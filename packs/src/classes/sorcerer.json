@@ -9,7 +9,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "identifier": "sorcerer",
     "levels": 1,
     "hitDice": "d6",
@@ -20,7 +25,73 @@
         "configuration": {},
         "value": {},
         "title": "Hit Points",
-        "icon": "systems/dnd5e/icons/svg/hit-points.svg"
+        "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+        "_id": "XFeJBDjRoDLHPuR5"
+      },
+      {
+        "_id": "BfjnJtYtVOv4PVHu",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim:dagger",
+            "weapon:sim:dart",
+            "weapon:sim:lightcrossbow",
+            "weapon:sim:quarterstaff",
+            "weapon:sim:sling"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary"
+      },
+      {
+        "_id": "KO7dxe4FlwlKXFIq",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:con",
+            "saves:cha"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "PAAGQYrkhVdGqg59",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:arc",
+                "skills:dec",
+                "skills:ins",
+                "skills:itm",
+                "skills:per",
+                "skills:rel"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
       },
       {
         "type": "ItemGrant",
@@ -42,7 +113,8 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "tHGuZb6Cezr0Yda6"
       },
       {
         "type": "ItemGrant",
@@ -63,7 +135,8 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "vEbnPhd3OW2Z5RH8"
       },
       {
         "type": "ItemGrant",
@@ -84,7 +157,8 @@
         "value": {},
         "level": 3,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "7MYEF9Ci5OaEWaQ7"
       },
       {
         "type": "ItemGrant",
@@ -105,7 +179,8 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "7FUhVIQtDqVQxUCJ"
       },
       {
         "type": "ItemChoice",
@@ -144,7 +219,8 @@
         },
         "value": {},
         "title": "Metamagic",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+        "_id": "JvnMksZAolGhHMVS"
       },
       {
         "type": "ScaleValue",
@@ -168,7 +244,8 @@
         },
         "value": {},
         "title": "Cantrips Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "rSUZv6eYOPRtikhv"
       },
       {
         "type": "ScaleValue",
@@ -225,7 +302,8 @@
         },
         "value": {},
         "title": "Spells Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "Wr4j8nEA7gZxzW5Z"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -245,7 +323,8 @@
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "zSlKyZ0rzKcd78Cq"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -265,7 +344,8 @@
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "Psp6dqmMqww0D44O"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -285,7 +365,8 @@
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "9qahHg5ZfS8bWkjD"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -305,7 +386,8 @@
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "QYpSCG2AmMi8taC1"
       },
       {
         "_id": "puDaUsYrlks0z5gm",
@@ -328,22 +410,6 @@
         "title": ""
       }
     ],
-    "saves": [
-      "con",
-      "cha"
-    ],
-    "skills": {
-      "number": 2,
-      "choices": [
-        "arc",
-        "dec",
-        "ins",
-        "itm",
-        "per",
-        "rel"
-      ],
-      "value": []
-    },
     "spellcasting": {
       "progression": "full",
       "ability": "cha"
@@ -358,10 +424,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234275,
-    "modifiedTime": 1691518581039,
+    "modifiedTime": 1698851497625,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!6T08zzKtmmpVwlXU"

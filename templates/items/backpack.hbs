@@ -1,47 +1,47 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
 
-	{{!-- Item Sheet Header --}}
-	<header class="sheet-header flexrow">
-		<img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img"/>
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img"/>
 
-		<div class="header-details flexrow">
-			<h1 class="charname">
-				<input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
-			</h1>
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
+            </h1>
 
-			<div class="item-subtitle">
-				<h4 class="item-type">{{itemType}}</h4>
-				<span class="item-status">{{itemStatus}}</span>
-			</div>
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
 
-			<ul class="summary flexrow">
-				<li>
-					<select name="system.rarity">
-						{{selectOptions config.itemRarity selected=system.rarity blank=""}}
-					</select>
-				</li>
-				<li>
-					<input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
-				</li>
-			</ul>
-		</div>
-	</header>
+            <ul class="summary flexrow">
+                <li>
+                    <select name="system.rarity">
+                        {{selectOptions config.itemRarity selected=system.rarity blank=""}}
+                    </select>
+                </li>
+                <li>
+                    {{> "dnd5e.item-source"}}
+                </li>
+            </ul>
+        </div>
+    </header>
 
-	{{!-- Item Sheet Navigation --}}
-	<nav class="sheet-navigation tabs" data-group="primary">
-		<a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
-		<a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
-	</nav>
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+    </nav>
 
-	{{!-- Item Sheet Body --}}
-	<section class="sheet-body">
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
 
-		{{!-- Description Tab --}}
-		{{> "dnd5e.item-description"}}
+        {{!-- Description Tab --}}
+        {{> "dnd5e.item-description"}}
 
-		{{!-- Details Tab --}}
-		<div class="tab details" data-group="primary" data-tab="details">
-			<h3 class="form-header">{{localize 'DND5E.ItemContainerDetails'}}</h3>
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{localize 'DND5E.ItemContainerDetails'}}</h3>
 
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemContainerStatus" }}</label>
@@ -51,19 +51,29 @@
                 </label>
             </div>
 
-			<div class="form-group">
-				<label>{{localize 'DND5E.ItemContainerCapacity'}}</label>
-				<div class="form-fields">
-					{{numberInput system.capacity.value name="system.capacity.value" placeholder="&mdash;"}}
-				</div>
-			</div>
+            {{!-- Container Properties --}}
+            <div class="form-group stacked container-properties">
+                <label>{{ localize "DND5E.ItemContainerProperties" }}</label>
+                {{#each properties}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                </label>
+                {{/each}}
+            </div>
 
-			<div class="form-group">
-				<label>{{localize 'DND5E.ItemContainerCapacityType'}}</label>
-				<select name="system.capacity.type">
-					{{selectOptions config.itemCapacityTypes selected=system.capacity.type}}
-				</select>
-			</div>
+            <div class="form-group">
+                <label>{{localize 'DND5E.ItemContainerCapacity'}}</label>
+                <div class="form-fields">
+                    {{numberInput system.capacity.value name="system.capacity.value" placeholder="&mdash;"}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{localize 'DND5E.ItemContainerCapacityType'}}</label>
+                <select name="system.capacity.type">
+                    {{selectOptions config.itemCapacityTypes selected=system.capacity.type}}
+                </select>
+            </div>
 
             <div class="form-group">
                 <label>{{localize "DND5E.Attunement"}}</label>
@@ -71,13 +81,6 @@
                     {{selectOptions config.attunements selected=system.attunement}}
                 </select>
             </div>
-
-			<div class="form-group stacked">
-				<label>{{localize 'DND5E.ItemContainerProperties'}}</label>
-				<label class="checkbox">
-					<input type="checkbox" name="system.capacity.weightless" {{checked system.capacity.weightless}}>
-					{{localize 'DND5E.ItemContainerWeightless'}}
-				</label>
-			</div>
-	</section>
+        </div>
+    </section>
 </form>

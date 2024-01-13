@@ -22,8 +22,17 @@
                            placeholder="{{localize 'DND5E.Dimensions'}}">
                 </li>
                 <li class="source">
-                    <input type="text" name="system.details.source" value="{{system.details.source}}"
-                           placeholder="{{localize 'DND5E.Source'}}">
+                    {{#if (eq system.details.source.custom system.details.source.label)}}
+                        <input type="text" name="system.details.source.custom" value="{{system.details.source.custom}}"
+                                     placeholder="{{ localize 'DND5E.Source' }}">
+                    {{else}}
+                        <span data-tooltip="{{system.details.source.label}}">{{system.details.source.label}}</span>
+                    {{/if}}
+                    {{#if editable}}
+                        <a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                    {{/if}}
                 </li>
             </ul>
             <ul class="attributes flexrow">

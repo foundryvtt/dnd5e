@@ -11,7 +11,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "activation": {
       "type": "",
       "cost": null,
@@ -22,6 +27,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -74,51 +80,15 @@
   },
   "flags": {},
   "img": "icons/magic/control/encase-creature-humanoid-hold.webp",
-  "effects": [
-    {
-      "_id": "JjH64T4YkNP1VTt4",
-      "changes": [
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "diseased",
-          "priority": null
-        },
-        {
-          "key": "system.traits.ci.value",
-          "mode": 2,
-          "value": "poisoned",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/magic/control/encase-creature-humanoid-hold.webp",
-      "label": "Purity of Body",
-      "origin": "Item.dvtlIzR4gvdfb7Od",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!items.effects!bqWA7t9pDELbNRkp.JjH64T4YkNP1VTt4"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.4.1",
+    "coreVersion": "10.312",
     "createdTime": 1661787234396,
-    "modifiedTime": 1672335071933,
+    "modifiedTime": 1701456042918,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!bqWA7t9pDELbNRkp"

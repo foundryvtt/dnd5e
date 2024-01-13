@@ -32,11 +32,16 @@
             {{!-- Character Summary --}}
             <ul class="summary flexrow">
                 <li class="race">
-                    <input type="text" name="system.details.race" value="{{system.details.race}}" placeholder="{{ localize 'DND5E.Race' }}"/>
+                    {{#if system.details.race.name}}
+                        <span data-tooltip="DND5E.Race">{{system.details.race.name}}</span>
+                    {{else}}
+                        <input type="text" name="system.details.race" value="{{system.details.race}}"
+                               placeholder="{{ localize 'DND5E.Race' }}">
+                    {{/if}}
                 </li>
                 <li class="background">
-                    {{#if labels.background}}
-                        <span data-tooltip="DND5E.Background">{{labels.background}}</span>
+                    {{#if system.details.background.name}}
+                        <span data-tooltip="DND5E.Background">{{system.details.background.name}}</span>
                     {{else}}
                         <input type="text" name="system.details.background" value="{{system.details.background}}" placeholder="{{ localize 'DND5E.Background' }}"/>
                     {{/if}}
@@ -247,11 +252,11 @@
                         </div>
                     </div>
                     <div class="counter flexrow inspiration">
-                        <h4>{{ localize "DND5E.Inspiration" }}</h4>
-                        <div class="counter-value">
-                            <input type="checkbox" name="system.attributes.inspiration" data-dtype="Boolean"
-                                   {{checked system.attributes.inspiration}}/>
-                        </div>
+                        <label class="flexrow">
+                            <h4>{{ localize "DND5E.Inspiration" }}</h4>
+                            <input type="checkbox" name="system.attributes.inspiration"
+                                   {{checked system.attributes.inspiration}}>
+                        </label>
                     </div>
                 </div>
 

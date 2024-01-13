@@ -19,7 +19,7 @@ export default class ScaleValueAdvancement extends Advancement {
       title: game.i18n.localize("DND5E.AdvancementScaleValueTitle"),
       hint: game.i18n.localize("DND5E.AdvancementScaleValueHint"),
       multiLevel: true,
-      validItemTypes: new Set(["class", "subclass"]),
+      validItemTypes: new Set(["background", "class", "race", "subclass"]),
       apps: {
         config: ScaleValueConfig,
         flow: ScaleValueFlow
@@ -41,7 +41,8 @@ export default class ScaleValueAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return Array.from(Object.keys(this.configuration.scale).map(l => Number(l)));
+    return Array.from(Object.keys(this.configuration.scale).map(l => Number(l)))
+      .filter(l => !["class", "subclass"].includes(this.item.type) ? true : l !== 0);
   }
 
   /* -------------------------------------------- */

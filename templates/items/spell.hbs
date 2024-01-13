@@ -22,7 +22,7 @@
                     {{labels.school}}
                 </li>
                 <li>
-                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    {{> "dnd5e.item-source"}}
                 </li>
             </ul>
         </div>
@@ -68,10 +68,9 @@
             {{!-- Spell Components --}}
             <div class="spell-components form-group stacked">
                 <label>{{ localize "DND5E.SpellComponents" }}</label>
-                {{#each spellComponents as |component key|}}
+                {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.components.{{key}}" {{checked (lookup ../system.components key)}}>
-                    {{component.label}}
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
                 </label>
                 {{/each}}
             </div>

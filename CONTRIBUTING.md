@@ -8,24 +8,24 @@ Please ensure there is an open issue about whatever contribution you are submitt
 
 Cloning this repository and either placing it in or symlinking it to your `Data/systems/dnd5e` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
 
-This repository leverages [gulp](https://gulpjs.com/) to run automated build tasks. If your system supports `npm`, you can run the following commands from the root of the project to get set up:
+If your system supports `npm`, you can run the following commands from the root of the project to get set up:
 
 ### `npm install`
 
 Installs all dependencies needed to run developer tooling scripts.
 
-### `npm run build` / `gulp buildAll`
+### `npm run build`
 
 Runs all relevant build scripts:
 
 - Converts LESS -> CSS
 - Converts JSON -> DB (compendia)
 
-### `npm run build:css` / `gulp buildCSS`
+### `npm run build:css`
 
 Converts the LESS in `./less` to the final `dnd5e.css`.
 
-### `npm run build:watch` / `gulp`
+### `npm run build:watch`
 
 Runs the LESS -> CSS builder in watch mode so that changes made to the LESS files will automatically compile to CSS.
 
@@ -41,11 +41,10 @@ Compile the source JSON files into compendium packs.
 
 ```text
 npm run build:db
-gulp compilePacks
 ```
 
-- `gulp compilePacks` - Compile all JSON files into their NEDB files.
-- `gulp compilePacks --pack classes` - Only compile the specified pack.
+- `npm run build:db` - Compile all JSON files into their NEDB files.
+- `npm run build:db -- classes` - Only compile the specified pack.
 
 #### Extracting Packs
 
@@ -53,12 +52,11 @@ Extract the contents of compendium packs to JSON files.
 
 ```text
 npm run build:json
-gulp extractPacks
 ```
 
-- `gulp extractPacks` - Extract all compendium NEDB files into JSON files.
-- `gulp extractPacks --pack classes` - Only extract the contents of the specified compendium.
-- `gulp extractPacks --pack classes --name Barbarian` - Only extract a single item from the specified compendium.
+- `npm run build:json` - Extract all compendium NEDB files into JSON files.
+- `npm run build:json -- classes` - Only extract the contents of the specified compendium.
+- `npm run build:json -- classes Barbarian` - Only extract a single item from the specified compendium.
 
 #### Cleaning Packs
 
@@ -66,12 +64,11 @@ Cleans and formats source JSON files, removing unnecessary permissions and flags
 
 ```text
 npm run build:clean
-gulp extractPacks
 ```
 
-- `gulp cleanPacks` - Clean all source JSON files.
-- `gulp cleanPacks --pack classes` - Only clean the source files for the specified compendium.
-- `gulp cleanPacks --pack classes --name Barbarian` - Only clean a single item from the specified compendium.
+- `npm run build:clean` - Clean all source JSON files.
+- `npm run build:clean -- classes` - Only clean the source files for the specified compendium.
+- `npm run build:clean -- classes Barbarian` - Only clean a single item from the specified compendium.
 
 ## Issues
 
@@ -118,8 +115,8 @@ To contribute code, [fork this project](https://docs.github.com/en/get-started/q
 
 Please attempt to follow code style present throughout the project. An ESLint profile is included to help with maintaining a consistent code style. All warnings presented by the linter should be resolved before an PR is submitted.
 
-- `gulp lint` or `npm run lint` - Run the linter and display any issues found.
-- `gulp lint --fix` or `npm run lint:fix` - Automatically fix any code style issues that can be fixed.
+- `npm run lint` - Run the linter and display any issues found.
+- `npm run lint:fix` - Automatically fix any code style issues that can be fixed.
 
 ### Linked Issues
 

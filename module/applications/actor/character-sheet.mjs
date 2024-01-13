@@ -1,4 +1,5 @@
 import ActorSheet5e from "./base-sheet.mjs";
+import ActorTypeConfig from "./type-config.mjs";
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
@@ -24,11 +25,12 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Resources
     context.resources = ["primary", "secondary", "tertiary"].reduce((arr, r) => {
-      const res = context.actor.system.resources[r] || {};
-      res.name = r;
-      res.placeholder = game.i18n.localize(`DND5E.Resource${r.titleCase()}`);
-      if (res && res.value === 0) delete res.value;
-      if (res && res.max === 0) delete res.max;
+      const res = foundry.utils.mergeObject(context.actor.system.resources[r] || {}, {
+        name: r,
+        placeholder: game.i18n.localize(`DND5E.Resource${r.titleCase()}`)
+      }, {inplace: false});
+      if ( res.value === 0 ) delete res.value;
+      if ( res.max === 0 ) delete res.max;
       return arr.concat([res]);
     }, []);
 
@@ -36,6 +38,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     return foundry.utils.mergeObject(context, {
       disableExperience: game.settings.get("dnd5e", "disableExperienceTracking"),
       classLabels: classes.map(c => c.name).join(", "),
+      labels: {
+        type: context.system.details.type.label
+      },
       multiclassLabels: classes.map(c => [c.subclass?.name ?? "", c.name, c.system.levels].filterJoin(" ")).join(", "),
       weightUnit: game.i18n.localize(`DND5E.Abbreviation${
         game.settings.get("dnd5e", "metricWeightUnits") ? "Kg" : "Lbs"}`),
@@ -55,7 +60,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Partition items by category
-    let {items, spells, feats, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
+    let {items, spells, feats, races, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
       const {quantity, uses, recharge} = item.system;
 
       // Item details
@@ -89,12 +94,13 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       // Classify items into types
       if ( item.type === "spell" ) obj.spells.push(item);
       else if ( item.type === "feat" ) obj.feats.push(item);
+      else if ( item.type === "race" ) obj.races.push(item);
       else if ( item.type === "background" ) obj.backgrounds.push(item);
       else if ( item.type === "class" ) obj.classes.push(item);
       else if ( item.type === "subclass" ) obj.subclasses.push(item);
       else if ( Object.keys(inventory).includes(item.type) ) obj.items.push(item);
       return obj;
-    }, { items: [], spells: [], feats: [], backgrounds: [], classes: [], subclasses: [] });
+    }, { items: [], spells: [], feats: [], races: [], backgrounds: [], classes: [], subclasses: [] });
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
@@ -140,6 +146,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Features
     const features = {
+      race: {
+        label: CONFIG.Item.typeLabels.race, items: races,
+        hasActions: false, dataset: {type: "race"} },
       background: {
         label: CONFIG.Item.typeLabels.background, items: backgrounds,
         hasActions: false, dataset: {type: "background"} },
@@ -164,7 +173,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     context.spellbook = spellbook;
     context.preparedSpells = nPrepared;
     context.features = Object.values(features);
-    context.labels.background = backgrounds[0]?.name;
   }
 
   /* -------------------------------------------- */
@@ -207,6 +215,19 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     html.find(".short-rest").click(this._onShortRest.bind(this));
     html.find(".long-rest").click(this._onLongRest.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onConfigMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    if ( (event.currentTarget.dataset.action === "type") && (this.actor.system.details.race?.id) ) {
+      new ActorTypeConfig(this.actor.system.details.race, { keyPath: "system.type" }).render(true);
+    } else if ( event.currentTarget.dataset.action !== "type" ) {
+      return super._onConfigMenu(event);
+    }
   }
 
   /* -------------------------------------------- */

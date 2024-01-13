@@ -81,7 +81,7 @@ export default class Advancement extends BaseAdvancement {
       title: game.i18n.localize("DND5E.AdvancementTitle"),
       hint: "",
       multiLevel: false,
-      validItemTypes: new Set(["background", "class", "subclass"]),
+      validItemTypes: new Set(["background", "class", "race", "subclass"]),
       apps: {
         config: AdvancementConfig,
         flow: AdvancementFlow
@@ -167,6 +167,21 @@ export default class Advancement extends BaseAdvancement {
   prepareData() {
     this.title = this.title || this.constructor.metadata.title;
     this.icon = this.icon || this.constructor.metadata.icon;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform preliminary operations before an Advancement is created.
+   * @param {object} data      The initial data object provided to the document creation request.
+   * @returns {boolean|void}   A return value of false indicates the creation operation should be cancelled.
+   * @protected
+   */
+  _preCreate(data) {
+    if ( !["class", "subclass"].includes(this.item.type)
+      || foundry.utils.hasProperty(data, "level")
+      || this.constructor.metadata.multiLevel ) return;
+    this.updateSource({level: 1});
   }
 
   /* -------------------------------------------- */

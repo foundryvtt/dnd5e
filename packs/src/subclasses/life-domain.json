@@ -9,10 +9,30 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "identifier": "life-domain",
     "classIdentifier": "cleric",
     "advancement": [
+      {
+        "_id": "bW7chouU8WIVH0Le",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "armor:hvy"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": ""
+      },
       {
         "_id": "9fyr5t01nhdg0u8n",
         "type": "ItemGrant",
@@ -157,10 +177,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.3.1",
+    "coreVersion": "10.303",
     "createdTime": 1661787234293,
-    "modifiedTime": 1671220973444,
+    "modifiedTime": 1698856991022,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!H3RYLGqCiqm8BP3q"

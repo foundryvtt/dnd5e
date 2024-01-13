@@ -110,7 +110,12 @@
       "environment": "Underdark",
       "cr": 0.5,
       "spellLevel": 0,
-      "source": "SRD 5.1"
+      "source": {
+        "custom": "",
+        "book": "SRD 5.1",
+        "page": "",
+        "license": "CC-BY-4.0"
+      }
     },
     "traits": {
       "size": "med",
@@ -457,7 +462,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 12,
         "price": {
@@ -529,7 +539,7 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
+        "baseItem": "hide",
         "speed": {
           "value": null,
           "conditions": ""
@@ -570,7 +580,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "bonus",
           "cost": 1,
@@ -663,7 +678,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 7,
         "price": {
@@ -739,7 +759,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
-        "baseItem": "",
+        "baseItem": "greataxe",
         "properties": {
           "amm": false,
           "fin": false,
@@ -790,7 +810,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 2,
         "price": {
@@ -866,7 +891,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
-        "baseItem": "",
+        "baseItem": "javelin",
         "properties": {
           "amm": false,
           "fin": false,

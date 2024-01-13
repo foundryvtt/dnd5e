@@ -8,6 +8,7 @@ export {default as Combat5e} from "./combat.mjs";
 
 // Helper Methods
 export {default as Proficiency} from "./actor/proficiency.mjs";
+export {default as SelectChoices} from "./actor/select-choices.mjs";
 export * as Trait from "./actor/trait.mjs";
 export * as chat from "./chat-message.mjs";
 export * as combat from "./combat.mjs";

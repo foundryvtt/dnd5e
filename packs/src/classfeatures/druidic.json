@@ -11,7 +11,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "activation": {
       "type": "",
       "cost": null,
@@ -22,6 +27,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -74,45 +80,15 @@
   },
   "flags": {},
   "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
-  "effects": [
-    {
-      "_id": "iIQXR8VezkvbkFoS",
-      "changes": [
-        {
-          "key": "system.traits.languages.value",
-          "mode": 2,
-          "value": "druidic",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/sundries/documents/document-torn-diagram-tan.webp",
-      "label": "Druidic",
-      "origin": "Item.LzJ5ayHt0OlSVGxi",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!items.effects!LzJ5ayHt0OlSVGxi.iIQXR8VezkvbkFoS"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.4.0",
+    "coreVersion": "10.303",
     "createdTime": 1661787234364,
-    "modifiedTime": 1672334482154,
+    "modifiedTime": 1699988234529,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LzJ5ayHt0OlSVGxi"

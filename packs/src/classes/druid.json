@@ -9,7 +9,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "identifier": "druid",
     "levels": 1,
     "hitDice": "d8",
@@ -20,7 +25,116 @@
         "configuration": {},
         "value": {},
         "title": "Hit Points",
-        "icon": "systems/dnd5e/icons/svg/hit-points.svg"
+        "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+        "_id": "UQN1QAt9gJWSbjhF"
+      },
+      {
+        "_id": "GsMQJqy3R8DVF485",
+        "type": "Trait",
+        "configuration": {
+          "hint": "Light Armor, Medium Armor, & Shields (druids will not wear armor or use shields made of metal)",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "armor:lgt",
+            "armor:med",
+            "armor:shl"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "dK0oEtM8ovrLJxi3",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim:club",
+            "weapon:sim:dagger",
+            "weapon:sim:dart",
+            "weapon:sim:javelin",
+            "weapon:sim:mace",
+            "weapon:sim:quarterstaff",
+            "weapon:sim:sickle",
+            "weapon:sim:spear",
+            "weapon:sim:sling",
+            "weapon:mar:scimitar"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "tSywlKq0aE3GYMmi",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "tool:herb"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "xZ55SColbUbJOW2i",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:int",
+            "saves:wis"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "bN13f0XX9ZVaUiaC",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:ani",
+                "skills:arc",
+                "skills:ins",
+                "skills:med",
+                "skills:nat",
+                "skills:prc",
+                "skills:rel",
+                "skills:sur"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
       },
       {
         "type": "ItemGrant",
@@ -42,7 +156,8 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "pkkBT3JrxyLuTmwm"
       },
       {
         "type": "ItemGrant",
@@ -64,7 +179,8 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "kDrm5stUR4Vp6oE3"
       },
       {
         "type": "ItemGrant",
@@ -86,7 +202,8 @@
         "value": {},
         "level": 18,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "IRKvBsuqs6C3ktQu"
       },
       {
         "type": "ItemGrant",
@@ -107,7 +224,8 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "UpHHo8cfTCVk92Th"
       },
       {
         "type": "ScaleValue",
@@ -131,7 +249,8 @@
         },
         "value": {},
         "title": "Wild Shape CR",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "eX43MTPVUV9VB0dK"
       },
       {
         "type": "ScaleValue",
@@ -155,7 +274,8 @@
         },
         "value": {},
         "title": "Cantrips Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "Gfzu57bEFMsekg7v"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -168,14 +288,16 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "2T62G1BtLjN7m0D9"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -188,14 +310,16 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "uXaQWuJioxGLKVfy"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -208,14 +332,16 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "GiktwdfAHfCAEXzm"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -228,14 +354,16 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "9QF2H24Ez8ZdH42N"
       },
       {
         "_id": "puDaUsYrlks0z5gm",
@@ -249,33 +377,31 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
         },
         "level": 19,
         "title": ""
+      },
+      {
+        "_id": "miieZ5i2DxMvyWKG",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "languages:druidic"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": ""
       }
     ],
-    "saves": [
-      "int",
-      "wis"
-    ],
-    "skills": {
-      "number": 2,
-      "choices": [
-        "arc",
-        "ani",
-        "ins",
-        "med",
-        "nat",
-        "prc",
-        "rel",
-        "sur"
-      ],
-      "value": []
-    },
     "spellcasting": {
       "progression": "full",
       "ability": "wis"
@@ -290,10 +416,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787234284,
-    "modifiedTime": 1691518466937,
+    "modifiedTime": 1699988244829,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ygVYgPbJkaH0tH1N"
