@@ -321,8 +321,12 @@
                         {{#each favorites}}
 
                         {{!-- Favorite --}}
-                        <li class="item-tooltip {{ type }}" data-favorite-id="{{ id }}"
-                            {{#if itemId}}data-item-id="{{ itemId }}"{{/if}}>
+                        <li class="{{#if itemId}}item-tooltip{{/if}} {{ type }} {{#if suppressed}}suppressed{{/if}}"
+                            data-favorite-id="{{ id }}"
+                            {{#if itemId}}data-item-id="{{ itemId }}"{{/if}}
+                            {{#if effectId}}data-effect-id="{{ effectId }}"{{/if}}
+                            {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}
+                            {{#if toggle.applicable}}data-action="useFavorite"{{/if}}>
 
                             {{!-- Icon --}}
                             <figure>
@@ -387,6 +391,10 @@
                                     {{else if quantity}}
                                     <span class="sign">&times;</span>
                                     <span class="value">{{ quantity }}</span>
+
+                                    {{!-- Toggleable --}}
+                                    {{else if toggle.applicable}}
+                                    <i class="fas fa-toggle-{{#if toggle.value}}on{{else}}off{{/if}}"></i>
                                     {{/if}}
                                 </div>
                                 <div class="secondary">

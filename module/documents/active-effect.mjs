@@ -197,6 +197,24 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  getRelativeUUID(doc) {
+    // Backport relative UUID fixes to accommodate descendant documents. Can be removed once v12 is the minimum.
+    if ( this.compendium && (this.compendium !== doc.compendium) ) return this.uuid;
+    if ( this.isEmbedded && (this.collection === doc.collection) ) return `.${this.id}`;
+    const parts = [this.documentName, this.id];
+    let parent = this.parent;
+    while ( parent ) {
+      if ( parent === doc ) break;
+      parts.unshift(parent.documentName, parent.id);
+      parent = parent.parent;
+    }
+    if ( parent === doc ) return `.${parts.join(".")}`;
+    return this.uuid;
+  }
+
+  /* -------------------------------------------- */
   /*  Lifecycle                                   */
   /* -------------------------------------------- */
 
@@ -250,6 +268,21 @@ export default class ActiveEffect5e extends ActiveEffect {
       this._displayScrollingStatus(increase);
       this.name = name;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare effect favorite data.
+   * @returns {Promise<FavoriteData5e>}
+   */
+  async getFavoriteData() {
+    return {
+      title: this.name,
+      subtitle: this.duration.remaining ? this.duration.label : "",
+      toggle: !this.disabled,
+      suppressed: this.isSuppressed
+    };
   }
 
   /* -------------------------------------------- */

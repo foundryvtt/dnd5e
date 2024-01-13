@@ -766,6 +766,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Condense the resulting attack bonus formula into a simplified label
     const roll = new Roll(parts.join("+"), rollData);
     const formula = simplifyRollFormula(roll.formula) || "0";
+    this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }) || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
     return {rollData, parts};
   }

@@ -659,6 +659,18 @@
               margin: 0;
               border: none;
             }
+
+            &.effect {
+              &:not(.suppressed){
+                cursor: pointer;
+                &:hover {
+                  .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
+                  .primary i { text-shadow: 0 0 8px var(--color-shadow-primary); }
+                }
+              }
+
+              &.suppressed { color: var(--color-text-light-6); }
+            }
           }
 
           .drop {
@@ -739,7 +751,7 @@
                 }
               }
 
-              .sign { color: var(--color-text-light-6); }
+              &.disabled i, .sign { color: var(--color-text-light-6); }
             }
 
             .secondary {

@@ -415,6 +415,8 @@ export class ItemDataModel extends SystemDataModel {
    * @property {number} [uses.max]           The maximum available uses.
    * @property {string} [uses.name]          The property to update on the item. If none is provided, the property will
    *                                         not be updatable.
+   * @property {boolean} [toggle]            The effect's toggle state.
+   * @property {boolean} [suppressed]        Whether the favorite is suppressed.
    */
 
   /**

@@ -23,7 +23,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       dragDrop: [
         { dragSelector: ".item-list .item", dropSelector: null },
         { dragSelector: ".containers .container", dropSelector: null },
-        { dragSelector: ".favorites [data-item-id]", dropSelector: null },
+        { dragSelector: ".favorites :is([data-item-id], [data-effect-id])", dropSelector: null },
         { dragSelector: ".classes .gold-icon[data-item-id]", dropSelector: null }
       ],
       scrollY: [".main-content"],
@@ -376,11 +376,14 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Favorites
     context.favorites = await this.actor.system.favorites.reduce(async (arr, f) => {
       const { id, type, sort } = f;
-      const item = fromUuidSync(id);
-      if ( item?.parent !== this.actor ) return arr;
+      const favorite = fromUuidSync(id, { relative: this.actor });
+      if ( !favorite ) return arr;
       arr = await arr;
-      const { img } = item;
-      let { title, subtitle, value, uses, quantity, attack, save, range } = await item.system.getFavoriteData();
+      const { img } = favorite;
+      let data = {};
+      if ( type === "item" ) data = await favorite.system.getFavoriteData();
+      else if ( type === "effect" ) data = await favorite.getFavoriteData();
+      let { title, subtitle, value, uses, quantity, attack, save, range, toggle, suppressed } = data;
       const css = [];
       if ( uses ) {
         css.push("uses");
@@ -389,14 +392,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       else if ( attack ) css.push("attack");
       else if ( save?.dc ) css.push("save");
       else if ( value !== undefined ) css.push("value");
+      if ( toggle === false ) css.push("disabled");
       if ( uses?.max > 100 ) css.push("uses-sm");
       if ( attack ) {
         const value = Number(attack.replace?.(/\s+/g, "") ?? attack);
         if ( !isNaN(value) ) attack = { abs: Math.abs(value), sign: value < 0 ? "-" : "+" };
       }
+      if ( suppressed ) subtitle = game.i18n.localize("DND5E.Suppressed");
       arr.push({
-        id, img, type, title, value, uses, sort, save, attack, range,
-        itemId: item.id,
+        id, img, type, title, value, uses, sort, save, attack, range, suppressed,
+        itemId: type === "item" ? favorite.id : null,
+        effectId: type === "effect" ? favorite.id : null,
+        parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
+        toggle: toggle === undefined ? null : { applicable: true, value: toggle },
         quantity: quantity > 1 ? quantity : "",
         rollable: type === "item",
         css: css.filterJoin(" "),
@@ -538,7 +546,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       }
 
       // To Hit
-      const toHit = parseInt(item.labels.toHit?.replace(/\s+/g, ""));
+      const toHit = parseInt(item.labels.modifier);
       if ( item.hasAttack && !isNaN(toHit) ) {
         ctx.toHit = {
           sign: Math.sign(toHit) < 0 ? "-" : "+",
@@ -971,13 +979,41 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     if ( !event.target.closest(".favorites") ) return super._onDropItem(event, data);
     const item = await Item.implementation.fromDropData(data);
     if ( item?.parent !== this.actor ) return super._onDropItem(event, data);
-    if ( this.actor.system.favorites.find(f => f.id === item.uuid) ) return this._onSortFavorites(event, item);
+    const uuid = item.getRelativeUUID(this.actor);
+    if ( this.actor.system.favorites.find(f => f.id === uuid) ) return this._onSortFavorites(event, item);
+    return this._onAddFavorite(item);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDropActiveEffect(event, data) {
+    if ( !event.target.closest(".favorites") ) return super._onDropActiveEffect(event, data);
+    const effect = await ActiveEffect.implementation.fromDropData(data);
+    if ( effect.target !== this.actor ) return super._onDropActiveEffect(event, data);
+    const uuid = effect.getRelativeUUID(this.actor);
+    if ( this.actor.system.favorites.find(f => f.id === uuid) ) return this._onSortFavorites(event, effect);
+    return this._onAddFavorite(effect);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle adding a favorite.
+   * @param {Item5e|ActiveEffect5e} favorite  The favorite to add.
+   * @returns {Promise<Actor5e>}
+   * @protected
+   */
+  _onAddFavorite(favorite) {
     let maxSort = 0;
     const favorites = this.actor.system.favorites.map(f => {
       if ( f.sort > maxSort ) maxSort = f.sort;
       return { ...f };
     });
-    favorites.push({ type: "item", id: item.uuid, sort: maxSort + CONST.SORT_INTEGER_DENSITY });
+    let type;
+    if ( favorite instanceof dnd5e.documents.Item5e ) type = "item";
+    else if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) type = "effect";
+    favorites.push({ type, id: favorite.getRelativeUUID(this.actor), sort: maxSort + CONST.SORT_INTEGER_DENSITY });
     return this.actor.update({ "system.favorites": favorites });
   }
 
@@ -999,20 +1035,22 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /**
    * Handle re-ordering the favorites list.
-   * @param {DragEvent} event  The drop event.
-   * @param {Item5e} item      The dropped item.
+   * @param {DragEvent} event                 The drop event.
+   * @param {Item5e|ActiveEffect5e} favorite  The dropped favorite.
    * @protected
    */
-  _onSortFavorites(event, item) {
+  _onSortFavorites(event, favorite) {
     const dropTarget = event.target.closest("[data-favorite-id]");
     if ( !dropTarget ) return;
     let source;
-    let target = fromUuidSync(dropTarget.dataset.favoriteId);
-    if ( (target?.parent !== this.actor) || (item.uuid === target.uuid) ) return;
+    let target = fromUuidSync(dropTarget.dataset.favoriteId, { relative: this.actor });
+    if ( favorite.uuid === target.uuid ) return;
+    const srcUUID = favorite.getRelativeUUID(this.actor);
+    const targetUUID = target.getRelativeUUID(this.actor);
     const siblings = this.actor.system.favorites.filter(f => {
-      if ( f.id === target.uuid ) target = f;
-      else if ( f.id === item.uuid ) source = f;
-      return f.id !== item.uuid;
+      if ( f.id === targetUUID ) target = f;
+      else if ( f.id === srcUUID ) source = f;
+      return f.id !== srcUUID;
     });
     const updates = SortingHelpers.performIntegerSort(source, { target, siblings });
     const favorites = this.actor.system.favorites.reduce((map, f) => map.set(f.id, { ...f }), new Map());
@@ -1032,7 +1070,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _onUseFavorite(event) {
     const { favoriteId } = event.currentTarget.closest("[data-favorite-id]").dataset;
-    const item = fromUuidSync(favoriteId);
-    if ( item?.parent === this.actor ) item.use({}, { event });
+    const favorite = fromUuidSync(favoriteId, { relative: this.actor });
+    if ( favorite instanceof dnd5e.documents.Item5e ) return favorite.use({}, { event });
+    if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) return favorite.update({ disabled: !favorite.disabled });
   }
 }
