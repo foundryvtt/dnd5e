@@ -398,11 +398,13 @@ export class ItemDataModel extends SystemDataModel {
 
   /**
    * @typedef {object} FavoriteData5e
+   * @property {string} img                  The icon path.
    * @property {string} title                The title.
    * @property {string|string[]} [subtitle]  An optional subtitle or several subtitle parts.
    * @property {number} [value]              A single value to display.
    * @property {number} [quantity]           The item's quantity.
-   * @property {string} [attack]             The item's attack modifier.
+   * @property {string|number} [modifier]    A modifier associated with the item.
+   * @property {number} [passive]            A passive score associated with the item.
    * @property {object} [range]              The item's range.
    * @property {number} [range.value]        The first range increment.
    * @property {number|null} [range.long]    The second range increment.
@@ -424,7 +426,11 @@ export class ItemDataModel extends SystemDataModel {
    * @returns {Promise<FavoriteData5e>}
    */
   async getFavoriteData() {
-    return { title: this.parent.name, subtitle: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]) };
+    return {
+      img: this.parent.img,
+      title: this.parent.name,
+      subtitle: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])
+    };
   }
 }
 

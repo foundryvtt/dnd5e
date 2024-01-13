@@ -70,7 +70,7 @@ export default class SpellData extends ItemDataModel.mixin(
   async getFavoriteData() {
     return foundry.utils.mergeObject(await super.getFavoriteData(), {
       subtitle: [this.parent.labels.components.vsm, this.parent.labels.activation],
-      attack: this.parent.labels.modifier,
+      modifier: this.parent.labels.modifier,
       range: this.range,
       save: this.save,
     });

@@ -89,7 +89,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   async getFavoriteData() {
     return foundry.utils.mergeObject(await super.getFavoriteData(), {
       subtitle: CONFIG.DND5E.itemActionTypes[this.actionType],
-      attack: this.parent.labels.modifier,
+      modifier: this.parent.labels.modifier,
       range: this.range
     });
   }

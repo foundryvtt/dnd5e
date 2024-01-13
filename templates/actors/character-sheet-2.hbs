@@ -322,7 +322,7 @@
 
                         {{!-- Favorite --}}
                         <li class="{{#if itemId}}item-tooltip{{/if}} {{ type }} {{#if suppressed}}suppressed{{/if}}"
-                            data-favorite-id="{{ id }}"
+                            data-favorite-id="{{ id }}" {{#if key}}data-key="{{ key }}"{{/if}}
                             {{#if itemId}}data-item-id="{{ itemId }}"{{/if}}
                             {{#if effectId}}data-effect-id="{{ effectId }}"{{/if}}
                             {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}
@@ -343,8 +343,8 @@
                             </figure>
 
                             {{!-- Name --}}
-                            <div class="name-stacked {{#if rollable}}{{ @root.rollableClass }}{{/if}}" role="button"
-                                 data-action="useFavorite">
+                            <div class="name-stacked {{ rollableClass }}"
+                                 role="button" data-action="useFavorite">
                                 <span class="title">{{ title }}</span>
                                 {{#if subtitle}}
                                 <span class="subtitle">{{{ subtitle }}}</span>
@@ -367,12 +367,17 @@
                                     <span class="max">{{ max }}</span>
                                     {{/with}}
 
-                                    {{!-- Attacks --}}
-                                    {{else if attack}}
-                                    {{#with attack}}
+                                    {{!-- Modifiers --}}
+                                    {{else if modifier}}
+                                    {{#with modifier}}
                                     <span class="sign">{{ sign }}</span>
                                     <span class="value">{{ abs }}</span>
                                     {{/with}}
+
+                                    {{!-- Passive Score --}}
+                                    {{#if passive}}
+                                    <span class="passive">({{ passive }})</span>
+                                    {{/if}}
 
                                     {{!-- Saves --}}
                                     {{else if save.dc}}

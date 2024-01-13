@@ -751,7 +751,12 @@
                 }
               }
 
-              &.disabled i, .sign { color: var(--color-text-light-6); }
+              &.disabled i, .sign, .passive { color: var(--color-text-light-6); }
+
+              .passive {
+                font-size: var(--font-size-13);
+                margin-left: .25rem;
+              }
             }
 
             .secondary {

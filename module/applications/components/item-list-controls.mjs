@@ -295,7 +295,7 @@ export default class ItemListControlsElement extends HTMLElement {
    */
   _applySorting() {
     const comparators = {
-      a: (a, b) => a.name.localeCompare(b.name),
+      a: (a, b) => a.name.localeCompare(b.name, game.i18n.lang),
       m: (a, b) => a.sort - b.sort
     };
     for ( const section of this.list.querySelectorAll(".items-section .item-list") ) {
