@@ -654,84 +654,108 @@ DND5E.mapLocationMarker = {
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for creature types.
+ *
+ * @typedef {object} CreatureTypeConfiguration
+ * @property {string} label               Localized label.
+ * @property {string} plural              Localized plural form used in swarm name.
+ * @property {string} [reference]         Reference to a rule page describing this type.
+ * @property {boolean} [detectAlignment]  Is this type detectable by spells such as "Detect Evil and Good"?
+ */
+
+/**
  * Default types of creatures.
- * @enum {{ label: string, plural: string, [detectAlignment]: boolean }}
+ * @enum {CreatureTypeConfiguration}
  */
 DND5E.creatureTypes = {
   aberration: {
     label: "DND5E.CreatureAberration",
     plural: "DND5E.CreatureAberrationPl",
     icon: "/icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.yy50qVC1JhPHt4LC",
     detectAlignment: true
   },
   beast: {
     label: "DND5E.CreatureBeast",
     plural: "DND5E.CreatureBeastPl",
-    icon: "/icons/creatures/claws/claw-bear-paw-swipe-red.webp"
+    icon: "/icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6bTHn7pZek9YX2tv"
   },
   celestial: {
     label: "DND5E.CreatureCelestial",
     plural: "DND5E.CreatureCelestialPl",
     icon: "/icons/creatures/abilities/wings-birdlike-blue.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.T5CJwxjhBbi6oqaM",
     detectAlignment: true
   },
   construct: {
     label: "DND5E.CreatureConstruct",
     plural: "DND5E.CreatureConstructPl",
-    icon: "/icons/creatures/magical/construct-stone-earth-gray.webp"
+    icon: "/icons/creatures/magical/construct-stone-earth-gray.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jQGAJZBZTqDFod8d"
   },
   dragon: {
     label: "DND5E.CreatureDragon",
     plural: "DND5E.CreatureDragonPl",
-    icon: "/icons/creatures/abilities/dragon-fire-breath-orange.webp"
+    icon: "/icons/creatures/abilities/dragon-fire-breath-orange.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.k2IRXZwGk9W0PM2S"
   },
   elemental: {
     label: "DND5E.CreatureElemental",
     plural: "DND5E.CreatureElementalPl",
     icon: "/icons/creatures/magical/spirit-fire-orange.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.7z1LXGGkXpHuzkFh",
     detectAlignment: true
   },
   fey: {
     label: "DND5E.CreatureFey",
     plural: "DND5E.CreatureFeyPl",
     icon: "/icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.OFsRUt3pWljgm8VC",
     detectAlignment: true
   },
   fiend: {
     label: "DND5E.CreatureFiend",
     plural: "DND5E.CreatureFiendPl",
     icon: "/icons/magic/death/skull-horned-goat-pentagram-red.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ElHKBJeiJPC7gj6k",
     detectAlignment: true
   },
   giant: {
     label: "DND5E.CreatureGiant",
     plural: "DND5E.CreatureGiantPl",
-    icon: "/icons/creatures/magical/humanoid-giant-forest-blue.webp"
+    icon: "/icons/creatures/magical/humanoid-giant-forest-blue.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.AOXn3Mv5vPZwo0Uf"
   },
   humanoid: {
     label: "DND5E.CreatureHumanoid",
     plural: "DND5E.CreatureHumanoidPl",
-    icon: "/icons/magic/unholy/strike-body-explode-disintegrate.webp"
+    icon: "/icons/magic/unholy/strike-body-explode-disintegrate.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iFzQs4AenN8ALRvw"
   },
   monstrosity: {
     label: "DND5E.CreatureMonstrosity",
     plural: "DND5E.CreatureMonstrosityPl",
-    icon: "/icons/creatures/abilities/mouth-teeth-rows-red.webp"
+    icon: "/icons/creatures/abilities/mouth-teeth-rows-red.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TX0yPEFTn79AMZ8P"
   },
   ooze: {
     label: "DND5E.CreatureOoze",
     plural: "DND5E.CreatureOozePl",
-    icon: "/icons/creatures/slimes/slime-movement-pseudopods-green.webp"
+    icon: "/icons/creatures/slimes/slime-movement-pseudopods-green.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.cgzIC1ecG03D97Fg"
   },
   plant: {
     label: "DND5E.CreaturePlant",
     plural: "DND5E.CreaturePlantPl",
-    icon: "/icons/magic/nature/tree-animated-strike.webp"
+    icon: "/icons/magic/nature/tree-animated-strike.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.1oT7t6tHE4kZuSN1"
   },
   undead: {
     label: "DND5E.CreatureUndead",
     plural: "DND5E.CreatureUndeadPl",
     icon: "/icons/magic/death/skull-horned-worn-fire-blue.webp",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.D2BdqS1GeD5rcZ6q",
     detectAlignment: true
   }
 };
@@ -2868,6 +2892,10 @@ DND5E.ruleTypes = {
     label: "DND5E.Rule.Type.Condition",
     references: "conditionTypes"
   },
+  creatureType: {
+    label: "DND5E.CreatureType",
+    references: "creatureTypes"
+  },
   damage: {
     label: "DND5E.DamageType",
     references: "damageTypes"
@@ -3018,7 +3046,30 @@ DND5E.rules = {
   spellsavingthrows: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.8DajfNll90eeKcmB",
   spellattackrolls: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.qAFzmGZKhVvAEUF3",
   combiningmagicaleffects: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TMIN963hG773yZzO",
-  schoolsofmagic: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TeF6CKMDRpYpsLd4"
+  schoolsofmagic: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TeF6CKMDRpYpsLd4",
+  detectingtraps: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DZ7AhdQ94xggG4bj",
+  disablingtraps: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DZ7AhdQ94xggG4bj",
+  curingmadness: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6Icem7G3CICdNOkM",
+  damagethreshold: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9LJZhqvCburpags3",
+  poisontypes: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.I6OMMWUaYCWR9xip",
+  contactpoison: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.kXnCEqqGUWRZeZDj",
+  ingestedpoison: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.Y0vsJYSWeQcFpJ27",
+  inhaledpoison: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.KUyN4eK1xTBzXsjP",
+  injurypoison: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.LUL48OUq6SJeMGc7",
+  attunement: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.UQ65OwIyGK65eiOK",
+  wearingitems: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iPB8mGKuQx3X0Z2J",
+  wieldingitems: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iPB8mGKuQx3X0Z2J",
+  multipleitemsofthesamekind: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.rLJdvz4Mde8GkEYQ",
+  paireditems: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.rd9pCH8yFraSGN34",
+  commandword: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.HiXixxLYesv6Ff3t",
+  consumables: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.UEPAcZFzQ5x196zE",
+  itemspells: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DABoaeeF6w31UCsj",
+  charges: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.NLRXcgrpRCfsA5mO",
+  creaturetags: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9jV1fFF163dr68vd",
+  telepathy: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.geTidcFIYWuUvD2L",
+  legendaryactions: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.C1awOyZh78pq1xmY",
+  lairactions: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.07PtjpMxiRIhkBEp",
+  regionaleffects: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.uj8W27NKFyzygPUd"
 };
 
 /* -------------------------------------------- */
