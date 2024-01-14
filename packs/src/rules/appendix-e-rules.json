@@ -6140,8 +6140,8 @@
       },
       "src": null,
       "system": {
-        "tooltip": "",
-        "type": "rule"
+        "tooltip": "<p>A ritual spell can be cast following the normal rules for spellcasting, or the spell can be cast as a ritual. The ritual version of a spell takes 10 minutes longer to cast than normal. It also doesn't expend a spell slot, which means the ritual version of a spell can't be cast at a higher level.</p><p>To cast a spell as a ritual, a spellcaster must have a feature that grants the ability to do so. The cleric and the druid, for example, have such a feature. The caster must also have the spell prepared or on his or her list of spells known, unless the character's ritual feature specifies otherwise, as the wizard's does.</p>",
+        "type": "spellTag"
       },
       "ownership": {
         "default": -1
@@ -6152,7 +6152,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170563663,
-        "modifiedTime": 1705170574985,
+        "modifiedTime": 1705173367680,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.FjWqT5iyJ89kohdA"
@@ -6407,7 +6407,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellComponent"
       },
       "ownership": {
         "default": -1
@@ -6418,7 +6418,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170809012,
-        "modifiedTime": 1705171371694,
+        "modifiedTime": 1705173328527,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.6UXTNWMCQ0nSlwwx"
@@ -6445,7 +6445,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellComponent"
       },
       "ownership": {
         "default": -1
@@ -6456,7 +6456,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170819180,
-        "modifiedTime": 1705171355356,
+        "modifiedTime": 1705173332561,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.qwUNgUNilEmZkSC9"
@@ -6483,7 +6483,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellComponent"
       },
       "ownership": {
         "default": -1
@@ -6494,7 +6494,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170825591,
-        "modifiedTime": 1705171348215,
+        "modifiedTime": 1705173335774,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.AeH5eDS4YeM9RETC"
@@ -6597,7 +6597,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellTag"
       },
       "ownership": {
         "default": -1
@@ -6608,7 +6608,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170846301,
-        "modifiedTime": 1705171299502,
+        "modifiedTime": 1705173340955,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.ow58p27ctAnr4VPH"
@@ -6787,7 +6787,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "areaOfEffect"
       },
       "ownership": {
         "default": -1
@@ -6798,7 +6798,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170889137,
-        "modifiedTime": 1705171141550,
+        "modifiedTime": 1705172792945,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.DqqAOr5JnX71OCOw"
@@ -6825,7 +6825,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "areaOfEffect"
       },
       "ownership": {
         "default": -1
@@ -6836,7 +6836,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170893040,
-        "modifiedTime": 1705171137392,
+        "modifiedTime": 1705172797235,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.dRfDIwuaHmUQ06uA"
@@ -6863,7 +6863,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "areaOfEffect"
       },
       "ownership": {
         "default": -1
@@ -6874,7 +6874,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170896467,
-        "modifiedTime": 1705171122963,
+        "modifiedTime": 1705172800786,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.jZFp4R7tXsIqkiG3"
@@ -6901,7 +6901,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "areaOfEffect"
       },
       "ownership": {
         "default": -1
@@ -6912,7 +6912,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170901914,
-        "modifiedTime": 1705171118821,
+        "modifiedTime": 1705172804375,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.6DOoBgg7okm9gBc6"
@@ -6939,7 +6939,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "areaOfEffect"
       },
       "ownership": {
         "default": -1
@@ -6950,7 +6950,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170907654,
-        "modifiedTime": 1705171114312,
+        "modifiedTime": 1705172807897,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.npdEWb2egUPnB5Fa"
@@ -7129,7 +7129,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellSchool"
       },
       "ownership": {
         "default": -1
@@ -7140,7 +7140,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170943259,
-        "modifiedTime": 1705171042037,
+        "modifiedTime": 1705172303694,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.849AYEWw9FHD6JNz"
@@ -7167,7 +7167,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellSchool"
       },
       "ownership": {
         "default": -1
@@ -7178,7 +7178,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170949703,
-        "modifiedTime": 1705171039084,
+        "modifiedTime": 1705172309793,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.TWyKMhZJZGqQ6uls"
@@ -7205,7 +7205,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellSchool"
       },
       "ownership": {
         "default": -1
@@ -7216,7 +7216,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170956034,
-        "modifiedTime": 1705171035971,
+        "modifiedTime": 1705172314058,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.HoD2MwzmVbMqj9se"
@@ -7243,7 +7243,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellSchool"
       },
       "ownership": {
         "default": -1
@@ -7254,7 +7254,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170960548,
-        "modifiedTime": 1705171032718,
+        "modifiedTime": 1705172317813,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.SehPXk24ySBVOwCZ"
@@ -7281,7 +7281,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellSchool"
       },
       "ownership": {
         "default": -1
@@ -7292,7 +7292,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170964466,
-        "modifiedTime": 1705171028451,
+        "modifiedTime": 1705172322347,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.kGp1RNuxL2SELLRC"
@@ -7319,7 +7319,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellSchool"
       },
       "ownership": {
         "default": -1
@@ -7330,7 +7330,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170970284,
-        "modifiedTime": 1705171024609,
+        "modifiedTime": 1705172328187,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.smEk7kvVyslFozrB"
@@ -7357,7 +7357,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellSchool"
       },
       "ownership": {
         "default": -1
@@ -7368,7 +7368,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170974681,
-        "modifiedTime": 1705171020498,
+        "modifiedTime": 1705172332801,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.W0eyiV1FBmngb6Qh"
@@ -7395,7 +7395,7 @@
       "src": null,
       "system": {
         "tooltip": "",
-        "type": "rule"
+        "type": "spellSchool"
       },
       "ownership": {
         "default": -1
@@ -7406,7 +7406,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1705170982045,
-        "modifiedTime": 1705171016000,
+        "modifiedTime": 1705172337242,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.IYWewSailtmv6qEb"
@@ -7448,6 +7448,3388 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.8HxbRceQQUAhyWRt"
+    },
+    {
+      "sort": 17900000,
+      "name": "Traps in Play",
+      "type": "rule",
+      "_id": "q8azjjql1Ya5DeR2",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When adventurers come across a trap, you need to know how the trap is triggered and what it does, as well as the possibility for the characters to detect the trap and to disable or avoid it.</p><h3>Triggering a Trap</h3><p>@Embed[.EnsZoNfQh0jVS5Y1 inline]</p><h3>Detecting and Disabling a Trap</h3><p>@Embed[.DZ7AhdQ94xggG4bj inline]</p><h3>Trap Effects</h3><p>@Embed[.qvBU4XhGZuOrb8LT inline]</p><h3>Complex Traps</h3><p>@Embed[.FjXRWwrGzsLmI83j inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190410014,
+        "modifiedTime": 1705190547748,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.q8azjjql1Ya5DeR2"
+    },
+    {
+      "sort": 18000000,
+      "name": "Triggering a Trap",
+      "type": "rule",
+      "_id": "EnsZoNfQh0jVS5Y1",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Most traps are triggered when a creature goes somewhere or touches something that the trap’s creator wanted to protect. Common triggers include stepping on a pressure plate or a false section of floor, pulling a trip wire, turning a doorknob, and using the wrong key in a lock. Magic traps are often set to go off when a creature enters an area or touches an object. Some magic traps (such as the @UUID[Compendium.dnd5e.spells.Item.pB7XVYwdGNcUG935]{Glyph of Warding} spell) have more complicated trigger conditions, including a password that prevents the trap from activating.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190415329,
+        "modifiedTime": 1705190513998,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.EnsZoNfQh0jVS5Y1"
+    },
+    {
+      "sort": 18100000,
+      "name": "Detecting and Disabling a Trap",
+      "type": "rule",
+      "_id": "DZ7AhdQ94xggG4bj",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Usually, some element of a trap is visible to careful inspection. Characters might notice an uneven flagstone that conceals a pressure plate, spot the gleam of light off a trip wire, notice small holes in the walls from which jets of flame will erupt, or otherwise detect something that points to a trap’s presence.</p><p>A trap’s description specifies the checks and DCs needed to detect it, disable it, or both. A character actively looking for a trap can attempt a Wisdom (Perception) check against the trap’s DC. You can also compare the DC to detect the trap with each character’s passive Wisdom (Perception) score to determine whether anyone in the party notices the trap in passing. If the adventurers detect a trap before triggering it, they might be able to disarm it, either permanently or long enough to move past it. You might call for an Intelligence (Investigation) check for a character to deduce what needs to be done, followed by a Dexterity check using thieves’ tools to perform the necessary sabotage.</p><p>Any character can attempt an Intelligence (Arcana) check to detect or disarm a magic trap, in addition to any other checks noted in the trap’s description. The DCs are the same regardless of the check used. In addition, @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} has a chance of disabling most magic traps. A magic trap’s description provides the DC for the ability check made when you use <em>dispel magic</em>.</p><p>In most cases, a trap’s description is clear enough that you can adjudicate whether a character’s actions locate or foil the trap. As with many situations, you shouldn’t allow die rolling to override clever play and good planning. Use your common sense, drawing on the trap’s description to determine what happens. No trap’s design can anticipate every possible action that the characters might attempt.</p><p>You should allow a character to discover a trap without making an ability check if an action would clearly reveal the trap’s presence. For example, if a character lifts a rug that conceals a pressure plate, the character has found the trigger and no check is required.</p><p>Foiling traps can be a little more complicated. Consider a trapped treasure chest. If the chest is opened without first pulling on the two handles set in its sides, a mechanism inside fires a hail of poison needles toward anyone in front of it. After inspecting the chest and making a few checks, the characters are still unsure if it’s trapped. Rather than simply open the chest, they prop a shield in front of it and push the chest open at a distance with an iron rod. In this case, the trap still triggers, but the hail of needles fires harmlessly into the shield.</p><p>Traps are often designed with mechanisms that allow them to be disarmed or bypassed. Intelligent monsters that place traps in or around their lairs need ways to get past those traps without harming themselves. Such traps might have hidden levers that disable their triggers, or a secret door might conceal a passage that goes around the trap.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190421483,
+        "modifiedTime": 1705190517331,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.DZ7AhdQ94xggG4bj"
+    },
+    {
+      "sort": 18200000,
+      "name": "Trap Effects",
+      "type": "rule",
+      "_id": "qvBU4XhGZuOrb8LT",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The effects of traps can range from inconvenient to deadly, making use of elements such as arrows, spikes, blades, poison, toxic gas, blasts of fire, and deep pits. The deadliest traps combine multiple elements to kill, injure, contain, or drive off any creature unfortunate enough to trigger them. A trap’s description specifies what happens when it is triggered.</p><p>The attack bonus of a trap, the save DC to resist its effects, and the damage it deals can vary depending on the trap’s severity. Use the Trap Save DCs and Attack Bonuses table and the Damage Severity by Level table for suggestions based on three levels of trap severity.</p><p>A trap intended to be a <strong>setback</strong> is unlikely to kill or seriously harm characters of the indicated levels, whereas a <strong>dangerous</strong> trap is likely to seriously injure (and potentially kill) characters of the indicated levels. A <strong>deadly</strong> trap is likely to kill characters of the indicated levels.</p><table border=\"0\"><caption><h4>Trap Save DCs and Attack Bonuses</h4></caption><thead><tr><td>Trap Danger</td><td>Save DC</td><td>Attack Bonus</td></tr></thead><tbody><tr><td>Setback</td><td>10–11</td><td>+3 to +5</td></tr><tr><td>Dangerous</td><td>12–15</td><td>+6 to +8</td></tr><tr><td>Deadly</td><td>16–20</td><td>+9 to +12</td></tr></tbody></table><table border=\"0\"><caption><h4>Damage Severity by Level</h4></caption><thead><tr><td>Character Level</td><td>Setback</td><td>Dangerous</td><td>Deadly</td></tr></thead><tbody><tr><td>1st–4th</td><td>1d10</td><td>2d10</td><td>4d10</td></tr><tr><td>5th–10th</td><td>2d10</td><td>4d10</td><td>10d10</td></tr><tr><td>11th–16th</td><td>4d10</td><td>10d10</td><td>18d10</td></tr><tr><td>17th–20th</td><td>10d10</td><td>18d10</td><td>24d10</td></tr></tbody></table>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190426771,
+        "modifiedTime": 1705190489785,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.qvBU4XhGZuOrb8LT"
+    },
+    {
+      "sort": 18300000,
+      "name": "Complex Traps",
+      "type": "rule",
+      "_id": "FjXRWwrGzsLmI83j",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Complex traps work like standard traps, except once activated they execute a series of actions each round. A complex trap turns the process of dealing with a trap into something more like a combat encounter.</p><p>When a complex trap activates, it rolls initiative. The trap’s description includes an initiative bonus. On its turn, the trap activates again, often taking an action. It might make successive attacks against intruders, create an effect that changes over time, or otherwise produce a dynamic challenge. Otherwise, the complex trap can be detected and disabled or bypassed in the usual ways.</p><p>For example, a trap that causes a room to slowly flood works best as a complex trap. On the trap’s turn, the water level rises. After several rounds, the room is completely flooded.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190440952,
+        "modifiedTime": 1705190470976,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.FjXRWwrGzsLmI83j"
+    },
+    {
+      "sort": 18400000,
+      "name": "Going Mad",
+      "type": "rule",
+      "_id": "bghE3dOp2KMcc3b3",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Various magical effects can inflict madness on an otherwise stable mind. Certain spells, such as @UUID[Compendium.dnd5e.spells.Item.dSTu1MaPhBqPITwM]{Contact Other Plane} and @UUID[Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx]{Symbol}, can cause insanity, and you can use the madness rules here instead of the spell effects of those spells. Diseases, poisons, and planar effects such as psychic wind or the howling winds of Pandemonium can all inflict madness. Some artifacts can also break the psyche of a character who uses or becomes attuned to them.</p><p>Resisting a madness-inducing effect usually requires a Wisdom or Charisma saving throw.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190589914,
+        "modifiedTime": 1705190691016,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.bghE3dOp2KMcc3b3"
+    },
+    {
+      "sort": 18500000,
+      "name": "Madness Effects",
+      "type": "rule",
+      "_id": "s0ZHwT4gTb5fuw4w",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Madness can be short-term, long-term, or indefinite. Most relatively mundane effects impose short-term madness, which lasts for just a few minutes. More horrific effects or cumulative effects can result in long-term or indefinite madness.</p><p>@Embed[.FiOvoBCuCpgyMjAX inline]</p><p>@Embed[.FximlEBSWq8TLAtX inline]</p><p>@Embed[.Ik0x5qoE14RYE6nj inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190595620,
+        "modifiedTime": 1705190680534,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.s0ZHwT4gTb5fuw4w"
+    },
+    {
+      "sort": 18600000,
+      "name": "Curing Madness",
+      "type": "rule",
+      "_id": "6Icem7G3CICdNOkM",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A @UUID[Compendium.dnd5e.spells.Item.3MYDjS6k9IYL0aTj]{Calm Emotions}spell can suppress the effects of madness, while a @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser Restoration} spell can rid a character of a short-term or long-term madness. Depending on the source of the madness, @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} or @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic}<em> </em>might also prove effective. A @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater Restoration} spell or more powerful magic is required to rid a character of indefinite madness.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190608959,
+        "modifiedTime": 1705190618059,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.6Icem7G3CICdNOkM"
+    },
+    {
+      "sort": 18550000,
+      "name": "Short-Term Madness",
+      "type": "rule",
+      "_id": "FiOvoBCuCpgyMjAX",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A character afflicted with <strong>short-term madness</strong> is subjected to an effect from the @UUID[Compendium.dnd5e.tables.RollTable.ypk2L9feVwTx0QVj]{Short-Term Madness} table for 1d10 minutes.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190635134,
+        "modifiedTime": 1705190662393,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.FiOvoBCuCpgyMjAX"
+    },
+    {
+      "sort": 18575000,
+      "name": "Long-Term Madness",
+      "type": "rule",
+      "_id": "FximlEBSWq8TLAtX",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A character afflicted with<strong> long-term madness</strong> is subjected to an effect from the @UUID[Compendium.dnd5e.tables.RollTable.kJB79nI9rju6VN8J]{Long-Term Madness} table for 1d10 × 10 hours.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190644622,
+        "modifiedTime": 1705190663203,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.FximlEBSWq8TLAtX"
+    },
+    {
+      "sort": 18587500,
+      "name": "Indefinite Madness",
+      "type": "rule",
+      "_id": "Ik0x5qoE14RYE6nj",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A character afflicted with <strong>indefinite madness</strong> gains a new character flaw from the @UUID[Compendium.dnd5e.tables.RollTable.MAL5r8ZKx7BVsE9R]{Indefinite Madness} table that lasts until cured.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190656989,
+        "modifiedTime": 1705190664011,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Ik0x5qoE14RYE6nj"
+    },
+    {
+      "sort": 18700000,
+      "name": "Statistics for Objects",
+      "type": "rule",
+      "_id": "YAhGI1Pyff166NF9",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When time is a factor, you can assign an Armor Class and hit points to a destructible object. You can also give it immunities, resistances, and vulnerabilities to specific types of damage.</p><p>@Embed[.KWmHLFi39glwuXQ7 inline]</p><p>@Embed[.243xmBDKcM1W2QEm inline]</p><p>@Embed[.dWO90EG5camfT34z inline]</p><p>@Embed[.HANU4fJW9LI4MIC8 inline]</p><p>@Embed[.9LJZhqvCburpags3 inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190740314,
+        "modifiedTime": 1705190918060,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.YAhGI1Pyff166NF9"
+    },
+    {
+      "sort": 18800000,
+      "name": "Armor Class",
+      "type": "rule",
+      "_id": "KWmHLFi39glwuXQ7",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Armor Class. </strong>An object’s Armor Class is a measure of how difficult it is to deal damage to the object when striking it (because the object has no chance of dodging out of the way). The Object Armor Class table provides suggested AC values for various substances.</p><table border=\"0\"><caption><h4>Object Armor Class</h4></caption><thead><tr><td>Substance</td><td>AC</td></tr></thead><tbody><tr><td>Cloth, paper, rope</td><td>11</td></tr><tr><td>Crystal, glass, ice</td><td>13</td></tr><tr><td>Wood, bone</td><td>15</td></tr><tr><td>Stone</td><td>17</td></tr><tr><td>Iron, steel</td><td>19</td></tr><tr><td>Mithral</td><td>21</td></tr><tr><td>Adamantine</td><td>23</td></tr></tbody></table>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>An object’s Armor Class is a measure of how difficult it is to deal damage to the object when striking it (because the object has no chance of dodging out of the way). The Object Armor Class table provides suggested AC values for various substances.</p><table border=\"0\"><caption><h4>Object Armor Class</h4></caption><thead><tr><td>Substance</td><td>AC</td></tr></thead><tbody><tr><td>Cloth, paper, rope</td><td>11</td></tr><tr><td>Crystal, glass, ice</td><td>13</td></tr><tr><td>Wood, bone</td><td>15</td></tr><tr><td>Stone</td><td>17</td></tr><tr><td>Iron, steel</td><td>19</td></tr><tr><td>Mithral</td><td>21</td></tr><tr><td>Adamantine</td><td>23</td></tr></tbody></table>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190749908,
+        "modifiedTime": 1705190868551,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.KWmHLFi39glwuXQ7"
+    },
+    {
+      "sort": 18900000,
+      "name": "Hit Points",
+      "type": "rule",
+      "_id": "243xmBDKcM1W2QEm",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Hit Points. </strong>An object’s hit points measure how much damage it can take before losing its structural integrity. Resilient objects have more hit points than fragile ones. Large objects also tend to have more hit points than small ones, unless breaking a small part of the object is just as effective as breaking the whole thing. The Object Hit Points table provides suggested hit points for fragile and resilient objects that are Large or smaller.</p><table border=\"0\"><caption><h4>Object Hit Points</h4></caption><thead><tr><td>Size</td><td>Fragile</td><td>Resilient</td></tr></thead><tbody><tr><td>Tiny (bottle, lock)</td><td>2 (1d4)</td><td>5 (2d4)</td></tr><tr><td>Small (chest, lute)</td><td>3 (1d6)</td><td>10 (3d6)</td></tr><tr><td>Medium (barrel, chandelier)</td><td>4 (1d8)</td><td>18 (4d8)</td></tr><tr><td>Large (cart, 10-ft.-by-10-ft. window)</td><td>5 (1d10)</td><td>27 (5d10)</td></tr></tbody></table>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>An object’s hit points measure how much damage it can take before losing its structural integrity. Resilient objects have more hit points than fragile ones. Large objects also tend to have more hit points than small ones, unless breaking a small part of the object is just as effective as breaking the whole thing. The Object Hit Points table provides suggested hit points for fragile and resilient objects that are Large or smaller.</p><table border=\"0\"><caption><h4>Object Hit Points</h4></caption><thead><tr><td>Size</td><td>Fragile</td><td>Resilient</td></tr></thead><tbody><tr><td>Tiny (bottle, lock)</td><td>2 (1d4)</td><td>5 (2d4)</td></tr><tr><td>Small (chest, lute)</td><td>3 (1d6)</td><td>10 (3d6)</td></tr><tr><td>Medium (barrel, chandelier)</td><td>4 (1d8)</td><td>18 (4d8)</td></tr><tr><td>Large (cart, 10-ft.-by-10-ft. window)</td><td>5 (1d10)</td><td>27 (5d10)</td></tr></tbody></table>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190758998,
+        "modifiedTime": 1705190849601,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.243xmBDKcM1W2QEm"
+    },
+    {
+      "sort": 19000000,
+      "name": "Huge and Gargantuan Objects",
+      "type": "rule",
+      "_id": "dWO90EG5camfT34z",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Huge and Gargantuan Objects. </strong>Normal weapons are of little use against many Huge and Gargantuan objects, such as a colossal statue, towering column of stone, or massive boulder. That said, one torch can burn a Huge tapestry, and an @UUID[Compendium.dnd5e.spells.Item.x5JNBSyIBBZsjcGT]{Earthquake} spell can reduce a colossus to rubble. You can track a Huge or Gargantuan object’s hit points if you like, or you can simply decide how long the object can withstand whatever weapon or force is acting against it. If you track hit points for the object, divide it into Large or smaller sections, and track each section’s hit points separately. Destroying one of those sections could ruin the entire object. For example, a Gargantuan statue of a human might topple over when one of its Large legs is reduced to 0 hit points.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Normal weapons are of little use against many Huge and Gargantuan objects, such as a colossal statue, towering column of stone, or massive boulder. That said, one torch can burn a Huge tapestry, and an @UUID[Compendium.dnd5e.spells.Item.x5JNBSyIBBZsjcGT]{Earthquake} spell can reduce a colossus to rubble. You can track a Huge or Gargantuan object’s hit points if you like, or you can simply decide how long the object can withstand whatever weapon or force is acting against it. If you track hit points for the object, divide it into Large or smaller sections, and track each section’s hit points separately. Destroying one of those sections could ruin the entire object. For example, a Gargantuan statue of a human might topple over when one of its Large legs is reduced to 0 hit points.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190767053,
+        "modifiedTime": 1705190825565,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.dWO90EG5camfT34z"
+    },
+    {
+      "sort": 19100000,
+      "name": "Objects and Damage Types",
+      "type": "rule",
+      "_id": "HANU4fJW9LI4MIC8",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Objects and Damage Types. </strong>Objects are immune to poison and psychic damage. You might decide that some damage types are more effective against a particular object or substance than others. For example, bludgeoning damage works well for smashing things but not for cutting through rope or leather. Paper or cloth objects might be vulnerable to fire and lightning damage. A pick can chip away stone but can’t effectively cut down a tree. As always, use your best judgment.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Objects are immune to poison and psychic damage. You might decide that some damage types are more effective against a particular object or substance than others. For example, bludgeoning damage works well for smashing things but not for cutting through rope or leather. Paper or cloth objects might be vulnerable to fire and lightning damage. A pick can chip away stone but can’t effectively cut down a tree. As always, use your best judgment.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190782639,
+        "modifiedTime": 1705190815143,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.HANU4fJW9LI4MIC8"
+    },
+    {
+      "sort": 19200000,
+      "name": "Damage Threshold",
+      "type": "rule",
+      "_id": "9LJZhqvCburpags3",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Damage Threshold. </strong>Big objects such as castle walls often have extra resilience represented by a damage threshold. An object with a damage threshold has immunity to all damage unless it takes an amount of damage from a single attack or effect equal to or greater than its damage threshold, in which case it takes damage as normal. Any damage that fails to meet or exceed the object’s damage threshold is considered superficial and doesn’t reduce the object’s hit points.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Big objects such as castle walls often have extra resilience represented by a damage threshold. An object with a damage threshold has immunity to all damage unless it takes an amount of damage from a single attack or effect equal to or greater than its damage threshold, in which case it takes damage as normal. Any damage that fails to meet or exceed the object’s damage threshold is considered superficial and doesn’t reduce the object’s hit points.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190789235,
+        "modifiedTime": 1705190805415,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.9LJZhqvCburpags3"
+    },
+    {
+      "sort": 19300000,
+      "name": "Poison Types",
+      "type": "rule",
+      "_id": "I6OMMWUaYCWR9xip",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Poisons come in the following four types.</p><p>@Embed[.kXnCEqqGUWRZeZDj inline]</p><p>@Embed[.Y0vsJYSWeQcFpJ27 inline]</p><p>@Embed[.KUyN4eK1xTBzXsjP inline]</p><p>@Embed[.LUL48OUq6SJeMGc7 inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190948325,
+        "modifiedTime": 1705191042937,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.I6OMMWUaYCWR9xip"
+    },
+    {
+      "sort": 19400000,
+      "name": "Contact",
+      "type": "rule",
+      "_id": "kXnCEqqGUWRZeZDj",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "markdown": "",
+        "content": "<p><strong>Contact.</strong> Contact poison can be smeared on an object and remains potent until it is touched or washed off. A creature that touches contact poison with exposed skin suffers its effects.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Contact poison can be smeared on an object and remains potent until it is touched or washed off. A creature that touches contact poison with exposed skin suffers its effects.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190958655,
+        "modifiedTime": 1705193944705,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.kXnCEqqGUWRZeZDj"
+    },
+    {
+      "sort": 19500000,
+      "name": "Ingested",
+      "type": "rule",
+      "_id": "Y0vsJYSWeQcFpJ27",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Ingested. </strong>A creature must swallow an entire dose of ingested poison to suffer its effects. The dose can be delivered in food or a liquid. You may decide that a partial dose has a reduced effect, such as allowing advantage on the saving throw or dealing only half damage on a failed save.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>A creature must swallow an entire dose of ingested poison to suffer its effects. The dose can be delivered in food or a liquid. You may decide that a partial dose has a reduced effect, such as allowing advantage on the saving throw or dealing only half damage on a failed save.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190964344,
+        "modifiedTime": 1705191015318,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Y0vsJYSWeQcFpJ27"
+    },
+    {
+      "sort": 19600000,
+      "name": "Inhaled",
+      "type": "rule",
+      "_id": "KUyN4eK1xTBzXsjP",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Inhaled.</strong> These poisons are powders or gases that take effect when inhaled. Blowing the powder or releasing the gas subjects creatures in a 5-foot cube to its effect. The resulting cloud dissipates immediately afterward. Holding one's breath is ineffective against inhaled poisons, as they affect nasal membranes, tear ducts, and other parts of the body.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>These poisons are powders or gases that take effect when inhaled. Blowing the powder or releasing the gas subjects creatures in a 5-foot cube to its effect. The resulting cloud dissipates immediately afterward. Holding one's breath is ineffective against inhaled poisons, as they affect nasal membranes, tear ducts, and other parts of the body.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190969769,
+        "modifiedTime": 1705191009180,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.KUyN4eK1xTBzXsjP"
+    },
+    {
+      "sort": 19700000,
+      "name": "Injury",
+      "type": "rule",
+      "_id": "LUL48OUq6SJeMGc7",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Injury. </strong>Injury poison can be applied to weapons, ammunition, trap components, and other objects that deal piercing or slashing damage and remains potent until delivered through a wound or washed off. A creature that takes piercing or slashing damage from an object coated with the poison is exposed to its effects.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Injury poison can be applied to weapons, ammunition, trap components, and other objects that deal piercing or slashing damage and remains potent until delivered through a wound or washed off. A creature that takes piercing or slashing damage from an object coated with the poison is exposed to its effects.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705190974351,
+        "modifiedTime": 1705191003184,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.LUL48OUq6SJeMGc7"
+    },
+    {
+      "sort": 19800000,
+      "name": "Attunement",
+      "type": "rule",
+      "_id": "UQ65OwIyGK65eiOK",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some magic items require a creature to form a bond with them before their magical properties can be used. This bond is called attunement, and certain items have a prerequisite for it. If the prerequisite is a class, a creature must be a member of that class to attune to the item. (If the class is a spellcasting class, a monster qualifies if it has spell slots and uses that class's spell list.) If the prerequisite is to be a spellcaster, a creature qualifies if it can cast at least one spell using its traits or features, not using a magic item or the like.</p><p>Without becoming attuned to an item that requires attunement, a creature gains only its nonmagical benefits, unless its description states otherwise. For example, a magic shield that requires attunement provides the benefits of a normal shield to a creature not attuned to it, but none of its magical properties.</p><p>Attuning to an item requires a creature to spend a short rest focused on only that item while being in physical contact with it (this can't be the same short rest used to learn the item's properties). This focus can take the form of weapon practice (for a weapon), meditation (for a wondrous item), or some other appropriate activity. If the short rest is interrupted, the attunement attempt fails. Otherwise, at the end of the short rest, the creature gains an intuitive understanding of how to activate any magical properties of the item, including any necessary command words.</p><p>An item can be attuned to only one creature at a time, and a creature can be attuned to no more than three magic items at a time. Any attempt to attune to a fourth item fails; the creature must end its attunement to an item first. Additionally, a creature can't attune to more than one copy of an item. For example, a creature can't attune to more than one @UUID[Compendium.dnd5e.items.Item.QtmVEreNIWEVOoLR]{Ring of Protection} at a time.</p><p>A creature's attunement to an item ends if the creature no longer satisfies the prerequisites for attunement, if the item has been more than 100 feet away for at least 24 hours, if the creature dies, or if another creature attunes to the item. A creature can also voluntarily end attunement by spending another short rest focused on the item, unless the item is cursed.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191083710,
+        "modifiedTime": 1705191268097,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.UQ65OwIyGK65eiOK"
+    },
+    {
+      "sort": 19900000,
+      "name": "Wearing and Wielding Items",
+      "type": "rule",
+      "_id": "iPB8mGKuQx3X0Z2J",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Using a magic item's properties might mean wearing or wielding it. A magic item meant to be worn must be donned in the intended fashion: boots go on the feet, gloves on the hands, hats and helmets on the head, and rings on the finger. Magic armor must be donned, a shield strapped to the arm, a cloak fastened about the shoulders. A weapon must be held.</p><p>In most cases, a magic item that's meant to be worn can fit a creature regardless of size or build. Many magic garments are made to be easily adjustable, or they magically adjust themselves to the wearer. Rare exceptions exist. If the story suggests a good reason for an item to fit only creatures of a certain size or shape, you can rule that it doesn't adjust. For example, drow-made armor might fit elves only. Dwarves might make items usable only by dwarf-sized and dwarf-shaped folk.</p><p>When a nonhumanoid tries to wear an item, use your discretion as to whether the item functions as intended. A ring placed on a tentacle might work, but a yuan-ti with a snakelike tail instead of legs can't wear boots.</p><h3>Multiple Items of the Same Kind</h3><p>@Embed[.rLJdvz4Mde8GkEYQ inline]</p><h3>Paired Items</h3><p>@Embed[.rd9pCH8yFraSGN34 inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191092027,
+        "modifiedTime": 1705191250393,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.iPB8mGKuQx3X0Z2J"
+    },
+    {
+      "sort": 20000000,
+      "name": "Multiple Items of the Same Kind",
+      "type": "rule",
+      "_id": "rLJdvz4Mde8GkEYQ",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Use common sense to determine whether more than one of a given kind of magic item can be worn. A character can't normally wear more than one pair of footwear, one pair of gloves or gauntlets, one pair of bracers, one suit of armor, one item of headwear, and one cloak. You can make exceptions; a character might be able to wear a circlet under a helmet, for example, or to layer two cloaks.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191100702,
+        "modifiedTime": 1705191231078,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.rLJdvz4Mde8GkEYQ"
+    },
+    {
+      "sort": 20100000,
+      "name": "Paired Items",
+      "type": "rule",
+      "_id": "rd9pCH8yFraSGN34",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Items that come in pairs—such as boots, bracers, gauntlets, and gloves—impart their benefits only if both items of the pair are worn. For example, a character wearing a boot of striding and springing on one foot and a boot of elvenkind on the other foot gains no benefit from either.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191106274,
+        "modifiedTime": 1705191228087,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.rd9pCH8yFraSGN34"
+    },
+    {
+      "sort": 20200000,
+      "name": "Activating an Item",
+      "type": "rule",
+      "_id": "PqHSxFUwaXHL7kSz",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Activating some magic items requires a user to do something special, such as holding the item and uttering a command word. The description of each item category or individual item details how an item is activated. Certain items use the following rules for their activation.</p><p>If an item requires an action to activate, that action isn't a function of the Use an Item action, so a feature such as the rogue's Fast Hands can't be used to activate the item.</p><h3>Command Word</h3><p>@Embed[.HiXixxLYesv6Ff3t inline]</p><h3>Consumables</h3><p>@Embed[.UEPAcZFzQ5x196zE inline]</p><h3>Spells</h3><p>@Embed[.DABoaeeF6w31UCsj inline]</p><h3>Charges</h3><p>@Embed[.NLRXcgrpRCfsA5mO inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191111590,
+        "modifiedTime": 1705191216029,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.PqHSxFUwaXHL7kSz"
+    },
+    {
+      "sort": 20300000,
+      "name": "Command Word",
+      "type": "rule",
+      "_id": "HiXixxLYesv6Ff3t",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A command word is a word or phrase that must be spoken for an item to work. A magic item that requires a command word can't be activated in an area where sound is prevented, as in the area of the silence spell.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191117206,
+        "modifiedTime": 1705191183988,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.HiXixxLYesv6Ff3t"
+    },
+    {
+      "sort": 20400000,
+      "name": "Consumables",
+      "type": "rule",
+      "_id": "UEPAcZFzQ5x196zE",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some items are used up when they are activated. A potion or an elixir must be swallowed, or an oil applied to the body. The writing vanishes from a scroll when it is read. Once used, a consumable item loses its magic.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191121710,
+        "modifiedTime": 1705191179696,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.UEPAcZFzQ5x196zE"
+    },
+    {
+      "sort": 20500000,
+      "name": "Spells",
+      "type": "rule",
+      "_id": "DABoaeeF6w31UCsj",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some magic items allow the user to cast a spell from the item. The spell is cast at the lowest possible spell level, doesn't expend any of the user's spell slots, and requires no components, unless the item's description says otherwise. The spell uses its normal casting time, range, and duration, and the user of the item must concentrate if the spell requires concentration. Many items, such as potions, bypass the casting of a spell and confer the spell's effects, with their usual duration. Certain items make exceptions to these rules, changing the casting time, duration, or other parts of a spell.</p><p>A magic item, such as certain staffs, may require you to use your own spellcasting ability when you cast a spell from the item. If you have more than one spellcasting ability, you choose which one to use with the item. If you don't have a spellcasting ability—perhaps you're a rogue with the Use Magic Device feature—your spellcasting ability modifier is +0 for the item, and your proficiency bonus does apply.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191125295,
+        "modifiedTime": 1705191175887,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.DABoaeeF6w31UCsj"
+    },
+    {
+      "sort": 20600000,
+      "name": "Charges",
+      "type": "rule",
+      "_id": "NLRXcgrpRCfsA5mO",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some magic items have charges that must be expended to activate their properties. The number of charges an item has remaining is revealed when an identify spell is cast on it, as well as when a creature attunes to it. Additionally, when an item regains charges, the creature attuned to it learns how many charges it regained.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191130439,
+        "modifiedTime": 1705191171058,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.NLRXcgrpRCfsA5mO"
+    },
+    {
+      "sort": 20800000,
+      "name": "Abilities",
+      "type": "rule",
+      "_id": "2l5215aIscQ8Y1di",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A sentient magic item has Intelligence, Wisdom, and Charisma scores. You can choose the item's abilities or determine them randomly. To determine them randomly, roll 4d6 for each one, dropping the lowest roll and totaling the rest.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191342684,
+        "modifiedTime": 1705191476530,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.2l5215aIscQ8Y1di"
+    },
+    {
+      "sort": 20750000,
+      "name": "Creating Sentient Magic Items",
+      "type": "rule",
+      "_id": "Kh16IbKZRyEer1ju",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you decide to make a magic item sentient, you create the item's persona in the same way you would create an NPC, with a few exceptions described here.</p><h4>Abilities</h4><p>@Embed[.2l5215aIscQ8Y1di inline]</p><h4>Communication</h4><p>@Embed[.iSNOtO9OQxN8Buf3 inline]</p><h4>Senses</h4><p>@Embed[.l4Z4cLJmlegyfY6c inline]</p><h4>Alignment</h4><p>@Embed[.SdK1Y86NLlPhjhMl inline]</p><h4>Special Purpose</h4><p>@Embed[.0LBrn5XGigZKGfIe inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191354524,
+        "modifiedTime": 1705191536112,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Kh16IbKZRyEer1ju"
+    },
+    {
+      "sort": 20900000,
+      "name": "Communication",
+      "type": "rule",
+      "_id": "iSNOtO9OQxN8Buf3",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A sentient item has some ability to communicate, either by sharing its emotions, broadcasting its thoughts telepathically, or speaking aloud. You can choose how it communicates or roll on the following table.</p><p>@Embed[Compendium.dnd5e.tables.RollTable.BHckoLKDwoL9d5p3]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191364820,
+        "modifiedTime": 1705191558514,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.iSNOtO9OQxN8Buf3"
+    },
+    {
+      "sort": 21000000,
+      "name": "Senses",
+      "type": "rule",
+      "_id": "l4Z4cLJmlegyfY6c",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>With sentience comes awareness. A sentient item can perceive its surroundings out to a limited range. You can choose its senses or roll on the following table.</p><p>@Embed[Compendium.dnd5e.tables.RollTable.gfR9uCe42xBCCktd]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191369699,
+        "modifiedTime": 1705191589567,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.l4Z4cLJmlegyfY6c"
+    },
+    {
+      "sort": 21100000,
+      "name": "Alignment",
+      "type": "rule",
+      "_id": "SdK1Y86NLlPhjhMl",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A sentient magic item has an alignment. Its creator or nature might suggest an alignment. If not, you can pick an alignment or roll on the following table.</p><p>@Embed[Compendium.dnd5e.tables.RollTable.NdjHJMSSVWw5fHsL]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191375219,
+        "modifiedTime": 1705191615151,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.SdK1Y86NLlPhjhMl"
+    },
+    {
+      "sort": 21200000,
+      "name": "Special Purpose",
+      "type": "rule",
+      "_id": "0LBrn5XGigZKGfIe",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You can give a sentient item an objective it pursues, perhaps to the exclusion of all else. As long as the wielder's use of the item aligns with that special purpose, the item remains cooperative. Deviating from this course might cause conflict between the wielder and the item, and could even cause the item to prevent the use of its activated properties. You can pick a special purpose or roll on the following table.</p><p>@Embed[Compendium.dnd5e.tables.RollTable.b250eqNa0k8lrE9b]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191380516,
+        "modifiedTime": 1705191634997,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.0LBrn5XGigZKGfIe"
+    },
+    {
+      "sort": 21300000,
+      "name": "Conflict",
+      "type": "rule",
+      "_id": "S48JxKMOF2ZmAfav",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A sentient item has a will of its own, shaped by its personality and alignment. If its wielder acts in a manner opposed to the item's alignment or purpose, conflict can arise. When such a conflict occurs, the item makes a Charisma check contested by the wielder's Charisma check. If the item wins the contest, it makes one or more of the following demands:</p><ul><li>The item insists on being carried or worn at all times.</li><li>The item demands that its wielder dispose of anything the item finds repugnant.</li><li>The item demands that its wielder pursue the item's goals to the exclusion of all other goals.</li><li>The item demands to be given to someone else.</li></ul><p>If its wielder refuses to comply with the item's wishes, the item can do any or all of the following:</p><ul><li>Make it impossible for its wielder to attune to it.</li><li>Suppress one or more of its activated properties.</li><li>Attempt to take control of its wielder.</li></ul><p>If a sentient item attempts to take control of its wielder, the wielder must make a Charisma saving throw, with a DC equal to 12 + the item's Charisma modifier. On a failed save, the wielder is charmed by the item for 1d12 hours. While charmed, the wielder must try to follow the item's commands. If the wielder takes damage, it can repeat the saving throw, ending the effect on a success. Whether the attempt to control its user succeeds or fails, the item can't use this power again until the next dawn.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191421018,
+        "modifiedTime": 1705191428605,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.S48JxKMOF2ZmAfav"
+    },
+    {
+      "sort": 21400000,
+      "name": "Size",
+      "type": "rule",
+      "_id": "v0UFDQcAt4aVwvxI",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster can be Tiny, Small, Medium, Large, Huge, or Gargantuan. The Size Categories table shows how much space a creature of a particular size controls in combat. See the <em>Player’s Handbook</em> for more information on creature size and space.</p><table border=\"0\"><caption><h4>Size Categories</h4></caption><thead><tr><td>Size</td><td>Space</td><td>Examples</td></tr></thead><tbody><tr><td>Tiny</td><td>2½ by 2½ ft.</td><td>Imp, sprite</td></tr><tr><td>Small</td><td>5 by 5 ft.</td><td>Giant rat, goblin</td></tr><tr><td>Medium</td><td>5 by 5 ft.</td><td>Orc, werewolf</td></tr><tr><td>Large</td><td>10 by 10 ft.</td><td>Hippogriff, ogre</td></tr><tr><td>Huge</td><td>15 by 15 ft.</td><td>Fire giant, treant</td></tr><tr><td>Gargantuan</td><td>20 by 20 ft. or larger</td><td>Kraken, purple worm</td></tr></tbody></table>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191693221,
+        "modifiedTime": 1705192971136,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.v0UFDQcAt4aVwvxI"
+    },
+    {
+      "sort": 21500000,
+      "name": "Modifying Creatures",
+      "type": "rule",
+      "_id": "BhPCJ7FryjIRAzap",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Despite the versatile collection of monsters in this book, you might be at a loss when it comes to finding the perfect creature for part of an adventure. Feel free to tweak an existing creature to make it into something more useful for you, perhaps by borrowing a trait or two from a different monster or by using a <strong>variant</strong> or <strong>template</strong>, such as the ones in this book. Keep in mind that modifying a monster, including when you apply a template to it, might change its challenge rating.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191698814,
+        "modifiedTime": 1705192988848,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.BhPCJ7FryjIRAzap"
+    },
+    {
+      "sort": 21600000,
+      "name": "Type",
+      "type": "rule",
+      "_id": "eqXkPKiwiACNXkfw",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster’s type speaks to its fundamental nature. Certain spells, magic items, class features, and other effects in the game interact in special ways with creatures of a particular type. For example, an <em>arrow of dragon slaying </em>deals extra damage not only to dragons but also other creatures of the dragon type, such as dragon turtles and wyverns.</p><p>The game includes the following monster types, which have no rules of their own.</p><p>@Embed[.yy50qVC1JhPHt4LC inline]</p><p>@Embed[.6bTHn7pZek9YX2tv inline]</p><p>@Embed[.T5CJwxjhBbi6oqaM inline]</p><p>@Embed[.jQGAJZBZTqDFod8d inline]</p><p>@Embed[.k2IRXZwGk9W0PM2S inline]</p><p>@Embed[.7z1LXGGkXpHuzkFh inline]</p><p>@Embed[.OFsRUt3pWljgm8VC inline]</p><p>@Embed[.ElHKBJeiJPC7gj6k inline]</p><p>@Embed[.AOXn3Mv5vPZwo0Uf inline]</p><p>@Embed[.iFzQs4AenN8ALRvw inline]</p><p>@Embed[.TX0yPEFTn79AMZ8P inline]</p><p>@Embed[.cgzIC1ecG03D97Fg inline]</p><p>@Embed[.1oT7t6tHE4kZuSN1 inline]</p><p>@Embed[.D2BdqS1GeD5rcZ6q inline]</p><h3>Tags</h3><p>@Embed[.9jV1fFF163dr68vd inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191711116,
+        "modifiedTime": 1705193210071,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.eqXkPKiwiACNXkfw"
+    },
+    {
+      "sort": 21700000,
+      "name": "Aberrations",
+      "type": "rule",
+      "_id": "yy50qVC1JhPHt4LC",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Aberrations</strong> are utterly alien beings. Many of them have innate magical abilities drawn from the creature’s alien mind rather than the mystical forces of the world. The quintessential aberrations are aboleths, beholders, mind flayers, and slaadi.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191721830,
+        "modifiedTime": 1705193103326,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.yy50qVC1JhPHt4LC"
+    },
+    {
+      "sort": 21800000,
+      "name": "Beasts",
+      "type": "rule",
+      "_id": "6bTHn7pZek9YX2tv",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Beasts</strong> are nonhumanoid creatures that are a natural part of the fantasy ecology. Some of them have magical powers, but most are unintelligent and lack any society or language. Beasts include all varieties of ordinary animals, dinosaurs, and giant versions of animals.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191913429,
+        "modifiedTime": 1705193098256,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.6bTHn7pZek9YX2tv"
+    },
+    {
+      "sort": 21900000,
+      "name": "Celestials",
+      "type": "rule",
+      "_id": "T5CJwxjhBbi6oqaM",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Celestials</strong> are creatures native to the Upper Planes. Many of them are the servants of deities, employed as messengers or agents in the mortal realm and throughout the planes. Celestials are good by nature, so the exceptional celestial who strays from a good alignment is a horrifying rarity. Celestials include angels, couatls, and pegasi.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191920412,
+        "modifiedTime": 1705193091912,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.T5CJwxjhBbi6oqaM"
+    },
+    {
+      "sort": 22000000,
+      "name": "Constructs",
+      "type": "rule",
+      "_id": "jQGAJZBZTqDFod8d",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Constructs</strong> are made, not born. Some are programmed by their creators to follow a simple set of instructions, while others are imbued with sentience and capable of independent thought. Golems are the iconic constructs. Many creatures native to the outer plane of Mechanus, such as modrons, are constructs shaped from the raw material of the plane by the will of more powerful creatures.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191930115,
+        "modifiedTime": 1705193084439,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.jQGAJZBZTqDFod8d"
+    },
+    {
+      "sort": 22100000,
+      "name": "Dragons",
+      "type": "rule",
+      "_id": "k2IRXZwGk9W0PM2S",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Dragons</strong> are large reptilian creatures of ancient origin and tremendous power. True dragons, including the good metallic dragons and the evil chromatic dragons, are highly intelligent and have innate magic. Also in this category are creatures distantly related to true dragons, but less powerful, less intelligent, and less magical, such as wyverns and pseudodragons.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191935639,
+        "modifiedTime": 1705193077260,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.k2IRXZwGk9W0PM2S"
+    },
+    {
+      "sort": 22200000,
+      "name": "Elementals",
+      "type": "rule",
+      "_id": "7z1LXGGkXpHuzkFh",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Elementals</strong> are creatures native to the elemental planes. Some creatures of this type are little more than animate masses of their respective elements, including the creatures simply called elementals. Others have biological forms infused with elemental energy. The races of genies, including djinn and efreet, form the most important civilizations on the elemental planes. Other elemental creatures include azers and invisible stalkers.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191944209,
+        "modifiedTime": 1705193071125,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.7z1LXGGkXpHuzkFh"
+    },
+    {
+      "sort": 22300000,
+      "name": "Fey",
+      "type": "rule",
+      "_id": "OFsRUt3pWljgm8VC",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Fey</strong> are magical creatures closely tied to the forces of nature. They dwell in twilight groves and misty forests. In some worlds, they are closely tied to the Feywild, also called the Plane of Faerie. Some are also found in the Outer Planes, particularly the planes of Arborea and the Beastlands. Fey include dryads, pixies, and satyrs.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191950637,
+        "modifiedTime": 1705193064571,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.OFsRUt3pWljgm8VC"
+    },
+    {
+      "sort": 22400000,
+      "name": "Fiends",
+      "type": "rule",
+      "_id": "ElHKBJeiJPC7gj6k",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Fiends</strong> are creatures of wickedness that are native to the Lower Planes. A few are the servants of deities, but many more labor under the leadership of archdevils and demon princes. Evil priests and mages sometimes summon fiends to the material world to do their bidding. If an evil celestial is a rarity, a good fiend is almost inconceivable. Fiends include demons, devils, hell hounds, rakshasas, and yugoloths.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191957083,
+        "modifiedTime": 1705193058674,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.ElHKBJeiJPC7gj6k"
+    },
+    {
+      "sort": 22500000,
+      "name": "Giants",
+      "type": "rule",
+      "_id": "AOXn3Mv5vPZwo0Uf",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Giants</strong> tower over humans and their kind. They are humanlike in shape, though some have multiple heads (ettins) or deformities (fomorians). The six varieties of true giant are hill giants, stone giants, frost giants, fire giants, cloud giants, and storm giants. Besides these, creatures such as ogres and trolls are giants.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191963101,
+        "modifiedTime": 1705193051371,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.AOXn3Mv5vPZwo0Uf"
+    },
+    {
+      "sort": 22600000,
+      "name": "Humanoids",
+      "type": "rule",
+      "_id": "iFzQs4AenN8ALRvw",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Humanoids</strong> are the main peoples of a fantasy gaming world, both civilized and savage, including humans and a tremendous variety of other species. They have language and culture, few if any innate magical abilities (though most humanoids can learn spellcasting), and a bipedal form. The most common humanoid races are the ones most suitable as player characters: humans, dwarves, elves, and halflings. Almost as numerous but far more savage and brutal, and almost uniformly evil, are the races of goblinoids (goblins, hobgoblins, and bugbears), orcs, gnolls, lizardfolk, and kobolds.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191971162,
+        "modifiedTime": 1705193045032,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.iFzQs4AenN8ALRvw"
+    },
+    {
+      "sort": 22700000,
+      "name": "Monstrosities",
+      "type": "rule",
+      "_id": "TX0yPEFTn79AMZ8P",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Monstrosities</strong> are monsters in the strictest sense—frightening creatures that are not ordinary, not truly natural, and almost never benign. Some are the results of magical experimentation gone awry (such as owlbears), and others are the product of terrible curses (including minotaurs and yuan-ti). They defy categorization, and in some sense serve as a catch-all category for creatures that don’t fit into any other type.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191981709,
+        "modifiedTime": 1705193038910,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.TX0yPEFTn79AMZ8P"
+    },
+    {
+      "sort": 22800000,
+      "name": "Oozes",
+      "type": "rule",
+      "_id": "cgzIC1ecG03D97Fg",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Oozes</strong> are gelatinous creatures that rarely have a fixed shape. They are mostly subterranean, dwelling in caves and dungeons and feeding on refuse, carrion, or creatures unlucky enough to get in their way. Black puddings and gelatinous cubes are among the most recognizable oozes.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191989646,
+        "modifiedTime": 1705193032725,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.cgzIC1ecG03D97Fg"
+    },
+    {
+      "sort": 22900000,
+      "name": "Plants",
+      "type": "rule",
+      "_id": "1oT7t6tHE4kZuSN1",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Plants</strong> in this context are vegetable creatures, not ordinary flora. Most of them are ambulatory, and some are carnivorous. The quintessential plants are the shambling mound and the treant. Fungal creatures such as the gas spore and the myconid also fall into this category.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705191996550,
+        "modifiedTime": 1705193026320,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.1oT7t6tHE4kZuSN1"
+    },
+    {
+      "sort": 23000000,
+      "name": "Undead",
+      "type": "rule",
+      "_id": "D2BdqS1GeD5rcZ6q",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Undead</strong> are once-living creatures brought to a horrifying state of undeath through the practice of necromantic magic or some unholy curse. Undead include walking corpses, such as vampires and zombies, as well as bodiless spirits, such as ghosts and specters.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "creatureType"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192004582,
+        "modifiedTime": 1705193019587,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.D2BdqS1GeD5rcZ6q"
+    },
+    {
+      "sort": 23100000,
+      "name": "Tags",
+      "type": "rule",
+      "_id": "9jV1fFF163dr68vd",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster might have one or more tags appended to its type, in parentheses. For example, an orc has the <em>humanoid (orc)</em> type. The parenthetical tags provide additional categorization for certain creatures. The tags have no rules of their own, but something in the game, such as a magic item, might refer to them. For instance, a spear that is especially effective at fighting demons would work against any monster that has the demon tag.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192012418,
+        "modifiedTime": 1705193198013,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.9jV1fFF163dr68vd"
+    },
+    {
+      "sort": 23200000,
+      "name": "Alignment",
+      "type": "rule",
+      "_id": "8i9W8vECXrwMunQC",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster’s alignment provides a clue to its disposition and how it behaves in a roleplaying or combat situation. For example, a chaotic evil monster might be difficult to reason with and might attack characters on sight, whereas a neutral monster might be willing to negotiate. See the <em>Player’s Handbook</em> for descriptions of the different alignments.</p><p>The alignment specified in a monster’s stat block is the default. Feel free to depart from it and change a monster’s alignment to suit the needs of your campaign. If you want a good-aligned green dragon or an evil storm giant, there’s nothing stopping you.</p><p>Some creatures can have <strong>any alignment</strong>. In other words, you choose the monster’s alignment. Some monster’s alignment entry indicates a tendency or aversion toward law, chaos, good, or evil. For example, a berserker can be any chaotic alignment (chaotic good, chaotic neutral, or chaotic evil), as befits its wild nature.</p><p>Many creatures of low intelligence have no comprehension of law or chaos, good or evil. They don’t make moral or ethical choices, but rather act on instinct. These creatures are <strong>unaligned</strong>, which means they don’t have an alignment.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192019032,
+        "modifiedTime": 1705193228696,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.8i9W8vECXrwMunQC"
+    },
+    {
+      "sort": 23300000,
+      "name": "Armor Class",
+      "type": "rule",
+      "_id": "0Dgs9HZmRIFKVeca",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster that wears armor or carries a shield has an Armor Class (AC) that takes its armor, shield, and Dexterity into account. Otherwise, a monster’s AC is based on its Dexterity modifier and natural armor, if any. If a monster has natural armor, wears armor, or carries a shield, this is noted in parentheses after its AC value.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192024363,
+        "modifiedTime": 1705193234939,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.0Dgs9HZmRIFKVeca"
+    },
+    {
+      "sort": 23400000,
+      "name": "Hit Points",
+      "type": "rule",
+      "_id": "cwkeZKDj6grWNq8m",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster usually dies or is destroyed when it drops to 0 hit points. For more on hit points, see the <em>Player’s Handbook.</em></p><p>A monster’s hit points are presented both as a die expression and as an average number. For example, a monster with 2d8 hit points has 9 hit points on average (2 × 4½).</p><p>A monster’s size determines the die used to calculate its hit points, as shown in the Hit Dice by Size table.</p><table border=\"0\"><caption><h4>Hit Dice by Size</h4></caption><thead><tr><td>Monster Size</td><td>Hit Die</td><td>Average HP per Die</td></tr></thead><tbody><tr><td>Tiny</td><td>d4</td><td>2½</td></tr><tr><td>Small</td><td>d6</td><td>3½</td></tr><tr><td>Medium</td><td>d8</td><td>4½</td></tr><tr><td>Large</td><td>d10</td><td>5½</td></tr><tr><td>Huge</td><td>d12</td><td>6½</td></tr><tr><td>Gargantuan</td><td>d20</td><td>10½</td></tr></tbody></table><p>A monster’s Constitution modifier also affects the number of hit points it has. Its Constitution modifier is multiplied by the number of Hit Dice it possesses, and the result is added to its hit points. For example, if a monster has a Constitution of 12 (+1 modifier) and 2d8 Hit Dice, it has 2d8 + 2 hit points (average 11).</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192028889,
+        "modifiedTime": 1705193245475,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.cwkeZKDj6grWNq8m"
+    },
+    {
+      "sort": 23500000,
+      "name": "Speed",
+      "type": "rule",
+      "_id": "DOKv3OuN2jzjOnX8",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster’s speed tells you how far it can move on its turn. For more information on speed, see the <em>Player’s Handbook</em>.</p><p>All creatures have a walking speed, simply called the monster’s speed. Creatures that have no form of ground-based locomotion have a walking speed of 0 feet.</p><p>Some creatures have one or more of the following additional movement modes.</p><h3>Burrow</h3><p>@Embed[Compendium.dnd5e.rules.JournalEntry.eVtpEGXjA2tamEIJ.JournalEntryPage.I13SYX1zaCLYmaYF inline]</p><h3>Climb</h3><p>@Embed[Compendium.dnd5e.rules.JournalEntry.eVtpEGXjA2tamEIJ.JournalEntryPage.eW0LypO5xZZdq4I9 inline]</p><h3>Fly</h3><p>@Embed[Compendium.dnd5e.rules.JournalEntry.eVtpEGXjA2tamEIJ.JournalEntryPage.X2CTP455Zpr7Shs9 inline]</p><h3>Swim</h3><p>@Embed[Compendium.dnd5e.rules.JournalEntry.eVtpEGXjA2tamEIJ.JournalEntryPage.EQWAcrLYsd96MzJH inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192038856,
+        "modifiedTime": 1705193335018,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.DOKv3OuN2jzjOnX8"
+    },
+    {
+      "sort": 24000000,
+      "name": "Ability Scores",
+      "type": "rule",
+      "_id": "Whmua4WYwTPfvjm8",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Every monster has six ability scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma) and corresponding modifiers. For more information on ability scores and how they’re used in play, see the <em>Player’s Handbook</em>.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192063085,
+        "modifiedTime": 1705193391480,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Whmua4WYwTPfvjm8"
+    },
+    {
+      "sort": 24100000,
+      "name": "Saving Throws",
+      "type": "rule",
+      "_id": "AoykthgwEP3T0XsL",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The Saving Throws entry is reserved for creatures that are adept at resisting certain kinds of effects. For example, a creature that isn’t easily charmed or frightened might gain a bonus on its Wisdom saving throws. Most creatures don’t have special saving throw bonuses, in which case this section is absent.</p><p>A saving throw bonus is the sum of a monster’s relevant ability modifier and its proficiency bonus, which is determined by the monster’s challenge rating (as shown in the Proficiency Bonus by Challenge Rating table).</p><table><caption><h4>Proficiency Bonus by Challenge Rating</h4></caption><thead><tr><td>Challenge</td><td>Proficiency Bonus</td></tr></thead><tbody><tr><td>0</td><td>+ 2</td></tr><tr><td>1/8</td><td>+ 2</td></tr><tr><td>1/4</td><td>+ 2</td></tr><tr><td>1/2</td><td>+ 2</td></tr><tr><td>1</td><td>+ 2</td></tr><tr><td>2</td><td>+ 2</td></tr><tr><td>3</td><td>+ 2</td></tr><tr><td>4</td><td>+ 2</td></tr><tr><td>5</td><td>+ 3</td></tr><tr><td>6</td><td>+ 3</td></tr><tr><td>7</td><td>+ 3</td></tr><tr><td>8</td><td>+ 3</td></tr><tr><td>9</td><td>+ 4</td></tr><tr><td>10</td><td>+ 4</td></tr><tr><td>11</td><td>+ 4</td></tr><tr><td>12</td><td>+ 4</td></tr><tr><td>13</td><td>+ 5</td></tr><tr><td>14</td><td>+ 5</td></tr><tr><td>15</td><td>+ 5</td></tr><tr><td>16</td><td>+ 5</td></tr><tr><td>17</td><td>+ 6</td></tr><tr><td>18</td><td>+ 6</td></tr><tr><td>19</td><td>+ 6</td></tr><tr><td>20</td><td>+ 6</td></tr><tr><td>21</td><td>+ 7</td></tr><tr><td>22</td><td>+ 7</td></tr><tr><td>23</td><td>+ 7</td></tr><tr><td>24</td><td>+ 7</td></tr><tr><td>25</td><td>+ 8</td></tr><tr><td>26</td><td>+ 8</td></tr><tr><td>27</td><td>+ 8</td></tr><tr><td>28</td><td>+ 8</td></tr><tr><td>29</td><td>+ 9</td></tr><tr><td>30</td><td>+ 9</td></tr></tbody></table>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192071676,
+        "modifiedTime": 1705193415344,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.AoykthgwEP3T0XsL"
+    },
+    {
+      "sort": 24200000,
+      "name": "Skills",
+      "type": "rule",
+      "_id": "bM4hvojHpH6eqAtX",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The Skills entry is reserved for monsters that are proficient in one or more skills. For example, a monster that is very perceptive and stealthy might have bonuses to Wisdom (Perception) and Dexterity (Stealth) checks.</p><p>A skill bonus is the sum of a monster’s relevant ability modifier and its proficiency bonus, which is determined by the monster’s challenge rating (as shown in the Proficiency Bonus by Challenge Rating table). Other modifiers might apply. For instance, a monster might have a larger-than-expected bonus (usually double its proficiency bonus) to account for its heightened expertise.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192075042,
+        "modifiedTime": 1705193435474,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.bM4hvojHpH6eqAtX"
+    },
+    {
+      "sort": 24300000,
+      "name": "Vulnerabilities, Resistances, and Immunities",
+      "type": "rule",
+      "_id": "jIvbJXZXcU4Wuzh0",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some creatures have vulnerability, resistance, or immunity to certain types of damage. Particular creatures are even resistant or immune to damage from nonmagical attacks (a magical attack is an attack delivered by a spell, a magic item, or another magical source). In addition, some creatures are immune to certain conditions.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192096949,
+        "modifiedTime": 1705193453140,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.jIvbJXZXcU4Wuzh0"
+    },
+    {
+      "sort": 24400000,
+      "name": "Senses",
+      "type": "rule",
+      "_id": "ILpAVXkFHoS8OQ8y",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The Senses entry notes a monster’s passive Wisdom (Perception) score, as well as any special senses the monster might have. Special senses are described below.</p><h3>Blindsight</h3><p>@Embed[Compendium.dnd5e.rules.JournalEntry.eVtpEGXjA2tamEIJ.JournalEntryPage.I6ABWHBYwGl55dLY inline]</p><h3>Darkvision</h3><p>@Embed[Compendium.dnd5e.rules.JournalEntry.eVtpEGXjA2tamEIJ.JournalEntryPage.0RBamBThjzeAdMSt inline]</p><h3>Tremorsense</h3><p>@Embed[Compendium.dnd5e.rules.JournalEntry.eVtpEGXjA2tamEIJ.JournalEntryPage.8AIlZ95v54mL531X inline]</p><h3>Truesight</h3><p>@Embed[Compendium.dnd5e.rules.JournalEntry.eVtpEGXjA2tamEIJ.JournalEntryPage.8iC24otVX4n1yrYw inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192099857,
+        "modifiedTime": 1705193527449,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.ILpAVXkFHoS8OQ8y"
+    },
+    {
+      "sort": 24250000,
+      "name": "Armor, Weapon, and Tool Proficiencies",
+      "type": "rule",
+      "_id": "CI6KiNhPoh5AL0sD",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Assume that a creature is proficient with its armor, weapons, and tools. If you swap them out, you decide whether the creature is proficient with its new equipment.</p><p>For example, a hill giant typically wears hide armor and wields a greatclub. You could equip a hill giant with chain mail and a greataxe instead, and assume the giant is proficient with both, one or the other, or neither.</p><p>See the <em>Player’s Handbook </em>for rules on using armor or weapons without proficiency.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192134563,
+        "modifiedTime": 1705193445219,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.CI6KiNhPoh5AL0sD"
+    },
+    {
+      "sort": 25000000,
+      "name": "Languages",
+      "type": "rule",
+      "_id": "iqWQPnNMz8f1rsQ8",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The languages that a monster can speak are listed in alphabetical order. Sometimes a monster can understand a language but can’t speak it, and this is noted in its entry. A “—” indicates that a creature neither speaks nor understands any language.</p><h3>Telepathy</h3><p>@Embed[.geTidcFIYWuUvD2L inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192139448,
+        "modifiedTime": 1705192924708,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.iqWQPnNMz8f1rsQ8"
+    },
+    {
+      "sort": 25100000,
+      "name": "Telepathy",
+      "type": "rule",
+      "_id": "geTidcFIYWuUvD2L",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Telepathy is a magical ability that allows a monster to communicate mentally with another creature within a specified range. The contacted creature doesn’t need to share a language with the monster to communicate in this way with it, but it must be able to understand at least one language. A creature without telepathy can receive and respond to telepathic messages but can’t initiate or terminate a telepathic conversation.</p><p>A telepathic monster doesn’t need to see a contacted creature and can end the telepathic contact at any time. The contact is broken as soon as the two creatures are no longer within range of each other or if the telepathic monster contacts a different creature within range. A telepathic monster can initiate or terminate a telepathic conversation without using an action, but while the monster is incapacitated, it can’t initiate telepathic contact, and any current contact is terminated.</p><p>A creature within the area of an @UUID[Compendium.dnd5e.spells.Item.Eon0jzGzQRNluTPQ]{Antimagic Field} or in any other location where magic doesn’t function can’t send or receive telepathic messages.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192143103,
+        "modifiedTime": 1705192908181,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.geTidcFIYWuUvD2L"
+    },
+    {
+      "sort": 25200000,
+      "name": "Challenge",
+      "type": "rule",
+      "_id": "m4ErwsuDpgi9Hu0V",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster’s <strong>challenge rating</strong> tells you how great a threat the monster is. An appropriately equipped and well-rested party of four adventurers should be able to defeat a monster that has a challenge rating equal to its level without suffering any deaths. For example, a party of four 3rd-level characters should find a monster with a challenge rating of 3 to be a worthy challenge, but not a deadly one.</p><p>Monsters that are significantly weaker than 1st-level characters have a challenge rating lower than 1. Monsters with a challenge rating of 0 are insignificant except in large numbers; those with no effective attacks are worth no experience points, while those that have attacks are worth 10 XP each.</p><p>Some monsters present a greater challenge than even a typical 20th-level party can handle. These monsters have a challenge rating of 21 or higher and are specifically designed to test player skill.</p><h3>Experience Points</h3><p>@Embed[.cNflBe0pZX8eAFB4 inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192149061,
+        "modifiedTime": 1705192884940,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.m4ErwsuDpgi9Hu0V"
+    },
+    {
+      "sort": 25300000,
+      "name": "Experience Points",
+      "type": "rule",
+      "_id": "cNflBe0pZX8eAFB4",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The number of experience points (XP) a monster is worth is based on its challenge rating. Typically, XP is awarded for defeating the monster, although the GM may also award XP for neutralizing the threat posed by the monster in some other manner.</p><p>Unless something tells you otherwise, a monster summoned by a spell or other magical ability is worth the XP noted in its stat block.</p><table><caption><h4>Experience Points by Challenge Rating</h4></caption><thead><tr><td>Challenge</td><td>XP</td></tr></thead><tbody><tr><td>0</td><td>0 or 10</td></tr><tr><td>1/8</td><td>25</td></tr><tr><td>1/4</td><td>50</td></tr><tr><td>1/2</td><td>100</td></tr><tr><td>1</td><td>200</td></tr><tr><td>2</td><td>450</td></tr><tr><td>3</td><td>700</td></tr><tr><td>4</td><td>1,100</td></tr><tr><td>5</td><td>1,800</td></tr><tr><td>6</td><td>2,300</td></tr><tr><td>7</td><td>2,900</td></tr><tr><td>8</td><td>3,900</td></tr><tr><td>9</td><td>5,000</td></tr><tr><td>10</td><td>5,900</td></tr><tr><td>11</td><td>7,200</td></tr><tr><td>12</td><td>8,400</td></tr><tr><td>13</td><td>10,000</td></tr><tr><td>14</td><td>11,500</td></tr><tr><td>15</td><td>13,000</td></tr><tr><td>16</td><td>15,000</td></tr><tr><td>17</td><td>18,000</td></tr><tr><td>18</td><td>20,000</td></tr><tr><td>19</td><td>22,000</td></tr><tr><td>20</td><td>25,000</td></tr><tr><td>21</td><td>33,000</td></tr><tr><td>22</td><td>41,000</td></tr><tr><td>23</td><td>50,000</td></tr><tr><td>24</td><td>62,000</td></tr><tr><td>25</td><td>75,000</td></tr><tr><td>26</td><td>90,000</td></tr><tr><td>27</td><td>105,000</td></tr><tr><td>28</td><td>120,000</td></tr><tr><td>29</td><td>135,000</td></tr><tr><td>30</td><td>155,000</td></tr></tbody></table>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192154142,
+        "modifiedTime": 1705192872402,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.cNflBe0pZX8eAFB4"
+    },
+    {
+      "sort": 25400000,
+      "name": "Special Traits",
+      "type": "rule",
+      "_id": "aeJoiagWfLPkJSFM",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Special traits (which appear after a monster’s challenge rating but before any actions or reactions) are characteristics that are likely to be relevant in a combat encounter and that require some explanation.</p><h3>Innate Spellcasting</h3><p>@Embed[.pyo2jnYvavIGyg0s inline]</p><h3>Spellcasting</h3><p>@Embed[.LrDxITNV8raUt37y inline]</p><h3>Psionics</h3><p>@Embed[.LLLopR0IZOleE1xT inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192160734,
+        "modifiedTime": 1705192783786,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.aeJoiagWfLPkJSFM"
+    },
+    {
+      "sort": 25500000,
+      "name": "Innate Spellcasting",
+      "type": "rule",
+      "_id": "pyo2jnYvavIGyg0s",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster with the innate ability to cast spells has the Innate Spellcasting special trait. Unless noted otherwise, an innate spell of 1st level or higher is always cast at its lowest possible level and can’t be cast at a higher level. If a monster has a cantrip where its level matters and no level is given, use the monster’s challenge rating.</p><p>An innate spell can have special rules or restrictions. For example, a drow mage can innately cast the @UUID[Compendium.dnd5e.spells.Item.MRxldJd6C4bsBo3O]{Levitate} spell, but the spell has a “self only” restriction, which means that the spell affects only the drow mage.</p><p>A monster’s innate spells can’t be swapped out with other spells. If a monster’s innate spells don’t require attack rolls, no attack bonus is given for them.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192165982,
+        "modifiedTime": 1705192729621,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.pyo2jnYvavIGyg0s"
+    },
+    {
+      "sort": 25600000,
+      "name": "Spellcasting",
+      "type": "rule",
+      "_id": "LrDxITNV8raUt37y",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster with the Spellcasting special trait has a spellcaster level and spell slots, which it uses to cast its spells of 1st level and higher (as explained in the <em>Player’s Handbook</em>). The spellcaster level is also used for any cantrips included in the feature.</p><p>The monster has a list of spells known or prepared from a specific class. The list might also include spells from a feature in that class, such as the @UUID[Compendium.dnd5e.classfeatures.Item.x637K2Icp2ZFM1TB]{Divine Domain} feature of the cleric or the @UUID[Compendium.dnd5e.classfeatures.Item.u6Du2P9s81SWuGbi]{Druid Circle} feature of the druid. The monster is considered a member of that class when attuning to or using a magic item that requires membership in the class or access to its spell list.</p><p>A monster can cast a spell from its list at a higher level if it has the spell slot to do so. For example, a drow mage with the 3rd-level @UUID[Compendium.dnd5e.spells.Item.IyikgTEOTv701jgQ]{Lightning Bolt} spell can cast it as a 5th-level spell by using one of its 5th-level spell slots.</p><p>You can change the spells that a monster knows or has prepared, replacing any spell on its spell list with a spell of the same level and from the same class list. If you do so, you might cause the monster to be a greater or lesser threat than suggested by its challenge rating.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192170966,
+        "modifiedTime": 1705192746079,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.LrDxITNV8raUt37y"
+    },
+    {
+      "sort": 25700000,
+      "name": "Psionics",
+      "type": "rule",
+      "_id": "LLLopR0IZOleE1xT",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster that casts spells using only the power of its mind has the psionics tag added to its Spellcasting or Innate Spellcasting special trait. This tag carries no special rules of its own, but other parts of the game might refer to it. A monster that has this tag typically doesn’t require any components to cast its spells.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192179062,
+        "modifiedTime": 1705192753375,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.LLLopR0IZOleE1xT"
+    },
+    {
+      "sort": 25800000,
+      "name": "Actions",
+      "type": "rule",
+      "_id": "63gRBbKNthvnmFmh",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When a monster takes its action, it can choose from the options in the Actions section of its stat block or use one of the actions available to all creatures, such as the Dash or Hide action, as described in the <em>Player’s Handbook</em>.</p><h3>Melee and Ranged Attacks</h3><p>@Embed[.kwj04a1za8L4cqPw inline]</p><h3>Multiattack</h3><p>@Embed[.sBAdGkDN7y7GmHKc inline]</p><h3>Ammunition</h3><p>@Embed[.3LkAmY7ENZwUBBdM inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192187258,
+        "modifiedTime": 1705192694346,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.63gRBbKNthvnmFmh"
+    },
+    {
+      "sort": 25900000,
+      "name": "Melee and Ranged Attacks",
+      "type": "rule",
+      "_id": "kwj04a1za8L4cqPw",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The most common actions that a monster will take in combat are melee and ranged attacks. These can be spell attacks or weapon attacks, where the “weapon” might be a manufactured item or a natural weapon, such as a claw or tail spike. For more information on different kinds of attacks, see the <em>Player’s Handbook</em>.</p><p><strong>Creature vs. Target. </strong>The target of a melee or ranged attack is usually either one creature or one target, the difference being that a “target” can be a creature or an object.</p><p><strong>Hit. </strong>Any damage dealt or other effects that occur as a result of an attack hitting a target are described after the “Hit” notation. You have the option of taking average damage or rolling the damage; for this reason, both the average damage and the die expression are presented.</p><p><strong>Miss.</strong> If an attack has an effect that occurs on a miss, that information is presented after the “Miss:” notation.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192193508,
+        "modifiedTime": 1705192661669,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.kwj04a1za8L4cqPw"
+    },
+    {
+      "sort": 26000000,
+      "name": "Multiattack",
+      "type": "rule",
+      "_id": "sBAdGkDN7y7GmHKc",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A creature that can make multiple attacks on its turn has the Multiattack action. A creature can’t use Multiattack when making an opportunity attack, which must be a single melee attack.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192198124,
+        "modifiedTime": 1705192667103,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.sBAdGkDN7y7GmHKc"
+    },
+    {
+      "sort": 26100000,
+      "name": "Ammunition",
+      "type": "rule",
+      "_id": "3LkAmY7ENZwUBBdM",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A monster carries enough ammunition to make its ranged attacks. You can assume that a monster has 2d4 pieces of ammunition for a thrown weapon attack, and 2d10 pieces of ammunition for a projectile weapon such as a bow or crossbow.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192206428,
+        "modifiedTime": 1705192672553,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.3LkAmY7ENZwUBBdM"
+    },
+    {
+      "sort": 26200000,
+      "name": "Reactions",
+      "type": "rule",
+      "_id": "Ms00uWg0w77sWI4C",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>If a monster can do something special with its reaction, that information is contained here. If a creature has no special reaction, this section is absent.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192211438,
+        "modifiedTime": 1705192703719,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Ms00uWg0w77sWI4C"
+    },
+    {
+      "sort": 26300000,
+      "name": "Limited Usage",
+      "type": "rule",
+      "_id": "xBOHFPuQWeudrfqy",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some special abilities have restrictions on the number of times they can be used.</p><p>@Embed[.GOlh1UMmEIjEQcSE inline]</p><p>@Embed[.NmdLIJPXEMZIWWQa inline]</p><p>@Embed[.saRwXXdZ2trLoGHZ inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192215835,
+        "modifiedTime": 1705192570384,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.xBOHFPuQWeudrfqy"
+    },
+    {
+      "sort": 26400000,
+      "name": "X/Day",
+      "type": "rule",
+      "_id": "GOlh1UMmEIjEQcSE",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>X/Day. </strong>The notation “X/Day” means a special ability can be used X number of times and that a monster must finish a long rest to regain expended uses. For example, “1/Day” means a special ability can be used once and that the monster must finish a long rest to use it again.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192220311,
+        "modifiedTime": 1705192525163,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.GOlh1UMmEIjEQcSE"
+    },
+    {
+      "sort": 26500000,
+      "name": "Recharge X–Y",
+      "type": "rule",
+      "_id": "NmdLIJPXEMZIWWQa",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Recharge X–Y. </strong>The notation “Recharge X–Y” means a monster can use a special ability once and that the ability then has a random chance of recharging during each subsequent round of combat. At the start of each of the monster’s turns, roll a d6. If the roll is one of the numbers in the recharge notation, the monster regains the use of the special ability. The ability also recharges when the monster finishes a short or long rest.</p><p>For example, “Recharge 5–6” means a monster can use the special ability once. Then, at the start of the monster’s turn, it regains the use of that ability if it rolls a 5 or 6 on a d6.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192227214,
+        "modifiedTime": 1705192532347,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.NmdLIJPXEMZIWWQa"
+    },
+    {
+      "sort": 26600000,
+      "name": "Recharge after a Short or Long Rest",
+      "type": "rule",
+      "_id": "saRwXXdZ2trLoGHZ",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Recharge after a Short or Long Rest. </strong>This notation means that a monster can use a special ability once and then must finish a short or long rest to use it again.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192234966,
+        "modifiedTime": 1705192538167,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.saRwXXdZ2trLoGHZ"
+    },
+    {
+      "sort": 26700000,
+      "name": "Grapple Rules for Monsters",
+      "type": "rule",
+      "_id": "ZWYqwR5xKGfLQH9u",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Many monsters have special attacks that allow them to quickly grapple prey. When a monster hits with such an attack, it doesn’t need to make an additional ability check to determine whether the grapple succeeds, unless the attack says otherwise.</p><p>A creature grappled by the monster can use its action to try to escape. To do so, it must succeed on a Strength (Athletics) or Dexterity (Acrobatics) check against the escape DC in the monster’s stat block. If no escape DC is given, assume the DC is 10 + the monster’s Strength (Athletics) modifier.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192240339,
+        "modifiedTime": 1705192506575,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.ZWYqwR5xKGfLQH9u"
+    },
+    {
+      "sort": 26900000,
+      "name": "Legendary Actions",
+      "type": "rule",
+      "_id": "C1awOyZh78pq1xmY",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A legendary creature can take a certain number of special actions—called legendary actions—outside its turn. Only one legendary action option can be used at a time and only at the end of another creature’s turn. A creature regains its spent legendary actions at the start of its turn. It can forgo using them, and it can’t use them while incapacitated or otherwise unable to take actions. If surprised, it can’t use them until after its first turn in the combat.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192252143,
+        "modifiedTime": 1705192397493,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.C1awOyZh78pq1xmY"
+    },
+    {
+      "sort": 27000000,
+      "name": "A Legendary Creature's Lair",
+      "type": "rule",
+      "_id": "kV4IIZoaMJUR4La9",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A legendary creature might have a section describing its lair and the special effects it can create while there, either by act of will or simply by being present. Such a section applies only to a legendary creature that spends a great deal of time in its lair.</p><h4>Lair Actions</h4><p>@Embed[.07PtjpMxiRIhkBEp inline]</p><h4>Regional Effects</h4><p>@Embed[.uj8W27NKFyzygPUd inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192261317,
+        "modifiedTime": 1705192317782,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.kV4IIZoaMJUR4La9"
+    },
+    {
+      "sort": 27100000,
+      "name": "Lair Actions",
+      "type": "rule",
+      "_id": "07PtjpMxiRIhkBEp",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can’t do so while incapacitated or otherwise unable to take actions. If surprised, it can’t use one until after its first turn in the combat.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192266733,
+        "modifiedTime": 1705192298346,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.07PtjpMxiRIhkBEp"
+    },
+    {
+      "sort": 27200000,
+      "name": "Regional Effects",
+      "type": "rule",
+      "_id": "uj8W27NKFyzygPUd",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The mere presence of a legendary creature can have strange and wondrous effects on its environment, as noted in this section. Regional effects end abruptly or dissipate over time when the legendary creature dies.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192271713,
+        "modifiedTime": 1705192294766,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.uj8W27NKFyzygPUd"
+    },
+    {
+      "sort": 26800000,
+      "name": "Equipment",
+      "type": "rule",
+      "_id": "qKmqbRFE9n2Up5bF",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A stat block rarely refers to equipment, other than armor or weapons used by a monster. A creature that customarily wears clothes, such as a humanoid, is assumed to be dressed appropriately.</p><p>You can equip monsters with additional gear and trinkets however you like, and you decide how much of a monster’s equipment is recoverable after the creature is slain and whether any of that equipment is still usable. A battered suit of armor made for a monster is rarely usable by someone else, for instance.</p><p>If a spellcasting monster needs material components to cast its spells, assume that it has the material components it needs to cast the spells in its stat block.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705192489830,
+        "modifiedTime": 1705192500106,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.qKmqbRFE9n2Up5bF"
     }
   ],
   "folder": null,
@@ -7460,7 +10842,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1704059808409,
-    "modifiedTime": 1705171465762,
+    "modifiedTime": 1705193944705,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "NizgRXLNUqtdlC1s",
