@@ -278,6 +278,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   async getFavoriteData() {
     return {
+      img: this.img,
       title: this.name,
       subtitle: this.duration.remaining ? this.duration.label : "",
       toggle: !this.disabled,

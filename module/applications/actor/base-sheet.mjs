@@ -394,7 +394,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
         override: override || 0,
-        dataset: {type: "spell", level: prepMode in sections ? 1 : i, "preparation.mode": prepMode},
+        dataset: {type: "spell", level: prepMode in sections ? 1 : i, "preparationMode": prepMode},
         prop: sl,
         editable: context.editable && !aeOverride
       };
@@ -1005,7 +1005,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       const list = this._event.target.closest(".item-list"); // Dropped inside an existing list.
       header = list?.previousElementSibling;
     }
-    const mode = header?.closest("[data-level]")?.dataset ?? {};
+    const { level, preparationMode } = header?.closest("[data-level]")?.dataset ?? {};
 
     // Determine the actor's spell slot progressions, if any.
     const progs = Object.values(this.document.classes).reduce((acc, cls) => {
@@ -1016,19 +1016,19 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Case 1: Drop a cantrip.
     if ( itemData.system.level === 0 ) {
-      if ( ["pact", "prepared"].includes(mode["preparation.mode"]) ) {
+      if ( ["pact", "prepared"].includes(preparationMode) ) {
         itemData.system.preparation.mode = "prepared";
-      } else if ( !mode["preparation.mode"] ) {
+      } else if ( !preparationMode ) {
         const isCaster = this.document.system.details.spellLevel || progs.pact || progs.leveled;
         itemData.system.preparation.mode = isCaster ? "prepared" : "innate";
       } else {
-        itemData.system.preparation.mode = mode["preparation.mode"];
+        itemData.system.preparation.mode = preparationMode;
       }
       if ( itemData.system.preparation.mode === "prepared" ) itemData.system.preparation.prepared = true;
     }
 
     // Case 2: Drop a leveled spell in a section without a mode.
-    else if ( (mode.level === "0") || !mode["preparation.mode"] ) {
+    else if ( (level === "0") || !preparationMode ) {
       if ( this.document.type === "npc" ) {
         itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {
@@ -1037,9 +1037,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Case 3: Drop a leveled spell in a specific section.
-    else {
-      itemData.system.preparation.mode = mode["preparation.mode"];
-    }
+    else itemData.system.preparation.mode = preparationMode;
   }
 
   /* -------------------------------------------- */

@@ -31,7 +31,7 @@
 
   <ol class="items-list inventory-list">
   {{#each spellbook as |section|}}
-    <li class="items-header spellbook-header flexrow" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+    <li class="items-header spellbook-header flexrow" {{ dnd5e-dataset section.dataset }}>
         <div class="item-name flexrow">
             <h3>{{section.label}}</h3>
             <div class="spell-slots">

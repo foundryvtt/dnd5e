@@ -25,7 +25,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         { dragSelector: ".containers .container", dropSelector: null },
         { dragSelector: ".favorites :is([data-item-id], [data-effect-id])", dropSelector: null },
         { dragSelector: ".classes .gold-icon[data-item-id]", dropSelector: null },
-        { dragSelector: "[data-key] .skill-name, [data-key] .tool-name", dropSelector: null }
+        { dragSelector: "[data-key] .skill-name, [data-key] .tool-name", dropSelector: null },
+        { dragSelector: ".spells-list .items-header .item-name, .slots[data-favorite-id]", dropSelector: null }
       ],
       scrollY: [".main-content"],
       width: 800,
@@ -662,15 +663,16 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     game.tooltip.deactivate();
 
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
-    const isSkill = key in CONFIG.DND5E.skills;
-    const isTool = key in CONFIG.DND5E.toolIds;
-    if ( isSkill || isTool ) {
-      const dragData = { dnd5e: { action: "favorite", type: isSkill ? "skill" : "tool", id: key } };
-      event.dataTransfer.setData("application/json", JSON.stringify(dragData));
-      return;
-    }
-
-    return super._onDragStart(event);
+    const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
+    let type;
+    if ( key in CONFIG.DND5E.skills ) type = "skill";
+    else if ( key in CONFIG.DND5E.toolIds ) type = "tool";
+    else if ( preparationMode && (level !== "0") ) type = "slots";
+    if ( !type ) return super._onDragStart(event);
+    const dragData = { dnd5e: { action: "favorite", type } };
+    if ( type === "slots" ) dragData.dnd5e.id = preparationMode === "pact" ? "pact" : `spell${level}`;
+    else dragData.dnd5e.id = key;
+    event.dataTransfer.setData("application/json", JSON.stringify(dragData));
   }
 
   /* -------------------------------------------- */
@@ -1083,9 +1085,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       let data;
       if ( type === "item" ) data = await favorite.system.getFavoriteData();
       else if ( type === "effect" ) data = await favorite.getFavoriteData();
-      else if ( (type === "skill") || (type === "tool") ) data = await this._getFavoriteData(type, id);
+      else data = await this._getFavoriteData(type, id);
       if ( !data ) return arr;
-      let { img, title, subtitle, value, uses, quantity, modifier, passive, save, range, toggle, suppressed } = data;
+      let {
+        img, title, subtitle, value, uses, quantity, modifier, passive, save, range, toggle, suppressed, level
+      } = data;
 
       const css = [];
       if ( uses ) {
@@ -1104,21 +1108,23 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       }
 
       const rollableClass = [];
-      if ( this.isEditable ) rollableClass.push("rollable");
+      if ( this.isEditable && (type !== "slots") ) rollableClass.push("rollable");
       if ( type === "skill" ) rollableClass.push("skill-name");
       else if ( type === "tool" ) rollableClass.push("tool-name");
 
       if ( suppressed ) subtitle = game.i18n.localize("DND5E.Suppressed");
       arr.push({
-        id, img, type, title, value, uses, sort, save, modifier, passive, range, suppressed,
+        id, img, type, title, value, uses, sort, save, modifier, passive, range, suppressed, level,
         itemId: type === "item" ? favorite.id : null,
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
+        preparationMode: type === "slots" ? id === "pact" ? "pact" : "prepared" : null,
         key: (type === "skill") || (type === "tool") ? id : null,
         toggle: toggle === undefined ? null : { applicable: true, value: toggle },
         quantity: quantity > 1 ? quantity : "",
         rollableClass: rollableClass.filterJoin(" "),
         css: css.filterJoin(" "),
+        bareName: type === "slots",
         subtitle: Array.isArray(subtitle) ? subtitle.filterJoin(" &bull; ") : subtitle
       });
       return arr;
@@ -1129,20 +1135,45 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /**
    * Prepare data for a favorited entry.
-   * @param {"skill"|"tool"} type  The type of favorite.
-   * @param {string} id            The favorite's identifier.
-   * @returns {Promise<FavoriteData5e>}
+   * @param {"skill"|"tool"|"slots"} type  The type of favorite.
+   * @param {string} id                    The favorite's identifier.
+   * @returns {Promise<FavoriteData5e|void>}
    * @protected
    */
   async _getFavoriteData(type, id) {
-    const data = this.actor.system[`${type}s`]?.[id];
-    if ( !data ) return;
-    const { total, ability, passive } = data ?? {};
-    const subtitle = game.i18n.format("DND5E.AbilityPromptTitle", { ability: CONFIG.DND5E.abilities[ability].label });
-    let img;
-    let title;
-    if ( type === "tool" ) ({ img, name: title } = Trait.getBaseItem(CONFIG.DND5E.toolIds[id], { indexOnly: true }));
-    else if ( type === "skill" ) ({ icon: img, label: title } = CONFIG.DND5E.skills[id]);
-    return { img, title, subtitle, modifier: total, passive };
+    // Spell slots
+    if ( type === "slots" ) {
+      const { value, max, level } = this.actor.system.spells[id] ?? {};
+      const uses = { value, max, name: `system.spells.${id}.value` };
+      if ( id === "pact" ) return {
+        uses, level,
+        title: game.i18n.localize("DND5E.SpellSlotsPact"),
+        subtitle: [game.i18n.localize(`DND5E.SpellLevel${level}`), game.i18n.localize("DND5E.AbbreviationSR")],
+        img: "icons/magic/unholy/silhouette-robe-evil-power.webp"
+      };
+
+      const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
+      return {
+        uses, level,
+        title: game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
+        subtitle: game.i18n.localize("DND5E.AbbreviationLR"),
+        img: `systems/dnd5e/icons/spell-tiers/${id}.webp`
+      };
+    }
+
+    // Skills & Tools
+    else {
+      const data = this.actor.system[`${type}s`]?.[id];
+      if ( !data ) return;
+      const { total, ability, passive } = data ?? {};
+      const subtitle = game.i18n.format("DND5E.AbilityPromptTitle", {
+        ability: CONFIG.DND5E.abilities[ability].label
+      });
+      let img;
+      let title;
+      if ( type === "tool" ) ({ img, name: title } = Trait.getBaseItem(CONFIG.DND5E.toolIds[id], { indexOnly: true }));
+      else if ( type === "skill" ) ({ icon: img, label: title } = CONFIG.DND5E.skills[id]);
+      return { img, title, subtitle, modifier: total, passive };
+    }
   }
 }

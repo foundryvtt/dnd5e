@@ -813,6 +813,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
     for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
       const slot = spells[`spell${level}`] ??= { value: 0 };
+      slot.level = level;
       slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
     }
   }
@@ -3026,7 +3027,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   async _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
-    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
+    if ( (userId === game.userId) ) {
+      if ( collection === "items" ) await this.updateEncumbrance(options);
+      await this._clearFavorites(documents);
+    }
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
   }
 
@@ -3110,5 +3114,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       { _id: ActiveEffect5e.ID.ENCUMBERED, ...effectData },
       { parent: this, keepId: true }
     );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clearing favorited entries that were deleted.
+   * @param {Document[]} documents  The deleted Documents.
+   * @protected
+   */
+  _clearFavorites(documents) {
+    const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
+    const favorites = this.system.favorites.filter(f => !ids.has(f.id));
+    return this.update({ "system.favorites": favorites });
   }
 }

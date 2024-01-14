@@ -326,6 +326,8 @@
                             {{#if itemId}}data-item-id="{{ itemId }}"{{/if}}
                             {{#if effectId}}data-effect-id="{{ effectId }}"{{/if}}
                             {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}
+                            {{#if preparationMode}}data-preparation-mode="{{ preparationMode }}"{{/if}}
+                            {{#if level}}data-level="{{ level }}"{{/if}}
                             {{#if toggle.applicable}}data-action="useFavorite"{{/if}}>
 
                             {{!-- Icon --}}
@@ -358,7 +360,8 @@
                                     {{#if uses}}
                                     {{#with uses}}
                                     {{#if (and name @root.actor.isOwner)}}
-                                    <input type="text" class="uninput value" data-name="{{ name }}" value="{{ value }}"
+                                    <input type="text" class="uninput value" value="{{ value }}"
+                                           {{#unless ../bareName}}data-{{/unless}}name="{{ name }}"
                                            data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*">
                                     {{else}}
                                     <span class="value">{{ value }}</span>
