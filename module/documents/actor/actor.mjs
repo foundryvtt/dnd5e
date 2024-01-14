@@ -600,8 +600,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _prepareHitPoints(rollData) {
-    if ( this.type !== "character" || (this.system.attributes.hp.max !== null) ) return;
     const hp = this.system.attributes.hp;
+    if ( this.type !== "character" || (this.system.attributes.hp.max !== null) ) {
+      hp.pct = Math.clamped(hp.max ? (hp.value / hp.max) * 100 : 0, 0, 100);
+      return;
+    }
 
     const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
     const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
