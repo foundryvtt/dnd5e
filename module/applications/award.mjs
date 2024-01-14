@@ -1,14 +1,15 @@
 import { filteredKeys, formatNumber } from "../utils.mjs";
+import DialogMixin from "./dialog-mixin.mjs";
 
 /**
  * Application for awarding XP and currency to players.
  */
-export default class Award extends FormApplication {
+export default class Award extends DialogMixin(FormApplication) {
 
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "award"],
+      classes: ["dnd5e2", "award", "dialog"],
       template: "systems/dnd5e/templates/apps/award.hbs",
       title: "DND5E.Award.Title",
       width: 350,

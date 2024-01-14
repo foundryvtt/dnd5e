@@ -617,8 +617,11 @@
     border: 1px solid var(--color-border-light-2);
     box-shadow: 0 0 8px var(--dnd5e-shadow-15);
 
-    &:disabled { cursor: default; }
-    &:hover, &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
+    &:disabled {
+      cursor: default;
+      color: var(--color-text-dark-inactive);
+    }
+    &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
   }
 
   .dialog-buttons {

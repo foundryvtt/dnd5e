@@ -1,4 +1,5 @@
 <form autocomplete="off">
+    <header>{{ localize "DND5E.CurrencyManager.Title" }}</header>
     <nav data-group="primary">
         <a data-tab="convert">{{localize "DND5E.CurrencyManager.Convert.Label"}}</a>
         <a data-tab="transfer">{{localize "DND5E.CurrencyManager.Transfer.Label"}}</a>
@@ -6,21 +7,26 @@
 
     <div class="sheet-content">
         <section class="tab" data-group="primary" data-tab="convert">
-            <p class="hint">{{localize "DND5E.CurrencyManager.Convert.Hint"}}</p>
-            <button type="submit" name="convert">{{localize "DND5E.CurrencyManager.Convert.Action"}}</button>
+            <p>{{localize "DND5E.CurrencyManager.Convert.Hint"}}</p>
+            <button type="submit" name="convert">
+                <i class="fa-solid fa-arrow-up-short-wide"></i>
+                {{localize "DND5E.CurrencyManager.Convert.Action"}}
+            </button>
         </section>
         
         <section class="tab" data-group="primary" data-tab="transfer">
-            <div class="amount">
+            <section class="currency">
                 <button type="button" name="setAll">{{localize "DND5E.CurrencyManager.Transfer.All"}}</button>
                 <button type="button" name="setHalf">{{localize "DND5E.CurrencyManager.Transfer.Half"}}</button>
                 {{#each currency}}
                 <label>
-                    <span>{{lookup (lookup @root.CONFIG.currencies @key) "label"}}</span>
-                    {{numberInput null name=(concat "amount." @key) min=0 step=1}}
+                    {{#with (lookup (lookup @root.CONFIG.currencies @key) "label") as |label|}}
+                    <i class="currency {{@key}}" data-tooltip="{{label}}" aria-label="{{label}}"></i>
+                    {{/with}}
+                    {{numberInput null name=(concat "amount." @key) step=1}}
                 </label>
                 {{/each}}
-            </div>
+            </section>
             <div class="destinations">
                 {{#each destinations}}
                 <label>
@@ -31,7 +37,10 @@
                 <p class="no-desinations">{{localize "DND5E.CurrencyManager.Transfer.NoDestinations"}}</p>
                 {{/each}}
             </div>
-            <button type="submit" name="transfer" disabled>{{localize "DND5E.CurrencyManager.Transfer.Action"}}</button>
+            <button type="submit" name="transfer" disabled>
+                <i class="fa-solid fa-reply-all fa-flip-horizontal"></i>
+                {{localize "DND5E.CurrencyManager.Transfer.Action"}}
+            </button>
         </section>  
     </div>
 </form>
