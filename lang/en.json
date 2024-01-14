@@ -331,6 +331,8 @@
   "Title": "Distribute Award",
   "Action": "Award",
   "Message": "{name} has been awarded {award}.",
+  "NoDestinations": "No Destinations Available",
+  "NoPrimaryParty": "No primary party set, displaying characters assigned to players instead.",
   "NotGMError": "The /award command is only available to GMs.",
   "UnrecognizedWarning": "Unable to parse {commands}. The /award command should be used with XP & currencies values such as '/award 10gp 50xp'."
 },
@@ -539,8 +541,7 @@
     "Label": "Transfer",
     "Action": "Transfer Selected",
     "All": "All",
-    "Half": "Half",
-    "NoDestinations": "No Destinations Available"
+    "Half": "Half"
   }
 },
 "DND5E.DamImm": "Damage Immunities",
