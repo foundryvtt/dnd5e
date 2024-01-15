@@ -456,6 +456,86 @@ function _localizeObject(obj, keys) {
 }
 
 /* -------------------------------------------- */
+/*  Localization                                */
+/* -------------------------------------------- */
+
+/**
+ * A cache of already-fetched labels for faster lookup.
+ * @type {Map<string, string>}
+ */
+const _attributeLabelCache = new Map();
+
+/**
+ * Convert an attribute path to a human-readable label.
+ * @param {string} attr              The attribute path.
+ * @param {object} [options]
+ * @param {Actor5e} [options.actor]  An optional reference actor.
+ * @returns {string|void}
+ */
+export function getHumanReadableAttributeLabel(attr, { actor }={}) {
+  // Check any actor-specific names first.
+  if ( attr.startsWith("resources.") && actor ) {
+    const resource = foundry.utils.getProperty(actor, `system.${attr}`);
+    if ( resource.label ) return resource.label;
+  }
+
+  if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
+    return game.i18n.localize("DND5E.ExperiencePointsValue");
+  }
+
+  // Check if the attribute is already in cache.
+  let label = _attributeLabelCache.get(attr);
+  if ( label ) return label;
+
+  // Derived fields.
+  if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
+  else if ( attr === "attributes.ac.value" ) label = "DND5E.ArmorClass";
+  else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
+
+  // Abilities.
+  else if ( attr.startsWith("abilities.") ) {
+    const [, key] = attr.split(".");
+    label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
+  }
+
+  // Skills.
+  else if ( attr.startsWith("skills.") ) {
+    const [, key] = attr.split(".");
+    label = game.i18n.format("DND5E.SkillPassiveScore", { skill: CONFIG.DND5E.skills[key].label });
+  }
+
+  // Spell slots.
+  else if ( attr.startsWith("spells.") ) {
+    const [, key] = attr.split(".");
+    if ( key === "pact" ) label = "DND5E.SpellSlotsPact";
+    else {
+      const plurals = new Intl.PluralRules(game.i18n.lang, {type: "ordinal"});
+      const level = Number(key.slice(5));
+      label = game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level });
+    }
+  }
+
+  // Attempt to find the attribute in a data model.
+  if ( !label ) {
+    const { CharacterData, NPCData, VehicleData, GroupData } = dnd5e.dataModels.actor;
+    for ( const model of [CharacterData, NPCData, VehicleData, GroupData] ) {
+      const field = model.schema.getField(attr);
+      if ( field ) {
+        label = field.label;
+        break;
+      }
+    }
+  }
+
+  if ( label ) {
+    label = game.i18n.localize(label);
+    _attributeLabelCache.set(attr, label);
+  }
+
+  return label;
+}
+
+/* -------------------------------------------- */
 /*  Migration                                   */
 /* -------------------------------------------- */
 

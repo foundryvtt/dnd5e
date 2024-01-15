@@ -941,6 +941,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const hp = this.system.attributes.hp;
       const delta = isDelta ? (-1 * value) : (hp.value + hp.temp) - value;
       return this.applyDamage(delta);
+    } else if ( attribute.startsWith(".") ) {
+      const item = fromUuidSync(attribute, { relative: this });
+      let newValue = item?.system.uses?.value ?? 0;
+      if ( isDelta ) newValue += value;
+      else newValue = value;
+      return item?.update({ "system.uses.value": newValue });
     }
     return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
   }

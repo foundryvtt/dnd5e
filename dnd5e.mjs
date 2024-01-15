@@ -190,7 +190,12 @@ function _configureTrackableAttributes() {
   };
 
   const creature = {
-    bar: [...common.bar, "attributes.hp", "spells.pact"],
+    bar: [
+      ...common.bar,
+      "attributes.hp",
+      "spells.pact",
+      ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(l => `spells.spell${l}`)
+    ],
     value: [
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
@@ -404,6 +409,8 @@ Hooks.on("chatMessage", (app, message, data) => dnd5e.applications.Award.chatMes
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
+
+Hooks.on("renderTokenConfig", documents.TokenDocument5e.onRenderTokenConfig);
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */
