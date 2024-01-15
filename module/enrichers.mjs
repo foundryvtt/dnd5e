@@ -773,31 +773,37 @@ async function rollAction(event) {
 
   // Direct roll
   if ( (action === "roll") || !game.user.isGM ) {
-    // Fetch the actor that should perform the roll
-    let actor;
-    const speaker = ChatMessage.implementation.getSpeaker();
-    if ( speaker.token ) actor = game.actors.tokens[speaker.token];
-    actor ??= game.actors.get(speaker.actor);
-    if ( !actor && (type !== "damage") ) {
-      ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
-      return;
-    }
+    target.disabled = true;
+    try {
+      // Fetch the actor that should perform the roll
+      let actor;
+      const speaker = ChatMessage.implementation.getSpeaker();
+      if ( speaker.token ) actor = game.actors.tokens[speaker.token];
+      actor ??= game.actors.get(speaker.actor);
 
-    switch ( type ) {
-      case "check":
-        return actor.rollAbilityTest(ability, options);
-      case "damage":
-        return rollDamage(event, speaker);
-      case "save":
-        return actor.rollAbilitySave(ability, options);
-      case "skill":
-        if ( ability ) options.ability = ability;
-        return actor.rollSkill(skill, options);
-      case "tool":
-        options.ability = ability;
-        return actor.rollToolCheck(tool, options);
-      default:
-        return console.warn(`DnD5e | Unknown roll type ${type} provided.`);
+      if ( !actor && (type !== "damage") ) {
+        ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
+        return;
+      }
+
+      switch ( type ) {
+        case "check":
+          return await actor.rollAbilityTest(ability, options);
+        case "damage":
+          return await rollDamage(event, speaker);
+        case "save":
+          return await actor.rollAbilitySave(ability, options);
+        case "skill":
+          if ( ability ) options.ability = ability;
+          return await actor.rollSkill(skill, options);
+        case "tool":
+          options.ability = ability;
+          return await actor.rollToolCheck(tool, options);
+        default:
+          return console.warn(`DnD5e | Unknown roll type ${type} provided.`);
+      }
+    } finally {
+      target.disabled = false;
     }
   }
 
