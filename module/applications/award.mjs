@@ -31,7 +31,9 @@ export default class Award extends DialogMixin(FormApplication) {
     if ( this.object?.system.type?.value === "party" ) return this.object.system.transferDestinations ?? [];
     if ( !game.user.isGM ) return [];
     const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
-    return primaryParty ? [primaryParty, ...primaryParty.system.transferDestinations] : [];
+    return primaryParty
+      ? [primaryParty, ...primaryParty.system.transferDestinations]
+      : game.users.map(u => u.character).filter(c => c);
   }
 
   /* -------------------------------------------- */
@@ -49,6 +51,8 @@ export default class Award extends DialogMixin(FormApplication) {
     }, {});
     context.destinations = Award.prepareDestinations(this.transferDestinations);
     context.hideXP = game.settings.get("dnd5e", "disableExperienceTracking");
+    context.noPrimaryParty = !game.settings.get("dnd5e", "primaryParty")?.actor
+      && (this.object?.system.type?.value !== "party");
     context.xp = this.options.xp ?? this.object?.system.details.xp.value ?? this.object?.system.details.xp.derived;
 
     return context;

@@ -614,11 +614,14 @@
       margin: 0;
       align-self: center;
     }
-    .no-destinations {
+    .no-destinations, .no-primary-party {
       grid-column: 1 / -1;
       font-family: var(--dnd5e-font-roboto-slab);
-      font-weight: bold;
       text-align: center;
+      text-wrap: pretty;
+    }
+    .no-destinations {
+      font-weight: bold;
     }
   }
 }

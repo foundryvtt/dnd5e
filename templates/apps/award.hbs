@@ -15,13 +15,16 @@
         {{/each}}
     </section>
     <div class="destinations">
+        {{#if noPrimaryParty}}
+        <p class="no-primary-party">{{localize "DND5E.Award.NoPrimaryParty"}}</p>
+        {{/if}}
         {{#each destinations}}
         <label>
             <input type="checkbox" name="destination.{{doc.id}}">
             {{{icon}}} {{doc.name}}
         </label>
         {{else}}
-        <p class="no-destinations">{{localize "DND5E.CurrencyManager.Transfer.NoDestinations"}}</p>
+        <p class="no-destinations">{{localize "DND5E.Award.NoDestinations"}}</p>
         {{/each}}
     </div>
     <button type="submit" name="transfer" disabled>
