@@ -1893,11 +1893,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           try {
             await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
           } catch(err) {
-            Hooks.onError("Item5e._onChatCardAction", err, {
-              msg: game.i18n.localize("DND5E.PlaceTemplateError"),
-              log: "error",
-              notify: "error"
-            });
+            err.message = game.i18n.localize("DND5E.PlaceTemplateError");
+            throw err;
           }
           break;
         case "abilityCheck":
@@ -1909,6 +1906,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           break;
       }
 
+    } catch(err) {
+      Hooks.onError("Item5e._onChatCardAction", err, { log: "error", notify: "error" });
     } finally {
       // Re-enable the button
       button.disabled = false;
