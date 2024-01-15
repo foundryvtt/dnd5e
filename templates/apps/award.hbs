@@ -20,7 +20,7 @@
         {{/if}}
         {{#each destinations}}
         <label>
-            <input type="checkbox" name="destination.{{doc.id}}">
+            <input type="checkbox" name="destination.{{doc.id}}" {{checked checked}}>
             {{{icon}}} {{doc.name}}
         </label>
         {{else}}

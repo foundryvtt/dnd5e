@@ -67,7 +67,8 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /**
    * @typedef {object} SystemDataModelMetadata
-   * @property {boolean} [singleton] - Should only a single item of this type be allowed on an actor?
+   * @property {boolean} [singleton]                  Should only a single item of this type be allowed on an actor?
+   * @property {typeof DataModel} [systemFlagsModel]  Model that represents flags data within the dnd5e namespace.
    */
 
   /**

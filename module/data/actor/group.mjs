@@ -1,6 +1,7 @@
 import { ActorDataModel } from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
+import GroupSystemFlags from "./group-system-flags.mjs";
 
 const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -75,6 +76,13 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       }, {label: "DND5E.Details"})
     });
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static metadata = Object.freeze({
+    systemFlagsModel: GroupSystemFlags
+  });
 
   /* -------------------------------------------- */
   /*  Properties                                  */
