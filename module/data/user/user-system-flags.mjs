@@ -1,6 +1,6 @@
 import { MappingField } from "../fields.mjs";
 
-const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, ForeignDocumentField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @typedef {object} SheetPreferences5e
@@ -19,12 +19,16 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
 /**
  * A custom model to validate system flags on User Documents.
  *
+ * @property {Set<string>} awardDestinations                  Saved targets from previous use of /award command.
  * @property {Record<string, SheetPreferences5e>} sheetPrefs  The User's sheet preferences.
  */
 export default class UserSystemFlags extends foundry.abstract.DataModel {
   /** @override */
   static defineSchema() {
     return {
+      awardDestinations: new SetField(
+        new ForeignDocumentField(foundry.documents.BaseActor, { idOnly: true }), { required: false }
+      ),
       sheetPrefs: new MappingField(new SchemaField({
         width: new NumberField({ integer: true, positive: true }),
         height: new NumberField({ integer: true, positive: true }),
