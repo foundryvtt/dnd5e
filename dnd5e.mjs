@@ -385,7 +385,7 @@ Hooks.on("canvasInit", gameCanvas => {
 });
 
 /* -------------------------------------------- */
-/*  Pause Styling                               */
+/*  System Styling                              */
 /* -------------------------------------------- */
 
 Hooks.on("renderPause", (app, [html]) => {
@@ -393,6 +393,42 @@ Hooks.on("renderPause", (app, [html]) => {
   const img = html.querySelector("img");
   img.src = "systems/dnd5e/ui/official/ampersand.svg";
   img.className = "";
+});
+
+Hooks.on("renderSettings", () => {
+  const details = document.getElementById("game-details");
+  details.querySelector(".system").remove();
+  const heading = document.createElement("div");
+  heading.classList.add("dnd5e2", "sidebar-heading");
+  heading.innerHTML = `
+    <h2>${game.i18n.localize("WORLD.GameSystem")}</h2>
+    <ul class="links">
+      <li>
+        <a href="https://github.com/foundryvtt/dnd5e/releases/latest" target="_blank">
+          ${game.i18n.localize("DND5E.Notes")}
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/foundryvtt/dnd5e/issues" target="_blank">${game.i18n.localize("DND5E.Issues")}</a>
+      </li>
+      <li>
+        <a href="https://github.com/foundryvtt/dnd5e/wiki" target="_blank">${game.i18n.localize("DND5E.Wiki")}</a>
+      </li>
+      <li>
+        <a href="https://discord.com/channels/170995199584108546/670336046164213761" target="_blank">
+          ${game.i18n.localize("DND5E.Discord")}
+        </a>
+      </li>
+    </ul>
+  `;
+  details.insertAdjacentElement("afterend", heading);
+  const badge = document.createElement("div");
+  badge.classList.add("dnd5e2", "system-badge");
+  badge.innerHTML = `
+    <img src="systems/dnd5e/ui/official/dnd-badge-32.webp" data-tooltip="${dnd5e.title}" alt="${dnd5e.title}">
+    <span class="system-info">${dnd5e.version}</span>
+  `;
+  heading.insertAdjacentElement("afterend", badge);
 });
 
 /* -------------------------------------------- */
