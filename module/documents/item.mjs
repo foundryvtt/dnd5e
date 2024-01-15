@@ -1842,75 +1842,77 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const message = game.messages.get(messageId);
     const action = button.dataset.action;
 
-    // Recover the actor for the chat card
-    const actor = await this._getChatCardActor(card);
-    if ( !actor ) return;
+    try {
+      // Recover the actor for the chat card
+      const actor = await this._getChatCardActor(card);
+      if ( !actor ) return;
 
-    // Validate permission to proceed with the roll
-    const isTargetted = action === "save";
-    if ( !( isTargetted || game.user.isGM || actor.isOwner ) ) return;
+      // Validate permission to proceed with the roll
+      const isTargetted = action === "save";
+      if ( !( isTargetted || game.user.isGM || actor.isOwner ) ) return;
 
-    // Get the Item from stored flag data or by the item ID on the Actor
-    const storedData = message.getFlag("dnd5e", "itemData");
-    const item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
-    if ( !item ) {
-      ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {
-        item: card.dataset.itemId, name: actor.name
-      }));
-      return null;
-    }
-    const spellLevel = parseInt(card.dataset.spellLevel) || null;
+      // Get the Item from stored flag data or by the item ID on the Actor
+      const storedData = message.getFlag("dnd5e", "itemData");
+      const item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
+      if ( !item ) {
+        ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {
+          item: card.dataset.itemId, name: actor.name
+        }));
+        return null;
+      }
+      const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
-    // Handle different actions
-    let targets;
-    switch ( action ) {
-      case "attack":
-        await item.rollAttack({
-          event: event,
-          spellLevel: spellLevel
-        });
-        break;
-      case "damage":
-      case "versatile":
-        await item.rollDamage({
-          event: event,
-          spellLevel: spellLevel,
-          versatile: action === "versatile"
-        });
-        break;
-      case "formula":
-        await item.rollFormula({event, spellLevel}); break;
-      case "save":
-        targets = this._getChatCardTargets(card);
-        for ( let token of targets ) {
-          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
-          await token.actor.rollAbilitySave(button.dataset.ability, { event, speaker });
-        }
-        break;
-      case "toolCheck":
-        await item.rollToolCheck({event}); break;
-      case "placeTemplate":
-        try {
-          await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
-        } catch(err) {
-          Hooks.onError("Item5e._onChatCardAction", err, {
-            msg: game.i18n.localize("DND5E.PlaceTemplateError"),
-            log: "error",
-            notify: "error"
+      // Handle different actions
+      let targets;
+      switch ( action ) {
+        case "attack":
+          await item.rollAttack({
+            event: event,
+            spellLevel: spellLevel
           });
-        }
-        break;
-      case "abilityCheck":
-        targets = this._getChatCardTargets(card);
-        for ( let token of targets ) {
-          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
-          await token.actor.rollAbilityTest(button.dataset.ability, { event, speaker });
-        }
-        break;
-    }
+          break;
+        case "damage":
+        case "versatile":
+          await item.rollDamage({
+            event: event,
+            spellLevel: spellLevel,
+            versatile: action === "versatile"
+          });
+          break;
+        case "formula":
+          await item.rollFormula({event, spellLevel}); break;
+        case "save":
+          targets = this._getChatCardTargets(card);
+          for ( let token of targets ) {
+            const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
+            await token.actor.rollAbilitySave(button.dataset.ability, { event, speaker });
+          }
+          break;
+        case "toolCheck":
+          await item.rollToolCheck({event}); break;
+        case "placeTemplate":
+          try {
+            await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
+          } catch(err) {
+            err.message = game.i18n.localize("DND5E.PlaceTemplateError");
+            throw err;
+          }
+          break;
+        case "abilityCheck":
+          targets = this._getChatCardTargets(card);
+          for ( let token of targets ) {
+            const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
+            await token.actor.rollAbilityTest(button.dataset.ability, { event, speaker });
+          }
+          break;
+      }
 
-    // Re-enable the button
-    button.disabled = false;
+    } catch(err) {
+      Hooks.onError("Item5e._onChatCardAction", err, { log: "error", notify: "error" });
+    } finally {
+      // Re-enable the button
+      button.disabled = false;
+    }
   }
 
   /* -------------------------------------------- */
