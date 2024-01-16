@@ -641,7 +641,7 @@ async function enrichSave(config, label, options) {
  */
 function _addDataset(element, dataset) {
   for ( const [key, value] of Object.entries(dataset) ) {
-    if ( !["input", "values"].includes(key) && value ) element.dataset[key] = value;
+    if ( !["_config", "_input", "values"].includes(key) && value ) element.dataset[key] = value;
   }
 }
 
@@ -656,7 +656,12 @@ function _addDataset(element, dataset) {
 function createPassiveTag(label, dataset) {
   const span = document.createElement("span");
   span.classList.add("passive-check");
-  _addDataset(span, dataset);
+  _addDataset(span, {
+    ...dataset,
+    tooltip: `
+      <section class="loading" data-passive><i class="fas fa-spinner fa-spin-pulse"></i></section>
+    `
+  });
   span.innerText = label;
   return span;
 }

@@ -66,12 +66,19 @@ export default class Tooltips5e {
       return this._onHoverContentLink(doc);
     }
 
+    const loading = this.tooltip.querySelector(".loading");
+
     // Sheet-specific tooltips
-    else {
-      const uuid = this.tooltip.querySelector(".loading[data-uuid]")?.dataset.uuid;
-      const doc = await fromUuid(uuid);
+    if ( loading?.dataset.uuid ) {
+      const doc = await fromUuid(loading.dataset.uuid);
       if ( doc instanceof dnd5e.documents.Item5e ) return this._onHoverContentLink(doc);
       if ( doc instanceof dnd5e.documents.Actor5e ) return this._onHoverActor(doc);
+    }
+
+    // Passive checks
+    else if ( loading?.dataset.passive !== undefined ) {
+      const { skill, dc } = game.tooltip.element?.dataset ?? {};
+      return this._onHoverPassive(skill, dc);
     }
   }
 
@@ -102,6 +109,37 @@ export default class Tooltips5e {
     classes?.forEach(c => this.tooltip.classList.add(c));
     const { tooltipDirection } = game.tooltip.element.dataset;
     requestAnimationFrame(() => this._positionItemTooltip(tooltipDirection));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle hovering a passive check link to display results for primary party.
+   * @param {string} skill  Passive skill key.
+   * @param {number} [dc]   DC against which to compare party values.
+   * @protected
+   */
+  async _onHoverPassive(skill, dc) {
+    const config = CONFIG.DND5E.skills[skill];
+    const label = game.i18n.format("DND5E.SkillPassiveHint", { skill: config.label });
+    const party = game.settings.get("dnd5e", "primaryParty")?.actor;
+    if ( !party ) {
+      this.tooltip.innerHTML = label;
+      return;
+    }
+
+    const context = { label, party: [] };
+    for ( const member of party.system.members ) {
+      const passive = member.actor?.system.skills?.[skill]?.passive;
+      if ( !passive ) continue;
+      const data = { name: member.actor.name, img: member.actor.img, passive };
+      if ( dc !== undefined ) data.status = passive >= dc ? "success" : "failure";
+      context.party.push(data);
+    }
+
+    this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip");
+    this.tooltip.innerHTML = await renderTemplate("systems/dnd5e/templates/journal/passive-tooltip.hbs", context);
+    game.tooltip._setAnchor(TooltipManager.TOOLTIP_DIRECTIONS.DOWN);
   }
 
   /* -------------------------------------------- */

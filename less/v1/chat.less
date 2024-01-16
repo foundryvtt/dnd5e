@@ -86,19 +86,19 @@
 .dice-roll .dice-total {
   &.success {
     color: inherit;
-    background: #c7d0c0;
-    border: 1px solid #006c00;
+    background: var(--dnd5e-color-success-background);
+    border: 1px solid var(--dnd5e-color-success);
   }
   &.failure {
     color: inherit;
-    background: #ffdddd;
-    border: 1px solid #6e0000;
+    background: var(--dnd5e-color-failure-background);
+    border: 1px solid var(--dnd5e-color-failure);
   }
   &.critical {
-    color: green;
+    color: var(--dnd5e-color-success-critical);
   }
   &.fumble {
-    color: red;
+    color: var(--dnd5e-color-failure-critical);
   }
 }
 
