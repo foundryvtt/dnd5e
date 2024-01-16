@@ -12,6 +12,16 @@
     border: 2px solid var(--dnd5e-color-gold);
 
     .content { padding: 0 .5rem .25rem; }
+
+    .header {
+      h2 {
+        margin: 0;
+        border: none;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    }
   }
 
   &.locked-tooltip {
@@ -163,12 +173,6 @@
 
     .header {
       margin-block: 6px 10px;
-      h1 {
-        border: none;
-        font-family: var(--dnd5e-font-roboto-slab);
-        font-size: 1.5em;
-        font-weight: bold;
-      }
     }
 
     .party {
@@ -189,18 +193,21 @@
         box-shadow: 0 0 4px var(--dnd5e-shadow-45);
         border-radius: 100%;
         object-fit: cover;
+        object-position: top;
         background: var(--dnd5e-color-light-gray);
       }
       .name {
         padding-inline-start: 4px;
-        font-size: var(--font-size-16);
+        font-size: var(--font-size-14);
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
       }
       .passive {
         font-weight: bold;
         text-align: end;
       }
       .status {
-        font-family: "Font Awesome 6 Pro";
+        font-family: var(--font-awesome);
         font-weight: 900;
 
         &.success::after {
@@ -221,20 +228,12 @@
 
   &.rule-tooltip {
     max-width: 450px;
-  
+
     .header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-block: 6px 10px;
-  
-      h1 {
-        margin: 0;
-        border: none;
-        font-family: var(--dnd5e-font-roboto-slab);
-        font-size: 1.5em;
-        font-weight: bold;
-      }
     }
   }
 }
