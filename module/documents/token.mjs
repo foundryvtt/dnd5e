@@ -68,7 +68,7 @@ export default class TokenDocument5e extends TokenDocument {
     // Add a new effect
     else if ( state ) {
       const cls = getDocumentClass("ActiveEffect");
-      const effect = cls.fromStatusEffect(effectData);
+      const effect = await cls.fromStatusEffect(effectData);
       if ( overlay ) effect.updateSource({ "flags.core.overlay": true });
       await cls.create(effect, { parent: this.actor, keepId: true });
     }

@@ -3079,7 +3079,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<ActiveEffect>|void}
    * @protected
    */
-  _onUpdateExhaustion(data, options) {
+  async _onUpdateExhaustion(data, options) {
     const level = foundry.utils.getProperty(data, "system.attributes.exhaustion");
     if ( !Number.isFinite(level) ) return;
     let effect = this.effects.get(ActiveEffect5e.ID.EXHAUSTION);
@@ -3088,7 +3088,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const originalExhaustion = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
       return effect.update({ "flags.dnd5e.exhaustionLevel": level }, { dnd5e: { originalExhaustion } });
     } else {
-      effect = ActiveEffect.implementation.fromStatusEffect("exhaustion", { parent: this });
+      effect = await ActiveEffect.implementation.fromStatusEffect("exhaustion", { parent: this });
       effect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
       return ActiveEffect.implementation.create(effect, { parent: this, keepId: true });
     }

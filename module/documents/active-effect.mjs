@@ -43,7 +43,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @param {DocumentModificationContext} [options]  Additional options to pass to ActiveEffect instantiation.
    * @returns {ActiveEffect5e|void}
    */
-  static fromStatusEffect(effectData, options={}) {
+  static async fromStatusEffect(effectData, options={}) {
     if ( typeof effectData === "string" ) effectData = CONFIG.statusEffects.find(e => e.id === effectData);
     if ( foundry.utils.getType(effectData) !== "Object" ) return;
     const createData = {
@@ -52,6 +52,10 @@ export default class ActiveEffect5e extends ActiveEffect {
       name: game.i18n.localize(effectData.name),
       statuses: [effectData.id, ...effectData.statuses ?? []]
     };
+    if ( !("description" in createData) && effectData.reference ) {
+      const page = await fromUuid(effectData.reference);
+      createData.description = page?.text.content ?? "";
+    }
     this.migrateDataSafe(createData);
     this.cleanData(createData);
     return new this(createData, { keepId: true, ...options });
