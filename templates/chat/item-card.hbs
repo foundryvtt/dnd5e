@@ -1,61 +1,111 @@
-<div class="dnd5e chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}"
-     {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isSpell}}data-spell-level="{{item.system.level}}"{{/if}}>
-    <header class="card-header flexrow">
-        <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
-        <h3 class="item-name">{{item.name}}</h3>
-    </header>
+<div class="dnd5e2 chat-card item-card" data-actor-id="{{ actor.id }}" data-item-id="{{ item.id }}"
+     {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isSpell}}data-spell-level="{{ item.system.level }}"{{/if}}>
 
-    <div class="card-content">
-        {{#if data.description.chat}}
-        {{{data.description.chat}}}
-        {{else}}
-        {{{data.description.value}}}
-        {{/if}}
-        {{#if data.materials.value}}
-        <p><strong>{{ localize "DND5E.RequiredMaterials" }}.</strong> {{data.materials.value}}</p>
-        {{/if}}
-    </div>
+    {{!-- Collapsible Item Details --}}
+    <section class="card-header description collapsible">
 
+        {{!-- Summary --}}
+        <header class="summary">
+            <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+            <div class="name-stacked border">
+                <span class="title">{{ item.name }}</span>
+                {{#if (or data.subtitle item.system.chatFlavor)}}
+                <span class="subtitle">
+                    {{#if item.system.chatFlavor}}{{ item.system.chatFlavor }}
+                    {{else}}{{{ data.subtitle }}}{{/if}}
+                </span>
+                {{/if}}
+            </div>
+            <i class="fas fa-chevron-down fa-fw"></i>
+        </header>
+
+        {{!-- Details --}}
+        <section class="details card-content">
+            {{{ data.description.chat }}}
+        </section>
+    </section>
+
+    {{!-- Item Actions --}}
     <div class="card-buttons">
-        {{#if hasAttack}}<button data-action="attack">{{ localize "DND5E.Attack" }}</button>{{/if}}
 
+        {{!-- Attacks --}}
+        {{#if hasAttack}}
+        <button type="button" data-action="attack">
+            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg"></i>
+            {{ localize "DND5E.Attack" }}
+        </button>
+        {{/if}}
+
+        {{!-- Damage / Healing --}}
         {{#if hasDamage}}
-        <button data-action="damage">
-            {{#if isHealing}}{{ localize "DND5E.Healing" }}
-            {{else}}{{localize "DND5E.Damage" }}{{/if}}
+        <button type="button" data-action="damage">
+            {{#if isHealing}}
+            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/damage/healing.svg"></i>
+            {{ localize "DND5E.Healing" }}
+            {{else}}
+            <i class="fas fa-burst"></i>
+            {{ localize "DND5E.Damage" }}
+            {{/if}}
         </button>
         {{/if}}
 
+        {{!-- Versatile --}}
         {{#if isVersatile}}
-        <button data-action="versatile">{{ localize "DND5E.Versatile" }}</button>
-        {{/if}}
-
-        {{#if hasSave}}
-        <button data-action="save" data-ability="{{data.save.ability}}">
-            {{ localize "DND5E.SavingThrow" }} {{labels.save}}
+        <button type="button" data-action="versatile">
+            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/versatile.svg"></i>
+            {{ localize "DND5E.Versatile" }}
         </button>
         {{/if}}
 
+        {{!-- Saving Throw --}}
+        {{#if hasSave}}
+        <button type="button" data-action="save" data-ability="{{ item.system.save.ability }}">
+            <i class="fas fa-shield-heart"></i>
+            {{#with item.system.save}}
+            {{ localize "DND5E.SavingThrowDC" dc=dc ability=(lookup (lookup @root.config.abilities ability) "label") }}
+            {{/with}}
+        </button>
+        {{/if}}
+
+        {{!-- Other Formula --}}
         {{#if data.formula}}
-        <button data-action="formula">{{ localize "DND5E.OtherFormula"}}</button>
+        <button type="button" data-action="formula">
+            <i class="fas fa-ellipsis"></i>
+            {{ localize "DND5E.OtherFormula"}}
+        </button>
         {{/if}}
 
+        {{!-- Templates --}}
         {{#if hasAreaTarget}}
-        <button data-action="placeTemplate">{{ localize "DND5E.PlaceTemplate" }}</button>
+        <button type="button" data-action="placeTemplate">
+            <i class="fas fa-bullseye"></i>
+            {{ localize "DND5E.PlaceTemplate" }}
+        </button>
         {{/if}}
 
+        {{!-- Tool Check --}}
         {{#if isTool}}
-        <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "DND5E.Use" }} {{item.name}}</button>
+        <button type="button" data-action="toolCheck" data-ability="{{ item.system.ability }}">
+            <i class="fas fa-hammer"></i>
+            {{ localize "DND5E.UseItem" item=item.name }}
+        </button>
         {{/if}}
 
+        {{!-- Ability Check --}}
         {{#if hasAbilityCheck}}
-        <button data-action="abilityCheck" data-ability="{{data.ability}}">{{labels.abilityCheck}}</button>
+        <button type="button" data-action="abilityCheck" data-ability="{{ item.system.ability }}">
+            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/ability-score-improvement.svg"></i>
+            {{ labels.abilityCheck }}
+        </button>
         {{/if}}
     </div>
 
-    <footer class="card-footer">
+    {{!-- Item Properties --}}
+    <ul class="card-footer pills unlist">
         {{#each data.properties}}
-        <span>{{this}}</span>
+        <li class="pill maroon">
+            <span class="label">{{ this }}</span>
+        </li>
         {{/each}}
-    </footer>
+    </ul>
 </div>

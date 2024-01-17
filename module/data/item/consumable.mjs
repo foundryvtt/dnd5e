@@ -68,6 +68,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    if ( !this.type.value ) return;
     const config = CONFIG.DND5E.consumableTypes[this.type.value];
     this.type.label = this.type.subtype ? config.subtypes[this.type.subtype] : config.label;
   }

@@ -559,6 +559,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         };
       }
       else ctx.equip = { applicable: false };
+
+      // Subtitles
+      ctx.subtitle = [system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
     }
   }
 

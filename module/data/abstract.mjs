@@ -341,7 +341,7 @@ export class ItemDataModel extends SystemDataModel {
   async richTooltip(enrichmentOptions={}) {
     return {
       content: await renderTemplate(
-        this.constructor.ITEM_TOOLTIP_TEMPLATE, await this.getTooltipData(enrichmentOptions)
+        this.constructor.ITEM_TOOLTIP_TEMPLATE, await this.getCardData(enrichmentOptions)
       ),
       classes: ["dnd5e2", "dnd5e-tooltip", "item-tooltip"]
     };
@@ -350,39 +350,46 @@ export class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Prepare item tooltip template data.
+   * Prepare item card template data.
    * @param {EnrichmentOptions} enrichmentOptions  Options for text enrichment.
    * @returns {Promise<object>}
    */
-  async getTooltipData(enrichmentOptions={}) {
+  async getCardData(enrichmentOptions={}) {
     const { name, type, img } = this.parent;
     let {
       price, weight, uses, identified, unidentified, description, school, materials, activation, properties
     } = this;
-    description = game.user.isGM || identified ? description.value : unidentified.description;
-    uses = game.user.isGM || identified ? uses : null;
+    const rollData = this.parent.getRollData();
+    const isIdentified = identified !== false;
+    const chat = isIdentified ? description.chat || description.value : unidentified?.description;
+    description = game.user.isGM || isIdentified ? description.value : unidentified?.description;
+    uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
     price = game.user.isGM || identified ? price : null;
+
+    let subtitle = [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
+    if ( type === "spell" ) subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[school]?.label];
 
     const context = {
       name, type, img, price, weight, uses, school, materials, activation,
       labels: foundry.utils.deepClone(this.parent.labels),
-      subtitle: school
-        ? CONFIG.DND5E.spellSchools[school]?.label
-        : this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]),
-      description: await TextEditor.enrichHTML(description, {
-        async: true, relativeTo: this.parent, rollData: this.parent.getRollData(), ...enrichmentOptions
-      })
+      subtitle: subtitle.filterJoin(" &bull; "),
+      description: {
+        value: await TextEditor.enrichHTML(description ?? "", {
+          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+        }),
+        chat: await TextEditor.enrichHTML(chat ?? "", {
+          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+        })
+      }
     };
 
     context.properties = [];
 
-    if ( game.user.isGM || identified ) {
-      context.properties.push(...this.tooltipProperties ?? []);
+    if ( game.user.isGM || isIdentified ) {
+      context.properties.push(...this.cardProperties ?? []);
       if ( type === "spell" ) context.properties.push(...this.parent.labels.components.tags);
-      else context.properties.push(...this.activatedEffectChatProperties ?? []);
-      if ( "proficient" in this ) {
-        context.properties.push(CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0]);
-      }
+      else context.properties.push(...this.activatedEffectCardProperties ?? []);
+      context.properties.push(...this.equippableItemCardProperties ?? []);
     }
 
     if ( properties?.has("concentration") ) {

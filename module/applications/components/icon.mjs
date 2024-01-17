@@ -7,7 +7,6 @@ export default class IconElement extends HTMLElement {
     this.#internals = this.attachInternals();
     this.#internals.role = "img";
     this.#shadowRoot = this.attachShadow({ mode: "closed" });
-    this.#src = this.getAttribute("src");
   }
 
   /**
@@ -28,7 +27,13 @@ export default class IconElement extends HTMLElement {
    * Path to the SVG source file.
    * @type {string}
    */
-  #src;
+  get src() {
+    return this.getAttribute("src");
+  }
+
+  set src(src) {
+    this.setAttribute("src", src);
+  }
 
   /* -------------------------------------------- */
 
@@ -73,7 +78,7 @@ export default class IconElement extends HTMLElement {
     };
 
     // Insert element immediately if already available, otherwise wait for fetch
-    const element = this.constructor.fetch(this.#src);
+    const element = this.constructor.fetch(this.src);
     if ( element instanceof Promise ) element.then(insertElement);
     else insertElement(element);
   }

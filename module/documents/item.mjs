@@ -447,11 +447,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   _prepareFeat() {
     const act = this.system.activation;
-    const types = CONFIG.DND5E.abilityActivationTypes;
-    if ( act?.type === types.legendary ) this.labels.featType = game.i18n.localize("DND5E.LegendaryActionLabel");
-    else if ( act?.type === types.lair ) this.labels.featType = game.i18n.localize("DND5E.LairActionLabel");
+    if ( act?.type === "legendary" ) this.labels.featType = game.i18n.localize("DND5E.LegendaryActionLabel");
+    else if ( act?.type === "lair" ) this.labels.featType = game.i18n.localize("DND5E.LairActionLabel");
     else if ( act?.type ) {
-      this.labels.featType = game.i18n.localize(this.system.damage.length ? "DND5E.Attack" : "DND5E.Action");
+      const isAttack = /\w\wak$/.test(this.system.actionType);
+      this.labels.featType = game.i18n.localize(isAttack ? "DND5E.Attack" : "DND5E.Action");
     }
     else this.labels.featType = game.i18n.localize("DND5E.Passive");
   }
@@ -1283,9 +1283,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const token = this.actor.token;
     const templateData = {
       actor: this.actor,
+      config: CONFIG.DND5E,
       tokenId: token?.uuid || null,
       item: this,
-      data: await this.getChatData(),
+      data: await this.system.getCardData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
       isHealing: this.isHealing,
@@ -1304,7 +1305,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       user: game.user.id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
-      flavor: this.system.chatFlavor || this.name,
       speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
       flags: {"core.canPopout": true}
     };
@@ -1369,8 +1369,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Type specific properties
     data.properties = [
       ...this.system.chatProperties ?? [],
-      ...this.system.equippableItemChatProperties ?? [],
-      ...this.system.activatedEffectChatProperties ?? []
+      ...this.system.equippableItemCardProperties ?? [],
+      ...this.system.activatedEffectCardProperties ?? []
     ].filter(p => p);
 
     return data;
@@ -1820,7 +1820,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   static chatListeners(html) {
     html.on("click", ".card-buttons button", this._onChatCardAction.bind(this));
-    html.on("click", ".item-name", this._onChatCardToggleContent.bind(this));
+    html.on("click", ".item-name, .description.collapsible", this._onChatCardToggleContent.bind(this));
+    html[0].querySelectorAll("[data-context-menu]").forEach(el => {
+      el.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        event.currentTarget.closest("[data-message-id]").dispatchEvent(new PointerEvent("contextmenu", {
+          view: window, bubbles: true, cancelable: true
+        }));
+      });
+    });
   }
 
   /* -------------------------------------------- */
@@ -1926,8 +1935,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     event.preventDefault();
     const header = event.currentTarget;
     const card = header.closest(".chat-card");
-    const content = card.querySelector(".card-content");
-    content.style.display = content.style.display === "none" ? "block" : "none";
+    const content = card.querySelector(".card-content:not(.details)");
+    if ( content ) content.style.display = content.style.display === "none" ? "block" : "none";
+    if ( header.classList.contains("collapsible") ) {
+      const collapsed = header.classList.contains("collapsed");
+      const details = header.querySelector(".details");
+      details.style.height = collapsed ? `${details.scrollHeight}px` : "0";
+      header.classList.toggle("collapsed", !collapsed);
+    }
   }
 
   /* -------------------------------------------- */

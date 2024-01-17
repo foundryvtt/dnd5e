@@ -43,6 +43,15 @@ export default class FeatData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareDerivedData() {
+    if ( !this.type.value ) return;
+    const config = CONFIG.DND5E.featureTypes[this.type.value];
+    this.type.label = this.type.subtype ? config.subtypes[this.type.subtype] : config.label;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getFavoriteData() {
     return foundry.utils.mergeObject(await super.getFavoriteData(), {
       subtitle: [this.parent.labels.activation, this.parent.labels.recovery],
@@ -101,10 +110,10 @@ export default class FeatData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
-   * Properties displayed in the item tooltip.
+   * Properties displayed on the item card.
    * @type {string[]}
    */
-  get tooltipProperties() {
+  get cardProperties() {
     return [this.requirements];
   }
 

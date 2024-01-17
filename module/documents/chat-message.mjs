@@ -40,7 +40,7 @@ export function highlightCriticalSuccessFailure(message, html, data) {
  * @param {object} data          Configuration data passed to the message.
  */
 export function displayChatActionButtons(message, html, data) {
-  const chatCard = html.find(".dnd5e.chat-card");
+  const chatCard = html.find(".dnd5e.chat-card, .dnd5e2.chat-card");
   if ( chatCard.length > 0 ) {
     const flavor = html.find(".flavor-text");
     if ( flavor.text() === html.find(".item-name").text() ) flavor.remove();
@@ -152,6 +152,51 @@ function applyChatCardTemp(li) {
 /* -------------------------------------------- */
 
 /**
+ * Augment the chat card markup for additional styling.
+ * @param {jQuery} html  The chat card markup.
+ */
+function enrichChatCard([html]) {
+  // Header matter
+  const message = game.messages.get(html.dataset.messageId);
+  const { scene: sceneId, token: tokenId, actor: actorId } = message.speaker;
+  const actor = game.scenes.get(sceneId)?.tokens.get(tokenId)?.actor ?? game.actors.get(actorId);
+  const img = actor?.img ?? message.user.avatar;
+  const avatar = document.createElement("div");
+  avatar.classList.add("avatar");
+  avatar.innerHTML = `<img src="${img}" alt="${message.alias}">`;
+  const name = document.createElement("span");
+  name.classList.add("name-stacked");
+  name.innerHTML = `<span class="title">${message.alias}</span>`;
+  const subtitle = document.createElement("span");
+  subtitle.classList.add("subtitle");
+  if ( message.whisper.length ) subtitle.innerText = html.querySelector(".whisper-to")?.innerText ?? "";
+  else if ( message.alias !== message.user?.name ) subtitle.innerText = message.user?.name ?? "";
+  name.appendChild(subtitle);
+  const sender = html.querySelector(".message-sender");
+  sender.replaceChildren(avatar, name);
+  html.querySelector(".whisper-to")?.remove();
+
+  // Context menu
+  const metadata = html.querySelector(".message-metadata");
+  metadata.querySelector(".message-delete")?.remove();
+  const anchor = document.createElement("a");
+  anchor.setAttribute("aria-label", game.i18n.localize("DND5E.AdditionalControls"));
+  anchor.classList.add("chat-control");
+  anchor.dataset.contextMenu = "";
+  anchor.innerHTML = '<i class="fas fa-ellipsis-vertical fa-fw"></i>';
+  metadata.appendChild(anchor);
+
+  // SVG icons
+  html.querySelectorAll("i.dnd5e-icon").forEach(el => {
+    const icon = document.createElement("dnd5e-icon");
+    icon.src = el.dataset.src;
+    el.replaceWith(icon);
+  });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Handle rendering of a chat message to the log
  * @param {ChatLog} app     The ChatLog instance
  * @param {jQuery} html     Rendered chat message HTML
@@ -160,5 +205,15 @@ function applyChatCardTemp(li) {
 export function onRenderChatMessage(app, html, data) {
   displayChatActionButtons(app, html, data);
   highlightCriticalSuccessFailure(app, html, data);
-  if (game.settings.get("dnd5e", "autoCollapseItemCards")) html.find(".card-content").hide();
+  if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
+    html.find(".card-content:not(.details)").hide();
+    html.find(".description.collapsible").each((i, el) => {
+      el.classList.add("collapsed");
+      el.querySelector(".details").style.height = "0";
+    });
+  }
+  else requestAnimationFrame(() => {
+    html.find(".description.collapsible .details").each((i, el) => el.style.height = `${el.scrollHeight}px`);
+  });
+  enrichChatCard(html);
 }

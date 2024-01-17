@@ -139,8 +139,8 @@
                         <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
                         <div class="name name-stacked">
                             <span class="title">{{ item.name }}</span>
-                            {{#if item.isActive}}
-                            <span class="subtitle">{{ item.labels.activation }}</span>
+                            {{#if ctx.subtitle}}
+                            <span class="subtitle">{{{ ctx.subtitle }}}</span>
                             {{/if}}
                         </div>
                     </div>

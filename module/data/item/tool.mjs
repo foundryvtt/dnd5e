@@ -96,10 +96,10 @@ export default class ToolData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
-   * Properties displayed in the item tooltip.
+   * Properties displayed on the item card.
    * @type {string[]}
    */
-  get tooltipProperties() {
+  get cardProperties() {
     return [CONFIG.DND5E.abilities[this.ability]?.label];
   }
 

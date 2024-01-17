@@ -13,10 +13,7 @@
             <img src="{{ img }}" alt="{{ name }}">
             <div class="name name-stacked">
                 <span class="title">{{ name }}</span>
-                <span class="subtitle">
-                    {{#if labels.level}}{{ labels.level }} &bull; {{/if}}
-                    {{ subtitle }}
-                </span>
+                <span class="subtitle">{{{ subtitle }}}</span>
             </div>
         </div>
         <div class="bottom">
@@ -77,7 +74,7 @@
         </li>
     </ul>
     {{/if}}
-    <section class="description">{{{ description }}}</section>
+    <section class="description">{{{ description.value }}}</section>
     <ul class="pills">
        {{#each properties}}
        <li class="pill maroon">

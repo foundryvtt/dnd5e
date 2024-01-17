@@ -171,10 +171,10 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
-   * Properties displayed in the item tooltip.
+   * Properties displayed on the item card.
    * @type {string[]}
    */
-  get tooltipProperties() {
+  get cardProperties() {
     return [
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
       this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null

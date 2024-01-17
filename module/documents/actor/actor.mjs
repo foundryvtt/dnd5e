@@ -3133,6 +3133,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _clearFavorites(documents) {
+    if ( !("favorites" in this.system) ) return;
     const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
     const favorites = this.system.favorites.filter(f => !ids.has(f.id));
     return this.update({ "system.favorites": favorites });

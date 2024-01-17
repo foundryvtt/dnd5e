@@ -1,0 +1,167 @@
+:is(.chat-popout, #chat-log) .message {
+  padding: .5rem;
+  border-width: 1px;
+  border-block-end-width: 2px;
+  border-radius: 6px;
+  font-family: var(--dnd5e-font-roboto);
+  font-size: var(--font-size-13);
+  position: relative;
+  background: var(--dnd5e-color-parchment);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: transparent url("ui/texture-gray1.webp") no-repeat top left;
+    border-radius: 6px;
+  }
+
+  > .message-header, > .message-content { position: relative; }
+
+  &.emote { background-color: #f3edde; }
+  &.whisper { background-color: #e8e8ef; }
+  &.whisper::before { filter: grayscale(1); }
+  &.blind { background-color: #f5eaf5; }
+  &.blind::before { mix-blend-mode: luminosity; }
+
+  /* Header */
+  .message-header {
+    margin-bottom: .375rem;
+
+    .message-sender {
+      display: flex;
+      align-items: start;
+      gap: .75rem;
+      white-space: unset;
+
+      .avatar {
+        height: 100%;
+        display: grid;
+        place-content: center;
+      }
+
+      img {
+        width: 38px;
+        height: 38px;
+        border-radius: 100%;
+        box-shadow: 0 0 6px rgb(0 0 0 / 85%);
+        object-fit: cover;
+        object-position: top;
+        border: none;
+        flex: none;
+        background: var(--dnd5e-color-light-gray);
+      }
+    }
+
+    .name-stacked {
+      flex: 1;
+      display: flex;
+      min-height: 32px;
+      flex-direction: column;
+      justify-content: center;
+      line-height: normal;
+    }
+
+    .title {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-size: var(--font-size-16);
+      font-weight: bold;
+      color: var(--color-text-dark-primary);
+    }
+
+    .subtitle {
+      font-size: var(--font-size-11);
+      color: var(--color-text-dark-5);
+    }
+
+    .message-metadata {
+      font-size: var(--font-size-10);
+      transform: translate(2px, -4px);
+      flex: none;
+    }
+
+    time { color: var(--color-text-dark-5); }
+
+    .flavor-text {
+      margin-block-start: 4px;
+      margin-block-end: -4px;
+      font-style: italic;
+    }
+  }
+}
+
+.dnd5e2.chat-card {
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+
+  .description {
+    padding: .5rem;
+    border: 1px solid var(--dnd5e-color-gold);
+    border-radius: 3px;
+    background: var(--dnd5e-color-card);
+    overflow: hidden;
+
+    .summary {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+
+
+      > img {
+        width: 32px;
+        height: 32px;
+        object-fit: cover;
+        background-color: var(--dnd5e-color-light-gray);
+      }
+
+      .name-stacked {
+        flex: 1;
+
+        &.border {
+          padding-right: .5rem;
+          border-right: 1px solid var(--color-border-light-1);
+        }
+      }
+
+      > i {
+        font-size: var(--font-size-14);
+        color: var(--color-text-dark-5);
+        margin-right: .25rem;
+        transition: all 250ms ease;
+      }
+    }
+
+    .details {
+      font-family: var(--dnd5e-font-roboto);
+      font-size: var(--font-size-11);
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      padding: 0;
+      transition: all 250ms ease;
+
+      p {
+        margin: 0;
+        &:first-child { padding-top: .5rem; }
+      }
+    }
+
+    &.collapsible .summary { cursor: pointer; }
+    &.collapsed {
+      .summary > i { transform: rotate(-90deg); }
+      .details { opacity: 0; }
+    }
+  }
+
+  .card-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: .375rem;
+  }
+
+  .pills .pill {
+    font-size: var(--font-size-10);
+    line-height: 1;
+  }
+}

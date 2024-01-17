@@ -1411,9 +1411,21 @@
       }
     }
 
-    .prosemirror menu .pm-dropdown {
-      background: none;
-      &:hover { background: var(--color-hover-bg); }
+    .prosemirror menu {
+      .pm-dropdown {
+        background: none;
+        &:hover { background: var(--color-hover-bg); }
+      }
+
+      button {
+        display: unset;
+        text-transform: unset;
+        box-shadow: none;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-14);
+        font-weight: normal;
+        line-height: 28px;
+      }
     }
   }
 

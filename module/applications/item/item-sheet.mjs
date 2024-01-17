@@ -339,10 +339,7 @@ export default class ItemSheet5e extends ItemSheet {
         return game.i18n.localize(this.item.system.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
       case "feat":
       case "consumable":
-        const name = this.item.type === "feat" ? "featureTypes" : "consumableTypes";
-        const typeConfig = CONFIG.DND5E[name][this.item.system.type.value];
-        if ( typeConfig?.subtypes ) return typeConfig.subtypes[this.item.system.type.subtype] ?? null;
-        break;
+        return this.item.system.type.label;
       case "spell":
         return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation];
       case "tool":

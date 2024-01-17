@@ -415,6 +415,27 @@
     transition: all 250ms ease;
   }
 
+  button {
+    background: var(--dnd5e-color-card);
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    font-size: var(--font-size-13);
+    text-transform: uppercase;
+    padding: .1875rem;
+    border: 1px solid var(--color-border-light-2);
+    box-shadow: 0 0 8px var(--dnd5e-shadow-15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .25rem;
+
+    &:disabled {
+      cursor: default;
+      color: var(--color-text-dark-inactive);
+    }
+    &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
+  }
+
   button.radio-button {
     width: 13px;
     height: 13px;
@@ -424,6 +445,7 @@
     padding: 3px;
     display: grid;
     border: none;
+    justify-content: unset;
 
     &:hover { filter: drop-shadow(0 0 6px var(--dnd5e-color-gold)); }
 
@@ -657,23 +679,6 @@
       text-align: center;
       margin-bottom: .75rem;
     }
-  }
-
-  button {
-    background: var(--dnd5e-color-card);
-    font-family: var(--dnd5e-font-roboto);
-    font-weight: bold;
-    font-size: var(--font-size-13);
-    text-transform: uppercase;
-    padding: .1875rem;
-    border: 1px solid var(--color-border-light-2);
-    box-shadow: 0 0 8px var(--dnd5e-shadow-15);
-
-    &:disabled {
-      cursor: default;
-      color: var(--color-text-dark-inactive);
-    }
-    &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
   }
 
   .dialog-buttons {
