@@ -25,6 +25,8 @@
   }
 
   &.locked-tooltip {
+    z-index: calc(var(--z-index-tooltip) - 1);
+
     &.dnd5e-tooltip::after {
       content: "";
       position: absolute;
