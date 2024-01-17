@@ -217,3 +217,18 @@ export function onRenderChatMessage(app, html, data) {
   });
   enrichChatCard(html);
 }
+
+/* -------------------------------------------- */
+
+/**
+ * Handle rendering a chat popout.
+ * @param {ChatPopout} app  The ChatPopout Application instance.
+ * @param {jQuery} html     The rendered Application HTML.
+ */
+export function onRenderChatPopout(app, [html]) {
+  const close = html.querySelector(".header-button.close");
+  close.innerHTML = '<i class="fas fa-times"></i>';
+  close.dataset.tooltip = game.i18n.localize("Close");
+  close.setAttribute("aria-label", close.dataset.tooltip);
+  html.querySelector(".message-metadata [data-context-menu]")?.remove();
+}

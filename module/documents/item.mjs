@@ -1942,6 +1942,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       const details = header.querySelector(".details");
       details.style.height = collapsed ? `${details.scrollHeight}px` : "0";
       header.classList.toggle("collapsed", !collapsed);
+
+      // Clear the height from the chat popout container so that it appropriately resizes.
+      const popout = header.closest(".chat-popout");
+      if ( popout ) popout.style.height = "";
     }
   }
 

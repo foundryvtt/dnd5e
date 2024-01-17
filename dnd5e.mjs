@@ -436,6 +436,7 @@ Hooks.on("renderSettings", () => {
 /* -------------------------------------------- */
 
 Hooks.on("renderChatMessage", documents.chat.onRenderChatMessage);
+Hooks.on("renderChatPopout", documents.chat.onRenderChatPopout);
 Hooks.on("getChatLogEntryContext", documents.chat.addChatMessageContextOptions);
 
 Hooks.on("renderChatLog", (app, html, data) => documents.Item5e.chatListeners(html));
