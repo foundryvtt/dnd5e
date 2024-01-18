@@ -162,6 +162,8 @@ export default class CharacterData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   getRollData({ deterministic=false }={}) {

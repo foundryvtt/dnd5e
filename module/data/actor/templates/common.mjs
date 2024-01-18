@@ -113,6 +113,8 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
   }
 
   /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
 
   /**
    * Prepare a data object which defines the data schema used by dice roll commands against this Actor.

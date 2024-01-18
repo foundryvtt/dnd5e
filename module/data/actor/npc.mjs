@@ -193,6 +193,8 @@ export default class NPCData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   getRollData({ deterministic=false }={}) {

@@ -144,6 +144,8 @@ export default class VehicleData extends CommonTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   getRollData({ deterministic=false }={}) {
