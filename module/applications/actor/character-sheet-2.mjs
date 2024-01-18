@@ -270,10 +270,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     };
 
     // Skills & Tools
-    for ( const entry of Object.values(context.skills).concat(Object.values(context.tools)) ) {
+    for ( const [key, entry] of Object.entries(context.skills).concat(Object.entries(context.tools)) ) {
       entry.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? entry.baseValue : entry.value];
       entry.sign = Math.sign(entry.total) < 0 ? "-" : "+";
       entry.mod = Math.abs(entry.total);
+      if ( key in CONFIG.DND5E.skills ) entry.reference = CONFIG.DND5E.skills[key].reference;
+      else if ( key in CONFIG.DND5E.toolIds ) entry.reference = Trait.getBaseItemUUID(CONFIG.DND5E.toolIds[key]);
     }
 
     // Character Background
@@ -282,7 +284,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       icon: CONFIG.DND5E.creatureTypes[details.type.value]?.icon ?? "/icons/svg/mystery-man.svg",
       title: details.type.value === "custom"
         ? details.type.custom
-        : CONFIG.DND5E.creatureTypes[details.type.value].label,
+        : CONFIG.DND5E.creatureTypes[details.type.value]?.label,
+      reference: CONFIG.DND5E.creatureTypes[details.type.value]?.reference,
       subtitle: details.type.subtype
     };
 
@@ -370,7 +373,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     // Characteristics
     context.characteristics = [
-      "alignment", "eyes", "height", "faith", "hair", "weight", "gender", "skin", "age",
+      "alignment", "eyes", "height", "faith", "hair", "weight", "gender", "skin", "age"
     ].map(k => {
       const fields = CharacterData.schema.fields.details.fields;
       const field = fields[k];
@@ -499,7 +502,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         minute: "DND5E.TimeMinuteAbbr",
         hour: "DND5E.TimeHourAbbr",
         day: "DND5E.TimeDayAbbr"
-      }[system.activation.type]
+      }[system.activation.type];
       ctx.activation = cost && abbr ? `${cost}${game.i18n.localize(abbr)}` : item.labels.activation;
 
       // Range
@@ -583,6 +586,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
     html.find(".sidebar .collapser").on("click", this._onToggleSidebar.bind(this));
     this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
+    this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
 
     // Prevent default middle-click scrolling when locking a tooltip.
     this.form.addEventListener("pointerdown", event => {
@@ -706,6 +710,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /**
    * Handle toggling a pip on the character sheet.
    * @param {PointerEvent} event  The triggering event.
+   * @returns {Promise<Actor5e>|void}
    * @protected
    */
   _onTogglePip(event) {
@@ -747,7 +752,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const tab = tray.querySelector(".death-tab");
     tray.classList.toggle("open", open);
     this._deathTrayOpen = tray.classList.contains("open");
-    tab.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`
+    tab.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`;
     tab.setAttribute("aria-label", game.i18n.localize(tab.dataset.tooltip));
   }
 
@@ -828,6 +833,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /**
    * Handle creating a new embedded child.
+   * @returns {ActiveEffect5e|Item5e|void}
    * @protected
    */
   _onCreateChild() {
@@ -883,7 +889,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _onToggleSpellcasting(event) {
     const ability = event.currentTarget.closest("[data-ability]")?.dataset.ability;
-    return this.actor.update({ "system.attributes.spellcasting": ability });
+    this.actor.update({ "system.attributes.spellcasting": ability });
   }
 
   /* -------------------------------------------- */
@@ -907,6 +913,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     `;
     element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
     element.dataset.tooltipDirection ??= "LEFT";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Initialize a rule tooltip on an element.
+   * @param {HTMLElement} element  The tooltipped element.
+   * @protected
+   */
+  _applyReferenceTooltips(element) {
+    if ( "tooltip" in element.dataset ) return;
+    const uuid = element.dataset.referenceTooltip;
+    element.dataset.tooltip = `
+      <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+    `;
   }
 
   /* -------------------------------------------- */
@@ -941,7 +962,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const abilityId = event.currentTarget.closest("[data-ability]").dataset.ability;
     const isSavingThrow = event.currentTarget.classList.contains("saving-throw");
     if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
-    else this.actor.rollAbilityTest(abilityId, { event })
+    else this.actor.rollAbilityTest(abilityId, { event });
   }
 
   /* -------------------------------------------- */
@@ -972,7 +993,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     let data;
     try {
       data = JSON.parse(dragData);
-    } catch (e) {
+    } catch(e) {
       console.error(e);
       return;
     }
@@ -1030,6 +1051,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /**
    * Handle removing a favorite.
    * @param {PointerEvent} event  The triggering event.
+   * @returns {Promise<Actor5e>|void}
    * @protected
    */
   _onRemoveFavorite(event) {
@@ -1046,6 +1068,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * Handle re-ordering the favorites list.
    * @param {DragEvent} event  The drop event.
    * @param {string} srcId     The identifier of the dropped favorite.
+   * @returns {Promise<Actor5e>|void}
    * @protected
    */
   _onSortFavorites(event, srcId) {
@@ -1074,6 +1097,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /**
    * Handle using a favorited item.
    * @param {PointerEvent} event  The triggering event.
+   * @returns {Promise|void}
    * @protected
    */
   _onUseFavorite(event) {
@@ -1121,7 +1145,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       else data = await this._getFavoriteData(type, id);
       if ( !data ) return arr;
       let {
-        img, title, subtitle, value, uses, quantity, modifier, passive, save, range, toggle, suppressed, level
+        img, title, subtitle, value, uses, quantity, modifier, passive,
+        save, range, reference, toggle, suppressed, level
       } = data;
 
       const css = [];
@@ -1147,7 +1172,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
       if ( suppressed ) subtitle = game.i18n.localize("DND5E.Suppressed");
       arr.push({
-        id, img, type, title, value, uses, sort, save, modifier, passive, range, suppressed, level,
+        id, img, type, title, value, uses, sort, save, modifier, passive, range, reference, suppressed, level,
         itemId: type === "item" ? favorite.id : null,
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
@@ -1204,9 +1229,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       });
       let img;
       let title;
-      if ( type === "tool" ) ({ img, name: title } = Trait.getBaseItem(CONFIG.DND5E.toolIds[id], { indexOnly: true }));
-      else if ( type === "skill" ) ({ icon: img, label: title } = CONFIG.DND5E.skills[id]);
-      return { img, title, subtitle, modifier: total, passive };
+      let reference;
+      if ( type === "tool" ) {
+        reference = Trait.getBaseItemUUID(CONFIG.DND5E.toolIds[id]);
+        ({ img, name: title } = Trait.getBaseItem(reference, { indexOnly: true }));
+      }
+      else if ( type === "skill" ) ({ icon: img, label: title, reference } = CONFIG.DND5E.skills[id]);
+      return { img, title, subtitle, modifier: total, passive, reference };
     }
   }
 }

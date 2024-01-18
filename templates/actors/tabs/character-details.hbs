@@ -10,7 +10,8 @@
         {{else}}
         <div class="ability roboto-upper">{{ abbreviation }}</div>
         {{/if}}
-        <a class="name {{ @root.rollableClass }} {{ roll }}">{{ label }}</a>
+        <a class="name {{ @root.rollableClass }} {{ roll }}"
+           {{~#if reference}} data-reference-tooltip="{{ reference }}"{{/if}}>{{ label }}</a>
         <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
         {{#if @root.editable}}
         <a class="config-button" data-action="{{ type }}" data-tooltip="{{ config }}"
@@ -136,10 +137,12 @@
             {{!-- Background --}}
             <div class="pills-lg">
                 {{#with creatureType}}
-                <div class="pill-lg texture type">
+                <div class="pill-lg texture type" {{#if reference}}data-reference-tooltip="{{reference}}"{{/if}}>
                     <div class="gold-icon creature-type {{ class }}" style="background-image: url('{{ icon }}');"></div>
                     <div class="name name-stacked">
-                        <span class="title">{{ localize title }}</span>
+                        <span class="title">
+                            {{ localize title }}
+                        </span>
                         <span class="subtitle">{{ subtitle }}</span>
                     </div>
                     {{#if @root.editable}}
