@@ -111,19 +111,4 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     const s = original.split(" ");
     if ( s.length > 0 ) source.attributes.movement.walk = Number.isNumeric(s[0]) ? parseInt(s[0]) : 0;
   }
-
-  /* -------------------------------------------- */
-  /*  Helpers                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare a data object which defines the data schema used by dice roll commands against this Actor.
-   * @param {object} [options]
-   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
-   *                                            either a die term or a flat term.
-   * @returns {object}
-   */
-  getRollData({ deterministic=false }={}) {
-    return {...this};
-  }
 }

@@ -1791,23 +1791,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *                                          either a die term or a flat term.
    */
   getRollData({ deterministic=false }={}) {
-    if ( !this.actor ) return null;
-    const actorRollData = this.actor.getRollData({ deterministic });
-    const rollData = {
-      ...actorRollData,
-      item: this.toObject().system
-    };
-
-    // Include an ability score modifier if one exists
-    const abl = this.abilityMod;
-    if ( abl && ("abilities" in rollData) ) {
-      const ability = rollData.abilities[abl];
-      if ( !ability ) {
-        console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${abl} defined`);
-      }
-      rollData.mod = ability?.mod ?? 0;
+    let data;
+    if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
+    else {
+      if ( !this.actor ) return null;
+      data = { ...this.actor.getRollData({ deterministic }), item: this.toObject().system };
     }
-    return rollData;
+    if ( data?.item ) data.item.flags = { ...this.flags };
+    return data;
   }
 
   /* -------------------------------------------- */
