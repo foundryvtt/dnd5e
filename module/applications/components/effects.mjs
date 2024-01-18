@@ -192,12 +192,13 @@ export default class EffectsElement extends HTMLElement {
   /**
    * Handle toggling a condition.
    * @param {string} conditionId  The condition identifier.
+   * @returns {Promise}
    * @protected
    */
-  _onToggleCondition(conditionId) {
+  async _onToggleCondition(conditionId) {
     const existing = this.document.effects.get(staticID(`dnd5e${conditionId}`));
     if ( existing ) return existing.delete();
-    const effect = ActiveEffect.implementation.fromStatusEffect(conditionId);
+    const effect = await ActiveEffect.implementation.fromStatusEffect(conditionId);
     return ActiveEffect.implementation.create(effect, { parent: this.document, keepId: true });
   }
 
