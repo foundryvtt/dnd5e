@@ -2436,6 +2436,10 @@ DND5E.statusEffects = {
   dead: {
     icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
   },
+  dodging: {
+    name: "EFFECT.DND5E.StatusDodging",
+    icon: "systems/dnd5e/icons/svg/statuses/dodging.svg"
+  },
   fly: {},
   hidden: {
     name: "EFFECT.DND5E.StatusHidden",
