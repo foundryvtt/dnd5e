@@ -150,7 +150,7 @@
                     {{/if}}
                 </div>
                 {{/with}}
-                {{#if system.details.race}}
+                {{#if race}}
                 <div class="pill-lg texture race item-tooltip" data-action="edit"
                      data-item-id="{{ system.details.race.id }}"
                      aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
@@ -179,7 +179,7 @@
                     {{ localize "DND5E.RaceAdd" }}
                 </div>
                 {{/if}}
-                {{#if system.details.background}}
+                {{#if background}}
                 <div class="pill-lg texture background item-tooltip" data-action="edit"
                      data-item-id="{{ system.details.background.id }}"
                      aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">

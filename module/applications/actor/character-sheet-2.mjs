@@ -276,7 +276,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       entry.mod = Math.abs(entry.total);
     }
 
-    // Creature Type
+    // Character Background
     context.creatureType = {
       class: details.type.value === "custom" ? "none" : "",
       icon: CONFIG.DND5E.creatureTypes[details.type.value]?.icon ?? "/icons/svg/mystery-man.svg",
@@ -285,6 +285,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         : CONFIG.DND5E.creatureTypes[details.type.value].label,
       subtitle: details.type.subtype
     };
+
+    if ( details.race instanceof dnd5e.documents.Item5e ) context.race = details.race;
+    if ( details.background instanceof dnd5e.documents.Item5e ) context.background = details.background;
 
     // Senses
     context.senses = Object.entries(CONFIG.DND5E.senses).reduce((obj, [k, label]) => {
@@ -467,9 +470,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       const spells = foundry.utils.getProperty(this.actor.system.spells, section.prop);
       const max = spells.override ?? spells.max ?? 0;
       section.pips = Array.fromRange(max, 1).map(n => {
-        const label = game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n });
-        const classes = ["pip"];
         const filled = spells.value >= n;
+        const label = filled
+          ? game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n })
+          : game.i18n.localize("DND5E.SpellSlotExpended");
+        const classes = ["pip"];
         if ( filled ) classes.push("filled");
         return { n, label, filled, tooltip: label, classes: classes.join(" ") };
       });
@@ -827,15 +832,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _onCreateChild() {
     const activeTab = this._tabs?.[0]?.active ?? "details";
+
     if ( activeTab === "effects" ) return ActiveEffect.implementation.create({
       name: game.i18n.localize("DND5E.EffectNew"),
       icon: "icons/svg/aura.svg"
     }, { parent: this.actor, renderSheet: true });
 
+    if ( activeTab === "spells" ) return Item.implementation.create({
+      name: game.i18n.format("DOCUMENT.New", { type: game.i18n.format(CONFIG.Item.typeLabels.spell) }),
+      type: "spell",
+      img: Item.implementation.getDefaultArtwork({ type: "spell" })?.img ?? Item.implementation.DEFAULT_ICON
+    }, { parent: this.actor, renderSheet: true });
+
     let types = {
       inventory: ["weapon", "equipment", "consumable", "tool", "container", "loot"],
-      features: ["feat", "race", "background", "class", "subclass"],
-      spells: ["spell"]
+      features: ["feat", "race", "background", "class", "subclass"]
     }[activeTab] ?? [];
 
     types = types.filter(type => {
