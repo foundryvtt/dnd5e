@@ -1134,7 +1134,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       else data = await this._getFavoriteData(type, id);
       if ( !data ) return arr;
       let {
-        img, title, subtitle, value, uses, quantity, modifier, passive, save, range, toggle, suppressed, level
+        img, title, subtitle, value, uses, quantity, modifier, passive,
+        save, range, reference, toggle, suppressed, level
       } = data;
 
       const css = [];
@@ -1160,7 +1161,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
       if ( suppressed ) subtitle = game.i18n.localize("DND5E.Suppressed");
       arr.push({
-        id, img, type, title, value, uses, sort, save, modifier, passive, range, suppressed, level,
+        id, img, type, title, value, uses, sort, save, modifier, passive, range, reference, suppressed, level,
         itemId: type === "item" ? favorite.id : null,
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
@@ -1217,9 +1218,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       });
       let img;
       let title;
-      if ( type === "tool" ) ({ img, name: title } = Trait.getBaseItem(CONFIG.DND5E.toolIds[id], { indexOnly: true }));
-      else if ( type === "skill" ) ({ icon: img, label: title } = CONFIG.DND5E.skills[id]);
-      return { img, title, subtitle, modifier: total, passive };
+      let reference;
+      if ( type === "tool" ) {
+        reference = Trait.getBaseItemUUID(CONFIG.DND5E.toolIds[id]);
+        ({ img, name: title } = Trait.getBaseItem(reference, { indexOnly: true }));
+      }
+      else if ( type === "skill" ) ({ icon: img, label: title, reference } = CONFIG.DND5E.skills[id]);
+      return { img, title, subtitle, modifier: total, passive, reference };
     }
   }
 }

@@ -137,10 +137,10 @@
             {{!-- Background --}}
             <div class="pills-lg">
                 {{#with creatureType}}
-                <div class="pill-lg texture type">
+                <div class="pill-lg texture type" {{#if reference}}data-reference-tooltip="{{reference}}"{{/if}}>
                     <div class="gold-icon creature-type {{ class }}" style="background-image: url('{{ icon }}');"></div>
                     <div class="name name-stacked">
-                        <span class="title" {{#if reference}}data-reference-tooltip="{{reference}}"{{/if}}>
+                        <span class="title">
                             {{ localize title }}
                         </span>
                         <span class="subtitle">{{ subtitle }}</span>
