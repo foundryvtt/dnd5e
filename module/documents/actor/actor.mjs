@@ -199,17 +199,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    *                                            either a die term or a flat term.
    */
   getRollData({ deterministic=false }={}) {
-    const data = {...super.getRollData()};
-    if ( this.type === "group" ) return data;
-    data.prof = new Proficiency(this.system.attributes.prof, 1);
-    if ( deterministic ) data.prof = data.prof.flat;
-    data.attributes = foundry.utils.deepClone(data.attributes);
-    data.attributes.spellmod = data.abilities[data.attributes.spellcasting || "int"]?.mod ?? 0;
-    data.classes = {};
-    for ( const [identifier, cls] of Object.entries(this.classes) ) {
-      data.classes[identifier] = {...cls.system};
-      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
-    }
+    let data;
+    if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
+    else data = {...super.getRollData()};
+    data.flags = {...this.flags};
     return data;
   }
 
@@ -642,9 +635,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _prepareSpellcasting() {
     if ( !this.system.spells ) return;
 
-    // Spellcasting DC
+    // Spellcasting DC and modifier
     const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
     this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
+    this.system.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
 
     // Translate the list of classes into spellcasting progression
     const progression = { slot: 0, pact: 0 };
