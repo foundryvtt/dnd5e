@@ -2016,6 +2016,7 @@ preLocalize("spellTags", { keys: ["label", "abbr"] });
  *
  * @typedef {object} SpellSchoolConfiguration
  * @property {string} label        Localized label.
+ * @property {string} icon         Spell school icon.
  * @property {string} fullKey      Fully written key used as alternate for enrichers.
  * @property {string} [reference]  Reference to a rule page describing this school.
  */
@@ -2027,41 +2028,49 @@ preLocalize("spellTags", { keys: ["label", "abbr"] });
 DND5E.spellSchools = {
   abj: {
     label: "DND5E.SchoolAbj",
+    icon: "systems/dnd5e/icons/svg/schools/abjuration.svg",
     fullKey: "abjuration",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.849AYEWw9FHD6JNz"
   },
   con: {
     label: "DND5E.SchoolCon",
+    icon: "systems/dnd5e/icons/svg/schools/conjuration.svg",
     fullKey: "conjuration",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TWyKMhZJZGqQ6uls"
   },
   div: {
     label: "DND5E.SchoolDiv",
+    icon: "systems/dnd5e/icons/svg/schools/divination.svg",
     fullKey: "divination",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.HoD2MwzmVbMqj9se"
   },
   enc: {
     label: "DND5E.SchoolEnc",
+    icon: "systems/dnd5e/icons/svg/schools/enchantment.svg",
     fullKey: "enchantment",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.SehPXk24ySBVOwCZ"
   },
   evo: {
     label: "DND5E.SchoolEvo",
+    icon: "systems/dnd5e/icons/svg/schools/evocation.svg",
     fullKey: "evocation",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.kGp1RNuxL2SELLRC"
   },
   ill: {
     label: "DND5E.SchoolIll",
+    icon: "systems/dnd5e/icons/svg/schools/illusion.svg",
     fullKey: "illusion",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.smEk7kvVyslFozrB"
   },
   nec: {
     label: "DND5E.SchoolNec",
+    icon: "systems/dnd5e/icons/svg/schools/necromancy.svg",
     fullKey: "necromancy",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.W0eyiV1FBmngb6Qh"
   },
   trs: {
     label: "DND5E.SchoolTrs",
+    icon: "systems/dnd5e/icons/svg/schools/transmutation.svg",
     fullKey: "transmutation",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.IYWewSailtmv6qEb"
   }

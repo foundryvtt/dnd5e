@@ -2,11 +2,9 @@
     <section class="header">
         {{#if school}}
         <div class="school">
-            {{#if (eq school "con")}}
-            <dnd5e-icon src="systems/dnd5e/icons/svg/schools/conj.svg"></dnd5e-icon>
-            {{else}}
-            <dnd5e-icon src="systems/dnd5e/icons/svg/schools/{{ school }}.svg"></dnd5e-icon>
-            {{/if}}
+            {{#with (lookup @root.config.spellSchools school) as |schoolConfig|}}
+            <dnd5e-icon src="{{ schoolConfig.icon }}"></dnd5e-icon>
+            {{/with}}
         </div>
         {{/if}}
         <div class="top">
