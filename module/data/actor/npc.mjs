@@ -1,3 +1,4 @@
+import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import SourceField from "../shared/source-field.mjs";
@@ -200,5 +201,17 @@ export default class NPCData extends CreatureTemplate {
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
     TraitsFields.prepareResistImmune.call(this);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getRollData({ deterministic=false }={}) {
+    const data = {...this};
+    data.prof = new Proficiency(this.attributes.prof, 1);
+    if ( deterministic ) data.prof = data.prof.flat;
+    return data;
   }
 }
