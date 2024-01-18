@@ -125,6 +125,10 @@ export default class ItemSheet5e extends ItemSheet {
       isFormulaRecharge: item.system.uses?.per in CONFIG.DND5E.limitedUseFormulaPeriods,
       isCostlessAction: item.system.activation?.type in CONFIG.DND5E.staticAbilityActivationTypes,
 
+      // Identified state
+      isIdentifiable: "identified" in item.system,
+      isIdentified: item.system.identified !== false,
+
       // Vehicles
       isCrewed: item.system.activation?.type === "crew",
 

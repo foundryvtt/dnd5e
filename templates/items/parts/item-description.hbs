@@ -65,7 +65,7 @@
     </div>
 
     <div class="item-description">
-    {{#if (or system.identified user.isGM)}}
+    {{#if (or isIdentified user.isGM)}}
 
     {{#if (or editable system.description.value)}}
         {{#if editable}}
@@ -80,7 +80,7 @@
         {{editor enriched.description target="system.description.value" editable=false engine="prosemirror"}}
     {{/if}}
 
-    {{#if (and (or editable system.unidentified.description) user.isGM)}}
+    {{#if (and (or editable system.unidentified.description) isIdentifiable user.isGM)}}
         <h3 class="description-header">
             <i class="accordion-indicator fa-solid fa-chevron-down"></i>
             {{localize "DND5E.DescriptionUnidentified"}}
