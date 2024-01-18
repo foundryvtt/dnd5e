@@ -3076,7 +3076,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Handle syncing the Actor's exhaustion level with the ActiveEffect.
    * @param {object} data                          The Actor's update delta.
    * @param {DocumentModificationContext} options  Additional options supplied with the update.
-   * @returns {Promise<ActiveEffect>|void}
+   * @returns {Promise<ActiveEffect|void>}
    * @protected
    */
   async _onUpdateExhaustion(data, options) {

@@ -41,7 +41,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * Create an ActiveEffect instance from some status effect data.
    * @param {string|object} effectData               The status effect ID or its data.
    * @param {DocumentModificationContext} [options]  Additional options to pass to ActiveEffect instantiation.
-   * @returns {ActiveEffect5e|void}
+   * @returns {Promise<ActiveEffect5e|void>}
    */
   static async fromStatusEffect(effectData, options={}) {
     if ( typeof effectData === "string" ) effectData = CONFIG.statusEffects.find(e => e.id === effectData);
