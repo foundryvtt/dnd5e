@@ -119,12 +119,9 @@
                     {{!-- Spell School --}}
                     <div class="item-detail item-school" data-tooltip="{{ item.labels.school }}"
                          aria-label="{{ item.labels.school }}">
-                        {{#if (eq item.system.school "con")}}
-                        {{!-- "CON" is a reserved filename on Windows so we can't call our SVG "con.svg" --}}
-                        <dnd5e-icon src="systems/dnd5e/icons/svg/schools/conj.svg"></dnd5e-icon>
-                        {{else}}
-                        <dnd5e-icon src="systems/dnd5e/icons/svg/schools/{{ item.system.school }}.svg"></dnd5e-icon>
-                        {{/if}}
+                        {{#with (lookup @root.config.spellSchools item.system.school) as |schoolConfig|}}
+                        <dnd5e-icon src="{{ schoolConfig.icon }}"></dnd5e-icon>
+                        {{/with}}
                     </div>
 
                     {{!-- Cast Time --}}
