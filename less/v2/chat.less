@@ -90,6 +90,130 @@
   }
 }
 
+/* Rolls */
+.dice-result {
+  display: flex;
+  flex-direction: column;
+
+  .dice-formula, .dice-total {
+    border-radius: 3px;
+    background: var(--dnd5e-background-5);
+    padding: .25rem;
+    line-height: normal;
+    flex: auto;
+    margin: 0;
+  }
+
+  .dice-total {
+    font-weight: bold;
+    font-size: var(--font-size-28);
+    padding: .125rem;
+    margin-top: .25rem;
+    font-family: var(--font-primary);
+    position: relative;
+
+    &::before, &::after {
+      position: absolute;
+      inset: 6px 0 6px auto;
+    }
+
+    &::before {
+      content: "";
+      width: 36px;
+      border-left: 1px solid #bbb;
+    }
+
+    &::after {
+      content: "\f054";
+      font-family: var(--font-awesome);
+      display: grid;
+      place-content: center;
+      padding: 0 .8125rem;
+      color: var(--color-text-dark-5);
+      font-size: var(--font-size-16);
+      transition: all 250ms ease;
+    }
+
+    &.success, &.critical {
+      background: var(--dnd5e-color-success-background);
+      border: 1px solid var(--dnd5e-color-success);
+      color: var(--dnd5e-color-success-critical);
+    }
+
+    &.failure, &.fumble {
+      background: var(--dnd5e-color-failure-background);
+      border: 1px solid var(--dnd5e-color-failure);
+      color: var(--dnd5e-color-failure-critical);
+    }
+  }
+
+  .dice-tooltip {
+    flex: auto;
+    order: unset;
+    display: block;
+    overflow: hidden;
+    transition: all 250ms ease;
+
+    .tooltip-part {
+      border-bottom: 1px solid var(--color-border-light-1);
+      padding: .125rem 0;
+
+      &:last-child {
+        border: none;
+        padding-bottom: 0;
+      }
+
+      &.constant {
+        padding-right: 6px;
+        min-height: 40px;
+        display: grid;
+      }
+    }
+
+    .dice {
+      display: flex;
+      align-items: center;
+
+      .dice-rolls {
+        flex: 1;
+        margin: 5px 0 5px 10px;
+      }
+
+      .total {
+        flex-basis: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .label {
+          font-family: var(--dnd5e-font-roboto-condensed);
+          font-size: var(--font-size-10);
+          color: var(--color-text-dark-5);
+          text-transform: uppercase;
+          text-align: center;
+        }
+
+        .value {
+          font-family: var(--font-primary);
+          font-weight: bold;
+          font-size: var(--font-size-20);
+        }
+
+        .sign {
+          color: var(--color-text-light-6);
+          font-weight: normal;
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+}
+
+.dice-roll {
+  cursor: pointer;
+  &.expanded .dice-total::after { transform: rotate(-90deg); }
+}
+
 .chat-popout {
   margin: 0;
   background: none;
@@ -136,6 +260,8 @@
   display: flex;
   flex-direction: column;
   gap: .375rem;
+
+  + .dice-roll { margin-top: .375rem; }
 
   .description {
     padding: .5rem;

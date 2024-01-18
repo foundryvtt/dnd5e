@@ -706,6 +706,21 @@ function createRollLabel(config) {
       return "";
   }
 
+  if ( config.icon ) {
+    switch ( config.type ) {
+      case "check":
+      case "skill":
+        label = `<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/ability-score-improvement.svg"></i>${label}`;
+        break;
+      case "tool":
+        label = `<i class="fas fa-hammer"></i>${label}`;
+        break;
+      case "save":
+        label = `<i class="fas fa-shield-heart"></i>${label}`;
+        break;
+    }
+  }
+
   return label;
 }
 
@@ -819,7 +834,7 @@ async function rollAction(event) {
       user: game.user.id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
-        buttonLabel: createRollLabel({ ...target.dataset, format: "short" }),
+        buttonLabel: createRollLabel({ ...target.dataset, format: "short", icon: true }),
         dataset: { ...target.dataset, action: "rollRequest" }
       }),
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),

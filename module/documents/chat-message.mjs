@@ -1,3 +1,6 @@
+import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
+import DamageRoll from "../dice/damage-roll.mjs";
+
 /**
  * Highlight critical success or failure on d20 rolls.
  * @param {ChatMessage} message  Message being prepared.
@@ -5,7 +8,7 @@
  * @param {object} data          Configuration data passed to the message.
  */
 export function highlightCriticalSuccessFailure(message, html, data) {
-  if ( !message.isRoll || !message.isContentVisible || !message.rolls.length ) return;
+  if ( !message.isContentVisible || !message.rolls.length ) return;
 
   // Highlight rolls where the first part is a d20 roll
   for ( let [index, d20Roll] of message.rolls.entries() ) {
@@ -53,7 +56,7 @@ export function displayChatActionButtons(message, html, data) {
     // Otherwise conceal action buttons except for saving throw
     const buttons = chatCard.find("button[data-action]");
     buttons.each((i, btn) => {
-      if ( btn.dataset.action === "save" ) return;
+      if ( (btn.dataset.action === "save") || (btn.dataset.action === "rollRequest") ) return;
       btn.style.display = "none";
     });
   }
@@ -192,6 +195,87 @@ function enrichChatCard([html]) {
     icon.src = el.dataset.src;
     el.replaceWith(icon);
   });
+
+  // Enriched roll flavor
+  const roll = message.getFlag("dnd5e", "roll");
+  const item = fromUuidSync(roll?.itemUuid);
+  if ( item ) {
+    const subtitle = roll.type === "damage"
+      ? game.i18n.localize("DND5E.DamageRoll")
+      : roll.type === "attack"
+        ? game.i18n.localize(`DND5E.Action${item.system.actionType.toUpperCase()}`)
+        : item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
+    const flavor = document.createElement("div");
+    flavor.classList.add("dnd5e2", "chat-card");
+    flavor.innerHTML = `
+      <section class="card-header description">
+        <header class="summary">
+          <img class="gold-icon" src="${item.img}" alt="${item.name}">
+          <div class="name-stacked">
+            <span class="title">${item.name}</span>
+            <span class="subtitle">${subtitle}</span>
+          </div>
+        </header>
+      </section>
+    `;
+    html.querySelector(".message-header .flavor-text").remove();
+    html.querySelector(".message-content").insertAdjacentElement("afterbegin", flavor);
+  }
+
+  // Dice rolls
+  html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", onClickDiceRoll));
+  html.querySelectorAll(".dice-tooltip").forEach((el, i) => {
+    el.style.height = "0";
+    const roll = message.rolls[i];
+    if ( roll instanceof DamageRoll ) enrichDamageTooltip(roll, el);
+    else enrichRollTooltip(message.rolls[i], el);
+  });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Augment roll tooltips with some additional information and styling.
+ * @param {Roll} roll            The roll instance.
+ * @param {HTMLDivElement} html  The roll tooltip markup.
+ */
+function enrichRollTooltip(roll, html) {
+  const constant = Number(simplifyRollFormula(roll.formula, { deterministic: true }));
+  if ( !constant ) return;
+  const sign = constant < 0 ? "-" : "+";
+  const part = document.createElement("section");
+  part.classList.add("tooltip-part", "constant");
+  part.innerHTML = `
+    <div class="dice">
+      <ol class="dice-rolls"></ol>
+      <div class="total">
+        <span class="value"><span class="sign">${sign}</span>${Math.abs(constant)}</span>
+      </div>
+    </div>
+  `;
+  html.appendChild(part);
+}
+
+/* -------------------------------------------- */
+
+
+function enrichDamageTooltip(roll, html) {
+  // TODO
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Handle dice roll expansion.
+ * @param {PointerEvent} event  The triggering event.
+ */
+function onClickDiceRoll(event) {
+  event.stopPropagation();
+  const target = event.currentTarget;
+  target.classList.toggle("expanded");
+  const expanded = target.classList.contains("expanded");
+  const tooltip = target.querySelector(".dice-tooltip");
+  tooltip.style.height = expanded ? `${tooltip.scrollHeight}px` : "0";
 }
 
 /* -------------------------------------------- */

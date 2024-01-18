@@ -1938,10 +1938,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const content = card.querySelector(".card-content:not(.details)");
     if ( content ) content.style.display = content.style.display === "none" ? "block" : "none";
     if ( header.classList.contains("collapsible") ) {
+      header.classList.toggle("collapsed");
       const collapsed = header.classList.contains("collapsed");
       const details = header.querySelector(".details");
-      details.style.height = collapsed ? `${details.scrollHeight}px` : "0";
-      header.classList.toggle("collapsed", !collapsed);
+      details.style.height = collapsed ? "0" : `${details.scrollHeight}px`;
 
       // Clear the height from the chat popout container so that it appropriately resizes.
       const popout = header.closest(".chat-popout");
