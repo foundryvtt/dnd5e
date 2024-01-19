@@ -4,15 +4,6 @@
 export default class Token5e extends Token {
 
   /**
-   * Token Ring flag data
-   * @typedef {object} TokenRingFlagData
-   * @property {object} colors                         The colors data
-   * @property {string|number} [colors.ring]           The ring color
-   * @property {string|number} [colors.background]     The background color
-   * @property {number} effects                        The effect value (composited with bitwise operations)
-   */
-
-  /**
    * Token ring attributes
    * @type {{bkgName: string, ringName: string,
    * ringColorLittleEndian: number, bkgColorLittleEndian: number, effects: number}}
@@ -20,8 +11,8 @@ export default class Token5e extends Token {
   tokenRing = {
     ringName: undefined,
     bkgName: undefined,
-    ringColorLittleEndian: 0xFFFFFF, // little endian format => BBGGRR
-    bkgColorLittleEndian: 0xFFFFFF,  // little endian format => BBGGRR
+    ringColorLittleEndian: 0xFFFFFF, // Little endian format => BBGGRR
+    bkgColorLittleEndian: 0xFFFFFF,  // Little endian format => BBGGRR
     effects: 0
   };
 
@@ -139,7 +130,7 @@ export default class Token5e extends Token {
 
     // Do we need to trigger a full redraw? We need to do so if a token ring texture has been updated
     const dataFlag = data.flags.dnd5e.tokenRing;
-    const redraw = ("textures" in dataFlag || "enabled" in dataFlag);
+    const redraw = ("textures" in dataFlag) || ("enabled" in dataFlag);
     if ( redraw ) return this.renderFlags.set({redraw});
 
     // If we don't need a full redraw, we're just updating the visuals properties
@@ -229,8 +220,8 @@ export default class Token5e extends Token {
     this.tokenRing = {
       ringName: undefined,
       bkgName: undefined,
-      ringColorLittleEndian: 0xFFFFFF, // little endian format => BBGGRR
-      bkgColorLittleEndian: 0xFFFFFF,  // little endian format => BBGGRR
+      ringColorLittleEndian: 0xFFFFFF, // Little endian format => BBGGRR
+      bkgColorLittleEndian: 0xFFFFFF,  // Little endian format => BBGGRR
       effects: (invisible ? game.dnd5e.tokenRings.effects.INVISIBILITY : game.dnd5e.tokenRings.effects.DISABLED)
     };
   }

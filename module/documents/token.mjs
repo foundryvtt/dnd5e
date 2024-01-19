@@ -1,3 +1,4 @@
+import TokenSystemFlags from "../data/token/token-system-flags.mjs";
 import { staticID } from "../utils.mjs";
 
 /**
@@ -18,6 +19,30 @@ export default class TokenDocument5e extends TokenDocument {
       if ( item.type === "backpack" ) item.type = "container";
     }
     return super._initializeSource(data, options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    if ( "dnd5e" in this.flags ) this.flags.dnd5e = new TokenSystemFlags(this._source.flags.dnd5e, { parent: this });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async setFlag(scope, key, value) {
+    if ( scope === "dnd5e" ) {
+      let diff;
+      const changes = foundry.utils.expandObject({ [key]: value });
+      if ( this.flags.dnd5e ) diff = this.flags.dnd5e.updateSource(changes, { dryRun: true });
+      else diff = new TokenSystemFlags(changes, { parent: this }).toObject();
+      return this.update({ flags: { dnd5e: diff } });
+    }
+    return super.setFlag(scope, key, value);
   }
 
   /* -------------------------------------------- */
