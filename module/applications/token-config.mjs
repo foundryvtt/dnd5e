@@ -52,8 +52,8 @@ export default class TokenConfig5e extends TokenConfig {
     const flags = this.document.getFlag("dnd5e", "tokenRing") ?? {};
     ringTab.innerHTML = await renderTemplate(this.constructor.dynamicRingTemplate, {
       flags, colors: {
-        ring: flags.colors?.ring ? Color.from(flags.colors.ring).toString() : null,
-        background: flags.colors?.background ? Color.from(flags.colors.background).toString() : null
+        ring: flags.colors?.ring ? Color.from(flags.colors.ring) : null,
+        background: flags.colors?.background ? Color.from(flags.colors.background) : null
       }
     });
     ringTab = ringTab.querySelector("div");
@@ -72,7 +72,7 @@ export default class TokenConfig5e extends TokenConfig {
     `);
 
     const content = this.popOut ? html.parentElement : html;
-    this._tabs[this._tabs.length - 1].bind(content);
+    this._tabs.at(-1).bind(content);
 
     if ( !this._minimized ) this.setPosition();
   }
