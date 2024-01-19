@@ -29,6 +29,9 @@
             </ol>
         </ol>
 
+        {{#if showContainerWarning}}
+        <p class="hint centered warning">{{localize "DND5E.AdvancementItemGrantContainerWarning"}}</p>
+        {{/if}}
         <p class="hint centered">{{localize "DND5E.AdvancementItemGrantDropHint"}}</p>
     </div>
 </form>
