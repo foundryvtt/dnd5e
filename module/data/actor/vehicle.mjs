@@ -1,4 +1,3 @@
-import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField } from "../fields.mjs";
 import SourceField from "../shared/source-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
@@ -141,18 +140,6 @@ export default class VehicleData extends CommonTemplate {
     if ( source.details?.source && (foundry.utils.getType(source.details.source) !== "Object") ) {
       source.details.source = { custom: source.details.source };
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Helpers                                     */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  getRollData({ deterministic=false }={}) {
-    const data = {...this};
-    data.prof = new Proficiency(this.attributes.prof, 1);
-    if ( deterministic ) data.prof = data.prof.flat;
-    return data;
   }
 }
 

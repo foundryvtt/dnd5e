@@ -1,4 +1,3 @@
-import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
@@ -199,9 +198,7 @@ export default class CharacterData extends CreatureTemplate {
 
   /** @inheritdoc */
   getRollData({ deterministic=false }={}) {
-    const data = {...this};
-    data.prof = new Proficiency(this.attributes.prof, 1);
-    if ( deterministic ) data.prof = data.prof.flat;
+    const data = super.getRollData({ deterministic });
     data.classes = {};
     for ( const [identifier, cls] of Object.entries(this.parent.classes) ) {
       data.classes[identifier] = {...cls.system};

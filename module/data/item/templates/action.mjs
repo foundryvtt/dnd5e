@@ -1,4 +1,4 @@
-import SystemDataModel from "../../abstract.mjs";
+import { ItemDataModel } from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
 
 /**
@@ -21,7 +21,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {string} save.scaling        Method for automatically determining saving throw DC.
  * @mixin
  */
-export default class ActionTemplate extends SystemDataModel {
+export default class ActionTemplate extends ItemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
@@ -256,4 +256,18 @@ export default class ActionTemplate extends SystemDataModel {
     return this.actionType && !!(this.hasDamage && this.damage.versatile);
   }
 
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(options) {
+    const data = super.getRollData(options);
+    const key = this.abilityMod;
+    if ( data && key && ("abilities" in data) ) {
+      const ability = data.abilities[key];
+      data.mod = ability?.mod ?? 0;
+    }
+    return data;
+  }
 }

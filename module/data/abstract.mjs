@@ -1,3 +1,5 @@
+import Proficiency from "../documents/actor/proficiency.mjs";
+
 /**
  * Data Model variant with some extra methods to support template mix-ins.
  *
@@ -187,7 +189,7 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Mixin                                       */
+  /*  Data Validation                             */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -256,6 +258,8 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Mixins                                      */
+  /* -------------------------------------------- */
 
   /**
    * Mix multiple templates with the base type.
@@ -316,6 +320,24 @@ export class ActorDataModel extends SystemDataModel {
     if ( primaryParty.isOwner ) destinations.unshift(primaryParty);
     return destinations;
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a data object which defines the data schema used by dice roll commands against this Actor.
+   * @param {object} [options]
+   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
+   *                                          either a die term or a flat term.
+   * @returns {object}
+   */
+  getRollData({ deterministic=false }={}) {
+    const data = { ...this };
+    data.prof = new Proficiency(this.attributes?.prof ?? 0, 1);
+    if ( deterministic ) data.prof = data.prof.flat;
+    return data;
+  }
 }
 
 /* -------------------------------------------- */
@@ -331,6 +353,8 @@ export class ItemDataModel extends SystemDataModel {
    */
   static ITEM_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
 
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
   /* -------------------------------------------- */
 
   /**
@@ -440,6 +464,22 @@ export class ItemDataModel extends SystemDataModel {
       title: this.parent.name,
       subtitle: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a data object which defines the data schema used by dice roll commands against this Item.
+   * @param {object} [options]
+   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
+   *                                          either a die term or a flat term.
+   * @returns {object}
+   */
+  getRollData({ deterministic=false }={}) {
+    if ( !this.parent.actor ) return null;
+    const actorRollData = this.parent.actor.getRollData({ deterministic });
+    const data = { ...actorRollData, item: { ...this } };
+    return data;
   }
 }
 
