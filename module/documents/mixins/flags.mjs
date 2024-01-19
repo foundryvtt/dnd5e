@@ -1,6 +1,6 @@
 /**
  * Mixin used to add system flags enforcement to types.
- * @type {function(Class)}
+ * @type {function(Class): Class}
  * @mixin
  */
 export default Base => class extends Base {
