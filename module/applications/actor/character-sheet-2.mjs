@@ -358,12 +358,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         effect.updateDuration();
         if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
         const { id, name, img, disabled, duration } = effect;
+        let source = await effect.getSource();
+        // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
+        if ( (source instanceof dnd5e.documents.ActiveEffect5e) && (source.target !== this.object) ) {
+          source = source.target;
+        }
         arr = await arr;
         arr.push({
-          id, name, img, disabled, duration,
+          id, name, img, disabled, duration, source,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
-          source: await effect.getSource(),
-          durationParts: duration.remaining ? duration.label.split(", ") : []
+          durationParts: duration.remaining ? duration.label.split(", ") : [],
+          hasTooltip: source instanceof dnd5e.documents.Item5e
         });
         return arr;
       }, []);

@@ -20,12 +20,13 @@
         </header>
 
         {{!-- Details --}}
-        <section class="details card-content">
+        <section class="details collapsible-content card-content">
             {{{ data.description.chat }}}
         </section>
     </section>
 
     {{!-- Item Actions --}}
+    {{#if hasButtons}}
     <div class="card-buttons">
 
         {{!-- Attacks --}}
@@ -99,8 +100,10 @@
         </button>
         {{/if}}
     </div>
+    {{/if}}
 
     {{!-- Item Properties --}}
+    {{#if data.properties.length}}
     <ul class="card-footer pills unlist">
         {{#each data.properties}}
         <li class="pill maroon">
@@ -108,4 +111,31 @@
         </li>
         {{/each}}
     </ul>
+    {{/if}}
+
+    {{!-- Applicable Effects --}}
+    {{#if effects.length}}
+    <div class="effects-tray collapsible">
+        <label class="roboto-upper">
+            <i class="fas fa-bolt"></i>
+            <span>{{ localize "DND5E.Effects" }}</span>
+            <i class="fas fa-caret-down"></i>
+        </label>
+        <ul class="effects collapsible-content unlist">
+            {{#each effects}}
+            <li class="effect" data-uuid="{{ uuid }}">
+                <img class="gold-icon" alt="{{ name }}" src="{{ img }}">
+                <div class="name-stacked">
+                    <span class="title">{{ name }}</span>
+                    <span class="subtitle">{{ duration.label }}</span>
+                </div>
+                <button type="button" class="apply-effect" data-action="applyEffect"
+                        data-tooltip="DND5E.EffectsApplyTokens" aria-label="{{ localize "DND5E.EffectsApplyTokens" }}">
+                    <i class="fas fa-reply-all fa-flip-horizontal"></i>
+                </button>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
 </div>

@@ -374,6 +374,13 @@ export function onRenderChatMessage(app, html, data) {
   else requestAnimationFrame(() => {
     html.find(".description.collapsible .details").each((i, el) => el.style.height = `${el.scrollHeight}px`);
   });
+  html.find(".effects-tray").each((i, el) => {
+    if ( game.user.isGM ) {
+      el.classList.add("collapsed");
+      el.querySelector(".collapsible-content").style.height = "0";
+    }
+    else el.remove();
+  });
   enrichChatCard(html);
 }
 

@@ -53,9 +53,13 @@
                     {{!-- Effect Source --}}
                     <div class="item-detail effect-source {{#unless source}}empty{{/unless}}">
                         {{#if source}}
+                        {{#if hasTooltip}}
                         <a class="item-tooltip" data-uuid="{{ source.uuid }}" data-tooltip-direction="RIGHT">
                             {{ source.name }}
                         </a>
+                        {{else}}
+                        {{ source.name }}
+                        {{/if}}
                         {{/if}}
                     </div>
 

@@ -1281,11 +1281,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Render the chat card template
     const token = this.actor.token;
+    const hasButtons = this.hasAttack || this.hasDamage || this.isVersatile || this.hasSave || this.system.formula
+      || this.hasAreaTarget || (this.type === "tool") || this.hasAbilityCheck;
     const templateData = {
+      hasButtons,
       actor: this.actor,
       config: CONFIG.DND5E,
       tokenId: token?.uuid || null,
       item: this,
+      effects: this.effects.filter(e => e.transfer),
       data: await this.system.getCardData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
@@ -1810,8 +1814,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {HTML} html  Rendered chat message.
    */
   static chatListeners(html) {
-    html.on("click", ".card-buttons button", this._onChatCardAction.bind(this));
-    html.on("click", ".item-name, .description.collapsible", this._onChatCardToggleContent.bind(this));
+    html.on("click", ".chat-card button[data-action]", this._onChatCardAction.bind(this));
+    html.on("click", ".item-name, .collapsible", this._onChatCardToggleContent.bind(this));
     html[0].querySelectorAll("[data-context-menu]").forEach(el => {
       el.addEventListener("click", event => {
         event.preventDefault();
@@ -1865,6 +1869,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       // Handle different actions
       let targets;
       switch ( action ) {
+        case "applyEffect":
+          if ( !game.user.isGM ) return;
+          const effect = await fromUuid(button.closest("[data-uuid]")?.dataset.uuid);
+          for ( const token of canvas.tokens.controlled ) {
+            await this._applyEffectToToken(effect, token);
+          }
+          break;
         case "attack":
           await item.rollAttack({
             event: event,
@@ -1918,6 +1929,23 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Handle applying an Active Effect to a Token.
+   * @param {ActiveEffect5e} effect  The effect.
+   * @param {Token5e} token          The token.
+   * @protected
+   */
+  static _applyEffectToToken(effect, token) {
+    const effectData = foundry.utils.mergeObject(effect.toObject(), {
+      disabled: false,
+      transfer: false,
+      origin: effect.uuid
+    });
+    return ActiveEffect.implementation.create(effectData, { parent: token.actor });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle toggling the visibility of chat card content when the name is clicked
    * @param {Event} event   The originating click event
    * @private
@@ -1931,7 +1959,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( header.classList.contains("collapsible") ) {
       header.classList.toggle("collapsed");
       const collapsed = header.classList.contains("collapsed");
-      const details = header.querySelector(".details");
+      const details = header.querySelector(".collapsible-content");
       details.style.height = collapsed ? "0" : `${details.scrollHeight}px`;
 
       // Clear the height from the chat popout container so that it appropriately resizes.
