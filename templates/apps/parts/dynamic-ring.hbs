@@ -6,15 +6,24 @@
         </div>
     </div>
     <div class="form-group">
+        <label>{{localize "DND5E.TokenRings.Subject.Label"}}</label>
+        <div class="form-fields">
+            {{filePicker type="image" target="flags.dnd5e.tokenRing.textures.subject"}}
+            <input class="image" type="text" name="flags.dnd5e.tokenRing.textures.subject"
+                   value="{{flags.textures.subject}}" placeholder="{{subjectPlaceholder}}">
+        </div>
+        <p class="hint">{{localize "DND5E.TokenRings.Subject.Hint"}}</p>
+    </div>
+    <div class="form-group">
         <label>{{localize "DND5E.TokenRings.RingColor"}}</label>
         <div class="form-fields">
-            {{colorPicker name="flags.dnd5e.tokenRing.colors.ring" value=colors.ring}}
+            {{colorPicker name="flags.dnd5e.tokenRing.colors.ring" value=flags.colors.ring}}
         </div>
     </div>
     <div class="form-group">
         <label>{{localize "DND5E.TokenRings.BackgroundColor"}}</label>
         <div class="form-fields">
-            {{colorPicker name="flags.dnd5e.tokenRing.colors.background" value=colors.background}}
+            {{colorPicker name="flags.dnd5e.tokenRing.colors.background" value=flags.colors.background}}
         </div>
     </div>
 </div>

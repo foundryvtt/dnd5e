@@ -106,7 +106,7 @@ export default class TokenRings5e {
   pushToLoad(additionalSources) {
     additionalSources.push(CONFIG.DND5E.tokenRings.spriteSheet);
     for ( const tokenDocument of canvas.scene.tokens ) {
-      const subjectSrc = tokenDocument.getSubjectName();
+      const subjectSrc = tokenDocument.subjectPath;
       if ( subjectSrc ) additionalSources.push(subjectSrc);
     }
   }

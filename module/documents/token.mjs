@@ -13,6 +13,19 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch the explicit subject texture or infer from `texture.src` for dynamic rings.
+   * @type {string}
+   */
+  get subjectPath() {
+    const subject = this.getFlag("dnd5e", "tokenRing")?.textures?.subject;
+    return subject ?? this._inferSubjectPath(this.texture.src);
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
@@ -52,19 +65,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /* -------------------------------------------- */
 
   /**
-   * Returns the subject texture src according to the current texture.src
-   * @returns {string} The subject src according to texture.src
-   * @protected
-   */
-  getSubjectName() {
-    const parts = (this.texture.src ?? "").split(".");
-    const extension = parts.pop();
-    return `${parts.join(".")}-subject.${extension}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Get an Array of attribute choices which are suitable for being consumed by an item usage.
    * @param {object} data  The actor data.
    * @returns {string[]}
@@ -94,5 +94,20 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     }
 
     return state;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the subject path based on the path to the main token artwork.
+   * @param {string} path  The token's `texture.src` path.
+   * @returns {string}     Inferred subject path.
+   * @protected
+   */
+  _inferSubjectPath(path) {
+    if ( !path ) return "";
+    const parts = path.split(".");
+    const extension = parts.pop();
+    return `${parts.join(".")}-subject.${extension}`;
   }
 }
