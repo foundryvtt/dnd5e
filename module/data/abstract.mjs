@@ -189,7 +189,7 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Mixin                                       */
+  /*  Data Validation                             */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -478,7 +478,7 @@ export class ItemDataModel extends SystemDataModel {
   getRollData({ deterministic=false }={}) {
     if ( !this.parent.actor ) return null;
     const actorRollData = this.parent.actor.getRollData({ deterministic });
-    const data = { ...actorRollData, item: this.toObject() };
+    const data = { ...actorRollData, item: { ...this } };
     return data;
   }
 }
