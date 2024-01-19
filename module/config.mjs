@@ -3086,6 +3086,26 @@ DND5E.rules = {
 };
 
 /* -------------------------------------------- */
+/*  Token Rings Framework                       */
+/* -------------------------------------------- */
+
+/**
+ * Token Rings configuration data
+ *
+ * @typedef {object} TokenRingsConfiguration
+ * @property {string} spriteSheet                          The sprite sheet json source.
+ * @property {typeof BaseSamplerShader} shaderClass        The shader class definition associated with the token ring.
+ */
+
+/**
+ * @type {TokenRingsConfiguration}
+ */
+DND5E.tokenRings = {
+  spriteSheet: "systems/dnd5e/tokens/composite/token-rings.json",
+  shaderClass: null
+};
+
+/* -------------------------------------------- */
 /*  Sources                                     */
 /* -------------------------------------------- */
 

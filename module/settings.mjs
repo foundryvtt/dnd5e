@@ -277,6 +277,17 @@ export default function registerSystemSettings() {
     type: PrimaryPartyData,
     onChange: s => ui.actors.render()
   });
+
+  // Token Rings
+  game.settings.register("dnd5e", "disableTokenRings", {
+    name: "SETTINGS.5eTokenRings.Name",
+    hint: "SETTINGS.5eTokenRings.Hint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: false,
+    requiresReload: true
+  });
 }
 
 /**

@@ -45,6 +45,19 @@ export default class TokenDocument5e extends TokenDocument {
   /* -------------------------------------------- */
 
   /**
+   * Returns the subject texture src according to the current texture.src
+   * @returns {string} The subject src according to texture.src
+   * @protected
+   */
+  getSubjectName() {
+    const parts = (this.texture.src ?? "").split(".");
+    const extension = parts.pop();
+    return `${parts.join(".")}-subject.${extension}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get an Array of attribute choices which are suitable for being consumed by an item usage.
    * @param {object} data  The actor data.
    * @returns {string[]}

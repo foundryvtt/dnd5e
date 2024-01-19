@@ -23,6 +23,9 @@ import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
+import TokenRings5e from "./module/token-rings.mjs";
+import TokenRingSamplerShaderV11 from "./module/canvas/shaders/token-ring-shader-v11.mjs";
+import TokenRingSamplerShader from "./module/canvas/shaders/token-ring-shader.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -323,6 +326,11 @@ Hooks.once("setup", function() {
   // Apply custom item compendium
   game.packs.filter(p => p.metadata.type === "Item")
     .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
+
+  // Configure token rings
+  CONFIG.DND5E.tokenRings.shaderClass ??=
+    game.release.generation < 12 ? TokenRingSamplerShaderV11 : TokenRingSamplerShader;
+  game.dnd5e.tokenRings = new TokenRings5e();
 });
 
 /* --------------------------------------------- */
@@ -383,6 +391,16 @@ Hooks.once("ready", function() {
 Hooks.on("canvasInit", gameCanvas => {
   gameCanvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
   SquareGrid.prototype.measureDistances = canvas.measureDistances;
+  game.dnd5e.tokenRings.pushToLoad(gameCanvas.loadTexturesOptions.additionalSources);
+});
+
+/* -------------------------------------------- */
+/*  Canvas Draw                                 */
+/* -------------------------------------------- */
+
+Hooks.on("canvasDraw", gameCanvas => {
+  // The sprite sheet has been loaded now, we can create the uvs for each texture
+  game.dnd5e.tokenRings.createAssetsUvs();
 });
 
 /* -------------------------------------------- */
@@ -449,6 +467,8 @@ Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRender
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
 Hooks.on("renderTokenConfig", documents.TokenDocument5e.onRenderTokenConfig);
+
+Hooks.on("applyTokenStatusEffect", canvas.Token5e.onApplyTokenStatusEffect);
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */
