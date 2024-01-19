@@ -1,9 +1,16 @@
+import TokenSystemFlags from "../data/token/token-system-flags.mjs";
 import { staticID } from "../utils.mjs";
+import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
  * Extend the base TokenDocument class to implement system-specific HP bar logic.
  */
-export default class TokenDocument5e extends TokenDocument {
+export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
+
+  /** @inheritDoc */
+  get _systemFlagsDataModel() {
+    return TokenSystemFlags;
+  }
 
   /* -------------------------------------------- */
   /*  Migrations                                  */

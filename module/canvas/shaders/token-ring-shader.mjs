@@ -233,4 +233,4 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
         return result;
       }
     `;
-};
+}

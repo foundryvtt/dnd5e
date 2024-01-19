@@ -1,34 +1,15 @@
+import SystemFlagsMixin from "./flags.mjs";
+
 /**
  * Mixin used to share some logic between Actor & Item documents.
- * @type {function(Class)}
+ * @type {function(Class): Class}
  * @mixin
  */
-export const SystemDocumentMixin = Base => class extends Base {
-
-  /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
+export default Base => class extends SystemFlagsMixin(Base) {
 
   /** @inheritDoc */
-  prepareData() {
-    super.prepareData();
-    if ( ("dnd5e" in this.flags) && this.system.metadata?.systemFlagsModel ) {
-      this.flags.dnd5e = new this.system.metadata.systemFlagsModel(this._source.flags.dnd5e, { parent: this });
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async setFlag(scope, key, value) {
-    if ( (scope === "dnd5e") && this.system.metadata?.systemFlagsModel ) {
-      let diff;
-      const changes = foundry.utils.expandObject({ [key]: value });
-      if ( this.flags.dnd5e ) diff = this.flags.dnd5e.updateSource(changes, { dryRun: true });
-      else diff = new this.system.metadata.systemFlagsModel(changes, { parent: this }).toObject();
-      return this.update({ flags: { dnd5e: diff } });
-    }
-    return super.setFlag(scope, key, value);
+  get _systemFlagsDataModel() {
+    return this.system?.metadata?.systemFlagsModel ?? null;
   }
 
   /* -------------------------------------------- */

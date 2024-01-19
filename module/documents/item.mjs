@@ -10,7 +10,7 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
-import { SystemDocumentMixin } from "./mixin.mjs";
+import SystemDocumentMixin from "./mixins/document.mjs";
 
 /**
  * Override and extend the basic Item implementation.
