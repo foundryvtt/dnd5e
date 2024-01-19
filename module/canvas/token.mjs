@@ -35,9 +35,11 @@ export default class Token5e extends Token {
   /** @inheritdoc */
   async _draw() {
     // Cache the subject texture if needed
-    const subjectName = this.document.subjectPath;
-    const cached = PIXI.Assets.cache.has(subjectName);
-    if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
+    if ( this.document.flags.dnd5e?.tokenRing?.enabled ) {
+      const subjectName = this.document.subjectPath;
+      const cached = PIXI.Assets.cache.has(subjectName);
+      if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
+    }
     await super._draw();
   }
 
