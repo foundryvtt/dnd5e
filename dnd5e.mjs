@@ -166,6 +166,11 @@ Hooks.once("init", function() {
     types: ["rule"]
   });
 
+  DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
+  DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
+    label: "DND5E.SheetClassToken"
+  });
+
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
   utils.preloadHandlebarsTemplates();
@@ -465,8 +470,6 @@ Hooks.on("chatMessage", (app, message, data) => dnd5e.applications.Award.chatMes
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
-
-Hooks.on("renderTokenConfig", documents.TokenDocument5e.onRenderTokenConfig);
 
 Hooks.on("applyTokenStatusEffect", canvas.Token5e.onApplyTokenStatusEffect);
 

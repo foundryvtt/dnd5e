@@ -12,3 +12,4 @@ export {default as DialogMixin} from "./dialog-mixin.mjs";
 export {default as PropertyAttribution} from "./property-attribution.mjs";
 export {default as SourceConfig} from "./source-config.mjs";
 export {default as Tabs5e} from "./tabs.mjs";
+export {default as TokenConfig5e} from "./token-config.mjs";
