@@ -35,9 +35,11 @@ export default class Token5e extends Token {
   /** @inheritdoc */
   async _draw() {
     // Cache the subject texture if needed
-    const subjectName = this.document.getSubjectName();
-    const cached = PIXI.Assets.cache.has(subjectName);
-    if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
+    if ( this.document.flags.dnd5e?.tokenRing?.enabled ) {
+      const subjectName = this.document.subjectPath;
+      const cached = PIXI.Assets.cache.has(subjectName);
+      if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
+    }
     await super._draw();
   }
 
@@ -178,7 +180,7 @@ export default class Token5e extends Token {
     mesh ||= this.mesh;
 
     // Should we replace the regular token texture with a custom subject texture?
-    const subjectSrc = this.document.getSubjectName();
+    const subjectSrc = this.document.subjectPath;
     if ( PIXI.Assets.cache.has(subjectSrc) ) {
       const subjectTexture = getTexture(subjectSrc);
       if ( subjectTexture?.valid ) mesh.texture = subjectTexture;

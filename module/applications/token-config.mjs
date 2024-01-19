@@ -51,13 +51,11 @@ export default class TokenConfig5e extends TokenConfig {
     let ringTab = document.createElement("div");
     const flags = this.document.getFlag("dnd5e", "tokenRing") ?? {};
     ringTab.innerHTML = await renderTemplate(this.constructor.dynamicRingTemplate, {
-      flags, colors: {
-        ring: flags.colors?.ring ? Color.from(flags.colors.ring) : null,
-        background: flags.colors?.background ? Color.from(flags.colors.background) : null
-      }
+      flags, subjectPlaceholder: this.object._inferSubjectPath(this.object.texture.src)
     });
     ringTab = ringTab.querySelector("div");
     ringTab.querySelectorAll("input").forEach(i => i.addEventListener("change", this._onChangeInput.bind(this)));
+    ringTab.querySelector("button.file-picker").addEventListener("click", this._activateFilePicker.bind(this));
 
     tab.replaceChildren(tokenTab, ringTab);
     tab.insertAdjacentHTML("afterbegin", `
