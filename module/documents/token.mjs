@@ -1,4 +1,4 @@
-import { getHumanReadableAttributeLabel, staticID } from "../utils.mjs";
+import { staticID } from "../utils.mjs";
 
 /**
  * Extend the base TokenDocument class to implement system-specific HP bar logic.
@@ -87,66 +87,5 @@ export default class TokenDocument5e extends TokenDocument {
     }
 
     return state;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle rendering human-readable labels and adding item uses.
-   * @param {TokenConfig} app  The TokenConfig application instance.
-   * @param {jQuery} html      The rendered markup.
-   */
-  static onRenderTokenConfig(app, [html]) {
-    const actor = app.object?.actor;
-    const makeOptgroup = (label, parent) => {
-      const optgroup = document.createElement("optgroup");
-      optgroup.label = game.i18n.localize(label);
-      parent.appendChild(optgroup);
-      return optgroup;
-    };
-
-    const items = actor?.items.reduce((obj, i) => {
-      const { per, max } = i.system.uses ?? {};
-      if ( per && max ) obj[i.getRelativeUUID(actor)] = i.name;
-      return obj;
-    }, {}) ?? {};
-
-    // Add human-readable labels, categorize, and sort entries, and add item uses.
-    for ( const select of html.querySelectorAll('[name="bar1.attribute"], [name="bar2.attribute"]') ) {
-      const groups = {
-        abilities: makeOptgroup("DND5E.AbilityScorePl", select),
-        movement: makeOptgroup("DND5E.MovementSpeeds", select),
-        senses: makeOptgroup("DND5E.Senses", select),
-        skills: makeOptgroup("DND5E.SkillPassives", select),
-        slots: makeOptgroup("JOURNALENTRYPAGE.DND5E.Class.SpellSlots", select)
-      };
-
-      select.querySelectorAll("option").forEach(option => {
-        const label = getHumanReadableAttributeLabel(option.value, { actor });
-        if ( label ) option.innerText = label;
-        if ( option.value.startsWith("abilities.") ) groups.abilities.appendChild(option);
-        else if ( option.value.startsWith("attributes.movement.") ) groups.movement.appendChild(option);
-        else if ( option.value.startsWith("attributes.senses.") ) groups.senses.appendChild(option);
-        else if ( option.value.startsWith("skills.") ) groups.skills.appendChild(option);
-        else if ( option.value.startsWith("spells.") ) groups.slots.appendChild(option);
-      });
-
-      select.querySelectorAll("optgroup").forEach(group => {
-        const options = Array.from(group.querySelectorAll("option"));
-        options.sort((a, b) => a.innerText.localeCompare(b.innerText, game.i18n.lang));
-        group.append(...options);
-      });
-
-      if ( !foundry.utils.isEmpty(items) ) {
-        const group = makeOptgroup("DND5E.ConsumeCharges", select);
-        for ( const [k, v] of Object.entries(items).sort(([, a], [, b]) => a.localeCompare(b, game.i18n.lang)) ) {
-          const option = document.createElement("option");
-          if ( k === foundry.utils.getProperty(app.object, select.name) ) option.selected = true;
-          option.value = k;
-          option.innerText = v;
-          group.appendChild(option);
-        }
-      }
-    }
   }
 }
