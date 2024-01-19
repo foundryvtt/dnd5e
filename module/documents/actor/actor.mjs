@@ -1,7 +1,7 @@
 import Proficiency from "./proficiency.mjs";
 import * as Trait from "./trait.mjs";
 import ScaleValueAdvancement from "../advancement/scale-value.mjs";
-import { SystemDocumentMixin } from "../mixin.mjs";
+import SystemDocumentMixin from "../mixins/document.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";

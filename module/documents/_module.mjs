@@ -12,4 +12,5 @@ export {default as SelectChoices} from "./actor/select-choices.mjs";
 export * as Trait from "./actor/trait.mjs";
 export * as chat from "./chat-message.mjs";
 export * as combat from "./combat.mjs";
+export * as mixins from "./mixins/_module.mjs";
 export * as macro from "./macro.mjs";
