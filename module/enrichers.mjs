@@ -859,7 +859,10 @@ async function rollDamage(event, speaker) {
   const title = game.i18n.localize("DND5E.DamageRoll");
   const messageData = { "flags.dnd5e.roll.type": "damage", speaker };
   const rollConfig = {
-    parts: [formula],
+    rollConfigs: [{
+      parts: [formula],
+      type: damageType
+    }],
     flavor: `${title} (${game.i18n.localize(CONFIG.DND5E.damageTypes[damageType]?.label ?? damageType)})`,
     event,
     title,

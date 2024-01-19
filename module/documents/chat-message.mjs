@@ -200,8 +200,9 @@ function enrichChatCard([html]) {
   const roll = message.getFlag("dnd5e", "roll");
   const item = fromUuidSync(roll?.itemUuid);
   if ( item ) {
+    const isCritical = (roll.type === "damage") && message.rolls[0]?.options?.critical;
     const subtitle = roll.type === "damage"
-      ? game.i18n.localize("DND5E.DamageRoll")
+      ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
       : roll.type === "attack"
         ? game.i18n.localize(`DND5E.Action${item.system.actionType.toUpperCase()}`)
         : item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
@@ -213,7 +214,7 @@ function enrichChatCard([html]) {
           <img class="gold-icon" src="${item.img}" alt="${item.name}">
           <div class="name-stacked">
             <span class="title">${item.name}</span>
-            <span class="subtitle">${subtitle}</span>
+            <span class="subtitle ${isCritical ? "critical" : ""}">${subtitle}</span>
           </div>
         </header>
       </section>
@@ -223,13 +224,12 @@ function enrichChatCard([html]) {
   }
 
   // Dice rolls
-  html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", onClickDiceRoll));
   html.querySelectorAll(".dice-tooltip").forEach((el, i) => {
-    el.style.height = "0";
-    const roll = message.rolls[i];
-    if ( roll instanceof DamageRoll ) enrichDamageTooltip(roll, el);
-    else enrichRollTooltip(message.rolls[i], el);
+    if ( !(roll instanceof DamageRoll) ) enrichRollTooltip(message.rolls[i], el);
   });
+  enrichDamageTooltip(message.rolls.filter(r => r instanceof DamageRoll), html);
+  html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", onClickDiceRoll));
+  html.querySelectorAll(".dice-tooltip").forEach(el => el.style.height = "0");
 }
 
 /* -------------------------------------------- */
@@ -258,9 +258,84 @@ function enrichRollTooltip(roll, html) {
 
 /* -------------------------------------------- */
 
+/**
+ * Coalesce damage rolls into a single breakdown.
+ * @param {DamageRoll[]} rolls  The damage rolls.
+ * @param {HTMLElement} html    The chat card markup.
+ */
+function enrichDamageTooltip(rolls, html) {
+  if ( !rolls.length ) return;
+  let { formula, total, breakdown } = rolls.reduce((obj, r) => {
+    obj.formula.push(r.formula);
+    obj.total += r.total;
+    aggregateDamageRoll(r, obj.breakdown);
+    return obj;
+  }, { formula: [], total: 0, breakdown: {} });
+  formula = formula.join(" + ");
+  html.querySelectorAll(".dice-roll").forEach(el => el.remove());
+  const roll = document.createElement("div");
+  roll.classList.add("dice-roll");
+  roll.innerHTML = `
+    <div class="dice-result">
+      <div class="dice-formula">${formula}</div>
+      <div class="dice-tooltip">
+        ${Object.entries(breakdown).reduce((str, [type, { total, constant, dice }]) => {
+          const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
+          return `${str}
+            <section class="tooltip-part">
+              <div class="dice">
+                <ol class="dice-rolls">
+                  ${dice.reduce((str, { result, classes }) => `
+                    ${str}<li class="roll ${classes}">${result}</li>
+                  `, "")}
+                  ${constant ? `
+                  <li class="constant"><span class="sign">${constant < 0 ? "-" : "+"}</span>${Math.abs(constant)}</li>
+                  ` : ""}
+                </ol>
+                <div class="total">
+                  ${config ? `<img src="${config.icon}" alt="${config.label}">` : ""}
+                  <span class="label">${config?.label ?? ""}</span>
+                  <span class="value">${total}</span>
+                </div>
+              </div>
+            </section>
+          `;
+        }, "")}
+      </div>
+      <h4 class="dice-total">${total}</h4>
+    </div>
+  `;
+  html.querySelector(".message-content").appendChild(roll);
+}
 
-function enrichDamageTooltip(roll, html) {
-  // TODO
+/* -------------------------------------------- */
+
+/**
+ * Aggregate damage roll information by damage type.
+ * @param {DamageRoll} roll  The damage roll.
+ * @param {Record<string, {total: number, constant: number, dice: {result: string, classes: string}[]}>} breakdown
+ */
+function aggregateDamageRoll(roll, breakdown) {
+  const isDamageType = t => (t in CONFIG.DND5E.damageTypes) || (t in CONFIG.DND5E.healingTypes);
+  for ( let i = roll.terms.length - 1; i >= 0; ) {
+    const term = roll.terms[i--];
+    if ( !(term instanceof NumericTerm) && !(term instanceof DiceTerm) ) continue;
+    const flavor = term.flavor?.toLowerCase();
+    const type = isDamageType(flavor) ? flavor : roll.options.type;
+    const aggregate = breakdown[type] ??= { total: 0, constant: 0, dice: [] };
+    const value = term.total;
+    if ( term instanceof DiceTerm ) aggregate.dice.push(...term.results.map(r => ({
+      result: term.getResultLabel(r), classes: term.getResultCSS(r).filterJoin(" ")
+    })));
+    let multiplier = 1;
+    let operator = roll.terms[i];
+    while ( operator instanceof OperatorTerm ) {
+      if ( operator.operator === "-" ) multiplier *= -1;
+      operator = roll.terms[--i];
+    }
+    aggregate.total += value * multiplier;
+    if ( term instanceof NumericTerm ) aggregate.constant += value * multiplier;
+  }
 }
 
 /* -------------------------------------------- */
