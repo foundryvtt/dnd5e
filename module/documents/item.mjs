@@ -1895,8 +1895,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         case "save":
           targets = this._getChatCardTargets(card);
           for ( let token of targets ) {
+            const dc = parseInt(button.dataset.dc);
             const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
-            await token.actor.rollAbilitySave(button.dataset.ability, { event, speaker });
+            await token.actor.rollAbilitySave(button.dataset.ability, {
+              event, speaker, targetValue: Number.isFinite(dc) ? dc : undefined
+            });
           }
           break;
         case "toolCheck":
