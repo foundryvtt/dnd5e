@@ -940,7 +940,6 @@ h5 {
   white-space: nowrap;
 }
 .dnd5e.sheet.actor .ability-scores {
-  display: grid;
   flex: 0 0 100px;
   align-content: flex-start;
   list-style: none;
@@ -957,6 +956,7 @@ h5 {
   text-align: center;
   border-bottom: 2px groove #eeede0;
   position: relative;
+  min-width: 100%;
 }
 .dnd5e.sheet.actor .ability-scores .ability:last-child {
   border-bottom: none;
