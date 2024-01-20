@@ -62,7 +62,10 @@
         <button type="button" data-action="save" data-ability="{{ item.system.save.ability }}">
             <i class="fas fa-shield-heart"></i>
             {{#with item.system.save}}
-            {{ localize "DND5E.SavingThrowDC" dc=dc ability=(lookup (lookup @root.config.abilities ability) "label") }}
+            {{#with (lookup (lookup @root.config.abilities ability) "label") as |abilityLabel|}}
+            <span class="visible-dc">{{ localize "DND5E.SavingThrowDC" dc=../dc ability=abilityLabel }}</span>
+            <span class="hidden-dc">{{ localize "DND5E.SavePromptTitle" ability=abilityLabel }}</span>
+            {{/with}}
             {{/with}}
         </button>
         {{/if}}

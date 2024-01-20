@@ -13,6 +13,21 @@ export default function registerSystemSettings() {
     default: ""
   });
 
+  // Challenge visibility
+  game.settings.register("dnd5e", "challengeVisibility", {
+    name: "SETTINGS.5eChallengeVisibility.Name",
+    hint: "SETTINGS.5eChallengeVisibility.Hint",
+    scope: "world",
+    config: true,
+    default: "player",
+    type: String,
+    choices: {
+      all: "SETTINGS.5eChallengeVisibility.All",
+      player: "SETTINGS.5eChallengeVisibility.Player",
+      none: "SETTINGS.5eChallengeVisibility.None"
+    }
+  });
+
   // Encumbrance tracking
   game.settings.register("dnd5e", "encumbrance", {
     name: "SETTINGS.5eEncumbrance.Name",

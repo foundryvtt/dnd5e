@@ -369,3 +369,10 @@
     line-height: 1;
   }
 }
+
+.hidden-dc { display: contents; }
+.visible-dc { display: none; }
+[data-display-challenge] {
+  .hidden-dc { display: none; }
+  .visible-dc { display: contents; }
+}

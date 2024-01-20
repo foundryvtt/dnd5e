@@ -679,6 +679,7 @@ function createRollLabel(config) {
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
   const tool = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true })?.name : null;
   const longSuffix = config.format === "long" ? "Long" : "Short";
+  const showDC = config.dc && !config.hideDC;
 
   let label;
   switch ( config.type ) {
@@ -693,13 +694,13 @@ function createRollLabel(config) {
       if ( config.passive ) {
         label = game.i18n.format(`EDITOR.DND5E.Inline.DCPassive${longSuffix}`, { dc: config.dc, check: label });
       } else {
-        if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+        if ( showDC ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
         label = game.i18n.format(`EDITOR.DND5E.Inline.Check${longSuffix}`, { check: label });
       }
       break;
     case "save":
       label = ability;
-      if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+      if ( showDC ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
       label = game.i18n.format(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
       break;
     default:
@@ -835,6 +836,7 @@ async function rollAction(event) {
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
         buttonLabel: createRollLabel({ ...target.dataset, format: "short", icon: true }),
+        hiddenLabel: createRollLabel({ ...target.dataset, format: "short", icon: true, hideDC: true }),
         dataset: { ...target.dataset, action: "rollRequest" }
       }),
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
