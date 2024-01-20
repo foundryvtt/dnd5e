@@ -242,6 +242,9 @@ function enrichChatCard([html]) {
     html.querySelector(".message-content").insertAdjacentElement("afterbegin", flavor);
   }
 
+  // Attack targets
+  enrichAttackTargets(message, html);
+
   // Dice rolls
   html.querySelectorAll(".dice-tooltip").forEach((el, i) => {
     if ( !(roll instanceof DamageRoll) ) enrichRollTooltip(message.rolls[i], el);
@@ -355,6 +358,41 @@ function aggregateDamageRoll(roll, breakdown) {
     aggregate.total += value * multiplier;
     if ( term instanceof NumericTerm ) aggregate.constant += value * multiplier;
   }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Augment attack cards with additional information.
+ * @param {ChatMessage} message  The chat message.
+ * @param {HTMLLIElement} html   The chat card.
+ */
+function enrichAttackTargets(message, html) {
+  const attackRoll = message.rolls[0];
+  const targets = message.getFlag("dnd5e", "targets");
+  if ( !game.user.isGM || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
+  const evaluation = document.createElement("ul");
+  evaluation.classList.add("dnd5e2", "evaluation");
+  evaluation.innerHTML = targets.reduce((str, { name, img, ac, uuid }) => {
+    const isMiss = attackRoll.total < ac;
+    return `
+      ${str}
+      <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
+        <img src="${img}" alt="${name}">
+        <div class="name-stacked">
+          <span class="title">
+            ${name}
+            <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
+          </span>
+        </div>
+        <div class="ac">
+          <i class="fas fa-shield-halved"></i>
+          <span>${ac}</span>
+        </div>
+      </li>
+    `;
+  }, "");
+  html.querySelector(".message-content")?.appendChild(evaluation);
 }
 
 /* -------------------------------------------- */

@@ -1436,7 +1436,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         left: window.innerWidth - 710
       },
       messageData: {
-        "flags.dnd5e.roll": {type: "attack", itemId: this.id, itemUuid: this.uuid},
+        "flags.dnd5e": {
+          targets: this._formatAttackTargets(),
+          roll: { type: "attack", itemId: this.id, itemUuid: this.uuid }
+        },
         speaker: ChatMessage.getSpeaker({actor: this.actor})
       }
     }, options);
@@ -1468,6 +1471,30 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
     if ( ammoUpdate.length ) await this.actor?.updateEmbeddedDocuments("Item", ammoUpdate);
     return roll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {object} TargetDescriptor5e
+   * @property {string} uuid  The UUID of the target.
+   * @property {string} img   The target's image.
+   * @property {string} name  The target's name.
+   * @property {number} ac    The target's armor class.
+   */
+
+  /**
+   * Extract salient information about targeted Actors.
+   * @returns {TargetDescriptor5e[]}
+   * @protected
+   */
+  _formatAttackTargets() {
+    const targets = [];
+    for ( const token of game.user.targets ) {
+      const { name, img, system, uuid } = token.actor ?? {};
+      if ( uuid ) targets.push({ name, img, uuid, ac: system.attributes.ac.value });
+    }
+    return targets;
   }
 
   /* -------------------------------------------- */

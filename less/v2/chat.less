@@ -145,12 +145,14 @@
       background: var(--dnd5e-color-success-background);
       border: 1px solid var(--dnd5e-color-success);
       color: var(--dnd5e-color-success-critical);
+      &::after { color: var(--dnd5e-color-success); }
     }
 
     &.failure, &.fumble {
       background: var(--dnd5e-color-failure-background);
       border: 1px solid var(--dnd5e-color-failure);
       color: var(--dnd5e-color-failure-critical);
+      &::after { color: var(--dnd5e-color-failure); }
     }
   }
 
@@ -446,4 +448,85 @@
 [data-display-challenge] {
   .hidden-dc { display: none; }
   .visible-dc { display: contents; }
+}
+
+/* ---------------------------------- */
+/*  Target Evaluations                */
+/* ---------------------------------- */
+
+:is(.chat-popout, #chat-log) .message .dnd5e2.evaluation {
+  list-style: none;
+  padding: 0;
+  margin: .375rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+
+  .target {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .325rem;
+    border: 1px solid;
+    border-radius: 3px;
+
+    > img {
+      width: 36px;
+      height: 36px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 100%;
+      border: 3px solid var(--dnd5e-color-gold);
+      box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+      background: var(--dnd5e-color-light-gray);
+    }
+
+    .name-stacked {
+      flex: 1;
+      line-height: normal;
+      min-height: 24px;
+
+      .title {
+        font-size: var(--font-size-16);
+        display: flex;
+        align-items: center;
+        gap: .325rem;
+
+        > i { font-size: var(--font-size-14); }
+      }
+    }
+
+    .ac {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      font-size: var(--font-size-16);
+      margin-right: .5rem;
+      opacity: .35;
+
+      > i { min-height: 17px; }
+
+      > span {
+        font-weight: bold;
+        font-family: var(--font-primary);
+      }
+    }
+
+    &.hit {
+      border-color: var(--dnd5e-color-success);
+      background: var(--dnd5e-color-success-background);
+      .ac { color: #105b10; }
+      .title > i { color: var(--dnd5e-color-success); }
+    }
+
+    &.miss {
+      border-color: var(--dnd5e-color-failure);
+      background: var(--dnd5e-color-failure-background);
+      .ac { color: var(--dnd5e-color-failure); }
+      .title > i {
+        color: var(--dnd5e-color-failure);
+        height: 12px;
+      }
+    }
+  }
 }
