@@ -231,8 +231,10 @@ export default class ItemSheet5e extends ItemSheet {
    */
   async _getItemBaseTypes() {
     const type = this.item.type === "equipment" ? "armor" : this.item.type;
-    const {armorIds, shieldIds} = CONFIG.DND5E;
-    const baseIds = this.item.type === "equipment" ? {...armorIds, ...shieldIds} : CONFIG.DND5E[`${type}Ids`];
+    const baseIds = this.item.type === "equipment" ? {
+      ...CONFIG.DND5E.armorIds,
+      ...CONFIG.DND5E.shieldIds
+    } : CONFIG.DND5E[`${type}Ids`];
     if ( baseIds === undefined ) return {};
 
     const baseType = this.item.system.type.value;
