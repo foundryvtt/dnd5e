@@ -9,6 +9,7 @@ import DamageRoll from "../dice/damage-roll.mjs";
  */
 export function highlightCriticalSuccessFailure(message, html, data) {
   if ( !message.isContentVisible || !message.rolls.length ) return;
+  const displayChallenge = shouldDisplayChallenge(message);
 
   // Highlight rolls where the first part is a d20 roll
   for ( let [index, d20Roll] of message.rolls.entries() ) {
@@ -27,7 +28,7 @@ export function highlightCriticalSuccessFailure(message, html, data) {
     if ( !total ) continue;
     if ( d20Roll.isCritical ) total.classList.add("critical");
     else if ( d20Roll.isFumble ) total.classList.add("fumble");
-    else if ( d.options.target ) {
+    else if ( d.options.target && displayChallenge ) {
       if ( d20Roll.total >= d.options.target ) total.classList.add("success");
       else total.classList.add("failure");
     }
@@ -48,6 +49,8 @@ export function displayChatActionButtons(message, html, data) {
     const flavor = html.find(".flavor-text");
     if ( flavor.text() === html.find(".item-name").text() ) flavor.remove();
 
+    if ( shouldDisplayChallenge(message) ) chatCard[0].dataset.displayChallenge = "";
+
     // If the user is the message author or the actor owner, proceed
     let actor = game.actors.get(data.message.speaker.actor);
     if ( actor && actor.isOwner ) return;
@@ -59,6 +62,22 @@ export function displayChatActionButtons(message, html, data) {
       if ( (btn.dataset.action === "save") || (btn.dataset.action === "rollRequest") ) return;
       btn.style.display = "none";
     });
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Should roll DCs and other challenge details be displayed on this card?
+ * @param {ChatMessage} message  Chat message being displayed.
+ * @returns {boolean}
+ */
+function shouldDisplayChallenge(message) {
+  if ( game.user.isGM || (message.user === game.user) ) return true;
+  switch ( game.settings.get("dnd5e", "challengeVisibility") ) {
+    case "all": return true;
+    case "player": return !message.user.isGM;
+    default: return false;
   }
 }
 
