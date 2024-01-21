@@ -1,6 +1,5 @@
 import Proficiency from "./proficiency.mjs";
 import * as Trait from "./trait.mjs";
-import ScaleValueAdvancement from "../advancement/scale-value.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
@@ -253,7 +252,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _prepareScaleValues() {
     this.system.scale = this.items.reduce((scale, item) => {
-      if ( ScaleValueAdvancement.metadata.validItemTypes.has(item.type) ) scale[item.identifier] = item.scaleValues;
+      if ( CONFIG.DND5E.advancementTypes.ScaleValue.validItemTypes.has(item.type) ) {
+        scale[item.identifier] = item.scaleValues;
+      }
       return scale;
     }, {});
   }

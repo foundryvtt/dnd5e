@@ -18,7 +18,6 @@ export default class HitPointsAdvancement extends Advancement {
       title: game.i18n.localize("DND5E.AdvancementHitPointsTitle"),
       hint: game.i18n.localize("DND5E.AdvancementHitPointsHint"),
       multiLevel: true,
-      validItemTypes: new Set(["class"]),
       apps: {
         config: HitPointsConfig,
         flow: HitPointsFlow
