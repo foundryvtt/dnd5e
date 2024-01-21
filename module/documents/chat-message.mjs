@@ -9,7 +9,8 @@ import DamageRoll from "../dice/damage-roll.mjs";
  */
 export function highlightCriticalSuccessFailure(message, html, data) {
   if ( !message.isContentVisible || !message.rolls.length ) return;
-  const displayChallenge = shouldDisplayChallenge(message);
+  const originatingMessage = game.messages.get(message.getFlag("dnd5e", "originatingMessage"));
+  const displayChallenge = originatingMessage ? shouldDisplayChallenge(originatingMessage) : false;
 
   // Highlight rolls where the first part is a d20 roll
   for ( let [index, d20Roll] of message.rolls.entries() ) {
