@@ -7,10 +7,20 @@
   --dnd5e-sheet-header-right-width: 280px;
   --dnd5e-sheet-sidebar-width: 230px;
   background: transparent;
-  border: 1px solid var(--dnd5e-color-gold);
   min-width: 800px;
   min-height: 800px;
   transform-style: preserve-3d;
+  box-shadow: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    border: 1px solid var(--dnd5e-color-gold);
+    box-shadow: 0 0 20px var(--color-shadow-dark);
+    border-radius: 5px;
+  }
 
   /* ---------------------------------- */
   /*  Outer Window                      */
@@ -48,8 +58,6 @@
   }
 
   .window-content > form { margin-top: -30px; }
-
-  .window-resizable-handle { transform: translateZ(1px); }
 
   /* ---------------------------------- */
   /*  Minimized                         */
@@ -216,7 +224,7 @@
     display: flex;
     flex-direction: column;
     gap: .25rem;
-    transform: translateZ(-1px);
+    z-index: -1;
 
     > .item {
       width: var(--tab-full-width);
@@ -261,8 +269,8 @@
   .tab-details .tab-body { padding-top: 56px; }
 
   .sheet-body {
+    border-radius: 5px;
     position: relative;
-    transform: translateZ(1px);
     background: url("ui/texture1.webp") no-repeat top center / auto 770px,
       url("ui/texture2.webp") no-repeat bottom center / auto 704px;
 
@@ -1003,7 +1011,6 @@
     left: calc(var(--dnd5e-sheet-sidebar-width) + 1.25rem);
     pointer-events: none;
     container-type: inline-size;
-    transform: translateZ(1px);
 
     .rows {
       padding: 4.75rem 0 4.75rem 1.5rem;
@@ -1153,7 +1160,6 @@
     display: none;
     position: absolute;
     inset: auto 1rem 1rem auto;
-    transform: translateZ(1px);
   }
 
   form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects) .create-child { display: block; }
