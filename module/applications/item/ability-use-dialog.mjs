@@ -106,16 +106,19 @@ export default class AbilityUseDialog extends Dialog {
       return arr;
     }, []).filter(sl => sl.level <= lmax);
 
-    // If this character has pact slots, present them as well.
-    const pact = actor.system.spells.pact;
-    if ( pact.level >= level ) {
-      options.push({
-        key: "pact",
-        level: pact.level,
-        label: `${game.i18n.format("DND5E.SpellLevelPact", {level: pact.level, n: pact.value})}`,
-        canCast: true,
-        hasSlots: pact.value > 0
-      });
+    // If this character has other kinds of slots, present them as well.
+    for (const k of Object.keys(CONFIG.DND5E.spellcastingTypes)) {
+      const spellData = actor.system.spells[k];
+      if ( !spellData ) continue;
+      if ( spellData.level >= level ) {
+        options.push({
+          key: k,
+          level: spellData.level,
+          label: `${game.i18n.format(`DND5E.SpellLevel${k.capitalize()}`, {level: spellData.level, n: spellData.value})}`,
+          canCast: true,
+          hasSlots: spellData.value > 0
+        });
+      }
     }
 
     return options;
@@ -247,7 +250,12 @@ export default class AbilityUseDialog extends Dialog {
     const item = data.item;
     const { quantity, level, consume, preparation } = item.system;
     const scale = item.usageScaling;
-    const levels = (preparation?.mode === "pact") ? [level, item.actor.system.spells.pact.level] : [level];
+    const levels = [level];
+
+    if ( item.type === "spell" ) {
+      const spellData = item.actor.system.spells[preparation.mode] ?? {};
+      if ( "level" in spellData ) levels.push(spellData.level);
+    }
 
     if ( (scale === "slot") && data.slotOptions.every(o => !o.hasSlots) ) {
       // Warn that the actor has no spell slots of any level with which to use this item.
