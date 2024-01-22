@@ -17,7 +17,7 @@ import Proficiency from "../documents/actor/proficiency.mjs";
  * can define its own schema unique to it, and then add templates in direct correspondence to those in template.json
  * via SystemDataModel.mixin.
  */
-export default class SystemDataModel extends foundry.abstract.DataModel {
+export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /** @inheritdoc */
   static _enableV10Validation = true;
