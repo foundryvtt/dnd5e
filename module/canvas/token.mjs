@@ -4,6 +4,12 @@ import flags from "../documents/mixins/flags.mjs";
  * Extend the base Token class to implement additional system-specific logic.
  */
 export default class Token5e extends Token {
+  constructor(...args) {
+    super(...args);
+    this.ringAnimation = new TokenRingAnimation(this);
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Token ring attributes
@@ -20,6 +26,12 @@ export default class Token5e extends Token {
     effects: 0,
     scaleCorrection: 1
   };
+
+  /**
+   * Interface for calling animations on the dynamic token ring.
+   * @type {TokenRingAnimation}
+   */
+  ringAnimation;
 
   /* -------------------------------------------- */
 
@@ -268,5 +280,86 @@ export default class Token5e extends Token {
     tr.scaleCorrection = scaleCorrection ?? 1;
     tr.ringUVs = game.dnd5e.tokenRings.getTextureUVs(tr.ringName, scaleCorrection);
     tr.bkgUVs = game.dnd5e.tokenRings.getTextureUVs(tr.bkgName, scaleCorrection);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Interface for calling animations on the dynamic token ring.
+ * @param {Token5e} token  Token that will be animated.
+ */
+class TokenRingAnimation {
+  constructor(token) {
+    this.#token = new WeakRef(token);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Weak reference to the token being animated.
+   * @type {WeakRef<Token5e>}
+   */
+  #token;
+
+  /**
+   * Reference to the token that should be animated.
+   * @type {Token5e|void}
+   */
+  get token() {
+    return this.#token.deref();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties for the token ring being animated.
+   * @type {object}
+   */
+  get tokenRing() {
+    return this.token?.tokenRing;
+  }
+
+  /* -------------------------------------------- */
+  /*  Animations                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Flash the ring briefly with a certain color.
+   * @param {Color} color                              Color to flash.
+   * @param {CanvasAnimationOptions} animationOptions  Options to customize the animation.
+   * @returns {Promise<boolean|void>}
+   */
+  async flashColor(color, animationOptions={}) {
+    if ( !this.tokenRing || Number.isNaN(color) ) return;
+
+    const originalColor = new Color(this.tokenRing.ringColorLittleEndian);
+    const flashColor = new Color(color.littleEndian);
+    const duration = animationOptions.duration ?? 600;
+    delete animationOptions.duration;
+
+    if ( await CanvasAnimation.animate([{
+      attribute: "ringColorLittleEndian",
+      parent: this.tokenRing,
+      from: originalColor,
+      to: flashColor,
+      color: true
+    }], foundry.utils.mergeObject({
+      duration: duration * 0.15,
+      priority: PIXI.UPDATE_PRIORITY.HIGH,
+      easing: CanvasAnimation.easeOutCircle
+    })) === false ) return false;
+
+    return CanvasAnimation.animate([{
+      attribute: "ringColorLittleEndian",
+      parent: this.tokenRing,
+      from: flashColor,
+      to: originalColor,
+      color: true
+    }], foundry.utils.mergeObject({
+      duration: duration * 0.85,
+      priority: PIXI.UPDATE_PRIORITY.HIGH,
+      easing: CanvasAnimation.easeInCircle
+    }));
   }
 }
