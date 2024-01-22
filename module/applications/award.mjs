@@ -94,6 +94,14 @@ export default class Award extends DialogMixin(FormApplication) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    this._validateForm();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onChangeInput(event) {
     super._onChangeInput(event);
     this._validateForm();

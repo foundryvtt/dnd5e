@@ -593,6 +593,20 @@
     input { max-width: unset; }
   }
 
+  .distribution {
+    display: grid;
+    grid-template-columns: auto repeat(3, max-content);
+    gap: 4px;
+    align-items: center;
+    margin-block-end: 6px;
+    font-size: var(--font-size-12);
+
+    slide-toggle {
+      --slide-toggle-track-color-unchecked: var(--dnd5e-color-olive);
+      --slide-toggle-track-color-checked: var(--dnd5e-color-maroon);
+    }
+  }
+
   .destinations {
     display: grid;
     grid-template-columns: 1fr 1fr;

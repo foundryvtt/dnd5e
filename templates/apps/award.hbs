@@ -27,6 +27,12 @@
         <p class="no-destinations">{{localize "DND5E.Award.NoDestinations"}}</p>
         {{/each}}
     </div>
+    <div class="distribution">
+        <label class="roboto-upper">{{localize "DND5E.Award.Distribution.Mode"}}</label>
+        <span>{{localize "DND5E.Award.Distribution.Split"}}</span>
+        <slide-toggle name="each" {{checked each}}></slide-toggle>
+        <span>{{localize "DND5E.Award.Distribution.Each"}}</span>
+    </div>
     <button type="submit" name="transfer" disabled>
         <i class="fa-solid fa-trophy"></i> {{localize "DND5E.Award.Action"}}
     </button>

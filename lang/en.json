@@ -333,6 +333,11 @@
 "DND5E.Award": {
   "Title": "Distribute Award",
   "Action": "Award",
+  "Distribution": {
+    "Mode": "Distribution Mode",
+    "Split": "Split",
+    "Each": "Each"
+  },
   "Message": "{name} has been awarded {award}.",
   "NoDestinations": "No Destinations Available",
   "NoPrimaryParty": "No primary party set, displaying characters assigned to players instead.",
