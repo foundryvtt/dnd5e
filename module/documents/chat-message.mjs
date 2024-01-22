@@ -41,6 +41,7 @@ export default class ChatMessage5e extends ChatMessage {
     this._displayChatActionButtons(html);
     this._highlightCriticalSuccessFailure(html);
     if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
+      // First selector ensures legacy chat cards continue to collapse properly
       html.find(".card-content:not(.details)").hide();
       html.find(".description.collapsible").each((i, el) => {
         el.classList.add("collapsed");
