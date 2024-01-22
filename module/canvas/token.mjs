@@ -33,6 +33,14 @@ export default class Token5e extends Token {
    */
   ringAnimation;
 
+  /**
+   * Is the dynamic token ring enabled?
+   * @type {boolean}
+   */
+  get hasDynamicRing() {
+    return !!this.document.getFlag("dnd5e", "tokenRing.enabled");
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -331,11 +339,11 @@ class TokenRingAnimation {
    * @returns {Promise<boolean|void>}
    */
   async flashColor(color, animationOptions={}) {
-    if ( !this.tokenRing || Number.isNaN(color) ) return;
+    if ( !this.token?.hasDynamicRing || Number.isNaN(color) ) return;
 
     const originalColor = new Color(this.tokenRing.ringColorLittleEndian);
     const flashColor = new Color(color.littleEndian);
-    const duration = animationOptions.duration ?? 600;
+    const duration = animationOptions.duration ?? 1600;
     delete animationOptions.duration;
 
     if ( await CanvasAnimation.animate([{
@@ -347,7 +355,7 @@ class TokenRingAnimation {
     }], foundry.utils.mergeObject({
       duration: duration * 0.15,
       priority: PIXI.UPDATE_PRIORITY.HIGH,
-      easing: CanvasAnimation.easeOutCircle
+      easing: CanvasAnimation.easeInCircle
     })) === false ) return false;
 
     return CanvasAnimation.animate([{
@@ -359,7 +367,7 @@ class TokenRingAnimation {
     }], foundry.utils.mergeObject({
       duration: duration * 0.85,
       priority: PIXI.UPDATE_PRIORITY.HIGH,
-      easing: CanvasAnimation.easeInCircle
+      easing: CanvasAnimation.easeOutCircle
     }));
   }
 }
