@@ -59,6 +59,7 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.documentClass = documents.Actor5e;
+  CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
   CONFIG.Item.compendiumIndexFields.push("system.container");
   CONFIG.Item.documentClass = documents.Item5e;
@@ -333,8 +334,8 @@ Hooks.once("setup", function() {
     .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
 
   // Configure token rings
-  CONFIG.DND5E.tokenRings.shaderClass ??=
-    game.release.generation < 12 ? TokenRingSamplerShaderV11 : TokenRingSamplerShader;
+  CONFIG.DND5E.tokenRings.shaderClass ??= game.release.generation < 12
+    ? TokenRingSamplerShaderV11 : TokenRingSamplerShader;
   game.dnd5e.tokenRings = new TokenRings5e();
 });
 
@@ -459,9 +460,8 @@ Hooks.on("renderSettings", () => {
 /*  Other Hooks                                 */
 /* -------------------------------------------- */
 
-Hooks.on("renderChatMessage", documents.chat.onRenderChatMessage);
-Hooks.on("renderChatPopout", documents.chat.onRenderChatPopout);
-Hooks.on("getChatLogEntryContext", documents.chat.addChatMessageContextOptions);
+Hooks.on("renderChatPopout", documents.ChatMessage5e.onRenderChatPopout);
+Hooks.on("getChatLogEntryContext", documents.ChatMessage5e.addChatMessageContextOptions);
 
 Hooks.on("renderChatLog", (app, html, data) => documents.Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
