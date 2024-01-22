@@ -140,10 +140,10 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Custom application for FormulaFields.
-   * @param {Actor} actor                   The Actor to whom this effect should be applied
+   * @param {Actor5e} actor                 The Actor to whom this effect should be applied
    * @param {EffectChangeData} change       The change data being applied
-   * @param {*} current                     The current value being modified
-   * @param {*} delta                       The parsed value of the change object
+   * @param {string} current                The current value being modified
+   * @param {string} delta                  The parsed value of the change object
    * @param {object} changes                An object which accumulates changes to be applied
    */
   _applyFormulaField(actor, change, current, delta, changes) {
@@ -155,13 +155,8 @@ export default class ActiveEffect5e extends ActiveEffect {
     let fn = "min";
     switch ( change.mode ) {
       case CONST.ACTIVE_EFFECT_MODES.ADD:
-        let operator = "+";
-        if ( delta.startsWith("+") ) {
-          delta = delta.replace("+", "").trim();
-        } else if ( delta.startsWith("-") ) {
-          delta = delta.replace("-", "").trim();
-          operator = "-";
-        }
+        const operator = delta.startsWith("-") ? "-" : "+";
+        delta = delta.replace(/^[+-]?/, "").trim();
         changes[change.key] = `${current} ${operator} ${delta}`;
         break;
       case CONST.ACTIVE_EFFECT_MODES.MULTIPLY:
