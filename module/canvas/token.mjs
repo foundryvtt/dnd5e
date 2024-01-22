@@ -342,32 +342,55 @@ class TokenRingAnimation {
     if ( !this.token?.hasDynamicRing || Number.isNaN(color) ) return;
 
     const originalColor = new Color(this.tokenRing.ringColorLittleEndian);
-    const flashColor = new Color(color.littleEndian);
-    const duration = animationOptions.duration ?? 1600;
-    delete animationOptions.duration;
 
-    if ( await CanvasAnimation.animate([{
+    return await CanvasAnimation.animate([{
       attribute: "ringColorLittleEndian",
       parent: this.tokenRing,
       from: originalColor,
-      to: flashColor,
+      to: new Color(color.littleEndian),
       color: true
     }], foundry.utils.mergeObject({
-      duration: duration * 0.15,
+      duration: 1600,
       priority: PIXI.UPDATE_PRIORITY.HIGH,
-      easing: CanvasAnimation.easeInCircle
-    })) === false ) return false;
+      easing: TokenRingAnimation.createSpikeEasing(.15),
+      ontick: (d, data) => {
+        // Manually set the final value to the origin due to issue with the CanvasAnimation
+        // See: https://github.com/foundryvtt/foundryvtt/issues/10364
+        if ( data.time >= data.duration ) this.tokenRing.ringColorLittleEndian = originalColor;
+      }
+    }, animationOptions));
+  }
 
-    return CanvasAnimation.animate([{
-      attribute: "ringColorLittleEndian",
-      parent: this.tokenRing,
-      from: flashColor,
-      to: originalColor,
-      color: true
-    }], foundry.utils.mergeObject({
-      duration: duration * 0.85,
-      priority: PIXI.UPDATE_PRIORITY.HIGH,
-      easing: CanvasAnimation.easeOutCircle
-    }));
+  /* -------------------------------------------- */
+  /*  Easing                                      */
+  /* -------------------------------------------- */
+
+  /**
+   * Create an easing function that spikes in the center.
+   * @param {number} [spikePct=0.5]  Position on [0,1] where the spike occurs.
+   * @returns {Function(number): number}
+   */
+  static createSpikeEasing(spikePct=0.5) {
+    const scaleStart = 1 / spikePct;
+    const scaleEnd = 1 / (1 - spikePct);
+    return pt => {
+      if ( pt < spikePct ) return CanvasAnimation.easeInCircle(pt * scaleStart);
+      else return 1 - CanvasAnimation.easeOutCircle(((pt - spikePct) * scaleEnd));
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Easing function that produces two peaks before returning to the original value.
+   * @param {number} pt     The proportional animation timing on [0,1].
+   * @returns {number}      The eased animation progress on [0,1].
+   */
+  static easeTwoPeaks(pt) {
+    return (
+      Math.sin(
+        (4 * Math.PI * pt) - (Math.PI / 2)
+      ) + 1
+    ) / 2;
   }
 }
