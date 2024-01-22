@@ -1,4 +1,5 @@
 import EffectsElement from "../applications/components/effects.mjs";
+import { FormulaField } from "../data/fields.mjs";
 import { staticID } from "../utils.mjs";
 
 /**
@@ -76,16 +77,25 @@ export default class ActiveEffect5e extends ActiveEffect {
     const current = foundry.utils.getProperty(actor, change.key) ?? null;
 
     const getTargetType = field => {
-      if ( field instanceof foundry.data.fields.ArrayField ) return "Array";
+      if ( field instanceof FormulaField ) return "formula";
+      else if ( field instanceof foundry.data.fields.ArrayField ) return "Array";
       else if ( field instanceof foundry.data.fields.ObjectField ) return "Object";
       else if ( field instanceof foundry.data.fields.BooleanField ) return "boolean";
       else if ( field instanceof foundry.data.fields.NumberField ) return "number";
       else if ( field instanceof foundry.data.fields.StringField ) return "string";
     };
-    // TODO: Custom handling for FormulaField
 
     const targetType = getTargetType(field);
     if ( !targetType ) return super.apply(actor, change);
+
+    // Special handling for FormulaField
+    if ( targetType === "formula" ) {
+      const changes = {};
+      const delta = field._cast(change.value).trim();
+      this._applyFormulaField(actor, change, current, delta, changes);
+      foundry.utils.mergeObject(actor, changes);
+      return changes;
+    }
 
     let delta;
     try {
@@ -124,6 +134,46 @@ export default class ActiveEffect5e extends ActiveEffect {
     // Apply all changes to the Actor data
     foundry.utils.mergeObject(actor, changes);
     return changes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Custom application for FormulaFields.
+   * @param {Actor5e} actor                 The Actor to whom this effect should be applied
+   * @param {EffectChangeData} change       The change data being applied
+   * @param {string} current                The current value being modified
+   * @param {string} delta                  The parsed value of the change object
+   * @param {object} changes                An object which accumulates changes to be applied
+   */
+  _applyFormulaField(actor, change, current, delta, changes) {
+    if ( !current || change.mode === CONST.ACTIVE_EFFECT_MODES.OVERRIDE ) {
+      this._applyOverride(actor, change, current, delta, changes);
+      return;
+    }
+    const terms = (new Roll(current)).terms;
+    let fn = "min";
+    switch ( change.mode ) {
+      case CONST.ACTIVE_EFFECT_MODES.ADD:
+        const operator = delta.startsWith("-") ? "-" : "+";
+        delta = delta.replace(/^[+-]?/, "").trim();
+        changes[change.key] = `${current} ${operator} ${delta}`;
+        break;
+      case CONST.ACTIVE_EFFECT_MODES.MULTIPLY:
+        if ( terms.length > 1 ) changes[change.key] = `(${current}) * ${delta}`;
+        else changes[change.key] = `${current} * ${delta}`;
+        break;
+      case CONST.ACTIVE_EFFECT_MODES.UPGRADE:
+        fn = "max";
+      case CONST.ACTIVE_EFFECT_MODES.DOWNGRADE:
+        if ( (terms.length === 1) && (terms[0].fn === fn) ) {
+          changes[change.key] = current.replace(/\)$/, `, ${delta})`);
+        } else changes[change.key] = `${fn}(${current}, ${delta})`;
+        break;
+      default:
+        this._applyCustom(actor, change, current, delta, changes);
+        break;
+    }
   }
 
   /* -------------------------------------------- */
