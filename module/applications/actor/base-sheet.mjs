@@ -469,7 +469,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const spellbook = {};
 
     // Define section and label mappings
-    const sections = {atwill: -20, innate: -10, pact: 0.5 };
+    const sections = Object.entries(CONFIG.DND5E.spellPreparationModes).reduce((acc, [k, {order}]) => {
+      if (Number.isNumeric(order)) acc[k] = Number(order);
+      return acc;
+    }, {});
     const useLabels = {"-20": "-", "-10": "-", 0: "&infin;"};
 
     // Format a spellbook entry for a certain indexed level
@@ -508,14 +511,16 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Pact magic users have cantrips and a pact magic section
-    if ( levels.pact && levels.pact.max ) {
-      if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      const l = levels.pact;
-      const config = CONFIG.DND5E.spellPreparationModes.pact;
-      const level = game.i18n.localize(`DND5E.SpellLevel${levels.pact.level}`);
-      const label = `${config} — ${level}`;
-      registerSection("pact", sections.pact, label, {
-        prepMode: "pact",
+    for (const [k, v] of Object.entries(CONFIG.DND5E.spellPreparationModes)) {
+      if ( !(k in levels) || (!v.upcast) || !(levels[k].max) ) continue;
+
+      if ( !spellbook["0"] && v.cantrips ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
+      const l = levels[k];
+      const config = CONFIG.DND5E.spellPreparationModes[k];
+      const level = game.i18n.localize(`DND5E.SpellLevel${l.level}`);
+      const label = `${config.label} — ${level}`;
+      registerSection(k, sections[k], label, {
+        prepMode: k,
         value: l.value,
         max: l.max,
         override: l.override
@@ -534,7 +539,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         if ( !spellbook[s] ) {
           const l = levels[mode] || {};
           const config = CONFIG.DND5E.spellPreparationModes[mode];
-          registerSection(mode, s, config, {
+          registerSection(mode, s, config.label, {
             prepMode: mode,
             value: l.value,
             max: l.max,

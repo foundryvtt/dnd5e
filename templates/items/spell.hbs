@@ -99,7 +99,7 @@
                         {{ localize "DND5E.SpellPrepared" }} <input type="checkbox" name="system.preparation.prepared" {{checked system.preparation.prepared}}/>
                     </label>
                     <select name="system.preparation.mode">
-                        {{ selectOptions config.spellPreparationModes selected=system.preparation.mode }}
+                        {{ selectOptions config.spellPreparationModes selected=system.preparation.mode labelAttr="label" }}
                     </select>
                 </div>
             </div>

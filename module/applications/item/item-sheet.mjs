@@ -337,7 +337,7 @@ export default class ItemSheet5e extends ItemSheet {
         if ( typeConfig?.subtypes ) return typeConfig.subtypes[this.item.system.type.subtype] ?? null;
         break;
       case "spell":
-        return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation];
+        return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation.mode]?.label;
       case "tool":
         return CONFIG.DND5E.proficiencyLevels[this.item.system.prof?.multiplier || 0];
     }
