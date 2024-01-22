@@ -94,6 +94,16 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Return only the group members that are characters.
+   * @type {Actor5e[]}
+   */
+  get playerCharacters() {
+    return this.members.map(m => m.actor).filter(a => a.type === "character");
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 

@@ -16,6 +16,7 @@ export default class Award extends DialogMixin(FormApplication) {
       height: "auto",
       currency: null,
       xp: null,
+      each: false,
       savedDestinations: new Set()
     });
   }
@@ -61,6 +62,7 @@ export default class Award extends DialogMixin(FormApplication) {
       return obj;
     }, {});
     context.destinations = Award.prepareDestinations(this.transferDestinations, this.options.savedDestinations);
+    context.each = this.options.each ?? false;
     context.hideXP = game.settings.get("dnd5e", "disableExperienceTracking");
     context.noPrimaryParty = !game.settings.get("dnd5e", "primaryParty")?.actor && !this.isPartyAward;
     context.xp = this.options.xp ?? this.object?.system.details.xp.value ?? this.object?.system.details.xp.derived;
@@ -117,10 +119,11 @@ export default class Award extends DialogMixin(FormApplication) {
   async _updateObject(event, formData) {
     const data = foundry.utils.expandObject(formData);
     const destinations = this.transferDestinations.filter(d => data.destination[d.id]);
+    const each = formData.each;
     this._saveDestinations(destinations);
     const results = new Map();
-    await this.constructor.awardCurrency(data.amount, destinations, { origin: this.object, results });
-    await this.constructor.awardXP(data.xp, destinations, { origin: this.object, results });
+    await this.constructor.awardCurrency(data.amount, destinations, { each, origin: this.object, results });
+    await this.constructor.awardXP(data.xp, destinations, { each, origin: this.object, results });
     this.constructor.displayAwardMessages(results);
     this.close();
   }
@@ -146,12 +149,18 @@ export default class Award extends DialogMixin(FormApplication) {
    * @param {object[]} amounts                 Amount of each denomination to transfer.
    * @param {(Actor5e|Item5e)[]} destinations  Documents that should receive the currency.
    * @param {object} [config={}]
+   * @param {boolean} [config.each=false]      Award the specified amount to each player, rather than splitting it.
    * @param {Actor5e|Item5e} [config.origin]   Document from which to move the currency, if not a freeform award.
    * @param {Map<Actor5e|Item5e, object>} [config.results]  Results of the award operation.
    */
-  static async awardCurrency(amounts, destinations, { origin, results=new Map() }={}) {
+  static async awardCurrency(amounts, destinations, { each=false, origin, results=new Map() }={}) {
     if ( !destinations.length ) return;
     const originCurrency = origin ? foundry.utils.deepClone(origin.system.currency) : null;
+
+    for ( const k of Object.keys(amounts) ) {
+      if ( each ) amounts[k] = amounts[k] * destinations.length;
+      if ( origin ) amounts[k] = Math.min(amounts[k], originCurrency[k] ?? 0);
+    }
 
     let remainingDestinations = destinations.length;
     for ( const destination of destinations ) {
@@ -189,14 +198,16 @@ export default class Award extends DialogMixin(FormApplication) {
    * @param {number} amount            Amount of XP to award.
    * @param {Actor5e[]} destinations   Actors that should receive the XP.
    * @param {object} [config={}]
+   * @param {boolean} [config.each=false]      Award the specified amount to each player, rather than splitting it.
    * @param {Actor5e} [config.origin]  Group actor from which to transfer the XP.
    * @param {Map<Actor5e|Item5e, object>} [config.results]  Results of the award operation.
    */
-  static async awardXP(amount, destinations, { origin, results=new Map() }={}) {
+  static async awardXP(amount, destinations, { each=false, origin, results=new Map() }={}) {
     destinations = destinations.filter(d => ["character", "group"].includes(d.type));
     if ( !amount || !destinations.length ) return;
 
     let originUpdate = origin?.system.details.xp.value ?? Infinity;
+    if ( each ) amount = amount * destinations.length;
     const perDestination = Math.floor(Math.min(amount, originUpdate) / destinations.length);
     originUpdate -= amount;
     for ( const destination of destinations ) {
@@ -292,7 +303,7 @@ export default class Award extends DialogMixin(FormApplication) {
     }
 
     try {
-      const { currency, xp, party } = this.parseAwardCommand(message);
+      const { currency, xp, party, each } = this.parseAwardCommand(message);
 
       for ( const [key, formula] of Object.entries(currency) ) {
         const roll = new Roll(formula);
@@ -303,16 +314,17 @@ export default class Award extends DialogMixin(FormApplication) {
       // If the party command is set, a primary party is set, and the award isn't empty, skip the UI
       const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
       if ( party && primaryParty && (xp || filteredKeys(currency).length) ) {
+        const destinations = each ? primaryParty.system.playerCharacters : [primaryParty];
         const results = new Map();
-        await this.awardCurrency(currency, [primaryParty], { results });
-        await this.awardXP(xp, [primaryParty], { results });
+        await this.awardCurrency(currency, destinations, { each, results });
+        await this.awardXP(xp, destinations, { each, results });
         this.displayAwardMessages(results);
       }
 
       // Otherwise show the UI with defaults
       else {
         const savedDestinations = game.user.getFlag("dnd5e", "awardDestinations");
-        const app = new Award(null, { currency, xp, savedDestinations });
+        const app = new Award(null, { currency, xp, each, savedDestinations });
         app.render(true);
       }
     } catch(err) {
@@ -331,6 +343,7 @@ export default class Award extends DialogMixin(FormApplication) {
     const command = message.replace(this.COMMAND_PATTERN, "").toLowerCase();
 
     const currency = {};
+    let each = false;
     let party = false;
     let xp;
     const unrecognized = [];
@@ -342,6 +355,7 @@ export default class Award extends DialogMixin(FormApplication) {
         new Roll(amount);
         if ( label in CONFIG.DND5E.currencies ) currency[label] = amount;
         else if ( label === "xp" ) xp = amount;
+        else if ( part === "each" ) each = true;
         else if ( part === "party" ) party = true;
         else throw new Error();
       } catch(err) {
@@ -354,6 +368,6 @@ export default class Award extends DialogMixin(FormApplication) {
       commands: game.i18n.getListFormatter().format(unrecognized.map(u => `"${u}"`))
     }));
 
-    return { currency, xp, party };
+    return { currency, xp, each, party };
   }
 }
