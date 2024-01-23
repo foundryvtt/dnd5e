@@ -1525,12 +1525,6 @@ DND5E.spellPreparationModes = {
   innate: {
     label: "DND5E.SpellPrepInnate",
     order: -10
-  },
-  apothecary: {
-    label: "Apothecary",
-    order: 0.75,
-    upcast: true,
-    cantrips: false
   }
 };
 preLocalize("spellPreparationModes", { key: "label" });
