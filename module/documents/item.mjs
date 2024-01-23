@@ -952,9 +952,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( config.slotLevel ) {
         // A spell slot was consumed.
         if (Number.isInteger(config.slotLevel)) level = config.slotLevel;
-        else if (config.slotLevel in is.spells) {
+        else if (config.slotLevel in as.spells) {
           if (/^spell([0-9]+)$/.test(config.slotLevel)) level = parseInt(config.slotLevel.replace("spell", ""));
-          else level = is.spells[config.slotLevel].level;
+          else level = as.spells[config.slotLevel].level;
         }
       } else if ( config.resourceAmount ) {
         // A quantity of the resource was consumed.
