@@ -48,11 +48,16 @@
             <div class="class roboto-upper">{{ labels.class }}</div>
         </div>
 
-        {{!-- Level, XP, & Buttons --}}
+        {{!-- Level, Inspiration, XP, & Buttons --}}
         <div class="right">
 
             {{!-- Level --}}
             <div class="level" aria-label="{{ localize "DND5E.LevelNumber" }}">{{ system.details.level }}</div>
+
+            {{!-- Inspiration --}}
+            <button type="button" class="inspiration unbutton" data-action="toggleInspiration"
+                    aria-label="{{ localize "DND5E.Inspiration" }}" data-tooltip="DND5E.Inspiration"
+                    aria-pressed="{{ system.attributes.inspiration }}"></button>
 
             <div>
                 {{!-- Resting & Special Traits --}}

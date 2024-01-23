@@ -819,6 +819,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       case "findItem": this._onFindItem(target.dataset.itemType); break;
       case "removeFavorite": this._onRemoveFavorite(event); break;
       case "spellcasting": this._onToggleSpellcasting(event); break;
+      case "toggleInspiration": this._onToggleInspiration(); break;
       case "useFavorite": this._onUseFavorite(event); break;
     }
   }
@@ -883,6 +884,16 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       case "race": game.packs.get("dnd5e.races").render(true); break;
       case "background": game.packs.get("dnd5e.backgrounds").render(true); break;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling inspiration.
+   * @protected
+   */
+  _onToggleInspiration() {
+    this.actor.update({ "system.attributes.inspiration": !this.actor.system.attributes.inspiration });
   }
 
   /* -------------------------------------------- */

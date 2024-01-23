@@ -142,15 +142,17 @@
 
     /* Level, XP, & Buttons */
     > .right {
-      padding-right: 3rem;
+      --level-size: 78px;
+      --padding-right: 3rem;
+      padding-right: var(--padding-right);
       display: flex;
       flex-direction: column;
       position: relative;
 
       /* Level */
       .level {
-        width: 78px;
-        height: 78px;
+        width: var(--level-size);
+        height: var(--level-size);
         background: transparent url("ui/level-badge.webp") no-repeat center / contain;
         font-family: var(--dnd5e-font-roboto);
         font-weight: bold;
@@ -159,6 +161,62 @@
         place-content: center;
         margin-left: auto;
         font-size: var(--font-size-30);
+      }
+
+      /* Inspiration */
+      .inspiration {
+        --size: 36px;
+        padding: 0;
+        position: absolute;
+        right: calc(var(--level-size) + var(--padding-right) - var(--size) / 2);
+        top: calc(var(--level-size) / 2 - var(--size) / 2);
+        width: var(--size);
+        height: var(--size);
+        background: transparent url("ui/inspiration.webp") no-repeat center / contain;
+        filter: drop-shadow(0 3px 4px var(--dnd5e-shadow-45));
+        display: grid;
+        place-content: center;
+
+        &:hover {
+          box-shadow: none;
+          filter: drop-shadow(0 3px 4px rgb(255 255 255 / 50%));
+        }
+
+        &[aria-pressed="true"]::after {
+          content: "";
+          width: calc(var(--size) / 4 - 1px);
+          height: calc(var(--size) / 4 - 1px);
+          background: white;
+          transform: rotate(45deg);
+          filter: drop-shadow(0 0 3px var(--color-shadow-highlight))
+            drop-shadow(0 0 4px var(--color-shadow-highlight))
+            drop-shadow(0 0 12px var(--color-shadow-highlight));
+          animation: pulsate-inspiration 3s infinite ease-in-out;
+
+          @keyframes pulsate-inspiration {
+            0% {
+              filter: drop-shadow(0 0 3px var(--color-shadow-highlight))
+                drop-shadow(0 0 4px var(--color-shadow-highlight))
+                drop-shadow(0 0 12px var(--color-shadow-highlight));
+            }
+
+            50% {
+              filter: drop-shadow(0 0 3px var(--color-shadow-highlight))
+                drop-shadow(0 0 4px var(--color-shadow-highlight))
+                drop-shadow(0 0 4px var(--color-shadow-highlight));
+            }
+
+            100% {
+              filter: drop-shadow(0 0 3px var(--color-shadow-highlight))
+                drop-shadow(0 0 4px var(--color-shadow-highlight))
+                drop-shadow(0 0 12px var(--color-shadow-highlight));
+            }
+          }
+        }
+
+        @media (prefers-reduced-motion) {
+          &[aria-pressed="true"]::after { animation: none; }
+        }
       }
 
       /* XP & Buttons */
