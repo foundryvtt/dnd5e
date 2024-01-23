@@ -1,5 +1,10 @@
 <form autocomplete="off">
     <header>{{ localize "DND5E.Award.Title" }}</header>
+    <div class="distribution">
+        <span>{{localize "DND5E.Award.Distribution.Split"}}</span>
+        <slide-toggle name="each" {{checked each}}></slide-toggle>
+        <span>{{localize "DND5E.Award.Distribution.Each"}}</span>
+    </div>
     {{#unless hideXP}}
     <label class="xp currency-style">
         <span class="roboto-upper">{{localize "DND5E.ExperiencePoints"}}</span>

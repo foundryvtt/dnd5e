@@ -155,8 +155,11 @@ async function enrichAward(config, label, options) {
     </span>
   `);
 
+  let award = game.i18n.getListFormatter({ type: "unit" }).format(entries);
+  if ( parsed.each ) award = game.i18n.format("EDITOR.DND5E.Inline.AwardEach", { award });
+
   block.innerHTML += `
-    ${game.i18n.getListFormatter({ type: "unit" }).format(entries)}
+    ${award}
     <a class="award-link" data-action="awardRequest">
       <i class="fa-solid fa-trophy"></i> ${label ?? game.i18n.localize("DND5E.Award.Action")}
     </a>
