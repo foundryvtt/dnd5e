@@ -38,7 +38,7 @@ export default class Token5e extends Token {
    * @type {boolean}
    */
   get hasDynamicRing() {
-    return !!this.document.getFlag("dnd5e", "tokenRing.enabled");
+    return this.document.hasDynamicRing;
   }
 
   /* -------------------------------------------- */
@@ -60,7 +60,7 @@ export default class Token5e extends Token {
   /** @inheritdoc */
   async _draw() {
     // Cache the subject texture if needed
-    if ( this.document.flags.dnd5e?.tokenRing?.enabled ) {
+    if ( this.hasDynamicRing ) {
       const subjectName = this.document.subjectPath;
       const cached = PIXI.Assets.cache.has(subjectName);
       if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
@@ -366,7 +366,7 @@ class TokenRingAnimation {
   /* -------------------------------------------- */
 
   /**
-   * Create an easing function that spikes in the center.
+   * Create an easing function that spikes in the center. Ideal duration is around 1600ms.
    * @param {number} [spikePct=0.5]  Position on [0,1] where the spike occurs.
    * @returns {Function(number): number}
    */
@@ -382,15 +382,11 @@ class TokenRingAnimation {
   /* -------------------------------------------- */
 
   /**
-   * Easing function that produces two peaks before returning to the original value.
+   * Easing function that produces two peaks before returning to the original value. Ideal duration is around 500ms.
    * @param {number} pt     The proportional animation timing on [0,1].
    * @returns {number}      The eased animation progress on [0,1].
    */
   static easeTwoPeaks(pt) {
-    return (
-      Math.sin(
-        (4 * Math.PI * pt) - (Math.PI / 2)
-      ) + 1
-    ) / 2;
+    return (Math.sin((4 * Math.PI * pt) - (Math.PI / 2)) + 1) / 2;
   }
 }

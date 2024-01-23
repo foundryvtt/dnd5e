@@ -7,13 +7,18 @@ import SystemFlagsMixin from "./mixins/flags.mjs";
  */
 export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
-  /** @inheritDoc */
-  get _systemFlagsDataModel() {
-    return TokenSystemFlags;
-  }
-
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Is the dynamic token ring enabled?
+   * @type {boolean}
+   */
+  get hasDynamicRing() {
+    return !!this.getFlag("dnd5e", "tokenRing.enabled");
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -23,6 +28,13 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   get subjectPath() {
     const subject = this.getFlag("dnd5e", "tokenRing")?.textures?.subject;
     return subject ?? this._inferSubjectPath(this.texture.src);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get _systemFlagsDataModel() {
+    return TokenSystemFlags;
   }
 
   /* -------------------------------------------- */
