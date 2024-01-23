@@ -639,6 +639,19 @@ DND5E.tokenHPColors = {
 /* -------------------------------------------- */
 
 /**
+ * Colors used when a dynamic token ring effects.
+ * @enum {number}
+ */
+DND5E.tokenRingColors = {
+  damage: 0xFF0000,
+  defeated: 0x000000,
+  healing: 0x00FF00,
+  temp: 0x33AAFF
+};
+
+/* -------------------------------------------- */
+
+/**
  * Settings used to render map location markers on the canvas.
  * @type {object}
  */
