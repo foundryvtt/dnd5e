@@ -383,6 +383,7 @@ export class ItemDataModel extends SystemDataModel {
     let {
       price, weight, uses, identified, unidentified, description, school, materials, activation, properties
     } = this;
+    const isSpell = type === "spell";
     const rollData = this.parent.getRollData();
     const isIdentified = identified !== false;
     const chat = isIdentified ? description.chat || description.value : unidentified?.description;
@@ -391,12 +392,13 @@ export class ItemDataModel extends SystemDataModel {
     price = game.user.isGM || identified ? price : null;
 
     let subtitle = [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
-    if ( type === "spell" ) subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[school]?.label];
+    if ( isSpell ) subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[school]?.label];
 
     const context = {
-      name, type, img, price, weight, uses, school, materials, activation,
+      name, type, img, price, weight, uses, school, materials, activation, isSpell,
       config: CONFIG.DND5E,
       labels: foundry.utils.deepClone(this.parent.labels),
+      tags: this.parent.labels?.components?.tags,
       subtitle: subtitle.filterJoin(" &bull; "),
       description: {
         value: await TextEditor.enrichHTML(description ?? "", {
@@ -411,19 +413,21 @@ export class ItemDataModel extends SystemDataModel {
     context.properties = [];
 
     if ( game.user.isGM || isIdentified ) {
-      context.properties.push(...this.cardProperties ?? []);
-      if ( type === "spell" ) context.properties.push(...this.parent.labels.components.tags);
-      else context.properties.push(...this.activatedEffectCardProperties ?? []);
-      context.properties.push(...this.equippableItemCardProperties ?? []);
+      context.properties.push(
+        ...this.cardProperties ?? [],
+        ...this.activatedEffectCardProperties ?? [],
+        ...this.equippableItemCardProperties ?? []
+      );
     }
 
     if ( properties?.has("concentration") ) {
-      context.labels.duration = game.i18n.format("DND5E.ConcentrationDuration", {
+      context.labels.concentrationDuration = game.i18n.format("DND5E.ConcentrationDuration", {
         duration: context.labels.duration.toLocaleLowerCase(game.i18n.lang)
       });
     }
 
     context.properties = context.properties.filter(_ => _);
+    context.hasProperties = context.tags?.length || context.properties.length;
     return context;
   }
 

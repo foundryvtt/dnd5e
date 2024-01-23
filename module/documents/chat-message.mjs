@@ -194,12 +194,12 @@ export default class ChatMessage5e extends ChatMessage {
       const flavor = document.createElement("div");
       flavor.classList.add("dnd5e2", "chat-card");
       flavor.innerHTML = `
-        <section class="card-header description">
+        <section class="card-header description ${isCritical ? "critical" : ""}">
           <header class="summary">
             <img class="gold-icon" src="${item.img}" alt="${item.name}">
             <div class="name-stacked">
               <span class="title">${item.name}</span>
-              <span class="subtitle ${isCritical ? "critical" : ""}">${subtitle}</span>
+              <span class="subtitle">${subtitle}</span>
             </div>
           </header>
         </section>
@@ -479,5 +479,21 @@ export default class ChatMessage5e extends ChatMessage {
     close.dataset.tooltip = game.i18n.localize("Close");
     close.setAttribute("aria-label", close.dataset.tooltip);
     html.querySelector(".message-metadata [data-context-menu]")?.remove();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Wait to apply appropriate element heights until after the chat log has completed its initial batch render.
+   * @param {jQuery} html  The chat log HTML.
+   */
+  static onRenderChatLog([html]) {
+    if ( !game.settings.get("dnd5e", "autoCollapseItemCards") ) {
+      requestAnimationFrame(() => {
+        html.querySelectorAll(".description.collapsible .details").forEach(el => {
+          el.style.height = `${el.scrollHeight}px`;
+        });
+      });
+    }
   }
 }

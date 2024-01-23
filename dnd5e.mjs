@@ -114,13 +114,12 @@ Hooks.once("init", function() {
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eCharacter, {
     types: ["character"],
-    makeDefault: true,
-    label: "DND5E.SheetClassCharacter"
+    label: "DND5E.SheetClassCharacterLegacy"
   });
-  // TODO: Temporary while new sheets are WIP.
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eCharacter2, {
     types: ["character"],
-    label: "dnd5e 3.0 Character Sheet"
+    makeDefault: true,
+    label: "DND5E.SheetClassCharacter"
   });
   Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eNPC, {
     types: ["npc"],
@@ -463,7 +462,10 @@ Hooks.on("renderSettings", () => {
 Hooks.on("renderChatPopout", documents.ChatMessage5e.onRenderChatPopout);
 Hooks.on("getChatLogEntryContext", documents.ChatMessage5e.addChatMessageContextOptions);
 
-Hooks.on("renderChatLog", (app, html, data) => documents.Item5e.chatListeners(html));
+Hooks.on("renderChatLog", (app, html, data) => {
+  documents.Item5e.chatListeners(html);
+  documents.ChatMessage5e.onRenderChatLog(html);
+});
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
 
 Hooks.on("chatMessage", (app, message, data) => dnd5e.applications.Award.chatMessage(message));

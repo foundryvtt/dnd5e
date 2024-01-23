@@ -250,6 +250,12 @@
       &.green { background-color: var(--dnd5e-color-green); }
       &.maroon { background-color: var(--dnd5e-color-maroon); }
 
+      &.pill-sm {
+        color: #4e4e4e;
+        border: 1px dotted var(--color-border-dark-5);
+        background-color: transparent;
+      }
+
       > .separator { color: var(--color-text-light-6); }
     }
   }
@@ -641,6 +647,10 @@
     0% { filter: drop-shadow(0 0 0 rgb(255 255 255 / 0%)); }
     50% { filter: drop-shadow(0 0 10px rgb(255 255 255 / 50%)); }
     100% { filter: drop-shadow(0 0 0 rgb(255 255 255 / 0%)); }
+  }
+
+  @media (prefers-reduced-motion) {
+    &#pause { animation: none; }
   }
 }
 

@@ -323,7 +323,6 @@
       align-items: center;
       gap: .5rem;
 
-
       > img {
         width: 32px;
         height: 32px;
@@ -337,11 +336,6 @@
         &.border {
           padding-right: .5rem;
           border-right: 1px solid var(--color-border-light-1);
-        }
-
-        .subtitle.critical {
-          color: var(--dnd5e-color-success);
-          text-transform: uppercase;
         }
       }
 
@@ -368,6 +362,16 @@
       }
     }
 
+    &.critical {
+      border-width: 3px;
+      border-style: double;
+
+      .summary .subtitle {
+        color: var(--dnd5e-color-success);
+        text-transform: uppercase;
+      }
+    }
+
     &.collapsible .summary { cursor: pointer; }
     &.collapsed {
       .summary > i { transform: rotate(-90deg); }
@@ -384,6 +388,20 @@
   .pills .pill {
     font-size: var(--font-size-10);
     line-height: 1;
+  }
+
+  p.supplement {
+    margin: 0;
+    font-size: var(--font-size-11);
+    color: var(--color-text-dark-5);
+    padding: 0 .25rem;
+
+    > strong {
+      color: var(--color-text-dark-primary);
+      text-transform: uppercase;
+      font-size: var(--font-size-10);
+      margin-right: .25rem;
+    }
   }
 
   /* Effects Tray */
@@ -421,6 +439,15 @@
         display: flex;
         gap: .5rem;
         align-items: center;
+        padding-bottom: .25rem;
+        margin-bottom: .25rem;
+        border-bottom: 1px solid var(--color-border-light-1);
+
+        &:last-child {
+          padding: 0;
+          margin: 0;
+          border: none;
+        }
 
         > img {
           width: 32px;

@@ -68,16 +68,24 @@
         </li>
         <li>
             <strong>{{ localize "DND5E.Duration" }}:</strong>
-            <span class="value">{{ labels.duration }}</span>
+            <span class="value">{{ labels.concentrationDuration }}</span>
         </li>
     </ul>
     {{/if}}
     <section class="description">{{{ description.value }}}</section>
     <ul class="pills">
-       {{#each properties}}
-       <li class="pill maroon">
-           <span class="label">{{ this }}</span>
-       </li>
-       {{/each}}
+        {{#if isSpell}}
+        {{#each tags}}
+        <li class="pill pill-sm">
+            <span class="label">{{ this }}</span>
+        </li>
+        {{/each}}
+        {{else}}
+        {{#each properties}}
+        <li class="pill pill-sm">
+            <span class="label">{{ this }}</span>
+        </li>
+        {{/each}}
+        {{/if}}
     </ul>
 </section>

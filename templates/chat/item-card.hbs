@@ -105,11 +105,26 @@
     </div>
     {{/if}}
 
+    {{!-- Reactions --}}
+    {{#if (and data.activation.condition (eq data.activation.type "reaction"))}}
+    <p class="supplement"><strong>{{ localize "DND5E.Reaction" }}</strong>{{ data.activation.condition }}</p>
+    {{/if}}
+
+    {{!-- Materials --}}
+    {{#if data.materials.value}}
+    <p class="supplement"><strong>{{ localize "DND5E.Materials" }}</strong>{{ data.materials.value }}</p>
+    {{/if}}
+
     {{!-- Item Properties --}}
-    {{#if data.properties.length}}
+    {{#if data.hasProperties}}
     <ul class="card-footer pills unlist">
+        {{#each data.tags}}
+        <li class="pill pill-sm">
+            <span class="label">{{ this }}</span>
+        </li>
+        {{/each}}
         {{#each data.properties}}
-        <li class="pill maroon">
+        <li class="pill pill-sm">
             <span class="label">{{ this }}</span>
         </li>
         {{/each}}
