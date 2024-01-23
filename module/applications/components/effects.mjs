@@ -1,4 +1,5 @@
-import { staticID } from "../../utils.mjs";
+import {staticID} from "../../utils.mjs";
+import ContextMenu5e from "../context-menu.mjs";
 
 /**
  * Custom element that handles displaying active effects lists.
@@ -21,13 +22,15 @@ export default class EffectsElement extends HTMLElement {
       control.addEventListener("click", event => {
         event.preventDefault();
         event.stopPropagation();
+        const { clientX, clientY } = event;
         event.currentTarget.closest("[data-effect-id]").dispatchEvent(new PointerEvent("contextmenu", {
-          view: window, bubbles: true, cancelable: true
+          view: window, bubbles: true, cancelable: true, clientX, clientY
         }));
       });
     }
 
-    new ContextMenu(this, "[data-effect-id]", [], {onOpen: element => {
+    const MenuCls = this.hasAttribute("v2") ? ContextMenu5e : ContextMenu;
+    new MenuCls(this, "[data-effect-id]", [], {onOpen: element => {
       const effect = this.getEffect(element.dataset);
       if ( !effect ) return;
       ui.context.menuItems = this._getContextOptions(effect);
@@ -142,6 +145,7 @@ export default class EffectsElement extends HTMLElement {
       {
         name: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
         icon: effect.disabled ? "<i class='fas fa-check fa-fw'></i>" : "<i class='fas fa-times fa-fw'></i>",
+        group: "state",
         condition: () => effect.isOwner,
         callback: li => this._onAction(li[0], "toggle")
       }

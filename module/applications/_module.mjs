@@ -7,6 +7,7 @@ export * as journal from "./journal/_module.mjs";
 
 export {default as Accordion} from "./accordion.mjs";
 export {default as Award} from "./award.mjs";
+export {default as ContextMenu5e} from "./context-menu.mjs";
 export {default as CurrencyManager} from "./currency-manager.mjs";
 export {default as DialogMixin} from "./dialog-mixin.mjs";
 export {default as PropertyAttribution} from "./property-attribution.mjs";

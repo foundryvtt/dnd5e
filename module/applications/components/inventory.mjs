@@ -1,5 +1,6 @@
-import { parseInputDelta } from "../../utils.mjs";
+import {parseInputDelta} from "../../utils.mjs";
 import CurrencyManager from "../currency-manager.mjs";
+import ContextMenu5e from "../context-menu.mjs";
 
 /**
  * Custom element that handles displaying actor & container inventories.
@@ -39,13 +40,15 @@ export default class InventoryElement extends HTMLElement {
       control.addEventListener("click", event => {
         event.preventDefault();
         event.stopPropagation();
+        const { clientX, clientY } = event;
         event.currentTarget.closest("[data-item-id]").dispatchEvent(new PointerEvent("contextmenu", {
-          view: window, bubbles: true, cancelable: true
+          view: window, bubbles: true, cancelable: true, clientX, clientY
         }));
       });
     }
 
-    new ContextMenu(this, "[data-item-id]", [], {onOpen: this._onOpenContextMenu.bind(this)});
+    const MenuCls = this.hasAttribute("v2") ? ContextMenu5e : ContextMenu;
+    new MenuCls(this, "[data-item-id]", [], {onOpen: this._onOpenContextMenu.bind(this)});
   }
 
   /* -------------------------------------------- */
