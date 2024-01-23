@@ -589,21 +589,26 @@
       padding-inline: 6px;
       width: unset;
       line-height: unset;
+      font-size: var(--font-size-10);
     }
     input { max-width: unset; }
   }
 
+  &.award header { margin-bottom: .25rem; }
+
   .distribution {
-    display: grid;
-    grid-template-columns: auto repeat(3, max-content);
-    gap: 4px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin-block-end: 6px;
+    gap: .375rem;
     font-size: var(--font-size-12);
+    margin-bottom: .25rem;
+
+    span:has(+ slide-toggle:not([checked])), slide-toggle[checked] + span { font-weight: bold; }
 
     slide-toggle {
       --slide-toggle-track-color-unchecked: var(--dnd5e-color-olive);
-      --slide-toggle-track-color-checked: var(--dnd5e-color-maroon);
+      --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
     }
   }
 
@@ -630,9 +635,9 @@
     }
     .no-destinations, .no-primary-party {
       grid-column: 1 / -1;
-      font-family: var(--dnd5e-font-roboto-slab);
       text-align: center;
       text-wrap: pretty;
+      color: var(--color-text-dark-5);
     }
     .no-destinations {
       font-weight: bold;
