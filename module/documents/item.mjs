@@ -1843,14 +1843,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static chatListeners(html) {
     html.on("click", ".chat-card button[data-action]", this._onChatCardAction.bind(this));
     html.on("click", ".item-name, .collapsible", this._onChatCardToggleContent.bind(this));
-    html[0].querySelectorAll("[data-context-menu]").forEach(el => {
-      el.addEventListener("click", event => {
+    html[0].addEventListener("click", event => {
+      if ( event.target.closest("[data-context-menu]") ) {
         event.preventDefault();
         event.stopPropagation();
-        event.currentTarget.closest("[data-message-id]").dispatchEvent(new PointerEvent("contextmenu", {
+        event.target.closest("[data-message-id]").dispatchEvent(new PointerEvent("contextmenu", {
           view: window, bubbles: true, cancelable: true
         }));
-      });
+      }
     });
   }
 
