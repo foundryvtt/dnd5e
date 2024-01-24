@@ -93,6 +93,8 @@ export const TOKEN_RING_FRAG_MAIN = `
   else {
     vec4 tokenRingPix = texture(tokenRingTexture, vRingTextureCoord);
     vec4 tokenBackPix = texture(tokenRingTexture, vBackgroundTextureCoord);
+    if ( tokenRingPix.a > 0.0 ) tokenRingPix.rgb /= tokenRingPix.a;
+    if ( tokenBackPix.a > 0.0 ) tokenBackPix.rgb /= tokenBackPix.a;
     
     float dist = length(vTextureCoord - 0.5) * 2.0 * vScaleCorrection;
           
@@ -100,7 +102,9 @@ export const TOKEN_RING_FRAG_MAIN = `
     tokenBackPix = colorizeTokenBackground(tokenBackPix, dist);
     vec4 ringPix = vec4(mix(tokenBackPix.rgb, tokenRingPix.rgb, tokenRingPix.a), 
                        max(tokenBackPix.a, tokenRingPix.a)) * step(dist, 1.0);
+    ringPix.rgb *= ringPix.a;
     vec4 tokenColor = processTokenColor(vec4(color.rgb * vColor.rgb, color.a));
-    result = mix(ringPix, tokenColor, tokenColor.a) * vColor.a;
+    result = vec4(mix(ringPix.rgb, tokenColor.rgb, tokenColor.a), 
+                  max(ringPix.a, tokenColor.a)) * vColor.a;
   }
 `;
