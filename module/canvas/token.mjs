@@ -50,9 +50,24 @@ export default class Token5e extends Token {
    * @param {boolean} active        Is the special status effect now active?
    */
   static onApplyTokenStatusEffect(token, statusId, active) {
-    if ( (statusId !== CONFIG.specialStatusEffects.INVISIBLE) || !game.dnd5e.tokenRings.enabled ) return;
+    const applicableEffects = [CONFIG.specialStatusEffects.DEFEATED, CONFIG.specialStatusEffects.INVISIBLE];
+    if ( !applicableEffects.includes(statusId) || !game.dnd5e.tokenRings.enabled ) return;
     const tokenRingFlag = token.document.getFlag("dnd5e", "tokenRing") || {};
-    token._configureTokenRingVisuals({...tokenRingFlag});
+    token._configureTokenRingVisuals(foundry.utils.deepClone(tokenRingFlag));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update the token ring when this token is targeted.
+   * @param {User5e} user         The user whose targeting has changed.
+   * @param {Token5e} token       The token that was targeted.
+   * @param {boolean} targeted    Is the token targeted or not?
+   */
+  static onTargetToken(user, token, targeted) {
+    if ( !targeted || !game.dnd5e.tokenRings.enabled ) return;
+    const color = Color.from(user.color);
+    token.ringAnimation.flashColor(color, { duration: 500, easing: token.ringAnimation.constructor.easeTwoPeaks });
   }
 
   /* -------------------------------------------- */
@@ -230,14 +245,15 @@ export default class Token5e extends Token {
    */
   _configureTokenRingVisuals({colors, effects}={}) {
     // Caching the colors into the little endian format
+    foundry.utils.mergeObject(colors, this.document.getRingColors());
     this.tokenRing.ringColorLittleEndian = Color.from(colors?.ring ?? 0xFFFFFF).littleEndian;
     this.tokenRing.bkgColorLittleEndian = Color.from(colors?.background ?? 0xFFFFFF).littleEndian;
 
     // Assigning the effects value (bitwise construction)
-    const invisible = this.document.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE);
+    const effectsToApply = this.document.getRingEffects();
     this.tokenRing.effects = ((effects >= game.dnd5e.tokenRings.effects.DISABLED)
       ? effects : game.dnd5e.tokenRings.effects.ENABLED)
-      | (invisible ? game.dnd5e.tokenRings.effects.INVISIBILITY : 0x0);
+      | effectsToApply.reduce((acc, e) => acc |= e, 0x0);
   }
 
   /* -------------------------------------------- */

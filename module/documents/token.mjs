@@ -139,4 +139,55 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     this.texture.scaleX = this._source.texture.scaleX * dts;
     this.texture.scaleY = this._source.texture.scaleY * dts;
   }
+
+  /* -------------------------------------------- */
+  /*  Ring Animations                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Determine if any rings colors should be forced based on current status.
+   * @returns {{[ring]: number, [background]: number}}
+   */
+  getRingColors() {
+    const colors = {};
+    if ( this.hasStatusEffect(CONFIG.specialStatusEffects.DEFEATED) ) {
+      colors.ring = CONFIG.DND5E.tokenRingColors.defeated;
+    }
+    return colors;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine what ring effects should be applied on top of any set by flags.
+   * @returns {string[]}
+   */
+  getRingEffects() {
+    const e = game.dnd5e.tokenRings.effects;
+    const effects = [];
+    if ( this.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE) ) effects.push(e.INVISIBILITY);
+    return effects;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Flash the token ring based on damage, healing, or temp HP.
+   * @param {object} changes
+   * @param {number} [changes.dhp]    Change to the actor's HP.
+   * @param {number} [changes.dtemp]  Change to the actor's temp HP.
+   */
+  flashRing({ dhp, dtemp }) {
+    let color;
+    const options = {};
+    if ( dtemp ) color = CONFIG.DND5E.tokenRingColors.temp;
+    else if ( dhp > 0 ) color = CONFIG.DND5E.tokenRingColors.healing;
+    else if ( dhp < 0 ) {
+      color = CONFIG.DND5E.tokenRingColors.damage;
+      options.duration = 500;
+      options.easing = this.object.ringAnimation.constructor.easeTwoPeaks;
+    }
+    if ( !color ) return;
+    this.object.ringAnimation.flashColor(Color.from(color), options);
+  }
 }

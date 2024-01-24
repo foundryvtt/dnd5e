@@ -1106,7 +1106,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Update the actor if the new amount is greater than the current
     const tmp = parseInt(hp.temp) || 0;
-    return amount > tmp ? this.update({"system.attributes.hp.temp": amount}) : this;
+    return amount > tmp ? this.update({"system.attributes.hp.temp": amount}, {dtemp: amount}) : this;
   }
 
   /* -------------------------------------------- */
@@ -3004,6 +3004,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
     this._displayScrollingDamage(options.dhp);
+    this.token?.flashRing(options);
     if ( userId === game.userId ) {
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
@@ -3124,6 +3125,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Handle clearing favorited entries that were deleted.
    * @param {Document[]} documents  The deleted Documents.
+   * @returns {Promise<Actor5e>|void}
    * @protected
    */
   _clearFavorites(documents) {
