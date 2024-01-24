@@ -166,6 +166,7 @@ Hooks.once("init", function() {
     types: ["rule"]
   });
 
+  CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
   DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
   DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
     label: "DND5E.SheetClassToken"

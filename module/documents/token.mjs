@@ -28,7 +28,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    */
   get subjectPath() {
     const subject = this.getFlag("dnd5e", "tokenRing")?.textures?.subject;
-    return subject ?? this._inferSubjectPath(this.texture.src);
+    return subject ?? this.constructor.inferSubjectPath(this.texture.src);
   }
 
   /* -------------------------------------------- */
@@ -115,9 +115,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * Determine the subject path based on the path to the main token artwork.
    * @param {string} path  The token's `texture.src` path.
    * @returns {string}     Inferred subject path.
-   * @protected
    */
-  _inferSubjectPath(path) {
+  static inferSubjectPath(path) {
     if ( !path ) return "";
     const parts = path.split(".");
     const extension = parts.pop();
