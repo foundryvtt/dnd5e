@@ -93,13 +93,13 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
     // Prepare token ring attributes
     const trConfig = game.dnd5e.tokenRings;
     const object = element.object.object || {};
-    const hasTokenRing = !!object.tokenRing;
-    const ringColor = (object.tokenRing?.ringColorLittleEndian ?? 0xFFFFFF) + 0xFF000000;
-    const bkgColor = (object.tokenRing?.bkgColorLittleEndian ?? 0xFFFFFF) + 0xFF000000;
-    const ringUvsFloat = object.tokenRing?.ringUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
-    const bkgUvsFloat = object.tokenRing?.bkgUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
-    const states = (hasTokenRing ? object.tokenRing.effects + 0.5 : 0.5);
-    const scaleCorrection = (hasTokenRing ? object.tokenRing.scaleCorrection ?? 1 : 1);
+    const hasTokenRing = !!object.ring;
+    const ringColor = (object.ring?.ringColorLittleEndian ?? 0xFFFFFF) + 0xFF000000;
+    const bkgColor = (object.ring?.bkgColorLittleEndian ?? 0xFFFFFF) + 0xFF000000;
+    const ringUvsFloat = object.ring?.ringUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
+    const bkgUvsFloat = object.ring?.bkgUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
+    const states = (hasTokenRing ? object.ring.effects + 0.5 : 0.5);
+    const scaleCorrection = (hasTokenRing ? object.ring.scaleCorrection ?? 1 : 1);
 
     for ( let i = 0; i < vertexData.length; i += 2 ) {
       float32View[aIndex++] = vertexData[i];

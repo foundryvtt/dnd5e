@@ -120,12 +120,12 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
     // Prepare token ring attributes
     const trConfig = game.dnd5e.tokenRings;
     const object = element.object.object || {};
-    const ringColor = PIXI.Color.shared.setValue(object.tokenRing?.ringColorLittleEndian ?? 0xFFFFFF).toNumber();
-    const bkgColor = PIXI.Color.shared.setValue(object.tokenRing?.bkgColorLittleEndian ?? 0xFFFFFF).toNumber();
-    const ringUvsFloat = object.tokenRing?.ringUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
-    const bkgUvsFloat = object.tokenRing?.bkgUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
-    const states = (object.tokenRing?.effects ?? 0) + 0.5;
-    const scaleCorrection = object.tokenRing?.scaleCorrection ?? 1;
+    const ringColor = PIXI.Color.shared.setValue(object.ring?.ringColorLittleEndian ?? 0xFFFFFF).toNumber();
+    const bkgColor = PIXI.Color.shared.setValue(object.ring?.bkgColorLittleEndian ?? 0xFFFFFF).toNumber();
+    const ringUvsFloat = object.ring?.ringUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
+    const bkgUvsFloat = object.ring?.bkgUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
+    const states = (object.ring?.effects ?? 0) + 0.5;
+    const scaleCorrection = object.ring?.scaleCorrection ?? 1;
 
     // Write attributes into buffer
     for ( let i = 0; i < vertexData.length; i += 2 ) {

@@ -1,3 +1,4 @@
+import TokenRing from "../canvas/token-ring.mjs";
 import TokenSystemFlags from "../data/token/token-system-flags.mjs";
 import { staticID } from "../utils.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
@@ -185,9 +186,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     else if ( dhp < 0 ) {
       color = CONFIG.DND5E.tokenRingColors.damage;
       options.duration = 500;
-      options.easing = this.object.ringAnimation.constructor.easeTwoPeaks;
+      options.easing = TokenRing.easeTwoPeaks;
     }
     if ( !color ) return;
-    this.object.ringAnimation.flashColor(Color.from(color), options);
+    this.object.ring.flashColor(Color.from(color), options);
   }
 }
