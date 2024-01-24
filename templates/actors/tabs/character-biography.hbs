@@ -58,12 +58,8 @@
             <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
             <span class="roboto-upper">{{ localize "DND5E.Biography" }}</span>
         </h3>
-        {{#if @root.editable}}
-        {{ editor biographyHTML target="system.details.biography.value" button=false editable=true engine="prosemirror"
-                  collaborate=false }}
-        {{else}}
-        {{{ biographyHTML }}}
-        {{/if}}
+        {{ editor biographyHTML target="system.details.biography.value" button=false editable=@root.editable
+                  engine="prosemirror" collaborate=false }}
     </div>
 
 </div>
