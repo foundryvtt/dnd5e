@@ -573,7 +573,8 @@ DND5E.actorSizes = {
   },
   sm: {
     label: "DND5E.SizeSmall",
-    abbreviation: "DND5E.SizeSmallAbbr"
+    abbreviation: "DND5E.SizeSmallAbbr",
+    dynamicTokenScale: 0.8
   },
   med: {
     label: "DND5E.SizeMedium",

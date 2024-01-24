@@ -21,7 +21,7 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
   /* -------------------------------------------- */
 
   /** @override */
-  static batchVertexSize = 16;
+  static batchVertexSize = 15;
 
   /* -------------------------------------------- */
 
@@ -29,12 +29,6 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
   static reservedTextureUnits = 2;
 
   /* -------------------------------------------- */
-
-  /**
-   * A quad UVs array used for normalized position.
-   * @type {Float32Array}
-   */
-  static quadUvs = new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]);
 
   /**
    * A null UVs array used for nulled texture position.
@@ -79,7 +73,6 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
             .addAttribute("aTextureCoord", this._buffer, 2, false, PIXI.TYPES.FLOAT)
             .addAttribute("aRingTextureCoord", this._buffer, 2, false, PIXI.TYPES.FLOAT)
             .addAttribute("aBackgroundTextureCoord", this._buffer, 2, false, PIXI.TYPES.FLOAT)
-            .addAttribute("aNormalizedPosition", this._buffer, 2, false, PIXI.TYPES.FLOAT)
             .addAttribute("aColor", this._buffer, 4, true, PIXI.TYPES.UNSIGNED_BYTE)
             .addAttribute("aRingColor", this._buffer, 4, true, PIXI.TYPES.UNSIGNED_BYTE)
             .addAttribute("aBackgroundColor", this._buffer, 4, true, PIXI.TYPES.UNSIGNED_BYTE)
@@ -91,6 +84,7 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
             .addAttribute("aRadialOcclusion", this._buffer, 1, true, PIXI.TYPES.UNSIGNED_BYTE)
             .addAttribute("aVisionOcclusion", this._buffer, 1, true, PIXI.TYPES.UNSIGNED_BYTE)
             .addAttribute("aStates", this._buffer, 1, false, PIXI.TYPES.FLOAT)
+            .addAttribute("aScaleCorrection", this._buffer, 1, false, PIXI.TYPES.FLOAT)
             .addIndex(this._indexBuffer);
         }
       };
@@ -126,15 +120,12 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
     // Prepare token ring attributes
     const trConfig = game.dnd5e.tokenRings;
     const object = element.object.object || {};
-    const hasTokenRing = !!object.tokenRing;
-    const ringName = object.tokenRing?.ringName;
-    const bkgName = object.tokenRing?.bkgName;
     const ringColor = PIXI.Color.shared.setValue(object.tokenRing?.ringColorLittleEndian ?? 0xFFFFFF).toNumber();
     const bkgColor = PIXI.Color.shared.setValue(object.tokenRing?.bkgColorLittleEndian ?? 0xFFFFFF).toNumber();
-    const ringUvsFloat = trConfig.texturesUvs[ringName] ?? trConfig.tokenRingSamplerShader.nullUvs;
-    const bkgUvsFloat = trConfig.texturesUvs[bkgName] ?? trConfig.tokenRingSamplerShader.nullUvs;
-    const normalizedUvsFloat = trConfig.tokenRingSamplerShader.quadUvs;
-    const states = (hasTokenRing ? object.tokenRing.effects + 0.5 : 0.5);
+    const ringUvsFloat = object.tokenRing?.ringUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
+    const bkgUvsFloat = object.tokenRing?.bkgUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
+    const states = (object.tokenRing?.effects ?? 0) + 0.5;
+    const scaleCorrection = object.tokenRing?.scaleCorrection ?? 1;
 
     // Write attributes into buffer
     for ( let i = 0; i < vertexData.length; i += 2 ) {
@@ -146,8 +137,6 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
       float32View[aIndex++] = ringUvsFloat[i + 1];
       float32View[aIndex++] = bkgUvsFloat[i];
       float32View[aIndex++] = bkgUvsFloat[i + 1];
-      float32View[aIndex++] = normalizedUvsFloat[i];
-      float32View[aIndex++] = normalizedUvsFloat[i + 1];
       uint32View[aIndex++] = argb;
       uint32View[aIndex++] = ringColor;
       uint32View[aIndex++] = bkgColor;
@@ -161,6 +150,7 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
       uint8View[k++] = visionOcclusion;
       aIndex += 2;
       float32View[aIndex++] = states;
+      float32View[aIndex++] = scaleCorrection;
     }
   }
 
@@ -174,30 +164,25 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
   static _batchVertexShader = `
       in vec2 aRingTextureCoord;
       in vec2 aBackgroundTextureCoord;
-      in vec2 aNormalizedPosition;
       in vec4 aRingColor;
       in vec4 aBackgroundColor;
       in float aStates;
-      
+      in float aScaleCorrection;
+
       out vec2 vRingTextureCoord;
       out vec2 vBackgroundTextureCoord;
-      out vec2 vNormalizedPosition;
       flat out vec3 vRingColor;
       flat out vec3 vBackgroundColor;
       flat out uint vStates;
-      flat out float vGauge1;
-      flat out float vGauge2;
+      flat out float vScaleCorrection;
 
       void _main(out vec2 vertexPosition, out vec2 textureCoord, out vec4 color) {
         vRingTextureCoord = aRingTextureCoord;
         vBackgroundTextureCoord = aBackgroundTextureCoord;
-        vNormalizedPosition = aNormalizedPosition;
         vRingColor = aRingColor.rgb;
         vBackgroundColor = aBackgroundColor.rgb;
         vStates = uint(aStates);
-        vGauge1 = aRingColor.a;
-        vGauge2 = aBackgroundColor.a;
-        
+        vScaleCorrection = aScaleCorrection;
         vertexPosition = (translationMatrix * vec3(aVertexPosition, 1.0)).xy;
         textureCoord = aTextureCoord;
         color = aColor * tint;
@@ -214,12 +199,10 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
   static _batchFragmentShader = `
       in vec2 vRingTextureCoord;
       in vec2 vBackgroundTextureCoord;
-      in vec2 vNormalizedPosition;
       flat in vec3 vRingColor;
       flat in vec3 vBackgroundColor;
       flat in uint vStates;
-      flat in float vGauge1;
-      flat in float vGauge2;
+      flat in float vScaleCorrection;
         
       uniform sampler2D tokenRingTexture;
       uniform float time;

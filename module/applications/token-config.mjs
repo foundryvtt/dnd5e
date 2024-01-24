@@ -32,6 +32,16 @@ export default class TokenConfig5e extends TokenConfig {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  async getData(options={}) {
+    const context = await super.getData(options);
+    const doc = this.preview ?? this.document;
+    context.scale = Math.abs(doc._source.texture.scaleX);
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Add a new section for token ring configuration.
    * @param {HTMLElement} html  The rendered markup.

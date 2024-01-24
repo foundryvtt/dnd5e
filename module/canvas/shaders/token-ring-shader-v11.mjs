@@ -18,7 +18,7 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
   /* -------------------------------------------- */
 
   /** @override */
-  static batchVertexSize = 15;
+  static batchVertexSize = 14;
 
   /* -------------------------------------------- */
 
@@ -26,12 +26,6 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
   static reservedTextureUnits = 1;
 
   /* -------------------------------------------- */
-
-  /**
-   * A quad UVs array used for normalized position.
-   * @type {Float32Array}
-   */
-  static quadUvs = new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]);
 
   /**
    * A null UVs array used for nulled texture position.
@@ -72,12 +66,12 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
             .addAttribute("aTextureCoord", this._buffer, 2, false, PIXI.TYPES.FLOAT)
             .addAttribute("aRingTextureCoord", this._buffer, 2, false, PIXI.TYPES.FLOAT)
             .addAttribute("aBackgroundTextureCoord", this._buffer, 2, false, PIXI.TYPES.FLOAT)
-            .addAttribute("aNormalizedPosition", this._buffer, 2, false, PIXI.TYPES.FLOAT)
             .addAttribute("aColor", this._buffer, 4, true, PIXI.TYPES.UNSIGNED_BYTE)
             .addAttribute("aRingColor", this._buffer, 4, true, PIXI.TYPES.UNSIGNED_BYTE)
             .addAttribute("aBackgroundColor", this._buffer, 4, true, PIXI.TYPES.UNSIGNED_BYTE)
             .addAttribute("aTextureId", this._buffer, 1, true, PIXI.TYPES.FLOAT)
             .addAttribute("aStates", this._buffer, 1, false, PIXI.TYPES.FLOAT)
+            .addAttribute("aScaleCorrection", this._buffer, 1, false, PIXI.TYPES.FLOAT)
             .addIndex(this._indexBuffer);
         }
       };
@@ -100,15 +94,12 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
     const trConfig = game.dnd5e.tokenRings;
     const object = element.object.object || {};
     const hasTokenRing = !!object.tokenRing;
-    const ringName = object.tokenRing?.ringName;
-    const bkgName = object.tokenRing?.bkgName;
     const ringColor = (object.tokenRing?.ringColorLittleEndian ?? 0xFFFFFF) + 0xFF000000;
     const bkgColor = (object.tokenRing?.bkgColorLittleEndian ?? 0xFFFFFF) + 0xFF000000;
-    const ringUvsFloat = trConfig.texturesUvs[ringName] ?? trConfig.tokenRingSamplerShader.nullUvs;
-    const bkgUvsFloat = trConfig.texturesUvs[bkgName] ?? trConfig.tokenRingSamplerShader.nullUvs;
-    const normalizedUvsFloat = trConfig.tokenRingSamplerShader.quadUvs;
+    const ringUvsFloat = object.tokenRing?.ringUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
+    const bkgUvsFloat = object.tokenRing?.bkgUVs ?? trConfig.tokenRingSamplerShader.nullUvs;
     const states = (hasTokenRing ? object.tokenRing.effects + 0.5 : 0.5);
-
+    const scaleCorrection = (hasTokenRing ? object.tokenRing.scaleCorrection ?? 1 : 1);
 
     for ( let i = 0; i < vertexData.length; i += 2 ) {
       float32View[aIndex++] = vertexData[i];
@@ -119,13 +110,12 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
       float32View[aIndex++] = ringUvsFloat[i + 1];
       float32View[aIndex++] = bkgUvsFloat[i];
       float32View[aIndex++] = bkgUvsFloat[i + 1];
-      float32View[aIndex++] = normalizedUvsFloat[i];
-      float32View[aIndex++] = normalizedUvsFloat[i + 1];
       uint32View[aIndex++] = argb;
       uint32View[aIndex++] = ringColor;
       uint32View[aIndex++] = bkgColor;
       float32View[aIndex++] = textureId;
       float32View[aIndex++] = states;
+      float32View[aIndex++] = scaleCorrection;
     }
 
     for ( let i = 0; i < indices.length; i++ ) {
@@ -145,11 +135,11 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
     in float aTextureId;
     in vec2 aRingTextureCoord;
     in vec2 aBackgroundTextureCoord;
-    in vec2 aNormalizedPosition;
     in vec4 aRingColor;
     in vec4 aBackgroundColor;
     in float aStates;
-    
+    in float aScaleCorrection;
+
     uniform mat3 projectionMatrix;
     uniform mat3 translationMatrix;
     uniform vec4 tint;
@@ -157,15 +147,13 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
     out vec2 vTextureCoord;
     out vec2 vRingTextureCoord;
     out vec2 vBackgroundTextureCoord;
-    out vec2 vNormalizedPosition;
     flat out vec4 vColor;
     flat out float vTextureId;
     flat out vec3 vRingColor;
     flat out vec3 vBackgroundColor;
     flat out uint vStates;
-    flat out float vGauge1;
-    flat out float vGauge2;
-    
+    flat out float vScaleCorrection;
+
     void main(void) {
       vec3 tPos = translationMatrix * vec3(aVertexPosition, 1.0);
       vTextureCoord = aTextureCoord;
@@ -173,12 +161,10 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
       vColor = aColor * tint;
       vRingTextureCoord = aRingTextureCoord;
       vBackgroundTextureCoord = aBackgroundTextureCoord;
-      vNormalizedPosition = aNormalizedPosition;
       vRingColor = aRingColor.rgb;
       vBackgroundColor = aBackgroundColor.rgb;
       vStates = uint(aStates);
-      vGauge1 = aRingColor.a;
-      vGauge2 = aBackgroundColor.a;
+      vScaleCorrection = aScaleCorrection;
       gl_Position = vec4((projectionMatrix * tPos).xy, 0.0, 1.0);
     }
   `;
@@ -193,15 +179,13 @@ export default class TokenRingSamplerShaderV11 extends BaseSamplerShader {
     in vec2 vTextureCoord;
     in vec2 vRingTextureCoord;
     in vec2 vBackgroundTextureCoord;
-    in vec2 vNormalizedPosition;
     
     flat in vec4 vColor;
     flat in float vTextureId;
     flat in vec3 vRingColor;
     flat in vec3 vBackgroundColor;
     flat in uint vStates;
-    flat in float vGauge1;
-    flat in float vGauge2;
+    flat in float vScaleCorrection;
  
     uniform sampler2D uSamplers[%count%];  
     uniform sampler2D tokenRingTexture;

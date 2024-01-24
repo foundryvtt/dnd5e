@@ -44,7 +44,7 @@ export const TOKEN_RING_FRAG_HEADER = `
                 : tokenRing.rrr;
     vec3 ccol = vRingColor * rcol;            
     vec3 gcol = hasState(STATE_RING_GRADIENT)
-            ? mix(ccol, vBackgroundColor * tokenRing.r, smoothstep(0.0, 1.0, dot(rotation(vNormalizedPosition, time), vec2(0.5))))
+            ? mix(ccol, vBackgroundColor * tokenRing.r, smoothstep(0.0, 1.0, dot(rotation(vTextureCoord, time), vec2(0.5))))
             : ccol;          
     vec4 col = vec4(mix(tokenRing.rgb, gcol, step(0.59, dist) - step(0.725, dist)), tokenRing.a);
     return col;
@@ -94,11 +94,12 @@ export const TOKEN_RING_FRAG_MAIN = `
     vec4 tokenRingPix = texture(tokenRingTexture, vRingTextureCoord);
     vec4 tokenBackPix = texture(tokenRingTexture, vBackgroundTextureCoord);
     
-    float dist = length(vNormalizedPosition - 0.5) * 2.0;
+    float dist = length(vTextureCoord - 0.5) * 2.0 * vScaleCorrection;
           
     tokenRingPix = colorizeTokenRing(tokenRingPix, dist);
     tokenBackPix = colorizeTokenBackground(tokenBackPix, dist);
-    vec4 ringPix = mix(tokenBackPix, tokenRingPix, tokenRingPix.a);
+    vec4 ringPix = vec4(mix(tokenBackPix.rgb, tokenRingPix.rgb, tokenRingPix.a), 
+                       max(tokenBackPix.a, tokenRingPix.a)) * step(dist, 1.0);
     vec4 tokenColor = processTokenColor(vec4(color.rgb * vColor.rgb, color.a));
     result = mix(ringPix, tokenColor, tokenColor.a) * vColor.a;
   }

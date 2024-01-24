@@ -29,6 +29,7 @@ export default class TokenSystemFlags extends foundry.abstract.DataModel {
           background: new ColorField({required: false, label: "DND5E.TokenRings.RingColor"})
         }, {required: false, initial: undefined}),
         effects: new NumberField({initial: 1, min: 0, max: 8388607, integer: true, label: "DND5E.TokenRings.Effects"}),
+        scaleCorrection: new NumberField({initial: 1, min: 0, required: false, label: "DND5E.TokenRings.ScaleCorrection"}),
         textures: new SchemaField({
           subject: new FilePathField({
             required: false, categories: ["IMAGE"], label: "DND5E.TokenRings.Subject.Label",

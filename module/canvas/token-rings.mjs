@@ -27,10 +27,10 @@ export default class TokenRings5e {
   baseTexture;
 
   /**
-   * Rings and background textures UVs.
-   * @type {Record<string, Float32Array>}
+   * Rings and background textures UVs and center offset.
+   * @type {Record<string, {UVs: Float32Array, center: {x: number, y: number}}>}
    */
-  texturesUvs;
+  texturesData;
 
   /**
    * The token ring shader class definition.
@@ -120,7 +120,7 @@ export default class TokenRings5e {
     if ( !this.enabled ) return;
     const spritesheet = TextureLoader.loader.getCache(CONFIG.DND5E.tokenRings.spriteSheet);
     this.baseTexture = spritesheet.baseTexture;
-    this.texturesUvs = {};
+    this.texturesData = {};
     this.#ringData = [];
     const frames = Object.keys(spritesheet.data.frames || {});
     for ( const asset of frames ) {
@@ -128,9 +128,16 @@ export default class TokenRings5e {
       if ( !assetTexture ) continue;
 
       // Extracting texture UVs
+      const frame = assetTexture.frame;
       const textureUvs = new PIXI.TextureUvs();
-      textureUvs.set(assetTexture.frame, assetTexture.baseTexture, assetTexture.rotate);
-      this.texturesUvs[asset] = textureUvs.uvsFloat32;
+      textureUvs.set(frame, assetTexture.baseTexture, assetTexture.rotate);
+      this.texturesData[asset] = {
+        UVs: textureUvs.uvsFloat32,
+        center: {
+          x: frame.center.x / assetTexture.baseTexture.width,
+          y: frame.center.y / assetTexture.baseTexture.height
+        }
+      };
 
       // Extracting dimensions
       if ( asset.includes("-bkg") ) continue;
@@ -143,6 +150,26 @@ export default class TokenRings5e {
     }
     // Sorting the rings data array
     this.#ringData.sort((a, b) => a.size - b.size);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the UVs array for a given texture name and scale correction.
+   * @param {string} name                  Name of the texture we want to get UVs.
+   * @param {number} [scaleCorrection=1]   The scale correction applied to UVs.
+   * @returns {Float32Array}
+   */
+  getTextureUVs(name, scaleCorrection=1) {
+    if ( scaleCorrection === 1 ) return this.texturesData[name].UVs;
+    const tUVs = this.texturesData[name].UVs;
+    const c = this.texturesData[name].center;
+    const UVs = new Float32Array(8);
+    for ( let i=0; i<8; i+=2 ) {
+      UVs[i] = (tUVs[i] - c.x) * scaleCorrection + c.x;
+      UVs[i+1] = (tUVs[i+1] - c.y) * scaleCorrection + c.y;
+    }
+    return UVs;
   }
 
   /* -------------------------------------------- */

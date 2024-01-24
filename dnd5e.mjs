@@ -23,7 +23,7 @@ import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
-import TokenRings5e from "./module/token-rings.mjs";
+import TokenRings5e from "./module/canvas/token-rings.mjs";
 import TokenRingSamplerShaderV11 from "./module/canvas/shaders/token-ring-shader-v11.mjs";
 import TokenRingSamplerShader from "./module/canvas/shaders/token-ring-shader.mjs";
 

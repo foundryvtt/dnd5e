@@ -1,3 +1,5 @@
+import flags from "../documents/mixins/flags.mjs";
+
 /**
  * Extend the base Token class to implement additional system-specific logic.
  */
@@ -5,15 +7,18 @@ export default class Token5e extends Token {
 
   /**
    * Token ring attributes
-   * @type {{bkgName: string, ringName: string,
-   * ringColorLittleEndian: number, bkgColorLittleEndian: number, effects: number}}
+   * @type {{bkgName: string, ringName: string, ringUVs: Float32Array, bkgUVs: Float32Array
+   * ringColorLittleEndian: number, bkgColorLittleEndian: number, effects: number, scaleCorrection: number}}
    */
   tokenRing = {
     ringName: undefined,
     bkgName: undefined,
+    ringUVs: undefined,
+    bkgUVs: undefined,
     ringColorLittleEndian: 0xFFFFFF, // Little endian format => BBGGRR
     bkgColorLittleEndian: 0xFFFFFF,  // Little endian format => BBGGRR
-    effects: 0
+    effects: 0,
+    scaleCorrection: 1
   };
 
   /* -------------------------------------------- */
@@ -135,6 +140,9 @@ export default class Token5e extends Token {
     const redraw = ("textures" in dataFlag) || ("enabled" in dataFlag);
     if ( redraw ) return this.renderFlags.set({redraw});
 
+    // Check for scale correction change (not necessary if shapeChange is triggered)
+    if ( ("scaleCorrection" in dataFlag) && !shapeChange ) this._configureTexturesUVs(dataFlag.scaleCorrection);
+
     // If we don't need a full redraw, we're just updating the visuals properties
     const tokenRingFlag = this.document.getFlag("dnd5e", "tokenRing") || {};
     this._configureTokenRingVisuals({...tokenRingFlag});
@@ -159,7 +167,7 @@ export default class Token5e extends Token {
     const tokenRingFlag = this.document.getFlag("dnd5e", "tokenRing");
     if ( tokenRingFlag?.enabled ) {
       // Configure token ring textures and visuals
-      this._configureTokenRingTexture({mesh});
+      this._configureTokenRingTexture({mesh, ...tokenRingFlag});
       this._configureTokenRingVisuals({...tokenRingFlag});
     }
     else {
@@ -174,9 +182,10 @@ export default class Token5e extends Token {
    * Configure dynamic token ring subject texture.
    * @param {object} parameters
    * @param {PrimarySpriteMesh|TokenMesh} [parameters.mesh] The mesh.
+   * @param {number} [parameters.scaleCorrection]           The scale correction value.
    * @protected
    */
-  _configureTokenRingTexture({mesh}) {
+  _configureTokenRingTexture({mesh, scaleCorrection}) {
     mesh ||= this.mesh;
 
     // Should we replace the regular token texture with a custom subject texture?
@@ -187,7 +196,7 @@ export default class Token5e extends Token {
     }
 
     // Assigning the assets' names
-    this._configureRingNames();
+    this._configureRingNames({scaleCorrection});
   }
 
   /* -------------------------------------------- */
@@ -222,9 +231,12 @@ export default class Token5e extends Token {
     this.tokenRing = {
       ringName: undefined,
       bkgName: undefined,
+      ringUVs: undefined,
+      bkgUVs: undefined,
       ringColorLittleEndian: 0xFFFFFF, // Little endian format => BBGGRR
       bkgColorLittleEndian: 0xFFFFFF,  // Little endian format => BBGGRR
-      effects: (invisible ? game.dnd5e.tokenRings.effects.INVISIBILITY : game.dnd5e.tokenRings.effects.DISABLED)
+      effects: (invisible ? game.dnd5e.tokenRings.effects.INVISIBILITY : game.dnd5e.tokenRings.effects.DISABLED),
+      scaleCorrection: 1
     };
   }
 
@@ -232,10 +244,29 @@ export default class Token5e extends Token {
 
   /**
    * Configure token ring names according to size.
+   * @param {TokenRingFlagData} parameters
+   * @param {number} [parameters.scaleCorrection]   The scale correction value.
    * @protected
    */
-  _configureRingNames() {
+  _configureRingNames({scaleCorrection}={}) {
     const size = Math.max(this.w * this.document.texture.scaleX ?? 1, this.h * this.document.texture.scaleY);
     Object.assign(this.tokenRing, game.dnd5e.tokenRings.getRingDataBySize(size));
+
+    // Configure assets' UVs
+    this._configureTexturesUVs(scaleCorrection ?? this.tokenRing.scaleCorrection);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Configure token ring UVs according to scale correction.
+   * @param {number} scaleCorrection        The scale correction value.
+   * @protected
+   */
+  _configureTexturesUVs(scaleCorrection) {
+    const tr = this.tokenRing;
+    tr.scaleCorrection = scaleCorrection ?? 1;
+    tr.ringUVs = game.dnd5e.tokenRings.getTextureUVs(tr.ringName, scaleCorrection);
+    tr.bkgUVs = game.dnd5e.tokenRings.getTextureUVs(tr.bkgName, scaleCorrection);
   }
 }
