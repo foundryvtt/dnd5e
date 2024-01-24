@@ -1,3 +1,5 @@
+import Token5e from "../canvas/token.mjs";
+import TokenDocument5e from "../documents/token.mjs";
 import { getHumanReadableAttributeLabel } from "../utils.mjs";
 
 /**
@@ -61,7 +63,7 @@ export default class TokenConfig5e extends TokenConfig {
     let ringTab = document.createElement("div");
     const flags = this.document.getFlag("dnd5e", "tokenRing") ?? {};
     ringTab.innerHTML = await renderTemplate(this.constructor.dynamicRingTemplate, {
-      flags, subjectPlaceholder: this.object._inferSubjectPath(this.object.texture.src)
+      flags, subjectPlaceholder: TokenDocument5e.inferSubjectPath(this.object.texture.src)
     });
     ringTab = ringTab.querySelector("div");
     ringTab.querySelectorAll("input").forEach(i => i.addEventListener("change", this._onChangeInput.bind(this)));
@@ -79,9 +81,7 @@ export default class TokenConfig5e extends TokenConfig {
       </nav>
     `);
 
-    const content = this.popOut ? html.parentElement : html;
-    this._tabs.at(-1).bind(content);
-
+    this._tabs.at(-1).bind(html);
     if ( !this._minimized ) this.setPosition();
   }
 
@@ -150,7 +150,7 @@ export default class TokenConfig5e extends TokenConfig {
 
   /** @inheritDoc */
   _previewChanges(change) {
-    if ( !this.preview ) return;
+    if ( !(this.preview instanceof Token5e) ) return;
     if ( change ) {
       const flags = foundry.utils.getProperty(foundry.utils.expandObject(change), "flags.dnd5e.tokenRing") ?? {};
       const redraw = ("textures" in flags) || ("enabled" in flags);
