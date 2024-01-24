@@ -87,12 +87,13 @@ export default class TokenRings5e {
     const addToken = PrimaryCanvasGroup.prototype.addToken;
 
     /**
+     * Monkey patch addToken to include custom mesh configuration.
      * @param {Token5e} token
      * @returns {TokenMesh|PrimarySpriteMesh}
      */
     PrimaryCanvasGroup.prototype.addToken = token => {
       const mesh = addToken.call(canvas.primary, token);
-      token.configureMesh(mesh);
+      token.tokenRing?.configureMesh(mesh);
       return mesh;
     };
   }
@@ -166,8 +167,8 @@ export default class TokenRings5e {
     const c = this.texturesData[name].center;
     const UVs = new Float32Array(8);
     for ( let i=0; i<8; i+=2 ) {
-      UVs[i] = (tUVs[i] - c.x) * scaleCorrection + c.x;
-      UVs[i+1] = (tUVs[i+1] - c.y) * scaleCorrection + c.y;
+      UVs[i] = ((tUVs[i] - c.x) * scaleCorrection) + c.x;
+      UVs[i+1] = ((tUVs[i+1] - c.y) * scaleCorrection) + c.y;
     }
     return UVs;
   }
