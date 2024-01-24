@@ -155,7 +155,7 @@ export default class TokenConfig5e extends TokenConfig {
       const flags = foundry.utils.getProperty(foundry.utils.expandObject(change), "flags.dnd5e.tokenRing") ?? {};
       const redraw = ("textures" in flags) || ("enabled" in flags);
       if ( redraw ) this.preview.object.renderFlags.set({ redraw });
-      else this.preview.object.tokenRing.configureVisuals({...flags});
+      else this.preview.object.ring.configureVisuals({...flags});
     }
     super._previewChanges(change);
   }

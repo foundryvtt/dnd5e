@@ -189,6 +189,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       options.easing = TokenRing.easeTwoPeaks;
     }
     if ( !color ) return;
-    this.object.tokenRing.flashColor(Color.from(color), options);
+    this.object.ring.flashColor(Color.from(color), options);
   }
 }

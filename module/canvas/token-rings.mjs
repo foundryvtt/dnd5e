@@ -93,7 +93,7 @@ export default class TokenRings5e {
      */
     PrimaryCanvasGroup.prototype.addToken = token => {
       const mesh = addToken.call(canvas.primary, token);
-      token.tokenRing?.configureMesh(mesh);
+      token.ring?.configureMesh(mesh);
       return mesh;
     };
   }

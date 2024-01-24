@@ -6,7 +6,7 @@ import TokenRing from "./token-ring.mjs";
 export default class Token5e extends Token {
   constructor(...args) {
     super(...args);
-    this.tokenRing = new TokenRing(this);
+    this.ring = new TokenRing(this);
   }
 
   /* -------------------------------------------- */
@@ -15,7 +15,7 @@ export default class Token5e extends Token {
    * Dynamic token ring.
    * @type {TokenRing}
    */
-  tokenRing;
+  ring;
 
   /* -------------------------------------------- */
 
@@ -29,7 +29,7 @@ export default class Token5e extends Token {
     const applicableEffects = [CONFIG.specialStatusEffects.DEFEATED, CONFIG.specialStatusEffects.INVISIBLE];
     if ( !applicableEffects.includes(statusId) || !game.dnd5e.tokenRings.enabled ) return;
     const tokenRingFlag = token.document.getFlag("dnd5e", "tokenRing") || {};
-    token.tokenRing.configureVisuals(foundry.utils.deepClone(tokenRingFlag));
+    token.ring.configureVisuals(foundry.utils.deepClone(tokenRingFlag));
   }
 
   /* -------------------------------------------- */
@@ -43,7 +43,7 @@ export default class Token5e extends Token {
   static onTargetToken(user, token, targeted) {
     if ( !targeted || !game.dnd5e.tokenRings.enabled ) return;
     const color = Color.from(user.color);
-    token.tokenRing.flashColor(color, { duration: 500, easing: TokenRing.easeTwoPeaks });
+    token.ring.flashColor(color, { duration: 500, easing: TokenRing.easeTwoPeaks });
   }
 
   /* -------------------------------------------- */
@@ -51,7 +51,7 @@ export default class Token5e extends Token {
   /** @inheritdoc */
   async _draw() {
     // Cache the subject texture if needed
-    if ( this.tokenRing.enabled ) {
+    if ( this.ring.enabled ) {
       const subjectName = this.document.subjectPath;
       const cached = PIXI.Assets.cache.has(subjectName);
       if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
@@ -141,7 +141,7 @@ export default class Token5e extends Token {
 
     // Update ring names if necessary
     const shapeChange = ("height" in data) || ("width" in data) || ("texture" in data);
-    if ( shapeChange ) this.tokenRing.configureNames();
+    if ( shapeChange ) this.ring.configureNames();
 
     // Do we have some token ring flag changes?
     if ( !foundry.utils.hasProperty(data, "flags.dnd5e.tokenRing") ) return;
@@ -152,11 +152,11 @@ export default class Token5e extends Token {
     if ( redraw ) return this.renderFlags.set({redraw});
 
     // Check for scale correction change (not necessary if shapeChange is triggered)
-    if ( ("scaleCorrection" in dataFlag) && !shapeChange ) this.tokenRing.configureUVs(dataFlag.scaleCorrection);
+    if ( ("scaleCorrection" in dataFlag) && !shapeChange ) this.ring.configureUVs(dataFlag.scaleCorrection);
 
     // If we don't need a full redraw, we're just updating the visuals properties
     const tokenRingFlag = this.document.getFlag("dnd5e", "tokenRing") || {};
-    this.tokenRing.configureVisuals({...tokenRingFlag});
+    this.ring.configureVisuals({...tokenRingFlag});
   }
 
   /* -------------------------------------------- */
