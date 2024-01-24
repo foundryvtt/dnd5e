@@ -164,7 +164,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @returns {string[]}
    */
   getRingEffects() {
-    const e = game.dnd5e.tokenRings.effects;
+    const e = CONFIG.Token.ringClass.effects;
     const effects = [];
     if ( this.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE) ) effects.push(e.INVISIBILITY);
     return effects;
@@ -186,7 +186,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     else if ( dhp < 0 ) {
       color = CONFIG.DND5E.tokenRingColors.damage;
       options.duration = 500;
-      options.easing = TokenRing.easeTwoPeaks;
+      options.easing = CONFIG.Token.ringClass.easeTwoPeaks;
     }
     if ( !color ) return;
     this.object.ring.flashColor(Color.from(color), options);

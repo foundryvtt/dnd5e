@@ -54,7 +54,7 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
   /** @override */
   static _preRenderBatch(batchRenderer) {
     super._preRenderBatch(batchRenderer);
-    batchRenderer.renderer.texture.bind(game.dnd5e.tokenRings.baseTexture, batchRenderer.uniforms.tokenRingTexture);
+    batchRenderer.renderer.texture.bind(dnd5e.tokenRings.baseTexture, batchRenderer.uniforms.tokenRingTexture);
     batchRenderer.uniforms.time = canvas.app.ticker.lastTime / 1000;
   }
 
@@ -118,7 +118,7 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
     const visionOcclusion = (element.visionOcclusion * 255) | 0;
 
     // Prepare token ring attributes
-    const trConfig = game.dnd5e.tokenRings;
+    const trConfig = CONFIG.Token.ringClass;
     const object = element.object.object || {};
     const ringColor = PIXI.Color.shared.setValue(object.ring?.ringColorLittleEndian ?? 0xFFFFFF).toNumber();
     const bkgColor = PIXI.Color.shared.setValue(object.ring?.bkgColorLittleEndian ?? 0xFFFFFF).toNumber();

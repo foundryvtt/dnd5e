@@ -23,9 +23,6 @@ import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
-import TokenRings5e from "./module/canvas/token-rings.mjs";
-import TokenRingSamplerShaderV11 from "./module/canvas/shaders/token-ring-shader-v11.mjs";
-import TokenRingSamplerShader from "./module/canvas/shaders/token-ring-shader.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -65,6 +62,7 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
+  CONFIG.Token.ringClass = canvas.TokenRing;
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
@@ -334,8 +332,8 @@ Hooks.once("setup", function() {
 
   // Configure token rings
   CONFIG.DND5E.tokenRings.shaderClass ??= game.release.generation < 12
-    ? TokenRingSamplerShaderV11 : TokenRingSamplerShader;
-  game.dnd5e.tokenRings = new TokenRings5e();
+    ? canvas.TokenRingSamplerShaderV11 : canvas.TokenRingSamplerShader;
+  CONFIG.Token.ringClass.initialize();
 });
 
 /* --------------------------------------------- */
@@ -396,7 +394,7 @@ Hooks.once("ready", function() {
 Hooks.on("canvasInit", gameCanvas => {
   gameCanvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
   SquareGrid.prototype.measureDistances = canvas.measureDistances;
-  game.dnd5e.tokenRings.pushToLoad(gameCanvas.loadTexturesOptions.additionalSources);
+  CONFIG.Token.ringClass.pushToLoad(gameCanvas.loadTexturesOptions.additionalSources);
 });
 
 /* -------------------------------------------- */
@@ -405,7 +403,7 @@ Hooks.on("canvasInit", gameCanvas => {
 
 Hooks.on("canvasDraw", gameCanvas => {
   // The sprite sheet has been loaded now, we can create the uvs for each texture
-  game.dnd5e.tokenRings.createAssetsUvs();
+  CONFIG.Token.ringClass.createAssetsUVs();
 });
 
 /* -------------------------------------------- */
