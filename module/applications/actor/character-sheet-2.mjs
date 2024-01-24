@@ -26,7 +26,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         { dragSelector: ".favorites :is([data-item-id], [data-effect-id])", dropSelector: null },
         { dragSelector: ".classes .gold-icon[data-item-id]", dropSelector: null },
         { dragSelector: "[data-key] .skill-name, [data-key] .tool-name", dropSelector: null },
-        { dragSelector: ".spells-list .items-header .item-name, .slots[data-favorite-id]", dropSelector: null }
+        { dragSelector: ".spells-list .spell-header, .slots[data-favorite-id]", dropSelector: null }
       ],
       scrollY: [".main-content"],
       width: 800,
@@ -684,7 +684,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.toolIds ) type = "tool";
-    else if ( preparationMode && (level !== "0") ) type = "slots";
+    else if ( preparationMode && (level !== "0") && event.target.classList.contains("spell-header") ) type = "slots";
     if ( !type ) return super._onDragStart(event);
     const dragData = { dnd5e: { action: "favorite", type } };
     if ( type === "slots" ) dragData.dnd5e.id = preparationMode === "pact" ? "pact" : `spell${level}`;
