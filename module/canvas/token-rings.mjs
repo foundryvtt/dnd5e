@@ -62,7 +62,7 @@ export default class TokenRings5e {
    * @readonly
    */
   get enabled() {
-    return this.#enabled
+    return this.#enabled;
   }
 
   #enabled;
@@ -107,7 +107,7 @@ export default class TokenRings5e {
     additionalSources.push(CONFIG.DND5E.tokenRings.spriteSheet);
     for ( const tokenDocument of canvas.scene.tokens ) {
       const subjectSrc = tokenDocument.subjectPath;
-      if ( tokenDocument.flags.dnd5e?.tokenRing?.enabled && subjectSrc ) additionalSources.push(subjectSrc);
+      if ( tokenDocument.hasDynamicRing && subjectSrc ) additionalSources.push(subjectSrc);
     }
   }
 

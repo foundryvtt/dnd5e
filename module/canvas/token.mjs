@@ -4,6 +4,12 @@ import flags from "../documents/mixins/flags.mjs";
  * Extend the base Token class to implement additional system-specific logic.
  */
 export default class Token5e extends Token {
+  constructor(...args) {
+    super(...args);
+    this.ringAnimation = new TokenRingAnimation(this);
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Token ring attributes
@@ -20,6 +26,20 @@ export default class Token5e extends Token {
     effects: 0,
     scaleCorrection: 1
   };
+
+  /**
+   * Interface for calling animations on the dynamic token ring.
+   * @type {TokenRingAnimation}
+   */
+  ringAnimation;
+
+  /**
+   * Is the dynamic token ring enabled?
+   * @type {boolean}
+   */
+  get hasDynamicRing() {
+    return this.document.hasDynamicRing;
+  }
 
   /* -------------------------------------------- */
 
@@ -40,7 +60,7 @@ export default class Token5e extends Token {
   /** @inheritdoc */
   async _draw() {
     // Cache the subject texture if needed
-    if ( this.document.flags.dnd5e?.tokenRing?.enabled ) {
+    if ( this.hasDynamicRing ) {
       const subjectName = this.document.subjectPath;
       const cached = PIXI.Assets.cache.has(subjectName);
       if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
@@ -268,5 +288,105 @@ export default class Token5e extends Token {
     tr.scaleCorrection = scaleCorrection ?? 1;
     tr.ringUVs = game.dnd5e.tokenRings.getTextureUVs(tr.ringName, scaleCorrection);
     tr.bkgUVs = game.dnd5e.tokenRings.getTextureUVs(tr.bkgName, scaleCorrection);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Interface for calling animations on the dynamic token ring.
+ * @param {Token5e} token  Token that will be animated.
+ */
+class TokenRingAnimation {
+  constructor(token) {
+    this.#token = new WeakRef(token);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Weak reference to the token being animated.
+   * @type {WeakRef<Token5e>}
+   */
+  #token;
+
+  /**
+   * Reference to the token that should be animated.
+   * @type {Token5e|void}
+   */
+  get token() {
+    return this.#token.deref();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties for the token ring being animated.
+   * @type {object}
+   */
+  get tokenRing() {
+    return this.token?.tokenRing;
+  }
+
+  /* -------------------------------------------- */
+  /*  Animations                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Flash the ring briefly with a certain color.
+   * @param {Color} color                              Color to flash.
+   * @param {CanvasAnimationOptions} animationOptions  Options to customize the animation.
+   * @returns {Promise<boolean|void>}
+   */
+  async flashColor(color, animationOptions={}) {
+    if ( !this.token?.hasDynamicRing || Number.isNaN(color) ) return;
+
+    const originalColor = new Color(this.tokenRing.ringColorLittleEndian);
+
+    return await CanvasAnimation.animate([{
+      attribute: "ringColorLittleEndian",
+      parent: this.tokenRing,
+      from: originalColor,
+      to: new Color(color.littleEndian),
+      color: true
+    }], foundry.utils.mergeObject({
+      duration: 1600,
+      priority: PIXI.UPDATE_PRIORITY.HIGH,
+      easing: TokenRingAnimation.createSpikeEasing(.15),
+      ontick: (d, data) => {
+        // Manually set the final value to the origin due to issue with the CanvasAnimation
+        // See: https://github.com/foundryvtt/foundryvtt/issues/10364
+        if ( data.time >= data.duration ) this.tokenRing.ringColorLittleEndian = originalColor;
+      }
+    }, animationOptions));
+  }
+
+  /* -------------------------------------------- */
+  /*  Easing                                      */
+  /* -------------------------------------------- */
+
+  /**
+   * Create an easing function that spikes in the center. Ideal duration is around 1600ms.
+   * @param {number} [spikePct=0.5]  Position on [0,1] where the spike occurs.
+   * @returns {Function(number): number}
+   */
+  static createSpikeEasing(spikePct=0.5) {
+    const scaleStart = 1 / spikePct;
+    const scaleEnd = 1 / (1 - spikePct);
+    return pt => {
+      if ( pt < spikePct ) return CanvasAnimation.easeInCircle(pt * scaleStart);
+      else return 1 - CanvasAnimation.easeOutCircle(((pt - spikePct) * scaleEnd));
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Easing function that produces two peaks before returning to the original value. Ideal duration is around 500ms.
+   * @param {number} pt     The proportional animation timing on [0,1].
+   * @returns {number}      The eased animation progress on [0,1].
+   */
+  static easeTwoPeaks(pt) {
+    return (Math.sin((4 * Math.PI * pt) - (Math.PI / 2)) + 1) / 2;
   }
 }
