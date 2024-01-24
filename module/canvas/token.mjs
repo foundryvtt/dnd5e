@@ -1,12 +1,10 @@
-import TokenRing from "./token-ring.mjs";
-
 /**
  * Extend the base Token class to implement additional system-specific logic.
  */
 export default class Token5e extends Token {
   constructor(...args) {
     super(...args);
-    this.ring = new TokenRing(this);
+    this.ring = new CONFIG.Token.ringClass(this);
   }
 
   /* -------------------------------------------- */
@@ -27,7 +25,7 @@ export default class Token5e extends Token {
    */
   static onApplyTokenStatusEffect(token, statusId, active) {
     const applicableEffects = [CONFIG.specialStatusEffects.DEFEATED, CONFIG.specialStatusEffects.INVISIBLE];
-    if ( !applicableEffects.includes(statusId) || !game.dnd5e.tokenRings.enabled ) return;
+    if ( !applicableEffects.includes(statusId) || !token.ring.enabled ) return;
     const tokenRingFlag = token.document.getFlag("dnd5e", "tokenRing") || {};
     token.ring.configureVisuals(foundry.utils.deepClone(tokenRingFlag));
   }
@@ -41,9 +39,9 @@ export default class Token5e extends Token {
    * @param {boolean} targeted    Is the token targeted or not?
    */
   static onTargetToken(user, token, targeted) {
-    if ( !targeted || !game.dnd5e.tokenRings.enabled ) return;
+    if ( !targeted || !token.ring.enabled ) return;
     const color = Color.from(user.color);
-    token.ring.flashColor(color, { duration: 500, easing: TokenRing.easeTwoPeaks });
+    token.ring.flashColor(color, { duration: 500, easing: CONFIG.Token.ringClass.easeTwoPeaks });
   }
 
   /* -------------------------------------------- */
@@ -137,7 +135,7 @@ export default class Token5e extends Token {
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    if ( !game.dnd5e.tokenRings.enabled ) return;
+    if ( !CONFIG.Token.ringClass.enabled ) return;
 
     // Update ring names if necessary
     const shapeChange = ("height" in data) || ("width" in data) || ("texture" in data);
@@ -163,7 +161,7 @@ export default class Token5e extends Token {
 
   /** @override */
   _refreshShader() {
-    if ( game.dnd5e.tokenRings.enabled ) this.mesh?.setShaderClass(game.dnd5e.tokenRings.tokenRingSamplerShader);
+    if ( CONFIG.Token.ringClass.enabled ) this.mesh?.setShaderClass(CONFIG.Token.ringClass.tokenRingSamplerShader);
     else super._refreshShader();
   }
 }

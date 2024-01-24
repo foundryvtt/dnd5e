@@ -101,7 +101,7 @@ export default class TokenRing {
     const size = Math.max(
       this.token.w * this.token.document.texture.scaleX ?? 1,
       this.token.h * this.token.document.texture.scaleY);
-    Object.assign(this, game.dnd5e.tokenRings.getRingDataBySize(size));
+    Object.assign(this, this.constructor.getRingDataBySize(size));
 
     // Configure assets' UVs
     this.configureUVs(scaleCorrection ?? this.scaleCorrection);
@@ -115,8 +115,8 @@ export default class TokenRing {
    */
   configureUVs(scaleCorrection) {
     this.scaleCorrection = scaleCorrection ?? 1;
-    this.ringUVs = game.dnd5e.tokenRings.getTextureUVs(this.ringName, scaleCorrection);
-    this.bkgUVs = game.dnd5e.tokenRings.getTextureUVs(this.bkgName, scaleCorrection);
+    this.ringUVs = this.constructor.getTextureUVs(this.ringName, scaleCorrection);
+    this.bkgUVs = this.constructor.getTextureUVs(this.bkgName, scaleCorrection);
   }
 
   /* -------------------------------------------- */
@@ -135,8 +135,8 @@ export default class TokenRing {
 
     // Assigning the effects value (bitwise construction)
     const effectsToApply = this.token.document.getRingEffects();
-    this.effects = ((effects >= game.dnd5e.tokenRings.effects.DISABLED)
-      ? effects : game.dnd5e.tokenRings.effects.ENABLED)
+    this.effects = ((effects >= this.constructor.effects.DISABLED)
+      ? effects : this.constructor.effects.ENABLED)
       | effectsToApply.reduce((acc, e) => acc |= e, 0x0);
   }
 
@@ -177,7 +177,7 @@ export default class TokenRing {
     this.ringColorLittleEndian = 0xFFFFFF;
     this.bkgColorLittleEndian = 0xFFFFFF;
     this.effects = this.token.document.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE)
-      ? game.dnd5e.tokenRings.effects.INVISIBILITY : game.dnd5e.tokenRings.effects.DISABLED;
+      ? this.constructor.effects.INVISIBILITY : this.constructor.effects.DISABLED;
     this.scaleCorrection = 1;
   }
 
@@ -205,7 +205,7 @@ export default class TokenRing {
     }], foundry.utils.mergeObject({
       duration: 1600,
       priority: PIXI.UPDATE_PRIORITY.HIGH,
-      easing: TokenRing.createSpikeEasing(.15),
+      easing: this.constructor.createSpikeEasing(.15),
       ontick: (d, data) => {
         // Manually set the final value to the origin due to issue with the CanvasAnimation
         // See: https://github.com/foundryvtt/foundryvtt/issues/10364
@@ -239,5 +239,192 @@ export default class TokenRing {
    */
   static easeTwoPeaks(pt) {
     return (Math.sin((4 * Math.PI * pt) - (Math.PI / 2)) + 1) / 2;
+  }
+
+  /* -------------------------------------------- */
+  /*  Rings System                                */
+  /* -------------------------------------------- */
+
+  /**
+   * The effects which could be applied to a token ring (using bitwise operations.)
+   * @enum {number}
+   * @readonly
+   */
+  static effects = Object.freeze({
+    DISABLED: 0x00,
+    ENABLED: 0x01,
+    RING_PULSE: 0x02,
+    RING_GRADIENT: 0x04,
+    BKG_WAVE: 0x08,
+    INVISIBILITY: 0x10
+  });
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is the token rings framework enabled? Will be `null` if the system hasn't initialized yet.
+   * @type {boolean|null}
+   * @readonly
+   */
+  static get enabled() {
+    return this.#enabled;
+  }
+
+  static #enabled = null;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Token Rings sprite sheet base texture.
+   * @type {PIXI.BaseTexture}
+   */
+  static baseTexture;
+
+  /**
+   * Rings and background textures UVs and center offset.
+   * @type {Record<string, {UVs: Float32Array, center: {x: number, y: number}}>}
+   */
+  static texturesData;
+
+  /**
+   * The token ring shader class definition.
+   * @type {typeof TokenRingSamplerShaderV11|typeof TokenRingSamplerShader}
+   */
+  static tokenRingSamplerShader;
+
+  /**
+   * Ring data with their ring name, background name and size.
+   * @type {{ringName: string, bkgName: string, size: number}[]}
+   */
+  static #ringData;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Initialize the Token Rings system, registering the batch plugin and patching PrimaryCanvasGroup#addToken.
+   */
+  static initialize() {
+    if ( this.enabled !== null ) throw new Error("TokenRings system already initialized.");
+
+    // Check client setting
+    this.#enabled = !(game.settings.get("dnd5e", "disableTokenRings") ?? false);
+    if ( !this.enabled ) return;
+
+    this.tokenRingSamplerShader = CONFIG.DND5E.tokenRings.shaderClass;
+    if ( game.release.generation >= 12 ) {
+      PrimaryBaseSamplerShader.classPluginName = this.tokenRingSamplerShader.classPluginName;
+    }
+    this.tokenRingSamplerShader.registerPlugin();
+    const addToken = PrimaryCanvasGroup.prototype.addToken;
+
+    /**
+     * Monkey patch addToken to include custom mesh configuration.
+     * @param {Token5e} token
+     * @returns {TokenMesh|PrimarySpriteMesh}
+     */
+    PrimaryCanvasGroup.prototype.addToken = token => {
+      const mesh = addToken.call(canvas.primary, token);
+      token.ring?.configureMesh(mesh);
+      return mesh;
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Push all assets necessary to cache for the Token Rings framework.
+   * @param {string[]} additionalSources
+   */
+  static pushToLoad(additionalSources) {
+    additionalSources.push(CONFIG.DND5E.tokenRings.spriteSheet);
+    for ( const tokenDocument of canvas.scene.tokens ) {
+      const subjectSrc = tokenDocument.subjectPath;
+      if ( tokenDocument.hasDynamicRing && subjectSrc ) additionalSources.push(subjectSrc);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create texture UVs for each asset into the token rings sprite sheet.
+   */
+  static createAssetsUVs() {
+    if ( !this.enabled ) return;
+
+    const spritesheet = TextureLoader.loader.getCache(CONFIG.DND5E.tokenRings.spriteSheet);
+    this.baseTexture = spritesheet.baseTexture;
+    this.texturesData = {};
+    this.#ringData = [];
+
+    const frames = Object.keys(spritesheet.data.frames || {});
+    for ( const asset of frames ) {
+      const assetTexture = PIXI.Assets.cache.get(asset);
+      if ( !assetTexture ) continue;
+
+      // Extracting texture UVs
+      const frame = assetTexture.frame;
+      const textureUvs = new PIXI.TextureUvs();
+      textureUvs.set(frame, assetTexture.baseTexture, assetTexture.rotate);
+      this.texturesData[asset] = {
+        UVs: textureUvs.uvsFloat32,
+        center: {
+          x: frame.center.x / assetTexture.baseTexture.width,
+          y: frame.center.y / assetTexture.baseTexture.height
+        }
+      };
+
+      // Extracting dimensions
+      if ( asset.includes("-bkg") ) continue;
+      const size = Math.max(assetTexture.height, assetTexture.width);
+      this.#ringData.push({
+        ringName: asset,
+        bkgName: `${asset}-bkg`,
+        size
+      });
+    }
+
+    // Sorting the rings data array
+    this.#ringData.sort((a, b) => a.size - b.size);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the UVs array for a given texture name and scale correction.
+   * @param {string} name                  Name of the texture we want to get UVs.
+   * @param {number} [scaleCorrection=1]   The scale correction applied to UVs.
+   * @returns {Float32Array}
+   */
+  static getTextureUVs(name, scaleCorrection=1) {
+    if ( scaleCorrection === 1 ) return this.texturesData[name].UVs;
+    const tUVs = this.texturesData[name].UVs;
+    const c = this.texturesData[name].center;
+    const UVs = new Float32Array(8);
+    for ( let i=0; i<8; i+=2 ) {
+      UVs[i] = ((tUVs[i] - c.x) * scaleCorrection) + c.x;
+      UVs[i+1] = ((tUVs[i+1] - c.y) * scaleCorrection) + c.y;
+    }
+    return UVs;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get ring and background names for a given size.
+   * @param {number} size   The size to match
+   * @returns {{bkgName: string, ringName: string}}
+   */
+  static getRingDataBySize(size) {
+    if ( !Number.isFinite(size) || !this.#ringData.length ) return { ringName: undefined, bkgName: undefined };
+    const adjustedSize = size * 1.4;
+
+    // Search in the sorted rings data
+    for ( const ring of this.#ringData ) {
+      if ( adjustedSize <= ring.size ) return { ringName: ring.ringName, bkgName: ring.bkgName };
+    }
+
+    // No match? we are returning the biggest
+    const lastRing = this.#ringData.at(-1);
+    return { ringName: lastRing.ringName, bkgName: lastRing.bkgName };
   }
 }
