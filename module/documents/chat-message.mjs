@@ -52,11 +52,8 @@ export default class ChatMessage5e extends ChatMessage {
       html.find(".description.collapsible .details").each((i, el) => el.style.height = `${el.scrollHeight}px`);
     });
     html.find(".effects-tray").each((i, el) => {
-      if ( game.user.isGM ) {
-        el.classList.add("collapsed");
-        el.querySelector(".collapsible-content").style.height = "0";
-      }
-      else el.remove();
+      el.classList.add("collapsed");
+      el.querySelector(".collapsible-content").style.height = "0";
     });
     this._enrichChatCard(html[0]);
 
@@ -87,13 +84,18 @@ export default class ChatMessage5e extends ChatMessage {
 
       if ( this.shouldDisplayChallenge ) chatCard[0].dataset.displayChallenge = "";
 
+      // Conceal effects that the user cannot apply.
+      chatCard.find(".effects-tray .effect").each((i, el) => {
+        if ( !game.user.isGM && ((el.dataset.transferred === "false") || (this.user.id !== game.user.id)) ) el.remove();
+      });
+
       // If the user is the message author or the actor owner, proceed
       let actor = game.actors.get(this.speaker.actor);
       if ( actor && actor.isOwner ) return;
       else if ( game.user.isGM || (this.user.id === game.user.id)) return;
 
       // Otherwise conceal action buttons except for saving throw
-      const buttons = chatCard.find("button[data-action]");
+      const buttons = chatCard.find("button[data-action]:not(.apply-effect)");
       buttons.each((i, btn) => {
         if ( (btn.dataset.action === "save") || (btn.dataset.action === "rollRequest") ) return;
         btn.style.display = "none";

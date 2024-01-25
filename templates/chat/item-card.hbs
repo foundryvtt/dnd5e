@@ -132,7 +132,6 @@
     {{/if}}
 
     {{!-- Applicable Effects --}}
-    {{#if effects.length}}
     <div class="effects-tray collapsible">
         <label class="roboto-upper">
             <i class="fas fa-bolt"></i>
@@ -140,8 +139,8 @@
             <i class="fas fa-caret-down"></i>
         </label>
         <ul class="effects collapsible-content unlist">
-            {{#each effects}}
-            <li class="effect" data-uuid="{{ uuid }}">
+            {{~#each effects~}}
+            <li class="effect" data-uuid="{{ uuid }}" data-transferred="{{ transfer }}">
                 <img class="gold-icon" alt="{{ name }}" src="{{ img }}">
                 <div class="name-stacked">
                     <span class="title">{{ name }}</span>
@@ -152,8 +151,7 @@
                     <i class="fas fa-reply-all fa-flip-horizontal"></i>
                 </button>
             </li>
-            {{/each}}
+            {{~/each~}}
         </ul>
     </div>
-    {{/if}}
 </div>

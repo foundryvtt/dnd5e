@@ -407,6 +407,7 @@
   /* Effects Tray */
   .effects-tray {
     margin-top: .125rem;
+    &:has(> ul:empty) { display: none; }
 
     label {
       cursor: pointer;

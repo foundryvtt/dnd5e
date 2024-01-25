@@ -1289,7 +1289,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       config: CONFIG.DND5E,
       tokenId: token?.uuid || null,
       item: this,
-      effects: this.effects.filter(e => e.transfer),
+      effects: this.effects,
       data: await this.system.getCardData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
@@ -1897,11 +1897,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let targets;
       switch ( action ) {
         case "applyEffect":
-          if ( !game.user.isGM ) return;
           const effect = await fromUuid(button.closest("[data-uuid]")?.dataset.uuid);
+          let warn = false;
           for ( const token of canvas.tokens.controlled ) {
-            await this._applyEffectToToken(effect, token);
+            if ( await this._applyEffectToToken(effect, token) === false ) warn = true;
           }
+          if ( warn ) ui.notifications.warn("DND5E.EffectApplyWarning", { localize: true });
           break;
         case "attack":
           await item.rollAttack({
@@ -1962,9 +1963,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Handle applying an Active Effect to a Token.
    * @param {ActiveEffect5e} effect  The effect.
    * @param {Token5e} token          The token.
+   * @returns {Promise<ActiveEffect5e>|false}
    * @protected
    */
   static _applyEffectToToken(effect, token) {
+    if ( !game.user.isGM && !token.actor?.isOwner ) return false;
+    // Toggle on effects that already exist on the Actor.
+    if ( (effect.parent?.parent === token.actor) && effect.transfer ) return effect.update({ disabled: false });
     const effectData = foundry.utils.mergeObject(effect.toObject(), {
       disabled: false,
       transfer: false,
