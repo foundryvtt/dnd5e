@@ -54,7 +54,7 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
   /** @override */
   static _preRenderBatch(batchRenderer) {
     super._preRenderBatch(batchRenderer);
-    batchRenderer.renderer.texture.bind(dnd5e.tokenRings.baseTexture, batchRenderer.uniforms.tokenRingTexture);
+    batchRenderer.renderer.texture.bind(CONFIG.Token.ringClass.baseTexture, batchRenderer.uniforms.tokenRingTexture);
     batchRenderer.uniforms.time = canvas.app.ticker.lastTime / 1000;
   }
 
