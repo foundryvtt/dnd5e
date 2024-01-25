@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You place a magical command on a creature that you can see within range, forcing it to carry out some service or refrain from some action or course of activity as you decide. If the creature can understand you, it must succeed on a Wisdom saving throw or become Charmed by you for the Duration. While the creature is charmed by you, it takes 5d10 psychic damage each time it acts in a manner directly counter to your instructions, but no more than once each day. A creature that can't understand you is unaffected by the spell.</p><p>You can issue any command you choose, short of an activity that would result in certain death. Should you issue a suicidal command, the spell ends.</p><p>You can end the spell early by using an action to dismiss it. A Remove Curse, Greater Restoration, or wish spell also ends it.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th or 8th level, the Duration is 1 year. When you cast this spell using a spell slot of 9th level, the spell lasts until it is ended by one of the Spells mentioned above.</p>",
+      "value": "<p>You place a magical command on a creature that you can see within range, forcing it to carry out some service or refrain from some action or course of activity as you decide. If the creature can understand you, it must succeed on a Wisdom saving throw or become &amp;Reference[Charmed] by you for the Duration. While the creature is charmed by you, it takes 5d10 psychic damage each time it acts in a manner directly counter to your instructions, but no more than once each day. A creature that can't understand you is unaffected by the spell.</p><p>You can issue any command you choose, short of an activity that would result in certain death. Should you issue a suicidal command, the spell ends.</p><p>You can end the spell early by using an action to dismiss it. A Remove Curse, Greater Restoration, or wish spell also ends it.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th or 8th level, the Duration is 1 year. When you cast this spell using a spell slot of 9th level, the spell lasts until it is ended by one of the Spells mentioned above.</p>",
       "chat": ""
     },
     "source": {
@@ -98,14 +98,40 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/air/air-burst-spiral-large-yellow.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Geas",
+      "icon": "icons/magic/air/air-burst-spiral-large-yellow.webp",
+      "origin": "Compendium.dnd5e.spells.Item.JQyigMNPiDnGI18b",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "zSoZHHi7BA6IAeoj",
+      "changes": [],
+      "description": "<p>The creature is Charmed for the Duration. While the creature is charmed by the caster, it takes psychic damage each time it acts in a manner directly counter to their instructions, but no more than once each day.</p>",
+      "transfer": false,
+      "statuses": [
+        "charmed"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!JQyigMNPiDnGI18b.zSoZHHi7BA6IAeoj"
+    }
+  ],
   "folder": "bG9QTayc46rfNkv2",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234114,
-    "modifiedTime": 1704823523182,
+    "modifiedTime": 1706145425887,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!JQyigMNPiDnGI18b"

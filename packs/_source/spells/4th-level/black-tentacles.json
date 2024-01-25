@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Squirming, ebony tentacles fill a 20-foot square on ground that you can see within range. For the Duration, these tentacles turn the ground in the area into difficult terrain.</p><p>When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a Dexterity saving throw or take 3d6 bludgeoning damage and be @UUID[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc]{Restrained} by the tentacles until the spell ends. A creature that starts its turn in the area and is already @UUID[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc]{Restrained} by the tentacles takes 3d6 bludgeoning damage.</p><p>A creature @UUID[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc]{Restrained} by the tentacles can use its action to make a Strength or Dexterity check (its choice) against your spell save DC. On a success, it frees itself.</p>",
+      "value": "<p>Squirming, ebony tentacles fill a 20-foot square on ground that you can see within range. For the Duration, these tentacles turn the ground in the area into difficult terrain.</p><p>When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a Dexterity saving throw or take 3d6 bludgeoning damage and be &amp;Reference[Restrained] by the tentacles until the spell ends. A creature that starts its turn in the area and is already Restrained by the tentacles takes 3d6 bludgeoning damage.</p><p>A creature Restrained by the tentacles can use its action to make a Strength or Dexterity check (its choice) against your spell save DC. On a success, it frees itself.</p>",
       "chat": ""
     },
     "source": {
@@ -101,14 +101,40 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Black Tentacles",
+      "icon": "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
+      "origin": "Compendium.dnd5e.spells.Item.DGONTFbk5eORs5qv",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "WTgRpzj4EQGJokA6",
+      "changes": [],
+      "description": "<p>The creature is Restrained by the tentacles until the spell ends or it uses its action to make a Strength or Dexterity check (its choice) to escape.</p>",
+      "transfer": false,
+      "statuses": [
+        "restrained"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!DGONTFbk5eORs5qv.WTgRpzj4EQGJokA6"
+    }
+  ],
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234098,
-    "modifiedTime": 1704823522768,
+    "modifiedTime": 1706146031998,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!DGONTFbk5eORs5qv"

@@ -100,14 +100,51 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/light/explosion-star-large-teal-purple.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Feeblemind",
+      "icon": "icons/magic/light/explosion-star-large-teal-purple.webp",
+      "origin": "Compendium.dnd5e.spells.Item.hYCrN82dMJFuJODB",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "flpBCg1pgZchf5Hz",
+      "changes": [
+        {
+          "key": "system.abilities.int.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.abilities.cha.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        }
+      ],
+      "description": "<p>The creature's Intelligence and Charisma scores become 1. The creature can't cast Spells, activate Magic Items, understand language, or communicate in any intelligible way. The creature can, however, identify its friends, follow them, and even protect them.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!hYCrN82dMJFuJODB.flpBCg1pgZchf5Hz"
+    }
+  ],
   "folder": "x1XTiOgx4DJ34wc5",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234195,
-    "modifiedTime": 1704823525391,
+    "modifiedTime": 1706143663072,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hYCrN82dMJFuJODB"

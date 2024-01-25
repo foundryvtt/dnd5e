@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>\n        <p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+      "value": "<p>You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is &amp;Reference[charmed] by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
       "chat": ""
     },
     "source": {
@@ -94,14 +94,40 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Charm Person",
+      "icon": "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
+      "origin": "Compendium.dnd5e.spells.Item.eS7XnnApoxRxYXPs",
+      "duration": {
+        "startTime": null,
+        "seconds": 3600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "1QhUB3231btaCO0b",
+      "changes": [],
+      "description": "<p>The target is Charmed by the caster until the spell ends. The charmed creature regards the caster as a friendly acquaintance. When the spell ends, the creature knows it was charmed.</p>",
+      "transfer": false,
+      "statuses": [
+        "charmed"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!eS7XnnApoxRxYXPs.1QhUB3231btaCO0b"
+    }
+  ],
   "folder": "ERuXllkhTQF51rDJ",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234185,
-    "modifiedTime": 1704823525090,
+    "modifiedTime": 1706147311442,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!eS7XnnApoxRxYXPs"

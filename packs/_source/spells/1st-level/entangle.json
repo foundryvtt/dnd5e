@@ -4,7 +4,7 @@
   "img": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
   "system": {
     "description": {
-      "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
+      "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be &amp;Reference[Restrained] by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
       "chat": ""
     },
     "source": {
@@ -89,7 +89,33 @@
     ],
     "crewed": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Entangle",
+      "icon": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
+      "origin": "Compendium.dnd5e.spells.Item.gMrWeG8fMDPRFiVe",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "fO14IutGR3Hrepun",
+      "changes": [],
+      "description": "<p>A creature in the area is Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p>",
+      "transfer": false,
+      "statuses": [
+        "restrained"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!gMrWeG8fMDPRFiVe.fO14IutGR3Hrepun"
+    }
+  ],
   "flags": {},
   "_id": "gMrWeG8fMDPRFiVe",
   "folder": "ERuXllkhTQF51rDJ",
@@ -102,7 +128,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234191,
-    "modifiedTime": 1704823525255,
+    "modifiedTime": 1706147248472,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gMrWeG8fMDPRFiVe"

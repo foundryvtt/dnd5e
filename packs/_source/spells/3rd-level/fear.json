@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You project a phantasmal image of a creature's worst fears. Each creature in a 30-foot cone must succeed on a Wisdom saving throw or drop whatever it is holding and become Frightened for the duration.</p><p>While Frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn't have line of sight to you, the creature can make a Wisdom saving throw. On a successful save, the spell ends for that creature.</p>",
+      "value": "<p>You project a phantasmal image of a creature's worst fears. Each creature in a 30-foot cone must succeed on a Wisdom saving throw or drop whatever it is holding and become &amp;Reference[Frightened] for the duration.</p><p>While Frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn't have line of sight to you, the creature can make a Wisdom saving throw. On a successful save, the spell ends for that creature.</p>",
       "chat": ""
     },
     "source": {
@@ -96,14 +96,40 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/control/fear-fright-monster-purple-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Fear",
+      "icon": "icons/magic/control/fear-fright-monster-purple-blue.webp",
+      "origin": "Compendium.dnd5e.spells.Item.XXUDGFELgoskdOD0",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "4QpReACTSQTg2KTw",
+      "changes": [],
+      "description": "<p>The target drops whatever it is holding and become Frightened for the duration. While Frightened by this spell, a creature must take the Dash action and move away from the caster by the safest available route on each of its turns, unless there is nowhere to move.</p>",
+      "transfer": false,
+      "statuses": [
+        "frightened"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!XXUDGFELgoskdOD0.4QpReACTSQTg2KTw"
+    }
+  ],
   "folder": "5Si35RRLLaaoWvC3",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234157,
-    "modifiedTime": 1704823524328,
+    "modifiedTime": 1706146504632,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!XXUDGFELgoskdOD0"

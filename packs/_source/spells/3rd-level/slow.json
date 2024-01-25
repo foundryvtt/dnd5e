@@ -96,14 +96,69 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/air/fog-gas-smoke-dense-pink.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Slow",
+      "icon": "icons/magic/air/fog-gas-smoke-dense-pink.webp",
+      "origin": "Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "YtN8kTDQyxFaxpEx",
+      "changes": [
+        {
+          "key": "system.attributes.ac.bonus",
+          "mode": 2,
+          "value": "-2"
+        },
+        {
+          "key": "system.attributes.movement.burrow",
+          "mode": 1,
+          "value": "0.5"
+        },
+        {
+          "key": "system.attributes.movement.climb",
+          "mode": 1,
+          "value": "0.5"
+        },
+        {
+          "key": "system.attributes.movement.fly",
+          "mode": 1,
+          "value": "0.5"
+        },
+        {
+          "key": "system.attributes.movement.swim",
+          "mode": 1,
+          "value": "0.5"
+        },
+        {
+          "key": "system.attributes.movement.walk",
+          "mode": 1,
+          "value": "0.5"
+        }
+      ],
+      "description": "<p>An affected target's speed is halved, it takes a -2 penalty to AC and Dexterity saving throws, and it can't use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature's abilities or magic items, it can't make more than one melee or ranged attack during its turn.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!yqUDoxk4x0NWG5Bz.YtN8kTDQyxFaxpEx"
+    }
+  ],
   "folder": "5Si35RRLLaaoWvC3",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234243,
-    "modifiedTime": 1704823526377,
+    "modifiedTime": 1706146260888,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!yqUDoxk4x0NWG5Bz"

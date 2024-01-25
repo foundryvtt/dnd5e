@@ -95,14 +95,54 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/life/heart-cross-strong-flame-purple-orange.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Heroes' Feast",
+      "icon": "icons/magic/life/heart-cross-strong-flame-purple-orange.webp",
+      "origin": "Compendium.dnd5e.spells.Item.mgFqi0ev8f7Ut19y",
+      "duration": {
+        "startTime": null,
+        "seconds": 86400,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "RY4byZPJu4TkIxyz",
+      "changes": [
+        {
+          "key": "system.traits.di.value",
+          "mode": 2,
+          "value": "poison"
+        },
+        {
+          "key": "system.traits.ci.value",
+          "mode": 2,
+          "value": "poisoned"
+        },
+        {
+          "key": "system.traits.ci.value",
+          "mode": 2,
+          "value": "frightened"
+        }
+      ],
+      "description": "<p>The creature is cured of all Diseases and poison, becomes immune to poison and being Frightened, and makes all Wisdom Saving Throws with advantage. Its hit point maximum also increases by 2d10, and it gains the same number of Hit Points. These benefits last for 24 hours.</p>",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!mgFqi0ev8f7Ut19y.RY4byZPJu4TkIxyz"
+    }
+  ],
   "folder": "0pdesvXqKd55VOh2",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234220,
-    "modifiedTime": 1704823525676,
+    "modifiedTime": 1706144960527,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!mgFqi0ev8f7Ut19y"

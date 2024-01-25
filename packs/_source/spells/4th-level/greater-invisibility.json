@@ -95,14 +95,40 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/air/fog-gas-smoke-swirling-gray.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Greater Invisibility",
+      "icon": "icons/magic/air/fog-gas-smoke-swirling-gray.webp",
+      "origin": "Compendium.dnd5e.spells.Item.tEpDmYZNGc9f5OhJ",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "lhYVl4DD9jyS5gcn",
+      "changes": [],
+      "description": "<p>The target becomes Invisible until the spell ends. Anything the target is wearing or carrying is Invisible as long as it is on the target's person.</p>",
+      "transfer": true,
+      "statuses": [
+        "invisible"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!tEpDmYZNGc9f5OhJ.lhYVl4DD9jyS5gcn"
+    }
+  ],
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234234,
-    "modifiedTime": 1704823526074,
+    "modifiedTime": 1706145768323,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!tEpDmYZNGc9f5OhJ"
