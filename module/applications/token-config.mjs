@@ -63,7 +63,13 @@ export default class TokenConfig5e extends TokenConfig {
     let ringTab = document.createElement("div");
     const flags = this.document.getFlag("dnd5e", "tokenRing") ?? {};
     ringTab.innerHTML = await renderTemplate(this.constructor.dynamicRingTemplate, {
-      flags, subjectPlaceholder: TokenDocument5e.inferSubjectPath(this.object.texture.src)
+      flags,
+      effects: Object.entries(CONFIG.DND5E.tokenRings.effects).reduce((obj, [key, label]) => {
+        const mask = CONFIG.Token.ringClass.effects[key];
+        obj[key] = { label, checked: (flags.effects & mask) > 0 };
+        return obj;
+      }, {}),
+      subjectPlaceholder: TokenDocument5e.inferSubjectPath(this.object.texture.src)
     });
     ringTab = ringTab.querySelector("div");
     ringTab.querySelectorAll("input").forEach(i => i.addEventListener("change", this._onChangeInput.bind(this)));
@@ -149,8 +155,24 @@ export default class TokenConfig5e extends TokenConfig {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _getSubmitData(updateData={}) {
+    const formData = super._getSubmitData(updateData);
+
+    formData["flags.dnd5e.tokenRing.effects"] = Object.keys(CONFIG.DND5E.tokenRings.effects).reduce((number, key) => {
+      const checked = formData[`flags.dnd5e.tokenRing.effects.${key}`];
+      delete formData[`flags.dnd5e.tokenRing.effects.${key}`];
+      if ( checked ) number |= CONFIG.Token.ringClass.effects[key];
+      return number;
+    }, 0x1);
+
+    return formData;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _previewChanges(change) {
-    if ( !(this.preview instanceof Token5e) ) return;
+    if ( !(this.preview instanceof TokenDocument5e) ) return;
     if ( change ) {
       const flags = foundry.utils.getProperty(foundry.utils.expandObject(change), "flags.dnd5e.tokenRing") ?? {};
       const redraw = ("textures" in flags) || ("enabled" in flags);

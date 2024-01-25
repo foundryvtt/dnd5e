@@ -26,4 +26,12 @@
             {{colorPicker name="flags.dnd5e.tokenRing.colors.background" value=flags.colors.background}}
         </div>
     </div>
+    {{#each effects}}
+    <div class="form-group">
+        <label>{{label}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="flags.dnd5e.tokenRing.effects.{{@key}}" {{checked checked}}>
+        </div>
+    </div>
+    {{/each}}
 </div>

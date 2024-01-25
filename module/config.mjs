@@ -3107,17 +3107,24 @@ DND5E.rules = {
  * Token Rings configuration data
  *
  * @typedef {object} TokenRingsConfiguration
- * @property {string} spriteSheet                          The sprite sheet json source.
- * @property {typeof BaseSamplerShader} shaderClass        The shader class definition associated with the token ring.
+ * @property {Record<string, string>} effects        Localized names of the configurable ring effects.
+ * @property {string} spriteSheet                    The sprite sheet json source.
+ * @property {typeof BaseSamplerShader} shaderClass  The shader class definition associated with the token ring.
  */
 
 /**
  * @type {TokenRingsConfiguration}
  */
 DND5E.tokenRings = {
+  effects: {
+    RING_PULSE: "DND5E.TokenRings.Effects.RingPulse",
+    RING_GRADIENT: "DND5E.TokenRings.Effects.RingGradient",
+    BKG_WAVE: "DND5E.TokenRings.Effects.BackgroundWave"
+  },
   spriteSheet: "systems/dnd5e/tokens/composite/token-rings.json",
   shaderClass: null
 };
+preLocalize("tokenRings.effects");
 
 /* -------------------------------------------- */
 /*  Sources                                     */
