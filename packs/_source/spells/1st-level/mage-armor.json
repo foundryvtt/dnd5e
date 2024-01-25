@@ -96,15 +96,15 @@
       "changes": [
         {
           "key": "system.attributes.ac.calc",
-          "value": "mage",
           "mode": 5,
+          "value": "mage",
           "priority": null
         }
       ],
       "disabled": true,
       "duration": {
         "startTime": null,
-        "seconds": null,
+        "seconds": 28800,
         "combat": null,
         "rounds": null,
         "turns": null,
@@ -117,7 +117,7 @@
       "flags": {},
       "tint": null,
       "name": "Mage Armor",
-      "description": "",
+      "description": "<p>The target's base AC becomes 13 + its Dexterity modifier.</p>",
       "statuses": [],
       "_key": "!items.effects!CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny"
     }
@@ -133,7 +133,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234095,
-    "modifiedTime": 1704823522722,
+    "modifiedTime": 1706147125570,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!CKZTpZlxj7hjjo2H"

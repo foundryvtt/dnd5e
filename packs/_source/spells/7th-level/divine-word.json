@@ -93,14 +93,94 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/light/explosion-star-large-orange-purple.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Divine Word (50 hp or fewer)",
+      "icon": "icons/magic/light/explosion-star-large-orange-purple.webp",
+      "origin": "Compendium.dnd5e.spells.Item.T1vpZLam7LezjToj",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "ng33sfAG959luxm1",
+      "changes": [],
+      "description": "<p>Creature is Deafened for 1 minute.</p>",
+      "transfer": false,
+      "statuses": [
+        "deafened"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!T1vpZLam7LezjToj.ng33sfAG959luxm1"
+    },
+    {
+      "name": "Divine Word (40 hp or fewer)",
+      "icon": "icons/magic/light/explosion-star-large-orange-purple.webp",
+      "origin": "Compendium.dnd5e.spells.Item.T1vpZLam7LezjToj",
+      "duration": {
+        "startTime": null,
+        "seconds": 600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "WFygB4koHfaqBOiK",
+      "changes": [],
+      "description": "<p>Creature is Deafened and Blinded for 10 minutes.</p>",
+      "transfer": false,
+      "statuses": [
+        "deafened",
+        "blinded"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!T1vpZLam7LezjToj.WFygB4koHfaqBOiK"
+    },
+    {
+      "name": "Divine Word (30 hp or fewer)",
+      "icon": "icons/magic/light/explosion-star-large-orange-purple.webp",
+      "origin": "Compendium.dnd5e.spells.Item.T1vpZLam7LezjToj",
+      "duration": {
+        "startTime": null,
+        "seconds": 3600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "QNru4BLkBqnn3uBB",
+      "changes": [],
+      "description": "<p>Creature is Blinded, Deafened, and Stunned for 1 hour.</p>",
+      "transfer": false,
+      "statuses": [
+        "deafened",
+        "blinded",
+        "stunned",
+        "incapacitated"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!T1vpZLam7LezjToj.QNru4BLkBqnn3uBB"
+    }
+  ],
   "folder": "irCSpQWIMtp978TA",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234144,
-    "modifiedTime": 1704823524012,
+    "modifiedTime": 1706144091449,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!T1vpZLam7LezjToj"

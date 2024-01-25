@@ -107,9 +107,8 @@
       "changes": [
         {
           "key": "system.traits.dr.value",
-          "value": "cold",
           "mode": 2,
-          "priority": null
+          "value": "cold"
         }
       ],
       "disabled": true,
@@ -127,7 +126,7 @@
       "tint": null,
       "transfer": true,
       "name": "Warm Shield",
-      "description": "",
+      "description": "<p>The warm shield grants you Resistance to cold damage.</p>",
       "statuses": [],
       "_key": "!items.effects!avD5XUtkBPQQR97c.lVKx8swB08jm6IFE"
     },
@@ -137,9 +136,8 @@
       "changes": [
         {
           "key": "system.traits.dr.value",
-          "value": "fire",
           "mode": 2,
-          "priority": null
+          "value": "fire"
         }
       ],
       "disabled": true,
@@ -157,7 +155,7 @@
       "tint": null,
       "transfer": true,
       "name": "Chill Shield",
-      "description": "",
+      "description": "<p>The chill shield grants you resistance to fire damage.</p>",
       "statuses": [],
       "_key": "!items.effects!avD5XUtkBPQQR97c.UUXwEKSPX4nYfDzo"
     }
@@ -168,7 +166,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234170,
-    "modifiedTime": 1704823524695,
+    "modifiedTime": 1706145865176,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!avD5XUtkBPQQR97c"

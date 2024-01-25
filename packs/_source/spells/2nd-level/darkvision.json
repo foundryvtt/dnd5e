@@ -95,14 +95,45 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Darkvision",
+      "icon": "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
+      "origin": "Compendium.dnd5e.spells.Item.hJ6ZiA3fpoY8v9cp",
+      "duration": {
+        "startTime": null,
+        "seconds": 28800,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "9qaZQFN5xP8Gig8f",
+      "changes": [
+        {
+          "key": "system.attributes.senses.darkvision",
+          "mode": 4,
+          "value": "60",
+          "priority": null
+        }
+      ],
+      "description": "<p>The target has darkvision out to a range of 60 feet.</p>",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!hJ6ZiA3fpoY8v9cp.9qaZQFN5xP8Gig8f"
+    }
+  ],
   "folder": "Qi4Se3we69ukl2V9",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234195,
-    "modifiedTime": 1704823525379,
+    "modifiedTime": 1706146851483,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hJ6ZiA3fpoY8v9cp"

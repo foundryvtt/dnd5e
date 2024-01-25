@@ -96,14 +96,45 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Shield of Faith",
+      "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+      "origin": "Compendium.dnd5e.spells.Item.jZ6JNykRtdQ90MOo",
+      "duration": {
+        "startTime": null,
+        "seconds": 600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "FKDbXBUs6VJlf8ZY",
+      "changes": [
+        {
+          "key": "system.attributes.ac.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": null
+        }
+      ],
+      "description": "<p>The target gains it a +2 bonus to AC for the duration.</p>",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!jZ6JNykRtdQ90MOo.FKDbXBUs6VJlf8ZY"
+    }
+  ],
   "folder": "ERuXllkhTQF51rDJ",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234212,
-    "modifiedTime": 1704823525473,
+    "modifiedTime": 1706147066200,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!jZ6JNykRtdQ90MOo"

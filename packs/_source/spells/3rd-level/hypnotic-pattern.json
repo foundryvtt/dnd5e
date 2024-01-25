@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You create a twisting pattern of colors that weaves through the air inside a 30-foot cube within range. The pattern appears for a moment and vanishes. Each creature in the area who sees the pattern must make a Wisdom saving throw. On a failed save, the creature becomes charmed for the duration. While charmed by this spell, the creature is incapacitated and has a speed of 0.</p><p>The spell ends for an affected creature if it takes any damage or if someone else uses an action to shake the creature out of its stupor.</p>",
+      "value": "<p>You create a twisting pattern of colors that weaves through the air inside a 30-foot cube within range. The pattern appears for a moment and vanishes. Each creature in the area who sees the pattern must make a Wisdom saving throw. On a failed save, the creature becomes &amp;Reference[charmed] for the duration. While charmed by this spell, the creature is &amp;Reference[incapacitated] and has a speed of 0.</p><p>The spell ends for an affected creature if it takes any damage or if someone else uses an action to shake the creature out of its stupor.</p>",
       "chat": ""
     },
     "source": {
@@ -95,14 +95,66 @@
   "sort": 0,
   "flags": {},
   "img": "icons/magic/air/air-burst-spiral-pink.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Hypnotic Pattern",
+      "icon": "icons/magic/air/air-burst-spiral-pink.webp",
+      "origin": "Compendium.dnd5e.spells.Item.6g3WLOZ2u0EbaLAd",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "SQnfuD2rHVcyLZ4j",
+      "changes": [
+        {
+          "key": "system.attributes.movement.burrow",
+          "mode": 5,
+          "value": "0"
+        },
+        {
+          "key": "system.attributes.movement.climb",
+          "mode": 5,
+          "value": "0"
+        },
+        {
+          "key": "system.attributes.movement.fly",
+          "mode": 5,
+          "value": "0"
+        },
+        {
+          "key": "system.attributes.movement.swim",
+          "mode": 5,
+          "value": "0"
+        },
+        {
+          "key": "system.attributes.movement.walk",
+          "mode": 5,
+          "value": "0"
+        }
+      ],
+      "description": "<p>The creature is Charmed for the duration. While charmed by this spell, the creature is Incapacitated and has a speed of 0.</p>",
+      "transfer": false,
+      "statuses": [
+        "charmed"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!6g3WLOZ2u0EbaLAd.SQnfuD2rHVcyLZ4j"
+    }
+  ],
   "folder": "5Si35RRLLaaoWvC3",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234072,
-    "modifiedTime": 1704823522053,
+    "modifiedTime": 1706146392236,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!6g3WLOZ2u0EbaLAd"
