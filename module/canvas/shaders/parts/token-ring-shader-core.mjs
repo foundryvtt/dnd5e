@@ -31,6 +31,12 @@ export const TOKEN_RING_FRAG_HEADER = `
   
   /* -------------------------------------------- */
   
+  float normalizedCos(in float val) {
+    return (cos(val) + 1.0) * 0.5;
+  }
+  
+  /* -------------------------------------------- */
+  
   float wave(in float dist) {
     float sinWave = 0.5 * (sin(-time * 4.0 + dist * 100.0) + 1.0);
     return mix(1.0, 0.55 * sinWave + 0.8, clamp(1.0 - dist, 0.0, 1.0));
@@ -66,15 +72,14 @@ export const TOKEN_RING_FRAG_HEADER = `
     finalColor.rgb /= finalColor.a;
   
     // Computing halo
-    float w = (cos(time * 2.0) + 1.0) * 0.5;
     float lum = perceivedBrightness(finalColor.rgb);
     vec3 haloColor = vec3(lum) * vec3(0.5, 1.0, 1.0);
-    float halo = smoothstep(0.0, 0.3 + w * 0.2, lum);
-    
+    haloColor *= 2.0;
+
     // Construct final image
-    finalColor *= (halo * 0.6);
-    finalColor.rgb = mix(finalColor.rgb * finalColor.a, haloColor * finalColor.a, 0.75);
-    return finalColor;
+    return vec4(haloColor, 1.0)
+                 * (0.55 + normalizedCos(time * 2.0) * 0.25) 
+                 * finalColor.a;
   }
 `;
 
