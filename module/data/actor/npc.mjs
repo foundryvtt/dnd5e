@@ -163,8 +163,8 @@ export default class NPCData extends CreatureTemplate {
       const typeLc = match.groups.type.trim().toLowerCase();
       const typeMatch = Object.entries(CONFIG.DND5E.creatureTypes).find(([k, v]) => {
         return (typeLc === k)
-          || (typeLc === game.i18n.localize(v).toLowerCase())
-          || (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
+          || (typeLc === game.i18n.localize(v.label).toLowerCase())
+          || (typeLc === game.i18n.localize(`${v.label}Pl`).toLowerCase());
       });
       if ( typeMatch ) source.type.value = typeMatch[0];
       else {
@@ -177,7 +177,7 @@ export default class NPCData extends CreatureTemplate {
       if ( match.groups.size ) {
         const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
         const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
-          return (sizeLc === k) || (sizeLc === game.i18n.localize(v).toLowerCase());
+          return (sizeLc === k) || (sizeLc === game.i18n.localize(v.label).toLowerCase());
         });
         source.type.swarm = sizeMatch ? sizeMatch[0] : "tiny";
       }
@@ -189,5 +189,16 @@ export default class NPCData extends CreatureTemplate {
       source.type.value = "custom";
       source.type.custom = original;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare remaining NPC data.
+   */
+  prepareDerivedData() {
+    AttributesFields.prepareExhaustionLevel.call(this);
+    AttributesFields.prepareMovement.call(this);
+    TraitsFields.prepareResistImmune.call(this);
   }
 }

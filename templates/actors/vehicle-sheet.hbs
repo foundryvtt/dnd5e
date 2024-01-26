@@ -10,7 +10,7 @@
             </h1>
             <ul class="summary flexrow">
                 <li class="size">
-                    <span>{{lookup config.actorSizes system.traits.size}}</span>
+                    <span>{{lookup (lookup config.actorSizes system.traits.size) "label"}}</span>
                 </li>
                 <li class="vehicle-type">
                     <select name="system.vehicleType">
@@ -22,8 +22,17 @@
                            placeholder="{{localize 'DND5E.Dimensions'}}">
                 </li>
                 <li class="source">
-                    <input type="text" name="system.details.source.custom" value="{{system.details.source.custom}}"
-                           placeholder="{{localize 'DND5E.Source'}}">
+                    {{#if (eq system.details.source.custom system.details.source.label)}}
+                        <input type="text" name="system.details.source.custom" value="{{system.details.source.custom}}"
+                                     placeholder="{{ localize 'DND5E.Source' }}">
+                    {{else}}
+                        <span data-tooltip="{{system.details.source.label}}">{{system.details.source.label}}</span>
+                    {{/if}}
+                    {{#if editable}}
+                        <a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                    {{/if}}
                 </li>
             </ul>
             <ul class="attributes flexrow">
@@ -156,7 +165,7 @@
         </div>
 
         <div class="tab cargo flexcol" data-group="primary" data-tab="cargo">
-            {{> "dnd5e.actor-inventory" sections=cargo}}
+            {{> "dnd5e.inventory" sections=cargo}}
         </div>
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
             {{> "dnd5e.active-effects"}}

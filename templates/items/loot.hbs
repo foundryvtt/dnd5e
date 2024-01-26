@@ -6,19 +6,38 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
+                {{#if system.identified}}
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}">
+                {{else}}
+                <input name="system.unidentified.name" type="text" value="{{system.unidentified.name}}"
+                       placeholder="{{ localize 'DND5E.NameUnidentified' }}">
+                {{/if}}
             </h1>
 
             <div class="item-subtitle">
                 <h4 class="item-type">{{itemType}}</h4>
                 <span class="item-status">{{itemStatus}}</span>
+                <label class="identified">
+                    <input type="checkbox" name="system.identified" {{checked system.identified}}>
+                    {{#if system.identified}}
+                        {{ localize "DND5E.Identified" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
+                    {{else}}
+                        {{ localize "DND5E.Unidentified.Title" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
+                    {{/if}}
+                </label>
             </div>
 
             <ul class="summary flexrow">
                 <li>
-                    <select name="system.rarity">
+                    {{#if concealDetails}}
+                    <span>{{ localize "DND5E.Unidentified.Title" }}</span>
+                    {{else}}
+                    <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>
+                    {{/if}}
                 </li>
                 <li>
                     {{> "dnd5e.item-source"}}
@@ -41,6 +60,8 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            {{#dnd5e-concealSection concealDetails}}
+
             <h3 class="form-header">{{ localize "DND5E.ItemLootDetails" }}</h3>
 
             {{!-- Loot Type --}}
@@ -51,18 +72,29 @@
                 </select>
             </div>
 
-            {{#if lootSubtypes}}
+            {{#if itemSubtypes}}
             <div class="form-group">
                 <label>
                     {{localize "DND5E.ItemLootSubtype"
-                        category=(lookup (lookup config.lootTypes system.type.value) "label")}}
+                               category=(lookup (lookup config.lootTypes system.type.value) "label")}}
                 </label>
                 <select name="system.type.subtype">
-                    {{selectOptions lootSubtypes selected=system.type.subtype blank=""}}
+                    {{selectOptions itemSubtypes selected=system.type.subtype blank=""}}
                 </select>
             </div>
             {{/if}}
 
+            {{!-- Loot Properties --}}
+            <div class="form-group stacked loot-properties">
+                <label>{{ localize "DND5E.ItemLootProperties" }}</label>
+                {{#each properties}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                </label>
+                {{/each}}
+            </div>
+
+            {{/dnd5e-concealSection}}
         </div>
 
     </section>

@@ -9,6 +9,7 @@ export {
   NPCData,
   VehicleData
 };
+export {default as GroupSystemFlags} from "./group-system-flags.mjs";
 export {default as AttributesFields} from "./templates/attributes.mjs";
 export {default as CommonTemplate} from "./templates/common.mjs";
 export {default as CreatureTemplate} from "./templates/creature.mjs";

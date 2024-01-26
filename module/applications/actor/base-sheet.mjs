@@ -1,6 +1,6 @@
-import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
+import EffectsElement from "../components/effects.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
 import ActorArmorConfig from "./armor-config.mjs";
@@ -13,15 +13,13 @@ import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorTypeConfig from "./type-config.mjs";
 import SourceConfig from "../source-config.mjs";
 
-import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
-import PropertyAttribution from "../property-attribution.mjs";
 import TraitSelector from "./trait-selector.mjs";
 import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
-import { simplifyBonus } from "../../utils.mjs";
-import { ActorSheetMixin } from "./sheet-mixin.mjs";
+import ActorSheetMixin from "./sheet-mixin.mjs";
+import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -30,15 +28,21 @@ import { ActorSheetMixin } from "./sheet-mixin.mjs";
 export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /**
+   * @typedef {object} FilterState5e
+   * @property {string} name             Filtering by name.
+   * @property {Set<string>} properties  Filtering by some property.
+   */
+
+  /**
    * Track the set of item filters which are applied
-   * @type {Object<string, Set>}
+   * @type {Object<string, FilterState5e>}
    * @protected
    */
   _filters = {
-    inventory: new Set(),
-    spellbook: new Set(),
-    features: new Set(),
-    effects: new Set()
+    inventory: { name: "", properties: new Set() },
+    spellbook: { name: "", properties: new Set() },
+    features: { name: "", properties: new Set() },
+    effects: { name: "", properties: new Set() }
   };
 
   /* -------------------------------------------- */
@@ -65,10 +69,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       scrollY: [
-        ".inventory .inventory-list",
-        ".features .inventory-list",
-        ".spellbook .inventory-list",
-        ".effects .inventory-list",
+        "dnd5e-inventory .inventory-list",
+        "dnd5e-effects .effects-list",
         ".center-pane"
       ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
@@ -76,7 +78,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       height: Math.max(680, Math.max(
         237 + (Object.keys(CONFIG.DND5E.abilities).length * 70),
         240 + (Object.keys(CONFIG.DND5E.skills).length * 24)
-      ))
+      )),
+      elements: {
+        effects: "dnd5e-effects",
+        inventory: "dnd5e-inventory"
+      }
     });
   }
 
@@ -119,7 +125,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       labels: this._getLabels(),
       movement: this._getMovementSpeed(this.actor.system),
       senses: this._getSenses(this.actor.system),
-      effects: ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects),
+      effects: EffectsElement.prepareCategories(this.actor.allApplicableEffects()),
       warnings: foundry.utils.deepClone(this.actor._preparationWarnings),
       filters: this._filters,
       owner: this.actor.isOwner,
@@ -135,11 +141,14 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       rollData: this.actor.getRollData(),
       overrides: {
         attunement: foundry.utils.hasProperty(this.actor.overrides, "system.attributes.attunement.max")
-      }
+      },
+      elements: this.options.elements
     };
 
-    // Sort Owned Items
-    context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    // Remove items in containers & sort remaining
+    context.items = context.items
+      .filter(i => !this.actor.items.has(i.system.container))
+      .sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     // Temporary HP
     const hp = {...context.system.attributes.hp};
@@ -163,6 +172,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         entry.hover = CONFIG.DND5E.proficiencyLevels[entry.value];
         entry.label = prop === "skills" ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, {trait: "tool"});
         entry.baseValue = source.system[prop]?.[key]?.value ?? 0;
+        entry.baseAbility = source.system[prop]?.[key]?.ability ?? "int";
       }
     });
 
@@ -174,7 +184,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     context.expandedData = {};
     for ( const id of this._expanded ) {
       const item = this.actor.items.get(id);
-      if ( item ) context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+      if ( item ) {
+        context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+        if ( context.itemContext[id] ) context.itemContext[id].expanded = context.expandedData[id];
+      }
     }
 
     // Biography HTML enrichment
@@ -284,110 +297,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     return super.activateEditor(name, options, initialContent);
   }
 
-  /* --------------------------------------------- */
-  /*  Property Attribution                         */
-  /* --------------------------------------------- */
-
-  /**
-   * Break down all of the Active Effects affecting a given target property.
-   * @param {string} target               The data property being targeted.
-   * @returns {AttributionDescription[]}  Any active effects that modify that property.
-   * @protected
-   */
-  _prepareActiveEffectAttributions(target) {
-    const rollData = this.actor.getRollData({deterministic: true});
-    return this.actor.effects.reduce((arr, e) => {
-      let source = e.sourceName;
-      if ( e.origin === this.actor.uuid ) source = e.name;
-      if ( !source || e.disabled || e.isSuppressed ) return arr;
-      const value = e.changes.reduce((n, change) => {
-        if ( change.key !== target ) return n;
-        if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
-        return n + simplifyBonus(change.value, rollData);
-      }, 0);
-      if ( !value ) return arr;
-      arr.push({value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD});
-      return arr;
-    }, []);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Produce a list of armor class attribution objects.
-   * @param {object} rollData             Data provided by Actor5e#getRollData
-   * @returns {AttributionDescription[]}  List of attribution descriptions.
-   * @protected
-   */
-  _prepareArmorClassAttribution(rollData) {
-    const ac = rollData.attributes.ac;
-    const cfg = CONFIG.DND5E.armorClasses[ac.calc];
-    const attribution = [];
-
-    // Base AC Attribution
-    switch ( ac.calc ) {
-
-      // Flat AC
-      case "flat":
-        return [{
-          label: game.i18n.localize("DND5E.ArmorClassFlat"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: ac.flat
-        }];
-
-      // Natural armor
-      case "natural":
-        attribution.push({
-          label: game.i18n.localize("DND5E.ArmorClassNatural"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: ac.flat
-        });
-        break;
-
-      default:
-        const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        let base = ac.base;
-        const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
-        for ( const [match, term] of formula.matchAll(dataRgx) ) {
-          const value = String(foundry.utils.getProperty(rollData, term));
-          if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
-          if ( Number.isNumeric(value) ) base -= Number(value);
-          attribution.push({
-            label: match,
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value
-          });
-        }
-        const armorInFormula = formula.includes("@attributes.ac.armor");
-        let label = game.i18n.localize("DND5E.PropertyBase");
-        if ( armorInFormula ) label = this.actor.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
-        attribution.unshift({
-          label,
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: base
-        });
-        break;
-    }
-
-    // Shield
-    if ( ac.shield !== 0 ) attribution.push({
-      label: this.actor.shield?.name ?? game.i18n.localize("DND5E.EquipmentShield"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: ac.shield
-    });
-
-    // Bonus
-    if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonus"));
-
-    // Cover
-    if ( ac.cover !== 0 ) attribution.push({
-      label: game.i18n.localize("DND5E.Cover"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: ac.cover
-    });
-    return attribution;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -430,7 +339,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         const bypassFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
         data.selected.physical = game.i18n.format("DND5E.DamagePhysicalBypasses", {
           damageTypes: damageTypesFormatter.format(physical.map(t => Trait.keyLabel(t, { trait }))),
-          bypassTypes: bypassFormatter.format(data.bypasses.map(t => CONFIG.DND5E.physicalWeaponProperties[t]))
+          bypassTypes: bypassFormatter.format(data.bypasses.reduce((acc, t) => {
+            const v = CONFIG.DND5E.itemProperties[t];
+            if ( v && v.isPhysical ) acc.push(v.label);
+            return acc;
+          }, []))
         });
       }
 
@@ -481,7 +394,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
         override: override || 0,
-        dataset: {type: "spell", level: prepMode in sections ? 1 : i, "preparation.mode": prepMode},
+        dataset: {type: "spell", level: prepMode in sections ? 1 : i, "preparationMode": prepMode},
         prop: sl,
         editable: context.editable && !aeOverride
       };
@@ -557,14 +470,49 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /**
-   * Determine whether an Owned Item will be shown based on the current set of filters.
-   * @param {object[]} items       Copies of item data to be filtered.
+   * Filter child embedded Documents based on the current set of filters.
+   * @param {string} collection    The embedded collection name.
+   * @param {Set<string>} filters  Filters to apply to the children.
+   * @returns {Document[]}
+   * @protected
+   */
+  _filterChildren(collection, filters) {
+    switch ( collection ) {
+      case "items": return this._filterItems(this.actor.items, filters);
+      case "effects": return this._filterEffects(Array.from(this.actor.allApplicableEffects()), filters);
+    }
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Filter Active Effects based on the current set of filters.
+   * @param {ActiveEffect5e[]} effects  The effects to filter.
+   * @param {Set<string>} filters       Filters to apply to the effects.
+   * @returns {ActiveEffect5e[]}
+   * @protected
+   */
+  _filterEffects(effects, filters) {
+    return effects;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Filter items based on the current set of filters.
+   * @param {Item5e[]} items       Copies of item data to be filtered.
    * @param {Set<string>} filters  Filters applied to the item list.
-   * @returns {object[]}           Subset of input items limited by the provided filters.
+   * @returns {Item5e[]}           Subset of input items limited by the provided filters.
    * @protected
    */
   _filterItems(items, filters) {
+    const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
     return items.filter(item => {
+
+      // Subclass-specific logic.
+      const filtered = this._filterItem(item);
+      if ( filtered !== undefined ) return filtered;
 
       // Action usage
       for ( let f of ["action", "bonus", "reaction"] ) {
@@ -572,19 +520,37 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       }
 
       // Spell-specific filters
-      if ( filters.has("ritual") && (item.system.components.ritual !== true) ) return false;
-      if ( filters.has("concentration") && (item.system.components.concentration !== true) ) return false;
+      if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
+      if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
+      const schoolFilter = spellSchools.intersection(filters);
+      if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
       if ( filters.has("prepared") ) {
-        if ( (item.system.level === 0) || ["innate", "always"].includes(item.system.preparation.mode) ) return true;
+        if ( ["innate", "always"].includes(item.system.preparation?.mode) ) return true;
         if ( this.actor.type === "npc" ) return true;
-        return item.system.preparation.prepared;
+        return item.system.preparation?.prepared;
       }
 
       // Equipment-specific filters
       if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
+      if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
+
+      // Feature-specific filters
+      if ( filters.has("lr") && (item.system.uses?.per !== "lr") ) return false;
+      if ( filters.has("sr") && (item.system.uses?.per !== "sr") ) return false;
+
       return true;
     });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether an Item will be shown based on the current set of filters.
+   * @param {Item5e} item  The item.
+   * @returns {boolean|void}
+   * @protected
+   */
+  _filterItem(item) {}
 
   /* -------------------------------------------- */
 
@@ -610,20 +576,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /** @inheritdoc */
   activateListeners(html) {
-    // Activate Item Filters
-    const filterLists = html.find(".filter-list");
-    filterLists.each(this._initializeFilterItemList.bind(this));
-    filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
-
-    // Item summaries
-    html.find(".item .item-name.rollable h4").click(event => this._onItemSummary(event));
-
-    // View Item Sheets
-    html.find(".item-edit").click(this._onItemEdit.bind(this));
-
     // Property attributions
-    html.find("[data-attribution]").mouseover(this._onPropertyAttribution.bind(this));
-    html.find(".attributable").mouseover(this._onPropertyAttribution.bind(this));
+    this.form.querySelectorAll("[data-attribution], .attributable").forEach(this._applyAttributionTooltips.bind(this));
 
     // Preparation Warnings
     html.find(".warnings").click(this._onWarningLink.bind(this));
@@ -651,21 +605,14 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       html.find(".config-button").click(this._onConfigMenu.bind(this));
 
       // Owned Item management
-      html.find(".item-create").click(this._onItemCreate.bind(this));
-      html.find(".item-delete").click(this._onItemDelete.bind(this));
-      html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
-      html.find(".item-quantity input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
       html.find(".attunement-max-override").click(this._onAttunementOverride.bind(this));
 
-      // Active Effect management
-      html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
       this._disableOverriddenFields(html);
     }
 
     // Owner Only Listeners, for non-compendium actors.
     if ( this.actor.isOwner && !this.actor.compendium ) {
-
       // Ability Checks
       html.find(".ability-name").click(this._onRollAbilityTest.bind(this));
 
@@ -674,19 +621,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
       // Roll Tool Checks.
       html.find(".tool-name").on("click", this._onRollToolCheck.bind(this));
-
-      // Item Rolling
-      html.find(".rollable .item-image").click(event => this._onItemUse(event));
-      html.find(".item .item-recharge").click(event => this._onItemRecharge(event));
     }
-
-    // Otherwise, remove rollable classes
-    else {
-      html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
-    }
-
-    // Item Context Menu
-    new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
@@ -729,49 +664,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Handle activation of a context menu for an embedded Item or ActiveEffect document.
-   * Dynamically populate the array of context menu options.
-   * @param {HTMLElement} element       The HTML element for which the context menu is activated
-   * @protected
-   */
-  _onItemContext(element) {
-
-    // Active Effects
-    if ( element.classList.contains("effect") ) {
-      const effect = this.actor.effects.get(element.dataset.effectId);
-      if ( !effect ) return;
-      ui.context.menuItems = this._getActiveEffectContextOptions(effect);
-      Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
-    }
-
-    // Items
-    else {
-      const item = this.actor.items.get(element.dataset.itemId);
-      if ( !item ) return;
-      ui.context.menuItems = this._getItemContextOptions(item);
-      Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Initialize Item list filters by activating the set of filters which are currently applied
-   * @param {number} i  Index of the filter in the list.
-   * @param {HTML} ul   HTML object for the list item surrounding the filter.
-   * @private
-   */
-  _initializeFilterItemList(i, ul) {
-    const set = this._filters[ul.dataset.filter];
-    const filters = ul.querySelectorAll(".filter-item");
-    for ( let li of filters ) {
-      if ( set.has(li.dataset.filter) ) li.classList.add("active");
-    }
-  }
-
-  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
@@ -789,10 +681,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "armor":
         app = new ActorArmorConfig(this.actor);
         break;
-      case "hit-dice":
+      case "hitDice":
         app = new ActorHitDiceConfig(this.actor);
         break;
-      case "hit-points":
+      case "hitPoints":
         app = new ActorHitPointsConfig(this.actor);
         break;
       case "initiative":
@@ -820,6 +712,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "skill":
         const skill = event.currentTarget.closest("[data-key]").dataset.key;
         app = new ProficiencyConfig(this.actor, {property: "skills", key: skill});
+        break;
+      case "spellSlots":
+        app = new ActorSpellSlotsConfig(this.actor);
         break;
       case "tool":
         const tool = event.currentTarget.closest("[data-key]").dataset.key;
@@ -853,6 +748,22 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Update the field value and save the form.
     return this._onSubmit(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onDragStart(event) {
+    const li = event.currentTarget;
+    if ( event.target.classList.contains("content-link") ) return;
+
+    if ( li.dataset.effectId && li.dataset.parentId ) {
+      const effect = this.actor.items.get(li.dataset.parentId)?.effects.get(li.dataset.effectId);
+      if ( effect ) event.dataTransfer.setData("text/plain", JSON.stringify(effect.toDragData()));
+      return;
+    }
+
+    super._onDragStart(event);
   }
 
   /* -------------------------------------------- */
@@ -940,7 +851,51 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  async _onDropActiveEffect(event, data) {
+    const effect = await ActiveEffect.implementation.fromDropData(data);
+    if ( effect?.target === this.actor ) return false;
+    return super._onDropActiveEffect(event, data);
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
+  async _onDropItem(event, data) {
+    if ( !this.actor.isOwner ) return false;
+    const item = await Item.implementation.fromDropData(data);
+
+    // Handle moving out of container & item sorting
+    if ( this.actor.uuid === item.parent?.uuid ) {
+      if ( item.system.container !== null ) await item.update({"system.container": null});
+      return this._onSortItem(event, item.toObject());
+    }
+
+    return this._onDropItemCreate(item);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropFolder(event, data) {
+    if ( !this.actor.isOwner ) return [];
+    const folder = await Folder.implementation.fromDropData(data);
+    if ( folder.type !== "Item" ) return [];
+    const droppedItemData = await Promise.all(folder.contents.map(async item => {
+      if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
+      return item;
+    }));
+    return this._onDropItemCreate(droppedItemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the final creation of dropped Item data on the Actor.
+   * @param {Item5e[]|Item5e} itemData     The item or items requested for creation
+   * @returns {Promise<Item5e[]>}
+   * @protected
+   */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
@@ -950,14 +905,15 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       items = itemsWithoutAdvancement;
     }
 
-    const toCreate = [];
-    for ( const item of items ) {
-      const result = await this._onDropSingleItem(item);
-      if ( result ) toCreate.push(result);
-    }
+    // Filter out items already in containers to avoid creating duplicates
+    const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
+    items = items.filter(i => !containers.has(i.system.container));
 
-    // Create the owned items as normal
-    return this.actor.createEmbeddedDocuments("Item", toCreate);
+    // Create the owned items & contents as normal
+    const toCreate = await Item5e.createWithContents(items, {
+      transformFirst: item => this._onDropSingleItem(item.toObject())
+    });
+    return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
   }
 
   /* -------------------------------------------- */
@@ -1049,7 +1005,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       const list = this._event.target.closest(".item-list"); // Dropped inside an existing list.
       header = list?.previousElementSibling;
     }
-    const mode = header?.dataset ?? {};
+    const { level, preparationMode } = header?.closest("[data-level]")?.dataset ?? {};
 
     // Determine the actor's spell slot progressions, if any.
     const progs = Object.values(this.document.classes).reduce((acc, cls) => {
@@ -1060,18 +1016,19 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Case 1: Drop a cantrip.
     if ( itemData.system.level === 0 ) {
-      if ( ["pact", "prepared"].includes(mode["preparation.mode"]) ) {
+      if ( ["pact", "prepared"].includes(preparationMode) ) {
         itemData.system.preparation.mode = "prepared";
-      } else if ( !mode["preparation.mode"] ) {
+      } else if ( !preparationMode ) {
         const isCaster = this.document.system.details.spellLevel || progs.pact || progs.leveled;
         itemData.system.preparation.mode = isCaster ? "prepared" : "innate";
       } else {
-        itemData.system.preparation.mode = mode["preparation.mode"];
+        itemData.system.preparation.mode = preparationMode;
       }
+      if ( itemData.system.preparation.mode === "prepared" ) itemData.system.preparation.prepared = true;
     }
 
     // Case 2: Drop a leveled spell in a section without a mode.
-    else if ( (mode.level === 0) || !mode["preparation.mode"] ) {
+    else if ( (level === "0") || !preparationMode ) {
       if ( this.document.type === "npc" ) {
         itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {
@@ -1080,9 +1037,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Case 3: Drop a leveled spell in a specific section.
-    else {
-      itemData.system.preparation.mode = mode["preparation.mode"];
-    }
+    else itemData.system.preparation.mode = preparationMode;
   }
 
   /* -------------------------------------------- */
@@ -1136,130 +1091,16 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /**
-   * Handle using an item from the Actor sheet, obtaining the Item instance, and dispatching to its use method.
-   * @param {Event} event  The triggering click event.
-   * @returns {Promise}    Results of the usage.
+   * Initialize attribution tooltips on an element.
+   * @param {HTMLElement} element  The tooltipped element.
    * @protected
    */
-  _onItemUse(event) {
-    event.preventDefault();
-    const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    return item.use({}, {event});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle attempting to recharge an item usage by rolling a recharge check.
-   * @param {Event} event      The originating click event.
-   * @returns {Promise<Roll>}  The resulting recharge roll.
-   * @private
-   */
-  _onItemRecharge(event) {
-    event.preventDefault();
-    const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    return item.rollRecharge();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset.
-   * @param {Event} event          The originating click event.
-   * @returns {Promise<Item5e[]>}  The newly created item.
-   * @private
-   */
-  _onItemCreate(event) {
-    event.preventDefault();
-    const dataset = (event.currentTarget.closest(".spellbook-header") ?? event.currentTarget).dataset;
-    const type = dataset.type;
-
-    // Check to make sure the newly created class doesn't take player over level cap
-    if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
-      const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel});
-      ui.notifications.error(err);
-      return null;
-    }
-
-    const itemData = {
-      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
-      type: type,
-      system: foundry.utils.expandObject({ ...dataset })
-    };
-    delete itemData.system.type;
-    return this.actor.createEmbeddedDocuments("Item", [itemData]);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle editing an existing Owned Item for the Actor.
-   * @param {Event} event    The originating click event.
-   * @returns {ItemSheet5e}  The rendered item sheet.
-   * @private
-   */
-  _onItemEdit(event) {
-    event.preventDefault();
-    const li = event.currentTarget.closest(".item");
-    const item = this.actor.items.get(li.dataset.itemId);
-    return item.sheet.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle deleting an existing Owned Item for the Actor.
-   * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e|AdvancementManager>|undefined}  The deleted item if something was deleted or the
-   *                                                          advancement manager if advancements need removing.
-   * @private
-   */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    const li = event.currentTarget.closest(".item");
-    const item = this.actor.items.get(li.dataset.itemId);
-    if ( !item ) return;
-
-    // If item has advancement, handle it separately
-    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
-      const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
-      if ( manager.steps.length ) {
-        try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
-          return item.delete({ shouldRemoveAdvancements });
-        } catch(err) {
-          return;
-        }
-      }
-    }
-
-    return item.deleteDialog();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle displaying the property attribution tooltip when a property is hovered over.
-   * @param {Event} event   The originating mouse event.
-   * @private
-   */
-  async _onPropertyAttribution(event) {
-    const element = event.target;
-    let property = element.dataset.attribution;
-    if ( !property ) return;
-
-    const rollData = this.actor.getRollData({ deterministic: true });
-    const title = game.i18n.localize(element.dataset.attributionCaption);
-    let attributions;
-    switch ( property ) {
-      case "attributes.ac":
-        attributions = this._prepareArmorClassAttribution(rollData); break;
-    }
-    if ( !attributions ) return;
-    new PropertyAttribution(this.actor, attributions, property, {title}).renderTooltip(element);
+  _applyAttributionTooltips(element) {
+    if ( "tooltip" in element.dataset ) return;
+    element.dataset.tooltip = `
+      <section class="loading" data-uuid="${this.actor.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+    `;
+    element.dataset.tooltipClass = "property-attribution";
   }
 
   /* -------------------------------------------- */
@@ -1310,24 +1151,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     event.preventDefault();
     const field = event.currentTarget.previousElementSibling;
     return this.actor.update({[field.name]: 1 - parseInt(field.value)});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle toggling of filters to display a different set of owned items.
-   * @param {Event} event     The click event which triggered the toggle.
-   * @returns {ActorSheet5e}  This actor sheet with toggled filters.
-   * @private
-   */
-  _onToggleFilter(event) {
-    event.preventDefault();
-    const li = event.currentTarget;
-    const set = this._filters[li.parentElement.dataset.filter];
-    const filter = li.dataset.filter;
-    if ( set.has(filter) ) set.delete(filter);
-    else set.add(filter);
-    return this.render();
   }
 
   /* -------------------------------------------- */

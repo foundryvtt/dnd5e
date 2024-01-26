@@ -1,0 +1,439 @@
+{
+  "_id": "6T08zzKtmmpVwlXU",
+  "name": "Sorcerer",
+  "type": "class",
+  "img": "icons/magic/earth/projectiles-magma-stone-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p>As a sorcerer, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d6 per sorcerer level<br /><strong>Hit Points at 1st Level:</strong> 6 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d6 (or 4) + your Constitution modifier per sorcerer level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> None<br /><strong>Weapons:</strong> Daggers, darts, slings, quarterstaffs, light crossbows<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Constitution, Charisma<br /><strong>Skills:</strong> Choose two from Arcana, Deception, Insight, Intimidation, Persuasion, and Religion</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a light crossbow and 20 bolts or (b) any simple weapon</li>\n<li>(a) a component pouch or (b) an arcane focus</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n<li>Two daggers</li>\n</ul>\n<h1>Sorcerer Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Sorcery Points</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>̶</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.oygRF3ZjTv2T7z0Y]{Spellcasting}, @UUID[Compendium.dnd5e.classfeatures.Item.cmRCL9T9UgRYOj1c]{Sorcerous Origins}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>2</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.LBKChJY5n02Afhnq]{Font of Magic}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>3</td>\n<td>2nd Level Spell Slot, @UUID[Compendium.dnd5e.classfeatures.Item.9Uh7uTDNZ04oTJsL]{Metamagic}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>4</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>5</td>\n<td>3rd Level Spell Slot</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>6</td>\n<td>Sorcerous Origin feature</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>7</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>8</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>9</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>10</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.9Uh7uTDNZ04oTJsL]{Metamagic improvement}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>11</td>\n<td>6th Level Spell Slot</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>12</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>13</td>\n<td>7th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>14</td>\n<td>Sorcerous Origin feature</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>15</td>\n<td>8th Level Spell Slot</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>16</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>17</td>\n<td>9th Level Spell Slot, @UUID[Compendium.dnd5e.classfeatures.Item.9Uh7uTDNZ04oTJsL]{Metamagic improvement}</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>18</td>\n<td>Sorcerous Origin feature</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>19</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>20</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.F2lEKSmOY0NUruzY]{Sorcerous Restoration}</td>\n</tr>\n</tbody>\n</table>\n<h1>Sorcerous Origins</h1>\n<p>Different sorcerers claim different origins for their innate magic, such as a draconic bloodline.</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.Item.2nadB2MBSHTQ0kcl]{Draconic Bloodline}</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "identifier": "sorcerer",
+    "levels": 1,
+    "hitDice": "d6",
+    "hitDiceUsed": 0,
+    "advancement": [
+      {
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "Hit Points",
+        "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+        "_id": "XFeJBDjRoDLHPuR5"
+      },
+      {
+        "_id": "BfjnJtYtVOv4PVHu",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim:dagger",
+            "weapon:sim:dart",
+            "weapon:sim:lightcrossbow",
+            "weapon:sim:quarterstaff",
+            "weapon:sim:sling"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "KO7dxe4FlwlKXFIq",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:con",
+            "saves:cha"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "PAAGQYrkhVdGqg59",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:arc",
+                "skills:dec",
+                "skills:ins",
+                "skills:itm",
+                "skills:per",
+                "skills:rel"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.oygRF3ZjTv2T7z0Y",
+            "Compendium.dnd5e.classfeatures.cmRCL9T9UgRYOj1c"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 1,
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "tHGuZb6Cezr0Yda6"
+      },
+      {
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.LBKChJY5n02Afhnq"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 2,
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "vEbnPhd3OW2Z5RH8"
+      },
+      {
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.9Uh7uTDNZ04oTJsL"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 3,
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "7MYEF9Ci5OaEWaQ7"
+      },
+      {
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.F2lEKSmOY0NUruzY"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 20,
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "7FUhVIQtDqVQxUCJ"
+      },
+      {
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "",
+          "choices": {
+            "3": 2,
+            "10": 1,
+            "17": 1
+          },
+          "allowDrops": true,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.zElYrOcCFFMhB6Xl",
+            "Compendium.dnd5e.classfeatures.DZpAa3LzMNBexbmX",
+            "Compendium.dnd5e.classfeatures.IWpe0Y9uAStHGiH1",
+            "Compendium.dnd5e.classfeatures.tQxlKyAx9sgPrbgj",
+            "Compendium.dnd5e.classfeatures.tNG2qi9zhmXEkecA",
+            "Compendium.dnd5e.classfeatures.nViGf6bZ6DQAJhkw",
+            "Compendium.dnd5e.classfeatures.fXa0DMhoVLtbBu9l",
+            "Compendium.dnd5e.classfeatures.Qb391hakCfmH4w8p"
+          ],
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          },
+          "restriction": {
+            "type": "class",
+            "subtype": "metamagic",
+            "level": ""
+          }
+        },
+        "value": {},
+        "title": "Metamagic",
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+        "_id": "JvnMksZAolGhHMVS"
+      },
+      {
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 4
+            },
+            "4": {
+              "value": 5
+            },
+            "10": {
+              "value": 6
+            }
+          }
+        },
+        "value": {},
+        "title": "Cantrips Known",
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "rSUZv6eYOPRtikhv"
+      },
+      {
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "spells-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 2
+            },
+            "2": {
+              "value": 3
+            },
+            "3": {
+              "value": 4
+            },
+            "4": {
+              "value": 5
+            },
+            "5": {
+              "value": 6
+            },
+            "6": {
+              "value": 7
+            },
+            "7": {
+              "value": 8
+            },
+            "8": {
+              "value": 9
+            },
+            "9": {
+              "value": 10
+            },
+            "10": {
+              "value": 11
+            },
+            "11": {
+              "value": 12
+            },
+            "13": {
+              "value": 13
+            },
+            "15": {
+              "value": 14
+            },
+            "17": {
+              "value": 15
+            }
+          }
+        },
+        "value": {},
+        "title": "Spells Known",
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "Wr4j8nEA7gZxzW5Z"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          },
+          "cap": 2
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 4,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "zSlKyZ0rzKcd78Cq"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          },
+          "cap": 2
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 8,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "Psp6dqmMqww0D44O"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          },
+          "cap": 2
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 12,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "9qahHg5ZfS8bWkjD"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          },
+          "cap": 2
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 16,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "QYpSCG2AmMi8taC1"
+      },
+      {
+        "_id": "puDaUsYrlks0z5gm",
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          },
+          "cap": 2
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 19,
+        "title": ""
+      }
+    ],
+    "spellcasting": {
+      "progression": "full",
+      "ability": "cha"
+    }
+  },
+  "effects": [],
+  "folder": "TCB42RLUb0HxUb2M",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234275,
+    "modifiedTime": 1704824714888,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!6T08zzKtmmpVwlXU"
+}

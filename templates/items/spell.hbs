@@ -2,11 +2,11 @@
 
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img"/>
+        <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img">
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.SpellName' }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.SpellName' }}">
             </h1>
 
             <div class="item-subtitle">
@@ -61,17 +61,16 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.SpellSchool" }}</label>
                 <select name="system.school">
-                    {{selectOptions config.spellSchools selected=system.school blank=""}}
+                    {{selectOptions config.spellSchools selected=system.school labelAttr="label" blank=""}}
                 </select>
             </div>
 
             {{!-- Spell Components --}}
             <div class="spell-components form-group stacked">
                 <label>{{ localize "DND5E.SpellComponents" }}</label>
-                {{#each spellComponents as |component key|}}
+                {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.components.{{key}}" {{checked (lookup ../system.components key)}}>
-                    {{component.label}}
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
                 </label>
                 {{/each}}
             </div>
@@ -79,7 +78,7 @@
             {{!-- Material Components --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.SpellMaterials" }}</label>
-                <input class="materials" type="text" name="system.materials.value" value="{{system.materials.value}}"/>
+                <input class="materials" type="text" name="system.materials.value" value="{{system.materials.value}}">
                 {{#if system.materials.value}}
                 <div class="spell-materials flexrow">
                     <label>{{ localize "DND5E.Supply" }}</label>
@@ -87,7 +86,7 @@
                     <label>{{ localize "DND5E.CostGP" }}</label>
                     {{numberInput system.materials.cost name="system.materials.cost" placeholder="&mdash;"}}
                     <label>{{ localize "DND5E.Consumed" }}</label>
-                    <input type="checkbox" name="system.materials.consumed" {{checked system.materials.consumed}}/>
+                    <input type="checkbox" name="system.materials.consumed" {{checked system.materials.consumed}}>
                 </div>
                 {{/if}}
             </div>
@@ -97,7 +96,8 @@
                 <label>{{ localize "DND5E.SpellPreparationMode" }}</label>
                 <div class="form-fields">
                     <label class="checkbox prepared">
-                        {{ localize "DND5E.SpellPrepared" }} <input type="checkbox" name="system.preparation.prepared" {{checked system.preparation.prepared}}/>
+                        {{ localize "DND5E.SpellPrepared" }}
+                        <input type="checkbox" name="system.preparation.prepared" {{checked system.preparation.prepared}}>
                     </label>
                     <select name="system.preparation.mode">
                         {{ selectOptions config.spellPreparationModes selected=system.preparation.mode }}
@@ -127,7 +127,7 @@
                         {{/select}}
                     </select>
                     <input type="text" name="system.scaling.formula" value="{{system.scaling.formula}}"
-                           placeholder="{{ localize 'DND5E.ScalingFormula' }}" data-formula-editor/>
+                           placeholder="{{ localize 'DND5E.ScalingFormula' }}" data-formula-editor>
                 </div>
             </div>
         </div>
