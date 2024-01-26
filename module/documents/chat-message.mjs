@@ -214,10 +214,12 @@ export default class ChatMessage5e extends ChatMessage {
     this._enrichAttackTargets(html);
 
     // Dice rolls
-    html.querySelectorAll(".dice-tooltip").forEach((el, i) => {
-      if ( !(roll instanceof DamageRoll) ) this._enrichRollTooltip(this.rolls[i], el);
-    });
-    this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
+    if ( this.isContentVisible ) {
+      html.querySelectorAll(".dice-tooltip").forEach((el, i) => {
+        if ( !(roll instanceof DamageRoll) ) this._enrichRollTooltip(this.rolls[i], el);
+      });
+      this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
+    }
     html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     html.querySelectorAll(".dice-tooltip").forEach(el => el.style.height = "0");
   }
