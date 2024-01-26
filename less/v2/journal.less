@@ -79,7 +79,11 @@
     font-family: var(--dnd5e-font-roboto-condensed);
 
     /* Content Links & Enrichers */
-    .passive-check { text-decoration-color: var(--dnd5e-color-black); }
+    .passive-check {
+      text-decoration-color: currentcolor;
+      text-decoration-style: dashed;
+      text-underline-offset: 2px;
+    }
 
     a:is(.content-link, .inline-roll), .roll-link a {
       background: transparent;
