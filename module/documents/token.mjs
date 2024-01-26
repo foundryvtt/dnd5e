@@ -22,13 +22,17 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /* -------------------------------------------- */
 
+  #subjectPath;
+
   /**
    * Fetch the explicit subject texture or infer from `texture.src` for dynamic rings.
    * @type {string}
    */
   get subjectPath() {
     const subject = this.getFlag("dnd5e", "tokenRing")?.textures?.subject;
-    return subject ?? this.constructor.inferSubjectPath(this.texture.src);
+    if ( subject ) return subject;
+    this.#subjectPath ??= this.constructor.inferSubjectPath(this.texture.src);
+    return this.#subjectPath;
   }
 
   /* -------------------------------------------- */
@@ -118,6 +122,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    */
   static inferSubjectPath(path) {
     if ( !path ) return "";
+    for ( const [src, dest] of Object.entries(CONFIG.Token.ringClass.subjectPaths) ) {
+      if ( path.startsWith(src) ) return path.replace(src, dest);
+    }
     const parts = path.split(".");
     const extension = parts.pop();
     return `${parts.join(".")}-subject.${extension}`;
@@ -138,6 +145,14 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const dts = CONFIG.DND5E.actorSizes[size].dynamicTokenScale ?? 1;
     this.texture.scaleX = this._source.texture.scaleX * dts;
     this.texture.scaleY = this._source.texture.scaleY * dts;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(data, options, userId) {
+    if ( foundry.utils.hasProperty(data, "texture.src") ) this.#subjectPath = null;
+    super._onUpdate(data, options, userId);
   }
 
   /* -------------------------------------------- */
