@@ -744,7 +744,7 @@ function createRollLink(label, dataset) {
   // Add main link
   const link = document.createElement("a");
   link.dataset.action = "roll";
-  link.innerHTML = `<i class="fa-solid fa-dice-d20"></i> ${label}`;
+  link.innerHTML = `<i class="fa-solid fa-dice-d20"></i>${label}`;
   span.insertAdjacentElement("afterbegin", link);
 
   // Add chat request link for GMs

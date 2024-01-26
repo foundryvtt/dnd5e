@@ -2,6 +2,27 @@
  * Variant of the standard journal sheet to handle custom TOC numbering.
  */
 export default class JournalSheet5e extends JournalSheet {
+  /** @inheritDoc */
+  static get defaultOptions() {
+    const options = super.defaultOptions;
+    options.classes.push("dnd5e2-journal");
+    return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.on("pointerdown", event => {
+      if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
+        event.preventDefault();
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   _getPageData() {
     const pageData = super._getPageData();

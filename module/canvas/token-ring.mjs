@@ -298,6 +298,12 @@ export default class TokenRing {
    */
   static #ringData;
 
+  /**
+   * A mapping of path prefixes to where modules have configured subject images.
+   * @type {Record<string, string>}
+   */
+  static subjectPaths = {};
+
   /* -------------------------------------------- */
 
   /**
@@ -309,6 +315,12 @@ export default class TokenRing {
     // Check client setting
     this.#enabled = !(game.settings.get("dnd5e", "disableTokenRings") ?? false);
     if ( !this.enabled ) return;
+
+    // Configure subject paths.
+    for ( const module of game.modules ) {
+      const mappings = module.flags?.tokenRingSubjectMappings ?? {};
+      if ( module.active ) Object.assign(this.subjectPaths, mappings);
+    }
 
     this.tokenRingSamplerShader = CONFIG.DND5E.tokenRings.shaderClass;
     if ( game.release.generation >= 12 ) {
