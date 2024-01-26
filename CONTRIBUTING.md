@@ -12,7 +12,7 @@ If your system supports `npm`, you can run the following commands from the root 
 
 ### `npm install`
 
-Installs all dependencies needed to run developer tooling scripts.
+Installs all dependencies needed to run developer tooling scripts. Then will compile the necessary CSS and DB files.
 
 ### `npm run build`
 
@@ -41,7 +41,7 @@ Compile the source JSON files into compendium packs.
 npm run build:db
 ```
 
-- `npm run build:db` - Compile all JSON files into their NEDB files.
+- `npm run build:db` - Compile all JSON files into their LevelDB files.
 - `npm run build:db -- classes` - Only compile the specified pack.
 
 #### Extracting Packs
@@ -52,7 +52,7 @@ Extract the contents of compendium packs to JSON files.
 npm run build:json
 ```
 
-- `npm run build:json` - Extract all compendium NEDB files into JSON files.
+- `npm run build:json` - Extract all compendium LevelDB files into JSON files.
 - `npm run build:json -- classes` - Only extract the contents of the specified compendium.
 - `npm run build:json -- classes Barbarian` - Only extract a single item from the specified compendium.
 
