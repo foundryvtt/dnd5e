@@ -1,4 +1,4 @@
-![Up to date as of 2.3.x](https://img.shields.io/badge/dnd5e-v2.3.x-informational)
+![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
 
 This document only covers Active Effects available to the Core dnd5e System.
 
@@ -30,9 +30,6 @@ As part of this, an [Actor's Rolldata](https://github.com/foundryvtt/dnd5e/wiki/
 | Downgrade   | Reduces the defined attribute only in cases where the current value of that attribute would be greater than value specified in the Effect Value field.|
 | Upgrade     | Increases the defined attribute only in cases where the current value of that attribute would be less than value specified in the Effect Value field. |
 | Custom      | The Custom change mode applies logic defined by a game system or add-on module. The dnd5e system does not utilize the Custom Change Mode|
-
-> [!important]
-> When using the `ADD` change mode, it is always recommended to include the `+` in the Effect Value, this will ensure that if you have multiple effects targeting the same Attribute, they will not be concatenated (e.g. two effects that `ADD | +1` will result in a bonus of `+1+1`, whereas two effects that `ADD | 1` will result in a bonus of `+11`.
 
 # Commonly Desired Effect Examples
 
@@ -322,9 +319,6 @@ system.traits.ci.value
               dr
               dv
 ```
-
-> [!WARNING]
-> These only serve as a marker on the actor sheet, the core system has no automations around immunities, resistances, or vulnerabilities.
 
 ### Add a Condition Immunity
 
