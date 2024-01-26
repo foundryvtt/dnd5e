@@ -147,8 +147,8 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClassContainer"
   });
 
-  DocumentSheetConfig.unregisterSheet(JournalEntry, "core", JournalSheet);
   DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalSheet5e, {
+    makeDefault: true,
     label: "DND5E.SheetClassJournalEntry"
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassPageSheet, {

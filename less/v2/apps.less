@@ -42,25 +42,6 @@
     overflow: visible;
   }
 
-  .window-resizable-handle {
-    border-radius: 0;
-    border: none;
-    background: transparent;
-    color: var(--dnd5e-color-black);
-    overflow: hidden;
-    font-size: var(--font-size-16);
-    cursor: nwse-resize;
-    opacity: .4;
-
-    > i {
-      position: absolute;
-      bottom: -3px;
-      right: 1px;
-
-      &::before { content: "\f7a5"; }
-    }
-  }
-
   /* ---------------------------------- */
   /*  Common App Components             */
   /* ---------------------------------- */
@@ -556,7 +537,7 @@
   /*  Currency                          */
   /* ---------------------------------- */
 
-  i.currency {
+  :is(i, span).currency {
     width: 1em;
     height: 1em;
     display: inline-block;
@@ -855,3 +836,26 @@
    accommodating fixed position context menus */
 
 .dnd5e2 .context { pointer-events: none; }
+
+/* ---------------------------------- */
+/*  Window Handles                    */
+/* ---------------------------------- */
+
+:is(.dnd5e2, .dnd5e2-journal) .window-resizable-handle {
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  color: var(--dnd5e-color-black);
+  overflow: hidden;
+  font-size: var(--font-size-16);
+  cursor: nwse-resize;
+  opacity: .4;
+
+  > i {
+    position: absolute;
+    bottom: -3px;
+    right: 1px;
+
+    &::before { content: "\f7a5"; }
+  }
+}

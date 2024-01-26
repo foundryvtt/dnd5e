@@ -6,7 +6,7 @@
 
 {{#if linked.document}}
 
-<section>
+<section class="journal-page-content">
     {{{enriched.value}}}
 
     <h{{title.level2}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.FeaturesHeader"}}</h{{title.level2}}>
@@ -29,7 +29,7 @@
     <h{{title.level3}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.TraitsHeader"}}</h{{title.level3}}>
     {{#if advancement.traits}}
     <p>
-        <strong>{{localize "DND5E.Armor"}}:</strong> {{advancement.traits.armor}}<br> 
+        <strong>{{localize "DND5E.Armor"}}:</strong> {{advancement.traits.armor}}<br>
         <strong>{{localize "TYPES.Item.weaponPl"}}:</strong> {{advancement.traits.weapons}}<br>
         <strong>{{localize "TYPES.Item.toolPl"}}:</strong> {{advancement.traits.tools}}<br>
         <strong>{{localize "DND5E.ClassSaves"}}:</strong> {{advancement.traits.saves}}<br>
