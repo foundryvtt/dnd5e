@@ -264,26 +264,29 @@ function _configureFonts() {
     Roboto: {
       editor: true,
       fonts: [
-        { urls: ["systems/dnd5e/fonts/Roboto-Regular.woff2"] },
-        { urls: ["systems/dnd5e/fonts/Roboto-Bold.woff2"], weight: "bold" },
-        { urls: ["systems/dnd5e/fonts/Roboto-Italic.woff2"], style: "italic" },
-        { urls: ["systems/dnd5e/fonts/Roboto-BoldItalic.woff2"], weight: "bold", style: "italic" }
+        { urls: ["systems/dnd5e/fonts/roboto/Roboto-Regular.woff2"] },
+        { urls: ["systems/dnd5e/fonts/roboto/Roboto-Bold.woff2"], weight: "bold" },
+        { urls: ["systems/dnd5e/fonts/roboto/Roboto-Italic.woff2"], style: "italic" },
+        { urls: ["systems/dnd5e/fonts/roboto/Roboto-BoldItalic.woff2"], weight: "bold", style: "italic" }
       ]
     },
     "Roboto Condensed": {
       editor: true,
       fonts: [
-        { urls: ["systems/dnd5e/fonts/RobotoCondensed-Regular.woff2"] },
-        { urls: ["systems/dnd5e/fonts/RobotoCondensed-Bold.woff2"], weight: "bold" },
-        { urls: ["systems/dnd5e/fonts/RobotoCondensed-Italic.woff2"], style: "italic" },
-        { urls: ["systems/dnd5e/fonts/RobotoCondensed-BoldItalic.woff2"], weight: "bold", style: "italic" }
+        { urls: ["systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-Regular.woff2"] },
+        { urls: ["systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-Bold.woff2"], weight: "bold" },
+        { urls: ["systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-Italic.woff2"], style: "italic" },
+        {
+          urls: ["systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-BoldItalic.woff2"], weight: "bold",
+          style: "italic"
+        }
       ]
     },
     "Roboto Slab": {
       editor: true,
       fonts: [
-        { urls: ["systems/dnd5e/fonts/RobotoSlab-Regular.ttf"] },
-        { urls: ["systems/dnd5e/fonts/RobotoSlab-Bold.ttf"], weight: "bold" }
+        { urls: ["systems/dnd5e/fonts/roboto-slab/RobotoSlab-Regular.ttf"] },
+        { urls: ["systems/dnd5e/fonts/roboto-slab/RobotoSlab-Bold.ttf"], weight: "bold" }
       ]
     }
   });
