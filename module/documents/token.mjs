@@ -151,7 +151,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
-    if ( foundry.utils.hasProperty(data, "texture.src") ) this.#subjectPath = null;
+    const textureChange = foundry.utils.hasProperty(data, "texture.src");
+    const tokenRingChange = foundry.utils.hasProperty(data, "flags.dnd5e.tokenRings.enabled");
+    if ( textureChange || tokenRingChange ) this.#subjectPath = null;
     super._onUpdate(data, options, userId);
   }
 
