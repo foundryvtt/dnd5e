@@ -105,7 +105,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const header = html[0].querySelector(".window-header");
 
     // Add edit <-> play slide toggle.
-    if ( this.actor.isOwner ) {
+    if ( this.isEditable ) {
       const toggle = document.createElement("slide-toggle");
       toggle.checked = this._mode === this.constructor.MODES.EDIT;
       toggle.classList.add("mode-slider");
