@@ -320,6 +320,9 @@ system.traits.ci.value
               dv
 ```
 
+> [!Note]
+> These only serve as a marker on the actor sheet, the core system has no automations around immunities, resistances, or vulnerabilities.
+
 ### Add a Condition Immunity
 
 > <details>

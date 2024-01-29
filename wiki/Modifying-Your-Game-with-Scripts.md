@@ -96,7 +96,7 @@ Hooks.once("init", () => {
 ```js
 /// Removes the Firearm Weapon Property
 Hooks.once("init", () => {
-  CONFIG.DND5E.validProperties.delete("fir");
+  CONFIG.DND5E.validProperties.weapon.delete("fir");
 });
 ```
 
