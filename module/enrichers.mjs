@@ -824,7 +824,7 @@ async function rollAction(event) {
           options.ability = ability;
           return await actor.rollToolCheck(tool, options);
         default:
-          return console.warn(`DnD5e | Unknown roll type ${type} provided.`);
+          return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
       }
     } finally {
       target.disabled = false;

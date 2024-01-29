@@ -1,5 +1,5 @@
 /**
- * The DnD5e game system for Foundry Virtual Tabletop
+ * The D&D fifth edition game system for Foundry Virtual Tabletop
  * A system for playing the fifth edition of the world's most popular role-playing game.
  * Author: Atropos
  * Software License: MIT
@@ -46,7 +46,7 @@ globalThis.dnd5e = {
 
 Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
-  console.log(`DnD5e | Initializing the DnD5e Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
+  console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
   // TODO: Remove when v11 support is dropped.
   CONFIG.compatibility.excludePatterns.push(/Math\.clamped/);
