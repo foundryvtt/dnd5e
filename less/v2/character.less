@@ -188,29 +188,13 @@
           height: calc(var(--size) / 4 - 1px);
           background: white;
           transform: rotate(45deg);
-          filter: drop-shadow(0 0 3px var(--color-shadow-highlight))
-            drop-shadow(0 0 4px var(--color-shadow-highlight))
-            drop-shadow(0 0 12px var(--color-shadow-highlight));
+          box-shadow: 0 0 8px 3px var(--color-shadow-highlight);
           animation: pulsate-inspiration 3s infinite ease-in-out;
 
           @keyframes pulsate-inspiration {
-            0% {
-              filter: drop-shadow(0 0 3px var(--color-shadow-highlight))
-                drop-shadow(0 0 4px var(--color-shadow-highlight))
-                drop-shadow(0 0 12px var(--color-shadow-highlight));
-            }
-
-            50% {
-              filter: drop-shadow(0 0 3px var(--color-shadow-highlight))
-                drop-shadow(0 0 4px var(--color-shadow-highlight))
-                drop-shadow(0 0 4px var(--color-shadow-highlight));
-            }
-
-            100% {
-              filter: drop-shadow(0 0 3px var(--color-shadow-highlight))
-                drop-shadow(0 0 4px var(--color-shadow-highlight))
-                drop-shadow(0 0 12px var(--color-shadow-highlight));
-            }
+            0% { box-shadow: 0 0 8px 3px var(--color-shadow-highlight); }
+            50% { box-shadow: 0 0 8px 4px var(--color-shadow-highlight); }
+            100% { box-shadow: 0 0 8px 3px var(--color-shadow-highlight); }
           }
         }
 
