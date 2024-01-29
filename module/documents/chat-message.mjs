@@ -497,6 +497,9 @@ export default class ChatMessage5e extends ChatMessage {
         html.querySelectorAll(".description.collapsible .details").forEach(el => {
           el.style.height = `${el.scrollHeight}px`;
         });
+        // FIXME: Allow time for transitions to complete. Adding a transitionend listener does not appear to work, so
+        // the transition time is hard-coded for now.
+        setTimeout(() => ui.chat.scrollBottom(), 250);
       });
     }
   }
