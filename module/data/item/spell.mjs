@@ -164,7 +164,7 @@ export default class SpellData extends ItemDataModel.mixin(
 
   /**
    * Provide a backwards compatible getter for accessing `components`.
-   * @deprecated since v2.5.
+   * @deprecated since v3.0.
    * @type {object}
    */
   get components() {
