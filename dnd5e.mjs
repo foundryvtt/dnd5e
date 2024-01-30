@@ -384,6 +384,11 @@ Hooks.once("ready", function() {
   if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
   if ( cv && !foundry.utils.isNewerVersion(game.system.flags.needsMigrationVersion, cv) ) return;
 
+  // Compendium pack folder migration.
+  if ( foundry.utils.isNewerVersion("3.0.0", cv) ) {
+    migrations.reparentCompendiums("DnD5e SRD Content", "D&D SRD Content");
+  }
+
   // Perform the migration
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
     ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});

@@ -204,6 +204,43 @@ export const migrateCompendium = async function(pack) {
 /* -------------------------------------------- */
 
 /**
+ * Re-parents compendia from one top-level folder to another.
+ * @param {string} from  The name of the source folder.
+ * @param {string} to    The name of the destination folder.
+ */
+export function reparentCompendiums(from, to) {
+  const compendiumFolders = new Map();
+  for ( const folder of game.folders ) {
+    if ( folder.type !== "Compendium" ) continue;
+    if ( folder.folder ) {
+      let folders = compendiumFolders.get(folder.folder);
+      if ( !folders ) {
+        folders = [];
+        compendiumFolders.set(folder.folder, folders);
+      }
+      folders.push(folder);
+    }
+    if ( folder.name === from ) from = folder;
+    else if ( folder.name === to ) to = folder;
+  }
+  if ( !(from instanceof Folder) || !(to instanceof Folder) ) return;
+  const config = game.settings.get("core", "compendiumConfiguration");
+
+  // Re-parent packs directly under the source folder.
+  Object.values(config).forEach(conf => {
+    if ( conf.folder === from.id ) conf.folder = to.id;
+  });
+
+  game.settings.set("core", "compendiumConfiguration", config);
+
+  // Re-parent folders directly under the source folder.
+  const updates = (compendiumFolders.get(from) ?? []).map(f => ({ _id: f.id, folder: to.id }));
+  return Folder.implementation.updateDocuments(updates).then(() => from.delete());
+}
+
+/* -------------------------------------------- */
+
+/**
  * Update all compendium packs using the new system data model.
  */
 export async function refreshAllCompendiums() {
