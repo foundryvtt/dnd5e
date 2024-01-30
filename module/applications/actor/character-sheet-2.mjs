@@ -159,6 +159,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /** @inheritDoc */
   async _render(force=false, options={}) {
     await super._render(force, options);
+    if ( !this.rendered ) return;
     const context = options.renderContext ?? options.action;
     const data = options.renderData ?? options.data;
     const isUpdate = (context === "update") || (context === "updateActor");

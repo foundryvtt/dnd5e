@@ -28,6 +28,7 @@ export default class TokenConfig5e extends TokenConfig {
   /** @inheritDoc */
   async _render(...args) {
     await super._render(...args);
+    if ( !this.rendered ) return;
     await this._addTokenRingConfiguration(this.element[0]);
     this._prepareResourceLabels(this.element[0]);
   }
