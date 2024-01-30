@@ -57,18 +57,18 @@ DND5E.abilities = {
     fullKey: "intelligence",
     defaults: { vehicle: 0 }
   },
-  wis: {
-    label: "DND5E.AbilityWis",
-    abbreviation: "DND5E.AbilityWisAbbr",
+  wil: {
+    label: "DND5E.AbilityWil",
+    abbreviation: "DND5E.AbilityWilAbbr",
     type: "mental",
-    fullKey: "wisdom",
+    fullKey: "willpower",
     defaults: { vehicle: 0 }
   },
-  cha: {
-    label: "DND5E.AbilityCha",
-    abbreviation: "DND5E.AbilityChaAbbr",
+  div: {
+    label: "DND5E.AbilityDiv",
+    abbreviation: "DND5E.AbilityDivAbbr",
     type: "mental",
-    fullKey: "charisma",
+    fullKey: "divinity",
     defaults: { vehicle: 0 }
   },
   hon: {
@@ -76,7 +76,7 @@ DND5E.abilities = {
     abbreviation: "DND5E.AbilityHonAbbr",
     type: "mental",
     fullKey: "honor",
-    defaults: { npc: "cha", vehicle: 0 },
+    defaults: { npc: "div", vehicle: 0 },
     improvement: false
   },
   san: {
@@ -84,7 +84,7 @@ DND5E.abilities = {
     abbreviation: "DND5E.AbilitySanAbbr",
     type: "mental",
     fullKey: "sanity",
-    defaults: { npc: "wis", vehicle: 0 },
+    defaults: { npc: "wil", vehicle: 0 },
     improvement: false
   }
 };
@@ -118,24 +118,19 @@ DND5E.hitPointsAbility = "con";
  * @enum {SkillConfiguration}
  */
 DND5E.skills = {
-  acr: { label: "DND5E.SkillAcr", ability: "dex", fullKey: "acrobatics" },
-  ani: { label: "DND5E.SkillAni", ability: "wis", fullKey: "animalHandling" },
-  arc: { label: "DND5E.SkillArc", ability: "int", fullKey: "arcana" },
-  ath: { label: "DND5E.SkillAth", ability: "str", fullKey: "athletics" },
-  dec: { label: "DND5E.SkillDec", ability: "cha", fullKey: "deception" },
-  his: { label: "DND5E.SkillHis", ability: "int", fullKey: "history" },
-  ins: { label: "DND5E.SkillIns", ability: "wis", fullKey: "insight" },
-  itm: { label: "DND5E.SkillItm", ability: "cha", fullKey: "intimidation" },
-  inv: { label: "DND5E.SkillInv", ability: "int", fullKey: "investigation" },
-  med: { label: "DND5E.SkillMed", ability: "wis", fullKey: "medicine" },
-  nat: { label: "DND5E.SkillNat", ability: "int", fullKey: "nature" },
-  prc: { label: "DND5E.SkillPrc", ability: "wis", fullKey: "perception" },
-  prf: { label: "DND5E.SkillPrf", ability: "cha", fullKey: "performance" },
-  per: { label: "DND5E.SkillPer", ability: "cha", fullKey: "persuasion" },
-  rel: { label: "DND5E.SkillRel", ability: "int", fullKey: "religion" },
-  slt: { label: "DND5E.SkillSlt", ability: "dex", fullKey: "sleightOfHand" },
-  ste: { label: "DND5E.SkillSte", ability: "dex", fullKey: "stealth" },
-  sur: { label: "DND5E.SkillSur", ability: "wis", fullKey: "survival" }
+  acr: { label: "DND5E.SkillAcr", ability: "dex" },
+  arc: { label: "DND5E.SkillArc", ability: "int" },
+  ath: { label: "DND5E.SkillAth", ability: "str" },
+  his: { label: "DND5E.SkillHis", ability: "int" },
+  ins: { label: "DND5E.SkillIns", ability: "int" },
+  itm: { label: "DND5E.SkillItm", ability: "str" },
+  inv: { label: "DND5E.SkillInv", ability: "int" },
+  med: { label: "DND5E.SkillMed", ability: "int" },
+  nat: { label: "DND5E.SkillNat", ability: "wil" },
+  prc: { label: "DND5E.SkillPrc", ability: "wil" },
+  per: { label: "DND5E.SkillPer", ability: "div" },
+  rel: { label: "DND5E.SkillRel", ability: "wil" },
+  ste: { label: "DND5E.SkillSte", ability: "dex" }
 };
 preLocalize("skills", { key: "label", sort: true });
 
@@ -913,30 +908,20 @@ preLocalize("lootTypes", { key: "label" });
  * @enum {CurrencyConfiguration}
  */
 DND5E.currencies = {
-  pp: {
-    label: "DND5E.CurrencyPP",
-    abbreviation: "DND5E.CurrencyAbbrPP",
-    conversion: 0.1
-  },
   gp: {
     label: "DND5E.CurrencyGP",
     abbreviation: "DND5E.CurrencyAbbrGP",
     conversion: 1
   },
-  ep: {
-    label: "DND5E.CurrencyEP",
-    abbreviation: "DND5E.CurrencyAbbrEP",
-    conversion: 2
-  },
   sp: {
     label: "DND5E.CurrencySP",
     abbreviation: "DND5E.CurrencyAbbrSP",
-    conversion: 10
+    conversion: 100
   },
   cp: {
     label: "DND5E.CurrencyCP",
     abbreviation: "DND5E.CurrencyAbbrCP",
-    conversion: 100
+    conversion: 10000
   }
 };
 preLocalize("currencies", { keys: ["label", "abbreviation"] });
@@ -950,9 +935,9 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
  * @enum {string}
  */
 DND5E.physicalDamageTypes = {
-  bludgeoning: "DND5E.DamageBludgeoning",
-  piercing: "DND5E.DamagePiercing",
-  slashing: "DND5E.DamageSlashing"
+  blunt: "Blunt",
+  blade: "Blade",
+  projectile: "Projectile"
 };
 preLocalize("physicalDamageTypes", { sort: true });
 
@@ -964,16 +949,13 @@ preLocalize("physicalDamageTypes", { sort: true });
  */
 DND5E.damageTypes = {
   ...DND5E.physicalDamageTypes,
-  acid: "DND5E.DamageAcid",
-  cold: "DND5E.DamageCold",
-  fire: "DND5E.DamageFire",
-  force: "DND5E.DamageForce",
-  lightning: "DND5E.DamageLightning",
-  necrotic: "DND5E.DamageNecrotic",
-  poison: "DND5E.DamagePoison",
-  psychic: "DND5E.DamagePsychic",
-  radiant: "DND5E.DamageRadiant",
-  thunder: "DND5E.DamageThunder"
+  fire: "Fire",
+  frost: "Frost",
+  lightning: "Lightning",
+  poison: "Poison",
+  sorcery: "Sorcery",
+  holy: "Holy",
+  true: "True"
 };
 preLocalize("damageTypes", { sort: true });
 
@@ -1418,14 +1400,11 @@ preLocalize("spellTags", {keys: ["label", "abbr"]});
  * @enum {string}
  */
 DND5E.spellSchools = {
-  abj: "DND5E.SchoolAbj",
-  con: "DND5E.SchoolCon",
-  div: "DND5E.SchoolDiv",
-  enc: "DND5E.SchoolEnc",
-  evo: "DND5E.SchoolEvo",
-  ill: "DND5E.SchoolIll",
-  nec: "DND5E.SchoolNec",
-  trs: "DND5E.SchoolTrs"
+  holyo: "Offensive Holy",
+  holyd: "Defensive Holy",
+  sorceryo: "Offensive Sorcery",
+  sorceryd: "Defensive Sorcery",
+  sorceryu: "Utility Sorcery",
 };
 preLocalize("spellSchools", { sort: true });
 
@@ -1696,37 +1675,20 @@ DND5E.languages = {
     label: "DND5E.LanguagesStandard",
     children: {
       common: "DND5E.LanguagesCommon",
-      dwarvish: "DND5E.LanguagesDwarvish",
-      elvish: "DND5E.LanguagesElvish",
-      giant: "DND5E.LanguagesGiant",
-      gnomish: "DND5E.LanguagesGnomish",
-      goblin: "DND5E.LanguagesGoblin",
-      halfling: "DND5E.LanguagesHalfling",
-      orc: "DND5E.LanguagesOrc"
+      danish: "Danish",
+      celtic: "Celtic",
+      oldeng: "Old English",
+      latin: "Latin"
     }
   },
   exotic: {
     label: "DND5E.LanguagesExotic",
     children: {
-      aarakocra: "DND5E.LanguagesAarakocra",
-      abyssal: "DND5E.LanguagesAbyssal",
+      giant: "Giant",
       celestial: "DND5E.LanguagesCelestial",
-      deep: "DND5E.LanguagesDeepSpeech",
       draconic: "DND5E.LanguagesDraconic",
-      gith: "DND5E.LanguagesGith",
-      gnoll: "DND5E.LanguagesGnoll",
       infernal: "DND5E.LanguagesInfernal",
-      primordial: {
-        label: "DND5E.LanguagesPrimordial",
-        children: {
-          aquan: "DND5E.LanguagesAquan",
-          auran: "DND5E.LanguagesAuran",
-          ignan: "DND5E.LanguagesIgnan",
-          terran: "DND5E.LanguagesTerran"
-        }
-      },
       sylvan: "DND5E.LanguagesSylvan",
-      undercommon: "DND5E.LanguagesUndercommon"
     }
   },
   druidic: "DND5E.LanguagesDruidic",
@@ -1757,8 +1719,8 @@ DND5E.maxAbilityScore = 20;
  * @type {number[]}
  */
 DND5E.CHARACTER_EXP_LEVELS = [
-  0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
-  120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000
+  0, 600, 1800, 5400, 13000, 28000, 46000, 68000, 96000, 128000, 170000, 200000,
+  240000, 280000, 330000, 400000, 450000, 520000, 601000, 700000
 ];
 
 /**
@@ -1766,8 +1728,8 @@ DND5E.CHARACTER_EXP_LEVELS = [
  * @type {number[]}
  */
 DND5E.CR_EXP_LEVELS = [
-  10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
-  20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
+  100, 225, 350, 550, 900, 1150, 1450, 1950, 2500, 2950, 3600, 4200, 5000, 6000, 6500, 7500, 9000,
+  10000, 11000, 13000, 16000, 20000, 25000, 31000, 37000, 45000, 55000, 60000, 70000, 85000
 ];
 
 /**
