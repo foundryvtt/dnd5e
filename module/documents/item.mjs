@@ -1936,8 +1936,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           try {
             await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
           } catch(err) {
-            err.message = game.i18n.localize("DND5E.PlaceTemplateError");
-            throw err;
+            Hooks.onError("Item5e#_onChatCardAction", err, {
+              msg: game.i18n.localize("DND5E.PlaceTemplateError"),
+              log: "error",
+              notify: "error"
+            });
           }
           break;
         case "abilityCheck":
