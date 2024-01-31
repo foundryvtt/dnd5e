@@ -5,7 +5,6 @@ The dnd5e system adds a number of useful enrichers that can be used within journ
 ![Enricher Preview](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enrichers-preview.jpg)
 
 ## Award Enricher
-
 See the enrichers section of the [awards guide](Awards).
 
 
@@ -88,3 +87,176 @@ The formula can also include formula values that will be evaluated before the da
 
 > [!Note]
 > Any values entered in the formula will be resolved based on the stats of the owner of the item, not who ultimately performs the roll.
+
+
+## Reference Enrichers
+The `&Reference` enricher allows for easy reference to rule pages and displays rich tooltips with the contents of a specific rule. It comes built-in with support for abilities, skills, conditions, damage types, and more.
+
+![Enricher Reference](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-reference.jpg)
+
+Using the enricher is very simple, simply type `&Reference` with the name of the referenced rule included inside the square brackets. For example `&Reference[prone]` will include be converted to `[Prone]` which links to the prone page in the SRD rules and display a tooltip with the description of the prone condition.
+
+> <details>
+> <summary>Ability References</summary>
+>
+> | Ability      | Short ID | Full ID        |
+> | ------------ | -------- | -------------- |
+> | Strength     | `str`    | `strength`     |
+> | Dexterity    | `dex`    | `dexterity`    |
+> | Constitution | `con`    | `constitution` |
+> | Intelligence | `int`    | `intelligence` |
+> | Wisdom       | `wis`    | `wisdom`       |
+> | Charisma     | `cha`    | `charisma`     |
+> | Honor        | N/A      | N/A            |
+> | Sanity       | N/A      | N/A            |
+>
+> Source: `CONFIG.DND5E.abilities` </details>
+
+
+> <details>
+> <summary>Skill References</summary>
+>
+> | Skill           | Short ID | Full ID          |
+> | --------------- | -------- | ---------------- |
+> | Acrobatics      | `acr`    | `acrobatics`     |
+> | Animal Handling | `ani`    | `animalHandling` |
+> | Arcana          | `arc`    | `arcana`         |
+> | Athletics       | `ath`    | `athletics`      |
+> | Deception       | `dec`    | `deception`      |
+> | History         | `his`    | `history`        |
+> | Insight         | `ins`    | `insight`        |
+> | Intimidation    | `itm`    | `intimidation`   |
+> | Investigation   | `inv`    | `investigation`  |
+> | Medicine        | `med`    | `medicine`       |
+> | Nature          | `nat`    | `nature`         |
+> | Perception      | `prc`    | `perception`     |
+> | Performance     | `prf`    | `performance`    |
+> | Persuasion      | `per`    | `persuasion`     |
+> | Religion        | `rel`    | `religion`       |
+> | Sleight of Hand | `slt`    | `sleightOfHand`  |
+> | Stealth         | `ste`    | `stealth`        |
+> | Survival        | `sur`    | `survival`       |
+>
+> Source: `CONFIG.DND5E.skills` </details>
+
+
+> <details>
+> <summary>Condition References</summary>
+>
+> | Creature Type | ID              |
+> | ------------- | --------------- |
+> | Blinded       | `blinded`       |
+> | Charmed       | `charmged`      |
+> | Deafened      | `deafened`      |
+> | Exhaustion    | `exhaustion`    |
+> | Frightened    | `frightened`    |
+> | Grappled      | `grappled`      |
+> | Incapacitated | `incapacitated` |
+> | Invisible     | `invisible`     |
+> | Paralyzed     | `paralyzed`     |
+> | Petrified     | `petrified`     |
+> | Poisoned      | `poisoned`      |
+> | Prone         | `prone`         |
+> | Restrained    | `restrained`    |
+> | Stunned       | `stunned`       |
+> | Unconscious   | `unconscious`   |
+>
+> Source: `CONFIG.DND5E.conditionTypes` </details>
+
+
+> <details>
+> <summary>Creature Type References</summary>
+>
+> | Creature Type | ID            |
+> | ------------- | ------------- |
+> | Aberration    | `aberration`  |
+> | Beast         | `beast`       |
+> | Celestial     | `celestial`   |
+> | Construct     | `construct`   |
+> | Dragon        | `dragon`      |
+> | Elemental     | `elemental`   |
+> | Fey           | `fey`         |
+> | Fiend         | `fiend`       |
+> | Giant         | `giant`       |
+> | Humanoid      | `humanoid`    |
+> | Monstrosity   | `monstrosity` |
+> | Ooze          | `ooze`        |
+> | Plant         | `plant`       |
+> | Undead        | `undead`      |
+>
+> Source: `CONFIG.DND5E.creatureTypes` </details>
+
+
+> <details>
+> <summary>Damage Type References</summary>
+>
+> | Damage Type | ID            |
+> | ----------- | ------------- |
+> | Acid        | `acid`        |
+> | Bludgeoning | `bludgeoning` |
+> | Cold        | `cold`        |
+> | Fire        | `fire`        |
+> | Force       | `force`       |
+> | Lightning   | `lightning`   |
+> | Necrotic    | `necrotic`    |
+> | Piercing    | `piercing`    |
+> | Poison      | `poison`      |
+> | Psychic     | `psychic`     |
+> | Radiant     | `radiant`     |
+> | Slashing    | `slashing`    |
+> | Thunder     | `thunder`     |
+>
+> Source: `CONFIG.DND5E.damageTypes` </details>
+
+
+> <details>
+> <summary>Area of Effect References</summary>
+>
+> | Area of EFfect | ID       |
+> | -------------- | -------- |
+> | Cone           | `cone`   |
+> | Cube           | `cube`   |
+> | Sphere         | `sphere` |
+> | Square         | `square` |
+> | Line           | `line`   |
+>
+> Source: `CONFIG.DND5E.areaTargetTypes` </details>
+
+
+> <details>
+> <summary>Spell Component & Tag References</summary>
+>
+> | Component/Tag   | ID                  |
+> | --------------- | ------------------- |
+> | Concentration   | `concentration`     |
+> | Material        | `material`          |
+> | Ritual          | `ritual`            |
+> | Somatic         | `somatic`           |
+> | Verbal          | `verbal` or `vocal` |
+>
+> Source: `CONFIG.DND5E.spellComponents` & `CONFIG.DND5E.spellTags` </details>
+
+
+> <details>
+> <summary>Spell School References</summary>
+>
+> | Spell School  | Short ID | Full ID         |
+> | ------------- | -------- | --------------- |
+> | Abjuration    | `abj`    | `abjuration`    |
+> | Conjuration   | `con`    | `conjuration`   |
+> | Divination    | `div`    | `divination`    |
+> | Enchantment   | `enc`    | `enchantment`   |
+> | Evocation     | `evo`    | `evocation`     |
+> | Illusion      | `ill`    | `illusion`      |
+> | Necromancy    | `nec`    | `necromancy`    |
+> | Transmutation | `trs`    | `transmutation` |
+>
+> Source: `CONFIG.DND5E.spellSchools` </details>
+
+
+> <details>
+> <summary>Other Rules (selected)</summary>
+>
+> <p>Inspiration, Carrying Capacity, Encumbrance, Hiding, Passive Perception, Falling, Suffocating, Lightly Obscured, Heavily Obscured, Bright Light, Dim Light, Darkness, Blindsight, Darkvision, Truesight, Surprise, Difficult Terrain, Size, Grappling, Shoving, Half Cover, Three-Quarters Cover, Total Cover, Instant Death, Death Saving Throws, Underwater Combat, Attunement, Telepathy</p>
+> 
+> Source: `CONFIG.DND5E.rules`
