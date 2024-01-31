@@ -136,7 +136,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         const delta = level - cls.system.levels;
         return { level, delta, disabled: delta > maxLevelDelta };
       });
-      ctx.prefixedImage = foundry.utils.getRoute(cls.img);
+      ctx.prefixedImage = cls.img ? foundry.utils.getRoute(cls.img) : null;
       arr.push(cls);
       const identifier = cls.system.identifier || cls.name.slugify({strict: true});
       const subclass = subclasses.findSplice(s => s.system.classIdentifier === identifier);
