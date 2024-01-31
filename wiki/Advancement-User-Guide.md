@@ -1,3 +1,5 @@
+![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
+
 # Class Items
 
 1.6 has added the ability to easily define what items should be granted to an actor when it is levelled up in a given class or subclass. This initial release covers a majority of users' needs for streamlining the level up process, however it does not cover all use cases currently, and improvements will be made with subsequent releases. This guide will assist you in creating your own custom classes, as well as provide tips and tricks for navigating the current state of the implementation.
@@ -37,11 +39,14 @@ All Advancement Items have the following fields:
     * Multiclass Only - Only if this class is chosen as a multiclass.
 
 ![Basic Advancement Configuration](https://github.com/foundryvtt/dnd5e/assets/86370342/e89f215e-8048-4aa1-a051-1632fbcd970f)
-    
+
+## Ability Score Improvement
+This advancement item will prompt for the user to select ability scores to improve, or apply a fixed improvement.
+For more information, see [Ability Score Improvement Advancement](Advancement-Type-Ability-Score-Improvement)
+
 ## Hit Points
 This advancement item will prompt for the user to Roll for HP or use the average, using the Hit Die noted in the Details tab of the Class item.  
 For more information, see [Hit Points Advancement](Advancement-Type-Hit-Points)
-
 
 ## Item Grant
 This advancement can grant another item on level up (e.g. Class Features, Equipment). It should not be used for Class Spellcasting as a separate Advancement type is planned for that. It can be used for Racial Spellcasting, however.  
@@ -54,6 +59,15 @@ For more information, see [Item Choice Advancement](Advancement-Type-Item-Choice
 ## Scale Value
 This can be used to track when features get extra uses (e.g. Wild Shape or Channel Divinity), or the die value of a feature increases (e.g. Sneak Attack or Martial Arts)
 For more information, see [Scale Value Advancement](Advancement-Type-Scale-Value)
+
+## Size
+This can be used to set an actor's size through their race.
+For more information, see [Size Advancement](Advancement-Type-Size)
+
+## Trait
+This can be used to grant proficiencies in skills, weapons, armor, and tools, as well as grant languages, damage resistances, and more.
+For more information, see [Trait Advancement](Advancement-Trait)
+
 
 # Managing Class Levels on an Actor
 ## Adding a Class to an Actor
