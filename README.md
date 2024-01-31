@@ -1,4 +1,4 @@
-![](https://github.com/foundryvtt/dnd5e/blob/v10-dev/media/repo-dnd5e.jpg?raw=true)
+![](https://github.com/foundryvtt/dnd5e/blob/master/ui/official/dnd5e-repo.jpg?raw=true)
 
 # Foundry Virtual Tabletop - Dungeons & Dragons Fifth Edition Game System
 

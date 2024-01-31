@@ -202,12 +202,18 @@
       "type": "cover",
       "loop": false,
       "flags": {}
+    },
+    {
+      "type": "setup",
+      "url": "systems/dnd5e/ui/official/dnd5e-repo.jpg",
+      "thumbnail": "systems/dnd5e/ui/official/dnd5e-thumbnail.jpg"
     }
   ],
   "socket": true,
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
+  "background": "systems/dnd5e/ui/official/dnd5e-background.webp",
   "flags": {
     "needsMigrationVersion": "3.0.0",
     "compatibleMigrationVersion": "0.8",
