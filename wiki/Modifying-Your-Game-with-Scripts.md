@@ -1,4 +1,4 @@
-![](https://img.shields.io/static/v1?label=dnd5e&message=2.4.1&color=informational)
+![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
 
 For a general overview of World Scripts, see the [Foundry Community Wiki](https://foundryvtt.wiki/en/basics/world-scripts), much of this guide has been lifted from that page, but the example scripts below will be limited to DnD5e specific scripts.
 
@@ -26,8 +26,7 @@ To include your Javascript file in your world, first, shut down the World in Fou
 {
   "title": "My Cool DnD Game",
   "esmodules": [],
-  "version": "1.0.0",
-...
+  "version": "1.0.0"
 }
 ```
 4. Add the path to your Javascript file to the esmodules array. If your Javascript file is stored in the root of the world directory as suggested above, just write the filename in quotation marks. It will look like this when you're done: `"esmodules": [ "my-script.js" ],` Note the comma is required at the end of the line, unless you've added this as the very last key in the JSON file. If you are unsure if your world.json file is formatted correctly, you can check it with an online JSON validator such as [JSONLint](https://jsonlint.com/).
@@ -47,9 +46,11 @@ Hooks.once("init", () => {
   CONFIG.DND5E.abilities.grt = {
     label: "Grit",
     abbreviation: "grt",
+    fullKey: "grit", // Full key used in enrichers
+    reference: "Compendium.my-module…", // UUID of journal entry page for rich tooltips
     type: "mental", // mental or physical
     defaults: {vehicle: 0}, // Optional
-    improvement: false, // Explicitly set this to 'false' to prevent it showing up for ASIs.
+    improvement: false // Explicitly set this to 'false' to prevent it showing up for ASIs.
   };
 });
 ```
@@ -59,8 +60,11 @@ Hooks.once("init", () => {
 /// Add a new Skill
 Hooks.once("init", () => {
   CONFIG.DND5E.skills.bfp = {
+    label: "Backflip",
     ability: "dex",
-    label: "Backflip"
+    fullKey: "backflip", // Full key used in enrichers
+    reference: "Compendium.my-module…", // UUID of journal entry page for rich tooltips
+    icon: "…" // Icon used in favorites on new character sheet
   };
 });
 ```
@@ -69,8 +73,10 @@ Hooks.once("init", () => {
 ```js
 /// Adds a new "plasma" damage type that will be selectable as a new type of damage for weapons and a new type of resistance for actors.
 Hooks.once("init", () => {
-  CONFIG.DND5E.damageTypes.plasma = "Plasma";
-  CONFIG.DND5E.damageResistanceTypes.plasma = "Plasma";
+  CONFIG.DND5E.damageTypes.plasma = {
+    label: "Plasma",
+    isPhysical: true
+  };
 });
 ```
 
@@ -78,8 +84,11 @@ Hooks.once("init", () => {
 ```js
 /// Adds a new "Laser" Weapon Property and Physical Property for resistance bypass
 Hooks.once("init", () => {
-  CONFIG.DND5E.weaponProperties.laser = "Laser";
-  CONFIG.DND5E.physicalWeaponProperties.laser = "Laser";
+  CONFIG.DND5E.itemProperties.laser = {
+    label: "Laser",
+    isPhysical: "true"
+  };
+  CONFIG.DND5E.validProperties.weapon.add("laser");
 });
 ```
 
@@ -87,7 +96,7 @@ Hooks.once("init", () => {
 ```js
 /// Removes the Firearm Weapon Property
 Hooks.once("init", () => {
-  delete CONFIG.DND5E.weaponProperties.fir;
+  CONFIG.DND5E.validProperties.weapon.delete("fir");
 });
 ```
 
@@ -95,7 +104,12 @@ Hooks.once("init", () => {
 ```js
 /// Add a new Spell School that can be selected in Spell Items
 Hooks.once("init", () => {
-  CONFIG.DND5E.spellSchools.psi = "Psionics"
+  CONFIG.DND5E.spellSchools.psi = {
+    label: "Psionics",
+    icon: "…",
+    fullKey: "psionics", // Full key used in enrichers
+    reference: "" // UUID of journal entry page for rich tooltips
+  };
 });
 ```
 
@@ -172,6 +186,7 @@ Hooks.once("setup", () => {
     }
 });
 ```
+
 ### Delete languages
 ```js
 Hooks.once("init", () => {

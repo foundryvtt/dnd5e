@@ -1,4 +1,4 @@
-![Up to date as of 2.1.0](https://img.shields.io/static/v1?label=dnd5e&message=2.1.0&color=informational)
+![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
 
 ## Actor
 
@@ -41,6 +41,37 @@ Fires after an ability save has been rolled.
 | actor | Actor5e | Actor for which the ability save has been rolled. |
 | roll | D20Roll | The resulting roll. |
 | abilityId | string | ID of the ability that was rolled as defined in `DND5E.abilities`. |
+
+### `dnd5e.preCalculateDamage`
+
+Fires before damage amount is calculated for an actor. Returning `false` will prevent damage from being applied.
+
+| Name    | Type                     | Description                            |
+| ------- | ------------------------ | -------------------------------------- |
+| actor   | Actor5e                  | The actor being damaged.               |
+| damages | DamageDescription[]      | Damage descriptions.                   |
+| options | DamageApplicationOptions | Additional damage application options. |
+
+### `dnd5e.preApplyDamage`
+
+Fires before damage is applied to an actor. Returning `false` will prevent damage from being applied.
+
+| Name    | Type                     | Description                                    |
+| ------- | ------------------------ | ---------------------------------------------- |
+| actor   | Actor5e                  | Actor the damage will be applied to.           |
+| amount  | number                   | Amount of damage that will be applied.         |
+| updates | object                   | Distinct updates to be performed on the actor. |
+| options | DamageApplicationOptions | Additional damage application options.         |
+
+### `dnd5e.applyDamage`
+
+Fires after damage has been applied to an actor.
+
+| Name    | Type                     | Description                             |
+| ------- | ------------------------ | --------------------------------------- |
+| actor   | Actor5e                  | Actor that has been damaged.            |
+| amount  | number                   | Amount of damage that has been applied. |
+| options | DamageApplicationOptions | Additional damage application options.  |
 
 ### `dnd5e.preRollDeathSave`
 
@@ -118,7 +149,7 @@ Fires before hit points are rolled for a character's class.
 | rollData.data | object | The data object against which to parse attributes within the formula. |
 | messageData | object | The data object to use when creating the message. |
 
-### `dnd5e.rollClasshitPoints`
+### `dnd5e.rollClassHitPoints`
 
 Fires after hit points haven been rolled for a character's class.
 
@@ -213,6 +244,28 @@ Fires just before a new actor is created during the transform process.
 | data | object | The merged data that will be used to create the newly-transformed actor. |
 | options | TransformationOptions | Options that determine how the transformation is performed. |
 
+### `dnd5e.compute___Progression` (`dnd5e.computeLeveledProgression` & `dnd5e.computePactProgression` by default)
+
+Fires while computing the spellcasting progression for each class on each actor. A different version of the hook will be fired for each spellcasting type defined in `CONFIG.DND5E.spellcastingTypes`. Explicitly return `false` to prevent default progression from being calculated.
+
+| Name         | Type                     | Description                                        |
+| ------------ | ------------------------ | -------------------------------------------------- |
+| progression  | object                   | Spellcasting progression data.                     |
+| actor        | Actor5e|null             | Actor for whom the data is being prepared.         |
+| cls          | Item5e                   | Class for whom this progression is being computed. |
+| spellcasting | SpellcastingDescriptions | Spellcasting descriptive object.                   |
+| count        | number                   | Number of classes with this type of spellcasting.  |
+
+### `dnd5e.prepare___Slots` (`dnd5e.prepareLeveledSlots` & `dnd5e.preparePactSlots` by default)
+
+Fires to convert the provided spellcasting progression into spell slots. A different version of the hook will be fired for each spellcasting type defined in `CONFIG.DND5E.spellcastingTypes`.
+
+| Name        | Type    | Description                                   |
+| ----------- | ------- | --------------------------------------------- |
+| spells      | object  | The `data.spells` object within actor's data. |
+| actor       | Actor5e | Actor for whom the data is being prepared.    |
+| progression | object  | Spellcasting progression data.                |
+
 ## Advancement
 
 ### `dnd5e.preAdvancementManagerRender`
@@ -253,6 +306,17 @@ Hooks.on('updateActor', (actor, change, options) => {
 })
 ```
 
+## Chat Messages
+
+### `dnd5e.renderChatMessage`
+
+Fires after dnd5e-specific chat message modifications have completed.
+
+| Name    | Type          | Description                   |
+| ------- | ------------- | ----------------------------- |
+| message | ChatMessage5e | Chat message being rendered.  |
+| html    | HTMLElement   | HTML contents of the message. |
+
 ## Item
 
 ### `dnd5e.preUseItem`
@@ -264,6 +328,24 @@ Fires before an item usage is configured. Returning `false` will prevent item fr
 | item | Item5e | Item being used. |
 | config | ItemUseConfiguration | Configuration data for the item usage being prepared. |
 | options | ItemUseOptions | Additional options used for configuring item usage. |
+
+### `dnd5e.preCreateItemTemplate`
+
+Fires before a template is created for an Item. Returning `false` will prevent template from being created.
+
+| Name         | Type   | Description                                  |
+| ------------ | ------ | -------------------------------------------- |
+| item         | Item5e | Item for which the template is being placed. |
+| templateData | object | Data used to create the new template.        |
+
+### `dnd5e.createItemTemplate`
+
+Fires after a template is created for an Item.
+
+| Name     | Type            | Description                                  |
+| -------- | --------------- | -------------------------------------------- |
+| item     | Item5e          | Item for which the template is being placed. |
+| template | AbilityTemplate | The template being placed.                   |
 
 ### `dnd5e.preItemUsageConsumption`
 
@@ -439,8 +521,21 @@ Fires after the item data for a scroll is created but before the item is returne
 
 Fires when some useful data is dropped onto an `ItemSheet5e`. Returning `false` will prevent the normal drop handling.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | The Item5e. |
-| sheet | ItemShee5e | The ItemSheet5e application. |
-| data | object | The data that has been dropped onto the sheet. |
+| Name  | Type       | Description                                    |
+| ----- | ---------- | ---------------------------------------------- |
+| item  | Item5e     | The Item5e.                                    |
+| sheet | ItemShee5e | The ItemSheet5e application.                   |
+| data  | object     | The data that has been dropped onto the sheet. |
+
+## Journal Pages
+
+### `dnd5e.build___SpellcastingTable` (`dnd5e.buildLeveledSpellcastingTable` & `dnd5e.buildPactSpellcastingTable` by default)
+
+Fires to generate the table for custom spellcasting types. A different version of the hook will be fired for each spellcasting type defined in `CONFIG.DND5E.spellcastingTypes`.
+
+| Name         | Type                    | Description                                            |
+| ------------ | ----------------------- | ------------------------------------------------------ |
+| table        | object                  | Table definition being built.                          |
+| item         | Item5e                  | Class for which the spellcasting table is being built. |
+| spellcasting | SpellcastingDescription | Spellcasting descriptive object.                       |
+
