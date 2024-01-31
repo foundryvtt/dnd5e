@@ -14,6 +14,7 @@
     - [Advancement Type: Trait](Advancement-Type-Trait.md)
 - Tutorials
   - [Custom Races](Custom-Race-Tutorial.md)
+- [Awards](Awards.md)
 - [Dynamic Module Art](Dynamic-Module-Art.md)
 - [Enrichers](Enrichers.md)
 - [Frequently Asked Questions](FAQ.md)
