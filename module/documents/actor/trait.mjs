@@ -243,33 +243,30 @@ export async function mixedChoices(keys) {
  *                                       otherwise else a simple object containing the minimal index data.
  */
 export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) {
-  let pack = CONFIG.DND5E.sourcePacks.ITEMS;
-  let [scope, collection, id] = identifier.split(".");
-  if ( scope && collection ) pack = `${scope}.${collection}`;
-  if ( !id ) id = identifier;
-
-  const packObject = game.packs.get(pack);
+  const uuid = getBaseItemUUID(identifier);
+  const { collection, documentId: id } = foundry.utils.parseUuid(uuid);
+  const pack = collection.metadata.id;
 
   // Full Item5e document required, always async.
-  if ( fullItem && !indexOnly ) return packObject?.getDocument(id);
+  if ( fullItem && !indexOnly ) return collection?.getDocument(id);
 
   const cache = _cachedIndices[pack];
   const loading = cache instanceof Promise;
 
   // Return extended index if cached, otherwise normal index, guaranteed to never be async.
   if ( indexOnly ) {
-    const index = packObject?.index.get(id);
+    const index = collection?.index.get(id);
     return loading ? index : cache?.[id] ?? index;
   }
 
   // Returned cached version of extended index if available.
   if ( loading ) return cache.then(() => _cachedIndices[pack][id]);
   else if ( cache ) return cache[id];
-  if ( !packObject ) return;
+  if ( !collection ) return;
 
   // Build the extended index and return a promise for the data
   const fields = traitIndexFields();
-  const promise = packObject.getIndex({ fields }).then(index => {
+  const promise = collection.getIndex({ fields }).then(index => {
     const store = index.reduce((obj, entry) => {
       for ( const field of fields ) {
         const val = foundry.utils.getProperty(entry, field);
@@ -277,7 +274,7 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
           foundry.utils.setProperty(entry, "system.type.value", val);
           foundry.utils.logCompatibilityWarning(
             `The '${field}' property has been deprecated in favor of a standardized \`system.type.value\` property.`,
-            { since: "DnD5e 2.5", until: "DnD5e 2.7", once: true }
+            { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
           );
         }
       }
@@ -289,6 +286,22 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
   });
   _cachedIndices[pack] = promise;
   return promise;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Construct a proper UUID for the provided base item ID.
+ * @param {string} identifier  Simple ID, compendium name and ID separated by a dot, or proper UUID.
+ * @returns {string}
+ */
+export function getBaseItemUUID(identifier) {
+  if ( identifier.startsWith("Compendium.") ) return identifier;
+  let pack = CONFIG.DND5E.sourcePacks.ITEMS;
+  let [scope, collection, id] = identifier.split(".");
+  if ( scope && collection ) pack = `${scope}.${collection}`;
+  if ( !id ) id = identifier;
+  return `Compendium.${pack}.Item.${id}`;
 }
 
 /* -------------------------------------------- */
@@ -374,7 +387,7 @@ export function traitLabel(trait, count) {
 export function keyLabel(key, config={}) {
   if ( foundry.utils.getType(config) === "string" ) {
     foundry.utils.logCompatibilityWarning("Trait.keyLabel(trait, key) is now Trait.keyLabel(key, { trait }).", {
-      since: "DnD5e 2.4", until: "DnD5e 2.6"
+      since: "DnD5e 2.4", until: "DnD5e 3.1"
     });
     const tmp = config;
     config = { trait: key };

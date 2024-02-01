@@ -1,0 +1,187 @@
+{
+  "_id": "T1vpZLam7LezjToj",
+  "name": "Divine Word",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You utter a divine word, imbued with the power that shaped the world at the dawn of Creation. Choose any number of creatures you can see within range. Each creature that can hear you must make a Charisma saving throw. On a failed save, a creature suffers an effect based on its current hit points:</p>\n<ul>\n<li>50 Hit Points or fewer: Deafened for 1 minute</li>\n<li>40 Hit Points or fewer: Deafened and Blinded for 10 minutes</li>\n<li>30 Hit Points or fewer: Blinded, Deafened, and Stunned for 1 Hour</li>\n<li>20 Hit Points or fewer: killed instantly</li>\n</ul>\n<p>Regardless of its current Hit Points, a Celestial, an elemental, a fey, or a fiend that fails its save is forced back to its plane of Origin (if it isn't there already) and can't return to your current plane for 24 hours by any means short of a wish spell.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "bonus",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "any",
+      "type": "creature",
+      "prompt": true
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "cha",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 7,
+    "school": "evo",
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    },
+    "properties": [
+      "vocal"
+    ],
+    "crewed": false
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/light/explosion-star-large-orange-purple.webp",
+  "effects": [
+    {
+      "name": "Divine Word (50 hp or fewer)",
+      "icon": "icons/magic/light/explosion-star-large-orange-purple.webp",
+      "origin": "Compendium.dnd5e.spells.Item.T1vpZLam7LezjToj",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "ng33sfAG959luxm1",
+      "changes": [],
+      "description": "<p>Creature is Deafened for 1 minute.</p>",
+      "transfer": false,
+      "statuses": [
+        "deafened"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!T1vpZLam7LezjToj.ng33sfAG959luxm1"
+    },
+    {
+      "name": "Divine Word (40 hp or fewer)",
+      "icon": "icons/magic/light/explosion-star-large-orange-purple.webp",
+      "origin": "Compendium.dnd5e.spells.Item.T1vpZLam7LezjToj",
+      "duration": {
+        "startTime": null,
+        "seconds": 600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "WFygB4koHfaqBOiK",
+      "changes": [],
+      "description": "<p>Creature is Deafened and Blinded for 10 minutes.</p>",
+      "transfer": false,
+      "statuses": [
+        "deafened",
+        "blinded"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!T1vpZLam7LezjToj.WFygB4koHfaqBOiK"
+    },
+    {
+      "name": "Divine Word (30 hp or fewer)",
+      "icon": "icons/magic/light/explosion-star-large-orange-purple.webp",
+      "origin": "Compendium.dnd5e.spells.Item.T1vpZLam7LezjToj",
+      "duration": {
+        "startTime": null,
+        "seconds": 3600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "QNru4BLkBqnn3uBB",
+      "changes": [],
+      "description": "<p>Creature is Blinded, Deafened, and Stunned for 1 hour.</p>",
+      "transfer": false,
+      "statuses": [
+        "deafened",
+        "blinded",
+        "stunned",
+        "incapacitated"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!T1vpZLam7LezjToj.QNru4BLkBqnn3uBB"
+    }
+  ],
+  "folder": "irCSpQWIMtp978TA",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234144,
+    "modifiedTime": 1706144091449,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!T1vpZLam7LezjToj"
+}

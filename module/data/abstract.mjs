@@ -1,3 +1,5 @@
+import Proficiency from "../documents/actor/proficiency.mjs";
+
 /**
  * Data Model variant with some extra methods to support template mix-ins.
  *
@@ -15,7 +17,7 @@
  * can define its own schema unique to it, and then add templates in direct correspondence to those in template.json
  * via SystemDataModel.mixin.
  */
-export default class SystemDataModel extends foundry.abstract.DataModel {
+export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /** @inheritdoc */
   static _enableV10Validation = true;
@@ -67,7 +69,8 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /**
    * @typedef {object} SystemDataModelMetadata
-   * @property {boolean} [singleton] - Should only a single item of this type be allowed on an actor?
+   * @property {boolean} [singleton]                  Should only a single item of this type be allowed on an actor?
+   * @property {typeof DataModel} [systemFlagsModel]  Model that represents flags data within the dnd5e namespace.
    */
 
   /**
@@ -186,7 +189,7 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Mixin                                       */
+  /*  Data Validation                             */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -255,6 +258,8 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Mixins                                      */
+  /* -------------------------------------------- */
 
   /**
    * Mix multiple templates with the base type.
@@ -290,6 +295,194 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
     }
 
     return Base;
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Variant of the SystemDataModel with some extra actor-specific handling.
+ */
+export class ActorDataModel extends SystemDataModel {
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Other actors that are available for currency transfers from this actor.
+   * @type {Actor5e[]}
+   */
+  get transferDestinations() {
+    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+    if ( !primaryParty?.system.members.ids.has(this.parent.id) ) return [];
+    const destinations = primaryParty.system.members.map(m => m.actor).filter(a => a.isOwner && a !== this.parent);
+    if ( primaryParty.isOwner ) destinations.unshift(primaryParty);
+    return destinations;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a data object which defines the data schema used by dice roll commands against this Actor.
+   * @param {object} [options]
+   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
+   *                                          either a die term or a flat term.
+   * @returns {object}
+   */
+  getRollData({ deterministic=false }={}) {
+    const data = { ...this };
+    data.prof = new Proficiency(this.attributes?.prof ?? 0, 1);
+    if ( deterministic ) data.prof = data.prof.flat;
+    return data;
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Variant of the SystemDataModel with support for rich item tooltips.
+ */
+export class ItemDataModel extends SystemDataModel {
+
+  /**
+   * The handlebars template for rendering item tooltips.
+   * @type {string}
+   */
+  static ITEM_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Render a rich tooltip for this item.
+   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @returns {{content: string, classes: string[]}}
+   */
+  async richTooltip(enrichmentOptions={}) {
+    return {
+      content: await renderTemplate(
+        this.constructor.ITEM_TOOLTIP_TEMPLATE, await this.getCardData(enrichmentOptions)
+      ),
+      classes: ["dnd5e2", "dnd5e-tooltip", "item-tooltip"]
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare item card template data.
+   * @param {EnrichmentOptions} enrichmentOptions  Options for text enrichment.
+   * @returns {Promise<object>}
+   */
+  async getCardData(enrichmentOptions={}) {
+    const { name, type, img } = this.parent;
+    let {
+      price, weight, uses, identified, unidentified, description, school, materials, activation, properties
+    } = this;
+    const rollData = this.parent.getRollData();
+    const isIdentified = identified !== false;
+    const chat = isIdentified ? description.chat || description.value : unidentified?.description;
+    description = game.user.isGM || isIdentified ? description.value : unidentified?.description;
+    uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
+    price = game.user.isGM || identified ? price : null;
+
+    const subtitle = [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
+    const context = {
+      name, type, img, price, weight, uses, school, materials, activation,
+      config: CONFIG.DND5E,
+      labels: foundry.utils.deepClone(this.parent.labels),
+      tags: this.parent.labels?.components?.tags,
+      subtitle: subtitle.filterJoin(" &bull; "),
+      description: {
+        value: await TextEditor.enrichHTML(description ?? "", {
+          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+        }),
+        chat: await TextEditor.enrichHTML(chat ?? "", {
+          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+        })
+      }
+    };
+
+    context.properties = [];
+
+    if ( game.user.isGM || isIdentified ) {
+      context.properties.push(
+        ...this.cardProperties ?? [],
+        ...this.activatedEffectCardProperties ?? [],
+        ...this.equippableItemCardProperties ?? []
+      );
+    }
+
+    if ( context.labels.duration ) {
+      context.labels.concentrationDuration = properties?.has("concentration")
+        ? game.i18n.format("DND5E.ConcentrationDuration", {
+          duration: context.labels.duration.toLocaleLowerCase(game.i18n.lang)
+        })
+        : context.labels.duration;
+    }
+
+    context.properties = context.properties.filter(_ => _);
+    context.hasProperties = context.tags?.length || context.properties.length;
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {object} FavoriteData5e
+   * @property {string} img                  The icon path.
+   * @property {string} title                The title.
+   * @property {string|string[]} [subtitle]  An optional subtitle or several subtitle parts.
+   * @property {number} [value]              A single value to display.
+   * @property {number} [quantity]           The item's quantity.
+   * @property {string|number} [modifier]    A modifier associated with the item.
+   * @property {number} [passive]            A passive score associated with the item.
+   * @property {object} [range]              The item's range.
+   * @property {number} [range.value]        The first range increment.
+   * @property {number|null} [range.long]    The second range increment.
+   * @property {string} [range.units]        The range units.
+   * @property {object} [save]               The item's saving throw.
+   * @property {string} [save.ability]       The saving throw ability.
+   * @property {number} [save.dc]            The saving throw DC.
+   * @property {object} [uses]               Data on an item's uses.
+   * @property {number} [uses.value]         The current available uses.
+   * @property {number} [uses.max]           The maximum available uses.
+   * @property {string} [uses.name]          The property to update on the item. If none is provided, the property will
+   *                                         not be updatable.
+   * @property {boolean} [toggle]            The effect's toggle state.
+   * @property {boolean} [suppressed]        Whether the favorite is suppressed.
+   */
+
+  /**
+   * Prepare item favorite data.
+   * @returns {Promise<FavoriteData5e>}
+   */
+  async getFavoriteData() {
+    return {
+      img: this.parent.img,
+      title: this.parent.name,
+      subtitle: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a data object which defines the data schema used by dice roll commands against this Item.
+   * @param {object} [options]
+   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
+   *                                          either a die term or a flat term.
+   * @returns {object}
+   */
+  getRollData({ deterministic=false }={}) {
+    if ( !this.parent.actor ) return null;
+    const actorRollData = this.parent.actor.getRollData({ deterministic });
+    const data = { ...actorRollData, item: { ...this } };
+    return data;
   }
 }
 

@@ -1,6 +1,7 @@
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
+import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
@@ -10,6 +11,7 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * Data definition for Tool items.
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
+ * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  *
@@ -18,8 +20,8 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @property {number} proficient  Level of proficiency in this tool as defined in `DND5E.proficiencyLevels`.
  * @property {string} bonus       Bonus formula added to tool rolls.
  */
-export default class ToolData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate
+export default class ToolData extends ItemDataModel.mixin(
+  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
@@ -60,6 +62,26 @@ export default class ToolData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: this.type.label,
+      modifier: this.parent.parent?.system.tools?.[this.type.baseItem]?.total
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -68,6 +90,16 @@ export default class ToolData extends SystemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
+    return [CONFIG.DND5E.abilities[this.ability]?.label];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
     return [CONFIG.DND5E.abilities[this.ability]?.label];
   }
 

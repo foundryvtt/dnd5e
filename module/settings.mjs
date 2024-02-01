@@ -13,6 +13,36 @@ export default function registerSystemSettings() {
     default: ""
   });
 
+  // Challenge visibility
+  game.settings.register("dnd5e", "challengeVisibility", {
+    name: "SETTINGS.5eChallengeVisibility.Name",
+    hint: "SETTINGS.5eChallengeVisibility.Hint",
+    scope: "world",
+    config: true,
+    default: "player",
+    type: String,
+    choices: {
+      all: "SETTINGS.5eChallengeVisibility.All",
+      player: "SETTINGS.5eChallengeVisibility.Player",
+      none: "SETTINGS.5eChallengeVisibility.None"
+    }
+  });
+
+  // Encumbrance tracking
+  game.settings.register("dnd5e", "encumbrance", {
+    name: "SETTINGS.5eEncumbrance.Name",
+    hint: "SETTINGS.5eEncumbrance.Hint",
+    scope: "world",
+    config: true,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.5eEncumbrance.None",
+      normal: "SETTINGS.5eEncumbrance.Normal",
+      variant: "SETTINGS.5eEncumbrance.Variant"
+    }
+  });
+
   // Rest Recovery Rules
   game.settings.register("dnd5e", "restVariant", {
     name: "SETTINGS.5eRestN",
@@ -252,4 +282,36 @@ export default function registerSystemSettings() {
       }
     }
   });
+
+  // Primary Group
+  game.settings.register("dnd5e", "primaryParty", {
+    name: "Primary Party",
+    scope: "world",
+    config: false,
+    default: null,
+    type: PrimaryPartyData,
+    onChange: s => ui.actors.render()
+  });
+
+  // Token Rings
+  game.settings.register("dnd5e", "disableTokenRings", {
+    name: "SETTINGS.5eTokenRings.Name",
+    hint: "SETTINGS.5eTokenRings.Hint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: false,
+    requiresReload: true
+  });
+}
+
+/**
+ * Data model for tracking information on the primary party.
+ *
+ * @property {Actor5e} actor  Group actor representing the primary party.
+ */
+class PrimaryPartyData extends foundry.abstract.DataModel {
+  static defineSchema() {
+    return { actor: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseActor) };
+  }
 }

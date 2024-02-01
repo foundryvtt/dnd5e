@@ -29,7 +29,7 @@
             {{!-- Character Summary --}}
             <ul class="summary flexrow">
                 <li class="size">
-                    <span>{{lookup config.actorSizes system.traits.size}}</span>
+                    <span>{{lookup (lookup config.actorSizes system.traits.size) "label"}}</span>
                 </li>
                 <li class="alignment">
                     <input type="text" name="system.details.alignment" value="{{system.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
@@ -59,7 +59,7 @@
             <ul class="attributes flexrow">
                 <li class="attribute health">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.HitPoints" }}</h4>
-                    <a class="config-button" data-action="hit-points" data-tooltip="DND5E.HitPointsConfig">
+                    <a class="config-button" data-action="hitPoints" data-tooltip="DND5E.HitPointsConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value multiple">
@@ -142,7 +142,8 @@
                             {{numberFormat ability.save decimals=0 sign=true}}
                         </span>
                     </div>
-                    <a class="config-button" data-action="ability" data-tooltip="DND5E.AbilityConfigure">
+                    <a class="config-button" data-action="ability"
+                       data-tooltip="{{ localize "DND5E.AbilityConfigure" ability=ability.label }}">
                         <i class="fas fa-cog"></i>
                     </a>
                 </li>

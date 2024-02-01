@@ -1,0 +1,108 @@
+{
+  "_id": "6OIw31CDF6mAwFnd",
+  "name": "Bolt of Slaying",
+  "type": "consumable",
+  "img": "icons/skills/ranged/arrow-flying-broadhead-metal.webp",
+  "system": {
+    "description": {
+      "value": "<p>A Bolt of Slaying is a magic weapon meant to slay a particular kind of creature. Some are more focused than others; for example, there are both Bolts of Dragon Slaying and Bolts of Blue Dragon Slaying. If a creature belonging to the type, race, or group associated with a bolt of slaying takes damage from the bolt, the creature must make a DC 17 Constitution saving throw, taking an extra 6d10 piercing damage on a failed save, or half as much extra damage on a successful one.</p>\n<p>Once a Bolt of Slaying deals its extra damage to a creature, it becomes a nonmagical bolt.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 0.075,
+    "price": {
+      "value": 600,
+      "denomination": "gp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "veryRare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "autoDestroy": false,
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "rwak",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "6d10",
+    "save": {
+      "ability": "con",
+      "dc": 17,
+      "scaling": "flat"
+    },
+    "type": {
+      "value": "ammo",
+      "subtype": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": []
+  },
+  "effects": [],
+  "folder": "NdDvXSjfqlghXpQZ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233478,
+    "modifiedTime": 1704823142904,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!6OIw31CDF6mAwFnd"
+}

@@ -9,6 +9,12 @@
                 <li>
                     <span>{{summary}}</span>
                 </li>
+                <li class="type">
+                    <select name="system.type.value">
+                        {{selectOptions config.groupTypes selected=system.type.value
+                                        blank=(localize "DND5E.Group.TypeGeneric")}}
+                    </select>
+                </li>
             </ul>
 
             <ul class="attributes flexrow">
@@ -33,12 +39,26 @@
                         <span>{{movement.secondary}}</span>
                     </footer>
                 </li>
+                {{#if xp}}
+                <li class="attribute xp">
+                    <h4 class="attribute-name box-title">{{localize "DND5E.ExperiencePoints"}}</h4>
+                    <div class="attribute-value">
+                        {{ numberInput xp.value name="system.details.xp.value" min=0 step=1
+                           placeholder=(dnd5e-numberFormat xp.derived) }}
+                    </div>
+                    <footer class="attribute-footer">
+                        <a class="action-button" data-action="award">
+                            <i class="fa-solid fa-trophy"></i> {{localize "DND5E.Award.Action"}}
+                        </a>
+                    </footer>
+                </li>
+                {{/if}}
             </ul>
         </section>
     </header>
 
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="members">{{localize 'DND5E.GroupMembers'}}</a>
+        <a class="item active" data-tab="members">{{localize 'DND5E.Group.Member.other'}}</a>
         <a class="item" data-tab="inventory">{{localize 'DND5E.GroupInventory'}}</a>
         <a class="item" data-tab="description">{{localize 'DND5E.Description'}}</a>
     </nav>
@@ -49,16 +69,34 @@
             <section class="directory" data-section="{{id}}">
                 <header class="directory-header flexrow">
                     <h3 class="name">{{localize section.label}}</h3>
+                    {{#if section.displayHPColumn}}
                     <span class="hp">{{localize "DND5E.HitPoints"}}</span>
+                    {{/if}}
+                    {{#if section.displayQuantityColumn}}
+                    <span class="quantity">
+                        {{localize "DND5E.Quantity"}}
+                        {{#if @root.editable}}
+                        <a class="action-button" data-action="rollQuantities" data-tooltip="DND5E.QuantityRoll"
+                           aria-label="{{localize 'DND5E.QuantityRoll'}}">
+                            <i class="fa-solid fa-dice"></i>
+                        </a>
+                        {{/if}}
+                    </span>
+                    {{/if}}
+                    {{#if section.displayChallengeColumn}}
+                    <span class="challenge">{{localize "DND5E.Group.Challenge"}}</span>
+                    {{/if}}
                     <span class="controls">{{localize "DND5E.GroupControls"}}</span>
                 </header>
                 <ol class="members-list directory-list">
                     {{#each section.members as |member|}}
                     <li class="group-member directory-item flexrow" data-actor-id="{{member.id}}">
+                        <input type="hidden" name="system.members.{{index}}.actor" value="{{member.id}}">
                         <div class="name flexrow">
                             <img class="thumbnail" src="{{member.img}}">
                             <h4 class="document-name"><a class="member-link">{{member.name}}</a></h4>
                         </div>
+                        {{#if section.displayHPColumn}}
                         <div class="hp flexrow">
                             <div class="bar-container">
                                 <div class="bar" style="width:{{member.hp.pct}}%; background:{{member.hp.color}}; border-color:{{member.hp.border}}"></div>
@@ -69,6 +107,26 @@
                             <span class="max">{{member.hp.max}}</span>
                             {{/if}}
                         </div>
+                        {{/if}}
+                        {{#if section.displayQuantityColumn}}
+                        <div class="quantity flexrow">
+                            <input type="number" name="system.members.{{index}}.quantity.value" min="0" step="1"
+                                   value="{{member.quantity.value}}">
+                            <input type="text" name="system.members.{{index}}.quantity.formula"
+                                   value="{{member.quantity.formula}}" placeholder="{{localize 'DND5E.Formula'}}">
+                        </div>
+                        {{else}}
+                        <input type="hidden" name="system.members.{{index}}.quantity.value"
+                               value="{{member.quantity.value}}">
+                        <input type="hidden" name="system.members.{{index}}.quantity.formula"
+                               value="{{member.quantity.formula}}">
+                        {{/if}}
+                        {{#if section.displayChallengeColumn}}
+                        <div class="challenge">
+                            <abbr>{{localize "DND5E.AbbreviationCR"}}</abbr> {{member.cr}}{{#if member.xp}} —
+                            {{member.xp}} <abbr>{{localize "DND5E.ExperiencePointsAbbr"}}</abbr>{{/if}}
+                        </div>
+                        {{/if}}
                         <div class="controls">
                             <a class="action-button" data-action="removeMember"><i class="fa-solid fa-close"></i></a>
                         </div>
@@ -80,7 +138,7 @@
         </div>
 
         <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-            {{> "dnd5e.actor-inventory" sections=inventory}}
+            {{> "dnd5e.inventory" sections=inventory}}
         </div>
 
         <div class="tab description" data-group="primary" data-tab="description">

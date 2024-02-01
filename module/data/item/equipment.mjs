@@ -1,7 +1,8 @@
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
+import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
@@ -12,6 +13,7 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * Data definition for Equipment items.
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
+ * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
@@ -28,8 +30,8 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @property {number} strength          Minimum strength required to use a piece of armor.
  * @property {number} proficient        Does the owner have proficiency in this piece of equipment?
  */
-export default class EquipmentData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
+export default class EquipmentData extends ItemDataModel.mixin(
+  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
   /** @inheritdoc */
@@ -131,6 +133,26 @@ export default class EquipmentData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: [this.type.label, this.parent.labels.activation],
+      uses: this.hasLimitedUses ? this.getUsesData() : null
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -140,9 +162,22 @@ export default class EquipmentData extends SystemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      CONFIG.DND5E.equipmentTypes[this.type.value],
+      this.type.label,
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.PropertyStealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
+    return [
+      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null
     ];
   }
 
@@ -190,12 +225,12 @@ export default class EquipmentData extends SystemDataModel.mixin(
   /**
    * Does this armor impose disadvantage on stealth checks?
    * @type {boolean}
-   * @deprecated since DnD5e 2.5, available until DnD5e 2.7
+   * @deprecated since DnD5e 3.0, available until DnD5e 3.2
    */
   get stealth() {
     foundry.utils.logCompatibilityWarning(
       "The `system.stealth` value on equipment has migrated to the 'stealthDisadvantage' property.",
-      { since: "DnD5e 2.5", until: "DnD5e 2.7" }
+      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
     );
     return this.properties.has("stealthDisadvantage");
   }

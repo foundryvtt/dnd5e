@@ -1,8 +1,9 @@
 import { filteredKeys } from "../../utils.mjs";
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
+import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
@@ -15,6 +16,7 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * Data definition for Weapon items.
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
+ * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
@@ -24,8 +26,8 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * @property {Set<string>} properties  Weapon's properties.
  * @property {number} proficient       Does the weapon's owner have proficiency?
  */
-export default class WeaponData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
+export default class WeaponData extends ItemDataModel.mixin(
+  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
   /** @inheritdoc */
@@ -72,6 +74,27 @@ export default class WeaponData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.type.label = CONFIG.DND5E.weaponTypes[this.type.value];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: CONFIG.DND5E.itemActionTypes[this.actionType],
+      modifier: this.parent.labels.modifier,
+      range: this.range
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -81,7 +104,19 @@ export default class WeaponData extends SystemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      CONFIG.DND5E.weaponTypes[this.type.value],
+      this.type.label,
+      this.isMountable ? (this.parent.labels?.armor ?? null) : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
+    return [
       this.isMountable ? (this.parent.labels?.armor ?? null) : null
     ];
   }

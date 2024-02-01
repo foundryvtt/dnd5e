@@ -1,0 +1,22 @@
+<form id="document-create" autocomplete="off">
+    <header>
+        <input type="text" class="document-name uninput" name="name" value="{{ name }}" autofocus>
+        {{#if hasFolders}}
+        <select class="unselect" name="folder" form="document-create">
+            {{ selectOptions folders selected=folder labelAttr="name" nameAttr="id"
+                             blank=(localize "DOCUMENT.Folder") }}
+        </select>
+        {{/if}}
+    </header>
+    <ol class="unlist card">
+        {{#each types}}
+        <li>
+            <label>
+                <img src="{{ icon }}" alt="{{ label }}">
+                <span>{{ label }}</span>
+                <input type="radio" name="type" value="{{ type }}">
+            </label>
+        </li>
+        {{/each}}
+    </ol>
+</form>

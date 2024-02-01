@@ -1,25 +1,25 @@
 <form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
-  <h3>{{{title}}}</h3>
+    <h3>{{{title}}}</h3>
 
-  <p>{{hint}}</p>
+    <p>{{hint}}</p>
 
-  <ol class="trait-slots">
-    {{#each slots}}
-      <li class="trait-slot flexrow" data-key="{{this.key}}">
-        {{#if this.key}}
-          <label class="flexrow">
-            {{this.label}}
-            <input type="hidden" name="chosen" value="{{this.key}}">
-          </label>
-          {{#if this.showDelete}}
+    <ol class="trait-slots">
+        {{#each slots}}
+        <li class="trait-slot flexrow" data-key="{{this.key}}">
+            {{#if this.key}}
+            <label class="flexrow">
+                {{this.label}}
+                <input type="hidden" name="chosen" value="{{this.key}}">
+            </label>
+            {{#if this.showDelete}}
             <a class="remove"><i class="fas fa-trash"></i></a>
-          {{/if}}
-        {{else if (and this.showSelector @root.available.choices)}}
-          <select name="added">
-            {{dnd5e-groupedSelectOptions @root.available.choices blank=@root.available.label}}
-          </select>
-        {{/if}}
-      </li>
-    {{/each}}
-  </ol>
+            {{/if}}
+            {{else if (and this.showSelector @root.available.choices)}}
+            <select name="added">
+                {{dnd5e-groupedSelectOptions @root.available.choices blank=@root.available.label}}
+            </select>
+            {{/if}}
+        </li>
+        {{/each}}
+    </ol>
 </form>

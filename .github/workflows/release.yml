@@ -75,7 +75,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: '16.x'
+        node-version: '18.x'
         cache: 'npm'
 
 
@@ -88,11 +88,11 @@ jobs:
     # Run our `build` script
     - name: Build All
       run: |
-        npm run build --if-present
+        npm run build:code --if-present
         mv --force dnd5e-compiled.mjs dnd5e.mjs
 
     # Create a zip file with all files required by the module to add to the release
-    - run: zip ${{steps.get_vars.outputs.ZIP_NAME}} -r icons lang json packs/*.db templates tokens ui dnd5e.css dnd5e.mjs dnd5e-compiled.mjs.map LICENSE.txt README.md system.json template.json
+    - run: zip ${{steps.get_vars.outputs.ZIP_NAME}} -r fonts icons lang json packs templates tokens ui dnd5e.css dnd5e.mjs dnd5e-compiled.mjs.map LICENSE.txt README.md system.json template.json -x packs/_source
 
 
     # Create a release for this specific version

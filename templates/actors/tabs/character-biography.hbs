@@ -1,0 +1,65 @@
+{{#*inline "textbox"}}
+    <div class="textbox-half">
+        <h3 class="icon">
+            {{#if icon}}<i class="{{ icon }}"></i>
+            {{~else if svg}}<dnd5e-icon src="systems/dnd5e/icons/svg/{{svg}}.svg"></dnd5e-icon>{{/if}}
+            <span class="roboto-upper">{{ localize label }}</span>
+        </h3>
+        {{#if @root.editable}}
+        <textarea class="untext" name="{{ name }}">{{ value }}</textarea>
+        {{else}}
+        <p>{{ dnd5e-textFormat value }}</p>
+        {{/if}}
+    </div>
+{{/inline}}
+
+<div class="tab biography" data-group="primary" data-tab="biography">
+
+    {{!-- Characteristics --}}
+    <div class="top">
+        <ul class="unlist characteristics">
+            {{#each characteristics}}
+            <li>
+                <label>
+                    <span class="roboto-upper label">{{ localize label }}</span>
+                    {{#if @root.editable}}
+                    <input type="text" name="{{ name }}" value="{{ value }}">
+                    {{else}}
+                    <span class="value">{{ value }}</span>
+                    {{/if}}
+                </label>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    {{!-- Ideals, Bonds, Flaws, Personality Traits, & Appearance --}}
+    <div class="middle flexrow">
+        <div class="left">
+            {{~> "textbox" name="system.details.ideal" value=system.details.ideal label="DND5E.Ideals"
+                icon="fas fa-seedling" ~}}
+            {{~> "textbox" name="system.details.bond" value=system.details.bond label="DND5E.Bonds"
+                icon="fas fa-link" ~}}
+            {{~> "textbox" name="system.details.flaw" value=system.details.flaw label="DND5E.Flaws"
+                icon="fas fa-heart-crack" ~}}
+        </div>
+        <div class="right">
+            {{~> "textbox" name="system.details.trait" value=system.details.trait label="DND5E.PersonalityTraits"
+                icon="fas fa-puzzle-piece" ~}}
+            {{~> "textbox" name="system.details.appearance" value=system.details.appearance label="DND5E.Appearance"
+                icon="fas fa-image-portrait" ~}}
+        </div>
+    </div>
+
+    {{!-- Biography --}}
+    <div class="bottom">
+        <h3 class="icon">
+            <i class="fas fa-feather"></i>
+            <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
+            <span class="roboto-upper">{{ localize "DND5E.Biography" }}</span>
+        </h3>
+        {{ editor biographyHTML target="system.details.biography.value" button=false editable=@root.editable
+                  engine="prosemirror" collaborate=false }}
+    </div>
+
+</div>

@@ -38,12 +38,12 @@ export default class SizeAdvancement extends Advancement {
   get automaticHint() {
     if ( !this.configuration.sizes.size ) return "";
     if ( this.configuration.sizes.size === 1 ) return game.i18n.format("DND5E.AdvancementSizeFlowHintSingle", {
-      size: CONFIG.DND5E.actorSizes[this.configuration.sizes.first()]
+      size: CONFIG.DND5E.actorSizes[this.configuration.sizes.first()].label
     });
 
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
     return game.i18n.format("DND5E.AdvancementSizeflowHintMultiple", {
-      sizes: listFormatter.format(this.configuration.sizes.map(s => CONFIG.DND5E.actorSizes[s]))
+      sizes: listFormatter.format(this.configuration.sizes.map(s => CONFIG.DND5E.actorSizes[s].label))
     });
   }
 
@@ -61,7 +61,7 @@ export default class SizeAdvancement extends Advancement {
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
     const sizes = configMode ? Array.from(this.configuration.sizes) : this.value.size ? [this.value.size] : [];
-    return sizes.map(s => `<span class="tag">${CONFIG.DND5E.actorSizes[s]}</span>`).join("");
+    return sizes.map(s => `<span class="tag">${CONFIG.DND5E.actorSizes[s].label}</span>`).join("");
   }
 
   /* -------------------------------------------- */
