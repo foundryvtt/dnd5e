@@ -931,7 +931,7 @@ async function rollAction(event) {
           } else if (target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName) {
             let locatedToken; let locatedScene; let locatedActor;
             const targetLocation = target.parentElement.parentElement;
-            if (target.offsetParent.className == "message-content") {
+            if (target.offsetParent.className === "message-content") {
               const chatCardIds = target.offsetParent.lastElementChild.dataset;
               if (chatCardIds.tokenId) {
                 const chatIds = chatCardIds.tokenId.match(/Scene\.(.{16}).Token\.(.{16})/);
@@ -951,9 +951,7 @@ async function rollAction(event) {
               }
 
             } else if (targetLocation.classList.contains("description")) {
-              console.log("TOOLTIPPIES", targetLocation.parentElement)
-              const actorSheet2Ids = ui.activeWindow._element[0].id.match(/ActorSheet5e(?:NPC|Character2)-(Scene-(.{16}))?(-Token-(.{16}))?(-Actor-(.{16}))?/);;
-              console.log("ACTOR SHEET 2", actorSheet2Ids)
+              const actorSheet2Ids = ui.activeWindow._element[0].id.match(/ActorSheet5e(?:NPC|Character2)-(Scene-(.{16}))?(-Token-(.{16}))?(-Actor-(.{16}))?/);
               if (actorSheet2Ids[2]) {
                 locatedScene = actorSheet2Ids[2];
                 locatedToken = actorSheet2Ids[4];
