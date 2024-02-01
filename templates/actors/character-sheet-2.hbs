@@ -79,6 +79,7 @@
                 {{/if}}
 
                 {{!-- XP --}}
+                {{#unless disableExperience}}
                 {{#with system.details.xp}}
                 <div class="xp-label roboto-upper">
                     {{#if @root.editable}}
@@ -94,6 +95,7 @@
                      aria-valuemin="{{ min }}" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      aria-valuetext="{{ pct }}%" style="--bar-percentage: {{ pct }}%;"></div>
                 {{/with}}
+                {{/unless}}
             </div>
         </div>
     </header>
