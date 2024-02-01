@@ -128,6 +128,8 @@ export default class TokenRing {
    * @param {number} [parameters.effects]   The effects value.
    */
   configureVisuals({colors, effects}={}) {
+    colors ??= {};
+
     // Caching the colors into the little endian format
     foundry.utils.mergeObject(colors, this.token.document.getRingColors());
     this.ringColorLittleEndian = Color.from(colors?.ring ?? 0xFFFFFF).littleEndian;

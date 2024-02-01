@@ -1,11 +1,11 @@
 {
   "id": "dnd5e",
-  "title": "DnD5e - Fifth Edition System",
-  "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
+  "title": "Dungeons & Dragons Fifth Edition",
+  "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
   "version": "3.0.0",
   "compatibility": {
     "minimum": "11.315",
-    "verified": "11"
+    "verified": "12"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
@@ -79,8 +79,26 @@
       "flags": {}
     },
     {
+      "name": "classes",
+      "label": "Classes (SRD)",
+      "system": "dnd5e",
+      "path": "packs/classes",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "subclasses",
+      "label": "Subclasses (SRD)",
+      "system": "dnd5e",
+      "path": "packs/subclasses",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
       "name": "classfeatures",
-      "label": "Classes & Subclasses (SRD)",
+      "label": "Class & Subclass Features (SRD)",
       "system": "dnd5e",
       "path": "packs/classfeatures",
       "type": "Item",
@@ -128,7 +146,7 @@
   ],
   "packFolders": [
     {
-      "name": "DnD5e SRD Content",
+      "name": "D&D SRD Content",
       "sorting": "m",
       "color": "#cd2c1e",
       "packs": [
@@ -142,6 +160,8 @@
           "sorting": "m",
           "color": "#b72c1f",
           "packs": [
+            "classes",
+            "subclasses",
             "classfeatures",
             "backgrounds",
             "races"
@@ -182,12 +202,18 @@
       "type": "cover",
       "loop": false,
       "flags": {}
+    },
+    {
+      "type": "setup",
+      "url": "systems/dnd5e/ui/official/dnd5e-repo.jpg",
+      "thumbnail": "systems/dnd5e/ui/official/dnd5e-thumbnail.jpg"
     }
   ],
   "socket": true,
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
+  "background": "systems/dnd5e/ui/official/dnd5e-background.webp",
   "flags": {
     "needsMigrationVersion": "3.0.0",
     "compatibleMigrationVersion": "0.8",

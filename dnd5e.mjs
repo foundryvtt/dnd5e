@@ -1,5 +1,5 @@
 /**
- * The DnD5e game system for Foundry Virtual Tabletop
+ * The D&D fifth edition game system for Foundry Virtual Tabletop
  * A system for playing the fifth edition of the world's most popular role-playing game.
  * Author: Atropos
  * Software License: MIT
@@ -46,7 +46,7 @@ globalThis.dnd5e = {
 
 Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
-  console.log(`DnD5e | Initializing the DnD5e Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
+  console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
   // TODO: Remove when v11 support is dropped.
   CONFIG.compatibility.excludePatterns.push(/Math\.clamped/);
@@ -264,26 +264,29 @@ function _configureFonts() {
     Roboto: {
       editor: true,
       fonts: [
-        { urls: ["systems/dnd5e/fonts/Roboto-Regular.woff2"] },
-        { urls: ["systems/dnd5e/fonts/Roboto-Bold.woff2"], weight: "bold" },
-        { urls: ["systems/dnd5e/fonts/Roboto-Italic.woff2"], style: "italic" },
-        { urls: ["systems/dnd5e/fonts/Roboto-BoldItalic.woff2"], weight: "bold", style: "italic" }
+        { urls: ["systems/dnd5e/fonts/roboto/Roboto-Regular.woff2"] },
+        { urls: ["systems/dnd5e/fonts/roboto/Roboto-Bold.woff2"], weight: "bold" },
+        { urls: ["systems/dnd5e/fonts/roboto/Roboto-Italic.woff2"], style: "italic" },
+        { urls: ["systems/dnd5e/fonts/roboto/Roboto-BoldItalic.woff2"], weight: "bold", style: "italic" }
       ]
     },
     "Roboto Condensed": {
       editor: true,
       fonts: [
-        { urls: ["systems/dnd5e/fonts/RobotoCondensed-Regular.woff2"] },
-        { urls: ["systems/dnd5e/fonts/RobotoCondensed-Bold.woff2"], weight: "bold" },
-        { urls: ["systems/dnd5e/fonts/RobotoCondensed-Italic.woff2"], style: "italic" },
-        { urls: ["systems/dnd5e/fonts/RobotoCondensed-BoldItalic.woff2"], weight: "bold", style: "italic" }
+        { urls: ["systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-Regular.woff2"] },
+        { urls: ["systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-Bold.woff2"], weight: "bold" },
+        { urls: ["systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-Italic.woff2"], style: "italic" },
+        {
+          urls: ["systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-BoldItalic.woff2"], weight: "bold",
+          style: "italic"
+        }
       ]
     },
     "Roboto Slab": {
       editor: true,
       fonts: [
-        { urls: ["systems/dnd5e/fonts/RobotoSlab-Regular.ttf"] },
-        { urls: ["systems/dnd5e/fonts/RobotoSlab-Bold.ttf"], weight: "bold" }
+        { urls: ["systems/dnd5e/fonts/roboto-slab/RobotoSlab-Regular.ttf"] },
+        { urls: ["systems/dnd5e/fonts/roboto-slab/RobotoSlab-Bold.ttf"], weight: "bold" }
       ]
     }
   });
@@ -380,6 +383,11 @@ Hooks.once("ready", function() {
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
   if ( cv && !foundry.utils.isNewerVersion(game.system.flags.needsMigrationVersion, cv) ) return;
+
+  // Compendium pack folder migration.
+  if ( foundry.utils.isNewerVersion("3.0.0", cv) ) {
+    migrations.reparentCompendiums("DnD5e SRD Content", "D&D SRD Content");
+  }
 
   // Perform the migration
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {

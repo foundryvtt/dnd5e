@@ -30,9 +30,9 @@ export default class CurrencyManager extends DialogMixin(FormApplication) {
   get transferDestinations() {
     const destinations = [];
     const actor = this.object instanceof Actor ? this.object : this.object.parent;
-    if ( actor !== this.object ) destinations.push(actor);
-    destinations.push(...(actor.system.transferDestinations ?? []));
-    destinations.push(...actor.itemTypes.container.filter(b => b !== this.object));
+    if ( actor && (actor !== this.object) ) destinations.push(actor);
+    destinations.push(...(actor?.system.transferDestinations ?? []));
+    destinations.push(...(actor?.itemTypes.container.filter(b => b !== this.object) ?? []));
     if ( game.user.isGM ) {
       const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
       if ( primaryParty && (this.object !== primaryParty) && !destinations.includes(primaryParty) ) {

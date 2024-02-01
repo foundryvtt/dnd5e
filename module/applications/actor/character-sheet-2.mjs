@@ -105,7 +105,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const header = html[0].querySelector(".window-header");
 
     // Add edit <-> play slide toggle.
-    if ( this.actor.isOwner ) {
+    if ( this.isEditable ) {
       const toggle = document.createElement("slide-toggle");
       toggle.checked = this._mode === this.constructor.MODES.EDIT;
       toggle.classList.add("mode-slider");
@@ -159,6 +159,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /** @inheritDoc */
   async _render(force=false, options={}) {
     await super._render(force, options);
+    if ( !this.rendered ) return;
     const context = options.renderContext ?? options.action;
     const data = options.renderData ?? options.data;
     const isUpdate = (context === "update") || (context === "updateActor");
@@ -681,10 +682,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
     const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
+    const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("spell-header");
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.toolIds ) type = "tool";
-    else if ( preparationMode && (level !== "0") && event.target.classList.contains("spell-header") ) type = "slots";
+    else if ( preparationMode && (level !== "0") && isSlots ) type = "slots";
     if ( !type ) return super._onDragStart(event);
     const dragData = { dnd5e: { action: "favorite", type } };
     if ( type === "slots" ) dragData.dnd5e.id = preparationMode === "pact" ? "pact" : `spell${level}`;

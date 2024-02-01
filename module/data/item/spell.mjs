@@ -67,6 +67,16 @@ export default class SpellData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async getCardData(enrichmentOptions={}) {
+    const context = await super.getCardData(enrichmentOptions);
+    context.isSpell = true;
+    context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getFavoriteData() {
     return foundry.utils.mergeObject(await super.getFavoriteData(), {
       subtitle: [this.parent.labels.components.vsm, this.parent.labels.activation],
@@ -154,7 +164,7 @@ export default class SpellData extends ItemDataModel.mixin(
 
   /**
    * Provide a backwards compatible getter for accessing `components`.
-   * @deprecated since v2.5.
+   * @deprecated since v3.0.
    * @type {object}
    */
   get components() {
