@@ -234,3 +234,24 @@ Hooks.once("init", () => {
   CONFIG.DND5E.toolIds.hacking = "module-scope.compendium-id.item-id";
 });
 ```
+
+## Modifying Encumbrance Values
+### Encumbrance Thresholds
+The encumbrance calculations are determined by strength multipliers that can be defined for both imperial and metric settings.
+```javascript
+// Modify encumbrance thresholds
+Hooks.once("init", () => {
+  CONFIG.DND5E.encumbrance.threshold.encumbered = {
+    imperial: 8,
+    metric: 4
+  };
+  CONFIG.DND5E.encumbrance.threshold.heavilyEncumbered = {
+    imperial: 14,
+    metric: 9
+  };
+  CONFIG.DND5E.encumbrance.threshold.maximum = {
+    imperial: 20,
+    metric: 10
+  };
+});
+```
