@@ -14,10 +14,10 @@
                     <span class="separator">&sol;</span>
                     <span class="max">{{ max }}</span>
                 </div>
-                <i class="breakpoint encumbrance-33 arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-33 arrow-down" role="presentation"></i>
-                <i class="breakpoint encumbrance-66 arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-66 arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-low arrow-up" role="presentation" style="--encumbrance-low: {{ low }}%"></i>
+                <i class="breakpoint encumbrance-low  arrow-down" role="presentation" style="--encumbrance-low: {{ low }}%"></i>
+                <i class="breakpoint encumbrance-high arrow-up" role="presentation" style="--encumbrance-high: {{ high }}%"></i>
+                <i class="breakpoint encumbrance-high arrow-down" role="presentation" style="--encumbrance-high: {{ high }}%"></i>
             </div>
             {{/with}}
             <div class="info">

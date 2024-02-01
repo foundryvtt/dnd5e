@@ -198,6 +198,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       path: showTokenPortrait ? this.actor.isToken ? "" : "prototypeToken.texture.src" : "img"
     };
 
+    // Encumbrance
+    const encumberedThreshold = game.settings.get("dnd5e", "metricWeightUnits") 
+      ? CONFIG.DND5E.encumbrance.threshold.encumbered.metric 
+      : CONFIG.DND5E.encumbrance.threshold.encumbered.imperial;
+    const heavilyEncumberedThreshold = game.settings.get("dnd5e", "metricWeightUnits") 
+      ? CONFIG.DND5E.encumbrance.threshold.heavilyEncumbered.metric
+      : CONFIG.DND5E.encumbrance.threshold.heavilyEncumbered.imperial;
+    const maximumThreshold = game.settings.get("dnd5e", "metricWeightUnits")
+      ? CONFIG.DND5E.encumbrance.threshold.maximum.metric
+      : CONFIG.DND5E.encumbrance.threshold.maximum.imperial;
+    context.encumbrance.low = (encumberedThreshold / maximumThreshold) * 100;
+    context.encumbrance.high = (heavilyEncumberedThreshold / maximumThreshold) * 100;
+
     // Exhaustion
     context.exhaustion = Array.fromRange(6, 1).map(n => {
       const label = game.i18n.format("DND5E.ExhaustionLevel", { n });

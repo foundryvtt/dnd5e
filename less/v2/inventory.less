@@ -51,13 +51,15 @@
       }
 
       .breakpoint {
+        --encumbrance-low: 33%;
+        --encumbrance-high: 66%;
         display: block;
         position: absolute;
         block-size: 0;
         inline-size: 0;
         border-inline: 3px solid transparent;
-        &.encumbrance-33 { inset-inline-start: 33% }
-        &.encumbrance-66 { inset-inline-start: 66% }
+        &.encumbrance-low { inset-inline-start: var(--encumbrance-low); }
+        &.encumbrance-high { inset-inline-start: var(--encumbrance-high); }
         &.arrow-up {
           inset-block-end: 0;
           border-block-end: 3px solid var(--dnd5e-color-gold);
