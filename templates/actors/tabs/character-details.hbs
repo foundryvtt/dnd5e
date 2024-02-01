@@ -145,7 +145,7 @@
                         </span>
                         <span class="subtitle">{{ subtitle }}</span>
                     </div>
-                    {{#if @root.editable}}
+                    {{#if (and @root.editable @root.race)}}
                     <a class="config-button" data-action="type" data-tooltip="DND5E.CreatureTypeConfig"
                        aria-label="{{ localize "DND5E.CreatureTypeConfig" }}">
                         <i class="fas fa-cog"></i>
