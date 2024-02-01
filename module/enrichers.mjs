@@ -12,7 +12,7 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool|status) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -51,6 +51,7 @@ async function enrichString(match, options) {
     case "save": return enrichSave(config, label, options);
     case "embed": return enrichEmbed(config, label, options);
     case "reference": return enrichReference(config, label, options);
+    case "status": return enrichStatus(config, label);
   }
   return null;
 }
@@ -343,6 +344,44 @@ async function enrichDamage(config, label, options) {
   const span = document.createElement("span");
   span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Damage${localizationType}`, localizationData);
   return span;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Enrich an Status link to toggle a status on the selected token.
+ * @param {string[]} config            Configuration data.
+ * @param {string} [label]             Optional label to replace default text.
+ * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.
+ *
+ * @example Toggle the diseased status:
+ * ```[[/status diseased]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item">
+ *   <i class="fa-solid fa-dice-d20"></i> diseased
+ * </a>
+ * ```
+ */
+async function enrichStatus(config, label) {
+  if (config.values.length !== 1) {
+    console.warn(`Status ${config.values.join(" ")} not found while enriching ${config._input}.`);
+    return config.input;
+  }
+
+  const givenStatus = config.values[0];
+  const statusName = givenStatus.charAt(0).toUpperCase() + givenStatus.slice(1);
+  if (!label) {
+    label = givenStatus;
+  }
+
+  const statusConfig = CONFIG.statusEffects.find(e => e.name === statusName);
+  if (!statusConfig) {
+    console.warn(`Status ${givenStatus} not found while enriching ${config._input}.`);
+    return config.input;
+  }
+
+  return createRollLink(label, { type: "status", toggleStatus: statusName, ...config });
 }
 
 /* -------------------------------------------- */
@@ -748,7 +787,7 @@ function createRollLink(label, dataset) {
   span.insertAdjacentElement("afterbegin", link);
 
   // Add chat request link for GMs
-  if ( game.user.isGM && (dataset.type !== "damage") ) {
+  if ( game.user.isGM && (dataset.type !== "damage" && dataset.type !== "status") ) {
     const gmLink = document.createElement("a");
     gmLink.dataset.action = "request";
     gmLink.dataset.tooltip = "EDITOR.DND5E.Inline.RequestRoll";
@@ -823,6 +862,11 @@ async function rollAction(event) {
         case "tool":
           options.ability = ability;
           return await actor.rollToolCheck(tool, options);
+        case "status":
+          for (let token of canvas.tokens.controlled) {
+            token.toggleEffect(CONFIG.statusEffects.find(e => e.name === target.dataset.toggleStatus));
+          }
+          break;
         default:
           return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
       }
