@@ -1,0 +1,4347 @@
+{
+  "name": "Beiro (Half-Elf Bard)",
+  "type": "character",
+  "img": "systems/dnd5e/tokens/heroes/BardLute.webp",
+  "system": {
+    "abilities": {
+      "str": {
+        "value": 8,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "dex": {
+        "value": 16,
+        "proficient": 1,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "con": {
+        "value": 14,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "int": {
+        "value": 10,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "wis": {
+        "value": 12,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "cha": {
+        "value": 18,
+        "proficient": 1,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": null,
+        "calc": "default",
+        "formula": ""
+      },
+      "hp": {
+        "value": 10,
+        "max": null,
+        "temp": null,
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
+      },
+      "init": {
+        "ability": "",
+        "bonus": "0"
+      },
+      "movement": {
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
+        "hover": false
+      },
+      "attunement": {
+        "max": 3
+      },
+      "senses": {
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
+        "special": ""
+      },
+      "spellcasting": "cha",
+      "death": {
+        "success": 0,
+        "failure": 0
+      },
+      "exhaustion": 0,
+      "inspiration": false
+    },
+    "details": {
+      "biography": {
+        "value": "<p>Beiro was a famed entertainer at his local tavern, when he one day ran out of stories to tell. To solve this, he set out to make his own stories, so as to one day tell them again at his tavern.</p>",
+        "public": ""
+      },
+      "alignment": "Chaotic Neutral",
+      "race": "Mmfz1ndrE8zwXsWT",
+      "background": "VgrH5nkz2SER0YhR",
+      "originalClass": "jRCTm0gBRZHs1hc7",
+      "xp": {
+        "value": 0
+      },
+      "appearance": "",
+      "trait": "",
+      "ideal": "",
+      "bond": "",
+      "flaw": ""
+    },
+    "traits": {
+      "size": "med",
+      "di": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": "Magic can't put you to sleep; Advantage on saving throws against being charmed"
+      },
+      "languages": {
+        "value": [
+          "common",
+          "elvish",
+          "gnomish"
+        ],
+        "custom": ""
+      },
+      "weaponProf": {
+        "value": [
+          "sim",
+          "handcrossbow",
+          "longsword",
+          "rapier",
+          "shortsword"
+        ],
+        "custom": ""
+      },
+      "armorProf": {
+        "value": [
+          "lgt"
+        ],
+        "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 15,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 1,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "his": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ins": {
+        "value": 1,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prc": {
+        "value": 1,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prf": {
+        "value": 1,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "per": {
+        "value": 1,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "rel": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "slt": {
+        "value": 1,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      }
+    },
+    "tools": {
+      "bagpipes": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      },
+      "flute": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      },
+      "lute": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 2,
+        "override": null
+      },
+      "spell2": {
+        "value": 0,
+        "override": null
+      },
+      "spell3": {
+        "value": 0,
+        "override": null
+      },
+      "spell4": {
+        "value": 0,
+        "override": null
+      },
+      "spell5": {
+        "value": 0,
+        "override": null
+      },
+      "spell6": {
+        "value": 0,
+        "override": null
+      },
+      "spell7": {
+        "value": 0,
+        "override": null
+      },
+      "spell8": {
+        "value": 0,
+        "override": null
+      },
+      "spell9": {
+        "value": 0,
+        "override": null
+      },
+      "pact": {
+        "value": 0,
+        "override": null
+      },
+      "spell0": {
+        "value": 0,
+        "override": null
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "primary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      },
+      "secondary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      },
+      "tertiary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "flags": {},
+    "name": "Beiro",
+    "displayName": 30,
+    "width": 1,
+    "height": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "actorLink": true,
+    "disposition": 1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": "attributes.ac.value"
+    },
+    "randomImg": false,
+    "alpha": 1,
+    "light": {
+      "alpha": 1,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "type": null,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": null,
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": true,
+      "range": 60,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "_id": "iWdMYgNBkGiajzc4",
+      "name": "Musical Instrument: Lute",
+      "type": "tool",
+      "system": {
+        "description": {
+          "value": "<p>A lute to evoke awe, wonder, or fear in your audience.</p><p>If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency. </p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 2,
+        "price": {
+          "value": 35,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "ability": "cha",
+        "chatFlavor": "",
+        "proficient": null,
+        "bonus": "",
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {},
+      "img": "icons/tools/instruments/lute-gold-brown.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.iWdMYgNBkGiajzc4"
+    },
+    {
+      "_id": "2Ejl2ovEUJg7swzL",
+      "name": "Musical Instrument: Flute",
+      "type": "tool",
+      "system": {
+        "description": {
+          "value": "<p>A lute to evoke awe, wonder, or fear in your audience.</p><p>If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency. </p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 1,
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "ability": "cha",
+        "chatFlavor": "",
+        "proficient": null,
+        "bonus": "",
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {},
+      "img": "icons/tools/instruments/flute-simple-wood.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.2Ejl2ovEUJg7swzL"
+    },
+    {
+      "_id": "TM6CyNpWtV8f0KAw",
+      "name": "Chest",
+      "type": "container",
+      "system": {
+        "description": {
+          "value": "<p>A chest holds 12 cubic feet or 300 pounds of gear.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 25,
+        "price": {
+          "value": 5,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "capacity": {
+          "type": "weight",
+          "value": 300
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.2YbuclKfhDL0bU4u"
+        }
+      },
+      "img": "icons/containers/chest/chest-reinforced-steel-walnut-brown.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.TM6CyNpWtV8f0KAw"
+    },
+    {
+      "_id": "Cj6MP46nIu5amhsZ",
+      "name": "Map or Scroll Case",
+      "type": "container",
+      "system": {
+        "description": {
+          "value": "<p>This cylindrical leather case can hold up to ten rolled-up sheets of paper or five rolled-up sheets of parchment.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 1,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "capacity": {
+          "type": "items",
+          "value": 10
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.5mIeX824uMklU3xq"
+        }
+      },
+      "img": "icons/containers/bags/case-leather-tan.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.Cj6MP46nIu5amhsZ"
+    },
+    {
+      "_id": "jNOSoW0La7Bk4vXk",
+      "name": "Backpack",
+      "type": "container",
+      "system": {
+        "description": {
+          "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 5,
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "capacity": {
+          "type": "weight",
+          "value": 30
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.H8YCd689ezlD26aT"
+        }
+      },
+      "img": "icons/containers/bags/pack-simple-leather.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.jNOSoW0La7Bk4vXk"
+    },
+    {
+      "_id": "NjSGXfLGqF3ZRlGk",
+      "name": "Pouch",
+      "type": "container",
+      "system": {
+        "description": {
+          "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 1,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "capacity": {
+          "type": "weight",
+          "value": 6
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.9bWTRRDym06PzSAf"
+        }
+      },
+      "img": "icons/containers/bags/coinpouch-simple-tan.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011641146,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.NjSGXfLGqF3ZRlGk"
+    },
+    {
+      "_id": "mTNjAEl1w1zwR5BT",
+      "name": "Disguise Kit",
+      "type": "tool",
+      "system": {
+        "description": {
+          "value": "<p>This pouch of cosmetics, hair dye, and small props lets you create disguises that change your physical appearance. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to create a visual disguise.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 3,
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "ability": "int",
+        "chatFlavor": "",
+        "proficient": null,
+        "bonus": "",
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "",
+          "baseItem": "disg"
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.IBhDAr7WkhWPYLVn"
+        }
+      },
+      "img": "icons/equipment/back/cloak-hooded-blue.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.mTNjAEl1w1zwR5BT"
+    },
+    {
+      "_id": "DPTz84c6sWcBSuQg",
+      "name": "Dagger",
+      "type": "weapon",
+      "system": {
+        "description": {
+          "value": "<p>A short metal blade mounted to a small hilt and crossguard. The dagger makes an effective side armament for hardened warriors or a hidden blade for assassins and thieves.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 1,
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 20,
+          "long": 60,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d4 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "fin",
+          "lgt",
+          "thr"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "simpleM",
+          "baseItem": "dagger"
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.0E565kQUBmndJ1a2"
+        }
+      },
+      "img": "icons/weapons/daggers/dagger-jeweled-purple.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.DPTz84c6sWcBSuQg"
+    },
+    {
+      "_id": "vRbfWjO0wkfi2EUS",
+      "name": "Rapier",
+      "type": "weapon",
+      "system": {
+        "description": {
+          "value": "<p>A thin tensile metal blade, light in weight but long in reach designed for quick darting attacks to target weak points in enemy defenses with lightning swiftness.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 2,
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d8 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "fin"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "martialM",
+          "baseItem": "rapier"
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.Tobce1hexTnDk4sV"
+        }
+      },
+      "img": "icons/weapons/swords/sword-guard-brown.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.vRbfWjO0wkfi2EUS"
+    },
+    {
+      "_id": "QeJyd2v24zGDwXbq",
+      "name": "Leather Armor",
+      "type": "equipment",
+      "system": {
+        "description": {
+          "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 10,
+        "price": {
+          "value": 10,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 11,
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": null,
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "light",
+          "baseItem": "leather"
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.WwdpHLXGX5r8uZu5"
+        }
+      },
+      "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.QeJyd2v24zGDwXbq"
+    },
+    {
+      "_id": "N3Ya1Qmpj8fmK8eU",
+      "name": "Costume Clothes",
+      "type": "equipment",
+      "system": {
+        "description": {
+          "value": "<p>A complete costume usually used by performers and artists in all manner of entertainment halls or for those that simply refuse to get out of character.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 4,
+        "price": {
+          "value": 5,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": null,
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": null,
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "clothing",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.E2h6sEe6FU2tnU96"
+        }
+      },
+      "img": "icons/equipment/back/cloak-hooded-pink.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.N3Ya1Qmpj8fmK8eU"
+    },
+    {
+      "_id": "OoQ9lTEooaOlQQaV",
+      "name": "Fine Clothes",
+      "type": "equipment",
+      "system": {
+        "description": {
+          "value": "<p>Set of clothes designed specifically to be expensive and show it.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 6,
+        "price": {
+          "value": 15,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": null,
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": null,
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "clothing",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.3OXueEpvDDCVfGFA"
+        }
+      },
+      "img": "icons/equipment/back/cloak-heavy-fur-blue.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.OoQ9lTEooaOlQQaV"
+    },
+    {
+      "_id": "wvxh8eOWg3RAJFoH",
+      "name": "Oil Flask",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>Oil usually comes in a clay flask that holds 1 pint. As an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon.</p><p>On a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil. You can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level.</p><p>If lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 2,
+        "weight": 1,
+        "price": {
+          "value": 1,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 5,
+          "long": 20,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": true,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "5",
+              "fire"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.psoZaItkOScMVaHL"
+        }
+      },
+      "img": "icons/consumables/potions/bottle-bulb-empty-glass.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011641154,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.wvxh8eOWg3RAJFoH"
+    },
+    {
+      "_id": "RXlNK5wqC22ZojbN",
+      "name": "Lamp",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "6",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 45,
+          "width": null,
+          "units": "ft",
+          "type": "radius",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": false,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.qMzHmlmha8qMDnEF"
+        }
+      },
+      "img": "icons/commodities/treasure/lantern-stone-grey.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011641163,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.RXlNK5wqC22ZojbN"
+    },
+    {
+      "_id": "6JFzrzKtJyhU12xi",
+      "name": "Musical Instrument: Drum",
+      "type": "tool",
+      "system": {
+        "description": {
+          "value": "<p>A drum, of any variety, to evoke awe, wonder, or fear in your audience.</p><p>If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency. </p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 3,
+        "price": {
+          "value": 6,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "ability": "cha",
+        "chatFlavor": "",
+        "proficient": null,
+        "bonus": "",
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {},
+      "img": "icons/tools/instruments/drum-brown-red.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.6JFzrzKtJyhU12xi"
+    },
+    {
+      "_id": "8pii9UucawKvfDsM",
+      "name": "Ink Pen",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A deviced used in combination with ink to write or draw on a sheet of paper.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 2,
+          "denomination": "cp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.uVm7MiB71QblfnoY"
+        }
+      },
+      "img": "icons/commodities/materials/feather-red-.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011647682,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.8pii9UucawKvfDsM"
+    },
+    {
+      "_id": "9vSJX7VXZLXkXLVs",
+      "name": "Ink Bottle",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A small bottle of ink for writing upon parchment.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0.06,
+        "price": {
+          "value": 10,
+          "denomination": "gp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.dP7jMKyHTTgVb3ii"
+        }
+      },
+      "img": "icons/consumables/potions/bottle-bulb-empty-glass.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.9vSJX7VXZLXkXLVs"
+    },
+    {
+      "_id": "VWdmspSsWBrQ85hx",
+      "name": "Paper",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A single sheet of paper.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 5,
+        "weight": 0,
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.fNMkFCOvMiW2Rh3t"
+        }
+      },
+      "img": "icons/sundries/documents/document-bound-white.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011641180,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.VWdmspSsWBrQ85hx"
+    },
+    {
+      "_id": "MgZvqEEt5jUtHG5d",
+      "name": "Perfume",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A vial of aromatic perfume.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 5,
+          "denomination": "gp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.uuh4UH3Jx5CsFjdA"
+        }
+      },
+      "img": "icons/consumables/potions/bottle-bulb-corked-purple.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.MgZvqEEt5jUtHG5d"
+    },
+    {
+      "_id": "833SKFj28K9Jzhzf",
+      "name": "Soap",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>Used to clean and wash.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 2,
+          "denomination": "cp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.REBWkTKe6lJaIkpn"
+        }
+      },
+      "img": "icons/sundries/survival/soap.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011647692,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.833SKFj28K9Jzhzf"
+    },
+    {
+      "_id": "80Gaz3MRLsMImA2r",
+      "name": "Sealing Wax",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A wax material of a seal which, after melting, hardens quickly forming a bond that is difficult to separate without noticeable tampering.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.3uEyuCfnAzGkwAn5"
+        }
+      },
+      "img": "icons/sundries/lights/candle-unlit-red.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011641233,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.80Gaz3MRLsMImA2r"
+    },
+    {
+      "_id": "pEDdh0i2HBhReeuU",
+      "name": "Love Letter",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A love letter sent by an admirer.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {},
+      "img": "icons/sundries/scrolls/scroll-plain-red.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.pEDdh0i2HBhReeuU"
+    },
+    {
+      "_id": "IUsB73tFTMjgMbFv",
+      "name": "Rations",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 10,
+        "weight": 2,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": true,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.f4w4GxBi0nYXmhX4"
+        }
+      },
+      "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011641244,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.IUsB73tFTMjgMbFv"
+    },
+    {
+      "_id": "Bnn9Nzajixvow9xi",
+      "name": "Light",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "object",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "dex",
+          "dc": 13,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "evo",
+        "materials": {
+          "value": "A firefly or phosphorescent moss.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "material"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      },
+      "img": "icons/magic/light/explosion-star-small-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486304,
+        "modifiedTime": 1661603486304,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.Bnn9Nzajixvow9xi"
+    },
+    {
+      "_id": "Utk1OQRwYkMkFRD3",
+      "name": "Mage Hand",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "space",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "con",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
+        }
+      },
+      "img": "icons/magic/water/water-hand.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486305,
+        "modifiedTime": 1661603486305,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.Utk1OQRwYkMkFRD3"
+    },
+    {
+      "_id": "eS7XnnApoxRxYXPs",
+      "name": "Charm Person",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>\n        <p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 13,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.eS7XnnApoxRxYXPs"
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486305,
+        "modifiedTime": 1661603486305,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.eS7XnnApoxRxYXPs"
+    },
+    {
+      "_id": "A3q2gTNqG6fvNGrv",
+      "name": "Disguise Self",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends or until you use your action to dismiss it. You can seem 1 foot shorter or taller and can appear thin, fat, or in between. You can't change your body type, so you must adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing or would feel your head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair.</p><p>To discern that you are disguised, a creature can use its action to inspect your appearance and must succeed on an Intelligence (Investigation) check against your spell save DC.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "ill",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv"
+        }
+      },
+      "img": "icons/magic/control/debuff-energy-hold-teal-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486305,
+        "modifiedTime": 1661603486305,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.A3q2gTNqG6fvNGrv"
+    },
+    {
+      "_id": "ge3Saet9zPTDyaoL",
+      "name": "Heroism",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A willing creature you touch is imbued with bravery. Until the spell ends, the creature is immune to being Frightened and gains Temporary Hit Points equal to your Spellcasting ability modifier at the start of each of its turns. When the spell ends, the target loses any remaining temporary hit points from this spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "@mod",
+              "temphp"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ge3Saet9zPTDyaoL"
+        }
+      },
+      "img": "icons/magic/life/heart-cross-strong-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486306,
+        "modifiedTime": 1661603486306,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.ge3Saet9zPTDyaoL"
+    },
+    {
+      "_id": "BQk5Row4NymMnUQl",
+      "name": "Hideous Laughter",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a Wisdom saving throw or fall prone, becoming Incapacitated and unable to stand up for the Duration. A creature with an Intelligence score of 4 or less isn't affected.</p><p>At the end of each of its turns, and each time it takes damage, the target can make another Wisdom saving throw. The target has advantage on the saving throw if it's triggered by damage. On a success, the spell ends.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 13,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "materials": {
+          "value": "Tiny tarts and a feather that is waved in the air",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.BQk5Row4NymMnUQl"
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486306,
+        "modifiedTime": 1661603486306,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.BQk5Row4NymMnUQl"
+    },
+    {
+      "name": "Musician",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Acrobatics, Performance</li><li><strong>Tool Proficiencies:</strong> Disguise kit, one type of musical instrument</li><li><strong>Equipment:</strong> A musical instrument, a note from an admirer, and a pouch containing 15 gp</li></ul>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "advancement": []
+      },
+      "img": "icons/tools/instruments/harp-gold-glowing.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040818193,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "VgrH5nkz2SER0YhR",
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.VgrH5nkz2SER0YhR"
+    },
+    {
+      "_id": "jRCTm0gBRZHs1hc7",
+      "name": "Bard",
+      "type": "class",
+      "img": "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
+      "system": {
+        "description": {
+          "value": "<p>As a bard, you gain the following class features.</p><h3>Hit Points</h3><p><strong>Hit Dice:</strong> 1d8 per bard level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per bard level after 1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> Light armor<br /><strong>Weapons:</strong> Simple weapons, hand crossbows, longswords, rapiers, shortswords<br /><strong>Tools:</strong> Three musical instruments of your choice<br /><strong>Saving Throws:</strong> Dexterity, Charisma<br /><strong>Skills:</strong> Choose any three</p><h3>Equipment</h3><p>You start with the following equipment, in addition to the equipment granted by your background:</p><ul><li>(a) a rapier, (b) a longsword, or (c) any simple weapon</li><li>(a) a diplomat's pack or (b) an entertainer's pack</li><li>(a) a lute or (b) any other musical instrument</li><li>Leather armor and a dagger</li></ul><h1>Bard Advancement</h1><table border=\"0\"><thead><tr><td>Level</td><td>Proficiency Bonus</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.u4NLajXETJhJU31v]{Spellcasting}, @UUID[Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA]{Bardic Inspiration (d6)}</td></tr><tr><td>2nd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.ezWijmCnlnQ9ZRX2]{Jack of All Trades}, @UUID[Compendium.dnd5e.classfeatures.Item.he8RpPXwSl2lVSIk]{Song of Rest (d6)}</td></tr><tr><td>3rd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.ILhzFHiRrqgQ9dFJ]{Bard College} @UUID[Compendium.dnd5e.classfeatures.Item.aQLg7BWdRnm4Hr9S]{Expertise}</td></tr><tr><td>4th</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>5th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA]{Bardic Inspiration (d8)}, @UUID[Compendium.dnd5e.classfeatures.Item.3VDZGs5Ug3hIE322]{Font of Inspiration}</td></tr><tr><td>6th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.SEJmsjkEhdAZ90ki]{Countercharm}, Bard College feature</td></tr><tr><td>7th</td><td>+3</td><td>4th Level Spell Slot</td></tr><tr><td>8th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>9th</td><td>+4</td><td>5th Level Spell Slot @UUID[Compendium.dnd5e.classfeatures.Item.he8RpPXwSl2lVSIk]{Song of Rest (d8)}</td></tr><tr><td>10th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA]{Bardic Inspiration (d10)}, @UUID[Compendium.dnd5e.classfeatures.Item.aQLg7BWdRnm4Hr9S]{Expertise}, @UUID[Compendium.dnd5e.classfeatures.Item.aonJ2YjkqkYB9WYB]{Magical Secrets}</td></tr><tr><td>11th</td><td>+4</td><td>6th Level Spell Slot</td></tr><tr><td>12th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>7th Level Spell Slot, @UUID[Compendium.dnd5e.classfeatures.Item.he8RpPXwSl2lVSIk]{Song of Rest (d10)}</td></tr><tr><td>14th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.aonJ2YjkqkYB9WYB]{Magical Secrets}, Bard College feature</td></tr><tr><td>15th</td><td>+5</td><td>8th Level Spell Slot, @UUID[Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA]{Bardic Inspiration (d12)}</td></tr><tr><td>16th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>9th Level Spell Slot, @UUID[Compendium.dnd5e.classfeatures.Item.he8RpPXwSl2lVSIk]{Song of Rest (d12)}</td></tr><tr><td>18th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.aonJ2YjkqkYB9WYB]{Magical Secrets}</td></tr><tr><td>19th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.GBYN5rH4nh1ocRlY]{Superior Inspiration}</td></tr></tbody></table><h1>Bard Colleges</h1><p>@UUID[Compendium.dnd5e.subclasses.Item.MNvsEc4D2ccX7dQT]{College of Lore}</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "identifier": "bard",
+        "levels": 1,
+        "hitDice": "d8",
+        "hitDiceUsed": 0,
+        "advancement": [
+          {
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": "Hit Points",
+            "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+            "_id": "EKTLkOHo2TCW7XIf"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.u4NLajXETJhJU31v",
+                "Compendium.dnd5e.classfeatures.hpLNiGq7y67d2EHA"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "68Ddyvt01lMQMzxs": "Compendium.dnd5e.classfeatures.u4NLajXETJhJU31v",
+                "YbNSECwaQYGzHnfL": "Compendium.dnd5e.classfeatures.hpLNiGq7y67d2EHA"
+              }
+            },
+            "level": 1,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "DAnM5n0F9nUkY15I"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.ezWijmCnlnQ9ZRX2",
+                "Compendium.dnd5e.classfeatures.he8RpPXwSl2lVSIk"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 2,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "sMIJRB5FeIM1OsMt"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.ILhzFHiRrqgQ9dFJ",
+                "Compendium.dnd5e.classfeatures.aQLg7BWdRnm4Hr9S"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 3,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "UxQ9cTOrazRMUpV0"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.3VDZGs5Ug3hIE322"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 5,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "DNqlO4gPAhwh1FEN"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.SEJmsjkEhdAZ90ki"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 6,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "WfrWYWix0JbCl6OP"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.aonJ2YjkqkYB9WYB"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 10,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "JKqujV3gQ79K1PM8"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.GBYN5rH4nh1ocRlY"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 20,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "Z1lpPlUMZns8euiD"
+          },
+          {
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "Choose two spells from any classes, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip.",
+              "choices": {
+                "10": 2,
+                "14": 2,
+                "18": 2
+              },
+              "allowDrops": true,
+              "type": "spell",
+              "pool": [],
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              },
+              "restriction": {
+                "type": "",
+                "subtype": "",
+                "level": "available"
+              }
+            },
+            "value": {},
+            "title": "Magical Secrets",
+            "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+            "_id": "MhSKzQVlKtFtH3xB"
+          },
+          {
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "inspiration",
+              "type": "dice",
+              "distance": {
+                "units": ""
+              },
+              "scale": {
+                "1": {
+                  "number": null,
+                  "faces": 6
+                },
+                "5": {
+                  "number": null,
+                  "faces": 8
+                },
+                "10": {
+                  "number": null,
+                  "faces": 10
+                },
+                "15": {
+                  "number": null,
+                  "faces": 12
+                }
+              }
+            },
+            "value": {},
+            "title": "Bardic Inspiration Die",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "kyjFphgByFS4mPlw"
+          },
+          {
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "song-of-rest",
+              "type": "dice",
+              "distance": {
+                "units": ""
+              },
+              "scale": {
+                "2": {
+                  "number": null,
+                  "faces": 6
+                },
+                "9": {
+                  "number": null,
+                  "faces": 8
+                },
+                "13": {
+                  "number": null,
+                  "faces": 10
+                },
+                "17": {
+                  "number": null,
+                  "faces": 12
+                }
+              }
+            },
+            "value": {},
+            "title": "Song of Rest Die",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "gdwtEVYkO44OCABo"
+          },
+          {
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "cantrips-known",
+              "type": "number",
+              "distance": {
+                "units": ""
+              },
+              "scale": {
+                "1": {
+                  "value": 2
+                },
+                "4": {
+                  "value": 3
+                },
+                "10": {
+                  "value": 4
+                }
+              }
+            },
+            "value": {},
+            "title": "Cantrips Known",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "Nz0ud8hOAINqJKZ1"
+          },
+          {
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "spells-known",
+              "type": "number",
+              "distance": {
+                "units": ""
+              },
+              "scale": {
+                "1": {
+                  "value": 4
+                },
+                "2": {
+                  "value": 5
+                },
+                "3": {
+                  "value": 6
+                },
+                "4": {
+                  "value": 7
+                },
+                "5": {
+                  "value": 8
+                },
+                "6": {
+                  "value": 9
+                },
+                "7": {
+                  "value": 10
+                },
+                "8": {
+                  "value": 11
+                },
+                "9": {
+                  "value": 12
+                },
+                "10": {
+                  "value": 14
+                },
+                "11": {
+                  "value": 15
+                },
+                "13": {
+                  "value": 16
+                },
+                "14": {
+                  "value": 18
+                },
+                "15": {
+                  "value": 19
+                },
+                "17": {
+                  "value": 20
+                },
+                "18": {
+                  "value": 22
+                }
+              }
+            },
+            "value": {},
+            "title": "Spells Known",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "aJhQOoccPAza9Cuq"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 4,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "Jy2URg8R3ETmmoFv"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 8,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "j8sWjSvQ4Gpq0nX0"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 12,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "VLxmhsFQAlTL0B8S"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 16,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "z2Caf1jETQT5k0WL"
+          },
+          {
+            "_id": "puDaUsYrlks0z5gm",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 19,
+            "title": ""
+          },
+          {
+            "_id": "svCkv1ECxsmu2Q7U",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "armor:lgt"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "armor:lgt"
+              ]
+            }
+          },
+          {
+            "_id": "hZPJWA6MdmFIZuQD",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim",
+                "weapon:mar:handcrossbow",
+                "weapon:mar:longsword",
+                "weapon:mar:rapier",
+                "weapon:mar:shortsword"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "weapon:sim",
+                "weapon:mar:handcrossbow",
+                "weapon:mar:longsword",
+                "weapon:mar:rapier",
+                "weapon:mar:shortsword"
+              ]
+            }
+          },
+          {
+            "_id": "tRCVvsqiLStPNyFl",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 3,
+                  "pool": [
+                    "tool:music:*"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "tool:music:bagpipes",
+                "tool:music:flute",
+                "tool:music:lute"
+              ]
+            }
+          },
+          {
+            "_id": "wVBCjoHg0ftdHj3m",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "saves:dex",
+                "saves:cha"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "saves:dex",
+                "saves:cha"
+              ]
+            }
+          },
+          {
+            "_id": "eNU6FoX5sNVbDx13",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 3,
+                  "pool": [
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "skills:acr",
+                "skills:his",
+                "skills:slt"
+              ]
+            }
+          },
+          {
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "tool:music:*"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "_id": "8oBIVC96av3lm5uk",
+            "classRestriction": "secondary",
+            "value": {}
+          },
+          {
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "_id": "ELIXk3XCH4EmyiqN",
+            "classRestriction": "secondary",
+            "value": {}
+          },
+          {
+            "_id": "cwu9uhmtcKhqli8W",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "expertise",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 3,
+            "title": "Expertise",
+            "value": {}
+          },
+          {
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "expertise",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 10,
+            "title": "Expertise",
+            "_id": "O2cVH7Y5kNfoUyLg",
+            "value": {}
+          }
+        ],
+        "spellcasting": {
+          "progression": "full",
+          "ability": "cha"
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classes.Item.ILvRZGEx3aXqSVUt"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234279,
+        "modifiedTime": 1699992833464,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.jRCTm0gBRZHs1hc7"
+    },
+    {
+      "_id": "68Ddyvt01lMQMzxs",
+      "name": "Spellcasting (Bard)",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Your spells are part of your vast repertoire, magic that you can tune to different situations.</p>\n<h5>Cantrips</h5>\n<p>You know two cantrips of your choice from the bard spell list. You learn additional bard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Bard table.</p>\n<h5>Spell Slots</h5>\n<p>The Bard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p>\n<p>For example, if you know the 1st-level spell cure wounds and have a 1st-level and a 2nd-level spell slot available, you can cast cure wounds using either slot.</p>\n<h5>Spells Known of 1st Level and Higher</h5>\n<p>You know four 1st-level spells of your choice from the bard spell list.</p>\n<p>The Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.</p>\n<p>Additionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.</p>\n<h5>Spellcasting Ability</h5>\n<p>Charisma is your spellcasting ability for your bard spells. Your magic comes from the heart and soul you pour into the performance of your music or oration. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a bard spell you cast and when making an attack roll with one.</p>\n<p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Charisma modifier</p>\n<p><strong>Spell attack modifier</strong> = your proficiency bonus + your Charisma modifier</p>\n<h5>Ritual Casting</h5>\n<p>You can cast any bard spell you know as a ritual if that spell has the ritual tag.</p>\n<h5>Spellcasting Focus</h5>\n<p>You can use a musical instrument (see @UUID[Compendium.dnd5e.rules.JournalEntry.BYFd9hiJGo9L5aOM.JournalEntryPage.AjavRU4yPfI9hfaI]{Adventuring Gear})) as a spellcasting focus for your bard spells.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Bard 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.u4NLajXETJhJU31v",
+          "advancementOrigin": "jRCTm0gBRZHs1hc7.DAnM5n0F9nUkY15I"
+        }
+      },
+      "img": "icons/magic/symbols/runes-carved-stone-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234434,
+        "modifiedTime": 1699987344215,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.68Ddyvt01lMQMzxs"
+    },
+    {
+      "_id": "YbNSECwaQYGzHnfL",
+      "name": "Bardic Inspiration",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6. Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the GM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time.</p><p>You can use this feature a number of times equal to your Charisma modifier (a minimum of once).</p><p>You regain any expended uses when you finish a long rest.</p><p>Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.</p><section class=\"secret\" id=\"secret-eL25CzgN1MY7TpsR\"><p><strong>Foundry Note</strong></p><p>Recovery is set to long rest (for levels before @UUID[Compendium.dnd5e.classfeatures.Item.3VDZGs5Ug3hIE322]{Font of Inspiration} is gained). Please manually adjust as required.</p></section>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 60,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 1,
+          "max": "max(1, @abilities.cha.mod)",
+          "per": "lr",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "1@scale.bard.inspiration",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Bard 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.hpLNiGq7y67d2EHA",
+          "advancementOrigin": "jRCTm0gBRZHs1hc7.DAnM5n0F9nUkY15I"
+        }
+      },
+      "img": "icons/skills/melee/unarmed-punch-fist.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234409,
+        "modifiedTime": 1691519060057,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.YbNSECwaQYGzHnfL"
+    },
+    {
+      "_id": "Mmfz1ndrE8zwXsWT",
+      "name": "Half-Elf",
+      "type": "race",
+      "img": "icons/magic/nature/leaf-glow-triple-green.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your half‑elf character has some qualities in common with elves and some that are unique to half-­elves.</p><p><em><strong>Ability Score Increase.</strong></em> Your Charisma score increases by 2, and two other ability scores of your choice increase by 1.</p><p><em><strong>Age.</strong></em> Half-­elves mature at the same rate humans do and reach adulthood around the age of 20. They live much longer than humans, however, often exceeding 180 years.</p><p><em><strong>Alignment.</strong></em> Half-­elves share the chaotic bent of their elven heritage. They value both personal freedom and creative expression, demonstrating neither love of leaders nor desire for followers. They chafe at rules, resent others' demands, and sometimes prove unreliable, or at least unpredictable.</p><p><em><strong>Size.</strong></em> Half-­elves are about the same size as humans, ranging from 5 to 6 feet tall. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your elf blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Fey Ancestry.</strong></em> You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p><p><em><strong>Skill Versatility.</strong></em> You gain proficiency in two skills of your choice.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common, Elvish, and one extra language of your choice.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "identifier": "half-elf",
+        "advancement": [
+          {
+            "_id": "rXyxzoqxdxlspMi5",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "9t0oaZailMjUceoS": "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV"
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 2
+              },
+              "cap": 1
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "cha": 2
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "r3PSgtQO6Eim49LU",
+            "type": "Size",
+            "configuration": {
+              "hint": "Half-elves are about the same size as humans, ranging from 5 to 6 feet tall. Your size is Medium.",
+              "sizes": [
+                "med"
+              ]
+            },
+            "value": {
+              "size": "med"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "CormRQZ5momyvS2I",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 0,
+            "title": "Skill Versatility",
+            "value": {
+              "chosen": [
+                "skills:prc",
+                "skills:rel"
+              ]
+            }
+          },
+          {
+            "_id": "U3OO7jLU0nm0Z7zw",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:standard:elvish"
+              ],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "languages:*"
+                  ]
+                }
+              ]
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:elvish",
+                "languages:standard:gnomish"
+              ]
+            }
+          }
+        ],
+        "senses": {
+          "darkvision": 60,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "type": {
+          "subtype": "elf",
+          "value": "humanoid",
+          "custom": ""
+        },
+        "movement": {
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "walk": 30,
+          "units": "ft",
+          "hover": false
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.Hye5IZwPOSwV0qRR"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677181061205,
+        "modifiedTime": 1699992833465,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.Mmfz1ndrE8zwXsWT"
+    },
+    {
+      "_id": "9t0oaZailMjUceoS",
+      "name": "Fey Ancestry",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Elf, Half-Elf",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV",
+          "advancementOrigin": "Mmfz1ndrE8zwXsWT.rXyxzoqxdxlspMi5"
+        }
+      },
+      "img": "icons/creatures/mammals/elk-moose-marked-green.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234471,
+        "modifiedTime": 1699987342522,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xVmbM44RXyI2Eqq3.9t0oaZailMjUceoS"
+    }
+  ],
+  "effects": [
+    {
+      "_id": "dnd5eencumbered0",
+      "name": "Heavily Encumbered",
+      "icon": "systems/dnd5e/icons/svg/statuses/heavily-encumbered.svg",
+      "statuses": [
+        "heavilyEncumbered",
+        "encumbered"
+      ],
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": 0,
+        "startTurn": 0
+      },
+      "description": "",
+      "origin": null,
+      "transfer": false,
+      "flags": {},
+      "_key": "!actors.effects!xVmbM44RXyI2Eqq3.dnd5eencumbered0"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_id": "xVmbM44RXyI2Eqq3",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787232198,
+    "modifiedTime": 1704823965180,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!actors!xVmbM44RXyI2Eqq3"
+}

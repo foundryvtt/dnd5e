@@ -1,0 +1,108 @@
+{
+  "name": "Truth Serum",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(ingested)</em></p>\n<p>A creature subjected to this poison must succeed on a <strong>DC 11 Constitution saving throw</strong> or become @UUID[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx]{Poisoned} for <strong>1 hour</strong>. The @UUID[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx]{Poisoned} creature can't knowingly speak a lie, as if under the effect of a @UUID[Compendium.dnd5e.spells.Item.CylBa7jR8DSbo8Z3]{Zone of Truth} spell.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 0,
+    "price": {
+      "value": 150,
+      "denomination": "gp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "hour"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "charges",
+      "recovery": "",
+      "autoDestroy": true,
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "poison",
+      "subtype": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": []
+  },
+  "effects": [],
+  "sort": 0,
+  "flags": {},
+  "_id": "a86F565Pjdzym1jH",
+  "folder": "ZzUfnm1OuSL02nLG",
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233720,
+    "modifiedTime": 1704823155262,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!a86F565Pjdzym1jH"
+}

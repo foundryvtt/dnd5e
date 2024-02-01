@@ -1,0 +1,196 @@
+.dnd5e dnd5e-inventory {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+
+  .inventory-header, .inventory-filters {
+    margin: 0 8px;
+    flex: 0 0 20px;
+    justify-content: flex-end;
+
+    .currency {
+      flex: 0 0 100%;
+      align-items: first baseline;
+      justify-content: flex-end;
+      margin: 4px 0 8px;
+      padding: 0;
+      font-size: var(--font-size-12);
+
+      label {
+        flex: 0;
+        margin-inline-start: 8px;
+        text-align: end;
+        line-height: 20px;
+        color: var(--dnd5e-color-tan);
+      }
+      input[type="text"], input[type="number"] {
+        flex: 0 0 48px;
+        text-align: center;
+        margin-inline-start: 8px;
+        border-block-end: var(--dnd5e-border-groove);
+      }
+    }
+  }
+
+  .attunement {
+    color: var(--dnd5e-color-tan);
+    font-size: var(--font-size-12);
+
+    [name="system.attributes.attunement.max"] {
+      display: inline;
+      max-inline-size: 23px;
+      text-align: center;
+    }
+  }
+
+  .inventory-list {
+    flex-grow: 1;
+    padding: 0 5px;
+
+    .item {
+      &[hidden] { display: none; }
+
+      .item-name {
+        cursor: pointer;
+        flex: auto;
+        &.rollable:hover .item-image {
+          background-image: url("../../icons/svg/d20-grey.svg") !important;
+        }
+        &.rollable .item-image:hover {
+          background-image: url("../../icons/svg/d20-black.svg") !important;
+        }
+        i.attuned { color: var(--dnd5e-color-crimson); }
+        i.not-attuned { color: var(--dnd5e-color-tan); }
+        h4 { line-height: 30px; }
+      }
+
+      // Item uses
+      .item-uses input {
+        width: 24px;
+        text-align: center;
+      }
+
+      // Item Dropdown Properties
+      .item-properties {
+        margin-block-start: 3px;
+      }
+
+      // Charged
+      .item-recharge {
+        flex: 0 0 80px;
+        text-align: end;
+        font-size: var(--font-size-11);
+        white-space: nowrap;
+      }
+    }
+
+    // Inventory Header
+    .inventory-header {
+      .item-controls a.item-create {
+        flex: 0 0 100%;
+      }
+    }
+
+    // Item Detail Sections
+    .item-detail {
+      flex: 0 0 70px;
+      min-block-size: 1.5em;
+      font-size: var(--font-size-12);
+      text-align: center;
+      border-inline-end: 1px solid var(--dnd5e-color-faint);
+      word-break: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+      &:last-child { border-inline-end: none; }
+      &.item-action { flex: 0 0 100px; }
+      &.item-quantity { flex: 0 0 40px; }
+      &.attunement { flex: 0 0 24px; }
+    }
+
+    .item-weight {
+      flex: 0 0 60px;
+      border-inline-start: 1px solid var(--dnd5e-color-faint);
+      border-inline-end: 1px solid var(--dnd5e-color-faint);
+    }
+
+    // Item Control Buttons
+    .item-controls {
+      flex: 0 0 68px;
+
+      [data-action="crew"], [data-action="equip"], [data-action="prepare"] {
+        color: var(--dnd5e-color-beige);
+        &.active { color: var(--dnd5e-color-olive); }
+        &.fixed { color: var(--dnd5e-color-crimson); }
+        &.fixed:hover { text-shadow: none; }
+      }
+    }
+
+    // Item Dropdown Summary
+    .item-summary {
+      flex: 0 0 100%;
+      font-size: var(--font-size-12);
+      line-height: 16px;
+      padding: 0.25em 0.5em;
+      color: var(--dnd5e-color-dark);
+      border-top: 1px solid var(--dnd5e-color-faint);
+    }
+  }
+
+  .capacity, .encumbrance {
+    flex: 0 0 12px;
+    margin-inline-end: 18px;
+    position: relative;
+
+    background: var(--dnd5e-capacity-container-background-color);
+    border: 1px solid var(--dnd5e-capacity-container-border-color);
+    border-radius: 3px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      inline-size: var(--percentage);
+      max-inline-size: calc(100% - 4px);
+      margin: 1px;
+      border: 1px solid var(--dnd5e-capacity-border-color);
+      border-radius: 2px;
+      background: var(--dnd5e-capacity-background-color);
+    }
+
+    label {
+      position: absolute;
+      inset-block: 0;
+      inset-inline-end: 0;
+      padding-inline: 5px;
+
+      color: var(--dnd5e-capacity-text-color);
+      font-size: var(--font-size-13);
+      text-shadow: 0 0 5px #000;
+      line-height: 0.8em;
+      z-index: 1;
+    }
+
+    .breakpoint {
+      display: block;
+      position: absolute;
+      block-size: 0;
+      inline-size: 0;
+      border-inline: 4px solid transparent;
+      &.encumbrance-33 { inset-inline-start: 33% }
+      &.encumbrance-66 { inset-inline-start: 66% }
+      &.arrow-up {
+        inset-block-end: 0;
+        border-block-end: 4px solid #666;
+      }
+      &.arrow-down {
+        inset-block-start: 0;
+        border-top: 4px solid #666;
+      }
+      z-index: 1;
+    }
+    &.encumbered {
+      .arrow-up { border-block-end: 4px solid #000; }
+      .arrow-down { border-block-start: 4px solid #000; }
+    }
+  }
+}

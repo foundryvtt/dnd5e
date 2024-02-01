@@ -1,0 +1,183 @@
+/* ---------------------------------- */
+/*  Slide Toggles                     */
+/* ---------------------------------- */
+
+slide-toggle {
+  --slide-toggle-height: 20px;
+  --slide-toggle-width: 36px;
+  --slide-toggle-padding: 3px;
+  --slide-toggle-track-color-unchecked: black;
+  --slide-toggle-track-color-checked: #3ba55d;
+  --slide-toggle-thumb-color: white;
+  --slide-toggle-thumb-width: calc(var(--slide-toggle-height) - var(--slide-toggle-padding) * 2);
+  --slide-toggle-thumb-height: var(--slide-toggle-thumb-width);
+  --slide-toggle-transition-time: 250ms;
+
+  display: inline-block;
+  width: var(--slide-toggle-width);
+  height: var(--slide-toggle-height);
+  cursor: pointer;
+
+  .slide-toggle-track {
+    width: 100%;
+    height: 100%;
+    background: var(--slide-toggle-track-color-unchecked);
+    border-radius: calc((var(--slide-toggle-height) * 2) / 3);
+    box-shadow: 0 0 8px rgb(0 0 0 / 45%);
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: var(--slide-toggle-padding);
+  }
+
+  .slide-toggle-thumb {
+    width: var(--slide-toggle-thumb-width);
+    height: var(--slide-toggle-thumb-height);
+    border-radius: 100%;
+    background: var(--slide-toggle-thumb-color);
+    box-shadow: 0 0 8px rgb(0 0 0 / 45%);
+    text-align: center;
+    transition: margin-left var(--slide-toggle-transition-time) ease;
+  }
+
+  /* Checked state */
+  &[checked] .slide-toggle-track { background: var(--slide-toggle-track-color-checked); }
+  &[checked] .slide-toggle-thumb { margin-left: calc(100% - var(--slide-toggle-thumb-width)); }
+}
+
+/* ---------------------------------- */
+/*  Icon                              */
+/* ---------------------------------- */
+
+dnd5e-icon.fa-fw {
+  --icon-width: 1.25em;
+}
+
+/* ---------------------------------- */
+/*  Item List Controls                */
+/* ---------------------------------- */
+
+item-list-controls search {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background: var(--dnd5e-color-card);
+  box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+  border: 1px solid var(--dnd5e-color-gold);
+  padding-right: .25rem;
+  position: relative;
+
+  > input[type="text"] {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: .75rem .5rem .75rem 2.25rem;
+    font-size: var(--font-size-13);
+    height: unset;
+
+    &:hover, &:focus-visible { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+  }
+
+  &::before {
+    content: "\f002";
+    font-family: var(--font-awesome);
+    font-weight: bold;
+    color: var(--color-text-light-6);
+    position: absolute;
+    left: .75rem;
+  }
+
+  .filter-list {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    inset: 100% auto auto -50px;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px var(--dnd5e-shadow-45);
+    background: var(--dnd5e-color-card);
+    min-width: 145px;
+    z-index: 1;
+
+    > li {
+      padding: 0 .75rem;
+
+      &:hover { background: var(--dnd5e-color-parchment); }
+      &:first-child { border-radius: 3px 3px 0 0; }
+
+      &:last-child {
+        border-radius: 0 0 3px 3px;
+        .filter-item { border: none; }
+      }
+    }
+
+    .filter-item {
+      font-weight: normal;
+      padding: .5rem 1.75rem .5rem 0;
+      justify-content: start;
+      font-family: var(--dnd5e-font-roboto);
+      font-size: var(--font-size-13);
+      background: none;
+      border-radius: 0;
+      border: none;
+      margin: 0;
+      line-height: normal;
+      border-bottom: 1px solid var(--color-border-light-1);
+      box-shadow: none;
+      text-transform: unset;
+
+      &:hover, &:focus { box-shadow: none; }
+
+      &.active {
+        font-weight: bold;
+        position: relative;
+
+        &::after {
+          content: "\f00c";
+          font-family: var(--font-awesome);
+          position: absolute;
+          right: .5rem;
+          color: var(--dnd5e-color-gold);
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    position: relative;
+
+    &:focus-within {
+      .filter {
+        color: var(--dnd5e-color-gold);
+        border-right: 1px solid var(--color-border-light-1);
+      }
+
+      .filter-list { display: flex; }
+    }
+
+    &:has(.filter-item.active) .filter { color: var(--dnd5e-color-red); }
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    padding: .5rem 0;
+  }
+
+  .filter-control {
+    color: var(--color-text-light-6);
+    font-size: var(--font-size-16);
+    padding: 0 .375rem;
+
+    &.active { color: var(--color-text-dark-primary); }
+    &:hover:not(.disabled) { text-shadow: 0 0 8px var(--color-shadow-primary); }
+    &:hover:not(.disabled), &:focus { box-shadow: none; }
+  }
+
+  .filter-control.filter {
+    border-right: 1px solid var(--color-border-light-1);
+    padding-right: .625rem;
+    &:hover { border-right: 1px solid var(--color-border-light-1); }
+  }
+
+  .filter-control[data-action="sort"] { padding-left: .625rem; }
+}

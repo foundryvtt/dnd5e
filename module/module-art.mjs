@@ -33,30 +33,14 @@ export class ModuleArt {
    */
   async registerModuleArt() {
     this.map.clear();
-    for ( const module of game.modules ) {
-      const flags = module.flags?.[module.id];
-      const artPath = this.constructor.getModuleArtPath(module);
-      if ( !artPath ) continue;
+    // Load art modules in reverse order so that higher-priority modules overwrite lower-priority ones.
+    for ( const { id, mapping, credit } of this.constructor.getArtModules().reverse() ) {
       try {
-        const mapping = await foundry.utils.fetchJsonWithTimeout(artPath);
-        await this.#parseArtMapping(module.id, mapping, flags["dnd5e-art-credit"]);
-      } catch( e ) {
+        const json = await foundry.utils.fetchJsonWithTimeout(mapping);
+        await this.#parseArtMapping(id, json, credit);
+      } catch(e) {
         console.error(e);
       }
-    }
-
-    // Load system mapping.
-    try {
-      const mapping = await foundry.utils.fetchJsonWithTimeout("systems/dnd5e/json/fa-token-mapping.json");
-      const credit = `
-        <em>
-          Token artwork by
-          <a href="https://www.forgotten-adventures.net/" target="_blank" rel="noopener">Forgotten Adventures</a>.
-        </em>
-      `;
-      await this.#parseArtMapping(game.system.id, mapping, credit);
-    } catch( e ) {
-      console.error(e);
     }
   }
 
@@ -103,6 +87,54 @@ export class ModuleArt {
     if ( !artPath || !module.active ) return null;
     return artPath;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {object} ModuleArtDescriptor
+   * @property {string} id        The module ID.
+   * @property {string} label     The module title.
+   * @property {string} mapping   The path to the art mapping file.
+   * @property {string} [credit]  An optional credit line to attack to the Actor's biography.
+   * @property {number} priority  The module's user-configured priority.
+   */
+
+  /**
+   * Returns all currently configured art modules in priority order.
+   * @returns {ModuleArtDescriptor[]}
+   */
+  static getArtModules() {
+    const settings = game.settings.get("dnd5e", "moduleArtConfiguration");
+    const unsorted = [];
+    const configs = [{
+      id: game.system.id,
+      label: game.system.title,
+      mapping: "systems/dnd5e/json/fa-token-mapping.json",
+      priority: settings.dnd5e?.priority ?? CONST.SORT_INTEGER_DENSITY,
+      credit: `
+        <em>
+          Token artwork by
+          <a href="https://www.forgotten-adventures.net/" target="_blank" rel="noopener">Forgotten Adventures</a>.
+        </em>      
+      `
+    }];
+
+    for ( const module of game.modules ) {
+      const flags = module.flags?.[module.id];
+      const mapping = this.getModuleArtPath(module);
+      if ( !mapping ) continue;
+      const config = { id: module.id, label: module.title, credit: flags?.["dnd5e-art-credit"], mapping };
+      configs.push(config);
+      const priority = settings[module.id]?.priority;
+      if ( priority === undefined ) unsorted.push(config);
+      else config.priority = priority;
+    }
+
+    const maxPriority = Math.max(...configs.map(({ priority }) => priority ?? -Infinity));
+    unsorted.forEach((config, i) => config.priority = maxPriority + (i + 1) * CONST.SORT_INTEGER_DENSITY);
+    configs.sort((a, b) => a.priority - b.priority);
+    return configs;
+  }
 }
 
 /**
@@ -122,7 +154,7 @@ export class ModuleArtConfig extends FormApplication {
     return foundry.utils.mergeObject(super.defaultOptions, {
       title: game.i18n.localize("DND5E.ModuleArtConfigL"),
       id: "module-art-config",
-      template: "systems/dnd5e/templates/apps/module-art-config.html",
+      template: "systems/dnd5e/templates/apps/module-art-config.hbs",
       popOut: true,
       width: 600,
       height: "auto"
@@ -135,14 +167,53 @@ export class ModuleArtConfig extends FormApplication {
   getData(options={}) {
     const context = super.getData(options);
     context.config = [];
-    for ( const module of game.modules ) {
-      if ( !ModuleArt.getModuleArtPath(module) ) continue;
-      const settings = this.object[module.id] ?? {portraits: true, tokens: true};
-      context.config.push({label: module.title, id: module.id, ...settings});
+    for ( const config of ModuleArt.getArtModules() ) {
+      const settings = this.object[config.id] ?? { portraits: true, tokens: true };
+      context.config.push({ ...config, ...settings });
     }
-    context.config.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
-    context.config.unshift({label: game.system.title, id: game.system.id, ...this.object.dnd5e});
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.find("[data-action]").on("click", this._onAction.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle priority increase or decrease actions.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onAction(event) {
+    const action = event.currentTarget.dataset.action;
+    const item = event.currentTarget.closest("[data-id]");
+    const id = item.dataset.id;
+    const configs = [];
+    for ( const element of this.form.elements ) {
+      const [id, key] = element.name.split(".");
+      if ( key === "priority" ) configs.push({ id, priority: Number(element.value) });
+    }
+    const idx = configs.findIndex(config => config.id === id);
+    if ( idx < 0 ) return;
+    if ( (action === "increase") && (idx === 0) ) return;
+    if ( (action === "decrease") && (idx === configs.length - 1) ) return;
+    const sortBefore = action === "increase";
+    const config = configs[idx];
+    const target = configs[sortBefore ? idx - 1 : idx + 1];
+    configs.splice(idx, 1);
+    const updates = SortingHelpers.performIntegerSort(config, {
+      target, sortBefore,
+      siblings: configs,
+      sortKey: "priority"
+    });
+    updates.forEach(({ target, update }) => this.form.elements[`${target.id}.priority`].value = update.priority);
+    if ( action === "increase" ) item.previousElementSibling.insertAdjacentElement("beforebegin", item);
+    else item.nextElementSibling.insertAdjacentElement("afterend", item);
   }
 
   /* -------------------------------------------- */

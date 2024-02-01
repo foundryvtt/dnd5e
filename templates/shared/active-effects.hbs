@@ -1,0 +1,58 @@
+{{#dnd5e-concealSection concealDetails}}
+<{{elements.effects}}>
+  <ol class="items-list effects-list">
+    {{#each effects as |section sid|}}
+    {{#unless section.hidden}}
+    <li class="items-header flexrow" data-effect-type="{{section.type}}">
+        <h3 class="item-name effect-name flexrow">{{localize section.label}}</h3>
+        <div class="effect-source">{{localize "DND5E.Source"}}</div>
+        <div class="effect-source">{{localize "DND5E.Duration"}}</div>
+        <div class="item-controls effect-controls flexrow">
+            {{#if @root.editable}}
+            <a class="effect-control" data-action="create" data-tooltip="DND5E.EffectCreate">
+                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
+            </a>
+            {{/if}}
+        </div>
+    </li>
+
+    {{#if section.info}}
+    <ol class="info">
+        {{#each section.info}}
+            <li class="notification info">{{this}}</li>
+        {{/each}}
+    </ol>
+    {{/if}}
+
+    <ol class="item-list">
+        {{#each section.effects as |effect|}}
+        <li class="item effect flexrow" data-effect-id="{{effect.id}}"
+            {{~#if (and @root.actor (ne effect.target effect.parent))}} data-parent-id="{{effect.parent.id}}"{{/if}}>
+            <div class="item-name effect-name flexrow">
+                <img class="item-image" src="{{effect.icon}}"/>
+                <h4>{{effect.name}}</h4>
+            </div>
+            <div class="effect-source">{{effect.sourceName}}</div>
+            <div class="effect-duration">{{effect.duration.label}}</div>
+            <div class="item-controls effect-controls flexrow">
+                {{#if @root.editable}}
+                <a class="effect-control" data-action="toggle"
+                   data-tooltip="{{#if effect.disabled}}DND5E.EffectEnable{{else}}DND5E.EffectDisable{{/if}}">
+                    <i class="fas {{#if effect.disabled}}fa-check{{else}}fa-times{{/if}}"></i>
+                </a>
+                <a class="effect-control" data-action="edit" data-tooltip="DND5E.EffectEdit">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a class="effect-control" data-action="delete" data-tooltip="DND5E.EffectDelete">
+                    <i class="fas fa-trash"></i>
+                </a>
+                {{/if}}
+            </div>
+        </li>
+        {{/each}}
+    </ol>
+    {{/unless}}
+    {{/each}}
+  </ol>
+</{{elements.effects}}>
+{{/dnd5e-concealSection}}

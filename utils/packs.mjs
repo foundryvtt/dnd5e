@@ -1,4 +1,3 @@
-import Datastore from "nedb-promises";
 import fs from "fs";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import logger from "fancy-log";
@@ -19,15 +18,17 @@ const PACK_DEST = "packs";
  * Folder where source JSON files should be located relative to the 5e system folder.
  * @type {string}
  */
-const PACK_SRC = "packs/src";
+const PACK_SRC = "packs/_source";
 
 
+// eslint-disable-next-line
 const argv = yargs(hideBin(process.argv))
   .command(packageCommand())
   .help().alias("help", "h")
   .argv;
 
 
+// eslint-disable-next-line
 function packageCommand() {
   return {
     command: "package [action] [pack] [entry]",
@@ -46,47 +47,36 @@ function packageCommand() {
         describe: "Name of any entry within a pack upon which to work. Only applicable to extract & clean commands.",
         type: "string"
       });
-      yargs.option("nedb", {
-        describe: "Should the NeDB database be used instead of ClassicLevel?",
-        type: "boolean"
-      });
     },
     handler: async argv => {
-      const { action, pack, entry, ...options } = argv;
+      const { action, pack, entry } = argv;
       switch ( action ) {
         case "clean":
           return await cleanPacks(pack, entry);
         case "pack":
-          return await compilePacks(pack, options);
+          return await compilePacks(pack);
         case "unpack":
-          return await extractPacks(pack, entry, options);
+          return await extractPacks(pack, entry);
       }
     }
   };
 }
 
 
-/**
- * Cache of DBs so they aren't loaded repeatedly when determining IDs.
- * @type {Object<string,Datastore>}
- */
-const DB_CACHE = {};
-
-
 /* ----------------------------------------- */
-/*  Clean Packs
+/*  Clean Packs                              */
 /* ----------------------------------------- */
 
 /**
  * Removes unwanted flags, permissions, and other data from entries before extracting or compiling.
- * @param {object} data  Data for a single entry to clean.
- * @param {object} [options]
- * @param {boolean} [options.clearSourceId]  Should the core sourceId flag be deleted.
+ * @param {object} data                           Data for a single entry to clean.
+ * @param {object} [options={}]
+ * @param {boolean} [options.clearSourceId=true]  Should the core sourceId flag be deleted.
+ * @param {number} [options.ownership=0]          Value to reset default ownership to.
  */
-function cleanPackEntry(data, { clearSourceId=true }={}) {
-  if ( data.ownership ) data.ownership = { default: 0 };
+function cleanPackEntry(data, { clearSourceId=true, ownership=0 }={}) {
+  if ( data.ownership ) data.ownership = { default: ownership };
   if ( clearSourceId ) delete data.flags?.core?.sourceId;
-  if ( typeof data.folder === "string" ) data.folder = null;
   delete data.flags?.importSource;
   delete data.flags?.exportSource;
   if ( data._stats?.lastModifiedBy ) data._stats.lastModifiedBy = "dnd5ebuilder0000";
@@ -117,30 +107,12 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
 
   if ( data.effects ) data.effects.forEach(i => cleanPackEntry(i, { clearSourceId: false }));
   if ( data.items ) data.items.forEach(i => cleanPackEntry(i, { clearSourceId: false }));
+  if ( data.pages ) data.pages.forEach(i => cleanPackEntry(i, { ownership: -1 }));
   if ( data.system?.description?.value ) data.system.description.value = cleanString(data.system.description.value);
   if ( data.label ) data.label = cleanString(data.label);
   if ( data.name ) data.name = cleanString(data.name);
-  data.sort = 0;
 }
 
-
-/**
- * Attempts to find an existing matching ID for an item of this name, otherwise generates a new unique ID.
- * @param {object} data        Data for the entry that needs an ID.
- * @param {string} pack        Name of the pack to which this item belongs.
- * @returns {Promise<string>}  Resolves once the ID is determined.
- */
-async function determineId(data, pack) {
-  const db_path = path.join(PACK_DEST, `${pack}.db`);
-  if ( !DB_CACHE[db_path] ) DB_CACHE[db_path] = Datastore.create({ filename: db_path, autoload: true });
-  const db = DB_CACHE[db_path];
-
-  try {
-    return await db.findOne({ name: data.name });
-  } catch(err) {
-    return db.createNewId();
-  }
-}
 
 /**
  * Removes invisible whitespace characters and normalizes single- and double-quotes.
@@ -150,6 +122,7 @@ async function determineId(data, pack) {
 function cleanString(str) {
   return str.replace(/\u2060/gu, "").replace(/[‘’]/gu, "'").replace(/[“”]/gu, '"');
 }
+
 
 /**
  * Cleans and formats source JSON files, removing unnecessary permissions and flags and adding the proper spacing.
@@ -185,8 +158,11 @@ async function cleanPacks(packName, entryName) {
     for await ( const src of _walkDir(path.join(PACK_SRC, folder.name)) ) {
       const json = JSON.parse(await readFile(src, { encoding: "utf8" }));
       if ( entryName && (entryName !== json.name.toLowerCase()) ) continue;
+      if ( !json._id || !json._key ) {
+        console.log(`Failed to clean \x1b[31m${src}\x1b[0m, must have _id and _key.`);
+        continue;
+      }
       cleanPackEntry(json);
-      if ( !json._id ) json._id = await determineId(json, folder.name);
       fs.rmSync(src, { force: true });
       writeFile(src, `${JSON.stringify(json, null, 2)}\n`, { mode: 0o664 });
     }
@@ -195,19 +171,17 @@ async function cleanPacks(packName, entryName) {
 
 
 /* ----------------------------------------- */
-/*  Compile Packs
+/*  Compile Packs                            */
 /* ----------------------------------------- */
 
 /**
  * Compile the source JSON files into compendium packs.
  * @param {string} [packName]       Name of pack to compile. If none provided, all packs will be packed.
- * @param {object} [options={}]
- * @param {boolean} [options.nedb]  Compile into NeDB?
  *
- * - `npm run build:db` - Compile all JSON files into their NEDB files.
+ * - `npm run build:db` - Compile all JSON files into their LevelDB files.
  * - `npm run build:db -- classes` - Only compile the specified pack.
  */
-async function compilePacks(packName, options={}) {
+async function compilePacks(packName) {
   // Determine which source folders to process
   const folders = fs.readdirSync(PACK_SRC, { withFileTypes: true }).filter(file =>
     file.isDirectory() && ( !packName || (packName === file.name) )
@@ -215,29 +189,27 @@ async function compilePacks(packName, options={}) {
 
   for ( const folder of folders ) {
     const src = path.join(PACK_SRC, folder.name);
-    const dest = path.join(PACK_DEST, `${folder.name}${options.nedb ? ".db" : ""}`);
+    const dest = path.join(PACK_DEST, folder.name);
     logger.info(`Compiling pack ${folder.name}`);
-    await compilePack(src, dest, { nedb: options.nedb, recursive: true, log: true, transformEntry: cleanPackEntry });
+    await compilePack(src, dest, { recursive: true, log: true, transformEntry: cleanPackEntry });
   }
 }
 
 
 /* ----------------------------------------- */
-/*  Extract Packs
+/*  Extract Packs                            */
 /* ----------------------------------------- */
 
 /**
  * Extract the contents of compendium packs to JSON files.
  * @param {string} [packName]       Name of pack to extract. If none provided, all packs will be unpacked.
  * @param {string} [entryName]      Name of a specific entry to extract.
- * @param {object} [options={}]
- * @param {boolean} [options.nedb]  Extract from NeDB?
  *
- * - `npm build:json - Extract all compendium NEDB files into JSON files.
+ * - `npm build:json - Extract all compendium LevelDB files into JSON files.
  * - `npm build:json -- classes` - Only extract the contents of the specified compendium.
  * - `npm build:json -- classes Barbarian` - Only extract a single item from the specified compendium.
  */
-async function extractPacks(packName, entryName, options) {
+async function extractPacks(packName, entryName) {
   entryName = entryName?.toLowerCase();
 
   // Load system.json.
@@ -249,15 +221,43 @@ async function extractPacks(packName, entryName, options) {
   for ( const packInfo of packs ) {
     const dest = path.join(PACK_SRC, packInfo.name);
     logger.info(`Extracting pack ${packInfo.name}`);
+
+    const folders = {};
+    const containers = {};
     await extractPack(packInfo.path, dest, {
-      nedb: options.nedb, log: true, documentType: packInfo.type, transformEntry: entry => {
+      log: false, transformEntry: e => {
+        if ( e._key.startsWith("!folders") ) folders[e._id] = { name: slugify(e.name), folder: e.folder };
+        else if ( e.type === "container" ) containers[e._id] = {
+          name: slugify(e.name), container: e.system?.container, folder: e.folder
+        };
+        return false;
+      }
+    });
+    const buildPath = (collection, entry, parentKey) => {
+      let parent = collection[entry[parentKey]];
+      entry.path = entry.name;
+      while ( parent ) {
+        entry.path = path.join(parent.name, entry.path);
+        parent = collection[parent[parentKey]];
+      }
+    };
+    Object.values(folders).forEach(f => buildPath(folders, f, "folder"));
+    Object.values(containers).forEach(c => {
+      buildPath(containers, c, "container");
+      const folder = folders[c.folder];
+      if ( folder ) c.path = path.join(folder.path, c.path);
+    });
+
+    await extractPack(packInfo.path, dest, {
+      log: true, transformEntry: entry => {
         if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
         cleanPackEntry(entry);
       }, transformName: entry => {
-        const name = entry.name.toLowerCase();
-        const outputName = name.replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
-        const subfolder = _getSubfolderName(entry, packInfo.name);
-        return path.join(subfolder, `${outputName}.json`);
+        if ( entry._id in folders ) return path.join(folders[entry._id].path, "_folder.json");
+        if ( entry._id in containers ) return path.join(containers[entry._id].path, "_container.json");
+        const outputName = slugify(entry.name);
+        const parent = containers[entry.system?.container] ?? folders[entry.folder];
+        return path.join(parent?.path ?? "", `${outputName}.json`);
       }
     });
   }
@@ -265,30 +265,10 @@ async function extractPacks(packName, entryName, options) {
 
 
 /**
- * Determine a subfolder name based on which pack is being extracted.
- * @param {object} data  Data for the entry being extracted.
- * @param {string} pack  Name of the pack.
- * @returns {string}     Subfolder name the entry into which the entry should be created. An empty string if none.
- * @private
+ * Standardize name format.
+ * @param {string} name
+ * @returns {string}
  */
-function _getSubfolderName(data, pack) {
-  switch (pack) {
-    // Items should be grouped by type
-    case "items":
-      if ( (data.type === "consumable") && data.system.type.value ) return data.system.type.value;
-      return data.type;
-
-    // Monsters should be grouped by type
-    case "monsters":
-      if ( !data.system?.details?.type?.value ) return "";
-      return data.system.details.type.value;
-
-    // Spells should be grouped by level
-    case "spells":
-      if ( data.system?.level === undefined ) return "";
-      if ( data.system.level === 0 ) return "cantrip";
-      return `level-${data.system.level}`;
-
-    default: return "";
-  }
+function slugify(name) {
+  return name.toLowerCase().replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
 }

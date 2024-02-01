@@ -1,0 +1,129 @@
+{
+  "_id": "zCeqyQ8uIPNdYJSW",
+  "name": "Unarmored Movement",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a shield. This bonus increases when you reach certain monk levels, as shown in the Monk table.</p>\n<p>At 9th level, you gain the ability to move along vertical surfaces and across liquids on your turn without falling during the move.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Monk 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "crewed": false,
+    "properties": []
+  },
+  "flags": {},
+  "img": "icons/magic/nature/root-vine-entangle-foot-green.webp",
+  "effects": [
+    {
+      "_id": "Veg0vXI93A0qlxZn",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.attributes.movement.walk",
+          "value": "10",
+          "mode": 2,
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null,
+        "combat": null
+      },
+      "icon": "icons/magic/nature/root-vine-entangle-foot-green.webp",
+      "origin": "Item.zCeqyQ8uIPNdYJSW",
+      "tint": null,
+      "transfer": true,
+      "name": "Unarmored Movement",
+      "description": "",
+      "statuses": [],
+      "_key": "!items.effects!zCeqyQ8uIPNdYJSW.Veg0vXI93A0qlxZn"
+    }
+  ],
+  "folder": "TMmNG8ujFDBEWXRe",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234338,
+    "modifiedTime": 1704824719978,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!zCeqyQ8uIPNdYJSW"
+}

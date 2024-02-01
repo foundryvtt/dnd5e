@@ -71,8 +71,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     }, [[], []]);
 
     // Apply item filters
-    spells = this._filterItems(spells, this._filters.spellbook);
-    other = this._filterItems(other, this._filters.features);
+    spells = this._filterItems(spells, this._filters.spellbook.properties);
+    other = this._filterItems(other, this._filters.features.properties);
 
     // Organize Spellbook
     const spellbook = this._prepareSpellbook(context, spells);

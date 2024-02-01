@@ -1,0 +1,46 @@
+<form autocomplete="off">
+    <header>{{ localize "DND5E.CurrencyManager.Title" }}</header>
+    <nav data-group="primary">
+        <a data-tab="convert">{{localize "DND5E.CurrencyManager.Convert.Label"}}</a>
+        <a data-tab="transfer">{{localize "DND5E.CurrencyManager.Transfer.Label"}}</a>
+    </nav>
+
+    <div class="sheet-content">
+        <section class="tab" data-group="primary" data-tab="convert">
+            <p>{{localize "DND5E.CurrencyManager.Convert.Hint"}}</p>
+            <button type="submit" name="convert">
+                <i class="fa-solid fa-arrow-up-short-wide"></i>
+                {{localize "DND5E.CurrencyManager.Convert.Action"}}
+            </button>
+        </section>
+
+        <section class="tab" data-group="primary" data-tab="transfer">
+            <section class="currency">
+                <button type="button" name="setAll">{{localize "DND5E.CurrencyManager.Transfer.All"}}</button>
+                <button type="button" name="setHalf">{{localize "DND5E.CurrencyManager.Transfer.Half"}}</button>
+                {{#each currency}}
+                <label>
+                    {{#with (lookup (lookup @root.CONFIG.currencies @key) "label") as |label|}}
+                    <i class="currency {{@key}}" data-tooltip="{{label}}" aria-label="{{label}}"></i>
+                    {{/with}}
+                    {{numberInput null name=(concat "amount." @key) step=1}}
+                </label>
+                {{/each}}
+            </section>
+            <div class="destinations">
+                {{#each destinations}}
+                <label>
+                    <input type="checkbox" name="destination.{{doc.id}}">
+                    {{{icon}}} {{doc.name}}
+                </label>
+                {{else}}
+                <p class="no-destinations">{{localize "DND5E.Award.NoDestinations"}}</p>
+                {{/each}}
+            </div>
+            <button type="submit" name="transfer" disabled>
+                <i class="fa-solid fa-reply-all fa-flip-horizontal"></i>
+                {{localize "DND5E.CurrencyManager.Transfer.Action"}}
+            </button>
+        </section>
+    </div>
+</form>

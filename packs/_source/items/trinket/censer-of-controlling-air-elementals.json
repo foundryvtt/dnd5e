@@ -1,0 +1,108 @@
+{
+  "_id": "sXEkkTDXWQDUMzsC",
+  "name": "Censer of Controlling Air Elementals",
+  "type": "consumable",
+  "img": "icons/commodities/treasure/goblet-worn-gold.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>While incense is burning in this censer, you can use an action to speak the censer's command word and summon an @UUID[Compendium.dnd5e.monsters.Actor.banHjKDMCegbUwYE]{Air Elemental}, as if you had cast the @UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure Elemental} spell. The censer can't be used this way again until the next dawn.</p>\n<p>This 6-inch-wide, 1-foot-high vessel resembles a chalice with a decorated lid. It weighs 1 pound.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 1,
+    "price": {
+      "value": 8000,
+      "denomination": "gp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": "Command word."
+    },
+    "duration": {
+      "value": "1",
+      "units": "hour"
+    },
+    "cover": null,
+    "target": {
+      "value": 10,
+      "width": null,
+      "units": "ft",
+      "type": "square",
+      "prompt": true
+    },
+    "range": {
+      "value": 90,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "day",
+      "recovery": "",
+      "autoDestroy": false,
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": []
+  },
+  "effects": [],
+  "folder": "UnUwTG4YIgd0kaUJ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233897,
+    "modifiedTime": 1704823163805,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!sXEkkTDXWQDUMzsC"
+}

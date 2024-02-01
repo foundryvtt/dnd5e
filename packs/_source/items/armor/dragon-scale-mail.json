@@ -1,0 +1,125 @@
+{
+  "_id": "tIwoSAGJlcuyiwaQ",
+  "name": "Dragon Scale Mail",
+  "type": "equipment",
+  "img": "icons/equipment/chest/breastplate-banded-steel.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement)</em></p>\n<p>Dragon Scale Mail is made of the scales of one kind of dragon. Sometimes dragons collect their cast-off scales and gift them to humanoids. Other times, hunters carefully skin and preserve the hide of a dead dragon. In either case, dragon scale mail is highly valued.</p>\n<p>While wearing this armor, you gain a +1 bonus to AC, you have advantage on saving throws against the Frightful Presence and Breath Weapons of dragons, and you have resistance to one damage type that is determined by the kind of dragon that provided the scales (see the table).</p>\n<p>Additionally, you can focus your senses as an action to magically discern the distance and direction to the closest dragon within 30 miles of you that is of the same type as the armor. This special action can't be used again until the next dawn.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Dragon</strong></td>\n<td><strong>Resistance</strong></td>\n</tr>\n<tr>\n<td>Black</td>\n<td>Acid</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>Lightning</td>\n</tr>\n<tr>\n<td>Brass</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Bronze</td>\n<td>Lightning</td>\n</tr>\n<tr>\n<td>Copper</td>\n<td>Acid</td>\n</tr>\n<tr>\n<td>Gold</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>Poison</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Silver</td>\n<td>Cold</td>\n</tr>\n<tr>\n<td>White</td>\n<td>Cold</td>\n</tr>\n</tbody>\n</table>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 45,
+    "price": {
+      "value": 4000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "veryRare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "crewed": false,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "mi"
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "day",
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 15,
+      "dex": 2
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": null,
+    "proficient": null,
+    "type": {
+      "value": "medium",
+      "baseItem": "scalemail"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "properties": [
+      "stealthDisadvantage"
+    ]
+  },
+  "effects": [],
+  "folder": "JqTP017wj3uxDJ8g",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233910,
+    "modifiedTime": 1704823164361,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!tIwoSAGJlcuyiwaQ"
+}

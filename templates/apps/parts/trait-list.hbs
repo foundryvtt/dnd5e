@@ -1,14 +1,14 @@
 <ol class="trait-list">
-  {{#each choices as |choice key|}}
+    {{#each choices as |choice key|}}
     <li class="{{#if choice.category}}category{{/if}} {{#if choice.wildcard}}wildcard{{/if}}">
-      <label class="checkbox">
-        <input type="checkbox" name="{{#if ../prefix}}{{../prefix}}.{{/if}}{{key}}"
-               {{checked choice.chosen}} {{disabled choice.disabled}}>
-        {{choice.label}}
-      </label>
-      {{#if choice.children}}
+        <label class="checkbox">
+            <input type="checkbox" name="{{#if ../prefix}}{{../prefix}}.{{/if}}{{key}}"
+                   {{checked choice.chosen}} {{disabled choice.disabled}}>
+            {{choice.label}}
+        </label>
+        {{#if choice.children}}
         {{> "dnd5e.trait-list" choices=choice.children prefix=../prefix}}
-      {{/if}}
+        {{/if}}
     </li>
-  {{/each}}
+    {{/each}}
 </ol>

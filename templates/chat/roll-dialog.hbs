@@ -1,8 +1,10 @@
 <form>
+    {{#each formulas}}
     <div class="form-group">
-        <label>{{ localize "DND5E.Formula" }}</label>
-        <input type="text" name="formula" value="{{formula}}" disabled/>
+        <label>{{ localize "DND5E.Formula" }} {{#if type}}({{type}}){{/if}}</label>
+        <input type="text" name="formula" value="{{formula}}" disabled>
     </div>
+    {{/each}}
     {{#if chooseModifier}}
     <div class="form-group">
         <label>{{ localize "DND5E.AbilityModifier" }}</label>

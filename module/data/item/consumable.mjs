@@ -1,8 +1,9 @@
 import { filteredKeys } from "../../utils.mjs";
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
+import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
@@ -14,6 +15,7 @@ const { BooleanField, SetField, StringField } = foundry.data.fields;
  * Data definition for Consumable items.
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
+ * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
@@ -23,14 +25,14 @@ const { BooleanField, SetField, StringField } = foundry.data.fields;
  * @property {object} uses
  * @property {boolean} uses.autoDestroy  Should this item be destroyed when it runs out of uses.
  */
-export default class ConsumableData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
+export default class ConsumableData extends ItemDataModel.mixin(
+  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "potion", subtype: false, baseItem: false}, {label: "DND5E.ItemConsumableType"}),
+      type: new ItemTypeField({value: "potion", baseItem: false}, {label: "DND5E.ItemConsumableType"}),
       properties: new SetField(new StringField(), { label: "DND5E.ItemAmmoProperties" }),
       uses: new ActivatedEffectTemplate.ItemUsesField({
         autoDestroy: new BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
@@ -60,6 +62,29 @@ export default class ConsumableData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if ( !this.type.value ) return;
+    const config = CONFIG.DND5E.consumableTypes[this.type.value];
+    this.type.label = this.type.subtype ? config.subtypes[this.type.subtype] : config.label;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: [this.type.label, this.parent.labels.activation],
+      uses: this.hasLimitedUses ? this.getUsesData() : null,
+      quantity: this.quantity
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -69,7 +94,7 @@ export default class ConsumableData extends SystemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      CONFIG.DND5E.consumableTypes[this.type.value],
+      this.type.label,
       this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5E.Charges")}` : null,
       this.priceLabel
     ];
@@ -92,5 +117,18 @@ export default class ConsumableData extends SystemDataModel.mixin(
   get proficiencyMultiplier() {
     const isProficient = this.parent?.actor?.getFlag("dnd5e", "tavernBrawlerFeat");
     return isProficient ? 1 : 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get validProperties() {
+    const valid = super.validProperties;
+    if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5E.itemProperties).forEach(([k, v]) => {
+      if ( v.isPhysical ) valid.add(k);
+    });
+    else if ( this.type.value === "scroll" ) CONFIG.DND5E.validProperties.spell
+      .filter(p => p !== "material").forEach(p => valid.add(p));
+    return valid;
   }
 }

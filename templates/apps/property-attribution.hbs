@@ -1,15 +1,15 @@
 <table>
-  {{#if caption}}<caption>{{caption}}</caption>{{/if}}
-  {{#each sources as |source|}}
+    {{#if caption}}<caption>{{caption}}</caption>{{/if}}
+    {{#each sources as |source|}}
     <tr>
-      <td class="attribution-value mode-{{source.mode}}{{#if source.negative}} negative{{/if}}">
-        {{source.value}}
-      </td>
-      <td class="attribution-label">{{source.label}}</td>
+        <td class="attribution-value mode-{{source.mode}}{{#if source.negative}} negative{{/if}}">
+            {{source.value}}
+        </td>
+        <td class="attribution-label">{{source.label}}</td>
     </tr>
-  {{/each}}
-  <tr class="total">
-    <td class="attribution-value">{{total}}</td>
-    <td class="attribution-label">{{localize "DND5E.PropertyTotal"}}</td>
-  </tr>
+    {{/each}}
+    <tr class="total">
+        <td class="attribution-value">{{total}}</td>
+        <td class="attribution-label">{{localize "DND5E.PropertyTotal"}}</td>
+    </tr>
 </table>

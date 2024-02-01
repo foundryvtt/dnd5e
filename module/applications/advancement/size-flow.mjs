@@ -22,7 +22,7 @@ export default class SizeFlow extends AdvancementFlow {
       hint: this.advancement.configuration.hint || this.advancement.automaticHint,
       selectedSize: this.retainedData?.size ?? this.advancement.value.size,
       sizes: Array.from(sizes).reduce((obj, key) => {
-        obj[key] = CONFIG.DND5E.actorSizes[key];
+        obj[key] = CONFIG.DND5E.actorSizes[key].label;
         return obj;
       }, {})
     });

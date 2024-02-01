@@ -1,4 +1,4 @@
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -18,13 +18,13 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @property {number} recharge.value                Minimum number needed to roll on a d6 to recharge this feature.
  * @property {boolean} recharge.charged             Does this feature have a charge remaining?
  */
-export default class FeatData extends SystemDataModel.mixin(
+export default class FeatData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({}, { label: "DND5E.ItemFeatureType" }),
+      type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
       properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
         label: "DND5E.ItemFeatureProperties"
       }),
@@ -35,6 +35,27 @@ export default class FeatData extends SystemDataModel.mixin(
         }),
         charged: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Charged"})
       }, {label: "DND5E.FeatureActionRecharge"})
+    });
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    if ( !this.type.value ) return;
+    const config = CONFIG.DND5E.featureTypes[this.type.value];
+    this.type.label = this.type.subtype ? config.subtypes[this.type.subtype] : config.label;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: [this.parent.labels.activation, this.parent.labels.recovery],
+      uses: this.hasLimitedUses ? this.getUsesData() : null
     });
   }
 
@@ -83,6 +104,16 @@ export default class FeatData extends SystemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
+    return [this.requirements];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
     return [this.requirements];
   }
 
