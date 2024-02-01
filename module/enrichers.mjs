@@ -364,10 +364,6 @@ async function enrichDamage(config, label, options) {
  * ```
  */
 async function enrichStatus(config, label) {
-  if (config.values.length !== 1) {
-    console.warn(`Status ${config.values.join(" ")} not found while enriching ${config._input}.`);
-    return config.input;
-  }
 
   const givenStatus = config.values[0];
   const statusName = givenStatus.charAt(0).toUpperCase() + givenStatus.slice(1);
@@ -376,7 +372,7 @@ async function enrichStatus(config, label) {
   }
 
   const statusConfig = CONFIG.statusEffects.find(e => e.name === statusName);
-  if (!statusConfig) {
+  if (!statusConfig || config.values.length !== 1) {
     console.warn(`Status ${givenStatus} not found while enriching ${config._input}.`);
     return config.input;
   }
