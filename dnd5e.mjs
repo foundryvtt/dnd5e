@@ -179,6 +179,17 @@ Hooks.once("init", function() {
 
   // Exhaustion handling
   documents.ActiveEffect5e.registerHUDListeners();
+
+  // Dark Mode handling
+  if(!game.settings.get('dnd5e', 'darkMode')) return;
+  $('body.vtt').addClass('dark');
+});
+
+// Set Dark Mode for rendered sheet
+Hooks.on('renderActorSheet', function(sheet){
+  let htmlElement = sheet.element;
+  if(!game.settings.get('dnd5e', 'darkMode')) return;
+  htmlElement.addClass('dark');
 });
 
 /* -------------------------------------------- */

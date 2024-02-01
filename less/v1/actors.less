@@ -1,5 +1,15 @@
 .dnd5e.sheet.actor {
 
+  &.dark .window-content{
+    filter: invert(1);
+    img, .item-image{
+      filter: invert(1);
+    }
+    .item-image:hover{
+      filter: invert(0);
+    }
+  }
+
   --dnd5e-actor-name-height: 60px;
 
   /* ----------------------------------------- */

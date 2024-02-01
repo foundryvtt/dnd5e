@@ -28,6 +28,9 @@
   }
 
   /* Encumbrance */
+  .dark .encumbrance {
+    filter:invert(1);
+  }
   .encumbrance {
     display: flex;
     flex-direction: column;
@@ -72,6 +75,10 @@
   }
 
   /* Containers */
+  &.dark .containers .container img{
+    filter:invert(1);
+  }
+
   .containers {
     flex: 1;
     display: grid;
@@ -204,6 +211,10 @@
     flex-direction: column;
     gap: 1rem;
     container-type: inline-size;
+  }
+
+  &.dark .items-list .item-image {
+    filter: invert(1);
   }
 
   /* Sections / Categories */
@@ -481,6 +492,10 @@
 /* ---------------------------------- */
 /*  Currency                          */
 /* ---------------------------------- */
+
+.dnd5e2.dark section.currency {
+  filter: invert(1);
+}
 
 .dnd5e2 section.currency, .dnd5e2 .currency-style {
   display: flex;

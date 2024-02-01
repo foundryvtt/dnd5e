@@ -2,6 +2,21 @@
 /*  Chat Cards                        */
 /* ---------------------------------- */
 
+.dark :is(.chat-popout, #chat-log) {
+  .message{
+    filter:invert(1);
+    img {
+      filter:invert(1);
+    }
+  }
+  #chat-controls .select {
+    filter:invert(1);
+  }
+  #chat-form {
+    filter:invert(1);
+  }
+}
+
 :is(.chat-popout, #chat-log) .message {
   padding: .5rem;
   border-width: 1px;

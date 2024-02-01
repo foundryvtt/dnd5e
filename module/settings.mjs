@@ -303,6 +303,17 @@ export default function registerSystemSettings() {
     default: false,
     requiresReload: true
   });
+
+  // Metric Unit Weights
+  game.settings.register("dnd5e", "darkMode", {
+      name: "SETTINGS.DarkMode.Name",
+      hint: "SETTINGS.DarkMode.Hint",
+      scope: "client",
+      config: true,
+      type: Boolean,
+      default: false,
+      requiresReload: true
+  });
 }
 
 /**

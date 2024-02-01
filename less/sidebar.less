@@ -1,0 +1,51 @@
+/* ---------------------------------- */
+/*  Sidebar                           */
+/* ---------------------------------- */
+
+.sidebar-tab{
+    &.directory {
+        .action-buttons {
+            button{
+                height: 20px;
+                line-height: 16px;
+            }
+        }
+    }
+    .directory-list {
+        .directory-item{
+            height: 30px;
+
+            h3 {
+                line-height: 28px;
+            }
+            h4 {
+                line-height: 24px;
+            }
+        }
+        li {
+            header {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+            img {
+                max-height: 30px;
+                max-width: 30px;
+                object-position: center;
+            }
+        }
+    }
+}
+.dark .sidebar-tab{
+    &.directory {
+        .action-buttons {
+            button {
+                filter: invert(1);
+            }
+        }
+        .header-search {
+            input {
+                filter: invert(1);
+            }
+        }
+    }
+}
