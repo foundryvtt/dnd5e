@@ -31,6 +31,15 @@
 
     {{/if}}
 
+    <hr>
+
+    <div class="form-group">
+        <label>{{localize "DND5E.HitPointsTempMaxShort"}}</label>
+        <div class="form-fields">
+            <input type="number" name="hp.tempmax" value="{{source.tempmax}}">
+        </div>
+    </div>
+
     <button type="submit">
         <i class="far fa-save"></i> {{localize "Save"}}
     </button>

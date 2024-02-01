@@ -612,7 +612,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( this.system.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
 
-    hp.value = Math.min(hp.value, hp.max);
+    hp.value = Math.min(hp.value, hp.max + (hp.tempmax ?? 0));
     hp.pct = Math.clamped(hp.max ? (hp.value / hp.max) * 100 : 0, 0, 100);
   }
 
