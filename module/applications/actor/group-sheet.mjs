@@ -219,6 +219,11 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       sections[type] = {label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], hasActions: false, dataset: {type}};
     }
 
+    // Remove items in containers & sort remaining
+    context.items = context.items
+      .filter(i => !this.actor.items.has(i.system.container))
+      .sort((a, b) => (a.sort || 0) - (b.sort || 0));
+
     // Classify items
     for ( const item of context.items ) {
       const ctx = context.itemContext[item.id] ??= {};
@@ -230,6 +235,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       if ( (item.type in sections) && (item.type !== "loot") ) sections[item.type].items.push(item);
       else sections.loot.items.push(item);
     }
+
     return sections;
   }
 
@@ -330,17 +336,48 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(itemData) {
-    const items = itemData instanceof Array ? itemData : [itemData];
+  async _onDropItem(event, data) {
+    if ( !this.actor.isOwner ) return false;
+    const item = await Item.implementation.fromDropData(data);
 
-    const toCreate = [];
-    for ( const item of items ) {
-      const result = await this._onDropSingleItem(item);
-      if ( result ) toCreate.push(result);
+    // Handle moving out of container & item sorting
+    if ( this.actor.uuid === item.parent?.uuid ) {
+      if ( item.system.container !== null ) await item.update({"system.container": null});
+      return this._onSortItem(event, item.toObject());
     }
 
-    // Create the owned items as normal
-    return this.actor.createEmbeddedDocuments("Item", toCreate);
+    return this._onDropItemCreate(item);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropFolder(event, data) {
+    if ( !this.actor.isOwner ) return [];
+    const folder = await Folder.implementation.fromDropData(data);
+    if ( folder.type !== "Item" ) return [];
+    const droppedItemData = await Promise.all(folder.contents.map(async item => {
+      if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
+      return item;
+    }));
+    return this._onDropItemCreate(droppedItemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropItemCreate(itemData) {
+    let items = itemData instanceof Array ? itemData : [itemData];
+
+    // Filter out items already in containers to avoid creating duplicates
+    const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
+    items = items.filter(i => !containers.has(i.system.container));
+
+    // Create the owned items & contents as normal
+    const toCreate = await Item5e.createWithContents(items, {
+      transformFirst: item => this._onDropSingleItem(item.toObject())
+    });
+    return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
   }
 
   /* -------------------------------------------- */
