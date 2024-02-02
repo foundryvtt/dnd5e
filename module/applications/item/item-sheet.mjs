@@ -614,16 +614,15 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @inheritdoc */
   _canDragStart(selector) {
-    if ( selector === ".advancement-item" ) return true;
-    return super._canDragStart(selector);
+    if ( [".advancement-item", "[data-effect-id]"].includes(selector) ) return true;
+    return this.isEditable;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   _canDragDrop(selector) {
-    if ( selector === ".advancement" ) return this.item.testUserPermission(game.user, "OWNER");
-    return super._canDragDrop(selector);
+    return this.isEditable;
   }
 
   /* -------------------------------------------- */
