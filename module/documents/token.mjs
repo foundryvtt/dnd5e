@@ -125,9 +125,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     for ( const [src, dest] of Object.entries(CONFIG.Token.ringClass.subjectPaths) ) {
       if ( path.startsWith(src) ) return path.replace(src, dest);
     }
-    const parts = path.split(".");
-    const extension = parts.pop();
-    return `${parts.join(".")}-subject.${extension}`;
+    return path;
   }
 
   /* -------------------------------------------- */
