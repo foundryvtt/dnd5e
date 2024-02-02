@@ -161,7 +161,8 @@ export default class Token5e extends Token {
 
   /** @override */
   _refreshShader() {
-    if ( CONFIG.Token.ringClass.enabled ) this.mesh?.setShaderClass(CONFIG.Token.ringClass.tokenRingSamplerShader);
-    else super._refreshShader();
+    if ( CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
+      this.mesh?.setShaderClass(CONFIG.Token.ringClass.tokenRingSamplerShader);
+    } else super._refreshShader();
   }
 }
