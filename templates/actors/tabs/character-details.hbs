@@ -59,8 +59,10 @@
             {{#each values}}
             <li class="pill {{ ../color }}">
                 {{#each icons}}
-                <i class="{{ this }}" data-tooltip="{{ lookup @root.config.physicalWeaponProperties this }}"
-                   aria-label="{{ lookup @root.config.physicalWeaponProperties this }}"></i>
+                {{#with (lookup (lookup @root.config.itemProperties this) "label") as |label|}}
+                <i class="{{ ../this }}" data-tooltip="{{ localize 'DND5E.DamagePhysicalBypassesShort' type=label }}"
+                   aria-label="{{ localize 'DND5E.DamagePhysicalBypassesShort' type=label }}"></i>
+                {{/with}}
                 {{/each}}
                 <span class="label">{{ label }}</span>
             </li>
