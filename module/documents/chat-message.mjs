@@ -163,7 +163,7 @@ export default class ChatMessage5e extends ChatMessage {
     else if ( this.alias !== this.user?.name ) subtitle.innerText = this.user?.name ?? "";
     name.appendChild(subtitle);
     const sender = html.querySelector(".message-sender");
-    sender.replaceChildren(avatar, name);
+    if (sender) { sender.replaceChildren(avatar, name); }
     html.querySelector(".whisper-to")?.remove();
 
     // Context menu
