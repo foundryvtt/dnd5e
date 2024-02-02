@@ -463,20 +463,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   _prepareSpell() {
-    const tags = Object.fromEntries(Object.entries(CONFIG.DND5E.spellTags).map(([k, v]) => {
-      v.tag = true;
-      return [k, v];
-    }));
-    const attributes = {...CONFIG.DND5E.spellComponents, ...tags};
+    const attributes = this.system?.validProperties.reduce((obj, k) => {
+      obj[k] = CONFIG.DND5E.itemProperties[k];
+      return obj;
+    }, {});
     this.system.preparation.mode ||= "prepared";
     this.labels.level = CONFIG.DND5E.spellLevels[this.system.level];
     this.labels.school = CONFIG.DND5E.spellSchools[this.system.school]?.label;
     this.labels.components = this.system.properties.reduce((obj, c) => {
       const config = attributes[c];
       if ( !config ) return obj;
-      const { abbr, label, icon } = config;
-      obj.all.push({ abbr, label, icon, tag: config.tag });
-      if ( config.tag ) obj.tags.push(label);
+      const { abbreviation: abbr, label, icon } = config;
+      obj.all.push({ abbr, label, icon, tag: config.isTag });
+      if ( config.isTag ) obj.tags.push(label);
       else obj.vsm.push(abbr);
       return obj;
     }, {all: [], vsm: [], tags: []});

@@ -1182,8 +1182,20 @@ preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for item properties.
+ *
+ * @typedef {object} ItemPropertyConfiguration
+ * @property {string} label           Localized label.
+ * @property {string} [abbreviation]  Localized abbreviation.
+ * @property {string} [icon]          Icon that can be used in certain places to represent this property.
+ * @property {string} [reference]     Reference to a rule page describing this property.
+ * @property {boolean} [isPhysical]   Is this property one that can cause damage resistance bypasses?
+ * @property {boolean} [isTag]        Is this spell property a tag, rather than a component?
+ */
+
+/**
  * The various properties of all item types.
- * @enum {object}
+ * @enum {ItemPropertyConfiguration}
  */
 DND5E.itemProperties = {
   ada: {
@@ -1195,7 +1207,9 @@ DND5E.itemProperties = {
   },
   concentration: {
     label: "DND5E.Item.Property.Concentration",
-    abbr: "DND5E.ConcentrationAbbr",
+    abbreviation: "DND5E.ConcentrationAbbr",
+    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true
   },
   fin: {
@@ -1217,7 +1231,9 @@ DND5E.itemProperties = {
     label: "DND5E.Item.Property.Loading"
   },
   material: {
-    label: "DND5E.Item.Property.Material"
+    label: "DND5E.Item.Property.Material",
+    abbreviation: "DND5E.ComponentMaterialAbbr",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.AeH5eDS4YeM9RETC"
   },
   mgc: {
     label: "DND5E.Item.Property.Magical",
@@ -1234,7 +1250,9 @@ DND5E.itemProperties = {
   },
   ritual: {
     label: "DND5E.Item.Property.Ritual",
-    abbr: "DND5E.RitualAbbr",
+    abbreviation: "DND5E.RitualAbbr",
+    icon: "systems/dnd5e/icons/svg/items/spell.svg",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA",
     isTag: true
   },
   sil: {
@@ -1242,7 +1260,9 @@ DND5E.itemProperties = {
     isPhysical: true
   },
   somatic: {
-    label: "DND5E.Item.Property.Somatic"
+    label: "DND5E.Item.Property.Somatic",
+    abbreviation: "DND5E.ComponentSomaticAbbr",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.qwUNgUNilEmZkSC9"
   },
   spc: {
     label: "DND5E.Item.Property.Special"
@@ -1260,13 +1280,15 @@ DND5E.itemProperties = {
     label: "DND5E.Item.Property.Versatile"
   },
   vocal: {
-    label: "DND5E.Item.Property.Verbal"
+    label: "DND5E.Item.Property.Verbal",
+    abbreviation: "DND5E.ComponentVerbalAbbr",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6UXTNWMCQ0nSlwwx"
   },
   weightlessContents: {
     label: "DND5E.Item.Property.WeightlessContents"
   }
 };
-preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
+preLocalize("itemProperties", { keys: ["label", "abbreviation"], sort: true });
 
 /* -------------------------------------------- */
 
@@ -2933,7 +2955,7 @@ DND5E.ruleTypes = {
   },
   spellComponent: {
     label: "DND5E.SpellComponent",
-    references: "spellComponents"
+    references: "itemProperties"
   },
   spellSchool: {
     label: "DND5E.SpellSchool",
@@ -2941,7 +2963,7 @@ DND5E.ruleTypes = {
   },
   spellTag: {
     label: "DND5E.SpellTag",
-    references: "spellTags"
+    references: "itemProperties"
   }
 };
 preLocalize("ruleTypes", { key: "label" });

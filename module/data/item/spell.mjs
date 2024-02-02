@@ -82,7 +82,7 @@ export default class SpellData extends ItemDataModel.mixin(
       subtitle: [this.parent.labels.components.vsm, this.parent.labels.activation],
       modifier: this.parent.labels.modifier,
       range: this.range,
-      save: this.save,
+      save: this.save
     });
   }
 
