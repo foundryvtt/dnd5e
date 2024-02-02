@@ -322,7 +322,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       const physical = [];
       if ( data.bypasses?.size ) {
         values = values.filter(t => {
-          if ( !CONFIG.DND5E.physicalDamageTypes[t] ) return true;
+          if ( !CONFIG.DND5E.damageTypes[t]?.isPhysical ) return true;
           physical.push(t);
           return false;
         });

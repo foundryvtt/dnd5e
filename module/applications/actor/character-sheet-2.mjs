@@ -419,7 +419,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       values = values.map(key => {
         const value = { label: Trait.keyLabel(key, { trait }) ?? key };
         const icons = value.icons = [];
-        if ( data.bypasses?.size && (key in CONFIG.DND5E.physicalDamageTypes) ) icons.push(...data.bypasses);
+        if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses);
         return value;
       });
       if ( data.custom ) data.custom.split(";").forEach(v => values.push({ label: v.trim() }));

@@ -1015,7 +1015,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const hasEffect = (category, type, properties) => {
       const config = traits?.[category];
       if ( !config?.value.has(type) ) return false;
-      if ( !(type in CONFIG.DND5E.physicalDamageTypes) || !properties?.size ) return true;
+      if ( !CONFIG.DND5E.damageTypes[type]?.isPhysical || !properties?.size ) return true;
       return !config.bypasses?.intersection(properties)?.size;
     };
 
