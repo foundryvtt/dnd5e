@@ -1021,9 +1021,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const rollData = this.getRollData({deterministic: true});
 
-    let amount = damages.reduce((total, d) => {
+    damages.forEach(d => {
       // Skip damage types with immunity
-      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) return total;
+      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) return;
 
       // Apply type-specific damage reduction
       if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
@@ -1041,8 +1041,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
 
       d.value = d.value * damageMultiplier;
-      return total + d.value;
-    }, 0);
+    });
 
     /**
      * A hook event that fires after damage amount is calculated for an actor.
@@ -1056,6 +1055,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return this;
 
     // Round damage towards zero
+    let amount = damages.reduce((acc, d) => acc + d.value, 0);
     amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
 
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
