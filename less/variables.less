@@ -78,6 +78,14 @@
   --dnd5e-capacity-background-color: oklch(62% 0.05 246);
   --dnd5e-capacity-border-color: oklch(91% 0.044 252.5);
   --dnd5e-capacity-text-color: oklch(95% 0 0);
+
+  @media (prefers-contrast: more) {
+    --dnd5e-color-card: #ffffff;
+    --dnd5e-color-gold: #e3ce9e;
+    --filigree-border-color: var(--dnd5e-color-dark);
+    --proficiency-cycle-enabled-color: color-mix(in oklab, var(--dnd5e-color-blue), black 20%);
+    --proficiency-cycle-disabled-color: var(--dnd5e-color-dark);
+  }
 }
 
 /* ----------------------------------------- */

@@ -690,9 +690,13 @@
         flex: 1;
 
         > h3 {
-          border-bottom-color: var(--dnd5e-color-gold);
+          border-bottom-color: currentcolor;
           color: var(--dnd5e-color-gold);
           margin-bottom: .5rem;
+
+          @media (prefers-contrast: more) {
+            color: var(--dnd5e-color-dark);
+          }
         }
 
         > ul {
@@ -731,6 +735,10 @@
             opacity: .25;
             justify-content: center;
             margin-top: .75rem;
+
+            @media (prefers-contrast: more) {
+              opacity: .5;
+            }
           }
 
           figure {
@@ -979,6 +987,10 @@
         cursor: pointer;
         transition: opacity 250ms ease;
         &:hover { opacity: .5; }
+
+        @media (prefers-contrast: more) {
+          &:hover { opacity: 1; }
+        }
       }
 
       &.texture {
@@ -1106,6 +1118,10 @@
         inset: 0;
         background: transparent url("ui/ability-score-tab.svg") no-repeat top center / contain;
         z-index: -1;
+
+        @media (prefers-contrast: more) {
+          background: transparent url("ui/ability-score-tab-hc.svg") no-repeat top center / contain;
+        }
       }
 
       &.flipped {
@@ -1129,6 +1145,10 @@
         text-transform: uppercase;
         font-size: var(--font-size-11);
         color: var(--dnd5e-color-gold);
+
+        @media (prefers-contrast: more) {
+          color: var(--dnd5e-color-dark);
+        }
       }
 
       .mod {
@@ -1161,6 +1181,10 @@
             border: 1px solid var(--dnd5e-color-gold);
             box-shadow: 0 0 6px var(--dnd5e-color-gold);
           }
+        }
+
+        @media (prefers-contrast: more) {
+          color: var(--color-text-light-1);
         }
       }
     }

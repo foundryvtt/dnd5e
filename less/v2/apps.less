@@ -120,6 +120,10 @@
         .sign { color: var(--color-text-light-6); }
       }
     }
+
+    @media (prefers-contrast: more) {
+      border-color: var(--dnd5e-color-dark);
+    }
   }
 
   .unlist {
@@ -185,6 +189,10 @@
       display: grid;
       place-content: center;
       opacity: .25;
+
+      @media (prefers-contrast: more) {
+        opacity: .5;
+      }
     }
 
     .gold-icon {
@@ -203,6 +211,10 @@
       mix-blend-mode: overlay;
       pointer-events: none;
       border-radius: 5px;
+    }
+
+    @media (prefers-contrast: more) {
+      border-color: var(--dnd5e-color-dark);
     }
   }
 
