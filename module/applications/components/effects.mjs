@@ -180,12 +180,12 @@ export default class EffectsElement extends HTMLElement {
     switch ( action ) {
       case "create":
         return this._onCreate(target);
+      case "delete":
+        return effect.deleteDialog();
       case "duplicate":
         return effect.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
       case "edit":
         return effect.sheet.render(true);
-      case "delete":
-        return effect.deleteDialog();
       case "toggle":
         return effect.update({disabled: !effect.disabled});
     }
