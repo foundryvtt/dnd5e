@@ -1050,7 +1050,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {DamageDescription[]} damages       Damage descriptions.
      * @param {DamageApplicationOptions} options  Additional damage application options.
      * @returns {boolean}                         Explicitly return `false` to prevent damage application.
-     * @function dnd5e.preCalculateDamage
+     * @function dnd5e.calculateDamage
      * @memberof hookEvents
      */
     if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return this;
