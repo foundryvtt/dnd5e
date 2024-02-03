@@ -1,3 +1,4 @@
+import Actor5e from "../../documents/actor/actor.mjs";
 import {staticID} from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 
@@ -123,7 +124,7 @@ export default class EffectsElement extends HTMLElement {
    * @protected
    */
   _getContextOptions(effect) {
-    return [
+    const options = [
       {
         name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
@@ -150,6 +151,21 @@ export default class EffectsElement extends HTMLElement {
         callback: li => this._onAction(li[0], "toggle")
       }
     ];
+
+    // Toggle Favorite State
+    if ( (this.document instanceof Actor5e) && ("favorites" in this.document.system) ) {
+      const uuid = effect.getRelativeUUID(this.document);
+      const isFavorited = this.document.system.hasFavorite(uuid);
+      options.push({
+        name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
+        icon: "<i class='fas fa-star fa-fw'></i>",
+        condition: () => effect.isOwner,
+        callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
+        group: "state"
+      });
+    }
+
+    return options;
   }
 
   /* -------------------------------------------- */
@@ -186,8 +202,12 @@ export default class EffectsElement extends HTMLElement {
         return effect.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
       case "edit":
         return effect.sheet.render(true);
+      case "favorite":
+        return this.document.system.addFavorite({type: "effect", id: effect.getRelativeUUID(this.document)});
       case "toggle":
         return effect.update({disabled: !effect.disabled});
+      case "unfavorite":
+        return this.document.system.removeFavorite(effect.getRelativeUUID(this.document));
     }
   }
 
