@@ -1044,7 +1044,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     });
 
     /**
-     * A hook event that fires after damage amount is calculated for an actor.
+     * A hook event that fires after damage values are calculated for an actor.
      * @param {Actor5e} actor                     The actor being damaged.
      * @param {DamageDescription[]} damages       Damage descriptions.
      * @param {DamageApplicationOptions} options  Additional damage application options.
