@@ -212,18 +212,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Is this actor under the effect of this property from some status or
-   * possibly due to its level of exhaustion?
+   * Is this actor under the effect of this property from some status or possibly due to its level of exhaustion?
    * @param {string} key      A key in `DND5E.conditionProperties`.
    * @returns {boolean}       Whether the actor is affected.
    */
   hasCondition(key) {
     const props = CONFIG.DND5E.conditionProperties[key];
-    const level = this.system.attributes?.exhaustion ?? null;
+    const level = this.system?.attributes?.exhaustion ?? null;
+    const imms = this.system?.traits?.ci.value ?? new Set();
     const statuses = this.statuses;
     return props.some(k => {
-      const hasStatus = statuses.has(k) && !this.system.traits?.ci?.value.has(k);
-      return hasStatus || ((level !== null) && Number.isInteger(k) && (level >= k));
+      return (statuses.has(k) && !imms.has(k))
+        || (!imms.has("exhaustion") && (level !== null) && Number.isInteger(k) && (level >= k));
     });
   }
 
