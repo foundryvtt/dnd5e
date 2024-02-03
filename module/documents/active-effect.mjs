@@ -285,11 +285,12 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @protected
    */
   _prepareExhaustionLevel() {
+    const config = CONFIG.DND5E.conditionTypes.exhaustion;
     let level = this.getFlag("dnd5e", "exhaustionLevel");
     if ( !Number.isFinite(level) ) level = 1;
-    this.icon = `systems/dnd5e/icons/svg/statuses/exhaustion-${level}.svg`;
-    this.name = `Exhaustion ${level}`;
-    if ( level >= CONFIG.DND5E.conditionTypes.exhaustion.maximum ) this.statuses.add("dead");
+    this.icon = `${config.icon.split(".")[0]}-${level}.svg`;
+    this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
+    if ( level >= config.maximum ) this.statuses.add("dead");
   }
 
   /* -------------------------------------------- */
