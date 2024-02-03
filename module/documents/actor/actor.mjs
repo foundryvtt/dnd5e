@@ -991,7 +991,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Number.isNumeric(damages) ) {
       damages = [{ value: damages }];
       options.ignore ??= true;
-    }
+    } else damages = foundry.utils.deepClone(damages);
 
     const multiplier = options.multiplier ?? 1;
 
@@ -1025,13 +1025,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Skip damage types with immunity
       if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) return total;
 
-      let value = d.value;
-
       // Apply type-specific damage reduction
       if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
         const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
-        if ( Math.sign(value) !== Math.sign(value + modification) ) value = 0;
-        else value += modification;
+        if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
+        else d.value += modification;
       }
 
       let damageMultiplier = multiplier;
@@ -1042,8 +1040,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Apply type-specific damage vulnerability
       if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
 
-      return total + (value * damageMultiplier);
+      d.value = d.value * damageMultiplier;
+      return total + d.value;
     }, 0);
+
+    /**
+     * A hook event that fires after damage amount is calculated for an actor.
+     * @param {Actor5e} actor                     The actor being damaged.
+     * @param {DamageDescription[]} damages       Damage descriptions.
+     * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
+     * @function dnd5e.preCalculateDamage
+     * @memberof hookEvents
+     */
+    if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return this;
 
     // Round damage towards zero
     amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
