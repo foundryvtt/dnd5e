@@ -1808,6 +1808,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       ability: this.system.ability,
       bonus: this.system.bonus,
       prof: this.system.prof,
+      item: this,
       ...options
     });
   }
