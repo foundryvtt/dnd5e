@@ -122,7 +122,7 @@ export default class TraitsField {
    * @this {CharacterData|NPCData}
    */
   static prepareResistImmune() {
-    if ( CONFIG.DND5E.conditionProperties.petrification.intersects(this.parent.statuses) ) {
+    if ( this.parent.hasCondition("petrification") ) {
       this.traits.dr.custom = game.i18n.localize("DND5E.DamageAll");
       this.traits.di.value.add("poison");
       this.traits.ci.value.add("poisoned");
