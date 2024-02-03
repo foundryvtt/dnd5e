@@ -149,6 +149,10 @@ item-list-controls search {
       .filter {
         color: var(--dnd5e-color-gold);
         border-right: 1px solid var(--color-border-light-1);
+
+        @media (prefers-contrast: more) {
+          color: var(--dnd5e-color-dark);
+        }
       }
 
       .filter-list { display: flex; }

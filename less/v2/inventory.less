@@ -257,6 +257,10 @@
           align-items: center;
           gap: .25rem;
           --icon-fill: var(--dnd5e-color-black);
+
+          @media (prefers-contrast: more) {
+            opacity: .5;
+          }
         }
       }
 
@@ -350,6 +354,10 @@
         --icon-fill: var(--dnd5e-color-gold);
         display: none;
         &.item-detail { font-size: var(--font-size-18); }
+
+        @media (prefers-contrast: more) {
+          --icon-fill: var(--dnd5e-color-black);
+        }
       }
 
       .item-roll {
@@ -367,6 +375,10 @@
           text-transform: uppercase;
           font-size: var(--font-size-10);
           color: var(--dnd5e-color-gold);
+
+          @media (prefers-contrast: more) {
+            color: var(--color-text-light-6);
+          }
         }
       }
 

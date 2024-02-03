@@ -387,6 +387,13 @@
         font-size: var(--font-size-14);
         opacity: .8;
       }
+
+      @media (prefers-contrast: more) {
+        .value, .max {
+          text-shadow: 0 0 2px var(--dnd5e-color-dark);
+          filter: drop-shadow(0 0 2px var(--dnd5e-color-dark));
+        }
+      }
     }
   }
 
