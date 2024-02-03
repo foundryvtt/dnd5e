@@ -1016,10 +1016,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       return;
     }
     const { action, type, id } = data.dnd5e ?? {};
-    if ( action === "favorite" ) {
-      if ( this.actor.system.favorites.find(f => f.id === id) ) return this._onSortFavorites(event, id);
-      return this._onAddFavorite({ type, id });
-    }
+    if ( action === "favorite" ) return this._onDropFavorite(event, { type, id });
   }
 
   /* -------------------------------------------- */
@@ -1030,8 +1027,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const item = await Item.implementation.fromDropData(data);
     if ( item?.parent !== this.actor ) return super._onDropItem(event, data);
     const uuid = item.getRelativeUUID(this.actor);
-    if ( this.actor.system.favorites.find(f => f.id === uuid) ) return this._onSortFavorites(event, uuid);
-    return this._onAddFavorite({ type: "item", id: uuid });
+    return this._onDropFavorite(event, { type: "item", id: uuid });
   }
 
   /* -------------------------------------------- */
@@ -1042,26 +1038,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const effect = await ActiveEffect.implementation.fromDropData(data);
     if ( effect.target !== this.actor ) return super._onDropActiveEffect(event, data);
     const uuid = effect.getRelativeUUID(this.actor);
-    if ( this.actor.system.favorites.find(f => f.id === uuid) ) return this._onSortFavorites(event, uuid);
-    return this._onAddFavorite({ type: "effect", id: uuid });
+    return this._onDropFavorite(event, { type: "effect", id: uuid });
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle adding a favorite.
-   * @param {object} [favorite]  The favorite to add.
-   * @returns {Promise<Actor5e>}
+   * Handle an owned item or effect being dropped in the favorites area.
+   * @param {PointerEvent} event         The triggering event.
+   * @param {ActorFavorites5e} favorite  The favorite that was dropped.
+   * @returns {Promise<Actor5e>|void}
    * @protected
    */
-  _onAddFavorite(favorite) {
-    let maxSort = 0;
-    const favorites = this.actor.system.favorites.map(f => {
-      if ( f.sort > maxSort ) maxSort = f.sort;
-      return { ...f };
-    });
-    favorites.push({ ...favorite, sort: maxSort + CONST.SORT_INTEGER_DENSITY });
-    return this.actor.update({ "system.favorites": favorites });
+  _onDropFavorite(event, favorite) {
+    if ( this.actor.system.hasFavorite(favorite.id) ) return this._onSortFavorites(event, favorite.id);
+    return this.actor.system.addFavorite(favorite);
   }
 
   /* -------------------------------------------- */
@@ -1075,9 +1066,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onRemoveFavorite(event) {
     const { favoriteId } = event.currentTarget.closest("[data-favorite-id]")?.dataset ?? {};
     if ( !favoriteId ) return;
-    if ( favoriteId.startsWith("resources.") ) return this.actor.update({ [`system.${favoriteId}.max`]: 0 });
-    const favorites = this.actor.system.favorites.filter(f => f.id !== favoriteId);
-    return this.actor.update({ "system.favorites": favorites });
+    return this.actor.system.removeFavorite(favoriteId);
   }
 
   /* -------------------------------------------- */
