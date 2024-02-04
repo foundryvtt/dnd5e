@@ -1,5 +1,6 @@
 {{#*inline "skill-prof"}}
-    <li data-key="{{ @key }}">
+    <li data-key="{{ @key }}"
+        {{~#if reference}} data-reference-tooltip="{{ reference }}"{{/if}}>
         <proficiency-cycle type="skill" name="{{ path }}.value" data-tooltip="{{ hover }}"
                            value="{{#if @root.editable}}{{ baseValue }}{{else}}{{ value }}{{/if}}"
                            aria-label="{{ localize hover }}" {{disabled (not @root.editable)}}></proficiency-cycle>
@@ -10,8 +11,7 @@
         {{else}}
         <div class="ability roboto-upper">{{ abbreviation }}</div>
         {{/if}}
-        <a class="name {{ @root.rollableClass }} {{ roll }}"
-           {{~#if reference}} data-reference-tooltip="{{ reference }}"{{/if}}>{{ label }}</a>
+        <a class="name {{ @root.rollableClass }} {{ roll }}">{{ label }}</a>
         <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
         {{#if @root.editable}}
         <a class="config-button" data-action="{{ type }}" data-tooltip="{{ config }}"
