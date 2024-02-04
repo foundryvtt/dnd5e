@@ -213,11 +213,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Is this actor under the effect of this property from some status?
-   * @param {string} key      A key in `DND5E.conditionProperties`.
+   * @param {string} key      A key in `DND5E.conditionEffects`.
    * @returns {boolean}       Whether the actor is affected.
    */
-  hasCondition(key) {
-    const props = CONFIG.DND5E.conditionProperties[key] ?? new Set();
+  hasConditionEffect(key) {
+    const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
     const imms = this.system.traits?.ci?.value ?? new Set();
     const statuses = this.statuses;
     return statuses.difference(imms).intersects(props);

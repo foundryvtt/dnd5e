@@ -2455,7 +2455,7 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
  * Various effects of conditions and which conditions apply it.
  * @enum {object}
  */
-DND5E.conditionProperties = {
+DND5E.conditionEffects = {
   noMovement: new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
   halfMovement: new Set(["prone"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),

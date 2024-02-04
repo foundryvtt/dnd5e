@@ -105,12 +105,12 @@ export default class AttributesFields {
    */
   static prepareMovement() {
     const statuses = this.parent.statuses;
-    const noMovement = this.parent.hasCondition("noMovement") || (this.attributes.exhaustion >= 5);
-    const halfMovement = this.parent.hasCondition("halfMovement") || (this.attributes.exhaustion >= 2);
+    const noMovement = this.parent.hasConditionEffect("noMovement") || (this.attributes.exhaustion >= 5);
+    const halfMovement = this.parent.hasConditionEffect("halfMovement") || (this.attributes.exhaustion >= 2);
     const reduction = statuses.has("heavilyEncumbered")
       ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered
       : statuses.has("encumbered") ? CONFIG.DND5E.encumbrance.speedReduction.encumbered : 0;
-    const crawl = this.parent.hasCondition("crawl");
+    const crawl = this.parent.hasConditionEffect("crawl");
     Object.keys(CONFIG.DND5E.movementTypes).forEach(k => {
       if ( reduction ) this.attributes.movement[k] = Math.max(0, this.attributes.movement[k] - reduction);
       if ( (crawl && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
