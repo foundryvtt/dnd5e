@@ -131,7 +131,7 @@ export class ModuleArt {
     }
 
     const maxPriority = Math.max(...configs.map(({ priority }) => priority ?? -Infinity));
-    unsorted.forEach((config, i) => config.priority = maxPriority + (i + 1) * CONST.SORT_INTEGER_DENSITY);
+    unsorted.forEach((config, i) => config.priority = maxPriority + ((i + 1) * CONST.SORT_INTEGER_DENSITY));
     configs.sort((a, b) => a.priority - b.priority);
     return configs;
   }

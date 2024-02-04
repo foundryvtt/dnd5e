@@ -49,10 +49,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @enum {string}
    */
   static PROFICIENCY_CLASSES = {
-    "0": "none",
-    "0.5": "half",
-    "1": "full",
-    "2": "double"
+    0: "none",
+    0.5: "half",
+    1: "full",
+    2: "double"
   };
 
   /**
