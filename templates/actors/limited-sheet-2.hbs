@@ -1,0 +1,56 @@
+<form class="{{ cssClass }} flexcol" autocomplete="off">
+
+    {{!-- Header --}}
+    <header class="sheet-header">
+
+        {{!-- Name --}}
+        <div class="left optional-ability-{{ abilityRows.optional }}">
+
+            <div class="document-name">{{ actor.name }}</div>
+        </div>
+    </header>
+
+    {{!-- Body --}}
+    <section class="sheet-body">
+
+        {{!-- Main Content --}}
+        <div class="main-content">
+
+            {{!-- Sidebar --}}
+            <div class="sidebar">
+
+                {{!-- Character Card --}}
+                <div class="card">
+
+                    {{!-- Collapser --}}
+                    <button type="button" class="collapser card-tab vertical unbutton interface-only"
+                        {{#if sidebarCollapsed}}
+                            data-tooltip="JOURNAL.ViewExpand" aria-label="{{ localize "JOURNAL.ViewExpand" }}"
+                        {{else}}
+                            data-tooltip="JOURNAL.ViewCollapse" aria-label="{{ localize "JOURNAL.ViewCollapse" }}"
+                        {{/if}}>
+                        <i class="fas fa-caret-{{#if sidebarCollapsed}}right{{else}}left{{/if}}"></i>
+                    </button>
+
+                    {{!-- Portrait --}}
+                    <div class="portrait {{#if portrait.token}}token{{/if}}">
+                        <img src="{{ portrait.src }}" alt="{{ actor.name }}">
+                    </div>
+
+                </div>
+
+            </div>
+
+            {{!-- Tabbed Content --}}
+            <section class="tab-body">
+                
+                {{!-- Biography --}}
+                {{> "dnd5e.limited-biography" }}
+
+            </section>
+
+        </div>
+
+    </section>
+
+</form>
