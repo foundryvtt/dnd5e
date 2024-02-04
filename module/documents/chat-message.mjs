@@ -303,13 +303,10 @@ export default class ChatMessage5e extends ChatMessage {
     html.querySelectorAll(".dice-roll").forEach(el => el.remove());
     const roll = document.createElement("div");
     roll.classList.add("dice-roll");
-    roll.innerHTML = `
-      <div class="dice-result">
-        <div class="dice-formula">${formula}</div>
-        <div class="dice-tooltip">
-          ${Object.entries(breakdown).reduce((str, [type, { total, constant, dice }]) => {
-            const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
-            return `${str}
+
+    const tooltipContents = Object.entries(breakdown).reduce((str, [type, { total, constant, dice }]) => {
+      const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
+      return `${str}
               <section class="tooltip-part">
                 <div class="dice">
                   <ol class="dice-rolls">
@@ -328,7 +325,13 @@ export default class ChatMessage5e extends ChatMessage {
                 </div>
               </section>
             `;
-          }, "")}
+    }, "");
+
+    roll.innerHTML = `
+      <div class="dice-result">
+        <div class="dice-formula">${formula}</div>
+        <div class="dice-tooltip">
+          ${tooltipContents}
         </div>
         <h4 class="dice-total">${total}</h4>
       </div>
