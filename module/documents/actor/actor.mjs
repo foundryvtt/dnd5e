@@ -1023,7 +1023,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     damages.forEach(d => {
       // Skip damage types with immunity
-      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) return;
+      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) {
+        d.value = 0;
+        return;
+      }
 
       // Apply type-specific damage reduction
       if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
