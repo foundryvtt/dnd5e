@@ -382,27 +382,117 @@ DND5E.ammoIds = {
 /* -------------------------------------------- */
 
 /**
- * The categories into which Tool items can be grouped.
- *
+ * Internal tool categories
  * @enum {string}
+ * @internal
  */
-DND5E.toolTypes = {
+DND5E._toolTypes = {
   art: "DND5E.ToolArtisans",
   game: "DND5E.ToolGamingSet",
   music: "DND5E.ToolMusicalInstrument"
 };
-preLocalize("toolTypes", { sort: true });
+preLocalize("_toolTypes", { sort: true });
+
+/**
+ * The categories into which Tool items can be grouped.
+ * @enum {string}
+ * @deprecated since 3.1, available until 3.3
+ */
+Object.defineProperty(DND5E, 'toolTypes', {
+  get() {
+    foundry.utils.logCompatibilityWarning(
+      "CONFIG.DND5E.toolTypes is deprecated in favor of CONFIG.DND5E.toolItemTypes.",
+      { since: "3.1", until: "3.3" }
+    );
+    return DND5E._toolTypes;
+  },
+  set(obj) {
+    foundry.utils.logCompatibilityWarning(
+      "CONFIG.DND5E.toolTypes is deprecated in favor of CONFIG.DND5E.toolItemTypes.",
+      { since: "3.1", until: "3.3" }
+    );
+    DND5E._toolTypes = obj
+  }
+})
+
+/**
+ * Internal tool category proficiencies
+ * @enum {string}
+ * @internal
+ */
+DND5E._toolProficiencies = {
+  ...DND5E._toolTypes,
+  vehicle: "DND5E.ToolVehicle"
+};
+preLocalize("_toolProficiencies", { sort: true });
 
 /**
  * The categories of tool proficiencies that a character can gain.
- *
  * @enum {string}
+ * @deprecated since 3.1, available until 3.3
  */
-DND5E.toolProficiencies = {
-  ...DND5E.toolTypes,
-  vehicle: "DND5E.ToolVehicle"
+Object.defineProperty(DND5E, 'toolProficiencies', {
+  get() {
+    foundry.utils.logCompatibilityWarning(
+      "CONFIG.DND5E.toolProficiencies has been deprecated in favor of CONFIG.DND5E.toolTypeProficiencies",
+      {since: "3.1", until: "3.3"}
+    )
+    return DND5E._toolProficiencies;
+  },
+  set(obj) {
+    foundry.utils.logCompatibilityWarning(
+      "CONFIG.DND5E.toolTypes has been deprecated in favor of CONFIG.DND5E.toolItemTypes",
+      {since: "3.1", until: "3.3"}
+    );
+    DND5E._toolProficiencies = obj;
+  }
+});
+
+/**
+ * Configuration data for tool types.
+ *
+ * @typedef {object} ToolTypeConfiguration
+ * @property {string} ability      Key for the default ability used by this tool type.
+ * @property {string} [reference]  Reference to a rule page describing this tool type.
+ * @property {string} [icon]       An icon for this tool type
+ *
+ * @todo in DND5e 3.3: get rid of `toolTypes` and `toolProficiencies` and add `label` to `ToolTypeConfiguration`
+ */
+
+/**
+ * The categories into which Tool items can be grouped.
+ * @enum {ToolTypeConfiguration}
+ */
+DND5E.toolItemTypes = {
+  art: {
+    ability: "int",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4MfrpERNiQXmvgCI",
+    icon: "icons/tools/hand/hammer-and-nail.webp"
+  },
+  game: {
+    ability: "int",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4MfrpERNiQXmvgCI",
+    icon: "icons/sundries/gaming/playing-cards-brown.webp"
+  },
+  music: {
+    ability: "int",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4MfrpERNiQXmvgCI",
+    icon: "icons/tools/instruments/harp-lap-brown.webp"
+  }
 };
-preLocalize("toolProficiencies", { sort: true });
+
+/**
+ * The categories of tool proficiencies that a character can gain.
+ * @enum {ToolTypeConfiguration}
+ */
+DND5E.toolTypeProficiencies = {
+  ...DND5E.toolItemTypes,
+  vehicle: {
+    ability: "int",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4MfrpERNiQXmvgCI",
+    icon: "icons/svg/cancel.svg"
+  }
+};
 
 /**
  * The basic tool types in 5e. This enables specific tool proficiencies or
@@ -2684,7 +2774,7 @@ DND5E.traits = {
     },
     icon: "systems/dnd5e/icons/svg/trait-tool-proficiencies.svg",
     actorKeyPath: "system.tools",
-    configKey: "toolProficiencies",
+    configKey: "_toolProficiencies",
     subtypes: { keyPath: "toolType", ids: ["toolIds"] },
     children: { vehicle: "vehicleTypes" },
     sortCategories: true,
