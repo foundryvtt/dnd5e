@@ -686,6 +686,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.toolIds ) type = "tool";
+    else if ( key in CONFIG.DND5E.toolTypeProficiencies ) type = "tool";
     else if ( preparationMode && (level !== "0") && isSlots ) type = "slots";
     if ( !type ) return super._onDragStart(event);
     const dragData = { dnd5e: { action: "favorite", type } };
@@ -1249,8 +1250,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       let title;
       let reference;
       if ( type === "tool" ) {
-        reference = Trait.getBaseItemUUID(CONFIG.DND5E.toolIds[id]);
-        ({ img, name: title } = Trait.getBaseItem(reference, { indexOnly: true }));
+        const toolItemId = CONFIG.DND5E.toolIds[id];
+        if ( toolItemId ) {
+          reference = Trait.getBaseItemUUID(toolItemId);
+          ({img, name: title} = Trait.getBaseItem(reference, {indexOnly: true}));
+        } else {
+          title = CONFIG.DND5E._toolProficiencies[id];
+          reference = CONFIG.DND5E.toolTypeProficiencies[id].reference;
+          img = CONFIG.DND5E.toolTypeProficiencies[id].icon;
+        }
       }
       else if ( type === "skill" ) ({ icon: img, label: title, reference } = CONFIG.DND5E.skills[id]);
       return { img, title, subtitle, modifier: total, passive, reference };
