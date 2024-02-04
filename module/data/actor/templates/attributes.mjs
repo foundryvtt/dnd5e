@@ -110,11 +110,12 @@ export default class AttributesFields {
     const reduction = statuses.has("heavilyEncumbered")
       ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered
       : statuses.has("encumbered") ? CONFIG.DND5E.encumbrance.speedReduction.encumbered : 0;
-    const crawl = this.parent.hasConditionEffect("crawl");
+    const exceeding = statuses.has("exceedingCarryingCapacity");
+    const crawl = this.parent.hasConditionEffect("crawl") || exceeding;
     Object.keys(CONFIG.DND5E.movementTypes).forEach(k => {
       if ( reduction ) this.attributes.movement[k] = Math.max(0, this.attributes.movement[k] - reduction);
       if ( (crawl && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
-      else if ( statuses.has("exceedingCarryingCapacity") ) this.attributes.movement[k] = 5;
+      else if ( exceeding ) this.attributes.movement[k] = 5;
       else if ( halfMovement ) this.attributes.movement[k] = Math.floor(this.attributes.movement[k] * 0.5);
     });
   }
