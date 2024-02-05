@@ -245,6 +245,19 @@ export default class InventoryElement extends HTMLElement {
       group: "state"
     });
 
+    // Toggle Favorite State
+    if ( ("favorites" in this.actor.system) ) {
+      const uuid = item.getRelativeUUID(this.actor);
+      const isFavorited = this.actor.system.hasFavorite(uuid);
+      options.push({
+        name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
+        icon: "<i class='fas fa-star fa-fw'></i>",
+        condition: () => item.isOwner,
+        callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
+        group: "state"
+      });
+    }
+
     return options;
   }
 
@@ -352,10 +365,14 @@ export default class InventoryElement extends HTMLElement {
         return item.update({"system.equipped": !item.system.equipped});
       case "expand":
         return this._onExpand(target, item);
+      case "favorite":
+        return this.actor.system.addFavorite({type: "item", id: item.getRelativeUUID(this.actor)});
       case "prepare":
         return item.update({"system.preparation.prepared": !item.system.preparation?.prepared});
       case "recharge":
         return item.rollRecharge();
+      case "unfavorite":
+        return this.actor.system.removeFavorite(item.getRelativeUUID(this.actor));
       case "use":
         return item.use({}, { event });
     }
