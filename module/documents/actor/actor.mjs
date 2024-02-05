@@ -594,23 +594,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _prepareHitPoints(rollData) {
     const hp = this.system.attributes.hp;
-    if ( this.type !== "character" || (this.system.attributes.hp.max !== null) ) {
-      hp.pct = Math.clamped(hp.max ? (hp.value / hp.max) * 100 : 0, 0, 100);
-      return;
+
+    if ( this.type === "character" && (this.system.attributes.hp.max === null) ) {
+      const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
+      const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
+      const base = Object.values(this.classes).reduce((total, item) => {
+        const advancement = item.advancement.byType.HitPoints?.[0];
+        return total + (advancement?.getAdjustedTotal(abilityMod) ?? 0);
+      }, 0);
+      const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.system.details.level;
+      const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
+
+      hp.max = base + levelBonus + overallBonus;
+
+      if ( this.system.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
     }
-
-    const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
-    const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
-    const base = Object.values(this.classes).reduce((total, item) => {
-      const advancement = item.advancement.byType.HitPoints?.[0];
-      return total + (advancement?.getAdjustedTotal(abilityMod) ?? 0);
-    }, 0);
-    const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.system.details.level;
-    const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
-
-    hp.max = base + levelBonus + overallBonus;
-
-    if ( this.system.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
 
     hp.value = Math.min(hp.value, hp.max + (hp.tempmax ?? 0));
     hp.pct = Math.clamped(hp.max ? (hp.value / hp.max) * 100 : 0, 0, 100);
