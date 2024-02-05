@@ -259,6 +259,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
       }
 
       .item-detail.empty::after {
@@ -321,8 +322,11 @@
         &.item-detail { font-weight: bold; }
         .max, input { width: 20px; }
         .separator { color: var(--dnd5e-color-gold); }
-        .max { color: var(--color-text-dark-5); }
-        input { text-align: right; }
+        .max {
+          color: var(--color-text-dark-5);
+          text-align: start;
+        }
+        input { text-align: end; }
       }
 
       /* Item Recovery */
