@@ -262,7 +262,7 @@ export default class ChatMessage5e extends ChatMessage {
     const evaluation = document.createElement("ul");
     evaluation.classList.add("dnd5e2", "evaluation");
     evaluation.innerHTML = targets.reduce((str, { name, img, ac, uuid }) => {
-      const isMiss = attackRoll.total < ac;
+      const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
       return `
         ${str}
         <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
