@@ -141,6 +141,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const displayXP = !game.settings.get("dnd5e", "disableExperienceTracking");
     for ( const [index, memberData] of this.object.system.members.entries() ) {
       const member = memberData.actor;
+      const multiplier = type === "encounter" ? memberData.quantity.value : 1;
 
       const m = {
         index,
@@ -159,13 +160,13 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       m.hp.max = Math.max(0, hp.max + (hp.tempmax || 0));
       m.hp.pct = Math.clamped((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
       m.hp.color = dnd5e.documents.Actor5e.getHPColor(m.hp.current, m.hp.max).css;
-      stats.currentHP += (m.hp.current * m.quantity.value);
-      stats.maxHP += (m.hp.max * m.quantity.value);
+      stats.currentHP += (m.hp.current * multiplier);
+      stats.maxHP += (m.hp.max * multiplier);
 
       // Challenge
       if ( member.type === "npc" ) {
         m.cr = formatCR(member.system.details.cr);
-        if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * m.quantity.value);
+        if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * multiplier);
       }
 
       if ( member.type === "vehicle" ) stats.nVehicles++;
