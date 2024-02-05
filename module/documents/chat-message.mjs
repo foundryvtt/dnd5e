@@ -186,7 +186,7 @@ export default class ChatMessage5e extends ChatMessage {
     // Enriched roll flavor
     const roll = this.getFlag("dnd5e", "roll");
     const item = fromUuidSync(roll?.itemUuid);
-    if ( item ) {
+    if ( this.isContentVisible && item ) {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.options?.critical;
       const subtitle = roll.type === "damage"
         ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
