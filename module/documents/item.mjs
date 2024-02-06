@@ -1989,8 +1989,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   static _onChatCardToggleContent(event) {
     // If the user is clicking on a link in the collapsible region, don't collapse
-    const clickTarget = event.target.closest(':is(.item-name, .collapsible) :is(a, button)')
-    if ( clickTarget) return;
+    if ( event.target.closest(":is(.item-name, .collapsible) :is(a, button)") ) return;
 
     event.preventDefault();
     const header = event.currentTarget;
