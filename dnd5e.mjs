@@ -428,6 +428,7 @@ Hooks.on("renderPause", (app, [html]) => {
 
 Hooks.on("renderSettings", (app, [html]) => {
   const details = html.querySelector("#game-details");
+  const pip = details.querySelector(".system-info .update");
   details.querySelector(".system").remove();
 
   const heading = document.createElement("div");
@@ -461,6 +462,7 @@ Hooks.on("renderSettings", (app, [html]) => {
     <img src="systems/dnd5e/ui/official/dnd-badge-32.webp" data-tooltip="${dnd5e.title}" alt="${dnd5e.title}">
     <span class="system-info">${dnd5e.version}</span>
   `;
+  if ( pip ) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
   heading.insertAdjacentElement("afterend", badge);
 });
 
