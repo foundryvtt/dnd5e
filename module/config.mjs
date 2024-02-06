@@ -2452,6 +2452,19 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
 /* -------------------------------------------- */
 
 /**
+ * Various effects of conditions and which conditions apply it.
+ * @enum {object}
+ */
+DND5E.conditionEffects = {
+  noMovement: new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
+  halfMovement: new Set(["prone"]),
+  crawl: new Set(["prone", "exceedingCarryingCapacity"]),
+  petrification: new Set(["petrified"])
+};
+
+/* -------------------------------------------- */
+
+/**
  * Extra status effects not specified in `conditionTypes`. If the ID matches a core-provided effect, then this
  * data will be merged into the core data.
  * @enum {object}
