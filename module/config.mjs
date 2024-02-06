@@ -1237,6 +1237,7 @@ DND5E.itemProperties = {
   },
   mgc: {
     label: "DND5E.Item.Property.Magical",
+    icon: "systems/dnd5e/icons/svg/properties/magical.svg",
     isPhysical: true
   },
   rch: {

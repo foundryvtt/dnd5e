@@ -408,6 +408,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Advancement
     this._prepareAdvancement();
 
+    // Item Properties
+    if ( this.system.properties ) {
+      this.labels.properties = Array.from(this.system.properties).map(prop => ({
+        abbr: prop,
+        label: CONFIG.DND5E.itemProperties[prop]?.label,
+        icon: CONFIG.DND5E.itemProperties[prop]?.icon
+      }));
+    }
+
     // Specialized preparation per Item type
     switch ( this.type ) {
       case "equipment":
