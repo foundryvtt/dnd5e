@@ -150,18 +150,32 @@ export default class ChatMessage5e extends ChatMessage {
     // Header matter
     const { scene: sceneId, token: tokenId, actor: actorId } = this.speaker;
     const actor = game.scenes.get(sceneId)?.tokens.get(tokenId)?.actor ?? game.actors.get(actorId);
-    const img = actor?.img ?? this.user.avatar;
+
+    let img;
+    let nameText;
+    if ( this.isContentVisible ) {
+      img = actor?.img ?? this.user.avatar;
+      nameText = this.alias;
+    } else {
+      img = this.user.avatar;
+      nameText = this.user.name;
+    }
+
     const avatar = document.createElement("div");
     avatar.classList.add("avatar");
-    avatar.innerHTML = `<img src="${img}" alt="${this.alias}">`;
+    avatar.innerHTML = `<img src="${img}" alt="${nameText}">`;
+
     const name = document.createElement("span");
     name.classList.add("name-stacked");
-    name.innerHTML = `<span class="title">${this.alias}</span>`;
+    name.innerHTML = `<span class="title">${nameText}</span>`;
+
     const subtitle = document.createElement("span");
     subtitle.classList.add("subtitle");
     if ( this.whisper.length ) subtitle.innerText = html.querySelector(".whisper-to")?.innerText ?? "";
-    else if ( this.alias !== this.user?.name ) subtitle.innerText = this.user?.name ?? "";
+    if ( (nameText !== this.user?.name) && !subtitle.innerText.length ) subtitle.innerText = this.user?.name ?? "";
+
     name.appendChild(subtitle);
+
     const sender = html.querySelector(".message-sender");
     sender?.replaceChildren(avatar, name);
     html.querySelector(".whisper-to")?.remove();
