@@ -252,6 +252,8 @@ export default class Award extends DialogMixin(FormApplication) {
           ${formatNumber(result.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
         </span>
       `);
+      if ( !entries.length ) continue;
+
       const content = game.i18n.format("DND5E.Award.Message", {
         name: destination.name, award: `<span class="dnd5e2">${game.i18n.getListFormatter().format(entries)}</span>`
       });
