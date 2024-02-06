@@ -72,17 +72,16 @@ export default class FiligreeBoxElement extends HTMLElement {
           position: absolute;
           fill: var(--filigree-border-color, var(--dnd5e-color-gold));
           z-index: -1;
-  
-          &.top, &.bottom { height: 30px; }
-          &.top { top: 0; }
-          &.bottom { bottom: 0; scale: 1 -1; }
-  
-          &.left, &.right { width: 25px; }
-          &.left { left: 0; }
-          &.right { right: 0; scale: -1 1; }
-  
-          &.bottom.right { scale: -1 -1; }
         }
+        .filigree.top, .filigree.bottom { height: 30px; }
+        .filigree.top { top: 0; }
+        .filigree.bottom { bottom: 0; scale: 1 -1; }
+
+        .filigree.left, .filigree.right { width: 25px; }
+        .filigree.left { left: 0; }
+        .filigree.right { right: 0; scale: -1 1; }
+
+        .filigree.bottom.right { scale: -1 -1; }
         .filigree.block {
           inline-size: calc(100% - 50px);
           inset-inline: 25px;
