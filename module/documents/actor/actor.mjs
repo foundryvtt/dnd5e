@@ -363,54 +363,97 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Prepare skill checks. Mutates the values of system.skills.
-   * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {object} globalBonuses   Global bonus data.
-   * @param {number} checkBonus      Global ability check bonus.
-   * @param {object} originalSkills  A transformed actor's original actor's skills.
+   * @param {object} rollData         Data produced by `getRollData` to be applied to bonus formulas.
+   * @param {object} globalBonuses     Global bonus data.
+   * @param {number} globalCheckBonus  Global ability check bonus.
+   * @param {object} originalSkills    A transformed actor's original actor's skills.
    * @protected
    */
-  _prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills) {
+  _prepareSkills(rollData, globalBonuses, globalCheckBonus, originalSkills) {
     if ( this.type === "vehicle" ) return;
-    const flags = this.flags.dnd5e ?? {};
 
     // Skill modifiers
-    const feats = CONFIG.DND5E.characterFlags;
-    const skillBonus = simplifyBonus(globalBonuses.skill, bonusData);
-    for ( const [id, skl] of Object.entries(this.system.skills) ) {
-      const ability = this.system.abilities[skl.ability];
-      const baseBonus = simplifyBonus(skl.bonuses?.check, bonusData);
-      let roundDown = true;
-
-      // Remarkable Athlete
-      if ( this._isRemarkableAthlete(skl.ability) && (skl.value < 0.5) ) {
-        skl.value = 0.5;
-        roundDown = false;
-      }
-
-      // Jack of All Trades
-      else if ( flags.jackOfAllTrades && (skl.value < 0.5) ) {
-        skl.value = 0.5;
-      }
-
-      // Polymorph Skill Proficiencies
-      if ( originalSkills ) {
-        skl.value = Math.max(skl.value, originalSkills[id].value);
-      }
-
-      // Compute modifier
-      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
-      skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
-      skl.mod = ability?.mod ?? 0;
-      skl.prof = new Proficiency(this.system.attributes.prof, skl.value, roundDown);
-      skl.proficient = skl.value;
-      skl.total = skl.mod + skl.bonus;
-      if ( Number.isNumeric(skl.prof.term) ) skl.total += skl.prof.flat;
-
-      // Compute passive bonus
-      const passive = flags.observantFeat && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      const passiveBonus = simplifyBonus(skl.bonuses?.passive, bonusData);
-      skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
+    for ( const [id, skillData] of Object.entries(this.system.skills) ) {
+      this._prepareSkill(id, { skillData, rollData, originalSkills, globalCheckBonus, globalBonuses });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepares data for a specific skill.
+   * @param {string} skillId                     The id of the skill to prepare data for.
+   * @param {object} [options]                   Additional options.
+   * @param {SkillData} [options.skillData]      The base skill data for this skill.
+   *                                             If undefined, `this.system.skill[skillId]` is used.
+   * @param {object} [options.rollData]          RollData for this actor, used to evaluate dice terms in bonuses.
+   *                                             If undefined, `this.getRollData()` is used.
+   * @param {object} [options.originalSkills]    Original skills if actor is polymorphed.
+   *                                             If undefined, the skills of the actor identified by
+   *                                             `this.flags.dnd5e.originalActor` are used.
+   * @param {object} [options.globalBonuses]     Global ability bonuses for this actor.
+   *                                             If undefined, `this.system.bonuses.abilities` is used.
+   * @param {number} [options.globalCheckBonus]  Global check bonus for this actor.
+   *                                             If undefined, `globalBonuses.check` will be evaluated using `rollData`.
+   * @param {number} [options.globalSkillBonus]  Global skill bonus for this actor.
+   *                                             If undefined, `globalBonuses.skill` will be evaluated using `rollData`.
+   * @param {string} [options.ability]           The ability to compute bonuses based on.
+   *                                             If undefined, skillData.ability is used.
+   * @returns {SkillData}
+   * @internal
+   */
+  _prepareSkill(skillId, {
+    skillData, rollData, originalSkills, globalBonuses,
+    globalCheckBonus, globalSkillBonus, ability
+  }={}) {
+    const flags = this.flags.dnd5e ?? {};
+
+    skillData ??= foundry.utils.deepClone(this.system.skills[skillId]);
+    rollData ??= this.getRollData();
+    originalSkills ??= flags.originalActor ? game.actors?.get(flags.originalActor)?.system?.skills : null;
+    globalBonuses ??= this.system.bonuses?.abilities ?? {};
+    globalCheckBonus ??= simplifyBonus(globalBonuses.check, rollData);
+    globalSkillBonus ??= simplifyBonus(globalBonuses.skill, rollData);
+    ability ??= skillData.ability;
+    const abilityData = this.system.abilities[ability];
+    skillData.ability = ability;
+
+    const feats = CONFIG.DND5E.characterFlags;
+
+    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
+    let roundDown = true;
+
+    // Remarkable Athlete
+    if ( this._isRemarkableAthlete(skillData.ability) && (skillData.value < 0.5) ) {
+      skillData.value = 0.5;
+      roundDown = false;
+    }
+
+    // Jack of All Trades
+    else if ( flags.jackOfAllTrades && (skillData.value < 0.5) ) {
+      skillData.value = 0.5;
+    }
+
+    // Polymorph Skill Proficiencies
+    if ( originalSkills ) {
+      skillData.value = Math.max(skillData.value, originalSkills[skillId].value);
+    }
+
+    // Compute modifier
+    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
+    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
+    skillData.mod = abilityData?.mod ?? 0;
+    skillData.prof = new Proficiency(this.system.attributes.prof, skillData.value, roundDown);
+    skillData.proficient = skillData.value;
+    skillData.total = skillData.mod + skillData.bonus;
+    if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
+
+    // Compute passive bonus
+    const passive = flags.observantFeat && (feats.observantFeat.skills.includes(skillId)) ? 5 : 0;
+    const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
+    skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
+
+    return skillData;
   }
 
   /* -------------------------------------------- */
