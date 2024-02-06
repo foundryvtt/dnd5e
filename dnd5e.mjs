@@ -426,9 +426,10 @@ Hooks.on("renderPause", (app, [html]) => {
   img.className = "";
 });
 
-Hooks.on("renderSettings", () => {
-  const details = document.getElementById("game-details");
+Hooks.on("renderSettings", (app, [html]) => {
+  const details = html.querySelector("#game-details");
   details.querySelector(".system").remove();
+
   const heading = document.createElement("div");
   heading.classList.add("dnd5e2", "sidebar-heading");
   heading.innerHTML = `
@@ -453,6 +454,7 @@ Hooks.on("renderSettings", () => {
     </ul>
   `;
   details.insertAdjacentElement("afterend", heading);
+
   const badge = document.createElement("div");
   badge.classList.add("dnd5e2", "system-badge");
   badge.innerHTML = `
