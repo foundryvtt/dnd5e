@@ -841,7 +841,11 @@
         }
       }
 
-      .tab:not(.details) { padding: .5rem .5rem 1.5rem; }
+      .tab:not(.details) {
+        padding-inline: .5rem;
+        // enough room that the "create new" button doesn't overlap when scrolled all the way down
+        padding-bottom: calc(1.5rem + 30px);
+      }
     }
 
     /* Skills, Tools, & Saving Throws */
