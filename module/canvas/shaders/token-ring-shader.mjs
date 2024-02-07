@@ -20,13 +20,26 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  static batchVertexSize = 15;
+  /** @inheritdoc */
+  static batchGeometry = [
+    ...super.batchGeometry,
+    {id: "aRingTextureCoord", size: 2, normalized: false, type: PIXI.TYPES.FLOAT},
+    {id: "aBackgroundTextureCoord", size: 2, normalized: false, type: PIXI.TYPES.FLOAT},
+    {id: "aRingColor", size: 4, normalized: true, type: PIXI.TYPES.UNSIGNED_BYTE},
+    {id: "aBackgroundColor", size: 4, normalized: true, type: PIXI.TYPES.UNSIGNED_BYTE},
+    {id: "aStates", size: 1, normalized: false, type: PIXI.TYPES.FLOAT},
+    {id: "aScaleCorrection", size: 1, normalized: false, type: PIXI.TYPES.FLOAT}
+  ];
 
   /* -------------------------------------------- */
 
-  /** @override */
-  static reservedTextureUnits = 2;
+  /** @inheritdoc */
+  static batchVertexSize = super.batchVertexSize + 8;
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static reservedTextureUnits = super.reservedTextureUnits + 1;
 
   /* -------------------------------------------- */
 
@@ -38,13 +51,11 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   static batchDefaultUniforms(maxTex) {
     return {
-      screenDimensions: [1, 1],
-      occlusionTexture: maxTex,
-      tokenRingTexture: maxTex + 1,
-      occlusionBlurStrength: 0,
+      ...super.batchDefaultUniforms(maxTex),
+      tokenRingTexture: maxTex + super.reservedTextureUnits,
       time: 0
     };
   }
@@ -60,64 +71,13 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
 
   /* ---------------------------------------- */
 
-  /** @override */
-  static initializeBatchGeometry() {
-    this.batchGeometry =
-      class BatchGeometry extends PIXI.Geometry {
-        /** @override */
-        constructor(_static = false) {
-          super();
-          this._buffer = new PIXI.Buffer(null, _static, false);
-          this._indexBuffer = new PIXI.Buffer(null, _static, true);
-          this.addAttribute("aVertexPosition", this._buffer, 2, false, PIXI.TYPES.FLOAT)
-            .addAttribute("aTextureCoord", this._buffer, 2, false, PIXI.TYPES.FLOAT)
-            .addAttribute("aRingTextureCoord", this._buffer, 2, false, PIXI.TYPES.FLOAT)
-            .addAttribute("aBackgroundTextureCoord", this._buffer, 2, false, PIXI.TYPES.FLOAT)
-            .addAttribute("aColor", this._buffer, 4, true, PIXI.TYPES.UNSIGNED_BYTE)
-            .addAttribute("aRingColor", this._buffer, 4, true, PIXI.TYPES.UNSIGNED_BYTE)
-            .addAttribute("aBackgroundColor", this._buffer, 4, true, PIXI.TYPES.UNSIGNED_BYTE)
-            .addAttribute("aTextureId", this._buffer, 1, false, PIXI.TYPES.UNSIGNED_SHORT)
-            .addAttribute("aUnoccludedAlpha", this._buffer, 1, true, PIXI.TYPES.UNSIGNED_BYTE)
-            .addAttribute("aOccludedAlpha", this._buffer, 1, true, PIXI.TYPES.UNSIGNED_BYTE)
-            .addAttribute("aOcclusionElevation", this._buffer, 1, true, PIXI.TYPES.UNSIGNED_BYTE)
-            .addAttribute("aFadeOcclusion", this._buffer, 1, true, PIXI.TYPES.UNSIGNED_BYTE)
-            .addAttribute("aRadialOcclusion", this._buffer, 1, true, PIXI.TYPES.UNSIGNED_BYTE)
-            .addAttribute("aVisionOcclusion", this._buffer, 1, true, PIXI.TYPES.UNSIGNED_BYTE)
-            .addAttribute("aStates", this._buffer, 1, false, PIXI.TYPES.FLOAT)
-            .addAttribute("aScaleCorrection", this._buffer, 1, false, PIXI.TYPES.FLOAT)
-            .addIndex(this._indexBuffer);
-        }
-      };
-  }
-
-  /* ---------------------------------------- */
-
-  /** @override */
+  /** @inheritdoc */
   static _packInterleavedGeometry(element, attributeBuffer, indexBuffer, aIndex, iIndex) {
-    const {float32View, uint8View, uint16View, uint32View} = attributeBuffer;
-
-    // Write indices into buffer
-    const packedVertices = aIndex / this.vertexSize;
-    const indices = element.indices;
-    for ( let i = 0; i < indices.length; i++ ) {
-      indexBuffer[iIndex++] = packedVertices + indices[i];
-    }
-
-    // Prepare attributes
-    const vertexData = element.vertexData;
-    const uvs = element.uvs;
-    const baseTexture = element._texture.baseTexture;
-    const alpha = Math.min(element.worldAlpha, 1.0);
-    const argb = PIXI.Color.shared.setValue(element._tintRGB).toPremultiplied(alpha, baseTexture.alphaMode > 0);
-    const textureId = baseTexture._batchLocation;
-    const unoccludedAlpha = (element.unoccludedAlpha * 255) | 0;
-    const occludedAlpha = (element.occludedAlpha * 255) | 0;
-    const occlusionElevation = (canvas.masks.occlusion.mapElevation(element.elevation) * 255) | 0;
-    const fadeOcclusion = (element.fadeOcclusion * 255) | 0;
-    const radialOcclusion = (element.radialOcclusion * 255) | 0;
-    const visionOcclusion = (element.visionOcclusion * 255) | 0;
+    super._packInterleavedGeometry(element, attributeBuffer, indexBuffer, aIndex, iIndex);
+    const {float32View, uint32View} = attributeBuffer;
 
     // Prepare token ring attributes
+    const vertexData = element.vertexData;
     const trConfig = CONFIG.Token.ringClass;
     const object = element.object.object || {};
     const ringColor = PIXI.Color.shared.setValue(object.ring?.ringColorLittleEndian ?? 0xFFFFFF).toNumber();
@@ -128,39 +88,24 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
     const scaleCorrection = object.ring?.scaleCorrection ?? 1;
 
     // Write attributes into buffer
-    for ( let i = 0; i < vertexData.length; i += 2 ) {
-      float32View[aIndex++] = vertexData[i];
-      float32View[aIndex++] = vertexData[i + 1];
-      float32View[aIndex++] = uvs[i];
-      float32View[aIndex++] = uvs[i + 1];
-      float32View[aIndex++] = ringUvsFloat[i];
-      float32View[aIndex++] = ringUvsFloat[i + 1];
-      float32View[aIndex++] = bkgUvsFloat[i];
-      float32View[aIndex++] = bkgUvsFloat[i + 1];
-      uint32View[aIndex++] = argb;
-      uint32View[aIndex++] = ringColor;
-      uint32View[aIndex++] = bkgColor;
-      uint16View[aIndex << 1] = textureId;
-      let k = (aIndex << 2) + 2;
-      uint8View[k++] = unoccludedAlpha;
-      uint8View[k++] = occludedAlpha;
-      uint8View[k++] = occlusionElevation;
-      uint8View[k++] = fadeOcclusion;
-      uint8View[k++] = radialOcclusion;
-      uint8View[k++] = visionOcclusion;
-      aIndex += 2;
-      float32View[aIndex++] = states;
-      float32View[aIndex++] = scaleCorrection;
+    const vertexSize = this.vertexSize;
+    const attributeOffset = PrimaryBaseSamplerShader.batchVertexSize;
+    for ( let i = 0, j = attributeOffset; i < vertexData.length; i += 2, j += vertexSize ) {
+      let k = aIndex + j;
+      float32View[k++] = ringUvsFloat[i];
+      float32View[k++] = ringUvsFloat[i + 1];
+      float32View[k++] = bkgUvsFloat[i];
+      float32View[k++] = bkgUvsFloat[i + 1];
+      uint32View[k++] = ringColor;
+      uint32View[k++] = bkgColor;
+      float32View[k++] = states;
+      float32View[k++] = scaleCorrection;
     }
   }
 
   /* ---------------------------------------- */
 
-  /**
-   * The batch vertex shader source. Subclasses can override it.
-   * @type {string}
-   * @protected
-   */
+  /** @override */
   static _batchVertexShader = `
       in vec2 aRingTextureCoord;
       in vec2 aBackgroundTextureCoord;
@@ -191,11 +136,7 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
 
   /* -------------------------------------------- */
 
-  /**
-   * The batch fragment shader source. Subclasses can override it.
-   * @type {string}
-   * @protected
-   */
+  /** @override */
   static _batchFragmentShader = `
       in vec2 vRingTextureCoord;
       in vec2 vBackgroundTextureCoord;
@@ -203,14 +144,14 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
       flat in vec3 vBackgroundColor;
       flat in uint vStates;
       flat in float vScaleCorrection;
-        
+
       uniform sampler2D tokenRingTexture;
       uniform float time;
-              
+
       ${this.CONSTANTS}
       ${this.PERCEIVED_BRIGHTNESS}
       ${TOKEN_RING_FRAG_HEADER}
-      
+
       vec4 _main() {
         ${TOKEN_RING_FRAG_MAIN}
         return result;
