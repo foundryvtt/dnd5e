@@ -3069,8 +3069,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritdoc */
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    this._displayScrollingDamage(options.dhp);
-    this.token?.flashRing(options);
+    this._displayTokenEffect(options);
     if ( userId === game.userId ) {
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
@@ -3107,26 +3106,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Display changes to health as scrolling combat text.
-   * Adapt the font size relative to the Actor's HP total to emphasize more significant blows.
-   * @param {number} dhp      The change in hit points that was applied
-   * @private
+   * Flash ring & display changes to health as scrolling combat text.
+   * @param {object} options  Any data provided by the update.
+   * @protected
    */
-  _displayScrollingDamage(dhp) {
-    if ( !dhp ) return;
-    dhp = Number(dhp);
-    const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
-    for ( const t of tokens ) {
-      if ( !t.visible || !t.renderable ) continue;
-      const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
-      canvas.interface.createScrollingText(t.center, dhp.signedString(), {
-        anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
-        fontSize: 16 + (32 * pct), // Range between [16, 48]
-        fill: CONFIG.DND5E.tokenHPColors[dhp < 0 ? "damage" : "healing"],
-        stroke: 0x000000,
-        strokeThickness: 4,
-        jitter: 0.25
-      });
+  _displayTokenEffect(options) {
+    const dhp = Number(options.dhp);
+    const tokens = this.isToken ? [this.token] : this.getActiveTokens(true, true);
+    for ( const token of tokens ) {
+      if ( !token.object.visible || !token.object.renderable ) continue;
+      token.flashRing(options);
+      if ( dhp ) {
+        const t = token.object;
+        const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
+        canvas.interface.createScrollingText(t.center, dhp.signedString(), {
+          anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+          // Adapt the font size relative to the Actor's HP total to emphasize more significant blows
+          fontSize: 16 + (32 * pct), // Range between [16, 48]
+          fill: CONFIG.DND5E.tokenHPColors[dhp < 0 ? "damage" : "healing"],
+          stroke: 0x000000,
+          strokeThickness: 4,
+          jitter: 0.25
+        });
+      }
     }
   }
 
