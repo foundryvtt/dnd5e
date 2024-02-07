@@ -449,7 +449,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
 
     // Compute passive bonus
-    const passive = flags.observantFeat && (feats.observantFeat.skills.includes(skillId)) ? 5 : 0;
+    const passive = flags.observantFeat && feats.observantFeat.skills.includes(skillId) ? 5 : 0;
     const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
     skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
 

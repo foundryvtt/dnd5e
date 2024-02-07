@@ -144,7 +144,7 @@ export default class Tooltips5e {
     for ( const member of party.system.members ) {
       const systemData = member.actor?.system;
       let passive;
-      if ( skill && (!ability || ability === skillConfig.ability) ) {
+      if ( skill && (!ability || (ability === skillConfig.ability)) ) {
         // Default passive skill check
         passive = systemData?.skills?.[skill]?.passive;
       } else if ( skill ) {
