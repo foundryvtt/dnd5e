@@ -2460,11 +2460,11 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
  * @enum {object}
  */
 DND5E.conditionEffects = {
-  noMovement: new Set([5, "grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
-  halfMovement: new Set([2, "prone"]),
+  noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
+  halfMovement: new Set(["exhaustion-2", "prone"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
-  halfHealth: new Set([4])
+  halfHealth: new Set(["exhaustion-4"])
 };
 
 /* -------------------------------------------- */

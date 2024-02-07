@@ -290,7 +290,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( !Number.isFinite(level) ) level = 1;
     this.icon = this.constructor._getExhaustionImage(level);
     this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
-    if ( level >= config.maximum ) this.statuses.add("dead");
+    if ( level >= config.levels ) this.statuses.add("dead");
   }
 
   /* -------------------------------------------- */
@@ -403,7 +403,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     event.stopPropagation();
     if ( event.button === 0 ) level++;
     else level--;
-    const max = CONFIG.DND5E.conditionTypes.exhaustion.maximum;
+    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
     actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, max) });
   }
 
