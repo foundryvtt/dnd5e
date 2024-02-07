@@ -2456,7 +2456,7 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
 
 /**
  * Various effects of conditions and which conditions apply it. Either keys for the conditions,
- * or a number for a level of exhaustion.
+ * and with a number appended for a level of exhaustion.
  * @enum {object}
  */
 DND5E.conditionEffects = {
