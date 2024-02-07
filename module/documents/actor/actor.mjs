@@ -222,8 +222,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const imms = this.system.traits?.ci?.value ?? new Set();
     const statuses = this.statuses;
     return props.some(k => {
+      const l = Number(k.split("-").pop());
       return (statuses.has(k) && !imms.has(k))
-        || (!imms.has("exhaustion") && (level !== null) && Number.isInteger(k) && (level >= k));
+        || (!imms.has("exhaustion") && (level !== null) && Number.isInteger(l) && (level >= l));
     });
   }
 
