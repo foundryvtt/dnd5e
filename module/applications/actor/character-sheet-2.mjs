@@ -391,6 +391,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     context.favorites = await this._prepareFavorites();
     context.favorites.sort((a, b) => a.sort - b.sort);
 
+    Hooks.call("getDataActorSheet5eCharacter2", this.actor, context );
+
     return context;
   }
 
