@@ -63,6 +63,10 @@
     box-shadow: 0 0 6px var(--dnd5e-shadow-45);
     border: 1px solid var(--dnd5e-color-gold);
 
+    @media (prefers-contrast: more) {
+      border-color: var(--dnd5e-color-dark);
+    }
+
     .header {
       background: linear-gradient(to right, var(--dnd5e-color-hd-1), var(--dnd5e-color-hd-2));
       color: white;
@@ -119,10 +123,6 @@
 
         .sign { color: var(--color-text-light-6); }
       }
-    }
-
-    @media (prefers-contrast: more) {
-      border-color: var(--dnd5e-color-dark);
     }
   }
 
@@ -182,6 +182,10 @@
     max-width: 280px;
     position: relative;
 
+    @media (prefers-contrast: more) {
+      border-color: var(--dnd5e-color-dark);
+    }
+
     &.empty {
       border: 2px dashed var(--dnd5e-color-black);
       color: var(--dnd5e-color-black);
@@ -211,10 +215,6 @@
       mix-blend-mode: overlay;
       pointer-events: none;
       border-radius: 5px;
-    }
-
-    @media (prefers-contrast: more) {
-      border-color: var(--dnd5e-color-dark);
     }
   }
 
@@ -403,12 +403,13 @@
 
   /* Reset button & input styles */
   input.uninput, button.unbutton {
-    border: none;
+    --border: none;
+    border: var(--border);
     box-shadow: none;
 
     &:hover, &:focus {
       box-shadow: none;
-      border: none;
+      border: var(--border);
     }
   }
 
@@ -797,16 +798,23 @@
     --icon-size: 18px;
 
     .condition {
+      --border-style: 1px dashed var(--color-border-light-1);
       display: flex;
       gap: .5rem;
       padding: .5625rem .75rem;
       align-items: center;
       cursor: pointer;
-      border-bottom: 1px dashed var(--color-border-light-1);
-      border-right: 1px dashed var(--color-border-light-1);
+      border-bottom: var(--border-style);
+      border-right: var(--border-style);
       color: var(--color-text-light-6);
       --icon-fill: var(--color-text-light-6);
       --icon-stroke: var(--dnd5e-color-card);
+
+      @media (prefers-contrast: more) {
+        --border-style: var(--dnd5e-border-dark);
+        span { color: var(--color-text-dark-5); }
+        &.active span { color: var(--color-text-dark-1); }
+      }
 
       &.active {
         color: var(--color-text-dark-primary);

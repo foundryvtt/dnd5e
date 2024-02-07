@@ -522,14 +522,14 @@
                 line-height: 30px;
                 text-shadow: 0 0 4px var(--dnd5e-highlight-45);
 
-                .config-button {
-                  color: inherit;
-                  font-size: inherit;
-                }
-
                 @media (prefers-contrast: more) {
                   text-shadow: 0 0 2px var(--dnd5e-color-dark);
                   filter: drop-shadow(0 0 2px var(--dnd5e-color-dark));
+                }
+
+                .config-button {
+                  color: inherit;
+                  font-size: inherit;
                 }
               }
 
@@ -888,6 +888,10 @@
           padding: .375rem;
           border-bottom: var(--dnd5e-border-dotted);
 
+          @media (prefers-contrast: more) {
+            border-bottom: var(--dnd5e-border-dark);
+          }
+
           &:last-child { border: none; }
 
           .config-button {
@@ -952,11 +956,17 @@
         grid-template-columns: 1fr 1fr;
 
         > li {
+          --border-style: var(--dnd5e-border-dotted);
           border-bottom: none;
-          border-top: var(--dnd5e-border-dotted);
+          border-top: var(--border-style);
+
+          @media (prefers-contrast: more) {
+            --border-style: var(--dnd5e-border-dark);
+            &:nth-child(odd) { border-inline-end: var(--border-style); }
+          }
 
           &:nth-child(1), &:nth-child(2) { border-top: none; }
-          &:last-child { border-top: var(--dnd5e-border-dotted); }
+          &:last-child { border-top: var(--border-style); }
         }
 
       }
@@ -1190,6 +1200,10 @@
         border-radius: 3px;
         margin-top: -.125rem;
 
+        @media (prefers-contrast: more) {
+          color: var(--color-text-light-1);
+        }
+
         > input {
           padding: .25rem;
           color: var(--dnd5e-color-gold);
@@ -1202,10 +1216,6 @@
             border: 1px solid var(--dnd5e-color-gold);
             box-shadow: 0 0 6px var(--dnd5e-color-gold);
           }
-        }
-
-        @media (prefers-contrast: more) {
-          color: var(--color-text-light-1);
         }
       }
     }
