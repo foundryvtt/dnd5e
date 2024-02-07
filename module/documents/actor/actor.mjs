@@ -212,15 +212,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Is this actor under the effect of this property from some status?
+   *Is this actor under the effect of this property from some status or possibly due to its level of exhaustion?
    * @param {string} key      A key in `DND5E.conditionEffects`.
    * @returns {boolean}       Whether the actor is affected.
    */
   hasConditionEffect(key) {
     const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
+    const level = this.system.attributes?.exhaustion ?? null;
     const imms = this.system.traits?.ci?.value ?? new Set();
     const statuses = this.statuses;
-    return statuses.difference(imms).intersects(props);
+    return props.some(k => {
+      return (statuses.has(k) && !imms.has(k))
+        || (!imms.has("exhaustion") && (level !== null) && Number.isInteger(k) && (level >= k));
+    });
   }
 
   /* -------------------------------------------- */
@@ -664,7 +668,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       hp.max = base + levelBonus + overallBonus;
 
-      if ( this.system.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
+      if ( this.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
     }
 
     hp.value = Math.min(hp.value, hp.max + (hp.tempmax ?? 0));

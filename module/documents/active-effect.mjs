@@ -285,11 +285,12 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @protected
    */
   _prepareExhaustionLevel() {
+    const config = CONFIG.DND5E.conditionTypes.exhaustion;
     let level = this.getFlag("dnd5e", "exhaustionLevel");
     if ( !Number.isFinite(level) ) level = 1;
-    this.icon = `systems/dnd5e/icons/svg/statuses/exhaustion-${level}.svg`;
+    this.icon = `${config.icon.split(".")[0]}-${level}.svg`;
     this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
-    if ( level >= 6 ) this.statuses.add("dead");
+    if ( level >= config.maximum ) this.statuses.add("dead");
   }
 
   /* -------------------------------------------- */
@@ -364,9 +365,10 @@ export default class ActiveEffect5e extends ActiveEffect {
     const actor = app.object.actor;
     const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
     if ( Number.isFinite(level) && (level > 0) ) {
+      const [path] = CONFIG.DND5E.conditionTypes.exhaustion.icon.split(".");
       html.find('[data-status-id="exhaustion"]').css({
         objectPosition: "-100px",
-        background: `url('systems/dnd5e/icons/svg/statuses/exhaustion-${level}.svg') no-repeat center / contain`
+        background: `url('${path}-${level}.svg') no-repeat center / contain`
       });
     }
   }
@@ -387,7 +389,8 @@ export default class ActiveEffect5e extends ActiveEffect {
     event.stopPropagation();
     if ( event.button === 0 ) level++;
     else level--;
-    actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, 6) });
+    const max = CONFIG.DND5E.conditionTypes.exhaustion.maximum;
+    actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, max) });
   }
 
   /* -------------------------------------------- */

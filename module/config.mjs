@@ -2385,7 +2385,8 @@ DND5E.conditionTypes = {
   exhaustion: {
     label: "DND5E.ConExhaustion",
     icon: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv"
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv",
+    maximum: 6
   },
   frightened: {
     label: "DND5E.ConFrightened",
@@ -2453,14 +2454,16 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
 /* -------------------------------------------- */
 
 /**
- * Various effects of conditions and which conditions apply it.
+ * Various effects of conditions and which conditions apply it. Either keys for the conditions,
+ * or a number for a level of exhaustion.
  * @enum {object}
  */
 DND5E.conditionEffects = {
-  noMovement: new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
-  halfMovement: new Set(["prone"]),
+  noMovement: new Set([5, "grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
+  halfMovement: new Set([2, "prone"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
-  petrification: new Set(["petrified"])
+  petrification: new Set(["petrified"]),
+  halfHealth: new Set([4])
 };
 
 /* -------------------------------------------- */

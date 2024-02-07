@@ -105,8 +105,8 @@ export default class AttributesFields {
    */
   static prepareMovement() {
     const statuses = this.parent.statuses;
-    const noMovement = this.parent.hasConditionEffect("noMovement") || (this.attributes.exhaustion >= 5);
-    const halfMovement = this.parent.hasConditionEffect("halfMovement") || (this.attributes.exhaustion >= 2);
+    const noMovement = this.parent.hasConditionEffect("noMovement");
+    const halfMovement = this.parent.hasConditionEffect("halfMovement");
     const reduction = statuses.has("heavilyEncumbered")
       ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered
       : statuses.has("encumbered") ? CONFIG.DND5E.encumbrance.speedReduction.encumbered : 0;
