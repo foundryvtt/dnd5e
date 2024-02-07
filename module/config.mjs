@@ -2463,7 +2463,7 @@ DND5E.conditionEffects = {
   halfMovement: new Set(["exhaustion-2", "prone"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
-  halfHealth: new Set([4])
+  halfHealth: new Set(["exhaustion-4"])
 };
 
 /* -------------------------------------------- */
