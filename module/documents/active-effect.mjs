@@ -389,7 +389,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     event.stopPropagation();
     if ( event.button === 0 ) level++;
     else level--;
-    const max = CONFIG.DND5E.conditionTypes.exhaustion.maximum;
+    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
     actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, max) });
   }
 
