@@ -143,6 +143,15 @@
                             <span class="subtitle">{{{ ctx.subtitle }}}</span>
                             {{/if}}
                         </div>
+                        <div class="tags">
+                            {{#each item.labels.properties}}
+                            {{#if icon}}
+                            <span aria-label="{{ label }}">
+                                <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                            </span>
+                            {{/if}}
+                            {{/each}}
+                        </div>
                     </div>
 
                     {{!-- Item Price --}}
