@@ -212,7 +212,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   *Is this actor under the effect of this property from some status or possibly due to its level of exhaustion?
+   * Is this actor under the effect of this property from some status or due to its level of exhaustion?
    * @param {string} key      A key in `DND5E.conditionEffects`.
    * @returns {boolean}       Whether the actor is affected.
    */
