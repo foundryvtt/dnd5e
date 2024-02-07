@@ -200,7 +200,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     };
 
     // Exhaustion
-    const max = CONFIG.DND5E.conditionTypes.exhaustion.maximum;
+    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
     context.exhaustion = {
       pips: Array.fromRange(max, 1).map(n => {
         const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
