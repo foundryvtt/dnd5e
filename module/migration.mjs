@@ -207,6 +207,7 @@ export const migrateCompendium = async function(pack) {
  * Re-parents compendia from one top-level folder to another.
  * @param {string} from  The name of the source folder.
  * @param {string} to    The name of the destination folder.
+ * @returns {Promise<Folder[]> | undefined}
  */
 export function reparentCompendiums(from, to) {
   const compendiumFolders = new Map();

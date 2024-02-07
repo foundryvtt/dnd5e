@@ -334,9 +334,11 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @ignore
    */
   get activatedEffectChatProperties() {
-    foundry.utils.logCompatibilityWarning("ActivatedEffectTemplate#activatedEffectChatProperties is deprecated. "
+    foundry.utils.logCompatibilityWarning(
+      "ActivatedEffectTemplate#activatedEffectChatProperties is deprecated. "
       + "Please use ActivatedEffectTemplate#activatedEffectCardProperties.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true });
+      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
+    );
     return [
       this.parent.labels.activation + (this.activation.condition ? ` (${this.activation.condition})` : ""),
       this.parent.labels.target,

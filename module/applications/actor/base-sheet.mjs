@@ -394,7 +394,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
         override: override || 0,
-        dataset: {type: "spell", level: prepMode in sections ? 1 : i, "preparationMode": prepMode},
+        dataset: {type: "spell", level: prepMode in sections ? 1 : i, preparationMode: prepMode},
         prop: sl,
         editable: context.editable && !aeOverride
       };

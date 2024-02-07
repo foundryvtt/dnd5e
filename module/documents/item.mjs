@@ -677,7 +677,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       }
       catch(err) {
-        const parentInfo = this.parent ? ` on ${this.parent.name} (${this.parent.id})` : '';
+        const parentInfo = this.parent ? ` on ${this.parent.name} (${this.parent.id})` : "";
         console.warn(`Unable to simplify formula for ${this.name} (${this.id})${parentInfo}`, err);
       }
       const damageType = damagePart[1];
@@ -2540,7 +2540,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
    * @returns {Promise<Item5e|null>}
    */
-  static async createDialog(data={}, { parent=null, pack=null, types=null, ...options }) {
+  static async createDialog(data={}, { parent=null, pack=null, types=null, ...options }={}) {
     types ??= game.documentTypes[this.documentName].filter(t => (t !== CONST.BASE_DOCUMENT_TYPE) && (t !== "backpack"));
     if ( !types.length ) return null;
     const collection = parent ? null : pack ? game.packs.get(pack) : game.collections.get(this.documentName);
