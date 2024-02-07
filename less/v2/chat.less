@@ -252,6 +252,13 @@
 .dice-roll {
   cursor: pointer;
   &.expanded .dice-total::after { transform: rotate(-90deg); }
+
+  &.secret-roll {
+    cursor: initial;
+    .dice-total::before, .dice-total::after {
+      content: none;
+    }
+  }
 }
 
 /* ---------------------------------- */

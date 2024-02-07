@@ -150,18 +150,32 @@ export default class ChatMessage5e extends ChatMessage {
     // Header matter
     const { scene: sceneId, token: tokenId, actor: actorId } = this.speaker;
     const actor = game.scenes.get(sceneId)?.tokens.get(tokenId)?.actor ?? game.actors.get(actorId);
-    const img = actor?.img ?? this.user.avatar;
+
+    let img;
+    let nameText;
+    if ( this.isContentVisible ) {
+      img = actor?.img ?? this.user.avatar;
+      nameText = this.alias;
+    } else {
+      img = this.user.avatar;
+      nameText = this.user.name;
+    }
+
     const avatar = document.createElement("div");
     avatar.classList.add("avatar");
-    avatar.innerHTML = `<img src="${img}" alt="${this.alias}">`;
+    avatar.innerHTML = `<img src="${img}" alt="${nameText}">`;
+
     const name = document.createElement("span");
     name.classList.add("name-stacked");
-    name.innerHTML = `<span class="title">${this.alias}</span>`;
+    name.innerHTML = `<span class="title">${nameText}</span>`;
+
     const subtitle = document.createElement("span");
     subtitle.classList.add("subtitle");
     if ( this.whisper.length ) subtitle.innerText = html.querySelector(".whisper-to")?.innerText ?? "";
-    else if ( this.alias !== this.user?.name ) subtitle.innerText = this.user?.name ?? "";
+    if ( (nameText !== this.user?.name) && !subtitle.innerText.length ) subtitle.innerText = this.user?.name ?? "";
+
     name.appendChild(subtitle);
+
     const sender = html.querySelector(".message-sender");
     sender?.replaceChildren(avatar, name);
     html.querySelector(".whisper-to")?.remove();
@@ -186,7 +200,7 @@ export default class ChatMessage5e extends ChatMessage {
     // Enriched roll flavor
     const roll = this.getFlag("dnd5e", "roll");
     const item = fromUuidSync(roll?.itemUuid);
-    if ( item ) {
+    if ( this.isContentVisible && item ) {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.options?.critical;
       const subtitle = roll.type === "damage"
         ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
@@ -219,8 +233,10 @@ export default class ChatMessage5e extends ChatMessage {
         if ( !(roll instanceof DamageRoll) ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
+      html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
+    } else {
+      html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
     }
-    html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     html.querySelectorAll(".dice-tooltip").forEach(el => el.style.height = "0");
   }
 
