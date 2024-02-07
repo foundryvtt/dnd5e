@@ -2355,6 +2355,7 @@ DND5E.consumableResources = [
  * @property {string} [icon]       Icon used to represent the condition on the token.
  * @property {string} [reference]  UUID of a journal entry with details on this condition.
  * @property {string} [special]    Set this condition as a special status effect under this name.
+ * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
  */
 
 /**
@@ -2386,7 +2387,7 @@ DND5E.conditionTypes = {
     label: "DND5E.ConExhaustion",
     icon: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv",
-    maximum: 6
+    levels: 6
   },
   frightened: {
     label: "DND5E.ConFrightened",

@@ -288,7 +288,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     const config = CONFIG.DND5E.conditionTypes.exhaustion;
     let level = this.getFlag("dnd5e", "exhaustionLevel");
     if ( !Number.isFinite(level) ) level = 1;
-    this.icon = `${config.icon.split(".")[0]}-${level}.svg`;
+    this.icon = this.constructor._getExhaustionImage(level);
     this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
     if ( level >= config.maximum ) this.statuses.add("dead");
   }
@@ -365,12 +365,26 @@ export default class ActiveEffect5e extends ActiveEffect {
     const actor = app.object.actor;
     const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
     if ( Number.isFinite(level) && (level > 0) ) {
-      const [path] = CONFIG.DND5E.conditionTypes.exhaustion.icon.split(".");
+      const img = this._getExhaustionImage(level);
       html.find('[data-status-id="exhaustion"]').css({
         objectPosition: "-100px",
-        background: `url('${path}-${level}.svg') no-repeat center / contain`
+        background: `url('${img}') no-repeat center / contain`
       });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the image used to represent exhaustion at this level.
+   * @param {number} level
+   * @returns {string}
+   */
+  static _getExhaustionImage(level) {
+    const split = CONFIG.DND5E.conditionTypes.exhaustion.icon.split(".");
+    const ext = split.pop();
+    const path = split.join(".");
+    return `${path}-${level}.${ext}`;
   }
 
   /* -------------------------------------------- */
