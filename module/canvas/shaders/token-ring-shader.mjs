@@ -22,7 +22,7 @@ export default class TokenRingSamplerShader extends PrimaryBaseSamplerShader {
 
   /** @inheritdoc */
   static batchGeometry = [
-    ...super.batchGeometry,
+    ...(super.batchGeometry ?? []),
     {id: "aRingTextureCoord", size: 2, normalized: false, type: PIXI.TYPES.FLOAT},
     {id: "aBackgroundTextureCoord", size: 2, normalized: false, type: PIXI.TYPES.FLOAT},
     {id: "aRingColor", size: 4, normalized: true, type: PIXI.TYPES.UNSIGNED_BYTE},
