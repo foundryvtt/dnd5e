@@ -365,7 +365,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     const actor = app.object.actor;
     const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
     if ( Number.isFinite(level) && (level > 0) ) {
-      const img = this._getExhaustionImage(level);
+      const img = ActiveEffect5e._getExhaustionImage(level);
       html.find('[data-status-id="exhaustion"]').css({
         objectPosition: "-100px",
         background: `url('${img}') no-repeat center / contain`
