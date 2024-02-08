@@ -244,6 +244,9 @@
                                         <span class="value">{{ value }}</span>
                                         <span class="separator">&sol;</span>
                                         <span class="max">{{ max }}</span>
+                                        {{#if tempmax}}
+                                        <span class="tempmax">{{dnd5e-numberFormat tempmax signDisplay="always"}}</span>
+                                        {{/if}}
                                     </div>
                                     <input type="text" name="system.attributes.hp.value" data-dtype="Number"
                                            placeholder="0" value="{{ value }}" hidden>

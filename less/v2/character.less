@@ -571,6 +571,11 @@
               border-right: var(--border-width) solid var(--dnd5e-color-hp-3);
               border-radius: 4px 0 0 4px;
             }
+            .tempmax {
+              opacity: 80%;
+              &::before { content: "("; }
+              &::after { content: ")"; }
+            }
           }
 
           &.hit-dice {
