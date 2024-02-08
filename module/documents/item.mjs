@@ -1597,7 +1597,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
 
     foundry.utils.mergeObject(rollConfig, options);
-    rollConfig.rollConfigs = rollConfigs;
+    rollConfig.rollConfigs = rollConfigs.concat(options.rollConfigs ?? []);
 
     /**
      * A hook event that fires before a damage is rolled for an Item.
