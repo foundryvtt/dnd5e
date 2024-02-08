@@ -254,11 +254,12 @@ export default class ItemListControlsElement extends HTMLElement {
     const elementMap = {};
     if ( !this.keepEmpty ) this.list.querySelectorAll(".items-section").forEach(el => el.hidden = true);
     this.list.querySelectorAll(".item-list .item").forEach(el => {
-      elementMap[el.dataset.entryId] = el;
+      const uniqueID = el.dataset.parentId ? `${el.dataset.parentId}.${el.dataset.entryId}` : el.dataset.entryId;
+      elementMap[uniqueID] = el;
       el.hidden = true;
     });
     for ( const entry of entries ) {
-      const el = elementMap[entry.id];
+      const el = elementMap[`${entry.parent.id}.${entry.id}`] ?? elementMap[entry.id];
       if ( el ) el.hidden = false;
     }
     this.list.querySelectorAll(".items-section:has(.item-list .item:not([hidden]))").forEach(el => el.hidden = false);
