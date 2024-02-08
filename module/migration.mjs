@@ -16,7 +16,7 @@ export const migrateWorld = async function() {
       const flags = { persistSourceMigration: false };
       const source = valid ? actor.toObject() : game.data.actors.find(a => a._id === actor.id);
       const version = actor._stats.systemVersion;
-      let updateData = migrateActorData(source, migrationData, flags);
+      let updateData = migrateActorData(source, migrationData, flags, { actorUuid: actor.uuid });
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Actor document ${actor.name}`);
         if ( flags.persistSourceMigration ) {
@@ -102,7 +102,7 @@ export const migrateWorld = async function() {
       try {
         const flags = { persistSourceMigration: false };
         const source = token.actor.toObject();
-        let updateData = migrateActorData(source, migrationData, flags);
+        let updateData = migrateActorData(source, migrationData, flags, { actorUuid: token.actor.uuid });
         if ( !foundry.utils.isEmpty(updateData) ) {
           console.log(`Migrating ActorDelta document ${token.actor.name} [${token.delta.id}] in Scene ${s.name}`);
           if ( flags.persistSourceMigration ) {
@@ -167,7 +167,7 @@ export const migrateCompendium = async function(pack) {
       const source = doc.toObject();
       switch ( documentName ) {
         case "Actor":
-          updateData = migrateActorData(source, migrationData, flags);
+          updateData = migrateActorData(source, migrationData, flags, { actorUuid: doc.uuid });
           if ( (documentName === "Actor") && source.effects && source.items
             && foundry.utils.isNewerVersion("3.0.3", source._stats.systemVersion) ) {
             const deleteIds = _duplicatedEffects(source);
@@ -334,12 +334,14 @@ export const migrateArmorClass = async function(pack) {
 /**
  * Migrate a single Actor document to incorporate latest data model changes
  * Return an Object of updateData to be applied
- * @param {object} actor            The actor data object to update
- * @param {object} [migrationData]  Additional data to perform the migration
- * @param {object} [flags={}]       Track the needs migration flag.
- * @returns {object}                The updateData to apply
+ * @param {object} actor                The actor data object to update
+ * @param {object} [migrationData]      Additional data to perform the migration
+ * @param {object} [flags={}]           Track the needs migration flag.
+ * @param {object} [options]
+ * @param {string} [options.actorUuid]  The UUID of the actor.
+ * @returns {object}                    The updateData to apply
  */
-export const migrateActorData = function(actor, migrationData, flags={}) {
+export const migrateActorData = function(actor, migrationData, flags={}, { actorUuid }={}) {
   const updateData = {};
   _migrateTokenImage(actor, updateData);
   _migrateActorAC(actor, updateData);
@@ -348,6 +350,7 @@ export const migrateActorData = function(actor, migrationData, flags={}) {
   // Migrate embedded effects
   if ( actor.effects ) {
     const effects = migrateEffects(actor, migrationData);
+    migrateCopyActorTransferEffects(actor, effects, { actorUuid });
     if ( effects.length > 0 ) updateData.effects = effects;
   }
 
@@ -440,10 +443,10 @@ export function migrateItemData(item, migrationData, flags={}) {
  * @returns {object[]}              Updates to apply on the embedded effects.
  */
 export const migrateEffects = function(parent, migrationData) {
-  if ( !parent.effects ) return {};
+  if ( !parent.effects ) return [];
   return parent.effects.reduce((arr, e) => {
     const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
-    let effectUpdate = migrateEffectData(effectData, migrationData);
+    let effectUpdate = migrateEffectData(effectData, migrationData, { parent });
     if ( !foundry.utils.isEmpty(effectUpdate) ) {
       effectUpdate._id = effectData._id;
       arr.push(foundry.utils.expandObject(effectUpdate));
@@ -455,15 +458,45 @@ export const migrateEffects = function(parent, migrationData) {
 /* -------------------------------------------- */
 
 /**
- * Migrate the provided active effect data.
- * @param {object} effect           Effect data to migrate.
- * @param {object} [migrationData]  Additional data to perform the migration.
- * @returns {object}                The updateData to apply.
+ * Migrates transfer effects on items belonging to this actor to "real" effects on the actor.
+ * @param {object} actor                 The parent actor.
+ * @param {object[]} effects             An array of new effects to add.
+ * @param {object} [options]             Additional options.
+ * @param {string} [options.actorUuid]  UUID of the parent actor
  */
-export const migrateEffectData = function(effect, migrationData) {
+export const migrateCopyActorTransferEffects = function(actor, effects, { actorUuid }={}) {
+  if ( !actor.items ) return;
+
+  for ( const item of actor.items ) {
+    for ( const effect of item.effects ) {
+      if ( !effect.transfer) continue;
+      if ( !isSpellOrScroll(item) ) continue;
+      if ( effect.disabled ) continue;
+
+      const newEffect = foundry.utils.deepClone(effect);
+      newEffect.transfer = false;
+      if ( actorUuid ) newEffect.origin = `${actorUuid}.Item.${item._id}.ActiveEffect.${effect._id}`;
+      delete newEffect._id;
+      effects.push(newEffect);
+    }
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate the provided active effect data.
+ * @param {object} effect            Effect data to migrate.
+ * @param {object} [migrationData]   Additional data to perform the migration.
+ * @param {object} [options]         Additional options.
+ * @param {object} [options.parent]  Parent of this effect.
+ * @returns {object}                 The updateData to apply.
+ */
+export const migrateEffectData = function(effect, migrationData, { parent }={}) {
   const updateData = {};
   _migrateDocumentIcon(effect, updateData, {...migrationData, field: "icon"});
   _migrateEffectArmorClass(effect, updateData);
+  _migrateTransferEffect(effect, parent, updateData);
   return updateData;
 };
 
@@ -703,6 +736,28 @@ function _migrateEffectArmorClass(effect, updateData) {
 /* -------------------------------------------- */
 
 /**
+ * Disable transfer on effects on spell items
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} parent      The parent of this effect.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateTransferEffect(effect, parent, updateData) {
+  if ( !effect.transfer ) return updateData;
+  if ( !isSpellOrScroll(parent) ) return updateData;
+
+  updateData.transfer = false;
+  updateData.disabled = true;
+  updateData["duration.startTime"] = null;
+  updateData["duration.startRound"] = null;
+  updateData["duration.startTurn"] = null;
+
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Migrate macros from the old 'dnd5e.rollItemMacro' and 'dnd5e.macros' commands to the new location.
  * @param {object} macro       Macro data to migrate.
  * @param {object} updateData  Existing update to expand upon.
@@ -743,4 +798,16 @@ export async function purgeFlags(pack) {
     console.log(`Purged flags from ${doc.name}`);
   }
   await pack.configure({locked: true});
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Returns whether given item data represents either a spell item or a spell scroll consumable
+ * @param {object} item  The item data.
+ * @returns {boolean}
+ */
+function isSpellOrScroll(item) {
+  if ( (item.type === "consumable") && (item.system.type.value === "scroll") ) return true;
+  return item.type === "spell";
 }
