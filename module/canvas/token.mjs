@@ -159,10 +159,20 @@ export default class Token5e extends Token {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   _refreshShader() {
     if ( CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
       this.mesh?.setShaderClass(CONFIG.Token.ringClass.tokenRingSamplerShader);
     } else super._refreshShader();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _configureFilterEffect(statusId, active) {
+    if ( (statusId === CONFIG.specialStatusEffects.INVISIBLE) && CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
+      active = false;
+    }
+    return super._configureFilterEffect(statusId, active);
   }
 }
