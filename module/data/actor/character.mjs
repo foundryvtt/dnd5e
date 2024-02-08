@@ -223,14 +223,15 @@ export default class CharacterData extends CreatureTemplate {
   /**
    * Add a favorite item to this actor.
    * If the given item is already favorite, this method has no effect.
-   * @param {object} favorite  The favorite to add.
+   * @param {ActorFavorites5e} favorite  The favorite to add.
    * @returns {Promise<Actor5e>}
    * @throws If the item intended to be favorited does not belong to this actor.
    */
   addFavorite(favorite) {
     if ( this.hasFavorite(favorite.id) ) return Promise.resolve(this.parent);
 
-    if ( fromUuidSync(favorite.id, { relative: this.parent }) === null ) {
+    if ( favorite.id.startsWith(".") && fromUuidSync(favorite.id, { relative: this.parent }) === null ) {
+      // Assume that an ID starting with a "." is a relative ID.
       throw new Error(`The item with id ${favorite.id} is not owned by actor ${this.parent.id}`);
     }
 
