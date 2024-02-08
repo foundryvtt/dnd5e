@@ -248,10 +248,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       ability.sign = Math.sign(ability.mod) < 0 ? "-" : "+";
       ability.mod = Math.abs(ability.mod);
       ability.baseValue = context.source.abilities[k]?.value ?? 0;
-      if ( obj.bottom.length > 5 ) obj.top.push(ability);
+      if ( obj.top.length > 1 ) obj.overflow.push(ability);
+      else if ( obj.bottom.length > 5 ) obj.top.push(ability);
       else obj.bottom.push(ability);
       return obj;
-    }, { top: [], bottom: [] });
+    }, { top: [], bottom: [], overflow: [] });
     context.abilityRows.optional = Object.keys(CONFIG.DND5E.abilities).length - 6;
 
     // Saving Throws

@@ -200,6 +200,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials
+    "systems/dnd5e/templates/actors/parts/actor-ability-score.hbs",
     "systems/dnd5e/templates/actors/parts/actor-traits.hbs",
     "systems/dnd5e/templates/actors/parts/actor-inventory.hbs",
     "systems/dnd5e/templates/actors/parts/actor-features.hbs",

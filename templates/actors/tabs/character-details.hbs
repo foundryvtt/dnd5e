@@ -121,6 +121,14 @@
         {{!-- Background & Saving Throws --}}
         <div class="top flexrow">
 
+            {{#if abilityRows.overflow.length}}
+            <div class="ability-scores">
+                {{#each abilityRows.overflow}}
+                {{> "dnd5e.actor-ability-score"}}
+                {{/each}}
+            </div>
+            {{/if}}
+
             {{!-- Saving Throws --}}
             <filigree-box class="saves">
                 <h3>

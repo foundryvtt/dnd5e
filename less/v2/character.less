@@ -1051,12 +1051,23 @@
   /* ---------------------------------- */
 
   .ability-scores {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: calc(var(--dnd5e-sheet-sidebar-width) + 1.25rem);
-    pointer-events: none;
-    container-type: inline-size;
+    &:not(.fixed) {
+      flex: 1 0 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .75rem 1.375rem;
+      margin-block-end: .25rem;
+    }
+
+    &.fixed {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: calc(var(--dnd5e-sheet-sidebar-width) + 1.25rem);
+      pointer-events: none;
+      container-type: inline-size;
+    }
 
     .rows {
       padding: 4.75rem 0 4.75rem 1.5rem;

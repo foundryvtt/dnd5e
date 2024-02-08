@@ -1,0 +1,22 @@
+<div class="ability-score {{#if flipped}}flipped{{/if}}" data-ability="{{ key }}">
+    <a class="label {{ @root.rollableClass }} ability-check">{{ abbr }}</a>
+    <div class="mod">
+        {{#if @root.editable}}
+        <a class="config-button" data-action="ability"
+           data-tooltip="{{ localize "DND5E.AbilityConfigure" ability=label }}"
+           aria-label="{{ localize "DND5E.AbilityConfigure" ability=label }}">
+            <i class="fas fa-cog"></i>
+        </a>
+        {{else}}
+        <span class="sign">{{ sign }}</span>{{ mod }}
+        {{/if}}
+    </div>
+    <div class="score">
+        {{#if @root.editable}}
+        <input type="text" name="system.abilities.{{ key }}.value" value="{{ baseValue }}" placeholder="10"
+               data-dtype="Number" class="uninput">
+        {{else}}
+        {{ value }}
+        {{/if}}
+    </div>
+</div>

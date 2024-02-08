@@ -4,31 +4,6 @@
             aria-pressed="{{ filled }}"></button>
 {{/inline}}
 
-{{#*inline "ability-score"}}
-    <div class="ability-score {{#if flipped}}flipped{{/if}}" data-ability="{{ key }}">
-        <a class="label {{ @root.rollableClass }} ability-check">{{ abbr }}</a>
-        <div class="mod">
-            {{#if @root.editable}}
-            <a class="config-button" data-action="ability"
-               data-tooltip="{{ localize "DND5E.AbilityConfigure" ability=label }}"
-               aria-label="{{ localize "DND5E.AbilityConfigure" ability=label }}">
-                <i class="fas fa-cog"></i>
-            </a>
-            {{else}}
-            <span class="sign">{{ sign }}</span>{{ mod }}
-            {{/if}}
-        </div>
-        <div class="score">
-            {{#if @root.editable}}
-            <input type="text" name="system.abilities.{{ key }}.value" value="{{ baseValue }}" placeholder="10"
-                   data-dtype="Number" class="uninput">
-            {{else}}
-            {{ value }}
-            {{/if}}
-        </div>
-    </div>
-{{/inline}}
-
 <form class="{{ cssClass }} flexcol" autocomplete="off">
 
     {{!-- Header --}}
@@ -495,16 +470,16 @@
     </section>
 
     {{!-- Ability Scores --}}
-    <section class="ability-scores optional-ability-{{ abilityRows.optional }}">
+    <section class="ability-scores fixed optional-ability-{{ abilityRows.optional }}">
         <div class="rows">
             <div class="top">
                 {{#each abilityRows.top}}
-                    {{> ability-score flipped=true }}
+                    {{> "dnd5e.actor-ability-score" flipped=true }}
                 {{/each}}
             </div>
             <div class="bottom">
                 {{#each abilityRows.bottom}}
-                    {{> ability-score }}
+                    {{> "dnd5e.actor-ability-score" }}
                 {{/each}}
             </div>
         </div>
