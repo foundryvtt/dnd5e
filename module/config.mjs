@@ -2355,6 +2355,7 @@ DND5E.consumableResources = [
  * @property {string} [icon]       Icon used to represent the condition on the token.
  * @property {string} [reference]  UUID of a journal entry with details on this condition.
  * @property {string} [special]    Set this condition as a special status effect under this name.
+ * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
  */
 
 /**
@@ -2385,7 +2386,8 @@ DND5E.conditionTypes = {
   exhaustion: {
     label: "DND5E.ConExhaustion",
     icon: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv"
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv",
+    levels: 6
   },
   frightened: {
     label: "DND5E.ConFrightened",
@@ -2453,14 +2455,16 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
 /* -------------------------------------------- */
 
 /**
- * Various effects of conditions and which conditions apply it.
+ * Various effects of conditions and which conditions apply it. Either keys for the conditions,
+ * and with a number appended for a level of exhaustion.
  * @enum {object}
  */
 DND5E.conditionEffects = {
-  noMovement: new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
-  halfMovement: new Set(["prone"]),
+  noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
+  halfMovement: new Set(["exhaustion-2", "prone"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
-  petrification: new Set(["petrified"])
+  petrification: new Set(["petrified"]),
+  halfHealth: new Set(["exhaustion-4"])
 };
 
 /* -------------------------------------------- */

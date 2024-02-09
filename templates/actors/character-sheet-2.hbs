@@ -148,10 +148,8 @@
                         <div class="top">
 
                             <div class="pips" data-prop="system.attributes.exhaustion">
-                                {{#each exhaustion}}
-                                {{#if (lt @index 3)}}
+                                {{#each exhaustion.left}}
                                     {{> pip }}
-                                {{/if}}
                                 {{/each}}
                             </div>
 
@@ -171,10 +169,8 @@
                             </div>
 
                             <div class="pips" data-prop="system.attributes.exhaustion">
-                                {{#each exhaustion}}
-                                {{#if (gt @index 2)}}
+                                {{#each exhaustion.right}}
                                     {{> pip }}
-                                {{/if}}
                                 {{/each}}
                             </div>
                         </div>

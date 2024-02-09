@@ -200,14 +200,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     };
 
     // Exhaustion
-    context.exhaustion = Array.fromRange(6, 1).map(n => {
+    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
+    context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
       const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
       const classes = ["pip"];
       const filled = attributes.exhaustion >= n;
       if ( filled ) classes.push("filled");
-      if ( n === 6 ) classes.push("death");
-      return { n, label, filled, tooltip: label, classes: classes.join(" ") };
-    });
+      if ( n === max ) classes.push("death");
+      const pip = { n, label, filled, tooltip: label, classes: classes.join(" ") };
+
+      if ( n <= max / 2 ) acc.left.push(pip);
+      else acc.right.push(pip);
+      return acc;
+    }, { left: [], right: [] });
 
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
