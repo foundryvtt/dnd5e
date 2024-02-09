@@ -674,6 +674,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
     hp.value = Math.min(hp.value, hp.effectiveMax);
+    hp.damage = hp.effectiveMax - hp.value;
     hp.pct = Math.clamped(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
   }
 
@@ -1123,11 +1124,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
 
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
-    const deltaHP = amount - deltaTemp;
+    const deltaHP = Math.clamped(amount - deltaTemp, -hp.damage, hp.value);
     const updates = {
       "system.attributes.hp.temp": hp.temp - deltaTemp,
       "system.attributes.hp.value": hp.value - deltaHP
     };
+    amount = deltaTemp + deltaHP;
 
     /**
      * A hook event that fires before damage is applied to an actor.
