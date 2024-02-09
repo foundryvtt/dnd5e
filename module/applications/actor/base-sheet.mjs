@@ -48,7 +48,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /**
-   * Additional registered collections for filtering.
+   * Additional custom registered collections for filtering.
    * @type {Object<string, Function>}
    */
   static FILTER_COLLECTIONS = {};
@@ -479,7 +479,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /**
    * Filter child embedded Documents based on the current set of filters.
-   * @param {string} collection    The embedded collection name.
+   * @param {string} collection    The embedded or custom collection name.
    * @param {Set<string>} filters  Filters to apply to the children.
    * @returns {Document[]}
    * @protected
