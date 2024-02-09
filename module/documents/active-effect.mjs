@@ -18,6 +18,14 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
+   * Additional key paths to properties added during base data preparation that should be treated as formula fields.
+   * @type {Set<string>}
+   */
+  static FORMULA_FIELDS = new Set(["system.attributes.ac.bonus"]);
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this active effect currently suppressed?
    * @type {boolean}
    */
@@ -71,13 +79,13 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
 
     // Determine type using DataField
-    const field = change.key.startsWith("system.") ? actor.system.schema.getField(change.key.slice(7)) : null;
+    let field = change.key.startsWith("system.") ? actor.system.schema.getField(change.key.slice(7)) : null;
 
     // Get the current value of the target field
     const current = foundry.utils.getProperty(actor, change.key) ?? null;
 
     const getTargetType = field => {
-      if ( field instanceof FormulaField ) return "formula";
+      if ( (field instanceof FormulaField) || ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) return "formula";
       else if ( field instanceof foundry.data.fields.ArrayField ) return "Array";
       else if ( field instanceof foundry.data.fields.ObjectField ) return "Object";
       else if ( field instanceof foundry.data.fields.BooleanField ) return "boolean";
@@ -91,6 +99,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     // Special handling for FormulaField
     if ( targetType === "formula" ) {
       const changes = {};
+      if ( !field ) field = new FormulaField({ deterministic: true });
       const delta = field._cast(change.value).trim();
       this._applyFormulaField(actor, change, current, delta, changes);
       foundry.utils.mergeObject(actor, changes);

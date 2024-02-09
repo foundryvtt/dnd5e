@@ -2588,7 +2588,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const attributions = [];
     for ( const e of this.allApplicableEffects() ) {
       let source = e.sourceName;
-      if ( e.origin === this.uuid ) source = e.name;
+      if ( !e.origin || (e.origin === this.uuid) ) source = e.name;
       if ( !source || e.disabled || e.isSuppressed ) continue;
       const value = e.changes.reduce((n, change) => {
         if ( change.key !== target ) return n;
