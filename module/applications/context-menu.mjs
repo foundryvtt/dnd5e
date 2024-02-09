@@ -5,6 +5,7 @@
 export default class ContextMenu5e extends ContextMenu {
   /** @override */
   _setPosition([html], [target]) {
+    document.body.appendChild(html);
     const { clientWidth, clientHeight } = document.documentElement;
     const { width, height } = html.getBoundingClientRect();
 
@@ -12,14 +13,13 @@ export default class ContextMenu5e extends ContextMenu {
     const { clientX, clientY } = window.event;
     const left = Math.min(clientX, clientWidth - width);
     this._expandUp = clientY + height > clientHeight;
-    const top = this._expandUp ? clientY - height : clientY;
     html.classList.add("dnd5e2");
     html.classList.toggle("expand-up", this._expandUp);
     html.classList.toggle("expand-down", !this._expandUp);
     html.style.visibility = "";
     html.style.left = `${left}px`;
-    html.style.top = `${top}px`;
+    if ( this._expandUp ) html.style.bottom = `${clientHeight - clientY}px`;
+    else html.style.top = `${clientY}px`;
     target.classList.add("context");
-    document.body.appendChild(html);
   }
 }
