@@ -123,7 +123,15 @@
       "trait": "",
       "ideal": "",
       "bond": "",
-      "flaw": ""
+      "flaw": "",
+      "eyes": "",
+      "height": "",
+      "faith": "",
+      "hair": "",
+      "weight": "",
+      "gender": "",
+      "skin": "",
+      "age": ""
     },
     "traits": {
       "size": "med",
@@ -410,11 +418,11 @@
     },
     "resources": {
       "primary": {
-        "value": 5,
-        "max": 5,
+        "value": null,
+        "max": null,
         "sr": false,
-        "lr": true,
-        "label": "Lay on Hands"
+        "lr": false,
+        "label": ""
       },
       "secondary": {
         "value": null,
@@ -430,7 +438,14 @@
         "lr": false,
         "label": ""
       }
-    }
+    },
+    "favorites": [
+      {
+        "type": "item",
+        "id": ".Item.2zb2FwOFtktH9JHF",
+        "sort": 100000
+      }
+    ]
   },
   "prototypeToken": {
     "flags": {},
@@ -3347,16 +3362,17 @@
   },
   "flags": {
     "dnd5e": {
-      "savageAttacks": true
+      "savageAttacks": true,
+      "showTokenPortrait": false
     }
   },
   "_id": "Dh1AA6w104V17V6w",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.0.2",
     "coreVersion": "11.315",
     "createdTime": 1661787232161,
-    "modifiedTime": 1706819067989,
+    "modifiedTime": 1707505942110,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Dh1AA6w104V17V6w"
