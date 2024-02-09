@@ -1001,8 +1001,16 @@ preLocalize("armorClasses", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for an items that have sub-types.
+ *
+ * @typedef {object} SubtypeTypeConfiguration
+ * @property {string} label                       Localized label for this type.
+ * @property {Record<string, string>} [subtypes]  Enum containing localized labels for subtypes.
+ */
+
+/**
  * Enumerate the valid consumable types which are recognized by the system.
- * @enum {string}
+ * @enum {SubtypeTypeConfiguration}
  */
 DND5E.consumableTypes = {
   ammo: {
@@ -1121,16 +1129,8 @@ DND5E.focusTypes = {
 /* -------------------------------------------- */
 
 /**
- * Configuration data for an item with the "feature" type.
- *
- * @typedef {object} FeatureTypeConfiguration
- * @property {string} label                       Localized label for this type.
- * @property {Object<string, string>} [subtypes]  Enum containing localized labels for subtypes.
- */
-
-/**
  * Types of "features" items.
- * @enum {FeatureTypeConfiguration}
+ * @enum {SubtypeTypeConfiguration}
  */
 DND5E.featureTypes = {
   background: {
