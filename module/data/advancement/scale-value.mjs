@@ -277,7 +277,22 @@ export class ScaleValueTypeDice extends ScaleValueType {
    */
   get die() {
     if ( !this.faces ) return "";
-    return `d${this.faces}${Array.from(this.modifiers).filterJoin("")}`;
+    return `d${this.faces}${this.mods}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The concatenated string of current modifiers.
+   * @type {string}
+   */
+  get mods() {
+    const mods = new Set();
+    for (const m of this.modifiers) {
+      const k = Roll.replaceFormulaData(m, this.parent?.parent?.getRollData({deterministic: true}) ?? {});
+      if (k) mods.add(k);
+    }
+    return Array.from(mods).join("");
   }
 
   /* -------------------------------------------- */
