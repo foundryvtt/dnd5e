@@ -548,6 +548,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
           applicable: true,
           disabled: !item.isOwner || isAlways,
           cls: prepared ? "active" : "",
+          icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}"></i>`,
           title: isAlways
             ? CONFIG.DND5E.spellPreparationModes.always
             : prepared
