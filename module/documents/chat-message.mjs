@@ -453,8 +453,7 @@ export default class ChatMessage5e extends ChatMessage {
       properties: new Set(roll.options.properties ?? [])
     }));
     return Promise.all(canvas.tokens.controlled.map(t => {
-      const a = t.actor;
-      return a.applyDamage(damages, { multiplier, ignore: true });
+      return t.actor?.applyDamage(damages, { multiplier, ignore: true });
     }));
   }
 
@@ -466,10 +465,9 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Promise}
    */
   applyChatCardTemp(li) {
-    const roll = this.rolls[0];
+    const total = this.rolls.reduce((acc, roll) => acc + roll.total, 0);
     return Promise.all(canvas.tokens.controlled.map(t => {
-      const a = t.actor;
-      return a.applyTempHP(roll.total);
+      return t.actor?.applyTempHP(total);
     }));
   }
 
