@@ -962,7 +962,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Bypass normal creation flow for any items with advancement
-    if ( itemData.system.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {
+    if ( this.actor.system.metadata?.supportsAdvancement && itemData.system.advancement?.length
+        && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forNewItem(this.actor, itemData);
       if ( manager.steps.length ) {
         manager.render(true);

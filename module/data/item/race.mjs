@@ -29,9 +29,9 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static metadata = Object.freeze({
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     singleton: true
-  });
+  }, {inplace: false}));
 
   /* -------------------------------------------- */
   /*  Properties                                  */

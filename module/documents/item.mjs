@@ -2356,7 +2356,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /** @inheritdoc */
   async deleteDialog(options={}) {
     // If item has advancement, handle it separately
-    if ( this.isEmbedded && (this.actor.type !== "group") && !game.settings.get("dnd5e", "disableAdvancements") ) {
+    if ( this.actor?.system.metadata?.supportsAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, this.id);
       if ( manager.steps.length ) {
         try {

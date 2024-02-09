@@ -733,7 +733,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     if ( !advancements.length ) return false;
-    if ( this.item.isEmbedded && !game.settings.get("dnd5e", "disableAdvancements") ) {
+    if ( this.item.actor?.system.metadata?.supportsAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forNewAdvancement(this.item.actor, this.item.id, advancements);
       if ( manager.steps.length ) return manager.render(true);
     }
@@ -761,7 +761,8 @@ export default class ItemSheet5e extends ItemSheet {
       case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
       case "delete":
-        if ( this.item.isEmbedded && !game.settings.get("dnd5e", "disableAdvancements") ) {
+        if ( this.item.actor?.system.metadata?.supportsAdvancement
+            && !game.settings.get("dnd5e", "disableAdvancements") ) {
           manager = AdvancementManager.forDeletedAdvancement(this.item.actor, this.item.id, id);
           if ( manager.steps.length ) return manager.render(true);
         }
