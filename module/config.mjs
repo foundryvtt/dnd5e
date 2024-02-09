@@ -2482,7 +2482,10 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusConcentrating",
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg"
   },
-  curse: {},
+  cursed: {
+    name: "EFFECT.DND5E.StatusCursed",
+    icon: "icons/svg/sun.svg"
+  },
   dead: {
     icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
   },
@@ -2490,7 +2493,10 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusDodging",
     icon: "systems/dnd5e/icons/svg/statuses/dodging.svg"
   },
-  fly: {},
+  flying: {
+    name: "EFFECT.DND5E.StatusFlying",
+    icon: "icons/svg/wing.svg"
+  },
   hidden: {
     name: "EFFECT.DND5E.StatusHidden",
     icon: "icons/svg/cowled.svg"
@@ -2502,8 +2508,9 @@ DND5E.statusEffects = {
   silence: {
     icon: "systems/dnd5e/icons/svg/statuses/silenced.svg"
   },
-  sleep: {
-    name: "EFFECT.DND5E.StatusSleeping"
+  sleeping: {
+    name: "EFFECT.DND5E.StatusSleeping",
+    icon: "icons/svg/sleep.svg"
   },
   surprised: {
     name: "EFFECT.DND5E.StatusSurprised",
