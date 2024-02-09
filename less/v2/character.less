@@ -78,11 +78,8 @@
   /* ---------------------------------- */
 
   .sheet-header {
-    --background-overlay: linear-gradient(transparent, transparent);
     flex: 0 0 var(--dnd5e-sheet-header-height);
-    background:
-      var(--background-overlay),
-      transparent url("ui/official/banner-character.jpg") no-repeat center / cover;
+    background: transparent url("ui/official/banner-character.jpg") no-repeat center / cover;
     border: none;
     border-radius: 5px 5px 0 0;
     display: grid;
@@ -90,7 +87,7 @@
     align-items: center;
 
     @media (prefers-contrast: more) {
-      --background-overlay: linear-gradient(to right, rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.25));
+      background: var(--dnd5e-color-maroon);
     }
 
     input {
