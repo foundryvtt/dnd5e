@@ -237,15 +237,17 @@
                             </div>
                             {{#with system.attributes.hp}}
                             <div class="meter sectioned hit-points">
-                                <div class="progress hit-points" role="meter" aria-valuemin="0"
-                                     aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
-                                     style="--bar-percentage: {{ pct }}%">
+                                <div class="progress hit-points
+                                     {{~#if (gt tempmax 0)}} temp-positive
+                                     {{~else if (lt tempmax 0)}} temp-negative{{/if}}"
+                                     role="meter" aria-valuemin="0" aria-valuenow="{{ value }}"
+                                     aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
                                     <div class="label">
                                         <span class="value">{{ value }}</span>
                                         <span class="separator">&sol;</span>
-                                        <span class="max">{{ max }}</span>
+                                        <span class="max">{{ effectiveMax }}</span>
                                         {{#if tempmax}}
-                                        <span class="tempmax">{{dnd5e-numberFormat tempmax signDisplay="always"}}</span>
+                                        <span class="bonus">{{dnd5e-numberFormat tempmax signDisplay="always"}}</span>
                                         {{/if}}
                                     </div>
                                     <input type="text" name="system.attributes.hp.value" data-dtype="Number"

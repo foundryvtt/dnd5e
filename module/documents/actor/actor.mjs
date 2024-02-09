@@ -667,8 +667,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( this.system.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
     }
 
-    hp.value = Math.min(hp.value, hp.max + (hp.tempmax ?? 0));
-    hp.pct = Math.clamped(hp.max ? (hp.value / hp.max) * 100 : 0, 0, 100);
+    hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
+    hp.value = Math.min(hp.value, hp.effectiveMax);
+    hp.pct = Math.clamped(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
   }
 
   /* -------------------------------------------- */
@@ -1903,7 +1904,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
 
     const hp = this.system.attributes.hp;
-    const dhp = Math.min(Math.max(0, hp.max + (hp.tempmax ?? 0)) - hp.value, roll.total);
+    const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, roll.total);
     const updates = {
       actor: {"system.attributes.hp.value": hp.value + dhp},
       class: {"system.hitDiceUsed": cls.system.hitDiceUsed + 1}
@@ -2276,7 +2277,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async autoSpendHitDice({ threshold=3 }={}) {
     const hp = this.system.attributes.hp;
-    const max = Math.max(0, hp.max + hp.tempmax);
+    const max = Math.max(0, hp.effectiveMax);
     let diceRolled = 0;
     while ( (this.system.attributes.hp.value + threshold) <= max ) {
       const r = await this.rollHitDie();
@@ -2301,7 +2302,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let max = hp.max;
     let updates = {};
     if ( recoverTempMax ) updates["system.attributes.hp.tempmax"] = 0;
-    else max = Math.max(0, max + (hp.tempmax || 0));
+    else max = Math.max(0, hp.effectiveMax);
     updates["system.attributes.hp.value"] = max;
     if ( recoverTemp ) updates["system.attributes.hp.temp"] = 0;
     return { updates, hitPointsRecovered: max - hp.value };

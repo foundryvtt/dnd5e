@@ -77,12 +77,12 @@ export default class Token5e extends Token {
   _drawHPBar(number, bar, data) {
 
     // Extract health data
-    let {value, max, temp, tempmax} = this.document.actor.system.attributes.hp;
+    let {value, max, effectiveMax, temp, tempmax} = this.document.actor.system.attributes.hp;
     temp = Number(temp || 0);
     tempmax = Number(tempmax || 0);
 
     // Differentiate between effective maximum and displayed maximum
-    const effectiveMax = Math.max(0, max + tempmax);
+    effectiveMax = Math.max(0, effectiveMax);
     let displayMax = max + (tempmax > 0 ? tempmax : 0);
 
     // Allocate percentages of the total
