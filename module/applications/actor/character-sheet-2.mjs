@@ -725,8 +725,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const n = Number(event.target.closest("[data-n]")?.dataset.n);
     if ( !n || isNaN(n) ) return;
     const prop = event.currentTarget.dataset.prop;
+    const filled = event.target.classList.contains("filled");
     let value = foundry.utils.getProperty(this.actor, prop);
-    if ( value === n ) value--;
+    if ( filled ) value = n - 1;
     else value = n;
     return this.actor.update({ [prop]: value });
   }
