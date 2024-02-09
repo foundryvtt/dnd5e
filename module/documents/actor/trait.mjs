@@ -245,7 +245,7 @@ export async function mixedChoices(keys) {
 export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) {
   const uuid = getBaseItemUUID(identifier);
   const { collection, documentId: id } = foundry.utils.parseUuid(uuid);
-  const pack = collection.metadata.id;
+  const pack = collection?.metadata.id;
 
   // Full Item5e document required, always async.
   if ( fullItem && !indexOnly ) return collection?.getDocument(id);
