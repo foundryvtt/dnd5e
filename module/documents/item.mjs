@@ -1881,6 +1881,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const messageId = card.closest(".message").dataset.messageId;
     const message = game.messages.get(messageId);
     const action = button.dataset.action;
+    const fastForward = button.dataset.actionFastForward;
+    const fastForwardOptions = {
+      fastForward: !!fastForward,
+      advantage: fastForward === "advantage" || undefined,
+      disadvantage: fastForward === "disadvantage" || undefined
+    };
 
     try {
       // Recover the actor for the chat card
@@ -1916,7 +1922,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         case "attack":
           await item.rollAttack({
             event: event,
-            spellLevel: spellLevel
+            spellLevel: spellLevel,
+            ...fastForwardOptions
           });
           break;
         case "damage":
@@ -1924,7 +1931,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           await item.rollDamage({
             event: event,
             spellLevel: spellLevel,
-            versatile: action === "versatile"
+            versatile: action === "versatile",
+            options: {
+              fastForward: !!fastForward,
+              critical: fastForward === "critical"
+            }
           });
           break;
         case "formula":
@@ -1935,12 +1946,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             const dc = parseInt(button.dataset.dc);
             const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
             await token.actor.rollAbilitySave(button.dataset.ability, {
-              event, speaker, targetValue: Number.isFinite(dc) ? dc : undefined
+              event,
+              speaker,
+              targetValue: Number.isFinite(dc) ? dc : undefined,
+              ...fastForwardOptions
             });
           }
           break;
         case "toolCheck":
-          await item.rollToolCheck({event}); break;
+          await item.rollToolCheck({
+            event,
+            ...fastForwardOptions
+          });
+          break;
         case "placeTemplate":
           try {
             await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
@@ -1956,7 +1974,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           targets = this._getChatCardTargets(card);
           for ( let token of targets ) {
             const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
-            await token.actor.rollAbilityTest(button.dataset.ability, { event, speaker });
+            await token.actor.rollAbilityTest(button.dataset.ability, {
+              event,
+              speaker,
+              ...fastForwardOptions
+            });
           }
           break;
       }
