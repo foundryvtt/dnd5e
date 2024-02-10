@@ -172,8 +172,7 @@ export default class TokenConfig5e extends TokenConfig {
 
   /** @inheritDoc */
   _previewChanges(change) {
-    if ( !(this.preview instanceof TokenDocument5e) ) return;
-    if ( change ) {
+    if ( change && (this.preview instanceof TokenDocument5e) ) {
       const flags = foundry.utils.getProperty(foundry.utils.expandObject(change), "flags.dnd5e.tokenRing") ?? {};
       const redraw = ("textures" in flags) || ("enabled" in flags);
       if ( redraw ) this.preview.object.renderFlags.set({ redraw });
