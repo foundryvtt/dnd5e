@@ -16,15 +16,6 @@ export default class ItemSheet5e extends ItemSheet {
   constructor(...args) {
     super(...args);
 
-    // Expand the default size of the class sheet
-    if ( this.object.type === "class" ) {
-      this.options.width = this.position.width = 600;
-      this.options.height = this.position.height = 680;
-    }
-    else if ( this.object.type === "subclass" ) {
-      this.options.height = this.position.height = 540;
-    }
-
     this._accordions = this._createAccordions();
   }
 
@@ -34,7 +25,6 @@ export default class ItemSheet5e extends ItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       width: 560,
-      height: 500,
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
       scrollY: [
@@ -401,11 +391,8 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  setPosition(position={}) {
-    if ( !(this._minimized || position.height) ) {
-      position.height = (this._tabs[0].active === "details") ? "auto" : Math.max(this.height, this.options.height);
-    }
-    return super.setPosition(position);
+  _onChangeTab(event, tabs, active) {
+    this.setPosition({ height: "auto" });
   }
 
   /* -------------------------------------------- */
