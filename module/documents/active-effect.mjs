@@ -284,6 +284,9 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    if ( (this.parent.system?.identified === false) && !game.user.isGM ) this.name = game.i18n.format(
+      "DND5E.Unidentified.DefaultName", { name: game.i18n.localize("DOCUMENT.ActiveEffect") }
+    );
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
   }
 
