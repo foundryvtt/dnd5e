@@ -355,7 +355,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         name, reference,
         id: k,
         icon: img ?? icon,
-        disabled: existing ? disabled : !this.actor.statuses.has(k)
+        disabled: existing ? disabled : true
       });
       return arr;
     }, []);

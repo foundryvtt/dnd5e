@@ -299,7 +299,10 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( !Number.isFinite(level) ) level = 1;
     this.icon = this.constructor._getExhaustionImage(level);
     this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
-    if ( level >= config.levels ) this.statuses.add("dead");
+    if ( level >= config.levels ) {
+      this.statuses.add("dead");
+      CONFIG.DND5E.statusEffects.dead.statuses?.forEach(s => this.statuses.add(s));
+    }
   }
 
   /* -------------------------------------------- */
