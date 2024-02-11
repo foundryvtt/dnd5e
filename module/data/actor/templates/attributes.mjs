@@ -115,7 +115,7 @@ export default class AttributesFields {
       if ( reduction ) this.attributes.movement[k] = Math.max(0, this.attributes.movement[k] - reduction);
       if ( (crawl && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
       else if ( statuses.has("exceedingCarryingCapacity") ) this.attributes.movement[k] = 5;
-      else if ( halfMovement ) this.attributes.movement[k] = Math.floor(this.attributes.movement[k] * 0.5);
+      else if ( halfMovement ) this.attributes.movement[k] *= 0.5;
     });
   }
 }
