@@ -210,6 +210,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/tabs/character-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
 
+    // Chat Partials
+    "systems/dnd5e/templates/chat/roll-button.hbs",
+
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
     "systems/dnd5e/templates/items/parts/item-activation.hbs",
@@ -367,7 +370,8 @@ export function registerHandlebarsHelpers() {
     "dnd5e-linkForUuid": linkForUuid,
     "dnd5e-itemContext": itemContext,
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
-    "dnd5e-textFormat": formatText
+    "dnd5e-textFormat": formatText,
+    "dnd5e-object": ({hash}) => hash
   });
 }
 
