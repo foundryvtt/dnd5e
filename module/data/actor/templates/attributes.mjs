@@ -111,9 +111,7 @@ export default class AttributesFields {
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
-    const units = this.attributes.movement.units
-        ?? this.details?.race?.system?.movement.units
-        ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+    const units = this.attributes.movement.units;
     for ( const type in CONFIG.DND5E.movementTypes ) {
       let speed = this.attributes.movement[type];
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
