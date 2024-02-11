@@ -111,18 +111,21 @@ export default class AttributesFields {
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
+    const units = this.attributes.movement.units
+        ?? this.details?.race?.system?.movement.units
+        ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
     for ( const type in CONFIG.DND5E.movementTypes ) {
       let speed = this.attributes.movement[type];
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
         if ( halfMovement ) speed *= 0.5;
         if ( heavilyEncumbered ) {
-          speed = Math.max(0, speed - CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered);
+          speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered[units] ?? 0));
         } else if ( encumbered ) {
-          speed = Math.max(0, speed - CONFIG.DND5E.encumbrance.speedReduction.encumbered);
+          speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.encumbered[units] ?? 0));
         }
         if ( exceedingCarryingCapacity ) {
-          speed = Math.min(speed, 5);
+          speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
         }
       }
       this.attributes.movement[type] = speed;
