@@ -353,7 +353,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Effects & Conditions
     const conditionIds = new Set();
     context.conditions = Object.entries(CONFIG.DND5E.conditionTypes).reduce((arr, [k, c]) => {
-      if ( k === "diseased" ) return arr; // Filter out diseased as it's not a real condition.
+      if ( !c.raw ) return arr; // Filter out non-RAW conditions.
       const { label: name, icon, reference } = c;
       const id = staticID(`dnd5e${k}`);
       conditionIds.add(id);
