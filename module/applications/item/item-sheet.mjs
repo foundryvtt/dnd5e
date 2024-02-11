@@ -226,7 +226,7 @@ export default class ItemSheet5e extends ItemSheet {
       }));
       if ( !items.length ) continue;
       advancement[level] = {
-        items: items.sort((a, b) => a.order.localeCompare(b.order)),
+        items: items.sort((a, b) => a.order.localeCompare(b.order, game.i18n.lang)),
         configured: (level > maxLevel) ? false : items.some(a => !a.configured) ? "partial" : "full"
       };
     }
@@ -255,7 +255,7 @@ export default class ItemSheet5e extends ItemSheet {
       if ( baseType !== baseItem?.system?.type?.value ) continue;
       items[name] = baseItem.name;
     }
-    return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
+    return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1], game.i18n.lang)));
   }
 
   /* -------------------------------------------- */

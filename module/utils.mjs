@@ -117,7 +117,7 @@ export function filteredKeys(obj, filter) {
  */
 export function sortObjectEntries(obj, sortKey) {
   let sorted = Object.entries(obj);
-  const sort = (lhs, rhs) => foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs) : lhs - rhs;
+  const sort = (lhs, rhs) => foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs, game.i18n.lang) : lhs - rhs;
   if ( foundry.utils.getType(sortKey) === "function" ) sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1]));
   else if ( sortKey ) sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey]));
   else sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1]));
@@ -414,7 +414,7 @@ export function performPreLocalization(config) {
   // Localize & sort status effects
   CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
   CONFIG.statusEffects.sort((lhs, rhs) =>
-    lhs.id === "dead" ? -1 : rhs.id === "dead" ? 1 : lhs.name.localeCompare(rhs.name)
+    lhs.id === "dead" ? -1 : rhs.id === "dead" ? 1 : lhs.name.localeCompare(rhs.name, game.i18n.lang)
   );
 }
 

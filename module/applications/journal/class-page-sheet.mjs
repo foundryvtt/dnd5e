@@ -57,7 +57,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     context.optionalTable = await this._getOptionalTable(linked);
     context.features = await this._getFeatures(linked);
     context.optionalFeatures = await this._getFeatures(linked, true);
-    context.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+    context.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
 
     return context;
   }
