@@ -74,7 +74,10 @@
                 <ul class="attributes flexrow">
                     {{#each resources as |res|}}
                     <li class="attribute resource">
-                        <h4 class="attribute-name box-title">{{ localize res.label}}</h4>
+                        <h4 class="attribute-name box-title">
+                            <input name="system.resources.{{res.name}}.label" type="text" value="{{res.label}}"
+                                   placeholder="{{res.placeholder}}" />
+                        </h4>
                         <div class="attribute-value">
                             <label class="recharge checkbox flexcol">
                                 <span>{{ localize "DND5E.AbbreviationSR" }}</span><input name="system.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}} disabled="true"/>

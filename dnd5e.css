@@ -1657,6 +1657,9 @@ h5 {
 .dnd5e.advancement form[data-type="AbilityScoreImprovement"] .ability-scores li label {
   grid-area: label;
   font-size: var(--font-size-18);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .dnd5e.advancement form[data-type="AbilityScoreImprovement"] .ability-scores li a {
   font-size: var(--font-size-16);

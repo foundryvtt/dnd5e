@@ -366,6 +366,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       case "equipment":
         this._prepareEquipment(); break;
       case "feat":
+      case "talent":
         this._prepareFeat(); break;
       case "spell":
         this._prepareSpell(); break;
@@ -531,7 +532,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   _prepareProficiency() {
-    if ( !["spell", "weapon", "equipment", "tool", "feat", "consumable"].includes(this.type) ) return;
+    if ( !["spell", "weapon", "equipment", "tool", "feat", "talent", "consumable"].includes(this.type) ) return;
     if ( !this.actor?.system.attributes?.prof ) {
       this.system.prof = new Proficiency(0, 0);
       return;
@@ -955,7 +956,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       consumeResource: null,
       resourceAmount: null,
       createMeasuredTemplate: null,
-      consumeReserve: null,
+      consumeReserve: null
     };
 
     const scaling = this.usageScaling;
@@ -2039,6 +2040,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         updates = this._onCreateOwnedWeapon(data, isNPC);
         break;
       case "feat":
+      case "talent":
         updates = this._onCreateOwnedFeature(data, isNPC);
         break;
     }

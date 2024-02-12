@@ -11,6 +11,7 @@ import SubclassData from "./subclass.mjs";
 import ToolData from "./tool.mjs";
 import WeaponData from "./weapon.mjs";
 import LineageData from "./lineage.mjs";
+import TalentData from "./TalentData.mjs";
 
 export {
   BackgroundData,
@@ -45,7 +46,7 @@ export const config = {
   spell: SpellData,
   subclass: SubclassData,
   tool: ToolData,
-  talent: BackgroundData,
+  talent: TalentData,
   lineage: LineageData,
   weapon: WeaponData
 };

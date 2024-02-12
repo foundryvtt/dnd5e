@@ -34,9 +34,11 @@ export default class AbilityUseDialog extends Dialog {
     const slotOptions = config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
     const resourceOptions = this._createResourceOptions(item);
 
-    const reserve = r && !item.system.uses?.value
+
+    const r = item.system.reserve;
+    const reserve = r?.identifier && !item.system.uses?.value
       ? {
-        value: resources
+        value: Object.values(item.actor.system.resources)
           .find(({identifier}) => identifier === r.identifier)?.value ?? 0,
         max: r.max,
         per: r.refresh

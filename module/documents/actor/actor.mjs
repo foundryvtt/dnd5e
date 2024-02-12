@@ -749,10 +749,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           ) ?? {
             ...curr,
           };
-          const replaced = Roll.replaceFormulaData(
+          const tmp = Roll.replaceFormulaData(
             curr.formula ?? "0",
             rollData
           );
+          const replaced = tmp === curr.formula ? "0" : tmp;
           let max = 0;
           if (replaced) {
             max = Roll.safeEval(replaced);
@@ -765,7 +766,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           }
           this.system.resources[r.resource].sr = r.refresh === "sr";
           this.system.resources[r.resource].lr = r.refresh === "lr";
-          this.system.resources[r.resource].label = r.key;
+          this.system.resources[r.resource].label = game.i18n.localize(r.key);
           this.system.resources[r.resource].max = r.max;
           return [
             ...prev.filter(({ identifier }) => identifier !== curr.identifier),
