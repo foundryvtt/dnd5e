@@ -1,8 +1,9 @@
-import ActorSheet5eCharacter from "./character-sheet.mjs";
-import * as Trait from "../../documents/actor/trait.mjs";
-import Tabs5e from "../tabs.mjs";
-import { simplifyBonus, staticID } from "../../utils.mjs";
 import CharacterData from "../../data/actor/character.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
+import { simplifyBonus, staticID } from "../../utils.mjs";
+import ContextMenu5e from "../context-menu.mjs";
+import Tabs5e from "../tabs.mjs";
+import ActorSheet5eCharacter from "./character-sheet.mjs";
 
 /**
  * An Actor sheet for player character type actors.
@@ -606,6 +607,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
         event.preventDefault();
       }
+    });
+
+    // Apply special context menus for items outside inventory elements
+    const featuresElement = html[0].querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
+    if ( featuresElement ) new ContextMenu5e(html, ".pills-lg [data-item-id]", [], {
+      onOpen: (...args) => featuresElement._onOpenContextMenu(...args)
     });
 
     if ( this.isEditable ) {
