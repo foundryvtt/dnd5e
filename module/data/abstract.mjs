@@ -76,9 +76,9 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
    * Metadata that describes this DataModel.
    * @type {SystemDataModelMetadata}
    */
-  static metadata = Object.freeze({
+  static metadata = {
     systemFlagsModel: null
-  });
+  };
 
   get metadata() {
     return this.constructor.metadata;
@@ -312,9 +312,9 @@ export class ActorDataModel extends SystemDataModel {
    */
 
   /** @type {ActorDataModelMetadata} */
-  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+  static metadata = foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: false
-  }, {inplace: false}));
+  }, {inplace: false});
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -364,9 +364,9 @@ export class ItemDataModel extends SystemDataModel {
    */
 
   /** @type {ItemDataModelMetadata} */
-  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+  static metadata = foundry.utils.mergeObject(super.metadata, {
     singleton: false
-  }, {inplace: false}));
+  }, {inplace: false});
 
   /**
    * The handlebars template for rendering item tooltips.

@@ -949,21 +949,20 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const stacked = this._onDropStackConsumables(itemData);
     if ( stacked ) return false;
 
-    // Ensure that this item isn't violating the singleton rule
-    // TODO: When v10 support is dropped, this will only need to be handled for items with advancement
-    const dataModel = CONFIG.Item[dnd5e.isV10 ? "systemDataModels" : "dataModels"][itemData.type];
-    const singleton = dataModel?.metadata.singleton ?? false;
-    if ( singleton && this.actor.itemTypes[itemData.type].length ) {
-      ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
-        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
-      }));
-      return false;
-    }
-
     // Bypass normal creation flow for any items with advancement
     if ( this.actor.system.metadata?.supportsAdvancement && itemData.system.advancement?.length
         && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      // Ensure that this item isn't violating the singleton rule
+      const dataModel = CONFIG.Item.dataModels[itemData.type];
+      const singleton = dataModel?.metadata.singleton ?? false;
+      if ( singleton && this.actor.itemTypes[itemData.type].length ) {
+        ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+        }));
+        return false;
+      }
+
       const manager = AdvancementManager.forNewItem(this.actor, itemData);
       if ( manager.steps.length ) {
         manager.render(true);
