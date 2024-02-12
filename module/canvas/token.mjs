@@ -2,6 +2,62 @@
  * Extend the base Token class to implement additional system-specific logic.
  */
 export default class Token5e extends Token {
+  constructor(...args) {
+    super(...args);
+    this.ring = new CONFIG.Token.ringClass(this);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Dynamic token ring.
+   * @type {TokenRing}
+   */
+  ring;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Callback invoked when a status effect is applied on a token.
+   * @param {Token5e} token         The token whose status effect is applied.
+   * @param {string} statusId       The status effect ID being applied, from CONFIG.specialStatusEffects
+   * @param {boolean} active        Is the special status effect now active?
+   */
+  static onApplyTokenStatusEffect(token, statusId, active) {
+    const applicableEffects = [CONFIG.specialStatusEffects.DEFEATED, CONFIG.specialStatusEffects.INVISIBLE];
+    if ( !applicableEffects.includes(statusId) || !token.ring.enabled ) return;
+    const tokenRingFlag = token.document.getFlag("dnd5e", "tokenRing") || {};
+    token.ring.configureVisuals(foundry.utils.deepClone(tokenRingFlag));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update the token ring when this token is targeted.
+   * @param {User5e} user         The user whose targeting has changed.
+   * @param {Token5e} token       The token that was targeted.
+   * @param {boolean} targeted    Is the token targeted or not?
+   */
+  static onTargetToken(user, token, targeted) {
+    if ( !targeted || !token.ring.enabled ) return;
+    const color = Color.from(user.color);
+    token.ring.flashColor(color, { duration: 500, easing: CONFIG.Token.ringClass.easeTwoPeaks });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _draw() {
+    // Cache the subject texture if needed
+    if ( this.ring.enabled ) {
+      const subjectName = this.document.subjectPath;
+      const cached = PIXI.Assets.cache.has(subjectName);
+      if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
+    }
+    await super._draw();
+  }
+
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   _drawBar(number, bar, data) {
@@ -72,5 +128,51 @@ export default class Token5e extends Token {
     // Set position
     let posY = (number === 0) ? (this.h - h) : 0;
     bar.position.set(0, posY);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(data, options, userId) {
+    super._onUpdate(data, options, userId);
+    if ( !CONFIG.Token.ringClass.enabled ) return;
+
+    // Update ring names if necessary
+    const shapeChange = ("height" in data) || ("width" in data) || ("texture" in data);
+    if ( shapeChange ) this.ring.configureNames();
+
+    // Do we have some token ring flag changes?
+    if ( !foundry.utils.hasProperty(data, "flags.dnd5e.tokenRing") ) return;
+
+    // Do we need to trigger a full redraw? We need to do so if a token ring texture has been updated
+    const dataFlag = data.flags.dnd5e.tokenRing;
+    const redraw = ("textures" in dataFlag) || ("enabled" in dataFlag);
+    if ( redraw ) return this.renderFlags.set({redraw});
+
+    // Check for scale correction change (not necessary if shapeChange is triggered)
+    if ( ("scaleCorrection" in dataFlag) && !shapeChange ) this.ring.configureUVs(dataFlag.scaleCorrection);
+
+    // If we don't need a full redraw, we're just updating the visuals properties
+    const tokenRingFlag = this.document.getFlag("dnd5e", "tokenRing") || {};
+    this.ring.configureVisuals({...tokenRingFlag});
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _refreshShader() {
+    if ( CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
+      this.mesh?.setShaderClass(CONFIG.Token.ringClass.tokenRingSamplerShader);
+    } else super._refreshShader();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _configureFilterEffect(statusId, active) {
+    if ( (statusId === CONFIG.specialStatusEffects.INVISIBLE) && CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
+      active = false;
+    }
+    return super._configureFilterEffect(statusId, active);
   }
 }

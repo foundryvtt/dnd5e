@@ -59,12 +59,29 @@ export default class EquippableItemTemplate extends SystemDataModel {
    * Chat properties for equippable items.
    * @type {string[]}
    */
-  get equippableItemChatProperties() {
+  get equippableItemCardProperties() {
     const req = CONFIG.DND5E.attunementTypes.REQUIRED;
     return [
       this.attunement === req ? CONFIG.DND5E.attunements[req] : null,
       game.i18n.localize(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
       ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
     ];
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since DnD5e 3.0, available until DnD5e 3.2
+   * @ignore
+   */
+  get equippableItemChatProperties() {
+    foundry.utils.logCompatibilityWarning(
+      "EquippableItemTemplate#equippableItemChatProperties is deprecated. "
+      + "Please use EquippableItemTemplate#equippableItemCardProperties.",
+      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
+    );
+    return this.equippableItemCardProperties;
   }
 }

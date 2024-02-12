@@ -2,11 +2,7 @@
     <div class="form-group">
         <label>{{localize "DND5E.Size"}}</label>
         <select class="actor-size" name="system.traits.size">
-            {{#select system.traits.size}}
-            {{#each config.actorSizes as |label size|}}
-                <option value="{{size}}">{{label}}</option>
-            {{/each}}
-            {{/select}}
+            {{selectOptions config.actorSizes selected=system.traits.size labelAttr="label"}}
         </select>
     </div>
 

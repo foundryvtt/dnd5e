@@ -1,4 +1,4 @@
-import SystemDataModel from "../../abstract.mjs";
+import { ActorDataModel } from "../../abstract.mjs";
 import { FormulaField, MappingField } from "../../fields.mjs";
 import CurrencyTemplate from "../../shared/currency.mjs";
 
@@ -18,7 +18,7 @@ import CurrencyTemplate from "../../shared/currency.mjs";
  * @property {Object<string, AbilityData>} abilities  Actor's abilities.
  * @mixin
  */
-export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTemplate) {
+export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplate) {
 
   /** @inheritdoc */
   static defineSchema() {

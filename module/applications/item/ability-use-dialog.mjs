@@ -230,7 +230,7 @@ export default class AbilityUseDialog extends Dialog {
       if ( uses.value > 1 ) str = "DND5E.AbilityUseConsumableChargeHint";
       else if ( quantity > 1 ) str = "DND5E.AbilityUseConsumableQuantityHint";
       return game.i18n.format(str, {
-        type: game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`),
+        type: game.i18n.localize(`DND5E.Consumable${item.system.type.value.capitalize()}`),
         value: uses.value,
         quantity: quantity,
         max: uses.max,
@@ -259,7 +259,7 @@ export default class AbilityUseDialog extends Dialog {
   static _getAbilityUseWarnings(data) {
     const warnings = [];
     const item = data.item;
-    const { quantity, level, consume, consumableType, preparation } = item.system;
+    const { quantity, level, consume, preparation } = item.system;
     const scale = item.usageScaling;
     const levels = (preparation?.mode === "pact") ? [level, item.actor.system.spells.pact.level] : [level];
 
@@ -294,7 +294,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // Display warnings that the item or its resource item will be destroyed.
     if ( item.type === "consumable" ) {
-      const type = game.i18n.localize(`DND5E.Consumable${consumableType.capitalize()}`);
+      const type = game.i18n.localize(`DND5E.Consumable${item.system.type.value.capitalize()}`);
       if ( this._willLowerQuantity(item) && (quantity === 1) ) {
         warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyHint", {type}));
       }

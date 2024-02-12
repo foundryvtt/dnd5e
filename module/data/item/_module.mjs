@@ -27,16 +27,19 @@ export {
   ToolData,
   WeaponData
 };
+export {default as ItemTypeField} from "./fields/item-type-field.mjs";
 export {default as ActionTemplate} from "./templates/action.mjs";
 export {default as ActivatedEffectTemplate} from "./templates/activated-effect.mjs";
 export {default as EquippableItemTemplate} from "./templates/equippable-item.mjs";
+export {default as IdentifiableTemplate} from "./templates/identifiable.mjs";
 export {default as ItemDescriptionTemplate} from "./templates/item-description.mjs";
+export {default as ItemTypeTemplate} from "./templates/item-type.mjs";
 export {default as MountableTemplate} from "./templates/mountable.mjs";
 export {default as PhysicalItemTemplate} from "./templates/physical-item.mjs";
 
 export const config = {
   background: BackgroundData,
-  backpack: ContainerData,
+  container: ContainerData,
   class: ClassData,
   consumable: ConsumableData,
   equipment: EquipmentData,

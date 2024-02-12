@@ -1,0 +1,36 @@
+<form>
+    <ol>
+        {{#each config}}
+        <li data-id="{{id}}">
+            <input type="hidden" name="{{ id }}.priority" value="{{ priority }}" data-dtype="Number">
+            <label>{{label}}</label>
+            <div class="form-fields">
+                <label>
+                    {{localize "DND5E.ModuleArtConfigPortraits"}}
+                    <input type="checkbox" name="{{id}}.portraits" {{checked portraits}}>
+                </label>
+                <label>
+                    {{localize "DND5E.ModuleArtConfigTokens"}}
+                    <input type="checkbox" name="{{id}}.tokens" {{checked tokens}}>
+                </label>
+            </div>
+            <div class="priority-adjust">
+                <button type="button" data-action="increase"
+                        aria-label="{{ localize "DND5E.ModuleArtPriorityIncrease" }}">
+                    <i class="fas fa-angle-up"></i>
+                </button>
+                <button type="button" data-action="decrease"
+                        aria-label="{{ localize "DND5E.ModuleArtPriorityDecrease" }}">
+                    <i class="fas fa-angle-down"></i>
+                </button>
+            </div>
+        </li>
+        {{/each}}
+    </ol>
+    <p class="hint">{{ localize "DND5E.ModuleArtPriorityHint" }}</p>
+    <footer class="sheet-footer flexrow">
+        <button type="submit">
+            <i class="far fa-save"></i> {{localize "Save Changes"}}
+        </button>
+    </footer>
+</form>

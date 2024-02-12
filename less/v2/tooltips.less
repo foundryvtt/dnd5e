@@ -1,0 +1,241 @@
+:is(#tooltip, .locked-tooltip) {
+  &.dnd5e-tooltip {
+    font-family: var(--dnd5e-font-roboto);
+    font-size: var(--font-size-13);
+    text-align: start;
+    color: var(--color-text-dark-primary);
+    border-radius: 5px;
+    background: url("ui/texture-gray1.webp") no-repeat top left,
+      url("ui/texture-gray2.webp") no-repeat bottom right,
+      var(--dnd5e-color-parchment);
+    box-shadow: 0 0 16px var(--dnd5e-shadow-45);
+    border: 2px solid var(--dnd5e-color-gold);
+
+    .content { padding: 0 .5rem .25rem; }
+
+    .header {
+      h2 {
+        margin: 0;
+        border: none;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.locked-tooltip {
+    z-index: calc(var(--z-index-tooltip) - 1);
+
+    &.dnd5e-tooltip::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border: 1px solid var(--dnd5e-color-gold);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Item Tooltips                     */
+  /* ---------------------------------- */
+
+  &.item-tooltip {
+    width: 300px;
+
+    .loading {
+      display: flex;
+      justify-content: center;
+      padding: .75rem;
+      font-size: var(--font-size-24);
+      opacity: .25;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      padding-top: .75rem;
+
+      .top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: .75rem;
+
+        .subtitle { font-size: var(--font-size-11); }
+      }
+
+      img {
+        width: 64px;
+        height: 64px;
+        border: 4px solid var(--dnd5e-color-gold);
+        box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+        border-radius: 100%;
+        object-fit: cover;
+        background: var(--dnd5e-color-light-gray);
+      }
+
+      .bottom {
+        display: flex;
+        font-size: var(--font-size-11);
+        color: var(--color-text-dark-5);
+      }
+
+      .weight, .price {
+        width: 70px;
+        display: flex;
+        align-items: center;
+        gap: .25rem;
+
+        span { height: 14px; }
+      }
+
+      .weight {
+        justify-content: end;
+        i { font-size: var(--font-size-9); }
+      }
+
+      .charges {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .25rem;
+      }
+
+      .school {
+        position: absolute;
+        top: .75rem;
+        right: .75rem;
+        --icon-fill: var(--dnd5e-color-gold);
+        --icon-size: 32px;
+      }
+    }
+
+    .info {
+      text-align: left;
+      font-size: var(--font-size-12);
+
+      .materials, .condition {
+        font-size: var(--font-size-11);
+        color: var(--color-text-dark-5);
+      }
+    }
+
+    .description {
+      text-align: left;
+      font-size: var(--font-size-12);
+      line-height: normal;
+      max-height: 450px;
+      overflow: hidden;
+      padding-right: .5rem;
+      margin-right: -.5rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--dnd5e-color-gold) transparent;
+
+      &::-webkit-scrollbar-track {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: none;
+        background: var(--dnd5e-color-gold);
+      }
+
+      table { display: none; }
+
+      &.overflowing { mask-image: linear-gradient(to bottom, black 90%, transparent); }
+      &:empty { margin-bottom: .5rem; }
+    }
+
+    &.locked-tooltip {
+      .description {
+        overflow-y: scroll;
+        &.overflowing { mask-image: unset; }
+      }
+    }
+
+    .pill {
+      font-size: var(--font-size-10);
+      padding: .1875rem .375rem;
+      line-height: 1;
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Passive Tooltips                  */
+  /* ---------------------------------- */
+
+  &.passive-tooltip {
+    max-width: unset;
+
+    .header {
+      margin-block: 6px 10px;
+    }
+
+    .party {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 20px;
+
+      .member {
+        display: grid;
+        grid-template-columns: max-content 140px 20px max-content;
+        align-items: center;
+        gap: 4px;
+      }
+      img {
+        width: 38px;
+        height: 38px;
+        border: 2px solid var(--dnd5e-color-gold);
+        box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+        border-radius: 100%;
+        object-fit: cover;
+        object-position: top;
+        background: var(--dnd5e-color-light-gray);
+      }
+      .name {
+        padding-inline-start: 4px;
+        font-size: var(--font-size-14);
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+      }
+      .passive {
+        font-weight: bold;
+        text-align: end;
+      }
+      .status {
+        font-family: var(--font-awesome);
+        font-weight: 900;
+
+        &.success::after {
+          content: "\f058";
+          color: var(--dnd5e-color-success);
+        }
+        &.failure::after {
+          content: "\f057";
+          color: var(--dnd5e-color-failure);
+        }
+      }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Rule Tooltips                     */
+  /* ---------------------------------- */
+
+  &.rule-tooltip {
+    max-width: 450px;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-block: 6px 10px;
+    }
+  }
+}

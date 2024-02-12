@@ -4,10 +4,11 @@
     "build:clean": "node ./utils/packs.mjs package clean",
     "build:code": "rollup dnd5e.mjs -f es -o dnd5e-compiled.mjs -p node-resolve -m --sourcemapFile dnd5e.mjs",
     "build:css": "lessc less/dnd5e.less dnd5e.css",
-    "build:db": "node ./utils/packs.mjs package pack --nedb",
-    "build:json": "node ./utils/packs.mjs package unpack --nedb",
-    "lint": "eslint --ext .mjs ./",
-    "lint:fix": "eslint --ext .mjs ./ --fix",
+    "build:db": "node ./utils/packs.mjs package pack",
+    "build:json": "node ./utils/packs.mjs package unpack",
+    "lint": "eslint --ext .mjs --ignore-path .gitignore ./",
+    "lint:fix": "eslint --ext .mjs --ignore-path .gitignore ./ --fix",
+    "postinstall": "npm run build:css && npm run build:db",
     "watch": "less-watch-compiler less/ ./ dnd5e.less"
   },
   "devDependencies": {
@@ -18,7 +19,6 @@
     "fancy-log": "^2.0.0",
     "less": "^4.2.0",
     "less-watch-compiler": "^1.16.3",
-    "nedb-promises": "^6.2.3",
     "rollup": "^3.28.1",
     "yargs": "^17.7.2"
   }

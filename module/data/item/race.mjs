@@ -1,5 +1,5 @@
 import Actor5e from "../../documents/actor/actor.mjs";
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import { AdvancementField, IdentifierField } from "../fields.mjs";
 import { CreatureTypeField, MovementField, SensesField } from "../shared/_module.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -14,7 +14,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {SensesField} senses
  * @property {CreatureType} type
  */
-export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTemplate) {
+export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
