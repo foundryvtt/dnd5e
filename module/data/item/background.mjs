@@ -19,9 +19,9 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static metadata = Object.freeze({
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     singleton: true
-  });
+  }, {inplace: false}));
 
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */

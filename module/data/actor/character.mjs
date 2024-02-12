@@ -58,6 +58,13 @@ const { SchemaField, NumberField, StringField, BooleanField, ArrayField, Integer
 export default class CharacterData extends CreatureTemplate {
 
   /** @inheritdoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    supportsAdvancement: true
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static _systemType = "character";
 
   /* -------------------------------------------- */

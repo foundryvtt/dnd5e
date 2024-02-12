@@ -80,9 +80,9 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static metadata = Object.freeze({
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     systemFlagsModel: GroupSystemFlags
-  });
+  }, {inplace: false}));
 
   /* -------------------------------------------- */
   /*  Properties                                  */

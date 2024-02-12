@@ -69,7 +69,6 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /**
    * @typedef {object} SystemDataModelMetadata
-   * @property {boolean} [singleton]                  Should only a single item of this type be allowed on an actor?
    * @property {typeof DataModel} [systemFlagsModel]  Model that represents flags data within the dnd5e namespace.
    */
 
@@ -77,7 +76,9 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
    * Metadata that describes this DataModel.
    * @type {SystemDataModelMetadata}
    */
-  static metadata = {};
+  static metadata = {
+    systemFlagsModel: null
+  };
 
   get metadata() {
     return this.constructor.metadata;
@@ -305,6 +306,16 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
  */
 export class ActorDataModel extends SystemDataModel {
 
+  /**
+   * @typedef {SystemDataModelMetadata} ActorDataModelMetadata
+   * @property {boolean} supportsAdvancement  Can advancement be performed for this actor type?
+   */
+
+  /** @type {ActorDataModelMetadata} */
+  static metadata = foundry.utils.mergeObject(super.metadata, {
+    supportsAdvancement: false
+  }, {inplace: false});
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -346,6 +357,16 @@ export class ActorDataModel extends SystemDataModel {
  * Variant of the SystemDataModel with support for rich item tooltips.
  */
 export class ItemDataModel extends SystemDataModel {
+
+  /**
+   * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
+   * @property {boolean} singleton  Should only a single item of this type be allowed on an actor?
+   */
+
+  /** @type {ItemDataModelMetadata} */
+  static metadata = foundry.utils.mergeObject(super.metadata, {
+    singleton: false
+  }, {inplace: false});
 
   /**
    * The handlebars template for rendering item tooltips.
