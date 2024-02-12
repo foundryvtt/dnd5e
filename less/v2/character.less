@@ -571,6 +571,8 @@
               border-right: var(--border-width) solid var(--dnd5e-color-hp-3);
               border-radius: 4px 0 0 4px;
             }
+            .temp-positive .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, blue 25%); }
+            .temp-negative .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, red 25%); }
           }
 
           &.hit-dice {
