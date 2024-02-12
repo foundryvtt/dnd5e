@@ -229,6 +229,54 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   }
 
   /* -------------------------------------------- */
+  /*  Resting                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Initiate a long rest for all members of the group.
+   * @param {RestConfiguration} config  Configuration data for the rest.
+   */
+  async longRest(config) {
+    this._rest(config, "long");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Initiate a short rest for all members of the group.
+   * @param {RestConfiguration} config  Configuration data for the rest.
+   */
+  async shortRest(config) {
+    this._rest(config, "short");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Initiate a rest for all members of this group.
+   * @param {RestConfiguration} config  Configuration data for the rest.
+   * @param {short|long} type           Type of rest to perform.
+   */
+  async _rest(config, type) {
+    const results = new Map();
+    for ( const member of this.members ) {
+      results.set(
+        member.actor,
+        await member.actor[type === "short" ? "shortRest" : "longRest"]({ ...config, dialog: false }) ?? null
+      );
+    }
+
+    /**
+     * A hook event that fires when the rest process is completed for a group.
+     * @function dnd5e.groupRestCompleted
+     * @memberof hookEvents
+     * @param {Actor5e} group                         The group that just completed resting.
+     * @param {Map<Actor5e, RestResult|null>} result  Details on the rests completed.
+     */
+    Hooks.callAll("dnd5e.groupRestCompleted", this.parent, results);
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 

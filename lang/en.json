@@ -834,6 +834,10 @@
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
 "DND5E.HitDie": "Hit Die",
 "DND5E.HitDice": "Hit Dice",
+"DND5E.HitDiceAutoSpend": {
+  "Label": "Auto Spend HD",
+  "Hint": "Automatically spend hit dice until they run out or health is full."
+},
 "DND5E.HitDiceConfig": "Adjust Hit Dice",
 "DND5E.HitDiceConfigHint": "Adjust remaining hit dice levels for each class.",
 "DND5E.HitDiceMax": "Maximum Hit Dice",
@@ -1013,6 +1017,7 @@
 "DND5E.LongRestEpic": "Long Rest (1 hour)",
 "DND5E.LongRestOvernight": "Long Rest (New Day)",
 "DND5E.LongRestHint": "Take a long rest? On a long rest you will recover hit points, half your maximum hit dice, class resources, limited use item charges, and spell slots.",
+"DND5E.LongRestHintGroup": "Take a long rest? On a long rest group members will recover hit points, half of their maximum hit dice, class resources, limited use item charges, and spell slots.",
 "DND5E.LongRestRecovery": "Recovers after Long Rest",
 "DND5E.LongRestResult": "{name} takes a long rest and recovers {health} Hit Points and {dice} Hit Dice.",
 "DND5E.LongRestResultHitDice": "{name} takes a long rest and recovers {dice} Hit Dice.",
@@ -1204,7 +1209,8 @@
 "DND5E.ShortRestGritty": "Short Rest (8 hours)",
 "DND5E.ShortRestEpic": "Short Rest (5 minutes)",
 "DND5E.ShortRestOvernight": "Short Rest (New Day)",
-"DND5E.ShortRestHint": "Take a short rest? On a short rest you may spend remaining Hit Dice and recover primary or secondary resources.",
+"DND5E.ShortRestHint": "Take a short rest? On a short rest you may spend remaining Hit Dice and recover item uses.",
+"DND5E.ShortRestHintGroup": "Take a short rest? On a short rest group members can spend Hit Dice and will recover item uses.",
 "DND5E.ShortRestNoHD": "No Hit Dice remaining",
 "DND5E.ShortRestRecovery": "Recovers after Short Rest",
 "DND5E.ShortRestResult": "{name} takes a short rest spending {dice} Hit Dice to recover {health} Hit Points.",

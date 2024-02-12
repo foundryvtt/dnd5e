@@ -2081,6 +2081,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<RestResult>}       A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest(config={}) {
+    if ( this.type === "vehicle" ) return;
+
     config = foundry.utils.mergeObject({
       dialog: true, chat: true, newDay: false, autoHD: false, autoHDThreshold: 3
     }, config);
@@ -2096,21 +2098,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.preShortRest", this, config) === false ) return;
 
     // Take note of the initial hit points and number of hit dice the Actor has
-    const hd0 = this.system.attributes.hd;
-    const hp0 = this.system.attributes.hp.value;
+    const hd0 = foundry.utils.getProperty(this, "system.attributes.hd");
+    const hp0 = foundry.utils.getProperty(this, "system.attributes.hp.value");
 
     // Display a Dialog for rolling hit dice
     if ( config.dialog ) {
-      try { config.newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+      try {
+        foundry.utils.mergeObject(config, await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0}));
       } catch(err) { return; }
     }
 
     // Automatically spend hit dice
     else if ( config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
 
+    if ( foundry.utils.getType(this.system.shortRest) === "function" ) return this.system.shortRest(config);
+
     // Return the rest result
-    const dhd = this.system.attributes.hd - hd0;
-    const dhp = this.system.attributes.hp.value - hp0;
+    const dhd = foundry.utils.getProperty(this, "system.attributes.hd") - hd0;
+    const dhp = foundry.utils.getProperty(this, "system.attributes.hp.value") - hp0;
     return this._rest(config.chat, config.newDay, false, dhd, dhp);
   }
 
@@ -2122,6 +2127,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<RestResult>}       A Promise which resolves once the long rest workflow has completed.
    */
   async longRest(config={}) {
+    if ( this.type === "vehicle" ) return;
+
     config = foundry.utils.mergeObject({
       dialog: true, chat: true, newDay: true
     }, config);
@@ -2137,9 +2144,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.preLongRest", this, config) === false ) return;
 
     if ( config.dialog ) {
-      try { config.newDay = await LongRestDialog.longRestDialog({actor: this}); }
-      catch(err) { return; }
+      try {
+        foundry.utils.mergeObject(config, await LongRestDialog.longRestDialog({actor: this}));
+      } catch(err) { return; }
     }
+
+    if ( foundry.utils.getType(this.system.longRest) === "function" ) return this.system.longRest(config);
 
     return this._rest(config.chat, config.newDay, true);
   }
@@ -2324,7 +2334,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _getRestResourceRecovery({recoverShortRestResources=true, recoverLongRestResources=true}={}) {
     let updates = {};
-    for ( let [k, r] of Object.entries(this.system.resources) ) {
+    for ( let [k, r] of Object.entries(this.system.resources ?? {}) ) {
       if ( Number.isNumeric(r.max) && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
         updates[`system.resources.${k}.value`] = Number(r.max);
       }
@@ -2343,7 +2353,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _getRestSpellRecovery({recoverPact=true, recoverSpells=true}={}) {
-    const spells = this.system.spells;
+    const spells = this.system.spells ?? {};
     let updates = {};
     if ( recoverPact ) {
       const pact = spells.pact;

@@ -2,6 +2,25 @@
   min-width: 620px;
   min-height: 620px;
 
+  .member-controls {
+    max-width: calc(100% - 2px);
+    gap: 8px;
+    justify-content: flex-end;
+    margin-block: 4px;
+    padding: 0;
+    list-style: none;
+    font-size: var(--font-size-12);
+
+    li {
+      flex: 0 1 max-content;
+
+      button {
+        padding-inline: 8px;
+        line-height: 1.5em;
+      }
+    }
+  }
+
   .attribute.health span.value {
     line-height: 64px;
     flex: 0 0 64px;

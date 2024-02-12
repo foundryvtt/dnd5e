@@ -53,6 +53,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     context.system = this.actor.system;
     context.items = Array.from(this.actor.items);
     context.config = CONFIG.DND5E;
+    context.isGM = game.user.isGM;
 
     // Membership
     const {sections, stats} = this.#prepareMembers();
@@ -276,6 +277,8 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       inputs.focus(ev => ev.currentTarget.select());
       inputs.addBack().find('[type="text"][data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
       html.find(".action-button").click(this._onClickActionButton.bind(this));
+    } else {
+      html.find(".rest-button").click(this._onClickActionButton.bind(this));
     }
   }
 
@@ -298,12 +301,18 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         const removeMemberId = button.closest("li.group-member").dataset.actorId;
         this.object.system.removeMember(removeMemberId);
         break;
-      case "rollQuantities":
-        this.object.system.rollQuantities();
+      case "longRest":
+        this.object.longRest();
         break;
       case "movementConfig":
         const movementConfig = new ActorMovementConfig(this.object);
         movementConfig.render(true);
+        break;
+      case "rollQuantities":
+        this.object.system.rollQuantities();
+        break;
+      case "shortRest":
+        this.object.shortRest();
         break;
     }
   }
