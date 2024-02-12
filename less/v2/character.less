@@ -912,6 +912,10 @@
         color: var(--color-text-dark-5);
         width: 30px;
         padding-top: 2px;
+
+        @media (prefers-contrast: more) {
+          color: var(--color-text-dark-primary);
+        }
       }
 
       select.ability {
@@ -941,6 +945,10 @@
         font-size: var(--font-size-11);
         color: var(--color-text-dark-5);
         text-align: center;
+
+        @media (prefers-contrast: more) {
+          color: var(--color-text-dark-primary);
+        }
       }
     }
 
