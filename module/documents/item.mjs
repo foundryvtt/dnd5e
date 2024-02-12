@@ -610,7 +610,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
     }
     Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {
-      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl));
+      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl), game.i18n.lang);
     }));
   }
 
