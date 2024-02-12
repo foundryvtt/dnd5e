@@ -33,7 +33,8 @@
                             {{numberFormat ability.save decimals=0 sign=true}}
                         </span>
                     </div>
-                    <a class="config-button" data-action="ability" data-tooltip="DND5E.AbilityConfigure">
+                    <a class="config-button" data-action="ability"
+                       data-tooltip="{{ localize "DND5E.AbilityConfigure" ability=ability.label }}">
                         <i class="fas fa-cog"></i>
                     </a>
                 </li>
@@ -80,13 +81,13 @@
                         </h4>
                         <div class="attribute-value">
                             <label class="recharge checkbox flexcol">
-                                <span>{{ localize "DND5E.AbbreviationSR" }}</span><input name="system.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}} disabled="true"/>
+                                <span>{{ localize "DND5E.AbbreviationSR" }}</span><input name="system.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
                             </label>
                             <input type="text" name="system.resources.{{res.name}}.value" value="{{res.value}}" placeholder="0" data-dtype="Number">
-                            <span class="sep"> / {{res.max}}</span>
-                            {{!-- <input type="text" name="system.resources.{{res.name}}.max" value="{{res.max}}" placeholder="0" data-dtype="Number"> --}}
+                            <span class="sep"> / </span>
+                            <input type="text" name="system.resources.{{res.name}}.max" value="{{res.max}}" placeholder="0" data-dtype="Number">
                             <label class="recharge checkbox flexcol">
-                                <span>{{ localize "DND5E.AbbreviationLR" }}</span><input name="system.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}} disabled="true"/>
+                                <span>{{ localize "DND5E.AbbreviationLR" }}</span><input name="system.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
                             </label>
                         </div>
                     </li>
@@ -126,7 +127,7 @@
 
         {{!-- Inventory Tab --}}
         <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-            {{> "dnd5e.actor-inventory" sections=inventory}}
+            {{> "dnd5e.inventory" sections=inventory}}
         </div>
 
         {{!-- Features Tab --}}
