@@ -737,11 +737,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const parts = [];
 
     // Include the item's innate attack bonus as the initial value and label
-    const ab = this.system.attackBonus;
+    const ab = this.system.attack?.bonus ?? "";
     if ( ab ) {
       parts.push(ab);
       this.labels.toHit = !/^[+-]/.test(ab) ? `+ ${ab}` : ab;
-      if ( this.system.attackFlat ) return {rollData, parts};
+      if ( this.system.attack?.flat ) return {rollData, parts};
     }
 
     // Take no further action for un-owned items
@@ -765,7 +765,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( ammo ) {
       const ammoItemQuantity = ammo.system.quantity;
       const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
-      const ammoItemAttackBonus = ammo.system.attackBonus;
+      const ammoItemAttackBonus = ammo.system.attack.bonus;
       const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.type.value === "ammo");
       if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
         parts.push("@ammo");
@@ -2463,7 +2463,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     let {
       actionType, description, source, activation, duration, target,
-      range, damage, formula, save, level, attackBonus, ability, properties
+      range, damage, formula, save, level, attack, ability, properties
     } = itemData.system;
 
     // Get scroll data
@@ -2502,7 +2502,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
-      attackBonus = scrollData.system.attackBonus;
+      attack.bonus = scrollData.system.attack.bonus;
     }
     if ( save.ability ) {
       save.scaling = "flat";
@@ -2516,7 +2516,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       effects: itemData.effects ?? [],
       system: {
         description: {value: desc.trim()}, source, actionType, activation, duration, target,
-        range, damage, formula, save, level, attackBonus, ability, properties, attackFlat: true
+        range, damage, formula, save, level, ability, properties, attack: {bonus: attack.bonus, flat: true}
       }
     });
     foundry.utils.mergeObject(spellScrollData, options);
