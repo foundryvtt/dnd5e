@@ -1859,7 +1859,18 @@ DND5E.pactCastingProgression = {
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for spell preparation modes.
+ *
+ * @typedef {object} SpellPreparationModeConfiguration
+ * @property {string} label           Localized name of this spell preparation type.
+ * @property {boolean} [upcast]       Whether this preparation mode allows for upcasting.
+ * @property {boolean} [cantrips]     Whether this mode allows for cantrips in a spellbook.
+ * @property {number} [order]         The sort order of this mode in a spellbook.
+ */
+
+/**
  * Various different ways a spell can be prepared.
+ * @enum {SpellPreparationModeConfiguration}
  */
 DND5E.spellPreparationModes = {
   prepared: {

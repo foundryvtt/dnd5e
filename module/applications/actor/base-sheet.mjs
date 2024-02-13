@@ -379,7 +379,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Define section and label mappings
     const sections = Object.entries(CONFIG.DND5E.spellPreparationModes).reduce((acc, [k, {order}]) => {
-      if (Number.isNumeric(order)) acc[k] = Number(order);
+      if ( Number.isNumeric(order) ) acc[k] = Number(order);
       return acc;
     }, {});
     const useLabels = {"-20": "-", "-10": "-", 0: "&infin;"};
@@ -421,7 +421,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Pact magic users have cantrips and a pact magic section
     for (const [k, v] of Object.entries(CONFIG.DND5E.spellPreparationModes)) {
-      if ( !(k in levels) || (!v.upcast) || !(levels[k].max) ) continue;
+      if ( !(k in levels) || !v.upcast || !levels[k].max ) continue;
 
       if ( !spellbook["0"] && v.cantrips ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
       const l = levels[k];
