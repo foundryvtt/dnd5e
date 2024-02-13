@@ -34,7 +34,9 @@ export default class ActorSpellSlotsConfig extends DialogMixin(DocumentSheet) {
       name: `system.spells.spell${level}.override`,
       placeholder: spells[`spell${level}`]?.max ?? 0
     }));
-    if ( spells.pact?.level ) overrides.push({
+
+    const hasPactSpells = this.document.items.some(i => i.type === "spell" && i.system.preparation.mode === "pact");
+    if ( spells.pact?.level || hasPactSpells ) overrides.push({
       label: CONFIG.DND5E.spellPreparationModes.pact,
       value: source.pact.override,
       name: "system.spells.pact.override",
