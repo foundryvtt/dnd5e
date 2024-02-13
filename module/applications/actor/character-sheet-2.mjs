@@ -1,8 +1,9 @@
-import ActorSheet5eCharacter from "./character-sheet.mjs";
-import * as Trait from "../../documents/actor/trait.mjs";
-import Tabs5e from "../tabs.mjs";
-import { simplifyBonus, staticID } from "../../utils.mjs";
 import CharacterData from "../../data/actor/character.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
+import { simplifyBonus, staticID } from "../../utils.mjs";
+import ContextMenu5e from "../context-menu.mjs";
+import Tabs5e from "../tabs.mjs";
+import ActorSheet5eCharacter from "./character-sheet.mjs";
 
 /**
  * An Actor sheet for player character type actors.
@@ -49,10 +50,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @enum {string}
    */
   static PROFICIENCY_CLASSES = {
-    "0": "none",
-    "0.5": "half",
-    "1": "full",
-    "2": "double"
+    0: "none",
+    0.5: "half",
+    1: "full",
+    2: "double"
   };
 
   /**
@@ -148,6 +149,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html[0].insertAdjacentElement("afterbegin", nav);
     this._tabs = this.options.tabs.map(t => {
       t.callback = this._onChangeTab.bind(this);
+      if (this._tabs?.[0]?.active !== t.initial) t.initial = this._tabs?.[0]?.active ?? t.initial;
       return new Tabs5e(t);
     });
 
@@ -174,7 +176,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const context = await super.getData(options);
     context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
     context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
-    const activeTab = this.element.length ? this._tabs?.[0]?.active ?? "details" : "details";
+    const activeTab = this._tabs?.[0]?.active ?? "details";
     context.cssClass += ` tab-${activeTab}`;
     const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
     if ( sidebarCollapsed ) {
@@ -199,14 +201,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     };
 
     // Exhaustion
-    context.exhaustion = Array.fromRange(6, 1).map(n => {
+    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
+    context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
       const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
       const classes = ["pip"];
       const filled = attributes.exhaustion >= n;
       if ( filled ) classes.push("filled");
-      if ( n === 6 ) classes.push("death");
-      return { n, label, filled, tooltip: label, classes: classes.join(" ") };
-    });
+      if ( n === max ) classes.push("death");
+      const pip = { n, label, filled, tooltip: label, classes: classes.join(" ") };
+
+      if ( n <= max / 2 ) acc.left.push(pip);
+      else acc.right.push(pip);
+      return acc;
+    }, { left: [], right: [] });
 
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
@@ -419,7 +426,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       values = values.map(key => {
         const value = { label: Trait.keyLabel(key, { trait }) ?? key };
         const icons = value.icons = [];
-        if ( data.bypasses?.size && (key in CONFIG.DND5E.physicalDamageTypes) ) icons.push(...data.bypasses);
+        if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses);
         return value;
       });
       if ( data.custom ) data.custom.split(";").forEach(v => values.push({ label: v.trim() }));
@@ -542,6 +549,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
           applicable: true,
           disabled: !item.isOwner || isAlways,
           cls: prepared ? "active" : "",
+          icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}"></i>`,
           title: isAlways
             ? CONFIG.DND5E.spellPreparationModes.always
             : prepared
@@ -599,6 +607,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
         event.preventDefault();
       }
+    });
+
+    // Apply special context menus for items outside inventory elements
+    const featuresElement = html[0].querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
+    if ( featuresElement ) new ContextMenu5e(html, ".pills-lg [data-item-id]", [], {
+      onOpen: (...args) => featuresElement._onOpenContextMenu(...args)
     });
 
     if ( this.isEditable ) {
@@ -1016,10 +1030,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       return;
     }
     const { action, type, id } = data.dnd5e ?? {};
-    if ( action === "favorite" ) {
-      if ( this.actor.system.favorites.find(f => f.id === id) ) return this._onSortFavorites(event, id);
-      return this._onAddFavorite({ type, id });
-    }
+    if ( action === "favorite" ) return this._onDropFavorite(event, { type, id });
   }
 
   /* -------------------------------------------- */
@@ -1030,8 +1041,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const item = await Item.implementation.fromDropData(data);
     if ( item?.parent !== this.actor ) return super._onDropItem(event, data);
     const uuid = item.getRelativeUUID(this.actor);
-    if ( this.actor.system.favorites.find(f => f.id === uuid) ) return this._onSortFavorites(event, uuid);
-    return this._onAddFavorite({ type: "item", id: uuid });
+    return this._onDropFavorite(event, { type: "item", id: uuid });
   }
 
   /* -------------------------------------------- */
@@ -1042,26 +1052,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const effect = await ActiveEffect.implementation.fromDropData(data);
     if ( effect.target !== this.actor ) return super._onDropActiveEffect(event, data);
     const uuid = effect.getRelativeUUID(this.actor);
-    if ( this.actor.system.favorites.find(f => f.id === uuid) ) return this._onSortFavorites(event, uuid);
-    return this._onAddFavorite({ type: "effect", id: uuid });
+    return this._onDropFavorite(event, { type: "effect", id: uuid });
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle adding a favorite.
-   * @param {object} [favorite]  The favorite to add.
-   * @returns {Promise<Actor5e>}
+   * Handle an owned item or effect being dropped in the favorites area.
+   * @param {PointerEvent} event         The triggering event.
+   * @param {ActorFavorites5e} favorite  The favorite that was dropped.
+   * @returns {Promise<Actor5e>|void}
    * @protected
    */
-  _onAddFavorite(favorite) {
-    let maxSort = 0;
-    const favorites = this.actor.system.favorites.map(f => {
-      if ( f.sort > maxSort ) maxSort = f.sort;
-      return { ...f };
-    });
-    favorites.push({ ...favorite, sort: maxSort + CONST.SORT_INTEGER_DENSITY });
-    return this.actor.update({ "system.favorites": favorites });
+  _onDropFavorite(event, favorite) {
+    if ( this.actor.system.hasFavorite(favorite.id) ) return this._onSortFavorites(event, favorite.id);
+    return this.actor.system.addFavorite(favorite);
   }
 
   /* -------------------------------------------- */
@@ -1075,9 +1080,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onRemoveFavorite(event) {
     const { favoriteId } = event.currentTarget.closest("[data-favorite-id]")?.dataset ?? {};
     if ( !favoriteId ) return;
-    if ( favoriteId.startsWith("resources.") ) return this.actor.update({ [`system.${favoriteId}.max`]: 0 });
-    const favorites = this.actor.system.favorites.filter(f => f.id !== favoriteId);
-    return this.actor.update({ "system.favorites": favorites });
+    return this.actor.system.removeFavorite(favoriteId);
   }
 
   /* -------------------------------------------- */

@@ -108,7 +108,7 @@ export default class SelectChoices {
     if ( (lhs.sorting === false) && (rhs.sorting === false) ) return 0;
     if ( lhs.sorting === false ) return -1;
     if ( rhs.sorting === false ) return 1;
-    return lhs.label.localeCompare(rhs.label);
+    return lhs.label.localeCompare(rhs.label, game.i18n.lang);
   }
 
   /* -------------------------------------------- */

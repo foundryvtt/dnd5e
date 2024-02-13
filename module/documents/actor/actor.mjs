@@ -210,6 +210,25 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Is this actor under the effect of this property from some status or due to its level of exhaustion?
+   * @param {string} key      A key in `DND5E.conditionEffects`.
+   * @returns {boolean}       Whether the actor is affected.
+   */
+  hasConditionEffect(key) {
+    const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
+    const level = this.system.attributes?.exhaustion ?? null;
+    const imms = this.system.traits?.ci?.value ?? new Set();
+    const statuses = this.statuses;
+    return props.some(k => {
+      const l = Number(k.split("-").pop());
+      return (statuses.has(k) && !imms.has(k))
+        || (!imms.has("exhaustion") && (level !== null) && Number.isInteger(l) && (level >= l));
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Base Data Preparation Helpers               */
   /* -------------------------------------------- */
 
@@ -363,54 +382,97 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Prepare skill checks. Mutates the values of system.skills.
-   * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {object} globalBonuses   Global bonus data.
-   * @param {number} checkBonus      Global ability check bonus.
-   * @param {object} originalSkills  A transformed actor's original actor's skills.
+   * @param {object} rollData         Data produced by `getRollData` to be applied to bonus formulas.
+   * @param {object} globalBonuses     Global bonus data.
+   * @param {number} globalCheckBonus  Global ability check bonus.
+   * @param {object} originalSkills    A transformed actor's original actor's skills.
    * @protected
    */
-  _prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills) {
+  _prepareSkills(rollData, globalBonuses, globalCheckBonus, originalSkills) {
     if ( this.type === "vehicle" ) return;
-    const flags = this.flags.dnd5e ?? {};
 
     // Skill modifiers
-    const feats = CONFIG.DND5E.characterFlags;
-    const skillBonus = simplifyBonus(globalBonuses.skill, bonusData);
-    for ( const [id, skl] of Object.entries(this.system.skills) ) {
-      const ability = this.system.abilities[skl.ability];
-      const baseBonus = simplifyBonus(skl.bonuses?.check, bonusData);
-      let roundDown = true;
-
-      // Remarkable Athlete
-      if ( this._isRemarkableAthlete(skl.ability) && (skl.value < 0.5) ) {
-        skl.value = 0.5;
-        roundDown = false;
-      }
-
-      // Jack of All Trades
-      else if ( flags.jackOfAllTrades && (skl.value < 0.5) ) {
-        skl.value = 0.5;
-      }
-
-      // Polymorph Skill Proficiencies
-      if ( originalSkills ) {
-        skl.value = Math.max(skl.value, originalSkills[id].value);
-      }
-
-      // Compute modifier
-      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
-      skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
-      skl.mod = ability?.mod ?? 0;
-      skl.prof = new Proficiency(this.system.attributes.prof, skl.value, roundDown);
-      skl.proficient = skl.value;
-      skl.total = skl.mod + skl.bonus;
-      if ( Number.isNumeric(skl.prof.term) ) skl.total += skl.prof.flat;
-
-      // Compute passive bonus
-      const passive = flags.observantFeat && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      const passiveBonus = simplifyBonus(skl.bonuses?.passive, bonusData);
-      skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
+    for ( const [id, skillData] of Object.entries(this.system.skills) ) {
+      this._prepareSkill(id, { skillData, rollData, originalSkills, globalCheckBonus, globalBonuses });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepares data for a specific skill.
+   * @param {string} skillId                     The id of the skill to prepare data for.
+   * @param {object} [options]                   Additional options.
+   * @param {SkillData} [options.skillData]      The base skill data for this skill.
+   *                                             If undefined, `this.system.skill[skillId]` is used.
+   * @param {object} [options.rollData]          RollData for this actor, used to evaluate dice terms in bonuses.
+   *                                             If undefined, `this.getRollData()` is used.
+   * @param {object} [options.originalSkills]    Original skills if actor is polymorphed.
+   *                                             If undefined, the skills of the actor identified by
+   *                                             `this.flags.dnd5e.originalActor` are used.
+   * @param {object} [options.globalBonuses]     Global ability bonuses for this actor.
+   *                                             If undefined, `this.system.bonuses.abilities` is used.
+   * @param {number} [options.globalCheckBonus]  Global check bonus for this actor.
+   *                                             If undefined, `globalBonuses.check` will be evaluated using `rollData`.
+   * @param {number} [options.globalSkillBonus]  Global skill bonus for this actor.
+   *                                             If undefined, `globalBonuses.skill` will be evaluated using `rollData`.
+   * @param {string} [options.ability]           The ability to compute bonuses based on.
+   *                                             If undefined, skillData.ability is used.
+   * @returns {SkillData}
+   * @internal
+   */
+  _prepareSkill(skillId, {
+    skillData, rollData, originalSkills, globalBonuses,
+    globalCheckBonus, globalSkillBonus, ability
+  }={}) {
+    const flags = this.flags.dnd5e ?? {};
+
+    skillData ??= foundry.utils.deepClone(this.system.skills[skillId]);
+    rollData ??= this.getRollData();
+    originalSkills ??= flags.originalActor ? game.actors?.get(flags.originalActor)?.system?.skills : null;
+    globalBonuses ??= this.system.bonuses?.abilities ?? {};
+    globalCheckBonus ??= simplifyBonus(globalBonuses.check, rollData);
+    globalSkillBonus ??= simplifyBonus(globalBonuses.skill, rollData);
+    ability ??= skillData.ability;
+    const abilityData = this.system.abilities[ability];
+    skillData.ability = ability;
+
+    const feats = CONFIG.DND5E.characterFlags;
+
+    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
+    let roundDown = true;
+
+    // Remarkable Athlete
+    if ( this._isRemarkableAthlete(skillData.ability) && (skillData.value < 0.5) ) {
+      skillData.value = 0.5;
+      roundDown = false;
+    }
+
+    // Jack of All Trades
+    else if ( flags.jackOfAllTrades && (skillData.value < 0.5) ) {
+      skillData.value = 0.5;
+    }
+
+    // Polymorph Skill Proficiencies
+    if ( originalSkills ) {
+      skillData.value = Math.max(skillData.value, originalSkills[skillId].value);
+    }
+
+    // Compute modifier
+    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
+    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
+    skillData.mod = abilityData?.mod ?? 0;
+    skillData.prof = new Proficiency(this.system.attributes.prof, skillData.value, roundDown);
+    skillData.proficient = skillData.value;
+    skillData.total = skillData.mod + skillData.bonus;
+    if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
+
+    // Compute passive bonus
+    const passive = flags.observantFeat && feats.observantFeat.skills.includes(skillId) ? 5 : 0;
+    const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
+    skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
+
+    return skillData;
   }
 
   /* -------------------------------------------- */
@@ -594,28 +656,26 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _prepareHitPoints(rollData) {
     const hp = this.system.attributes.hp;
-    if ( this.type !== "character" || (this.system.attributes.hp.max !== null) ) {
-      hp.pct = Math.clamped(hp.max ? (hp.value / hp.max) * 100 : 0, 0, 100);
-      return;
+
+    if ( this.type === "character" && (this.system.attributes.hp.max === null) ) {
+      const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
+      const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
+      const base = Object.values(this.classes).reduce((total, item) => {
+        const advancement = item.advancement.byType.HitPoints?.[0];
+        return total + (advancement?.getAdjustedTotal(abilityMod) ?? 0);
+      }, 0);
+      const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.system.details.level;
+      const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
+
+      hp.max = base + levelBonus + overallBonus;
+
+      if ( this.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
     }
 
-    const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
-    const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
-    const base = Object.values(this.classes).reduce((total, item) => {
-      const advancement = item.advancement.byType.HitPoints?.[0];
-      return total + (advancement?.getAdjustedTotal(abilityMod) ?? 0);
-    }, 0);
-    const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.system.details.level;
-    const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
-
-    hp.max = base + levelBonus + overallBonus;
-
-    if ( this.system.attributes.exhaustion >= 4 ) {
-      hp.max = Math.floor(hp.max * 0.5);
-      hp.value = Math.min(hp.value, hp.max);
-    }
-
-    hp.pct = Math.clamped(hp.max ? (hp.value / hp.max) * 100 : 0, 0, 100);
+    hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
+    hp.value = Math.min(hp.value, hp.effectiveMax);
+    hp.damage = hp.effectiveMax - hp.value;
+    hp.pct = Math.clamped(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
   }
 
   /* -------------------------------------------- */
@@ -993,7 +1053,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Number.isNumeric(damages) ) {
       damages = [{ value: damages }];
       options.ignore ??= true;
-    }
+    } else damages = foundry.utils.deepClone(damages);
 
     const multiplier = options.multiplier ?? 1;
 
@@ -1017,23 +1077,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const hasEffect = (category, type, properties) => {
       const config = traits?.[category];
       if ( !config?.value.has(type) ) return false;
-      if ( !(type in CONFIG.DND5E.physicalDamageTypes) || !properties?.size ) return true;
+      if ( !CONFIG.DND5E.damageTypes[type]?.isPhysical || !properties?.size ) return true;
       return !config.bypasses?.intersection(properties)?.size;
     };
 
     const rollData = this.getRollData({deterministic: true});
 
-    let amount = damages.reduce((total, d) => {
+    damages.forEach(d => {
       // Skip damage types with immunity
-      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) return total;
-
-      let value = d.value;
+      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) {
+        d.value = 0;
+        return;
+      }
 
       // Apply type-specific damage reduction
       if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
         const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
-        if ( Math.sign(value) !== Math.sign(value + modification) ) value = 0;
-        else value += modification;
+        if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
+        else d.value += modification;
       }
 
       let damageMultiplier = multiplier;
@@ -1044,14 +1105,26 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Apply type-specific damage vulnerability
       if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
 
-      return total + (value * damageMultiplier);
-    }, 0);
+      d.value = d.value * damageMultiplier;
+    });
+
+    /**
+     * A hook event that fires after damage values are calculated for an actor.
+     * @param {Actor5e} actor                     The actor being damaged.
+     * @param {DamageDescription[]} damages       Damage descriptions.
+     * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
+     * @function dnd5e.calculateDamage
+     * @memberof hookEvents
+     */
+    if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return this;
 
     // Round damage towards zero
+    let amount = damages.reduce((acc, d) => acc + d.value, 0);
     amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
 
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
-    const deltaHP = amount - deltaTemp;
+    const deltaHP = Math.clamped(amount - deltaTemp, -hp.damage, hp.value);
     const updates = {
       "system.attributes.hp.temp": hp.temp - deltaTemp,
       "system.attributes.hp.value": hp.value - deltaHP
@@ -1837,7 +1910,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
 
     const hp = this.system.attributes.hp;
-    const dhp = Math.min(Math.max(0, hp.max + (hp.tempmax ?? 0)) - hp.value, roll.total);
+    const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, roll.total);
     const updates = {
       actor: {"system.attributes.hp.value": hp.value + dhp},
       class: {"system.hitDiceUsed": cls.system.hitDiceUsed + 1}
@@ -2210,7 +2283,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async autoSpendHitDice({ threshold=3 }={}) {
     const hp = this.system.attributes.hp;
-    const max = Math.max(0, hp.max + hp.tempmax);
+    const max = Math.max(0, hp.effectiveMax);
     let diceRolled = 0;
     while ( (this.system.attributes.hp.value + threshold) <= max ) {
       const r = await this.rollHitDie();
@@ -2235,7 +2308,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let max = hp.max;
     let updates = {};
     if ( recoverTempMax ) updates["system.attributes.hp.tempmax"] = 0;
-    else max = Math.max(0, max + (hp.tempmax || 0));
+    else max = Math.max(0, hp.effectiveMax);
     updates["system.attributes.hp.value"] = max;
     if ( recoverTemp ) updates["system.attributes.hp.temp"] = 0;
     return { updates, hitPointsRecovered: max - hp.value };
@@ -2522,7 +2595,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const attributions = [];
     for ( const e of this.allApplicableEffects() ) {
       let source = e.sourceName;
-      if ( e.origin === this.uuid ) source = e.name;
+      if ( !e.origin || (e.origin === this.uuid) ) source = e.name;
       if ( !source || e.disabled || e.isSuppressed ) continue;
       const value = e.changes.reduce((n, change) => {
         if ( change.key !== target ) return n;
@@ -3003,8 +3076,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritdoc */
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    this._displayScrollingDamage(options.dhp);
-    this.token?.flashRing(options);
+    this._displayTokenEffect(options);
     if ( userId === game.userId ) {
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
@@ -3041,26 +3113,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Display changes to health as scrolling combat text.
-   * Adapt the font size relative to the Actor's HP total to emphasize more significant blows.
-   * @param {number} dhp      The change in hit points that was applied
-   * @private
+   * Flash ring & display changes to health as scrolling combat text.
+   * @param {object} options  Any data provided by the update.
+   * @protected
    */
-  _displayScrollingDamage(dhp) {
-    if ( !dhp ) return;
-    dhp = Number(dhp);
-    const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
-    for ( const t of tokens ) {
-      if ( !t.visible || !t.renderable ) continue;
-      const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
-      canvas.interface.createScrollingText(t.center, dhp.signedString(), {
-        anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
-        fontSize: 16 + (32 * pct), // Range between [16, 48]
-        fill: CONFIG.DND5E.tokenHPColors[dhp < 0 ? "damage" : "healing"],
-        stroke: 0x000000,
-        strokeThickness: 4,
-        jitter: 0.25
-      });
+  _displayTokenEffect(options) {
+    const dhp = Number(options.dhp);
+    const tokens = this.isToken ? [this.token] : this.getActiveTokens(true, true);
+    for ( const token of tokens ) {
+      if ( !token.object.visible || !token.object.renderable ) continue;
+      token.flashRing(options);
+      if ( dhp ) {
+        const t = token.object;
+        const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
+        canvas.interface.createScrollingText(t.center, dhp.signedString(), {
+          anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+          // Adapt the font size relative to the Actor's HP total to emphasize more significant blows
+          fontSize: 16 + (32 * pct), // Range between [16, 48]
+          fill: CONFIG.DND5E.tokenHPColors[dhp < 0 ? "damage" : "healing"],
+          stroke: 0x000000,
+          strokeThickness: 4,
+          jitter: 0.25
+        });
+      }
     }
   }
 

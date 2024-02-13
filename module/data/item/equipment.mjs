@@ -139,7 +139,8 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value];
+    this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
+      ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
   }
 
   /* -------------------------------------------- */

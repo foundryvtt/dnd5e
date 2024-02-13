@@ -58,6 +58,13 @@ const { SchemaField, NumberField, StringField, BooleanField, ArrayField, Integer
 export default class CharacterData extends CreatureTemplate {
 
   /** @inheritdoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    supportsAdvancement: true
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static _systemType = "character";
 
   /* -------------------------------------------- */
@@ -205,6 +212,56 @@ export default class CharacterData extends CreatureTemplate {
       if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
     }
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Checks whether the item with the given relative UUID has been favorited
+   * @param {string} favoriteId  The relative UUID of the item to check.
+   * @returns {boolean}
+   */
+  hasFavorite(favoriteId) {
+    return !!this.favorites.find(f => f.id === favoriteId);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a favorite item to this actor.
+   * If the given item is already favorite, this method has no effect.
+   * @param {ActorFavorites5e} favorite  The favorite to add.
+   * @returns {Promise<Actor5e>}
+   * @throws If the item intended to be favorited does not belong to this actor.
+   */
+  addFavorite(favorite) {
+    if ( this.hasFavorite(favorite.id) ) return Promise.resolve(this.parent);
+
+    if ( favorite.id.startsWith(".") && fromUuidSync(favorite.id, { relative: this.parent }) === null ) {
+      // Assume that an ID starting with a "." is a relative ID.
+      throw new Error(`The item with id ${favorite.id} is not owned by actor ${this.parent.id}`);
+    }
+
+    let maxSort = 0;
+    const favorites = this.favorites.map(f => {
+      if ( f.sort > maxSort ) maxSort = f.sort;
+      return { ...f };
+    });
+    favorites.push({ ...favorite, sort: maxSort + CONST.SORT_INTEGER_DENSITY });
+    return this.parent.update({ "system.favorites": favorites });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Removes the favorite with the given relative UUID or resource ID
+   * @param {string} favoriteId  The relative UUID or resource ID of the favorite to remove.
+   * @returns {Promise<Actor5e>}
+   */
+  removeFavorite(favoriteId) {
+    if ( favoriteId.startsWith("resources.") ) return this.parent.update({ [`system.${favoriteId}.max`]: 0 });
+    const favorites = this.favorites.filter(f => f.id !== favoriteId);
+    return this.parent.update({ "system.favorites": favorites });
   }
 }
 

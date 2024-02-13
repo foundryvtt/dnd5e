@@ -1,4 +1,3 @@
-import Token5e from "../canvas/token.mjs";
 import TokenDocument5e from "../documents/token.mjs";
 import { getHumanReadableAttributeLabel } from "../utils.mjs";
 
@@ -64,7 +63,7 @@ export default class TokenConfig5e extends TokenConfig {
     let ringTab = document.createElement("div");
     const flags = this.document.getFlag("dnd5e", "tokenRing") ?? {};
     ringTab.innerHTML = await renderTemplate(this.constructor.dynamicRingTemplate, {
-      flags,
+      flags: foundry.utils.mergeObject(flags, { scaleCorrection: 1 }, { inplace: false }),
       effects: Object.entries(CONFIG.DND5E.tokenRings.effects).reduce((obj, [key, label]) => {
         const mask = CONFIG.Token.ringClass.effects[key];
         obj[key] = { label, checked: (flags.effects & mask) > 0 };
@@ -173,8 +172,7 @@ export default class TokenConfig5e extends TokenConfig {
 
   /** @inheritDoc */
   _previewChanges(change) {
-    if ( !(this.preview instanceof TokenDocument5e) ) return;
-    if ( change ) {
+    if ( change && (this.preview instanceof TokenDocument5e) ) {
       const flags = foundry.utils.getProperty(foundry.utils.expandObject(change), "flags.dnd5e.tokenRing") ?? {};
       const redraw = ("textures" in flags) || ("enabled" in flags);
       if ( redraw ) this.preview.object.renderFlags.set({ redraw });

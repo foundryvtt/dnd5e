@@ -408,6 +408,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Advancement
     this._prepareAdvancement();
 
+    // Item Properties
+    if ( this.system.properties ) {
+      this.labels.properties = Array.from(this.system.properties).map(prop => ({
+        abbr: prop,
+        label: CONFIG.DND5E.itemProperties[prop]?.label,
+        icon: CONFIG.DND5E.itemProperties[prop]?.icon
+      }));
+    }
+
     // Specialized preparation per Item type
     switch ( this.type ) {
       case "equipment":
@@ -463,20 +472,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   _prepareSpell() {
-    const tags = Object.fromEntries(Object.entries(CONFIG.DND5E.spellTags).map(([k, v]) => {
-      v.tag = true;
-      return [k, v];
-    }));
-    const attributes = {...CONFIG.DND5E.spellComponents, ...tags};
+    const attributes = this.system?.validProperties.reduce((obj, k) => {
+      obj[k] = CONFIG.DND5E.itemProperties[k];
+      return obj;
+    }, {});
     this.system.preparation.mode ||= "prepared";
     this.labels.level = CONFIG.DND5E.spellLevels[this.system.level];
     this.labels.school = CONFIG.DND5E.spellSchools[this.system.school]?.label;
     this.labels.components = this.system.properties.reduce((obj, c) => {
       const config = attributes[c];
       if ( !config ) return obj;
-      const { abbr, label, icon } = config;
-      obj.all.push({ abbr, label, icon, tag: config.tag });
-      if ( config.tag ) obj.tags.push(label);
+      const { abbreviation: abbr, label, icon } = config;
+      obj.all.push({ abbr, label, icon, tag: config.isTag });
+      if ( config.isTag ) obj.tags.push(label);
       else obj.vsm.push(abbr);
       return obj;
     }, {all: [], vsm: [], tags: []});
@@ -602,7 +610,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
     }
     Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {
-      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl));
+      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl), game.i18n.lang);
     }));
   }
 
@@ -678,7 +686,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       }
       catch(err) {
-        const parentInfo = this.parent ? ` on ${this.parent.name} (${this.parent.id})` : '';
+        const parentInfo = this.parent ? ` on ${this.parent.name} (${this.parent.id})` : "";
         console.warn(`Unable to simplify formula for ${this.name} (${this.id})${parentInfo}`, err);
       }
       const damageType = damagePart[1];
@@ -1520,7 +1528,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Get roll data
     const dmg = this.system.damage;
-    const properties = Object.keys(CONFIG.DND5E.physicalWeaponProperties).filter(k => this.system.properties?.[k]);
+    const properties = Array.from(this.system.properties).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical);
     const rollConfigs = dmg.parts.map(([formula, type]) => ({ parts: [formula], type, properties }));
     const rollData = this.getRollData();
     if ( spellLevel ) rollData.item.level = spellLevel;
@@ -1589,7 +1597,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
 
     foundry.utils.mergeObject(rollConfig, options);
-    rollConfig.rollConfigs = rollConfigs;
+    rollConfig.rollConfigs = rollConfigs.concat(options.rollConfigs ?? []);
 
     /**
      * A hook event that fires before a damage is rolled for an Item.
@@ -1809,6 +1817,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       ability: this.system.ability,
       bonus: this.system.bonus,
       prof: this.system.prof,
+      item: this,
       ...options
     });
   }
@@ -1971,8 +1980,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   static _applyEffectToToken(effect, token) {
     if ( !game.user.isGM && !token.actor?.isOwner ) return false;
-    // Toggle on effects that already exist on the Actor.
-    if ( (effect.parent?.parent === token.actor) && effect.transfer ) return effect.update({ disabled: false });
+
+    // Enable this effect if it is transferred from an item on the token's actor
+    const tokenIsOwner = effect.parent?.parent === token.actor;
+    if ( tokenIsOwner && effect.transfer ) return effect.update({ disabled: !effect.disabled });
+
+    // Enable an existing effect on the target if it originated from this effect
+    const existingEffect = token.actor?.effects.find(e => e.origin === effect.uuid);
+    if ( existingEffect ) return existingEffect.update({ disabled: !existingEffect.disabled });
+
+    // Otherwise, create a new effect on the target
     const effectData = foundry.utils.mergeObject(effect.toObject(), {
       disabled: false,
       transfer: false,
@@ -1989,6 +2006,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @private
    */
   static _onChatCardToggleContent(event) {
+    // If the user is clicking on a link in the collapsible region, don't collapse
+    if ( event.target.closest(":is(.item-name, .collapsible) :is(a, button)") ) return;
+
     event.preventDefault();
     const header = event.currentTarget;
     const card = header.closest(".chat-card");
@@ -2336,7 +2356,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /** @inheritdoc */
   async deleteDialog(options={}) {
     // If item has advancement, handle it separately
-    if ( this.isEmbedded && (this.actor.type !== "group") && !game.settings.get("dnd5e", "disableAdvancements") ) {
+    if ( this.actor?.system.metadata?.supportsAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, this.id);
       if ( manager.steps.length ) {
         try {
@@ -2529,7 +2549,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
    * @returns {Promise<Item5e|null>}
    */
-  static async createDialog(data={}, { parent=null, pack=null, types=null, ...options }) {
+  static async createDialog(data={}, { parent=null, pack=null, types=null, ...options }={}) {
     types ??= game.documentTypes[this.documentName].filter(t => (t !== CONST.BASE_DOCUMENT_TYPE) && (t !== "backpack"));
     if ( !types.length ) return null;
     const collection = parent ? null : pack ? game.packs.get(pack) : game.collections.get(this.documentName);

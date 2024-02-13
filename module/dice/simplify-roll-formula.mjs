@@ -20,7 +20,7 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false, det
   if ( deterministic ) {
     // Remove non-deterministic terms and their preceding operators.
     const terms = [];
-    for ( let i =  roll.terms.length - 1; i >= 0; ) {
+    for ( let i = roll.terms.length - 1; i >= 0; ) {
       let term = roll.terms[i];
       const deterministic = term.isDeterministic;
       if ( deterministic ) terms.unshift(term);

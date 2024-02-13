@@ -1,4 +1,6 @@
-const { BooleanField, ColorField, FilePathField, NumberField, SchemaField } = foundry.data.fields;
+const {
+  BooleanField, ColorField, FilePathField, ForeignDocumentField, NumberField, ObjectField, SchemaField
+} = foundry.data.fields;
 
 /**
  * Token Ring flag data
@@ -17,12 +19,20 @@ const { BooleanField, ColorField, FilePathField, NumberField, SchemaField } = fo
 /**
  * A custom model to validate system flags on Token Documents.
  *
+ * @property {boolean} isPolymorphed        Is the actor represented by this token transformed?
+ * @property {string} originalActor         Original actor before transformation.
+ * @property {object} previousActorData     Actor data from before transformation for unlinked tokens.
  * @property {TokenRingFlagData} tokenRing
  */
 export default class TokenSystemFlags extends foundry.abstract.DataModel {
   /** @override */
   static defineSchema() {
     return {
+      isPolymorphed: new BooleanField({required: false, initial: undefined}),
+      originalActor: new ForeignDocumentField(foundry.documents.BaseActor, {
+        required: false, initial: undefined, idOnly: true
+      }),
+      previousActorData: new ObjectField({required: false, initial: undefined}),
       tokenRing: new SchemaField({
         enabled: new BooleanField({label: "DND5E.TokenRings.Enabled"}),
         colors: new SchemaField({

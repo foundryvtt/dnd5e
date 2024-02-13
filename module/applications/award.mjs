@@ -214,7 +214,7 @@ export default class Award extends DialogMixin(FormApplication) {
     destinations = destinations.filter(d => ["character", "group"].includes(d.type));
     if ( !amount || !destinations.length ) return;
 
-    let originUpdate = origin?.system.details.xp.value ?? Infinity;
+    let originUpdate = origin ? (origin.system.details.xp.value ?? 0) : Infinity;
     if ( each ) amount = amount * destinations.length;
     const perDestination = Math.floor(Math.min(amount, originUpdate) / destinations.length);
     originUpdate -= amount;
@@ -252,6 +252,8 @@ export default class Award extends DialogMixin(FormApplication) {
           ${formatNumber(result.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
         </span>
       `);
+      if ( !entries.length ) continue;
+
       const content = game.i18n.format("DND5E.Award.Message", {
         name: destination.name, award: `<span class="dnd5e2">${game.i18n.getListFormatter().format(entries)}</span>`
       });

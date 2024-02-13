@@ -35,6 +35,7 @@
   --dnd5e-color-green: #205b15;
   --dnd5e-color-maroon: #741b2b;
   --dnd5e-color-parchment: #f1ebe8;
+  --dnd5e-color-scrollbar: var(--dnd5e-color-gold);
   --dnd5e-color-card: #f8f4f1;
   --dnd5e-color-hp-1: #1b4b29;
   --dnd5e-color-hp-2: #3ba55d;
@@ -54,6 +55,7 @@
   --dnd5e-color-failure-critical: red;
   --dnd5e-background-10: rgb(0 0 0 / 10%);
   --dnd5e-background-5: rgb(0 0 0 / 5%);
+  --dnd5e-border-dark: 1px solid #999;
   --dnd5e-border-light: 1px solid #CCC;
   --dnd5e-border-groove: 2px groove var(--dnd5e-color-groove);
   --dnd5e-border-dotted: 1px dotted #bbb;
@@ -78,6 +80,18 @@
   --dnd5e-capacity-background-color: oklch(62% 0.05 246);
   --dnd5e-capacity-border-color: oklch(91% 0.044 252.5);
   --dnd5e-capacity-text-color: oklch(95% 0 0);
+
+  @media (prefers-contrast: more) {
+    --dnd5e-color-card: #ffffff;
+    --dnd5e-color-gold: #e3ce9e;
+    --dnd5e-color-scrollbar: var(--dnd5e-color-maroon);
+    --filigree-border-color: var(--dnd5e-color-dark);
+    --proficiency-cycle-enabled-color: color-mix(in oklab, var(--dnd5e-color-blue), black 20%);
+    --proficiency-cycle-disabled-color: var(--dnd5e-color-dark);
+    .window-app .window-content {
+      --color-text-dark-primary: #000000;
+    }
+  }
 }
 
 /* ----------------------------------------- */
