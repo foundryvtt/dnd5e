@@ -1886,13 +1886,13 @@ DND5E.spellPreparationModes = {
   }
 };
 preLocalize("spellPreparationModes", { key: "label" });
-patchConfig("spellPreparationModes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+patchConfig("spellPreparationModes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 
 /**
  * Subset of `DND5E.spellPreparationModes` that consume spell slots.
- * @deprecated since DnD5e 2.5, available until DnD5e 2.7
+ * @deprecated since DnD5e 3.0, available until DnD5e 3.2
  * @type {string[]}
  */
 DND5E.spellUpcastModes = ["always", "pact", "prepared"];
