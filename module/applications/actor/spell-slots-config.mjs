@@ -39,7 +39,7 @@ export default class ActorSpellSlotsConfig extends DialogMixin(DocumentSheet) {
       if ( !parseInt(spells[k]?.level) ) continue;
       const hasSpell = this.document.items.some(i => i.type === "spell" && i.system.preparation.mode === k);
       if ( hasSpell ) overrides.push({
-        label: CONFIG.DND5E.spellPreparationModes[k],
+        label: CONFIG.DND5E.spellPreparationModes[k].label,
         value: source[k]?.override,
         name: `system.spells.${k}.override`,
         placeholder: spells[k]?.max ?? 0
