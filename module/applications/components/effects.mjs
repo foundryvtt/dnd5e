@@ -104,6 +104,7 @@ export default class EffectsElement extends HTMLElement {
 
     // Iterate over active effects, classifying them into categories
     for ( const e of effects ) {
+      if ( (e.parent.system?.identified === false) && !game.user.isGM ) continue;
       if ( e.isSuppressed ) categories.suppressed.effects.push(e);
       else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
