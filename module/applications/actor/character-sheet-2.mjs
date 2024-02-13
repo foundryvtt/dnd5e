@@ -10,7 +10,8 @@ import ActorSheet5eCharacter from "./character-sheet.mjs";
  */
 export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   constructor(object, options={}) {
-    const { width, height } = game.user.getFlag("dnd5e", "sheetPrefs.character") ?? {};
+    const key = `character${object.limited ? ":limited" : ""}`;
+    const { width, height } = game.user.getFlag("dnd5e", `sheetPrefs.${key}`) ?? {};
     if ( width && !("width" in options) ) options.width = width;
     if ( height && !("height" in options) ) options.height = height;
     super(object, options);
@@ -132,6 +133,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       firstButton?.insertAdjacentElement("beforebegin", idLink);
     }
 
+    if ( !game.user.isGM && this.actor.limited ) {
+      html[0].classList.add("limited");
+      return html;
+    }
+
     // Render tabs.
     const nav = document.createElement("nav");
     nav.classList.add("tabs");
@@ -150,7 +156,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html[0].insertAdjacentElement("afterbegin", nav);
     this._tabs = this.options.tabs.map(t => {
       t.callback = this._onChangeTab.bind(this);
-      if (this._tabs?.[0]?.active !== t.initial) t.initial = this._tabs?.[0]?.active ?? t.initial;
+      if ( this._tabs?.[0]?.active !== t.initial ) t.initial = this._tabs?.[0]?.active ?? t.initial;
       return new Tabs5e(t);
     });
 
@@ -1004,7 +1010,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onResize(event) {
     super._onResize(event);
     const { width, height } = this.position;
-    game.user.setFlag("dnd5e", "sheetPrefs.character", { width, height });
+    const key = `character${this.actor.limited ? ":limited": ""}`;
+    game.user.setFlag("dnd5e", `sheetPrefs.${key}`, { width, height });
   }
 
   /* -------------------------------------------- */

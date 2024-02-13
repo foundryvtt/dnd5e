@@ -209,7 +209,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/tabs/character-features.hbs",
     "systems/dnd5e/templates/actors/tabs/character-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
-    "systems/dnd5e/templates/actors/tabs/limited-biography.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
