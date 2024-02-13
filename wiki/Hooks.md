@@ -1,4 +1,4 @@
-![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
+![Up to date as of 3.0.2](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
 
 ## Actor
 
@@ -45,6 +45,16 @@ Fires after an ability save has been rolled.
 ### `dnd5e.preCalculateDamage`
 
 Fires before damage amount is calculated for an actor. Returning `false` will prevent damage from being applied.
+
+| Name    | Type                     | Description                            |
+| ------- | ------------------------ | -------------------------------------- |
+| actor   | Actor5e                  | The actor being damaged.               |
+| damages | DamageDescription[]      | Damage descriptions.                   |
+| options | DamageApplicationOptions | Additional damage application options. |
+
+### `dnd5e.calculateDamage`
+
+Fires after damage values are calculated for an actor. Returning `false` will prevent damage from being applied.
 
 | Name    | Type                     | Description                            |
 | ------- | ------------------------ | -------------------------------------- |
