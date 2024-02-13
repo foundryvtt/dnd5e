@@ -1001,8 +1001,16 @@ preLocalize("armorClasses", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for an items that have sub-types.
+ *
+ * @typedef {object} SubtypeTypeConfiguration
+ * @property {string} label                       Localized label for this type.
+ * @property {Record<string, string>} [subtypes]  Enum containing localized labels for subtypes.
+ */
+
+/**
  * Enumerate the valid consumable types which are recognized by the system.
- * @enum {string}
+ * @enum {SubtypeTypeConfiguration}
  */
 DND5E.consumableTypes = {
   ammo: {
@@ -1121,16 +1129,8 @@ DND5E.focusTypes = {
 /* -------------------------------------------- */
 
 /**
- * Configuration data for an item with the "feature" type.
- *
- * @typedef {object} FeatureTypeConfiguration
- * @property {string} label                       Localized label for this type.
- * @property {Object<string, string>} [subtypes]  Enum containing localized labels for subtypes.
- */
-
-/**
  * Types of "features" items.
- * @enum {FeatureTypeConfiguration}
+ * @enum {SubtypeTypeConfiguration}
  */
 DND5E.featureTypes = {
   background: {
@@ -1182,8 +1182,20 @@ preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for item properties.
+ *
+ * @typedef {object} ItemPropertyConfiguration
+ * @property {string} label           Localized label.
+ * @property {string} [abbreviation]  Localized abbreviation.
+ * @property {string} [icon]          Icon that can be used in certain places to represent this property.
+ * @property {string} [reference]     Reference to a rule page describing this property.
+ * @property {boolean} [isPhysical]   Is this property one that can cause damage resistance bypasses?
+ * @property {boolean} [isTag]        Is this spell property a tag, rather than a component?
+ */
+
+/**
  * The various properties of all item types.
- * @enum {object}
+ * @enum {ItemPropertyConfiguration}
  */
 DND5E.itemProperties = {
   ada: {
@@ -1195,7 +1207,9 @@ DND5E.itemProperties = {
   },
   concentration: {
     label: "DND5E.Item.Property.Concentration",
-    abbr: "DND5E.ConcentrationAbbr",
+    abbreviation: "DND5E.ConcentrationAbbr",
+    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true
   },
   fin: {
@@ -1217,10 +1231,13 @@ DND5E.itemProperties = {
     label: "DND5E.Item.Property.Loading"
   },
   material: {
-    label: "DND5E.Item.Property.Material"
+    label: "DND5E.Item.Property.Material",
+    abbreviation: "DND5E.ComponentMaterialAbbr",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.AeH5eDS4YeM9RETC"
   },
   mgc: {
     label: "DND5E.Item.Property.Magical",
+    icon: "systems/dnd5e/icons/svg/properties/magical.svg",
     isPhysical: true
   },
   rch: {
@@ -1234,7 +1251,9 @@ DND5E.itemProperties = {
   },
   ritual: {
     label: "DND5E.Item.Property.Ritual",
-    abbr: "DND5E.RitualAbbr",
+    abbreviation: "DND5E.RitualAbbr",
+    icon: "systems/dnd5e/icons/svg/items/spell.svg",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA",
     isTag: true
   },
   sil: {
@@ -1242,7 +1261,9 @@ DND5E.itemProperties = {
     isPhysical: true
   },
   somatic: {
-    label: "DND5E.Item.Property.Somatic"
+    label: "DND5E.Item.Property.Somatic",
+    abbreviation: "DND5E.ComponentSomaticAbbr",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.qwUNgUNilEmZkSC9"
   },
   spc: {
     label: "DND5E.Item.Property.Special"
@@ -1260,13 +1281,15 @@ DND5E.itemProperties = {
     label: "DND5E.Item.Property.Versatile"
   },
   vocal: {
-    label: "DND5E.Item.Property.Verbal"
+    label: "DND5E.Item.Property.Verbal",
+    abbreviation: "DND5E.ComponentVerbalAbbr",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6UXTNWMCQ0nSlwwx"
   },
   weightlessContents: {
     label: "DND5E.Item.Property.WeightlessContents"
   }
 };
-preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
+preLocalize("itemProperties", { keys: ["label", "abbreviation"], sort: true });
 
 /* -------------------------------------------- */
 
@@ -2332,6 +2355,7 @@ DND5E.consumableResources = [
  * @property {string} [icon]       Icon used to represent the condition on the token.
  * @property {string} [reference]  UUID of a journal entry with details on this condition.
  * @property {string} [special]    Set this condition as a special status effect under this name.
+ * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
  */
 
 /**
@@ -2362,7 +2386,8 @@ DND5E.conditionTypes = {
   exhaustion: {
     label: "DND5E.ConExhaustion",
     icon: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv"
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv",
+    levels: 6
   },
   frightened: {
     label: "DND5E.ConFrightened",
@@ -2430,6 +2455,21 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
 /* -------------------------------------------- */
 
 /**
+ * Various effects of conditions and which conditions apply it. Either keys for the conditions,
+ * and with a number appended for a level of exhaustion.
+ * @enum {object}
+ */
+DND5E.conditionEffects = {
+  noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
+  halfMovement: new Set(["exhaustion-2", "prone"]),
+  crawl: new Set(["prone", "exceedingCarryingCapacity"]),
+  petrification: new Set(["petrified"]),
+  halfHealth: new Set(["exhaustion-4"])
+};
+
+/* -------------------------------------------- */
+
+/**
  * Extra status effects not specified in `conditionTypes`. If the ID matches a core-provided effect, then this
  * data will be merged into the core data.
  * @enum {object}
@@ -2446,7 +2486,10 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusConcentrating",
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg"
   },
-  curse: {},
+  cursed: {
+    name: "EFFECT.DND5E.StatusCursed",
+    icon: "icons/svg/sun.svg"
+  },
   dead: {
     icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
   },
@@ -2454,7 +2497,10 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusDodging",
     icon: "systems/dnd5e/icons/svg/statuses/dodging.svg"
   },
-  fly: {},
+  flying: {
+    name: "EFFECT.DND5E.StatusFlying",
+    icon: "icons/svg/wing.svg"
+  },
   hidden: {
     name: "EFFECT.DND5E.StatusHidden",
     icon: "icons/svg/cowled.svg"
@@ -2466,8 +2512,9 @@ DND5E.statusEffects = {
   silence: {
     icon: "systems/dnd5e/icons/svg/statuses/silenced.svg"
   },
-  sleep: {
-    name: "EFFECT.DND5E.StatusSleeping"
+  sleeping: {
+    name: "EFFECT.DND5E.StatusSleeping",
+    icon: "icons/svg/sleep.svg"
   },
   surprised: {
     name: "EFFECT.DND5E.StatusSurprised",
@@ -2529,7 +2576,7 @@ DND5E.languages = {
   cant: "DND5E.LanguagesThievesCant"
 };
 preLocalize("languages", { key: "label" });
-preLocalize("languages.standard.children", { sort: true });
+preLocalize("languages.standard.children", { key: "label", sort: true });
 preLocalize("languages.exotic.children", { key: "label", sort: true });
 preLocalize("languages.exotic.children.primordial.children", { sort: true });
 patchConfig("languages", "label", { since: "DnD5e 2.4", until: "DnD5e 3.1" });
@@ -2933,7 +2980,7 @@ DND5E.ruleTypes = {
   },
   spellComponent: {
     label: "DND5E.SpellComponent",
-    references: "spellComponents"
+    references: "itemProperties"
   },
   spellSchool: {
     label: "DND5E.SpellSchool",
@@ -2941,7 +2988,7 @@ DND5E.ruleTypes = {
   },
   spellTag: {
     label: "DND5E.SpellTag",
-    references: "spellTags"
+    references: "itemProperties"
   }
 };
 preLocalize("ruleTypes", { key: "label" });

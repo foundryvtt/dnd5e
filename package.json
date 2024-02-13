@@ -6,8 +6,8 @@
     "build:css": "lessc less/dnd5e.less dnd5e.css",
     "build:db": "node ./utils/packs.mjs package pack",
     "build:json": "node ./utils/packs.mjs package unpack",
-    "lint": "eslint --ext .mjs ./",
-    "lint:fix": "eslint --ext .mjs ./ --fix",
+    "lint": "eslint --ext .mjs --ignore-path .gitignore ./",
+    "lint:fix": "eslint --ext .mjs --ignore-path .gitignore ./ --fix",
     "postinstall": "npm run build:css && npm run build:db",
     "watch": "less-watch-compiler less/ ./ dnd5e.less"
   },

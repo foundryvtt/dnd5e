@@ -11,7 +11,7 @@
     // Becomes more red the closer it is to 100% encumbrance.
     --bar-color-2: color-mix(in oklab, var(--dnd5e-color-blue), var(--dnd5e-color-maroon) var(--bar-percentage));
     --bar-color-1: color-mix(in oklab, var(--bar-color-2), black 33%);
-    --bar-color-3: color-mix(in oklab, var(--bar-color-2), black 40%);
+    --bar-color-3: color-mix(in oklab, var(--bar-color-2), black 20%);
     background: linear-gradient(to right, var(--bar-color-1), var(--bar-color-2));
     border-right: var(--border-width) solid var(--bar-color-3);
     border-radius: 3px 3px 0 0;
@@ -34,10 +34,16 @@
     width: 230px;
 
     .meter {
+      --encumbrance-low: 33%;
+      --encumbrance-high: 66%;
       border-radius: 3px 3px 0 0;
       height: 25px;
       border: none;
       border-bottom: 1px solid var(--dnd5e-color-gold);
+
+      @media (prefers-contrast: more) {
+        border-color: var(--dnd5e-color-dark);
+      }
 
       .label {
         display: flex;
@@ -56,8 +62,8 @@
         block-size: 0;
         inline-size: 0;
         border-inline: 3px solid transparent;
-        &.encumbrance-33 { inset-inline-start: 33% }
-        &.encumbrance-66 { inset-inline-start: 66% }
+        &.encumbrance-low { inset-inline-start: var(--encumbrance-low); }
+        &.encumbrance-high { inset-inline-start: var(--encumbrance-high); }
         &.arrow-up {
           inset-block-end: 0;
           border-block-end: 3px solid var(--dnd5e-color-gold);
@@ -66,6 +72,7 @@
           inset-block-start: 0;
           border-top: 3px solid var(--dnd5e-color-gold);
         }
+        transform: translateX(-50%);
         z-index: 1;
       }
     }
@@ -147,6 +154,11 @@
       .fa-sun, .separator { color: var(--dnd5e-color-gold); }
       .config-button { color: var(--color-text-light-6); }
       .max { color: var(--color-text-dark-5); }
+
+      @media (prefers-contrast: more) {
+        border-color: var(--dnd5e-color-dark);
+        .fa-sun, .separator { color: var(--dnd5e-color-dark); }
+      }
 
       input.max {
         width: 22px;
@@ -245,6 +257,10 @@
           align-items: center;
           gap: .25rem;
           --icon-fill: var(--dnd5e-color-black);
+
+          @media (prefers-contrast: more) {
+            opacity: .5;
+          }
         }
       }
 
@@ -258,6 +274,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
       }
 
       .item-detail.empty::after {
@@ -320,8 +337,11 @@
         &.item-detail { font-weight: bold; }
         .max, input { width: 20px; }
         .separator { color: var(--dnd5e-color-gold); }
-        .max { color: var(--color-text-dark-5); }
-        input { text-align: right; }
+        .max {
+          color: var(--color-text-dark-5);
+          text-align: start;
+        }
+        input { text-align: end; }
       }
 
       /* Item Recovery */
@@ -334,6 +354,10 @@
         --icon-fill: var(--dnd5e-color-gold);
         display: none;
         &.item-detail { font-size: var(--font-size-18); }
+
+        @media (prefers-contrast: more) {
+          --icon-fill: var(--dnd5e-color-black);
+        }
       }
 
       .item-roll {
@@ -351,6 +375,10 @@
           text-transform: uppercase;
           font-size: var(--font-size-10);
           color: var(--dnd5e-color-gold);
+
+          @media (prefers-contrast: more) {
+            color: var(--color-text-dark-4);
+          }
         }
       }
 
@@ -417,12 +445,17 @@
       /* Item Controls */
       .item-controls {
         width: 60px;
+        align-items: stretch;
         justify-content: center;
         gap: .375rem;
         color: var(--color-text-light-6);
         padding: 0 1.5rem 0 .25rem;
         position: relative;
 
+        .item-control {
+          display: flex;
+          align-items: center;
+        }
         .item-control.active { color: var(--dnd5e-color-black); }
 
         &.item-detail .radio-button {
@@ -501,6 +534,11 @@
     border: 1px solid var(--dnd5e-color-gold);
     background: var(--dnd5e-color-parchment);
     box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+
+    @media (prefers-contrast: more) {
+      border: var(--dnd5e-border-dark);
+      background: var(--dnd5e-color-card);
+    }
 
     &:hover, &:focus {
       box-shadow: 0 0 6px var(--dnd5e-color-gold);

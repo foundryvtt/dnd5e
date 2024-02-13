@@ -105,13 +105,12 @@ export default class AttributesFields {
    */
   static prepareMovement() {
     const statuses = this.parent.statuses;
-    const noMovement = new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"])
-      .intersection(statuses).size || (this.attributes.exhaustion >= 5);
-    const halfMovement = statuses.has("prone") || (this.attributes.exhaustion >= 2);
+    const noMovement = this.parent.hasConditionEffect("noMovement");
+    const halfMovement = this.parent.hasConditionEffect("halfMovement");
     const reduction = statuses.has("heavilyEncumbered")
       ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered
       : statuses.has("encumbered") ? CONFIG.DND5E.encumbrance.speedReduction.encumbered : 0;
-    const crawl = statuses.has("prone") || statuses.has("exceedingCarryingCapacity");
+    const crawl = this.parent.hasConditionEffect("crawl");
     Object.keys(CONFIG.DND5E.movementTypes).forEach(k => {
       if ( reduction ) this.attributes.movement[k] = Math.max(0, this.attributes.movement[k] - reduction);
       if ( (crawl && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;

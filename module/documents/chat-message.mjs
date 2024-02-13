@@ -150,20 +150,34 @@ export default class ChatMessage5e extends ChatMessage {
     // Header matter
     const { scene: sceneId, token: tokenId, actor: actorId } = this.speaker;
     const actor = game.scenes.get(sceneId)?.tokens.get(tokenId)?.actor ?? game.actors.get(actorId);
-    const img = actor?.img ?? this.user.avatar;
+
+    let img;
+    let nameText;
+    if ( this.isContentVisible ) {
+      img = actor?.img ?? this.user.avatar;
+      nameText = this.alias;
+    } else {
+      img = this.user.avatar;
+      nameText = this.user.name;
+    }
+
     const avatar = document.createElement("div");
     avatar.classList.add("avatar");
-    avatar.innerHTML = `<img src="${img}" alt="${this.alias}">`;
+    avatar.innerHTML = `<img src="${img}" alt="${nameText}">`;
+
     const name = document.createElement("span");
     name.classList.add("name-stacked");
-    name.innerHTML = `<span class="title">${this.alias}</span>`;
+    name.innerHTML = `<span class="title">${nameText}</span>`;
+
     const subtitle = document.createElement("span");
     subtitle.classList.add("subtitle");
     if ( this.whisper.length ) subtitle.innerText = html.querySelector(".whisper-to")?.innerText ?? "";
-    else if ( this.alias !== this.user?.name ) subtitle.innerText = this.user?.name ?? "";
+    if ( (nameText !== this.user?.name) && !subtitle.innerText.length ) subtitle.innerText = this.user?.name ?? "";
+
     name.appendChild(subtitle);
+
     const sender = html.querySelector(".message-sender");
-    sender.replaceChildren(avatar, name);
+    sender?.replaceChildren(avatar, name);
     html.querySelector(".whisper-to")?.remove();
 
     // Context menu
@@ -186,7 +200,7 @@ export default class ChatMessage5e extends ChatMessage {
     // Enriched roll flavor
     const roll = this.getFlag("dnd5e", "roll");
     const item = fromUuidSync(roll?.itemUuid);
-    if ( item ) {
+    if ( this.isContentVisible && item ) {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.options?.critical;
       const subtitle = roll.type === "damage"
         ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
@@ -219,8 +233,10 @@ export default class ChatMessage5e extends ChatMessage {
         if ( !(roll instanceof DamageRoll) ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
+      html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
+    } else {
+      html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
     }
-    html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     html.querySelectorAll(".dice-tooltip").forEach(el => el.style.height = "0");
   }
 
@@ -262,7 +278,7 @@ export default class ChatMessage5e extends ChatMessage {
     const evaluation = document.createElement("ul");
     evaluation.classList.add("dnd5e2", "evaluation");
     evaluation.innerHTML = targets.reduce((str, { name, img, ac, uuid }) => {
-      const isMiss = attackRoll.total < ac;
+      const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
       return `
         ${str}
         <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
@@ -303,13 +319,10 @@ export default class ChatMessage5e extends ChatMessage {
     html.querySelectorAll(".dice-roll").forEach(el => el.remove());
     const roll = document.createElement("div");
     roll.classList.add("dice-roll");
-    roll.innerHTML = `
-      <div class="dice-result">
-        <div class="dice-formula">${formula}</div>
-        <div class="dice-tooltip">
-          ${Object.entries(breakdown).reduce((str, [type, { total, constant, dice }]) => {
-            const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
-            return `${str}
+
+    const tooltipContents = Object.entries(breakdown).reduce((str, [type, { total, constant, dice }]) => {
+      const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
+      return `${str}
               <section class="tooltip-part">
                 <div class="dice">
                   <ol class="dice-rolls">
@@ -328,7 +341,13 @@ export default class ChatMessage5e extends ChatMessage {
                 </div>
               </section>
             `;
-          }, "")}
+    }, "");
+
+    roll.innerHTML = `
+      <div class="dice-result">
+        <div class="dice-formula">${formula}</div>
+        <div class="dice-tooltip">
+          ${tooltipContents}
         </div>
         <h4 class="dice-total">${total}</h4>
       </div>
@@ -434,8 +453,7 @@ export default class ChatMessage5e extends ChatMessage {
       properties: new Set(roll.options.properties ?? [])
     }));
     return Promise.all(canvas.tokens.controlled.map(t => {
-      const a = t.actor;
-      return a.applyDamage(damages, { multiplier, ignore: true });
+      return t.actor?.applyDamage(damages, { multiplier, ignore: true });
     }));
   }
 
@@ -447,10 +465,9 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Promise}
    */
   applyChatCardTemp(li) {
-    const roll = this.rolls[0];
+    const total = this.rolls.reduce((acc, roll) => acc + roll.total, 0);
     return Promise.all(canvas.tokens.controlled.map(t => {
-      const a = t.actor;
-      return a.applyTempHP(roll.total);
+      return t.actor?.applyTempHP(total);
     }));
   }
 

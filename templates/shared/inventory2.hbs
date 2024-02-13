@@ -7,17 +7,17 @@
         <div class="encumbrance card">
             {{#with encumbrance}}
             <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
-                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
+                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
                 <div class="label">
                     <i class="fas fa-weight-hanging"></i>
                     <span class="value">{{ value }}</span>
                     <span class="separator">&sol;</span>
                     <span class="max">{{ max }}</span>
                 </div>
-                <i class="breakpoint encumbrance-33 arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-33 arrow-down" role="presentation"></i>
-                <i class="breakpoint encumbrance-66 arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-66 arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-low  arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
             </div>
             {{/with}}
             <div class="info">
@@ -142,6 +142,15 @@
                             {{#if ctx.subtitle}}
                             <span class="subtitle">{{{ ctx.subtitle }}}</span>
                             {{/if}}
+                        </div>
+                        <div class="tags">
+                            {{#each item.labels.properties}}
+                            {{#if icon}}
+                            <span aria-label="{{ label }}">
+                                <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                            </span>
+                            {{/if}}
+                            {{/each}}
                         </div>
                     </div>
 

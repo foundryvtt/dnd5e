@@ -18,6 +18,14 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
+   * Additional key paths to properties added during base data preparation that should be treated as formula fields.
+   * @type {Set<string>}
+   */
+  static FORMULA_FIELDS = new Set(["system.attributes.ac.bonus"]);
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this active effect currently suppressed?
    * @type {boolean}
    */
@@ -71,13 +79,13 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
 
     // Determine type using DataField
-    const field = change.key.startsWith("system.") ? actor.system.schema.getField(change.key.slice(7)) : null;
+    let field = change.key.startsWith("system.") ? actor.system.schema.getField(change.key.slice(7)) : null;
 
     // Get the current value of the target field
     const current = foundry.utils.getProperty(actor, change.key) ?? null;
 
     const getTargetType = field => {
-      if ( field instanceof FormulaField ) return "formula";
+      if ( (field instanceof FormulaField) || ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) return "formula";
       else if ( field instanceof foundry.data.fields.ArrayField ) return "Array";
       else if ( field instanceof foundry.data.fields.ObjectField ) return "Object";
       else if ( field instanceof foundry.data.fields.BooleanField ) return "boolean";
@@ -91,6 +99,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     // Special handling for FormulaField
     if ( targetType === "formula" ) {
       const changes = {};
+      if ( !field ) field = new FormulaField({ deterministic: true });
       const delta = field._cast(change.value).trim();
       this._applyFormulaField(actor, change, current, delta, changes);
       foundry.utils.mergeObject(actor, changes);
@@ -285,11 +294,12 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @protected
    */
   _prepareExhaustionLevel() {
+    const config = CONFIG.DND5E.conditionTypes.exhaustion;
     let level = this.getFlag("dnd5e", "exhaustionLevel");
     if ( !Number.isFinite(level) ) level = 1;
-    this.icon = `systems/dnd5e/icons/svg/statuses/exhaustion-${level}.svg`;
-    this.name = `Exhaustion ${level}`;
-    if ( level >= 6 ) this.statuses.add("dead");
+    this.icon = this.constructor._getExhaustionImage(level);
+    this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
+    if ( level >= config.levels ) this.statuses.add("dead");
   }
 
   /* -------------------------------------------- */
@@ -364,11 +374,26 @@ export default class ActiveEffect5e extends ActiveEffect {
     const actor = app.object.actor;
     const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
     if ( Number.isFinite(level) && (level > 0) ) {
+      const img = ActiveEffect5e._getExhaustionImage(level);
       html.find('[data-status-id="exhaustion"]').css({
         objectPosition: "-100px",
-        background: `url('systems/dnd5e/icons/svg/statuses/exhaustion-${level}.svg') no-repeat center / contain`
+        background: `url('${img}') no-repeat center / contain`
       });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the image used to represent exhaustion at this level.
+   * @param {number} level
+   * @returns {string}
+   */
+  static _getExhaustionImage(level) {
+    const split = CONFIG.DND5E.conditionTypes.exhaustion.icon.split(".");
+    const ext = split.pop();
+    const path = split.join(".");
+    return `${path}-${level}.${ext}`;
   }
 
   /* -------------------------------------------- */
@@ -387,7 +412,8 @@ export default class ActiveEffect5e extends ActiveEffect {
     event.stopPropagation();
     if ( event.button === 0 ) level++;
     else level--;
-    actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, 6) });
+    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
+    actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, max) });
   }
 
   /* -------------------------------------------- */
