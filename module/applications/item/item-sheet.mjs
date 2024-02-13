@@ -347,7 +347,7 @@ export default class ItemSheet5e extends ItemSheet {
       case "consumable":
         return this.item.system.type.label;
       case "spell":
-        return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation];
+        return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation.mode]?.label;
       case "tool":
         return CONFIG.DND5E.proficiencyLevels[this.item.system.prof?.multiplier || 0];
     }

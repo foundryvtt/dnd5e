@@ -336,7 +336,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   get usageScaling() {
     const { level, preparation, consume } = this.system;
     const isLeveled = (this.type === "spell") && (level > 0);
-    if ( isLeveled && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) return "slot";
+    if ( isLeveled && CONFIG.DND5E.spellPreparationModes[preparation.mode]?.upcast ) return "slot";
     else if ( isLeveled && this.hasResource && consume.scale ) return "resource";
     return null;
   }

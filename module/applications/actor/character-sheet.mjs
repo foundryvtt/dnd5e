@@ -197,8 +197,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const isPrepared = !!prep.prepared;
       context.toggleClass = isPrepared ? "active" : "";
       if ( isAlways ) context.toggleClass = "fixed";
-      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always;
-      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared;
+      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always.label;
+      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared.label;
       else context.toggleTitle = game.i18n.localize("DND5E.SpellUnprepared");
     }
     else {

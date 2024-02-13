@@ -1862,18 +1862,37 @@ DND5E.pactCastingProgression = {
  * Various different ways a spell can be prepared.
  */
 DND5E.spellPreparationModes = {
-  prepared: "DND5E.SpellPrepPrepared",
-  pact: "DND5E.PactMagic",
-  always: "DND5E.SpellPrepAlways",
-  atwill: "DND5E.SpellPrepAtWill",
-  innate: "DND5E.SpellPrepInnate"
+  prepared: {
+    label: "DND5E.SpellPrepPrepared",
+    upcast: true
+  },
+  pact: {
+    label: "DND5E.PactMagic",
+    upcast: true,
+    cantrips: true,
+    order: 0.5
+  },
+  always: {
+    label: "DND5E.SpellPrepAlways",
+    upcast: true
+  },
+  atwill: {
+    label: "DND5E.SpellPrepAtWill",
+    order: -20
+  },
+  innate: {
+    label: "DND5E.SpellPrepInnate",
+    order: -10
+  }
 };
-preLocalize("spellPreparationModes");
+preLocalize("spellPreparationModes", { key: "label" });
+patchConfig("spellPreparationModes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
 
 /* -------------------------------------------- */
 
 /**
  * Subset of `DND5E.spellPreparationModes` that consume spell slots.
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @type {string[]}
  */
 DND5E.spellUpcastModes = ["always", "pact", "prepared"];
