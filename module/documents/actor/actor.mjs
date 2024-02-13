@@ -1129,7 +1129,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       "system.attributes.hp.temp": hp.temp - deltaTemp,
       "system.attributes.hp.value": hp.value - deltaHP
     };
-    amount = deltaTemp + deltaHP;
 
     /**
      * A hook event that fires before damage is applied to an actor.
