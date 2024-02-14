@@ -238,17 +238,18 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
    * @param {RestResult} result         Results of the rest operation being built.
    */
   async rest(config, result) {
-    config = foundry.utils.mergeObject(config, {
-      dialog: false, advanceTime: false
-    }, {inplace: false});
-
     const results = new Map();
     for ( const member of this.members ) {
       results.set(
         member.actor,
-        await member.actor[config.type === "short" ? "shortRest" : "longRest"](config) ?? null
+        await member.actor[config.type === "short" ? "shortRest" : "longRest"]({
+          ...config, dialog: false, advanceTime: false
+        }) ?? null
       );
     }
+
+    // Advance the game clock
+    if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
 
     /**
      * A hook event that fires when the rest process is completed for a group.

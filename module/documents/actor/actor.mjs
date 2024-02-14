@@ -2055,7 +2055,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean} dialog            Present a dialog window which allows for rolling hit dice as part of the
    *                                       Short Rest and selecting whether a new day has occurred.
    * @property {boolean} chat              Should a chat message be created to summarize the results of the rest?
-   * @property {number} duration           Amount of time passed during the rest.
+   * @property {number} duration           Amount of time passed during the rest in minutes.
    * @property {boolean} newDay            Does this rest carry over to a new day?
    * @property {boolean} [advanceTime]     Should the game clock be advanced by the rest duration?
    * @property {boolean} [autoHD]          Should hit dice be spent automatically during a short rest?
@@ -2246,6 +2246,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Perform updates
     await this.update(result.updateData, { isRest: true });
     await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
+
+    // Advance the game clock
+    if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
 
     // Display a Chat Message summarizing the rest effects
     if ( config.chat ) await this._displayRestResultMessage(result, longRest);
