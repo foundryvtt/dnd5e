@@ -233,36 +233,20 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /* -------------------------------------------- */
 
   /**
-   * Initiate a long rest for all members of the group.
-   * @param {RestConfiguration} config  Configuration data for the rest.
-   */
-  async longRest(config) {
-    this._rest(config, "long");
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Initiate a short rest for all members of the group.
-   * @param {RestConfiguration} config  Configuration data for the rest.
-   */
-  async shortRest(config) {
-    this._rest(config, "short");
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Initiate a rest for all members of this group.
    * @param {RestConfiguration} config  Configuration data for the rest.
-   * @param {short|long} type           Type of rest to perform.
+   * @param {RestResult} result         Results of the rest operation being built.
    */
-  async _rest(config, type) {
+  async rest(config, result) {
+    config = foundry.utils.mergeObject(config, {
+      dialog: false, advanceTime: false
+    }, {inplace: false});
+
     const results = new Map();
     for ( const member of this.members ) {
       results.set(
         member.actor,
-        await member.actor[type === "short" ? "shortRest" : "longRest"]({ ...config, dialog: false }) ?? null
+        await member.actor[config.type === "short" ? "shortRest" : "longRest"](config) ?? null
       );
     }
 

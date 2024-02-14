@@ -302,7 +302,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         this.object.system.removeMember(removeMemberId);
         break;
       case "longRest":
-        this.object.longRest();
+        this.object.longRest({ advanceTime: true });
         break;
       case "movementConfig":
         const movementConfig = new ActorMovementConfig(this.object);
@@ -312,7 +312,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         this.object.system.rollQuantities();
         break;
       case "shortRest":
-        this.object.shortRest();
+        this.object.shortRest({ advanceTime: true });
         break;
     }
   }
