@@ -38,10 +38,11 @@ export default class IconElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
-   * Stylesheet that is shared among all icons.
-   * @type {CSSStyleSheet}
+   * The stylesheets map to store the CSS singleton
+   * associated with a particular shadowroot.
+   * @type {WeakMap<Document, CSSStyleSheet>}
    */
-  static #stylesheet;
+  static #stylesheets;
 
   /* -------------------------------------------- */
 
@@ -51,14 +52,20 @@ export default class IconElement extends HTMLElement {
    */
   static #svgCache = new Map();
 
+
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  connectedCallback() {
-    // Create icon styles
-    if ( !this.constructor.#stylesheet ) {
-      this.constructor.#stylesheet = new CSSStyleSheet();
-      this.constructor.#stylesheet.replaceSync(`
+  #buildCSS() {
+    if (!this.constructor.#stylesheets) {
+      this.constructor.#stylesheets = new WeakMap();
+    }
+
+    const _window = this.ownerDocument.defaultView;
+    let cssObj = this.constructor.#stylesheets.get(_window.document);
+
+    if (!cssObj) {
+      cssObj = new _window.CSSStyleSheet();
+      cssObj.replaceSync(`
         :host {
           display: contents;
         }
@@ -68,9 +75,23 @@ export default class IconElement extends HTMLElement {
           height: var(--icon-height, var(--icon-size, 1em));
         }
       `);
+      this.constructor.#stylesheets.set(_window.document, cssObj);
     }
-    this.#shadowRoot.adoptedStyleSheets = [this.constructor.#stylesheet];
+    this.#shadowRoot.adoptedStyleSheets = [this.constructor.#stylesheets.get(_window.document)];
+  }
 
+  /* -------------------------------------------- */
+
+  /** @override */
+  adoptedCallback() {
+    this.#buildCSS();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  connectedCallback() {
+    this.#buildCSS();
     const insertElement = element => {
       if ( !element ) return;
       const clone = element.cloneNode(true);

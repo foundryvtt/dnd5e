@@ -30,11 +30,19 @@ export default class FiligreeBoxElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
-   * The stylesheet to attach to the element's shadow root.
-   * @type {CSSStyleSheet}
+   * The stylesheets map to store the CSS singleton
+   * associated with a particular shadowroot.
+   * @type {WeakMap<Document, CSSStyleSheet>}
    * @protected
    */
-  static _stylesheet;
+  static _stylesheets;
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  adoptedCallback() {
+    this.#buildStyle();
+  }
 
   /* -------------------------------------------- */
 
@@ -42,9 +50,16 @@ export default class FiligreeBoxElement extends HTMLElement {
    * Build the shadow DOM's styles.
    */
   #buildStyle() {
-    if ( !this.constructor._stylesheet ) {
-      this.constructor._stylesheet = new CSSStyleSheet();
-      this.constructor._stylesheet.replaceSync(`
+    if (!this.constructor._stylesheets) {
+      this.constructor._stylesheets = new WeakMap();
+    }
+
+    const _window = this.ownerDocument.defaultView;
+    let cssObj = this.constructor._stylesheets.get(_window.document);
+
+    if (!cssObj) {
+      cssObj = new _window.CSSStyleSheet();
+      cssObj.replaceSync(`
         :host {
           position: relative;
           isolation: isolate;
@@ -92,8 +107,9 @@ export default class FiligreeBoxElement extends HTMLElement {
           inset-block: 30px;
         }
       `);
+      this.constructor._stylesheets.set(_window.document, cssObj);
     }
-    this.#shadowRoot.adoptedStyleSheets = [this.constructor._stylesheet];
+    this.#shadowRoot.adoptedStyleSheets = [this.constructor._stylesheets.get(_window.document)];
   }
 
   /* -------------------------------------------- */

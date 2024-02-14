@@ -33,11 +33,12 @@ export default class ProficiencyCycleElement extends HTMLElement {
   #shadowRoot;
 
   /**
-   * The stylesheet to attach to the element's shadow root.
-   * @type {CSSStyleSheet}
+   * The stylesheets map to store the CSS singleton
+   * associated with a particular shadowroot.
+   * @type {WeakMap<Document, CSSStyleSheet>}
    * @protected
    */
-  static _stylesheet;
+  static _stylesheets;
 
   /* -------------------------------------------- */
 
@@ -121,8 +122,14 @@ export default class ProficiencyCycleElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /** @override */
+  adoptedCallback() {
+    this.#buildCSS();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   connectedCallback() {
-    this.replaceChildren();
     this.#buildHTML();
     this.#refreshValue();
 
@@ -139,9 +146,16 @@ export default class ProficiencyCycleElement extends HTMLElement {
    * Build the CSS internals.
    */
   #buildCSS() {
-    if ( !this.constructor._stylesheet ) {
-      this.constructor._stylesheet = new CSSStyleSheet();
-      this.constructor._stylesheet.replaceSync(`
+    if (!this.constructor._stylesheets) {
+      this.constructor._stylesheets = new WeakMap();
+    }
+
+    const _window = this.ownerDocument.defaultView;
+    let cssObj = this.constructor._stylesheets.get(_window.document);
+
+    if (!cssObj) {
+      cssObj = new _window.CSSStyleSheet();
+      cssObj.replaceSync(`
         :host { display: inline-block; }
         div { --_fill: var(--proficiency-cycle-enabled-color, var(--dnd5e-color-blue)); }
         div:has(:disabled, :focus-visible) { --_fill: var(--proficiency-cycle-disabled-color, var(--dnd5e-color-gold)); }
@@ -198,8 +212,9 @@ export default class ProficiencyCycleElement extends HTMLElement {
           opacity: 0;
         }
       `);
+      this.constructor._stylesheets.set(_window.document, cssObj);
     }
-    this.#shadowRoot.adoptedStyleSheets = [this.constructor._stylesheet];
+    this.#shadowRoot.adoptedStyleSheets = [this.constructor._stylesheets.get(_window.document)];
   }
 
   /* -------------------------------------------- */
@@ -209,7 +224,7 @@ export default class ProficiencyCycleElement extends HTMLElement {
    */
   #buildHTML() {
     const div = document.createElement("div");
-    this.#shadowRoot.appendChild(div);
+    this.#shadowRoot.replaceChildren(div);
 
     const input = document.createElement("input");
     input.setAttribute("type", "number");
