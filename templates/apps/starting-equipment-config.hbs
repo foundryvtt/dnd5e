@@ -1,19 +1,55 @@
 <form autocomplete="off">
     {{#*inline "list-level"}}
-    <ul>
+    <ul class="flexcol">
         {{#each entries}}
-        {{#if (or ../nested (eq group null))}}
-        <li>
-            {{type}}
-            {{#if children}}
-            {{> "list-level" entries=children nested=true}}
-            {{/if}}
+        <li data-entry-id="{{ id }}" data-entry-type="{{ entry.type }}" data-depth="{{ depth }}">
+            <div class="controls flexrow">
+                <select name="startingEquipment.{{ id }}.type">
+                    {{ selectOptions validTypes selected=entry.type localize=true }}
+                </select>
+                <button type="button" class="unbutton" data-action="delete-entry"
+                        data-tooltip="DND5E.StartingEquipment.Action.RemoveEntry"
+                        aria-label="{{ localize 'DND5E.StartingEquipment.Action.RemoveEntry' }}">
+                    <i class="fa-solid fa-trash fa-fw" inert></i>
+                </button>
+            </div>
+            <div class="data flexrow">
+                {{#if groupType}}
+                {{> "list-level" entries=children nested=true }}
+                {{else}}
+                {{ numberInput entry.count name=(concat "startingEquipment." id ".count")
+                   placeholder=1 step=1 min=1 }}
+                {{#if (eq entry.type "linked")}}
+                {{#if linked}}
+                {{{ dnd5e-linkForUuid entry.key }}}
+                {{else}}
+                <div class="drop-area">
+                    {{ localize "DND5E.StartingEquipment.DropHint" }}
+                </div>
+                {{/if}}
+                <input type="hidden" name="startingEquipment.{{ id }}.key" value="{{ entry.key }}">
+                {{else}}
+                <select name="startingEquipment.{{ id }}.key">
+                    {{ selectOptions entry.keyOptions selected=entry.key blank=entry.blankLabel }}
+                </select>
+                {{/if}}
+                {{/if}}
+            </div>
+            <div class="drag-bar"><i class="fa-solid fa-grip-lines-vertical" inert></i></div>
+            <input type="hidden" name="startingEquipment.{{ id }}._id" value="{{ entry._id }}">
+            <input type="hidden" name="startingEquipment.{{ id }}.group" value="{{ entry.group }}">
+            <input type="hidden" name="startingEquipment.{{ id }}.sort" value="{{ entry.sort }}"
+                   data-dtype="Number">
         </li>
-        {{/if}}
         {{/each}}
+        <li data-depth="{{ depth }}">
+            <button type="button" data-action="add-entry">
+                <i class="fa-solid fa-plus" inert></i>
+                {{ localize "DND5E.StartingEquipment.Action.AddEntry" }}
+            </button>
+        </li>
     </ul>
     {{/inline}}
 
-    {{> "list-level" entries=startingEquipment}}
+    {{> "list-level" }}
  </form>
- 

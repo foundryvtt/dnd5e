@@ -713,9 +713,12 @@
     "EpicBoon": "Epic Boon"
   }
 },
-"DND5E.Focus.Arcane": "Arcane Focus",
-"DND5E.Focus.Druidic": "Druidic Focus",
-"DND5E.Focus.Holy": "Holy Focus",
+"DND5E.Focus": {
+  "Label": "Spellcasting Focus",
+  "Arcane": "Arcane Focus",
+  "Druidic": "Druidic Focus",
+  "Holy": "Holy Focus"
+},
 "DND5E.Loot.Art": "Art Object",
 "DND5E.Loot.Gear": "Adventuring Gear",
 "DND5E.Loot.Gem": "Gemstone",
@@ -1389,7 +1392,9 @@
 "DND5E.StartingEquipment": {
   "Title": "Starting Equipment",
   "Action": {
-    "Configure": "Configure Starting Equipment"
+    "AddEntry": "Add Entry",
+    "Configure": "Configure Starting Equipment",
+    "RemoveEntry": "Remove Entry"
   },
   "Choice": {
     "Armor": "Choose Armor",
@@ -1397,12 +1402,16 @@
     "Tool": "Choose Tool",
     "Weapon": "Choose Weapon"
   },
+  "DropHint": "Drop item here to link",
   "IfProficient": "If Proficient",
   "Operator": {
-    "AND": "All",
-    "OR": "One"
+    "AND": "All of…",
+    "OR": "One of…"
   },
   "SpecificItem": "Specific Item",
+  "Warning": {
+    "ItemTypeInvalid": "{type} items cannot be added to starting equipment."
+  },
   "Wealth": {
     "Label": "Starting Wealth",
     "Hint": "Formula in GP that can be used in place of starting equipment."
