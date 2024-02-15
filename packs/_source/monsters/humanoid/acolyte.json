@@ -1469,62 +1469,7 @@
       "_key": "!actors.items!CHEUjiYrVM9X0vIT.uUWb1wZgtMou0TVP"
     }
   ],
-  "effects": [
-    {
-      "_id": "8rP3gwmXVTgZqYZE",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.bonuses.abilities.save",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.mwak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.msak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.rsak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.rwak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 678,
-        "seconds": 60,
-        "rounds": 10,
-        "combat": null,
-        "turns": null,
-        "startRound": 2,
-        "startTurn": 1
-      },
-      "icon": "icons/magic/control/buff-flight-wings-blue.webp",
-      "origin": "Compendium.dnd5e.monsters.CHEUjiYrVM9X0vIT.Item.8dzaICjGy6mTUaUr",
-      "tint": null,
-      "transfer": false,
-      "name": "Bless",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!CHEUjiYrVM9X0vIT.8rP3gwmXVTgZqYZE"
-    }
-  ],
+  "effects": [],
   "folder": "pEyqIq8DYb21xia3",
   "sort": 0,
   "ownership": {
@@ -1533,7 +1478,7 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.0.3",
     "coreVersion": "11.315",
     "createdTime": 1661787232667,
     "modifiedTime": 1704847043944,

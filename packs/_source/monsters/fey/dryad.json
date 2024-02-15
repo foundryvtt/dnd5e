@@ -1872,44 +1872,7 @@
       "_key": "!actors.items!KOHVWl5RU9XBR8Jb.VzgFzcmocr1X1cp4"
     }
   ],
-  "effects": [
-    {
-      "_id": "uM6rgctYpcbCVSkn",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.formula",
-          "value": "16",
-          "mode": 5,
-          "priority": null
-        },
-        {
-          "key": "system.attributes.ac.calc",
-          "value": "custom",
-          "mode": 5,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 678,
-        "seconds": 3600,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": 2,
-        "startTurn": 1
-      },
-      "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-      "origin": "Compendium.dnd5e.monsters.KOHVWl5RU9XBR8Jb.Item.JPwIEfgUPVebr5AH",
-      "tint": null,
-      "transfer": false,
-      "name": "Barkskin",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!KOHVWl5RU9XBR8Jb.uM6rgctYpcbCVSkn"
-    }
-  ],
+  "effects": [],
   "folder": "5TSd0wOZe1L5I3eJ",
   "sort": 0,
   "ownership": {
@@ -1918,7 +1881,7 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.0.3",
     "coreVersion": "11.315",
     "createdTime": 1661787232758,
     "modifiedTime": 1704847046106,
