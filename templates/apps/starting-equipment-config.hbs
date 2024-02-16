@@ -38,8 +38,9 @@
             <div class="drag-bar"><i class="fa-solid fa-grip-lines-vertical" inert></i></div>
             <input type="hidden" name="startingEquipment.{{ id }}._id" value="{{ entry._id }}">
             <input type="hidden" name="startingEquipment.{{ id }}.group" value="{{ entry.group }}">
-            <input type="hidden" name="startingEquipment.{{ id }}.sort" value="{{ entry.sort }}"
-                   data-dtype="Number">
+            <input type="hidden" name="startingEquipment.{{ id }}.sort" value="{{ entry.sort }}" data-dtype="Number">
+            <input type="hidden" name="startingEquipment.{{ id }}.requiresProficiency"
+                   value="{{ entry.requiresProficiency }}" data-dtype="Boolean">
         </li>
         {{/each}}
         <li data-depth="{{ depth }}">
