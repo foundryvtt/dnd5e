@@ -556,16 +556,18 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {string} type       The type of selection ('hit' or 'miss').
    */
   selectTargets(li, type) {
-    const uuids = new Set();
+    if ( !canvas?.ready ) return;
     const lis = li.closest("[data-message-id]").querySelectorAll(`.evaluation li.target.${type}`);
-    lis.forEach(n => uuids.add(n.dataset.uuid));
+    const uuids = new Set(Array.from(lis).map(n => n.dataset.uuid));
     canvas.tokens.releaseAll();
     uuids.forEach(uuid => {
       const actor = fromUuidSync(uuid);
       if ( !actor ) return;
       const tokens = actor.isToken ? [actor.token?.object] : actor.getActiveTokens();
       for ( const token of tokens ) {
-        if ( token?.isVisible ) token.control({ releaseOthers: false });
+        if ( token?.isVisible && actor.testUserPermission(game.user, "OWNER") ) {
+          token.control({ releaseOthers: false });
+        }
       }
     });
   }
