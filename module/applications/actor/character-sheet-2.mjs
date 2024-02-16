@@ -278,9 +278,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     }
 
     // Size
+    const actorSize = CONFIG.DND5E.actorSizes[traits.size] || CONFIG.DND5E.actorSizes.med;
     context.size = {
-      label: CONFIG.DND5E.actorSizes[traits.size].label,
-      abbr: CONFIG.DND5E.actorSizes[traits.size].abbreviation,
+      label: actorSize.label,
+      abbr: actorSize.abbreviation,
       mod: attributes.encumbrance.mod
     };
 
