@@ -788,6 +788,7 @@ DND5E.itemActionTypes = {
   msak: "DND5E.ActionMSAK",
   rsak: "DND5E.ActionRSAK",
   save: "DND5E.ActionSave",
+  summ: "DND5E.ActionSumm",
   heal: "DND5E.ActionHeal",
   abil: "DND5E.ActionAbil",
   util: "DND5E.ActionUtil",

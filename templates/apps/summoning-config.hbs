@@ -1,0 +1,69 @@
+<form autocomplete="off">
+    <h3 class="form-header flexrow">
+        {{ localize "DND5E.Summoning.Profile.Label" }}
+        <button type="button" class="unbutton" data-action="add-profile">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            {{ localize 'DND5E.Summoning.Action.Add' }}
+        </a>
+    </h3>
+    <ul class="profiles flexcol">
+        {{#each profiles}}
+        <li class="profile" data-profile-id="{{ id }}">
+            <div class="details flexrow">
+                {{#if document}}
+                {{{ dnd5e-linkForUuid uuid }}}
+                {{else}}
+                <div class="drop-area">
+                    {{localize "DND5E.Summoning.DropHint"}}
+                </div>
+                {{/if}}
+                <input type="text" name="profiles.{{ id }}.name" value="{{ name }}" aria-label="{{ localize 'Name' }}"
+                       placeholder="{{#if document}}{{ document.name }}{{else}}
+                       {{~ localize 'DND5E.Summoning.DisplayName' }}{{/if}}">
+                <button type="button" class="unbutton" data-action="delete-profile"
+                        data-tooltip="DND5E.Summoning.Action.Remove"
+                        aria-label="{{ localize 'DND5E.Summoning.Action.Remove' }}">
+                    <i class="fa-solid fa-trash fa-fw" inert></i>
+                </button>
+            </div>
+            <div class="drag-bar"><i class="fa-solid fa-grip-lines-vertical" inert"></i></div>
+            <input type="hidden" name="profiles.{{ id }}._id" value="{{ id }}">
+            <input type="hidden" name="profiles.{{ id }}.sort" value="{{ sort }}" data-dtype="Number">
+            <input type="hidden" name="profiles.{{ id }}.uuid" value="{{ uuid }}">
+        </li>
+        {{else}}
+        <li class="empty">{{ localize "DND5E.Summoning.Profile.Empty" }}</li>
+        {{/each}}
+    </ul>
+
+    <h3 class="form-header">{{ localize "DND5E.Summoning.ActorChanges.Label" }}</h3>
+    <p class="hint">{{ localize "DND5E.Summoning.ActorChanges.Hint" }}</p>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.Match.Proficiency.Label" }}</label>
+        <input type="checkbox" name="match.proficiency" {{ checked summons.match.proficiency }}>
+        <p class="hint">{{ localize "DND5E.Summoning.Match.Proficiency.Hint" }}</p>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.ArmorClass.Label" }}</label>
+        <input type="text" name="ac" value="{{ summons.ac }}">
+        <p class="hint">{{ localize "DND5E.Summoning.ArmorClass.Hint" }}</p>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.HitPoints.Label" }}</label>
+        <input type="text" name="hp" value="{{ summons.hp }}">
+        <p class="hint">{{ localize "DND5E.Summoning.HitPoints.Hint" }}</p>
+    </div>
+
+    <h3 class="form-header">{{ localize "DND5E.Summoning.ItemChanges.Label" }}</h3>
+    <p class="hint">{{ localize "DND5E.Summoning.ItemChanges.Hint" }}</p>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.Match.Attacks.Label" }}</label>
+        <input type="checkbox" name="match.attacks" {{ checked summons.match.attacks }}>
+        <p class="hint">{{ localize "DND5E.Summoning.Match.Attacks.Hint" }}</p>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.Match.Saves.Label" }}</label>
+        <input type="checkbox" name="match.saves" {{ checked summons.match.saves }}>
+        <p class="hint">{{ localize "DND5E.Summoning.Match.Saves.Hint" }}</p>
+    </div>
+</form>
