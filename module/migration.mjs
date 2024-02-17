@@ -15,6 +15,7 @@ export const migrateWorld = async function() {
     try {
       const flags = { persistSourceMigration: false };
       const source = valid ? actor.toObject() : game.data.actors.find(a => a._id === actor.id);
+      const version = actor._stats.systemVersion;
       let updateData = migrateActorData(source, migrationData, flags);
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Actor document ${actor.name}`);
@@ -23,7 +24,7 @@ export const migrateWorld = async function() {
         }
         await actor.update(updateData, {enforceTypes: false, diff: valid && !flags.persistSourceMigration});
       }
-      if ( actor.effects && actor.items && foundry.utils.isNewerVersion("3.0.3", actor._stats.systemVersion) ) {
+      if ( actor.effects && actor.items && foundry.utils.isNewerVersion("3.0.3", version) ) {
         const deleteIds = _duplicatedEffects(actor);
         if ( deleteIds.size ) await actor.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds));
       }
