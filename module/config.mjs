@@ -109,19 +109,40 @@ DND5E.defaultAbilities = {
   concentration: "con"
 };
 
-/**
- * Configure which ability score is used as the default modifier for initiative rolls.
- * @deprecated since DnD5e 3.1, available until DnD5e 3.3
- * @type {string}
- */
-DND5E.initiativeAbility = "dex";
-
-/**
- * Configure which ability score is used when calculating hit points per level.
- * @deprecated since DnD5e 3.1, available until DnD5e 3.3
- * @type {string}
- */
-DND5E.hitPointsAbility = "con";
+Object.defineProperties(DND5E, {
+  hitPointsAbility: {
+    get: function() {
+      foundry.utils.logCompatibilityWarning(
+        "DND5E.hitPointsAbility has been deprecated and is now accessible through DND5E.defaultAbilities.hitPoints.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      return DND5E.defaultAbilities.hitPoints;
+    },
+    set: function(value) {
+      foundry.utils.logCompatibilityWarning(
+        "DND5E.hitPointsAbility has been deprecated and is now accessible through DND5E.defaultAbilities.hitPoints.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      DND5E.defaultAbilities.hitPoints = value;
+    }
+  },
+  initiativeAbility: {
+    get: function() {
+      foundry.utils.logCompatibilityWarning(
+        "DND5E.initiativeAbility has been deprecated and is now accessible through DND5E.defaultAbilities.initiative.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      return DND5E.defaultAbilities.initiative;
+    },
+    set: function(value) {
+      foundry.utils.logCompatibilityWarning(
+        "DND5E.initiativeAbility has been deprecated and is now accessible through DND5E.defaultAbilities.initiative.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      DND5E.defaultAbilities.initiative = value;
+    }
+  }
+});
 
 /* -------------------------------------------- */
 
