@@ -98,13 +98,27 @@ DND5E.abilities = {
 preLocalize("abilities", { keys: ["label", "abbreviation"] });
 
 /**
+ * Configure which ability score is used as the default modifier for initiative rolls,
+ * when calculating hit points per level and hit dice, and as the default modifier for
+ * saving throws to maintain concentration.
+ * @enum {string}
+ */
+DND5E.defaultAbilities = {
+  initiative: "dex",
+  hitPoints: "con",
+  concentration: "con"
+};
+
+/**
  * Configure which ability score is used as the default modifier for initiative rolls.
+ * @deprecated since DnD5e 3.1, available until DnD5e 3.3
  * @type {string}
  */
 DND5E.initiativeAbility = "dex";
 
 /**
  * Configure which ability score is used when calculating hit points per level.
+ * @deprecated since DnD5e 3.1, available until DnD5e 3.3
  * @type {string}
  */
 DND5E.hitPointsAbility = "con";
