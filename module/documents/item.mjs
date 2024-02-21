@@ -1500,12 +1500,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   _formatAttackTargets() {
-    const targets = [];
+    const targets = new Map();
     for ( const token of game.user.targets ) {
       const { name, img, system, uuid } = token.actor ?? {};
-      if ( uuid ) targets.push({ name, img, uuid, ac: system.attributes.ac.value });
+      const ac = system?.attributes?.ac ?? {};
+      if ( uuid && Number.isNumeric(ac.value) ) targets.set(uuid, { name, img, uuid, ac: ac.value });
     }
-    return targets;
+    return Array.from(targets.values());
   }
 
   /* -------------------------------------------- */
