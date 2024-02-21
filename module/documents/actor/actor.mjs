@@ -1411,9 +1411,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Roll an Ability Saving Throw
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} abilityId    The ability ID (e.g. "str")
-   * @param {object} options      Options which configure how ability tests are rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * @param {string} abilityId          The ability ID (e.g. "str")
+   * @param {object} [options]          Options which configure how ability saves are rolled
+   * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
    */
   async rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
@@ -1612,6 +1612,71 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Return the rolled result
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform a saving throw to maintain concentration.
+   * @param {object} [options]          Options to configure how the saving throw is rolled
+   * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
+   */
+  async rollConcentration(options={}) {
+    if ( !this.isOwner ) {
+      ui.notifications.warn("DND5E.TODO", {localize: true});
+      return null;
+    }
+
+    const conc = this.system.attributes?.concentration;
+    if ( !conc || !conc.limit ) {
+      ui.notifications.warn("DND5E.TODO", {localize: true});
+      return null;
+    }
+
+    const config = CONFIG.DND5E;
+    const modes = CONFIG.Dice.D20Roll.ADV_MODE;
+    const parts = [];
+
+    // Concentration bonus
+    if ( conc.bonus ) {
+      parts.push(conc.bonus);
+    }
+
+    const ability = (conc.ability in config.abilities) ? conc.ability : config.defaultAbilities.concentration;
+
+    options = foundry.utils.mergeObject({
+      isConcentration: true,
+      targetValue: 10,
+      advantage: options.advantage || (conc.roll.mode === modes.ADVANTAGE),
+      disadvantage: options.disadvantage || (conc.roll.mode === modes.DISADVANTAGE),
+    }, options);
+    options.parts = parts.concat(options.parts ?? []);
+
+    /**
+     * A hook event that fires before a saving throw to maintain concentration is rolled for an Actor.
+     * @function dnd5e.preRollConcentration
+     * @memberof hookEvents
+     * @param {Actor5e} actor                   Actor for which the saving throw is being rolled.
+     * @param {D20RollConfiguration} options    Configuration data for the pending roll.
+     * @param {string} abilityId                ID of the ability being rolled as defined in `DND5E.abilities`.
+     * @returns {boolean}                       Explicitly return `false` to prevent the save from being performed.
+     */
+    if ( Hooks.call("dnd5e.preRollConcentration", this, options, ability) === false ) return;
+
+    // Perform a standard ability save.
+    const roll = await this.rollAbilitySave(ability, options);
+
+    /**
+     * A hook event that fires after a saving throw to maintain concentration is rolled for an Actor.
+     * @function dnd5e.rollConcentration
+     * @memberof hookEvents
+     * @param {Actor5e} actor     Actor for which the saving throw has been rolled.
+     * @param {D20Roll} roll      The resulting roll.
+     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
+     */
+    if ( roll ) Hooks.callAll("dnd5e.rollConcentration", this, roll, ability);
+
     return roll;
   }
 
