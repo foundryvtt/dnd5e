@@ -658,7 +658,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const hp = this.system.attributes.hp;
 
     if ( this.type === "character" && (this.system.attributes.hp.max === null) ) {
-      const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
+      const abilityId = CONFIG.DND5E.defaultAbilities.hitPoints || "con";
       const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
       const base = Object.values(this.classes).reduce((total, item) => {
         const advancement = item.advancement.byType.HitPoints?.[0];
@@ -692,7 +692,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const flags = this.flags.dnd5e || {};
 
     // Compute initiative modifier
-    const abilityId = init.ability || CONFIG.DND5E.initiativeAbility;
+    const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;
     const ability = this.system.abilities?.[abilityId] || {};
     init.mod = ability.mod ?? 0;
 
@@ -1723,7 +1723,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Obtain required data
     const init = this.system.attributes?.init;
-    const abilityId = init?.ability || CONFIG.DND5E.initiativeAbility;
+    const abilityId = init?.ability || CONFIG.DND5E.defaultAbilities.initiative;
     const data = this.getRollData();
     const flags = this.flags.dnd5e || {};
     if ( flags.initiativeAdv ) options.advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
