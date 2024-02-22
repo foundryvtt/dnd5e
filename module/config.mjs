@@ -2276,6 +2276,21 @@ patchConfig("spellSchools", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" })
 /* -------------------------------------------- */
 
 /**
+ * Types of spell lists.
+ * @enum {string}
+ */
+DND5E.spellListTypes = {
+  class: "ITEM.TypeClass",
+  subclass: "ITEM.TypeSubclass",
+  background: "ITEM.TypeBackground",
+  race: "ITEM.TypeRace",
+  other: "JOURNALENTRYPAGE.DND5E.SpellList.Type.Other"
+};
+preLocalize("spellListTypes");
+
+/* -------------------------------------------- */
+
+/**
  * Spell scroll item ID within the `DND5E.sourcePacks` compendium or a full UUID for each spell level.
  * @enum {string}
  */

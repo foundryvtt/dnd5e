@@ -160,6 +160,10 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClassRule",
     types: ["rule"]
   });
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalSpellListPageSheet, {
+    label: "DND5E.SheetClassSpellList",
+    types: ["spellList"]
+  });
 
   CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
   DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
