@@ -71,7 +71,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     if ( !this.type.value ) return;
     const config = CONFIG.DND5E.consumableTypes[this.type.value];
     if ( config ) {
-      this.type.label = this.type.subtype ? config.subtypes[this.type.subtype] : config.label;
+      this.type.label = config.subtypes?.[this.type.subtype] ?? config.label;
     } else {
       this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.consumable);
     }
