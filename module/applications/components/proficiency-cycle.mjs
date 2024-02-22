@@ -1,8 +1,10 @@
+import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
+
 /**
  * A custom HTML element that displays proficiency status and allows cycling through values.
  * @fires change
  */
-export default class ProficiencyCycleElement extends HTMLElement {
+export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTMLElement) {
   /** @inheritDoc */
   constructor() {
     super();
@@ -10,10 +12,9 @@ export default class ProficiencyCycleElement extends HTMLElement {
     this.#internals = this.attachInternals();
     this.#internals.role = "spinbutton";
     this.#shadowRoot = this.attachShadow({ mode: "open" });
-    this.#buildCSS();
+    this._adoptStyleSheet(this._getStyleSheet());
     this.#value = Number(this.getAttribute("value") ?? 0);
   }
-
   /**
    * Controller for removing listeners automatically.
    * @type {AbortController}
@@ -31,14 +32,6 @@ export default class ProficiencyCycleElement extends HTMLElement {
    * @type {ShadowRoot}
    */
   #shadowRoot;
-
-  /**
-   * The stylesheets map to store the CSS singleton
-   * associated with a particular shadowroot.
-   * @type {WeakMap<Document, CSSStyleSheet>}
-   * @protected
-   */
-  static _stylesheets;
 
   /* -------------------------------------------- */
 
@@ -122,13 +115,6 @@ export default class ProficiencyCycleElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /** @override */
-  adoptedCallback() {
-    this.#buildCSS();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
   connectedCallback() {
     this.#buildHTML();
     this.#refreshValue();
@@ -142,79 +128,72 @@ export default class ProficiencyCycleElement extends HTMLElement {
 
   /* -------------------------------------------- */
 
-  /**
-   * Build the CSS internals.
-   */
-  #buildCSS() {
-    if (!this.constructor._stylesheets) {
-      this.constructor._stylesheets = new WeakMap();
-    }
+  /** @inheritDoc */
+  _adoptStyleSheet(sheet) {
+    this.#shadowRoot.adoptedStyleSheets = [sheet];
+  }
 
-    const _window = this.ownerDocument.defaultView;
-    let cssObj = this.constructor._stylesheets.get(_window.document);
+  /* -------------------------------------------- */
 
-    if (!cssObj) {
-      cssObj = new _window.CSSStyleSheet();
-      cssObj.replaceSync(`
-        :host { display: inline-block; }
-        div { --_fill: var(--proficiency-cycle-enabled-color, var(--dnd5e-color-blue)); }
-        div:has(:disabled, :focus-visible) { --_fill: var(--proficiency-cycle-disabled-color, var(--dnd5e-color-gold)); }
-        div:not(:has(:disabled)) { cursor: pointer; }
+  /** @inheritDoc */
+  _buildCSS(sheet) {
+    sheet.replaceSync(`
+      :host { display: inline-block; }
+      div { --_fill: var(--proficiency-cycle-enabled-color, var(--dnd5e-color-blue)); }
+      div:has(:disabled, :focus-visible) { --_fill: var(--proficiency-cycle-disabled-color, var(--dnd5e-color-gold)); }
+      div:not(:has(:disabled)) { cursor: pointer; }
   
-        div {
-          position: relative;
-          overflow: clip;
-          width: 100%;
-          aspect-ratio: 1;
+      div {
+        position: relative;
+        overflow: clip;
+        width: 100%;
+        aspect-ratio: 1;
   
+        &::before {
+          content: "";
+          position: absolute;
+          display: block;
+          inset: 3px;
+          border: 1px solid var(--_fill);
+          border-radius: 100%;
+        }
+  
+        &:has([value="1"])::before { background: var(--_fill); }
+  
+        &:has([value="0.5"], [value="2"])::after {
+          content: "";
+          position: absolute;
+          background: var(--_fill);  
+        }
+  
+        &:has([value="0.5"])::after {
+          inset: 4px;
+          width: 4px;
+          aspect-ratio: 1 / 2;
+          border-radius: 100% 0 0 100%;
+        }
+  
+        &:has([value="2"]) {
           &::before {
-            content: "";
-            position: absolute;
-            display: block;
-            inset: 3px;
-            border: 1px solid var(--_fill);
+            inset: 1px;
+            border-width: 2px;
+          }
+  
+          &::after {
+            inset: 5px;
             border-radius: 100%;
           }
-  
-          &:has([value="1"])::before { background: var(--_fill); }
-    
-          &:has([value="0.5"], [value="2"])::after {
-            content: "";
-            position: absolute;
-            background: var(--_fill);  
-          }
-  
-          &:has([value="0.5"])::after {
-            inset: 4px;
-            width: 4px;
-            aspect-ratio: 1 / 2;
-            border-radius: 100% 0 0 100%;
-          }
-  
-          &:has([value="2"]) {
-            &::before {
-              inset: 1px;
-              border-width: 2px;
-            }
-  
-            &::after {
-              inset: 5px;
-              border-radius: 100%;
-            }
-          }
         }
+      }
   
-        input {
-          position: absolute;
-          inset-block-start: -100px;
-          width: 1px;
-          height: 1px;
-          opacity: 0;
-        }
-      `);
-      this.constructor._stylesheets.set(_window.document, cssObj);
-    }
-    this.#shadowRoot.adoptedStyleSheets = [this.constructor._stylesheets.get(_window.document)];
+      input {
+        position: absolute;
+        inset-block-start: -100px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+      }
+    `);
   }
 
   /* -------------------------------------------- */

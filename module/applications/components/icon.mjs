@@ -1,13 +1,21 @@
+import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
+
 /**
  * Custom element for displaying SVG icons that are cached and can be styled.
  */
-export default class IconElement extends HTMLElement {
+export default class IconElement extends AdoptedStyleSheetMixin(HTMLElement) {
   constructor() {
     super();
     this.#internals = this.attachInternals();
     this.#internals.role = "img";
     this.#shadowRoot = this.attachShadow({ mode: "closed" });
   }
+
+  /**
+   * Cached SVG files by SRC.
+   * @type {Map<string, SVGElement|Promise<SVGElement>>}
+   */
+  static #svgCache = new Map();
 
   /**
    * The custom element's form and accessibility internals.
@@ -37,61 +45,32 @@ export default class IconElement extends HTMLElement {
 
   /* -------------------------------------------- */
 
-  /**
-   * The stylesheets map to store the CSS singleton
-   * associated with a particular shadowroot.
-   * @type {WeakMap<Document, CSSStyleSheet>}
-   */
-  static #stylesheets;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Cached SVG files by SRC.
-   * @type {Map<string, SVGElement|Promise<SVGElement>>}
-   */
-  static #svgCache = new Map();
-
-
-  /* -------------------------------------------- */
-
-  #buildCSS() {
-    if (!this.constructor.#stylesheets) {
-      this.constructor.#stylesheets = new WeakMap();
-    }
-
-    const _window = this.ownerDocument.defaultView;
-    let cssObj = this.constructor.#stylesheets.get(_window.document);
-
-    if (!cssObj) {
-      cssObj = new _window.CSSStyleSheet();
-      cssObj.replaceSync(`
-        :host {
-          display: contents;
-        }
-        svg {
-          fill: var(--icon-fill, #000);
-          width: var(--icon-width, var(--icon-size, 1em));
-          height: var(--icon-height, var(--icon-size, 1em));
-        }
-      `);
-      this.constructor.#stylesheets.set(_window.document, cssObj);
-    }
-    this.#shadowRoot.adoptedStyleSheets = [this.constructor.#stylesheets.get(_window.document)];
+  /** @inheritDoc */
+  _adoptStyleSheet(sheet) {
+    this.#shadowRoot.adoptedStyleSheets = [sheet];
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
-  adoptedCallback() {
-    this.#buildCSS();
+  /** @inheritDoc */
+  _buildCSS(sheet) {
+    sheet.replaceSync(`
+      :host {
+        display: contents;
+      }
+      svg {
+        fill: var(--icon-fill, #000);
+        width: var(--icon-width, var(--icon-size, 1em));
+        height: var(--icon-height, var(--icon-size, 1em));
+      }
+    `);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   connectedCallback() {
-    this.#buildCSS();
+    this._adoptStyleSheet(this._getStyleSheet());
     const insertElement = element => {
       if ( !element ) return;
       const clone = element.cloneNode(true);
