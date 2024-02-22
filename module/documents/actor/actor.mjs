@@ -2486,10 +2486,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
       const value = movement[k];
-      if ( value ) html += `
+      if ( value || (k === "walk") ) html += `
         <div class="row">
           <i class="fas ${k}"></i>
-          <span class="value">${value} <span class="units">${units}</span></span>
+          <span class="value">${value ?? 0} <span class="units">${units}</span></span>
           <span class="label">${label}</span>
         </div>
       `;
