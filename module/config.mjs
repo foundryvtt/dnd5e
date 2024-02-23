@@ -1796,7 +1796,7 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
 
 /**
  * Types of rests.
- * @type {RestConfiguration}
+ * @enum {RestConfiguration}
  */
 DND5E.restTypes = {
   short: {

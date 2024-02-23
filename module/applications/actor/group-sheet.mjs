@@ -277,8 +277,6 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       inputs.focus(ev => ev.currentTarget.select());
       inputs.addBack().find('[type="text"][data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
       html.find(".action-button").click(this._onClickActionButton.bind(this));
-    } else {
-      html.find(".rest-button").click(this._onClickActionButton.bind(this));
     }
   }
 
