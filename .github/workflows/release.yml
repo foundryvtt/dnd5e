@@ -107,6 +107,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         tag: ${{ env.TAG_NAME }}
+        doNotFailIfNotFound: true
 
 
     # Create a release for this specific version
@@ -116,6 +117,8 @@ jobs:
       with:
         allowUpdates: true # Set this to false if you want to prevent updating existing releases
         name: ${{ env.TAG_NAME }}
+        draft: false
+        prerelease: true
         omitDraftDuringUpdate: true
         omitPrereleaseDuringUpdate: true
         token: ${{ secrets.GITHUB_TOKEN }}
