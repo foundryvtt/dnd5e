@@ -2419,13 +2419,13 @@ DND5E.conditionTypes = {
     label: "DND5E.ConParalyzed",
     icon: "systems/dnd5e/icons/svg/statuses/paralyzed.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xnSV5hLJIMaTABXP",
-    statuses: ["incapacitated", "silenced"]
+    statuses: ["incapacitated"]
   },
   petrified: {
     label: "DND5E.ConPetrified",
     icon: "systems/dnd5e/icons/svg/statuses/petrified.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xaNDaW6NwQTgHSmi",
-    statuses: ["blinded", "deafened", "incapacitated", "silenced"]
+    statuses: ["incapacitated"]
   },
   poisoned: {
     label: "DND5E.ConPoisoned",
@@ -2452,7 +2452,7 @@ DND5E.conditionTypes = {
     label: "DND5E.ConUnconscious",
     icon: "systems/dnd5e/icons/svg/statuses/unconscious.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd",
-    statuses: ["blinded", "deafened", "incapacitated", "prone", "silenced"]
+    statuses: ["incapacitated", "prone"]
   }
 };
 preLocalize("conditionTypes", { key: "label", sort: true });
@@ -2488,7 +2488,6 @@ DND5E.statusEffects = {
   burrowing: {
     name: "EFFECT.DND5E.StatusBurrowing",
     icon: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
-    statuses: ["blinded"],
     special: "BURROW"
   },
   concentrating: {
@@ -2524,7 +2523,6 @@ DND5E.statusEffects = {
   hovering: {
     name: "EFFECT.DND5E.StatusHovering",
     icon: "systems/dnd5e/icons/svg/statuses/hovering.svg",
-    statuses: ["flying"],
     special: "HOVER"
   },
   marked: {
@@ -2538,7 +2536,7 @@ DND5E.statusEffects = {
   sleeping: {
     name: "EFFECT.DND5E.StatusSleeping",
     icon: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
-    statuses: ["blinded", "deafened", "incapacitated", "prone", "silenced", "unconscious"]
+    statuses: ["incapacitated", "prone", "unconscious"]
   },
   stabilized: {
     name: "EFFECT.DND5E.StatusStabilized",
