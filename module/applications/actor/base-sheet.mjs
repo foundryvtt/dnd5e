@@ -311,7 +311,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       const key = traitConfig.actorKeyPath?.replace("system.", "") ?? `traits.${trait}`;
       const data = foundry.utils.deepClone(foundry.utils.getProperty(systemData, key));
       if ( !data ) continue;
-
       foundry.utils.setProperty(traits, key, data);
       let values = data.value;
       if ( !values ) values = [];
@@ -350,6 +349,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Add custom entries
       if ( data.custom ) data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
       data.cssClass = !foundry.utils.isEmpty(data.selected) ? "" : "inactive";
+
+      // If petrified, display "All Damage" instead of all damage types separately
+      if ( (trait === "dr") && this.document.hasConditionEffect("petrification") ) {
+        data.selected = { custom1: game.i18n.localize("DND5E.DamageAll") };
+        data.cssClass = "";
+      }
     }
     return traits;
   }
