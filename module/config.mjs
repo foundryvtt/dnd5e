@@ -2538,9 +2538,9 @@ DND5E.statusEffects = {
     icon: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
     statuses: ["incapacitated", "prone", "unconscious"]
   },
-  stabilized: {
-    name: "EFFECT.DND5E.StatusStabilized",
-    icon: "systems/dnd5e/icons/svg/statuses/stabilized.svg"
+  stable: {
+    name: "EFFECT.DND5E.StatusStable",
+    icon: "systems/dnd5e/icons/svg/statuses/stable.svg"
   },
   surprised: {
     name: "EFFECT.DND5E.StatusSurprised",
