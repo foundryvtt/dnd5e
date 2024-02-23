@@ -1623,16 +1623,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
    */
   async rollConcentration(options={}) {
-    if ( !this.isOwner ) {
-      ui.notifications.warn("DND5E.TODO", {localize: true});
-      return null;
-    }
-
+    if ( !this.isOwner ) return null;
     const conc = this.system.attributes?.concentration;
-    if ( !conc || !conc.limit ) {
-      ui.notifications.warn("DND5E.TODO", {localize: true});
-      return null;
-    }
+    if ( !conc ) throw new Error("You may not make a Concentration Saving Throw with this Actor.");
 
     const config = CONFIG.DND5E;
     const modes = CONFIG.Dice.D20Roll.ADV_MODE;
