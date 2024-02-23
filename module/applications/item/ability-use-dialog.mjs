@@ -1,13 +1,14 @@
 /**
  * A specialized Dialog subclass for ability usage.
  *
- * @param {Item5e} item                   Item that is being used.
- * @param {ItemUseConfiguration} config   The ability use configuration's values.
- * @param {object} [dialogData={}]        An object of dialog data which configures how the modal window is rendered.
- * @param {object} [options={}]           Dialog rendering options.
+ * @param {Item5e} item                                Item that is being used.
+ * @param {object} [dialogData={}]                     An object of dialog data which configures
+ *                                                     how the modal window is rendered.
+ * @param {object} [options={}]                        Dialog rendering options.
+ * @param {ItemUseConfiguration} [options.usageConfig] The ability use configuration's values.
  */
 export default class AbilityUseDialog extends Dialog {
-  constructor(item, config={}, dialogData={}, options={}) {
+  constructor(item, dialogData={}, options={}) {
     super(dialogData, options);
     this.options.classes = ["dnd5e", "dialog"];
 
@@ -21,7 +22,7 @@ export default class AbilityUseDialog extends Dialog {
      * Store a reference to the ItemUseConfiguration being used
      * @type {ItemUseConfiguration}
      */
-    this.configuration = config;
+    this.configuration = options.usageConfig ?? {};
   }
 
   /* -------------------------------------------- */
@@ -62,7 +63,7 @@ export default class AbilityUseDialog extends Dialog {
     const isSpell = item.type === "spell";
     const label = game.i18n.localize(`DND5E.AbilityUse${isSpell ? "Cast" : "Use"}`);
     return new Promise(resolve => {
-      const dlg = new this(item, config, {
+      const dlg = new this(item, {
         title: `${item.name}: ${game.i18n.localize("DND5E.AbilityUseConfig")}`,
         content: html,
         buttons: {
@@ -77,6 +78,8 @@ export default class AbilityUseDialog extends Dialog {
         },
         default: "use",
         close: () => resolve(null)
+      }, {
+        usageConfig: config
       });
       dlg.render(true);
     });
