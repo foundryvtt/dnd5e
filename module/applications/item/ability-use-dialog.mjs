@@ -107,7 +107,7 @@ export default class AbilityUseDialog extends Dialog {
     }, []).filter(sl => sl.level <= lmax);
 
     // If this character has other kinds of slots, present them as well.
-    for (const k of Object.keys(CONFIG.DND5E.spellcastingTypes)) {
+    for ( const k of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
       const spellData = actor.system.spells[k];
       if ( !spellData ) continue;
       if ( spellData.level >= level ) {
