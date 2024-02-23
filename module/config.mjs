@@ -1903,7 +1903,7 @@ patchConfig("spellPreparationModes", "label", { since: "DnD5e 3.1", until: "DnD5
 
 /**
  * Subset of `DND5E.spellPreparationModes` that consume spell slots.
- * @deprecated since DnD5e 3.0, available until DnD5e 3.2
+ * @deprecated since DnD5e 3.1, available until DnD5e 3.3
  * @type {string[]}
  */
 DND5E.spellUpcastModes = ["always", "pact", "prepared"];
