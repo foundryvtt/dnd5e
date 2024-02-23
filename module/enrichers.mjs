@@ -3,8 +3,6 @@ import Award from "./applications/award.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 
-const MAX_EMBED_DEPTH = 5;
-
 const slugify = value => value?.slugify().replaceAll("-", "");
 
 /**
@@ -58,44 +56,6 @@ async function enrichString(match, options) {
 /* -------------------------------------------- */
 
 /**
- * Parse the enriched embed and provide the appropriate content.
- * @param {object} config              Configuration data.
- * @param {string} [label]             Optional label to replace default caption/text.
- * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
- * @returns {HTMLElement|null}         An HTML link if the check could be built, otherwise null.
- */
-async function enrichEmbed(config, label, options) {
-  options._embedDepth ??= 0;
-  if ( options._embedDepth > MAX_EMBED_DEPTH ) {
-    console.warn(
-      `Embed enrichers are restricted to ${MAX_EMBED_DEPTH} levels deep. ${config._input} cannot be enriched fully.`
-    );
-    return null;
-  }
-
-  for ( const value of config.values ) {
-    if ( config.uuid ) break;
-    try {
-      const parsed = foundry.utils.parseUuid(value);
-      if ( parsed.documentId ) config.uuid = value;
-    } catch(err) {}
-  }
-
-  config.doc = await fromUuid(config.uuid, { relative: options.relativeTo });
-  if ( config.doc instanceof JournalEntryPage ) {
-    switch ( config.doc.type ) {
-      case "image": return embedImagePage(config, label, options);
-      case "text":
-      case "rule": return embedTextPage(config, label, options);
-    }
-  }
-  else if ( config.doc instanceof RollTable ) return embedRollTable(config, label, options);
-  return null;
-}
-
-/* -------------------------------------------- */
-
-/**
  * Parse a roll string into a configuration object.
  * @param {string} match  Matched configuration string.
  * @returns {object}
@@ -115,7 +75,7 @@ function parseConfig(match) {
 }
 
 /* -------------------------------------------- */
-/*  Enrichers                                   */
+/*  Award Enricher                              */
 /* -------------------------------------------- */
 
 /**
@@ -168,6 +128,8 @@ async function enrichAward(config, label, options) {
   return block;
 }
 
+/* -------------------------------------------- */
+/*  Check & Save Enrichers                      */
 /* -------------------------------------------- */
 
 /**
@@ -275,6 +237,56 @@ async function enrichCheck(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Enrich a saving throw link.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.
+ *
+ * @example Create a dexterity saving throw:
+ * ```[[/save ability=dex]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="save" data-key="dex">
+ *   <i class="fa-solid fa-dice-d20"></i> Dexterity
+ * </a>
+ * ```
+ *
+ * @example Add a DC to the save:
+ * ```[[/save ability=dex dc=20]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="save" data-key="dex" data-dc="20">
+ *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity
+ * </a>
+ * ```
+ */
+async function enrichSave(config, label, options) {
+  for ( const value of config.values ) {
+    if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
+    else if ( Number.isNumeric(value) ) config.dc = Number(value);
+    else config[value] = true;
+  }
+
+  const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
+  if ( !abilityConfig ) {
+    console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
+    return null;
+  }
+  if ( abilityConfig?.key ) config.ability = abilityConfig.key;
+
+  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
+
+  config = { type: "save", ...config };
+  if ( !label ) label = createRollLabel(config);
+  return createRollLink(label, config);
+}
+
+/* -------------------------------------------- */
+/*  Damage Enricher                             */
+/* -------------------------------------------- */
+
+/**
  * Enrich a damage link.
  * @param {object} config              Configuration data.
  * @param {string} [label]             Optional label to replace default text.
@@ -343,6 +355,75 @@ async function enrichDamage(config, label, options) {
   const span = document.createElement("span");
   span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Damage${localizationType}`, localizationData);
   return span;
+}
+
+/* -------------------------------------------- */
+/*  Embed Enrichers                             */
+/* -------------------------------------------- */
+
+const MAX_EMBED_DEPTH = 5;
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the enriched embed and provide the appropriate content.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace default caption/text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML link if the check could be built, otherwise null.
+ */
+async function enrichEmbed(config, label, options) {
+  options._embedDepth ??= 0;
+  if ( options._embedDepth > MAX_EMBED_DEPTH ) {
+    console.warn(
+      `Embed enrichers are restricted to ${MAX_EMBED_DEPTH} levels deep. ${config._input} cannot be enriched fully.`
+    );
+    return null;
+  }
+
+  for ( const value of config.values ) {
+    if ( config.uuid ) break;
+    try {
+      const parsed = foundry.utils.parseUuid(value);
+      if ( parsed.documentId ) config.uuid = value;
+    } catch(err) {}
+  }
+
+  config.doc = await fromUuid(config.uuid, { relative: options.relativeTo });
+  if ( config.doc instanceof JournalEntryPage ) {
+    switch ( config.doc.type ) {
+      case "image": return embedImagePage(config, label, options);
+      case "text":
+      case "rule": return embedTextPage(config, label, options);
+    }
+  }
+  else if ( config.doc instanceof RollTable ) return embedRollTable(config, label, options);
+  else if ( (config.doc instanceof Actor) || (config.doc instanceof Item) ) {
+    return embedDocument(config, label, options);
+  }
+  return null;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Embed an Actor or Item document with a description.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace the default caption.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML figure containing the image, caption from the image page or a custom
+ *                                     caption, and a link to the source if it could be built, otherwise null.
+ */
+async function embedDocument(config, label, options) {
+  options = { ...options, _embedDepth: options._embedDepth + 1, relativeTo: config.doc };
+  config.inline ??= config.values.includes("inline");
+
+  const keyPath = (config.doc instanceof Actor) ? "system.details.biography.value" : "system.description.value";
+  const description = foundry.utils.getProperty(config.doc, keyPath);
+  if ( description === undefined ) return null;
+
+  const enriched = await TextEditor.enrichHTML(description, options);
+  return wrapEmbeddedText(enriched, config, label, options);
 }
 
 /* -------------------------------------------- */
@@ -427,30 +508,7 @@ async function embedTextPage(config, label, options) {
   config.inline ??= config.values.includes("inline");
 
   const enrichedPage = await TextEditor.enrichHTML(config.doc.text.content, options);
-  if ( config.inline ) {
-    const section = document.createElement("section");
-    if ( config.classes ) section.className = config.classes;
-    section.classList.add("content-embed");
-    section.innerHTML = enrichedPage;
-    return section;
-  }
-
-  const showCaption = config.caption !== false;
-  const showCite = config.cite !== false;
-  const caption = label || config.doc.name;
-  const figure = document.createElement("figure");
-  figure.innerHTML = enrichedPage;
-
-  if ( config.classes ) figure.className = config.classes;
-  figure.classList.add("content-embed");
-  if ( showCaption || showCite ) {
-    const figcaption = document.createElement("figcaption");
-    if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
-    if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
-    figure.insertAdjacentElement("beforeend", figcaption);
-  }
-
-  return figure;
+  return wrapEmbeddedText(enrichedPage, config, label, options);
 }
 
 /* -------------------------------------------- */
@@ -546,6 +604,45 @@ async function embedRollTable(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Wrap embeds in containing elements.
+ * @param {string} enriched  Enriched text content to include.
+ * @param {object} config              Configuration data.
+ * @param {string} label               Optional label to use as the table caption.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {Promise<HTMLElement>}
+ */
+function wrapEmbeddedText(enriched, config, label, options) {
+  if ( config.inline ) {
+    const section = document.createElement("section");
+    if ( config.classes ) section.className = config.classes;
+    section.classList.add("content-embed");
+    section.innerHTML = enriched;
+    return section;
+  }
+
+  const showCaption = config.caption !== false;
+  const showCite = config.cite !== false;
+  const caption = label || config.doc.name;
+  const figure = document.createElement("figure");
+  figure.innerHTML = enriched;
+
+  if ( config.classes ) figure.className = config.classes;
+  figure.classList.add("content-embed");
+  if ( showCaption || showCite ) {
+    const figcaption = document.createElement("figcaption");
+    if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
+    if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+    figure.insertAdjacentElement("beforeend", figcaption);
+  }
+
+  return figure;
+}
+
+/* -------------------------------------------- */
+/*  Reference Enricher                          */
+/* -------------------------------------------- */
+
+/**
  * Enrich a reference link.
  * @param {object} config              Configuration data.
  * @param {string} [label]             Optional label to replace default text.
@@ -584,54 +681,6 @@ async function enrichReference(config, label, options) {
   if ( !uuid ) return null;
   const doc = await fromUuid(uuid);
   return doc.toAnchor({ name: label || doc.name });
-}
-
-/* -------------------------------------------- */
-
-/**
- * Enrich a saving throw link.
- * @param {object} config              Configuration data.
- * @param {string} [label]             Optional label to replace default text.
- * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
- * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.
- *
- * @example Create a dexterity saving throw:
- * ```[[/save ability=dex]]```
- * becomes
- * ```html
- * <a class="roll-action" data-type="save" data-key="dex">
- *   <i class="fa-solid fa-dice-d20"></i> Dexterity
- * </a>
- * ```
- *
- * @example Add a DC to the save:
- * ```[[/save ability=dex dc=20]]```
- * becomes
- * ```html
- * <a class="roll-action" data-type="save" data-key="dex" data-dc="20">
- *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity
- * </a>
- * ```
- */
-async function enrichSave(config, label, options) {
-  for ( const value of config.values ) {
-    if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
-    else if ( Number.isNumeric(value) ) config.dc = Number(value);
-    else config[value] = true;
-  }
-
-  const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
-  if ( !abilityConfig ) {
-    console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
-    return null;
-  }
-  if ( abilityConfig?.key ) config.ability = abilityConfig.key;
-
-  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
-
-  config = { type: "save", ...config };
-  if ( !label ) label = createRollLabel(config);
-  return createRollLink(label, config);
 }
 
 /* -------------------------------------------- */
