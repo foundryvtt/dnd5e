@@ -124,6 +124,26 @@ Fires after a skill check has been rolled.
 | roll | D20Roll | The resulting roll. |
 | skillId | string | ID of the skill that was rolled as defined in `DND5E.skills`. |
 
+### `dnd5e.preRollToolCheck`
+
+Fires before a tool check is rolled for an Actor. Returning `false` will prevent the tool check from being rolled.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| actor | Actor5e | Actor for which the tool check is being rolled. |
+| config | D20RollConfiguration | Configuration data for the pending roll. |
+| toolId | string | ID of the tool being rolled as defined in `DND5E.toolIds`. |
+
+### `dnd5e.rollToolCheck`
+
+Fires after a tool check has been rolled for an Actor.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| actor | Actor5e | Actor for which the tool check has been rolled. |
+| roll | D20Roll | The resulting roll. |
+| toolId | string | ID of the tool that was rolled as defined in `DND5E.toolIds`. |
+
 ### `dnd5e.preRollHitDie`
 
 Fires before a hit die is rolled. Returning `false` will prevent the normal rolling process.
@@ -488,24 +508,6 @@ Fires after the Item has rolled to recharge, but before any changes have been pe
 | ---- | ---- | ----------- |
 | item | Item5e | Item for which the roll was performed. |
 | roll | Roll | The resulting roll. |
-
-### `dnd5e.preRollToolCheck`
-
-Fires before a tool check is rolled for an Item. Returning `false` will prevent the tool check from being rolled.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll is being performed. |
-| config | D20RollConfiguration | Configuration data for the pending roll. |
-
-### `dnd5e.rollToolCheck`
-
-Fires after a tool check has been rolled for an Item.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll was performed. |
-| roll | D20Roll | The resulting roll. |
 
 ### `dnd5e.preCreateScrollFromSpell`
 
