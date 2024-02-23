@@ -1,5 +1,6 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
+import { setTheme } from "../../settings.mjs";
 import { simplifyBonus, staticID } from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
@@ -162,7 +163,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     });
 
     // Set theme
-    html[0].dataset.theme = this.actor.getFlag("dnd5e", "theme");
+    setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
 
     return html;
   }

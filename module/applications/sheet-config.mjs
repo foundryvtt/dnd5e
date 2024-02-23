@@ -1,3 +1,5 @@
+import { setTheme } from "../settings.mjs";
+
 /**
  * Sheet config with extra options.
  */
@@ -29,7 +31,7 @@ export default class SheetConfig5e extends DocumentSheetConfig {
 
     if ( "flags.dnd5e.theme" in formData ) {
       const sheet = this.object.sheet.element?.[0];
-      if ( sheet ) sheet.dataset.theme = formData["flags.dnd5e.theme"];
+      if ( sheet ) setTheme(sheet, formData["flags.dnd5e.theme"]);
     }
   }
 }

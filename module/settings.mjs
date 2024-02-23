@@ -333,8 +333,21 @@ export function registerDeferredSettings() {
       "": "SHEETS.DND5E.THEME.Automatic",
       ...CONFIG.DND5E.themes
     },
-    onChange: s => document.body.dataset.theme = s
+    onChange: s => setTheme(document.body, s)
   });
 
-  document.body.dataset.theme = game.settings.get("dnd5e", "theme");
+  setTheme(document.body, game.settings.get("dnd5e", "theme"));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Set the theme on an element, removing the previous theme class in the process.
+ * @param {HTMLElement} element  Body or sheet element on which to set the theme data.
+ * @param {string} [theme=""]    Theme key to set.
+ */
+export function setTheme(element, theme="") {
+  element.dataset.theme = theme;
+  element.className = element.className.replace(/\bdnd5e-theme-\w+/g, "");
+  if ( theme ) element.classList.add(`dnd5e-theme-${theme.slugify()}`);
 }
