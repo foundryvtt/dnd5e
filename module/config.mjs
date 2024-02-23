@@ -1897,7 +1897,7 @@ DND5E.spellPreparationModes = {
   }
 };
 preLocalize("spellPreparationModes", { key: "label" });
-patchConfig("spellPreparationModes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
+patchConfig("spellPreparationModes", "label", { since: "DnD5e 3.1", until: "DnD5e 3.3" });
 
 /* -------------------------------------------- */
 
