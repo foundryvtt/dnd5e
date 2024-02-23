@@ -208,10 +208,12 @@
                     <div class="counter flexrow death-saves">
                         <h4 class="rollable" data-action="rollDeathSave">{{ localize "DND5E.DeathSave" }}</h4>
                         <div class="counter-value">
-                            <i class="fas fa-check"></i>
-                            <input type="text" name="system.attributes.death.success" value="{{system.attributes.death.success}}" placeholder="0" data-dtype="Number">
-                            <i class="fas fa-times"></i>
-                            <input type="text" name="system.attributes.death.failure" value="{{system.attributes.death.failure}}" placeholder="0" data-dtype="Number">
+                            <i class="fa-solid fa-check"></i>
+                            {{ numberInput system.attributes.death.success name="system.attributes.death.success"
+                               min=0 step=1 placeholder=0 }}
+                            <i class="fa-solid fa-times"></i>
+                            {{ numberInput system.attributes.death.failure name="system.attributes.death.failure"
+                               min=0 step=1 placeholder=0 }}
                         </div>
                     </div>
                 </div>
