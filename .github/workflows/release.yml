@@ -99,6 +99,16 @@ jobs:
     - run: zip ${{ env.ZIP_NAME }} -r fonts icons lang json packs templates tokens ui dnd5e.css dnd5e.mjs dnd5e-compiled.mjs.map LICENSE.txt README.md system.json template.json --exclude "packs/_source/*"
 
 
+    # Fetch the body from the release
+    - name: Fetch Release Body
+      id: release
+      uses: cardinalby/git-get-release-action@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        tag: ${{ env.TAG_NAME }}
+
+
     # Create a release for this specific version
     - name: Update Release with Files
       id: create_version_release
@@ -106,9 +116,12 @@ jobs:
       with:
         allowUpdates: true # Set this to false if you want to prevent updating existing releases
         name: ${{ env.TAG_NAME }}
-        draft: false
-        prerelease: false
+        omitDraftDuringUpdate: true
+        omitPrereleaseDuringUpdate: true
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: './system.json, ./${{ env.ZIP_NAME }}'
         tag: ${{ env.TAG_NAME }}
-        body: '**Installation:** To manually install this release, please use the following manifest URL: ${{ env.RELEASE_INSTALL_URL }}'
+        body: |
+          ${{ steps.release.outputs.body }}
+          
+          **Installation:** To manually install this release, please use the following manifest URL: ${{ env.RELEASE_INSTALL_URL }}
