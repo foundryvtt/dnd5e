@@ -420,7 +420,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Pact magic users have cantrips and a pact magic section
-    for (const [k, v] of Object.entries(CONFIG.DND5E.spellPreparationModes)) {
+    for ( const [k, v] of Object.entries(CONFIG.DND5E.spellPreparationModes) ) {
       if ( !(k in levels) || !v.upcast || !levels[k].max ) continue;
 
       if ( !spellbook["0"] && v.cantrips ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
