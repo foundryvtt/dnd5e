@@ -2080,15 +2080,26 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
     if ( !this.system.advancement ) return this;
 
-    const Advancement = CONFIG.DND5E.advancementTypes[type];
-    if ( !Advancement ) throw new Error(`${type} not found in CONFIG.DND5E.advancementTypes`);
+    let config = CONFIG.DND5E.advancementTypes[type];
+    if ( !config ) throw new Error(`${type} not found in CONFIG.DND5E.advancementTypes`);
+    if ( config.prototype instanceof Advancement ) {
+      foundry.utils.logCompatibilityWarning(
+        "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3", once: true }
+      );
+      config = {
+        documentClass: config,
+        validItemTypes: config.metadata.validItemTypes
+      };
+    }
+    const cls = config.documentClass;
 
-    if ( !Advancement.metadata.validItemTypes.has(this.type) || !Advancement.availableForItem(this) ) {
+    if ( !config.validItemTypes.has(this.type) || !cls.availableForItem(this) ) {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
     }
 
     const createData = foundry.utils.deepClone(data);
-    const advancement = new Advancement(data, {parent: this});
+    const advancement = new cls(data, {parent: this});
     if ( advancement._preCreate(createData) === false ) return;
 
     const advancementCollection = this.toObject().system.advancement;
@@ -2096,7 +2107,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection}).then(() => {
       if ( !showConfig ) return this;
-      const config = new Advancement.metadata.apps.config(this.advancement.byId[advancement.id]);
+      const config = new cls.metadata.apps.config(this.advancement.byId[advancement.id]);
       return config.render(true);
     });
   }

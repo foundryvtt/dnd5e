@@ -718,8 +718,10 @@ export default class ItemSheet5e extends ItemSheet {
       return false;
     }
     advancements = advancements.filter(a => {
+      const validItemTypes = CONFIG.DND5E.advancementTypes[a.constructor.typeName]?.validItemTypes
+        ?? a.metadata.validItemTypes;
       return !this.item.advancement.byId[a.id]
-        && a.constructor.metadata.validItemTypes.has(this.item.type)
+        && validItemTypes.has(this.item.type)
         && a.constructor.availableForItem(this.item);
     });
 

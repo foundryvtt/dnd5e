@@ -2932,17 +2932,48 @@ preLocalize("groupTypes");
 /* -------------------------------------------- */
 
 /**
+ * Configuration information for advancement types.
+ *
+ * @typedef {object} AdvancementTypeConfiguration
+ * @property {typeof Advancement} documentClass  The advancement's document class.
+ * @property {Set<string>} validItemTypes        What item types this advancement can be used with.
+ */
+
+const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
+
+/**
  * Advancement types that can be added to items.
- * @enum {*}
+ * @enum {AdvancementTypeConfiguration}
  */
 DND5E.advancementTypes = {
-  AbilityScoreImprovement: advancement.AbilityScoreImprovementAdvancement,
-  HitPoints: advancement.HitPointsAdvancement,
-  ItemChoice: advancement.ItemChoiceAdvancement,
-  ItemGrant: advancement.ItemGrantAdvancement,
-  ScaleValue: advancement.ScaleValueAdvancement,
-  Size: advancement.SizeAdvancement,
-  Trait: advancement.TraitAdvancement
+  AbilityScoreImprovement: {
+    documentClass: advancement.AbilityScoreImprovementAdvancement,
+    validItemTypes: new Set(["background", "class", "race"])
+  },
+  HitPoints: {
+    documentClass: advancement.HitPointsAdvancement,
+    validItemTypes: new Set(["class"])
+  },
+  ItemChoice: {
+    documentClass: advancement.ItemChoiceAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
+  ItemGrant: {
+    documentClass: advancement.ItemGrantAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
+  ScaleValue: {
+    documentClass: advancement.ScaleValueAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
+  Size: {
+    documentClass: advancement.SizeAdvancement,
+    validItemTypes: new Set(["race"])
+  },
+  Trait: {
+    documentClass: advancement.TraitAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  }
 };
 
 /* -------------------------------------------- */
