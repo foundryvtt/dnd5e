@@ -1,9 +1,11 @@
 /**
  * A specialized Dialog subclass for ability usage.
  *
- * @param {Item5e} item             Item that is being used.
- * @param {object} [dialogData={}]  An object of dialog data which configures how the modal window is rendered.
- * @param {object} [options={}]     Dialog rendering options.
+ * @param {Item5e} item                                Item that is being used.
+ * @param {object} [dialogData={}]                     An object of dialog data which configures
+ *                                                     how the modal window is rendered.
+ * @param {object} [options={}]                        Dialog rendering options.
+ * @param {ItemUseConfiguration} [options.usageConfig] The ability use configuration's values.
  */
 export default class AbilityUseDialog extends Dialog {
   constructor(item, dialogData={}, options={}) {
@@ -15,6 +17,12 @@ export default class AbilityUseDialog extends Dialog {
      * @type {Item5e}
      */
     this.item = item;
+
+    /**
+     * Store a reference to the ItemUseConfiguration being used
+     * @type {ItemUseConfiguration}
+     */
+    this.configuration = options.usageConfig ?? {};
   }
 
   /* -------------------------------------------- */
@@ -70,6 +78,8 @@ export default class AbilityUseDialog extends Dialog {
         },
         default: "use",
         close: () => resolve(null)
+      }, {
+        usageConfig: config
       });
       dlg.render(true);
     });
