@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
     # Load the system.json manifest into memory
     - name: Load system manifest
       id: manifest
-      uses: ActionsTools/read-json-action@main
+      uses: zoexx/github-action-json-file-properties@release
       with:
         file_path: "./system.json"
 
@@ -67,7 +67,7 @@ jobs:
 
 
     - name: Adjust manifest
-      uses: microsoft/variable-substitution@v1
+      uses: TomaszKandula/variable-substitution@v1.0.2
       with:
         files: "system.json"
       env:
@@ -76,7 +76,7 @@ jobs:
 
     # Set up Node
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18.x'
         cache: 'npm'
