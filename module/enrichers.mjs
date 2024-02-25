@@ -947,7 +947,13 @@ async function rollAction(event) {
             }
 
             const gameActor = await fromUuid(locatedActor);
-            const actorItem = gameActor.items.get(target.dataset.rollRelativeItemId) || gameActor.items.getName(target.dataset.rollRelativeItemName);
+            let actorItem;
+            if (target.dataset.rollRelativeItemId) {
+              actorItem = await fromUuid(`.Item.${target.dataset.rollRelativeItemId}`, {relative: gameActor})
+            } else {
+              const findItem = gameActor.items.getName(target.dataset.rollRelativeItemName);
+              actorItem = await fromUuid(findItem.uuid)
+            }
             if (actorItem) {
               if (gameActor.testUserPermission(game.user, "OWNER")) {
                 return actorItem.use();
