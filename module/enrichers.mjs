@@ -949,10 +949,14 @@ async function rollAction(event) {
             const gameActor = await fromUuid(locatedActor);
             let actorItem;
             if (target.dataset.rollRelativeItemId) {
-              actorItem = await fromUuid(`.Item.${target.dataset.rollRelativeItemId}`, {relative: gameActor})
+              actorItem = await fromUuid(`.Item.${target.dataset.rollRelativeItemId}`, { relative: gameActor });
             } else {
               const findItem = gameActor.items.getName(target.dataset.rollRelativeItemName);
-              actorItem = await fromUuid(findItem.uuid)
+              if (findItem == null) {
+                return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemName} not found on Actor ${gameActor.name}!`);
+              } else {
+                actorItem = await fromUuid(findItem.uuid);
+              }
             }
             if (actorItem) {
               if (gameActor.testUserPermission(game.user, "OWNER")) {
@@ -961,7 +965,6 @@ async function rollAction(event) {
                 return ui.notifications.warn(`You do not have ownership of ${gameActor.name}, and cannot use this item!`);
               }
             }
-            else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName} not found on Actor ${gameActor.name}!`);
 
             // Name Method
           } else if (target.dataset.rollItemName) {
