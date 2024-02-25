@@ -2502,7 +2502,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
-      attack.bonus = scrollData.system.attack.bonus;
+      attack = { bonus: scrollData.system.attack.bonus };
     }
     if ( save.ability ) {
       save.scaling = "flat";
