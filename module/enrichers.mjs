@@ -685,14 +685,14 @@ async function enrichItem(config, label) {
   const itemUuidMatch = givenItem.match(/^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/);
   if (itemUuidMatch) {
     const ownerActor = itemUuidMatch.groups.actorid.trim();
-      if ( !label ) {
-        if ((await fromUuid(givenItem)) == null) {
-          console.warn(`Item not found while enriching ${givenItem}.`);
-          return null;
-        } else label = (await fromUuid(givenItem)).name;
-      }
-      return createRollLink(label, {type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
+    if (!label) {
+      if ((await fromUuid(givenItem)) == null) {
+        console.warn(`Item not found while enriching ${givenItem}.`);
+        return null;
+      } else label = (await fromUuid(givenItem)).name;
     }
+    return createRollLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
+  }
 
   // If config is a relative Id/Name
   const relativeIdMatch = givenItem.match(/^\.\w{16}$/);  // .amUUCouL69OK1GZU
@@ -703,7 +703,7 @@ async function enrichItem(config, label) {
     const foundActor = game.actors.find(actor => actor.items.get(relativeId));
     if (foundActor) {
       const foundItem = foundActor.items.get(relativeId);
-      if ( !label ) {
+      if (!label) {
         label = foundItem.name;
         console.log(`Found actor ${foundActor.name} that owns the item ${foundItem.name}.`);
       }
@@ -718,8 +718,9 @@ async function enrichItem(config, label) {
   }
 
   // Finally, if config is an item name
-  if ( !label ) {
-    label = givenItem;}
+  if (!label) {
+    label = givenItem;
+  }
   return createRollLink(label, { type: "item", rollItemName: givenItem });
 }
 
@@ -930,7 +931,7 @@ async function rollAction(event) {
             if (target.offsetParent.className === "message-content") {
               const cardData = target.offsetParent.lastElementChild.dataset;
               if (cardData.tokenId) {
-                locatedActor = `${cardData.tokenId?.trim()}.Actor.${cardData.actorId}`
+                locatedActor = `${cardData.tokenId?.trim()}.Actor.${cardData.actorId}`;
               } else {
                 locatedActor = `Actor.${cardData.actorId}`;
               }
@@ -959,7 +960,7 @@ async function rollAction(event) {
             // Name Method
           } else if (target.dataset.rollItemName) {
             return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
-          };
+          }
 
         default:
           return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
