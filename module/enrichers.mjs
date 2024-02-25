@@ -641,7 +641,7 @@ async function enrichSave(config, label, options) {
  * Enrich an item use link to roll an item on the selected token.
  * @param {string[]} config            Configuration data.
  * @param {string} [label]             Optional label to replace default text.
- * @returns {HTMLElement|null}         An HTML link if the item link could be built, otherwise null.
+ * @returns {Promise<HTMLElement|null>}         An HTML link if the item link could be built, otherwise null.
  *
  * @example Use an item from a Name:
  * ```[[/item Heavy Crossbow]]```
@@ -682,27 +682,22 @@ async function enrichSave(config, label, options) {
 async function enrichItem(config, label) {
   const givenItem = config.values.join(" ");
   // If config is a UUID
-  const itemUuidMatch = givenItem.match(/^Actor\..*?\.Item\..*?$/);
+  const itemUuidMatch = givenItem.match(/^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/);
   if (itemUuidMatch) {
-    const actorIdOrName = itemUuidMatch[0].split(".")[1];
-    const ownerActor = game.actors.get(actorIdOrName) || game.actors.getName(actorIdOrName);
-    if (ownerActor) {
-      const itemIdOrName = itemUuidMatch[0].split(".")[3];
-      const ownedItem = ownerActor.items.get(itemIdOrName) || ownerActor.items.getName(itemIdOrName);
-      if (!ownedItem) {
-        console.warn(`Item ${itemIdOrName} not found while enriching ${config.input}.`);
-        return config.input;
-      } else if ( !label ) {
-        label = ownedItem.name;
+    const ownerActor = itemUuidMatch.groups.actorid.trim();
+      if ( !label ) {
+        if ((await fromUuid(givenItem)) == null) {
+          console.warn(`Item not found while enriching ${givenItem}.`);
+          return null;
+        } else label = (await fromUuid(givenItem)).name;
       }
-      return createRollLink(label, {type: "item", rollItemActor: ownerActor.id, rollItemId: ownedItem.id });
+      return createRollLink(label, {type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
     }
-  }
 
-  // If config is a relative ID
-  const relativeIdMatch = givenItem.match(/^\.\w{16}$/);
-  const copiedIdMatch = givenItem.match(/^\w{16}$/);
-  const relativeNameMatch = givenItem.startsWith(".");
+  // If config is a relative Id/Name
+  const relativeIdMatch = givenItem.match(/^\.\w{16}$/);  // .amUUCouL69OK1GZU
+  const copiedIdMatch = givenItem.match(/^\w{16}$/);      // amUUCouL69OK1GZU
+  const relativeNameMatch = givenItem.startsWith(".");    // .Bite
   if (relativeIdMatch || copiedIdMatch || relativeNameMatch) {
     const relativeId = relativeIdMatch ? givenItem.substr(1) : givenItem;
     const foundActor = game.actors.find(actor => actor.items.get(relativeId));
@@ -919,85 +914,53 @@ async function rollAction(event) {
           return await actor.rollToolCheck(tool, options);
         case "item":
           // UUID Method
-          if (target.dataset.rollItemActor) {
-            const gameActor = game.actors.get(target.dataset.rollItemActor);
+          if (target.dataset.rollItemUuid) {
+            const gameActor = await fromUuid(target.dataset.rollItemActor);
             if (gameActor.testUserPermission(game.user, "OWNER")) {
-              return gameActor.items.get(target.dataset.rollItemId).use();
+              return (await fromUuid(target.dataset.rollItemUuid)).use();
             } else {
               return ui.notifications.warn(`You do not have ownership of ${gameActor.name}, and cannot use this item!`);
             }
 
-          // Relative Id Method
+          // Relative Id/Name Method
           } else if (target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName) {
-            let locatedToken; let locatedScene; let locatedActor;
+            let locatedActor;
             const targetLocation = target.parentElement.parentElement;
+            // Enricher is in Chat Message
             if (target.offsetParent.className === "message-content") {
-              const chatCardIds = target.offsetParent.lastElementChild.dataset;
-              if (chatCardIds.tokenId) {
-                const chatIds = chatCardIds.tokenId.match(/Scene\.(.{16}).Token\.(.{16})/);
-                locatedScene = chatIds[1];
-                locatedToken = chatIds[2];
+              const cardData = target.offsetParent.lastElementChild.dataset;
+              if (cardData.tokenId) {
+                locatedActor = `${cardData.tokenId?.trim()}.Actor.${cardData.actorId}`
               } else {
-                locatedActor = chatCardIds.actorId;
+                locatedActor = `Actor.${cardData.actorId}`;
               }
-
+            // Enricher is in Legacy/NPC Sheet
             } else if (targetLocation.classList.contains("item-summary")) {
-              const actorSheetIds = target.closest(".app.window-app.dnd5e.sheet.actor").id.match(/ActorSheet5e(?:NPC|Character)-(Scene-(.{16}))?(-Token-(.{16}))?(-Actor-(.{16}))?/);
-              if (actorSheetIds[2]) {
-                locatedScene = actorSheetIds[2];
-                locatedToken = actorSheetIds[4];
-              } else {
-                locatedActor = event.target.offsetParent.id.slice(-16);
-              }
-
+              locatedActor = ui.activeWindow.object.uuid;
+            // Enricher is in Actor2 Sheet
             } else if (targetLocation.classList.contains("description")) {
-              const actorSheet2Ids = ui.activeWindow._element[0].id.match(/ActorSheet5e(?:NPC|Character2)-(Scene-(.{16}))?(-Token-(.{16}))?(-Actor-(.{16}))?/);
-              if (actorSheet2Ids[2]) {
-                locatedScene = actorSheet2Ids[2];
-                locatedToken = actorSheet2Ids[4];
-              } else {
-                locatedActor = ui.activeWindow.object.id;
-              }
-
+              locatedActor = ui.activeWindow.object.uuid;
+            // Enricher is in Item Sheet
             } else if (targetLocation.classList.contains("editor-content")) {
-              const itemSheetIds = target.closest(".app.window-app.dnd5e.sheet.item").id.match(/ItemSheet5e-(Scene-(.{16}))?(-Token-(.{16}))?(Actor-(.{16}))?/);
-              if (itemSheetIds[2]) {
-                locatedScene = itemSheetIds[2];
-                locatedToken = itemSheetIds[4];
+              locatedActor = ui.activeWindow.object.actor.uuid;
+            }
+
+            const gameActor = await fromUuid(locatedActor);
+            const actorItem = gameActor.items.get(target.dataset.rollRelativeItemId) || gameActor.items.getName(target.dataset.rollRelativeItemName);
+            if (actorItem) {
+              if (gameActor.testUserPermission(game.user, "OWNER")) {
+                return actorItem.use();
               } else {
-                locatedActor = itemSheetIds[6];
+                return ui.notifications.warn(`You do not have ownership of ${gameActor.name}, and cannot use this item!`);
               }
             }
+            else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName} not found on Actor ${gameActor.name}!`);
 
-            if (locatedActor) {
-              const gameActor = game.actors.get(locatedActor);
-              const actorItem = gameActor.items.get(target.dataset.rollRelativeItemId) || gameActor.items.getName(target.dataset.rollRelativeItemName);
-              if (actorItem) {
-                if (gameActor.testUserPermission(game.user, "OWNER")) {
-                  return actorItem.use();
-                } else {
-                  return ui.notifications.warn(`You do not have ownership of ${gameActor.name}, and cannot use this item!`);
-                }
-              }
-              else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName} not found on Actor ${gameActor.name}!`);
-            } else {
-              const parentScene = game.scenes.get(locatedScene);
-              const sceneToken = parentScene.collections.tokens.get(locatedToken);
-              const tokenItem = sceneToken.delta.collections.items.get(target.dataset.rollRelativeItemId) || sceneToken.delta.collections.items.getName(target.dataset.rollRelativeItemName);
-              if (tokenItem) {
-                if (sceneToken.actor.testUserPermission(game.user, "OWNER")) {
-                  return tokenItem.use();
-                } else {
-                  return ui.notifications.warn(`You do not have ownership of ${sceneToken.name}, and cannot use this item!`);
-                }
-              }
-              else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName} not found on Token ${sceneToken.name} in Scene ${parentScene.name}!`);
-            }
-
-          // Name Method
+            // Name Method
           } else if (target.dataset.rollItemName) {
             return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
-          }
+          };
+
         default:
           return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
       }
