@@ -94,9 +94,11 @@ export default class ActionTemplate extends ItemDataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateAttack(source) {
-    source.attack ??= {};
-    if ( "attackBonus" in source ) source.attack.bonus = source.attackBonus;
-    if ( [0, "0", null].includes(source.attack.bonus) ) source.attack.bonus = "";
+    if ( "attackBonus" in source ) {
+      source.attack ??= {};
+      source.attack.bonus ??= source.attackBonus;
+    }
+    if ( [0, "0", null].includes(source.attack?.bonus) ) source.attack.bonus = "";
   }
 
   /* -------------------------------------------- */
