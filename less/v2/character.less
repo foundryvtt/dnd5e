@@ -101,6 +101,18 @@
       }
     }
 
+    /* Name */
+    .document-name {
+      color: var(--color-text-light-0);
+      font-size: var(--font-size-46);
+      text-shadow: 2px 2px 2px var(--color-shadow-dark);
+      font-family: var(--dnd5e-font-modesto);
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding: 0;
+      margin: 0;
+      transition: font-size 250ms ease;
+    }
 
     /* Name & Class */
     > .left {
@@ -117,19 +129,6 @@
       &.optional-ability-2 {
         padding-right: 14rem;
         .document-name { font-size: var(--font-size-36); }
-      }
-
-      /* Name */
-      .document-name {
-        color: var(--color-text-light-0);
-        font-size: var(--font-size-46);
-        text-shadow: 2px 2px 2px var(--color-shadow-dark);
-        font-family: var(--dnd5e-font-modesto);
-        font-weight: bold;
-        letter-spacing: 2px;
-        padding: 0;
-        margin: 0;
-        transition: font-size 250ms ease;
       }
 
       input.document-name {
@@ -1564,6 +1563,50 @@
     }
 
     .ability-scores { left: 0; }
+  }
+
+  /* ---------------------------------- */
+  /*  Limited Sheets                    */
+  /* ---------------------------------- */
+
+  &.limited {
+    min-width: 600px;
+    min-height: 600px;
+
+    .sheet-header {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem 1.5rem;
+
+      > * { flex: unset; }
+
+      .portrait {
+        width: 128px;
+        height: 128px;
+        border-radius: 100%;
+        border: 4px solid var(--dnd5e-color-gold);
+        box-shadow: 0 0 6px var(--dnd5e-color-black);
+        overflow: hidden;
+
+        > img {
+          border: none;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top;
+          background-color: var(--dnd5e-color-light-gray);
+          margin: 0;
+        }
+      }
+    }
+
+    .tab.biography > .bottom {
+      padding: .5rem .5rem 1.5rem;
+      .editor { min-height: unset; }
+    }
+
+    .main-content { display: unset; }
+    .sheet-body .tab-body .tab:not(.details) { padding: 0; }
   }
 
   /* ---------------------------------- */

@@ -73,7 +73,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     if ( data?.attribute === "attributes.hp" ) {
       const hp = this.actor.system.attributes.hp || {};
       data.value += (hp.temp || 0);
-      data.max = Math.max(0, data.effectiveMax);
+      data.max = Math.max(0, hp.effectiveMax);
     }
     return data;
   }

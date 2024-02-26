@@ -15,6 +15,7 @@ export const migrateWorld = async function() {
     try {
       const flags = { persistSourceMigration: false };
       const source = valid ? actor.toObject() : game.data.actors.find(a => a._id === actor.id);
+      const version = actor._stats.systemVersion;
       let updateData = migrateActorData(source, migrationData, flags);
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Actor document ${actor.name}`);
@@ -23,7 +24,7 @@ export const migrateWorld = async function() {
         }
         await actor.update(updateData, {enforceTypes: false, diff: valid && !flags.persistSourceMigration});
       }
-      if ( actor.effects && actor.items && foundry.utils.isNewerVersion("3.0.0", actor._stats.systemVersion) ) {
+      if ( actor.effects && actor.items && foundry.utils.isNewerVersion("3.0.3", version) ) {
         const deleteIds = _duplicatedEffects(actor);
         if ( deleteIds.size ) await actor.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds));
       }
@@ -164,13 +165,16 @@ export const migrateCompendium = async function(pack) {
     try {
       const flags = { persistSourceMigration: false };
       const source = doc.toObject();
-      switch (documentName) {
+      switch ( documentName ) {
         case "Actor":
           updateData = migrateActorData(source, migrationData, flags);
           if ( (documentName === "Actor") && source.effects && source.items
-            && foundry.utils.isNewerVersion("3.0.0", source._stats.systemVersion) ) {
+            && foundry.utils.isNewerVersion("3.0.3", source._stats.systemVersion) ) {
             const deleteIds = _duplicatedEffects(source);
-            if ( deleteIds.size ) await doc.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds));
+            if ( deleteIds.size ) {
+              if ( flags.persistSourceMigration ) source.effects = source.effects.filter(e => !deleteIds.has(e._id));
+              else await doc.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds));
+            }
           }
           break;
         case "Item":
@@ -560,7 +564,7 @@ function _duplicatedEffects(parent) {
       if ( !effect.transfer ) continue;
       const match = parent.effects.find(t => {
         const diff = foundry.utils.diffObject(t, effect);
-        return t.origin.endsWith(`Item.${item._id}`) && !("changes" in diff) && !deleteIds.has(t._id);
+        return t.origin?.endsWith(`Item.${item._id}`) && !("changes" in diff) && !deleteIds.has(t._id);
       });
       if ( match ) deleteIds.add(match._id);
     }
