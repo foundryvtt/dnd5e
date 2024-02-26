@@ -85,7 +85,7 @@
       text-underline-offset: 2px;
     }
 
-    a:is(.content-link, .inline-roll), .roll-link a {
+    a:is(.content-link, .inline-roll), :is(.roll-link, .reference-link) a {
       background: transparent;
       border: none;
       text-decoration: underline currentcolor;
@@ -111,7 +111,7 @@
       &:focus-visible { text-shadow: 0 0 8px var(--color-shadow-primary); }
     }
 
-    .roll-link a[data-action="request"] {
+    a.enricher-action {
       text-decoration: none;
 
       &::before {

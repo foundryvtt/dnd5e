@@ -12,7 +12,7 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool|status) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -25,6 +25,7 @@ export function registerCustomEnrichers() {
     enricher: enrichString
   });
 
+  document.body.addEventListener("click", applyAction);
   document.body.addEventListener("click", awardAction);
   document.body.addEventListener("click", rollAction);
 }
@@ -51,7 +52,6 @@ async function enrichString(match, options) {
     case "save": return enrichSave(config, label, options);
     case "embed": return enrichEmbed(config, label, options);
     case "reference": return enrichReference(config, label, options);
-    case "status": return enrichStatus(config, label);
   }
   return null;
 }
@@ -349,40 +349,6 @@ async function enrichDamage(config, label, options) {
 /* -------------------------------------------- */
 
 /**
- * Enrich an Status link to toggle a status on the selected token.
- * @param {string[]} config            Configuration data.
- * @param {string} [label]             Optional label to replace default text.
- * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.
- *
- * @example Toggle the diseased status:
- * ```[[/status diseased]]```
- * becomes
- * ```html
- * <a class="roll-action" data-type="item">
- *   <i class="fa-solid fa-dice-d20"></i> diseased
- * </a>
- * ```
- */
-async function enrichStatus(config, label) {
-
-  const givenStatus = config.values[0];
-  const statusName = givenStatus.charAt(0).toUpperCase() + givenStatus.slice(1);
-  if (!label) {
-    label = givenStatus;
-  }
-
-  const statusConfig = CONFIG.statusEffects.find(e => e.name === statusName);
-  if (!statusConfig || config.values.length !== 1) {
-    console.warn(`Status ${givenStatus} not found while enriching ${config._input}.`);
-    return config.input;
-  }
-
-  return createRollLink(label, { type: "status", toggleStatus: statusName, ...config });
-}
-
-/* -------------------------------------------- */
-
-/**
  * Embed an image page.
  * @param {object} config              Configuration data.
  * @param {string} [label]             Optional label to replace the default caption.
@@ -599,16 +565,21 @@ async function embedRollTable(config, label, options) {
  * ```
  */
 async function enrichReference(config, label, options) {
+  let key;
   let source;
+  let isCondition = "condition" in config;
   const type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
   if ( type ) {
-    const key = slugify(config[type]);
+    key = slugify(config[type]);
     source = foundry.utils.getProperty(CONFIG.DND5E, CONFIG.DND5E.ruleTypes[type].references)?.[key];
   } else if ( config.values.length ) {
-    const key = slugify(config.values.join(""));
-    for ( const { references } of Object.values(CONFIG.DND5E.ruleTypes) ) {
+    key = slugify(config.values.join(""));
+    for ( const [type, { references }] of Object.entries(CONFIG.DND5E.ruleTypes) ) {
       source = foundry.utils.getProperty(CONFIG.DND5E, references)[key];
-      if ( source ) break;
+      if ( source ) {
+        if ( type === "condition" ) isCondition = true;
+        break;
+      }
     }
   }
   if ( !source ) {
@@ -618,7 +589,20 @@ async function enrichReference(config, label, options) {
   const uuid = foundry.utils.getType(source) === "Object" ? source.reference : source;
   if ( !uuid ) return null;
   const doc = await fromUuid(uuid);
-  return doc.toAnchor({ name: label || doc.name });
+  const span = document.createElement("span");
+  span.classList.add("reference-link");
+  span.append(doc.toAnchor({ name: label || doc.name }));
+  if ( isCondition ) {
+    const apply = document.createElement("a");
+    apply.classList.add("enricher-action");
+    apply.dataset.action = "apply";
+    apply.dataset.status = key;
+    apply.dataset.tooltip = "EDITOR.DND5E.Inline.ApplyStatus";
+    apply.setAttribute("aria-label", game.i18n.localize(apply.dataset.tooltip));
+    apply.innerHTML = '<i class="fas fa-fw fa-reply-all fa-flip-horizontal"></i>';
+    span.append(apply);
+  }
+  return span;
 }
 
 /* -------------------------------------------- */
@@ -783,8 +767,9 @@ function createRollLink(label, dataset) {
   span.insertAdjacentElement("afterbegin", link);
 
   // Add chat request link for GMs
-  if ( game.user.isGM && (dataset.type !== "damage" && dataset.type !== "status") ) {
+  if ( game.user.isGM && (dataset.type !== "damage") ) {
     const gmLink = document.createElement("a");
+    gmLink.classList.add("enricher-action");
     gmLink.dataset.action = "request";
     gmLink.dataset.tooltip = "EDITOR.DND5E.Inline.RequestRoll";
     gmLink.setAttribute("aria-label", game.i18n.localize(gmLink.dataset.tooltip));
@@ -800,9 +785,25 @@ function createRollLink(label, dataset) {
 /* -------------------------------------------- */
 
 /**
+ * Toggle status effects on selected tokens.
+ * @param {PointerEvent} event  The triggering event.
+ * @returns {Promise<void>}
+ */
+async function applyAction(event) {
+  const target = event.target.closest('[data-action="apply"][data-status]');
+  const status = target?.dataset.status;
+  const effect = CONFIG.statusEffects.find(e => e.id === status);
+  if ( !effect ) return;
+  event.stopPropagation();
+  for ( const token of canvas.tokens.controlled ) await token.toggleEffect(effect);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Forward clicks on award requests to the Award application.
  * @param {Event} event  The click event triggering the action.
- * @returns {Promise|void}
+ * @returns {Promise<void>}
  */
 async function awardAction(event) {
   const target = event.target.closest('[data-action="awardRequest"]');
@@ -817,7 +818,7 @@ async function awardAction(event) {
 /**
  * Perform the provided roll action.
  * @param {Event} event  The click event triggering the action.
- * @returns {Promise|void}
+ * @returns {Promise}
  */
 async function rollAction(event) {
   const target = event.target.closest('.roll-link, [data-action="rollRequest"]');
@@ -858,11 +859,6 @@ async function rollAction(event) {
         case "tool":
           options.ability = ability;
           return await actor.rollToolCheck(tool, options);
-        case "status":
-          for (let token of canvas.tokens.controlled) {
-            token.toggleEffect(CONFIG.statusEffects.find(e => e.name === target.dataset.toggleStatus));
-          }
-          break;
         default:
           return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
       }
@@ -895,7 +891,7 @@ async function rollAction(event) {
  * Perform a damage roll.
  * @param {Event} event              The click event triggering the action.
  * @param {TokenDocument} [speaker]  Currently selected token, if one exists.
- * @returns {Promise|void}
+ * @returns {Promise<void>}
  */
 async function rollDamage(event, speaker) {
   const target = event.target.closest(".roll-link");
