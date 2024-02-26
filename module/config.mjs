@@ -1823,6 +1823,36 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for rest types.
+ *
+ * @typedef {object} RestConfiguration
+ * @property {Record<string, number>} duration  Duration of different rest variants in minutes.
+ */
+
+/**
+ * Types of rests.
+ * @enum {RestConfiguration}
+ */
+DND5E.restTypes = {
+  short: {
+    duration: {
+      normal: 60,
+      gritty: 480,
+      epic: 1
+    }
+  },
+  long: {
+    duration: {
+      normal: 480,
+      gritty: 10080,
+      epic: 60
+    }
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * The set of possible sensory perception types which an Actor may have.
  * @enum {string}
  */

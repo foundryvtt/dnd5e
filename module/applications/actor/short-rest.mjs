@@ -36,26 +36,29 @@ export default class ShortRestDialog extends Dialog {
 
   /** @inheritDoc */
   getData() {
-    const data = super.getData();
+    const context = super.getData();
+    context.isGroup = this.actor.type === "group";
 
-    // Determine Hit Dice
-    data.availableHD = this.actor.items.reduce((hd, item) => {
-      if ( item.type === "class" ) {
-        const {levels, hitDice, hitDiceUsed} = item.system;
-        const denom = hitDice ?? "d6";
-        const available = parseInt(levels ?? 1) - parseInt(hitDiceUsed ?? 0);
-        hd[denom] = denom in hd ? hd[denom] + available : available;
-      }
-      return hd;
-    }, {});
-    data.canRoll = this.actor.system.attributes.hd > 0;
-    data.denomination = this._denom;
+    if ( foundry.utils.hasProperty(this.actor, "system.attributes.hd") ) {
+      // Determine Hit Dice
+      context.availableHD = this.actor.items.reduce((hd, item) => {
+        if ( item.type === "class" ) {
+          const {levels, hitDice, hitDiceUsed} = item.system;
+          const denom = hitDice ?? "d6";
+          const available = parseInt(levels ?? 1) - parseInt(hitDiceUsed ?? 0);
+          hd[denom] = denom in hd ? hd[denom] + available : available;
+        }
+        return hd;
+      }, {});
+      context.canRoll = this.actor.system.attributes.hd > 0;
+      context.denomination = this._denom;
+    }
 
     // Determine rest type
     const variant = game.settings.get("dnd5e", "restVariant");
-    data.promptNewDay = variant !== "epic";     // It's never a new day when only resting 1 minute
-    data.newDay = false;                        // It may be a new day, but not by default
-    return data;
+    context.promptNewDay = variant !== "epic";     // It's never a new day when only resting 1 minute
+    context.newDay = false;                        // It may be a new day, but not by default
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -101,11 +104,8 @@ export default class ShortRestDialog extends Dialog {
             icon: '<i class="fas fa-bed"></i>',
             label: game.i18n.localize("DND5E.Rest"),
             callback: html => {
-              let newDay = false;
-              if ( game.settings.get("dnd5e", "restVariant") !== "epic" ) {
-                newDay = html.find('input[name="newDay"]')[0].checked;
-              }
-              resolve(newDay);
+              const formData = new FormDataExtended(html.find("form")[0]);
+              resolve(formData.object);
             }
           },
           cancel: {
