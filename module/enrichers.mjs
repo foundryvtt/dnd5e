@@ -557,11 +557,17 @@ async function embedRollTable(config, label, options) {
  * ```@Reference[condition=unconscious]{Label}```
  * becomes
  * ```html
- * <a class="content-link" draggable="true"
- *    data-uuid="Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd"
- *    data-type="JournalEntryPage" data-tooltip="Text Page">
- *   <i class="fas fa-file-lines"></i> Label
- * </a>
+ * <span class="reference-link">
+ *   <a class="content-link" draggable="true"
+ *      data-uuid="Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd"
+ *      data-type="JournalEntryPage" data-tooltip="Text Page">
+ *     <i class="fas fa-book-open"></i> Label
+ *   </a>
+ *   <a class="enricher-action" data-action="apply" data-status="unconscious"
+ *      data-tooltip="EDITOR.DND5E.Inline.ApplyStatus" aria-label="Apply Status to Selected Tokens">
+ *     <i class="fas fa-fw fa-reply-all fa-flip-horizontal"></i>
+ *   </a>
+ * </span>
  * ```
  */
 async function enrichReference(config, label, options) {
