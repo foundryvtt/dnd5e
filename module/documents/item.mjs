@@ -1984,13 +1984,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static _applyEffectToToken(effect, token) {
     if ( !game.user.isGM && !token.actor?.isOwner ) return false;
 
-    // Enable this effect if it is transferred from an item on the token's actor
-    const tokenIsOwner = effect.parent?.parent === token.actor;
-    if ( tokenIsOwner && effect.transfer ) return effect.update({ disabled: !effect.disabled });
-
     // Enable an existing effect on the target if it originated from this effect
     const existingEffect = token.actor?.effects.find(e => e.origin === effect.uuid);
-    if ( existingEffect ) return existingEffect.update({ disabled: !existingEffect.disabled });
+    if ( existingEffect ) {
+      return existingEffect.update({
+        ...effect.constructor.getInitialDuration(),
+        disabled: false
+      });
+    }
 
     // Otherwise, create a new effect on the target
     const effectData = foundry.utils.mergeObject(effect.toObject(), {
