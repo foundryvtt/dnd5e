@@ -68,13 +68,13 @@
 
                         {{#if @root.editable}}
                         {{!-- Editing --}}
-                        <a class="effect-control" data-action="edit" data-tooltip="DND5E.EffectEdit"
+                        <a class="effect-control item-control" data-action="edit" data-tooltip="DND5E.EffectEdit"
                            aria-label="{{ localize "DND5E.EffectEdit" }}">
                             <i class="fas fa-pen-to-square"></i>
                         </a>
 
                         {{!-- Deleting --}}
-                        <a class="effect-control" data-action="delete" data-tooltip="DND5E.EffectDelete"
+                        <a class="effect-control item-control" data-action="delete" data-tooltip="DND5E.EffectDelete"
                            aria-label="{{ localize "DND5E.EffectDelete" }}">
                             <i class="fas fa-trash"></i>
                         </a>
@@ -92,7 +92,7 @@
                         {{/if}}
 
                         {{!-- Context Menu --}}
-                        <a class="effect-control interface-only" data-context-menu
+                        <a class="effect-control item-control interface-only" data-context-menu
                            aria-label="{{ localize "DND5E.AdditionalControls" }}">
                             <i class="fas fa-ellipsis-vertical"></i>
                         </a>
