@@ -363,7 +363,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         name, reference,
         id: k,
         icon: img ?? icon,
-        disabled: existing ? disabled : !this.actor.statuses.has(k)
+        disabled: existing ? disabled : true
       });
       return arr;
     }, []);
@@ -438,6 +438,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       });
       if ( data.custom ) data.custom.split(";").forEach(v => values.push({ label: v.trim() }));
       if ( values.length ) traits[trait] = values;
+    }
+    // If petrified, display "All Damage" instead of all damage types separately
+    if ( this.document.hasConditionEffect("petrification") ) {
+      traits.dr = [{ label: game.i18n.localize("DND5E.DamageAll") }];
     }
     // Combine damage & condition immunities in play mode.
     if ( (this._mode === this.constructor.MODES.PLAY) && traits.ci ) {

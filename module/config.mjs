@@ -2413,14 +2413,20 @@ DND5E.consumableResources = [
 /* -------------------------------------------- */
 
 /**
- * Configuration data for system conditions.
- *
- * @typedef {object} ConditionConfiguration
- * @property {string} label        Localized label for the condition.
- * @property {string} [icon]       Icon used to represent the condition on the token.
+ * @typedef {object} _StatusEffectConfig5e
  * @property {string} [reference]  UUID of a journal entry with details on this condition.
  * @property {string} [special]    Set this condition as a special status effect under this name.
  * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
+ */
+
+/**
+ * Configuration data for system status effects.
+ * @typedef {StatusEffectConfig & _StatusEffectConfig5e} StatusEffectConfig5e
+ */
+
+/**
+ * Configuration data for system conditions.
+ * @typedef {Omit<StatusEffectConfig5e, "name" | "img"> & {label: string, icon: string}} ConditionConfiguration
  */
 
 /**
@@ -2446,7 +2452,7 @@ DND5E.conditionTypes = {
   },
   diseased: {
     label: "DND5E.ConDiseased",
-    icon: "icons/svg/biohazard.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/diseased.svg"
   },
   exhaustion: {
     label: "DND5E.ConExhaustion",
@@ -2537,15 +2543,17 @@ DND5E.conditionEffects = {
 /**
  * Extra status effects not specified in `conditionTypes`. If the ID matches a core-provided effect, then this
  * data will be merged into the core data.
- * @enum {object}
+ * @enum {Omit<StatusEffectConfig5e, "img"> & {icon: string}}
  */
 DND5E.statusEffects = {
   bleeding: {
+    name: "EFFECT.DND5E.StatusBleeding",
     icon: "systems/dnd5e/icons/svg/statuses/bleeding.svg"
   },
   burrowing: {
     name: "EFFECT.DND5E.StatusBurrowing",
-    icon: "icons/svg/cave.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
+    special: "BURROW"
   },
   concentrating: {
     name: "EFFECT.DND5E.StatusConcentrating",
@@ -2553,33 +2561,51 @@ DND5E.statusEffects = {
   },
   cursed: {
     name: "EFFECT.DND5E.StatusCursed",
-    icon: "icons/svg/sun.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/cursed.svg"
   },
   dead: {
-    icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
+    name: "EFFECT.DND5E.StatusDead",
+    icon: "systems/dnd5e/icons/svg/statuses/dead.svg",
+    special: "DEFEATED"
   },
   dodging: {
     name: "EFFECT.DND5E.StatusDodging",
     icon: "systems/dnd5e/icons/svg/statuses/dodging.svg"
   },
+  ethereal: {
+    name: "EFFECT.DND5E.StatusEthereal",
+    icon: "systems/dnd5e/icons/svg/statuses/ethereal.svg"
+  },
   flying: {
     name: "EFFECT.DND5E.StatusFlying",
-    icon: "icons/svg/wing.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/flying.svg",
+    special: "FLY"
   },
-  hidden: {
-    name: "EFFECT.DND5E.StatusHidden",
-    icon: "icons/svg/cowled.svg"
+  hiding: {
+    name: "EFFECT.DND5E.StatusHiding",
+    icon: "systems/dnd5e/icons/svg/statuses/hiding.svg"
+  },
+  hovering: {
+    name: "EFFECT.DND5E.StatusHovering",
+    icon: "systems/dnd5e/icons/svg/statuses/hovering.svg",
+    special: "HOVER"
   },
   marked: {
     name: "EFFECT.DND5E.StatusMarked",
     icon: "systems/dnd5e/icons/svg/statuses/marked.svg"
   },
-  silence: {
+  silenced: {
+    name: "EFFECT.DND5E.StatusSilenced",
     icon: "systems/dnd5e/icons/svg/statuses/silenced.svg"
   },
   sleeping: {
     name: "EFFECT.DND5E.StatusSleeping",
-    icon: "icons/svg/sleep.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
+    statuses: ["incapacitated", "prone", "unconscious"]
+  },
+  stable: {
+    name: "EFFECT.DND5E.StatusStable",
+    icon: "systems/dnd5e/icons/svg/statuses/stable.svg"
   },
   surprised: {
     name: "EFFECT.DND5E.StatusSurprised",
@@ -2587,7 +2613,7 @@ DND5E.statusEffects = {
   },
   transformed: {
     name: "EFFECT.DND5E.StatusTransformed",
-    icon: "icons/svg/pawprint.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/transformed.svg"
   }
 };
 
@@ -3330,7 +3356,7 @@ function patchConfig(key, fallbackKey, options) {
 
   Object.values(DND5E[key]).forEach(o => {
     if ( foundry.utils.getType(o) !== "Object" ) return;
-    o.toString = toString;
+    Object.defineProperty(o, "toString", {value: toString});
   });
 }
 
