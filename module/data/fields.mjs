@@ -13,7 +13,7 @@ export class AdvancementField extends foundry.data.fields.ObjectField {
    */
   getModelForType(type) {
     let config = CONFIG.DND5E.advancementTypes[type];
-    if ( config.prototype instanceof Advancement ) {
+    if ( config?.prototype instanceof Advancement ) {
       foundry.utils.logCompatibilityWarning(
         "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
         { since: "DnD5e 3.1", until: "DnD5e 3.3", once: true }
