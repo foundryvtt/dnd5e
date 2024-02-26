@@ -180,6 +180,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const e = CONFIG.Token.ringClass.effects;
     const effects = [];
     if ( this.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE) ) effects.push(e.INVISIBILITY);
+    else if ( this === game.combat?.combatant?.token ) effects.push(e.RING_GRADIENT);
     return effects;
   }
 
