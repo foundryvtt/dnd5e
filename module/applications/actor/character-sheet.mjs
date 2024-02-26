@@ -88,6 +88,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.isDepleted = ctx.isOnCooldown && ctx.hasUses && (uses.value > 0);
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
+      // Unidentified items
+      ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
+
       // Item grouping
       const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
       const group = this.actor.items.get(originId);

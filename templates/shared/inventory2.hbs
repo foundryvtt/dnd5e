@@ -157,7 +157,7 @@
                     {{!-- Item Price --}}
                     <div class="item-detail item-price {{#unless item.system.price.value}}empty{{/unless}}">
                         {{#if item.system.price.value}}
-                        {{ dnd5e-numberFormat item.system.price.value }}
+                        {{ifThen ctx.concealDetails "—" (dnd5e-numberFormat item.system.price.value)}}
                         <i class="currency {{ item.system.price.denomination }}"></i>
                         {{/if}}
                     </div>

@@ -386,8 +386,9 @@ export default class InventoryElement extends HTMLElement {
    * @returns {Promise<Item5e>}
    */
   async _onCreate(target) {
-    const dataset = (target.closest(".spellbook-header") ?? target).dataset;
-    const type = dataset.type;
+    const { type, ...dataset } = (target.closest(".spellbook-header") ?? target).dataset;
+    delete dataset.action;
+    delete dataset.tooltip;
 
     // Check to make sure the newly created class doesn't take player over level cap
     if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {

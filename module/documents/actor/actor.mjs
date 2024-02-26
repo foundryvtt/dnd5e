@@ -2538,10 +2538,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
       const value = movement[k];
-      if ( value ) html += `
+      if ( value || (k === "walk") ) html += `
         <div class="row">
           <i class="fas ${k}"></i>
-          <span class="value">${value} <span class="units">${units}</span></span>
+          <span class="value">${value ?? 0} <span class="units">${units}</span></span>
           <span class="label">${label}</span>
         </div>
       `;
@@ -2774,6 +2774,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
       d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
     }
+    foundry.utils.setProperty(d.prototypeToken, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
+      foundry.utils.getProperty(d.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
+      foundry.utils.getProperty(source.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
+      { inplace: false }
+    ));
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
@@ -2973,6 +2978,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
         tokenUpdate.texture[k] = prototypeTokenData.texture[k];
       }
+      foundry.utils.setProperty(tokenUpdate, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
+        foundry.utils.getProperty(tokenUpdate, "flags.dnd5e.tokenRing") ?? {},
+        foundry.utils.getProperty(prototypeTokenData, "flags.dnd5e.tokenRing") ?? {},
+        { inplace: false }
+      ));
       tokenUpdate.sight = prototypeTokenData.sight;
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
 
@@ -3000,15 +3010,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Get the Tokens which represent this actor
     if ( canvas.ready ) {
       const tokens = this.getActiveTokens(true);
-      const tokenData = await original.getTokenDocument();
+      const tokenData = (await original.getTokenDocument()).toObject();
       const tokenUpdates = tokens.map(t => {
-        const update = duplicate(tokenData);
+        const update = foundry.utils.deepClone(tokenData);
         update._id = t.id;
         delete update.x;
         delete update.y;
+        if ( !foundry.utils.getProperty(tokenData, "flags.dnd5e.tokenRing") ) {
+          foundry.utils.setProperty(update, "flags.dnd5e.tokenRing", {});
+        }
         return update;
       });
-      await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates);
+      await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates, { diff: false, recursive: false });
     }
     if ( isOriginalActor ) {
       await this.unsetFlag("dnd5e", "isPolymorphed");

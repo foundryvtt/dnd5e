@@ -154,7 +154,7 @@ export default class Award extends DialogMixin(FormApplication) {
 
   /**
    * Award currency, optionally transferring between one document and another.
-   * @param {object[]} amounts                 Amount of each denomination to transfer.
+   * @param {Record<string, number>} amounts   Amount of each denomination to transfer.
    * @param {(Actor5e|Item5e)[]} destinations  Documents that should receive the currency.
    * @param {object} [config={}]
    * @param {boolean} [config.each=false]      Award the specified amount to each player, rather than splitting it.
