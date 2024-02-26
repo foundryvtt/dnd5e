@@ -3,7 +3,7 @@ import { ModuleArtConfig } from "./module-art.mjs";
 /**
  * Register all of the system's settings.
  */
-export default function registerSystemSettings() {
+export function registerSystemSettings() {
   // Internal System Migration Version
   game.settings.register("dnd5e", "systemMigrationVersion", {
     name: "System Migration Version",
@@ -314,4 +314,40 @@ class PrimaryPartyData extends foundry.abstract.DataModel {
   static defineSchema() {
     return { actor: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseActor) };
   }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Register additional settings after modules have had a chance to initialize to give them a chance to modify choices.
+ */
+export function registerDeferredSettings() {
+  game.settings.register("dnd5e", "theme", {
+    name: "SETTINGS.DND5E.THEME.Name",
+    hint: "SETTINGS.DND5E.THEME.Hint",
+    scope: "client",
+    config: true,
+    default: "",
+    type: String,
+    choices: {
+      "": "SHEETS.DND5E.THEME.Automatic",
+      ...CONFIG.DND5E.themes
+    },
+    onChange: s => setTheme(document.body, s)
+  });
+
+  setTheme(document.body, game.settings.get("dnd5e", "theme"));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Set the theme on an element, removing the previous theme class in the process.
+ * @param {HTMLElement} element  Body or sheet element on which to set the theme data.
+ * @param {string} [theme=""]    Theme key to set.
+ */
+export function setTheme(element, theme="") {
+  element.dataset.theme = theme;
+  element.className = element.className.replace(/\bdnd5e-theme-\w+/g, "");
+  if ( theme ) element.classList.add(`dnd5e-theme-${theme.slugify()}`);
 }

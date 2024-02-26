@@ -1691,6 +1691,21 @@
   "Name": "Disable Dynamic Token Rings",
   "Hint": "Disabling the token ring animations can improve performance."
 },
+"SETTINGS.DND5E": {
+  "THEME": {
+    "Name": "Theme",
+    "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings. Can be overridden on a sheet-by-sheet basis."
+  }
+},
+
+"SHEETS.DND5E": {
+  "THEME": {
+    "Label": "Theme",
+    "Automatic": "Automatic",
+    "Dark": "Dark Mode",
+    "Light": "Light Mode"
+  }
+},
 
 "SOURCE.BOOK.SRD": "System Reference Document 5.1"
 }
