@@ -88,6 +88,19 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Initialize derived AC fields for Active Effects to target.
+   * @this {CharacterData|NPCData|VehicleData}
+   */
+  static prepareBaseArmorClass() {
+    const ac = this.attributes.ac;
+    ac.armor = 10;
+    ac.shield = ac.cover = 0;
+    ac.bonus = "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Adjust exhaustion level based on Active Effects.
    * @this {CharacterData|NPCData}
    */

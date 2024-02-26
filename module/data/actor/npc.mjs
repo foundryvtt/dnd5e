@@ -1,3 +1,4 @@
+import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import SourceField from "../shared/source-field.mjs";
@@ -203,10 +204,36 @@ export default class NPCData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
 
-  /**
-   * Prepare remaining NPC data.
-   */
+  /** @inheritdoc */
+  prepareBaseData() {
+    const cr = this.details.cr;
+
+    // Attuned items
+    this.attributes.attunement.value = this.parent.items.filter(i => {
+      return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
+    }).length;
+
+    // Kill Experience
+    this.details.xp ??= {};
+    this.details.xp.value = this.parent.getCRExp(cr);
+
+    // Proficiency
+    this.attributes.prof = Proficiency.calculateMod(Math.max(cr, 1));
+
+    // Spellcaster Level
+    if ( this.attributes.spellcasting && !Number.isNumeric(this.details.spellLevel) ) {
+      this.details.spellLevel = Math.max(cr, 1);
+    }
+
+    AttributesFields.prepareBaseArmorClass.call(this);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   prepareDerivedData() {
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);

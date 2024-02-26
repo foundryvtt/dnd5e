@@ -141,6 +141,16 @@ export default class VehicleData extends CommonTemplate {
       source.details.source = { custom: source.details.source };
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  prepareBaseData() {
+    this.attributes.prof = 0;
+    AttributesFields.prepareBaseArmorClass.call(this);
+  }
 }
 
 /* -------------------------------------------- */
