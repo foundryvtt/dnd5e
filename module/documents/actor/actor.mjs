@@ -2198,7 +2198,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       result = { dhd, dhp };
     }
 
-    if ( foundry.utils.getType(this.system.rest) === "function" ) return this.system.rest(config, result);
+    if ( (foundry.utils.getType(this.system.rest) === "function")
+      && (await this.system.rest(config, result) === false) ) return;
 
     let hitPointsRecovered = 0;
     let hitPointUpdates = {};

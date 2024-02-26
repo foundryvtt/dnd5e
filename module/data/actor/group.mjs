@@ -236,6 +236,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
    * Initiate a rest for all members of this group.
    * @param {RestConfiguration} config  Configuration data for the rest.
    * @param {RestResult} result         Results of the rest operation being built.
+   * @returns {boolean}                 Returns `false` to prevent regular rest process from completing.
    */
   async rest(config, result) {
     const results = new Map();
@@ -259,6 +260,8 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
      * @param {Map<Actor5e, RestResult|null>} result  Details on the rests completed.
      */
     Hooks.callAll("dnd5e.groupRestCompleted", this.parent, results);
+
+    return false;
   }
 
   /* -------------------------------------------- */
