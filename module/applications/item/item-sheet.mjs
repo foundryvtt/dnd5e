@@ -477,17 +477,29 @@ export default class ItemSheet5e extends ItemSheet {
   /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
-    if ( !this.editingDescriptionTarget ) this._accordions.forEach(accordion => accordion.bind(html[0]));
+    html = html[0];
+    if ( !this.editingDescriptionTarget ) this._accordions.forEach(accordion => accordion.bind(html));
     if ( this.isEditable ) {
-      html.find(".config-button").click(this._onConfigMenu.bind(this));
-      html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find(".advancement .item-control").click(event => {
-        const t = event.currentTarget;
-        if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
+      html.querySelectorAll("input").forEach(n => {
+        n.addEventListener("focus", event => event.currentTarget.select());
       });
-      html.find(".description-edit").click(event => {
-        this.editingDescriptionTarget = event.currentTarget.dataset.target;
-        this.render();
+      html.querySelectorAll(".config-button").forEach(n => {
+        n.addEventListener("click", this._onConfigMenu.bind(this));
+      });
+      html.querySelectorAll(".damage-control").forEach(n => {
+        n.addEventListener("click", this._onDamageControl.bind(this));
+      });
+      html.querySelectorAll(".advancement .item-control[data-action]").forEach(n => {
+        n.addEventListener("click", event => {
+          const t = event.currentTarget;
+          this._onAdvancementAction(t, t.dataset.action);
+        });
+      });
+      html.querySelectorAll(".description-edit").forEach(n => {
+        n.addEventListener("click", event => {
+          this.editingDescriptionTarget = event.currentTarget.dataset.target;
+          this.render();
+        });
       });
     }
 
