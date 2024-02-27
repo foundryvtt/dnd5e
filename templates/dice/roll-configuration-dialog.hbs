@@ -1,0 +1,24 @@
+<form class="dialog-content" autocomplete="off">
+    {{#each rolls}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Formula" }} {{#if type}}({{ type }}){{/if}}</label>
+        <input type="text" name="formula" value="{{ formula }}" disabled>
+    </div>
+    {{/each}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.RollSituationalBonus" }}</label>
+        <input type="text" name="situational" value="{{ situational }}" placeholder="{{ localize 'DND5E.RollExample' }}">
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.RollMode" }}</label>
+        <select name="rollMode">
+            {{ selectOptions rollModes selected=rollMode localize=true }}
+        </select>
+    </div>
+
+    <nav class="dialog-buttons">
+        {{#each buttons}}
+        <button type="submit" data-action="{{ @key }}">{{{ icon }}} {{{ label }}}</button>
+        {{/each}}
+    </nav>
+</form>

@@ -1937,90 +1937,142 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
-   * @param {string} [denomination]  The hit denomination of hit die to roll. Example "d8".
-   *                                 If no denomination is provided, the first available HD will be used
-   * @param {object} options         Additional options which modify the roll.
-   * @returns {Promise<Roll|null>}   The created Roll instance, or null if no hit die was rolled
+   * @typedef {BasicRollProcessConfiguration} HitDieRollProcessConfiguration
+   * @property {string} [denomination]      The hit denomination of hit die to roll with the leading letter (e.g. `d8`).
+   *                                        If no denomination is provided, the first available hit die will be used.
+   * @property {boolean} [modifyHitDice]    Should the actor's spent hit die count be updated?
+   * @property {boolean} [modifyHitPoints]  Should the actor's hit points be updated after the roll?
    */
-  async rollHitDie(denomination, options={}) {
+
+  /**
+   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
+   * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
+   * @returns {Promise<BasicRoll[]|null>}            The created Roll instance, or null if no hit die was rolled.
+   */
+  async rollHitDie(config={}, dialog={}, message={}) {
+    let formula;
+    let oldFormat = false;
+
+    // Handle deprecated calling pattern
+    if ( config && (foundry.utils.getType(config) !== "Object") ) {
+      foundry.utils.logCompatibilityWarning(
+        "Actor5e.rollHitDie now takes roll, dialog, and message config objects as parameters.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      oldFormat = true;
+      formula = dialog.formula;
+      config = { denomination: config, data: dialog.data };
+      message = { create: dialog.chatMessage, data: dialog.messageData };
+      dialog = {};
+    }
+
     // If no denomination was provided, choose the first available
     let cls = null;
-    if ( !denomination ) {
+    if ( !config.denomination ) {
       cls = this.itemTypes.class.find(c => c.system.hitDiceUsed < c.system.levels);
       if ( !cls ) return null;
-      denomination = cls.system.hitDice;
+      config.denomination = cls.system.hitDice;
     }
 
     // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
     else cls = this.items.find(i => {
-      return (i.system.hitDice === denomination) && ((i.system.hitDiceUsed || 0) < (i.system.levels || 1));
+      return (i.system.hitDice === config.denomination) && ((i.system.hitDiceUsed || 0) < (i.system.levels || 1));
     });
 
     // If no class is available, display an error notification
     if ( !cls ) {
-      ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: denomination}));
+      ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: config.denomination}));
       return null;
     }
 
-    // Prepare roll data
+    formula ??= `max(0, 1${config.denomination} + @abilities.con.mod)`;
+    const rollConfig = foundry.utils.deepClone(config);
+    rollConfig.origin = this;
+    rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
+
+    const dialogConfig = foundry.utils.mergeObject({
+      configure: false
+    }, dialog);
+
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
-    const rollConfig = foundry.utils.mergeObject({
-      formula: `max(0, 1${denomination} + @abilities.con.mod)`,
-      data: this.getRollData(),
-      chatMessage: true,
-      messageData: {
+    const messageConfig = foundry.utils.mergeObject({
+      rollMode: game.settings.get("core", "rollMode"),
+      data: {
         speaker: ChatMessage.getSpeaker({actor: this}),
         flavor,
         title: `${flavor}: ${this.name}`,
-        rollMode: game.settings.get("core", "rollMode"),
         "flags.dnd5e.roll": {type: "hitDie"}
       }
-    }, options);
+    }, message);
 
     /**
      * A hook event that fires before a hit die is rolled for an Actor.
      * @function dnd5e.preRollHitDie
      * @memberof hookEvents
-     * @param {Actor5e} actor               Actor for which the hit die is to be rolled.
-     * @param {object} config               Configuration data for the pending roll.
-     * @param {string} config.formula       Formula that will be rolled.
-     * @param {object} config.data          Data used when evaluating the roll.
-     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
-     * @param {object} config.messageData   Data used to create the chat message.
-     * @param {string} denomination         Size of hit die to be rolled.
-     * @returns {boolean}                   Explicitly return `false` to prevent hit die from being rolled.
+     * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
+     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
+     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
+     * @returns {boolean}                              Explicitly return `false` to prevent hit die from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollHitDie", this, rollConfig, denomination) === false ) return;
+    if ( Hooks.call("dnd5e.preRollHitDieV2", rollConfig, dialogConfig, messageConfig) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
-    if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
+    if ( "dnd5e.preRollHitDie" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preRollHitDie` hook has been deprecated and replaced with `dnd5e.preRollHitDieV2`.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      const hookData = {
+        formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
+        chatMessage: messageConfig.create, messageData: messageConfig.data
+      };
+      if ( Hooks.call("dnd5e.preRollHitDie", this, hookData, rollConfig.denomination) === false ) return;
+      rollConfig.rolls[0].parts[0] = hookData.formula;
+      rollConfig.rolls[0].data = hookData.data;
+      messageConfig.create = hookData.chatMessage;
+      messageConfig.data = hookData.messageData;
+    }
 
+    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
+    const returnValue = oldFormat && rolls?.length ? rolls[0] : rolls;
+
+    const updates = { actor: {}, class: {} };
+    if ( rollConfig.modifyHitDice !== false ) {
+      updates.class["system.hitDiceUsed"] = cls.system.hitDiceUsed + 1;
+    }
     const hp = this.system.attributes.hp;
-    const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, roll.total);
-    const updates = {
-      actor: {"system.attributes.hp.value": hp.value + dhp},
-      class: {"system.hitDiceUsed": cls.system.hitDiceUsed + 1}
-    };
+    if ( rollConfig.modifyHitPoints !== false ) {
+      const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, rolls.reduce((t, r) => t + r.total, 0));
+      updates.actor["system.attributes.hp.value"] = hp.value + dhp;
+    }
 
     /**
      * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
      * @function dnd5e.rollHitDie
      * @memberof hookEvents
      * @param {Actor5e} actor         Actor for which the hit die has been rolled.
-     * @param {Roll} roll             The resulting roll.
+     * @param {BasicRoll[]} rolls     The resulting rolls.
      * @param {object} updates
      * @param {object} updates.actor  Updates that will be applied to the actor.
      * @param {object} updates.class  Updates that will be applied to the class.
      * @returns {boolean}             Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
+    if ( Hooks.call("dnd5e.rollHitDieV2", this, rolls, updates) === false ) return returnValue;
+
+    if ( "dnd5e.rollHitDie" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.rollHitDie` hook has been deprecated and replaced with `dnd5e.rollHitDieV2`.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      if ( Hooks.call("dnd5e.rollHitDie", this, rolls[0], updates) === false ) return;
+    }
 
     // Perform updates
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
     if ( !foundry.utils.isEmpty(updates.class) ) await cls.update(updates.class);
 
-    return roll;
+    return returnValue;
   }
 
   /* -------------------------------------------- */
