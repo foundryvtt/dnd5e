@@ -1,4 +1,4 @@
-.dnd5e2 dnd5e-inventory {
+.dnd5e2 .inventory-element {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -567,7 +567,7 @@
 /*  Locked                            */
 /* ---------------------------------- */
 
-.dnd5e2 .locked dnd5e-inventory {
+.dnd5e2 .locked .inventory-element {
   .item :is(.item-quantity, .item-uses) input:is(:focus-visible, :hover) { box-shadow: none; }
 }
 
@@ -575,7 +575,7 @@
 /*  Edit Mode                         */
 /* ---------------------------------- */
 
-.dnd5e2 .editable dnd5e-inventory {
+.dnd5e2 .editable .inventory-element {
   .middle .attunement { padding-right: 0; }
   .items-section .pips { display: none; }
 }
