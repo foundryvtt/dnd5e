@@ -12,7 +12,7 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool|item) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>award|check|damage|item|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -49,8 +49,8 @@ async function enrichString(match, options) {
     case "skill":
     case "tool": return enrichCheck(config, label, options);
     case "save": return enrichSave(config, label, options);
-    case "item": return enrichItem(config, label);
     case "embed": return enrichEmbed(config, label, options);
+    case "item": return enrichItem(config, label);
     case "reference": return enrichReference(config, label, options);
   }
   return null;
@@ -639,15 +639,15 @@ async function enrichSave(config, label, options) {
 
 /**
  * Enrich an item use link to roll an item on the selected token.
- * @param {string[]} config            Configuration data.
- * @param {string} [label]             Optional label to replace default text.
- * @returns {Promise<HTMLElement|null>}         An HTML link if the item link could be built, otherwise null.
+ * @param {string[]} config              Configuration data.
+ * @param {string} [label]               Optional label to replace default text.
+ * @returns {Promise<HTMLElement|null>}  An HTML link if the item link could be built, otherwise null.
  *
  * @example Use an item from a Name:
  * ```[[/item Heavy Crossbow]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="item">
+ * <a class="roll-action" data-type="item" data-roll-item-name="Heavy Crossbow">
  *   <i class="fa-solid fa-dice-d20"></i> Heavy Crossbow
  * </a>
  * ```
@@ -674,7 +674,7 @@ async function enrichSave(config, label, options) {
  * ```[[/item .amUUCouL69OK1GZU]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="item">
+ * <a class="roll-action" data-type="item" data-roll-relative-item-id="amUUCouL69OK1GZU">
  *   <i class="fa-solid fa-dice-d20"></i> Bite
  * </a>
  * ```
@@ -682,26 +682,30 @@ async function enrichSave(config, label, options) {
 async function enrichItem(config, label) {
   const givenItem = config.values.join(" ");
   // If config is a UUID
-  const itemUuidMatch = givenItem.match(/^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/);
-  if (itemUuidMatch) {
+  const itemUuidMatch = givenItem.match(
+    /^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/
+  );
+  if ( itemUuidMatch ) {
     const ownerActor = itemUuidMatch.groups.actorid.trim();
-    if (!label) {
-      if ((await fromUuid(givenItem)) == null) {
+    if ( !label ) {
+      const item = await fromUuid(givenItem);
+      if ( !item ) {
         console.warn(`Item not found while enriching ${givenItem}.`);
         return null;
-      } else label = (await fromUuid(givenItem)).name;
+      }
+      label = item.name;
     }
     return createRollLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
   }
 
   // If config is a relative Id/Name
-  const relativeIdMatch = givenItem.match(/^\.\w{16}$/);  // .amUUCouL69OK1GZU
-  const copiedIdMatch = givenItem.match(/^\w{16}$/);      // amUUCouL69OK1GZU
-  const relativeNameMatch = givenItem.startsWith(".");    // .Bite
-  if (relativeIdMatch || copiedIdMatch || relativeNameMatch) {
+  const relativeIdMatch = givenItem.match(/^\.\w{16}$/);  // [[/item .amUUCouL69OK1GZU]]
+  const copiedIdMatch = givenItem.match(/^\w{16}$/);      // [[/item amUUCouL69OK1GZU]]
+  const relativeNameMatch = givenItem.startsWith(".");    // [[/item .Bite]]
+  if ( relativeIdMatch || copiedIdMatch || relativeNameMatch ) {
     const relativeId = relativeIdMatch ? givenItem.substr(1) : givenItem;
     const foundActor = game.actors.find(actor => actor.items.get(relativeId));
-    if (foundActor) {
+    if ( foundActor ) {
       const foundItem = foundActor.items.get(relativeId);
       if (!label) {
         label = foundItem.name;
@@ -718,9 +722,7 @@ async function enrichItem(config, label) {
   }
 
   // Finally, if config is an item name
-  if (!label) {
-    label = givenItem;
-  }
+  if ( !label ) label = givenItem;
   return createRollLink(label, { type: "item", rollItemName: givenItem });
 }
 
@@ -838,7 +840,7 @@ function createRollLink(label, dataset) {
   span.insertAdjacentElement("afterbegin", link);
 
   // Add chat request link for GMs
-  if ( game.user.isGM && (dataset.type !== "damage" && dataset.type !== "item") ) {
+  if ( game.user.isGM && (dataset.type !== "damage") && (dataset.type !== "item") ) {
     const gmLink = document.createElement("a");
     gmLink.dataset.action = "request";
     gmLink.dataset.tooltip = "EDITOR.DND5E.Inline.RequestRoll";
