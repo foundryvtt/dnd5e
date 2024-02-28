@@ -16,7 +16,7 @@
     position: absolute;
     pointer-events: none;
     inset: 0;
-    border: 1px solid var(--dnd5e-color-gold);
+    border: var(--dnd5e-border-gold);
     box-shadow: 0 0 20px var(--color-shadow-dark);
     border-radius: 5px;
   }
@@ -56,7 +56,7 @@
     }
   }
 
-  .window-content > form { margin-top: -30px; }
+  .window-content { margin-top: -30px; }
 
   /* ---------------------------------- */
   /*  Minimized                         */
@@ -1025,35 +1025,28 @@
       }
 
       &.texture {
+        --background-color: color-mix(in oklab, var(--dnd5e-color-parchment), white);
         background-blend-mode: color-burn;
 
-        &.type {
-          background: url("ui/official/pill-texture-type.webp") no-repeat right,
-            color-mix(in oklab, var(--dnd5e-color-parchment), white);
-        }
-
-        &.race {
-          background: url("ui/official/pill-texture-race.webp") no-repeat right,
-            color-mix(in oklab, var(--dnd5e-color-parchment), white);
-        }
-
+        &.type { background: url("ui/official/pill-texture-type.webp") no-repeat right, var(--background-color); }
+        &.race { background: url("ui/official/pill-texture-race.webp") no-repeat right, var(--background-color); }
         &.background {
-          background: url("ui/official/pill-texture-background.webp") no-repeat right,
-            color-mix(in oklab, var(--dnd5e-color-parchment), white);
+          background: url("ui/official/pill-texture-background.webp") no-repeat right, var(--background-color);
         }
 
         &::before {
+          --gradient-start: var(--dnd5e-background-card);
           --gradient-end: transparent;
           content: "";
           position: absolute;
           inset: 0;
-          background: linear-gradient(to right, var(--dnd5e-color-card) 35%, var(--gradient-end));
+          background: linear-gradient(to right, var(--gradient-start) 35%, var(--gradient-end));
           border-radius: 5px;
           mix-blend-mode: unset;
           filter: unset;
 
           @media (prefers-contrast: more) {
-            --gradient-end: color-mix(in oklab, var(--dnd5e-color-card), transparent 40%);
+            --gradient-end: color-mix(in oklab, var(--dnd5e-background-card), transparent 40%);
           }
         }
 

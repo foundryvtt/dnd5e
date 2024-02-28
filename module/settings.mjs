@@ -337,6 +337,9 @@ export function registerDeferredSettings() {
   });
 
   setTheme(document.body, game.settings.get("dnd5e", "theme"));
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    setTheme(document.body, game.settings.get("dnd5e", "theme"));
+  });
 }
 
 /* -------------------------------------------- */
@@ -347,6 +350,10 @@ export function registerDeferredSettings() {
  * @param {string} [theme=""]    Theme key to set.
  */
 export function setTheme(element, theme="") {
+  if ( !theme && (element === document.body) ) {
+    if ( matchMedia("(prefers-color-scheme: dark)").matches ) theme = "dark";
+    if ( matchMedia("(prefers-color-scheme: light)").matches ) theme = "light";
+  }
   element.dataset.theme = theme;
   element.className = element.className.replace(/\bdnd5e-theme-\w+/g, "");
   if ( theme ) element.classList.add(`dnd5e-theme-${theme.slugify()}`);

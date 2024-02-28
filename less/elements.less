@@ -61,9 +61,9 @@ item-list-controls search {
   display: flex;
   align-items: center;
   border-radius: 4px;
-  background: var(--dnd5e-color-card);
+  background: var(--dnd5e-background-card);
   box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-  border: 1px solid var(--dnd5e-color-gold);
+  border: var(--dnd5e-border-gold);
   padding-right: .25rem;
   position: relative;
 
@@ -94,14 +94,14 @@ item-list-controls search {
     inset: 100% auto auto -50px;
     border-radius: 3px;
     box-shadow: 0 3px 6px var(--dnd5e-shadow-45);
-    background: var(--dnd5e-color-card);
+    background: var(--dnd5e-background-card);
     min-width: 145px;
     z-index: 1;
 
     > li {
       padding: 0 .75rem;
 
-      &:hover { background: var(--dnd5e-color-parchment); }
+      &:hover { background: var(--dnd5e-background-parchment); }
       &:first-child { border-radius: 3px 3px 0 0; }
 
       &:last-child {
@@ -163,7 +163,6 @@ item-list-controls search {
 
   .controls {
     display: flex;
-    align-items: center;
     padding: .5rem 0;
     align-self: stretch;
     align-items: stretch;
