@@ -1404,27 +1404,32 @@ DND5E.currencies = {
   pp: {
     label: "DND5E.CurrencyPP",
     abbreviation: "DND5E.CurrencyAbbrPP",
-    conversion: 0.1
+    conversion: 0.1,
+    icon: "pp"
   },
   gp: {
     label: "DND5E.CurrencyGP",
     abbreviation: "DND5E.CurrencyAbbrGP",
-    conversion: 1
+    conversion: 1,
+    icon: "gp"
   },
   ep: {
     label: "DND5E.CurrencyEP",
     abbreviation: "DND5E.CurrencyAbbrEP",
-    conversion: 2
+    conversion: 2,
+    icon: "ep"
   },
   sp: {
     label: "DND5E.CurrencySP",
     abbreviation: "DND5E.CurrencyAbbrSP",
-    conversion: 10
+    conversion: 10,
+    icon: "sp"
   },
   cp: {
     label: "DND5E.CurrencyCP",
     abbreviation: "DND5E.CurrencyAbbrCP",
-    conversion: 100
+    conversion: 100,
+    icon: "cp"
   }
 };
 preLocalize("currencies", { keys: ["label", "abbreviation"] });
