@@ -480,23 +480,10 @@
     border-radius: 4px;
     box-shadow: 0 0 4px var(--dnd5e-shadow-45);
 
-    &:has(.drag-bar) { padding-inline-end: 18px; }
-
     .details {
       gap: 4px;
       input { height: unset; }
       input::placeholder { opacity: .5; }
-    }
-    .drag-bar {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      inset-block: 0;
-      inset-inline-end: 0;
-      inline-size: 16px;
-      cursor: grab;
-      color: var(--dnd5e-color-faint);
     }
     [data-action="delete-profile"] {
       --size: 26px;

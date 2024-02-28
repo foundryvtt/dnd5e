@@ -9,8 +9,9 @@ const {
  * Information for a single summoned creature.
  *
  * @typedef {object} SummonsProfile
+ * @property {string} _id    Unique ID for this profile.
  * @property {number} count  Number of creatures to summon.
- * @property {string} label  Display name for this profile if it differs from actor's name.
+ * @property {string} name   Display name for this profile if it differs from actor's name.
  * @property {string} uuid   UUID of the actor to summon.
  */
 
@@ -84,7 +85,6 @@ export default class ActionTemplate extends ItemDataModel {
           _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
           count: new NumberField({integer: true, min: 1}),
           name: new StringField(),
-          sort: new IntegerSortField(),
           uuid: new StringField()
         }))
       })
