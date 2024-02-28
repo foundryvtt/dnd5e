@@ -67,7 +67,7 @@
         </button>
         {{#each system.currency}}
         <label aria-label="{{ lookup (lookup @root.config.currencies @key) "label" }}">
-            <i class="currency {{ lookup (lookup @root.config.currencies @key) "abbreviation" }}"
+            <i class="currency {{ lookup (lookup @root.config.currencies @key) "icon" }}"
                data-tooltip="{{ lookup (lookup @root.config.currencies @key) "label" }}"></i>
             <input type="text" class="uninput" name="system.currency.{{ @key }}" value="{{ this }}"
                    data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*">
