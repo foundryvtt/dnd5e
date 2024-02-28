@@ -26,7 +26,7 @@
                     <i class="fa-solid fa-trash fa-fw" inert></i>
                 </button>
             </div>
-            <div class="drag-bar"><i class="fa-solid fa-grip-lines-vertical" inert"></i></div>
+            <div class="drag-bar"><i class="fa-solid fa-grip-lines-vertical" inert></i></div>
             <input type="hidden" name="profiles.{{ id }}._id" value="{{ id }}">
             <input type="hidden" name="profiles.{{ id }}.sort" value="{{ sort }}" data-dtype="Number">
             <input type="hidden" name="profiles.{{ id }}.uuid" value="{{ uuid }}">
@@ -36,8 +36,8 @@
         {{/each}}
     </ul>
 
-    <h3 class="form-header">{{ localize "DND5E.Summoning.ActorChanges.Label" }}</h3>
-    <p class="hint">{{ localize "DND5E.Summoning.ActorChanges.Hint" }}</p>
+    <h3 class="form-header">{{ localize "DND5E.Summoning.CreatureChanges.Label" }}</h3>
+    <p class="hint">{{ localize "DND5E.Summoning.CreatureChanges.Hint" }}</p>
     <div class="form-group">
         <label>{{ localize "DND5E.Summoning.Match.Proficiency.Label" }}</label>
         <input type="checkbox" name="match.proficiency" {{ checked summons.match.proficiency }}>

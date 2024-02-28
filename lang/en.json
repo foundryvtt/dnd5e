@@ -1369,42 +1369,42 @@
     "Configure": "Configure Summons",
     "Remove": "Remove Profile"
   },
-  "ActorChanges": {
-    "Label": "Actor Changes",
-    "Hint": "Changes that will be made to the actor being summoned. Any @ references used in the following formulas will be based on the summoner’s stats."
-  },
   "ArmorClass": {
     "Label": "Bonus Armor Class",
-    "Hint": "Bonus to the Armor Class set on the summoned actor added to what is specified in their statblock."
+    "Hint": "Bonus to the Armor Class set on the summoned creature added to what is specified in their statblock."
   },
   "Configuration": "Summoning Configuration",
+  "CreatureChanges": {
+    "Label": "Creature Changes",
+    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats."
+  },
   "DisplayName": "Display Name",
-  "DropHint": "Drop actor here",
+  "DropHint": "Drop creature here",
   "HitPoints": {
     "Label": "Bonus Hit Points",
-    "Hint": "Additional hit points added to the actor on top of what is specified in their statblock."
+    "Hint": "Additional hit points added to the creature on top of what is specified in their statblock."
   },
   "ItemChanges": {
     "Label": "Item Changes",
-    "Hint": "Changes made to items on the summoned actor."
+    "Hint": "Changes made to items on the summoned creature."
   },
   "Match": {
     "Attacks": {
       "Label": "Match Attacks",
-      "Hint": "Modify to hit values on the summoned actor’s attacks to match that of the summoner."
+      "Hint": "Modify to hit values on the summoned creature's attacks to match that of the summoner."
     },
     "Proficiency": {
       "Label": "Match Proficiency",
-      "Hint": "Modify the summoned actor’s proficiency to match that of the summoner."
+      "Hint": "Modify the summoned creature's proficiency to match that of the summoner."
     },
     "Saves": {
       "Label": "Match Saves",
-      "Hint": "Modify to saving throw DCs on the summoned actor’s abilities to match that of the summoner."
+      "Hint": "Modify to saving throw DCs on the summoned creature's abilities to match that of the summoner."
     }
   },
   "Profile": {
     "Label": "Summons Profiles",
-    "Empty": "Click above to add a profile or drop an actor to summon here."
+    "Empty": "Click above to add a profile or drop an creature to summon here."
   }
 },
 "DND5E.Supply": "Supply",

@@ -131,7 +131,7 @@ export default class SummoningConfig extends DocumentSheet {
     const data = TextEditor.getDragEventData(event);
 
     // Handle re-ordering of list
-    if ( data?.item && (data.item === this.document.uuid) ) return this._onSortEntry(event, data);
+    if ( data.item === this.document.uuid ) return this._onSortEntry(event, data);
 
     // Handle dropping linked items
     if ( data?.type !== "Actor" ) return;
