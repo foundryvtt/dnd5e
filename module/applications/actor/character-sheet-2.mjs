@@ -465,7 +465,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         if ( !total ) return null;
         const value = {
           label: `${CONFIG.DND5E.damageTypes[k]?.label ?? key} ${formatNumber(total, { signDisplay: "always" })}`,
-          color: total < 0 ? "maroon" : "green"
+          color: total > 0 ? "maroon" : "green"
         };
         const icons = value.icons = [];
         if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses);
