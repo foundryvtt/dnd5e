@@ -1,6 +1,7 @@
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
+import RollConfigField from "../shared/roll-config-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
@@ -81,7 +82,7 @@ export default class NPCData extends CreatureTemplate {
           tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
         }, {label: "DND5E.HitPoints"}),
-        death: new foundry.data.fields.SchemaField({
+        death: new RollConfigField({
           success: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),
