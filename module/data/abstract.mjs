@@ -341,9 +341,10 @@ export class ActorDataModel extends SystemDataModel {
    * @param {object} [options]
    * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
    *                                          either a die term or a flat term.
+   * @param {boolean} [options.extended]      Include extra values like "name" that aren't useful in formulas.
    * @returns {object}
    */
-  getRollData({ deterministic=false }={}) {
+  getRollData({ deterministic=false, extended=false }={}) {
     const data = { ...this };
     data.prof = new Proficiency(this.attributes?.prof ?? 0, 1);
     if ( deterministic ) data.prof = data.prof.flat;
@@ -497,11 +498,12 @@ export class ItemDataModel extends SystemDataModel {
    * @param {object} [options]
    * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
    *                                          either a die term or a flat term.
+   * @param {boolean} [options.extended]      Include extra values like "name" that aren't useful in formulas.
    * @returns {object}
    */
-  getRollData({ deterministic=false }={}) {
+  getRollData({ deterministic=false, extended }={}) {
     if ( !this.parent.actor ) return null;
-    const actorRollData = this.parent.actor.getRollData({ deterministic });
+    const actorRollData = this.parent.actor.getRollData({ deterministic, extended });
     const data = { ...actorRollData, item: { ...this } };
     return data;
   }

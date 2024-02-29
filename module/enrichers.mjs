@@ -10,7 +10,7 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>award|check|damage|lookup|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -47,6 +47,7 @@ async function enrichString(match, options) {
     case "check":
     case "skill":
     case "tool": return enrichCheck(config, label, options);
+    case "lookup": return enrichLookup(config, label, options);
     case "save": return enrichSave(config, label, options);
     case "embed": return enrichEmbed(config, label, options);
     case "reference": return enrichReference(config, label, options);
@@ -643,6 +644,47 @@ function wrapEmbeddedText(enriched, config, label, options) {
 }
 
 /* -------------------------------------------- */
+/*  Lookup Enricher                             */
+/* -------------------------------------------- */
+
+/**
+ * Enrich a property lookup.
+ * @param {object} config              Configuration data.
+ * @param {string} [fallback]          Optional fallback if the value couldn't be found.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML element if the lookup could be built, otherwise null.
+ */
+function enrichLookup(config, fallback, options) {
+  let keyPath = config.path;
+  let style = config.style;
+  for ( const value of config.values ) {
+    if ( value === "capitalize" ) style ??= "capitalize";
+    else if ( value === "lowercase" ) style ??= "lowercase";
+    else if ( value === "uppercase" ) style ??= "uppercase";
+    else if ( value.startsWith("@") ) keyPath ??= value;
+  }
+
+  if ( !keyPath ) {
+    console.warn(`Lookup path must be defined to enrich ${config._input}.`);
+    return null;
+  }
+
+  const data = options.relativeTo?.getRollData({ extended: true });
+  let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
+  if ( value && style ) {
+    if ( style === "capitalize" ) value = value.capitalize();
+    else if ( style === "lowercase" ) value = value.toLowerCase();
+    else if ( style === "uppercase" ) value = value.toUpperCase();
+  }
+
+  const span = document.createElement("span");
+  span.classList.add("lookup-value");
+  if ( !value ) span.classList.add("not-found");
+  span.innerText = value ?? keyPath;
+  return span;
+}
+
+/* -------------------------------------------- */
 /*  Reference Enricher                          */
 /* -------------------------------------------- */
 
@@ -711,6 +753,8 @@ async function enrichReference(config, label, options) {
   return span;
 }
 
+/* -------------------------------------------- */
+/*  Helpers                                     */
 /* -------------------------------------------- */
 
 /**
