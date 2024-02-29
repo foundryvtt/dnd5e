@@ -75,6 +75,7 @@ export default class AttributesFields {
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
       }),
       concentration: new RollConfigField({
+        ability: "con",
         limit: new foundry.data.fields.NumberField({integer: true, min: 0, initial: 1, label: "DND5E.AttrConcentration.Limit"})
       }, {label: "DND5E.Concentration"})
     };
