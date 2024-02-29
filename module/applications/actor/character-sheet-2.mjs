@@ -1,7 +1,7 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { setTheme } from "../../settings.mjs";
-import { simplifyBonus, staticID } from "../../utils.mjs";
+import { formatNumber, simplifyBonus, staticID } from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
 import Tabs5e from "../tabs.mjs";
@@ -455,6 +455,25 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       traits.di.push(...traits.ci);
       delete traits.ci;
     }
+
+    // Prepare damage modifications
+    const dm = this.actor.system.traits?.dm;
+    if ( dm ) {
+      const rollData = this.actor.getRollData({ deterministic: true });
+      const values = Object.entries(dm.amount).map(([k, v]) => {
+        const total = simplifyBonus(v, rollData);
+        if ( !total ) return null;
+        const value = {
+          label: `${CONFIG.DND5E.damageTypes[k]?.label ?? key} ${formatNumber(total, { signDisplay: "always" })}`,
+          color: total > 0 ? "maroon" : "green"
+        };
+        const icons = value.icons = [];
+        if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses);
+        return value;
+      }).filter(f => f);
+      if ( values.length ) traits.dm = values;
+    }
+
     return traits;
   }
 

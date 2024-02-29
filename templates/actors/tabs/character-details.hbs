@@ -56,7 +56,7 @@
         </h3>
         <ul class="pills">
             {{#each values}}
-            <li class="pill {{ ../color }}">
+            <li class="pill {{ ../color }} {{ color }}">
                 {{#each icons}}
                 {{#with (lookup (lookup @root.config.itemProperties this) "label") as |label|}}
                 <i class="{{ ../this }}" data-tooltip="{{ localize 'DND5E.DamagePhysicalBypassesShort' type=label }}"
@@ -250,6 +250,9 @@
 
         {{!-- Vulnerabilities --}}
         {{> "traits" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack" label="DND5E.Vulnerabilities" }}
+
+        {{!-- Damage Modification --}}
+        {{> "traits" values=traits.dm key="dm" icon="fas fa-heart-circle-plus" label="DND5E.DamageModification.Label" }}
 
         {{!-- Armor --}}
         {{> "traits" values=traits.armor key="armor" svg="checked-shield" label="DND5E.Armor" }}
