@@ -359,7 +359,13 @@ export default class ChatMessage5e extends ChatMessage {
   _enrichAttackTargets(html) {
     const attackRoll = this.rolls[0];
     const targets = this.getFlag("dnd5e", "targets");
-    if ( !game.user.isGM || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
+    const visibility = game.settings.get("dnd5e", "attackRollCheckVisibility");
+
+    const visibilityCondition = game.user.isGM ||
+    (visibility === "players" && !game.user.isGM) ||
+    (visibility === "players_hideac" && !game.user.isGM);
+
+    if (!visibilityCondition || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length) return;
     const tray = document.createElement("div");
     tray.classList.add("dnd5e2");
     tray.innerHTML = `
@@ -376,6 +382,7 @@ export default class ChatMessage5e extends ChatMessage {
     `;
     const evaluation = tray.querySelector("ul");
     evaluation.innerHTML = targets.map(({ name, ac, uuid }) => {
+      const displayedAC = (visibility === "players_hideac" && !game.user.isGM) ? "" : ac;
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
       return [`
         <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
@@ -383,7 +390,7 @@ export default class ChatMessage5e extends ChatMessage {
           <div class="name">${name}</div>
           <div class="ac">
             <i class="fas fa-shield-halved"></i>
-            <span>${ac}</span>
+            <span>${displayedAC}</span>
           </div>
         </li>
       `, isMiss];
