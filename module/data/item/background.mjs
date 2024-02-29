@@ -1,14 +1,16 @@
 import { ItemDataModel } from "../abstract.mjs";
 import { AdvancementField } from "../fields.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 
 /**
  * Data definition for Background items.
  * @mixes ItemDescriptionTemplate
+ * @mixes StartingEquipmentTemplate
  *
  * @property {object[]} advancement  Advancement objects for this background.
  */
-export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
+export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
@@ -22,6 +24,18 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     singleton: true
   }, {inplace: false}));
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch additional advancement entries.
+   * @type {object[]}
+   */
+  get supplementalAdvancement() {
+    return { 1: [this.startingEquipmentAdvancement] };
+  }
 
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */

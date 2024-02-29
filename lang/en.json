@@ -175,6 +175,7 @@
 "DND5E.AdvancementConfiguredComplete": "Fully Configured",
 "DND5E.AdvancementConfiguredIncomplete": "Not Configured",
 "DND5E.AdvancementControlCreate": "Create Advancement",
+"DND5E.AdvancementControlConfigure": "Configure {name}",
 "DND5E.AdvancementControlDelete": "Delete Advancement",
 "DND5E.AdvancementControlDuplicate": "Duplicate Advancement",
 "DND5E.AdvancementControlEdit": "Edit Advancement",
@@ -1373,6 +1374,25 @@
 "DND5E.SpellUnprepared": "Unprepared",
 "DND5E.SpellUsage": "Spell Usage",
 "DND5E.Spellbook": "Spellbook",
+"DND5E.StartingEquipment": {
+  "Title": "Starting Equipment",
+  "Choice": {
+    "Armor": "Choose Armor",
+    "Focus": "Choose Spellcasting Focus",
+    "Tool": "Choose Tool",
+    "Weapon": "Choose Weapon"
+  },
+  "IfProficient": "If Proficient",
+  "Operator": {
+    "AND": "All",
+    "OR": "One"
+  },
+  "SpecificItem": "Specific Item",
+  "Wealth": {
+    "Label": "Starting Wealth",
+    "Hint": "Formula in GP that can be used in place of starting equipment."
+  }
+},
 "DND5E.SubclassIdentifierHint": "This identifier should match the identifier on the parent class to ensure they are properly linked.",
 "DND5E.SubclassAssignmentError": "{class} already has a subclass. Remove the existing '{subclass}' subclass before adding a new one.",
 "DND5E.SubclassDuplicateError": "A subclass with the identifier {identifier} already exists on this actor.",
@@ -1589,6 +1609,7 @@
 "DND5E.WarnCantAddMultipleAdvancements": "It is not currently possible to add multiple items with advancements to an actor at the same time. Please add them individually.",
 "DND5E.WarnMultipleArmor": "More than one suit of armor equipped, AC calculation may be incorrect.",
 "DND5E.WarnMultipleShields": "More than one shield equipped, AC calculation may be incorrect.",
+"DND5E.WeaponCategory": "{category} Weapon",
 "DND5E.WeaponImprov": "Improvised",
 "DND5E.WeaponMartialM": "Martial Melee",
 "DND5E.WeaponMartialProficiency": "Martial",

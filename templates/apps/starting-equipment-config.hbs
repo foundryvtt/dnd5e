@@ -1,0 +1,19 @@
+<form autocomplete="off">{{log this}}
+    {{#*inline "list-level"}}
+    <ul>
+        {{#each entries}}
+        {{#if (or ../nested (eq group null))}}
+        <li>
+            {{type}}
+            {{#if children}}
+            {{> "list-level" entries=children nested=true}}
+            {{/if}}
+        </li>
+        {{/if}}
+        {{/each}}
+    </ul>
+    {{/inline}}
+
+    {{> "list-level" entries=startingEquipment}}
+ </form>
+ 
