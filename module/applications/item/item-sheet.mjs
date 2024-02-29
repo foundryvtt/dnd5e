@@ -1,3 +1,5 @@
+import * as Trait from "../../documents/actor/trait.mjs";
+import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
 import ActorMovementConfig from "../actor/movement-config.mjs";
 import ActorSensesConfig from "../actor/senses-config.mjs";
 import ActorTypeConfig from "../actor/type-config.mjs";
@@ -6,8 +8,7 @@ import AdvancementMigrationDialog from "../advancement/advancement-migration-dia
 import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
 import SourceConfig from "../source-config.mjs";
-import * as Trait from "../../documents/actor/trait.mjs";
-import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
+import SummoningConfig from "./summoning-config.mjs";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -560,6 +561,9 @@ export default class ItemSheet5e extends ItemSheet {
         break;
       case "source":
         app = new SourceConfig(this.item, { keyPath: "system.source" });
+        break;
+      case "summoning":
+        app = new SummoningConfig(this.item);
         break;
       case "type":
         app = new ActorTypeConfig(this.item, { keyPath: "system.type" });

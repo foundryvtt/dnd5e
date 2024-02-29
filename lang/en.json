@@ -135,6 +135,7 @@
 "DND5E.ActionRSAK": "Ranged Spell Attack",
 "DND5E.ActionRWAK": "Ranged Weapon Attack",
 "DND5E.ActionSave": "Saving Throw",
+"DND5E.ActionSumm": "Summon",
 "DND5E.ActionUtil": "Utility",
 "DND5E.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}",
 "DND5E.ActionWarningNoToken": "You must have one or more controlled Tokens in order to use this option.",
@@ -1378,6 +1379,51 @@
 "DND5E.SubclassMismatchWarn": "{name} subclass has no matching class with identifier '{class}'.",
 "DND5E.SubclassName": "Subclass Name",
 "DND5E.Subtype": "Subtype",
+"DND5E.Summoning": {
+  "Label": "Summoning",
+  "Action": {
+    "Add": "Add Profile",
+    "Configure": "Configure Summons",
+    "Remove": "Remove Profile"
+  },
+  "ArmorClass": {
+    "Label": "Bonus Armor Class",
+    "Hint": "Bonus to the Armor Class set on the summoned creature added to what is specified in their statblock."
+  },
+  "Configuration": "Summoning Configuration",
+  "CreatureChanges": {
+    "Label": "Creature Changes",
+    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats."
+  },
+  "DisplayName": "Display Name",
+  "DropHint": "Drop creature here",
+  "HitPoints": {
+    "Label": "Bonus Hit Points",
+    "Hint": "Additional hit points added to the creature on top of what is specified in their statblock."
+  },
+  "ItemChanges": {
+    "Label": "Item Changes",
+    "Hint": "Changes made to items on the summoned creature."
+  },
+  "Match": {
+    "Attacks": {
+      "Label": "Match Attacks",
+      "Hint": "Modify to hit values on the summoned creature's attacks to match that of the summoner."
+    },
+    "Proficiency": {
+      "Label": "Match Proficiency",
+      "Hint": "Modify the summoned creature's proficiency to match that of the summoner."
+    },
+    "Saves": {
+      "Label": "Match Saves",
+      "Hint": "Modify to saving throw DCs on the summoned creature's abilities to match that of the summoner."
+    }
+  },
+  "Profile": {
+    "Label": "Summons Profiles",
+    "Empty": "Click above to add a profile or drop an creature to summon here."
+  }
+},
 "DND5E.Supply": "Supply",
 "DND5E.Suppressed": "Suppressed",
 "DND5E.Target": "Target",
