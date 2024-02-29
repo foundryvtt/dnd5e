@@ -1404,27 +1404,32 @@ DND5E.currencies = {
   pp: {
     label: "DND5E.CurrencyPP",
     abbreviation: "DND5E.CurrencyAbbrPP",
-    conversion: 0.1
+    conversion: 0.1,
+    icon: "systems/dnd5e/icons/currency/platinum.webp"
   },
   gp: {
     label: "DND5E.CurrencyGP",
     abbreviation: "DND5E.CurrencyAbbrGP",
-    conversion: 1
+    conversion: 1,
+    icon: "systems/dnd5e/icons/currency/gold.webp"
   },
   ep: {
     label: "DND5E.CurrencyEP",
     abbreviation: "DND5E.CurrencyAbbrEP",
-    conversion: 2
+    conversion: 2,
+    icon: "systems/dnd5e/icons/currency/electrum.webp"
   },
   sp: {
     label: "DND5E.CurrencySP",
     abbreviation: "DND5E.CurrencyAbbrSP",
-    conversion: 10
+    conversion: 10,
+    icon: "systems/dnd5e/icons/currency/silver.webp"
   },
   cp: {
     label: "DND5E.CurrencyCP",
     abbreviation: "DND5E.CurrencyAbbrCP",
-    conversion: 100
+    conversion: 100,
+    icon: "systems/dnd5e/icons/currency/copper.webp"
   }
 };
 preLocalize("currencies", { keys: ["label", "abbreviation"] });
