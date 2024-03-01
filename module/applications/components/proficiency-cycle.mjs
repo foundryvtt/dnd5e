@@ -15,6 +15,66 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
     this._adoptStyleSheet(this._getStyleSheet());
     this.#value = Number(this.getAttribute("value") ?? 0);
   }
+
+  /** @inheritDoc */
+  static CSS = `
+    :host { display: inline-block; }
+    div { --_fill: var(--proficiency-cycle-enabled-color, var(--dnd5e-color-blue)); }
+    div:has(:disabled, :focus-visible) { --_fill: var(--proficiency-cycle-disabled-color, var(--dnd5e-color-gold)); }
+    div:not(:has(:disabled)) { cursor: pointer; }
+
+    div {
+      position: relative;
+      overflow: clip;
+      width: 100%;
+      aspect-ratio: 1;
+
+      &::before {
+        content: "";
+        position: absolute;
+        display: block;
+        inset: 3px;
+        border: 1px solid var(--_fill);
+        border-radius: 100%;
+      }
+
+      &:has([value="1"])::before { background: var(--_fill); }
+
+      &:has([value="0.5"], [value="2"])::after {
+        content: "";
+        position: absolute;
+        background: var(--_fill);  
+      }
+
+      &:has([value="0.5"])::after {
+        inset: 4px;
+        width: 4px;
+        aspect-ratio: 1 / 2;
+        border-radius: 100% 0 0 100%;
+      }
+
+      &:has([value="2"]) {
+        &::before {
+          inset: 1px;
+          border-width: 2px;
+        }
+
+        &::after {
+          inset: 5px;
+          border-radius: 100%;
+        }
+      }
+    }
+
+    input {
+      position: absolute;
+      inset-block-start: -100px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+  `;
+
   /**
    * Controller for removing listeners automatically.
    * @type {AbortController}
@@ -131,69 +191,6 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
   /** @inheritDoc */
   _adoptStyleSheet(sheet) {
     this.#shadowRoot.adoptedStyleSheets = [sheet];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _buildCSS(sheet) {
-    sheet.replaceSync(`
-      :host { display: inline-block; }
-      div { --_fill: var(--proficiency-cycle-enabled-color, var(--dnd5e-color-blue)); }
-      div:has(:disabled, :focus-visible) { --_fill: var(--proficiency-cycle-disabled-color, var(--dnd5e-color-gold)); }
-      div:not(:has(:disabled)) { cursor: pointer; }
-  
-      div {
-        position: relative;
-        overflow: clip;
-        width: 100%;
-        aspect-ratio: 1;
-  
-        &::before {
-          content: "";
-          position: absolute;
-          display: block;
-          inset: 3px;
-          border: 1px solid var(--_fill);
-          border-radius: 100%;
-        }
-  
-        &:has([value="1"])::before { background: var(--_fill); }
-  
-        &:has([value="0.5"], [value="2"])::after {
-          content: "";
-          position: absolute;
-          background: var(--_fill);  
-        }
-  
-        &:has([value="0.5"])::after {
-          inset: 4px;
-          width: 4px;
-          aspect-ratio: 1 / 2;
-          border-radius: 100% 0 0 100%;
-        }
-  
-        &:has([value="2"]) {
-          &::before {
-            inset: 1px;
-            border-width: 2px;
-          }
-  
-          &::after {
-            inset: 5px;
-            border-radius: 100%;
-          }
-        }
-      }
-  
-      input {
-        position: absolute;
-        inset-block-start: -100px;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-      }
-    `);
   }
 
   /* -------------------------------------------- */

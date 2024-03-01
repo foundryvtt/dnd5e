@@ -11,6 +11,18 @@ export default class IconElement extends AdoptedStyleSheetMixin(HTMLElement) {
     this.#shadowRoot = this.attachShadow({ mode: "closed" });
   }
 
+  /** @inheritDoc */
+  static CSS = `
+    :host {
+      display: contents;
+    }
+    svg {
+      fill: var(--icon-fill, #000);
+      width: var(--icon-width, var(--icon-size, 1em));
+      height: var(--icon-height, var(--icon-size, 1em));
+    }
+  `;
+
   /**
    * Cached SVG files by SRC.
    * @type {Map<string, SVGElement|Promise<SVGElement>>}
@@ -48,22 +60,6 @@ export default class IconElement extends AdoptedStyleSheetMixin(HTMLElement) {
   /** @inheritDoc */
   _adoptStyleSheet(sheet) {
     this.#shadowRoot.adoptedStyleSheets = [sheet];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _buildCSS(sheet) {
-    sheet.replaceSync(`
-      :host {
-        display: contents;
-      }
-      svg {
-        fill: var(--icon-fill, #000);
-        width: var(--icon-width, var(--icon-size, 1em));
-        height: var(--icon-height, var(--icon-size, 1em));
-      }
-    `);
   }
 
   /* -------------------------------------------- */

@@ -11,7 +11,13 @@ export default function AdoptedStyleSheetMixin(Base) {
      * @type {WeakMap<WeakKey<Document>, CSSStyleSheet>}
      * @protected
      */
-    static _stylesheets;
+    static _stylesheets = new WeakMap();
+
+    /**
+     * The CSS content for this element.
+     * @type {string}
+     */
+    static CSS = "";
 
     /* -------------------------------------------- */
 
@@ -27,11 +33,10 @@ export default function AdoptedStyleSheetMixin(Base) {
      * @protected
      */
     _getStyleSheet() {
-      this.constructor._stylesheets ??= new WeakMap();
       let sheet = this.constructor._stylesheets.get(this.ownerDocument);
       if ( !sheet ) {
         sheet = new this.ownerDocument.defaultView.CSSStyleSheet();
-        this._buildCSS(sheet);
+        sheet.replaceSync(this.constructor.CSS);
         this.constructor._stylesheets.set(this.ownerDocument, sheet);
       }
       return sheet;
@@ -45,14 +50,5 @@ export default function AdoptedStyleSheetMixin(Base) {
      * @abstract
      */
     _adoptStyleSheet(sheet) {}
-
-    /* -------------------------------------------- */
-
-    /**
-     * Build the element's custom CSS.
-     * @param {CSSStyleSheet} sheet  The stylesheet instance to append the CSS to.
-     * @abstract
-     */
-    _buildCSS(sheet) {}
   }
 }
