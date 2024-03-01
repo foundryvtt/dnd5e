@@ -56,9 +56,9 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( typeof effectData === "string" ) effectData = CONFIG.statusEffects.find(e => e.id === effectData);
     if ( foundry.utils.getType(effectData) !== "Object" ) return;
     const createData = {
-      ...foundry.utils.deepClone(effectData),
-      _id: staticID(`dnd5e${effectData.id}`),
       name: game.i18n.localize(effectData.name),
+      _id: staticID(`dnd5e${effectData.id}`),
+      ...foundry.utils.deepClone(effectData),
       statuses: [effectData.id, ...effectData.statuses ?? []]
     };
     if ( !("description" in createData) && effectData.reference ) {
@@ -354,7 +354,53 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
-  /*  Exhaustion Handling                         */
+  /*  Concentration Handling                      */
+  /* -------------------------------------------- */
+
+  /**
+   * Create an effect for concentration on an actor, optionally replacing an existing effect.
+   * @param {Item5e} item                   The item on which to begin concentrating.
+   * @param {ActiveEffect5e} [existing]     An existing effect to replace.
+   * @returns {Promise<ActiveEffect5e}      A promise that resolves to the created effect.
+   */
+  static async createConcentrationEffect(item, existing=null) {
+    if ( !item.isEmbedded || !item.requiresConcentration ) {
+      throw new Error("You may not begin concentration on this item!");
+    }
+
+    const actor = item.actor;
+
+    const baseData = {
+      name: `${game.i18n.localize("DND5E.Concentration")}: ${item.name}`,
+      description: game.i18n.format("DND5E.ConcentratingOn", {
+        name: item.name,
+        type: game.i18n.localize(`TYPES.Item.${item.type}`)
+      }),
+      duration: {seconds: 60}, // TODO: get duration in seconds from item.
+      "flags.dnd5e.itemData": actor.items.has(item.id) ? item.id : item.toObject()
+    };
+
+    const effects = actor.concentration?.effects ?? new Set();
+
+    existing ??= effects.find(e => {
+      const d = e.flags.dnd5e?.itemData ?? {};
+      return (d === item.id) || (d._id === item.id);
+    });
+
+    // Replace an existing effect if already concentrating on this item or if another effect has been chosen.
+    if (existing) {
+      const effectData = foundry.utils.mergeObject(existing.toObject(), baseData);
+      await existing.delete();
+      return ActiveEffect5e.create(effectData, { parent: item.actor });
+    }
+
+    const effectData = (await ActiveEffect5e.fromStatusEffect(CONFIG.specialStatusEffects.CONCENTRATING)).toObject();
+    foundry.utils.mergeObject(effectData, baseData);
+    return ActiveEffect5e.create(effectData, { parent: item.actor });
+  }
+
+  /* -------------------------------------------- */
+  /*  Exhaustion and Concentration Handling       */
   /* -------------------------------------------- */
 
   /**
@@ -402,21 +448,60 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
-   * Implement custom exhaustion cycling when interacting with the Token HUD.
+   * Implement custom exhaustion cycling when interacting with the Token HUD,
+   * and management of which items the actor is concentrating on.
    * @param {PointerEvent} event        The triggering event.
    */
-  static onClickTokenHUD(event) {
+  static async onClickTokenHUD(event) {
     const { target } = event;
-    if ( !target.classList?.contains("effect-control") || (target.dataset?.statusId !== "exhaustion") ) return;
+    if ( !target.classList?.contains("effect-control") ) return;
+
     const actor = canvas.hud.token.object?.actor;
-    let level = foundry.utils.getProperty(actor ?? {}, "system.attributes.exhaustion");
-    if ( !Number.isFinite(level) ) return;
-    event.preventDefault();
-    event.stopPropagation();
-    if ( event.button === 0 ) level++;
-    else level--;
-    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
-    actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, max) });
+    if ( !actor ) return;
+    if ( target.dataset?.statusId === "exhaustion" ) {
+      let level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
+      if ( !Number.isFinite(level) ) return;
+      event.preventDefault();
+      event.stopPropagation();
+      if ( event.button === 0 ) level++;
+      else level--;
+      const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
+      actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, max) });
+    } else if ( target.dataset?.statusId === "concentrating" ) {
+      const effects = actor.concentration?.effects ?? new Set();
+      if ( effects.size < 1 ) return;
+      event.preventDefault();
+      event.stopPropagation();
+      if ( effects.size === 1 ) {
+        effects.first().delete();
+        return;
+      }
+      const choices = effects.reduce((acc, effect) => {
+        const data = effect.flags.dnd5e?.itemData;
+        acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
+        return acc;
+      }, {});
+      const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
+      const content = `
+      <form class="dnd5e">
+        <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
+        <div class="form-group">
+          <label>${game.i18n.localize("DND5E.Source")}</label>
+          <div class="form-fields">
+            <select name="source">${options}</select>
+          </div>
+        </div>
+      </form>`;
+      const source = await Dialog.prompt({
+        content: content,
+        callback: ([html]) => new FormDataExtended(html.querySelector("FORM")).object.source,
+        rejectClose: false,
+        title: game.i18n.localize("DND5E.Concentration"),
+        label: game.i18n.localize("DND5E.Confirm")
+      });
+      if ( !source ) return;
+      actor.effects.get(source).delete();
+    }
   }
 
   /* -------------------------------------------- */
