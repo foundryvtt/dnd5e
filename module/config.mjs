@@ -2598,7 +2598,8 @@ DND5E.statusEffects = {
   },
   concentrating: {
     name: "EFFECT.DND5E.StatusConcentrating",
-    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
+    special: "CONCENTRATING"
   },
   cursed: {
     name: "EFFECT.DND5E.StatusCursed",
