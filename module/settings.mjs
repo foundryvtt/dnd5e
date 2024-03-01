@@ -354,7 +354,10 @@ export function setTheme(element, theme="") {
     if ( matchMedia("(prefers-color-scheme: dark)").matches ) theme = "dark";
     if ( matchMedia("(prefers-color-scheme: light)").matches ) theme = "light";
   }
-  element.dataset.theme = theme;
   element.className = element.className.replace(/\bdnd5e-theme-\w+/g, "");
-  if ( theme ) element.classList.add(`dnd5e-theme-${theme.slugify()}`);
+  if ( theme ) {
+    element.classList.add(`dnd5e-theme-${theme.slugify()}`);
+    element.dataset.theme = theme;
+  }
+  else delete element.dataset.theme;
 }
