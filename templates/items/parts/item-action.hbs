@@ -123,8 +123,12 @@
     <div class="form-fields">
         <a class="config-button" data-action="summoning">
             <i class="fa-solid fa-gear" aria-hidden="true"></i>
-            {{ localize 'DND5E.Summoning.Action.Configure' }}
+            {{ localize "DND5E.Summoning.Action.Configure" }}
         </a>
+        <label class="checkbox" data-tooltip="DND5E.Summoning.Prompt.Hint">
+            <input type="checkbox" name="system.summons.prompt" {{ checked system.summons.prompt }}>
+            {{ localize "DND5E.Summoning.Prompt.Label" }}
+        </label>
     </div>
 </div>
 {{/if}}

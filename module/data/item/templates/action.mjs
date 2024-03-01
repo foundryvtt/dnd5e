@@ -2,7 +2,7 @@ import { ItemDataModel } from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, IntegerSortField, NumberField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -41,6 +41,7 @@ const {
  * @property {boolean} summons.match.proficiency  Match proficiency on summoned actor to the summoner.
  * @property {boolean} summons.match.saves        Match the save DC on summoned actor's abilities to the summoner.
  * @property {SummonsProfile[]} summons.profiles  Information on creatures that can be summoned.
+ * @property {boolean} summons.prompt             Should the player be prompted to place the summons?
  * @mixin
  */
 export default class ActionTemplate extends ItemDataModel {
@@ -86,7 +87,10 @@ export default class ActionTemplate extends ItemDataModel {
           count: new NumberField({integer: true, min: 1}),
           name: new StringField(),
           uuid: new StringField()
-        }))
+        })),
+        prompt: new BooleanField({
+          initial: true, label: "DND5E.Summoning.Prompt.Label", hint: "DND5E.Summoning.Prompt.Hint"
+        })
       })
     };
   }
@@ -267,6 +271,16 @@ export default class ActionTemplate extends ItemDataModel {
    */
   get hasSave() {
     return this.actionType && !!(this.save.ability && this.save.scaling);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this Item implement summoning as part of its usage?
+   * @type {boolean}
+   */
+  get hasSummoning() {
+    return (this.actionType === "summ") && !!this.summons.profiles.length;
   }
 
   /* -------------------------------------------- */

@@ -879,10 +879,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *
    * @typedef {object} ItemUseConfiguration
    * @property {boolean} createMeasuredTemplate     Should this item create a template?
+   * @property {boolean} createSummons              Should this item create a summoned creature?
    * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
    * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
+   * @property {string|null} summonsProfile         ID of the summoning profile to use.
    * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
    */
 
@@ -969,6 +971,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     if ( item.type === "spell" ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
+    // Store selected summons type in flag
+    if ( config.createSummons && config.summonsProfile ) {
+      foundry.utils.setProperty(options.flags, "dnd5e.use.summonsProfile", config.summonsProfile);
+    }
+
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
      * @function dnd5e.preItemUsageConsumption
@@ -1025,6 +1032,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }
     }
 
+    // Initiate summons creation
+    let summoned;
+    if ( config.createSummons ) {
+      console.log("TODO: Create Summons", config.summonsProfile);
+    }
+
     /**
      * A hook event that fires when an item is used, after the measured template has been created if one is needed.
      * @function dnd5e.useItem
@@ -1033,8 +1046,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @param {ItemUseConfiguration} config                Configuration data for the roll.
      * @param {ItemUseOptions} options                     Additional options for configuring item usage.
      * @param {MeasuredTemplateDocument[]|null} templates  The measured templates if they were created.
+     * @param {TokenDocument5e[]|null} summoned            Summoned tokens if they were created.
      */
-    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null);
+    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null, summoned ?? null);
 
     return cardData;
   }
@@ -1044,7 +1058,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {ItemUseConfiguration}  Configuration data for the roll.
    */
   _getUsageConfig() {
-    const { consume, uses, target, level, preparation } = this.system;
+    const { consume, uses, summons, target, level, preparation } = this.system;
 
     const config = {
       consumeSpellSlot: null,
@@ -1052,7 +1066,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       consumeUsage: null,
       consumeResource: null,
       resourceAmount: null,
-      createMeasuredTemplate: null
+      createMeasuredTemplate: null,
+      createSummons: null,
+      summonsProfile: null
     };
 
     const scaling = this.usageScaling;
@@ -1069,6 +1085,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( consume.target === this.id ) config.consumeUsage = null;
     }
     if ( game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = target.prompt;
+    if ( this.system.hasSummoning ) {
+      config.createSummons = summons.prompt;
+      config.summonsProfile = this.system.summons.profiles[0]._id;
+    }
 
     return config;
   }
@@ -1293,7 +1313,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Render the chat card template
     const token = this.actor.token;
     const hasButtons = this.hasAttack || this.hasDamage || this.isVersatile || this.hasSave || this.system.formula
-      || this.hasAreaTarget || (this.type === "tool") || this.hasAbilityCheck;
+      || this.hasAreaTarget || (this.type === "tool") || this.hasAbilityCheck || this.system.hasSummoning;
     const templateData = {
       hasButtons,
       actor: this.actor,
@@ -1909,6 +1929,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       // Handle different actions
       let targets;
       switch ( action ) {
+        case "abilityCheck":
+          targets = this._getChatCardTargets(card);
+          for ( let token of targets ) {
+            const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
+            await token.actor.rollAbilityTest(button.dataset.ability, { event, speaker });
+          }
+          break;
         case "applyEffect":
           const effect = await fromUuid(button.closest("[data-uuid]")?.dataset.uuid);
           let warn = false;
@@ -1932,19 +1959,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           });
           break;
         case "formula":
-          await item.rollFormula({event, spellLevel}); break;
-        case "save":
-          targets = this._getChatCardTargets(card);
-          for ( let token of targets ) {
-            const dc = parseInt(button.dataset.dc);
-            const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
-            await token.actor.rollAbilitySave(button.dataset.ability, {
-              event, speaker, targetValue: Number.isFinite(dc) ? dc : undefined
-            });
-          }
+          await item.rollFormula({event, spellLevel});
           break;
-        case "toolCheck":
-          await item.rollToolCheck({event}); break;
         case "placeTemplate":
           try {
             await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
@@ -1956,12 +1972,21 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             });
           }
           break;
-        case "abilityCheck":
+        case "save":
           targets = this._getChatCardTargets(card);
           for ( let token of targets ) {
+            const dc = parseInt(button.dataset.dc);
             const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
-            await token.actor.rollAbilityTest(button.dataset.ability, { event, speaker });
+            await token.actor.rollAbilitySave(button.dataset.ability, {
+              event, speaker, targetValue: Number.isFinite(dc) ? dc : undefined
+            });
           }
+          break;
+        case "summon":
+          await this._onChatCardSummon(message, item);
+          break;
+        case "toolCheck":
+          await item.rollToolCheck({event});
           break;
       }
 
@@ -2001,6 +2026,42 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       origin: effect.uuid
     });
     return ActiveEffect.implementation.create(effectData, { parent: token.actor });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle summoning from a chat card.
+   * @param {ChatMessage5e} message  The message that was clicked.
+   * @param {Item5e} item            The item from which to summon.
+   */
+  static async _onChatCardSummon(message, item) {
+    let summonsProfile = message.getFlag("dnd5e", "use.summonsProfile");
+
+    // No profile specified and only one profile on item, use that one
+    if ( !summonsProfile && (item.system.summons.profiles.length === 1) ) {
+      summonsProfile = item.system.summons.profiles[0]._id;
+    }
+
+    // Otherwise show the item use dialog to get the profile
+    else if ( !summonsProfile ) {
+      const config = await AbilityUseDialog.create(item, {
+        consumeResource: null,
+        consumeSpellSlot: null,
+        consumeUsage: null,
+        createMeasuredTemplate: null,
+        createSummons: true
+      }, {
+        button: {
+          icon: '<i class="fa-solid fa-spaghetti-monster-flying"></i>',
+          label: game.i18n.localize("DND5E.Summoning.Action.Summon")
+        }
+      });
+      if ( !config?.summonsProfile ) return;
+      summonsProfile = config.summonsProfile;
+    }
+
+    console.log("TODO: Create Summons", summonsProfile);
   }
 
   /* -------------------------------------------- */
