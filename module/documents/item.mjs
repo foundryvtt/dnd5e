@@ -1089,8 +1089,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.requiresConcentration ) {
       config.beginConcentration = true;
       const items = this.actor.concentration.items;
-      const limit = this.actor.system.attributes?.concentration.limit ?? 0;
-      if ( limit <= items.size ) config.endConcentration = items.has(this.id) ? this.id : items.first().id;
+      const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
+      if ( limit && (limit <= items.size) ) config.endConcentration = items.has(this.id) ? this.id : items.first().id;
     }
 
     return config;
