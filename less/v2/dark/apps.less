@@ -12,6 +12,8 @@
     --dnd5e-background-card: var(--dnd5e-color-blue-gray-2);
     --dnd5e-background-parchment: var(--dnd5e-color-blue-gray-2);
     --dnd5e-border-gold: 1px solid var(--dnd5e-color-blue-gray-1);
+    --filigree-background-color: var(--dnd5e-color-blue-gray-2);
+    --filigree-border-color: var(--dnd5e-color-blue-gray-3);
 
     select option { background: var(--dnd5e-color-blue-gray-2); }
     .meter { --meter-background: var(--dnd5e-color-dark-gray); }
@@ -22,11 +24,7 @@
       .header { background: linear-gradient(to right, #491d25, #311b1f); }
     }
 
-    filigree-box {
-      --filigree-background-color: var(--dnd5e-color-blue-gray-2);
-      --filigree-border-color: var(--dnd5e-color-blue-gray-3);
-      > h3 > span { color: var(--dnd5e-color-gold); }
-    }
+    filigree-box > h3 > span { color: var(--dnd5e-color-gold); }
 
     h3.icon {
       color: var(--color-text-light-6);
