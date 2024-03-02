@@ -368,7 +368,7 @@ export default class AbilityUseDialog extends Dialog {
     if ( data.concentration.show ) {
       const locale = `DND5E.ConcentratingWarnLimit${data.concentration.optional ? "Optional" : ""}`;
       warnings.push(game.i18n.localize(locale));
-    } else if ( data.beginConcentration && !item.actor.system.attributes?.concentration?.limit) {
+    } else if ( data.beginConcentration && !item.actor.system.attributes?.concentration?.limit ) {
       const locale = "DND5E.ConcentratingWarnLimitZero";
       warnings.push(game.i18n.localize(locale));
     }
