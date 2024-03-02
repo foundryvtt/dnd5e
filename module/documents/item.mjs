@@ -890,7 +890,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
    * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
    * @property {boolean} beginConcentration         Should this item initiate concentration?
-   * @property {string|null} endConcentration       The id of the item to end concentration on, if any.
+   * @property {string|null} endConcentration       The id of the active effect to end concentration on, if any.
    */
 
   /**
@@ -1088,9 +1088,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = target.prompt;
     if ( this.requiresConcentration ) {
       config.beginConcentration = true;
-      const items = this.actor.concentration.items;
+      const effects = this.actor.concentration.effects;
       const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
-      if ( limit && (limit <= items.size) ) config.endConcentration = items.has(this.id) ? this.id : items.first().id;
+      if ( limit && (limit <= effects.size) ) {
+        const id = effects.find(e => {
+          const data = e.flags.dnd5e?.itemData ?? {};
+          return (data === this.id) || (data._id === this.id);
+        })?.id ?? effects.first()?.id ?? null;
+        config.endConcentration = id;
+      }
     }
 
     return config;
