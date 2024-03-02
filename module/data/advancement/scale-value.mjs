@@ -226,9 +226,11 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 export class ScaleValueTypeDice extends ScaleValueType {
   /** @inheritdoc */
   static defineSchema() {
+    const fields = foundry.data.fields;
     return {
-      number: new foundry.data.fields.NumberField({nullable: true, integer: true, positive: true}),
-      faces: new foundry.data.fields.NumberField({required: true, integer: true, positive: true})
+      number: new fields.NumberField({nullable: true, integer: true, positive: true}),
+      faces: new fields.NumberField({required: true, integer: true, positive: true}),
+      modifiers: new fields.SetField(new fields.StringField({required: true}))
     };
   }
 
@@ -275,7 +277,22 @@ export class ScaleValueTypeDice extends ScaleValueType {
    */
   get die() {
     if ( !this.faces ) return "";
-    return `d${this.faces}`;
+    return `d${this.faces}${this.mods}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The concatenated string of current modifiers.
+   * @type {string}
+   */
+  get mods() {
+    const mods = new Set();
+    for (const m of this.modifiers) {
+      const k = Roll.replaceFormulaData(m, this.parent?.parent?.getRollData({deterministic: true}) ?? {});
+      if (k) mods.add(k);
+    }
+    return Array.from(mods).join("");
   }
 
   /* -------------------------------------------- */
