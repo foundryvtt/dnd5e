@@ -1910,7 +1910,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let targets;
       switch ( action ) {
         case "applyEffect":
-          const effect = await fromUuid(button.closest("[data-uuid]")?.dataset.uuid);
+          const li = button.closest("li.effect");
+          let effect = item.effects.get(li.dataset.effectId);
+          if ( !effect ) effect = await fromUuid(li.dataset.uuid);
           let warn = false;
           for ( const token of canvas.tokens.controlled ) {
             if ( await this._applyEffectToToken(effect, token) === false ) warn = true;
