@@ -379,6 +379,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    * @protected
    */
   _prepareSpellbook(context, spells) {
+    console.warn("hello!");
     const owner = this.actor.isOwner;
     const levels = context.actor.system.spells;
     const spellbook = {};
@@ -388,7 +389,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( Number.isNumeric(order) ) acc[k] = Number(order);
       return acc;
     }, {});
-    const useLabels = {"-20": "-", "-10": "-", 0: "&infin;"};
+    const useLabels = {"-30": "-", "-20": "-", "-10": "-", 0: "&infin;"};
 
     // Format a spellbook entry for a certain indexed level
     const registerSection = (sl, i, label, {prepMode="prepared", value, max, override}={}) => {

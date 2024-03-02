@@ -1953,6 +1953,10 @@ DND5E.spellPreparationModes = {
     label: "DND5E.SpellPrepAlways",
     upcast: true
   },
+  ritual: {
+    label: "DND5E.SpellPrepRitual",
+    order: -30
+  },
   atwill: {
     label: "DND5E.SpellPrepAtWill",
     order: -20
