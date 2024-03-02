@@ -379,7 +379,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    * @protected
    */
   _prepareSpellbook(context, spells) {
-    console.warn("hello!");
     const owner = this.actor.isOwner;
     const levels = context.actor.system.spells;
     const spellbook = {};
