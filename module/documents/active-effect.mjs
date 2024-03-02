@@ -56,9 +56,9 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( typeof effectData === "string" ) effectData = CONFIG.statusEffects.find(e => e.id === effectData);
     if ( foundry.utils.getType(effectData) !== "Object" ) return;
     const createData = {
-      name: game.i18n.localize(effectData.name),
-      _id: staticID(`dnd5e${effectData.id}`),
       ...foundry.utils.deepClone(effectData),
+      _id: staticID(`dnd5e${effectData.id}`),
+      name: game.i18n.localize(effectData.name),
       statuses: [effectData.id, ...effectData.statuses ?? []]
     };
     if ( !("description" in createData) && effectData.reference ) {
@@ -361,16 +361,17 @@ export default class ActiveEffect5e extends ActiveEffect {
    * Create an effect for concentration on an actor, optionally replacing an existing effect.
    * @param {Item5e} item                         The item on which to begin concentrating.
    * @param {ActiveEffect5e} [existing]           An existing effect to replace.
+   * @param {object} [options]                    Additional data provided for the effect instance.
    * @returns {Promise<ActiveEffect5e|null>}      A promise that resolves to the created effect.
    */
-  static async createConcentrationEffect(item, existing=null) {
+  static async createConcentrationEffect(item, existing=null, options={}) {
     if ( !item.isEmbedded || !item.requiresConcentration ) {
       throw new Error("You may not begin concentration on this item!");
     }
 
     const actor = item.actor;
 
-    const baseData = {
+    const baseData = foundry.utils.mergeObject({
       name: `${game.i18n.localize("DND5E.Concentration")}: ${item.name}`,
       description: game.i18n.format("DND5E.ConcentratingOn", {
         name: item.name,
@@ -379,7 +380,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       duration: ActiveEffect5e._getEffectDuration(item),
       "flags.dnd5e.itemData": actor.items.has(item.id) ? item.id : item.toObject(),
       origin: item.uuid
-    };
+    }, options);
 
     const effects = actor.concentration?.effects ?? new Set();
     existing ??= effects.find(e => {
