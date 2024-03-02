@@ -359,9 +359,9 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Create an effect for concentration on an actor, optionally replacing an existing effect.
-   * @param {Item5e} item                   The item on which to begin concentrating.
-   * @param {ActiveEffect5e} [existing]     An existing effect to replace.
-   * @returns {Promise<ActiveEffect5e}      A promise that resolves to the created effect.
+   * @param {Item5e} item                         The item on which to begin concentrating.
+   * @param {ActiveEffect5e} [existing]           An existing effect to replace.
+   * @returns {Promise<ActiveEffect5e|null>}      A promise that resolves to the created effect.
    */
   static async createConcentrationEffect(item, existing=null) {
     if ( !item.isEmbedded || !item.requiresConcentration ) {
@@ -376,27 +376,56 @@ export default class ActiveEffect5e extends ActiveEffect {
         name: item.name,
         type: game.i18n.localize(`TYPES.Item.${item.type}`)
       }),
-      duration: {seconds: 60}, // TODO: get duration in seconds from item.
-      "flags.dnd5e.itemData": actor.items.has(item.id) ? item.id : item.toObject()
+      duration: ActiveEffect5e._getEffectDuration(item),
+      "flags.dnd5e.itemData": actor.items.has(item.id) ? item.id : item.toObject(),
+      origin: item.uuid
     };
 
     const effects = actor.concentration?.effects ?? new Set();
-
     existing ??= effects.find(e => {
       const d = e.flags.dnd5e?.itemData ?? {};
       return (d === item.id) || (d._id === item.id);
     });
 
+    let effectData;
     // Replace an existing effect if already concentrating on this item or if another effect has been chosen.
-    if (existing) {
-      const effectData = foundry.utils.mergeObject(existing.toObject(), baseData);
+    if ( existing ) {
+      const data = existing.flags.dnd5e?.itemData ?? {};
+      const sameItem = (data === item.id) || (data._id === item.id);
+      if ( sameItem ) {
+        effectData = foundry.utils.mergeObject({...existing.toObject(), duration: {}}, baseData);
+      }
       await existing.delete();
-      return ActiveEffect5e.create(effectData, { parent: item.actor });
     }
 
-    const effectData = (await ActiveEffect5e.fromStatusEffect(CONFIG.specialStatusEffects.CONCENTRATING)).toObject();
-    foundry.utils.mergeObject(effectData, baseData);
-    return ActiveEffect5e.create(effectData, { parent: item.actor });
+    // Create an entirely new effect.
+    if ( !effectData ) {
+      effectData = (await ActiveEffect5e.fromStatusEffect(CONFIG.specialStatusEffects.CONCENTRATING)).toObject();
+      foundry.utils.mergeObject(effectData, baseData);
+    }
+
+    /**
+     * A hook that is called before a concentration effect is created.
+     * @function dnd5e.preCreateConcentration
+     * @memberof hookEvents
+     * @param {Item5e} item           The item that is being concentrated on.
+     * @param {object} effectData     Data used to create the ActiveEffect.
+     * @returns {boolean}             Explicitly return false to prevent the effect from being created.
+     */
+    if ( Hooks.call("dnd5e.preCreateConcentration", item, effectData) === false ) return null;
+
+    const effect = await ActiveEffect5e.create(effectData, { parent: item.actor });
+
+    /**
+     * A hook that is called after a concentration effect is created.
+     * @function dnd5e.createConcentration
+     * @memberof hookEvents
+     * @param {Item5e} item               The item that is being concentrated on.
+     * @param {ActiveEffect5e} effect     The created ActiveEffect instance.
+     */
+    Hooks.callAll("dnd5e.createConcentration", item, effect);
+
+    return effect;
   }
 
   /* -------------------------------------------- */
@@ -443,6 +472,26 @@ export default class ActiveEffect5e extends ActiveEffect {
     const ext = split.pop();
     const path = split.join(".");
     return `${path}-${level}.${ext}`;
+  }
+
+  /**
+   * Map the duration of an item to an active effect duration.
+   * @param {Item5e} item     An item with a duration.
+   * @returns {object}        The active effect duration.
+   */
+  static _getEffectDuration(item) {
+    const dur = item.system.duration ?? {};
+    const value = dur.value || 1;
+
+    switch (dur.units) {
+      case "turn": return { turns: value };
+      case "round": return { rounds: value };
+      case "minute": return { seconds: value * 60 };
+      case "hour": return { seconds: value * 60 * 60 };
+      case "day": return { seconds: value * 60 * 60 * 24 };
+      case "year": return { seconds: value * 60 * 60 * 24 * 365 };
+      default: return { seconds: 60 };
+    }
   }
 
   /* -------------------------------------------- */
