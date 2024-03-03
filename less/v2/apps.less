@@ -1,0 +1,915 @@
+/* ---------------------------------- */
+/*  All DnD5e Apps                    */
+/* ---------------------------------- */
+
+.dnd5e2 {
+
+  /* ---------------------------------- */
+  /*  Frame Styling                     */
+  /* ---------------------------------- */
+
+  .window-header {
+    border: none;
+    align-items: center;
+
+    .header-button {
+      border-radius: 100%;
+      background: rgb(0 0 0 / 25%);
+      width: 1.3em;
+      aspect-ratio: 1;
+      line-height: unset;
+      display: grid;
+      place-content: center;
+
+      > i { margin: 0 }
+    }
+
+    .header-button, .document-id-link { margin-top: .25rem; }
+  }
+
+  &.window-app.minimized .window-header .document-id-link {
+    display: block;
+    margin-top: 0;
+  }
+
+  .window-content {
+    font-family: var(--dnd5e-font-roboto);
+    font-size: var(--font-size-13);
+    border-radius: 5px;
+    padding: 0;
+    background: var(--dnd5e-color-parchment);
+    overflow: visible;
+  }
+
+  /* ---------------------------------- */
+  /*  Common App Components             */
+  /* ---------------------------------- */
+
+  .roboto-upper {
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .roboto-condensed-upper {
+    font-family: var(--dnd5e-font-roboto-condensed);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .card {
+    border-radius: 4px;
+    background: var(--dnd5e-color-card);
+    box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+    border: 1px solid var(--dnd5e-color-gold);
+
+    @media (prefers-contrast: more) {
+      border-color: var(--dnd5e-color-dark);
+    }
+
+    .header {
+      background: linear-gradient(to right, var(--dnd5e-color-hd-1), var(--dnd5e-color-hd-2));
+      color: white;
+      border-radius: 3px 3px 0 0;
+      border-bottom: 1px solid var(--dnd5e-color-gold);
+
+      &.disabled {
+        background: linear-gradient(to right, var(--color-border-dark-3), var(--color-border-light-2));
+      }
+
+      h3 {
+        border: none;
+        margin: 0;
+        padding: .5rem;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-size: var(--font-size-13);
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      .radio-button {
+        background: var(--dnd5e-color-light-gray);
+        &[aria-pressed="true"]::before { background: var(--dnd5e-color-gold); }
+      }
+    }
+
+    .info {
+      display: flex;
+      align-items: stretch;
+      padding: .5rem 0;
+
+      > div {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 .5rem;
+        border-right: 1px solid var(--color-border-light-1);
+
+        &:last-child { border: none; }
+
+        .label {
+          font-family: var(--dnd5e-font-roboto-condensed);
+          font-size: var(--font-size-10);
+          color: var(--color-text-dark-5);
+          text-transform: uppercase;
+        }
+
+        .value {
+          font-family: var(--dnd5e-font-roboto-slab);
+          font-weight: bold;
+          font-size: var(--font-size-16);
+        }
+
+        .sign { color: var(--color-text-light-6); }
+      }
+    }
+  }
+
+  .unlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  h1, h2, h3 {
+    border: none;
+    font-family: var(--dnd5e-font-roboto-slab);
+    font-weight: bold;
+  }
+
+  h2 { font-size: 1.4em; }
+  h1 { font-size: 1.5em; }
+
+  h3.icon {
+    border-bottom: 1px solid var(--dnd5e-color-black);
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    padding-bottom: .25rem;
+    margin-bottom: .375rem;
+
+    > i { font-size: var(--font-size-14); }
+    > span { font-size: var(--font-size-13); }
+
+    > dnd5e-icon {
+      font-size: var(--font-size-14);
+      --icon-fill: var(--color-text-dark-primary);
+    }
+
+    > a {
+      margin-left: auto;
+      font-size: var(--font-size-12);
+      color: var(--color-text-light-6);
+    }
+  }
+
+  proficiency-cycle {
+    width: 15px;
+    height: 15px;
+  }
+
+  .pill-lg {
+    background: var(--dnd5e-color-card);
+    border: 2px solid var(--dnd5e-color-gold);
+    border-radius: 5px;
+    box-shadow: 0 0 12px var(--dnd5e-shadow-15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    height: 50px;
+    max-width: 280px;
+    position: relative;
+
+    @media (prefers-contrast: more) {
+      border-color: var(--dnd5e-color-dark);
+    }
+
+    &.empty {
+      border: 2px dashed var(--dnd5e-color-black);
+      color: var(--dnd5e-color-black);
+      border-radius: 4px;
+      display: grid;
+      place-content: center;
+      opacity: .25;
+
+      @media (prefers-contrast: more) {
+        opacity: .5;
+      }
+    }
+
+    .gold-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .name { flex: 1; }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--underlay) no-repeat center / cover;
+      filter: grayscale(1);
+      mix-blend-mode: overlay;
+      pointer-events: none;
+      border-radius: 5px;
+    }
+  }
+
+  .pills {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+
+    .pill {
+      font-family: var(--dnd5e-font-roboto);
+      font-weight: bold;
+      font-size: var(--font-size-11);
+      text-transform: uppercase;
+      border: 1px solid var(--color-border-dark-5);
+      border-radius: 3px;
+      background: var(--dnd5e-color-card);
+      padding: .1875rem .375rem;
+      display: flex;
+      gap: .25rem;
+
+      &.green, &.maroon { color: var(--color-text-light-0); }
+      &.green { background-color: var(--dnd5e-color-green); }
+      &.maroon { background-color: var(--dnd5e-color-maroon); }
+
+      &.pill-sm {
+        color: #4e4e4e;
+        border: 1px dotted var(--color-border-dark-5);
+        background-color: transparent;
+      }
+
+      > .separator { color: var(--color-text-light-6); }
+    }
+  }
+
+  .gold-button {
+    position: relative;
+    border: none;
+    border-radius: 4px;
+    background: var(--dnd5e-color-black);
+    color: var(--dnd5e-color-gold);
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+    font-size: var(--font-size-14);
+    display: grid;
+    place-content: center;
+    line-height: normal;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border: 1px solid var(--dnd5e-color-gold);
+      border-radius: 3px;
+    }
+
+    &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+    > i { margin: 0; }
+  }
+
+  .gold-icon {
+    border: 2px solid var(--dnd5e-color-gold);
+    box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+    border-radius: 0;
+    background-color: var(--dnd5e-color-light-gray);
+  }
+
+  .name-stacked {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-size: var(--font-size-14);
+      font-weight: bold;
+    }
+
+    .subtitle {
+      font-family: var(--dnd5e-font-roboto);
+      font-size: var(--font-size-10);
+      color: var(--color-text-dark-5);
+    }
+  }
+
+  filigree-box {
+    > h3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .75rem 1rem .375rem;
+      border: none;
+      font-size: var(--font-size-13);
+      margin: 0;
+
+      > i {
+        font-size: var(--font-size-11);
+        color: var(--color-text-dark-5);
+      }
+    }
+  }
+
+  a.deletion-control {
+    width: 32px;
+    height: 32px;
+    color: var(--dnd5e-color-red);
+    display: flex;
+    justify-content: end;
+    font-size: var(--font-size-11);
+  }
+
+  /* ---------------------------------- */
+  /*  Meters                            */
+  /* ---------------------------------- */
+
+  .meter-group {
+    display: flex;
+    flex-direction: column;
+    gap: .125rem;
+
+    + .meter-group { margin-top: .5rem; }
+  }
+
+  .meter {
+    border: 1px solid var(--dnd5e-color-gold);
+    border-radius: 4px;
+    background: var(--dnd5e-color-light-gray);
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    box-shadow: inset 0 0 16px rgb(0 0 0 / 25%);
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &.progress, .progress {
+      --bar-percentage: 0%;
+      --border-width: 3px;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: calc(var(--bar-percentage) - var(--border-width));
+        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+        clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
+        border-radius: 4px;
+      }
+    }
+
+    .label {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      position: relative;
+      padding-inline-start: .5rem;
+      padding-inline-end: .75rem;
+      color: var(--color-text-light-0);
+
+      &[hidden] { display: none; }
+      .value, .max { text-shadow: 0 0 4px var(--dnd5e-color-gold); }
+      .separator { color: var(--dnd5e-color-gold); }
+      .bonus {
+        margin-inline-start: auto;
+        font-size: var(--font-size-14);
+        opacity: .8;
+      }
+
+      @media (prefers-contrast: more) {
+        .value, .max {
+          text-shadow: 0 0 2px var(--dnd5e-color-dark);
+          filter: drop-shadow(0 0 2px var(--dnd5e-color-dark));
+        }
+      }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Form Elements                     */
+  /* ---------------------------------- */
+
+  /* Reset button & input styles */
+  input.uninput, button.unbutton {
+    --border: none;
+    border: var(--border);
+    box-shadow: none;
+
+    &:hover, &:focus {
+      box-shadow: none;
+      border: var(--border);
+    }
+  }
+
+  input.uninput {
+    color: inherit;
+    font-weight: inherit;
+    height: unset;
+  }
+
+  button.unbutton {
+    background: none;
+    margin: 0;
+    border-radius: 0;
+    line-height: normal;
+
+    > i { margin: 0; }
+  }
+
+  /* Inputs & Buttons */
+  input, button {
+    transition: all 250ms ease;
+  }
+
+  button {
+    background: var(--dnd5e-color-card);
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    font-size: var(--font-size-13);
+    text-transform: uppercase;
+    padding: 3px;
+    border: 1px solid var(--color-border-light-2);
+    box-shadow: 0 0 8px var(--dnd5e-shadow-15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .25rem;
+
+    &:disabled {
+      cursor: default;
+      color: var(--color-text-dark-inactive);
+    }
+    &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
+  }
+
+  button.radio-button {
+    width: 13px;
+    height: 13px;
+    border-radius: 100%;
+    background: none;
+    box-shadow: inset 0 0 6px var(--dnd5e-shadow-45);
+    padding: 3px;
+    display: grid;
+    border: none;
+    justify-content: unset;
+
+    &:hover { filter: drop-shadow(0 0 6px var(--dnd5e-color-gold)); }
+
+    &[aria-pressed="true"]::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      border-radius: 100%;
+      background: var(--color-border-dark-5);
+    }
+  }
+
+  /* Reset select styles */
+  select.unselect {
+    border: none;
+    padding: 0;
+    background: transparent;
+    height: unset;
+  }
+
+  /* Reset textarea styles */
+  textarea.untext {
+    background: none;
+    border: none;
+
+    &:focus { box-shadow: none; }
+  }
+
+  .form-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    justify-content: center;
+
+    &.form-grid-20 > * { flex-basis: 20%; }
+
+    input {
+      border: 2px solid var(--dnd5e-color-gold);
+      border-radius: 8px;
+      padding: .5rem;
+      background: var(--dnd5e-color-parchment);
+      font-size: var(--font-size-14);
+      height: unset;
+      width: 100%;
+
+      &:focus { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+      &::placeholder { color: var(--color-text-light-6); }
+    }
+
+    input[type="number"] {
+      font-weight: bold;
+    }
+  }
+
+  label.input-stack {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      text-align: center;
+      font-size: var(--font-size-10);
+      color: var(--color-text-dark-5);
+    }
+
+    input { text-align: center; }
+  }
+
+  /* FA icon-based slide-toggle */
+  label.slide-toggle {
+    display: block;
+
+    > input { display: none; }
+    &:has(input:not([disabled])) { cursor: pointer; }
+  }
+
+  /* Pips */
+  .pips {
+    display: flex;
+    gap: 5px;
+    padding: 10px 12px;
+
+    .pip {
+      background: var(--dnd5e-color-light-gray);
+      border: 2px solid var(--dnd5e-color-gold);
+      border-radius: 100%;
+      width: 16px;
+      height: 16px;
+      display: grid;
+      place-content: center;
+      font-weight: bold;
+      font-size: var(--font-size-18);
+      box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+      margin: 0;
+
+      &.filled { background: var(--dnd5e-color-gold); }
+      &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  System Badge                      */
+  /* ---------------------------------- */
+
+  &.sidebar-heading {
+    margin: 6px 0;
+    padding: 3px 8px;
+    border-top: 1px solid var(--color-border-dark-4);
+    border-bottom: 1px solid var(--color-border-dark-4);
+    background: rgb(255 255 255 / 10%);
+    display: flex;
+    align-items: center;
+
+    h2 {
+      font-size: var(--font-size-16);
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font-family: var(--font-primary);
+      font-weight: normal;
+    }
+
+    ul.links {
+      flex: 1;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: .5rem;
+      text-transform: uppercase;
+      font-size: var(--font-size-11);
+      justify-content: center;
+    }
+  }
+
+  &.system-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    padding: .25rem;
+
+    > img {
+      height: 32px;
+      border: none;
+      object-fit: contain;
+    }
+
+    .system-info {
+      font-size: var(--font-size-16);
+      i {
+        padding-inline-start: 2px;
+        font-size: var(--font-size-12);
+      }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Pause                             */
+  /* ---------------------------------- */
+
+  &#pause {
+    background: none;
+    animation: pulsate 3s infinite ease-in-out;
+
+    img { opacity: .75; }
+
+    figcaption {
+      color: var(--color-text-light-0);
+      font-size: var(--font-size-46);
+      text-shadow: 2px 2px 2px var(--color-shadow-dark);
+      font-family: var(--dnd5e-font-modesto);
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  @keyframes pulsate {
+    0% { filter: drop-shadow(0 0 0 rgb(255 255 255 / 0%)); }
+    50% { filter: drop-shadow(0 0 10px rgb(255 255 255 / 50%)); }
+    100% { filter: drop-shadow(0 0 0 rgb(255 255 255 / 0%)); }
+  }
+
+  @media (prefers-reduced-motion) {
+    &#pause { animation: none; }
+  }
+}
+
+/* ---------------------------------- */
+/*  Currency                          */
+/* ---------------------------------- */
+
+:is(.dnd5e2, .dnd5e2-journal) :is(i, span).currency {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  background: transparent no-repeat center / contain;
+
+  &.cp { background-image: url("icons/currency/copper.webp"); }
+  &.sp { background-image: url("icons/currency/silver.webp"); }
+  &.ep { background-image: url("icons/currency/electrum.webp"); }
+  &.gp { background-image: url("icons/currency/gold.webp"); }
+  &.pp { background-image: url("icons/currency/platinum.webp"); }
+}
+
+/* ---------------------------------- */
+/*  Document Sheets                   */
+/* ---------------------------------- */
+
+.dnd5e2.sheet {
+  .locked a:not(.interface-only) {
+    cursor: default;
+    &:hover { text-shadow: unset; }
+  }
+}
+
+/* ---------------------------------- */
+/*  Dialogs                           */
+/* ---------------------------------- */
+
+.dnd5e2.dialog {
+  background: url("ui/texture-gray1.webp") no-repeat top left,
+    url("ui/texture-gray2.webp") no-repeat bottom right,
+    var(--dnd5e-color-parchment);
+  border: 1px solid var(--dnd5e-color-gold);
+
+  > .window-content { background: transparent; }
+
+  > .window-header .window-title { visibility: hidden; }
+
+  form {
+    padding: 0 .75rem .75rem;
+
+    > header {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      font-size: var(--font-size-24);
+      text-align: center;
+      margin-bottom: .75rem;
+    }
+  }
+
+  .dialog-buttons {
+    padding: .5rem;
+    gap: .5rem;
+
+    button {
+      background: var(--dnd5e-color-card);
+      border: 1px solid var(--color-border-light-2);
+      &.default { border-color: var(--dnd5e-color-gold); }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Create Document Dialog            */
+/* ---------------------------------- */
+
+.dnd5e2.create-document {
+  form header { padding: 0 .5rem; }
+
+  .document-name {
+    font-family: var(--dnd5e-font-roboto-slab);
+    font-weight: bold;
+    font-size: var(--font-size-24);
+    text-align: center;
+    background: none;
+
+    &:hover, &:focus { box-shadow: none; }
+  }
+
+  ol {
+    padding: .25rem .5rem;
+
+    li {
+      padding: .25rem .5rem;
+      border-bottom: var(--dnd5e-border-dotted);
+
+      &:hover { background: var(--dnd5e-color-parchment); }
+      &:last-child { border: none; }
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+
+      > span {
+        flex: 1;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+        font-size: var(--font-size-14);
+      }
+    }
+
+    img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      object-position: center;
+      border: none;
+      filter: invert(100%);
+    }
+  }
+
+  select {
+    border: 1px solid var(--color-border-light-2);
+    background: var(--dnd5e-background-10);
+    padding: 0 .5rem;
+    flex: none;
+  }
+
+  .dialog-buttons {
+    select {
+      flex: 1;
+      min-block-size: 28px;
+    }
+    button {
+      flex: 1 0 50%;
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Active Effects Pane               */
+/* ---------------------------------- */
+
+.dnd5e2 .effects-element {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: unset;
+
+  .conditions-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+    clip-path: polygon(0 0, calc(100% - 1px) 0, calc(100% - 1px) calc(100% - 1px), 0 calc(100% - 1px));
+    --icon-size: 18px;
+
+    .condition {
+      --border-style: 1px dashed var(--color-border-light-1);
+      display: flex;
+      gap: .5rem;
+      padding: .5625rem .75rem;
+      align-items: center;
+      cursor: pointer;
+      border-bottom: var(--border-style);
+      border-right: var(--border-style);
+      color: var(--color-text-light-6);
+      --icon-fill: var(--color-text-light-6);
+      --icon-stroke: var(--dnd5e-color-card);
+
+      @media (prefers-contrast: more) {
+        --border-style: var(--dnd5e-border-dark);
+        span { color: var(--color-text-dark-5); }
+        &.active span { color: var(--color-text-dark-1); }
+      }
+
+      &.active {
+        color: var(--color-text-dark-primary);
+        --icon-fill: var(--color-text-dark-primary);
+      }
+
+      &:hover { background: var(--dnd5e-color-parchment); }
+      .icon { display: grid; }
+
+      .name-stacked {
+        flex: 1;
+        .title { font-size: var(--font-size-13); }
+      }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Context Menus                     */
+/* ---------------------------------- */
+
+#context-menu.dnd5e2 {
+  position: fixed;
+  z-index: var(--z-index-tooltip);
+  background: var(--dnd5e-color-card);
+  border-radius: 3px;
+  box-shadow: 0 3px 6px var(--dnd5e-shadow-45);
+  font-family: var(--dnd5e-font-roboto);
+  font-size: var(--font-size-13);
+  border: none;
+  color: var(--color-text-dark-primary);
+  width: max-content;
+  min-width: 145px;
+
+  .context-item {
+    padding: 0 .75rem;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-text-dark-primary);
+      text-shadow: none;
+      background: var(--dnd5e-color-parchment);
+    }
+
+    i {
+      font-size: var(--font-size-11);
+      color: var(--color-text-dark-5);
+    }
+  }
+
+  .context-items > .context-item {
+    &:first-child { border-radius: 3px 3px 0 0; }
+    &:last-child { border-radius: 0 0 3px 3px; }
+  }
+
+  .context-group:first-child > ol > .context-item:first-child { border-radius: 3px 3px 0 0; }
+  .context-group:last-child > ol > .context-item:last-child { border-radius: 0 0 3px 3px; }
+
+  [data-group-id]:has(li)::before { border-block-start: 1px solid var(--color-border-light-1); }
+}
+
+/* Disable pointer events on the target while the context menu is open as a workaround for core tooltip logic not
+   accommodating fixed position context menus */
+
+.dnd5e2 .context { pointer-events: none; }
+
+/* ---------------------------------- */
+/*  Window Handles                    */
+/* ---------------------------------- */
+
+:is(.dnd5e2, .dnd5e2-journal) .window-resizable-handle {
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  color: var(--dnd5e-color-black);
+  overflow: hidden;
+  font-size: 16px;
+  cursor: nwse-resize;
+  opacity: .4;
+
+  > i {
+    position: absolute;
+    bottom: -3px;
+    right: 1px;
+
+    &::before { content: "\f7a5"; }
+  }
+}

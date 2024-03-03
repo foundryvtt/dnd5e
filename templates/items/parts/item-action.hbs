@@ -63,10 +63,10 @@
             {{#select (lookup this "1")}}
                 <option value="">{{ localize "DND5E.None" }}</option>
                 <optgroup label="{{localize 'DND5E.Damage'}}">
-                    {{selectOptions @root.config.damageTypes}}
+                    {{selectOptions @root.config.damageTypes labelAttr="label"}}
                 </optgroup>
                 <optgroup label="{{localize 'DND5E.Healing'}}">
-                    {{selectOptions @root.config.healingTypes}}
+                    {{selectOptions @root.config.healingTypes labelAttr="label"}}
                 </optgroup>
             {{/select}}
         </select>
@@ -115,6 +115,19 @@
         </select>
     </div>
 </div>
+
+{{!-- Summoning --}}
+{{#if (eq system.actionType "summ")}}
+<div class="form-group summoning">
+    <label>{{ localize "DND5E.Summoning.Label" }}</label>
+    <div class="form-fields">
+        <a class="config-button" data-action="summoning">
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+            {{ localize 'DND5E.Summoning.Action.Configure' }}
+        </a>
+    </div>
+</div>
+{{/if}}
 
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">

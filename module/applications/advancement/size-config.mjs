@@ -23,7 +23,7 @@ export default class SizeConfig extends AdvancementConfig {
         hint: this.advancement.automaticHint
       },
       showLevelSelector: false,
-      sizes: Object.entries(CONFIG.DND5E.actorSizes).reduce((obj, [key, label]) => {
+      sizes: Object.entries(CONFIG.DND5E.actorSizes).reduce((obj, [key, { label }]) => {
         obj[key] = { label, chosen: this.advancement.configuration.sizes.has(key) };
         return obj;
       }, {})

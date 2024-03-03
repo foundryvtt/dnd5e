@@ -1,5 +1,5 @@
 import Actor5e from "../../documents/actor/actor.mjs";
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import { AdvancementField, IdentifierField } from "../fields.mjs";
 import { CreatureTypeField, MovementField, SensesField } from "../shared/_module.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -14,7 +14,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {SensesField} senses
  * @property {CreatureType} type
  */
-export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTemplate) {
+export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
@@ -29,9 +29,9 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static metadata = Object.freeze({
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     singleton: true
-  });
+  }, {inplace: false}));
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -95,8 +95,9 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
       { type: "Trait", configuration: { grants: ["languages:standard:common"] } }
     ];
     this.parent.updateSource({"system.advancement": toCreate.map(c => {
-      const AdvancementClass = CONFIG.DND5E.advancementTypes[c.type];
-      return new AdvancementClass(c, { parent: this.parent }).toObject();
+      const config = CONFIG.DND5E.advancementTypes[c.type];
+      const cls = config.documentClass ?? config;
+      return new cls(c, { parent: this.parent }).toObject();
     })});
   }
 

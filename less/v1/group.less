@@ -1,0 +1,115 @@
+.dnd5e.sheet.group {
+  min-width: 620px;
+  min-height: 620px;
+
+  .member-controls {
+    max-width: calc(100% - 2px);
+    gap: 8px;
+    justify-content: flex-end;
+    margin-block: 4px;
+    padding: 0;
+    list-style: none;
+    font-size: var(--font-size-12);
+
+    li {
+      flex: 0 1 max-content;
+
+      button {
+        padding-inline: 8px;
+        line-height: 1.5em;
+      }
+    }
+  }
+
+  .attribute.health span.value {
+    line-height: 64px;
+    flex: 0 0 64px;
+  }
+
+  /** Members Directory */
+  .members {
+    .directory-header {
+      height: 28px;
+      margin: 2px 0;
+      padding: 0 0.5rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.05);
+      border: var(--dnd5e-border-groove);
+      > * {
+        margin: 0;
+        font-family: var(--dnd5e-font-modesto);
+        font-size: var(--font-size-16);
+        font-weight: bold;
+        line-height: 20px;
+        text-align: left;
+      }
+
+      [data-action="rollQuantities"] {
+        color: var(--dnd5e-color-olive);
+        font-size: var(--font-size-12);
+      }
+    }
+
+    input {
+      align-self: center;
+      margin-inline-end: 4px;
+      height: var(--form-field-height);
+      &::placeholder {
+        opacity: 50%;
+      }
+    }
+
+    .group-member {
+      padding: 0 0.5rem;
+      .name {
+        cursor: pointer;
+        align-items: center;
+        h4 {
+          white-space: unset;
+          line-height: 1;
+        }
+      }
+    }
+
+    .hp {
+      flex: 2;
+      align-items: center;
+
+      .current, .max {
+        flex: 0 0 40px;
+        text-align: center;
+      }
+      .bar-container {
+        background: #111;
+        height: 20px;
+        padding: 1px;
+        border: 1px solid #000;
+        border-radius: 6px;
+      }
+      .bar {
+        height: 16px;
+        border-radius: 4px;
+      }
+    }
+
+    .quantity {
+      flex: 0.5;
+
+      [name$=".formula"] {
+        font-size: var(--font-size-11);
+      }
+    }
+
+    .challenge {
+      flex: 0.5;
+      abbr {
+        color: var(--dnd5e-color-tan);
+      }
+    }
+
+    .controls {
+      flex: 0 0 64px;
+      text-align: right;
+    }
+  }
+}

@@ -10,7 +10,7 @@ import { sortObjectEntries } from "../../utils.mjs";
  *                                       a level, unsorted values are listed first followed by sorted values.
  * @property {SelectChoices} [children]  Nested choices. If wildcard filtering support is desired, then trait keys
  *                                       should be provided prefixed for children (e.g. `parent:child`, rather than
-  *                                      just `child`).
+ *                                       just `child`).
  */
 
 /**
@@ -64,6 +64,26 @@ export default class SelectChoices {
   /* -------------------------------------------- */
 
   /**
+   * Find key and value for the provided key or key suffix.
+   * @param {string} key  Full prefixed key (e.g. `tool:art:alchemist`) or just the suffix (e.g. `alchemist`).
+   * @returns {[string, SelectChoicesEntry]|null}  An array with the first value being the matched key,
+   *                                               and the second being the value.
+   */
+  find(key) {
+    for ( const [k, v] of Object.entries(this) ) {
+      if ( (k === key) || k.endsWith(`:${key}`) ) {
+        return [k, v];
+      } else if ( v.children ) {
+        const result = v.children.find(key);
+        if ( result ) return result;
+      }
+    }
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Merge another SelectChoices object into this one.
    * @param {SelectChoices} other
    * @param {object} [options={}]
@@ -88,7 +108,7 @@ export default class SelectChoices {
     if ( (lhs.sorting === false) && (rhs.sorting === false) ) return 0;
     if ( lhs.sorting === false ) return -1;
     if ( rhs.sorting === false ) return 1;
-    return lhs.label.localeCompare(rhs.label);
+    return lhs.label.localeCompare(rhs.label, game.i18n.lang);
   }
 
   /* -------------------------------------------- */

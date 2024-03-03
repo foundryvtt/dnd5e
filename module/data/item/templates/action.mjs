@@ -1,5 +1,19 @@
-import SystemDataModel from "../../abstract.mjs";
+import { ItemDataModel } from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
+
+const {
+  ArrayField, BooleanField, DocumentIdField, IntegerSortField, NumberField, SchemaField, StringField
+} = foundry.data.fields;
+
+/**
+ * Information for a single summoned creature.
+ *
+ * @typedef {object} SummonsProfile
+ * @property {string} _id    Unique ID for this profile.
+ * @property {number} count  Number of creatures to summon.
+ * @property {string} name   Display name for this profile if it differs from actor's name.
+ * @property {string} uuid   UUID of the actor to summon.
+ */
 
 /**
  * Data model template for item actions.
@@ -19,42 +33,61 @@ import { FormulaField } from "../../fields.mjs";
  * @property {string} save.ability        Ability required for the save.
  * @property {number} save.dc             Custom saving throw value.
  * @property {string} save.scaling        Method for automatically determining saving throw DC.
+ * @property {object} summons
+ * @property {string} summons.ac                  Formula used to calculate the AC on summoned actors.
+ * @property {string} summons.hp                  Formula indicating bonus hit points to add to each summoned actor.
+ * @property {object} summons.match
+ * @property {boolean} summons.match.attacks      Match the to hit values on summoned actor's attack to the summoner.
+ * @property {boolean} summons.match.proficiency  Match proficiency on summoned actor to the summoner.
+ * @property {boolean} summons.match.saves        Match the save DC on summoned actor's abilities to the summoner.
+ * @property {SummonsProfile[]} summons.profiles  Information on creatures that can be summoned.
  * @mixin
  */
-export default class ActionTemplate extends SystemDataModel {
+export default class ActionTemplate extends ItemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      ability: new foundry.data.fields.StringField({
-        required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"
-      }),
-      actionType: new foundry.data.fields.StringField({
-        required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"
-      }),
+      ability: new StringField({required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"}),
+      actionType: new StringField({required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"}),
       attackBonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
-      chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
-      critical: new foundry.data.fields.SchemaField({
-        threshold: new foundry.data.fields.NumberField({
+      chatFlavor: new StringField({required: true, label: "DND5E.ChatFlavor"}),
+      critical: new SchemaField({
+        threshold: new NumberField({
           required: true, integer: true, initial: null, positive: true, label: "DND5E.ItemCritThreshold"
         }),
         damage: new FormulaField({required: true, label: "DND5E.ItemCritExtraDamage"})
       }),
-      damage: new foundry.data.fields.SchemaField({
-        parts: new foundry.data.fields.ArrayField(new foundry.data.fields.ArrayField(
-          new foundry.data.fields.StringField({nullable: true})
-        ), {required: true}),
+      damage: new SchemaField({
+        parts: new ArrayField(new ArrayField(new StringField({nullable: true})), {required: true}),
         versatile: new FormulaField({required: true, label: "DND5E.VersatileDamage"})
       }, {label: "DND5E.Damage"}),
       formula: new FormulaField({required: true, label: "DND5E.OtherFormula"}),
-      save: new foundry.data.fields.SchemaField({
-        ability: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Ability"}),
-        dc: new foundry.data.fields.NumberField({
-          required: true, min: 0, integer: true, label: "DND5E.AbbreviationDC"
+      save: new SchemaField({
+        ability: new StringField({required: true, blank: true, label: "DND5E.Ability"}),
+        dc: new NumberField({required: true, min: 0, integer: true, label: "DND5E.AbbreviationDC"}),
+        scaling: new StringField({required: true, blank: false, initial: "spell", label: "DND5E.ScalingFormula"})
+      }, {label: "DND5E.SavingThrow"}),
+      summons: new SchemaField({
+        ac: new FormulaField({label: "DND5E.Summoning.ArmorClass.Label", hint: "DND5E.Summoning.ArmorClass.hint"}),
+        hp: new FormulaField({label: "DND5E.Summoning.HitPoints.Label", hint: "DND5E.Summoning.HitPoints.hint"}),
+        match: new SchemaField({
+          attacks: new BooleanField({
+            label: "DND5E.Summoning.Match.Attacks.Label", hint: "DND5E.Summoning.Match.Attacks.Hint"
+          }),
+          proficiency: new BooleanField({
+            label: "DND5E.Summoning.Match.Proficiency.Label", hint: "DND5E.Summoning.Match.Proficiency.Hint"
+          }),
+          saves: new BooleanField({
+            label: "DND5E.Summoning.Match.Saves.Label", hint: "DND5E.Summoning.Match.Saves.Hint"
+          })
         }),
-        scaling: new foundry.data.fields.StringField({
-          required: true, blank: false, initial: "spell", label: "DND5E.ScalingFormula"
-        })
-      }, {label: "DND5E.SavingThrow"})
+        profiles: new ArrayField(new SchemaField({
+          _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
+          count: new NumberField({integer: true, min: 1}),
+          name: new StringField(),
+          uuid: new StringField()
+        }))
+      })
     };
   }
 
@@ -256,4 +289,18 @@ export default class ActionTemplate extends SystemDataModel {
     return this.actionType && !!(this.hasDamage && this.damage.versatile);
   }
 
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(options) {
+    const data = super.getRollData(options);
+    const key = this.abilityMod;
+    if ( data && key && ("abilities" in data) ) {
+      const ability = data.abilities[key];
+      data.mod = ability?.mod ?? 0;
+    }
+    return data;
+  }
 }

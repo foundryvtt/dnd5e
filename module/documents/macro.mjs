@@ -27,9 +27,9 @@ export async function create5eMacro(dropData, slot) {
         return null;
       }
       foundry.utils.mergeObject(macroData, {
-        name: effectData.label,
+        name: effectData.name,
         img: effectData.icon,
-        command: `dnd5e.documents.macro.toggleEffect("${effectData.label}")`,
+        command: `dnd5e.documents.macro.toggleEffect("${effectData.name}")`,
         flags: {"dnd5e.effectMacro": true}
       });
       break;
@@ -62,11 +62,10 @@ function getMacroTarget(name, documentType) {
     return null;
   }
 
-  const collection = (documentType === "Item") ? actor.items : actor.effects;
-  const nameKeyPath = (documentType === "Item") ? "name" : "label";
+  const collection = (documentType === "Item") ? actor.items : Array.from(actor.allApplicableEffects());
 
   // Find item in collection
-  const documents = collection.filter(i => foundry.utils.getProperty(i, nameKeyPath) === name);
+  const documents = collection.filter(i => i.name === name);
   const type = game.i18n.localize(`DOCUMENT.${documentType}`);
   if ( documents.length === 0 ) {
     ui.notifications.warn(game.i18n.format("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));

@@ -8,11 +8,11 @@ Please ensure there is an open issue about whatever contribution you are submitt
 
 Cloning this repository and either placing it in or symlinking it to your `Data/systems/dnd5e` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
 
-This repository leverages [gulp](https://gulpjs.com/) to run automated build tasks. If your system supports `npm`, you can run the following commands from the root of the project to get set up:
+If your system supports `npm`, you can run the following commands from the root of the project to get set up:
 
 ### `npm install`
 
-Installs all dependencies needed to run developer tooling scripts.
+Installs all dependencies needed to run developer tooling scripts. Then will compile the necessary CSS and DB files.
 
 ### `npm run build`
 
@@ -33,18 +33,15 @@ Runs the LESS -> CSS builder in watch mode so that changes made to the LESS file
 
 This repository includes some utilities which allow the Compendia included in the System to be maintained as JSON files. This makes contributions which include changes to the compendia considerably easier to review.
 
-Please remember to compile any pack whose JSON your contribution touches before submitting an PR.
-
 #### Compiling Packs
 
 Compile the source JSON files into compendium packs.
 
 ```text
 npm run build:db
-gulp compilePacks
 ```
 
-- `npm run build:db` - Compile all JSON files into their NEDB files.
+- `npm run build:db` - Compile all JSON files into their LevelDB files.
 - `npm run build:db -- classes` - Only compile the specified pack.
 
 #### Extracting Packs
@@ -53,10 +50,9 @@ Extract the contents of compendium packs to JSON files.
 
 ```text
 npm run build:json
-gulp extractPacks
 ```
 
-- `npm run build:json` - Extract all compendium NEDB files into JSON files.
+- `npm run build:json` - Extract all compendium LevelDB files into JSON files.
 - `npm run build:json -- classes` - Only extract the contents of the specified compendium.
 - `npm run build:json -- classes Barbarian` - Only extract a single item from the specified compendium.
 
@@ -66,7 +62,6 @@ Cleans and formats source JSON files, removing unnecessary permissions and flags
 
 ```text
 npm run build:clean
-gulp extractPacks
 ```
 
 - `npm run build:clean` - Clean all source JSON files.
@@ -99,8 +94,6 @@ All Content released with this system must come from the WotC [5e System Referen
 If there is missing content, please open an issue detailing what is missing.
 
 In general, content contributions will take the shape of fixing typos or bugs in the configuration of the existing items in the included compendia JSON files, which are then compiled into the appropriate db file.
-
-Every PR which contributes content must change both the source JSON file and the db file.
 
 ### Translations
 
@@ -185,6 +178,6 @@ https://github.com/foundryvtt/dnd5e/releases/download/release-1.6.3/dnd5e-1.6.3.
 
 0. [ ] Verify the `NEEDS_MIGRATION_VERSION` is correct.
 1. [ ] `system.json` `version` and `download` fields are updated on the development branch (e.g. `1.5.x`).
-2. [ ] A Tag is created at the tip of the development branch with the format `release-x.x.x`, triggering the CI workflow (which takes ~2 mins to complete).
+2. [ ] A tag is created at the tip of the development branch with the format `release-x.x.x`, triggering the CI workflow (which takes ~2 mins to complete).
 3. [ ] Development Branch is merged to `master` after the workflow is completed.
-4. [ ] The Foundryvtt.com admin listing is updated with the `manifest` url pointing to the `system.json` attached to the workflow-created release.
+4. [ ] The foundryvtt.com admin listing is updated with the `manifest` url pointing to the `system.json` attached to the workflow-created release.

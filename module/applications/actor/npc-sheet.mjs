@@ -71,8 +71,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     }, [[], []]);
 
     // Apply item filters
-    spells = this._filterItems(spells, this._filters.spellbook);
-    other = this._filterItems(other, this._filters.features);
+    spells = this._filterItems(spells, this._filters.spellbook.properties);
+    other = this._filterItems(other, this._filters.features.properties);
 
     // Organize Spellbook
     const spellbook = this._prepareSpellbook(context, spells);
@@ -106,6 +106,34 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     else label.push(game.i18n.localize(CONFIG.DND5E.armorClasses[ac.calc].label));
     if ( this.actor.shield ) label.push(this.actor.shield.name);
     return label.filterJoin(", ");
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    if ( !this.isEditable ) return;
+    html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle mouse click events for NPC sheet actions.
+   * @param {MouseEvent} event  The originating click event.
+   * @returns {Promise}         Dialog or roll result.
+   * @private
+   */
+  _onSheetAction(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    switch ( button.dataset.action ) {
+      case "rollDeathSave":
+        return this.actor.rollDeathSave({event: event});
+    }
   }
 
   /* -------------------------------------------- */

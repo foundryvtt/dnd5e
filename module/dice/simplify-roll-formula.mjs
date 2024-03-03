@@ -4,10 +4,11 @@
  * @param {string} formula                          The original roll formula.
  * @param {object} [options]                        Formatting options.
  * @param {boolean} [options.preserveFlavor=false]  Preserve flavor text in the simplified formula.
+ * @param {boolean} [options.deterministic]         Strip any non-deterministic terms from the result.
  *
  * @returns {string}  The resulting simplified formula.
  */
-export default function simplifyRollFormula(formula, { preserveFlavor=false } = {}) {
+export default function simplifyRollFormula(formula, { preserveFlavor=false, deterministic=false } = {}) {
   // Create a new roll and verify that the formula is valid before attempting simplification.
   let roll;
   try { roll = new Roll(formula); }
@@ -16,6 +17,21 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false } = 
 
   // Optionally strip flavor annotations.
   if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
+  if ( deterministic ) {
+    // Remove non-deterministic terms and their preceding operators.
+    const terms = [];
+    for ( let i = roll.terms.length - 1; i >= 0; ) {
+      let term = roll.terms[i];
+      const deterministic = term.isDeterministic;
+      if ( deterministic ) terms.unshift(term);
+      term = roll.terms[--i];
+      while ( term instanceof OperatorTerm ) {
+        if ( deterministic ) terms.unshift(term);
+        term = roll.terms[--i];
+      }
+    }
+    roll.terms = terms;
+  }
 
   // Perform arithmetic simplification on the existing roll terms.
   roll.terms = _simplifyOperatorTerms(roll.terms);

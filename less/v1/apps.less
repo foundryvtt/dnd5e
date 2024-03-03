@@ -1,0 +1,884 @@
+/* ----------------------------------------- */
+/*  All DnD5e Apps                           */
+/* ----------------------------------------- */
+
+h5 {
+  margin-block-start: 1em;
+  margin-block-end: 0;
+  font-size: var(--font-size-13);
+}
+
+.dialog {
+  label:has(input[type="checkbox"]) {
+    display: flex;
+    margin-block-end: 0.5em;
+
+    > input[type="checkbox"] {
+      flex-basis: auto;
+    }
+  }
+}
+
+.dnd5e {
+  .window-content {
+    font-size: var(--font-size-13);
+  }
+
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+
+  h3 {
+    border-bottom: none;
+  }
+
+  // Item Sheet form fields
+  input[type="text"],
+  input[type="number"],
+  select {
+    height: calc(100% - 2px);
+    border: 1px solid var(--dnd5e-color-tan);
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--dnd5e-color-dark);
+  }
+
+  input[type="number"].number-lg {
+    font-size: 3em;
+    text-align: center;
+  }
+
+  // Hovered Fields
+  input[type="text"],
+  input[type="number"],
+  input[type="checkbox"] {
+    &:hover,
+    &:focus {
+      border: 1px solid #111;
+      box-shadow: 0 0 8px red;
+    }
+  }
+
+  // Disabled Fields
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    color: var(--dnd5e-color-olive);
+    border: 1px solid transparent !important;
+    outline: none !important;
+    &:hover,
+    &:focus {
+      box-shadow: none !important;
+      border: 1px solid transparent !important;
+      outline: none !important;
+    }
+  }
+
+  // Buttons
+  button {
+    background: rgba(0, 0, 0, 0.10);
+    border: var(--dnd5e-border-groove);
+  }
+
+  // Secrets
+  .secret .reveal {
+    border: 1px dashed var(--color-border-light-primary);
+    background: rgb(255 255 240 / 80%);
+  }
+
+  // TODO: Remove when fixed in core: https://github.com/foundryvtt/foundryvtt/issues/8340
+  .locked .secret .reveal {
+    display: none;
+  }
+
+  /* Form Groups */
+  .form-group {
+    label {
+      flex: 2;
+      color: var(--dnd5e-color-olive);
+      font-weight: bold;
+    }
+    .form-fields {
+      .flexrow();
+      > * {
+        margin: 0 3px 0 0;
+        &:last-child { margin-right: 0; }
+      }
+    }
+  }
+
+  // Stacked Groups
+  .form-group.stacked {
+    > label {
+      flex: 0 0 100%;
+      margin: 0;
+    }
+    label.checkbox,
+    label.radio {
+      flex: auto;
+      text-align: left;
+    }
+  }
+
+  // Form Headers
+  .form-header {
+    margin: 0 0 0.25em 0;
+    padding: 2px 0;
+    border-top: var(--dnd5e-border-groove);
+    border-bottom: var(--dnd5e-border-groove);
+    font-family: var(--dnd5e-font-modesto);
+    font-size: var(--font-size-20);
+    font-weight: 700;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    margin: 0 2px 0 0;
+    padding: 0 3px;
+    font-size: var(--font-size-10);
+    line-height: 16px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+
+/* ----------------------------------------- */
+/*  Hit Dice Config Sheet Specifically       */
+/* ----------------------------------------- */
+
+.dnd5e.hd-config {
+  .form-group {
+    button.increment, button.decrement {
+      flex: 0 0 1rem;
+      line-height: 1rem;
+    }
+
+    button.decrement {
+      margin-right: 0;
+    }
+
+    span.sep {
+      margin: 0;
+    }
+
+    input {
+      flex: 0 0 2rem;
+      text-align: center;
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+  }
+}
+
+
+/* ----------------------------------------- */
+/*  Entity Sheets Specifically               */
+/* ----------------------------------------- */
+
+.dnd5e.sheet {
+  .window-content {
+    overflow-y: hidden;
+    padding: 5px;
+    background: var(--dnd5e-sheet-background);
+    font-size: var(--font-size-13);
+    color: var(--dnd5e-color-dark);
+
+    form {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .tab {
+      height: 100%;
+      overflow-y: auto;
+      align-content: flex-start;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+
+  // Input Fields
+  input[type="text"],
+  input[type="number"] {
+    background: none;
+    border: 1px solid transparent;
+    &:hover,
+    &:focus {
+      border: 1px solid #111;
+    }
+  }
+
+  // Select Fields
+  select {
+    flex: 1;
+    font-size: var(--font-size-12);
+    height: 22px;
+    background: transparent;
+  }
+
+  // Rollable Titles
+  .editable .rollable:hover {
+    cursor: pointer;
+  }
+  .editable h4.rollable:hover,
+  .editable .rollable:hover > h4 {
+    color: #000;
+    text-shadow: 0 0 10px red;
+  }
+
+  // Separators
+  span.sep {
+    flex: none;
+    margin: 0 1px;
+    display: inline;
+    position: relative;
+    color: var(--dnd5e-color-tan);
+    font-weight: normal;
+  }
+
+  /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
+
+  .editor {
+    height: 100%;
+    .tox-toolbar-overlord,
+    .tox-toolbar__primary {
+      background: none;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Notifications                            */
+  /* ----------------------------------------- */
+
+  .warnings, .info {
+    flex: 0 0 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .notification {
+      font-family: 'Signika', sans-serif;
+      font-weight: normal;
+      font-size: var(--font-size-13);
+      box-shadow: none;
+      padding: 2px 8px;
+      margin-bottom: 2px;
+    }
+
+    .warning, .error {
+      text-shadow: black 0 0 1px, rgba(0, 0, 0, 0.75) 0 0 2px, rgba(0, 0, 0, 0.5) 0 0 4px
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+
+  .sheet-header {
+    --dnd5e-sheet-header-height: 100px;
+
+    flex: 0 0 var(--dnd5e-sheet-header-height);
+    border-bottom: var(--dnd5e-border-groove);
+
+    .header-details {
+      font-family: var(--dnd5e-font-modesto);
+      font-size: var(--font-size-20);
+      font-weight: 700;
+
+      .summary select {
+        width: 100%;
+        height: 100%;
+        border: 0;
+
+        font-family: var(--dnd5e-font-modesto);
+        font-size: var(--font-size-20);
+        font-weight: 100;
+        text-transform: capitalize;
+      }
+    }
+
+    /* Character Name */
+    h1 {
+      flex: 1;
+      border-bottom: none;
+      height: 60px;
+      margin: 0;
+      padding: 5px;
+
+      input {
+        display: block;
+        height: 50px;
+        font-size: var(--font-size-32);
+        margin: 0;
+      }
+    }
+
+    /* Profile Image */
+    img.profile {
+      flex: 0 0 var(--dnd5e-sheet-header-height);
+      max-width: var(--dnd5e-sheet-header-height);
+      height: var(--dnd5e-sheet-header-height);
+      object-fit: contain;
+      border: none;
+      border-right: var(--dnd5e-border-groove);
+    }
+
+    /* Header Summary Details */
+    .summary {
+      flex: 0 0 100%;
+      height: 40px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: var(--dnd5e-border-groove);
+      border-bottom: none;
+
+      li {
+        height: calc(100% - 6px);
+        float: left;
+        margin: 2px 0;
+        padding: 0;
+        border-right: var(--dnd5e-border-groove);
+        line-height: 34px;
+        color: var(--dnd5e-color-olive);
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Navigation                         */
+  /* ----------------------------------------- */
+
+  .sheet-navigation {
+    flex: 0 0 30px;
+    margin-bottom: 5px;
+    font-family: var(--dnd5e-font-modesto);
+    font-size: var(--font-size-20);
+    font-weight: 700;
+
+    .item {
+      height: 30px;
+      line-height: 32px;
+      margin: 0 24px;
+      border-bottom: 3px solid var(--dnd5e-color-beige);
+
+      &.active {
+        border-bottom: 3px solid var(--dnd5e-color-crimson);
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+
+  .sheet-body {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ----------------------------------------- */
+  /*  List Filters                             */
+  /* ----------------------------------------- */
+
+  .filter-list {
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 16px;
+    max-width: 70%;
+
+    .filter-icon {
+      flex: none;
+      font-size: var(--font-size-14);
+      color: var(--dnd5e-color-tan);
+    }
+
+    .filter-item {
+      text-align: center;
+      font-size: var(--font-size-12);
+      margin: 0 6px 0 0;
+      border-bottom: 3px solid var(--dnd5e-color-beige);
+      white-space: nowrap;
+
+      &:last-child {
+        margin: 0;
+      }
+
+      &:hover {
+        text-shadow: 0 0 4px red;
+        border-bottom: 3px solid var(--dnd5e-color-tan);
+      }
+
+      &.active {
+        border-bottom: 3px solid var(--dnd5e-color-crimson);
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Trait Lists                              */
+  /* ----------------------------------------- */
+
+  .traits {
+    margin: 5px 0 0;
+
+    .traits-list {
+      flex: 0 0 100%;
+      line-height: 20px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .trait-selector, .proficiency-selector {
+    flex: 0 0 16px;
+    padding: 2px 0;
+    color: #999;
+    font-size: var(--font-size-10);
+  }
+}
+
+  /* ----------------------------------------- */
+  /*  Items Lists                              */
+  /* ----------------------------------------- */
+.dnd5e {
+  .items-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    color: var(--dnd5e-color-tan);
+
+    // Child lists
+    .item-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    // Item Name
+    .item-name {
+      flex: 2;
+      margin: 0;
+      overflow: hidden;
+      font-size: var(--font-size-13);
+      text-align: left;
+      align-items: center;
+      h3, h4 {
+        margin: 0;
+        white-space: nowrap;
+        overflow-x: hidden;
+      }
+    }
+
+    // Control Buttons
+    .item-controls {
+      flex: 0 0 60px;
+      justify-content: space-between;
+      a {
+        font-size: var(--font-size-12);
+        text-align: center;
+      }
+    }
+
+    // Individual Item
+    .item {
+      align-items: center;
+      padding: 0 2px; // to align with the header border
+      border-bottom: 1px solid var(--dnd5e-color-faint);
+      &:last-child { border-bottom: none; }
+      .item-name {
+        color: var(--dnd5e-color-dark);
+        .item-image {
+          flex: 0 0 30px;
+          height: 30px;
+          background-size: cover;
+          background-position: 50% 0;
+          border: none;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    // Section Header
+    .items-header {
+      height: 28px;
+      margin: 2px 0;
+      padding: 0;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.05);
+      border: var(--dnd5e-border-groove);
+      font-weight: bold;
+      > * {
+        font-size: var(--font-size-12);
+        text-align: center;
+      }
+      h3 {
+        padding-left: 5px;
+        font-family: var(--dnd5e-font-modesto);
+        font-size: var(--font-size-16);
+        font-weight: 700;
+        text-align: left;
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Active Effects                           */
+/* ----------------------------------------- */
+
+.effects-element {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+
+  .effects-list {
+    flex-grow: 1;
+  }
+  .effect-source,
+  .effect-duration,
+  .effect-controls {
+    text-align: center;
+    border-inline: 1px solid var(--dnd5e-color-faint);
+    font-size: var(--font-size-12);
+  }
+  .effect-controls {
+    border: none;
+  }
+}
+
+/* ----------------------------------------- */
+/* Trait Selector
+/* ----------------------------------------- */
+
+.trait-selector {
+  max-height: 80vh;
+
+  form {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    > .trait-list {
+      overflow: auto;
+      border-bottom: var(--dnd5e-border-groove);
+    }
+  }
+
+  .trait-list {
+    list-style: none;
+    margin: 0;
+    margin-block-end: 6px;
+    padding: 0;
+    padding-block-end: 6px;
+
+    li ol.trait-list {
+      margin-left: 1.5em;
+    }
+    .category > label {
+      font-weight: bold;
+    }
+    .wildcard > label {
+      font-style: italic;
+    }
+  }
+
+  input[type="text"] {
+    height: 24px;
+    margin: 2px;
+  }
+}
+
+.damage-modification {
+  .modifications label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      flex: 0 0 150px;
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Property Attribution                     */
+/* ----------------------------------------- */
+
+:is(#tooltip, .locked-tooltip).property-attribution {
+  min-width: 150px;
+  padding: 3px;
+  background-color: rgba(0, 0, 0, .8);
+  backdrop-filter: blur(4px);
+  text-align: left;
+
+  table {
+    margin: 0;
+    border: 0;
+    font-size: var(--font-size-14);
+
+    caption {
+      padding-block: 0.25em 0.5em;
+      font-size: var(--font-size-16);
+    }
+    tr {
+      background-color: inherit;
+    }
+    td {
+      padding: 3px;
+    }
+    tr.total > td {
+      font-weight: 600;
+      padding-top: 5px;
+      border-top: 1px solid var(--dnd5e-color-tan);
+    }
+    td.attribution-value {
+      width: 20%;
+      padding-right: 5px;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    // Arithmetic Operators
+    td::before {
+      opacity: 0.6;
+    }
+    td.mode-1::before { // Multiply
+      content: "×";
+    }
+    td.mode-2::before { // Add
+      content: "+";
+    }
+    td.mode-2.negative::before { // Subtract
+      content: "−";
+      margin-right: -1px;
+    }
+    td.mode-3::before { // Downgrade
+      content: "↓";
+    }
+    td.mode-4::before { // Upgrade
+      content: "↑";
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    font-size: var(--font-size-14);
+    gap: .5rem;
+
+    + .row { margin-top: 4px; }
+    .value { font-weight: bold; }
+    .label { flex: 1; }
+    .units {
+      opacity: .6;
+      font-weight: normal;
+    }
+    > i.fas {
+      height: 16px;
+      width: 16px;
+      text-align: center;
+
+      &.burrow::before { content: "\f85e"; }
+      &.climb::before { content: "\f6fc"; }
+      &.fly::before { content: "\f56b"; }
+      &.walk::before { content: "\f554"; }
+      &.swim {
+        transform: scaleX(-1);
+        &::before { content: "\f5c4"; }
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Actor Type Config Sheet Specifically     */
+/* ----------------------------------------- */
+
+.actor-type {
+  .trait-list {
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      flex-basis: 50%;
+      flex-grow: 1;
+    }
+    li.form-group {
+      flex-basis: 100%;
+    }
+  }
+  label.radio {
+    display: flex;
+    flex: auto;
+    font-size: var(--font-size-12);
+    line-height: 20px;
+    font-weight: normal;
+    align-items: baseline;
+    > input[type="radio"] {
+      margin: 0 5px 0 0;
+    }
+  }
+  li.custom-type input[type="radio"] {
+    display: none;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Add Feature Prompt Specifically          */
+/* ----------------------------------------- */
+
+.dnd5e.select-items-prompt {
+  .dialog-content {
+    margin-bottom: 1em;
+  }
+
+  .items-list {
+    margin-top: 0.5em;
+  }
+
+  .item-name > label, .item-image, input {
+    cursor: pointer;
+  }
+
+  .item-name > label {
+    align-items: center;
+  }
+
+  .window-content {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Polymorph Features                       */
+/* ----------------------------------------- */
+
+.polymorph {
+  /* ----------------------------------------- */
+  /*  Two Column Configurations                */
+  /* ----------------------------------------- */
+  &.two-column {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    grid-gap: 0.4em;
+  }
+
+}
+
+/* ----------------------------------------- */
+/*  Module Art Configuration                 */
+/* ----------------------------------------- */
+
+#module-art-config {
+  ol {
+    counter-reset: priorities;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+
+    &::before {
+      counter-increment: priorities;
+      content: counter(priorities);
+      width: 2em;
+      text-align: center;
+      font-size: var(--font-size-16);
+    }
+
+    > label { flex: 1; }
+
+    > .form-fields {
+      display: flex;
+      gap: .5rem;
+
+      label {
+        display: flex;
+        align-items: center;
+      }
+
+      input {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  .priority-adjust {
+    display: flex;
+
+    button {
+      width: 24px;
+      height: 24px;
+      font-size: var(--font-size-11);
+      display: grid;
+      place-content: center;
+
+      > i { margin: 0; }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Token Heads-Up Display                   */
+/* ----------------------------------------- */
+
+#token-hud .status-effects .effect-control.active:not(.overlay) {
+  border: 1px solid green;
+}
+
+/* ----------------------------------------- */
+/*  Accordion                                */
+/* ----------------------------------------- */
+
+.accordion {
+  transition: margin-bottom 500ms ease;
+}
+.accordion.collapsed {
+  > .accordion-content { height: 0; }
+}
+
+.accordion-indicator {
+  display: none;
+  transition: transform 500ms ease;
+}
+.accordion .accordion-indicator {
+  display: inherit;
+  transform: rotate(0deg);
+}
+.accordion.collapsed .accordion-indicator {
+  transform: rotate(-90deg);
+}
+
+.accordion-heading {
+  cursor: pointer;
+  position: relative;
+}
+
+.accordion-content {
+  overflow: hidden;
+  transition: height 500ms ease;
+}

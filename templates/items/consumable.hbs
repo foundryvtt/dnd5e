@@ -6,22 +6,48 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
+                {{#if system.identified}}
                 <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}">
+                {{else}}
+                <input name="system.unidentified.name" type="text" value="{{system.unidentified.name}}"
+                       placeholder="{{ localize 'DND5E.NameUnidentified' }}">
+                {{/if}}
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{itemType}}</h4>
-                <span class="item-status">{{itemStatus}}</span>
+                <h4 class="item-type">{{ itemType }}</h4>
+                <label class="equipped">
+                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}>
+                    {{#if system.equipped}}
+                        {{ localize "DND5E.Equipped" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
+                    {{else}}
+                        {{ localize "DND5E.Unequipped" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
+                    {{/if}}
+                </label>
+                <label class="identified">
+                    <input type="checkbox" name="system.identified" {{checked system.identified}}>
+                    {{#if system.identified}}
+                        {{ localize "DND5E.Identified" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
+                    {{else}}
+                        {{ localize "DND5E.Unidentified.Title" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
+                    {{/if}}
+                </label>
             </div>
 
             <ul class="summary flexrow">
+                <li>{{ itemStatus }}</li>
                 <li>
-                    {{lookup config.consumableTypes system.consumableType }}
-                </li>
-                <li>
-                    <select name="system.rarity">
+                    {{#if concealDetails}}
+                    <span>{{ localize "DND5E.Unidentified.Title" }}</span>
+                    {{else}}
+                    <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>
+                    {{/if}}
                 </li>
                 <li>
                     {{> "dnd5e.item-source"}}
@@ -45,15 +71,28 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            {{#dnd5e-concealSection concealDetails}}
+
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableDetails" }}</h3>
 
             {{!-- Consumable Type --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemConsumableType" }}</label>
-                <select name="system.consumableType">
-                    {{selectOptions config.consumableTypes selected=system.consumableType}}
+                <select name="system.type.value">
+                    {{selectOptions config.consumableTypes selected=system.type.value labelAttr="label"}}
                 </select>
             </div>
+            {{#if itemSubtypes}}
+            <div class="form-group">
+                <label>
+                    {{localize "DND5E.ItemConsumableSubtype"
+                        category=(lookup (lookup config.consumableTypes system.type.value) "label")}}
+                </label>
+                <select name="system.type.subtype">
+                    {{selectOptions itemSubtypes selected=system.type.subtype blank=""}}
+                </select>
+            </div>
+            {{/if}}
 
             <div class="form-group">
                 <label>{{localize "DND5E.Attunement"}}</label>
@@ -62,28 +101,19 @@
                 </select>
             </div>
 
-            {{!-- Consumable Status --}}
-            <div class="form-group stacked">
-                <label>{{ localize "DND5E.ItemConsumableStatus" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}> {{ localize "DND5E.Equipped" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.identified" {{checked system.identified}}> {{ localize "DND5E.Identified" }}
-                </label>
-            </div>
-
-            {{#if (eq system.consumableType "ammo")}}
             {{!-- Consumable Properties --}}
             <div class="form-group stacked weapon-properties">
+                {{#if (eq system.type.value "ammo")}}
                 <label>{{ localize "DND5E.ItemAmmoProperties" }}</label>
-                {{#each config.physicalWeaponProperties as |name prop|}}
+                {{else}}
+                <label>{{ localize "DND5E.ItemConsumableProperties" }}</label>
+                {{/if}}
+                {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../system.properties prop)}}> {{ name }}
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
                 </label>
                 {{/each}}
             </div>
-            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
 
@@ -94,6 +124,8 @@
 
             {{!-- Item Action Template --}}
             {{> "dnd5e.item-action"}}
+
+            {{/dnd5e-concealSection}}
         </div>
 
         {{!-- Effects Tab --}}

@@ -1,9 +1,11 @@
 /**
  * A specialized Dialog subclass for ability usage.
  *
- * @param {Item5e} item             Item that is being used.
- * @param {object} [dialogData={}]  An object of dialog data which configures how the modal window is rendered.
- * @param {object} [options={}]     Dialog rendering options.
+ * @param {Item5e} item                                Item that is being used.
+ * @param {object} [dialogData={}]                     An object of dialog data which configures
+ *                                                     how the modal window is rendered.
+ * @param {object} [options={}]                        Dialog rendering options.
+ * @param {ItemUseConfiguration} [options.usageConfig] The ability use configuration's values.
  */
 export default class AbilityUseDialog extends Dialog {
   constructor(item, dialogData={}, options={}) {
@@ -15,6 +17,12 @@ export default class AbilityUseDialog extends Dialog {
      * @type {Item5e}
      */
     this.item = item;
+
+    /**
+     * Store a reference to the ItemUseConfiguration being used
+     * @type {ItemUseConfiguration}
+     */
+    this.configuration = options.usageConfig ?? {};
   }
 
   /* -------------------------------------------- */
@@ -70,6 +78,8 @@ export default class AbilityUseDialog extends Dialog {
         },
         default: "use",
         close: () => resolve(null)
+      }, {
+        usageConfig: config
       });
       dlg.render(true);
     });
@@ -106,16 +116,19 @@ export default class AbilityUseDialog extends Dialog {
       return arr;
     }, []).filter(sl => sl.level <= lmax);
 
-    // If this character has pact slots, present them as well.
-    const pact = actor.system.spells.pact;
-    if ( pact.level >= level ) {
-      options.push({
-        key: "pact",
-        level: pact.level,
-        label: `${game.i18n.format("DND5E.SpellLevelPact", {level: pact.level, n: pact.value})}`,
-        canCast: true,
-        hasSlots: pact.value > 0
-      });
+    // If this character has other kinds of slots, present them as well.
+    for ( const k of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
+      const spellData = actor.system.spells[k];
+      if ( !spellData ) continue;
+      if ( spellData.level >= level ) {
+        options.push({
+          key: k,
+          level: spellData.level,
+          label: `${game.i18n.format(`DND5E.SpellLevel${k.capitalize()}`, {level: spellData.level, n: spellData.value})}`,
+          canCast: true,
+          hasSlots: spellData.value > 0
+        });
+      }
     }
 
     return options;
@@ -216,7 +229,7 @@ export default class AbilityUseDialog extends Dialog {
       if ( uses.value > 1 ) str = "DND5E.AbilityUseConsumableChargeHint";
       else if ( quantity > 1 ) str = "DND5E.AbilityUseConsumableQuantityHint";
       return game.i18n.format(str, {
-        type: game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`),
+        type: game.i18n.localize(`DND5E.Consumable${item.system.type.value.capitalize()}`),
         value: uses.value,
         quantity: quantity,
         max: uses.max,
@@ -245,15 +258,21 @@ export default class AbilityUseDialog extends Dialog {
   static _getAbilityUseWarnings(data) {
     const warnings = [];
     const item = data.item;
-    const { quantity, level, consume, consumableType } = item.system;
+    const { quantity, level, consume, preparation } = item.system;
     const scale = item.usageScaling;
+    const levels = [level];
+
+    if ( item.type === "spell" ) {
+      const spellData = item.actor.system.spells[preparation.mode] ?? {};
+      if ( "level" in spellData ) levels.push(spellData.level);
+    }
 
     if ( (scale === "slot") && data.slotOptions.every(o => !o.hasSlots) ) {
       // Warn that the actor has no spell slots of any level with which to use this item.
       warnings.push(game.i18n.format("DND5E.SpellCastNoSlotsLeft", {
         name: item.name
       }));
-    } else if ( (scale === "slot") && !data.slotOptions.some(o => (o.level === level) && o.hasSlots) ) {
+    } else if ( (scale === "slot") && !data.slotOptions.some(o => levels.includes(o.level) && o.hasSlots) ) {
       // Warn that the actor has no spell slots of this particular level with which to use this item.
       warnings.push(game.i18n.format("DND5E.SpellCastNoSlots", {
         level: CONFIG.DND5E.spellLevels[level],
@@ -279,7 +298,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // Display warnings that the item or its resource item will be destroyed.
     if ( item.type === "consumable" ) {
-      const type = game.i18n.localize(`DND5E.Consumable${consumableType.capitalize()}`);
+      const type = game.i18n.localize(`DND5E.Consumable${item.system.type.value.capitalize()}`);
       if ( this._willLowerQuantity(item) && (quantity === 1) ) {
         warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyHint", {type}));
       }

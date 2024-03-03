@@ -172,10 +172,10 @@ export default class TraitAdvancement extends Advancement {
       : filteredKeys(CONFIG.DND5E.traits, t => t.expertise);
 
     for ( const trait of traitTypes ) {
-      const actorValues = Trait.actorValues(this.actor, trait);
+      const actorValues = await Trait.actorValues(this.actor, trait);
       const choices = await Trait.choices(trait, { prefixed: true });
       for ( const key of choices.asSet() ) {
-        const value = actorValues[key];
+        const value = actorValues[key] ?? 0;
         if ( this.configuration.mode === "default" ) {
           if ( value >= 1 ) selected.add(key);
           else available.add(key);

@@ -1,8 +1,3 @@
-
-/* Deprecated vars */
-@borderLight: #CCC;
-@borderDark: #666;
-
 /* ----------------------------------------- */
 /*  Fonts                                    */
 /* ----------------------------------------- */
@@ -21,24 +16,83 @@
   src: url('../../fonts/modesto-condensed/modesto-condensed-bold.woff2') format('woff2');
 }
 
-.modesto {
-  font-family: "Modesto Condensed", "Palatino Linotype", serif;
-  font-size: 20px;
-  font-weight: 700;
-}
-
 /* ----------------------------------------- */
 /*  Sheet Styles                             */
 /* ----------------------------------------- */
 
-@colorDark: #191813;
-@colorFaint: #c9c7b8;
-@colorBeige: #b5b3a4;
-@colorTan: #7a7971;
-@colorOlive: #4b4a44;
-@colorCrimson: #44191A;
-@borderGroove: 2px groove #eeede0;
-@sheetBackground: url("ui/parchment.jpg") repeat;
+:root {
+  --dnd5e-color-black: #000;
+  --dnd5e-color-dark: #191813;
+  --dnd5e-color-faint: #c9c7b8;
+  --dnd5e-color-beige: #b5b3a4;
+  --dnd5e-color-tan: #7a7971;
+  --dnd5e-color-olive: #4b4a44;
+  --dnd5e-color-crimson: #44191A;
+  --dnd5e-color-groove: #eeede0;
+  --dnd5e-color-gold: #9f9275;
+  --dnd5e-color-red: #ed1c24;
+  --dnd5e-color-blue: cornflowerblue;
+  --dnd5e-color-green: #205b15;
+  --dnd5e-color-maroon: #741b2b;
+  --dnd5e-color-parchment: #f1ebe8;
+  --dnd5e-color-scrollbar: var(--dnd5e-color-gold);
+  --dnd5e-color-card: #f8f4f1;
+  --dnd5e-color-hp-1: #1b4b29;
+  --dnd5e-color-hp-2: #3ba55d;
+  --dnd5e-color-hp-3: #276d3c;
+  --dnd5e-color-hd-1: #401f25;
+  --dnd5e-color-hd-2: var(--dnd5e-color-maroon);
+  --dnd5e-color-hd-3: #500000;
+  --dnd5e-color-sc-1: #433754;
+  --dnd5e-color-sc-2: #776493;
+  --dnd5e-color-iron-gray: #313131;
+  --dnd5e-color-light-gray: #3d3d3d;
+  --dnd5e-color-success: #006c00;
+  --dnd5e-color-success-background: #c7d0c0;
+  --dnd5e-color-success-critical: green;
+  --dnd5e-color-failure: #6e0000;
+  --dnd5e-color-failure-background: #ffdddd;
+  --dnd5e-color-failure-critical: red;
+  --dnd5e-background-10: rgb(0 0 0 / 10%);
+  --dnd5e-background-5: rgb(0 0 0 / 5%);
+  --dnd5e-border-dark: 1px solid #999;
+  --dnd5e-border-light: 1px solid #CCC;
+  --dnd5e-border-groove: 2px groove var(--dnd5e-color-groove);
+  --dnd5e-border-dotted: 1px dotted #bbb;
+  --dnd5e-font-modesto: "Modesto Condensed", "Palatino Linotype", serif;
+  --dnd5e-font-roboto: Roboto, sans-serif;
+  --dnd5e-font-roboto-condensed: "Roboto Condensed", sans-serif;
+  --dnd5e-font-roboto-slab: "Roboto Slab", serif;
+  --dnd5e-sheet-background: url("ui/parchment.jpg") repeat;
+  --dnd5e-shadow-45: rgb(0 0 0 / 45%);
+  --dnd5e-shadow-15: rgb(0 0 0 / 15%);
+  --dnd5e-highlight-45: rgb(255 255 255 / 45%);
+  --font-size-9: 0.5625rem;
+  --font-size-10: 0.625rem;
+  --font-size-23: 1.4375rem;
+  --font-size-30: 1.875rem;
+  --font-size-36: 2.25rem;
+  --font-size-42: 2.625rem;
+  --font-size-46: 2.875rem;
+
+  --dnd5e-capacity-container-background-color: oklch(57.5% 0.012 101);
+  --dnd5e-capacity-container-border-color: oklch(20.8% 0.01 98);
+  --dnd5e-capacity-background-color: oklch(62% 0.05 246);
+  --dnd5e-capacity-border-color: oklch(91% 0.044 252.5);
+  --dnd5e-capacity-text-color: oklch(95% 0 0);
+
+  @media (prefers-contrast: more) {
+    --dnd5e-color-card: #ffffff;
+    --dnd5e-color-gold: #e3ce9e;
+    --dnd5e-color-scrollbar: var(--dnd5e-color-maroon);
+    --filigree-border-color: var(--dnd5e-color-dark);
+    --proficiency-cycle-enabled-color: color-mix(in oklab, var(--dnd5e-color-blue), black 20%);
+    --proficiency-cycle-disabled-color: var(--dnd5e-color-dark);
+    .window-app .window-content {
+      --color-text-dark-primary: #000000;
+    }
+  }
+}
 
 /* ----------------------------------------- */
 /*  Flexbox                                  */

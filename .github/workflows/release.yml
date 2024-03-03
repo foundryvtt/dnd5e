@@ -11,38 +11,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+
+
+    # Load the system.json manifest into memory
+    - name: Load system manifest
+      id: manifest
+      uses: zoexx/github-action-json-file-properties@release
+      with:
+        file_path: "./system.json"
 
 
     # Set up our some variables for future use
     # Adapted from https://github.community/t/how-to-get-just-the-tag-name/16241/7
-    # Tag name: ${{ steps.get_vars.outputs.TAG_NAME }}
-    # Zip name: ${{ steps.get_vars.outputs.ZIP_NAME }}
-    # Expected Release Download URL: ${{ steps.get_vars.outputs.RELEASE_DOWNLOAD_URL }}
-    # Expected Release system.json URL: ${{ steps.get_vars.outputs.RELEASE_INSTALL_URL }}
-    # Stringified system.json contents: ${{ steps.get_vars.outputs.SYSTEM_JSON }}
+    # Tag name: ${{ env.TAG_NAME }}
+    # Zip name: ${{ env.ZIP_NAME }}
+    # Expected Release Download URL: ${{ env.RELEASE_DOWNLOAD_URL }}
+    # Expected Release system.json URL: ${{ env.RELEASE_INSTALL_URL }}
     - name: Set up variables
       id: get_vars
       run: |
         TAG=${GITHUB_REF/refs\/tags\//}
-        echo ::set-output name=TAG_NAME::$TAG
-        echo ::set-output name=ZIP_NAME::dnd5e-$TAG.zip
-        echo ::set-output name=RELEASE_DOWNLOAD_URL::https://github.com/${{github.repository}}/releases/download/$TAG/dnd5e-$TAG.zip
-        echo ::set-output name=RELEASE_INSTALL_URL::https://github.com/${{github.repository}}/releases/download/$TAG/system.json
-        JSON=$(cat ./system.json)
-        echo ::set-output name=SYSTEM_JSON::${JSON//'%'/'%25'}
+        echo "TAG_NAME=$TAG" >> $GITHUB_ENV
+        echo "ZIP_NAME=dnd5e-$TAG.zip" >> $GITHUB_ENV
+        echo "RELEASE_DOWNLOAD_URL=https://github.com/${{github.repository}}/releases/download/$TAG/dnd5e-$TAG.zip" >> $GITHUB_ENV
+        echo "RELEASE_INSTALL_URL=https://github.com/${{github.repository}}/releases/download/$TAG/system.json" >> $GITHUB_ENV
 
 
     # Run some tests to make sure our `system.json` is correct
     # Exit before setting up node if not
     - name: Verify correct naming
       env:
-        TAG_NAME: ${{ steps.get_vars.outputs.TAG_NAME }}
-        RELEASE_DOWNLOAD: ${{steps.get_vars.outputs.RELEASE_DOWNLOAD_URL}}
-        # Extract version and download url from system.json
-        # https://docs.github.com/en/actions/learn-github-actions/expressions#fromjson
-        PACKAGE_VERSION: ${{fromJSON(steps.get_vars.outputs.SYSTEM_JSON).version}}
-        PACKAGE_DOWNLOAD: ${{fromJSON(steps.get_vars.outputs.SYSTEM_JSON).download}}
+        TAG_NAME: ${{ env.TAG_NAME }}
+        RELEASE_DOWNLOAD: ${{ env.RELEASE_DOWNLOAD_URL }}
+        PACKAGE_VERSION: ${{ steps.manifest.outputs.version }}
+        PACKAGE_DOWNLOAD: ${{ steps.manifest.outputs.download }}
       run: |
         # Validate that the tag being released matches the package version.
         if [[ ! $TAG_NAME == release-$PACKAGE_VERSION ]]; then
@@ -64,7 +67,7 @@ jobs:
 
 
     - name: Adjust manifest
-      uses: microsoft/variable-substitution@v1
+      uses: TomaszKandula/variable-substitution@v1.0.2
       with:
         files: "system.json"
       env:
@@ -73,9 +76,9 @@ jobs:
 
     # Set up Node
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '16.x'
+        node-version: '18.x'
         cache: 'npm'
 
 
@@ -88,11 +91,23 @@ jobs:
     # Run our `build` script
     - name: Build All
       run: |
-        npm run build --if-present
+        npm run build:code --if-present
         mv --force dnd5e-compiled.mjs dnd5e.mjs
 
+
     # Create a zip file with all files required by the module to add to the release
-    - run: zip ${{steps.get_vars.outputs.ZIP_NAME}} -r icons lang json packs/*.db templates tokens ui dnd5e.css dnd5e.mjs dnd5e-compiled.mjs.map LICENSE.txt README.md system.json template.json
+    - run: zip ${{ env.ZIP_NAME }} -r fonts icons lang json packs templates tokens ui dnd5e.css dnd5e.mjs dnd5e-compiled.mjs.map LICENSE.txt README.md system.json template.json --exclude "packs/_source/*"
+
+
+    # Fetch the body from the release
+    - name: Fetch Release Body
+      id: release
+      uses: cardinalby/git-get-release-action@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        tag: ${{ env.TAG_NAME }}
+        doNotFailIfNotFound: true
 
 
     # Create a release for this specific version
@@ -101,10 +116,15 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         allowUpdates: true # Set this to false if you want to prevent updating existing releases
-        name: ${{steps.get_vars.outputs.TAG_NAME}}
+        name: ${{ env.TAG_NAME }}
         draft: false
-        prerelease: false
+        prerelease: true
+        omitDraftDuringUpdate: true
+        omitPrereleaseDuringUpdate: true
         token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: './system.json, ./${{steps.get_vars.outputs.ZIP_NAME}}'
-        tag: ${{steps.get_vars.outputs.TAG_NAME}}
-        body: '**Installation:** To manually install this release, please use the following manifest URL: ${{steps.get_vars.outputs.RELEASE_INSTALL_URL}}'
+        artifacts: './system.json, ./${{ env.ZIP_NAME }}'
+        tag: ${{ env.TAG_NAME }}
+        body: |
+          ${{ steps.release.outputs.body }}
+          
+          **Installation:** To manually install this release, please use the following manifest URL: ${{ env.RELEASE_INSTALL_URL }}

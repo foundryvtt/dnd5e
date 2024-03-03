@@ -39,21 +39,27 @@ export function actorKeyPath(trait) {
 /**
  * Get the current trait values for the provided actor.
  * @param {Actor5e} actor  Actor from which to retrieve the values.
- * @param {string} trait          Trait as defined in `CONFIG.DND5E.traits`.
+ * @param {string} trait   Trait as defined in `CONFIG.DND5E.traits`.
  * @returns {Object<number>}
  */
-export function actorValues(actor, trait) {
+export async function actorValues(actor, trait) {
   const keyPath = actorKeyPath(trait);
   const data = foundry.utils.getProperty(actor, keyPath);
   if ( !data ) return {};
   const values = {};
+  const traitChoices = await choices(trait, {prefixed: true});
+
+  const setValue = (k, v) => {
+    const result = traitChoices.find(k);
+    if ( result ) values[result[0]] = v;
+  };
 
   if ( ["skills", "tool"].includes(trait) ) {
-    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.value);
+    Object.entries(data).forEach(([k, d]) => setValue(k, d.value));
   } else if ( trait === "saves" ) {
-    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.proficient);
+    Object.entries(data).forEach(([k, d]) => setValue(k, d.proficient));
   } else {
-    data.value.forEach(v => values[`${trait}:${v}`] = 1);
+    data.value.forEach(v => setValue(v, 1));
   }
 
   return values;
@@ -110,7 +116,6 @@ export async function categories(trait) {
   }
 
   if ( traitConfig.subtypes ) {
-    const keyPath = `system.${traitConfig.subtypes.keyPath}`;
     const map = CONFIG.DND5E[`${trait}ProficienciesMap`];
 
     // Merge all ID lists together
@@ -130,7 +135,7 @@ export async function categories(trait) {
       if ( !index ) continue;
 
       // Get the proper subtype, using proficiency map if needed
-      let type = foundry.utils.getProperty(index, keyPath);
+      let type = index.system.type.value;
       if ( map?.[type] ) type = map[type];
 
       // No category for this type, add at top level
@@ -173,14 +178,14 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     };
   }
 
-  const prepareCategory = (key, data, result, prefix) => {
+  const prepareCategory = (key, data, result, prefix, topLevel=false) => {
     let label = _innerLabel(data, traitConfig);
     if ( !label ) label = key;
     if ( prefixed ) key = `${prefix}:${key}`;
     result[key] = {
       label: game.i18n.localize(label),
       chosen: chosen.has(key),
-      sorting: traitConfig.sortCategories === true
+      sorting: topLevel ? traitConfig.sortCategories === true : true
     };
     if ( data.children ) {
       const children = result[key].children = {};
@@ -195,7 +200,7 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     }
   };
 
-  Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait));
+  Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait, true));
 
   return new SelectChoices(result).sort();
 }
@@ -238,33 +243,41 @@ export async function mixedChoices(keys) {
  *                                       otherwise else a simple object containing the minimal index data.
  */
 export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) {
-  let pack = CONFIG.DND5E.sourcePacks.ITEMS;
-  let [scope, collection, id] = identifier.split(".");
-  if ( scope && collection ) pack = `${scope}.${collection}`;
-  if ( !id ) id = identifier;
-
-  const packObject = game.packs.get(pack);
+  const uuid = getBaseItemUUID(identifier);
+  const { collection, documentId: id } = foundry.utils.parseUuid(uuid);
+  const pack = collection?.metadata.id;
 
   // Full Item5e document required, always async.
-  if ( fullItem && !indexOnly ) return packObject?.getDocument(id);
+  if ( fullItem && !indexOnly ) return collection?.getDocument(id);
 
   const cache = _cachedIndices[pack];
   const loading = cache instanceof Promise;
 
   // Return extended index if cached, otherwise normal index, guaranteed to never be async.
   if ( indexOnly ) {
-    const index = packObject?.index.get(id);
+    const index = collection?.index.get(id);
     return loading ? index : cache?.[id] ?? index;
   }
 
   // Returned cached version of extended index if available.
   if ( loading ) return cache.then(() => _cachedIndices[pack][id]);
   else if ( cache ) return cache[id];
-  if ( !packObject ) return;
+  if ( !collection ) return;
 
   // Build the extended index and return a promise for the data
-  const promise = packObject.getIndex({ fields: traitIndexFields() }).then(index => {
+  const fields = traitIndexFields();
+  const promise = collection.getIndex({ fields }).then(index => {
     const store = index.reduce((obj, entry) => {
+      for ( const field of fields ) {
+        const val = foundry.utils.getProperty(entry, field);
+        if ( (field !== "system.type.value") && (val !== undefined) ) {
+          foundry.utils.setProperty(entry, "system.type.value", val);
+          foundry.utils.logCompatibilityWarning(
+            `The '${field}' property has been deprecated in favor of a standardized \`system.type.value\` property.`,
+            { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
+          );
+        }
+      }
       obj[entry._id] = entry;
       return obj;
     }, {});
@@ -278,12 +291,28 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
 /* -------------------------------------------- */
 
 /**
+ * Construct a proper UUID for the provided base item ID.
+ * @param {string} identifier  Simple ID, compendium name and ID separated by a dot, or proper UUID.
+ * @returns {string}
+ */
+export function getBaseItemUUID(identifier) {
+  if ( identifier.startsWith("Compendium.") ) return identifier;
+  let pack = CONFIG.DND5E.sourcePacks.ITEMS;
+  let [scope, collection, id] = identifier.split(".");
+  if ( scope && collection ) pack = `${scope}.${collection}`;
+  if ( !id ) id = identifier;
+  return `Compendium.${pack}.Item.${id}`;
+}
+
+/* -------------------------------------------- */
+
+/**
  * List of fields on items that should be indexed for retrieving subtypes.
  * @returns {string[]}  Index list to pass to `Compendium#getIndex`.
  * @protected
  */
 export function traitIndexFields() {
-  const fields = [];
+  const fields = ["system.type.value"];
   for ( const traitConfig of Object.values(CONFIG.DND5E.traits) ) {
     if ( !traitConfig.subtypes ) continue;
     fields.push(`system.${traitConfig.subtypes.keyPath}`);
@@ -357,9 +386,10 @@ export function traitLabel(trait, count) {
  */
 export function keyLabel(key, config={}) {
   if ( foundry.utils.getType(config) === "string" ) {
-    foundry.utils.logCompatibilityWarning("Trait.keyLabel(trait, key) is now Trait.keyLabel(key, { trait }).", {
-      since: "DnD5e 2.4", until: "DnD5e 2.6"
-    });
+    foundry.utils.logCompatibilityWarning(
+      "Trait.keyLabel(trait, key) is now Trait.keyLabel(key, { trait }).",
+      { since: "DnD5e 2.4", until: "DnD5e 3.1" }
+    );
     const tmp = config;
     config = { trait: key };
     key = tmp;

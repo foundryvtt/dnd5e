@@ -1,0 +1,158 @@
+{
+  "_id": "zwGsAv6kmwzYGhh3",
+  "name": "Blindness/Deafness",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You can blind or deafen a foe. Choose one creature that you can see within range to make a Constitution saving throw. If it fails, the target is either &amp;Reference[blinded] or &amp;Reference[deafened] (your choice) for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature",
+      "prompt": true
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "con",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 2,
+    "school": "nec",
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": ""
+    },
+    "properties": [
+      "vocal"
+    ],
+    "crewed": false
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+  "effects": [
+    {
+      "name": "Blindness",
+      "icon": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+      "origin": "Compendium.dnd5e.spells.Item.zwGsAv6kmwzYGhh3",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "59WpbiZFULwixyvC",
+      "changes": [],
+      "description": "<p>The target is Blinded for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends.</p>",
+      "transfer": false,
+      "statuses": [
+        "blinded"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!zwGsAv6kmwzYGhh3.59WpbiZFULwixyvC"
+    },
+    {
+      "name": "Deafness",
+      "icon": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+      "origin": "Compendium.dnd5e.spells.Item.zwGsAv6kmwzYGhh3",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "H0SG0oq3VfiCxBOQ",
+      "changes": [],
+      "description": "<p>The target is Deafened for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends.</p>",
+      "transfer": false,
+      "statuses": [
+        "deafened"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!zwGsAv6kmwzYGhh3.H0SG0oq3VfiCxBOQ"
+    }
+  ],
+  "folder": "Qi4Se3we69ukl2V9",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234247,
+    "modifiedTime": 1706146917536,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!zwGsAv6kmwzYGhh3"
+}

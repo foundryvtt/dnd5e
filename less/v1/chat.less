@@ -1,0 +1,138 @@
+/* ----------------------------------------- */
+/*  Chat Cards                               */
+/* ----------------------------------------- */
+
+.dnd5e.chat-card {
+  font-style: normal;
+  font-size: var(--font-size-12);
+
+  .card-header {
+    padding: 3px 0;
+    border-top: 2px groove #FFF;
+    border-bottom: 2px groove #FFF;
+
+    img {
+      flex: 0 0 36px;
+      margin-right: 5px;
+    }
+
+    h3 {
+      flex: 1;
+      margin: 0;
+      line-height: 36px;
+      font-family: var(--dnd5e-font-modesto);
+      font-size: var(--font-size-20);
+      font-weight: 700;
+      color: var(--dnd5e-color-olive);
+      &:hover {
+        color: #111;
+        text-shadow: 0 0 10px red;
+      }
+    }
+  }
+
+  .card-content {
+    margin: 5px 0;
+
+    h3 {
+      font-size: var(--font-size-12);
+      margin: 0;
+      font-weight: bold;
+    }
+
+    > * {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+  }
+
+  .card-buttons {
+    margin: 5px 0;
+
+    span {
+      display: block;
+      line-height: 28px;
+      text-align: center;
+      border: 1px solid var(--dnd5e-border-light);
+    }
+
+    button {
+      font-size: var(--font-size-12);
+      height: 24px;
+      line-height: 20px;
+      margin: 2px 0;
+    }
+  }
+
+  .card-footer {
+    padding: 3px 0 0;
+    border-top: 2px groove #FFF;
+
+    span {
+      border-right: 2px groove #FFF;
+      padding: 0 3px 0 0;
+      font-size: var(--font-size-10);
+
+      &:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.dice-roll .dice-total {
+  &.success {
+    color: inherit;
+    background: var(--dnd5e-color-success-background);
+    border: 1px solid var(--dnd5e-color-success);
+  }
+  &.failure {
+    color: inherit;
+    background: var(--dnd5e-color-failure-background);
+    border: 1px solid var(--dnd5e-color-failure);
+  }
+  &.critical {
+    color: var(--dnd5e-color-success-critical);
+  }
+  &.fumble {
+    color: var(--dnd5e-color-failure-critical);
+  }
+}
+
+/* ----------------------------------------- */
+/*  Inline Roll Actions                      */
+/* ----------------------------------------- */
+
+.roll-link, .reference-link {
+  a {
+    background: #DDD;
+    padding: 1px 4px;
+    border: 1px solid var(--color-border-dark-tertiary);
+    white-space: nowrap;
+    word-break: break-all;
+
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    i {
+      color: var(--color-text-dark-inactive);
+      margin-inline-end: 0.25em;
+    }
+
+    &.enricher-action {
+      padding-inline-end: 1px;
+    }
+  }
+  a + a {
+    margin-inline-start: 2px;
+  }
+}

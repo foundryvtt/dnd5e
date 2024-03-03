@@ -1,0 +1,15 @@
+<section class="content">
+    <section class="header">
+        <h2>{{ label }}</h2>
+    </section>
+    <section class="party">
+        {{#each party}}
+        <div class="member">
+            <img src="{{ img }}" alt="{{ name }}">
+            <span class="name">{{ name }}</span>
+            <span class="passive">{{ passive }}</span>
+            <span class="status {{status}}"></span>
+        </div>
+        {{/each}}
+    </section>
+</section>

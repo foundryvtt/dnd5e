@@ -38,7 +38,6 @@ export default class TraitSelector extends BaseConfigSheet {
       template: "systems/dnd5e/templates/apps/trait-selector.hbs",
       width: 320,
       height: "auto",
-      sheetConfig: false,
       allowCustom: true
     });
   }
@@ -70,8 +69,8 @@ export default class TraitSelector extends BaseConfigSheet {
       choices: await Trait.choices(this.trait, { chosen: data.value }),
       custom: data.custom,
       customPath: "custom" in data ? `${path}.custom` : null,
-      bypasses: "bypasses" in data ? Object.entries(CONFIG.DND5E.physicalWeaponProperties).reduce((obj, [k, v]) => {
-        obj[k] = { label: v, chosen: data.bypasses.has(k) };
+      bypasses: "bypasses" in data ? Object.entries(CONFIG.DND5E.itemProperties).reduce((obj, [k, v]) => {
+        if ( v.isPhysical ) obj[k] = { label: v.label, chosen: data.bypasses.has(k) };
         return obj;
       }, {}) : null,
       bypassesPath: "bypasses" in data ? `${path}.bypasses` : null
@@ -94,13 +93,13 @@ export default class TraitSelector extends BaseConfigSheet {
   /** @inheritdoc */
   _getActorOverrides() {
     const overrides = super._getActorOverrides();
-    const path = Trait.changeKeyPath(this.trait);
-    const src = new Set(foundry.utils.getProperty(this.document._source, path));
-    const current = foundry.utils.getProperty(this.document, path);
-    const delta = current.difference(src);
-    for ( const choice of delta ) {
-      overrides.push(`choices.${choice}`);
-    }
+    const path = Trait.actorKeyPath(this.trait);
+    this._addOverriddenChoices("choices", Trait.changeKeyPath(this.trait), overrides);
+    this._addOverriddenChoices("bypasses", `${path}.bypasses`, overrides);
+    const pathCustom = `${path}.custom`;
+    const sourceCustom = foundry.utils.getProperty(this.document._source, pathCustom);
+    const currentCustom = foundry.utils.getProperty(this.document, pathCustom);
+    if ( sourceCustom !== currentCustom ) overrides.push(pathCustom);
     return overrides;
   }
 
@@ -133,18 +132,24 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /**
    * Filter a list of choices that begin with the provided key for update.
-   * @param {string} prefix    They initial form prefix under which the choices are grouped.
+   * @param {string} prefix    The initial form prefix under which the choices are grouped.
    * @param {string} path      Path in actor data where the final choices will be saved.
    * @param {object} formData  Form data being prepared. *Will be mutated.*
    * @protected
    */
   _prepareChoices(prefix, path, formData) {
-    const chosen = [];
+    const chosen = new Set();
     for ( const key of Object.keys(formData).filter(k => k.startsWith(`${prefix}.`)) ) {
-      if ( formData[key] ) chosen.push(key.replace(`${prefix}.`, ""));
+      if ( formData[key] ) chosen.add(key.replace(`${prefix}.`, ""));
       delete formData[key];
     }
-    formData[path] = chosen;
+
+    // Add choices from the source that have been removed by an override: if we didn't, the override would be persisted
+    const source = new Set(foundry.utils.getProperty(this.document._source, path));
+    const current = foundry.utils.getProperty(this.document, path);
+    for ( const choice of source.difference(current) ) chosen.add(choice);
+
+    formData[path] = Array.from(chosen).sort((a, b) => a.localeCompare(b, "en"));
   }
 
   /* -------------------------------------------- */
@@ -154,7 +159,7 @@ export default class TraitSelector extends BaseConfigSheet {
     const path = Trait.actorKeyPath(this.trait);
     const data = foundry.utils.getProperty(this.document, path);
 
-    this._prepareChoices("choices", `${path}.value`, formData);
+    this._prepareChoices("choices", Trait.changeKeyPath(this.trait), formData);
     if ( "bypasses" in data ) this._prepareChoices("bypasses", `${path}.bypasses`, formData);
 
     return this.object.update(formData);
