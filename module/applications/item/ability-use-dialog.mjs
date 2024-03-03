@@ -194,7 +194,8 @@ export default class AbilityUseDialog extends Dialog {
 
     if ( /spells\.(.+)\.value/.test(consume.target) ) {
       const [, key] = consume.target.match(/spells\.(.+)\.value/);
-      const level = (key === "pact") ? item.actor.system.spells.pact.level : parseInt(key.replace("spell", ""));
+      const spells = item.actor.system.spells[key] ?? {};
+      const level = ("level" in spells) ? spells.level : parseInt(key.replace("spell", ""));
       const minimum = (item.type === "spell") ? Math.max(item.system.level, level) : level;
       return this._createSpellSlotOptions(item.actor, minimum);
     }
