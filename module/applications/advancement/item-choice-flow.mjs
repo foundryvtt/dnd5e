@@ -192,8 +192,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     const largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
       if ( data.max === 0 ) return slot;
-      const level = ("level" in data) ? data.level : parseInt(key.replace("spell", ""));
-      if ( !Number.isNaN(level) && level > slot ) return level;
+      const level = parseInt(data.level);
+      if ( !Number.isNaN(level) && (level > slot) ) return level;
       return slot;
     }, -1);
     return Math.max(0, largestSlot);

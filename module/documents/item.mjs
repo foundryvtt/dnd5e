@@ -1108,7 +1108,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       const level = spellData[config.slotLevel];
       const spells = Number(level?.value ?? 0);
       if ( spells === 0 ) {
-        const isLeveled = !("level" in level);
+        const isLeveled = /spell[0-9]+/.test(config.slotLevel || "");
         const labelKey = isLeveled ? `DND5E.SpellLevel${this.system.level}`: `DND5E.SpellProg${config.slotLevel?.capitalize()}`;
         const label = game.i18n.localize(labelKey);
         ui.notifications.warn(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.name, level: label}));
