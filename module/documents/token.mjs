@@ -92,6 +92,40 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  static getTrackedAttributeChoices(attributes) {
+    const groups = super.getTrackedAttributeChoices(attributes);
+    const abilities = [];
+    const movement = [];
+    const senses = [];
+    const skills = [];
+    const slots = [];
+
+    // Regroup existing attributes based on their path.
+    for ( const group of Object.values(groups) ) {
+      for ( let i = 0; i < group.length; i++ ) {
+        const attribute = group[i];
+        if ( attribute.startsWith("abilities.") ) abilities.push(attribute);
+        else if ( attribute.startsWith("attributes.movement.") ) movement.push(attribute);
+        else if ( attribute.startsWith("attributes.senses.") ) senses.push(attribute);
+        else if ( attribute.startsWith("skills.") ) skills.push(attribute);
+        else if ( attribute.startsWith("spells.") ) slots.push(attribute);
+        else continue;
+        group.splice(i--, 1);
+      }
+    }
+
+    // Add new groups to choices.
+    if ( abilities.length ) groups[game.i18n.localize("DND5E.AbilityScorePl")] = abilities;
+    if ( movement.length ) groups[game.i18n.localize("DND5E.MovementSpeeds")] = movement;
+    if ( senses.length ) groups[game.i18n.localize("DND5E.Senses")] = senses;
+    if ( skills.length ) groups[game.i18n.localize("DND5E.SkillPassives")] = skills;
+    if ( slots.length ) groups[game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots")] = slots;
+    return groups;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async toggleActiveEffect(effectData, {overlay=false, active}={}) {
     if ( !this.actor || !effectData.id ) return false;
     const id = staticID(`dnd5e${effectData.id}`);

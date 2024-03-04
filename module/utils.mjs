@@ -484,6 +484,11 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
     return game.i18n.localize("DND5E.ExperiencePointsValue");
   }
 
+  if ( attr.startsWith(".") && actor ) {
+    const item = fromUuidSync(attr, { relative: actor });
+    return item?.name ?? attr;
+  }
+
   // Check if the attribute is already in cache.
   let label = _attributeLabelCache.get(attr);
   if ( label ) return label;
