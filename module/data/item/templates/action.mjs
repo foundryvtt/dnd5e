@@ -2,7 +2,7 @@ import { ItemDataModel } from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, IntegerSortField, NumberField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -51,7 +51,7 @@ export default class ActionTemplate extends ItemDataModel {
     return {
       ability: new StringField({required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"}),
       actionType: new StringField({required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"}),
-      attack: new foundry.data.fields.SchemaField({
+      attack: new SchemaField({
         bonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
         flat: new BooleanField({label: "DND5E.ItemAttackFlat"})
       }),
