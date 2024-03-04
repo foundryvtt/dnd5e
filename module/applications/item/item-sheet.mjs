@@ -696,13 +696,15 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {Promise}
    */
   async _onDropAdvancement(event, data) {
+    if ( !this.item.system.advancement ) return;
+
     let advancements;
     let showDialog = false;
     if ( data.type === "Advancement" ) {
       advancements = [await fromUuid(data.uuid)];
     } else if ( data.type === "Item" ) {
       const item = await Item.implementation.fromDropData(data);
-      if ( !item ) return false;
+      if ( !item?.system.advancement ) return false;
       advancements = Object.values(item.advancement.byId);
       showDialog = true;
     } else {
