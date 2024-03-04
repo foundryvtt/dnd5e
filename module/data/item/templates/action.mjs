@@ -2,7 +2,7 @@ import { ItemDataModel } from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, IntegerSortField, NumberField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -20,7 +20,9 @@ const {
  *
  * @property {string} ability             Ability score to use when determining modifier.
  * @property {string} actionType          Action type as defined in `DND5E.itemActionTypes`.
- * @property {string} attackBonus         Numeric or dice bonus to attack rolls.
+ * @property {object} attack              Information how attacks are handled.
+ * @property {string} attack.bonus        Numeric or dice bonus to attack rolls.
+ * @property {boolean} attack.flat        Is the attack bonus the only bonus to attack rolls?
  * @property {string} chatFlavor          Extra text displayed in chat.
  * @property {object} critical            Information on how critical hits are handled.
  * @property {number} critical.threshold  Minimum number on the dice to roll a critical hit.
@@ -49,7 +51,10 @@ export default class ActionTemplate extends ItemDataModel {
     return {
       ability: new StringField({required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"}),
       actionType: new StringField({required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"}),
-      attackBonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
+      attack: new SchemaField({
+        bonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
+        flat: new BooleanField({label: "DND5E.ItemAttackFlat"})
+      }),
       chatFlavor: new StringField({required: true, label: "DND5E.ChatFlavor"}),
       critical: new SchemaField({
         threshold: new NumberField({
@@ -99,7 +104,7 @@ export default class ActionTemplate extends ItemDataModel {
   static _migrateData(source) {
     super._migrateData(source);
     ActionTemplate.#migrateAbility(source);
-    ActionTemplate.#migrateAttackBonus(source);
+    ActionTemplate.#migrateAttack(source);
     ActionTemplate.#migrateCritical(source);
     ActionTemplate.#migrateSave(source);
     ActionTemplate.#migrateDamage(source);
@@ -118,12 +123,15 @@ export default class ActionTemplate extends ItemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Ensure a 0 or null in attack bonus is converted to an empty string rather than "0".
+   * Move 'attackBonus' to 'attack.bonus' and ensure a 0 or null is converted to an empty string rather than "0".
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static #migrateAttackBonus(source) {
-    if ( [0, "0", null].includes(source.attackBonus) ) source.attackBonus = "";
-    else if ( typeof source.attackBonus === "number" ) source.attackBonus = source.attackBonus.toString();
+  static #migrateAttack(source) {
+    if ( "attackBonus" in source ) {
+      source.attack ??= {};
+      source.attack.bonus ??= source.attackBonus;
+    }
+    if ( [0, "0", null].includes(source.attack?.bonus) ) source.attack.bonus = "";
   }
 
   /* -------------------------------------------- */
