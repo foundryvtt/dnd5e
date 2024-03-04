@@ -447,7 +447,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           });
           const armorData = armors[0].system.armor;
           const isHeavy = armors[0].system.type.value === "heavy";
-          ac.armor = armors[0].system.effectiveAC ?? ac.armor;
+          ac.armor = armorData.value ?? ac.armor;
           ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
         }
@@ -472,7 +472,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( shields.length > 1 ) this._preparationWarnings.push({
         message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
       });
-      ac.shield = shields[0].system.effectiveAC ?? 0;
+      ac.shield = shields[0].system.armor.value ?? 0;
       ac.equippedShield = shields[0];
     }
 

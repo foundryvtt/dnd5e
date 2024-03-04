@@ -445,7 +445,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   _prepareEquipment() {
-    this.labels.armor = this.system.armor.value ? `${this.system.effectiveAC} ${game.i18n.localize("DND5E.AC")}` : "";
+    this.labels.armor = this.system.armor.value ? `${this.system.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
   }
 
   /* -------------------------------------------- */

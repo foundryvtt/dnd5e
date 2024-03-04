@@ -132,7 +132,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.MagicalBonus" }}</label>
                 <div class="form-fields">
-                    {{ numberInput system.magicalBonus name="system.magicalBonus" placeholder=0 }}
+                    {{ numberInput system.magicalBonus name="system.magicalBonus" min="0" step="1" placeholder="0" }}
                 </div>
             </div>
             {{/if}}

@@ -143,6 +143,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    this.armor.value = (this._source.armor.value ?? 0) + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
   }
@@ -184,16 +185,6 @@ export default class EquipmentData extends ItemDataModel.mixin(
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
       this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null
     ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Effective armor class, taking any magical bonus into account.
-   * @type {number}
-   */
-  get effectiveAC() {
-    return this.armor.value + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
   }
 
   /* -------------------------------------------- */

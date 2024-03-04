@@ -23,7 +23,7 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * @mixes ActionTemplate
  * @mixes MountableTemplate
  *
- * @property {number} magicalBonus     Bonus added to attack & damage rolls, so long as the weapon is attuned.
+ * @property {number} magicalBonus     Magical bonus added to attack & damage rolls.
  * @property {Set<string>} properties  Weapon's properties.
  * @property {number} proficient       Does the weapon's owner have proficiency?
  */
