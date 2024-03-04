@@ -135,6 +135,7 @@
 "DND5E.ActionRSAK": "Ranged Spell Attack",
 "DND5E.ActionRWAK": "Ranged Weapon Attack",
 "DND5E.ActionSave": "Saving Throw",
+"DND5E.ActionSumm": "Summon",
 "DND5E.ActionUtil": "Utility",
 "DND5E.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}",
 "DND5E.ActionWarningNoToken": "You must have one or more controlled Tokens in order to use this option.",
@@ -283,6 +284,7 @@
 "DND5E.AdvancementTraitModeUpgradeHint": "Gain proficiency in a trait unless you already have it, otherwise gain expertise.",
 "DND5E.AdvancementTraitType": "Trait Type",
 "DND5E.Advantage": "Advantage",
+"DND5E.AdvantageMode": "Advantage Mode",
 "DND5E.Age": "Age",
 "DND5E.Alignment": "Alignment",
 "DND5E.AlignmentCE": "Chaotic Evil",
@@ -328,6 +330,9 @@
 "DND5E.AttackPl": "Attacks",
 "DND5E.AttackRoll": "Attack Roll",
 "DND5E.Attributes": "Attributes",
+"DND5E.AttrConcentration": {
+  "Limit": "Limit"
+},
 "DND5E.Automatic": "Automatic",
 "DND5E.AutomaticValue": "Automatic ({value})",
 "DND5E.Award": {
@@ -563,6 +568,11 @@
 "DND5E.DamageFire": "Fire",
 "DND5E.DamageForce": "Force",
 "DND5E.DamageLightning": "Lightning",
+"DND5E.DamageModification": {
+  "Label": "Damage Modification",
+  "Hint": "Formulas for amounts that will be added to typed damage applied to this actor. Negative values will reduce the damage taken.",
+  "BypassHint": "These weapon properties will bypass damage modification for physical damage."
+},
 "DND5E.DamageNecrotic": "Necrotic",
 "DND5E.DamagePiercing": "Piercing",
 "DND5E.DamagePhysical": "Non-Magical Physical",
@@ -834,6 +844,10 @@
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
 "DND5E.HitDie": "Hit Die",
 "DND5E.HitDice": "Hit Dice",
+"DND5E.HitDiceAutoSpend": {
+  "Label": "Auto Spend HD",
+  "Hint": "Automatically spend hit dice until they run out or health is full."
+},
 "DND5E.HitDiceConfig": "Adjust Hit Dice",
 "DND5E.HitDiceConfigHint": "Adjust remaining hit dice levels for each class.",
 "DND5E.HitDiceMax": "Maximum Hit Dice",
@@ -1015,6 +1029,7 @@
 "DND5E.LongRestEpic": "Long Rest (1 hour)",
 "DND5E.LongRestOvernight": "Long Rest (New Day)",
 "DND5E.LongRestHint": "Take a long rest? On a long rest you will recover hit points, half your maximum hit dice, class resources, limited use item charges, and spell slots.",
+"DND5E.LongRestHintGroup": "Take a long rest? On a long rest group members will recover hit points, half of their maximum hit dice, class resources, limited use item charges, and spell slots.",
 "DND5E.LongRestRecovery": "Recovers after Long Rest",
 "DND5E.LongRestResult": "{name} takes a long rest and recovers {health} Hit Points and {dice} Hit Dice.",
 "DND5E.LongRestResultHitDice": "{name} takes a long rest and recovers {dice} Hit Dice.",
@@ -1025,6 +1040,8 @@
 "DND5E.MaxCharacterLevelExceededWarn": "Character cannot be advanced past level {max}.",
 "DND5E.MaxClassLevelExceededWarn": "Class cannot be advanced past level {max}.",
 "DND5E.MaxClassLevelMinimumWarn": "Class must have at least one level.",
+"DND5E.Maximum": "Maximum",
+"DND5E.Minimum": "Minimum",
 "DND5E.Modifier": "Modifier",
 "DND5E.ModuleArtConfigH": "Configure which module-provided art should be used.",
 "DND5E.ModuleArtConfigL": "Configure Art",
@@ -1206,7 +1223,8 @@
 "DND5E.ShortRestGritty": "Short Rest (8 hours)",
 "DND5E.ShortRestEpic": "Short Rest (5 minutes)",
 "DND5E.ShortRestOvernight": "Short Rest (New Day)",
-"DND5E.ShortRestHint": "Take a short rest? On a short rest you may spend remaining Hit Dice and recover primary or secondary resources.",
+"DND5E.ShortRestHint": "Take a short rest? On a short rest you may spend remaining Hit Dice and recover item uses.",
+"DND5E.ShortRestHintGroup": "Take a short rest? On a short rest group members can spend Hit Dice and will recover item uses.",
 "DND5E.ShortRestNoHD": "No Hit Dice remaining",
 "DND5E.ShortRestRecovery": "Recovers after Short Rest",
 "DND5E.ShortRestResult": "{name} takes a short rest spending {dice} Hit Dice to recover {health} Hit Points.",
@@ -1363,6 +1381,51 @@
 "DND5E.SubclassMismatchWarn": "{name} subclass has no matching class with identifier '{class}'.",
 "DND5E.SubclassName": "Subclass Name",
 "DND5E.Subtype": "Subtype",
+"DND5E.Summoning": {
+  "Label": "Summoning",
+  "Action": {
+    "Add": "Add Profile",
+    "Configure": "Configure Summons",
+    "Remove": "Remove Profile"
+  },
+  "ArmorClass": {
+    "Label": "Bonus Armor Class",
+    "Hint": "Bonus to the Armor Class set on the summoned creature added to what is specified in their statblock."
+  },
+  "Configuration": "Summoning Configuration",
+  "CreatureChanges": {
+    "Label": "Creature Changes",
+    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats."
+  },
+  "DisplayName": "Display Name",
+  "DropHint": "Drop creature here",
+  "HitPoints": {
+    "Label": "Bonus Hit Points",
+    "Hint": "Additional hit points added to the creature on top of what is specified in their statblock."
+  },
+  "ItemChanges": {
+    "Label": "Item Changes",
+    "Hint": "Changes made to items on the summoned creature."
+  },
+  "Match": {
+    "Attacks": {
+      "Label": "Match Attacks",
+      "Hint": "Modify to hit values on the summoned creature's attacks to match that of the summoner."
+    },
+    "Proficiency": {
+      "Label": "Match Proficiency",
+      "Hint": "Modify the summoned creature's proficiency to match that of the summoner."
+    },
+    "Saves": {
+      "Label": "Match Saves",
+      "Hint": "Modify to saving throw DCs on the summoned creature's abilities to match that of the summoner."
+    }
+  },
+  "Profile": {
+    "Label": "Summons Profiles",
+    "Empty": "Click above to add a profile or drop an creature to summon here."
+  }
+},
 "DND5E.Supply": "Supply",
 "DND5E.Suppressed": "Suppressed",
 "DND5E.Target": "Target",
@@ -1547,6 +1610,7 @@
 "DND5E.spell": "spell",
 
 "EDITOR.DND5E.Inline": {
+  "ApplyStatus": "Apply Status to Selected Tokens",
   "AwardEach": "{award} each",
   "CheckShort": "{check}",
   "CheckLong": "{check} check",
@@ -1564,17 +1628,23 @@
 },
 
 "EFFECT.DND5E": {
+  "StatusBleeding": "Bleeding",
   "StatusBurrowing": "Burrowing",
   "StatusConcentrating": "Concentrating",
   "StatusCursed": "Cursed",
+  "StatusDead": "Dead",
   "StatusDodging": "Dodging",
   "StatusEncumbered": "Encumbered",
+  "StatusEthereal": "Ethereal",
   "StatusExceedingCarryingCapacity": "Exceeding Carrying Capacity",
   "StatusFlying": "Flying",
   "StatusHeavilyEncumbered": "Heavily Encumbered",
-  "StatusHidden": "Hidden",
+  "StatusHiding": "Hiding",
+  "StatusHovering": "Hovering",
   "StatusMarked": "Marked",
+  "StatusSilenced": "Silenced",
   "StatusSleeping": "Sleeping",
+  "StatusStable": "Stable",
   "StatusSurprised": "Surprised",
   "StatusTransformed": "Transformed"
 },
@@ -1686,6 +1756,21 @@
 "SETTINGS.5eTokenRings": {
   "Name": "Disable Dynamic Token Rings",
   "Hint": "Disabling the token ring animations can improve performance."
+},
+"SETTINGS.DND5E": {
+  "THEME": {
+    "Name": "Theme",
+    "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings. Can be overridden on a sheet-by-sheet basis."
+  }
+},
+
+"SHEETS.DND5E": {
+  "THEME": {
+    "Label": "Theme",
+    "Automatic": "Automatic",
+    "Dark": "Dark Mode",
+    "Light": "Light Mode"
+  }
 },
 
 "SOURCE.BOOK.SRD": "System Reference Document 5.1"

@@ -124,6 +124,8 @@ export default class TraitsField {
   static prepareResistImmune() {
     if ( this.parent.hasConditionEffect("petrification") ) {
       this.traits.dr.custom = game.i18n.localize("DND5E.DamageAll");
+      Object.keys(CONFIG.DND5E.damageTypes).forEach(type => this.traits.dr.value.add(type));
+      this.traits.dr.bypasses.clear();
       this.traits.di.value.add("poison");
       this.traits.ci.value.add("poisoned");
       this.traits.ci.value.add("diseased");

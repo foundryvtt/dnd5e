@@ -22,8 +22,7 @@ export default class ActorHitPointsConfig extends BaseConfigSheet {
       classes: ["dnd5e", "actor-hit-points-config"],
       template: "systems/dnd5e/templates/apps/hit-points-config.hbs",
       width: 320,
-      height: "auto",
-      sheetConfig: false
+      height: "auto"
     });
   }
 

@@ -1,6 +1,5 @@
 import Proficiency from "./proficiency.mjs";
 import * as Trait from "./trait.mjs";
-import ScaleValueAdvancement from "../advancement/scale-value.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
@@ -100,24 +99,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._preparationWarnings = [];
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareBaseData() {
-    if ( !game.template.Actor.types.includes(this.type) ) return;
-    if ( this.type !== "group" ) this._prepareBaseArmorClass();
-
-    // Type-specific preparation
-    switch ( this.type ) {
-      case "character":
-        return this._prepareCharacterData();
-      case "npc":
-        return this._prepareNPCData();
-      case "vehicle":
-        return this._prepareVehicleData();
-    }
   }
 
   /* --------------------------------------------- */
@@ -233,109 +214,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Initialize derived AC fields for Active Effects to target.
-   * Mutates the system.attributes.ac object.
-   * @protected
-   */
-  _prepareBaseArmorClass() {
-    const ac = this.system.attributes.ac;
-    ac.armor = 10;
-    ac.shield = ac.cover = 0;
-    ac.bonus = "";
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Derive any values that have been scaled by the Advancement system.
    * Mutates the value of the `system.scale` object.
    * @protected
    */
   _prepareScaleValues() {
     this.system.scale = this.items.reduce((scale, item) => {
-      if ( ScaleValueAdvancement.metadata.validItemTypes.has(item.type) ) scale[item.identifier] = item.scaleValues;
+      if ( CONFIG.DND5E.advancementTypes.ScaleValue.validItemTypes.has(item.type) ) {
+        scale[item.identifier] = item.scaleValues;
+      }
       return scale;
     }, {});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Perform any Character specific preparation.
-   * Mutates several aspects of the system data object.
-   * @protected
-   */
-  _prepareCharacterData() {
-    this.system.details.level = 0;
-    this.system.attributes.hd = 0;
-    this.system.attributes.attunement.value = 0;
-
-    for ( const item of this.items ) {
-      // Class levels & hit dice
-      if ( item.type === "class" ) {
-        const classLevels = parseInt(item.system.levels) || 1;
-        this.system.details.level += classLevels;
-        this.system.attributes.hd += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
-      }
-
-      // Attuned items
-      else if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
-        this.system.attributes.attunement.value += 1;
-      }
-    }
-
-    // Character proficiency bonus
-    this.system.attributes.prof = Proficiency.calculateMod(this.system.details.level);
-
-    // Experience required for next level
-    const { xp, level } = this.system.details;
-    xp.max = this.getLevelExp(level || 1);
-    xp.min = level ? this.getLevelExp(level - 1) : 0;
-    if ( level >= CONFIG.DND5E.CHARACTER_EXP_LEVELS.length ) xp.pct = 100;
-    else {
-      const required = xp.max - xp.min;
-      const pct = Math.round((xp.value - xp.min) * 100 / required);
-      xp.pct = Math.clamped(pct, 0, 100);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Perform any NPC specific preparation.
-   * Mutates several aspects of the system data object.
-   * @protected
-   */
-  _prepareNPCData() {
-    const cr = this.system.details.cr;
-
-    // Attuned items
-    this.system.attributes.attunement.value = this.items.filter(i => {
-      return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
-    }).length;
-
-    // Kill Experience
-    this.system.details.xp ??= {};
-    this.system.details.xp.value = this.getCRExp(cr);
-
-    // Proficiency
-    this.system.attributes.prof = Proficiency.calculateMod(Math.max(cr, 1));
-
-    // Spellcaster Level
-    if ( this.system.attributes.spellcasting && !Number.isNumeric(this.system.details.spellLevel) ) {
-      this.system.details.spellLevel = Math.max(cr, 1);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Perform any Vehicle specific preparation.
-   * Mutates several aspects of the system data object.
-   * @protected
-   */
-  _prepareVehicleData() {
-    this.system.attributes.prof = 0;
   }
 
   /* -------------------------------------------- */
@@ -658,7 +547,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const hp = this.system.attributes.hp;
 
     if ( this.type === "character" && (this.system.attributes.hp.max === null) ) {
-      const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
+      const abilityId = CONFIG.DND5E.defaultAbilities.hitPoints || "con";
       const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
       const base = Object.values(this.classes).reduce((total, item) => {
         const advancement = item.advancement.byType.HitPoints?.[0];
@@ -692,7 +581,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const flags = this.flags.dnd5e || {};
 
     // Compute initiative modifier
-    const abilityId = init.ability || CONFIG.DND5E.initiativeAbility;
+    const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;
     const ability = this.system.abilities?.[abilityId] || {};
     init.mod = ability.mod ?? 0;
 
@@ -1587,6 +1476,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollDeathSave(options={}) {
     const death = this.system.attributes.death;
+    if ( !death ) throw new Error(`Actors of the type '${this.type}' don't support death saves.`);
 
     // Display a warning if we are not at zero HP or if we already have reached 3
     if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
@@ -1723,7 +1613,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Obtain required data
     const init = this.system.attributes?.init;
-    const abilityId = init?.ability || CONFIG.DND5E.initiativeAbility;
+    const abilityId = init?.ability || CONFIG.DND5E.defaultAbilities.initiative;
     const data = this.getRollData();
     const flags = this.flags.dnd5e || {};
     if ( flags.initiativeAdv ) options.advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
@@ -2053,10 +1943,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Configuration options for a rest.
    *
    * @typedef {object} RestConfiguration
+   * @property {string} type               Type of rest to perform.
    * @property {boolean} dialog            Present a dialog window which allows for rolling hit dice as part of the
    *                                       Short Rest and selecting whether a new day has occurred.
    * @property {boolean} chat              Should a chat message be created to summarize the results of the rest?
+   * @property {number} duration           Amount of time passed during the rest in minutes.
    * @property {boolean} newDay            Does this rest carry over to a new day?
+   * @property {boolean} [advanceTime]     Should the game clock be advanced by the rest duration?
    * @property {boolean} [autoHD]          Should hit dice be spent automatically during a short rest?
    * @property {number} [autoHDThreshold]  How many hit points should be missing before hit dice are
    *                                       automatically spent during a short rest.
@@ -2083,8 +1976,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<RestResult>}       A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest(config={}) {
+    if ( this.type === "vehicle" ) return;
+
     config = foundry.utils.mergeObject({
-      dialog: true, chat: true, newDay: false, autoHD: false, autoHDThreshold: 3
+      type: "short", dialog: true, chat: true, newDay: false, advanceTime: false, autoHD: false, autoHDThreshold: 3,
+      duration: CONFIG.DND5E.restTypes.short.duration[game.settings.get("dnd5e", "restVariant")]
     }, config);
 
     /**
@@ -2098,22 +1994,33 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.preShortRest", this, config) === false ) return;
 
     // Take note of the initial hit points and number of hit dice the Actor has
-    const hd0 = this.system.attributes.hd;
-    const hp0 = this.system.attributes.hp.value;
+    const hd0 = foundry.utils.getProperty(this, "system.attributes.hd");
+    const hp0 = foundry.utils.getProperty(this, "system.attributes.hp.value");
 
     // Display a Dialog for rolling hit dice
     if ( config.dialog ) {
-      try { config.newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+      try {
+        foundry.utils.mergeObject(config, await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0}));
       } catch(err) { return; }
     }
 
+    /**
+     * A hook event that fires after a short rest has started, after the configuration is complete.
+     * @function dnd5e.shortRest
+     * @memberof hookEvents
+     * @param {Actor5e} actor             The actor that is being rested.
+     * @param {RestConfiguration} config  Configuration options for the rest.
+     * @returns {boolean}                 Explicitly return `false` to prevent the rest from being continued.
+     */
+    if ( Hooks.call("dnd5e.shortRest", this, config) === false ) return;
+
     // Automatically spend hit dice
-    else if ( config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
+    if ( !config.dialog && config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
 
     // Return the rest result
-    const dhd = this.system.attributes.hd - hd0;
-    const dhp = this.system.attributes.hp.value - hp0;
-    return this._rest(config.chat, config.newDay, false, dhd, dhp);
+    const dhd = foundry.utils.getProperty(this, "system.attributes.hd") - hd0;
+    const dhp = foundry.utils.getProperty(this, "system.attributes.hp.value") - hp0;
+    return this._rest(config, { dhd, dhp });
   }
 
   /* -------------------------------------------- */
@@ -2124,8 +2031,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<RestResult>}       A Promise which resolves once the long rest workflow has completed.
    */
   async longRest(config={}) {
+    if ( this.type === "vehicle" ) return;
+
     config = foundry.utils.mergeObject({
-      dialog: true, chat: true, newDay: true
+      type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
+      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")]
     }, config);
 
     /**
@@ -2139,11 +2049,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.preLongRest", this, config) === false ) return;
 
     if ( config.dialog ) {
-      try { config.newDay = await LongRestDialog.longRestDialog({actor: this}); }
-      catch(err) { return; }
+      try {
+        foundry.utils.mergeObject(config, await LongRestDialog.longRestDialog({actor: this}));
+      } catch(err) { return; }
     }
 
-    return this._rest(config.chat, config.newDay, true);
+    /**
+     * A hook event that fires after a long rest has started, after the configuration is complete.
+     * @function dnd5e.longRest
+     * @memberof hookEvents
+     * @param {Actor5e} actor             The actor that is being rested.
+     * @param {RestConfiguration} config  Configuration options for the rest.
+     * @returns {boolean}                 Explicitly return `false` to prevent the rest from being continued.
+     */
+    if ( Hooks.call("dnd5e.longRest", this, config) === false ) return;
+
+    return this._rest(config);
   }
 
   /* -------------------------------------------- */
@@ -2151,20 +2072,34 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Perform all of the changes needed for a short or long rest.
    *
-   * @param {boolean} chat           Summarize the results of the rest workflow as a chat message.
-   * @param {boolean} newDay         Has a new day occurred during this rest?
-   * @param {boolean} longRest       Is this a long rest?
-   * @param {number} [dhd=0]         Number of hit dice spent during so far during the rest.
-   * @param {number} [dhp=0]         Number of hit points recovered so far during the rest.
+   * @param {RestConfiguration} config  Configuration data for the rest occurring.
+   * @param {RestResult} [result={}]    Results of the rest operation being built.
+   * @param {*[]} [args]
    * @returns {Promise<RestResult>}  Consolidated results of the rest workflow.
    * @private
    */
-  async _rest(chat, newDay, longRest, dhd=0, dhp=0) {
+  async _rest(config, result={}, ...args) {
+    if ( args.length ) {
+      foundry.utils.logCompatibilityWarning(
+        "Actor5e._rest now takes a config object and a results object as parameters.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      const [longRest, dhd, dhp] = args;
+      config = { chat: config, newDay: result };
+      config.type = longRest ? "long" : "short";
+      result = { dhd, dhp };
+    }
+
+    if ( (foundry.utils.getType(this.system.rest) === "function")
+      && (await this.system.rest(config, result) === false) ) return;
+
     let hitPointsRecovered = 0;
     let hitPointUpdates = {};
     let hitDiceRecovered = 0;
     let hitDiceUpdates = [];
     const rolls = [];
+    const longRest = config.type === "long";
+    const newDay = config.newDay === true;
 
     // Recover hit points & hit dice on long rest
     if ( longRest ) {
@@ -2173,9 +2108,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Figure out the rest of the changes
-    const result = {
-      dhd: dhd + hitDiceRecovered,
-      dhp: dhp + hitPointsRecovered,
+    foundry.utils.mergeObject(result, {
+      dhd: (result.dhd ?? 0) + hitDiceRecovered,
+      dhp: (result.dhp ?? 0) + hitPointsRecovered,
       updateData: {
         ...hitPointUpdates,
         ...this._getRestResourceRecovery({ recoverShortRestResources: !longRest, recoverLongRestResources: longRest }),
@@ -2187,34 +2122,39 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ],
       longRest,
       newDay
-    };
+    });
     result.rolls = rolls;
 
     /**
      * A hook event that fires after rest result is calculated, but before any updates are performed.
      * @function dnd5e.preRestCompleted
      * @memberof hookEvents
-     * @param {Actor5e} actor      The actor that is being rested.
-     * @param {RestResult} result  Details on the rest to be completed.
-     * @returns {boolean}          Explicitly return `false` to prevent the rest updates from being performed.
+     * @param {Actor5e} actor             The actor that is being rested.
+     * @param {RestResult} result         Details on the rest to be completed.
+     * @param {RestConfiguration} config  Configuration data for the rest occurring.
+     * @returns {boolean}                 Explicitly return `false` to prevent the rest updates from being performed.
      */
-    if ( Hooks.call("dnd5e.preRestCompleted", this, result) === false ) return result;
+    if ( Hooks.call("dnd5e.preRestCompleted", this, result, config) === false ) return result;
 
     // Perform updates
     await this.update(result.updateData, { isRest: true });
     await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
 
+    // Advance the game clock
+    if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
+
     // Display a Chat Message summarizing the rest effects
-    if ( chat ) await this._displayRestResultMessage(result, longRest);
+    if ( config.chat ) await this._displayRestResultMessage(result, longRest);
 
     /**
      * A hook event that fires when the rest process is completed for an actor.
      * @function dnd5e.restCompleted
      * @memberof hookEvents
-     * @param {Actor5e} actor      The actor that just completed resting.
-     * @param {RestResult} result  Details on the rest completed.
+     * @param {Actor5e} actor             The actor that just completed resting.
+     * @param {RestResult} result         Details on the rest completed.
+     * @param {RestConfiguration} config  Configuration data for that occurred.
      */
-    Hooks.callAll("dnd5e.restCompleted", this, result);
+    Hooks.callAll("dnd5e.restCompleted", this, result, config);
 
     // Return data summarizing the rest effects
     return result;
@@ -2326,7 +2266,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _getRestResourceRecovery({recoverShortRestResources=true, recoverLongRestResources=true}={}) {
     let updates = {};
-    for ( let [k, r] of Object.entries(this.system.resources) ) {
+    for ( let [k, r] of Object.entries(this.system.resources ?? {}) ) {
       if ( Number.isNumeric(r.max) && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
         updates[`system.resources.${k}.value`] = Number(r.max);
       }
@@ -2345,7 +2285,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _getRestSpellRecovery({recoverPact=true, recoverSpells=true}={}) {
-    const spells = this.system.spells;
+    const spells = this.system.spells ?? {};
     let updates = {};
     if ( recoverPact ) {
       const pact = spells.pact;
@@ -2486,10 +2426,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
       const value = movement[k];
-      if ( value ) html += `
+      if ( value || (k === "walk") ) html += `
         <div class="row">
           <i class="fas ${k}"></i>
-          <span class="value">${value} <span class="units">${units}</span></span>
+          <span class="value">${value ?? 0} <span class="units">${units}</span></span>
           <span class="label">${label}</span>
         </div>
       `;
@@ -2722,6 +2662,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
       d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
     }
+    foundry.utils.setProperty(d.prototypeToken, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
+      foundry.utils.getProperty(d.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
+      foundry.utils.getProperty(source.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
+      { inplace: false }
+    ));
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
@@ -2921,6 +2866,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
         tokenUpdate.texture[k] = prototypeTokenData.texture[k];
       }
+      foundry.utils.setProperty(tokenUpdate, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
+        foundry.utils.getProperty(tokenUpdate, "flags.dnd5e.tokenRing") ?? {},
+        foundry.utils.getProperty(prototypeTokenData, "flags.dnd5e.tokenRing") ?? {},
+        { inplace: false }
+      ));
       tokenUpdate.sight = prototypeTokenData.sight;
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
 
@@ -2948,15 +2898,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Get the Tokens which represent this actor
     if ( canvas.ready ) {
       const tokens = this.getActiveTokens(true);
-      const tokenData = await original.getTokenDocument();
+      const tokenData = (await original.getTokenDocument()).toObject();
       const tokenUpdates = tokens.map(t => {
-        const update = duplicate(tokenData);
+        const update = foundry.utils.deepClone(tokenData);
         update._id = t.id;
         delete update.x;
         delete update.y;
+        if ( !foundry.utils.getProperty(tokenData, "flags.dnd5e.tokenRing") ) {
+          foundry.utils.setProperty(update, "flags.dnd5e.tokenRing", {});
+        }
         return update;
       });
-      await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates);
+      await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates, { diff: false, recursive: false });
     }
     if ( isOriginalActor ) {
       await this.unsetFlag("dnd5e", "isPolymorphed");

@@ -15,7 +15,7 @@
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{itemType}}</h4>
+                <h4 class="item-type">{{ itemType }}</h4>
                 <label class="equipped">
                     <input type="checkbox" name="system.equipped" {{checked system.equipped}}>
                     {{#if system.equipped}}
@@ -39,7 +39,7 @@
             </div>
 
             <ul class="summary flexrow">
-                <li>{{ itemType }}</li>
+                <li>{{ itemStatus }}</li>
                 <li>
                     {{#if concealDetails}}
                     <span>{{ localize "DND5E.Unidentified.Title" }}</span>

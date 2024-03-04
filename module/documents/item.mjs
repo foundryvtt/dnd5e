@@ -336,7 +336,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   get usageScaling() {
     const { level, preparation, consume } = this.system;
     const isLeveled = (this.type === "spell") && (level > 0);
-    if ( isLeveled && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) return "slot";
+    if ( isLeveled && CONFIG.DND5E.spellPreparationModes[preparation.mode]?.upcast ) return "slot";
     else if ( isLeveled && this.hasResource && consume.scale ) return "resource";
     return null;
   }
@@ -596,7 +596,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     this.advancement = {
       byId: {},
       byLevel: Object.fromEntries(
-        Array.fromRange(CONFIG.DND5E.maxLevel + 1, minAdvancementLevel).map(l => [l, []])
+        Array.fromRange(CONFIG.DND5E.maxLevel, minAdvancementLevel).map(l => [l, []])
       ),
       byType: {},
       needingConfiguration: []
@@ -607,7 +607,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       this.advancement.byType[advancement.type] ??= [];
       this.advancement.byType[advancement.type].push(advancement);
       advancement.levels.forEach(l => this.advancement.byLevel[l]?.push(advancement));
-      if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
+      if ( !advancement.levels.length
+        || ((advancement.levels.length === 1) && (advancement.levels[0] < minAdvancementLevel)) ) {
+        this.advancement.needingConfiguration.push(advancement);
+      }
     }
     Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {
       return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl), game.i18n.lang);
@@ -952,8 +955,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let level = null;
       if ( config.slotLevel ) {
         // A spell slot was consumed.
-        level = Number.isInteger(config.slotLevel) ? config.slotLevel
-          : config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
+        if ( Number.isInteger(config.slotLevel) ) level = config.slotLevel;
+        else if ( config.slotLevel in as.spells ) {
+          if ( /^spell([0-9]+)$/.test(config.slotLevel) ) level = parseInt(config.slotLevel.replace("spell", ""));
+          else level = as.spells[config.slotLevel].level;
+        }
       } else if ( config.resourceAmount ) {
         // A quantity of the resource was consumed.
         const diff = config.resourceAmount - (this.system.consume.amount || 1);
@@ -1498,12 +1504,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   _formatAttackTargets() {
-    const targets = [];
+    const targets = new Map();
     for ( const token of game.user.targets ) {
       const { name, img, system, uuid } = token.actor ?? {};
-      if ( uuid ) targets.push({ name, img, uuid, ac: system.attributes.ac.value });
+      const ac = system?.attributes?.ac ?? {};
+      if ( uuid && Number.isNumeric(ac.value) ) targets.set(uuid, { name, img, uuid, ac: ac.value });
     }
-    return targets;
+    return Array.from(targets.values());
   }
 
   /* -------------------------------------------- */
@@ -1907,7 +1914,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let targets;
       switch ( action ) {
         case "applyEffect":
-          const effect = await fromUuid(button.closest("[data-uuid]")?.dataset.uuid);
+          const li = button.closest("li.effect");
+          let effect = item.effects.get(li.dataset.effectId);
+          if ( !effect ) effect = await fromUuid(li.dataset.uuid);
           let warn = false;
           for ( const token of canvas.tokens.controlled ) {
             if ( await this._applyEffectToToken(effect, token) === false ) warn = true;
@@ -1982,13 +1991,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static _applyEffectToToken(effect, token) {
     if ( !game.user.isGM && !token.actor?.isOwner ) return false;
 
-    // Enable this effect if it is transferred from an item on the token's actor
-    const tokenIsOwner = effect.parent?.parent === token.actor;
-    if ( tokenIsOwner && effect.transfer ) return effect.update({ disabled: !effect.disabled });
-
     // Enable an existing effect on the target if it originated from this effect
     const existingEffect = token.actor?.effects.find(e => e.origin === effect.uuid);
-    if ( existingEffect ) return existingEffect.update({ disabled: !existingEffect.disabled });
+    if ( existingEffect ) {
+      return existingEffect.update({
+        ...effect.constructor.getInitialDuration(),
+        disabled: false
+      });
+    }
 
     // Otherwise, create a new effect on the target
     const effectData = foundry.utils.mergeObject(effect.toObject(), {
@@ -2081,15 +2091,26 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
     if ( !this.system.advancement ) return this;
 
-    const Advancement = CONFIG.DND5E.advancementTypes[type];
-    if ( !Advancement ) throw new Error(`${type} not found in CONFIG.DND5E.advancementTypes`);
+    let config = CONFIG.DND5E.advancementTypes[type];
+    if ( !config ) throw new Error(`${type} not found in CONFIG.DND5E.advancementTypes`);
+    if ( config.prototype instanceof Advancement ) {
+      foundry.utils.logCompatibilityWarning(
+        "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3", once: true }
+      );
+      config = {
+        documentClass: config,
+        validItemTypes: config.metadata.validItemTypes
+      };
+    }
+    const cls = config.documentClass;
 
-    if ( !Advancement.metadata.validItemTypes.has(this.type) || !Advancement.availableForItem(this) ) {
+    if ( !config.validItemTypes.has(this.type) || !cls.availableForItem(this) ) {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
     }
 
     const createData = foundry.utils.deepClone(data);
-    const advancement = new Advancement(data, {parent: this});
+    const advancement = new cls(data, {parent: this});
     if ( advancement._preCreate(createData) === false ) return;
 
     const advancementCollection = this.toObject().system.advancement;
@@ -2097,7 +2118,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection}).then(() => {
       if ( !showConfig ) return this;
-      const config = new Advancement.metadata.apps.config(this.advancement.byId[advancement.id]);
+      const config = new cls.metadata.apps.config(this.advancement.byId[advancement.id]);
       return config.render(true);
     });
   }

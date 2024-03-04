@@ -1,3 +1,4 @@
+import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import SourceField from "../shared/source-field.mjs";
@@ -20,6 +21,9 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {number} attributes.hp.temp         Temporary HP applied on top of value.
  * @property {number} attributes.hp.tempmax      Temporary change to the maximum HP.
  * @property {string} attributes.hp.formula      Formula used to determine hit points.
+ * @property {object} attributes.death
+ * @property {number} attributes.death.success   Number of successful death saves.
+ * @property {number} attributes.death.failure   Number of failed death saves.
  * @property {object} details
  * @property {TypeData} details.type             Creature type of this NPC.
  * @property {string} details.type.value         NPC's type as defined in the system configuration.
@@ -69,7 +73,15 @@ export default class NPCData extends CreatureTemplate {
           temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
           tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
-        }, {label: "DND5E.HitPoints"})
+        }, {label: "DND5E.HitPoints"}),
+        death: new foundry.data.fields.SchemaField({
+          success: new foundry.data.fields.NumberField({
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
+          }),
+          failure: new foundry.data.fields.NumberField({
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
+          })
+        }, {label: "DND5E.DeathSave"}),
       }, {label: "DND5E.Attributes"}),
       details: new foundry.data.fields.SchemaField({
         ...DetailsFields.common,
@@ -192,10 +204,36 @@ export default class NPCData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
 
-  /**
-   * Prepare remaining NPC data.
-   */
+  /** @inheritdoc */
+  prepareBaseData() {
+    const cr = this.details.cr;
+
+    // Attuned items
+    this.attributes.attunement.value = this.parent.items.filter(i => {
+      return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
+    }).length;
+
+    // Kill Experience
+    this.details.xp ??= {};
+    this.details.xp.value = this.parent.getCRExp(cr);
+
+    // Proficiency
+    this.attributes.prof = Proficiency.calculateMod(Math.max(cr, 1));
+
+    // Spellcaster Level
+    if ( this.attributes.spellcasting && !Number.isNumeric(this.details.spellLevel) ) {
+      this.details.spellLevel = Math.max(cr, 1);
+    }
+
+    AttributesFields.prepareBaseArmorClass.call(this);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   prepareDerivedData() {
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);

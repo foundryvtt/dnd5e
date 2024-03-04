@@ -98,16 +98,51 @@ DND5E.abilities = {
 preLocalize("abilities", { keys: ["label", "abbreviation"] });
 
 /**
- * Configure which ability score is used as the default modifier for initiative rolls.
- * @type {string}
+ * Configure which ability score is used as the default modifier for initiative rolls,
+ * when calculating hit points per level and hit dice, and as the default modifier for
+ * saving throws to maintain concentration.
+ * @enum {string}
  */
-DND5E.initiativeAbility = "dex";
+DND5E.defaultAbilities = {
+  initiative: "dex",
+  hitPoints: "con",
+  concentration: "con"
+};
 
-/**
- * Configure which ability score is used when calculating hit points per level.
- * @type {string}
- */
-DND5E.hitPointsAbility = "con";
+Object.defineProperties(DND5E, {
+  hitPointsAbility: {
+    get: function() {
+      foundry.utils.logCompatibilityWarning(
+        "DND5E.hitPointsAbility has been deprecated and is now accessible through DND5E.defaultAbilities.hitPoints.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      return DND5E.defaultAbilities.hitPoints;
+    },
+    set: function(value) {
+      foundry.utils.logCompatibilityWarning(
+        "DND5E.hitPointsAbility has been deprecated and is now accessible through DND5E.defaultAbilities.hitPoints.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      DND5E.defaultAbilities.hitPoints = value;
+    }
+  },
+  initiativeAbility: {
+    get: function() {
+      foundry.utils.logCompatibilityWarning(
+        "DND5E.initiativeAbility has been deprecated and is now accessible through DND5E.defaultAbilities.initiative.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      return DND5E.defaultAbilities.initiative;
+    },
+    set: function(value) {
+      foundry.utils.logCompatibilityWarning(
+        "DND5E.initiativeAbility has been deprecated and is now accessible through DND5E.defaultAbilities.initiative.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+      );
+      DND5E.defaultAbilities.initiative = value;
+    }
+  }
+});
 
 /* -------------------------------------------- */
 
@@ -788,6 +823,7 @@ DND5E.itemActionTypes = {
   msak: "DND5E.ActionMSAK",
   rsak: "DND5E.ActionRSAK",
   save: "DND5E.ActionSave",
+  summ: "DND5E.ActionSumm",
   heal: "DND5E.ActionHeal",
   abil: "DND5E.ActionAbil",
   util: "DND5E.ActionUtil",
@@ -1627,7 +1663,7 @@ preLocalize("distanceUnits");
  * @property {Record<string, number>} threshold.encumbered
  * @property {Record<string, number>} threshold.heavilyEncumbered
  * @property {Record<string, number>} threshold.maximum
- * @property {Record<string, number>} speedReduction     Speed reduction caused by encumbered status effects.
+ * @property {Record<string, {ft: number, m: number}>} speedReduction  Speed reduction caused by encumbered status.
  * @property {Record<string, number>} vehicleWeightMultiplier  Multiplier used to determine vehicle carrying capacity.
  */
 
@@ -1669,8 +1705,18 @@ DND5E.encumbrance = {
     }
   },
   speedReduction: {
-    encumbered: 10,
-    heavilyEncumbered: 20
+    encumbered: {
+      ft: 10,
+      m: 3
+    },
+    heavilyEncumbered: {
+      ft: 20,
+      m: 6
+    },
+    exceedingCarryingCapacity: {
+      ft: 5,
+      m: 1.5
+    }
   },
   vehicleWeightMultiplier: {
     imperial: 2000, // 2000 lbs in an imperial ton
@@ -1788,6 +1834,36 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for rest types.
+ *
+ * @typedef {object} RestConfiguration
+ * @property {Record<string, number>} duration  Duration of different rest variants in minutes.
+ */
+
+/**
+ * Types of rests.
+ * @enum {RestConfiguration}
+ */
+DND5E.restTypes = {
+  short: {
+    duration: {
+      normal: 60,
+      gritty: 480,
+      epic: 1
+    }
+  },
+  long: {
+    duration: {
+      normal: 480,
+      gritty: 10080,
+      epic: 60
+    }
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * The set of possible sensory perception types which an Actor may have.
  * @enum {string}
  */
@@ -1859,21 +1935,51 @@ DND5E.pactCastingProgression = {
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for spell preparation modes.
+ *
+ * @typedef {object} SpellPreparationModeConfiguration
+ * @property {string} label           Localized name of this spell preparation type.
+ * @property {boolean} [upcast]       Whether this preparation mode allows for upcasting.
+ * @property {boolean} [cantrips]     Whether this mode allows for cantrips in a spellbook.
+ * @property {number} [order]         The sort order of this mode in a spellbook.
+ */
+
+/**
  * Various different ways a spell can be prepared.
+ * @enum {SpellPreparationModeConfiguration}
  */
 DND5E.spellPreparationModes = {
-  prepared: "DND5E.SpellPrepPrepared",
-  pact: "DND5E.PactMagic",
-  always: "DND5E.SpellPrepAlways",
-  atwill: "DND5E.SpellPrepAtWill",
-  innate: "DND5E.SpellPrepInnate"
+  prepared: {
+    label: "DND5E.SpellPrepPrepared",
+    upcast: true
+  },
+  pact: {
+    label: "DND5E.PactMagic",
+    upcast: true,
+    cantrips: true,
+    order: 0.5
+  },
+  always: {
+    label: "DND5E.SpellPrepAlways",
+    upcast: true
+  },
+  atwill: {
+    label: "DND5E.SpellPrepAtWill",
+    order: -20
+  },
+  innate: {
+    label: "DND5E.SpellPrepInnate",
+    order: -10
+  }
 };
-preLocalize("spellPreparationModes");
+preLocalize("spellPreparationModes", { key: "label" });
+patchConfig("spellPreparationModes", "label", { since: "DnD5e 3.1", until: "DnD5e 3.3" });
 
 /* -------------------------------------------- */
 
 /**
  * Subset of `DND5E.spellPreparationModes` that consume spell slots.
+ * @deprecated since DnD5e 3.1, available until DnD5e 3.3
  * @type {string[]}
  */
 DND5E.spellUpcastModes = ["always", "pact", "prepared"];
@@ -2348,14 +2454,20 @@ DND5E.consumableResources = [
 /* -------------------------------------------- */
 
 /**
- * Configuration data for system conditions.
- *
- * @typedef {object} ConditionConfiguration
- * @property {string} label        Localized label for the condition.
- * @property {string} [icon]       Icon used to represent the condition on the token.
+ * @typedef {object} _StatusEffectConfig5e
  * @property {string} [reference]  UUID of a journal entry with details on this condition.
  * @property {string} [special]    Set this condition as a special status effect under this name.
  * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
+ */
+
+/**
+ * Configuration data for system status effects.
+ * @typedef {StatusEffectConfig & _StatusEffectConfig5e} StatusEffectConfig5e
+ */
+
+/**
+ * Configuration data for system conditions.
+ * @typedef {Omit<StatusEffectConfig5e, "name" | "img"> & {label: string, icon: string}} ConditionConfiguration
  */
 
 /**
@@ -2381,7 +2493,7 @@ DND5E.conditionTypes = {
   },
   diseased: {
     label: "DND5E.ConDiseased",
-    icon: "icons/svg/biohazard.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/diseased.svg"
   },
   exhaustion: {
     label: "DND5E.ConExhaustion",
@@ -2461,7 +2573,7 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
  */
 DND5E.conditionEffects = {
   noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
-  halfMovement: new Set(["exhaustion-2", "prone"]),
+  halfMovement: new Set(["exhaustion-2"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
   halfHealth: new Set(["exhaustion-4"])
@@ -2472,15 +2584,17 @@ DND5E.conditionEffects = {
 /**
  * Extra status effects not specified in `conditionTypes`. If the ID matches a core-provided effect, then this
  * data will be merged into the core data.
- * @enum {object}
+ * @enum {Omit<StatusEffectConfig5e, "img"> & {icon: string}}
  */
 DND5E.statusEffects = {
   bleeding: {
+    name: "EFFECT.DND5E.StatusBleeding",
     icon: "systems/dnd5e/icons/svg/statuses/bleeding.svg"
   },
   burrowing: {
     name: "EFFECT.DND5E.StatusBurrowing",
-    icon: "icons/svg/cave.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
+    special: "BURROW"
   },
   concentrating: {
     name: "EFFECT.DND5E.StatusConcentrating",
@@ -2488,33 +2602,51 @@ DND5E.statusEffects = {
   },
   cursed: {
     name: "EFFECT.DND5E.StatusCursed",
-    icon: "icons/svg/sun.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/cursed.svg"
   },
   dead: {
-    icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
+    name: "EFFECT.DND5E.StatusDead",
+    icon: "systems/dnd5e/icons/svg/statuses/dead.svg",
+    special: "DEFEATED"
   },
   dodging: {
     name: "EFFECT.DND5E.StatusDodging",
     icon: "systems/dnd5e/icons/svg/statuses/dodging.svg"
   },
+  ethereal: {
+    name: "EFFECT.DND5E.StatusEthereal",
+    icon: "systems/dnd5e/icons/svg/statuses/ethereal.svg"
+  },
   flying: {
     name: "EFFECT.DND5E.StatusFlying",
-    icon: "icons/svg/wing.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/flying.svg",
+    special: "FLY"
   },
-  hidden: {
-    name: "EFFECT.DND5E.StatusHidden",
-    icon: "icons/svg/cowled.svg"
+  hiding: {
+    name: "EFFECT.DND5E.StatusHiding",
+    icon: "systems/dnd5e/icons/svg/statuses/hiding.svg"
+  },
+  hovering: {
+    name: "EFFECT.DND5E.StatusHovering",
+    icon: "systems/dnd5e/icons/svg/statuses/hovering.svg",
+    special: "HOVER"
   },
   marked: {
     name: "EFFECT.DND5E.StatusMarked",
     icon: "systems/dnd5e/icons/svg/statuses/marked.svg"
   },
-  silence: {
+  silenced: {
+    name: "EFFECT.DND5E.StatusSilenced",
     icon: "systems/dnd5e/icons/svg/statuses/silenced.svg"
   },
   sleeping: {
     name: "EFFECT.DND5E.StatusSleeping",
-    icon: "icons/svg/sleep.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
+    statuses: ["incapacitated", "prone", "unconscious"]
+  },
+  stable: {
+    name: "EFFECT.DND5E.StatusStable",
+    icon: "systems/dnd5e/icons/svg/statuses/stable.svg"
   },
   surprised: {
     name: "EFFECT.DND5E.StatusSurprised",
@@ -2522,7 +2654,7 @@ DND5E.statusEffects = {
   },
   transformed: {
     name: "EFFECT.DND5E.StatusTransformed",
-    icon: "icons/svg/pawprint.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/transformed.svg"
   }
 };
 
@@ -2897,17 +3029,48 @@ preLocalize("groupTypes");
 /* -------------------------------------------- */
 
 /**
+ * Configuration information for advancement types.
+ *
+ * @typedef {object} AdvancementTypeConfiguration
+ * @property {typeof Advancement} documentClass  The advancement's document class.
+ * @property {Set<string>} validItemTypes        What item types this advancement can be used with.
+ */
+
+const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
+
+/**
  * Advancement types that can be added to items.
- * @enum {*}
+ * @enum {AdvancementTypeConfiguration}
  */
 DND5E.advancementTypes = {
-  AbilityScoreImprovement: advancement.AbilityScoreImprovementAdvancement,
-  HitPoints: advancement.HitPointsAdvancement,
-  ItemChoice: advancement.ItemChoiceAdvancement,
-  ItemGrant: advancement.ItemGrantAdvancement,
-  ScaleValue: advancement.ScaleValueAdvancement,
-  Size: advancement.SizeAdvancement,
-  Trait: advancement.TraitAdvancement
+  AbilityScoreImprovement: {
+    documentClass: advancement.AbilityScoreImprovementAdvancement,
+    validItemTypes: new Set(["background", "class", "race"])
+  },
+  HitPoints: {
+    documentClass: advancement.HitPointsAdvancement,
+    validItemTypes: new Set(["class"])
+  },
+  ItemChoice: {
+    documentClass: advancement.ItemChoiceAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
+  ItemGrant: {
+    documentClass: advancement.ItemGrantAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
+  ScaleValue: {
+    documentClass: advancement.ScaleValueAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
+  Size: {
+    documentClass: advancement.SizeAdvancement,
+    validItemTypes: new Set(["race"])
+  },
+  Trait: {
+    documentClass: advancement.TraitAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  }
 };
 
 /* -------------------------------------------- */
@@ -3188,6 +3351,20 @@ DND5E.sourceBooks = {
 preLocalize("sourceBooks", { sort: true });
 
 /* -------------------------------------------- */
+/*  Themes                                      */
+/* -------------------------------------------- */
+
+/**
+ * Themes that can be set for the system or on sheets.
+ * @enum {string}
+ */
+DND5E.themes = {
+  light: "SHEETS.DND5E.THEME.Light",
+  dark: "SHEETS.DND5E.THEME.Dark"
+};
+preLocalize("themes");
+
+/* -------------------------------------------- */
 /*  Enrichment                                  */
 /* -------------------------------------------- */
 
@@ -3234,7 +3411,7 @@ function patchConfig(key, fallbackKey, options) {
 
   Object.values(DND5E[key]).forEach(o => {
     if ( foundry.utils.getType(o) !== "Object" ) return;
-    o.toString = toString;
+    Object.defineProperty(o, "toString", {value: toString});
   });
 }
 

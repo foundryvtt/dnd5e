@@ -28,6 +28,7 @@ export default Base => class extends SystemFlagsMixin(Base) {
    */
   async _preCreate(data, options, user) {
     let allowed = await super._preCreate(data, options, user);
+    if ( foundry.utils.isNewerVersion(game.version, 12) ) return allowed;
     if ( allowed !== false ) allowed = await this.system._preCreate?.(data, options, user);
     return allowed;
   }
@@ -46,6 +47,7 @@ export default Base => class extends SystemFlagsMixin(Base) {
    */
   async _preUpdate(changed, options, user) {
     let allowed = await super._preUpdate(changed, options, user);
+    if ( foundry.utils.isNewerVersion(game.version, 12) ) return allowed;
     if ( allowed !== false ) allowed = await this.system._preUpdate?.(changed, options, user);
     return allowed;
   }
@@ -63,6 +65,7 @@ export default Base => class extends SystemFlagsMixin(Base) {
    */
   async _preDelete(options, user) {
     let allowed = await super._preDelete(options, user);
+    if ( foundry.utils.isNewerVersion(game.version, 12) ) return allowed;
     if ( allowed !== false ) allowed = await this.system._preDelete?.(options, user);
     return allowed;
   }
@@ -80,6 +83,7 @@ export default Base => class extends SystemFlagsMixin(Base) {
    */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
+    if ( foundry.utils.isNewerVersion(game.version, 12) ) return;
     this.system._onCreate?.(data, options, userId);
   }
 
@@ -96,6 +100,7 @@ export default Base => class extends SystemFlagsMixin(Base) {
    */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
+    if ( foundry.utils.isNewerVersion(game.version, 12) ) return;
     this.system._onUpdate?.(changed, options, userId);
   }
 
@@ -111,6 +116,7 @@ export default Base => class extends SystemFlagsMixin(Base) {
    */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
+    if ( foundry.utils.isNewerVersion(game.version, 12) ) return;
     this.system._onDelete?.(options, userId);
   }
 };

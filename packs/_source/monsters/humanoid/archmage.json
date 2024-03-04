@@ -2892,7 +2892,7 @@
           "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
           "origin": "Item.OtcTsffCQaOFkr9K",
           "tint": null,
-          "transfer": true,
+          "transfer": false,
           "name": "Warm Shield",
           "description": "",
           "statuses": [],
@@ -2922,7 +2922,7 @@
           "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
           "origin": "Item.OtcTsffCQaOFkr9K",
           "tint": null,
-          "transfer": true,
+          "transfer": false,
           "name": "Chill Shield",
           "description": "",
           "statuses": [],
@@ -4193,146 +4193,7 @@
       "_key": "!actors.items!B7lBOr1AahNZs4a6.A3q2gTNqG6fvNGrv"
     }
   ],
-  "effects": [
-    {
-      "_id": "cfwMU7LuOJ619Lny",
-      "changes": [
-        {
-          "key": "system.attributes.ac.calc",
-          "value": "mage",
-          "mode": 5,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 678,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": 2,
-        "startTurn": 1
-      },
-      "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-      "origin": "Compendium.dnd5e.monsters.B7lBOr1AahNZs4a6.Item.CKZTpZlxj7hjjo2H",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "name": "Mage Armor",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!B7lBOr1AahNZs4a6.cfwMU7LuOJ619Lny"
-    },
-    {
-      "_id": "lVKx8swB08jm6IFE",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "value": "cold",
-          "mode": 2,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 678,
-        "seconds": 600,
-        "rounds": null,
-        "turns": null,
-        "startRound": 2,
-        "startTurn": 1,
-        "combat": null
-      },
-      "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
-      "origin": "Compendium.dnd5e.monsters.B7lBOr1AahNZs4a6.Item.avD5XUtkBPQQR97c",
-      "tint": null,
-      "transfer": false,
-      "name": "Warm Shield",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!B7lBOr1AahNZs4a6.lVKx8swB08jm6IFE"
-    },
-    {
-      "_id": "UUXwEKSPX4nYfDzo",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "value": "fire",
-          "mode": 2,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 678,
-        "seconds": 600,
-        "rounds": null,
-        "turns": null,
-        "startRound": 2,
-        "startTurn": 1,
-        "combat": null
-      },
-      "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
-      "origin": "Compendium.dnd5e.monsters.B7lBOr1AahNZs4a6.Item.avD5XUtkBPQQR97c",
-      "tint": null,
-      "transfer": false,
-      "name": "Chill Shield",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!B7lBOr1AahNZs4a6.UUXwEKSPX4nYfDzo"
-    },
-    {
-      "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-      "origin": "Compendium.dnd5e.monsters.B7lBOr1AahNZs4a6.Item.ReMbjfeOKoSj3O79",
-      "duration": {
-        "startTime": 0,
-        "seconds": 3600,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "disabled": true,
-      "_id": "4KtXvy5OXy2qUidh",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "bludgeoning",
-          "priority": null
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "piercing",
-          "priority": null
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "slashing",
-          "priority": null
-        },
-        {
-          "key": "system.traits.dr.bypasses",
-          "mode": 2,
-          "value": "mgc",
-          "priority": null
-        }
-      ],
-      "tint": null,
-      "transfer": false,
-      "flags": {},
-      "name": "Stoneskin",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!B7lBOr1AahNZs4a6.4KtXvy5OXy2qUidh"
-    }
-  ],
+  "effects": [],
   "folder": "pEyqIq8DYb21xia3",
   "sort": 0,
   "ownership": {
@@ -4341,7 +4202,7 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.0.3",
     "coreVersion": "11.315",
     "createdTime": 1661787232655,
     "modifiedTime": 1704847043574,

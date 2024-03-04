@@ -1,0 +1,19 @@
+.dnd5e-theme-dark .dnd5e2,
+.dnd5e2.dnd5e-theme-dark {
+  .items-section {
+    .item {
+      .item-name .tags {
+        --icon-fill: var(--color-text-light-6);
+        opacity: unset;
+      }
+
+      .item-controls .item-control {
+        color: var(--dnd5e-color-blue-gray-3);
+        &[data-context-menu] { color: var(--color-text-light-6); }
+        &.active { color: var(--dnd5e-color-gold); }
+      }
+    }
+  }
+
+  .editable .items-section .item-controls .item-control { color: var(--color-text-light-6); }
+}

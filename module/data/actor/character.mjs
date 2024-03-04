@@ -1,3 +1,4 @@
+import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
@@ -163,12 +164,53 @@ export default class CharacterData extends CreatureTemplate {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  prepareBaseData() {
+    this.details.level = 0;
+    this.attributes.hd = 0;
+    this.attributes.attunement.value = 0;
+
+    for ( const item of this.parent.items ) {
+      // Class levels & hit dice
+      if ( item.type === "class" ) {
+        const classLevels = parseInt(item.system.levels) || 1;
+        this.details.level += classLevels;
+        this.attributes.hd += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
+      }
+
+      // Attuned items
+      else if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
+        this.attributes.attunement.value += 1;
+      }
+    }
+
+    // Character proficiency bonus
+    this.attributes.prof = Proficiency.calculateMod(this.details.level);
+
+    // Experience required for next level
+    const { xp, level } = this.details;
+    xp.max = this.parent.getLevelExp(level || 1);
+    xp.min = level ? this.parent.getLevelExp(level - 1) : 0;
+    if ( level >= CONFIG.DND5E.CHARACTER_EXP_LEVELS.length ) xp.pct = 100;
+    else {
+      const required = xp.max - xp.min;
+      const pct = Math.round((xp.value - xp.min) * 100 / required);
+      xp.pct = Math.clamped(pct, 0, 100);
+    }
+
+    AttributesFields.prepareBaseArmorClass.call(this);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Prepare movement & senses values derived from race item.
    */
   prepareEmbeddedData() {
     const raceData = this.details.race?.system;
     if ( !raceData ) {
+      this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
+      this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
       this.details.type = new CreatureTypeField({ swarm: false }).initialize({ value: "humanoid" }, this);
       return;
     }
@@ -177,13 +219,13 @@ export default class CharacterData extends CreatureTemplate {
       if ( raceData.movement[key] ) this.attributes.movement[key] ??= raceData.movement[key];
     }
     if ( raceData.movement.hover ) this.attributes.movement.hover = true;
-    this.attributes.movement.units ??= raceData.movement.units;
+    this.attributes.movement.units ??= raceData.movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
 
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
       if ( raceData.senses[key] ) this.attributes.senses[key] ??= raceData.senses[key];
     }
     this.attributes.senses.special = [this.attributes.senses.special, raceData.senses.special].filterJoin(";");
-    this.attributes.senses.units ??= raceData.senses.units;
+    this.attributes.senses.units ??= raceData.senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
 
     this.details.type = raceData.type;
   }

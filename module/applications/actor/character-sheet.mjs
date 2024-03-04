@@ -88,6 +88,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.isDepleted = ctx.isOnCooldown && ctx.hasUses && (uses.value > 0);
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
+      // Unidentified items
+      ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
+
       // Item grouping
       const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
       const group = this.actor.items.get(originId);
@@ -197,8 +200,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const isPrepared = !!prep.prepared;
       context.toggleClass = isPrepared ? "active" : "";
       if ( isAlways ) context.toggleClass = "fixed";
-      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always;
-      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared;
+      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always.label;
+      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared.label;
       else context.toggleTitle = game.i18n.localize("DND5E.SpellUnprepared");
     }
     else {

@@ -120,6 +120,19 @@
     </div>
 </div>
 
+{{!-- Summoning --}}
+{{#if (eq system.actionType "summ")}}
+<div class="form-group summoning">
+    <label>{{ localize "DND5E.Summoning.Label" }}</label>
+    <div class="form-fields">
+        <a class="config-button" data-action="summoning">
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+            {{ localize 'DND5E.Summoning.Action.Configure' }}
+        </a>
+    </div>
+</div>
+{{/if}}
+
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">
     <label>{{ localize "DND5E.ChatFlavor" }}</label>

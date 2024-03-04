@@ -1,0 +1,55 @@
+.dnd5e-theme-dark .dnd5e2.sheet.actor.character,
+.dnd5e2.sheet.actor.character.dnd5e-theme-dark {
+  background: none;
+
+  .window-content {
+    background: var(--dnd5e-color-dark-gray) url("/ui/denim075.png");
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 300px;
+      border-radius: 5px 5px 0 0;
+      opacity: .5;
+      background: url("ui/official/banner-character-dark.webp") no-repeat top center / cover;
+      mask-image: linear-gradient(to bottom, black, transparent);
+    }
+  }
+
+  .sheet-header {
+    background: none;
+    position: relative;
+  }
+
+  .sheet-body {
+    background: none;
+
+    .skills, .tools, .saves {
+      .ability { color: var(--dnd5e-color-gold); }
+    }
+
+    .sidebar .favorites > ul .drop {
+      color: white;
+      border-color: white;
+    }
+
+    .pill-lg {
+      .name .title { color: var(--dnd5e-color-gold); }
+
+      &.texture {
+        border: 1px solid var(--dnd5e-color-blue-gray-1);
+        --background-color: var(--dnd5e-color-blue-gray-2);
+        background-blend-mode: soft-light;
+      }
+    }
+  }
+
+  .tab.biography textarea { color: var(--dnd5e-color-blue-white); }
+
+  .ability-score {
+    &::before { background-image: url("ui/ability-score-tab-dark.svg"); }
+    .label { font-weight: bold; }
+    .mod { color: var(--dnd5e-color-blue-white); }
+  }
+}

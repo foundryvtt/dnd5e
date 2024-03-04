@@ -2,6 +2,7 @@ import { FormulaField } from "../../fields.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
+import RollConfigField from "../../shared/roll-config-field.mjs";
 
 /**
  * Shared contents of the attributes schema between various actor types.
@@ -12,8 +13,8 @@ export default class AttributesFields {
    *
    * @type {object}
    * @property {object} init
-   * @property {number} init.value       Calculated initiative modifier.
-   * @property {number} init.bonus       Fixed bonus provided to initiative rolls.
+   * @property {string} init.ability     The ability used for initiative rolls.
+   * @property {string} init.bonus       The bonus provided to initiative rolls.
    * @property {object} movement
    * @property {number} movement.burrow  Actor burrowing speed.
    * @property {number} movement.climb   Actor climbing speed.
@@ -40,15 +41,24 @@ export default class AttributesFields {
    *
    * @type {object}
    * @property {object} attunement
-   * @property {number} attunement.max      Maximum number of attuned items.
+   * @property {number} attunement.max          Maximum number of attuned items.
    * @property {object} senses
-   * @property {number} senses.darkvision   Creature's darkvision range.
-   * @property {number} senses.blindsight   Creature's blindsight range.
-   * @property {number} senses.tremorsense  Creature's tremorsense range.
-   * @property {number} senses.truesight    Creature's truesight range.
-   * @property {string} senses.units        Distance units used to measure senses.
-   * @property {string} senses.special      Description of any special senses or restrictions.
-   * @property {string} spellcasting        Primary spellcasting ability.
+   * @property {number} senses.darkvision       Creature's darkvision range.
+   * @property {number} senses.blindsight       Creature's blindsight range.
+   * @property {number} senses.tremorsense      Creature's tremorsense range.
+   * @property {number} senses.truesight        Creature's truesight range.
+   * @property {string} senses.units            Distance units used to measure senses.
+   * @property {string} senses.special          Description of any special senses or restrictions.
+   * @property {string} spellcasting            Primary spellcasting ability.
+   * @property {number} exhaustion              Creature's exhaustion level.
+   * @property {object} concentration
+   * @property {string} concentration.ability   The ability used for concentration saving throws.
+   * @property {string} concentration.bonus     The bonus provided to concentration saving throws.
+   * @property {number} concentration.limit     The amount of items this actor can concentrate on.
+   * @property {number} concentration.mode      The default advantage mode for this actor's concentration saving throws.
+   * @property {object} concentration.roll
+   * @property {number} concentration.roll.min  The minimum the d20 can roll.
+   * @property {number} concentration.roll.max  The maximum the d20 can roll.
    */
   static get creature() {
     return {
@@ -63,7 +73,11 @@ export default class AttributesFields {
       }),
       exhaustion: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
-      })
+      }),
+      concentration: new RollConfigField({
+        ability: "con",
+        limit: new foundry.data.fields.NumberField({integer: true, min: 0, initial: 1, label: "DND5E.AttrConcentration.Limit"})
+      }, {label: "DND5E.Concentration"})
     };
   }
 
@@ -88,6 +102,19 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Initialize derived AC fields for Active Effects to target.
+   * @this {CharacterData|NPCData|VehicleData}
+   */
+  static prepareBaseArmorClass() {
+    const ac = this.attributes.ac;
+    ac.armor = 10;
+    ac.shield = ac.cover = 0;
+    ac.bonus = "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Adjust exhaustion level based on Active Effects.
    * @this {CharacterData|NPCData}
    */
@@ -107,15 +134,26 @@ export default class AttributesFields {
     const statuses = this.parent.statuses;
     const noMovement = this.parent.hasConditionEffect("noMovement");
     const halfMovement = this.parent.hasConditionEffect("halfMovement");
-    const reduction = statuses.has("heavilyEncumbered")
-      ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered
-      : statuses.has("encumbered") ? CONFIG.DND5E.encumbrance.speedReduction.encumbered : 0;
+    const encumbered = statuses.has("encumbered");
+    const heavilyEncumbered = statuses.has("heavilyEncumbered");
+    const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
-    Object.keys(CONFIG.DND5E.movementTypes).forEach(k => {
-      if ( reduction ) this.attributes.movement[k] = Math.max(0, this.attributes.movement[k] - reduction);
-      if ( (crawl && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
-      else if ( statuses.has("exceedingCarryingCapacity") ) this.attributes.movement[k] = 5;
-      else if ( halfMovement ) this.attributes.movement[k] = Math.floor(this.attributes.movement[k] * 0.5);
-    });
+    const units = this.attributes.movement.units;
+    for ( const type in CONFIG.DND5E.movementTypes ) {
+      let speed = this.attributes.movement[type];
+      if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
+      else {
+        if ( halfMovement ) speed *= 0.5;
+        if ( heavilyEncumbered ) {
+          speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered[units] ?? 0));
+        } else if ( encumbered ) {
+          speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.encumbered[units] ?? 0));
+        }
+        if ( exceedingCarryingCapacity ) {
+          speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
+        }
+      }
+      this.attributes.movement[type] = speed;
+    }
   }
 }

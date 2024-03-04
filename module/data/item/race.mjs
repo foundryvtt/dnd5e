@@ -95,8 +95,9 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
       { type: "Trait", configuration: { grants: ["languages:standard:common"] } }
     ];
     this.parent.updateSource({"system.advancement": toCreate.map(c => {
-      const AdvancementClass = CONFIG.DND5E.advancementTypes[c.type];
-      return new AdvancementClass(c, { parent: this.parent }).toObject();
+      const config = CONFIG.DND5E.advancementTypes[c.type];
+      const cls = config.documentClass ?? config;
+      return new cls(c, { parent: this.parent }).toObject();
     })});
   }
 

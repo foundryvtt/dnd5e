@@ -10,7 +10,7 @@
 
 // Import Configuration
 import DND5E from "./module/config.mjs";
-import registerSystemSettings from "./module/settings.mjs";
+import { registerSystemSettings, registerDeferredSettings } from "./module/settings.mjs";
 
 // Import Submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -324,6 +324,9 @@ Hooks.once("setup", function() {
   game.dnd5e.moduleArt.registerModuleArt();
   Tooltips5e.activateListeners();
   game.dnd5e.tooltips.observe();
+
+  // Register settings after modules have had a chance to initialize
+  registerDeferredSettings();
 
   // Apply table of contents compendium style if specified in flags
   game.packs

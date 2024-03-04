@@ -59,9 +59,9 @@
 
   .card {
     border-radius: 4px;
-    background: var(--dnd5e-color-card);
+    background: var(--dnd5e-background-card);
     box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-    border: 1px solid var(--dnd5e-color-gold);
+    border: var(--dnd5e-border-gold);
 
     @media (prefers-contrast: more) {
       border-color: var(--dnd5e-color-dark);
@@ -71,7 +71,7 @@
       background: linear-gradient(to right, var(--dnd5e-color-hd-1), var(--dnd5e-color-hd-2));
       color: white;
       border-radius: 3px 3px 0 0;
-      border-bottom: 1px solid var(--dnd5e-color-gold);
+      border-bottom: var(--dnd5e-border-gold);
 
       &.disabled {
         background: linear-gradient(to right, var(--color-border-dark-3), var(--color-border-light-2));
@@ -170,14 +170,15 @@
   }
 
   .pill-lg {
-    background: var(--dnd5e-color-card);
-    border: 2px solid var(--dnd5e-color-gold);
+    background: var(--dnd5e-background-card);
+    border: var(--dnd5e-border-gold);
+    border-width: 2px;
     border-radius: 5px;
     box-shadow: 0 0 12px var(--dnd5e-shadow-15);
     display: flex;
     align-items: center;
-    gap: .5rem;
-    padding: .5rem;
+    gap: 8px;
+    padding: 8px;
     height: 50px;
     max-width: 280px;
     position: relative;
@@ -343,9 +344,10 @@
   }
 
   .meter {
+    --meter-background: var(--dnd5e-color-light-gray);
     border: 1px solid var(--dnd5e-color-gold);
     border-radius: 4px;
-    background: var(--dnd5e-color-light-gray);
+    background: var(--meter-background);
     font-family: var(--dnd5e-font-roboto);
     font-weight: bold;
     box-shadow: inset 0 0 16px rgb(0 0 0 / 25%);
@@ -434,12 +436,12 @@
   }
 
   button {
-    background: var(--dnd5e-color-card);
+    background: var(--dnd5e-background-card);
     font-family: var(--dnd5e-font-roboto);
     font-weight: bold;
     font-size: var(--font-size-13);
     text-transform: uppercase;
-    padding: .1875rem;
+    padding: 3px;
     border: 1px solid var(--color-border-light-2);
     box-shadow: 0 0 8px var(--dnd5e-shadow-15);
     display: flex;
@@ -478,11 +480,15 @@
   }
 
   /* Reset select styles */
-  select.unselect {
-    border: none;
-    padding: 0;
-    background: transparent;
-    height: unset;
+  select {
+    color: inherit;
+
+    &.unselect {
+      border: none;
+      padding: 0;
+      background: transparent;
+      height: unset;
+    }
   }
 
   /* Reset textarea styles */
@@ -543,8 +549,8 @@
   /* Pips */
   .pips {
     display: flex;
-    gap: .3125rem;
-    padding: .625rem .75rem;
+    gap: 5px;
+    padding: 10px 12px;
 
     .pip {
       background: var(--dnd5e-color-light-gray);
@@ -779,13 +785,23 @@
     padding: 0 .5rem;
     flex: none;
   }
+
+  .dialog-buttons {
+    select {
+      flex: 1;
+      min-block-size: 28px;
+    }
+    button {
+      flex: 1 0 50%;
+    }
+  }
 }
 
 /* ---------------------------------- */
 /*  Active Effects Pane               */
 /* ---------------------------------- */
 
-.dnd5e2 dnd5e-effects {
+.dnd5e2 .effects-element {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -839,7 +855,7 @@
 #context-menu.dnd5e2 {
   position: fixed;
   z-index: var(--z-index-tooltip);
-  background: var(--dnd5e-color-card);
+  background: var(--dnd5e-background-card);
   border-radius: 3px;
   box-shadow: 0 3px 6px var(--dnd5e-shadow-45);
   font-family: var(--dnd5e-font-roboto);
@@ -891,7 +907,7 @@
   background: transparent;
   color: var(--dnd5e-color-black);
   overflow: hidden;
-  font-size: var(--font-size-16);
+  font-size: 16px;
   cursor: nwse-resize;
   opacity: .4;
 
