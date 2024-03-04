@@ -50,7 +50,7 @@ async function enrichString(match, options) {
     case "tool": return enrichCheck(config, label, options);
     case "save": return enrichSave(config, label, options);
     case "embed": return enrichEmbed(config, label, options);
-    case "item": return enrichItem(config, label);
+    case "item": return enrichItem(config, label, options);
     case "reference": return enrichReference(config, label, options);
   }
   return null;
@@ -641,6 +641,7 @@ async function enrichSave(config, label, options) {
  * Enrich an item use link to roll an item on the selected token.
  * @param {string[]} config              Configuration data.
  * @param {string} [label]               Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {Promise<HTMLElement|null>}  An HTML link if the item link could be built, otherwise null.
  *
  * @example Use an item from a Name:
@@ -661,15 +662,6 @@ async function enrichSave(config, label, options) {
  * </a>
  * ```
  *
- * @example Use an Item from a "Name UUID":
- * ```[[/item Actor.Akra (Dragonborn Cleric).Item.Mace]]```
- * becomes
- * ```html
- * <a class="roll-action" data-type="item">
- *   <i class="fa-solid fa-dice-d20"></i> Mace
- * </a>
- * ```
- *
  * @example Use an Item from a Relative UUID:
  * ```[[/item .amUUCouL69OK1GZU]]```
  * becomes
@@ -679,17 +671,17 @@ async function enrichSave(config, label, options) {
  * </a>
  * ```
  */
-async function enrichItem(config, label) {
-  const givenItem = config.values.join(" ");
+async function enrichItem(config, label, options) {
+  let givenItem = config.values.join(" ");
   // If config is a UUID
   const itemUuidMatch = givenItem.match(
     /^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/
   );
-  if ( itemUuidMatch ) {
+  if (itemUuidMatch) {
     const ownerActor = itemUuidMatch.groups.actorid.trim();
-    if ( !label ) {
+    if (!label) {
       const item = await fromUuid(givenItem);
-      if ( !item ) {
+      if (!item) {
         console.warn(`Item not found while enriching ${givenItem}.`);
         return null;
       }
@@ -702,27 +694,30 @@ async function enrichItem(config, label) {
   const relativeIdMatch = givenItem.match(/^\.\w{16}$/);  // [[/item .amUUCouL69OK1GZU]]
   const copiedIdMatch = givenItem.match(/^\w{16}$/);      // [[/item amUUCouL69OK1GZU]]
   const relativeNameMatch = givenItem.startsWith(".");    // [[/item .Bite]]
-  if ( relativeIdMatch || copiedIdMatch || relativeNameMatch ) {
-    const relativeId = relativeIdMatch ? givenItem.substr(1) : givenItem;
-    const foundActor = game.actors.find(actor => actor.items.get(relativeId));
-    if ( foundActor ) {
-      const foundItem = foundActor.items.get(relativeId);
+  if (relativeIdMatch || copiedIdMatch || relativeNameMatch) {
+    const relativeId = givenItem.startsWith(".") ? givenItem.substr(1) : givenItem;
+    const foundActor = options.relativeTo?.parent;
+    let foundItem = foundActor?.items.get(relativeId);
+    if (foundItem) {
       if (!label) {
         label = foundItem.name;
-        console.log(`Found actor ${foundActor.name} that owns the item ${foundItem.name}.`);
       }
-      return createRollLink(label, { type: "item", rollRelativeItemId: relativeId });
+      return createRollLink(label, { type: "item", rollItemActor: `Actor.${foundActor.id}`, rollItemUuid: foundItem.uuid });
     } else if (relativeNameMatch) {
-      const relativeName = givenItem.substr(1);
-      if (!label) {
-        label = relativeName;
-        return createRollLink(label, { type: "item", rollRelativeItemName: relativeName });
+      foundItem = foundActor?.items.getName(relativeId);
+      if (foundItem) {
+        if (!label) {
+          label = foundItem.name;
+          return createRollLink(label, { type: "item", rollItemActor: `Actor.${foundActor.id}`, rollItemUuid: foundItem.uuid });
+        }
       }
+      console.warn(`Item not found while enriching ${givenItem}.`);
+      return null;
     }
   }
 
   // Finally, if config is an item name
-  if ( !label ) label = givenItem;
+  if (!label) label = givenItem;
   return createRollLink(label, { type: "item", rollItemName: givenItem });
 }
 
@@ -916,7 +911,7 @@ async function rollAction(event) {
           options.ability = ability;
           return await actor.rollToolCheck(tool, options);
         case "item":
-          // UUID Method
+          // UUID & Relative ID Methods
           if (target.dataset.rollItemUuid) {
             const gameActor = await fromUuid(target.dataset.rollItemActor);
             if (gameActor.testUserPermission(game.user, "OWNER")) {
@@ -924,50 +919,6 @@ async function rollAction(event) {
             } else {
               return ui.notifications.warn(`You do not have ownership of ${gameActor.name}, and cannot use this item!`);
             }
-
-          // Relative Id/Name Method
-          } else if (target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName) {
-            let locatedActor;
-            const targetLocation = target.parentElement.parentElement;
-            // Enricher is in Chat Message
-            if (target.offsetParent.className === "message-content") {
-              const cardData = target.offsetParent.lastElementChild.dataset;
-              if (cardData.tokenId) {
-                locatedActor = `${cardData.tokenId?.trim()}.Actor.${cardData.actorId}`;
-              } else {
-                locatedActor = `Actor.${cardData.actorId}`;
-              }
-            // Enricher is in Legacy/NPC Sheet
-            } else if (targetLocation.classList.contains("item-summary")) {
-              locatedActor = ui.activeWindow.object.uuid;
-            // Enricher is in Actor2 Sheet
-            } else if (targetLocation.classList.contains("description")) {
-              locatedActor = ui.activeWindow.object.uuid;
-            // Enricher is in Item Sheet
-            } else if (targetLocation.classList.contains("editor-content")) {
-              locatedActor = ui.activeWindow.object.actor.uuid;
-            }
-
-            const gameActor = await fromUuid(locatedActor);
-            let actorItem;
-            if (target.dataset.rollRelativeItemId) {
-              actorItem = await fromUuid(`.Item.${target.dataset.rollRelativeItemId}`, { relative: gameActor });
-            } else {
-              const findItem = gameActor.items.getName(target.dataset.rollRelativeItemName);
-              if (findItem == null) {
-                return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemName} not found on Actor ${gameActor.name}!`);
-              } else {
-                actorItem = await fromUuid(findItem.uuid);
-              }
-            }
-            if (actorItem) {
-              if (gameActor.testUserPermission(game.user, "OWNER")) {
-                return actorItem.use();
-              } else {
-                return ui.notifications.warn(`You do not have ownership of ${gameActor.name}, and cannot use this item!`);
-              }
-            }
-
             // Name Method
           } else if (target.dataset.rollItemName) {
             return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
