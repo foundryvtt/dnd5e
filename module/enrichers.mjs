@@ -418,7 +418,10 @@ async function embedDocument(config, label, options) {
   options = { ...options, _embedDepth: options._embedDepth + 1, relativeTo: config.doc };
   config.inline ??= config.values.includes("inline");
 
-  const keyPath = (config.doc instanceof Actor) ? "system.details.biography.value" : "system.description.value";
+  const keyPath = (config.doc instanceof Actor) ? "system.details.biography.value"
+    : game.user.isGM || (config.doc.system.identified !== false)
+      ? "system.description.value"
+      : "system.unidentified.description";
   const description = foundry.utils.getProperty(config.doc, keyPath);
   if ( description === undefined ) return null;
 
@@ -605,9 +608,9 @@ async function embedRollTable(config, label, options) {
 
 /**
  * Wrap embeds in containing elements.
- * @param {string} enriched  Enriched text content to include.
+ * @param {string} enriched            Enriched text content to include.
  * @param {object} config              Configuration data.
- * @param {string} label               Optional label to use as the table caption.
+ * @param {string} label               Optional label to replace the default caption.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {Promise<HTMLElement>}
  */
