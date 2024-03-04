@@ -693,28 +693,25 @@ async function enrichItem(config, label, options) {
   // If config is a relative Id/Name
   const relativeIdMatch = givenItem.match(/^\.\w{16}$/);  // [[/item .amUUCouL69OK1GZU]]
   const copiedIdMatch = givenItem.match(/^\w{16}$/);      // [[/item amUUCouL69OK1GZU]]
-  const relativeNameMatch = givenItem.startsWith(".");    // [[/item .Bite]]
-  if ( relativeIdMatch || copiedIdMatch || relativeNameMatch ) {
-    const relativeId = givenItem.startsWith(".") ? givenItem.substr(1) : givenItem;
-    const foundActor = options.relativeTo?.parent;
-    let foundItem = foundActor?.items.get(relativeId);
-    if ( foundItem ) {
-      if ( !label ) label = foundItem.name;
-      return createRollLink(label, { type: "item", rollItemActor: `Actor.${foundActor.id}`, rollItemUuid: foundItem.uuid });
-    } else if ( relativeNameMatch ) {
-      foundItem = foundActor?.items.getName(relativeId);
+  if ( relativeIdMatch || copiedIdMatch ) {
+    if ( options.relativeTo?.documentName === "Item") {
+      const foundActor = options.relativeTo?.parent;
+      const relativeId = givenItem.startsWith(".") ? givenItem.substr(1) : givenItem;
+      let foundItem = foundActor?.items.get(relativeId);
       if ( foundItem ) {
         if ( !label ) label = foundItem.name;
-        return createRollLink(label, { type: "item", rollItemActor: `Actor.${foundActor.id}`, rollItemUuid: foundItem.uuid });
+        return createRollLink(label, { type: "item", rollItemActor: foundActor.uuid, rollItemUuid: foundItem.uuid });
       }
-      console.warn(`Item not found while enriching ${givenItem}.`);
+    } else {
+      console.warn("Relative Item Enrichers must be within an Owned Item's description");
       return null;
     }
   }
 
   // Finally, if config is an item name
   if ( !label ) label = givenItem;
-  return createRollLink(label, { type: "item", rollItemName: givenItem });
+  const foundActor = options.relativeTo?.documentName === "Item" ? options.relativeTo?.parent : null;
+  return createRollLink(label, { type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem });
 }
 
 /* -------------------------------------------- */
@@ -888,7 +885,7 @@ async function rollAction(event) {
       if ( speaker.token ) actor = game.actors.tokens[speaker.token];
       actor ??= game.actors.get(speaker.actor);
 
-      if ( !actor && (type !== "damage" && type !== "item") ) {
+      if ( !actor && (type !== "damage") && (type !== "item") ) {
         ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
         return;
       }
@@ -907,17 +904,33 @@ async function rollAction(event) {
           options.ability = ability;
           return await actor.rollToolCheck(tool, options);
         case "item":
-          // UUID & Relative ID Methods
           if ( target.dataset.rollItemUuid ) {
             const gameActor = await fromUuid(target.dataset.rollItemActor);
             if ( gameActor.testUserPermission(game.user, "OWNER") ) {
               return (await fromUuid(target.dataset.rollItemUuid)).use();
             } else {
-              return ui.notifications.warn(`You do not have ownership of ${gameActor.name}, and cannot use this item!`);
+              return ui.notifications.warn(`You do not have ownership of ${gameActor?.name}, and cannot use this item.`);
             }
-            // Name Method
           } else if ( target.dataset.rollItemName ) {
-            return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
+            if ( (canvas.tokens.controlled.length === 0 && !target.dataset.rollItemActor) || canvas.tokens.controlled[0].actor.items.getName(target.dataset.rollItemName) ) {
+              return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
+            } else if ( target.dataset.rollItemActor ) {
+              const gameActor = await fromUuid(target.dataset.rollItemActor);
+              if ( gameActor.testUserPermission(game.user, "OWNER") ) {
+                if ( gameActor.items.getName(target.dataset.rollItemName) ) {
+                  if ( canvas.tokens.controlled.length > 0 ) {
+                    ui.notifications.warn(`Your controlled token ${canvas.tokens.controlled[0].name} does not have an Item with name ${target.dataset.rollItemName} using Item Enricher owner`);
+                  }
+                  return (await fromUuid(target.dataset.rollItemActor)).items.getName(target.dataset.rollItemName).use();
+                } else {
+                  return ui.notifications.warn(`${gameActor.name} does not have an Item with name ${target.dataset.rollItemName}.`);
+                }
+              } else {
+                return ui.notifications.warn(`You do not have ownership of ${gameActor?.name}, and cannot use this item.`);
+              }
+            } else {
+              return ui.notifications.warn(`Your controlled actor ${canvas.tokens.controlled[0]?.actor.name} does not have an Item with name ${target.dataset.rollItemName}.`);
+            }
           }
 
         default:
