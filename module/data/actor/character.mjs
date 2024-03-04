@@ -209,6 +209,8 @@ export default class CharacterData extends CreatureTemplate {
   prepareEmbeddedData() {
     const raceData = this.details.race?.system;
     if ( !raceData ) {
+      this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
+      this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
       this.details.type = new CreatureTypeField({ swarm: false }).initialize({ value: "humanoid" }, this);
       return;
     }
@@ -217,13 +219,13 @@ export default class CharacterData extends CreatureTemplate {
       if ( raceData.movement[key] ) this.attributes.movement[key] ??= raceData.movement[key];
     }
     if ( raceData.movement.hover ) this.attributes.movement.hover = true;
-    this.attributes.movement.units ??= raceData.movement.units;
+    this.attributes.movement.units ??= raceData.movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
 
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
       if ( raceData.senses[key] ) this.attributes.senses[key] ??= raceData.senses[key];
     }
     this.attributes.senses.special = [this.attributes.senses.special, raceData.senses.special].filterJoin(";");
-    this.attributes.senses.units ??= raceData.senses.units;
+    this.attributes.senses.units ??= raceData.senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
 
     this.details.type = raceData.type;
   }
