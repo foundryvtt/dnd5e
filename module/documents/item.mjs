@@ -260,7 +260,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {boolean|null}
    */
   get isOriginalClass() {
-    if ( this.type !== "class" || !this.isEmbedded ) return null;
+    if ( this.type !== "class" || !this.isEmbedded || !this.parent.system.details?.originalClass ) return null;
     return this.id === this.parent.system.details.originalClass;
   }
 
