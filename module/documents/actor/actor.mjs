@@ -928,7 +928,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async applyDamage(damages, options={}) {
     const hp = this.system.attributes.hp;
-    const traits = this.system.traits ?? {};
     if ( !hp ) return this; // Group actors don't have HP at the moment
 
     if ( foundry.utils.getType(options) !== "Object" ) {
@@ -942,71 +941,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Number.isNumeric(damages) ) {
       damages = [{ value: damages }];
       options.ignore ??= true;
-    } else damages = foundry.utils.deepClone(damages);
+    }
 
-    const multiplier = options.multiplier ?? 1;
-
-    /**
-     * A hook event that fires before damage amount is calculated for an actor.
-     * @param {Actor5e} actor                     The actor being damaged.
-     * @param {DamageDescription[]} damages       Damage descriptions.
-     * @param {DamageApplicationOptions} options  Additional damage application options.
-     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
-     * @function dnd5e.preCalculateDamage
-     * @memberof hookEvents
-     */
-    if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options) === false ) return this;
-
-    const ignore = (category, type) => {
-      return options.ignore === true
-        || options.ignore?.[category] === true
-        || options.ignore?.[category]?.has?.(type);
-    };
-
-    const hasEffect = (category, type, properties) => {
-      const config = traits?.[category];
-      if ( !config?.value.has(type) ) return false;
-      if ( !CONFIG.DND5E.damageTypes[type]?.isPhysical || !properties?.size ) return true;
-      return !config.bypasses?.intersection(properties)?.size;
-    };
-
-    const rollData = this.getRollData({deterministic: true});
-
-    damages.forEach(d => {
-      // Skip damage types with immunity
-      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) {
-        d.value = 0;
-        return;
-      }
-
-      // Apply type-specific damage reduction
-      if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
-        const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
-        if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
-        else d.value += modification;
-      }
-
-      let damageMultiplier = multiplier;
-
-      // Apply type-specific damage resistance
-      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) damageMultiplier /= 2;
-
-      // Apply type-specific damage vulnerability
-      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
-
-      d.value = d.value * damageMultiplier;
-    });
-
-    /**
-     * A hook event that fires after damage values are calculated for an actor.
-     * @param {Actor5e} actor                     The actor being damaged.
-     * @param {DamageDescription[]} damages       Damage descriptions.
-     * @param {DamageApplicationOptions} options  Additional damage application options.
-     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
-     * @function dnd5e.calculateDamage
-     * @memberof hookEvents
-     */
-    if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return this;
+    damages = this.calculateDamage(damages, options);
+    if ( !damages ) return this;
 
     // Round damage towards zero
     let amount = damages.reduce((acc, d) => acc + d.value, 0);
@@ -1053,6 +991,86 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.applyDamage", this, amount, options);
 
     return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the damage that will be applied to this actor.
+   * @param {DamageDescription[]} damages            Damages to calculate.
+   * @param {DamageApplicationOptions} [options={}]  Damage calculation options.
+   * @returns {DamageDescription[]|false}            New damage descriptions with changes applied, or `false` if the
+   *                                                 calculation was canceled.
+   */
+  calculateDamage(damages, options={}) {
+    damages = foundry.utils.deepClone(damages);
+
+    /**
+     * A hook event that fires before damage amount is calculated for an actor.
+     * @param {Actor5e} actor                     The actor being damaged.
+     * @param {DamageDescription[]} damages       Damage descriptions.
+     * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
+     * @function dnd5e.preCalculateDamage
+     * @memberof hookEvents
+     */
+    if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options) === false ) return false;
+
+    const multiplier = options.multiplier ?? 1;
+
+    const ignore = (category, type) => {
+      return options.ignore === true
+        || options.ignore?.[category] === true
+        || options.ignore?.[category]?.has?.(type);
+    };
+
+    const traits = this.system.traits ?? {};
+    const hasEffect = (category, type, properties) => {
+      const config = traits?.[category];
+      if ( !config?.value.has(type) ) return false;
+      if ( !CONFIG.DND5E.damageTypes[type]?.isPhysical || !properties?.size ) return true;
+      return !config.bypasses?.intersection(properties)?.size;
+    };
+
+    const rollData = this.getRollData({deterministic: true});
+
+    damages.forEach(d => {
+      // Skip damage types with immunity
+      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) {
+        d.value = 0;
+        return;
+      }
+
+      // Apply type-specific damage reduction
+      if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
+        const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
+        if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
+        else d.value += modification;
+      }
+
+      let damageMultiplier = multiplier;
+
+      // Apply type-specific damage resistance
+      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) damageMultiplier /= 2;
+
+      // Apply type-specific damage vulnerability
+      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
+
+      d.value = d.value * damageMultiplier;
+    });
+
+    /**
+     * A hook event that fires after damage values are calculated for an actor.
+     * @param {Actor5e} actor                     The actor being damaged.
+     * @param {DamageDescription[]} damages       Damage descriptions.
+     * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
+     * @function dnd5e.calculateDamage
+     * @memberof hookEvents
+     */
+    if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return false;
+
+    return damages;
   }
 
   /* -------------------------------------------- */
