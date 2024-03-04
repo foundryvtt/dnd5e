@@ -14,6 +14,7 @@ import ActorTypeConfig from "./type-config.mjs";
 import DamageModificationConfig from "./damage-modification-config.mjs";
 import SourceConfig from "../source-config.mjs";
 
+import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 import TraitSelector from "./trait-selector.mjs";

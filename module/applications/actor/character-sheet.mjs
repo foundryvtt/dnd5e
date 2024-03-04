@@ -1,6 +1,5 @@
 import ActorSheet5e from "./base-sheet.mjs";
 import ActorTypeConfig from "./type-config.mjs";
-import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 /**
