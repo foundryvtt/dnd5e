@@ -433,25 +433,54 @@
     transition: all 250ms ease;
   }
 
-  button {
+  button, .button-group {
     background: var(--dnd5e-color-card);
     font-family: var(--dnd5e-font-roboto);
     font-weight: bold;
     font-size: var(--font-size-13);
     text-transform: uppercase;
-    padding: .1875rem;
     border: 1px solid var(--color-border-light-2);
     box-shadow: 0 0 8px var(--dnd5e-shadow-15);
+    border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: .25rem;
 
     &:disabled {
       cursor: default;
       color: var(--color-text-dark-inactive);
     }
+  }
+
+  button {
+    padding: .1875rem;
+    gap: .25rem;
     &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
+  }
+
+  .button-group {
+    align-items: stretch;
+    min-height: 36px;
+    > button {
+      width: unset;
+      box-shadow: none;
+      background: none;
+      border: none;
+      margin: 0;
+      padding-inline: .75rem;
+      border-radius: 0;
+      flex: 1 1 auto;
+      line-height: 1.2;
+
+      &:first-child { border-radius: 3px 0 0 3px; }
+      &:last-child { border-radius: 0 3px 3px 0; }
+      &:not(:last-child) { border-right: 1px solid var(--color-border-light-1); }
+
+      &.shrink {
+        flex-grow: 0;
+        min-width: 50px;
+      }
+    }
   }
 
   button.radio-button {

@@ -31,15 +31,15 @@
 
         {{!-- Attacks --}}
         {{#if hasAttack}}
-        <button type="button" data-action="attack">
+        {{#> dnd5e.roll-button (dnd5e-object action="attack") }}
             <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg"></i>
             {{ localize "DND5E.Attack" }}
-        </button>
+        {{/dnd5e.roll-button }}
         {{/if}}
 
         {{!-- Damage / Healing --}}
         {{#if hasDamage}}
-        <button type="button" data-action="damage">
+        {{#> dnd5e.roll-button (dnd5e-object action="damage") }}
             {{#if isHealing}}
             <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/damage/healing.svg"></i>
             {{ localize "DND5E.Healing" }}
@@ -47,27 +47,27 @@
             <i class="fas fa-burst"></i>
             {{ localize "DND5E.Damage" }}
             {{/if}}
-        </button>
+        {{/dnd5e.roll-button }}
         {{/if}}
 
         {{!-- Versatile --}}
         {{#if isVersatile}}
-        <button type="button" data-action="versatile">
+        {{#> dnd5e.roll-button (dnd5e-object action="versatile") }}
             <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/versatile.svg"></i>
             {{ localize "DND5E.Versatile" }}
-        </button>
+        {{/dnd5e.roll-button }}
         {{/if}}
 
         {{!-- Saving Throw --}}
         {{#if hasSave}}
         {{#with item.system.save}}
-        <button type="button" data-action="save" data-ability="{{ ability }}" data-dc="{{ dc }}">
+        {{#> dnd5e.roll-button (dnd5e-object action="save" ability=ability dc=dc) }}
             <i class="fas fa-shield-heart"></i>
             {{#with (lookup (lookup @root.config.abilities ability) "label") as |abilityLabel|}}
             <span class="visible-dc">{{ localize "DND5E.SavingThrowDC" dc=../dc ability=abilityLabel }}</span>
             <span class="hidden-dc">{{ localize "DND5E.SavePromptTitle" ability=abilityLabel }}</span>
             {{/with}}
-        </button>
+        {{/dnd5e.roll-button}}
         {{/with}}
         {{/if}}
 
@@ -89,18 +89,18 @@
 
         {{!-- Tool Check --}}
         {{#if isTool}}
-        <button type="button" data-action="toolCheck" data-ability="{{ item.system.ability }}">
+        {{#> dnd5e.roll-button (dnd5e-object action="toolCheck" ability=item.system.ability) }}
             <i class="fas fa-hammer"></i>
             {{ localize "DND5E.UseItem" item=item.name }}
-        </button>
+        {{/dnd5e.roll-button}}
         {{/if}}
 
         {{!-- Ability Check --}}
         {{#if hasAbilityCheck}}
-        <button type="button" data-action="abilityCheck" data-ability="{{ item.system.ability }}">
+        {{#> dnd5e.roll-button (dnd5e-object action="abilityCheck" ability=item.system.ability) }}
             <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/ability-score-improvement.svg"></i>
             {{ labels.abilityCheck }}
-        </button>
+        {{/dnd5e.roll-button}}
         {{/if}}
     </div>
     {{/if}}

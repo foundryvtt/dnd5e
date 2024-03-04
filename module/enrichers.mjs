@@ -789,8 +789,11 @@ async function rollAction(event) {
   if ( !target ) return;
   event.stopPropagation();
 
-  const { type, ability, skill, tool, dc } = target.dataset;
+  const { type, ability, skill, tool, dc, fastForward } = target.dataset;
   const options = { event };
+  options.fastForward = !!fastForward;
+  options.advantage = fastForward === "advantage" || undefined;
+  options.disadvantage = fastForward === "disadvantage" || undefined;
   if ( dc ) options.targetValue = dc;
 
   const action = event.target.closest("a")?.dataset.action ?? "roll";

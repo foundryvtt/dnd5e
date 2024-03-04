@@ -98,7 +98,8 @@ export default class ChatMessage5e extends ChatMessage {
       const buttons = chatCard.find("button[data-action]:not(.apply-effect)");
       buttons.each((i, btn) => {
         if ( (btn.dataset.action === "save") || (btn.dataset.action === "rollRequest") ) return;
-        btn.style.display = "none";
+        const hide = btn.closest(".button-group") ?? btn;
+        hide.style.display = "none";
       });
     }
   }
