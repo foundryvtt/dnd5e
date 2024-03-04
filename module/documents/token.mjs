@@ -89,6 +89,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     return CONFIG.DND5E.consumableResources;
   }
 
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static getTrackedAttributeChoices(attributes) {
     const groups = super.getTrackedAttributeChoices(attributes);

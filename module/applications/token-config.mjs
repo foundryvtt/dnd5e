@@ -92,6 +92,8 @@ export default class TokenConfig5e extends TokenConfig {
     if ( !this._minimized ) this.setPosition();
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Adds charge based items as attributes for the current token.
    * @param {object} attributes The attribute groups to add the item entries to.
@@ -104,7 +106,7 @@ export default class TokenConfig5e extends TokenConfig {
       if ( per && max ) arr.push([i.getRelativeUUID(actor), i.name]);
       return arr;
     }, []) ?? [];
-    if ( items.length > 0 ) {
+    if ( items.length ) {
       items.sort(([, a], [, b]) => a.localeCompare(b, game.i18n.lang));
       attributes[game.i18n.localize("DND5E.ConsumeCharges")] = items.map(i => i[0]);
     }
@@ -127,7 +129,7 @@ export default class TokenConfig5e extends TokenConfig {
         // Localize attribute paths.
         options.forEach(option => {
           const label = getHumanReadableAttributeLabel(option.value, { actor });
-          if (label) option.innerText = label;
+          if ( label ) option.innerText = label;
         });
 
         // Sort options by localized label.
