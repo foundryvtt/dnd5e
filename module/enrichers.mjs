@@ -10,7 +10,11 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>award|check|damage|lookup|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    enricher: enrichString
+  },
+  {
+    pattern: /\[\[(?<type>lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -653,6 +657,13 @@ function wrapEmbeddedText(enriched, config, label, options) {
  * @param {string} [fallback]          Optional fallback if the value couldn't be found.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML element if the lookup could be built, otherwise null.
+ *
+ * @example Include a creature's name in its description:
+ * ```[[lookup @name]]``
+ * becomes
+ * ```html
+ * <span class="lookup-value">Adult Black Dragon</span>
+ * ```
  */
 function enrichLookup(config, fallback, options) {
   let keyPath = config.path;
@@ -696,7 +707,7 @@ function enrichLookup(config, fallback, options) {
  * @returns {HTMLElement|null}         An HTML link to the Journal Entry Page for the given reference.
  *
  * @example Create a content link to the relevant reference:
- * ```@Reference[condition=unconscious]{Label}```
+ * ```&Reference[condition=unconscious]{Label}```
  * becomes
  * ```html
  * <span class="reference-link">
