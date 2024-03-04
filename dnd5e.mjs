@@ -57,6 +57,8 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
+  CONFIG.Combat.documentClass = documents.Combat5e;
+  CONFIG.Combatant.documentClass = documents.Combatant5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
   CONFIG.Item.compendiumIndexFields.push("system.container");
   CONFIG.Item.documentClass = documents.Item5e;
@@ -92,9 +94,6 @@ Hooks.once("init", function() {
   // Configure trackable & consumable attributes.
   _configureTrackableAttributes();
   _configureConsumableAttributes();
-
-  // Patch Core Functions
-  Combatant.prototype.getInitiativeRoll = documents.combat.getInitiativeRoll;
 
   // Register Roll Extensions
   CONFIG.Dice.rolls.push(dice.D20Roll);
