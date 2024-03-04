@@ -220,7 +220,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   activateListeners(html) {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
-    html.find(".level-selector").change(this._onLevelChange.bind(this));
     html.find(".short-rest").click(this._onShortRest.bind(this));
     html.find(".long-rest").click(this._onLongRest.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
@@ -262,36 +261,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       case "rollInitiative":
         return this.actor.rollInitiativeDialog({event});
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Respond to a new level being selected from the level selector.
-   * @param {Event} event                           The originating change.
-   * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
-   * @private
-   */
-  async _onLevelChange(event) {
-    event.preventDefault();
-    const delta = Number(event.target.value);
-    const classId = event.target.closest("[data-item-id]")?.dataset.itemId;
-    if ( !delta || !classId ) return;
-    const classItem = this.actor.items.get(classId);
-    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
-      const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
-      if ( manager.steps.length ) {
-        if ( delta > 0 ) return manager.render(true);
-        try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
-        }
-        catch(err) {
-          return;
-        }
-      }
-    }
-    return classItem.update({"system.levels": classItem.system.levels + delta});
   }
 
   /* -------------------------------------------- */

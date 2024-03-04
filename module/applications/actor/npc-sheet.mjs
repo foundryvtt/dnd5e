@@ -14,11 +14,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
-
-  /** @override */
-  static unsupportedItemTypes = new Set(["background", "class", "race", "subclass"]);
-
-  /* -------------------------------------------- */
   /*  Context Preparation                         */
   /* -------------------------------------------- */
 
@@ -55,6 +50,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     };
 
     // Start by classifying items into groups for rendering
+    const maxLevelDelta = CONFIG.DND5E.maxLevel - (this.actor.system.details.level ?? 0);
     let [spells, other] = context.items.reduce((arr, item) => {
       const {quantity, uses, recharge, target} = item.system;
       const ctx = context.itemContext[item.id] ??= {};
@@ -65,6 +61,9 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       ctx.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
       ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
       ctx.canToggle = false;
+      if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => ({
+        level, delta: level - item.system.levels, disabled: (level - item.system.levels) > maxLevelDelta
+      }));
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;
@@ -80,8 +79,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Organize Features
     for ( let item of other ) {
       if ( item.type === "weapon" ) features.weapons.items.push(item);
-      else if ( item.type === "feat" ) {
-        if ( item.system.activation.type ) features.actions.items.push(item);
+      else if ( ["background", "class", "feat", "race", "subclass"].includes(item.type) ) {
+        if ( item.system.activation?.type ) features.actions.items.push(item);
         else features.passive.items.push(item);
       }
       else features.equipment.items.push(item);
