@@ -699,17 +699,13 @@ async function enrichItem(config, label, options) {
     const foundActor = options.relativeTo?.parent;
     let foundItem = foundActor?.items.get(relativeId);
     if ( foundItem ) {
-      if ( !label ) {
-        label = foundItem.name;
-      }
+      if ( !label ) label = foundItem.name;
       return createRollLink(label, { type: "item", rollItemActor: `Actor.${foundActor.id}`, rollItemUuid: foundItem.uuid });
     } else if ( relativeNameMatch ) {
       foundItem = foundActor?.items.getName(relativeId);
       if ( foundItem ) {
-        if ( !label ) {
-          label = foundItem.name;
-          return createRollLink(label, { type: "item", rollItemActor: `Actor.${foundActor.id}`, rollItemUuid: foundItem.uuid });
-        }
+        if ( !label ) label = foundItem.name;
+        return createRollLink(label, { type: "item", rollItemActor: `Actor.${foundActor.id}`, rollItemUuid: foundItem.uuid });
       }
       console.warn(`Item not found while enriching ${givenItem}.`);
       return null;
