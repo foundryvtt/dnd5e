@@ -677,11 +677,11 @@ async function enrichItem(config, label, options) {
   const itemUuidMatch = givenItem.match(
     /^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/
   );
-  if (itemUuidMatch) {
+  if ( itemUuidMatch ) {
     const ownerActor = itemUuidMatch.groups.actorid.trim();
-    if (!label) {
+    if ( !label ) {
       const item = await fromUuid(givenItem);
-      if (!item) {
+      if ( !item ) {
         console.warn(`Item not found while enriching ${givenItem}.`);
         return null;
       }
@@ -694,19 +694,19 @@ async function enrichItem(config, label, options) {
   const relativeIdMatch = givenItem.match(/^\.\w{16}$/);  // [[/item .amUUCouL69OK1GZU]]
   const copiedIdMatch = givenItem.match(/^\w{16}$/);      // [[/item amUUCouL69OK1GZU]]
   const relativeNameMatch = givenItem.startsWith(".");    // [[/item .Bite]]
-  if (relativeIdMatch || copiedIdMatch || relativeNameMatch) {
+  if ( relativeIdMatch || copiedIdMatch || relativeNameMatch ) {
     const relativeId = givenItem.startsWith(".") ? givenItem.substr(1) : givenItem;
     const foundActor = options.relativeTo?.parent;
     let foundItem = foundActor?.items.get(relativeId);
-    if (foundItem) {
-      if (!label) {
+    if ( foundItem ) {
+      if ( !label ) {
         label = foundItem.name;
       }
       return createRollLink(label, { type: "item", rollItemActor: `Actor.${foundActor.id}`, rollItemUuid: foundItem.uuid });
-    } else if (relativeNameMatch) {
+    } else if ( relativeNameMatch ) {
       foundItem = foundActor?.items.getName(relativeId);
-      if (foundItem) {
-        if (!label) {
+      if ( foundItem ) {
+        if ( !label ) {
           label = foundItem.name;
           return createRollLink(label, { type: "item", rollItemActor: `Actor.${foundActor.id}`, rollItemUuid: foundItem.uuid });
         }
@@ -717,7 +717,7 @@ async function enrichItem(config, label, options) {
   }
 
   // Finally, if config is an item name
-  if (!label) label = givenItem;
+  if ( !label ) label = givenItem;
   return createRollLink(label, { type: "item", rollItemName: givenItem });
 }
 
@@ -912,15 +912,15 @@ async function rollAction(event) {
           return await actor.rollToolCheck(tool, options);
         case "item":
           // UUID & Relative ID Methods
-          if (target.dataset.rollItemUuid) {
+          if ( target.dataset.rollItemUuid ) {
             const gameActor = await fromUuid(target.dataset.rollItemActor);
-            if (gameActor.testUserPermission(game.user, "OWNER")) {
+            if ( gameActor.testUserPermission(game.user, "OWNER") ) {
               return (await fromUuid(target.dataset.rollItemUuid)).use();
             } else {
               return ui.notifications.warn(`You do not have ownership of ${gameActor.name}, and cannot use this item!`);
             }
             // Name Method
-          } else if (target.dataset.rollItemName) {
+          } else if ( target.dataset.rollItemName ) {
             return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
           }
 
