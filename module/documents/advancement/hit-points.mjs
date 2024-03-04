@@ -155,9 +155,11 @@ export default class HitPointsAdvancement extends Advancement {
   apply(level, data) {
     let value = this.constructor.valueForLevel(data, this.hitDieValue, level);
     if ( value === undefined ) return;
-    this.actor.updateSource({
-      "system.attributes.hp.value": this.actor.system.attributes.hp.value + this.#getApplicableValue(value)
-    });
+    const delta = this.#getApplicableValue(value);
+    const updates = { "system.attributes.hp.value": this.actor.system.attributes.hp.value + delta };
+    const max = this.actor.system.toObject().attributes.hp.max;
+    if ( max !== null ) updates["system.attributes.hp.max"] = max + delta;
+    this.actor.updateSource(updates);
     this.updateSource({ value: data });
   }
 
@@ -174,9 +176,11 @@ export default class HitPointsAdvancement extends Advancement {
   reverse(level) {
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;
-    this.actor.updateSource({
-      "system.attributes.hp.value": this.actor.system.attributes.hp.value - this.#getApplicableValue(value)
-    });
+    const delta = this.#getApplicableValue(value);
+    const updates = { "system.attributes.hp.value": this.actor.system.attributes.hp.value - delta };
+    const max = this.actor.system.toObject().attributes.hp.max;
+    if ( max !== null ) updates["system.attributes.hp.max"] = max - delta;
+    this.actor.updateSource(updates);
     const source = { [level]: this.value[level] };
     this.updateSource({ [`value.-=${level}`]: null });
     return source;
