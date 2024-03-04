@@ -1,0 +1,122 @@
+.dnd5e-theme-dark .dnd5e2,
+.dnd5e2.dnd5e-theme-dark {
+  &.sheet {
+    /* TODO: Move these out once dark themes have been ported to all apps, not just the character sheet. */
+    --color-text-dark-primary: var(--dnd5e-color-blue-white);
+    --color-text-dark-secondary: var(--color-text-light-6);
+    --color-text-dark-5: var(--color-text-light-6);
+    --dnd5e-border-dotted: 1px dotted var(--dnd5e-color-blue-gray-3);
+    --color-border-light-1: var(--dnd5e-color-blue-gray-1);
+    --color-border-light-tertiary: var(--color-border-light-2);
+    --dnd5e-color-iron-gray: var(--dnd5e-color-blue-gray-2);
+    --dnd5e-background-card: var(--dnd5e-color-blue-gray-2);
+    --dnd5e-background-parchment: var(--dnd5e-color-blue-gray-2);
+    --dnd5e-border-gold: 1px solid var(--dnd5e-color-blue-gray-1);
+
+    select option { background: var(--dnd5e-color-blue-gray-2); }
+    .meter { --meter-background: var(--dnd5e-color-dark-gray); }
+    .window-resizable-handle { color: var(--dnd5e-color-blue-white); }
+
+    .card {
+      border: none;
+      .header { background: linear-gradient(to right, #491d25, #311b1f); }
+    }
+
+    filigree-box {
+      --filigree-background-color: var(--dnd5e-color-blue-gray-2);
+      --filigree-border-color: var(--dnd5e-color-blue-gray-3);
+      > h3 > span { color: var(--dnd5e-color-gold); }
+    }
+
+    h3.icon {
+      color: var(--color-text-light-6);
+      border-color: var(--color-border-light-2);
+      dnd5e-icon { --icon-fill: var(--color-text-light-6); }
+    }
+
+    .pills .pill {
+      border-color: var(--dnd5e-color-blue-gray-3);
+      background-color: var(--dnd5e-color-blue-gray-2);
+
+      &.green { background-color: color-mix(in srgb, var(--dnd5e-color-green), transparent 25%); }
+      &.maroon { background-color: color-mix(in srgb, var(--dnd5e-color-maroon), transparent 25%); }
+
+      &.green, &.maroon {
+        border-color: var(--dnd5e-color-blue-gray-1);
+        color: var(--dnd5e-color-blue-white);
+      }
+    }
+
+    .pill-lg {
+      &.empty {
+        border-color: white;
+        color: white;
+      }
+
+      &::before {
+        mix-blend-mode: soft-light;
+        opacity: .15;
+      }
+    }
+
+    .prosemirror menu {
+      --color-hover-bg: var(--dnd5e-color-blue-gray-3);
+      --color-control-bg: var(--dnd5e-color-blue-gray-2);
+      background: var(--dnd5e-color-blue-gray-2);
+      color: var(--color-text-light-6);
+
+      button {
+        color: inherit;
+        &.active { color: var(--dnd5e-color-gold); }
+      }
+
+      .pm-dropdown ul {
+        color: var(--dnd5e-color-blue-white);
+        border-color: var(--dnd5e-color-blue-gray-1);
+        li.divider { border-color: var(--dnd5e-color-blue-gray-3); }
+      }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Context Menus                     */
+/* ---------------------------------- */
+
+#context-menu.dnd5e-theme-dark.dnd5e2 {
+  /* TODO: These will be handled by the general app dark mode styles once they are no longer scoped to .sheet */
+  --color-text-dark-primary: var(--dnd5e-color-blue-white);
+  --dnd5e-background-card: var(--dnd5e-color-blue-gray-2);
+  --color-text-dark-5: var(--color-text-light-6);
+  --color-border-light-1: var(--dnd5e-color-blue-gray-3);
+  .context-item:hover { background-color: var(--dnd5e-color-blue-gray-3); }
+}
+
+/* ---------------------------------- */
+/*  Custom Elements                   */
+/* ---------------------------------- */
+
+.dnd5e-theme-dark item-list-controls search {
+  .filter-list {
+    border: 1px solid var(--dnd5e-color-blue-gray-1);
+
+    > li:hover { background: var(--dnd5e-color-blue-gray-3); }
+
+    .filter-item {
+      color: var(--dnd5e-color-blue-white);
+      border-color: var(--dnd5e-color-blue-gray-3);
+    }
+  }
+
+  .filter-control {
+    color: var(--dnd5e-color-blue-gray-3);
+    &.active { color: var(--dnd5e-color-gold); }
+  }
+}
+
+.dnd5e-theme-dark .effects-element {
+  .conditions-list .condition {
+    border-color: var(--dnd5e-color-blue-gray-3);
+    &:hover { background: var(--dnd5e-color-blue-gray-3); }
+  }
+}

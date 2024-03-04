@@ -39,7 +39,7 @@
       border-radius: 3px 3px 0 0;
       height: 25px;
       border: none;
-      border-bottom: 1px solid var(--dnd5e-color-gold);
+      border-bottom: var(--dnd5e-border-gold);
 
       @media (prefers-contrast: more) {
         border-color: var(--dnd5e-color-dark);
@@ -89,7 +89,7 @@
       max-width: 78px;
       max-height: 78px;
       aspect-ratio: 1;
-      border: 1px solid var(--dnd5e-color-gold);
+      border: var(--dnd5e-border-gold);
       border-radius: 4px;
       box-shadow: 0 0 6px var(--dnd5e-shadow-45);
       background-color: var(--dnd5e-color-light-gray);
@@ -144,10 +144,10 @@
       display: flex;
       gap: .5rem;
       align-items: center;
-      background: var(--dnd5e-color-card);
+      background: var(--dnd5e-background-card);
       border-radius: 4px;
       box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-      border: 1px solid var(--dnd5e-color-gold);
+      border: var(--dnd5e-border-gold);
       padding: 0 .875rem 0 .5rem;
       font-weight: bold;
 
@@ -531,8 +531,8 @@
   }
 
   input, button {
-    border: 1px solid var(--dnd5e-color-gold);
-    background: var(--dnd5e-color-parchment);
+    border: var(--dnd5e-border-gold);
+    background: var(--dnd5e-background-parchment);
     box-shadow: 0 0 6px var(--dnd5e-shadow-15);
 
     @media (prefers-contrast: more) {
