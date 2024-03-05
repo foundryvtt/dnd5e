@@ -1632,17 +1632,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const parts = [];
 
     // Concentration bonus
-    if ( conc.bonus ) {
-      parts.push(conc.bonus);
-    }
+    if ( conc.bonus ) parts.push(conc.bonus);
 
     const ability = (conc.ability in config.abilities) ? conc.ability : config.defaultAbilities.concentration;
 
     options = foundry.utils.mergeObject({
+      ability: ability,
       isConcentration: true,
       targetValue: 10,
-      advantage: options.advantage || (conc.roll.mode === modes.ADVANTAGE),
-      disadvantage: options.disadvantage || (conc.roll.mode === modes.DISADVANTAGE),
+      advantage: options.advantage || (conc.mode === modes.ADVANTAGE),
+      disadvantage: options.disadvantage || (conc.mode === modes.DISADVANTAGE),
     }, options);
     options.parts = parts.concat(options.parts ?? []);
 
@@ -1652,13 +1651,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      * @param {Actor5e} actor                   Actor for which the saving throw is being rolled.
      * @param {D20RollConfiguration} options    Configuration data for the pending roll.
-     * @param {string} abilityId                ID of the ability being rolled as defined in `DND5E.abilities`.
      * @returns {boolean}                       Explicitly return `false` to prevent the save from being performed.
      */
-    if ( Hooks.call("dnd5e.preRollConcentration", this, options, ability) === false ) return;
+    if ( Hooks.call("dnd5e.preRollConcentration", this, options) === false ) return;
 
     // Perform a standard ability save.
-    const roll = await this.rollAbilitySave(ability, options);
+    const roll = await this.rollAbilitySave(options.ability, options);
 
     /**
      * A hook event that fires after a saving throw to maintain concentration is rolled for an Actor.
@@ -1666,9 +1664,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      * @param {Actor5e} actor     Actor for which the saving throw has been rolled.
      * @param {D20Roll} roll      The resulting roll.
-     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
      */
-    if ( roll ) Hooks.callAll("dnd5e.rollConcentration", this, roll, ability);
+    if ( roll ) Hooks.callAll("dnd5e.rollConcentration", this, roll);
 
     return roll;
   }
