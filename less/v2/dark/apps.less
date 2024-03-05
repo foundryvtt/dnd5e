@@ -8,18 +8,18 @@
     --dnd5e-border-dotted: 1px dotted var(--dnd5e-color-blue-gray-3);
     --color-border-light-1: var(--dnd5e-color-blue-gray-1);
     --color-border-light-tertiary: var(--color-border-light-2);
+    --dnd5e-color-light-gray: var(--dnd5e-color-dark-gray);
     --dnd5e-color-iron-gray: var(--dnd5e-color-blue-gray-2);
     --dnd5e-background-card: var(--dnd5e-color-blue-gray-2);
     --dnd5e-background-parchment: var(--dnd5e-color-blue-gray-2);
     --dnd5e-border-gold: 1px solid var(--dnd5e-color-blue-gray-1);
 
     select option { background: var(--dnd5e-color-blue-gray-2); }
-    .meter { --meter-background: var(--dnd5e-color-dark-gray); }
     .window-resizable-handle { color: var(--dnd5e-color-blue-white); }
 
-    .card {
-      border: none;
-      .header { background: linear-gradient(to right, #491d25, #311b1f); }
+    .card .header {
+      background: linear-gradient(to right, #491d25, #311b1f);
+      &.disabled { background: linear-gradient(to right, var(--color-border-dark-4), var(--color-border-dark-3)); }
     }
 
     filigree-box {
