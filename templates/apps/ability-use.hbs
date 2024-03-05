@@ -38,7 +38,7 @@
     </div>
     {{/if}}
 
-    {{#if (ne beginConcentration null)}}
+    {{#if (ne beginConcentrating null)}}
     {{#if concentration.show}}
     <div class="form-group">
         <label>{{ localize "DND5E.ConcentratingEnd" }}</label>
@@ -52,7 +52,7 @@
 
     <div class="form-group">
         <label class="checkbox">
-            <input type="checkbox" name="beginConcentration" {{checked beginConcentration}}>
+            <input type="checkbox" name="beginConcentrating" {{checked beginConcentrating}}>
             {{ localize "DND5E.Concentration" }}
         </label>
     </div>

@@ -507,7 +507,7 @@ export default class ActiveEffect5e extends ActiveEffect {
         return;
       }
       const choices = effects.reduce((acc, effect) => {
-        const data = effect.flags.dnd5e?.itemData;
+        const data = effect.getFlag("dnd5e", "itemData");
         acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
         return acc;
       }, {});
