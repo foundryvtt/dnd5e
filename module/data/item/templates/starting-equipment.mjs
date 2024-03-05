@@ -48,7 +48,7 @@ export default class StartingEquipmentTemplate extends SystemDataModel {
     if ( !topLevel.length ) return "";
 
     // If more than one entry, display as an unordered list (like for classes)
-    if ( topLevel.length > 1 ) return `<ul>${topLevel.map(e => `<li>${e.label}</li>`).join("")}`;
+    if ( topLevel.length > 1 ) return `<ul>${topLevel.map(e => `<li>${e.label}</li>`).join("")}</ul>`;
 
     // Otherwise display as its own paragraph (like for backgrounds)
     return `<p>${game.i18n.getListFormatter().format(topLevel.map(e => e.label))}</p>`;
@@ -179,7 +179,6 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
    */
   get categoryLabel() {
     let config = CONFIG.DND5E[this.constructor.CATEGORY_LABELS[this.type]];
-    let category = this.key;
 
     // For Weapons, check to see if it specifies melee/ranged
     if ( (this.type === "weapon") && (this.key in CONFIG.DND5E.weaponProficienciesMap) ) {
@@ -187,7 +186,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
     }
 
     // Fetch the category label from config
-    const configEntry = config[category];
+    const configEntry = config[this.key];
     let label = configEntry?.label ?? configEntry ?? this.key;
 
     if ( this.type === "weapon" ) label = game.i18n.format("DND5E.WeaponCategory", { category: label });
