@@ -366,7 +366,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   static async createConcentrationEffect(item, existing=null, options={}) {
     if ( !item.isEmbedded || !item.requiresConcentration ) {
-      throw new Error("You may not begin concentration on this item!");
+      throw new Error("You may not begin concentrating on this item!");
     }
 
     const actor = item.actor;
