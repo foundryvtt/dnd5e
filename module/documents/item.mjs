@@ -1837,18 +1837,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} [options]
    * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
    *                                          either a die term or a flat term.
-   * @param {boolean} [options.extended]      Include extra values like "name" that aren't useful in formulas.
    */
-  getRollData({ deterministic=false, extended=false }={}) {
+  getRollData({ deterministic=false }={}) {
     let data;
-    if ( this.system.getRollData ) data = this.system.getRollData({ deterministic, extended });
+    if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
     else {
       if ( !this.actor ) return null;
-      data = { ...this.actor.getRollData({ deterministic, extended }), item: { ...this.system } };
+      data = { ...this.actor.getRollData({ deterministic }), item: { ...this.system } };
     }
     if ( data?.item ) {
       data.item.flags = { ...this.flags };
-      if ( extended ) data.item.name = this.name;
+      data.item.name = this.name;
     }
     return data;
   }
