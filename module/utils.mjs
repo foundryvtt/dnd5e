@@ -160,7 +160,21 @@ export function indexFromUuid(uuid) {
  * @returns {string}     Link to the item or empty string if item wasn't found.
  */
 export function linkForUuid(uuid) {
-  return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+  if ( game.release.generation < 12 ) {
+    return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+  }
+
+  // TODO: When v11 support is dropped we can make this method async and return to using TextEditor._createContentLink.
+  if ( uuid.startsWith("Compendium.") ) {
+    const data = {
+      classes: ["content-link"],
+      attrs: { draggable: "true" }
+    };
+    TextEditor._createLegacyContentLink("Compendium", uuid.slice(11), "", data);
+    data.dataset.link = "";
+    return TextEditor.createAnchor(data).outerHTML;
+  }
+  return fromUuidSync(uuid).toAnchor().outerHTML;
 }
 
 /* -------------------------------------------- */
