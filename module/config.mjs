@@ -1942,6 +1942,7 @@ DND5E.pactCastingProgression = {
  * @property {boolean} [upcast]       Whether this preparation mode allows for upcasting.
  * @property {boolean} [cantrips]     Whether this mode allows for cantrips in a spellbook.
  * @property {number} [order]         The sort order of this mode in a spellbook.
+ * @property {boolean} [prepares]     Whether this preparation mode prepares spells.
  */
 
 /**
@@ -1951,7 +1952,8 @@ DND5E.pactCastingProgression = {
 DND5E.spellPreparationModes = {
   prepared: {
     label: "DND5E.SpellPrepPrepared",
-    upcast: true
+    upcast: true,
+    prepares: true
   },
   pact: {
     label: "DND5E.PactMagic",
@@ -1961,7 +1963,8 @@ DND5E.spellPreparationModes = {
   },
   always: {
     label: "DND5E.SpellPrepAlways",
-    upcast: true
+    upcast: true,
+    prepares: true
   },
   atwill: {
     label: "DND5E.SpellPrepAtWill",
