@@ -166,11 +166,13 @@ export function linkForUuid(uuid) {
 
   // TODO: When v11 support is dropped we can make this method async and return to using TextEditor._createContentLink.
   if ( uuid.startsWith("Compendium.") ) {
+    let [, scope, pack, documentName, id] = uuid.split(".");
+    if ( !CONST.PRIMARY_DOCUMENT_TYPES.includes(documentName) ) id = documentName;
     const data = {
       classes: ["content-link"],
       attrs: { draggable: "true" }
     };
-    TextEditor._createLegacyContentLink("Compendium", uuid.slice(11), "", data);
+    TextEditor._createLegacyContentLink("Compendium", [scope, pack, id].join("."), "", data);
     data.dataset.link = "";
     return TextEditor.createAnchor(data).outerHTML;
   }
