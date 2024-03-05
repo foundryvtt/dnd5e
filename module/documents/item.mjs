@@ -889,7 +889,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
    * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
-   * @property {boolean} beginConcentration         Should this item initiate concentration?
+   * @property {boolean} beginConcentrating         Should this item initiate concentration?
    * @property {string|null} endConcentration       The id of the active effect to end concentration on, if any.
    */
 
@@ -1019,7 +1019,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const cardData = await item.displayCard(options);
 
     // Initiate concentration.
-    if ( config.beginConcentration ) {
+    if ( config.beginConcentrating ) {
       const effect = config.endConcentration ? item.actor.concentration.effects.find(e => {
         return e.id === config.endConcentration;
       }) : null;
@@ -1064,7 +1064,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const config = {
       consumeSpellSlot: null,
       slotLevel: null,
-      beginConcentration: null,
+      beginConcentrating: null,
       endConcentration: null,
       consumeUsage: null,
       consumeResource: null,
@@ -1087,7 +1087,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     if ( game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = target.prompt;
     if ( this.requiresConcentration ) {
-      config.beginConcentration = true;
+      config.beginConcentrating = true;
       const { effects } = this.actor.concentration;
       const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
       if ( limit && (limit <= effects.size) ) {
@@ -1143,7 +1143,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     // Determine whether the item can be used by testing for available concentration.
-    if ( config.beginConcentration ) {
+    if ( config.beginConcentrating ) {
       const { effects } = this.actor.concentration;
 
       // Case 1: Replacing.
