@@ -62,7 +62,7 @@ export default class AbilityUseDialog extends Dialog {
       concentration: {
         show: concentrationOptions.length > 0,
         options: concentrationOptions,
-        optional: (concentrationOptions.length < limit) ? "-" : null
+        optional: (concentrationOptions.length < limit) ? "—" : null
       },
       scaling: item.usageScaling,
       note: this._getAbilityUseNote(item, config),
@@ -113,9 +113,9 @@ export default class AbilityUseDialog extends Dialog {
    * @private
    */
   static _createConcentrationOptions(item) {
-    const effects = item.actor.concentration?.effects ?? new Set();
+    const { effects } = item.actor.concentration;
     return effects.reduce((acc, effect) => {
-      const data = effect.flags.dnd5e?.itemData;
+      const data = effect.getFlag("dnd5e", "itemData");
       acc.push({
         name: effect.id,
         label: data?.name ?? item.actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless")

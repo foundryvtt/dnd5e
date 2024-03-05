@@ -1106,7 +1106,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     if ( this.requiresConcentration ) {
       config.beginConcentration = true;
-      const effects = this.actor.concentration.effects;
+      const { effects } = this.actor.concentration;
       const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
       if ( limit && (limit <= effects.size) ) {
         const id = effects.find(e => {
@@ -1162,7 +1162,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Determine whether the item can be used by testing for available concentration.
     if ( config.beginConcentration ) {
-      const effects = this.actor.concentration.effects;
+      const { effects } = this.actor.concentration;
 
       // Case 1: Replacing.
       if ( config.endConcentration ) {

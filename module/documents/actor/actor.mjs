@@ -71,7 +71,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * The items this actor is concentrating on, and the relevant effects.
-   * @type {object}
+   * @type {{items: Set<Item5e>, effects: Set<ActiveEffect5e>}}
    */
   get concentration() {
     const concentration = {
@@ -82,9 +82,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const limit = this.system.attributes?.concentration?.limit ?? 0;
     if ( !limit ) return concentration;
 
-    for (const effect of this.effects) {
+    for ( const effect of this.effects ) {
       if ( !effect.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) ) continue;
-      const data = effect.flags.dnd5e?.itemData;
+      const data = effect.getFlag("dnd5e", "itemData");
       concentration.effects.add(effect);
       if ( data ) {
         const item = this.items.get(data) ?? new Item.implementation(data, { keepId: true, parent: this });
