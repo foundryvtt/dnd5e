@@ -61,7 +61,6 @@
     },
     "ability": "",
     "actionType": "mwak",
-    "attackBonus": "2",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -70,11 +69,11 @@
     "damage": {
       "parts": [
         [
-          "1d8 +@mod +2",
+          "1d8 +@mod",
           "slashing"
         ]
       ],
-      "versatile": "1d10 +@mod +2"
+      "versatile": "1d10 +@mod"
     },
     "formula": "",
     "save": {
@@ -104,7 +103,20 @@
       "description": ""
     },
     "container": null,
-    "crewed": false
+    "crewed": false,
+    "magicalBonus": 2,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -115,10 +127,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.1.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233511,
-    "modifiedTime": 1704823144904,
+    "modifiedTime": 1709659525712,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!BefbYlWbRYyy6R8s"
