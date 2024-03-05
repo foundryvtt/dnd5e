@@ -360,50 +360,28 @@ export default class ActiveEffect5e extends ActiveEffect {
   /**
    * Create an effect for concentration on an actor, optionally replacing an existing effect.
    * @param {Item5e} item                         The item on which to begin concentrating.
-   * @param {ActiveEffect5e} [existing]           An existing effect to replace.
-   * @param {object} [options]                    Additional data provided for the effect instance.
+   * @param {object} [data]                       Additional data provided for the effect instance.
    * @returns {Promise<ActiveEffect5e|null>}      A promise that resolves to the created effect.
    */
-  static async createConcentrationEffect(item, existing=null, options={}) {
+  static async createConcentrationEffect(item, data={}) {
     if ( !item.isEmbedded || !item.requiresConcentration ) {
       throw new Error("You may not begin concentrating on this item!");
     }
 
-    const actor = item.actor;
-
-    const baseData = foundry.utils.mergeObject({
+    const statusEffect = CONFIG.statusEffects.find(e => e.id === CONFIG.specialStatusEffects.CONCENTRATING);
+    const effectData = foundry.utils.mergeObject({
+      ...statusEffect,
       name: `${game.i18n.localize("DND5E.Concentration")}: ${item.name}`,
       description: game.i18n.format("DND5E.ConcentratingOn", {
         name: item.name,
         type: game.i18n.localize(`TYPES.Item.${item.type}`)
       }),
       duration: ActiveEffect5e._getEffectDuration(item),
-      "flags.dnd5e.itemData": actor.items.has(item.id) ? item.id : item.toObject(),
-      origin: item.uuid
-    }, options);
-
-    const effects = actor.concentration?.effects ?? new Set();
-    existing ??= effects.find(e => {
-      const d = e.flags.dnd5e?.itemData ?? {};
-      return (d === item.id) || (d._id === item.id);
-    });
-
-    let effectData;
-    // Replace an existing effect if already concentrating on this item or if another effect has been chosen.
-    if ( existing ) {
-      const data = existing.flags.dnd5e?.itemData ?? {};
-      const sameItem = (data === item.id) || (data._id === item.id);
-      if ( sameItem ) {
-        effectData = foundry.utils.mergeObject({...existing.toObject(), duration: {}}, baseData);
-      }
-      await existing.delete();
-    }
-
-    // Create an entirely new effect.
-    if ( !effectData ) {
-      effectData = (await ActiveEffect5e.fromStatusEffect(CONFIG.specialStatusEffects.CONCENTRATING)).toObject();
-      foundry.utils.mergeObject(effectData, baseData);
-    }
+      "flags.dnd5e.itemData": item.actor.items.has(item.id) ? item.id : item.toObject(),
+      origin: item.uuid,
+      statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
+    }, data, {inplace: false});
+    delete effectData.id;
 
     /**
      * A hook that is called before a concentration effect is created.
@@ -475,6 +453,8 @@ export default class ActiveEffect5e extends ActiveEffect {
     return `${path}-${level}.${ext}`;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Map the duration of an item to an active effect duration.
    * @param {Item5e} item     An item with a duration.
@@ -484,7 +464,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     const dur = item.system.duration ?? {};
     const value = dur.value || 1;
 
-    switch (dur.units) {
+    switch ( dur.units ) {
       case "turn": return { turns: value };
       case "round": return { rounds: value };
       case "minute": return { seconds: value * 60 };
@@ -518,7 +498,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
       actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, max) });
     } else if ( target.dataset?.statusId === "concentrating" ) {
-      const effects = actor.concentration?.effects ?? new Set();
+      const { effects } = actor.concentration;
       if ( effects.size < 1 ) return;
       event.preventDefault();
       event.stopPropagation();
