@@ -682,10 +682,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !this.hasDamage || !this.isOwned ) return [];
     const rollData = this.getRollData();
     const damageLabels = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
-    const derivedDamage = this.system.damage?.parts?.map(damagePart => {
+    const derivedDamage = this.system.damage?.parts?.map((damagePart, index) => {
       let formula;
       try {
-        const roll = new Roll(damagePart[0], rollData);
+        formula = damagePart[0];
+        if ( (index === 0) && this.system.magicAvailable ) formula = `${formula} + ${this.system.magicalBonus ?? 0}`;
+        const roll = new Roll(formula, rollData);
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       }
       catch(err) {
@@ -728,47 +730,45 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Update a label to the Item detailing its total to hit bonus from the following sources:
-   * - item document's innate attack bonus
    * - item's actor's proficiency bonus if applicable
    * - item's actor's global bonuses to the given item type
+   * - item document's innate & magical attack bonuses
    * - item's ammunition if applicable
    * @returns {{rollData: object, parts: string[]}|null}  Data used in the item's Attack roll.
    */
   getAttackToHit() {
     if ( !this.hasAttack ) return null;
+    const flat = this.system.attack.flat;
     const rollData = this.getRollData();
     const parts = [];
+    let ammo;
 
-    // Include the item's innate attack bonus as the initial value and label
-    const ab = this.system.attack?.bonus ?? "";
-    if ( ab ) {
-      parts.push(ab);
-      this.labels.toHit = !/^[+-]/.test(ab) ? `+ ${ab}` : ab;
-      if ( this.system.attack?.flat ) return {rollData, parts};
+    if ( this.isOwned && !flat ) {
+      // Ability score modifier
+      if ( this.system.ability !== "none" ) parts.push("@mod");
+
+      // Add proficiency bonus.
+      if ( this.system.prof?.hasProficiency ) {
+        parts.push("@prof");
+        rollData.prof = this.system.prof.term;
+      }
+
+      // Actor-level global bonus to attack rolls
+      const actorBonus = this.actor.system.bonuses?.[this.system.actionType] || {};
+      if ( actorBonus.attack ) parts.push(actorBonus.attack);
+
+      ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
     }
 
-    // Take no further action for un-owned items
-    if ( !this.isOwned ) return {rollData, parts};
-
-    // Ability score modifier
-    if ( this.system.ability !== "none" ) parts.push("@mod");
-
-    // Add proficiency bonus.
-    if ( this.system.prof?.hasProficiency ) {
-      parts.push("@prof");
-      rollData.prof = this.system.prof.term;
-    }
-
-    // Actor-level global bonus to attack rolls
-    const actorBonus = this.actor.system.bonuses?.[this.system.actionType] || {};
-    if ( actorBonus.attack ) parts.push(actorBonus.attack);
+    // Include the item's innate & magical attack bonuses
+    if ( this.system.attack.bonus ) parts.push(this.system.attack.bonus);
+    if ( this.system.magicalBonus && this.system.magicAvailable && !flat ) parts.push(this.system.magicalBonus);
 
     // One-time bonus provided by consumed ammunition
-    const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
-    if ( ammo ) {
+    if ( ammo && !flat ) {
       const ammoItemQuantity = ammo.system.quantity;
       const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
-      const ammoItemAttackBonus = ammo.system.attack.bonus;
+      const ammoItemAttackBonus = ammo.system.attackBonus;
       const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.type.value === "ammo");
       if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
         parts.push("@ammo");
@@ -781,7 +781,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const formula = simplifyRollFormula(roll.formula) || "0";
     this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }) || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
-    return {rollData, parts};
+    return { rollData, parts };
   }
 
   /* -------------------------------------------- */
@@ -1563,6 +1563,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( versatile && dmg.versatile ) {
       rollConfigs[0].parts[0] = dmg.versatile;
       messageData["flags.dnd5e.roll"].versatile = true;
+    }
+
+    // Add magical damage if available
+    if ( this.system.magicalBonus && this.system.magicAvailable ) {
+      rollConfigs[0].parts.push(this.system.magicalBonus);
     }
 
     // Scale damage from up-casting spells
