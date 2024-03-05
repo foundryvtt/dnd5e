@@ -971,11 +971,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     if ( item.type === "spell" ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
-    // Store selected summons type in flag
-    if ( config.createSummons && config.summonsProfile ) {
-      foundry.utils.setProperty(options.flags, "dnd5e.use.summonsProfile", config.summonsProfile);
-    }
-
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
      * @function dnd5e.preItemUsageConsumption
@@ -2036,15 +2031,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {Item5e} item            The item from which to summon.
    */
   static async _onChatCardSummon(message, item) {
-    let summonsProfile = message.getFlag("dnd5e", "use.summonsProfile");
+    let summonsProfile;
 
     // No profile specified and only one profile on item, use that one
-    if ( !summonsProfile && (item.system.summons.profiles.length === 1) ) {
+    if ( item.system.summons.profiles.length === 1 ) {
       summonsProfile = item.system.summons.profiles[0]._id;
     }
 
     // Otherwise show the item use dialog to get the profile
-    else if ( !summonsProfile ) {
+    else {
       const config = await AbilityUseDialog.create(item, {
         consumeResource: null,
         consumeSpellSlot: null,
