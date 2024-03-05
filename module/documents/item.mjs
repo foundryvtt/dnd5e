@@ -768,11 +768,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( ammo && !flat ) {
       const ammoItemQuantity = ammo.system.quantity;
       const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
-      const ammoItemAttackBonus = ammo.system.attackBonus;
+      const ammoParts = [
+        Roll.replaceFormulaData(ammo.system.attack.bonus, rollData),
+        ammo.system.magicAvailable ? ammo.system.magicalBonus : null
+      ].filter(b => b);
       const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.type.value === "ammo");
-      if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
+      if ( ammoCanBeConsumed && ammoParts.length && ammoIsTypeConsumable ) {
         parts.push("@ammo");
-        rollData.ammo = ammoItemAttackBonus;
+        rollData.ammo = ammoParts.join(" + ");
       }
     }
 
@@ -1596,9 +1599,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
     const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
     if ( ammo ) {
-      rollConfigs[0].parts.push("@ammo");
-      rollData.ammo = ammo.system.damage.parts.map(p => p[0]).join("+");
-      rollConfig.flavor += ` [${ammo.name}]`;
+      const properties = Array.from(ammo.system.properties).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical);
+      if ( this.system.properties.has("mgc") && !properties.includes("mgc") ) properties.push("mgc");
+      const ammoConfigs = ammo.system.damage.parts.map((([formula, type]) => ({ parts: [formula], type, properties })));
+      if ( ammo.system.magicalBonus && ammo.system.magicAvailable ) {
+        rollConfigs[0].parts.push("@ammo");
+        properties.forEach(p => {
+          if ( !rollConfigs[0].properties.includes(p) ) rollConfigs[0].properties.push(p);
+        });
+        rollData.ammo = ammo.system.magicalBonus;
+      }
+      rollConfigs.push(...ammoConfigs);
     }
 
     // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
