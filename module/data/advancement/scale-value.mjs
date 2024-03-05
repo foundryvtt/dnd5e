@@ -272,12 +272,36 @@ export class ScaleValueTypeDice extends ScaleValueType {
   /* -------------------------------------------- */
 
   /**
-   * The die value to be rolled with the leading "d" (e.g. "d4").
+   * The entire die, with leading "d" and any modifiers, e.g., "d4" or "d4r1".
    * @type {string}
    */
   get die() {
     if ( !this.faces ) return "";
-    return `d${this.faces}${Array.from(this.modifiers).filterJoin("")}`;
+    return `d${this.faces}${this.mods}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The die modifiers.
+   * @type {string}
+   */
+  get mods() {
+    if ( !this.modifiers ) return "";
+    return this.modifiers.reduce((acc, mod) => {
+      return acc + (dnd5e.utils.isValidDieModifier(mod) ? mod : "");
+    }, "");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The die value to be rolled with the leading "d" (e.g. "d4").
+   * @type {string}
+   */
+  get denom() {
+    if ( !this.faces ) return "";
+    return `d${this.faces}`;
   }
 
   /* -------------------------------------------- */
