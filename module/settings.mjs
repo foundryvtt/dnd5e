@@ -368,7 +368,7 @@ export function setTheme(element, theme="", flags=new Set()) {
   else delete element.dataset.theme;
 
   // Additional Flags
-  if ( matchMedia("(prefers-contrast: more)").matches ) flags.add("high-contrast");
+  if ( (element === document.body) && matchMedia("(prefers-contrast: more)").matches ) flags.add("high-contrast");
   for ( const flag of flags ) element.classList.add(`dnd5e-flag-${flag.slugify()}`);
   element.dataset.themeFlags = Array.from(flags).join(" ");
 }
