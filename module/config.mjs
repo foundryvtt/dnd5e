@@ -2099,6 +2099,7 @@ preLocalize("spellScalingModes", { sort: true });
 
 /**
  * Types of components that can be required when casting a spell.
+ * @deprecated since DnD5e 3.0, available until DnD5e 3.3
  * @enum {SpellComponentConfiguration}
  */
 DND5E.spellComponents = {
@@ -2134,6 +2135,7 @@ preLocalize("spellComponents", { keys: ["label", "abbr"] });
 
 /**
  * Supplementary rules keywords that inform a spell's use.
+ * @deprecated since DnD5e 3.0, available until DnD5e 3.3
  * @enum {SpellTagConfiguration}
  */
 DND5E.spellTags = {
