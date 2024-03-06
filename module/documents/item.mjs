@@ -11,7 +11,6 @@ import Advancement from "./advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
-import ActiveEffect5e from "./active-effect.mjs";
 
 /**
  * Override and extend the basic Item implementation.
@@ -1024,11 +1023,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const cardData = await item.displayCard(options);
 
     // Initiate concentration.
+    let effects;
     if ( config.beginConcentrating ) {
-      const effect = config.endConcentration ? item.actor.concentration.effects.find(e => {
-        return e.id === config.endConcentration;
-      }) : null;
-      await ActiveEffect5e.createConcentrationEffect(item, effect);
+      effects = await item.actor.beginConcentratingOn(item, { deleteId: config.endConcentration });
     }
 
     // Initiate measured template creation
@@ -1059,9 +1056,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @param {ItemUseConfiguration} config                Configuration data for the roll.
      * @param {ItemUseOptions} options                     Additional options for configuring item usage.
      * @param {MeasuredTemplateDocument[]|null} templates  The measured templates if they were created.
+     * @param {ActiveEffect5e[]|null} effects              The active effects that were created or deleted.
      * @param {TokenDocument5e[]|null} summoned            Summoned tokens if they were created.
      */
-    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null, summoned ?? null);
+    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null, effects ?? null, summoned ?? null);
 
     return cardData;
   }
