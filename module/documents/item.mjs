@@ -1037,7 +1037,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Initiate summons creation
     let summoned;
     if ( config.createSummons ) {
-      console.log("TODO: Create Summons", config.summonsProfile);
+      try {
+        summoned = await item.system.summons.summon(config.summonsProfile);
+      } catch(err) {
+        Hooks.onError("Item5e#use", err, {
+          msg: game.i18n.localize("DND5E.Summoning.Placement.GenericError"),
+          log: "error",
+          notify: "error"
+        });
+      }
     }
 
     /**
@@ -1935,7 +1943,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
       // Get the Item from stored flag data or by the item ID on the Actor
       const storedData = message.getFlag("dnd5e", "itemData");
-      const item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
+      let item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
       if ( !item ) {
         ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {
           item: card.dataset.itemId, name: actor.name
@@ -2003,6 +2011,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           }
           break;
         case "summon":
+          if ( spellLevel ) item = item.clone({ "system.level": spellLevel });
           await this._onChatCardSummon(message, item);
           break;
         case "toolCheck":
@@ -2081,7 +2090,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       summonsProfile = config.summonsProfile;
     }
 
-    console.log("TODO: Create Summons", summonsProfile);
+    try {
+      await item.system.summons.summon(summonsProfile);
+    } catch(err) {
+      Hooks.onError("Item5e#_onChatCardSummon", err, {
+        msg: game.i18n.localize("DND5E.Summoning.Placement.GenericError"),
+        log: "error",
+        notify: "error"
+      });
+    }
   }
 
   /* -------------------------------------------- */

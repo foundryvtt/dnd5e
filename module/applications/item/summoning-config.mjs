@@ -27,7 +27,7 @@ export default class SummoningConfig extends DocumentSheet {
    * @type {object[]}
    */
   get profiles() {
-    return this.document.system.summons.profiles;
+    return this.document.system.summons?.profiles ?? [];
   }
 
   /* -------------------------------------------- */
