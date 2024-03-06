@@ -1,8 +1,10 @@
 .dnd5e-flag-high-contrast .dnd5e2,
-.ddn5e2.dnd5e-flag-high-contrast {
-  --color-text-dark-primary: #000000;
-  --dnd5e-color-gold: #e3ce9e;
-  --dnd5e-color-scrollbar: var(--dnd5e-color-maroon);
+.dnd5e2.dnd5e-flag-high-contrast {
+  &.sheet {
+    --color-text-dark-primary: #000000;
+    --dnd5e-color-gold: #e3ce9e;
+    --dnd5e-color-scrollbar: var(--dnd5e-color-maroon);
+  }
 
   .card { border-color: var(--dnd5e-color-dark); }
 
@@ -41,14 +43,16 @@
 /* ---------------------------------- */
 
 .dnd5e-flag-high-contrast.dnd5e-theme-light .dnd5e2,
-.ddn5e2.dnd5e-flag-high-contrast.dnd5e-theme-light {
-  --filigree-background-color: #ffffff;
-  --filigree-border-color: var(--dnd5e-color-dark);
-  --dnd5e-background-card: #ffffff;
-  --dnd5e-background-parchment: #ffffff;
-  --dnd5e-border-dark: 1px solid #000;
-  --proficiency-cycle-enabled-color: color-mix(in oklab, var(--dnd5e-color-blue), black 20%);
-  --proficiency-cycle-disabled-color: var(--dnd5e-color-dark);
+.dnd5e2.dnd5e-flag-high-contrast.dnd5e-theme-light {
+  &.sheet {
+    --filigree-background-color: #ffffff;
+    --filigree-border-color: var(--dnd5e-color-dark);
+    --dnd5e-background-card: #ffffff;
+    --dnd5e-background-parchment: #ffffff;
+    --dnd5e-border-dark: 1px solid #000;
+    --proficiency-cycle-enabled-color: color-mix(in oklab, var(--dnd5e-color-blue), black 20%);
+    --proficiency-cycle-disabled-color: var(--dnd5e-color-dark);
+  }
 }
 
 .dnd5e-flag-high-contrast.dnd5e-theme-light item-list-controls search {
@@ -61,16 +65,18 @@
 /* ---------------------------------- */
 
 .dnd5e-flag-high-contrast.dnd5e-theme-dark .dnd5e2,
-.ddn5e2.dnd5e-flag-high-contrast.dnd5e-theme-dark {
-  --color-text-dark-primary: #fff;
-  --color-text-dark-secondary: var(--color-text-light-3);
-  --dnd5e-color-blue-white: #fff;
-  --dnd5e-color-card: #fff;
-  --filigree-border-color: #999;
+.dnd5e2.dnd5e-flag-high-contrast.dnd5e-theme-dark {
+  &.sheet {
+    --color-text-dark-primary: #fff;
+    --color-text-dark-secondary: var(--color-text-light-3);
+    --dnd5e-color-blue-white: #fff;
+    --dnd5e-color-card: #fff;
+    --filigree-border-color: #999;
+  }
 
   .card { border: var(--dnd5e-border-dark); }
 }
 
-.dnd5e-flag-high-contrast.dnd5e-theme-light item-list-controls search {
-  .filter-list .filter-item.active::after { color: var(--color-text-light-3); }
+.dnd5e-flag-high-contrast.dnd5e-theme-dark item-list-controls search {
+  .filter-control:not(.active) { color: var(--color-text-light-6); }
 }

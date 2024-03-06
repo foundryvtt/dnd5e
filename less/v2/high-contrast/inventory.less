@@ -1,5 +1,5 @@
 .dnd5e-flag-high-contrast .dnd5e2,
-.ddn5e2.dnd5e-flag-high-contrast {
+.dnd5e2.dnd5e-flag-high-contrast {
   .inventory-element {
     .encumbrance .meter { border-block-end: var(--dnd5e-border-dark); }
     .middle .attunement { border: var(--dnd5e-border-dark); }
@@ -11,7 +11,7 @@
 /* ---------------------------------- */
 
 .dnd5e-flag-high-contrast.dnd5e-theme-light .dnd5e2,
-.ddn5e2.dnd5e-flag-high-contrast.dnd5e-theme-light {
+.dnd5e2.dnd5e-flag-high-contrast.dnd5e-theme-light {
   .inventory-element {
     .encumbrance .meter { border-color: var(--dnd5e-color-dark); }
     .middle .attunement {
@@ -31,7 +31,7 @@
 /* ---------------------------------- */
 
 .dnd5e-flag-high-contrast.dnd5e-theme-dark .dnd5e2,
-.ddn5e2.dnd5e-flag-high-contrast.dnd5e-theme-dark {
+.dnd5e2.dnd5e-flag-high-contrast.dnd5e-theme-dark {
   .inventory-element {
     .middle .attunement {
       .fa-sun, .separator { color: var(--dnd5e-color-light); }
@@ -41,6 +41,9 @@
     :is(.items-header, .item) .item-name .tags { opacity: 1; }
     .item-school { --icon-fill: var(--dnd5e-color-blue-white); }
     .item-roll .ability { color: var(--color-text-light-4); }
+    .item .item-controls .item-control:not(.active) {
+      color: var(--color-text-light-6);
+    }
   }
 }
 
