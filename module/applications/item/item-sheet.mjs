@@ -8,6 +8,7 @@ import AdvancementMigrationDialog from "../advancement/advancement-migration-dia
 import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
 import SourceConfig from "../source-config.mjs";
+import StartingEquipmentConfig from "./starting-equipment-config.mjs";
 import SummoningConfig from "./summoning-config.mjs";
 
 /**
@@ -561,6 +562,9 @@ export default class ItemSheet5e extends ItemSheet {
         break;
       case "source":
         app = new SourceConfig(this.item, { keyPath: "system.source" });
+        break;
+      case "starting-equipment":
+        app = new StartingEquipmentConfig(this.item);
         break;
       case "summoning":
         app = new SummoningConfig(this.item);
