@@ -11,6 +11,7 @@ import Advancement from "./advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
+import ActiveEffect5e from "./active-effect.mjs";
 
 /**
  * Override and extend the basic Item implementation.
