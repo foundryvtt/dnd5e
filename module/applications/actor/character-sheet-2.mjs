@@ -164,7 +164,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     });
 
     // Set theme
-    setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
+    // TODO: Re-enable this when we support V12 only
+    // setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
 
     return html;
   }
