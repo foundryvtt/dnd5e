@@ -1876,7 +1876,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( !this.actor ) return null;
       data = { ...this.actor.getRollData({ deterministic }), item: { ...this.system } };
     }
-    if ( data?.item ) data.item.flags = { ...this.flags };
+    if ( data?.item ) {
+      data.item.flags = { ...this.flags };
+      data.item.name = this.name;
+    }
     return data;
   }
 

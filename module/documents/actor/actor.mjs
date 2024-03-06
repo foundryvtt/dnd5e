@@ -180,13 +180,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @inheritdoc
    * @param {object} [options]
    * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
-   *                                            either a die term or a flat term.
+   *                                          either a die term or a flat term.
    */
   getRollData({ deterministic=false }={}) {
     let data;
     if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
     else data = {...super.getRollData()};
     data.flags = {...this.flags};
+    data.name = this.name;
     return data;
   }
 
