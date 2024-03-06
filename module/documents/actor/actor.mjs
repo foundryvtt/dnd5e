@@ -1135,11 +1135,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Initiate concentration on an item.
-   * @param {Item5e} item                     The item on which to being concentration.
-   * @param {object} [effectData]             Effect data to merge into the created effect.
-   * @returns {Promise<ActiveEffect5e[]>}     A promise that resolves to the created and deleted effects.
+   * @param {Item5e} item                        The item on which to being concentration.
+   * @param {object} [effectData]                Effect data to merge into the created effect.
+   * @returns {Promise<ActiveEffect5e|void>}     A promise that resolves to the created effect.
    */
-  async beginConcentratingOn(item, effectData={}) {
+  async beginConcentrating(item, effectData={}) {
     effectData = ActiveEffect5e.createConcentrationEffectData(item, effectData);
 
     /**
@@ -1172,12 +1172,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * End concentration on an item.
-   * @param {Item5e|ActiveEffect5e|string} target     An item or effect to end concentration on, or id of an effect.
-   * @returns {Promise<ActiveEffect5e>}               A promise that resolves to the deleted effect.
+   * @param {Item5e|ActiveEffect5e|string} [target]    An item or effect to end concentration on, or id of an effect.
+   *                                                   If not provided, all maintained effects are removed.
+   * @returns {Promise<ActiveEffect5e[]>}              A promise that resolves to the deleted effects.
    */
-  async endConcentrationOn(target) {
+  async endConcentration(target) {
     let effect;
     const { effects } = this.concentration;
+
+    if ( !target ) return Promise.all(Array.from(effects).map(effect => this.endConcentration(effect)));
 
     if ( foundry.utils.getType(target) === "string" ) effect = effects.find(e => e.id === target);
     else if ( target instanceof ActiveEffect5e ) effect = effects.has(target) ? target : null;
@@ -1187,7 +1190,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         return (data === target._id) || (data._id === target._id);
       });
     }
-    if ( !effect ) return;
+    if ( !effect ) return [];
 
     /**
      * A hook that is called before a concentration effect is deleted.
@@ -1197,7 +1200,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {ActiveEffect5e} effect     The ActiveEffect that will be deleted.
      * @returns {boolean}                 Explicitly return false to prevent the effect from being deleted.
      */
-    if ( Hooks.call("dnd5e.preEndConcentration", this, effect) === false) return;
+    if ( Hooks.call("dnd5e.preEndConcentration", this, effect) === false) return [];
 
     await effect.delete();
 
@@ -1210,7 +1213,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.endConcentration", this, effect);
 
-    return effect;
+    return [effect];
   }
 
   /* -------------------------------------------- */

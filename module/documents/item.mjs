@@ -1025,11 +1025,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Initiate or concentration.
     const effects = [];
     if ( config.beginConcentrating ) {
-      const effect = await item.actor.beginConcentratingOn(item);
+      const effect = await item.actor.beginConcentrating(item);
       if ( effect ) effects.push(effect);
     }
     if ( config.endConcentration ) {
-      const effect = await item.actor.endConcentrationOn(config.endConcentration);
+      const effect = await item.actor.endConcentration(config.endConcentration);
       if ( effect ) effects.push(effect);
     }
 

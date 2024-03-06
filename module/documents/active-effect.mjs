@@ -500,7 +500,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     event.preventDefault();
     event.stopPropagation();
     if ( effects.size === 1 ) {
-      actor.endConcentrationOn(effects.first());
+      actor.endConcentration(effects.first());
       return;
     }
     const choices = effects.reduce((acc, effect) => {
@@ -523,7 +523,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       content: content,
       callback: ([html]) => {
         const source = new FormDataExtended(html.querySelector("FORM")).object.source;
-        actor.endConcentrationOn(source);
+        if ( source ) actor.endConcentration(source);
       },
       rejectClose: false,
       title: game.i18n.localize("DND5E.Concentration"),
