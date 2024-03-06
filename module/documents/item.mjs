@@ -1019,11 +1019,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const cardData = await item.displayCard(options);
 
     // Initiate concentration.
+    let effects;
     if ( config.beginConcentrating ) {
-      const effect = config.endConcentration ? item.actor.concentration.effects.find(e => {
-        return e.id === config.endConcentration;
-      }) : null;
-      await ActiveEffect5e.createConcentrationEffect(item, effect);
+      effects = await item.actor.beginConcentratingOn(item, { deleteId: config.endConcentration });
     }
 
     // Initiate measured template creation
@@ -1048,8 +1046,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @param {ItemUseConfiguration} config                Configuration data for the roll.
      * @param {ItemUseOptions} options                     Additional options for configuring item usage.
      * @param {MeasuredTemplateDocument[]|null} templates  The measured templates if they were created.
+     * @param {ActiveEffect5e[]|null} effects              The active effects that were created or deleted.
      */
-    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null);
+    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null, effects ?? null);
 
     return cardData;
   }

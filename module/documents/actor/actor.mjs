@@ -1132,6 +1132,79 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Initiate concentration on an item.
+   * @param {Item5e} item     The item on which to being concentration.
+   * @param {object} [options]
+   * @param {object} [options.effectData]     Effect data to merge into the created effect.
+   * @param {object} [options.deleteId]       The id of an existing effect to delete.
+   * @returns {Promise<ActiveEffect5e[]>}     A promise that resolves to the created and deleted effects.
+   */
+  async beginConcentratingOn(item, {effectData={}, deleteId=null}={}) {
+    effectData = ActiveEffect5e.createConcentrationEffect(item, effectData);
+    const effects = [];
+
+    /**
+     * A hook that is called before a concentration effect is created.
+     * @function dnd5e.preCreateConcentration
+     * @memberof hookEvents
+     * @param {Actor5e} actor         The actor initiating concentration.
+     * @param {Item5e} item           The item that is being concentrated on.
+     * @param {object} effectData     Data used to create the ActiveEffect.
+     * @returns {boolean}             Explicitly return false to prevent the effect from being created.
+     */
+    const creation = Hooks.call("dnd5e.preCreateConcentration", this, item, effectData);
+
+    if ( creation ) {
+      const effect = await ActiveEffect5e.create(effectData, { parent: this });
+      effects.push(effect);
+
+      /**
+       * A hook that is called after a concentration effect is created.
+       * @function dnd5e.createConcentration
+       * @memberof hookEvents
+       * @param {Actor5e} actor             The actor initiating concentration.
+       * @param {Item5e} item               The item that is being concentrated on.
+       * @param {ActiveEffect5e} effect     The created ActiveEffect instance.
+       */
+      Hooks.callAll("dnd5e.createConcentration", this, item, effect);
+    }
+
+    const deletion = this.effects.get(deleteId);
+    if ( deletion ) {
+
+      /**
+       * A hook that is called before a concentration effect is deleted.
+       * @function dnd5e.preDeleteConcentration
+       * @memberof hookEvents
+       * @param {Actor5e} actor             The actor ending concentration.
+       * @param {Item5e} item               The new item that is being concentrated on.
+       * @param {ActiveEffect5e} effect     The ActiveEffect that will be deleted.
+       * @returns {boolean}                 Explicitly return false to prevent the effect from being deleted.
+       */
+      const hook = Hooks.call("dnd5e.preDeleteConcentration", this, item, deletion);
+
+      if ( hook !== false ) {
+        await deletion.delete();
+        effects.push(deletion);
+
+        /**
+         * A hook that is called after a concentration effect is deleted.
+         * @function dnd5e.deleteConcentration
+         * @memberof hookEvents
+         * @param {Actor5e} actor             The actor ending concentration.
+         * @param {Item5e} item               The new item that is being concentrated on.
+         * @param {ActiveEffect5e} effect     The ActiveEffect that was deleted.
+         */
+        Hooks.callAll("dnd5e.deleteConcentration", this, item, deletion);
+      }
+    }
+
+    return effects;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Determine whether the provided ability is usable for remarkable athlete.
    * @param {string} ability  Ability type to check.
    * @returns {boolean}       Whether the actor has the remarkable athlete flag and the ability is physical.

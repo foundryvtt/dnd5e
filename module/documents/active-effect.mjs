@@ -358,12 +358,12 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
-   * Create an effect for concentration on an actor, optionally replacing an existing effect.
-   * @param {Item5e} item                         The item on which to begin concentrating.
-   * @param {object} [data]                       Additional data provided for the effect instance.
-   * @returns {Promise<ActiveEffect5e|null>}      A promise that resolves to the created effect.
+   * Create effect data for concentration on an actor.
+   * @param {Item5e} item       The item on which to begin concentrating.
+   * @param {object} [data]     Additional data provided for the effect instance.
+   * @returns {object}          Created data for the ActiveEffect.
    */
-  static async createConcentrationEffect(item, data={}) {
+  static createConcentrationEffect(item, data={}) {
     if ( !item.isEmbedded || !item.requiresConcentration ) {
       throw new Error("You may not begin concentrating on this item!");
     }
@@ -383,28 +383,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     }, data, {inplace: false});
     delete effectData.id;
 
-    /**
-     * A hook that is called before a concentration effect is created.
-     * @function dnd5e.preCreateConcentration
-     * @memberof hookEvents
-     * @param {Item5e} item           The item that is being concentrated on.
-     * @param {object} effectData     Data used to create the ActiveEffect.
-     * @returns {boolean}             Explicitly return false to prevent the effect from being created.
-     */
-    if ( Hooks.call("dnd5e.preCreateConcentration", item, effectData) === false ) return null;
-
-    const effect = await ActiveEffect5e.create(effectData, { parent: item.actor });
-
-    /**
-     * A hook that is called after a concentration effect is created.
-     * @function dnd5e.createConcentration
-     * @memberof hookEvents
-     * @param {Item5e} item               The item that is being concentrated on.
-     * @param {ActiveEffect5e} effect     The created ActiveEffect instance.
-     */
-    Hooks.callAll("dnd5e.createConcentration", item, effect);
-
-    return effect;
+    return effectData;
   }
 
   /* -------------------------------------------- */
