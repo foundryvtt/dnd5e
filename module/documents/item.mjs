@@ -1789,18 +1789,24 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Perform an ability recharge test for an item which uses the d6 recharge mechanic.
-   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance
+   * @param {object} [options]                Options to modify the roll.
+   * @param {string} [options.formula]        The formula to roll.
+   * @param {number} [options.target]         The target to meet.
+   * @param {boolean} [options.chatMessage]   Whether to display a chat message.
+   * @returns {Promise<Roll>}                 A Promise which resolves to the created Roll instance
    */
-  async rollRecharge() {
-    const recharge = this.system.recharge ?? {};
-    if ( !recharge.value ) return;
+  async rollRecharge({ formula="1d6", target=null, chatMessage=true }={}) {
+    if ( !this.system.recharge ) {
+      throw new Error("You cannot roll Recharge with this item!");
+    }
 
     const rollConfig = {
-      formula: "1d6",
+      formula: formula,
       data: this.getRollData(),
-      target: parseInt(recharge.value),
-      chatMessage: true
+      target: parseInt(target || this.system.recharge.value),
+      chatMessage: chatMessage
     };
+    if ( !rollConfig.target ) return;
 
     /**
      * A hook event that fires before the Item is rolled to recharge.
@@ -1816,7 +1822,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preRollRecharge", this, rollConfig) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    const roll = await new Roll(rollConfig.formula, rollConfig.data).evaluate();
     const success = roll.total >= rollConfig.target;
 
     if ( rollConfig.chatMessage ) {
