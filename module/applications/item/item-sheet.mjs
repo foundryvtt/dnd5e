@@ -204,8 +204,6 @@ export default class ItemSheet5e extends ItemSheet {
       };
     }
 
-    const supplementalAdvancement = item.system.supplementalAdvancement ?? {};
-
     // All other advancements by level
     for ( let [level, advancements] of Object.entries(item.advancement.byLevel) ) {
       if ( !configMode ) advancements = advancements.filter(a => a.appliesToClass);
@@ -218,7 +216,6 @@ export default class ItemSheet5e extends ItemSheet {
         summary: advancement.summaryForLevel(level, { configMode }),
         configured: advancement.configuredForLevel(level)
       }));
-      items.push(...(supplementalAdvancement[level] ?? []));
       if ( !items.length ) continue;
       advancement[level] = {
         items: items.sort((a, b) => a.order.localeCompare(b.order, game.i18n.lang)),

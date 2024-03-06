@@ -22,24 +22,6 @@ export default class StartingEquipmentTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Fake advancement for displaying starting equipment within the advancement list.
-   * @type {object}
-   */
-  get startingEquipmentAdvancement() {
-    return {
-      id: "starting-equipment",
-      order: "0150",
-      title: game.i18n.localize("DND5E.StartingEquipment.Title"),
-      icon: "systems/dnd5e/icons/svg/starting-equipment.svg",
-      summary: this.startingEquipmentDescription,
-      supplemental: true,
-      configured: true
-    };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * HTML formatted description of the starting equipment on this item.
    * @type {string}
    */

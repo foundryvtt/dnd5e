@@ -73,14 +73,6 @@
                 {{/if}}
                 {{#if @root.advancementEditable}}
                 <div class="item-controls flexrow">
-                    {{#if supplemental}}
-                    {{#with (localize "DND5E.AdvancementControlConfigure" name=title) as |tooltip|}}
-                    <a class="item-control config-button" data-action="{{ ../id }}"
-                       data-tooltip="{{ tooltip }}" aria-label="{{ tooltip }}">
-                        <i class="fa-solid fa-gear" aria-hidden="true"></i>
-                    </a>
-                    {{/with}}
-                    {{else}}
                     <a class="item-control" data-action="edit" data-tooltip="DND5E.AdvancementControlEdit"
                        aria-label="{{ localize 'DND5E.AdvancementControlEdit' }}">
                         <i class="fas fa-edit" aria-hidden="true"></i>
@@ -89,7 +81,6 @@
                        aria-label="{{ localize 'DND5E.AdvancementControlDelete' }}">
                         <i class="fas fa-trash" aria-hidden="true"></i>
                     </a>
-                    {{/if}}
                 </div>
                 {{/if}}
                 {{#if this.summary}}

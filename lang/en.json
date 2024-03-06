@@ -175,7 +175,6 @@
 "DND5E.AdvancementConfiguredComplete": "Fully Configured",
 "DND5E.AdvancementConfiguredIncomplete": "Not Configured",
 "DND5E.AdvancementControlCreate": "Create Advancement",
-"DND5E.AdvancementControlConfigure": "Configure {name}",
 "DND5E.AdvancementControlDelete": "Delete Advancement",
 "DND5E.AdvancementControlDuplicate": "Duplicate Advancement",
 "DND5E.AdvancementControlEdit": "Edit Advancement",
@@ -1376,6 +1375,9 @@
 "DND5E.Spellbook": "Spellbook",
 "DND5E.StartingEquipment": {
   "Title": "Starting Equipment",
+  "Action": {
+    "Configure": "Configure Starting Equipment"
+  },
   "Choice": {
     "Armor": "Choose Armor",
     "Focus": "Choose Spellcasting Focus",

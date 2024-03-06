@@ -26,18 +26,6 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
   }, {inplace: false}));
 
   /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Fetch additional advancement entries.
-   * @type {object[]}
-   */
-  get supplementalAdvancement() {
-    return { 1: [this.startingEquipmentAdvancement] };
-  }
-
-  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 

@@ -48,18 +48,6 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   }
 
   /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Fetch additional advancement entries.
-   * @type {object[]}
-   */
-  get supplementalAdvancement() {
-    return { 1: [this.startingEquipmentAdvancement] };
-  }
-
-  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
