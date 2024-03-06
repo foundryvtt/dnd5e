@@ -50,12 +50,20 @@ export default class AbilityUseDialog extends Dialog {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
     config ??= item._getUsageConfig();
 
+    const limit = item.actor.system.attributes?.concentration?.limit ?? 0;
+    const concentrationOptions = this._createConcentrationOptions(item);
+
     const data = {
       item,
       ...config,
       slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
       summoningOptions: this._createSummoningOptions(item),
       resourceOptions: this._createResourceOptions(item),
+      concentration: {
+        show: concentrationOptions.length > 0,
+        options: concentrationOptions,
+        optional: (concentrationOptions.length < limit) ? "—" : null
+      },
       scaling: item.usageScaling,
       note: this._getAbilityUseNote(item, config),
       title: game.i18n.format("DND5E.AbilityUseHint", {
@@ -97,6 +105,24 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
+
+  /**
+   * Create an array of options for which concentration effect to end or replace.
+   * @param {Item5e} item     The item being used.
+   * @returns {object[]}      Array of concentration options.
+   * @private
+   */
+  static _createConcentrationOptions(item) {
+    const { effects } = item.actor.concentration;
+    return effects.reduce((acc, effect) => {
+      const data = effect.getFlag("dnd5e", "itemData");
+      acc.push({
+        name: effect.id,
+        label: data?.name ?? item.actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless")
+      });
+      return acc;
+    }, []);
+  }
 
   /**
    * Create an array of spell slot options for a select.
@@ -336,6 +362,15 @@ export default class AbilityUseDialog extends Dialog {
       if ( resource && (resource.system.quantity === 1) && this._willLowerQuantity(resource, qty) ) {
         warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyResourceHint", {type, name: resource.name}));
       }
+    }
+
+    // Display warnings that the actor cannot concentrate on this item, or if it must replace one of the effects.
+    if ( data.concentration.show ) {
+      const locale = `DND5E.ConcentratingWarnLimit${data.concentration.optional ? "Optional" : ""}`;
+      warnings.push(game.i18n.localize(locale));
+    } else if ( data.beginConcentrating && !item.actor.system.attributes?.concentration?.limit ) {
+      const locale = "DND5E.ConcentratingWarnLimitZero";
+      warnings.push(game.i18n.localize(locale));
     }
 
     data.warnings = warnings;

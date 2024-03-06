@@ -893,6 +893,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
    * @property {string|null} summonsProfile         ID of the summoning profile to use.
    * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
+   * @property {boolean} beginConcentrating         Should this item initiate concentration?
+   * @property {string|null} endConcentration       The id of the active effect to end concentration on, if any.
    */
 
   /**
@@ -989,7 +991,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return;
 
-    // Determine whether the item can be used by testing for resource consumption
+    // Determine whether the item can be used by testing the chosen values of the config.
     const usage = item._getUsageUpdates(config);
     if ( !usage ) return;
 
@@ -1020,6 +1022,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Prepare card data & display it if options.createMessage is true
     const cardData = await item.displayCard(options);
 
+    // Initiate or concentration.
+    const effects = [];
+    if ( config.beginConcentrating ) {
+      const effect = await item.actor.beginConcentrating(item);
+      if ( effect ) effects.push(effect);
+    }
+    if ( config.endConcentration ) {
+      const deleted = await item.actor.endConcentration(config.endConcentration);
+      effects.push(...deleted);
+    }
+
     // Initiate measured template creation
     let templates;
     if ( config.createMeasuredTemplate ) {
@@ -1048,9 +1061,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @param {ItemUseConfiguration} config                Configuration data for the roll.
      * @param {ItemUseOptions} options                     Additional options for configuring item usage.
      * @param {MeasuredTemplateDocument[]|null} templates  The measured templates if they were created.
+     * @param {ActiveEffect5e[]} effects                   The active effects that were created or deleted.
      * @param {TokenDocument5e[]|null} summoned            Summoned tokens if they were created.
      */
-    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null, summoned ?? null);
+    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null, effects, summoned ?? null);
 
     return cardData;
   }
@@ -1065,6 +1079,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const config = {
       consumeSpellSlot: null,
       slotLevel: null,
+      beginConcentrating: null,
+      endConcentration: null,
       consumeUsage: null,
       consumeResource: null,
       resourceAmount: null,
@@ -1090,6 +1106,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.system.hasSummoning ) {
       config.createSummons = summons.prompt;
       config.summonsProfile = this.system.summons.profiles[0]._id;
+    }
+    if ( this.requiresConcentration ) {
+      config.beginConcentrating = true;
+      const { effects } = this.actor.concentration;
+      const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
+      if ( limit && (limit <= effects.size) ) {
+        const id = effects.find(e => {
+          const data = e.flags.dnd5e?.itemData ?? {};
+          return (data === this.id) || (data._id === this.id);
+        })?.id ?? effects.first()?.id ?? null;
+        config.endConcentration = id;
+      }
     }
 
     return config;
@@ -1133,6 +1161,26 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         return false;
       }
       actorUpdates[`system.spells.${config.slotLevel}.value`] = Math.max(spells - 1, 0);
+    }
+
+    // Determine whether the item can be used by testing for available concentration.
+    if ( config.beginConcentrating ) {
+      const { effects } = this.actor.concentration;
+
+      // Case 1: Replacing.
+      if ( config.endConcentration ) {
+        const replacedEffect = effects.find(i => i.id === config.endConcentration);
+        if ( !replacedEffect ) {
+          ui.notifications.warn("DND5E.ConcentratingMissingItem", {localize: true});
+          return false;
+        }
+      }
+
+      // Case 2: Starting concentration, but at limit.
+      else if ( effects.size >= this.actor.system.attributes.concentration.limit ) {
+        ui.notifications.warn("DND5E.ConcentratingLimited", {localize: true});
+        return false;
+      }
     }
 
     // Return the configured usage
