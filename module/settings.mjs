@@ -340,6 +340,9 @@ export function registerDeferredSettings() {
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
     setTheme(document.body, game.settings.get("dnd5e", "theme"));
   });
+  matchMedia("(prefers-contrast: more)").addEventListener("change", () => {
+    setTheme(document.body, game.settings.get("dnd5e", "theme"));
+  });
 }
 
 /* -------------------------------------------- */
@@ -348,16 +351,24 @@ export function registerDeferredSettings() {
  * Set the theme on an element, removing the previous theme class in the process.
  * @param {HTMLElement} element  Body or sheet element on which to set the theme data.
  * @param {string} [theme=""]    Theme key to set.
+ * @param {string[]} [flags=[]]  Additional theming flags to set.
  */
-export function setTheme(element, theme="") {
+export function setTheme(element, theme="", flags=new Set()) {
+  element.className = element.className.replace(/\bdnd5e-(theme|flag)-[\w-]+\b/g, "");
+
+  // Primary Theme
   if ( !theme && (element === document.body) ) {
     if ( matchMedia("(prefers-color-scheme: dark)").matches ) theme = "dark";
     if ( matchMedia("(prefers-color-scheme: light)").matches ) theme = "light";
   }
-  element.className = element.className.replace(/\bdnd5e-theme-\w+/g, "");
   if ( theme ) {
     element.classList.add(`dnd5e-theme-${theme.slugify()}`);
     element.dataset.theme = theme;
   }
   else delete element.dataset.theme;
+
+  // Additional Flags
+  if ( (element === document.body) && matchMedia("(prefers-contrast: more)").matches ) flags.add("high-contrast");
+  for ( const flag of flags ) element.classList.add(`dnd5e-flag-${flag.slugify()}`);
+  element.dataset.themeFlags = Array.from(flags).join(" ");
 }

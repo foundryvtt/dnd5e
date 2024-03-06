@@ -63,10 +63,6 @@
     box-shadow: 0 0 6px var(--dnd5e-shadow-45);
     border: var(--dnd5e-border-gold);
 
-    @media (prefers-contrast: more) {
-      border-color: var(--dnd5e-color-dark);
-    }
-
     .header {
       background: linear-gradient(to right, var(--dnd5e-color-hd-1), var(--dnd5e-color-hd-2));
       color: white;
@@ -183,10 +179,6 @@
     max-width: 280px;
     position: relative;
 
-    @media (prefers-contrast: more) {
-      border-color: var(--dnd5e-color-dark);
-    }
-
     &.empty {
       border: 2px dashed var(--dnd5e-color-black);
       color: var(--dnd5e-color-black);
@@ -194,10 +186,6 @@
       display: grid;
       place-content: center;
       opacity: .25;
-
-      @media (prefers-contrast: more) {
-        opacity: .5;
-      }
     }
 
     .gold-icon {
@@ -388,13 +376,6 @@
         margin-inline-start: auto;
         font-size: var(--font-size-14);
         opacity: .8;
-      }
-
-      @media (prefers-contrast: more) {
-        .value, .max {
-          text-shadow: 0 0 2px var(--dnd5e-color-dark);
-          filter: drop-shadow(0 0 2px var(--dnd5e-color-dark));
-        }
       }
     }
   }
@@ -825,12 +806,6 @@
       color: var(--color-text-light-6);
       --icon-fill: var(--color-text-light-6);
       --icon-stroke: var(--dnd5e-color-card);
-
-      @media (prefers-contrast: more) {
-        --border-style: var(--dnd5e-border-dark);
-        span { color: var(--color-text-dark-5); }
-        &.active span { color: var(--color-text-dark-1); }
-      }
 
       &.active {
         color: var(--color-text-dark-primary);
