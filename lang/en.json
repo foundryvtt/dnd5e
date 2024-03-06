@@ -1387,7 +1387,9 @@
   "Action": {
     "Add": "Add Profile",
     "Configure": "Configure Summons",
-    "Remove": "Remove Profile"
+    "Place": "Place Summons",
+    "Remove": "Remove Profile",
+    "Summon": "Summon"
   },
   "ArmorClass": {
     "Label": "Bonus Armor Class",
@@ -1423,8 +1425,13 @@
     }
   },
   "Profile": {
-    "Label": "Summons Profiles",
+    "Label": "Summons Profile",
+    "LabelPl": "Summons Profiles",
     "Empty": "Click above to add a profile or drop an creature to summon here."
+  },
+  "Prompt": {
+    "Label": "Summon Prompt",
+    "Hint": "Disable the summoning prompt when item is used. Players will still be able to summon from the chat card."
   }
 },
 "DND5E.Supply": "Supply",

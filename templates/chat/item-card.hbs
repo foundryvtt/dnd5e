@@ -87,6 +87,14 @@
         </button>
         {{/if}}
 
+        {{!-- Summoning --}}
+        {{#if item.system.hasSummoning}}
+        <button type="button" data-action="summon">
+            <i class="fa-solid fa-spaghetti-monster-flying"></i>
+            {{ localize "DND5E.Summoning.Action.Summon" }}
+        </button>
+        {{/if}}
+
         {{!-- Tool Check --}}
         {{#if isTool}}
         <button type="button" data-action="toolCheck" data-ability="{{ item.system.ability }}">
