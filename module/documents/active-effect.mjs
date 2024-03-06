@@ -455,60 +455,80 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
-   * Implement custom exhaustion cycling when interacting with the Token HUD,
-   * and management of which items the actor is concentrating on.
+   * Implement custom behavior for select conditions on the token HUD.
    * @param {PointerEvent} event        The triggering event.
    */
-  static async onClickTokenHUD(event) {
+  static onClickTokenHUD(event) {
     const { target } = event;
     if ( !target.classList?.contains("effect-control") ) return;
 
     const actor = canvas.hud.token.object?.actor;
     if ( !actor ) return;
-    if ( target.dataset?.statusId === "exhaustion" ) {
-      let level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
-      if ( !Number.isFinite(level) ) return;
-      event.preventDefault();
-      event.stopPropagation();
-      if ( event.button === 0 ) level++;
-      else level--;
-      const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
-      actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, max) });
-    } else if ( target.dataset?.statusId === "concentrating" ) {
-      const { effects } = actor.concentration;
-      if ( effects.size < 1 ) return;
-      event.preventDefault();
-      event.stopPropagation();
-      if ( effects.size === 1 ) {
-        effects.first().delete();
-        return;
-      }
-      const choices = effects.reduce((acc, effect) => {
-        const data = effect.getFlag("dnd5e", "itemData");
-        acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
-        return acc;
-      }, {});
-      const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
-      const content = `
-      <form class="dnd5e">
-        <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
-        <div class="form-group">
-          <label>${game.i18n.localize("DND5E.Source")}</label>
-          <div class="form-fields">
-            <select name="source">${options}</select>
-          </div>
-        </div>
-      </form>`;
-      const source = await Dialog.prompt({
-        content: content,
-        callback: ([html]) => new FormDataExtended(html.querySelector("FORM")).object.source,
-        rejectClose: false,
-        title: game.i18n.localize("DND5E.Concentration"),
-        label: game.i18n.localize("DND5E.Confirm")
-      });
-      if ( !source ) return;
-      actor.effects.get(source).delete();
+
+    if ( target.dataset?.statusId === "exhaustion" ) ActiveEffect5e._manageExhaustion(event, actor);
+    else if ( target.dataset?.statusId === "concentrating" ) ActiveEffect5e._manageConcentration(event, actor);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Manage custom exhaustion cycling when interacting with the token HUD.
+   * @param {PointerEvent} event        The triggering event.
+   * @param {Actor5e} actor             The actor belonging to the token.
+   */
+  static _manageExhaustion(event, actor) {
+    let level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
+    if ( !Number.isFinite(level) ) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if ( event.button === 0 ) level++;
+    else level--;
+    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
+    actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, max) });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Manage custom concentration handling when interacting with the token HUD.
+   * @param {PointerEvent} event        The triggering event.
+   * @param {Actor5e} actor             The actor belonging to the token.
+   */
+  static _manageConcentration(event, actor) {
+    const { effects } = actor.concentration;
+    if ( effects.size < 1 ) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if ( effects.size === 1 ) {
+      actor.endConcentrationOn(effects.first());
+      return;
     }
+    const choices = effects.reduce((acc, effect) => {
+      const data = effect.getFlag("dnd5e", "itemData");
+      acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
+      return acc;
+    }, {});
+    const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
+    const content = `
+    <form class="dnd5e">
+      <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
+      <div class="form-group">
+        <label>${game.i18n.localize("DND5E.Source")}</label>
+        <div class="form-fields">
+          <select name="source">${options}</select>
+        </div>
+      </div>
+    </form>`;
+    Dialog.prompt({
+      content: content,
+      callback: ([html]) => {
+        const source = new FormDataExtended(html.querySelector("FORM")).object.source;
+        actor.endConcentrationOn(source);
+      },
+      rejectClose: false,
+      title: game.i18n.localize("DND5E.Concentration"),
+      label: game.i18n.localize("DND5E.Confirm")
+    });
   }
 
   /* -------------------------------------------- */

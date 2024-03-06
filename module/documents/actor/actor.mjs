@@ -7,6 +7,7 @@ import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import Item5e from "../item.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -1134,15 +1135,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Initiate concentration on an item.
-   * @param {Item5e} item     The item on which to being concentration.
-   * @param {object} [options]
-   * @param {object} [options.effectData]     Effect data to merge into the created effect.
-   * @param {object} [options.deleteId]       The id of an existing effect to delete.
+   * @param {Item5e} item                     The item on which to being concentration.
+   * @param {object} [effectData]             Effect data to merge into the created effect.
    * @returns {Promise<ActiveEffect5e[]>}     A promise that resolves to the created and deleted effects.
    */
-  async beginConcentratingOn(item, { effectData={}, deleteId=null }={}) {
+  async beginConcentratingOn(item, effectData={}) {
     effectData = ActiveEffect5e.createConcentrationEffectData(item, effectData);
-    const effects = [];
 
     /**
      * A hook that is called before a concentration effect is created.
@@ -1153,47 +1151,66 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {object} effectData     Data used to create the ActiveEffect.
      * @returns {boolean}             Explicitly return false to prevent the effect from being created.
      */
-    if ( Hooks.call("dnd5e.preBeginConcentrating", this, item, effectData) !== false ) {
-      const effect = await ActiveEffect5e.create(effectData, { parent: this });
-      effects.push(effect);
+    if ( Hooks.call("dnd5e.preBeginConcentrating", this, item, effectData) === false ) return;
 
-      /**
-       * A hook that is called after a concentration effect is created.
-       * @function dnd5e.createConcentrating
-       * @memberof hookEvents
-       * @param {Actor5e} actor             The actor initiating concentration.
-       * @param {Item5e} item               The item that is being concentrated on.
-       * @param {ActiveEffect5e} effect     The created ActiveEffect instance.
-       */
-      Hooks.callAll("dnd5e.beginConcentrating", this, item, effect);
+    const effect = await ActiveEffect5e.create(effectData, { parent: this });
+
+    /**
+     * A hook that is called after a concentration effect is created.
+     * @function dnd5e.createConcentrating
+     * @memberof hookEvents
+     * @param {Actor5e} actor             The actor initiating concentration.
+     * @param {Item5e} item               The item that is being concentrated on.
+     * @param {ActiveEffect5e} effect     The created ActiveEffect instance.
+     */
+    Hooks.callAll("dnd5e.beginConcentrating", this, item, effect);
+
+    return effect;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * End concentration on an item.
+   * @param {Item5e|ActiveEffect5e|string} target     An item or effect to end concentration on, or id of an effect.
+   * @returns {Promise<ActiveEffect5e>}               A promise that resolves to the deleted effect.
+   */
+  async endConcentrationOn(target) {
+    let effect;
+    const { effects } = this.concentration;
+
+    if ( foundry.utils.getType(target) === "string" ) effect = effects.find(e => e.id === target);
+    else if ( target instanceof ActiveEffect5e ) effect = effects.has(target) ? target : null;
+    else if ( target instanceof Item5e ) {
+      effect = effects.find(e => {
+        const data = e.getFlag("dnd5e", "itemData") ?? {};
+        return (data === target._id) || (data._id === target._id);
+      });
     }
+    if ( !effect ) return;
 
-    const deletion = this.effects.get(deleteId);
     /**
      * A hook that is called before a concentration effect is deleted.
      * @function dnd5e.preEndConcentration
      * @memberof hookEvents
      * @param {Actor5e} actor             The actor ending concentration.
-     * @param {Item5e} item               The item whose usage prompted the ending of concentration.
      * @param {ActiveEffect5e} effect     The ActiveEffect that will be deleted.
      * @returns {boolean}                 Explicitly return false to prevent the effect from being deleted.
      */
-    if ( deletion && (Hooks.call("dnd5e.preEndConcentration", this, item, deletion) !== false) ) {
-      await deletion.delete();
-      effects.push(deletion);
+    if ( Hooks.call("dnd5e.preEndConcentration", this, effect) === false) return;
 
-      /**
-       * A hook that is called after a concentration effect is deleted.
-       * @function dnd5e.endConcentration
-       * @memberof hookEvents
-       * @param {Actor5e} actor             The actor ending concentration.
-       * @param {Item5e} item               The item whose usage prompted the ending of concentration.
-       * @param {ActiveEffect5e} effect     The ActiveEffect that was deleted.
-       */
-      Hooks.callAll("dnd5e.endConcentration", this, item, deletion);
-    }
+    await effect.delete();
 
-    return effects;
+    /**
+     * A hook that is called after a concentration effect is deleted.
+     * @function dnd5e.endConcentration
+     * @memberof hookEvents
+     * @param {Actor5e} actor             The actor ending concentration.
+     * @param {ActiveEffect5e} effect     The ActiveEffect that was deleted.
+     */
+    Hooks.callAll("dnd5e.endConcentration", this, effect);
+
+    return effect;
   }
 
   /* -------------------------------------------- */
