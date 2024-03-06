@@ -354,7 +354,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
-  /*  Concentration Handling                      */
+  /*  Exhaustion and Concentration Handling       */
   /* -------------------------------------------- */
 
   /**
@@ -363,7 +363,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @param {object} [data]     Additional data provided for the effect instance.
    * @returns {object}          Created data for the ActiveEffect.
    */
-  static createConcentrationEffect(item, data={}) {
+  static createConcentrationEffectData(item, data={}) {
     if ( !item.isEmbedded || !item.requiresConcentration ) {
       throw new Error("You may not begin concentrating on this item!");
     }
@@ -371,12 +371,12 @@ export default class ActiveEffect5e extends ActiveEffect {
     const statusEffect = CONFIG.statusEffects.find(e => e.id === CONFIG.specialStatusEffects.CONCENTRATING);
     const effectData = foundry.utils.mergeObject({
       ...statusEffect,
-      name: `${game.i18n.localize("DND5E.Concentration")}: ${item.name}`,
+      name: `${game.i18n.localize("EFFECT.DND5E.StatusConcentrating")}: ${item.name}`,
       description: game.i18n.format("DND5E.ConcentratingOn", {
         name: item.name,
         type: game.i18n.localize(`TYPES.Item.${item.type}`)
       }),
-      duration: ActiveEffect5e._getEffectDuration(item),
+      duration: ActiveEffect5e.getEffectDurationFromItem(item),
       "flags.dnd5e.itemData": item.actor.items.has(item.id) ? item.id : item.toObject(),
       origin: item.uuid,
       statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
@@ -387,11 +387,9 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
-  /*  Exhaustion and Concentration Handling       */
-  /* -------------------------------------------- */
 
   /**
-   * Register listeners for custom exhaustion handling in the TokenHUD.
+   * Register listeners for custom handling in the TokenHUD.
    */
   static registerHUDListeners() {
     Hooks.on("renderTokenHUD", this.onTokenHUDRender);
@@ -439,7 +437,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @param {Item5e} item     An item with a duration.
    * @returns {object}        The active effect duration.
    */
-  static _getEffectDuration(item) {
+  static getEffectDurationFromItem(item) {
     const dur = item.system.duration ?? {};
     const value = dur.value || 1;
 
@@ -450,7 +448,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       case "hour": return { seconds: value * 60 * 60 };
       case "day": return { seconds: value * 60 * 60 * 24 };
       case "year": return { seconds: value * 60 * 60 * 24 * 365 };
-      default: return { seconds: 60 };
+      default: return {};
     }
   }
 
