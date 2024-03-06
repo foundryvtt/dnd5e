@@ -2426,16 +2426,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( recoverDailyUses ) recovery.push("day");
     let updates = [];
     for ( let item of this.items ) {
-      const uses = item.system.uses;
-      if ( recovery.includes(uses?.per) ) {
+      const uses = item.system.uses ?? {};
+      if ( recovery.includes(uses.per) ) {
         updates.push({_id: item.id, "system.uses.value": uses.max});
       }
       if ( recoverLongRestUses && item.system.recharge?.value ) {
         updates.push({_id: item.id, "system.recharge.charged": true});
       }
 
-      // Items that roll to gain charges on a new day
-      if ( recoverDailyUses && uses?.recovery && (uses?.per in CONFIG.DND5E.limitedUseFormulaPeriods) ) {
+      // Items that roll to gain charges via a formula
+      if ( recoverDailyUses && uses.recovery && CONFIG.DND5E.limitedUsePeriods[uses.per]?.formula ) {
         const roll = new Roll(uses.recovery, item.getRollData());
         if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
           roll.alter(7, 0, {multiplyNumeric: true});
@@ -2443,7 +2443,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
         let total = 0;
         try {
-          total = (await roll.evaluate({async: true})).total;
+          total = (await roll.evaluate()).total;
         } catch(err) {
           ui.notifications.warn(game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
             name: item.name,

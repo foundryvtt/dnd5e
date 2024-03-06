@@ -261,7 +261,7 @@ export default class AbilityUseDialog extends Dialog {
         value: uses.value,
         quantity: quantity,
         max: uses.max,
-        per: CONFIG.DND5E.limitedUsePeriods[uses.per]
+        per: CONFIG.DND5E.limitedUsePeriods[uses.per]?.label
       });
     }
 
@@ -271,7 +271,7 @@ export default class AbilityUseDialog extends Dialog {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
         value: uses.value,
         max: uses.max,
-        per: CONFIG.DND5E.limitedUsePeriods[uses.per]
+        per: CONFIG.DND5E.limitedUsePeriods[uses.per]?.label
       });
     }
   }
