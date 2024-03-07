@@ -805,11 +805,11 @@ function createPassiveTag(label, dataset) {
 
 /**
  * Create a label for a roll message.
- * @param {object} config  Enrichment configuration data.
+ * @param {object} config  Configuration data.
  * @returns {string}
  */
-function createRollLabel(config) {
-  const ability = CONFIG.DND5E.abilities[config.ability]?.label;
+export function createRollLabel(config) {
+  const { label: ability, abbreviation } = CONFIG.DND5E.abilities[config.ability] ?? {};
   const skill = CONFIG.DND5E.skills[config.skill]?.label;
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
   const tool = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true })?.name : null;
@@ -833,8 +833,10 @@ function createRollLabel(config) {
         label = game.i18n.format(`EDITOR.DND5E.Inline.Check${longSuffix}`, { check: label });
       }
       break;
+    case "concentration":
     case "save":
-      label = ability;
+      if ( config.type === "save" ) label = ability;
+      else label = `${game.i18n.localize("DND5E.Concentration")} ${ability ? `(${abbreviation})` : ""}`;
       if ( showDC ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
       label = game.i18n.format(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
       break;
@@ -851,6 +853,7 @@ function createRollLabel(config) {
       case "tool":
         label = `<i class="fas fa-hammer"></i>${label}`;
         break;
+      case "concentration":
       case "save":
         label = `<i class="fas fa-shield-heart"></i>${label}`;
         break;
@@ -934,7 +937,7 @@ async function awardAction(event) {
  * @returns {Promise}
  */
 async function rollAction(event) {
-  const target = event.target.closest('.roll-link, [data-action="rollRequest"]');
+  const target = event.target.closest('.roll-link, [data-action="rollRequest"], [data-action="concentration"]');
   if ( !target ) return;
   event.stopPropagation();
 
@@ -962,6 +965,9 @@ async function rollAction(event) {
       switch ( type ) {
         case "check":
           return await actor.rollAbilityTest(ability, options);
+        case "concentration":
+          if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+          return actor.rollConcentration(options);
         case "damage":
           return await rollDamage(event, speaker);
         case "save":
