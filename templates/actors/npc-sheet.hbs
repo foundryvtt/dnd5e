@@ -66,8 +66,12 @@
                         <input name="system.attributes.hp.value" type="text" value="{{hp.value}}" placeholder="10"
                             data-tooltip="DND5E.HitPointsCurrent" data-dtype="Number">
                         <span class="sep"> / </span>
-                        <input name="system.attributes.hp.max" type="text" value="{{hp.max}}" placeholder="10"
-                            data-tooltip="DND5E.HitPointsMax" data-dtype="Number">
+                        {{#if system.details.level}}
+                        <span data-tooltip="DND5E.HitPointsMax">{{ hp.max }}</span>
+                        {{else}}
+                        <input name="system.attributes.hp.max" type="text" value="{{ hp.max }}" placeholder="10"
+                               data-tooltip="DND5E.HitPointsMax" data-dtype="Number">
+                        {{/if}}
                     </div>
                     <footer class="attribute-footer flexrow">
                         <input name="system.attributes.hp.temp" type="text" class="temphp"

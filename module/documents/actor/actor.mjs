@@ -149,31 +149,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   prepareDerivedData() {
     if ( !game.template.Actor.types.includes(this.type) || (this.type === "group") ) return;
 
-    const flags = this.flags.dnd5e || {};
     this.labels = {};
 
     // Retrieve data for polymorphed actors
-    let originalSaves = null;
-    let originalSkills = null;
-    if ( this.isPolymorphed ) {
-      const transformOptions = flags.transformOptions;
-      const original = game.actors?.get(flags.originalActor);
-      if ( original ) {
-        if ( transformOptions.mergeSaves ) originalSaves = original.system.abilities;
-        if ( transformOptions.mergeSkills ) originalSkills = original.system.skills;
-      }
-    }
+    const { originalSkills } = this.getOriginalStats();
 
     // Prepare abilities, skills, & everything else
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const rollData = this.getRollData();
     const checkBonus = simplifyBonus(globalBonuses?.check, rollData);
-    this._prepareAbilities(rollData, globalBonuses, checkBonus, originalSaves);
     this._prepareSkills(rollData, globalBonuses, checkBonus, originalSkills);
     this._prepareTools(rollData, globalBonuses, checkBonus);
     this._prepareArmorClass();
     this._prepareEncumbrance();
-    this._prepareHitPoints(rollData);
     this._prepareInitiative(rollData, checkBonus);
     this._prepareSpellcasting();
   }
@@ -258,44 +246,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
   /*  Derived Data Preparation Helpers            */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare abilities.
-   * @param {object} bonusData      Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {object} globalBonuses  Global bonus data.
-   * @param {number} checkBonus     Global ability check bonus.
-   * @param {object} originalSaves  A transformed actor's original actor's abilities.
-   * @protected
-   */
-  _prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves) {
-    const flags = this.flags.dnd5e ?? {};
-    const dcBonus = simplifyBonus(this.system.bonuses?.spell?.dc, bonusData);
-    const saveBonus = simplifyBonus(globalBonuses.save, bonusData);
-    for ( const [id, abl] of Object.entries(this.system.abilities) ) {
-      if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
-      abl.mod = Math.floor((abl.value - 10) / 2);
-
-      const isRA = this._isRemarkableAthlete(id);
-      abl.checkProf = new Proficiency(this.system.attributes.prof, (isRA || flags.jackOfAllTrades) ? 0.5 : 0, !isRA);
-      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, bonusData);
-      abl.saveBonus = saveBonusAbl + saveBonus;
-
-      abl.saveProf = new Proficiency(this.system.attributes.prof, abl.proficient);
-      const checkBonusAbl = simplifyBonus(abl.bonuses?.check, bonusData);
-      abl.checkBonus = checkBonusAbl + checkBonus;
-
-      abl.save = abl.mod + abl.saveBonus;
-      if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
-      abl.dc = 8 + abl.mod + this.system.attributes.prof + dcBonus;
-
-      if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
-
-      // If we merged saves when transforming, take the highest bonus here.
-      if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
-    }
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -563,37 +513,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
     encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
     encumbrance.encumbered = encumbrance.value > encumbrance.heavilyEncumbered;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare hit points for characters.
-   * @param {object} rollData  Data produced by `getRollData` to be applied to bonus formulas.
-   * @protected
-   */
-  _prepareHitPoints(rollData) {
-    const hp = this.system.attributes.hp;
-
-    if ( this.type === "character" && (this.system.attributes.hp.max === null) ) {
-      const abilityId = CONFIG.DND5E.defaultAbilities.hitPoints || "con";
-      const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
-      const base = Object.values(this.classes).reduce((total, item) => {
-        const advancement = item.advancement.byType.HitPoints?.[0];
-        return total + (advancement?.getAdjustedTotal(abilityMod) ?? 0);
-      }, 0);
-      const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.system.details.level;
-      const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
-
-      hp.max = base + levelBonus + overallBonus;
-
-      if ( this.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
-    }
-
-    hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
-    hp.value = Math.min(hp.value, hp.effectiveMax);
-    hp.damage = hp.effectiveMax - hp.value;
-    hp.pct = Math.clamped(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
   }
 
   /* -------------------------------------------- */
@@ -1755,7 +1674,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       isConcentration: true,
       targetValue: 10,
       advantage: options.advantage || (conc.mode === modes.ADVANTAGE),
-      disadvantage: options.disadvantage || (conc.mode === modes.DISADVANTAGE),
+      disadvantage: options.disadvantage || (conc.mode === modes.DISADVANTAGE)
     }, options);
     options.parts = parts.concat(options.parts ?? []);
 
@@ -2750,6 +2669,27 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       { since: "DnD5e 3.0", until: "DnD5e 3.2" }
     );
     return CurrencyManager.convertCurrency(this);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch stats from the original actor for data preparation.
+   * @returns {{ originalSaves: object|null, originalSkills: object|null }}
+   */
+  getOriginalStats() {
+    // Retrieve data for polymorphed actors
+    let originalSaves = null;
+    let originalSkills = null;
+    if ( this.isPolymorphed ) {
+      const transformOptions = this.flags.dnd5e?.transformOptions;
+      const original = game.actors?.get(this.flags.dnd5e?.originalActor);
+      if ( original ) {
+        if ( transformOptions.mergeSaves ) originalSaves = original.system.abilities;
+        if ( transformOptions.mergeSkills ) originalSkills = original.system.skills;
+      }
+    }
+    return { originalSaves, originalSkills };
   }
 
   /* -------------------------------------------- */
