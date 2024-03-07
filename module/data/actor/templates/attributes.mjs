@@ -156,4 +156,32 @@ export default class AttributesFields {
       this.attributes.movement[type] = speed;
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply movement and sense changes based on a race item. This method should be called during
+   * the `prepareEmbeddedData` step of data preparation.
+   * @param {Item5e} race                    Race item from which to get the stats.
+   * @param {object} [options={}]
+   * @param {boolean} [options.force=false]  Override any values on the actor.
+   * @this {CharacterData|NPCData}
+   */
+  static prepareRace(race, { force=false }={}) {
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
+      this.attributes.movement[key] = race.system.movement[key];
+    }
+    if ( race.system.movement.hover ) this.attributes.movement.hover = true;
+    if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;
+    else this.attributes.movement.units ??= race.system.movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
+      if ( !race.system.senses[key] || (!force && (this.attributes.senses[key] !== null)) ) continue;
+      this.attributes.senses[key] = race.system.senses[key];
+    }
+    this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
+    if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
+    else this.attributes.senses.units ??= race.system.senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+  }
 }
