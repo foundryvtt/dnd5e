@@ -229,6 +229,20 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       return acc;
     }, { left: [], right: [] });
 
+    // Concentration.
+    context.concentration = [];
+    const concentration = this.document.concentration;
+    for ( const effect of concentration.effects ) {
+      const data = effect.getFlag("dnd5e", "itemData");
+      const item = concentration.items.find(item => (item._id === data) || (item._id === data?._id));
+      context.concentration.push({
+        effect: effect,
+        item: item,
+        label: item ? item.name : game.i18n.localize("DND5E.Concentration"),
+        icon: item ? item.img : effect.img
+      });
+    }
+
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
       const value = attributes.movement[k];

@@ -109,6 +109,22 @@
 
     </section>
 
+    {{#if concentration.length}}
+    <section class="concentration-effects pills-lg">
+        <button type="button" class="rollable" data-action="rollConcentration">
+          {{localize "DND5E.AttrConcentration.Save"}}
+        </button>
+        {{#each concentration}}
+        <div class="concentration-effect pill-lg">
+            <img class="gold-icon" src="{{icon}}">
+            <div class="name-stacked">
+              <div class="title">{{label}}</div>
+            </div>
+        </div>
+        {{/each}}
+    </section>
+    {{/if}}
+
     <section class="items-list">
 
         <div class="items-section card">

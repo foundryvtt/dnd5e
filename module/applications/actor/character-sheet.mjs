@@ -258,7 +258,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       case "rollDeathSave":
         return this.actor.rollDeathSave({event: event});
       case "rollInitiative":
-        return this.actor.rollInitiativeDialog({event});
+        return this.actor.rollInitiativeDialog({event: event});
+      case "rollConcentration":
+        return this.actor.rollConcentration({event: event});
     }
   }
 
