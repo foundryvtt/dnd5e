@@ -8,6 +8,7 @@ import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import Item5e from "../item.mjs";
+import { createRollLabel } from "../../enrichers.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -1180,7 +1181,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let effect;
     const { effects } = this.concentration;
 
-    if ( !target ) return Promise.all(Array.from(effects).map(effect => this.endConcentration(effect)));
+    if ( !target ) {
+      return effects.reduce(async (acc, effect) => {
+        acc = await acc;
+        return acc.concat(await this.endConcentration(effect));
+      }, []);
+    }
 
     if ( foundry.utils.getType(target) === "string" ) effect = effects.find(e => e.id === target);
     else if ( target instanceof ActiveEffect5e ) effect = effects.has(target) ? target : null;
@@ -1214,6 +1220,42 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.endConcentration", this, effect);
 
     return [effect];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a chat message for this actor with a prompt to challenge concentration.
+   * @param {object} [options]
+   * @param {number} [options.dc]         The target value of the saving throw.
+   * @param {string} [options.ability]    An ability to use instead of the default.
+   * @returns {Promise<ChatMessage5e>}    A promise that resolves to the created chat message.
+   */
+  async challengeConcentration({ dc=10, ability=null }={}) {
+    const isConcentrating = this.concentration.effects.size > 0;
+    if ( !isConcentrating ) return null;
+
+    const dataset = {
+      action: "concentration",
+      dc: dc
+    };
+    if ( ability in CONFIG.DND5E.abilities ) dataset.ability = ability;
+
+    const config = {
+      type: "concentration",
+      format: "short",
+      icon: true
+    };
+
+    return ChatMessage.implementation.create({
+      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
+        dataset: { ...dataset, type: "concentration" },
+        buttonLabel: createRollLabel({ ...dataset, ...config }),
+        hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
+      }),
+      whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
+      speaker: ChatMessage.implementation.getSpeaker({ actor: this })
+    });
   }
 
   /* -------------------------------------------- */
@@ -1755,7 +1797,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       isConcentration: true,
       targetValue: 10,
       advantage: options.advantage || (conc.mode === modes.ADVANTAGE),
-      disadvantage: options.disadvantage || (conc.mode === modes.DISADVANTAGE),
+      disadvantage: options.disadvantage || (conc.mode === modes.DISADVANTAGE)
     }, options);
     options.parts = parts.concat(options.parts ?? []);
 
