@@ -875,13 +875,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }
 
-    // Reset death save counters
+    // Reset death save counters and store hp
     if ( "hp" in (this.system.attributes || {}) ) {
       const isDead = this.system.attributes.hp.value <= 0;
       if ( isDead && (foundry.utils.getProperty(changed, "system.attributes.hp.value") > 0) ) {
         foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
         foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
       }
+      foundry.utils.setProperty(options, "dnd5e.hp", { ...this.system.attributes.hp });
     }
 
     // Record previous exhaustion level.
@@ -1007,7 +1008,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       isBar: true
     }, updates) === false ) return this;
 
-    await this.update(updates, {dhp: -amount});
+    await this.update(updates, { dnd5e: { damages } });
 
     /**
      * A hook event that fires after damage has been applied to an actor.
@@ -1115,7 +1116,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Update the actor if the new amount is greater than the current
     const tmp = parseInt(hp.temp) || 0;
-    return amount > tmp ? this.update({"system.attributes.hp.temp": amount}, {dtemp: amount}) : this;
+    return amount > tmp ? this.update({"system.attributes.hp.temp": amount}) : this;
   }
 
   /* -------------------------------------------- */
@@ -2006,11 +2007,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
 
-    // Re-evaluate dhp in the event that it was changed in the previous hook
-    const updateOptions = { dhp: (updates.actor?.["system.attributes.hp.value"] ?? hp.value) - hp.value };
-
     // Perform updates
-    if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor, updateOptions);
+    if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
     if ( !foundry.utils.isEmpty(updates.class) ) await cls.update(updates.class);
 
     return roll;
@@ -3216,10 +3214,36 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritdoc */
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    this._displayTokenEffect(options);
     if ( userId === game.userId ) {
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
+    }
+
+    const hp = options.dnd5e?.hp;
+    if ( hp && (!options.isRest && !options.isAdvancement) ) {
+      const curr = this.system.attributes.hp;
+      const changes = {
+        hp: curr.value - hp.value,
+        temp: curr.temp - hp.temp
+      };
+      changes.total = changes.hp + changes.temp;
+
+
+      if ( Number.isInteger(changes.total) && parseInt(changes.total) !== 0 ) {
+        this._displayTokenEffect(changes);
+
+        /**
+         * A hook event that fires when an actor is damaged or healed by any means. The actual name
+         * of the hook will depend on the change in hit points.
+         * @function dnd5e.damageActor
+         * @memberof hookEvents
+         * @param {Actor5e} actor     The actor that had their hit points reduced.
+         * @param {number} changes    The changes to hit points.
+         * @param {object} update     The triggering updated performed.
+         * @param {string} userId     Id of the user that performed the update.
+         */
+        Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this, changes, data, userId);
+      }
     }
   }
 
@@ -3254,28 +3278,42 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Flash ring & display changes to health as scrolling combat text.
-   * @param {object} options  Any data provided by the update.
+   * @param {object} changes          Object of changes to hit points.
+   * @param {number} changes.hp       Changes to `hp.value`.
+   * @param {number} changes.temp     The change to `hp.temp`.
+   * @param {number} changes.total    The total change to hit points.
    * @protected
    */
-  _displayTokenEffect(options) {
-    const dhp = Number(options.dhp);
+  _displayTokenEffect(changes) {
+    let key;
+    let change;
+    if ( !parseInt(changes.hp) && parseInt(changes.temp) ) key = "temp";
+    else {
+      key = "hp";
+      change = changes.total;
+    }
+    if ( !key ) return;
+    change ??= changes[key];
+
     const tokens = this.isToken ? [this.token] : this.getActiveTokens(true, true);
+    if ( !tokens.length ) return;
+
+    const pct = Math.clamped(Math.abs(change) / this.system.attributes.hp.max, 0, 1);
+    const fill = CONFIG.DND5E.tokenHPColors[(key === "hp") ? (change < 0 ? "damage" : "healing") : "temp"];
+
     for ( const token of tokens ) {
       if ( !token.object.visible || !token.object.renderable ) continue;
-      token.flashRing(options);
-      if ( dhp ) {
-        const t = token.object;
-        const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
-        canvas.interface.createScrollingText(t.center, dhp.signedString(), {
-          anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
-          // Adapt the font size relative to the Actor's HP total to emphasize more significant blows
-          fontSize: 16 + (32 * pct), // Range between [16, 48]
-          fill: CONFIG.DND5E.tokenHPColors[dhp < 0 ? "damage" : "healing"],
-          stroke: 0x000000,
-          strokeThickness: 4,
-          jitter: 0.25
-        });
-      }
+      token.flashRing({ [key]: change });
+      const t = token.object;
+      canvas.interface.createScrollingText(t.center, change.signedString(), {
+        anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+        // Adapt the font size relative to the Actor's HP total to emphasize more significant blows
+        fontSize: 16 + (32 * pct), // Range between [16, 48]
+        fill: fill,
+        stroke: 0x000000,
+        strokeThickness: 4,
+        jitter: 0.25
+      });
     }
   }
 
