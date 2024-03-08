@@ -16,7 +16,7 @@
     position: absolute;
     pointer-events: none;
     inset: 0;
-    border: 1px solid var(--dnd5e-color-gold);
+    border: var(--dnd5e-border-gold);
     box-shadow: 0 0 20px var(--color-shadow-dark);
     border-radius: 5px;
   }
@@ -56,7 +56,7 @@
     }
   }
 
-  .window-content > form { margin-top: -30px; }
+  .window-content { margin-top: -30px; }
 
   /* ---------------------------------- */
   /*  Minimized                         */
@@ -85,10 +85,6 @@
     display: grid;
     grid-template-columns: 1fr var(--dnd5e-sheet-header-right-width);
     align-items: center;
-
-    @media (prefers-contrast: more) {
-      background: var(--dnd5e-color-maroon);
-    }
 
     input {
       background: rgb(0 0 0 / 45%);
@@ -518,11 +514,6 @@
                 line-height: 30px;
                 text-shadow: 0 0 4px var(--dnd5e-highlight-45);
 
-                @media (prefers-contrast: more) {
-                  text-shadow: 0 0 2px var(--dnd5e-color-dark);
-                  filter: drop-shadow(0 0 2px var(--dnd5e-color-dark));
-                }
-
                 .config-button {
                   color: inherit;
                   font-size: inherit;
@@ -624,10 +615,6 @@
               border-left: 1px dashed var(--dnd5e-color-gold);
 
               > input { color: var(--dnd5e-color-blue); }
-
-              @media (prefers-contrast: more) {
-                > input::placeholder { color: var(--color-text-light-6); }
-              }
             }
           }
         }
@@ -705,10 +692,6 @@
           border-bottom-color: currentcolor;
           color: var(--dnd5e-color-gold);
           margin-bottom: .5rem;
-
-          @media (prefers-contrast: more) {
-            color: var(--dnd5e-color-dark);
-          }
         }
 
         > ul {
@@ -747,10 +730,6 @@
             opacity: .25;
             justify-content: center;
             margin-top: .75rem;
-
-            @media (prefers-contrast: more) {
-              opacity: .5;
-            }
           }
 
           figure {
@@ -885,10 +864,6 @@
           padding: .375rem;
           border-bottom: var(--dnd5e-border-dotted);
 
-          @media (prefers-contrast: more) {
-            border-bottom: var(--dnd5e-border-dark);
-          }
-
           &:last-child { border: none; }
 
           .config-button {
@@ -912,10 +887,6 @@
         color: var(--color-text-dark-5);
         width: 30px;
         padding-top: 2px;
-
-        @media (prefers-contrast: more) {
-          color: var(--color-text-dark-primary);
-        }
       }
 
       select.ability {
@@ -945,10 +916,6 @@
         font-size: var(--font-size-11);
         color: var(--color-text-dark-5);
         text-align: center;
-
-        @media (prefers-contrast: more) {
-          color: var(--color-text-dark-primary);
-        }
       }
     }
 
@@ -964,11 +931,6 @@
           --border-style: var(--dnd5e-border-dotted);
           border-bottom: none;
           border-top: var(--border-style);
-
-          @media (prefers-contrast: more) {
-            --border-style: var(--dnd5e-border-dark);
-            &:nth-child(odd) { border-inline-end: var(--border-style); }
-          }
 
           &:nth-child(1), &:nth-child(2) { border-top: none; }
           &:last-child { border-top: var(--border-style); }
@@ -1018,43 +980,28 @@
         cursor: pointer;
         transition: opacity 250ms ease;
         &:hover { opacity: .5; }
-
-        @media (prefers-contrast: more) {
-          &:hover { opacity: 1; }
-        }
       }
 
       &.texture {
+        --background-color: color-mix(in oklab, var(--dnd5e-color-parchment), white);
         background-blend-mode: color-burn;
 
-        &.type {
-          background: url("ui/official/pill-texture-type.webp") no-repeat right,
-            color-mix(in oklab, var(--dnd5e-color-parchment), white);
-        }
-
-        &.race {
-          background: url("ui/official/pill-texture-race.webp") no-repeat right,
-            color-mix(in oklab, var(--dnd5e-color-parchment), white);
-        }
-
+        &.type { background: url("ui/official/pill-texture-type.webp") no-repeat right, var(--background-color); }
+        &.race { background: url("ui/official/pill-texture-race.webp") no-repeat right, var(--background-color); }
         &.background {
-          background: url("ui/official/pill-texture-background.webp") no-repeat right,
-            color-mix(in oklab, var(--dnd5e-color-parchment), white);
+          background: url("ui/official/pill-texture-background.webp") no-repeat right, var(--background-color);
         }
 
         &::before {
+          --gradient-start: var(--dnd5e-background-card);
           --gradient-end: transparent;
           content: "";
           position: absolute;
           inset: 0;
-          background: linear-gradient(to right, var(--dnd5e-color-card) 35%, var(--gradient-end));
+          background: linear-gradient(to right, var(--gradient-start) 35%, var(--gradient-end));
           border-radius: 5px;
           mix-blend-mode: unset;
           filter: unset;
-
-          @media (prefers-contrast: more) {
-            --gradient-end: color-mix(in oklab, var(--dnd5e-color-card), transparent 40%);
-          }
         }
 
         > * { position: relative; }
@@ -1153,10 +1100,6 @@
         inset: 0;
         background: transparent url("ui/ability-score-tab.svg") no-repeat top center / contain;
         z-index: -1;
-
-        @media (prefers-contrast: more) {
-          background: transparent url("ui/ability-score-tab-hc.svg") no-repeat top center / contain;
-        }
       }
 
       &.flipped {
@@ -1180,10 +1123,6 @@
         text-transform: uppercase;
         font-size: var(--font-size-11);
         color: var(--dnd5e-color-gold);
-
-        @media (prefers-contrast: more) {
-          color: var(--dnd5e-color-dark);
-        }
       }
 
       .mod {
@@ -1203,10 +1142,6 @@
         background: black;
         border-radius: 3px;
         margin-top: -2px;
-
-        @media (prefers-contrast: more) {
-          color: var(--color-text-light-1);
-        }
 
         > input {
           padding: 4px;
@@ -1336,10 +1271,6 @@
         > span {
           text-shadow: 0 0 12px var(--dnd5e-shadow-15);
           color: var(--dnd5e-color-gold);
-
-          @media (prefers-contrast: more) {
-            color: var(--dnd5e-color-dark);
-          }
         }
 
         > select {

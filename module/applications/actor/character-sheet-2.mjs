@@ -164,7 +164,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     });
 
     // Set theme
-    setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
+    // TODO: Re-enable this when we support V12 only
+    // setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
 
     return html;
   }
@@ -587,9 +588,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
           cls: prepared ? "active" : "",
           icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}"></i>`,
           title: isAlways
-            ? CONFIG.DND5E.spellPreparationModes.always
+            ? CONFIG.DND5E.spellPreparationModes.always.label
             : prepared
-              ? CONFIG.DND5E.spellPreparationModes.prepared
+              ? CONFIG.DND5E.spellPreparationModes.prepared.label
               : game.i18n.localize("DND5E.SpellUnprepared")
         };
       }

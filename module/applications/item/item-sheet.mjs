@@ -8,6 +8,7 @@ import AdvancementMigrationDialog from "../advancement/advancement-migration-dia
 import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
 import SourceConfig from "../source-config.mjs";
+import StartingEquipmentConfig from "./starting-equipment-config.mjs";
 import SummoningConfig from "./summoning-config.mjs";
 
 /**
@@ -562,6 +563,9 @@ export default class ItemSheet5e extends ItemSheet {
       case "source":
         app = new SourceConfig(this.item, { keyPath: "system.source" });
         break;
+      case "starting-equipment":
+        app = new StartingEquipmentConfig(this.item);
+        break;
       case "summoning":
         app = new SummoningConfig(this.item);
         break;
@@ -696,13 +700,15 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {Promise}
    */
   async _onDropAdvancement(event, data) {
+    if ( !this.item.system.advancement ) return;
+
     let advancements;
     let showDialog = false;
     if ( data.type === "Advancement" ) {
       advancements = [await fromUuid(data.uuid)];
     } else if ( data.type === "Item" ) {
       const item = await Item.implementation.fromDropData(data);
-      if ( !item ) return false;
+      if ( !item?.system.advancement ) return false;
       advancements = Object.values(item.advancement.byId);
       showDialog = true;
     } else {

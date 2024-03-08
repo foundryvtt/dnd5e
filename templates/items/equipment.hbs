@@ -126,9 +126,19 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ArmorClass" }}</label>
                 <div class="form-fields">
-                    {{numberInput system.armor.value name="system.armor.value"}}
+                    {{ numberInput source.armor.value name="system.armor.value" step="1" }}
                 </div>
             </div>
+
+            {{#if properties.mgc.selected}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.MagicalBonus" }}</label>
+                <div class="form-fields">
+                    {{ numberInput system.armor.magicalBonus name="system.armor.magicalBonus"
+                       min="0" step="1" placeholder="0" }}
+                </div>
+            </div>
+            {{/if}}
             {{/if}}
 
             {{#if hasDexModifier}}

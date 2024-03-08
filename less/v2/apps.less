@@ -59,19 +59,15 @@
 
   .card {
     border-radius: 4px;
-    background: var(--dnd5e-color-card);
+    background: var(--dnd5e-background-card);
     box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-    border: 1px solid var(--dnd5e-color-gold);
-
-    @media (prefers-contrast: more) {
-      border-color: var(--dnd5e-color-dark);
-    }
+    border: var(--dnd5e-border-gold);
 
     .header {
       background: linear-gradient(to right, var(--dnd5e-color-hd-1), var(--dnd5e-color-hd-2));
       color: white;
       border-radius: 3px 3px 0 0;
-      border-bottom: 1px solid var(--dnd5e-color-gold);
+      border-bottom: var(--dnd5e-border-gold);
 
       &.disabled {
         background: linear-gradient(to right, var(--color-border-dark-3), var(--color-border-light-2));
@@ -170,8 +166,9 @@
   }
 
   .pill-lg {
-    background: var(--dnd5e-color-card);
-    border: 2px solid var(--dnd5e-color-gold);
+    background: var(--dnd5e-background-card);
+    border: var(--dnd5e-border-gold);
+    border-width: 2px;
     border-radius: 5px;
     box-shadow: 0 0 12px var(--dnd5e-shadow-15);
     display: flex;
@@ -182,10 +179,6 @@
     max-width: 280px;
     position: relative;
 
-    @media (prefers-contrast: more) {
-      border-color: var(--dnd5e-color-dark);
-    }
-
     &.empty {
       border: 2px dashed var(--dnd5e-color-black);
       color: var(--dnd5e-color-black);
@@ -193,10 +186,6 @@
       display: grid;
       place-content: center;
       opacity: .25;
-
-      @media (prefers-contrast: more) {
-        opacity: .5;
-      }
     }
 
     .gold-icon {
@@ -343,9 +332,10 @@
   }
 
   .meter {
+    --meter-background: var(--dnd5e-color-light-gray);
     border: 1px solid var(--dnd5e-color-gold);
     border-radius: 4px;
-    background: var(--dnd5e-color-light-gray);
+    background: var(--meter-background);
     font-family: var(--dnd5e-font-roboto);
     font-weight: bold;
     box-shadow: inset 0 0 16px rgb(0 0 0 / 25%);
@@ -387,13 +377,6 @@
         font-size: var(--font-size-14);
         opacity: .8;
       }
-
-      @media (prefers-contrast: more) {
-        .value, .max {
-          text-shadow: 0 0 2px var(--dnd5e-color-dark);
-          filter: drop-shadow(0 0 2px var(--dnd5e-color-dark));
-        }
-      }
     }
   }
 
@@ -434,7 +417,7 @@
   }
 
   button {
-    background: var(--dnd5e-color-card);
+    background: var(--dnd5e-background-card);
     font-family: var(--dnd5e-font-roboto);
     font-weight: bold;
     font-size: var(--font-size-13);
@@ -478,11 +461,15 @@
   }
 
   /* Reset select styles */
-  select.unselect {
-    border: none;
-    padding: 0;
-    background: transparent;
-    height: unset;
+  select {
+    color: inherit;
+
+    &.unselect {
+      border: none;
+      padding: 0;
+      background: transparent;
+      height: unset;
+    }
   }
 
   /* Reset textarea styles */
@@ -820,12 +807,6 @@
       --icon-fill: var(--color-text-light-6);
       --icon-stroke: var(--dnd5e-color-card);
 
-      @media (prefers-contrast: more) {
-        --border-style: var(--dnd5e-border-dark);
-        span { color: var(--color-text-dark-5); }
-        &.active span { color: var(--color-text-dark-1); }
-      }
-
       &.active {
         color: var(--color-text-dark-primary);
         --icon-fill: var(--color-text-dark-primary);
@@ -849,7 +830,7 @@
 #context-menu.dnd5e2 {
   position: fixed;
   z-index: var(--z-index-tooltip);
-  background: var(--dnd5e-color-card);
+  background: var(--dnd5e-background-card);
   border-radius: 3px;
   box-shadow: 0 3px 6px var(--dnd5e-shadow-45);
   font-family: var(--dnd5e-font-roboto);

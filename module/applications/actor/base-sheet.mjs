@@ -14,6 +14,7 @@ import ActorTypeConfig from "./type-config.mjs";
 import DamageModificationConfig from "./damage-modification-config.mjs";
 import SourceConfig from "../source-config.mjs";
 
+import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 import TraitSelector from "./trait-selector.mjs";
@@ -615,6 +616,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Configure Special Flags
       html.find(".config-button").click(this._onConfigMenu.bind(this));
 
+      // Changing Level
+      html.find(".level-selector").change(this._onLevelChange.bind(this));
+
       // Owned Item management
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
       html.find(".attunement-max-override").click(this._onAttunementOverride.bind(this));
@@ -675,7 +679,35 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
+
+  /**
+   * Respond to a new level being selected from the level selector.
+   * @param {Event} event                           The originating change.
+   * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
+   * @private
+   */
+  async _onLevelChange(event) {
+    event.preventDefault();
+    const delta = Number(event.target.value);
+    const classId = event.target.closest("[data-item-id]")?.dataset.itemId;
+    if ( !delta || !classId ) return;
+    const classItem = this.actor.items.get(classId);
+    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
+      if ( manager.steps.length ) {
+        if ( delta > 0 ) return manager.render(true);
+        try {
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
+          if ( shouldRemoveAdvancements ) return manager.render(true);
+        }
+        catch(err) {
+          return;
+        }
+      }
+    }
+    return classItem.update({"system.levels": classItem.system.levels + delta});
+  }
+
   /* -------------------------------------------- */
 
   /**

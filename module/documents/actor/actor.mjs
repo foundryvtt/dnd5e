@@ -7,6 +7,7 @@ import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import Item5e from "../item.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -65,6 +66,33 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   get shield() {
     return this.system.attributes.ac.equippedShield ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The items this actor is concentrating on, and the relevant effects.
+   * @type {{items: Set<Item5e>, effects: Set<ActiveEffect5e>}}
+   */
+  get concentration() {
+    const concentration = {
+      items: new Set(),
+      effects: new Set()
+    };
+
+    const limit = this.system.attributes?.concentration?.limit ?? 0;
+    if ( !limit ) return concentration;
+
+    for ( const effect of this.effects ) {
+      if ( !effect.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) ) continue;
+      const data = effect.getFlag("dnd5e", "itemData");
+      concentration.effects.add(effect);
+      if ( data ) {
+        const item = this.items.get(data) ?? new Item.implementation(data, { keepId: true, parent: this });
+        if ( item ) concentration.items.add(item);
+      }
+    }
+    return concentration;
   }
 
   /* -------------------------------------------- */
@@ -180,13 +208,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @inheritdoc
    * @param {object} [options]
    * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
-   *                                            either a die term or a flat term.
+   *                                          either a die term or a flat term.
    */
   getRollData({ deterministic=false }={}) {
     let data;
     if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
     else data = {...super.getRollData()};
     data.flags = {...this.flags};
+    data.name = this.name;
     return data;
   }
 
@@ -928,7 +957,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async applyDamage(damages, options={}) {
     const hp = this.system.attributes.hp;
-    const traits = this.system.traits ?? {};
     if ( !hp ) return this; // Group actors don't have HP at the moment
 
     if ( foundry.utils.getType(options) !== "Object" ) {
@@ -942,71 +970,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Number.isNumeric(damages) ) {
       damages = [{ value: damages }];
       options.ignore ??= true;
-    } else damages = foundry.utils.deepClone(damages);
+    }
 
-    const multiplier = options.multiplier ?? 1;
-
-    /**
-     * A hook event that fires before damage amount is calculated for an actor.
-     * @param {Actor5e} actor                     The actor being damaged.
-     * @param {DamageDescription[]} damages       Damage descriptions.
-     * @param {DamageApplicationOptions} options  Additional damage application options.
-     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
-     * @function dnd5e.preCalculateDamage
-     * @memberof hookEvents
-     */
-    if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options) === false ) return this;
-
-    const ignore = (category, type) => {
-      return options.ignore === true
-        || options.ignore?.[category] === true
-        || options.ignore?.[category]?.has?.(type);
-    };
-
-    const hasEffect = (category, type, properties) => {
-      const config = traits?.[category];
-      if ( !config?.value.has(type) ) return false;
-      if ( !CONFIG.DND5E.damageTypes[type]?.isPhysical || !properties?.size ) return true;
-      return !config.bypasses?.intersection(properties)?.size;
-    };
-
-    const rollData = this.getRollData({deterministic: true});
-
-    damages.forEach(d => {
-      // Skip damage types with immunity
-      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) {
-        d.value = 0;
-        return;
-      }
-
-      // Apply type-specific damage reduction
-      if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
-        const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
-        if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
-        else d.value += modification;
-      }
-
-      let damageMultiplier = multiplier;
-
-      // Apply type-specific damage resistance
-      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) damageMultiplier /= 2;
-
-      // Apply type-specific damage vulnerability
-      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
-
-      d.value = d.value * damageMultiplier;
-    });
-
-    /**
-     * A hook event that fires after damage values are calculated for an actor.
-     * @param {Actor5e} actor                     The actor being damaged.
-     * @param {DamageDescription[]} damages       Damage descriptions.
-     * @param {DamageApplicationOptions} options  Additional damage application options.
-     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
-     * @function dnd5e.calculateDamage
-     * @memberof hookEvents
-     */
-    if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return this;
+    damages = this.calculateDamage(damages, options);
+    if ( !damages ) return this;
 
     // Round damage towards zero
     let amount = damages.reduce((acc, d) => acc + d.value, 0);
@@ -1058,6 +1025,86 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Calculate the damage that will be applied to this actor.
+   * @param {DamageDescription[]} damages            Damages to calculate.
+   * @param {DamageApplicationOptions} [options={}]  Damage calculation options.
+   * @returns {DamageDescription[]|false}            New damage descriptions with changes applied, or `false` if the
+   *                                                 calculation was canceled.
+   */
+  calculateDamage(damages, options={}) {
+    damages = foundry.utils.deepClone(damages);
+
+    /**
+     * A hook event that fires before damage amount is calculated for an actor.
+     * @param {Actor5e} actor                     The actor being damaged.
+     * @param {DamageDescription[]} damages       Damage descriptions.
+     * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
+     * @function dnd5e.preCalculateDamage
+     * @memberof hookEvents
+     */
+    if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options) === false ) return false;
+
+    const multiplier = options.multiplier ?? 1;
+
+    const ignore = (category, type) => {
+      return options.ignore === true
+        || options.ignore?.[category] === true
+        || options.ignore?.[category]?.has?.(type);
+    };
+
+    const traits = this.system.traits ?? {};
+    const hasEffect = (category, type, properties) => {
+      const config = traits?.[category];
+      if ( !config?.value.has(type) ) return false;
+      if ( !CONFIG.DND5E.damageTypes[type]?.isPhysical || !properties?.size ) return true;
+      return !config.bypasses?.intersection(properties)?.size;
+    };
+
+    const rollData = this.getRollData({deterministic: true});
+
+    damages.forEach(d => {
+      // Skip damage types with immunity
+      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) {
+        d.value = 0;
+        return;
+      }
+
+      // Apply type-specific damage reduction
+      if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
+        const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
+        if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
+        else d.value += modification;
+      }
+
+      let damageMultiplier = multiplier;
+
+      // Apply type-specific damage resistance
+      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) damageMultiplier /= 2;
+
+      // Apply type-specific damage vulnerability
+      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
+
+      d.value = d.value * damageMultiplier;
+    });
+
+    /**
+     * A hook event that fires after damage values are calculated for an actor.
+     * @param {Actor5e} actor                     The actor being damaged.
+     * @param {DamageDescription[]} damages       Damage descriptions.
+     * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @returns {boolean}                         Explicitly return `false` to prevent damage application.
+     * @function dnd5e.calculateDamage
+     * @memberof hookEvents
+     */
+    if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return false;
+
+    return damages;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Apply a certain amount of temporary hit point, but only if it's more than the actor currently has.
    * @param {number} amount       An amount of temporary hit points to set
    * @returns {Promise<Actor5e>}  A Promise which resolves once the temp HP has been applied
@@ -1082,6 +1129,91 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static getHPColor(current, max) {
     const pct = Math.clamped(current, 0, max) / max;
     return Color.fromRGB([(1-(pct/2)), pct, 0]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Initiate concentration on an item.
+   * @param {Item5e} item                        The item on which to being concentration.
+   * @param {object} [effectData]                Effect data to merge into the created effect.
+   * @returns {Promise<ActiveEffect5e|void>}     A promise that resolves to the created effect.
+   */
+  async beginConcentrating(item, effectData={}) {
+    effectData = ActiveEffect5e.createConcentrationEffectData(item, effectData);
+
+    /**
+     * A hook that is called before a concentration effect is created.
+     * @function dnd5e.preBeginConcentrating
+     * @memberof hookEvents
+     * @param {Actor5e} actor         The actor initiating concentration.
+     * @param {Item5e} item           The item that will be concentrated on.
+     * @param {object} effectData     Data used to create the ActiveEffect.
+     * @returns {boolean}             Explicitly return false to prevent the effect from being created.
+     */
+    if ( Hooks.call("dnd5e.preBeginConcentrating", this, item, effectData) === false ) return;
+
+    const effect = await ActiveEffect5e.create(effectData, { parent: this });
+
+    /**
+     * A hook that is called after a concentration effect is created.
+     * @function dnd5e.createConcentrating
+     * @memberof hookEvents
+     * @param {Actor5e} actor             The actor initiating concentration.
+     * @param {Item5e} item               The item that is being concentrated on.
+     * @param {ActiveEffect5e} effect     The created ActiveEffect instance.
+     */
+    Hooks.callAll("dnd5e.beginConcentrating", this, item, effect);
+
+    return effect;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * End concentration on an item.
+   * @param {Item5e|ActiveEffect5e|string} [target]    An item or effect to end concentration on, or id of an effect.
+   *                                                   If not provided, all maintained effects are removed.
+   * @returns {Promise<ActiveEffect5e[]>}              A promise that resolves to the deleted effects.
+   */
+  async endConcentration(target) {
+    let effect;
+    const { effects } = this.concentration;
+
+    if ( !target ) return Promise.all(Array.from(effects).map(effect => this.endConcentration(effect)));
+
+    if ( foundry.utils.getType(target) === "string" ) effect = effects.find(e => e.id === target);
+    else if ( target instanceof ActiveEffect5e ) effect = effects.has(target) ? target : null;
+    else if ( target instanceof Item5e ) {
+      effect = effects.find(e => {
+        const data = e.getFlag("dnd5e", "itemData") ?? {};
+        return (data === target._id) || (data._id === target._id);
+      });
+    }
+    if ( !effect ) return [];
+
+    /**
+     * A hook that is called before a concentration effect is deleted.
+     * @function dnd5e.preEndConcentration
+     * @memberof hookEvents
+     * @param {Actor5e} actor             The actor ending concentration.
+     * @param {ActiveEffect5e} effect     The ActiveEffect that will be deleted.
+     * @returns {boolean}                 Explicitly return false to prevent the effect from being deleted.
+     */
+    if ( Hooks.call("dnd5e.preEndConcentration", this, effect) === false) return [];
+
+    await effect.delete();
+
+    /**
+     * A hook that is called after a concentration effect is deleted.
+     * @function dnd5e.endConcentration
+     * @memberof hookEvents
+     * @param {Actor5e} actor             The actor ending concentration.
+     * @param {ActiveEffect5e} effect     The ActiveEffect that was deleted.
+     */
+    Hooks.callAll("dnd5e.endConcentration", this, effect);
+
+    return [effect];
   }
 
   /* -------------------------------------------- */
@@ -1393,9 +1525,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Roll an Ability Saving Throw
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} abilityId    The ability ID (e.g. "str")
-   * @param {object} options      Options which configure how ability tests are rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * @param {string} abilityId          The ability ID (e.g. "str")
+   * @param {object} [options]          Options which configure how ability saves are rolled
+   * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
    */
   async rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
@@ -1594,6 +1726,61 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Return the rolled result
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform a saving throw to maintain concentration.
+   * @param {object} [options]          Options to configure how the saving throw is rolled
+   * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
+   */
+  async rollConcentration(options={}) {
+    if ( !this.isOwner ) return null;
+    const conc = this.system.attributes?.concentration;
+    if ( !conc ) throw new Error("You may not make a Concentration Saving Throw with this Actor.");
+
+    const config = CONFIG.DND5E;
+    const modes = CONFIG.Dice.D20Roll.ADV_MODE;
+    const parts = [];
+
+    // Concentration bonus
+    if ( conc.bonus ) parts.push(conc.bonus);
+
+    const ability = (conc.ability in config.abilities) ? conc.ability : config.defaultAbilities.concentration;
+
+    options = foundry.utils.mergeObject({
+      ability: ability,
+      isConcentration: true,
+      targetValue: 10,
+      advantage: options.advantage || (conc.mode === modes.ADVANTAGE),
+      disadvantage: options.disadvantage || (conc.mode === modes.DISADVANTAGE),
+    }, options);
+    options.parts = parts.concat(options.parts ?? []);
+
+    /**
+     * A hook event that fires before a saving throw to maintain concentration is rolled for an Actor.
+     * @function dnd5e.preRollConcentration
+     * @memberof hookEvents
+     * @param {Actor5e} actor                   Actor for which the saving throw is being rolled.
+     * @param {D20RollConfiguration} options    Configuration data for the pending roll.
+     * @returns {boolean}                       Explicitly return `false` to prevent the save from being performed.
+     */
+    if ( Hooks.call("dnd5e.preRollConcentration", this, options) === false ) return;
+
+    // Perform a standard ability save.
+    const roll = await this.rollAbilitySave(options.ability, options);
+
+    /**
+     * A hook event that fires after a saving throw to maintain concentration is rolled for an Actor.
+     * @function dnd5e.rollConcentration
+     * @memberof hookEvents
+     * @param {Actor5e} actor     Actor for which the saving throw has been rolled.
+     * @param {D20Roll} roll      The resulting roll.
+     */
+    if ( roll ) Hooks.callAll("dnd5e.rollConcentration", this, roll);
+
     return roll;
   }
 

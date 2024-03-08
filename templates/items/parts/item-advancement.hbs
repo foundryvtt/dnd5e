@@ -73,11 +73,13 @@
                 {{/if}}
                 {{#if @root.advancementEditable}}
                 <div class="item-controls flexrow">
-                    <a class="item-control" data-action="edit" data-tooltip="DND5E.AdvancementControlEdit">
-                        <i class="fas fa-edit"></i>
+                    <a class="item-control" data-action="edit" data-tooltip="DND5E.AdvancementControlEdit"
+                       aria-label="{{ localize 'DND5E.AdvancementControlEdit' }}">
+                        <i class="fas fa-edit" aria-hidden="true"></i>
                     </a>
-                    <a class="item-control" data-action="delete" data-tooltip="DND5E.AdvancementControlDelete">
-                        <i class="fas fa-trash"></i>
+                    <a class="item-control" data-action="delete" data-tooltip="DND5E.AdvancementControlDelete"
+                       aria-label="{{ localize 'DND5E.AdvancementControlDelete' }}">
+                        <i class="fas fa-trash" aria-hidden="true"></i>
                     </a>
                 </div>
                 {{/if}}

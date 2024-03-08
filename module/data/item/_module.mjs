@@ -34,6 +34,7 @@ export {default as ItemDescriptionTemplate} from "./templates/item-description.m
 export {default as ItemTypeTemplate} from "./templates/item-type.mjs";
 export {default as MountableTemplate} from "./templates/mountable.mjs";
 export {default as PhysicalItemTemplate} from "./templates/physical-item.mjs";
+export * as startingEquipment from "./templates/starting-equipment.mjs";
 
 export const config = {
   background: BackgroundData,

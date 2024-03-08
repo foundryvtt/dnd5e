@@ -30,23 +30,40 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
+   * Configuration options for displaying the ability use dialog.
+   *
+   * @typedef {object} AbilityUseDialogOptions
+   * @property {object} [button]
+   * @property {string} [button.icon]   Icon used for the activation button.
+   * @property {string} [button.label]  Label used for the activation button.
+   */
+
+  /**
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-   * @param {Item5e} item                   Item being used.
-   * @param {ItemUseConfiguration} config   The ability use configuration's values.
-   * @returns {Promise}                     Promise that is resolved when the use dialog is acted upon.
+   * @param {Item5e} item                           Item being used.
+   * @param {ItemUseConfiguration} config           The ability use configuration's values.
+   * @param {AbilityUseDialogOptions} [options={}]  Additional options for displaying the dialog.
+   * @returns {Promise}                             Promise that is resolved when the use dialog is acted upon.
    */
-  static async create(item, config) {
+  static async create(item, config, options={}) {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
     config ??= item._getUsageConfig();
-    const slotOptions = config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
-    const resourceOptions = this._createResourceOptions(item);
+
+    const limit = item.actor.system.attributes?.concentration?.limit ?? 0;
+    const concentrationOptions = this._createConcentrationOptions(item);
 
     const data = {
       item,
       ...config,
-      slotOptions,
-      resourceOptions,
+      slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
+      summoningOptions: this._createSummoningOptions(item),
+      resourceOptions: this._createResourceOptions(item),
+      concentration: {
+        show: concentrationOptions.length > 0,
+        options: concentrationOptions,
+        optional: (concentrationOptions.length < limit) ? "—" : null
+      },
       scaling: item.usageScaling,
       note: this._getAbilityUseNote(item, config),
       title: game.i18n.format("DND5E.AbilityUseHint", {
@@ -68,8 +85,8 @@ export default class AbilityUseDialog extends Dialog {
         content: html,
         buttons: {
           use: {
-            icon: `<i class="fas ${isSpell ? "fa-magic" : "fa-fist-raised"}"></i>`,
-            label: label,
+            icon: options.button?.icon ?? `<i class="fas ${isSpell ? "fa-magic" : "fa-fist-raised"}"></i>`,
+            label: options.button?.label ?? label,
             callback: html => {
               const fd = new FormDataExtended(html[0].querySelector("form"));
               resolve(fd.object);
@@ -88,6 +105,24 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
+
+  /**
+   * Create an array of options for which concentration effect to end or replace.
+   * @param {Item5e} item     The item being used.
+   * @returns {object[]}      Array of concentration options.
+   * @private
+   */
+  static _createConcentrationOptions(item) {
+    const { effects } = item.actor.concentration;
+    return effects.reduce((acc, effect) => {
+      const data = effect.getFlag("dnd5e", "itemData");
+      acc.push({
+        name: effect.id,
+        label: data?.name ?? item.actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless")
+      });
+      return acc;
+    }, []);
+  }
 
   /**
    * Create an array of spell slot options for a select.
@@ -131,6 +166,25 @@ export default class AbilityUseDialog extends Dialog {
       }
     }
 
+    return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create an array of summoning profiles.
+   * @param {Item5e} item  The item.
+   * @returns {object|null}   Array of select options.
+   */
+  static _createSummoningOptions(item) {
+    const profiles = item.system.summons.profiles;
+    if ( profiles.length <= 1 ) return null;
+    const options = {};
+    for ( const profile of profiles ) {
+      const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
+      if ( profile.uuid && !doc ) continue;
+      options[profile._id] = profile.name ?? doc?.name ?? "—";
+    }
     return options;
   }
 
@@ -239,7 +293,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // Other Items
     else {
-      return game.i18n.format("DND5E.AbilityUseNormalHint", {
+      return game.i18n.format(`DND5E.AbilityUse${uses.value ? "Normal" : "Unavailable"}Hint`, {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
         value: uses.value,
         max: uses.max,
@@ -308,6 +362,15 @@ export default class AbilityUseDialog extends Dialog {
       if ( resource && (resource.system.quantity === 1) && this._willLowerQuantity(resource, qty) ) {
         warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyResourceHint", {type, name: resource.name}));
       }
+    }
+
+    // Display warnings that the actor cannot concentrate on this item, or if it must replace one of the effects.
+    if ( data.concentration.show ) {
+      const locale = `DND5E.ConcentratingWarnLimit${data.concentration.optional ? "Optional" : ""}`;
+      warnings.push(game.i18n.localize(locale));
+    } else if ( data.beginConcentrating && !item.actor.system.attributes?.concentration?.limit ) {
+      const locale = "DND5E.ConcentratingWarnLimitZero";
+      warnings.push(game.i18n.localize(locale));
     }
 
     data.warnings = warnings;

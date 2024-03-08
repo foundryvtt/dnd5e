@@ -23,6 +23,7 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * @mixes ActionTemplate
  * @mixes MountableTemplate
  *
+ * @property {number} magicalBonus     Magical bonus added to attack & damage rolls.
  * @property {Set<string>} properties  Weapon's properties.
  * @property {number} proficient       Does the weapon's owner have proficiency?
  */
@@ -34,6 +35,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
+      magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
       properties: new SetField(new StringField(), {label: "DND5E.ItemWeaponProperties"}),
       proficient: new NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"

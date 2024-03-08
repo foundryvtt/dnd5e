@@ -134,15 +134,26 @@ export default class AttributesFields {
     const statuses = this.parent.statuses;
     const noMovement = this.parent.hasConditionEffect("noMovement");
     const halfMovement = this.parent.hasConditionEffect("halfMovement");
-    const reduction = statuses.has("heavilyEncumbered")
-      ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered
-      : statuses.has("encumbered") ? CONFIG.DND5E.encumbrance.speedReduction.encumbered : 0;
+    const encumbered = statuses.has("encumbered");
+    const heavilyEncumbered = statuses.has("heavilyEncumbered");
+    const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
-    Object.keys(CONFIG.DND5E.movementTypes).forEach(k => {
-      if ( reduction ) this.attributes.movement[k] = Math.max(0, this.attributes.movement[k] - reduction);
-      if ( (crawl && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
-      else if ( statuses.has("exceedingCarryingCapacity") ) this.attributes.movement[k] = 5;
-      else if ( halfMovement ) this.attributes.movement[k] = Math.floor(this.attributes.movement[k] * 0.5);
-    });
+    const units = this.attributes.movement.units;
+    for ( const type in CONFIG.DND5E.movementTypes ) {
+      let speed = this.attributes.movement[type];
+      if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
+      else {
+        if ( halfMovement ) speed *= 0.5;
+        if ( heavilyEncumbered ) {
+          speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered[units] ?? 0));
+        } else if ( encumbered ) {
+          speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.encumbered[units] ?? 0));
+        }
+        if ( exceedingCarryingCapacity ) {
+          speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
+        }
+      }
+      this.attributes.movement[type] = speed;
+    }
   }
 }
