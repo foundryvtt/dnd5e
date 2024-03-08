@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>**Cold Breath.** The {type} exhales an icy blast in a 60-foot cone. Each creature in that area must make a  <strong>DC 20 Constitution</strong> saving throw, taking <strong>58 (13d8) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The {type} exhales an icy blast in a 60-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw.</p>",
+      "value": "<section class=\"secret\">\n<p>**Cold Breath.** The [[lookup @details.type.config.label lowercase]] exhales an icy blast in a 60-foot cone. Each creature in that area must make a  <strong>DC 20 Constitution</strong> saving throw, taking <strong>58 (13d8) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The [[lookup @details.type.config.label lowercase]] exhales an icy blast in a 60-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

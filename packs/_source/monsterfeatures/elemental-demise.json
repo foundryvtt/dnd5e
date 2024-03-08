@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>If the {creature} dies, its body disintegrates into a warm breeze, leaving behind only equipment the {creature} was wearing or carrying.</p>",
+      "value": "<p>If the [[lookup @name lowercase]] dies, its body disintegrates into a warm breeze, leaving behind only equipment the [[lookup @name lowercase]] was wearing or carrying.</p>",
       "chat": "",
       "unidentified": ""
     },

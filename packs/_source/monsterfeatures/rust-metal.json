@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>Any nonmagical weapon made of metal that hits the {creature} corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Non magical ammunition made of metal that hits the {creature} is destroyed after dealing damage.</p></section><p>Any nonmagical weapon made of metal that hits the {creature} corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls.</p>",
+      "value": "<section class=\"secret\"><p>Any nonmagical weapon made of metal that hits the [[lookup @name lowercase]] corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Non magical ammunition made of metal that hits the [[lookup @name lowercase]] is destroyed after dealing damage.</p></section><p>Any nonmagical weapon made of metal that hits the [[lookup @name lowercase]] corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls.</p>",
       "chat": "",
       "unidentified": ""
     },

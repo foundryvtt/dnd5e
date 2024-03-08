@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">Once per turn.</section>\n<p>The {creature} deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the {creature} that isn't incapacitated and the {creature} doesn't have disadvantage on the attack roll.</p>",
+      "value": "<section class=\"secret\">Once per turn.</section>\n<p>the [[lookup @name lowercase]] deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the [[lookup @name lowercase]] that isn't incapacitated and the [[lookup @name lowercase]] doesn't have disadvantage on the attack roll.</p>",
       "chat": "",
       "unidentified": ""
     },

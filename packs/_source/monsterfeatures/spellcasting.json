@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The {creature} has following cleric spells prepared:</p><p>Cantrips (at will): light, sacred flame, thaumaturgy</p><p>1st level (3 slots): bless, cure wounds, sanctuary</p>\n</section>\n<p>The {creature} is a spellcaster. Its spellcasting ability is Wisdom.</p>",
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). the [[lookup @name lowercase]] has following cleric spells prepared:</p><p>Cantrips (at will): light, sacred flame, thaumaturgy</p><p>1st level (3 slots): bless, cure wounds, sanctuary</p>\n</section>\n<p>the [[lookup @name lowercase]] is a spellcaster. Its spellcasting ability is Wisdom.</p>",
       "chat": "",
       "unidentified": ""
     },

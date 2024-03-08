@@ -7,7 +7,7 @@
   "type": "weapon",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 17 (2d10 + 6) piercing damage.</p>\n</section>\n<p>The {creature} attacks with its Bite.</p>",
+      "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 17 (2d10 + 6) piercing damage.</p>\n</section>\n<p>the [[lookup @name lowercase]] attacks with its Bite.</p>",
       "chat": "",
       "unidentified": ""
     },
