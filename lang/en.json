@@ -1481,9 +1481,6 @@
       "Hint": "Modify to saving throw DCs on the summoned creature's abilities to match that of the summoner."
     }
   },
-  "Placement": {
-    "GenericError": "Failed to place summoned actor"
-  },
   "Profile": {
     "Label": "Summons Profile",
     "LabelPl": "Summons Profiles",
@@ -1492,6 +1489,13 @@
   "Prompt": {
     "Label": "Summon Prompt",
     "Hint": "Disable the summoning prompt when item is used. Players will still be able to summon from the chat card."
+  },
+  "Warning": {
+    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly a compendium.",
+    "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
+    "NoOwnership": "You do not have ownership of '{actor}' which you must have to summon it.",
+    "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
+    "Wildcard": "You must have 'Use File Browser' permissions to summon creatures with wildcard artwork."
   }
 },
 "DND5E.Supply": "Supply",

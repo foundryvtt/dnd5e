@@ -1056,11 +1056,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       try {
         summoned = await item.system.summons.summon(config.summonsProfile);
       } catch(err) {
-        Hooks.onError("Item5e#use", err, {
-          msg: game.i18n.localize("DND5E.Summoning.Placement.GenericError"),
-          log: "error",
-          notify: "error"
-        });
+        Hooks.onError("Item5e#use", err, { log: "error", notify: "error" });
       }
     }
 
@@ -1116,7 +1112,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget && canvas.scene ) {
       config.createMeasuredTemplate = target.prompt;
     }
-    if ( this.system.hasSummoning ) {
+    if ( this.system.hasSummoning && this.system.summons.canSummon && canvas.scene ) {
       config.createSummons = summons.prompt;
       config.summonsProfile = this.system.summons.profiles[0]._id;
     }
@@ -2148,11 +2144,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     try {
       await item.system.summons.summon(summonsProfile);
     } catch(err) {
-      Hooks.onError("Item5e#_onChatCardSummon", err, {
-        msg: game.i18n.localize("DND5E.Summoning.Placement.GenericError"),
-        log: "error",
-        notify: "error"
-      });
+      Hooks.onError("Item5e#_onChatCardSummon", err, { log: "error", notify: "error" });
     }
   }
 

@@ -90,6 +90,20 @@ export class SummonsData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Does the user have permissions to summon?
+   * @type {boolean}
+   */
+  static get canSummon() {
+    return game.user.can("TOKEN_CREATE");
+  }
+
+  get canSummon() {
+    return this.constructor.canSummon;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Item to which this summoning information belongs.
    * @type {Item5e}
    */
@@ -106,8 +120,12 @@ export class SummonsData extends foundry.abstract.DataModel {
    * @param {string} profileId  ID of the summoning profile to use.
    */
   async summon(profileId) {
+    if ( !this.canSummon || !canvas.scene ) return;
+
     const profile = this.profiles.find(p => p._id === profileId);
-    if ( !profile ) throw new Error(`Cannot find summoning profile ${profileId} on ${this.item.id}.`);
+    if ( !profile ) {
+      throw new Error(game.i18n.format("DND5E.Summoning.Warning.NoProfile", { profileId, item: this.item.name }));
+    }
 
     /**
      * A hook event that fires before summoning is performed.
@@ -120,9 +138,12 @@ export class SummonsData extends foundry.abstract.DataModel {
     if ( Hooks.call("dnd5e.preSummon", this.item, profile) === false ) return;
 
     // Fetch the actor that will be summoned
-    let actor = await fromUuid(profile.uuid);
+    const actor = await this.fetchActor(profile.uuid);
 
-    // TODO: Import actor into world if inside compendium
+    // Verify ownership of actor
+    if ( !actor.isOwner ) {
+      throw new Error(game.i18n.format("DND5E.Summoning.Warning.NoOwnership", { actor: actor.name }));
+    }
 
     const tokensData = [];
     const minimized = !this.item.parent?.sheet._minimized;
@@ -182,6 +203,33 @@ export class SummonsData extends foundry.abstract.DataModel {
      * @param {Token5e[]} tokens        Tokens that have been created.
      */
     Hooks.callAll("dnd5e.postSummon", this.item, profile, createdTokens);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * If actor to be summoned is in a compendium, create a local copy or use an already imported version if present.
+   * @param {string} uuid  UUID of actor that will be summoned.
+   * @returns {Actor5e}    Local copy of actor.
+   */
+  async fetchActor(uuid) {
+    const actor = await fromUuid(uuid);
+    if ( !actor ) throw new Error(game.i18n.format("DND5E.Summoning.Warning.NoActor", { uuid }));
+    if ( !actor.pack ) return actor;
+
+    // Search world actors to see if any have a matching summon ID flag
+    const localActor = game.actors.find(a =>
+      a.getFlag("dnd5e", "summonedCopy") && (a.getFlag("core", "sourceId") === uuid)
+    );
+    if ( localActor ) return localActor;
+
+    // Check permissions to create actors before importing
+    if ( !game.user.can("ACTOR_CREATE") ) throw new Error(game.i18n.localize("DND5E.Summoning.Warning.CreateActor"));
+
+    // Otherwise import the actor into the world and set the flag
+    return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
+      "flags.dnd5e.summonedCopy": true
+    });
   }
 
   /* -------------------------------------------- */
@@ -345,8 +393,18 @@ export class SummonsData extends foundry.abstract.DataModel {
    * @returns {object}
    */
   async getTokenData({ actor, placement, tokenUpdates, actorUpdates }) {
+    if ( actor.prototypeToken.randomImg && !game.user.can("FILES_BROWSE") ) {
+      tokenUpdates.texture ??= {};
+      tokenUpdates.texture.src ??= actor.img;
+      ui.notifications.warn("DND5E.Summoning.Warning.Wildcard", { localize: true });
+    }
+
     const tokenDocument = await actor.getTokenDocument(foundry.utils.mergeObject(placement, tokenUpdates));
     tokenDocument.delta.updateSource(actorUpdates);
+    tokenDocument.updateSource({
+      "flags.dnd5e.summon": { origin: this.item.uuid }
+    });
+
     return tokenDocument.toObject();
   }
 }

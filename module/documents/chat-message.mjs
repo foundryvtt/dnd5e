@@ -1,3 +1,4 @@
+import { SummonsData } from "../data/item/fields/summons-field.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import DamageRoll from "../dice/damage-roll.mjs";
 
@@ -99,6 +100,8 @@ export default class ChatMessage5e extends ChatMessage {
       // If the user is the message author or the actor owner, proceed
       let actor = game.actors.get(this.speaker.actor);
       if ( game.user.isGM || actor?.isOwner || (this.user.id === game.user.id) ) {
+        const summonsButton = chatCard[0].querySelector('button[data-action="summon"]');
+        if ( summonsButton && !SummonsData.canSummon ) summonsButton.style.display = "none";
         const template = chatCard[0].querySelector('button[data-action="placeTemplate"]');
         if ( template && !game.user.can("TEMPLATE_CREATE") ) template.style.display = "none";
         return;

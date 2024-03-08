@@ -246,7 +246,7 @@ export default class ActionTemplate extends ItemDataModel {
    * @type {boolean}
    */
   get hasSummoning() {
-    return (this.actionType === "summ") && !!this.summons.profiles.length;
+    return (this.actionType === "summ") && !!this.summons?.profiles.length;
   }
 
   /* -------------------------------------------- */
