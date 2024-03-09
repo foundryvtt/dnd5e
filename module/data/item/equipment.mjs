@@ -246,7 +246,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritdoc */
   get validProperties() {
     const valid = super.validProperties;
-    if ( this.isArmor ) valid.add("stealthDisadvantage");
+    valid.add("stealthDisadvantage");
     return valid;
   }
 }
