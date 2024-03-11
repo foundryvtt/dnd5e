@@ -34,13 +34,21 @@
                 </select>
                 {{/if}}
                 {{/if}}
+                {{#if showRequireProficiency}}
+                <label class="flexrow require-proficiency">
+                    <input type="checkbox" name="startingEquipment.{{ id }}.requiresProficiency"
+                           {{ checked entry.requiresProficiency }}>
+                    {{ localize "DND5E.StartingEquipment.RequireProficiency" }}
+                </label>
+                {{else}}
+                <input type="hidden" name="startingEquipment.{{ id }}.requiresProficiency"
+                       value="{{ entry.requiresProficiency }}" data-dtype="Boolean">
+                {{/if}}
             </div>
             <div class="drag-bar"><i class="fa-solid fa-grip-lines-vertical" inert></i></div>
             <input type="hidden" name="startingEquipment.{{ id }}._id" value="{{ entry._id }}">
             <input type="hidden" name="startingEquipment.{{ id }}.group" value="{{ entry.group }}">
             <input type="hidden" name="startingEquipment.{{ id }}.sort" value="{{ entry.sort }}" data-dtype="Number">
-            <input type="hidden" name="startingEquipment.{{ id }}.requiresProficiency"
-                   value="{{ entry.requiresProficiency }}" data-dtype="Boolean">
         </li>
         {{/each}}
         <li class="dnd5e2" data-depth="{{ depth }}">
