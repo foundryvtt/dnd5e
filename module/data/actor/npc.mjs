@@ -250,8 +250,19 @@ export default class NPCData extends CreatureTemplate {
 
   /** @inheritdoc */
   prepareDerivedData() {
+    const rollData = this.getRollData({ deterministic: true });
+    const { originalSaves } = this.parent.getOriginalStats();
+
+    this.prepareAbilities({ rollData, originalSaves });
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
     TraitsFields.prepareResistImmune.call(this);
+
+    // Hit Points
+    const hpOptions = {
+      advancement: Object.values(this.parent.classes).map(c => c.advancement.byType.HitPoints?.[0]).filter(a => a),
+      mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
+    };
+    AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
   }
 }

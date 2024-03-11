@@ -127,6 +127,28 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Calculate maximum hit points, taking an provided advancement into consideration.
+   * @param {object} hp                 HP object to calculate.
+   * @param {object} [options={}]
+   * @param {HitPointsAdvancement[]} [options.advancement=[]]  Advancement items from which to get hit points per-level.
+   * @param {number} [options.bonus=0]  Additional bonus to add atop the calculated value.
+   * @param {number} [options.mod=0]    Modifier for the ability to add to hit points from advancement.
+   * @this {ActorDataModel}
+   */
+  static prepareHitPoints(hp, { advancement=[], mod=0, bonus=0 }={}) {
+    const base = advancement.reduce((total, advancement) => total + advancement.getAdjustedTotal(mod), 0);
+    hp.max = (hp.max ?? 0) + base + bonus;
+    if ( this.parent.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
+
+    hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
+    hp.value = Math.min(hp.value, hp.effectiveMax);
+    hp.damage = hp.effectiveMax - hp.value;
+    hp.pct = Math.clamped(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
    * @this {CharacterData|NPCData}
    */
