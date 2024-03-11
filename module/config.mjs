@@ -1161,6 +1161,7 @@ DND5E.focusTypes = {
     }
   }
 };
+preLocalize("focusTypes", { key: "label" });
 
 /* -------------------------------------------- */
 
