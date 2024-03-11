@@ -163,7 +163,7 @@ export default class StartingEquipmentConfig extends DocumentSheet {
         break;
     }
 
-    return { "system.startingEquipment": data.startingEquipment, "system.wealth": data.wealth };
+    return { "system.startingEquipment": data.startingEquipment };
   }
 
   /* -------------------------------------------- */
@@ -250,6 +250,15 @@ export default class StartingEquipmentConfig extends DocumentSheet {
 
     // If drop entry is a group, move drag entry into it
     if ( dropEntry?.type in EquipmentEntryData.GROUPING_TYPES ) {
+      let depth = Number(dropArea.dataset.depth) + 1;
+      if ( dragEntry.children?.length ) {
+        depth += 1;
+        if ( dragEntry.children.some(c => c.type in EquipmentEntryData.GROUPING_TYPES) ) depth += 1;
+      }
+      if ( depth > 3 ) {
+        ui.notifications.warn("DND5E.StartingEquipment.Warning.Depth", { localize: true });
+        return;
+      }
       updateData = { [`startingEquipment.${dragEntry._id}.group`]: dropEntry._id };
       target = dropEntry.children.pop();
     }

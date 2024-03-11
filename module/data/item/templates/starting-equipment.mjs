@@ -177,7 +177,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Black label of no key is specified for a choice type.
+   * Blank label if no key is specified for a choice type.
    * @type {string}
    */
   get blankLabel() {
