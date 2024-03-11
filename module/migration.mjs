@@ -498,7 +498,7 @@ export const migrateEffectData = function(effect, migrationData, { parent }={}) 
   const updateData = {};
   _migrateDocumentIcon(effect, updateData, {...migrationData, field: "icon"});
   _migrateEffectArmorClass(effect, updateData);
-  if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion) ) {
+  if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
     _migrateTransferEffect(effect, parent, updateData);
   }
   return updateData;
