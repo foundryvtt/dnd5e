@@ -17,17 +17,39 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false, det
 
   // Optionally strip flavor annotations.
   if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
+
   if ( deterministic ) {
-    // Remove non-deterministic terms and their preceding operators.
+    // Perform arithmetic simplification to simplify parsing through the terms.
+    roll.terms = _simplifyOperatorTerms(roll.terms);
+
+    // Remove non-deterministic terms, their preceding operators, and dependent operators/terms.
     const terms = [];
+    const tempTerms = [];
+    let multiplicativeOP = false;
+    let determ;
     for ( let i = roll.terms.length - 1; i >= 0; ) {
-      let term = roll.terms[i];
-      const deterministic = term.isDeterministic;
-      if ( deterministic ) terms.unshift(term);
+      let PTerm;
+      if (roll.terms[i] instanceof ParentheticalTerm) {
+        PTerm = simplifyRollFormula(roll.terms[i].formula.slice(1, -1), {preserveFlavor, deterministic});
+      }
+      let term = roll.terms[i] instanceof ParentheticalTerm && Number(PTerm)
+        ? new NumericTerm({ number: PTerm}) : roll.terms[i];
+      determ = term.isDeterministic && (!multiplicativeOP || determ);
+      if (determ) tempTerms.unshift(term);
+      else while ( tempTerms.length ) tempTerms.pop();
       term = roll.terms[--i];
       while ( term instanceof OperatorTerm ) {
-        if ( deterministic ) terms.unshift(term);
+        if ( determ ) tempTerms.unshift(term);
+        if ( term.operator === "*" || term.operator === "/" || term.operator === "%" ) multiplicativeOP = true;
+        else {
+          multiplicativeOP = false;
+          while ( tempTerms.length ) terms.unshift(tempTerms.pop());
+        }
         term = roll.terms[--i];
+      }
+      if ( typeof term === "undefined" && determ ) {
+        while ( tempTerms.length ) terms.unshift(tempTerms.pop());
+
       }
     }
     roll.terms = terms;

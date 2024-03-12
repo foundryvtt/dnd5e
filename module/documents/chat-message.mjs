@@ -248,7 +248,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {HTMLDivElement} html  The roll tooltip markup.
    */
   _enrichRollTooltip(roll, html) {
-    const constant = Number(simplifyRollFormula(roll.formula, { deterministic: true }));
+    const constant = Number(simplifyRollFormula(roll._formula, { deterministic: true }));
     if ( !constant ) return;
     const sign = constant < 0 ? "-" : "+";
     const part = document.createElement("section");
