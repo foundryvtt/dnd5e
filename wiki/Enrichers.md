@@ -146,7 +146,7 @@ Using the enricher is very simple, simply type `&Reference` with the name of the
 > | Creature Type | ID              |
 > | ------------- | --------------- |
 > | Blinded       | `blinded`       |
-> | Charmed       | `charmged`      |
+> | Charmed       | `charmed`       |
 > | Deafened      | `deafened`      |
 > | Exhaustion    | `exhaustion`    |
 > | Frightened    | `frightened`    |
