@@ -1702,8 +1702,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * A hook event that fires after a damage has been rolled for an Item.
      * @function dnd5e.rollDamage
      * @memberof hookEvents
-     * @param {Item5e} item       Item for which the roll was performed.
-     * @param {DamageRoll} rolls  The resulting rolls.
+     * @param {Item5e} item                    Item for which the roll was performed.
+     * @param {DamageRoll|DamageRoll[]} rolls  The resulting rolls (or single roll if `returnMultiple` is `false`).
      */
     if ( rolls || (rollConfig.returnMultiple && rolls?.length) ) Hooks.callAll("dnd5e.rollDamage", this, rolls);
 
