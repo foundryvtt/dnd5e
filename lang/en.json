@@ -1391,9 +1391,27 @@
     "Remove": "Remove Profile",
     "Summon": "Summon"
   },
-  "ArmorClass": {
-    "Label": "Bonus Armor Class",
-    "Hint": "Bonus to the Armor Class set on the summoned creature added to what is specified in their statblock."
+  "Bonuses": {
+    "ArmorClass": {
+      "Label": "Bonus Armor Class",
+      "Hint": "Bonus to the Armor Class set on the summoned creature added to what is specified in their statblock."
+    },
+    "Attack": {
+      "Label": "Bonus Attack Damage",
+      "Hint": "Additional damage done by the creature's attacks."
+    },
+    "Healing": {
+      "Label": "Bonus Healing",
+      "Hint": "Additional healing provided by healing abilities."
+    },
+    "HitPoints": {
+      "Label": "Bonus Hit Points",
+      "Hint": "Additional hit points added to the creature on top of what is specified in their statblock."
+    },
+    "Saves": {
+      "Label": "Bonus Save Damage",
+      "Hint": "Additional damage done by the creature's abilities that require saving throws."
+    }
   },
   "Configuration": "Summoning Configuration",
   "CreatureChanges": {
@@ -1402,10 +1420,6 @@
   },
   "DisplayName": "Display Name",
   "DropHint": "Drop creature here",
-  "HitPoints": {
-    "Label": "Bonus Hit Points",
-    "Hint": "Additional hit points added to the creature on top of what is specified in their statblock."
-  },
   "ItemChanges": {
     "Label": "Item Changes",
     "Hint": "Changes made to items on the summoned creature."
