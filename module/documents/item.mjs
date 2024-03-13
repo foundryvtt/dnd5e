@@ -410,11 +410,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Item Properties
     if ( this.system.properties ) {
-      this.labels.properties = Array.from(this.system.properties).map(prop => ({
-        abbr: prop,
-        label: CONFIG.DND5E.itemProperties[prop]?.label,
-        icon: CONFIG.DND5E.itemProperties[prop]?.icon
-      }));
+      this.labels.properties = this.system.properties.reduce((acc, prop) => {
+        if ( (prop === "concentration") && !this.requiresConcentration ) return acc;
+        acc.push({
+          abbr: prop,
+          label: CONFIG.DND5E.itemProperties[prop]?.label,
+          icon: CONFIG.DND5E.itemProperties[prop]?.icon
+        });
+        return acc;
+      }, []);
     }
 
     // Specialized preparation per Item type

@@ -264,6 +264,8 @@ export default class AbilityUseDialog extends Dialog {
   static _getAbilityUseNote(item, config) {
     const { quantity, recharge, uses } = item.system;
 
+    if ( !item.isActive ) return "";
+
     // Zero quantity
     if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
 
