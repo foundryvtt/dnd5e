@@ -28,8 +28,9 @@ export default class SummonsField extends foundry.data.fields.EmbeddedDataField 
 /**
  * Data model for summons configuration.
  *
- * @property {string} ac                  Formula used to calculate the AC on summoned actors.
- * @property {string} hp                  Formula indicating bonus hit points to add to each summoned actor.
+ * @property {object} bonuses
+ * @property {string} bonuses.ac          Formula for armor class bonus on summoned actor.
+ * @property {string} bonuses.hp          Formula for bonus hit points to add to each summoned actor.
  * @property {object} match
  * @property {boolean} match.attacks      Match the to hit values on summoned actor's attack to the summoner.
  * @property {boolean} match.proficiency  Match proficiency on summoned actor to the summoner.
@@ -41,8 +42,10 @@ export class SummonsData extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      ac: new FormulaField({label: "DND5E.Summoning.ArmorClass.Label", hint: "DND5E.Summoning.ArmorClass.hint"}),
-      hp: new FormulaField({label: "DND5E.Summoning.HitPoints.Label", hint: "DND5E.Summoning.HitPoints.hint"}),
+      bonuses: new SchemaField({
+        ac: new FormulaField({label: "DND5E.Summoning.ArmorClass.Label", hint: "DND5E.Summoning.ArmorClass.hint"}),
+        hp: new FormulaField({label: "DND5E.Summoning.HitPoints.Label", hint: "DND5E.Summoning.HitPoints.hint"})
+      }),
       match: new SchemaField({
         attacks: new BooleanField({
           label: "DND5E.Summoning.Match.Attacks.Label", hint: "DND5E.Summoning.Match.Attacks.Hint"
@@ -194,44 +197,48 @@ export class SummonsData extends foundry.abstract.DataModel {
     }
 
     // Add bonus to AC
-    const acBonus = new Roll(this.ac, rollData);
-    await acBonus.evaluate();
-    if ( acBonus.total ) {
-      if ( actor.system.attributes.ac.calc === "flat" ) {
-        updates["system.attributes.ac.flat"] = (actor.system.attributes.ac.flat ?? 0) + acBonus.total;
-      } else {
-        updates.effects.push((new ActiveEffect({
-          changes: [{
-            key: "system.attributes.ac.bonus",
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value: acBonus.total
-          }],
-          disabled: false,
-          icon: "icons/magic/defensive/shield-barrier-blue.webp",
-          name: game.i18n.localize("DND5E.Summoning.ArmorClass.Label")
-        })).toObject());
+    if ( this.bonuses.ac ) {
+      const acBonus = new Roll(this.bonuses.ac, rollData);
+      await acBonus.evaluate();
+      if ( acBonus.total ) {
+        if ( actor.system.attributes.ac.calc === "flat" ) {
+          updates["system.attributes.ac.flat"] = (actor.system.attributes.ac.flat ?? 0) + acBonus.total;
+        } else {
+          updates.effects.push((new ActiveEffect({
+            changes: [{
+              key: "system.attributes.ac.bonus",
+              mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+              value: acBonus.total
+            }],
+            disabled: false,
+            icon: "icons/magic/defensive/shield-barrier-blue.webp",
+            name: game.i18n.localize("DND5E.Summoning.ArmorClass.Label")
+          })).toObject());
+        }
       }
     }
 
     // Add bonus to HP
-    const hpBonus = new Roll(this.hp, rollData);
-    await hpBonus.evaluate();
-    if ( hpBonus.total ) {
-      if ( (actor.type === "pc") && !actor._source.system.attributes.hp.max ) {
-        updates.effects.push((new ActiveEffect({
-          changes: [{
-            key: "system.attributes.hp.bonuses.overall",
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value: hpBonus.total
-          }],
-          disabled: false,
-          icon: "icons/magic/life/heart-glowing-red.webp",
-          name: game.i18n.localize("DND5E.Summoning.HitPoints.Label")
-        })).toObject());
-      } else {
-        updates["system.attributes.hp.max"] = actor.system.attributes.hp.max + hpBonus.total;
+    if ( this.bonuses.hp ) {
+      const hpBonus = new Roll(this.bonuses.hp, rollData);
+      await hpBonus.evaluate();
+      if ( hpBonus.total ) {
+        if ( (actor.type === "pc") && !actor._source.system.attributes.hp.max ) {
+          updates.effects.push((new ActiveEffect({
+            changes: [{
+              key: "system.attributes.hp.bonuses.overall",
+              mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+              value: hpBonus.total
+            }],
+            disabled: false,
+            icon: "icons/magic/life/heart-glowing-red.webp",
+            name: game.i18n.localize("DND5E.Summoning.HitPoints.Label")
+          })).toObject());
+        } else {
+          updates["system.attributes.hp.max"] = actor.system.attributes.hp.max + hpBonus.total;
+        }
+        updates["system.attributes.hp.value"] = actor.system.attributes.hp.value + hpBonus.total;
       }
-      updates["system.attributes.hp.value"] = actor.system.attributes.hp.value + hpBonus.total;
     }
 
     if ( !this.match.attacks && !this.match.saves ) return updates;
