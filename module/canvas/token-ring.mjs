@@ -198,10 +198,10 @@ export default class TokenRing {
     if ( !this.enabled || Number.isNaN(color) ) return;
 
     const originalColor = Color.from(foundry.utils.mergeObject(
-      this.token.document.getFlag("dnd5e", "tokenRing.colors") ?? { ring: 0xFFFFFF },
+      this.token.document.getFlag("dnd5e", "tokenRing.colors"),
       this.token.document.getRingColors(),
       { inplace: false }
-    ).ring).littleEndian;
+    ).ring ?? 0xFFFFFF).littleEndian;
 
     return await CanvasAnimation.animate([{
       attribute: "ringColorLittleEndian",
