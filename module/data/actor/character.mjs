@@ -209,27 +209,14 @@ export default class CharacterData extends CreatureTemplate {
    * Prepare movement & senses values derived from race item.
    */
   prepareEmbeddedData() {
-    const raceData = this.details.race?.system;
-    if ( !raceData ) {
+    if ( this.details.race instanceof Item ) {
+      AttributesFields.prepareRace.call(this, this.details.race);
+      this.details.type = this.details.race.system.type;
+    } else {
       this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
       this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
       this.details.type = new CreatureTypeField({ swarm: false }).initialize({ value: "humanoid" }, this);
-      return;
     }
-
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( raceData.movement[key] ) this.attributes.movement[key] ??= raceData.movement[key];
-    }
-    if ( raceData.movement.hover ) this.attributes.movement.hover = true;
-    this.attributes.movement.units ??= raceData.movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
-
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( raceData.senses[key] ) this.attributes.senses[key] ??= raceData.senses[key];
-    }
-    this.attributes.senses.special = [this.attributes.senses.special, raceData.senses.special].filterJoin(";");
-    this.attributes.senses.units ??= raceData.senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
-
-    this.details.type = raceData.type;
   }
 
   /* -------------------------------------------- */

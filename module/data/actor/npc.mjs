@@ -249,6 +249,18 @@ export default class NPCData extends CreatureTemplate {
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare movement & senses values derived from race item.
+   */
+  prepareEmbeddedData() {
+    if ( this.details.race instanceof Item ) {
+      AttributesFields.prepareRace.call(this, this.details.race, { force: true });
+      this.details.type = this.details.race.system.type;
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   prepareDerivedData() {
     const rollData = this.getRollData({ deterministic: true });
