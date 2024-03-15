@@ -63,30 +63,6 @@ export default class SpellData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getCardData(enrichmentOptions={}) {
-    const context = await super.getCardData(enrichmentOptions);
-    context.isSpell = true;
-    context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
-    return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getFavoriteData() {
-    return foundry.utils.mergeObject(await super.getFavoriteData(), {
-      subtitle: [this.parent.labels.components.vsm, this.parent.labels.activation],
-      modifier: this.parent.labels.modifier,
-      range: this.range,
-      save: this.save
-    });
-  }
-
-  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -118,6 +94,38 @@ export default class SpellData extends ItemDataModel.mixin(
   static #migrateScaling(source) {
     if ( !("scaling" in source) ) return;
     if ( (source.scaling.mode === "") || (source.scaling.mode === null) ) source.scaling.mode = "none";
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.properties.add("mgc");
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getCardData(enrichmentOptions={}) {
+    const context = await super.getCardData(enrichmentOptions);
+    context.isSpell = true;
+    context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: [this.parent.labels.components.vsm, this.parent.labels.activation],
+      modifier: this.parent.labels.modifier,
+      range: this.range,
+      save: this.save
+    });
   }
 
   /* -------------------------------------------- */

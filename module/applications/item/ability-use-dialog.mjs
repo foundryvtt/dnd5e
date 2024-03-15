@@ -177,7 +177,7 @@ export default class AbilityUseDialog extends Dialog {
    * @returns {object|null}   Array of select options.
    */
   static _createSummoningOptions(item) {
-    const profiles = item.system.summons.profiles;
+    const profiles = item.system.summons?.profiles ?? [];
     if ( profiles.length <= 1 ) return null;
     const options = {};
     for ( const profile of profiles ) {
