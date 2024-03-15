@@ -91,8 +91,11 @@ export default class ChatMessage5e extends ChatMessage {
 
       // If the user is the message author or the actor owner, proceed
       let actor = game.actors.get(this.speaker.actor);
-      if ( actor && actor.isOwner ) return;
-      else if ( game.user.isGM || (this.user.id === game.user.id)) return;
+      if ( game.user.isGM || actor?.isOwner || (this.user.id === game.user.id) ) {
+        const template = chatCard[0].querySelector('button[data-action="placeTemplate"]');
+        if ( template && !game.user.can("TEMPLATE_CREATE") ) template.style.display = "none";
+        return;
+      }
 
       // Otherwise conceal action buttons except for saving throw
       const buttons = chatCard.find("button[data-action]:not(.apply-effect)");
