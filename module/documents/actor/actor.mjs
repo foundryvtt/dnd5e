@@ -1715,8 +1715,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ability: ability,
       isConcentration: true,
       targetValue: 10,
-      advantage: options.advantage || (conc.mode === modes.ADVANTAGE),
-      disadvantage: options.disadvantage || (conc.mode === modes.DISADVANTAGE)
+      advantage: options.advantage || (conc.roll.mode === modes.ADVANTAGE),
+      disadvantage: options.disadvantage || (conc.roll.mode === modes.DISADVANTAGE)
     }, options);
     options.parts = parts.concat(options.parts ?? []);
 

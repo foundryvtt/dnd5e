@@ -2,6 +2,7 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
+import RollConfigField from "../shared/roll-config-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -96,7 +97,7 @@ export default class CharacterData extends CreatureTemplate {
             overall: new FormulaField({deterministic: true, label: "DND5E.HitPointsBonusOverall"})
           })
         }, {label: "DND5E.HitPoints"}),
-        death: new SchemaField({
+        death: new RollConfigField({
           success: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),
