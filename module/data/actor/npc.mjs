@@ -252,10 +252,9 @@ export default class NPCData extends CreatureTemplate {
    * Prepare movement & senses values derived from race item.
    */
   prepareEmbeddedData() {
-    const race = this.parent.items.find(i => i.type === "race");
-    if ( race ) {
-      AttributesFields.prepareRace.call(this, race, { force: true });
-      this.details.type = race.system.type;
+    if ( this.details.race instanceof Item ) {
+      AttributesFields.prepareRace.call(this, this.details.race, { force: true });
+      this.details.type = this.details.race.system.type;
     }
   }
 
