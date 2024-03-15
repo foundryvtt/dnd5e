@@ -55,10 +55,10 @@ export default class AttributesFields {
    * @property {string} concentration.ability   The ability used for concentration saving throws.
    * @property {string} concentration.bonus     The bonus provided to concentration saving throws.
    * @property {number} concentration.limit     The amount of items this actor can concentrate on.
-   * @property {number} concentration.mode      The default advantage mode for this actor's concentration saving throws.
    * @property {object} concentration.roll
    * @property {number} concentration.roll.min  The minimum the d20 can roll.
    * @property {number} concentration.roll.max  The maximum the d20 can roll.
+   * @property {number} concentration.roll.mode The default advantage mode for this actor's concentration saving throws.
    */
   static get creature() {
     return {
