@@ -858,8 +858,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Options for damage application.
    *
    * @typedef {object} DamageApplicationOptions
+   * @property {boolean|Set<string>} [downgrade]  Should this actor's damage immunity be downgraded to resistance?
+   *                                              A set of damage types to be downgraded or `true` to downgrade all
+   *                                              damage types.
    * @property {number} [multiplier=1]         Amount by which to multiply all damage.
-   * @property {boolean} [invertHealing=true]  Automatically invert healing types to it heals, rather than damages.
    * @property {object|boolean} [ignore]       Set to `true` to ignore all damage modifiers. If set to an object, then
    *                                           values can either be `true` to indicate that the all modifications of
    *                                           that type should be ignored, or a set of specific damage types for which
@@ -868,6 +870,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean|Set<string>} [ignore.resistance]     Should this actor's damage resistance be ignored?
    * @property {boolean|Set<string>} [ignore.vulnerability]  Should this actor's damage vulnerability be ignored?
    * @property {boolean|Set<string>} [ignore.modification]   Should this actor's damage modification be ignored?
+   * @property {boolean} [invertHealing=true]  Automatically invert healing types to it heals, rather than damages.
    * @property {"damage"|"healing"} [only]     Apply only damage or healing parts. Untyped rolls will always be applied.
    */
 
@@ -969,15 +972,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const multiplier = options.multiplier ?? 1;
 
-    const ignore = (category, type) => {
+    const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
+    const ignore = (category, type, skipDowngrade) => {
+      if ( !skipDowngrade && (options.ignore !== true) && (category === "resistance") && downgrade(type) ) return false;
       return options.ignore === true
         || options.ignore?.[category] === true
-        || options.ignore?.[category]?.has?.(type);
+        || options.ignore?.[category]?.has?.(type)
+        || (!skipDowngrade && (category === "immunity") && downgrade(type));
     };
 
     const traits = this.system.traits ?? {};
     const hasEffect = (category, type, properties) => {
-      const config = traits?.[category];
+      if ( (category === "dr") && downgrade(type) && hasEffect("di", type, properties)
+        && !ignore("immunity", type, true) ) return true;
+      const config = traits[category];
       if ( !config?.value.has(type) ) return false;
       if ( !CONFIG.DND5E.damageTypes[type]?.isPhysical || !properties?.size ) return true;
       return !config.bypasses?.intersection(properties)?.size;
@@ -999,7 +1007,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
 
       // Apply type-specific damage reduction
-      if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
+      if ( !ignore("modification", d.type) && traits.dm?.amount[d.type] ) {
         const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
         if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
         else d.value += modification;
