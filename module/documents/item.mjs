@@ -2123,6 +2123,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Otherwise show the item use dialog to get the profile
     else {
       const config = await AbilityUseDialog.create(item, {
+        beginConcentrating: null,
         consumeResource: null,
         consumeSpellSlot: null,
         consumeUsage: null,
@@ -2132,7 +2133,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         button: {
           icon: '<i class="fa-solid fa-spaghetti-monster-flying"></i>',
           label: game.i18n.localize("DND5E.Summoning.Action.Summon")
-        }
+        },
+        disableScaling: true
       });
       if ( !config?.summonsProfile ) return;
       summonsProfile = config.summonsProfile;
