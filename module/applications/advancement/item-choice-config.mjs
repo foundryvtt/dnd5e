@@ -20,7 +20,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
 
   /** @inheritdoc */
   getData(options={}) {
-    const indexes = this.advancement.configuration.pool.map(uuid => fromUuidSync(uuid));
+    const indexes = this.advancement.configuration.pool.map(i => fromUuidSync(i.uuid));
     const context = {
       ...super.getData(options),
       showContainerWarning: indexes.some(i => i?.type === "container"),
@@ -50,10 +50,10 @@ export default class ItemChoiceConfig extends AdvancementConfig {
 
     // Ensure items are still valid if type restriction or spell restriction are changed
     const pool = [];
-    for ( const uuid of (configuration.pool ?? this.advancement.configuration.pool) ) {
-      if ( this.advancement._validateItemType(await fromUuid(uuid), {
+    for ( const item of (configuration.pool ?? this.advancement.configuration.pool) ) {
+      if ( this.advancement._validateItemType(await fromUuid(item.uuid), {
         type: configuration.type, restriction: configuration.restriction ?? {}, strict: false
-      }) ) pool.push(uuid);
+      }) ) pool.push(item);
     }
     configuration.pool = pool;
 

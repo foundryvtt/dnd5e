@@ -68,7 +68,7 @@ export default class AdvancementConfig extends FormApplication {
   /** @inheritdoc */
   async close(options={}) {
     await super.close(options);
-    delete this.advancement.apps[this.appId];
+    delete this.advancement?.apps[this.appId];
   }
 
   /* -------------------------------------------- */
@@ -164,7 +164,7 @@ export default class AdvancementConfig extends FormApplication {
     if ( !uuidToDelete ) return;
     const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
     const updates = { configuration: await this.prepareConfigurationUpdate({
-      [this.options.dropKeyPath]: items.filter(uuid => uuid !== uuidToDelete)
+      [this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
     }) };
     await this.advancement.update(updates);
   }
@@ -207,12 +207,14 @@ export default class AdvancementConfig extends FormApplication {
     }
 
     // Abort if this uuid exists already
-    if ( existingItems.includes(item.uuid) ) {
+    if ( existingItems.find(i => i.uuid === item.uuid) ) {
       ui.notifications.warn("DND5E.AdvancementItemGrantDuplicateWarning", {localize: true});
       return null;
     }
 
-    await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [...existingItems, item.uuid]});
+    await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [
+      ...existingItems, { uuid: item.uuid }
+    ]});
   }
 
   /* -------------------------------------------- */
