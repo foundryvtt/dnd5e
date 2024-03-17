@@ -296,3 +296,19 @@
 `@spells.*.override` - A value that overrides the calculated `max` slots.
 
 `@spells.*.level` - The level of the relevant spell slots (e.g., the level of the pact slots, or the '3' in 'spell3').
+
+## Item Properties
+
+Items have roll data same as actors, but only while said item is owned by an actor (i.e., is placed on their sheet). The roll data of item is an extension of the actor's roll data, adding `@item` as an additional property.
+
+The most common properties are:
+
+`@item.uses.value` - The current Limited Uses available on the item.
+
+`@item.uses.max` - The max Limited Uses of this item.
+
+`@item.save.dc` - The saving throw DC of this item.
+
+`@item.level` - The spell level of this item (for spells only).
+
+`@item.levels` - The class level of this item (for classes only).
