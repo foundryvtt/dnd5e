@@ -167,9 +167,11 @@
 
 `@details.level` - Overall character level.
 
-`@details.xp.value` - Actor's total XP earned.
+`@details.cr` - Challenge rating.
 
-`@details.xp.min` & `.max` - XP range for the actor's current level.
+`@details.xp.value` - Actor's total XP earned (or the XP a monster is worth).
+
+`@details.xp.min` and `.max` - XP range for the actor's current level.
 
 `@details.xp.pct` - Progress towards the next level.
 

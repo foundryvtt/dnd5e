@@ -17,6 +17,7 @@ Useful examples:
 | `@abilities.dex.mod`        | Actor's Dexterity Modifier    |
 | `@prof`                     | Actor's Proficiency Bonus     |
 | `@details.level`            | Actor's overall Level         |
+| `@details.cr`               | Actor's Challenge Rating      |
 | `@classes.barbarian.levels` | Actor's Barbarian Class Level |
 
 > [!Note]
