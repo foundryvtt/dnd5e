@@ -1,3 +1,4 @@
+import HitDice from "../../documents/actor/HitDice.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
@@ -166,20 +167,13 @@ export default class CharacterData extends CreatureTemplate {
 
   /** @inheritdoc */
   prepareBaseData() {
-    this.details.level = 0;
-    this.attributes.hd = 0;
+    this.attributes.hd = new HitDice(this.parent);
+    this.details.level = this.attributes.hd.total;
     this.attributes.attunement.value = 0;
 
     for ( const item of this.parent.items ) {
-      // Class levels & hit dice
-      if ( item.type === "class" ) {
-        const classLevels = parseInt(item.system.levels) || 1;
-        this.details.level += classLevels;
-        this.attributes.hd += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
-      }
-
       // Attuned items
-      else if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
+      if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
         this.attributes.attunement.value += 1;
       }
     }

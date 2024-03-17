@@ -1937,14 +1937,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // If no denomination was provided, choose the first available
     let cls = null;
     if ( !denomination ) {
-      cls = this.itemTypes.class.find(c => c.system.hitDiceUsed < c.system.levels);
+      cls = this.system.attributes.hd._classes.find(c => c.system.hitDiceUsed < c.system.levels);
       if ( !cls ) return null;
       denomination = cls.system.hitDice;
     }
 
     // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
-    else cls = this.items.find(i => {
-      return (i.system.hitDice === denomination) && ((i.system.hitDiceUsed || 0) < (i.system.levels || 1));
+    else cls = this.system.attributes.hd._classes.find(i => {
+      return (i.system.hitDice === denomination) && (i.system.hitDiceUsed < i.system.levels);
     });
 
     // If no class is available, display an error notification
@@ -1960,7 +1960,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data: this.getRollData(),
       chatMessage: true,
       messageData: {
-        speaker: ChatMessage.getSpeaker({actor: this}),
+        speaker: ChatMessage.implementation.getSpeaker({actor: this}),
         flavor,
         title: `${flavor}: ${this.name}`,
         rollMode: game.settings.get("core", "rollMode"),
@@ -2037,7 +2037,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
-      speaker: ChatMessage.getSpeaker({ actor: this }),
+      speaker: ChatMessage.implementation.getSpeaker({ actor: this }),
       "flags.dnd5e.roll": { type: "hitPoints" }
     };
 
@@ -2181,7 +2181,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.preShortRest", this, config) === false ) return;
 
     // Take note of the initial hit points and number of hit dice the Actor has
-    const hd0 = foundry.utils.getProperty(this, "system.attributes.hd");
+    const hd0 = foundry.utils.getProperty(this, "system.attributes.hd.value");
     const hp0 = foundry.utils.getProperty(this, "system.attributes.hp.value");
 
     // Display a Dialog for rolling hit dice
@@ -2205,7 +2205,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !config.dialog && config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
 
     // Return the rest result
-    const dhd = foundry.utils.getProperty(this, "system.attributes.hd") - hd0;
+    const dhd = foundry.utils.getProperty(this, "system.attributes.hd.value") - hd0;
     const dhp = foundry.utils.getProperty(this, "system.attributes.hp.value") - hp0;
     return this._rest(config, { dhd, dhp });
   }
@@ -2497,26 +2497,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _getRestHitDiceRecovery({maxHitDice}={}) {
-    // Determine the number of hit dice which may be recovered
-    if ( maxHitDice === undefined ) maxHitDice = Math.max(Math.floor(this.system.details.level / 2), 1);
-
-    // Sort classes which can recover HD, assuming players prefer recovering larger HD first.
-    const sortedClasses = Object.values(this.classes).sort((a, b) => {
-      return (parseInt(b.system.hitDice.slice(1)) || 0) - (parseInt(a.system.hitDice.slice(1)) || 0);
-    });
-
-    // Update hit dice usage
-    let updates = [];
-    let hitDiceRecovered = 0;
-    for ( let item of sortedClasses ) {
-      const hitDiceUsed = item.system.hitDiceUsed;
-      if ( (hitDiceRecovered < maxHitDice) && (hitDiceUsed > 0) ) {
-        let delta = Math.min(hitDiceUsed || 0, maxHitDice - hitDiceRecovered);
-        hitDiceRecovered += delta;
-        updates.push({_id: item.id, "system.hitDiceUsed": hitDiceUsed - delta});
-      }
-    }
-    return { updates, hitDiceRecovered };
+    return this.system.attributes.hd.createHitDiceUpdates({maxHitDice});
   }
 
   /* -------------------------------------------- */
