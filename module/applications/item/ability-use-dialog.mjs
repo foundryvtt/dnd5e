@@ -240,13 +240,9 @@ export default class AbilityUseDialog extends Dialog {
         target = item.actor;
         if ( ["smallest", "largest"].includes(consume.target) ) {
           label = game.i18n.localize(`DND5E.ConsumeHitDice${consume.target.capitalize()}Long`);
-          value = target.system.attributes.hd;
+          value = target.system.attributes.hd.value;
         } else {
-          value = Object.values(item.actor.classes ?? {}).reduce((acc, cls) => {
-            if ( cls.system.hitDice !== consume.target ) return acc;
-            const hd = cls.system.levels - cls.system.hitDiceUsed;
-            return acc + hd;
-          }, 0);
+          value = item.actor.system.attributes.hd.bySize[consume.target] ?? 0;
           label = `${game.i18n.localize("DND5E.HitDice")} (${consume.target})`;
         }
         break;
