@@ -29,22 +29,38 @@ export default class SummonsField extends foundry.data.fields.EmbeddedDataField 
  * Data model for summons configuration.
  *
  * @property {object} bonuses
- * @property {string} bonuses.ac          Formula for armor class bonus on summoned actor.
- * @property {string} bonuses.hp          Formula for bonus hit points to add to each summoned actor.
+ * @property {string} bonuses.ac            Formula for armor class bonus on summoned actor.
+ * @property {string} bonuses.hp            Formula for bonus hit points to add to each summoned actor.
+ * @property {string} bonuses.attackDamage  Formula for bonus added to damage for attacks.
+ * @property {string} bonuses.saveDamage    Formula for bonus added to damage for saving throws.
+ * @property {string} bonuses.healing       Formula for bonus added to healing.
  * @property {object} match
- * @property {boolean} match.attacks      Match the to hit values on summoned actor's attack to the summoner.
- * @property {boolean} match.proficiency  Match proficiency on summoned actor to the summoner.
- * @property {boolean} match.saves        Match the save DC on summoned actor's abilities to the summoner.
- * @property {SummonsProfile[]} profiles  Information on creatures that can be summoned.
- * @property {boolean} prompt             Should the player be prompted to place the summons?
+ * @property {boolean} match.attacks        Match the to hit values on summoned actor's attack to the summoner.
+ * @property {boolean} match.proficiency    Match proficiency on summoned actor to the summoner.
+ * @property {boolean} match.saves          Match the save DC on summoned actor's abilities to the summoner.
+ * @property {SummonsProfile[]} profiles    Information on creatures that can be summoned.
+ * @property {boolean} prompt               Should the player be prompted to place the summons?
  */
 export class SummonsData extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
       bonuses: new SchemaField({
-        ac: new FormulaField({label: "DND5E.Summoning.ArmorClass.Label", hint: "DND5E.Summoning.ArmorClass.hint"}),
-        hp: new FormulaField({label: "DND5E.Summoning.HitPoints.Label", hint: "DND5E.Summoning.HitPoints.hint"})
+        ac: new FormulaField({
+          label: "DND5E.Summoning.Bonuses.ArmorClass.Label", hint: "DND5E.Summoning.Bonuses.ArmorClass.hint"
+        }),
+        hp: new FormulaField({
+          label: "DND5E.Summoning.Bonuses.HitPoints.Label", hint: "DND5E.Summoning.Bonuses.HitPoints.hint"
+        }),
+        attackDamage: new FormulaField({
+          label: "DND5E.Summoning.Bonuses.Attack.Label", hint: "DND5E.Summoning.Bonuses.Attack.Hint"
+        }),
+        saveDamage: new FormulaField({
+          label: "DND5E.Summoning.Bonuses.Saves.Label", hint: "DND5E.Summoning.Bonuses.Saves.Hint"
+        }),
+        healing: new FormulaField({
+          label: "DND5E.Summoning.Bonuses.Healing.Label", hint: "DND5E.Summoning.Bonuses.Healing.Hint"
+        })
       }),
       match: new SchemaField({
         attacks: new BooleanField({
@@ -241,8 +257,9 @@ export class SummonsData extends foundry.abstract.DataModel {
       }
     }
 
-    if ( !this.match.attacks && !this.match.saves ) return updates;
-
+    const attackDamageBonus = Roll.replaceFormulaData(this.bonuses.attackDamage, rollData);
+    const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage, rollData);
+    const healingBonus = Roll.replaceFormulaData(this.bonuses.healing, rollData);
     for ( const item of actor.items ) {
       const itemUpdates = {};
 
@@ -263,6 +280,20 @@ export class SummonsData extends foundry.abstract.DataModel {
       if ( this.match.saves && item.hasSave ) {
         itemUpdates["system.save.dc"] = rollData.item.save.dc ?? rollData.attributes.spelldc;
         itemUpdates["system.save.scaling"] = "flat";
+      }
+
+      // Damage bonus
+      let damageBonus;
+      if ( item.hasAttack ) damageBonus = attackDamageBonus;
+      else if ( item.system.actionType === "save" ) damageBonus = saveDamageBonus;
+      else if ( item.isHealing ) damageBonus = healingBonus;
+      if ( damageBonus && item.hasDamage ) {
+        const damage = foundry.utils.deepClone(item.system.damage.parts);
+        damage[0][0] = `${damage[0][0] ?? ""} + ${damageBonus}`;
+        itemUpdates["system.damage.parts"] = damage;
+        if ( item.system.damage.versatile ) {
+          itemUpdates["system.damage.versatile"] = `${item.system.damage.versatile} + ${damageBonus}`;
+        }
       }
 
       if ( !foundry.utils.isEmpty(itemUpdates) ) {
