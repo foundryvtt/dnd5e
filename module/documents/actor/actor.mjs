@@ -984,9 +984,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
 
     const skipped = type => {
-      if ( only === "damage" ) return type in CONFIG.DND5E.healingTypes;
-      if ( only === "healing" ) return type in CONFIG.DND5E.damageTypes;
-      return true;
+      if ( options.only === "damage" ) return type in CONFIG.DND5E.healingTypes;
+      if ( options.only === "healing" ) return type in CONFIG.DND5E.damageTypes;
+      return false;
     };
 
     const rollData = this.getRollData({deterministic: true});
