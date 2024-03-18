@@ -863,6 +863,7 @@ preLocalize("itemRarity");
 
 /**
  * The limited use periods that support a recovery formula.
+ * @deprecated since DnD5e 3.1, available until DnD5e 3.3
  * @enum {string}
  */
 DND5E.limitedUseFormulaPeriods = {
@@ -874,16 +875,49 @@ DND5E.limitedUseFormulaPeriods = {
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for limited use periods.
+ *
+ * @typedef {object} LimitedUsePeriodConfiguration
+ * @property {string} label           Localized label.
+ * @property {string} abbreviation    Shorthand form of the label.
+ * @property {boolean} [formula]      Whether this limited use period restores chargs via formula.
+ */
+
+/**
  * Enumerate the lengths of time over which an item can have limited use ability.
- * @enum {string}
+ * @enum {LimitedUsePeriodConfiguration}
  */
 DND5E.limitedUsePeriods = {
-  sr: "DND5E.ShortRest",
-  lr: "DND5E.LongRest",
-  day: "DND5E.Day",
-  ...DND5E.limitedUseFormulaPeriods
+  sr: {
+    label: "DND5E.UsesPeriods.Sr",
+    abbreviation: "DND5E.UsesPeriods.SrAbbreviation"
+  },
+  lr: {
+    label: "DND5E.UsesPeriods.Lr",
+    abbreviation: "DND5E.UsesPeriods.LrAbbreviation"
+  },
+  day: {
+    label: "DND5E.UsesPeriods.Day",
+    abbreviation: "DND5E.UsesPeriods.DayAbbreviation"
+  },
+  charges: {
+    label: "DND5E.UsesPeriods.Charges",
+    abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
+    formula: true
+  },
+  dawn: {
+    label: "DND5E.UsesPeriods.Dawn",
+    abbreviation: "DND5E.UsesPeriods.DawnAbbreviation",
+    formula: true
+  },
+  dusk: {
+    label: "DND5E.UsesPeriods.Dusk",
+    abbreviation: "DND5E.UsesPeriods.DuskAbbreviation",
+    formula: true
+  }
 };
-preLocalize("limitedUsePeriods");
+preLocalize("limitedUsePeriods", { keys: ["label", "abbreviation"] });
+patchConfig("limitedUsePeriods", "label", { since: "DnD5e 3.1", until: "DnD5e 3.3" });
 
 /* -------------------------------------------- */
 

@@ -584,9 +584,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   _prepareRecovery() {
     const { per } = this.system.uses ?? {};
-    this.labels.recovery = CONFIG.DND5E.limitedUsePeriods[per];
-    if ( per === "lr" ) this.labels.recovery = game.i18n.localize("DND5E.AbbreviationLR");
-    else if ( per === "sr" ) this.labels.recovery = game.i18n.localize("DND5E.AbbreviationSR");
+    const config = CONFIG.DND5E.limitedUsePeriods[per] ?? {};
+    this.labels.recovery = config.abbreviation ?? config.label;
   }
 
   /* -------------------------------------------- */
