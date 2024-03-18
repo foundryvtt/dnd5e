@@ -444,7 +444,7 @@
   }
 
   .target-source-control {
-    display: flex;
+    &:not([hidden]) { display: flex; }
     justify-content: space-evenly;
     gap: 4px;
     margin-block-start: 1px;
@@ -483,6 +483,10 @@
       }
 
       .name-stacked { flex: 1; }
+    }
+    > .none {
+      text-align: center;
+      margin-block: 4px;
     }
   }
 

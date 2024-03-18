@@ -51,13 +51,14 @@ export default class DamageApplicationElement extends HTMLElement {
    */
   get targetingMode() {
     if ( !game.user.isGM ) return "targeted";
-    return this.querySelector('.target-source-control [aria-pressed="true"]')?.dataset.mode ?? "targeted";
+    if ( this.targetSourceControl.hidden ) return "selected";
+    return this.targetSourceControl.querySelector('[aria-pressed="true"]')?.dataset.mode ?? "targeted";
   }
 
   set targetingMode(mode) {
-    const toPress = this.querySelector(`.target-source-control [data-mode="${mode}"]`);
-    if ( toPress?.ariaPressed === "true" ) return;
-    const currentlyPressed = this.querySelector('.target-source-control [aria-pressed="true"]');
+    const toPress = this.targetSourceControl.querySelector(`[data-mode="${mode}"]`);
+    if ( this.targetSourceControl.hidden || (toPress?.ariaPressed === "true") ) return;
+    const currentlyPressed = this.targetSourceControl.querySelector('[aria-pressed="true"]');
     if ( currentlyPressed ) currentlyPressed.ariaPressed = false;
     toPress.ariaPressed = true;
     this.buildTargetsList();
@@ -88,6 +89,14 @@ export default class DamageApplicationElement extends HTMLElement {
     if ( !this.#targetOptions.has(uuid) ) this.#targetOptions.set(uuid, { multiplier: 1 });
     return this.#targetOptions.get(uuid);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The controls for selecting target source mode.
+   * @type {HTMLElement}
+   */
+  targetSourceControl;
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
@@ -129,9 +138,13 @@ export default class DamageApplicationElement extends HTMLElement {
       this.applyButton = div.querySelector(".apply-damage");
       this.applyButton.addEventListener("click", this._onApplyDamage.bind(this));
       this.targetList = div.querySelector(".targets");
-      div.querySelectorAll(".target-source-control button").forEach(b =>
+      this.targetSourceControl = this.querySelector(".target-source-control");
+      this.targetSourceControl.querySelectorAll("button").forEach(b =>
         b.addEventListener("click", this._onChangeTargetMode.bind(this))
       );
+      if ( !game.user.isGM || !this.chatMessage.getFlag("dnd5e", "targets")?.length ) {
+        this.targetSourceControl.hidden = true;
+      }
       div.querySelector(".collapsible-content").addEventListener("click", event => {
         event.stopImmediatePropagation();
       });
@@ -165,7 +178,13 @@ export default class DamageApplicationElement extends HTMLElement {
         break;
     }
     const targets = await Promise.all(targetedTokens.map(t => this.buildTargetListEntry(t)));
-    this.targetList.replaceChildren(...targets.filter(e => e));
+    if ( targets.length ) this.targetList.replaceChildren(...targets.filter(e => e));
+    else {
+      const li = document.createElement("li");
+      li.classList.add("none");
+      li.innerText = game.i18n.localize("DND5E.Tokens.NoneTargeted");
+      this.targetList.replaceChildren(li);
+    }
 
     // Reset collapsible height to allow for animation
     requestAnimationFrame(() => {
@@ -183,7 +202,7 @@ export default class DamageApplicationElement extends HTMLElement {
    */
   async buildTargetListEntry(uuid) {
     const token = await fromUuid(uuid);
-    if ( !token ) return;
+    if ( !token?.isOwner ) return;
 
     // Calculate damage to apply
     const targetOptions = this.targetOptions(uuid);
