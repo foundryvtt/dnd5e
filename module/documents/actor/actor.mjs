@@ -123,7 +123,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareData() {
-    if ( !game.template.Actor.types.includes(this.type) ) return super.prepareData();
+    if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
     this._classes = undefined;
     this._preparationWarnings = [];
     super.prepareData();
@@ -148,7 +148,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    if ( !game.template.Actor.types.includes(this.type) || (this.type === "group") ) return;
+    if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
 
     this.labels = {};
 

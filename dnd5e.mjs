@@ -50,6 +50,8 @@ Hooks.once("init", function() {
 
   // TODO: Remove when v11 support is dropped.
   CONFIG.compatibility.excludePatterns.push(/Math\.clamped/);
+  CONFIG.compatibility.excludePatterns.push(/\{\{filePicker}}/);
+  CONFIG.compatibility.excludePatterns.push(/foundry\.dice\.terms/);
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;

@@ -3,6 +3,13 @@ import DamageRoll from "../dice/damage-roll.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
+  /** @inheritDoc */
+  _initialize(options = {}) {
+    super._initialize(options);
+    // TODO: Remove when v11 support is dropped.
+    if ( game.release.generation > 11 ) Object.defineProperty(this, "user", { value: this.author, configurable: true });
+  }
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -323,24 +330,24 @@ export default class ChatMessage5e extends ChatMessage {
     const tooltipContents = Object.entries(breakdown).reduce((str, [type, { total, constant, dice }]) => {
       const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
       return `${str}
-              <section class="tooltip-part">
-                <div class="dice">
-                  <ol class="dice-rolls">
-                    ${dice.reduce((str, { result, classes }) => `
-                      ${str}<li class="roll ${classes}">${result}</li>
-                    `, "")}
-                    ${constant ? `
-                    <li class="constant"><span class="sign">${constant < 0 ? "-" : "+"}</span>${Math.abs(constant)}</li>
-                    ` : ""}
-                  </ol>
-                  <div class="total">
-                    ${config ? `<img src="${config.icon}" alt="${config.label}">` : ""}
-                    <span class="label">${config?.label ?? ""}</span>
-                    <span class="value">${total}</span>
-                  </div>
-                </div>
-              </section>
-            `;
+        <section class="tooltip-part">
+          <div class="dice">
+            <ol class="dice-rolls">
+              ${dice.reduce((str, { result, classes }) => `
+                ${str}<li class="roll ${classes}">${result}</li>
+              `, "")}
+              ${constant ? `
+              <li class="constant"><span class="sign">${constant < 0 ? "-" : "+"}</span>${Math.abs(constant)}</li>
+              ` : ""}
+            </ol>
+            <div class="total">
+              ${config ? `<img src="${config.icon}" alt="${config.label}">` : ""}
+              <span class="label">${config?.label ?? ""}</span>
+              <span class="value">${total}</span>
+            </div>
+          </div>
+        </section>
+      `;
     }, "");
 
     roll.innerHTML = `
