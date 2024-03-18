@@ -409,71 +409,136 @@
       margin-right: .25rem;
     }
   }
+}
 
-  /* Effects Tray */
-  .effects-tray {
-    margin-top: .125rem;
-    &:has(> ul:empty) { display: none; }
+/* Damage & Effects Trays */
+.dnd5e2 :is(.card-tray, .effects-tray) {
+  margin-top: .125rem;
+  &:has(> ul:empty) { display: none; }
+  &.damage-tray { margin-block-start: 8px; }
 
-    label {
-      cursor: pointer;
+  > label {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: .25rem;
+    font-size: var(--font-size-11);
+
+    > span { flex: none; }
+    .fa-bolt, .fa-heart-crack { color: var(--color-text-light-6); }
+    .fa-caret-down { transition: all 250ms ease; }
+
+    &::before, &::after {
+      content: "";
+      flex-basis: 50%;
+      border-top: 1px dotted var(--dnd5e-color-gold);
+      align-self: center;
+    }
+  }
+
+  &.collapsed label .fa-caret-down { transform: rotate(-90deg); }
+
+  .collapsible-content {
+    overflow: hidden;
+    transition: all 250ms ease;
+  }
+
+  .effects, .targets {
+    display: flex;
+    flex-direction: column;
+
+    .effect, .target {
       display: flex;
+      gap: .5rem;
+      align-items: center;
+      padding-bottom: .25rem;
+      margin-bottom: .25rem;
+      border-bottom: 1px solid var(--color-border-light-1);
+
+      &:last-child {
+        padding: 0;
+        margin: 0;
+        border: none;
+      }
+  
+      > img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .name-stacked { flex: 1; }
+    }
+  }
+
+  .effects .effect {
+    > button {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
       justify-content: center;
-      gap: .25rem;
-      font-size: var(--font-size-11);
+      padding: 0 0 0 4px;
+      font-size: var(--font-size-12);
+    }
+  }
 
-      > span { flex: none; }
-      .fa-bolt { color: var(--color-text-light-6); }
-      .fa-caret-down { transition: all 250ms ease; }
+  .targets .target {
+    flex-wrap: wrap;
 
-      &::before, &::after {
-        content: "";
-        flex-basis: 50%;
-        border-top: 1px dotted var(--dnd5e-color-gold);
-        align-self: center;
-      }
+    .calculated-damage {
+      padding-inline-end: 4px;
+      font-size: var(--font-size-14);
+      font-weight: bold;
     }
 
-    &.collapsed label .fa-caret-down { transform: rotate(-90deg); }
+    .damage-multipliers {
+      flex: 1 0 100%;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+      font-size: var(--font-size-10);
 
-    .effects {
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transition: all 250ms ease;
+      li {
+        border: 1px solid var(--color-border-light-2);
+        border-radius: 3px;
+        background: var(--dnd5e-background-card);
+        box-shadow: 0 0 8px var(--dnd5e-shadow-15);
+      }
 
-      .effect {
+      label {
         display: flex;
-        gap: .5rem;
         align-items: center;
-        padding-bottom: .25rem;
-        margin-bottom: .25rem;
-        border-bottom: 1px solid var(--color-border-light-1);
+        justify-content: center;
+        gap: 4px;
+        padding: 3px;
+      }
+      span::before {
+        content: "\f00d";
+        padding-inline-end: 2px;
+        color: var(--dnd5e-color-tan);
+        font-family: var(--font-awesome);
+        font-weight: 900;
+      }
+      input {
+        appearance: none;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 10px;
+        background-color: var(--dnd5e-color-faint);
 
-        &:last-child {
-          padding: 0;
-          margin: 0;
-          border: none;
-        }
-
-        > img {
-          width: 32px;
-          height: 32px;
-        }
-
-        .name-stacked { flex: 1; }
-
-        > button {
-          width: 28px;
-          height: 28px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0 0 0 4px;
-          font-size: var(--font-size-12);
+        &:checked {
+          background-color: var(--dnd5e-color-crimson);
         }
       }
     }
+  }
+
+  .targets + button {
+    width: calc(100% - 1px);
+    margin-block-start: 6px;
   }
 }
 

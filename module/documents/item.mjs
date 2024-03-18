@@ -2161,7 +2161,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     event.preventDefault();
     const header = event.currentTarget;
-    const card = header.closest(".chat-card");
+    const card = header.closest(".message-content");
     const content = card.querySelector(".card-content:not(.details)");
     if ( content ) content.style.display = content.style.display === "none" ? "block" : "none";
     if ( header.classList.contains("collapsible") ) {

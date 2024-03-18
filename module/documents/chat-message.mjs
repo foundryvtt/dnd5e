@@ -60,11 +60,11 @@ export default class ChatMessage5e extends ChatMessage {
     else requestAnimationFrame(() => {
       html.find(".description.collapsible .details").each((i, el) => el.style.height = `${el.scrollHeight}px`);
     });
-    html.find(".effects-tray").each((i, el) => {
+    this._enrichChatCard(html[0]);
+    html.find(".card-tray, .effects-tray").each((i, el) => {
       el.classList.add("collapsed");
       el.querySelector(".collapsible-content").style.height = "0";
     });
-    this._enrichChatCard(html[0]);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -367,6 +367,15 @@ export default class ChatMessage5e extends ChatMessage {
       </div>
     `;
     html.querySelector(".message-content").appendChild(roll);
+
+    const damageApplication = document.createElement("damage-application");
+    damageApplication.classList.add("dnd5e2");
+    damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
+      value: roll.total,
+      type: roll.options.type,
+      properties: new Set(roll.options.properties ?? [])
+    }));
+    html.querySelector(".message-content").appendChild(damageApplication);
   }
 
   /* -------------------------------------------- */
