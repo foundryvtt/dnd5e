@@ -38,6 +38,34 @@ export default class DamageApplicationElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * Currently registered hook for monitoring for changes to selected tokens.
+   * @type {number|null}
+   */
+  selectedTokensHook = null;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Currently target selection mode.
+   * @type {"targeted"|"selected"}
+   */
+  get targetingMode() {
+    if ( !game.user.isGM ) return "targeted";
+    return this.querySelector('.target-source-control [aria-pressed="true"]')?.dataset.mode ?? "targeted";
+  }
+
+  set targetingMode(mode) {
+    const toPress = this.querySelector(`.target-source-control [data-mode="${mode}"]`);
+    if ( toPress?.ariaPressed === "true" ) return;
+    const currentlyPressed = this.querySelector('.target-source-control [aria-pressed="true"]');
+    if ( currentlyPressed ) currentlyPressed.ariaPressed = false;
+    toPress.ariaPressed = true;
+    this.buildTargetsList();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The list of application targets.
    * @type {HTMLUListElement}
    */
@@ -82,10 +110,17 @@ export default class DamageApplicationElement extends HTMLElement {
           <i class="fa-solid fa-caret-down"></i>
         </label>
         <div class="collapsible-content">
-          <!-- TODO: For GM users, add switch between Targeted & Selected tokens -->
+          <div class="target-source-control">
+            <button type="button" class="unbutton" data-mode="targeted" aria-pressed="true">
+              <i class="fa-solid fa-bullseye" inert></i> ${game.i18n.localize("DND5E.Tokens.Targeted")}
+            </button>
+            <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
+              <i class="fa-solid fa-expand inert"></i> ${game.i18n.localize("DND5E.Tokens.Selected")}
+            </button>
+          </div>
           <ul class="targets unlist"></ul>
           <button class="apply-damage" type="button" data-action="applyDamage">
-            <i class="fa-solid fa-reply-all fa-flip-horizontal"></i>
+            <i class="fa-solid fa-reply-all fa-flip-horizontal inert"></i>
             ${game.i18n.localize("DND5E.Apply")}
           </button>
         </div>
@@ -94,17 +129,49 @@ export default class DamageApplicationElement extends HTMLElement {
       this.applyButton = div.querySelector(".apply-damage");
       this.applyButton.addEventListener("click", this._onApplyDamage.bind(this));
       this.targetList = div.querySelector(".targets");
+      div.querySelectorAll(".target-source-control button").forEach(b =>
+        b.addEventListener("click", this._onChangeTargetMode.bind(this))
+      );
       div.querySelector(".collapsible-content").addEventListener("click", event => {
         event.stopImmediatePropagation();
       });
     }
 
-    // TODO: Fetch list of targeted tokens
-    const targetedTokens = ["Scene.N0f8tURZUeuPKHH2.Token.tZwBXZDPpYHSwnEv.Actor.KO931H2sXBlaABzx"];
-    for ( const uuid of targetedTokens ) {
-      const entry = await this.buildTargetListEntry(uuid);
-      if ( entry ) this.targetList.append(entry);
+    this.buildTargetsList();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Build a list of targeted tokens based on current mode & replace any existing targets.
+   */
+  async buildTargetsList() {
+    // Ensure collapsible section automatically resizes when content changes
+    const collapsible = this.querySelector(".collapsible-content");
+    if ( collapsible.style.height !== "0px" ) collapsible.style.height = "auto";
+
+    let targetedTokens;
+    switch ( this.targetingMode ) {
+      case "targeted":
+        targetedTokens = (this.chatMessage.getFlag("dnd5e", "targets") ?? []).map(t => t.uuid);
+        if ( this.selectedTokensHook ) {
+          Hooks.off("controlToken", this.selectedTokensHook);
+          this.selectedTokensHook = null;
+        }
+        break;
+      case "selected":
+        targetedTokens = canvas.tokens.controlled.map(t => t.document.actor.uuid);
+        this.selectedTokensHook ??= Hooks.on("controlToken", foundry.utils.debounce(() => this.buildTargetsList(), 50));
+        break;
     }
+    const targets = await Promise.all(targetedTokens.map(t => this.buildTargetListEntry(t)));
+    this.targetList.replaceChildren(...targets.filter(e => e));
+
+    // Reset collapsible height to allow for animation
+    requestAnimationFrame(() => {
+      const height = collapsible.getBoundingClientRect().height;
+      collapsible.style.height = `${height}px`;
+    });
   }
 
   /* -------------------------------------------- */
@@ -141,16 +208,15 @@ export default class DamageApplicationElement extends HTMLElement {
     for ( const [value, display] of MULTIPLIERS ) {
       const entry = document.createElement("li");
       entry.innerHTML = `
-        <label>
+        <button class="multiplier-button" type="button" value="${value}">
           <span>${display}</span>
-          <input type="radio" name="multiplier/${this.chatMessage.id}/${uuid}" value="${value}"
-                 ${value === targetOptions.multiplier ? " checked" : ""}>
-        </label>
+        </button>
       `;
       menu.append(entry);
     }
 
-    li.addEventListener("change", this._onChangeOptions.bind(this));
+    this.refreshListEntry(token, li, targetOptions);
+    li.addEventListener("click", this._onChangeOptions.bind(this));
 
     return li;
   }
@@ -176,16 +242,20 @@ export default class DamageApplicationElement extends HTMLElement {
 
   /**
    * Refresh the damage total on a list entry based on modified options.
-   * @param {string} uuid
+   * @param {Actor5e} token
+   * @param {HTMLLiElement} entry
    * @param {DamageApplicationOptions} options
    */
-  async refreshListEntry(uuid, options) {
-    const entry = this.targetList.querySelector(`[data-target-uuid="${uuid}"]`);
-    const token = await fromUuid(uuid);
-    if ( !token || !entry ) return;
-
+  refreshListEntry(token, entry, options) {
     const { total } = this.calculateDamage(token, options);
     entry.querySelector(".calculated-damage").innerText = total;
+
+    const pressedMultiplier = entry.querySelector('.multiplier-button[aria-pressed="true"]');
+    if ( Number(pressedMultiplier?.dataset.multiplier) !== options.multiplier ) {
+      if ( pressedMultiplier ) pressedMultiplier.ariaPressed = false;
+      const toPress = entry.querySelector(`[value="${options.multiplier}"]`);
+      if ( toPress ) toPress.ariaPressed = true;
+    }
   }
 
   /* -------------------------------------------- */
@@ -212,20 +282,34 @@ export default class DamageApplicationElement extends HTMLElement {
    * Handle clicking a multiplier button or resistance toggle.
    * @param {PointerEvent} event  Triggering click event.
    */
-  _onChangeOptions(event) {
+  async _onChangeOptions(event) {
     event.preventDefault();
+    const button = event.target.closest("button");
     const uuid = event.target.closest("[data-target-uuid]")?.dataset.targetUuid;
-    if ( !uuid ) return;
+    if ( !uuid || !button ) return;
 
     const options = this.targetOptions(uuid);
 
     // Set multiplier
-    if ( event.target.name.startsWith("multiplier") ) {
-      options.multiplier = Number(event.target.value);
+    if ( button.classList.contains("multiplier-button") ) {
+      options.multiplier = Number(button.value);
     }
 
     // TODO: Set imm/res/vul ignore & downgrade
 
-    this.refreshListEntry(uuid, options);
+    const token = await fromUuid(uuid);
+    const entry = this.targetList.querySelector(`[data-target-uuid="${token.uuid}"]`);
+    this.refreshListEntry(token, entry, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicking on the target mode buttons.
+   * @param {PointerEvent} event  Triggering click event.
+   */
+  async _onChangeTargetMode(event) {
+    event.preventDefault();
+    this.targetingMode = event.currentTarget.dataset.mode;
   }
 }

@@ -443,6 +443,22 @@
     transition: all 250ms ease;
   }
 
+  .target-source-control {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 4px;
+    margin-block-start: 1px;
+
+    button {
+      width: unset;
+      font-size: var(--font-size-10);
+      &:hover, &:focus, &[aria-pressed="true"] {
+        box-shadow: none;
+        text-shadow: 0 0 5px var(--color-shadow-highlight);
+      }
+    }
+  }
+
   .effects, .targets {
     display: flex;
     flex-direction: column;
@@ -492,52 +508,50 @@
     }
 
     .damage-multipliers {
-      flex: 1 0 100%;
+      flex: 1 0 calc(100% - 6px);
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: auto repeat(6, 1fr);
       gap: 2px;
-      font-size: var(--font-size-10);
+      margin-inline: 3px;
+      font-size: var(--font-size-11);
 
-      li {
-        border: 1px solid var(--color-border-light-2);
-        border-radius: 3px;
-        background: var(--dnd5e-background-card);
-        box-shadow: 0 0 8px var(--dnd5e-shadow-15);
-      }
-
-      label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-        padding: 3px;
-      }
-      span::before {
+      &::before {
         content: "\f00d";
+        align-self: center;
         padding-inline-end: 2px;
         color: var(--dnd5e-color-tan);
         font-family: var(--font-awesome);
         font-weight: 900;
       }
-      input {
-        appearance: none;
-        top: 0;
-        margin: 0;
-        padding: 0;
-        width: 8px;
-        height: 8px;
-        border-radius: 10px;
-        background-color: var(--dnd5e-color-faint);
+      
+      button {
+        width: 100%;
+        border-radius: 3px;
+        padding: 2px;
+        font-size: inherit;
+        line-height: unset;
+        cursor: pointer;
 
-        &:checked {
-          background-color: var(--dnd5e-color-crimson);
+        &::after {
+          content: "";
+          display: block;
+          width: 8px;
+          height: 8px;
+          border-radius: 8px;
+          background-color: var(--dnd5e-color-faint);
+        }
+
+        &[aria-pressed="true"] {
+          border-color: var(--dnd5e-color-crimson);
+          &::after { background-color: var(--dnd5e-color-crimson); }
         }
       }
     }
   }
 
   .targets + button {
-    width: calc(100% - 1px);
+    margin: 3px;
+    width: calc(100% - 6px);
     margin-block-start: 6px;
   }
 }

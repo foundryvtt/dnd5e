@@ -60,11 +60,12 @@ export default class ChatMessage5e extends ChatMessage {
     else requestAnimationFrame(() => {
       html.find(".description.collapsible .details").each((i, el) => el.style.height = `${el.scrollHeight}px`);
     });
+
     this._enrichChatCard(html[0]);
-    html.find(".card-tray, .effects-tray").each((i, el) => {
+    requestAnimationFrame(() => html.find(".card-tray, .effects-tray").each((i, el) => {
       el.classList.add("collapsed");
       el.querySelector(".collapsible-content").style.height = "0";
-    });
+    }));
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
