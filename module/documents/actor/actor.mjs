@@ -858,15 +858,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Options for damage application.
    *
    * @typedef {object} DamageApplicationOptions
-   * @property {number} [multiplier=1]    Amount by which to multiply all damage.
-   * @property {object|boolean} [ignore]  Set to `true` to ignore all damage modifiers. If set to an object, then
-   *                                      values can either be `true` to indicate that the all modifications of that
-   *                                      type should be ignored, or a set of specific damage types for which it should
-   *                                      be ignored.
+   * @property {number} [multiplier=1]         Amount by which to multiply all damage.
+   * @property {boolean} [invertHealing=true]  Automatically invert healing types to it heals, rather than damages.
+   * @property {object|boolean} [ignore]       Set to `true` to ignore all damage modifiers. If set to an object, then
+   *                                           values can either be `true` to indicate that the all modifications of
+   *                                           that type should be ignored, or a set of specific damage types for which
+   *                                           it should be ignored.
    * @property {boolean|Set<string>} [ignore.immunity]       Should this actor's damage immunity be ignored?
    * @property {boolean|Set<string>} [ignore.resistance]     Should this actor's damage resistance be ignored?
    * @property {boolean|Set<string>} [ignore.vulnerability]  Should this actor's damage vulnerability be ignored?
    * @property {boolean|Set<string>} [ignore.modification]   Should this actor's damage modification be ignored?
+   * @property {"damage"|"healing"} [only]     Apply only damage or healing parts. Untyped rolls will always be applied.
    */
 
   /**
@@ -981,11 +983,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return !config.bypasses?.intersection(properties)?.size;
     };
 
+    const skipped = type => {
+      if ( only === "damage" ) return type in CONFIG.DND5E.healingTypes;
+      if ( only === "healing" ) return type in CONFIG.DND5E.damageTypes;
+      return true;
+    };
+
     const rollData = this.getRollData({deterministic: true});
 
     damages.forEach(d => {
       // Skip damage types with immunity
-      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) {
+      if ( skipped(d.type) || (!ignore("immunity", d.type) && hasEffect("di", d.type, d.properties)) ) {
         d.value = 0;
         return;
       }
@@ -1004,6 +1012,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // Apply type-specific damage vulnerability
       if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
+
+      // Negate healing types
+      if ( (options.invertHealing !== false) && (d.type === "healing") ) damageMultiplier *= -1;
 
       d.value = d.value * damageMultiplier;
     });
