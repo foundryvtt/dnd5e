@@ -22,6 +22,7 @@ const {
  * @property {boolean} isPolymorphed        Is the actor represented by this token transformed?
  * @property {string} originalActor         Original actor before transformation.
  * @property {object} previousActorData     Actor data from before transformation for unlinked tokens.
+ * @property {object} summon                Data for summoned tokens.
  * @property {TokenRingFlagData} tokenRing
  */
 export default class TokenSystemFlags extends foundry.abstract.DataModel {
@@ -33,6 +34,7 @@ export default class TokenSystemFlags extends foundry.abstract.DataModel {
         required: false, initial: undefined, idOnly: true
       }),
       previousActorData: new ObjectField({required: false, initial: undefined}),
+      summon: new ObjectField({required: false, initial: undefined}),
       tokenRing: new SchemaField({
         enabled: new BooleanField({label: "DND5E.TokenRings.Enabled"}),
         colors: new SchemaField({
