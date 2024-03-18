@@ -1491,9 +1491,9 @@
     "Hint": "Disable the summoning prompt when item is used. Players will still be able to summon from the chat card."
   },
   "Warning": {
-    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly a compendium.",
+    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
     "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
-    "NoOwnership": "You do not have ownership of '{actor}' which you must have to summon it.",
+    "NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
     "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
     "Wildcard": "You must have 'Use File Browser' permissions to summon creatures with wildcard artwork."
   }
@@ -1845,6 +1845,10 @@
   "Hint": "Disabling the token ring animations can improve performance."
 },
 "SETTINGS.DND5E": {
+  "ALLOWSUMMONING": {
+    "Name": "Allow Summoning",
+    "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
+  },
   "THEME": {
     "Name": "Theme",
     "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings. Can be overridden on a sheet-by-sheet basis."

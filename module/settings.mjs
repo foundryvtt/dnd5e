@@ -222,6 +222,16 @@ export function registerSystemSettings() {
     }
   });
 
+  // Allow Summoning
+  game.settings.register("dnd5e", "allowSummoning", {
+    name: "SETTINGS.DND5E.ALLOWSUMMONING.Name",
+    hint: "SETTINGS.DND5E.ALLOWSUMMONING.Hint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Metric Unit Weights
   game.settings.register("dnd5e", "metricWeightUnits", {
     name: "SETTINGS.5eMetricN",

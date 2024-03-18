@@ -94,7 +94,7 @@ export class SummonsData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   static get canSummon() {
-    return game.user.can("TOKEN_CREATE");
+    return game.user.can("TOKEN_CREATE") && (game.user.isGM || game.settings.get("dnd5e", "allowSummoning"));
   }
 
   get canSummon() {
