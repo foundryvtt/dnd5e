@@ -1527,7 +1527,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       messageData: {
         "flags.dnd5e": {
-          targets: this._formatAttackTargets(),
+          targets: this.constructor._formatAttackTargets(),
           roll: { type: "attack", itemId: this.id, itemUuid: this.uuid }
         },
         speaker: ChatMessage.getSpeaker({actor: this.actor})
@@ -1578,7 +1578,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {TargetDescriptor5e[]}
    * @protected
    */
-  _formatAttackTargets() {
+  static _formatAttackTargets() {
     const targets = new Map();
     for ( const token of game.user.targets ) {
       const { name, img, system, uuid } = token.actor ?? {};
@@ -1629,7 +1629,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       messageData: {
         "flags.dnd5e": {
-          targets: this._formatAttackTargets(),
+          targets: this.constructor._formatAttackTargets(),
           roll: {type: "damage", itemId: this.id, itemUuid: this.uuid}
         },
         speaker: ChatMessage.getSpeaker({actor: this.actor})

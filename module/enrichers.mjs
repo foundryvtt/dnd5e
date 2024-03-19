@@ -2,6 +2,7 @@ import { formatNumber, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
+import Item5e from "./documents/item.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "");
 
@@ -1017,7 +1018,6 @@ async function rollDamage(event, speaker) {
   const { formula, damageType } = target.dataset;
 
   const title = game.i18n.localize("DND5E.DamageRoll");
-  const messageData = { "flags.dnd5e.roll.type": "damage", speaker };
   const rollConfig = {
     rollConfigs: [{
       parts: [formula],
@@ -1026,7 +1026,13 @@ async function rollDamage(event, speaker) {
     flavor: `${title} (${game.i18n.localize(CONFIG.DND5E.damageTypes[damageType]?.label ?? damageType)})`,
     event,
     title,
-    messageData
+    messageData: {
+      "flags.dnd5e": {
+        targets: Item5e._formatAttackTargets(),
+        roll: {type: "damage"}
+      },
+      speaker
+    }
   };
 
   if ( Hooks.call("dnd5e.preRollDamage", undefined, rollConfig) === false ) return;
