@@ -369,7 +369,7 @@ export default class ChatMessage5e extends ChatMessage {
     `;
     html.querySelector(".message-content").appendChild(roll);
 
-    if ( game.user.isGM || this.getFlag("dnd5e", "targets")?.map(t => fromUuidSync(t.uuid)).some(t => t.isOwner) ) {
+    if ( game.user.isGM ) {
       const damageApplication = document.createElement("damage-application");
       damageApplication.classList.add("dnd5e2");
       damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
