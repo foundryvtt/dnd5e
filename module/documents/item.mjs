@@ -1527,7 +1527,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       messageData: {
         "flags.dnd5e": {
-          targets: this._formatAttackTargets(),
+          targets: this.constructor._formatAttackTargets(),
           roll: { type: "attack", itemId: this.id, itemUuid: this.uuid }
         },
         speaker: ChatMessage.getSpeaker({actor: this.actor})
@@ -1578,7 +1578,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {TargetDescriptor5e[]}
    * @protected
    */
-  _formatAttackTargets() {
+  static _formatAttackTargets() {
     const targets = new Map();
     for ( const token of game.user.targets ) {
       const { name, img, system, uuid } = token.actor ?? {};
@@ -1604,10 +1604,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollDamage({critical, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
-    const messageData = {
-      "flags.dnd5e.roll": {type: "damage", itemId: this.id, itemUuid: this.uuid},
-      speaker: ChatMessage.getSpeaker({actor: this.actor})
-    };
 
     // Get roll data
     const dmg = this.system.damage;
@@ -1631,13 +1627,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         top: event ? event.clientY - 80 : null,
         left: window.innerWidth - 710
       },
-      messageData
+      messageData: {
+        "flags.dnd5e": {
+          targets: this.constructor._formatAttackTargets(),
+          roll: {type: "damage", itemId: this.id, itemUuid: this.uuid}
+        },
+        speaker: ChatMessage.getSpeaker({actor: this.actor})
+      }
     };
 
     // Adjust damage from versatile usage
     if ( versatile && dmg.versatile ) {
       rollConfigs[0].parts[0] = dmg.versatile;
-      messageData["flags.dnd5e.roll"].versatile = true;
+      rollConfig.messageData["flags.dnd5e.roll"].versatile = true;
     }
 
     // Add magical damage if available
@@ -2161,7 +2163,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     event.preventDefault();
     const header = event.currentTarget;
-    const card = header.closest(".chat-card");
+    const card = header.closest(".message-content");
     const content = card.querySelector(".card-content:not(.details)");
     if ( content ) content.style.display = content.style.display === "none" ? "block" : "none";
     if ( header.classList.contains("collapsible") ) {
