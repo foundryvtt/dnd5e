@@ -43,7 +43,7 @@ export default function aggregateDamageRolls(rolls, { respectProperties }={}) {
  * division will keep groups together. These groups also contain information on contained types written in flavor
  * and whether they are negative.
  * @param {RollTerm[]} terms  Terms to chunk.
- * @param {string} type       Type specified in the roll as a whole which will be ignored if used as flavor.
+ * @param {string} type       Type specified in the roll as a whole.
  * @returns {{ terms: RollTerm[], negative: boolean, type: string }[]}
  */
 function chunkTerms(terms, type) {
@@ -51,8 +51,9 @@ function chunkTerms(terms, type) {
     currentChunk.type ??= type;
     chunks.push(currentChunk);
     currentChunk = null;
+    negative = false;
   };
-  const isValidType = t => ((t in CONFIG.DND5E.damageTypes) || (t in CONFIG.DND5E.healingTypes)) && (t !== type);
+  const isValidType = t => ((t in CONFIG.DND5E.damageTypes) || (t in CONFIG.DND5E.healingTypes));
   const chunks = [];
   let currentChunk;
   let negative = false;
@@ -61,7 +62,7 @@ function chunkTerms(terms, type) {
     // Plus or minus operators split chunks
     if ( (term instanceof OperatorTerm) && ["+", "-"].includes(term.operator) ) {
       if ( currentChunk ) pushChunk();
-      negative = term.operator === "-";
+      if ( term.operator === "-" ) negative = !negative;
       continue;
     }
 
