@@ -3285,26 +3285,30 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _displayTokenEffect(changes) {
     let key;
-    let change;
-    if ( !changes.hp && changes.temp ) key = "temp";
-    else {
-      key = "hp";
-      change = changes.total;
+    let value;
+    if ( changes.hp < 0 ) {
+      key = "damage";
+      value = changes.total;
+    } else if ( changes.hp > 0 ) {
+      key = "healing";
+      value = changes.total;
+    } else if ( changes.temp ) {
+      key = "temp";
+      value = changes.temp;
     }
-    if ( !key ) return;
-    change ??= changes[key];
+    if ( !key || !value ) return;
 
     const tokens = this.isToken ? [this.token] : this.getActiveTokens(true, true);
     if ( !tokens.length ) return;
 
-    const pct = Math.clamped(Math.abs(change) / this.system.attributes.hp.max, 0, 1);
-    const fill = CONFIG.DND5E.tokenHPColors[(key === "hp") ? (change < 0 ? "damage" : "healing") : "temp"];
+    const pct = Math.clamped(Math.abs(value) / this.system.attributes.hp.max, 0, 1);
+    const fill = CONFIG.DND5E.tokenHPColors[key];
 
     for ( const token of tokens ) {
-      if ( !token.object.visible || !token.object.renderable ) continue;
-      token.flashRing({ [key]: change });
+      if ( !token.object?.visible || !token.object?.renderable ) continue;
+      token.flashRing(key);
       const t = token.object;
-      canvas.interface.createScrollingText(t.center, change.signedString(), {
+      canvas.interface.createScrollingText(t.center, value.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
         // Adapt the font size relative to the Actor's HP total to emphasize more significant blows
         fontSize: 16 + (32 * pct), // Range between [16, 48]
