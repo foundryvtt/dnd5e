@@ -323,13 +323,13 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _enrichDamageTooltip(rolls, html) {
     if ( !rolls.length ) return;
-    let { formula, total, breakdown } = rolls.reduce((obj, r) => {
+    let { formula, total, breakdown } = aggregateDamageRolls(rolls).reduce((obj, r) => {
       obj.formula.push(r.formula);
       obj.total += r.total;
       this._aggregateDamageRoll(r, obj.breakdown);
       return obj;
     }, { formula: [], total: 0, breakdown: {} });
-    formula = formula.join(" + ");
+    formula = formula.join("").replace(/^ \+ /, "");
     html.querySelectorAll(".dice-roll").forEach(el => el.remove());
     const roll = document.createElement("div");
     roll.classList.add("dice-roll");
@@ -378,13 +378,10 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _aggregateDamageRoll(roll, breakdown) {
-    const isDamageType = t => (t in CONFIG.DND5E.damageTypes) || (t in CONFIG.DND5E.healingTypes);
+    const aggregate = breakdown[roll.options.type] ??= { total: roll.total, constant: 0, dice: [] };
     for ( let i = roll.terms.length - 1; i >= 0; ) {
       const term = roll.terms[i--];
       if ( !(term instanceof NumericTerm) && !(term instanceof DiceTerm) ) continue;
-      const flavor = term.flavor?.toLowerCase();
-      const type = isDamageType(flavor) ? flavor : roll.options.type;
-      const aggregate = breakdown[type] ??= { total: 0, constant: 0, dice: [] };
       const value = term.total;
       if ( term instanceof DiceTerm ) aggregate.dice.push(...term.results.map(r => ({
         result: term.getResultLabel(r), classes: term.getResultCSS(r).filterJoin(" ")
@@ -395,7 +392,6 @@ export default class ChatMessage5e extends ChatMessage {
         if ( operator.operator === "-" ) multiplier *= -1;
         operator = roll.terms[--i];
       }
-      aggregate.total += value * multiplier;
       if ( term instanceof NumericTerm ) aggregate.constant += value * multiplier;
     }
   }

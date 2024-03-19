@@ -70,7 +70,10 @@ function chunkTerms(terms, type) {
     currentChunk ??= { terms: [], negative, type: null };
     currentChunk.terms.push(term);
     const flavor = term.flavor?.toLowerCase().trim();
-    if ( isValidType(flavor) ) currentChunk.type ??= flavor;
+    if ( isValidType(flavor) ) {
+      currentChunk.type ??= flavor;
+      term.options.flavor = "";
+    }
   }
 
   if ( currentChunk ) pushChunk();
