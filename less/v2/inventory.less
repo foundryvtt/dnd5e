@@ -249,6 +249,18 @@
           gap: .25rem;
           --icon-fill: var(--dnd5e-color-black);
         }
+
+        > .concentration {
+          position: absolute;
+          inset: .25rem auto .25rem .25rem;
+          width: 32px;
+          font-size: var(--font-size-24);
+          display: grid;
+          place-content: center;
+          color: var(--dnd5e-color-gold);
+          opacity: .5;
+          @media (prefers-reduced-motion) { animation: none; }
+        }
       }
 
       .item-header {

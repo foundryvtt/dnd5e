@@ -932,14 +932,19 @@
           border-bottom: none;
           border-top: var(--border-style);
 
+          &.concentration {
+            --icon-fill: var(--dnd5e-color-gold);
+            padding-left: 8px;
+            .name { text-align: center; }
+          }
+
+          &.colspan { grid-column: auto / span 2; }
           &:nth-child(1), &:nth-child(2) { border-top: none; }
           &:last-child { border-top: var(--border-style); }
         }
-
       }
 
       .name {
-
         &.abbr {
           font-family: var(--dnd5e-font-roboto);
           text-transform: uppercase;

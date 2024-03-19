@@ -3,6 +3,7 @@ import MovementField from "../../shared/movement-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
+import { simplifyBonus } from "../../../utils.mjs";
 
 /**
  * Shared contents of the attributes schema between various actor types.
@@ -125,6 +126,21 @@ export default class AttributesFields {
     const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
     const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
     this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare concentration data for an Actor.
+   * @this {CharacterData|NPCData}
+   * @param {object} rollData  The Actor's roll data.
+   */
+  static prepareConcentration(rollData) {
+    const { concentration } = this.attributes;
+    const abilityId = concentration.ability;
+    const ability = this.abilities?.[abilityId] || {};
+    const bonus = simplifyBonus(concentration.bonuses.save, rollData);
+    concentration.save = (ability.save ?? 0) + bonus;
   }
 
   /* -------------------------------------------- */

@@ -843,6 +843,9 @@
   .context-item {
     padding: 0 .75rem;
     cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
 
     &:hover {
       color: var(--color-text-dark-primary);
@@ -853,6 +856,12 @@
     i {
       font-size: var(--font-size-11);
       color: var(--color-text-dark-5);
+      margin: 0;
+    }
+
+    dnd5e-icon {
+      --icon-fill: var(--color-text-dark-5);
+      margin-right: 5px;
     }
   }
 
