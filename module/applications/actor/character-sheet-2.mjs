@@ -399,6 +399,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         effect.updateDuration();
         if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
         const { id, name, img, disabled, duration } = effect;
+        const toggleable = !this._concentration?.effects.has(effect);
         let source = await effect.getSource();
         // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
         if ( (source instanceof dnd5e.documents.ActiveEffect5e) && (source.target !== this.object) ) {
@@ -406,7 +407,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         }
         arr = await arr;
         arr.push({
-          id, name, img, disabled, duration, source,
+          id, name, img, disabled, duration, source, toggleable,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
           hasTooltip: source instanceof dnd5e.documents.Item5e
