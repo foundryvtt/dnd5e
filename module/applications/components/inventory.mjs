@@ -258,6 +258,15 @@ export default class InventoryElement extends HTMLElement {
       });
     }
 
+    // Concentration
+    options.push({
+      name: "DND5E.ConcentrationBreak",
+      icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
+      condition: () => this.actor.concentration?.items.has(item),
+      callback: () => this.actor.endConcentration(item),
+      group: "state"
+    });
+
     return options;
   }
 

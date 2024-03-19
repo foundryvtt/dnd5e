@@ -136,6 +136,9 @@
                     {{!-- Item Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
                          data-action="use" aria-label="{{ item.name }}">
+                        {{#if ctx.concentration}}
+                        <i class="concentration fas fa-arrow-rotate-left fa-spin fa-spin-reverse"></i>
+                        {{/if}}
                         <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
                         <div class="name name-stacked">
                             <span class="title">{{ item.name }}</span>
