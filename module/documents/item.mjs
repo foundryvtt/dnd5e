@@ -2158,19 +2158,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @private
    */
   static _onChatCardToggleContent(event) {
-    // If the user is clicking on a link in the collapsible region, don't collapse
-    if ( event.target.closest(":is(.item-name, .collapsible) :is(a, button)") ) return;
-
-    event.preventDefault();
     const header = event.currentTarget;
-    const card = header.closest(".message-content");
-    const content = card.querySelector(".card-content:not(.details)");
-    if ( content ) content.style.display = content.style.display === "none" ? "block" : "none";
     if ( header.classList.contains("collapsible") ) {
+      event.preventDefault();
       header.classList.toggle("collapsed");
-      const collapsed = header.classList.contains("collapsed");
-      const details = header.querySelector(".collapsible-content");
-      details.style.height = collapsed ? "0" : `${details.scrollHeight}px`;
 
       // Clear the height from the chat popout container so that it appropriately resizes.
       const popout = header.closest(".chat-popout");

@@ -156,12 +156,17 @@
     }
   }
 
+  .dice-tooltip-collapser {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 250ms ease;
+  }
+
   .dice-tooltip {
     flex: auto;
     order: unset;
     display: block;
     overflow: hidden;
-    transition: all 250ms ease;
 
     .tooltip-part {
       border-bottom: 1px solid var(--color-border-light-1);
@@ -250,7 +255,10 @@
 
 .dice-roll {
   cursor: pointer;
-  &.expanded .dice-total::after { transform: rotate(-90deg); }
+  &.expanded {
+    .dice-total::after { transform: rotate(-90deg); }
+    .dice-tooltip-collapser { grid-template-rows: 1fr; }
+  }
 
   &.secret-roll {
     cursor: initial;
@@ -356,11 +364,17 @@
     .details {
       font-family: var(--dnd5e-font-roboto);
       font-size: var(--font-size-11);
-      display: flex;
-      flex-direction: column;
-      gap: .25rem;
       padding: 0;
+      display: grid;
+      grid-template-rows: 1fr;
       transition: all 250ms ease;
+
+      > .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+        overflow: hidden;
+      }
 
       p {
         margin: 0;
@@ -381,7 +395,10 @@
     &.collapsible .summary { cursor: pointer; }
     &.collapsed {
       .summary > i { transform: rotate(-90deg); }
-      .details { opacity: 0; }
+      .details {
+        grid-template-rows: 0fr;
+        opacity: 0;
+      }
     }
   }
 
@@ -414,7 +431,7 @@
 /* Damage & Effects Trays */
 .dnd5e2 :is(.card-tray, .effects-tray) {
   margin-top: .125rem;
-  &:has(> ul:empty) { display: none; }
+  &:has(.effects:empty) { display: none; }
   &.damage-tray { margin-block-start: 8px; }
 
   > label {
@@ -436,11 +453,16 @@
     }
   }
 
-  &.collapsed label .fa-caret-down { transform: rotate(-90deg); }
+  &.collapsed {
+    label .fa-caret-down { transform: rotate(-90deg); }
+    .collapsible-content { grid-template-rows: 0fr; }
+  }
 
   .collapsible-content {
-    overflow: hidden;
-    transition: all 250ms ease;
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 250ms ease;
+    > .wrapper { overflow: hidden; }
   }
 
   .target-source-control {
@@ -476,7 +498,7 @@
         margin: 0;
         border: none;
       }
-  
+
       > img {
         width: 32px;
         height: 32px;
@@ -527,7 +549,7 @@
         font-family: var(--font-awesome);
         font-weight: 900;
       }
-      
+
       button {
         width: 100%;
         border-radius: 3px;

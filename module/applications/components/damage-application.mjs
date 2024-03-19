@@ -117,7 +117,7 @@ export default class DamageApplicationElement extends HTMLElement {
     // Build the frame HTML only once
     if ( !this.targetList ) {
       const div = document.createElement("div");
-      div.classList.add("card-tray", "damage-tray", "collapsible");
+      div.classList.add("card-tray", "damage-tray", "collapsible", "collapsed");
       div.innerHTML = `
         <label class="roboto-upper">
           <i class="fa-solid fa-heart-crack"></i>
@@ -125,19 +125,21 @@ export default class DamageApplicationElement extends HTMLElement {
           <i class="fa-solid fa-caret-down"></i>
         </label>
         <div class="collapsible-content">
-          <div class="target-source-control">
-            <button type="button" class="unbutton" data-mode="targeted" aria-pressed="false">
-              <i class="fa-solid fa-bullseye" inert></i> ${game.i18n.localize("DND5E.Tokens.Targeted")}
-            </button>
-            <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
-              <i class="fa-solid fa-expand inert"></i> ${game.i18n.localize("DND5E.Tokens.Selected")}
+          <div class="wrapper">
+            <div class="target-source-control">
+              <button type="button" class="unbutton" data-mode="targeted" aria-pressed="false">
+                <i class="fa-solid fa-bullseye" inert></i> ${game.i18n.localize("DND5E.Tokens.Targeted")}
+              </button>
+              <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
+                <i class="fa-solid fa-expand inert"></i> ${game.i18n.localize("DND5E.Tokens.Selected")}
+              </button>
+            </div>
+            <ul class="targets unlist"></ul>
+            <button class="apply-damage" type="button" data-action="applyDamage">
+              <i class="fa-solid fa-reply-all fa-flip-horizontal inert"></i>
+              ${game.i18n.localize("DND5E.Apply")}
             </button>
           </div>
-          <ul class="targets unlist"></ul>
-          <button class="apply-damage" type="button" data-action="applyDamage">
-            <i class="fa-solid fa-reply-all fa-flip-horizontal inert"></i>
-            ${game.i18n.localize("DND5E.Apply")}
-          </button>
         </div>
       `;
       this.replaceChildren(div);
@@ -163,10 +165,6 @@ export default class DamageApplicationElement extends HTMLElement {
    * Build a list of targeted tokens based on current mode & replace any existing targets.
    */
   buildTargetsList() {
-    // Ensure collapsible section automatically resizes when content changes
-    const collapsible = this.querySelector(".collapsible-content");
-    if ( collapsible.style.height !== "0px" ) collapsible.style.height = "auto";
-
     let targetedTokens;
     switch ( this.targetingMode ) {
       case "targeted":
@@ -185,12 +183,6 @@ export default class DamageApplicationElement extends HTMLElement {
       li.innerText = game.i18n.localize(`DND5E.Tokens.None${this.targetingMode.capitalize()}`);
       this.targetList.replaceChildren(li);
     }
-
-    // Reset collapsible height to allow for animation
-    requestAnimationFrame(() => {
-      const height = collapsible.getBoundingClientRect().height;
-      collapsible.style.height = `${height}px`;
-    });
   }
 
   /* -------------------------------------------- */

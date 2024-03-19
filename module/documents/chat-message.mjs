@@ -50,22 +50,11 @@ export default class ChatMessage5e extends ChatMessage {
     this._displayChatActionButtons(html);
     this._highlightCriticalSuccessFailure(html);
     if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
-      // First selector ensures legacy chat cards continue to collapse properly
-      html.find(".card-content:not(.details)").hide();
-      html.find(".description.collapsible").each((i, el) => {
-        el.classList.add("collapsed");
-        el.querySelector(".details").style.height = "0";
-      });
+      html.find(".description.collapsible").each((i, el) => el.classList.add("collapsed"));
     }
-    else requestAnimationFrame(() => {
-      html.find(".description.collapsible .details").each((i, el) => el.style.height = `${el.scrollHeight}px`);
-    });
 
     this._enrichChatCard(html[0]);
-    requestAnimationFrame(() => html.find(".card-tray, .effects-tray").each((i, el) => {
-      el.classList.add("collapsed");
-      el.querySelector(".collapsible-content").style.height = "0";
-    }));
+    requestAnimationFrame(() => html.find(".card-tray, .effects-tray").each((i, el) => el.classList.add("collapsed")));
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -252,7 +241,6 @@ export default class ChatMessage5e extends ChatMessage {
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
     }
-    html.querySelectorAll(".dice-tooltip").forEach(el => el.style.height = "0");
   }
 
   /* -------------------------------------------- */
@@ -361,8 +349,10 @@ export default class ChatMessage5e extends ChatMessage {
     roll.innerHTML = `
       <div class="dice-result">
         <div class="dice-formula">${formula}</div>
-        <div class="dice-tooltip">
-          ${tooltipContents}
+        <div class="dice-tooltip-collapser">
+          <div class="dice-tooltip">
+            ${tooltipContents}
+          </div>
         </div>
         <h4 class="dice-total">${total}</h4>
       </div>
@@ -504,9 +494,6 @@ export default class ChatMessage5e extends ChatMessage {
     event.stopPropagation();
     const target = event.currentTarget;
     target.classList.toggle("expanded");
-    const expanded = target.classList.contains("expanded");
-    const tooltip = target.querySelector(".dice-tooltip");
-    tooltip.style.height = expanded ? `${tooltip.scrollHeight}px` : "0";
   }
 
   /* -------------------------------------------- */
@@ -533,9 +520,6 @@ export default class ChatMessage5e extends ChatMessage {
   static onRenderChatLog([html]) {
     if ( !game.settings.get("dnd5e", "autoCollapseItemCards") ) {
       requestAnimationFrame(() => {
-        html.querySelectorAll(".description.collapsible .details").forEach(el => {
-          el.style.height = `${el.scrollHeight}px`;
-        });
         // FIXME: Allow time for transitions to complete. Adding a transitionend listener does not appear to work, so
         // the transition time is hard-coded for now.
         setTimeout(() => ui.chat.scrollBottom(), 250);
