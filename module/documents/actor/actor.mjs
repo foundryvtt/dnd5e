@@ -3228,8 +3228,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       };
       changes.total = changes.hp + changes.temp;
 
-
-      if ( Number.isInteger(changes.total) && parseInt(changes.total) !== 0 ) {
+      if ( Number.isInteger(changes.total) && (changes.total !== 0) ) {
         this._displayTokenEffect(changes);
 
         /**
@@ -3237,10 +3236,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
          * of the hook will depend on the change in hit points.
          * @function dnd5e.damageActor
          * @memberof hookEvents
-         * @param {Actor5e} actor     The actor that had their hit points reduced.
-         * @param {number} changes    The changes to hit points.
-         * @param {object} update     The triggering updated performed.
-         * @param {string} userId     Id of the user that performed the update.
+         * @param {Actor5e} actor                                       The actor that had their hit points reduced.
+         * @param {{hp: number, temp: number, total: number}} changes   The changes to hit points.
+         * @param {object} update                                       The original update delta.
+         * @param {string} userId                                       Id of the user that performed the update.
          */
         Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this, changes, data, userId);
       }
@@ -3287,7 +3286,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _displayTokenEffect(changes) {
     let key;
     let change;
-    if ( !parseInt(changes.hp) && parseInt(changes.temp) ) key = "temp";
+    if ( !changes.hp && changes.temp ) key = "temp";
     else {
       key = "hp";
       change = changes.total;
