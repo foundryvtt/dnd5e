@@ -292,7 +292,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       ability.mod = Math.abs(ability.save);
     }
 
-    if ( this._concentration.effects.size || context.editable ) {
+    if ( this.actor.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) || context.editable ) {
       context.saves.concentration = {
         isConcentration: true,
         class: "colspan concentration",
