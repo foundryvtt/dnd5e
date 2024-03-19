@@ -1,6 +1,7 @@
 import { SummonsData } from "../data/item/fields/summons-field.mjs";
-import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
+import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
 import DamageRoll from "../dice/damage-roll.mjs";
+import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
@@ -460,7 +461,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Promise}
    */
   applyChatCardDamage(li, multiplier) {
-    const damages = this.rolls.map(roll => ({
+    const damages = aggregateDamageRolls(this.rolls, { respectProperties: true }).map(roll => ({
       value: roll.total,
       type: roll.options.type,
       properties: new Set(roll.options.properties ?? [])
