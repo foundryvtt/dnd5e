@@ -858,9 +858,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Options for damage application.
    *
    * @typedef {object} DamageApplicationOptions
-   * @property {boolean|Set<string>} [downgrade]  Should this actor's damage immunity be downgraded to resistance?
-   *                                              A set of damage types to be downgraded or `true` to downgrade all
-   *                                              damage types.
+   * @property {boolean|Set<string>} [downgrade]  Should this actor's resistances and immunities be downgraded by one
+   *                                              step? A set of damage types to be downgraded or `true` to downgrade
+   *                                              all damage types.
    * @property {number} [multiplier=1]         Amount by which to multiply all damage.
    * @property {object|boolean} [ignore]       Set to `true` to ignore all damage modifiers. If set to an object, then
    *                                           values can either be `true` to indicate that the all modifications of
@@ -974,11 +974,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
     const ignore = (category, type, skipDowngrade) => {
-      if ( !skipDowngrade && (options.ignore !== true) && (category === "resistance") && downgrade(type) ) return false;
       return options.ignore === true
         || options.ignore?.[category] === true
         || options.ignore?.[category]?.has?.(type)
-        || (!skipDowngrade && (category === "immunity") && downgrade(type));
+        || ((category === "immunity") && downgrade(type) && !skipDowngrade)
+        || ((category === "resistance") && downgrade(type) && !hasEffect("di", type));
     };
 
     const traits = this.system.traits ?? {};
