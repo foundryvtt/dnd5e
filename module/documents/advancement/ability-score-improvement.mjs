@@ -170,6 +170,8 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       }
     }
 
+    delete data.featUuid;
+    delete data.retainedItems;
     this.updateSource({value: data});
   }
 
