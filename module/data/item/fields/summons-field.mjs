@@ -358,13 +358,12 @@ export class SummonsData extends foundry.abstract.DataModel {
 
   /**
    * Determine where the summons should be placed on the scene.
-   * @param {TokenDocument5e} token   Token to be placed.
+   * @param {PrototypeToken} token    Token to be placed.
    * @param {SummonsProfile} profile  Profile used for summoning.
    * @returns {Promise<PlacementData[]>}
    */
   getPlacement(token, profile) {
-    const placement = new TokenPlacement({ tokens: [token] });
-    return placement.place();
+    return TokenPlacement.place({ tokens: [token] });
   }
 
   /* -------------------------------------------- */
