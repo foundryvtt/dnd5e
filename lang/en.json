@@ -578,6 +578,16 @@
 "DND5E.Damage": "Damage",
 "DND5E.DamageAcid": "Acid",
 "DND5E.DamageAll": "All Damage",
+"DND5E.DamageApplication": {
+  "Change": {
+    "Modification": "{type} Modification",
+    "Immunity": "{type} Immunity",
+    "Resistance": "{type} Resistance",
+    "Vulnerability": "{type} Vulnerability"
+  },
+  "Downgrading": "Downgrading {source} to Resistance",
+  "Ignoring": "Ignoring {source}"
+},
 "DND5E.DamageBludgeoning": "Bludgeoning",
 "DND5E.DamageCold": "Cold",
 "DND5E.DamageFire": "Fire",

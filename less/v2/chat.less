@@ -527,6 +527,25 @@
   .targets .target {
     flex-wrap: wrap;
 
+    .change-source {
+      width: 16px;
+      padding: 2px;
+      border-radius: 4px;
+      display: grid;
+      grid-template-areas: "overlay";
+      font-size: inherit;
+      > * { grid-area: overlay; }
+      > dnd5e-icon { display: block; }
+      > i { color: red; }
+      &:not([aria-pressed="true"]) .fa-slash { display: none; }
+      &:not([aria-pressed="mixed"]) .fa-arrow-turn-down { display: none; }
+      .fa-arrow-turn-down {
+        position: relative;
+        left: 8px;
+        top: -1px;
+      }
+    }
+
     .calculated-damage {
       padding-inline-end: 4px;
       font-size: var(--font-size-14);
