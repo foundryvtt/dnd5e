@@ -359,16 +359,15 @@ export default class ChatMessage5e extends ChatMessage {
     `;
     html.querySelector(".message-content").appendChild(roll);
 
-    if ( game.user.isGM ) {
-      const damageApplication = document.createElement("damage-application");
-      damageApplication.classList.add("dnd5e2");
-      damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
-        value: roll.total,
-        type: roll.options.type,
-        properties: new Set(roll.options.properties ?? [])
-      }));
-      html.querySelector(".message-content").appendChild(damageApplication);
-    }
+    const damageApplication = document.createElement("damage-application");
+    damageApplication.classList.add("dnd5e2");
+    if ( !game.user.isGM ) damageApplication.classList.add("hidden");
+    damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
+      value: roll.total,
+      type: roll.options.type,
+      properties: new Set(roll.options.properties ?? [])
+    }));
+    html.querySelector(".message-content").appendChild(damageApplication);
   }
 
   /* -------------------------------------------- */
