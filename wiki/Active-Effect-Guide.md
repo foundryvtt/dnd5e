@@ -452,12 +452,13 @@ system.scale.[classIdentifier].[scaleIdentifier]
                                                 .number
                                                 .die
                                                 .faces
+                                                .modifiers
 ```
 
 > <details>
 > <summary>Dice Scale Values</summary>
 >
-> The Dice Scale Values have a few unique keys, here is an example of the result for these keys based on a scale value that is 3d8
+> The Dice Scale Values have a few unique keys, here is an example of the result for these keys based on a scale value that is 3d8. If the dice scale value has any dice modifiers attached (via `.modifiers`, see below), you can use `.denom` to retrieve the die denomination without modifiers attached if desired.
 >
 > | Key                                                 | Value |
 > | --------------------------------------------------- | ----- |
@@ -465,22 +466,30 @@ system.scale.[classIdentifier].[scaleIdentifier]
 > | `@scale.[classIdentifier].[scaleIdentifier].number` | 3     |
 > | `@scale.[classIdentifier].[scaleIdentifier].die`    | d8    |
 > | `@scale.[classIdentifier].[scaleIdentifier].faces`  | 8     |
+> | `@scale.[classIdentifier].[scaleIdentifier].denom`  | d8    |
 > </details>
 
 ### Increase the value of a Scale Value
-E.g. An Item or Spell which allows additional use(s) of a Class Feature (e.g. adds an additional use of a Barbarian's Rage).
+E.g., an Item or Spell which allows additional use(s) of a Class Feature (e.g. adds an additional use of a Barbarian's Rage).
 
 | Attribute Key                        | Change Mode | Effect Value | Roll Data? |
 | ------------------------------------ | ----------- | ------------ | ---------- |
 | `system.scale.barbarian.rages.value` | Add         | `[number]`   | No         |
 
 ### Increase the number of die of a Dice Scale Value
-E.g. An Item or Spell which increases the number of die in a Dice Scale Value (e.g. adds a die to a Rogue's Sneak Attack), and increases the size of the dice.
+E.g., an Item or Spell which increases the number of die in a Dice Scale Value (e.g. adds a die to a Rogue's Sneak Attack), and increases the size of the dice.
 
 | Attribute Key                            | Change Mode | Effect Value | Roll Data? |
 | ---------------------------------------- | ----------- | ------------ | ---------- |
 | `system.scale.rogue.sneak-attack.number` | Add         | `[number]`   | No         |
 | `system.scale.rogue.sneak-attack.faces`  | Add         | `[number]`   | No         |
+
+### Add a dice modifier to a Dice Scale Value
+E.g., making Sneak Attack reroll 1s by using the Effect Value `r=1`. For details on dice modifiers, see [Dice Modifiers](https://foundryvtt.com/article/dice-modifiers/).
+
+| Attribute Key                               | Change Mode | Effect Value | Roll Data? |
+| ------------------------------------------- | ----------- | ------------ | ---------- |
+| `system.scale.rogue.sneak-attack.modifiers` | Add         | `[text]`     | No         |
 
 ---
 
