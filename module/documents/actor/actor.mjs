@@ -852,6 +852,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {number} value            Amount of damage.
    * @property {string} type             Type of damage.
    * @property {Set<string>} properties  Physical properties that affect damage application.
+   * @property {object} [active]
+   * @property {number} [active.multiplier]      Final calculated multiplier.
+   * @property {boolean} [active.modifications]  Did modification affect this description?
+   * @property {boolean} [active.resistance]     Did resistance affect this description?
+   * @property {boolean} [active.vulnerability]  Did vulnerability affect this description?
+   * @property {boolean} [active.immunity]       Did immunity affect this description?
    */
 
   /**
@@ -1003,28 +1009,38 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Skip damage types with immunity
       if ( skipped(d.type) || (!ignore("immunity", d.type) && hasEffect("di", d.type, d.properties)) ) {
         d.value = 0;
+        d.active = { multiplier: 0, immunity: true };
         return;
       }
+      d.active = {};
 
       // Apply type-specific damage reduction
       if ( !ignore("modification", d.type) && traits.dm?.amount[d.type] ) {
         const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
         if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
         else d.value += modification;
+        d.active.modification = true;
       }
 
       let damageMultiplier = multiplier;
 
       // Apply type-specific damage resistance
-      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) damageMultiplier /= 2;
+      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) {
+        damageMultiplier /= 2;
+        d.active.resistance = true;
+      }
 
       // Apply type-specific damage vulnerability
-      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
+      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) {
+        damageMultiplier *= 2;
+        d.active.vulnerability = true;
+      }
 
       // Negate healing types
       if ( (options.invertHealing !== false) && (d.type === "healing") ) damageMultiplier *= -1;
 
       d.value = d.value * damageMultiplier;
+      d.active.multiplier = damageMultiplier;
     });
 
     /**
