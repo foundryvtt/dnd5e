@@ -1398,11 +1398,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Create the ChatMessage data object
     const chatData = {
       user: game.user.id,
-      type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
       speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
       flags: {"core.canPopout": true}
     };
+    // TODO: Remove when v11 support is dropped.
+    if ( game.release.generation < 12 ) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
 
     // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message
     if ( (this.type === "consumable") && !this.actor.items.has(this.id) ) {
@@ -2160,7 +2161,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   static _onChatCardToggleContent(event) {
     const header = event.currentTarget;
-    if ( header.classList.contains("collapsible") ) {
+    if ( header.classList.contains("collapsible") && !event.target.closest(".collapsible-content.card-content") ) {
       event.preventDefault();
       header.classList.toggle("collapsed");
 

@@ -992,7 +992,6 @@ async function rollAction(event) {
     const MessageClass = getDocumentClass("ChatMessage");
     const chatData = {
       user: game.user.id,
-      type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
         buttonLabel: createRollLabel({ ...target.dataset, format: "short", icon: true }),
         hiddenLabel: createRollLabel({ ...target.dataset, format: "short", icon: true, hideDC: true }),
@@ -1001,6 +1000,8 @@ async function rollAction(event) {
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})
     };
+    // TODO: Remove when v11 support is dropped.
+    if ( game.release.generation < 12 ) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
     return MessageClass.create(chatData);
   }
 }
