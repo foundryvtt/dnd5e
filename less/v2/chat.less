@@ -516,7 +516,12 @@
       > dnd5e-icon { display: block; }
       > i { color: red; }
       &:not([aria-pressed="true"]) .fa-slash { display: none; }
-      &:not([aria-pressed="mixed"]) .fa-chevron-down { display: none; }
+      &:not([aria-pressed="mixed"]) .fa-arrow-turn-down { display: none; }
+      .fa-arrow-turn-down {
+        position: relative;
+        left: 8px;
+        top: -1px;
+      }
     }
 
     .calculated-damage {
