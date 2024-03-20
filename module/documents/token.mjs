@@ -222,21 +222,16 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /**
    * Flash the token ring based on damage, healing, or temp HP.
-   * @param {object} changes
-   * @param {number} [changes.dhp]    Change to the actor's HP.
-   * @param {number} [changes.dtemp]  Change to the actor's temp HP.
+   * @param {string} type     The key to determine the type of flashing.
    */
-  flashRing({ dhp, dtemp }) {
-    let color;
+  flashRing(type) {
+    const color = CONFIG.DND5E.tokenRingColors[type];
+    if ( !color ) return;
     const options = {};
-    if ( dtemp ) color = CONFIG.DND5E.tokenRingColors.temp;
-    else if ( dhp > 0 ) color = CONFIG.DND5E.tokenRingColors.healing;
-    else if ( dhp < 0 ) {
-      color = CONFIG.DND5E.tokenRingColors.damage;
+    if ( type === "damage" ) {
       options.duration = 500;
       options.easing = CONFIG.Token.ringClass.easeTwoPeaks;
     }
-    if ( !color ) return;
     this.object.ring.flashColor(Color.from(color), options);
   }
 }
