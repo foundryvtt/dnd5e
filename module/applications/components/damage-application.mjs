@@ -131,12 +131,12 @@ export default class DamageApplicationElement extends HTMLElement {
                 <i class="fa-solid fa-bullseye" inert></i> ${game.i18n.localize("DND5E.Tokens.Targeted")}
               </button>
               <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
-                <i class="fa-solid fa-expand inert"></i> ${game.i18n.localize("DND5E.Tokens.Selected")}
+                <i class="fa-solid fa-expand" inert></i> ${game.i18n.localize("DND5E.Tokens.Selected")}
               </button>
             </div>
             <ul class="targets unlist"></ul>
             <button class="apply-damage" type="button" data-action="applyDamage">
-              <i class="fa-solid fa-reply-all fa-flip-horizontal inert"></i>
+              <i class="fa-solid fa-reply-all fa-flip-horizontal" inert></i>
               ${game.i18n.localize("DND5E.Apply")}
             </button>
           </div>
