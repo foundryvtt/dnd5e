@@ -170,6 +170,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Calculate the DC of a concentration save required for a given amount of damage.
+   * @param {number} damage  Amount of damage taken.
+   * @returns {number}       DC of the required concentration save.
+   */
+  getConcentrationDC(damage) {
+    return Math.max(10, Math.floor(damage * .5));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Return the amount of experience required to gain a certain character level.
    * @param {number} level  The desired level.
    * @returns {number}      The XP required.
@@ -3237,7 +3248,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const hp = options.dnd5e?.hp;
-    if ( hp && (!options.isRest && !options.isAdvancement) ) {
+    if ( hp && !options.isRest && !options.isAdvancement ) {
       const curr = this.system.attributes.hp;
       const changes = {
         hp: curr.value - hp.value,
@@ -3247,6 +3258,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       if ( Number.isInteger(changes.total) && (changes.total !== 0) ) {
         this._displayTokenEffect(changes);
+        if ( (userId === game.userId) && (changes.total < 0) ) {
+          this.challengeConcentration({ dc: this.getConcentrationDC(-changes.total) });
+        }
 
         /**
          * A hook event that fires when an actor is damaged or healed by any means. The actual name
