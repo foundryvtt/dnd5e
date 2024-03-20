@@ -40,6 +40,23 @@ export function formatText(value) {
 /* -------------------------------------------- */
 
 /**
+ * Return whether a string is a valid reroll, explosion, min, or max dice modifier.
+ * @param {string} mod      The modifier to test.
+ * @returns {boolean}
+ */
+export function isValidDieModifier(mod) {
+  const regex = {
+    reroll: /rr?([0-9]+)?([<>=]+)?([0-9]+)?/i,
+    explode: /xo?([0-9]+)?([<>=]+)?([0-9]+)?/i,
+    minimum: /(?:min)([0-9]+)/i,
+    maximum: /(?:max)([0-9]+)/i
+  };
+  return Object.values(regex).some(rgx => rgx.test(mod));
+}
+
+/* -------------------------------------------- */
+
+/**
  * Handle a delta input for a number value from a form.
  * @param {HTMLInputElement} input  Input that contains the modified value.
  * @param {Document} target         Target document to be updated.
