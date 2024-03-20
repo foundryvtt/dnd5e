@@ -1726,7 +1726,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const parts = [];
 
     // Concentration bonus
-    if ( conc.bonus ) parts.push(conc.bonus);
+    if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
 
     const ability = (conc.ability in config.abilities) ? conc.ability : config.defaultAbilities.concentration;
 
