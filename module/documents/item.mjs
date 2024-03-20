@@ -1030,10 +1030,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( config.beginConcentrating ) {
       const effect = await item.actor.beginConcentrating(item);
       if ( effect ) effects.push(effect);
-    }
-    if ( config.endConcentration ) {
-      const deleted = await item.actor.endConcentration(config.endConcentration);
-      effects.push(...deleted);
+
+      if ( config.endConcentration ) {
+        const deleted = await item.actor.endConcentration(config.endConcentration);
+        effects.push(...deleted);
+      }
     }
 
     // Initiate measured template creation
