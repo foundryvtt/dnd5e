@@ -1022,20 +1022,22 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
     if ( !foundry.utils.isEmpty(resourceUpdates) ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
-    // Prepare card data & display it if options.createMessage is true
-    const cardData = await item.displayCard(options);
-
-    // Initiate or concentration.
+    // Initiate or end concentration.
     const effects = [];
     if ( config.beginConcentrating ) {
       const effect = await item.actor.beginConcentrating(item);
-      if ( effect ) effects.push(effect);
-
+      if ( effect ) {
+        effects.push(effect);
+        foundry.utils.setProperty(options.flags, "dnd5e.use.concentrationId", effect.id);
+      }
       if ( config.endConcentration ) {
         const deleted = await item.actor.endConcentration(config.endConcentration);
         effects.push(...deleted);
       }
     }
+
+    // Prepare card data & display it if options.createMessage is true
+    const cardData = await item.displayCard(options);
 
     // Initiate measured template creation
     let templates;
@@ -2019,11 +2021,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           const li = button.closest("li.effect");
           let effect = item.effects.get(li.dataset.effectId);
           if ( !effect ) effect = await fromUuid(li.dataset.uuid);
-          let warn = false;
+          const concentration = actor.effects.get(message.getFlag("dnd5e", "use.concentrationId"));
           for ( const token of canvas.tokens.controlled ) {
-            if ( await this._applyEffectToToken(effect, token) === false ) warn = true;
+            try {
+              await this._applyEffectToToken(effect, token, { concentration });
+            } catch(err) {
+              Hooks.onError("Item5e._applyEffectToToken", err, { notify: "warn", log: "warn" });
+            }
           }
-          if ( warn ) ui.notifications.warn("DND5E.EffectApplyWarning", { localize: true });
           break;
         case "attack":
           await item.rollAttack({
@@ -2084,16 +2089,23 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Handle applying an Active Effect to a Token.
-   * @param {ActiveEffect5e} effect  The effect.
-   * @param {Token5e} token          The token.
-   * @returns {Promise<ActiveEffect5e>|false}
+   * @param {ActiveEffect5e} effect                   The effect.
+   * @param {Token5e} token                           The token.
+   * @param {object} [options]
+   * @param {ActiveEffect5e} [options.concentration]  An optional concentration effect to act as the applied effect's
+   *                                                  origin instead.
+   * @returns {Promise<ActiveEffect5e|false>}
+   * @throws {Error}                                  If the effect could not be applied.
    * @protected
    */
-  static _applyEffectToToken(effect, token) {
-    if ( !game.user.isGM && !token.actor?.isOwner ) return false;
+  static async _applyEffectToToken(effect, token, { concentration }={}) {
+    const origin = concentration ?? effect;
+    if ( !game.user.isGM && !token.actor?.isOwner ) {
+      throw new Error(game.i18n.localize("DND5E.EffectApplyWarningOwnership"));
+    }
 
     // Enable an existing effect on the target if it originated from this effect
-    const existingEffect = token.actor?.effects.find(e => e.origin === effect.uuid);
+    const existingEffect = token.actor?.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update({
         ...effect.constructor.getInitialDuration(),
@@ -2101,13 +2113,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       });
     }
 
+    if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
+      throw new Error(game.i18n.localize("DND5E.EffectApplyWarningConcentration"));
+    }
+
     // Otherwise, create a new effect on the target
     const effectData = foundry.utils.mergeObject(effect.toObject(), {
       disabled: false,
       transfer: false,
-      origin: effect.uuid
+      origin: origin.uuid
     });
-    return ActiveEffect.implementation.create(effectData, { parent: token.actor });
+    const applied = await ActiveEffect.implementation.create(effectData, { parent: token.actor });
+    if ( concentration ) await concentration.addDependent(applied);
+    return applied;
   }
 
   /* -------------------------------------------- */

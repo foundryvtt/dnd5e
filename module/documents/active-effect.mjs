@@ -339,6 +339,26 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  async _preDelete(options, user) {
+    const dependents = this.getDependents();
+    if ( dependents.length && !game.users.activeGM ) {
+      ui.notifications.warn("DND5E.ConcentrationBreakWarning", { localize: true });
+      return false;
+    }
+    return super._preDelete(options, user);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Prepare effect favorite data.
    * @returns {Promise<FavoriteData5e>}
@@ -529,6 +549,33 @@ export default class ActiveEffect5e extends ActiveEffect {
       title: game.i18n.localize("DND5E.Concentration"),
       label: game.i18n.localize("DND5E.Confirm")
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Record another effect as a dependent of this one.
+   * @param {ActiveEffect5e} dependent  The dependent effect.
+   * @returns {Promise<ActiveEffect5e>}
+   */
+  addDependent(dependent) {
+    const dependents = this.getFlag("dnd5e", "dependents") ?? [];
+    dependents.push({ uuid: dependent.uuid });
+    return this.setFlag("dnd5e", "dependents", dependents);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve a list of dependent effects.
+   * @returns {ActiveEffect5e[]}
+   */
+  getDependents() {
+    return (this.getFlag("dnd5e", "dependents") || []).reduce((arr, { uuid }) => {
+      const effect = fromUuidSync(uuid);
+      if ( effect ) arr.push(effect);
+      return arr;
+    }, []);
   }
 
   /* -------------------------------------------- */
