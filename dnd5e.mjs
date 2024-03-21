@@ -93,10 +93,6 @@ Hooks.once("init", function() {
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
-  // Configure trackable & consumable attributes.
-  _configureTrackableAttributes();
-  _configureConsumableAttributes();
-
   // Register Roll Extensions
   CONFIG.Dice.rolls.push(dice.D20Roll);
   CONFIG.Dice.rolls.push(dice.DamageRoll);
@@ -327,6 +323,10 @@ function _configureStatusEffects() {
  * Prepare attribute lists.
  */
 Hooks.once("setup", function() {
+  // Configure trackable & consumable attributes.
+  _configureTrackableAttributes();
+  _configureConsumableAttributes();
+
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   game.dnd5e.moduleArt.registerModuleArt();
   Tooltips5e.activateListeners();
