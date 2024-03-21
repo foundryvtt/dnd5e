@@ -71,7 +71,8 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
     const {id, label, icon, hud, ...effectData} = foundry.utils.deepClone(status);
     effectData.name = game.i18n.localize(effectData.name ?? label);
-    effectData.img ??= icon;
+    if ( game.release.generation < 12 ) effectData.icon ??= icon;
+    else effectData.img ??= icon;
     effectData.statuses = Array.from(new Set([id, ...effectData.statuses ?? []]));
     if ( (effectData.statuses.length > 1) && !status._id ) {
       throw new Error("Status effects with implicit statuses must have a static _id");
@@ -88,7 +89,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       effectData.description = page?.text.content ?? "";
     }
     delete effectData.reference;
-    return super._fromStatusEffect(statusId, effectData, options);
+    return super._fromStatusEffect?.(statusId, effectData, options) ?? new this(effectData, options);
   }
 
   /* -------------------------------------------- */
@@ -284,7 +285,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /** @override */
   getRelativeUUID(doc) {
-    // Backport relative UUID fixes to accommodate descendant documents. Can be removed once v12 is the minimum.
+    // TODO: Backport relative UUID fixes to accommodate descendant documents. Can be removed once v12 is the minimum.
     if ( this.compendium && (this.compendium !== doc.compendium) ) return this.uuid;
     if ( this.isEmbedded && (this.collection === doc.collection) ) return `.${this.id}`;
     const parts = [this.documentName, this.id];
@@ -318,7 +319,9 @@ export default class ActiveEffect5e extends ActiveEffect {
     const config = CONFIG.DND5E.conditionTypes.exhaustion;
     let level = this.getFlag("dnd5e", "exhaustionLevel");
     if ( !Number.isFinite(level) ) level = 1;
-    this.icon = this.constructor._getExhaustionImage(level);
+    // TODO: Remove when v11 support is dropped.
+    if ( game.release.version < 12 ) this.icon = this.constructor._getExhaustionImage(level);
+    else this.img = this.constructor._getExhaustionImage(level);
     this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
     if ( level >= config.levels ) {
       this.statuses.add("dead");
