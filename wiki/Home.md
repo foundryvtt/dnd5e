@@ -21,4 +21,5 @@
 - [Hooks](Hooks.md)
 - [Roll Formulas](Roll-Formulas.md)
 - [Modifying Your Game with World Scripts](Modifying-Your-Game-with-Scripts.md)
+- [Summoning](Summoning.md)
 - [Contributing to the Wiki](Contributing-to-the-Wiki.md)
