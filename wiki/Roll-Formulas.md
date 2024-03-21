@@ -1,4 +1,4 @@
-![Up to date as of 2.3](https://img.shields.io/static/v1?label=dnd5e&message=2.3&color=informational)
+![Up to date as of 3.1](https://img.shields.io/static/v1?label=dnd5e&message=3.1&color=informational)
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
 > • Select a token, then open up the dev tools (F12 on Win; ⌥⌘I on Mac), and paste this into the Console (or save it as a Script macro in your hotbar):
@@ -31,17 +31,13 @@
 
 `@abilities.*.mod` - Base ability modifier
 
-`@abilities.*.dc` - Feature DC based on this ability, equals `8 + modifier`
-
-`@abilities.*.bonuses.check` - Formula for ability-specific check bonuses (applies to generic ability checks and saves that use this ability)
+`@abilities.*.dc` - Feature DC based on this ability, equals `8 + prof + modifier`
 
 `@abilities.*.checkBonus` - Flat ability check bonus, combining ability-specific bonuses with global check bonuses
 
 `@abilities.*.checkProf` - Ability check [proficiency](Roll-Formulas#proficiency) details
 
 `@abilities.*.save` - Flat ability save modifier (without any dice bonuses)
-
-`@abilities.*.bonuses.save` - Formula for ability-specific saving throw bonuses
 
 `@abilities.*.saveBonus` - Flat ability save bonus, combining ability-specific bonuses with global save bonuses
 
@@ -51,10 +47,6 @@
 ### Attributes
 
 #### Armor Class
-
-`@attributes.ac.calc` - Calculation mode that its used for determining `attributes.ac.base`
-
-`@attributes.ac.formula` - Custom formula that will be used to determine `attributes.ac.base` if `calc` is set to `custom`
 
 `@attributes.ac.flat` - Value that will be used as final `value` if `flat` calculation is set, or as `base` with `natural` calculation
 
@@ -79,155 +71,121 @@
 
 `@attributes.attunement.max` - Maximum number of attunement slots
 
+#### Concentration
+
+`@attributes.concentration.limit` - Maximimum number of effects the actor can sustain concentration on.
+
+`@attributes.concentration.save` - The final bonus an actor has to concentration saving throws.
+
 #### Death Saves
 
 `@attributes.death.success` & `.failure` - Death save successes & failures
 
 #### Encumbrance
 
+`@attributes.encumbrance.value` and `.max` - The current and maximum capacity of the actor.
+
+`@attributes.encumbrance.pct` - The percentage encumbrance (a number, with decimals, between 0 and 100).
+
+#### Exhaustion
+
+`@attributes.exhaustion` - The current exhaustion value (an integer between 0 and 6).
+
+#### Hit Dice
+
+`@attributes.hd` - The actor's current number of remaining hit dice.
 
 #### Hit Points
 
-`@attributes.hp.min` & `.max` - Minimum & maximum hit points (not including any changes from temporary max)
+`@attributes.hp.max` - Maximum hit points (not including any changes from temporary max).
 
-`@attributes.hp.value` - Current hit points (not including temp)
+`@attributes.hp.value` - Current hit points (not including temp).
 
-`@attributes.hp.temp` - Temporary hit points
+`@attributes.hp.temp` - Temporary hit points.
 
-`@attributes.hp.tempmax` - Temporary changes to max hit points
+`@attributes.hp.tempmax` - Temporary changes to max hit points.
+
+`@attributes.hp.pct` - Percentage hit points (current over maximum).
 
 #### Initiative
 
-`@attributes.init.mod` - Actor's base initiative modifier
+`@attributes.init.mod` - Actor's base initiative modifier derived from its Dexterity.
 
-`@attributes.init.prof` - Initiative [proficiency](Roll-Formulas#proficiency) details
+`@attributes.init.prof` - Initiative [proficiency](Roll-Formulas#proficiency) details.
 
-`@attributes.init.bonus` - Any extra arbitrary bonus (active effects or the initiative config window)
-
-`@attributes.init.total` - Final initiative modifier
+`@attributes.init.total` - Final initiative modifier.
 
 #### Movement
 
-`@attributes.movement.burrow` - 
+`@attributes.movement.burrow` - The actor's burrowing speed.
 
-`@attributes.movement.climb` - 
+`@attributes.movement.climb` - The actor's climbing speed.
 
-`@attributes.movement.fly` - 
+`@attributes.movement.fly` - The actor's flying speed.
 
-`@attributes.movement.swim` - 
+`@attributes.movement.swim` - The actor's swimming speed.
 
-`@attributes.movement.walk` - 
-
-`@attributes.movement.units` - 
-
-`@attributes.movement.hover` - 
-
+`@attributes.movement.walk` - The actor's walking speed.
 
 #### Senses
 
-`@attributes.senses.blindsight` - 
+`@attributes.senses.blindsight` - The actor's blindsight range.
 
-`@attributes.senses.darkvision` - 
+`@attributes.senses.darkvision` - The actor's darkvision range.
 
-`@attributes.senses.tremorsense` - 
+`@attributes.senses.tremorsense` - The actor's tremorsense range.
 
-`@attributes.senses.truesight` - 
-
-`@attributes.senses.units` - 
-
-`@attributes.senses.special` - 
-
+`@attributes.senses.truesight` - The actor's truesight range.
 
 #### Other Attributes
 
-`@attributes.exhaustion` - Current exhaustion level
-
-`@attributes.hd` - Currently available hit dice
-
-`@attributes.inspiration` - Whether the actor has inspiration
-
 `@attributes.prof` - Base, numerical proficiency value (does not reflect options like Proficiency Dice)
-
-`@attributes.spellcasting` - Spellcasting ability (three-letter code, not the modifier)
 
 `@attributes.spelldc` - Spell save DC based on the selected spellcasting ability
 
 `@attributes.spellmod` - Base ability modifier for the actor's selected spellcasting ability
 
-### Bonuses
-
-#### Ability
-
-`@bonuses.abilities.check` - Global ability check bonuses (added to base ability checks and skills checks)
-
-`@bonuses.abilities.save` - Global ability save bonuses
-
-`@bonuses.abilities.skill` - Global skill check bonuses
-
-#### Attacks
-
-`@bonuses.msak` - Melee spell attack
-
-`@bonuses.mwak` - Melee weapon attack
-
-`@bonuses.rsak` - Ranged spell attack
-
-`@bonuses.rwak` - Ranged weapon attack
-
-***Note:** Replace the `*` in the following formulas with the four-letter code from above.*
-
-`@bonuses.*.attack` - Global bonus to attack rolls
-
-`@bonuses.*.damage` - Global bonus to damage rolls
-
-#### Spell
-
-`@bonuses.spell.dc` - Global bonus to spell save DC
-
-
 ### Classes
 
 ***Note:** Replace the `*` in the following formulas with `identifier` specified on the class item.*
 
-`@classes.*.levels` - 
+`@classes.*.levels` - The current level of the class.
 
-`@classes.*.hitDice` - 
+`@classes.*.hitDice` - The hit die denomination of the class, e.g., 'd8'.
 
-`@classes.*.hitDiceUsed` - 
-
-`@classes.*.isOriginalClass` - 
-
-`@classes.*.spellcasting.progression` - 
-
-`@classes.*.spellcasting.ability` - 
-
+`@classes.*.hitDiceUsed` - How many hit dice this class has expended.
 
 ### Currency
 
-`@currency.pp`, `.gp`, `.sp`, `.ep`, `.cp` - Amount of each type of current held by actor
-
+`@currency.pp`, `.gp`, `.sp`, `.ep`, `.cp` - Amount of each type of current held by actor.
 
 ### Details
 
-`@details.level` - Overall character level
+`@details.level` - Overall character level.
 
-`@details.xp.value` - Actor's total XP earned
+`@details.cr` - Challenge rating.
 
-`@details.xp.min` & `.max` - XP range for the actor's current level
+`@details.xp.value` - Actor's total XP earned (or the XP a monster is worth).
 
-`@details.xp.pct` - Progress towards the next level
+`@details.xp.min` and `.max` - XP range for the actor's current level.
 
+`@details.xp.pct` - Progress towards the next level.
+
+### Flags
+
+`@flags.*` - An arbitrary object added to the roll data object for convenience. There are no rules regarding the properties held here, as they are added as needed by the system, modules, or macros.
 
 ### Proficiency
 
-`@prof` - Actor proficiency
+`@prof` - Actor proficiency.
 
-`@prof.term` - Either flat proficiency value or dice, depending on whether `"Proficiency Dice"` settings is set in system settings
+`@prof.term` - Either flat proficiency value or dice, depending on whether `"Proficiency Dice"` settings is set in system settings.
 
-`@prof.flat` - Flat proficiency value, regardless of settings
+`@prof.flat` - Flat proficiency value, regardless of settings.
 
-`@prof.dice` - Dice-based proficiency value, regardless of settings
+`@prof.dice` - Dice-based proficiency value, regardless of settings.
 
+`@prof.multiplier` - The contextual multiplier depending on proficiency level (0, 0.5, 1, or 2).
 
 ### Resources
 
@@ -235,30 +193,23 @@
 
 ***Note:** Replace the `*` in the following formulas with one of the slots above.*
 
-`@resources.*.value` - 
+`@resources.*.value` - The remaining resource value.
 
-`@resources.*.max` - 
-
-`@resources.*.sr` - 
-
-`@resources.*.lr` - 
-
-`@resources.*.label` - 
-
+`@resources.*.max` - The maximum value of this resource.
 
 ### Scale
 
 > <details>
 > <summary> Scale Value Identifiers</summary>
-> 
-> [Scale Value Advancements](Advancement-Type-Scale-Value.md) can be added to Class, Subclass, Race, and Background item types, which will define how the identifiers used are generated.  
-> The identifiers used will follow this general format: `@scale.parent-item-identifier.scale-value-identifier` where the `parent-item-identifier` is defined in the item the advancement is added to, and the `scale-value-identifier` is defined within the Advancement itself.  
->> Examples from the SRD:  
->> Race item - Dragonborn's Breath Weapon: `@scale.dragonborn.breath-weapon`  
->> Class item - Rogue's Sneak Attack: `@scale.rogue.sneak-attack`  
->> Subclass item - Life Domain's Divine Strike: `@scale.life-domain.divine-strike`  
-> 
-> Scale Values that are a Scale Type of Dice have additional formulas that can be used to reference specific parts of the die expression, as detailed below.  
+>
+> [Scale Value Advancements](Advancement-Type-Scale-Value.md) can be added to Class, Subclass, Race, and Background item types, which will define how the identifiers used are generated.
+> The identifiers used will follow this general format: `@scale.parent-item-identifier.scale-value-identifier` where the `parent-item-identifier` is defined in the item the advancement is added to, and the `scale-value-identifier` is defined within the Advancement itself.
+>> Examples from the SRD:
+>> Race item - Dragonborn's Breath Weapon: `@scale.dragonborn.breath-weapon`
+>> Class item - Rogue's Sneak Attack: `@scale.rogue.sneak-attack`
+>> Subclass item - Life Domain's Divine Strike: `@scale.life-domain.divine-strike`
+>
+> Scale Values that are a Scale Type of Dice have additional formulas that can be used to reference specific parts of the die expression, as detailed below.
 >
 > </details>
 
@@ -266,14 +217,13 @@
 
 ***Note:** Replace the `**` in the following formulas with the identifier defined within the Advancement itself.*
 
-`@scale.*.**` - The value of the Scale Value referenced
+`@scale.*.**` - The value of the Scale Value referenced.
 
-`@scale.*.**.number` - *Scale Value Type: Dice Only* - The number of Dice defined in the Scale Value (e.g. `3` of `3d8`)
+`@scale.*.**.number` - *Scale Value Type: Dice Only* - The number of Dice defined in the Scale Value (e.g. `3` of `3d8`).
 
-`@scale.*.**.die` - *Scale Value Type: Dice Only* - The Die defined in the Scale Value (e.g. `d8` of `3d8`)
+`@scale.*.**.die` - *Scale Value Type: Dice Only* - The Die defined in the Scale Value (e.g. `d8` of `3d8`).
 
-`@scale.*.**.faces` - *Scale Value Type: Dice Only* - The number of faces on the Die defined in the Scale Value (e.g. `8` of `3d8`)
-
+`@scale.*.**.faces` - *Scale Value Type: Dice Only* - The number of faces on the Die defined in the Scale Value (e.g. `8` of `3d8`).
 
 ### Skills
 
@@ -315,40 +265,44 @@
 
 ***Note:** Replace the `*` in the following formulas with the three-letter code from above.*
 
-`@skills.*.ability` - Three letter code for the ability associated with this skill by default
+`@skills.*.mod` - Ability modifier from the default ability.
 
-`@skills.*.mod` - Ability modifier from the default ability
-
-`@skills.*.prof` - Skill [proficiency](Roll-Formulas#proficiency) details
-
-`@skills.*.bonuses.check` - Bonus formula for this skill's modifier
+`@skills.*.prof` - Skill [proficiency](Roll-Formulas#proficiency) details.
 
 `@skills.*.bonus` - Flat skill check bonus, combining skill-specific bonus, ability check bonus, and global skill bonus
 
 `@skills.*.total` - Total skill check modifier (without any dice bonuses)
 
-`@skills.*.bonuses.passive` - Bonus formula for this skill's passive score (cannot contain dice)
-
-`@skills.*.passive` - Passive skill value equalling `10 + total + bonuses.passive`
-
+`@skills.*.passive` - Passive skill value equalling `10 + total + bonuses.passive`.
 
 ### Spells
 
-`@spells.spell1`, `.spell2`, `.spell3`, etc. - Normal spell slot levels
+`@spells.spell1`, `.spell2`, `.spell3`, etc. - Normal spell slot levels.
 
-`@spells.pact` - Pact slots
+`@spells.pact` - Pact slots.
 
 ***Note:** Replace the `*` in the following formulas with one of the spell slots above.*
 
-`@spells.*.value` - The currently available slots at this level
+`@spells.*.value` - The currently remaining number of slots at this level.
 
-`@spells.*.max` - Maximum number of slots at this level
+`@spells.*.max` - Maximum number of slots at this level.
 
-`@spells.*.override` - This value overrides the calculated `max` slots
+`@spells.*.override` - A value that overrides the calculated `max` slots.
 
-`@spells.*.level` - Spell slot level (for pact slots only)
+`@spells.*.level` - The level of the relevant spell slots (e.g., the level of the pact slots, or the '3' in 'spell3').
 
+## Item Properties
 
-### Traits
+Items have roll data same as actors, but only while said item is owned by an actor (i.e., is placed on their sheet). The roll data of item is an extension of the actor's roll data, adding `@item` as an additional property.
 
-`@traits.size` - Actor size
+The most common properties are:
+
+`@item.uses.value` - The current Limited Uses available on the item.
+
+`@item.uses.max` - The max Limited Uses of this item.
+
+`@item.save.dc` - The saving throw DC of this item.
+
+`@item.level` - The spell level of this item (for spells only).
+
+`@item.levels` - The class level of this item (for classes only).
