@@ -1,7 +1,9 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { simplifyBonus, staticID } from "../../utils.mjs";
+import { setTheme } from "../../settings.mjs";
+import { formatNumber, simplifyBonus, staticID } from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
+import SheetConfig5e from "../sheet-config.mjs";
 import Tabs5e from "../tabs.mjs";
 import ActorSheet5eCharacter from "./character-sheet.mjs";
 
@@ -26,6 +28,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         { dragSelector: ".item-list .item", dropSelector: null },
         { dragSelector: ".containers .container", dropSelector: null },
         { dragSelector: ".favorites :is([data-item-id], [data-effect-id])", dropSelector: null },
+        { dragSelector: ":is(.race, .background)[data-item-id]", dropSelector: null },
         { dragSelector: ".classes .gold-icon[data-item-id]", dropSelector: null },
         { dragSelector: "[data-key] .skill-name, [data-key] .tool-name", dropSelector: null },
         { dragSelector: ".spells-list .spell-header, .slots[data-favorite-id]", dropSelector: null }
@@ -91,6 +94,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @protected
    */
   _deathTrayOpen = false;
+
+  /**
+   * The cached concentration information for the character.
+   * @type {{items: Set<Item5e>, effects: Set<ActiveEffect5e>}}
+   * @internal
+   */
+  _concentration;
 
   /* -------------------------------------------- */
 
@@ -160,6 +170,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       return new Tabs5e(t);
     });
 
+    // Set theme
+    // TODO: Re-enable this when we support V12 only
+    // setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
+
     return html;
   }
 
@@ -180,6 +194,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /** @inheritDoc */
   async getData(options) {
+    this._concentration = this.actor.concentration; // Cache concentration so it's not called for every item.
     const context = await super.getData(options);
     context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
     context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
@@ -277,10 +292,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       ability.mod = Math.abs(ability.save);
     }
 
+    if ( this.actor.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) || context.editable ) {
+      context.saves.concentration = {
+        isConcentration: true,
+        class: "colspan concentration",
+        label: game.i18n.localize("DND5E.Concentration"),
+        abbr: game.i18n.localize("DND5E.Concentration"),
+        mod: Math.abs(attributes.concentration.save),
+        sign: attributes.concentration.save < 0 ? "-" : "+"
+      };
+    }
+
     // Size
     context.size = {
-      label: CONFIG.DND5E.actorSizes[traits.size].label,
-      abbr: CONFIG.DND5E.actorSizes[traits.size].abbreviation,
+      label: CONFIG.DND5E.actorSizes[traits.size]?.label ?? traits.size,
+      abbr: CONFIG.DND5E.actorSizes[traits.size]?.abbreviation ?? "—",
       mod: attributes.encumbrance.mod
     };
 
@@ -353,7 +379,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Effects & Conditions
     const conditionIds = new Set();
     context.conditions = Object.entries(CONFIG.DND5E.conditionTypes).reduce((arr, [k, c]) => {
-      if ( k === "diseased" ) return arr; // Filter out diseased as it's not a real condition.
+      if ( c.pseudo ) return arr; // Filter out pseudo-conditions.
       const { label: name, icon, reference } = c;
       const id = staticID(`dnd5e${k}`);
       conditionIds.add(id);
@@ -363,7 +389,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         name, reference,
         id: k,
         icon: img ?? icon,
-        disabled: existing ? disabled : !this.actor.statuses.has(k)
+        disabled: existing ? disabled : true
       });
       return arr;
     }, []);
@@ -373,6 +399,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         effect.updateDuration();
         if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
         const { id, name, img, disabled, duration } = effect;
+        const toggleable = !this._concentration?.effects.has(effect);
         let source = await effect.getSource();
         // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
         if ( (source instanceof dnd5e.documents.ActiveEffect5e) && (source.target !== this.object) ) {
@@ -380,7 +407,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         }
         arr = await arr;
         arr.push({
-          id, name, img, disabled, duration, source,
+          id, name, img, disabled, duration, source, toggleable,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
           hasTooltip: source instanceof dnd5e.documents.Item5e
@@ -439,12 +466,35 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       if ( data.custom ) data.custom.split(";").forEach(v => values.push({ label: v.trim() }));
       if ( values.length ) traits[trait] = values;
     }
+    // If petrified, display "All Damage" instead of all damage types separately
+    if ( this.document.hasConditionEffect("petrification") ) {
+      traits.dr = [{ label: game.i18n.localize("DND5E.DamageAll") }];
+    }
     // Combine damage & condition immunities in play mode.
     if ( (this._mode === this.constructor.MODES.PLAY) && traits.ci ) {
       traits.di ??= [];
       traits.di.push(...traits.ci);
       delete traits.ci;
     }
+
+    // Prepare damage modifications
+    const dm = this.actor.system.traits?.dm;
+    if ( dm ) {
+      const rollData = this.actor.getRollData({ deterministic: true });
+      const values = Object.entries(dm.amount).map(([k, v]) => {
+        const total = simplifyBonus(v, rollData);
+        if ( !total ) return null;
+        const value = {
+          label: `${CONFIG.DND5E.damageTypes[k]?.label ?? key} ${formatNumber(total, { signDisplay: "always" })}`,
+          color: total > 0 ? "maroon" : "green"
+        };
+        const icons = value.icons = [];
+        if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses);
+        return value;
+      }).filter(f => f);
+      if ( values.length ) traits.dm = values;
+    }
+
     return traits;
   }
 
@@ -558,9 +608,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
           cls: prepared ? "active" : "",
           icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}"></i>`,
           title: isAlways
-            ? CONFIG.DND5E.spellPreparationModes.always
+            ? CONFIG.DND5E.spellPreparationModes.always.label
             : prepared
-              ? CONFIG.DND5E.spellPreparationModes.prepared
+              ? CONFIG.DND5E.spellPreparationModes.prepared.label
               : game.i18n.localize("DND5E.SpellUnprepared")
         };
       }
@@ -592,6 +642,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       // Subtitles
       ctx.subtitle = [system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
     }
+
+    // Concentration
+    if ( this._concentration.items.has(item) ) ctx.concentration = true;
   }
 
   /* -------------------------------------------- */
@@ -860,6 +913,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  _onConfigureSheet(event) {
+    event.preventDefault();
+    new SheetConfig5e(this.document, {
+      top: this.position.top + 40,
+      left: this.position.left + ((this.position.width - DocumentSheet.defaultOptions.width) / 2)
+    }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle creating a new embedded child.
    * @returns {ActiveEffect5e|Item5e|void}
@@ -1000,7 +1064,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onRollAbility(event) {
     const abilityId = event.currentTarget.closest("[data-ability]").dataset.ability;
     const isSavingThrow = event.currentTarget.classList.contains("saving-throw");
-    if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
+    if ( abilityId === "concentration" ) this.actor.rollConcentration({ event });
+    else if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
     else this.actor.rollAbilityTest(abilityId, { event });
   }
 

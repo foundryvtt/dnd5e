@@ -1,0 +1,31 @@
+<form autocomplete="off">
+    <p class="notes">{{ localize "DND5E.ConcentrationConfigurationHint" }}</p>
+    <h3 class="form-header">{{ localize "DND5E.Concentration" }}</h3>
+    <div class="form-group">
+        <label>{{ localize "DND5E.AbilityModifier" }}</label>
+        <select name="system.attributes.concentration.ability">
+            {{ selectOptions abilities selected=ability blank="" labelAttr="label" }}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.AdvantageMode" }}</label>
+        <select name="system.attributes.concentration.roll.mode" data-dtype="Number">
+            {{ selectOptions modes selected=mode localize=true }}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.ConcentrationBonus" }}</label>
+        <input name="system.attributes.concentration.bonuses.save" type="text" value="{{ bonus }}">
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.ConcentrationLimit" }}</label>
+        {{ numberInput limit name="system.attributes.concentration.limit" min=0 step=1 }}
+    </div>
+    <h3 class="form-header">{{ localize "DND5E.BonusAbilitySaveTitle" }}</h3>
+    <div class="form-group">
+        <label>{{ localize "DND5E.BonusAbilitySave" }}</label>
+        <input name="system.bonuses.abilities.save" type="text" value="{{ bonusGlobalSave }}">
+        <p class="notes">{{ localize "DND5E.SaveGlobalBonusHint" }}</p>
+    </div>
+    <button type="submit"><i class="far fa-save" inert></i> {{ localize "Submit" }}</button>
+</form>

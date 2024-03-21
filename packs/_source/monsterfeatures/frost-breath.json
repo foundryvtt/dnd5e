@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} exhales a 15-foot cone of cold air. Each creature in that area must succeed on a <strong>DC 10 Dexterity</strong> saving throw, taking <strong>5 (2d4) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p>\n</section>\n<p>The {creature} exhales a 15-foot cone of cold air. Each creature in that area must make a <strong>Dexterity</strong> saving throw.</p>",
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] exhales a 15-foot cone of cold air. Each creature in that area must succeed on a <strong>DC 10 Dexterity</strong> saving throw, taking <strong>5 (2d4) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p>\n</section>\n<p>the [[lookup @name lowercase]] exhales a 15-foot cone of cold air. Each creature in that area must make a <strong>Dexterity</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

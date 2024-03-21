@@ -24,10 +24,14 @@
 {{/inline}}
 
 {{#*inline "ability-prof"}}
-    <li data-ability="{{ @key }}">
+    <li data-ability="{{ @key }}" class="{{ class }}">
+        {{#if isConcentration}}
+        <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/concentrating.svg"></dnd5e-icon>
+        {{else}}
         <proficiency-cycle type="ability" name="{{ path }}.proficient" data-tooltip="{{ hover }}"
                            value="{{#if @root.editable}}{{ baseProf }}{{else}}{{ proficient }}{{/if}}"
                            aria-label="{{ localize hover }}" {{ disabled (not @root.editable) }}></proficiency-cycle>
+        {{/if}}
         <a class="name saving-throw full {{ @root.rollableClass }}">{{ label }}</a>
         <a class="name saving-throw abbr {{ @root.rollableClass }}">{{ abbr }}</a>
         <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
@@ -56,7 +60,7 @@
         </h3>
         <ul class="pills">
             {{#each values}}
-            <li class="pill {{ ../color }}">
+            <li class="pill {{ ../color }} {{ color }}">
                 {{#each icons}}
                 {{#with (lookup (lookup @root.config.itemProperties this) "label") as |label|}}
                 <i class="{{ ../this }}" data-tooltip="{{ localize 'DND5E.DamagePhysicalBypassesShort' type=label }}"
@@ -250,6 +254,9 @@
 
         {{!-- Vulnerabilities --}}
         {{> "traits" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack" label="DND5E.Vulnerabilities" }}
+
+        {{!-- Damage Modification --}}
+        {{> "traits" values=traits.dm key="dm" icon="fas fa-heart-circle-plus" label="DND5E.DamageModification.Label" }}
 
         {{!-- Armor --}}
         {{> "traits" values=traits.armor key="armor" svg="checked-shield" label="DND5E.Armor" }}

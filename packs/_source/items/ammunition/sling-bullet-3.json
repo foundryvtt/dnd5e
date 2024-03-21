@@ -62,19 +62,13 @@
     },
     "ability": "",
     "actionType": "rwak",
-    "attackBonus": "3",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "3",
-          "bludgeoning"
-        ]
-      ],
+      "parts": [],
       "versatile": ""
     },
     "formula": "",
@@ -94,7 +88,20 @@
     "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "magicalBonus": 3,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -105,10 +112,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
+    "systemVersion": "3.1.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233963,
-    "modifiedTime": 1707244298773,
+    "modifiedTime": 1709677518399,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!x9I9vdo4kafHDjcO"

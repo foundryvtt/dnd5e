@@ -217,7 +217,24 @@ export async function damageRoll({
 
   // Create a Chat Message
   if ( rolls?.length && chatMessage ) await CONFIG.Dice.DamageRoll.toMessage(rolls, messageData, { rollMode });
-  return returnMultiple ? rolls : rolls[0];
+  if ( returnMultiple ) return rolls;
+  if ( rolls?.length <= 1 ) return rolls[0];
+
+  const mergedRoll = new CONFIG.Dice.DamageRoll();
+  mergedRoll._total = 0;
+  for ( const roll of rolls ) {
+    if ( mergedRoll.terms.length ) {
+      const operator = new OperatorTerm({operator: "+"});
+      operator._evaluated = true;
+      mergedRoll.terms.push(operator);
+    }
+    mergedRoll.terms.push(...roll.terms);
+    mergedRoll._total += roll.total;
+    mergedRoll.options = foundry.utils.mergeObject(roll.options, mergedRoll.options, { inplace: false });
+  }
+  mergedRoll._evaluated = true;
+  mergedRoll.resetFormula();
+  return mergedRoll;
 }
 
 /* -------------------------------------------- */

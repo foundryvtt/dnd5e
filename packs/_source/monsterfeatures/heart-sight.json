@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>The {creature} touches a creature and magically knows the creature's current emotional state. </p><p>If the target fails a  <strong>DC 10 Charisma</strong> saving throw, the {creature} also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw.</p></section><p>The {creature} touches a creature. target must make a <strong>Charisma</strong> saving throw.</p>",
+      "value": "<section class=\"secret\"><p>the [[lookup @name lowercase]] touches a creature and magically knows the creature's current emotional state. </p><p>If the target fails a  <strong>DC 10 Charisma</strong> saving throw, the [[lookup @name lowercase]] also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw.</p></section><p>the [[lookup @name lowercase]] touches a creature. target must make a <strong>Charisma</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

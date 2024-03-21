@@ -1,0 +1,64 @@
+<form autocomplete="off">
+    {{#*inline "list-level"}}
+    <ul class="flexcol">
+        {{#each entries}}
+        <li data-entry-id="{{ id }}" data-entry-type="{{ entry.type }}" data-depth="{{ depth }}">
+            <div class="controls flexrow">
+                <select name="startingEquipment.{{ id }}.type">
+                    {{ selectOptions validTypes selected=entry.type localize=true }}
+                </select>
+                <button type="button" class="unbutton" data-action="delete-entry"
+                        data-tooltip="DND5E.StartingEquipment.Action.RemoveEntry"
+                        aria-label="{{ localize 'DND5E.StartingEquipment.Action.RemoveEntry' }}">
+                    <i class="fa-solid fa-trash fa-fw" inert></i>
+                </button>
+            </div>
+            <div class="data flexrow">
+                {{#if groupType}}
+                {{> "list-level" entries=children nested=true }}
+                {{else}}
+                {{ numberInput entry.count name=(concat "startingEquipment." id ".count")
+                   placeholder=1 step=1 min=1 }}
+                {{#if (eq entry.type "linked")}}
+                {{#if linked}}
+                {{{ dnd5e-linkForUuid entry.key }}}
+                {{else}}
+                <div class="drop-area">
+                    {{ localize "DND5E.StartingEquipment.DropHint" }}
+                </div>
+                {{/if}}
+                <input type="hidden" name="startingEquipment.{{ id }}.key" value="{{ entry.key }}">
+                {{else}}
+                <select name="startingEquipment.{{ id }}.key">
+                    {{ selectOptions entry.keyOptions selected=entry.key blank=entry.blankLabel }}
+                </select>
+                {{/if}}
+                {{/if}}
+                {{#if showRequireProficiency}}
+                <label class="flexrow require-proficiency">
+                    <input type="checkbox" name="startingEquipment.{{ id }}.requiresProficiency"
+                           {{ checked entry.requiresProficiency }}>
+                    {{ localize "DND5E.StartingEquipment.RequireProficiency" }}
+                </label>
+                {{else}}
+                <input type="hidden" name="startingEquipment.{{ id }}.requiresProficiency"
+                       value="{{ entry.requiresProficiency }}" data-dtype="Boolean">
+                {{/if}}
+            </div>
+            <div class="drag-bar"><i class="fa-solid fa-grip-lines-vertical" inert></i></div>
+            <input type="hidden" name="startingEquipment.{{ id }}._id" value="{{ entry._id }}">
+            <input type="hidden" name="startingEquipment.{{ id }}.group" value="{{ entry.group }}">
+            <input type="hidden" name="startingEquipment.{{ id }}.sort" value="{{ entry.sort }}" data-dtype="Number">
+        </li>
+        {{/each}}
+        <li class="dnd5e2" data-depth="{{ depth }}">
+            <button type="button" data-action="add-entry">
+                <i class="fa-solid fa-plus" inert></i>
+                {{ localize "DND5E.StartingEquipment.Action.AddEntry" }}
+            </button>
+        </li>
+    </ul>
+    {{/inline}}
+
+    {{> "list-level" }}
+ </form>

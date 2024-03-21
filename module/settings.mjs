@@ -3,7 +3,7 @@ import { ModuleArtConfig } from "./module-art.mjs";
 /**
  * Register all of the system's settings.
  */
-export default function registerSystemSettings() {
+export function registerSystemSettings() {
   // Internal System Migration Version
   game.settings.register("dnd5e", "systemMigrationVersion", {
     name: "System Migration Version",
@@ -170,6 +170,16 @@ export default function registerSystemSettings() {
     type: Boolean
   });
 
+  // Disable Concentration Tracking
+  game.settings.register("dnd5e", "disableConcentration", {
+    name: "SETTINGS.5eNoConcentrationN",
+    hint: "SETTINGS.5eNoConcentrationL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Collapse Item Cards (by default)
   game.settings.register("dnd5e", "autoCollapseItemCards", {
     name: "SETTINGS.5eAutoCollapseCardN",
@@ -220,6 +230,16 @@ export default function registerSystemSettings() {
       keepBackgroundAE: true,
       transformTokens: true
     }
+  });
+
+  // Allow Summoning
+  game.settings.register("dnd5e", "allowSummoning", {
+    name: "SETTINGS.DND5E.ALLOWSUMMONING.Name",
+    hint: "SETTINGS.DND5E.ALLOWSUMMONING.Hint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
   });
 
   // Metric Unit Weights
@@ -314,4 +334,61 @@ class PrimaryPartyData extends foundry.abstract.DataModel {
   static defineSchema() {
     return { actor: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseActor) };
   }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Register additional settings after modules have had a chance to initialize to give them a chance to modify choices.
+ */
+export function registerDeferredSettings() {
+  game.settings.register("dnd5e", "theme", {
+    name: "SETTINGS.DND5E.THEME.Name",
+    hint: "SETTINGS.DND5E.THEME.Hint",
+    scope: "client",
+    config: true,
+    default: "",
+    type: String,
+    choices: {
+      "": "SHEETS.DND5E.THEME.Automatic",
+      ...CONFIG.DND5E.themes
+    },
+    onChange: s => setTheme(document.body, s)
+  });
+
+  setTheme(document.body, game.settings.get("dnd5e", "theme"));
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    setTheme(document.body, game.settings.get("dnd5e", "theme"));
+  });
+  matchMedia("(prefers-contrast: more)").addEventListener("change", () => {
+    setTheme(document.body, game.settings.get("dnd5e", "theme"));
+  });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Set the theme on an element, removing the previous theme class in the process.
+ * @param {HTMLElement} element  Body or sheet element on which to set the theme data.
+ * @param {string} [theme=""]    Theme key to set.
+ * @param {string[]} [flags=[]]  Additional theming flags to set.
+ */
+export function setTheme(element, theme="", flags=new Set()) {
+  element.className = element.className.replace(/\bdnd5e-(theme|flag)-[\w-]+\b/g, "");
+
+  // Primary Theme
+  if ( !theme && (element === document.body) ) {
+    if ( matchMedia("(prefers-color-scheme: dark)").matches ) theme = "dark";
+    if ( matchMedia("(prefers-color-scheme: light)").matches ) theme = "light";
+  }
+  if ( theme ) {
+    element.classList.add(`dnd5e-theme-${theme.slugify()}`);
+    element.dataset.theme = theme;
+  }
+  else delete element.dataset.theme;
+
+  // Additional Flags
+  if ( (element === document.body) && matchMedia("(prefers-contrast: more)").matches ) flags.add("high-contrast");
+  for ( const flag of flags ) element.classList.add(`dnd5e-flag-${flag.slugify()}`);
+  element.dataset.themeFlags = Array.from(flags).join(" ");
 }

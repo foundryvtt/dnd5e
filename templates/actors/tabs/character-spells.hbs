@@ -33,7 +33,7 @@
 </section>
 
 {{!-- Spells --}}
-<{{ elements.inventory }} v2>
+<{{ elements.inventory }} class="inventory-element" v2>
 
     {{!-- Searching & Filtering --}}
     <item-list-controls for="spellbook" label="{{ localize "DND5E.SpellsSearch" }}" sort="toggle" collection="items"
@@ -100,6 +100,10 @@
                     {{!-- Spell Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
                          data-action="use" aria-label="{{ item.name }}">
+                        {{#if ctx.concentration}}
+                        <i class="concentration fas fa-arrow-rotate-left fa-spin fa-spin-reverse"
+                           aria-label="{{ localize "DND5E.Concentration" }}"></i>
+                        {{/if}}
                         <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
                         <div class="name name-stacked">
                             <span class="title">{{ item.name }}</span>

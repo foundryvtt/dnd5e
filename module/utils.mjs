@@ -40,6 +40,23 @@ export function formatText(value) {
 /* -------------------------------------------- */
 
 /**
+ * Return whether a string is a valid reroll, explosion, min, or max dice modifier.
+ * @param {string} mod      The modifier to test.
+ * @returns {boolean}
+ */
+export function isValidDieModifier(mod) {
+  const regex = {
+    reroll: /rr?([0-9]+)?([<>=]+)?([0-9]+)?/i,
+    explode: /xo?([0-9]+)?([<>=]+)?([0-9]+)?/i,
+    minimum: /(?:min)([0-9]+)/i,
+    maximum: /(?:max)([0-9]+)/i
+  };
+  return Object.values(regex).some(rgx => rgx.test(mod));
+}
+
+/* -------------------------------------------- */
+
+/**
  * Handle a delta input for a number value from a form.
  * @param {HTMLInputElement} input  Input that contains the modified value.
  * @param {Document} target         Target document to be updated.
@@ -160,7 +177,23 @@ export function indexFromUuid(uuid) {
  * @returns {string}     Link to the item or empty string if item wasn't found.
  */
 export function linkForUuid(uuid) {
-  return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+  if ( game.release.generation < 12 ) {
+    return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+  }
+
+  // TODO: When v11 support is dropped we can make this method async and return to using TextEditor._createContentLink.
+  if ( uuid.startsWith("Compendium.") ) {
+    let [, scope, pack, documentName, id] = uuid.split(".");
+    if ( !CONST.PRIMARY_DOCUMENT_TYPES.includes(documentName) ) id = documentName;
+    const data = {
+      classes: ["content-link"],
+      attrs: { draggable: "true" }
+    };
+    TextEditor._createLegacyContentLink("Compendium", [scope, pack, id].join("."), "", data);
+    data.dataset.link = "";
+    return TextEditor.createAnchor(data).outerHTML;
+  }
+  return fromUuidSync(uuid).toAnchor().outerHTML;
 }
 
 /* -------------------------------------------- */
@@ -209,6 +242,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/tabs/character-features.hbs",
     "systems/dnd5e/templates/actors/tabs/character-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
+    "systems/dnd5e/templates/actors/tabs/group-members.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
@@ -481,6 +515,11 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
 
   if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
     return game.i18n.localize("DND5E.ExperiencePointsValue");
+  }
+
+  if ( attr.startsWith(".") && actor ) {
+    const item = fromUuidSync(attr, { relative: actor });
+    return item?.name ?? attr;
   }
 
   // Check if the attribute is already in cache.

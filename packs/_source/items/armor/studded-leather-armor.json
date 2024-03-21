@@ -61,7 +61,6 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -79,7 +78,8 @@
     },
     "armor": {
       "value": 12,
-      "dex": null
+      "dex": null,
+      "magicalBonus": null
     },
     "hp": {
       "value": 0,
@@ -102,7 +102,19 @@
     },
     "container": null,
     "crewed": false,
-    "properties": []
+    "properties": [],
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -113,10 +125,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.1.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233668,
-    "modifiedTime": 1704823152255,
+    "modifiedTime": 1709659995045,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!TIV3B1vbrVHIhQAm"

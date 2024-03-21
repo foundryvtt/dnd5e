@@ -4,6 +4,7 @@ import EffectsElement from "../components/effects.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
 import ActorArmorConfig from "./armor-config.mjs";
+import ActorConcentrationConfig from "./concentration-config.mjs";
 import ActorHitDiceConfig from "./hit-dice-config.mjs";
 import ActorHitPointsConfig from "./hit-points-config.mjs";
 import ActorInitiativeConfig from "./initiative-config.mjs";
@@ -11,8 +12,10 @@ import ActorMovementConfig from "./movement-config.mjs";
 import ActorSensesConfig from "./senses-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorTypeConfig from "./type-config.mjs";
+import DamageModificationConfig from "./damage-modification-config.mjs";
 import SourceConfig from "../source-config.mjs";
 
+import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 import TraitSelector from "./trait-selector.mjs";
@@ -311,7 +314,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       const key = traitConfig.actorKeyPath?.replace("system.", "") ?? `traits.${trait}`;
       const data = foundry.utils.deepClone(foundry.utils.getProperty(systemData, key));
       if ( !data ) continue;
-
       foundry.utils.setProperty(traits, key, data);
       let values = data.value;
       if ( !values ) values = [];
@@ -350,6 +352,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Add custom entries
       if ( data.custom ) data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
       data.cssClass = !foundry.utils.isEmpty(data.selected) ? "" : "inactive";
+
+      // If petrified, display "All Damage" instead of all damage types separately
+      if ( (trait === "dr") && this.document.hasConditionEffect("petrification") ) {
+        data.selected = { custom1: game.i18n.localize("DND5E.DamageAll") };
+        data.cssClass = "";
+      }
     }
     return traits;
   }
@@ -378,7 +386,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const spellbook = {};
 
     // Define section and label mappings
-    const sections = {atwill: -20, innate: -10, pact: 0.5 };
+    const sections = Object.entries(CONFIG.DND5E.spellPreparationModes).reduce((acc, [k, {order}]) => {
+      if ( Number.isNumeric(order) ) acc[k] = Number(order);
+      return acc;
+    }, {});
     const useLabels = {"-20": "-", "-10": "-", 0: "&infin;"};
 
     // Format a spellbook entry for a certain indexed level
@@ -417,14 +428,16 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Pact magic users have cantrips and a pact magic section
-    if ( levels.pact && levels.pact.max ) {
-      if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      const l = levels.pact;
-      const config = CONFIG.DND5E.spellPreparationModes.pact;
-      const level = game.i18n.localize(`DND5E.SpellLevel${levels.pact.level}`);
-      const label = `${config} — ${level}`;
-      registerSection("pact", sections.pact, label, {
-        prepMode: "pact",
+    for ( const [k, v] of Object.entries(CONFIG.DND5E.spellPreparationModes) ) {
+      if ( !(k in levels) || !v.upcast || !levels[k].max ) continue;
+
+      if ( !spellbook["0"] && v.cantrips ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
+      const l = levels[k];
+      const config = CONFIG.DND5E.spellPreparationModes[k];
+      const level = game.i18n.localize(`DND5E.SpellLevel${l.level}`);
+      const label = `${config.label} — ${level}`;
+      registerSection(k, sections[k], label, {
+        prepMode: k,
         value: l.value,
         max: l.max,
         override: l.override
@@ -443,7 +456,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         if ( !spellbook[s] ) {
           const l = levels[mode] || {};
           const config = CONFIG.DND5E.spellPreparationModes[mode];
-          registerSection(mode, s, config, {
+          registerSection(mode, s, config.label, {
             prepMode: mode,
             value: l.value,
             max: l.max,
@@ -604,6 +617,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Configure Special Flags
       html.find(".config-button").click(this._onConfigMenu.bind(this));
 
+      // Changing Level
+      html.find(".level-selector").change(this._onLevelChange.bind(this));
+
       // Owned Item management
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
       html.find(".attunement-max-override").click(this._onAttunementOverride.bind(this));
@@ -664,7 +680,35 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
+
+  /**
+   * Respond to a new level being selected from the level selector.
+   * @param {Event} event                           The originating change.
+   * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
+   * @private
+   */
+  async _onLevelChange(event) {
+    event.preventDefault();
+    const delta = Number(event.target.value);
+    const classId = event.target.closest("[data-item-id]")?.dataset.itemId;
+    if ( !delta || !classId ) return;
+    const classItem = this.actor.items.get(classId);
+    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
+      if ( manager.steps.length ) {
+        if ( delta > 0 ) return manager.render(true);
+        try {
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
+          if ( shouldRemoveAdvancements ) return manager.render(true);
+        }
+        catch(err) {
+          return;
+        }
+      }
+    }
+    return classItem.update({"system.levels": classItem.system.levels + delta});
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -707,7 +751,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         break;
       case "ability":
         const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
-        app = new ActorAbilityConfig(this.actor, null, ability);
+        if ( ability === "concentration" ) app = new ActorConcentrationConfig(this.actor);
+        else app = new ActorAbilityConfig(this.actor, null, ability);
         break;
       case "skill":
         const skill = event.currentTarget.closest("[data-key]").dataset.key;
@@ -1165,6 +1210,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     event.preventDefault();
     const trait = event.currentTarget.dataset.trait;
     if ( trait === "tool" ) return new ToolSelector(this.actor, trait).render(true);
+    else if ( trait === "dm" ) return new DamageModificationConfig(this.actor).render(true);
     return new TraitSelector(this.actor, trait).render(true);
   }
 

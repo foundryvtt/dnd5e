@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>As a bonus action, the {creature} can target one creature it can see within <strong>5 ft.</strong> of it that has <strong>0 hit points</strong> and is still alive. </p><p>The target must succeed on a <strong>DC 10 Constitution saving throw</strong> against this magic or die. If the target dies, the {creature} regains 10 (3d6)<strong> hit points</strong>.</p></section><p>The {creature} can target one creature it can see within <strong>5 ft.</strong> The target must succeed on a Constitution saving throw.</p>",
+      "value": "<section class=\"secret\"><p>As a bonus action, the [[lookup @name lowercase]] can target one creature it can see within <strong>5 ft.</strong> of it that has <strong>0 hit points</strong> and is still alive. </p><p>The target must succeed on a <strong>DC 10 Constitution saving throw</strong> against this magic or die. If the target dies, the [[lookup @name lowercase]] regains 10 (3d6)<strong> hit points</strong>.</p></section><p>the [[lookup @name lowercase]] can target one creature it can see within <strong>5 ft.</strong> The target must succeed on a Constitution saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

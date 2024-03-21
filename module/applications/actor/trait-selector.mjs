@@ -38,7 +38,6 @@ export default class TraitSelector extends BaseConfigSheet {
       template: "systems/dnd5e/templates/apps/trait-selector.hbs",
       width: 320,
       height: "auto",
-      sheetConfig: false,
       allowCustom: true
     });
   }
@@ -95,28 +94,13 @@ export default class TraitSelector extends BaseConfigSheet {
   _getActorOverrides() {
     const overrides = super._getActorOverrides();
     const path = Trait.actorKeyPath(this.trait);
-    this.#addOverriddenChoices("choices", Trait.changeKeyPath(this.trait), overrides);
-    this.#addOverriddenChoices("bypasses", `${path}.bypasses`, overrides);
+    this._addOverriddenChoices("choices", Trait.changeKeyPath(this.trait), overrides);
+    this._addOverriddenChoices("bypasses", `${path}.bypasses`, overrides);
     const pathCustom = `${path}.custom`;
     const sourceCustom = foundry.utils.getProperty(this.document._source, pathCustom);
     const currentCustom = foundry.utils.getProperty(this.document, pathCustom);
     if ( sourceCustom !== currentCustom ) overrides.push(pathCustom);
     return overrides;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Add choices that have been overridden.
-   * @param {string} prefix       The initial form prefix under which the choices are grouped.
-   * @param {string} path         Path in actor data.
-   * @param {string[]} overrides  The list of fields that are currently modified by Active Effects. *Will be mutated.*
-   */
-  #addOverriddenChoices(prefix, path, overrides) {
-    const source = new Set(foundry.utils.getProperty(this.document._source, path) ?? []);
-    const current = foundry.utils.getProperty(this.document, path) ?? new Set();
-    const delta = current.symmetricDifference(source);
-    for ( const choice of delta ) overrides.push(`${prefix}.${choice}`);
   }
 
   /* -------------------------------------------- */

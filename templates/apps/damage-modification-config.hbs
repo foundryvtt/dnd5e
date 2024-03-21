@@ -1,0 +1,22 @@
+<form autocomplete="off">
+    <h3>{{ localize "DND5E.DamageTypes" }}</h3>
+    <p class="note">{{ localize "DND5E.DamageModification.Hint" }}</p>
+    <ol class="trait-list modifications">
+        {{#each modifications}}
+        <li>
+            <label>
+                {{ label }}
+                <input type="text" name="system.traits.dm.amount.{{ @key }}" value="{{ value }}"
+            </label>
+        </li>
+        {{/each}}
+    </ol>
+
+    <h3>{{ localize "DND5E.DamagePhysicalBypass" }}</h3>
+    <p class="note">{{ localize "DND5E.DamageModification.BypassHint" }}</p>
+    {{> "dnd5e.trait-list" choices=bypasses prefix="system.traits.dm.bypasses" }}
+
+    <button type="submit" name="submit" value="1">
+        <i class="fa-regular fa-save"></i> {{ localize "DND5E.TraitSave" }}
+    </button>
+</form>

@@ -95,8 +95,9 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
       { type: "Trait", configuration: { grants: ["languages:standard:common"] } }
     ];
     this.parent.updateSource({"system.advancement": toCreate.map(c => {
-      const AdvancementClass = CONFIG.DND5E.advancementTypes[c.type];
-      return new AdvancementClass(c, { parent: this.parent }).toObject();
+      const config = CONFIG.DND5E.advancementTypes[c.type];
+      const cls = config.documentClass ?? config;
+      return new cls(c, { parent: this.parent }).toObject();
     })});
   }
 
@@ -111,7 +112,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    * @protected
    */
   _onCreate(data, options, userId) {
-    if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
+    if ( (game.user.id !== userId) || !["character", "npc"].includes(this.parent.actor?.type) ) return;
     this.parent.actor.update({ "system.details.race": this.parent.id });
   }
 
@@ -126,7 +127,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    * @protected
    */
   async _preDelete(options, user) {
-    if ( (this.parent.actor?.type !== "character") ) return;
+    if ( !["character", "npc"].includes(this.parent.actor?.type) ) return;
     await this.parent.actor.update({ "system.details.race": null });
   }
 }

@@ -12,7 +12,6 @@ export default class ActorMovementConfig extends BaseConfigSheet {
       template: "systems/dnd5e/templates/apps/movement-config.hbs",
       width: 300,
       height: "auto",
-      sheetConfig: false,
       keyPath: "system.attributes.movement"
     });
   }

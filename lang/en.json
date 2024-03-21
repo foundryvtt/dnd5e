@@ -135,6 +135,7 @@
 "DND5E.ActionRSAK": "Ranged Spell Attack",
 "DND5E.ActionRWAK": "Ranged Weapon Attack",
 "DND5E.ActionSave": "Saving Throw",
+"DND5E.ActionSumm": "Summon",
 "DND5E.ActionUtil": "Utility",
 "DND5E.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}",
 "DND5E.ActionWarningNoToken": "You must have one or more controlled Tokens in order to use this option.",
@@ -283,6 +284,7 @@
 "DND5E.AdvancementTraitModeUpgradeHint": "Gain proficiency in a trait unless you already have it, otherwise gain expertise.",
 "DND5E.AdvancementTraitType": "Trait Type",
 "DND5E.Advantage": "Advantage",
+"DND5E.AdvantageMode": "Advantage Mode",
 "DND5E.Age": "Age",
 "DND5E.Alignment": "Alignment",
 "DND5E.AlignmentCE": "Chaotic Evil",
@@ -328,6 +330,9 @@
 "DND5E.AttackPl": "Attacks",
 "DND5E.AttackRoll": "Attack Roll",
 "DND5E.Attributes": "Attributes",
+"DND5E.AttrConcentration": {
+  "Limit": "Limit"
+},
 "DND5E.Automatic": "Automatic",
 "DND5E.AutomaticValue": "Automatic ({value})",
 "DND5E.Award": {
@@ -353,6 +358,7 @@
 "DND5E.BonusAbility": "Global Ability Bonuses",
 "DND5E.BonusAbilityCheck": "Global Ability Check Bonus",
 "DND5E.BonusAbilitySave": "Global Saving Throw Bonus",
+"DND5E.BonusAbilitySaveTitle": "Global Saving Throws",
 "DND5E.BonusAbilitySkill": "Global Skill Check Bonus",
 "DND5E.BonusAction": "Bonus Action",
 "DND5E.BonusActionAbbr": "BA",
@@ -382,6 +388,8 @@
 "DND5E.ChatContextTempHP": "Apply Temporary HP",
 "DND5E.ChatContextDoubleDamage": "Apply Double Damage",
 "DND5E.ChatContextHalfDamage": "Apply Half Damage",
+"DND5E.ChatContextSelectHit": "Select Hit Targets",
+"DND5E.ChatContextSelectMiss": "Select Missed Targets",
 "DND5E.ChatFlavor": "Chat Message Flavor",
 "DND5E.CheckBonus": "Check Bonus",
 "DND5E.ClassAdd": "Add Class",
@@ -393,6 +401,7 @@
 "DND5E.ClassName": "Class Name",
 "DND5E.ClassOriginal": "Original Class",
 "DND5E.ClassSaves": "Saving Throws",
+"DND5E.Confirm": "Confirm",
 "DND5E.ComponentMaterial": "Material",
 "DND5E.ComponentMaterialAbbr": "M",
 "DND5E.ComponentSomatic": "Somatic",
@@ -436,7 +445,21 @@
 "DND5E.ConUnconscious": "Unconscious",
 "DND5E.Concentration": "Concentration",
 "DND5E.ConcentrationAbbr": "C",
+"DND5E.ConcentrationBreak": "Break Concentration",
+"DND5E.ConcentrationBreakWarning": "Breaking concentration on an effect that is active on other creatures requires an active GM to be present.",
+"DND5E.ConcentrationBonus": "Concentration Bonus",
 "DND5E.ConcentrationDuration": "Concentration, up to {duration}",
+"DND5E.ConcentratingOn": "You are maintaining concentration on the effects of the '{name}' {type}.",
+"DND5E.ConcentratingEndChoice": "You are concentrating on effects from more than one source. Pick which effect to end.",
+"DND5E.ConcentratingMissingItem": "The effect that is concentrated on and to be replaced does not exist.",
+"DND5E.ConcentratingLimited": "You are not able to begin concentrating on an additional effect.",
+"DND5E.ConcentrationLimit": "Concentration Limit",
+"DND5E.ConcentratingEnd": "End Concentration",
+"DND5E.ConcentratingItemless": "Concentration With No Source",
+"DND5E.ConcentratingWarnLimit": "You cannot maintain concentration on more effects!",
+"DND5E.ConcentratingWarnLimitOptional": "You may end concentration on one of your maintained effects to use this item.",
+"DND5E.ConcentratingWarnLimitZero": "You are not able to maintain concentration on any effects!",
+"DND5E.ConcentrationConfigurationHint": "Configure concentration modifiers and bonuses which apply to this creature.",
 "DND5E.ConsumeTitle": "Resource Consumption",
 "DND5E.ConsumeAmount": "Consumption Amount",
 "DND5E.ConsumeTarget": "Consumption Target",
@@ -558,11 +581,26 @@
 "DND5E.Damage": "Damage",
 "DND5E.DamageAcid": "Acid",
 "DND5E.DamageAll": "All Damage",
+"DND5E.DamageApplication": {
+  "Change": {
+    "Modification": "{type} Modification",
+    "Immunity": "{type} Immunity",
+    "Resistance": "{type} Resistance",
+    "Vulnerability": "{type} Vulnerability"
+  },
+  "Downgrading": "Downgrading {source} to Resistance",
+  "Ignoring": "Ignoring {source}"
+},
 "DND5E.DamageBludgeoning": "Bludgeoning",
 "DND5E.DamageCold": "Cold",
 "DND5E.DamageFire": "Fire",
 "DND5E.DamageForce": "Force",
 "DND5E.DamageLightning": "Lightning",
+"DND5E.DamageModification": {
+  "Label": "Damage Modification",
+  "Hint": "Formulas for amounts that will be added to typed damage applied to this actor. Negative values will reduce the damage taken.",
+  "BypassHint": "These weapon properties will bypass damage modification for physical damage."
+},
 "DND5E.DamageNecrotic": "Necrotic",
 "DND5E.DamagePiercing": "Piercing",
 "DND5E.DamagePhysical": "Non-Magical Physical",
@@ -633,7 +671,8 @@
 "DND5E.Effect": "Effect",
 "DND5E.Effects": "Effects",
 "DND5E.EffectsApplyTokens": "Apply to selected tokens",
-"DND5E.EffectApplyWarning": "Effects cannot be applied to tokens you are not the owner of.",
+"DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
+"DND5E.EffectApplyWarningOwnership": "Effects cannot be applied to tokens you are not the owner of.",
 "DND5E.EffectsSearch": "Search effects",
 "DND5E.Environment": "Environment",
 "DND5E.EquipmentBonus": "Magical Bonus",
@@ -693,9 +732,12 @@
     "EpicBoon": "Epic Boon"
   }
 },
-"DND5E.Focus.Arcane": "Arcane Focus",
-"DND5E.Focus.Druidic": "Druidic Focus",
-"DND5E.Focus.Holy": "Holy Focus",
+"DND5E.Focus": {
+  "Label": "Spellcasting Focus",
+  "Arcane": "Arcane Focus",
+  "Druidic": "Druidic Focus",
+  "Holy": "Holy Focus"
+},
 "DND5E.Loot.Art": "Art Object",
 "DND5E.Loot.Gear": "Adventuring Gear",
 "DND5E.Loot.Gem": "Gemstone",
@@ -834,6 +876,10 @@
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
 "DND5E.HitDie": "Hit Die",
 "DND5E.HitDice": "Hit Dice",
+"DND5E.HitDiceAutoSpend": {
+  "Label": "Auto Spend HD",
+  "Hint": "Automatically spend hit dice until they run out or health is full."
+},
 "DND5E.HitDiceConfig": "Adjust Hit Dice",
 "DND5E.HitDiceConfigHint": "Adjust remaining hit dice levels for each class.",
 "DND5E.HitDiceMax": "Maximum Hit Dice",
@@ -863,6 +909,8 @@
 "DND5E.ItemActivationType": "Activation Type",
 "DND5E.ItemAmmoProperties": "Ammunition Properties",
 "DND5E.ItemAttackBonus": "Attack Roll Bonus",
+"DND5E.ItemAttackFlat": "Flat Bonus",
+"DND5E.ItemAttackFlatHint": "If checked, don't add proficiency, ability modifier, or any other bonuses to attack roll except what is included here.",
 "DND5E.ItemConsumableActivation": "Consumable Activation",
 "DND5E.ItemConsumableUsage": "Consumable Usage",
 "DND5E.ItemConsumableDetails": "Consumable Details",
@@ -1013,16 +1061,20 @@
 "DND5E.LongRestEpic": "Long Rest (1 hour)",
 "DND5E.LongRestOvernight": "Long Rest (New Day)",
 "DND5E.LongRestHint": "Take a long rest? On a long rest you will recover hit points, half your maximum hit dice, class resources, limited use item charges, and spell slots.",
+"DND5E.LongRestHintGroup": "Take a long rest? On a long rest group members will recover hit points, half of their maximum hit dice, class resources, limited use item charges, and spell slots.",
 "DND5E.LongRestRecovery": "Recovers after Long Rest",
 "DND5E.LongRestResult": "{name} takes a long rest and recovers {health} Hit Points and {dice} Hit Dice.",
 "DND5E.LongRestResultHitDice": "{name} takes a long rest and recovers {dice} Hit Dice.",
 "DND5E.LongRestResultHitPoints": "{name} takes a long rest and recovers {health} Hit Points.",
 "DND5E.LongRestResultShort": "{name} takes a long rest.",
+"DND5E.MagicalBonus": "Magical Bonus",
 "DND5E.Materials": "Materials",
 "DND5E.Max": "Max",
 "DND5E.MaxCharacterLevelExceededWarn": "Character cannot be advanced past level {max}.",
 "DND5E.MaxClassLevelExceededWarn": "Class cannot be advanced past level {max}.",
 "DND5E.MaxClassLevelMinimumWarn": "Class must have at least one level.",
+"DND5E.Maximum": "Maximum",
+"DND5E.Minimum": "Minimum",
 "DND5E.Modifier": "Modifier",
 "DND5E.ModuleArtConfigH": "Configure which module-provided art should be used.",
 "DND5E.ModuleArtConfigL": "Configure Art",
@@ -1204,7 +1256,8 @@
 "DND5E.ShortRestGritty": "Short Rest (8 hours)",
 "DND5E.ShortRestEpic": "Short Rest (5 minutes)",
 "DND5E.ShortRestOvernight": "Short Rest (New Day)",
-"DND5E.ShortRestHint": "Take a short rest? On a short rest you may spend remaining Hit Dice and recover primary or secondary resources.",
+"DND5E.ShortRestHint": "Take a short rest? On a short rest you may spend remaining Hit Dice and recover item uses.",
+"DND5E.ShortRestHintGroup": "Take a short rest? On a short rest group members can spend Hit Dice and will recover item uses.",
 "DND5E.ShortRestNoHD": "No Hit Dice remaining",
 "DND5E.ShortRestRecovery": "Recovers after Short Rest",
 "DND5E.ShortRestResult": "{name} takes a short rest spending {dice} Hit Dice to recover {health} Hit Points.",
@@ -1355,12 +1408,115 @@
 "DND5E.SpellUnprepared": "Unprepared",
 "DND5E.SpellUsage": "Spell Usage",
 "DND5E.Spellbook": "Spellbook",
+"DND5E.StartingEquipment": {
+  "Title": "Starting Equipment",
+  "Action": {
+    "AddEntry": "Add Entry",
+    "Configure": "Configure Starting Equipment",
+    "RemoveEntry": "Remove Entry"
+  },
+  "Choice": {
+    "Armor": "Choose Armor",
+    "Focus": "Choose Spellcasting Focus",
+    "Tool": "Choose Tool",
+    "Weapon": "Choose Weapon"
+  },
+  "DropHint": "Drop item here to link",
+  "IfProficient": "If Proficient",
+  "Operator": {
+    "AND": "All of…",
+    "OR": "One of…"
+  },
+  "RequireProficiency": "Require Proficiency",
+  "SpecificItem": "Specific Item",
+  "Warning": {
+    "Depth": "Only three levels of depth allowed in starting equipment.",
+    "ItemTypeInvalid": "{type} items cannot be added to starting equipment."
+  },
+  "Wealth": {
+    "Label": "Starting Wealth",
+    "Hint": "Formula in GP that can be used in place of starting equipment."
+  }
+},
 "DND5E.SubclassIdentifierHint": "This identifier should match the identifier on the parent class to ensure they are properly linked.",
 "DND5E.SubclassAssignmentError": "{class} already has a subclass. Remove the existing '{subclass}' subclass before adding a new one.",
 "DND5E.SubclassDuplicateError": "A subclass with the identifier {identifier} already exists on this actor.",
 "DND5E.SubclassMismatchWarn": "{name} subclass has no matching class with identifier '{class}'.",
 "DND5E.SubclassName": "Subclass Name",
 "DND5E.Subtype": "Subtype",
+"DND5E.Summoning": {
+  "Label": "Summoning",
+  "Action": {
+    "Add": "Add Profile",
+    "Configure": "Configure Summons",
+    "Place": "Place Summons",
+    "Remove": "Remove Profile",
+    "Summon": "Summon"
+  },
+  "Bonuses": {
+    "ArmorClass": {
+      "Label": "Bonus Armor Class",
+      "Hint": "Bonus to the Armor Class set on the summoned creature added to what is specified in their statblock."
+    },
+    "Attack": {
+      "Label": "Bonus Attack Damage",
+      "Hint": "Additional damage done by the creature's attacks."
+    },
+    "Healing": {
+      "Label": "Bonus Healing",
+      "Hint": "Additional healing provided by healing abilities."
+    },
+    "HitPoints": {
+      "Label": "Bonus Hit Points",
+      "Hint": "Additional hit points added to the creature on top of what is specified in their statblock."
+    },
+    "Saves": {
+      "Label": "Bonus Save Damage",
+      "Hint": "Additional damage done by the creature's abilities that require saving throws."
+    }
+  },
+  "Configuration": "Summoning Configuration",
+  "CreatureChanges": {
+    "Label": "Creature Changes",
+    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats."
+  },
+  "DisplayName": "Display Name",
+  "DropHint": "Drop creature here",
+  "ItemChanges": {
+    "Label": "Item Changes",
+    "Hint": "Changes made to items on the summoned creature."
+  },
+  "Match": {
+    "Attacks": {
+      "Label": "Match Attacks",
+      "Hint": "Modify to hit values on the summoned creature's attacks to match that of the summoner."
+    },
+    "Proficiency": {
+      "Label": "Match Proficiency",
+      "Hint": "Modify the summoned creature's proficiency to match that of the summoner."
+    },
+    "Saves": {
+      "Label": "Match Saves",
+      "Hint": "Modify to saving throw DCs on the summoned creature's abilities to match that of the summoner."
+    }
+  },
+  "Profile": {
+    "Label": "Summons Profile",
+    "LabelPl": "Summons Profiles",
+    "Empty": "Click above to add a profile or drop an creature to summon here."
+  },
+  "Prompt": {
+    "Label": "Summon Prompt",
+    "Hint": "Disable the summoning prompt when item is used. Players will still be able to summon from the chat card."
+  },
+  "Warning": {
+    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
+    "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
+    "NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
+    "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
+    "Wildcard": "You must have 'Use File Browser' permissions to summon creatures with wildcard artwork."
+  }
+},
 "DND5E.Supply": "Supply",
 "DND5E.Suppressed": "Suppressed",
 "DND5E.Target": "Target",
@@ -1407,6 +1563,12 @@
 "DND5E.TimeYear": "Years",
 "DND5E.TMP": "TMP",
 "DND5E.ToHit": "To Hit",
+"DND5E.Tokens": {
+  "NoneSelected": "No Tokens Selected",
+  "NoneTargeted": "No Tokens Targeted",
+  "Selected": "Selected",
+  "Targeted": "Targeted"
+},
 "DND5E.TokenRings": {
   "BackgroundColor": "Background Color",
   "Effects": {
@@ -1489,6 +1651,20 @@
 "DND5E.UsesAvailable": "Available Uses",
 "DND5E.UsesMax": "Maximum Uses",
 "DND5E.UsesPeriod": "Recovery Period",
+"DND5E.UsesPeriods": {
+  "Charges": "Charges",
+  "ChargesAbbreviation": "Charges",
+  "Dawn": "Dawn",
+  "DawnAbbreviation": "Dawn",
+  "Day": "Day",
+  "DayAbbreviation": "Day",
+  "Dusk": "Dusk",
+  "DuskAbbreviation": "Dusk",
+  "Lr": "Long Rest",
+  "LrAbbreviation": "LR",
+  "Sr": "Short Rest",
+  "SrAbbreviation": "SR"
+},
 "DND5E.Vehicle": "Vehicle",
 "DND5E.VehicleActions": "Actions",
 "DND5E.VehicleActionsHint": "Actions taken with full crew complement",
@@ -1526,6 +1702,7 @@
 "DND5E.WarnCantAddMultipleAdvancements": "It is not currently possible to add multiple items with advancements to an actor at the same time. Please add them individually.",
 "DND5E.WarnMultipleArmor": "More than one suit of armor equipped, AC calculation may be incorrect.",
 "DND5E.WarnMultipleShields": "More than one shield equipped, AC calculation may be incorrect.",
+"DND5E.WeaponCategory": "{category} Weapon",
 "DND5E.WeaponImprov": "Improvised",
 "DND5E.WeaponMartialM": "Martial Melee",
 "DND5E.WeaponMartialProficiency": "Martial",
@@ -1545,6 +1722,7 @@
 "DND5E.spell": "spell",
 
 "EDITOR.DND5E.Inline": {
+  "ApplyStatus": "Apply Status to Selected Tokens",
   "AwardEach": "{award} each",
   "CheckShort": "{check}",
   "CheckLong": "{check} check",
@@ -1562,17 +1740,23 @@
 },
 
 "EFFECT.DND5E": {
+  "StatusBleeding": "Bleeding",
   "StatusBurrowing": "Burrowing",
   "StatusConcentrating": "Concentrating",
   "StatusCursed": "Cursed",
+  "StatusDead": "Dead",
   "StatusDodging": "Dodging",
   "StatusEncumbered": "Encumbered",
+  "StatusEthereal": "Ethereal",
   "StatusExceedingCarryingCapacity": "Exceeding Carrying Capacity",
   "StatusFlying": "Flying",
   "StatusHeavilyEncumbered": "Heavily Encumbered",
-  "StatusHidden": "Hidden",
+  "StatusHiding": "Hiding",
+  "StatusHovering": "Hovering",
   "StatusMarked": "Marked",
+  "StatusSilenced": "Silenced",
   "StatusSleeping": "Sleeping",
+  "StatusStable": "Stable",
   "StatusSurprised": "Surprised",
   "StatusTransformed": "Transformed"
 },
@@ -1664,6 +1848,8 @@
 "SETTINGS.5eMetricL": "Replaces all reference to lbs with kgs and updates the encumbrance calculations to use metric weight units.",
 "SETTINGS.5eNoAdvancementsN": "Disable level-up automation",
 "SETTINGS.5eNoAdvancementsL": "Do not prompt for level-up or character creation choices.",
+"SETTINGS.5eNoConcentrationN": "Disable concentration tracking",
+"SETTINGS.5eNoConcentrationL": "Disable the system's automated tracking of concentration.",
 "SETTINGS.5eNoExpL": "Remove experience bars from character sheets.",
 "SETTINGS.5eNoExpN": "Disable Experience Tracking",
 "SETTINGS.5eProfBonus": "PHB: Bonus (+2, +3, +4, +5, +6)",
@@ -1684,6 +1870,25 @@
 "SETTINGS.5eTokenRings": {
   "Name": "Disable Dynamic Token Rings",
   "Hint": "Disabling the token ring animations can improve performance."
+},
+"SETTINGS.DND5E": {
+  "ALLOWSUMMONING": {
+    "Name": "Allow Summoning",
+    "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
+  },
+  "THEME": {
+    "Name": "Theme",
+    "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."
+  }
+},
+
+"SHEETS.DND5E": {
+  "THEME": {
+    "Label": "Theme",
+    "Automatic": "Automatic",
+    "Dark": "Dark Mode",
+    "Light": "Light Mode"
+  }
 },
 
 "SOURCE.BOOK.SRD": "System Reference Document 5.1"
