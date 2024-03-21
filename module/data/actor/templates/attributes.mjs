@@ -28,7 +28,7 @@ export default class AttributesFields {
   static get common() {
     return {
       init: new RollConfigField({
-        ability: "dex",
+        ability: "",
         bonus: new FormulaField({required: true, label: "DND5E.InitiativeBonus"})
       }, { label: "DND5E.Initiative" }),
       movement: new MovementField()
@@ -76,7 +76,7 @@ export default class AttributesFields {
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
       }),
       concentration: new RollConfigField({
-        ability: "con",
+        ability: "",
         bonuses: new foundry.data.fields.SchemaField({
           save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
         }),
@@ -137,7 +137,7 @@ export default class AttributesFields {
    */
   static prepareConcentration(rollData) {
     const { concentration } = this.attributes;
-    const abilityId = concentration.ability;
+    const abilityId = concentration.ability || CONFIG.DND5E.defaultAbilities.concentration;
     const ability = this.abilities?.[abilityId] || {};
     const bonus = simplifyBonus(concentration.bonuses.save, rollData);
     concentration.save = (ability.save ?? 0) + bonus;
