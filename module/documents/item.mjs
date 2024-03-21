@@ -2451,6 +2451,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       await Item.deleteDocuments(Array.from(contents.map(i => i.id)), { pack: this.pack, parent: this.parent });
     }
 
+    // End concentration on any effects.
+    this.parent?.endConcentration?.(this);
+
     // Assign a new original class
     if ( this.parent && (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
       this.parent._assignPrimaryClass();

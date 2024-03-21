@@ -58,7 +58,7 @@ function chunkTerms(terms, type) {
   let currentChunk;
   let negative = false;
 
-  for ( const term of terms ) {
+  for ( let term of terms ) {
     // Plus or minus operators split chunks
     if ( (term instanceof OperatorTerm) && ["+", "-"].includes(term.operator) ) {
       if ( currentChunk ) pushChunk();
@@ -67,6 +67,7 @@ function chunkTerms(terms, type) {
     }
 
     // All other terms get added to the current chunk
+    term = RollTerm.fromData(foundry.utils.deepClone(term.toJSON()));
     currentChunk ??= { terms: [], negative, type: null };
     currentChunk.terms.push(term);
     const flavor = term.flavor?.toLowerCase().trim();

@@ -89,7 +89,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const data = effect.getFlag("dnd5e", "itemData");
       concentration.effects.add(effect);
       if ( data ) {
-        const item = this.items.get(data) ?? new Item.implementation(data, { keepId: true, parent: this });
+        const item = typeof data === "string"
+          ? this.items.get(data)
+          : new Item.implementation(data, { keepId: true, parent: this });
         if ( item ) concentration.items.add(item);
       }
     }
