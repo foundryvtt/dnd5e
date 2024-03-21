@@ -186,7 +186,7 @@ export default class AbilityUseDialog extends Dialog {
     for ( const profile of profiles ) {
       const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
       if ( profile.uuid && !doc ) continue;
-      options[profile._id] = profile.name ?? doc?.name ?? "—";
+      options[profile._id] = !!profile.name ? profile.name : (doc?.name ?? "—");
     }
     return options;
   }
