@@ -1,4 +1,5 @@
-![Up to date as of 3.1](https://img.shields.io/static/v1?label=dnd5e&message=3.1&color=informational)
+![Up to date as of 3.1.0](https://img.shields.io/static/v1?label=dnd5e&message=3.1.0&color=informational)
+
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
 > • Select a token, then open up the dev tools (F12 on Win; ⌥⌘I on Mac), and paste this into the Console (or save it as a Script macro in your hotbar):
