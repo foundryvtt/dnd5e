@@ -2427,7 +2427,8 @@ DND5E.consumableResources = [
 /**
  * @typedef {object} _ConditionConfiguration
  * @property {string} label        Localized label for the condition.
- * @property {boolean} [raw]       Is this a condition by RAW?
+ * @property {boolean} [pseudo]    Is this a pseudo-condition, i.e. one that does not appear in the conditions appendix
+ *                                 but acts as a status effect?
  * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
  */
 
@@ -2443,65 +2444,60 @@ DND5E.consumableResources = [
 DND5E.conditionTypes = {
   bleeding: {
     label: "EFFECT.DND5E.StatusBleeding",
-    icon: "systems/dnd5e/icons/svg/statuses/bleeding.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/bleeding.svg",
+    pseudo: true
   },
   blinded: {
     label: "DND5E.ConBlinded",
     icon: "systems/dnd5e/icons/svg/statuses/blinded.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ",
-    special: "BLIND",
-    raw: true
+    special: "BLIND"
   },
   charmed: {
     label: "DND5E.ConCharmed",
     icon: "systems/dnd5e/icons/svg/statuses/charmed.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD",
-    raw: true
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD"
   },
   cursed: {
     label: "EFFECT.DND5E.StatusCursed",
-    icon: "systems/dnd5e/icons/svg/statuses/cursed.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/cursed.svg",
+    pseudo: true
   },
   deafened: {
     label: "DND5E.ConDeafened",
     icon: "systems/dnd5e/icons/svg/statuses/deafened.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.6G8JSjhn701cBITY",
-    raw: true
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.6G8JSjhn701cBITY"
   },
   diseased: {
     label: "DND5E.ConDiseased",
-    icon: "systems/dnd5e/icons/svg/statuses/diseased.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/diseased.svg",
+    pseudo: true
   },
   exhaustion: {
     label: "DND5E.ConExhaustion",
     icon: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv",
-    levels: 6,
-    raw: true
+    levels: 6
   },
   frightened: {
     label: "DND5E.ConFrightened",
     icon: "systems/dnd5e/icons/svg/statuses/frightened.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.oreoyaFKnvZCrgij",
-    raw: true
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.oreoyaFKnvZCrgij"
   },
   grappled: {
     label: "DND5E.ConGrappled",
     icon: "systems/dnd5e/icons/svg/statuses/grappled.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn",
-    raw: true
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn"
   },
   incapacitated: {
     label: "DND5E.ConIncapacitated",
     icon: "systems/dnd5e/icons/svg/statuses/incapacitated.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.TpkZgLfxCmSndmpb",
-    raw: true
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.TpkZgLfxCmSndmpb"
   },
   invisible: {
     label: "DND5E.ConInvisible",
     icon: "systems/dnd5e/icons/svg/statuses/invisible.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u",
-    raw: true
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u"
   },
   paralyzed: {
     label: "DND5E.ConParalyzed",
@@ -2518,39 +2514,38 @@ DND5E.conditionTypes = {
   poisoned: {
     label: "DND5E.ConPoisoned",
     icon: "systems/dnd5e/icons/svg/statuses/poisoned.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx",
-    raw: true
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx"
   },
   prone: {
     label: "DND5E.ConProne",
     icon: "systems/dnd5e/icons/svg/statuses/prone.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.y0TkcdyoZlOTmAFT",
-    raw: true
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.y0TkcdyoZlOTmAFT"
   },
   restrained: {
     label: "DND5E.ConRestrained",
     icon: "systems/dnd5e/icons/svg/statuses/restrained.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc",
-    raw: true
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc"
   },
   silenced: {
     label: "EFFECT.DND5E.StatusSilenced",
-    icon: "systems/dnd5e/icons/svg/statuses/silenced.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/silenced.svg",
+    pseudo: true
   },
   stunned: {
     label: "DND5E.ConStunned",
     icon: "systems/dnd5e/icons/svg/statuses/stunned.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS",
-    statuses: ["incapacitated"],
-    raw: true
+    statuses: ["incapacitated"]
   },
   surprised: {
     label: "EFFECT.DND5E.StatusSurprised",
-    icon: "systems/dnd5e/icons/svg/statuses/surprised.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/surprised.svg",
+    pseudo: true
   },
   transformed: {
     label: "EFFECT.DND5E.StatusTransformed",
-    icon: "systems/dnd5e/icons/svg/statuses/transformed.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/transformed.svg",
+    pseudo: true
   },
   unconscious: {
     label: "DND5E.ConUnconscious",
