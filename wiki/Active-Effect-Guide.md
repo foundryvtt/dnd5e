@@ -113,7 +113,8 @@ E.g. Paladin Aura of Protection
 
 ## Skills
 ```
-system.skills.[abbreviation].bonuses.check
+system.skills.[abbreviation].value
+                             bonuses.check
                                      passive
 ```
 
@@ -156,6 +157,13 @@ system.skills.[abbreviation].bonuses.check
 | Attribute Key                                  | Change Mode | Effect Value | Roll Data? |
 | ---------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.skills.[abbreviation].bonuses.passive` | Add         | `[number]`   | No         |
+
+### Upgrade Proficiency Level to Expertise
+The number must be one of 0, 0.5, 1, and 2.
+
+| Attribute Key                        | Change Mode | Effect Value | Roll Data? |
+| ------------------------------------ | ----------- | ------------ | ---------- |
+| `system.skills.[abbreviation].value` | Upgrade     | `[number]`   | No         |
 
 ### Bonus to All Skill Checks
 
