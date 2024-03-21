@@ -109,6 +109,22 @@ E.g. Paladin Aura of Protection
 | ------------------------------ | ----------- | ------------ | ---------- |
 | `system.attributes.init.bonus` | Add         | `[formula]`  | Yes        |
 
+## Concentration
+
+### Bonus to Concentration
+Add a bonus to concentration saving throws.
+
+| Attribute Key                                  | Change Mode | Effect Value | Roll Data? |
+| ---------------------------------------------- | ----------- | ------------ | ---------- |
+| `system.attributes.concentration.bonuses.save` | Add         | `[formula]`  | Yes        |
+
+### Concentration Limit
+Change the amount of effects you can maintain concentration on at the same time.
+
+| Attribute Key                           | Change Mode | Effect Value | Roll Data? |
+| --------------------------------------- | ----------- | ------------ | ---------- |
+| `system.attributes.concentration.limit` | Override    | `[number]`   | No         |
+
 ---
 
 ## Skills
