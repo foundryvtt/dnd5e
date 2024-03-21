@@ -137,7 +137,7 @@ export default class AttributesFields {
    */
   static prepareConcentration(rollData) {
     const { concentration } = this.attributes;
-    const abilityId = concentration.ability;
+    const abilityId = concentration.ability || CONFIG.DND5E.defaultAbilities.concentration;
     const ability = this.abilities?.[abilityId] || {};
     const bonus = simplifyBonus(concentration.bonuses.save, rollData);
     concentration.save = (ability.save ?? 0) + bonus;
