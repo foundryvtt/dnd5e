@@ -171,7 +171,7 @@ export default class DamageApplicationElement extends HTMLElement {
         targetedTokens = (this.chatMessage.getFlag("dnd5e", "targets") ?? []).map(t => t.uuid);
         break;
       case "selected":
-        targetedTokens = canvas.tokens.controlled.map(t => t.actor?.uuid);
+        targetedTokens = canvas.tokens?.controlled?.map(t => t.actor?.uuid) ?? [];
         break;
     }
     targetedTokens = Array.from(new Set(targetedTokens));
