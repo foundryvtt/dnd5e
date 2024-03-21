@@ -28,7 +28,7 @@ Clicking the "Configure Summons" button will open the summoning configuration sc
 
 ### Summoning Profiles
 
-The top section that reads "Summoning Profiles" is where the actors that will be summoned is set up. It is easy to add actors here by dragging and dropping them from the world or a compendium into the app. By default they name displayed to users will match the actor name, but that can be changed by entering a custom label in the box to the right of the link. Any extra entries can be deleted using the delete button.
+The top section that reads "Summoning Profiles" is where the actors that will be summoned are set up. It is easy to add actors here by dragging and dropping them from the world or a compendium into the app. By default the name displayed to users will match the actor name, but that can be changed by entering a custom label in the box to the right of the link. Any extra entries can be deleted using the delete button.
 
 In the example above, the spell "Summon Beast" from *Tasha's Cauldron of Everything*, there are three profiles created to match with the three variants of Bestial Spirit that can be created: Air, Land, and Water. Custom labels have been added to make the usage window more legible to players.
 
