@@ -75,7 +75,7 @@
 
 `@attributes.concentration.limit` - Maximimum number of effects the actor can sustain concentration on.
 
-`@attributes.concentration.roll.min` and `.max` - The minimum and maximum values of the d20 for concentration-related saving throws.
+`@attributes.concentration.save` - The final bonus an actor has to concentration saving throws.
 
 #### Death Saves
 
