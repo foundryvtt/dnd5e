@@ -1,4 +1,4 @@
-![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
+![Up to date as of 3.1.0](https://img.shields.io/static/v1?label=dnd5e&message=3.1.0&color=informational)
 
 The dnd5e system adds a number of useful enrichers that can be used within journals or in item or actor descriptions. These enrichers will generate text based on the standard formatting used throughout 5e releases and provide rolls and related behavior that properly hooks into the system.
 
@@ -89,6 +89,17 @@ The formula can also include formula values that will be evaluated before the da
 > Any values entered in the formula will be resolved based on the stats of the owner of the item, not who ultimately performs the roll.
 
 
+## Lookup Enrichers
+
+The lookup enricher allows for referencing data within an actor's roll data and displaying it in a description. This is most useful for automatically including a creature's name (`[[lookup @name]]`) or their type (`[[lookup @details.type.config.label]]`), but can be used to reference any values normally available in [roll data](Roll-Formulas.md).
+
+![Lookup Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-lookup.jpg)
+
+A few additional parameters are available to transform the resulting text:
+- `[[lookup @name lowercase]]`: Converts the text to all lowercase (e.g. "adult white dragon")
+- `[[lookup @name uppercase]]`: Converts the text to all uppercase (e.g. "ADULT WHITE DRAGON")
+- `[[lookup @name capitalize]]`: Capitalizes the first word in the text (e.g. "Adult white dragon")
+
 ## Reference Enrichers
 The `&Reference` enricher allows for easy reference to rule pages and displays rich tooltips with the contents of a specific rule. It comes built-in with support for abilities, skills, conditions, damage types, and more.
 
@@ -143,7 +154,7 @@ Using the enricher is very simple, simply type `&Reference` with the name of the
 > <details>
 > <summary>Condition References</summary>
 >
-> | Creature Type | ID              |
+> | Condition     | ID              |
 > | ------------- | --------------- |
 > | Blinded       | `blinded`       |
 > | Charmed       | `charmed`       |
