@@ -1,3 +1,4 @@
+import TokenPlacement from "../../../canvas/token-placement.mjs";
 import { FormulaField } from "../../fields.mjs";
 
 const {
@@ -356,23 +357,13 @@ export class SummonsData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Data for token placement on the scene.
-   *
-   * @typedef {object} PlacementData
-   * @property {number} x
-   * @property {number} y
-   * @property {number} rotation
-   */
-
-  /**
    * Determine where the summons should be placed on the scene.
-   * @param {TokenDocument5e} token   Token to be placed.
+   * @param {PrototypeToken} token    Token to be placed.
    * @param {SummonsProfile} profile  Profile used for summoning.
-   * @returns {PlacementData[]}
+   * @returns {Promise<PlacementData[]>}
    */
-  async getPlacement(token, profile) {
-    // TODO: Query use for placement
-    return [{x: 1000, y: 1000, rotation: 0}];
+  getPlacement(token, profile) {
+    return TokenPlacement.place({ tokens: [token] });
   }
 
   /* -------------------------------------------- */
