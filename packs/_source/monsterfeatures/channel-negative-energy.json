@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>The {creature} magically unleashes negative energy. Creatures within 60 feet of the {creature}, including ones behind barriers and around corners, can't regain hit points until the end of the {creature}'s next turn.</p>",
+      "value": "<p>the [[lookup @name lowercase]] magically unleashes negative energy. Creatures within 60 feet of the [[lookup @name lowercase]], including ones behind barriers and around corners, can't regain hit points until the end of the [[lookup @name lowercase]]'s next turn.</p>",
       "chat": "",
       "unidentified": ""
     },
