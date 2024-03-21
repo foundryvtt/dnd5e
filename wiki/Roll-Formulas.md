@@ -81,8 +81,6 @@
 
 `@attributes.death.success` & `.failure` - Death save successes & failures
 
-`@attributes.death.roll.min` and `.max` - The minimum and maximum values of the d20 for death saving throws.
-
 #### Encumbrance
 
 `@attributes.encumbrance.value` and `.max` - The current and maximum capacity of the actor.
@@ -116,8 +114,6 @@
 `@attributes.init.prof` - Initiative [proficiency](Roll-Formulas#proficiency) details.
 
 `@attributes.init.total` - Final initiative modifier.
-
-`@attributes.init.roll.min` and `.max` - The minimum and maximum values of the d20 for initiative rolls.
 
 #### Movement
 
@@ -278,8 +274,6 @@
 `@skills.*.total` - Total skill check modifier (without any dice bonuses)
 
 `@skills.*.passive` - Passive skill value equalling `10 + total + bonuses.passive`.
-
-`@skills.*.roll.min` and `.max` - The minimum and maximum the d20 can roll on this skill check.
 
 ### Spells
 
