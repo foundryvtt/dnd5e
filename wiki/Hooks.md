@@ -1,4 +1,4 @@
-![Up to date as of 3.0.2](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
+![Up to date as of 3.1.0](https://img.shields.io/static/v1?label=dnd5e&message=3.1.0&color=informational)
 
 ## Actor
 
@@ -41,6 +41,62 @@ Fires after an ability save has been rolled.
 | actor | Actor5e | Actor for which the ability save has been rolled. |
 | roll | D20Roll | The resulting roll. |
 | abilityId | string | ID of the ability that was rolled as defined in `DND5E.abilities`. |
+
+### `dnd5e.preBeginConcentrating`
+
+Fires before a concentration effect is created. Returning `false` will prevent concentration effect from being created.
+
+| Name       | Type    | Description                            |
+| ---------- | ------- | -------------------------------------- |
+| actor      | Actor5e | The actor initiating concentration.    |
+| item       | Item5e  | The item that will be concentrated on. |
+| effectData | object  | Data used to create the ActiveEffect.  |
+
+### `dnd5e.beginConcentrating`
+
+Fires after a concentration effect is created.
+
+| Name   | Type           | Description                             |
+| ------ | -------------- | --------------------------------------- |
+| actor  | Actor5e        | The actor initiating concentration.     |
+| item   | Item5e         | The item that is being concentrated on. |
+| effect | ActiveEffect5e | The created ActiveEffect instance.      |
+
+### `dnd5e.preEndConcentrating`
+
+Fires before a concentration effect is deleted. Returning `false` will prevent concentration effect from being deleted.
+
+| Name   | Type           | Description                            |
+| ------ | -------------- | -------------------------------------- |
+| actor  | Actor5e        | The actor ending concentration.        |
+| effect | ActiveEffect5e | The ActiveEffect that will be deleted. |
+
+### `dnd5e.endConcentrating`
+
+Fires after a concentration effect is deleted.
+
+| Name   | Type           | Description                        |
+| ------ | -------------- | ---------------------------------- |
+| actor  | Actor5e        | The actor ending concentration.    |
+| effect | ActiveEffect5e | The ActiveEffect that was deleted. |
+
+### `dnd5e.preRollConcentration`
+
+Fires before a saving throw to maintain concentration is rolled. Returning `false` will prevent the normal rolling process.
+
+| Name    | Type                 | Description                                       |
+| ------- | -------------------- | ------------------------------------------------- |
+| actor   | Actor5e              | Actor for which the saving throw is being rolled. |
+| options | D20RollConfiguration | Configuration data for the pending roll.          |
+
+### `dnd5e.rollConcentration`
+
+Fires after a saving throw to maintain concentration is rolled.
+
+| Name  | Type    | Description                                       |
+| ----- | ------- | ------------------------------------------------- |
+| actor | Actor5e | Actor for which the saving throw has been rolled. |
+| roll  | D20Roll | The resulting roll.                               |
 
 ### `dnd5e.preCalculateDamage`
 
@@ -262,6 +318,15 @@ Fires when the actor completes a short or long rest.
 | ---- | ---- | ----------- |
 | actor | Actor5e | The actor that just completed resting. |
 | result | RestResult | Details on the completed rest. |
+
+### `dnd5e.groupRestCompleted`
+
+Fires when the rest process is completed for a group.
+
+| Name   | Type                     | Description                            |
+| ------ | ------------------------ | -------------------------------------- |
+| group  | Actor5e                  | The group that just completed resting. |
+| result | Map<Actor5e, RestResult> | Details on the rests completed.        |
 
 ### `dnd5e.transformActor`
 
@@ -508,6 +573,45 @@ Fires after the Item has rolled to recharge, but before any changes have been pe
 | ---- | ---- | ----------- |
 | item | Item5e | Item for which the roll was performed. |
 | roll | Roll | The resulting roll. |
+
+### `dnd5e.preSummon`
+
+Fires before summoning is performed. Returning `false` will prevent summoning from occurring.
+
+| Name    | Type           | Description                                |
+| ------- | -------------- | ------------------------------------------ |
+| item    | Item5e         | The item that is performing the summoning. |
+| profile | SummonsProfile | Profile used for summoning.                |
+
+### `dnd5e.preSummonToken`
+
+Fires before a specific token is summoned. After placement has been determined but before the final token data is constructed. Returning `false` will prevent this token from being summoned.
+
+| Name    | Type            | Description                                  |
+| ------- | --------------- | -------------------------------------------- |
+| item    | Item5e          | The item that is performing the summoning.   |
+| profile | SummonsProfile  | Profile used for summoning.                  |
+| config  | TokenUpdateData | Configuration for creating a modified token. |
+
+### `dnd5e.summonToken`
+
+Fires after token creation data is prepared, but before summoning occurs.
+
+| Name      | Type           | Description                                |
+| --------- | -------------- | ------------------------------------------ |
+| item      | Item5e         | The item that is performing the summoning. |
+| profile   | SummonsProfile | Profile used for summoning.                |
+| tokenData | object         | Data for creating a token.                 |
+
+### `dnd5e.postSummon`
+
+Fires when summoning is complete.
+
+| Name    | Type           | Description                                |
+| ------- | -------------- | ------------------------------------------ |
+| item    | Item5e         | The item that is performing the summoning. |
+| profile | SummonsProfile | Profile used for summoning.                |
+| tokens  | Token5e[]      | Tokens that have been created.             |
 
 ### `dnd5e.preCreateScrollFromSpell`
 

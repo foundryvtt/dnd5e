@@ -1,4 +1,4 @@
-![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
+![Up to date as of 3.1.0](https://img.shields.io/static/v1?label=dnd5e&message=3.1.0&color=informational)
 
 This document only covers Active Effects available to the Core dnd5e System.
 
