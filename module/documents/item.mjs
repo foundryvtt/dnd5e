@@ -1661,9 +1661,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         else level = this.actor.system.details.spellLevel;
         rollConfigs.forEach(c => this._scaleCantripDamage(c.parts, scaling.formula, level, rollData));
       }
-      else if ( spellLevel && (scaling.mode === "level") && scaling.formula ) {
+      else if ( spellLevel && (scaling.mode === "level") && (scaling.formula || c.parts.length) ) {
         rollConfigs.forEach(c =>
-          this._scaleSpellDamage(c.parts, this.system.level, spellLevel, scaling.formula, rollData)
+          this._scaleSpellDamage(c.parts, this.system.level, spellLevel, scaling.formula || c.parts[0], rollData)
         );
       }
     }
