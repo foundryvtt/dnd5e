@@ -170,6 +170,16 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Disable Concentration Tracking
+  game.settings.register("dnd5e", "disableConcentration", {
+    name: "SETTINGS.5eNoConcentrationN",
+    hint: "SETTINGS.5eNoConcentrationL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Collapse Item Cards (by default)
   game.settings.register("dnd5e", "autoCollapseItemCards", {
     name: "SETTINGS.5eAutoCollapseCardN",
