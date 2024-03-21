@@ -29,7 +29,11 @@
         <li class="item effect flexrow" data-effect-id="{{effect.id}}"
             {{~#if (and @root.actor (ne effect.target effect.parent))}} data-parent-id="{{effect.parent.id}}"{{/if}}>
             <div class="item-name effect-name flexrow">
-                <img class="item-image" src="{{effect.icon}}"/>
+                {{#if effect.img}}
+                <img class="item-image" src="{{ effect.img }}">
+                {{else}}
+                <img class="item-image" src="{{effect.icon}}">
+                {{/if}}
                 <h4>{{effect.name}}</h4>
             </div>
             <div class="effect-source">{{effect.sourceName}}</div>

@@ -127,23 +127,45 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /** @inheritdoc */
   async toggleActiveEffect(effectData, {overlay=false, active}={}) {
-    if ( !this.actor || !effectData.id ) return false;
-    const id = staticID(`dnd5e${effectData.id}`);
+    // TODO: This function as been deprecated in V12. Remove it once V11 support is dropped.
 
-    // Remove existing effects that contain this effect data's primary ID as their primary ID.
-    const existing = this.actor.effects.get(id);
-    const state = active ?? !existing;
-    if ( !state && existing ) await this.actor.deleteEmbeddedDocuments("ActiveEffect", [id]);
-
-    // Add a new effect
-    else if ( state ) {
-      const cls = getDocumentClass("ActiveEffect");
-      const effect = await cls.fromStatusEffect(effectData);
-      if ( overlay ) effect.updateSource({ "flags.core.overlay": true });
-      await cls.create(effect, { parent: this.actor, keepId: true });
+    if ( foundry.utils.isNewerVersion(game.version, 12) ) {
+      foundry.utils.logCompatibilityWarning("TokenDocument#toggleActiveEffect is deprecated in favor of "
+        + "Actor#toggleStatusEffect", {since: 12, until: 14});
     }
 
-    return state;
+    if ( !this.actor ) return false;
+    const statusId = effectData.id;
+    if ( !statusId ) return false;
+    const existing = [];
+
+    // Find the effect with the static _id of the status effect
+    if ( effectData._id ) {
+      const effect = this.actor.effects.get(effectData._id);
+      if ( effect ) existing.push(effect.id);
+    }
+
+    // If no static _id, find all single-status effects that have this status
+    else {
+      for ( const effect of this.actor.effects ) {
+        const statuses = effect.statuses;
+        if ( (statuses.size === 1) && statuses.has(statusId) ) existing.push(effect.id);
+      }
+    }
+
+    // Remove the existing effects unless the status effect is forced active
+    if ( existing.length ) {
+      if ( active ) return true;
+      await this.actor.deleteEmbeddedDocuments("ActiveEffect", existing);
+      return false;
+    }
+
+    // Create a new effect unless the status effect is forced inactive
+    if ( !active && (active !== undefined) ) return false;
+    const effect = await ActiveEffect.implementation.fromStatusEffect(statusId);
+    if ( overlay ) effect.updateSource({"flags.core.overlay": true});
+    await ActiveEffect.implementation.create(effect, {parent: this.actor, keepId: true});
+    return true;
   }
 
   /* -------------------------------------------- */
