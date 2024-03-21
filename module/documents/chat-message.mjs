@@ -17,11 +17,28 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /**
+   * The currently highlighted token for attack roll evaluation.
+   * @type {Token5e|null}
+   */
+  _highlighted = null;
+
+  /**
    * Should the apply damage options appear?
    * @type {boolean}
    */
   get canApplyDamage() {
-    return this.isRoll && this.isContentVisible && canvas.tokens?.controlled.length;
+    const type = this.flags.dnd5e?.roll?.type;
+    if ( type && (type !== "damage") ) return false;
+    return this.isRoll && this.isContentVisible && !!canvas.tokens?.controlled.length;
+  }
+
+  /**
+   * Should the select targets options appear?
+   * @type {boolean}
+   */
+  get canSelectTargets() {
+    if ( this.flags.dnd5e?.roll?.type !== "attack" ) return false;
+    return this.isRoll && this.isContentVisible;
   }
 
   /* -------------------------------------------- */
@@ -280,10 +297,9 @@ export default class ChatMessage5e extends ChatMessage {
     if ( !game.user.isGM || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
     const evaluation = document.createElement("ul");
     evaluation.classList.add("dnd5e2", "evaluation");
-    evaluation.innerHTML = targets.reduce((str, { name, img, ac, uuid }) => {
+    evaluation.innerHTML = targets.map(({ name, img, ac, uuid }) => {
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
-      return `
-        ${str}
+      return [`
         <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
           <img src="${img}" alt="${name}">
           <div class="name-stacked">
@@ -297,8 +313,13 @@ export default class ChatMessage5e extends ChatMessage {
             <span>${ac}</span>
           </div>
         </li>
-      `;
-    }, "");
+      `, isMiss];
+    }).sort((a, b) => (a[1] === b[1]) ? 0 : a[1] ? 1 : -1).reduce((str, [li]) => str + li, "");
+    evaluation.querySelectorAll("li.target").forEach(target => {
+      target.addEventListener("click", this._onTargetMouseDown.bind(this));
+      target.addEventListener("mouseover", this._onTargetHoverIn.bind(this));
+      target.addEventListener("mouseout", this._onTargetHoverOut.bind(this));
+    });
     html.querySelector(".message-content")?.appendChild(evaluation);
   }
 
@@ -412,40 +433,110 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {object[]}          The extended options Array including new context choices
    */
   static addChatMessageContextOptions(html, options) {
-    let canApply = li => game.messages.get(li.data("messageId"))?.canApplyDamage;
+    const canApply = ([li]) => game.messages.get(li.dataset.messageId)?.canApplyDamage;
+    const canTarget = ([li]) => game.messages.get(li.dataset.messageId)?.canSelectTargets;
     options.push(
       {
         name: game.i18n.localize("DND5E.ChatContextDamage"),
         icon: '<i class="fas fa-user-minus"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, 1)
+        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, 1),
+        group: "damage"
       },
       {
         name: game.i18n.localize("DND5E.ChatContextHealing"),
         icon: '<i class="fas fa-user-plus"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, -1)
+        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, -1),
+        group: "damage"
       },
       {
         name: game.i18n.localize("DND5E.ChatContextTempHP"),
         icon: '<i class="fas fa-user-clock"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardTemp(li)
+        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardTemp(li),
+        group: "damage"
       },
       {
         name: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
         icon: '<i class="fas fa-user-injured"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, 2)
+        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, 2),
+        group: "damage"
       },
       {
         name: game.i18n.localize("DND5E.ChatContextHalfDamage"),
         icon: '<i class="fas fa-user-shield"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, 0.5)
+        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, 0.5),
+        group: "damage"
+      },
+      {
+        name: game.i18n.localize("DND5E.ChatContextSelectHit"),
+        icon: '<i class="fas fa-bullseye"></i>',
+        condition: canTarget,
+        callback: ([li]) => game.messages.get(li.dataset.messageId)?.selectTargets(li, "hit"),
+        group: "attack"
+      },
+      {
+        name: game.i18n.localize("DND5E.ChatContextSelectMiss"),
+        icon: '<i class="fas fa-bullseye"></i>',
+        condition: canTarget,
+        callback: ([li]) => game.messages.get(li.dataset.messageId)?.selectTargets(li, "miss"),
+        group: "attack"
       }
     );
     return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle target selection and panning.
+   * @param {Event} event   The triggering event.
+   * @returns {Promise}     A promise that resolves once the canvas pan has completed.
+   * @protected
+   */
+  async _onTargetMouseDown(event) {
+    const uuid = event.currentTarget.dataset.uuid;
+    const actor = fromUuidSync(uuid);
+    const token = actor?.token?.object ?? actor?.getActiveTokens()[0];
+    if ( !token || !actor.testUserPermission(game.user, "OBSERVER")) return;
+    const releaseOthers = !event.shiftKey;
+    if ( token.controlled ) token.release();
+    else {
+      token.control({ releaseOthers });
+      return canvas.animatePan(token.center);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle hovering over a target in an attack roll message.
+   * @param {Event} event     Initiating hover event.
+   * @protected
+   */
+  _onTargetHoverIn(event) {
+    const uuid = event.currentTarget.dataset.uuid;
+    const actor = fromUuidSync(uuid);
+    const token = actor?.token?.object ?? actor?.getActiveTokens()[0];
+    if ( token && token.isVisible ) {
+      if ( !token.controlled ) token._onHoverIn(event, { hoverOutOthers: true });
+      this._highlighted = token;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle hovering out of a target in an attack roll message.
+   * @param {Event} event     Initiating hover event.
+   * @protected
+   */
+  _onTargetHoverOut(event) {
+    if ( this._highlighted ) this._highlighted._onHoverOut(event);
+    this._highlighted = null;
   }
 
   /* -------------------------------------------- */
@@ -467,6 +558,30 @@ export default class ChatMessage5e extends ChatMessage {
     return Promise.all(canvas.tokens.controlled.map(t => {
       return t.actor?.applyDamage(damages, { multiplier, invertHealing: false, ignore: true });
     }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Select the hit or missed targets.
+   * @param {HTMLElement} li    The chat entry which contains the roll data.
+   * @param {string} type       The type of selection ('hit' or 'miss').
+   */
+  selectTargets(li, type) {
+    if ( !canvas?.ready ) return;
+    const lis = li.closest("[data-message-id]").querySelectorAll(`.evaluation li.target.${type}`);
+    const uuids = new Set(Array.from(lis).map(n => n.dataset.uuid));
+    canvas.tokens.releaseAll();
+    uuids.forEach(uuid => {
+      const actor = fromUuidSync(uuid);
+      if ( !actor ) return;
+      const tokens = actor.isToken ? [actor.token?.object] : actor.getActiveTokens();
+      for ( const token of tokens ) {
+        if ( token?.isVisible && actor.testUserPermission(game.user, "OWNER") ) {
+          token.control({ releaseOthers: false });
+        }
+      }
+    });
   }
 
   /* -------------------------------------------- */
