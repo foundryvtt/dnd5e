@@ -1643,7 +1643,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Adjust damage from versatile usage
     if ( versatile && dmg.versatile ) {
       rollConfigs[0].parts[0] = dmg.versatile;
-      rollConfig.messageData["flags.dnd5e.roll"].versatile = true;
+      rollConfig.messageData["flags.dnd5e"].roll.versatile = true;
     }
 
     // Add magical damage if available
