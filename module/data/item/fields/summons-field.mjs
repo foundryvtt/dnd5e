@@ -277,7 +277,7 @@ export class SummonsData extends foundry.abstract.DataModel {
             }],
             disabled: false,
             icon: "icons/magic/defensive/shield-barrier-blue.webp",
-            name: game.i18n.localize("DND5E.Summoning.ArmorClass.Label")
+            name: game.i18n.localize("DND5E.Summoning.Bonuses.ArmorClass.Label")
           })).toObject());
         }
       }
@@ -297,7 +297,7 @@ export class SummonsData extends foundry.abstract.DataModel {
             }],
             disabled: false,
             icon: "icons/magic/life/heart-glowing-red.webp",
-            name: game.i18n.localize("DND5E.Summoning.HitPoints.Label")
+            name: game.i18n.localize("DND5E.Summoning.Bonuses.HitPoints.Label")
           })).toObject());
         } else {
           updates["system.attributes.hp.max"] = actor.system.attributes.hp.max + hpBonus.total;
