@@ -61,7 +61,7 @@ export default class AbilityUseDialog extends Dialog {
       summoningOptions: this._createSummoningOptions(item),
       resourceOptions: this._createResourceOptions(item),
       concentration: {
-        show: concentrationOptions.length > 0,
+        show: (config.beginConcentrating !== null) && !!concentrationOptions.length,
         options: concentrationOptions,
         optional: (concentrationOptions.length < limit) ? "—" : null
       },
