@@ -15,7 +15,7 @@ export default class ItemCompendium5e extends Compendium {
       items = this.collection.index;
     }
     for ( const item of items ) {
-      if ( items.has(item.system.container) ) {
+      if ( items.has(item.system?.container) ) {
         this._element?.[0].querySelector(`[data-entry-id="${item._id}"]`)?.remove();
       }
     }
