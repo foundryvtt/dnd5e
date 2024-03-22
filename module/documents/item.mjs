@@ -1661,11 +1661,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         else level = this.actor.system.details.spellLevel;
         rollConfigs.forEach(c => this._scaleCantripDamage(c.parts, scaling.formula, level, rollData));
       }
-      else if ( spellLevel && (scaling.mode === "level") && (scaling.formula || c.parts.length) ) {
-        rollConfigs.forEach(c =>
-          this._scaleSpellDamage(c.parts, this.system.level, spellLevel, scaling.formula || c.parts[0], rollData)
-        );
-      }
+      else if ( spellLevel && (scaling.mode === "level") ) rollConfigs.forEach(c => {
+        if ( scaling.formula || c.parts.length ) {
+          this._scaleSpellDamage(c.parts, this.system.level, spellLevel, scaling.formula || c.parts[0], rollData);
+        }
+      });
     }
 
     // Add damage bonus formula
