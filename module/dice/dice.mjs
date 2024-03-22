@@ -190,7 +190,7 @@ export async function damageRoll({
       rollOptions.criticalBonusDice = criticalBonusDice;
       rollOptions.criticalBonusDamage = criticalBonusDamage;
     }
-    rolls.push(new CONFIG.Dice.DamageRoll(formula, data, rollOptions));
+    if ( formula ) rolls.push(new CONFIG.Dice.DamageRoll(formula, data, rollOptions));
   }
 
   // Prompt a Dialog to further configure the DamageRoll
