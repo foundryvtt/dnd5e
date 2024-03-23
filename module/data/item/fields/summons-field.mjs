@@ -242,7 +242,7 @@ export class SummonsData extends foundry.abstract.DataModel {
    * @returns {object}                Changes that will be applied to the actor & its items.
    */
   async getChanges(actor, profile) {
-    const updates = { actor: {}, effects: [], items: [] };
+    const updates = { effects: [], items: [] };
     const rollData = this.item.getRollData();
     const prof = rollData.attributes?.prof ?? 0;
 
@@ -390,11 +390,9 @@ export class SummonsData extends foundry.abstract.DataModel {
       ui.notifications.warn("DND5E.Summoning.Warning.Wildcard", { localize: true });
     }
 
+    actorUpdates["flags.dnd5e.summon.origin"] = this.item.uuid;
     const tokenDocument = await actor.getTokenDocument(foundry.utils.mergeObject(placement, tokenUpdates));
     tokenDocument.delta.updateSource(actorUpdates);
-    tokenDocument.updateSource({
-      "flags.dnd5e.summon": { origin: this.item.uuid }
-    });
 
     return tokenDocument.toObject();
   }
