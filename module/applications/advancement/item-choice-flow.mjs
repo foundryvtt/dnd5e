@@ -66,9 +66,11 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     const items = [...this.pool, ...this.dropped].reduce((items, i) => {
-      i.checked = this.selected.has(i.uuid);
-      i.disabled = !i.checked && choices.full;
-      if ( !previouslySelected.has(i.uuid) ) items.push(i);
+      if ( i ) {
+        i.checked = this.selected.has(i.uuid);
+        i.disabled = !i.checked && choices.full;
+        if ( !previouslySelected.has(i.uuid) ) items.push(i);
+      }
       return items;
     }, []);
 
