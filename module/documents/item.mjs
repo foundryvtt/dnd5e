@@ -2573,6 +2573,58 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Add additional system-specific compendium context menu options for Item documents.
+   * @param {jQuery} html            The compendium HTML.
+   * @param {object{}} entryOptions  The default array of context menu options.
+   */
+  static addCompendiumContextOptions(html, entryOptions) {
+    const makeUuid = li => {
+      const pack = li[0].closest("[data-pack]")?.dataset.pack;
+      return `Compendium.${pack}.Item.${li.data("documentId")}`;
+    };
+    entryOptions.push({
+      name: "DND5E.Scroll.CreateScroll",
+      icon: '<i class="fa-solid fa-scroll"></i>',
+      callback: async li => {
+        const spell = await fromUuid(makeUuid(li));
+        const data = await Item5e.createScrollFromSpell(spell);
+        Item5e.createDocuments([data.toObject()]);
+      },
+      condition: li => {
+        const item = fromUuidSync(makeUuid(li));
+        return (item?.type === "spell") && game.user.hasPermission("ITEM_CREATE");
+      },
+      group: "system"
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add additional system-specific sidebar directory context menu options for Item documents.
+   * @param {jQuery} html            The sidebar HTML.
+   * @param {object[]} entryOptions  The default array of context menu options.
+   */
+  static addDirectoryContextOptions(html, entryOptions) {
+    entryOptions.push({
+      name: "DND5E.Scroll.CreateScroll",
+      icon: '<i class="fa-solid fa-scroll"></i>',
+      callback: async li => {
+        const spell = game.items.get(li.data("documentId"));
+        const data = await Item5e.createScrollFromSpell(spell);
+        Item5e.createDocuments([data.toObject()]);
+      },
+      condition: li => {
+        const item = game.items.get(li.data("documentId"));
+        return (item.type === "spell") && game.user.hasPermission("ITEM_CREATE");
+      },
+      group: "system"
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare creation data for the provided items and any items contained within them. The data created by this method
    * can be passed to `createDocuments` with `keepId` always set to true to maintain links to container contents.
    * @param {Item5e[]} items                     Items to create.
@@ -2682,11 +2734,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           scrollIntro,
           "<hr>",
           `<h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`,
-          isConc ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : null,
+          isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
           "<hr>",
           description.value,
           "<hr>",
-          `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3>`,
+          `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
           "<hr>",
           scrollDetails
         ].filterJoin("");
@@ -2696,7 +2748,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           "<p><em>",
           CONFIG.DND5E.spellLevels[level] ?? level,
           "&Reference[Spell Scroll]",
-          isConc ? `, ${game.i18n.localize("DND5E.ScrollRequiresConcentration")}` : null,
+          isConc ? `, ${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}` : null,
           "</em></p>",
           description.value
         ].filterJoin("");

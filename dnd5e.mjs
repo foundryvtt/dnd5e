@@ -494,6 +494,9 @@ Hooks.on("chatMessage", (app, message, data) => dnd5e.applications.Award.chatMes
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
+Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
+Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
+
 Hooks.on("applyTokenStatusEffect", canvas.Token5e.onApplyTokenStatusEffect);
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
