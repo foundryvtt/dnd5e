@@ -1343,7 +1343,8 @@ DND5E.validProperties = {
   ]),
   equipment: new Set([
     "concentration",
-    "mgc"
+    "mgc",
+    "stealthDisadvantage"
   ]),
   feat: new Set([
     "concentration",

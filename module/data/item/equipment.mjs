@@ -240,13 +240,4 @@ export default class EquipmentData extends ItemDataModel.mixin(
     );
     return this.properties.has("stealthDisadvantage");
   }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  get validProperties() {
-    const valid = super.validProperties;
-    valid.add("stealthDisadvantage");
-    return valid;
-  }
 }
