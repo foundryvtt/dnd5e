@@ -2617,12 +2617,24 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Create a consumable spell scroll Item from a spell Item.
-   * @param {Item5e|object} spell     The spell or item data to be made into a scroll
-   * @param {object} [options]        Additional options that modify the created scroll
-   * @returns {Promise<Item5e>}       The created scroll consumable item
+   * Configuration options for spell scroll creation.
+   *
+   * @typedef {object} SpellScrollConfiguration
+   * @property {"full"|"reference"|"none"} [explanation="full"]  Length of spell scroll rules text to include.
    */
-  static async createScrollFromSpell(spell, options={}) {
+
+  /**
+   * Create a consumable spell scroll Item from a spell Item.
+   * @param {Item5e|object} spell                   The spell or item data to be made into a scroll.
+   * @param {object} [options]                      Additional options that modify the created scroll.
+   * @param {SpellScrollConfiguration} [config={}]  Configuration options for scroll creation.
+   * @returns {Promise<Item5e>}                     The created scroll consumable item.
+   */
+  static async createScrollFromSpell(spell, options={}, config={}) {
+
+    config = foundry.utils.mergeObject({
+      explanation: "full"
+    }, config);
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
@@ -2631,11 +2643,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * A hook event that fires before the item data for a scroll is created.
      * @function dnd5e.preCreateScrollFromSpell
      * @memberof hookEvents
-     * @param {object} itemData    The initial item data of the spell to convert to a scroll
-     * @param {object} [options]   Additional options that modify the created scroll
-     * @returns {boolean}          Explicitly return false to prevent the scroll to be created.
+     * @param {object} itemData                  The initial item data of the spell to convert to a scroll.
+     * @param {object} options                   Additional options that modify the created scroll.
+     * @param {SpellScrollConfiguration} config  Configuration options for scroll creation.
+     * @returns {boolean}                        Explicitly return false to prevent the scroll to be created.
      */
-    if ( Hooks.call("dnd5e.preCreateScrollFromSpell", itemData, options) === false ) return;
+    if ( Hooks.call("dnd5e.preCreateScrollFromSpell", itemData, options, config) === false ) return;
 
     let {
       actionType, description, source, activation, duration, target,
@@ -2653,28 +2666,45 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const scrollItem = await fromUuid(scrollUuid);
     const scrollData = scrollItem.toObject();
     delete scrollData._id;
-
-    // Split the scroll description into an intro paragraph and the remaining details
-    const scrollDescription = scrollData.system.description.value;
-    const pdel = "</p>";
-    const scrollIntroEnd = scrollDescription.indexOf(pdel);
-    const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
-    const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
     const isConc = properties.includes("concentration");
 
     // Create a composite description from the scroll description and the spell details
-    const desc = [
-      scrollIntro,
-      "<hr>",
-      `<h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`,
-      isConc ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : null,
-      "<hr>",
-      description.value,
-      "<hr>",
-      `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3>`,
-      "<hr>",
-      scrollDetails
-    ].filterJoin("");
+    let desc;
+    switch ( config.explanation ) {
+      case "full":
+        // Split the scroll description into an intro paragraph and the remaining details
+        const scrollDescription = scrollData.system.description.value;
+        const pdel = "</p>";
+        const scrollIntroEnd = scrollDescription.indexOf(pdel);
+        const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
+        const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
+        desc = [
+          scrollIntro,
+          "<hr>",
+          `<h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`,
+          isConc ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : null,
+          "<hr>",
+          description.value,
+          "<hr>",
+          `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3>`,
+          "<hr>",
+          scrollDetails
+        ].filterJoin("");
+        break;
+      case "reference":
+        desc = [
+          "<p><em>",
+          CONFIG.DND5E.spellLevels[level] ?? level,
+          "&Reference[Spell Scroll]",
+          isConc ? `, ${game.i18n.localize("DND5E.ScrollRequiresConcentration")}` : null,
+          "</em></p>",
+          description.value
+        ].filterJoin("");
+        break;
+      default:
+        desc = description.value;
+        break;
+    }
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
@@ -2707,10 +2737,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * A hook event that fires after the item data for a scroll is created but before the item is returned.
      * @function dnd5e.createScrollFromSpell
      * @memberof hookEvents
-     * @param {Item5e|object} spell       The spell or item data to be made into a scroll.
-     * @param {object} spellScrollData    The final item data used to make the scroll.
+     * @param {Item5e|object} spell              The spell or item data to be made into a scroll.
+     * @param {object} spellScrollData           The final item data used to make the scroll.
+     * @param {SpellScrollConfiguration} config  Configuration options for scroll creation.
      */
-    Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
+    Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData, config);
+
     return new this(spellScrollData);
   }
 
