@@ -1998,16 +1998,16 @@ DND5E.spellPreparationModes = {
     label: "DND5E.SpellPrepAlways",
     upcast: true
   },
-  ritual: {
-    label: "DND5E.SpellPrepRitual",
-    order: -30
-  },
   atwill: {
     label: "DND5E.SpellPrepAtWill",
-    order: -20
+    order: -30
   },
   innate: {
     label: "DND5E.SpellPrepInnate",
+    order: -20
+  },
+  ritual: {
+    label: "DND5E.SpellPrepRitual",
     order: -10
   }
 };
