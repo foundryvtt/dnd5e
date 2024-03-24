@@ -1,4 +1,5 @@
 import { FormulaField, MappingField } from "../../fields.mjs";
+import RollConfigField from "../../shared/roll-config-field.mjs";
 import CommonTemplate from "./common.mjs";
 
 /**
@@ -44,11 +45,11 @@ export default class CreatureTemplate extends CommonTemplate {
           dc: new FormulaField({required: true, deterministic: true, label: "DND5E.BonusSpellDC"})
         }, {label: "DND5E.BonusSpell"})
       }, {label: "DND5E.Bonuses"}),
-      skills: new MappingField(new foundry.data.fields.SchemaField({
+      skills: new MappingField(new RollConfigField({
         value: new foundry.data.fields.NumberField({
           required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
         }),
-        ability: new foundry.data.fields.StringField({required: true, initial: "dex", label: "DND5E.Ability"}),
+        ability: "dex",
         bonuses: new foundry.data.fields.SchemaField({
           check: new FormulaField({required: true, label: "DND5E.SkillBonusCheck"}),
           passive: new FormulaField({required: true, label: "DND5E.SkillBonusPassive"})
@@ -57,11 +58,11 @@ export default class CreatureTemplate extends CommonTemplate {
         initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue,
         initialKeysOnly: true, label: "DND5E.Skills"
       }),
-      tools: new MappingField(new foundry.data.fields.SchemaField({
+      tools: new MappingField(new RollConfigField({
         value: new foundry.data.fields.NumberField({
           required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 1, label: "DND5E.ProficiencyLevel"
         }),
-        ability: new foundry.data.fields.StringField({required: true, initial: "int", label: "DND5E.Ability"}),
+        ability: "int",
         bonuses: new foundry.data.fields.SchemaField({
           check: new FormulaField({required: true, label: "DND5E.CheckBonus"})
         }, {label: "DND5E.ToolBonuses"})

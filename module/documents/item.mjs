@@ -410,11 +410,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Item Properties
     if ( this.system.properties ) {
-      this.labels.properties = Array.from(this.system.properties).map(prop => ({
-        abbr: prop,
-        label: CONFIG.DND5E.itemProperties[prop]?.label,
-        icon: CONFIG.DND5E.itemProperties[prop]?.icon
-      }));
+      this.labels.properties = this.system.properties.reduce((acc, prop) => {
+        if ( (prop === "concentration") && !this.requiresConcentration ) return acc;
+        acc.push({
+          abbr: prop,
+          label: CONFIG.DND5E.itemProperties[prop]?.label,
+          icon: CONFIG.DND5E.itemProperties[prop]?.icon
+        });
+        return acc;
+      }, []);
     }
 
     // Specialized preparation per Item type
@@ -580,9 +584,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   _prepareRecovery() {
     const { per } = this.system.uses ?? {};
-    this.labels.recovery = CONFIG.DND5E.limitedUsePeriods[per];
-    if ( per === "lr" ) this.labels.recovery = game.i18n.localize("DND5E.AbbreviationLR");
-    else if ( per === "sr" ) this.labels.recovery = game.i18n.localize("DND5E.AbbreviationSR");
+    const config = CONFIG.DND5E.limitedUsePeriods[per] ?? {};
+    this.labels.recovery = config.abbreviation ?? config.label;
   }
 
   /* -------------------------------------------- */
@@ -1019,19 +1022,22 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
     if ( !foundry.utils.isEmpty(resourceUpdates) ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
-    // Prepare card data & display it if options.createMessage is true
-    const cardData = await item.displayCard(options);
-
-    // Initiate or concentration.
+    // Initiate or end concentration.
     const effects = [];
     if ( config.beginConcentrating ) {
       const effect = await item.actor.beginConcentrating(item);
-      if ( effect ) effects.push(effect);
+      if ( effect ) {
+        effects.push(effect);
+        foundry.utils.setProperty(options.flags, "dnd5e.use.concentrationId", effect.id);
+      }
+      if ( config.endConcentration ) {
+        const deleted = await item.actor.endConcentration(config.endConcentration);
+        effects.push(...deleted);
+      }
     }
-    if ( config.endConcentration ) {
-      const deleted = await item.actor.endConcentration(config.endConcentration);
-      effects.push(...deleted);
-    }
+
+    // Prepare card data & display it if options.createMessage is true
+    const cardData = await item.displayCard(options);
 
     // Initiate measured template creation
     let templates;
@@ -1050,7 +1056,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Initiate summons creation
     let summoned;
     if ( config.createSummons ) {
-      console.log("TODO: Create Summons", config.summonsProfile);
+      try {
+        summoned = await item.system.summons.summon(config.summonsProfile);
+      } catch(err) {
+        Hooks.onError("Item5e#use", err, { log: "error", notify: "error" });
+      }
     }
 
     /**
@@ -1102,12 +1112,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       // Do not suggest consuming your own uses if also consuming them through resources.
       if ( consume.target === this.id ) config.consumeUsage = null;
     }
-    if ( game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = target.prompt;
-    if ( this.system.hasSummoning ) {
+    if ( game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget && canvas.scene ) {
+      config.createMeasuredTemplate = target.prompt;
+    }
+    if ( this.system.hasSummoning && this.system.summons.canSummon && canvas.scene ) {
       config.createSummons = summons.prompt;
       config.summonsProfile = this.system.summons.profiles[0]._id;
     }
-    if ( this.requiresConcentration ) {
+    if ( this.requiresConcentration && !game.settings.get("dnd5e", "disableConcentration") ) {
       config.beginConcentrating = true;
       const { effects } = this.actor.concentration;
       const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
@@ -1388,11 +1400,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Create the ChatMessage data object
     const chatData = {
       user: game.user.id,
-      type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
       speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
       flags: {"core.canPopout": true}
     };
+    // TODO: Remove when v11 support is dropped.
+    if ( game.release.generation < 12 ) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
 
     // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message
     if ( (this.type === "consumable") && !this.actor.items.has(this.id) ) {
@@ -1518,7 +1531,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       messageData: {
         "flags.dnd5e": {
-          targets: this._formatAttackTargets(),
+          targets: this.constructor._formatAttackTargets(),
           roll: { type: "attack", itemId: this.id, itemUuid: this.uuid }
         },
         speaker: ChatMessage.getSpeaker({actor: this.actor})
@@ -1569,7 +1582,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {TargetDescriptor5e[]}
    * @protected
    */
-  _formatAttackTargets() {
+  static _formatAttackTargets() {
     const targets = new Map();
     for ( const token of game.user.targets ) {
       const { name, img, system, uuid } = token.actor ?? {};
@@ -1595,10 +1608,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollDamage({critical, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
-    const messageData = {
-      "flags.dnd5e.roll": {type: "damage", itemId: this.id, itemUuid: this.uuid},
-      speaker: ChatMessage.getSpeaker({actor: this.actor})
-    };
 
     // Get roll data
     const dmg = this.system.damage;
@@ -1622,13 +1631,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         top: event ? event.clientY - 80 : null,
         left: window.innerWidth - 710
       },
-      messageData
+      messageData: {
+        "flags.dnd5e": {
+          targets: this.constructor._formatAttackTargets(),
+          roll: {type: "damage", itemId: this.id, itemUuid: this.uuid}
+        },
+        speaker: ChatMessage.getSpeaker({actor: this.actor})
+      }
     };
 
     // Adjust damage from versatile usage
     if ( versatile && dmg.versatile ) {
       rollConfigs[0].parts[0] = dmg.versatile;
-      messageData["flags.dnd5e.roll"].versatile = true;
+      rollConfig.messageData["flags.dnd5e"].roll.versatile = true;
     }
 
     // Add magical damage if available
@@ -1646,11 +1661,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         else level = this.actor.system.details.spellLevel;
         rollConfigs.forEach(c => this._scaleCantripDamage(c.parts, scaling.formula, level, rollData));
       }
-      else if ( spellLevel && (scaling.mode === "level") && scaling.formula ) {
-        rollConfigs.forEach(c =>
-          this._scaleSpellDamage(c.parts, this.system.level, spellLevel, scaling.formula, rollData)
-        );
-      }
+      else if ( spellLevel && (scaling.mode === "level") ) rollConfigs.forEach(c => {
+        if ( scaling.formula || c.parts.length ) {
+          this._scaleSpellDamage(c.parts, this.system.level, spellLevel, scaling.formula || c.parts[0], rollData);
+        }
+      });
     }
 
     // Add damage bonus formula
@@ -1702,8 +1717,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * A hook event that fires after a damage has been rolled for an Item.
      * @function dnd5e.rollDamage
      * @memberof hookEvents
-     * @param {Item5e} item       Item for which the roll was performed.
-     * @param {DamageRoll} rolls  The resulting rolls.
+     * @param {Item5e} item                    Item for which the roll was performed.
+     * @param {DamageRoll|DamageRoll[]} rolls  The resulting rolls (or single roll if `returnMultiple` is `false`).
      */
     if ( rolls || (rollConfig.returnMultiple && rolls?.length) ) Hooks.callAll("dnd5e.rollDamage", this, rolls);
 
@@ -1983,7 +1998,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
       // Get the Item from stored flag data or by the item ID on the Actor
       const storedData = message.getFlag("dnd5e", "itemData");
-      const item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
+      let item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
       if ( !item ) {
         ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {
           item: card.dataset.itemId, name: actor.name
@@ -2006,11 +2021,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           const li = button.closest("li.effect");
           let effect = item.effects.get(li.dataset.effectId);
           if ( !effect ) effect = await fromUuid(li.dataset.uuid);
-          let warn = false;
+          const concentration = actor.effects.get(message.getFlag("dnd5e", "use.concentrationId"));
           for ( const token of canvas.tokens.controlled ) {
-            if ( await this._applyEffectToToken(effect, token) === false ) warn = true;
+            try {
+              await this._applyEffectToToken(effect, token, { concentration });
+            } catch(err) {
+              Hooks.onError("Item5e._applyEffectToToken", err, { notify: "warn", log: "warn" });
+            }
           }
-          if ( warn ) ui.notifications.warn("DND5E.EffectApplyWarning", { localize: true });
           break;
         case "attack":
           await item.rollAttack({
@@ -2051,6 +2069,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           }
           break;
         case "summon":
+          if ( spellLevel ) item = item.clone({ "system.level": spellLevel });
           await this._onChatCardSummon(message, item);
           break;
         case "toolCheck":
@@ -2070,16 +2089,23 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Handle applying an Active Effect to a Token.
-   * @param {ActiveEffect5e} effect  The effect.
-   * @param {Token5e} token          The token.
-   * @returns {Promise<ActiveEffect5e>|false}
+   * @param {ActiveEffect5e} effect                   The effect.
+   * @param {Token5e} token                           The token.
+   * @param {object} [options]
+   * @param {ActiveEffect5e} [options.concentration]  An optional concentration effect to act as the applied effect's
+   *                                                  origin instead.
+   * @returns {Promise<ActiveEffect5e|false>}
+   * @throws {Error}                                  If the effect could not be applied.
    * @protected
    */
-  static _applyEffectToToken(effect, token) {
-    if ( !game.user.isGM && !token.actor?.isOwner ) return false;
+  static async _applyEffectToToken(effect, token, { concentration }={}) {
+    const origin = concentration ?? effect;
+    if ( !game.user.isGM && !token.actor?.isOwner ) {
+      throw new Error(game.i18n.localize("DND5E.EffectApplyWarningOwnership"));
+    }
 
     // Enable an existing effect on the target if it originated from this effect
-    const existingEffect = token.actor?.effects.find(e => e.origin === effect.uuid);
+    const existingEffect = token.actor?.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update({
         ...effect.constructor.getInitialDuration(),
@@ -2087,13 +2113,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       });
     }
 
+    if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
+      throw new Error(game.i18n.localize("DND5E.EffectApplyWarningConcentration"));
+    }
+
     // Otherwise, create a new effect on the target
     const effectData = foundry.utils.mergeObject(effect.toObject(), {
       disabled: false,
       transfer: false,
-      origin: effect.uuid
+      origin: origin.uuid
     });
-    return ActiveEffect.implementation.create(effectData, { parent: token.actor });
+    const applied = await ActiveEffect.implementation.create(effectData, { parent: token.actor });
+    if ( concentration ) await concentration.addDependent(applied);
+    return applied;
   }
 
   /* -------------------------------------------- */
@@ -2114,6 +2146,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Otherwise show the item use dialog to get the profile
     else {
       const config = await AbilityUseDialog.create(item, {
+        beginConcentrating: null,
         consumeResource: null,
         consumeSpellSlot: null,
         consumeUsage: null,
@@ -2123,13 +2156,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         button: {
           icon: '<i class="fa-solid fa-spaghetti-monster-flying"></i>',
           label: game.i18n.localize("DND5E.Summoning.Action.Summon")
-        }
+        },
+        disableScaling: true
       });
       if ( !config?.summonsProfile ) return;
       summonsProfile = config.summonsProfile;
     }
 
-    console.log("TODO: Create Summons", summonsProfile);
+    try {
+      await item.system.summons.summon(summonsProfile);
+    } catch(err) {
+      Hooks.onError("Item5e#_onChatCardSummon", err, { log: "error", notify: "error" });
+    }
   }
 
   /* -------------------------------------------- */
@@ -2140,19 +2178,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @private
    */
   static _onChatCardToggleContent(event) {
-    // If the user is clicking on a link in the collapsible region, don't collapse
-    if ( event.target.closest(":is(.item-name, .collapsible) :is(a, button)") ) return;
-
-    event.preventDefault();
     const header = event.currentTarget;
-    const card = header.closest(".chat-card");
-    const content = card.querySelector(".card-content:not(.details)");
-    if ( content ) content.style.display = content.style.display === "none" ? "block" : "none";
-    if ( header.classList.contains("collapsible") ) {
+    if ( header.classList.contains("collapsible") && !event.target.closest(".collapsible-content.card-content") ) {
+      event.preventDefault();
       header.classList.toggle("collapsed");
-      const collapsed = header.classList.contains("collapsed");
-      const details = header.querySelector(".collapsible-content");
-      details.style.height = collapsed ? "0" : `${details.scrollHeight}px`;
 
       // Clear the height from the chat popout container so that it appropriately resizes.
       const popout = header.closest(".chat-popout");
@@ -2421,6 +2450,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( contents?.size && options.deleteContents ) {
       await Item.deleteDocuments(Array.from(contents.map(i => i.id)), { pack: this.pack, parent: this.parent });
     }
+
+    // End concentration on any effects.
+    this.parent?.endConcentration?.(this);
 
     // Assign a new original class
     if ( this.parent && (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {

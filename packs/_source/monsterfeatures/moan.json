@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>Each creature within 60 feet of the {creature} that can hear its moan and that isn't an {type} must succeed on a  <strong>DC 13 Wisdom</strong> saving throw or become frightened until the end of the {creature}'s next turn. </p><p>If a creature's saving throw is successful, the creature is immune to the {creature}'s moan for the next 24 hours.</p></section><p>Each creature within 60 feet of the {creature} that can hear its moan and that isn't an {type} must make a <strong>Wisdom</strong> saving throw.</p>",
+      "value": "<section class=\"secret\"><p>Each creature within 60 feet of the [[lookup @name lowercase]] that can hear its moan and that isn't an [[lookup @details.type.config.label lowercase]] must succeed on a  <strong>DC 13 Wisdom</strong> saving throw or become frightened until the end of the [[lookup @name lowercase]]'s next turn. </p><p>If a creature's saving throw is successful, the creature is immune to the [[lookup @name lowercase]]'s moan for the next 24 hours.</p></section><p>Each creature within 60 feet of the [[lookup @name lowercase]] that can hear its moan and that isn't an [[lookup @details.type.config.label lowercase]] must make a <strong>Wisdom</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

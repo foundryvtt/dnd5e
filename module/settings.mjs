@@ -170,6 +170,16 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Disable Concentration Tracking
+  game.settings.register("dnd5e", "disableConcentration", {
+    name: "SETTINGS.5eNoConcentrationN",
+    hint: "SETTINGS.5eNoConcentrationL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Collapse Item Cards (by default)
   game.settings.register("dnd5e", "autoCollapseItemCards", {
     name: "SETTINGS.5eAutoCollapseCardN",
@@ -220,6 +230,16 @@ export function registerSystemSettings() {
       keepBackgroundAE: true,
       transformTokens: true
     }
+  });
+
+  // Allow Summoning
+  game.settings.register("dnd5e", "allowSummoning", {
+    name: "SETTINGS.DND5E.ALLOWSUMMONING.Name",
+    hint: "SETTINGS.DND5E.ALLOWSUMMONING.Hint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
   });
 
   // Metric Unit Weights

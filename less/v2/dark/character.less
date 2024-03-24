@@ -1,6 +1,6 @@
 .dnd5e-theme-dark .dnd5e2.sheet.actor.character,
 .dnd5e2.sheet.actor.character.dnd5e-theme-dark {
-  background: none;
+  &:not(.minimized) { background: none; }
 
   .window-content {
     background: var(--dnd5e-color-dark-gray) url("/ui/denim075.png");
@@ -45,6 +45,8 @@
         &::before { opacity: unset; }
       }
     }
+
+    .pills-group.empty > h3 > a { color: var(--color-text-light-0); }
   }
 
   .tab.biography textarea { color: var(--dnd5e-color-blue-white); }

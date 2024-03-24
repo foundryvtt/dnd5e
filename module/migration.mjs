@@ -350,7 +350,9 @@ export const migrateActorData = function(actor, migrationData, flags={}, { actor
   // Migrate embedded effects
   if ( actor.effects ) {
     const effects = migrateEffects(actor, migrationData);
-    migrateCopyActorTransferEffects(actor, effects, { actorUuid });
+    if ( foundry.utils.isNewerVersion("3.1.0", actor._stats?.systemVersion) ) {
+      migrateCopyActorTransferEffects(actor, effects, { actorUuid });
+    }
     if ( effects.length > 0 ) updateData.effects = effects;
   }
 
@@ -462,14 +464,14 @@ export const migrateEffects = function(parent, migrationData) {
  * @param {object} actor                 The parent actor.
  * @param {object[]} effects             An array of new effects to add.
  * @param {object} [options]             Additional options.
- * @param {string} [options.actorUuid]  UUID of the parent actor
+ * @param {string} [options.actorUuid]   UUID of the parent actor
  */
 export const migrateCopyActorTransferEffects = function(actor, effects, { actorUuid }={}) {
   if ( !actor.items ) return;
 
   for ( const item of actor.items ) {
     for ( const effect of item.effects ) {
-      if ( !effect.transfer) continue;
+      if ( !effect.transfer ) continue;
       if ( !isSpellOrScroll(item) ) continue;
       if ( effect.disabled ) continue;
 
@@ -494,9 +496,11 @@ export const migrateCopyActorTransferEffects = function(actor, effects, { actorU
  */
 export const migrateEffectData = function(effect, migrationData, { parent }={}) {
   const updateData = {};
-  _migrateDocumentIcon(effect, updateData, {...migrationData, field: "icon"});
+  _migrateDocumentIcon(effect, updateData, {...migrationData, field: game.release.generation < 12 ? "icon" : "img"});
   _migrateEffectArmorClass(effect, updateData);
-  _migrateTransferEffect(effect, parent, updateData);
+  if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
+    _migrateTransferEffect(effect, parent, updateData);
+  }
   return updateData;
 };
 

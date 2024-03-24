@@ -1,19 +1,8 @@
 import { ItemDataModel } from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
+import SummonsField from "../fields/summons-field.mjs";
 
-const {
-  ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, StringField
-} = foundry.data.fields;
-
-/**
- * Information for a single summoned creature.
- *
- * @typedef {object} SummonsProfile
- * @property {string} _id    Unique ID for this profile.
- * @property {number} count  Number of creatures to summon.
- * @property {string} name   Display name for this profile if it differs from actor's name.
- * @property {string} uuid   UUID of the actor to summon.
- */
+const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data model template for item actions.
@@ -35,15 +24,7 @@ const {
  * @property {string} save.ability        Ability required for the save.
  * @property {number} save.dc             Custom saving throw value.
  * @property {string} save.scaling        Method for automatically determining saving throw DC.
- * @property {object} summons
- * @property {string} summons.ac                  Formula used to calculate the AC on summoned actors.
- * @property {string} summons.hp                  Formula indicating bonus hit points to add to each summoned actor.
- * @property {object} summons.match
- * @property {boolean} summons.match.attacks      Match the to hit values on summoned actor's attack to the summoner.
- * @property {boolean} summons.match.proficiency  Match proficiency on summoned actor to the summoner.
- * @property {boolean} summons.match.saves        Match the save DC on summoned actor's abilities to the summoner.
- * @property {SummonsProfile[]} summons.profiles  Information on creatures that can be summoned.
- * @property {boolean} summons.prompt             Should the player be prompted to place the summons?
+ * @property {SummonsData} summons
  * @mixin
  */
 export default class ActionTemplate extends ItemDataModel {
@@ -73,30 +54,7 @@ export default class ActionTemplate extends ItemDataModel {
         dc: new NumberField({required: true, min: 0, integer: true, label: "DND5E.AbbreviationDC"}),
         scaling: new StringField({required: true, blank: false, initial: "spell", label: "DND5E.ScalingFormula"})
       }, {label: "DND5E.SavingThrow"}),
-      summons: new SchemaField({
-        ac: new FormulaField({label: "DND5E.Summoning.ArmorClass.Label", hint: "DND5E.Summoning.ArmorClass.hint"}),
-        hp: new FormulaField({label: "DND5E.Summoning.HitPoints.Label", hint: "DND5E.Summoning.HitPoints.hint"}),
-        match: new SchemaField({
-          attacks: new BooleanField({
-            label: "DND5E.Summoning.Match.Attacks.Label", hint: "DND5E.Summoning.Match.Attacks.Hint"
-          }),
-          proficiency: new BooleanField({
-            label: "DND5E.Summoning.Match.Proficiency.Label", hint: "DND5E.Summoning.Match.Proficiency.Hint"
-          }),
-          saves: new BooleanField({
-            label: "DND5E.Summoning.Match.Saves.Label", hint: "DND5E.Summoning.Match.Saves.Hint"
-          })
-        }),
-        profiles: new ArrayField(new SchemaField({
-          _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
-          count: new NumberField({integer: true, min: 1}),
-          name: new StringField(),
-          uuid: new StringField()
-        })),
-        prompt: new BooleanField({
-          initial: true, label: "DND5E.Summoning.Prompt.Label", hint: "DND5E.Summoning.Prompt.Hint"
-        })
-      })
+      summons: new SummonsField()
     };
   }
 
@@ -288,7 +246,7 @@ export default class ActionTemplate extends ItemDataModel {
    * @type {boolean}
    */
   get hasSummoning() {
-    return (this.actionType === "summ") && !!this.summons.profiles.length;
+    return (this.actionType === "summ") && !!this.summons?.profiles.length;
   }
 
   /* -------------------------------------------- */

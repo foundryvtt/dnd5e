@@ -201,6 +201,13 @@ export default class InventoryElement extends HTMLElement {
         icon: "<i class='fas fa-trash fa-fw'></i>",
         condition: () => item.isOwner,
         callback: li => this._onAction(li[0], "delete")
+      },
+      {
+        name: "DND5E.ConcentrationBreak",
+        icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
+        condition: () => this.actor.concentration?.items.has(item),
+        callback: () => this.actor.endConcentration(item),
+        group: "state"
       }
     ];
 

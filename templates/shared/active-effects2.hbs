@@ -78,7 +78,7 @@
                            aria-label="{{ localize "DND5E.EffectDelete" }}">
                             <i class="fas fa-trash"></i>
                         </a>
-                        {{else}}
+                        {{else if toggleable}}
                         <a class="effect-control item-control {{#unless disabled}}active{{/unless}}"
                            data-action="toggle"
                            data-tooltip="{{#if disabled}}DND5E.EffectEnable{{else}}DND5E.EffectDisable{{/if}}"

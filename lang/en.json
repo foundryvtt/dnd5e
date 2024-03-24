@@ -358,6 +358,7 @@
 "DND5E.BonusAbility": "Global Ability Bonuses",
 "DND5E.BonusAbilityCheck": "Global Ability Check Bonus",
 "DND5E.BonusAbilitySave": "Global Saving Throw Bonus",
+"DND5E.BonusAbilitySaveTitle": "Global Saving Throws",
 "DND5E.BonusAbilitySkill": "Global Skill Check Bonus",
 "DND5E.BonusAction": "Bonus Action",
 "DND5E.BonusActionAbbr": "BA",
@@ -387,6 +388,8 @@
 "DND5E.ChatContextTempHP": "Apply Temporary HP",
 "DND5E.ChatContextDoubleDamage": "Apply Double Damage",
 "DND5E.ChatContextHalfDamage": "Apply Half Damage",
+"DND5E.ChatContextSelectHit": "Select Hit Targets",
+"DND5E.ChatContextSelectMiss": "Select Missed Targets",
 "DND5E.ChatFlavor": "Chat Message Flavor",
 "DND5E.CheckBonus": "Check Bonus",
 "DND5E.ClassAdd": "Add Class",
@@ -442,16 +445,21 @@
 "DND5E.ConUnconscious": "Unconscious",
 "DND5E.Concentration": "Concentration",
 "DND5E.ConcentrationAbbr": "C",
+"DND5E.ConcentrationBreak": "Break Concentration",
+"DND5E.ConcentrationBreakWarning": "Breaking concentration on an effect that is active on other creatures requires an active GM to be present.",
+"DND5E.ConcentrationBonus": "Concentration Bonus",
 "DND5E.ConcentrationDuration": "Concentration, up to {duration}",
 "DND5E.ConcentratingOn": "You are maintaining concentration on the effects of the '{name}' {type}.",
 "DND5E.ConcentratingEndChoice": "You are concentrating on effects from more than one source. Pick which effect to end.",
 "DND5E.ConcentratingMissingItem": "The effect that is concentrated on and to be replaced does not exist.",
 "DND5E.ConcentratingLimited": "You are not able to begin concentrating on an additional effect.",
+"DND5E.ConcentrationLimit": "Concentration Limit",
 "DND5E.ConcentratingEnd": "End Concentration",
 "DND5E.ConcentratingItemless": "Concentration With No Source",
 "DND5E.ConcentratingWarnLimit": "You cannot maintain concentration on more effects!",
 "DND5E.ConcentratingWarnLimitOptional": "You may end concentration on one of your maintained effects to use this item.",
 "DND5E.ConcentratingWarnLimitZero": "You are not able to maintain concentration on any effects!",
+"DND5E.ConcentrationConfigurationHint": "Configure concentration modifiers and bonuses which apply to this creature.",
 "DND5E.ConsumeTitle": "Resource Consumption",
 "DND5E.ConsumeAmount": "Consumption Amount",
 "DND5E.ConsumeTarget": "Consumption Target",
@@ -573,6 +581,16 @@
 "DND5E.Damage": "Damage",
 "DND5E.DamageAcid": "Acid",
 "DND5E.DamageAll": "All Damage",
+"DND5E.DamageApplication": {
+  "Change": {
+    "Modification": "{type} Modification",
+    "Immunity": "{type} Immunity",
+    "Resistance": "{type} Resistance",
+    "Vulnerability": "{type} Vulnerability"
+  },
+  "Downgrading": "Downgrading {source} to Resistance",
+  "Ignoring": "Ignoring {source}"
+},
 "DND5E.DamageBludgeoning": "Bludgeoning",
 "DND5E.DamageCold": "Cold",
 "DND5E.DamageFire": "Fire",
@@ -653,7 +671,8 @@
 "DND5E.Effect": "Effect",
 "DND5E.Effects": "Effects",
 "DND5E.EffectsApplyTokens": "Apply to selected tokens",
-"DND5E.EffectApplyWarning": "Effects cannot be applied to tokens you are not the owner of.",
+"DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
+"DND5E.EffectApplyWarningOwnership": "Effects cannot be applied to tokens you are not the owner of.",
 "DND5E.EffectsSearch": "Search effects",
 "DND5E.Environment": "Environment",
 "DND5E.EquipmentBonus": "Magical Bonus",
@@ -713,9 +732,12 @@
     "EpicBoon": "Epic Boon"
   }
 },
-"DND5E.Focus.Arcane": "Arcane Focus",
-"DND5E.Focus.Druidic": "Druidic Focus",
-"DND5E.Focus.Holy": "Holy Focus",
+"DND5E.Focus": {
+  "Label": "Spellcasting Focus",
+  "Arcane": "Arcane Focus",
+  "Druidic": "Druidic Focus",
+  "Holy": "Holy Focus"
+},
 "DND5E.Loot.Art": "Art Object",
 "DND5E.Loot.Gear": "Adventuring Gear",
 "DND5E.Loot.Gem": "Gemstone",
@@ -1390,7 +1412,9 @@
 "DND5E.StartingEquipment": {
   "Title": "Starting Equipment",
   "Action": {
-    "Configure": "Configure Starting Equipment"
+    "AddEntry": "Add Entry",
+    "Configure": "Configure Starting Equipment",
+    "RemoveEntry": "Remove Entry"
   },
   "Choice": {
     "Armor": "Choose Armor",
@@ -1398,12 +1422,18 @@
     "Tool": "Choose Tool",
     "Weapon": "Choose Weapon"
   },
+  "DropHint": "Drop item here to link",
   "IfProficient": "If Proficient",
   "Operator": {
-    "AND": "All",
-    "OR": "One"
+    "AND": "All of…",
+    "OR": "One of…"
   },
+  "RequireProficiency": "Require Proficiency",
   "SpecificItem": "Specific Item",
+  "Warning": {
+    "Depth": "Only three levels of depth allowed in starting equipment.",
+    "ItemTypeInvalid": "{type} items cannot be added to starting equipment."
+  },
   "Wealth": {
     "Label": "Starting Wealth",
     "Hint": "Formula in GP that can be used in place of starting equipment."
@@ -1424,9 +1454,27 @@
     "Remove": "Remove Profile",
     "Summon": "Summon"
   },
-  "ArmorClass": {
-    "Label": "Bonus Armor Class",
-    "Hint": "Bonus to the Armor Class set on the summoned creature added to what is specified in their statblock."
+  "Bonuses": {
+    "ArmorClass": {
+      "Label": "Bonus Armor Class",
+      "Hint": "Bonus to the Armor Class set on the summoned creature added to what is specified in their statblock."
+    },
+    "Attack": {
+      "Label": "Bonus Attack Damage",
+      "Hint": "Additional damage done by the creature's attacks."
+    },
+    "Healing": {
+      "Label": "Bonus Healing",
+      "Hint": "Additional healing provided by healing abilities."
+    },
+    "HitPoints": {
+      "Label": "Bonus Hit Points",
+      "Hint": "Additional hit points added to the creature on top of what is specified in their statblock."
+    },
+    "Saves": {
+      "Label": "Bonus Save Damage",
+      "Hint": "Additional damage done by the creature's abilities that require saving throws."
+    }
   },
   "Configuration": "Summoning Configuration",
   "CreatureChanges": {
@@ -1435,10 +1483,6 @@
   },
   "DisplayName": "Display Name",
   "DropHint": "Drop creature here",
-  "HitPoints": {
-    "Label": "Bonus Hit Points",
-    "Hint": "Additional hit points added to the creature on top of what is specified in their statblock."
-  },
   "ItemChanges": {
     "Label": "Item Changes",
     "Hint": "Changes made to items on the summoned creature."
@@ -1465,6 +1509,13 @@
   "Prompt": {
     "Label": "Summon Prompt",
     "Hint": "Disable the summoning prompt when item is used. Players will still be able to summon from the chat card."
+  },
+  "Warning": {
+    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
+    "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
+    "NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
+    "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
+    "Wildcard": "You must have 'Use File Browser' permissions to summon creatures with wildcard artwork."
   }
 },
 "DND5E.Supply": "Supply",
@@ -1513,6 +1564,12 @@
 "DND5E.TimeYear": "Years",
 "DND5E.TMP": "TMP",
 "DND5E.ToHit": "To Hit",
+"DND5E.Tokens": {
+  "NoneSelected": "No Tokens Selected",
+  "NoneTargeted": "No Tokens Targeted",
+  "Selected": "Selected",
+  "Targeted": "Targeted"
+},
 "DND5E.TokenRings": {
   "BackgroundColor": "Background Color",
   "Effects": {
@@ -1595,6 +1652,20 @@
 "DND5E.UsesAvailable": "Available Uses",
 "DND5E.UsesMax": "Maximum Uses",
 "DND5E.UsesPeriod": "Recovery Period",
+"DND5E.UsesPeriods": {
+  "Charges": "Charges",
+  "ChargesAbbreviation": "Charges",
+  "Dawn": "Dawn",
+  "DawnAbbreviation": "Dawn",
+  "Day": "Day",
+  "DayAbbreviation": "Day",
+  "Dusk": "Dusk",
+  "DuskAbbreviation": "Dusk",
+  "Lr": "Long Rest",
+  "LrAbbreviation": "LR",
+  "Sr": "Short Rest",
+  "SrAbbreviation": "SR"
+},
 "DND5E.Vehicle": "Vehicle",
 "DND5E.VehicleActions": "Actions",
 "DND5E.VehicleActionsHint": "Actions taken with full crew complement",
@@ -1778,6 +1849,8 @@
 "SETTINGS.5eMetricL": "Replaces all reference to lbs with kgs and updates the encumbrance calculations to use metric weight units.",
 "SETTINGS.5eNoAdvancementsN": "Disable level-up automation",
 "SETTINGS.5eNoAdvancementsL": "Do not prompt for level-up or character creation choices.",
+"SETTINGS.5eNoConcentrationN": "Disable concentration tracking",
+"SETTINGS.5eNoConcentrationL": "Disable the system's automated tracking of concentration.",
 "SETTINGS.5eNoExpL": "Remove experience bars from character sheets.",
 "SETTINGS.5eNoExpN": "Disable Experience Tracking",
 "SETTINGS.5eProfBonus": "PHB: Bonus (+2, +3, +4, +5, +6)",
@@ -1800,9 +1873,13 @@
   "Hint": "Disabling the token ring animations can improve performance."
 },
 "SETTINGS.DND5E": {
+  "ALLOWSUMMONING": {
+    "Name": "Allow Summoning",
+    "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
+  },
   "THEME": {
     "Name": "Theme",
-    "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings. Can be overridden on a sheet-by-sheet basis."
+    "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."
   }
 },
 

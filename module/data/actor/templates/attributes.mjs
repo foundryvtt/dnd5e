@@ -3,6 +3,7 @@ import MovementField from "../../shared/movement-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
+import { simplifyBonus } from "../../../utils.mjs";
 
 /**
  * Shared contents of the attributes schema between various actor types.
@@ -26,9 +27,9 @@ export default class AttributesFields {
    */
   static get common() {
     return {
-      init: new foundry.data.fields.SchemaField({
-        ability: new foundry.data.fields.StringField({label: "DND5E.AbilityModifier"}),
-        bonus: new FormulaField({label: "DND5E.InitiativeBonus"})
+      init: new RollConfigField({
+        ability: "",
+        bonus: new FormulaField({required: true, label: "DND5E.InitiativeBonus"})
       }, { label: "DND5E.Initiative" }),
       movement: new MovementField()
     };
@@ -55,10 +56,10 @@ export default class AttributesFields {
    * @property {string} concentration.ability   The ability used for concentration saving throws.
    * @property {string} concentration.bonus     The bonus provided to concentration saving throws.
    * @property {number} concentration.limit     The amount of items this actor can concentrate on.
-   * @property {number} concentration.mode      The default advantage mode for this actor's concentration saving throws.
    * @property {object} concentration.roll
    * @property {number} concentration.roll.min  The minimum the d20 can roll.
    * @property {number} concentration.roll.max  The maximum the d20 can roll.
+   * @property {number} concentration.roll.mode The default advantage mode for this actor's concentration saving throws.
    */
   static get creature() {
     return {
@@ -75,7 +76,10 @@ export default class AttributesFields {
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
       }),
       concentration: new RollConfigField({
-        ability: "con",
+        ability: "",
+        bonuses: new foundry.data.fields.SchemaField({
+          save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
+        }),
         limit: new foundry.data.fields.NumberField({integer: true, min: 0, initial: 1, label: "DND5E.AttrConcentration.Limit"})
       }, {label: "DND5E.Concentration"})
     };
@@ -127,6 +131,43 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Prepare concentration data for an Actor.
+   * @this {CharacterData|NPCData}
+   * @param {object} rollData  The Actor's roll data.
+   */
+  static prepareConcentration(rollData) {
+    const { concentration } = this.attributes;
+    const abilityId = concentration.ability || CONFIG.DND5E.defaultAbilities.concentration;
+    const ability = this.abilities?.[abilityId] || {};
+    const bonus = simplifyBonus(concentration.bonuses.save, rollData);
+    concentration.save = (ability.save ?? 0) + bonus;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate maximum hit points, taking an provided advancement into consideration.
+   * @param {object} hp                 HP object to calculate.
+   * @param {object} [options={}]
+   * @param {HitPointsAdvancement[]} [options.advancement=[]]  Advancement items from which to get hit points per-level.
+   * @param {number} [options.bonus=0]  Additional bonus to add atop the calculated value.
+   * @param {number} [options.mod=0]    Modifier for the ability to add to hit points from advancement.
+   * @this {ActorDataModel}
+   */
+  static prepareHitPoints(hp, { advancement=[], mod=0, bonus=0 }={}) {
+    const base = advancement.reduce((total, advancement) => total + advancement.getAdjustedTotal(mod), 0);
+    hp.max = (hp.max ?? 0) + base + bonus;
+    if ( this.parent.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
+
+    hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
+    hp.value = Math.min(hp.value, hp.effectiveMax);
+    hp.damage = hp.effectiveMax - hp.value;
+    hp.pct = Math.clamped(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
    * @this {CharacterData|NPCData}
    */
@@ -155,5 +196,33 @@ export default class AttributesFields {
       }
       this.attributes.movement[type] = speed;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply movement and sense changes based on a race item. This method should be called during
+   * the `prepareEmbeddedData` step of data preparation.
+   * @param {Item5e} race                    Race item from which to get the stats.
+   * @param {object} [options={}]
+   * @param {boolean} [options.force=false]  Override any values on the actor.
+   * @this {CharacterData|NPCData}
+   */
+  static prepareRace(race, { force=false }={}) {
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
+      this.attributes.movement[key] = race.system.movement[key];
+    }
+    if ( race.system.movement.hover ) this.attributes.movement.hover = true;
+    if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;
+    else this.attributes.movement.units ??= race.system.movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
+      if ( !race.system.senses[key] || (!force && (this.attributes.senses[key] !== null)) ) continue;
+      this.attributes.senses[key] = race.system.senses[key];
+    }
+    this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
+    if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
+    else this.attributes.senses.units ??= race.system.senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
   }
 }

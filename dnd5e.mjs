@@ -50,6 +50,8 @@ Hooks.once("init", function() {
 
   // TODO: Remove when v11 support is dropped.
   CONFIG.compatibility.excludePatterns.push(/Math\.clamped/);
+  CONFIG.compatibility.excludePatterns.push(/\{\{filePicker}}/);
+  CONFIG.compatibility.excludePatterns.push(/foundry\.dice\.terms/);
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -90,10 +92,6 @@ Hooks.once("init", function() {
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
-
-  // Configure trackable & consumable attributes.
-  _configureTrackableAttributes();
-  _configureConsumableAttributes();
 
   // Register Roll Extensions
   CONFIG.Dice.rolls.push(dice.D20Roll);
@@ -297,9 +295,15 @@ function _configureFonts() {
  * Configure system status effects.
  */
 function _configureStatusEffects() {
-  const addEffect = (effects, data) => {
+  const addEffect = (effects, {special, ...data}) => {
+    data = foundry.utils.deepClone(data);
+    data._id = utils.staticID(`dnd5e${data.id}`);
+    if ( foundry.utils.isNewerVersion(game.version, 12) ) {
+      data.img = data.icon ?? data.img;
+      delete data.icon;
+    }
     effects.push(data);
-    if ( "special" in data ) CONFIG.specialStatusEffects[data.special] = data.id;
+    if ( special ) CONFIG.specialStatusEffects[special] = data.id;
   };
   CONFIG.statusEffects = Object.entries(CONFIG.DND5E.statusEffects).reduce((arr, [id, data]) => {
     const original = CONFIG.statusEffects.find(s => s.id === id);
@@ -319,6 +323,10 @@ function _configureStatusEffects() {
  * Prepare attribute lists.
  */
 Hooks.once("setup", function() {
+  // Configure trackable & consumable attributes.
+  _configureTrackableAttributes();
+  _configureConsumableAttributes();
+
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   game.dnd5e.moduleArt.registerModuleArt();
   Tooltips5e.activateListeners();

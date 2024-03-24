@@ -1,6 +1,7 @@
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
+import RollConfigField from "../shared/roll-config-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
@@ -81,7 +82,7 @@ export default class NPCData extends CreatureTemplate {
           tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
         }, {label: "DND5E.HitPoints"}),
-        death: new foundry.data.fields.SchemaField({
+        death: new RollConfigField({
           success: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),
@@ -248,10 +249,34 @@ export default class NPCData extends CreatureTemplate {
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare movement & senses values derived from race item.
+   */
+  prepareEmbeddedData() {
+    if ( this.details.race instanceof Item ) {
+      AttributesFields.prepareRace.call(this, this.details.race, { force: true });
+      this.details.type = this.details.race.system.type;
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   prepareDerivedData() {
+    const rollData = this.getRollData({ deterministic: true });
+    const { originalSaves } = this.parent.getOriginalStats();
+
+    this.prepareAbilities({ rollData, originalSaves });
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
+    AttributesFields.prepareConcentration.call(this, rollData);
     TraitsFields.prepareResistImmune.call(this);
+
+    // Hit Points
+    const hpOptions = {
+      advancement: Object.values(this.parent.classes).map(c => c.advancement.byType.HitPoints?.[0]).filter(a => a),
+      mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
+    };
+    AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
   }
 }

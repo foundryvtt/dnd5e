@@ -208,10 +208,11 @@ export default class DamageRoll extends Roll {
     // Prepare chat data
     messageData = foundry.utils.mergeObject({
       user: game.user.id,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       sound: CONFIG.sounds.dice
     }, messageData);
     messageData.rolls = rolls;
+    // TODO: Remove when v11 support is dropped.
+    if ( game.release.generation < 12 ) messageData.type = CONST.CHAT_MESSAGE_TYPES.ROLL;
 
     // Either create the message or just return the chat data
     const cls = getDocumentClass("ChatMessage");

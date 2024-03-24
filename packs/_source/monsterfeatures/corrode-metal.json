@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>Any nonmagical weapon made of metal that hits the {type} corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls.</p><p>If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal that hits the {type} is destroyed after dealing damage. The {type} can eat through 2-inch-thick, nonmagical metal in 1 round.</p>\n</section>\n<p>The {type} corrodes metal.</p>",
+      "value": "<section class=\"secret\">\n<p>Any nonmagical weapon made of metal that hits the [[lookup @details.type.config.label lowercase]] corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls.</p><p>If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal that hits the [[lookup @details.type.config.label lowercase]] is destroyed after dealing damage. The [[lookup @details.type.config.label lowercase]] can eat through 2-inch-thick, nonmagical metal in 1 round.</p>\n</section>\n<p>The [[lookup @details.type.config.label lowercase]] corrodes metal.</p>",
       "chat": "",
       "unidentified": ""
     },

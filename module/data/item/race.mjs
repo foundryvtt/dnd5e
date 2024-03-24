@@ -112,7 +112,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    * @protected
    */
   _onCreate(data, options, userId) {
-    if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
+    if ( (game.user.id !== userId) || !["character", "npc"].includes(this.parent.actor?.type) ) return;
     this.parent.actor.update({ "system.details.race": this.parent.id });
   }
 
@@ -127,7 +127,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    * @protected
    */
   async _preDelete(options, user) {
-    if ( (this.parent.actor?.type !== "character") ) return;
+    if ( !["character", "npc"].includes(this.parent.actor?.type) ) return;
     await this.parent.actor.update({ "system.details.race": null });
   }
 }

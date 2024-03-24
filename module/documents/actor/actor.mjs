@@ -8,6 +8,7 @@ import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import Item5e from "../item.mjs";
+import { createRollLabel } from "../../enrichers.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -88,7 +89,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const data = effect.getFlag("dnd5e", "itemData");
       concentration.effects.add(effect);
       if ( data ) {
-        const item = this.items.get(data) ?? new Item.implementation(data, { keepId: true, parent: this });
+        const item = typeof data === "string"
+          ? this.items.get(data)
+          : new Item.implementation(data, { keepId: true, parent: this });
         if ( item ) concentration.items.add(item);
       }
     }
@@ -122,7 +125,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareData() {
-    if ( !game.template.Actor.types.includes(this.type) ) return super.prepareData();
+    if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
     this._classes = undefined;
     this._preparationWarnings = [];
     super.prepareData();
@@ -147,35 +150,34 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    if ( !game.template.Actor.types.includes(this.type) || (this.type === "group") ) return;
+    if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
 
-    const flags = this.flags.dnd5e || {};
     this.labels = {};
 
     // Retrieve data for polymorphed actors
-    let originalSaves = null;
-    let originalSkills = null;
-    if ( this.isPolymorphed ) {
-      const transformOptions = flags.transformOptions;
-      const original = game.actors?.get(flags.originalActor);
-      if ( original ) {
-        if ( transformOptions.mergeSaves ) originalSaves = original.system.abilities;
-        if ( transformOptions.mergeSkills ) originalSkills = original.system.skills;
-      }
-    }
+    const { originalSkills } = this.getOriginalStats();
 
     // Prepare abilities, skills, & everything else
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const rollData = this.getRollData();
     const checkBonus = simplifyBonus(globalBonuses?.check, rollData);
-    this._prepareAbilities(rollData, globalBonuses, checkBonus, originalSaves);
     this._prepareSkills(rollData, globalBonuses, checkBonus, originalSkills);
     this._prepareTools(rollData, globalBonuses, checkBonus);
     this._prepareArmorClass();
     this._prepareEncumbrance();
-    this._prepareHitPoints(rollData);
     this._prepareInitiative(rollData, checkBonus);
     this._prepareSpellcasting();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the DC of a concentration save required for a given amount of damage.
+   * @param {number} damage  Amount of damage taken.
+   * @returns {number}       DC of the required concentration save.
+   */
+  getConcentrationDC(damage) {
+    return Math.max(10, Math.floor(damage * .5));
   }
 
   /* -------------------------------------------- */
@@ -258,44 +260,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
   /*  Derived Data Preparation Helpers            */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare abilities.
-   * @param {object} bonusData      Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {object} globalBonuses  Global bonus data.
-   * @param {number} checkBonus     Global ability check bonus.
-   * @param {object} originalSaves  A transformed actor's original actor's abilities.
-   * @protected
-   */
-  _prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves) {
-    const flags = this.flags.dnd5e ?? {};
-    const dcBonus = simplifyBonus(this.system.bonuses?.spell?.dc, bonusData);
-    const saveBonus = simplifyBonus(globalBonuses.save, bonusData);
-    for ( const [id, abl] of Object.entries(this.system.abilities) ) {
-      if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
-      abl.mod = Math.floor((abl.value - 10) / 2);
-
-      const isRA = this._isRemarkableAthlete(id);
-      abl.checkProf = new Proficiency(this.system.attributes.prof, (isRA || flags.jackOfAllTrades) ? 0.5 : 0, !isRA);
-      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, bonusData);
-      abl.saveBonus = saveBonusAbl + saveBonus;
-
-      abl.saveProf = new Proficiency(this.system.attributes.prof, abl.proficient);
-      const checkBonusAbl = simplifyBonus(abl.bonuses?.check, bonusData);
-      abl.checkBonus = checkBonusAbl + checkBonus;
-
-      abl.save = abl.mod + abl.saveBonus;
-      if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
-      abl.dc = 8 + abl.mod + this.system.attributes.prof + dcBonus;
-
-      if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
-
-      // If we merged saves when transforming, take the highest bonus here.
-      if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
-    }
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -563,37 +527,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
     encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
     encumbrance.encumbered = encumbrance.value > encumbrance.heavilyEncumbered;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare hit points for characters.
-   * @param {object} rollData  Data produced by `getRollData` to be applied to bonus formulas.
-   * @protected
-   */
-  _prepareHitPoints(rollData) {
-    const hp = this.system.attributes.hp;
-
-    if ( this.type === "character" && (this.system.attributes.hp.max === null) ) {
-      const abilityId = CONFIG.DND5E.defaultAbilities.hitPoints || "con";
-      const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
-      const base = Object.values(this.classes).reduce((total, item) => {
-        const advancement = item.advancement.byType.HitPoints?.[0];
-        return total + (advancement?.getAdjustedTotal(abilityMod) ?? 0);
-      }, 0);
-      const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.system.details.level;
-      const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
-
-      hp.max = base + levelBonus + overallBonus;
-
-      if ( this.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
-    }
-
-    hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
-    hp.value = Math.min(hp.value, hp.effectiveMax);
-    hp.damage = hp.effectiveMax - hp.value;
-    hp.pct = Math.clamped(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
   }
 
   /* -------------------------------------------- */
@@ -875,13 +808,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }
 
-    // Reset death save counters
+    // Reset death save counters and store hp
     if ( "hp" in (this.system.attributes || {}) ) {
       const isDead = this.system.attributes.hp.value <= 0;
       if ( isDead && (foundry.utils.getProperty(changed, "system.attributes.hp.value") > 0) ) {
         foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
         foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
       }
+      foundry.utils.setProperty(options, "dnd5e.hp", { ...this.system.attributes.hp });
     }
 
     // Record previous exhaustion level.
@@ -932,21 +866,32 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {number} value            Amount of damage.
    * @property {string} type             Type of damage.
    * @property {Set<string>} properties  Physical properties that affect damage application.
+   * @property {object} [active]
+   * @property {number} [active.multiplier]      Final calculated multiplier.
+   * @property {boolean} [active.modifications]  Did modification affect this description?
+   * @property {boolean} [active.resistance]     Did resistance affect this description?
+   * @property {boolean} [active.vulnerability]  Did vulnerability affect this description?
+   * @property {boolean} [active.immunity]       Did immunity affect this description?
    */
 
   /**
    * Options for damage application.
    *
    * @typedef {object} DamageApplicationOptions
-   * @property {number} [multiplier=1]    Amount by which to multiply all damage.
-   * @property {object|boolean} [ignore]  Set to `true` to ignore all damage modifiers. If set to an object, then
-   *                                      values can either be `true` to indicate that the all modifications of that
-   *                                      type should be ignored, or a set of specific damage types for which it should
-   *                                      be ignored.
+   * @property {boolean|Set<string>} [downgrade]  Should this actor's resistances and immunities be downgraded by one
+   *                                              step? A set of damage types to be downgraded or `true` to downgrade
+   *                                              all damage types.
+   * @property {number} [multiplier=1]         Amount by which to multiply all damage.
+   * @property {object|boolean} [ignore]       Set to `true` to ignore all damage modifiers. If set to an object, then
+   *                                           values can either be `true` to indicate that the all modifications of
+   *                                           that type should be ignored, or a set of specific damage types for which
+   *                                           it should be ignored.
    * @property {boolean|Set<string>} [ignore.immunity]       Should this actor's damage immunity be ignored?
    * @property {boolean|Set<string>} [ignore.resistance]     Should this actor's damage resistance be ignored?
    * @property {boolean|Set<string>} [ignore.vulnerability]  Should this actor's damage vulnerability be ignored?
    * @property {boolean|Set<string>} [ignore.modification]   Should this actor's damage modification be ignored?
+   * @property {boolean} [invertHealing=true]  Automatically invert healing types to it heals, rather than damages.
+   * @property {"damage"|"healing"} [only]     Apply only damage or healing parts. Untyped rolls will always be applied.
    */
 
   /**
@@ -1007,7 +952,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       isBar: true
     }, updates) === false ) return this;
 
-    await this.update(updates, {dhp: -amount});
+    await this.update(updates);
 
     /**
      * A hook event that fires after damage has been applied to an actor.
@@ -1047,45 +992,69 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const multiplier = options.multiplier ?? 1;
 
-    const ignore = (category, type) => {
+    const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
+    const ignore = (category, type, skipDowngrade) => {
       return options.ignore === true
         || options.ignore?.[category] === true
-        || options.ignore?.[category]?.has?.(type);
+        || options.ignore?.[category]?.has?.(type)
+        || ((category === "immunity") && downgrade(type) && !skipDowngrade)
+        || ((category === "resistance") && downgrade(type) && !hasEffect("di", type));
     };
 
     const traits = this.system.traits ?? {};
     const hasEffect = (category, type, properties) => {
-      const config = traits?.[category];
+      if ( (category === "dr") && downgrade(type) && hasEffect("di", type, properties)
+        && !ignore("immunity", type, true) ) return true;
+      const config = traits[category];
       if ( !config?.value.has(type) ) return false;
       if ( !CONFIG.DND5E.damageTypes[type]?.isPhysical || !properties?.size ) return true;
       return !config.bypasses?.intersection(properties)?.size;
+    };
+
+    const skipped = type => {
+      if ( options.only === "damage" ) return type in CONFIG.DND5E.healingTypes;
+      if ( options.only === "healing" ) return type in CONFIG.DND5E.damageTypes;
+      return false;
     };
 
     const rollData = this.getRollData({deterministic: true});
 
     damages.forEach(d => {
       // Skip damage types with immunity
-      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) {
+      if ( skipped(d.type) || (!ignore("immunity", d.type) && hasEffect("di", d.type, d.properties)) ) {
         d.value = 0;
+        d.active = { multiplier: 0, immunity: true };
         return;
       }
+      d.active = {};
 
       // Apply type-specific damage reduction
-      if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
+      if ( !ignore("modification", d.type) && traits.dm?.amount[d.type] ) {
         const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
         if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
         else d.value += modification;
+        d.active.modification = true;
       }
 
       let damageMultiplier = multiplier;
 
       // Apply type-specific damage resistance
-      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) damageMultiplier /= 2;
+      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) {
+        damageMultiplier /= 2;
+        d.active.resistance = true;
+      }
 
       // Apply type-specific damage vulnerability
-      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
+      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) {
+        damageMultiplier *= 2;
+        d.active.vulnerability = true;
+      }
+
+      // Negate healing types
+      if ( (options.invertHealing !== false) && (d.type === "healing") ) damageMultiplier *= -1;
 
       d.value = d.value * damageMultiplier;
+      d.active.multiplier = damageMultiplier;
     });
 
     /**
@@ -1115,7 +1084,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Update the actor if the new amount is greater than the current
     const tmp = parseInt(hp.temp) || 0;
-    return amount > tmp ? this.update({"system.attributes.hp.temp": amount}, {dtemp: amount}) : this;
+    return amount > tmp ? this.update({"system.attributes.hp.temp": amount}) : this;
   }
 
   /* -------------------------------------------- */
@@ -1180,7 +1149,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let effect;
     const { effects } = this.concentration;
 
-    if ( !target ) return Promise.all(Array.from(effects).map(effect => this.endConcentration(effect)));
+    if ( !target ) {
+      return effects.reduce(async (acc, effect) => {
+        acc = await acc;
+        return acc.concat(await this.endConcentration(effect));
+      }, []);
+    }
 
     if ( foundry.utils.getType(target) === "string" ) effect = effects.find(e => e.id === target);
     else if ( target instanceof ActiveEffect5e ) effect = effects.has(target) ? target : null;
@@ -1214,6 +1188,42 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.endConcentration", this, effect);
 
     return [effect];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a chat message for this actor with a prompt to challenge concentration.
+   * @param {object} [options]
+   * @param {number} [options.dc]         The target value of the saving throw.
+   * @param {string} [options.ability]    An ability to use instead of the default.
+   * @returns {Promise<ChatMessage5e>}    A promise that resolves to the created chat message.
+   */
+  async challengeConcentration({ dc=10, ability=null }={}) {
+    const isConcentrating = this.concentration.effects.size > 0;
+    if ( !isConcentrating ) return null;
+
+    const dataset = {
+      action: "concentration",
+      dc: dc
+    };
+    if ( ability in CONFIG.DND5E.abilities ) dataset.ability = ability;
+
+    const config = {
+      type: "concentration",
+      format: "short",
+      icon: true
+    };
+
+    return ChatMessage.implementation.create({
+      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
+        dataset: { ...dataset, type: "concentration" },
+        buttonLabel: createRollLabel({ ...dataset, ...config }),
+        hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
+      }),
+      whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
+      speaker: ChatMessage.implementation.getSpeaker({ actor: this })
+    });
   }
 
   /* -------------------------------------------- */
@@ -1746,7 +1756,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const parts = [];
 
     // Concentration bonus
-    if ( conc.bonus ) parts.push(conc.bonus);
+    if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
 
     const ability = (conc.ability in config.abilities) ? conc.ability : config.defaultAbilities.concentration;
 
@@ -1754,8 +1764,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ability: ability,
       isConcentration: true,
       targetValue: 10,
-      advantage: options.advantage || (conc.mode === modes.ADVANTAGE),
-      disadvantage: options.disadvantage || (conc.mode === modes.DISADVANTAGE),
+      advantage: options.advantage || (conc.roll.mode === modes.ADVANTAGE),
+      disadvantage: options.disadvantage || (conc.roll.mode === modes.DISADVANTAGE)
     }, options);
     options.parts = parts.concat(options.parts ?? []);
 
@@ -2006,11 +2016,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
 
-    // Re-evaluate dhp in the event that it was changed in the previous hook
-    const updateOptions = { dhp: (updates.actor?.["system.attributes.hp.value"] ?? hp.value) - hp.value };
-
     // Perform updates
-    if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor, updateOptions);
+    if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
     if ( !foundry.utils.isEmpty(updates.class) ) await cls.update(updates.class);
 
     return roll;
@@ -2539,16 +2546,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( recoverDailyUses ) recovery.push("day");
     let updates = [];
     for ( let item of this.items ) {
-      const uses = item.system.uses;
-      if ( recovery.includes(uses?.per) ) {
+      const uses = item.system.uses ?? {};
+      if ( recovery.includes(uses.per) ) {
         updates.push({_id: item.id, "system.uses.value": uses.max});
       }
       if ( recoverLongRestUses && item.system.recharge?.value ) {
         updates.push({_id: item.id, "system.recharge.charged": true});
       }
 
-      // Items that roll to gain charges on a new day
-      if ( recoverDailyUses && uses?.recovery && (uses?.per in CONFIG.DND5E.limitedUseFormulaPeriods) ) {
+      // Items that roll to gain charges via a formula
+      if ( recoverDailyUses && uses.recovery && CONFIG.DND5E.limitedUsePeriods[uses.per]?.formula ) {
         const roll = new Roll(uses.recovery, item.getRollData());
         if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
           roll.alter(7, 0, {multiplyNumeric: true});
@@ -2556,7 +2563,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
         let total = 0;
         try {
-          total = (await roll.evaluate({async: true})).total;
+          total = (await roll.evaluate()).total;
         } catch(err) {
           ui.notifications.warn(game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
             name: item.name,
@@ -2750,6 +2757,27 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       { since: "DnD5e 3.0", until: "DnD5e 3.2" }
     );
     return CurrencyManager.convertCurrency(this);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch stats from the original actor for data preparation.
+   * @returns {{ originalSaves: object|null, originalSkills: object|null }}
+   */
+  getOriginalStats() {
+    // Retrieve data for polymorphed actors
+    let originalSaves = null;
+    let originalSkills = null;
+    if ( this.isPolymorphed ) {
+      const transformOptions = this.flags.dnd5e?.transformOptions;
+      const original = game.actors?.get(this.flags.dnd5e?.originalActor);
+      if ( original ) {
+        if ( transformOptions.mergeSaves ) originalSaves = original.system.abilities;
+        if ( transformOptions.mergeSkills ) originalSkills = original.system.skills;
+      }
+    }
+    return { originalSaves, originalSkills };
   }
 
   /* -------------------------------------------- */
@@ -3216,10 +3244,38 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritdoc */
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    this._displayTokenEffect(options);
     if ( userId === game.userId ) {
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
+    }
+
+    const hp = options.dnd5e?.hp;
+    if ( hp && !options.isRest && !options.isAdvancement ) {
+      const curr = this.system.attributes.hp;
+      const changes = {
+        hp: curr.value - hp.value,
+        temp: curr.temp - hp.temp
+      };
+      changes.total = changes.hp + changes.temp;
+
+      if ( Number.isInteger(changes.total) && (changes.total !== 0) ) {
+        this._displayTokenEffect(changes);
+        if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId) && (changes.total < 0) ) {
+          this.challengeConcentration({ dc: this.getConcentrationDC(-changes.total) });
+        }
+
+        /**
+         * A hook event that fires when an actor is damaged or healed by any means. The actual name
+         * of the hook will depend on the change in hit points.
+         * @function dnd5e.damageActor
+         * @memberof hookEvents
+         * @param {Actor5e} actor                                       The actor that had their hit points reduced.
+         * @param {{hp: number, temp: number, total: number}} changes   The changes to hit points.
+         * @param {object} update                                       The original update delta.
+         * @param {string} userId                                       Id of the user that performed the update.
+         */
+        Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this, changes, data, userId);
+      }
     }
   }
 
@@ -3254,28 +3310,46 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Flash ring & display changes to health as scrolling combat text.
-   * @param {object} options  Any data provided by the update.
+   * @param {object} changes          Object of changes to hit points.
+   * @param {number} changes.hp       Changes to `hp.value`.
+   * @param {number} changes.temp     The change to `hp.temp`.
+   * @param {number} changes.total    The total change to hit points.
    * @protected
    */
-  _displayTokenEffect(options) {
-    const dhp = Number(options.dhp);
+  _displayTokenEffect(changes) {
+    let key;
+    let value;
+    if ( changes.hp < 0 ) {
+      key = "damage";
+      value = changes.total;
+    } else if ( changes.hp > 0 ) {
+      key = "healing";
+      value = changes.total;
+    } else if ( changes.temp ) {
+      key = "temp";
+      value = changes.temp;
+    }
+    if ( !key || !value ) return;
+
     const tokens = this.isToken ? [this.token] : this.getActiveTokens(true, true);
+    if ( !tokens.length ) return;
+
+    const pct = Math.clamped(Math.abs(value) / this.system.attributes.hp.max, 0, 1);
+    const fill = CONFIG.DND5E.tokenHPColors[key];
+
     for ( const token of tokens ) {
-      if ( !token.object.visible || !token.object.renderable ) continue;
-      token.flashRing(options);
-      if ( dhp ) {
-        const t = token.object;
-        const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
-        canvas.interface.createScrollingText(t.center, dhp.signedString(), {
-          anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
-          // Adapt the font size relative to the Actor's HP total to emphasize more significant blows
-          fontSize: 16 + (32 * pct), // Range between [16, 48]
-          fill: CONFIG.DND5E.tokenHPColors[dhp < 0 ? "damage" : "healing"],
-          stroke: 0x000000,
-          strokeThickness: 4,
-          jitter: 0.25
-        });
-      }
+      if ( !token.object?.visible || !token.object?.renderable ) continue;
+      token.flashRing(key);
+      const t = token.object;
+      canvas.interface.createScrollingText(t.center, value.signedString(), {
+        anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+        // Adapt the font size relative to the Actor's HP total to emphasize more significant blows
+        fontSize: 16 + (32 * pct), // Range between [16, 48]
+        fill: fill,
+        stroke: 0x000000,
+        strokeThickness: 4,
+        jitter: 0.25
+      });
     }
   }
 

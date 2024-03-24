@@ -34,8 +34,9 @@ export default class AbilityUseDialog extends Dialog {
    *
    * @typedef {object} AbilityUseDialogOptions
    * @property {object} [button]
-   * @property {string} [button.icon]   Icon used for the activation button.
-   * @property {string} [button.label]  Label used for the activation button.
+   * @property {string} [button.icon]     Icon used for the activation button.
+   * @property {string} [button.label]    Label used for the activation button.
+   * @property {string} [disableScaling]  Should spell or resource scaling be disabled?
    */
 
   /**
@@ -60,18 +61,18 @@ export default class AbilityUseDialog extends Dialog {
       summoningOptions: this._createSummoningOptions(item),
       resourceOptions: this._createResourceOptions(item),
       concentration: {
-        show: concentrationOptions.length > 0,
+        show: (config.beginConcentrating !== null) && !!concentrationOptions.length,
         options: concentrationOptions,
         optional: (concentrationOptions.length < limit) ? "—" : null
       },
-      scaling: item.usageScaling,
+      scaling: options.disableScaling ? null : item.usageScaling,
       note: this._getAbilityUseNote(item, config),
       title: game.i18n.format("DND5E.AbilityUseHint", {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
         name: item.name
       })
     };
-    this._getAbilityUseWarnings(data);
+    this._getAbilityUseWarnings(data, options);
 
     // Render the ability usage template
     const html = await renderTemplate("systems/dnd5e/templates/apps/ability-use.hbs", data);
@@ -123,6 +124,8 @@ export default class AbilityUseDialog extends Dialog {
       return acc;
     }, []);
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Create an array of spell slot options for a select.
@@ -177,13 +180,13 @@ export default class AbilityUseDialog extends Dialog {
    * @returns {object|null}   Array of select options.
    */
   static _createSummoningOptions(item) {
-    const profiles = item.system.summons.profiles;
+    const profiles = item.system.summons?.profiles ?? [];
     if ( profiles.length <= 1 ) return null;
     const options = {};
     for ( const profile of profiles ) {
       const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
       if ( profile.uuid && !doc ) continue;
-      options[profile._id] = profile.name ?? doc?.name ?? "—";
+      options[profile._id] = profile.name ? profile.name : (doc?.name ?? "—");
     }
     return options;
   }
@@ -264,6 +267,8 @@ export default class AbilityUseDialog extends Dialog {
   static _getAbilityUseNote(item, config) {
     const { quantity, recharge, uses } = item.system;
 
+    if ( !item.isActive ) return "";
+
     // Zero quantity
     if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
 
@@ -287,7 +292,7 @@ export default class AbilityUseDialog extends Dialog {
         value: uses.value,
         quantity: quantity,
         max: uses.max,
-        per: CONFIG.DND5E.limitedUsePeriods[uses.per]
+        per: CONFIG.DND5E.limitedUsePeriods[uses.per]?.label
       });
     }
 
@@ -297,7 +302,7 @@ export default class AbilityUseDialog extends Dialog {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
         value: uses.value,
         max: uses.max,
-        per: CONFIG.DND5E.limitedUsePeriods[uses.per]
+        per: CONFIG.DND5E.limitedUsePeriods[uses.per]?.label
       });
     }
   }
@@ -306,14 +311,15 @@ export default class AbilityUseDialog extends Dialog {
 
   /**
    * Get the ability usage warnings to display.
-   * @param {object} data  Template data for the AbilityUseDialog. **Will be mutated**
+   * @param {object} data                           Template data for the AbilityUseDialog. **Will be mutated**
+   * @param {AbilityUseDialogOptions} [options={}]  Additional options for displaying the dialog.
    * @private
    */
-  static _getAbilityUseWarnings(data) {
+  static _getAbilityUseWarnings(data, options={}) {
     const warnings = [];
     const item = data.item;
     const { quantity, level, consume, preparation } = item.system;
-    const scale = item.usageScaling;
+    const scale = options.disableScaling ? null : item.usageScaling;
     const levels = [level];
 
     if ( item.type === "spell" ) {

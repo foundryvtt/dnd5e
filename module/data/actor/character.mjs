@@ -1,6 +1,8 @@
 import Proficiency from "../../documents/actor/proficiency.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
+import RollConfigField from "../shared/roll-config-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -95,7 +97,7 @@ export default class CharacterData extends CreatureTemplate {
             overall: new FormulaField({deterministic: true, label: "DND5E.HitPointsBonusOverall"})
           })
         }, {label: "DND5E.HitPoints"}),
-        death: new SchemaField({
+        death: new RollConfigField({
           success: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),
@@ -207,27 +209,14 @@ export default class CharacterData extends CreatureTemplate {
    * Prepare movement & senses values derived from race item.
    */
   prepareEmbeddedData() {
-    const raceData = this.details.race?.system;
-    if ( !raceData ) {
+    if ( this.details.race instanceof Item ) {
+      AttributesFields.prepareRace.call(this, this.details.race);
+      this.details.type = this.details.race.system.type;
+    } else {
       this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
       this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
       this.details.type = new CreatureTypeField({ swarm: false }).initialize({ value: "humanoid" }, this);
-      return;
     }
-
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( raceData.movement[key] ) this.attributes.movement[key] ??= raceData.movement[key];
-    }
-    if ( raceData.movement.hover ) this.attributes.movement.hover = true;
-    this.attributes.movement.units ??= raceData.movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
-
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( raceData.senses[key] ) this.attributes.senses[key] ??= raceData.senses[key];
-    }
-    this.attributes.senses.special = [this.attributes.senses.special, raceData.senses.special].filterJoin(";");
-    this.attributes.senses.units ??= raceData.senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
-
-    this.details.type = raceData.type;
   }
 
   /* -------------------------------------------- */
@@ -236,9 +225,25 @@ export default class CharacterData extends CreatureTemplate {
    * Prepare remaining character data.
    */
   prepareDerivedData() {
+    const rollData = this.getRollData({ deterministic: true });
+    const { originalSaves } = this.parent.getOriginalStats();
+
+    this.prepareAbilities({ rollData, originalSaves });
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
+    AttributesFields.prepareConcentration.call(this, rollData);
     TraitsFields.prepareResistImmune.call(this);
+
+    // Hit Points
+    const hpOptions = {};
+    if ( this.attributes.hp.max === null ) {
+      hpOptions.advancement = Object.values(this.parent.classes)
+        .map(c => c.advancement.byType.HitPoints?.[0]).filter(a => a);
+      hpOptions.bonus = (simplifyBonus(this.attributes.hp.bonuses.level, rollData) * this.details.level)
+        + simplifyBonus(this.attributes.hp.bonuses.overall, rollData);
+      hpOptions.mod = this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0;
+    }
+    AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
   }
 
   /* -------------------------------------------- */
