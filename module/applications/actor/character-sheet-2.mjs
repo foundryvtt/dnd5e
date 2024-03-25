@@ -1212,11 +1212,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Legacy resources
     const resources = Object.entries(this.actor.system.resources).reduce((arr, [k, r]) => {
       const { value, max, sr, lr, label } = r;
+      const source = this.actor._source.system.resources[k];
       if ( label && max ) arr.push({
         id: `resources.${k}`,
         type: "resource",
         img: "icons/svg/upgrade.svg",
-        resource: { value, max },
+        resource: { value, max, source },
         css: "uses",
         title: label,
         subtitle: [

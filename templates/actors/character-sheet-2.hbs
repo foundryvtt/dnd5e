@@ -423,8 +423,8 @@
                                     <span class="value">{{ resource.value }}</span>
                                     {{/if}}
                                     <span class="separator">&sol;</span>
-                                    {{#if @root.actor.isOwner}}
-                                    <input type="text" class="uninput max" value="{{ resource.max }}"
+                                    {{#if @root.editable}}
+                                    <input type="text" class="uninput max" value="{{ resource.source.max }}"
                                            data-dtype="Number" name="system.{{ id }}.max" inputmode="numeric"
                                            pattern="[0-9+=\-]*">
                                     {{else}}
