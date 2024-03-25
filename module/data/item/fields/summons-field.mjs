@@ -391,6 +391,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     }
 
     actorUpdates["flags.dnd5e.summon.origin"] = this.item.uuid;
+    delete placement.prototypeToken;
     const tokenDocument = await actor.getTokenDocument(foundry.utils.mergeObject(placement, tokenUpdates));
     tokenDocument.delta.updateSource(actorUpdates);
 

@@ -295,22 +295,25 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         const award = new Award(this.object, { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") });
         award.render(true);
         break;
-      case "removeMember":
-        const removeMemberId = button.closest("li.group-member").dataset.actorId;
-        this.object.system.removeMember(removeMemberId);
-        break;
       case "longRest":
-        this.object.longRest({ advanceTime: true });
+        this.actor.longRest({ advanceTime: true });
         break;
       case "movementConfig":
         const movementConfig = new ActorMovementConfig(this.object);
         movementConfig.render(true);
         break;
+      case "placeMembers":
+        this.actor.system.placeMembers();
+        break;
+      case "removeMember":
+        const removeMemberId = button.closest("li.group-member").dataset.actorId;
+        this.actor.system.removeMember(removeMemberId);
+        break;
       case "rollQuantities":
-        this.object.system.rollQuantities();
+        this.actor.system.rollQuantities();
         break;
       case "shortRest":
-        this.object.shortRest({ advanceTime: true });
+        this.actor.shortRest({ advanceTime: true });
         break;
     }
   }
