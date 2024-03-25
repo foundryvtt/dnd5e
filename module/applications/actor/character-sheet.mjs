@@ -1,6 +1,5 @@
 import ActorSheet5e from "./base-sheet.mjs";
 import ActorTypeConfig from "./type-config.mjs";
-import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 /**
@@ -88,6 +87,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.isDepleted = ctx.isOnCooldown && ctx.hasUses && (uses.value > 0);
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
+      // Unidentified items
+      ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
+
       // Item grouping
       const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
       const group = this.actor.items.get(originId);
@@ -104,7 +106,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Classify items into types
       if ( item.type === "spell" ) obj.spells.push(item);
-      else if (["feat", "talent"].includes(item.type)) obj.feats.push(item);
+      else if ( item.type === "feat" ) obj.feats.push(item);
       else if ( item.type === "race" ) obj.races.push(item);
       else if ( item.type === "background" ) obj.backgrounds.push(item);
       else if ( item.type === "class" ) obj.classes.push(item);
@@ -150,32 +152,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       });
       context.warnings.push({ message, type: "warning" });
     }
-    const tmp = feats
-      .reduce((prev, curr) => {
-        const type = this.getFeatType(curr);
-        prev[type] = [
-          ...(prev[type] ?? []),
-          curr
-        ];
-        return prev;
-      }, {});
 
-    const resources = Object.values(context.system?.resources ?? {})
-      .filter(({identifier}) => identifier).reduce((prev, curr) => ({
-        ...prev,
-        [curr.identifier]: curr
-      }), {});
-    const reserves = (context?.rollData?.reserves ?? []).reduce((prev, reserve) => ({
-      ...prev,
-      [reserve.identifier]: {
-        label: reserve.key,
-        hasActions: true,
-        dataset: {type: "reserve"},
-        items: tmp[reserve.identifier],
-        value: resources[reserve.identifier]?.value ?? 0,
-        reserve
-      }
-    }), {});
     // Organize Features
     const features = {
       race: {
@@ -187,7 +164,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       classes: {
         label: `${CONFIG.Item.typeLabels.class}Pl`, items: classes,
         hasActions: false, dataset: {type: "class"}, isClass: true },
-      ...reserves,
       active: {
         label: "DND5E.FeatureActive", items: [],
         hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
@@ -195,7 +171,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         label: "DND5E.FeaturePassive", items: [],
         hasActions: false, dataset: {type: "feat"} }
     };
-    for ( const feat of feats.filter(f => !f.system.reserve?.identifier) ) {
+    for ( const feat of feats ) {
       if ( feat.system.activation?.type ) features.active.items.push(feat);
       else features.passive.items.push(feat);
     }
@@ -206,22 +182,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     context.spellbook = spellbook;
     context.preparedSpells = nPrepared;
     context.features = Object.values(features);
-  }
-
-  getFeatType(feat) {
-    if (feat.system.reserve?.identifier) {
-      return feat.system.reserve.identifier;
-    }
-    if (feat.system.activation?.type) {
-      return feat.system.activation.type;
-    }
-    if (feat.system.type?.value) {
-      return feat.system.type.value;
-    }
-    if (feat.type) {
-      return feat.type;
-    }
-    return "";
   }
 
   /* -------------------------------------------- */
@@ -239,8 +199,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const isPrepared = !!prep.prepared;
       context.toggleClass = isPrepared ? "active" : "";
       if ( isAlways ) context.toggleClass = "fixed";
-      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always;
-      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared;
+      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always.label;
+      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared.label;
       else context.toggleTitle = game.i18n.localize("DND5E.SpellUnprepared");
     }
     else {
@@ -259,7 +219,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   activateListeners(html) {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
-    html.find(".level-selector").change(this._onLevelChange.bind(this));
     html.find(".short-rest").click(this._onShortRest.bind(this));
     html.find(".long-rest").click(this._onLongRest.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
@@ -301,36 +260,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       case "rollInitiative":
         return this.actor.rollInitiativeDialog({event});
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Respond to a new level being selected from the level selector.
-   * @param {Event} event                           The originating change.
-   * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
-   * @private
-   */
-  async _onLevelChange(event) {
-    event.preventDefault();
-    const delta = Number(event.target.value);
-    const classId = event.target.closest("[data-item-id]")?.dataset.itemId;
-    if ( !delta || !classId ) return;
-    const classItem = this.actor.items.get(classId);
-    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
-      const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
-      if ( manager.steps.length ) {
-        if ( delta > 0 ) return manager.render(true);
-        try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
-        }
-        catch(err) {
-          return;
-        }
-      }
-    }
-    return classItem.update({"system.levels": classItem.system.levels + delta});
   }
 
   /* -------------------------------------------- */

@@ -1636,7 +1636,7 @@
           "icon": "icons/magic/control/buff-flight-wings-blue.webp",
           "origin": "Item.kZZAZ6kp9YzgPQEe",
           "tint": null,
-          "transfer": true,
+          "transfer": false,
           "name": "Bless",
           "description": "",
           "statuses": [],
@@ -2266,7 +2266,7 @@
           "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
           "origin": "Item.FlLKKv7bQBlIAs11",
           "tint": null,
-          "transfer": true,
+          "transfer": false,
           "name": "Shield",
           "description": "",
           "statuses": [],
@@ -2785,92 +2785,7 @@
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.MAxM77CDUu8dgIRQ"
     }
   ],
-  "effects": [
-    {
-      "_id": "8rP3gwmXVTgZqYZE",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.bonuses.abilities.save",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.mwak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.msak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.rsak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.rwak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 678,
-        "seconds": 60,
-        "rounds": 10,
-        "combat": null,
-        "turns": null,
-        "startRound": 2,
-        "startTurn": 1
-      },
-      "icon": "icons/magic/control/buff-flight-wings-blue.webp",
-      "origin": "Compendium.dnd5e.monsters.ZaP1H91t4FzbRqR5.Item.8dzaICjGy6mTUaUr",
-      "tint": null,
-      "transfer": false,
-      "name": "Bless",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!ZaP1H91t4FzbRqR5.8rP3gwmXVTgZqYZE"
-    },
-    {
-      "_id": "6pbotGIvqQkraPva",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "value": "5",
-          "mode": 2,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 678,
-        "rounds": 1,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 2,
-        "startTurn": 1
-      },
-      "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-      "origin": "Compendium.dnd5e.monsters.ZaP1H91t4FzbRqR5.Item.z1mx84ONwkXKUZd7",
-      "tint": null,
-      "transfer": false,
-      "name": "Shield",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!ZaP1H91t4FzbRqR5.6pbotGIvqQkraPva"
-    }
-  ],
+  "effects": [],
   "folder": "pCy5ieJezFRCg9A0",
   "sort": 0,
   "ownership": {
@@ -2879,7 +2794,7 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.0.3",
     "coreVersion": "11.315",
     "createdTime": 1661787232895,
     "modifiedTime": 1704847049432,

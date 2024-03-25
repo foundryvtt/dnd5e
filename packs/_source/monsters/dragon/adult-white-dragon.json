@@ -1879,7 +1879,7 @@
       "img": "icons/creatures/abilities/wing-batlike-white-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The dragon makes a tail attack.</p>\n</section>\n<p>The dragon slams its long tail against its foe!</p>",
+          "value": "<section class=\"secret\">\n<p>The dragon beats its wings. <strong>Each creature within 10 feet of the dragon</strong> must succeed on a <strong>DC 19 Dexterity saving throw</strong> or take <strong>13 (2d6+6) bludgeoning</strong> damage and be <strong>knocked prone.</strong> The dragon can then <strong>fly up to half its flying speed.</strong></p>\n</section>\n<p>The dragon beats its wings!</p>",
           "chat": ""
         },
         "source": {
@@ -1953,7 +1953,7 @@
         "formula": "",
         "save": {
           "ability": "dex",
-          "dc": null,
+          "dc": 19,
           "scaling": "flat"
         },
         "armor": {

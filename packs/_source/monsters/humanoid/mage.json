@@ -1682,7 +1682,7 @@
           "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
           "origin": "Item.FlLKKv7bQBlIAs11",
           "tint": null,
-          "transfer": true,
+          "transfer": false,
           "name": "Shield",
           "description": "",
           "statuses": [],
@@ -2689,68 +2689,7 @@
       "_key": "!actors.items!mQnsXanewsPiV7QE.RpKjTlYASrfqUPVA"
     }
   ],
-  "effects": [
-    {
-      "_id": "cfwMU7LuOJ619Lny",
-      "changes": [
-        {
-          "key": "system.attributes.ac.calc",
-          "value": "mage",
-          "mode": 5,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 678,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": 2,
-        "startTurn": 1
-      },
-      "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-      "origin": "Compendium.dnd5e.monsters.mQnsXanewsPiV7QE.Item.CKZTpZlxj7hjjo2H",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "name": "Mage Armor",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!mQnsXanewsPiV7QE.cfwMU7LuOJ619Lny"
-    },
-    {
-      "_id": "6pbotGIvqQkraPva",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "value": "5",
-          "mode": 2,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 678,
-        "rounds": 1,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 2,
-        "startTurn": 1
-      },
-      "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-      "origin": "Compendium.dnd5e.monsters.mQnsXanewsPiV7QE.Item.z1mx84ONwkXKUZd7",
-      "tint": null,
-      "transfer": false,
-      "name": "Shield",
-      "description": "",
-      "statuses": [],
-      "_key": "!actors.effects!mQnsXanewsPiV7QE.6pbotGIvqQkraPva"
-    }
-  ],
+  "effects": [],
   "folder": "pEyqIq8DYb21xia3",
   "sort": 0,
   "ownership": {
@@ -2759,7 +2698,7 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.0.3",
     "coreVersion": "11.315",
     "createdTime": 1661787233145,
     "modifiedTime": 1704847052422,

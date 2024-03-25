@@ -39,6 +39,7 @@ export default class TokenConfig5e extends TokenConfig {
     const context = await super.getData(options);
     const doc = this.preview ?? this.document;
     context.scale = Math.abs(doc._source.texture.scaleX);
+    this._addItemAttributes(context.barAttributes);
     return context;
   }
 
@@ -63,7 +64,7 @@ export default class TokenConfig5e extends TokenConfig {
     let ringTab = document.createElement("div");
     const flags = this.document.getFlag("dnd5e", "tokenRing") ?? {};
     ringTab.innerHTML = await renderTemplate(this.constructor.dynamicRingTemplate, {
-      flags: foundry.utils.mergeObject(flags, { scaleCorrection: 1 }, { inplace: false }),
+      flags: foundry.utils.mergeObject({ scaleCorrection: 1 }, flags, { inplace: false }),
       effects: Object.entries(CONFIG.DND5E.tokenRings.effects).reduce((obj, [key, label]) => {
         const mask = CONFIG.Token.ringClass.effects[key];
         obj[key] = { label, checked: (flags.effects & mask) > 0 };
@@ -94,61 +95,47 @@ export default class TokenConfig5e extends TokenConfig {
   /* -------------------------------------------- */
 
   /**
-   * Handle rendering human-readable labels and adding item uses.
+   * Adds charge based items as attributes for the current token.
+   * @param {object} attributes The attribute groups to add the item entries to.
+   * @protected
+   */
+  _addItemAttributes(attributes) {
+    const actor = this.object?.actor;
+    const items = actor?.items.reduce((arr, i) => {
+      const { per, max } = i.system.uses ?? {};
+      if ( per && max ) arr.push([i.getRelativeUUID(actor), i.name]);
+      return arr;
+    }, []) ?? [];
+    if ( items.length ) {
+      items.sort(([, a], [, b]) => a.localeCompare(b, game.i18n.lang));
+      attributes[game.i18n.localize("DND5E.ConsumeCharges")] = items.map(i => i[0]);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Replace the attribute paths in token resources with human readable labels and sort them alphabetically.
    * @param {HTMLElement} html  The rendered markup.
    * @protected
    */
   _prepareResourceLabels(html) {
     const actor = this.object?.actor;
-    const makeOptgroup = (label, parent) => {
-      const optgroup = document.createElement("optgroup");
-      optgroup.label = game.i18n.localize(label);
-      parent.appendChild(optgroup);
-      return optgroup;
-    };
 
-    const items = actor?.items.reduce((obj, i) => {
-      const { per, max } = i.system.uses ?? {};
-      if ( per && max ) obj[i.getRelativeUUID(actor)] = i.name;
-      return obj;
-    }, {}) ?? {};
-
-    // Add human-readable labels, categorize, and sort entries, and add item uses.
-    for ( const select of html.querySelectorAll('[name="bar1.attribute"], [name="bar2.attribute"]') ) {
-      const groups = {
-        abilities: makeOptgroup("DND5E.AbilityScorePl", select),
-        movement: makeOptgroup("DND5E.MovementSpeeds", select),
-        senses: makeOptgroup("DND5E.Senses", select),
-        skills: makeOptgroup("DND5E.SkillPassives", select),
-        slots: makeOptgroup("JOURNALENTRYPAGE.DND5E.Class.SpellSlots", select)
-      };
-
-      select.querySelectorAll("option").forEach(option => {
-        const label = getHumanReadableAttributeLabel(option.value, { actor });
-        if ( label ) option.innerText = label;
-        if ( option.value.startsWith("abilities.") ) groups.abilities.appendChild(option);
-        else if ( option.value.startsWith("attributes.movement.") ) groups.movement.appendChild(option);
-        else if ( option.value.startsWith("attributes.senses.") ) groups.senses.appendChild(option);
-        else if ( option.value.startsWith("skills.") ) groups.skills.appendChild(option);
-        else if ( option.value.startsWith("spells.") ) groups.slots.appendChild(option);
-      });
-
+    for ( const select of html.querySelectorAll("select.bar-attribute") ) {
       select.querySelectorAll("optgroup").forEach(group => {
         const options = Array.from(group.querySelectorAll("option"));
+
+        // Localize attribute paths.
+        options.forEach(option => {
+          const label = getHumanReadableAttributeLabel(option.value, { actor });
+          if ( label ) option.innerText = label;
+        });
+
+        // Sort options by localized label.
         options.sort((a, b) => a.innerText.localeCompare(b.innerText, game.i18n.lang));
         group.append(...options);
       });
-
-      if ( !foundry.utils.isEmpty(items) ) {
-        const group = makeOptgroup("DND5E.ConsumeCharges", select);
-        for ( const [k, v] of Object.entries(items).sort(([, a], [, b]) => a.localeCompare(b, game.i18n.lang)) ) {
-          const option = document.createElement("option");
-          if ( k === foundry.utils.getProperty(this.object, select.name) ) option.selected = true;
-          option.value = k;
-          option.innerText = v;
-          group.appendChild(option);
-        }
-      }
     }
   }
 

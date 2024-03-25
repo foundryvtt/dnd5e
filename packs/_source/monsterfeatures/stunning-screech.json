@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a {type} must succeed on a <strong>DC 14 Constitution</strong> saving throw or be stunned until the end of the {creature}'s next turn .</p>\n</section>\n<p>The {creature} emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a {type} must make a <strong>Constitution</strong> saving throw.</p>",
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a [[lookup @details.type.config.label lowercase]] must succeed on a <strong>DC 14 Constitution</strong> saving throw or be stunned until the end of the [[lookup @name lowercase]]'s next turn .</p>\n</section>\n<p>the [[lookup @name lowercase]] emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a [[lookup @details.type.config.label lowercase]] must make a <strong>Constitution</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

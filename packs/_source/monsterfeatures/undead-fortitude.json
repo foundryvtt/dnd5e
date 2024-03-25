@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>If damage reduces the {creature} to <strong>0 hit points</strong>, it must make a <strong>Constitution</strong> saving throw with a DC of 5+the damage taken, unless the damage is radiant or from a critical hit. On a success, the {creature} drops to <strong>1 hit point</strong> instead.</p>\n</section>\n<p>If damage reduces the {creature} to <strong>0 hit points</strong>, it must make a <strong>Constitution</strong> saving throw.</p>",
+      "value": "<section class=\"secret\">\n<p>If damage reduces the [[lookup @name lowercase]] to <strong>0 hit points</strong>, it must make a <strong>Constitution</strong> saving throw with a DC of 5+the damage taken, unless the damage is radiant or from a critical hit. On a success, the [[lookup @name lowercase]] drops to <strong>1 hit point</strong> instead.</p>\n</section>\n<p>If damage reduces the [[lookup @name lowercase]] to <strong>0 hit points</strong>, it must make a <strong>Constitution</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

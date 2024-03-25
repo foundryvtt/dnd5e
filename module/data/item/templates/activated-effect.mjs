@@ -17,6 +17,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {number} target.width          Width of line when line type is selected.
  * @property {string} target.units          Units used for value and width as defined in `DND5E.distanceUnits`.
  * @property {string} target.type           Targeting mode as defined in `DND5E.targetTypes`.
+ * @property {boolean} target.prompt        Should the player be prompted to place the template?
  * @property {object} range                 Effect's range.
  * @property {number} range.value           Regular targeting distance for item's effect.
  * @property {number} range.long            Maximum targeting distance for features that have a separate long range.
@@ -61,10 +62,6 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
         units: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.RangeUnits"})
       }, {label: "DND5E.Range"}),
       uses: new this.ItemUsesField({}, {label: "DND5E.LimitedUses"}),
-      reserve: new foundry.data.fields.SchemaField({
-        identifier: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.ReserveIdentifier"}),
-        cost: new foundry.data.fields.NumberField({initial: 1, label: "DND5E.ReserveCost"})
-      }, {label: "DND5E.Reserve"}),
       consume: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.ConsumeType"}),
         target: new foundry.data.fields.StringField({

@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} magically turns invisible until it attacks, casts a spell, or uses its Enlarge, or until its concentration is broken, up to 1 hour (as if concentrating on a spell).</p>\n</section>\n<p>The {creature} magically turns invisible. Any equipment the {creature} wears or carries is invisible with it.</p>",
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] magically turns invisible until it attacks, casts a spell, or uses its Enlarge, or until its concentration is broken, up to 1 hour (as if concentrating on a spell).</p>\n</section>\n<p>the [[lookup @name lowercase]] magically turns invisible. Any equipment the [[lookup @name lowercase]] wears or carries is invisible with it.</p>",
       "chat": "",
       "unidentified": ""
     },

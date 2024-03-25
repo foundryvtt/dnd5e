@@ -1,4 +1,4 @@
-<{{elements.inventory}}>
+<{{elements.inventory}} class="inventory-element">
   {{#unless isVehicle}}
   <div class="inventory-filters inventory-header flexrow">
     <ul class="filter-list flexrow" data-filter="features">
@@ -15,17 +15,9 @@
         <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
         {{#if section.hasActions}}
-            {{#if section.reserve.max}}
-            {{ section.value }} / {{ section.reserve.max }}
-            {{else}}
-            <div class="item-detail item-uses">{{localize "DND5E.Uses"}}</div>
-            {{/if}}
-        <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
-        {{/if}}
-        {{!-- {{#if section.hasActions}}
         <div class="item-detail item-uses">{{localize "DND5E.Uses"}}</div>
         <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
-        {{/if}} --}}
+        {{/if}}
 
         {{#if section.columns}}
             {{#each section.columns}}

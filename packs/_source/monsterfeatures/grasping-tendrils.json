@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>The {creature} can have up to six tendrils at a time. Each tendril can be attacked (AC 20; <strong>10 hit points</strong>; immunity to poison and <em>psychic damage</em>). </p><p>Destroying a tendril deals no damage to the {creature}, which can extrude a replacement tendril on its next turn. A tendril can also be broken if a creature takes an action and succeeds on a <strong>DC 15 Strength check</strong> against it.</p></section><p>The {creature} can have up to six tendrils at a time. Each tendril can be attacked. A tendril can also be broken if a creature takes an action and succeeds on a Strength check against it.</p>",
+      "value": "<section class=\"secret\"><p>the [[lookup @name lowercase]] can have up to six tendrils at a time. Each tendril can be attacked (AC 20; <strong>10 hit points</strong>; immunity to poison and <em>psychic damage</em>). </p><p>Destroying a tendril deals no damage to the [[lookup @name lowercase]], which can extrude a replacement tendril on its next turn. A tendril can also be broken if a creature takes an action and succeeds on a <strong>DC 15 Strength check</strong> against it.</p></section><p>the [[lookup @name lowercase]] can have up to six tendrils at a time. Each tendril can be attacked. A tendril can also be broken if a creature takes an action and succeeds on a Strength check against it.</p>",
       "chat": "",
       "unidentified": ""
     },

@@ -22,8 +22,7 @@ export default class ActorArmorConfig extends BaseConfigSheet {
       classes: ["dnd5e", "actor-armor-config"],
       template: "systems/dnd5e/templates/apps/actor-armor.hbs",
       width: 320,
-      height: "auto",
-      sheetConfig: false
+      height: "auto"
     });
   }
 

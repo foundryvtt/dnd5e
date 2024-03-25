@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact.</p><p>Each creature within 5 feet of the flash must succeed on a <strong>DC 13 Dexterity</strong> saving throw or be blinded until the end of the {creature}'s next turn.</p>\n</section>\n<p>The {creature} spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must make a <strong>Dexterity</strong> saving throw.</p>",
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact.</p><p>Each creature within 5 feet of the flash must succeed on a <strong>DC 13 Dexterity</strong> saving throw or be blinded until the end of the [[lookup @name lowercase]]'s next turn.</p>\n</section>\n<p>the [[lookup @name lowercase]] spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must make a <strong>Dexterity</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

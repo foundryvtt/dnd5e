@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>One creature charmed by the {creature} takes <strong>10 (3d6)</strong> <strong>psychic </strong>damage, and the {creature} regains hit points equal to the damage the creature takes.</p>",
+      "value": "<p>One creature charmed by the [[lookup @name lowercase]] takes <strong>10 (3d6)</strong> <strong>psychic </strong>damage, and the [[lookup @name lowercase]] regains hit points equal to the damage the creature takes.</p>",
       "chat": "",
       "unidentified": ""
     },

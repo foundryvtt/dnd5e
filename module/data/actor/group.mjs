@@ -80,9 +80,9 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static metadata = Object.freeze({
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     systemFlagsModel: GroupSystemFlags
-  });
+  }, {inplace: false}));
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -226,6 +226,42 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       if ( roll.total > 0 ) member.quantity.value = roll.total;
     }));
     return this.parent.update({"system.members": membersCollection});
+  }
+
+  /* -------------------------------------------- */
+  /*  Resting                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Initiate a rest for all members of this group.
+   * @param {RestConfiguration} config  Configuration data for the rest.
+   * @param {RestResult} result         Results of the rest operation being built.
+   * @returns {boolean}                 Returns `false` to prevent regular rest process from completing.
+   */
+  async rest(config, result) {
+    const results = new Map();
+    for ( const member of this.members ) {
+      results.set(
+        member.actor,
+        await member.actor[config.type === "short" ? "shortRest" : "longRest"]({
+          ...config, dialog: false, advanceTime: false
+        }) ?? null
+      );
+    }
+
+    // Advance the game clock
+    if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
+
+    /**
+     * A hook event that fires when the rest process is completed for a group.
+     * @function dnd5e.groupRestCompleted
+     * @memberof hookEvents
+     * @param {Actor5e} group                         The group that just completed resting.
+     * @param {Map<Actor5e, RestResult|null>} result  Details on the rests completed.
+     */
+    Hooks.callAll("dnd5e.groupRestCompleted", this.parent, results);
+
+    return false;
   }
 
   /* -------------------------------------------- */

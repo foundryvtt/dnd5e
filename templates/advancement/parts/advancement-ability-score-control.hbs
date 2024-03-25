@@ -1,5 +1,5 @@
 <li data-score="{{key}}">
-    <label>{{#if allowedPath}}{{#if canAllow}}<input type="checkbox" name="{{allowedPath}}" {{checked allowed}} data-tooltip="DND5E.AdvancementAbilityScoreImprovementAllowed"> {{/if}}{{/if}}{{label}}</label>
+    <label>{{label}}</label>
     {{#if canAdjust}}
     <a class="adjustment-button" {{~#if canDecrease}}data-action="decrease"{{else}}aria-disabled="true"{{/if}}>
         <i class="fas fa-minus"></i>

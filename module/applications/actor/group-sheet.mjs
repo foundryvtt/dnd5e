@@ -53,6 +53,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     context.system = this.actor.system;
     context.items = Array.from(this.actor.items);
     context.config = CONFIG.DND5E;
+    context.isGM = game.user.isGM;
 
     // Membership
     const {sections, stats} = this.#prepareMembers();
@@ -157,7 +158,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       // HP bar
       const hp = member.system.attributes.hp;
       m.hp.current = hp.value + (hp.temp || 0);
-      m.hp.max = Math.max(0, hp.max + (hp.tempmax || 0));
+      m.hp.max = Math.max(0, hp.effectiveMax);
       m.hp.pct = Math.clamped((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
       m.hp.color = dnd5e.documents.Actor5e.getHPColor(m.hp.current, m.hp.max).css;
       stats.currentHP += (m.hp.current * multiplier);
@@ -298,12 +299,18 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         const removeMemberId = button.closest("li.group-member").dataset.actorId;
         this.object.system.removeMember(removeMemberId);
         break;
-      case "rollQuantities":
-        this.object.system.rollQuantities();
+      case "longRest":
+        this.object.longRest({ advanceTime: true });
         break;
       case "movementConfig":
         const movementConfig = new ActorMovementConfig(this.object);
         movementConfig.render(true);
+        break;
+      case "rollQuantities":
+        this.object.system.rollQuantities();
+        break;
+      case "shortRest":
+        this.object.shortRest({ advanceTime: true });
         break;
     }
   }

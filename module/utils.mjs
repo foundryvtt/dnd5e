@@ -40,6 +40,23 @@ export function formatText(value) {
 /* -------------------------------------------- */
 
 /**
+ * Return whether a string is a valid reroll, explosion, min, or max dice modifier.
+ * @param {string} mod      The modifier to test.
+ * @returns {boolean}
+ */
+export function isValidDieModifier(mod) {
+  const regex = {
+    reroll: /rr?([0-9]+)?([<>=]+)?([0-9]+)?/i,
+    explode: /xo?([0-9]+)?([<>=]+)?([0-9]+)?/i,
+    minimum: /(?:min)([0-9]+)/i,
+    maximum: /(?:max)([0-9]+)/i
+  };
+  return Object.values(regex).some(rgx => rgx.test(mod));
+}
+
+/* -------------------------------------------- */
+
+/**
  * Handle a delta input for a number value from a form.
  * @param {HTMLInputElement} input  Input that contains the modified value.
  * @param {Document} target         Target document to be updated.
@@ -117,7 +134,7 @@ export function filteredKeys(obj, filter) {
  */
 export function sortObjectEntries(obj, sortKey) {
   let sorted = Object.entries(obj);
-  const sort = (lhs, rhs) => foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs) : lhs - rhs;
+  const sort = (lhs, rhs) => foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs, game.i18n.lang) : lhs - rhs;
   if ( foundry.utils.getType(sortKey) === "function" ) sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1]));
   else if ( sortKey ) sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey]));
   else sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1]));
@@ -160,7 +177,23 @@ export function indexFromUuid(uuid) {
  * @returns {string}     Link to the item or empty string if item wasn't found.
  */
 export function linkForUuid(uuid) {
-  return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+  if ( game.release.generation < 12 ) {
+    return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+  }
+
+  // TODO: When v11 support is dropped we can make this method async and return to using TextEditor._createContentLink.
+  if ( uuid.startsWith("Compendium.") ) {
+    let [, scope, pack, documentName, id] = uuid.split(".");
+    if ( !CONST.PRIMARY_DOCUMENT_TYPES.includes(documentName) ) id = documentName;
+    const data = {
+      classes: ["content-link"],
+      attrs: { draggable: "true" }
+    };
+    TextEditor._createLegacyContentLink("Compendium", [scope, pack, id].join("."), "", data);
+    data.dataset.link = "";
+    return TextEditor.createAnchor(data).outerHTML;
+  }
+  return fromUuidSync(uuid).toAnchor().outerHTML;
 }
 
 /* -------------------------------------------- */
@@ -205,12 +238,11 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/actor-features.hbs",
     "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-score-generation.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-body.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
     "systems/dnd5e/templates/actors/tabs/character-features.hbs",
     "systems/dnd5e/templates/actors/tabs/character-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
+    "systems/dnd5e/templates/actors/tabs/group-members.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
@@ -220,7 +252,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-mountable.hbs",
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
     "systems/dnd5e/templates/items/parts/item-source.hbs",
-    "systems/dnd5e/templates/items/parts/item-reserve.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
     "systems/dnd5e/templates/items/parts/item-tooltip.hbs",
 
@@ -417,7 +448,7 @@ export function performPreLocalization(config) {
   // Localize & sort status effects
   CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
   CONFIG.statusEffects.sort((lhs, rhs) =>
-    lhs.id === "dead" ? -1 : rhs.id === "dead" ? 1 : lhs.name.localeCompare(rhs.name)
+    lhs.id === "dead" ? -1 : rhs.id === "dead" ? 1 : lhs.name.localeCompare(rhs.name, game.i18n.lang)
   );
 }
 
@@ -484,6 +515,11 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
 
   if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
     return game.i18n.localize("DND5E.ExperiencePointsValue");
+  }
+
+  if ( attr.startsWith(".") && actor ) {
+    const item = fromUuidSync(attr, { relative: actor });
+    return item?.name ?? attr;
   }
 
   // Check if the attribute is already in cache.

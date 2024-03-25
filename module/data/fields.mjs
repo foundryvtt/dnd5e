@@ -1,3 +1,5 @@
+import Advancement from "../documents/advancement/advancement.mjs";
+
 /**
  * Data field that selects the appropriate advancement data model if available, otherwise defaults to generic
  * `ObjectField` to prevent issues with custom advancement types that aren't currently loaded.
@@ -10,7 +12,15 @@ export class AdvancementField extends foundry.data.fields.ObjectField {
    * @returns {typeof BaseAdvancement|null}  The BaseAdvancement class, or null.
    */
   getModelForType(type) {
-    return CONFIG.DND5E.advancementTypes[type] ?? null;
+    let config = CONFIG.DND5E.advancementTypes[type];
+    if ( config?.prototype instanceof Advancement ) {
+      foundry.utils.logCompatibilityWarning(
+        "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3", once: true }
+      );
+      return config;
+    }
+    return config?.documentClass ?? null;
   }
 
   /* -------------------------------------------- */
@@ -70,22 +80,6 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
    */
   getDefaults() {
     return this.advancementType.metadata?.defaults?.[this.name] ?? {};
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  _cleanType(value, options) {
-    if ( !(typeof value === "object") ) value = {};
-
-    // Use a defined DataModel
-    const cls = this.getModel();
-    if ( cls ) return cls.cleanData(value, options);
-    if ( options.partial ) return value;
-
-    // Use the defined defaults
-    const defaults = this.getDefaults();
-    return foundry.utils.mergeObject(defaults, value, {inplace: false});
   }
 
   /* -------------------------------------------- */

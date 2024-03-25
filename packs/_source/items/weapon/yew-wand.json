@@ -61,7 +61,6 @@
     },
     "ability": null,
     "actionType": "util",
-    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -98,7 +97,20 @@
       "description": ""
     },
     "container": null,
-    "crewed": false
+    "crewed": false,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    },
+    "magicalBonus": null
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -109,10 +121,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
+    "systemVersion": "3.1.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233904,
-    "modifiedTime": 1707055842280,
+    "modifiedTime": 1709659531197,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!t5yP0d7YaKwuKKiH"

@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>Any time the {creature} is targeted by a magic missile spell, a line spell, or a spell that requires a ranged attack roll, roll a d6. On a 1 to 5, the {creature} is unaffected.</p><p>On a 6, the {creature} is unaffected, and the effect is reflected back at the caster as though it originated from the {creature}, turning the caster into the target.</p></section><p>The {creature} is unaffected, and the effect is reflected back at the caster as though it originated from the {creature}, turning the caster into the target.</p>",
+      "value": "<section class=\"secret\"><p>Any time the [[lookup @name lowercase]] is targeted by a magic missile spell, a line spell, or a spell that requires a ranged attack roll, roll a d6. On a 1 to 5, the [[lookup @name lowercase]] is unaffected.</p><p>On a 6, the [[lookup @name lowercase]] is unaffected, and the effect is reflected back at the caster as though it originated from the [[lookup @name lowercase]], turning the caster into the target.</p></section><p>the [[lookup @name lowercase]] is unaffected, and the effect is reflected back at the caster as though it originated from the [[lookup @name lowercase]], turning the caster into the target.</p>",
       "chat": "",
       "unidentified": ""
     },

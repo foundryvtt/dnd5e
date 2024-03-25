@@ -154,7 +154,7 @@ export default class Award extends DialogMixin(FormApplication) {
 
   /**
    * Award currency, optionally transferring between one document and another.
-   * @param {object[]} amounts                 Amount of each denomination to transfer.
+   * @param {Record<string, number>} amounts   Amount of each denomination to transfer.
    * @param {(Actor5e|Item5e)[]} destinations  Documents that should receive the currency.
    * @param {object} [config={}]
    * @param {boolean} [config.each=false]      Award the specified amount to each player, rather than splitting it.
@@ -260,11 +260,13 @@ export default class Award extends DialogMixin(FormApplication) {
 
       const whisperTargets = game.users.filter(user => destination.testUserPermission(user, "OWNER"));
       const whisper = whisperTargets.length !== game.users.size;
-      messages.push({
-        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+      const messageData = {
         content,
         whisper: whisper ? whisperTargets : []
-      });
+      };
+      // TODO: Remove when v11 support is dropped.
+      if ( game.release.generation < 12 ) messageData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
+      messages.push(messageData);
     }
     if ( messages.length ) cls.createDocuments(messages);
   }

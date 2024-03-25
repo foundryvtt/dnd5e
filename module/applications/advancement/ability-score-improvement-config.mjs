@@ -19,12 +19,9 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
     const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
       if ( !this.advancement.canImprove(key) ) return obj;
       const fixed = this.advancement.configuration.fixed[key] ?? 0;
-      const allowed = this.advancement.configuration.allowed[key] ?? true;
       obj[key] = {
         key,
-        allowed,
         name: `configuration.fixed.${key}`,
-        allowedPath: `configuration.allowed.${key}`,
         label: data.label,
         value: fixed,
         canIncrease: true,
