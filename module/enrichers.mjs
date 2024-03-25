@@ -690,14 +690,13 @@ async function enrichItem(config, label, options) {
     return createRollLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
   }
 
-  // If config is a relative Id/Name
-  const relativeIdMatch = givenItem.match(/^\.\w{16}$/);  // [[/item .amUUCouL69OK1GZU]]
-  const copiedIdMatch = givenItem.match(/^\w{16}$/);      // [[/item amUUCouL69OK1GZU]]
-  if ( relativeIdMatch || copiedIdMatch ) {
-    if ( options.relativeTo?.documentName === "Item") {
-      const foundActor = options.relativeTo?.parent;
+  // If config is a relative ID
+  if ( givenItem.match(/^\.?\w{16}$/) ) {
+    const foundActor = options.relativeTo instanceof Item ? options.relativeTo.parent
+      : options.relativeTo instanceof Actor ? options.relativeTo : null;
+    if ( foundActor ) {
       const relativeId = givenItem.startsWith(".") ? givenItem.substr(1) : givenItem;
-      let foundItem = foundActor?.items.get(relativeId);
+      let foundItem = foundActor.items.get(relativeId);
       if ( foundItem ) {
         if ( !label ) label = foundItem.name;
         return createRollLink(label, { type: "item", rollItemActor: foundActor.uuid, rollItemUuid: foundItem.uuid });
