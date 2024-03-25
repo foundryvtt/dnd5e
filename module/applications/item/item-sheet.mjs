@@ -137,6 +137,7 @@ export default class ItemSheet5e extends ItemSheet {
       concealDetails: !game.user.isGM && (this.document.system.identified === false)
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
+    context.abilityConsumptionManual = !item.isEmbedded && (this.item.system.consume?.type === "attribute");
 
     if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
       context.properties = item.system.validProperties.reduce((obj, k) => {
@@ -261,7 +262,7 @@ export default class ItemSheet5e extends ItemSheet {
     const consume = this.item.system.consume || {};
     if ( !consume.type ) return [];
     const actor = this.item.actor;
-    if ( !actor ) return {};
+    if ( !actor && (consume.type !== "hitDice") ) return {};
 
     // Ammunition
     if ( consume.type === "ammo" ) {
