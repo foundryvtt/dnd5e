@@ -1,6 +1,11 @@
 {{#if isGM}}
 <menu class="member-controls flexrow">
     <li>
+        <button type="button" class="action-button" data-action="placeMembers">
+            <i class="fa-solid fa-location-dot" inert></i> {{localize "DND5E.Group.PlaceMembers"}}
+        </button>
+    </li>
+    <li>
         <button type="button" class="action-button rest-button" data-action="shortRest">
             <i class="fa-solid fa-utensils" inert></i> {{localize "DND5E.ShortRest"}}
         </button>
