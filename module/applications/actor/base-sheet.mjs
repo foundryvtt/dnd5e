@@ -475,8 +475,14 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     });
 
     // Sort the spellbook by section level
-    const sorted = Object.values(spellbook);
-    sorted.sort((a, b) => a.order - b.order);
+    const sorted = Object.values(spellbook)
+    .map(data => ({
+      ...data,
+      spells: data.spells.sort((l, r) => l.name?.localeCompare(r.name) ?? 0)
+        .sort((l, r) => ((l.system.preparation.mode === "always" ? 0 : 1)-(r.system.preparation.mode === "always" ? 0 : 1))
+        || ((l.system.preparation.prepared ? 0 : 1)-(r.system.preparation.prepared ? 0 : 1)))
+    }));
+  sorted.sort((a, b) => a.order - b.order);
     return sorted;
   }
 
