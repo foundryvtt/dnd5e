@@ -108,6 +108,21 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Prepare activated effect data.
+   */
+  prepareActivatedEffectData() {
+    if ( !this.parent.isEmbedded ) return;
+    if ( ["ammo", "charges", "material"].includes(this.consume.type) && this.consume.target.includes(".") ) {
+      const item = this.parent.actor.items.find(i =>
+        (i.flags.core?.sourceId === this.consume.target) || (i.flags.dnd5e?.sourceId === this.consume.target)
+      );
+      if ( item ) this.consume.target = item.id;
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
