@@ -424,6 +424,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       ui.notifications.warn("DND5E.Summoning.Warning.Wildcard", { localize: true });
     }
 
+    delete placement.prototypeToken;
     const tokenDocument = await actor.getTokenDocument(foundry.utils.mergeObject(placement, tokenUpdates));
     tokenDocument.delta.updateSource(actorUpdates);
 
