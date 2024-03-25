@@ -474,8 +474,14 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       spellbook[s].spells.push(spell);
     });
 
-    // Sort the spellbook by section level
-    const sorted = Object.values(spellbook);
+    // Sort the spellbook by section level, speels sorted by "always prepared" first and next by "prepared" status.
+    const sorted = Object.values(spellbook)
+    .map(data => ({
+      ...data,
+      spells: data.spells.sort((l, r) => l.name?.localeCompare(r.name) ?? 0)
+        .sort((l, r) => ((l.system.preparation.mode === "always" ? 0 : 1)-(r.system.preparation.mode === "always" ? 0 : 1))
+        || ((l.system.preparation.prepared ? 0 : 1)-(r.system.preparation.prepared ? 0 : 1)))
+    }));
     sorted.sort((a, b) => a.order - b.order);
     return sorted;
   }
