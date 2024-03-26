@@ -702,14 +702,15 @@ async function enrichItem(config, label, options) {
         return createRollLink(label, { type: "item", rollItemActor: foundActor.uuid, rollItemUuid: foundItem.uuid });
       }
     } else {
-      console.warn("Relative Item Enrichers must be within an Owned Item's description");
+      console.warn("Relative Item Enrichers must be within an Owned Item or Actor's description");
       return null;
     }
   }
 
   // Finally, if config is an item name
   if ( !label ) label = givenItem;
-  const foundActor = options.relativeTo?.documentName === "Item" ? options.relativeTo?.parent : null;
+  const foundActor = options.relativeTo instanceof Item ? options.relativeTo.parent
+  : options.relativeTo instanceof Actor ? options.relativeTo : null;
   return createRollLink(label, { type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem });
 }
 
@@ -911,15 +912,12 @@ async function rollAction(event) {
               return ui.notifications.warn(`You do not have ownership of ${gameActor?.name}, and cannot use this item.`);
             }
           } else if ( target.dataset.rollItemName ) {
-            if ( (canvas.tokens.controlled.length === 0 && !target.dataset.rollItemActor) || canvas.tokens.controlled[0].actor.items.getName(target.dataset.rollItemName) ) {
+            if ( ( !target.dataset.rollItemActor) ) {
               return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
-            } else if ( target.dataset.rollItemActor ) {
+            } else {
               const gameActor = await fromUuid(target.dataset.rollItemActor);
               if ( gameActor.testUserPermission(game.user, "OWNER") ) {
                 if ( gameActor.items.getName(target.dataset.rollItemName) ) {
-                  if ( canvas.tokens.controlled.length > 0 ) {
-                    ui.notifications.warn(`Your controlled token ${canvas.tokens.controlled[0].name} does not have an Item with name ${target.dataset.rollItemName} using Item Enricher owner`);
-                  }
                   return (await fromUuid(target.dataset.rollItemActor)).items.getName(target.dataset.rollItemName).use();
                 } else {
                   return ui.notifications.warn(`${gameActor.name} does not have an Item with name ${target.dataset.rollItemName}.`);
@@ -927,8 +925,6 @@ async function rollAction(event) {
               } else {
                 return ui.notifications.warn(`You do not have ownership of ${gameActor?.name}, and cannot use this item.`);
               }
-            } else {
-              return ui.notifications.warn(`Your controlled actor ${canvas.tokens.controlled[0]?.actor.name} does not have an Item with name ${target.dataset.rollItemName}.`);
             }
           }
 
