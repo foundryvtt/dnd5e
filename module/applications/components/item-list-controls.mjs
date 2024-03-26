@@ -296,14 +296,14 @@ export default class ItemListControlsElement extends HTMLElement {
    */
   _applySorting() {
     const comparators = {
-      a: (a, b) => a.name.localeCompare(b.name, game.i18n.lang),
+      a: (a, b) => ((a.preparationMode === "always" ? 0 : 1)-(b.preparationMode === "always" ? 0 : 1)) || (a.prepared-b.prepared) || a.name.localeCompare(b.name, game.i18n.lang),
       m: (a, b) => a.sort - b.sort
     };
     for ( const section of this.list.querySelectorAll(".items-section .item-list") ) {
       const items = [];
       section.querySelectorAll(".item").forEach(element => {
-        const { itemName, itemSort } = element.dataset;
-        items.push({ element, name: itemName, sort: Number(itemSort) });
+        const { itemName, itemSort, itemPreparationMode, itemPreparationPrepared } = element.dataset;
+        items.push({ element, name: itemName, sort: Number(itemSort), preparationMode: itemPreparationMode, prepared: itemPreparationPrepared === "true" ? 0 : 1 });
       });
       items.sort(comparators[this.sortMode]);
       section.replaceChildren(...items.map(({ element }) => element));

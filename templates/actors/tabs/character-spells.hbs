@@ -95,7 +95,9 @@
 
                 {{!-- Spells --}}
                 <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
-                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}">
+                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}" 
+                    data-item-preparation-mode="{{ item.system.preparation.mode }}"
+                    data-item-preparation-prepared="{{ item.system.preparation.prepared }}">
 
                     {{!-- Spell Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
