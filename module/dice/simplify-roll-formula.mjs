@@ -166,7 +166,6 @@ function _simplifyDiceTerms(terms) {
       ? new Coin({ number: number })
       : new Die({ number, faces: parseInt(key.slice(1)), modifiers: [...new Set(modifiers)] })
   ]));
-  console.warn({diceQuantities, simplified});
   return [...simplified, ...annotated];
 }
 
