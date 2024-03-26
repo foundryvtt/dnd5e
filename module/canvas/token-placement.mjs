@@ -113,7 +113,7 @@ export default class TokenPlacement {
       if ( tokenData.randomImg ) tokenData.texture.src = prototypeToken.actor.img;
       const cls = getDocumentClass("Token");
       const doc = new cls(tokenData, { parent: canvas.scene });
-      this.#placements.push({ x: 0, y: 0, rotation: 0 });
+      this.#placements.push({ x: 0, y: 0, rotation: tokenData.rotation ?? 0 });
       this.#previews.push(doc);
       doc.object.draw();
     }
