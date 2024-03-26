@@ -7,6 +7,7 @@ import SpellData from "../data/item/spell.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
+import { getSceneTargets } from "../utils.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
@@ -2214,14 +2215,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Get the Actor which is the author of a chat card
-   * @param {HTMLElement} card    The chat card being used
-   * @returns {Actor[]}            An Array of Actor documents, if any
+   * Get token targets for the current chat card action and display warning of none are selected.
+   * @param {HTMLElement} card  The chat card being used.
+   * @returns {Token5e[]}       An Array of Token objects, if any.
    * @private
    */
   static _getChatCardTargets(card) {
-    let targets = canvas.tokens.controlled.filter(t => !!t.actor);
-    if ( !targets.length && game.user.character ) targets = targets.concat(game.user.character.getActiveTokens());
+    const targets = getSceneTargets();
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", {localize: true});
     return targets;
   }
