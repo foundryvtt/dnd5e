@@ -48,9 +48,8 @@ export default class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
-    if ( !this.value.added || configMode ) {
-      return this.configuration.items.reduce((html, i) => html + dnd5e.utils.linkForUuid(i.uuid), "");
-    }
+    if ( !this.value.added || configMode ) return this.configuration.items.filter(i => fromUuidSync(i.uuid))
+      .reduce((html, i) => html + dnd5e.utils.linkForUuid(i.uuid), "");
 
     // Link to items on the actor
     else {
