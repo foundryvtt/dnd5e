@@ -710,7 +710,7 @@ async function enrichItem(config, label, options) {
   // Finally, if config is an item name
   if ( !label ) label = givenItem;
   const foundActor = options.relativeTo instanceof Item ? options.relativeTo.parent
-  : options.relativeTo instanceof Actor ? options.relativeTo : null;
+    : options.relativeTo instanceof Actor ? options.relativeTo : null;
   return createRollLink(label, { type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem });
 }
 
@@ -918,7 +918,11 @@ async function rollAction(event) {
                 if ( canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName) ) {
                   return canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName).use();
                 } else if ( gameActor.items.getName(target.dataset.rollItemName) ) {
-                  return gameActor.items.getName(target.dataset.rollItemName).use();
+                  await gameActor.items.getName(target.dataset.rollItemName).use();
+                  if (canvas.tokens.controlled.length > 0 ) {
+                    ui.notifications.warn(`Your controlled token ${canvas.tokens.controlled[0].name} does not have an Item with name ${target.dataset.rollItemName} using Item Enricher owner`);
+                  }
+                  return;
                 } else {
                   return ui.notifications.warn(`${gameActor.name} does not have an Item with name ${target.dataset.rollItemName}.`);
                 }
@@ -928,7 +932,6 @@ async function rollAction(event) {
               return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
             }
           }
-          
 
         default:
           return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
