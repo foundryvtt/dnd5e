@@ -366,7 +366,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         ability: { sign: Math.sign(mod) < 0 ? "-" : "+", value: Math.abs(mod), ability: sc.ability },
         attack: { sign: Math.sign(attack) < 0 ? "-" : "+", value: Math.abs(attack) },
         primary: this.actor.system.attributes.spellcasting === sc.ability,
-        save: ability?.dc ?? 0
+        save: ability?.dc ?? 0,
+        preparedSpellsLimit: sc.preparedSpellsLimit
       });
     }
 

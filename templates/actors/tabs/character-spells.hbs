@@ -1,6 +1,7 @@
 {{!-- Spellcasting --}}
 <section class="top">
     {{#each spellcasting}}
+    {{log this}}
     <div class="spellcasting card {{#if primary}}primary{{/if}}" data-ability="{{ ability.ability }}">
         <div class="header">
             <h3>{{ label }}</h3>

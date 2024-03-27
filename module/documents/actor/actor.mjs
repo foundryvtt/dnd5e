@@ -166,7 +166,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._prepareArmorClass();
     this._prepareEncumbrance();
     this._prepareInitiative(rollData, checkBonus);
-    this._prepareSpellcasting();
+    this._prepareSpellcasting(rollData);
   }
 
   /* -------------------------------------------- */
@@ -567,9 +567,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
    * Mutates the value of the system.spells object.
+   * @param {object} bonusData         Data produced by getRollData to be applied to bonus formulas
    * @protected
    */
-  _prepareSpellcasting() {
+  _prepareSpellcasting(bonusData) {
     if ( !this.system.spells ) return;
 
     // Spellcasting DC and modifier
@@ -588,6 +589,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     else {
+
+      // Process the different prepared spell limit.
+      this.items
+        .filter(cls => cls.system?.spellcasting?.preparedSpellsLimitFormula)
+        .forEach(cls => {
+          cls.system.spellcasting.preparedSpellsLimit = Roll.safeEval(
+            Roll.replaceFormulaData(
+              cls.spellcasting.preparedSpellsLimitFormula,
+              bonusData
+            )
+          );
+        });
       // Grab all classes with spellcasting
       const classes = this.items.filter(cls => {
         if ( cls.type !== "class" ) return false;
