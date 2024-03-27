@@ -1567,7 +1567,7 @@ DND5E.damageTypes = {
   },
   necrotic: {
     label: "DND5E.DamageNecrotic",
-    icon: "systems/dnd5e/icons/svg/damage/acid.svg",
+    icon: "systems/dnd5e/icons/svg/damage/necrotic.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.klOVUV5G1U7iaKoG"
   },
   piercing: {
