@@ -905,12 +905,7 @@ async function rollAction(event) {
           return await actor.rollToolCheck(tool, options);
         case "item":
           if ( target.dataset.rollItemUuid ) {
-            const gameActor = await fromUuid(target.dataset.rollItemActor);
-            if ( gameActor.testUserPermission(game.user, "OWNER") ) {
               return (await fromUuid(target.dataset.rollItemUuid)).use();
-            } else {
-              return ui.notifications.warn(`You do not have ownership of ${gameActor?.name}, and cannot use this item.`);
-            }
           } else if ( target.dataset.rollItemName ) {
             if ( target.dataset.rollItemActor ) {
               const gameActor = await fromUuid(target.dataset.rollItemActor);
@@ -919,7 +914,7 @@ async function rollAction(event) {
                   return canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName).use();
                 } else if ( gameActor.items.getName(target.dataset.rollItemName) ) {
                   await gameActor.items.getName(target.dataset.rollItemName).use();
-                  if (canvas.tokens.controlled.length > 0 ) {
+                  if ( canvas.tokens.controlled.length > 0 ) {
                     ui.notifications.warn(`Your controlled token ${canvas.tokens.controlled[0].name} does not have an Item with name ${target.dataset.rollItemName} using Item Enricher owner`);
                   }
                   return;
