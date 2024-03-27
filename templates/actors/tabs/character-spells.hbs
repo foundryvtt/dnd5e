@@ -45,7 +45,7 @@
 <{{ elements.inventory }} class="inventory-element" v2>
 
     {{!-- Searching & Filtering --}}
-    <item-list-controls for="spellbook" label="{{ localize "DND5E.SpellsSearch" }}" sort="toggle" collection="items"
+    <item-list-controls for="spellbook" label="{{ localize "DND5E.SpellsSearch" }}" sort="multi" sortValues="apm" collection="items"
                         keep-empty>
         <datalist>
             <option value="action">{{ localize "DND5E.Action" }}</option>
