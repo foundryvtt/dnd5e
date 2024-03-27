@@ -912,21 +912,23 @@ async function rollAction(event) {
               return ui.notifications.warn(`You do not have ownership of ${gameActor?.name}, and cannot use this item.`);
             }
           } else if ( target.dataset.rollItemName ) {
-            if ( ( !target.dataset.rollItemActor) ) {
-              return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
-            } else {
+            if ( target.dataset.rollItemActor ) {
               const gameActor = await fromUuid(target.dataset.rollItemActor);
               if ( gameActor.testUserPermission(game.user, "OWNER") ) {
-                if ( gameActor.items.getName(target.dataset.rollItemName) ) {
-                  return (await fromUuid(target.dataset.rollItemActor)).items.getName(target.dataset.rollItemName).use();
+                if ( canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName) ) {
+                  return canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName).use();
+                } else if ( gameActor.items.getName(target.dataset.rollItemName) ) {
+                  return gameActor.items.getName(target.dataset.rollItemName).use();
                 } else {
                   return ui.notifications.warn(`${gameActor.name} does not have an Item with name ${target.dataset.rollItemName}.`);
                 }
-              } else {
-                return ui.notifications.warn(`You do not have ownership of ${gameActor?.name}, and cannot use this item.`);
               }
+              return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
+            } else {
+              return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
             }
           }
+          
 
         default:
           return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
