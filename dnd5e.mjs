@@ -150,7 +150,7 @@ Hooks.once("init", function() {
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassPageSheet, {
     label: "DND5E.SheetClassClassSummary",
-    types: ["class"]
+    types: ["class", "subclass"]
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalMapLocationPageSheet, {
     label: "DND5E.SheetClassMapLocation",

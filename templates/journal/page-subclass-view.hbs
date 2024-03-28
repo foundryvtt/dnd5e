@@ -1,0 +1,38 @@
+{{#if data.title.show}}
+<header>
+    <h{{title.level1}}>{{data.name}}</h{{title.level1}}>
+</header>
+{{/if}}
+
+{{#if linked.document}}
+
+<section class="journal-page-content">
+    {{{ enriched.value }}}
+
+    {{> "dnd5e.journal-table" table=table level=title.level3
+        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=linked.name) }}
+
+    {{#each features}}
+    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    {{{ this.description }}}
+    {{/each}}
+
+    {{#if optionalTable}}
+    <h{{ title.level2 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption" }}</h{{ title.level2 }}>
+    <p>{{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesDescription" class=linked.lowercaseName }}</p>
+
+    {{> "dnd5e.journal-table" table=optionalTable level=title.level3
+        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableOptionalCaption" class=linked.name) }}
+
+    {{#each optionalFeatures}}
+    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    {{{ this.description }}}
+    {{/each}}
+    {{/if}}
+</section>
+
+{{else}}
+<section>
+    {{ localize "JOURNALENTRYPAGE.DND5E.Subclass.NoValidSubclass" }}
+</section>
+{{/if}}
