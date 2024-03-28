@@ -356,7 +356,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Is this spell linked to the active spell casting ?
-   * @type {string}
+   * @type {boolean}
    */
   get isActiveSpellCasting() {
     if (this.type !== "spell" | !this.parent) return;
