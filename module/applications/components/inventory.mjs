@@ -206,10 +206,7 @@ export default class InventoryElement extends HTMLElement {
       {
         name: "DND5E.Scroll.CreateScroll",
         icon: '<i class="fa-solid fa-scroll"></i>',
-        callback: async li => {
-          const data = await Item5e.createScrollFromSpell(item);
-          Item5e.createDocuments([data.toObject()], { parent: this.actor });
-        },
+        callback: async li => Item5e.create(await Item5e.createScrollFromSpell(item), { parent: this.actor }),
         condition: li => (item.type === "spell") && this.actor?.isOwner,
         group: "action"
       },

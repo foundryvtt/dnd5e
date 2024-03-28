@@ -2587,8 +2587,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
         const spell = await fromUuid(makeUuid(li));
-        const data = await Item5e.createScrollFromSpell(spell);
-        Item5e.createDocuments([data.toObject()]);
+        Item5e.create(await Item5e.createScrollFromSpell(spell));
       },
       condition: li => {
         const item = fromUuidSync(makeUuid(li));
@@ -2611,8 +2610,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
         const spell = game.items.get(li.data("documentId"));
-        const data = await Item5e.createScrollFromSpell(spell);
-        Item5e.createDocuments([data.toObject()]);
+        Item5e.create(await Item5e.createScrollFromSpell(spell));
       },
       condition: li => {
         const item = game.items.get(li.data("documentId"));
