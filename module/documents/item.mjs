@@ -1058,7 +1058,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     let summoned;
     if ( config.createSummons ) {
       try {
-        summoned = await item.system.summons.summon(config.summonsProfile);
+        summoned = await item.system.summons.summon(config.summonsProfile, config.summonsOptions);
       } catch(err) {
         Hooks.onError("Item5e#use", err, { log: "error", notify: "error" });
       }
@@ -2147,15 +2147,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   static async _onChatCardSummon(message, item) {
     let summonsProfile;
+    let summonsOptions = {};
+    let needsConfiguration = false;
 
     // No profile specified and only one profile on item, use that one
-    if ( item.system.summons.profiles.length === 1 ) {
-      summonsProfile = item.system.summons.profiles[0]._id;
-    }
+    if ( item.system.summons.profiles.length === 1 ) summonsProfile = item.system.summons.profiles[0]._id;
+    else needsConfiguration = true;
 
-    // Otherwise show the item use dialog to get the profile
-    else {
-      const config = await AbilityUseDialog.create(item, {
+    // More than one creature type requires configuration
+    if ( item.system.summons.creatureTypes.size > 1 ) needsConfiguration = true;
+
+    // Show the item use dialog to get the profile and other options
+    if ( needsConfiguration ) {
+      let config = await AbilityUseDialog.create(item, {
         beginConcentrating: null,
         consumeResource: null,
         consumeSpellSlot: null,
@@ -2170,11 +2174,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         disableScaling: true
       });
       if ( !config?.summonsProfile ) return;
+      config = foundry.utils.expandObject(config);
       summonsProfile = config.summonsProfile;
+      summonsOptions = config.summonsOptions;
     }
 
     try {
-      await item.system.summons.summon(summonsProfile);
+      await item.system.summons.summon(summonsProfile, summonsOptions);
     } catch(err) {
       Hooks.onError("Item5e#_onChatCardSummon", err, { log: "error", notify: "error" });
     }

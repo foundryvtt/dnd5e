@@ -52,6 +52,10 @@ export default class SummoningConfig extends DocumentSheet {
       (lhs.name || lhs.document?.name || "").localeCompare(rhs.name || rhs.document?.name || "", game.i18n.lang)
     );
     context.summons = this.document.system.summons;
+    context.creatureTypes = Object.entries(CONFIG.DND5E.creatureTypes).reduce((obj, [k, c]) => {
+      obj[k] = { label: c.label, selected: context.summons?.creatureTypes.has(k) ? "selected" : "" };
+      return obj;
+    }, {});
     return context;
   }
 
