@@ -2679,6 +2679,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Configuration options for spell scroll creation.
    *
    * @typedef {object} SpellScrollConfiguration
+   * @property {boolean} [dialog=true]                           Present scroll creation dialog?
    * @property {"full"|"reference"|"none"} [explanation="full"]  Length of spell scroll rules text to include.
    * @property {number} [level]                                  Level at which the spell should be cast.
    */
@@ -2691,10 +2692,30 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Item5e>}                     The created scroll consumable item.
    */
   static async createScrollFromSpell(spell, options={}, config={}) {
-
     config = foundry.utils.mergeObject({
-      explanation: "full"
+      explanation: game.user.getFlag("dnd5e", "creation.scrollExplanation") ?? "reference",
+      level: spell.system.level
     }, config);
+
+    if ( config.dialog !== false ) {
+      const anchor = spell instanceof Item5e ? spell.toAnchor().outerHTML : `<span>${spell.name}</span>`;
+      const result = await Dialog.prompt({
+        title: game.i18n.format("DND5E.Scroll.CreateFrom", { spell: spell.name }),
+        label: game.i18n.localize("DND5E.Scroll.CreateScroll"),
+        content: await renderTemplate("systems/dnd5e/templates/apps/spell-scroll-dialog.hbs", {
+          ...config, anchor, spellLevels: Object.entries(CONFIG.DND5E.spellLevels).reduce((obj, [k, v]) => {
+            if ( Number(k) >= spell.system.level ) obj[k] = v;
+            return obj;
+          }, {})
+        }),
+        callback: dialog => (new FormDataExtended(dialog.querySelector("form"))).object,
+        rejectClose: false,
+        options: { jQuery: false }
+      });
+      if ( result === null ) return;
+      foundry.utils.mergeObject(config, result);
+      await game.user.setFlag("dnd5e", "creation.scrollExplanation", config.explanation);
+    }
 
     // Get spell data
     const flags = {};

@@ -410,7 +410,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     // Create a Consumable spell scroll on the Inventory tab
     if ( itemData.type === "spell" ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
-      return scroll.toObject();
+      return scroll?.toObject?.();
     }
 
     // Stack identical consumables
