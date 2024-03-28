@@ -551,10 +551,14 @@
       }
     }
 
-    .calculated-damage {
+    .calculated {
       padding-inline-end: 4px;
       font-size: var(--font-size-14);
       font-weight: bold;
+      color: var(--dnd5e-color-application-damage);
+
+      &.healing { color: var(--dnd5e-color-application-healing); }
+      &.temp { color: var(--dnd5e-color-application-temp); }
     }
 
     .damage-multipliers {
