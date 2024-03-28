@@ -367,7 +367,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         attack: { sign: Math.sign(attack) < 0 ? "-" : "+", value: Math.abs(attack) },
         primary: this.actor.system.attributes.spellcasting === sc.ability,
         save: ability?.dc ?? 0,
-        preparedSpellsLimit: sc.preparedSpellsLimit
+        preparedSpellsLimit: sc.preparedSpellsLimit,
+        preparedSpellsCount: sc.preparedSpellsCount,
+        spellCastingClass: item.system.identifier
       });
     }
 
@@ -992,8 +994,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @protected
    */
   _onToggleSpellcasting(event) {
-    const ability = event.currentTarget.closest("[data-ability]")?.dataset.ability;
-    this.actor.update({ "system.attributes.spellcasting": ability });
+    const {ability, spellClass} = event.currentTarget.closest("[data-ability]")?.dataset;
+    this.actor.update(
+      {
+        "system.attributes.spellcasting": ability,
+        "system.attributes.activeSpellcastingClass": spellClass
+      }
+    );
   }
 
   /* -------------------------------------------- */

@@ -1078,6 +1078,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {
         itemData.system.preparation.mode = progs.leveled ? "prepared" : progs.pact ? "pact" : "innate";
+        // Link the spell with the active spell casting ability.
+        // const activeSpellCasting = 
+        // if (this.document.type === "character") {
+
+        // }
       }
     }
 

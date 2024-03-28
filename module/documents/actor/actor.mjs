@@ -39,6 +39,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, {});
   }
 
+  /**
+   * Get all classes, and subclasses, which have spell casting ability.
+   * @type {Array<Item5e>}
+   */
+  get spellCastingClasses() {
+    return Object.values(this.classes).filter(({system}) => system.spellcasting
+    && system.spellcasting.progression !== "none" );
+  }
+
+  /**
+   * Get the actual active spell casting class.
+   * @type {Item5e}
+   */
+  get activeSpellCastingClass() {
+    if (this.system.attributes.activeSpellcastingClass
+      && this.classes[this.system.attributes.activeSpellcastingClass]) {
+      return this.classes[this.system.attributes.activeSpellcastingClass];
+    }
+    return Object.values(this.classes).find(({system}) => system.spellcasting
+    && system.spellcasting.progression !== "none" );
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -574,6 +596,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !this.system.spells ) return;
 
     // Spellcasting DC and modifier
+    const activeSpellCasting = this.activeSpellCastingClass;
+    this.system.attributes.spellcasting = activeSpellCasting?.spellcasting?.ability
+    ?? this.system.attributes.spellcasting;
     const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
     this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
     this.system.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
@@ -590,7 +615,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     else {
 
-      // Process the different prepared spell limit.
+      // Calculate the prepared spell limit for each spell caster class which needs to prepare spells.
       this.items
         .filter(cls => cls.system?.spellcasting?.preparedSpellsLimitFormula)
         .forEach(cls => {
@@ -600,6 +625,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
               bonusData
             )
           );
+          cls.system.spellcasting.preparedSpellsCount = this.items.filter(x => x.type === "spell"
+          && x.system?.level > 0
+          && x.system?.linkedClass === cls.system.identifier
+          && x.system?.preparation?.mode === "prepared"
+          && x.system?.preparation?.prepared).length;
         });
       // Grab all classes with spellcasting
       const classes = this.items.filter(cls => {

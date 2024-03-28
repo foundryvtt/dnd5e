@@ -344,6 +344,28 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Get available spell casting classes.
+   * @type {Array<Item5e>|null}
+   */
+  get availableSpellCastingClasses() {
+    if (this.type !== "spell" | !this.parent) return;
+    return this.parent.spellCastingClasses.map(({name, system}) => ({name, value: system.identifier}));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this spell linked to the active spell casting ?
+   * @type {string}
+   */
+  get isActiveSpellCasting() {
+    if (this.type !== "spell" | !this.parent) return;
+    return this.parent.activeSpellCastingClass?.system?.identifier === this.system.linkedClass;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Spellcasting details for a class or subclass.
    *
    * @typedef {object} SpellcastingDescription
