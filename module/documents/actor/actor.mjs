@@ -921,7 +921,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !damages ) return this;
 
     // Round damage towards zero
-    let amount = damages.reduce((acc, d) => acc + d.value, 0);
+    let { amount, temp } = damages.reduce((acc, d) => {
+      if ( d.type === "temphp" ) acc.temp += d.value;
+      else acc.amount += d.value;
+      return acc;
+    }, { amount: 0, temp: 0 });
     amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
 
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
@@ -930,6 +934,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       "system.attributes.hp.temp": hp.temp - deltaTemp,
       "system.attributes.hp.value": hp.value - deltaHP
     };
+
+    if ( temp > updates["system.attributes.hp.temp"] ) updates["system.attributes.hp.temp"] = temp;
 
     /**
      * A hook event that fires before damage is applied to an actor.
