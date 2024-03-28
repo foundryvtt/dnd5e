@@ -1,4 +1,17 @@
 /**
+ * Sort constants
+ */
+const sortIcons = {
+  a: "fa-arrow-down-a-z",
+  p: "fa-arrow-down-1-9",
+  m: "fa-arrow-down-short-wide"
+};
+const sortLocalisations = {
+  a: "Alpha",
+  p: "Priority",
+  m: "Manual"
+};
+/**
  * A custom element that encapsulates functionality for sorting, filtering, searching, and grouping lists of items.
  */
 export default class ItemListControlsElement extends HTMLElement {
@@ -111,12 +124,23 @@ export default class ItemListControlsElement extends HTMLElement {
 
   /**
    * Get the current sort mode.
-   * @type {"a"|"m"}
+   * @type {"a"|"p"|"m"}
    */
   get sortMode() {
     const sortMode = this.getAttribute("sort");
     if ( !sortMode ) return "m";
     if ( sortMode === "toggle" ) return this.prefs?.sort === "a" ? "a" : "m";
+    if ( sortMode === "multi" ) {
+
+      const sortValues = this.getAttribute("sortValues");
+      if (!sortValues) return "m";
+
+      const values = Array.from(sortValues);
+      if (!Array.isArray(values) || values.length < 1) return "m";
+
+      const index = values.indexOf(this.prefs?.sort);
+      return index === -1 ? values[0] : values[index];
+    }
     return sortMode;
   }
 
@@ -170,7 +194,7 @@ export default class ItemListControlsElement extends HTMLElement {
 
     // Sorting
     const sortMode = this.getAttribute("sort");
-    if ( sortMode === "toggle" ) {
+    if ( ["toggle", "multi"].includes(sortMode) ) {
       const item = document.createElement("li");
       item.innerHTML = `
         <button type="button" class="unbutton filter-control active" data-action="sort"
@@ -231,10 +255,11 @@ export default class ItemListControlsElement extends HTMLElement {
    * @protected
    */
   _initSorting() {
-    if ( this.getAttribute("sort") !== "toggle" ) return;
-    const sortIcon = `fa-${this.sortMode === "a" ? "arrow-down-a-z" : "arrow-down-short-wide"}`;
+    if ( !["toggle", "multi"].includes(this.getAttribute("sort")) ) return;
+    // const sortIcon = `fa-${this.sortMode === "a" ? "arrow-down-a-z" : "arrow-down-short-wide"}`;
+    const sortIcon = sortIcons[this.sortMode];
     this._controls.sort.querySelector("i").className = `fas ${sortIcon}`;
-    const label = `SIDEBAR.SortMode${this.sortMode === "a" ? "Alpha" : "Manual"}`;
+    const label = `SIDEBAR.SortMode${sortLocalisations[this.sortMode]}`;
     this._controls.sort.dataset.tooltip = label;
     this._controls.sort.setAttribute("aria-label", game.i18n.localize(label));
   }
@@ -297,13 +322,14 @@ export default class ItemListControlsElement extends HTMLElement {
   _applySorting() {
     const comparators = {
       a: (a, b) => a.name.localeCompare(b.name, game.i18n.lang),
+      p: (a, b) => ((a.preparationMode === "always" ? 0 : 1)-(b.preparationMode === "always" ? 0 : 1)) || (a.prepared-b.prepared) || a.name.localeCompare(b.name, game.i18n.lang),
       m: (a, b) => a.sort - b.sort
     };
     for ( const section of this.list.querySelectorAll(".items-section .item-list") ) {
       const items = [];
       section.querySelectorAll(".item").forEach(element => {
-        const { itemName, itemSort } = element.dataset;
-        items.push({ element, name: itemName, sort: Number(itemSort) });
+        const { itemName, itemSort, itemPreparationMode, itemPreparationPrepared } = element.dataset;
+        items.push({ element, name: itemName, sort: Number(itemSort), preparationMode: itemPreparationMode, prepared: itemPreparationPrepared === "true" ? 0 : 1 });
       });
       items.sort(comparators[this.sortMode]);
       section.replaceChildren(...items.map(({ element }) => element));
@@ -340,7 +366,11 @@ export default class ItemListControlsElement extends HTMLElement {
     const current = game.user.getFlag("dnd5e", flag);
     let value;
     if ( action === "group" ) value = current === false;
-    else if ( action === "sort" ) value = current === "a" ? "m" : "a";
+    else if ( action === "sort" ) {
+      const values = Array.from(this.getAttribute("sortValues") ?? "am");
+      const index = values.indexOf(current);
+      value = values[index + 1] ?? values[0];
+    }
     await game.user.setFlag("dnd5e", flag, value);
     if ( action === "group" ) {
       this._initGrouping();
