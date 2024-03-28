@@ -60,6 +60,7 @@ export default class AbilityUseDialog extends Dialog {
       slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
       summoningOptions: this._createSummoningOptions(item),
       resourceOptions: this._createResourceOptions(item),
+      resourceArray: Array.isArray(resourceOptions),
       concentration: {
         show: (config.beginConcentrating !== null) && !!concentrationOptions.length,
         options: concentrationOptions,
@@ -248,6 +249,14 @@ export default class AbilityUseDialog extends Dialog {
 
     if ( !target ) return null;
 
+    if ( /spells\.(.+)\.value/.test(consume.target) ) {
+      const [, key] = consume.target.match(/spells\.(.+)\.value/);
+      const spells = item.actor.system.spells[key] ?? {};
+      const level = parseInt(spells.level) || 0;
+      const minimum = (item.type === "spell") ? Math.max(item.system.level, level) : level;
+      return this._createSpellSlotOptions(item.actor, minimum);
+    }
+
     const max = Math.min(cap, value);
     return Array.fromRange(max, 1).reduce((acc, n) => {
       if ( n >= min ) acc[n] = `[${n}/${value}] ${label ?? consume.target}`;
@@ -324,7 +333,7 @@ export default class AbilityUseDialog extends Dialog {
 
     if ( item.type === "spell" ) {
       const spellData = item.actor.system.spells[preparation.mode] ?? {};
-      if ( "level" in spellData ) levels.push(spellData.level);
+      if ( Number.isNumeric(spellData.level) ) levels.push(spellData.level);
     }
 
     if ( (scale === "slot") && data.slotOptions.every(o => !o.hasSlots) ) {
