@@ -89,7 +89,9 @@
                 <label>{{ localize "DND5E.ItemLootProperties" }}</label>
                 {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                    <input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }} {{#if disabled~}}
+                           disabled data-tooltip="{{ localize 'DND5E.Enchantment.Warning.Override' }}"{{/if}}>
+                    {{ label }}
                 </label>
                 {{/each}}
             </div>
