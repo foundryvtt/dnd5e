@@ -250,17 +250,20 @@
       }
     }
 
-    .form-group.uses-per, .form-group.consumption {
+    .form-group.uses-per {
       .form-fields {
         flex-wrap: nowrap;
-      }
-      &.consumption [name="system.consume.amount"] {
-        flex: 0 0 32px;
       }
       span {
         flex: 0 0 16px;
         margin: 0 4px 0 0;
       }
+    }
+    .form-group.consumption .form-fields {
+      flex-wrap: wrap;
+      > * { margin: 0; }
+      [name="system.consume.amount"] { flex: 0 0 32px; }
+      [name="system.consume.type"] { flex: 0 0 100%; }
     }
     span.sep {
       flex: 0 0 8px;

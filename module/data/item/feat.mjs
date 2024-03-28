@@ -45,13 +45,19 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.prepareActivatedEffectData();
 
     if ( this.type.value ) {
       const config = CONFIG.DND5E.featureTypes[this.type.value];
       if ( config ) this.type.label = config.subtypes?.[this.type.subtype] ?? null;
       else this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.feat);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivatedEffectData();
   }
 
   /* -------------------------------------------- */

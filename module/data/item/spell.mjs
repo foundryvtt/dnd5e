@@ -103,8 +103,14 @@ export default class SpellData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.prepareActivatedEffectData();
     this.properties.add("mgc");
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivatedEffectData();
   }
 
   /* -------------------------------------------- */
