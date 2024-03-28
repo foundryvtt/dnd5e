@@ -11,7 +11,7 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>award|check|damage|healing|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -48,6 +48,7 @@ async function enrichString(match, options) {
   config._input = match[0];
   switch ( type.toLowerCase() ) {
     case "award": return enrichAward(config, label, options);
+    case "healing": config._isHealing = true;
     case "damage": return enrichDamage(config, label, options);
     case "check":
     case "skill":
@@ -326,25 +327,37 @@ async function enrichSave(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> 8d4dl
  * </a> force
  * ````
+ *
+ * @example Create a healing link:
+ * ```[[/healing 2d6]]``` or ```[[/damage 2d6 healing]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="healing">
+ *   <i class="fa-solid fa-dice-d20"></i> 2d6
+ * </a> healing
+ * ```
  */
 async function enrichDamage(config, label, options) {
   const formulaParts = [];
   if ( config.formula ) formulaParts.push(config.formula);
   for ( const value of config.values ) {
     if ( value in CONFIG.DND5E.damageTypes ) config.type = value;
+    else if ( value in CONFIG.DND5E.healingTypes ) config.type = value;
     else if ( value === "average" ) config.average = true;
+    else if ( value === "temp" ) config.type = "temphp";
     else formulaParts.push(value);
   }
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
   if ( !config.formula ) return null;
-  config.damageType = config.type;
+  config.damageType = config.type ?? (config._isHealing ? "healing" : null);
   config.type = "damage";
 
   if ( label ) return createRollLink(label, config);
 
+  const typeConfig = CONFIG.DND5E.damageTypes[config.damageType] ?? CONFIG.DND5E.healingTypes[config.damageType];
   const localizationData = {
     formula: createRollLink(config.formula, config).outerHTML,
-    type: game.i18n.localize(CONFIG.DND5E.damageTypes[config.damageType]?.label ?? "").toLowerCase()
+    type: game.i18n.localize(typeConfig?.label ?? "").toLowerCase()
   };
 
   let localizationType = "Short";
@@ -777,7 +790,7 @@ async function enrichReference(config, label, options) {
  */
 function _addDataset(element, dataset) {
   for ( const [key, value] of Object.entries(dataset) ) {
-    if ( !["_config", "_input", "values"].includes(key) && value ) element.dataset[key] = value;
+    if ( !key.startsWith("_") && (key !== "values") && value ) element.dataset[key] = value;
   }
 }
 
@@ -1020,13 +1033,14 @@ async function rollDamage(event) {
   const target = event.target.closest(".roll-link");
   const { formula, damageType } = target.dataset;
 
-  const title = game.i18n.localize("DND5E.DamageRoll");
+  const isHealing = damageType in CONFIG.DND5E.healingTypes;
+  const title = game.i18n.localize(`DND5E.${isHealing ? "Healing" : "Damage"}Roll`);
   const rollConfig = {
     rollConfigs: [{
       parts: [formula],
       type: damageType
     }],
-    flavor: `${title} (${game.i18n.localize(CONFIG.DND5E.damageTypes[damageType]?.label ?? damageType)})`,
+    flavor: title,
     event,
     title,
     messageData: {
