@@ -1610,6 +1610,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   async rollDamage({critical, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
 
+    // Fetch level from tags if not specified
+    let originalLevel = this.system.level;
+    let scaling = this.system.scaling;
+    const levelingFlag = this.getFlag("dnd5e", "spellLevel");
+    if ( !spellLevel && levelingFlag ) {
+      spellLevel = levelingFlag.value;
+      originalLevel = levelingFlag.base;
+      scaling = levelingFlag.scaling;
+    }
+
     // Get roll data
     const dmg = this.system.damage;
     const properties = Array.from(this.system.properties).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical);
@@ -1653,8 +1663,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     // Scale damage from up-casting spells
-    const scaling = this.system.scaling;
-    if ( this.type === "spell" ) {
+    if ( (this.type === "spell") || scaling ) {
       if ( scaling.mode === "cantrip" ) {
         let level;
         if ( this.actor.type === "character" ) level = this.actor.system.details.level;
@@ -1664,7 +1673,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }
       else if ( spellLevel && (scaling.mode === "level") ) rollConfigs.forEach(c => {
         if ( scaling.formula || c.parts.length ) {
-          this._scaleSpellDamage(c.parts, this.system.level, spellLevel, scaling.formula || c.parts[0], rollData);
+          this._scaleSpellDamage(c.parts, originalLevel, spellLevel, scaling.formula || c.parts[0], rollData);
         }
       });
     }
@@ -2671,6 +2680,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *
    * @typedef {object} SpellScrollConfiguration
    * @property {"full"|"reference"|"none"} [explanation="full"]  Length of spell scroll rules text to include.
+   * @property {number} [level]                                  Level at which the spell should be cast.
    */
 
   /**
@@ -2687,7 +2697,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }, config);
 
     // Get spell data
+    const flags = {};
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
+    if ( Number.isNumeric(config.level) ) {
+      flags.dnd5e = { spellLevel: {
+        value: config.level,
+        base: spell.system.level,
+        scaling: spell.system.scaling
+      } };
+      itemData.system.level = config.level;
+    }
 
     /**
      * A hook event that fires before the item data for a scroll is created.
@@ -2770,6 +2789,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       effects: itemData.effects ?? [],
+      flags,
       system: {
         description: {value: desc.trim()}, source, actionType, activation, duration, target,
         range, damage, formula, save, level, ability, properties, attack: {bonus: attack.bonus, flat: true}
