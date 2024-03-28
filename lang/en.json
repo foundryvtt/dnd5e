@@ -1232,6 +1232,7 @@
 "DND5E.SheetClassMapLocation": "Default 5e Map Location Sheet",
 "DND5E.SheetClassNPC": "Default 5e NPC Sheet",
 "DND5E.SheetClassRule": "Default 5e Rule Sheet",
+"DND5E.SheetClassSpellList": "Default 5e Spell List Sheet",
 "DND5E.SheetClassToken": "Default 5e Token Sheet",
 "DND5E.SheetClassVehicle": "Default 5e Vehicle Sheet",
 "DND5E.SheetModeEdit": "Edit",
@@ -1764,6 +1765,7 @@
 "TYPES.JournalEntryPage.class": "Class Summary",
 "TYPES.JournalEntryPage.map": "Map Location",
 "TYPES.JournalEntryPage.rule": "Rule",
+"TYPES.JournalEntryPage.spellList": "Spell List",
 "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipment": "Equipment",
 "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipmentHint": "List of equipment granted by this class if taken at first level.",
 "JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPoints": "Additional Hit Points Description",
@@ -1796,7 +1798,22 @@
 "JOURNALENTRYPAGE.DND5E.Class.TableOptionalCaption": "Optional {class} Features",
 "JOURNALENTRYPAGE.DND5E.Class.TraitsHeader": "Proficiencies",
 "JOURNALENTRYPAGE.DND5E.EditDescription": "Edit",
-"JOURNALENTRYPAGE.DND5E.TableTOC": "Table: {caption}",
+"JOURNALENTRYPAGE.DND5E.SpellList": {
+  "DropHint": "Drop spells here to add to list",
+  "Grouping": {
+    "Label": "Grouping Mode",
+    "Hint": "Controls how the spells will be grouped by default in the spell list.",
+    "Alphabetical": "By First Letter",
+    "Level": "By Level",
+    "None": "No Grouping",
+    "School": "By School"
+  },
+  "IdentifierHint": "Identifier should match that defined on the associated document, if applicable. For example, when creating a spell list for the Wizard class, the identifier should be 'wizard'.",
+  "Type": {
+    "Label": "Spell List Type",
+    "Other": "Uncategorized"
+  }
+},
 
 "MACRO.5eMissingTargetWarn": "Your controlled actor '{actor}' does not have an {type} with name '{name}'.",
 "MACRO.5eMultipleTargetsWarn": "Your controlled actor '{actor}' has more than one {type} with name '{name}'. The first match will be chosen.",
