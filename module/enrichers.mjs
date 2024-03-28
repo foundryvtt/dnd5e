@@ -1,4 +1,4 @@
-import { formatNumber, simplifyBonus } from "./utils.mjs";
+import { formatNumber, getSceneTargets, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
@@ -952,35 +952,38 @@ async function rollAction(event) {
   if ( (action === "roll") || !game.user.isGM ) {
     target.disabled = true;
     try {
-      // Fetch the actor that should perform the roll
-      let actor;
-      const speaker = ChatMessage.implementation.getSpeaker();
-      if ( speaker.token ) actor = game.actors.tokens[speaker.token];
-      actor ??= game.actors.get(speaker.actor);
+      switch ( type ) {
+        case "damage": return await rollDamage(event);
+      }
 
-      if ( !actor && (type !== "damage") ) {
+      const tokens = getSceneTargets();
+      if ( !tokens.length ) {
         ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
         return;
       }
 
-      switch ( type ) {
-        case "check":
-          return await actor.rollAbilityTest(ability, options);
-        case "concentration":
-          if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
-          return actor.rollConcentration(options);
-        case "damage":
-          return await rollDamage(event, speaker);
-        case "save":
-          return await actor.rollAbilitySave(ability, options);
-        case "skill":
-          if ( ability ) options.ability = ability;
-          return await actor.rollSkill(skill, options);
-        case "tool":
-          options.ability = ability;
-          return await actor.rollToolCheck(tool, options);
-        default:
-          return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
+      for ( const token of tokens ) {
+        const actor = token.actor;
+        switch ( type ) {
+          case "check":
+            await actor.rollAbilityTest(ability, options);
+            break;
+          case "concentration":
+            if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+            await actor.rollConcentration(options);
+            break;
+          case "save":
+            await actor.rollAbilitySave(ability, options);
+            break;
+          case "skill":
+            if ( ability ) options.ability = ability;
+            await actor.rollSkill(skill, options);
+            break;
+          case "tool":
+            options.ability = ability;
+            await actor.rollToolCheck(tool, options);
+            break;
+        }
       }
     } finally {
       target.disabled = false;
@@ -1010,11 +1013,10 @@ async function rollAction(event) {
 
 /**
  * Perform a damage roll.
- * @param {Event} event              The click event triggering the action.
- * @param {TokenDocument} [speaker]  Currently selected token, if one exists.
+ * @param {Event} event  The click event triggering the action.
  * @returns {Promise<void>}
  */
-async function rollDamage(event, speaker) {
+async function rollDamage(event) {
   const target = event.target.closest(".roll-link");
   const { formula, damageType } = target.dataset;
 
@@ -1032,7 +1034,7 @@ async function rollDamage(event, speaker) {
         targets: Item5e._formatAttackTargets(),
         roll: {type: "damage"}
       },
-      speaker
+      speaker: ChatMessage.implementation.getSpeaker()
     }
   };
 
