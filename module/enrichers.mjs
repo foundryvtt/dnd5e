@@ -11,7 +11,7 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>award|check|damage|item|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -55,6 +55,7 @@ async function enrichString(match, options) {
     case "lookup": return enrichLookup(config, label, options);
     case "save": return enrichSave(config, label, options);
     case "embed": return enrichEmbed(config, label, options);
+    case "item": return enrichItem(config, label, options);
     case "reference": return enrichReference(config, label, options);
   }
   return null;
@@ -770,6 +771,85 @@ async function enrichReference(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Enrich an item use link to roll an item on the selected token.
+ * @param {string[]} config              Configuration data.
+ * @param {string} [label]               Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {Promise<HTMLElement|null>}  An HTML link if the item link could be built, otherwise null.
+ *
+ * @example Use an item from a Name:
+ * ```[[/item Heavy Crossbow]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item" data-roll-item-name="Heavy Crossbow">
+ *   <i class="fa-solid fa-dice-d20"></i> Heavy Crossbow
+ * </a>
+ * ```
+ *
+ * @example Use an Item from a UUID:
+ * ```[[/item Actor.M4eX4Mu5IHCr3TMf.Item.amUUCouL69OK1GZU]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item">
+ *   <i class="fa-solid fa-dice-d20"></i> Bite
+ * </a>
+ * ```
+ *
+ * @example Use an Item from a Relative UUID:
+ * ```[[/item .amUUCouL69OK1GZU]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item" data-roll-relative-item-id="amUUCouL69OK1GZU">
+ *   <i class="fa-solid fa-dice-d20"></i> Bite
+ * </a>
+ * ```
+ */
+async function enrichItem(config, label, options) {
+  let givenItem = config.values.join(" ");
+  // If config is a UUID
+  const itemUuidMatch = givenItem.match(
+    /^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/
+  );
+  if ( itemUuidMatch ) {
+    const ownerActor = itemUuidMatch.groups.actorid.trim();
+    if ( !label ) {
+      const item = await fromUuid(givenItem);
+      if ( !item ) {
+        console.warn(`Item not found while enriching ${givenItem}.`);
+        return null;
+      }
+      label = item.name;
+    }
+    return createRollLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
+  }
+
+  // If config is a relative ID
+  if ( givenItem.match(/^\.?\w{16}$/) ) {
+    const foundActor = options.relativeTo instanceof Item ? options.relativeTo.parent
+      : options.relativeTo instanceof Actor ? options.relativeTo : null;
+    if ( foundActor ) {
+      const relativeId = givenItem.startsWith(".") ? givenItem.substr(1) : givenItem;
+      let foundItem = foundActor.items.get(relativeId);
+      if ( foundItem ) {
+        if ( !label ) label = foundItem.name;
+        return createRollLink(label, { type: "item", rollItemActor: foundActor.uuid, rollItemUuid: foundItem.uuid });
+      }
+    } else {
+      console.warn("Relative Item Enrichers must be within an Owned Item or Actor's description");
+      return null;
+    }
+  }
+
+  // Finally, if config is an item name
+  if ( !label ) label = givenItem;
+  const foundActor = options.relativeTo instanceof Item ? options.relativeTo.parent
+    : options.relativeTo instanceof Actor ? options.relativeTo : null;
+  return createRollLink(label, { type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Add a dataset object to the provided element.
  * @param {HTMLElement} element  Element to modify.
  * @param {object} dataset       Data properties to add.
@@ -884,7 +964,7 @@ function createRollLink(label, dataset) {
   span.insertAdjacentElement("afterbegin", link);
 
   // Add chat request link for GMs
-  if ( game.user.isGM && (dataset.type !== "damage") ) {
+  if ( game.user.isGM && (dataset.type !== "damage") && (dataset.type !== "item") ) {
     const gmLink = document.createElement("a");
     gmLink.classList.add("enricher-action");
     gmLink.dataset.action = "request";
@@ -958,7 +1038,7 @@ async function rollAction(event) {
       if ( speaker.token ) actor = game.actors.tokens[speaker.token];
       actor ??= game.actors.get(speaker.actor);
 
-      if ( !actor && (type !== "damage") ) {
+      if ( !actor && (type !== "damage") && (type !== "item") ) {
         ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
         return;
       }
@@ -979,6 +1059,31 @@ async function rollAction(event) {
         case "tool":
           options.ability = ability;
           return await actor.rollToolCheck(tool, options);
+        case "item":
+          if ( target.dataset.rollItemUuid ) {
+              return (await fromUuid(target.dataset.rollItemUuid)).use();
+          } else if ( target.dataset.rollItemName ) {
+            if ( target.dataset.rollItemActor ) {
+              const gameActor = await fromUuid(target.dataset.rollItemActor);
+              if ( gameActor.testUserPermission(game.user, "OWNER") ) {
+                if ( canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName) ) {
+                  return canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName).use();
+                } else if ( gameActor.items.getName(target.dataset.rollItemName) ) {
+                  await gameActor.items.getName(target.dataset.rollItemName).use();
+                  if ( canvas.tokens.controlled.length > 0 ) {
+                    ui.notifications.warn(`Your controlled token ${canvas.tokens.controlled[0].name} does not have an Item with name ${target.dataset.rollItemName} using Item Enricher owner`);
+                  }
+                  return;
+                } else {
+                  return ui.notifications.warn(`${gameActor.name} does not have an Item with name ${target.dataset.rollItemName}.`);
+                }
+              }
+              return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
+            } else {
+              return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
+            }
+          }
+
         default:
           return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
       }
