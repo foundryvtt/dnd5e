@@ -213,6 +213,27 @@ export function getSceneTargets() {
 }
 
 /* -------------------------------------------- */
+/*  Conversions                                 */
+/* -------------------------------------------- */
+
+/**
+ * Convert the provided weight to another unit.
+ * @param {number} value  The weight being converted.
+ * @param {string} from   The initial units.
+ * @param {string} to     The final units.
+ * @returns {number}      Weight in the specified units.
+ */
+export function convertWeight(value, from, to) {
+  if ( from === to ) return value;
+  const message = unit => `Weight unit ${unit} not defined in CONFIG.DND5E.weightUnits`;
+  if ( !CONFIG.DND5E.weightUnits[from] ) throw new Error(message(from));
+  if ( !CONFIG.DND5E.weightUnits[to] ) throw new Error(message(to));
+  return value
+    * CONFIG.DND5E.weightUnits[from].conversion
+    / CONFIG.DND5E.weightUnits[to].conversion;
+}
+
+/* -------------------------------------------- */
 /*  Validators                                  */
 /* -------------------------------------------- */
 
