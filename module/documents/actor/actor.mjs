@@ -595,7 +595,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       progression, cls, { actor: this, count: types[cls.spellcasting.type] }
     );
 
-    if ( this.type === "npc" ) progression.slot += this.system.details.spellLevel ?? 0;
+    if ( this.type === "npc" ) {
+      if ( progression.slot || progression.pact ) this.system.details.spellLevel = progression.slot || progression.pact;
+      else progression.slot = this.system.details.spellLevel ?? 0;
+    }
 
     for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
       this.constructor.prepareSpellcastingSlots(this.system.spells, type, progression, { actor: this });
