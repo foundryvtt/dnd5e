@@ -1615,8 +1615,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     let scaling = this.system.scaling;
     const levelingFlag = this.getFlag("dnd5e", "spellLevel");
     if ( !spellLevel && levelingFlag ) {
-      spellLevel = parseInt(levelingFlag.value);
-      originalLevel = parseInt(levelingFlag.base);
+      spellLevel = levelingFlag.value;
+      originalLevel = levelingFlag.base;
       scaling = levelingFlag.scaling;
     }
 
@@ -2701,11 +2701,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
     if ( Number.isNumeric(config.level) ) {
       flags.dnd5e = { spellLevel: {
-        value: parseInt(config.level),
+        value: config.level,
         base: spell.system.level,
         scaling: spell.system.scaling
       } };
-      itemData.system.level = parseInt(config.level);
+      itemData.system.level = config.level;
     }
 
     /**
