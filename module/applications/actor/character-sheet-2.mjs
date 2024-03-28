@@ -599,7 +599,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
       // Prepared
       const mode = system.preparation?.mode;
-      if ( (mode === "always") || (mode === "prepared") ) {
+      const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
+      if ( config.prepares ) {
         const isAlways = mode === "always";
         const prepared = isAlways || system.preparation.prepared;
         ctx.preparation = {

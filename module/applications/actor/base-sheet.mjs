@@ -393,14 +393,14 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const useLabels = {"-20": "-", "-10": "-", 0: "&infin;"};
 
     // Format a spellbook entry for a certain indexed level
-    const registerSection = (sl, i, label, {prepMode="prepared", value, max, override}={}) => {
+    const registerSection = (sl, i, label, {prepMode="prepared", value, max, override, config}={}) => {
       const aeOverride = foundry.utils.hasProperty(this.actor.overrides, `system.spells.spell${i}.override`);
       spellbook[i] = {
         order: i,
         label: label,
         usesSlots: i > 0,
         canCreate: owner,
-        canPrepare: (context.actor.type === "character") && (i >= 1),
+        canPrepare: ((context.actor.type === "character") && (i >= 1)) || config?.prepares,
         spells: [],
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
@@ -433,14 +433,14 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
       if ( !spellbook["0"] && v.cantrips ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
       const l = levels[k];
-      const config = CONFIG.DND5E.spellPreparationModes[k];
       const level = game.i18n.localize(`DND5E.SpellLevel${l.level}`);
-      const label = `${config.label} — ${level}`;
+      const label = `${v.label} — ${level}`;
       registerSection(k, sections[k], label, {
         prepMode: k,
         value: l.value,
         max: l.max,
-        override: l.override
+        override: l.override,
+        config: v
       });
     }
 
@@ -460,7 +460,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
             prepMode: mode,
             value: l.value,
             max: l.max,
-            override: l.override
+            override: l.override,
+            config: config
           });
         }
       }
