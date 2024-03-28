@@ -497,6 +497,11 @@
 
     .item {
       border-bottom: var(--dnd5e-border-dotted);
+      opacity: 1;
+      transition: opacity 0.3s ease-out;
+      &.inactive {
+        opacity: 0.3;
+      }
       &:last-child { border: none; }
     }
   }

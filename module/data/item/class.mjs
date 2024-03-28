@@ -41,7 +41,10 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
         progression: new StringField({
           required: true, initial: "none", blank: false, label: "DND5E.SpellProgression"
         }),
-        ability: new StringField({required: true, label: "DND5E.SpellAbility"})
+        ability: new StringField({required: true, label: "DND5E.SpellAbility"}),
+        preparedSpellsLimitFormula: new StringField({
+          required: false, label: "DND5E.PreparedSpellsLimitFormula"
+        })
       }, {label: "DND5E.Spellcasting"}),
       wealth: new FormulaField({label: "DND5E.StartingEquipment.Wealth.Label"})
     });

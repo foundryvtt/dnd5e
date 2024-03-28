@@ -104,6 +104,22 @@
                     </select>
                 </div>
             </div>
+            {{!-- Linked Class --}}
+            {{#if document.parent}}
+            <div class="form-group input-select">
+                <label>{{ localize "DND5E.SpellCastingClass" }}</label>
+                <div class="form-fields">
+                    <select name="system.linkedClass">
+                        {{#select system.linkedClass}}
+                        <option value=""></option>
+                        {{#each document.availableSpellCastingClasses as |scs|}}
+                        <option value="{{scs.value}}">{{scs.name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.SpellCastingHeader" }}</h3>
 

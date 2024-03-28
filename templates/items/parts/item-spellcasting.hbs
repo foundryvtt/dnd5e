@@ -15,3 +15,13 @@
         </select>
     </div>
 </div>
+{{#unless (eq system.spellcasting.progression "none")}}
+    <div class="form-group">
+        <label>{{localize "DND5E.PreparedSpellsLimitFormula"}}</label>
+        <div class="form-fields">
+            <input type="text" name="system.spellcasting.preparedSpellsLimitFormula"
+            value="{{system.spellcasting.preparedSpellsLimitFormula}}"
+            placeholder="{{localize "DND5E.AllSpellsAlwaysPrepared"}}">
+        </div>
+    </div>
+{{/unless}}
