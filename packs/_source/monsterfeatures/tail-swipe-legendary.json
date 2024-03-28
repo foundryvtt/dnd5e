@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} makes one tail attack.</p>\n</section>\n<p>The {creature} swipes its tail against its prey!</p>",
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] makes one tail attack.</p>\n</section>\n<p>the [[lookup @name lowercase]] swipes its tail against its prey!</p>",
       "chat": "",
       "unidentified": ""
     },

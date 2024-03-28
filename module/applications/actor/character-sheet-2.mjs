@@ -95,6 +95,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _deathTrayOpen = false;
 
+  /**
+   * The cached concentration information for the character.
+   * @type {{items: Set<Item5e>, effects: Set<ActiveEffect5e>}}
+   * @internal
+   */
+  _concentration;
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -164,7 +171,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     });
 
     // Set theme
-    setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
+    // TODO: Re-enable this when we support V12 only
+    // setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
 
     return html;
   }
@@ -186,6 +194,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /** @inheritDoc */
   async getData(options) {
+    this._concentration = this.actor.concentration; // Cache concentration so it's not called for every item.
     const context = await super.getData(options);
     context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
     context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
@@ -283,10 +292,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       ability.mod = Math.abs(ability.save);
     }
 
+    if ( this.actor.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) || context.editable ) {
+      context.saves.concentration = {
+        isConcentration: true,
+        class: "colspan concentration",
+        label: game.i18n.localize("DND5E.Concentration"),
+        abbr: game.i18n.localize("DND5E.Concentration"),
+        mod: Math.abs(attributes.concentration.save),
+        sign: attributes.concentration.save < 0 ? "-" : "+"
+      };
+    }
+
     // Size
     context.size = {
-      label: CONFIG.DND5E.actorSizes[traits.size].label,
-      abbr: CONFIG.DND5E.actorSizes[traits.size].abbreviation,
+      label: CONFIG.DND5E.actorSizes[traits.size]?.label ?? traits.size,
+      abbr: CONFIG.DND5E.actorSizes[traits.size]?.abbreviation ?? "—",
       mod: attributes.encumbrance.mod
     };
 
@@ -359,7 +379,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Effects & Conditions
     const conditionIds = new Set();
     context.conditions = Object.entries(CONFIG.DND5E.conditionTypes).reduce((arr, [k, c]) => {
-      if ( k === "diseased" ) return arr; // Filter out diseased as it's not a real condition.
+      if ( c.pseudo ) return arr; // Filter out pseudo-conditions.
       const { label: name, icon, reference } = c;
       const id = staticID(`dnd5e${k}`);
       conditionIds.add(id);
@@ -379,6 +399,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         effect.updateDuration();
         if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
         const { id, name, img, disabled, duration } = effect;
+        const toggleable = !this._concentration?.effects.has(effect);
         let source = await effect.getSource();
         // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
         if ( (source instanceof dnd5e.documents.ActiveEffect5e) && (source.target !== this.object) ) {
@@ -386,7 +407,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         }
         arr = await arr;
         arr.push({
-          id, name, img, disabled, duration, source,
+          id, name, img, disabled, duration, source, toggleable,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
           hasTooltip: source instanceof dnd5e.documents.Item5e
@@ -578,7 +599,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
       // Prepared
       const mode = system.preparation?.mode;
-      if ( (mode === "always") || (mode === "prepared") ) {
+      const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
+      if ( config.prepares ) {
         const isAlways = mode === "always";
         const prepared = isAlways || system.preparation.prepared;
         ctx.preparation = {
@@ -587,9 +609,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
           cls: prepared ? "active" : "",
           icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}"></i>`,
           title: isAlways
-            ? CONFIG.DND5E.spellPreparationModes.always
+            ? CONFIG.DND5E.spellPreparationModes.always.label
             : prepared
-              ? CONFIG.DND5E.spellPreparationModes.prepared
+              ? CONFIG.DND5E.spellPreparationModes.prepared.label
               : game.i18n.localize("DND5E.SpellUnprepared")
         };
       }
@@ -621,6 +643,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       // Subtitles
       ctx.subtitle = [system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
     }
+
+    // Concentration
+    if ( this._concentration.items.has(item) ) ctx.concentration = true;
   }
 
   /* -------------------------------------------- */
@@ -1040,7 +1065,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onRollAbility(event) {
     const abilityId = event.currentTarget.closest("[data-ability]").dataset.ability;
     const isSavingThrow = event.currentTarget.classList.contains("saving-throw");
-    if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
+    if ( abilityId === "concentration" ) this.actor.rollConcentration({ event });
+    else if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
     else this.actor.rollAbilityTest(abilityId, { event });
   }
 
@@ -1187,11 +1213,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Legacy resources
     const resources = Object.entries(this.actor.system.resources).reduce((arr, [k, r]) => {
       const { value, max, sr, lr, label } = r;
+      const source = this.actor._source.system.resources[k];
       if ( label && max ) arr.push({
         id: `resources.${k}`,
         type: "resource",
         img: "icons/svg/upgrade.svg",
-        resource: { value, max },
+        resource: { value, max, source },
         css: "uses",
         title: label,
         subtitle: [

@@ -28,7 +28,11 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemAttackBonus" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.attackBonus" value="{{system.attackBonus}}" data-formula-editor/>
+        <input type="text" name="system.attack.bonus" value="{{system.attack.bonus}}" data-formula-editor>
+        <label class="checkbox" data-tooltip="DND5E.ItemAttackFlatHint">
+          <input type="checkbox" name="system.attack.flat" {{checked system.attack.flat}}>
+          {{localize "DND5E.ItemAttackFlat"}}
+        </label>
     </div>
 </div>
 
@@ -123,8 +127,12 @@
     <div class="form-fields">
         <a class="config-button" data-action="summoning">
             <i class="fa-solid fa-gear" aria-hidden="true"></i>
-            {{ localize 'DND5E.Summoning.Action.Configure' }}
+            {{ localize "DND5E.Summoning.Action.Configure" }}
         </a>
+        <label class="checkbox" data-tooltip="DND5E.Summoning.Prompt.Hint">
+            <input type="checkbox" name="system.summons.prompt" {{ checked system.summons.prompt }}>
+            {{ localize "DND5E.Summoning.Prompt.Label" }}
+        </label>
     </div>
 </div>
 {{/if}}

@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} utters a blasphemous word. Each non-{type} creature within 10 feet of the {creature} that can hear the magical utterance must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be stunned until the end of the {creature}'s next turn.</p>\n</section>\n<p>The {creature} utters a blasphemous word. Each non-{type} creature within 10 feet of the {creature} that can hear the magical utterance must make a <strong>Constitution</strong> saving throw.</p>",
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] utters a blasphemous word. Each non-[[lookup @details.type.config.label lowercase]] creature within 10 feet of the [[lookup @name lowercase]] that can hear the magical utterance must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be stunned until the end of the [[lookup @name lowercase]]'s next turn.</p>\n</section>\n<p>the [[lookup @name lowercase]] utters a blasphemous word. Each non-[[lookup @details.type.config.label lowercase]] creature within 10 feet of the [[lookup @name lowercase]] that can hear the magical utterance must make a <strong>Constitution</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

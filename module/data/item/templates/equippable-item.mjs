@@ -52,7 +52,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -66,6 +66,17 @@ export default class EquippableItemTemplate extends SystemDataModel {
       game.i18n.localize(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
       ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
     ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
+   * @type {boolean}
+   */
+  get magicAvailable() {
+    const attunement = this.attunement !== CONFIG.DND5E.attunementTypes.REQUIRED;
+    return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
   }
 
   /* -------------------------------------------- */

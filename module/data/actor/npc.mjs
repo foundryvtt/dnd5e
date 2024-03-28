@@ -1,6 +1,7 @@
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
+import RollConfigField from "../shared/roll-config-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
@@ -48,6 +49,13 @@ import TraitsFields from "./templates/traits.mjs";
 export default class NPCData extends CreatureTemplate {
 
   /** @inheritdoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    supportsAdvancement: true
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static _systemType = "npc";
 
   /* -------------------------------------------- */
@@ -74,14 +82,14 @@ export default class NPCData extends CreatureTemplate {
           tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
         }, {label: "DND5E.HitPoints"}),
-        death: new foundry.data.fields.SchemaField({
+        death: new RollConfigField({
           success: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),
           failure: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
           })
-        }, {label: "DND5E.DeathSave"}),
+        }, {label: "DND5E.DeathSave"})
       }, {label: "DND5E.Attributes"}),
       details: new foundry.data.fields.SchemaField({
         ...DetailsFields.common,
@@ -209,23 +217,31 @@ export default class NPCData extends CreatureTemplate {
 
   /** @inheritdoc */
   prepareBaseData() {
-    const cr = this.details.cr;
+    this.details.level = 0;
 
-    // Attuned items
-    this.attributes.attunement.value = this.parent.items.filter(i => {
-      return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
-    }).length;
+    for ( const item of this.parent.items ) {
+      // Class levels & hit dice
+      if ( item.type === "class" ) {
+        const classLevels = parseInt(item.system.levels) ?? 1;
+        this.details.level += classLevels;
+      }
+
+      // Attuned items
+      else if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
+        this.attributes.attunement.value += 1;
+      }
+    }
 
     // Kill Experience
     this.details.xp ??= {};
-    this.details.xp.value = this.parent.getCRExp(cr);
+    this.details.xp.value = this.parent.getCRExp(this.details.cr);
 
     // Proficiency
-    this.attributes.prof = Proficiency.calculateMod(Math.max(cr, 1));
+    this.attributes.prof = Proficiency.calculateMod(Math.max(this.details.cr, this.details.level, 1));
 
     // Spellcaster Level
     if ( this.attributes.spellcasting && !Number.isNumeric(this.details.spellLevel) ) {
-      this.details.spellLevel = Math.max(cr, 1);
+      this.details.spellLevel = Math.max(this.details.cr, 1);
     }
 
     AttributesFields.prepareBaseArmorClass.call(this);
@@ -233,10 +249,34 @@ export default class NPCData extends CreatureTemplate {
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare movement & senses values derived from race item.
+   */
+  prepareEmbeddedData() {
+    if ( this.details.race instanceof Item ) {
+      AttributesFields.prepareRace.call(this, this.details.race, { force: true });
+      this.details.type = this.details.race.system.type;
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   prepareDerivedData() {
+    const rollData = this.getRollData({ deterministic: true });
+    const { originalSaves } = this.parent.getOriginalStats();
+
+    this.prepareAbilities({ rollData, originalSaves });
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
+    AttributesFields.prepareConcentration.call(this, rollData);
     TraitsFields.prepareResistImmune.call(this);
+
+    // Hit Points
+    const hpOptions = {
+      advancement: Object.values(this.parent.classes).map(c => c.advancement.byType.HitPoints?.[0]).filter(a => a),
+      mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
+    };
+    AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
   }
 }

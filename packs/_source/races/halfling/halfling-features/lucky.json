@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><section id=\"secret-S04TPyvUh05Dz0Ng\" class=\"secret foundry-note\"><p><strong>Foundry Note</strong></p><p>This property can be enabled on your character sheet in the Special Traits configuration on the Attributes tab.</p></section>",
+      "value": "<p>When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><section class=\"secret foundry-note\" id=\"secret-S04TPyvUh05Dz0Ng\"><p><strong>Foundry Note</strong></p><p>This property can be enabled on your character sheet in the Special Traits configuration on the Attributes tab.</p></section>",
       "chat": ""
     },
     "source": {
@@ -83,46 +83,15 @@
   },
   "flags": {},
   "img": "icons/sundries/gaming/dice-runed-brown.webp",
-  "effects": [
-    {
-      "_id": "3ZXTUDl62zDpvpai",
-      "changes": [
-        {
-          "key": "flags.dnd5e.halflingLucky",
-          "mode": 5,
-          "value": "true",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/sundries/gaming/dice-runed-brown.webp",
-      "origin": "Item.LOMdcNAGWh5xpfm4",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "name": "Lucky",
-      "description": "",
-      "statuses": [],
-      "_key": "!items.effects!LOMdcNAGWh5xpfm4.3ZXTUDl62zDpvpai"
-    }
-  ],
+  "effects": [],
   "folder": "kbtbKofcv13crhke",
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.1.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234467,
-    "modifiedTime": 1704824711173,
+    "modifiedTime": 1710190479094,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LOMdcNAGWh5xpfm4"

@@ -1,3 +1,4 @@
+import Item5e from "../../documents/item.mjs";
 import {parseInputDelta} from "../../utils.mjs";
 import CurrencyManager from "../currency-manager.mjs";
 import ContextMenu5e from "../context-menu.mjs";
@@ -201,6 +202,20 @@ export default class InventoryElement extends HTMLElement {
         icon: "<i class='fas fa-trash fa-fw'></i>",
         condition: () => item.isOwner,
         callback: li => this._onAction(li[0], "delete")
+      },
+      {
+        name: "DND5E.Scroll.CreateScroll",
+        icon: '<i class="fa-solid fa-scroll"></i>',
+        callback: async li => Item5e.create(await Item5e.createScrollFromSpell(item), { parent: this.actor }),
+        condition: li => (item.type === "spell") && this.actor?.isOwner,
+        group: "action"
+      },
+      {
+        name: "DND5E.ConcentrationBreak",
+        icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
+        condition: () => this.actor.concentration?.items.has(item),
+        callback: () => this.actor.endConcentration(item),
+        group: "state"
       }
     ];
 

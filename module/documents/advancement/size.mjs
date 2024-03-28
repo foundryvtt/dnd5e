@@ -94,6 +94,6 @@ export default class SizeAdvancement extends Advancement {
   /** @inheritdoc */
   async reverse(level) {
     this.actor.updateSource({"system.traits.size": "med"});
-    this.updateSource({ "value.-=size": null });
+    this.updateSource({ "value.size": null });
   }
 }

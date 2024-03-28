@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} sweeps its spectral scythe through a creature within 5 feet of it, dealing <strong>7 (1d8 + 3) <em>slashing damage</em></strong> plus <strong>4 (1d8) <em>necrotic damage</em></strong>.</p>\n</section>\n<p>The {creature} sweeps its spectral scythe through a creature within 5 feet of it.</p>",
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] sweeps its spectral scythe through a creature within 5 feet of it, dealing <strong>7 (1d8 + 3) <em>slashing damage</em></strong> plus <strong>4 (1d8) <em>necrotic damage</em></strong>.</p>\n</section>\n<p>the [[lookup @name lowercase]] sweeps its spectral scythe through a creature within 5 feet of it.</p>",
       "chat": "",
       "unidentified": ""
     },

@@ -42,7 +42,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
         ?? Object.values(this.advancement.value[this.level] ?? {})
     );
-    this.pool ??= await Promise.all(this.advancement.configuration.pool.map(uuid => fromUuid(uuid)));
+    this.pool ??= await Promise.all(this.advancement.configuration.pool.map(i => fromUuid(i.uuid)));
     if ( !this.dropped ) {
       this.dropped = [];
       for ( const data of this.retainedData?.items ?? [] ) {
@@ -66,9 +66,11 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     const items = [...this.pool, ...this.dropped].reduce((items, i) => {
-      i.checked = this.selected.has(i.uuid);
-      i.disabled = !i.checked && choices.full;
-      if ( !previouslySelected.has(i.uuid) ) items.push(i);
+      if ( i ) {
+        i.checked = this.selected.has(i.uuid);
+        i.disabled = !i.checked && choices.full;
+        if ( !previouslySelected.has(i.uuid) ) items.push(i);
+      }
       return items;
     }, []);
 

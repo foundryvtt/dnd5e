@@ -145,7 +145,7 @@ export default class HitPointsAdvancement extends Advancement {
   #getApplicableValue(value) {
     const abilityId = CONFIG.DND5E.defaultAbilities.hitPoints || "con";
     value = Math.max(value + (this.actor.system.abilities[abilityId]?.mod ?? 0), 1);
-    value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
+    value += simplifyBonus(this.actor.system.attributes.hp.bonuses?.level, this.actor.getRollData());
     return value;
   }
 

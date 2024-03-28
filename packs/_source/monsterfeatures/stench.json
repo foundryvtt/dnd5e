@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>Any creature that starts its turn within <strong>5 ft.</strong> of the {creature} must succeed on a <strong>DC 10 Constitution saving throw</strong> or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the {creature}'s Stench for 24 hours.</p></section><p>Any creature that starts its turn within <strong>5 ft.</strong> of the {creature} must succeed on a Constitution saving throw.</p>",
+      "value": "<section class=\"secret\"><p>Any creature that starts its turn within <strong>5 ft.</strong> of the [[lookup @name lowercase]] must succeed on a <strong>DC 10 Constitution saving throw</strong> or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the [[lookup @name lowercase]]'s Stench for 24 hours.</p></section><p>Any creature that starts its turn within <strong>5 ft.</strong> of the [[lookup @name lowercase]] must succeed on a Constitution saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

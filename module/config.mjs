@@ -863,6 +863,7 @@ preLocalize("itemRarity");
 
 /**
  * The limited use periods that support a recovery formula.
+ * @deprecated since DnD5e 3.1, available until DnD5e 3.3
  * @enum {string}
  */
 DND5E.limitedUseFormulaPeriods = {
@@ -874,16 +875,49 @@ DND5E.limitedUseFormulaPeriods = {
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for limited use periods.
+ *
+ * @typedef {object} LimitedUsePeriodConfiguration
+ * @property {string} label           Localized label.
+ * @property {string} abbreviation    Shorthand form of the label.
+ * @property {boolean} [formula]      Whether this limited use period restores chargs via formula.
+ */
+
+/**
  * Enumerate the lengths of time over which an item can have limited use ability.
- * @enum {string}
+ * @enum {LimitedUsePeriodConfiguration}
  */
 DND5E.limitedUsePeriods = {
-  sr: "DND5E.ShortRest",
-  lr: "DND5E.LongRest",
-  day: "DND5E.Day",
-  ...DND5E.limitedUseFormulaPeriods
+  sr: {
+    label: "DND5E.UsesPeriods.Sr",
+    abbreviation: "DND5E.UsesPeriods.SrAbbreviation"
+  },
+  lr: {
+    label: "DND5E.UsesPeriods.Lr",
+    abbreviation: "DND5E.UsesPeriods.LrAbbreviation"
+  },
+  day: {
+    label: "DND5E.UsesPeriods.Day",
+    abbreviation: "DND5E.UsesPeriods.DayAbbreviation"
+  },
+  charges: {
+    label: "DND5E.UsesPeriods.Charges",
+    abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
+    formula: true
+  },
+  dawn: {
+    label: "DND5E.UsesPeriods.Dawn",
+    abbreviation: "DND5E.UsesPeriods.DawnAbbreviation",
+    formula: true
+  },
+  dusk: {
+    label: "DND5E.UsesPeriods.Dusk",
+    abbreviation: "DND5E.UsesPeriods.DuskAbbreviation",
+    formula: true
+  }
 };
-preLocalize("limitedUsePeriods");
+preLocalize("limitedUsePeriods", { keys: ["label", "abbreviation"] });
+patchConfig("limitedUsePeriods", "label", { since: "DnD5e 3.1", until: "DnD5e 3.3" });
 
 /* -------------------------------------------- */
 
@@ -1161,6 +1195,7 @@ DND5E.focusTypes = {
     }
   }
 };
+preLocalize("focusTypes", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -1343,7 +1378,8 @@ DND5E.validProperties = {
   ]),
   equipment: new Set([
     "concentration",
-    "mgc"
+    "mgc",
+    "stealthDisadvantage"
   ]),
   feat: new Set([
     "concentration",
@@ -1531,7 +1567,7 @@ DND5E.damageTypes = {
   },
   necrotic: {
     label: "DND5E.DamageNecrotic",
-    icon: "systems/dnd5e/icons/svg/damage/acid.svg",
+    icon: "systems/dnd5e/icons/svg/damage/necrotic.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.klOVUV5G1U7iaKoG"
   },
   piercing: {
@@ -1663,7 +1699,7 @@ preLocalize("distanceUnits");
  * @property {Record<string, number>} threshold.encumbered
  * @property {Record<string, number>} threshold.heavilyEncumbered
  * @property {Record<string, number>} threshold.maximum
- * @property {Record<string, number>} speedReduction     Speed reduction caused by encumbered status effects.
+ * @property {Record<string, {ft: number, m: number}>} speedReduction  Speed reduction caused by encumbered status.
  * @property {Record<string, number>} vehicleWeightMultiplier  Multiplier used to determine vehicle carrying capacity.
  */
 
@@ -1705,8 +1741,18 @@ DND5E.encumbrance = {
     }
   },
   speedReduction: {
-    encumbered: 10,
-    heavilyEncumbered: 20
+    encumbered: {
+      ft: 10,
+      m: 3
+    },
+    heavilyEncumbered: {
+      ft: 20,
+      m: 6
+    },
+    exceedingCarryingCapacity: {
+      ft: 5,
+      m: 1.5
+    }
   },
   vehicleWeightMultiplier: {
     imperial: 2000, // 2000 lbs in an imperial ton
@@ -1932,6 +1978,7 @@ DND5E.pactCastingProgression = {
  * @property {boolean} [upcast]       Whether this preparation mode allows for upcasting.
  * @property {boolean} [cantrips]     Whether this mode allows for cantrips in a spellbook.
  * @property {number} [order]         The sort order of this mode in a spellbook.
+ * @property {boolean} [prepares]     Whether this preparation mode prepares spells.
  */
 
 /**
@@ -1941,7 +1988,8 @@ DND5E.pactCastingProgression = {
 DND5E.spellPreparationModes = {
   prepared: {
     label: "DND5E.SpellPrepPrepared",
-    upcast: true
+    upcast: true,
+    prepares: true
   },
   pact: {
     label: "DND5E.PactMagic",
@@ -1951,7 +1999,8 @@ DND5E.spellPreparationModes = {
   },
   always: {
     label: "DND5E.SpellPrepAlways",
-    upcast: true
+    upcast: true,
+    prepares: true
   },
   atwill: {
     label: "DND5E.SpellPrepAtWill",
@@ -2089,6 +2138,7 @@ preLocalize("spellScalingModes", { sort: true });
 
 /**
  * Types of components that can be required when casting a spell.
+ * @deprecated since DnD5e 3.0, available until DnD5e 3.3
  * @enum {SpellComponentConfiguration}
  */
 DND5E.spellComponents = {
@@ -2124,6 +2174,7 @@ preLocalize("spellComponents", { keys: ["label", "abbr"] });
 
 /**
  * Supplementary rules keywords that inform a spell's use.
+ * @deprecated since DnD5e 3.0, available until DnD5e 3.3
  * @enum {SpellTagConfiguration}
  */
 DND5E.spellTags = {
@@ -2214,7 +2265,7 @@ patchConfig("spellSchools", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" })
 /* -------------------------------------------- */
 
 /**
- * Spell scroll item ID within the `DND5E.sourcePacks` compendium for each level.
+ * Spell scroll item ID within the `DND5E.sourcePacks` compendium or a full UUID for each spell level.
  * @enum {string}
  */
 DND5E.spellScrollIds = {
@@ -2445,19 +2496,27 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _StatusEffectConfig5e
+ * @property {string} icon         Icon used to represent the condition on the token.
  * @property {string} [reference]  UUID of a journal entry with details on this condition.
  * @property {string} [special]    Set this condition as a special status effect under this name.
- * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
  */
 
 /**
  * Configuration data for system status effects.
- * @typedef {StatusEffectConfig & _StatusEffectConfig5e} StatusEffectConfig5e
+ * @typedef {Omit<StatusEffectConfig, "img"> & _StatusEffectConfig5e} StatusEffectConfig5e
+ */
+
+/**
+ * @typedef {object} _ConditionConfiguration
+ * @property {string} label        Localized label for the condition.
+ * @property {boolean} [pseudo]    Is this a pseudo-condition, i.e. one that does not appear in the conditions appendix
+ *                                 but acts as a status effect?
+ * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
  */
 
 /**
  * Configuration data for system conditions.
- * @typedef {Omit<StatusEffectConfig5e, "name" | "img"> & {label: string, icon: string}} ConditionConfiguration
+ * @typedef {Omit<StatusEffectConfig5e, "name"> & _ConditionConfiguration} ConditionConfiguration
  */
 
 /**
@@ -2465,6 +2524,11 @@ DND5E.consumableResources = [
  * @enum {ConditionConfiguration}
  */
 DND5E.conditionTypes = {
+  bleeding: {
+    label: "EFFECT.DND5E.StatusBleeding",
+    icon: "systems/dnd5e/icons/svg/statuses/bleeding.svg",
+    pseudo: true
+  },
   blinded: {
     label: "DND5E.ConBlinded",
     icon: "systems/dnd5e/icons/svg/statuses/blinded.svg",
@@ -2476,6 +2540,11 @@ DND5E.conditionTypes = {
     icon: "systems/dnd5e/icons/svg/statuses/charmed.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD"
   },
+  cursed: {
+    label: "EFFECT.DND5E.StatusCursed",
+    icon: "systems/dnd5e/icons/svg/statuses/cursed.svg",
+    pseudo: true
+  },
   deafened: {
     label: "DND5E.ConDeafened",
     icon: "systems/dnd5e/icons/svg/statuses/deafened.svg",
@@ -2483,7 +2552,8 @@ DND5E.conditionTypes = {
   },
   diseased: {
     label: "DND5E.ConDiseased",
-    icon: "systems/dnd5e/icons/svg/statuses/diseased.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/diseased.svg",
+    pseudo: true
   },
   exhaustion: {
     label: "DND5E.ConExhaustion",
@@ -2538,11 +2608,26 @@ DND5E.conditionTypes = {
     icon: "systems/dnd5e/icons/svg/statuses/restrained.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc"
   },
+  silenced: {
+    label: "EFFECT.DND5E.StatusSilenced",
+    icon: "systems/dnd5e/icons/svg/statuses/silenced.svg",
+    pseudo: true
+  },
   stunned: {
     label: "DND5E.ConStunned",
     icon: "systems/dnd5e/icons/svg/statuses/stunned.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS",
     statuses: ["incapacitated"]
+  },
+  surprised: {
+    label: "EFFECT.DND5E.StatusSurprised",
+    icon: "systems/dnd5e/icons/svg/statuses/surprised.svg",
+    pseudo: true
+  },
+  transformed: {
+    label: "EFFECT.DND5E.StatusTransformed",
+    icon: "systems/dnd5e/icons/svg/statuses/transformed.svg",
+    pseudo: true
   },
   unconscious: {
     label: "DND5E.ConUnconscious",
@@ -2563,7 +2648,7 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
  */
 DND5E.conditionEffects = {
   noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
-  halfMovement: new Set(["exhaustion-2", "prone"]),
+  halfMovement: new Set(["exhaustion-2"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
   halfHealth: new Set(["exhaustion-4"])
@@ -2577,10 +2662,6 @@ DND5E.conditionEffects = {
  * @enum {Omit<StatusEffectConfig5e, "img"> & {icon: string}}
  */
 DND5E.statusEffects = {
-  bleeding: {
-    name: "EFFECT.DND5E.StatusBleeding",
-    icon: "systems/dnd5e/icons/svg/statuses/bleeding.svg"
-  },
   burrowing: {
     name: "EFFECT.DND5E.StatusBurrowing",
     icon: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
@@ -2588,11 +2669,8 @@ DND5E.statusEffects = {
   },
   concentrating: {
     name: "EFFECT.DND5E.StatusConcentrating",
-    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg"
-  },
-  cursed: {
-    name: "EFFECT.DND5E.StatusCursed",
-    icon: "systems/dnd5e/icons/svg/statuses/cursed.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
+    special: "CONCENTRATING"
   },
   dead: {
     name: "EFFECT.DND5E.StatusDead",
@@ -2625,10 +2703,6 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusMarked",
     icon: "systems/dnd5e/icons/svg/statuses/marked.svg"
   },
-  silenced: {
-    name: "EFFECT.DND5E.StatusSilenced",
-    icon: "systems/dnd5e/icons/svg/statuses/silenced.svg"
-  },
   sleeping: {
     name: "EFFECT.DND5E.StatusSleeping",
     icon: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
@@ -2637,14 +2711,6 @@ DND5E.statusEffects = {
   stable: {
     name: "EFFECT.DND5E.StatusStable",
     icon: "systems/dnd5e/icons/svg/statuses/stable.svg"
-  },
-  surprised: {
-    name: "EFFECT.DND5E.StatusSurprised",
-    icon: "systems/dnd5e/icons/svg/statuses/surprised.svg"
-  },
-  transformed: {
-    name: "EFFECT.DND5E.StatusTransformed",
-    icon: "systems/dnd5e/icons/svg/statuses/transformed.svg"
   }
 };
 
@@ -3293,6 +3359,7 @@ DND5E.rules = {
   consumables: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.UEPAcZFzQ5x196zE",
   itemspells: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DABoaeeF6w31UCsj",
   charges: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.NLRXcgrpRCfsA5mO",
+  spellscroll: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.gi8IKhtOlBVhMJrN",
   creaturetags: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9jV1fFF163dr68vd",
   telepathy: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.geTidcFIYWuUvD2L",
   legendaryactions: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.C1awOyZh78pq1xmY",

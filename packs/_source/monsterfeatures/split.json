@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>When a {creature} that is Medium or larger is subjected to lightning or <em>slashing damage</em>, it splits into two new {creature}s if it has at least 10 Hit Points. Each new {creature} has Hit Points equal to half the original {creature}'s, rounded down. New {creature}s are one size smaller than the original pudding.</p>\n</section>\n<p>The {creature} splits into two new {creature}s. New {creature}s are one size smaller than the original {creature}.</p>",
+      "value": "<section class=\"secret\">\n<p>When a [[lookup @name lowercase]] that is Medium or larger is subjected to lightning or <em>slashing damage</em>, it splits into two new [[lookup @name lowercase]]s if it has at least 10 Hit Points. Each new [[lookup @name lowercase]] has Hit Points equal to half the original [[lookup @name lowercase]]'s, rounded down. New [[lookup @name lowercase]]s are one size smaller than the original pudding.</p>\n</section>\n<p>the [[lookup @name lowercase]] splits into two new [[lookup @name lowercase]]s. New [[lookup @name lowercase]]s are one size smaller than the original [[lookup @name lowercase]].</p>",
       "chat": "",
       "unidentified": ""
     },

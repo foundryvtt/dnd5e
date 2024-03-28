@@ -42,6 +42,18 @@ export class AdvancementField extends foundry.data.fields.ObjectField {
     if ( cls ) return new cls(value, {parent: model, ...options});
     return foundry.utils.deepClone(value);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate this field's candidate source data.
+   * @param {object} sourceData   Candidate source data of the root model
+   * @param {any} fieldData       The value of this field within the source data
+   */
+  migrateSource(sourceData, fieldData) {
+    const cls = this.getModelForType(fieldData.type);
+    if ( cls ) cls.migrateDataSafe(fieldData);
+  }
 }
 
 /* -------------------------------------------- */
@@ -105,6 +117,18 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
     const cls = this.getModel();
     if ( cls ) return new cls(value, {parent: model, ...options});
     return foundry.utils.deepClone(value);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate this field's candidate source data.
+   * @param {object} sourceData   Candidate source data of the root model
+   * @param {any} fieldData       The value of this field within the source data
+   */
+  migrateSource(sourceData, fieldData) {
+    const cls = this.getModel();
+    if ( cls ) cls.migrateDataSafe(fieldData);
   }
 }
 

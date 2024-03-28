@@ -160,8 +160,8 @@ export default class Advancement extends BaseAdvancement {
    */
   get appliesToClass() {
     const originalClass = this.item.isOriginalClass;
-    return (originalClass === null) || !this.classRestriction
-      || (this.classRestriction === "primary" && originalClass)
+    return !this.classRestriction
+      || (this.classRestriction === "primary" && [true, null].includes(originalClass))
       || (this.classRestriction === "secondary" && !originalClass);
   }
 

@@ -1,26 +1,17 @@
 import { ItemDataModel } from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
+import SummonsField from "../fields/summons-field.mjs";
 
-const {
-  ArrayField, BooleanField, DocumentIdField, IntegerSortField, NumberField, SchemaField, StringField
-} = foundry.data.fields;
-
-/**
- * Information for a single summoned creature.
- *
- * @typedef {object} SummonsProfile
- * @property {string} _id    Unique ID for this profile.
- * @property {number} count  Number of creatures to summon.
- * @property {string} name   Display name for this profile if it differs from actor's name.
- * @property {string} uuid   UUID of the actor to summon.
- */
+const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data model template for item actions.
  *
  * @property {string} ability             Ability score to use when determining modifier.
  * @property {string} actionType          Action type as defined in `DND5E.itemActionTypes`.
- * @property {string} attackBonus         Numeric or dice bonus to attack rolls.
+ * @property {object} attack              Information how attacks are handled.
+ * @property {string} attack.bonus        Numeric or dice bonus to attack rolls.
+ * @property {boolean} attack.flat        Is the attack bonus the only bonus to attack rolls?
  * @property {string} chatFlavor          Extra text displayed in chat.
  * @property {object} critical            Information on how critical hits are handled.
  * @property {number} critical.threshold  Minimum number on the dice to roll a critical hit.
@@ -33,14 +24,7 @@ const {
  * @property {string} save.ability        Ability required for the save.
  * @property {number} save.dc             Custom saving throw value.
  * @property {string} save.scaling        Method for automatically determining saving throw DC.
- * @property {object} summons
- * @property {string} summons.ac                  Formula used to calculate the AC on summoned actors.
- * @property {string} summons.hp                  Formula indicating bonus hit points to add to each summoned actor.
- * @property {object} summons.match
- * @property {boolean} summons.match.attacks      Match the to hit values on summoned actor's attack to the summoner.
- * @property {boolean} summons.match.proficiency  Match proficiency on summoned actor to the summoner.
- * @property {boolean} summons.match.saves        Match the save DC on summoned actor's abilities to the summoner.
- * @property {SummonsProfile[]} summons.profiles  Information on creatures that can be summoned.
+ * @property {SummonsData} summons
  * @mixin
  */
 export default class ActionTemplate extends ItemDataModel {
@@ -49,7 +33,10 @@ export default class ActionTemplate extends ItemDataModel {
     return {
       ability: new StringField({required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"}),
       actionType: new StringField({required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"}),
-      attackBonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
+      attack: new SchemaField({
+        bonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
+        flat: new BooleanField({label: "DND5E.ItemAttackFlat"})
+      }),
       chatFlavor: new StringField({required: true, label: "DND5E.ChatFlavor"}),
       critical: new SchemaField({
         threshold: new NumberField({
@@ -67,27 +54,7 @@ export default class ActionTemplate extends ItemDataModel {
         dc: new NumberField({required: true, min: 0, integer: true, label: "DND5E.AbbreviationDC"}),
         scaling: new StringField({required: true, blank: false, initial: "spell", label: "DND5E.ScalingFormula"})
       }, {label: "DND5E.SavingThrow"}),
-      summons: new SchemaField({
-        ac: new FormulaField({label: "DND5E.Summoning.ArmorClass.Label", hint: "DND5E.Summoning.ArmorClass.hint"}),
-        hp: new FormulaField({label: "DND5E.Summoning.HitPoints.Label", hint: "DND5E.Summoning.HitPoints.hint"}),
-        match: new SchemaField({
-          attacks: new BooleanField({
-            label: "DND5E.Summoning.Match.Attacks.Label", hint: "DND5E.Summoning.Match.Attacks.Hint"
-          }),
-          proficiency: new BooleanField({
-            label: "DND5E.Summoning.Match.Proficiency.Label", hint: "DND5E.Summoning.Match.Proficiency.Hint"
-          }),
-          saves: new BooleanField({
-            label: "DND5E.Summoning.Match.Saves.Label", hint: "DND5E.Summoning.Match.Saves.Hint"
-          })
-        }),
-        profiles: new ArrayField(new SchemaField({
-          _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
-          count: new NumberField({integer: true, min: 1}),
-          name: new StringField(),
-          uuid: new StringField()
-        }))
-      })
+      summons: new SummonsField()
     };
   }
 
@@ -99,7 +66,7 @@ export default class ActionTemplate extends ItemDataModel {
   static _migrateData(source) {
     super._migrateData(source);
     ActionTemplate.#migrateAbility(source);
-    ActionTemplate.#migrateAttackBonus(source);
+    ActionTemplate.#migrateAttack(source);
     ActionTemplate.#migrateCritical(source);
     ActionTemplate.#migrateSave(source);
     ActionTemplate.#migrateDamage(source);
@@ -118,12 +85,15 @@ export default class ActionTemplate extends ItemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Ensure a 0 or null in attack bonus is converted to an empty string rather than "0".
+   * Move 'attackBonus' to 'attack.bonus' and ensure a 0 or null is converted to an empty string rather than "0".
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static #migrateAttackBonus(source) {
-    if ( [0, "0", null].includes(source.attackBonus) ) source.attackBonus = "";
-    else if ( typeof source.attackBonus === "number" ) source.attackBonus = source.attackBonus.toString();
+  static #migrateAttack(source) {
+    if ( "attackBonus" in source ) {
+      source.attack ??= {};
+      source.attack.bonus ??= source.attackBonus;
+    }
+    if ( [0, "0", null].includes(source.attack?.bonus) ) source.attack.bonus = "";
   }
 
   /* -------------------------------------------- */
@@ -267,6 +237,16 @@ export default class ActionTemplate extends ItemDataModel {
    */
   get hasSave() {
     return this.actionType && !!(this.save.ability && this.save.scaling);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this Item implement summoning as part of its usage?
+   * @type {boolean}
+   */
+  get hasSummoning() {
+    return (this.actionType === "summ") && !!this.summons?.profiles.length;
   }
 
   /* -------------------------------------------- */
