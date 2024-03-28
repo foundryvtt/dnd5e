@@ -137,7 +137,10 @@ export default class ItemSheet5e extends ItemSheet {
       concealDetails: !game.user.isGM && (this.document.system.identified === false)
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
-    context.abilityConsumptionManual = !item.isEmbedded && (this.item.system.consume?.type === "attribute");
+    if ( !item.isEmbedded && foundry.utils.isEmpty(context.abilityConsumptionTargets) ) {
+      context.abilityConsumptionHint = (this.item.system.consume?.type === "attribute")
+        ? "DND5E.ConsumeHint.Attribute" : "DND5E.ConsumeHint.Item";
+    }
 
     if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
       context.properties = item.system.validProperties.reduce((obj, k) => {
