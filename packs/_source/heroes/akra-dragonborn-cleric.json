@@ -78,7 +78,12 @@
       },
       "init": {
         "ability": "",
-        "bonus": "0"
+        "bonus": "0",
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
+        }
       },
       "movement": {
         "burrow": null,
@@ -103,14 +108,32 @@
       "spellcasting": "wis",
       "death": {
         "success": 0,
-        "failure": 0
+        "failure": 0,
+        "ability": "",
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
+        }
       },
       "exhaustion": 0,
-      "inspiration": false
+      "inspiration": false,
+      "concentration": {
+        "ability": "",
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
+        },
+        "bonuses": {
+          "save": ""
+        },
+        "limit": 1
+      }
     },
     "details": {
       "biography": {
-        "value": "<p>A devout follower of her deity and of her society's customs, Akra feels somewhat out of place adventuring in foreign lands. But she feels bound to do everything in her power to bring peace to the region.</p>",
+        "value": "<p>A devout follower of her deity and of her society's customs, Akra feels somewhat out of place adventuring in foreign lands. But she feels bound to do everything in her power to bring peace to the region.</p><p><em>Token artwork by </em><a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\"><em>Forgotten Adventures</em></a><em>.</em></p>",
         "public": ""
       },
       "alignment": "Lawful Good",
@@ -124,7 +147,15 @@
       "trait": "",
       "ideal": "",
       "bond": "",
-      "flaw": ""
+      "flaw": "",
+      "gender": "",
+      "eyes": "",
+      "height": "",
+      "faith": "",
+      "hair": "",
+      "skin": "",
+      "age": "",
+      "weight": ""
     },
     "traits": {
       "size": "med",
@@ -192,6 +223,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "ani": {
@@ -200,6 +236,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "arc": {
@@ -208,6 +249,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "ath": {
@@ -216,6 +262,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "dec": {
@@ -224,6 +275,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "his": {
@@ -232,6 +288,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "ins": {
@@ -240,6 +301,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "itm": {
@@ -248,6 +314,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "inv": {
@@ -256,6 +327,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "med": {
@@ -264,6 +340,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "nat": {
@@ -272,6 +353,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "prc": {
@@ -280,6 +366,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "prf": {
@@ -288,6 +379,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "per": {
@@ -296,6 +392,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "rel": {
@@ -304,6 +405,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "slt": {
@@ -312,6 +418,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "ste": {
@@ -320,6 +431,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "sur": {
@@ -328,6 +444,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       }
     },
@@ -426,7 +547,8 @@
         "lr": false,
         "label": ""
       }
-    }
+    },
+    "favorites": []
   },
   "prototypeToken": {
     "flags": {},
@@ -471,7 +593,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": null,
+      "src": "systems/dnd5e/tokens/heroes/ClericDragonborn.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -543,8 +665,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.Ra2Z1ujre76weR0i"
+      }
     },
     {
       "_id": "74K6TAuSg2xzd209",
@@ -598,8 +719,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640945,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.74K6TAuSg2xzd209"
+      }
     },
     {
       "_id": "mRxDz7yEtvJgpJsO",
@@ -659,8 +779,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.mRxDz7yEtvJgpJsO"
+      }
     },
     {
       "_id": "4FozMXUzyFXaB3Ps",
@@ -726,7 +845,6 @@
         },
         "ability": "",
         "actionType": "abil",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -750,7 +868,13 @@
           "value": "trinket",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -777,8 +901,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.4FozMXUzyFXaB3Ps"
+      }
     },
     {
       "_id": "QBmv3SSCaae2xxzT",
@@ -832,8 +955,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640955,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.QBmv3SSCaae2xxzT"
+      }
     },
     {
       "_id": "ehYoem9Oas5sgRUK",
@@ -893,8 +1015,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640965,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.ehYoem9Oas5sgRUK"
+      }
     },
     {
       "_id": "p9MqgEEsODUHJebP",
@@ -960,7 +1081,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -984,7 +1104,13 @@
           "value": "food",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -1005,8 +1131,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640975,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.p9MqgEEsODUHJebP"
+      }
     },
     {
       "_id": "3pLaAsrIUSbFeFDh",
@@ -1069,8 +1194,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.3pLaAsrIUSbFeFDh"
+      }
     },
     {
       "_id": "PzCcpWNIKilXJXMG",
@@ -1133,8 +1257,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640984,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.PzCcpWNIKilXJXMG"
+      }
     },
     {
       "_id": "njMyrs5IpKrRqvI9",
@@ -1197,8 +1320,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.njMyrs5IpKrRqvI9"
+      }
     },
     {
       "_id": "l46uaz805Fr9lZvU",
@@ -1263,7 +1385,6 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1281,7 +1402,8 @@
         },
         "armor": {
           "value": 14,
-          "dex": 2
+          "dex": 2,
+          "magicalBonus": null
         },
         "hp": {
           "value": 0,
@@ -1305,7 +1427,12 @@
           "value": "medium",
           "baseItem": "scalemail"
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "sort": 0,
       "flags": {
@@ -1326,8 +1453,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.l46uaz805Fr9lZvU"
+      }
     },
     {
       "_id": "k2WyjZI9mN5jclTd",
@@ -1392,7 +1518,6 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1410,7 +1535,8 @@
         },
         "armor": {
           "value": null,
-          "dex": null
+          "dex": null,
+          "magicalBonus": null
         },
         "hp": {
           "value": 0,
@@ -1432,7 +1558,12 @@
           "baseItem": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "sort": 0,
       "flags": {
@@ -1453,8 +1584,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640996,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.k2WyjZI9mN5jclTd"
+      }
     },
     {
       "_id": "DNmD3z2JYmCQ203g",
@@ -1519,7 +1649,6 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1537,7 +1666,8 @@
         },
         "armor": {
           "value": null,
-          "dex": null
+          "dex": null,
+          "magicalBonus": null
         },
         "hp": {
           "value": 0,
@@ -1559,7 +1689,12 @@
           "baseItem": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "sort": 0,
       "flags": {
@@ -1580,8 +1715,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.DNmD3z2JYmCQ203g"
+      }
     },
     {
       "_id": "uuucgo72s3ZdzGqs",
@@ -1646,7 +1780,6 @@
         },
         "ability": null,
         "actionType": null,
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1664,7 +1797,8 @@
         },
         "armor": {
           "value": 2,
-          "dex": null
+          "dex": null,
+          "magicalBonus": null
         },
         "hp": {
           "value": 0,
@@ -1686,7 +1820,12 @@
           "baseItem": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "sort": 0,
       "flags": {
@@ -1707,8 +1846,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.uuucgo72s3ZdzGqs"
+      }
     },
     {
       "_id": "eT4j7mNbZGHIUOtT",
@@ -1773,7 +1911,6 @@
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1812,7 +1949,13 @@
           "value": "simpleM",
           "baseItem": "mace"
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -1833,8 +1976,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.eT4j7mNbZGHIUOtT"
+      }
     },
     {
       "_id": "Yb4Gsfcswu3pZnoR",
@@ -1900,7 +2042,6 @@
         },
         "ability": "",
         "actionType": "rwak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1929,7 +2070,13 @@
           "value": "ammo",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -1950,8 +2097,7 @@
         "createdTime": null,
         "modifiedTime": 1670011647610,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.Yb4Gsfcswu3pZnoR"
+      }
     },
     {
       "_id": "dRVZvSq4EXz8u5sk",
@@ -2016,7 +2162,6 @@
         },
         "ability": "",
         "actionType": "rwak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2059,7 +2204,13 @@
           "value": "simpleR",
           "baseItem": "lightcrossbow"
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -2080,8 +2231,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.dRVZvSq4EXz8u5sk"
+      }
     },
     {
       "_id": "ngTZ5FkHGxsYo2Ie",
@@ -2147,7 +2297,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2171,7 +2320,13 @@
           "value": "food",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -2192,8 +2347,7 @@
         "createdTime": null,
         "modifiedTime": 1670011641017,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.ngTZ5FkHGxsYo2Ie"
+      }
     },
     {
       "_id": "sa2Az2SjUNScdr5T",
@@ -2259,7 +2413,6 @@
         },
         "ability": "str",
         "actionType": "mwak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2288,7 +2441,13 @@
           "value": "trinket",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -2315,8 +2474,7 @@
         "createdTime": null,
         "modifiedTime": 1670011647619,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.sa2Az2SjUNScdr5T"
+      }
     },
     {
       "_id": "1qgVPt1uOptTVby1",
@@ -2370,8 +2528,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.1qgVPt1uOptTVby1"
+      }
     },
     {
       "_id": "6srkb2hvbgbrjzi3",
@@ -2397,8 +2554,12 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW",
-                "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2424,7 +2585,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.hEymt45rICi4f9eL"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.hEymt45rICi4f9eL"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2445,7 +2608,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.yv49QN6Bzqs0ecCs"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.yv49QN6Bzqs0ecCs"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2466,7 +2631,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.T6u5z8ZTX6UftXqE"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.T6u5z8ZTX6UftXqE"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2487,7 +2654,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.4UOgxzr83vFuUash"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.4UOgxzr83vFuUash"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2547,8 +2716,7 @@
         "createdTime": null,
         "modifiedTime": 1699989874871,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.6srkb2hvbgbrjzi3"
+      }
     },
     {
       "_id": "P7mF2MxSuVJwHRRY",
@@ -2606,7 +2774,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2641,13 +2808,39 @@
         "properties": [
           "vocal",
           "somatic",
-          "concentration"
-        ]
+          "concentration",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.P7mF2MxSuVJwHRRY"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false,
+          "concentration": true
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "otherCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/control/buff-flight-wings-blue.webp",
@@ -2655,13 +2848,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486203,
-        "modifiedTime": 1661603486203,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.P7mF2MxSuVJwHRRY"
+        "modifiedTime": 1711718200319,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "n9pJzTDsAwQxJVRl",
@@ -2719,7 +2911,6 @@
         },
         "ability": "",
         "actionType": "save",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2758,13 +2949,41 @@
         },
         "properties": [
           "vocal",
-          "somatic"
-        ]
+          "somatic",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "saveDamage": "default",
+          "bonusSaveDamage": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "removeAttackDamageButtons": "default",
+          "itemCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/light/beam-rays-orange.webp",
@@ -2772,13 +2991,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486203,
-        "modifiedTime": 1661603486203,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.n9pJzTDsAwQxJVRl"
+        "modifiedTime": 1711718209385,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "MUO1uYN7JR1hm4dR",
@@ -2836,7 +3054,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2869,13 +3086,38 @@
           "formula": ""
         },
         "properties": [
-          "vocal"
-        ]
+          "vocal",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
@@ -2883,13 +3125,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486205,
-        "modifiedTime": 1661603486205,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.MUO1uYN7JR1hm4dR"
+        "modifiedTime": 1711718219773,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "8dzaICjGy6mTUaUr",
@@ -2945,7 +3186,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2981,8 +3221,15 @@
           "vocal",
           "somatic",
           "material",
-          "concentration"
-        ]
+          "concentration",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "effects": [
         {
@@ -3036,8 +3283,7 @@
           "transfer": false,
           "name": "Bless",
           "description": "",
-          "statuses": [],
-          "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE"
+          "statuses": []
         }
       ],
       "folder": null,
@@ -3048,17 +3294,35 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false,
+          "concentration": true
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "otherCondition": "",
+          "effectCondition": ""
         }
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486205,
-        "modifiedTime": 1661603486205,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.8dzaICjGy6mTUaUr"
+        "modifiedTime": 1711718237954,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "uUWb1wZgtMou0TVP",
@@ -3116,7 +3380,6 @@
         },
         "ability": "",
         "actionType": "heal",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3155,13 +3418,39 @@
         },
         "properties": [
           "vocal",
-          "somatic"
-        ]
+          "somatic",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "removeAttackDamageButtons": "default",
+          "itemCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/life/heart-cross-green.webp",
@@ -3169,13 +3458,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486206,
-        "modifiedTime": 1661603486206,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.uUWb1wZgtMou0TVP"
+        "modifiedTime": 1711718565441,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "gvdA9nPuWLck4tBl",
@@ -3233,7 +3521,6 @@
         },
         "ability": "",
         "actionType": "save",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3268,13 +3555,38 @@
         "properties": [
           "vocal",
           "somatic",
-          "material"
-        ]
+          "material",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
@@ -3282,13 +3594,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486206,
-        "modifiedTime": 1661603486206,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.gvdA9nPuWLck4tBl"
+        "modifiedTime": 1711718626619,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "arzCrMRgcNiQuh43",
@@ -3346,7 +3657,6 @@
         },
         "ability": "",
         "actionType": "save",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3379,13 +3689,38 @@
           "formula": ""
         },
         "properties": [
-          "vocal"
-        ]
+          "vocal",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.arzCrMRgcNiQuh43"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/fire/explosion-fireball-small-purple.webp",
@@ -3393,13 +3728,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486207,
-        "modifiedTime": 1661603486207,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.arzCrMRgcNiQuh43"
+        "modifiedTime": 1711718244268,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "a3XtAO5n2GrqiAh5",
@@ -3457,7 +3791,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3492,13 +3825,41 @@
         "properties": [
           "vocal",
           "somatic",
-          "material"
-        ]
+          "material",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.a3XtAO5n2GrqiAh5"
+        },
+        "midi-qol": {
+          "AoETargetType": "any",
+          "AoETargetTypeIncludeSelf": true,
+          "autoTarget": "default",
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
         }
       },
       "img": "icons/magic/air/wind-swirl-purple-blue.webp",
@@ -3506,13 +3867,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486207,
-        "modifiedTime": 1661603486207,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.a3XtAO5n2GrqiAh5"
+        "modifiedTime": 1711718545188,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "95K2aUhAGV9qXjnf",
@@ -3570,7 +3930,6 @@
         },
         "ability": "",
         "actionType": "save",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3606,13 +3965,38 @@
           "vocal",
           "somatic",
           "material",
-          "concentration"
-        ]
+          "concentration",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.95K2aUhAGV9qXjnf"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false,
+          "concentration": true
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/unholy/strike-beam-blood-red-purple.webp",
@@ -3668,20 +4052,18 @@
           "transfer": false,
           "name": "Bane",
           "description": "",
-          "statuses": [],
-          "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.95K2aUhAGV9qXjnf.potjmpJPeUA1U4oe"
+          "statuses": []
         }
       ],
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486208,
-        "modifiedTime": 1661603486208,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.95K2aUhAGV9qXjnf"
+        "modifiedTime": 1711718229298,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "Mzh95utKDPIrjiH8",
@@ -3739,7 +4121,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3774,13 +4155,41 @@
         "properties": [
           "vocal",
           "somatic",
-          "concentration"
-        ]
+          "concentration",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+        },
+        "midi-qol": {
+          "AoETargetType": "any",
+          "AoETargetTypeIncludeSelf": true,
+          "autoTarget": "default",
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false,
+          "concentration": true
         }
       },
       "img": "icons/magic/air/air-burst-spiral-blue-gray.webp",
@@ -3788,13 +4197,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486209,
-        "modifiedTime": 1661603486209,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.Mzh95utKDPIrjiH8"
+        "modifiedTime": 1711718574751,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "ghXTfe7sgCbgf1Q8",
@@ -3852,7 +4260,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3887,14 +4294,42 @@
         "properties": [
           "vocal",
           "somatic",
+          "concentration",
           "ritual",
-          "concentration"
-        ]
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        },
+        "midi-qol": {
+          "AoETargetType": "any",
+          "AoETargetTypeIncludeSelf": true,
+          "autoTarget": "default",
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false,
+          "concentration": true
         }
       },
       "img": "icons/magic/light/explosion-star-blue.webp",
@@ -3902,13 +4337,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486210,
-        "modifiedTime": 1661603486210,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.ghXTfe7sgCbgf1Q8"
+        "modifiedTime": 1711718580495,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "2skfDtglk1mGrb3l",
@@ -3966,7 +4400,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4002,13 +4435,41 @@
           "vocal",
           "somatic",
           "material",
-          "concentration"
-        ]
+          "concentration",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.2skfDtglk1mGrb3l"
+        },
+        "midi-qol": {
+          "AoETargetType": "any",
+          "AoETargetTypeIncludeSelf": true,
+          "autoTarget": "default",
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false,
+          "concentration": true
         }
       },
       "img": "icons/magic/air/air-burst-spiral-teal-green.webp",
@@ -4016,13 +4477,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486210,
-        "modifiedTime": 1661603486210,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.2skfDtglk1mGrb3l"
+        "modifiedTime": 1711718587641,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "7buEm5KhI5lP8m1z",
@@ -4080,7 +4540,6 @@
         },
         "ability": "",
         "actionType": "rsak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4119,13 +4578,40 @@
         },
         "properties": [
           "vocal",
-          "somatic"
-        ]
+          "somatic",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.7buEm5KhI5lP8m1z"
+        },
+        "midi-qol": {
+          "fumbleThreshold": null,
+          "rollAttackPerTarget": "default",
+          "removeAttackDamageButtons": "default",
+          "itemCondition": "",
+          "effectCondition": ""
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
         }
       },
       "img": "icons/magic/fire/projectile-fireball-smoke-large-blue.webp",
@@ -4133,13 +4619,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486210,
-        "modifiedTime": 1661603486210,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.7buEm5KhI5lP8m1z"
+        "modifiedTime": 1711718593512,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "o8Dh7fblk1d16tnO",
@@ -4197,7 +4682,6 @@
         },
         "ability": "",
         "actionType": "heal",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4235,13 +4719,39 @@
           "formula": "1d4"
         },
         "properties": [
-          "vocal"
-        ]
+          "vocal",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.o8Dh7fblk1d16tnO"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "removeAttackDamageButtons": "default",
+          "itemCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/life/heart-cross-green.webp",
@@ -4249,13 +4759,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486211,
-        "modifiedTime": 1661603486211,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.o8Dh7fblk1d16tnO"
+        "modifiedTime": 1711718600331,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "ksaaTxIbKx2sJfia",
@@ -4313,7 +4822,6 @@
         },
         "ability": "",
         "actionType": "msak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4352,13 +4860,40 @@
         },
         "properties": [
           "vocal",
-          "somatic"
-        ]
+          "somatic",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ksaaTxIbKx2sJfia"
+        },
+        "midi-qol": {
+          "fumbleThreshold": null,
+          "rollAttackPerTarget": "default",
+          "removeAttackDamageButtons": "default",
+          "itemCondition": "",
+          "effectCondition": ""
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
         }
       },
       "img": "icons/magic/unholy/strike-beam-blood-red-teal.webp",
@@ -4366,13 +4901,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486211,
-        "modifiedTime": 1661603486211,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.ksaaTxIbKx2sJfia"
+        "modifiedTime": 1711718605843,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "xmDBqZhRVrtLP8h2",
@@ -4430,7 +4964,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4466,13 +4999,38 @@
           "vocal",
           "somatic",
           "material",
-          "concentration"
-        ]
+          "concentration",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.xmDBqZhRVrtLP8h2"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false,
+          "concentration": true
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
@@ -4480,13 +5038,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486212,
-        "modifiedTime": 1661603486212,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.xmDBqZhRVrtLP8h2"
+        "modifiedTime": 1711718614261,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "Kn7K5PtYUJAKZTTp",
@@ -4544,7 +5101,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4579,13 +5135,41 @@
         "properties": [
           "vocal",
           "somatic",
-          "ritual"
-        ]
+          "ritual",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Kn7K5PtYUJAKZTTp"
+        },
+        "midi-qol": {
+          "AoETargetType": "any",
+          "AoETargetTypeIncludeSelf": true,
+          "autoTarget": "default",
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "concentration": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false
         }
       },
       "img": "icons/magic/light/explosion-star-small-teal.webp",
@@ -4593,13 +5177,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486212,
-        "modifiedTime": 1661603486212,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.Kn7K5PtYUJAKZTTp"
+        "modifiedTime": 1711718619700,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "jZ6JNykRtdQ90MOo",
@@ -4657,7 +5240,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4693,13 +5275,38 @@
           "vocal",
           "somatic",
           "material",
-          "concentration"
-        ]
+          "concentration",
+          "mgc"
+        ],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "linkedClass": "cleric"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo"
+        },
+        "midiProperties": {
+          "confirmTargets": "default",
+          "autoFailFriendly": false,
+          "autoSaveFriendly": false,
+          "critOther": false,
+          "offHandWeapon": false,
+          "magicdam": false,
+          "magiceffect": false,
+          "noConcentrationCheck": false,
+          "toggleEffect": false,
+          "ignoreTotalCover": false,
+          "concentration": true
+        },
+        "midi-qol": {
+          "rollAttackPerTarget": "default",
+          "itemCondition": "",
+          "effectCondition": ""
         }
       },
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
@@ -4707,13 +5314,12 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661603486213,
-        "modifiedTime": 1661603486213,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.jZ6JNykRtdQ90MOo"
+        "modifiedTime": 1711718634279,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "name": "Priest",
@@ -4729,7 +5335,8 @@
           "page": "",
           "license": "CC-BY-4.0"
         },
-        "advancement": []
+        "advancement": [],
+        "startingEquipment": []
       },
       "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
       "effects": [],
@@ -4747,8 +5354,7 @@
         "modifiedTime": 1673040357495,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
-      "_id": "UXJw0wVE7GCx6yzv",
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.UXJw0wVE7GCx6yzv"
+      "_id": "UXJw0wVE7GCx6yzv"
     },
     {
       "_id": "Zo7sWdchHDF6d0nn",
@@ -4785,8 +5391,12 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7",
-                "Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB"
+                }
               ],
               "optional": false,
               "spell": {
@@ -4813,8 +5423,12 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ",
-                "Compendium.dnd5e.classfeatures.r91UIgwFdHwkXdia"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.r91UIgwFdHwkXdia"
+                }
               ],
               "optional": false,
               "spell": {
@@ -4836,7 +5450,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE"
+                }
               ],
               "optional": false,
               "spell": {
@@ -4858,7 +5474,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU"
+                }
               ],
               "optional": false,
               "spell": {
@@ -5168,8 +5786,11 @@
         ],
         "spellcasting": {
           "progression": "full",
-          "ability": "wis"
-        }
+          "ability": "wis",
+          "preparedSpellsLimitFormula": "max(@abilities.wis.mod,0) + @classes.cleric.levels"
+        },
+        "startingEquipment": [],
+        "wealth": ""
       },
       "effects": [],
       "folder": null,
@@ -5184,13 +5805,12 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.4.0",
-        "coreVersion": "10.303",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661787234282,
-        "modifiedTime": 1699989874871,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.Zo7sWdchHDF6d0nn"
+        "modifiedTime": 1711718521495,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "QC8NPpGVE4sAQA4Y",
@@ -5248,7 +5868,6 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -5266,15 +5885,19 @@
         },
         "type": {
           "value": "class",
-          "subtype": "",
-          "baseItem": ""
+          "subtype": ""
         },
         "requirements": "Cleric 1",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "flags": {
         "dnd5e": {
@@ -5293,8 +5916,7 @@
         "createdTime": 1661787234436,
         "modifiedTime": 1691519023057,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.QC8NPpGVE4sAQA4Y"
+      }
     },
     {
       "_id": "GQ656cfZYrH361kV",
@@ -5352,7 +5974,6 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -5370,15 +5991,19 @@
         },
         "type": {
           "value": "class",
-          "subtype": "",
-          "baseItem": ""
+          "subtype": ""
         },
         "requirements": "Cleric 1",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "sort": 0,
       "flags": {
@@ -5397,8 +6022,7 @@
         "createdTime": 1661787234439,
         "modifiedTime": 1691519023058,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.GQ656cfZYrH361kV"
+      }
     },
     {
       "_id": "nc5IaPb64YH0AT8L",
@@ -5456,7 +6080,6 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -5474,15 +6097,19 @@
         },
         "type": {
           "value": "class",
-          "subtype": "",
-          "baseItem": ""
+          "subtype": ""
         },
         "requirements": "Life Domain 1",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "flags": {
         "dnd5e": {
@@ -5519,8 +6146,7 @@
           "tint": null,
           "name": "Heavy Armor Proficiency",
           "description": "",
-          "statuses": [],
-          "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.nc5IaPb64YH0AT8L.Dk95lqbXXCUlefZW"
+          "statuses": []
         }
       ],
       "folder": null,
@@ -5532,8 +6158,7 @@
         "createdTime": 1661787234335,
         "modifiedTime": 1691519023059,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.nc5IaPb64YH0AT8L"
+      }
     },
     {
       "_id": "A7qWZHa1wRp3NRgK",
@@ -5591,7 +6216,6 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -5609,15 +6233,19 @@
         },
         "type": {
           "value": "class",
-          "subtype": "",
-          "baseItem": ""
+          "subtype": ""
         },
         "requirements": "Life Domain 1",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "flags": {
         "dnd5e": {
@@ -5636,8 +6264,7 @@
         "createdTime": 1661787234412,
         "modifiedTime": 1691519023060,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.A7qWZHa1wRp3NRgK"
+      }
     },
     {
       "_id": "syaK4jD01I8U6EAL",
@@ -5668,16 +6295,36 @@
               "allowDrops": false,
               "type": "feat",
               "pool": [
-                "Compendium.dnd5e.races.NnSZlrsHCFeH3cCq",
-                "Compendium.dnd5e.races.KVgvW5yhKcmQUanz",
-                "Compendium.dnd5e.races.JrUcwLR2aQC09iUM",
-                "Compendium.dnd5e.races.pJzMSk9qYywYy65w",
-                "Compendium.dnd5e.races.bFpLM0N3uTeHLdzu",
-                "Compendium.dnd5e.races.YPQQBZAuRiSwuBfh",
-                "Compendium.dnd5e.races.lXIxndsBaQglHBtO",
-                "Compendium.dnd5e.races.kB61JPKQrDBbSNU7",
-                "Compendium.dnd5e.races.pAYTdRGftNr8AitK",
-                "Compendium.dnd5e.races.KL7wx9Q8XNJQir0k"
+                {
+                  "uuid": "Compendium.dnd5e.races.NnSZlrsHCFeH3cCq"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.KVgvW5yhKcmQUanz"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.JrUcwLR2aQC09iUM"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.pJzMSk9qYywYy65w"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.bFpLM0N3uTeHLdzu"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.YPQQBZAuRiSwuBfh"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.lXIxndsBaQglHBtO"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.kB61JPKQrDBbSNU7"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.pAYTdRGftNr8AitK"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.KL7wx9Q8XNJQir0k"
+                }
               ],
               "spell": {
                 "ability": "",
@@ -5739,19 +6386,23 @@
               "scale": {
                 "0": {
                   "number": 2,
-                  "faces": 6
+                  "faces": 6,
+                  "modifiers": []
                 },
                 "6": {
                   "number": 3,
-                  "faces": 6
+                  "faces": 6,
+                  "modifiers": []
                 },
                 "11": {
                   "number": 4,
-                  "faces": 6
+                  "faces": 6,
+                  "modifiers": []
                 },
                 "16": {
                   "number": 5,
-                  "faces": 6
+                  "faces": 6,
+                  "modifiers": []
                 }
               }
             },
@@ -5866,8 +6517,7 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "sort": 0,
-      "folder": null,
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.syaK4jD01I8U6EAL"
+      "folder": null
     },
     {
       "_id": "Ww5s1slhUia11ZqH",
@@ -5925,7 +6575,6 @@
         },
         "ability": "con",
         "actionType": "save",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -5948,15 +6597,19 @@
         },
         "type": {
           "value": "race",
-          "subtype": "",
-          "baseItem": ""
+          "subtype": ""
         },
         "requirements": "White Dragonborn",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "flags": {
         "dnd5e": {
@@ -5975,24 +6628,32 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "sort": 0,
-      "folder": null,
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.Ww5s1slhUia11ZqH"
+      "folder": null
     }
   ],
   "effects": [],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
+  "flags": {
+    "core": {},
+    "midi-qol": {
+      "concentration-damage": 0
+    },
+    "dnd5e": {
+      "showTokenPortrait": false
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "11.315",
+      "systemVersion": "3.2.0"
+    }
   },
-  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232189,
-    "modifiedTime": 1706819052251,
-    "lastModifiedBy": "dnd5ebuilder0000"
-  },
-  "_key": "!actors!kfzBL0q1Y7LgGs2x"
+    "modifiedTime": 1711718637265,
+    "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+  }
 }

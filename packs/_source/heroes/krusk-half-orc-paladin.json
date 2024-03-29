@@ -77,7 +77,12 @@
       },
       "init": {
         "ability": "",
-        "bonus": "0"
+        "bonus": "0",
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
+        }
       },
       "movement": {
         "burrow": null,
@@ -102,14 +107,32 @@
       "spellcasting": "cha",
       "death": {
         "success": 0,
-        "failure": 0
+        "failure": 0,
+        "ability": "",
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
+        }
       },
       "exhaustion": 0,
-      "inspiration": false
+      "inspiration": false,
+      "concentration": {
+        "ability": "",
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
+        },
+        "bonuses": {
+          "save": ""
+        },
+        "limit": 1
+      }
     },
     "details": {
       "biography": {
-        "value": "<p>Roaming the land brigning justice to all, Krusk has just one goal: the destruction of evil wherever it lies.</p>",
+        "value": "<p>Roaming the land brigning justice to all, Krusk has just one goal: the destruction of evil wherever it lies.</p><p>\n        <em>\n          Token artwork by\n          <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.\n        </em>      \n      </p><p>\n        <em>\n          Token artwork by\n          <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.\n        </em>      \n      </p>",
         "public": ""
       },
       "alignment": "Lawful Good",
@@ -196,6 +219,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "ani": {
@@ -204,6 +232,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "arc": {
@@ -212,6 +245,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "ath": {
@@ -220,6 +258,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "dec": {
@@ -228,6 +271,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "his": {
@@ -236,6 +284,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "ins": {
@@ -244,6 +297,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "itm": {
@@ -252,6 +310,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "inv": {
@@ -260,6 +323,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "med": {
@@ -268,6 +336,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "nat": {
@@ -276,6 +349,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "prc": {
@@ -284,6 +362,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "prf": {
@@ -292,6 +375,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "per": {
@@ -300,6 +388,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "rel": {
@@ -308,6 +401,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "slt": {
@@ -316,6 +414,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "ste": {
@@ -324,6 +427,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       },
       "sur": {
@@ -332,6 +440,11 @@
         "bonuses": {
           "check": "",
           "passive": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       }
     },
@@ -341,6 +454,11 @@
         "ability": "int",
         "bonuses": {
           "check": ""
+        },
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
         }
       }
     },
@@ -490,7 +608,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": null,
+      "src": "systems/dnd5e/tokens/heroes/PaladinHammer.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -577,7 +695,6 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -595,7 +712,8 @@
         },
         "armor": {
           "value": null,
-          "dex": null
+          "dex": null,
+          "magicalBonus": null
         },
         "hp": {
           "value": 0,
@@ -617,7 +735,12 @@
           "baseItem": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "sort": 0,
       "flags": {},
@@ -634,8 +757,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.mmNOUJeTSbhakKbO"
+      }
     },
     {
       "_id": "wKzMNfJSgCUaqpHG",
@@ -700,7 +822,6 @@
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -741,7 +862,13 @@
           "value": "simpleM",
           "baseItem": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {},
@@ -758,8 +885,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640500,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.wKzMNfJSgCUaqpHG"
+      }
     },
     {
       "_id": "PzYFkgoa8KpZwUWe",
@@ -824,7 +950,6 @@
         },
         "ability": "",
         "actionType": "rwak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -865,7 +990,13 @@
           "value": "simpleR",
           "baseItem": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {},
@@ -882,8 +1013,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640507,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.PzYFkgoa8KpZwUWe"
+      }
     },
     {
       "_id": "REOAERyAiCBpCA7V",
@@ -949,7 +1079,6 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -973,7 +1102,13 @@
           "value": "ammo",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -994,8 +1129,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640514,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.REOAERyAiCBpCA7V"
+      }
     },
     {
       "_id": "h9ta6MMHygQtSvhd",
@@ -1045,8 +1179,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.h9ta6MMHygQtSvhd"
+      }
     },
     {
       "_id": "7GbdWRRe8GyKGVYk",
@@ -1111,7 +1244,6 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1129,7 +1261,8 @@
         },
         "armor": {
           "value": 16,
-          "dex": 0
+          "dex": 0,
+          "magicalBonus": null
         },
         "hp": {
           "value": 0,
@@ -1153,7 +1286,12 @@
           "value": "heavy",
           "baseItem": "chainmail"
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "sort": 0,
       "flags": {
@@ -1174,8 +1312,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.7GbdWRRe8GyKGVYk"
+      }
     },
     {
       "_id": "jAp8oEZymuFqMEME",
@@ -1240,7 +1377,6 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1258,7 +1394,8 @@
         },
         "armor": {
           "value": 2,
-          "dex": null
+          "dex": null,
+          "magicalBonus": null
         },
         "hp": {
           "value": 0,
@@ -1280,7 +1417,12 @@
           "baseItem": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "sort": 0,
       "flags": {
@@ -1301,8 +1443,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.jAp8oEZymuFqMEME"
+      }
     },
     {
       "_id": "JVygpNYgNviQlQDL",
@@ -1367,7 +1508,6 @@
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1408,7 +1548,13 @@
           "value": "martialM",
           "baseItem": "longsword"
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -1429,8 +1575,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.JVygpNYgNviQlQDL"
+      }
     },
     {
       "_id": "QDJj8gNDG3fapNIZ",
@@ -1496,7 +1641,6 @@
         },
         "ability": "",
         "actionType": "abil",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1520,7 +1664,13 @@
           "value": "trinket",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -1547,8 +1697,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.QDJj8gNDG3fapNIZ"
+      }
     },
     {
       "_id": "E0S0CJRUih4rZUTx",
@@ -1608,8 +1757,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640519,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.E0S0CJRUih4rZUTx"
+      }
     },
     {
       "_id": "XDOhevGrWTwftiiM",
@@ -1669,8 +1817,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.XDOhevGrWTwftiiM"
+      }
     },
     {
       "_id": "eIMlGbeDuYjjEGRH",
@@ -1736,7 +1883,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1760,7 +1906,13 @@
           "value": "food",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -1781,8 +1933,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640526,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.eIMlGbeDuYjjEGRH"
+      }
     },
     {
       "_id": "XeDU0JtxGcNBjXer",
@@ -1845,8 +1996,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.XeDU0JtxGcNBjXer"
+      }
     },
     {
       "_id": "IPeL1J71CbP6s5y5",
@@ -1906,8 +2056,7 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.IPeL1J71CbP6s5y5"
+      }
     },
     {
       "_id": "zk8hxPzKFTDZWVED",
@@ -1961,8 +2110,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640532,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.zk8hxPzKFTDZWVED"
+      }
     },
     {
       "_id": "grGg87yIxTTxoPTA",
@@ -2028,7 +2176,6 @@
         },
         "ability": "str",
         "actionType": "mwak",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2057,7 +2204,13 @@
           "value": "trinket",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -2084,8 +2237,7 @@
         "createdTime": null,
         "modifiedTime": 1670011647529,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.grGg87yIxTTxoPTA"
+      }
     },
     {
       "_id": "WuNY7UdTCjUEpGlU",
@@ -2151,7 +2303,6 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2175,7 +2326,13 @@
           "value": "food",
           "subtype": ""
         },
-        "container": null
+        "container": null,
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null,
+        "magicalBonus": null
       },
       "sort": 0,
       "flags": {
@@ -2196,8 +2353,7 @@
         "createdTime": null,
         "modifiedTime": 1670011640583,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.WuNY7UdTCjUEpGlU"
+      }
     },
     {
       "name": "Local Champion",
@@ -2213,7 +2369,8 @@
           "page": "",
           "license": "CC-BY-4.0"
         },
-        "advancement": []
+        "advancement": [],
+        "startingEquipment": []
       },
       "img": "icons/environment/people/infantry-armored.webp",
       "effects": [],
@@ -2231,8 +2388,7 @@
         "modifiedTime": 1673040912446,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
-      "_id": "gfQ9BWSZtm6WJyZr",
-      "_key": "!actors.items!Dh1AA6w104V17V6w.gfQ9BWSZtm6WJyZr"
+      "_id": "gfQ9BWSZtm6WJyZr"
     },
     {
       "_id": "xogb503g0jZcBEyb",
@@ -2269,8 +2425,12 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.E8ozg8avUVOX9N7u",
-                "Compendium.dnd5e.classfeatures.OdrvL3afwLOPeuYZ"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.E8ozg8avUVOX9N7u"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.OdrvL3afwLOPeuYZ"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2297,9 +2457,15 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.Ho7dVxBlOYFlfBHk",
-                "Compendium.dnd5e.classfeatures.ihoQHsmVZlyDbPhX",
-                "Compendium.dnd5e.classfeatures.ySMPQ6zNSlvkrl2f"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.Ho7dVxBlOYFlfBHk"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.ihoQHsmVZlyDbPhX"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.ySMPQ6zNSlvkrl2f"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2321,9 +2487,15 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.dY9yrqkyEDuF0CG2",
-                "Compendium.dnd5e.classfeatures.olAqNsUTIef9x8xC",
-                "Compendium.dnd5e.classfeatures.8M7uOPhbTxoxxJSo"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.dY9yrqkyEDuF0CG2"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.olAqNsUTIef9x8xC"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.8M7uOPhbTxoxxJSo"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2345,7 +2517,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2367,7 +2541,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.carGDhkIdoduTC0I"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.carGDhkIdoduTC0I"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2389,7 +2565,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.nahSkBO6LH4HkpaT"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.nahSkBO6LH4HkpaT"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2411,7 +2589,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.FAk41RPCTcvCk6KI"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.FAk41RPCTcvCk6KI"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2433,7 +2613,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.U7BIPVPsptBmwsnV"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.U7BIPVPsptBmwsnV"
+                }
               ],
               "optional": false,
               "spell": {
@@ -2461,10 +2643,18 @@
               "allowDrops": true,
               "type": "feat",
               "pool": [
-                "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB",
-                "Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4",
-                "Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm",
-                "Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O"
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O"
+                }
               ],
               "spell": {
                 "ability": "",
@@ -2715,7 +2905,9 @@
             "title": "",
             "_id": "qd6RxOGs50LR5Lea",
             "classRestriction": "secondary",
-            "value": {}
+            "value": {
+              "chosen": []
+            }
           },
           {
             "_id": "LYiiMtwvVVXZs8yE",
@@ -2731,13 +2923,18 @@
             },
             "level": 3,
             "title": "Divine Health",
-            "value": {}
+            "value": {
+              "chosen": []
+            }
           }
         ],
         "spellcasting": {
           "progression": "half",
-          "ability": "cha"
-        }
+          "ability": "cha",
+          "preparedSpellsLimitFormula": "ceil(@classes.paladin.levels/2) + max(@abilities.cha.mod,0)"
+        },
+        "startingEquipment": [],
+        "wealth": ""
       },
       "effects": [],
       "folder": null,
@@ -2752,13 +2949,12 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.4.0",
-        "coreVersion": "10.303",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661787234280,
-        "modifiedTime": 1699992948012,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.xogb503g0jZcBEyb"
+        "modifiedTime": 1711719346097,
+        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+      }
     },
     {
       "_id": "BudM4uxDSnRehek7",
@@ -2816,7 +3012,6 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2834,15 +3029,19 @@
         },
         "type": {
           "value": "class",
-          "subtype": "",
-          "baseItem": ""
+          "subtype": ""
         },
         "requirements": "Paladin 1",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "flags": {
         "dnd5e": {
@@ -2861,8 +3060,7 @@
         "createdTime": 1661787234352,
         "modifiedTime": 1699987355946,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.BudM4uxDSnRehek7"
+      }
     },
     {
       "_id": "2zb2FwOFtktH9JHF",
@@ -2920,7 +3118,6 @@
         },
         "ability": "",
         "actionType": "heal",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2938,15 +3135,19 @@
         },
         "type": {
           "value": "class",
-          "subtype": "",
-          "baseItem": ""
+          "subtype": ""
         },
         "requirements": "Paladin 1",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "flags": {
         "dnd5e": {
@@ -2965,8 +3166,7 @@
         "createdTime": 1661787234371,
         "modifiedTime": 1699987355947,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.2zb2FwOFtktH9JHF"
+      }
     },
     {
       "_id": "PIvfnfQVQ98MdCmQ",
@@ -2991,8 +3191,12 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.races.97c8i9Z28thvZuA8",
-                "Compendium.dnd5e.races.0kUsT4sMUOr5FcoX"
+                {
+                  "uuid": "Compendium.dnd5e.races.97c8i9Z28thvZuA8"
+                },
+                {
+                  "uuid": "Compendium.dnd5e.races.0kUsT4sMUOr5FcoX"
+                }
               ],
               "optional": false,
               "spell": {
@@ -3137,8 +3341,7 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "sort": 0,
-      "folder": null,
-      "_key": "!actors.items!Dh1AA6w104V17V6w.PIvfnfQVQ98MdCmQ"
+      "folder": null
     },
     {
       "_id": "qLsxqVkevc8LivRC",
@@ -3196,7 +3399,6 @@
         },
         "ability": "",
         "actionType": "heal",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3219,15 +3421,19 @@
         },
         "type": {
           "value": "race",
-          "subtype": "",
-          "baseItem": ""
+          "subtype": ""
         },
         "requirements": "Half-Orc",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "flags": {
         "dnd5e": {
@@ -3246,8 +3452,7 @@
         "createdTime": 1661787234463,
         "modifiedTime": 1699987355942,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.qLsxqVkevc8LivRC"
+      }
     },
     {
       "_id": "3EbsalzpbmnJxgU2",
@@ -3305,7 +3510,6 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3323,15 +3527,19 @@
         },
         "type": {
           "value": "race",
-          "subtype": "",
-          "baseItem": ""
+          "subtype": ""
         },
         "requirements": "Half-Orc",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": []
+        "properties": [],
+        "attack": {
+          "bonus": "",
+          "flat": false
+        },
+        "summons": null
       },
       "flags": {
         "dnd5e": {
@@ -3350,30 +3558,30 @@
         "createdTime": 1661787234460,
         "modifiedTime": 1699987177874,
         "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!Dh1AA6w104V17V6w.3EbsalzpbmnJxgU2"
+      }
     }
   ],
   "effects": [],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
   "flags": {
     "dnd5e": {
       "savageAttacks": true,
       "showTokenPortrait": false
+    },
+    "core": {},
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "11.315",
+      "systemVersion": "3.2.0"
     }
   },
-  "_id": "Dh1AA6w104V17V6w",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.2",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232161,
-    "modifiedTime": 1707505942110,
-    "lastModifiedBy": "dnd5ebuilder0000"
-  },
-  "_key": "!actors!Dh1AA6w104V17V6w"
+    "modifiedTime": 1711719316743,
+    "lastModifiedBy": "MgiMsJAmPYWx7tAf"
+  }
 }
