@@ -39,28 +39,28 @@
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "dnd5e.item-description"}}
+        {{> "dnd5e.item-description" }}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{localize "DND5E.ItemFeatureDetails"}}</h3>
+            <h3 class="form-header">{{ localize "DND5E.ItemFeatureDetails" }}</h3>
 
             {{!-- Feature Type --}}
             <div class="form-group">
-                <label>{{localize "DND5E.ItemFeatureType"}}</label>
+                <label>{{ localize "DND5E.ItemFeatureType" }}</label>
                 <select name="system.type.value">
-                    {{selectOptions config.featureTypes selected=system.type.value blank="" labelAttr="label"}}
+                    {{ selectOptions config.featureTypes selected=system.type.value blank="" labelAttr="label" }}
                 </select>
             </div>
 
             {{#if itemSubtypes}}
             <div class="form-group">
                 <label>
-                    {{localize "DND5E.ItemFeatureSubtype"
-                               category=(lookup (lookup config.featureTypes system.type.value) "label")}}
+                    {{ localize "DND5E.ItemFeatureSubtype"
+                                category=(lookup (lookup config.featureTypes system.type.value) "label") }}
                 </label>
                 <select name="system.type.subtype">
-                    {{selectOptions itemSubtypes selected=system.type.subtype blank=""}}
+                    {{ selectOptions itemSubtypes selected=system.type.subtype blank="" }}
                 </select>
             </div>
             {{/if}}
@@ -70,9 +70,17 @@
                 <label>{{ localize "DND5E.ItemFeatureProperties" }}</label>
                 {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                    <input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}> {{ label }}
                 </label>
                 {{/each}}
+            </div>
+
+            <h3 class="form-header">{{ localize "DND5E.Prerequisites.Header" }}</h3>
+
+            <div class="form-group">
+                <label>{{ localize "DND5E.Prerequisites.FIELDS.prerequisites.level.label" }}</label>
+                {{ numberInput system.prerequisites.level name="system.prerequisites.level" step=1 }}
+                <p class="hint">{{ localize "DND5E.Prerequisites.FIELDS.prerequisites.level.hint" }}</p>
             </div>
 
             <h3 class="form-header">{{ localize "DND5E.FeatureUsage" }}</h3>
