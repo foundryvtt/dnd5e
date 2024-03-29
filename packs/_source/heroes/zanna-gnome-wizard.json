@@ -77,12 +77,7 @@
       },
       "init": {
         "ability": "",
-        "bonus": "0",
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
-        }
+        "bonus": "0"
       },
       "movement": {
         "burrow": null,
@@ -107,32 +102,14 @@
       "spellcasting": "int",
       "death": {
         "success": 0,
-        "failure": 0,
-        "ability": "",
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
-        }
+        "failure": 0
       },
       "exhaustion": 0,
-      "inspiration": false,
-      "concentration": {
-        "ability": "",
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
-        },
-        "bonuses": {
-          "save": ""
-        },
-        "limit": 1
-      }
+      "inspiration": false
     },
     "details": {
       "biography": {
-        "value": "<p>Always interested in tinkering, Zanna set out for adventure in order to find more spells for her spellbook, and perhaps one day create some of her own.</p><p>\n        <em>\n          Token artwork by\n          <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.\n        </em>      \n      </p><p>\n        <em>\n          Token artwork by\n          <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.\n        </em>      \n      </p>",
+        "value": "<p>Always interested in tinkering, Zanna set out for adventure in order to find more spells for her spellbook, and perhaps one day create some of her own.</p>",
         "public": ""
       },
       "alignment": "Chaotic Good",
@@ -211,11 +188,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "ani": {
@@ -224,11 +196,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "arc": {
@@ -237,11 +204,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "ath": {
@@ -250,11 +212,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "dec": {
@@ -263,11 +220,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "his": {
@@ -276,11 +228,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "ins": {
@@ -289,11 +236,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "itm": {
@@ -302,11 +244,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "inv": {
@@ -315,11 +252,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "med": {
@@ -328,11 +260,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "nat": {
@@ -341,11 +268,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "prc": {
@@ -354,11 +276,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "prf": {
@@ -367,11 +284,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "per": {
@@ -380,11 +292,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "rel": {
@@ -393,11 +300,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "slt": {
@@ -406,11 +308,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "ste": {
@@ -419,11 +316,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "sur": {
@@ -432,11 +324,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       }
     },
@@ -535,8 +422,7 @@
         "lr": false,
         "label": ""
       }
-    },
-    "favorites": []
+    }
   },
   "prototypeToken": {
     "flags": {},
@@ -581,7 +467,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/heroes/WizardTome.webp",
+      "src": null,
       "tint": null,
       "scaleX": 0.7,
       "scaleY": 0.7,
@@ -669,6 +555,7 @@
         },
         "ability": null,
         "actionType": "util",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -692,13 +579,7 @@
           "value": "ammo",
           "subtype": ""
         },
-        "container": null,
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "magicalBonus": null
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -719,7 +600,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ZTaGDK3lSy8a5T1l"
     },
     {
       "_id": "EPiw1vnn3pDOdO1m",
@@ -784,6 +666,7 @@
         },
         "ability": "",
         "actionType": "mwak",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -824,13 +707,7 @@
           "value": "simpleM",
           "baseItem": "quarterstaff"
         },
-        "container": null,
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "magicalBonus": null
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -851,7 +728,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640403,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.EPiw1vnn3pDOdO1m"
     },
     {
       "_id": "aJZGeP8AiFrEwgWX",
@@ -916,6 +794,7 @@
         },
         "ability": null,
         "actionType": "",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -933,8 +812,7 @@
         },
         "armor": {
           "value": null,
-          "dex": null,
-          "magicalBonus": null
+          "dex": null
         },
         "hp": {
           "value": 0,
@@ -956,12 +834,7 @@
           "baseItem": ""
         },
         "container": null,
-        "properties": [],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -982,7 +855,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.aJZGeP8AiFrEwgWX"
     },
     {
       "_id": "wIPWkO6CHUrTw13Y",
@@ -1045,7 +919,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.wIPWkO6CHUrTw13Y"
     },
     {
       "_id": "4rrQYmSFohtbkBwH",
@@ -1108,7 +983,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640411,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.4rrQYmSFohtbkBwH"
     },
     {
       "_id": "eYEelIdlbOvIRDkK",
@@ -1168,7 +1044,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.eYEelIdlbOvIRDkK"
     },
     {
       "_id": "Ps3a8zDFtNoUfJDZ",
@@ -1234,6 +1111,7 @@
         },
         "ability": "",
         "actionType": "abil",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1257,13 +1135,7 @@
           "value": "trinket",
           "subtype": ""
         },
-        "container": null,
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "magicalBonus": null
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1290,7 +1162,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.Ps3a8zDFtNoUfJDZ"
     },
     {
       "_id": "rsSr1FRdaAKl6fpc",
@@ -1350,7 +1223,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640426,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.rsSr1FRdaAKl6fpc"
     },
     {
       "_id": "FQpJpWjX9bsPZvDo",
@@ -1416,6 +1290,7 @@
         },
         "ability": "",
         "actionType": "util",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1439,13 +1314,7 @@
           "value": "food",
           "subtype": ""
         },
-        "container": null,
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "magicalBonus": null
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1466,7 +1335,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640437,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.FQpJpWjX9bsPZvDo"
     },
     {
       "_id": "zthIyDRa8OLDoBId",
@@ -1520,7 +1390,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640445,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.zthIyDRa8OLDoBId"
     },
     {
       "_id": "rTQEtliS3CqxnBPg",
@@ -1586,6 +1457,7 @@
         },
         "ability": "str",
         "actionType": "mwak",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1614,13 +1486,7 @@
           "value": "trinket",
           "subtype": ""
         },
-        "container": null,
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "magicalBonus": null
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1647,7 +1513,8 @@
         "createdTime": null,
         "modifiedTime": 1670011647511,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.rTQEtliS3CqxnBPg"
     },
     {
       "_id": "xxVyo2I5EYUi3cla",
@@ -1713,6 +1580,7 @@
         },
         "ability": "",
         "actionType": "util",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1736,13 +1604,7 @@
           "value": "food",
           "subtype": ""
         },
-        "container": null,
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "magicalBonus": null
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1763,7 +1625,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640466,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.xxVyo2I5EYUi3cla"
     },
     {
       "_id": "gIJ6Vm16khwtSS0q",
@@ -1817,7 +1680,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.gIJ6Vm16khwtSS0q"
     },
     {
       "_id": "EuWal2U6WQwbDmAL",
@@ -1871,7 +1735,8 @@
         "createdTime": null,
         "modifiedTime": 1670011647522,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.EuWal2U6WQwbDmAL"
     },
     {
       "_id": "MNtWDpVTu3jHk8be",
@@ -1925,7 +1790,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640482,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.MNtWDpVTu3jHk8be"
     },
     {
       "_id": "i3YAIUu7sNkJUPTU",
@@ -1979,7 +1845,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.i3YAIUu7sNkJUPTU"
     },
     {
       "_id": "23NorZLPXATDYptB",
@@ -2033,7 +1900,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.23NorZLPXATDYptB"
     },
     {
       "_id": "rjlTBnXJGxoodrM3",
@@ -2087,7 +1955,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640492,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.rjlTBnXJGxoodrM3"
     },
     {
       "_id": "5hEbhdZm1ozQ3B2g",
@@ -2142,6 +2011,7 @@
         },
         "ability": "",
         "actionType": "",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2159,19 +2029,15 @@
         },
         "type": {
           "value": "",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Rock Gnome",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": [],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -2192,7 +2058,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.5hEbhdZm1ozQ3B2g"
     },
     {
       "_id": "EOmsUcFQJTfG2oio",
@@ -2250,6 +2117,7 @@
         },
         "ability": "",
         "actionType": "rsak",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2288,40 +2156,13 @@
         },
         "properties": [
           "vocal",
-          "somatic",
-          "mgc"
-        ],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "linkedClass": "wizard"
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.EOmsUcFQJTfG2oio"
-        },
-        "midi-qol": {
-          "fumbleThreshold": null,
-          "rollAttackPerTarget": "default",
-          "removeAttackDamageButtons": "default",
-          "itemCondition": "",
-          "effectCondition": ""
-        },
-        "midiProperties": {
-          "confirmTargets": "default",
-          "autoFailFriendly": false,
-          "autoSaveFriendly": false,
-          "critOther": false,
-          "offHandWeapon": false,
-          "magicdam": false,
-          "magiceffect": false,
-          "concentration": false,
-          "noConcentrationCheck": false,
-          "toggleEffect": false,
-          "ignoreTotalCover": false
         }
       },
       "img": "icons/magic/fire/projectile-fireball-smoke-orange.webp",
@@ -2329,12 +2170,13 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
         "createdTime": 1661603486020,
-        "modifiedTime": 1711719700655,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1661603486020,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.EOmsUcFQJTfG2oio"
     },
     {
       "_id": "Bnn9Nzajixvow9xi",
@@ -2392,6 +2234,7 @@
         },
         "ability": "",
         "actionType": "save",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2425,38 +2268,13 @@
         },
         "properties": [
           "vocal",
-          "material",
-          "mgc"
-        ],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "linkedClass": "wizard"
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
-        },
-        "midiProperties": {
-          "confirmTargets": "default",
-          "autoFailFriendly": false,
-          "autoSaveFriendly": false,
-          "critOther": false,
-          "offHandWeapon": false,
-          "magicdam": false,
-          "magiceffect": false,
-          "concentration": false,
-          "noConcentrationCheck": false,
-          "toggleEffect": false,
-          "ignoreTotalCover": false
-        },
-        "midi-qol": {
-          "rollAttackPerTarget": "default",
-          "itemCondition": "",
-          "effectCondition": ""
         }
       },
       "img": "icons/magic/light/explosion-star-small-blue-yellow.webp",
@@ -2464,12 +2282,13 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
         "createdTime": 1661603486021,
-        "modifiedTime": 1711719707338,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1661603486021,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.Bnn9Nzajixvow9xi"
     },
     {
       "_id": "Utk1OQRwYkMkFRD3",
@@ -2527,6 +2346,7 @@
         },
         "ability": "",
         "actionType": "util",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2560,38 +2380,13 @@
         },
         "properties": [
           "vocal",
-          "somatic",
-          "mgc"
-        ],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "linkedClass": "wizard"
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
-        },
-        "midiProperties": {
-          "confirmTargets": "default",
-          "autoFailFriendly": false,
-          "autoSaveFriendly": false,
-          "critOther": false,
-          "offHandWeapon": false,
-          "magicdam": false,
-          "magiceffect": false,
-          "concentration": false,
-          "noConcentrationCheck": false,
-          "toggleEffect": false,
-          "ignoreTotalCover": false
-        },
-        "midi-qol": {
-          "rollAttackPerTarget": "default",
-          "itemCondition": "",
-          "effectCondition": ""
         }
       },
       "img": "icons/magic/water/water-hand.webp",
@@ -2599,12 +2394,13 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
         "createdTime": 1661603486021,
-        "modifiedTime": 1711719714452,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1661603486021,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.Utk1OQRwYkMkFRD3"
     },
     {
       "_id": "7p9IuWrSWFgfyQo2",
@@ -2662,6 +2458,7 @@
         },
         "ability": "",
         "actionType": "util",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2697,41 +2494,13 @@
           "vocal",
           "somatic",
           "material",
-          "ritual",
-          "mgc"
-        ],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "linkedClass": "wizard"
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.7p9IuWrSWFgfyQo2"
-        },
-        "midi-qol": {
-          "AoETargetType": "any",
-          "AoETargetTypeIncludeSelf": true,
-          "autoTarget": "default",
-          "rollAttackPerTarget": "default",
-          "itemCondition": "",
-          "effectCondition": ""
-        },
-        "midiProperties": {
-          "confirmTargets": "default",
-          "autoFailFriendly": false,
-          "autoSaveFriendly": false,
-          "critOther": false,
-          "offHandWeapon": false,
-          "magicdam": false,
-          "magiceffect": false,
-          "concentration": false,
-          "noConcentrationCheck": false,
-          "toggleEffect": false,
-          "ignoreTotalCover": false
         }
       },
       "img": "icons/magic/symbols/runes-triangle-orange-purple.webp",
@@ -2739,12 +2508,13 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
         "createdTime": 1661603486022,
-        "modifiedTime": 1711719721212,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1661603486022,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.7p9IuWrSWFgfyQo2"
     },
     {
       "_id": "z1mx84ONwkXKUZd7",
@@ -2800,6 +2570,7 @@
         },
         "ability": "",
         "actionType": "util",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2825,7 +2596,7 @@
         },
         "preparation": {
           "mode": "prepared",
-          "prepared": true
+          "prepared": false
         },
         "scaling": {
           "mode": "none",
@@ -2833,15 +2604,8 @@
         },
         "properties": [
           "vocal",
-          "somatic",
-          "mgc"
-        ],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "linkedClass": "wizard"
+          "somatic"
+        ]
       },
       "effects": [
         {
@@ -2871,7 +2635,8 @@
           "transfer": false,
           "name": "Shield",
           "description": "",
-          "statuses": []
+          "statuses": [],
+          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva"
         }
       ],
       "folder": null,
@@ -2882,35 +2647,17 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
-        },
-        "midiProperties": {
-          "confirmTargets": "default",
-          "autoFailFriendly": false,
-          "autoSaveFriendly": false,
-          "critOther": false,
-          "offHandWeapon": false,
-          "magicdam": false,
-          "magiceffect": false,
-          "concentration": false,
-          "noConcentrationCheck": false,
-          "toggleEffect": false,
-          "ignoreTotalCover": false
-        },
-        "midi-qol": {
-          "rollAttackPerTarget": "default",
-          "itemCondition": "",
-          "reactionCondition": "",
-          "effectCondition": ""
         }
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
         "createdTime": 1661603486022,
-        "modifiedTime": 1711719771755,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1661603486022,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.z1mx84ONwkXKUZd7"
     },
     {
       "_id": "JGT5bNqu9REL7Fuz",
@@ -2968,6 +2715,7 @@
         },
         "ability": "",
         "actionType": "util",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3003,38 +2751,13 @@
           "vocal",
           "somatic",
           "material",
-          "ritual",
-          "mgc"
-        ],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "linkedClass": "wizard"
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.JGT5bNqu9REL7Fuz"
-        },
-        "midiProperties": {
-          "confirmTargets": "default",
-          "autoFailFriendly": false,
-          "autoSaveFriendly": false,
-          "critOther": false,
-          "offHandWeapon": false,
-          "magicdam": false,
-          "magiceffect": false,
-          "concentration": false,
-          "noConcentrationCheck": false,
-          "toggleEffect": false,
-          "ignoreTotalCover": false
-        },
-        "midi-qol": {
-          "rollAttackPerTarget": "default",
-          "itemCondition": "",
-          "effectCondition": ""
         }
       },
       "img": "icons/magic/nature/wolf-paw-glow-purple-teal.webp",
@@ -3042,12 +2765,13 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
         "createdTime": 1661603486025,
-        "modifiedTime": 1711719726872,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1661603486025,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.JGT5bNqu9REL7Fuz"
     },
     {
       "_id": "CKZTpZlxj7hjjo2H",
@@ -3103,6 +2827,7 @@
         },
         "ability": "",
         "actionType": "util",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3128,7 +2853,7 @@
         },
         "preparation": {
           "mode": "prepared",
-          "prepared": true
+          "prepared": false
         },
         "scaling": {
           "mode": "none",
@@ -3137,15 +2862,8 @@
         "properties": [
           "vocal",
           "somatic",
-          "material",
-          "mgc"
-        ],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "linkedClass": "wizard"
+          "material"
+        ]
       },
       "effects": [
         {
@@ -3175,7 +2893,8 @@
           "tint": null,
           "name": "Mage Armor",
           "description": "",
-          "statuses": []
+          "statuses": [],
+          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny"
         }
       ],
       "folder": null,
@@ -3186,34 +2905,17 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H"
-        },
-        "midiProperties": {
-          "confirmTargets": "default",
-          "autoFailFriendly": false,
-          "autoSaveFriendly": false,
-          "critOther": false,
-          "offHandWeapon": false,
-          "magicdam": false,
-          "magiceffect": false,
-          "concentration": false,
-          "noConcentrationCheck": false,
-          "toggleEffect": false,
-          "ignoreTotalCover": false
-        },
-        "midi-qol": {
-          "rollAttackPerTarget": "default",
-          "itemCondition": "",
-          "effectCondition": ""
         }
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
         "createdTime": 1661603486026,
-        "modifiedTime": 1711719764524,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1661603486026,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.CKZTpZlxj7hjjo2H"
     },
     {
       "_id": "KhwiSi9fwVfUPtku",
@@ -3269,6 +2971,7 @@
         },
         "ability": "",
         "actionType": "other",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3299,7 +3002,7 @@
         },
         "preparation": {
           "mode": "prepared",
-          "prepared": true
+          "prepared": false
         },
         "scaling": {
           "mode": "level",
@@ -3308,15 +3011,8 @@
         "properties": [
           "vocal",
           "somatic",
-          "material",
-          "mgc"
-        ],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "linkedClass": "wizard"
+          "material"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -3327,38 +3023,17 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
-        },
-        "midi-qol": {
-          "AoETargetType": "any",
-          "AoETargetTypeIncludeSelf": true,
-          "autoTarget": "default",
-          "rollAttackPerTarget": "default",
-          "removeAttackDamageButtons": "default",
-          "itemCondition": "",
-          "effectCondition": ""
-        },
-        "midiProperties": {
-          "confirmTargets": "default",
-          "autoFailFriendly": false,
-          "autoSaveFriendly": false,
-          "critOther": false,
-          "offHandWeapon": false,
-          "magicdam": false,
-          "magiceffect": false,
-          "concentration": false,
-          "noConcentrationCheck": false,
-          "toggleEffect": false,
-          "ignoreTotalCover": false
         }
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
         "createdTime": 1661603486027,
-        "modifiedTime": 1711719768843,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1661603486027,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.KhwiSi9fwVfUPtku"
     },
     {
       "_id": "41JIhpDyM9Anm7cs",
@@ -3416,6 +3091,7 @@
         },
         "ability": "",
         "actionType": "other",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3446,7 +3122,7 @@
         },
         "preparation": {
           "mode": "prepared",
-          "prepared": true
+          "prepared": false
         },
         "scaling": {
           "mode": "level",
@@ -3454,39 +3130,13 @@
         },
         "properties": [
           "vocal",
-          "somatic",
-          "mgc"
-        ],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null,
-        "linkedClass": "wizard"
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.41JIhpDyM9Anm7cs"
-        },
-        "midiProperties": {
-          "confirmTargets": "default",
-          "autoFailFriendly": false,
-          "autoSaveFriendly": false,
-          "critOther": false,
-          "offHandWeapon": false,
-          "magicdam": false,
-          "magiceffect": false,
-          "concentration": false,
-          "noConcentrationCheck": false,
-          "toggleEffect": false,
-          "ignoreTotalCover": false
-        },
-        "midi-qol": {
-          "rollAttackPerTarget": "default",
-          "removeAttackDamageButtons": "default",
-          "itemCondition": "",
-          "effectCondition": ""
         }
       },
       "img": "icons/magic/fire/projectile-meteor-salvo-light-pink.webp",
@@ -3494,12 +3144,13 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
         "createdTime": 1661603486027,
-        "modifiedTime": 1711719766261,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1661603486027,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.41JIhpDyM9Anm7cs"
     },
     {
       "name": "Scholar",
@@ -3515,8 +3166,7 @@
           "page": "",
           "license": "CC-BY-4.0"
         },
-        "advancement": [],
-        "startingEquipment": []
+        "advancement": []
       },
       "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
       "effects": [],
@@ -3534,7 +3184,8 @@
         "modifiedTime": 1673040326437,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
-      "_id": "Nt4QsuSYvhIwSoO5"
+      "_id": "Nt4QsuSYvhIwSoO5",
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.Nt4QsuSYvhIwSoO5"
     },
     {
       "_id": "N4bhi6usK8wuNEnh",
@@ -3571,12 +3222,8 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                {
-                  "uuid": "Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL"
-                },
-                {
-                  "uuid": "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9"
-                }
+                "Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL",
+                "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9"
               ],
               "optional": false,
               "spell": {
@@ -3603,9 +3250,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                {
-                  "uuid": "Compendium.dnd5e.classfeatures.AEWr9EMxy5gj4ZFT"
-                }
+                "Compendium.dnd5e.classfeatures.AEWr9EMxy5gj4ZFT"
               ],
               "optional": false,
               "spell": {
@@ -3627,9 +3272,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                {
-                  "uuid": "Compendium.dnd5e.classfeatures.JfFfHTeIszx1hNRx"
-                }
+                "Compendium.dnd5e.classfeatures.JfFfHTeIszx1hNRx"
               ],
               "optional": false,
               "spell": {
@@ -3651,9 +3294,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                {
-                  "uuid": "Compendium.dnd5e.classfeatures.nUrZDi6QN1YjwAr6"
-                }
+                "Compendium.dnd5e.classfeatures.nUrZDi6QN1YjwAr6"
               ],
               "optional": false,
               "spell": {
@@ -3921,11 +3562,8 @@
         ],
         "spellcasting": {
           "progression": "full",
-          "ability": "int",
-          "preparedSpellsLimitFormula": "max(@abilities.int.mod,0) + @classes.wizard.levels"
-        },
-        "startingEquipment": [],
-        "wealth": ""
+          "ability": "int"
+        }
       },
       "effects": [],
       "folder": null,
@@ -3940,12 +3578,13 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "11.315",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
         "createdTime": 1661787234283,
-        "modifiedTime": 1711719687402,
-        "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-      }
+        "modifiedTime": 1699993725827,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.N4bhi6usK8wuNEnh"
     },
     {
       "_id": "ZCH7glEObWbjFGHB",
@@ -4003,6 +3642,7 @@
         },
         "ability": null,
         "actionType": "",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4020,19 +3660,15 @@
         },
         "type": {
           "value": "class",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Wizard 1",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": [],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -4051,7 +3687,8 @@
         "createdTime": 1661787234406,
         "modifiedTime": 1699987548856,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ZCH7glEObWbjFGHB"
     },
     {
       "_id": "fnxa7jBxIHkDyZuU",
@@ -4109,6 +3746,7 @@
         },
         "ability": "",
         "actionType": "util",
+        "attackBonus": "",
         "chatFlavor": "The wizard can recover this number worth of spells slots (of 5th-level or lower):",
         "critical": {
           "threshold": null,
@@ -4126,19 +3764,15 @@
         },
         "type": {
           "value": "class",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Wizard 1",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": [],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -4157,7 +3791,8 @@
         "createdTime": 1661787234399,
         "modifiedTime": 1691519218869,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.fnxa7jBxIHkDyZuU"
     },
     {
       "_id": "ur4Pjajcd3IlxKlZ",
@@ -4182,15 +3817,9 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                {
-                  "uuid": "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH"
-                },
-                {
-                  "uuid": "Compendium.dnd5e.races.OQA1sHxKnSJq01dL"
-                },
-                {
-                  "uuid": "Compendium.dnd5e.races.koRPOLtj8XAFMwnW"
-                }
+                "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH",
+                "Compendium.dnd5e.races.OQA1sHxKnSJq01dL",
+                "Compendium.dnd5e.races.koRPOLtj8XAFMwnW"
               ],
               "optional": false,
               "spell": {
@@ -4316,7 +3945,8 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "sort": 0,
-      "folder": null
+      "folder": null,
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ur4Pjajcd3IlxKlZ"
     },
     {
       "_id": "PZFiXV29QKKu02BE",
@@ -4374,6 +4004,7 @@
         },
         "ability": "",
         "actionType": "",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4391,19 +4022,15 @@
         },
         "type": {
           "value": "race",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Gnome",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": [],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -4422,7 +4049,8 @@
         "createdTime": 1661787234464,
         "modifiedTime": 1699987548856,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.PZFiXV29QKKu02BE"
     },
     {
       "_id": "H5IsMCJRETbzQF6T",
@@ -4480,6 +4108,7 @@
         },
         "ability": "",
         "actionType": "",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4497,19 +4126,15 @@
         },
         "type": {
           "value": "race",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Rock Gnome",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": [],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -4528,7 +4153,8 @@
         "createdTime": 1661787234468,
         "modifiedTime": 1699987550173,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.H5IsMCJRETbzQF6T"
     },
     {
       "_id": "ylzIab4YKbPPyvj0",
@@ -4586,6 +4212,7 @@
         },
         "ability": "",
         "actionType": "",
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4603,19 +4230,15 @@
         },
         "type": {
           "value": "race",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Rock Gnome",
         "recharge": {
           "value": null,
           "charged": false
         },
-        "properties": [],
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "summons": null
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -4652,7 +4275,8 @@
           "tint": null,
           "name": "Tinker",
           "description": "",
-          "statuses": []
+          "statuses": [],
+          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.ylzIab4YKbPPyvj0.CkQlNsLyTZGVbnKM"
         }
       ],
       "folder": null,
@@ -4664,26 +4288,25 @@
         "createdTime": 1661787234472,
         "modifiedTime": 1699986898969,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ylzIab4YKbPPyvj0"
     }
   ],
   "effects": [],
   "folder": null,
-  "flags": {
-    "core": {},
-    "exportSource": {
-      "world": "test",
-      "system": "dnd5e",
-      "coreVersion": "11.315",
-      "systemVersion": "3.2.0"
-    }
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
+  "flags": {},
+  "_id": "4Jsv5vYaJ1atUEDV",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
+    "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232155,
-    "modifiedTime": 1711719657877,
-    "lastModifiedBy": "MgiMsJAmPYWx7tAf"
-  }
+    "modifiedTime": 1706819155143,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!actors!4Jsv5vYaJ1atUEDV"
 }
