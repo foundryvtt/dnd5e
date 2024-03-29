@@ -159,6 +159,15 @@ export default class RollConfigurationDialog extends FormApplication {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Rebuild rolls based on an updated config and re-render the dialog.
+   */
+  rebuild() {
+    this._onSubmit(new Event("change"));
+  }
+
+  /* -------------------------------------------- */
   /*  Event Handling                              */
   /* -------------------------------------------- */
 
