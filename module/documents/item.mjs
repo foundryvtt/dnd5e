@@ -1124,7 +1124,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       ?? this.parent?.activeSpellCastingClass;
       return sc?.system?.spellcasting?.ability
         ? this.parent?.system?.abilities?.[sc.system.spellcasting.ability]?.dc
-        :null;
+        : this.parent?.actor?.system?.attributes?.spellcasting?.dc;
 
     }
     return null;
