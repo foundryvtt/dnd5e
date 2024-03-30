@@ -55,28 +55,32 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
     const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
 
-    const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
-      if ( !this.advancement.canImprove(key) ) return obj;
-      const ability = this.advancement.actor.system.abilities[key];
-      const assignment = this.assignments[key] ?? 0;
-      const fixed = this.advancement.configuration.fixed[key] ?? 0;
-      const value = Math.min(ability.value + ((fixed || assignment) ?? 0), ability.max);
-      const max = fixed ? value : Math.min(value + points.available, ability.max);
-      obj[key] = {
-        key, max, value,
-        name: `abilities.${key}`,
-        label: data.label,
-        initial: ability.value,
-        min: fixed ? max : ability.value,
-        delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
-        showDelta: true,
-        isDisabled: !!this.feat,
-        isFixed: !!fixed || (ability.value >= ability.max),
-        canIncrease: (value < max) && (assignment < points.cap) && !fixed && !this.feat,
-        canDecrease: (value > ability.value) && !fixed && !this.feat
-      };
-      return obj;
-    }, {});
+    const abilities = Object.entries(CONFIG.DND5E.abilities)
+      .filter(([key]) => this.advancement.configuration.allowed[key] ?? true)
+      .reduce((obj, [key, data]) => {
+        if ( !this.advancement.canImprove(key) ) return obj;
+        const ability = this.advancement.actor.system.abilities[key];
+        const assignment = this.assignments[key] ?? 0;
+        const fixed = this.advancement.configuration.fixed[key] ?? 0;
+        const allowed = this.advancement.configuration.allowed[key] ?? true;
+        const value = Math.min(ability.value + ((fixed || assignment) ?? 0), ability.max);
+        const max = fixed ? value : Math.min(value + points.available, ability.max);
+        obj[key] = {
+          allowed,
+          key, max, value,
+          name: `abilities.${key}`,
+          label: data.label,
+          initial: ability.value,
+          min: fixed ? max : ability.value,
+          delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
+          showDelta: true,
+          isDisabled: !!this.feat,
+          isFixed: !!fixed || (ability.value >= ability.max),
+          canIncrease: (value < max) && (assignment < points.cap) && !fixed && !this.feat,
+          canDecrease: (value > ability.value) && !fixed && !this.feat
+        };
+        return obj;
+      }, {});
 
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
     return foundry.utils.mergeObject(super.getData(), {
@@ -198,9 +202,13 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
 
-    if ( (item.type !== "feat") || (item.system.type.value !== "feat") ) {
+    if ( (item.type !== "truefeat") ) {
       ui.notifications.error("DND5E.AdvancementAbilityScoreImprovementFeatWarning", {localize: true});
       return null;
+    }
+
+    if (this.onDrop) {
+      this.onDrop(item);
     }
 
     this.feat = item;

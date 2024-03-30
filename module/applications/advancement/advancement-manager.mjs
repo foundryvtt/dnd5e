@@ -330,7 +330,11 @@ export default class AdvancementManager extends Application {
    * @private
    */
   createLevelChangeSteps(classItem, levelDelta) {
-    const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => ({ flow, ...data })));
+    const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => {
+      const step = { flow, ...data };
+      flow.onDrop = f => this.onDropFeat(step, f, this.actor.system.details.level + levelDelta);
+      return step;
+    }));
     const getItemFlows = characterLevel => this.clone.items.contents.flatMap(i => {
       if ( ["class", "subclass"].includes(i.type) ) return [];
       return this.constructor.flowsForLevel(i, characterLevel);
@@ -364,6 +368,33 @@ export default class AdvancementManager extends Application {
     });
 
     return this;
+  }
+
+  /**
+   * On drop feat.
+   * @param {object} step
+   * @param {object} feat
+   * @param {number} level
+   */
+  onDropFeat(step, feat, level) {
+
+    const dataClone = foundry.utils.deepClone(feat.toObject());
+    dataClone._id = foundry.utils.randomID();
+    this.clone.updateSource({items: [dataClone]});
+    const clonedItem = this.clone.items.get(dataClone._id);
+    const adv = Array.fromRange(level)
+      .flatMap(l => AdvancementManager.flowsForLevel(clonedItem, l))
+      .map(flow => ({ type: "forward", flow }));
+
+    if (adv?.length > 0) {
+      this.steps = [
+        ...this.steps.filter(({flow}) => flow),
+        ...adv,
+        ...this.steps.filter(({flow}) => !flow)
+      ];
+
+    }
+    this._forward();
   }
 
   /* -------------------------------------------- */

@@ -4,6 +4,7 @@ import ConsumableData from "./consumable.mjs";
 import ContainerData from "./container.mjs";
 import EquipmentData from "./equipment.mjs";
 import FeatData from "./feat.mjs";
+import TrueFeatData from "./truefeat.mjs";
 import LootData from "./loot.mjs";
 import RaceData from "./race.mjs";
 import SpellData from "./spell.mjs";
@@ -18,6 +19,7 @@ export {
   ContainerData,
   EquipmentData,
   FeatData,
+  TrueFeatData,
   LootData,
   RaceData,
   SpellData,
@@ -44,6 +46,7 @@ export const config = {
   consumable: ConsumableData,
   equipment: EquipmentData,
   feat: FeatData,
+  truefeat: TrueFeatData,
   loot: LootData,
   race: RaceData,
   spell: SpellData,
