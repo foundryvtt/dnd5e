@@ -114,7 +114,7 @@ export default class DamageRoll extends Roll {
    * @protected
    */
   configureDamage() {
-    let flatBonus = 0;
+    let flatBonus = new Map();
     for ( let [i, term] of this.terms.entries() ) {
       // Multiply dice terms
       if ( term instanceof DiceTerm ) {
@@ -125,7 +125,12 @@ export default class DamageRoll extends Roll {
 
           // Powerful critical - maximize damage and reduce the multiplier by 1
           if ( this.options.powerfulCritical ) {
-            flatBonus += (term.number * term.faces);
+            let bonus = term.number * term.faces;
+            if (bonus > 0) {
+              let flavor = term.flavor ?? game.i18n.localize("DND5E.PowerfulCritical");
+              if (flatBonus.has(flavor))flatBonus.set(flavor, flatBonus.get(flavor) + bonus);
+              else flatBonus.set(flavor, bonus);
+            }
             cm = Math.max(1, cm-1);
           }
 
@@ -148,9 +153,11 @@ export default class DamageRoll extends Roll {
     }
 
     // Add powerful critical bonus
-    if ( this.options.powerfulCritical && (flatBonus > 0) ) {
-      this.terms.push(new OperatorTerm({operator: "+"}));
-      this.terms.push(new NumericTerm({number: flatBonus}, {flavor: game.i18n.localize("DND5E.PowerfulCritical")}));
+    if ( this.options.powerfulCritical && (flatBonus.size > 0) ) {
+      for ( let type of flatBonus.keys() ) {
+        this.terms.push(new OperatorTerm({operator: "+"}));
+        this.terms.push(new NumericTerm({number: flatBonus.get(type), options: {flavor: type}}));
+      }
     }
 
     // Add extra critical damage term
