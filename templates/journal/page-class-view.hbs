@@ -43,6 +43,8 @@
 
     {{#if (or advancement.equipment enriched.additionalEquipment)}}
     <h{{ title.level3 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.EquipmentHeader" }}</h{{ title.level3 }}>
+    <p>{{ localize "JOURNALENTRYPAGE.DND5E.Class.EquipmentDescription" }}</p>
+    {{{ advancement.equipment }}}
     {{{ enriched.additionalEquipment }}}
     {{/if}}
 
