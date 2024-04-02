@@ -149,10 +149,10 @@
     <div class="form-fields">
         {{#if system.consume.type}}
             <input type="number" step="any" name="system.consume.amount" value="{{system.consume.amount}}"
-                   data-tooltip="DND5E.ConsumeAmount">
-            {{#if abilityConsumptionManual}}
+                   data-tooltip="DND5E.ConsumeAmount" placeholder="{{ localize 'DND5E.QuantityAbbr' }}">
+            {{#if abilityConsumptionHint}}
             <input type="text" name="system.consume.target" value="{{ system.consume.target }}"
-                   data-tooltip="DND5E.ConsumeTarget">
+                   placeholder="{{ localize abilityConsumptionHint }}">
             {{else}}
             <select name="system.consume.target" data-tooltip="DND5E.ConsumeTarget">
                 {{selectOptions abilityConsumptionTargets selected=system.consume.target blank=""}}

@@ -109,6 +109,13 @@ export default class SpellData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivatedEffectData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getCardData(enrichmentOptions={}) {
     const context = await super.getCardData(enrichmentOptions);
     context.isSpell = true;

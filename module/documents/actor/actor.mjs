@@ -22,6 +22,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _classes;
 
+  /**
+   * Mapping of item source IDs to the items.
+   * @type {Map<string, Item5e>}
+   */
+  sourcedItems = this.sourcedItems;
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -130,6 +136,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._preparationWarnings = [];
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
+  }
+
+  /* --------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareEmbeddedDocuments() {
+    this.sourcedItems = new Map();
+    super.prepareEmbeddedDocuments();
   }
 
   /* --------------------------------------------- */

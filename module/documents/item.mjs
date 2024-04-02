@@ -645,6 +645,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Otherwise, it will be called at the end of `Item5e#prepareDerivedData`.
    */
   prepareFinalAttributes() {
+    this.system.prepareFinalData?.();
 
     // Proficiency
     this._prepareProficiency();
