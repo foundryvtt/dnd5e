@@ -12,8 +12,8 @@
             <select name="resourceAmount">
                 {{#if resourceArray}}
                 {{#select item.system.consume.target}}
-                {{#each resourceOptions as |l|}}
-                <option value="{{l.key}}" {{disabled (not l.canCast)}}>{{l.label}}</option>
+                {{#each resourceOptions}}
+                <option value="{{key}}" {{disabled (not canCast)}}>{{label}}</option>
                 {{/each}}
                 {{/select}}
                 {{else}}
