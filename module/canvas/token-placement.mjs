@@ -105,7 +105,7 @@ export default class TokenPlacement {
     try {
       const placements = [];
       while ( this.#currentPlacement < this.config.tokens.length - 1 ) {
-        this.#currentPlacement += 1;
+        this.#currentPlacement++;
         const obj = canvas.tokens.preview.addChild(this.#previews[this.#currentPlacement].object);
         await obj.draw();
         const placement = await this.#requestPlacement();
@@ -127,6 +127,7 @@ export default class TokenPlacement {
     this.#previews = [];
     for ( const prototypeToken of this.config.tokens ) {
       const tokenData = prototypeToken.toObject();
+      tokenData.sight.enabled = false;
       tokenData._id = foundry.utils.randomID();
       if ( tokenData.randomImg ) tokenData.texture.src = prototypeToken.actor.img;
       const cls = getDocumentClass("Token");
@@ -171,7 +172,8 @@ export default class TokenPlacement {
 
   /**
    * Activate listeners for the placement preview.
-   * @returns {Promise<PlacementData>}  A promise that resolves with the final placement if created.
+   * @returns {Promise<PlacementData|false>}  A promise that resolves with the final placement if created,
+   *                                          or false if the placement was skipped.
    */
   #requestPlacement() {
     return new Promise((resolve, reject) => {
