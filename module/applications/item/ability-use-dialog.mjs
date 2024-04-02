@@ -53,13 +53,14 @@ export default class AbilityUseDialog extends Dialog {
 
     const limit = item.actor.system.attributes?.concentration?.limit ?? 0;
     const concentrationOptions = this._createConcentrationOptions(item);
+    const resourceOptions = this._createResourceOptions(item);
 
     const data = {
       item,
       ...config,
       slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
       summoningOptions: this._createSummoningOptions(item),
-      resourceOptions: this._createResourceOptions(item),
+      resourceOptions: resourceOptions,
       resourceArray: Array.isArray(resourceOptions),
       concentration: {
         show: (config.beginConcentrating !== null) && !!concentrationOptions.length,
