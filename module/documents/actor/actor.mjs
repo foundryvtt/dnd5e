@@ -595,26 +595,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const progression = { slot: 0, pact: 0 };
     const types = {};
 
-    // NPCs don't get spell levels from classes
+    // Grab all classes with spellcasting
+    const classes = this.items.filter(cls => {
+      if ( cls.type !== "class" ) return false;
+      const type = cls.spellcasting.type;
+      if ( !type ) return false;
+      types[type] ??= 0;
+      types[type] += 1;
+      return true;
+    });
+
+    for ( const cls of classes ) this.constructor.computeClassProgression(
+      progression, cls, { actor: this, count: types[cls.spellcasting.type] }
+    );
+
     if ( this.type === "npc" ) {
-      progression.slot = this.system.details.spellLevel ?? 0;
-      types.leveled = 1;
-    }
-
-    else {
-      // Grab all classes with spellcasting
-      const classes = this.items.filter(cls => {
-        if ( cls.type !== "class" ) return false;
-        const type = cls.spellcasting.type;
-        if ( !type ) return false;
-        types[type] ??= 0;
-        types[type] += 1;
-        return true;
-      });
-
-      for ( const cls of classes ) this.constructor.computeClassProgression(
-        progression, cls, { actor: this, count: types[cls.spellcasting.type] }
-      );
+      if ( progression.slot || progression.pact ) this.system.details.spellLevel = progression.slot || progression.pact;
+      else progression.slot = this.system.details.spellLevel ?? 0;
     }
 
     for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
