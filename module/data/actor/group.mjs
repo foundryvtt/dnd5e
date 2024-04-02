@@ -1,3 +1,4 @@
+import TokenPlacement from "../../canvas/token-placement.mjs";
 import { ActorDataModel } from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
@@ -187,6 +188,34 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
     const membersCollection = this.toObject().members;
     membersCollection.push({ actor: actor.id });
     return this.parent.update({"system.members": membersCollection});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Place all members in the group on the current scene.
+   */
+  async placeMembers() {
+    if ( !game.user.isGM || !canvas.scene ) return;
+    const minimized = !this.parent.sheet._minimized;
+    await this.parent.sheet.minimize();
+    const tokensData = [];
+
+    try {
+      const placements = await TokenPlacement.place({
+        tokens: Object.values(this.members).map(m => m.actor.prototypeToken)
+      });
+      for ( const placement of placements ) {
+        const actor = placement.prototypeToken.actor;
+        delete placement.prototypeToken;
+        const tokenDocument = await actor.getTokenDocument(placement);
+        tokensData.push(tokenDocument.toObject());
+      }
+    } finally {
+      if ( minimized ) this.parent.sheet.maximize();
+    }
+
+    await canvas.scene.createEmbeddedDocuments("Token", tokensData);
   }
 
   /* -------------------------------------------- */
