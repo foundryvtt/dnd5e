@@ -196,6 +196,7 @@
 "DND5E.AdvancementItemChoiceTitle": "Choose Items",
 "DND5E.AdvancementItemChoiceHint": "Present the player with a choice of items (such as equipment, features, or spells) that they can choose for their character at one or more levels.",
 "DND5E.AdvancementItemChoiceChosen": "Chosen: {current} of {max}",
+"DND5E.AdvancementItemChoiceFeatureLevelWarning": "Must be at least level {level} to take this feature.",
 "DND5E.AdvancementItemChoiceLevelsHint": "Specify how many choices are allowed at each level.",
 "DND5E.AdvancementItemChoicePreviouslyChosenWarning": "This item has already been chosen at a previous level.",
 "DND5E.AdvancementItemChoiceSpellLevelAvailable": "Any Available Level",
@@ -1142,6 +1143,17 @@
 "DND5E.PolymorphWildShape": "Wild Shape",
 "DND5E.Portrait": "Portrait",
 "DND5E.Prepared": "Prepared",
+"DND5E.Prerequisites": {
+  "Header": "Feature Prerequisites",
+  "FIELDS": {
+    "prerequisites": {
+      "level": {
+        "label": "Required Level",
+        "hint": "Character or class level required to select this feature when levelling up."
+      }
+    }
+  }
+},
 "DND5E.Price": "Price",
 "DND5E.Proficiency": "Proficiency",
 "DND5E.ProficiencyBonus": "Proficiency Bonus",
