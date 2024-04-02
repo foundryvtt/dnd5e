@@ -107,7 +107,7 @@ export default class TokenPlacement {
       while ( this.#currentPlacement < this.config.tokens.length - 1 ) {
         this.#currentPlacement += 1;
         const obj = canvas.tokens.preview.addChild(this.#previews[this.#currentPlacement].object);
-        obj.draw();
+        await obj.draw();
         const placement = await this.#requestPlacement();
         if ( placement ) placements.push(placement);
       }
@@ -127,6 +127,7 @@ export default class TokenPlacement {
     this.#previews = [];
     for ( const prototypeToken of this.config.tokens ) {
       const tokenData = prototypeToken.toObject();
+      tokenData._id = foundry.utils.randomID();
       if ( tokenData.randomImg ) tokenData.texture.src = prototypeToken.actor.img;
       const cls = getDocumentClass("Token");
       const doc = new cls(tokenData, { parent: canvas.scene });
