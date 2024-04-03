@@ -49,7 +49,9 @@ export function isValidDieModifier(mod) {
     reroll: /rr?([0-9]+)?([<>=]+)?([0-9]+)?/i,
     explode: /xo?([0-9]+)?([<>=]+)?([0-9]+)?/i,
     minimum: /(?:min)([0-9]+)/i,
-    maximum: /(?:max)([0-9]+)/i
+    maximum: /(?:max)([0-9]+)/i,
+    dropKeep: /[dk]([hl])?([0-9]+)?/i,
+    count: /(?:c[sf])([<>=]+)?([0-9]+)?/i
   };
   return Object.values(regex).some(rgx => rgx.test(mod));
 }
@@ -194,6 +196,20 @@ export function linkForUuid(uuid) {
     return TextEditor.createAnchor(data).outerHTML;
   }
   return fromUuidSync(uuid).toAnchor().outerHTML;
+}
+
+/* -------------------------------------------- */
+/*  Targeting                                   */
+/* -------------------------------------------- */
+
+/**
+ * Get currently selected tokens in the scene or user's character's tokens.
+ * @returns {Token5e[]}
+ */
+export function getSceneTargets() {
+  let targets = canvas.tokens.controlled.filter(t => t.actor);
+  if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
+  return targets;
 }
 
 /* -------------------------------------------- */

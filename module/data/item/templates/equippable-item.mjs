@@ -75,7 +75,8 @@ export default class EquippableItemTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get magicAvailable() {
-    return this.attunement !== CONFIG.DND5E.attunementTypes.REQUIRED;
+    const attunement = this.attunement !== CONFIG.DND5E.attunementTypes.REQUIRED;
+    return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
   }
 
   /* -------------------------------------------- */

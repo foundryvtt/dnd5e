@@ -66,9 +66,12 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     const items = [...this.pool, ...this.dropped].reduce((items, i) => {
-      i.checked = this.selected.has(i.uuid);
-      i.disabled = !i.checked && choices.full;
-      if ( !previouslySelected.has(i.uuid) ) items.push(i);
+      if ( i ) {
+        i.checked = this.selected.has(i.uuid);
+        i.disabled = !i.checked && choices.full;
+        const validLevel = (i.system.prerequisites.level ?? -Infinity) <= this.level;
+        if ( !previouslySelected.has(i.uuid) && validLevel ) items.push(i);
+      }
       return items;
     }, []);
 
@@ -142,6 +145,14 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
         ui.notifications.error("DND5E.AdvancementItemChoicePreviouslyChosenWarning", {localize: true});
         return null;
       }
+    }
+
+    // If a feature has a level pre-requisite, make sure it is less than or equal to current level
+    if ( (item.system.prerequisites?.level ?? -Infinity) >= this.level ) {
+      ui.notifications.error(game.i18n.format("DND5E.AdvancementItemChoiceFeatureLevelWarning", {
+        level: item.system.prerequisites.level
+      }));
+      return null;
     }
 
     // If spell level is restricted to available level, ensure the spell is of the appropriate level

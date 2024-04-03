@@ -366,7 +366,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         ability: { sign: Math.sign(mod) < 0 ? "-" : "+", value: Math.abs(mod), ability: sc.ability },
         attack: { sign: Math.sign(attack) < 0 ? "-" : "+", value: Math.abs(attack) },
         primary: this.actor.system.attributes.spellcasting === sc.ability,
-        save: ability?.dc ?? 0
+        save: ability?.dc ?? 0,
+        preparedSpellsLimit: sc.preparedSpellsLimit,
+        preparedSpellsCount: sc.preparedSpellsCount,
+        spellCastingClass: item.system.identifier
       });
     }
 
@@ -599,7 +602,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
       // Prepared
       const mode = system.preparation?.mode;
-      if ( (mode === "always") || (mode === "prepared") ) {
+      const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
+      if ( config.prepares ) {
         const isAlways = mode === "always";
         const prepared = isAlways || system.preparation.prepared;
         ctx.preparation = {
@@ -991,8 +995,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @protected
    */
   _onToggleSpellcasting(event) {
-    const ability = event.currentTarget.closest("[data-ability]")?.dataset.ability;
-    this.actor.update({ "system.attributes.spellcasting": ability });
+    const {ability, spellClass} = event.currentTarget.closest("[data-ability]")?.dataset;
+    this.actor.update(
+      {
+        "system.attributes.spellcasting": ability,
+        "system.attributes.activeSpellcastingClass": spellClass
+      }
+    );
   }
 
   /* -------------------------------------------- */
@@ -1212,11 +1221,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Legacy resources
     const resources = Object.entries(this.actor.system.resources).reduce((arr, [k, r]) => {
       const { value, max, sr, lr, label } = r;
+      const source = this.actor._source.system.resources[k];
       if ( label && max ) arr.push({
         id: `resources.${k}`,
         type: "resource",
         img: "icons/svg/upgrade.svg",
-        resource: { value, max },
+        resource: { value, max, source },
         css: "uses",
         title: label,
         subtitle: [

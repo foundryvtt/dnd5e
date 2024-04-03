@@ -177,17 +177,22 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * Create an array of summoning profiles.
    * @param {Item5e} item  The item.
-   * @returns {object|null}   Array of select options.
+   * @returns {{ profiles: object, creatureTypes: object }|null}   Array of select options.
    */
   static _createSummoningOptions(item) {
-    const profiles = item.system.summons?.profiles ?? [];
-    if ( profiles.length <= 1 ) return null;
+    const summons = item.system.summons;
+    if ( !summons?.profiles.length ) return null;
     const options = {};
-    for ( const profile of profiles ) {
+    if ( summons.profiles.length > 1 ) options.profiles = summons.profiles.reduce((obj, profile) => {
       const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
-      if ( profile.uuid && !doc ) continue;
-      options[profile._id] = profile.name ? profile.name : (doc?.name ?? "—");
-    }
+      if ( !profile.uuid || doc ) obj[profile._id] = profile.name ? profile.name : (doc?.name ?? "—");
+      return obj;
+    }, {});
+    else options.profile = summons.profiles[0]._id;
+    if ( summons.creatureTypes.size > 1 ) options.creatureTypes = summons.creatureTypes.reduce((obj, k) => {
+      obj[k] = CONFIG.DND5E.creatureTypes[k].label;
+      return obj;
+    }, {});
     return options;
   }
 

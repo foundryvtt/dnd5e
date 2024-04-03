@@ -12,6 +12,7 @@
  * @property {Set<string>} subclassItems               UUIDs of all subclasses to display.
  */
 export default class ClassJournalPageData extends foundry.abstract.DataModel {
+  /** @inheritDoc */
   static defineSchema() {
     return {
       item: new foundry.data.fields.StringField({required: true, label: "JOURNALENTRYPAGE.DND5E.Class.Item"}),

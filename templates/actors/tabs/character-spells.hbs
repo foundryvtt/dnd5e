@@ -1,7 +1,10 @@
 {{!-- Spellcasting --}}
 <section class="top">
     {{#each spellcasting}}
-    <div class="spellcasting card {{#if primary}}primary{{/if}}" data-ability="{{ ability.ability }}">
+    {{log this}}
+    <div class="spellcasting card {{#if primary}}primary{{/if}}"
+    data-ability="{{ ability.ability }}"
+    data-spell-class="{{ spellCastingClass }}">
         <div class="header">
             <h3>{{ label }}</h3>
             <button type="button" class="radio-button" data-action="spellcasting"
@@ -27,6 +30,12 @@
                 <span class="label">{{ localize "DND5E.SpellDC" }}</span>
                 <span class="value">{{ save }}</span>
             </div>
+            {{#if preparedSpellsLimit}}
+                <div class="save">
+                    <span class="label">{{ localize "DND5E.PreparedSpellsLimit" }}</span>
+                    <span class="value">{{ preparedSpellsCount }} / {{ preparedSpellsLimit }}</span>
+                </div>
+            {{/if}}
         </div>
     </div>
     {{/each}}
@@ -94,7 +103,7 @@
                 {{#dnd5e-itemContext item as |ctx|}}
 
                 {{!-- Spells --}}
-                <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
+                <li class="item {{#unless item.isActiveSpellCasting }}inactive{{/unless}}" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
                     data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}" 
                     data-item-preparation-mode="{{ item.system.preparation.mode }}"
                     data-item-preparation-prepared="{{ item.system.preparation.prepared }}">
