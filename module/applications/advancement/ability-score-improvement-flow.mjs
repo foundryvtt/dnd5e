@@ -203,6 +203,14 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       return null;
     }
 
+    // If a feat has a level pre-requisite, make sure it is less than or equal to current character level
+    if ( (item.system.prerequisites?.level ?? -Infinity) >= this.advancement.actor.system.details.level ) {
+      ui.notifications.error(game.i18n.format("DND5E.AdvancementAbilityScoreImprovementFeatLevelWarning", {
+        level: item.system.prerequisites.level
+      }));
+      return null;
+    }
+
     this.feat = item;
     this.render();
   }
