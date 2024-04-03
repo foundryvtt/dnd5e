@@ -1,4 +1,4 @@
-import { formatNumber, simplifyBonus } from "./utils.mjs";
+import { formatNumber, getSceneTargets, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
@@ -11,7 +11,7 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>award|check|damage|healing|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -48,6 +48,7 @@ async function enrichString(match, options) {
   config._input = match[0];
   switch ( type.toLowerCase() ) {
     case "award": return enrichAward(config, label, options);
+    case "healing": config._isHealing = true;
     case "damage": return enrichDamage(config, label, options);
     case "check":
     case "skill":
@@ -326,25 +327,37 @@ async function enrichSave(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> 8d4dl
  * </a> force
  * ````
+ *
+ * @example Create a healing link:
+ * ```[[/healing 2d6]]``` or ```[[/damage 2d6 healing]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="healing">
+ *   <i class="fa-solid fa-dice-d20"></i> 2d6
+ * </a> healing
+ * ```
  */
 async function enrichDamage(config, label, options) {
   const formulaParts = [];
   if ( config.formula ) formulaParts.push(config.formula);
   for ( const value of config.values ) {
     if ( value in CONFIG.DND5E.damageTypes ) config.type = value;
+    else if ( value in CONFIG.DND5E.healingTypes ) config.type = value;
     else if ( value === "average" ) config.average = true;
+    else if ( value === "temp" ) config.type = "temphp";
     else formulaParts.push(value);
   }
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
   if ( !config.formula ) return null;
-  config.damageType = config.type;
+  config.damageType = config.type ?? (config._isHealing ? "healing" : null);
   config.type = "damage";
 
   if ( label ) return createRollLink(label, config);
 
+  const typeConfig = CONFIG.DND5E.damageTypes[config.damageType] ?? CONFIG.DND5E.healingTypes[config.damageType];
   const localizationData = {
     formula: createRollLink(config.formula, config).outerHTML,
-    type: game.i18n.localize(CONFIG.DND5E.damageTypes[config.damageType]?.label ?? "").toLowerCase()
+    type: game.i18n.localize(typeConfig?.label ?? "").toLowerCase()
   };
 
   let localizationType = "Short";
@@ -777,7 +790,7 @@ async function enrichReference(config, label, options) {
  */
 function _addDataset(element, dataset) {
   for ( const [key, value] of Object.entries(dataset) ) {
-    if ( !["_config", "_input", "values"].includes(key) && value ) element.dataset[key] = value;
+    if ( !key.startsWith("_") && (key !== "values") && value ) element.dataset[key] = value;
   }
 }
 
@@ -952,35 +965,38 @@ async function rollAction(event) {
   if ( (action === "roll") || !game.user.isGM ) {
     target.disabled = true;
     try {
-      // Fetch the actor that should perform the roll
-      let actor;
-      const speaker = ChatMessage.implementation.getSpeaker();
-      if ( speaker.token ) actor = game.actors.tokens[speaker.token];
-      actor ??= game.actors.get(speaker.actor);
+      switch ( type ) {
+        case "damage": return await rollDamage(event);
+      }
 
-      if ( !actor && (type !== "damage") ) {
+      const tokens = getSceneTargets();
+      if ( !tokens.length ) {
         ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
         return;
       }
 
-      switch ( type ) {
-        case "check":
-          return await actor.rollAbilityTest(ability, options);
-        case "concentration":
-          if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
-          return actor.rollConcentration(options);
-        case "damage":
-          return await rollDamage(event, speaker);
-        case "save":
-          return await actor.rollAbilitySave(ability, options);
-        case "skill":
-          if ( ability ) options.ability = ability;
-          return await actor.rollSkill(skill, options);
-        case "tool":
-          options.ability = ability;
-          return await actor.rollToolCheck(tool, options);
-        default:
-          return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
+      for ( const token of tokens ) {
+        const actor = token.actor;
+        switch ( type ) {
+          case "check":
+            await actor.rollAbilityTest(ability, options);
+            break;
+          case "concentration":
+            if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+            await actor.rollConcentration(options);
+            break;
+          case "save":
+            await actor.rollAbilitySave(ability, options);
+            break;
+          case "skill":
+            if ( ability ) options.ability = ability;
+            await actor.rollSkill(skill, options);
+            break;
+          case "tool":
+            options.ability = ability;
+            await actor.rollToolCheck(tool, options);
+            break;
+        }
       }
     } finally {
       target.disabled = false;
@@ -1010,21 +1026,21 @@ async function rollAction(event) {
 
 /**
  * Perform a damage roll.
- * @param {Event} event              The click event triggering the action.
- * @param {TokenDocument} [speaker]  Currently selected token, if one exists.
+ * @param {Event} event  The click event triggering the action.
  * @returns {Promise<void>}
  */
-async function rollDamage(event, speaker) {
+async function rollDamage(event) {
   const target = event.target.closest(".roll-link");
   const { formula, damageType } = target.dataset;
 
-  const title = game.i18n.localize("DND5E.DamageRoll");
+  const isHealing = damageType in CONFIG.DND5E.healingTypes;
+  const title = game.i18n.localize(`DND5E.${isHealing ? "Healing" : "Damage"}Roll`);
   const rollConfig = {
     rollConfigs: [{
       parts: [formula],
       type: damageType
     }],
-    flavor: `${title} (${game.i18n.localize(CONFIG.DND5E.damageTypes[damageType]?.label ?? damageType)})`,
+    flavor: title,
     event,
     title,
     messageData: {
@@ -1032,7 +1048,7 @@ async function rollDamage(event, speaker) {
         targets: Item5e._formatAttackTargets(),
         roll: {type: "damage"}
       },
-      speaker
+      speaker: ChatMessage.implementation.getSpeaker()
     }
   };
 

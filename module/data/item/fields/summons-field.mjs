@@ -2,7 +2,7 @@ import TokenPlacement from "../../../canvas/token-placement.mjs";
 import { FormulaField } from "../../fields.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
 /**
@@ -35,6 +35,7 @@ export default class SummonsField extends foundry.data.fields.EmbeddedDataField 
  * @property {string} bonuses.attackDamage  Formula for bonus added to damage for attacks.
  * @property {string} bonuses.saveDamage    Formula for bonus added to damage for saving throws.
  * @property {string} bonuses.healing       Formula for bonus added to healing.
+ * @property {Set<string>} creatureTypes    Set of creature types that will be set on summoned creature.
  * @property {object} match
  * @property {boolean} match.attacks        Match the to hit values on summoned actor's attack to the summoner.
  * @property {boolean} match.proficiency    Match proficiency on summoned actor to the summoner.
@@ -62,6 +63,9 @@ export class SummonsData extends foundry.abstract.DataModel {
         healing: new FormulaField({
           label: "DND5E.Summoning.Bonuses.Healing.Label", hint: "DND5E.Summoning.Bonuses.Healing.Hint"
         })
+      }),
+      creatureTypes: new SetField(new StringField(), {
+        label: "DND5E.Summoning.CreatureTypes.Label", hint: "DND5E.Summoning.CreatureTypes.Hint"
       }),
       match: new SchemaField({
         attacks: new BooleanField({
@@ -117,10 +121,18 @@ export class SummonsData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Process for summoning actor to the scene.
-   * @param {string} profileId  ID of the summoning profile to use.
+   * Additional options that might modify summoning behavior.
+   *
+   * @typedef {object} SummoningOptions
+   * @property {string} creatureType  Selected creature type if multiple are available.
    */
-  async summon(profileId) {
+
+  /**
+   * Process for summoning actor to the scene.
+   * @param {string} profileId     ID of the summoning profile to use.
+   * @param {object} [options={}]  Additional summoning options.
+   */
+  async summon(profileId, options={}) {
     if ( !this.canSummon || !canvas.scene ) return;
 
     const profile = this.profiles.find(p => p._id === profileId);
@@ -132,11 +144,12 @@ export class SummonsData extends foundry.abstract.DataModel {
      * A hook event that fires before summoning is performed.
      * @function dnd5e.preSummon
      * @memberof hookEvents
-     * @param {Item5e} item             The item that is performing the summoning.
-     * @param {SummonsProfile} profile  Profile used for summoning.
-     * @returns {boolean}               Explicitly return `false` to prevent summoning.
+     * @param {Item5e} item               The item that is performing the summoning.
+     * @param {SummonsProfile} profile    Profile used for summoning.
+     * @param {SummoningOptions} options  Additional summoning options.
+     * @returns {boolean}                 Explicitly return `false` to prevent summoning.
      */
-    if ( Hooks.call("dnd5e.preSummon", this.item, profile) === false ) return;
+    if ( Hooks.call("dnd5e.preSummon", this.item, profile, options) === false ) return;
 
     // Fetch the actor that will be summoned
     const actor = await this.fetchActor(profile.uuid);
@@ -159,7 +172,7 @@ export class SummonsData extends foundry.abstract.DataModel {
           actor,
           placement,
           tokenUpdates: {},
-          actorUpdates: await this.getChanges(actor, profile)
+          actorUpdates: await this.getChanges(actor, profile, options)
         };
 
         /**
@@ -167,12 +180,13 @@ export class SummonsData extends foundry.abstract.DataModel {
          * the final token data is constructed.
          * @function dnd5e.preSummonToken
          * @memberof hookEvents
-         * @param {Item5e} item             The item that is performing the summoning.
-         * @param {SummonsProfile} profile  Profile used for summoning.
-         * @param {TokenUpdateData} config  Configuration for creating a modified token.
-         * @returns {boolean}               Explicitly return `false` to prevent this token from being summoned.
+         * @param {Item5e} item               The item that is performing the summoning.
+         * @param {SummonsProfile} profile    Profile used for summoning.
+         * @param {TokenUpdateData} config    Configuration for creating a modified token.
+         * @param {SummoningOptions} options  Additional summoning options.
+         * @returns {boolean}                 Explicitly return `false` to prevent this token from being summoned.
          */
-        if ( Hooks.call("dnd5e.preSummonToken", this.item, profile, tokenUpdateData) === false ) continue;
+        if ( Hooks.call("dnd5e.preSummonToken", this.item, profile, tokenUpdateData, options) === false ) continue;
 
         // Create a token document and apply updates
         const tokenData = await this.getTokenData(tokenUpdateData);
@@ -181,11 +195,12 @@ export class SummonsData extends foundry.abstract.DataModel {
          * A hook event that fires after token creation data is prepared, but before summoning occurs.
          * @function dnd5e.summonToken
          * @memberof hookEvents
-         * @param {Item5e} item             The item that is performing the summoning.
-         * @param {SummonsProfile} profile  Profile used for summoning.
-         * @param {object} tokenData        Data for creating a token.
+         * @param {Item5e} item               The item that is performing the summoning.
+         * @param {SummonsProfile} profile    Profile used for summoning.
+         * @param {object} tokenData          Data for creating a token.
+         * @param {SummoningOptions} options  Additional summoning options.
          */
-        Hooks.callAll("dnd5e.summonToken", this.item, profile, tokenData);
+        Hooks.callAll("dnd5e.summonToken", this.item, profile, tokenData, options);
 
         tokensData.push(tokenData);
       }
@@ -199,11 +214,12 @@ export class SummonsData extends foundry.abstract.DataModel {
      * A hook event that fires when summoning is complete.
      * @function dnd5e.postSummon
      * @memberof hookEvents
-     * @param {Item5e} item             The item that is performing the summoning.
-     * @param {SummonsProfile} profile  Profile used for summoning.
-     * @param {Token5e[]} tokens        Tokens that have been created.
+     * @param {Item5e} item               The item that is performing the summoning.
+     * @param {SummonsProfile} profile    Profile used for summoning.
+     * @param {Token5e[]} tokens          Tokens that have been created.
+     * @param {SummoningOptions} options  Additional summoning options.
      */
-    Hooks.callAll("dnd5e.postSummon", this.item, profile, createdTokens);
+    Hooks.callAll("dnd5e.postSummon", this.item, profile, createdTokens, options);
   }
 
   /* -------------------------------------------- */
@@ -237,14 +253,22 @@ export class SummonsData extends foundry.abstract.DataModel {
 
   /**
    * Prepare the updates to apply to the summoned actor.
-   * @param {Actor5e} actor           Actor that will be modified.
-   * @param {SummonsProfile} profile  Summoning profile used to summon the actor.
-   * @returns {object}                Changes that will be applied to the actor & its items.
+   * @param {Actor5e} actor             Actor that will be modified.
+   * @param {SummonsProfile} profile    Summoning profile used to summon the actor.
+   * @param {SummoningOptions} options  Additional summoning options.
+   * @returns {object}                  Changes that will be applied to the actor & its items.
    */
-  async getChanges(actor, profile) {
+  async getChanges(actor, profile, options) {
     const updates = { effects: [], items: [] };
     const rollData = this.item.getRollData();
     const prof = rollData.attributes?.prof ?? 0;
+
+    // Add flags
+    updates["flags.dnd5e.summon"] = {
+      origin: this.item.uuid,
+      profile: profile._id
+    };
+    if ( this.item.type === "spell" ) updates["flags.dnd5e.summon"].level = this.item.system.level;
 
     // Match proficiency
     if ( this.match.proficiency ) {
@@ -303,6 +327,16 @@ export class SummonsData extends foundry.abstract.DataModel {
           updates["system.attributes.hp.max"] = actor.system.attributes.hp.max + hpBonus.total;
         }
         updates["system.attributes.hp.value"] = actor.system.attributes.hp.value + hpBonus.total;
+      }
+    }
+
+    // Change creature type
+    if ( this.creatureTypes.size ) {
+      const type = this.creatureTypes.has(options.creatureType) ? options.creatureType : this.creatureTypes.first();
+      if ( actor.system.details?.race instanceof Item ) {
+        updates.items.push({ _id: actor.system.details.race.id, "system.type.value": type });
+      } else {
+        updates["system.details.type.value"] = type;
       }
     }
 
@@ -390,7 +424,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       ui.notifications.warn("DND5E.Summoning.Warning.Wildcard", { localize: true });
     }
 
-    actorUpdates["flags.dnd5e.summon.origin"] = this.item.uuid;
+    delete placement.prototypeToken;
     const tokenDocument = await actor.getTokenDocument(foundry.utils.mergeObject(placement, tokenUpdates));
     tokenDocument.delta.updateSource(actorUpdates);
 

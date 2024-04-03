@@ -39,7 +39,14 @@ export default class ShortRestDialog extends Dialog {
     const context = super.getData();
     context.isGroup = this.actor.type === "group";
 
-    if ( foundry.utils.hasProperty(this.actor, "system.attributes.hd") ) {
+    if ( this.actor.type === "npc" ) {
+      const hd = this.actor.system.attributes.hd;
+      context.availableHD = { [`d${hd.denomination}`]: hd.value };
+      context.canRoll = hd.value > 0;
+      context.denomination = `d${hd.denomination}`;
+    }
+
+    else if ( foundry.utils.hasProperty(this.actor, "system.attributes.hd") ) {
       // Determine Hit Dice
       context.availableHD = this.actor.items.reduce((hd, item) => {
         if ( item.type === "class" ) {

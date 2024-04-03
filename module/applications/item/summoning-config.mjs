@@ -52,6 +52,10 @@ export default class SummoningConfig extends DocumentSheet {
       (lhs.name || lhs.document?.name || "").localeCompare(rhs.name || rhs.document?.name || "", game.i18n.lang)
     );
     context.summons = this.document.system.summons;
+    context.creatureTypes = Object.entries(CONFIG.DND5E.creatureTypes).reduce((obj, [k, c]) => {
+      obj[k] = { label: c.label, selected: context.summons?.creatureTypes.has(k) ? "selected" : "" };
+      return obj;
+    }, {});
     return context;
   }
 
@@ -70,6 +74,10 @@ export default class SummoningConfig extends DocumentSheet {
         profileId: event.target.closest("[data-profile-id]")?.dataset.profileId
       } }));
     }
+
+    for ( const element of html.querySelectorAll("multi-select") ) {
+      element.addEventListener("change", this._onChangeInput.bind(this));
+    }
   }
 
   /* -------------------------------------------- */
@@ -77,6 +85,7 @@ export default class SummoningConfig extends DocumentSheet {
   /** @inheritDoc */
   _getSubmitData(...args) {
     const data = foundry.utils.expandObject(super._getSubmitData(...args));
+    data.creatureTypes ??= [];
     data.profiles = Object.values(data.profiles ?? {});
 
     switch ( data.action ) {

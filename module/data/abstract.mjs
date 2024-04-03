@@ -375,6 +375,18 @@ export class ItemDataModel extends SystemDataModel {
   static ITEM_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    if ( this.parent.isEmbedded ) {
+      const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent.flags.core?.sourceId;
+      if ( sourceId ) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 

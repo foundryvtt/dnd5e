@@ -1,3 +1,5 @@
+import { formatNumber } from "../../utils.mjs";
+
 /**
  * List of multiplier options as tuples containing their numeric value and rendered text.
  * @type {[number, string][]}
@@ -198,7 +200,7 @@ export default class DamageApplicationElement extends HTMLElement {
 
     // Calculate damage to apply
     const targetOptions = this.getTargetOptions(uuid);
-    const { total, active } = this.calculateDamage(token, targetOptions);
+    const { temp, total, active } = this.calculateDamage(token, targetOptions);
 
     const types = [];
     for ( const [change, values] of Object.entries(active) ) {
@@ -231,8 +233,11 @@ export default class DamageApplicationElement extends HTMLElement {
         <span class="title">${token.name}</span>
         ${changeSources ? `<span class="subtitle">${changeSources}</span>` : ""}
       </div>
-      <div class="calculated-damage">
+      <div class="calculated damage">
         ${total}
+      </div>
+      <div class="calculated temp" data-tooltip="DND5E.HitPointsTemp">
+        ${temp}
       </div>
       <menu class="damage-multipliers unlist"></menu>
     `;
@@ -260,20 +265,23 @@ export default class DamageApplicationElement extends HTMLElement {
    * Calculate the total damage that will be applied to an actor.
    * @param {Actor5e} actor
    * @param {DamageApplicationOptions} options
-   * @returns {{total: number, active: Record<string, Set<string>>}}
+   * @returns {{temp: number, total: number, active: Record<string, Set<string>>}}
    */
   calculateDamage(actor, options) {
     const damages = actor.calculateDamage(this.damages, options);
 
+    let temp = 0;
     let total = 0;
     let active = { modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set() };
     for ( const damage of damages ) {
-      total += damage.value;
+      if ( damage.type === "temphp" ) temp += damage.value;
+      else total += damage.value;
       if ( damage.active.modification ) active.modification.add(damage.type);
       if ( damage.active.resistance ) active.resistance.add(damage.type);
       if ( damage.active.vulnerability ) active.vulnerability.add(damage.type);
       if ( damage.active.immunity ) active.immunity.add(damage.type);
     }
+    temp = Math.floor(Math.max(0, temp));
     total = total > 0 ? Math.floor(total) : Math.ceil(total);
 
     // Add values from options to prevent active changes from being lost when re-rendering target list
@@ -288,7 +296,7 @@ export default class DamageApplicationElement extends HTMLElement {
       active.immunity = active.immunity.union(options.downgrade);
     }
 
-    return { total, active };
+    return { temp, total, active };
   }
 
   /* -------------------------------------------- */
@@ -323,8 +331,15 @@ export default class DamageApplicationElement extends HTMLElement {
    * @param {DamageApplicationOptions} options
    */
   refreshListEntry(token, entry, options) {
-    const { total } = this.calculateDamage(token, options);
-    entry.querySelector(".calculated-damage").innerText = total;
+    const { temp, total } = this.calculateDamage(token, options);
+    const calculatedDamage = entry.querySelector(".calculated.damage");
+    calculatedDamage.innerText = formatNumber(-total, { signDisplay: "exceptZero" });
+    calculatedDamage.classList.toggle("healing", total < 0);
+    calculatedDamage.dataset.tooltip = `DND5E.${total < 0 ? "Healing" : "Damage"}`;
+    calculatedDamage.hidden = !total && !!temp;
+    const calculatedTemp = entry.querySelector(".calculated.temp");
+    calculatedTemp.innerText = temp;
+    calculatedTemp.hidden = !temp;
 
     const pressedMultiplier = entry.querySelector('.multiplier-button[aria-pressed="true"]');
     if ( Number(pressedMultiplier?.dataset.multiplier) !== options.multiplier ) {
