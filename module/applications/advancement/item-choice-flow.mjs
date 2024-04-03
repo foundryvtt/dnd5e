@@ -192,10 +192,9 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     // For all other items, use the largest slot possible
     else spells = this.advancement.actor.system.spells;
 
-    const largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
-      if ( data.max === 0 ) return slot;
-      return Math.max(slot, data.level || -1);
-    }, -1);
-    return Math.max(0, largestSlot);
+    return Object.values(spells).reduce((slot, { max, level }) => {
+      if ( !max ) return slot;
+      return Math.max(slot, level || -1);
+    }, 0);
   }
 }
