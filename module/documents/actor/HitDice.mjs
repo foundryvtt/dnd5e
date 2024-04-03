@@ -1,49 +1,63 @@
 /**
  * Object describing the hit dice for an actor.
- *
- * @param {Actor5e} actor
  */
 export default class HitDice {
+  /**
+   * Object describing the hit dice for an actor.
+   * @param {Actor5e} actor     The actor whose hit dice this document describes.
+   */
   constructor(actor) {
-    /**
-     * Store a reference to the actor.
-     * @type {Actor5e}
-     */
     this.actor = actor;
 
-    /**
-     * Remaining hit dice.
-     * @type {number}
-     */
-    this.remaining = 0;
-
-    /**
-     * The actor's total amount of hit dice.
-     * @type {number}
-     */
-    this.total = 0;
-
-    /**
-     * All valid die sizes derived from all classes.
-     * @type {Set<number>}
-     */
-    this.sizes = new Set();
-
-    /**
-     * Store valid class items.
-     * @type {Set<Item5e>}
-     */
-    this._classes = new Set();
-
-    for (const item of Object.values(this.actor.classes)) {
-      if ( /^d[0-9]+$/.test(item.system.hitDice) ) {
-        this._classes.add(item);
-        this.remaining += item.system.levels - item.system.hitDiceUsed;
-        this.total += item.system.levels;
-        this.sizes.add(parseInt(item.system.hitDice.replace("d", "")));
+    for ( const item of Object.values(actor.classes) ) {
+      if ( /^d\d+$/.test(item.system.hitDice) ) {
+        this.classes.add(item);
+        this.value += item.system.levels - item.system.hitDiceUsed;
+        this.max += item.system.levels;
+        this.sizes.add(parseInt(item.system.hitDice.slice(1)));
       }
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Store a reference to the actor.
+   * @type {Actor5e}
+   */
+  actor = null;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remaining hit dice.
+   * @type {number}
+   */
+  value = 0;
+
+  /* -------------------------------------------- */
+
+  /**
+   * The actor's total amount of hit dice.
+   * @type {number}
+   */
+  max = 0;
+
+  /* -------------------------------------------- */
+
+  /**
+   * All valid die sizes derived from all classes.
+   * @type {Set<number>}
+   */
+  sizes = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Store valid class items.
+   * @type {Set<Item5e>}
+   */
+  classes = new Set();
 
   /* -------------------------------------------- */
 
@@ -92,27 +106,7 @@ export default class HitDice {
    * @type {number}
    */
   get pct() {
-    return Math.clamped(this.total ? (this.remaining / this.total) * 100 : 0, 0, 100);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Alias for the remaining hit dice.
-   * @type {number}
-   */
-  get value() {
-    return this.remaining;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Alias for the total amount of hit dice.
-   * @type {number}
-   */
-  get max() {
-    return this.total;
+    return Math.clamped(this.max ? (this.value / this.max) * 100 : 0, 0, 100);
   }
 
   /* -------------------------------------------- */
@@ -123,10 +117,10 @@ export default class HitDice {
    */
   get bySize() {
     const hd = {};
-    this._classes.forEach(cls => {
+    this.classes.forEach(cls => {
       const d = cls.system.hitDice;
       const remaining = cls.system.levels - cls.system.hitDiceUsed;
-      hd[d] = ( d in hd ) ? hd[d] + remaining : remaining;
+      hd[d] = (hd[d] ?? 0) + remaining;
     });
     return hd;
   }
@@ -138,7 +132,7 @@ export default class HitDice {
    * @returns {number}    Remaining hit dice.
    */
   toString() {
-    return this.remaining;
+    return this.value;
   }
 
   /* -------------------------------------------- */
@@ -146,15 +140,15 @@ export default class HitDice {
   /**
    * Create item updates for recovering hit dice during a rest.
    * @param {object} [options]
-   * @param {number} [options.maxHitDice]   Maximum number of hit dice to recover.
-   * @param {boolean} [options.largest]     Whether to restore the largest hit dice first.
-   * @returns {object}                      Array of item updates and number of hit dice recovered.
+   * @param {number} [options.maxHitDice]                       Maximum number of hit dice to recover.
+   * @param {boolean} [options.largest]                         Whether to restore the largest hit dice first.
+   * @returns {{updates: object[], hitDiceRecovered: number}}   Array of item updates and number of hit dice recovered.
    */
   createHitDiceUpdates({ maxHitDice, largest=true }={}) {
-    if ( !Number.isInteger(maxHitDice) ) maxHitDice = Math.max(Math.floor(this.total / 2), 1);
-    const classes = Array.from(this._classes).sort((a, b) => {
-      a = parseInt(a.system.hitDice.replace("d", ""));
-      b = parseInt(b.system.hitDice.replace("d", ""));
+    if ( !Number.isInteger(maxHitDice) ) maxHitDice = Math.max(Math.floor(this.max / 2), 1);
+    const classes = Array.from(this.classes).sort((a, b) => {
+      a = parseInt(a.system.hitDice.slice(1));
+      b = parseInt(b.system.hitDice.slice(1));
       return largest ? (b - a) : (a - b);
     });
     const updates = [];

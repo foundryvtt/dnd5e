@@ -170,7 +170,7 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritdoc */
   prepareBaseData() {
     this.attributes.hd = new HitDice(this.parent);
-    this.details.level = this.attributes.hd.total;
+    this.details.level = this.attributes.hd.max;
     this.attributes.attunement.value = 0;
 
     for ( const item of this.parent.items ) {

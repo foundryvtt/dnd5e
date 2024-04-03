@@ -26,7 +26,7 @@ export default class ActorHitDiceConfig extends BaseConfigSheet {
 
   /** @inheritDoc */
   getData(options) {
-    const classes = this.object.system.attributes.hd._classes;
+    const classes = this.object.system.attributes.hd.classes;
     return {
       classes: Array.from(classes).map(item => {
         return {
