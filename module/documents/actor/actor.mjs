@@ -22,6 +22,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _classes;
 
+  /**
+   * Mapping of item source IDs to the items.
+   * @type {Map<string, Item5e>}
+   */
+  sourcedItems = this.sourcedItems;
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -37,6 +43,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       obj[cls.identifier] = cls;
       return obj;
     }, {});
+  }
+
+  /**
+   * Get all classes, and subclasses, which have spell casting ability.
+   * @type {Array<Item5e>}
+   */
+  get spellCastingClasses() {
+    return Object.values(this.classes).filter(({system}) => system.spellcasting
+    && system.spellcasting.progression !== "none" );
+  }
+
+  /**
+   * Get the actual active spell casting class.
+   * @type {Item5e}
+   */
+  get activeSpellCastingClass() {
+    if (this.system.attributes.activeSpellcastingClass
+      && this.classes[this.system.attributes.activeSpellcastingClass]) {
+      return this.classes[this.system.attributes.activeSpellcastingClass];
+    }
+    return Object.values(this.classes).find(({system}) => system.spellcasting
+    && system.spellcasting.progression !== "none" );
   }
 
   /* -------------------------------------------- */
@@ -135,6 +163,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* --------------------------------------------- */
 
   /** @inheritDoc */
+  prepareEmbeddedDocuments() {
+    this.sourcedItems = new Map();
+    super.prepareEmbeddedDocuments();
+  }
+
+  /* --------------------------------------------- */
+
+  /** @inheritDoc */
   applyActiveEffects() {
     this._prepareScaleValues();
     if ( this.system?.prepareEmbeddedData instanceof Function ) this.system.prepareEmbeddedData();
@@ -166,7 +202,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._prepareArmorClass();
     this._prepareEncumbrance();
     this._prepareInitiative(rollData, checkBonus);
-    this._prepareSpellcasting();
+    this._prepareSpellcasting(rollData);
   }
 
   /* -------------------------------------------- */
@@ -567,12 +603,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
    * Mutates the value of the system.spells object.
+   * @param {object} bonusData         Data produced by getRollData to be applied to bonus formulas
    * @protected
    */
-  _prepareSpellcasting() {
+  _prepareSpellcasting(bonusData) {
     if ( !this.system.spells ) return;
 
     // Spellcasting DC and modifier
+    const activeSpellCasting = this.activeSpellCastingClass;
+    this.system.attributes.spellcasting = activeSpellCasting?.spellcasting?.ability
+    ?? this.system.attributes.spellcasting;
     const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
     this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
     this.system.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
@@ -581,13 +621,42 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const progression = { slot: 0, pact: 0 };
     const types = {};
 
-    // NPCs don't get spell levels from classes
-    if ( this.type === "npc" ) {
-      progression.slot = this.system.details.spellLevel ?? 0;
-      types.leveled = 1;
-    }
+    // Grab all classes with spellcasting
+    const classes = this.items.filter(cls => {
+      if ( cls.type !== "class" ) return false;
+      const type = cls.spellcasting.type;
+      if ( !type ) return false;
+      types[type] ??= 0;
+      types[type] += 1;
+      return true;
+    });
 
+    for ( const cls of classes ) this.constructor.computeClassProgression(
+      progression, cls, { actor: this, count: types[cls.spellcasting.type] }
+    );
+
+    if ( this.type === "npc" ) {
+      if ( progression.slot || progression.pact ) this.system.details.spellLevel = progression.slot || progression.pact;
+      else progression.slot = this.system.details.spellLevel ?? 0;
+    }
     else {
+
+      // Calculate the prepared spell limit for each spell caster class which needs to prepare spells.
+      this.items
+        .filter(cls => cls.system?.spellcasting?.preparedSpellsLimitFormula)
+        .forEach(cls => {
+          cls.system.spellcasting.preparedSpellsLimit = Roll.safeEval(
+            Roll.replaceFormulaData(
+              cls.spellcasting.preparedSpellsLimitFormula,
+              bonusData
+            )
+          );
+          cls.system.spellcasting.preparedSpellsCount = this.items.filter(x => x.type === "spell"
+          && x.system?.level > 0
+          && x.system?.linkedClass === cls.system.identifier
+          && x.system?.preparation?.mode === "prepared"
+          && x.system?.preparation?.prepared).length;
+        });
       // Grab all classes with spellcasting
       const classes = this.items.filter(cls => {
         if ( cls.type !== "class" ) return false;
@@ -597,10 +666,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         types[type] += 1;
         return true;
       });
-
-      for ( const cls of classes ) this.constructor.computeClassProgression(
-        progression, cls, { actor: this, count: types[cls.spellcasting.type] }
-      );
     }
 
     for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
@@ -1950,23 +2015,38 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<Roll|null>}   The created Roll instance, or null if no hit die was rolled
    */
   async rollHitDie(denomination, options={}) {
-    // If no denomination was provided, choose the first available
     let cls = null;
-    if ( !denomination ) {
-      cls = this.itemTypes.class.find(c => c.system.hitDiceUsed < c.system.levels);
-      if ( !cls ) return null;
-      denomination = cls.system.hitDice;
+
+    // NPCs only have on denomination
+    if ( this.type === "npc" ) {
+      denomination = `d${this.system.attributes.hd.denomination}`;
+
+      // If no hit dice are available, display an error notification
+      if ( !this.system.attributes.hd.value ) {
+        ui.notifications.error(game.i18n.format("DND5E.HitDiceNPCWarn", {name: this.name}));
+        return null;
+      }
     }
 
-    // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
-    else cls = this.items.find(i => {
-      return (i.system.hitDice === denomination) && ((i.system.hitDiceUsed || 0) < (i.system.levels || 1));
-    });
+    // Otherwise check classes
+    else {
+      // If no denomination was provided, choose the first available
+      if ( !denomination ) {
+        cls = this.itemTypes.class.find(c => c.system.hitDiceUsed < c.system.levels);
+        if ( !cls ) return null;
+        denomination = cls.system.hitDice;
+      }
 
-    // If no class is available, display an error notification
-    if ( !cls ) {
-      ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: denomination}));
-      return null;
+      // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
+      else cls = this.items.find(i => {
+        return (i.system.hitDice === denomination) && ((i.system.hitDiceUsed || 0) < (i.system.levels || 1));
+      });
+
+      // If no class is available, display an error notification
+      if ( !cls ) {
+        ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: denomination}));
+        return null;
+      }
     }
 
     // Prepare roll data
@@ -2004,21 +2084,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const hp = this.system.attributes.hp;
     const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, roll.total);
-    const updates = {
-      actor: {"system.attributes.hp.value": hp.value + dhp},
-      class: {"system.hitDiceUsed": cls.system.hitDiceUsed + 1}
-    };
+    const updates = { actor: {"system.attributes.hp.value": hp.value + dhp} };
+    if ( cls ) updates.class = {"system.hitDiceUsed": cls.system.hitDiceUsed + 1};
+    else updates.actor["system.attributes.hd.spent"] = this.system.attributes.hd.spent + 1;
 
     /**
      * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
      * @function dnd5e.rollHitDie
      * @memberof hookEvents
-     * @param {Actor5e} actor         Actor for which the hit die has been rolled.
-     * @param {Roll} roll             The resulting roll.
+     * @param {Actor5e} actor           Actor for which the hit die has been rolled.
+     * @param {Roll} roll               The resulting roll.
      * @param {object} updates
-     * @param {object} updates.actor  Updates that will be applied to the actor.
-     * @param {object} updates.class  Updates that will be applied to the class.
-     * @returns {boolean}             Explicitly return `false` to prevent updates from being performed.
+     * @param {object} updates.actor    Updates that will be applied to the actor.
+     * @param {object} [updates.class]  Updates that will be applied to the class.
+     * @returns {boolean}               Explicitly return `false` to prevent updates from being performed.
      */
     if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
 
@@ -2194,7 +2273,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.preShortRest", this, config) === false ) return;
 
     // Take note of the initial hit points and number of hit dice the Actor has
-    const hd0 = foundry.utils.getProperty(this, "system.attributes.hd");
+    const getHD = () => foundry.utils.getProperty(this, `system.attributes.hd${this.type === "npc" ? ".value" : ""}`);
+    const hd0 = getHD();
     const hp0 = foundry.utils.getProperty(this, "system.attributes.hp.value");
 
     // Display a Dialog for rolling hit dice
@@ -2218,7 +2298,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !config.dialog && config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
 
     // Return the rest result
-    const dhd = foundry.utils.getProperty(this, "system.attributes.hd") - hd0;
+    const dhd = getHD() - hd0;
     const dhp = foundry.utils.getProperty(this, "system.attributes.hp.value") - hp0;
     return this._rest(config, { dhd, dhp });
   }
@@ -2294,17 +2374,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       && (await this.system.rest(config, result) === false) ) return;
 
     let hitPointsRecovered = 0;
-    let hitPointUpdates = {};
+    let hpActorUpdates = {};
     let hitDiceRecovered = 0;
-    let hitDiceUpdates = [];
+    let hdActorUpdates = {};
+    let hdItemUpdates = [];
     const rolls = [];
     const longRest = config.type === "long";
     const newDay = config.newDay === true;
 
     // Recover hit points & hit dice on long rest
     if ( longRest ) {
-      ({ updates: hitPointUpdates, hitPointsRecovered } = this._getRestHitPointRecovery());
-      ({ updates: hitDiceUpdates, hitDiceRecovered } = this._getRestHitDiceRecovery());
+      ({ updates: hpActorUpdates, hitPointsRecovered } = this._getRestHitPointRecovery());
+      ({ updates: hdItemUpdates, actorUpdates: hdActorUpdates, hitDiceRecovered } = this._getRestHitDiceRecovery());
     }
 
     // Figure out the rest of the changes
@@ -2312,12 +2393,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       dhd: (result.dhd ?? 0) + hitDiceRecovered,
       dhp: (result.dhp ?? 0) + hitPointsRecovered,
       updateData: {
-        ...hitPointUpdates,
+        ...(hdActorUpdates ?? {}),
+        ...hpActorUpdates,
         ...this._getRestResourceRecovery({ recoverShortRestResources: !longRest, recoverLongRestResources: longRest }),
         ...this._getRestSpellRecovery({ recoverSpells: longRest })
       },
       updateItems: [
-        ...hitDiceUpdates,
+        ...(hdItemUpdates ?? []),
         ...(await this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay, rolls }))
       ],
       longRest,
@@ -2510,6 +2592,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _getRestHitDiceRecovery({maxHitDice}={}) {
+    // Handle simpler HD recovery for NPCs
+    if ( this.type === "npc" ) {
+      const hd = this.system.attributes.hd;
+      const recovered = Math.min(
+        Math.max(1, Math.floor(hd.max * 0.5)), hd.spent, maxHitDice ?? Infinity
+      );
+      return {
+        actorUpdates: { "system.attributes.hd.spent": hd.spent - recovered },
+        hitDiceRecovered: recovered
+      };
+    }
+
     // Determine the number of hit dice which may be recovered
     if ( maxHitDice === undefined ) maxHitDice = Math.max(Math.floor(this.system.details.level / 2), 1);
 

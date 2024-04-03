@@ -74,6 +74,10 @@ export default class SummoningConfig extends DocumentSheet {
         profileId: event.target.closest("[data-profile-id]")?.dataset.profileId
       } }));
     }
+
+    for ( const element of html.querySelectorAll("multi-select") ) {
+      element.addEventListener("change", this._onChangeInput.bind(this));
+    }
   }
 
   /* -------------------------------------------- */
@@ -81,6 +85,7 @@ export default class SummoningConfig extends DocumentSheet {
   /** @inheritDoc */
   _getSubmitData(...args) {
     const data = foundry.utils.expandObject(super._getSubmitData(...args));
+    data.creatureTypes ??= [];
     data.profiles = Object.values(data.profiles ?? {});
 
     switch ( data.action ) {

@@ -5,6 +5,8 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
 /**
  * Data definition for Feature items.
  * @mixes ItemDescriptionTemplate
@@ -12,6 +14,8 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  *
+ * @property {object} prerequisites
+ * @property {number} prerequisites.level           Character or class level required to choose this feature.
  * @property {Set<string>} properties               General properties of a feature item.
  * @property {string} requirements                  Actor details required to use this feature.
  * @property {object} recharge                      Details on how a feature can roll for recharges.
@@ -21,19 +25,26 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 export default class FeatData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.Prerequisites"];
+
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+      prerequisites: new SchemaField({
+        level: new NumberField({integer: true, min: 0})
+      }),
+      properties: new SetField(new StringField(), {
         label: "DND5E.ItemFeatureProperties"
       }),
-      requirements: new foundry.data.fields.StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
-      recharge: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
+      requirements: new StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
+      recharge: new SchemaField({
+        value: new NumberField({
           required: true, integer: true, min: 1, label: "DND5E.FeatureRechargeOn"
         }),
-        charged: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Charged"})
+        charged: new BooleanField({required: true, label: "DND5E.Charged"})
       }, {label: "DND5E.FeatureActionRecharge"})
     });
   }
@@ -44,13 +55,20 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
-    if ( !this.type.value ) return;
-    const config = CONFIG.DND5E.featureTypes[this.type.value];
-    if ( config ) {
-      this.type.label = config.subtypes?.[this.type.subtype] ?? null;
-    } else {
-      this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.feat);
+    super.prepareDerivedData();
+
+    if ( this.type.value ) {
+      const config = CONFIG.DND5E.featureTypes[this.type.value];
+      if ( config ) this.type.label = config.subtypes?.[this.type.subtype] ?? null;
+      else this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.feat);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivatedEffectData();
   }
 
   /* -------------------------------------------- */

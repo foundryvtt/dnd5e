@@ -404,7 +404,8 @@
     ],
     "spellcasting": {
       "progression": "full",
-      "ability": "wis"
+      "ability": "wis",
+      "preparedSpellsLimitFormula": "max(@abilities.wis.mod,0) + @classes.druid.levels"
     },
     "startingEquipment": [
       {

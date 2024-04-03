@@ -263,6 +263,13 @@ export class SummonsData extends foundry.abstract.DataModel {
     const rollData = this.item.getRollData();
     const prof = rollData.attributes?.prof ?? 0;
 
+    // Add flags
+    updates["flags.dnd5e.summon"] = {
+      origin: this.item.uuid,
+      profile: profile._id
+    };
+    if ( this.item.type === "spell" ) updates["flags.dnd5e.summon"].level = this.item.system.level;
+
     // Match proficiency
     if ( this.match.proficiency ) {
       const proficiencyEffect = new ActiveEffect({
@@ -417,7 +424,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       ui.notifications.warn("DND5E.Summoning.Warning.Wildcard", { localize: true });
     }
 
-    actorUpdates["flags.dnd5e.summon.origin"] = this.item.uuid;
+    delete placement.prototypeToken;
     const tokenDocument = await actor.getTokenDocument(foundry.utils.mergeObject(placement, tokenUpdates));
     tokenDocument.delta.updateSource(actorUpdates);
 

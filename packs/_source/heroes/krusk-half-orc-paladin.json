@@ -2736,7 +2736,8 @@
         ],
         "spellcasting": {
           "progression": "half",
-          "ability": "cha"
+          "ability": "cha",
+          "preparedSpellsLimitFormula": "ceil(@classes.paladin.levels/2) + max(@abilities.cha.mod,0)"
         }
       },
       "effects": [],
