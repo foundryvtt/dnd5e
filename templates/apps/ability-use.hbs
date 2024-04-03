@@ -10,7 +10,15 @@
         <label>{{ localize "DND5E.ConsumeScalingLabel" }}</label>
         <div class="form-fields">
             <select name="resourceAmount">
+                {{#if resourceArray}}
+                {{#select item.system.consume.target}}
+                {{#each resourceOptions}}
+                <option value="{{key}}" {{disabled (not canCast)}}>{{label}}</option>
+                {{/each}}
+                {{/select}}
+                {{else}}
                 {{selectOptions resourceOptions selected=resourceAmount localize=true}}
+                {{/if}}
             </select>
         </div>
     </div>

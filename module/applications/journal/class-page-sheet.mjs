@@ -236,11 +236,9 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         Actor5e.computeClassProgression(progression, item, { spellcasting });
         Actor5e.prepareSpellcastingSlots(spells, "leveled", progression);
 
-        if ( !largestSlot ) largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
-          if ( !data.max ) return slot;
-          const level = parseInt(key.slice(5));
-          if ( !Number.isNaN(level) && (level > slot) ) return level;
-          return slot;
+        if ( !largestSlot ) largestSlot = Object.values(spells).reduce((slot, { max, level }) => {
+          if ( !max ) return slot;
+          return Math.max(slot, level || -1);
         }, -1);
 
         table.rows.push(Array.fromRange(largestSlot, 1).map(spellLevel => {
