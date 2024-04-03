@@ -657,15 +657,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           && x.system?.preparation?.mode === "prepared"
           && x.system?.preparation?.prepared).length;
         });
-      // Grab all classes with spellcasting
-      const classes = this.items.filter(cls => {
-        if ( cls.type !== "class" ) return false;
-        const type = cls.spellcasting.type;
-        if ( !type ) return false;
-        types[type] ??= 0;
-        types[type] += 1;
-        return true;
-      });
     }
 
     for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
