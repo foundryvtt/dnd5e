@@ -1,7 +1,7 @@
 import ClassJournalPageData from "./class.mjs";
 import MapLocationJournalPageData from "./map.mjs";
 import RuleJournalPageData from "./rule.mjs";
-import SpellListJournalPageData from "./spell-list.mjs";
+import SpellListJournalPageData from "./spells.mjs";
 import SubclassJournalPageData from "./subclass.mjs";
 
 export {
@@ -16,6 +16,6 @@ export const config = {
   class: ClassJournalPageData,
   map: MapLocationJournalPageData,
   rule: RuleJournalPageData,
-  spellList: SpellListJournalPageData,
+  spells: SpellListJournalPageData,
   subclass: SubclassJournalPageData
 };

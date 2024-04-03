@@ -1,5 +1,6 @@
-import SpellListJournalPageData from "../../data/journal/spell-list.mjs";
+import SpellListJournalPageData from "../../data/journal/spells.mjs";
 import { sortObjectEntries } from "../../utils.mjs";
+import Items5e from "../../data/collection/items-collection.mjs";
 
 /**
  * Journal entry page the displays a list of spells for a class, subclass, background, or something else.
@@ -13,7 +14,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       submitOnChange: true,
       width: 700
     });
-    options.classes.push("spellList");
+    options.classes.push("spells");
     return options;
   }
 
@@ -107,7 +108,8 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     for ( const uuid of this.document.system.spells ) {
       const { collection } = foundry.utils.parseUuid(uuid);
       if ( collection && !collections.has(collection) ) {
-        collections.set(collection, collection.getIndex({ fields }));
+        if ( collection instanceof Items5e ) collections.set(collection, collection);
+        else collections.set(collection, collection.getIndex({ fields }));
       }
     }
 

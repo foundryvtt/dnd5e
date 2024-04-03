@@ -162,7 +162,7 @@ Hooks.once("init", function() {
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalSpellListPageSheet, {
     label: "DND5E.SheetClassSpellList",
-    types: ["spellList"]
+    types: ["spells"]
   });
 
   CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;

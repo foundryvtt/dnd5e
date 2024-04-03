@@ -146,7 +146,7 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
   }
 }
 
-.journal-entry-page.sheet:is(.class-journal, .spellList) {
+.journal-entry-page.sheet:is(.class-journal, .spells) {
   min-block-size: 600px;
   min-inline-size: 400px;
 
@@ -170,7 +170,7 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
   }
 }
 
-.journal-entry-page.sheet.spellList {
+.journal-entry-page.sheet.spells {
   min-inline-size: 550px;
 
   form {
@@ -262,9 +262,7 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
   }
 }
 
-.journal-entry-page.spellList {
-  container: spellList / inline-size;
-
+.journal-entry-page.spells {
   .grouping {
     font-size: var(--font-size-12);
  
@@ -275,12 +273,8 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
   }
 
   ul {
-    column-count: 1;
+    column-width: 200px;
     padding-inline-start: 0;
-
-    @container spellList (width > 400px) { column-count: 2; }
-    @container spellList (width > 600px) { column-count: 3; }
-    @container spellList (width > 900px) { column-count: 4; }
 
     li {
       list-style: none;
