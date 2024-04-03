@@ -1801,8 +1801,8 @@
 "TYPES.JournalEntryPage.subclass": "Subclass Summary",
 "JOURNALENTRYPAGE.DND5E": {
   "Class": {
-    "AdditionalEquipment": "Equipment",
-    "AdditionalEquipmentHint": "List of equipment granted by this class if taken at first level.",
+    "AdditionalEquipment": "Additional Equipment Description",
+    "AdditionalEquipmentHint": "Additional descriptive text displayed beneath the starting equipment section.",
     "AdditionalHitPoints": "Additional Hit Points Description",
     "AdditionalHitPointsHint": "Additional descriptive text displayed beneath the auto-generated hit points section.",
     "AdditionalTraits": "Additional Proficiencies Description",
@@ -1810,6 +1810,7 @@
     "Description": "Introduction",
     "DescriptionHint": "Primary description of the class that will appear first.",
     "EquipmentHeader": "Equipment",
+    "EquipmentDescription": "You start with the following equipment, in addition to the equipment granted by your background:",
     "FeaturesHeader": "Class Features",
     "FeaturesDescription": "As a {lowercaseName}, you gain the following class features, which are summarized in the {name} table.",
     "HitDice": "<strong>Hit Dice:</strong> {dice} per {class} level",

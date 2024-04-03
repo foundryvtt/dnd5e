@@ -120,6 +120,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       };
     }
 
+    advancement.equipment = item.system.startingEquipmentDescription;
+
     return advancement;
   }
 
