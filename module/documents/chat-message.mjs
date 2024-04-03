@@ -181,12 +181,14 @@ export default class ChatMessage5e extends ChatMessage {
       // Highlight successes and failures
       const total = html.find(".dice-total")[index];
       if ( !total ) continue;
+      // Only attack rolls can crit or fumble.
+      const canCrit = this.getFlag("dnd5e", "roll.type") === "attack";
       if ( d.options.target && displayChallenge ) {
         if ( d20Roll.total >= d.options.target ) total.classList.add("success");
         else total.classList.add("failure");
       }
-      else if ( d20Roll.isCritical ) total.classList.add("critical");
-      else if ( d20Roll.isFumble ) total.classList.add("fumble");
+      else if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
+      else if ( canCrit && d20Roll.isFumble ) total.classList.add("fumble");
 
       const icon = document.createElement("i");
       icon.classList.add("fas");
