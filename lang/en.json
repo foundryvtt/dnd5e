@@ -307,6 +307,7 @@
 "DND5E.AttunementOverride": "Override attunement",
 "DND5E.Attuned": "Attuned",
 "DND5E.AreaOfEffect": "Area of Effect",
+"DND5E.ActiveSpellcastingClass" : "Active spell casting class",
 "DND5E.Armor": "Armor",
 "DND5E.ArmorClass": "Armor Class",
 "DND5E.ArmorClassEquipment": "Equipped Armor",
@@ -883,6 +884,8 @@
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
 "DND5E.HitDie": "Hit Die",
 "DND5E.HitDice": "Hit Dice",
+"DND5E.PreparedSpellsLimitFormula": "Prepared spells limit formula",
+"DND5E.AllSpellsAlwaysPrepared": "All spells always prepared",
 "DND5E.HitDiceAutoSpend": {
   "Label": "Auto Spend HD",
   "Hint": "Automatically spend hit dice until they run out or health is full."
@@ -1355,6 +1358,8 @@
 "DND5E.SpeedConditions": "Speed Conditions",
 "DND5E.SpeedSpecial": "Special Movement",
 "DND5E.SpellAbility": "Spellcasting Ability",
+"DND5E.SpellCastingClass" : "Spell casting class",
+"DND5E.SpellPreparationLimitWarning" : "You already have reach the spell preparation limit of {limit} for the class \"{class}\"",
 "DND5E.SpellAbilitySet": "Set as Primary Spellcasting Ability",
 "DND5E.SpellAdd": "Add Spell",
 "DND5E.SpellCantrip": "Cantrip",
@@ -1371,6 +1376,7 @@
 "DND5E.SpellComponents": "Spell Components",
 "DND5E.SpellCreate": "Create Spell",
 "DND5E.SpellDC": "Spell DC",
+"DND5E.PreparedSpellsLimit" : "Prepared",
 "DND5E.SpellDetails": "Spell Details",
 "DND5E.SpellEffects": "Spell Effects",
 "DND5E.SpellHeader": {
@@ -1937,5 +1943,6 @@
   }
 },
 
-"SOURCE.BOOK.SRD": "System Reference Document 5.1"
+"SOURCE.BOOK.SRD": "System Reference Document 5.1",
+"SIDEBAR.SortModePriority": "Sort by priority"
 }
