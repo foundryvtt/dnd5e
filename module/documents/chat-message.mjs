@@ -181,11 +181,22 @@ export default class ChatMessage5e extends ChatMessage {
       // Highlight successes and failures
       const total = html.find(".dice-total")[index];
       if ( !total ) continue;
-      if ( d20Roll.isCritical ) total.classList.add("critical");
-      else if ( d20Roll.isFumble ) total.classList.add("fumble");
-      else if ( d.options.target && displayChallenge ) {
+      if ( d.options.target && displayChallenge ) {
         if ( d20Roll.total >= d.options.target ) total.classList.add("success");
         else total.classList.add("failure");
+      }
+      else if ( d20Roll.isCritical ) total.classList.add("critical");
+      else if ( d20Roll.isFumble ) total.classList.add("fumble");
+
+      const icon = document.createElement("i");
+      icon.classList.add("fas");
+      icon.setAttribute("inert", "");
+      if ( total.classList.contains("success") || total.classList.contains("critical") ) {
+        icon.classList.add("fa-check");
+        total.append(icon);
+      } else if ( total.classList.contains("failure") || total.classList.contains("fumble") ) {
+        icon.classList.add("fa-xmark");
+        total.append(icon);
       }
     }
   }
@@ -331,8 +342,19 @@ export default class ChatMessage5e extends ChatMessage {
     const attackRoll = this.rolls[0];
     const targets = this.getFlag("dnd5e", "targets");
     if ( !game.user.isGM || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
-    const evaluation = document.createElement("ul");
-    evaluation.classList.add("dnd5e2", "evaluation");
+    const tray = document.createElement("div");
+    tray.classList.add("dnd5e2", "card-tray", "targets-tray", "collapsible", "collapsed");
+    tray.innerHTML = `
+      <label class="roboto-upper">
+        <i class="fas fa-bullseye" inert></i>
+        <span>${game.i18n.localize("DND5E.TargetPl")}</span>
+        <i class="fas fa-caret-down" inert></i>
+      </label>
+      <div class="collapsible-content">
+        <ul class="dnd5e2 unlist evaluation wrapper"></ul>
+      </div>
+    `;
+    const evaluation = tray.querySelector("ul");
     evaluation.innerHTML = targets.map(({ name, img, ac, uuid }) => {
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
       return [`
@@ -356,7 +378,7 @@ export default class ChatMessage5e extends ChatMessage {
       target.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
       target.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
     });
-    html.querySelector(".message-content")?.appendChild(evaluation);
+    html.querySelector(".message-content")?.appendChild(tray);
   }
 
   /* -------------------------------------------- */
@@ -556,6 +578,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   async _onTargetMouseDown(event) {
+    event.stopPropagation();
     const uuid = event.currentTarget.dataset.uuid;
     const actor = fromUuidSync(uuid);
     const token = actor?.token?.object ?? actor?.getActiveTokens()[0];

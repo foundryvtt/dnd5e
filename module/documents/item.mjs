@@ -1525,6 +1525,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const elvenAccuracy = (flags.elvenAccuracy
       && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
 
+    // Targets
+    const targets = this.constructor._formatAttackTargets();
+
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
       actor: this.actor,
@@ -1533,6 +1536,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       title,
       flavor: title,
       elvenAccuracy,
+      targetValue: targets.length === 1 ? targets[0].ac : undefined,
       halflingLucky: flags.halflingLucky,
       dialogOptions: {
         width: 400,
@@ -1541,7 +1545,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       messageData: {
         "flags.dnd5e": {
-          targets: this.constructor._formatAttackTargets(),
+          targets,
           roll: { type: "attack", itemId: this.id, itemUuid: this.uuid }
         },
         speaker: ChatMessage.getSpeaker({actor: this.actor})
