@@ -2,7 +2,7 @@
 <div class="form-group select">
     <label>{{ localize "DND5E.ItemActionType" }}</label>
     <select name="system.actionType">
-        {{selectOptions config.itemActionTypes selected=system.actionType blank=""}}
+        {{ selectOptions availableActionTypes selected=system.actionType blank="" }}
     </select>
 </div>
 {{#if system.actionType}}

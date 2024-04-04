@@ -411,6 +411,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   applyActiveEffects() {
     const overrides = {};
+    if ( !this.system?.metadata?.enchantable ) {
+      this.overrides = overrides;
+      return;
+    }
 
     // Organize non-disabled effects by their application priority
     const changes = [];

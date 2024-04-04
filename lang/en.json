@@ -128,7 +128,8 @@
 "DND5E.ActionAbbr": "A",
 "DND5E.ActionPl": "Actions",
 "DND5E.ActionAbil": "Ability Check",
-"DND5E.ActionHeal": "Healing",
+"DND5E.ActionEnch": "Enchant",
+"DND5E.ActionHeal": "Heal",
 "DND5E.ActionMSAK": "Melee Spell Attack",
 "DND5E.ActionMWAK": "Melee Weapon Attack",
 "DND5E.ActionOther": "Other",
@@ -680,6 +681,19 @@
 "DND5E.EffectApplyWarningOwnership": "Effects cannot be applied to tokens you are not the owner of.",
 "DND5E.EffectsSearch": "Search effects",
 "DND5E.Enchantment": {
+  "Action": {
+    "Create": "Create Enchantment",
+    "Delete": "Delete Enchantment",
+    "Disable": "Disable Enchantment",
+    "Edit": "Edit Enchantment",
+    "Enable": "Enable Enchantment"
+  },
+  "Category": {
+    "Active": "Active Enchantments",
+    "General": "Enchantments",
+    "Inactive": "Inactive Enchantments"
+  },
+  "Label": "Enchantment",
   "Warning": {
     "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it."
   }
