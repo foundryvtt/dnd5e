@@ -383,7 +383,7 @@ export default class InventoryElement extends HTMLElement {
       case "favorite":
         return this.actor.system.addFavorite({type: "item", id: item.getRelativeUUID(this.actor)});
       case "prepare":
-        return item.update({"system.preparation.prepared": !item.system.preparation?.prepared});
+        return this._prepareSpell(item);
       case "recharge":
         return item.rollRecharge();
       case "unfavorite":
@@ -391,6 +391,49 @@ export default class InventoryElement extends HTMLElement {
       case "use":
         return item.use({}, { event });
     }
+  }
+
+  /* -------------------------------------------- */
+  /**
+   * Manage spell preparation.
+   * @param {Item5e} item
+   * @returns {Promise}
+   */
+  async _prepareSpell(item) {
+    const spellClass = this.actor.classes[item.system.boundOrigin];
+
+    // Invalid spell preparation notification.
+    let chatData = game.messages.find(x => x.flags?.warning === "over-preparation" && x.speaker?.actor===this.actor._id);
+    const delta = spellClass.spellcasting.preparedSpellsCount + (item.system.preparation?.prepared ? -1 : 1);
+    if (spellClass
+      && delta > spellClass.spellcasting.spellPreparationLimit) {
+
+      chatData = chatData
+      ?? {
+        user: game.user._id,
+        speaker: ChatMessage.getSpeaker(),
+        whisper: game.users.filter(u => u.isGM).map(u => u._id),
+        flags: {
+          warning: "over-preparation"
+        }
+      };
+      chatData.content = game.i18n.format("DND5E.SpellPreparationLimitWarning",
+        {
+          limit: spellClass.spellcasting.spellPreparationLimit,
+          count: delta,
+          class: spellClass.name,
+          name: this.actor.name
+        });
+      if (chatData._id) {
+        new ChatLog().updateMessage(chatData, true);
+      } else {
+        ChatMessage.create(chatData, {});
+      }
+    } else if (chatData) {
+      new ChatLog().deleteMessage(chatData._id);
+    }
+
+    return await item.update({"system.preparation.prepared": !item.system.preparation?.prepared});
   }
 
   /* -------------------------------------------- */
