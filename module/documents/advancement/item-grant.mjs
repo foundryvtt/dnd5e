@@ -85,7 +85,9 @@ export default class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
-    const spellChanges = this.configuration.spell?.spellChanges ?? {};
+    const spellChanges = this.configuration.spell?.getSpellChanges({
+      ability: data.ability ?? this.retainedData?.ability ?? this.value?.ability
+    }) ?? {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
 
@@ -105,7 +107,10 @@ export default class ItemGrantAdvancement extends Advancement {
       updates[itemData._id] = uuid;
     }
     this.actor.updateSource({items});
-    this.updateSource({[this.storagePath(level)]: updates});
+    this.updateSource({
+      "value.ability": data.ability,
+      [this.storagePath(level)]: updates
+    });
   }
 
   /* -------------------------------------------- */
@@ -117,7 +122,10 @@ export default class ItemGrantAdvancement extends Advancement {
       this.actor.updateSource({items: [item]});
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
-    this.updateSource({[this.storagePath(level)]: updates});
+    this.updateSource({
+      "value.ability": data.ability,
+      [this.storagePath(level)]: updates
+    });
   }
 
   /* -------------------------------------------- */
@@ -132,7 +140,7 @@ export default class ItemGrantAdvancement extends Advancement {
       this.actor.items.delete(id);
     }
     this.updateSource({[keyPath.replace(/\.([\w\d]+)$/, ".-=$1")]: null});
-    return { items };
+    return { ability: this.value?.ability, items };
   }
 
   /* -------------------------------------------- */
