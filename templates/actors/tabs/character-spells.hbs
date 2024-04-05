@@ -27,6 +27,12 @@
                 <span class="label">{{ localize "DND5E.SpellDC" }}</span>
                 <span class="value">{{ save }}</span>
             </div>
+            {{#if spellPreparationLimit}}
+                <div class="save">
+                    <span class="label">{{ localize "DND5E.spellPreparationLimit" }}</span>
+                    <span class="value">{{ spellPreparationLimit }}</span>
+                </div>
+            {{/if}}
         </div>
     </div>
     {{/each}}
