@@ -83,6 +83,26 @@
                 <p class="hint">{{ localize "DND5E.Prerequisites.FIELDS.prerequisites.level.hint" }}</p>
             </div>
 
+            {{#if system.isEnchantmentSource}}
+            <h3 class="form-header">{{ localize "DND5E.Enchantment.Label" }}</h3>
+
+            <div class="form-group">
+                <label>{{ localize "DND5E.Enchantment.FIELDS.enchantment.items.max.label" }}</label>
+                <input type="text" name="system.enchantment.items.max" value="{{ source.enchantment.items.max }}">
+                <p class="hint">{{ localize "DND5E.Enchantment.FIELDS.enchantment.items.max.hintSource" }}</p>
+            </div>
+            
+            <div class="form-group">
+                <label>{{ localize "DND5E.Enchantment.FIELDS.enchantment.items.period.label" }}</label>
+                <select name="system.enchantment.items.period">
+                    {{ selectOptions config.enchantmentPeriods selected=system.enchantment.items.period
+                                     labelAttr="label" blank=(localize "DND5E.UsesPeriods.Never") }}
+                </select>
+                <p class="hint">{{ localize "DND5E.Enchantment.FIELDS.enchantment.items.period.hint" }}</p>
+            </div>
+
+            {{/if}}
+
             <h3 class="form-header">{{ localize "DND5E.FeatureUsage" }}</h3>
 
             {{!-- Item Activation Template --}}

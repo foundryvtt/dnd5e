@@ -4,9 +4,9 @@
         <button type="button" class="unbutton" data-action="add-profile">
             <i class="fa-solid fa-plus" aria-hidden="true"></i>
             {{ localize 'DND5E.Summoning.Action.Add' }}
-        </a>
+        </button>
     </h3>
-    <ul class="profiles flexcol">
+    <ul class="dnd5e2 separated-list profiles flexcol">
         {{#each profiles}}
         <li class="profile dnd5e2" data-profile-id="{{ id }}">
             <div class="details flexrow">
@@ -20,11 +20,13 @@
                 <input type="text" name="profiles.{{ id }}.name" value="{{ name }}" aria-label="{{ localize 'Name' }}"
                        placeholder="{{#if document}}{{ document.name }}{{else}}
                        {{~ localize 'DND5E.Summoning.DisplayName' }}{{/if}}">
-                <button type="button" class="unbutton" data-action="delete-profile"
-                        data-tooltip="DND5E.Summoning.Action.Remove"
-                        aria-label="{{ localize 'DND5E.Summoning.Action.Remove' }}">
-                    <i class="fa-solid fa-trash fa-fw" inert></i>
-                </button>
+                <div class="list-controls">
+                    <button type="button" class="unbutton" data-action="delete-profile"
+                            data-tooltip="DND5E.Summoning.Action.Remove"
+                            aria-label="{{ localize 'DND5E.Summoning.Action.Remove' }}">
+                        <i class="fa-solid fa-trash fa-fw" inert></i>
+                    </button>
+                </div>
             </div>
             <input type="hidden" name="profiles.{{ id }}._id" value="{{ id }}">
             <input type="hidden" name="profiles.{{ id }}.uuid" value="{{ uuid }}">

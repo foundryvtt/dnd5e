@@ -357,7 +357,7 @@
     }
   }
 
-  .summoning.form-group {
+  :is(.enchantment, .summoning).form-group {
     .config-button {
       opacity: 1;
       font-size: var(--font-size-12);
@@ -549,10 +549,10 @@
 }
 
 /* ----------------------------------------- */
-/*  Summoning Configuration                  */
+/*  Enchantment & Summoning Configuration    */
 /* ----------------------------------------- */
 
-.dnd5e.summoning-config {
+.dnd5e:is(.enchantment-config, .summoning-config) {
   max-block-size: 90vh;
 
   .unbutton {
@@ -565,35 +565,12 @@
     &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
     &:focus-visible { outline: 2px solid black; }
   }
-
   .form-header {
     justify-content: space-between;
     button { flex: unset; }
   }
 
-  ul.profiles {
-    padding: 0;
-    list-style: none;
-    gap: 12px;
-  }
-  li.profile {
-    position: relative;
-    padding: 8px;
-    background: var(--dnd5e-color-card);
-    border: 2px solid var(--dnd5e-color-gold);
-    border-radius: 4px;
-    box-shadow: 0 0 4px var(--dnd5e-shadow-45);
-
-    .details {
-      gap: 4px;
-      input { height: unset; }
-    }
-    [data-action="delete-profile"] {
-      --size: 26px;
-      flex: 0 0 var(--size);
-      block-size: var(--size);
-      inline-size: var(--size);
-    }
+  .separated-list {
     .content-link, .drop-area {
       flex: 0 0 175px;
       display: flex;

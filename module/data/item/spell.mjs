@@ -1,6 +1,7 @@
 import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
+import {default as EnchantmentField, EnchantmentData} from "./fields/enchantment-field.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -14,6 +15,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {number} level                      Base level of the spell.
  * @property {string} school                     Magical school to which this spell belongs.
  * @property {Set<string>} properties            General components and tags for this spell.
+ * @property {EnchantmentData} enchantment       Enchantment configuration associated with this type.
  * @property {object} materials                  Details on material components required for this spell.
  * @property {string} materials.value            Description of the material components required for casting.
  * @property {boolean} materials.consumed        Are these material components consumed during casting?
@@ -39,6 +41,7 @@ export default class SpellData extends ItemDataModel.mixin(
       properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
         label: "DND5E.SpellComponents"
       }),
+      enchantment: new EnchantmentField(),
       materials: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellMaterialsDescription"}),
         consumed: new foundry.data.fields.BooleanField({required: true, label: "DND5E.SpellMaterialsConsumed"}),
@@ -164,6 +167,16 @@ export default class SpellData extends ItemDataModel.mixin(
   /** @inheritdoc */
   get _typeCriticalThreshold() {
     return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this spell an enchantment?
+   * @type {boolean}
+   */
+  get isEnchantment() {
+    return EnchantmentData.isEnchantment(this);
   }
 
   /* -------------------------------------------- */

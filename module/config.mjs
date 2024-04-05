@@ -888,7 +888,7 @@ DND5E.limitedUseFormulaPeriods = {
  * @typedef {object} LimitedUsePeriodConfiguration
  * @property {string} label           Localized label.
  * @property {string} abbreviation    Shorthand form of the label.
- * @property {boolean} [formula]      Whether this limited use period restores chargs via formula.
+ * @property {boolean} [formula]      Whether this limited use period restores charges via formula.
  */
 
 /**
@@ -926,6 +926,25 @@ DND5E.limitedUsePeriods = {
 };
 preLocalize("limitedUsePeriods", { keys: ["label", "abbreviation"] });
 patchConfig("limitedUsePeriods", "label", { since: "DnD5e 3.1", until: "DnD5e 3.3" });
+
+/* -------------------------------------------- */
+
+/**
+ * Periods at which enchantments can be re-bound to new items.
+ * @enum {{ label: string }}
+ */
+DND5E.enchantmentPeriods = {
+  sr: {
+    label: "DND5E.UsesPeriods.Sr"
+  },
+  lr: {
+    label: "DND5E.UsesPeriods.Lr"
+  },
+  atwill: {
+    label: "DND5E.UsesPeriods.AtWill"
+  }
+};
+preLocalize("enchantmentPeriods", { key: "label" });
 
 /* -------------------------------------------- */
 
