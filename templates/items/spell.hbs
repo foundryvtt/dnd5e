@@ -104,6 +104,22 @@
                     </select>
                 </div>
             </div>
+            {{!-- Bound Spellcasting Origin --}}
+            {{#if document.parent}}
+            <div class="form-group input-select">
+                <label>{{ localize "DND5E.BoundSpellOrigin" }}</label>
+                <div class="form-fields">
+                    <select name="system.boundOrigin">
+                        {{#select system.boundOrigin}}
+                        <option value=""></option>
+                        {{#each document.availableSpellCastingOrigins as |scs|}}
+                        <option value="{{scs.value}}">{{scs.name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.SpellCastingHeader" }}</h3>
 
