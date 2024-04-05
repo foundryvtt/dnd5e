@@ -1,7 +1,10 @@
 {{!-- Spellcasting --}}
 <section class="top">
     {{#each spellcasting}}
-    <div class="spellcasting card {{#if primary}}primary{{/if}}" data-ability="{{ ability.ability }}">
+    <div class="spellcasting card {{#if primary}}primary{{/if}}"
+    data-ability="{{ ability.ability }}"
+    data-spell-origin="{{ spellCastingOrigin }}"
+    data-prep-valid="{{ valid }}">
         <div class="header">
             <h3>{{ label }}</h3>
             <button type="button" class="radio-button" data-action="spellcasting"
@@ -30,7 +33,7 @@
             {{#if spellPreparationLimit}}
                 <div class="save">
                     <span class="label">{{ localize "DND5E.spellPreparationLimit" }}</span>
-                    <span class="value">{{ spellPreparationLimit }}</span>
+                    <span class="value" data-item-valid="{{ valid }}">{{ preparedSpellsCount }} / {{ spellPreparationLimit }}</span>
                 </div>
             {{/if}}
         </div>
@@ -101,7 +104,7 @@
 
                 {{!-- Spells --}}
                 <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
-                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}">
+                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}" data-item-active="{{ item.isActiveSpellCasting }}">
 
                     {{!-- Spell Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"

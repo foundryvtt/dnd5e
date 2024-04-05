@@ -345,6 +345,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Is this spell linked to the active spell casting ?
+   * @type {boolean}
+   */
+  get isActiveSpellCasting() {
+    if (this.type !== "spell" || !this.parent) return;
+    return this.system?.preparation?.mode === "innate"
+    || this.parent.activeSpellCastingClass?.system?.identifier === this.system.boundOrigin;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Spellcasting details for a class or subclass.
    *
    * @typedef {object} SpellcastingDescription
@@ -381,6 +393,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           this.system.levels / (CONFIG.DND5E.spellcastingTypes.leveled.progression[finalSC.progression].divisor || 1)
         )
       );
+      finalSC.preparedSpellsCount = this.parent.items.filter(x => x.type === "spell"
+      && x.system?.level > 0
+      && x.system?.boundOrigin === this.system.identifier
+      && x.system?.preparation?.mode === "prepared"
+      && x.system?.preparation?.prepared).length;
     }
 
     // Temp method for determining spellcasting type until this data is available directly using advancement
@@ -728,7 +745,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Actor spell-DC based scaling
     if ( save.scaling === "spell" ) {
-      save.dc = this.isOwned ? this.actor.system.attributes.spelldc : null;
+      save.dc = this._getSpellDC();
     }
 
     // Ability-score based scaling
@@ -1091,6 +1108,33 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null, effects, summoned ?? null);
 
     return cardData;
+  }
+
+  /**
+   * Get the spell DC first selected ability (if not default),
+   * then from the bound spell caster (if bound),
+   * or finally from the current active spell caster class (if any)
+   * @returns {number}
+   */
+  _getSpellDC() {
+    if (this.isOwned) {
+
+      if (this.system.ability && this.parent?.system?.abilities?.[this.system.ability]?.dc) {
+        return this.parent.system.abilities[this.system.ability]?.dc;
+      }
+
+      const sc = (
+        this.system?.boundOrigin
+          ? this.parent?.classes?.[this.system.boundOrigin]
+          : null
+      )
+      ?? this.parent?.activeSpellCastingClass;
+      return sc?.system?.spellcasting?.ability
+        ? this.parent?.system?.abilities?.[sc.system.spellcasting.ability]?.dc
+        : this.parent?.actor?.system?.attributes?.spellcasting?.dc;
+
+    }
+    return null;
   }
 
   /**
