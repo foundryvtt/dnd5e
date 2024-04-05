@@ -109,6 +109,17 @@
         <input type="hidden" name="summonsProfile" value="{{ summoningOptions.profile }}">
         {{/if}}
     </div>
+    
+    {{#if summoningOptions.creatureSizes}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Size" }}</label>
+        <div class="form-fields">
+            <select name="summonsOptions.creatureSize">
+                {{ selectOptions summoningOptions.creatureSizes }}
+            </select>
+        </div>
+    </div>
+    {{/if}}
 
     {{#if summoningOptions.creatureTypes}}
     <div class="form-group">

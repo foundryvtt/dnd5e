@@ -64,6 +64,9 @@ export class SummonsData extends foundry.abstract.DataModel {
           label: "DND5E.Summoning.Bonuses.Healing.Label", hint: "DND5E.Summoning.Bonuses.Healing.Hint"
         })
       }),
+      creatureSizes: new SetField(new StringField(), {
+        label: "DND5E.Summoning.CreatureSizes.Label", hint: "DND5E.Summoning.CreatureSizes.Hint"
+      }),
       creatureTypes: new SetField(new StringField(), {
         label: "DND5E.Summoning.CreatureTypes.Label", hint: "DND5E.Summoning.CreatureTypes.Hint"
       }),
@@ -124,6 +127,7 @@ export class SummonsData extends foundry.abstract.DataModel {
    * Additional options that might modify summoning behavior.
    *
    * @typedef {object} SummoningOptions
+   * @property {string} creatureSize  Selected creature size if multiple are available.
    * @property {string} creatureType  Selected creature type if multiple are available.
    */
 
@@ -164,15 +168,14 @@ export class SummonsData extends foundry.abstract.DataModel {
     await this.item.parent?.sheet.minimize();
     try {
       // Figure out where to place the summons
-      const placements = await this.getPlacement(actor.prototypeToken, profile);
+      const placements = await this.getPlacement(actor.prototypeToken, profile, options);
 
       for ( const placement of placements ) {
         // Prepare changes to actor data, re-calculating per-token for potentially random values
         const tokenUpdateData = {
           actor,
           placement,
-          tokenUpdates: {},
-          actorUpdates: await this.getChanges(actor, profile, options)
+          ...(await this.getChanges(actor, profile, options))
         };
 
         /**
@@ -252,23 +255,25 @@ export class SummonsData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Prepare the updates to apply to the summoned actor.
+   * Prepare the updates to apply to the summoned actor and its token.
    * @param {Actor5e} actor             Actor that will be modified.
    * @param {SummonsProfile} profile    Summoning profile used to summon the actor.
    * @param {SummoningOptions} options  Additional summoning options.
-   * @returns {object}                  Changes that will be applied to the actor & its items.
+   * @returns {Promise<{actorChanges: object, tokenChanges: object}>}  Changes that will be applied to the actor,
+   *                                                                   its items, and its token.
    */
   async getChanges(actor, profile, options) {
-    const updates = { effects: [], items: [] };
+    const actorUpdates = { effects: [], items: [] };
+    const tokenUpdates = {};
     const rollData = { ...this.item.getRollData(), summon: actor.getRollData() };
     const prof = rollData.attributes?.prof ?? 0;
 
     // Add flags
-    updates["flags.dnd5e.summon"] = {
+    actorUpdates["flags.dnd5e.summon"] = {
       origin: this.item.uuid,
       profile: profile._id
     };
-    if ( this.item.type === "spell" ) updates["flags.dnd5e.summon"].level = this.item.system.level;
+    if ( this.item.type === "spell" ) actorUpdates["flags.dnd5e.summon"].level = this.item.system.level;
 
     // Match proficiency
     if ( this.match.proficiency ) {
@@ -282,7 +287,7 @@ export class SummonsData extends foundry.abstract.DataModel {
         icon: "icons/skills/targeting/crosshair-bars-yellow.webp",
         name: game.i18n.localize("DND5E.Summoning.Match.Proficiency.Label")
       });
-      updates.effects.push(proficiencyEffect.toObject());
+      actorUpdates.effects.push(proficiencyEffect.toObject());
     }
 
     // Add bonus to AC
@@ -291,9 +296,9 @@ export class SummonsData extends foundry.abstract.DataModel {
       await acBonus.evaluate();
       if ( acBonus.total ) {
         if ( actor.system.attributes.ac.calc === "flat" ) {
-          updates["system.attributes.ac.flat"] = (actor.system.attributes.ac.flat ?? 0) + acBonus.total;
+          actorUpdates["system.attributes.ac.flat"] = (actor.system.attributes.ac.flat ?? 0) + acBonus.total;
         } else {
-          updates.effects.push((new ActiveEffect({
+          actorUpdates.effects.push((new ActiveEffect({
             changes: [{
               key: "system.attributes.ac.bonus",
               mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -313,7 +318,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       await hpBonus.evaluate();
       if ( hpBonus.total ) {
         if ( (actor.type === "pc") && !actor._source.system.attributes.hp.max ) {
-          updates.effects.push((new ActiveEffect({
+          actorUpdates.effects.push((new ActiveEffect({
             changes: [{
               key: "system.attributes.hp.bonuses.overall",
               mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -324,9 +329,20 @@ export class SummonsData extends foundry.abstract.DataModel {
             name: game.i18n.localize("DND5E.Summoning.Bonuses.HitPoints.Label")
           })).toObject());
         } else {
-          updates["system.attributes.hp.max"] = actor.system.attributes.hp.max + hpBonus.total;
+          actorUpdates["system.attributes.hp.max"] = actor.system.attributes.hp.max + hpBonus.total;
         }
-        updates["system.attributes.hp.value"] = actor.system.attributes.hp.value + hpBonus.total;
+        actorUpdates["system.attributes.hp.value"] = actor.system.attributes.hp.value + hpBonus.total;
+      }
+    }
+
+    // Change creature size
+    if ( this.creatureSizes.size ) {
+      const size = this.creatureSizes.has(options.creatureSize) ? options.creatureSize : this.creatureSizes.first();
+      const config = CONFIG.DND5E.actorSizes[size];
+      if ( config ) {
+        actorUpdates["system.traits.size"] = size;
+        tokenUpdates.width = config.token ?? 1;
+        tokenUpdates.height = config.token ?? 1;
       }
     }
 
@@ -334,9 +350,9 @@ export class SummonsData extends foundry.abstract.DataModel {
     if ( this.creatureTypes.size ) {
       const type = this.creatureTypes.has(options.creatureType) ? options.creatureType : this.creatureTypes.first();
       if ( actor.system.details?.race instanceof Item ) {
-        updates.items.push({ _id: actor.system.details.race.id, "system.type.value": type });
+        actorUpdates.items.push({ _id: actor.system.details.race.id, "system.type.value": type });
       } else {
-        updates["system.details.type.value"] = type;
+        actorUpdates["system.details.type.value"] = type;
       }
     }
 
@@ -381,22 +397,30 @@ export class SummonsData extends foundry.abstract.DataModel {
 
       if ( !foundry.utils.isEmpty(itemUpdates) ) {
         itemUpdates._id = item.id;
-        updates.items.push(itemUpdates);
+        actorUpdates.items.push(itemUpdates);
       }
     }
 
-    return updates;
+    return { actorUpdates, tokenUpdates };
   }
 
   /* -------------------------------------------- */
 
   /**
    * Determine where the summons should be placed on the scene.
-   * @param {PrototypeToken} token    Token to be placed.
-   * @param {SummonsProfile} profile  Profile used for summoning.
+   * @param {PrototypeToken} token      Token to be placed.
+   * @param {SummonsProfile} profile    Profile used for summoning.
+   * @param {SummoningOptions} options  Additional summoning options.
    * @returns {Promise<PlacementData[]>}
    */
-  getPlacement(token, profile) {
+  getPlacement(token, profile, options) {
+    // Ensure the token matches the final size
+    if ( this.creatureSizes.size ) {
+      const size = this.creatureSizes.has(options.creatureSize) ? options.creatureSize : this.creatureSizes.first();
+      const config = CONFIG.DND5E.actorSizes[size];
+      if ( config ) token = token.clone({ width: config.token ?? 1, height: config.token ?? 1 });
+    }
+
     return TokenPlacement.place({ tokens: [token] });
   }
 

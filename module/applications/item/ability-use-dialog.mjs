@@ -191,8 +191,12 @@ export default class AbilityUseDialog extends Dialog {
       return obj;
     }, {});
     else options.profile = summons.profiles[0]._id;
+    if ( summons.creatureSizes.size > 1 ) options.creatureSizes = summons.creatureSizes.reduce((obj, k) => {
+      obj[k] = CONFIG.DND5E.actorSizes[k]?.label;
+      return obj;
+    }, {});
     if ( summons.creatureTypes.size > 1 ) options.creatureTypes = summons.creatureTypes.reduce((obj, k) => {
-      obj[k] = CONFIG.DND5E.creatureTypes[k].label;
+      obj[k] = CONFIG.DND5E.creatureTypes[k]?.label;
       return obj;
     }, {});
     return options;
