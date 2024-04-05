@@ -1,0 +1,138 @@
+{
+  "_id": "dJjdWdaZU30r1zx4",
+  "name": "Plate Armor of Etherealness",
+  "type": "equipment",
+  "img": "icons/equipment/chest/breastplate-collared-steel.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement)</em></p>\n<p>Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body. This particular armor has been inscribed with certain magical runes or other means to imbue power upon it.</p>\n<p>While you're wearing this armor, you can speak its command word as an action to gain the effect of the @UUID[Compendium.dnd5e.spells.Item.PQuEgKyCdovOvhqN]{Etherealness} spell, which last for 10 minutes or until you remove the armor or use an action to speak the command word again. This property of the armor can't be used again until the next dawn.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 65,
+    "price": {
+      "value": 48000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": "Command word."
+    },
+    "duration": {
+      "value": "10",
+      "units": "minute"
+    },
+    "cover": null,
+    "crewed": false,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "day",
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "util",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 18,
+      "dex": 0,
+      "magicalBonus": null
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": 15,
+    "proficient": null,
+    "type": {
+      "value": "heavy",
+      "baseItem": "plate"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "properties": [
+      "mgc",
+      "stealthDisadvantage"
+    ],
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
+  },
+  "effects": [],
+  "folder": "JqTP017wj3uxDJ8g",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233742,
+    "modifiedTime": 1709659997173,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!dJjdWdaZU30r1zx4"
+}

@@ -1,0 +1,131 @@
+{
+  "_id": "bod1dKzbAkAm21Ho",
+  "name": "Staff of Swarming Insects",
+  "type": "weapon",
+  "img": "icons/weapons/staves/staff-simple-spiral-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement by a bard, cleric, druid, sorcerer, warlock, or wizard)</em></p><p>This staff has 10 charges and regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, a swarm of insects consumes and destroys the staff, then disperses.</p><p><strong>Spells</strong>. While holding the staff, you can use an action to expend some of its charges to cast one of the following spells from it, using your spell save DC: @UUID[Compendium.dnd5e.spells.Item.czXrVRx6XYRWsHAi]{Giant Insect} (4 charges) or @UUID[Compendium.dnd5e.spells.Item.OVikYmSdHliAG2YD]{Insect Plague} (5 charges).</p><p><strong>Insect Cloud</strong>. While holding the staff, you can use an action and expend 1 charge to cause a swarm of harmless flying insects to spread out in a 30-foot radius from you. The insects remain for 10 minutes, making the area heavily obscured for creatures other than you. The swarm moves with you, remaining centered on you. A wind of at least 10 miles per hour disperses the swarm and ends the effect.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 4,
+    "price": {
+      "value": 16000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self",
+      "prompt": true
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 10,
+      "max": "10",
+      "per": "charges",
+      "recovery": "1d6 + 4",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "util",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "con",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    },
+    "magicalBonus": null
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233733,
+    "modifiedTime": 1709659528570,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!bod1dKzbAkAm21Ho"
+}

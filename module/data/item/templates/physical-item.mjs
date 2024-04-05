@@ -3,19 +3,22 @@ import SystemDataModel from "../../abstract.mjs";
 /**
  * Data model template with information on physical items.
  *
+ * @property {string} container           Container within which this item is located.
  * @property {number} quantity            Number of items in a stack.
  * @property {number} weight              Item's weight in pounds or kilograms (depending on system setting).
  * @property {object} price
  * @property {number} price.value         Item's cost in the specified denomination.
  * @property {string} price.denomination  Currency denomination used to determine price.
  * @property {string} rarity              Item rarity as defined in `DND5E.itemRarity`.
- * @property {boolean} identified         Has this item been identified?
  * @mixin
  */
 export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
+      container: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseItem, {
+        idOnly: true, label: "DND5E.Container"
+      }),
       quantity: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, initial: 1, min: 0, label: "DND5E.Quantity"
       }),
@@ -30,10 +33,17 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, blank: false, initial: "gp", label: "DND5E.Currency"
         })
       }, {label: "DND5E.Price"}),
-      rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"}),
-      identified: new foundry.data.fields.BooleanField({required: true, initial: true, label: "DND5E.Identified"})
+      rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"})
     };
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Maximum depth items can be nested in containers.
+   * @type {number}
+   */
+  static MAX_DEPTH = 5;
 
   /* -------------------------------------------- */
   /*  Getters                                     */
@@ -47,6 +57,16 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     const { value, denomination } = this.price;
     const hasPrice = value && (denomination in CONFIG.DND5E.currencies);
     return hasPrice ? `${value} ${CONFIG.DND5E.currencies[denomination].label}` : null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The weight of all of the items in an item stack.
+   * @type {number}
+   */
+  get totalWeight() {
+    return this.quantity * this.weight;
   }
 
   /* -------------------------------------------- */
@@ -97,5 +117,76 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   static #migrateWeight(source) {
     if ( !("weight" in source) ) return;
     if ( (source.weight === null) || (source.weight === undefined) ) source.weight = 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger a render on all sheets for items within which this item is contained.
+   * @param {object} [options={}]
+   * @param {object} [options.rendering]        Additional rendering options.
+   * @param {string} [options.formerContainer]  UUID of the former container if this item was moved.
+   * @protected
+   */
+  async _renderContainers({ formerContainer, ...rendering }={}) {
+    // Render this item's container & any containers it is within
+    const parentContainers = await this.allContainers();
+    parentContainers.forEach(c => c.sheet?.render(false, rendering));
+
+    // Render the actor sheet, compendium, or sidebar
+    if ( this.parent.isEmbedded ) this.parent.actor.sheet?.render(false, rendering);
+    else if ( this.parent.pack ) game.packs.get(this.parent.pack).apps.forEach(a => a.render(false, rendering));
+    else ui.sidebar.tabs.items.render(false, rendering);
+
+    // Render former container if it was moved between containers
+    if ( formerContainer ) {
+      const former = await fromUuid(formerContainer);
+      former.render(false, rendering);
+      former.system._renderContainers(rendering);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onCreate(data, options, userId) {
+    this._renderContainers();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onUpdate(changed, options, userId) {
+    this._renderContainers({ formerContainer: options.formerContainer });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onDelete(options, userId) {
+    this._renderContainers();
+  }
+
+  /* -------------------------------------------- */
+  /*  Helper Methods                              */
+  /* -------------------------------------------- */
+
+  /**
+   * All of the containers this item is within up to the parent actor or collection.
+   * @returns {Promise<Item5e[]>}
+   */
+  async allContainers() {
+    let item = this.parent;
+    let container;
+    let depth = 0;
+    const containers = [];
+    while ( (container = await item.container) && (depth < PhysicalItemTemplate.MAX_DEPTH) ) {
+      containers.push(container);
+      item = container;
+      depth++;
+    }
+    return containers;
   }
 }

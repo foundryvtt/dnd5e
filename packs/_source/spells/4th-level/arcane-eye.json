@@ -1,0 +1,128 @@
+{
+  "_id": "ImlCJQwR1VL40Qem",
+  "name": "Arcane Eye",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You create an invisible, magical eye within range that hovers in the air for the duration.</p><p>You mentally receive visual information from the eye, which has normal vision and darkvision out to 30 feet. The eye can look in every direction.</p><p>As an action, you can move the eye up to 30 feet in any direction. There is no limit to how far away from you the eye can move, but it can't enter another plane of existence. A solid barrier blocks the eye's movement, but the eye can pass through an opening as small as 1 inch in diameter.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "hour"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "summ",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 4,
+    "school": "div",
+    "materials": {
+      "value": "A bit of bat fur.",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    },
+    "properties": [
+      "vocal",
+      "somatic",
+      "material",
+      "concentration",
+      "mgc"
+    ],
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "bonuses": {
+        "ac": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "profiles": [
+        {
+          "name": "",
+          "_id": "ymTRUlo76wX36XFK",
+          "uuid": "Compendium.dnd5e.monsters.Actor.tuHyePQ9GazMTyc0"
+        }
+      ]
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/perception/eye-ringed-glow-angry-teal.webp",
+  "effects": [],
+  "folder": "5auWSClKMDUIV5Ni",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.2.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234109,
+    "modifiedTime": 1712086371894,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!ImlCJQwR1VL40Qem"
+}

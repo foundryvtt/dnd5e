@@ -1,0 +1,110 @@
+{
+  "_id": "FIDyR0kZnxGy7bj8",
+  "name": "Oil of Slipperiness",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-circular-corked-labeled-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>This sticky black unguent is thick and heavy in the container, but it flows quickly when poured. </em></p>\n<p>The oil can cover a Medium or smaller creature, along with the equipment it's wearing and carrying (one additional vial is required for each size category above Medium).  Applying the oil takes 10 minutes.  The affected creature then gains the effect of a @UUID[Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT]{Freedom of Movement} spell for 8 hours.</p>\n<p>Alternatively, the oil can be poured on the ground as an action, where it covers a 10‑foot square, duplicating the effect of the @UUID[Compendium.dnd5e.spells.Item.etgcR9wqmrhyZ0tx]{Grease} spell in that area for 8 hours.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 0.1,
+    "price": {
+      "value": 480,
+      "denomination": "gp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "uncommon",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "8",
+      "units": "hour"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "touch"
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "charges",
+      "recovery": "",
+      "autoDestroy": true,
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "potion",
+      "subtype": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "folder": "gyBZp72zKb56Da84",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.1",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233544,
+    "modifiedTime": 1707055841114,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!FIDyR0kZnxGy7bj8"
+}

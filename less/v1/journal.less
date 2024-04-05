@@ -1,0 +1,284 @@
+/* ----------------------------------------- */
+/*  SRD Compendium                           */
+/* ----------------------------------------- */
+
+.table-of-contents {
+  --dnd5e-srd-color-background: #efefef99;
+  --dnd5e-srd-color-border: #ba2828;
+  --dnd5e-srd-color-box-header: var(--color-text-light-1);
+  --dnd5e-srd-color-chapter-header: var(--color-text-hyperlink);
+}
+
+.table-of-contents.app {
+  min-height: 480px;
+  min-width: 640px;
+
+  .window-content {
+    background: var(--dnd5e-sheet-background);
+    color: var(--color-text-dark-primary);
+  }
+}
+
+.table-of-contents article {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+
+  aside, .contents {
+    border: 4px solid var(--dnd5e-srd-color-border);
+    background: var(--dnd5e-srd-color-background);
+
+    header h2 {
+      border: none;
+      background: var(--dnd5e-srd-color-border);
+      color: var(--dnd5e-srd-color-box-header);
+      padding: 0 .25rem .25rem .25rem;
+      margin: 0;
+    }
+
+    section {
+      padding: .625rem 1rem;
+    }
+  }
+
+  aside blockquote {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .contents {
+    flex-grow: 1;
+
+    .chapter {
+      margin-block-end: .5rem;
+      break-inside: avoid-column;
+    }
+
+    h3 {
+      border: none;
+      font-weight: bold;
+      font-size: var(--font-size-18);
+      color: var(--dnd5e-srd-color-chapter-header);
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0 0 0 .375rem;
+      padding: 0;
+
+      li {
+        font-size: var(--font-size-16);
+      }
+    }
+
+    section {
+      column-count: 3;
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Journal Styles                           */
+/* ----------------------------------------- */
+
+.passive-check {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  cursor: help;
+}
+
+p:empty:has(+ .content-embed), .content-embed + p:empty {
+  display: none;
+}
+
+.award-block {
+  [data-action="awardRequest"] {
+    margin-block: -2px;
+    margin-inline-start: 4px;
+    border: 1px dotted black;
+    border-radius: 4px;
+    padding-block: 2px;
+    padding-inline: 4px 2px;
+
+    &:hover, &:focus {
+      border-style: solid;
+    }
+  }
+}
+.award-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sidebar-block {
+  margin-block-end: 4px;
+  background-color: rgb(238 236 228 / 0.75);
+  padding: 8px;
+  padding-block-end: 2px;
+
+  h4 {
+    font-size: var(--font-size-16);
+    font-weight: bold;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Journal Pages                            */
+/* ----------------------------------------- */
+
+.journal-editor {
+  min-width: 340px;
+  min-height: 260px;
+
+  .window-content {
+    padding: 0;
+  }
+  .prosemirror {
+    menu {
+      border-radius: 0;
+    }
+    .editor-container {
+      overflow-y: auto;
+    }
+  }
+}
+
+.journal-entry-page.sheet:is(.class-journal, .spells) {
+  min-block-size: 600px;
+  min-inline-size: 400px;
+
+  form {
+    .form-group {
+      align-items: start;
+      &:has(button.launch-text-editor) .form-fields { flex: 0 0 125px; }
+      button.launch-text-editor { flex: unset; }
+    }
+
+    .items-list .item {
+      align-items: center;
+      padding-block: 0.35em 0;
+      padding-inline: 2px;
+
+      .item-controls { flex: 0; }
+    }
+    .items-list .item:not(:last-of-type) {
+      border-bottom: 1px solid var(--color-border-light-secondary);
+    }
+  }
+}
+
+.journal-entry-page.sheet.spells {
+  min-inline-size: 550px;
+
+  form {
+    display: grid;
+    grid-template-columns: auto 250px;
+    overflow: hidden;
+
+    > .right { overflow-y: auto; }
+    h3 { margin-block-start: 1rem; }
+    .editor { margin-inline-end: .5rem; }
+
+    .items-list {
+      margin-block-end: 1em;
+      margin-inline-end: 10px;
+      padding-inline-start: 0;
+      list-style: none;
+
+      .empty {
+        min-block-size: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed black;
+        border-radius: 10px;
+        padding: 12px;
+      }
+    }
+  }
+}
+
+.journal-entry-page.class {
+  h4 {
+    border-block-end: 1px solid var(--color-underline-header);
+    font-weight: bold;
+  }
+
+  table {
+    th[scope="col"] {
+      padding-inline: 0.25em;
+    }
+
+    td:is(.level, .prof, .scale, .spell-slots) {
+      text-align: center;
+    }
+  }
+}
+
+.journal-entry-page.map {
+  .journal-header {
+    gap: 1rem;
+
+    [name="system.code"] {
+      block-size: 100%;
+      inline-size: 3em;
+      background: rgb(0 0 0 / 0.1);
+      font-size: var(--font-size-24);
+      text-align: center;
+    }
+
+    .page-level {
+      margin-inline-start: 0;
+    }
+  }
+  [data-map-location-code]::before {
+    content: attr(data-map-location-code) ': ';
+  }
+}
+
+.journal-entry-page.rule {
+  .window-content {
+    .editor:first-of-type { flex: 2; }
+    .separator {
+      flex: 0 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-block-start: 1px dashed var(--color-border-dark-4);
+      padding-block: 0.5em;
+      padding-inline: 1em;
+
+      h3 {
+        border: none;
+        margin: 0;
+      }
+      select {
+        min-width: 8em;
+      }
+    }
+  }
+}
+
+.journal-entry-page.spells {
+  .grouping {
+    font-size: var(--font-size-12);
+ 
+    select {
+      margin-inline-start: 1em;
+      height: 1.75em;
+    }
+  }
+
+  ul {
+    column-width: 200px;
+    padding-inline-start: 0;
+
+    li {
+      list-style: none;
+      line-height: 1.8em;
+    }
+  }
+}

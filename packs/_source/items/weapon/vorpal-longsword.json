@@ -1,0 +1,137 @@
+{
+  "_id": "HokQ1loVJTFxt27u",
+  "name": "Vorpal Longsword",
+  "type": "weapon",
+  "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement)</em></p>\n<p>You gain a +3 bonus to attack and damage rolls made with this magic weapon. In addition, the weapon ignores resistance to slashing damage.</p>\n<p>When you attack a creature that has at least one head with this weapon and roll a 20 on the attack roll, you cut off one of the creature's heads. The creature dies if it can't survive without the lost head. A creature is immune to this effect if it is immune to slashing damage, doesn't have or need a head, has legendary actions, or the GM decides that the creature is too big for its head to be cut off with this weapon. Such a creature instead takes an extra 6d8 slashing damage from the hit.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 3,
+    "price": {
+      "value": 24000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 5,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "mwak",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "1d8 + @mod",
+          "slashing"
+        ]
+      ],
+      "versatile": "1d10 + @mod"
+    },
+    "formula": "6d8",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "ver",
+      "mgc"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "martialM",
+      "baseItem": "longsword"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "magicalBonus": 3,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233567,
+    "modifiedTime": 1709659526508,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!HokQ1loVJTFxt27u"
+}

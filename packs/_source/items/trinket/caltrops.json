@@ -1,0 +1,113 @@
+{
+  "_id": "8tvhh5wqG5FRh3Sf",
+  "name": "Caltrops",
+  "type": "consumable",
+  "img": "icons/weapons/thrown/bomb-spiked-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>As an action, you can spread a single bag of caltrops to cover a 5-foot-square area. Any creature that enters the area must succeed on a DC 15 Dexterity saving throw or stop moving and take 1 piercing damage. Until the creature regains at least 1 hit point, its walking speed is reduced by 10 feet. A creature moving through the area at half speed doesn't need to make the saving throw.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 0.1,
+    "price": {
+      "value": 5,
+      "denomination": "cp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": 5,
+      "width": null,
+      "units": "ft",
+      "type": "square",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "charges",
+      "recovery": "",
+      "autoDestroy": true,
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "1",
+          "piercing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "dex",
+      "dc": 15,
+      "scaling": "flat"
+    },
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": []
+  },
+  "effects": [],
+  "folder": "UnUwTG4YIgd0kaUJ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233494,
+    "modifiedTime": 1704823144004,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!8tvhh5wqG5FRh3Sf"
+}

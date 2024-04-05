@@ -26,6 +26,12 @@ export default class CreatureTypeField extends foundry.data.fields.SchemaField {
       },
       enumerable: false
     });
+    Object.defineProperty(obj, "config", {
+      get() {
+        return CONFIG.DND5E.creatureTypes[this.value];
+      },
+      enumerable: false
+    });
 
     return obj;
   }

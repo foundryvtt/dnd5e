@@ -1,0 +1,101 @@
+{
+  "_id": "snsjxGfmzWfZR5Nh",
+  "name": "Witch Sight",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You can see the true form of any shapechanger or creature concealed by illusion or transmutation magic while the creature is within 30 feet of you and within line of sight.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self",
+      "prompt": true
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "eldritchInvocation"
+    },
+    "requirements": "Warlock 15",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "crewed": false,
+    "properties": [],
+    "prerequisites": {
+      "level": 15
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
+  "effects": [],
+  "folder": "0uFCjs5gYeVtl38i",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.2.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234432,
+    "modifiedTime": 1712073635047,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!snsjxGfmzWfZR5Nh"
+}

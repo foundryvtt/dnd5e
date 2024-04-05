@@ -1,0 +1,138 @@
+{
+  "_id": "MAxM77CDUu8dgIRQ",
+  "name": "Protection from Poison",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You touch a creature. If it is poisoned, you neutralize the poison. If more than one poison afflicts the target, you neutralize one poison that you know is present, or you neutralize one at random.</p><p>For the duration, the target has advantage on saving throws against being &amp;Reference[poisoned], and it has resistance to poison damage.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "hour"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "touch"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 2,
+    "school": "abj",
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    },
+    "properties": [
+      "vocal",
+      "somatic"
+    ],
+    "crewed": false
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
+  "effects": [
+    {
+      "name": "Protection from Poison",
+      "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
+      "origin": "Compendium.dnd5e.spells.Item.MAxM77CDUu8dgIRQ",
+      "duration": {
+        "startTime": null,
+        "seconds": 3600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "dNSELIYDQMBopj0Z",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "poison"
+        }
+      ],
+      "description": "<p>The target has advantage on saving throws against being poisoned, and it has resistance to poison damage.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!MAxM77CDUu8dgIRQ.dNSELIYDQMBopj0Z"
+    }
+  ],
+  "folder": "Qi4Se3we69ukl2V9",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234123,
+    "modifiedTime": 1706146721162,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!MAxM77CDUu8dgIRQ"
+}

@@ -1,0 +1,151 @@
+{
+  "_id": "5eh2HFbS13078Y3H",
+  "name": "Find Steed",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You summon a spirit that assumes the form of an unusually intelligent, strong, and loyal steed, creating a long-lasting bond with it. Appearing in an unoccupied space within range, the steed takes on a form that you choose, such as a @UUID[Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d]{warhorse}, a @UUID[Compendium.dnd5e.monsters.Actor.PHO4J98zK2p4KNyc]{pony}, a @UUID[Compendium.dnd5e.monsters.Actor.FQMFuzzSh73d0Nrd]{camel}, an @UUID[Compendium.dnd5e.monsters.Actor.55PkbskG5iBZGrgR]{elk}, or a @UUID[Compendium.dnd5e.monsters.Actor.YTpL2c3NO4sOn2UA]{mastiff}. (Your DM might allow other animals to be summoned as steeds.) The steed has the statistics of the chosen form, though it is a celestial, fey, or fiend (your choice) instead of its normal type. Additionally, if your steed has an Intelligence of 5 or less, its Intelligence becomes 6, and it gains the ability to understand one language of your choice that you speak.</p><p>Your steed serves you as a mount, both in combat and out, and you have an instinctive bond with it that allows you to fight as a seamless unit. While mounted on your steed, you can make any spell you cast that targets only you also target your steed.</p><p>When the steed drops to 0 hit points, it disappears, leaving behind no physical form. You can also dismiss your steed at any time as an action, causing it to disappear. In either case, casting this spell again summons the same steed, restored to its hit point maximum.</p><p>While your steed is within 1 mile of you, you can communicate with it telepathically.</p><p>You can't have more than one steed bonded by this spell at a time. As an action, you can release the steed from its bond at any time, causing it to disappear.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "pg. 143",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "minute",
+      "cost": 10,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "any",
+      "type": "space",
+      "prompt": true
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "summ",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 2,
+    "school": "con",
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    },
+    "properties": [
+      "vocal",
+      "somatic",
+      "mgc"
+    ],
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "bonuses": {
+        "ac": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "creatureTypes": [
+        "celestial",
+        "fey",
+        "fiend"
+      ],
+      "profiles": [
+        {
+          "name": "",
+          "_id": "AjbDWduosqyViS2D",
+          "uuid": "Compendium.dnd5e.monsters.Actor.FQMFuzzSh73d0Nrd"
+        },
+        {
+          "name": "",
+          "_id": "5bNPkSBX9Nc043lQ",
+          "uuid": "Compendium.dnd5e.monsters.Actor.55PkbskG5iBZGrgR"
+        },
+        {
+          "name": "",
+          "_id": "3hWu8Ub25OiFqWhu",
+          "uuid": "Compendium.dnd5e.monsters.Actor.YTpL2c3NO4sOn2UA"
+        },
+        {
+          "name": "",
+          "_id": "qwzKyNaevY3tXRfu",
+          "uuid": "Compendium.dnd5e.monsters.Actor.PHO4J98zK2p4KNyc"
+        },
+        {
+          "name": "",
+          "_id": "DprNdxi3hb7lbrjw",
+          "uuid": "Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d"
+        }
+      ]
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/nature/wolf-paw-glow-teal-blue.webp",
+  "effects": [],
+  "folder": "Qi4Se3we69ukl2V9",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.2.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234070,
+    "modifiedTime": 1711665620744,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!5eh2HFbS13078Y3H"
+}

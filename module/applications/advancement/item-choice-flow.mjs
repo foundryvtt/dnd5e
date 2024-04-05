@@ -42,7 +42,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
         ?? Object.values(this.advancement.value[this.level] ?? {})
     );
-    this.pool ??= await Promise.all(this.advancement.configuration.pool.map(uuid => fromUuid(uuid)));
+    this.pool ??= await Promise.all(this.advancement.configuration.pool.map(i => fromUuid(i.uuid)));
     if ( !this.dropped ) {
       this.dropped = [];
       for ( const data of this.retainedData?.items ?? [] ) {
@@ -66,9 +66,12 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     const items = [...this.pool, ...this.dropped].reduce((items, i) => {
-      i.checked = this.selected.has(i.uuid);
-      i.disabled = !i.checked && choices.full;
-      if ( !previouslySelected.has(i.uuid) ) items.push(i);
+      if ( i ) {
+        i.checked = this.selected.has(i.uuid);
+        i.disabled = !i.checked && choices.full;
+        const validLevel = (i.system.prerequisites.level ?? -Infinity) <= this.level;
+        if ( !previouslySelected.has(i.uuid) && validLevel ) items.push(i);
+      }
       return items;
     }, []);
 
@@ -144,6 +147,14 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       }
     }
 
+    // If a feature has a level pre-requisite, make sure it is less than or equal to current level
+    if ( (item.system.prerequisites?.level ?? -Infinity) >= this.level ) {
+      ui.notifications.error(game.i18n.format("DND5E.AdvancementItemChoiceFeatureLevelWarning", {
+        level: item.system.prerequisites.level
+      }));
+      return null;
+    }
+
     // If spell level is restricted to available level, ensure the spell is of the appropriate level
     const spellLevel = this.advancement.configuration.restriction.level;
     if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
@@ -190,12 +201,9 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     // For all other items, use the largest slot possible
     else spells = this.advancement.actor.system.spells;
 
-    const largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
-      if ( data.max === 0 ) return slot;
-      const level = parseInt(key.replace("spell", ""));
-      if ( !Number.isNaN(level) && level > slot ) return level;
-      return slot;
-    }, -1);
-    return Math.max(spells.pact?.level ?? 0, largestSlot);
+    return Object.values(spells).reduce((slot, { max, level }) => {
+      if ( !max ) return slot;
+      return Math.max(slot, level || -1);
+    }, 0);
   }
 }

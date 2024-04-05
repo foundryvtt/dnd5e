@@ -1,0 +1,136 @@
+{
+  "_id": "i4NeNZ30ycwPDHMx",
+  "name": "Sickle",
+  "type": "weapon",
+  "img": "icons/weapons/sickles/sickle-curved.webp",
+  "system": {
+    "description": {
+      "value": "<p>A crescent hooked blade mounted atop a short haft, light enough to be wielded in one hand for treshing crops or foes.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 2,
+    "price": {
+      "value": 1,
+      "denomination": "gp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 5,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "mwak",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "1d4 + @mod",
+          "slashing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "lgt"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": "sickle"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    },
+    "magicalBonus": null
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233819,
+    "modifiedTime": 1709659529503,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!i4NeNZ30ycwPDHMx"
+}

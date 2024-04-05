@@ -1,0 +1,138 @@
+{
+  "_id": "WWb4vAmh18sMAxfY",
+  "name": "Flame Tongue Greatsword",
+  "type": "weapon",
+  "img": "icons/magic/fire/projectile-bolt-zigzag-orange.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement)</em></p>\n<p>You can use a bonus action to speak this magic sword's command word, causing flames to erupt from the blade. These flames shed bright light in a 40-foot radius and dim light for an additional 40 feet. While the sword is ablaze, it deals an extra 2d6 fire damage to any target it hits. The flames last until you use a bonus action to speak the command word again or until you drop or sheathe the sword.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 6,
+    "price": {
+      "value": 5000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 5,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "mwak",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "2d6 + @mod",
+          "slashing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "2d6",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "hvy",
+      "two",
+      "mgc"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "martialM",
+      "baseItem": "greatsword"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    },
+    "magicalBonus": null
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233691,
+    "modifiedTime": 1709659527993,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!WWb4vAmh18sMAxfY"
+}

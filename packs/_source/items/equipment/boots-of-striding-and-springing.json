@@ -1,0 +1,156 @@
+{
+  "_id": "hSY1b8yi8JWw2blf",
+  "name": "Boots of Striding and Springing",
+  "type": "equipment",
+  "img": "icons/equipment/feet/boots-collared-rounded-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While you wear these boots, your walking speed becomes 30 feet, unless your walking speed is higher, and your speed isn't reduced if you are encumbered or wearing heavy armor. In addition, you can jump three times the normal distance, though you can't jump farther than your remaining movement would allow.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 1,
+    "price": {
+      "value": 5000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "uncommon",
+    "identified": true,
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "crewed": false,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 0,
+      "dex": 0
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": null,
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [
+    {
+      "icon": "icons/equipment/feet/boots-collared-rounded-brown.webp",
+      "origin": "Compendium.dnd5e.items.hSY1b8yi8JWw2blf",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "ewBIkUaBn4meKsK5",
+      "changes": [
+        {
+          "key": "system.attributes.movement.walk",
+          "mode": 4,
+          "value": "30",
+          "priority": null
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "name": "Boots of Striding and Springing",
+      "description": "",
+      "statuses": [],
+      "_key": "!items.effects!hSY1b8yi8JWw2blf.ewBIkUaBn4meKsK5"
+    }
+  ],
+  "folder": "aJgMxnZED9XdoN2W",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.1",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233814,
+    "modifiedTime": 1707055845705,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!hSY1b8yi8JWw2blf"
+}

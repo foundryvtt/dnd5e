@@ -1,0 +1,256 @@
+<{{ elements.inventory }} class="inventory-element" v2>
+
+    {{!-- Encumbrance & Containers --}}
+    <div class="top">
+
+        {{!-- Encumbrance --}}
+        <div class="encumbrance card">
+            {{#with encumbrance}}
+            <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
+                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
+                <div class="label">
+                    <i class="fas fa-weight-hanging"></i>
+                    <span class="value">{{ value }}</span>
+                    <span class="separator">&sol;</span>
+                    <span class="max">{{ max }}</span>
+                </div>
+                <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-low  arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
+            </div>
+            {{/with}}
+            <div class="info">
+                <div class="strength">
+                    <span class="label">{{ localize "DND5E.AbilityStr" }}</span>
+                    <span class="value">{{ system.abilities.str.value }}</span>
+                </div>
+                <div class="size">
+                    <span class="label">{{ localize "DND5E.Size" }}</span>
+                    <span class="value" aria-label="{{ size.label }}">{{ size.abbr }}</span>
+                </div>
+                <div class="multiplier">
+                    <span class="label">{{ localize "DND5E.Multiplier" }}</span>
+                    <span class="value">
+                        <span class="sign">&times;</span>
+                        {{ size.mod }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Containers --}}
+        <ul class="containers unlist">
+            {{#each containers}}
+            <li class="container" data-item-id="{{ id }}">
+                <a class="item-action" data-action="edit" data-tooltip="{{ name }}" aria-label="{{ name }}">
+                    {{#dnd5e-itemContext this as |ctx|}}
+                    {{#with ctx.capacity}}
+                    <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
+                         aria-valuetext="{{ value }}" aria-valuemax="{{ max }}"
+                         style="--bar-percentage: {{ pct }}%"></div>
+                    {{/with}}
+                    {{/dnd5e-itemContext}}
+                    <img src="{{ img }}" alt="{{ name }}">
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+
+    </div>
+
+    {{!-- Currency --}}
+    <section class="currency">
+        <button type="button" class="item-action unbutton" data-action="currency"
+                data-tooltip="DND5E.CurrencyManager.Title" aria-label="{{ localize "DND5E.CurrencyManager.Title" }}">
+            <i class="fas fa-coins"></i>
+        </button>
+        {{#each system.currency}}
+        <label aria-label="{{ lookup (lookup @root.config.currencies @key) "label" }}">
+            <i class="currency {{ @key }}"
+               data-tooltip="{{ lookup (lookup @root.config.currencies @key) "label" }}"></i>
+            <input type="text" class="uninput" name="system.currency.{{ @key }}" value="{{ this }}"
+                   data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*">
+        </label>
+        {{/each}}
+    </section>
+
+    {{!-- Searching, Filtering, Sorting, & Grouping, & Attunement --}}
+    <div class="middle">
+
+        {{!-- Searching & Filtering --}}
+        <item-list-controls for="inventory" label="{{ localize "DND5E.InventorySearch" }}" sort="toggle" group
+                            group-label="{{ localize "DND5E.FilterGroupCategory" }}" collection="items">
+            <datalist>
+                <option value="action">{{ localize "DND5E.Action" }}</option>
+                <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
+                <option value="reaction">{{ localize "DND5E.Reaction" }}</option>
+                <option value="equipped">{{ localize "DND5E.Equipped" }}</option>
+                <option value="mgc">{{ localize "DND5E.Item.Property.Magical" }}</option>
+            </datalist>
+        </item-list-controls>
+
+        {{!-- Attunement --}}
+        {{#with system.attributes.attunement}}
+        <div class="attunement">
+            <i class="fas fa-sun" data-tooltip="DND5E.Attunement" aria-label="{{ localize "DND5E.Attunement" }}"></i>
+            <span class="value">{{ value }}</span>
+            <span class="separator">&sol;</span>
+            {{#if @root.editable}}
+            {{ numberInput max name="system.attributes.attunement.max" class="max" min=0 step=1 }}
+            {{else}}
+            <span class="max">{{ max }}</span>
+            {{/if}}
+        </div>
+        {{/with}}
+
+    </div>
+
+    {{!-- Inventory List --}}
+    <section class="items-list inventory-list" data-item-list="inventory">
+
+        {{!-- Sections / Categories --}}
+        {{#each sections}}
+        <div class="items-section card" {{ dnd5e-dataset dataset }}>
+
+            {{!-- Section Header --}}
+            <div class="items-header header">
+                <h3 class="item-name">{{ localize label }}</h3>
+                <div class="item-header item-price">{{ localize "DND5E.Price" }}</div>
+                <div class="item-header item-weight">{{ localize "DND5E.Weight" }}</div>
+                <div class="item-header item-quantity">{{ localize "DND5E.Quantity" }}</div>
+                <div class="item-header item-uses">{{ localize "DND5E.Charges" }}</div>
+                <div class="item-header item-controls"></div>
+            </div>
+
+            {{!-- Section Contents --}}
+            <ol class="item-list unlist">
+                {{#each items as |item|}}
+                {{#dnd5e-itemContext item as |ctx|}}
+
+                {{!-- Items --}}
+                <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
+                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}" data-ungrouped="all"
+                    data-grouped="{{ item.type }}">
+
+                    {{!-- Item Name --}}
+                    <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
+                         data-action="use" aria-label="{{ item.name }}">
+                        {{#if ctx.concentration}}
+                        <i class="concentration fas fa-arrow-rotate-left fa-spin fa-spin-reverse"
+                           aria-label="{{ localize "DND5E.Concentration" }}"></i>
+                        {{/if}}
+                        <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+                        <div class="name name-stacked">
+                            <span class="title">{{ item.name }}</span>
+                            {{#if ctx.subtitle}}
+                            <span class="subtitle">{{{ ctx.subtitle }}}</span>
+                            {{/if}}
+                        </div>
+                        <div class="tags">
+                            {{#each item.labels.properties}}
+                            {{#if icon}}
+                            <span aria-label="{{ label }}">
+                                <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                            </span>
+                            {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    {{!-- Item Price --}}
+                    <div class="item-detail item-price {{#unless item.system.price.value}}empty{{/unless}}">
+                        {{#if item.system.price.value}}
+                        {{ifThen ctx.concealDetails "—" (dnd5e-numberFormat item.system.price.value)}}
+                        <i class="currency {{ item.system.price.denomination }}"></i>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Item Weight --}}
+                    <div class="item-detail item-weight {{#unless ctx.totalWeight}}empty{{/unless}}">
+                        {{#if ctx.totalWeight}}
+                        <i class="fas fa-weight-hanging"></i> {{ ctx.totalWeight }}
+                        {{/if}}
+                    </div>
+
+                    {{!-- Item Quantity --}}
+                    <div class="item-detail item-quantity">
+                        {{#if @root.owner}}
+                        <a class="adjustment-button" data-action="decrease" data-property="system.quantity">
+                            <i class="fas fa-minus"></i>
+                        </a>
+                        {{/if}}
+                        <input type="text" value="{{ item.system.quantity }}" placeholder="0" data-dtype="Number"
+                               data-name="system.quantity" inputmode="numeric" pattern="[0-9+=\-]*" min="0">
+                        {{#if @root.owner}}
+                        <a class="adjustment-button" data-action="increase" data-property="system.quantity">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Item Uses --}}
+                    <div class="item-detail item-uses {{#unless ctx.hasUses}}empty{{/unless}}">
+                        {{#if ctx.hasUses}}
+                        <input type="text" value="{{ item.system.uses.value }}" placeholder="0" data-dtype="Number"
+                               data-name="system.uses.value" inputmode="numeric" pattern="[0-9+=\-]*">
+                        <span class="separator">&sol;</span>
+                        <span class="max">{{ item.system.uses.max }}</span>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Item Status --}}
+                    <div class="item-detail item-controls">
+
+                        {{#if @root.editable}}
+                        {{!-- Editing --}}
+                        <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit"
+                           aria-label="{{ localize "DND5E.ItemEdit" }}">
+                            <i class="fas fa-pen-to-square"></i>
+                        </a>
+
+                        {{!-- Deleting --}}
+                        <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                           aria-label="{{ localize "DND5E.ItemDelete" }}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        {{else if @root.owner}}
+                        {{!-- Attuning --}}
+                        {{#with ctx.attunement}}
+                        {{#if applicable}}
+                        <a class="item-control item-action {{ cls }}" data-action="attune" data-tooltip="{{ title }}"
+                           aria-label="{{ localize title }}" aria-disabled="{{ this.disabled }}">
+                            <i class="fas fa-sun"></i>
+                        </a>
+                        {{/if}}
+                        {{/with}}
+
+                        {{!-- Equipping --}}
+                        {{#with ctx.equip}}
+                        {{#if applicable}}
+                        <a class="item-control item-action {{ cls }}" data-action="equip" data-tooltip="{{ title }}"
+                           aria-label="{{ localize title }}" aria-disabled="{{ this.disabled }}">
+                            <i class="fas fa-shield-halved"></i>
+                        </a>
+                        {{/if}}
+                        {{/with}}
+                        {{/if}}
+
+                        {{!-- Context Menu --}}
+                        <a class="item-control interface-only" data-context-menu
+                           aria-label="{{ localize "DND5E.AdditionalControls" }}">
+                            <i class="fas fa-ellipsis-vertical"></i>
+                        </a>
+
+                    </div>
+
+                </li>
+                {{/dnd5e-itemContext}}
+                {{/each}}
+            </ol>
+
+        </div>
+        {{/each}}
+
+    </section>
+</{{ elements.inventory }}>

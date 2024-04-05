@@ -1,0 +1,144 @@
+<{{ elements.effects }} class="effects-element" v2>
+
+    {{!-- Searching --}}
+    <item-list-controls for="effects" label="{{ localize "DND5E.EffectsSearch" }}" sort="a"
+                        collection="effects"></item-list-controls>
+
+    {{!-- Effects List --}}
+    <section class="items-list effects-list" data-item-list="effects">
+
+        {{!-- Sections / Categories --}}
+        {{#each effects}}
+        <div class="items-section card" data-effect-type="{{ type }}">
+
+            {{!-- Section Header --}}
+            <div class="items-header header {{#if disabled}}disabled{{/if}}">
+                <h3 class="item-name effect-name">{{ localize label }}</h3>
+                <div class="item-header effect-source">{{ localize "DND5E.Source" }}</div>
+                <div class="item-header item-controls effect-controls">
+                    {{#if info}}
+                    <a class="info-control" data-tooltip="{{ info }}" aria-label="{{ info }}">
+                        <i class="fas fa-circle-question"></i>
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+
+            {{!-- Section Contents --}}
+            <ol class="item-list unlist">
+                {{#each effects}}
+
+                {{!-- Effects --}}
+                <li class="item effect" data-effect-id="{{ id }}" data-entry-id="{{ id }}" data-item-name="{{ name }}"
+                    {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}>
+
+                    {{!-- Effect Name --}}
+                    <div class="item-name effect-name">
+                        <img class="item-image gold-icon" src="{{ img }}" alt="{{ name }}">
+                        <div class="name name-stacked">
+                            <span class="title">{{ name }}</span>
+                        </div>
+                        {{#if duration.remaining}}
+                        <div class="duration">
+                            <i class="fas fa-clock"></i>
+                            <span class="most-significant">{{ durationParts.[0] }}</span>
+                            {{#if durationParts.[1]}}
+                            <span class="separator">&vert;</span>
+                            <span class="least-significant">{{ durationParts.[1] }}</span>
+                            {{/if}}
+                        </div>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Effect Source --}}
+                    <div class="item-detail effect-source {{#unless source}}empty{{/unless}}">
+                        {{#if source}}
+                        {{#if hasTooltip}}
+                        <a class="item-tooltip" data-uuid="{{ source.uuid }}" data-tooltip-direction="RIGHT">
+                            {{ source.name }}
+                        </a>
+                        {{else}}
+                        {{ source.name }}
+                        {{/if}}
+                        {{/if}}
+                    </div>
+
+                    {{!-- Effect Status --}}
+                    <div class="item-detail item-controls effect-controls">
+
+                        {{#if @root.editable}}
+                        {{!-- Editing --}}
+                        <a class="effect-control item-control" data-action="edit" data-tooltip="DND5E.EffectEdit"
+                           aria-label="{{ localize "DND5E.EffectEdit" }}">
+                            <i class="fas fa-pen-to-square"></i>
+                        </a>
+
+                        {{!-- Deleting --}}
+                        <a class="effect-control item-control" data-action="delete" data-tooltip="DND5E.EffectDelete"
+                           aria-label="{{ localize "DND5E.EffectDelete" }}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        {{else if toggleable}}
+                        <a class="effect-control item-control {{#unless disabled}}active{{/unless}}"
+                           data-action="toggle"
+                           data-tooltip="{{#if disabled}}DND5E.EffectEnable{{else}}DND5E.EffectDisable{{/if}}"
+                           aria-label="{{#if disabled}}{{ localize "DND5E.EffectEnable" }}{{else}}{{ localize "DND5E.EffectDisable" }}{{/if}}">
+                            {{#if disabled}}
+                            <i class="fas fa-toggle-off"></i>
+                            {{else}}
+                            <i class="fas fa-toggle-on"></i>
+                            {{/if}}
+                        </a>
+                        {{/if}}
+
+                        {{!-- Context Menu --}}
+                        <a class="effect-control item-control interface-only" data-context-menu
+                           aria-label="{{ localize "DND5E.AdditionalControls" }}">
+                            <i class="fas fa-ellipsis-vertical"></i>
+                        </a>
+
+                    </div>
+
+                </li>
+
+                {{/each}}
+            </ol>
+
+        </div>
+        {{/each}}
+
+    </section>
+
+    <section class="items-list">
+
+        <div class="items-section card">
+
+            <div class="items-header header">
+                <h3 class="item-name">{{ localize "DND5E.Conditions" }}</h3>
+            </div>
+
+            <ul class="conditions-list unlist">
+                {{#each conditions}}
+                <li class="condition {{#unless disabled}}active{{/unless}} {{#if reference}}content-link{{/if}}"
+                    data-action="toggleCondition" data-uuid="{{ reference }}" data-condition-id="{{ id }}"
+                    data-tooltip="<section class=&quot;loading&quot;><i class=&quot;fas fa-spinner fa-spin-pulse&quot;></i></section>">
+                    <div class="icon">
+                        <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                    </div>
+                    <div class="name-stacked">
+                        <span class="title">{{ name }}</span>
+                    </div>
+                    {{#if disabled}}
+                    <i class="fas fa-toggle-off"></i>
+                    {{else}}
+                    <i class="fas fa-toggle-on"></i>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ul>
+
+        </div>
+
+    </section>
+
+</{{ elements.effects }}>

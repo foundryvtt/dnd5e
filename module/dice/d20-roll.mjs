@@ -219,7 +219,7 @@ export default class D20Roll extends Roll {
 
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
-      formula: `${this.formula} + @bonus`,
+      formulas: [{formula: `${this.formula} + @bonus`}],
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes,
       chooseModifier,

@@ -1,0 +1,125 @@
+{
+  "_id": "FkDyLSpiynKTQZdi",
+  "name": "Wings of Flying",
+  "type": "equipment",
+  "img": "icons/equipment/back/cloak-heavy-fur-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing this cloak, you can use an action to speak its command word. This turns the cloak into a pair of bat wings or bird wings on your back for 1 hour or until you repeat the command word as an action. The wings give you a flying speed of 60 feet. When they disappear, you can't use them again for 1d12 hours.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 3,
+    "price": {
+      "value": 5000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "hour"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "charges",
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": null,
+      "dex": null
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": null,
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "folder": "aJgMxnZED9XdoN2W",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.1",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233551,
+    "modifiedTime": 1707055841226,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!FkDyLSpiynKTQZdi"
+}

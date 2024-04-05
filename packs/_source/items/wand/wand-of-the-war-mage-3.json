@@ -1,0 +1,125 @@
+{
+  "_id": "IuVaBrq17AqxpXc4",
+  "name": "Wand of the War Mage +3",
+  "type": "equipment",
+  "img": "icons/weapons/staves/staff-engraved-red.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement by a spellcaster)</em></p>\n<p>While holding this wand, you gain a bonus to spell attack rolls of +3. In addition, you ignore half cover when making a spell attack.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 1,
+    "price": {
+      "value": 19200,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "uncommon",
+    "identified": true,
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 0,
+      "dex": null
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": null,
+    "proficient": null,
+    "type": {
+      "value": "trinket",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "folder": "1aDgsGVwDbPdxG2V",
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.1",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233576,
+    "modifiedTime": 1707055841710,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!IuVaBrq17AqxpXc4"
+}

@@ -1,0 +1,4312 @@
+{
+  "name": "Zanna (Gnome Wizard)",
+  "type": "character",
+  "img": "systems/dnd5e/tokens/heroes/WizardTome.webp",
+  "system": {
+    "abilities": {
+      "str": {
+        "value": 8,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "dex": {
+        "value": 12,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "con": {
+        "value": 15,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "int": {
+        "value": 17,
+        "proficient": 1,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "wis": {
+        "value": 13,
+        "proficient": 1,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "cha": {
+        "value": 10,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": null,
+        "calc": "default",
+        "formula": ""
+      },
+      "hp": {
+        "value": 8,
+        "max": null,
+        "temp": null,
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
+      },
+      "init": {
+        "ability": "",
+        "bonus": "0"
+      },
+      "movement": {
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
+        "hover": false
+      },
+      "attunement": {
+        "max": 3
+      },
+      "senses": {
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
+        "special": ""
+      },
+      "spellcasting": "int",
+      "death": {
+        "success": 0,
+        "failure": 0
+      },
+      "exhaustion": 0,
+      "inspiration": false
+    },
+    "details": {
+      "biography": {
+        "value": "<p>Always interested in tinkering, Zanna set out for adventure in order to find more spells for her spellbook, and perhaps one day create some of her own.</p>",
+        "public": ""
+      },
+      "alignment": "Chaotic Good",
+      "race": "ur4Pjajcd3IlxKlZ",
+      "background": "Nt4QsuSYvhIwSoO5",
+      "originalClass": "N4bhi6usK8wuNEnh",
+      "xp": {
+        "value": 0
+      },
+      "appearance": "",
+      "trait": "",
+      "ideal": "",
+      "bond": "",
+      "flaw": ""
+    },
+    "traits": {
+      "size": "sm",
+      "di": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [
+          "dwarvish",
+          "giant",
+          "common",
+          "gnomish"
+        ],
+        "custom": ""
+      },
+      "weaponProf": {
+        "value": [
+          "dagger",
+          "dart",
+          "sling",
+          "quarterstaff",
+          "lightcrossbow"
+        ],
+        "custom": ""
+      },
+      "armorProf": {
+        "value": [],
+        "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 10,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "arc": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "his": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "inv": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "med": {
+        "value": 1,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      }
+    },
+    "tools": {},
+    "spells": {
+      "spell1": {
+        "value": 2,
+        "override": null
+      },
+      "spell2": {
+        "value": 0,
+        "override": null
+      },
+      "spell3": {
+        "value": 0,
+        "override": null
+      },
+      "spell4": {
+        "value": 0,
+        "override": null
+      },
+      "spell5": {
+        "value": 0,
+        "override": null
+      },
+      "spell6": {
+        "value": 0,
+        "override": null
+      },
+      "spell7": {
+        "value": 0,
+        "override": null
+      },
+      "spell8": {
+        "value": 0,
+        "override": null
+      },
+      "spell9": {
+        "value": 0,
+        "override": null
+      },
+      "pact": {
+        "value": 0,
+        "override": null
+      },
+      "spell0": {
+        "value": 0,
+        "override": null
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "primary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      },
+      "secondary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      },
+      "tertiary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "flags": {},
+    "name": "Zanna",
+    "displayName": 30,
+    "width": 1,
+    "height": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "actorLink": true,
+    "disposition": 1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": "attributes.ac.value"
+    },
+    "randomImg": false,
+    "alpha": 1,
+    "light": {
+      "alpha": 1,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "type": null,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": null,
+      "tint": null,
+      "scaleX": 0.7,
+      "scaleY": 0.7,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": true,
+      "range": 60,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "_id": "ZTaGDK3lSy8a5T1l",
+      "name": "Component Pouch",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description).</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 2,
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "autoDestroy": false,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "ammo",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.eZGmdOhaTWMicXPW"
+        }
+      },
+      "img": "icons/containers/bags/pack-simple-leather-tan.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ZTaGDK3lSy8a5T1l"
+    },
+    {
+      "_id": "EPiw1vnn3pDOdO1m",
+      "name": "Quarterstaff",
+      "type": "weapon",
+      "system": {
+        "description": {
+          "value": "<p>A thick shaft of wood wrapped with a sturdy grip makes a highly functional weapon in addition to a stout walking stick.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 4,
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": "1d8 + @mod"
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "ver"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "simpleM",
+          "baseItem": "quarterstaff"
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.g2dWN7PQiMRYWzyk"
+        }
+      },
+      "img": "icons/weapons/staves/staff-simple-gold.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640403,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.EPiw1vnn3pDOdO1m"
+    },
+    {
+      "_id": "aJZGeP8AiFrEwgWX",
+      "name": "Robes",
+      "type": "equipment",
+      "system": {
+        "description": {
+          "value": "<p>Simple or ceremonial wear, often used by priests and other religious figures.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 4,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "none",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": null,
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": null,
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "clothing",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.8GCEodUsTEEpBlO6"
+        }
+      },
+      "img": "icons/equipment/back/mantle-collared-black.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.aJZGeP8AiFrEwgWX"
+    },
+    {
+      "_id": "wIPWkO6CHUrTw13Y",
+      "name": "Backpack",
+      "type": "container",
+      "system": {
+        "description": {
+          "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 5,
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "capacity": {
+          "type": "weight",
+          "value": 30
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.H8YCd689ezlD26aT"
+        }
+      },
+      "img": "icons/containers/bags/pack-simple-leather.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.wIPWkO6CHUrTw13Y"
+    },
+    {
+      "_id": "4rrQYmSFohtbkBwH",
+      "name": "Pouch",
+      "type": "container",
+      "system": {
+        "description": {
+          "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 1,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "capacity": {
+          "type": "weight",
+          "value": 6
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.9bWTRRDym06PzSAf"
+        }
+      },
+      "img": "icons/containers/bags/coinpouch-simple-tan.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640411,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.4rrQYmSFohtbkBwH"
+    },
+    {
+      "_id": "eYEelIdlbOvIRDkK",
+      "name": "Bedroll",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 7,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "adnd5e": {
+          "itemInfo": {
+            "type": "item",
+            "idx": 6
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.DVXmyetZuvxbzAwW"
+        }
+      },
+      "img": "icons/sundries/flags/banner-worn-blue.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.eYEelIdlbOvIRDkK"
+    },
+    {
+      "_id": "Ps3a8zDFtNoUfJDZ",
+      "name": "Hempen Rope (50 ft.)",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 10,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": false,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "abil",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "str",
+          "dc": 17,
+          "scaling": "flat"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "adnd5e": {
+          "itemInfo": {
+            "type": "item",
+            "idx": 8
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.QXmaarJ4X8P0C1HV"
+        }
+      },
+      "img": "icons/sundries/survival/rope-wrapped-brown.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.Ps3a8zDFtNoUfJDZ"
+    },
+    {
+      "_id": "rsSr1FRdaAKl6fpc",
+      "name": "Mess Kit",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 1,
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "adnd5e": {
+          "itemInfo": {
+            "type": "item",
+            "idx": 4
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.V13fjV5oSmvbRdgP"
+        }
+      },
+      "img": "icons/tools/cooking/fork-steel-grey.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640426,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.rsSr1FRdaAKl6fpc"
+    },
+    {
+      "_id": "FQpJpWjX9bsPZvDo",
+      "name": "Rations",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 10,
+        "weight": 2,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": true,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.f4w4GxBi0nYXmhX4"
+        }
+      },
+      "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640437,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.FQpJpWjX9bsPZvDo"
+    },
+    {
+      "_id": "zthIyDRa8OLDoBId",
+      "name": "Tinderbox",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 1,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.DNOSEAvF4Oh1DlWy"
+        }
+      },
+      "img": "icons/sundries/lights/torch-black.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640445,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.zthIyDRa8OLDoBId"
+    },
+    {
+      "_id": "rTQEtliS3CqxnBPg",
+      "name": "Torch",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 10,
+        "weight": 1,
+        "price": {
+          "value": 1,
+          "denomination": "cp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 40,
+          "width": null,
+          "units": "ft",
+          "type": "radius",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": true,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "fire"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "adnd5e": {
+          "itemInfo": {
+            "type": "item",
+            "idx": 7
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.BnOCLuNWhVvzHLjl"
+        }
+      },
+      "img": "icons/sundries/lights/torch-black.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011647511,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.rTQEtliS3CqxnBPg"
+    },
+    {
+      "_id": "xxVyo2I5EYUi3cla",
+      "name": "Waterskin",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 5,
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 4,
+          "max": "4",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": false,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.Uv0ilmzbWvqmlCVH"
+        }
+      },
+      "img": "icons/sundries/survival/wetskin-leather-purple.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640466,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.xxVyo2I5EYUi3cla"
+    },
+    {
+      "_id": "gIJ6Vm16khwtSS0q",
+      "name": "Ink Bottle",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A small bottle of ink for writing upon parchment.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0.06,
+        "price": {
+          "value": 10,
+          "denomination": "gp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.dP7jMKyHTTgVb3ii"
+        }
+      },
+      "img": "icons/consumables/potions/bottle-bulb-empty-glass.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.gIJ6Vm16khwtSS0q"
+    },
+    {
+      "_id": "EuWal2U6WQwbDmAL",
+      "name": "Ink Pen",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A deviced used in combination with ink to write or draw on a sheet of paper.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 2,
+          "denomination": "cp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.uVm7MiB71QblfnoY"
+        }
+      },
+      "img": "icons/commodities/materials/feather-red-.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011647522,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.EuWal2U6WQwbDmAL"
+    },
+    {
+      "_id": "MNtWDpVTu3jHk8be",
+      "name": "Parchment",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A single sheet of heavier parchment paper.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 1,
+          "denomination": "sp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.WFQS2vT8ddrFjTJg"
+        }
+      },
+      "img": "icons/sundries/documents/document-symbol-circle-gold-red.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640482,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.MNtWDpVTu3jHk8be"
+    },
+    {
+      "_id": "i3YAIUu7sNkJUPTU",
+      "name": "Book of Lore",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A book containing historical accounts, information pertaining to a particular field of lore, myth, or legend.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 5,
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.l794iywHk8Wc6Uvi"
+        }
+      },
+      "img": "icons/sundries/books/book-plain-orange.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.i3YAIUu7sNkJUPTU"
+    },
+    {
+      "_id": "23NorZLPXATDYptB",
+      "name": "Spellbook",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 3,
+        "price": {
+          "value": 50,
+          "denomination": "gp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.LBajgahniRJbAgDr"
+        }
+      },
+      "img": "icons/sundries/books/book-embossed-jewel-gold-purple.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.23NorZLPXATDYptB"
+    },
+    {
+      "_id": "rjlTBnXJGxoodrM3",
+      "name": "Small Knife",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>A blunt knife used by the scholarly to open letters and correspondence.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0.5,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.3nVvaHVfHsgwGlkL"
+        }
+      },
+      "img": "icons/weapons/daggers/dagger-jeweled-purple.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640492,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.rjlTBnXJGxoodrM3"
+    },
+    {
+      "_id": "5hEbhdZm1ozQ3B2g",
+      "name": "Tinker",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time. When you create a device, choose one of the following options:</p><p><em>Clockwork Toy:</em> This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</p><p><em>Fire Starter:</em> The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</p><p><em>Music Box:</em> When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song's end or when it is closed.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "hour",
+          "cost": 1,
+          "condition": "Expend 10 gp worth of materials"
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Rock Gnome",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.koRPOLtj8XAFMwnW"
+        }
+      },
+      "img": "icons/commodities/tech/cog-steel.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.5hEbhdZm1ozQ3B2g"
+    },
+    {
+      "_id": "EOmsUcFQJTfG2oio",
+      "name": "Fire Bolt",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried.</p><p>This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 120,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "rsak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d10",
+              "fire"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "evo",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "cantrip",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.EOmsUcFQJTfG2oio"
+        }
+      },
+      "img": "icons/magic/fire/projectile-fireball-smoke-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486020,
+        "modifiedTime": 1661603486020,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.EOmsUcFQJTfG2oio"
+    },
+    {
+      "_id": "Bnn9Nzajixvow9xi",
+      "name": "Light",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "object",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "dex",
+          "dc": 13,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "evo",
+        "materials": {
+          "value": "A firefly or phosphorescent moss.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "material"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      },
+      "img": "icons/magic/light/explosion-star-small-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486021,
+        "modifiedTime": 1661603486021,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.Bnn9Nzajixvow9xi"
+    },
+    {
+      "_id": "Utk1OQRwYkMkFRD3",
+      "name": "Mage Hand",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "space",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "con",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
+        }
+      },
+      "img": "icons/magic/water/water-hand.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486021,
+        "modifiedTime": 1661603486021,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.Utk1OQRwYkMkFRD3"
+    },
+    {
+      "_id": "7p9IuWrSWFgfyQo2",
+      "name": "Alarm",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won't set off the alarm. You also choose whether the alarm is mental or audible.</p><p>A mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.</p><p>An audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "minute",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "8",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 20,
+          "width": null,
+          "units": "ft",
+          "type": "cube",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "abj",
+        "materials": {
+          "value": "A tiny bell and a piece of fine silver wire.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.7p9IuWrSWFgfyQo2"
+        }
+      },
+      "img": "icons/magic/symbols/runes-triangle-orange-purple.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486022,
+        "modifiedTime": 1661603486022,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.7p9IuWrSWFgfyQo2"
+    },
+    {
+      "_id": "z1mx84ONwkXKUZd7",
+      "name": "Shield",
+      "type": "spell",
+      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
+      "system": {
+        "description": {
+          "value": "<p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "reaction",
+          "cost": 1,
+          "condition": "Which you take when you are hit by an attack or targeted by the magic missile spell"
+        },
+        "duration": {
+          "value": "1",
+          "units": "round"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "abj",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
+      },
+      "effects": [
+        {
+          "_id": "6pbotGIvqQkraPva",
+          "flags": {},
+          "changes": [
+            {
+              "key": "system.attributes.ac.bonus",
+              "value": "5",
+              "mode": 2,
+              "priority": null
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "rounds": 1,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
+          "origin": "Item.FlLKKv7bQBlIAs11",
+          "tint": null,
+          "transfer": false,
+          "name": "Shield",
+          "description": "",
+          "statuses": [],
+          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486022,
+        "modifiedTime": 1661603486022,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.z1mx84ONwkXKUZd7"
+    },
+    {
+      "_id": "JGT5bNqu9REL7Fuz",
+      "name": "Find Familiar",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Your familiar acts independently of you, but it always obeys your commands. In combat, it rolls its own initiative and acts on its own turn. A familiar can't attack, but it can take other actions as normal.</p><p>When the familiar drops to 0 hit points, it disappears, leaving behind no physical form. It reappears after you cast this spell again.</p><p>While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as an action, you can see through your familiar's eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has. During this time, you are deaf and blind with regard to your own senses.</p><p>As an action, you can temporarily dismiss your familiar. It disappears into a pocket dimension where it awaits your summons. Alternatively, you can dismiss it forever. As an action while it is temporarily dismissed, you can cause it to reappear in any unoccupied space within 30 feet of you.</p><p>You can't have more than one familiar at a time. If you cast this spell while you already have a familiar, you instead cause it to adopt a new form. Choose one of the forms from the above list. Your familiar transforms into the chosen creature.</p><p>Finally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell. Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it. If the spell requires an attack roll, you use your action modifier for the roll.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "hour",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "any",
+          "type": "space",
+          "prompt": true
+        },
+        "range": {
+          "value": 10,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "con",
+        "materials": {
+          "value": "10 gp worth of charcoal, incense, and herbs that must be consumed by fire in a brass brazier",
+          "consumed": true,
+          "cost": 10,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JGT5bNqu9REL7Fuz"
+        }
+      },
+      "img": "icons/magic/nature/wolf-paw-glow-purple-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486025,
+        "modifiedTime": 1661603486025,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.JGT5bNqu9REL7Fuz"
+    },
+    {
+      "_id": "CKZTpZlxj7hjjo2H",
+      "name": "Mage Armor",
+      "type": "spell",
+      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it until the spell ends. The target's base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "8",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "abj",
+        "materials": {
+          "value": "A piece of cured leather",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
+      },
+      "effects": [
+        {
+          "_id": "cfwMU7LuOJ619Lny",
+          "changes": [
+            {
+              "key": "system.attributes.ac.calc",
+              "value": "mage",
+              "mode": 5,
+              "priority": null
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
+          "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
+          "transfer": false,
+          "flags": {},
+          "tint": null,
+          "name": "Mage Armor",
+          "description": "",
+          "statuses": [],
+          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486026,
+        "modifiedTime": 1661603486026,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.CKZTpZlxj7hjjo2H"
+    },
+    {
+      "_id": "KhwiSi9fwVfUPtku",
+      "name": "Sleep",
+      "type": "spell",
+      "img": "icons/magic/light/explosion-star-small-pink.webp",
+      "system": {
+        "description": {
+          "value": "<p>This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected.</p><p>Undead and creatures immune to being charmed aren't affected by this spell.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 20,
+          "width": null,
+          "units": "ft",
+          "type": "sphere",
+          "prompt": true
+        },
+        "range": {
+          "value": 90,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "other",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "5d8",
+              ""
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "materials": {
+          "value": "A pinch of fine sand, rose petals, or a cricket.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "2d8"
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486027,
+        "modifiedTime": 1661603486027,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.KhwiSi9fwVfUPtku"
+    },
+    {
+      "_id": "41JIhpDyM9Anm7cs",
+      "name": "Magic Missile",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 120,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "other",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d4 + 1",
+              "force"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "evo",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.41JIhpDyM9Anm7cs"
+        }
+      },
+      "img": "icons/magic/fire/projectile-meteor-salvo-light-pink.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486027,
+        "modifiedTime": 1661603486027,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.41JIhpDyM9Anm7cs"
+    },
+    {
+      "name": "Scholar",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> History, plus your choice of one from among Arcana, Nature, and Religion</li><li><strong>Languages:</strong> Two of your choice</li><li><strong>Equipment:</strong> Scholar's robes, a writing kit, a book of lore, and a pouch containing 10 gp</li></ul>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "advancement": []
+      },
+      "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040326437,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "Nt4QsuSYvhIwSoO5",
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.Nt4QsuSYvhIwSoO5"
+    },
+    {
+      "_id": "N4bhi6usK8wuNEnh",
+      "name": "Wizard",
+      "type": "class",
+      "img": "icons/magic/air/wind-tornado-wall-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>As a wizard, you gain the following class features.</p><h3>Hit Points</h3><p><strong>Hit Dice:</strong> 1d6 per wizard level<br /><strong>Hit Points at 1st Level:</strong> 6 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d6 (or 4) + your Constitution modifier per wizard level after 1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> None<br /><strong>Weapons:</strong> Daggers, darts, slings, quarterstaffs, light crossbows<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Intelligence, Wisdom<br /><strong>Skills:</strong> Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion</p><h3>Equipment</h3><p>You start with the following equipment, in addition to the equipment granted by your background:</p><ul><li>(a) a quarterstaff or (b) a dagger</li><li>(a) a component pouch or (b) an arcane focus</li><li>(a) a scholar's pack or (b) an explorer's pack</li><li>A spellbook</li></ul><h1>Wizard Advancement</h1><table><thead><tr><td>Level</td><td>Proficiency Bonus</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.gbNo5eVPaqr8IVKL]{Spellcasting}, @UUID[Compendium.dnd5e.classfeatures.Item.e0uTcFPpgxjIyUW9]{Arcane Recovery}</td></tr><tr><td>2nd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.AEWr9EMxy5gj4ZFT]{Arcane Tradition}</td></tr><tr><td>3rd</td><td>+2</td><td>2nd Level Spell Slot</td></tr><tr><td>4th</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>5th</td><td>+3</td><td>3rd Level Spell Slot</td></tr><tr><td>6th</td><td>+3</td><td>Arcane Tradition feature</td></tr><tr><td>7th</td><td>+3</td><td>4th Level Spell Slot</td></tr><tr><td>8th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>9th</td><td>+4</td><td>5th Level Spell Slot</td></tr><tr><td>10th</td><td>+4</td><td>Arcane Tradition feature</td></tr><tr><td>11th</td><td>+4</td><td>6 Level Spell Slot</td></tr><tr><td>12th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>7th Level Spell Slot</td></tr><tr><td>14th</td><td>+5</td><td>Arcane Tradition feature</td></tr><tr><td>15th</td><td>+5</td><td>8th Level Spell Slot</td></tr><tr><td>16th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>9 Level Spell Slot</td></tr><tr><td>18th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.JfFfHTeIszx1hNRx]{Spell Mastery}</td></tr><tr><td>19th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.nUrZDi6QN1YjwAr6]{Signature Spells}</td></tr></tbody></table><h3>Your Spellbook</h3><p>The spells that you add to your spellbook as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library.</p><p><em><strong>Copying a Spell into the Book.</strong></em> When you find a wizard spell of 1st level or higher, you can add it to your spellbook if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.</p><p>Copying that spell into your spellbook involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your spellbook using your own notation.</p><p>For each level of the spell, the process takes 2 hours and costs 50 gp. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine inks you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.</p><p><em><strong>Replacing the Book.</strong></em> You can copy a spell from your own spellbook into another book—for example, if you want to make a backup copy of your spellbook. This is just like copying a new spell into your spellbook, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 gp for each level of the copied spell.</p><p>If you lose your spellbook, you can use the same procedure to transcribe the spells that you have prepared into a new spellbook. Filling out the remainder of your spellbook requires you to find new spells to do so, as normal. For this reason, many wizards keep backup spellbooks in a safe place.</p><p><em><strong>The Book's Appearance.</strong></em> Your spellbook is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library, or even a loose collection of notes scrounged together after you lost your previous spellbook in a mishap.</p><h1>Arcane Traditions</h1><p>The study of wizardry is ancient, stretching back to the earliest mortal discoveries of magic. It is firmly established in fantasy gaming worlds, with various traditions dedicated to its complex study.</p><p>The most common arcane traditions in the multiverse revolve around the schools of magic. Wizards through the ages have cataloged thousands of spells, grouping them into eight categories called schools. In some places, these traditions are literally schools. In other institutions, the schools are more like academic departments, with rival faculties competing for students and funding. Even wizards who train apprentices in the solitude of their own towers use the division of magic into schools as a learning device, since the spells of each school require mastery of different techniques.</p><p>@UUID[Compendium.dnd5e.subclasses.Item.Ye5f3FReEnuXfi0y]{School of Evocation}</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "identifier": "wizard",
+        "levels": 1,
+        "hitDice": "d6",
+        "hitDiceUsed": 0,
+        "advancement": [
+          {
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": "Hit Points",
+            "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+            "_id": "o1lOLgOTi4SFT675"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL",
+                "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "ZCH7glEObWbjFGHB": "Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL",
+                "fnxa7jBxIHkDyZuU": "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9"
+              }
+            },
+            "level": 1,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "NhwTsEnDKEFARuzC"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.AEWr9EMxy5gj4ZFT"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 2,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "0uOmTQCuBt5Uamzq"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.JfFfHTeIszx1hNRx"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 18,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "3mW9054CUxI1C7aO"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.nUrZDi6QN1YjwAr6"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 20,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "Eb7ydpaIxiGHB08g"
+          },
+          {
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "Choose two 3rd-level wizard spells in your spellbook as your signature spells.",
+              "choices": {
+                "20": 2
+              },
+              "allowDrops": true,
+              "type": "spell",
+              "pool": [],
+              "spell": {
+                "ability": "",
+                "preparation": "atwill",
+                "uses": {
+                  "max": "1",
+                  "per": "sr"
+                }
+              },
+              "restriction": {
+                "type": "",
+                "subtype": "",
+                "level": "3"
+              }
+            },
+            "value": {},
+            "title": "Signature Spells",
+            "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+            "_id": "tD8OooHM6soXzVTR"
+          },
+          {
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "cantrips-known",
+              "type": "number",
+              "distance": {
+                "units": ""
+              },
+              "scale": {
+                "1": {
+                  "value": 3
+                },
+                "4": {
+                  "value": 4
+                },
+                "10": {
+                  "value": 5
+                }
+              }
+            },
+            "value": {},
+            "title": "Cantrips Known",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "tLCuM1cHSnmr1VEu"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 4,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "EFPSW4WIEveFjZL0"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 8,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "uytL1QdWhsGgRAGk"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 12,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "OC4KaX8DSQVZFqli"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 16,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "tNdNUznXfjAyXGGQ"
+          },
+          {
+            "_id": "puDaUsYrlks0z5gm",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 19,
+            "title": ""
+          },
+          {
+            "_id": "JXcSQmjdfaJeSjZ7",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim:dagger",
+                "weapon:sim:dart",
+                "weapon:sim:lightcrossbow",
+                "weapon:sim:quarterstaff",
+                "weapon:sim:sling"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "weapon:sim:dagger",
+                "weapon:sim:dart",
+                "weapon:sim:lightcrossbow",
+                "weapon:sim:quarterstaff",
+                "weapon:sim:sling"
+              ]
+            }
+          },
+          {
+            "_id": "r1DG0GF8L6SkLNvq",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "saves:int",
+                "saves:wis"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "saves:int",
+                "saves:wis"
+              ]
+            }
+          },
+          {
+            "_id": "6blzmKC4EON0KM2e",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:arc",
+                    "skills:his",
+                    "skills:ins",
+                    "skills:inv",
+                    "skills:med",
+                    "skills:rel"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "skills:med",
+                "skills:inv"
+              ]
+            }
+          }
+        ],
+        "spellcasting": {
+          "progression": "full",
+          "ability": "int"
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classfeatures.wZK2Q0rXB0AQo8h3"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234283,
+        "modifiedTime": 1699993725827,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.N4bhi6usK8wuNEnh"
+    },
+    {
+      "_id": "ZCH7glEObWbjFGHB",
+      "name": "Spellcasting (Wizard)",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>As a student of arcane magic, you have a spellbook containing spells that show the first glimmerings of your true power.</p>\n<h5>Cantrips</h5>\n<p>At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.</p>\n<h5>Spellbook</h5>\n<p>At 1st level, you have a spellbook containing six 1stlevel wizard spells of your choice. Your spellbook is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.</p>\n<h5>Preparing and Casting Spells</h5>\n<p>The Wizard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p>\n<p>You prepare the list of wizard spells that are available for you to cast. To do so, choose a number of wizard spells from your spellbook equal to your Intelligence modifier + your wizard level (minimum of one spell). The spells must be of a level for which you have spell slots.</p>\n<p>For example, if you're a 3rd-level wizard, you have four 1st-level and two 2nd-level spell slots. With an Intelligence of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination, chosen from your spellbook. If you prepare the 1st-level spell magic missile, you can cast it using a 1st-level or a 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.</p>\n<p>You can change your list of prepared spells when you finish a long rest. Preparing a new list of wizard spells requires time spent studying your spellbook and memorizing the incantations and gestures you must make to cast the spell: at least 1 minute per spell level for each spell on your list.</p>\n<h5>Spellcasting Ability</h5>\n<p>Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through dedicated study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.</p>\n<p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Intelligence modifier</p>\n<p><strong>Spell attack modifier </strong>= your proficiency bonus + your Intelligence modifier</p>\n<h5>Ritual Casting</h5>\n<p>You can cast a wizard spell as a ritual if that spell has the ritual tag and you have the spell in your spellbook. You don't need to have the spell prepared.</p>\n<h5>Spellcasting Focus</h5>\n<p>You can use an arcane focus as a spellcasting focus for your wizard spells.</p>\n<h5>Learning Spells of 1st Level and Higher</h5>\n<p>Each time you gain a wizard level, you can add two wizard spells of your choice to your spellbook for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your spellbook (see the \"Your Spellbook\" sidebar).</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Wizard 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL",
+          "advancementOrigin": "N4bhi6usK8wuNEnh.NhwTsEnDKEFARuzC"
+        }
+      },
+      "img": "icons/magic/fire/explosion-embers-orange.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234406,
+        "modifiedTime": 1699987548856,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ZCH7glEObWbjFGHB"
+    },
+    {
+      "_id": "fnxa7jBxIHkDyZuU",
+      "name": "Arcane Recovery",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.</p><p>For example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "special",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "lr",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "The wizard can recover this number worth of spells slots (of 5th-level or lower):",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "ceil(@classes.wizard.levels/2)",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Wizard 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9",
+          "advancementOrigin": "N4bhi6usK8wuNEnh.NhwTsEnDKEFARuzC"
+        }
+      },
+      "img": "icons/magic/earth/explosion-lava-stone-green.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234399,
+        "modifiedTime": 1691519218869,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.fnxa7jBxIHkDyZuU"
+    },
+    {
+      "_id": "ur4Pjajcd3IlxKlZ",
+      "name": "Rock Gnome",
+      "type": "race",
+      "img": "icons/environment/wilderness/terrain-rocks-brown.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your gnome character has certain characteristics in common with all other gnomes.</p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 2.</p><p><em><strong>Age.</strong></em> Gnomes mature at the same rate humans do, and most are expected to settle down into an adult life by around age 40. They can live 350 to almost 500 years.</p><p><em><strong>Alignment.</strong></em> Gnomes are most often good. Those who tend toward law are sages, engineers, researchers, scholars, investigators, or inventors. Those who tend toward chaos are minstrels, tricksters, wanderers, or fanciful jewelers. Gnomes are good‑hearted, and even the tricksters among them are more playful than vicious.</p><p><em><strong>Size.</strong></em> Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 25 feet.</p><p><em><strong>Darkvision.</strong></em> Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Gnome Cunning.</strong></em> You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Gnomish. The Gnomish language, which uses the Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.</p><h5>Rock Gnome</h5><p>As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.</p><p><em><strong>Ability Score Increase.</strong></em> Your Constitution score increases by 1.</p><p><em><strong>Artificer's Lore.</strong></em> Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.</p><p><em><strong>Tinker.</strong></em> You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time.</p><p>When you create a device, choose one of the following options:</p><p><em>Clockwork Toy.</em> This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</p><p><em>Fire Starter.</em> The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</p><p><em>Music Box.</em> When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song's end or when it is closed.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "identifier": "rock-gnome",
+        "advancement": [
+          {
+            "_id": "oHASjkY2yexn8nAv",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH",
+                "Compendium.dnd5e.races.OQA1sHxKnSJq01dL",
+                "Compendium.dnd5e.races.koRPOLtj8XAFMwnW"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "PZFiXV29QKKu02BE": "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH",
+                "H5IsMCJRETbzQF6T": "Compendium.dnd5e.races.OQA1sHxKnSJq01dL",
+                "ylzIab4YKbPPyvj0": "Compendium.dnd5e.races.koRPOLtj8XAFMwnW"
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 1,
+                "int": 2,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "con": 1,
+                "int": 2
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "1qwH1s1GrEC8T8Qp",
+            "type": "Size",
+            "configuration": {
+              "hint": "Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small.",
+              "sizes": [
+                "sm"
+              ]
+            },
+            "value": {
+              "size": "sm"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "lQjgBd250F2JZeo2",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:standard:gnomish"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:gnomish"
+              ]
+            }
+          }
+        ],
+        "movement": {
+          "walk": 25,
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "units": "ft",
+          "hover": false
+        },
+        "senses": {
+          "darkvision": 60,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "type": {
+          "subtype": "gnome",
+          "value": "humanoid",
+          "custom": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.TZtarkKs6cgGD7z2"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677181053374,
+        "modifiedTime": 1699993725827,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ur4Pjajcd3IlxKlZ"
+    },
+    {
+      "_id": "PZFiXV29QKKu02BE",
+      "name": "Gnome Cunning",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Gnome",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH",
+          "advancementOrigin": "ur4Pjajcd3IlxKlZ.oHASjkY2yexn8nAv"
+        }
+      },
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234464,
+        "modifiedTime": 1699987548856,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.PZFiXV29QKKu02BE"
+    },
+    {
+      "_id": "H5IsMCJRETbzQF6T",
+      "name": "Artificer's Lore",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Rock Gnome",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.OQA1sHxKnSJq01dL",
+          "advancementOrigin": "ur4Pjajcd3IlxKlZ.oHASjkY2yexn8nAv"
+        }
+      },
+      "img": "icons/magic/fire/flame-burning-chain.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234468,
+        "modifiedTime": 1699987550173,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.H5IsMCJRETbzQF6T"
+    },
+    {
+      "_id": "ylzIab4YKbPPyvj0",
+      "name": "Tinker",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time. When you create a device, choose one of the following options:</p>\n<p><em>Clockwork Toy:</em> This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</p>\n<p><em>Fire Starter:</em> The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</p>\n<p><em>Music Box:</em> When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song's end or when it is closed.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "hour",
+          "cost": 1,
+          "condition": "Expend 10 gp worth of materials"
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Rock Gnome",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.koRPOLtj8XAFMwnW",
+          "advancementOrigin": "ur4Pjajcd3IlxKlZ.oHASjkY2yexn8nAv"
+        }
+      },
+      "img": "icons/commodities/tech/cog-steel.webp",
+      "effects": [
+        {
+          "_id": "CkQlNsLyTZGVbnKM",
+          "changes": [
+            {
+              "key": "system.traits.toolProf.value",
+              "mode": 2,
+              "value": "tinker",
+              "priority": null
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/commodities/tech/cog-steel.webp",
+          "origin": "Item.koRPOLtj8XAFMwnW",
+          "transfer": true,
+          "flags": {},
+          "tint": null,
+          "name": "Tinker",
+          "description": "",
+          "statuses": [],
+          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.ylzIab4YKbPPyvj0.CkQlNsLyTZGVbnKM"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234472,
+        "modifiedTime": 1699986898969,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ylzIab4YKbPPyvj0"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_id": "4Jsv5vYaJ1atUEDV",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787232155,
+    "modifiedTime": 1706819155143,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!actors!4Jsv5vYaJ1atUEDV"
+}

@@ -1,0 +1,138 @@
+{
+  "_id": "nSNhjX5F7f86AW1a",
+  "name": "Defender Greatsword",
+  "type": "weapon",
+  "img": "icons/weapons/polearms/spear-flared-silver-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement)</em></p><p>You gain a +3 bonus to attack and damage rolls made with this magic weapon.</p><p>The first time you attack with the sword on each of your turns, you can transfer some or all of the sword's bonus to your Armor Class, instead of using the bonus on any attacks that turn. For example, you could reduce the bonus to your attack and damage rolls to +1 and gain a +2 bonus to AC. The adjusted bonuses remain in effect until the start of your next turn, although you must hold the sword to gain a bonus to AC from it.</p><section class=\"secret foundry-note\" id=\"secret-vPTn0EbT3KHUiRNN\"><p><strong>Foundry Note</strong></p><p>The sword's bonus to attack and damage rolls have been included; please remember to manually subtract should the user transfer any of the bonus to their AC.</p></section>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 6,
+    "price": {
+      "value": 24000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 5,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "mwak",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "2d6 + @mod",
+          "slashing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "hvy",
+      "two",
+      "mgc"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "martialM",
+      "baseItem": "greatsword"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "magicalBonus": 3,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233860,
+    "modifiedTime": 1709659530250,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!nSNhjX5F7f86AW1a"
+}

@@ -1,0 +1,110 @@
+{
+  "_id": "zJ5LhDvTxYKzPIx4",
+  "name": "Sovereign Glue",
+  "type": "consumable",
+  "img": "icons/consumables/drinks/tea-jug-gourd-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p><p>This viscous, milky-white substance can form a permanent adhesive bond between any two objects. It must be stored in a jar or flask that has been coated inside with oil of slipperiness. When found, a container contains 1d6 + 1 ounces.</p><p>One ounce of the glue can cover a 1-foot square surface. The glue takes 1 minute to set. Once it has done so, the bond it creates can be broken only by the application of universal solvent or oil of etherealness, or with a @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell.</p><section class=\"secret foundry-note\" id=\"secret-s3MCPshCsEZEYTHn\"><p><strong>Foundry Note</strong></p><p>The 7 charges reflect the maximum amount a character can find. Please adjust as required.</p></section>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 0.25,
+    "price": {
+      "value": 400,
+      "denomination": "gp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": "Takes 1 minute to set."
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "ft",
+      "type": "square",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "touch"
+    },
+    "uses": {
+      "value": 7,
+      "max": "7",
+      "per": "charges",
+      "recovery": "",
+      "autoDestroy": true,
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "folder": "UnUwTG4YIgd0kaUJ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.1",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233977,
+    "modifiedTime": 1707055848301,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!zJ5LhDvTxYKzPIx4"
+}

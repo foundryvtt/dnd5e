@@ -1,0 +1,138 @@
+{
+  "_id": "QM3gdsL0eaAus7XT",
+  "name": "Vicious Handaxe",
+  "type": "weapon",
+  "img": "icons/weapons/axes/axe-broad-black.webp",
+  "system": {
+    "description": {
+      "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 2,
+    "price": {
+      "value": 350,
+      "denomination": "gp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 20,
+      "long": 60,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "mwak",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": "2d6"
+    },
+    "damage": {
+      "parts": [
+        [
+          "1d6 + @mod",
+          "slashing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "lgt",
+      "thr",
+      "mgc"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": "handaxe"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    },
+    "magicalBonus": null
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233650,
+    "modifiedTime": 1709659527323,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!QM3gdsL0eaAus7XT"
+}

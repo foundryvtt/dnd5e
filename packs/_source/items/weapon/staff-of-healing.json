@@ -1,0 +1,131 @@
+{
+  "_id": "WLVQJVpCWiPkCAtZ",
+  "name": "Staff of Healing",
+  "type": "weapon",
+  "img": "icons/weapons/staves/staff-simple-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement by a bard, cleric, or druid)</em></p><p>This staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spellcasting ability modifier: @UUID[Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP]{Cure Wounds} (1 charge per spell level, up to 4th), @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser Restoration} (2 charges), or @UUID[Compendium.dnd5e.spells.Item.Pyzmm8R7rVsNAPsd]{Mass Cure Wounds} (5 charges).</p><p>The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff vanishes in a flash of light, lost forever.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 4,
+    "price": {
+      "value": 13000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "veryRare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 10,
+      "max": "10",
+      "per": "charges",
+      "recovery": "1d6 + 4",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "heal",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "mgc"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    },
+    "magicalBonus": null
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233689,
+    "modifiedTime": 1709659527941,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!WLVQJVpCWiPkCAtZ"
+}

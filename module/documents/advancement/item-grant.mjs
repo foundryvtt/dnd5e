@@ -32,7 +32,7 @@ export default class ItemGrantAdvancement extends Advancement {
    * The item types that are supported in Item Grant.
    * @type {Set<string>}
    */
-  static VALID_TYPES = new Set(["feat", "spell", "consumable", "backpack", "equipment", "loot", "tool", "weapon"]);
+  static VALID_TYPES = new Set(["feat", "spell", "consumable", "container", "equipment", "loot", "tool", "weapon"]);
 
   /* -------------------------------------------- */
   /*  Display Methods                             */
@@ -48,9 +48,8 @@ export default class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
-    if ( !this.value.added || configMode ) {
-      return this.configuration.items.reduce((html, uuid) => html + dnd5e.utils.linkForUuid(uuid), "");
-    }
+    if ( !this.value.added || configMode ) return this.configuration.items.filter(i => fromUuidSync(i.uuid))
+      .reduce((html, i) => html + dnd5e.utils.linkForUuid(i.uuid), "");
 
     // Link to items on the actor
     else {

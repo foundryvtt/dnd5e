@@ -1,13 +1,15 @@
+import * as Trait from "../../documents/actor/trait.mjs";
+import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
 import ActorMovementConfig from "../actor/movement-config.mjs";
 import ActorSensesConfig from "../actor/senses-config.mjs";
 import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
 import Accordion from "../accordion.mjs";
+import EffectsElement from "../components/effects.mjs";
 import SourceConfig from "../source-config.mjs";
-import ActiveEffect5e from "../../documents/active-effect.mjs";
-import * as Trait from "../../documents/actor/trait.mjs";
-import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
+import StartingEquipmentConfig from "./starting-equipment-config.mjs";
+import SummoningConfig from "./summoning-config.mjs";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -15,15 +17,6 @@ import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
 export default class ItemSheet5e extends ItemSheet {
   constructor(...args) {
     super(...args);
-
-    // Expand the default size of the class sheet
-    if ( this.object.type === "class" ) {
-      this.options.width = this.position.width = 600;
-      this.options.height = this.position.height = 680;
-    }
-    else if ( this.object.type === "subclass" ) {
-      this.options.height = this.position.height = 540;
-    }
 
     this._accordions = this._createAccordions();
   }
@@ -34,7 +27,6 @@ export default class ItemSheet5e extends ItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       width: 560,
-      height: 500,
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
       scrollY: [
@@ -50,7 +42,10 @@ export default class ItemSheet5e extends ItemSheet {
       ],
       accordions: [{
         headingSelector: ".description-header", contentSelector: ".editor"
-      }]
+      }],
+      elements: {
+        effects: "dnd5e-effects"
+      }
     });
   }
 
@@ -106,6 +101,7 @@ export default class ItemSheet5e extends ItemSheet {
       isEmbedded: item.isEmbedded,
       advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
       rollData: this.item.getRollData(),
+      user: game.user,
 
       // Item Type, Status, and Details
       itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
@@ -118,8 +114,12 @@ export default class ItemSheet5e extends ItemSheet {
       isHealing: item.system.actionType === "heal",
       isFlatDC: item.system.save?.scaling === "flat",
       isLine: ["line", "wall"].includes(item.system.target?.type),
-      isFormulaRecharge: item.system.uses?.per in CONFIG.DND5E.limitedUseFormulaPeriods,
+      isFormulaRecharge: !!CONFIG.DND5E.limitedUsePeriods[item.system.uses?.per]?.formula,
       isCostlessAction: item.system.activation?.type in CONFIG.DND5E.staticAbilityActivationTypes,
+
+      // Identified state
+      isIdentifiable: "identified" in item.system,
+      isIdentified: item.system.identified !== false,
 
       // Vehicles
       isCrewed: item.system.activation?.type === "crew",
@@ -131,14 +131,21 @@ export default class ItemSheet5e extends ItemSheet {
       advancement: this._getItemAdvancement(item),
 
       // Prepare Active Effects
-      effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
+      effects: EffectsElement.prepareCategories(item.effects),
+      elements: this.options.elements,
+
+      concealDetails: !game.user.isGM && (this.document.system.identified === false)
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
+    if ( !item.isEmbedded && foundry.utils.isEmpty(context.abilityConsumptionTargets) ) {
+      context.abilityConsumptionHint = (this.item.system.consume?.type === "attribute")
+        ? "DND5E.ConsumeHint.Attribute" : "DND5E.ConsumeHint.Item";
+    }
 
     if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
-      const valids = item.system.validProperties;
-      context.properties = Object.entries(CONFIG.DND5E.itemProperties).reduce((obj, [k, v]) => {
-        if ( valids.has(k) ) obj[k] = { label: v.label, selected: item.system.properties.has(k) };
+      context.properties = item.system.validProperties.reduce((obj, k) => {
+        const v = CONFIG.DND5E.itemProperties[k];
+        obj[k] = { label: v.label, selected: item.system.properties.has(k) };
         return obj;
       }, {});
       if ( item.type !== "spell" ) context.properties = sortObjectEntries(context.properties, "label");
@@ -160,7 +167,7 @@ export default class ItemSheet5e extends ItemSheet {
     };
     context.enriched = {
       description: await TextEditor.enrichHTML(item.system.description.value, enrichmentOptions),
-      unidentified: await TextEditor.enrichHTML(item.system.description.unidentified, enrichmentOptions),
+      unidentified: await TextEditor.enrichHTML(item.system.unidentified?.description, enrichmentOptions),
       chat: await TextEditor.enrichHTML(item.system.description.chat, enrichmentOptions)
     };
     if ( this.editingDescriptionTarget ) {
@@ -215,7 +222,7 @@ export default class ItemSheet5e extends ItemSheet {
       }));
       if ( !items.length ) continue;
       advancement[level] = {
-        items: items.sort((a, b) => a.order.localeCompare(b.order)),
+        items: items.sort((a, b) => a.order.localeCompare(b.order, game.i18n.lang)),
         configured: (level > maxLevel) ? false : items.some(a => !a.configured) ? "partial" : "full"
       };
     }
@@ -230,8 +237,10 @@ export default class ItemSheet5e extends ItemSheet {
    * @protected
    */
   async _getItemBaseTypes() {
-    const type = this.item.type === "equipment" ? "armor" : this.item.type;
-    const baseIds = CONFIG.DND5E[`${type}Ids`];
+    const baseIds = this.item.type === "equipment" ? {
+      ...CONFIG.DND5E.armorIds,
+      ...CONFIG.DND5E.shieldIds
+    } : CONFIG.DND5E[`${this.item.type}Ids`];
     if ( baseIds === undefined ) return {};
 
     const baseType = this.item.system.type.value;
@@ -242,7 +251,7 @@ export default class ItemSheet5e extends ItemSheet {
       if ( baseType !== baseItem?.system?.type?.value ) continue;
       items[name] = baseItem.name;
     }
-    return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
+    return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1], game.i18n.lang)));
   }
 
   /* -------------------------------------------- */
@@ -256,7 +265,7 @@ export default class ItemSheet5e extends ItemSheet {
     const consume = this.item.system.consume || {};
     if ( !consume.type ) return [];
     const actor = this.item.actor;
-    if ( !actor ) return {};
+    if ( !actor && (consume.type !== "hitDice") ) return {};
 
     // Ammunition
     if ( consume.type === "ammo" ) {
@@ -268,7 +277,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Attributes
     else if ( consume.type === "attribute" ) {
-      const attrData = game.dnd5e.isV10 ? actor.system : actor.type;
+      const attrData = actor.type;
       return TokenDocument.implementation.getConsumedAttributes(attrData).reduce((obj, attr) => {
         obj[attr] = attr;
         return obj;
@@ -301,7 +310,7 @@ export default class ItemSheet5e extends ItemSheet {
         // Limited-use items
         const uses = i.system.uses || {};
         if ( uses.per && uses.max ) {
-          const label = (uses.per in CONFIG.DND5E.limitedUseFormulaPeriods)
+          const label = CONFIG.DND5E.limitedUsePeriods[uses.per]?.formula
             ? ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})`
             : ` (${game.i18n.format("DND5E.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
           obj[i.id] = i.name + label;
@@ -332,12 +341,9 @@ export default class ItemSheet5e extends ItemSheet {
         return game.i18n.localize(this.item.system.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
       case "feat":
       case "consumable":
-        const name = this.item.type === "feat" ? "featureTypes" : "consumableTypes";
-        const typeConfig = CONFIG.DND5E[name][this.item.system.type.value];
-        if ( typeConfig?.subtypes ) return typeConfig.subtypes[this.item.system.type.subtype] ?? null;
-        break;
+        return this.item.system.type.label;
       case "spell":
-        return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation];
+        return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation.mode]?.label;
       case "tool":
         return CONFIG.DND5E.proficiencyLevels[this.item.system.prof?.multiplier || 0];
     }
@@ -391,11 +397,8 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  setPosition(position={}) {
-    if ( !(this._minimized || position.height) ) {
-      position.height = (this._tabs[0].active === "details") ? "auto" : Math.max(this.height, this.options.height);
-    }
-    return super.setPosition(position);
+  _onChangeTab(event, tabs, active) {
+    this.setPosition({ height: "auto" });
   }
 
   /* -------------------------------------------- */
@@ -484,11 +487,6 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.isEditable ) {
       html.find(".config-button").click(this._onConfigMenu.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find(".effect-control").click(ev => {
-        const unsupported = game.dnd5e.isV10 && this.item.isOwned;
-        if ( unsupported ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
-        ActiveEffect5e.onManageActiveEffect(ev, this.item);
-      });
       html.find(".advancement .item-control").click(event => {
         const t = event.currentTarget;
         if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
@@ -548,6 +546,7 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+
   /**
    * Handle spawning the configuration applications.
    * @param {Event} event   The click event which originated the selection.
@@ -567,6 +566,12 @@ export default class ItemSheet5e extends ItemSheet {
         break;
       case "source":
         app = new SourceConfig(this.item, { keyPath: "system.source" });
+        break;
+      case "starting-equipment":
+        app = new StartingEquipmentConfig(this.item);
+        break;
+      case "summoning":
+        app = new SummoningConfig(this.item);
         break;
       case "type":
         app = new ActorTypeConfig(this.item, { keyPath: "system.type" });
@@ -608,16 +613,15 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @inheritdoc */
   _canDragStart(selector) {
-    if ( selector === ".advancement-item" ) return true;
-    return super._canDragStart(selector);
+    if ( [".advancement-item", "[data-effect-id]"].includes(selector) ) return true;
+    return this.isEditable;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   _canDragDrop(selector) {
-    if ( selector === ".advancement" ) return this.item.testUserPermission(game.user, "OWNER");
-    return super._canDragDrop(selector);
+    return this.isEditable;
   }
 
   /* -------------------------------------------- */
@@ -700,21 +704,25 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {Promise}
    */
   async _onDropAdvancement(event, data) {
+    if ( !this.item.system.advancement ) return;
+
     let advancements;
     let showDialog = false;
     if ( data.type === "Advancement" ) {
       advancements = [await fromUuid(data.uuid)];
     } else if ( data.type === "Item" ) {
       const item = await Item.implementation.fromDropData(data);
-      if ( !item ) return false;
+      if ( !item?.system.advancement ) return false;
       advancements = Object.values(item.advancement.byId);
       showDialog = true;
     } else {
       return false;
     }
     advancements = advancements.filter(a => {
+      const validItemTypes = CONFIG.DND5E.advancementTypes[a.constructor.typeName]?.validItemTypes
+        ?? a.metadata.validItemTypes;
       return !this.item.advancement.byId[a.id]
-        && a.constructor.metadata.validItemTypes.has(this.item.type)
+        && validItemTypes.has(this.item.type)
         && a.constructor.availableForItem(this.item);
     });
 
@@ -728,7 +736,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     if ( !advancements.length ) return false;
-    if ( this.item.isEmbedded && !game.settings.get("dnd5e", "disableAdvancements") ) {
+    if ( this.item.actor?.system.metadata?.supportsAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forNewAdvancement(this.item.actor, this.item.id, advancements);
       if ( manager.steps.length ) return manager.render(true);
     }
@@ -756,7 +764,8 @@ export default class ItemSheet5e extends ItemSheet {
       case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
       case "delete":
-        if ( this.item.isEmbedded && !game.settings.get("dnd5e", "disableAdvancements") ) {
+        if ( this.item.actor?.system.metadata?.supportsAdvancement
+            && !game.settings.get("dnd5e", "disableAdvancements") ) {
           manager = AdvancementManager.forDeletedAdvancement(this.item.actor, this.item.id, id);
           if ( manager.steps.length ) return manager.render(true);
         }

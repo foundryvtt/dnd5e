@@ -1,0 +1,113 @@
+{
+  "_id": "qcYitWoSMTnKkzM1",
+  "name": "Heal",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>Choose a creature that you can see within range. A surge of positive energy washes through the creature, causing it to regain 70 Hit Points. This spell also ends blindness, deafness, and any Diseases affecting the target. This spell has no effect on constructs or Undead.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th level or higher, the amount of Healing increases by 10 for each slot level above 6th.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature",
+      "prompt": true
+    },
+    "range": {
+      "value": 60,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "heal",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "70",
+          "healing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 6,
+    "school": "evo",
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": "10"
+    },
+    "properties": [
+      "vocal",
+      "somatic"
+    ],
+    "crewed": false
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/life/heart-cross-strong-flame-green.webp",
+  "effects": [],
+  "folder": "0pdesvXqKd55VOh2",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234231,
+    "modifiedTime": 1704823526007,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!qcYitWoSMTnKkzM1"
+}

@@ -1,0 +1,137 @@
+{
+  "_id": "FeouSUPUlUhfgeRp",
+  "name": "Staff of Charming",
+  "type": "weapon",
+  "img": "icons/weapons/staves/staff-simple-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement by a bard, cleric, druid, sorcerer, warlock, or wizard)</em></p><p>While holding this staff, you can use an action to expend 1 of its 10 charges to cast @UUID[Compendium.dnd5e.spells.Item.eS7XnnApoxRxYXPs]{Charm Person}, @UUID[Compendium.dnd5e.spells.Item.arzCrMRgcNiQuh43]{Command}, or @UUID[Compendium.dnd5e.spells.Item.4dSvfvTy2ZIJ3K4k]{Comprehend Languages} from it using your spell save DC. The staff can also be used as a magic quarterstaff.</p><p>If you are holding the staff and fail a saving throw against an enchantment spell that targets only you, you can turn your failed save into a successful one. You can't use this property of the staff again until the next dawn. If you succeed on a save against an enchantment spell that targets only you, with or without the staff's intervention, you can use your reaction to expend 1 charge from the staff and turn the spell back on its caster as if you had cast the spell.</p><p>The staff regains 1d8 + 2 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff becomes a nonmagical quarterstaff.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 4,
+    "price": {
+      "value": 12000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 5,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 10,
+      "max": "10",
+      "per": "charges",
+      "recovery": "1d8 + 2",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "save",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "1d6 + @mod",
+          "bludgeoning"
+        ]
+      ],
+      "versatile": "1d8 + @mod"
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "ver",
+      "mgc"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    },
+    "magicalBonus": null
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233548,
+    "modifiedTime": 1709659526229,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!FeouSUPUlUhfgeRp"
+}

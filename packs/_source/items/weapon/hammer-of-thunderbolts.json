@@ -1,0 +1,138 @@
+{
+  "_id": "wGDDt17DpBcXPuUD",
+  "name": "Hammer of Thunderbolts",
+  "type": "weapon",
+  "img": "icons/skills/melee/strike-hammer-destructive-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon (maul).</p>\n<p><strong>Giant's Bane</strong> (<em>requires attunement</em>)</p>\n<p>You must be wearing a Belt of Giant Strength (any variety) and Gauntlets of Ogre Power to attune to this weapon. The attunement ends if you take off either of those items. While you are attuned to this weapon and holding it, your Strength score increases by 4 and can exceed 20, but not 30.</p>\n<p>When you roll a 20 on an attack roll made with this weapon against a giant, the giant must succeed on a DC 17 Constitution saving throw or die.</p>\n<p>The hammer also has 5 charges. While attuned to it, you can expend 1 charge and make a ranged weapon attack with the hammer, hurling it as if it had the thrown property with a normal range of 20 feet and a long range of 60 feet. If the attack hits, the hammer unleashes a thunderclap audible out to 300 feet. The target and every creature within 30 feet of it must succeed on a DC 17 Constitution saving throw or be stunned until the end of your next turn. The hammer regains 1d4 + 1 expended charges daily at dawn.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 10,
+    "price": {
+      "value": 16000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 20,
+      "long": 60,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 5,
+      "max": "5",
+      "per": "charges",
+      "recovery": "1d4 + 1",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "mwak",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "2d6 +@mod",
+          "bludgeoning"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "con",
+      "dc": 17,
+      "scaling": "flat"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "hvy",
+      "two",
+      "mgc"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "martialM",
+      "baseItem": "maul"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "magicalBonus": 1,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233956,
+    "modifiedTime": 1709659531585,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!wGDDt17DpBcXPuUD"
+}

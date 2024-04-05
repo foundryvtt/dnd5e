@@ -1,0 +1,137 @@
+{
+  "_id": "URun3vYrXKJJdAJe",
+  "name": "Staff of Striking",
+  "type": "weapon",
+  "img": "icons/weapons/staves/staff-simple-brown.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>(Requires attunement)</em></p><p>This staff can be wielded as a magic quarterstaff that grants a +3 bonus to attack and damage rolls made with it.</p><p>The staff has 10 charges. When you hit with a melee attack using it, you can expend up to 3 of its charges. For each charge you expend, the target takes an extra 1d6 force damage. The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff becomes a nonmagical quarterstaff.</p><section class=\"secret foundry-note\" id=\"secret-Fp8PZmbsQFbsmSHS\"><p><strong>Foundry Note</strong></p><p>The Other Formula button has been configured to roll 1d6. Use to calculate any additional force damage.</p></section>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 4,
+    "price": {
+      "value": 21000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "veryRare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": 5,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 10,
+      "max": "10",
+      "per": "charges",
+      "recovery": "1d6 + 4",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "mwak",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "1d6 + @mod",
+          "bludgeoning"
+        ]
+      ],
+      "versatile": "1d8 + @mod"
+    },
+    "formula": "1d6",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": [
+      "ver",
+      "mgc"
+    ],
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "magicalBonus": 3,
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
+  },
+  "effects": [],
+  "folder": "MLMTCAvKsuFE3vYA",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233677,
+    "modifiedTime": 1709659527749,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!URun3vYrXKJJdAJe"
+}

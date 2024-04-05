@@ -25,11 +25,12 @@ export default class LongRestDialog extends Dialog {
 
   /** @inheritDoc */
   getData() {
-    const data = super.getData();
+    const context = super.getData();
     const variant = game.settings.get("dnd5e", "restVariant");
-    data.promptNewDay = variant !== "gritty";     // It's always a new day when resting 1 week
-    data.newDay = variant === "normal";           // It's probably a new day when resting normally (8 hours)
-    return data;
+    context.isGroup = this.actor.type === "group";
+    context.promptNewDay = variant !== "gritty";     // It's always a new day when resting 1 week
+    context.newDay = variant === "normal";           // It's probably a new day when resting normally (8 hours)
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -50,11 +51,8 @@ export default class LongRestDialog extends Dialog {
             icon: '<i class="fas fa-bed"></i>',
             label: game.i18n.localize("DND5E.Rest"),
             callback: html => {
-              let newDay = true;
-              if (game.settings.get("dnd5e", "restVariant") !== "gritty") {
-                newDay = html.find('input[name="newDay"]')[0].checked;
-              }
-              resolve(newDay);
+              const formData = new FormDataExtended(html.find("form")[0]);
+              resolve(formData.object);
             }
           },
           cancel: {

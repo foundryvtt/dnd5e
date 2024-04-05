@@ -44,7 +44,7 @@ export default class ActorSheetFlags extends BaseConfigSheet {
    */
   _getClasses() {
     const classes = this.object.items.filter(i => i.type === "class");
-    return classes.sort((a, b) => a.name.localeCompare(b.name)).reduce((obj, i) => {
+    return classes.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang)).reduce((obj, i) => {
       obj[i.id] = i.name;
       return obj;
     }, {});

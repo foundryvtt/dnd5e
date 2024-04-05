@@ -1,0 +1,98 @@
+{
+  "_id": "1DY8w3CXeD7PHDXF",
+  "name": "Whirlwind Attack",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You can use your action to make a melee attack against any number of creatures within 5 feet of you, with a separate attack roll for each target.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "multiattack"
+    },
+    "requirements": "Hunter 11",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "crewed": false,
+    "properties": []
+  },
+  "flags": {},
+  "img": "icons/skills/melee/spear-tips-quintuple-orange.webp",
+  "effects": [],
+  "folder": "UYfImiULTmGD1AvR",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234322,
+    "modifiedTime": 1704824714397,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!1DY8w3CXeD7PHDXF"
+}

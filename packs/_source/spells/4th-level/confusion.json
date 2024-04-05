@@ -1,0 +1,110 @@
+{
+  "_id": "9hQXdMSmerkTsHDe",
+  "name": "Confusion",
+  "type": "spell",
+  "img": "icons/magic/air/wind-tornado-cyclone-purple-pink.webp",
+  "system": {
+    "description": {
+      "value": "<p>This spell assaults and twists creatures' minds, spawning delusions and provoking uncontrolled action. Each creature in a 10-foot-radius sphere centered on a point you choose within range must succeed on a Wisdom saving throw when you cast this spell or be affected by it.</p>\n<p>An affected target can't take reactions and must roll from the @UUID[Compendium.dnd5e.tables.RollTable.LHEts1oDaDwcehuj]{Confusion} table at the start of each of its turns to determine its behavior for that turn.</p>\n<p><em><strong>At Higher Levels.</strong></em> When you cast this spell using a spell slot of 5th level or higher, the radius of the sphere increases by 5 feet for each slot level above 4th.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 10,
+      "width": null,
+      "units": "ft",
+      "type": "sphere",
+      "prompt": true
+    },
+    "range": {
+      "value": 90,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "1d10",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 4,
+    "school": "enc",
+    "materials": {
+      "value": "Three walnut shells.",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": ""
+    },
+    "properties": [
+      "vocal",
+      "somatic",
+      "material",
+      "concentration"
+    ],
+    "crewed": false
+  },
+  "effects": [],
+  "folder": "5auWSClKMDUIV5Ni",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234085,
+    "modifiedTime": 1704823522425,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!9hQXdMSmerkTsHDe"
+}

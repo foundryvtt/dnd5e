@@ -1,0 +1,3446 @@
+{
+  "name": "Merric (Halfling Barbarian)",
+  "type": "character",
+  "img": null,
+  "system": {
+    "abilities": {
+      "str": {
+        "value": 14,
+        "proficient": 1,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "dex": {
+        "value": 14,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "con": {
+        "value": 15,
+        "proficient": 1,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "int": {
+        "value": 8,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "wis": {
+        "value": 10,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      },
+      "cha": {
+        "value": 14,
+        "proficient": 0,
+        "max": null,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        }
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": null,
+        "calc": "unarmoredBarb",
+        "formula": ""
+      },
+      "hp": {
+        "value": 14,
+        "max": null,
+        "temp": null,
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
+      },
+      "init": {
+        "ability": "",
+        "bonus": "0"
+      },
+      "movement": {
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
+        "hover": false
+      },
+      "attunement": {
+        "max": 3
+      },
+      "senses": {
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
+        "special": ""
+      },
+      "spellcasting": "int",
+      "death": {
+        "success": 0,
+        "failure": 0
+      },
+      "exhaustion": 0,
+      "inspiration": false
+    },
+    "details": {
+      "biography": {
+        "value": "<p>Merric was once a vigilante, due to her innate sense of street justice. Though her small size may not seem like much in combat, she more than makes up for it with her violent outbursts of anger.</p>",
+        "public": ""
+      },
+      "alignment": "Chaotic Good",
+      "race": "DAbggfkfZ8yIEDyK",
+      "background": "XIVdS0HZI5lOG5bx",
+      "originalClass": "LX25nsSy2bvul2dp",
+      "xp": {
+        "value": 0
+      },
+      "appearance": "",
+      "trait": "",
+      "ideal": "",
+      "bond": "",
+      "flaw": ""
+    },
+    "traits": {
+      "size": "sm",
+      "di": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": "Advantage against being frightened"
+      },
+      "languages": {
+        "value": [
+          "common",
+          "halfling"
+        ],
+        "custom": ""
+      },
+      "weaponProf": {
+        "value": [
+          "sim",
+          "mar"
+        ],
+        "custom": ""
+      },
+      "armorProf": {
+        "value": [
+          "lgt",
+          "med",
+          "shl"
+        ],
+        "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 2,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ani": {
+        "value": 1,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ath": {
+        "value": 1,
+        "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ins": {
+        "value": 1,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "inv": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prc": {
+        "value": 1,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      }
+    },
+    "tools": {},
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null
+      },
+      "spell2": {
+        "value": 0,
+        "override": null
+      },
+      "spell3": {
+        "value": 0,
+        "override": null
+      },
+      "spell4": {
+        "value": 0,
+        "override": null
+      },
+      "spell5": {
+        "value": 0,
+        "override": null
+      },
+      "spell6": {
+        "value": 0,
+        "override": null
+      },
+      "spell7": {
+        "value": 0,
+        "override": null
+      },
+      "spell8": {
+        "value": 0,
+        "override": null
+      },
+      "spell9": {
+        "value": 0,
+        "override": null
+      },
+      "pact": {
+        "value": 0,
+        "override": null
+      },
+      "spell0": {
+        "value": 0,
+        "override": null
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "primary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      },
+      "secondary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      },
+      "tertiary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "flags": {},
+    "name": "Merric",
+    "displayName": 30,
+    "width": 1,
+    "height": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "actorLink": true,
+    "disposition": 1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": "attributes.ac.value"
+    },
+    "randomImg": false,
+    "alpha": 1,
+    "light": {
+      "alpha": 1,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "type": null,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": null,
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": true,
+      "range": 5,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "_id": "l87HKTUcZRp0PohR",
+      "name": "Javelin (melee)",
+      "type": "weapon",
+      "system": {
+        "description": {
+          "value": "<p>This light and flexible spear is designed for throwing, but is versatile enough to be used in melee combat as well.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": 120,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "thr"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "simpleM",
+          "baseItem": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {},
+      "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640852,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.l87HKTUcZRp0PohR"
+    },
+    {
+      "_id": "bvHyCpcudXZ2bN7i",
+      "name": "Javelin (thrown)",
+      "type": "weapon",
+      "system": {
+        "description": {
+          "value": "<p>This light and flexible spear is designed for throwing, but is versatile enough to be used in melee combat as well.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": 120,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "ammo",
+          "target": "acFqo6BnGivxj5lE",
+          "amount": 1,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "rwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "thr"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "simpleR",
+          "baseItem": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {},
+      "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640858,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.bvHyCpcudXZ2bN7i"
+    },
+    {
+      "_id": "acFqo6BnGivxj5lE",
+      "name": "Javelin",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>This light and flexible spear is designed for throwing, but is versatile enough to be used in melee combat as well.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 5,
+        "weight": 2,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "autoDestroy": false,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "ammo",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.DWLMnODrnHn8IbAG"
+        }
+      },
+      "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640874,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.acFqo6BnGivxj5lE"
+    },
+    {
+      "_id": "kccU0cngRTiFlfLu",
+      "name": "Greataxe",
+      "type": "weapon",
+      "system": {
+        "description": {
+          "value": "<p>This enormous axe features two twin crescent blades mounted on either side of a tall spiked shaft. Designed to be wielded with two hands and cleave foes in twain.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 7,
+        "price": {
+          "value": 30,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d12 + @mod",
+              "slashing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "hvy",
+          "two"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "martialM",
+          "baseItem": "greataxe"
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u"
+        }
+      },
+      "img": "icons/weapons/axes/axe-double.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.kccU0cngRTiFlfLu"
+    },
+    {
+      "_id": "9hY5bOuPFqGubCEw",
+      "name": "Backpack",
+      "type": "container",
+      "system": {
+        "description": {
+          "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 5,
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "capacity": {
+          "type": "weight",
+          "value": 30
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.H8YCd689ezlD26aT"
+        }
+      },
+      "img": "icons/containers/bags/pack-simple-leather.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.9hY5bOuPFqGubCEw"
+    },
+    {
+      "_id": "86aiVMgc7XPJ1z8C",
+      "name": "Bedroll",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 7,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.DVXmyetZuvxbzAwW"
+        }
+      },
+      "img": "icons/sundries/flags/banner-worn-blue.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.86aiVMgc7XPJ1z8C"
+    },
+    {
+      "_id": "SHXoXJMWZywkU7aV",
+      "name": "Hempen Rope (50 ft.)",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 10,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": false,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "abil",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "str",
+          "dc": 17,
+          "scaling": "flat"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.QXmaarJ4X8P0C1HV"
+        }
+      },
+      "img": "icons/sundries/survival/rope-wrapped-brown.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.SHXoXJMWZywkU7aV"
+    },
+    {
+      "_id": "pIYHCVrKJLq0D2Jc",
+      "name": "Rations",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 10,
+        "weight": 2,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": true,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.f4w4GxBi0nYXmhX4"
+        }
+      },
+      "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640909,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.pIYHCVrKJLq0D2Jc"
+    },
+    {
+      "_id": "j8eiLPd8bbBYNyC1",
+      "name": "Mess Kit",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 1,
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.V13fjV5oSmvbRdgP"
+        }
+      },
+      "img": "icons/tools/cooking/fork-steel-grey.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640919,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.j8eiLPd8bbBYNyC1"
+    },
+    {
+      "_id": "bHPIk24Cq3Z5FO86",
+      "name": "Tinderbox",
+      "type": "loot",
+      "system": {
+        "description": {
+          "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 1,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "rarity": "",
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.DNOSEAvF4Oh1DlWy"
+        }
+      },
+      "img": "icons/sundries/lights/torch-black.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640925,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.bHPIk24Cq3Z5FO86"
+    },
+    {
+      "_id": "YyXrE0aRDWy4AtwB",
+      "name": "Torch",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 10,
+        "weight": 1,
+        "price": {
+          "value": 1,
+          "denomination": "cp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 40,
+          "width": null,
+          "units": "ft",
+          "type": "radius",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": true,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "fire"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.BnOCLuNWhVvzHLjl"
+        }
+      },
+      "img": "icons/sundries/lights/torch-black.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011647601,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.YyXrE0aRDWy4AtwB"
+    },
+    {
+      "_id": "YvaZVAmilJd26Bfq",
+      "name": "Waterskin",
+      "type": "consumable",
+      "system": {
+        "description": {
+          "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 5,
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 4,
+          "max": "4",
+          "per": "charges",
+          "recovery": "",
+          "autoDestroy": false,
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.Uv0ilmzbWvqmlCVH"
+        }
+      },
+      "img": "icons/sundries/survival/wetskin-leather-purple.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
+        "createdTime": null,
+        "modifiedTime": 1670011640938,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.YvaZVAmilJd26Bfq"
+    },
+    {
+      "_id": "3hJ5vLP7E424pEo4",
+      "name": "Handaxe",
+      "type": "weapon",
+      "system": {
+        "description": {
+          "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 2,
+        "price": {
+          "value": 5,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 20,
+          "long": 60,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "slashing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "lgt",
+          "thr"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "simpleM",
+          "baseItem": "handaxe"
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.eO7Fbv5WBk5zvGOc"
+        }
+      },
+      "img": "icons/weapons/axes/axe-broad-black.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.3hJ5vLP7E424pEo4"
+    },
+    {
+      "_id": "uWLF3Gr976X8vd7n",
+      "name": "Handaxe (offhand)",
+      "type": "weapon",
+      "system": {
+        "description": {
+          "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 2,
+        "price": {
+          "value": 5,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 20,
+          "long": 60,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d6",
+              "slashing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "lgt",
+          "thr"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "simpleM",
+          "baseItem": ""
+        },
+        "container": null
+      },
+      "sort": 0,
+      "flags": {},
+      "img": "icons/weapons/axes/axe-broad-black.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.uWLF3Gr976X8vd7n"
+    },
+    {
+      "name": "Vigilante",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Insight, Investigation, Perception</li><li><strong>Equipment:</strong> Explorer's Pack, 2 gp</li></ul>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "advancement": []
+      },
+      "img": "icons/magic/fire/flame-burning-fist-strike.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040848723,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "XIVdS0HZI5lOG5bx",
+      "_key": "!actors.items!irWonyO6ZLh47sN7.XIVdS0HZI5lOG5bx"
+    },
+    {
+      "_id": "LX25nsSy2bvul2dp",
+      "name": "Barbarian",
+      "type": "class",
+      "img": "icons/skills/melee/hand-grip-sword-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p>As a barbarian, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d12 per barbarian level<br /><strong>Hit Points at 1st Level:</strong> 12 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d12 (or 7) + your Constitution modifier per barbarian level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong> Choose two from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a greataxe or (b) any martial melee weapon</li>\n<li>(a) two handaxes or (b) any simple weapon</li>\n<li>An explorer's pack and four javelins</li>\n</ul>\n<h1>Barbarian Advancement</h1>\n<table border=\"0\">\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n<td>Rages</td>\n<td>Rage Damage</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.VoR0SUrNX5EJVPIO]{Rage}, @UUID[Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK]{Unarmored Defense}</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.SCVjqRdlZ9cvHVSR]{Reckless Attack}, @UUID[Compendium.dnd5e.classfeatures.Item.vt31lWAULygEl7yk]{Danger Sense}</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.TH1QAf6YNGSeBVjT]{Primal Path}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.XogoBnFWmCAHXppo]{Extra Attack}, @UUID[Compendium.dnd5e.classfeatures.Item.Kl6zifJ5OmdHlOi2]{Fast Movement}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>Path feature</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.NlXslw4yAqmKZWtN]{Feral Instinct}</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.L94gyvNpUhUe0rwh]{Brutal Critical (1 die)}</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Path feature</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.FqfmbPgxiyrWzhYk]{Relentless Rage}</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.L94gyvNpUhUe0rwh]{Brutal Critical (2 dice)}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>Path feature</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.l8tUhZ5Pecm9wz7I]{Persistent Rage}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>5</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.L94gyvNpUhUe0rwh]{Brutal Critical (3 dice)}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.Q1exex5ALteprrPo]{Indomitable Might}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@UUID[Compendium.dnd5e.classfeatures.Item.jVU4AgqfrFaqgXns]{Primal Champion}</td>\n<td>Unlimited</td>\n<td>+4</td>\n</tr>\n</tbody>\n</table>\n<h1>Primal Paths</h1>\n<p>@UUID[Compendium.dnd5e.subclasses.Item.uGuDQX9Mz3oHNHkU]{Path of the Berserker}</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "identifier": "barbarian",
+        "levels": 1,
+        "hitDice": "d12",
+        "hitDiceUsed": 0,
+        "advancement": [
+          {
+            "_id": "5jn0ekktgccyvvpw",
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": ""
+          },
+          {
+            "_id": "amez6rlose3eoigo",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
+                "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "t9n1JlIt64USZcYm": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
+                "jq7HHcrrGB4hc9dp": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"
+              }
+            },
+            "level": 1,
+            "title": "Features"
+          },
+          {
+            "_id": "udl318k61boq0rnn",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.SCVjqRdlZ9cvHVSR",
+                "Compendium.dnd5e.classfeatures.vt31lWAULygEl7yk"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 2,
+            "title": "Features"
+          },
+          {
+            "_id": "8y2ey740kizr4jb6",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.TH1QAf6YNGSeBVjT"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 3,
+            "title": "Features"
+          },
+          {
+            "_id": "uoexdq8totskritb",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo",
+                "Compendium.dnd5e.classfeatures.Kl6zifJ5OmdHlOi2"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 5,
+            "title": "Features"
+          },
+          {
+            "_id": "w6ceiqibcmzpcuy8",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.NlXslw4yAqmKZWtN"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 7,
+            "title": "Features"
+          },
+          {
+            "_id": "ty9si22p6pfwb3ow",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.L94gyvNpUhUe0rwh"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 9,
+            "title": "Features"
+          },
+          {
+            "_id": "802xi5l50le3ntk8",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.FqfmbPgxiyrWzhYk"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 11,
+            "title": "Features"
+          },
+          {
+            "_id": "g9ut0x1ugm31gbhk",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.l8tUhZ5Pecm9wz7I"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 15,
+            "title": "Features"
+          },
+          {
+            "_id": "so18afasiyobkpxy",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.Q1exex5ALteprrPo"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 18,
+            "title": "Features"
+          },
+          {
+            "_id": "9hvtrqbg7d7zwg07",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.jVU4AgqfrFaqgXns"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 20,
+            "title": "Features"
+          },
+          {
+            "_id": "62svnflxsuad7oar",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "rages",
+              "type": "number",
+              "scale": {
+                "1": {
+                  "value": 2
+                },
+                "3": {
+                  "value": 3
+                },
+                "6": {
+                  "value": 4
+                },
+                "12": {
+                  "value": 5
+                },
+                "17": {
+                  "value": 6
+                },
+                "20": {
+                  "value": 999
+                }
+              },
+              "distance": {
+                "units": ""
+              }
+            },
+            "value": {},
+            "title": "Rages"
+          },
+          {
+            "_id": "t42incolsbuqn2ec",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "rage-damage",
+              "type": "number",
+              "scale": {
+                "1": {
+                  "value": 2
+                },
+                "9": {
+                  "value": 3
+                },
+                "16": {
+                  "value": 4
+                }
+              },
+              "distance": {
+                "units": ""
+              }
+            },
+            "value": {},
+            "title": "Rage Damage"
+          },
+          {
+            "_id": "y0kr48pnq5doebeb",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "brutal-critical",
+              "type": "number",
+              "scale": {
+                "9": {
+                  "value": 1
+                },
+                "13": {
+                  "value": 2
+                },
+                "17": {
+                  "value": 3
+                }
+              },
+              "distance": {
+                "units": ""
+              }
+            },
+            "value": {},
+            "title": "Brutal Critical Dice"
+          },
+          {
+            "_id": "dZHMy3530RPCjzvD",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 4,
+            "title": ""
+          },
+          {
+            "_id": "dBMWU3h8MBO4PcEm",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 8,
+            "title": ""
+          },
+          {
+            "_id": "nROeTbeO8vrGjqAp",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 12,
+            "title": ""
+          },
+          {
+            "_id": "prZMkvcCNoLvF4yB",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 16,
+            "title": ""
+          },
+          {
+            "_id": "puDaUsYrlks0z5gm",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 19,
+            "title": ""
+          },
+          {
+            "_id": "fjwU0G5OtTZWOkib",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "armor:lgt",
+                "armor:med",
+                "armor:shl"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "armor:lgt",
+                "armor:med",
+                "armor:shl"
+              ]
+            }
+          },
+          {
+            "_id": "sFas4Tifj7zKgmkY",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim",
+                "weapon:mar"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "weapon:sim",
+                "weapon:mar"
+              ]
+            }
+          },
+          {
+            "_id": "CmX808i8HaWZ7VMx",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "saves:str",
+                "saves:con"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "saves:str",
+                "saves:con"
+              ]
+            }
+          },
+          {
+            "_id": "lD3JBViqmxFYu0kc",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:ani",
+                    "skills:ath",
+                    "skills:itm",
+                    "skills:nat",
+                    "skills:prc",
+                    "skills:sur"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "skills:ani",
+                "skills:ath"
+              ]
+            }
+          },
+          {
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "armor:shl"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "_id": "3ETNrLc8RQlHwNXP",
+            "classRestriction": "secondary",
+            "value": {}
+          }
+        ],
+        "spellcasting": {
+          "progression": "none",
+          "ability": ""
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classes.Item.pvEzGSv71zBhaolc"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234281,
+        "modifiedTime": 1699993047511,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.LX25nsSy2bvul2dp"
+    },
+    {
+      "_id": "t9n1JlIt64USZcYm",
+      "name": "Rage",
+      "type": "feat",
+      "img": "icons/creatures/abilities/mouth-teeth-human.webp",
+      "system": {
+        "description": {
+          "value": "<p>In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor:</p>\n<ul>\n<li>\n<p>You have advantage on Strength checks and Strength saving throws.</p>\n</li>\n<li>\n<p>When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.</p>\n</li>\n<li>\n<p>You have resistance to bludgeoning, piercing, and slashing damage.</p>\n</li>\n</ul>\n<p>If you are able to cast spells, you can't cast them or concentrate on them while raging. </p>\n<p>Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action. </p>\n<p>Once you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 2,
+          "max": "@scale.barbarian.rages",
+          "per": "lr",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Barbarian 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "effects": [
+        {
+          "_id": "eWhL8hUr0c2ujDUm",
+          "flags": {},
+          "changes": [
+            {
+              "key": "system.bonuses.mwak.damage",
+              "mode": 2,
+              "value": "+@scale.barbarian.rage-damage",
+              "priority": null
+            },
+            {
+              "key": "system.traits.dr.value",
+              "mode": 2,
+              "value": "slashing",
+              "priority": null
+            },
+            {
+              "key": "system.traits.dr.value",
+              "mode": 2,
+              "value": "piercing",
+              "priority": null
+            },
+            {
+              "key": "system.traits.dr.value",
+              "mode": 2,
+              "value": "bludgeoning",
+              "priority": null
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "rounds": 10,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/creatures/abilities/mouth-teeth-human.webp",
+          "origin": "Item.bdfYHJstcltQC7SZ",
+          "tint": null,
+          "transfer": false,
+          "name": "Rage",
+          "description": "",
+          "statuses": [],
+          "_key": "!actors.items.effects!irWonyO6ZLh47sN7.t9n1JlIt64USZcYm.eWhL8hUr0c2ujDUm"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
+          "advancementOrigin": "LX25nsSy2bvul2dp.amez6rlose3eoigo"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234384,
+        "modifiedTime": 1691519103297,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.t9n1JlIt64USZcYm"
+    },
+    {
+      "_id": "jq7HHcrrGB4hc9dp",
+      "name": "Unarmored Defense (Barbarian)",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Barbarian 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK",
+          "advancementOrigin": "LX25nsSy2bvul2dp.amez6rlose3eoigo"
+        }
+      },
+      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "effects": [
+        {
+          "_id": "hEgUnQNVxtBo2zkK",
+          "changes": [
+            {
+              "key": "system.attributes.ac.calc",
+              "mode": 5,
+              "value": "unarmoredBarb",
+              "priority": null
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
+          "origin": "Item.aIMXb43ACIxMItbh",
+          "transfer": true,
+          "flags": {},
+          "tint": null,
+          "name": "Unarmored Defense",
+          "description": "",
+          "statuses": [],
+          "_key": "!actors.items.effects!irWonyO6ZLh47sN7.jq7HHcrrGB4hc9dp.hEgUnQNVxtBo2zkK"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234378,
+        "modifiedTime": 1699987364863,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.jq7HHcrrGB4hc9dp"
+    },
+    {
+      "_id": "DAbggfkfZ8yIEDyK",
+      "name": "Lightfoot Halfling",
+      "type": "race",
+      "img": "icons/equipment/feet/shoes-leather-simple-brown.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your halfling character has a number of traits in common with all other halflings.</p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> A halfling reaches adulthood at the age of 20 and generally lives into the middle of his or her second century.</p><p><em><strong>Alignment.</strong></em> Most halflings are lawful good. As a rule, they are good-hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of their old ways.</p><p><em><strong>Size.</strong></em> Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 25 feet.</p><p><em><strong>Lucky.</strong></em> When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><p><em><strong>Brave.</strong></em> You have advantage on saving throws against being frightened.</p><p><em><strong>Halfling Nimbleness.</strong></em> You can move through the space of any creature that is of a size larger than yours.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Halfling. The Halfling language isn't secret, but halflings are loath to share it with others. They write very little, so they don't have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.</p><h5>Lightfoot</h5><p>As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You're inclined to be affable and get along well with others.</p><p>Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life.</p><p><em><strong>Ability Score Increase.</strong></em> Your Charisma score increases by 1.</p><p><em><strong>Naturally Stealthy.</strong></em> You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "identifier": "lightfoot-halfling",
+        "advancement": [
+          {
+            "_id": "nInhIgkbzzJTdm8F",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.LOMdcNAGWh5xpfm4",
+                "Compendium.dnd5e.races.7Yoo9hG0hfPSmBoC",
+                "Compendium.dnd5e.races.PqxZgcJzp1VVgP8t",
+                "Compendium.dnd5e.races.GWPjKFeIthBBeCFJ"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "JQl3VzzqbaXKQUy4": "Compendium.dnd5e.races.LOMdcNAGWh5xpfm4",
+                "PzGCDcNJshheVVAl": "Compendium.dnd5e.races.7Yoo9hG0hfPSmBoC",
+                "5AZTgt4DbYOMJtBh": "Compendium.dnd5e.races.PqxZgcJzp1VVgP8t",
+                "WPhg1wZUed3W0ili": "Compendium.dnd5e.races.GWPjKFeIthBBeCFJ"
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 0,
+                "dex": 2,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 1
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "dex": 2,
+                "cha": 1
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "hv2bcANK5jEJZaAb",
+            "type": "Size",
+            "configuration": {
+              "hint": "Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.",
+              "sizes": [
+                "sm"
+              ]
+            },
+            "value": {
+              "size": "sm"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "nGwMjsfNU6CXHk3A",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:standard:halfling"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:halfling"
+              ]
+            }
+          }
+        ],
+        "movement": {
+          "walk": 25,
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "units": "ft",
+          "hover": false
+        },
+        "type": {
+          "subtype": "halfling",
+          "value": "humanoid",
+          "custom": ""
+        },
+        "senses": {
+          "darkvision": 0,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.ZgYBjYYfiUstQD6f"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677178323356,
+        "modifiedTime": 1699993047511,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!irWonyO6ZLh47sN7.DAbggfkfZ8yIEDyK"
+    },
+    {
+      "_id": "JQl3VzzqbaXKQUy4",
+      "name": "Lucky",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><section id=\"secret-S04TPyvUh05Dz0Ng\" class=\"secret foundry-note\"><p><strong>Foundry Note</strong></p><p>This property can be enabled on your character sheet in the Special Traits configuration on the Attributes tab.</p></section>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Halfling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.LOMdcNAGWh5xpfm4",
+          "advancementOrigin": "DAbggfkfZ8yIEDyK.nInhIgkbzzJTdm8F"
+        }
+      },
+      "img": "icons/sundries/gaming/dice-runed-brown.webp",
+      "effects": [
+        {
+          "_id": "3ZXTUDl62zDpvpai",
+          "changes": [
+            {
+              "key": "flags.dnd5e.halflingLucky",
+              "mode": 5,
+              "value": "true",
+              "priority": null
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/sundries/gaming/dice-runed-brown.webp",
+          "origin": "Item.LOMdcNAGWh5xpfm4",
+          "transfer": true,
+          "flags": {},
+          "tint": null,
+          "name": "Lucky",
+          "description": "",
+          "statuses": [],
+          "_key": "!actors.items.effects!irWonyO6ZLh47sN7.JQl3VzzqbaXKQUy4.3ZXTUDl62zDpvpai"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234467,
+        "modifiedTime": 1699986724866,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.JQl3VzzqbaXKQUy4"
+    },
+    {
+      "_id": "PzGCDcNJshheVVAl",
+      "name": "Brave",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have advantage on saving throws against being frightened.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "You have advantage on saving throws against being frightened.",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Halfling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.7Yoo9hG0hfPSmBoC",
+          "advancementOrigin": "DAbggfkfZ8yIEDyK.nInhIgkbzzJTdm8F"
+        }
+      },
+      "img": "icons/skills/melee/unarmed-punch-fist.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234462,
+        "modifiedTime": 1699986724866,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.PzGCDcNJshheVVAl"
+    },
+    {
+      "_id": "5AZTgt4DbYOMJtBh",
+      "name": "Halfling Nimbleness",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You can move through the space of any creature that is of a size larger than yours.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Halfling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.PqxZgcJzp1VVgP8t",
+          "advancementOrigin": "DAbggfkfZ8yIEDyK.nInhIgkbzzJTdm8F"
+        }
+      },
+      "img": "icons/skills/movement/feet-winged-boots-brown.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234468,
+        "modifiedTime": 1699986724867,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.5AZTgt4DbYOMJtBh"
+    },
+    {
+      "_id": "WPhg1wZUed3W0ili",
+      "name": "Naturally Stealthy",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": "",
+          "baseItem": ""
+        },
+        "requirements": "Lightfoot Halfling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "properties": []
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.GWPjKFeIthBBeCFJ",
+          "advancementOrigin": "DAbggfkfZ8yIEDyK.nInhIgkbzzJTdm8F"
+        }
+      },
+      "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234465,
+        "modifiedTime": 1699986724867,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.WPhg1wZUed3W0ili"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "dnd5e": {
+      "halflingLucky": true
+    }
+  },
+  "_id": "irWonyO6ZLh47sN7",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787232184,
+    "modifiedTime": 1704823964785,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!actors!irWonyO6ZLh47sN7"
+}

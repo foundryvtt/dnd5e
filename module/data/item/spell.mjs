@@ -1,5 +1,5 @@
 import { filteredKeys } from "../../utils.mjs";
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
@@ -26,7 +26,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {string} scaling.mode               Spell scaling mode as defined in `DND5E.spellScalingModes`.
  * @property {string} scaling.formula            Dice formula used for scaling.
  */
-export default class SpellData extends SystemDataModel.mixin(
+export default class SpellData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
   /** @inheritdoc */
@@ -80,7 +80,9 @@ export default class SpellData extends SystemDataModel.mixin(
    */
   static _migrateComponentData(source) {
     const components = filteredKeys(source.system?.components ?? {});
-    if ( components.length ) foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", components);
+    if ( components.length ) {
+      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", components);
+    }
   }
 
   /* -------------------------------------------- */
@@ -92,6 +94,46 @@ export default class SpellData extends SystemDataModel.mixin(
   static #migrateScaling(source) {
     if ( !("scaling" in source) ) return;
     if ( (source.scaling.mode === "") || (source.scaling.mode === null) ) source.scaling.mode = "none";
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.properties.add("mgc");
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivatedEffectData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getCardData(enrichmentOptions={}) {
+    const context = await super.getCardData(enrichmentOptions);
+    context.isSpell = true;
+    context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
+    if ( this.parent.labels.components.vsm ) context.tags = [this.parent.labels.components.vsm, ...context.tags];
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: [this.parent.labels.components.vsm, this.parent.labels.activation],
+      modifier: this.parent.labels.modifier,
+      range: this.range,
+      save: this.save
+    });
   }
 
   /* -------------------------------------------- */
@@ -138,13 +180,13 @@ export default class SpellData extends SystemDataModel.mixin(
 
   /**
    * Provide a backwards compatible getter for accessing `components`.
-   * @deprecated since v2.5.
+   * @deprecated since v3.0.
    * @type {object}
    */
   get components() {
     foundry.utils.logCompatibilityWarning(
       "The `system.components` property has been deprecated in favor of a standardized `system.properties` property.",
-      { since: "DnD5e 2.5", until: "DnD5e 2.7", once: true }
+      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
     );
     return this.properties.reduce((acc, p) => {
       acc[p] = true;

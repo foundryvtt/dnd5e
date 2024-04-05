@@ -80,8 +80,8 @@ export default class ActorTypeConfig extends DocumentSheet {
       showSwarm: Object.hasOwn(attr, "swarm"),
       subtype: attr.subtype,
       swarm: attr.swarm,
-      sizes: Array.from(Object.entries(CONFIG.DND5E.actorSizes)).reverse().reduce((obj, e) => {
-        obj[e[0]] = e[1];
+      sizes: Array.from(Object.entries(CONFIG.DND5E.actorSizes)).reverse().reduce((obj, [key, { label }]) => {
+        obj[key] = label;
         return obj;
       }, {}),
       preview: Actor5e.formatCreatureType(attr) || "–"

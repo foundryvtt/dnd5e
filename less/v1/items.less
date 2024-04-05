@@ -1,0 +1,608 @@
+.dnd5e.sheet.item {
+  min-height: 400px;
+  max-height: 95%;
+  min-width: 480px;
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+
+  .sheet-header {
+    img.profile {
+      border: 2px solid #000;
+    }
+
+    .item-subtitle {
+      flex: 0 0 100px;
+      display: flex;
+      flex-direction: column;
+      height: 60px;
+      margin: 0;
+      padding: 5px;
+      text-align: right;
+      white-space: nowrap;
+      color: var(--dnd5e-color-tan);
+
+      .item-type {
+        flex-grow: 1;
+        font-size: var(--font-size-20);
+        line-height: 1em;
+        margin: 0;
+      }
+
+      .item-status {
+        font-size: var(--font-size-14);
+        line-height: 1em;
+      }
+
+      label {
+        display: block;
+        font-size: var(--font-size-14);
+        > input { display: none; }
+
+        &:has(input:not([disabled])) {
+          cursor: pointer;
+          &:hover, &:focus-visible {
+            text-shadow: 0 0 4px color-mix(in oklab, var(--color-shadow-primary), transparent);
+          }
+        }
+      }
+    }
+
+    .summary {
+      .class-level {
+        flex: 0 0 4em;
+        padding: 0 0.25em;
+        text-align: right;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.25em;
+
+        span {
+          padding-inline: 4px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-weight: 400;
+        }
+
+        .config-button {
+          display: none;
+          font-size: var(--font-size-14);
+          font-weight: normal;
+          padding-inline-end: 0.25em;
+        }
+        &:hover .config-button {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .sheet-navigation {
+    margin-bottom: 5px;
+    .item {
+      font-size: var(--font-size-18);
+    }
+  }
+
+  .sheet-body {
+    overflow: hidden;
+
+    .tab {
+      padding: 0 5px;
+      overflow: hidden auto;
+    }
+
+    .item-properties {
+      flex: 0 0 120px;
+      margin: 0 5px 0 0;
+      padding: 5px 5px 0 0;
+      border-right: var(--dnd5e-border-groove);
+      overflow: hidden auto;
+      height: 100%;
+
+      .form-group {
+        margin: 0;
+        label {
+          line-height: 20px;
+        }
+        input {
+          text-align: right;
+        }
+      }
+
+      .properties-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          margin: 3px 0;
+          padding: 0 2px;
+          background: rgba(0, 0, 0, 0.05);
+          border: var(--dnd5e-border-groove);
+          text-align: center;
+          font-size: var(--font-size-12);
+          line-height: 18px;
+        }
+      }
+
+      .properties-header {
+        font-weight: bold;
+        color: var(--dnd5e-color-olive);
+        margin: 0.5em 0 0 0;
+        font-size: var(--font-size-13);
+      }
+
+      [name="system.price.denomination"] {
+        border: none;
+      }
+    }
+  }
+
+  .form-group, h4 {
+    .config-button {
+      color: var(--dnd5e-color-olive);
+      font-size: var(--font-size-10);
+      font-weight: normal;
+      opacity: 0;
+    }
+
+    &:hover .config-button {
+      display: inline;
+      opacity: 1;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Description                         */
+  /* ----------------------------------------- */
+
+  [data-tab="description"] {
+    align-content: stretch;
+
+    .item-description {
+      .description-header {
+        display: flex;
+        align-items: first baseline;
+        gap: 0.5em;
+        margin-block-end: 0;
+        padding: 0.25rem;
+        background-color: rgb(0 0 0 / 0.05);
+
+        .description-edit {
+          margin-inline-start: auto;
+          opacity: 20%;
+
+          .fa-solid.fa-edit {
+            position: absolute;
+            inset-block: 0;
+            inset-inline-end: 0;
+            padding: 6px;
+          }
+        }
+        &:hover .description-edit {
+          opacity: 100%;
+        }
+      }
+      .editor + .description-header {
+        margin-block-start: 0.5rem;
+      }
+      .accordion .editor:not(.prosemirror) {
+        height: auto;
+        padding-inline: 0.25rem;
+      }
+      .accordion { margin-block-end: 0.5rem; }
+      .accordion p:last-child { margin-block-end: 0; }
+      .accordion.collapsed > .editor.accordion-content { height: 0; }
+      .editor.accordion-content > .editor-content { overflow: hidden; }
+      .accordion-indicator {
+        align-self: center;
+        opacity: 0.5;
+        font-size: 0.75em;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Details Form                        */
+  /* ----------------------------------------- */
+
+  .details {
+
+    // Item Sheet form fields
+    input[type="text"],
+    input[type="number"],
+    select {
+      height: 24px;
+      border: 1px solid var(--dnd5e-color-tan);
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    h3.form-header .config-button {
+      display: block;
+      padding: 3px;
+      float: right;
+      color: var(--dnd5e-color-tan);
+      font-size: var(--font-size-14);
+      text-align: end;
+    }
+
+    .form-group {
+      span {
+        text-align: center;
+        line-height: 24px;
+      }
+    }
+
+    .form-group.input-select {
+      select {
+        flex: 1.8;
+      }
+    }
+
+    .form-group.input-select-select {
+      select {
+        flex: 1.5;
+      }
+    }
+
+    .form-group.uses-per {
+      .form-fields {
+        flex-wrap: nowrap;
+      }
+      span {
+        flex: 0 0 16px;
+        margin: 0 4px 0 0;
+      }
+    }
+    .form-group.consumption .form-fields {
+      flex-wrap: wrap;
+      > * { margin: 0; }
+      [name="system.consume.amount"] { flex: 0 0 32px; }
+      [name="system.consume.type"] { flex: 0 0 100%; }
+    }
+    span.sep {
+      flex: 0 0 8px;
+    }
+
+    .prepared {
+      flex: 1.3 !important;
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    // Spell Materials
+    .spell-materials {
+      flex: 0 0 100%;
+      margin: 0.25em 0;
+      justify-content: flex-end;
+      label {
+        flex: 0 0 64px;
+        text-align: right;
+        margin-right: 5px;
+        font-size: var(--font-size-12);
+        line-height: 24px;
+      }
+      input[type="number"] {
+        flex: 0 0 48px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+
+  h4.damage-header {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    line-height: 24px;
+    color: var(--dnd5e-color-olive);
+  }
+
+  .damage-parts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .damage-part {
+      flex: 0 0 100%;
+      padding: 0;
+      input {
+        flex: 3;
+      }
+      select {
+        margin-left: 5px;
+        flex: 1;
+      }
+    }
+  }
+
+  .damage-control {
+    width: 18px;
+    flex: 0 0 18px;
+    line-height: 24px;
+    float: right;
+    text-align: right;
+    color: var(--dnd5e-color-tan);
+  }
+
+  .recharge.form-group {
+    span {
+      text-align: right;
+      padding-right: 3px;
+    }
+    input[type="number"] {
+      flex: 0 0 32px;
+      text-align: center;
+    }
+    label.checkbox {
+      flex: none;
+      input {
+        width: 16px;
+        height: 16px;
+        top: 4px;
+      }
+    }
+  }
+
+  .summoning.form-group {
+    .config-button {
+      opacity: 1;
+      font-size: var(--font-size-12);
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+
+  .weapon-properties label.checkbox {
+    flex: 0 0 98px;
+  }
+
+  /* ----------------------------------------- */
+  /*  Unidentified Items                       */
+  /* ----------------------------------------- */
+
+  [inert] {
+    filter: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cfilter%20id%3D%22b%22%20color-interpolation-filters%3D%22sRGB%22%20x%3D%220%22%20y%3D%220%22%3E%3CfeComponentTransfer%20in%3D%22SourceGraphic%22%20result%3D%22t%22%3E%3CfeFuncA%20type%3D%22table%22%20tableValues%3D%22-1%200.5%22/%3E%3C/feComponentTransfer%3E%3CfeMerge%20result%3D%22a%22%3E%3CfeMergeNode%20in%3D%22t%22/%3E%3CfeMergeNode%20in%3D%22SourceGraphic%22/%3E%3C/feMerge%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.025%22%20numOctaves%3D%221%22%20result%3D%22w%22/%3E%3CfeDisplacementMap%20xChannelSelector%3D%22R%22%20yChannelSelector%3D%22G%22%20scale%3D%2250%22%20in%3D%22a%22%20in2%3D%22w%22%20result%3D%22displacement-map-0%22/%3E%3C/filter%3E%3C/svg%3E#b") blur(3px) opacity(50%);
+  }
+  [data-tab]:has(.unidentified-notice) {
+    position: relative;
+
+    .unidentified-notice {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: start center;
+
+      > div {
+        margin-block-start: 4em;
+        margin-inline: auto;
+        padding: 2em;
+        border: 1px solid var(--dnd5e-color-tan);
+        border-radius: 4px;
+        box-shadow: 0 0 12px var(--dnd5e-shadow-45);
+        background: var(--dnd5e-sheet-background);
+        text-align: center;
+      }
+
+      strong {
+        font-size: var(--font-size-24);
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Item Advancement                         */
+/* ----------------------------------------- */
+
+.dnd5e .advancement .items-list {
+  height: 100%;
+
+  .main-controls {
+    .configuration-mode-control {
+      flex: 1 0;
+      margin-inline-start: 0.5em;
+      a { text-align: start; }
+    }
+    .item-add {
+      padding-block-start: 0.2em;
+    }
+  }
+  .items-header {
+    .item-checkmark {
+      flex: 0 0 44px;
+      color: rgb(17 145 17);
+      text-shadow: white 0 0 1px;
+    }
+    .item-warning {
+      flex: 0 0 44px;
+      color: rgb(250 255 35);
+      text-shadow: black 0 0 1px;
+    }
+  }
+  .item-name {
+    flex: 1 0 10em;
+  }
+  .item-controls {
+    border-left: 1px solid var(--dnd5e-color-faint);
+    flex: 0 0 44px;
+  }
+  .item-summary {
+    flex: 0 0 100%;
+    font-size: var(--font-size-12);
+    line-height: 16px;
+    padding: 0 .5em .5em 34px;
+    margin-top: -4px;
+    color: var(--dnd5e-color-dark);
+
+    .item-list {
+      .item-name {
+        display: flex;
+      }
+    }
+  }
+
+  .tag {
+    font-size: var(--font-size-11);
+    padding: 0.1em 0.5em;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Starting Equipment Configuration         */
+/* ----------------------------------------- */
+
+.dnd5e.starting-equipment {
+  --background-depth-1: var(--dnd5e-color-card);
+  --background-depth-2: color-mix(in oklab, var(--dnd5e-color-card), black 5%);
+  --background-depth-3: color-mix(in oklab, var(--dnd5e-color-card), black 10%);
+
+  select, input {
+    height: calc(var(--form-field-height) + 1px);
+  }
+
+  ul {
+    margin-block-end: 0;
+    padding: 0;
+    list-style: none;
+    gap: 12px;
+  }
+  li[data-entry-id] {
+    position: relative;
+    padding: 8px;
+    background: var(--background-depth-1);
+    border: 2px solid var(--dnd5e-color-gold);
+    border-radius: 4px;
+    box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+
+    &:has(.drag-bar) { padding-inline-end: 18px; }
+    &[data-depth="2"] { background: var(--background-depth-2); }
+    &[data-depth="3"] { background: var(--background-depth-3); }
+
+    .controls, .data { gap: 4px; }
+    .controls {
+      justify-content: space-between;
+      margin-block-end: 4px;
+    }
+    .drag-bar {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      inset-block: 0;
+      inset-inline-end: 0;
+      inline-size: 16px;
+      cursor: grab;
+      color: var(--dnd5e-color-faint);
+    }
+    [data-action="delete-entry"] {
+      --size: 26px;
+      flex: 0 0 var(--size);
+      margin: 0;
+      padding: 0;
+      block-size: var(--size);
+      inline-size: var(--size);
+      border: none;
+      background: none;
+      text-align: center;
+
+      &:hover, &:focus { box-shadow: none; }
+      &:hover, &:focus-visible { text-shadow: 0 0 5px var(--color-shadow-primary); }
+    }
+    [name$=".count"] { flex: 0 0 3em; }
+    .content-link, .drop-area {
+      display: flex;
+      align-items: center;
+    }
+    .drop-area {
+      border: 1px dashed black;
+      border-radius: 4px;
+      padding-inline: 4px;
+    }
+    .require-proficiency {
+      flex: 0.66;
+      align-items: center;
+      font-size: var(--font-size-11);
+      text-align: end;
+
+      input {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Summoning Configuration                  */
+/* ----------------------------------------- */
+
+.dnd5e.summoning-config {
+  max-block-size: 90vh;
+
+  .unbutton {
+    width: unset;
+    border: none;
+    background: none;
+    line-height: unset;
+
+    &:hover, &:focus { box-shadow: none; }
+    &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
+    &:focus-visible { outline: 2px solid black; }
+  }
+
+  .form-header {
+    justify-content: space-between;
+    button { flex: unset; }
+  }
+
+  ul.profiles {
+    padding: 0;
+    list-style: none;
+    gap: 12px;
+  }
+  li.profile {
+    position: relative;
+    padding: 8px;
+    background: var(--dnd5e-color-card);
+    border: 2px solid var(--dnd5e-color-gold);
+    border-radius: 4px;
+    box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+
+    .details {
+      gap: 4px;
+      input { height: unset; }
+      input::placeholder { opacity: .5; }
+    }
+    [data-action="delete-profile"] {
+      --size: 26px;
+      flex: 0 0 var(--size);
+      block-size: var(--size);
+      inline-size: var(--size);
+    }
+    .content-link, .drop-area {
+      flex: 0 0 175px;
+      display: flex;
+      align-items: center;
+    }
+    .drop-area {
+      border: 1px dashed black;
+      border-radius: 4px;
+      padding-inline: 4px;
+    }
+  }
+
+  multi-select .tags .tag {
+    cursor: pointer;
+  }
+}

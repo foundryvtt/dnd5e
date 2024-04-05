@@ -1,0 +1,103 @@
+{
+  "_id": "3CaP1vFHVR8LgHjx",
+  "name": "Foe Slayer",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 20th level, you become an unparalleled hunter of your enemies. Once on each of your turns, you can add your Wisdom modifier to the attack roll or the damage roll of an attack you make against one of your favored enemies. You can choose to use this feature before or after the roll, but before any effects of the roll are applied.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "special",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "wis",
+    "actionType": "other",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "@mod",
+          ""
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "@mod",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Ranger 20",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "crewed": false,
+    "properties": []
+  },
+  "flags": {},
+  "img": "icons/magic/fire/projectile-arrow-fire-red-yellow.webp",
+  "effects": [],
+  "folder": "S0rKJuStpCBy0hAf",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234324,
+    "modifiedTime": 1704824714481,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!3CaP1vFHVR8LgHjx"
+}

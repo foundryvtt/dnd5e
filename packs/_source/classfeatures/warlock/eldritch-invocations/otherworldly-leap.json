@@ -1,0 +1,101 @@
+{
+  "_id": "8zciiglzEOZo7DDN",
+  "name": "Otherworldly Leap",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You can cast @UUID[Compendium.dnd5e.spells.Item.ZrTc23tToJ0JpH2h]{Jump} on yourself at will, without expending a spell slot or material components.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "eldritchInvocation"
+    },
+    "requirements": "Warlock 9",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "crewed": false,
+    "properties": [],
+    "prerequisites": {
+      "level": 9
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/light/beam-strike-orange-gold.webp",
+  "effects": [],
+  "folder": "0uFCjs5gYeVtl38i",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.2.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234342,
+    "modifiedTime": 1712073609547,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!8zciiglzEOZo7DDN"
+}

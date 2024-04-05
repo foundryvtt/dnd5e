@@ -58,7 +58,7 @@
             <ul class="attributes flexrow">
                 <li class="attribute health">
                     <h4 class="attribute-name box-title">{{localize "DND5E.HitPoints"}}</h4>
-                    <a class="config-button" data-action="hit-points" data-tooltip="DND5E.HitPointsConfig">
+                    <a class="config-button" data-action="hitPoints" data-tooltip="DND5E.HitPointsConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value multiple">
@@ -81,12 +81,12 @@
 
                 <li class="attribute hit-dice">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.HitDice" }}</h4>
-                    <a class="config-button" data-action="hit-dice" data-tooltip="DND5E.HitDiceConfig">
+                    <a class="config-button" data-action="hitDice" data-tooltip="DND5E.HitDiceConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value multiple">
                         <label class="hit-dice">
-                            <span data-tooltip="DND5E.HitDiceRemaining">{{system.attributes.hd}}</span>
+                            <span data-tooltip="DND5E.HitDiceRemaining">{{system.attributes.hd.value}}</span>
                             <span class="sep"> / </span>
                             <span data-tooltip="DND5E.HitDiceMax">{{system.details.level}}</span>
                         </label>
@@ -174,7 +174,8 @@
                             {{numberFormat ability.save decimals=0 sign=true}}
                         </span>
                     </div>
-                    <a class="config-button" data-action="ability" data-tooltip="DND5E.AbilityConfigure">
+                    <a class="config-button" data-action="ability"
+                       data-tooltip="{{ localize "DND5E.AbilityConfigure" ability=ability.label }}">
                         <i class="fas fa-cog"></i>
                     </a>
                 </li>
@@ -267,7 +268,7 @@
 
         {{!-- Inventory Tab --}}
         <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-            {{> "dnd5e.actor-inventory" sections=inventory}}
+            {{> "dnd5e.inventory" sections=inventory}}
         </div>
 
         {{!-- Features Tab --}}

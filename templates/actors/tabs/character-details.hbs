@@ -1,0 +1,271 @@
+{{#*inline "skill-prof"}}
+    <li data-key="{{ @key }}" {{~#if reference}} data-reference-tooltip="{{ reference }}"{{/if}}>
+        <proficiency-cycle type="skill" name="{{ path }}.value" data-tooltip="{{ hover }}"
+                           value="{{#if @root.editable}}{{ baseValue }}{{else}}{{ value }}{{/if}}"
+                           aria-label="{{ localize hover }}" {{disabled (not @root.editable)}}></proficiency-cycle>
+        {{#if @root.editable}}
+        <select name="{{ path }}.ability" class="ability roboto-upper unselect">
+            {{ selectOptions @root.config.abilities selected=baseAbility labelAttr="abbreviation" }}
+        </select>
+        {{else}}
+        <div class="ability roboto-upper">{{ abbreviation }}</div>
+        {{/if}}
+        <a class="name {{ @root.rollableClass }} {{ roll }}">{{ label }}</a>
+        <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
+        {{#if @root.editable}}
+        <a class="config-button" data-action="{{ type }}" data-tooltip="{{ config }}"
+           aria-label="{{ localize config }}">
+            <i class="fas fa-cog"></i>
+        </a>
+        {{else if hasPassive}}
+        <div class="passive">{{ passive }}</div>
+        {{/if}}
+    </li>
+{{/inline}}
+
+{{#*inline "ability-prof"}}
+    <li data-ability="{{ @key }}" class="{{ class }}">
+        {{#if isConcentration}}
+        <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/concentrating.svg"></dnd5e-icon>
+        {{else}}
+        <proficiency-cycle type="ability" name="{{ path }}.proficient" data-tooltip="{{ hover }}"
+                           value="{{#if @root.editable}}{{ baseProf }}{{else}}{{ proficient }}{{/if}}"
+                           aria-label="{{ localize hover }}" {{ disabled (not @root.editable) }}></proficiency-cycle>
+        {{/if}}
+        <a class="name saving-throw full {{ @root.rollableClass }}">{{ label }}</a>
+        <a class="name saving-throw abbr {{ @root.rollableClass }}">{{ abbr }}</a>
+        <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
+        {{#if @root.editable}}
+        <a class="config-button" data-action="ability" data-tooltip="{{ config }}" aria-label="{{ localize config }}">
+            <i class="fas fa-cog"></i>
+        </a>
+        {{/if}}
+    </li>
+{{/inline}}
+
+{{#*inline "traits"}}
+    {{#if (or @root.editable values)}}
+    <div class="pills-group {{#unless values}}empty{{/unless}}">
+        <h3 class="icon">
+            {{#if icon}}<i class="{{ icon }}"></i>
+            {{~else if svg}}<dnd5e-icon src="systems/dnd5e/icons/svg/{{svg}}.svg"></dnd5e-icon>{{/if}}
+            <span class="roboto-upper">{{ localize label }}</span>
+            {{#if @root.editable}}
+            <a class="trait-selector" data-trait="{{ key }}"
+               data-tooltip="{{ localize "DND5E.TraitConfig" trait=(localize label) }}"
+               aria-label="{{ localize "DND5E.TraitConfig" trait=(localize label) }}">
+                <i class="fas fa-cog"></i>
+            </a>
+            {{/if}}
+        </h3>
+        <ul class="pills">
+            {{#each values}}
+            <li class="pill {{ ../color }} {{ color }}">
+                {{#each icons}}
+                {{#with (lookup (lookup @root.config.itemProperties this) "label") as |label|}}
+                <i class="{{ ../this }}" data-tooltip="{{ localize 'DND5E.DamagePhysicalBypassesShort' type=label }}"
+                   aria-label="{{ localize 'DND5E.DamagePhysicalBypassesShort' type=label }}"></i>
+                {{/with}}
+                {{/each}}
+                <span class="label">{{ label }}</span>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+{{/inline}}
+
+<div class="tab details col-2" data-group="primary" data-tab="details">
+
+    {{!-- Skills & Tools --}}
+    <div class="left">
+
+        {{!-- Skills --}}
+        <filigree-box class="skills">
+            <h3>
+                <i class="fas fa-briefcase"></i>
+                <span class="roboto-upper">{{ localize "DND5E.Skills" }}</span>
+            </h3>
+            <ul>
+                {{#each config.skills}}
+                {{#with (lookup @root.skills @key)}}
+                    {{> "skill-prof" path=(concat "system.skills." @key) config="DND5E.SkillConfigure"
+                        type="skill" hasPassive=true roll="skill-name" }}
+                {{/with}}
+                {{/each}}
+            </ul>
+        </filigree-box>
+
+        {{!-- Tools --}}
+        <filigree-box class="tools">
+            {{#if editable}}
+            <a class="trait-selector" data-trait="tool"
+               data-tooltip="{{ localize "DND5E.TraitConfig" trait=(localize "DND5E.TraitToolProf") }}"
+               aria-label="{{ localize "DND5E.TraitConfig" trait=(localize "DND5E.TraitToolProf") }}">
+                <i class="fas fa-cog"></i>
+            </a>
+            {{/if}}
+            <h3>
+                <i class="fas fa-hammer"></i>
+                <span class="roboto-upper">{{ localize "TYPES.Item.toolPl" }}</span>
+            </h3>
+            <ul>
+                {{#each tools}}
+                    {{> "skill-prof" path=(concat "system.tools." @key) config="DND5E.ToolConfigure"
+                        type="tool" hasPassive=false roll="tool-name" }}
+                {{/each}}
+            </ul>
+        </filigree-box>
+
+    </div>
+
+    {{!-- Background, Saving Throws, Proficiencies, & Senses --}}
+    <div class="right">
+
+        {{!-- Background & Saving Throws --}}
+        <div class="top flexrow">
+
+            {{!-- Saving Throws --}}
+            <filigree-box class="saves">
+                <h3>
+                    <i class="fas fa-shield-heart"></i>
+                    <span class="roboto-upper">{{ localize "DND5E.ClassSaves" }}</span>
+                </h3>
+                <ul>
+                    {{#each saves}}
+                        {{> "ability-prof" path=(concat "system.abilities." @key)
+                            config=(localize "DND5E.AbilityConfigure" ability=label) }}
+                    {{/each}}
+                </ul>
+            </filigree-box>
+
+            {{!-- Background --}}
+            <div class="pills-lg">
+                {{#with creatureType}}
+                <div class="pill-lg texture type" {{#if reference}}data-reference-tooltip="{{reference}}"{{/if}}>
+                    <div class="gold-icon creature-type {{ class }}" style="background-image: url('{{ icon }}');"></div>
+                    <div class="name name-stacked">
+                        <span class="title">
+                            {{ localize title }}
+                        </span>
+                        <span class="subtitle">{{ subtitle }}</span>
+                    </div>
+                    {{#if (and @root.editable @root.race)}}
+                    <a class="config-button" data-action="type" data-tooltip="DND5E.CreatureTypeConfig"
+                       aria-label="{{ localize "DND5E.CreatureTypeConfig" }}">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                    {{/if}}
+                </div>
+                {{/with}}
+                {{#if race}}
+                <div class="pill-lg texture race item-tooltip" data-action="edit"
+                     data-item-id="{{ system.details.race.id }}"
+                     aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
+                    {{#if system.details.race.img}}
+                    <img class="gold-icon" src="{{ system.details.race.img }}" alt="{{ system.details.race.name }}">
+                    {{/if}}
+                    <div class="name name-stacked">
+                        <span class="title">{{ system.details.race.name }}</span>
+                        {{#if editable}}
+                        <select class="actor-size unselect" name="system.traits.size">
+                            {{ selectOptions config.actorSizes selected=source.traits.size labelAttr="label" }}
+                        </select>
+                        {{else}}
+                        <span class="subtitle">{{ size.label }}</span>
+                        {{/if}}
+                    </div>
+                    {{#if editable}}
+                    <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                       aria-label="{{ localize "DND5E.ItemDelete" }}" data-tooltip-class data-tooltip-direction>
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    {{/if}}
+                </div>
+                {{else if actor.isOwner}}
+                <div class="pill-lg empty roboto-upper" data-action="findItem" data-item-type="race">
+                    {{ localize "DND5E.RaceAdd" }}
+                </div>
+                {{/if}}
+                {{#if background}}
+                <div class="pill-lg texture background item-tooltip" data-action="edit"
+                     data-item-id="{{ system.details.background.id }}"
+                     aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
+                    {{#if system.details.background.img}}
+                    <img class="gold-icon" src="{{ system.details.background.img }}"
+                         alt="{{ system.details.background.name }}">
+                    {{/if}}
+                    <div class="name name-stacked">
+                        <span class="title">{{ system.details.background.name }}</span>
+                    </div>
+                    {{#if editable}}
+                    <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                       aria-label="{{ localize "DND5E.ItemDelete" }}" data-tooltip-class data-tooltip-direction>
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    {{/if}}
+                </div>
+                {{else if actor.isOwner}}
+                <div class="pill-lg empty roboto-upper" data-action="findItem" data-item-type="background">
+                    {{ localize "DND5E.BackgroundAdd" }}
+                </div>
+                {{/if}}
+            </div>
+
+        </div>
+
+        {{!-- Senses --}}
+        {{#if (or editable senses)}}
+        <div class="pills-group {{#unless senses}}empty{{/unless}}">
+            <h3 class="icon">
+                <i class="fas fa-eye"></i>
+                <span class="roboto-upper">{{ localize "DND5E.Senses" }}</span>
+                {{#if editable}}
+                <a class="config-button" data-action="senses" data-tooltip="DND5E.SensesConfig"
+                   aria-label="{{ localize "DND5E.SensesConfig" }}">
+                    <i class="fas fa-cog"></i>
+                </a>
+                {{/if}}
+            </h3>
+            <ul class="pills">
+                {{#each senses}}
+                <li class="pill">
+                    <span class="label">{{ label }}</span>
+                    {{#if value}}
+                    <span class="separator">&vert;</span>
+                    <span class="value">{{ value }}</span>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+
+        {{!-- Resistances --}}
+        {{> "traits" values=traits.dr key="dr" color="green" icon="fas fa-shield-halved" label="DND5E.Resistances" }}
+
+        {{!-- Immunities --}}
+        {{#if editable}}
+            {{> "traits" values=traits.di key="di" color="green" icon="fas fa-shield" label="DND5E.DamImm" }}
+        {{else}}
+            {{> "traits" values=traits.di key="di" color="green" icon="fas fa-shield" label="DND5E.Immunities" }}
+        {{/if}}
+        {{> "traits" values=traits.ci key="ci" color="green" svg="rosa-shield" label="DND5E.ConImm" }}
+
+        {{!-- Vulnerabilities --}}
+        {{> "traits" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack" label="DND5E.Vulnerabilities" }}
+
+        {{!-- Damage Modification --}}
+        {{> "traits" values=traits.dm key="dm" icon="fas fa-heart-circle-plus" label="DND5E.DamageModification.Label" }}
+
+        {{!-- Armor --}}
+        {{> "traits" values=traits.armor key="armor" svg="checked-shield" label="DND5E.Armor" }}
+
+        {{!-- Weapons --}}
+        {{> "traits" values=traits.weapon key="weapon" svg="trait-weapon-proficiencies" label="TYPES.Item.weaponPl" }}
+
+        {{!-- Languages --}}
+        {{> "traits" values=traits.languages key="languages" icon="fas fa-flag" label="DND5E.Languages" }}
+
+    </div>
+</div>

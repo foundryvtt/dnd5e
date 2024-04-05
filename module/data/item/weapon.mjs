@@ -1,8 +1,9 @@
 import { filteredKeys } from "../../utils.mjs";
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
+import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
@@ -15,23 +16,26 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * Data definition for Weapon items.
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
+ * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  * @mixes MountableTemplate
  *
+ * @property {number} magicalBonus     Magical bonus added to attack & damage rolls.
  * @property {Set<string>} properties  Weapon's properties.
  * @property {number} proficient       Does the weapon's owner have proficiency?
  */
-export default class WeaponData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
+export default class WeaponData extends ItemDataModel.mixin(
+  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
+      magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
       properties: new SetField(new StringField(), {label: "DND5E.ItemWeaponProperties"}),
       proficient: new NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
@@ -72,6 +76,34 @@ export default class WeaponData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivatedEffectData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: CONFIG.DND5E.itemActionTypes[this.actionType],
+      modifier: this.parent.labels.modifier,
+      range: this.range
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -81,7 +113,19 @@ export default class WeaponData extends SystemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      CONFIG.DND5E.weaponTypes[this.type.value],
+      this.type.label,
+      this.isMountable ? (this.parent.labels?.armor ?? null) : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
+    return [
       this.isMountable ? (this.parent.labels?.armor ?? null) : null
     ];
   }

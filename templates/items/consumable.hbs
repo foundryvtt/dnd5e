@@ -6,20 +6,48 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
+                {{#if system.identified}}
                 <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}">
+                {{else}}
+                <input name="system.unidentified.name" type="text" value="{{system.unidentified.name}}"
+                       placeholder="{{ localize 'DND5E.NameUnidentified' }}">
+                {{/if}}
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{itemType}}</h4>
-                <span class="item-status">{{itemStatus}}</span>
+                <h4 class="item-type">{{ itemType }}</h4>
+                <label class="equipped">
+                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}>
+                    {{#if system.equipped}}
+                        {{ localize "DND5E.Equipped" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
+                    {{else}}
+                        {{ localize "DND5E.Unequipped" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
+                    {{/if}}
+                </label>
+                <label class="identified">
+                    <input type="checkbox" name="system.identified" {{checked system.identified}}>
+                    {{#if system.identified}}
+                        {{ localize "DND5E.Identified" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
+                    {{else}}
+                        {{ localize "DND5E.Unidentified.Title" }}
+                        {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
+                    {{/if}}
+                </label>
             </div>
 
             <ul class="summary flexrow">
-                <li>{{itemType}}</li>
+                <li>{{ itemStatus }}</li>
                 <li>
-                    <select name="system.rarity">
+                    {{#if concealDetails}}
+                    <span>{{ localize "DND5E.Unidentified.Title" }}</span>
+                    {{else}}
+                    <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>
+                    {{/if}}
                 </li>
                 <li>
                     {{> "dnd5e.item-source"}}
@@ -43,6 +71,8 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            {{#dnd5e-concealSection concealDetails}}
+
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableDetails" }}</h3>
 
             {{!-- Consumable Type --}}
@@ -71,17 +101,6 @@
                 </select>
             </div>
 
-            {{!-- Consumable Status --}}
-            <div class="form-group stacked">
-                <label>{{ localize "DND5E.ItemConsumableStatus" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}> {{ localize "DND5E.Equipped" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.identified" {{checked system.identified}}> {{ localize "DND5E.Identified" }}
-                </label>
-            </div>
-
             {{!-- Consumable Properties --}}
             <div class="form-group stacked weapon-properties">
                 {{#if (eq system.type.value "ammo")}}
@@ -96,6 +115,15 @@
                 {{/each}}
             </div>
 
+            {{#if (and properties.mgc.selected (eq system.type.value "ammo"))}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.MagicalBonus" }}</label>
+                <div class="form-fields">
+                    {{ numberInput system.magicalBonus name="system.magicalBonus" min="0" step="1" placeholder="0" }}
+                </div>
+            </div>
+            {{/if}}
+
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
@@ -105,6 +133,8 @@
 
             {{!-- Item Action Template --}}
             {{> "dnd5e.item-action"}}
+
+            {{/dnd5e-concealSection}}
         </div>
 
         {{!-- Effects Tab --}}

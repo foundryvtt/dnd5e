@@ -1,0 +1,293 @@
+/* ---------------------------------- */
+/*  Journal v2 Styles                 */
+/* ---------------------------------- */
+
+.sheet.journal-entry.dnd5e2-journal {
+  .window-resizable-handle {
+    bottom: 1px;
+    right: 1px;
+  }
+
+  .scrollable {
+    scrollbar-width: thin;
+    scrollbar-color: var(--dnd5e-color-gold) transparent;
+
+    &::-webkit-scrollbar-track {
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: none;
+      background: var(--dnd5e-color-gold);
+    }
+  }
+
+  /* Background Texture & Headings */
+  .journal-entry-content {
+    background: url("ui/texture1.webp") no-repeat top center / auto 770px,
+      var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
+
+    h1, h2, h3 {
+      font-family: var(--dnd5e-font-modesto);
+      font-weight: bold;
+      border-bottom: none;
+    }
+
+    h1 { font-size: 2.5em; }
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.5em; }
+
+    h4 {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+  }
+
+  /* Page Title */
+  .journal-header .title {
+    border: 1px transparent;
+    transition: all 250ms ease;
+    font-size: var(--font-size-46);
+    font-family: var(--dnd5e-font-modesto);
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    &:hover, &:focus {
+      border: 1px solid var(--dnd5e-color-gold);
+      box-shadow: 0 0 6px var(--dnd5e-color-gold);
+    }
+
+    &:disabled {
+      background: none;
+      color: var(--color-text-dark-primary);
+    }
+  }
+
+  /* Edit Button */
+  .edit-container .editor-edit {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    > i::before { content: "\f52d"; }
+  }
+
+  /* Content */
+  .journal-page-content {
+    font-family: var(--dnd5e-font-roboto-condensed);
+
+    /* Content Links & Enrichers */
+    .passive-check {
+      text-decoration-color: currentcolor;
+      text-decoration-style: dashed;
+      text-underline-offset: 2px;
+    }
+
+    a:is(.content-link, .inline-roll), :is(.roll-link, .reference-link) a {
+      background: transparent;
+      border: none;
+      text-decoration: underline currentcolor;
+      text-underline-offset: 2px;
+
+      > i {
+        color: var(--dnd5e-color-black);
+        opacity: .75;
+        transition: opacity 250ms ease;
+      }
+
+      &.broken {
+        color: var(--dnd5e-color-maroon);
+        cursor: not-allowed;
+        > i { color: currentcolor; }
+      }
+
+      &:hover {
+        text-shadow: none;
+        > i { opacity: 1; }
+      }
+
+      &:focus-visible { text-shadow: 0 0 8px var(--color-shadow-primary); }
+    }
+
+    a.enricher-action {
+      text-decoration: none;
+
+      &::before {
+        content: "\f105";
+        font-family: var(--font-awesome);
+        font-weight: bold;
+        margin: 0 4px 0 -6px;
+        font-size: var(--font-size-10);
+        color: var(--color-text-light-6);
+      }
+    }
+
+    .roll-link a > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      background: url("../../icons/svg/d20-black.svg") no-repeat center / contain;
+      vertical-align: middle;
+
+      &::before { content: unset; }
+    }
+
+    /* Embed Captions */
+    .content-embed figcaption cite {
+      display: block;
+      text-align: right;
+      &::before { content: "-"; }
+    }
+
+    /* Embedded Roll Tables */
+    figure.content-embed.caption-top {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      margin: 0 0 2rem 0;
+
+      table, img { order: 2; }
+
+      cite {
+        position: absolute;
+        inset: 100% 0 auto auto;
+      }
+
+      .embed-caption {
+        font-weight: normal;
+        text-align: left;
+        font-style: italic;
+      }
+    }
+
+    /* Tables */
+    table {
+      --dnd5e-color-table-row-even: var(--dnd5e-color-parchment);
+      --dnd5e-color-table-row-odd: var(--dnd5e-color-card);
+      background: var(--dnd5e-color-card);
+      border-color: var(--dnd5e-color-gold);
+
+      caption {
+        margin-block-end: 2px;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-variant: small-caps;
+        font-weight: bold;
+      }
+
+      thead {
+        background: linear-gradient(to right, var(--dnd5e-color-hd-1), var(--dnd5e-color-hd-2));
+        color: var(--color-text-light-0);
+        text-align: center;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+        text-shadow: none;
+        border-color: var(--dnd5e-color-gold);
+
+        tr:nth-child(n) { background: unset; }
+      }
+
+      tr:nth-child(even) { background-color: var(--dnd5e-color-table-row-even); }
+      tr:nth-child(odd) { background-color: var(--dnd5e-color-table-row-odd); }
+      td { padding: .375rem; }
+    }
+
+    /* Narrative Blocks */
+    .fvtt.narrative {
+      position: relative;
+      margin: 1.5rem 1rem;
+      padding: 1rem 1.5rem;
+      background-color: var(--dnd5e-color-card);
+      border-left: 1px solid var(--dnd5e-color-gold);
+      border-right: 1px solid var(--dnd5e-color-gold);
+      text-align: justify;
+      --dot-size: 8px;
+
+      &::before, &::after, > p:last-of-type::before, > p:last-of-type::after {
+        content: "";
+        position: absolute;
+        width: var(--dot-size);
+        height: var(--dot-size);
+        border-radius: 100%;
+        background: var(--dnd5e-color-gold);
+      }
+
+      &::before, &::after { top: calc(var(--dot-size) / -2); }
+      &::before, > p:last-of-type::before { left: calc(var(--dot-size) / -2); }
+      &::after, > p:last-of-type::after { right: calc(var(--dot-size) / -2); }
+      > p:last-of-type::before, > p:last-of-type::after { bottom: calc(var(--dot-size) / -2); }
+    }
+
+    /* Quest Blocks */
+    .fvtt:is(.quest, .advice) {
+      --img-size: 64px;
+      position: relative;
+      background-color: var(--dnd5e-color-card);
+      border: 2px solid var(--dnd5e-color-gold);
+      box-shadow: 1px 3px 5px var(--dnd5e-shadow-15);
+      margin: 1rem  1rem 1rem calc(var(--img-size) / 2);
+      padding: .75rem .75rem .75rem calc(var(--img-size) / 2 + .75rem);
+
+      article > p:last-child { margin-bottom: 0; }
+
+      > figure {
+        position: absolute;
+        width: var(--img-size);
+        height: var(--img-size);
+        margin: 0;
+        left: calc(var(--img-size) / -2);
+        top: calc(50% - var(--img-size) / 2);
+
+        img {
+          border: none;
+          width: 100%;
+          height: 100%;
+
+          &.round {
+            background: var(--dnd5e-color-light-gray);
+            border: 4px solid var(--dnd5e-color-gold);
+            border-radius: 100%;
+            box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+          }
+        }
+      }
+    }
+
+    /* Notable Callout */
+    aside.notable {
+      background-color: #d8e3e3;
+      margin: 30px 5px;
+      padding: 20px 28px 25px 30px;
+      border-width: 3px 1px;
+      border-style: solid;
+      border-color: #231f20 #b3b3b3;;
+      filter: drop-shadow(0 5px 8px var(--dnd5e-shadow-15));
+
+      &::before, &::after {
+        content: "";
+        background-image: url(ui/notable-right-corner.svg), url(ui/notable-left-corner.svg);
+        background-position: 0, 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 11px;
+        position: absolute;
+        left: 0;
+        z-index: -1;
+      }
+
+      &::before {
+        top: -13px;
+        right: 0;
+      }
+
+      &::after {
+        bottom: -13px;
+        right: 0;
+        transform: scaleY(-1);
+      }
+
+      p:last-of-type { margin-bottom: 0; }
+    }
+  }
+}

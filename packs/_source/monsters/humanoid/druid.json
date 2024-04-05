@@ -1,0 +1,1844 @@
+{
+  "_id": "K15Yl8JmB5iPircc",
+  "name": "Druid",
+  "type": "npc",
+  "img": null,
+  "system": {
+    "abilities": {
+      "str": {
+        "value": 10,
+        "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "dex": {
+        "value": 12,
+        "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "con": {
+        "value": 13,
+        "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "int": {
+        "value": 12,
+        "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "wis": {
+        "value": 15,
+        "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "cha": {
+        "value": 11,
+        "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": 11,
+        "calc": "natural",
+        "formula": ""
+      },
+      "hp": {
+        "value": 27,
+        "max": 27,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "5d8 + 5"
+      },
+      "init": {
+        "ability": "",
+        "bonus": "0"
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 0,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "attunement": {
+        "max": 3
+      },
+      "senses": {
+        "darkvision": 0,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "wis",
+      "exhaustion": 0
+    },
+    "details": {
+      "biography": {
+        "value": "",
+        "public": ""
+      },
+      "alignment": "any",
+      "race": null,
+      "type": {
+        "value": "humanoid",
+        "subtype": "Any Race",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "",
+      "cr": 2,
+      "spellLevel": 4,
+      "source": {
+        "custom": "",
+        "book": "SRD 5.1",
+        "page": "",
+        "license": "CC-BY-4.0"
+      }
+    },
+    "traits": {
+      "size": "med",
+      "di": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [
+          "druidic",
+          "custom"
+        ],
+        "custom": "any two languages"
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "med": {
+        "value": 1,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "nat": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prc": {
+        "value": 1,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 4,
+        "override": null
+      },
+      "spell2": {
+        "value": 3,
+        "override": null
+      },
+      "spell3": {
+        "value": 0,
+        "override": null
+      },
+      "spell4": {
+        "value": 0,
+        "override": null
+      },
+      "spell5": {
+        "value": 0,
+        "override": null
+      },
+      "spell6": {
+        "value": 0,
+        "override": null
+      },
+      "spell7": {
+        "value": 0,
+        "override": null
+      },
+      "spell8": {
+        "value": 0,
+        "override": null
+      },
+      "spell9": {
+        "value": 0,
+        "override": null
+      },
+      "pact": {
+        "value": 0,
+        "override": null
+      },
+      "spell0": {
+        "value": 0,
+        "override": null
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": null
+      }
+    },
+    "tools": {}
+  },
+  "prototypeToken": {
+    "name": "Druid",
+    "displayName": 20,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "disposition": -1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "flags": {},
+    "randomImg": false,
+    "alpha": 1,
+    "light": {
+      "alpha": 1,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "type": null,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": null,
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 0,
+      "brightness": 1,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "_id": "07sdy4qaaW4MaB8W",
+      "name": "Spellcasting",
+      "type": "feat",
+      "img": "icons/magic/light/projectiles-star-purple.webp",
+      "system": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p>The druid is a 4th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks).</p>\n<p>It has the following druid spells prepared:</p>\n<p><strong>Cantrips </strong>(at will): druidcraft, produce flame, shillelagh</p>\n<p><strong> 1st level</strong> (4 slots): entangle, longstrider, speak with animals, thunderwave</p>\n<p><strong>2nd level</strong> (3 slots): animal messenger, barkskin</p>\n</section>\n<p>The druid is a spellcaster. Its spellcasting ability is Wisdom.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "crewed": false,
+        "properties": []
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a"
+        }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.07sdy4qaaW4MaB8W"
+    },
+    {
+      "_id": "KUP8WEfLxlcY7K2x",
+      "name": "Quarterstaff",
+      "type": "weapon",
+      "img": "icons/weapons/staves/staff-simple-gold.webp",
+      "system": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +2 to hit (+4 to hit with shillelagh), reach 5 ft., one target. Hit: <strong>3 (1d6) <em>bludgeoning damage</em></strong>, or <strong>6 (1d8 + 2) <em>bludgeoning damage</em></strong> with shillelagh or if wielded with two hands.</p></section>\n<p>The Druid attacks with its Quarterstaff.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 4,
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "dex",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": "1d8 + @mod"
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "ver"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "simpleM",
+          "baseItem": "quarterstaff"
+        },
+        "container": null,
+        "crewed": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.items.g2dWN7PQiMRYWzyk"
+        }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.KUP8WEfLxlcY7K2x"
+    },
+    {
+      "_id": "SbSvZKkJASyk8jKo",
+      "name": "Druidcraft",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Whispering to the spirits of Nature, you create one of the following Effects within range:</p>\n<ul>\n<li>You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, Falling snowflakes for snow, and so on. This effect persists for 1 round.</li>\n<li>You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.</li>\n<li>You create an Instantaneous, harmless sensory effect, such as Falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.</li>\n<li>You instantly light or snuff out a Candle, a torch, or a small campfire.</li>\n</ul>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "trs",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.SbSvZKkJASyk8jKo"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
+        }
+      },
+      "img": "icons/magic/nature/vines-thorned-glow-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234141,
+        "modifiedTime": 1661791116365,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.SbSvZKkJASyk8jKo"
+    },
+    {
+      "_id": "eCPQuQkIabFKTl9u",
+      "name": "Produce Flame",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A flickering flame appears in your hand. The flame remains there for the Duration and harms neither you nor your Equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again.</p><p>You can also Attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell Attack. On a hit, the target takes 1d8 fire damage.</p><p>This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "rsak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d8",
+              "fire"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "con",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "cantrip",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.eCPQuQkIabFKTl9u"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-medium-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234183,
+        "modifiedTime": 1661791116365,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.eCPQuQkIabFKTl9u"
+    },
+    {
+      "name": "Entangle",
+      "type": "spell",
+      "img": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
+      "system": {
+        "description": {
+          "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": 20,
+          "width": null,
+          "units": "ft",
+          "type": "square",
+          "prompt": true
+        },
+        "range": {
+          "value": 90,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "str",
+          "dc": 12,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "con",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ],
+        "crewed": false
+      },
+      "effects": [],
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "concentration"
+          ]
+        }
+      },
+      "_id": "gMrWeG8fMDPRFiVe",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234191,
+        "modifiedTime": 1661791116366,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.gMrWeG8fMDPRFiVe"
+    },
+    {
+      "_id": "B0pnIcc52O6G8hi8",
+      "name": "Longstrider",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You touch a creature. The target's speed increases by 10 feet until the spell ends.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "trs",
+        "materials": {
+          "value": "A pinch of dirt",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.B0pnIcc52O6G8hi8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        }
+      },
+      "img": "icons/magic/air/wind-stream-blue-gray.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234090,
+        "modifiedTime": 1661791116366,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.B0pnIcc52O6G8hi8"
+    },
+    {
+      "_id": "aL1F8fvYLtNzUbKu",
+      "name": "Speak with Animals",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You gain the ability to comprehend and verbally communicate with beasts for the duration. The knowledge and awareness of many beasts is limited by their intelligence, but at minimum, beasts can give you information about nearby locations and monsters, including whatever they can perceive or have perceived within the past day. You might be able to persuade a beast to perform a small favor for you, at the DM's discretion.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "div",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.aL1F8fvYLtNzUbKu"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "ritual"
+          ]
+        }
+      },
+      "img": "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234167,
+        "modifiedTime": 1661791116366,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.aL1F8fvYLtNzUbKu"
+    },
+    {
+      "_id": "WTbOQBsarsL1LuXJ",
+      "name": "Thunderwave",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a Constitution saving throw. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed.</p><p>In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "target": {
+          "value": 15,
+          "width": null,
+          "units": "ft",
+          "type": "cube",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "2d8",
+              "thunder"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": 12,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "evo",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d8"
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
+        }
+      },
+      "img": "icons/magic/lightning/bolt-forked-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234152,
+        "modifiedTime": 1661791116367,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.WTbOQBsarsL1LuXJ"
+    },
+    {
+      "_id": "X8w9EzYLGc4vQ1H2",
+      "name": "Animal Messenger",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>By means of this spell, you use an animal to deliver a message. Choose a Tiny beast you can see within range, such as a squirrel, a blue jay, or a bat. You specify a location, which you must have visited, and a recipient who matches a general description, such as \"a man or woman dressed in the uniform of the town guard\" or \"a red-haired dwarf wearing a pointed hat.\" You also speak a message of up to twenty-five words. The target beast travels for the duration of the spell toward the specified location, covering about 50 miles per 24 hours for a flying messenger, or 25 miles for other animals.</p><p>When the messenger arrives, it delivers your message to the creature that you described, replicating the sound of your voice. The messenger speaks only to a creature matching the description you gave. If the messenger doesn't reach its destination before the spell ends, the message is lost, and the beast makes its way back to where you cast this spell.</p><p><strong>At Higher Levels.</strong> If you cast this spell using a spell slot of 3rd level or higher, the duration of the spell increases by 48 hours for each slot level above 2nd.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "24",
+          "units": "hour"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 2,
+        "school": "enc",
+        "materials": {
+          "value": "A morsel of food.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.X8w9EzYLGc4vQ1H2"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "ritual"
+          ]
+        }
+      },
+      "img": "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234156,
+        "modifiedTime": 1661791116367,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.X8w9EzYLGc4vQ1H2"
+    },
+    {
+      "_id": "VzgFzcmocr1X1cp4",
+      "name": "Shillelagh",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>The wood of a club or quarterstaff you are holding is imbued with nature's power. For the duration, you can use your spellcasting ability instead of Strength for the attack and damage rolls of melee attacks using that weapon, and the weapon's damage die becomes a d8. The weapon also becomes magical, if it isn't already. The spell ends if you cast it again or if you let go of the weapon.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "spec",
+          "type": "object",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d8 + @mod",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "trs",
+        "materials": {
+          "value": "A shamrock leaf, and a club or quarterstaff",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.VzgFzcmocr1X1cp4"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        }
+      },
+      "img": "icons/magic/fire/dagger-rune-enchant-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234149,
+        "modifiedTime": 1661791116367,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.VzgFzcmocr1X1cp4"
+    },
+    {
+      "_id": "JPwIEfgUPVebr5AH",
+      "name": "Barkskin",
+      "type": "spell",
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p>You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 2,
+        "school": "trs",
+        "materials": {
+          "value": "A handful of oak bark",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ],
+        "crewed": false
+      },
+      "effects": [
+        {
+          "_id": "uM6rgctYpcbCVSkn",
+          "flags": {},
+          "changes": [
+            {
+              "key": "system.attributes.ac.formula",
+              "value": "16",
+              "mode": 5,
+              "priority": null
+            },
+            {
+              "key": "system.attributes.ac.calc",
+              "value": "custom",
+              "mode": 5,
+              "priority": null
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 3600,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
+          "origin": "Item.VQMKMnQDw5rzL0zp",
+          "tint": null,
+          "transfer": true,
+          "name": "Barkskin",
+          "description": "",
+          "statuses": [],
+          "_key": "!actors.items.effects!K15Yl8JmB5iPircc.JPwIEfgUPVebr5AH.uM6rgctYpcbCVSkn"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JPwIEfgUPVebr5AH"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234113,
+        "modifiedTime": 1661791116367,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!K15Yl8JmB5iPircc.JPwIEfgUPVebr5AH"
+    }
+  ],
+  "effects": [],
+  "folder": "pEyqIq8DYb21xia3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.3",
+    "coreVersion": "11.315",
+    "createdTime": 1661787232744,
+    "modifiedTime": 1704847045803,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!actors!K15Yl8JmB5iPircc"
+}

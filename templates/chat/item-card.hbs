@@ -1,61 +1,169 @@
-<div class="dnd5e chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}"
-     {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isSpell}}data-spell-level="{{item.system.level}}"{{/if}}>
-    <header class="card-header flexrow">
-        <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
-        <h3 class="item-name">{{item.name}}</h3>
-    </header>
+<div class="dnd5e2 chat-card item-card" data-actor-id="{{ actor.id }}" data-item-id="{{ item.id }}"
+     {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isSpell}}data-spell-level="{{ item.system.level }}"{{/if}}>
 
-    <div class="card-content">
-        {{#if data.description.chat}}
-            {{{data.description.chat}}}
-        {{else}}
-            {{{data.description.value}}}
-        {{/if}}
-        {{#if data.materials.value}}
-        <p><strong>{{ localize "DND5E.RequiredMaterials" }}.</strong> {{data.materials.value}}</p>
-        {{/if}}
-    </div>
+    {{!-- Collapsible Item Details --}}
+    <section class="card-header description collapsible">
 
+        {{!-- Summary --}}
+        <header class="summary">
+            <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+            <div class="name-stacked border">
+                <span class="title">{{ item.name }}</span>
+                {{#if (or data.subtitle item.system.chatFlavor)}}
+                <span class="subtitle">
+                    {{#if item.system.chatFlavor}}{{ item.system.chatFlavor }}
+                    {{else}}{{{ data.subtitle }}}{{/if}}
+                </span>
+                {{/if}}
+            </div>
+            <i class="fas fa-chevron-down fa-fw"></i>
+        </header>
+
+        {{!-- Details --}}
+        <section class="details collapsible-content card-content">
+            <div class="wrapper">
+                {{{ data.description.chat }}}
+            </div>
+        </section>
+    </section>
+
+    {{!-- Item Actions --}}
+    {{#if hasButtons}}
     <div class="card-buttons">
-        {{#if hasAttack}}<button data-action="attack">{{ localize "DND5E.Attack" }}</button>{{/if}}
 
+        {{!-- Attacks --}}
+        {{#if hasAttack}}
+        <button type="button" data-action="attack">
+            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg"></i>
+            {{ localize "DND5E.Attack" }}
+        </button>
+        {{/if}}
+
+        {{!-- Damage / Healing --}}
         {{#if hasDamage}}
-        <button data-action="damage">
-            {{#if isHealing}}{{ localize "DND5E.Healing" }}
-            {{else}}{{localize "DND5E.Damage" }}{{/if}}
+        <button type="button" data-action="damage">
+            {{#if isHealing}}
+            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/damage/healing.svg"></i>
+            {{ localize "DND5E.Healing" }}
+            {{else}}
+            <i class="fas fa-burst"></i>
+            {{ localize "DND5E.Damage" }}
+            {{/if}}
         </button>
         {{/if}}
 
+        {{!-- Versatile --}}
         {{#if isVersatile}}
-        <button data-action="versatile">{{ localize "DND5E.Versatile" }}</button>
-        {{/if}}
-
-        {{#if hasSave}}
-        <button data-action="save" data-ability="{{data.save.ability}}">
-            {{ localize "DND5E.SavingThrow" }} {{labels.save}}
+        <button type="button" data-action="versatile">
+            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/versatile.svg"></i>
+            {{ localize "DND5E.Versatile" }}
         </button>
         {{/if}}
 
-        {{#if data.formula}}
-        <button data-action="formula">{{ localize "DND5E.OtherFormula"}}</button>
+        {{!-- Saving Throw --}}
+        {{#if hasSave}}
+        {{#with item.system.save}}
+        <button type="button" data-action="save" data-ability="{{ ability }}" data-dc="{{ dc }}">
+            <i class="fas fa-shield-heart"></i>
+            {{#with (lookup (lookup @root.config.abilities ability) "label") as |abilityLabel|}}
+            <span class="visible-dc">{{ localize "DND5E.SavingThrowDC" dc=../dc ability=abilityLabel }}</span>
+            <span class="hidden-dc">{{ localize "DND5E.SavePromptTitle" ability=abilityLabel }}</span>
+            {{/with}}
+        </button>
+        {{/with}}
         {{/if}}
 
+        {{!-- Other Formula --}}
+        {{#if item.system.formula}}
+        <button type="button" data-action="formula">
+            <i class="fas fa-ellipsis"></i>
+            {{ localize "DND5E.OtherFormula"}}
+        </button>
+        {{/if}}
+
+        {{!-- Templates --}}
         {{#if hasAreaTarget}}
-        <button data-action="placeTemplate">{{ localize "DND5E.PlaceTemplate" }}</button>
+        <button type="button" data-action="placeTemplate">
+            <i class="fas fa-bullseye"></i>
+            {{ localize "DND5E.PlaceTemplate" }}
+        </button>
         {{/if}}
 
+        {{!-- Summoning --}}
+        {{#if item.system.hasSummoning}}
+        <button type="button" data-action="summon">
+            <i class="fa-solid fa-spaghetti-monster-flying"></i>
+            {{ localize "DND5E.Summoning.Action.Summon" }}
+        </button>
+        {{/if}}
+
+        {{!-- Tool Check --}}
         {{#if isTool}}
-        <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "DND5E.Use" }} {{item.name}}</button>
+        <button type="button" data-action="toolCheck" data-ability="{{ item.system.ability }}">
+            <i class="fas fa-hammer"></i>
+            {{ localize "DND5E.UseItem" item=item.name }}
+        </button>
         {{/if}}
 
+        {{!-- Ability Check --}}
         {{#if hasAbilityCheck}}
-        <button data-action="abilityCheck" data-ability="{{data.ability}}">{{labels.abilityCheck}}</button>
+        <button type="button" data-action="abilityCheck" data-ability="{{ item.system.ability }}">
+            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/ability-score-improvement.svg"></i>
+            {{ labels.abilityCheck }}
+        </button>
         {{/if}}
     </div>
+    {{/if}}
 
-    <footer class="card-footer">
-        {{#each data.properties}}
-        <span>{{this}}</span>
+    {{!-- Reactions --}}
+    {{#if (and data.activation.condition (eq data.activation.type "reaction"))}}
+    <p class="supplement"><strong>{{ localize "DND5E.Reaction" }}</strong>{{ data.activation.condition }}</p>
+    {{/if}}
+
+    {{!-- Materials --}}
+    {{#if data.materials.value}}
+    <p class="supplement"><strong>{{ localize "DND5E.Materials" }}</strong>{{ data.materials.value }}</p>
+    {{/if}}
+
+    {{!-- Item Properties --}}
+    {{#if data.hasProperties}}
+    <ul class="card-footer pills unlist">
+        {{#each data.tags}}
+        <li class="pill pill-sm">
+            <span class="label">{{ this }}</span>
+        </li>
         {{/each}}
-    </footer>
+        {{#each data.properties}}
+        <li class="pill pill-sm">
+            <span class="label">{{ this }}</span>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
+    {{!-- Applicable Effects --}}
+    <div class="card-tray effects-tray collapsible collapsed">
+        <label class="roboto-upper">
+            <i class="fas fa-bolt"></i>
+            <span>{{ localize "DND5E.Effects" }}</span>
+            <i class="fas fa-caret-down"></i>
+        </label>
+        <div class="collapsible-content">
+            <ul class="effects unlist wrapper">
+                {{~#each effects~}}
+                <li class="effect" data-effect-id="{{ id }}" data-uuid="{{ uuid }}" data-transferred="{{ transfer }}">
+                    <img class="gold-icon" alt="{{ name }}" src="{{ img }}">
+                    <div class="name-stacked">
+                        <span class="title">{{ name }}</span>
+                        <span class="subtitle">{{ duration.label }}</span>
+                    </div>
+                    <button type="button" class="apply-effect" data-action="applyEffect"
+                            data-tooltip="DND5E.EffectsApplyTokens" aria-label="{{ localize "DND5E.EffectsApplyTokens" }}">
+                        <i class="fas fa-reply-all fa-flip-horizontal"></i>
+                    </button>
+                </li>
+                {{~/each~}}
+            </ul>
+        </div>
+    </div>
 </div>

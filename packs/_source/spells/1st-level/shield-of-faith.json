@@ -1,0 +1,141 @@
+{
+  "_id": "jZ6JNykRtdQ90MOo",
+  "name": "Shield of Faith",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "bonus",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "10",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature",
+      "prompt": true
+    },
+    "range": {
+      "value": 60,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 1,
+    "school": "abj",
+    "materials": {
+      "value": "A small parchment with a bit of holy text written on it.",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    },
+    "properties": [
+      "vocal",
+      "somatic",
+      "material",
+      "concentration"
+    ],
+    "crewed": false
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+  "effects": [
+    {
+      "name": "Shield of Faith",
+      "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+      "origin": "Compendium.dnd5e.spells.Item.jZ6JNykRtdQ90MOo",
+      "duration": {
+        "startTime": null,
+        "seconds": 600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "FKDbXBUs6VJlf8ZY",
+      "changes": [
+        {
+          "key": "system.attributes.ac.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": null
+        }
+      ],
+      "description": "<p>The target gains it a +2 bonus to AC for the duration.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!jZ6JNykRtdQ90MOo.FKDbXBUs6VJlf8ZY"
+    }
+  ],
+  "folder": "ERuXllkhTQF51rDJ",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234212,
+    "modifiedTime": 1706147066200,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!jZ6JNykRtdQ90MOo"
+}

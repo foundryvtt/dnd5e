@@ -1,0 +1,21 @@
+{{#if parts.length}}
+<div class="dice-tooltip-collapser">
+    <div class="dice-tooltip">
+        {{#each parts}}
+        <section class="tooltip-part">
+            <div class="dice">
+                <ol class="dice-rolls">
+                    {{#each rolls}}
+                    <li class="roll {{ classes }}">{{{ result }}}</li>
+                    {{/each}}
+                </ol>
+                <div class="total">
+                    <span class="label">{{ flavor }}</span>
+                    <span class="value">{{ total }}</span>
+                </div>
+            </div>
+        </section>
+        {{/each}}
+    </div>
+</div>
+{{/if}}

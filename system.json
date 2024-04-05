@@ -1,15 +1,15 @@
 {
   "id": "dnd5e",
-  "title": "DnD5e - Fifth Edition System",
-  "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "2.4.1",
+  "title": "Dungeons & Dragons Fifth Edition",
+  "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
+  "version": "3.2.0",
   "compatibility": {
-    "minimum": "10.303",
-    "verified": "11"
+    "minimum": "11.315",
+    "verified": "12"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-2.4.1/dnd5e-release-2.4.1.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-3.2.0/dnd5e-release-3.2.0.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -28,7 +28,7 @@
       "name": "heroes",
       "label": "Starter Heroes",
       "system": "dnd5e",
-      "path": "packs/heroes.db",
+      "path": "packs/heroes",
       "type": "Actor",
       "private": false,
       "flags": {}
@@ -37,7 +37,7 @@
       "name": "monsters",
       "label": "Monsters (SRD)",
       "system": "dnd5e",
-      "path": "packs/monsters.db",
+      "path": "packs/monsters",
       "type": "Actor",
       "private": false,
       "flags": {}
@@ -46,7 +46,7 @@
       "name": "items",
       "label": "Items (SRD)",
       "system": "dnd5e",
-      "path": "packs/items.db",
+      "path": "packs/items",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -55,7 +55,7 @@
       "name": "tradegoods",
       "label": "Trade Goods (SRD)",
       "system": "dnd5e",
-      "path": "packs/tradegoods.db",
+      "path": "packs/tradegoods",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -64,7 +64,7 @@
       "name": "spells",
       "label": "Spells (SRD)",
       "system": "dnd5e",
-      "path": "packs/spells.db",
+      "path": "packs/spells",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -73,7 +73,7 @@
       "name": "backgrounds",
       "label": "Backgrounds (SRD)",
       "system": "dnd5e",
-      "path": "packs/backgrounds.db",
+      "path": "packs/backgrounds",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -82,7 +82,7 @@
       "name": "classes",
       "label": "Classes (SRD)",
       "system": "dnd5e",
-      "path": "packs/classes.db",
+      "path": "packs/classes",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -91,16 +91,16 @@
       "name": "subclasses",
       "label": "Subclasses (SRD)",
       "system": "dnd5e",
-      "path": "packs/subclasses.db",
+      "path": "packs/subclasses",
       "type": "Item",
       "private": false,
       "flags": {}
     },
     {
       "name": "classfeatures",
-      "label": "Class Features (SRD)",
+      "label": "Class & Subclass Features (SRD)",
       "system": "dnd5e",
-      "path": "packs/classfeatures.db",
+      "path": "packs/classfeatures",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -109,7 +109,7 @@
       "name": "races",
       "label": "Races (SRD)",
       "system": "dnd5e",
-      "path": "packs/races.db",
+      "path": "packs/races",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -118,7 +118,7 @@
       "name": "monsterfeatures",
       "label": "Monster Features (SRD)",
       "system": "dnd5e",
-      "path": "packs/monsterfeatures.db",
+      "path": "packs/monsterfeatures",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -127,16 +127,18 @@
       "name": "rules",
       "label": "Rules (SRD)",
       "system": "dnd5e",
-      "path": "packs/rules.db",
+      "path": "packs/rules",
       "type": "JournalEntry",
       "private": false,
-      "flags": {}
+      "flags": {
+        "display": "table-of-contents"
+      }
     },
     {
       "name": "tables",
       "label": "Tables (SRD)",
       "system": "dnd5e",
-      "path": "packs/tables.db",
+      "path": "packs/tables",
       "type": "RollTable",
       "private": false,
       "flags": {}
@@ -144,7 +146,7 @@
   ],
   "packFolders": [
     {
-      "name": "DnD5e SRD Content",
+      "name": "D&D SRD Content",
       "sorting": "m",
       "color": "#cd2c1e",
       "packs": [
@@ -200,14 +202,20 @@
       "type": "cover",
       "loop": false,
       "flags": {}
+    },
+    {
+      "type": "setup",
+      "url": "systems/dnd5e/ui/official/dnd5e-repo.jpg",
+      "thumbnail": "systems/dnd5e/ui/official/dnd5e-thumbnail.jpg"
     }
   ],
   "socket": true,
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
+  "background": "systems/dnd5e/ui/official/dnd5e-background.webp",
   "flags": {
-    "needsMigrationVersion": "2.4.0",
+    "needsMigrationVersion": "3.1.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
       "extensions": ["css", "hbs", "json"],

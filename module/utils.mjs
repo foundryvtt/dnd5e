@@ -1,5 +1,81 @@
 /* -------------------------------------------- */
+/*  Formatters                                  */
+/* -------------------------------------------- */
+
+/**
+ * Format a Challenge Rating using the proper fractional symbols.
+ * @param {number} value  CR value for format.
+ * @returns {string}
+ */
+export function formatCR(value) {
+  return { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[value] ?? formatNumber(value);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * A helper for using Intl.NumberFormat within handlebars.
+ * @param {number} value    The value to format.
+ * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
+ * @returns {string}
+ */
+export function formatNumber(value, options) {
+  const formatter = new Intl.NumberFormat(game.i18n.lang, options);
+  return formatter.format(value);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * A helper function to format textarea text to HTML with linebreaks.
+ * @param {string} value  The text to format.
+ * @returns {Handlebars.SafeString}
+ */
+export function formatText(value) {
+  return new Handlebars.SafeString(value?.replaceAll("\n", "<br>") ?? "");
+}
+
+/* -------------------------------------------- */
 /*  Formulas                                    */
+/* -------------------------------------------- */
+
+/**
+ * Return whether a string is a valid reroll, explosion, min, or max dice modifier.
+ * @param {string} mod      The modifier to test.
+ * @returns {boolean}
+ */
+export function isValidDieModifier(mod) {
+  const regex = {
+    reroll: /rr?([0-9]+)?([<>=]+)?([0-9]+)?/i,
+    explode: /xo?([0-9]+)?([<>=]+)?([0-9]+)?/i,
+    minimum: /(?:min)([0-9]+)/i,
+    maximum: /(?:max)([0-9]+)/i,
+    dropKeep: /[dk]([hl])?([0-9]+)?/i,
+    count: /(?:c[sf])([<>=]+)?([0-9]+)?/i
+  };
+  return Object.values(regex).some(rgx => rgx.test(mod));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Handle a delta input for a number value from a form.
+ * @param {HTMLInputElement} input  Input that contains the modified value.
+ * @param {Document} target         Target document to be updated.
+ * @returns {number|void}
+ */
+export function parseInputDelta(input, target) {
+  let value = input.value;
+  if ( ["+", "-"].includes(value[0]) ) {
+    const delta = parseFloat(value);
+    value = Number(foundry.utils.getProperty(target, input.dataset.name ?? input.name)) + delta;
+  }
+  else if ( value[0] === "=" ) value = Number(value.slice(1));
+  if ( Number.isNaN(value) ) return;
+  input.value = value;
+  return value;
+}
+
 /* -------------------------------------------- */
 
 /**
@@ -19,6 +95,20 @@ export function simplifyBonus(bonus, data={}) {
     console.error(error);
     return 0;
   }
+}
+
+/* -------------------------------------------- */
+/*  IDs                                         */
+/* -------------------------------------------- */
+
+/**
+ * Create an ID from the input truncating or padding the value to make it reach 16 characters.
+ * @param {string} id
+ * @returns {string}
+ */
+export function staticID(id) {
+  if ( id.length >= 16 ) return id.substring(0, 16);
+  return id.padEnd(16, "0");
 }
 
 /* -------------------------------------------- */
@@ -46,7 +136,7 @@ export function filteredKeys(obj, filter) {
  */
 export function sortObjectEntries(obj, sortKey) {
   let sorted = Object.entries(obj);
-  const sort = (lhs, rhs) => foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs) : lhs - rhs;
+  const sort = (lhs, rhs) => foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs, game.i18n.lang) : lhs - rhs;
   if ( foundry.utils.getType(sortKey) === "function" ) sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1]));
   else if ( sortKey ) sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey]));
   else sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1]));
@@ -89,7 +179,37 @@ export function indexFromUuid(uuid) {
  * @returns {string}     Link to the item or empty string if item wasn't found.
  */
 export function linkForUuid(uuid) {
-  return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+  if ( game.release.generation < 12 ) {
+    return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+  }
+
+  // TODO: When v11 support is dropped we can make this method async and return to using TextEditor._createContentLink.
+  if ( uuid.startsWith("Compendium.") ) {
+    let [, scope, pack, documentName, id] = uuid.split(".");
+    if ( !CONST.PRIMARY_DOCUMENT_TYPES.includes(documentName) ) id = documentName;
+    const data = {
+      classes: ["content-link"],
+      attrs: { draggable: "true" }
+    };
+    TextEditor._createLegacyContentLink("Compendium", [scope, pack, id].join("."), "", data);
+    data.dataset.link = "";
+    return TextEditor.createAnchor(data).outerHTML;
+  }
+  return fromUuidSync(uuid).toAnchor().outerHTML;
+}
+
+/* -------------------------------------------- */
+/*  Targeting                                   */
+/* -------------------------------------------- */
+
+/**
+ * Get currently selected tokens in the scene or user's character's tokens.
+ * @returns {Token5e[]}
+ */
+export function getSceneTargets() {
+  let targets = canvas.tokens.controlled.filter(t => t.actor);
+  if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
+  return targets;
 }
 
 /* -------------------------------------------- */
@@ -122,7 +242,10 @@ export const validators = {
 export async function preloadHandlebarsTemplates() {
   const partials = [
     // Shared Partials
-    "systems/dnd5e/templates/actors/parts/active-effects.hbs",
+    "systems/dnd5e/templates/shared/active-effects.hbs",
+    "systems/dnd5e/templates/shared/inventory.hbs",
+    "systems/dnd5e/templates/shared/inventory2.hbs",
+    "systems/dnd5e/templates/shared/active-effects2.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials
@@ -131,6 +254,11 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/actor-features.hbs",
     "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
+    "systems/dnd5e/templates/actors/tabs/character-details.hbs",
+    "systems/dnd5e/templates/actors/tabs/character-features.hbs",
+    "systems/dnd5e/templates/actors/tabs/character-spells.hbs",
+    "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
+    "systems/dnd5e/templates/actors/tabs/group-members.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
@@ -141,6 +269,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
     "systems/dnd5e/templates/items/parts/item-source.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
+    "systems/dnd5e/templates/items/parts/item-tooltip.hbs",
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
@@ -253,15 +382,42 @@ function itemContext(context, options) {
 /* -------------------------------------------- */
 
 /**
+ * Conceal a section and display a notice if unidentified.
+ * @param {boolean} conceal  Should the section be concealed?
+ * @param {object} options   Handlebars options.
+ * @returns {string}
+ */
+function concealSection(conceal, options) {
+  let content = options.fn(this);
+  if ( !conceal ) return content;
+
+  content = `<div inert>
+    ${content}
+  </div>
+  <div class="unidentified-notice">
+      <div>
+          <strong>${game.i18n.localize("DND5E.Unidentified.Title")}</strong>
+          <p>${game.i18n.localize("DND5E.Unidentified.Notice")}</p>
+      </div>
+  </div>`;
+  return content;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Register custom Handlebars helpers used by 5e.
  */
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
+    "dnd5e-concealSection": concealSection,
     "dnd5e-dataset": dataset,
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-linkForUuid": linkForUuid,
-    "dnd5e-itemContext": itemContext
+    "dnd5e-itemContext": itemContext,
+    "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
+    "dnd5e-textFormat": formatText
   });
 }
 
@@ -304,6 +460,12 @@ export function performPreLocalization(config) {
     _localizeObject(target, settings.keys);
     if ( settings.sort ) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
   }
+
+  // Localize & sort status effects
+  CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
+  CONFIG.statusEffects.sort((lhs, rhs) =>
+    lhs.id === "dead" ? -1 : rhs.id === "dead" ? 1 : lhs.name.localeCompare(rhs.name, game.i18n.lang)
+  );
 }
 
 /* -------------------------------------------- */
@@ -341,6 +503,91 @@ function _localizeObject(obj, keys) {
       foundry.utils.setProperty(v, key, game.i18n.localize(value));
     }
   }
+}
+
+/* -------------------------------------------- */
+/*  Localization                                */
+/* -------------------------------------------- */
+
+/**
+ * A cache of already-fetched labels for faster lookup.
+ * @type {Map<string, string>}
+ */
+const _attributeLabelCache = new Map();
+
+/**
+ * Convert an attribute path to a human-readable label.
+ * @param {string} attr              The attribute path.
+ * @param {object} [options]
+ * @param {Actor5e} [options.actor]  An optional reference actor.
+ * @returns {string|void}
+ */
+export function getHumanReadableAttributeLabel(attr, { actor }={}) {
+  // Check any actor-specific names first.
+  if ( attr.startsWith("resources.") && actor ) {
+    const resource = foundry.utils.getProperty(actor, `system.${attr}`);
+    if ( resource.label ) return resource.label;
+  }
+
+  if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
+    return game.i18n.localize("DND5E.ExperiencePointsValue");
+  }
+
+  if ( attr.startsWith(".") && actor ) {
+    const item = fromUuidSync(attr, { relative: actor });
+    return item?.name ?? attr;
+  }
+
+  // Check if the attribute is already in cache.
+  let label = _attributeLabelCache.get(attr);
+  if ( label ) return label;
+
+  // Derived fields.
+  if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
+  else if ( attr === "attributes.ac.value" ) label = "DND5E.ArmorClass";
+  else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
+
+  // Abilities.
+  else if ( attr.startsWith("abilities.") ) {
+    const [, key] = attr.split(".");
+    label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
+  }
+
+  // Skills.
+  else if ( attr.startsWith("skills.") ) {
+    const [, key] = attr.split(".");
+    label = game.i18n.format("DND5E.SkillPassiveScore", { skill: CONFIG.DND5E.skills[key].label });
+  }
+
+  // Spell slots.
+  else if ( attr.startsWith("spells.") ) {
+    const [, key] = attr.split(".");
+    if ( key === "pact" ) label = "DND5E.SpellSlotsPact";
+    else {
+      const plurals = new Intl.PluralRules(game.i18n.lang, {type: "ordinal"});
+      const level = Number(key.slice(5));
+      label = game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level });
+    }
+  }
+
+  // Attempt to find the attribute in a data model.
+  if ( !label ) {
+    const { CharacterData, NPCData, VehicleData, GroupData } = dnd5e.dataModels.actor;
+    for ( const model of [CharacterData, NPCData, VehicleData, GroupData] ) {
+      const field = model.schema.getField(attr);
+      if ( field ) {
+        label = field.label;
+        break;
+      }
+    }
+  }
+
+  if ( label ) {
+    label = game.i18n.localize(label);
+    _attributeLabelCache.set(attr, label);
+  }
+
+  return label;
 }
 
 /* -------------------------------------------- */

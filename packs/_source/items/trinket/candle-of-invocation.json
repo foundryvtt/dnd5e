@@ -1,0 +1,110 @@
+{
+  "_id": "ZoUVmRA3HfAK2eZy",
+  "name": "Candle of Invocation",
+  "type": "consumable",
+  "img": "icons/sundries/lights/candle-unlit-grey.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>This slender taper is dedicated to a deity and shares that deity's alignment. The candle's alignment can be detected with the Detect Evil and Good spell. The GM chooses the god and associated alignment or determines the alignment randomly from the @UUID[Compendium.dnd5e.tables.RollTable.C1N8LjO7gOjEWgh4]{Candle of Invocation} table.</p>\n<p>The candle's magic is activated when the candle is lit, which requires an action. After burning for 4 hours, the candle is destroyed. You can snuff it out early for use at a later time. Deduct the time it burned in increments of 1 minute from the candle's total burn time.</p>\n<p>While lit, the candle sheds dim light in a 30-foot radius. Any creature within that light whose alignment matches that of the candle makes attack rolls, saving throws, and ability checks with advantage. In addition, a cleric or druid in the light whose alignment matches the candle's can cast 1st- level spells he or she has prepared without expending spell slots, though the spell's effect is as if cast with a 1st-level slot.</p>\n<p>Alternatively, when you light the candle for the first time, you can cast the <em>@UUID[Compendium.dnd5e.spells.Item.XbwGq5kDJNvAxNXV]{Gate}</em>spell with it. Doing so destroys the candle.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 0,
+    "price": {
+      "value": 12000,
+      "denomination": "gp"
+    },
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "veryRare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "4",
+      "units": "hour"
+    },
+    "cover": null,
+    "target": {
+      "value": 30,
+      "width": null,
+      "units": "ft",
+      "type": "radius",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "charges",
+      "recovery": "",
+      "autoDestroy": false,
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "trinket",
+      "subtype": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": [
+      "mgc"
+    ]
+  },
+  "effects": [],
+  "folder": "UnUwTG4YIgd0kaUJ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.1",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233718,
+    "modifiedTime": 1707055844311,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!ZoUVmRA3HfAK2eZy"
+}

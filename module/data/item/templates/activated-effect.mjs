@@ -17,6 +17,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {number} target.width          Width of line when line type is selected.
  * @property {string} target.units          Units used for value and width as defined in `DND5E.distanceUnits`.
  * @property {string} target.type           Targeting mode as defined in `DND5E.targetTypes`.
+ * @property {boolean} target.prompt        Should the player be prompted to place the template?
  * @property {object} range                 Effect's range.
  * @property {number} range.value           Regular targeting distance for item's effect.
  * @property {number} range.long            Maximum targeting distance for features that have a separate long range.
@@ -93,6 +94,31 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
       }, extraSchema), options);
     }
   };
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve information on available uses for display.
+   * @returns {{value: number, max: number, name: string}}
+   */
+  getUsesData() {
+    return { value: this.uses.value, max: this.parent.system.uses.max, name: "system.uses.value" };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare activated effect data, should be called during `prepareFinalData` stage.
+   */
+  prepareFinalActivatedEffectData() {
+    if ( !this.parent.isEmbedded ) return;
+    if ( ["ammo", "charges", "material"].includes(this.consume.type) && this.consume.target.includes(".") ) {
+      const item = this.parent.actor.sourcedItems?.get(this.consume.target);
+      if ( item ) this.consume.target = item.id;
+    }
+  }
 
   /* -------------------------------------------- */
   /*  Migrations                                  */
@@ -202,9 +228,9 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * Chat properties for activated effects.
    * @type {string[]}
    */
-  get activatedEffectChatProperties() {
+  get activatedEffectCardProperties() {
     return [
-      this.parent.labels.activation + (this.activation.condition ? ` (${this.activation.condition})` : ""),
+      this.parent.labels.activation,
       this.parent.labels.target,
       this.parent.labels.range,
       this.parent.labels.duration
@@ -311,6 +337,28 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    */
   get isActive() {
     return !!this.activation.type;
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since DnD5e 3.0, available until DnD5e 3.2
+   * @ignore
+   */
+  get activatedEffectChatProperties() {
+    foundry.utils.logCompatibilityWarning(
+      "ActivatedEffectTemplate#activatedEffectChatProperties is deprecated. "
+      + "Please use ActivatedEffectTemplate#activatedEffectCardProperties.",
+      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
+    );
+    return [
+      this.parent.labels.activation + (this.activation.condition ? ` (${this.activation.condition})` : ""),
+      this.parent.labels.target,
+      this.parent.labels.range,
+      this.parent.labels.duration
+    ];
   }
 
 }

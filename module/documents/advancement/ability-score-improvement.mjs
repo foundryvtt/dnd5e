@@ -22,7 +22,6 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       icon: "systems/dnd5e/icons/svg/ability-score-improvement.svg",
       title: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementTitle"),
       hint: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementHint"),
-      validItemTypes: new Set(["background", "class", "race"]),
       apps: {
         config: AbilityScoreImprovementConfig,
         flow: AbilityScoreImprovementFlow
@@ -171,6 +170,8 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       }
     }
 
+    delete data.featUuid;
+    delete data.retainedItems;
     this.updateSource({value: data});
   }
 

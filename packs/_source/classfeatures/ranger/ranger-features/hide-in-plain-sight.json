@@ -1,0 +1,129 @@
+{
+  "_id": "r0unvWK0lPsDthDx",
+  "name": "Hide in Plain Sight",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 10th level, you can spend 1 minute creating camouflage for yourself. You must have access to fresh mud, dirt, plants, soot, and other naturally occurring materials with which to create your camouflage.</p><p>Once you are camouflaged in this way, you can try to hide by pressing yourself up against a solid surface, such as a tree or wall, that is at least as tall and wide as you are. You gain a +10 bonus to Dexterity (Stealth) checks as long as you remain there without moving or taking actions. Once you move or take an action or a reaction, you must camouflage yourself again to gain this benefit.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "minute",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "dex",
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Ranger 10",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "crewed": false,
+    "properties": []
+  },
+  "flags": {},
+  "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
+  "effects": [
+    {
+      "_id": "7if4vIkT84Sw2zFm",
+      "changes": [
+        {
+          "key": "system.skills.ste.bonuses.check",
+          "mode": 2,
+          "value": "+10",
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/nature/stealth-hide-eyes-green.webp",
+      "origin": "Item.r0unvWK0lPsDthDx",
+      "transfer": false,
+      "flags": {},
+      "tint": null,
+      "name": "Hide in Plain Sight",
+      "description": "",
+      "statuses": [],
+      "_key": "!items.effects!r0unvWK0lPsDthDx.7if4vIkT84Sw2zFm"
+    }
+  ],
+  "folder": "S0rKJuStpCBy0hAf",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234428,
+    "modifiedTime": 1704824719069,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!r0unvWK0lPsDthDx"
+}

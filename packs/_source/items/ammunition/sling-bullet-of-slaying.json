@@ -1,0 +1,122 @@
+{
+  "_id": "Mj8fTo5VZKJJ7uMv",
+  "name": "Sling Bullet of Slaying",
+  "type": "consumable",
+  "img": "icons/skills/ranged/bullets-triple-ball-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p>A Bullet of Slaying is a magic weapon meant to slay a particular kind of creature. Some are more focused than others; for example, there are both Bullets of Dragon Slaying and Bullets of Blue Dragon Slaying. If a creature belonging to the type, race, or group associated with a Bullet of Slaying takes damage from the bullet, the creature must make a DC 17 Constitution saving throw, taking an extra 6d10 bludgeoning damage on a failed save, or half as much extra damage on a successful one.</p>\n<p>Once a Bullet of Slaying deals its extra damage to a creature, it becomes a nonmagical bullet.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 0.075,
+    "price": {
+      "value": 600,
+      "denomination": "gp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "veryRare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "autoDestroy": false,
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "rwak",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "6d10",
+    "save": {
+      "ability": "con",
+      "dc": 17,
+      "scaling": "flat"
+    },
+    "type": {
+      "value": "ammo",
+      "subtype": "slingBullet"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": [
+      "mgc"
+    ],
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    },
+    "magicalBonus": null
+  },
+  "effects": [],
+  "folder": "NdDvXSjfqlghXpQZ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233627,
+    "modifiedTime": 1709677518113,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!Mj8fTo5VZKJJ7uMv"
+}

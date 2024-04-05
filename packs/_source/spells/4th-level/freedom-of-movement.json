@@ -1,0 +1,146 @@
+{
+  "_id": "da0a1t2FqaTjRZGT",
+  "name": "Freedom of Movement",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You touch a willing creature. For the Duration, the target's Movement is unaffected by difficult terrain, and Spells and other magical Effects can neither reduce the target's speed nor cause the target to be Paralyzed or Restrained.</p><p>The target can also spend 5 feet of Movement to automatically escape from nonmagical restraints, such as Manacles or a creature that has it Grappled. Finally, being Underwater imposes no penalties on the target's movement or attacks.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "hour"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "touch"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 4,
+    "school": "abj",
+    "materials": {
+      "value": "A leather strap, bound around the arm or a similar appendage",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    },
+    "properties": [
+      "vocal",
+      "somatic",
+      "material"
+    ],
+    "crewed": false
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+  "effects": [
+    {
+      "name": "Freedom of Movement",
+      "icon": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "origin": "Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "OnWa3f4IQ3pneB5T",
+      "changes": [
+        {
+          "key": "system.traits.di.value",
+          "mode": 2,
+          "value": "paralyzed",
+          "priority": null
+        },
+        {
+          "key": "system.traits.di.value",
+          "mode": 2,
+          "value": "restrained",
+          "priority": null
+        }
+      ],
+      "description": "<p>The target's Movement is unaffected by difficult terrain, and Spells and other magical Effects can neither reduce the target's speed nor cause the target to be Paralyzed or Restrained.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!da0a1t2FqaTjRZGT.OnWa3f4IQ3pneB5T"
+    }
+  ],
+  "folder": "5auWSClKMDUIV5Ni",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234180,
+    "modifiedTime": 1706145828975,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!da0a1t2FqaTjRZGT"
+}

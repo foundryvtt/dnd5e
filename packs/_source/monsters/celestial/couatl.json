@@ -1,0 +1,2804 @@
+{
+  "_id": "ZaP1H91t4FzbRqR5",
+  "name": "Couatl",
+  "type": "npc",
+  "img": null,
+  "system": {
+    "abilities": {
+      "str": {
+        "value": 16,
+        "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "dex": {
+        "value": 20,
+        "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "con": {
+        "value": 17,
+        "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "int": {
+        "value": 18,
+        "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "wis": {
+        "value": 20,
+        "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      },
+      "cha": {
+        "value": 18,
+        "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
+        "max": null
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": 19,
+        "calc": "natural",
+        "formula": ""
+      },
+      "hp": {
+        "value": 97,
+        "max": 97,
+        "temp": null,
+        "tempmax": 0,
+        "formula": "13d8 + 39"
+      },
+      "init": {
+        "ability": "",
+        "bonus": "0"
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 90,
+        "swim": 0,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "attunement": {
+        "max": 3
+      },
+      "senses": {
+        "darkvision": 0,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 120,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "cha",
+      "exhaustion": 0
+    },
+    "details": {
+      "biography": {
+        "value": "",
+        "public": ""
+      },
+      "alignment": "Lawful Good",
+      "race": null,
+      "type": {
+        "value": "celestial",
+        "subtype": "",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "Grassland",
+      "cr": 4,
+      "spellLevel": 0,
+      "source": {
+        "custom": "",
+        "book": "SRD 5.1",
+        "page": "",
+        "license": "CC-BY-4.0"
+      }
+    },
+    "traits": {
+      "size": "med",
+      "di": {
+        "value": [
+          "bludgeoning",
+          "piercing",
+          "psychic",
+          "slashing"
+        ],
+        "bypasses": [
+          "mgc"
+        ],
+        "custom": ""
+      },
+      "dr": {
+        "value": [
+          "radiant"
+        ],
+        "bypasses": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "bypasses": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [],
+        "custom": "All; Telepathy 120 ft."
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        }
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null
+      },
+      "spell2": {
+        "value": 0,
+        "override": null
+      },
+      "spell3": {
+        "value": 0,
+        "override": null
+      },
+      "spell4": {
+        "value": 0,
+        "override": null
+      },
+      "spell5": {
+        "value": 0,
+        "override": null
+      },
+      "spell6": {
+        "value": 0,
+        "override": null
+      },
+      "spell7": {
+        "value": 0,
+        "override": null
+      },
+      "spell8": {
+        "value": 0,
+        "override": null
+      },
+      "spell9": {
+        "value": 0,
+        "override": null
+      },
+      "pact": {
+        "value": 0,
+        "override": null
+      },
+      "spell0": {
+        "value": 0,
+        "override": null
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": null
+      }
+    },
+    "tools": {}
+  },
+  "prototypeToken": {
+    "name": "Couatl",
+    "displayName": 20,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "disposition": -1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "flags": {},
+    "randomImg": false,
+    "alpha": 1,
+    "light": {
+      "alpha": 1,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "type": null,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": null,
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 120,
+      "brightness": 1,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "_id": "7M1OrMoMMTCEKxta",
+      "name": "Bite",
+      "type": "weapon",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>8 (1d6 + 5) <em>piercing damage</em></strong>.</p>\n<p>The target must succeed on a  <strong>DC 13 Constitution</strong> saving throw or be poisoned for 24 hours. Until this poison ends, the target is unconscious. Another creature can use an action to shake the target awake.</p>\n</section>\n<p>The Couatl attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "dex",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": 13,
+          "scaling": "flat"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "fin"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y"
+        }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.7M1OrMoMMTCEKxta"
+    },
+    {
+      "_id": "8LkzioyaScFxfst7",
+      "name": "Constrict",
+      "type": "weapon",
+      "img": "icons/creatures/reptiles/serpent-horned-green.webp",
+      "system": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one Medium or smaller creature. Hit: <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p>\n<p>The target is grappled (escape DC 15). Until this grapple ends, the target is restrained, and the couatl can't constrict another target.</p>\n</section>\n<p>The Couatl attacks with its Constrict. The target is grappled. Until this grapple ends, the target is restrained, and the couatl can't constrict another target.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "quantity": 1,
+        "weight": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "2d6 + @mod",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "fin"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.8LkzioyaScFxfst7"
+    },
+    {
+      "_id": "iw2q07K1D0X01DZO",
+      "name": "Change Shape",
+      "type": "feat",
+      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>The couatl magically <strong>polymorphs</strong> into a <strong>humanoid</strong> or <strong>beast</strong> that has a challenge rating equal to or less than its own,<strong> or back into its true form</strong>. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the couatl's choice).</p>\n<p>In a new form, the couatl retains its game statistics and ability to speak, but <strong>its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form</strong>, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks.<strong> If the new form has a bite attack, the couatl can use its bite in that form.</strong></p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "crewed": false,
+        "properties": []
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy"
+        }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.iw2q07K1D0X01DZO"
+    },
+    {
+      "_id": "J40yeoOnwpvtVpHt",
+      "name": "Innate Spellcasting",
+      "type": "feat",
+      "img": "icons/magic/light/projectiles-star-purple.webp",
+      "system": {
+        "description": {
+          "value": "<p>The couatl's spellcasting ability is Charisma (spell save DC 14). It can innately cast the following spells, requiring only verbal components:</p>\n<p>At will: detect evil and good, detect magic, detect thoughts</p>\n<p>3/day each: bless, create food and water, cure wounds, lesser restoration, protection from poison, sanctuary, shield</p>\n<p>1/day each: dream, greater restoration, scrying</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "crewed": false,
+        "properties": []
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4"
+        }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.J40yeoOnwpvtVpHt"
+    },
+    {
+      "_id": "3qE2LLHPANSEPmIN",
+      "name": "Magic Weapons",
+      "type": "feat",
+      "img": "icons/weapons/swords/sword-runed-glowing.webp",
+      "system": {
+        "description": {
+          "value": "<p>The couatl's weapon attacks are magical.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "crewed": false,
+        "properties": []
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS"
+        }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.3qE2LLHPANSEPmIN"
+    },
+    {
+      "_id": "MGh9IkfXNn7FmwL5",
+      "name": "Shielded Mind",
+      "type": "feat",
+      "img": "icons/magic/control/control-influence-rally-purple.webp",
+      "system": {
+        "description": {
+          "value": "<p>The couatl is immune to scrying and to any effect that would sense its emotions, read its thoughts, or detect its location.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "crewed": false,
+        "properties": []
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.monsterfeatures.SrmR5UfLMFxTErTp"
+        }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.MGh9IkfXNn7FmwL5"
+    },
+    {
+      "_id": "Mzh95utKDPIrjiH8",
+      "name": "Detect Evil and Good",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": 30,
+          "width": null,
+          "units": "ft",
+          "type": "radius",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "div",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "atwill",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "concentration"
+          ]
+        }
+      },
+      "img": "icons/magic/air/air-burst-spiral-blue-gray.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234128,
+        "modifiedTime": 1661791116658,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.Mzh95utKDPIrjiH8"
+    },
+    {
+      "_id": "ghXTfe7sgCbgf1Q8",
+      "name": "Detect Magic",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": 30,
+          "width": null,
+          "units": "ft",
+          "type": "radius",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "div",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "atwill",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual",
+          "concentration"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "ritual",
+            "concentration"
+          ]
+        }
+      },
+      "img": "icons/magic/light/explosion-star-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234192,
+        "modifiedTime": 1661791116658,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.ghXTfe7sgCbgf1Q8"
+    },
+    {
+      "_id": "ppWAAEul0QHtm4er",
+      "name": "Detect Thoughts",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>For the duration, you can read the thoughts of certain creatures. When you cast the spell and as your action on each turn until the spell ends, you can focus your mind on any one creature that you can see within 30 feet of you. If the creature you choose has an Intelligence of 3 or lower or doesn't speak any language, the creature is unaffected.</p><p>You initially learn the surface thoughts of the creature—what is most on its mind in that moment. As an action, you can either shift your attention to another creature's thoughts or attempt to probe deeper into the same creature's mind. If you probe deeper, the target must make a Wisdom saving throw. If it fails, you gain insight into its reasoning (if any), its emotional state, and something that looms large in its mind (such as something it worries over, loves, or hates). If it succeeds, the spell ends. Either way, the target knows that you are probing into its mind, and unless you shift your attention to another creature's thoughts, the creature can use its action on its turn to make an Intelligence check contested by your Intelligence check; if it succeeds, the spell ends.</p><p>Questions verbally directed at the target creature naturally shape the course of its thoughts, so this spell is particularly effective as part of an interrogation.</p><p>You can also use this spell to detect the presence of thinking creatures you can't see. When you cast the spell or as your action during the duration, you can search for thoughts within 30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2 inches of any metal other than lead, or a thin sheet of lead blocks you. You can't detect a creature with an Intelligence of 3 or lower or one that doesn't speak any language.</p><p>Once you detect the presence of a creature in this way, you can read its thoughts for the rest of the duration as described above, even if you can't see it, but it must still be within range.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "scaling": "spell"
+        },
+        "level": 2,
+        "school": "div",
+        "materials": {
+          "value": "A copper piece",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "atwill",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ppWAAEul0QHtm4er"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
+        }
+      },
+      "img": "icons/magic/light/explosion-star-teal-purple.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234229,
+        "modifiedTime": 1661791116659,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.ppWAAEul0QHtm4er"
+    },
+    {
+      "_id": "8dzaICjGy6mTUaUr",
+      "name": "Bless",
+      "type": "spell",
+      "img": "icons/magic/control/buff-flight-wings-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll 1d4 and add the number rolled to the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": 3,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 3,
+          "max": "3",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "1d4",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "materials": {
+          "value": "A sprinkling of holy water",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ],
+        "crewed": false
+      },
+      "effects": [
+        {
+          "_id": "8rP3gwmXVTgZqYZE",
+          "flags": {},
+          "changes": [
+            {
+              "key": "system.bonuses.abilities.save",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.mwak.attack",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.msak.attack",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.rsak.attack",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.rwak.attack",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 60,
+            "rounds": 10,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/magic/control/buff-flight-wings-blue.webp",
+          "origin": "Item.kZZAZ6kp9YzgPQEe",
+          "tint": null,
+          "transfer": false,
+          "name": "Bless",
+          "description": "",
+          "statuses": [],
+          "_key": "!actors.items.effects!ZaP1H91t4FzbRqR5.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234081,
+        "modifiedTime": 1661791116659,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.8dzaICjGy6mTUaUr"
+    },
+    {
+      "_id": "BV0mpbHh29IbbIj5",
+      "name": "Create Food and Water",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You create 45 pounds of food and 30 gallons of water on the ground or in containers within range, enough to sustain up to fifteen humanoids or five steeds for 24 hours. The food is bland but nourishing, and spoils if uneaten after 24 hours. The water is clean and doesn't go bad.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "any",
+          "type": "space",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 3,
+          "max": "3",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 3,
+        "school": "con",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.BV0mpbHh29IbbIj5"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
+        }
+      },
+      "img": "icons/magic/nature/leaf-glow-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234092,
+        "modifiedTime": 1661791116659,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.BV0mpbHh29IbbIj5"
+    },
+    {
+      "_id": "uUWb1wZgtMou0TVP",
+      "name": "Cure Wounds",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 3,
+          "max": "3",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d8 + @mod",
+              "healing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "evo",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d8"
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
+        }
+      },
+      "img": "icons/magic/life/heart-cross-green.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234236,
+        "modifiedTime": 1661791116660,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.uUWb1wZgtMou0TVP"
+    },
+    {
+      "_id": "F0GsG0SJzsIOacwV",
+      "name": "Lesser Restoration",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You touch a creature and can end either one disease or one condition afflicting it. The condition can be blinded, deafened, paralyzed, or poisoned.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 3,
+          "max": "3",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 2,
+        "school": "abj",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.F0GsG0SJzsIOacwV"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
+        }
+      },
+      "img": "icons/magic/life/heart-cross-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234103,
+        "modifiedTime": 1661791116660,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.F0GsG0SJzsIOacwV"
+    },
+    {
+      "_id": "gvdA9nPuWLck4tBl",
+      "name": "Sanctuary",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 3,
+          "max": "3",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "abj",
+        "materials": {
+          "value": "A small silver mirror",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        }
+      },
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234193,
+        "modifiedTime": 1661791116660,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.gvdA9nPuWLck4tBl"
+    },
+    {
+      "_id": "z1mx84ONwkXKUZd7",
+      "name": "Shield",
+      "type": "spell",
+      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
+      "system": {
+        "description": {
+          "value": "<p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "reaction",
+          "cost": 1,
+          "condition": "Which you take when you are hit by an attack or targeted by the magic missile spell"
+        },
+        "duration": {
+          "value": "1",
+          "units": "round"
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 3,
+          "max": "3",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "abj",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ],
+        "crewed": false
+      },
+      "effects": [
+        {
+          "_id": "6pbotGIvqQkraPva",
+          "flags": {},
+          "changes": [
+            {
+              "key": "system.attributes.ac.bonus",
+              "value": "5",
+              "mode": 2,
+              "priority": null
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "rounds": 1,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
+          "origin": "Item.FlLKKv7bQBlIAs11",
+          "tint": null,
+          "transfer": false,
+          "name": "Shield",
+          "description": "",
+          "statuses": [],
+          "_key": "!actors.items.effects!ZaP1H91t4FzbRqR5.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234244,
+        "modifiedTime": 1661791116660,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.z1mx84ONwkXKUZd7"
+    },
+    {
+      "_id": "kSPRpeIx3w3nihrF",
+      "name": "Dream",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>This spell shapes a creature's dreams. Choose a creature known to you as the target of this spell. The target must be on the same plane of existence as you. Creatures that don't sleep, such as elves, can't be contacted by this spell. You, or a willing creature you touch, enters a trance state, acting as a messenger. While in the trance, the messenger is aware of his or her surroundings, but can't take Actions or move.</p><p>If the target is asleep, the messenger appears in the target's dreams and can converse with the target as long as it remains asleep, through the Duration of the spell. The messenger can also shape The Environment of the dream, creating landscapes, Objects, and other images. The messenger can emerge from the trance at any time, ending the effect of the spell early. The target recalls the dream perfectly upon waking. If the target is awake when you cast the spell, the messenger knows it, and can either end the trance (and the spell) or wait for the target to fall asleep, at which point the messenger appears in the target's dreams.</p><p>You can make the messenger appear monstrous and terrifying to the target. If you do, the messenger can deliver a message of no more than ten words and then the target must make a Wisdom saving throw. On a failed save, echoes of the phantasmal monstrosity spawn a nightmare that lasts the Duration of the target's sleep and prevents the target from gaining any benefit from that rest. In addition, when the target wakes up, it takes 3d6 psychic damage.</p><p>If you have a body part, lock of hair, clipping from a nail, or similar portion of the target's body, the target makes its saving throw with disadvantage.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "minute",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "8",
+          "units": "hour"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "3d6",
+              "psychic"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "scaling": "spell"
+        },
+        "level": 5,
+        "school": "ill",
+        "materials": {
+          "value": "A handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.kSPRpeIx3w3nihrF"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        }
+      },
+      "img": "icons/magic/air/fog-gas-smoke-swirling-pink.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234214,
+        "modifiedTime": 1661791116661,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.kSPRpeIx3w3nihrF"
+    },
+    {
+      "_id": "WzvJ7G3cqvIubsLk",
+      "name": "Greater Restoration",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You imbue a creature you touch with positive energy to undo a debilitating effect. You can reduce the target's Exhaustion level by one, or end one of the following Effects on the target:</p>\n<ul>\n<li>One effect that Charmed or Petrified the target</li>\n<li>One curse, including the target's Attunement to a cursed magic item</li>\n<li>Any reduction to one of the target's Ability Scores</li>\n<li>One effect reducing the target's hit point maximum</li>\n</ul>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 5,
+        "school": "abj",
+        "materials": {
+          "value": "diamond dust worth at least 100gp, which the spell consumes",
+          "consumed": true,
+          "cost": 100,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        }
+      },
+      "img": "icons/magic/life/heart-cross-strong-flame-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234154,
+        "modifiedTime": 1661791116661,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.WzvJ7G3cqvIubsLk"
+    },
+    {
+      "_id": "fVbCxFRaORalHB20",
+      "name": "Scrying",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You can see and hear a particular creature you choose that is on the same plane of existence as you. The target must make a Wisdom saving throw, which is modified by how well you know the target and the sort of physical connection you have to it. If a target knows you're casting this spell, it can fail the saving throw voluntarily if it wants to be observed.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Knowledge</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Secondhand (you have heard of the target)</td>\n<td>+5</td>\n</tr>\n<tr>\n<td>Firsthand (you have met the target)</td>\n<td>+0</td>\n</tr>\n<tr>\n<td>Familiar (you know the target well)</td>\n<td>-5</td>\n</tr>\n</tbody>\n</table>\n\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Connection</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Likeness or picture</td>\n<td>-2</td>\n</tr>\n<tr>\n<td>Possession or garment</td>\n<td>-4</td>\n</tr>\n<tr>\n<td>Body part, lock of hair, bit of nail, or the like</td>\n<td>-10</td>\n</tr>\n</tbody>\n</table>\n<p>On a successful save, the target isn't affected, and you can't use this spell against it again for 24 hours.</p><p>On a failed save, the spell creates an Invisible sensor within 10 feet of the target. You can see and hear through the sensor as if you were there. The sensor moves with the target, remaining within 10 feet of it for the Duration. A creature that can see Invisile Objects sees the sensor as a luminous orb about the size of your fist.</p><p>Instead of targeting a creature, you can choose a location you have seen before as the target of this spell. When you do, the sensor appears at that location and doesn't move.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "minute",
+          "cost": 10,
+          "condition": ""
+        },
+        "duration": {
+          "value": "10",
+          "units": "minute"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "scaling": "spell"
+        },
+        "level": 5,
+        "school": "div",
+        "materials": {
+          "value": "A focus worth at least 1,000 gp, such as a crystal ball, a silver mirror, or a font filled with holy water.",
+          "consumed": false,
+          "cost": 1000,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.fVbCxFRaORalHB20"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
+        }
+      },
+      "img": "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234189,
+        "modifiedTime": 1661791116662,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.fVbCxFRaORalHB20"
+    },
+    {
+      "_id": "MAxM77CDUu8dgIRQ",
+      "name": "Protection from Poison",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You touch a creature. If it is poisoned, you neutralize the poison. If more than one poison afflicts the target, you neutralize one poison that you know is present, or you neutralize one at random.</p><p>For the duration, the target has advantage on saving throws against being poisoned, and it has resistance to poison damage.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 3,
+          "max": "3",
+          "per": "day",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 2,
+        "school": "abj",
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ],
+        "crewed": false
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MAxM77CDUu8dgIRQ"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
+        }
+      },
+      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234123,
+        "modifiedTime": 1661791116662,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!ZaP1H91t4FzbRqR5.MAxM77CDUu8dgIRQ"
+    }
+  ],
+  "effects": [],
+  "folder": "pCy5ieJezFRCg9A0",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.3",
+    "coreVersion": "11.315",
+    "createdTime": 1661787232895,
+    "modifiedTime": 1704847049432,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!actors!ZaP1H91t4FzbRqR5"
+}

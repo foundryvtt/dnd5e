@@ -1,0 +1,138 @@
+{
+  "_id": "9uT9SXy1Gb1jiiZX",
+  "name": "Scale Mail +3",
+  "type": "equipment",
+  "img": "icons/equipment/chest/breastplate-banded-steel.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>This armor has been embellished with powerful runes, crafted in sorcerous fires, blessed by a powerful being, or some other event has seen it bequeathed with enhanced protection for the wearer.</em></p>\n<p>You have a bonus to AC while wearing this armor.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 45,
+    "price": {
+      "value": 24050,
+      "denomination": "gp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "crewed": false,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": null,
+    "actionType": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 14,
+      "dex": 2,
+      "magicalBonus": 3
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": null,
+    "proficient": null,
+    "type": {
+      "value": "medium",
+      "baseItem": "scalemail"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "properties": [
+      "mgc",
+      "stealthDisadvantage"
+    ],
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
+  },
+  "effects": [],
+  "folder": "JqTP017wj3uxDJ8g",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233504,
+    "modifiedTime": 1709659990705,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!9uT9SXy1Gb1jiiZX"
+}

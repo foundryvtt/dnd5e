@@ -119,6 +119,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       label: game.i18n.localize("DND5E.HP"),
       css: "item-hp",
       property: "system.hp.value",
+      maxProperty: "system.hp.max",
       editable: "Number"
     }, {
       label: game.i18n.localize("DND5E.Threshold"),
@@ -224,7 +225,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       // Handle cargo explicitly
       const isCargo = item.flags.dnd5e?.vehicleCargo === true;
       if ( isCargo ) {
-        totalWeight += (item.system.weight || 0) * item.system.quantity;
+        totalWeight += item.system.totalWeight ?? 0;
         cargo.cargo.items.push(item);
         continue;
       }
@@ -244,7 +245,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           else features.actions.items.push(item);
           break;
         default:
-          totalWeight += (item.system.weight || 0) * item.system.quantity;
+          totalWeight += item.system.totalWeight ?? 0;
           cargo.cargo.items.push(item);
       }
     }
@@ -265,22 +266,12 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
 
-    html.find(".item-toggle").click(this._onToggleItem.bind(this));
-    html.find(".item-hp input")
-      .click(evt => evt.target.select())
-      .change(this._onHPChange.bind(this));
-
-    html.find(".item:not(.cargo-row) input[data-property]")
-      .click(evt => evt.target.select())
-      .change(this._onEditInSheet.bind(this));
+    html[0].querySelector('[data-tab="cargo"] dnd5e-inventory')
+      .addEventListener("inventory", this._onInventoryEvent.bind(this));
 
     html.find(".cargo-row input")
       .click(evt => evt.target.select())
       .change(this._onCargoRowChange.bind(this));
-
-    html.find(".item:not(.cargo-row) .item-qty input")
-      .click(evt => evt.target.select())
-      .change(this._onQtyChange.bind(this));
 
     if (this.actor.system.attributes.actions.stations) {
       html.find(".counter.actions, .counter.action-thresholds").hide();
@@ -308,7 +299,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     if ( !entry ) return null;
 
     // Update the cargo value
-    const key = target.dataset.property ?? "name";
+    const key = target.dataset.name ?? "name";
     const type = target.dataset.dtype;
     let value = target.value;
     if (type === "Number") value = Number(value);
@@ -321,113 +312,38 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle editing certain values like quantity, price, and weight in-sheet.
-   * @param {Event} event  Triggering event.
-   * @returns {Promise<Item5e>}  Item with updates applied.
-   * @private
+   * Handle creating and deleting crew and passenger rows.
+   * @param {CustomEvent} event   Triggering inventory event.
+   * @returns {Promise}
    */
-  _onEditInSheet(event) {
-    event.preventDefault();
-    const itemID = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemID);
-    const property = event.currentTarget.dataset.property;
-    const type = event.currentTarget.dataset.dtype;
-    let value = event.currentTarget.value;
-    switch (type) {
-      case "Number": value = parseInt(value); break;
-      case "Boolean": value = value === "true"; break;
+  async _onInventoryEvent(event) {
+    if ( event.detail === "create" ) {
+      const type = event.target.dataset.type;
+      if ( !["crew", "passengers"].includes(type) ) return;
+      event.preventDefault();
+      const cargoCollection = foundry.utils.deepClone(this.actor.system.cargo[type]);
+      cargoCollection.push(this.constructor.newCargo);
+      return this.actor.update({[`system.cargo.${type}`]: cargoCollection});
     }
-    return item.update({[`${property}`]: value});
-  }
 
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onItemCreate(event) {
-    event.preventDefault();
-    // Handle creating a new crew or passenger row.
-    const target = event.currentTarget;
-    const type = target.dataset.type;
-    if (type === "crew" || type === "passengers") {
-      const cargo = foundry.utils.deepClone(this.actor.system.cargo[type]);
-      cargo.push(this.constructor.newCargo);
-      return this.actor.update({[`system.cargo.${type}`]: cargo});
-    }
-    return super._onItemCreate(event);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onItemDelete(event) {
-    event.preventDefault();
-    // Handle deleting a crew or passenger row.
-    const row = event.currentTarget.closest(".item");
-    if (row.classList.contains("cargo-row")) {
+    else if ( event.detail === "delete" ) {
+      const row = event.target.closest(".item");
+      if ( !row.classList.contains("cargo-row") ) return;
+      event.preventDefault();
       const idx = Number(row.dataset.itemIndex);
       const type = row.classList.contains("crew") ? "crew" : "passengers";
-      const cargo = foundry.utils.deepClone(this.actor.system.cargo[type]).filter((_, i) => i !== idx);
-      return this.actor.update({[`system.cargo.${type}`]: cargo});
+      const cargoCollection = foundry.utils.deepClone(this.actor.system.cargo[type]).filter((_, i) => i !== idx);
+      return this.actor.update({[`system.cargo.${type}`]: cargoCollection});
     }
-    return super._onItemDelete(event);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   async _onDropSingleItem(itemData) {
-    const cargoTypes = ["weapon", "equipment", "consumable", "tool", "loot", "backpack"];
+    const cargoTypes = ["weapon", "equipment", "consumable", "tool", "loot", "container"];
     const isCargo = cargoTypes.includes(itemData.type) && (this._tabs[0].active === "cargo");
     foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", isCargo);
     return super._onDropSingleItem(itemData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Special handling for editing HP to clamp it within appropriate range.
-   * @param {Event} event  Triggering event.
-   * @returns {Promise<Item5e>}  Item after the update is applied.
-   * @private
-   */
-  _onHPChange(event) {
-    event.preventDefault();
-    const itemID = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemID);
-    let hp = Math.clamped(0, parseInt(event.currentTarget.value), item.system.hp.max);
-    if ( Number.isNaN(hp) ) hp = 0;
-    return item.update({"system.hp.value": hp});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Special handling for editing quantity value of equipment and weapons inside the features tab.
-   * @param {Event} event  Triggering event.
-   * @returns {Promise<Item5e>}  Item after the update is applied.
-   * @private
-   */
-  _onQtyChange(event) {
-    event.preventDefault();
-    const itemID = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemID);
-    let qty = parseInt(event.currentTarget.value);
-    if ( Number.isNaN(qty) ) qty = 0;
-    return item.update({"system.quantity": qty});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle toggling an item's crewed status.
-   * @param {Event} event  Triggering event.
-   * @returns {Promise<Item5e>}  Item after the toggling is applied.
-   * @private
-   */
-  _onToggleItem(event) {
-    event.preventDefault();
-    const itemID = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemID);
-    return item.update({"system.crewed": !item.system.crewed});
   }
 }

@@ -1,4 +1,5 @@
 import ActorSheet5e from "./base-sheet.mjs";
+import ActorTypeConfig from "./type-config.mjs";
 
 /**
  * An Actor sheet for NPC type characters.
@@ -14,11 +15,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
-
-  /** @override */
-  static unsupportedItemTypes = new Set(["background", "class", "race", "subclass"]);
-
-  /* -------------------------------------------- */
   /*  Context Preparation                         */
   /* -------------------------------------------- */
 
@@ -29,6 +25,9 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Challenge Rating
     const cr = parseFloat(context.system.details.cr ?? 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
+
+    // Class Spellcasting
+    context.classSpellcasting = Object.values(this.actor.classes).some(c => c.spellcasting?.levels);
 
     return foundry.utils.mergeObject(context, {
       labels: {
@@ -55,6 +54,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     };
 
     // Start by classifying items into groups for rendering
+    const maxLevelDelta = CONFIG.DND5E.maxLevel - (this.actor.system.details.level ?? 0);
     let [spells, other] = context.items.reduce((arr, item) => {
       const {quantity, uses, recharge, target} = item.system;
       const ctx = context.itemContext[item.id] ??= {};
@@ -65,14 +65,17 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       ctx.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
       ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
       ctx.canToggle = false;
+      if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => ({
+        level, delta: level - item.system.levels, disabled: (level - item.system.levels) > maxLevelDelta
+      }));
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;
     }, [[], []]);
 
     // Apply item filters
-    spells = this._filterItems(spells, this._filters.spellbook);
-    other = this._filterItems(other, this._filters.features);
+    spells = this._filterItems(spells, this._filters.spellbook.properties);
+    other = this._filterItems(other, this._filters.features.properties);
 
     // Organize Spellbook
     const spellbook = this._prepareSpellbook(context, spells);
@@ -80,8 +83,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Organize Features
     for ( let item of other ) {
       if ( item.type === "weapon" ) features.weapons.items.push(item);
-      else if ( item.type === "feat" ) {
-        if ( item.system.activation.type ) features.actions.items.push(item);
+      else if ( ["background", "class", "feat", "race", "subclass"].includes(item.type) ) {
+        if ( item.system.activation?.type ) features.actions.items.push(item);
         else features.passive.items.push(item);
       }
       else features.equipment.items.push(item);
@@ -106,6 +109,46 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     else label.push(game.i18n.localize(CONFIG.DND5E.armorClasses[ac.calc].label));
     if ( this.actor.shield ) label.push(this.actor.shield.name);
     return label.filterJoin(", ");
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    if ( !this.isEditable ) return;
+    html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onConfigMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    if ( (event.currentTarget.dataset.action === "type") && (this.actor.system.details.race?.id) ) {
+      new ActorTypeConfig(this.actor.system.details.race, { keyPath: "system.type" }).render(true);
+    }
+    else return super._onConfigMenu(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle mouse click events for NPC sheet actions.
+   * @param {MouseEvent} event  The originating click event.
+   * @returns {Promise}         Dialog or roll result.
+   * @private
+   */
+  _onSheetAction(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    switch ( button.dataset.action ) {
+      case "rollDeathSave":
+        return this.actor.rollDeathSave({event: event});
+    }
   }
 
   /* -------------------------------------------- */

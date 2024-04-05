@@ -1,0 +1,610 @@
+.dnd5e.sheet.actor {
+
+  --dnd5e-actor-name-height: 60px;
+
+  /* ----------------------------------------- */
+  /*  Shared Styles                            */
+  /* ----------------------------------------- */
+
+  // Attribute Configuration
+  .config-button {
+    color: var(--dnd5e-color-olive);
+    font-size: var(--font-size-10);
+    font-weight: normal;
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  .sheet-header {
+
+    // Portrait Artwork
+    img.profile {
+      flex: 0 0 160px;
+      max-width: 160px;
+      height: 160px;
+    }
+
+    // Character Name
+    h1.charname {
+      flex: 1;
+      height: var(--dnd5e-actor-name-height);
+      padding: 0;
+      input {
+        height: calc(var(--dnd5e-actor-name-height) - 20px);
+        margin: 10px 0;
+      }
+    }
+
+    // Character Level
+    .header-exp {
+      flex: 0 0 150px;
+      max-width: 18em;
+      margin-right: 3px;
+      height: var(--dnd5e-actor-name-height);
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    // Character Summary
+    .summary {
+      height: 30px;
+      border-bottom: var(--dnd5e-border-groove);
+      font-size: var(--font-size-18);
+      input, span {
+        display: block;
+        height: 24px;
+        line-height: 24px;
+      }
+      span {
+        margin-inline: 4px;
+        border-block-start: 1px solid transparent;
+        white-space: nowrap;
+      }
+      select {
+        position: relative;
+        top: -4px;
+      }
+    }
+
+    // Primary Attributes
+    .attributes {
+      flex: 0 0 100%;
+      margin: 0;
+
+      .attribute {
+        position: relative;
+        height: 70px;
+        margin: 0;
+        border: none;
+        border-right: var(--dnd5e-border-groove);
+        border-radius: 0;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        .attribute-name {
+          position: relative;
+        }
+
+        .attribute-value {
+          height: 30px;
+          line-height: 30px;
+        }
+
+        .config-button {
+          position: absolute;
+          padding: 4px;
+          right: 0;
+          top: 0;
+          display: none;
+        }
+
+        &:hover .config-button {
+          display: block;
+        }
+
+        // Temporary HP
+        input.temphp {
+          width: 48%;
+        }
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  General Styles                           */
+  /* ----------------------------------------- */
+
+  // Box Headers
+  h4.box-title {
+    height: 18px;
+    line-height: 16px;
+    margin: 4px 8px 2px;
+    font-family: var(--dnd5e-font-modesto);
+    font-size: var(--font-size-18);
+    font-weight: 700;
+    color: var(--dnd5e-color-olive);
+    border-bottom: 1px solid var(--dnd5e-color-faint);
+    white-space: nowrap;
+  }
+
+  /* ----------------------------------------- */
+  /*  Attributes                               */
+  /* ----------------------------------------- */
+
+  .tab.attributes {
+    overflow: hidden;
+    align-items: flex-start;
+  }
+
+  ul.attributes {
+    flex: 0 0 60px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li.attribute {
+      height: 60px;
+      margin: 0 5px 0 0;
+      border: var(--dnd5e-border-groove);
+      border-radius: 4px;
+      text-align: center;
+
+      &:last-child {
+        margin: 0;
+      }
+
+      .attribute-value {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 28px;
+        line-height: 28px;
+        font-family: var(--dnd5e-font-modesto);
+        font-size: var(--font-size-20);
+        font-weight: 700;
+
+        > * {
+          font-weight: 400;
+          font-size: var(--font-size-24);
+        }
+
+        &.multiple input, &.multiple span:not(.sep) {
+          flex: 0 0 33%;
+        }
+      }
+
+      .attribute-footer {
+        flex: 0 0 18px;
+        margin-top: -1px;
+        line-height: 18px;
+        font-family: "Signika", sans-serif;
+        font-size: var(--font-size-12);
+        font-weight: 400;
+        white-space: nowrap
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Ability Scores                           */
+  /* ----------------------------------------- */
+
+  .ability-scores {
+    flex: 0 0 100px;
+    align-content: flex-start;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--dnd5e-font-modesto);
+    font-size: var(--font-size-20);
+    font-weight: 700;
+    border: var(--dnd5e-border-groove);
+    border-radius: 3px;
+
+    .ability {
+      min-width: 100%;
+      height: 70px;
+      text-align: center;
+      border-bottom: var(--dnd5e-border-groove);
+      position: relative;
+
+      &:last-child {
+        border-bottom: none;
+        margin-bottom: -3px;
+      }
+
+      input.ability-score {
+        height: 30px;
+        width: 36px;
+        margin: 0 auto;
+        line-height: 32px;
+        font-size: var(--font-size-24);
+      }
+
+      .config-button {
+        right: 2px;
+        top: 3px;
+        position: absolute;
+        display: none;
+      }
+
+      &:hover .config-button {
+        display: block;
+      }
+
+      .ability-modifiers {
+        height: 24px;
+        margin: -8px 0 0;
+
+        span.ability-mod,
+        span.ability-save {
+          flex: 0 0 24px;
+          height: 22px;
+          line-height: 22px;
+          font-size: var(--font-size-16);
+          border-top: var(--dnd5e-border-groove);
+        }
+
+        span.ability-mod {
+          border-right: var(--dnd5e-border-groove);
+        }
+
+        .ability-proficiency {
+          line-height: 30px;
+        }
+
+        span.ability-save {
+          border-left: var(--dnd5e-border-groove);
+        }
+      }
+    }
+  }
+
+  // Proficiency Toggle Buttons
+  .proficiency-toggle {
+    color: var(--dnd5e-color-beige);
+    font-size: var(--font-size-12);
+
+    &.disabled {
+      cursor: default;
+      text-shadow: none;
+    }
+  }
+  .proficient .proficiency-toggle {
+    color: var(--dnd5e-color-olive);
+  }
+
+  .locked .proficiency-toggle {
+    color: var(--dnd5e-color-beige);
+    text-shadow: none;
+    cursor: default;
+  }
+
+  /* ----------------------------------------- */
+  /*  Skills                                   */
+  /* ----------------------------------------- */
+
+  ul.skills-list {
+    flex: 0 0 180px;
+    list-style: none;
+    margin: 0 5px 0;
+    padding: 0;
+    border: var(--dnd5e-border-groove);
+    border-radius: 3px;
+
+    li.skill {
+      height: 24px;
+      padding: 3px 2px;
+
+      &:nth-child(even) {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      h4 {
+        flex: 1px;
+        margin: 0;
+        font-size: var(--font-size-11);
+        line-height: 18px;
+      }
+
+      .skill-proficiency {
+        flex: 0 0 16px;
+        line-height: 18px;
+      }
+
+      .skill-name-controls {
+        position: relative;
+
+        .config-button {
+          right: 3px;
+          top: 4px;
+          position: absolute;
+          display: none;
+        }
+
+        &:hover .config-button {
+          display: block;
+        }
+      }
+
+      .skill-ability {
+        flex: 0 0 26px;
+        text-transform: capitalize;
+      }
+
+      .skill-mod {
+        flex: 0 0 20px;
+      }
+
+      .skill-passive {
+        flex: 0 0 26px;
+        text-align: center;
+        color: var(--dnd5e-color-tan);
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Tools                                    */
+  /* ----------------------------------------- */
+
+  .tag.tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 4px;
+
+    a:is(.proficiency-toggle, .config-button) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 13px;
+      height: 13px;
+
+      > i { margin: 0; }
+    }
+
+    h4 { margin: 0; }
+  }
+
+  /* ----------------------------------------- */
+  /*  Statuses                                 */
+  /* ----------------------------------------- */
+
+  .counters {
+    flex: none;
+    padding: 5px 0;
+    margin: 0;
+    border-bottom: var(--dnd5e-border-groove);
+
+    .counter {
+      height: 20px;
+      line-height: 20px;
+
+      label {
+        cursor: pointer;
+        align-items: center;
+        input[type=checkbox] {
+          top: unset;
+          flex: none;
+        }
+      }
+
+      h4 {
+        flex: auto;
+        margin: 0;
+        font-size: var(--font-size-13);
+        font-weight: bold;
+        color: var(--dnd5e-color-olive);
+      }
+
+      .counter-value {
+        flex: none;
+        text-align: right;
+        > * {
+          display: inline;
+        }
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        height: 20px;
+        max-width: 20px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      input[type="checkbox"] {
+        position: relative;
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        top: 4px;
+      }
+      span.sep {
+        font-size: var(--font-size-12);
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Traits                                   */
+  /* ----------------------------------------- */
+
+  .center-pane {
+    height: 100%;
+    padding: 0 5px 0 3px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .traits {
+    .form-group, .form-group-stacked {
+      margin: 0 0 3px 0;
+      justify-content: space-between;
+    }
+    .config-button {
+      flex: 1;
+    }
+
+    label {
+      flex: none;
+      line-height: 20px;
+      font-weight: bold;
+      margin: 0 10px 0 0;
+    }
+
+    select {
+      max-width: 200px;
+    }
+
+    input {
+      text-align: right;
+    }
+
+    i.fas {
+      float: right;
+      margin-right: 3px;
+      text-align: right;
+      color: #999;
+
+      &:hover {
+        color: #111;
+        text-shadow: 0 0 10px red;
+      }
+    }
+
+    .inactive {
+      color: var(--dnd5e-color-tan);
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Inventory Lists                          */
+  /* ----------------------------------------- */
+
+  .tab.features,
+  .tab.inventory,
+  .tab.spellbook {
+    overflow-y: hidden;
+  }
+
+  /* ----------------------------------------- */
+  /*  Spellbook                                */
+  /* ----------------------------------------- */
+
+  .spellcasting-ability {
+    flex: 0 0 240px;
+    margin: 0;
+    label, span {
+      flex: none;
+    }
+    input {
+      flex: 0 0 28px;
+      text-align: center;
+    }
+    select {
+      margin: 0 5px;
+      flex: 0 0 120px;
+    }
+  }
+
+  .spell-slots,
+  .spell-comps {
+    flex: none;
+    padding: 0 5px;
+    font-size: var(--font-size-12);
+    color: var(--dnd5e-color-tan);
+    border-right: 1px solid var(--dnd5e-color-faint);
+  }
+
+  .spell-slots {
+    input {
+      display: inline;
+      max-width: 20px;
+    }
+    .sep {
+      font-size: var(--font-size-13);
+      font-weight: normal;
+    }
+  }
+
+  .spellbook .spell-uses {
+    padding-right: 5px;
+    text-align: right;
+    color: var(--dnd5e-color-tan);
+  }
+
+  .spell-school, .spell-action, .spell-target {
+    flex: 0 0 100px;
+    font-size: var(--font-size-12);
+    color: var(--dnd5e-color-tan);
+    text-align: center;
+    border-right: 1px solid var(--dnd5e-color-faint);
+  }
+
+  .spell-component {
+    line-height: 14px;
+    &.tag {
+      display: inline-block;
+      text-align: center;
+      padding-top: 1px;
+      width: 16px;
+      color: var(--dnd5e-color-faint);
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid transparent;
+      border-radius: 8px;
+    }
+  }
+
+  // Empty spellbook controls
+  .spellbook-empty .item-controls { flex: 1; }
+
+  /* ----------------------------------------- */
+  /*  Features Tab                             */
+  /* ----------------------------------------- */
+
+  // Original class icon
+  .features i.original-class {
+    color: #4b4a44
+  }
+  .features .item-detail select {
+    max-width: 90%;
+  }
+
+  /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
+
+  .editor {
+    padding: 0 8px;
+  }
+}
+
+#actor-flags {
+  .window-content {
+    overflow-y: hidden;
+  }
+  form {
+    height: 100%;
+  }
+  .form-body {
+    height: calc(100% - 40px);
+    padding-right: 8px;
+    margin-bottom: 4px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Sidebar                                  */
+/* ----------------------------------------- */
+
+.actors-sidebar .primary-party .entry-name::after {
+  content: " ✦";
+  color: var(--dnd5e-color-blue);
+}

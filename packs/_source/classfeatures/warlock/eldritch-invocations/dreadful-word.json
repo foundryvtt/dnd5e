@@ -1,0 +1,101 @@
+{
+  "_id": "QBk1RsuTIEF4GEBC",
+  "name": "Dreadful Word",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You can cast @UUID[Compendium.dnd5e.spells.Item.9hQXdMSmerkTsHDe]{Confusion} once using a warlock spell slot. You can't do so again until you finish a long rest.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 10,
+      "width": null,
+      "units": "ft",
+      "type": "sphere",
+      "prompt": true
+    },
+    "range": {
+      "value": 90,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "lr",
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "scaling": "cha"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "eldritchInvocation"
+    },
+    "requirements": "Warlock 7",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "crewed": false,
+    "properties": [],
+    "prerequisites": {
+      "level": 7
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/air/wind-vortex-swirl-blue.webp",
+  "effects": [],
+  "folder": "0uFCjs5gYeVtl38i",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.2.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234374,
+    "modifiedTime": 1712073581480,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!QBk1RsuTIEF4GEBC"
+}

@@ -1,6 +1,5 @@
 import ActorSheet5e from "./base-sheet.mjs";
 import ActorTypeConfig from "./type-config.mjs";
-import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 /**
@@ -55,7 +54,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {};
-    for ( const type of ["weapon", "equipment", "consumable", "tool", "backpack", "loot"] ) {
+    for ( const type of ["weapon", "equipment", "consumable", "tool", "container", "loot"] ) {
       inventory[type] = {label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], dataset: {type}};
     }
 
@@ -88,8 +87,22 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.isDepleted = ctx.isOnCooldown && ctx.hasUses && (uses.value > 0);
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
-      // Item toggle state
-      this._prepareItemToggleState(item, ctx);
+      // Unidentified items
+      ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
+
+      // Item grouping
+      const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
+      const group = this.actor.items.get(originId);
+      switch ( group?.type ) {
+        case "race": ctx.group = "race"; break;
+        case "background": ctx.group = "background"; break;
+        case "class": ctx.group = group.identifier; break;
+        case "subclass": ctx.group = group.class?.identifier ?? "other"; break;
+        default: ctx.group = "other";
+      }
+
+      // Individual item preparation
+      this._prepareItem(item, ctx);
 
       // Classify items into types
       if ( item.type === "spell" ) obj.spells.push(item);
@@ -102,15 +115,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return obj;
     }, { items: [], spells: [], feats: [], races: [], backgrounds: [], classes: [], subclasses: [] });
 
-    // Apply active item filters
-    items = this._filterItems(items, this._filters.inventory);
-    spells = this._filterItems(spells, this._filters.spellbook);
-    feats = this._filterItems(feats, this._filters.features);
-
     // Organize items
     for ( let i of items ) {
       const ctx = context.itemContext[i.id] ??= {};
-      ctx.totalWeight = (i.system.quantity * i.system.weight).toNearest(0.1);
+      ctx.totalWeight = i.system.totalWeight?.toNearest(0.1);
       inventory[i.type].items.push(i);
     }
 
@@ -130,6 +138,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         const delta = level - cls.system.levels;
         return { level, delta, disabled: delta > maxLevelDelta };
       });
+      ctx.prefixedImage = cls.img ? foundry.utils.getRoute(cls.img) : null;
       arr.push(cls);
       const identifier = cls.system.identifier || cls.name.slugify({strict: true});
       const subclass = subclasses.findSplice(s => s.system.classIdentifier === identifier);
@@ -183,15 +192,15 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * @param {object} context  Context data for display.
    * @protected
    */
-  _prepareItemToggleState(item, context) {
+  _prepareItem(item, context) {
     if ( item.type === "spell" ) {
       const prep = item.system.preparation || {};
       const isAlways = prep.mode === "always";
       const isPrepared = !!prep.prepared;
       context.toggleClass = isPrepared ? "active" : "";
       if ( isAlways ) context.toggleClass = "fixed";
-      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always;
-      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared;
+      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always.label;
+      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared.label;
       else context.toggleTitle = game.i18n.localize("DND5E.SpellUnprepared");
     }
     else {
@@ -210,8 +219,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   activateListeners(html) {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
-    html.find(".level-selector").change(this._onLevelChange.bind(this));
-    html.find(".item-toggle").click(this._onToggleItem.bind(this));
     html.find(".short-rest").click(this._onShortRest.bind(this));
     html.find(".long-rest").click(this._onLongRest.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
@@ -236,7 +243,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * Handle mouse click events for character sheet actions.
    * @param {MouseEvent} event  The originating click event.
    * @returns {Promise}         Dialog or roll result.
-   * @private
+   * @protected
    */
   _onSheetAction(event) {
     event.preventDefault();
@@ -253,52 +260,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       case "rollInitiative":
         return this.actor.rollInitiativeDialog({event});
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Respond to a new level being selected from the level selector.
-   * @param {Event} event                           The originating change.
-   * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
-   * @private
-   */
-  async _onLevelChange(event) {
-    event.preventDefault();
-    const delta = Number(event.target.value);
-    const classId = event.target.closest(".item")?.dataset.itemId;
-    if ( !delta || !classId ) return;
-    const classItem = this.actor.items.get(classId);
-    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
-      const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
-      if ( manager.steps.length ) {
-        if ( delta > 0 ) return manager.render(true);
-        try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
-        }
-        catch(err) {
-          return;
-        }
-      }
-    }
-    return classItem.update({"system.levels": classItem.system.levels + delta});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle toggling the state of an Owned Item within the Actor.
-   * @param {Event} event        The triggering click event.
-   * @returns {Promise<Item5e>}  Item with the updates applied.
-   * @private
-   */
-  _onToggleItem(event) {
-    event.preventDefault();
-    const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    const attr = item.type === "spell" ? "system.preparation.prepared" : "system.equipped";
-    return item.update({[attr]: !foundry.utils.getProperty(item, attr)});
   }
 
   /* -------------------------------------------- */

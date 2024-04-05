@@ -1,0 +1,175 @@
+{
+  "_id": "Szvk5FEVQW3uhJi5",
+  "name": "Haste",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>Choose a willing creature that you can see within range. Until the spell ends, the target's speed is doubled, it gains a +2 bonus to AC, it has advantage on Dexterity Saving Throws, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p><p>When the spell ends, the target can't move or take Actions until after its next turn, as a wave of lethargy sweeps over it.</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature",
+      "prompt": true
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 3,
+    "school": "trs",
+    "materials": {
+      "value": "A shaving of licorice root",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    },
+    "properties": [
+      "vocal",
+      "somatic",
+      "material",
+      "concentration"
+    ],
+    "crewed": false
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
+  "effects": [
+    {
+      "name": "Haste",
+      "icon": "icons/magic/control/buff-flight-wings-runes-purple.webp",
+      "origin": "Compendium.dnd5e.spells.Item.Szvk5FEVQW3uhJi5",
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "DEPrzDiNHOqKj4Hj",
+      "changes": [
+        {
+          "key": "system.attributes.ac.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.attributes.movement.burrow",
+          "mode": 1,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.attributes.movement.climb",
+          "mode": 1,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.attributes.movement.fly",
+          "mode": 1,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.attributes.movement.swim",
+          "mode": 1,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.attributes.movement.walk",
+          "mode": 1,
+          "value": "2",
+          "priority": null
+        }
+      ],
+      "description": "<p>Until the spell ends, the target's speed is doubled, it gains a +2 bonus to AC, it has advantage on Dexterity Saving Throws, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz.ActiveEffect.YtN8kTDQyxFaxpEx"
+        }
+      },
+      "tint": null,
+      "_key": "!items.effects!Szvk5FEVQW3uhJi5.DEPrzDiNHOqKj4Hj"
+    }
+  ],
+  "folder": "5Si35RRLLaaoWvC3",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234143,
+    "modifiedTime": 1706146315548,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!Szvk5FEVQW3uhJi5"
+}

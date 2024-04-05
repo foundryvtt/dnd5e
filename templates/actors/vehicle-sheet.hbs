@@ -10,7 +10,7 @@
             </h1>
             <ul class="summary flexrow">
                 <li class="size">
-                    <span>{{lookup config.actorSizes system.traits.size}}</span>
+                    <span>{{lookup (lookup config.actorSizes system.traits.size) "label"}}</span>
                 </li>
                 <li class="vehicle-type">
                     <select name="system.vehicleType">
@@ -165,7 +165,7 @@
         </div>
 
         <div class="tab cargo flexcol" data-group="primary" data-tab="cargo">
-            {{> "dnd5e.actor-inventory" sections=cargo}}
+            {{> "dnd5e.inventory" sections=cargo}}
         </div>
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
             {{> "dnd5e.active-effects"}}

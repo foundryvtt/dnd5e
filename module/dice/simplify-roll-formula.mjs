@@ -4,10 +4,11 @@
  * @param {string} formula                          The original roll formula.
  * @param {object} [options]                        Formatting options.
  * @param {boolean} [options.preserveFlavor=false]  Preserve flavor text in the simplified formula.
+ * @param {boolean} [options.deterministic]         Strip any non-deterministic terms from the result.
  *
  * @returns {string}  The resulting simplified formula.
  */
-export default function simplifyRollFormula(formula, { preserveFlavor=false } = {}) {
+export default function simplifyRollFormula(formula, { preserveFlavor=false, deterministic=false } = {}) {
   // Create a new roll and verify that the formula is valid before attempting simplification.
   let roll;
   try { roll = new Roll(formula); }
@@ -16,6 +17,47 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false } = 
 
   // Optionally strip flavor annotations.
   if ( !preserveFlavor ) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
+
+  if ( deterministic ) {
+    // Perform arithmetic simplification to simplify parsing through the terms.
+    roll.terms = _simplifyOperatorTerms(roll.terms);
+
+    // Remove non-deterministic terms, their preceding operators, and dependent operators/terms.
+    const terms = [];
+    let temp = [];
+    let multiplicative = false;
+    let determ;
+
+    for ( let i = roll.terms.length - 1; i >= 0; ) {
+      let paren;
+      let term = roll.terms[i];
+      if ( term instanceof ParentheticalTerm ) {
+        paren = simplifyRollFormula(term.term, { preserveFlavor, deterministic });
+      }
+      if ( Number.isNumeric(paren) ) {
+        const termData = { number: paren };
+        if ( preserveFlavor ) termData.options = { flavor: term.flavor };
+        term = new NumericTerm(termData);
+      }
+      determ = term.isDeterministic && (!multiplicative || determ);
+      if ( determ ) temp.unshift(term);
+      else temp = [];
+      term = roll.terms[--i];
+      while ( term instanceof OperatorTerm ) {
+        if ( determ ) temp.unshift(term);
+        if ( (term.operator === "*") || (term.operator === "/") || (term.operator === "%") ) multiplicative = true;
+        else {
+          multiplicative = false;
+          while ( temp.length ) terms.unshift(temp.pop());
+        }
+        term = roll.terms[--i];
+      }
+    }
+    if ( determ ) {
+      while ( temp.length ) terms.unshift(temp.pop());
+    }
+    roll.terms = terms;
+  }
 
   // Perform arithmetic simplification on the existing roll terms.
   roll.terms = _simplifyOperatorTerms(roll.terms);
@@ -107,18 +149,22 @@ function _simplifyDiceTerms(terms) {
   // Split the unannotated terms into different die sizes and signs
   const diceQuantities = unannotated.reduce((obj, curr, i) => {
     if ( curr instanceof OperatorTerm ) return obj;
-    const face = curr.constructor?.name === "Coin" ? "c" : curr.faces;
-    const key = `${unannotated[i - 1].operator}${face}`;
-    obj[key] = (obj[key] ?? 0) + curr.number;
+    const isCoin = curr.constructor?.name === "Coin";
+    const face = isCoin ? "c" : curr.faces;
+    const modifiers = isCoin ? "" : curr.modifiers.filterJoin("");
+    const key = `${unannotated[i - 1].operator}${face}${modifiers}`;
+    obj[key] ??= {};
+    obj[key].number = (obj[key].number ?? 0) + curr.number;
+    if ( !isCoin ) obj[key].modifiers = (obj[key].modifiers ?? []).concat(curr.modifiers);
     return obj;
   }, {});
 
   // Add new die and operator terms to simplified for each die size and sign
-  const simplified = Object.entries(diceQuantities).flatMap(([key, number]) => ([
+  const simplified = Object.entries(diceQuantities).flatMap(([key, {number, modifiers}]) => ([
     new OperatorTerm({ operator: key.charAt(0) }),
     key.slice(1) === "c"
       ? new Coin({ number: number })
-      : new Die({ number, faces: parseInt(key.slice(1)) })
+      : new Die({ number, faces: parseInt(key.slice(1)), modifiers: [...new Set(modifiers)] })
   ]));
   return [...simplified, ...annotated];
 }

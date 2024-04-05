@@ -1,0 +1,158 @@
+/* ----------------------------------------- */
+/*  Basic Structure                          */
+/* ----------------------------------------- */
+.dnd5e.sheet.actor.character {
+  min-width: 720px;
+  min-height: 680px;
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+
+  .sheet-header {
+
+    // Character Profile image (larger)
+    img.profile {
+      flex: 0 0 160px;
+      max-width: 160px;
+      height: 160px;
+    }
+
+    // Character Level
+    .charlevel {
+      flex: 0 0 20px;
+      height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: var(--font-size-18);
+      color: var(--dnd5e-color-tan);
+      white-space: nowrap;
+    }
+
+    // Experience Tracking
+    .experience {
+      flex: 0 0 32px;
+      margin-bottom: -5px;
+      align-items: center;
+      font-size: var(--font-size-18);
+      span.max {
+        color: var(--dnd5e-color-tan);
+        flex: none;
+        margin-left: 3px;
+      }
+    }
+    .xpbar {
+      flex: 0 0 8px;
+      width: 100%;
+      margin-bottom: 5px;
+      background: var(--dnd5e-color-tan);
+      border: 1px solid #000;
+      border-radius: 3px;
+      .bar {
+        height: 4px;
+        margin: 1px;
+        display: block;
+        background: #afebff;
+        border: 1px solid #000;
+        border-radius: 2px;
+      }
+    }
+
+    // Header Attributes
+    .attributes {
+      a.rest {
+        border: 1px solid var(--dnd5e-color-beige);
+        border-radius: 2px;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 0 3px;
+        margin: 0 3px;
+      }
+
+      .hit-dice {
+        font-size: var(--font-size-24);
+      }
+
+      .initiative .attribute-footer input {
+        width: 32px;
+      }
+    }
+
+    .summary .proficiency {
+      text-align: right;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+
+  // Custom Resources
+  .resource .attribute-value {
+    > input {
+      flex: 0 0 25%;
+    }
+    label.recharge {
+      height: 32px;
+      position: relative;
+      font-family: "Signika", sans-serif;
+      font-size: var(--font-size-11);
+      text-align: center;
+      color: var(--dnd5e-color-olive);
+      align-items: center;
+      input[type="checkbox"] {
+        flex-basis: 14px;
+        height: 14px;
+        width: 14px;
+        margin: 0;
+        top: -6px;
+      }
+    }
+  }
+
+  ul.skills-list {
+    flex: 0 0 212px;
+
+    li.skill {
+      padding: 3px;
+      h4 {
+        flex: 1px;
+        margin: 0;
+        font-size: var(--font-size-13);
+      }
+    }
+  }
+
+  .item-detail.player-class {
+    flex: 0 0 180px;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  /* ----------------------------------------- */
+  /*  Biography                                */
+  /* ----------------------------------------- */
+
+  .characteristics {
+    flex: 0 0 180px;
+    height: 100%;
+    padding: 0 3px 3px;
+    label {
+      flex: 0 0 20px;
+      font-family: var(--dnd5e-font-modesto);
+      font-size: var(--font-size-16);
+      font-weight: normal;
+      line-height: 20px;
+      text-align: center;
+    }
+    textarea {
+      font-family: "Signika", serif;
+      font-size: var(--font-size-13);
+      border: 1px solid var(--dnd5e-color-faint);
+      resize: none;
+    }
+  }
+
+  .biography {
+    max-width: calc(100% - 180px);
+  }
+}

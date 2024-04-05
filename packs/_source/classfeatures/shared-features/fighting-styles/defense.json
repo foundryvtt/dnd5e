@@ -1,0 +1,129 @@
+{
+  "_id": "zSlV0O2rQMdoq6pB",
+  "name": "Defense",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>While you are wearing armor, you gain a +1 bonus to AC</p>",
+      "chat": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "fightingStyle"
+    },
+    "requirements": "Fighter 1, Champion 10, Paladin 2, Ranger 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "crewed": false,
+    "properties": []
+  },
+  "flags": {},
+  "img": "icons/equipment/shield/heater-stone-orange.webp",
+  "effects": [
+    {
+      "_id": "U3so0zDcVt4sIBRz",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.attributes.ac.bonus",
+          "value": "+1",
+          "mode": 2,
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/equipment/shield/heater-stone-orange.webp",
+      "origin": "Item.4mQUDmiDBePkQD6Y",
+      "tint": null,
+      "transfer": true,
+      "name": "Fighting Style: Defense",
+      "description": "",
+      "statuses": [],
+      "_key": "!items.effects!zSlV0O2rQMdoq6pB.U3so0zDcVt4sIBRz"
+    }
+  ],
+  "folder": "159EPyqZTcus1HNJ",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234445,
+    "modifiedTime": 1704824720020,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!zSlV0O2rQMdoq6pB"
+}

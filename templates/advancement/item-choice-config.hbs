@@ -1,104 +1,108 @@
 <form autocomplete="off">
-  <div class="left-column">
-    {{> "dnd5e.advancement-controls"}}
-    <div class="form-group">
-      <label>{{localize "DND5E.AdvancementHint"}}</label>
-      <textarea name="configuration.hint">{{configuration.hint}}</textarea>
-    </div>
-
-    <div class="form-group">
-      <label>{{localize "DND5E.AdvancementConfigureAllowDrops"}}</label>
-      <div class="form-fields">
-        <input type="checkbox" name="configuration.allowDrops" {{checked configuration.allowDrops}}>
-      </div>
-      <p class="hint">{{localize "DND5E.AdvancementConfigureAllowDropsHint"}}</p>
-    </div>
-
-    <div class="form-group">
-      <label>{{localize "DND5E.AdvancementItemChoiceType"}}</label>
-      <div class="form-fields">
-        <select name="configuration.type">
-          {{selectOptions validTypes selected=configuration.type
-            blank=(localize "DND5E.AdvancementItemChoiceTypeAny")}}
-        </select>
-      </div>
-      <p class="hint">{{localize "DND5E.AdvancementItemChoiceTypeHint"}}</p>
-    </div>
-
-    {{#if typeRestriction}}
-      <div class="form-group">
-        <label>{{typeRestriction.typeLabel}}</label>
-        <div class="form-fields">
-          <select name="configuration.restriction.type">
-            {{selectOptions typeRestriction.typeOptions selected=configuration.restriction.type
-              labelAttr="label" blank="—"}}
-          </select>
-        </div>
-      </div>
-
-      {{#if typeRestriction.subtypeOptions}}
+    <div class="left-column">
+        {{> "dnd5e.advancement-controls"}}
         <div class="form-group">
-          <label>{{typeRestriction.subtypeLabel}}</label>
-          <div class="form-fields">
-            <select name="configuration.restriction.subtype">
-              {{selectOptions typeRestriction.subtypeOptions selected=configuration.restriction.subtype blank="—"}}
-            </select>
-          </div>
+            <label>{{localize "DND5E.AdvancementHint"}}</label>
+            <textarea name="configuration.hint">{{configuration.hint}}</textarea>
         </div>
-      {{/if}}
-    {{/if}}
 
-    {{#if showSpellConfig}}
-      <div class="form-group">
-        <label>{{localize "DND5E.SpellLevel"}}</label>
-        <div class="form-fields">
-          <select name="configuration.restriction.level">
-            {{#select configuration.restriction.level}}
-              <option value="">&mdash;</option>
-              {{#each CONFIG.spellLevels as |label key|}}
-                <option value="{{key}}">{{label}}</option>
-              {{/each}}
-              <option value="available">{{localize "DND5E.AdvancementItemChoiceSpellLevelAvailable"}}</option>
-            {{/select}}
-          </select>
-        </div>
-        <p class="hint">{{localize "DND5E.AdvancementItemChoiceSpellLevelHint"}}</p>
-      </div>
-
-      {{> "dnd5e.advancement-spell-config"}}
-    {{/if}}
-
-    <div class="drop-target">
-      <ol class="items-list">
-        <li class="items-header flexrow"><h3 class="item-name">{{localize "DOCUMENT.Items"}}</h3></li>
-        <ol class="item-list">
-        {{#each configuration.pool}}
-          <li class="item flexrow" data-item-uuid="{{this}}">
-            <div class="item-name">{{{dnd5e-linkForUuid this}}}</div>
-            <div class="item-controls flexrow">
-              <a class="item-control item-action" data-action="delete" title="{{localize 'DND5E.ItemDelete'}}">
-                <i class="fas fa-trash"></i>
-              </a>
+        <div class="form-group">
+            <label>{{localize "DND5E.AdvancementConfigureAllowDrops"}}</label>
+            <div class="form-fields">
+                <input type="checkbox" name="configuration.allowDrops" {{checked configuration.allowDrops}}>
             </div>
-          </li>
-        {{/each}}
-        </ol>
-      </ol>
-
-      <p class="hint centered">{{localize "DND5E.AdvancementConfigureDropAreaHint"}}</p>
-    </div>
-  </div>
-
-  <div class="right-column level-list">
-    <p class="hint">{{localize "DND5E.AdvancementItemChoiceLevelsHint"}}</p>
-    {{#each levels as |label level|}}
-      <div class="form-group">
-        <label>{{label}}</label>
-        <div class="form-fields">
-          {{numberInput (lookup ../configuration.choices level) placeholder="0"
-            name=(concat "configuration.choices." level) min=1 step=1}}
+            <p class="hint">{{localize "DND5E.AdvancementConfigureAllowDropsHint"}}</p>
         </div>
-      </div>
-    {{/each}}
-  </div>
+
+        <div class="form-group">
+            <label>{{localize "DND5E.AdvancementItemChoiceType"}}</label>
+            <div class="form-fields">
+                <select name="configuration.type">
+                    {{selectOptions validTypes selected=configuration.type
+                                    blank=(localize "DND5E.AdvancementItemChoiceTypeAny")}}
+                </select>
+            </div>
+            <p class="hint">{{localize "DND5E.AdvancementItemChoiceTypeHint"}}</p>
+        </div>
+
+        {{#if typeRestriction}}
+        <div class="form-group">
+            <label>{{typeRestriction.typeLabel}}</label>
+            <div class="form-fields">
+                <select name="configuration.restriction.type">
+                    {{selectOptions typeRestriction.typeOptions selected=configuration.restriction.type
+                                    labelAttr="label" blank="—"}}
+                </select>
+            </div>
+        </div>
+
+        {{#if typeRestriction.subtypeOptions}}
+        <div class="form-group">
+            <label>{{typeRestriction.subtypeLabel}}</label>
+            <div class="form-fields">
+                <select name="configuration.restriction.subtype">
+                    {{selectOptions typeRestriction.subtypeOptions selected=configuration.restriction.subtype blank="—"}}
+                </select>
+            </div>
+        </div>
+        {{/if}}
+        {{/if}}
+
+        {{#if showSpellConfig}}
+            <div class="form-group">
+                <label>{{localize "DND5E.SpellLevel"}}</label>
+                <div class="form-fields">
+                    <select name="configuration.restriction.level">
+                        {{#select configuration.restriction.level}}
+                        <option value="">&mdash;</option>
+                        {{#each CONFIG.spellLevels as |label key|}}
+                        <option value="{{key}}">{{label}}</option>
+                        {{/each}}
+                        <option value="available">{{localize "DND5E.AdvancementItemChoiceSpellLevelAvailable"}}</option>
+                        {{/select}}
+                    </select>
+                </div>
+                <p class="hint">{{localize "DND5E.AdvancementItemChoiceSpellLevelHint"}}</p>
+            </div>
+
+            {{> "dnd5e.advancement-spell-config"}}
+        {{/if}}
+
+        <div class="drop-target">
+            <ol class="items-list">
+                <li class="items-header flexrow"><h3 class="item-name">{{localize "DOCUMENT.Items"}}</h3></li>
+                <ol class="item-list">
+                {{#each configuration.pool}}
+                <li class="item flexrow" data-item-uuid="{{ uuid }}">
+                    <div class="item-name">{{{ dnd5e-linkForUuid uuid }}}</div>
+                    <div class="item-controls flexrow">
+                        <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                           aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                            <i class="fas fa-trash" inert></i>
+                        </a>
+                    </div>
+                </li>
+                {{/each}}
+                </ol>
+            </ol>
+
+            {{#if showContainerWarning}}
+            <p class="hint centered warning">{{localize "DND5E.AdvancementItemGrantContainerWarning"}}</p>
+            {{/if}}
+            <p class="hint centered">{{localize "DND5E.AdvancementConfigureDropAreaHint"}}</p>
+        </div>
+    </div>
+
+    <div class="right-column level-list">
+        <p class="hint">{{localize "DND5E.AdvancementItemChoiceLevelsHint"}}</p>
+        {{#each levels as |label level|}}
+        <div class="form-group">
+            <label>{{label}}</label>
+            <div class="form-fields">
+                {{numberInput (lookup ../configuration.choices level) placeholder="0"
+                              name=(concat "configuration.choices." level) min=1 step=1}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
 </form>
