@@ -15,7 +15,7 @@
             {{localize "DND5E.AdvancementAbilityScoreImprovementPointsHint"}}
         </li>
         {{#each abilities}}
-        {{> "dnd5e.advancement-ability-score-control" this canAdjust=true}}
+        {{> "dnd5e.advancement-ability-score-control" this canAdjust=true canAllow=@root.points.value}}
         {{/each}}
     </ul>
 </form>

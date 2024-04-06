@@ -105,10 +105,23 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
         const name = CONFIG.DND5E.abilities[key]?.label ?? key;
         return `<span class="tag">${name} <strong>${formatter.format(value)}</strong></span>`;
       });
-      if ( this.configuration.points ) entries.push(`<span class="tag">${
-        game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementPoints")}: <strong>${
-        this.configuration.points}</strong></span>`
-      );
+      if ( this.configuration.points ) {
+        const selection = Object.keys(
+          this.configuration.allowed
+        ).map(key => ({key, value: this.configuration.allowed[key]}));
+        let among;
+        if (selection.some(({value}) => !value)) {
+          among = ` ${
+            game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementAmong")
+          } ${
+            selection.filter(({value}) => value).map(({key}) => CONFIG.DND5E.abilities[key]?.label ?? key).join(", ")
+          }`;
+        }
+        entries.push(`<span class="tag">${
+          game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementPoints")}: <strong>${
+          this.configuration.points}</strong>${among}</span>`
+        );
+      }
       return entries.filterJoin("\n");
     }
 
