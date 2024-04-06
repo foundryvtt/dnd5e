@@ -396,22 +396,6 @@ export default class AdvancementManager extends Application {
         }),
       ...this.steps.filter(({flow}) => !flow)
     ];
-    // const adv = Array.fromRange(level)
-    //   .flatMap((l, i) => {
-    //     return [
-    //       ...this.steps.filter(s => s.flow && ((i === 0 && s.class?.level <= this.step.class?.level)
-    //       || (l > this.step.class?.level && s.class?.level === l))),
-    //       ...AdvancementManager.flowsForLevel(clonedItem, l).map(flow => ({ flow, type: "forward", class: this.step.class }))
-    //     ];
-    //   });
-
-    // If (adv?.length > 0) {
-    //   this.steps = [
-    //     ...this.steps.filter(({flow}) => flow),
-    //     ...adv,
-    //     ...this.steps.filter(({flow}) => !flow)
-    //   ];
-    // }
 
     this._forward();
   }
