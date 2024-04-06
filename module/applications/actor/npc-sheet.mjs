@@ -26,6 +26,9 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     const cr = parseFloat(context.system.details.cr ?? 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
 
+    // Class Spellcasting
+    context.classSpellcasting = Object.values(this.actor.classes).some(c => c.spellcasting?.levels);
+
     return foundry.utils.mergeObject(context, {
       labels: {
         cr: cr >= 1 ? String(cr) : crLabels[cr] ?? 1,

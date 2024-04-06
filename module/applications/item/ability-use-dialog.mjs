@@ -53,13 +53,15 @@ export default class AbilityUseDialog extends Dialog {
 
     const limit = item.actor.system.attributes?.concentration?.limit ?? 0;
     const concentrationOptions = this._createConcentrationOptions(item);
+    const resourceOptions = this._createResourceOptions(item);
 
     const data = {
       item,
       ...config,
       slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
       summoningOptions: this._createSummoningOptions(item),
-      resourceOptions: this._createResourceOptions(item),
+      resourceOptions: resourceOptions,
+      resourceArray: Array.isArray(resourceOptions),
       concentration: {
         show: (config.beginConcentrating !== null) && !!concentrationOptions.length,
         options: concentrationOptions,
@@ -177,17 +179,22 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * Create an array of summoning profiles.
    * @param {Item5e} item  The item.
-   * @returns {object|null}   Array of select options.
+   * @returns {{ profiles: object, creatureTypes: object }|null}   Array of select options.
    */
   static _createSummoningOptions(item) {
-    const profiles = item.system.summons?.profiles ?? [];
-    if ( profiles.length <= 1 ) return null;
+    const summons = item.system.summons;
+    if ( !summons?.profiles.length ) return null;
     const options = {};
-    for ( const profile of profiles ) {
+    if ( summons.profiles.length > 1 ) options.profiles = summons.profiles.reduce((obj, profile) => {
       const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
-      if ( profile.uuid && !doc ) continue;
-      options[profile._id] = profile.name ? profile.name : (doc?.name ?? "—");
-    }
+      if ( !profile.uuid || doc ) obj[profile._id] = profile.name ? profile.name : (doc?.name ?? "—");
+      return obj;
+    }, {});
+    else options.profile = summons.profiles[0]._id;
+    if ( summons.creatureTypes.size > 1 ) options.creatureTypes = summons.creatureTypes.reduce((obj, k) => {
+      obj[k] = CONFIG.DND5E.creatureTypes[k].label;
+      return obj;
+    }, {});
     return options;
   }
 
@@ -233,13 +240,9 @@ export default class AbilityUseDialog extends Dialog {
         target = item.actor;
         if ( ["smallest", "largest"].includes(consume.target) ) {
           label = game.i18n.localize(`DND5E.ConsumeHitDice${consume.target.capitalize()}Long`);
-          value = target.system.attributes.hd;
+          value = target.system.attributes.hd.value;
         } else {
-          value = Object.values(item.actor.classes ?? {}).reduce((acc, cls) => {
-            if ( cls.system.hitDice !== consume.target ) return acc;
-            const hd = cls.system.levels - cls.system.hitDiceUsed;
-            return acc + hd;
-          }, 0);
+          value = item.actor.system.attributes.hd.bySize[consume.target] ?? 0;
           label = `${game.i18n.localize("DND5E.HitDice")} (${consume.target})`;
         }
         break;
@@ -247,6 +250,15 @@ export default class AbilityUseDialog extends Dialog {
     }
 
     if ( !target ) return null;
+
+    const consumesSpellSlot = consume.target.match(/spells\.([^.]+)\.value/);
+    if ( consumesSpellSlot ) {
+      const [, key] = consumesSpellSlot;
+      const spells = item.actor.system.spells[key] ?? {};
+      const level = spells.level || 0;
+      const minimum = (item.type === "spell") ? Math.max(item.system.level, level) : level;
+      return this._createSpellSlotOptions(item.actor, minimum);
+    }
 
     const max = Math.min(cap, value);
     return Array.fromRange(max, 1).reduce((acc, n) => {
@@ -324,7 +336,7 @@ export default class AbilityUseDialog extends Dialog {
 
     if ( item.type === "spell" ) {
       const spellData = item.actor.system.spells[preparation.mode] ?? {};
-      if ( "level" in spellData ) levels.push(spellData.level);
+      if ( Number.isNumeric(spellData.level) ) levels.push(spellData.level);
     }
 
     if ( (scale === "slot") && data.slotOptions.every(o => !o.hasSlots) ) {

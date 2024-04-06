@@ -245,8 +245,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     }, { value: 0, label: CONFIG.DND5E.movementTypes.walk });
 
     // Hit Dice
-    context.hd = { value: attributes.hd, max: this.actor.system.details.level };
-    context.hd.pct = Math.clamped(context.hd.max ? (context.hd.value / context.hd.max) * 100 : 0, 0, 100);
+    context.hd = attributes.hd;
 
     // Death Saves
     const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
@@ -599,7 +598,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
       // Prepared
       const mode = system.preparation?.mode;
-      if ( (mode === "always") || (mode === "prepared") ) {
+      const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
+      if ( config.prepares ) {
         const isAlways = mode === "always";
         const prepared = isAlways || system.preparation.prepared;
         ctx.preparation = {

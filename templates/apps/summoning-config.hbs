@@ -51,6 +51,15 @@
         <input type="text" name="bonuses.hp" value="{{ summons.bonuses.hp }}">
         <p class="hint">{{ localize "DND5E.Summoning.Bonuses.HitPoints.Hint" }}</p>
     </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.CreatureTypes.Label" }}</label>
+        <multi-select name="creatureTypes">
+            {{#each creatureTypes}}
+            <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+            {{/each}}
+        </multi-select>
+        <p class="hint">{{ localize "DND5E.Summoning.CreatureTypes.Hint" }}</p>
+    </div>
 
     <h3 class="form-header">{{ localize "DND5E.Summoning.ItemChanges.Label" }}</h3>
     <p class="hint">{{ localize "DND5E.Summoning.ItemChanges.Hint" }}</p>

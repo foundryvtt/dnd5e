@@ -151,6 +151,13 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivatedEffectData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getFavoriteData() {
     return foundry.utils.mergeObject(await super.getFavoriteData(), {
       subtitle: [this.type.label, this.parent.labels.activation],
@@ -239,14 +246,5 @@ export default class EquipmentData extends ItemDataModel.mixin(
       { since: "DnD5e 3.0", until: "DnD5e 3.2" }
     );
     return this.properties.has("stealthDisadvantage");
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  get validProperties() {
-    const valid = super.validProperties;
-    if ( this.isArmor ) valid.add("stealthDisadvantage");
-    return valid;
   }
 }

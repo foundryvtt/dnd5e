@@ -10,7 +10,15 @@
         <label>{{ localize "DND5E.ConsumeScalingLabel" }}</label>
         <div class="form-fields">
             <select name="resourceAmount">
+                {{#if resourceArray}}
+                {{#select item.system.consume.target}}
+                {{#each resourceOptions}}
+                <option value="{{key}}" {{disabled (not canCast)}}>{{label}}</option>
+                {{/each}}
+                {{/select}}
+                {{else}}
                 {{selectOptions resourceOptions selected=resourceAmount localize=true}}
+                {{/if}}
             </select>
         </div>
     </div>
@@ -91,15 +99,26 @@
             <input type="checkbox" name="createSummons" {{ checked createSummons }}>
             {{ localize "DND5E.Summoning.Action.Place" }}
         </label>
-        {{#if summoningOptions}}
+        {{#if summoningOptions.profiles}}
         <div class="form-fields">
             <select name="summonsProfile" aria-label="{{ localize 'DND5E.Summoning.Profile.Label' }}">
-                {{ selectOptions summoningOptions selected=summonsProfile }}
+                {{ selectOptions summoningOptions.profiles selected=summonsProfile }}
             </select>
         </div>
         {{else}}
-        <input type="hidden" name="summonsProfile" value="{{ summonsProfile }}">
+        <input type="hidden" name="summonsProfile" value="{{ summoningOptions.profile }}">
         {{/if}}
     </div>
+
+    {{#if summoningOptions.creatureTypes}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.CreatureType" }}</label>
+        <div class="form-fields">
+            <select name="summonsOptions.creatureType">
+                {{ selectOptions summoningOptions.creatureTypes }}
+            </select>
+        </div>
+    </div>
+    {{/if}}
     {{/if}}
 </form>

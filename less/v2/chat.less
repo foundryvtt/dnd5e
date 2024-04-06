@@ -340,8 +340,6 @@
       > img {
         width: 32px;
         height: 32px;
-        object-fit: cover;
-        background-color: var(--dnd5e-color-light-gray);
       }
 
       .name-stacked {
@@ -527,9 +525,16 @@
   .targets .target {
     flex-wrap: wrap;
 
+    .subtitle {
+      display: flex;
+      gap: 4px;
+    }
+
     .change-source {
-      width: 16px;
-      padding: 2px;
+      width: 13px;
+      height: 13px;
+      --icon-size: 13px;
+      padding: 0;
       border-radius: 4px;
       display: grid;
       grid-template-areas: "overlay";
@@ -546,10 +551,14 @@
       }
     }
 
-    .calculated-damage {
+    .calculated {
       padding-inline-end: 4px;
       font-size: var(--font-size-14);
       font-weight: bold;
+      color: var(--dnd5e-color-application-damage);
+
+      &.healing { color: var(--dnd5e-color-application-healing); }
+      &.temp { color: var(--dnd5e-color-application-temp); }
     }
 
     .damage-multipliers {

@@ -28,7 +28,8 @@ export default class ShortRestDialog extends Dialog {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/apps/short-rest.hbs",
-      classes: ["dnd5e", "dialog"]
+      classes: ["dnd5e", "dialog"],
+      height: "auto"
     });
   }
 
@@ -39,19 +40,20 @@ export default class ShortRestDialog extends Dialog {
     const context = super.getData();
     context.isGroup = this.actor.type === "group";
 
-    if ( foundry.utils.hasProperty(this.actor, "system.attributes.hd") ) {
+    if ( this.actor.type === "npc" ) {
+      const hd = this.actor.system.attributes.hd;
+      context.availableHD = { [`d${hd.denomination}`]: hd.value };
+      context.canRoll = hd.value > 0;
+      context.denomination = `d${hd.denomination}`;
+    }
+
+    else if ( foundry.utils.hasProperty(this.actor, "system.attributes.hd") ) {
       // Determine Hit Dice
-      context.availableHD = this.actor.items.reduce((hd, item) => {
-        if ( item.type === "class" ) {
-          const {levels, hitDice, hitDiceUsed} = item.system;
-          const denom = hitDice ?? "d6";
-          const available = parseInt(levels ?? 1) - parseInt(hitDiceUsed ?? 0);
-          hd[denom] = denom in hd ? hd[denom] + available : available;
-        }
-        return hd;
-      }, {});
-      context.canRoll = this.actor.system.attributes.hd > 0;
-      context.denomination = this._denom;
+      context.availableHD = this.actor.system.attributes.hd.bySize;
+      context.canRoll = this.actor.system.attributes.hd.value > 0;
+
+      const dice = Object.entries(context.availableHD);
+      context.denomination = (context.availableHD[this._denom] > 0) ? this._denom : dice.find(([k, v]) => v > 0)?.[0];
     }
 
     // Determine rest type

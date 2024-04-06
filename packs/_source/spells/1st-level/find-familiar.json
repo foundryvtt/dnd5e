@@ -7,13 +7,13 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Your familiar acts independently of you, but it always obeys your commands. In combat, it rolls its own initiative and acts on its own turn. A familiar can't attack, but it can take other actions as normal.</p><p>When the familiar drops to 0 hit points, it disappears, leaving behind no physical form. It reappears after you cast this spell again.</p><p>While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as an action, you can see through your familiar's eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has. During this time, you are deaf and blind with regard to your own senses.</p><p>As an action, you can temporarily dismiss your familiar. It disappears into a pocket dimension where it awaits your summons. Alternatively, you can dismiss it forever. As an action while it is temporarily dismissed, you can cause it to reappear in any unoccupied space within 30 feet of you.</p><p>You can't have more than one familiar at a time. If you cast this spell while you already have a familiar, you instead cause it to adopt a new form. Choose one of the forms from the above list. Your familiar transforms into the chosen creature.</p><p>Finally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell. Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it. If the spell requires an attack roll, you use your action modifier for the roll.</p>",
+      "value": "<p>You gain the service of a familiar, a spirit that takes an animal form you choose: @UUID[Compendium.dnd5e.monsters.Actor.qav2dvMIUiMQCCsy]{bat}, @UUID[Compendium.dnd5e.monsters.Actor.hIf83RD3ZVW4Egfi]{cat}, @UUID[Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1]{crab}, @UUID[Compendium.dnd5e.monsters.Actor.EZgiprHXA2D7Uyb3]{frog} (toad), @UUID[Compendium.dnd5e.monsters.Actor.fnkPNfIpS62LqOu4]{hawk}, @UUID[Compendium.dnd5e.monsters.Actor.I2x01hzOjVN4NUjf]{lizard}, @UUID[Compendium.dnd5e.monsters.Actor.3UUNbGiG2Yf1ZPxM]{octopus}, @UUID[Compendium.dnd5e.monsters.Actor.d0prpsGSAorDadec]{owl}, @UUID[Compendium.dnd5e.monsters.Actor.D5rwVIxmfFrdyyxT]{poisonous snake}, fish (@UUID[Compendium.dnd5e.monsters.Actor.nkyCGJ9wXeAZkyyz]{quipper}), @UUID[Compendium.dnd5e.monsters.Actor.pozQUPTnLZW8epox]{rat}, @UUID[Compendium.dnd5e.monsters.Actor.LPdX5YLlwci0NDZx]{raven}, @UUID[Compendium.dnd5e.monsters.Actor.FWSDiq9SZsdiBAa8]{sea horse}, @UUID[Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz]{spider}, or @UUID[Compendium.dnd5e.monsters.Actor.WOdeacKCYVhgLDuN]{weasel}. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a celestial, fey, or fiend (your choice) instead of a beast.</p><p>Your familiar acts independently of you, but it always obeys your commands. In combat, it rolls its own initiative and acts on its own turn. A familiar can't attack, but it can take other actions as normal.</p><p>When the familiar drops to 0 hit points, it disappears, leaving behind no physical form. It reappears after you cast this spell again.</p><p>While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as an action, you can see through your familiar's eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has. During this time, you are deaf and blind with regard to your own senses.</p><p>As an action, you can temporarily dismiss your familiar. It disappears into a pocket dimension where it awaits your summons. Alternatively, you can dismiss it forever. As an action while it is temporarily dismissed, you can cause it to reappear in any unoccupied space within 30 feet of you.</p><p>You can't have more than one familiar at a time. If you cast this spell while you already have a familiar, you instead cause it to adopt a new form. Choose one of the forms from the above list. Your familiar transforms into the chosen creature.</p><p>Finally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell. Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it. If the spell requires an attack roll, you use your action modifier for the roll.</p>",
       "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
-      "page": "",
+      "page": "pg. 143",
       "license": "CC-BY-4.0"
     },
     "activation": {
@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -89,9 +89,102 @@
       "vocal",
       "somatic",
       "material",
-      "ritual"
+      "ritual",
+      "mgc"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "bonuses": {
+        "ac": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "creatureTypes": [
+        "celestial",
+        "fey",
+        "fiend"
+      ],
+      "profiles": [
+        {
+          "name": "",
+          "_id": "HShhzdPtYkhNleyj",
+          "uuid": "Compendium.dnd5e.monsters.Actor.qav2dvMIUiMQCCsy"
+        },
+        {
+          "name": "",
+          "_id": "NIHXnk03LvysDp7t",
+          "uuid": "Compendium.dnd5e.monsters.Actor.hIf83RD3ZVW4Egfi"
+        },
+        {
+          "name": "",
+          "_id": "L59Xqchh128r45Rc",
+          "uuid": "Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1"
+        },
+        {
+          "name": "Fish",
+          "_id": "kaiiJrnUWOqlQHt3",
+          "uuid": "Compendium.dnd5e.monsters.Actor.nkyCGJ9wXeAZkyyz"
+        },
+        {
+          "name": "",
+          "_id": "zGRnQq2EkrfRb14O",
+          "uuid": "Compendium.dnd5e.monsters.Actor.EZgiprHXA2D7Uyb3"
+        },
+        {
+          "name": "",
+          "_id": "n2fhgnH9XTc8MbKt",
+          "uuid": "Compendium.dnd5e.monsters.Actor.fnkPNfIpS62LqOu4"
+        },
+        {
+          "name": "",
+          "_id": "bZJcnv1H2Vjm5XI6",
+          "uuid": "Compendium.dnd5e.monsters.Actor.I2x01hzOjVN4NUjf"
+        },
+        {
+          "name": "",
+          "_id": "aqC42mfjOB5PB5JU",
+          "uuid": "Compendium.dnd5e.monsters.Actor.3UUNbGiG2Yf1ZPxM"
+        },
+        {
+          "name": "",
+          "_id": "9sLcKSCGrnG7gO7O",
+          "uuid": "Compendium.dnd5e.monsters.Actor.d0prpsGSAorDadec"
+        },
+        {
+          "name": "",
+          "_id": "IxXkUKUna11rHprj",
+          "uuid": "Compendium.dnd5e.monsters.Actor.D5rwVIxmfFrdyyxT"
+        },
+        {
+          "name": "",
+          "_id": "0t4KAcZWZ7fY9A5u",
+          "uuid": "Compendium.dnd5e.monsters.Actor.pozQUPTnLZW8epox"
+        },
+        {
+          "name": "",
+          "_id": "op4FTfM9QWefJxOJ",
+          "uuid": "Compendium.dnd5e.monsters.Actor.LPdX5YLlwci0NDZx"
+        },
+        {
+          "name": "",
+          "_id": "1gJGQBWi5LJYjONw",
+          "uuid": "Compendium.dnd5e.monsters.Actor.FWSDiq9SZsdiBAa8"
+        },
+        {
+          "name": "",
+          "_id": "7hgp23Fe02ITFtIw",
+          "uuid": "Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz"
+        },
+        {
+          "name": "",
+          "_id": "czhL1VUn6ecvG0WV",
+          "uuid": "Compendium.dnd5e.monsters.Actor.WOdeacKCYVhgLDuN"
+        }
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -100,10 +193,10 @@
   "folder": "ERuXllkhTQF51rDJ",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234112,
-    "modifiedTime": 1704823523146,
+    "modifiedTime": 1711665544993,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!JGT5bNqu9REL7Fuz"
