@@ -330,7 +330,11 @@ export default class AdvancementManager extends Application {
    * @private
    */
   createLevelChangeSteps(classItem, levelDelta) {
-    const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => ({ flow, ...data })));
+    const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => {
+      const step = { flow, ...data };
+      flow.onDrop = f => this.onDropFeat(f, this.actor.system.details.level + levelDelta);
+      return step;
+    }));
     const getItemFlows = characterLevel => this.clone.items.contents.flatMap(i => {
       if ( ["class", "subclass"].includes(i.type) ) return [];
       return this.constructor.flowsForLevel(i, characterLevel);
@@ -364,6 +368,52 @@ export default class AdvancementManager extends Application {
     });
 
     return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * On drop feat.
+   * @param {object} feat
+   * @param {number} level
+   */
+  onDropFeat(feat, level) {
+
+    const dataClone = foundry.utils.deepClone(feat.toObject());
+    dataClone._id = foundry.utils.randomID();
+    this.clone.updateSource({items: [dataClone]});
+    const clonedItem = this.clone.items.get(dataClone._id);
+
+    this.steps = [
+      ...Array.fromRange(level + 1)
+        .flatMap((l, i) => {
+          const steps = this.steps.filter(s => s.flow && ((i === 0 && s.class?.level <= this.step.class?.level)
+          || (l > this.step.class?.level && s.class?.level === l)));
+          return [
+            ...steps,
+            ...AdvancementManager.flowsForLevel(clonedItem, l).map(flow => ({ flow, type: "forward", class: this.step.class }))
+          ];
+        }),
+      ...this.steps.filter(({flow}) => !flow)
+    ];
+    // const adv = Array.fromRange(level)
+    //   .flatMap((l, i) => {
+    //     return [
+    //       ...this.steps.filter(s => s.flow && ((i === 0 && s.class?.level <= this.step.class?.level)
+    //       || (l > this.step.class?.level && s.class?.level === l))),
+    //       ...AdvancementManager.flowsForLevel(clonedItem, l).map(flow => ({ flow, type: "forward", class: this.step.class }))
+    //     ];
+    //   });
+
+    // If (adv?.length > 0) {
+    //   this.steps = [
+    //     ...this.steps.filter(({flow}) => flow),
+    //     ...adv,
+    //     ...this.steps.filter(({flow}) => !flow)
+    //   ];
+    // }
+
+    this._forward();
   }
 
   /* -------------------------------------------- */

@@ -106,7 +106,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Classify items into types
       if ( item.type === "spell" ) obj.spells.push(item);
-      else if ( item.type === "feat" ) obj.feats.push(item);
+      else if ( ["feat", "truefeat"].includes(item.type) ) obj.feats.push(item);
       else if ( item.type === "race" ) obj.races.push(item);
       else if ( item.type === "background" ) obj.backgrounds.push(item);
       else if ( item.type === "class" ) obj.classes.push(item);

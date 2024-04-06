@@ -3118,7 +3118,7 @@ preLocalize("groupTypes");
  * @property {Set<string>} validItemTypes        What item types this advancement can be used with.
  */
 
-const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
+const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass", "truefeat"];
 
 /**
  * Advancement types that can be added to items.
@@ -3127,7 +3127,7 @@ const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
 DND5E.advancementTypes = {
   AbilityScoreImprovement: {
     documentClass: advancement.AbilityScoreImprovementAdvancement,
-    validItemTypes: new Set(["background", "class", "race"])
+    validItemTypes: new Set(["background", "class", "race", "truefeat"])
   },
   HitPoints: {
     documentClass: advancement.HitPointsAdvancement,

@@ -4,6 +4,7 @@ import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
+import FeatureFields from "./templates/feature.mjs";
 
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -31,22 +32,7 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /** @inheritdoc */
   static defineSchema() {
-    return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
-      prerequisites: new SchemaField({
-        level: new NumberField({integer: true, min: 0})
-      }),
-      properties: new SetField(new StringField(), {
-        label: "DND5E.ItemFeatureProperties"
-      }),
-      requirements: new StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
-      recharge: new SchemaField({
-        value: new NumberField({
-          required: true, integer: true, min: 1, label: "DND5E.FeatureRechargeOn"
-        }),
-        charged: new BooleanField({required: true, label: "DND5E.Charged"})
-      }, {label: "DND5E.FeatureActionRecharge"})
-    });
+    return this.mergeSchema(super.defineSchema(), FeatureFields.feature);
   }
 
   /* -------------------------------------------- */
