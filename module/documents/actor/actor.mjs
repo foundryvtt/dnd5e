@@ -48,12 +48,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Get all origins which have spellcasting ability.
-   * @type {Array<Item5e>}
+   * Get all classes which have spellcasting ability.
+   * @type {Record<string, Item5e>}
    */
-  get spellCastingClasses() {
-    return Object.values(this.classes).filter(({system}) => system.spellcasting
-    && system.spellcasting.progression !== "none" );
+  get spellcastingClasses() {
+    return Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
+      if ( cls.spellcasting && (cls.spellcasting.progression !== "none") ) obj[identifier] = cls;
+      return obj;
+    }, {});
   }
 
   /**
