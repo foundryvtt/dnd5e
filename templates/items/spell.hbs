@@ -110,13 +110,9 @@
             <div class="form-group input-select">
                 <label>{{ localize "DND5E.SpellSourceClass" }}</label>
                 <div class="form-fields">
-                    <select name="system.boundOrigin">
-                        {{#select system.boundOrigin}}
-                        <option value=""></option>
-                        {{#each document.availableSpellCastingOrigins as |scs|}}
-                        <option value="{{scs.value}}">{{scs.name}}</option>
-                        {{/each}}
-                        {{/select}}
+                    <select name="system.sourceClass">
+                        {{selectOptions document.parent.spellcastingClasses selected=system.sourceClass
+                                        labelAttr="name" blank=""}}
                     </select>
                 </div>
             </div>
