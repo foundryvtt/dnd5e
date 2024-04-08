@@ -372,6 +372,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !finalSC ) return null;
     finalSC.levels = this.isEmbedded ? (this.system.levels ?? this.class?.system.levels) : null;
 
+    if (spellcasting.needToPrepare && this.isEmbedded
+      && CONFIG.DND5E.spellcastingTypes.leveled.progression[finalSC.progression]) {
+      finalSC.spellPreparationLimit = Math.max(
+        1,
+        this.parent.system.abilities[finalSC.ability].mod
+        + Math.ceil(
+          this.system.levels / (CONFIG.DND5E.spellcastingTypes.leveled.progression[finalSC.progression].divisor || 1)
+        )
+      );
+    }
+
     // Temp method for determining spellcasting type until this data is available directly using advancement
     if ( CONFIG.DND5E.spellcastingTypes[finalSC.progression] ) finalSC.type = finalSC.progression;
     else finalSC.type = Object.entries(CONFIG.DND5E.spellcastingTypes).find(([type, data]) => {
