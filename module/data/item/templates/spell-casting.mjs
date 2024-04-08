@@ -10,7 +10,7 @@ export default class SpellCastingFields {
    * @type {object}
    * @property {string} progression
    * @property {string} ability
-   * @property {boolean} needToPrepareSpells
+   * @property {boolean} needToPrepare
    */
   static get spellCasting() {
     return new SchemaField(
@@ -25,10 +25,10 @@ export default class SpellCastingFields {
           required: true,
           label: "DND5E.SpellAbility"
         }),
-        needToPrepareSpells: new BooleanField({
+        needToPrepare: new BooleanField({
           required: false,
           initial: false,
-          label: "DND5E.needToPrepareSpells"
+          label: "DND5E.needToPrepare"
         })
       },
       { label: "DND5E.Spellcasting" }
