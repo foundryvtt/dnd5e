@@ -1001,7 +1001,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     this.actor.update(
       {
         "system.attributes.spellcasting": sc?.ability,
-        "system.attributes.activeSpellcastingClass": sc?.spellOrigin
+        "system.attributes.activeSpellcastingClass": sc?.sourceClass
       }
     );
   }
