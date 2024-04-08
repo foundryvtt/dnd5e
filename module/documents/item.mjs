@@ -372,7 +372,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !finalSC ) return null;
     finalSC.levels = this.isEmbedded ? (this.system.levels ?? this.class?.system.levels) : null;
 
-    if (spellcasting.needToPrepare && this.parent
+    if (spellcasting.needToPrepare && this.isEmbedded
       && CONFIG.DND5E.spellcastingTypes.leveled.progression[finalSC.progression]) {
       finalSC.spellPreparationLimit = Math.max(
         1,
