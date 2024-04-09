@@ -1,6 +1,6 @@
 {{#if data.title.show}}
 <header>
-    <h{{ title.level1 }}>{{ data.name }}</h{{ title.level1 }}>
+    <h{{ title.level1 }}>{{#if linked.document.img}}<img src="{{ linked.document.img }}">{{/if}}{{ data.name }}</h{{ title.level1 }}>
 </header>
 {{/if}}
 
@@ -52,7 +52,7 @@
         caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=linked.name) }}
 
     {{#each features}}
-    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    <h{{ @root.title.level4 }}>{{#if this.document.img}}<img src="{{ this.document.img }}">{{/if}}{{ this.name }}</h{{ @root.title.level4 }}>
     {{{ this.description }}}
     {{/each}}
 
@@ -77,7 +77,7 @@
     {{{ enriched.subclass }}}
 
     {{#each subclasses}}
-    <h{{ @root.title.level3 }}>{{ this.name }}</h{{ @root.title.level3 }}>
+    <h{{ @root.title.level3 }}>{{#if this.document.img}}<img src="{{ this.document.img }}">{{/if}}{{ this.name }}</h{{ @root.title.level3 }}>
     {{{this.description}}}
 
     {{#if this.table}}
@@ -86,7 +86,7 @@
     {{/if}}
 
     {{#each this.features}}
-    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    <h{{ @root.title.level4 }}>{{#if this.document.img}}<img src="{{ this.document.img }}">{{/if}}{{ this.name }}</h{{ @root.title.level4 }}>
     {{{ this.description }}}
     {{/each}}
     {{/each}}
