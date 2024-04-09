@@ -22,7 +22,7 @@ export default class SummonsField extends foundry.data.fields.EmbeddedDataField 
  *
  * @typedef {object} SummonsProfile
  * @property {string} _id        Unique ID for this profile.
- * @property {number} count      Number of creatures to summon.
+ * @property {string} count      Formula for the number of creatures to summon.
  * @property {object} level
  * @property {number} level.min  Minimum level at which this profile can be used.
  * @property {number} level.max  Maximum level at which this profile can be used.
@@ -94,7 +94,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       }),
       profiles: new ArrayField(new SchemaField({
         _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
-        count: new NumberField({integer: true, min: 1}),
+        count: new FormulaField(),
         level: new SchemaField({
           min: new NumberField({integer: true, min: 0}),
           max: new NumberField({integer: true, min: 0})
@@ -450,7 +450,7 @@ export class SummonsData extends foundry.abstract.DataModel {
    * @param {SummoningOptions} options  Additional summoning options.
    * @returns {Promise<PlacementData[]>}
    */
-  getPlacement(token, profile, options) {
+  async getPlacement(token, profile, options) {
     // Ensure the token matches the final size
     if ( this.creatureSizes.size ) {
       const size = this.creatureSizes.has(options.creatureSize) ? options.creatureSize : this.creatureSizes.first();
@@ -458,7 +458,10 @@ export class SummonsData extends foundry.abstract.DataModel {
       if ( config ) token = token.clone({ width: config.token ?? 1, height: config.token ?? 1 });
     }
 
-    return TokenPlacement.place({ tokens: [token] });
+    const rollData = this.item.getRollData();
+    const count = new Roll(profile.count ?? "1", rollData);
+    await count.evaluate();
+    return TokenPlacement.place({ tokens: Array(count.total).fill(token) });
   }
 
   /* -------------------------------------------- */
