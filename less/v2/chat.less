@@ -451,18 +451,6 @@
     }
   }
 
-  &.collapsed {
-    label .fa-caret-down { transform: rotate(-90deg); }
-    .collapsible-content { grid-template-rows: 0fr; }
-  }
-
-  .collapsible-content {
-    display: grid;
-    grid-template-rows: 1fr;
-    transition: grid-template-rows 250ms ease;
-    > .wrapper { overflow: hidden; }
-  }
-
   .target-source-control {
     &:not([hidden]) { display: flex; }
     justify-content: space-evenly;

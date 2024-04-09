@@ -23,6 +23,14 @@ export default class SummoningConfig extends DocumentSheet {
   /* -------------------------------------------- */
 
   /**
+   * Expanded states for each profile.
+   * @type {Map<string, boolean>}
+   */
+  expandedProfiles = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
    * Shortcut to the summoning profiles.
    * @type {object[]}
    */
@@ -44,8 +52,9 @@ export default class SummoningConfig extends DocumentSheet {
   /** @inheritDoc */
   async getData(options={}) {
     const context = await super.getData(options);
+    context.isSpell = this.document.type === "spell";
     context.profiles = this.profiles.map(p => {
-      const profile = { id: p._id, ...p };
+      const profile = { id: p._id, ...p, collapsed: this.expandedProfiles.get(p._id) ? "" : "collapsed" };
       if ( p.uuid ) profile.document = fromUuidSync(p.uuid);
       return profile;
     }).sort((lhs, rhs) =>
@@ -81,6 +90,17 @@ export default class SummoningConfig extends DocumentSheet {
 
     for ( const element of html.querySelectorAll("multi-select") ) {
       element.addEventListener("change", this._onChangeInput.bind(this));
+    }
+
+    for ( const element of html.querySelectorAll(".collapsible") ) {
+      element.addEventListener("click", event => {
+        if ( event.target.closest(".collapsible-content") ) return;
+        event.currentTarget.classList.toggle("collapsed");
+        this.expandedProfiles.set(
+          event.target.closest("[data-profile-id]").dataset.profileId,
+          !event.currentTarget.classList.contains("collapsed")
+        );
+      });
     }
   }
 

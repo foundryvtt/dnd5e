@@ -123,6 +123,20 @@
     }
   }
 
+  .collapsible {
+    &.collapsed {
+      label .fa-caret-down { transform: rotate(-90deg); }
+      .collapsible-content { grid-template-rows: 0fr; }
+    }
+    .fa-caret-down { transition: transform 250ms ease; }
+    .collapsible-content {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows 250ms ease;
+      > .wrapper { overflow: hidden; }
+    }
+  }
+
   .unlist {
     list-style: none;
     padding: 0;

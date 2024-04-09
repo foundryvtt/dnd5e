@@ -1,5 +1,5 @@
 import TokenPlacement from "../../../canvas/token-placement.mjs";
-import { FormulaField } from "../../fields.mjs";
+import { FormulaField, IdentifierField } from "../../fields.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, SetField, StringField
@@ -20,10 +20,13 @@ export default class SummonsField extends foundry.data.fields.EmbeddedDataField 
  * Information for a single summoned creature.
  *
  * @typedef {object} SummonsProfile
- * @property {string} _id    Unique ID for this profile.
- * @property {number} count  Number of creatures to summon.
- * @property {string} name   Display name for this profile if it differs from actor's name.
- * @property {string} uuid   UUID of the actor to summon.
+ * @property {string} _id        Unique ID for this profile.
+ * @property {number} count      Number of creatures to summon.
+ * @property {object} level
+ * @property {number} level.min  Minimum level at which this profile can be used.
+ * @property {number} level.max  Maximum level at which this profile can be used.
+ * @property {string} name       Display name for this profile if it differs from actor's name.
+ * @property {string} uuid       UUID of the actor to summon.
  */
 
 /**
@@ -35,6 +38,8 @@ export default class SummonsField extends foundry.data.fields.EmbeddedDataField 
  * @property {string} bonuses.attackDamage  Formula for bonus added to damage for attacks.
  * @property {string} bonuses.saveDamage    Formula for bonus added to damage for saving throws.
  * @property {string} bonuses.healing       Formula for bonus added to healing.
+ * @property {string} classIdentifier       Class identifier that will be used to determine applicable level.
+ * @property {Set<string>} creatureSizes    Set of creature sizes that will be set on summoned creature.
  * @property {Set<string>} creatureTypes    Set of creature types that will be set on summoned creature.
  * @property {object} match
  * @property {boolean} match.attacks        Match the to hit values on summoned actor's attack to the summoner.
@@ -64,6 +69,7 @@ export class SummonsData extends foundry.abstract.DataModel {
           label: "DND5E.Summoning.Bonuses.Healing.Label", hint: "DND5E.Summoning.Bonuses.Healing.Hint"
         })
       }),
+      classIdentifier: new IdentifierField(),
       creatureSizes: new SetField(new StringField(), {
         label: "DND5E.Summoning.CreatureSizes.Label", hint: "DND5E.Summoning.CreatureSizes.Hint"
       }),
@@ -84,6 +90,10 @@ export class SummonsData extends foundry.abstract.DataModel {
       profiles: new ArrayField(new SchemaField({
         _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
         count: new NumberField({integer: true, min: 1}),
+        level: new SchemaField({
+          min: new NumberField({integer: true, min: 0}),
+          max: new NumberField({integer: true, min: 0})
+        }),
         name: new StringField(),
         uuid: new StringField()
       })),

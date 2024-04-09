@@ -185,12 +185,28 @@ export default class AbilityUseDialog extends Dialog {
     const summons = item.system.summons;
     if ( !summons?.profiles.length ) return null;
     const options = {};
-    if ( summons.profiles.length > 1 ) options.profiles = summons.profiles.reduce((obj, profile) => {
-      const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
-      if ( !profile.uuid || doc ) obj[profile._id] = profile.name ? profile.name : (doc?.name ?? "—");
-      return obj;
-    }, {});
-    else options.profile = summons.profiles[0]._id;
+    const rollData = item.getRollData();
+    const keyPath = item.type === "spell"
+      ? "item.level"
+      : summons.classIdentifier
+        ? `classes.${summons.classIdentifier}.levels`
+        : "details.level";
+    const level = foundry.utils.getProperty(rollData, keyPath) ?? 0;
+    options.profiles = Object.fromEntries(
+      summons.profiles
+        .map(profile => {
+          const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
+          const withinRange = ((profile.level.min ?? -Infinity) <= level) && (level <= (profile.level.max ?? Infinity));
+          if ( !doc || !withinRange ) return null;
+          const label = profile.name ? profile.name : (doc?.name ?? "—");
+          return [profile._id, label];
+        })
+        .filter(f => f)
+    );
+    if ( Object.values(options.profiles).length <= 1 ) {
+      options.profiles = null;
+      options.profile = summons.profiles[0]._id;
+    }
     if ( summons.creatureSizes.size > 1 ) options.creatureSizes = summons.creatureSizes.reduce((obj, k) => {
       obj[k] = CONFIG.DND5E.actorSizes[k]?.label;
       return obj;
@@ -413,5 +429,55 @@ export default class AbilityUseDialog extends Dialog {
     if ( !hasUses || !uses.autoDestroy ) return false;
     const value = uses.value - consume;
     return value <= 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(jQuery) {
+    super.activateListeners(jQuery);
+    const [html] = jQuery;
+
+    html.querySelector('[name="slotLevel"]')?.addEventListener("change", this._onChangeSlotLevel.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update summoning profiles when spell slot level is changed.
+   * @param {Event} event  Triggering change event.
+   */
+  _onChangeSlotLevel(event) {
+    const level = parseInt(event.target.value.replace("spell", ""));
+    const item = this.item.clone({ "system.level": level });
+    const summoningData = this.constructor._createSummoningOptions(item);
+    const originalInput = this.element[0].querySelector('[name="summonsProfile"]');
+    if ( !originalInput ) return;
+
+    // If multiple profiles, replace with select element
+    if ( summoningData.profles ) {
+      const select = document.createElement("select");
+      select.name = "summonsProfile";
+      select.ariaLabel = game.i18n.localize("DND5E.Summoning.Profile.Label");
+      for ( const [id, label] of Object.entries(summoningData.profiles) ) {
+        const option = document.createElement("option");
+        option.value = id;
+        option.innerText = label;
+        if ( id === originalInput.value ) option.selected = true;
+        select.append(option);
+      }
+      originalInput.replaceWith(select);
+    }
+
+    // If only one profile, replace with hidden input
+    else {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "summonsProfile";
+      input.value = summoningData.profile;
+      originalInput.replaceWith(input);
+    }
   }
 }
