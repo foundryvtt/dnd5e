@@ -1,4 +1,5 @@
 import TokenPlacement from "../../../canvas/token-placement.mjs";
+import { staticID } from "../../../utils.mjs";
 import { FormulaField, IdentifierField } from "../../fields.mjs";
 
 const {
@@ -34,6 +35,7 @@ export default class SummonsField extends foundry.data.fields.EmbeddedDataField 
  *
  * @property {object} bonuses
  * @property {string} bonuses.ac            Formula for armor class bonus on summoned actor.
+ * @property {string} bonuses.hd            Formula for bonus hit dice to add to each summoned NPC.
  * @property {string} bonuses.hp            Formula for bonus hit points to add to each summoned actor.
  * @property {string} bonuses.attackDamage  Formula for bonus added to damage for attacks.
  * @property {string} bonuses.saveDamage    Formula for bonus added to damage for saving throws.
@@ -55,6 +57,9 @@ export class SummonsData extends foundry.abstract.DataModel {
       bonuses: new SchemaField({
         ac: new FormulaField({
           label: "DND5E.Summoning.Bonuses.ArmorClass.Label", hint: "DND5E.Summoning.Bonuses.ArmorClass.hint"
+        }),
+        hd: new FormulaField({
+          label: "DND5E.Summoning.Bonuses.HitDice.Label", hint: "DND5E.Summoning.Bonuses.HitDice.hint"
         }),
         hp: new FormulaField({
           label: "DND5E.Summoning.Bonuses.HitPoints.Label", hint: "DND5E.Summoning.Bonuses.HitPoints.hint"
@@ -288,6 +293,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     // Match proficiency
     if ( this.match.proficiency ) {
       const proficiencyEffect = new ActiveEffect({
+        _id: staticID("dnd5eMatchProficiency"),
         changes: [{
           key: "system.attributes.prof",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -309,6 +315,7 @@ export class SummonsData extends foundry.abstract.DataModel {
           actorUpdates["system.attributes.ac.flat"] = (actor.system.attributes.ac.flat ?? 0) + acBonus.total;
         } else {
           actorUpdates.effects.push((new ActiveEffect({
+            _id: staticID("dnd5eACBonus"),
             changes: [{
               key: "system.attributes.ac.bonus",
               mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -322,6 +329,25 @@ export class SummonsData extends foundry.abstract.DataModel {
       }
     }
 
+    // Add bonus to HD
+    if ( this.bonuses.hd && (actor.type === "npc") ) {
+      const hdBonus = new Roll(this.bonuses.hd, rollData);
+      await hdBonus.evaluate();
+      if ( hdBonus.total ) {
+        actorUpdates.effects.push((new ActiveEffect({
+          _id: staticID("dnd5eHDBonus"),
+          changes: [{
+            key: "system.attributes.hd.max",
+            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+            value: hdBonus.total
+          }],
+          disabled: false,
+          icon: "icons/sundries/gaming/dice-runed-brown.webp",
+          name: game.i18n.localize("DND5E.Summoning.Bonuses.HitDice.Label")
+        })).toObject());
+      }
+    }
+
     // Add bonus to HP
     if ( this.bonuses.hp ) {
       const hpBonus = new Roll(this.bonuses.hp, rollData);
@@ -329,6 +355,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       if ( hpBonus.total ) {
         if ( (actor.type === "pc") && !actor._source.system.attributes.hp.max ) {
           actorUpdates.effects.push((new ActiveEffect({
+            _id: staticID("dnd5eHPBonus"),
             changes: [{
               key: "system.attributes.hp.bonuses.overall",
               mode: CONST.ACTIVE_EFFECT_MODES.ADD,
