@@ -1,0 +1,18 @@
+<div>
+    <table class="spells">
+        <thead>
+            <tr>
+                <th>{{ localize "DND5E.SpellLevel" }}</th>
+                <th>{{ localize "TYPES.Item.spellPl" }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each sections}}
+            <tr>
+                <th scope="row">{{ header }}</th>
+                <td>{{{ spellList }}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

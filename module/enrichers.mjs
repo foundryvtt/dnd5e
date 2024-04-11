@@ -1,5 +1,6 @@
 import { formatNumber, getSceneTargets, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
+import JournalSpellListPageSheet from "./applications/journal/spells-page-sheet.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import Item5e from "./documents/item.mjs";
@@ -415,6 +416,7 @@ async function enrichEmbed(config, label, options) {
       case "image": return embedImagePage(config, label, options);
       case "text":
       case "rule": return embedTextPage(config, label, options);
+      case "spells": return embedSpellList(config, label, options);
     }
   }
   else if ( config.doc instanceof RollTable ) return embedRollTable(config, label, options);
@@ -622,6 +624,30 @@ async function embedRollTable(config, label, options) {
     figure.append(figcaption);
   }
   return figure;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Embed a spell list.
+ * @param {object} config              Configuration data.
+ * @param {string} label               Optional label to use as the table caption.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {Promise<HTMLElement|null>}
+ */
+async function embedSpellList(config, label, options) {
+  for ( const value of config.values ) {
+    if ( value === "table" ) config.table = true;
+    else if ( value in JournalSpellListPageSheet.GROUPING_MODES ) config.grouping = value;
+  }
+  if ( config.table ) config.grouping = "level";
+
+  const sheet = new JournalSpellListPageSheet(config.doc, {
+    editable: false, displayAsTable: config.table, embedRendering: true, grouping: config.grouping
+  });
+  const rendered = await sheet._renderInner(await sheet.getData());
+  config.classes = `spells ${config.classes ?? ""}`;
+  return wrapEmbeddedText(rendered[0].innerHTML, config, label, options);
 }
 
 /* -------------------------------------------- */

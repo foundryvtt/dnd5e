@@ -1,5 +1,5 @@
 import SpellListJournalPageData from "../../data/journal/spells.mjs";
-import { sortObjectEntries } from "../../utils.mjs";
+import { linkForUuid, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
 
 /**
@@ -12,7 +12,10 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     const options = foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{dropSelector: "form"}],
       submitOnChange: true,
-      width: 700
+      width: 700,
+      displayAsTable: false,
+      embedRendering: false,
+      grouping: null
     });
     options.classes.push("spells");
     return options;
@@ -40,6 +43,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 
   /** @inheritDoc */
   get template() {
+    if ( this.options.displayAsTable ) return "systems/dnd5e/templates/journal/page-spell-list-table.hbs";
     return `systems/dnd5e/templates/journal/page-spell-list-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
@@ -50,6 +54,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     const context = super.getData(options);
     context.CONFIG = CONFIG.DND5E;
     context.system = context.document.system;
+    context.embedRendering = this.options.embedRendering ?? false;
 
     context.title = Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1]));
 
@@ -59,7 +64,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     if ( context.description === "<p></p>" ) context.description = "";
 
     context.GROUPING_MODES = this.constructor.GROUPING_MODES;
-    context.grouping = this.grouping || context.system.grouping;
+    context.grouping = this.grouping || this.options.grouping || context.system.grouping;
 
     context.spells = await this.prepareSpells(context.grouping);
 
@@ -85,6 +90,11 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       section.spells.push(spell);
     }
     if ( context.grouping === "school" ) context.sections = sortObjectEntries(context.sections, "header");
+
+    if ( this.options.displayAsTable ) Object.values(context.sections).forEach(section => {
+      const spells = section.spells.map(s => linkForUuid(s.uuid));
+      section.spellList = game.i18n.getListFormatter({ type: "unit" }).format(spells);
+    });
 
     return context;
   }
