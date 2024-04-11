@@ -400,7 +400,7 @@ export default class InventoryElement extends HTMLElement {
    * @returns {Promise}
    */
   async _prepareSpell(item) {
-    const spellClass = this.actor.classes[item.system.boundOrigin];
+    const spellClass = this.actor.classes[item.system.sourceClass];
 
     // Invalid spell preparation notification.
     let chatData = game.messages.find(x => x.flags?.warning === "over-preparation" && x.speaker?.actor===this.actor._id);

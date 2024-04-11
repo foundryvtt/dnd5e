@@ -396,7 +396,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     finalSC.preparedSpellsCount = this.parent.items.filter(x => x.type === "spell"
     && x.system?.level > 0
-    && x.system?.boundOrigin === this.system.identifier
+    && x.system?.sourceClass === this.system.identifier
     && x.system?.preparation?.mode === "prepared"
     && x.system?.preparation?.prepared).length;
 
@@ -1124,8 +1124,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }
 
       const sc = (
-        this.system?.boundOrigin
-          ? this.parent?.classes?.[this.system.boundOrigin]
+        this.system?.sourceClass
+          ? this.parent?.classes?.[this.system.sourceClass]
           : null
       )
       ?? this.parent?.activeSpellCastingClass;
