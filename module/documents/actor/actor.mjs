@@ -67,8 +67,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       && this.classes[this.system.attributes.activeSpellcastingClass]) {
       return this.classes[this.system.attributes.activeSpellcastingClass];
     }
-    return Object.values(this.classes).find(({system}) => system.spellcasting
-    && system.spellcasting.progression !== "none" );
+    return Object.values(this.classes).find(({spellcasting}) => spellcasting
+    && spellcasting.progression !== "none" );
   }
 
   /* -------------------------------------------- */
