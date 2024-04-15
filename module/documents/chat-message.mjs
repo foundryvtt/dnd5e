@@ -182,8 +182,9 @@ export default class ChatMessage5e extends ChatMessage {
       nameText = this.user.name;
     }
 
-    const avatar = document.createElement("div");
+    const avatar = document.createElement("a");
     avatar.classList.add("avatar");
+    avatar.dataset.uuid = actor.uuid;
     avatar.innerHTML = `<img src="${img}" alt="${nameText}">`;
 
     const name = document.createElement("span");
@@ -258,6 +259,10 @@ export default class ChatMessage5e extends ChatMessage {
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
     }
+
+    avatar.addEventListener("click", this._onTargetMouseDown.bind(this));
+    avatar.addEventListener("mouseover", this._onTargetHoverIn.bind(this));
+    avatar.addEventListener("mouseout", this._onTargetHoverOut.bind(this));
   }
 
   /* -------------------------------------------- */
