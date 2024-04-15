@@ -1736,15 +1736,15 @@ DND5E.encumbrance = {
   threshold: {
     encumbered: {
       imperial: 5,
-      metric: 2.2
+      metric: 2.5
     },
     heavilyEncumbered: {
       imperial: 10,
-      metric: 4.5
+      metric: 5
     },
     maximum: {
       imperial: 15,
-      metric: 6.8
+      metric: 7.5
     }
   },
   speedReduction: {
