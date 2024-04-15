@@ -1986,6 +1986,7 @@ DND5E.pactCastingProgression = {
  * @property {boolean} [cantrips]     Whether this mode allows for cantrips in a spellbook.
  * @property {number} [order]         The sort order of this mode in a spellbook.
  * @property {boolean} [prepares]     Whether this preparation mode prepares spells.
+ * @property {boolean} [shortRest]    Are these spell slots additionally restored on a short rest?
  */
 
 /**
@@ -1996,13 +1997,15 @@ DND5E.spellPreparationModes = {
   prepared: {
     label: "DND5E.SpellPrepPrepared",
     upcast: true,
-    prepares: true
+    prepares: true,
+    shortRest: false
   },
   pact: {
     label: "DND5E.PactMagic",
     upcast: true,
     cantrips: true,
-    order: 0.5
+    order: 0.5,
+    shortRest: true
   },
   always: {
     label: "DND5E.SpellPrepAlways",
@@ -2060,6 +2063,7 @@ DND5E.spellUpcastModes = ["always", "pact", "prepared"];
 DND5E.spellcastingTypes = {
   leveled: {
     label: "DND5E.SpellProgLeveled",
+    img: "systems/dnd5e/icons/spell-tiers/{id}.webp",
     progression: {
       full: {
         label: "DND5E.SpellProgFull",
@@ -2081,7 +2085,8 @@ DND5E.spellcastingTypes = {
     }
   },
   pact: {
-    label: "DND5E.SpellProgPact"
+    label: "DND5E.SpellProgPact",
+    img: "icons/magic/unholy/silhouette-robe-evil-power.webp"
   }
 };
 preLocalize("spellcastingTypes", { key: "label", sort: true });

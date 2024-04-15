@@ -740,40 +740,53 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Prepare pact spell slots using progression data.
+   * Prepare non-leveled spell slots using progression data.
+   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {object} progression   Spellcasting progression data.
+   * @param {string} key           The internal key for these spell slots on the actor.
+   * @param {object} table         The table used for determining the progression of slots.
+   */
+  static prepareAltSlots(spells, actor, progression, key, table) {
+    // Spell data:
+    // - x.level: Slot level for casting
+    // - x.max: Total number of slots
+    // - x.value: Currently available slots
+    // - x.override: Override number of available spell slots
+
+    let keyLevel = Math.clamped(progression[key], 0, CONFIG.DND5E.maxLevel);
+    spells[key] ??= {};
+    const override = Number.isNumeric(spells[key].override) ? parseInt(spells[key].override) : null;
+
+    // Slot override
+    if ( (keyLevel === 0) && (actor.type === "npc") && (override !== null) ) {
+      keyLevel = actor.system.details.spellLevel;
+    }
+
+    const [, keyConfig] = Object.entries(table).reverse().find(([l]) => Number(l) <= keyLevel) ?? [];
+    if ( keyConfig ) {
+      spells[key].level = keyConfig.level;
+      if ( override === null ) spells[key].max = keyConfig.slots;
+      else spells[key].max = Math.max(override, 1);
+      spells[key].value = Math.min(spells[key].value, spells[key].max);
+    }
+
+    else {
+      spells[key].max = override || 0;
+      spells[key].level = (spells[key].max > 0) ? 1 : 0;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convenience method for preparing pact slots specifically.
    * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
    * @param {object} progression   Spellcasting progression data.
    */
   static preparePactSlots(spells, actor, progression) {
-    // Pact spell data:
-    // - pact.level: Slot level for pact casting
-    // - pact.max: Total number of pact slots
-    // - pact.value: Currently available pact slots
-    // - pact.override: Override number of available spell slots
-
-    let pactLevel = Math.clamped(progression.pact, 0, CONFIG.DND5E.maxLevel);
-    spells.pact ??= {};
-    const override = Number.isNumeric(spells.pact.override) ? parseInt(spells.pact.override) : null;
-
-    // Pact slot override
-    if ( (pactLevel === 0) && (actor.type === "npc") && (override !== null) ) {
-      pactLevel = actor.system.details.spellLevel;
-    }
-
-    const [, pactConfig] = Object.entries(CONFIG.DND5E.pactCastingProgression)
-      .reverse().find(([l]) => Number(l) <= pactLevel) ?? [];
-    if ( pactConfig ) {
-      spells.pact.level = pactConfig.level;
-      if ( override === null ) spells.pact.max = pactConfig.slots;
-      else spells.pact.max = Math.max(override, 1);
-      spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
-    }
-
-    else {
-      spells.pact.max = override || 0;
-      spells.pact.level = spells.pact.max > 0 ? 1 : 0;
-    }
+    this.prepareAltSlots(spells, actor, progression, "pact", CONFIG.DND5E.pactCastingProgression);
   }
 
   /* -------------------------------------------- */
@@ -2196,7 +2209,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Take a short rest, possibly spending hit dice and recovering resources, item uses, and pact slots.
+   * Take a short rest, possibly spending hit dice and recovering resources, item uses, and relevant spell slots.
    * @param {RestConfiguration} [config]  Configuration options for a short rest.
    * @returns {Promise<RestResult>}       A Promise which resolves once the short rest workflow has completed.
    */
@@ -2341,7 +2354,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         ...(hdActorUpdates ?? {}),
         ...hpActorUpdates,
         ...this._getRestResourceRecovery({ recoverShortRestResources: !longRest, recoverLongRestResources: longRest }),
-        ...this._getRestSpellRecovery({ recoverSpells: longRest })
+        ...this._getRestSpellRecovery({ recoverLong: longRest })
       },
       updateItems: [
         ...(hdItemUpdates ?? []),
@@ -2504,25 +2517,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Recovers spell slots and pact slots.
+   * Recovers expended spell slots.
    * @param {object} [options]
-   * @param {boolean} [options.recoverPact=true]     Recover all expended pact slots.
-   * @param {boolean} [options.recoverSpells=true]   Recover all expended spell slots.
+   * @param {boolean} [options.recoverShort=true]    Recover slots that return on short rests.
+   * @param {boolean} [options.recoverLong=true]     Recover slots that return on long rests.
    * @returns {object}                               Updates to the actor.
    * @protected
    */
-  _getRestSpellRecovery({recoverPact=true, recoverSpells=true}={}) {
-    const spells = this.system.spells ?? {};
+  _getRestSpellRecovery({recoverShort=true, recoverLong=true}={}) {
+    const spells = this.system.spells;
     let updates = {};
-    if ( recoverPact ) {
-      const pact = spells.pact;
-      updates["system.spells.pact.value"] = pact.override || pact.max;
-    }
-    if ( recoverSpells ) {
-      for ( let [k, v] of Object.entries(spells) ) {
-        updates[`system.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
+    if ( !spells ) return updates;
+
+    Object.entries(CONFIG.DND5E.spellPreparationModes).forEach(([k, v]) => {
+      if ( v.upcast && ((recoverShort && v.shortRest) || recoverLong) ) {
+        if ( k === "prepared" ) {
+          Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1).forEach(level => {
+            updates[`system.spells.spell${level}.value`] = spells[`spell${level}`].max;
+          });
+        } else if ( k !== "always" ) {
+          updates[`system.spells.${k}.value`] = spells[k].max;
+        }
       }
-    }
+    });
     return updates;
   }
 

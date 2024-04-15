@@ -754,16 +754,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     requestAnimationFrame(() => game.tooltip.deactivate());
     game.tooltip.deactivate();
 
+    const modes = CONFIG.DND5E.spellPreparationModes;
+
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
     const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
     const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("spell-header");
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.toolIds ) type = "tool";
-    else if ( preparationMode && (level !== "0") && isSlots ) type = "slots";
+    else if ( modes[preparationMode]?.upcast && (level !== "0") && isSlots ) type = "slots";
     if ( !type ) return super._onDragStart(event);
     const dragData = { dnd5e: { action: "favorite", type } };
-    if ( type === "slots" ) dragData.dnd5e.id = preparationMode === "pact" ? "pact" : `spell${level}`;
+    if ( type === "slots" ) dragData.dnd5e.id = (preparationMode === "prepared") ? `spell${level}` : preparationMode;
     else dragData.dnd5e.id = key;
     event.dataTransfer.setData("application/json", JSON.stringify(dragData));
   }
@@ -1271,7 +1273,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         itemId: type === "item" ? favorite.id : null,
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
-        preparationMode: type === "slots" ? id === "pact" ? "pact" : "prepared" : null,
+        preparationMode: (type === "slots") ? (/spell\d+/.test(id) ? "prepared" : id) : null,
         key: (type === "skill") || (type === "tool") ? id : null,
         toggle: toggle === undefined ? null : { applicable: true, value: toggle },
         quantity: quantity > 1 ? quantity : "",
@@ -1298,19 +1300,23 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     if ( type === "slots" ) {
       const { value, max, level } = this.actor.system.spells[id] ?? {};
       const uses = { value, max, name: `system.spells.${id}.value` };
-      if ( id === "pact" ) return {
+      if ( !/spell\d+/.test(id) ) return {
         uses, level,
-        title: game.i18n.localize("DND5E.SpellSlotsPact"),
-        subtitle: [game.i18n.localize(`DND5E.SpellLevel${level}`), game.i18n.localize("DND5E.AbbreviationSR")],
-        img: "icons/magic/unholy/silhouette-robe-evil-power.webp"
+        title: game.i18n.localize(`DND5E.SpellSlots${id.capitalize()}`),
+        subtitle: [
+          game.i18n.localize(`DND5E.SpellLevel${level}`),
+          game.i18n.localize(`DND5E.Abbreviation${CONFIG.DND5E.spellPreparationModes[id]?.shortRest ? "SR" : "LR"}`)
+        ],
+        img: CONFIG.DND5E.spellcastingTypes[id]?.img || CONFIG.DND5E.spellcastingTypes.pact.img
       };
 
       const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
+      const isSR = CONFIG.DND5E.spellPreparationModes.prepared.shortRest;
       return {
         uses, level,
         title: game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
-        subtitle: game.i18n.localize("DND5E.AbbreviationLR"),
-        img: `systems/dnd5e/icons/spell-tiers/${id}.webp`
+        subtitle: game.i18n.localize(`DND5E.Abbreviation${isSR ? "SR" : "LR"}`),
+        img: CONFIG.DND5E.spellcastingTypes.leveled.img.replace("{id}", id)
       };
     }
 
