@@ -1,4 +1,5 @@
 import { FormulaField } from "../data/fields.mjs";
+import { EnchantmentData } from "../data/item/fields/enchantment-field.mjs";
 import { staticID } from "../utils.mjs";
 
 /**
@@ -21,6 +22,18 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @type {Set<string>}
    */
   static FORMULA_FIELDS = new Set(["system.attributes.ac.bonus"]);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this effect an enchantment on an item that accepts enchantment?
+   * @type {boolean}
+   */
+  get isAppliedEnchantment() {
+    return (this.getFlag("dnd5e", "type") === "enchantment")
+      && (this.parent.system.metadata?.enchantable === true)
+      && !!this.origin && (this.origin !== this.parent.uuid);
+  }
 
   /* -------------------------------------------- */
 
@@ -309,6 +322,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     super.prepareDerivedData();
     if ( this.getFlag("dnd5e", "type") === "enchantment" ) this.transfer = false;
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
+    if ( this.isAppliedEnchantment ) EnchantmentData.trackEnchantment(this.origin, this.uuid);
   }
 
   /* -------------------------------------------- */
@@ -329,6 +343,49 @@ export default class ActiveEffect5e extends ActiveEffect {
       this.statuses.add("dead");
       CONFIG.DND5E.statusEffects.dead.statuses?.forEach(s => this.statuses.add(s));
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare effect favorite data.
+   * @returns {Promise<FavoriteData5e>}
+   */
+  async getFavoriteData() {
+    return {
+      img: this.img,
+      title: this.name,
+      subtitle: this.duration.remaining ? this.duration.label : "",
+      toggle: !this.disabled,
+      suppressed: this.isSuppressed
+    };
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( await super._preCreate(data, options, user) === false ) return false;
+    if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
+
+    // Enchantments cannot be added directly to actors
+    if ( (this.getFlag("dnd5e", "type") === "enchantment") && (this.parent instanceof Actor) ) {
+      ui.notifications.error("DND5E.Enchantment.Warning.NotOnActor", { localize: true });
+      return false;
+    }
+
+    if ( !this.isAppliedEnchantment ) return;
+
+    // Otherwise validate against the enchantment's restraints on the origin item
+    const origin = await fromUuid(this.origin);
+    const errors = origin?.system.enchantment?.canEnchant(this.parent);
+    this.updateSource({ disabled: false });
+    if ( !errors?.length ) return;
+
+    errors.forEach(err => ui.notifications.error(err.message));
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -381,22 +438,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare effect favorite data.
-   * @returns {Promise<FavoriteData5e>}
-   */
-  async getFavoriteData() {
-    return {
-      img: this.img,
-      title: this.name,
-      subtitle: this.duration.remaining ? this.duration.label : "",
-      toggle: !this.disabled,
-      suppressed: this.isSuppressed
-    };
+    if ( this.isAppliedEnchantment ) EnchantmentData.untrackEnchantment(this.origin, this.uuid);
   }
 
   /* -------------------------------------------- */

@@ -3,7 +3,7 @@ import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
-import {default as EnchantmentField, EnchantmentData} from "./fields/enchantment-field.mjs";
+import { EnchantmentData } from "./fields/enchantment-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -15,7 +15,6 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  *
- * @property {EnchantmentData} enchantment          Enchantment configuration associated with this type.
  * @property {object} prerequisites
  * @property {number} prerequisites.level           Character or class level required to choose this feature.
  * @property {Set<string>} properties               General properties of a feature item.
@@ -35,7 +34,6 @@ export default class FeatData extends ItemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
-      enchantment: new EnchantmentField(),
       prerequisites: new SchemaField({
         level: new NumberField({integer: true, min: 0})
       }),
@@ -147,16 +145,6 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritdoc */
   get hasLimitedUses() {
     return this.isActive && (!!this.recharge.value || super.hasLimitedUses);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this feature an enchantment?
-   * @type {boolean}
-   */
-  get isEnchantment() {
-    return EnchantmentData.isEnchantment(this);
   }
 
   /* -------------------------------------------- */
