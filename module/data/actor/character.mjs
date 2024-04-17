@@ -1,4 +1,4 @@
-import HitDice from "../../documents/actor/HitDice.mjs";
+import HitDice from "../../documents/actor/hit-dice.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
