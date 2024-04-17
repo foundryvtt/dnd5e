@@ -168,14 +168,20 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Skills & tools.
+    const baseAbility = (prop, key) => {
+      let src = source.system[prop]?.[key]?.ability;
+      if ( src ) return src;
+      if ( prop === "skills" ) src = CONFIG.DND5E.skills[key]?.ability;
+      return src ?? "int";
+    };
     ["skills", "tools"].forEach(prop => {
       for ( const [key, entry] of Object.entries(context[prop]) ) {
         entry.abbreviation = CONFIG.DND5E.abilities[entry.ability]?.abbreviation;
         entry.icon = this._getProficiencyIcon(entry.value);
         entry.hover = CONFIG.DND5E.proficiencyLevels[entry.value];
-        entry.label = prop === "skills" ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, {trait: "tool"});
+        entry.label = (prop === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, {trait: "tool"});
         entry.baseValue = source.system[prop]?.[key]?.value ?? 0;
-        entry.baseAbility = source.system[prop]?.[key]?.ability ?? "int";
+        entry.baseAbility = baseAbility(prop, key);
       }
     });
 
