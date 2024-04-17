@@ -100,14 +100,11 @@ export default class ChatMessage5e extends ChatMessage {
 
       if ( this.shouldDisplayChallenge ) chatCard[0].dataset.displayChallenge = "";
 
-      // Conceal effects that the user cannot apply.
-      chatCard.find(".effects-tray .effect").each((i, el) => {
-        if ( !game.user.isGM && ((el.dataset.transferred === "false") || (this.user.id !== game.user.id)) ) el.remove();
-      });
+      const actor = game.actors.tokens[this.speaker.token] ?? game.actors.get(this.speaker.actor);
+      const ownership = game.user.isGM || actor?.isOwner || (this.user.id === game.user.id);
 
       // If the user is the message author or the actor owner, proceed
-      let actor = game.actors.get(this.speaker.actor);
-      if ( game.user.isGM || actor?.isOwner || (this.user.id === game.user.id) ) {
+      if ( ownership ) {
         const summonsButton = chatCard[0].querySelector('button[data-action="summon"]');
         if ( summonsButton && !SummonsData.canSummon ) summonsButton.style.display = "none";
         const template = chatCard[0].querySelector('button[data-action="placeTemplate"]');
@@ -115,7 +112,10 @@ export default class ChatMessage5e extends ChatMessage {
         return;
       }
 
-      // Otherwise conceal action buttons except for saving throw
+      // Otherwise conceal effects that the user cannot apply.
+      chatCard.find(".effects-tray .effect").each((i, el) => el.remove());
+
+      // And conceal action buttons except for saving throws
       const buttons = chatCard.find("button[data-action]:not(.apply-effect)");
       buttons.each((i, btn) => {
         if ( ["save", "rollRequest", "concentration"].includes(btn.dataset.action) ) return;

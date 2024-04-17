@@ -1394,7 +1394,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       config: CONFIG.DND5E,
       tokenId: token?.uuid || null,
       item: this,
-      effects: this.effects,
+      effects: this.effects.filter(effect => !effect.transfer),
       data: await this.system.getCardData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
