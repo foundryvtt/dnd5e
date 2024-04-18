@@ -73,6 +73,8 @@
         <div class="tab details" data-group="primary" data-tab="details">
             {{#dnd5e-concealSection concealDetails}}
 
+            <h3 class="form-header">{{ localize "DND5E.ItemToolDetails" }}</h3>
+
             {{!-- Tool Type --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemToolType" }}</label>
@@ -128,6 +130,11 @@
                 <label>{{ localize "DND5E.ItemToolBonus" }}</label>
                 <input type="text" name="system.bonus" value="{{system.bonus}}" data-formula-editor/>
             </div>
+
+            <h3 class="form-header">{{ localize "DND5E.ItemToolUsage" }}</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "dnd5e.item-activation"}}
 
             {{!-- Chat Message Flavor --}}
             <div class="form-group stacked">
