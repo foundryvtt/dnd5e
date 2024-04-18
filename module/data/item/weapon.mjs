@@ -134,11 +134,11 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritdoc */
   get _typeAbilityMod() {
-    if ( ["simpleR", "martialR"].includes(this.type.value) ) return "dex";
-
-    const abilities = this.parent?.actor?.system.abilities;
-    if ( this.properties.has("fin") && abilities ) {
-      return (abilities.dex?.mod ?? 0) >= (abilities.str?.mod ?? 0) ? "dex" : "str";
+    const abi = this.parent?.actor?.system.abilities ?? {};
+    const t0 = {simpleM: "str", martialM: "str", simpleR: "dex", martialR: "dex"}[this.type.value];
+    if ( t0 && this.properties.has("fin") && abi.dex && abi.str ) {
+      const t1 = (t0 === "str") ? "dex" : "str";
+      return (abi[t1].mod > abi[t0].mod) ? t1 : t0;
     }
 
     return null;
