@@ -25,6 +25,12 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
   pool;
 
   /**
+   * UUID of item to be replaced.
+   * @type {string}
+   */
+  replacement;
+
+  /**
    * List of dropped items.
    * @type {Item5e[]}
    */
@@ -43,13 +49,18 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  async retainData(data) {
+    await super.retainData(data);
+    this.replacement = data.replaced?.original;
+    this.selected = new Set(data.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId")));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async getContext() {
     const context = {};
-
-    this.selected ??= new Set(
-      this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
-        ?? Object.values(this.advancement.value[this.level] ?? {})
-    );
+    this.selected ??= new Set(Object.values(this.advancement.value[this.level] ?? {}));
     this.pool ??= await Promise.all(this.advancement.configuration.pool.map(i => fromUuid(i.uuid)));
     if ( !this.dropped ) {
       this.dropped = [];
@@ -62,15 +73,37 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       }
     }
 
-    const max = this.advancement.configuration.choices[this.level];
+    const levelConfig = this.advancement.configuration.choices[this.level];
+    let max = levelConfig.count ?? 0;
+    if ( levelConfig.replacement && this.replacement ) max++;
+    if ( this.selected.size > max ) {
+      this.selected = new Set(Array.from(this.selected).slice(0, max));
+    }
     context.choices = { max, current: this.selected.size, full: this.selected.size >= max };
+    context.replacement = levelConfig.replacement;
+    context.noReplacement = !this.replacement;
 
     context.previousLevels = {};
     const previouslySelected = new Set();
-    for ( const [level, data] of Object.entries(this.advancement.value.added ?? {}) ) {
-      if ( level > this.level ) continue;
-      context.previousLevels[level] = await Promise.all(Object.values(data).map(uuid => fromUuid(uuid)));
-      Object.values(data).forEach(uuid => previouslySelected.add(uuid));
+    for ( const level of Array.fromRange(this.level - 1, 1) ) {
+      const added = this.advancement.value.added[level];
+      if ( added ) context.previousLevels[level] = Object.entries(added).map(([id, uuid]) => {
+        const item = fromUuidSync(uuid);
+        previouslySelected.add(uuid);
+        return {
+          ...item, id, uuid,
+          checked: id === this.replacement,
+          replaced: false
+        };
+      });
+      const replaced = this.advancement.value.replaced[level];
+      if ( replaced ) {
+        const match = context.previousLevels[replaced.level].find(v => v.id === replaced.original);
+        if ( match ) {
+          match.replaced = true;
+          previouslySelected.delete(match.uuid);
+        }
+      }
     }
 
     context.items = [...this.pool, ...this.dropped].reduce((items, i) => {
@@ -106,6 +139,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       if ( event.target.checked ) this.selected.add(event.target.name);
       else this.selected.delete(event.target.name);
     }
+    else if ( event.target.type === "radio" ) this.replacement = event.target.value;
     else if ( event.target.name === "ability" ) this.ability = event.target.value;
     this.render();
   }
@@ -130,7 +164,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /** @inheritdoc */
   async _onDrop(event) {
-    if ( this.selected.size >= this.advancement.configuration.choices[this.level] ) return false;
+    if ( this.selected.size >= this.advancement.configuration.choices[this.level].count ) return false;
 
     // Try to extract the data
     let data;

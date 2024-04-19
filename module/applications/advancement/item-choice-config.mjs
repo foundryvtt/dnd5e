@@ -8,11 +8,11 @@ export default class ItemChoiceConfig extends AdvancementConfig {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "item-choice", "two-column"],
+      classes: ["dnd5e", "advancement", "item-choice", "three-column"],
       dragDrop: [{ dropSelector: ".drop-target" }],
       dropKeyPath: "pool",
       template: "systems/dnd5e/templates/advancement/item-choice-config.hbs",
-      width: 540
+      width: 780
     });
   }
 
@@ -34,6 +34,10 @@ export default class ItemChoiceConfig extends AdvancementConfig {
         return obj;
       }, {})
     };
+    context.choices = Object.entries(context.levels).reduce((obj, [level, label]) => {
+      obj[level] = { label, ...this.advancement.configuration.choices[level] };
+      return obj;
+    }, {});
     if ( this.advancement.configuration.type === "feat" ) {
       const selectedType = CONFIG.DND5E.featureTypes[this.advancement.configuration.restriction.type];
       context.typeRestriction = {

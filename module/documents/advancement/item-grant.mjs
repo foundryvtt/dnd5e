@@ -1,7 +1,8 @@
-import Advancement from "./advancement.mjs";
+import { filteredKeys } from "../../utils.mjs";
 import ItemGrantConfig from "../../applications/advancement/item-grant-config.mjs";
 import ItemGrantFlow from "../../applications/advancement/item-grant-flow.mjs";
 import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";
+import Advancement from "./advancement.mjs";
 
 /**
  * Advancement that automatically grants one or more items to the player. Presents the player with the option of
@@ -81,6 +82,7 @@ export default class ItemGrantAdvancement extends Advancement {
    * @param {object} data               Data from the advancement form.
    * @param {object} [retainedData={}]  Item data grouped by UUID. If present, this data will be used rather than
    *                                    fetching new data from the source.
+   * @returns {object}
    */
   async apply(level, data, retainedData={}) {
     const items = [];
@@ -88,18 +90,12 @@ export default class ItemGrantAdvancement extends Advancement {
     const spellChanges = this.configuration.spell?.getSpellChanges({
       ability: data.ability ?? this.retainedData?.ability ?? this.value?.ability
     }) ?? {};
-    for ( const [uuid, selected] of Object.entries(data) ) {
-      if ( !selected ) continue;
+    for ( const uuid of filteredKeys(data) ) {
 
       let itemData = retainedData[uuid];
       if ( !itemData ) {
-        const source = await fromUuid(uuid);
-        if ( !source ) continue;
-        itemData = source.clone({
-          _id: foundry.utils.randomID(),
-          "flags.dnd5e.sourceId": uuid,
-          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
-        }, {keepId: true}).toObject();
+        itemData = await this.createItemData(uuid);
+        if ( !itemData ) continue;
       }
       if ( itemData.type === "spell" ) foundry.utils.mergeObject(itemData, spellChanges);
 
@@ -111,6 +107,7 @@ export default class ItemGrantAdvancement extends Advancement {
       "value.ability": data.ability,
       [this.storagePath(level)]: updates
     });
+    return updates;
   }
 
   /* -------------------------------------------- */

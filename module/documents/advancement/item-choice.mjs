@@ -1,7 +1,7 @@
-import ItemGrantAdvancement from "./item-grant.mjs";
 import ItemChoiceConfig from "../../applications/advancement/item-choice-config.mjs";
 import ItemChoiceFlow from "../../applications/advancement/item-choice-flow.mjs";
-import ItemChoiceConfigurationData from "../../data/advancement/item-choice.mjs";
+import { ItemChoiceConfigurationData, ItemChoiceValueData } from "../../data/advancement/item-choice.mjs";
+import ItemGrantAdvancement from "./item-grant.mjs";
 
 /**
  * Advancement that presents the player with a choice of multiple items that they can take. Keeps track of which
@@ -13,7 +13,8 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
-        configuration: ItemChoiceConfigurationData
+        configuration: ItemChoiceConfigurationData,
+        value: ItemChoiceValueData
       },
       order: 50,
       icon: "systems/dnd5e/icons/svg/item-choice.svg",
@@ -42,14 +43,19 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /** @inheritdoc */
   configuredForLevel(level) {
-    return this.value.added?.[level] !== undefined;
+    return (this.value.added?.[level] !== undefined) || !this.configuration.choices[level]?.count;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   titleForLevel(level, { configMode=false }={}) {
-    return `${this.title} <em>(${game.i18n.localize("DND5E.AdvancementChoices")})</em>`;
+    const data = this.configuration.choices[level] ?? {};
+    let tag;
+    if ( data.count ) tag = game.i18n.format("DND5E.AdvancementItemChoiceChoose", { count: data.count });
+    else if ( data.replacement ) tag = game.i18n.localize("DND5E.AdvancementItemChoiceReplacementTitle");
+    else return this.title;
+    return `${this.title} <em>(${tag})</em>`;
   }
 
   /* -------------------------------------------- */
@@ -65,9 +71,70 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @override */
   storagePath(level) {
     return `value.added.${level}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async apply(level, data, retainedData={}) {
+    let original = data.replace;
+    let replacement;
+    if ( retainedData.replaced ) {
+      original = retainedData.replaced.original;
+      replacement = retainedData.replaced.replacement;
+    }
+    delete data.replaced;
+
+    const updates = await super.apply(level, data, retainedData);
+
+    replacement ??= Object.keys(updates).pop();
+    if ( original && replacement ) {
+      const replacedLevel = Object.entries(this.value.added).reverse().reduce((level, [l, v]) => {
+        if ( (original in v) && (Number(l) > level) ) return Number(l);
+        return level;
+      }, 0);
+      if ( Number.isFinite(replacedLevel) ) {
+        this.actor.items.delete(original);
+        this.updateSource({ [`value.replaced.${level}`]: { level: replacedLevel, original, replacement } });
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  restore(level, data) {
+    super.restore(level, data);
+
+    if ( data.replaced ) {
+      this.actor.items.delete(data.replaced.original);
+      this.updateSource({ [`value.replaced.${level}`]: data.replaced });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async reverse(level) {
+    const retainedData = await super.reverse(level);
+
+    const replaced = retainedData.replaced = this.value.replaced[level];
+    if ( replaced ) {
+      const uuid = this.value.added[replaced.level][replaced.original];
+      const itemData = await this.createItemData(uuid, replaced.original);
+      if ( itemData ) {
+        if ( itemData.type === "spell" ) {
+          foundry.utils.mergeObject(itemData, this.configuration.spell?.spellChanges ?? {});
+        }
+        this.actor.updateSource({ items: [itemData] });
+        this.updateSource({ [`value.replaced.-=${level}`]: null });
+      }
+    }
+
+    return retainedData;
   }
 
   /* -------------------------------------------- */
