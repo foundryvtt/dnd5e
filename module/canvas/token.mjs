@@ -4,16 +4,8 @@
 export default class Token5e extends Token {
   constructor(...args) {
     super(...args);
-    this.ring = new CONFIG.Token.ringClass(this);
+    if ( game.release.generation < 12 ) this.ring = new CONFIG.Token.ringClass(this);
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Dynamic token ring.
-   * @type {TokenRing}
-   */
-  ring;
 
   /* -------------------------------------------- */
 
@@ -49,7 +41,7 @@ export default class Token5e extends Token {
   /** @inheritdoc */
   async _draw() {
     // Cache the subject texture if needed
-    if ( this.ring.enabled ) {
+    if ( (game.release.generation < 12) && this.ring.enabled ) {
       const subjectName = this.document.subjectPath;
       const cached = PIXI.Assets.cache.has(subjectName);
       if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
@@ -135,7 +127,7 @@ export default class Token5e extends Token {
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    if ( !CONFIG.Token.ringClass.enabled ) return;
+    if ( !CONFIG.Token.ringClass.enabled || (game.release.generation > 11) ) return;
 
     // Update ring names if necessary
     const shapeChange = ("height" in data) || ("width" in data) || ("texture" in data);

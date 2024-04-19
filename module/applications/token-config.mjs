@@ -51,6 +51,8 @@ export default class TokenConfig5e extends TokenConfig {
    * @protected
    */
   async _addTokenRingConfiguration(html) {
+    html.querySelector('.tab[data-tab="appearance"] fieldset:last-child')?.remove();
+
     if ( game.settings.get("dnd5e", "disableTokenRings") ) return;
 
     const tab = html.querySelector('.tab[data-tab="appearance"]');
@@ -159,7 +161,7 @@ export default class TokenConfig5e extends TokenConfig {
 
   /** @inheritDoc */
   _previewChanges(change) {
-    if ( change && (this.preview instanceof TokenDocument5e) ) {
+    if ( change && (this.preview instanceof TokenDocument5e) && (game.release.generation < 12) ) {
       const flags = foundry.utils.getProperty(foundry.utils.expandObject(change), "flags.dnd5e.tokenRing") ?? {};
       const redraw = ("textures" in flags) || ("enabled" in flags);
       if ( redraw ) this.preview.object.renderFlags.set({ redraw });

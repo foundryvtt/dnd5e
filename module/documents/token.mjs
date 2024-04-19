@@ -57,6 +57,19 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    // Migrate v11 flags to core token ring.
+    if ( (game.release.generation > 11) && source.flags?.dnd5e?.tokenRing ) {
+      const { enabled, colors, effects, scaleCorrection, textures } = source.flags.dnd5e.tokenRing;
+      source.ring = { enabled, colors, effects };
+      if ( textures ) source.ring.subject =  { texture: textures.subject };
+    }
+    return super.migrateData(source);
+  }
+
+  /* -------------------------------------------- */
   /*  Methods                                     */
   /* -------------------------------------------- */
 

@@ -349,8 +349,7 @@ Hooks.once("setup", function() {
     .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
 
   // Configure token rings
-  CONFIG.DND5E.tokenRings.shaderClass ??= game.release.generation < 12
-    ? canvas.TokenRingSamplerShaderV11 : canvas.TokenRingSamplerShader;
+  CONFIG.DND5E.tokenRings.shaderClass ??= canvas.TokenRingSamplerShaderV11;
   CONFIG.Token.ringClass.initialize();
 });
 
