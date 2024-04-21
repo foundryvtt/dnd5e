@@ -642,25 +642,6 @@ DND5E.actorSizes = {
   }
 };
 preLocalize("actorSizes", { keys: ["label", "abbreviation"] });
-patchConfig("actorSizes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
-
-/**
- * Default token image size for the values of `DND5E.actorSizes`.
- * @enum {number}
- * @deprecated since DnD5e 3.0, available until DnD5e 3.2
- */
-Object.defineProperty(DND5E, "tokenSizes", {
-  get() {
-    foundry.utils.logCompatibilityWarning(
-      "DND5E.tokenSizes has been deprecated and is now accessible through the .token property on DND5E.actorSizes.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-    );
-    return Object.entries(DND5E.actorSizes).reduce((obj, [k, v]) => {
-      obj[k] = v.token ?? 1;
-      return obj;
-    }, {});
-  }
-});
 
 /* -------------------------------------------- */
 /*  Canvas                                      */
@@ -816,7 +797,6 @@ DND5E.creatureTypes = {
   }
 };
 preLocalize("creatureTypes", { keys: ["label", "plural"], sort: true });
-patchConfig("creatureTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 
@@ -866,19 +846,6 @@ DND5E.itemRarity = {
   artifact: "DND5E.ItemRarityArtifact"
 };
 preLocalize("itemRarity");
-
-/* -------------------------------------------- */
-
-/**
- * The limited use periods that support a recovery formula.
- * @deprecated since DnD5e 3.1, available until DnD5e 3.3
- * @enum {string}
- */
-DND5E.limitedUseFormulaPeriods = {
-  charges: "DND5E.Charges",
-  dawn: "DND5E.Dawn",
-  dusk: "DND5E.Dusk"
-};
 
 /* -------------------------------------------- */
 
@@ -1147,7 +1114,6 @@ DND5E.consumableTypes = {
     label: "DND5E.ConsumableTrinket"
   }
 };
-patchConfig("consumableTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 preLocalize("consumableTypes", { key: "label", sort: true });
 preLocalize("consumableTypes.ammo.subtypes", { sort: true });
 preLocalize("consumableTypes.poison.subtypes", { sort: true });
@@ -1541,20 +1507,6 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 /* -------------------------------------------- */
 
 /**
- * Types of damage that are considered physical.
- * @deprecated since DnD5e 3.0, available until DnD5e 3.2
- * @enum {string}
- */
-DND5E.physicalDamageTypes = {
-  bludgeoning: "DND5E.DamageBludgeoning",
-  piercing: "DND5E.DamagePiercing",
-  slashing: "DND5E.DamageSlashing"
-};
-preLocalize("physicalDamageTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
  * Configuration data for damage types.
  *
  * @typedef {object} DamageTypeConfiguration
@@ -1652,7 +1604,6 @@ DND5E.damageTypes = {
     color: new Color(0x708090)
   }
 };
-patchConfig("damageTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 preLocalize("damageTypes", { keys: ["label"], sort: true });
 
 /* -------------------------------------------- */
@@ -1675,7 +1626,6 @@ DND5E.healingTypes = {
     color: new Color(0x4B66DE)
   }
 };
-patchConfig("healingTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 preLocalize("healingTypes", { keys: ["label"] });
 
 /* -------------------------------------------- */
@@ -1810,15 +1760,6 @@ DND5E.encumbrance = {
     metric: 1000 // 1000 kg in a metric ton
   }
 };
-Object.defineProperty(DND5E.encumbrance, "strMultiplier", {
-  get() {
-    foundry.utils.logCompatibilityWarning(
-      "`DND5E.encumbrance.strMultiplier` has been moved to `DND5E.encumbrance.threshold.maximum`.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-    );
-    return this.threshold.maximum;
-  }
-});
 preLocalize("encumbrance.effects", { key: "name" });
 
 /* -------------------------------------------- */
@@ -2315,7 +2256,6 @@ DND5E.spellSchools = {
   }
 };
 preLocalize("spellSchools", { key: "label", sort: true });
-patchConfig("spellSchools", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 
@@ -2369,47 +2309,6 @@ DND5E.weaponTypes = {
   siege: "DND5E.WeaponSiege"
 };
 preLocalize("weaponTypes");
-
-/* -------------------------------------------- */
-
-/**
- * A subset of weapon properties that determine the physical characteristics of the weapon.
- * These properties are used for determining physical resistance bypasses.
- * @deprecated since DnD5e 3.0, available until DnD5e 3.2
- * @enum {string}
- */
-DND5E.physicalWeaponProperties = {
-  ada: "DND5E.WeaponPropertiesAda",
-  mgc: "DND5E.WeaponPropertiesMgc",
-  sil: "DND5E.WeaponPropertiesSil"
-};
-preLocalize("physicalWeaponProperties", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * The set of weapon property flags which can exist on a weapon.
- * @deprecated since DnD5e 3.0, available until DnD5e 3.2
- * @enum {string}
- */
-DND5E.weaponProperties = {
-  ...DND5E.physicalWeaponProperties,
-  amm: "DND5E.WeaponPropertiesAmm",
-  fin: "DND5E.WeaponPropertiesFin",
-  fir: "DND5E.WeaponPropertiesFir",
-  foc: "DND5E.WeaponPropertiesFoc",
-  hvy: "DND5E.WeaponPropertiesHvy",
-  lgt: "DND5E.WeaponPropertiesLgt",
-  lod: "DND5E.WeaponPropertiesLod",
-  rch: "DND5E.WeaponPropertiesRch",
-  rel: "DND5E.WeaponPropertiesRel",
-  ret: "DND5E.WeaponPropertiesRet",
-  spc: "DND5E.WeaponPropertiesSpc",
-  thr: "DND5E.WeaponPropertiesThr",
-  two: "DND5E.WeaponPropertiesTwo",
-  ver: "DND5E.WeaponPropertiesVer"
-};
-preLocalize("weaponProperties", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -2708,7 +2607,6 @@ DND5E.conditionTypes = {
   }
 };
 preLocalize("conditionTypes", { key: "label", sort: true });
-patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 

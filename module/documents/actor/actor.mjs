@@ -917,14 +917,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const hp = this.system.attributes.hp;
     if ( !hp ) return this; // Group actors don't have HP at the moment
 
-    if ( foundry.utils.getType(options) !== "Object" ) {
-      foundry.utils.logCompatibilityWarning(
-        "Actor5e.applyDamage now takes an options object as its second parameter with `multiplier` as an parameter.",
-        { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-      );
-      options = { multiplier: options };
-    }
-
     if ( Number.isNumeric(damages) ) {
       damages = [{ value: damages }];
       options.ignore ??= true;
@@ -2774,22 +2766,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
   /*  Conversion & Transformation                 */
-  /* -------------------------------------------- */
-
-  /**
-   * Convert all carried currency to the highest possible denomination using configured conversion rates.
-   * See CONFIG.DND5E.currencies for configuration.
-   * @returns {Promise<Actor5e>}
-   * @deprecated since DnD5e 3.0, targeted for removal in DnD5e 3.2.
-   */
-  convertCurrency() {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e.convertCurrency has been moved to CurrencyManager.convertCurrency.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-    );
-    return CurrencyManager.convertCurrency(this);
-  }
-
   /* -------------------------------------------- */
 
   /**

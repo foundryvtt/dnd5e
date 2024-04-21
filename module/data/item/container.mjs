@@ -82,23 +82,6 @@ export default class ContainerData extends ItemDataModel.mixin(
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  prepareDerivedData() {
-    const system = this;
-    Object.defineProperty(this.capacity, "weightless", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `system.capacity.weightless` value on containers has migrated to the 'weightlessContents' property.",
-          { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-        );
-        return system.properties.has("weightlessContents");
-      },
-      configurable: true
-    });
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   async getFavoriteData() {
     const data = super.getFavoriteData();

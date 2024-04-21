@@ -239,19 +239,4 @@ export default class EquipmentData extends ItemDataModel.mixin(
     const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does this armor impose disadvantage on stealth checks?
-   * @type {boolean}
-   * @deprecated since DnD5e 3.0, available until DnD5e 3.2
-   */
-  get stealth() {
-    foundry.utils.logCompatibilityWarning(
-      "The `system.stealth` value on equipment has migrated to the 'stealthDisadvantage' property.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-    );
-    return this.properties.has("stealthDisadvantage");
-  }
 }

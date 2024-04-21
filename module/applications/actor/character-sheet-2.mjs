@@ -1,6 +1,5 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { setTheme } from "../../settings.mjs";
 import { formatNumber, simplifyBonus, staticID } from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";

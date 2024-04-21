@@ -338,27 +338,4 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   get isActive() {
     return !!this.activation.type;
   }
-
-  /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since DnD5e 3.0, available until DnD5e 3.2
-   * @ignore
-   */
-  get activatedEffectChatProperties() {
-    foundry.utils.logCompatibilityWarning(
-      "ActivatedEffectTemplate#activatedEffectChatProperties is deprecated. "
-      + "Please use ActivatedEffectTemplate#activatedEffectCardProperties.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
-    );
-    return [
-      this.parent.labels.activation + (this.activation.condition ? ` (${this.activation.condition})` : ""),
-      this.parent.labels.target,
-      this.parent.labels.range,
-      this.parent.labels.duration
-    ];
-  }
-
 }

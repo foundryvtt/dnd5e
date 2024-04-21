@@ -78,21 +78,4 @@ export default class EquippableItemTemplate extends SystemDataModel {
     const attunement = this.attunement !== CONFIG.DND5E.attunementTypes.REQUIRED;
     return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
   }
-
-  /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since DnD5e 3.0, available until DnD5e 3.2
-   * @ignore
-   */
-  get equippableItemChatProperties() {
-    foundry.utils.logCompatibilityWarning(
-      "EquippableItemTemplate#equippableItemChatProperties is deprecated. "
-      + "Please use EquippableItemTemplate#equippableItemCardProperties.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
-    );
-    return this.equippableItemCardProperties;
-  }
 }

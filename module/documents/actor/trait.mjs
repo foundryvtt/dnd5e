@@ -274,7 +274,7 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
           foundry.utils.setProperty(entry, "system.type.value", val);
           foundry.utils.logCompatibilityWarning(
             `The '${field}' property has been deprecated in favor of a standardized \`system.type.value\` property.`,
-            { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
+            { since: "DnD5e 3.0", until: "DnD5e 3.4", once: true }
           );
         }
       }

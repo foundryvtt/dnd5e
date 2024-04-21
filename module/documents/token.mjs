@@ -1,5 +1,4 @@
 import TokenSystemFlags from "../data/token/token-system-flags.mjs";
-import { staticID } from "../utils.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
