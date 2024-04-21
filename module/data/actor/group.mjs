@@ -203,7 +203,10 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
     try {
       const placements = await TokenPlacement.place({
-        tokens: Object.values(this.members).map(m => m.actor.prototypeToken)
+        tokens: Object.values(this.members).flatMap(({ actor, quantity }) => {
+          if (!(quantity?.value)) return [];
+          return quantity.value === 1 ? actor.prototypeToken : new Array(quantity.value).fill(actor.prototypeToken);
+        })
       });
       for ( const placement of placements ) {
         const actor = placement.prototypeToken.actor;
