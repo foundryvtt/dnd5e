@@ -112,6 +112,10 @@ export default class ItemSheet5e extends ItemSheet {
       isPhysical: item.system.hasOwnProperty("quantity"),
 
       // Action Details
+      availableActionTypes: Object.entries(CONFIG.DND5E.itemActionTypes).reduce((obj, [k, v]) => {
+        if ( k !== "ench" || !this.item.system.metadata?.enchantable ) obj[k] = v;
+        return obj;
+      }, {}),
       isHealing: item.system.actionType === "heal",
       isFlatDC: item.system.save?.scaling === "flat",
       isLine: ["line", "wall"].includes(item.system.target?.type),
@@ -132,7 +136,7 @@ export default class ItemSheet5e extends ItemSheet {
       advancement: this._getItemAdvancement(item),
 
       // Prepare Active Effects
-      effects: EffectsElement.prepareCategories(item.effects),
+      effects: EffectsElement.prepareCategories(item.effects, { parent: this.item }),
       elements: this.options.elements,
 
       concealDetails: !game.user.isGM && (this.document.system.identified === false)

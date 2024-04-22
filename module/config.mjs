@@ -829,10 +829,11 @@ DND5E.itemActionTypes = {
   rwak: "DND5E.ActionRWAK",
   msak: "DND5E.ActionMSAK",
   rsak: "DND5E.ActionRSAK",
+  abil: "DND5E.ActionAbil",
   save: "DND5E.ActionSave",
+  ench: "DND5E.ActionEnch",
   summ: "DND5E.ActionSumm",
   heal: "DND5E.ActionHeal",
-  abil: "DND5E.ActionAbil",
   util: "DND5E.ActionUtil",
   other: "DND5E.ActionOther"
 };
@@ -1241,6 +1242,13 @@ DND5E.featureTypes = {
   race: {
     label: "DND5E.Feature.Race"
   },
+  enchantment: {
+    label: "DND5E.Enchantment.Label",
+    subtypes: {
+      artificerInfusion: "DND5E.Feature.Class.ArtificerInfusion",
+      rune: "DND5E.Feature.Class.Rune"
+    }
+  },
   feat: {
     label: "DND5E.Feature.Feat"
   },
@@ -1255,6 +1263,7 @@ DND5E.featureTypes = {
 };
 preLocalize("featureTypes", { key: "label" });
 preLocalize("featureTypes.class.subtypes", { sort: true });
+preLocalize("featureTypes.enchantment.subtypes", { sort: true });
 preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
 
 /* -------------------------------------------- */
