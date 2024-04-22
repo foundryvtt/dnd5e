@@ -8,7 +8,7 @@
     </h3>
     <ul class="profiles flexcol">
         {{#each profiles}}
-        <li class="profile" data-profile-id="{{ id }}">
+        <li class="profile dnd5e2" data-profile-id="{{ id }}">
             <div class="details flexrow">
                 {{#if document}}
                 {{{ dnd5e-linkForUuid uuid }}}
@@ -28,11 +28,41 @@
             </div>
             <input type="hidden" name="profiles.{{ id }}._id" value="{{ id }}">
             <input type="hidden" name="profiles.{{ id }}.uuid" value="{{ uuid }}">
+            <div class="additional-tray collapsible {{ collapsed }}">
+                <label class="roboto-upper">
+                    <i class="fa-solid fa-gears" inert></i>
+                    <span>{{ localize "DND5E.Summoning.AdditionalSettings" }}</span>
+                    <i class="fas fa-caret-down" inert></i>
+                </label>
+                <div class="collapsible-content">
+                    <div class="wrapper">
+                        <div class="form-group">
+                            <label>{{ localize "DND5E.Summoning.Level.Label" }}</label>
+                            <div class="form-fields">
+                                <input type="number" name="profiles.{{ id }}.level.min" min="1" step="1" placeholder="0"
+                                       value="{{ level.min }}" aria-label="{{ localize 'DND5E.Summoning.Level.Min' }}">
+                                <span class="sep">&ndash;</span>
+                                <input type="number" name="profiles.{{ id }}.level.max" min="1" step="1" placeholder="∞"
+                                       value="{{ level.max }}" aria-label="{{ localize 'DND5E.Summoning.Level.Max' }}">
+                            </div>
+                            <p class="hint">{{ localize "DND5E.Summoning.Level.Hint" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </li>
         {{else}}
         <li class="empty">{{ localize "DND5E.Summoning.Profile.Empty" }}</li>
         {{/each}}
     </ul>
+
+    {{#unless @root.isSpell}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.ClassIdentifier" }}</label>
+        <input type="text" name="classIdentifier" value="{{ summons.classIdentifier }}">
+        <p class="hint">{{ localize "DND5E.Summoning.Level.IdentifierHint" }}</p>
+    </div>
+    {{/unless}}
 
     <h3 class="form-header">{{ localize "DND5E.Summoning.CreatureChanges.Label" }}</h3>
     <p class="hint">{{ localize "DND5E.Summoning.CreatureChanges.Hint" }}</p>

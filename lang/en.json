@@ -1484,6 +1484,7 @@
     "Remove": "Remove Profile",
     "Summon": "Summon"
   },
+  "AdditionalSettings": "Additional Settings",
   "Bonuses": {
     "ArmorClass": {
       "Label": "Bonus Armor Class",
@@ -1524,6 +1525,13 @@
   "ItemChanges": {
     "Label": "Item Changes",
     "Hint": "Changes made to items on the summoned creature."
+  },
+  "Level": {
+    "Label": "Level Limit",
+    "Max": "Maximum Level",
+    "Min": "Minimum Level",
+    "Hint": "Range of levels required to use this profile.",
+    "IdentifierHint": "Identifier used to determine whether the character level or a specific class level should be used for profile level limits."
   },
   "Match": {
     "Attacks": {
