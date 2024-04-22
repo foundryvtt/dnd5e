@@ -367,7 +367,7 @@ export default class ItemSheet5e extends ItemSheet {
     const overrides = Object.keys(foundry.utils.flattenObject(this.item.overrides ?? {}));
     this.item.system.getItemOverrides?.(overrides);
     if ( "properties" in this.item.system ) {
-      ActiveEffect5e.addOverriddenChoices(this.item, "properties", "system.properties", overrides);
+      ActiveEffect5e.addOverriddenChoices(this.item, "system.properties", "system.properties", overrides);
     }
     return overrides;
   }
