@@ -13,21 +13,21 @@
         </select>
     </label>
     {{/unless}}
-    
+
     {{{ description }}}
-    
+
     {{#each sections}}
-        <h{{ @root.title.level3 }}>{{ header }}</h{{ @root.title.level3 }}>
-        <ul>
+    <h{{ @root.title.level3 }}>{{ header }}</h{{ @root.title.level3 }}>
+    <ul>
         {{#each spells}}
-            <li>{{{ dnd5e-linkForUuid uuid }}}</li>
+        <li>{{{ display }}}</li>
         {{/each}}
-        </ul>
+    </ul>
     {{else}}
-        <ul>
-            {{#each spells}}
-            <li>{{{ dnd5e-linkForUuid uuid }}}</li>
-            {{/each}}
-        </ul>
+    <ul>
+        {{#each spells}}
+        <li>{{{ display }}}</li>
+        {{/each}}
+    </ul>
     {{/each}}
 </div>

@@ -1,6 +1,7 @@
 import SpellListJournalPageData from "../../data/journal/spells.mjs";
 import { linkForUuid, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
+import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
 
 /**
  * Journal entry page the displays a list of spells for a class, subclass, background, or something else.
@@ -69,7 +70,8 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     context.spells = await this.prepareSpells(context.grouping);
 
     context.sections = {};
-    for ( const spell of context.spells ) {
+    for ( const data of context.spells ) {
+      const spell = data.spell ?? data.unlinked;
       let section;
       switch ( context.grouping ) {
         case "level":
@@ -87,7 +89,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
         default:
           continue;
       }
-      section.spells.push(spell);
+      section.spells.push(data);
     }
     if ( context.grouping === "school" ) context.sections = sortObjectEntries(context.sections, "header");
 
@@ -114,18 +116,46 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       default: fields = []; break;
     }
 
+    const unlinkedData = {};
+    const uuids = new Set(this.document.system.spells);
+    for ( const unlinked of this.document.system.unlinkedSpells ) {
+      if ( unlinked.source.uuid ) {
+        uuids.add(unlinked.source.uuid);
+        unlinkedData[unlinked.source.uuid] = unlinked;
+      }
+    }
+
     let collections = new Collection();
-    for ( const uuid of this.document.system.spells ) {
+    for ( const uuid of uuids ) {
       const { collection } = foundry.utils.parseUuid(uuid);
       if ( collection && !collections.has(collection) ) {
         if ( collection instanceof Items5e ) collections.set(collection, collection);
         else collections.set(collection, collection.getIndex({ fields }));
-      }
+      } else if ( !collection ) uuids.delete(uuid);
     }
 
-    return (await Promise.all(collections.values()))
-      .flatMap(c => c.filter(s => this.document.system.spells.has(s.uuid)))
-      .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
+    const spells = (await Promise.all(collections.values())).flatMap(c => c.filter(s => uuids.has(s.uuid)));
+
+    for ( const unlinked of this.document.system.unlinkedSpells ) {
+      if ( !uuids.has(unlinked.source.uuid) ) spells.push({ unlinked });
+    }
+
+    return spells
+      .map(spell => {
+        const data = spell.unlinked ? spell : { spell };
+        data.unlinked ??= unlinkedData[data.spell?.uuid];
+        data.name = data.spell?.name ?? data.unlinked?.name;
+        if ( data.spell ) {
+          data.display = linkForUuid(data.spell.uuid, {
+            tooltip: '<section class="loading"><i class="fas fa-spinner fa-spin-pulse"></i></section>'
+          });
+        } else {
+          data.display = `<span class="unlinked-spell"
+            data-tooltip="${data.unlinked.source.label}">${data.unlinked.name ?? "—"}*</span>`;
+        }
+        return data;
+      })
+      .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
@@ -141,25 +171,42 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       this.grouping = (event.target.value === this.document.system.grouping) ? null : event.target.value;
       this.object.parent.sheet.render();
     });
-    html.querySelectorAll(".item-delete").forEach(e => {
-      e.addEventListener("click", this._onDeleteItem.bind(this));
+    html.querySelectorAll("[data-action]").forEach(e => {
+      e.addEventListener("click", this._onAction.bind(this));
     });
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle deleting a dropped spell.
-   * @param {Event} event  This triggering click event.
-   * @returns {JournalSpellListPageSheet}
+   * Handle performing an action.
+   * @param {PointerEvent} event  This triggering click event.
    */
-  async _onDeleteItem(event) {
+  async _onAction(event) {
     event.preventDefault();
-    const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
-    if ( !uuidToDelete ) return this;
-    const spellSet = this.document.system.spells.filter(s => s !== uuidToDelete);
-    await this.document.update({"system.spells": Array.from(spellSet)});
-    this.render();
+    const { action } = event.target.dataset;
+
+    const { itemUuid, unlinkedId } = event.target.closest(".item")?.dataset ?? {};
+    switch ( action ) {
+      case "add-unlinked":
+        await this.document.update({"system.unlinkedSpells": [...this.document.system.unlinkedSpells, {}]});
+        const id = this.document.toObject().system.unlinkedSpells.pop()._id;
+        new SpellsUnlinkedConfig(id, this.document).render(true);
+        break;
+      case "delete":
+        if ( itemUuid ) {
+          const spellSet = this.document.system.spells.filter(s => s !== itemUuid);
+          await this.document.update({"system.spells": Array.from(spellSet)});
+        } else if ( unlinkedId ) {
+          const unlinkedSet = this.document.system.unlinkedSpells.filter(s => s._id !== unlinkedId);
+          await this.document.update({"system.unlinkedSpells": Array.from(unlinkedSet)});
+        }
+        this.render();
+        break;
+      case "edit-unlinked":
+        if ( unlinkedId ) new SpellsUnlinkedConfig(unlinkedId, this.document).render(true);
+        break;
+    }
   }
 
   /* -------------------------------------------- */

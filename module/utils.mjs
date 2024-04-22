@@ -175,16 +175,18 @@ export function indexFromUuid(uuid) {
 
 /**
  * Creates an HTML document link for the provided UUID.
- * @param {string} uuid  UUID for which to produce the link.
- * @returns {string}     Link to the item or empty string if item wasn't found.
+ * @param {string} uuid               UUID for which to produce the link.
+ * @param {object} [options]
+ * @param {string} [options.tooltip]  Tooltip to add to the link.
+ * @returns {string}                  Link to the item or empty string if item wasn't found.
  */
-export function linkForUuid(uuid) {
-  if ( game.release.generation < 12 ) {
-    return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
-  }
+export function linkForUuid(uuid, { tooltip }={}) {
+  let element;
+
+  if ( game.release.generation < 12 ) element = TextEditor._createContentLink(["", "UUID", uuid]);
 
   // TODO: When v11 support is dropped we can make this method async and return to using TextEditor._createContentLink.
-  if ( uuid.startsWith("Compendium.") ) {
+  else if ( uuid.startsWith("Compendium.") ) {
     let [, scope, pack, documentName, id] = uuid.split(".");
     if ( !CONST.PRIMARY_DOCUMENT_TYPES.includes(documentName) ) id = documentName;
     const data = {
@@ -193,9 +195,13 @@ export function linkForUuid(uuid) {
     };
     TextEditor._createLegacyContentLink("Compendium", [scope, pack, id].join("."), "", data);
     data.dataset.link = "";
-    return TextEditor.createAnchor(data).outerHTML;
+    element = TextEditor.createAnchor(data);
   }
-  return fromUuidSync(uuid).toAnchor().outerHTML;
+
+  else element = fromUuidSync(uuid).toAnchor();
+
+  if ( tooltip ) element.dataset.tooltip = tooltip;
+  return element.outerHTML;
 }
 
 /* -------------------------------------------- */
@@ -414,7 +420,7 @@ export function registerHandlebarsHelpers() {
     "dnd5e-concealSection": concealSection,
     "dnd5e-dataset": dataset,
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
-    "dnd5e-linkForUuid": linkForUuid,
+    "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-itemContext": itemContext,
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
     "dnd5e-textFormat": formatText
