@@ -1,3 +1,4 @@
+import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
 import ActorMovementConfig from "../actor/movement-config.mjs";
@@ -143,9 +144,14 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
+      const overrides = this._getItemOverrides();
       context.properties = item.system.validProperties.reduce((obj, k) => {
         const v = CONFIG.DND5E.itemProperties[k];
-        obj[k] = { label: v.label, selected: item.system.properties.has(k) };
+        obj[k] = {
+          label: v.label,
+          selected: item.system.properties.has(k),
+          disabled: overrides?.includes(`properties.${k}`)
+        };
         return obj;
       }, {});
       if ( item.type !== "spell" ) context.properties = sortObjectEntries(context.properties, "label");
@@ -353,6 +359,22 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve the list of fields that are currently modified by Active Effects on the Item.
+   * @returns {string[]}
+   * @protected
+   */
+  _getItemOverrides() {
+    const overrides = Object.keys(foundry.utils.flattenObject(this.item.overrides ?? {}));
+    this.item.system.getItemOverrides?.(overrides);
+    if ( "properties" in this.item.system ) {
+      ActiveEffect5e.addOverriddenChoices(this.item, "system.properties", "system.properties", overrides);
+    }
+    return overrides;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the Array of item properties which are used in the small sidebar of the description tab.
    * @returns {string[]}   List of property labels to be shown.
    * @private
@@ -434,7 +456,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Handle properties
     if ( foundry.utils.hasProperty(formData, "system.properties") ) {
       const keys = new Set(Object.keys(formData.system.properties));
-      const preserve = this.object.system.properties.difference(keys);
+      const preserve = new Set(this.item._source.system.properties ?? []).difference(keys);
       formData.system.properties = [...filteredKeys(formData.system.properties), ...preserve];
     }
 
@@ -492,9 +514,20 @@ export default class ItemSheet5e extends ItemSheet {
         if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
       });
       html.find(".description-edit").click(event => {
+        if ( event.currentTarget.ariaDisabled ) return;
         this.editingDescriptionTarget = event.currentTarget.dataset.target;
         this.render();
       });
+      for ( const override of this._getItemOverrides() ) {
+        for ( const element of html[0].querySelectorAll(`[name="${override}"]`) ) {
+          element.disabled = true;
+          element.dataset.tooltip = "DND5E.Enchantment.Warning.Override";
+        }
+        for ( const element of html[0].querySelectorAll(`[data-target="${override}"]`) ) {
+          element.ariaDisabled = true;
+          element.dataset.tooltip = "DND5E.Enchantment.Warning.Override";
+        }
+      }
     }
 
     // Advancement context menu

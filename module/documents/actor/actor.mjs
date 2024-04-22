@@ -143,7 +143,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
     this.sourcedItems = new Map();
+    this._embeddedPreparation = true;
     super.prepareEmbeddedDocuments();
+    delete this._embeddedPreparation;
   }
 
   /* --------------------------------------------- */

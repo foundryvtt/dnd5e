@@ -110,7 +110,8 @@
                 {{/if}}
                 {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                    <input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}>
+                    {{ label }}
                 </label>
                 {{/each}}
             </div>

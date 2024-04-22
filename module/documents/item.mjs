@@ -26,6 +26,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   _classLink;
 
   /* -------------------------------------------- */
+
+  /**
+   * An object that tracks which tracks the changes to the data model which were applied by active effects
+   * @type {object}
+   */
+  overrides = this.overrides ?? {};
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
@@ -382,6 +390,53 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
+  /*  Active Effects                              */
+  /* -------------------------------------------- */
+
+  /**
+   * Get all ActiveEffects that may apply to this Item.
+   * @yields {ActiveEffect5e}
+   * @returns {Generator<ActiveEffect5e, void, void>}
+   */
+  *allApplicableEffects() {
+    for ( const effect of this.effects ) {
+      if ( effect.flags.dnd5e?.type === "enchantment" ) yield effect;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply any transformation to the Item data which are caused by enchantment Effects.
+   */
+  applyActiveEffects() {
+    const overrides = {};
+
+    // Organize non-disabled effects by their application priority
+    const changes = [];
+    for ( const effect of this.allApplicableEffects() ) {
+      if ( !effect.active ) continue;
+      changes.push(...effect.changes.map(change => {
+        const c = foundry.utils.deepClone(change);
+        c.effect = effect;
+        c.priority ??= c.mode * 10;
+        return c;
+      }));
+    }
+    changes.sort((a, b) => a.priority - b.priority);
+
+    // Apply all changes
+    for ( const change of changes ) {
+      if ( !change.key ) continue;
+      const changes = change.effect.apply(this, change);
+      Object.assign(overrides, changes);
+    }
+
+    // Expand the set of final overrides
+    this.overrides = foundry.utils.expandObject(overrides);
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Should this item's active effects be suppressed.
@@ -396,6 +451,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
   /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareEmbeddedDocuments() {
+    super.prepareEmbeddedDocuments();
+    if ( !this.actor || this.actor._embeddedPreparation ) this.applyActiveEffects();
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

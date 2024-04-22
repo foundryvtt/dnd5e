@@ -183,8 +183,13 @@
             inset-inline-end: 0;
             padding: 6px;
           }
+          
+          &[aria-disabled] {
+            cursor: not-allowed;
+            &:hover { text-shadow: none; }
+          }
         }
-        &:hover .description-edit {
+        &:hover .description-edit:not[aria-disabled] {
           opacity: 100%;
         }
       }

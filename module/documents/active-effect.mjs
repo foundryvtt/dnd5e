@@ -283,6 +283,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
+    if ( this.getFlag("dnd5e", "type") === "enchantment" ) return;
     if ( this.parent instanceof dnd5e.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
   }
 
@@ -311,6 +312,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    if ( this.getFlag("dnd5e", "type") === "enchantment" ) this.transfer = false;
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
   }
 
@@ -605,6 +607,26 @@ export default class ActiveEffect5e extends ActiveEffect {
       if ( effect ) arr.push(effect);
       return arr;
     }, []);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Helper method to add choices that have been overridden by an active effect. Used to determine what fields might
+   * need to be disabled because they are overridden by an active effect in a way not easily determined by looking at
+   * the `Document#overrides` data structure.
+   * @param {Actor5e|Item5e} doc  Document from which to determine the overrides.
+   * @param {string} prefix       The initial form prefix under which the choices are grouped.
+   * @param {string} path         Path in document data.
+   * @param {string[]} overrides  The list of fields that are currently modified by Active Effects. *Will be mutated.*
+   */
+  static addOverriddenChoices(doc, prefix, path, overrides) {
+    const source = new Set(foundry.utils.getProperty(doc._source, path) ?? []);
+    const current = foundry.utils.getProperty(doc, path) ?? new Set();
+    const delta = current.symmetricDifference(source);
+    for ( const choice of delta ) overrides.push(`${prefix}.${choice}`);
   }
 
   /* -------------------------------------------- */
