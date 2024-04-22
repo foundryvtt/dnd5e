@@ -16,7 +16,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @type {boolean}
    */
   get hasDynamicRing() {
-    return !!this.getFlag("dnd5e", "tokenRing.enabled");
+    if ( game.release.generation < 12 ) return !!this.getFlag("dnd5e", "tokenRing.enabled");
+    return this.object?.hasDynamicRing;
   }
 
   /* -------------------------------------------- */
@@ -54,19 +55,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       if ( item.type === "backpack" ) item.type = "container";
     }
     return super._initializeSource(data, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static migrateData(source) {
-    // Migrate v11 flags to core token ring.
-    if ( (game.release.generation > 11) && source.flags?.dnd5e?.tokenRing ) {
-      const { enabled, colors, effects, scaleCorrection, textures } = source.flags.dnd5e.tokenRing;
-      source.ring = { enabled, colors, effects };
-      if ( textures ) source.ring.subject =  { texture: textures.subject };
-    }
-    return super.migrateData(source);
   }
 
   /* -------------------------------------------- */
@@ -201,7 +189,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /** @override */
   prepareData() {
     super.prepareData();
-    if ( !this.getFlag("dnd5e", "tokenRing.enabled") ) return;
+    if ( !this.hasDynamicRing ) return;
     let size = this.baseActor?.system.traits?.size;
     if ( !this.actorLink ) {
       const deltaSize = this.delta.system.traits?.size;

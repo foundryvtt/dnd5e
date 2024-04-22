@@ -8,7 +8,7 @@ export default class TokenConfig5e extends TokenConfig {
   /** @inheritdoc */
   static get defaultOptions() {
     const options = super.defaultOptions;
-    if ( !game.settings.get("dnd5e", "disableTokenRings") ) options.tabs.push({
+    options.tabs.push({
       navSelector: '.tabs[data-group="appearance"]', contentSelector: '.tab[data-tab="appearance"]', initial: "token"
     });
     return options;
@@ -51,9 +51,7 @@ export default class TokenConfig5e extends TokenConfig {
    * @protected
    */
   async _addTokenRingConfiguration(html) {
-    html.querySelector('.tab[data-tab="appearance"] fieldset:last-child')?.remove();
-
-    if ( game.settings.get("dnd5e", "disableTokenRings") ) return;
+    if ( game.release.generation > 11 ) return;
 
     const tab = html.querySelector('.tab[data-tab="appearance"]');
 

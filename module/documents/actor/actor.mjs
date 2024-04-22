@@ -3365,7 +3365,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     for ( const token of tokens ) {
       if ( !token.object?.visible || !token.object?.renderable ) continue;
-      token.flashRing(key);
+      if ( token.hasDynamicRing ) token.flashRing(key);
       const t = token.object;
       canvas.interface.createScrollingText(t.center, value.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,

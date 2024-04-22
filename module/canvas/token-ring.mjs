@@ -319,10 +319,7 @@ export default class TokenRing {
   static initialize() {
     if ( game.release.generation > 11 ) return;
     if ( this.enabled !== null ) throw new Error("TokenRings system already initialized.");
-
-    // Check client setting
-    this.#enabled = !(game.settings.get("dnd5e", "disableTokenRings") ?? false);
-    if ( !this.enabled ) return;
+    this.#enabled = true;
 
     // Configure subject paths.
     for ( const module of game.modules ) {

@@ -382,7 +382,7 @@ export class ItemDataModel extends SystemDataModel {
   prepareBaseData() {
     if ( this.parent.isEmbedded ) {
       const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent.flags.core?.sourceId;
-      if ( sourceId ) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
+      if ( sourceId ) this.parent.actor?.sourcedItems?.set(sourceId, this.parent);
     }
   }
 
