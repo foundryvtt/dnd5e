@@ -765,7 +765,7 @@ async function enrichReference(config, label, options) {
   const span = document.createElement("span");
   span.classList.add("reference-link");
   span.append(doc.toAnchor({ name: label || doc.name }));
-  if ( isCondition ) {
+  if ( isCondition && (config.apply !== false) ) {
     const apply = document.createElement("a");
     apply.classList.add("enricher-action");
     apply.dataset.action = "apply";
