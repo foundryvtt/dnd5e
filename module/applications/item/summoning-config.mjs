@@ -52,6 +52,10 @@ export default class SummoningConfig extends DocumentSheet {
       (lhs.name || lhs.document?.name || "").localeCompare(rhs.name || rhs.document?.name || "", game.i18n.lang)
     );
     context.summons = this.document.system.summons;
+    context.creatureSizes = Object.entries(CONFIG.DND5E.actorSizes).reduce((obj, [k, c]) => {
+      obj[k] = { label: c.label, selected: context.summons?.creatureSizes.has(k) ? "selected" : "" };
+      return obj;
+    }, {});
     context.creatureTypes = Object.entries(CONFIG.DND5E.creatureTypes).reduce((obj, [k, c]) => {
       obj[k] = { label: c.label, selected: context.summons?.creatureTypes.has(k) ? "selected" : "" };
       return obj;
@@ -85,6 +89,7 @@ export default class SummoningConfig extends DocumentSheet {
   /** @inheritDoc */
   _getSubmitData(...args) {
     const data = foundry.utils.expandObject(super._getSubmitData(...args));
+    data.creatureSizes ??= [];
     data.creatureTypes ??= [];
     data.profiles = Object.values(data.profiles ?? {});
 

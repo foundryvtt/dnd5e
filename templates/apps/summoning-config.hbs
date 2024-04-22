@@ -52,6 +52,15 @@
         <p class="hint">{{ localize "DND5E.Summoning.Bonuses.HitPoints.Hint" }}</p>
     </div>
     <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.CreatureSizes.Label" }}</label>
+        <multi-select name="creatureSizes">
+            {{#each creatureSizes}}
+            <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+            {{/each}}
+        </multi-select>
+        <p class="hint">{{ localize "DND5E.Summoning.CreatureSizes.Hint" }}</p>
+    </div>
+    <div class="form-group">
         <label>{{ localize "DND5E.Summoning.CreatureTypes.Label" }}</label>
         <multi-select name="creatureTypes">
             {{#each creatureTypes}}

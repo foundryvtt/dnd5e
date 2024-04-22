@@ -2166,7 +2166,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     else needsConfiguration = true;
 
     // More than one creature type requires configuration
-    if ( item.system.summons.creatureTypes.size > 1 ) needsConfiguration = true;
+    if ( item.system.summons.creatureSizes.size > 1
+      || item.system.summons.creatureTypes.size > 1 ) needsConfiguration = true;
 
     // Show the item use dialog to get the profile and other options
     if ( needsConfiguration ) {

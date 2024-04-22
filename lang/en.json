@@ -1511,9 +1511,13 @@
     "Label": "Creature Changes",
     "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats. Summoned creature's stats can be referenced using @summon (e.g. @summon.attributes.hd.max to reference the creature's hit dice count)."
   },
+  "CreatureSizes": {
+    "Label": "Creature Sizes",
+    "Hint": "Summoned creature and token will be changed to this size. If more than one size is selected, then the player will be able to choose from these sizes when summoning."
+  },
   "CreatureTypes": {
     "Label": "Creature Types",
-    "Hint": "Summoned creature will be changed to this type. If more than one type is selected, then player will be able to choose from these types when summoning."
+    "Hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
   },
   "DisplayName": "Display Name",
   "DropHint": "Drop creature here",
