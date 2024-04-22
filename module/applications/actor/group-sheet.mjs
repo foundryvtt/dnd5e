@@ -142,7 +142,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const displayXP = !game.settings.get("dnd5e", "disableExperienceTracking");
     for ( const [index, memberData] of this.object.system.members.entries() ) {
       const member = memberData.actor;
-      const multiplier = type === "encounter" ? memberData.quantity.value : 1;
+      const multiplier = type === "encounter" ? (memberData.quantity.value ?? 1) : 1;
 
       const m = {
         index,
@@ -170,8 +170,8 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * multiplier);
       }
 
-      if ( member.type === "vehicle" ) stats.nVehicles++;
-      else stats.nMembers++;
+      if ( member.type === "vehicle" ) stats.nVehicles += multiplier;
+      else stats.nMembers += multiplier;
       sections[member.type].members.push(m);
     }
     for ( const [k, section] of Object.entries(sections) ) {
