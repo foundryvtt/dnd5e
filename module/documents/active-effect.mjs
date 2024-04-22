@@ -212,8 +212,13 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritdoc */
   _applyAdd(actor, change, current, delta, changes) {
     if ( current instanceof Set ) {
-      if ( Array.isArray(delta) ) delta.forEach(item => current.add(item));
-      else current.add(delta);
+      const handle = v => {
+        const neg = v.replace(/^\s*-\s*/, "");
+        if ( neg !== v ) current.delete(neg);
+        else current.add(v);
+      };
+      if ( Array.isArray(delta) ) delta.forEach(item => handle(item));
+      else handle(delta);
       return;
     }
     super._applyAdd(actor, change, current, delta, changes);
