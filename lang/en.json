@@ -1509,7 +1509,7 @@
   "Configuration": "Summoning Configuration",
   "CreatureChanges": {
     "Label": "Creature Changes",
-    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats."
+    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats. Summoned creature's stats can be referenced using @summon (e.g. @summon.attributes.hd.max to reference the creature's hit dice count)."
   },
   "CreatureTypes": {
     "Label": "Creature Types",

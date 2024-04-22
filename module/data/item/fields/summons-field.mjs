@@ -260,7 +260,7 @@ export class SummonsData extends foundry.abstract.DataModel {
    */
   async getChanges(actor, profile, options) {
     const updates = { effects: [], items: [] };
-    const rollData = this.item.getRollData();
+    const rollData = { ...this.item.getRollData(), summon: actor.getRollData() };
     const prof = rollData.attributes?.prof ?? 0;
 
     // Add flags
