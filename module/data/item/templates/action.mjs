@@ -69,7 +69,6 @@ export default class ActionTemplate extends ItemDataModel {
     ActionTemplate.#migrateAttack(source);
     ActionTemplate.#migrateCritical(source);
     ActionTemplate.#migrateSave(source);
-    ActionTemplate.#migrateDamage(source);
   }
 
   /* -------------------------------------------- */
@@ -126,18 +125,6 @@ export default class ActionTemplate extends ItemDataModel {
       if ( source.save.dc === "" ) source.save.dc = null;
       else if ( Number.isNumeric(source.save.dc) ) source.save.dc = Number(source.save.dc);
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate damage parts.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateDamage(source) {
-    if ( !("damage" in source) ) return;
-    source.damage ??= {};
-    source.damage.parts ??= [];
   }
 
   /* -------------------------------------------- */

@@ -460,7 +460,9 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Handle Damage array
     const damage = formData.system?.damage;
-    if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+    if ( damage && !foundry.utils.getProperty(this.item.overrides, "system.damage.parts") ) {
+      damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+    }
 
     // Handle properties
     if ( foundry.utils.hasProperty(formData, "system.properties") ) {
