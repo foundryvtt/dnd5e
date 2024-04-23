@@ -2480,7 +2480,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else max = Math.max(0, hp.effectiveMax);
     updates["system.attributes.hp.value"] = max;
     if ( recoverTemp ) updates["system.attributes.hp.temp"] = 0;
-    return { updates, hitPointsRecovered: max - hp.value };
+    return { updates, hitPointsRecovered: Math.max(0, max - hp.value) };
   }
 
   /* -------------------------------------------- */
