@@ -69,7 +69,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       if ( i ) {
         i.checked = this.selected.has(i.uuid);
         i.disabled = !i.checked && choices.full;
-        const validLevel = (i.system.prerequisites.level ?? -Infinity) <= this.level;
+        const validLevel = (i.system.prerequisites?.level ?? -Infinity) <= this.level;
         if ( !previouslySelected.has(i.uuid) && validLevel ) items.push(i);
       }
       return items;
