@@ -3,7 +3,7 @@ import { staticID } from "../../../utils.mjs";
 import { FormulaField, IdentifierField } from "../../fields.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, SetField, StringField
+  ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
 /**
@@ -11,7 +11,7 @@ const {
  *
  * @param {object} [options={}]  Options to configure this field's behavior.
  */
-export default class SummonsField extends foundry.data.fields.EmbeddedDataField {
+export default class SummonsField extends EmbeddedDataField {
   constructor(options={}) {
     super(SummonsData, foundry.utils.mergeObject({ required: false, nullable: true, initial: null }, options));
   }

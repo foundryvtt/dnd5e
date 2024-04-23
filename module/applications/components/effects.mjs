@@ -123,7 +123,7 @@ export default class EffectsElement extends HTMLElement {
     };
 
     // Iterate over active effects, classifying them into categories
-    const enchantmentParent = (parent?.system.type?.value === "enchantment") || (parent?.system.actionType === "ench");
+    const enchantmentParent = parent?.system.isEnchantment;
     for ( const e of effects ) {
       if ( (e.parent.system?.identified === false) && !game.user.isGM ) continue;
       if ( e.getFlag("dnd5e", "type") === "enchantment" ) {

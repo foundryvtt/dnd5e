@@ -120,6 +120,19 @@
     </div>
 </div>
 
+{{!-- Enchantment --}}
+{{#if system.isEnchantment}}
+<div class="form-group enchantment">
+    <label>{{ localize "DND5E.Enchantment.Label" }}</label>
+    <div class="form-fields">
+        <a class="config-button" data-action="enchantment">
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+            {{ localize "DND5E.Enchantment.Action.Configure" }}
+        </a>
+    </div>
+</div>
+{{/if}}
+
 {{!-- Summoning --}}
 {{#if (eq system.actionType "summ")}}
 <div class="form-group summoning">

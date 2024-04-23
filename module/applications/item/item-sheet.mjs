@@ -9,6 +9,7 @@ import AdvancementMigrationDialog from "../advancement/advancement-migration-dia
 import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
 import SourceConfig from "../source-config.mjs";
+import EnchantmentConfig from "./enchantment-config.mjs";
 import StartingEquipmentConfig from "./starting-equipment-config.mjs";
 import SummoningConfig from "./summoning-config.mjs";
 
@@ -595,6 +596,9 @@ export default class ItemSheet5e extends ItemSheet {
     const button = event.currentTarget;
     let app;
     switch ( button.dataset.action ) {
+      case "enchantment":
+        app = new EnchantmentConfig(this.item);
+        break;
       case "movement":
         app = new ActorMovementConfig(this.item, { keyPath: "system.movement" });
         break;

@@ -398,6 +398,42 @@
   }
 
   /* ---------------------------------- */
+  /*  Lists                             */
+  /* ---------------------------------- */
+
+  .separated-list, &.separated-list {
+    padding: 0;
+    list-style: none;
+    gap: 12px;
+
+    > li:not(.empty) {
+      position: relative;
+      padding: 8px;
+      background: var(--dnd5e-color-card);
+      border: 2px solid var(--dnd5e-color-gold);
+      border-radius: 4px;
+      box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+
+      .details {
+        gap: 4px;
+        input { height: unset; }
+        input::placeholder { opacity: .5; }
+      }
+      .list-controls {
+        justify-content: flex-end;
+        gap: inherit;
+
+        button {
+          --size: 26px;
+          flex: 0 0 var(--size);
+          block-size: var(--size);
+          inline-size: var(--size);
+        }
+      }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Form Elements                     */
   /* ---------------------------------- */
 

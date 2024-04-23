@@ -682,6 +682,7 @@
 "DND5E.EffectsSearch": "Search effects",
 "DND5E.Enchantment": {
   "Action": {
+    "Configure": "Configure Enchantment",
     "Create": "Create Enchantment",
     "Delete": "Delete Enchantment",
     "Disable": "Disable Enchantment",
@@ -690,12 +691,43 @@
   },
   "Category": {
     "Active": "Active Enchantments",
+    "Empty": "No enchantments have been created, use the button above to create one.",
     "General": "Enchantments",
     "Inactive": "Inactive Enchantments"
   },
+  "Configuration": "Enchantment Configuration",
+  "FIELDS": {
+    "enchantment": {
+      "label": "Enchantment Configuration",
+      "items": {
+        "max": {
+          "label": "Item Limit",
+          "hint": "Formula for the maximum number of enchantments of this type that can be active at a time."
+        },
+        "period": {
+          "label": "Replacement Period",
+          "hint": "How frequently the enchantments of this type can be re-bound to different items."
+        }
+      },
+      "restrictions": {
+        "label": "Restrictions",
+        "hint": "Restrictions on the type of item to which this enchantment can be applied.",
+        "allowMagical": {
+          "label": "Allow Magical",
+          "hint": "Allow items that are already magical to be enchanted."
+        },
+        "type": {
+          "label": "Item Type",
+          "hint": "Type of item to which this enchantment can be applied."
+        }
+      }
+    }
+  },
   "Label": "Enchantment",
   "Warning": {
-    "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it."
+    "NoMagicalItems": "Items that are already magical cannot be enchanted.",
+    "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it.",
+    "WrongType": "{incorrectType} items cannot be enchanted by this enchantment, only {allowedType} items are allowed."
   }
 },
 "DND5E.Environment": "Environment",
@@ -1722,6 +1754,7 @@
 "DND5E.UsesMax": "Maximum Uses",
 "DND5E.UsesPeriod": "Recovery Period",
 "DND5E.UsesPeriods": {
+  "AtWill": "At Will",
   "Charges": "Charges",
   "ChargesAbbreviation": "Charges",
   "Dawn": "Dawn",
@@ -1732,6 +1765,7 @@
   "DuskAbbreviation": "Dusk",
   "Lr": "Long Rest",
   "LrAbbreviation": "LR",
+  "Never": "Never",
   "Sr": "Short Rest",
   "SrAbbreviation": "SR"
 },
