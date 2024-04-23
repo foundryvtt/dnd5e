@@ -20,7 +20,7 @@ export default class EnchantmentField extends EmbeddedDataField {
  *
  * @property {object} items
  * @property {string} items.max                   Maximum number of items that can have this enchantment.
- * @property {string} items.period                Frequently at which the enchantment be swapped.
+ * @property {string} items.period                Frequency at which the enchantment be swapped.
  * @property {object} restrictions
  * @property {boolean} restrictions.allowMagical  Allow enchantments to be applied to items that are already magical.
  * @property {string} restrictions.type           Item type to which this enchantment can be applied.
@@ -31,7 +31,8 @@ export class EnchantmentData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       items: new SchemaField({
-        max: new FormulaField({deterministic: true})
+        max: new FormulaField({deterministic: true}),
+        period: new StringField()
       }),
       restrictions: new SchemaField({
         allowMagical: new BooleanField(),

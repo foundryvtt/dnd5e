@@ -66,22 +66,18 @@ export default class EnchantmentConfig extends DocumentSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _updateObject(event, formData) {
-    const { action, enchantmentId } = formData;
-    delete formData.action;
-    delete formData.enchantmentId;
-
+  async _updateObject(event, { action, enchantmentId, ...formData }) {
     await this.document.update({"system.enchantment": formData});
 
     switch ( action ) {
       case "add-enchantment":
-        const effect = await this.document.createEmbeddedDocuments("ActiveEffect", [{
+        const effect = await ActiveEffect.implementation.create({
           name: this.document.name,
           icon: this.document.img,
           origin: this.document.uuid,
           "flags.dnd5e.type": "enchantment"
-        }]);
-        effect[0].sheet.render(true);
+        }, { parent: this.document });
+        effect.sheet.render(true);
         break;
       case "delete-enchantment":
         const enchantment = this.document.effects.get(enchantmentId);
