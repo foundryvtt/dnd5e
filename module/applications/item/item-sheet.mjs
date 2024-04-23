@@ -149,13 +149,11 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
-      const overrides = this._getItemOverrides();
       context.properties = item.system.validProperties.reduce((obj, k) => {
         const v = CONFIG.DND5E.itemProperties[k];
         obj[k] = {
           label: v.label,
-          selected: item.system.properties.has(k),
-          disabled: overrides?.includes(`properties.${k}`)
+          selected: item.system.properties.has(k)
         };
         return obj;
       }, {});
@@ -374,6 +372,12 @@ export default class ItemSheet5e extends ItemSheet {
     if ( "properties" in this.item.system ) {
       ActiveEffect5e.addOverriddenChoices(this.item, "system.properties", "system.properties", overrides);
     }
+    if ( ("damage" in this.item.system) && foundry.utils.getProperty(this.item.overrides, "system.damage.parts") ) {
+      overrides.push("damage-control");
+      Array.fromRange(2).forEach(index => overrides.push(
+        `system.damage.parts.${index}.0`, `system.damage.parts.${index}.1`
+      ));
+    }
     return overrides;
   }
 
@@ -532,6 +536,7 @@ export default class ItemSheet5e extends ItemSheet {
           element.ariaDisabled = true;
           element.dataset.tooltip = "DND5E.Enchantment.Warning.Override";
         }
+        if ( override === "damage-control" ) html[0].querySelectorAll(".damage-control").forEach(e => e.remove());
       }
     }
 
