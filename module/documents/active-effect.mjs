@@ -623,4 +623,34 @@ export default class ActiveEffect5e extends ActiveEffect {
     const delta = current.symmetricDifference(source);
     for ( const choice of delta ) overrides.push(`${prefix}.${choice}`);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a rich tooltip for this effect.
+   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @returns {Promise<{content: string, classes: string[]}>}
+   */
+  async richTooltip(enrichmentOptions={}) {
+    const properties = [];
+    if ( this.isSuppressed ) properties.push("DND5E.EffectType.Unavailable");
+    else if ( this.disabled ) properties.push("DND5E.EffectType.Inactive");
+    else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
+    else properties.push("DND5E.EffectType.Passive");
+    if ( this.getFlag("dnd5e", "type") === "enchantment" ) properties.push("DND5E.Enchantment.Label");
+
+    return {
+      content: await renderTemplate(
+        "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", {
+          effect: this,
+          description: await TextEditor.enrichHTML(this.description ?? "", {
+            async: true, relativeTo: this, ...enrichmentOptions
+          }),
+          durationParts: this.duration.remaining ? this.duration.label.split(", ") : [],
+          properties: properties.map(p => game.i18n.localize(p))
+        }
+      ),
+      classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip"]
+    };
+  }
 }

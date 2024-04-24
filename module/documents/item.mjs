@@ -954,6 +954,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Render a rich tooltip for this item.
+   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @returns {Promise<{content: string, classes: string[]}>|null}
+   */
+  richTooltip(enrichmentOptions={}) {
+    return this.system.richTooltip?.() ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Configuration data for an item usage being prepared.
    *
    * @typedef {object} ItemUseConfiguration
