@@ -1048,7 +1048,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       d.active = {};
 
       // Apply type-specific damage reduction
-      if ( !ignore("modification", d.type) && traits.dm?.amount[d.type] ) {
+      if ( !ignore("modification", d.type) && traits.dm?.amount[d.type]
+        && !traits.dm.bypasses.intersection(d.properties).size ) {
         const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
         if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
         else d.value += modification;
