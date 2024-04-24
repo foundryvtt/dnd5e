@@ -484,7 +484,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         const total = simplifyBonus(v, rollData);
         if ( !total ) return null;
         const value = {
-          label: `${CONFIG.DND5E.damageTypes[k]?.label ?? key} ${formatNumber(total, { signDisplay: "always" })}`,
+          label: `${CONFIG.DND5E.damageTypes[k]?.label ?? k} ${formatNumber(total, { signDisplay: "always" })}`,
           color: total > 0 ? "maroon" : "green"
         };
         const icons = value.icons = [];
