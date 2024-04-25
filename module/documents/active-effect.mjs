@@ -1,4 +1,3 @@
-import EffectsElement from "../applications/components/effects.mjs";
 import { FormulaField } from "../data/fields.mjs";
 import { staticID } from "../utils.mjs";
 
@@ -623,61 +622,5 @@ export default class ActiveEffect5e extends ActiveEffect {
     const current = foundry.utils.getProperty(doc, path) ?? new Set();
     const delta = current.symmetricDifference(source);
     for ( const choice of delta ) overrides.push(`${prefix}.${choice}`);
-  }
-
-  /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
-
-  /**
-   * Manage Active Effect instances through the Actor Sheet via effect control buttons.
-   * @param {MouseEvent} event      The left-click event on the effect control
-   * @param {Actor5e|Item5e} owner  The owning document which manages this effect
-   * @returns {Promise|null}        Promise that resolves when the changes are complete.
-   * @deprecated since 3.0, targeted for removal in 3.2
-   */
-  static onManageActiveEffect(event, owner) {
-    foundry.utils.logCompatibilityWarning(
-      "ActiveEffects5e#onManageActiveEffect has been deprecated in favor of the new dnd5e-effects element.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-    );
-    event.preventDefault();
-    const a = event.currentTarget;
-    const li = a.closest("li");
-    if ( li.dataset.parentId ) owner = owner.items.get(li.dataset.parentId);
-    const effect = li.dataset.effectId ? owner.effects.get(li.dataset.effectId) : null;
-    switch ( a.dataset.action ) {
-      case "create":
-        const isActor = owner instanceof Actor;
-        return owner.createEmbeddedDocuments("ActiveEffect", [{
-          name: isActor ? game.i18n.localize("DND5E.EffectNew") : owner.name,
-          icon: isActor ? "icons/svg/aura.svg" : owner.img,
-          origin: owner.uuid,
-          "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
-          disabled: li.dataset.effectType === "inactive"
-        }]);
-      case "edit":
-        return effect.sheet.render(true);
-      case "delete":
-        return effect.deleteDialog();
-      case "toggle":
-        return effect.update({disabled: !effect.disabled});
-    }
-  }
-
-  /* --------------------------------------------- */
-
-  /**
-   * Prepare the data structure for Active Effects which are currently applied to an Actor or Item.
-   * @param {ActiveEffect5e[]} effects  The array of Active Effect instances to prepare sheet data for
-   * @returns {object}                  Data for rendering
-   * @deprecated since 3.0, targeted for removal in 3.2
-   */
-  static prepareActiveEffectCategories(effects) {
-    foundry.utils.logCompatibilityWarning(
-      "ActiveEffects5e#prepareActiveEffectCategories has been deprecated in favor of EffectsElement#prepareCategories.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-    );
-    return EffectsElement.prepareCategories(effects);
   }
 }
