@@ -1,10 +1,19 @@
-<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}"
-      data-current="{{choices.current}}" data-max="{{choices.max}}">
+<form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}"
+      data-current="{{ choices.current }}" data-max="{{ choices.max }}">
     <h3>{{{title}}}</h3>
 
     <div class="drop-target">
         {{#if advancement.configuration.hint}}
         <p>{{advancement.configuration.hint}}</p>
+        {{/if}}
+
+        {{#if abilities.options}}
+        <div class="form-group">
+            <label>{{ localize "DND5E.SpellAbility" }}</label>
+            <select name="ability" {{ disabled abilities.disabled }}>
+                {{ selectOptions abilities.options selected=abilities.selected }}
+            </select>
+        </div>
         {{/if}}
 
         {{#each previousLevels}}

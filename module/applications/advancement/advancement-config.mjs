@@ -112,6 +112,10 @@ export default class AdvancementConfig extends FormApplication {
 
     // Remove an item from the list
     if ( this.options.dropKeyPath ) html.on("click", "[data-action='delete']", this._onItemDelete.bind(this));
+
+    for ( const element of html[0].querySelectorAll("multi-select") ) {
+      element.addEventListener("change", this._onChangeInput.bind(this));
+    }
   }
 
   /* -------------------------------------------- */

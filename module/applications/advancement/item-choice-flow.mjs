@@ -7,6 +7,12 @@ import ItemGrantFlow from "./item-grant-flow.mjs";
 export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /**
+   * Currently selected ability.
+   * @type {string}
+   */
+  ability;
+
+  /**
    * Set of selected UUIDs.
    * @type {Set<string>}
    */
@@ -38,6 +44,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /** @inheritdoc */
   async getContext() {
+    const context = {};
+
     this.selected ??= new Set(
       this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
         ?? Object.values(this.advancement.value[this.level] ?? {})
@@ -55,27 +63,31 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     const max = this.advancement.configuration.choices[this.level];
-    const choices = { max, current: this.selected.size, full: this.selected.size >= max };
+    context.choices = { max, current: this.selected.size, full: this.selected.size >= max };
 
-    const previousLevels = {};
+    context.previousLevels = {};
     const previouslySelected = new Set();
     for ( const [level, data] of Object.entries(this.advancement.value.added ?? {}) ) {
       if ( level > this.level ) continue;
-      previousLevels[level] = await Promise.all(Object.values(data).map(uuid => fromUuid(uuid)));
+      context.previousLevels[level] = await Promise.all(Object.values(data).map(uuid => fromUuid(uuid)));
       Object.values(data).forEach(uuid => previouslySelected.add(uuid));
     }
 
-    const items = [...this.pool, ...this.dropped].reduce((items, i) => {
+    context.items = [...this.pool, ...this.dropped].reduce((items, i) => {
       if ( i ) {
         i.checked = this.selected.has(i.uuid);
-        i.disabled = !i.checked && choices.full;
+        i.disabled = !i.checked && context.choices.full;
         const validLevel = (i.system.prerequisites?.level ?? -Infinity) <= this.level;
         if ( !previouslySelected.has(i.uuid) && validLevel ) items.push(i);
       }
       return items;
     }, []);
 
-    return { choices, items, previousLevels };
+    context.abilities = this.getSelectAbilities();
+    context.abilities.disabled = previouslySelected.size;
+    this.ability ??= context.abilities.selected;
+
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -90,8 +102,11 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /** @inheritdoc */
   _onChangeInput(event) {
-    if ( event.target.checked ) this.selected.add(event.target.name);
-    else this.selected.delete(event.target.name);
+    if ( event.target.type === "checkbox" ) {
+      if ( event.target.checked ) this.selected.add(event.target.name);
+      else this.selected.delete(event.target.name);
+    }
+    else if ( event.target.name === "ability" ) this.ability = event.target.value;
     this.render();
   }
 
