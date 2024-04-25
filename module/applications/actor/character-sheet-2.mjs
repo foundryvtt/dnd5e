@@ -1003,11 +1003,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _applyItemTooltips(element) {
     if ( "tooltip" in element.dataset ) return;
-    const target = element.closest("[data-item-id], [data-uuid]");
+    const target = element.closest("[data-item-id], [data-effect-id], [data-uuid]");
     let uuid = target.dataset.uuid;
-    if ( !uuid ) {
+    if ( !uuid && target.dataset.itemId ) {
       const item = this.actor.items.get(target.dataset.itemId);
       uuid = item?.uuid;
+    } else if ( !uuid && target.dataset.effectId ) {
+      const { effectId, parentId } = target.dataset;
+      const collection = parentId ? this.actor.items.get(parentId).effects : this.actor.effects;
+      uuid = collection.get(effectId)?.uuid;
     }
     if ( !uuid ) return;
     element.dataset.tooltip = `

@@ -103,8 +103,8 @@ export default class Tooltips5e {
    * @protected
    */
   async _onHoverContentLink(doc) {
-    if ( !doc.system?.richTooltip ) return;
-    const { content, classes } = await doc.system.richTooltip();
+    const { content, classes } = await doc.richTooltip?.() ?? {};
+    if ( !content ) return;
     this.tooltip.innerHTML = content;
     classes?.forEach(c => this.tooltip.classList.add(c));
     const { tooltipDirection } = game.tooltip.element.dataset;

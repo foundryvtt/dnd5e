@@ -410,17 +410,6 @@
       /* Effect Duration */
       .effect-name {
         .name { flex: 1; }
-        .duration {
-          padding: .25rem;
-          border: 1px dashed var(--color-border-light-1);
-          border-radius: 4px;
-          font-family: var(--dnd5e-font-roboto-condensed);
-          text-transform: uppercase;
-          font-size: var(--font-size-11);
-          color: var(--color-text-dark-5);
-
-          .separator, .least-significant { color: var(--color-text-light-6); }
-        }
       }
 
       /* Effect Source */
@@ -499,6 +488,18 @@
       border-bottom: var(--dnd5e-border-dotted);
       &:last-child { border: none; }
     }
+  }
+
+  .effect-name .duration, &.effect-tooltip .duration {
+    padding: .25rem;
+    border: 1px dashed var(--color-border-light-1);
+    border-radius: 4px;
+    font-family: var(--dnd5e-font-roboto-condensed);
+    text-transform: uppercase;
+    font-size: var(--font-size-11);
+    color: var(--color-text-dark-5);
+
+    .separator, .least-significant { color: var(--color-text-light-6); }
   }
 }
 
