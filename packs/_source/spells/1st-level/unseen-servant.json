@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>This spell creates an Invisible, mindless, shapeless, Medium force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 hit point, and a Strength of 2, and it can't attack. If it drops to 0 hit points, the spell ends.</p><p>Once on each of your turns as a Bonus Action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.</p><p>If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.</p>",
+      "value": "<p>This spell creates an &amp;Reference[Invisible], mindless, shapeless, Medium force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 hit point, and a Strength of 2, and it can't attack. If it drops to 0 hit points, the spell ends.</p><p>Once on each of your turns as a Bonus Action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.</p><p>If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.</p>",
       "chat": ""
     },
     "source": {
@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -89,9 +89,27 @@
       "vocal",
       "somatic",
       "material",
-      "ritual"
+      "ritual",
+      "mgc"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "bonuses": {
+        "ac": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "profiles": [
+        {
+          "name": "",
+          "_id": "vmeSKU0Wnzs5TfPn",
+          "uuid": "Compendium.dnd5e.monsters.Actor.BTQz2q4JJVQn8W5W"
+        }
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -100,10 +118,10 @@
   "folder": "ERuXllkhTQF51rDJ",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234174,
-    "modifiedTime": 1704823524792,
+    "modifiedTime": 1712088880231,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ccduLIvutyNqvkgv"

@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>**Repulsion Breath.** The {type} exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 19 Strength</strong> saving throw. On a failed save, the creature is pushed 60 feet away from the {type}.</p>\n</section>\n<p>The {type} exhales repulsion energy in a 30-foot cone. Each creature in that area must make a <strong>Strength</strong> saving throw.</p>",
+      "value": "<section class=\"secret\">\n<p>**Repulsion Breath.** The [[lookup @details.type.config.label lowercase]] exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 19 Strength</strong> saving throw. On a failed save, the creature is pushed 60 feet away from the [[lookup @details.type.config.label lowercase]].</p>\n</section>\n<p>The [[lookup @details.type.config.label lowercase]] exhales repulsion energy in a 30-foot cone. Each creature in that area must make a <strong>Strength</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },

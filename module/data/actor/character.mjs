@@ -1,5 +1,9 @@
+import HitDice from "../../documents/actor/hit-dice.mjs";
+import Proficiency from "../../documents/actor/proficiency.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
+import RollConfigField from "../shared/roll-config-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -58,6 +62,13 @@ const { SchemaField, NumberField, StringField, BooleanField, ArrayField, Integer
 export default class CharacterData extends CreatureTemplate {
 
   /** @inheritdoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    supportsAdvancement: true
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static _systemType = "character";
 
   /* -------------------------------------------- */
@@ -87,7 +98,7 @@ export default class CharacterData extends CreatureTemplate {
             overall: new FormulaField({deterministic: true, label: "DND5E.HitPointsBonusOverall"})
           })
         }, {label: "DND5E.HitPoints"}),
-        death: new SchemaField({
+        death: new RollConfigField({
           success: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),
@@ -156,29 +167,50 @@ export default class CharacterData extends CreatureTemplate {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  prepareBaseData() {
+    this.attributes.hd = new HitDice(this.parent);
+    this.details.level = this.attributes.hd.max;
+    this.attributes.attunement.value = 0;
+
+    for ( const item of this.parent.items ) {
+      // Attuned items
+      if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
+        this.attributes.attunement.value += 1;
+      }
+    }
+
+    // Character proficiency bonus
+    this.attributes.prof = Proficiency.calculateMod(this.details.level);
+
+    // Experience required for next level
+    const { xp, level } = this.details;
+    xp.max = this.parent.getLevelExp(level || 1);
+    xp.min = level ? this.parent.getLevelExp(level - 1) : 0;
+    if ( level >= CONFIG.DND5E.CHARACTER_EXP_LEVELS.length ) xp.pct = 100;
+    else {
+      const required = xp.max - xp.min;
+      const pct = Math.round((xp.value - xp.min) * 100 / required);
+      xp.pct = Math.clamped(pct, 0, 100);
+    }
+
+    AttributesFields.prepareBaseArmorClass.call(this);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Prepare movement & senses values derived from race item.
    */
   prepareEmbeddedData() {
-    const raceData = this.details.race?.system;
-    if ( !raceData ) {
+    if ( this.details.race instanceof Item ) {
+      AttributesFields.prepareRace.call(this, this.details.race);
+      this.details.type = this.details.race.system.type;
+    } else {
+      this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
+      this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
       this.details.type = new CreatureTypeField({ swarm: false }).initialize({ value: "humanoid" }, this);
-      return;
     }
-
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( raceData.movement[key] ) this.attributes.movement[key] ??= raceData.movement[key];
-    }
-    if ( raceData.movement.hover ) this.attributes.movement.hover = true;
-    this.attributes.movement.units ??= raceData.movement.units;
-
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( raceData.senses[key] ) this.attributes.senses[key] ??= raceData.senses[key];
-    }
-    this.attributes.senses.special = [this.attributes.senses.special, raceData.senses.special].filterJoin(";");
-    this.attributes.senses.units ??= raceData.senses.units;
-
-    this.details.type = raceData.type;
   }
 
   /* -------------------------------------------- */
@@ -187,9 +219,25 @@ export default class CharacterData extends CreatureTemplate {
    * Prepare remaining character data.
    */
   prepareDerivedData() {
+    const rollData = this.getRollData({ deterministic: true });
+    const { originalSaves } = this.parent.getOriginalStats();
+
+    this.prepareAbilities({ rollData, originalSaves });
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
+    AttributesFields.prepareConcentration.call(this, rollData);
     TraitsFields.prepareResistImmune.call(this);
+
+    // Hit Points
+    const hpOptions = {};
+    if ( this.attributes.hp.max === null ) {
+      hpOptions.advancement = Object.values(this.parent.classes)
+        .map(c => c.advancement.byType.HitPoints?.[0]).filter(a => a);
+      hpOptions.bonus = (simplifyBonus(this.attributes.hp.bonuses.level, rollData) * this.details.level)
+        + simplifyBonus(this.attributes.hp.bonuses.overall, rollData);
+      hpOptions.mod = this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0;
+    }
+    AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
   }
 
   /* -------------------------------------------- */
@@ -205,6 +253,56 @@ export default class CharacterData extends CreatureTemplate {
       if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
     }
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Checks whether the item with the given relative UUID has been favorited
+   * @param {string} favoriteId  The relative UUID of the item to check.
+   * @returns {boolean}
+   */
+  hasFavorite(favoriteId) {
+    return !!this.favorites.find(f => f.id === favoriteId);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a favorite item to this actor.
+   * If the given item is already favorite, this method has no effect.
+   * @param {ActorFavorites5e} favorite  The favorite to add.
+   * @returns {Promise<Actor5e>}
+   * @throws If the item intended to be favorited does not belong to this actor.
+   */
+  addFavorite(favorite) {
+    if ( this.hasFavorite(favorite.id) ) return Promise.resolve(this.parent);
+
+    if ( favorite.id.startsWith(".") && fromUuidSync(favorite.id, { relative: this.parent }) === null ) {
+      // Assume that an ID starting with a "." is a relative ID.
+      throw new Error(`The item with id ${favorite.id} is not owned by actor ${this.parent.id}`);
+    }
+
+    let maxSort = 0;
+    const favorites = this.favorites.map(f => {
+      if ( f.sort > maxSort ) maxSort = f.sort;
+      return { ...f };
+    });
+    favorites.push({ ...favorite, sort: maxSort + CONST.SORT_INTEGER_DENSITY });
+    return this.parent.update({ "system.favorites": favorites });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Removes the favorite with the given relative UUID or resource ID
+   * @param {string} favoriteId  The relative UUID or resource ID of the favorite to remove.
+   * @returns {Promise<Actor5e>}
+   */
+  removeFavorite(favoriteId) {
+    if ( favoriteId.startsWith("resources.") ) return this.parent.update({ [`system.${favoriteId}.max`]: 0 });
+    const favorites = this.favorites.filter(f => f.id !== favoriteId);
+    return this.parent.update({ "system.favorites": favorites });
   }
 }
 

@@ -4862,32 +4862,7 @@
       "_key": "!actors.items!ZGDys30OS76uYaIO.FZiSrcZmUUelVbNW"
     }
   ],
-  "effects": [
-    {
-      "_id": "dnd5eencumbered0",
-      "name": "Encumbered",
-      "icon": "systems/dnd5e/icons/svg/statuses/encumbered.svg",
-      "statuses": [
-        "encumbered"
-      ],
-      "changes": [],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": 0,
-        "startTurn": 0
-      },
-      "description": "",
-      "origin": null,
-      "transfer": false,
-      "flags": {},
-      "_key": "!actors.effects!ZGDys30OS76uYaIO.dnd5eencumbered0"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -4900,7 +4875,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232171,
-    "modifiedTime": 1704823964434,
+    "modifiedTime": 1706819059111,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!ZGDys30OS76uYaIO"

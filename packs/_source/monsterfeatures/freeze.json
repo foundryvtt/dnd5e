@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>If the {type} takes <strong><em>cold damage</em></strong>, it partially freezes; its speed is reduced by <strong>20 ft.</strong> until the end of its next turn.</p></section><p>If the {type} takes <strong><em>cold damage</em></strong>, it partially freezes.</p>",
+      "value": "<section class=\"secret\"><p>If the [[lookup @details.type.config.label lowercase]] takes <strong><em>cold damage</em></strong>, it partially freezes; its speed is reduced by <strong>20 ft.</strong> until the end of its next turn.</p></section><p>If the [[lookup @details.type.config.label lowercase]] takes <strong><em>cold damage</em></strong>, it partially freezes.</p>",
       "chat": "",
       "unidentified": ""
     },

@@ -79,6 +79,7 @@
                 {{/if}}
 
                 {{!-- XP --}}
+                {{#unless disableExperience}}
                 {{#with system.details.xp}}
                 <div class="xp-label roboto-upper">
                     {{#if @root.editable}}
@@ -94,6 +95,7 @@
                      aria-valuemin="{{ min }}" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      aria-valuetext="{{ pct }}%" style="--bar-percentage: {{ pct }}%;"></div>
                 {{/with}}
+                {{/unless}}
             </div>
         </div>
     </header>
@@ -146,10 +148,8 @@
                         <div class="top">
 
                             <div class="pips" data-prop="system.attributes.exhaustion">
-                                {{#each exhaustion}}
-                                {{#if (lt @index 3)}}
+                                {{#each exhaustion.left}}
                                     {{> pip }}
-                                {{/if}}
                                 {{/each}}
                             </div>
 
@@ -169,10 +169,8 @@
                             </div>
 
                             <div class="pips" data-prop="system.attributes.exhaustion">
-                                {{#each exhaustion}}
-                                {{#if (gt @index 2)}}
+                                {{#each exhaustion.right}}
                                     {{> pip }}
-                                {{/if}}
                                 {{/each}}
                             </div>
                         </div>
@@ -235,13 +233,18 @@
                             </div>
                             {{#with system.attributes.hp}}
                             <div class="meter sectioned hit-points">
-                                <div class="progress hit-points" role="meter" aria-valuemin="0"
-                                     aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
-                                     style="--bar-percentage: {{ pct }}%">
+                                <div class="progress hit-points
+                                     {{~#if (gt tempmax 0)}} temp-positive
+                                     {{~else if (lt tempmax 0)}} temp-negative{{/if}}"
+                                     role="meter" aria-valuemin="0" aria-valuenow="{{ value }}"
+                                     aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
                                     <div class="label">
                                         <span class="value">{{ value }}</span>
                                         <span class="separator">&sol;</span>
-                                        <span class="max">{{ max }}</span>
+                                        <span class="max">{{ effectiveMax }}</span>
+                                        {{#if tempmax}}
+                                        <span class="bonus">{{dnd5e-numberFormat tempmax signDisplay="always"}}</span>
+                                        {{/if}}
                                     </div>
                                     <input type="text" name="system.attributes.hp.value" data-dtype="Number"
                                            placeholder="0" value="{{ value }}" hidden>
@@ -420,8 +423,8 @@
                                     <span class="value">{{ resource.value }}</span>
                                     {{/if}}
                                     <span class="separator">&sol;</span>
-                                    {{#if @root.actor.isOwner}}
-                                    <input type="text" class="uninput max" value="{{ resource.max }}"
+                                    {{#if @root.editable}}
+                                    <input type="text" class="uninput max" value="{{ resource.source.max }}"
                                            data-dtype="Number" name="system.{{ id }}.max" inputmode="numeric"
                                            pattern="[0-9+=\-]*">
                                     {{else}}

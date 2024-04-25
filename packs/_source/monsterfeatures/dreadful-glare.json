@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} targets one creature it can see within 60 ft. of it. If the target can see the {creature}, it must succeed on a <strong>DC 11 Wisdom</strong> saving throw against this magic or become frightened until the end of the {creature}'s next turn.</p><p>If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies (but not mummy lords) for the next 24 hours.</p>\n</section>\n<p>The {creature} targets one creature it can see within 60 ft. of it. If the target can see the {creature}, it must make a <strong>Wisdom</strong> saving throw against this magic.</p>",
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] targets one creature it can see within 60 ft. of it. If the target can see the [[lookup @name lowercase]], it must succeed on a <strong>DC 11 Wisdom</strong> saving throw against this magic or become frightened until the end of the [[lookup @name lowercase]]'s next turn.</p><p>If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies (but not mummy lords) for the next 24 hours.</p>\n</section>\n<p>the [[lookup @name lowercase]] targets one creature it can see within 60 ft. of it. If the target can see the [[lookup @name lowercase]], it must make a <strong>Wisdom</strong> saving throw against this magic.</p>",
       "chat": "",
       "unidentified": ""
     },

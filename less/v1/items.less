@@ -59,7 +59,7 @@
         display: flex;
         justify-content: space-between;
         gap: 0.25em;
-      
+
         span {
           padding-inline: 4px;
           overflow: hidden;
@@ -67,7 +67,7 @@
           white-space: nowrap;
           font-weight: 400;
         }
-      
+
         .config-button {
           display: none;
           font-size: var(--font-size-14);
@@ -183,8 +183,13 @@
             inset-inline-end: 0;
             padding: 6px;
           }
+          
+          &[aria-disabled] {
+            cursor: not-allowed;
+            &:hover { text-shadow: none; }
+          }
         }
-        &:hover .description-edit {
+        &:hover .description-edit:not[aria-disabled] {
           opacity: 100%;
         }
       }
@@ -222,6 +227,15 @@
       background: rgba(0, 0, 0, 0.05);
     }
 
+    h3.form-header .config-button {
+      display: block;
+      padding: 3px;
+      float: right;
+      color: var(--dnd5e-color-tan);
+      font-size: var(--font-size-14);
+      text-align: end;
+    }
+
     .form-group {
       span {
         text-align: center;
@@ -241,17 +255,20 @@
       }
     }
 
-    .form-group.uses-per, .form-group.consumption {
+    .form-group.uses-per {
       .form-fields {
         flex-wrap: nowrap;
-      }
-      &.consumption input {
-        flex: 0 0 32px;
       }
       span {
         flex: 0 0 16px;
         margin: 0 4px 0 0;
       }
+    }
+    .form-group.consumption .form-fields {
+      flex-wrap: wrap;
+      > * { margin: 0; }
+      [name="system.consume.amount"] { flex: 0 0 32px; }
+      [name="system.consume.type"] { flex: 0 0 100%; }
     }
     span.sep {
       flex: 0 0 8px;
@@ -337,6 +354,13 @@
         height: 16px;
         top: 4px;
       }
+    }
+  }
+
+  :is(.enchantment, .summoning).form-group {
+    .config-button {
+      opacity: 1;
+      font-size: var(--font-size-12);
     }
   }
 
@@ -436,5 +460,151 @@
   .tag {
     font-size: var(--font-size-11);
     padding: 0.1em 0.5em;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Starting Equipment Configuration         */
+/* ----------------------------------------- */
+
+.dnd5e.starting-equipment {
+  --background-depth-1: var(--dnd5e-color-card);
+  --background-depth-2: color-mix(in oklab, var(--dnd5e-color-card), black 5%);
+  --background-depth-3: color-mix(in oklab, var(--dnd5e-color-card), black 10%);
+
+  select, input {
+    height: calc(var(--form-field-height) + 1px);
+  }
+
+  ul {
+    margin-block-end: 0;
+    padding: 0;
+    list-style: none;
+    gap: 12px;
+  }
+  li[data-entry-id] {
+    position: relative;
+    padding: 8px;
+    background: var(--background-depth-1);
+    border: 2px solid var(--dnd5e-color-gold);
+    border-radius: 4px;
+    box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+
+    &:has(.drag-bar) { padding-inline-end: 18px; }
+    &[data-depth="2"] { background: var(--background-depth-2); }
+    &[data-depth="3"] { background: var(--background-depth-3); }
+
+    .controls, .data { gap: 4px; }
+    .controls {
+      justify-content: space-between;
+      margin-block-end: 4px;
+    }
+    .drag-bar {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      inset-block: 0;
+      inset-inline-end: 0;
+      inline-size: 16px;
+      cursor: grab;
+      color: var(--dnd5e-color-faint);
+    }
+    [data-action="delete-entry"] {
+      --size: 26px;
+      flex: 0 0 var(--size);
+      margin: 0;
+      padding: 0;
+      block-size: var(--size);
+      inline-size: var(--size);
+      border: none;
+      background: none;
+      text-align: center;
+
+      &:hover, &:focus { box-shadow: none; }
+      &:hover, &:focus-visible { text-shadow: 0 0 5px var(--color-shadow-primary); }
+    }
+    [name$=".count"] { flex: 0 0 3em; }
+    .content-link, .drop-area {
+      display: flex;
+      align-items: center;
+    }
+    .drop-area {
+      border: 1px dashed black;
+      border-radius: 4px;
+      padding-inline: 4px;
+    }
+    .require-proficiency {
+      flex: 0.66;
+      align-items: center;
+      font-size: var(--font-size-11);
+      text-align: end;
+
+      input {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Enchantment & Summoning Configuration    */
+/* ----------------------------------------- */
+
+.dnd5e:is(.enchantment-config, .summoning-config) {
+  max-block-size: 90vh;
+
+  .unbutton {
+    width: unset;
+    border: none;
+    background: none;
+    line-height: unset;
+
+    &:hover, &:focus { box-shadow: none; }
+    &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
+    &:focus-visible { outline: 2px solid black; }
+  }
+  .form-header {
+    justify-content: space-between;
+    button { flex: unset; }
+  }
+
+  .separated-list {
+    .content-link, .drop-area {
+      flex: 0 0 175px;
+      display: flex;
+      align-items: center;
+    }
+    .drop-area {
+      border: 1px dashed black;
+      border-radius: 4px;
+      padding-inline: 4px;
+    }
+    input::placeholder { opacity: .5; }
+  }
+  .additional-tray {
+    margin-block-start: 8px;
+
+    > label {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      gap: .25rem;
+      font-size: var(--font-size-11);
+
+      > span { flex: none; }
+      .fa-gears { color: var(--color-text-light-6); }
+
+      &::before, &::after {
+        content: "";
+        flex-basis: 50%;
+        border-top: 1px dotted var(--dnd5e-color-gold);
+        align-self: center;
+      }
+    }
+    .form-group:last-child {
+      margin-block-end: -3px;
+    }
   }
 }

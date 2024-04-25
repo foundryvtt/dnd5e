@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>One creature of the {creature}'s choice within 20 ft. of it must succeed on a  <strong>DC 10 Wisdom</strong> saving throw or be frightened for 1 minute. </p><p>The target can repeat the saving throw at the end of each of its turns, with disadvantage if the {creature} is within line of sight, ending the effect on itself on a success.</p></section><p>One creature of the {creature}'s choice within 20 ft. of it must make a <strong>Wisdom</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, with disadvantage if the {creature} is within line of sight, ending the effect on itself on a success.</p>",
+      "value": "<section class=\"secret\"><p>One creature of the [[lookup @name lowercase]]'s choice within 20 ft. of it must succeed on a  <strong>DC 10 Wisdom</strong> saving throw or be frightened for 1 minute. </p><p>The target can repeat the saving throw at the end of each of its turns, with disadvantage if the [[lookup @name lowercase]] is within line of sight, ending the effect on itself on a success.</p></section><p>One creature of the [[lookup @name lowercase]]'s choice within 20 ft. of it must make a <strong>Wisdom</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, with disadvantage if the [[lookup @name lowercase]] is within line of sight, ending the effect on itself on a success.</p>",
       "chat": "",
       "unidentified": ""
     },

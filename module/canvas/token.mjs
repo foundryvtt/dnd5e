@@ -4,16 +4,8 @@
 export default class Token5e extends Token {
   constructor(...args) {
     super(...args);
-    this.ring = new CONFIG.Token.ringClass(this);
+    if ( game.release.generation < 12 ) this.ring = new CONFIG.Token.ringClass(this);
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Dynamic token ring.
-   * @type {TokenRing}
-   */
-  ring;
 
   /* -------------------------------------------- */
 
@@ -49,7 +41,7 @@ export default class Token5e extends Token {
   /** @inheritdoc */
   async _draw() {
     // Cache the subject texture if needed
-    if ( this.ring.enabled ) {
+    if ( (game.release.generation < 12) && this.ring.enabled ) {
       const subjectName = this.document.subjectPath;
       const cached = PIXI.Assets.cache.has(subjectName);
       if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
@@ -77,12 +69,12 @@ export default class Token5e extends Token {
   _drawHPBar(number, bar, data) {
 
     // Extract health data
-    let {value, max, temp, tempmax} = this.document.actor.system.attributes.hp;
+    let {value, max, effectiveMax, temp, tempmax} = this.document.actor.system.attributes.hp;
     temp = Number(temp || 0);
     tempmax = Number(tempmax || 0);
 
     // Differentiate between effective maximum and displayed maximum
-    const effectiveMax = Math.max(0, max + tempmax);
+    effectiveMax = Math.max(0, effectiveMax);
     let displayMax = max + (tempmax > 0 ? tempmax : 0);
 
     // Allocate percentages of the total
@@ -135,7 +127,7 @@ export default class Token5e extends Token {
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    if ( !CONFIG.Token.ringClass.enabled ) return;
+    if ( !CONFIG.Token.ringClass.enabled || (game.release.generation > 11) ) return;
 
     // Update ring names if necessary
     const shapeChange = ("height" in data) || ("width" in data) || ("texture" in data);
@@ -159,9 +151,20 @@ export default class Token5e extends Token {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   _refreshShader() {
-    if ( CONFIG.Token.ringClass.enabled ) this.mesh?.setShaderClass(CONFIG.Token.ringClass.tokenRingSamplerShader);
-    else super._refreshShader();
+    if ( CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
+      this.mesh?.setShaderClass(CONFIG.Token.ringClass.tokenRingSamplerShader);
+    } else super._refreshShader();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _configureFilterEffect(statusId, active) {
+    if ( (statusId === CONFIG.specialStatusEffects.INVISIBLE) && CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
+      active = false;
+    }
+    return super._configureFilterEffect(statusId, active);
   }
 }

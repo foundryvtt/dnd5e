@@ -112,7 +112,8 @@
                 <label>{{ localize "DND5E.ItemWeaponProperties" }}</label>
                 {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                    <input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}>
+                    {{ label }}
                 </label>
                 {{/each}}
             </div>
@@ -126,6 +127,15 @@
             </div>
 
             {{> "dnd5e.item-mountable"}}
+            {{/if}}
+
+            {{#if properties.mgc.selected}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.MagicalBonus" }}</label>
+                <div class="form-fields">
+                    {{ numberInput system.magicalBonus name="system.magicalBonus" min="0" step="1" placeholder="0" }}
+                </div>
+            </div>
             {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemWeaponUsage" }}</h3>

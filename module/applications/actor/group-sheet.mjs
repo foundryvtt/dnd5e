@@ -53,6 +53,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     context.system = this.actor.system;
     context.items = Array.from(this.actor.items);
     context.config = CONFIG.DND5E;
+    context.isGM = game.user.isGM;
 
     // Membership
     const {sections, stats} = this.#prepareMembers();
@@ -141,6 +142,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const displayXP = !game.settings.get("dnd5e", "disableExperienceTracking");
     for ( const [index, memberData] of this.object.system.members.entries() ) {
       const member = memberData.actor;
+      const multiplier = type === "encounter" ? (memberData.quantity.value ?? 1) : 1;
 
       const m = {
         index,
@@ -156,20 +158,20 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       // HP bar
       const hp = member.system.attributes.hp;
       m.hp.current = hp.value + (hp.temp || 0);
-      m.hp.max = Math.max(0, hp.max + (hp.tempmax || 0));
+      m.hp.max = Math.max(0, hp.effectiveMax);
       m.hp.pct = Math.clamped((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
       m.hp.color = dnd5e.documents.Actor5e.getHPColor(m.hp.current, m.hp.max).css;
-      stats.currentHP += (m.hp.current * m.quantity.value);
-      stats.maxHP += (m.hp.max * m.quantity.value);
+      stats.currentHP += (m.hp.current * multiplier);
+      stats.maxHP += (m.hp.max * multiplier);
 
       // Challenge
       if ( member.type === "npc" ) {
         m.cr = formatCR(member.system.details.cr);
-        if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * m.quantity.value);
+        if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * multiplier);
       }
 
-      if ( member.type === "vehicle" ) stats.nVehicles++;
-      else stats.nMembers++;
+      if ( member.type === "vehicle" ) stats.nVehicles += multiplier;
+      else stats.nMembers += multiplier;
       sections[member.type].members.push(m);
     }
     for ( const [k, section] of Object.entries(sections) ) {
@@ -219,6 +221,11 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       sections[type] = {label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], hasActions: false, dataset: {type}};
     }
 
+    // Remove items in containers & sort remaining
+    context.items = context.items
+      .filter(i => !this.actor.items.has(i.system.container))
+      .sort((a, b) => (a.sort || 0) - (b.sort || 0));
+
     // Classify items
     for ( const item of context.items ) {
       const ctx = context.itemContext[item.id] ??= {};
@@ -230,6 +237,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       if ( (item.type in sections) && (item.type !== "loot") ) sections[item.type].items.push(item);
       else sections.loot.items.push(item);
     }
+
     return sections;
   }
 
@@ -269,7 +277,6 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       inputs.focus(ev => ev.currentTarget.select());
       inputs.addBack().find('[type="text"][data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
       html.find(".action-button").click(this._onClickActionButton.bind(this));
-      html.find(".item .rollable h4").click(event => this._onItemSummary(event));
     }
   }
 
@@ -288,16 +295,25 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         const award = new Award(this.object, { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") });
         award.render(true);
         break;
-      case "removeMember":
-        const removeMemberId = button.closest("li.group-member").dataset.actorId;
-        this.object.system.removeMember(removeMemberId);
-        break;
-      case "rollQuantities":
-        this.object.system.rollQuantities();
+      case "longRest":
+        this.actor.longRest({ advanceTime: true });
         break;
       case "movementConfig":
         const movementConfig = new ActorMovementConfig(this.object);
         movementConfig.render(true);
+        break;
+      case "placeMembers":
+        this.actor.system.placeMembers();
+        break;
+      case "removeMember":
+        const removeMemberId = button.closest("li.group-member").dataset.actorId;
+        this.actor.system.removeMember(removeMemberId);
+        break;
+      case "rollQuantities":
+        this.actor.system.rollQuantities();
+        break;
+      case "shortRest":
+        this.actor.shortRest({ advanceTime: true });
         break;
     }
   }
@@ -330,17 +346,48 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(itemData) {
-    const items = itemData instanceof Array ? itemData : [itemData];
+  async _onDropItem(event, data) {
+    if ( !this.actor.isOwner ) return false;
+    const item = await Item.implementation.fromDropData(data);
 
-    const toCreate = [];
-    for ( const item of items ) {
-      const result = await this._onDropSingleItem(item);
-      if ( result ) toCreate.push(result);
+    // Handle moving out of container & item sorting
+    if ( this.actor.uuid === item.parent?.uuid ) {
+      if ( item.system.container !== null ) await item.update({"system.container": null});
+      return this._onSortItem(event, item.toObject());
     }
 
-    // Create the owned items as normal
-    return this.actor.createEmbeddedDocuments("Item", toCreate);
+    return this._onDropItemCreate(item);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropFolder(event, data) {
+    if ( !this.actor.isOwner ) return [];
+    const folder = await Folder.implementation.fromDropData(data);
+    if ( folder.type !== "Item" ) return [];
+    const droppedItemData = await Promise.all(folder.contents.map(async item => {
+      if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
+      return item;
+    }));
+    return this._onDropItemCreate(droppedItemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropItemCreate(itemData) {
+    let items = itemData instanceof Array ? itemData : [itemData];
+
+    // Filter out items already in containers to avoid creating duplicates
+    const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
+    items = items.filter(i => !containers.has(i.system.container));
+
+    // Create the owned items & contents as normal
+    const toCreate = await Item5e.createWithContents(items, {
+      transformFirst: item => this._onDropSingleItem(item.toObject())
+    });
+    return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
   }
 
   /* -------------------------------------------- */
@@ -366,7 +413,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     // Create a Consumable spell scroll on the Inventory tab
     if ( itemData.type === "spell" ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
-      return scroll.toObject();
+      return scroll?.toObject?.();
     }
 
     // Stack identical consumables

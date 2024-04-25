@@ -2,7 +2,7 @@
 <div class="form-group select">
     <label>{{ localize "DND5E.ItemActionType" }}</label>
     <select name="system.actionType">
-        {{selectOptions config.itemActionTypes selected=system.actionType blank=""}}
+        {{ selectOptions availableActionTypes selected=system.actionType blank="" }}
     </select>
 </div>
 {{#if system.actionType}}
@@ -28,7 +28,11 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemAttackBonus" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.attackBonus" value="{{system.attackBonus}}" data-formula-editor/>
+        <input type="text" name="system.attack.bonus" value="{{system.attack.bonus}}" data-formula-editor>
+        <label class="checkbox" data-tooltip="DND5E.ItemAttackFlatHint">
+          <input type="checkbox" name="system.attack.flat" {{checked system.attack.flat}}>
+          {{localize "DND5E.ItemAttackFlat"}}
+        </label>
     </div>
 </div>
 
@@ -115,6 +119,36 @@
         </select>
     </div>
 </div>
+
+{{!-- Enchantment --}}
+{{#if system.isEnchantment}}
+<div class="form-group enchantment">
+    <label>{{ localize "DND5E.Enchantment.Label" }}</label>
+    <div class="form-fields">
+        <a class="config-button" data-action="enchantment">
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+            {{ localize "DND5E.Enchantment.Action.Configure" }}
+        </a>
+    </div>
+</div>
+{{/if}}
+
+{{!-- Summoning --}}
+{{#if (eq system.actionType "summ")}}
+<div class="form-group summoning">
+    <label>{{ localize "DND5E.Summoning.Label" }}</label>
+    <div class="form-fields">
+        <a class="config-button" data-action="summoning">
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+            {{ localize "DND5E.Summoning.Action.Configure" }}
+        </a>
+        <label class="checkbox" data-tooltip="DND5E.Summoning.Prompt.Hint">
+            <input type="checkbox" name="system.summons.prompt" {{ checked system.summons.prompt }}>
+            {{ localize "DND5E.Summoning.Prompt.Label" }}
+        </label>
+    </div>
+</div>
+{{/if}}
 
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">

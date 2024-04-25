@@ -1,15 +1,19 @@
-import ActorSheet5eCharacter from "./character-sheet.mjs";
-import * as Trait from "../../documents/actor/trait.mjs";
-import Tabs5e from "../tabs.mjs";
-import { simplifyBonus, staticID } from "../../utils.mjs";
 import CharacterData from "../../data/actor/character.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
+import { setTheme } from "../../settings.mjs";
+import { formatNumber, simplifyBonus, staticID } from "../../utils.mjs";
+import ContextMenu5e from "../context-menu.mjs";
+import SheetConfig5e from "../sheet-config.mjs";
+import Tabs5e from "../tabs.mjs";
+import ActorSheet5eCharacter from "./character-sheet.mjs";
 
 /**
  * An Actor sheet for player character type actors.
  */
 export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   constructor(object, options={}) {
-    const { width, height } = game.user.getFlag("dnd5e", "sheetPrefs.character") ?? {};
+    const key = `character${object.limited ? ":limited" : ""}`;
+    const { width, height } = game.user.getFlag("dnd5e", `sheetPrefs.${key}`) ?? {};
     if ( width && !("width" in options) ) options.width = width;
     if ( height && !("height" in options) ) options.height = height;
     super(object, options);
@@ -24,6 +28,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         { dragSelector: ".item-list .item", dropSelector: null },
         { dragSelector: ".containers .container", dropSelector: null },
         { dragSelector: ".favorites :is([data-item-id], [data-effect-id])", dropSelector: null },
+        { dragSelector: ":is(.race, .background)[data-item-id]", dropSelector: null },
         { dragSelector: ".classes .gold-icon[data-item-id]", dropSelector: null },
         { dragSelector: "[data-key] .skill-name, [data-key] .tool-name", dropSelector: null },
         { dragSelector: ".spells-list .spell-header, .slots[data-favorite-id]", dropSelector: null }
@@ -49,10 +54,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @enum {string}
    */
   static PROFICIENCY_CLASSES = {
-    "0": "none",
-    "0.5": "half",
-    "1": "full",
-    "2": "double"
+    0: "none",
+    0.5: "half",
+    1: "full",
+    2: "double"
   };
 
   /**
@@ -90,10 +95,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _deathTrayOpen = false;
 
+  /**
+   * The cached concentration information for the character.
+   * @type {{items: Set<Item5e>, effects: Set<ActiveEffect5e>}}
+   * @internal
+   */
+  _concentration;
+
   /* -------------------------------------------- */
 
   /** @override */
   get template() {
+    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet-2.hbs";
     return "systems/dnd5e/templates/actors/character-sheet-2.hbs";
   }
 
@@ -130,6 +143,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       firstButton?.insertAdjacentElement("beforebegin", idLink);
     }
 
+    if ( !game.user.isGM && this.actor.limited ) {
+      html[0].classList.add("limited");
+      return html;
+    }
+
     // Render tabs.
     const nav = document.createElement("nav");
     nav.classList.add("tabs");
@@ -148,8 +166,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html[0].insertAdjacentElement("afterbegin", nav);
     this._tabs = this.options.tabs.map(t => {
       t.callback = this._onChangeTab.bind(this);
+      if ( this._tabs?.[0]?.active !== t.initial ) t.initial = this._tabs?.[0]?.active ?? t.initial;
       return new Tabs5e(t);
     });
+
+    // Set theme
+    // TODO: Re-enable this when we support V12 only
+    // setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
 
     return html;
   }
@@ -171,10 +194,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /** @inheritDoc */
   async getData(options) {
+    this._concentration = this.actor.concentration; // Cache concentration so it's not called for every item.
     const context = await super.getData(options);
     context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
     context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
-    const activeTab = this.element.length ? this._tabs?.[0]?.active ?? "details" : "details";
+    const activeTab = (game.user.isGM || !this.actor.limited) ? this._tabs?.[0]?.active ?? "details" : "biography";
     context.cssClass += ` tab-${activeTab}`;
     const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
     if ( sidebarCollapsed ) {
@@ -199,14 +223,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     };
 
     // Exhaustion
-    context.exhaustion = Array.fromRange(6, 1).map(n => {
+    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
+    context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
       const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
       const classes = ["pip"];
       const filled = attributes.exhaustion >= n;
       if ( filled ) classes.push("filled");
-      if ( n === 6 ) classes.push("death");
-      return { n, label, filled, tooltip: label, classes: classes.join(" ") };
-    });
+      if ( n === max ) classes.push("death");
+      const pip = { n, label, filled, tooltip: label, classes: classes.join(" ") };
+
+      if ( n <= max / 2 ) acc.left.push(pip);
+      else acc.right.push(pip);
+      return acc;
+    }, { left: [], right: [] });
 
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
@@ -216,8 +245,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     }, { value: 0, label: CONFIG.DND5E.movementTypes.walk });
 
     // Hit Dice
-    context.hd = { value: attributes.hd, max: this.actor.system.details.level };
-    context.hd.pct = Math.clamped(context.hd.max ? (context.hd.value / context.hd.max) * 100 : 0, 0, 100);
+    context.hd = attributes.hd;
 
     // Death Saves
     const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
@@ -263,10 +291,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       ability.mod = Math.abs(ability.save);
     }
 
+    if ( this.actor.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) || context.editable ) {
+      context.saves.concentration = {
+        isConcentration: true,
+        class: "colspan concentration",
+        label: game.i18n.localize("DND5E.Concentration"),
+        abbr: game.i18n.localize("DND5E.Concentration"),
+        mod: Math.abs(attributes.concentration.save),
+        sign: attributes.concentration.save < 0 ? "-" : "+"
+      };
+    }
+
     // Size
     context.size = {
-      label: CONFIG.DND5E.actorSizes[traits.size].label,
-      abbr: CONFIG.DND5E.actorSizes[traits.size].abbreviation,
+      label: CONFIG.DND5E.actorSizes[traits.size]?.label ?? traits.size,
+      abbr: CONFIG.DND5E.actorSizes[traits.size]?.abbreviation ?? "—",
       mod: attributes.encumbrance.mod
     };
 
@@ -339,7 +378,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Effects & Conditions
     const conditionIds = new Set();
     context.conditions = Object.entries(CONFIG.DND5E.conditionTypes).reduce((arr, [k, c]) => {
-      if ( k === "diseased" ) return arr; // Filter out diseased as it's not a real condition.
+      if ( c.pseudo ) return arr; // Filter out pseudo-conditions.
       const { label: name, icon, reference } = c;
       const id = staticID(`dnd5e${k}`);
       conditionIds.add(id);
@@ -349,7 +388,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         name, reference,
         id: k,
         icon: img ?? icon,
-        disabled: existing ? disabled : !this.actor.statuses.has(k)
+        disabled: existing ? disabled : true
       });
       return arr;
     }, []);
@@ -359,6 +398,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         effect.updateDuration();
         if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
         const { id, name, img, disabled, duration } = effect;
+        const toggleable = !this._concentration?.effects.has(effect);
         let source = await effect.getSource();
         // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
         if ( (source instanceof dnd5e.documents.ActiveEffect5e) && (source.target !== this.object) ) {
@@ -366,7 +406,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         }
         arr = await arr;
         arr.push({
-          id, name, img, disabled, duration, source,
+          id, name, img, disabled, duration, source, toggleable,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
           hasTooltip: source instanceof dnd5e.documents.Item5e
@@ -419,11 +459,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       values = values.map(key => {
         const value = { label: Trait.keyLabel(key, { trait }) ?? key };
         const icons = value.icons = [];
-        if ( data.bypasses?.size && (key in CONFIG.DND5E.physicalDamageTypes) ) icons.push(...data.bypasses);
+        if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses);
         return value;
       });
       if ( data.custom ) data.custom.split(";").forEach(v => values.push({ label: v.trim() }));
       if ( values.length ) traits[trait] = values;
+    }
+    // If petrified, display "All Damage" instead of all damage types separately
+    if ( this.document.hasConditionEffect("petrification") ) {
+      traits.dr = [{ label: game.i18n.localize("DND5E.DamageAll") }];
     }
     // Combine damage & condition immunities in play mode.
     if ( (this._mode === this.constructor.MODES.PLAY) && traits.ci ) {
@@ -431,6 +475,25 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       traits.di.push(...traits.ci);
       delete traits.ci;
     }
+
+    // Prepare damage modifications
+    const dm = this.actor.system.traits?.dm;
+    if ( dm ) {
+      const rollData = this.actor.getRollData({ deterministic: true });
+      const values = Object.entries(dm.amount).map(([k, v]) => {
+        const total = simplifyBonus(v, rollData);
+        if ( !total ) return null;
+        const value = {
+          label: `${CONFIG.DND5E.damageTypes[k]?.label ?? k} ${formatNumber(total, { signDisplay: "always" })}`,
+          color: total > 0 ? "maroon" : "green"
+        };
+        const icons = value.icons = [];
+        if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses);
+        return value;
+      }).filter(f => f);
+      if ( values.length ) traits.dm = values;
+    }
+
     return traits;
   }
 
@@ -535,17 +598,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
       // Prepared
       const mode = system.preparation?.mode;
-      if ( (mode === "always") || (mode === "prepared") ) {
+      const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
+      if ( config.prepares ) {
         const isAlways = mode === "always";
         const prepared = isAlways || system.preparation.prepared;
         ctx.preparation = {
           applicable: true,
           disabled: !item.isOwner || isAlways,
           cls: prepared ? "active" : "",
+          icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}"></i>`,
           title: isAlways
-            ? CONFIG.DND5E.spellPreparationModes.always
+            ? CONFIG.DND5E.spellPreparationModes.always.label
             : prepared
-              ? CONFIG.DND5E.spellPreparationModes.prepared
+              ? CONFIG.DND5E.spellPreparationModes.prepared.label
               : game.i18n.localize("DND5E.SpellUnprepared")
         };
       }
@@ -577,6 +642,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       // Subtitles
       ctx.subtitle = [system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
     }
+
+    // Concentration
+    if ( this._concentration.items.has(item) ) ctx.concentration = true;
   }
 
   /* -------------------------------------------- */
@@ -599,6 +667,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
         event.preventDefault();
       }
+    });
+
+    // Apply special context menus for items outside inventory elements
+    const featuresElement = html[0].querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
+    if ( featuresElement ) new ContextMenu5e(html, ".pills-lg [data-item-id]", [], {
+      onOpen: (...args) => featuresElement._onOpenContextMenu(...args)
     });
 
     if ( this.isEditable ) {
@@ -839,6 +913,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  _onConfigureSheet(event) {
+    event.preventDefault();
+    new SheetConfig5e(this.document, {
+      top: this.position.top + 40,
+      left: this.position.left + ((this.position.width - DocumentSheet.defaultOptions.width) / 2)
+    }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle creating a new embedded child.
    * @returns {ActiveEffect5e|Item5e|void}
@@ -882,7 +967,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _onFindItem(type) {
     switch ( type ) {
-      case "class": game.packs.get("dnd5e.classfeatures").render(true); break;
+      case "class": game.packs.get("dnd5e.classes").render(true); break;
       case "race": game.packs.get("dnd5e.races").render(true); break;
       case "background": game.packs.get("dnd5e.backgrounds").render(true); break;
     }
@@ -979,7 +1064,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onRollAbility(event) {
     const abilityId = event.currentTarget.closest("[data-ability]").dataset.ability;
     const isSavingThrow = event.currentTarget.classList.contains("saving-throw");
-    if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
+    if ( abilityId === "concentration" ) this.actor.rollConcentration({ event });
+    else if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
     else this.actor.rollAbilityTest(abilityId, { event });
   }
 
@@ -989,7 +1075,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onResize(event) {
     super._onResize(event);
     const { width, height } = this.position;
-    game.user.setFlag("dnd5e", "sheetPrefs.character", { width, height });
+    const key = `character${this.actor.limited ? ":limited": ""}`;
+    game.user.setFlag("dnd5e", `sheetPrefs.${key}`, { width, height });
   }
 
   /* -------------------------------------------- */
@@ -1016,10 +1103,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       return;
     }
     const { action, type, id } = data.dnd5e ?? {};
-    if ( action === "favorite" ) {
-      if ( this.actor.system.favorites.find(f => f.id === id) ) return this._onSortFavorites(event, id);
-      return this._onAddFavorite({ type, id });
-    }
+    if ( action === "favorite" ) return this._onDropFavorite(event, { type, id });
   }
 
   /* -------------------------------------------- */
@@ -1030,8 +1114,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const item = await Item.implementation.fromDropData(data);
     if ( item?.parent !== this.actor ) return super._onDropItem(event, data);
     const uuid = item.getRelativeUUID(this.actor);
-    if ( this.actor.system.favorites.find(f => f.id === uuid) ) return this._onSortFavorites(event, uuid);
-    return this._onAddFavorite({ type: "item", id: uuid });
+    return this._onDropFavorite(event, { type: "item", id: uuid });
   }
 
   /* -------------------------------------------- */
@@ -1042,26 +1125,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const effect = await ActiveEffect.implementation.fromDropData(data);
     if ( effect.target !== this.actor ) return super._onDropActiveEffect(event, data);
     const uuid = effect.getRelativeUUID(this.actor);
-    if ( this.actor.system.favorites.find(f => f.id === uuid) ) return this._onSortFavorites(event, uuid);
-    return this._onAddFavorite({ type: "effect", id: uuid });
+    return this._onDropFavorite(event, { type: "effect", id: uuid });
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle adding a favorite.
-   * @param {object} [favorite]  The favorite to add.
-   * @returns {Promise<Actor5e>}
+   * Handle an owned item or effect being dropped in the favorites area.
+   * @param {PointerEvent} event         The triggering event.
+   * @param {ActorFavorites5e} favorite  The favorite that was dropped.
+   * @returns {Promise<Actor5e>|void}
    * @protected
    */
-  _onAddFavorite(favorite) {
-    let maxSort = 0;
-    const favorites = this.actor.system.favorites.map(f => {
-      if ( f.sort > maxSort ) maxSort = f.sort;
-      return { ...f };
-    });
-    favorites.push({ ...favorite, sort: maxSort + CONST.SORT_INTEGER_DENSITY });
-    return this.actor.update({ "system.favorites": favorites });
+  _onDropFavorite(event, favorite) {
+    if ( this.actor.system.hasFavorite(favorite.id) ) return this._onSortFavorites(event, favorite.id);
+    return this.actor.system.addFavorite(favorite);
   }
 
   /* -------------------------------------------- */
@@ -1075,9 +1153,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onRemoveFavorite(event) {
     const { favoriteId } = event.currentTarget.closest("[data-favorite-id]")?.dataset ?? {};
     if ( !favoriteId ) return;
-    if ( favoriteId.startsWith("resources.") ) return this.actor.update({ [`system.${favoriteId}.max`]: 0 });
-    const favorites = this.actor.system.favorites.filter(f => f.id !== favoriteId);
-    return this.actor.update({ "system.favorites": favorites });
+    return this.actor.system.removeFavorite(favoriteId);
   }
 
   /* -------------------------------------------- */
@@ -1136,11 +1212,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Legacy resources
     const resources = Object.entries(this.actor.system.resources).reduce((arr, [k, r]) => {
       const { value, max, sr, lr, label } = r;
+      const source = this.actor._source.system.resources[k];
       if ( label && max ) arr.push({
         id: `resources.${k}`,
         type: "resource",
         img: "icons/svg/upgrade.svg",
-        resource: { value, max },
+        resource: { value, max, source },
         css: "uses",
         title: label,
         subtitle: [

@@ -54,7 +54,7 @@
     "ability": "",
     "actionType": "util",
     "attackBonus": "",
-    "chatFlavor": "The wizard can recover this number worth of spells slots (of 5th-level or lower):",
+    "chatFlavor": "The wizard can recover [[ceil(@classes.wizard.levels/2)]] levels worth of spell slots (of 5th-level or lower).",
     "critical": {
       "threshold": null,
       "damage": ""
@@ -63,7 +63,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "ceil(@classes.wizard.levels/2)",
+    "formula": "",
     "save": {
       "ability": "",
       "dc": null,
@@ -88,10 +88,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.0.2",
     "coreVersion": "11.315",
     "createdTime": 1661787234399,
-    "modifiedTime": 1704824717795,
+    "modifiedTime": 1707095231218,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!e0uTcFPpgxjIyUW9"

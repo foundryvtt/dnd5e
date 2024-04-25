@@ -60,9 +60,8 @@
       "amount": null,
       "scale": false
     },
-    "ability": null,
+    "ability": "",
     "actionType": "rwak",
-    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -85,14 +84,27 @@
     },
     "type": {
       "value": "ammo",
-      "subtype": ""
+      "subtype": "crossbowBolt"
     },
     "unidentified": {
       "description": ""
     },
     "container": null,
     "crewed": false,
-    "properties": []
+    "properties": [],
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    },
+    "magicalBonus": null
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -103,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.1.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233660,
-    "modifiedTime": 1704823151850,
+    "modifiedTime": 1709677518179,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!SItCnYBqhzqBoaWG"

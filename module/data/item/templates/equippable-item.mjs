@@ -52,7 +52,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -69,6 +69,17 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
+   * @type {boolean}
+   */
+  get magicAvailable() {
+    const attunement = this.attunement !== CONFIG.DND5E.attunementTypes.REQUIRED;
+    return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
+  }
+
+  /* -------------------------------------------- */
   /*  Deprecations                                */
   /* -------------------------------------------- */
 
@@ -77,9 +88,11 @@ export default class EquippableItemTemplate extends SystemDataModel {
    * @ignore
    */
   get equippableItemChatProperties() {
-    foundry.utils.logCompatibilityWarning("EquippableItemTemplate#equippableItemChatProperties is deprecated. "
+    foundry.utils.logCompatibilityWarning(
+      "EquippableItemTemplate#equippableItemChatProperties is deprecated. "
       + "Please use EquippableItemTemplate#equippableItemCardProperties.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true });
+      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
+    );
     return this.equippableItemCardProperties;
   }
 }

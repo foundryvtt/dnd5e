@@ -154,7 +154,7 @@ export default class Award extends DialogMixin(FormApplication) {
 
   /**
    * Award currency, optionally transferring between one document and another.
-   * @param {object[]} amounts                 Amount of each denomination to transfer.
+   * @param {Record<string, number>} amounts   Amount of each denomination to transfer.
    * @param {(Actor5e|Item5e)[]} destinations  Documents that should receive the currency.
    * @param {object} [config={}]
    * @param {boolean} [config.each=false]      Award the specified amount to each player, rather than splitting it.
@@ -214,7 +214,7 @@ export default class Award extends DialogMixin(FormApplication) {
     destinations = destinations.filter(d => ["character", "group"].includes(d.type));
     if ( !amount || !destinations.length ) return;
 
-    let originUpdate = origin?.system.details.xp.value ?? Infinity;
+    let originUpdate = origin ? (origin.system.details.xp.value ?? 0) : Infinity;
     if ( each ) amount = amount * destinations.length;
     const perDestination = Math.floor(Math.min(amount, originUpdate) / destinations.length);
     originUpdate -= amount;
@@ -252,17 +252,21 @@ export default class Award extends DialogMixin(FormApplication) {
           ${formatNumber(result.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
         </span>
       `);
+      if ( !entries.length ) continue;
+
       const content = game.i18n.format("DND5E.Award.Message", {
         name: destination.name, award: `<span class="dnd5e2">${game.i18n.getListFormatter().format(entries)}</span>`
       });
 
       const whisperTargets = game.users.filter(user => destination.testUserPermission(user, "OWNER"));
       const whisper = whisperTargets.length !== game.users.size;
-      messages.push({
-        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+      const messageData = {
         content,
         whisper: whisper ? whisperTargets : []
-      });
+      };
+      // TODO: Remove when v11 support is dropped.
+      if ( game.release.generation < 12 ) messageData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
+      messages.push(messageData);
     }
     if ( messages.length ) cls.createDocuments(messages);
   }

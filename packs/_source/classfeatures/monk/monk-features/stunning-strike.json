@@ -46,9 +46,9 @@
       "prompt": true
     },
     "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
+      "type": "charges",
+      "target": "Compendium.dnd5e.classfeatures.Item.10b6z2W1txNkrGP7",
+      "amount": 1,
       "scale": false
     },
     "ability": "",
@@ -101,7 +101,7 @@
       "_id": "ydyOZkp3pCtwM0Xb",
       "changes": [],
       "description": "",
-      "transfer": true,
+      "transfer": false,
       "statuses": [
         "stunned"
       ],
@@ -113,10 +113,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234427,
-    "modifiedTime": 1706153505443,
+    "modifiedTime": 1712173537477,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!pvRc6GAu1ok6zihC"

@@ -5,7 +5,7 @@
   "img": "icons/equipment/neck/pendant-faceted-green.webp",
   "system": {
     "description": {
-      "value": "<div><em>Wondrous Item (requires attunement)</em></div>\n<div> </div>\n<div>While wearing this Amulet, you can use an action to name a location that you are familiar with on another plane of existence. Then make a DC 15 Intelligence check. On a successful check, you cast the <em>@UUID[Compendium.dnd5e.spells.Item.J6Jpw5XzB5aTeqnz]{Plane Shift}</em> spell. On a failure, you and each creature and object within 15 feet of you travel to a random destination. Roll a d100. On a 1-60, you travel to a random location on the plane you named. On a 61-100, you travel to a randomly determined plane of existence.</div>",
+      "value": "<p><em>Wondrous Item (requires attunement)</em></p><p>While wearing this Amulet, you can use an action to name a location that you are familiar with on another plane of existence. Then make a DC 15 Intelligence check. On a successful check, you cast the @UUID[Compendium.dnd5e.spells.Item.J6Jpw5XzB5aTeqnz]{Plane Shift} spell. On a failure, you and each creature and object within 15 feet of you travel to a random destination. Roll a d100. On a 1-60, you travel to a random location on the plane you named. On a 61-100, you travel to a randomly determined plane of existence.</p>",
       "chat": ""
     },
     "source": {
@@ -102,7 +102,9 @@
     },
     "container": null,
     "crewed": false,
-    "properties": []
+    "properties": [
+      "mgc"
+    ]
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -113,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.0.1",
     "coreVersion": "11.315",
     "createdTime": 1661787233487,
-    "modifiedTime": 1704823143516,
+    "modifiedTime": 1707055839778,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!8ABk0XV76Hzq8Qul"

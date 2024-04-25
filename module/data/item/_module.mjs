@@ -25,7 +25,9 @@ export {
   ToolData,
   WeaponData
 };
+export {default as EnchantmentField, EnchantmentData, EnchantmentError} from "./fields/enchantment-field.mjs";
 export {default as ItemTypeField} from "./fields/item-type-field.mjs";
+export {default as SummonsField, SummonsData} from "./fields/summons-field.mjs";
 export {default as ActionTemplate} from "./templates/action.mjs";
 export {default as ActivatedEffectTemplate} from "./templates/activated-effect.mjs";
 export {default as EquippableItemTemplate} from "./templates/equippable-item.mjs";
@@ -34,6 +36,7 @@ export {default as ItemDescriptionTemplate} from "./templates/item-description.m
 export {default as ItemTypeTemplate} from "./templates/item-type.mjs";
 export {default as MountableTemplate} from "./templates/mountable.mjs";
 export {default as PhysicalItemTemplate} from "./templates/physical-item.mjs";
+export * as startingEquipment from "./templates/starting-equipment.mjs";
 
 export const config = {
   background: BackgroundData,

@@ -19,7 +19,6 @@ export default class SizeAdvancement extends Advancement {
       icon: "systems/dnd5e/icons/svg/size.svg",
       title: game.i18n.localize("DND5E.AdvancementSizeTitle"),
       hint: game.i18n.localize("DND5E.AdvancementSizeHint"),
-      validItemTypes: new Set(["race"]),
       apps: {
         config: SizeConfig,
         flow: SizeFlow
@@ -95,6 +94,6 @@ export default class SizeAdvancement extends Advancement {
   /** @inheritdoc */
   async reverse(level) {
     this.actor.updateSource({"system.traits.size": "med"});
-    this.updateSource({ "value.-=size": null });
+    this.updateSource({ "value.size": null });
   }
 }

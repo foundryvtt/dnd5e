@@ -1,3 +1,5 @@
+import Advancement from "../documents/advancement/advancement.mjs";
+
 /**
  * Data field that selects the appropriate advancement data model if available, otherwise defaults to generic
  * `ObjectField` to prevent issues with custom advancement types that aren't currently loaded.
@@ -10,7 +12,15 @@ export class AdvancementField extends foundry.data.fields.ObjectField {
    * @returns {typeof BaseAdvancement|null}  The BaseAdvancement class, or null.
    */
   getModelForType(type) {
-    return CONFIG.DND5E.advancementTypes[type] ?? null;
+    let config = CONFIG.DND5E.advancementTypes[type];
+    if ( config?.prototype instanceof Advancement ) {
+      foundry.utils.logCompatibilityWarning(
+        "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
+        { since: "DnD5e 3.1", until: "DnD5e 3.3", once: true }
+      );
+      return config;
+    }
+    return config?.documentClass ?? null;
   }
 
   /* -------------------------------------------- */
@@ -31,6 +41,18 @@ export class AdvancementField extends foundry.data.fields.ObjectField {
     const cls = this.getModelForType(value.type);
     if ( cls ) return new cls(value, {parent: model, ...options});
     return foundry.utils.deepClone(value);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate this field's candidate source data.
+   * @param {object} sourceData   Candidate source data of the root model
+   * @param {any} fieldData       The value of this field within the source data
+   */
+  migrateSource(sourceData, fieldData) {
+    const cls = this.getModelForType(fieldData.type);
+    if ( cls ) cls.migrateDataSafe(fieldData);
   }
 }
 
@@ -95,6 +117,18 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
     const cls = this.getModel();
     if ( cls ) return new cls(value, {parent: model, ...options});
     return foundry.utils.deepClone(value);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate this field's candidate source data.
+   * @param {object} sourceData   Candidate source data of the root model
+   * @param {any} fieldData       The value of this field within the source data
+   */
+  migrateSource(sourceData, fieldData) {
+    const cls = this.getModel();
+    if ( cls ) cls.migrateDataSafe(fieldData);
   }
 }
 

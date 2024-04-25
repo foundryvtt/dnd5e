@@ -245,7 +245,7 @@ export async function mixedChoices(keys) {
 export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) {
   const uuid = getBaseItemUUID(identifier);
   const { collection, documentId: id } = foundry.utils.parseUuid(uuid);
-  const pack = collection.metadata.id;
+  const pack = collection?.metadata.id;
 
   // Full Item5e document required, always async.
   if ( fullItem && !indexOnly ) return collection?.getDocument(id);
@@ -386,9 +386,10 @@ export function traitLabel(trait, count) {
  */
 export function keyLabel(key, config={}) {
   if ( foundry.utils.getType(config) === "string" ) {
-    foundry.utils.logCompatibilityWarning("Trait.keyLabel(trait, key) is now Trait.keyLabel(key, { trait }).", {
-      since: "DnD5e 2.4", until: "DnD5e 3.1"
-    });
+    foundry.utils.logCompatibilityWarning(
+      "Trait.keyLabel(trait, key) is now Trait.keyLabel(key, { trait }).",
+      { since: "DnD5e 2.4", until: "DnD5e 3.1" }
+    );
     const tmp = config;
     config = { trait: key };
     key = tmp;

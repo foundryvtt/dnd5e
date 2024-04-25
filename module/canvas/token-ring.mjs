@@ -172,14 +172,15 @@ export default class TokenRing {
    * @protected
    */
   _clearState() {
+    const applyInvisibility = this.token.document.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE)
+      && (game.release.generation < 12 || this.enabled);
     this.ringName = undefined;
     this.bkgName = undefined;
     this.ringUVs = undefined;
     this.bkgUVs = undefined;
     this.ringColorLittleEndian = 0xFFFFFF;
     this.bkgColorLittleEndian = 0xFFFFFF;
-    this.effects = this.token.document.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE)
-      ? this.constructor.effects.INVISIBILITY : this.constructor.effects.DISABLED;
+    this.effects = applyInvisibility ? this.constructor.effects.INVISIBILITY : this.constructor.effects.DISABLED;
     this.scaleCorrection = 1;
   }
 
@@ -196,7 +197,11 @@ export default class TokenRing {
   async flashColor(color, animationOptions={}) {
     if ( !this.enabled || Number.isNaN(color) ) return;
 
-    const originalColor = new Color(this.ringColorLittleEndian);
+    const originalColor = Color.from(foundry.utils.mergeObject(
+      this.token.document.getFlag("dnd5e", "tokenRing.colors") ?? {},
+      this.token.document.getRingColors(),
+      { inplace: false }
+    ).ring ?? 0xFFFFFF).littleEndian;
 
     return await CanvasAnimation.animate([{
       attribute: "ringColorLittleEndian",
@@ -312,11 +317,9 @@ export default class TokenRing {
    * Initialize the Token Rings system, registering the batch plugin and patching PrimaryCanvasGroup#addToken.
    */
   static initialize() {
+    if ( game.release.generation > 11 ) return;
     if ( this.enabled !== null ) throw new Error("TokenRings system already initialized.");
-
-    // Check client setting
-    this.#enabled = !(game.settings.get("dnd5e", "disableTokenRings") ?? false);
-    if ( !this.enabled ) return;
+    this.#enabled = true;
 
     // Configure subject paths.
     for ( const module of game.modules ) {

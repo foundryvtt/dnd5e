@@ -62,7 +62,6 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -80,7 +79,8 @@
     },
     "armor": {
       "value": 18,
-      "dex": 0
+      "dex": 0,
+      "magicalBonus": null
     },
     "hp": {
       "value": 0,
@@ -103,8 +103,21 @@
     },
     "container": null,
     "properties": [
+      "mgc",
       "stealthDisadvantage"
-    ]
+    ],
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -115,10 +128,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.1.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233727,
-    "modifiedTime": 1704823155725,
+    "modifiedTime": 1709659996855,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!azxwKFHrNmG3HpVy"

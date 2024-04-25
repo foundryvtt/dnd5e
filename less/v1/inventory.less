@@ -1,4 +1,4 @@
-.dnd5e dnd5e-inventory {
+.dnd5e .inventory-element {
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
@@ -24,7 +24,8 @@
         color: var(--dnd5e-color-tan);
       }
       input[type="text"], input[type="number"] {
-        flex: 0 0 48px;
+        min-inline-size: 24px;
+        max-inline-size: 48px;
         text-align: center;
         margin-inline-start: 8px;
         border-block-end: var(--dnd5e-border-groove);

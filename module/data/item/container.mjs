@@ -40,6 +40,13 @@ export default class ContainerData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -94,7 +101,10 @@ export default class ContainerData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   async getFavoriteData() {
-    return foundry.utils.mergeObject(await super.getFavoriteData(), { uses: await this.computeCapacity() });
+    const data = super.getFavoriteData();
+    const capacity = await this.computeCapacity();
+    if ( Number.isFinite(capacity.max) ) return foundry.utils.mergeObject(await data, { uses: capacity });
+    return await data;
   }
 
   /* -------------------------------------------- */
@@ -230,7 +240,7 @@ export default class ContainerData extends ItemDataModel.mixin(
    */
   async computeCapacity() {
     const { value, type } = this.capacity;
-    const context = { max: value };
+    const context = { max: value ?? Infinity };
     if ( type === "weight" ) {
       context.value = await this.contentsWeight;
       context.units = game.i18n.localize("DND5E.AbbreviationLbs");
@@ -238,7 +248,7 @@ export default class ContainerData extends ItemDataModel.mixin(
       context.value = await this.contentsCount;
       context.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
     }
-    context.pct = context.max ? (context.value / context.max) * 100 : 0;
+    context.pct = Math.clamped(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;
   }
 

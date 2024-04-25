@@ -1,6 +1,5 @@
 import ActorSheet5e from "./base-sheet.mjs";
 import ActorTypeConfig from "./type-config.mjs";
-import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 /**
@@ -88,6 +87,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.isDepleted = ctx.isOnCooldown && ctx.hasUses && (uses.value > 0);
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
+      // Unidentified items
+      ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
+
       // Item grouping
       const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
       const group = this.actor.items.get(originId);
@@ -136,7 +138,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         const delta = level - cls.system.levels;
         return { level, delta, disabled: delta > maxLevelDelta };
       });
-      ctx.prefixedImage = foundry.utils.getRoute(cls.img);
+      ctx.prefixedImage = cls.img ? foundry.utils.getRoute(cls.img) : null;
       arr.push(cls);
       const identifier = cls.system.identifier || cls.name.slugify({strict: true});
       const subclass = subclasses.findSplice(s => s.system.classIdentifier === identifier);
@@ -197,8 +199,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const isPrepared = !!prep.prepared;
       context.toggleClass = isPrepared ? "active" : "";
       if ( isAlways ) context.toggleClass = "fixed";
-      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always;
-      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared;
+      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always.label;
+      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared.label;
       else context.toggleTitle = game.i18n.localize("DND5E.SpellUnprepared");
     }
     else {
@@ -217,7 +219,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   activateListeners(html) {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
-    html.find(".level-selector").change(this._onLevelChange.bind(this));
     html.find(".short-rest").click(this._onShortRest.bind(this));
     html.find(".long-rest").click(this._onLongRest.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
@@ -259,36 +260,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       case "rollInitiative":
         return this.actor.rollInitiativeDialog({event});
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Respond to a new level being selected from the level selector.
-   * @param {Event} event                           The originating change.
-   * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
-   * @private
-   */
-  async _onLevelChange(event) {
-    event.preventDefault();
-    const delta = Number(event.target.value);
-    const classId = event.target.closest("[data-item-id]")?.dataset.itemId;
-    if ( !delta || !classId ) return;
-    const classItem = this.actor.items.get(classId);
-    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
-      const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
-      if ( manager.steps.length ) {
-        if ( delta > 0 ) return manager.render(true);
-        try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
-        }
-        catch(err) {
-          return;
-        }
-      }
-    }
-    return classItem.update({"system.levels": classItem.system.levels + delta});
   }
 
   /* -------------------------------------------- */

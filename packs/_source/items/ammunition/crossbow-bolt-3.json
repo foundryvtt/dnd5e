@@ -62,19 +62,13 @@
     },
     "ability": "",
     "actionType": "rwak",
-    "attackBonus": "3",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "3",
-          "piercing"
-        ]
-      ],
+      "parts": [],
       "versatile": ""
     },
     "formula": "",
@@ -85,14 +79,29 @@
     },
     "type": {
       "value": "ammo",
-      "subtype": ""
+      "subtype": "crossbowBolt"
     },
     "unidentified": {
       "description": ""
     },
     "container": null,
     "crewed": false,
-    "properties": []
+    "properties": [
+      "mgc"
+    ],
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "magicalBonus": 3,
+    "summons": {
+      "match": {
+        "attacks": false,
+        "proficiency": false,
+        "saves": false
+      },
+      "profiles": []
+    }
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -103,10 +112,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.1.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233701,
-    "modifiedTime": 1704823154193,
+    "modifiedTime": 1709677518205,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!XXLznzi3rlanMhTM"

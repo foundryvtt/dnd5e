@@ -1,3 +1,4 @@
+import TokenPlacement from "../../canvas/token-placement.mjs";
 import { ActorDataModel } from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
@@ -80,9 +81,9 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static metadata = Object.freeze({
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     systemFlagsModel: GroupSystemFlags
-  });
+  }, {inplace: false}));
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -192,6 +193,36 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /* -------------------------------------------- */
 
   /**
+   * Place all members in the group on the current scene.
+   */
+  async placeMembers() {
+    if ( !game.user.isGM || !canvas.scene ) return;
+    const minimized = !this.parent.sheet._minimized;
+    await this.parent.sheet.minimize();
+    const tokensData = [];
+
+    try {
+      const placements = await TokenPlacement.place({
+        tokens: Object.values(this.members).flatMap(({ actor, quantity }) =>
+          Array(this.type.value === "encounter" ? (quantity.value ?? 1) : 1).fill(actor.prototypeToken)
+        )
+      });
+      for ( const placement of placements ) {
+        const actor = placement.prototypeToken.actor;
+        delete placement.prototypeToken;
+        const tokenDocument = await actor.getTokenDocument(placement);
+        tokensData.push(tokenDocument.toObject());
+      }
+    } finally {
+      if ( minimized ) this.parent.sheet.maximize();
+    }
+
+    await canvas.scene.createEmbeddedDocuments("Token", tokensData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Remove a member from the group.
    * @param {Actor5e|string} actor    An Actor or ID to remove from this group
    * @returns {Promise<Actor5e>}      The updated group Actor
@@ -226,6 +257,42 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       if ( roll.total > 0 ) member.quantity.value = roll.total;
     }));
     return this.parent.update({"system.members": membersCollection});
+  }
+
+  /* -------------------------------------------- */
+  /*  Resting                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Initiate a rest for all members of this group.
+   * @param {RestConfiguration} config  Configuration data for the rest.
+   * @param {RestResult} result         Results of the rest operation being built.
+   * @returns {boolean}                 Returns `false` to prevent regular rest process from completing.
+   */
+  async rest(config, result) {
+    const results = new Map();
+    for ( const member of this.members ) {
+      results.set(
+        member.actor,
+        await member.actor[config.type === "short" ? "shortRest" : "longRest"]({
+          ...config, dialog: false, advanceTime: false
+        }) ?? null
+      );
+    }
+
+    // Advance the game clock
+    if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
+
+    /**
+     * A hook event that fires when the rest process is completed for a group.
+     * @function dnd5e.groupRestCompleted
+     * @memberof hookEvents
+     * @param {Actor5e} group                         The group that just completed resting.
+     * @param {Map<Actor5e, RestResult|null>} result  Details on the rests completed.
+     */
+    Hooks.callAll("dnd5e.groupRestCompleted", this.parent, results);
+
+    return false;
   }
 
   /* -------------------------------------------- */

@@ -226,9 +226,11 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 export class ScaleValueTypeDice extends ScaleValueType {
   /** @inheritdoc */
   static defineSchema() {
+    const fields = foundry.data.fields;
     return {
-      number: new foundry.data.fields.NumberField({nullable: true, integer: true, positive: true}),
-      faces: new foundry.data.fields.NumberField({required: true, integer: true, positive: true})
+      number: new fields.NumberField({nullable: true, integer: true, positive: true}),
+      faces: new fields.NumberField({required: true, integer: true, positive: true}),
+      modifiers: new fields.SetField(new fields.StringField({required: true}))
     };
   }
 
@@ -270,10 +272,34 @@ export class ScaleValueTypeDice extends ScaleValueType {
   /* -------------------------------------------- */
 
   /**
-   * The die value to be rolled with the leading "d" (e.g. "d4").
+   * The entire die, with leading "d" and any modifiers, e.g., "d4" or "d4r1".
    * @type {string}
    */
   get die() {
+    if ( !this.faces ) return "";
+    return `d${this.faces}${this.mods}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The die modifiers.
+   * @type {string}
+   */
+  get mods() {
+    if ( !this.modifiers ) return "";
+    return this.modifiers.reduce((acc, mod) => {
+      return acc + (dnd5e.utils.isValidDieModifier(mod) ? mod : "");
+    }, "");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The die value to be rolled with the leading "d" (e.g. "d4").
+   * @type {string}
+   */
+  get denom() {
     if ( !this.faces ) return "";
     return `d${this.faces}`;
   }

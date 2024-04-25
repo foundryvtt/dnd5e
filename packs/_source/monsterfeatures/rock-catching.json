@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>If a rock or similar object is hurled at the {type}, the {type} can, with a successful DC 10 Dexterity saving throw, catch the missile and take no <em>bludgeoning damage</em> from it.</p></section><p>If a rock or similar object is hurled at the {type}, the {type} can catch the missile and take no <em>bludgeoning damage</em> from it.</p>",
+      "value": "<section class=\"secret\"><p>If a rock or similar object is hurled at the [[lookup @details.type.config.label lowercase]], the [[lookup @details.type.config.label lowercase]] can, with a successful DC 10 Dexterity saving throw, catch the missile and take no <em>bludgeoning damage</em> from it.</p></section><p>If a rock or similar object is hurled at the [[lookup @details.type.config.label lowercase]], the [[lookup @details.type.config.label lowercase]] can catch the missile and take no <em>bludgeoning damage</em> from it.</p>",
       "chat": "",
       "unidentified": ""
     },

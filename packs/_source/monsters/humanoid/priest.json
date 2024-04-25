@@ -1585,7 +1585,7 @@
         "damage": {
           "parts": [
             [
-              "floor(@item.level / 2)d8 + @mod",
+              "(floor(@item.level / 2))d8 + @mod",
               "force"
             ]
           ],
@@ -1638,10 +1638,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
         "createdTime": 1661787234115,
-        "modifiedTime": 1661791116514,
+        "modifiedTime": 1713903779111,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!PVD5wRdyO7iCJPs1.JbxsYXxSOTZbf9I0"
@@ -2142,10 +2142,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232808,
-    "modifiedTime": 1704847047405,
+    "modifiedTime": 1713903779111,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!PVD5wRdyO7iCJPs1"

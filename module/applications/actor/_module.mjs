@@ -8,6 +8,8 @@ export {default as GroupActorSheet} from "./group-sheet.mjs";
 export {default as BaseConfigSheet} from "./base-config.mjs";
 export {default as ActorAbilityConfig} from "./ability-config.mjs";
 export {default as ActorArmorConfig} from "./armor-config.mjs";
+export {default as ActorConcentrationConfig} from "./concentration-config.mjs";
+export {default as DamageModificationConfig} from "./damage-modification-config.mjs";
 export {default as ActorHitDiceConfig} from "./hit-dice-config.mjs";
 export {default as ActorHitPointsConfig} from "./hit-points-config.mjs";
 export {default as ActorSpellSlotsConfig} from "./spell-slots-config.mjs";

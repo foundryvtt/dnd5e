@@ -69,7 +69,6 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /**
    * @typedef {object} SystemDataModelMetadata
-   * @property {boolean} [singleton]                  Should only a single item of this type be allowed on an actor?
    * @property {typeof DataModel} [systemFlagsModel]  Model that represents flags data within the dnd5e namespace.
    */
 
@@ -77,7 +76,9 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
    * Metadata that describes this DataModel.
    * @type {SystemDataModelMetadata}
    */
-  static metadata = {};
+  static metadata = Object.freeze({
+    systemFlagsModel: null
+  });
 
   get metadata() {
     return this.constructor.metadata;
@@ -305,6 +306,16 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
  */
 export class ActorDataModel extends SystemDataModel {
 
+  /**
+   * @typedef {SystemDataModelMetadata} ActorDataModelMetadata
+   * @property {boolean} supportsAdvancement  Can advancement be performed for this actor type?
+   */
+
+  /** @type {ActorDataModelMetadata} */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    supportsAdvancement: false
+  }, {inplace: false}));
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -348,10 +359,34 @@ export class ActorDataModel extends SystemDataModel {
 export class ItemDataModel extends SystemDataModel {
 
   /**
+   * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
+   * @property {boolean} enchantable  Can this item be modified by enchantment effects?
+   * @property {boolean} singleton    Should only a single item of this type be allowed on an actor?
+   */
+
+  /** @type {ItemDataModelMetadata} */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: false,
+    singleton: false
+  }, {inplace: false}));
+
+  /**
    * The handlebars template for rendering item tooltips.
    * @type {string}
    */
   static ITEM_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    if ( this.parent.isEmbedded ) {
+      const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent.flags.core?.sourceId;
+      if ( sourceId ) this.parent.actor?.sourcedItems?.set(sourceId, this.parent);
+    }
+  }
 
   /* -------------------------------------------- */
   /*  Helpers                                     */

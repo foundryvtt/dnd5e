@@ -133,7 +133,10 @@ export default class ContainerSheet extends ItemSheet5e {
     if ( !items.length ) return [];
 
     // Create any remaining items
-    const toCreate = await Item5e.createWithContents(items, {container: this.item});
+    const toCreate = await Item5e.createWithContents(items, {
+      container: this.item,
+      transformAll: itemData => itemData.type === "spell" ? Item5e.createScrollFromSpell(itemData) : itemData
+    });
     if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder.id);
     return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.parent, keepId: true});
   }
@@ -169,7 +172,10 @@ export default class ContainerSheet extends ItemSheet5e {
     }
 
     // Otherwise, create a new item & contents in this context
-    const toCreate = await Item5e.createWithContents([item], {container: this.item});
+    const toCreate = await Item5e.createWithContents([item], {
+      container: this.item,
+      transformAll: itemData => itemData.type === "spell" ? Item5e.createScrollFromSpell(itemData) : itemData
+    });
     if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder.id);
     return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.actor, keepId: true});
   }

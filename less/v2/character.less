@@ -16,7 +16,7 @@
     position: absolute;
     pointer-events: none;
     inset: 0;
-    border: 1px solid var(--dnd5e-color-gold);
+    border: var(--dnd5e-border-gold);
     box-shadow: 0 0 20px var(--color-shadow-dark);
     border-radius: 5px;
   }
@@ -56,7 +56,7 @@
     }
   }
 
-  .window-content > form { margin-top: -30px; }
+  .window-content { margin-top: -30px; }
 
   /* ---------------------------------- */
   /*  Minimized                         */
@@ -67,7 +67,8 @@
     border: unset;
 
     > header {
-      align-items: unset;
+      align-items: center;
+      .header-button, .document-id-link { margin-top: 0; }
       .window-title { visibility: visible; }
     }
     nav.tabs { display: none; }
@@ -97,6 +98,18 @@
       }
     }
 
+    /* Name */
+    .document-name {
+      color: var(--color-text-light-0);
+      font-size: var(--font-size-46);
+      text-shadow: 2px 2px 2px var(--color-shadow-dark);
+      font-family: var(--dnd5e-font-modesto);
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding: 0;
+      margin: 0;
+      transition: font-size 250ms ease;
+    }
 
     /* Name & Class */
     > .left {
@@ -113,19 +126,6 @@
       &.optional-ability-2 {
         padding-right: 14rem;
         .document-name { font-size: var(--font-size-36); }
-      }
-
-      /* Name */
-      .document-name {
-        color: var(--color-text-light-0);
-        font-size: var(--font-size-46);
-        text-shadow: 2px 2px 2px var(--color-shadow-dark);
-        font-family: var(--dnd5e-font-modesto);
-        font-weight: bold;
-        letter-spacing: 2px;
-        padding: 0;
-        margin: 0;
-        transition: font-size 250ms ease;
       }
 
       input.document-name {
@@ -275,7 +275,7 @@
       display: flex;
       justify-content: end;
       align-items: center;
-      padding-right: .75rem;
+      padding-right: 12px;
       background: var(--dnd5e-color-black);
       color: var(--dnd5e-color-gold);
       --icon-fill: var(--dnd5e-color-gold);
@@ -295,7 +295,7 @@
       &::after {
         content: "";
         position: absolute;
-        inset: .25rem .25rem .25rem 0;
+        inset: 4px 4px 4px 0;
         border-radius: 0 5px 5px 0;
         border: 1px solid var(--dnd5e-color-gold);
         border-left: none;
@@ -320,13 +320,13 @@
     .main-content {
       display: grid;
       grid-template-columns: var(--dnd5e-sheet-sidebar-width) 1fr;
-      gap: .75rem;
+      gap: 12px;
       position: absolute;
       inset: 0;
-      padding: .5rem;
+      padding: 8px;
       overflow: hidden auto;
       scrollbar-width: thin;
-      scrollbar-color: var(--dnd5e-color-gold) transparent;
+      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
       transition: all 450ms ease;
 
       &::-webkit-scrollbar-track {
@@ -336,7 +336,7 @@
 
       &::-webkit-scrollbar-thumb {
         border: none;
-        background: var(--dnd5e-color-gold);
+        background: var(--dnd5e-color-scrollbar);
       }
     }
 
@@ -344,7 +344,7 @@
     .sidebar {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 16px;
       transition: margin-left 450ms ease;
 
       /* Character Card */
@@ -384,7 +384,7 @@
 
           > i {
             color: var(--dnd5e-color-gold);
-            font-size: var(--font-size-12);
+            font-size: 12px;
             margin: 0;
           }
         }
@@ -571,6 +571,8 @@
               border-right: var(--border-width) solid var(--dnd5e-color-hp-3);
               border-radius: 4px 0 0 4px;
             }
+            .temp-positive .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, blue 25%); }
+            .temp-negative .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, red 25%); }
           }
 
           &.hit-dice {
@@ -625,7 +627,7 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 0 .5rem;
+          padding: 0 8px;
           position: absolute;
           width: 100%;
           top: calc(100% - var(--tray-height));
@@ -635,7 +637,7 @@
           &.open { top: calc(100% - var(--lip)); }
 
           .death-saves {
-            --padding: .375rem;
+            --padding: 6px;
             background: black;
             border-radius: 0 0 5px 5px;
             box-shadow: 0 0 6px var(--color-shadow-dark);
@@ -688,7 +690,7 @@
         flex: 1;
 
         > h3 {
-          border-bottom-color: var(--dnd5e-color-gold);
+          border-bottom-color: currentcolor;
           color: var(--dnd5e-color-gold);
           margin-bottom: .5rem;
         }
@@ -784,6 +786,7 @@
 
                 input {
                   background: none;
+                  padding: 0;
                   &:hover, &:focus { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
                 }
               }
@@ -841,7 +844,11 @@
         }
       }
 
-      .tab:not(.details) { padding: .5rem .5rem 1.5rem; }
+      .tab:not(.details) {
+        padding-inline: .5rem;
+        // enough room that the "create new" button doesn't overlap when scrolled all the way down
+        padding-bottom: calc(1.5rem + 30px);
+      }
     }
 
     /* Skills, Tools, & Saving Throws */
@@ -922,17 +929,23 @@
         grid-template-columns: 1fr 1fr;
 
         > li {
+          --border-style: var(--dnd5e-border-dotted);
           border-bottom: none;
-          border-top: var(--dnd5e-border-dotted);
+          border-top: var(--border-style);
 
+          &.concentration {
+            --icon-fill: var(--dnd5e-color-gold);
+            padding-left: 8px;
+            .name { text-align: center; }
+          }
+
+          &.colspan { grid-column: auto / span 2; }
           &:nth-child(1), &:nth-child(2) { border-top: none; }
-          &:last-child { border-top: var(--dnd5e-border-dotted); }
+          &:last-child { border-top: var(--border-style); }
         }
-
       }
 
       .name {
-
         &.abbr {
           font-family: var(--dnd5e-font-roboto);
           text-transform: uppercase;
@@ -976,28 +989,22 @@
       }
 
       &.texture {
+        --background-color: color-mix(in oklab, var(--dnd5e-color-parchment), white);
         background-blend-mode: color-burn;
 
-        &.type {
-          background: url("ui/official/pill-texture-type.webp") no-repeat right,
-            color-mix(in oklab, var(--dnd5e-color-parchment), white);
-        }
-
-        &.race {
-          background: url("ui/official/pill-texture-race.webp") no-repeat right,
-            color-mix(in oklab, var(--dnd5e-color-parchment), white);
-        }
-
+        &.type { background: url("ui/official/pill-texture-type.webp") no-repeat right, var(--background-color); }
+        &.race { background: url("ui/official/pill-texture-race.webp") no-repeat right, var(--background-color); }
         &.background {
-          background: url("ui/official/pill-texture-background.webp") no-repeat right,
-            color-mix(in oklab, var(--dnd5e-color-parchment), white);
+          background: url("ui/official/pill-texture-background.webp") no-repeat right, var(--background-color);
         }
 
         &::before {
+          --gradient-start: var(--dnd5e-background-card);
+          --gradient-end: transparent;
           content: "";
           position: absolute;
           inset: 0;
-          background: linear-gradient(to right, var(--dnd5e-color-card) 35%, transparent);
+          background: linear-gradient(to right, var(--gradient-start) 35%, var(--gradient-end));
           border-radius: 5px;
           mix-blend-mode: unset;
           filter: unset;
@@ -1050,12 +1057,12 @@
     position: absolute;
     top: 0;
     right: 0;
-    left: calc(var(--dnd5e-sheet-sidebar-width) + 1.25rem);
+    left: calc(var(--dnd5e-sheet-sidebar-width) + 18px);
     pointer-events: none;
     container-type: inline-size;
 
     .rows {
-      padding: 4.75rem 0 4.75rem 1.5rem;
+      padding: 76px 0 76px 24px;
       display: flex;
       flex-wrap: wrap;
       width: 546px;
@@ -1063,7 +1070,7 @@
 
       > div {
         display: flex;
-        gap: 1.375rem;
+        gap: 22px;
       }
     }
 
@@ -1071,8 +1078,7 @@
       width: unset;
       margin: 0;
       justify-content: center;
-      padding-left: .75rem;
-      padding-right: .75rem;
+      padding-inline: 12px;
     }
 
     .top {
@@ -1090,7 +1096,7 @@
       justify-content: space-between;
       align-items: center;
       font-family: var(--dnd5e-font-roboto);
-      padding-top: .75rem;
+      padding-top: 12px;
       filter: drop-shadow(0 0 6px var(--dnd5e-shadow-45));
       pointer-events: all;
 
@@ -1103,10 +1109,10 @@
       }
 
       &.flipped {
-        padding: 0 0 .5rem 0;
+        padding: 0 0 8px 0;
         height: 72px;
         justify-content: start;
-        gap: .125rem;
+        gap: 2px;
 
         &::before { transform: scaleY(-1); }
         .mod { padding: 0; }
@@ -1129,22 +1135,22 @@
         font-weight: bold;
         color: var(--dnd5e-color-black);
         font-size: var(--font-size-16);
-        padding: .1875rem 0;
+        padding: 3px 0;
       }
 
       .score {
         width: 50px;
         height: 23px;
-        padding: .25rem;
+        padding: 4px;
         text-align: center;
         font-size: var(--font-size-13);
         color: var(--dnd5e-color-gold);
         background: black;
         border-radius: 3px;
-        margin-top: -.125rem;
+        margin-top: -2px;
 
         > input {
-          padding: .25rem;
+          padding: 4px;
           color: var(--dnd5e-color-gold);
           width: 50px;
           height: 23px;
@@ -1162,8 +1168,8 @@
     @container (min-width: 700px) {
       .rows {
         justify-content: center;
-        gap: 1.375rem;
-        padding-top: 9.25rem;
+        gap: 22px;
+        padding-top: 148px;
         width: unset;
         margin: 0;
 
@@ -1175,16 +1181,16 @@
         }
 
         .ability-score.flipped {
-          padding: .75rem 0 0;
+          padding: 12px 0 0;
           height: 64px;
           justify-content: space-between;
           gap: unset;
 
           &::before { transform: unset; }
-          .mod { padding: .1875rem 0; }
+          .mod { padding: 3px 0; }
 
           .score {
-            margin: -.125rem 0 0;
+            margin: -2px 0 0;
             order: unset;
           }
         }
@@ -1381,7 +1387,7 @@
           font-family: var(--dnd5e-font-roboto-condensed);
           font-size: var(--font-size-14);
           scrollbar-width: thin;
-          scrollbar-color: var(--dnd5e-color-gold) transparent;
+          scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
 
           &::-webkit-scrollbar-track {
             box-shadow: none;
@@ -1390,7 +1396,7 @@
 
           &::-webkit-scrollbar-thumb {
             border: none;
-            background: var(--dnd5e-color-gold);
+            background: var(--dnd5e-color-scrollbar);
           }
         }
       }
@@ -1445,7 +1451,7 @@
       padding: .375rem;
       height: 60px;
       scrollbar-width: thin;
-      scrollbar-color: var(--dnd5e-color-gold) transparent;
+      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
       background: var(--dnd5e-background-5);
 
       &::-webkit-scrollbar-track {
@@ -1455,7 +1461,7 @@
 
       &::-webkit-scrollbar-thumb {
         border: none;
-        background: var(--dnd5e-color-gold);
+        background: var(--dnd5e-color-scrollbar);
       }
     }
 
@@ -1489,11 +1495,55 @@
     }
 
     .sheet-header > .left:is(.optional-ability-1, .optional-ability-2) {
-      padding-right: 1.5rem;
+      padding-right: 24px;
       .document-name { font-size: var(--font-size-46); }
     }
 
     .ability-scores { left: 0; }
+  }
+
+  /* ---------------------------------- */
+  /*  Limited Sheets                    */
+  /* ---------------------------------- */
+
+  &.limited {
+    min-width: 600px;
+    min-height: 600px;
+
+    .sheet-header {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem 1.5rem;
+
+      > * { flex: unset; }
+
+      .portrait {
+        width: 128px;
+        height: 128px;
+        border-radius: 100%;
+        border: 4px solid var(--dnd5e-color-gold);
+        box-shadow: 0 0 6px var(--dnd5e-color-black);
+        overflow: hidden;
+
+        > img {
+          border: none;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top;
+          background-color: var(--dnd5e-color-light-gray);
+          margin: 0;
+        }
+      }
+    }
+
+    .tab.biography > .bottom {
+      padding: .5rem .5rem 1.5rem;
+      .editor { min-height: unset; }
+    }
+
+    .main-content { display: unset; }
+    .sheet-body .tab-body .tab:not(.details) { padding: 0; }
   }
 
   /* ---------------------------------- */

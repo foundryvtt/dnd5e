@@ -12,6 +12,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   static get defaultOptions() {
     const options = foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{dropSelector: ".drop-target"}],
+      height: "auto",
+      width: 500,
       submitOnChange: true
     });
     options.classes.push("class-journal");
@@ -19,10 +21,12 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   get template() {
-    return `systems/dnd5e/templates/journal/page-class-${this.isEditable ? "edit" : "view"}.hbs`;
+    return `systems/dnd5e/templates/journal/page-${this.document.type}-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -30,6 +34,18 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /** @inheritdoc */
   toc = {};
 
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this page represents a class or subclass.
+   * @type {string}
+   */
+  get type() {
+    return this.document.type;
+  }
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -40,9 +56,10 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     context.title = Object.fromEntries(
       Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1])
     );
+    context.type = this.type;
 
     const linked = await fromUuid(this.document.system.item);
-    context.subclasses = await this._getSubclasses(this.document.system.subclassItems);
+    context.subclasses = this.type === "class" ? await this._getSubclasses(this.document.system.subclassItems) : null;
 
     if ( !linked ) return context;
     context.linked = {
@@ -57,7 +74,9 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     context.optionalTable = await this._getOptionalTable(linked);
     context.features = await this._getFeatures(linked);
     context.optionalFeatures = await this._getFeatures(linked, true);
-    context.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+    if ( context.subclasses?.length ) context.subclasses?.sort((lhs, rhs) =>
+      lhs.name.localeCompare(rhs.name, game.i18n.lang)
+    );
 
     return context;
   }
@@ -100,6 +119,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         skills: makeTrait("skills")
       };
     }
+
+    advancement.equipment = item.system.startingEquipmentDescription;
 
     return advancement;
   }
@@ -170,7 +191,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
             continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
+            features.push(...await Promise.all(advancement.configuration.items.map(i => makeLink(i.uuid))));
             break;
         }
       }
@@ -217,11 +238,9 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         Actor5e.computeClassProgression(progression, item, { spellcasting });
         Actor5e.prepareSpellcastingSlots(spells, "leveled", progression);
 
-        if ( !largestSlot ) largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
-          if ( !data.max ) return slot;
-          const level = parseInt(key.slice(5));
-          if ( !Number.isNaN(level) && (level > slot) ) return level;
-          return slot;
+        if ( !largestSlot ) largestSlot = Object.values(spells).reduce((slot, { max, level }) => {
+          if ( !max ) return slot;
+          return Math.max(slot, level || -1);
         }, -1);
 
         table.rows.push(Array.fromRange(largestSlot, 1).map(spellLevel => {
@@ -305,7 +324,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
             if ( !advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
+            features.push(...await Promise.all(advancement.configuration.items.map(i => makeLink(i.uuid))));
             break;
         }
       }
@@ -332,8 +351,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * @returns {object[]}   Prepared features.
    */
   async _getFeatures(item, optional=false) {
-    const prepareFeature = async uuid => {
-      const document = await fromUuid(uuid);
+    const prepareFeature = async f => {
+      const document = await fromUuid(f.uuid);
       return {
         document,
         name: document.name,
@@ -390,8 +409,6 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Rendering                                   */
-  /* -------------------------------------------- */
 
   /** @inheritdoc */
   async _renderInner(...args) {
@@ -427,8 +444,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     const container = event.currentTarget.closest("[data-item-uuid]");
     const uuidToDelete = container?.dataset.itemUuid;
     if ( !uuidToDelete ) return;
-    switch (container.dataset.itemType) {
-      case "class":
+    switch ( container.dataset.itemType ) {
+      case "linked":
         await this.document.update({"system.item": ""});
         return this.render();
       case "subclass":
@@ -461,8 +478,9 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
     if ( data?.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
-    switch ( item.type ) {
-      case "class":
+    const type = this.type === item.type ? "linked" : item.type;
+    switch ( type ) {
+      case "linked":
         await this.document.update({"system.item": item.uuid});
         return this.render();
       case "subclass":

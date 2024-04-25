@@ -1,4 +1,4 @@
-<{{ elements.inventory }} v2>
+<{{ elements.inventory }} class="inventory-element" v2>
 
     {{!-- Encumbrance & Containers --}}
     <div class="top">
@@ -7,17 +7,17 @@
         <div class="encumbrance card">
             {{#with encumbrance}}
             <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
-                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
+                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
                 <div class="label">
                     <i class="fas fa-weight-hanging"></i>
                     <span class="value">{{ value }}</span>
                     <span class="separator">&sol;</span>
                     <span class="max">{{ max }}</span>
                 </div>
-                <i class="breakpoint encumbrance-33 arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-33 arrow-down" role="presentation"></i>
-                <i class="breakpoint encumbrance-66 arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-66 arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-low  arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
             </div>
             {{/with}}
             <div class="info">
@@ -136,6 +136,10 @@
                     {{!-- Item Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
                          data-action="use" aria-label="{{ item.name }}">
+                        {{#if ctx.concentration}}
+                        <i class="concentration fas fa-arrow-rotate-left fa-spin fa-spin-reverse"
+                           aria-label="{{ localize "DND5E.Concentration" }}"></i>
+                        {{/if}}
                         <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
                         <div class="name name-stacked">
                             <span class="title">{{ item.name }}</span>
@@ -143,12 +147,21 @@
                             <span class="subtitle">{{{ ctx.subtitle }}}</span>
                             {{/if}}
                         </div>
+                        <div class="tags">
+                            {{#each item.labels.properties}}
+                            {{#if icon}}
+                            <span aria-label="{{ label }}">
+                                <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                            </span>
+                            {{/if}}
+                            {{/each}}
+                        </div>
                     </div>
 
                     {{!-- Item Price --}}
                     <div class="item-detail item-price {{#unless item.system.price.value}}empty{{/unless}}">
                         {{#if item.system.price.value}}
-                        {{ dnd5e-numberFormat item.system.price.value }}
+                        {{ifThen ctx.concealDetails "—" (dnd5e-numberFormat item.system.price.value)}}
                         <i class="currency {{ item.system.price.denomination }}"></i>
                         {{/if}}
                     </div>

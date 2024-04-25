@@ -10830,6 +10830,84 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.qKmqbRFE9n2Up5bF"
+    },
+    {
+      "sort": 20675000,
+      "name": "Spell Scroll",
+      "type": "rule",
+      "_id": "gi8IKhtOlBVhMJrN",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A spell scroll bears the words of a single spell, written in a mystical cipher. If the spell is on your class’s spell list, you can read the scroll and cast its spell without providing any material components. Otherwise, the scroll is unintelligible. Casting the spell by reading the scroll requires the spell’s normal casting time. Once the spell is cast, the words on the scroll fade, and it crumbles to dust. If the casting is interrupted, the scroll is not lost.</p><p>If the spell is on your class’s spell list but of a higher level than you can normally cast, you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC equals 10 + the spell’s level. On a failed check, the spell disappears from the scroll with no other effect.</p><p>The level of the spell on the scroll determines the spell’s saving throw DC and attack bonus, as well as the scroll’s rarity, as shown in the Spell Scroll table.</p><table><caption>Spell Scroll</caption><thead><tr><th scope=\"col\">Spell Level</th><th scope=\"col\">Rarity</th><th scope=\"col\">Save DC</th><th scope=\"col\">Attack Bonus</th></tr></thead><tbody><tr><th scope=\"row\">Cantrip</th><td>Common</td><td>13</td><td>+5</td></tr><tr><th scope=\"row\">1st</th><td>Common</td><td>13</td><td>+5</td></tr><tr><th scope=\"row\">2nd</th><td>Uncommon</td><td>13</td><td>+5</td></tr><tr><th scope=\"row\">3rd</th><td>Uncommon</td><td>15</td><td>+7</td></tr><tr><th scope=\"row\">4th</th><td>Rare</td><td>15</td><td>+7</td></tr><tr><th scope=\"row\">5th</th><td>Rare</td><td>17</td><td>+9</td></tr><tr><th scope=\"row\">6th</th><td>Very rare</td><td>17</td><td>+9</td></tr><tr><th scope=\"row\">7th</th><td>Very rare</td><td>18</td><td>+10</td></tr><tr><th scope=\"row\">8th</th><td>Very rare</td><td>18</td><td>+10</td></tr><tr><th scope=\"row\">9th</th><td>Legendary</td><td>19</td><td>+11</td></tr></tbody></table><p>A wizard spell on a <em>spell scroll</em> can be copied just as spells in spellbooks can be copied. When a spell is copied from a <em>spell scroll</em>, the copier must succeed on an Intelligence (Arcana) check with a DC equal to 10 + the spell’s level. If the check succeeds, the spell is successfully copied. Whether the check succeeds or fails, the <em>spell scroll</em> is destroyed.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.2.0",
+        "coreVersion": "11.315",
+        "createdTime": 1711217829430,
+        "modifiedTime": 1711218278065,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.gi8IKhtOlBVhMJrN"
+    },
+    {
+      "sort": 18350000,
+      "name": "Diseases",
+      "type": "rule",
+      "_id": "oNQWvyRZkTOJ8PBq",
+      "system": {
+        "tooltip": "<p>A disease that does more than infect a few party members is primarily a plot device. The rules help describe the effects of the disease and how it can be cured, but the specifics of how a disease works aren't bound by a common set of rules. Diseases can affect any creature, and a given illness might or might not pass from one race or kind of creature to another. A plague might affect only constructs or undead, or sweep through a halfling neighborhood but leave other races untouched. What matters is the story you want to tell.</p>",
+        "type": "rule"
+      },
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A plague ravages the kingdom, setting the adventurers on a quest to find a cure. An adventurer emerges from an ancient tomb, unopened for centuries, and soon finds herself suffering from a wasting illness. A warlock offends some dark power and contracts a strange affliction that spreads whenever he casts spells.</p><p>A simple outbreak might amount to little more than a small drain on party resources, curable by a casting of @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser Restoration}. A more complicated outbreak can form the basis of one or more adventures as characters search for a cure, stop the spread of the disease, and deal with the consequences.</p><p>A disease that does more than infect a few party members is primarily a plot device. The rules help describe the effects of the disease and how it can be cured, but the specifics of how a disease works aren't bound by a common set of rules. Diseases can affect any creature, and a given illness might or might not pass from one race or kind of creature to another. A plague might affect only constructs or undead, or sweep through a halfling neighborhood but leave other races untouched. What matters is the story you want to tell.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "11.315",
+        "systemId": "dnd5e",
+        "systemVersion": "3.2.0",
+        "createdTime": 1713798086261,
+        "modifiedTime": 1713798194558,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.oNQWvyRZkTOJ8PBq"
     }
   ],
   "folder": null,
@@ -10839,10 +10917,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1704059808409,
-    "modifiedTime": 1706217746263,
+    "modifiedTime": 1711218278065,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "NizgRXLNUqtdlC1s",

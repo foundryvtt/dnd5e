@@ -10,7 +10,7 @@
 
 // Import Configuration
 import DND5E from "./module/config.mjs";
-import registerSystemSettings from "./module/settings.mjs";
+import { registerSystemSettings, registerDeferredSettings } from "./module/settings.mjs";
 
 // Import Submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -50,6 +50,8 @@ Hooks.once("init", function() {
 
   // TODO: Remove when v11 support is dropped.
   CONFIG.compatibility.excludePatterns.push(/Math\.clamped/);
+  CONFIG.compatibility.excludePatterns.push(/\{\{filePicker}}/);
+  CONFIG.compatibility.excludePatterns.push(/foundry\.dice\.terms/);
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -57,6 +59,8 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
+  CONFIG.Combat.documentClass = documents.Combat5e;
+  CONFIG.Combatant.documentClass = documents.Combatant5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
   CONFIG.Item.compendiumIndexFields.push("system.container");
   CONFIG.Item.documentClass = documents.Item5e;
@@ -88,13 +92,6 @@ Hooks.once("init", function() {
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
-
-  // Configure trackable & consumable attributes.
-  _configureTrackableAttributes();
-  _configureConsumableAttributes();
-
-  // Patch Core Functions
-  Combatant.prototype.getInitiativeRoll = documents.combat.getInitiativeRoll;
 
   // Register Roll Extensions
   CONFIG.Dice.rolls.push(dice.D20Roll);
@@ -153,7 +150,7 @@ Hooks.once("init", function() {
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassPageSheet, {
     label: "DND5E.SheetClassClassSummary",
-    types: ["class"]
+    types: ["class", "subclass"]
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalMapLocationPageSheet, {
     label: "DND5E.SheetClassMapLocation",
@@ -162,6 +159,10 @@ Hooks.once("init", function() {
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalRulePageSheet, {
     label: "DND5E.SheetClassRule",
     types: ["rule"]
+  });
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalSpellListPageSheet, {
+    label: "DND5E.SheetClassSpellList",
+    types: ["spells"]
   });
 
   CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
@@ -298,9 +299,15 @@ function _configureFonts() {
  * Configure system status effects.
  */
 function _configureStatusEffects() {
-  const addEffect = (effects, data) => {
+  const addEffect = (effects, {special, ...data}) => {
+    data = foundry.utils.deepClone(data);
+    data._id = utils.staticID(`dnd5e${data.id}`);
+    if ( foundry.utils.isNewerVersion(game.version, 12) ) {
+      data.img = data.icon ?? data.img;
+      delete data.icon;
+    }
     effects.push(data);
-    if ( "special" in data ) CONFIG.specialStatusEffects[data.special] = data.id;
+    if ( special ) CONFIG.specialStatusEffects[special] = data.id;
   };
   CONFIG.statusEffects = Object.entries(CONFIG.DND5E.statusEffects).reduce((arr, [id, data]) => {
     const original = CONFIG.statusEffects.find(s => s.id === id);
@@ -320,10 +327,17 @@ function _configureStatusEffects() {
  * Prepare attribute lists.
  */
 Hooks.once("setup", function() {
+  // Configure trackable & consumable attributes.
+  _configureTrackableAttributes();
+  _configureConsumableAttributes();
+
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   game.dnd5e.moduleArt.registerModuleArt();
   Tooltips5e.activateListeners();
   game.dnd5e.tooltips.observe();
+
+  // Register settings after modules have had a chance to initialize
+  registerDeferredSettings();
 
   // Apply table of contents compendium style if specified in flags
   game.packs
@@ -335,8 +349,7 @@ Hooks.once("setup", function() {
     .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
 
   // Configure token rings
-  CONFIG.DND5E.tokenRings.shaderClass ??= game.release.generation < 12
-    ? canvas.TokenRingSamplerShaderV11 : canvas.TokenRingSamplerShader;
+  CONFIG.DND5E.tokenRings.shaderClass ??= canvas.TokenRingSamplerShaderV11;
   CONFIG.Token.ringClass.initialize();
 });
 
@@ -426,9 +439,11 @@ Hooks.on("renderPause", (app, [html]) => {
   img.className = "";
 });
 
-Hooks.on("renderSettings", () => {
-  const details = document.getElementById("game-details");
+Hooks.on("renderSettings", (app, [html]) => {
+  const details = html.querySelector("#game-details");
+  const pip = details.querySelector(".system-info .update");
   details.querySelector(".system").remove();
+
   const heading = document.createElement("div");
   heading.classList.add("dnd5e2", "sidebar-heading");
   heading.innerHTML = `
@@ -453,12 +468,14 @@ Hooks.on("renderSettings", () => {
     </ul>
   `;
   details.insertAdjacentElement("afterend", heading);
+
   const badge = document.createElement("div");
   badge.classList.add("dnd5e2", "system-badge");
   badge.innerHTML = `
     <img src="systems/dnd5e/ui/official/dnd-badge-32.webp" data-tooltip="${dnd5e.title}" alt="${dnd5e.title}">
     <span class="system-info">${dnd5e.version}</span>
   `;
+  if ( pip ) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
   heading.insertAdjacentElement("afterend", badge);
 });
 
@@ -479,6 +496,9 @@ Hooks.on("chatMessage", (app, message, data) => dnd5e.applications.Award.chatMes
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
+
+Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
+Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
 
 Hooks.on("applyTokenStatusEffect", canvas.Token5e.onApplyTokenStatusEffect);
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
