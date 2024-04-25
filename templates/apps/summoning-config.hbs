@@ -10,6 +10,8 @@
         {{#each profiles}}
         <li class="profile dnd5e2" data-profile-id="{{ id }}">
             <div class="details flexrow">
+                <input type="text" name="profiles.{{ id }}.count" value="{{ count }}" placeholder="1"
+                       aria-label="{{ localize 'DND5E.Summoning.Count.Label' }}">
                 {{#if document}}
                 {{{ dnd5e-linkForUuid uuid }}}
                 {{else}}

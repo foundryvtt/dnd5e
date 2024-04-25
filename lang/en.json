@@ -1564,6 +1564,9 @@
     }
   },
   "Configuration": "Summoning Configuration",
+  "Count": {
+    "Label": "Count"
+  },
   "CreatureChanges": {
     "Label": "Creature Changes",
     "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats. Summoned creature's stats can be referenced using @summon (e.g. @summon.attributes.hd.max to reference the creature's hit dice count)."
@@ -1576,7 +1579,7 @@
     "Label": "Creature Types",
     "Hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
   },
-  "DisplayName": "Display Name",
+  "DisplayName": "Profile Name",
   "DropHint": "Drop creature here",
   "ItemChanges": {
     "Label": "Item Changes",

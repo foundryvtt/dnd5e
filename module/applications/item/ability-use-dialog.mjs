@@ -1,3 +1,5 @@
+import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+
 /**
  * A specialized Dialog subclass for ability usage.
  *
@@ -198,7 +200,12 @@ export default class AbilityUseDialog extends Dialog {
           const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
           const withinRange = ((profile.level.min ?? -Infinity) <= level) && (level <= (profile.level.max ?? Infinity));
           if ( !doc || !withinRange ) return null;
-          const label = profile.name ? profile.name : (doc?.name ?? "—");
+          let label = profile.name ? profile.name : (doc?.name ?? "—");
+          let count = simplifyRollFormula(Roll.replaceFormulaData(profile.count ?? "1", rollData));
+          if ( Number.isNumeric(count) ) {
+            count = parseInt(count);
+            if ( count > 1 ) label = `${count} x ${label}`;
+          } else if ( count ) label = `${count} x ${label}`;
           return [profile._id, label];
         })
         .filter(f => f)
@@ -457,7 +464,7 @@ export default class AbilityUseDialog extends Dialog {
     if ( !originalInput ) return;
 
     // If multiple profiles, replace with select element
-    if ( summoningData.profles ) {
+    if ( summoningData.profiles ) {
       const select = document.createElement("select");
       select.name = "summonsProfile";
       select.ariaLabel = game.i18n.localize("DND5E.Summoning.Profile.Label");
