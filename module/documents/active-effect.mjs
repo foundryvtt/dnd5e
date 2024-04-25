@@ -428,6 +428,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
     }, data, {inplace: false});
     delete effectData.id;
+    if ( item.type === "spell" ) effectData["flags.dnd5e.spellLevel"] = item.system.level;
 
     return effectData;
   }
