@@ -83,12 +83,8 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static async _fromStatusEffect(statusId, effectData, options) {
-    if ( !("description" in effectData) && effectData.reference ) {
-      const page = await fromUuid(effectData.reference);
-      effectData.description = page?.text.content ?? "";
-    }
-    delete effectData.reference;
+  static async _fromStatusEffect(statusId, { reference, ...effectData }, options) {
+    if ( !("description" in effectData) && reference ) effectData.description = `@Embed[${reference} inline]`;
     return super._fromStatusEffect?.(statusId, effectData, options) ?? new this(effectData, options);
   }
 
