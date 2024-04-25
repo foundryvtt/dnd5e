@@ -176,6 +176,23 @@ export default class Tooltips5e {
    * @protected
    */
   _positionItemTooltip(direction=TooltipManager.TOOLTIP_DIRECTIONS.LEFT) {
+    const pos = this.tooltip.getBoundingClientRect();
+    const dirs = TooltipManager.TOOLTIP_DIRECTIONS;
+    switch ( direction ) {
+      case dirs.UP:
+        if ( pos.y - TooltipManager.TOOLTIP_MARGIN_PX <= 0 ) direction = dirs.DOWN;
+        break;
+      case dirs.DOWN:
+        if ( pos.y + this.tooltip.offsetHeight > window.innerHeight ) direction = dirs.UP;
+        break;
+      case dirs.LEFT:
+        if ( pos.x - TooltipManager.TOOLTIP_MARGIN_PX <= 0 ) direction = dirs.RIGHT;
+        break;
+      case dirs.RIGHT:
+        if ( pos.x + this.tooltip.offsetWidth > window.innerWith ) direction = dirs.LEFT;
+        break;
+    }
+
     game.tooltip._setAnchor(direction);
 
     // Set overflowing styles for item tooltips.
