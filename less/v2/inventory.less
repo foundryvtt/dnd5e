@@ -342,6 +342,7 @@
         }
         input { text-align: end; }
       }
+      .spell-uses { display: none; }
 
       /* Item Recovery */
       .item-recovery { width: 60px; }
@@ -462,7 +463,8 @@
       }
 
       @container (min-width: 600px) {
-        .item-price, .item-formula { display: flex; }
+        .item-price, .item-formula, .spell-uses { display: flex; }
+        .subtitle-uses { display: none; }
       }
 
       @container (min-width: 650px) {
