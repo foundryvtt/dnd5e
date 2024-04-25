@@ -850,6 +850,19 @@ preLocalize("itemRarity");
 /* -------------------------------------------- */
 
 /**
+ * The limited use periods that support a recovery formula.
+ * @deprecated since DnD5e 3.1, available until DnD5e 3.3
+ * @enum {string}
+ */
+DND5E.limitedUseFormulaPeriods = {
+  charges: "DND5E.Charges",
+  dawn: "DND5E.Dawn",
+  dusk: "DND5E.Dusk"
+};
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for limited use periods.
  *
  * @typedef {object} LimitedUsePeriodConfiguration
