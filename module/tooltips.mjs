@@ -103,7 +103,7 @@ export default class Tooltips5e {
    * @protected
    */
   async _onHoverContentLink(doc) {
-    const { content, classes } = await doc.richTooltip?.() ?? {};
+    const { content, classes } = await (doc.richTooltip?.() ?? doc.system?.richTooltip?.() ?? {});
     if ( !content ) return;
     this.tooltip.innerHTML = content;
     classes?.forEach(c => this.tooltip.classList.add(c));
