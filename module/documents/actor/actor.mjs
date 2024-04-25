@@ -1039,13 +1039,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const rollData = this.getRollData({deterministic: true});
 
     damages.forEach(d => {
+      d.active ??= {};
+
       // Skip damage types with immunity
       if ( skipped(d.type) || (!ignore("immunity", d.type) && hasEffect("di", d.type, d.properties)) ) {
         d.value = 0;
-        d.active = { multiplier: 0, immunity: true };
+        d.active.multiplier = 0;
+        d.active.immunity = true;
         return;
       }
-      d.active = {};
 
       // Apply type-specific damage reduction
       if ( !ignore("modification", d.type) && traits.dm?.amount[d.type]
@@ -1074,7 +1076,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( (options.invertHealing !== false) && (d.type === "healing") ) damageMultiplier *= -1;
 
       d.value = d.value * damageMultiplier;
-      d.active.multiplier = damageMultiplier;
+      d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
     });
 
     /**
