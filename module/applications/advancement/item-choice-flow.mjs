@@ -163,7 +163,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     // If a feature has a level pre-requisite, make sure it is less than or equal to current level
-    if ( (item.system.prerequisites?.level ?? -Infinity) >= this.level ) {
+    if ( (item.system.prerequisites?.level ?? -Infinity) > this.level ) {
       ui.notifications.error(game.i18n.format("DND5E.AdvancementItemChoiceFeatureLevelWarning", {
         level: item.system.prerequisites.level
       }));
