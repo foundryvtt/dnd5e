@@ -1082,7 +1082,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( this.document.type === "npc" ) {
         prep.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {
-        const m = progs.has("leveled") ? "prepared" : ( progs.first() ?? "innate" );
+        const m = progs.has("leveled") ? "prepared" : (progs.first() ?? "innate");
         prep.mode = progs.has(prep.mode) ? prep.mode : m;
       }
     }

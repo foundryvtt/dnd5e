@@ -9,6 +9,7 @@ import ActiveEffect5e from "../active-effect.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import Item5e from "../item.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
+import DND5E from "../../config.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -2529,11 +2530,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let updates = {};
     if ( !spells ) return updates;
 
-    Object.entries(CONFIG.DND5E.spellPreparationModes).forEach(([k, v]) => {
-      if ( v.upcast && ((recoverShort && v.shortRest) || recoverLong) ) {
+    Object.entries(DND5E.spellPreparationModes).forEach(([k, v]) => {
+      const isSR = DND5E.spellcastingTypes[k === "prepared" ? "leveled" : k]?.shortRest;
+      if ( v.upcast && ((recoverShort && isSR) || recoverLong) ) {
         if ( k === "prepared" ) {
-          Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1).forEach(level => {
-            updates[`system.spells.spell${level}.value`] = spells[`spell${level}`].max;
+          Object.entries(spells).forEach(([m, n]) => {
+            if ( /^spell\d+/.test(m) && n.level ) {
+              updates[`system.spells.${m}.value`] = n.max;
+            }
           });
         } else if ( k !== "always" ) {
           updates[`system.spells.${k}.value`] = spells[k].max;

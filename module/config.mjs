@@ -1986,7 +1986,6 @@ DND5E.pactCastingProgression = {
  * @property {boolean} [cantrips]     Whether this mode allows for cantrips in a spellbook.
  * @property {number} [order]         The sort order of this mode in a spellbook.
  * @property {boolean} [prepares]     Whether this preparation mode prepares spells.
- * @property {boolean} [shortRest]    Are these spell slots additionally restored on a short rest?
  */
 
 /**
@@ -1997,15 +1996,13 @@ DND5E.spellPreparationModes = {
   prepared: {
     label: "DND5E.SpellPrepPrepared",
     upcast: true,
-    prepares: true,
-    shortRest: false
+    prepares: true
   },
   pact: {
     label: "DND5E.PactMagic",
     upcast: true,
     cantrips: true,
-    order: 0.5,
-    shortRest: true
+    order: 0.5
   },
   always: {
     label: "DND5E.SpellPrepAlways",
@@ -2043,7 +2040,9 @@ DND5E.spellUpcastModes = ["always", "pact", "prepared"];
  * Configuration data for different types of spellcasting supported.
  *
  * @typedef {object} SpellcastingTypeConfiguration
- * @property {string} label                                                        Localized label.
+ * @property {string} label                               Localized label.
+ * @property {string} img                                 Image used when rendered as a favorite on the sheet.
+ * @property {boolean} [shortRest]                        Are these spell slots additionally restored on a short rest?
  * @property {Object<string, SpellcastingProgressionConfiguration>} [progression]  Any progression modes for this type.
  */
 
@@ -2086,7 +2085,8 @@ DND5E.spellcastingTypes = {
   },
   pact: {
     label: "DND5E.SpellProgPact",
-    img: "icons/magic/unholy/silhouette-robe-evil-power.webp"
+    img: "icons/magic/unholy/silhouette-robe-evil-power.webp",
+    shortRest: true
   }
 };
 preLocalize("spellcastingTypes", { key: "label", sort: true });

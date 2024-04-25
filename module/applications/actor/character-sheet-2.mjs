@@ -1305,13 +1305,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         title: game.i18n.localize(`DND5E.SpellSlots${id.capitalize()}`),
         subtitle: [
           game.i18n.localize(`DND5E.SpellLevel${level}`),
-          game.i18n.localize(`DND5E.Abbreviation${CONFIG.DND5E.spellPreparationModes[id]?.shortRest ? "SR" : "LR"}`)
+          game.i18n.localize(`DND5E.Abbreviation${CONFIG.DND5E.spellcastingTypes[id]?.shortRest ? "SR" : "LR"}`)
         ],
         img: CONFIG.DND5E.spellcastingTypes[id]?.img || CONFIG.DND5E.spellcastingTypes.pact.img
       };
 
       const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
-      const isSR = CONFIG.DND5E.spellPreparationModes.prepared.shortRest;
+      const isSR = CONFIG.DND5E.spellcastingTypes.leveled.shortRest;
       return {
         uses, level,
         title: game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
