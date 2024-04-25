@@ -61,12 +61,12 @@
             {{!-- Section Header --}}
             <div class="items-header header">
                 <h3 class="item-name spell-header">{{ localize label }}</h3>
-                <div class="item-header item-uses spell-uses">{{ localize "DND5E.Uses" }}</div>
                 <div class="item-header item-school">{{ localize "DND5E.SpellHeader.School" }}</div>
                 <div class="item-header item-usage">{{ localize "DND5E.SpellHeader.Time" }}</div>
                 <div class="item-header item-range">{{ localize "DND5E.SpellHeader.Range" }}</div>
                 <div class="item-header item-target">{{ localize "DND5E.SpellHeader.Target" }}</div>
                 <div class="item-header item-roll">{{ localize "DND5E.SpellHeader.Roll" }}</div>
+                <div class="item-header item-uses spell-uses">{{ localize "DND5E.Uses" }}</div>
                 <div class="item-header item-formula">{{ localize "DND5E.SpellHeader.Formula" }}</div>
                 <div class="item-header item-controls"></div>
                 {{#if (and usesSlots editable)}}
@@ -128,16 +128,6 @@
                         </div>
                     </div>
 
-                    {{!-- Spell Uses --}}
-                    <div class="item-detail item-uses spell-uses {{#unless ctx.hasUses}}empty{{/unless}}">
-                        {{#if ctx.hasUses}}
-                        <input type="text" value="{{ item.system.uses.value }}" placeholder="0" data-dtype="Number"
-                               data-name="system.uses.value" inputmode="numeric" pattern="[0-9+=\-]*">
-                        <span class="separator">&sol;</span>
-                        <span class="max">{{ item.system.uses.max }}</span>
-                        {{/if}}
-                    </div>
-
                     {{!-- Spell School --}}
                     <div class="item-detail item-school" data-tooltip="{{ item.labels.school }}"
                          aria-label="{{ item.labels.school }}">
@@ -182,6 +172,16 @@
                             </span>
                             <span class="value">{{ item.system.save.dc }}</span>
                         </div>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Spell Uses --}}
+                    <div class="item-detail item-uses spell-uses {{#unless ctx.hasUses}}empty{{/unless}}">
+                        {{#if ctx.hasUses}}
+                        <input type="text" value="{{ item.system.uses.value }}" placeholder="0" data-dtype="Number"
+                               data-name="system.uses.value" inputmode="numeric" pattern="[+=\-]?\d*">
+                        <span class="separator">&sol;</span>
+                        <span class="max">{{ item.system.uses.max }}</span>
                         {{/if}}
                     </div>
 
