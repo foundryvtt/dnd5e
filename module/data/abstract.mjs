@@ -360,13 +360,15 @@ export class ItemDataModel extends SystemDataModel {
 
   /**
    * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
-   * @property {boolean} enchantable  Can this item be modified by enchantment effects?
-   * @property {boolean} singleton    Should only a single item of this type be allowed on an actor?
+   * @property {boolean} enchantable    Can this item be modified by enchantment effects?
+   * @property {boolean} inventoryItem  Should this item be listed with an actor's inventory?
+   * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
    */
 
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: false,
+    inventoryItem: true,
     singleton: false
   }, {inplace: false}));
 
