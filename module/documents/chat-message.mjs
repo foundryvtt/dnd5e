@@ -261,8 +261,8 @@ export default class ChatMessage5e extends ChatMessage {
     }
 
     avatar.addEventListener("click", this._onTargetMouseDown.bind(this));
-    avatar.addEventListener("mouseover", this._onTargetHoverIn.bind(this));
-    avatar.addEventListener("mouseout", this._onTargetHoverOut.bind(this));
+    avatar.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
+    avatar.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -322,8 +322,8 @@ export default class ChatMessage5e extends ChatMessage {
     }).sort((a, b) => (a[1] === b[1]) ? 0 : a[1] ? 1 : -1).reduce((str, [li]) => str + li, "");
     evaluation.querySelectorAll("li.target").forEach(target => {
       target.addEventListener("click", this._onTargetMouseDown.bind(this));
-      target.addEventListener("mouseover", this._onTargetHoverIn.bind(this));
-      target.addEventListener("mouseout", this._onTargetHoverOut.bind(this));
+      target.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
+      target.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
     });
     html.querySelector(".message-content")?.appendChild(evaluation);
   }
