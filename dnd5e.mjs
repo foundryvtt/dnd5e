@@ -198,11 +198,16 @@ function _configureTrackableAttributes() {
     ]
   };
 
+  const altSpells = Object.entries(DND5E.spellPreparationModes).reduce((acc, [k, v]) => {
+    if ( !["prepared", "always"].includes(k) && v.upcast ) acc.push(`spells.${k}`);
+    return acc;
+  }, []);
+
   const creature = {
     bar: [
       ...common.bar,
       "attributes.hp",
-      "spells.pact",
+      ...altSpells,
       ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(l => `spells.spell${l}`)
     ],
     value: [
@@ -240,6 +245,11 @@ function _configureTrackableAttributes() {
  * @internal
  */
 function _configureConsumableAttributes() {
+  const altSpells = Object.entries(DND5E.spellPreparationModes).reduce((acc, [k, v]) => {
+    if ( !["prepared", "always"].includes(k) && v.upcast ) acc.push(`spells.${k}.value`);
+    return acc;
+  }, []);
+
   CONFIG.DND5E.consumableResources = [
     ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
     "attributes.ac.flat",
@@ -250,7 +260,7 @@ function _configureConsumableAttributes() {
     "details.xp.value",
     "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",
     "resources.legact.value", "resources.legres.value",
-    "spells.pact.value",
+    ...altSpells,
     ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(level => `spells.spell${level}.value`)
   ];
 }

@@ -562,7 +562,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   // Spell slots.
   else if ( attr.startsWith("spells.") ) {
     const [, key] = attr.split(".");
-    if ( key === "pact" ) label = "DND5E.SpellSlotsPact";
+    if ( !/spell\d+/.test(key) ) label = `DND5E.SpellSlots${key.capitalize()}`;
     else {
       const plurals = new Intl.PluralRules(game.i18n.lang, {type: "ordinal"});
       const level = Number(key.slice(5));
