@@ -29,7 +29,8 @@ export default class LootData extends ItemDataModel.mixin(
 
   /** @inheritdoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true
+    enchantable: true,
+    inventoryItem: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
