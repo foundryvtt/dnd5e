@@ -79,6 +79,7 @@ export default class AdvancementConfig extends FormApplication {
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
     else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
     const context = {
+      appId: this.id,
       CONFIG: CONFIG.DND5E,
       ...this.advancement.toObject(false),
       src: this.advancement.toObject(),

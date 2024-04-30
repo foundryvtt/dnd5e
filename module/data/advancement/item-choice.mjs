@@ -85,7 +85,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
  * Data for a replacement.
  *
  * @typedef {object} ItemChoiceReplacement
- * @property {number} level        Level at which the original item originated.
+ * @property {number} level        Level at which the original item was chosen.
  * @property {string} original     ID of the original item that was replaced.
  * @property {string} replacement  ID of the replacement item.
  */

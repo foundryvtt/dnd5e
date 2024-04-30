@@ -79,14 +79,9 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async apply(level, data, retainedData={}) {
-    let original = data.replace;
+  async apply(level, { replace: original, ...data }, retainedData={}) {
     let replacement;
-    if ( retainedData.replaced ) {
-      original = retainedData.replaced.original;
-      replacement = retainedData.replaced.replacement;
-    }
-    delete data.replaced;
+    if ( retainedData.replaced ) ({ original, replacement } = retainedData.replaced);
 
     const updates = await super.apply(level, data, retainedData);
 

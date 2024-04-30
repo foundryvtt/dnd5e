@@ -224,8 +224,11 @@
     --grid-two-column-center-size: 0.7fr;
     --grid-two-column-right-size: 0.5fr;
 
-    .level-list .hint {
-      text-align: end;
+    .level-list {
+      .items-header { padding-inline: 2px; }
+      .level-header { flex: 0.5; }
+      .choices-header { flex: 3; }
+      .replacement-header { flex: 0 0 20px; }
     }
 
     .form-group:has(textarea) {
