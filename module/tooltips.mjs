@@ -172,10 +172,15 @@ export default class Tooltips5e {
 
   /**
    * Position a tooltip after rendering.
-   * @param {string} [direction="LEFT"]  The direction to position the tooltip.
+   * @param {string} [direction]  The direction to position the tooltip.
    * @protected
    */
-  _positionItemTooltip(direction=TooltipManager.TOOLTIP_DIRECTIONS.LEFT) {
+  _positionItemTooltip(direction) {
+    if ( !direction ) {
+      direction = TooltipManager.TOOLTIP_DIRECTIONS.LEFT;
+      game.tooltip._setAnchor(direction);
+    }
+
     const pos = this.tooltip.getBoundingClientRect();
     const dirs = TooltipManager.TOOLTIP_DIRECTIONS;
     switch ( direction ) {
