@@ -368,7 +368,7 @@ export class ItemDataModel extends SystemDataModel {
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: false,
-    inventoryItem: true,
+    inventoryItem: false,
     singleton: false
   }, {inplace: false}));
 
