@@ -144,7 +144,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       .map(spell => {
         const data = spell.unlinked ? spell : { spell };
         data.unlinked ??= unlinkedData[data.spell?.uuid];
-        data.name = data.spell?.name ?? data.unlinked?.name;
+        data.name = data.spell?.name ?? data.unlinked?.name ?? "";
         if ( data.spell ) {
           data.display = linkForUuid(data.spell.uuid, {
             tooltip: '<section class="loading"><i class="fas fa-spinner fa-spin-pulse"></i></section>'
