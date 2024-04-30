@@ -91,7 +91,6 @@ export default class ItemGrantAdvancement extends Advancement {
       ability: data.ability ?? this.retainedData?.ability ?? this.value?.ability
     }) ?? {};
     for ( const uuid of filteredKeys(data) ) {
-
       let itemData = retainedData[uuid];
       if ( !itemData ) {
         itemData = await this.createItemData(uuid);
@@ -102,11 +101,13 @@ export default class ItemGrantAdvancement extends Advancement {
       items.push(itemData);
       updates[itemData._id] = uuid;
     }
-    this.actor.updateSource({items});
-    this.updateSource({
-      "value.ability": data.ability,
-      [this.storagePath(level)]: updates
-    });
+    if ( items.length ) {
+      this.actor.updateSource({ items });
+      this.updateSource({
+        "value.ability": data.ability,
+        [this.storagePath(level)]: updates
+      });
+    }
     return updates;
   }
 

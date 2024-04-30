@@ -75,13 +75,13 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     const levelConfig = this.advancement.configuration.choices[this.level];
     let max = levelConfig.count ?? 0;
-    if ( levelConfig.replacement && this.replacement ) max++;
+    context.replaceable = levelConfig.replacement;
+    context.noReplacement = !this.advancement.actor.items.has(this.replacement);
+    if ( context.replaceable && !context.noReplacement ) max++;
     if ( this.selected.size > max ) {
       this.selected = new Set(Array.from(this.selected).slice(0, max));
     }
     context.choices = { max, current: this.selected.size, full: this.selected.size >= max };
-    context.replacement = levelConfig.replacement;
-    context.noReplacement = !this.replacement;
 
     context.previousLevels = {};
     const previouslySelected = new Set();

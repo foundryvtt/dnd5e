@@ -7,7 +7,7 @@
         <p>{{ advancement.configuration.hint }}</p>
         {{/if}}
 
-        {{#if replacement}}
+        {{#if replaceable}}
         <div class="item-name">
             <label class="flexrow">
                 <h4>{{ localize "DND5E.AdvancementItemChoiceReplacementNone" }}</h4>
@@ -32,7 +32,7 @@
             <div class="item-image" style="background-image: url('{{ img }}');"></div>
             <label class="flexrow">
                 <h4><a data-uuid="{{ uuid }}">{{ name }}</a></h4>
-                {{#if (and @root.replacement (not replaced))}}
+                {{#if (and @root.replaceable (not replaced))}}
                 <input type="radio" name="replace" value="{{ id }}" {{ checked checked }}>
                 {{/if}}
             </label>

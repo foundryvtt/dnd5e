@@ -102,9 +102,15 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /** @inheritdoc */
   restore(level, data) {
+    const original = this.actor.items.get(data.replaced?.original);
+    if ( data.replaced && !original ) data.items = data.items.filter(i => i._id !== data.replaced.replacement);
+
     super.restore(level, data);
 
     if ( data.replaced ) {
+      if ( !original ) {
+        throw new ItemChoiceAdvancement.ERROR(game.i18n.localize("DND5E.AdvancementItemChoiceNoOriginalError"));
+      }
       this.actor.items.delete(data.replaced.original);
       this.updateSource({ [`value.replaced.${level}`]: data.replaced });
     }
