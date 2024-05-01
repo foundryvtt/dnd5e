@@ -152,7 +152,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    */
   async getItems() {
     return (await Promise.all(
-      Array.from(this.constructor.#appliedEnchantments.get(this.item.uuid) ?? [])
+      Array.from(EnchantmentData.#appliedEnchantments.get(this.item.uuid) ?? [])
         .map(uuid => fromUuid(uuid).then(ae => ae?.parent))
     )).filter(i => i);
   }
@@ -177,10 +177,10 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    */
   static trackEnchantment(source, enchanted) {
     if ( enchanted.startsWith("Compendium.") ) return;
-    if ( !this.#appliedEnchantments.has(source) ) {
-      this.#appliedEnchantments.set(source, new Set());
+    if ( !EnchantmentData.#appliedEnchantments.has(source) ) {
+      EnchantmentData.#appliedEnchantments.set(source, new Set());
     }
-    const applied = this.#appliedEnchantments.get(source);
+    const applied = EnchantmentData.#appliedEnchantments.get(source);
     applied.add(enchanted);
   }
 
@@ -192,9 +192,8 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    * @param {string} enchanted  UUID of the enchantment to stop tracking.
    */
   static untrackEnchantment(source, enchanted) {
-    if ( !this.#appliedEnchantments.has(source) ) return;
-    const applied = this.#appliedEnchantments.get(source);
-    applied.delete(enchanted);
+    if ( !EnchantmentData.#appliedEnchantments.has(source) ) return;
+    EnchantmentData.#appliedEnchantments.get(source).delete(enchanted);
   }
 }
 

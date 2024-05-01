@@ -376,16 +376,15 @@ export default class ActiveEffect5e extends ActiveEffect {
       return false;
     }
 
-    if ( !this.isAppliedEnchantment ) return;
-
-    // Otherwise validate against the enchantment's restraints on the origin item
-    const origin = await fromUuid(this.origin);
-    const errors = origin?.system.enchantment?.canEnchant(this.parent);
-    this.updateSource({ disabled: false });
-    if ( !errors?.length ) return;
-
-    errors.forEach(err => ui.notifications.error(err.message));
-    return false;
+    if ( this.isAppliedEnchantment ) {
+      const origin = await fromUuid(this.origin);
+      const errors = origin?.system.enchantment?.canEnchant(this.parent);
+      if ( errors?.length ) {
+        errors.forEach(err => console.error(err));
+        return false;
+      }
+      this.updateSource({ disabled: false });
+    }
   }
 
   /* -------------------------------------------- */
