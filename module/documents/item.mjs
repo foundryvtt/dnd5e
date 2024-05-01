@@ -979,11 +979,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Configuration data for an item usage being prepared.
    *
    * @typedef {object} ItemUseConfiguration
+   * @property {boolean} applyEnchantment           Should this item apply an enchantment?
    * @property {boolean} createMeasuredTemplate     Should this item create a template?
    * @property {boolean} createSummons              Should this item create a summoned creature?
    * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
    * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
+   * @property {string} enchantmentProfile          ID of the enchantment to apply.
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
    * @property {string|null} summonsProfile         ID of the summoning profile to use.
    * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
@@ -1048,7 +1050,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( (options.configureDialog !== false) && needsConfiguration ) {
       const configuration = await AbilityUseDialog.create(item, config);
       if ( !configuration ) return;
+      if ( !configuration.applyEnchantment ) configuration.enchantmentProfile = null;
       foundry.utils.mergeObject(config, configuration);
+    }
+
+    // Store selected enchantment profile in flag
+    if ( config.enchantmentProfile ) {
+      foundry.utils.setProperty(options.flags, "dnd5e.use.enchantmentProfile", config.enchantmentProfile);
     }
 
     // Handle upcasting
@@ -1176,19 +1184,21 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {ItemUseConfiguration}  Configuration data for the roll.
    */
   _getUsageConfig() {
-    const { consume, uses, summons, target, level, preparation } = this.system;
+    const { consume, uses, enchantment, summons, target, level, preparation } = this.system;
 
     const config = {
-      consumeSpellSlot: null,
-      slotLevel: null,
-      beginConcentrating: null,
-      endConcentration: null,
-      consumeUsage: null,
-      consumeResource: null,
-      resourceAmount: null,
+      applyEnchantment: null,
       createMeasuredTemplate: null,
       createSummons: null,
-      summonsProfile: null
+      consumeResource: null,
+      consumeSpellSlot: null,
+      consumeUsage: null,
+      enchantmentProfile: null,
+      slotLevel: null,
+      summonsProfile: null,
+      resourceAmount: null,
+      beginConcentrating: null,
+      endConcentration: null
     };
 
     const scaling = this.usageScaling;
@@ -1207,6 +1217,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     if ( game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget && canvas.scene ) {
       config.createMeasuredTemplate = target.prompt;
+    }
+    if ( this.system.isEnchantment ) {
+      config.applyEnchantment = enchantment?.prompt ?? true;
+      config.enchantmentProfile = this.effects.find(e =>
+        (e.getFlag("dnd5e", "type") === "enchantment") && !e.isAppliedEnchantment
+      )?.id;
     }
     if ( this.system.hasSummoning && this.system.summons.canSummon && canvas.scene ) {
       config.createSummons = summons.prompt;
@@ -1483,7 +1499,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       config: CONFIG.DND5E,
       tokenId: token?.uuid || null,
       item: this,
-      effects: this.effects,
+      effects: this.effects.filter(e => e.getFlag("dnd5e", "type") !== "enchantment"),
       data: await this.system.getCardData(),
       labels: this.labels,
       hasAttack: this.hasAttack,

@@ -255,6 +255,7 @@ export default class ChatMessage5e extends ChatMessage {
         if ( !(roll instanceof DamageRoll) ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
+      this._enrichEnchantmentTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
@@ -422,6 +423,27 @@ export default class ChatMessage5e extends ChatMessage {
       }
       if ( term instanceof NumericTerm ) aggregate.constant += value * multiplier;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display the enrichment application interface if necessary.
+   * @param {HTMLLIElement} html   The chat card.
+   * @protected
+   */
+  _enrichEnchantmentTooltip(html) {
+    const enchantmentProfile = this.getFlag("dnd5e", "use.enchantmentProfile");
+    if ( !enchantmentProfile ) return;
+
+    // Ensure concentration is still being maintained
+    const concentrationId = this.getFlag("dnd5e", "use.concentrationId");
+    if ( concentrationId && !this.getAssociatedActor()?.effects.get(concentrationId) ) return;
+
+    // Create the enchantment tray
+    const enchantmentApplication = document.createElement("enchantment-application");
+    enchantmentApplication.classList.add("dnd5e2");
+    html.querySelector(".message-content").appendChild(enchantmentApplication);
   }
 
   /* -------------------------------------------- */
@@ -645,5 +667,37 @@ export default class ChatMessage5e extends ChatMessage {
         setTimeout(() => ui.chat.scrollBottom(), 250);
       });
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the Actor which is the author of a chat card.
+   * @returns {Actor|void}
+   */
+  getAssociatedActor() {
+    if ( this.speaker.scene && this.speaker.token ) {
+      const scene = game.scenes.get(this.speaker.scene);
+      const token = scene?.tokens.get(this.speaker.token);
+      if ( token ) return token.actor;
+    }
+    return game.actors.get(this.speaker.actor);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the item associated with this chat card.
+   * @returns {Item5e|void}
+   */
+  getAssociatedItem() {
+    const actor = this.getAssociatedActor();
+    if ( !actor ) return;
+    const storedData = this.getFlag("dnd5e", "itemData");
+    return storedData
+      ? new Item.implementation(storedData, { parent: actor })
+      : actor.items.get(this.getFlag("dnd5e", "use.itemId"));
   }
 }

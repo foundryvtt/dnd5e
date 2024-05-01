@@ -591,10 +591,44 @@
     }
   }
 
-  .targets + button {
+  .wrapper > button {
     margin: 3px;
     width: calc(100% - 6px);
     margin-block-start: 6px;
+  }
+
+  &.enchantment-tray {
+    .drop-area {
+      display: grid;
+      min-block-size: 40px;
+      margin: 4px;
+      border: 1px dashed var(--dnd5e-color-crimson);
+      border-radius: 4px;
+      padding-inline: 4px;
+      background: var(--dnd5e-color-card);
+
+      p {
+        place-content: center;
+        text-align: center;
+      }
+
+      .preview {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        > img {
+          block-size: 32px;
+          inline-size: 32px;
+          flex: 0 0 32px;
+        }
+        > .name {
+          flex: 1;
+          font-family: var(--dnd5e-font-roboto-slab);
+          font-weight: bold;
+        }
+      }
+    }
   }
 }
 

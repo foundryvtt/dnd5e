@@ -41,7 +41,9 @@ export default class EnchantmentConfig extends DocumentSheet {
       return obj;
     }, {});
     context.enchantment = this.document.system.enchantment;
-    context.enchantments = this.document.effects.filter(e => e.getFlag("dnd5e", "type") === "enchantment");
+    context.enchantments = this.document.effects.filter(e =>
+      (e.getFlag("dnd5e", "type") === "enchantment") && !e.isAppliedEnchantment
+    );
     context.source = this.document.toObject().system.enchantment;
     return context;
   }

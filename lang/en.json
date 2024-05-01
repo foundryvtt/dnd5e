@@ -689,6 +689,7 @@
 "DND5E.EffectsSearch": "Search effects",
 "DND5E.Enchantment": {
   "Action": {
+    "Apply": "Apply Enchantment",
     "Configure": "Configure Enchantment",
     "Create": "Create Enchantment",
     "Delete": "Delete Enchantment",
@@ -703,6 +704,7 @@
     "Inactive": "Inactive Enchantments"
   },
   "Configuration": "Enchantment Configuration",
+  "DropArea": "Place item here to enchant it…",
   "FIELDS": {
     "enchantment": {
       "label": "Enchantment Configuration",
@@ -736,7 +738,12 @@
     "Entry": "{item} on {actor}",
     "None": "Nothing Enchanted"
   },
+  "Prompt": {
+    "Label": "Enchant Prompt",
+    "Hint": "Disable the enchantment prompt when item is used. First available enchantment will always be applied."
+  },
   "Warning": {
+    "ConcentrationEnded": "Cannot apply this enchantment because concentration has ended.",
     "NoMagicalItems": "Items that are already magical cannot be enchanted.",
     "NotOnActor": "Enchantments can only be added to items, not directly to actors.",
     "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it.",
