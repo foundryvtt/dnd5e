@@ -2839,7 +2839,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( Hooks.call("dnd5e.preCreateScrollFromSpell", itemData, options, config) === false ) return;
 
     let {
-      actionType, description, source, activation, duration, target,
+      actionType, description, source, activation, duration, target, summons,
       range, damage, formula, save, level, attack, ability, properties
     } = itemData.system;
 
@@ -2910,7 +2910,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       effects: itemData.effects ?? [],
       flags,
       system: {
-        description: {value: desc.trim()}, source, actionType, activation, duration, target,
+        description: {value: desc.trim()}, source, actionType, activation, duration, target, summons,
         range, damage, formula, save, level, ability, properties, attack: {bonus: attack.bonus, flat: true}
       }
     });
