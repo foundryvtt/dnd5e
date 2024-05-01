@@ -3,6 +3,7 @@ import Award from "./applications/award.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import Item5e from "./documents/item.mjs";
+import { rollItem } from "./documents/macro.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "");
 
@@ -1045,34 +1046,44 @@ async function rollAction(event) {
       switch ( type ) {
         case "damage": return await rollDamage(event);
         case "item":
-          if ( target.dataset.rollItemUuid ) {
-            return (await fromUuid(target.dataset.rollItemUuid)).use();
-          } else if ( target.dataset.rollItemName ) {
-            if ( target.dataset.rollItemActor ) {
-              const gameActor = await fromUuid(target.dataset.rollItemActor);
-              if ( gameActor.testUserPermission(game.user, "OWNER") ) {
-                if ( canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName) ) {
-                  return canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName).use();
-                } else if ( gameActor.items.getName(target.dataset.rollItemName) ) {
-                  await gameActor.items.getName(target.dataset.rollItemName).use();
-                  if ( canvas.tokens.controlled.length > 0 ) {
-                    ui.notifications.warn(`Your controlled token ${canvas.tokens.controlled[0].name} does not have an Item with name ${target.dataset.rollItemName} using Item Enricher owner`);
-                  }
-                  return;
-                } else {
-                  return ui.notifications.warn(`${gameActor.name} does not have an Item with name ${target.dataset.rollItemName}.`);
-                }
-              }
-              return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
-            } else {
-              return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
-            }
-          }
+          let item;
+	          // If UUID is provided, always roll that item directly
+	          if ( target.dataset.rollItemUuid ) item = await fromUuid(target.dataset.rollItemUuid);
+	          else if ( target.dataset.rollItemName ) {
+	            const actor = target.dataset.rollItemActor ? await fromUuid(target.dataset.rollItemActor) : null;
+	
+	            // If no actor is specified or player isn't owner, fall back to the macro rolling logic
+	            if ( !actor?.isOwner ) return rollItem(target.dataset.rollItemName);
+	
+	            // If a token is controlled and it has an item with the correct name, activate it
+	            if ( canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName) ) {
+	              item = canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName);
+	            }
+	
+	            // Otherwise check the specified actor for the item
+	            else {
+	              item = actor.items.getName(target.dataset.rollItemName);
+	
+	              // Display a warning to indicate the item wasn't rolled from the controlled actor
+	              if ( item && (canvas.tokens.controlled.length > 0) ) ui.notifications.warn(
+	                game.i18n.format("MACRO.5eMissingTargetWarn", {
+	                  actor: canvas.tokens.controlled[0].name, item: target.dataset.rollItemName
+	                })
+	              );
+	            }
+	
+	            // If no item could be found at all, display a warning
+	            if ( !item ) ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
+	              actor: actor.name, item: target.dataset.rollItemName
+	            }));
+	          }
+	          if ( item ) item.use();
+	          return;
       }
 
       const tokens = getSceneTargets();
       if ( !tokens.length ) {
-        ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
+        ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor", { localize: true });
         return;
       }
 
