@@ -459,7 +459,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     }
 
     const rollData = this.item.getRollData();
-    const count = new Roll(profile.count ?? "1", rollData);
+    const count = new Roll(profile.count || "1", rollData);
     await count.evaluate();
     return TokenPlacement.place({ tokens: Array(count.total).fill(token) });
   }
