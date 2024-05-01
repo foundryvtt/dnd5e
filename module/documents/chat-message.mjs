@@ -184,7 +184,7 @@ export default class ChatMessage5e extends ChatMessage {
 
     const avatar = document.createElement("a");
     avatar.classList.add("avatar");
-    avatar.dataset.uuid = actor.uuid;
+    if ( actor ) avatar.dataset.uuid = actor.uuid;
     avatar.innerHTML = `<img src="${img}" alt="${nameText}">`;
 
     const name = document.createElement("span");
