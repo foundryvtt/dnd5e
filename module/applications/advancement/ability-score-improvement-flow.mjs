@@ -113,7 +113,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
     else {
       this.assignments[key] = Math.min(
-        Math.clamped(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
+        Math.clamp(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
         this.advancement.configuration.cap ?? Infinity
       );
     }

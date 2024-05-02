@@ -292,7 +292,7 @@ export default class InventoryElement extends HTMLElement {
     const item = await this.getItem(itemId);
     const min = event.target.min !== "" ? Number(event.target.min) : -Infinity;
     const max = event.target.max !== "" ? Number(event.target.max) : Infinity;
-    const value = Math.clamped(event.target.valueAsNumber, min, max);
+    const value = Math.clamp(event.target.valueAsNumber, min, max);
     if ( !item || Number.isNaN(value) ) return;
 
     event.target.value = value;
@@ -331,7 +331,7 @@ export default class InventoryElement extends HTMLElement {
     let value = Number(input.value);
     if ( isNaN(value) ) return;
     value += action === "increase" ? 1 : -1;
-    input.value = Math.clamped(value, min, max);
+    input.value = Math.clamp(value, min, max);
     input.dispatchEvent(new Event("change"));
   }
 
