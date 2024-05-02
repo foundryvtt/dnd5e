@@ -2104,7 +2104,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         }));
         return null;
       }
-      const spellLevel = parseInt(card.dataset.spellLevel) || null;
+
+      let spellLevel;
+      if ( item.system.level === 0 ) spellLevel = 0;
+      else spellLevel = parseInt(card.dataset.spellLevel) || null;
 
       // Handle different actions
       let targets;
@@ -2123,7 +2126,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           const concentration = actor.effects.get(message.getFlag("dnd5e", "use.concentrationId"));
           for ( const token of canvas.tokens.controlled ) {
             try {
-              await this._applyEffectToToken(effect, token, { concentration });
+              await this._applyEffectToToken(effect, token, { concentration, spellLevel });
             } catch(err) {
               Hooks.onError("Item5e._applyEffectToToken", err, { notify: "warn", log: "warn" });
             }
@@ -2193,11 +2196,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} [options]
    * @param {ActiveEffect5e} [options.concentration]  An optional concentration effect to act as the applied effect's
    *                                                  origin instead.
+   * @param {number} [options.spellLevel]             The level of the spell that was cast.
    * @returns {Promise<ActiveEffect5e|false>}
    * @throws {Error}                                  If the effect could not be applied.
    * @protected
    */
-  static async _applyEffectToToken(effect, token, { concentration }={}) {
+  static async _applyEffectToToken(effect, token, { concentration, spellLevel }={}) {
     const origin = concentration ?? effect;
     if ( !game.user.isGM && !token.actor?.isOwner ) {
       throw new Error(game.i18n.localize("DND5E.EffectApplyWarningOwnership"));
@@ -2208,7 +2212,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( existingEffect ) {
       return existingEffect.update({
         ...effect.constructor.getInitialDuration(),
-        disabled: false
+        disabled: false,
+        "flags.dnd5e.spellLevel": spellLevel
       });
     }
 
@@ -2220,7 +2225,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const effectData = foundry.utils.mergeObject(effect.toObject(), {
       disabled: false,
       transfer: false,
-      origin: origin.uuid
+      origin: origin.uuid,
+      "flags.dnd5e.spellLevel": spellLevel
     });
     const applied = await ActiveEffect.implementation.create(effectData, { parent: token.actor });
     if ( concentration ) await concentration.addDependent(applied);
