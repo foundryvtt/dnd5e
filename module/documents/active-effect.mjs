@@ -96,7 +96,9 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
 
     // Determine type using DataField
-    let field = change.key.startsWith("system.") ? actor.system.schema.getField(change.key.slice(7)) : null;
+    let field = change.key.startsWith("system.")
+      ? actor.system.schema.getField(change.key.slice(7))
+      : actor.schema.getField(change.key);
 
     // Get the current value of the target field
     const current = foundry.utils.getProperty(actor, change.key) ?? null;
@@ -112,6 +114,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     const targetType = getTargetType(field);
     if ( !targetType ) return super.apply(actor, change);
+    const modes = CONST.ACTIVE_EFFECT_MODES;
 
     // Special handling for FormulaField
     if ( targetType === "formula" ) {
@@ -121,6 +124,11 @@ export default class ActiveEffect5e extends ActiveEffect {
       this._applyFormulaField(actor, change, current, delta, changes);
       foundry.utils.mergeObject(actor, changes);
       return changes;
+    }
+
+    else if ( (targetType === "string") && (change.mode === modes.OVERRIDE) && change.value.includes("{{}}") ) {
+      change = foundry.utils.deepClone(change);
+      change.value = change.value.replace("{{}}", current ?? "");
     }
 
     let delta;
@@ -136,7 +144,6 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
 
     // Apply the change depending on the application mode
-    const modes = CONST.ACTIVE_EFFECT_MODES;
     const changes = {};
     switch ( change.mode ) {
       case modes.ADD:
