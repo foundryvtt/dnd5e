@@ -188,12 +188,7 @@ export default class AbilityUseDialog extends Dialog {
     if ( !summons?.profiles.length ) return null;
     const options = {};
     const rollData = item.getRollData();
-    const keyPath = item.type === "spell"
-      ? "item.level"
-      : summons.classIdentifier
-        ? `classes.${summons.classIdentifier}.levels`
-        : "details.level";
-    const level = foundry.utils.getProperty(rollData, keyPath) ?? 0;
+    const level = summons.relevantLevel;
     options.profiles = Object.fromEntries(
       summons.profiles
         .map(profile => {
