@@ -502,13 +502,15 @@ Hooks.on("renderChatLog", (app, html, data) => {
 });
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
 
-Hooks.on("chatMessage", (app, message, data) => dnd5e.applications.Award.chatMessage(message));
+Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(message));
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
 Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
 Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
+
+Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
 Hooks.on("applyTokenStatusEffect", canvas.Token5e.onApplyTokenStatusEffect);
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
