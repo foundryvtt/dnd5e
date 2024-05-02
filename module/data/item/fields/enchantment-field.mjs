@@ -1,4 +1,4 @@
-import { FormulaField } from "../../fields.mjs";
+import { FormulaField, IdentifierField } from "../../fields.mjs";
 
 const { BooleanField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
 
@@ -18,6 +18,7 @@ export default class EnchantmentField extends EmbeddedDataField {
 /**
  * Data model for enchantment configuration.
  *
+ * @property {string} classIdentifier             Class identifier that will be used to determine applicable level.
  * @property {object} items
  * @property {string} items.max                   Maximum number of items that can have this enchantment.
  * @property {string} items.period                Frequency at which the enchantment be swapped.
@@ -31,6 +32,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
+      classIdentifier: new IdentifierField(),
       items: new SchemaField({
         max: new FormulaField({deterministic: true}),
         period: new StringField()
@@ -124,6 +126,27 @@ export class EnchantmentData extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Return only the allowed enchantments based on spell/character/class level.
+   * @param {Item5e} item   Item from which to fetch the enchantments.
+   * @returns {ActiveEffect5e[]}
+   */
+  static availableEnchantments(item) {
+    const keyPath = item.type === "spell"
+      ? "item.level"
+      : item.system.enchantment?.classIdentifier
+        ? `classes.${item.system.enchantment?.classIdentifier}.levels`
+        : "details.level";
+    const level = foundry.utils.getProperty(item.getRollData(), keyPath) ?? 0;
+    return item.effects.filter(e => {
+      if ( (e.getFlag("dnd5e", "type") !== "enchantment") || e.isAppliedEnchantment ) return false;
+      const { min, max } = e.getFlag("dnd5e", "enchantment.level") ?? {};
+      return ((min ?? -Infinity) <= level) && (level <= (max ?? Infinity));
+    });
+  }
+
   /* -------------------------------------------- */
 
   /**

@@ -4,6 +4,7 @@ import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
+import { EnchantmentData } from "../data/item/fields/enchantment-field.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
@@ -1220,9 +1221,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     if ( this.system.isEnchantment ) {
       config.applyEnchantment = enchantment?.prompt ?? true;
-      config.enchantmentProfile = this.effects.find(e =>
-        (e.getFlag("dnd5e", "type") === "enchantment") && !e.isAppliedEnchantment
-      )?.id;
+      config.enchantmentProfile = EnchantmentData.availableEnchantments(this)[0]?.id;
     }
     if ( this.system.hasSummoning && this.system.summons.canSummon && canvas.scene ) {
       config.createSummons = summons.prompt;
