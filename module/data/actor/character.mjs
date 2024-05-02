@@ -244,19 +244,6 @@ export default class CharacterData extends CreatureTemplate {
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  getRollData({ deterministic=false }={}) {
-    const data = super.getRollData({ deterministic });
-    data.classes = {};
-    for ( const [identifier, cls] of Object.entries(this.parent.classes) ) {
-      data.classes[identifier] = {...cls.system};
-      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
-    }
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Checks whether the item with the given relative UUID has been favorited
    * @param {string} favoriteId  The relative UUID of the item to check.
