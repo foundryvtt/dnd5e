@@ -2483,9 +2483,10 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _StatusEffectConfig5e
- * @property {string} icon         Icon used to represent the condition on the token.
- * @property {string} [reference]  UUID of a journal entry with details on this condition.
- * @property {string} [special]    Set this condition as a special status effect under this name.
+ * @property {string} icon            Icon used to represent the condition on the token.
+ * @property {string} [reference]     UUID of a journal entry with details on this condition.
+ * @property {string} [special]       Set this condition as a special status effect under this name.
+ * @property {string[]} [riders]      Additional conditions, by id, to apply as part of this condition.
  */
 
 /**
@@ -2621,7 +2622,8 @@ DND5E.conditionTypes = {
     label: "DND5E.ConUnconscious",
     icon: "systems/dnd5e/icons/svg/statuses/unconscious.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd",
-    statuses: ["incapacitated", "prone"]
+    statuses: ["incapacitated"],
+    riders: ["prone"]
   }
 };
 preLocalize("conditionTypes", { key: "label", sort: true });
@@ -2693,7 +2695,7 @@ DND5E.statusEffects = {
   sleeping: {
     name: "EFFECT.DND5E.StatusSleeping",
     icon: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
-    statuses: ["incapacitated", "prone", "unconscious"]
+    statuses: ["incapacitated", "unconscious"]
   },
   stable: {
     name: "EFFECT.DND5E.StatusStable",

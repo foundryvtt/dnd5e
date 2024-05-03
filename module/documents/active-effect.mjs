@@ -362,6 +362,29 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Create conditions that are applied separately from an effect.
+   * @returns {Promise<ActiveEffect5e[]|void>}      Created rider effects.
+   */
+  async createRiderConditions() {
+    const riders = new Set(this.statuses.reduce((acc, status) => {
+      const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
+      return acc.concat(r);
+    }, []));
+    if ( !riders.size ) return;
+
+    const createRider = async id => {
+      const existing = this.parent.effects.get(staticID(`dnd5e${id}`));
+      if ( existing ) return;
+      const effect = await ActiveEffect.implementation.fromStatusEffect(id);
+      return ActiveEffect.implementation.create(effect, { parent: this.parent, keepId: true });
+    };
+
+    return Promise.all(Array.from(riders).map(createRider));
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
@@ -385,6 +408,14 @@ export default class ActiveEffect5e extends ActiveEffect {
       }
       this.updateSource({ disabled: false });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    if ( (userId === game.userId) && this.active && (this.parent instanceof Actor) ) this.createRiderConditions();
   }
 
   /* -------------------------------------------- */
@@ -553,8 +584,9 @@ export default class ActiveEffect5e extends ActiveEffect {
     const actor = canvas.hud.token.object?.actor;
     if ( !actor ) return;
 
-    if ( target.dataset?.statusId === "exhaustion" ) ActiveEffect5e._manageExhaustion(event, actor);
-    else if ( target.dataset?.statusId === "concentrating" ) ActiveEffect5e._manageConcentration(event, actor);
+    const id = target.dataset?.statusId;
+    if ( id === "exhaustion" ) ActiveEffect5e._manageExhaustion(event, actor);
+    else if ( id === "concentrating" ) ActiveEffect5e._manageConcentration(event, actor);
   }
 
   /* -------------------------------------------- */
