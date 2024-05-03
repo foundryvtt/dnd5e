@@ -2486,7 +2486,7 @@ DND5E.consumableResources = [
  * @property {string} icon            Icon used to represent the condition on the token.
  * @property {string} [reference]     UUID of a journal entry with details on this condition.
  * @property {string} [special]       Set this condition as a special status effect under this name.
- * @property {Set<string>} [riders]   Additional conditions, by id, to apply as part of this condition.
+ * @property {string[]} [riders]      Additional conditions, by id, to apply as part of this condition.
  */
 
 /**
