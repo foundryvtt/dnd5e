@@ -2115,7 +2115,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         }));
         return null;
       }
-      const spellLevel = parseInt(card.dataset.spellLevel) || null;
+
+      let spellLevel;
+      if ( item.system.level === 0 ) spellLevel = 0;
+      else spellLevel = parseInt(card.dataset.spellLevel) || null;
 
       // Handle different actions
       let targets;
@@ -2132,9 +2135,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           let effect = item.effects.get(li.dataset.effectId);
           if ( !effect ) effect = await fromUuid(li.dataset.uuid);
           const concentration = actor.effects.get(message.getFlag("dnd5e", "use.concentrationId"));
+          const effectData = { "flags.dnd5e.spellLevel": spellLevel };
           for ( const token of canvas.tokens.controlled ) {
             try {
-              await this._applyEffectToToken(effect, token, { concentration });
+              await this._applyEffectToToken(effect, token, { concentration, effectData });
             } catch(err) {
               Hooks.onError("Item5e._applyEffectToToken", err, { notify: "warn", log: "warn" });
             }
@@ -2204,11 +2208,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} [options]
    * @param {ActiveEffect5e} [options.concentration]  An optional concentration effect to act as the applied effect's
    *                                                  origin instead.
+   * @param {number} [options.effectData]             Optional data to merge into the created or updated effect.
    * @returns {Promise<ActiveEffect5e|false>}
    * @throws {Error}                                  If the effect could not be applied.
    * @protected
    */
-  static async _applyEffectToToken(effect, token, { concentration }={}) {
+  static async _applyEffectToToken(effect, token, { concentration, effectData={} }={}) {
     const origin = concentration ?? effect;
     if ( !game.user.isGM && !token.actor?.isOwner ) {
       throw new Error(game.i18n.localize("DND5E.EffectApplyWarningOwnership"));
@@ -2217,10 +2222,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Enable an existing effect on the target if it originated from this effect
     const existingEffect = token.actor?.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
-      return existingEffect.update({
+      return existingEffect.update(foundry.utils.mergeObject({
         ...effect.constructor.getInitialDuration(),
         disabled: false
-      });
+      }, effectData));
     }
 
     if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
@@ -2228,11 +2233,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     // Otherwise, create a new effect on the target
-    const effectData = foundry.utils.mergeObject(effect.toObject(), {
+    effectData = foundry.utils.mergeObject({
+      ...effect.toObject(),
       disabled: false,
       transfer: false,
       origin: origin.uuid
-    });
+    }, effectData);
     const applied = await ActiveEffect.implementation.create(effectData, { parent: token.actor });
     if ( concentration ) await concentration.addDependent(applied);
     return applied;
