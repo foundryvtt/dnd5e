@@ -415,7 +415,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritdoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( this.active && (this.parent instanceof Actor) ) this.createRiderConditions();
+    if ( (userId === game.userId) && this.active && (this.parent instanceof Actor) ) this.createRiderConditions();
   }
 
   /* -------------------------------------------- */
