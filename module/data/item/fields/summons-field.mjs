@@ -135,6 +135,22 @@ export class SummonsData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Determine the level used to determine profile limits, based on the spell level for spells or either the
+   * character or class level, depending on whether `classIdentifier` is set.
+   * @type {number}
+   */
+  get relevantLevel() {
+    const keyPath = this.item.type === "spell"
+      ? "item.level"
+      : this.classIdentifier
+        ? `classes.${this.classIdentifier}.levels`
+        : "details.level";
+    return foundry.utils.getProperty(this.item.getRollData(), keyPath) ?? 0;
+  }
+
+  /* -------------------------------------------- */
   /*  Summoning                                   */
   /* -------------------------------------------- */
 
@@ -285,10 +301,10 @@ export class SummonsData extends foundry.abstract.DataModel {
 
     // Add flags
     actorUpdates["flags.dnd5e.summon"] = {
+      level: this.relevantLevel,
       origin: this.item.uuid,
       profile: profile._id
     };
-    if ( this.item.type === "spell" ) actorUpdates["flags.dnd5e.summon"].level = this.item.system.level;
 
     // Match proficiency
     if ( this.match.proficiency ) {
