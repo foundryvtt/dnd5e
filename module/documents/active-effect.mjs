@@ -362,6 +362,29 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Create conditions that are applied separately from an effect.
+   * @returns {Promise<ActiveEffect5e[]|void>}      Created rider effects.
+   */
+  createRiderConditions() {
+    const riders = new Set(this.statuses.reduce((acc, status) => {
+      const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
+      return acc.concat(r);
+    }, []));
+    if ( !riders.size ) return;
+
+    const createRider = async id => {
+      const existing = this.parent.effects.get(staticID(`dnd5e${id}`));
+      if ( existing ) return;
+      const effect = await ActiveEffect.implementation.fromStatusEffect(id);
+      return ActiveEffect.implementation.create(effect, { parent: this.parent, keepId: true });
+    };
+
+    return Promise.all(Array.from(riders).map(createRider));
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
@@ -385,6 +408,15 @@ export default class ActiveEffect5e extends ActiveEffect {
       }
       this.updateSource({ disabled: false });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+
+    if ( this.active && (this.parent instanceof Actor) ) this.createRiderConditions();
   }
 
   /* -------------------------------------------- */
@@ -556,20 +588,6 @@ export default class ActiveEffect5e extends ActiveEffect {
     const id = target.dataset?.statusId;
     if ( id === "exhaustion" ) ActiveEffect5e._manageExhaustion(event, actor);
     else if ( id === "concentrating" ) ActiveEffect5e._manageConcentration(event, actor);
-
-    if ( target.classList.contains("active") ) return;
-
-    const riders = CONFIG.statusEffects.find(e => e.id === id)?.riders;
-    if ( !riders ) return;
-
-    const createRider = async id => {
-      const existing = actor.effects.get(staticID(`dnd5e${id}`));
-      if ( existing ) return;
-      const effect = await ActiveEffect.implementation.fromStatusEffect(id);
-      return ActiveEffect.implementation.create(effect, { parent: actor, keepId: true });
-    };
-
-    Promise.all(Array.from(riders).map(createRider));
   }
 
   /* -------------------------------------------- */

@@ -2623,7 +2623,7 @@ DND5E.conditionTypes = {
     icon: "systems/dnd5e/icons/svg/statuses/unconscious.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd",
     statuses: ["incapacitated"],
-    riders: new Set(["prone"])
+    riders: ["prone"]
   }
 };
 preLocalize("conditionTypes", { key: "label", sort: true });
@@ -2695,8 +2695,7 @@ DND5E.statusEffects = {
   sleeping: {
     name: "EFFECT.DND5E.StatusSleeping",
     icon: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
-    statuses: ["incapacitated", "unconscious"],
-    riders: new Set(["prone"])
+    statuses: ["incapacitated", "unconscious"]
   },
   stable: {
     name: "EFFECT.DND5E.StatusStable",
