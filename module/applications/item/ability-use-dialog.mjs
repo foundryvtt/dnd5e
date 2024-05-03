@@ -190,9 +190,7 @@ export default class AbilityUseDialog extends Dialog {
     );
     if ( !enchantments.length ) return null;
     const options = {};
-    options.enchantments = Object.fromEntries(
-      enchantments.map(enchantment => [enchantment._id, enchantment.name])
-    );
+    options.enchantments = Object.fromEntries(enchantments.map(enchantment => [enchantment._id, enchantment.name]));
     if ( Object.values(options.enchantments).length <= 1 ) {
       options.enchantments = null;
       options.enchantment = enchantments[0]._id;

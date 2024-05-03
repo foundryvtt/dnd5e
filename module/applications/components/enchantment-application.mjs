@@ -24,31 +24,6 @@ export default class EnchantmentApplicationElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
-   * Dropped item to be enchanted.
-   * @type {Item5e}
-   */
-  #droppedItem;
-
-  get droppedItem() {
-    return this.#droppedItem;
-  }
-
-  set droppedItem(item) {
-    this.#droppedItem = item;
-    if ( this.#droppedItem ) {
-      this.dropArea.innerHTML = `
-        <div class="preview">
-          <img src="${item.img}" class="gold-icon" alt="${item.name}">
-          <span class="name">${item.name}</span>
-        </div>
-      `;
-    }
-    else this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5E.Enchantment.DropArea")}</p>`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Item providing the enchantment that will be applied.
    * @type {Item5e}
    */
@@ -68,33 +43,49 @@ export default class EnchantmentApplicationElement extends HTMLElement {
     // Build the frame HTML only once
     if ( !this.dropArea ) {
       const div = document.createElement("div");
-      div.classList.add("card-tray", "enchantment-tray", "collapsible", "collapsed");
-      div.innerHTML = `
-        <label class="roboto-upper">
-          <i class="fa-solid fa-wand-sparkles" inert></i>
-          <span>${game.i18n.localize("DND5E.ActionEnch")}</span>
-          <i class="fa-solid fa-caret-down" inert></i>
-        </label>
-        <div class="collapsible-content">
-          <div class="wrapper">
-            <div class="drop-area"></div>
-            <button class="apply-enchantment" type="button" data-action="applyEnchantment">
-              <i class="fa-solid fa-reply-all fa-flip-horizontal" inert></i>
-              ${game.i18n.localize("DND5E.Apply")}
-            </button>
-          </div>
-        </div>
-      `;
+      div.classList.add("enchantment-control");
+      div.innerHTML = '<div class="drop-area"></div>';
       this.replaceChildren(div);
-      div.querySelector(".apply-enchantment").addEventListener("click", this._onApplyEnchantment.bind(this));
       this.dropArea = div.querySelector(".drop-area");
-      div.querySelector(".collapsible-content").addEventListener("click", event => {
-        event.stopImmediatePropagation();
-      });
       this.addEventListener("drop", this._onDrop.bind(this));
+      this.addEventListener("click", this._onRemoveEnchantment.bind(this));
     }
 
-    this.droppedItem = null;
+    this.buildItemList();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Build a list of enchanted items.
+   */
+  async buildItemList() {
+    const enchantedItems = (await Promise.all(
+      (this.chatMessage.getFlag("dnd5e", "enchanted") ?? []).map(uuid => fromUuid(uuid))
+    )).filter(i => i).map(enchantment => {
+      const item = enchantment.parent;
+      const div = document.createElement("div");
+      div.classList.add("preview");
+      div.dataset.enchantmentUuid = enchantment.uuid;
+      div.innerHTML = `
+        <img src="${item.img}" class="gold-icon" alt="${item.name}">
+        <span class="name">${item.name}</span>
+      `;
+      if ( item.isOwner ) {
+        const control = document.createElement("a");
+        control.ariaLabel = game.i18n.localize("DND5E.Enchantment.Action.Remove");
+        control.dataset.action = "removeEnchantment";
+        control.dataset.tooltip = "DND5E.Enchantment.Action.Remove";
+        control.innerHTML = '<i class="fa-solid fa-rotate-left" inert></i>';
+        div.append(control);
+      }
+      return div;
+    });
+    if ( enchantedItems.length ) {
+      this.dropArea.replaceChildren(...enchantedItems);
+    } else {
+      this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5E.Enchantment.DropArea")}</p>`;
+    }
   }
 
   /* -------------------------------------------- */
@@ -102,15 +93,24 @@ export default class EnchantmentApplicationElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
-   * Handle clicking the apply enchantment button.
-   * @param {PointerEvent} event  Triggering click event.
+   * Handle dropping an item onto the control.
+   * @param {Event} event  Triggering drop event.
    */
-  async _onApplyEnchantment(event) {
+  async _onDrop(event) {
     event.preventDefault();
-
+    const data = TextEditor.getDragEventData(event);
     const effect = this.enchantmentItem.effects.get(this.chatMessage.getFlag("dnd5e", "use.enchantmentProfile"));
-    if ( !effect ) return;
+    if ( (data.type !== "Item") || !effect ) return;
+    const droppedItem = await Item.implementation.fromDropData(data);
 
+    // Validate against the enchantment's restraints on the origin item
+    const errors = this.enchantmentItem.system.enchantment?.canEnchant(droppedItem);
+    if ( errors?.length ) {
+      errors.forEach(err => ui.notifications.error(err.message));
+      return;
+    }
+
+    // If concentration is required, ensure it is still being maintained & GM is present
     const concentrationId = this.chatMessage.getFlag("dnd5e", "use.concentrationId");
     const concentration = effect.parent.actor.effects.get(concentrationId);
     if ( concentrationId && !concentration ) {
@@ -124,32 +124,22 @@ export default class EnchantmentApplicationElement extends HTMLElement {
 
     const effectData = effect.toObject();
     effectData.origin = this.enchantmentItem.uuid;
-    const applied = await ActiveEffect.create(effectData, { parent: this.droppedItem, keepOrigin: true });
+    const applied = await ActiveEffect.create(effectData, {
+      parent: droppedItem, keepOrigin: true, chatMessageOrigin: this.chatMessage.id
+    });
     if ( concentration ) await concentration.addDependent(applied);
-
-    this.droppedItem = null;
-    this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle dropping an item onto the control.
+   * Handle removing an enchantment.
    * @param {Event} event  Triggering drop event.
    */
-  async _onDrop(event) {
-    event.preventDefault();
-    const data = TextEditor.getDragEventData(event);
-    if ( data.type !== "Item" ) return;
-    const droppedItem = await Item.implementation.fromDropData(data);
-
-    // Validate against the enchantment's restraints on the origin item
-    const errors = this.enchantmentItem.system.enchantment?.canEnchant(droppedItem);
-    if ( errors?.length ) {
-      errors.forEach(err => ui.notifications.error(err.message));
-      return;
-    }
-
-    this.droppedItem = droppedItem;
+  async _onRemoveEnchantment(event) {
+    if ( event.target.dataset.action !== "removeEnchantment" ) return;
+    const enchantmentUuid = event.target.closest("[data-enchantment-uuid]")?.dataset.enchantmentUuid;
+    const enchantment = await fromUuid(enchantmentUuid);
+    enchantment?.delete({ chatMessageOrigin: this.chatMessage.id });
   }
 }
