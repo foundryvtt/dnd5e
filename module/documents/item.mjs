@@ -1498,7 +1498,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       config: CONFIG.DND5E,
       tokenId: token?.uuid || null,
       item: this,
-      effects: this.effects.filter(e => e.getFlag("dnd5e", "type") !== "enchantment"),
+      effects: this.effects.filter(e =>
+        (e.getFlag("dnd5e", "type") !== "enchantment") && !e.getFlag("dnd5e", "rideAlong")
+      ),
       data: await this.system.getCardData(),
       labels: this.labels,
       hasAttack: this.hasAttack,

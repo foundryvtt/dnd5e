@@ -327,7 +327,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if ( this.getFlag("dnd5e", "type") === "enchantment" ) this.transfer = false;
+    if ( this.getFlag("dnd5e", "type") === "enchantment" || this.getFlag("dnd5e", "rideAlong") ) this.transfer = false;
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
     if ( this.isAppliedEnchantment ) EnchantmentData.trackEnchantment(this.origin, this.uuid);
   }
@@ -427,6 +427,27 @@ export default class ActiveEffect5e extends ActiveEffect {
       document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
         .forEach(element => element.buildItemList());
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onCreate(data, options, userId) {
+    await super._onCreate(data, options, userId);
+    if ( (userId !== game.user.id) || !this.isAppliedEnchantment ) return;
+
+    const origin = await fromUuid(this.origin);
+    const rideAlongEffects = (this.getFlag("dnd5e", "enchantment.rideAlong") ?? []).map(id => {
+      const effectData = origin.effects.get(id)?.toObject();
+      if ( effectData ) {
+        delete effectData._id;
+        delete effectData.flags?.dnd5e?.rideAlong;
+        effectData.origin = this.origin;
+      }
+      return effectData;
+    }).filter(e => e);
+    const created = await this.parent.createEmbeddedDocuments("ActiveEffect", rideAlongEffects);
+    if ( created.length ) this.addDependent(...created);
   }
 
   /* -------------------------------------------- */
@@ -670,12 +691,12 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Record another effect as a dependent of this one.
-   * @param {ActiveEffect5e} dependent  The dependent effect.
+   * @param {...ActiveEffect5e} dependent  One or more dependent effects.
    * @returns {Promise<ActiveEffect5e>}
    */
-  addDependent(dependent) {
+  addDependent(...dependent) {
     const dependents = this.getFlag("dnd5e", "dependents") ?? [];
-    dependents.push({ uuid: dependent.uuid });
+    dependents.push(...dependent.map(d => ({ uuid: d.uuid })));
     return this.setFlag("dnd5e", "dependents", dependents);
   }
 
