@@ -1,30 +1,66 @@
 import { MappingField } from "../fields.mjs";
 import SpellConfigurationData from "./spell-config.mjs";
 
-export default class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
+const {
+  ArrayField, BooleanField, EmbeddedDataField, ForeignDocumentField, NumberField, SchemaField, StringField
+} = foundry.data.fields;
+
+/**
+ * Configuration data for choice levels.
+ *
+ * @typedef {object} ItemChoiceLevelConfig
+ * @property {number} count         Number of items a player can select at this level.
+ * @property {boolean} replacement  Can a player replace previous selections at this level?
+ */
+
+/**
+ * Configuration data for an individual pool entry.
+ *
+ * @typedef {object} ItemChoicePoolEntry
+ * @property {string} uuid  UUID of the item to present as a choice.
+ */
+
+/**
+ * Configuration data for Item Choice advancement.
+ *
+ * @property {string} hint                                    Brief hint about the choice to be made.
+ * @property {Record<number, ItemChoiceLevelConfig>} choices  Choices & config for specific levels.
+ * @property {boolean} allowDrops                             Should players be able to drop non-listed items?
+ * @property {string} type                                    Type of item allowed, if it should be restricted.
+ * @property {ItemChoicePoolEntry[]} pool                     Items that can be chosen.
+ * @property {SpellConfigurationData} spell                   Mutations applied to spell items.
+ * @property {object} restriction
+ * @property {string} restriction.type                        Specific item type allowed.
+ * @property {string} restriction.subtype                     Item sub-type allowed.
+ * @property {"available"|number} restriction.level           Level of spell allowed.
+ */
+export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      hint: new foundry.data.fields.StringField({label: "DND5E.AdvancementHint"}),
-      choices: new MappingField(new foundry.data.fields.NumberField(), {
+      hint: new StringField({label: "DND5E.AdvancementHint"}),
+      choices: new MappingField(new SchemaField({
+        count: new NumberField({integer: true, min: 0}),
+        replacement: new BooleanField({label: "DND5E.AdvancementItemChoiceReplacement"})
+      }), {
         hint: "DND5E.AdvancementItemChoiceLevelsHint"
       }),
-      allowDrops: new foundry.data.fields.BooleanField({
+      allowDrops: new BooleanField({
         initial: true, label: "DND5E.AdvancementConfigureAllowDrops",
         hint: "DND5E.AdvancementConfigureAllowDropsHint"
       }),
-      type: new foundry.data.fields.StringField({
+      type: new StringField({
         blank: false, nullable: true, initial: null,
         label: "DND5E.AdvancementItemChoiceType", hint: "DND5E.AdvancementItemChoiceTypeHint"
       }),
-      pool: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-        uuid: new foundry.data.fields.StringField()
+      pool: new ArrayField(new SchemaField({
+        uuid: new StringField()
       }), {label: "DOCUMENT.Items"}),
-      spell: new foundry.data.fields.EmbeddedDataField(SpellConfigurationData, {nullable: true, initial: null}),
-      restriction: new foundry.data.fields.SchemaField({
-        type: new foundry.data.fields.StringField({label: "DND5E.Type"}),
-        subtype: new foundry.data.fields.StringField({label: "DND5E.Subtype"}),
-        level: new foundry.data.fields.StringField({label: "DND5E.SpellLevel"})
+      spell: new EmbeddedDataField(SpellConfigurationData, {nullable: true, initial: null}),
+      restriction: new SchemaField({
+        type: new StringField({label: "DND5E.Type"}),
+        subtype: new StringField({label: "DND5E.Subtype"}),
+        level: new StringField({label: "DND5E.SpellLevel"})
       })
     };
   }
@@ -35,9 +71,41 @@ export default class ItemChoiceConfigurationData extends foundry.abstract.DataMo
 
   /** @inheritDoc */
   static migrateData(source) {
+    if ( "choices" in source ) Object.entries(source.choices).forEach(([k, c]) => {
+      if ( foundry.utils.getType(c) === "number" ) source.choices[k] = { count: c };
+    });
     if ( "pool" in source ) {
       source.pool = source.pool.map(i => foundry.utils.getType(i) === "string" ? { uuid: i } : i);
     }
     return source;
+  }
+}
+
+/**
+ * Data for a replacement.
+ *
+ * @typedef {object} ItemChoiceReplacement
+ * @property {number} level        Level at which the original item was chosen.
+ * @property {string} original     ID of the original item that was replaced.
+ * @property {string} replacement  ID of the replacement item.
+ */
+
+/**
+ * Value data for Item Choice advancement.
+ *
+ * @property {Record<number, Record<string, string>>} added    Mapping of IDs to UUIDs for items added at each level.
+ * @property {Record<number, ItemChoiceReplacement>} replaced  Information on items replaced at each level.
+ */
+export class ItemChoiceValueData extends foundry.abstract.DataModel {
+  /** @inheritDoc */
+  static defineSchema() {
+    return {
+      added: new MappingField(new MappingField(new StringField())),
+      replaced: new MappingField(new SchemaField({
+        level: new NumberField({integer: true, min: 0}),
+        original: new ForeignDocumentField(foundry.documents.BaseItem, {idOnly: true}),
+        replacement: new ForeignDocumentField(foundry.documents.BaseItem, {idOnly: true})
+      }))
+    };
   }
 }

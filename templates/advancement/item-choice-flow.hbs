@@ -1,10 +1,19 @@
 <form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}"
       data-current="{{ choices.current }}" data-max="{{ choices.max }}">
-    <h3>{{{title}}}</h3>
+    <h3>{{{ title }}}</h3>
 
     <div class="drop-target">
         {{#if advancement.configuration.hint}}
-        <p>{{advancement.configuration.hint}}</p>
+        <p>{{ advancement.configuration.hint }}</p>
+        {{/if}}
+
+        {{#if replaceable}}
+        <div class="item-name">
+            <label class="flexrow">
+                <h4>{{ localize "DND5E.AdvancementItemChoiceReplacementNone" }}</h4>
+                <input type="radio" name="replace" value="" {{ checked noReplacement }}>
+            </label>
+        </div>
         {{/if}}
 
         {{#if abilities.options}}
@@ -17,40 +26,46 @@
         {{/if}}
 
         {{#each previousLevels}}
-        <h4 class="form-header">{{localize "DND5E.AdvancementLevelHeader" level=@key}}</h4>
+        <h4 class="form-header">{{ localize "DND5E.AdvancementLevelHeader" level=@key }}</h4>
         {{#each this}}
-        <div class="item-name flexrow">
-            <div class="item-image" style="background-image: url('{{this.img}}');"></div>
-            <label class="flexrow"><h4><a data-uuid="{{this.uuid}}">{{this.name}}</a></h4></label>
+        <div class="item-name flexrow {{#if replaced}}replaced{{/if}}">
+            <div class="item-image" style="background-image: url('{{ img }}');"></div>
+            <label class="flexrow">
+                <h4><a data-uuid="{{ uuid }}">{{ name }}</a></h4>
+                {{#if (and @root.replaceable (not replaced))}}
+                <input type="radio" name="replace" value="{{ id }}" {{ checked checked }}>
+                {{/if}}
+            </label>
         </div>
         {{/each}}
         {{/each}}
 
         <h4 class="form-header">
-            {{localize "DND5E.AdvancementItemChoiceChosen" current=choices.current max=choices.max}}
+            {{ localize "DND5E.AdvancementItemChoiceChosen" current=choices.current max=choices.max }}
         </h4>
 
         {{#each items}}
         <div class="item-name flexrow">
-            <div class="item-image" style="background-image: url({{this.img}});"></div>
+            <div class="item-image" style="background-image: url({{ img }});"></div>
             <label class="flexrow">
                 <h4>
-                    <a data-uuid="{{this.uuid}}">{{this.name}}</a>
+                    <a data-uuid="{{this.uuid}}">{{ name }}</a>
                 </h4>
-                {{#if this.dropped}}
-                <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}">
-                    <i class="fas fa-trash"></i>
+                {{#if dropped}}
+                <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete"
+                   aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                    <i class="fa-solid fa-trash" inert></i>
                 </a>
-                <input type="hidden" name="{{this.uuid}}" value="true" data-dtype="Boolean">
+                <input type="hidden" name="{{ uuid }}" value="true" data-dtype="Boolean">
                 {{else}}
-                <input type="checkbox" name="{{this.uuid}}" {{checked this.checked}} {{disabled this.disabled}}>
+                <input type="checkbox" name="{{ uuid }}" {{ checked checked }} {{ disabled disabled }}>
                 {{/if}}
             </label>
         </div>
         {{/each}}
 
         {{#if advancement.configuration.allowDrops}}
-        <p class="hint centered">{{localize "DND5E.AdvancementFlowDropAreaHint"}}</p>
+        <p class="hint centered">{{ localize "DND5E.AdvancementFlowDropAreaHint" }}</p>
         {{/if}}
     </div>
 </form>

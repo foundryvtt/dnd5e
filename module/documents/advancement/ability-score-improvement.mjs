@@ -153,16 +153,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
 
     else {
       let itemData = data.retainedItems?.[data.featUuid];
-      if ( !itemData ) {
-        const source = await fromUuid(data.featUuid);
-        if ( source ) {
-          itemData = source.clone({
-            _id: foundry.utils.randomID(),
-            "flags.dnd5e.sourceId": data.featUuid,
-            "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
-          }, {keepId: true}).toObject();
-        }
-      }
+      if ( !itemData ) itemData = await this.createItemData(data.featUuid);
       data.assignments = null;
       if ( itemData ) {
         data.feat = { [itemData._id]: data.featUuid };
