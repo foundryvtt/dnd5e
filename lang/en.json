@@ -725,8 +725,14 @@
     }
   },
   "Label": "Enchantment",
+  "Items": {
+    "Label": "Enchanted Items",
+    "Entry": "{item} on {actor}",
+    "None": "Nothing Enchanted"
+  },
   "Warning": {
     "NoMagicalItems": "Items that are already magical cannot be enchanted.",
+    "NotOnActor": "Enchantments can only be added to items, not directly to actors.",
     "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it.",
     "WrongType": "{incorrectType} items cannot be enchanted by this enchantment, only {allowedType} items are allowed."
   }

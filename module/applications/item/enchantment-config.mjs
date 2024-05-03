@@ -74,7 +74,6 @@ export default class EnchantmentConfig extends DocumentSheet {
         const effect = await ActiveEffect.implementation.create({
           name: this.document.name,
           icon: this.document.img,
-          origin: this.document.uuid,
           "flags.dnd5e.type": "enchantment"
         }, { parent: this.document });
         effect.sheet.render(true);

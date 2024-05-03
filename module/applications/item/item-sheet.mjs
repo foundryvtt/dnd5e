@@ -113,10 +113,6 @@ export default class ItemSheet5e extends ItemSheet {
       isPhysical: item.system.hasOwnProperty("quantity"),
 
       // Action Details
-      availableActionTypes: Object.entries(CONFIG.DND5E.itemActionTypes).reduce((obj, [k, v]) => {
-        if ( k !== "ench" || !this.item.system.metadata?.enchantable ) obj[k] = v;
-        return obj;
-      }, {}),
       isHealing: item.system.actionType === "heal",
       isFlatDC: item.system.save?.scaling === "flat",
       isLine: ["line", "wall"].includes(item.system.target?.type),
@@ -135,6 +131,9 @@ export default class ItemSheet5e extends ItemSheet {
 
       // Advancement
       advancement: this._getItemAdvancement(item),
+
+      // Enchantment
+      enchantedItems: await item.system.enchantment?.getItems(),
 
       // Prepare Active Effects
       effects: EffectsElement.prepareCategories(item.effects, { parent: this.item }),
@@ -735,12 +734,24 @@ export default class ItemSheet5e extends ItemSheet {
    */
   async _onDropActiveEffect(event, data) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
-    if ( !this.item.isOwner || !effect ) return false;
-    if ( (this.item.uuid === effect.parent?.uuid) || (this.item.uuid === effect.origin) ) return false;
-    return ActiveEffect.create({
-      ...effect.toObject(),
-      origin: this.item.uuid
-    }, {parent: this.item});
+    if ( !this.item.isOwner || !effect
+      || (this.item.uuid === effect.parent?.uuid)
+      || (this.item.uuid === effect.origin) ) return false;
+    const effectData = effect.toObject();
+    let keepOrigin = false;
+
+    // Validate against the enchantment's restraints on the origin item
+    if ( effect.getFlag("dnd5e", "type") === "enchantment" ) {
+      const errors = effect.parent.system.enchantment?.canEnchant(this.item);
+      if ( errors?.length ) {
+        errors.forEach(err => ui.notifications.error(err.message));
+        return false;
+      }
+      effectData.origin ??= effect.parent.uuid;
+      keepOrigin = true;
+    }
+
+    return ActiveEffect.create(effectData, {parent: this.item, keepOrigin});
   }
 
   /* -------------------------------------------- */

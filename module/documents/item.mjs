@@ -400,7 +400,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   *allApplicableEffects() {
     for ( const effect of this.effects ) {
-      if ( effect.flags.dnd5e?.type === "enchantment" ) yield effect;
+      if ( effect.isAppliedEnchantment ) yield effect;
     }
   }
 

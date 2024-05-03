@@ -123,20 +123,19 @@ export default class EffectsElement extends HTMLElement {
     };
 
     // Iterate over active effects, classifying them into categories
-    const enchantmentParent = parent?.system.isEnchantment;
     for ( const e of effects ) {
       if ( (e.parent.system?.identified === false) && !game.user.isGM ) continue;
-      if ( e.getFlag("dnd5e", "type") === "enchantment" ) {
-        if ( enchantmentParent ) categories.enchantment.effects.push(e);
-        else if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
+      if ( e.isAppliedEnchantment ) {
+        if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
         else categories.enchantmentActive.effects.push(e);
       }
+      else if ( e.getFlag("dnd5e", "type") === "enchantment" ) categories.enchantment.effects.push(e);
       else if ( e.isSuppressed ) categories.suppressed.effects.push(e);
       else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
       else categories.passive.effects.push(e);
     }
-    categories.enchantment.hidden = !enchantmentParent;
+    categories.enchantment.hidden = !parent?.system.isEnchantment;
     categories.enchantmentActive.hidden = !categories.enchantmentActive.effects.length;
     categories.enchantmentInactive.hidden = !categories.enchantmentInactive.effects.length;
     categories.suppressed.hidden = !categories.suppressed.effects.length;
@@ -277,17 +276,16 @@ export default class EffectsElement extends HTMLElement {
    * @returns {Promise<ActiveEffect5e>}
    */
   async _onCreate(target) {
-    const isActor = this.document instanceof Actor;
     const li = target.closest("li");
-    const flags = {};
-    if ( li.dataset.effectType.startsWith("enchantment") ) flags["dnd5e.type"] = "enchantment";
+    const isActor = this.document instanceof Actor;
+    const isEnchantment = li.dataset.effectType.startsWith("enchantment");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
       name: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
-      origin: this.document.uuid,
+      origin: isEnchantment ? undefined : this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
       disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType),
-      flags
+      "flags.dnd5e.type": isEnchantment ? "enchantment" : undefined
     }]);
   }
 

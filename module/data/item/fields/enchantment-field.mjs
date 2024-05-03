@@ -59,6 +59,16 @@ export class EnchantmentData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Enchantments available or applied.
+   * @type {ActiveEffect5e[]}
+   */
+  get enchantments() {
+    return this.item.effects.filter(ae => ae.getFlag("dnd5e", "type") === "enchantment");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this feature an enchantment?
    * @param {FeatData} data  Data for the feature.
    * @returns {boolean}
@@ -99,6 +109,16 @@ export class EnchantmentData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Item to which this enchantment information belongs.
+   * @type {Item5e}
+   */
+  get item() {
+    return this.parent.parent;
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
@@ -122,6 +142,58 @@ export class EnchantmentData extends foundry.abstract.DataModel {
     }
 
     return errors.length ? errors : true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch the tracked enchanted items.
+   * @returns {Promise<Item5e[]>}
+   */
+  async getItems() {
+    return (await Promise.all(
+      Array.from(EnchantmentData.#appliedEnchantments.get(this.item.uuid) ?? [])
+        .map(uuid => fromUuid(uuid).then(ae => ae?.parent))
+    )).filter(i => i);
+  }
+
+  /* -------------------------------------------- */
+  /*  Static Registry                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Registration of enchanted items mapped to a specific enchantment source. The map is keyed by the UUID of
+   * enchantment sources while the set contains UUID of items that source has enchanted.
+   * @type {Map<string, Set<string>>}
+   */
+  static #appliedEnchantments = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a new enchantment effect to the list of tracked enchantments. Will not track enchanted items in compendiums.
+   * @param {string} source     UUID of the active effect origin for the enchantment.
+   * @param {string} enchanted  UUID of the enchantment to track.
+   */
+  static trackEnchantment(source, enchanted) {
+    if ( enchanted.startsWith("Compendium.") ) return;
+    if ( !EnchantmentData.#appliedEnchantments.has(source) ) {
+      EnchantmentData.#appliedEnchantments.set(source, new Set());
+    }
+    const applied = EnchantmentData.#appliedEnchantments.get(source);
+    applied.add(enchanted);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stop tracking an enchantment.
+   * @param {string} source     UUID of the active effect origin for the enchantment.
+   * @param {string} enchanted  UUID of the enchantment to stop tracking.
+   */
+  static untrackEnchantment(source, enchanted) {
+    if ( !EnchantmentData.#appliedEnchantments.has(source) ) return;
+    EnchantmentData.#appliedEnchantments.get(source).delete(enchanted);
   }
 }
 

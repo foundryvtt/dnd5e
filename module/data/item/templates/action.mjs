@@ -1,5 +1,6 @@
 import { ItemDataModel } from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
+import {default as EnchantmentField, EnchantmentData} from "../fields/enchantment-field.mjs";
 import SummonsField from "../fields/summons-field.mjs";
 
 const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -7,23 +8,24 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
 /**
  * Data model template for item actions.
  *
- * @property {string} ability             Ability score to use when determining modifier.
- * @property {string} actionType          Action type as defined in `DND5E.itemActionTypes`.
- * @property {object} attack              Information how attacks are handled.
- * @property {string} attack.bonus        Numeric or dice bonus to attack rolls.
- * @property {boolean} attack.flat        Is the attack bonus the only bonus to attack rolls?
- * @property {string} chatFlavor          Extra text displayed in chat.
- * @property {object} critical            Information on how critical hits are handled.
- * @property {number} critical.threshold  Minimum number on the dice to roll a critical hit.
- * @property {string} critical.damage     Extra damage on critical hit.
- * @property {object} damage              Item damage formulas.
- * @property {string[][]} damage.parts    Array of damage formula and types.
- * @property {string} damage.versatile    Special versatile damage formula.
- * @property {string} formula             Other roll formula.
- * @property {object} save                Item saving throw data.
- * @property {string} save.ability        Ability required for the save.
- * @property {number} save.dc             Custom saving throw value.
- * @property {string} save.scaling        Method for automatically determining saving throw DC.
+ * @property {string} ability               Ability score to use when determining modifier.
+ * @property {string} actionType            Action type as defined in `DND5E.itemActionTypes`.
+ * @property {object} attack                Information how attacks are handled.
+ * @property {string} attack.bonus          Numeric or dice bonus to attack rolls.
+ * @property {boolean} attack.flat          Is the attack bonus the only bonus to attack rolls?
+ * @property {string} chatFlavor            Extra text displayed in chat.
+ * @property {object} critical              Information on how critical hits are handled.
+ * @property {number} critical.threshold    Minimum number on the dice to roll a critical hit.
+ * @property {string} critical.damage       Extra damage on critical hit.
+ * @property {object} damage                Item damage formulas.
+ * @property {string[][]} damage.parts      Array of damage formula and types.
+ * @property {string} damage.versatile      Special versatile damage formula.
+ * @property {EnchantmentData} enchantment  Enchantment configuration associated with this type.
+ * @property {string} formula               Other roll formula.
+ * @property {object} save                  Item saving throw data.
+ * @property {string} save.ability          Ability required for the save.
+ * @property {number} save.dc               Custom saving throw value.
+ * @property {string} save.scaling          Method for automatically determining saving throw DC.
  * @property {SummonsData} summons
  * @mixin
  */
@@ -48,6 +50,7 @@ export default class ActionTemplate extends ItemDataModel {
         parts: new ArrayField(new ArrayField(new StringField({nullable: true})), {required: true}),
         versatile: new FormulaField({required: true, label: "DND5E.VersatileDamage"})
       }, {label: "DND5E.Damage"}),
+      enchantment: new EnchantmentField(),
       formula: new FormulaField({required: true, label: "DND5E.OtherFormula"}),
       save: new SchemaField({
         ability: new StringField({required: true, blank: true, label: "DND5E.Ability"}),
@@ -234,6 +237,16 @@ export default class ActionTemplate extends ItemDataModel {
    */
   get hasSummoning() {
     return (this.actionType === "summ") && !!this.summons?.profiles.length;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Can this item enchant other items?
+   * @type {boolean}
+   */
+  get isEnchantment() {
+    return EnchantmentData.isEnchantment(this);
   }
 
   /* -------------------------------------------- */
