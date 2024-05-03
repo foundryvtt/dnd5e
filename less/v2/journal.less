@@ -2,13 +2,13 @@
 /*  Journal v2 Styles                 */
 /* ---------------------------------- */
 
-.sheet.journal-entry.dnd5e2-journal {
+.sheet.dnd5e2-journal {
   .window-resizable-handle {
     bottom: 1px;
     right: 1px;
   }
 
-  .scrollable {
+  &.journal-entry .scrollable, &.journal-entry-page.editor-content {
     scrollbar-width: thin;
     scrollbar-color: var(--dnd5e-color-gold) transparent;
 
@@ -24,7 +24,7 @@
   }
 
   /* Background Texture & Headings */
-  .journal-entry-content {
+  &.journal-entry .journal-entry-content, &.journal-entry-page .window-content {
     background: url("ui/texture1.webp") no-repeat top center / auto 770px,
       var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
 
@@ -46,7 +46,7 @@
   }
 
   /* Page Title */
-  .journal-header .title {
+  &.journal-entry .journal-header .title {
     border: 1px transparent;
     transition: all 250ms ease;
     font-size: var(--font-size-46);
@@ -66,7 +66,7 @@
   }
 
   /* Edit Button */
-  .edit-container .editor-edit {
+  &.journal-entry .edit-container .editor-edit {
     background: transparent;
     border: none;
     box-shadow: none;
