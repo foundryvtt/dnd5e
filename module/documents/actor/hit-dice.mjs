@@ -106,7 +106,7 @@ export default class HitDice {
    * @type {number}
    */
   get pct() {
-    return Math.clamped(this.max ? (this.value / this.max) * 100 : 0, 0, 100);
+    return Math.clamp(this.max ? (this.value / this.max) * 100 : 0, 0, 100);
   }
 
   /* -------------------------------------------- */

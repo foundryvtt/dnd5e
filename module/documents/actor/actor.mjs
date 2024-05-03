@@ -538,10 +538,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
     encumbrance.max = encumbrance.thresholds.maximum;
     encumbrance.stops = {
-      encumbered: Math.clamped((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100),
-      heavilyEncumbered: Math.clamped((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
+      encumbered: Math.clamp((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100),
+      heavilyEncumbered: Math.clamp((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
     };
-    encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
+    encumbrance.pct = Math.clamp((encumbrance.value * 100) / encumbrance.max, 0, 100);
     encumbrance.encumbered = encumbrance.value > encumbrance.heavilyEncumbered;
   }
 
@@ -730,7 +730,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} progression   Spellcasting progression data.
    */
   static prepareLeveledSlots(spells, actor, progression) {
-    const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
+    const levels = Math.clamp(progression.slot, 0, CONFIG.DND5E.maxLevel);
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
     for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
       const slot = spells[`spell${level}`] ??= { value: 0 };
@@ -756,7 +756,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // - x.value: Currently available slots
     // - x.override: Override number of available spell slots
 
-    let keyLevel = Math.clamped(progression[key], 0, CONFIG.DND5E.maxLevel);
+    let keyLevel = Math.clamp(progression[key], 0, CONFIG.DND5E.maxLevel);
     spells[key] ??= {};
     const override = Number.isNumeric(spells[key].override) ? parseInt(spells[key].override) : null;
 
@@ -947,7 +947,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
 
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
-    const deltaHP = Math.clamped(amount - deltaTemp, -hp.damage, hp.value);
+    const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage, hp.value);
     const updates = {
       "system.attributes.hp.temp": hp.temp - deltaTemp,
       "system.attributes.hp.value": hp.value - deltaHP
@@ -1123,7 +1123,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Color}               The color used to represent the HP percentage
    */
   static getHPColor(current, max) {
-    const pct = Math.clamped(current, 0, max) / max;
+    const pct = Math.clamp(current, 0, max) / max;
     return Color.fromRGB([(1-(pct/2)), pct, 0]);
   }
 
@@ -1726,13 +1726,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
 
       // Increment successes
-      else details.updates = {"system.attributes.death.success": Math.clamped(successes, 0, 3)};
+      else details.updates = {"system.attributes.death.success": Math.clamp(successes, 0, 3)};
     }
 
     // Save failure
     else {
       let failures = (death.failure || 0) + (roll.isFumble ? 2 : 1);
-      details.updates = {"system.attributes.death.failure": Math.clamped(failures, 0, 3)};
+      details.updates = {"system.attributes.death.failure": Math.clamp(failures, 0, 3)};
       if ( failures >= 3 ) {  // 3 Failures = death
         details.chatString = "DND5E.DeathSaveFailure";
       }
@@ -2611,7 +2611,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           }));
         }
 
-        const newValue = Math.clamped(uses.value + total, 0, uses.max);
+        const newValue = Math.clamp(uses.value + total, 0, uses.max);
         if ( newValue !== uses.value ) {
           const diff = newValue - uses.value;
           const isMax = newValue === uses.max;
@@ -3358,7 +3358,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const tokens = this.isToken ? [this.token] : this.getActiveTokens(true, true);
     if ( !tokens.length ) return;
 
-    const pct = Math.clamped(Math.abs(value) / this.system.attributes.hp.max, 0, 1);
+    const pct = Math.clamp(Math.abs(value) / this.system.attributes.hp.max, 0, 1);
     const fill = CONFIG.DND5E.tokenHPColors[key];
 
     for ( const token of tokens ) {

@@ -49,9 +49,9 @@ Hooks.once("init", function() {
   console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
   // TODO: Remove when v11 support is dropped.
-  CONFIG.compatibility.excludePatterns.push(/Math\.clamped/);
   CONFIG.compatibility.excludePatterns.push(/\{\{filePicker}}/);
   CONFIG.compatibility.excludePatterns.push(/foundry\.dice\.terms/);
+  if ( game.release.generation < 12 ) Math.clamp = Math.clamped;
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -424,8 +424,10 @@ Hooks.once("ready", function() {
 /* -------------------------------------------- */
 
 Hooks.on("canvasInit", gameCanvas => {
-  gameCanvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
-  SquareGrid.prototype.measureDistances = canvas.measureDistances;
+  if ( game.release.generation < 12 ) {
+    gameCanvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
+    SquareGrid.prototype.measureDistances = canvas.measureDistances;
+  }
   CONFIG.Token.ringClass.pushToLoad(gameCanvas.loadTexturesOptions.additionalSources);
 });
 

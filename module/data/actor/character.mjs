@@ -191,7 +191,7 @@ export default class CharacterData extends CreatureTemplate {
     else {
       const required = xp.max - xp.min;
       const pct = Math.round((xp.value - xp.min) * 100 / required);
-      xp.pct = Math.clamped(pct, 0, 100);
+      xp.pct = Math.clamp(pct, 0, 100);
     }
 
     AttributesFields.prepareBaseArmorClass.call(this);
