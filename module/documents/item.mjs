@@ -44,6 +44,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       data.type = "container";
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
+
+    /**
+     * A hook event that fires before source data is initialized for an Item in a compendium.
+     * @function dnd5e.initializeItemSource
+     * @memberof hookEvents
+     * @param {Item5e} item     Item for which the data is being initialized.
+     * @param {object} data     Source data being initialized.
+     * @param {object} options  Additional data initialization options.
+     */
+    if ( options.pack || options.parent?.pack ) Hooks.callAll("dnd5e.initializeItemSource", this, data, options);
+
     return super._initializeSource(data, options);
   }
 
