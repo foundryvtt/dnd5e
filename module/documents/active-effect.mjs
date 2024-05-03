@@ -126,9 +126,9 @@ export default class ActiveEffect5e extends ActiveEffect {
       return changes;
     }
 
-    else if ( (targetType === "string") && (change.mode === modes.OVERRIDE) && change.value.includes("{{}}") ) {
+    else if ( (targetType === "string") && (change.mode === modes.OVERRIDE) && change.value.includes("{}") ) {
       change = foundry.utils.deepClone(change);
-      change.value = change.value.replace("{{}}", current ?? "");
+      change.value = change.value.replace("{}", current ?? "");
     }
 
     let delta;
