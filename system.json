@@ -212,6 +212,10 @@
   "socket": true,
   "gridDistance": 5,
   "gridUnits": "ft",
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
   "primaryTokenAttribute": "attributes.hp",
   "background": "systems/dnd5e/ui/official/dnd5e-background.webp",
   "flags": {
