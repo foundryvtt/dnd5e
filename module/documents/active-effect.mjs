@@ -367,7 +367,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * Create conditions that are applied separately from an effect.
    * @returns {Promise<ActiveEffect5e[]|void>}      Created rider effects.
    */
-  createRiderConditions() {
+  async createRiderConditions() {
     const riders = new Set(this.statuses.reduce((acc, status) => {
       const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
       return acc.concat(r);
@@ -415,7 +415,6 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritdoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-
     if ( this.active && (this.parent instanceof Actor) ) this.createRiderConditions();
   }
 
