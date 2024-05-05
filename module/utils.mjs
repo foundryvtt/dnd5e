@@ -175,33 +175,23 @@ export function indexFromUuid(uuid) {
 
 /**
  * Creates an HTML document link for the provided UUID.
+ * Try to build links to compendium content synchronously to avoid DB lookups.
  * @param {string} uuid               UUID for which to produce the link.
  * @param {object} [options]
  * @param {string} [options.tooltip]  Tooltip to add to the link.
  * @returns {string}                  Link to the item or empty string if item wasn't found.
  */
 export function linkForUuid(uuid, { tooltip }={}) {
-  let element;
-
-  if ( game.release.generation < 12 ) element = TextEditor._createContentLink(["", "UUID", uuid]);
-
-  // TODO: When v11 support is dropped we can make this method async and return to using TextEditor._createContentLink.
-  else if ( uuid.startsWith("Compendium.") ) {
-    let [, scope, pack, documentName, id] = uuid.split(".");
-    if ( !CONST.PRIMARY_DOCUMENT_TYPES.includes(documentName) ) id = documentName;
-    const data = {
-      classes: ["content-link"],
-      attrs: { draggable: "true" }
-    };
-    TextEditor._createLegacyContentLink("Compendium", [scope, pack, id].join("."), "", data);
-    data.dataset.link = "";
-    element = TextEditor.createAnchor(data);
+  let doc = fromUuidSync(uuid);
+  if ( uuid.startsWith("Compendium.") && !(doc instanceof foundry.abstract.Document) ) {
+    const {collection} = foundry.utils.parseUuid(uuid);
+    const cls = collection.documentClass;
+    // Minimal "shell" of a document using index data
+    doc = new cls(foundry.utils.deepClone(doc), {pack: collection.metadata.id});
   }
-
-  else element = fromUuidSync(uuid).toAnchor();
-
-  if ( tooltip ) element.dataset.tooltip = tooltip;
-  return element.outerHTML;
+  const a = doc.toAnchor();
+  if ( tooltip ) a.dataset.tooltip = tooltip;
+  return a.outerHTML;
 }
 
 /* -------------------------------------------- */
