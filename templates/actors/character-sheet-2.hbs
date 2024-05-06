@@ -52,7 +52,9 @@
         <div class="right">
 
             {{!-- Level --}}
-            <div class="level" aria-label="{{ localize "DND5E.LevelNumber" level=system.details.level }}">{{ system.details.level }}</div>
+            <div class="level-badge badge" aria-label="{{ localize "DND5E.LevelNumber" level=system.details.level }}">
+                {{ system.details.level }}
+            </div>
 
             {{!-- Inspiration --}}
             <button type="button" class="inspiration unbutton" data-action="toggleInspiration"
@@ -113,11 +115,11 @@
                 <div class="card">
 
                     {{!-- Collapser --}}
-                    <button type="button" class="collapser card-tab vertical unbutton interface-only"
+                    <button type="button" class="sidebar-collapser collapser card-tab vertical unbutton interface-only"
                         {{#if sidebarCollapsed}}
-                            data-tooltip="JOURNAL.ViewExpand" aria-label="{{ localize "JOURNAL.ViewExpand" }}"
+                        data-tooltip="JOURNAL.ViewExpand" aria-label="{{ localize "JOURNAL.ViewExpand" }}"
                         {{else}}
-                            data-tooltip="JOURNAL.ViewCollapse" aria-label="{{ localize "JOURNAL.ViewCollapse" }}"
+                        data-tooltip="JOURNAL.ViewCollapse" aria-label="{{ localize "JOURNAL.ViewCollapse" }}"
                         {{/if}}>
                         <i class="fas fa-caret-{{#if sidebarCollapsed}}right{{else}}left{{/if}}"></i>
                     </button>
@@ -154,7 +156,7 @@
                             </div>
 
                             {{!-- AC --}}
-                            <div class="ac" aria-label="{{ localize "DND5E.ArmorClass" }}">
+                            <div class="ac-badge badge" aria-label="{{ localize "DND5E.ArmorClass" }}">
                                 {{#if editable}}
                                 <a class="config-button" data-action="armor" data-tooltip="DND5E.ArmorConfig"
                                    aria-label="{{ localize "DND5E.ArmorConfig" }}">
@@ -258,10 +260,11 @@
                         </div>
 
                         {{!-- Hit Dice --}}
+                        {{#with system.attributes.hd}}
                         <div class="meter-group">
                             <div class="label roboto-condensed-upper">
                                 <span>{{ localize "DND5E.HitDice" }}</span>
-                                {{#if editable}}
+                                {{#if @root.editable}}
                                 <a class="config-button" data-action="hitDice" data-tooltip="DND5E.HitDiceConfig"
                                    aria-label="{{ localize "DND5E.HitDiceConfig" }}">
                                     <i class="fas fa-cog"></i>
@@ -269,15 +272,16 @@
                                 {{/if}}
                             </div>
                             <div class="meter hit-dice progress" role="meter" aria-valuemin="0"
-                                 aria-valuenow="{{ hd.value }}" aria-valuemax="{{ hd.max }}"
-                                 style="--bar-percentage: {{ hd.pct }}%">
+                                 aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
+                                 style="--bar-percentage: {{ pct }}%">
                                 <div class="label">
-                                    <span class="value">{{ hd.value }}</span>
+                                    <span class="value">{{ value }}</span>
                                     <span class="separator">&sol;</span>
-                                    <span class="max">{{ hd.max }}</span>
+                                    <span class="max">{{ max }}</span>
                                 </div>
                             </div>
                         </div>
+                        {{/with}}
                     </div>
 
                     {{!-- Death Saves --}}

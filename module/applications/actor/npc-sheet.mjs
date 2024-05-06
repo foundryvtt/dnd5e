@@ -63,6 +63,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       ctx.hasUses = uses && (uses.max > 0);
       ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
       ctx.canToggle = false;
+      // Individual item preparation
+      this._prepareItem(item, ctx);
       if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => ({
         level, delta: level - item.system.levels, disabled: (level - item.system.levels) > maxLevelDelta
       }));
@@ -108,6 +110,16 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     if ( this.actor.shield ) label.push(this.actor.shield.name);
     return label.filterJoin(", ");
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A helper method to establish the displayed preparation state for an item.
+   * @param {Item5e} item     Item being prepared for display.
+   * @param {object} context  Context data for display.
+   * @protected
+   */
+  _prepareItem(item, context) {}
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers

@@ -1,0 +1,183 @@
+.dnd5e2.sheet.actor {
+
+  /* ---------------------------------- */
+  /*  Outer Window                      */
+  /* ---------------------------------- */
+
+  > header {
+    background: transparent;
+    position: relative;
+    z-index: 1;
+
+    .window-title { visibility: hidden; }
+
+    /* Edit Mode Toggle */
+    > slide-toggle {
+      --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
+      --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray);
+      flex: none;
+
+      .slide-toggle-thumb {
+        line-height: 12px;
+
+        &::before {
+          content: "\f0ad";
+          font-family: var(--font-awesome);
+          color: var(--dnd5e-color-light-gray);
+          font-weight: bold;
+          font-size: var(--font-size-9);
+        }
+      }
+
+      &[checked] .slide-toggle-thumb::before {
+        color: var(--dnd5e-color-gold);
+      }
+    }
+  }
+
+  .window-content { margin-top: -30px; }
+
+  /* ---------------------------------- */
+  /*  Sheet Header                      */
+  /* ---------------------------------- */
+
+  .sheet-header {
+    input, select {
+      background: rgb(0 0 0 / 45%);
+      border: 1px solid transparent;
+      transition: all 250ms ease;
+
+      &:hover, &:focus {
+        border: 1px solid var(--dnd5e-color-gold);
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      }
+    }
+
+    /* Resting & Special Traits */
+    .sheet-header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Badges                            */
+  /* ---------------------------------- */
+
+  .badge {
+    background: transparent no-repeat center / contain;
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    color: var(--color-text-light-0);
+    display: grid;
+    place-content: center;
+    font-size: var(--font-size-30);
+
+    .config-button {
+      color: inherit;
+      font-size: inherit;
+    }
+  }
+
+  /* AC */
+  .ac-badge {
+    width: 68px;
+    height: 68px;
+    text-align: center;
+    line-height: 62px;
+    background-image: url("ui/ac-badge.webp");
+    display: block;
+    place-content: unset;
+    font-size: var(--font-size-23);
+    margin-top: -21px;
+    filter: drop-shadow(0 0 6px var(--color-shadow-dark));
+  }
+
+  /* ---------------------------------- */
+  /*  Meters                            */
+  /* ---------------------------------- */
+
+  .meter {
+    &.hit-points {
+      height: 32px;
+      font-size: var(--font-size-16);
+
+      .progress::before {
+        background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%);
+        border-inline-end: var(--border-width) solid var(--dnd5e-color-hp-3);
+        border-radius: 4px 0 0 4px;
+      }
+      .temp-positive .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, blue 25%); }
+      .temp-negative .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, red 25%); }
+    }
+
+    &.hit-dice {
+      height: 25px;
+      font-size: var(--font-size-14);
+
+      &.progress::before {
+        background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%);
+        border-inline-end: var(--border-width) solid var(--dnd5e-color-hd-3);
+      }
+    }
+
+    &.sectioned {
+      input {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        border: none;
+        font-weight: bold;
+        background: none;
+        color: var(--color-text-light-0);
+
+        &:hover, &:focus { box-shadow: 0 0 8px var(--dnd5e-color-gold); }
+      }
+
+      > div { height: 100%; }
+
+      > .hit-points {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        > input { position: relative; }
+      }
+
+      > .tmp {
+        flex: none;
+        width: 50px;
+        border-inline-start: 1px dashed var(--dnd5e-color-gold);
+
+        > input { color: var(--dnd5e-color-blue); }
+      }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Minimized                         */
+  /* ---------------------------------- */
+
+  &.minimized {
+    background: url("../ui/denim075.png");
+    border: unset;
+
+    > header {
+      align-items: center;
+      .header-button, .document-id-link { margin-top: 0; }
+      .window-title { visibility: visible; }
+    }
+    nav.tabs { display: none; }
+  }
+
+  /* ---------------------------------- */
+  /*  Locked                            */
+  /* ---------------------------------- */
+
+  form.locked {
+    .meter.sectioned > .hit-points { cursor: default; }
+  }
+}
