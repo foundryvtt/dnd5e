@@ -10,8 +10,13 @@
         {{#each enchantments}}
         <li class="enchantment" data-enchantment-id="{{ id }}">
             <div class="details flexrow">
-                {{{ dnd5e-linkForUuid uuid }}}
+                <span class="name">{{ name }}</span>
                 <div class="list-controls flexrow">
+                    <button type="button" class="unbutton" data-action="edit-enchantment"
+                            data-tooltip="DND5E.Enchantment.Action.Edit"
+                            aria-label="{{ localize 'DND5E.Enchantment.Action.Edit' }}">
+                        <i class="fa-solid fa-pen-to-square fa-fw" inert></i>
+                    </button>
                     <button type="button" class="unbutton" data-action="delete-enchantment"
                             data-tooltip="DND5E.Enchantment.Action.Delete"
                             aria-label="{{ localize 'DND5E.Enchantment.Action.Delete' }}">

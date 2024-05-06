@@ -69,6 +69,7 @@ export default class EnchantmentConfig extends DocumentSheet {
   async _updateObject(event, { action, enchantmentId, ...formData }) {
     await this.document.update({"system.enchantment": formData});
 
+    const enchantment = this.document.effects.get(enchantmentId);
     switch ( action ) {
       case "add-enchantment":
         const effect = await ActiveEffect.implementation.create({
@@ -79,8 +80,10 @@ export default class EnchantmentConfig extends DocumentSheet {
         effect.sheet.render(true);
         break;
       case "delete-enchantment":
-        const enchantment = this.document.effects.get(enchantmentId);
         enchantment?.deleteDialog();
+        break;
+      case "edit-enchantment":
+        enchantment?.sheet.render(true);
         break;
     }
   }
