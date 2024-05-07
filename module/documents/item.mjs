@@ -513,7 +513,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     // Activated Items
-    this._prepareActivation();
     this._prepareAction();
     this._prepareRecovery();
 
@@ -584,59 +583,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   _prepareWeapon() {
     this.labels.armor = this.system.armor.value ? `${this.system.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare derived data for activated items and define labels.
-   * @protected
-   */
-  _prepareActivation() {
-    if ( !("activation" in this.system) ) return;
-    const C = CONFIG.DND5E;
-
-    // Ability Activation Label
-    const act = this.system.activation ?? {};
-    if ( !act.type ) act.type = null;   // Backwards compatibility
-    this.labels.activation = act.type ? [
-      (act.type in C.staticAbilityActivationTypes) ? null : act.cost,
-      C.abilityActivationTypes[act.type]
-    ].filterJoin(" ") : "";
-
-    // Target Label
-    let tgt = this.system.target ?? {};
-    if ( ["none", ""].includes(tgt.type) ) tgt.type = null;   // Backwards compatibility
-    if ( [null, "self"].includes(tgt.type) ) tgt.value = tgt.units = null;
-    else if ( tgt.units === "touch" ) tgt.value = null;
-
-    if ( this.hasTarget ) {
-      const target = [tgt.value];
-      if ( this.hasAreaTarget ) {
-        if ( tgt.units in C.movementUnits ) target.push(game.i18n.localize(`DND5E.Dist${tgt.units.capitalize()}Abbr`));
-        else target.push(C.distanceUnits[tgt.units]);
-      }
-      target.push(C.targetTypes[tgt.type]);
-      this.labels.target = target.filterJoin(" ");
-    }
-
-    // Range Label
-    let rng = this.system.range ?? {};
-    if ( ["none", ""].includes(rng.units) ) rng.units = null; // Backwards compatibility
-    if ( [null, "touch", "self"].includes(rng.units) ) rng.value = rng.long = null;
-    if ( this.isActive && rng.units ) {
-      this.labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null];
-      if ( rng.units in C.movementUnits ) {
-        this.labels.range.push(game.i18n.localize(`DND5E.Dist${rng.units.capitalize()}Abbr`));
-      }
-      else this.labels.range.push(C.distanceUnits[rng.units]);
-      this.labels.range = this.labels.range.filterJoin(" ");
-    } else this.labels.range = game.i18n.localize("DND5E.None");
-
-    // Recharge Label
-    let chg = this.system.recharge ?? {};
-    const chgSuffix = `${chg.value}${parseInt(chg.value) < 6 ? "+" : ""}`;
-    this.labels.recharge = `${game.i18n.localize("DND5E.Recharge")} [${chgSuffix}]`;
   }
 
   /* -------------------------------------------- */
@@ -742,12 +688,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
       // To Hit
       this.getAttackToHit();
-
-      // Limited Uses
-      this.prepareMaxUses();
-
-      // Duration
-      this.prepareDurationValue();
 
       // Damage Label
       this.getDerivedDamageLabel();
@@ -873,66 +813,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Populates the max uses of an item.
-   * If the item is an owned item and the `max` is not numeric, calculate based on actor data.
-   */
-  prepareMaxUses() {
-    const uses = this.system.uses;
-    if ( !uses?.max ) return;
-    let max = uses.max;
-    if ( this.isOwned && !Number.isNumeric(max) ) {
-      const property = game.i18n.localize("DND5E.UsesMax");
-      try {
-        const rollData = this.getRollData({ deterministic: true });
-        max = Roll.safeEval(this.replaceFormulaData(max, rollData, { property }));
-      } catch(e) {
-        const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.name });
-        this.actor._preparationWarnings.push({ message, link: this.uuid, type: "error" });
-        console.error(message, e);
-        return;
-      }
-    }
-    uses.max = Number(max);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Populate the duration value of an item. If the item is an owned item and the
-   * duration value is not numeric, calculate based on actor data.
-   */
-  prepareDurationValue() {
-    const duration = this.system.duration;
-    let value = duration?.value;
-
-    if ( !value ) {
-      if ( duration?.units ) this.labels.duration = CONFIG.DND5E.timePeriods[duration.units];
-      return;
-    }
-
-    // If this is an owned item and the value is not numeric, we need to calculate it
-    if ( this.isOwned && !Number.isNumeric(value) ) {
-      const property = game.i18n.localize("DND5E.Duration");
-      try {
-        const rollData = this.getRollData({ deterministic: true });
-        value = Roll.safeEval(this.replaceFormulaData(value, rollData, { property }));
-      } catch(e) {
-        const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.name });
-        this.actor._preparationWarnings.push({ message, link: this.uuid, type: "error" });
-        console.error(message, e);
-        return;
-      }
-    }
-    duration.value = Number(value);
-
-    // Now that duration value is a number, set the label
-    if ( ["inst", "perm"].includes(duration.units) ) duration.value = null;
-    this.labels.duration = [duration.value, CONFIG.DND5E.timePeriods[duration.units]].filterJoin(" ");
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Replace referenced data attributes in the roll formula with values from the provided data.
    * If the attribute is not found in the provided data, display a warning on the actor.
    * @param {string} formula           The original formula within which to replace.
@@ -940,26 +820,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} options
    * @param {string} options.property  Name of the property to which this formula belongs.
    * @returns {string}                 Formula with replaced data.
+   * @deprecated since DnD5e 3.2, available until DnD5e 3.4
    */
   replaceFormulaData(formula, data, { property }) {
-    const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
-    const missingReferences = new Set();
-    formula = formula.replace(dataRgx, (match, term) => {
-      let value = foundry.utils.getProperty(data, term);
-      if ( value == null ) {
-        missingReferences.add(match);
-        return "0";
-      }
-      return String(value).trim();
-    });
-    if ( (missingReferences.size > 0) && this.actor ) {
-      const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
-      const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
-        property, name: this.name, references: listFormatter.format(missingReferences)
-      });
-      this.actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
-    }
-    return formula;
+    foundry.utils.logCompatibilityWarning(
+      "Item5e#replaceFormulaData has been moved to dnd5e.utils.replaceFormulaData.",
+      { since: "DnD5e 3.2", until: "DnD5e 3.4" }
+    );
+    return dnd5e.utils.replaceFormulaData(formula, data, { actor: this.actor, property });
   }
 
   /* -------------------------------------------- */
@@ -2045,10 +1913,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   getRollData({ deterministic=false }={}) {
     let data;
     if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
-    else {
-      if ( !this.actor ) return null;
-      data = { ...this.actor.getRollData({ deterministic }), item: { ...this.system } };
-    }
+    else data = { ...(this.actor?.getRollData({ deterministic }) ?? {}), item: { ...this.system } };
     if ( data?.item ) {
       data.item.flags = { ...this.flags };
       data.item.name = this.name;

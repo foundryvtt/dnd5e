@@ -155,16 +155,6 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Validation                             */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  validate(options={}) {
-    if ( this.constructor._enableV10Validation === false ) return true;
-    return super.validate(options);
-  }
-
-  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
@@ -191,6 +181,14 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------- */
   /*  Data Validation                             */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  validate(options={}) {
+    if ( this.constructor._enableV10Validation === false ) return true;
+    return super.validate(options);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -516,8 +514,7 @@ export class ItemDataModel extends SystemDataModel {
    * @returns {object}
    */
   getRollData({ deterministic=false }={}) {
-    if ( !this.parent.actor ) return null;
-    const actorRollData = this.parent.actor.getRollData({ deterministic });
+    const actorRollData = this.parent.actor?.getRollData({ deterministic }) ?? {};
     const data = { ...actorRollData, item: { ...this } };
     return data;
   }
