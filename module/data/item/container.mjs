@@ -44,7 +44,8 @@ export default class ContainerData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: true,
-    inventoryItem: true
+    inventoryItem: true,
+    inventoryOrder: 500
   }, {inplace: false}));
 
   /* -------------------------------------------- */
