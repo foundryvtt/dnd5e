@@ -50,8 +50,9 @@ export default class EnchantmentConfig extends DocumentSheet {
     }, {});
     context.enchantment = this.document.system.enchantment;
     context.enchantments = this.document.effects.reduce((arr, e) => {
+      const { id, uuid, flags } = e;
       if ( (e.getFlag("dnd5e", "type") === "enchantment") && !e.isAppliedEnchantment ) arr.push({
-        id: e.id, uuid: e.uuid, flags: e.flags, collapsed: this.expandedEnchantments.get(e._id) ? "" : "collapsed"
+        id, uuid, flags, collapsed: this.expandedEnchantments.get(id) ? "" : "collapsed"
       });
       return arr;
     }, []);
