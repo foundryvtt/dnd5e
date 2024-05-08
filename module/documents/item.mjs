@@ -1075,44 +1075,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     if ( item.type === "spell" ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
-    /**
-     * A hook event that fires before an item's resource consumption has been calculated.
-     * @function dnd5e.preItemUsageConsumption
-     * @memberof hookEvents
-     * @param {Item5e} item                  Item being used.
-     * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
-     * @param {ItemUseOptions} options       Additional options used for configuring item usage.
-     * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
-     */
-    if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return;
-
-    // Determine whether the item can be used by testing the chosen values of the config.
-    const usage = item._getUsageUpdates(config);
-    if ( !usage ) return;
-
-    /**
-     * A hook event that fires after an item's resource consumption has been calculated but before any
-     * changes have been made.
-     * @function dnd5e.itemUsageConsumption
-     * @memberof hookEvents
-     * @param {Item5e} item                     Item being used.
-     * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
-     * @param {ItemUseOptions} options          Additional options used for configuring item usage.
-     * @param {object} usage
-     * @param {object} usage.actorUpdates       Updates that will be applied to the actor.
-     * @param {object} usage.itemUpdates        Updates that will be applied to the item being used.
-     * @param {object[]} usage.resourceUpdates  Updates that will be applied to other items on the actor.
-     * @param {Set<string>} usage.deleteIds     Item ids for those which consumption will delete.
-     * @returns {boolean}                       Explicitly return `false` to prevent item from being used.
-     */
-    if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
-
-    // Commit pending data updates
-    const { actorUpdates, itemUpdates, resourceUpdates, deleteIds } = usage;
-    if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( !foundry.utils.isEmpty(deleteIds) ) await this.actor.deleteEmbeddedDocuments("Item", [...deleteIds]);
-    if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
-    if ( !foundry.utils.isEmpty(resourceUpdates) ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
+    // Calculate and consume item consumption
+    if ( await this.consume(item, config, options) === false ) return;
 
     // Initiate or end concentration.
     const effects = [];
@@ -1170,6 +1134,63 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     return cardData;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle item's consumption.
+   * @param {Item5e} item  Item or clone to use when calculating updates.
+   * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
+   * @param {ItemUseOptions} options       Additional options used for configuring item usage.
+   * @returns {boolean|void}               Returns `false` if any further usage should be canceled.
+   */
+  async consume(item, config, options) {
+    /**
+     * A hook event that fires before an item's resource consumption has been calculated.
+     * @function dnd5e.preItemUsageConsumption
+     * @memberof hookEvents
+     * @param {Item5e} item                  Item being used.
+     * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
+     * @param {ItemUseOptions} options       Additional options used for configuring item usage.
+     * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
+     */
+    if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return false;
+
+    // Determine whether the item can be used by testing the chosen values of the config.
+    const usage = item._getUsageUpdates(config);
+    if ( !usage ) return false;
+
+    options.flags ??= {};
+    if ( config.consumeUsage ) foundry.utils.setProperty(options.flags, "dnd5e.use.consumedUsage", true);
+    if ( config.consumeResource ) foundry.utils.setProperty(options.flags, "dnd5e.use.consumedResource", true);
+    if ( config.consumeSpellSlot ) foundry.utils.setProperty(options.flags, "dnd5e.use.consumedSpellSlot", true);
+
+    /**
+     * A hook event that fires after an item's resource consumption has been calculated but before any
+     * changes have been made.
+     * @function dnd5e.itemUsageConsumption
+     * @memberof hookEvents
+     * @param {Item5e} item                     Item being used.
+     * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
+     * @param {ItemUseOptions} options          Additional options used for configuring item usage.
+     * @param {object} usage
+     * @param {object} usage.actorUpdates       Updates that will be applied to the actor.
+     * @param {object} usage.itemUpdates        Updates that will be applied to the item being used.
+     * @param {object[]} usage.resourceUpdates  Updates that will be applied to other items on the actor.
+     * @param {Set<string>} usage.deleteIds     Item ids for those which consumption will delete.
+     * @returns {boolean}                       Explicitly return `false` to prevent item from being used.
+     */
+    if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return false;
+
+    // Commit pending data updates
+    const { actorUpdates, itemUpdates, resourceUpdates, deleteIds } = usage;
+    if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
+    if ( !foundry.utils.isEmpty(deleteIds) ) await this.actor.deleteEmbeddedDocuments("Item", [...deleteIds]);
+    if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
+    if ( !foundry.utils.isEmpty(resourceUpdates) ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Prepare an object of possible and default values for item usage. A value that is `null` is ignored entirely.
@@ -1475,8 +1496,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Render the chat card template
     const token = this.actor.token;
+    const consumeUsage = this.hasLimitedUses && !options.flags?.dnd5e?.use?.consumedUsage;
+    const consumeResource = this.hasResource && !options.flags?.dnd5e?.use?.consumedResource;
     const hasButtons = this.hasAttack || this.hasDamage || this.isVersatile || this.hasSave || this.system.formula
-      || this.hasAreaTarget || (this.type === "tool") || this.hasAbilityCheck || this.system.hasSummoning;
+      || this.hasAreaTarget || (this.type === "tool") || this.hasAbilityCheck || this.system.hasSummoning
+      || consumeUsage || consumeResource;
     const templateData = {
       hasButtons,
       actor: this.actor,
@@ -1494,7 +1518,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       hasSave: this.hasSave,
       hasAreaTarget: this.hasAreaTarget,
       isTool: this.type === "tool",
-      hasAbilityCheck: this.hasAbilityCheck
+      hasAbilityCheck: this.hasAbilityCheck,
+      consumeUsage,
+      consumeResource
     };
     const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", templateData);
 
@@ -2122,6 +2148,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
       // Handle different actions
       let targets;
+      let messageUpdates = {};
       switch ( action ) {
         case "abilityCheck":
           targets = this._getChatCardTargets(card);
@@ -2149,6 +2176,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             event: event,
             spellLevel: spellLevel
           });
+          break;
+        case "consumeUsage":
+          await item.consume(item, { consumeUsage: true }, messageUpdates);
+          break;
+        case "consumeResource":
+          await item.consume(item, { consumeResource: true }, messageUpdates);
           break;
         case "damage":
         case "versatile":
@@ -2190,6 +2223,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           await item.rollToolCheck({event});
           break;
       }
+      if ( !foundry.utils.isEmpty(messageUpdates) ) await message.update(messageUpdates);
 
     } catch(err) {
       Hooks.onError("Item5e._onChatCardAction", err, { log: "error", notify: "error" });
