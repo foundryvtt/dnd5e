@@ -630,6 +630,11 @@ enchantment-application {
       align-items: center;
       gap: 6px;
 
+      &:not(:last-child) {
+        border-block-end: 1px dotted var(--color-border-light-2);
+        padding-block-end: 4px;
+      }
+
       > img {
         block-size: 32px;
         inline-size: 32px;

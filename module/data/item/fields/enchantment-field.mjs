@@ -155,10 +155,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    * @returns {Promise<Item5e[]>}
    */
   async getItems() {
-    return (await Promise.all(
-      Array.from(EnchantmentData.#appliedEnchantments.get(this.item.uuid) ?? [])
-        .map(uuid => fromUuid(uuid).then(ae => ae?.parent))
-    )).filter(i => i);
+    return (await this.constructor.appliedEnchantments(this.item.uuid)).map(ae => ae?.parent);
   }
 
   /* -------------------------------------------- */
@@ -167,10 +164,23 @@ export class EnchantmentData extends foundry.abstract.DataModel {
 
   /**
    * Registration of enchanted items mapped to a specific enchantment source. The map is keyed by the UUID of
-   * enchantment sources while the set contains UUID of items that source has enchanted.
+   * enchantment sources while the set contains UUID of applied enchantment active effects.
    * @type {Map<string, Set<string>>}
    */
   static #appliedEnchantments = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch the tracked enchanted items.
+   * @param {string} itemUuid  UUID of the item supplying the enchantments.
+   * @returns {Promise<ActiveEffect5e[]>}
+   */
+  static async appliedEnchantments(itemUuid) {
+    return Promise.all(
+      Array.from(EnchantmentData.#appliedEnchantments.get(itemUuid) ?? []).map(uuid => fromUuid(uuid))
+    ).then(a => a.filter(i => i));
+  }
 
   /* -------------------------------------------- */
 

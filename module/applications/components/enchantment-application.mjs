@@ -1,3 +1,5 @@
+import { EnchantmentData } from "../../data/item/fields/enchantment-field.mjs";
+
 /**
  * Application to handle applying enchantments to items from a chat card.
  */
@@ -57,12 +59,11 @@ export default class EnchantmentApplicationElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
-   * Build a list of enchanted items.
+   * Build a list of enchanted items. Will be called whenever the enchanted items are changed in order to update
+   * the card list.
    */
   async buildItemList() {
-    const enchantedItems = (await Promise.all(
-      (this.chatMessage.getFlag("dnd5e", "enchanted") ?? []).map(uuid => fromUuid(uuid))
-    )).filter(i => i).map(enchantment => {
+    const enchantedItems = (await EnchantmentData.appliedEnchantments(this.enchantmentItem.uuid)).map(enchantment => {
       const item = enchantment.parent;
       const div = document.createElement("div");
       div.classList.add("preview");

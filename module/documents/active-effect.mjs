@@ -423,13 +423,9 @@ export default class ActiveEffect5e extends ActiveEffect {
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if ( (userId === game.userId) && this.active && (this.parent instanceof Actor) ) this.createRiderConditions();
-    if ( game.users.activeGM?.isSelf && options.chatMessageOrigin ) {
-      const message = game.messages.get(options.chatMessageOrigin);
-      if ( message ) {
-        const enchantmentUuids = message.getFlag("dnd5e", "enchanted") ?? [];
-        enchantmentUuids.push(this.uuid);
-        message.setFlag("dnd5e", "enchanted", enchantmentUuids);
-      }
+    if ( options.chatMessageOrigin ) {
+      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
+        .forEach(element => element.buildItemList());
     }
   }
 
@@ -484,12 +480,9 @@ export default class ActiveEffect5e extends ActiveEffect {
     super._onDelete(options, userId);
     if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
     if ( this.isAppliedEnchantment ) EnchantmentData.untrackEnchantment(this.origin, this.uuid);
-    if ( game.users.activeGM?.isSelf && options.chatMessageOrigin ) {
-      const message = game.messages.get(options.chatMessageOrigin);
-      if ( message ) {
-        const enchantmentUuids = message.getFlag("dnd5e", "enchanted") ?? [];
-        message.setFlag("dnd5e", "enchanted", enchantmentUuids.filter(uuid => uuid !== this.uuid));
-      }
+    if ( options.chatMessageOrigin ) {
+      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
+        .forEach(element => element.buildItemList());
     }
   }
 
