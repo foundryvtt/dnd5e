@@ -64,8 +64,8 @@ export default class EnchantmentConfig extends DocumentSheet {
       uuid: effect.uuid,
       flags: effect.flags,
       collapsed: this.expandedEnchantments.get(effect.id) ? "" : "collapsed",
-      rideAlong: effects.map(({ id, name }) => ({
-        id, name, selected: effect.flags.dnd5e?.enchantment?.rideAlong?.includes(id) ? "selected" : ""
+      riders: effects.map(({ id, name }) => ({
+        id, name, selected: effect.flags.dnd5e?.enchantment?.riders?.includes(id) ? "selected" : ""
       }))
     }));
 
@@ -110,21 +110,21 @@ export default class EnchantmentConfig extends DocumentSheet {
 
     await this.document.update({"system.enchantment": data});
 
-    const rideAlongIds = new Set();
+    const riderIds = new Set();
     const effectsChanges = Object.entries(effects ?? {}).map(([_id, changes]) => {
       const updates = { _id, ...changes };
       // Fix bug with <multi-select> in V11
-      if ( !foundry.utils.hasProperty(updates, "flags.dnd5e.enchantment.rideAlong") ) {
-        foundry.utils.setProperty(updates, "flags.dnd5e.enchantment.rideAlong", []);
+      if ( !foundry.utils.hasProperty(updates, "flags.dnd5e.enchantment.riders") ) {
+        foundry.utils.setProperty(updates, "flags.dnd5e.enchantment.riders", []);
       }
       // End bug fix
-      rideAlongIds.add(...foundry.utils.getProperty(updates, "flags.dnd5e.enchantment.rideAlong", []));
+      riderIds.add(...foundry.utils.getProperty(updates, "flags.dnd5e.enchantment.riders", []));
       return updates;
     });
     for ( const effect of this.document.effects ) {
       if ( effect.getFlag("dnd5e", "type") === "enchantment" ) continue;
-      if ( rideAlongIds.has(effect.id) ) effectsChanges.push({ _id: effect.id, "flags.dnd5e.rideAlong": true });
-      else effectsChanges.push({ _id: effect.id, "flags.dnd5e.-=rideAlong": null });
+      if ( riderIds.has(effect.id) ) effectsChanges.push({ _id: effect.id, "flags.dnd5e.rider": true });
+      else effectsChanges.push({ _id: effect.id, "flags.dnd5e.-=rider": null });
     }
     if ( effectsChanges.length ) await this.document.updateEmbeddedDocuments("ActiveEffect", effectsChanges);
 

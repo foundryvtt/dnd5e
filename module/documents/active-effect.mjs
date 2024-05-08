@@ -327,7 +327,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if ( this.getFlag("dnd5e", "type") === "enchantment" || this.getFlag("dnd5e", "rideAlong") ) this.transfer = false;
+    if ( this.getFlag("dnd5e", "type") === "enchantment" || this.getFlag("dnd5e", "rider") ) this.transfer = false;
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
     if ( this.isAppliedEnchantment ) EnchantmentData.trackEnchantment(this.origin, this.uuid);
   }
@@ -392,6 +392,26 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Create additional effects that are applied separately from an enchantment.
+   */
+  async createRiderEnchantments() {
+    const origin = await fromUuid(this.origin);
+    const riders = (this.getFlag("dnd5e", "enchantment.riders") ?? []).map(id => {
+      const effectData = origin.effects.get(id)?.toObject();
+      if ( effectData ) {
+        delete effectData._id;
+        delete effectData.flags?.dnd5e?.rider;
+        effectData.origin = this.origin;
+      }
+      return effectData;
+    }).filter(e => e);
+    const created = await this.parent.createEmbeddedDocuments("ActiveEffect", riders);
+    if ( created.length ) this.addDependent(...created);
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
@@ -420,34 +440,16 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _onCreate(data, options, userId) {
+  async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( (userId === game.userId) && this.active && (this.parent instanceof Actor) ) this.createRiderConditions();
+    if ( userId === game.userId ) {
+      if ( this.active && (this.parent instanceof Actor) ) await this.createRiderConditions();
+      if ( this.isAppliedEnchantment ) await this.createRiderEnchantments();
+    }
     if ( options.chatMessageOrigin ) {
       document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
         .forEach(element => element.buildItemList());
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _onCreate(data, options, userId) {
-    await super._onCreate(data, options, userId);
-    if ( (userId !== game.user.id) || !this.isAppliedEnchantment ) return;
-
-    const origin = await fromUuid(this.origin);
-    const rideAlongEffects = (this.getFlag("dnd5e", "enchantment.rideAlong") ?? []).map(id => {
-      const effectData = origin.effects.get(id)?.toObject();
-      if ( effectData ) {
-        delete effectData._id;
-        delete effectData.flags?.dnd5e?.rideAlong;
-        effectData.origin = this.origin;
-      }
-      return effectData;
-    }).filter(e => e);
-    const created = await this.parent.createEmbeddedDocuments("ActiveEffect", rideAlongEffects);
-    if ( created.length ) this.addDependent(...created);
   }
 
   /* -------------------------------------------- */

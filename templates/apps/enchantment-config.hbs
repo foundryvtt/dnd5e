@@ -41,13 +41,13 @@
                             <p class="hint">{{ localize "DND5E.Enchantment.Level.Hint" }}</p>
                         </div>
                         <div class="form-group">
-                            <label>{{ localize "DND5E.Enchantment.RideAlong.Label" }}</label>
-                            <multi-select name="effects.{{ id }}.flags.dnd5e.enchantment.rideAlong">
-                                {{#each rideAlong}}
+                            <label>{{ localize "DND5E.Enchantment.Riders.Label" }}</label>
+                            <multi-select name="effects.{{ id }}.flags.dnd5e.enchantment.riders">
+                                {{#each riders}}
                                 <option value="{{ id }}" {{ selected }}>{{ name }}</option>
                                 {{/each}}
                             </multi-select>
-                            <p class="hint">{{ localize "DND5E.Enchantment.RideAlong.Hint" }}</p>
+                            <p class="hint">{{ localize "DND5E.Enchantment.Riders.Hint" }}</p>
                         </div>
                     </div>
                 </div>
