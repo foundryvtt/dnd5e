@@ -193,6 +193,21 @@ export function registerSystemSettings() {
     }
   });
 
+  // Collapse Chat Card Trays
+  game.settings.register("dnd5e", "autoCollapseChatTrays", {
+    name: "SETTINGS.DND5E.COLLAPSETRAYS.Name",
+    hint: "SETTINGS.DND5E.COLLAPSETRAYS.Hint",
+    scope: "client",
+    config: true,
+    default: "older",
+    type: String,
+    choices: {
+      never: "SETTINGS.DND5E.COLLAPSETRAYS.Never",
+      older: "SETTINGS.DND5E.COLLAPSETRAYS.Older",
+      always: "SETTINGS.DND5E.COLLAPSETRAYS.Always"
+    }
+  });
+
   // Allow Polymorphing
   game.settings.register("dnd5e", "allowPolymorphing", {
     name: "SETTINGS.5eAllowPolymorphingN",
