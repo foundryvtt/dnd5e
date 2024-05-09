@@ -151,6 +151,18 @@ export class SummonsData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Creatures summoned by this item.
+   * @type {Actor5e[]}
+   */
+  get summonedCreatures() {
+    if ( !this.item.actor ) return [];
+    return SummonsData.summonedCreatures(this.item.actor)
+      .filter(i => i?.getFlag("dnd5e", "summon.origin") === this.item.uuid);
+  }
+
+  /* -------------------------------------------- */
   /*  Summoning                                   */
   /* -------------------------------------------- */
 
@@ -509,5 +521,54 @@ export class SummonsData extends foundry.abstract.DataModel {
     tokenDocument.delta.updateSource(actorUpdates);
 
     return tokenDocument.toObject();
+  }
+
+  /* -------------------------------------------- */
+  /*  Static Registry                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Registration of summoned creatures mapped to a specific summoner. The map is keyed by the UUID of
+   * summoned actor while the set contains UUID of actors that have been summoned.
+   * @type {Map<string, Set<string>>}
+   */
+  static #summonedCreatures = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch creatures summoned by an actor.
+   * @param {Actor5e} actor  Actor for which to find the summoned creatures.
+   * @returns {Actor5e[]}
+   */
+  static summonedCreatures(actor) {
+    return Array.from(SummonsData.#summonedCreatures.get(actor.uuid) ?? []).map(uuid => fromUuidSync(uuid));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a new summoned creature to the list of summoned creatures.
+   * @param {string} summoner  UUID of the actor who performed the summoning.
+   * @param {string} summoned  UUID of the summoned creature to track.
+   */
+  static trackSummon(summoner, summoned) {
+    if ( summoned.startsWith("Compendium.") ) return;
+    if ( !SummonsData.#summonedCreatures.has(summoner) ) {
+      SummonsData.#summonedCreatures.set(summoner, new Set());
+    }
+    SummonsData.#summonedCreatures.get(summoner).add(summoned);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stop tracking a summoned creature.
+   * @param {string} summoner  UUID of the actor who performed the summoning.
+   * @param {string} summoned  UUID of the summoned creature to track.
+   */
+  static untrackSummon(summoner, summoned) {
+    if ( !SummonsData.#summonedCreatures.has(summoner) ) return;
+    SummonsData.#summonedCreatures.get(summoner).delete(summoned);
   }
 }

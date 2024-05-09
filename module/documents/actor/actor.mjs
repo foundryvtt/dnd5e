@@ -5,8 +5,9 @@ import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
-import ActiveEffect5e from "../active-effect.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import { SummonsData } from "../../data/item/fields/summons-field.mjs";
+import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 
@@ -105,6 +106,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Creatures summoned by this actor.
+   * @type {Actor5e[]}
+   */
+  get summonedCreatures() {
+    return SummonsData.summonedCreatures(this);
+  }
+
+  /* -------------------------------------------- */
   /*  Methods                                     */
   /* -------------------------------------------- */
 
@@ -166,6 +177,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareDerivedData() {
+    const origin = this.getFlag("dnd5e", "summon.origin");
+    if ( origin ) SummonsData.trackSummon(origin.split(".Item.")[0], this.uuid);
+
     if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
 
     this.labels = {};
@@ -3301,6 +3315,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this, changes, data, userId);
       }
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+
+    const origin = this.getFlag("dnd5e", "summon.origin");
+    if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.uuid);
   }
 
   /* -------------------------------------------- */

@@ -2183,7 +2183,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           }
           break;
         case "summon":
-          if ( spellLevel ) item = item.clone({ "system.level": spellLevel });
+          if ( spellLevel ) item = item.clone({ "system.level": spellLevel }, { keepId: true });
           await this._onChatCardSummon(message, item);
           break;
         case "toolCheck":
