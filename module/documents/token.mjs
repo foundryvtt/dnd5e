@@ -1,3 +1,4 @@
+import { SummonsData } from "../data/item/fields/summons-field.mjs";
 import TokenSystemFlags from "../data/token/token-system-flags.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
@@ -255,5 +256,18 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       options.easing = CONFIG.Token.ringClass.easeTwoPeaks;
     }
     this.object.ring.flashColor(Color.from(color), options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+
+    const origin = this.actor.getFlag("dnd5e", "summon.origin");
+    // TODO: Replace with parseUuid once V11 support is dropped
+    if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.actor.uuid);
   }
 }
