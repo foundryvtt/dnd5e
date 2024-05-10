@@ -240,9 +240,7 @@ export default class NPCData extends CreatureTemplate {
       }
 
       // Attuned items
-      else if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
-        this.attributes.attunement.value += 1;
-      }
+      else if ( item.system.attuned ) this.attributes.attunement.value += 1;
     }
 
     // Kill Experience

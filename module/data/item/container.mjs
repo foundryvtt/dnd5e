@@ -85,6 +85,14 @@ export default class ContainerData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDerivedEquippableData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getFavoriteData() {
     const data = super.getFavoriteData();
     const capacity = await this.computeCapacity();

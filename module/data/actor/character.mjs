@@ -174,10 +174,7 @@ export default class CharacterData extends CreatureTemplate {
     this.attributes.attunement.value = 0;
 
     for ( const item of this.parent.items ) {
-      // Attuned items
-      if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
-        this.attributes.attunement.value += 1;
-      }
+      if ( item.system.attuned ) this.attributes.attunement.value += 1;
     }
 
     // Character proficiency bonus
