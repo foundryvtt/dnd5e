@@ -26,6 +26,7 @@ export default class ChatTrayElement extends HTMLElement {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
+  /** @override */
   attributeChangedCallback(name, oldValue, newValue) {
     if ( name === "open" ) this._handleToggleOpen(newValue !== null);
   }
