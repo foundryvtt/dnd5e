@@ -1142,7 +1142,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {Item5e} item  Item or clone to use when calculating updates.
    * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
    * @param {ItemUseOptions} options       Additional options used for configuring item usage.
-   * @returns {boolean|void}               Returns `false` if any further usage should be canceled.
+   * @returns {false|void}                 Returns `false` if any further usage should be canceled.
    */
   async consume(item, config, options) {
     /**
