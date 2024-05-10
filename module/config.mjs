@@ -1770,13 +1770,13 @@ DND5E.weightUnits = {
   kg: {
     label: "DND5E.WeightUnit.Kilograms.Label",
     abbreviation: "DND5E.WeightUnit.Kilograms.Abbreviation",
-    conversion: 2.2046,
+    conversion: 2.5,
     type: "metric"
   },
   Mg: {
     label: "DND5E.WeightUnit.Megagrams.Label",
     abbreviation: "DND5E.WeightUnit.Megagrams.Abbreviation",
-    conversion: 2204.6,
+    conversion: 2500,
     type: "metric"
   }
 };

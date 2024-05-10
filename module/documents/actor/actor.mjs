@@ -503,12 +503,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const encumbrance = this.system.attributes.encumbrance ??= {};
     const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[this.type] ?? CONFIG.DND5E.encumbrance.baseUnits.default;
     const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
-    const units = unitSystem === "metric" ? baseUnits.metric : baseUnits.imperial;
 
     // Get the total weight from items
     let weight = this.items
       .filter(item => !item.container)
-      .reduce((weight, item) => weight + (item.system.totalWeightIn?.(units) ?? 0), 0);
+      .reduce((weight, item) => weight + (item.system.totalWeightIn?.(baseUnits[unitSystem]) ?? 0), 0);
 
     // [Optional] add Currency Weight (for non-transformed actors)
     const currency = this.system.currency;

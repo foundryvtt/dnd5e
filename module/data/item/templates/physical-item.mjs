@@ -207,7 +207,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /**
    * Calculate the total weight and return it in specific units.
    * @param {string} units  Units in which the weight should be returned.
-   * @returns {number}
+   * @returns {number|Promise<number>}
    */
   totalWeightIn(units) {
     const weight = this.totalWeight;
