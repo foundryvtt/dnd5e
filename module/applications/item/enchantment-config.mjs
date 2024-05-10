@@ -118,7 +118,7 @@ export default class EnchantmentConfig extends DocumentSheet {
         foundry.utils.setProperty(updates, "flags.dnd5e.enchantment.riders", []);
       }
       // End bug fix
-      riderIds.add(...foundry.utils.getProperty(updates, "flags.dnd5e.enchantment.riders", []));
+      riderIds.add(...(foundry.utils.getProperty(updates, "flags.dnd5e.enchantment.riders") ?? []));
       return updates;
     });
     for ( const effect of this.document.effects ) {

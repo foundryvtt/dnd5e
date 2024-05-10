@@ -327,7 +327,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if ( this.getFlag("dnd5e", "type") === "enchantment" || this.getFlag("dnd5e", "rider") ) this.transfer = false;
+    if ( (this.getFlag("dnd5e", "type") === "enchantment") || this.getFlag("dnd5e", "rider") ) this.transfer = false;
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
     if ( this.isAppliedEnchantment ) EnchantmentData.trackEnchantment(this.origin, this.uuid);
   }
