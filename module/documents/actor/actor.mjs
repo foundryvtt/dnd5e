@@ -178,7 +178,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   prepareDerivedData() {
     const origin = this.getFlag("dnd5e", "summon.origin");
-    if ( origin ) SummonsData.trackSummon(origin.split(".Item.")[0], this.uuid);
+    // TODO: Replace with parseUuid once V11 support is dropped
+    if ( origin && this.token?.id ) SummonsData.trackSummon(origin.split(".Item.")[0], this.uuid);
 
     if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
 
@@ -3324,6 +3325,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     super._onDelete(options, userId);
 
     const origin = this.getFlag("dnd5e", "summon.origin");
+    // TODO: Replace with parseUuid once V11 support is dropped
     if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.uuid);
   }
 

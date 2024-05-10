@@ -529,7 +529,7 @@ export class SummonsData extends foundry.abstract.DataModel {
 
   /**
    * Registration of summoned creatures mapped to a specific summoner. The map is keyed by the UUID of
-   * summoned actor while the set contains UUID of actors that have been summoned.
+   * summoner while the set contains UUID of actors that have been summoned.
    * @type {Map<string, Set<string>>}
    */
   static #summonedCreatures = new Map();
@@ -565,10 +565,9 @@ export class SummonsData extends foundry.abstract.DataModel {
   /**
    * Stop tracking a summoned creature.
    * @param {string} summoner  UUID of the actor who performed the summoning.
-   * @param {string} summoned  UUID of the summoned creature to track.
+   * @param {string} summoned  UUID of the summoned creature to stop tracking.
    */
   static untrackSummon(summoner, summoned) {
-    if ( !SummonsData.#summonedCreatures.has(summoner) ) return;
-    SummonsData.#summonedCreatures.get(summoner).delete(summoned);
+    SummonsData.#summonedCreatures.get(summoner)?.delete(summoned);
   }
 }
