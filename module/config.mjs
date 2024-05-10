@@ -1773,7 +1773,7 @@ DND5E.weightUnits = {
     conversion: 2.2046,
     type: "metric"
   },
-  mg: {
+  Mg: {
     label: "DND5E.WeightUnit.Megagrams.Label",
     abbreviation: "DND5E.WeightUnit.Megagrams.Abbreviation",
     conversion: 2204.6,
@@ -1857,7 +1857,7 @@ DND5E.encumbrance = {
     },
     vehicle: {
       imperial: "tn",
-      metric: "mg"
+      metric: "Mg"
     }
   }
 };
