@@ -362,6 +362,7 @@ export class ItemDataModel extends SystemDataModel {
    * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
    * @property {boolean} enchantable    Can this item be modified by enchantment effects?
    * @property {boolean} inventoryItem  Should this item be listed with an actor's inventory?
+   * @property {number} inventoryOrder  Order this item appears in the actor's inventory, smaller numbers are earlier.
    * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
    */
 
@@ -369,6 +370,7 @@ export class ItemDataModel extends SystemDataModel {
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: false,
     inventoryItem: false,
+    inventoryOrder: Infinity,
     singleton: false
   }, {inplace: false}));
 

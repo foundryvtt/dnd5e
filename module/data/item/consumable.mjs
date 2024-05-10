@@ -47,7 +47,8 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: true,
-    inventoryItem: true
+    inventoryItem: true,
+    inventoryOrder: 300
   }, {inplace: false}));
 
   /* -------------------------------------------- */
