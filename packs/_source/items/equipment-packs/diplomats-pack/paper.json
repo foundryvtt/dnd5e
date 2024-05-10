@@ -14,7 +14,10 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 5,
-    "weight": 0,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
     "price": {
       "value": 2,
       "denomination": "sp"
@@ -36,10 +39,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233796,
-    "modifiedTime": 1704823140400,
+    "modifiedTime": 1715374570231,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "0huCWvOncUsme84v",

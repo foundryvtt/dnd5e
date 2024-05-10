@@ -15,7 +15,10 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 0,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
     "price": {
       "value": 1000,
       "denomination": "gp"
@@ -109,14 +112,8 @@
       "bonus": "",
       "flat": false
     },
-    "summons": {
-      "match": {
-        "attacks": false,
-        "proficiency": false,
-        "saves": false
-      },
-      "profiles": []
-    }
+    "summons": null,
+    "enchantment": null
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -127,10 +124,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233476,
-    "modifiedTime": 1709659525183,
+    "modifiedTime": 1715374577890,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!6I5lt8KheTsAE4Zr"
