@@ -22,6 +22,8 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _highlighted = null;
 
+  /* -------------------------------------------- */
+
   /**
    * Should the apply damage options appear?
    * @type {boolean}
@@ -31,6 +33,8 @@ export default class ChatMessage5e extends ChatMessage {
     if ( type && (type !== "damage") ) return false;
     return this.isRoll && this.isContentVisible && !!canvas.tokens?.controlled.length;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Should the select targets options appear?
@@ -71,7 +75,7 @@ export default class ChatMessage5e extends ChatMessage {
     }
 
     this._enrichChatCard(html[0]);
-    requestAnimationFrame(() => html.find(".card-tray, .effects-tray").each((i, el) => el.classList.add("collapsed")));
+    this._collapseTrays(html[0]);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -83,6 +87,28 @@ export default class ChatMessage5e extends ChatMessage {
     Hooks.callAll("dnd5e.renderChatMessage", this, html[0]);
 
     return html;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle collapsing or expanding trays depending on user settings.
+   * @param {HTMLElement} html  Rendered contents of the message.
+   */
+  _collapseTrays(html) {
+    let collapse;
+    switch ( game.settings.get("dnd5e", "autoCollapseChatTrays") ) {
+      case "always": collapse = true; break;
+      case "never": collapse = false; break;
+      // Collapse chat message trays older than 5 minutes
+      case "older": collapse = this.timestamp < Date.now() - (5 * 60 * 1000); break;
+    }
+    for ( const tray of html.querySelectorAll(".card-tray, .effects-tray") ) {
+      tray.classList.toggle("collapsed", collapse);
+    }
+    for ( const element of html.querySelectorAll("damage-application") ) {
+      element.toggleAttribute("open", !collapse);
+    }
   }
 
   /* -------------------------------------------- */
