@@ -99,14 +99,14 @@
             <input type="checkbox" name="applyEnchantment" {{ checked applyEnchantment }}>
             {{ localize "DND5E.Enchantment.Action.Apply" }}
         </label>
-        {{#if enchantmentOptions.enchantments}}
+        {{#if enchantmentOptions.profiles}}
         <div class="form-fields">
             <select name="enchantmentProfile" aria-label="{{ localize 'DND5E.Enchantment.Label' }}">
-                {{ selectOptions enchantmentOptions.enchantments selected=enchantmentProfile }}
+                {{ selectOptions enchantmentOptions.profiles selected=enchantmentProfile }}
             </select>
         </div>
         {{else}}
-        <input type="hidden" name="enchantmentProfile" value="{{ enchantmentOptions.enchantment }}">
+        <input type="hidden" name="enchantmentProfile" value="{{ enchantmentOptions.profile }}">
         {{/if}}
     </div>
     {{/if}}

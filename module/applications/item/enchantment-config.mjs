@@ -24,6 +24,14 @@ export default class EnchantmentConfig extends DocumentSheet {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
+  /**
+   * Expanded states for each enchantment.
+   * @type {Map<string, boolean>}
+   */
+  expandedEnchantments = new Map();
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   get title() {
     return `${game.i18n.localize("DND5E.Enchantment.Configuration")}: ${this.document.name}`;
@@ -41,9 +49,14 @@ export default class EnchantmentConfig extends DocumentSheet {
       return obj;
     }, {});
     context.enchantment = this.document.system.enchantment;
-    context.enchantments = this.document.effects.filter(e =>
-      (e.getFlag("dnd5e", "type") === "enchantment") && !e.isAppliedEnchantment
-    );
+    context.enchantments = this.document.effects.reduce((arr, e) => {
+      const { id, uuid, flags } = e;
+      if ( (e.getFlag("dnd5e", "type") === "enchantment") && !e.isAppliedEnchantment ) arr.push({
+        id, uuid, flags, collapsed: this.expandedEnchantments.get(id) ? "" : "collapsed"
+      });
+      return arr;
+    }, []);
+    context.isSpell = this.document.type === "spell";
     context.source = this.document.toObject().system.enchantment;
     return context;
   }
@@ -63,13 +76,29 @@ export default class EnchantmentConfig extends DocumentSheet {
         enchantmentId: event.target.closest("[data-enchantment-id]")?.dataset.enchantmentId
       } }));
     }
+
+    for ( const element of html.querySelectorAll(".collapsible") ) {
+      element.addEventListener("click", event => {
+        if ( event.target.closest(".collapsible-content") ) return;
+        event.currentTarget.classList.toggle("collapsed");
+        this.expandedEnchantments.set(
+          event.target.closest("[data-enchantment-id]").dataset.enchantmentId,
+          !event.currentTarget.classList.contains("collapsed")
+        );
+      });
+    }
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _updateObject(event, { action, enchantmentId, ...formData }) {
-    await this.document.update({"system.enchantment": formData});
+  async _updateObject(event, formData) {
+    const { action, effects, enchantmentId, ...data } = foundry.utils.expandObject(formData);
+
+    await this.document.update({"system.enchantment": data});
+
+    const effectsChanges = Object.entries(effects ?? {}).map(([_id, changes]) => ({ _id, ...changes }));
+    if ( effectsChanges.length ) await this.document.updateEmbeddedDocuments("ActiveEffect", effectsChanges);
 
     switch ( action ) {
       case "add-enchantment":

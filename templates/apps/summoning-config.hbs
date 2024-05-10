@@ -35,19 +35,19 @@
             <div class="additional-tray collapsible {{ collapsed }}">
                 <label class="roboto-upper">
                     <i class="fa-solid fa-gears" inert></i>
-                    <span>{{ localize "DND5E.Summoning.AdditionalSettings" }}</span>
+                    <span>{{ localize "DND5E.AdditionalSettings" }}</span>
                     <i class="fas fa-caret-down" inert></i>
                 </label>
                 <div class="collapsible-content">
                     <div class="wrapper">
                         <div class="form-group">
-                            <label>{{ localize "DND5E.Summoning.Level.Label" }}</label>
+                            <label>{{ localize "DND5E.LevelLimit.Label" }}</label>
                             <div class="form-fields">
                                 <input type="number" name="profiles.{{ id }}.level.min" min="1" step="1" placeholder="0"
-                                       value="{{ level.min }}" aria-label="{{ localize 'DND5E.Summoning.Level.Min' }}">
+                                       value="{{ level.min }}" aria-label="{{ localize 'DND5E.LevelLimit.Min' }}">
                                 <span class="sep">&ndash;</span>
                                 <input type="number" name="profiles.{{ id }}.level.max" min="1" step="1" placeholder="∞"
-                                       value="{{ level.max }}" aria-label="{{ localize 'DND5E.Summoning.Level.Max' }}">
+                                       value="{{ level.max }}" aria-label="{{ localize 'DND5E.LevelLimit.Max' }}">
                             </div>
                             <p class="hint">{{ localize "DND5E.Summoning.Level.Hint" }}</p>
                         </div>
