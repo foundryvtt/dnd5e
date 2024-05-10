@@ -302,6 +302,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     // Add flags
     actorUpdates["flags.dnd5e.summon"] = {
       level: this.relevantLevel,
+      mod: rollData.mod,
       origin: this.item.uuid,
       profile: profile._id
     };
