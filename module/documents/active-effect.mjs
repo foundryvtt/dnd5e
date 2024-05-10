@@ -327,7 +327,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if ( this.getFlag("dnd5e", "type") === "enchantment" ) this.transfer = false;
+    if ( (this.getFlag("dnd5e", "type") === "enchantment") || this.getFlag("dnd5e", "rider") ) this.transfer = false;
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
     if ( this.isAppliedEnchantment ) EnchantmentData.trackEnchantment(this.origin, this.uuid);
   }
@@ -392,6 +392,26 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Create additional effects that are applied separately from an enchantment.
+   */
+  async createRiderEnchantments() {
+    const origin = await fromUuid(this.origin);
+    const riders = (this.getFlag("dnd5e", "enchantment.riders") ?? []).map(id => {
+      const effectData = origin.effects.get(id)?.toObject();
+      if ( effectData ) {
+        delete effectData._id;
+        delete effectData.flags?.dnd5e?.rider;
+        effectData.origin = this.origin;
+      }
+      return effectData;
+    }).filter(e => e);
+    const created = await this.parent.createEmbeddedDocuments("ActiveEffect", riders);
+    if ( created.length ) this.addDependent(...created);
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
@@ -420,9 +440,12 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _onCreate(data, options, userId) {
+  async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( (userId === game.userId) && this.active && (this.parent instanceof Actor) ) this.createRiderConditions();
+    if ( userId === game.userId ) {
+      if ( this.active && (this.parent instanceof Actor) ) await this.createRiderConditions();
+      if ( this.isAppliedEnchantment ) await this.createRiderEnchantments();
+    }
     if ( options.chatMessageOrigin ) {
       document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
         .forEach(element => element.buildItemList());
@@ -670,12 +693,12 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Record another effect as a dependent of this one.
-   * @param {ActiveEffect5e} dependent  The dependent effect.
+   * @param {...ActiveEffect5e} dependent  One or more dependent effects.
    * @returns {Promise<ActiveEffect5e>}
    */
-  addDependent(dependent) {
+  addDependent(...dependent) {
     const dependents = this.getFlag("dnd5e", "dependents") ?? [];
-    dependents.push({ uuid: dependent.uuid });
+    dependents.push(...dependent.map(d => ({ uuid: d.uuid })));
     return this.setFlag("dnd5e", "dependents", dependents);
   }
 

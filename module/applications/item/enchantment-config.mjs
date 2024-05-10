@@ -44,20 +44,31 @@ export default class EnchantmentConfig extends DocumentSheet {
   /** @inheritDoc */
   async getData(options={}) {
     const context = await super.getData(options);
+
     context.enchantableTypes = EnchantmentData.enchantableTypes.reduce((obj, k) => {
       obj[k] = game.i18n.localize(CONFIG.Item.typeLabels[k]);
       return obj;
     }, {});
     context.enchantment = this.document.system.enchantment;
-    context.enchantments = this.document.effects.reduce((arr, e) => {
-      const { id, uuid, flags } = e;
-      if ( (e.getFlag("dnd5e", "type") === "enchantment") && !e.isAppliedEnchantment ) arr.push({
-        id, uuid, flags, collapsed: this.expandedEnchantments.get(id) ? "" : "collapsed"
-      });
-      return arr;
-    }, []);
     context.isSpell = this.document.type === "spell";
     context.source = this.document.toObject().system.enchantment;
+
+    const effects = [];
+    context.enchantments = [];
+    for ( const effect of this.document.effects ) {
+      if ( effect.getFlag("dnd5e", "type") !== "enchantment" ) effects.push(effect);
+      else if ( !effect.isAppliedEnchantment ) context.enchantments.push(effect);
+    }
+    context.enchantments = context.enchantments.map(effect => ({
+      id: effect.id,
+      uuid: effect.uuid,
+      flags: effect.flags,
+      collapsed: this.expandedEnchantments.get(effect.id) ? "" : "collapsed",
+      riders: effects.map(({ id, name }) => ({
+        id, name, selected: effect.flags.dnd5e?.enchantment?.riders?.includes(id) ? "selected" : ""
+      }))
+    }));
+
     return context;
   }
 
@@ -77,14 +88,16 @@ export default class EnchantmentConfig extends DocumentSheet {
       } }));
     }
 
+    for ( const element of html.querySelectorAll("multi-select") ) {
+      element.addEventListener("change", this._onChangeInput.bind(this));
+    }
+
     for ( const element of html.querySelectorAll(".collapsible") ) {
       element.addEventListener("click", event => {
-        if ( event.target.closest(".collapsible-content") ) return;
+        const id = event.target.closest("[data-enchantment-id]")?.dataset.enchantmentId;
+        if ( event.target.closest(".collapsible-content") || !id ) return;
         event.currentTarget.classList.toggle("collapsed");
-        this.expandedEnchantments.set(
-          event.target.closest("[data-enchantment-id]").dataset.enchantmentId,
-          !event.currentTarget.classList.contains("collapsed")
-        );
+        this.expandedEnchantments.set(id, !event.currentTarget.classList.contains("collapsed"));
       });
     }
   }
@@ -97,7 +110,22 @@ export default class EnchantmentConfig extends DocumentSheet {
 
     await this.document.update({"system.enchantment": data});
 
-    const effectsChanges = Object.entries(effects ?? {}).map(([_id, changes]) => ({ _id, ...changes }));
+    const riderIds = new Set();
+    const effectsChanges = Object.entries(effects ?? {}).map(([_id, changes]) => {
+      const updates = { _id, ...changes };
+      // Fix bug with <multi-select> in V11
+      if ( !foundry.utils.hasProperty(updates, "flags.dnd5e.enchantment.riders") ) {
+        foundry.utils.setProperty(updates, "flags.dnd5e.enchantment.riders", []);
+      }
+      // End bug fix
+      riderIds.add(...(foundry.utils.getProperty(updates, "flags.dnd5e.enchantment.riders") ?? []));
+      return updates;
+    });
+    for ( const effect of this.document.effects ) {
+      if ( effect.getFlag("dnd5e", "type") === "enchantment" ) continue;
+      if ( riderIds.has(effect.id) ) effectsChanges.push({ _id: effect.id, "flags.dnd5e.rider": true });
+      else effectsChanges.push({ _id: effect.id, "flags.dnd5e.-=rider": null });
+    }
     if ( effectsChanges.length ) await this.document.updateEmbeddedDocuments("ActiveEffect", effectsChanges);
 
     const enchantment = this.document.effects.get(enchantmentId);
