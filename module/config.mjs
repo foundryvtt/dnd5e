@@ -2335,7 +2335,10 @@ preLocalize("weaponTypes");
  * @enum {string}
  */
 DND5E.sourcePacks = {
-  ITEMS: "dnd5e.items"
+  BACKGROUNDS: "dnd5e.backgrounds",
+  CLASSES: "dnd5e.classes",
+  ITEMS: "dnd5e.items",
+  RACES: "dnd5e.races"
 };
 
 /* -------------------------------------------- */

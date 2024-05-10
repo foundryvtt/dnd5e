@@ -968,9 +968,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _onFindItem(type) {
     switch ( type ) {
-      case "class": game.packs.get("dnd5e.classes").render(true); break;
-      case "race": game.packs.get("dnd5e.races").render(true); break;
-      case "background": game.packs.get("dnd5e.backgrounds").render(true); break;
+      case "class": game.packs.get(CONFIG.DND5E.sourcePacks.CLASSES)?.render(true); break;
+      case "race": game.packs.get(CONFIG.DND5E.sourcePacks.RACES)?.render(true); break;
+      case "background": game.packs.get(CONFIG.DND5E.sourcePacks.BACKGROUNDS)?.render(true); break;
     }
   }
 
