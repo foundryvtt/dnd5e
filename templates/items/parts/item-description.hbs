@@ -15,7 +15,10 @@
 
         <div class="form-group">
             <label>{{ localize "DND5E.Weight" }}</label>
-            {{numberInput system.weight name="system.weight"}}
+            {{ numberInput system.weight.value name="system.weight.value" }}
+            <select name="system.weight.units">
+                {{ selectOptions config.weightUnits selected=system.weight.units labelAttr="abbreviation" }}
+            </select>
         </div>
 
         <div class="form-group">

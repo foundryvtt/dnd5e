@@ -1704,17 +1704,62 @@ preLocalize("distanceUnits");
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for a weight unit.
+ *
+ * @typedef {object} WeightUnitConfiguration
+ * @property {string} label         Localized label for the unit.
+ * @property {string} abbreviation  Localized abbreviation for the unit.
+ * @property {number} conversion    Number that by which this unit should be multiplied to arrive at a standard value.
+ * @property {string} type          Whether this is an "imperial" or "metric" unit.
+ */
+
+/**
+ * The valid units for measurement of weight.
+ * @enum {WeightUnitConfiguration}
+ */
+DND5E.weightUnits = {
+  lb: {
+    label: "DND5E.WeightUnit.Pounds.Label",
+    abbreviation: "DND5E.WeightUnit.Pounds.Abbreviation",
+    conversion: 1,
+    type: "imperial"
+  },
+  tn: {
+    label: "DND5E.WeightUnit.Tons.Label",
+    abbreviation: "DND5E.WeightUnit.Tons.Abbreviation",
+    conversion: 2000,
+    type: "imperial"
+  },
+  kg: {
+    label: "DND5E.WeightUnit.Kilograms.Label",
+    abbreviation: "DND5E.WeightUnit.Kilograms.Abbreviation",
+    conversion: 2.5,
+    type: "metric"
+  },
+  Mg: {
+    label: "DND5E.WeightUnit.Megagrams.Label",
+    abbreviation: "DND5E.WeightUnit.Megagrams.Abbreviation",
+    conversion: 2500,
+    type: "metric"
+  }
+};
+preLocalize("weightUnits", { keys: ["label", "abbreviation"] });
+
+/* -------------------------------------------- */
+
+/**
  * Encumbrance configuration data.
  *
  * @typedef {object} EncumbranceConfiguration
  * @property {Record<string, number>} currencyPerWeight  Pieces of currency that equal a base weight (lbs or kgs).
- * @property {Record<string, object>} effects            Data used to create encumbrance-replated Active Effects.
+ * @property {Record<string, object>} effects            Data used to create encumbrance-related Active Effects.
  * @property {object} threshold                          Amount to multiply strength to get given capacity threshold.
  * @property {Record<string, number>} threshold.encumbered
  * @property {Record<string, number>} threshold.heavilyEncumbered
  * @property {Record<string, number>} threshold.maximum
  * @property {Record<string, {ft: number, m: number}>} speedReduction  Speed reduction caused by encumbered status.
  * @property {Record<string, number>} vehicleWeightMultiplier  Multiplier used to determine vehicle carrying capacity.
+ * @property {Record<string, Record<string, string>>} baseUnits  Base units used to calculate carrying weight.
  */
 
 /**
@@ -1768,9 +1813,15 @@ DND5E.encumbrance = {
       m: 1.5
     }
   },
-  vehicleWeightMultiplier: {
-    imperial: 2000, // 2000 lbs in an imperial ton
-    metric: 1000 // 1000 kg in a metric ton
+  baseUnits: {
+    default: {
+      imperial: "lb",
+      metric: "kg"
+    },
+    vehicle: {
+      imperial: "tn",
+      metric: "Mg"
+    }
   }
 };
 preLocalize("encumbrance.effects", { key: "name" });
