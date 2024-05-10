@@ -61,6 +61,7 @@ export default class AbilityUseDialog extends Dialog {
       item,
       ...config,
       slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
+      enchantmentOptions: this._createEnchantmentOptions(item),
       summoningOptions: this._createSummoningOptions(item),
       resourceOptions: resourceOptions,
       resourceArray: Array.isArray(resourceOptions),
@@ -179,9 +180,30 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
-   * Create an array of summoning profiles.
+   * Create details on enchantment that can be applied.
    * @param {Item5e} item  The item.
-   * @returns {{ profiles: object, creatureTypes: object }|null}   Array of select options.
+   * @returns {{ enchantments: object }|null}
+   */
+  static _createEnchantmentOptions(item) {
+    const enchantments = item.effects.filter(e =>
+      (e.getFlag("dnd5e", "type") === "enchantment") && !e.isAppliedEnchantment
+    );
+    if ( !enchantments.length ) return null;
+    const options = {};
+    options.enchantments = Object.fromEntries(enchantments.map(enchantment => [enchantment._id, enchantment.name]));
+    if ( Object.values(options.enchantments).length <= 1 ) {
+      options.enchantments = null;
+      options.enchantment = enchantments[0]._id;
+    }
+    return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create details on the summoning profiles and other related options.
+   * @param {Item5e} item  The item.
+   * @returns {{ profiles: object, creatureTypes: object }|null}
    */
   static _createSummoningOptions(item) {
     const summons = item.system.summons;

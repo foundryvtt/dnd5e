@@ -21,6 +21,7 @@ export default class EnchantmentField extends EmbeddedDataField {
  * @property {object} items
  * @property {string} items.max                   Maximum number of items that can have this enchantment.
  * @property {string} items.period                Frequency at which the enchantment be swapped.
+ * @property {boolean} prompt                     Should the player be prompted to apply an enchantment?
  * @property {object} restrictions
  * @property {boolean} restrictions.allowMagical  Allow enchantments to be applied to items that are already magical.
  * @property {string} restrictions.type           Item type to which this enchantment can be applied.
@@ -33,6 +34,9 @@ export class EnchantmentData extends foundry.abstract.DataModel {
       items: new SchemaField({
         max: new FormulaField({deterministic: true}),
         period: new StringField()
+      }),
+      prompt: new BooleanField({
+        initial: true, label: "DND5E.Enchantment.Prompt.Label", hint: "DND5E.Enchantment.Prompt.Hint"
       }),
       restrictions: new SchemaField({
         allowMagical: new BooleanField(),
@@ -151,10 +155,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    * @returns {Promise<Item5e[]>}
    */
   async getItems() {
-    return (await Promise.all(
-      Array.from(EnchantmentData.#appliedEnchantments.get(this.item.uuid) ?? [])
-        .map(uuid => fromUuid(uuid).then(ae => ae?.parent))
-    )).filter(i => i);
+    return (await this.constructor.appliedEnchantments(this.item.uuid)).map(ae => ae?.parent);
   }
 
   /* -------------------------------------------- */
@@ -163,10 +164,23 @@ export class EnchantmentData extends foundry.abstract.DataModel {
 
   /**
    * Registration of enchanted items mapped to a specific enchantment source. The map is keyed by the UUID of
-   * enchantment sources while the set contains UUID of items that source has enchanted.
+   * enchantment sources while the set contains UUID of applied enchantment active effects.
    * @type {Map<string, Set<string>>}
    */
   static #appliedEnchantments = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch the tracked enchanted items.
+   * @param {string} itemUuid  UUID of the item supplying the enchantments.
+   * @returns {Promise<ActiveEffect5e[]>}
+   */
+  static async appliedEnchantments(itemUuid) {
+    return Promise.all(
+      Array.from(EnchantmentData.#appliedEnchantments.get(itemUuid) ?? []).map(uuid => fromUuid(uuid))
+    ).then(a => a.filter(i => i));
+  }
 
   /* -------------------------------------------- */
 

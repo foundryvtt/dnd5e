@@ -423,6 +423,10 @@ export default class ActiveEffect5e extends ActiveEffect {
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if ( (userId === game.userId) && this.active && (this.parent instanceof Actor) ) this.createRiderConditions();
+    if ( options.chatMessageOrigin ) {
+      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
+        .forEach(element => element.buildItemList());
+    }
   }
 
   /* -------------------------------------------- */
@@ -476,6 +480,10 @@ export default class ActiveEffect5e extends ActiveEffect {
     super._onDelete(options, userId);
     if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
     if ( this.isAppliedEnchantment ) EnchantmentData.untrackEnchantment(this.origin, this.uuid);
+    if ( options.chatMessageOrigin ) {
+      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
+        .forEach(element => element.buildItemList());
+    }
   }
 
   /* -------------------------------------------- */
