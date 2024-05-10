@@ -179,7 +179,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @param {object} options.rollData  Roll data to use to evaluate the formula.
    */
   _prepareFinalFormula(keyPath, { label, rollData }) {
-    let value = foundry.utils.getProperty(this, keyPath);
+    const value = foundry.utils.getProperty(this, keyPath);
     if ( !value ) return;
     const property = game.i18n.localize(label);
     try {
@@ -202,7 +202,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
-    if ( ("activation" in source) && !source.activation.type ) source.activation.type = null;
+    if ( ("activation" in source) && !source.activation.type ) source.activation.type = "";
     ActivatedEffectTemplate.#migrateFormulaFields(source);
     ActivatedEffectTemplate.#migrateRanges(source);
     ActivatedEffectTemplate.#migrateTargets(source);
@@ -234,7 +234,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   static #migrateRanges(source) {
     if ( !("range" in source) ) return;
     source.range ??= {};
-    if ( ["none", ""].includes(source.range.units) ) source.range.units = null;
+    if ( ["none", null].includes(source.range.units) ) source.range.units = "";
     if ( typeof source.range.long === "string" ) {
       if ( source.range.long === "" ) source.range.long = null;
       else if ( Number.isNumeric(source.range.long) ) source.range.long = Number(source.range.long);
@@ -260,7 +260,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     source.target ??= {};
     if ( source.target.value === "" ) source.target.value = null;
     if ( source.target.units === null ) source.target.units = "";
-    if ( ["none", ""].includes(source.target.type) ) source.target.type = null;
+    if ( ["none", null].includes(source.target.type) ) source.target.type = "";
   }
 
   /* -------------------------------------------- */
