@@ -100,6 +100,7 @@ export default class EnchantmentConfig extends DocumentSheet {
     const effectsChanges = Object.entries(effects ?? {}).map(([_id, changes]) => ({ _id, ...changes }));
     if ( effectsChanges.length ) await this.document.updateEmbeddedDocuments("ActiveEffect", effectsChanges);
 
+    const enchantment = this.document.effects.get(enchantmentId);
     switch ( action ) {
       case "add-enchantment":
         const effect = await ActiveEffect.implementation.create({
@@ -110,8 +111,10 @@ export default class EnchantmentConfig extends DocumentSheet {
         effect.sheet.render(true);
         break;
       case "delete-enchantment":
-        const enchantment = this.document.effects.get(enchantmentId);
         enchantment?.deleteDialog();
+        break;
+      case "edit-enchantment":
+        enchantment?.sheet.render(true);
         break;
     }
   }
