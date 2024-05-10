@@ -51,6 +51,7 @@ Hooks.once("init", function() {
   // TODO: Remove when v11 support is dropped.
   CONFIG.compatibility.excludePatterns.push(/\{\{filePicker}}/);
   CONFIG.compatibility.excludePatterns.push(/foundry\.dice\.terms/);
+  CONFIG.compatibility.excludePatterns.push(/core\.sourceId/);
   if ( game.release.generation < 12 ) Math.clamp = Math.clamped;
 
   // Record Configuration Values

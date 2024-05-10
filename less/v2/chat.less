@@ -255,6 +255,9 @@
 
 .dice-roll {
   cursor: pointer;
+
+  .dice-flavor { display: none; }
+
   &.expanded {
     .dice-total::after { transform: rotate(-90deg); }
     .dice-tooltip-collapser { grid-template-rows: 1fr; }
