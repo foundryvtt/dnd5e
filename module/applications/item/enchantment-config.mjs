@@ -62,6 +62,7 @@ export default class EnchantmentConfig extends DocumentSheet {
     context.enchantments = context.enchantments.map(effect => ({
       id: effect.id,
       uuid: effect.uuid,
+      name: effect.name,
       flags: effect.flags,
       collapsed: this.expandedEnchantments.get(effect.id) ? "" : "collapsed",
       riders: effects.map(({ id, name }) => ({
