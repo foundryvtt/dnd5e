@@ -124,13 +124,21 @@
                     </div>
 
                     {{!-- Item Uses --}}
-                    <div class="item-detail item-uses {{#unless ctx.hasUses}}empty{{/unless}}">
-                        {{#if ctx.hasUses}}
+                    {{#if ctx.isOnCooldown}}
+                    <div class="item-detail item-uses">
+                        <a class="item-action" data-action="recharge">{{item.labels.recharge}}</a>
+                    {{else if item.system.recharge.value}}
+                    <div class="item-detail item-uses">
+                        {{localize "DND5E.Charged"}}
+                    {{else if ctx.hasUses}}
+                    <div class="item-detail item-uses">
                         <input type="text" value="{{ item.system.uses.value }}" placeholder="0" data-dtype="Number"
                                data-name="system.uses.value" inputmode="numeric" pattern="[+=\-]?\d*">
                         <span class="separator">&sol;</span>
                         <span class="max">{{ item.system.uses.max }}</span>
-                        {{/if}}
+                    {{else}}
+                    <div class="item-detail item-uses empty">
+                    {{/if}}
                     </div>
 
                     {{!-- Item Recovery --}}
