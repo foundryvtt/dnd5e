@@ -801,22 +801,22 @@ async function enrichReference(config, label, options) {
  * ```[[/item Actor.M4eX4Mu5IHCr3TMf.Item.amUUCouL69OK1GZU]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="item">
+ * <a class="roll-action" data-type="item" data-roll-item-uuid="Actor.M4eX4Mu5IHCr3TMf.Item.amUUCouL69OK1GZU">
  *   <i class="fa-solid fa-dice-d20"></i> Bite
  * </a>
  * ```
  *
- * @example Use an Item from a Relative UUID:
- * ```[[/item .amUUCouL69OK1GZU]]```
+ * @example Use an Item from an ID:
+ * ```[[/item amUUCouL69OK1GZU]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="item" data-roll-relative-item-id="amUUCouL69OK1GZU">
+ * <a class="roll-action" data-type="item" data-roll-item-uuid="Actor.M4eX4Mu5IHCr3TMf.Item.amUUCouL69OK1GZU">
  *   <i class="fa-solid fa-dice-d20"></i> Bite
  * </a>
  * ```
  */
 async function enrichItem(config, label, options) {
-  let givenItem = config.values.join(" ");
+  const givenItem = config.values.join(" ");
   // If config is a UUID
   const itemUuidMatch = givenItem.match(
     /^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/
@@ -834,27 +834,28 @@ async function enrichItem(config, label, options) {
     return createRollLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
   }
 
-  // If config is a relative ID
-  if ( givenItem.match(/^\.?\w{16}$/) ) {
-    const foundActor = options.relativeTo instanceof Item ? options.relativeTo.parent
-      : options.relativeTo instanceof Actor ? options.relativeTo : null;
-    if ( foundActor ) {
-      const relativeId = givenItem.startsWith(".") ? givenItem.substr(1) : givenItem;
-      let foundItem = foundActor.items.get(relativeId);
-      if ( foundItem ) {
-        if ( !label ) label = foundItem.name;
-        return createRollLink(label, { type: "item", rollItemActor: foundActor.uuid, rollItemUuid: foundItem.uuid });
-      }
-    } else {
-      console.warn("Relative Item Enrichers must be within an Owned Item or Actor's description");
-      return null;
-    }
+  let foundItem;
+  const foundActor = options.relativeTo instanceof Item
+    ? options.relativeTo.parent
+    : options.relativeTo instanceof Actor ? options.relativeTo : null;
+
+  // If config is an Item ID
+  if ( /^\w{16}$/.test(givenItem) && foundActor ) foundItem = foundActor.items.get(givenItem);
+
+  // If config is a relative UUID
+  if ( givenItem.startsWith(".") ) {
+    try {
+      foundItem = await fromUuid(givenItem, { relative: options.relativeTo });
+    } catch { return null; }
+  }
+
+  if ( foundItem ) {
+    if ( !label ) label = foundItem.name;
+    return createRollLink(label, { type: "item", rollItemUuid: foundItem.uuid });
   }
 
   // Finally, if config is an item name
   if ( !label ) label = givenItem;
-  const foundActor = options.relativeTo instanceof Item ? options.relativeTo.parent
-    : options.relativeTo instanceof Actor ? options.relativeTo : null;
   return createRollLink(label, { type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem });
 }
 
@@ -1045,40 +1046,7 @@ async function rollAction(event) {
     try {
       switch ( type ) {
         case "damage": return await rollDamage(event);
-        case "item":
-          let item;
-	          // If UUID is provided, always roll that item directly
-	          if ( target.dataset.rollItemUuid ) item = await fromUuid(target.dataset.rollItemUuid);
-	          else if ( target.dataset.rollItemName ) {
-	            const actor = target.dataset.rollItemActor ? await fromUuid(target.dataset.rollItemActor) : null;
-	
-	            // If no actor is specified or player isn't owner, fall back to the macro rolling logic
-	            if ( !actor?.isOwner ) return rollItem(target.dataset.rollItemName);
-	
-	            // If a token is controlled and it has an item with the correct name, activate it
-	            if ( canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName) ) {
-	              item = canvas.tokens.controlled[0]?.actor.items.getName(target.dataset.rollItemName);
-	            }
-	
-	            // Otherwise check the specified actor for the item
-	            else {
-	              item = actor.items.getName(target.dataset.rollItemName);
-	
-	              // Display a warning to indicate the item wasn't rolled from the controlled actor
-	              if ( item && (canvas.tokens.controlled.length > 0) ) ui.notifications.warn(
-	                game.i18n.format("MACRO.5eMissingTargetWarn", {
-	                  actor: canvas.tokens.controlled[0].name, item: target.dataset.rollItemName
-	                })
-	              );
-	            }
-	
-	            // If no item could be found at all, display a warning
-	            if ( !item ) ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
-	              actor: actor.name, item: target.dataset.rollItemName
-	            }));
-	          }
-	          if ( item ) item.use();
-	          return;
+        case "item": return await useItem(target.dataset);
       }
 
       const tokens = getSceneTargets();
@@ -1167,4 +1135,48 @@ async function rollDamage(event) {
   if ( Hooks.call("dnd5e.preRollDamage", undefined, rollConfig) === false ) return;
   const roll = await damageRoll(rollConfig);
   if ( roll ) Hooks.callAll("dnd5e.rollDamage", undefined, roll);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Use an Item from an Item enricher.
+ * @param {object} [options]
+ * @param {string} [options.rollItemUuid]   Lookup the Item by UUID.
+ * @param {string} [options.rollItemName]   Lookup the Item by name.
+ * @param {string} [options.rollItemActor]  The UUID of a specific Actor that should use the Item.
+ * @returns {Promise}
+ */
+async function useItem({ rollItemUuid, rollItemName, rollItemActor }={}) {
+  // If UUID is provided, always roll that item directly
+  if ( rollItemUuid ) return (await fromUuid(rollItemUuid))?.use();
+
+  if ( !rollItemName ) return;
+  const actor = rollItemActor ? await fromUuid(rollItemActor) : null;
+
+  // If no actor is specified or player isn't owner, fall back to the macro rolling logic
+  if ( !actor?.isOwner ) return rollItem(rollItemName);
+  const token = canvas.tokens.controlled[0];
+
+  // If a token is controlled, and it has an item with the correct name, activate it
+  let item = token?.actor.items.getName(rollItemName);
+
+  // Otherwise check the specified actor for the item
+  if ( !item ) {
+    item = actor.items.getName(rollItemName);
+
+    // Display a warning to indicate the item wasn't rolled from the controlled actor
+    if ( item && canvas.tokens.controlled.length ) ui.notifications.warn(
+      game.i18n.format("MACRO.5eMissingTargetWarn", {
+        actor: token.name, name: rollItemName, type: game.i18n.localize("DOCUMENT.Item")
+      })
+    );
+  }
+
+  if ( item ) return item.use();
+
+  // If no item could be found at all, display a warning
+  ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
+    actor: actor.name, name: rollItemName, type: game.i18n.localize("DOCUMENT.Item")
+  }));
 }
