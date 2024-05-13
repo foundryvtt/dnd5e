@@ -986,6 +986,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
    * @property {string} enchantmentProfile          ID of the enchantment to apply.
+   * @property {boolean} promptEnchantment          Does an enchantment profile need to be selected?
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
    * @property {string|null} summonsProfile         ID of the summoning profile to use.
    * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
