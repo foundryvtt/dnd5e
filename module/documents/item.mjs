@@ -462,7 +462,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const requireEquipped = (this.type !== "consumable")
       || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
-    return this.system.attuned || (this.system.attunement !== "required");
+    return !this.system.attuned && (this.system.attunement === "required");
   }
 
   /* -------------------------------------------- */
