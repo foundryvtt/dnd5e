@@ -327,6 +327,16 @@ export function registerSystemSettings() {
     type: PrimaryPartyData,
     onChange: s => ui.actors.render()
   });
+
+  // Control hints
+  game.settings.register("dnd5e", "controlHints", {
+    name: "DND5E.Controls.Name",
+    hint: "DND5E.Controls.Hint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true
+  });
 }
 
 /**
