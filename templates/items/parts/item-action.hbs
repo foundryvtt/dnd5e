@@ -130,23 +130,37 @@
             {{ localize "DND5E.Enchantment.Action.Configure" }}
         </a>
     </div>
-</div>
-
-<div class="form-group enchanted-items">
-    <label>{{ localize "DND5E.Enchantment.Items.Label" }}</label>
-    <ul>
-        {{#each enchantedItems}}
-        <li>
-            {{#if actor}}
-            {{ localize "DND5E.Enchantment.Items.Entry" item=_source.name actor=actor.name }}
-            {{else}}
-            {{ _source.name }}
-            {{/if}}
+    {{#if appliedEnchantments.length}}
+    <ul class="separated-list dnd5e2">
+        {{#each appliedEnchantments}}
+        <li class="item" data-enchantment-uuid="{{ enchantment.uuid }}">
+            <div class="details flexrow">
+                <img class="gold-icon" src="{{ item.img }}" alt="{{ name }}">
+                <span class="name">
+                    {{#if actor}}
+                    {{ localize "DND5E.Enchantment.Items.Entry" item=name actor=actor.name }}
+                    {{else}}
+                    {{ name }}
+                    {{/if}}
+                </span>
+                <div class="list-controls flexrow">
+                    {{#if item.isOwner}}
+                    <button type="button" class="enchantment-button unbutton" data-action="viewItem"
+                            data-tooltip="DND5E.ItemView" aria-label="{{ localize 'DND5E.ItemView' }}">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="enchantment-button unbutton" data-action="removeEnchantment"
+                            data-tooltip="DND5E.Enchantment.Action.Remove"
+                            aria-label="{{ localize 'DND5E.Enchantment.Action.Remove' }}">
+                        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                    </button>
+                    {{/if}}
+                </div>
+            </div>
         </li>
-        {{else}}
-        <li>{{ localize "DND5E.Enchantment.Items.None" }}</li>
         {{/each}}
     </ul>
+    {{/if}}
 </div>
 {{/if}}
 
