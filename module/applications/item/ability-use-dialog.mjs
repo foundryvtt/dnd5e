@@ -224,7 +224,7 @@ export default class AbilityUseDialog extends Dialog {
         .filter(f => f)
     );
     if ( Object.values(options.profiles).length <= 1 ) {
-      options.profile = Object.values(options.profiles)[0];
+      options.profile = Object.keys(options.profiles)[0];
       options.profiles = null;
     }
     if ( summons.creatureSizes.size > 1 ) options.creatureSizes = summons.creatureSizes.reduce((obj, k) => {

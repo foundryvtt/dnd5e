@@ -266,7 +266,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   _onDelete(options, userId) {
     super._onDelete(options, userId);
 
-    const origin = this.actor.getFlag("dnd5e", "summon.origin");
+    const origin = this.actor?.getFlag("dnd5e", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
     if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.actor.uuid);
   }
