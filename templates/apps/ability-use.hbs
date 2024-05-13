@@ -93,8 +93,6 @@
     </div>
     {{/if}}
 
-    {{#if (ne applyEnchantment null)}}
-    <input type="hidden" name="applyEnchantment" value="true" data-dtype="Boolean">
     {{#if enchantmentOptions.profiles}}
     <div class="form-group">
         <label>{{ localize "DND5E.Enchantment.Label" }}
@@ -107,7 +105,6 @@
     </div>
     {{else if enchantmentOptions.profile}}
     <input type="hidden" name="enchantmentProfile" value="{{ enchantmentOptions.profile }}">
-    {{/if}}
     {{/if}}
 
     {{#if (ne createSummons null)}}

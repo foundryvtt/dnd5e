@@ -980,7 +980,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Configuration data for an item usage being prepared.
    *
    * @typedef {object} ItemUseConfiguration
-   * @property {boolean} applyEnchantment           Should this item apply an enchantment?
    * @property {boolean} createMeasuredTemplate     Should this item create a template?
    * @property {boolean} createSummons              Should this item create a summoned creature?
    * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
@@ -1051,7 +1050,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( (options.configureDialog !== false) && needsConfiguration ) {
       const configuration = await AbilityUseDialog.create(item, config);
       if ( !configuration ) return;
-      if ( !configuration.applyEnchantment ) configuration.enchantmentProfile = null;
       foundry.utils.mergeObject(config, configuration);
     }
 
@@ -1206,16 +1204,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {ItemUseConfiguration}  Configuration data for the roll.
    */
   _getUsageConfig() {
-    const { consume, uses, enchantment, summons, target, level, preparation } = this.system;
+    const { consume, uses, summons, target, level, preparation } = this.system;
 
     const config = {
-      applyEnchantment: null,
       createMeasuredTemplate: null,
       createSummons: null,
       consumeResource: null,
       consumeSpellSlot: null,
       consumeUsage: null,
       enchantmentProfile: null,
+      promptEnchantment: null,
       slotLevel: null,
       summonsProfile: null,
       resourceAmount: null,
@@ -1241,8 +1239,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       config.createMeasuredTemplate = target.prompt;
     }
     if ( this.system.isEnchantment ) {
-      config.applyEnchantment = enchantment?.prompt ?? true;
-      config.enchantmentProfile = EnchantmentData.availableEnchantments(this)[0]?.id;
+      const availableEnchantments = EnchantmentData.availableEnchantments(this);
+      config.promptEnchantment = availableEnchantments.length > 1;
+      config.enchantmentProfile = availableEnchantments[0]?.id;
     }
     if ( this.system.hasSummoning && this.system.summons.canSummon && canvas.scene ) {
       config.createSummons = summons.prompt;
