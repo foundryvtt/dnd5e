@@ -215,7 +215,7 @@ export default class AttributesFields {
     }
     if ( race.system.movement.hover ) this.attributes.movement.hover = true;
     if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;
-    else this.attributes.movement.units ??= race.system.movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+    else this.attributes.movement.units ??= race.system.movement.units;
 
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
       if ( !race.system.senses[key] || (!force && (this.attributes.senses[key] !== null)) ) continue;
@@ -223,6 +223,6 @@ export default class AttributesFields {
     }
     this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
     if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
-    else this.attributes.senses.units ??= race.system.senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+    else this.attributes.senses.units ??= race.system.senses.units;
   }
 }
