@@ -187,7 +187,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     if ( Hooks.call("dnd5e.preSummon", this.item, profile, options) === false ) return;
 
     // Fetch the actor that will be summoned
-    const actor = await this.fetchActor(profile.uuid, this.item);
+    const actor = await this.fetchActor(profile.uuid);
 
     // Verify ownership of actor
     if ( !actor.isOwner ) {
@@ -260,8 +260,8 @@ export class SummonsData extends foundry.abstract.DataModel {
 
   /**
    * If actor to be summoned is in a compendium, create a local copy or use an already imported version if present.
-   * @param {string} uuid       UUID of actor that will be summoned.
-   * @returns {Actor5e}         Local copy of actor.
+   * @param {string} uuid  UUID of actor that will be summoned.
+   * @returns {Actor5e}    Local copy of actor.
    */
   async fetchActor(uuid) {
     const actor = await fromUuid(uuid);
@@ -273,9 +273,12 @@ export class SummonsData extends foundry.abstract.DataModel {
     // Search world actors to see if any usable summoned actor instances are present from prior summonings.
     // Linked actors must match the summoning origin (item) to be considered.
     const localActor = game.actors.find(a =>
-      a.getFlag("dnd5e", "summonedCopy") // Has been cloned for summoning use
-      && (a.getFlag("core", "sourceId") === uuid) // Sourced from the desired actor UUID
-      && ( (a.getFlag("dnd5e", "summon.origin") === this.item.uuid) || !a.prototypeToken.actorLink) // Unlinked or created from this item specifically
+      // Has been cloned for summoning use
+      a.getFlag("dnd5e", "summonedCopy")
+      // Sourced from the desired actor UUID
+      && (a.getFlag("core", "sourceId") === uuid)
+      // Unlinked or created from this item specifically
+      && ( (a.getFlag("dnd5e", "summon.origin") === this.item.uuid) || !a.prototypeToken.actorLink)
     );
     if ( localActor ) return localActor;
 
@@ -283,7 +286,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     if ( !game.user.can("ACTOR_CREATE") ) throw new Error(game.i18n.localize("DND5E.Summoning.Warning.CreateActor"));
 
     // No suitable world actor was found, create a new actor for this summoning instance.
-    if (actor.pack) {
+    if ( actor.pack ) {
       // Template actor resides only in compendium, import the actor into the world and set the flag.
       return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
         "flags.dnd5e.summonedCopy": true
@@ -520,7 +523,7 @@ export class SummonsData extends foundry.abstract.DataModel {
 
     // Linked summons require more explicit updates before token creation.
     // Unlinked summons can take actor delta directly.
-    if (tokenDocument.actorLink) {
+    if ( tokenDocument.actorLink ) {
       const { effects, items, ...rest } = actorUpdates;
       await tokenDocument.actor.update(rest);
       await tokenDocument.actor.updateEmbeddedDocuments("Item", items);
