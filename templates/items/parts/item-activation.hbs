@@ -37,8 +37,8 @@
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
         {{#if system.hasScalarTarget}}
-            <input type="number" step="any" name="system.target.value"
-                   value="{{system.target.value}}" placeholder="&mdash;">
+            <input type="text" name="system.target.value" value="{{source.target.value}}"
+                   placeholder="&mdash;" data-formula-editor>
         {{/if}}
         {{#if system.hasAreaTarget}}
             <select name="system.target.units" data-tooltip="DND5E.TargetUnits">
