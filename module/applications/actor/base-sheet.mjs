@@ -1036,10 +1036,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    */
   _onDropResetData(itemData) {
     if ( !itemData.system ) return;
-    ["equipped", "proficient", "prepared"].forEach(k => delete itemData.system[k]);
-    if ( "attunement" in itemData.system ) {
-      itemData.system.attunement = Math.min(itemData.system.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
-    }
+    ["attuned", "equipped", "proficient", "prepared"].forEach(k => delete itemData.system[k]);
   }
 
   /* -------------------------------------------- */

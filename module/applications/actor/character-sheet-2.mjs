@@ -343,9 +343,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     });
     if ( foundry.utils.isEmpty(context.senses) ) delete context.senses;
 
-    // Inventory
-    this._prepareItems(context);
-
     // Spellcasting
     context.spellcasting = [];
     const msak = simplifyBonus(this.actor.system.bonuses.msak.attack, context.rollData);

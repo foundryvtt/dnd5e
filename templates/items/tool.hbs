@@ -101,11 +101,17 @@
                 {{/each}}
             </div>
 
-            <div class="form-group">
+            <div class="form-group input-select">
                 <label>{{localize "DND5E.Attunement"}}</label>
-                <select name="system.attunement" data-dtype="Number">
-                    {{selectOptions config.attunements selected=system.attunement}}
-                </select>
+                <div class="form-fields">
+                    <input type="checkbox" name="system.attuned" {{ checked system.attuned }}
+                           {{ disabled (not system.attunement) }}
+                           data-tooltip="DND5E.Attuned" aria-label="{{ localize 'DND5E.Attuned' }}">
+                    <select name="system.attunement">
+                        {{selectOptions config.attunementTypes selected=system.attunement
+                                        blank=(localize "DND5E.AttunementNone")}}
+                    </select>
+                </div>
             </div>
 
             {{!-- Tool Proficiency --}}
