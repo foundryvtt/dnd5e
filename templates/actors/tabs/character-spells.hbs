@@ -36,8 +36,8 @@
 <{{ elements.inventory }} class="inventory-element" v2>
 
     {{!-- Searching & Filtering --}}
-    <item-list-controls for="spellbook" label="{{ localize "DND5E.SpellsSearch" }}" sort="toggle" collection="items"
-                        keep-empty>
+    <item-list-controls for="spellbook" label="{{ localize "DND5E.SpellsSearch" }}" sort="multi" sort-modes="apm"
+                        collection="items" keep-empty>
         <datalist>
             <option value="action">{{ localize "DND5E.Action" }}</option>
             <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
@@ -96,7 +96,10 @@
 
                 {{!-- Spells --}}
                 <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
-                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}">
+                    data-item-level="{{ item.system.level }}"
+                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}"
+                    data-item-preparation-mode="{{ item.system.preparation.mode }}"
+                    data-item-preparation-prepared="{{ item.system.preparation.prepared }}">
 
                     {{!-- Spell Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
