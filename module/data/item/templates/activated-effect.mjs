@@ -202,7 +202,6 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
-    if ( ("activation" in source) && !source.activation.type ) source.activation.type = "";
     ActivatedEffectTemplate.#migrateFormulaFields(source);
     ActivatedEffectTemplate.#migrateRanges(source);
     ActivatedEffectTemplate.#migrateTargets(source);
@@ -234,7 +233,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   static #migrateRanges(source) {
     if ( !("range" in source) ) return;
     source.range ??= {};
-    if ( ["none", null].includes(source.range.units) ) source.range.units = "";
+    if ( source.range.units === "none" ) source.range.units = "";
     if ( typeof source.range.long === "string" ) {
       if ( source.range.long === "" ) source.range.long = null;
       else if ( Number.isNumeric(source.range.long) ) source.range.long = Number(source.range.long);
@@ -259,8 +258,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     if ( !("target" in source) ) return;
     source.target ??= {};
     if ( source.target.value === "" ) source.target.value = null;
-    if ( source.target.units === null ) source.target.units = "";
-    if ( ["none", null].includes(source.target.type) ) source.target.type = "";
+    if ( source.target.type === "none" ) source.target.type = "";
   }
 
   /* -------------------------------------------- */
@@ -288,7 +286,6 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   static #migrateConsume(source) {
     if ( !("consume" in source) ) return;
     source.consume ??= {};
-    if ( source.consume.type === null ) source.consume.type = "";
     const amount = source.consume.amount;
     if ( typeof amount === "string" ) {
       if ( amount === "" ) source.consume.amount = null;
