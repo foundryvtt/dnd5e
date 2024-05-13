@@ -882,6 +882,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *                                             false, and nothing if the roll wasn't performed.
    */
   async use(config={}, options={}) {
+    if ( !this.isOwner ) {
+      ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
+      return null;
+    }
     let item = this;
     const is = item.system;
     const as = item.actor.system;

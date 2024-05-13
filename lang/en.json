@@ -677,6 +677,7 @@
 "DND5E.DistMiAbbr": "mi",
 "DND5E.DistSelf": "Self",
 "DND5E.DistTouch": "Touch",
+"DND5E.DocumentUseWarn": "You lack permission to use an item on this document.",
 "DND5E.DocumentViewWarn": "You lack permission to view this document.",
 "DND5E.Duration": "Duration",
 "DND5E.DurationPermanent": "Permanent",
@@ -1902,7 +1903,11 @@
   "RollRequest": "Roll Request",
   "SaveShort": "{save}",
   "SaveLong": "{save} saving throw",
-  "SpecificCheck": "{ability} ({type})"
+  "SpecificCheck": "{ability} ({type})",
+  "Warning": {
+    "NoActor": "No selected or assigned actor could be found to execute this roll.",
+    "NoItemOnActor": "{actor} does not have an Item with name {item}."
+  }
 },
 
 "EFFECT.DND5E": {
