@@ -546,6 +546,7 @@ export default class ItemSheet5e extends ItemSheet {
         if ( override === "damage-control" ) html[0].querySelectorAll(".damage-control").forEach(e => e.remove());
       }
     }
+    html[0].querySelectorAll('[data-action="view"]').forEach(e => e.addEventListener("click", this._onView.bind(this)));
 
     // Advancement context menu
     const contextOptions = this._getAdvancementContextMenuOptions();
@@ -678,10 +679,20 @@ export default class ItemSheet5e extends ItemSheet {
         await enchantment.delete();
         this.render();
         break;
-      case "viewItem":
-        enchantment.parent.sheet.render(true);
-        break;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle actions on a view sheet button.
+   * @param {PointerEvent} event  Triggering click event.
+   * @private
+   */
+  async _onView(event) {
+    event.preventDefault();
+    const doc = await fromUuid(event.currentTarget.dataset.uuid);
+    doc?.sheet.render(true);
   }
 
   /* -------------------------------------------- */
