@@ -1,6 +1,11 @@
 {{#if isGM}}
 <menu class="member-controls flexrow">
     <li>
+        <button type="button" class="action-button" data-action="award">
+            <i class="fa-solid fa-trophy" inert></i> {{ localize "DND5E.Award.Action" }}
+        </button>
+    </li>
+    <li>
         <button type="button" class="action-button" data-action="placeMembers">
             <i class="fa-solid fa-location-dot" inert></i> {{localize "DND5E.Group.PlaceMembers"}}
         </button>
