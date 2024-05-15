@@ -841,6 +841,31 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       return settings;
     };
 
+    const buttons = foundry.utils.mergeObject({
+      accept: {
+        icon: '<i class="fas fa-check"></i>',
+        label: game.i18n.localize("DND5E.PolymorphAcceptSettings"),
+        callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
+      },
+      ...Object.fromEntries(
+        Object.entries(CONFIG.DND5E.transformationPresets)
+          .sort((a, b) => a[1].order - b[1].order)
+          .map(([k, v]) => [k, {
+            icon: v.icon,
+            label: v.label,
+            callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+              v.options,
+              { transformTokens: rememberOptions(html).transformTokens }
+            ))
+          }])
+      )
+    }, {
+      cancel: {
+        icon: '<i class="fas fa-times"></i>',
+        label: game.i18n.localize("Cancel")
+      }
+    });
+
     // Create and render the Dialog
     return new Dialog({
       title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
@@ -851,41 +876,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         isToken: this.actor.isToken
       },
       default: "accept",
-      buttons: {
-        accept: {
-          icon: '<i class="fas fa-check"></i>',
-          label: game.i18n.localize("DND5E.PolymorphAcceptSettings"),
-          callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
-        },
-        wildshape: {
-          icon: CONFIG.DND5E.transformationPresets.wildshape.icon,
-          label: CONFIG.DND5E.transformationPresets.wildshape.label,
-          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
-            CONFIG.DND5E.transformationPresets.wildshape.options,
-            { transformTokens: rememberOptions(html).transformTokens }
-          ))
-        },
-        polymorph: {
-          icon: CONFIG.DND5E.transformationPresets.polymorph.icon,
-          label: CONFIG.DND5E.transformationPresets.polymorph.label,
-          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
-            CONFIG.DND5E.transformationPresets.polymorph.options,
-            { transformTokens: rememberOptions(html).transformTokens }
-          ))
-        },
-        self: {
-          icon: CONFIG.DND5E.transformationPresets.polymorphSelf.icon,
-          label: CONFIG.DND5E.transformationPresets.polymorphSelf.label,
-          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
-            CONFIG.DND5E.transformationPresets.polymorphSelf.options,
-            { transformTokens: rememberOptions(html).transformTokens }
-          ))
-        },
-        cancel: {
-          icon: '<i class="fas fa-times"></i>',
-          label: game.i18n.localize("Cancel")
-        }
-      }
+      buttons
     }, {
       classes: ["dialog", "dnd5e", "polymorph"],
       width: 900,
