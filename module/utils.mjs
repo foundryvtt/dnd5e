@@ -216,6 +216,7 @@ export function indexFromUuid(uuid) {
  */
 export function linkForUuid(uuid, { tooltip }={}) {
   let doc = fromUuidSync(uuid);
+  if ( !doc ) return "";
   if ( uuid.startsWith("Compendium.") && !(doc instanceof foundry.abstract.Document) ) {
     const {collection} = foundry.utils.parseUuid(uuid);
     const cls = collection.documentClass;

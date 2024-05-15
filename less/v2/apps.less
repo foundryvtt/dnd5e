@@ -473,8 +473,6 @@
 
   button {
     background: var(--dnd5e-background-card);
-    font-family: var(--dnd5e-font-roboto);
-    font-weight: bold;
     font-size: var(--font-size-13);
     text-transform: uppercase;
     padding: 3px;
@@ -485,6 +483,10 @@
     justify-content: center;
     gap: .25rem;
 
+    &:not(.fas, .far, .fa-solid, .fa-regular, .fa-light, .fa-duotone, .fa-thin) {
+      font-family: var(--dnd5e-font-roboto);
+      font-weight: bold;
+    }
     &:disabled {
       cursor: default;
       color: var(--color-text-dark-inactive);

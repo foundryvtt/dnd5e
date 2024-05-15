@@ -46,13 +46,21 @@
                             <p class="hint">{{ localize "DND5E.Enchantment.Level.Hint" }}</p>
                         </div>
                         <div class="form-group">
-                            <label>{{ localize "DND5E.Enchantment.Riders.Label" }}</label>
-                            <multi-select name="effects.{{ id }}.flags.dnd5e.enchantment.riders">
-                                {{#each riders}}
+                            <label>{{ localize "DND5E.Enchantment.Riders.Effect.Label" }}</label>
+                            <multi-select name="effects.{{ id }}.flags.dnd5e.enchantment.riders.effect">
+                                {{#each riderEffects}}
                                 <option value="{{ id }}" {{ selected }}>{{ name }}</option>
                                 {{/each}}
                             </multi-select>
-                            <p class="hint">{{ localize "DND5E.Enchantment.Riders.Hint" }}</p>
+                            <p class="hint">{{ localize "DND5E.Enchantment.Riders.Effect.Hint" }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "DND5E.Enchantment.Riders.Item.Label" }}</label>
+                            <document-tags name="effects.{{ id }}.flags.dnd5e.enchantment.riders.item" type="Item"
+                                value="{{ riderItems }}">
+                                {{~#each flags.dnd5e.enchantment.riders.item}}{{{ dnd5e-linkForUuid this }}}{{/each~}}
+                            </document-tags>
+                            <p class="hint">{{ localize "DND5E.Enchantment.Riders.Item.Hint" }}</p>
                         </div>
                     </div>
                 </div>

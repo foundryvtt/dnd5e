@@ -65,9 +65,10 @@ export default class EnchantmentConfig extends DocumentSheet {
       name: effect.name,
       flags: effect.flags,
       collapsed: this.expandedEnchantments.get(effect.id) ? "" : "collapsed",
-      riders: effects.map(({ id, name }) => ({
-        id, name, selected: effect.flags.dnd5e?.enchantment?.riders?.includes(id) ? "selected" : ""
-      }))
+      riderEffects: effects.map(({ id, name }) => ({
+        id, name, selected: effect.flags.dnd5e?.enchantment?.riders?.effect?.includes(id) ? "selected" : ""
+      })),
+      riderItems: effect.flags.dnd5e?.enchantment?.riders?.item?.join(",") ?? ""
     }));
 
     return context;
@@ -115,11 +116,11 @@ export default class EnchantmentConfig extends DocumentSheet {
     const effectsChanges = Object.entries(effects ?? {}).map(([_id, changes]) => {
       const updates = { _id, ...changes };
       // Fix bug with <multi-select> in V11
-      if ( !foundry.utils.hasProperty(updates, "flags.dnd5e.enchantment.riders") ) {
-        foundry.utils.setProperty(updates, "flags.dnd5e.enchantment.riders", []);
+      if ( !foundry.utils.hasProperty(updates, "flags.dnd5e.enchantment.riders.effect") ) {
+        foundry.utils.setProperty(updates, "flags.dnd5e.enchantment.riders.effect", []);
       }
       // End bug fix
-      riderIds.add(...(foundry.utils.getProperty(updates, "flags.dnd5e.enchantment.riders") ?? []));
+      riderIds.add(...(foundry.utils.getProperty(updates, "flags.dnd5e.enchantment.riders.effect") ?? []));
       return updates;
     });
     for ( const effect of this.document.effects ) {
