@@ -48,6 +48,16 @@ export class EnchantmentData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Enchantments that have been applied by this item.
+   * @type {ActiveEffect5e[]}
+   */
+  get appliedEnchantments() {
+    return EnchantmentData.appliedEnchantments(this.item.uuid);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * List of item types that are enchantable.
    * @type {Set<string>}
    */
@@ -168,16 +178,6 @@ export class EnchantmentData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Fetch the tracked enchanted items.
-   * @returns {Promise<Item5e[]>}
-   */
-  async getItems() {
-    return (await this.constructor.appliedEnchantments(this.item.uuid)).map(ae => ae?.parent);
-  }
-
-  /* -------------------------------------------- */
   /*  Static Registry                             */
   /* -------------------------------------------- */
 
@@ -193,12 +193,12 @@ export class EnchantmentData extends foundry.abstract.DataModel {
   /**
    * Fetch the tracked enchanted items.
    * @param {string} itemUuid  UUID of the item supplying the enchantments.
-   * @returns {Promise<ActiveEffect5e[]>}
+   * @returns {ActiveEffect5e[]}
    */
-  static async appliedEnchantments(itemUuid) {
-    return Promise.all(
-      Array.from(EnchantmentData.#appliedEnchantments.get(itemUuid) ?? []).map(uuid => fromUuid(uuid))
-    ).then(a => a.filter(i => i));
+  static appliedEnchantments(itemUuid) {
+    return Array.from(EnchantmentData.#appliedEnchantments.get(itemUuid) ?? [])
+      .map(uuid => fromUuidSync(uuid))
+      .filter(i => i);
   }
 
   /* -------------------------------------------- */
@@ -213,8 +213,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
     if ( !EnchantmentData.#appliedEnchantments.has(source) ) {
       EnchantmentData.#appliedEnchantments.set(source, new Set());
     }
-    const applied = EnchantmentData.#appliedEnchantments.get(source);
-    applied.add(enchanted);
+    EnchantmentData.#appliedEnchantments.get(source).add(enchanted);
   }
 
   /* -------------------------------------------- */
@@ -225,8 +224,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    * @param {string} enchanted  UUID of the enchantment to stop tracking.
    */
   static untrackEnchantment(source, enchanted) {
-    if ( !EnchantmentData.#appliedEnchantments.has(source) ) return;
-    EnchantmentData.#appliedEnchantments.get(source).delete(enchanted);
+    EnchantmentData.#appliedEnchantments.get(source)?.delete(enchanted);
   }
 }
 
