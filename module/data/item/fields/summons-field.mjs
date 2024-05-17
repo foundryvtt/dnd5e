@@ -455,7 +455,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage, rollData);
     const healingBonus = Roll.replaceFormulaData(this.bonuses.healing, rollData);
     for ( const item of actor.items ) {
-      const itemUpdates = {};
+      const changes = [];
 
       // Match attacks
       if ( this.match.attacks && item.hasAttack ) {
@@ -466,33 +466,52 @@ export class SummonsData extends foundry.abstract.DataModel {
           prof,
           rollData.bonuses?.[typeMapping[item.system.actionType] ?? item.system.actionType]?.attack
         ].filter(p => p);
-        itemUpdates["system.attack.bonus"] = parts.join(" + ");
-        itemUpdates["system.attack.flat"] = true;
+        changes.push({
+          key: "system.attack.bonus",
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: parts.join(" + ")
+        }, {
+          key: "system.attack.flat",
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: true
+        });
       }
 
       // Match saves
-      if ( this.match.saves && item.hasSave ) {
-        itemUpdates["system.save.dc"] = rollData.item.save.dc ?? rollData.attributes.spelldc;
-        itemUpdates["system.save.scaling"] = "flat";
-      }
+      if ( this.match.saves && item.hasSave ) changes.push({
+        key: "system.save.dc",
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: rollData.item.save.dc ?? rollData.attributes.spelldc
+      }, {
+        key: "system.save.scaling",
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: "flat"
+      });
 
       // Damage bonus
       let damageBonus;
       if ( item.hasAttack ) damageBonus = attackDamageBonus;
       else if ( item.system.actionType === "save" ) damageBonus = saveDamageBonus;
       else if ( item.isHealing ) damageBonus = healingBonus;
-      if ( damageBonus && item.hasDamage ) {
-        const damage = foundry.utils.deepClone(item.system.damage.parts);
-        damage[0][0] = `${damage[0][0] ?? ""} + ${damageBonus}`;
-        itemUpdates["system.damage.parts"] = damage;
-        if ( item.system.damage.versatile ) {
-          itemUpdates["system.damage.versatile"] = `${item.system.damage.versatile} + ${damageBonus}`;
-        }
-      }
+      if ( damageBonus && item.hasDamage ) changes.push({
+        key: "system.damage.parts",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: JSON.stringify([[`${damageBonus}`, ""]])
+      });
 
-      if ( !foundry.utils.isEmpty(itemUpdates) ) {
-        itemUpdates._id = item.id;
-        actorUpdates.items.push(itemUpdates);
+      if ( changes.length ) {
+        const effect = (new ActiveEffect({
+          _id: staticID("dnd5eItemChanges"),
+          changes,
+          disabled: false,
+          icon: "icons/skills/melee/strike-slashes-orange.webp",
+          name: game.i18n.localize("DND5E.Summoning.ItemChanges.Label"),
+          origin: this.item.uuid,
+          flags: {
+            dnd5e: { type: "enchantment" }
+          }
+        })).toObject();
+        actorUpdates.items.push({ _id: item.id, effects: [effect] });
       }
     }
 

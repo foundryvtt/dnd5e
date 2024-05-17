@@ -41,7 +41,6 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   get isAppliedEnchantment() {
     return (this.getFlag("dnd5e", "type") === "enchantment")
-      && (this.parent.system.metadata?.enchantable === true)
       && !!this.origin && (this.origin !== this.parent.uuid);
   }
 
