@@ -382,23 +382,38 @@ export class SummonsData extends foundry.abstract.DataModel {
     if ( this.bonuses.hp ) {
       const hpBonus = new Roll(this.bonuses.hp, rollData);
       await hpBonus.evaluate();
+
+      // If non-zero hp bonus, apply as needed for this actor.
+      // Note: Only unlinked actors will have their current HP set to their new max HP
       if ( hpBonus.total ) {
-        if ( (actor.type === "pc") && !actor._source.system.attributes.hp.max ) {
-          actorUpdates.effects.push((new ActiveEffect({
+
+        // Helper function for modifying max HP ('bonuses.overall' or 'max')
+        const maxHpEffect = hpField => {
+          return (new ActiveEffect({
             _id: staticID("dnd5eHPBonus"),
             changes: [{
-              key: "system.attributes.hp.bonuses.overall",
+              key: `system.attributes.hp.${hpField}`,
               mode: CONST.ACTIVE_EFFECT_MODES.ADD,
               value: hpBonus.total
             }],
             disabled: false,
             icon: "icons/magic/life/heart-glowing-red.webp",
             name: game.i18n.localize("DND5E.Summoning.Bonuses.HitPoints.Label")
-          })).toObject());
+          })).toObject();
+        };
+
+        if ( (!foundry.utils.isEmpty(actor.classes)) && !actor._source.system.attributes.hp.max ) {
+          // Actor has classes without a hard-coded max -- apply bonuses to 'overall'
+          actorUpdates.effects.push(maxHpEffect("bonuses.overall"));
+        } else if (actor.prototypeToken.actorLink) {
+          // Otherwise, linked actors boost HP via 'max' AE
+          actorUpdates.effects.push(maxHpEffect("max"));
         } else {
+          // Unlinked actors assumed to always be "fresh" copies with bonus HP added to both
+          // Max HP and Current HP
           actorUpdates["system.attributes.hp.max"] = actor.system.attributes.hp.max + hpBonus.total;
+          actorUpdates["system.attributes.hp.value"] = actor.system.attributes.hp.value + hpBonus.total;
         }
-        actorUpdates["system.attributes.hp.value"] = actor.system.attributes.hp.value + hpBonus.total;
       }
     }
 
