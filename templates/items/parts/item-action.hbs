@@ -138,7 +138,7 @@
                 <img class="gold-icon" src="{{ item.img }}" alt="{{ name }}">
                 <span class="name">
                     {{#if actor}}
-                    {{ localize "DND5E.Enchantment.Items.Entry" item=name actor=actor.name }}
+                    {{{ localize "DND5E.Enchantment.Items.Entry" item=name actor=actor.name }}}
                     {{else}}
                     {{ name }}
                     {{/if}}
