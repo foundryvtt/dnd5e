@@ -278,7 +278,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       // Sourced from the desired actor UUID
       && (a.getFlag("core", "sourceId") === uuid)
       // Unlinked or created from this item specifically
-      && ( (a.getFlag("dnd5e", "summon.origin") === this.item.uuid) || !a.prototypeToken.actorLink)
+      && ((a.getFlag("dnd5e", "summon.origin") === this.item.uuid) || !a.prototypeToken.actorLink)
     );
     if ( localActor ) return localActor;
 
@@ -402,10 +402,10 @@ export class SummonsData extends foundry.abstract.DataModel {
           })).toObject();
         };
 
-        if ( (!foundry.utils.isEmpty(actor.classes)) && !actor._source.system.attributes.hp.max ) {
+        if ( !foundry.utils.isEmpty(actor.classes) && !actor._source.system.attributes.hp.max ) {
           // Actor has classes without a hard-coded max -- apply bonuses to 'overall'
           actorUpdates.effects.push(maxHpEffect("bonuses.overall"));
-        } else if (actor.prototypeToken.actorLink) {
+        } else if ( actor.prototypeToken.actorLink ) {
           // Otherwise, linked actors boost HP via 'max' AE
           actorUpdates.effects.push(maxHpEffect("max"));
         } else {
@@ -543,11 +543,11 @@ export class SummonsData extends foundry.abstract.DataModel {
       await tokenDocument.actor.update(rest);
       await tokenDocument.actor.updateEmbeddedDocuments("Item", items);
 
-      const {newEffects, oldEffects} = effects.reduce( (acc, curr) => {
+      const { newEffects, oldEffects } = effects.reduce((acc, curr) => {
         const target = tokenDocument.actor.effects.get(curr._id) ? "oldEffects" : "newEffects";
         acc[target].push(curr);
         return acc;
-      }, {newEffects: [], oldEffects: []});
+      }, { newEffects: [], oldEffects: [] });
 
       await tokenDocument.actor.updateEmbeddedDocuments("ActiveEffect", oldEffects);
       await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, {keepId: true});
