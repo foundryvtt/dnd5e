@@ -408,7 +408,9 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   async createRiderEnchantments() {
     const origin = await fromUuid(this.origin);
-    const riders = (this.getFlag("dnd5e", "enchantment.riders") ?? []).map(id => {
+
+    // Create Effects
+    const riderEffects = (this.getFlag("dnd5e", "enchantment.riders.effect") ?? []).map(id => {
       const effectData = origin.effects.get(id)?.toObject();
       if ( effectData ) {
         delete effectData._id;
@@ -416,9 +418,24 @@ export default class ActiveEffect5e extends ActiveEffect {
         effectData.origin = this.origin;
       }
       return effectData;
-    }).filter(e => e);
-    const created = await this.parent.createEmbeddedDocuments("ActiveEffect", riders);
-    if ( created.length ) this.addDependent(...created);
+    });
+    const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects.filter(e => e));
+
+    // Create Items
+    let createdItems = [];
+    if ( this.parent.isEmbedded ) {
+      const riderItems = await Promise.all((this.getFlag("dnd5e", "enchantment.riders.item") ?? []).map(async uuid => {
+        const itemData = (await fromUuid(uuid))?.toObject();
+        if ( itemData ) {
+          delete itemData._id;
+          foundry.utils.setProperty(itemData, "flags.dnd5e.enchantment", { origin: this.uuid });
+        }
+        return itemData;
+      }));
+      createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems.filter(i => i));
+    }
+
+    if ( createdEffects.length || createdItems.length ) this.addDependent(...createdEffects, ...createdItems);
   }
 
   /* -------------------------------------------- */
@@ -714,7 +731,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Retrieve a list of dependent effects.
-   * @returns {ActiveEffect5e[]}
+   * @returns {Array<ActiveEffect5e|Item5e>}
    */
   getDependents() {
     return (this.getFlag("dnd5e", "dependents") || []).reduce((arr, { uuid }) => {

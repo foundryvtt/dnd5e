@@ -749,8 +749,14 @@
     "Entry": "{item} on  <em>{actor}</em>"
   },
   "Riders": {
-    "Label": "Additional Effects",
-    "Hint": "These additional effects will be added to the enchanted item when this enchantment is added, and removed when the enchantment is removed."
+    "Effect": {
+      "Label": "Additional Effects",
+      "Hint": "These additional effects will be added to the enchanted item when this enchantment is added, and removed when the enchantment is removed."
+    },
+    "Item": {
+      "Label": "Additional Items",
+      "Hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
+    }
   },
   "Warning": {
     "ConcentrationEnded": "Cannot apply this enchantment because concentration has ended.",

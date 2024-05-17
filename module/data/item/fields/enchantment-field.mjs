@@ -16,6 +16,18 @@ export default class EnchantmentField extends EmbeddedDataField {
 }
 
 /**
+ * Data stored in "enchantment" flag on enchantment active effects.
+ *
+ * @typedef {object} EnchantmentProfile
+ * @property {object} level
+ * @property {number} level.min        Minimum level at which this profile can be used.
+ * @property {number} level.max        Maximum level at which this profile can be used.
+ * @property {object} riders
+ * @property {string[]} riders.effect  IDs of other effects on this item that will be added with this enchantment.
+ * @property {string[]} riders.item    UUIDs of items that will be added with this enchantment.
+ */
+
+/**
  * Data model for enchantment configuration.
  *
  * @property {string} classIdentifier             Class identifier that will be used to determine applicable level.
