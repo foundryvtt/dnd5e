@@ -145,7 +145,7 @@
                 </span>
                 <div class="list-controls flexrow">
                     {{#if item.isOwner}}
-                    <button type="button" class="enchantment-button unbutton" data-action="viewItem"
+                    <button type="button" class="unbutton" data-action="view" data-uuid="{{ item.uuid }}"
                             data-tooltip="DND5E.ItemView" aria-label="{{ localize 'DND5E.ItemView' }}">
                         <i class="fa-solid fa-eye" aria-hidden="true"></i>
                     </button>
@@ -178,6 +178,27 @@
             {{ localize "DND5E.Summoning.Prompt.Label" }}
         </label>
     </div>
+    {{#with system.summons.summonedCreatures as |summonedCreatures|}}
+    {{#if summonedCreatures.length}}
+    <ul class="separated-list dnd5e2">
+        {{#each summonedCreatures}}
+        <li class="item" data-summon-uuid="{{ uuid }}">
+            <div class="details flexrow">
+                <img class="gold-icon" src="{{ img }}" alt="{{ name }}">
+                <span class="name">{{ name }}</span>
+                <div class="list-controls flexrow">
+                    <button type="button" class="unbutton" data-action="view" data-uuid="{{ uuid }}"
+                            data-tooltip="DND5E.Summoning.Action.View"
+                            aria-label="{{ localize 'DND5E.Summoning.Action.View' }}">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+    {{/with}}
 </div>
 {{/if}}
 
