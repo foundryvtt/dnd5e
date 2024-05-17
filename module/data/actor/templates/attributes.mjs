@@ -180,7 +180,7 @@ export default class AttributesFields {
     const sizeConfig = CONFIG.DND5E.actorSizes[
       keys[this.parent.flags.dnd5e?.powerfulBuild ? Math.min(index + 1, keys.length - 1) : index]
     ];
-    const mod = sizeConfig?.capacityMultiplier ?? sizeConfig?.token ?? 1;
+    const sizeMod = sizeConfig?.capacityMultiplier ?? sizeConfig?.token ?? 1;
     let maximumMultiplier;
 
     const calculateThreshold = threshold => {
@@ -191,7 +191,7 @@ export default class AttributesFields {
         * simplifyBonus(encumbrance.multipliers.overall, rollData);
       if ( threshold === "maximum" ) maximumMultiplier = multiplier;
       if ( this.parent.type === "vehicle" ) base = this.attributes.capacity.cargo;
-      else multiplier *= (config.threshold[threshold]?.[unitSystem] ?? 1) * mod;
+      else multiplier *= (config.threshold[threshold]?.[unitSystem] ?? 1) * sizeMod;
       return (base * multiplier).toNearest(0.1) + bonus;
     };
 
@@ -203,7 +203,7 @@ export default class AttributesFields {
       maximum: calculateThreshold("maximum")
     };
     encumbrance.max = encumbrance.thresholds.maximum;
-    encumbrance.mod = (mod * maximumMultiplier).toNearest(0.1);
+    encumbrance.mod = (sizeMod * maximumMultiplier).toNearest(0.1);
     encumbrance.stops = {
       encumbered: Math.clamp((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100),
       heavilyEncumbered: Math.clamp((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
