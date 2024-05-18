@@ -320,7 +320,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Character Background
     context.creatureType = {
       class: details.type.value === "custom" ? "none" : "",
-      icon: CONFIG.DND5E.creatureTypes[details.type.value]?.icon ?? "/icons/svg/mystery-man.svg",
+      icon: CONFIG.DND5E.creatureTypes[details.type.value]?.icon ?? "icons/svg/mystery-man.svg",
       title: details.type.value === "custom"
         ? details.type.custom
         : CONFIG.DND5E.creatureTypes[details.type.value]?.label,
