@@ -59,7 +59,7 @@
                 {{else if item.system.recharge.value}}
                     {{localize "DND5E.Charged"}}
                 {{else if ctx.hasUses}}
-                    <input type="text" value="{{item.system.uses.value}}" placeholder="0" data-dtype="Number" data-name="system.uses.value">/ {{item.system.uses.max}}
+                    <input type="text" value="{{item.system.uses.value}}" min="0" max="{{item.system.uses.max}}" placeholder="0" data-dtype="Number" data-name="system.uses.value" inputmode="numeric" pattern="[0-9+=\-]*">/ {{item.system.uses.max}}
                 {{/if}}
             </div>
             <div class="item-detail item-action">
