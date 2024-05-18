@@ -54,7 +54,7 @@
 
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
-                {{#if ctx.isOnCooldown}}
+                {{#if item.isOnCooldown}}
                     <a class="item-action" data-action="recharge">{{item.labels.recharge}}</a>
                 {{else if item.system.recharge.value}}
                     {{localize "DND5E.Charged"}}

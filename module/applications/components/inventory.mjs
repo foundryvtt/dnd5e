@@ -241,6 +241,15 @@ export default class InventoryElement extends HTMLElement {
       group: "state"
     });
 
+    // Toggle Charged State
+    if ( item.isOnCooldown || item.system.recharge.value ) options.push({
+      name: item.system.recharge?.charged ? "DND5E.ContextMenuActionExpendCharge" : "DND5E.ContextMenuActionCharge",
+      icon: "<i class='fa-solid fa-bolt'></i>",
+      condition: () => item.isOwner,
+      callback: li => this._onAction(li[0], "toggleCharge"),
+      group: "state"
+    });
+
     // Toggle Prepared State
     else if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared") ) options.push({
       name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
@@ -384,6 +393,8 @@ export default class InventoryElement extends HTMLElement {
         return item.update({"system.preparation.prepared": !item.system.preparation?.prepared});
       case "recharge":
         return item.rollRecharge();
+      case "toggleCharge":
+        return item.update({"system.recharge.charged": !item.system.recharge?.charged});
       case "unfavorite":
         return this.actor.system.removeFavorite(item.getRelativeUUID(this.actor));
       case "use":
