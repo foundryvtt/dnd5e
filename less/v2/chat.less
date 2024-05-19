@@ -155,11 +155,16 @@
       &::after { color: var(--dnd5e-color-failure); }
     }
 
-    > i {
+    &.critical, &.fumble {
+      border-width: 3px;
+      border-style: double;
+    }
+
+    > .icons {
       position: absolute;
       inset: 0 auto 0 8px;
-      display: grid;
-      place-content: center;
+      display: flex;
+      align-items: center;
       opacity: .35;
     }
   }
@@ -682,20 +687,15 @@ enchantment-application {
     display: flex;
     align-items: center;
     gap: .5rem;
-    padding: .325rem;
-    border: 1px solid;
-    border-radius: 3px;
+    padding: 0 8px;
     cursor: pointer;
 
-    > img {
-      width: 36px;
-      height: 36px;
-      object-fit: cover;
-      object-position: top;
-      border-radius: 100%;
-      border: 3px solid var(--dnd5e-color-gold);
-      box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-      background: var(--dnd5e-color-light-gray);
+    > i { font-size: var(--font-size-14); }
+
+    .name {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-size: var(--font-size-14);
+      font-weight: bold;
     }
 
     .name-stacked {
@@ -717,33 +717,22 @@ enchantment-application {
       display: flex;
       align-items: center;
       gap: .25rem;
-      font-size: var(--font-size-16);
-      margin-right: .5rem;
-      opacity: .35;
-
-      > i { min-height: 17px; }
+      font-size: var(--font-size-14);
+      margin-left: auto;
+      opacity: .75;
 
       > span {
         font-weight: bold;
         font-family: var(--font-primary);
+        word-break: keep-all;
       }
     }
 
-    &.hit {
-      border-color: var(--dnd5e-color-success);
-      background: var(--dnd5e-color-success-background);
-      .ac { color: #105b10; }
-      .title > i { color: var(--dnd5e-color-success); }
-    }
+    &.hit > i { color: var(--dnd5e-color-success); }
 
-    &.miss {
-      border-color: var(--dnd5e-color-failure);
-      background: var(--dnd5e-color-failure-background);
-      .ac { color: var(--dnd5e-color-failure); }
-      .title > i {
-        color: var(--dnd5e-color-failure);
-        height: 12px;
-      }
+    &.miss > i {
+      color: var(--dnd5e-color-failure);
+      height: 12px;
     }
   }
 }

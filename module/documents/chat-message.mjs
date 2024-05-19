@@ -166,6 +166,18 @@ export default class ChatMessage5e extends ChatMessage {
     const originatingMessage = game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
     const displayChallenge = originatingMessage?.shouldDisplayChallenge;
 
+    /**
+     * Create an icon to indicate success or failure.
+     * @param {string} cls  The icon class.
+     * @returns {HTMLElement}
+     */
+    function makeIcon(cls) {
+      const icon = document.createElement("i");
+      icon.classList.add("fas", cls);
+      icon.setAttribute("inert", "");
+      return icon;
+    }
+
     // Highlight rolls where the first part is a d20 roll
     for ( let [index, d20Roll] of this.rolls.entries() ) {
 
@@ -181,25 +193,22 @@ export default class ChatMessage5e extends ChatMessage {
       // Highlight successes and failures
       const total = html.find(".dice-total")[index];
       if ( !total ) continue;
-      // Only attack rolls can crit or fumble.
-      const canCrit = this.getFlag("dnd5e", "roll.type") === "attack";
+      // Only attack rolls and death saves can crit or fumble.
+      const canCrit = ["attack", "death"].includes(this.getFlag("dnd5e", "roll.type"));
       if ( d.options.target && displayChallenge ) {
         if ( d20Roll.total >= d.options.target ) total.classList.add("success");
         else total.classList.add("failure");
       }
-      else if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
-      else if ( canCrit && d20Roll.isFumble ) total.classList.add("fumble");
+      if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
+      if ( canCrit && d20Roll.isFumble ) total.classList.add("fumble");
 
-      const icon = document.createElement("i");
-      icon.classList.add("fas");
-      icon.setAttribute("inert", "");
-      if ( total.classList.contains("success") || total.classList.contains("critical") ) {
-        icon.classList.add("fa-check");
-        total.append(icon);
-      } else if ( total.classList.contains("failure") || total.classList.contains("fumble") ) {
-        icon.classList.add("fa-xmark");
-        total.append(icon);
-      }
+      const icons = document.createElement("div");
+      icons.classList.add("icons");
+      if ( total.classList.contains("critical") ) icons.append(makeIcon("fa-check"), makeIcon("fa-check"));
+      else if ( total.classList.contains("fumble") ) icons.append(makeIcon("fa-xmark"), makeIcon("fa-xmark"));
+      else if ( total.classList.contains("success") ) icons.append(makeIcon("fa-check"));
+      else if ( total.classList.contains("failure") ) icons.append(makeIcon("fa-xmark"));
+      if ( icons.children.length ) total.append(icons);
     }
   }
 
@@ -345,29 +354,26 @@ export default class ChatMessage5e extends ChatMessage {
     const targets = this.getFlag("dnd5e", "targets");
     if ( !game.user.isGM || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
     const tray = document.createElement("div");
-    tray.classList.add("dnd5e2", "card-tray", "targets-tray", "collapsible", "collapsed");
+    tray.classList.add("dnd5e2");
     tray.innerHTML = `
-      <label class="roboto-upper">
-        <i class="fas fa-bullseye" inert></i>
-        <span>${game.i18n.localize("DND5E.TargetPl")}</span>
-        <i class="fas fa-caret-down" inert></i>
-      </label>
-      <div class="collapsible-content">
-        <ul class="dnd5e2 unlist evaluation wrapper"></ul>
+      <div class="card-tray targets-tray collapsible collapsed">
+        <label class="roboto-upper">
+          <i class="fas fa-bullseye" inert></i>
+          <span>${game.i18n.localize("DND5E.TargetPl")}</span>
+          <i class="fas fa-caret-down" inert></i>
+        </label>
+        <div class="collapsible-content">
+          <ul class="dnd5e2 unlist evaluation wrapper"></ul>
+        </div>
       </div>
     `;
     const evaluation = tray.querySelector("ul");
-    evaluation.innerHTML = targets.map(({ name, img, ac, uuid }) => {
+    evaluation.innerHTML = targets.map(({ name, ac, uuid }) => {
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
       return [`
         <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
-          <img src="${img}" alt="${name}">
-          <div class="name-stacked">
-            <span class="title">
-              ${name}
-              <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
-            </span>
-          </div>
+          <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
+          <div class="name">${name}</div>
           <div class="ac">
             <i class="fas fa-shield-halved"></i>
             <span>${ac}</span>
