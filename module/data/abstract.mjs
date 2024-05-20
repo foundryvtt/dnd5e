@@ -155,16 +155,6 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Validation                             */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  validate(options={}) {
-    if ( this.constructor._enableV10Validation === false ) return true;
-    return super.validate(options);
-  }
-
-  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
@@ -191,6 +181,14 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------- */
   /*  Data Validation                             */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  validate(options={}) {
+    if ( this.constructor._enableV10Validation === false ) return true;
+    return super.validate(options);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -360,11 +358,17 @@ export class ItemDataModel extends SystemDataModel {
 
   /**
    * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
-   * @property {boolean} singleton  Should only a single item of this type be allowed on an actor?
+   * @property {boolean} enchantable    Can this item be modified by enchantment effects?
+   * @property {boolean} inventoryItem  Should this item be listed with an actor's inventory?
+   * @property {number} inventoryOrder  Order this item appears in the actor's inventory, smaller numbers are earlier.
+   * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
    */
 
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: false,
+    inventoryItem: false,
+    inventoryOrder: Infinity,
     singleton: false
   }, {inplace: false}));
 
@@ -373,6 +377,18 @@ export class ItemDataModel extends SystemDataModel {
    * @type {string}
    */
   static ITEM_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    if ( this.parent.isEmbedded ) {
+      const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent.flags.core?.sourceId;
+      if ( sourceId ) this.parent.actor?.sourcedItems?.set(sourceId, this.parent);
+    }
+  }
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
@@ -500,8 +516,7 @@ export class ItemDataModel extends SystemDataModel {
    * @returns {object}
    */
   getRollData({ deterministic=false }={}) {
-    if ( !this.parent.actor ) return null;
-    const actorRollData = this.parent.actor.getRollData({ deterministic });
+    const actorRollData = this.parent.actor?.getRollData({ deterministic }) ?? {};
     const data = { ...actorRollData, item: { ...this } };
     return data;
   }

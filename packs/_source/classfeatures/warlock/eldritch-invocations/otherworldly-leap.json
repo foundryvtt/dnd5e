@@ -79,7 +79,10 @@
       "charged": false
     },
     "crewed": false,
-    "properties": []
+    "properties": [],
+    "prerequisites": {
+      "level": 9
+    }
   },
   "flags": {},
   "img": "icons/magic/light/beam-strike-orange-gold.webp",
@@ -88,10 +91,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234342,
-    "modifiedTime": 1704824715249,
+    "modifiedTime": 1712073609547,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!8zciiglzEOZo7DDN"

@@ -330,9 +330,10 @@ export default class AdvancementManager extends Application {
    * @private
    */
   createLevelChangeSteps(classItem, levelDelta) {
+    const raceItem = this.clone.system?.details?.race;
     const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => ({ flow, ...data })));
     const getItemFlows = characterLevel => this.clone.items.contents.flatMap(i => {
-      if ( ["class", "subclass"].includes(i.type) ) return [];
+      if ( ["class", "subclass", "race"].includes(i.type) ) return [];
       return this.constructor.flowsForLevel(i, characterLevel);
     });
 
@@ -341,6 +342,7 @@ export default class AdvancementManager extends Application {
       const classLevel = classItem.system.levels + offset;
       const characterLevel = (this.actor.system.details.level ?? 0) + offset;
       const stepData = { type: "forward", class: {item: classItem, level: classLevel} };
+      pushSteps(this.constructor.flowsForLevel(raceItem, characterLevel), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem, classLevel), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel), stepData);
       pushSteps(getItemFlows(characterLevel), stepData);
@@ -354,6 +356,7 @@ export default class AdvancementManager extends Application {
       pushSteps(getItemFlows(characterLevel).reverse(), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel).reverse(), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem, classLevel).reverse(), stepData);
+      pushSteps(this.constructor.flowsForLevel(raceItem, characterLevel).reverse(), stepData);
       if ( classLevel === 1 ) this.steps.push({ type: "delete", item: classItem, automatic: true });
     }
 

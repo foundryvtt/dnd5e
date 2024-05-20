@@ -119,13 +119,17 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
-   * Adjust exhaustion level based on Active Effects.
-   * @this {CharacterData|NPCData}
+   * Initialize base encumbrance fields to be targeted by active effects.
+   * @this {CharacterData|NPCData|VehicleData}
    */
-  static prepareExhaustionLevel() {
-    const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-    const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
-    this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
+  static prepareBaseEncumbrance() {
+    const encumbrance = this.attributes.encumbrance ??= {};
+    encumbrance.multipliers = {
+      encumbered: "1", heavilyEncumbered: "1", maximum: "1", overall: "1"
+    };
+    encumbrance.bonuses = {
+      encumbered: "", heavilyEncumbered: "", maximum: "", overall: ""
+    };
   }
 
   /* -------------------------------------------- */
@@ -141,6 +145,83 @@ export default class AttributesFields {
     const ability = this.abilities?.[abilityId] || {};
     const bonus = simplifyBonus(concentration.bonuses.save, rollData);
     concentration.save = (ability.save ?? 0) + bonus;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate encumbrance details for an Actor.
+   * @this {CharacterData|NPCData|VehicleData}
+   * @param {object} rollData  The Actor's roll data.
+   */
+  static prepareEncumbrance(rollData) {
+    const config = CONFIG.DND5E.encumbrance;
+    const encumbrance = this.attributes.encumbrance ??= {};
+    const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[this.parent.type]
+      ?? CONFIG.DND5E.encumbrance.baseUnits.default;
+    const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+
+    // Get the total weight from items
+    let weight = this.parent.items
+      .filter(item => !item.container)
+      .reduce((weight, item) => weight + (item.system.totalWeightIn?.(baseUnits[unitSystem]) ?? 0), 0);
+
+    // [Optional] add Currency Weight (for non-transformed actors)
+    const currency = this.currency;
+    if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
+      const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
+      const currencyPerWeight = config.currencyPerWeight[unitSystem];
+      weight += numCoins / currencyPerWeight;
+    }
+
+    // Determine the Encumbrance size class
+    const keys = Object.keys(CONFIG.DND5E.actorSizes);
+    const index = keys.findIndex(k => k === this.traits.size);
+    const sizeConfig = CONFIG.DND5E.actorSizes[
+      keys[this.parent.flags.dnd5e?.powerfulBuild ? Math.min(index + 1, keys.length - 1) : index]
+    ];
+    const sizeMod = sizeConfig?.capacityMultiplier ?? sizeConfig?.token ?? 1;
+    let maximumMultiplier;
+
+    const calculateThreshold = threshold => {
+      let base = this.abilities.str?.value ?? 10;
+      const bonus = simplifyBonus(encumbrance.bonuses?.[threshold], rollData)
+        + simplifyBonus(encumbrance.bonuses?.overall, rollData);
+      let multiplier = simplifyBonus(encumbrance.multipliers[threshold], rollData)
+        * simplifyBonus(encumbrance.multipliers.overall, rollData);
+      if ( threshold === "maximum" ) maximumMultiplier = multiplier;
+      if ( this.parent.type === "vehicle" ) base = this.attributes.capacity.cargo;
+      else multiplier *= (config.threshold[threshold]?.[unitSystem] ?? 1) * sizeMod;
+      return (base * multiplier).toNearest(0.1) + bonus;
+    };
+
+    // Populate final Encumbrance values
+    encumbrance.value = weight.toNearest(0.1);
+    encumbrance.thresholds = {
+      encumbered: calculateThreshold("encumbered"),
+      heavilyEncumbered: calculateThreshold("heavilyEncumbered"),
+      maximum: calculateThreshold("maximum")
+    };
+    encumbrance.max = encumbrance.thresholds.maximum;
+    encumbrance.mod = (sizeMod * maximumMultiplier).toNearest(0.1);
+    encumbrance.stops = {
+      encumbered: Math.clamp((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100),
+      heavilyEncumbered: Math.clamp((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
+    };
+    encumbrance.pct = Math.clamp((encumbrance.value * 100) / encumbrance.max, 0, 100);
+    encumbrance.encumbered = encumbrance.value > encumbrance.heavilyEncumbered;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust exhaustion level based on Active Effects.
+   * @this {CharacterData|NPCData}
+   */
+  static prepareExhaustionLevel() {
+    const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
+    const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
+    this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
   }
 
   /* -------------------------------------------- */
@@ -162,7 +243,7 @@ export default class AttributesFields {
     hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
     hp.value = Math.min(hp.value, hp.effectiveMax);
     hp.damage = hp.effectiveMax - hp.value;
-    hp.pct = Math.clamped(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
+    hp.pct = Math.clamp(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
   }
 
   /* -------------------------------------------- */
@@ -215,7 +296,7 @@ export default class AttributesFields {
     }
     if ( race.system.movement.hover ) this.attributes.movement.hover = true;
     if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;
-    else this.attributes.movement.units ??= race.system.movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+    else this.attributes.movement.units ??= race.system.movement.units;
 
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
       if ( !race.system.senses[key] || (!force && (this.attributes.senses[key] !== null)) ) continue;
@@ -223,6 +304,6 @@ export default class AttributesFields {
     }
     this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
     if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
-    else this.attributes.senses.units ??= race.system.senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+    else this.attributes.senses.units ??= race.system.senses.units;
   }
 }

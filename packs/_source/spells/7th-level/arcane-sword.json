@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "rsak",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -94,9 +94,32 @@
       "vocal",
       "somatic",
       "material",
-      "concentration"
+      "concentration",
+      "mgc"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "match": {
+        "proficiency": false,
+        "attacks": true,
+        "saves": false
+      },
+      "bonuses": {
+        "ac": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "creatureTypes": [],
+      "profiles": [
+        {
+          "name": "",
+          "_id": "wPuXJHCG0YZ72HSI",
+          "uuid": "Compendium.dnd5e.monsters.Actor.Tac7eq0AXJco0nml"
+        }
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -105,10 +128,10 @@
   "folder": "irCSpQWIMtp978TA",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234120,
-    "modifiedTime": 1704823523382,
+    "modifiedTime": 1712087139676,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LTDNWoFVJNLjiiNa"

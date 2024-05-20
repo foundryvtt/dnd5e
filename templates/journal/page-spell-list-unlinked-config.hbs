@@ -1,0 +1,44 @@
+<form autocomplete="off">
+    <fieldset>
+        <legend>{{ localize "TYPES.Item.spell" }}</legend>
+        <div class="form-group">
+            <label>{{ localize "Name" }}</label>
+            <input type="text" name="name" value="{{ name }}">
+        </div>
+        <div class="form-group">
+            <label>{{ localize "DND5E.SpellLevel" }}</label>
+            <select name="system.level">
+                {{ selectOptions CONFIG.spellLevels selected=system.level }}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "DND5E.SpellSchool" }}</label>
+            <select name="system.school">
+                {{ selectOptions CONFIG.spellSchools selected=system.school labelAttr="label" blank="" }}
+            </select>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>{{ localize "DND5E.Source" }}</legend>
+        <div class="form-group">
+            <label>{{ localize "DND5E.SourceBook" }}</label>
+            <input type="text" name="source.book" value="{{ source.book }}" list="{{ appId }}-books">
+            <datalist id="{{ appId }}-books">
+                {{selectOptions CONFIG.sourceBooks}}
+            </datalist>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "DND5E.SourcePage" }}</label>
+            <input type="text" name="source.page" value="{{ source.page }}">
+        </div>
+        <div class="form-group">
+            <label>{{ localize "DND5E.SourceCustom" }}</label>
+            <input type="text" name="source.custom" value="{{ source.custom }}">
+        </div>
+        <div class="form-group">
+            <label>{{ localize "DND5E.SourceUUID" }}</label>
+            <input type="text" name="source.uuid" value="{{ source.uuid }}">
+        </div>
+    </fieldset>
+    <button type="submit"><i class="fa-regular fa-save"></i> {{ localize "Submit" }}</button>
+</form>

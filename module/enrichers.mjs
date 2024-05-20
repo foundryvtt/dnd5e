@@ -1,8 +1,10 @@
-import { formatNumber, simplifyBonus } from "./utils.mjs";
+import { formatNumber, getSceneTargets, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
+import JournalSpellListPageSheet from "./applications/journal/spells-page-sheet.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import Item5e from "./documents/item.mjs";
+import { rollItem } from "./documents/macro.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "");
 
@@ -11,11 +13,8 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
-    enricher: enrichString
-  },
-  {
-    pattern: /\[\[(?<type>lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern:
+      /\[\[\/(?<type>award|check|damage|healing|item|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -48,6 +47,7 @@ async function enrichString(match, options) {
   config._input = match[0];
   switch ( type.toLowerCase() ) {
     case "award": return enrichAward(config, label, options);
+    case "healing": config._isHealing = true;
     case "damage": return enrichDamage(config, label, options);
     case "check":
     case "skill":
@@ -55,6 +55,7 @@ async function enrichString(match, options) {
     case "lookup": return enrichLookup(config, label, options);
     case "save": return enrichSave(config, label, options);
     case "embed": return enrichEmbed(config, label, options);
+    case "item": return enrichItem(config, label, options);
     case "reference": return enrichReference(config, label, options);
   }
   return null;
@@ -326,25 +327,37 @@ async function enrichSave(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> 8d4dl
  * </a> force
  * ````
+ *
+ * @example Create a healing link:
+ * ```[[/healing 2d6]]``` or ```[[/damage 2d6 healing]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="healing">
+ *   <i class="fa-solid fa-dice-d20"></i> 2d6
+ * </a> healing
+ * ```
  */
 async function enrichDamage(config, label, options) {
   const formulaParts = [];
   if ( config.formula ) formulaParts.push(config.formula);
   for ( const value of config.values ) {
     if ( value in CONFIG.DND5E.damageTypes ) config.type = value;
+    else if ( value in CONFIG.DND5E.healingTypes ) config.type = value;
     else if ( value === "average" ) config.average = true;
+    else if ( value === "temp" ) config.type = "temphp";
     else formulaParts.push(value);
   }
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
   if ( !config.formula ) return null;
-  config.damageType = config.type;
+  config.damageType = config.type ?? (config._isHealing ? "healing" : null);
   config.type = "damage";
 
   if ( label ) return createRollLink(label, config);
 
+  const typeConfig = CONFIG.DND5E.damageTypes[config.damageType] ?? CONFIG.DND5E.healingTypes[config.damageType];
   const localizationData = {
     formula: createRollLink(config.formula, config).outerHTML,
-    type: game.i18n.localize(CONFIG.DND5E.damageTypes[config.damageType]?.label ?? "").toLowerCase()
+    type: game.i18n.localize(typeConfig?.label ?? "").toLowerCase()
   };
 
   let localizationType = "Short";
@@ -402,6 +415,7 @@ async function enrichEmbed(config, label, options) {
       case "image": return embedImagePage(config, label, options);
       case "text":
       case "rule": return embedTextPage(config, label, options);
+      case "spells": return embedSpellList(config, label, options);
     }
   }
   else if ( config.doc instanceof RollTable ) return embedRollTable(config, label, options);
@@ -614,6 +628,30 @@ async function embedRollTable(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Embed a spell list.
+ * @param {object} config              Configuration data.
+ * @param {string} label               Optional label to use as the table caption.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {Promise<HTMLElement|null>}
+ */
+async function embedSpellList(config, label, options) {
+  for ( const value of config.values ) {
+    if ( value === "table" ) config.table = true;
+    else if ( value in JournalSpellListPageSheet.GROUPING_MODES ) config.grouping = value;
+  }
+  if ( config.table ) config.grouping = "level";
+
+  const sheet = new JournalSpellListPageSheet(config.doc, {
+    editable: false, displayAsTable: config.table, embedRendering: true, grouping: config.grouping
+  });
+  const rendered = await sheet._renderInner(await sheet.getData());
+  config.classes = `spells ${config.classes ?? ""}`;
+  return wrapEmbeddedText(rendered[0].innerHTML, config, label, options);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Wrap embeds in containing elements.
  * @param {string} enriched            Enriched text content to include.
  * @param {object} config              Configuration data.
@@ -752,7 +790,7 @@ async function enrichReference(config, label, options) {
   const span = document.createElement("span");
   span.classList.add("reference-link");
   span.append(doc.toAnchor({ name: label || doc.name }));
-  if ( isCondition ) {
+  if ( isCondition && (config.apply !== false) ) {
     const apply = document.createElement("a");
     apply.classList.add("enricher-action");
     apply.dataset.action = "apply";
@@ -770,6 +808,86 @@ async function enrichReference(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Enrich an item use link to roll an item on the selected token.
+ * @param {string[]} config              Configuration data.
+ * @param {string} [label]               Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {Promise<HTMLElement|null>}  An HTML link if the item link could be built, otherwise null.
+ *
+ * @example Use an item from a Name:
+ * ```[[/item Heavy Crossbow]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item" data-roll-item-name="Heavy Crossbow">
+ *   <i class="fa-solid fa-dice-d20"></i> Heavy Crossbow
+ * </a>
+ * ```
+ *
+ * @example Use an Item from a UUID:
+ * ```[[/item Actor.M4eX4Mu5IHCr3TMf.Item.amUUCouL69OK1GZU]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item" data-roll-item-uuid="Actor.M4eX4Mu5IHCr3TMf.Item.amUUCouL69OK1GZU">
+ *   <i class="fa-solid fa-dice-d20"></i> Bite
+ * </a>
+ * ```
+ *
+ * @example Use an Item from an ID:
+ * ```[[/item amUUCouL69OK1GZU]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item" data-roll-item-uuid="Actor.M4eX4Mu5IHCr3TMf.Item.amUUCouL69OK1GZU">
+ *   <i class="fa-solid fa-dice-d20"></i> Bite
+ * </a>
+ * ```
+ */
+async function enrichItem(config, label, options) {
+  const givenItem = config.values.join(" ");
+  // If config is a UUID
+  const itemUuidMatch = givenItem.match(
+    /^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/
+  );
+  if ( itemUuidMatch ) {
+    const ownerActor = itemUuidMatch.groups.actorid.trim();
+    if ( !label ) {
+      const item = await fromUuid(givenItem);
+      if ( !item ) {
+        console.warn(`Item not found while enriching ${givenItem}.`);
+        return null;
+      }
+      label = item.name;
+    }
+    return createRollLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
+  }
+
+  let foundItem;
+  const foundActor = options.relativeTo instanceof Item
+    ? options.relativeTo.parent
+    : options.relativeTo instanceof Actor ? options.relativeTo : null;
+
+  // If config is an Item ID
+  if ( /^\w{16}$/.test(givenItem) && foundActor ) foundItem = foundActor.items.get(givenItem);
+
+  // If config is a relative UUID
+  if ( givenItem.startsWith(".") ) {
+    try {
+      foundItem = await fromUuid(givenItem, { relative: options.relativeTo });
+    } catch { return null; }
+  }
+
+  if ( foundItem ) {
+    if ( !label ) label = foundItem.name;
+    return createRollLink(label, { type: "item", rollItemUuid: foundItem.uuid });
+  }
+
+  // Finally, if config is an item name
+  if ( !label ) label = givenItem;
+  return createRollLink(label, { type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Add a dataset object to the provided element.
  * @param {HTMLElement} element  Element to modify.
  * @param {object} dataset       Data properties to add.
@@ -777,7 +895,7 @@ async function enrichReference(config, label, options) {
  */
 function _addDataset(element, dataset) {
   for ( const [key, value] of Object.entries(dataset) ) {
-    if ( !["_config", "_input", "values"].includes(key) && value ) element.dataset[key] = value;
+    if ( !key.startsWith("_") && (key !== "values") && value ) element.dataset[key] = value;
   }
 }
 
@@ -884,7 +1002,7 @@ function createRollLink(label, dataset) {
   span.insertAdjacentElement("afterbegin", link);
 
   // Add chat request link for GMs
-  if ( game.user.isGM && (dataset.type !== "damage") ) {
+  if ( game.user.isGM && (dataset.type !== "damage") && (dataset.type !== "item") ) {
     const gmLink = document.createElement("a");
     gmLink.classList.add("enricher-action");
     gmLink.dataset.action = "request";
@@ -952,35 +1070,39 @@ async function rollAction(event) {
   if ( (action === "roll") || !game.user.isGM ) {
     target.disabled = true;
     try {
-      // Fetch the actor that should perform the roll
-      let actor;
-      const speaker = ChatMessage.implementation.getSpeaker();
-      if ( speaker.token ) actor = game.actors.tokens[speaker.token];
-      actor ??= game.actors.get(speaker.actor);
+      switch ( type ) {
+        case "damage": return await rollDamage(event);
+        case "item": return await useItem(target.dataset);
+      }
 
-      if ( !actor && (type !== "damage") ) {
-        ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
+      const tokens = getSceneTargets();
+      if ( !tokens.length ) {
+        ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor", { localize: true });
         return;
       }
 
-      switch ( type ) {
-        case "check":
-          return await actor.rollAbilityTest(ability, options);
-        case "concentration":
-          if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
-          return actor.rollConcentration(options);
-        case "damage":
-          return await rollDamage(event, speaker);
-        case "save":
-          return await actor.rollAbilitySave(ability, options);
-        case "skill":
-          if ( ability ) options.ability = ability;
-          return await actor.rollSkill(skill, options);
-        case "tool":
-          options.ability = ability;
-          return await actor.rollToolCheck(tool, options);
-        default:
-          return console.warn(`D&D 5e | Unknown roll type ${type} provided.`);
+      for ( const token of tokens ) {
+        const actor = token.actor;
+        switch ( type ) {
+          case "check":
+            await actor.rollAbilityTest(ability, options);
+            break;
+          case "concentration":
+            if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+            await actor.rollConcentration(options);
+            break;
+          case "save":
+            await actor.rollAbilitySave(ability, options);
+            break;
+          case "skill":
+            if ( ability ) options.ability = ability;
+            await actor.rollSkill(skill, options);
+            break;
+          case "tool":
+            options.ability = ability;
+            await actor.rollToolCheck(tool, options);
+            break;
+        }
       }
     } finally {
       target.disabled = false;
@@ -1010,21 +1132,21 @@ async function rollAction(event) {
 
 /**
  * Perform a damage roll.
- * @param {Event} event              The click event triggering the action.
- * @param {TokenDocument} [speaker]  Currently selected token, if one exists.
+ * @param {Event} event  The click event triggering the action.
  * @returns {Promise<void>}
  */
-async function rollDamage(event, speaker) {
+async function rollDamage(event) {
   const target = event.target.closest(".roll-link");
   const { formula, damageType } = target.dataset;
 
-  const title = game.i18n.localize("DND5E.DamageRoll");
+  const isHealing = damageType in CONFIG.DND5E.healingTypes;
+  const title = game.i18n.localize(`DND5E.${isHealing ? "Healing" : "Damage"}Roll`);
   const rollConfig = {
     rollConfigs: [{
       parts: [formula],
       type: damageType
     }],
-    flavor: `${title} (${game.i18n.localize(CONFIG.DND5E.damageTypes[damageType]?.label ?? damageType)})`,
+    flavor: title,
     event,
     title,
     messageData: {
@@ -1032,11 +1154,55 @@ async function rollDamage(event, speaker) {
         targets: Item5e._formatAttackTargets(),
         roll: {type: "damage"}
       },
-      speaker
+      speaker: ChatMessage.implementation.getSpeaker()
     }
   };
 
   if ( Hooks.call("dnd5e.preRollDamage", undefined, rollConfig) === false ) return;
   const roll = await damageRoll(rollConfig);
   if ( roll ) Hooks.callAll("dnd5e.rollDamage", undefined, roll);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Use an Item from an Item enricher.
+ * @param {object} [options]
+ * @param {string} [options.rollItemUuid]   Lookup the Item by UUID.
+ * @param {string} [options.rollItemName]   Lookup the Item by name.
+ * @param {string} [options.rollItemActor]  The UUID of a specific Actor that should use the Item.
+ * @returns {Promise}
+ */
+async function useItem({ rollItemUuid, rollItemName, rollItemActor }={}) {
+  // If UUID is provided, always roll that item directly
+  if ( rollItemUuid ) return (await fromUuid(rollItemUuid))?.use();
+
+  if ( !rollItemName ) return;
+  const actor = rollItemActor ? await fromUuid(rollItemActor) : null;
+
+  // If no actor is specified or player isn't owner, fall back to the macro rolling logic
+  if ( !actor?.isOwner ) return rollItem(rollItemName);
+  const token = canvas.tokens.controlled[0];
+
+  // If a token is controlled, and it has an item with the correct name, activate it
+  let item = token?.actor.items.getName(rollItemName);
+
+  // Otherwise check the specified actor for the item
+  if ( !item ) {
+    item = actor.items.getName(rollItemName);
+
+    // Display a warning to indicate the item wasn't rolled from the controlled actor
+    if ( item && canvas.tokens.controlled.length ) ui.notifications.warn(
+      game.i18n.format("MACRO.5eMissingTargetWarn", {
+        actor: token.name, name: rollItemName, type: game.i18n.localize("DOCUMENT.Item")
+      })
+    );
+  }
+
+  if ( item ) return item.use();
+
+  // If no item could be found at all, display a warning
+  ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
+    actor: actor.name, name: rollItemName, type: game.i18n.localize("DOCUMENT.Item")
+  }));
 }

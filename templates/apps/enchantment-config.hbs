@@ -1,0 +1,95 @@
+<form autocomplete="off">
+    <h3 class="form-header flexrow">
+        {{ localize "DND5E.Enchantment.Category.General" }}
+        <button type="button" class="unbutton" data-action="add-enchantment">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            {{ localize 'DND5E.Enchantment.Action.Create' }}
+        </button>
+    </h3>
+    <ul class="dnd5e2 separated-list enchantments flexcol">
+        {{#each enchantments}}
+        <li class="enchantment" data-enchantment-id="{{ id }}">
+            <div class="details flexrow">
+                <span class="name">{{ name }}</span>
+                <div class="list-controls flexrow">
+                    <button type="button" class="unbutton" data-action="edit-enchantment"
+                            data-tooltip="DND5E.Enchantment.Action.Edit"
+                            aria-label="{{ localize 'DND5E.Enchantment.Action.Edit' }}">
+                        <i class="fa-solid fa-pen-to-square fa-fw" inert></i>
+                    </button>
+                    <button type="button" class="unbutton" data-action="delete-enchantment"
+                            data-tooltip="DND5E.Enchantment.Action.Delete"
+                            aria-label="{{ localize 'DND5E.Enchantment.Action.Delete' }}">
+                        <i class="fa-solid fa-trash fa-fw" inert></i>
+                    </button>
+                </div>
+            </div>
+            <div class="additional-tray collapsible {{ collapsed }}">
+                <label class="roboto-upper">
+                    <i class="fa-solid fa-gears" inert></i>
+                    <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+                    <i class="fas fa-caret-down" inert></i>
+                </label>
+                <div class="collapsible-content">
+                    <div class="wrapper">
+                        <div class="form-group">
+                            <label>{{ localize "DND5E.LevelLimit.Label" }}</label>
+                            <div class="form-fields">
+                                <input type="number" name="effects.{{ id }}.flags.dnd5e.enchantment.level.min"
+                                       min="1" step="1" placeholder="0" value="{{ flags.dnd5e.enchantment.level.min }}"
+                                       aria-label="{{ localize 'DND5E.LevelLimit.Min' }}">
+                                <span class="sep">&ndash;</span>
+                                <input type="number" name="effects.{{ id }}.flags.dnd5e.enchantment.level.max"
+                                       min="1" step="1" placeholder="∞" value="{{ flags.dnd5e.enchantment.level.max }}"
+                                       aria-label="{{ localize 'DND5E.LevelLimit.Max' }}">
+                            </div>
+                            <p class="hint">{{ localize "DND5E.Enchantment.Level.Hint" }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "DND5E.Enchantment.Riders.Effect.Label" }}</label>
+                            <multi-select name="effects.{{ id }}.flags.dnd5e.enchantment.riders.effect">
+                                {{#each riderEffects}}
+                                <option value="{{ id }}" {{ selected }}>{{ name }}</option>
+                                {{/each}}
+                            </multi-select>
+                            <p class="hint">{{ localize "DND5E.Enchantment.Riders.Effect.Hint" }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "DND5E.Enchantment.Riders.Item.Label" }}</label>
+                            <document-tags name="effects.{{ id }}.flags.dnd5e.enchantment.riders.item" type="Item"
+                                value="{{ riderItems }}">
+                                {{~#each flags.dnd5e.enchantment.riders.item}}{{{ dnd5e-linkForUuid this }}}{{/each~}}
+                            </document-tags>
+                            <p class="hint">{{ localize "DND5E.Enchantment.Riders.Item.Hint" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {{else}}
+        <li class="empty">{{ localize "DND5E.Enchantment.Category.Empty" }}</li>
+        {{/each}}
+    </ul>
+
+    {{#unless @root.isSpell}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.ClassIdentifier" }}</label>
+        <input type="text" name="classIdentifier" value="{{ enchantment.classIdentifier }}">
+        <p class="hint">{{ localize "DND5E.Enchantment.FIELDS.enchantment.classIdentifier.hint" }}</p>
+    </div>
+    {{/unless}}
+
+    <h3 class="form-header">{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.label" }}</h3>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.allowMagical.label" }}</label>
+        <input type="checkbox" name="restrictions.allowMagical" {{ checked enchantment.restrictions.allowMagical }}>
+        <p class="hint">{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.allowMagical.hint" }}</p>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.type.label" }}</label>
+        <select name="restrictions.type">
+            {{ selectOptions enchantableTypes selected=enchantment.restrictions.type blank="" }}
+        </select>
+        <p class="hint">{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.type.hint" }}</p>
+    </div>
+</form>

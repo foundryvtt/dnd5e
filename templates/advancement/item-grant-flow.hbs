@@ -1,17 +1,26 @@
-<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
-    <h3>{{{title}}}</h3>
+<form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}">
+    <h3>{{{ title }}}</h3>
+
+    {{#if abilities.options}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.SpellAbility" }}</label>
+        <select name="ability">
+            {{ selectOptions abilities.options selected=abilities.selected }}
+        </select>
+    </div>
+    {{/if}}
 
     {{#each items}}
     <div class="item-name flexrow">
-        <div class="item-image" style="background-image: url('{{this.img}}');"></div>
+        <div class="item-image" style="background-image: url('{{ img }}');"></div>
         <label class="flexrow">
             <h4>
-                <a data-uuid="{{uuid}}">{{this.name}}</a>
+                <a data-uuid="{{ uuid }}">{{ name }}</a>
             </h4>
-            {{#if @root.optional}}
-            <input type="checkbox" name="{{this.uuid}}" {{checked this.checked}}>
+            {{#if optional}}
+            <input type="checkbox" name="{{ uuid }}" {{ checked checked }}>
             {{else}}
-            <input type="hidden" name="{{this.uuid}}" value="true" data-dtype="Boolean">
+            <input type="hidden" name="{{ uuid }}" value="true" data-dtype="Boolean">
             {{/if}}
         </label>
     </div>

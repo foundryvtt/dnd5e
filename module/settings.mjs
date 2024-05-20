@@ -193,6 +193,21 @@ export function registerSystemSettings() {
     }
   });
 
+  // Collapse Chat Card Trays
+  game.settings.register("dnd5e", "autoCollapseChatTrays", {
+    name: "SETTINGS.DND5E.COLLAPSETRAYS.Name",
+    hint: "SETTINGS.DND5E.COLLAPSETRAYS.Hint",
+    scope: "client",
+    config: true,
+    default: "older",
+    type: String,
+    choices: {
+      never: "SETTINGS.DND5E.COLLAPSETRAYS.Never",
+      older: "SETTINGS.DND5E.COLLAPSETRAYS.Older",
+      always: "SETTINGS.DND5E.COLLAPSETRAYS.Always"
+    }
+  });
+
   // Allow Polymorphing
   game.settings.register("dnd5e", "allowPolymorphing", {
     name: "SETTINGS.5eAllowPolymorphingN",
@@ -312,17 +327,6 @@ export function registerSystemSettings() {
     type: PrimaryPartyData,
     onChange: s => ui.actors.render()
   });
-
-  // Token Rings
-  game.settings.register("dnd5e", "disableTokenRings", {
-    name: "SETTINGS.5eTokenRings.Name",
-    hint: "SETTINGS.5eTokenRings.Hint",
-    scope: "client",
-    config: true,
-    type: Boolean,
-    default: false,
-    requiresReload: true
-  });
 }
 
 /**
@@ -346,7 +350,7 @@ export function registerDeferredSettings() {
     name: "SETTINGS.DND5E.THEME.Name",
     hint: "SETTINGS.DND5E.THEME.Hint",
     scope: "client",
-    config: true,
+    config: game.release.generation < 12,
     default: "",
     type: String,
     choices: {
@@ -356,13 +360,24 @@ export function registerDeferredSettings() {
     onChange: s => setTheme(document.body, s)
   });
 
-  setTheme(document.body, game.settings.get("dnd5e", "theme"));
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
     setTheme(document.body, game.settings.get("dnd5e", "theme"));
   });
   matchMedia("(prefers-contrast: more)").addEventListener("change", () => {
     setTheme(document.body, game.settings.get("dnd5e", "theme"));
   });
+
+  // Hook into core color scheme setting.
+  if ( game.release.generation > 11 ) {
+    const setting = game.settings.settings.get("core.colorScheme");
+    const { onChange } = setting ?? {};
+    if ( onChange ) setting.onChange = s => {
+      onChange();
+      setTheme(document.body, s);
+    };
+    setTheme(document.body, game.settings.get("core", "colorScheme"));
+  }
+  else setTheme(document.body, game.settings.get("dnd5e", "theme"));
 }
 
 /* -------------------------------------------- */

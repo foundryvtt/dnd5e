@@ -4,12 +4,14 @@
         <button type="button" class="unbutton" data-action="add-profile">
             <i class="fa-solid fa-plus" aria-hidden="true"></i>
             {{ localize 'DND5E.Summoning.Action.Add' }}
-        </a>
+        </button>
     </h3>
-    <ul class="profiles flexcol">
+    <ul class="dnd5e2 separated-list profiles flexcol">
         {{#each profiles}}
-        <li class="profile" data-profile-id="{{ id }}">
+        <li class="profile dnd5e2" data-profile-id="{{ id }}">
             <div class="details flexrow">
+                <input type="text" name="profiles.{{ id }}.count" value="{{ count }}" placeholder="1"
+                       aria-label="{{ localize 'DND5E.Summoning.Count.Label' }}">
                 {{#if document}}
                 {{{ dnd5e-linkForUuid uuid }}}
                 {{else}}
@@ -20,19 +22,51 @@
                 <input type="text" name="profiles.{{ id }}.name" value="{{ name }}" aria-label="{{ localize 'Name' }}"
                        placeholder="{{#if document}}{{ document.name }}{{else}}
                        {{~ localize 'DND5E.Summoning.DisplayName' }}{{/if}}">
-                <button type="button" class="unbutton" data-action="delete-profile"
-                        data-tooltip="DND5E.Summoning.Action.Remove"
-                        aria-label="{{ localize 'DND5E.Summoning.Action.Remove' }}">
-                    <i class="fa-solid fa-trash fa-fw" inert></i>
-                </button>
+                <div class="list-controls">
+                    <button type="button" class="unbutton" data-action="delete-profile"
+                            data-tooltip="DND5E.Summoning.Action.Remove"
+                            aria-label="{{ localize 'DND5E.Summoning.Action.Remove' }}">
+                        <i class="fa-solid fa-trash fa-fw" inert></i>
+                    </button>
+                </div>
             </div>
             <input type="hidden" name="profiles.{{ id }}._id" value="{{ id }}">
             <input type="hidden" name="profiles.{{ id }}.uuid" value="{{ uuid }}">
+            <div class="additional-tray collapsible {{ collapsed }}">
+                <label class="roboto-upper">
+                    <i class="fa-solid fa-gears" inert></i>
+                    <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+                    <i class="fas fa-caret-down" inert></i>
+                </label>
+                <div class="collapsible-content">
+                    <div class="wrapper">
+                        <div class="form-group">
+                            <label>{{ localize "DND5E.LevelLimit.Label" }}</label>
+                            <div class="form-fields">
+                                <input type="number" name="profiles.{{ id }}.level.min" min="1" step="1" placeholder="0"
+                                       value="{{ level.min }}" aria-label="{{ localize 'DND5E.LevelLimit.Min' }}">
+                                <span class="sep">&ndash;</span>
+                                <input type="number" name="profiles.{{ id }}.level.max" min="1" step="1" placeholder="∞"
+                                       value="{{ level.max }}" aria-label="{{ localize 'DND5E.LevelLimit.Max' }}">
+                            </div>
+                            <p class="hint">{{ localize "DND5E.Summoning.Level.Hint" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </li>
         {{else}}
         <li class="empty">{{ localize "DND5E.Summoning.Profile.Empty" }}</li>
         {{/each}}
     </ul>
+
+    {{#unless @root.isSpell}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.ClassIdentifier" }}</label>
+        <input type="text" name="classIdentifier" value="{{ summons.classIdentifier }}">
+        <p class="hint">{{ localize "DND5E.Summoning.Level.IdentifierHint" }}</p>
+    </div>
+    {{/unless}}
 
     <h3 class="form-header">{{ localize "DND5E.Summoning.CreatureChanges.Label" }}</h3>
     <p class="hint">{{ localize "DND5E.Summoning.CreatureChanges.Hint" }}</p>
@@ -47,9 +81,32 @@
         <p class="hint">{{ localize "DND5E.Summoning.Bonuses.ArmorClass.Hint" }}</p>
     </div>
     <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.Bonuses.HitDice.Label" }}</label>
+        <input type="text" name="bonuses.hd" value="{{ summons.bonuses.hd }}">
+        <p class="hint">{{ localize "DND5E.Summoning.Bonuses.HitDice.Hint" }}</p>
+    </div>
+    <div class="form-group">
         <label>{{ localize "DND5E.Summoning.Bonuses.HitPoints.Label" }}</label>
         <input type="text" name="bonuses.hp" value="{{ summons.bonuses.hp }}">
         <p class="hint">{{ localize "DND5E.Summoning.Bonuses.HitPoints.Hint" }}</p>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.CreatureSizes.Label" }}</label>
+        <multi-select name="creatureSizes">
+            {{#each creatureSizes}}
+            <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+            {{/each}}
+        </multi-select>
+        <p class="hint">{{ localize "DND5E.Summoning.CreatureSizes.Hint" }}</p>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.CreatureTypes.Label" }}</label>
+        <multi-select name="creatureTypes">
+            {{#each creatureTypes}}
+            <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+            {{/each}}
+        </multi-select>
+        <p class="hint">{{ localize "DND5E.Summoning.CreatureTypes.Hint" }}</p>
     </div>
 
     <h3 class="form-header">{{ localize "DND5E.Summoning.ItemChanges.Label" }}</h3>

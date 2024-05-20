@@ -1,5 +1,5 @@
+import { SummonsData } from "../data/item/fields/summons-field.mjs";
 import TokenSystemFlags from "../data/token/token-system-flags.mjs";
-import { staticID } from "../utils.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
@@ -16,7 +16,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @type {boolean}
    */
   get hasDynamicRing() {
-    return !!this.getFlag("dnd5e", "tokenRing.enabled");
+    if ( game.release.generation < 12 ) return !!this.getFlag("dnd5e", "tokenRing.enabled");
+    return this.object?.hasDynamicRing;
   }
 
   /* -------------------------------------------- */
@@ -188,7 +189,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /** @override */
   prepareData() {
     super.prepareData();
-    if ( !this.getFlag("dnd5e", "tokenRing.enabled") ) return;
+    if ( !this.hasDynamicRing ) return;
     let size = this.baseActor?.system.traits?.size;
     if ( !this.actorLink ) {
       const deltaSize = this.delta.system.traits?.size;
@@ -255,5 +256,18 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       options.easing = CONFIG.Token.ringClass.easeTwoPeaks;
     }
     this.object.ring.flashColor(Color.from(color), options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+
+    const origin = this.actor?.getFlag("dnd5e", "summon.origin");
+    // TODO: Replace with parseUuid once V11 support is dropped
+    if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.actor.uuid);
   }
 }

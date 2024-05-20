@@ -1,7 +1,8 @@
-import Advancement from "./advancement.mjs";
+import { filteredKeys } from "../../utils.mjs";
 import ItemGrantConfig from "../../applications/advancement/item-grant-config.mjs";
 import ItemGrantFlow from "../../applications/advancement/item-grant-flow.mjs";
 import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";
+import Advancement from "./advancement.mjs";
 
 /**
  * Advancement that automatically grants one or more items to the player. Presents the player with the option of
@@ -48,9 +49,8 @@ export default class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
-    if ( !this.value.added || configMode ) {
-      return this.configuration.items.reduce((html, i) => html + dnd5e.utils.linkForUuid(i.uuid), "");
-    }
+    if ( !this.value.added || configMode ) return this.configuration.items.filter(i => fromUuidSync(i.uuid))
+      .reduce((html, i) => html + dnd5e.utils.linkForUuid(i.uuid), "");
 
     // Link to items on the actor
     else {
@@ -82,31 +82,33 @@ export default class ItemGrantAdvancement extends Advancement {
    * @param {object} data               Data from the advancement form.
    * @param {object} [retainedData={}]  Item data grouped by UUID. If present, this data will be used rather than
    *                                    fetching new data from the source.
+   * @returns {object}
    */
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
-    const spellChanges = this.configuration.spell?.spellChanges ?? {};
-    for ( const [uuid, selected] of Object.entries(data) ) {
-      if ( !selected ) continue;
-
+    const spellChanges = this.configuration.spell?.getSpellChanges({
+      ability: data.ability ?? this.retainedData?.ability ?? this.value?.ability
+    }) ?? {};
+    for ( const uuid of filteredKeys(data) ) {
       let itemData = retainedData[uuid];
       if ( !itemData ) {
-        const source = await fromUuid(uuid);
-        if ( !source ) continue;
-        itemData = source.clone({
-          _id: foundry.utils.randomID(),
-          "flags.dnd5e.sourceId": uuid,
-          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
-        }, {keepId: true}).toObject();
+        itemData = await this.createItemData(uuid);
+        if ( !itemData ) continue;
       }
       if ( itemData.type === "spell" ) foundry.utils.mergeObject(itemData, spellChanges);
 
       items.push(itemData);
       updates[itemData._id] = uuid;
     }
-    this.actor.updateSource({items});
-    this.updateSource({[this.storagePath(level)]: updates});
+    if ( items.length ) {
+      this.actor.updateSource({ items });
+      this.updateSource({
+        "value.ability": data.ability,
+        [this.storagePath(level)]: updates
+      });
+    }
+    return updates;
   }
 
   /* -------------------------------------------- */
@@ -118,7 +120,10 @@ export default class ItemGrantAdvancement extends Advancement {
       this.actor.updateSource({items: [item]});
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
-    this.updateSource({[this.storagePath(level)]: updates});
+    this.updateSource({
+      "value.ability": data.ability,
+      [this.storagePath(level)]: updates
+    });
   }
 
   /* -------------------------------------------- */
@@ -133,7 +138,7 @@ export default class ItemGrantAdvancement extends Advancement {
       this.actor.items.delete(id);
     }
     this.updateSource({[keyPath.replace(/\.([\w\d]+)$/, ".-=$1")]: null});
-    return { items };
+    return { ability: this.value?.ability, items };
   }
 
   /* -------------------------------------------- */

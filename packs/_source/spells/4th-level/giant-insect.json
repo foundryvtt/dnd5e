@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -90,7 +90,60 @@
       "somatic",
       "concentration"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "bonuses": {
+        "ac": "",
+        "hd": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "profiles": [
+        {
+          "count": "10",
+          "name": "",
+          "_id": "xLVPgOloyb3QJ0i1",
+          "uuid": "Compendium.dnd5e.monsters.Actor.Hn8FFLEzscgT7azz",
+          "level": {
+            "min": null,
+            "max": null
+          }
+        },
+        {
+          "count": "",
+          "name": "",
+          "_id": "zzh3sTByUIvUYVvE",
+          "uuid": "Compendium.dnd5e.monsters.Actor.GxgIVRX5GbVTifiF",
+          "level": {
+            "min": null,
+            "max": null
+          }
+        },
+        {
+          "count": "3",
+          "name": "",
+          "_id": "Mjp51GLFAYyA6NgW",
+          "uuid": "Compendium.dnd5e.monsters.Actor.v99wOosUJjUgcUNF",
+          "level": {
+            "min": null,
+            "max": null
+          }
+        },
+        {
+          "count": "5",
+          "name": "",
+          "_id": "LkxYBiqNIyzUJxuH",
+          "uuid": "Compendium.dnd5e.monsters.Actor.4tl0s2SnaLjkoDiI",
+          "level": {
+            "min": null,
+            "max": null
+          }
+        }
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -99,10 +152,10 @@
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234177,
-    "modifiedTime": 1704823524872,
+    "modifiedTime": 1714077185843,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!czXrVRx6XYRWsHAi"

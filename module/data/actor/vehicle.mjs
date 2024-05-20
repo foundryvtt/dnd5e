@@ -150,6 +150,7 @@ export default class VehicleData extends CommonTemplate {
   prepareBaseData() {
     this.attributes.prof = 0;
     AttributesFields.prepareBaseArmorClass.call(this);
+    AttributesFields.prepareBaseEncumbrance.call(this);
   }
 
   /* -------------------------------------------- */
@@ -160,6 +161,7 @@ export default class VehicleData extends CommonTemplate {
     const { originalSaves } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp);
   }
 }

@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "rsak",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -60,15 +60,10 @@
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "4d8",
-          "force"
-        ]
-      ],
-      "versatile": "2d6"
+      "parts": [],
+      "versatile": ""
     },
-    "formula": "1d20+8",
+    "formula": "",
     "save": {
       "ability": "",
       "dc": null,
@@ -94,9 +89,32 @@
       "vocal",
       "somatic",
       "material",
-      "concentration"
+      "concentration",
+      "mgc"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "match": {
+        "proficiency": false,
+        "attacks": true,
+        "saves": false
+      },
+      "bonuses": {
+        "ac": "",
+        "hp": "@attributes.hp.max",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "creatureTypes": [],
+      "profiles": [
+        {
+          "name": "",
+          "_id": "M8uQaRVLa9er5zMP",
+          "uuid": "Compendium.dnd5e.monsters.Actor.iHj5Tkm6HRgXuaWP"
+        }
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -105,10 +123,10 @@
   "folder": "bG9QTayc46rfNkv2",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234166,
-    "modifiedTime": 1704823524601,
+    "modifiedTime": 1712086944357,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!a2KJHCIbY5Mi4Dmn"

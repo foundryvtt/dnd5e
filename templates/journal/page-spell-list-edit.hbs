@@ -1,0 +1,75 @@
+<form class="{{ cssClass }}" autocomplete="off">
+    <div class="left flexcol">
+        {{> journalEntryPageHeader }}
+    
+        <div class="form-group">
+            <label>{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Type.Label" }}</label>
+            <div class="form-fields">
+                <select name="system.type">
+                    {{ selectOptions CONFIG.spellListTypes selected=system.type }}
+                </select>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label>{{ localize "DND5E.Identifier" }}</label>
+            <div class="form-fields">
+                <input type="text" name="system.identifier" value="{{system.identifier}}">
+            </div>
+            <p class="hint">{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.IdentifierHint" }}
+        </div>
+    
+        <div class="form-group">
+            <label>{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Label" }}</label>
+            <div class="form-fields">
+                <select name="system.grouping">
+                    {{ selectOptions GROUPING_MODES selected=system.grouping localize=true }}
+                </select>
+            </div>
+            <p class="hint">
+                {{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Hint" }}
+            </p>
+        </div>
+    
+        <div class="form-group">
+            <label>{{ localize "DND5E.Description" }}</label>
+        </div>
+    
+        {{ editor description target="system.description.value" button=false editable=editable
+           engine="prosemirror" collaborate=false }}
+    </div>
+
+    <div class="right spell-list">
+        <h3 class="flexrow">
+            {{ localize "ITEM.TypeSpellPl" }}
+            <a data-action="add-unlinked" data-tooltip="JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Add"
+               aria-label="{{ localize 'JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Add' }}">
+                <i class="fa-solid fa-plus" inert></i>
+            </a>
+        </h3>
+        <ol class="items-list">
+            {{#each spells}}
+            <li class="item flexrow" data-item-uuid="{{ spell.uuid }}" data-unlinked-id="{{ unlinked._id }}">
+                <div class="item-name">{{{ display }}}</div>
+                <div class="item-controls flexrow">
+                    {{#if unlinked}}
+                    <a class="item-control" data-action="edit-unlinked"
+                       data-tooltip="JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Edit"
+                       aria-label="{{ localize 'JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Edit' }}">
+                        <i class="fa-solid fa-cog" inert></i>
+                    </a>
+                    {{/if}}
+                    <a class="item-control" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                       aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                        <i class="fa-solid fa-trash" inert></i>
+                    </a>
+                </div>
+            </li>
+            {{else}}
+            <li class="empty">
+                {{ localize "JOURNALENTRYPAGE.DND5E.SpellList.DropHint" }}
+            </li>
+            {{/each}}
+        </ol>
+    </div>
+</form>

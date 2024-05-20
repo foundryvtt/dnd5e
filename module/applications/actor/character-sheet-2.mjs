@@ -1,6 +1,5 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { setTheme } from "../../settings.mjs";
 import { formatNumber, simplifyBonus, staticID } from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
@@ -245,8 +244,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     }, { value: 0, label: CONFIG.DND5E.movementTypes.walk });
 
     // Hit Dice
-    context.hd = { value: attributes.hd, max: this.actor.system.details.level };
-    context.hd.pct = Math.clamped(context.hd.max ? (context.hd.value / context.hd.max) * 100 : 0, 0, 100);
+    context.hd = attributes.hd;
 
     // Death Saves
     const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
@@ -344,9 +342,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       context.senses[`custom${i + 1}`] = { label: v.trim() };
     });
     if ( foundry.utils.isEmpty(context.senses) ) delete context.senses;
-
-    // Inventory
-    this._prepareItems(context);
 
     // Spellcasting
     context.spellcasting = [];
@@ -485,7 +480,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         const total = simplifyBonus(v, rollData);
         if ( !total ) return null;
         const value = {
-          label: `${CONFIG.DND5E.damageTypes[k]?.label ?? key} ${formatNumber(total, { signDisplay: "always" })}`,
+          label: `${CONFIG.DND5E.damageTypes[k]?.label ?? k} ${formatNumber(total, { signDisplay: "always" })}`,
           color: total > 0 ? "maroon" : "green"
         };
         const icons = value.icons = [];
@@ -599,7 +594,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
       // Prepared
       const mode = system.preparation?.mode;
-      if ( (mode === "always") || (mode === "prepared") ) {
+      const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
+      if ( config.prepares ) {
         const isAlways = mode === "always";
         const prepared = isAlways || system.preparation.prepared;
         ctx.preparation = {
@@ -754,16 +750,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     requestAnimationFrame(() => game.tooltip.deactivate());
     game.tooltip.deactivate();
 
+    const modes = CONFIG.DND5E.spellPreparationModes;
+
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
     const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
     const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("spell-header");
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.toolIds ) type = "tool";
-    else if ( preparationMode && (level !== "0") && isSlots ) type = "slots";
+    else if ( modes[preparationMode]?.upcast && (level !== "0") && isSlots ) type = "slots";
     if ( !type ) return super._onDragStart(event);
     const dragData = { dnd5e: { action: "favorite", type } };
-    if ( type === "slots" ) dragData.dnd5e.id = preparationMode === "pact" ? "pact" : `spell${level}`;
+    if ( type === "slots" ) dragData.dnd5e.id = (preparationMode === "prepared") ? `spell${level}` : preparationMode;
     else dragData.dnd5e.id = key;
     event.dataTransfer.setData("application/json", JSON.stringify(dragData));
   }
@@ -967,9 +965,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _onFindItem(type) {
     switch ( type ) {
-      case "class": game.packs.get("dnd5e.classes").render(true); break;
-      case "race": game.packs.get("dnd5e.races").render(true); break;
-      case "background": game.packs.get("dnd5e.backgrounds").render(true); break;
+      case "class": game.packs.get(CONFIG.DND5E.sourcePacks.CLASSES)?.render(true); break;
+      case "race": game.packs.get(CONFIG.DND5E.sourcePacks.RACES)?.render(true); break;
+      case "background": game.packs.get(CONFIG.DND5E.sourcePacks.BACKGROUNDS)?.render(true); break;
     }
   }
 
@@ -1004,11 +1002,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _applyItemTooltips(element) {
     if ( "tooltip" in element.dataset ) return;
-    const target = element.closest("[data-item-id], [data-uuid]");
+    const target = element.closest("[data-item-id], [data-effect-id], [data-uuid]");
     let uuid = target.dataset.uuid;
-    if ( !uuid ) {
+    if ( !uuid && target.dataset.itemId ) {
       const item = this.actor.items.get(target.dataset.itemId);
       uuid = item?.uuid;
+    } else if ( !uuid && target.dataset.effectId ) {
+      const { effectId, parentId } = target.dataset;
+      const collection = parentId ? this.actor.items.get(parentId).effects : this.actor.effects;
+      uuid = collection.get(effectId)?.uuid;
     }
     if ( !uuid ) return;
     element.dataset.tooltip = `
@@ -1212,11 +1214,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Legacy resources
     const resources = Object.entries(this.actor.system.resources).reduce((arr, [k, r]) => {
       const { value, max, sr, lr, label } = r;
+      const source = this.actor._source.system.resources[k];
       if ( label && max ) arr.push({
         id: `resources.${k}`,
         type: "resource",
         img: "icons/svg/upgrade.svg",
-        resource: { value, max },
+        resource: { value, max, source },
         css: "uses",
         title: label,
         subtitle: [
@@ -1270,7 +1273,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         itemId: type === "item" ? favorite.id : null,
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
-        preparationMode: type === "slots" ? id === "pact" ? "pact" : "prepared" : null,
+        preparationMode: (type === "slots") ? (/spell\d+/.test(id) ? "prepared" : id) : null,
         key: (type === "skill") || (type === "tool") ? id : null,
         toggle: toggle === undefined ? null : { applicable: true, value: toggle },
         quantity: quantity > 1 ? quantity : "",
@@ -1297,19 +1300,23 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     if ( type === "slots" ) {
       const { value, max, level } = this.actor.system.spells[id] ?? {};
       const uses = { value, max, name: `system.spells.${id}.value` };
-      if ( id === "pact" ) return {
+      if ( !/spell\d+/.test(id) ) return {
         uses, level,
-        title: game.i18n.localize("DND5E.SpellSlotsPact"),
-        subtitle: [game.i18n.localize(`DND5E.SpellLevel${level}`), game.i18n.localize("DND5E.AbbreviationSR")],
-        img: "icons/magic/unholy/silhouette-robe-evil-power.webp"
+        title: game.i18n.localize(`DND5E.SpellSlots${id.capitalize()}`),
+        subtitle: [
+          game.i18n.localize(`DND5E.SpellLevel${level}`),
+          game.i18n.localize(`DND5E.Abbreviation${CONFIG.DND5E.spellcastingTypes[id]?.shortRest ? "SR" : "LR"}`)
+        ],
+        img: CONFIG.DND5E.spellcastingTypes[id]?.img || CONFIG.DND5E.spellcastingTypes.pact.img
       };
 
       const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
+      const isSR = CONFIG.DND5E.spellcastingTypes.leveled.shortRest;
       return {
         uses, level,
         title: game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
-        subtitle: game.i18n.localize("DND5E.AbbreviationLR"),
-        img: `systems/dnd5e/icons/spell-tiers/${id}.webp`
+        subtitle: game.i18n.localize(`DND5E.Abbreviation${isSR ? "SR" : "LR"}`),
+        img: CONFIG.DND5E.spellcastingTypes.leveled.img.replace("{id}", id)
       };
     }
 

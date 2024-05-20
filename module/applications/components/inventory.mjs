@@ -1,3 +1,4 @@
+import Item5e from "../../documents/item.mjs";
 import {parseInputDelta} from "../../utils.mjs";
 import CurrencyManager from "../currency-manager.mjs";
 import ContextMenu5e from "../context-menu.mjs";
@@ -203,6 +204,13 @@ export default class InventoryElement extends HTMLElement {
         callback: li => this._onAction(li[0], "delete")
       },
       {
+        name: "DND5E.Scroll.CreateScroll",
+        icon: '<i class="fa-solid fa-scroll"></i>',
+        callback: async li => Item5e.create(await Item5e.createScrollFromSpell(item), { parent: this.actor }),
+        condition: li => (item.type === "spell") && this.actor?.isOwner,
+        group: "action"
+      },
+      {
         name: "DND5E.ConcentrationBreak",
         icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
         condition: () => this.actor.concentration?.items.has(item),
@@ -214,10 +222,9 @@ export default class InventoryElement extends HTMLElement {
     if ( !this.actor || (this.actor.type === "group") ) return options;
 
     // Toggle Attunement State
-    if ( ("attunement" in item.system) && (item.system.attunement !== CONFIG.DND5E.attunementTypes.NONE) ) {
-      const isAttuned = item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
+    if ( item.system.attunement ) {
       options.push({
-        name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
+        name: item.system.attuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
         icon: "<i class='fas fa-sun fa-fw'></i>",
         condition: () => item.isOwner,
         callback: li => this._onAction(li[0], "attune"),
@@ -284,7 +291,7 @@ export default class InventoryElement extends HTMLElement {
     const item = await this.getItem(itemId);
     const min = event.target.min !== "" ? Number(event.target.min) : -Infinity;
     const max = event.target.max !== "" ? Number(event.target.max) : Infinity;
-    const value = Math.clamped(event.target.valueAsNumber, min, max);
+    const value = Math.clamp(event.target.valueAsNumber, min, max);
     if ( !item || Number.isNaN(value) ) return;
 
     event.target.value = value;
@@ -323,7 +330,7 @@ export default class InventoryElement extends HTMLElement {
     let value = Number(input.value);
     if ( isNaN(value) ) return;
     value += action === "increase" ? 1 : -1;
-    input.value = Math.clamped(value, min, max);
+    input.value = Math.clamp(value, min, max);
     input.dispatchEvent(new Event("change"));
   }
 
@@ -350,10 +357,7 @@ export default class InventoryElement extends HTMLElement {
 
     switch ( action ) {
       case "attune":
-        const isAttuned = item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
-        return item.update({
-          "system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "REQUIRED" : "ATTUNED"]
-        });
+        return item.update({"system.attuned": !item.system.attuned});
       case "create":
         if ( this.document.type === "container" ) return;
         return this._onCreate(target);

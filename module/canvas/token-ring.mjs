@@ -317,11 +317,9 @@ export default class TokenRing {
    * Initialize the Token Rings system, registering the batch plugin and patching PrimaryCanvasGroup#addToken.
    */
   static initialize() {
+    if ( game.release.generation > 11 ) return;
     if ( this.enabled !== null ) throw new Error("TokenRings system already initialized.");
-
-    // Check client setting
-    this.#enabled = !(game.settings.get("dnd5e", "disableTokenRings") ?? false);
-    if ( !this.enabled ) return;
+    this.#enabled = true;
 
     // Configure subject paths.
     for ( const module of game.modules ) {

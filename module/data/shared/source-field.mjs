@@ -10,13 +10,15 @@ const { SchemaField, StringField } = foundry.data.fields;
  */
 export default class SourceField extends SchemaField {
   constructor(fields={}, options={}) {
-    super({
+    fields = {
       book: new StringField({label: "DND5E.SourceBook"}),
       page: new StringField({label: "DND5E.SourcePage"}),
       custom: new StringField({label: "DND5E.SourceCustom"}),
       license: new StringField({label: "DND5E.SourceLicense"}),
       ...fields
-    }, { label: "DND5E.Source", ...options });
+    };
+    Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
+    super(fields, { label: "DND5E.Source", ...options });
   }
 
   /* -------------------------------------------- */

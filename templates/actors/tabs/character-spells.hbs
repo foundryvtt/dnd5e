@@ -36,8 +36,8 @@
 <{{ elements.inventory }} class="inventory-element" v2>
 
     {{!-- Searching & Filtering --}}
-    <item-list-controls for="spellbook" label="{{ localize "DND5E.SpellsSearch" }}" sort="toggle" collection="items"
-                        keep-empty>
+    <item-list-controls for="spellbook" label="{{ localize "DND5E.SpellsSearch" }}" sort="multi" sort-modes="apm"
+                        collection="items" keep-empty>
         <datalist>
             <option value="action">{{ localize "DND5E.Action" }}</option>
             <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
@@ -66,6 +66,7 @@
                 <div class="item-header item-range">{{ localize "DND5E.SpellHeader.Range" }}</div>
                 <div class="item-header item-target">{{ localize "DND5E.SpellHeader.Target" }}</div>
                 <div class="item-header item-roll">{{ localize "DND5E.SpellHeader.Roll" }}</div>
+                <div class="item-header item-uses spell-uses">{{ localize "DND5E.Uses" }}</div>
                 <div class="item-header item-formula">{{ localize "DND5E.SpellHeader.Formula" }}</div>
                 <div class="item-header item-controls"></div>
                 {{#if (and usesSlots editable)}}
@@ -95,7 +96,10 @@
 
                 {{!-- Spells --}}
                 <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
-                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}">
+                    data-item-level="{{ item.system.level }}"
+                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}"
+                    data-item-preparation-mode="{{ item.system.preparation.mode }}"
+                    data-item-preparation-prepared="{{ item.system.preparation.prepared }}">
 
                     {{!-- Spell Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
@@ -107,7 +111,14 @@
                         <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
                         <div class="name name-stacked">
                             <span class="title">{{ item.name }}</span>
-                            <span class="subtitle">{{ item.labels.components.vsm }}</span>
+                            <span class="subtitle">
+                                {{ item.labels.components.vsm }}
+                                {{#if ctx.hasUses}}
+                                <span class="subtitle-uses">
+                                    — {{ item.system.uses.value }} &sol; {{ item.system.uses.max }}
+                                </span>
+                                {{/if}}
+                            </span>
                         </div>
                         <div class="tags">
                             {{#each item.labels.components.all}}
@@ -164,6 +175,16 @@
                             </span>
                             <span class="value">{{ item.system.save.dc }}</span>
                         </div>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Spell Uses --}}
+                    <div class="item-detail item-uses spell-uses {{#unless ctx.hasUses}}empty{{/unless}}">
+                        {{#if ctx.hasUses}}
+                        <input type="text" value="{{ item.system.uses.value }}" placeholder="0" data-dtype="Number"
+                               data-name="system.uses.value" inputmode="numeric" pattern="[+=\-]?\d*">
+                        <span class="separator">&sol;</span>
+                        <span class="max">{{ item.system.uses.max }}</span>
                         {{/if}}
                     </div>
 
