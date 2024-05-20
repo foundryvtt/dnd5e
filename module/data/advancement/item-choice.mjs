@@ -93,6 +93,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
 /**
  * Value data for Item Choice advancement.
  *
+ * @property {string} ability                                  Ability selected for the spells.
  * @property {Record<number, Record<string, string>>} added    Mapping of IDs to UUIDs for items added at each level.
  * @property {Record<number, ItemChoiceReplacement>} replaced  Information on items replaced at each level.
  */
@@ -100,6 +101,7 @@ export class ItemChoiceValueData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
+      ability: new StringField(),
       added: new MappingField(new MappingField(new StringField())),
       replaced: new MappingField(new SchemaField({
         level: new NumberField({integer: true, min: 0}),

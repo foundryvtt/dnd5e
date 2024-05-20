@@ -56,7 +56,8 @@ export default class ItemGrantFlow extends AdvancementFlow {
         obj[k] = CONFIG.DND5E.abilities[k]?.label;
         return obj;
       }, {}) : null,
-      selected: this.ability ?? this.retainedData?.ability ?? config.spell?.ability.first()
+      selected: this.ability ?? this.retainedData?.ability ?? this.advancement.value.ability
+        ?? config.spell?.ability.first()
     };
   }
 
