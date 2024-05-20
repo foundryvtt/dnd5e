@@ -945,18 +945,13 @@
 :is(.dnd5e2, .dnd5e2-journal) .window-resizable-handle {
   border-radius: 0;
   border: none;
-  background: transparent;
   color: var(--dnd5e-color-black);
   overflow: hidden;
-  font-size: 16px;
+  width: 11px;
+  height: 11px;
   cursor: nwse-resize;
-  opacity: .4;
+  opacity: .7;
+  background: transparent url('ui/resize-handle.webp') no-repeat center / contain;
 
-  > i {
-    position: absolute;
-    bottom: -3px;
-    right: 1px;
-
-    &::before { content: "\f7a5"; }
-  }
+  > i { display: none; }
 }
