@@ -167,4 +167,11 @@ export default class Token5e extends Token {
     }
     return super._configureFilterEffect(statusId, active);
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onClickRight(event) {
+    return (canvas?.app?.view?.oncontextmenu) ? canvas.app.view.oncontextmenu(event) : super._onClickRight(event);
+  }
 }
