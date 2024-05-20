@@ -1,4 +1,4 @@
-![Up to date as of 3.1.0](https://img.shields.io/static/v1?label=dnd5e&message=3.1.0&color=informational)
+![Up to date as of 3.2.0](https://img.shields.io/static/v1?label=dnd5e&message=3.2.0&color=informational)
 
 The dnd5e system adds a number of useful enrichers that can be used within journals or in item or actor descriptions. These enrichers will generate text based on the standard formatting used throughout 5e releases and provide rolls and related behavior that properly hooks into the system.
 
@@ -87,6 +87,9 @@ The formula can also include formula values that will be evaluated before the da
 
 > [!Note]
 > Any values entered in the formula will be resolved based on the stats of the owner of the item, not who ultimately performs the roll.
+
+### Healing Enricher
+While healing can be provided using the standard damage enricher using one of the healing types (`healing` or `temp`), there is also a dedicated enricher to make it a bit clearer. This can be used in the format of `[[/healing {formula}]]` for normal healing and `[[/healing {formula} temp]]` for temporary HP. This also accepts the `average` parameter just like the damage enricher.
 
 
 ## Lookup Enrichers
