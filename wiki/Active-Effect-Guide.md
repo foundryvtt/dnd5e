@@ -1,4 +1,4 @@
-![Up to date as of 3.1.0](https://img.shields.io/static/v1?label=dnd5e&message=3.1.0&color=informational)
+![Up to date as of 3.2.0](https://img.shields.io/static/v1?label=dnd5e&message=3.2.0&color=informational)
 
 This document only covers Active Effects available to the Core dnd5e System.
 
@@ -26,9 +26,9 @@ Useful examples:
 
 | Change Mode | Description |
 |------------ | ------------|
-| Add         | Adds the provided value to the specified attribute. For numerical attributes, this can be used to both add and subtract from a particular value by specifying `1` or `-1` as the value to add. |
-| Multiply    | Multiplies the defined attribute by the numeric value in the Effect Value field.|
-| Override    | Replaces the defined attribute with the value provided in the Effect Value field.|
+| Add         | Adds the provided value to the specified attribute. For numerical attributes, this can be used to both add and subtract from a particular value by specifying `1` or `-1` as the value to add. For sets such as an item's properties or character's damage resistances this can be used to add or remove and entry (e.g. `mgc` to add the magical property, or `-mgc` to remove it).  |
+| Multiply    | Multiplies the defined attribute by the numeric value in the Effect Value field. |
+| Override    | Replaces the defined attribute with the value provided in the Effect Value field. If applied to a text value such as a name or description a pair of curly brackets like `{}` can be used to include the value being overriden in the final output. So overriding on the name of "Breastplate" with `Arcane Propulsive {}` will result in the final name of "Arcane Propulsive Breastplate". |
 | Downgrade   | Reduces the defined attribute only in cases where the current value of that attribute would be greater than value specified in the Effect Value field.|
 | Upgrade     | Increases the defined attribute only in cases where the current value of that attribute would be less than value specified in the Effect Value field. |
 | Custom      | The Custom change mode applies logic defined by a game system or add-on module. The dnd5e system does not utilize the Custom Change Mode|
@@ -186,6 +186,23 @@ The number must be one of 0, 0.5, 1, and 2.
 | Attribute Key                    | Change Mode | Effect Value | Roll Data? |
 | -------------------------------- | ----------- | ------------ | ---------- |
 | `system.bonuses.abilities.skill` | Add         | `[formula]`  | Yes        |
+
+---
+
+## Encumbrance
+
+```
+system.attributes.encumbrance.multipliers.encumbered
+                                         .heavilyEncumbered
+                                         .maximum
+                                         .overall
+                             .bonuses.encumbered
+                                     .heavilyEncumbered
+                                     .maximum
+                                     .overall
+```
+
+Multipliers will multiply the default encumbrance values and bonuses will add a fixed amount to them. The values for `encumbered`, `heavilyEncumbered`, and `maximum` apply to the three encumbrance thresholds while `overall` applies to all three equally. Each of these takes a formula.
 
 ---
 
