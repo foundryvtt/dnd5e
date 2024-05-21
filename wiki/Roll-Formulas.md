@@ -1,4 +1,4 @@
-![Up to date as of 3.1.0](https://img.shields.io/static/v1?label=dnd5e&message=3.1.0&color=informational)
+![Up to date as of 3.2.0](https://img.shields.io/static/v1?label=dnd5e&message=3.2.0&color=informational)
 
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
@@ -94,7 +94,21 @@
 
 #### Hit Dice
 
-`@attributes.hd` - The actor's current number of remaining hit dice.
+`@attributes.hd.value` - The actor's current number of remaining hit dice.
+
+`@attributes.hd.max` - The actor's total amount of hit dice.
+
+`@attributes.hd.largest` - The denomination of the actor's largest hit die (e.g. "d8").
+
+`@attributes.hd.smallest` - The denomination of the actor's smallest hit die (e.g. "d8").
+
+`@attributes.hd.largestFace` - The size of the actor's largest hit die (e.g. the "8" of "d8").
+
+`@attributes.hd.smallestFace` - The size of the actor's smallest hit die (e.g. the "8" of "d8").
+
+`@attributes.hd.bySize.[denom]` - How many remaining hit dice the actor has of the specific denomination, e.g., `@attributes.hd.bySize.d6` for the number of remaining d6 hit dice.
+
+`@attributes.hd.pct` - The percentage of remaining hit dice (current over maximum).
 
 #### Hit Points
 
