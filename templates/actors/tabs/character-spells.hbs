@@ -69,7 +69,7 @@
                 <div class="item-header item-uses spell-uses">{{ localize "DND5E.Uses" }}</div>
                 <div class="item-header item-formula">{{ localize "DND5E.SpellHeader.Formula" }}</div>
                 <div class="item-header item-controls"></div>
-                {{#if (and usesSlots editable)}}
+                {{#if (and usesSlots @root.editable)}}
                 <a class="config-button" data-action="spellSlots" data-tooltip="DND5E.SpellSlotsConfig"
                    aria-label="{{ localize "DND5E.SpellSlotsConfig" }}">
                     <i class="fas fa-cog"></i>
