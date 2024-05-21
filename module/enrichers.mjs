@@ -18,6 +18,10 @@ export function registerCustomEnrichers() {
     enricher: enrichString
   },
   {
+    pattern: /\[\[(?<type>lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    enricher: enrichString
+  },
+  {
     pattern: /&(?<type>Reference)\[(?<config>[^\]]+)](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
