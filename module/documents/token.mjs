@@ -17,7 +17,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    */
   get hasDynamicRing() {
     if ( game.release.generation < 12 ) return !!this.getFlag("dnd5e", "tokenRing.enabled");
-    return this.object?.hasDynamicRing;
+    return this.ring.enabled;
   }
 
   /* -------------------------------------------- */
@@ -248,6 +248,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @param {string} type     The key to determine the type of flashing.
    */
   flashRing(type) {
+    if ( !this.rendered ) return;
     const color = CONFIG.DND5E.tokenRingColors[type];
     if ( !color ) return;
     const options = {};
@@ -255,7 +256,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       options.duration = 500;
       options.easing = CONFIG.Token.ringClass.easeTwoPeaks;
     }
-    this.object.ring.flashColor(Color.from(color), options);
+    this.object.ring?.flashColor(Color.from(color), options);
   }
 
   /* -------------------------------------------- */
