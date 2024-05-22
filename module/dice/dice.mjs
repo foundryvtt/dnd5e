@@ -23,6 +23,9 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
  * @property {string} [mastery]        Weapon mastery to use with an attack roll.
  *
+ * @property {number} [minimumRoll]    The minimum possible result of the d20.
+ * @property {number} [maximumRoll]    The maximum possible result of the d20.
+ *
  * ## Flags
  * @property {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
  * @property {boolean} [halflingLucky]   Allow Halfling Luck to modify this roll?
@@ -57,6 +60,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
 export async function d20Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue, mastery,
+  minimumRoll, maximumRoll,
   elvenAccuracy, halflingLucky, reliableTalent,
   fastForward, ammunitionOptions, attackModes, chooseModifier=false, masteryOptions, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
@@ -83,6 +87,8 @@ export async function d20Roll({
     fumble,
     targetValue,
     mastery,
+    minimumRoll,
+    maximumRoll,
     elvenAccuracy,
     halflingLucky,
     reliableTalent
