@@ -5,24 +5,28 @@ import AdvancementConfig from "./advancement-config.mjs";
  */
 export default class ItemChoiceConfig extends AdvancementConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "item-choice", "two-column"],
+      classes: ["dnd5e", "advancement", "item-choice", "three-column"],
       dragDrop: [{ dropSelector: ".drop-target" }],
       dropKeyPath: "pool",
       template: "systems/dnd5e/templates/advancement/item-choice-config.hbs",
-      width: 540
+      width: 780
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData(options={}) {
     const indexes = this.advancement.configuration.pool.map(i => fromUuidSync(i.uuid));
     const context = {
       ...super.getData(options),
+      abilities: Object.entries(CONFIG.DND5E.abilities).reduce((obj, [k, c]) => {
+        obj[k] = { label: c.label, selected: this.advancement.configuration.spell?.ability.has(k) ? "selected" : "" };
+        return obj;
+      }, {}),
       showContainerWarning: indexes.some(i => i?.type === "container"),
       showSpellConfig: this.advancement.configuration.type === "spell",
       validTypes: this.advancement.constructor.VALID_TYPES.reduce((obj, type) => {
@@ -30,6 +34,10 @@ export default class ItemChoiceConfig extends AdvancementConfig {
         return obj;
       }, {})
     };
+    context.choices = Object.entries(context.levels).reduce((obj, [level, label]) => {
+      obj[level] = { label, ...this.advancement.configuration.choices[level] };
+      return obj;
+    }, {});
     if ( this.advancement.configuration.type === "feat" ) {
       const selectedType = CONFIG.DND5E.featureTypes[this.advancement.configuration.restriction.type];
       context.typeRestriction = {
@@ -44,9 +52,10 @@ export default class ItemChoiceConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async prepareConfigurationUpdate(configuration) {
     if ( configuration.choices ) configuration.choices = this.constructor._cleanedObject(configuration.choices);
+    if ( configuration.spell ) configuration.spell.ability ??= [];
 
     // Ensure items are still valid if type restriction or spell restriction are changed
     const pool = [];
@@ -62,7 +71,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _validateDroppedItem(event, item) {
     this.advancement._validateItemType(item);
   }

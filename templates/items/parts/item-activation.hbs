@@ -37,8 +37,8 @@
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
         {{#if system.hasScalarTarget}}
-            <input type="number" step="any" name="system.target.value"
-                   value="{{system.target.value}}" placeholder="&mdash;">
+            <input type="text" name="system.target.value" value="{{source.target.value}}"
+                   placeholder="&mdash;" data-formula-editor>
         {{/if}}
         {{#if system.hasAreaTarget}}
             <select name="system.target.units" data-tooltip="DND5E.TargetUnits">
@@ -149,10 +149,15 @@
     <div class="form-fields">
         {{#if system.consume.type}}
             <input type="number" step="any" name="system.consume.amount" value="{{system.consume.amount}}"
-                   data-tooltip="DND5E.ConsumeAmount">
+                   data-tooltip="DND5E.ConsumeAmount" placeholder="{{ localize 'DND5E.QuantityAbbr' }}">
+            {{#if abilityConsumptionHint}}
+            <input type="text" name="system.consume.target" value="{{ system.consume.target }}"
+                   placeholder="{{ localize abilityConsumptionHint }}">
+            {{else}}
             <select name="system.consume.target" data-tooltip="DND5E.ConsumeTarget">
                 {{selectOptions abilityConsumptionTargets selected=system.consume.target blank=""}}
             </select>
+            {{/if}}
         {{/if}}
         <select name="system.consume.type" data-tooltip="DND5E.ConsumeType">
             {{selectOptions config.abilityConsumptionTypes selected=system.consume.type blank=(localize "DND5E.None")}}

@@ -4,16 +4,8 @@
 export default class Token5e extends Token {
   constructor(...args) {
     super(...args);
-    this.ring = new CONFIG.Token.ringClass(this);
+    if ( game.release.generation < 12 ) this.ring = new CONFIG.Token.ringClass(this);
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Dynamic token ring.
-   * @type {TokenRing}
-   */
-  ring;
 
   /* -------------------------------------------- */
 
@@ -39,7 +31,7 @@ export default class Token5e extends Token {
    * @param {boolean} targeted    Is the token targeted or not?
    */
   static onTargetToken(user, token, targeted) {
-    if ( !targeted || !token.ring.enabled ) return;
+    if ( !targeted || !token.ring?.enabled ) return;
     const color = Color.from(user.color);
     token.ring.flashColor(color, { duration: 500, easing: CONFIG.Token.ringClass.easeTwoPeaks });
   }
@@ -49,7 +41,7 @@ export default class Token5e extends Token {
   /** @inheritdoc */
   async _draw() {
     // Cache the subject texture if needed
-    if ( this.ring.enabled ) {
+    if ( (game.release.generation < 12) && this.ring.enabled ) {
       const subjectName = this.document.subjectPath;
       const cached = PIXI.Assets.cache.has(subjectName);
       if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
@@ -86,8 +78,8 @@ export default class Token5e extends Token {
     let displayMax = max + (tempmax > 0 ? tempmax : 0);
 
     // Allocate percentages of the total
-    const tempPct = Math.clamped(temp, 0, displayMax) / displayMax;
-    const colorPct = Math.clamped(value, 0, effectiveMax) / displayMax;
+    const tempPct = Math.clamp(temp, 0, displayMax) / displayMax;
+    const colorPct = Math.clamp(value, 0, effectiveMax) / displayMax;
     const hpColor = dnd5e.documents.Actor5e.getHPColor(value, effectiveMax);
 
     // Determine colors to use
@@ -98,7 +90,7 @@ export default class Token5e extends Token {
     const w = this.w;
     let h = Math.max((canvas.dimensions.size / 12), 8);
     if ( this.document.height >= 2 ) h *= 1.6;
-    const bs = Math.clamped(h / 8, 1, 2);
+    const bs = Math.clamp(h / 8, 1, 2);
     const bs1 = bs+1;
 
     // Overall bar container
@@ -135,7 +127,7 @@ export default class Token5e extends Token {
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    if ( !CONFIG.Token.ringClass.enabled ) return;
+    if ( !CONFIG.Token.ringClass.enabled || (game.release.generation > 11) ) return;
 
     // Update ring names if necessary
     const shapeChange = ("height" in data) || ("width" in data) || ("texture" in data);

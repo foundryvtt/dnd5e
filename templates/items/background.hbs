@@ -41,6 +41,16 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+            {{!-- Identifier --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.Identifier" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.identifier" value="{{ system.identifier }}"
+                           placeholder="{{ item.identifier }}">
+                </div>
+                <p class="hint">{{ localize "DND5E.IdentifierError" }}</p>
+            </div>
+
             {{!-- Starting Equipment --}}
             <h3 class="form-header">
                 {{ localize "DND5E.StartingEquipment.Title" }}

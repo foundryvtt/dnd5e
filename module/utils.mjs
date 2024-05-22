@@ -79,6 +79,39 @@ export function parseInputDelta(input, target) {
 /* -------------------------------------------- */
 
 /**
+ * Replace referenced data attributes in the roll formula with values from the provided data.
+ * If the attribute is not found in the provided data, display a warning on the actor.
+ * @param {string} formula           The original formula within which to replace.
+ * @param {object} data              The data object which provides replacements.
+ * @param {object} options
+ * @param {Actor5e} [options.actor]  Actor upon which to display the preparation warnings.
+ * @param {string} options.property  Name of the property to which this formula belongs.
+ * @returns {string}                 Formula with replaced data.
+ */
+export function replaceFormulaData(formula, data, { actor, property }) {
+  const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
+  const missingReferences = new Set();
+  formula = formula.replace(dataRgx, (match, term) => {
+    let value = foundry.utils.getProperty(data, term);
+    if ( value == null ) {
+      missingReferences.add(match);
+      return "0";
+    }
+    return String(value).trim();
+  });
+  if ( (missingReferences.size > 0) && actor ) {
+    const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
+    const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
+      property, name: this.name, references: listFormatter.format(missingReferences)
+    });
+    actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
+  }
+  return formula;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Convert a bonus value to a simple integer for displaying on the sheet.
  * @param {number|string|null} bonus  Bonus formula.
  * @param {object} [data={}]          Data to use for replacing @ strings.
@@ -175,27 +208,24 @@ export function indexFromUuid(uuid) {
 
 /**
  * Creates an HTML document link for the provided UUID.
- * @param {string} uuid  UUID for which to produce the link.
- * @returns {string}     Link to the item or empty string if item wasn't found.
+ * Try to build links to compendium content synchronously to avoid DB lookups.
+ * @param {string} uuid               UUID for which to produce the link.
+ * @param {object} [options]
+ * @param {string} [options.tooltip]  Tooltip to add to the link.
+ * @returns {string}                  Link to the item or empty string if item wasn't found.
  */
-export function linkForUuid(uuid) {
-  if ( game.release.generation < 12 ) {
-    return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+export function linkForUuid(uuid, { tooltip }={}) {
+  let doc = fromUuidSync(uuid);
+  if ( !doc ) return "";
+  if ( uuid.startsWith("Compendium.") && !(doc instanceof foundry.abstract.Document) ) {
+    const {collection} = foundry.utils.parseUuid(uuid);
+    const cls = collection.documentClass;
+    // Minimal "shell" of a document using index data
+    doc = new cls(foundry.utils.deepClone(doc), {pack: collection.metadata.id});
   }
-
-  // TODO: When v11 support is dropped we can make this method async and return to using TextEditor._createContentLink.
-  if ( uuid.startsWith("Compendium.") ) {
-    let [, scope, pack, documentName, id] = uuid.split(".");
-    if ( !CONST.PRIMARY_DOCUMENT_TYPES.includes(documentName) ) id = documentName;
-    const data = {
-      classes: ["content-link"],
-      attrs: { draggable: "true" }
-    };
-    TextEditor._createLegacyContentLink("Compendium", [scope, pack, id].join("."), "", data);
-    data.dataset.link = "";
-    return TextEditor.createAnchor(data).outerHTML;
-  }
-  return fromUuidSync(uuid).toAnchor().outerHTML;
+  const a = doc.toAnchor();
+  if ( tooltip ) a.dataset.tooltip = tooltip;
+  return a.outerHTML;
 }
 
 /* -------------------------------------------- */
@@ -210,6 +240,27 @@ export function getSceneTargets() {
   let targets = canvas.tokens.controlled.filter(t => t.actor);
   if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
   return targets;
+}
+
+/* -------------------------------------------- */
+/*  Conversions                                 */
+/* -------------------------------------------- */
+
+/**
+ * Convert the provided weight to another unit.
+ * @param {number} value  The weight being converted.
+ * @param {string} from   The initial units.
+ * @param {string} to     The final units.
+ * @returns {number}      Weight in the specified units.
+ */
+export function convertWeight(value, from, to) {
+  if ( from === to ) return value;
+  const message = unit => `Weight unit ${unit} not defined in CONFIG.DND5E.weightUnits`;
+  if ( !CONFIG.DND5E.weightUnits[from] ) throw new Error(message(from));
+  if ( !CONFIG.DND5E.weightUnits[to] ) throw new Error(message(to));
+  return value
+    * CONFIG.DND5E.weightUnits[from].conversion
+    / CONFIG.DND5E.weightUnits[to].conversion;
 }
 
 /* -------------------------------------------- */
@@ -414,7 +465,7 @@ export function registerHandlebarsHelpers() {
     "dnd5e-concealSection": concealSection,
     "dnd5e-dataset": dataset,
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
-    "dnd5e-linkForUuid": linkForUuid,
+    "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-itemContext": itemContext,
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
     "dnd5e-textFormat": formatText
@@ -562,7 +613,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   // Spell slots.
   else if ( attr.startsWith("spells.") ) {
     const [, key] = attr.split(".");
-    if ( key === "pact" ) label = "DND5E.SpellSlotsPact";
+    if ( !/spell\d+/.test(key) ) label = `DND5E.SpellSlots${key.capitalize()}`;
     else {
       const plurals = new Intl.PluralRules(game.i18n.lang, {type: "ordinal"});
       const level = Number(key.slice(5));

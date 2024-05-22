@@ -359,7 +359,7 @@ export class MappingField extends foundry.data.fields.ObjectField {
   _validateType(value, options={}) {
     if ( foundry.utils.getType(value) !== "Object" ) throw new Error("must be an Object");
     const errors = this._validateValues(value, options);
-    if ( !foundry.utils.isEmpty(errors) ) throw new foundry.data.fields.ModelValidationError(errors);
+    if ( !foundry.utils.isEmpty(errors) ) throw new foundry.data.validation.DataModelValidationError(errors);
   }
 
   /* -------------------------------------------- */

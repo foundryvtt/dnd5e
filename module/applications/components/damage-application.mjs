@@ -1,3 +1,6 @@
+import { formatNumber } from "../../utils.mjs";
+import ChatTrayElement from "./chat-tray-element.mjs";
+
 /**
  * List of multiplier options as tuples containing their numeric value and rendered text.
  * @type {[number, string][]}
@@ -7,7 +10,7 @@ const MULTIPLIERS = [[-1, "-1"], [0, "0"], [.25, "¼"], [.5, "½"], [1, "1"], [2
 /**
  * Application to handle applying damage from a chat card.
  */
-export default class DamageApplicationElement extends HTMLElement {
+export default class DamageApplicationElement extends ChatTrayElement {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -117,7 +120,8 @@ export default class DamageApplicationElement extends HTMLElement {
     // Build the frame HTML only once
     if ( !this.targetList ) {
       const div = document.createElement("div");
-      div.classList.add("card-tray", "damage-tray", "collapsible", "collapsed");
+      div.classList.add("card-tray", "damage-tray", "collapsible");
+      if ( !this.open ) div.classList.add("collapsed");
       div.innerHTML = `
         <label class="roboto-upper">
           <i class="fa-solid fa-heart-crack"></i>
@@ -151,9 +155,7 @@ export default class DamageApplicationElement extends HTMLElement {
         b.addEventListener("click", this._onChangeTargetMode.bind(this))
       );
       if ( !this.chatMessage.getFlag("dnd5e", "targets")?.length ) this.targetSourceControl.hidden = true;
-      div.querySelector(".collapsible-content").addEventListener("click", event => {
-        event.stopImmediatePropagation();
-      });
+      div.addEventListener("click", this._handleClickHeader.bind(this));
     }
 
     this.targetingMode = this.targetSourceControl.hidden ? "selected" : "targeted";
@@ -198,7 +200,7 @@ export default class DamageApplicationElement extends HTMLElement {
 
     // Calculate damage to apply
     const targetOptions = this.getTargetOptions(uuid);
-    const { total, active } = this.calculateDamage(token, targetOptions);
+    const { temp, total, active } = this.calculateDamage(token, targetOptions);
 
     const types = [];
     for ( const [change, values] of Object.entries(active) ) {
@@ -231,8 +233,11 @@ export default class DamageApplicationElement extends HTMLElement {
         <span class="title">${token.name}</span>
         ${changeSources ? `<span class="subtitle">${changeSources}</span>` : ""}
       </div>
-      <div class="calculated-damage">
+      <div class="calculated damage">
         ${total}
+      </div>
+      <div class="calculated temp" data-tooltip="DND5E.HitPointsTemp">
+        ${temp}
       </div>
       <menu class="damage-multipliers unlist"></menu>
     `;
@@ -260,20 +265,23 @@ export default class DamageApplicationElement extends HTMLElement {
    * Calculate the total damage that will be applied to an actor.
    * @param {Actor5e} actor
    * @param {DamageApplicationOptions} options
-   * @returns {{total: number, active: Record<string, Set<string>>}}
+   * @returns {{temp: number, total: number, active: Record<string, Set<string>>}}
    */
   calculateDamage(actor, options) {
     const damages = actor.calculateDamage(this.damages, options);
 
+    let temp = 0;
     let total = 0;
     let active = { modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set() };
     for ( const damage of damages ) {
-      total += damage.value;
+      if ( damage.type === "temphp" ) temp += damage.value;
+      else total += damage.value;
       if ( damage.active.modification ) active.modification.add(damage.type);
       if ( damage.active.resistance ) active.resistance.add(damage.type);
       if ( damage.active.vulnerability ) active.vulnerability.add(damage.type);
       if ( damage.active.immunity ) active.immunity.add(damage.type);
     }
+    temp = Math.floor(Math.max(0, temp));
     total = total > 0 ? Math.floor(total) : Math.ceil(total);
 
     // Add values from options to prevent active changes from being lost when re-rendering target list
@@ -288,7 +296,7 @@ export default class DamageApplicationElement extends HTMLElement {
       active.immunity = active.immunity.union(options.downgrade);
     }
 
-    return { total, active };
+    return { temp, total, active };
   }
 
   /* -------------------------------------------- */
@@ -323,8 +331,15 @@ export default class DamageApplicationElement extends HTMLElement {
    * @param {DamageApplicationOptions} options
    */
   refreshListEntry(token, entry, options) {
-    const { total } = this.calculateDamage(token, options);
-    entry.querySelector(".calculated-damage").innerText = total;
+    const { temp, total } = this.calculateDamage(token, options);
+    const calculatedDamage = entry.querySelector(".calculated.damage");
+    calculatedDamage.innerText = formatNumber(-total, { signDisplay: "exceptZero" });
+    calculatedDamage.classList.toggle("healing", total < 0);
+    calculatedDamage.dataset.tooltip = `DND5E.${total < 0 ? "Healing" : "Damage"}`;
+    calculatedDamage.hidden = !total && !!temp;
+    const calculatedTemp = entry.querySelector(".calculated.temp");
+    calculatedTemp.innerText = temp;
+    calculatedTemp.hidden = !temp;
 
     const pressedMultiplier = entry.querySelector('.multiplier-button[aria-pressed="true"]');
     if ( Number(pressedMultiplier?.dataset.multiplier) !== options.multiplier ) {
@@ -357,7 +372,7 @@ export default class DamageApplicationElement extends HTMLElement {
       const options = this.getTargetOptions(target.dataset.targetUuid);
       await token?.applyDamage(this.damages, options);
     }
-    this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
+    this.open = false;
   }
 
   /* -------------------------------------------- */

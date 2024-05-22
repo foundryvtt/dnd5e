@@ -1,0 +1,29 @@
+<form>
+    <div class="form-group">
+        <label>{{ localize "TYPES.Item.spell" }}</label>
+        <div class="form-fields">
+            {{{ anchor }}}
+        </div>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Scroll.Explanation.Label" }}</label>
+        <div class="form-fields">
+            <select name="explanation">
+                {{#select explanation}}
+                <option value="full">{{ localize "DND5E.Scroll.Explanation.Complete" }}</option>
+                <option value="reference">{{ localize "DND5E.Scroll.Explanation.Reference" }}</option>
+                <option value="none">{{ localize "DND5E.None" }}</option>
+                {{/select}}
+            </select>
+        </div>
+        <p class="hint">{{ localize "DND5E.Scroll.Explanation.Hint" }}</p>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.SpellLevel" }}</label>
+        <div class="form-fields">
+            <select name="level" data-dtype="Number">
+                {{ selectOptions spellLevels selected=level name="level" }}
+            </select>
+        </div>
+    </div>
+</form>

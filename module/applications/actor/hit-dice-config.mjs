@@ -26,20 +26,18 @@ export default class ActorHitDiceConfig extends BaseConfigSheet {
 
   /** @inheritDoc */
   getData(options) {
+    const classes = this.object.system.attributes.hd.classes;
     return {
-      classes: this.object.items.reduce((classes, item) => {
-        if (item.type === "class") {
-          classes.push({
-            classItemId: item.id,
-            name: item.name,
-            diceDenom: item.system.hitDice,
-            currentHitDice: item.system.levels - item.system.hitDiceUsed,
-            maxHitDice: item.system.levels,
-            canRoll: (item.system.levels - item.system.hitDiceUsed) > 0
-          });
-        }
-        return classes;
-      }, []).sort((a, b) => parseInt(b.diceDenom.slice(1)) - parseInt(a.diceDenom.slice(1)))
+      classes: Array.from(classes).map(item => {
+        return {
+          classItemId: item.id,
+          name: item.name,
+          diceDenom: item.system.hitDice,
+          currentHitDice: item.system.levels - item.system.hitDiceUsed,
+          maxHitDice: item.system.levels,
+          canRoll: (item.system.levels - item.system.hitDiceUsed) > 0
+        };
+      }).sort((a, b) => parseInt(b.diceDenom.slice(1)) - parseInt(a.diceDenom.slice(1)))
     };
   }
 
@@ -50,12 +48,12 @@ export default class ActorHitDiceConfig extends BaseConfigSheet {
     super.activateListeners(html);
 
     // Hook up -/+ buttons to adjust the current value in the form
-    html.find("button.increment,button.decrement").click(event => {
+    html.find("button.increment, button.decrement").click(event => {
       const button = event.currentTarget;
       const current = button.parentElement.querySelector(".current");
       const max = button.parentElement.querySelector(".max");
       const direction = button.classList.contains("increment") ? 1 : -1;
-      current.value = Math.clamped(parseInt(current.value) + direction, 0, parseInt(max.value));
+      current.value = Math.clamp(parseInt(current.value) + direction, 0, parseInt(max.value));
     });
 
     html.find("button.roll-hd").click(this._onRollHitDie.bind(this));

@@ -109,6 +109,13 @@ export default class SpellData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivatedEffectData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getCardData(enrichmentOptions={}) {
     const context = await super.getCardData(enrichmentOptions);
     context.isSpell = true;
@@ -167,23 +174,5 @@ export default class SpellData extends ItemDataModel.mixin(
    */
   get proficiencyMultiplier() {
     return 1;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Provide a backwards compatible getter for accessing `components`.
-   * @deprecated since v3.0.
-   * @type {object}
-   */
-  get components() {
-    foundry.utils.logCompatibilityWarning(
-      "The `system.components` property has been deprecated in favor of a standardized `system.properties` property.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
-    );
-    return this.properties.reduce((acc, p) => {
-      acc[p] = true;
-      return acc;
-    }, {});
   }
 }

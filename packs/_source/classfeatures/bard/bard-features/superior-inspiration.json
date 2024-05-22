@@ -17,9 +17,9 @@
       "license": "CC-BY-4.0"
     },
     "activation": {
-      "type": "",
+      "type": "special",
       "cost": null,
-      "condition": ""
+      "condition": "When you roll initiative and have no uses of Bardic Inspiration"
     },
     "duration": {
       "value": "",
@@ -46,9 +46,9 @@
       "prompt": true
     },
     "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
+      "type": "charges",
+      "target": "Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA",
+      "amount": -1,
       "scale": false
     },
     "ability": "",
@@ -88,10 +88,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234356,
-    "modifiedTime": 1704824715825,
+    "modifiedTime": 1712173377397,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!GBYN5rH4nh1ocRlY"

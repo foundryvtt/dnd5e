@@ -6,6 +6,8 @@ import MapLocationControlIcon from "../../canvas/map-location-control-icon.mjs";
  * @property {string} code  Code for the location marker on the map.
  */
 export default class MapLocationJournalPageData extends foundry.abstract.DataModel {
+
+  /** @inheritDoc */
   static defineSchema() {
     return {
       code: new foundry.data.fields.StringField()

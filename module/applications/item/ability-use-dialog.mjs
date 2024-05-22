@@ -1,3 +1,6 @@
+import { EnchantmentData } from "../../data/item/fields/enchantment-field.mjs";
+import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+
 /**
  * A specialized Dialog subclass for ability usage.
  *
@@ -53,13 +56,16 @@ export default class AbilityUseDialog extends Dialog {
 
     const limit = item.actor.system.attributes?.concentration?.limit ?? 0;
     const concentrationOptions = this._createConcentrationOptions(item);
+    const resourceOptions = this._createResourceOptions(item);
 
     const data = {
       item,
       ...config,
       slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
+      enchantmentOptions: this._createEnchantmentOptions(item),
       summoningOptions: this._createSummoningOptions(item),
-      resourceOptions: this._createResourceOptions(item),
+      resourceOptions: resourceOptions,
+      resourceArray: Array.isArray(resourceOptions),
       concentration: {
         show: (config.beginConcentrating !== null) && !!concentrationOptions.length,
         options: concentrationOptions,
@@ -142,7 +148,7 @@ export default class AbilityUseDialog extends Dialog {
       const label = CONFIG.DND5E.spellLevels[i];
       const l = actor.system.spells[`spell${i}`] || {max: 0, override: null};
       let max = parseInt(l.override || l.max || 0);
-      let slots = Math.clamped(parseInt(l.value || 0), 0, max);
+      let slots = Math.clamp(parseInt(l.value || 0), 0, max);
       if ( max > 0 ) lmax = i;
       arr.push({
         key: `spell${i}`,
@@ -175,19 +181,60 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
-   * Create an array of summoning profiles.
+   * Create details on enchantment that can be applied.
    * @param {Item5e} item  The item.
-   * @returns {object|null}   Array of select options.
+   * @returns {{ enchantments: object }|null}
+   */
+  static _createEnchantmentOptions(item) {
+    const enchantments = EnchantmentData.availableEnchantments(item);
+    if ( !enchantments.length ) return null;
+    const options = {};
+    if ( enchantments.length > 1 ) options.profiles = Object.fromEntries(enchantments.map(e => [e._id, e.name]));
+    else options.profile = enchantments[0]._id;
+    return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create details on the summoning profiles and other related options.
+   * @param {Item5e} item  The item.
+   * @returns {{ profiles: object, creatureTypes: object }|null}
    */
   static _createSummoningOptions(item) {
-    const profiles = item.system.summons?.profiles ?? [];
-    if ( profiles.length <= 1 ) return null;
+    const summons = item.system.summons;
+    if ( !summons?.profiles.length ) return null;
     const options = {};
-    for ( const profile of profiles ) {
-      const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
-      if ( profile.uuid && !doc ) continue;
-      options[profile._id] = profile.name ? profile.name : (doc?.name ?? "—");
+    const rollData = item.getRollData();
+    const level = summons.relevantLevel;
+    options.profiles = Object.fromEntries(
+      summons.profiles
+        .map(profile => {
+          const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
+          const withinRange = ((profile.level.min ?? -Infinity) <= level) && (level <= (profile.level.max ?? Infinity));
+          if ( !doc || !withinRange ) return null;
+          let label = profile.name ? profile.name : (doc?.name ?? "—");
+          let count = simplifyRollFormula(Roll.replaceFormulaData(profile.count ?? "1", rollData));
+          if ( Number.isNumeric(count) ) {
+            count = parseInt(count);
+            if ( count > 1 ) label = `${count} x ${label}`;
+          } else if ( count ) label = `${count} x ${label}`;
+          return [profile._id, label];
+        })
+        .filter(f => f)
+    );
+    if ( Object.values(options.profiles).length <= 1 ) {
+      options.profile = Object.keys(options.profiles)[0];
+      options.profiles = null;
     }
+    if ( summons.creatureSizes.size > 1 ) options.creatureSizes = summons.creatureSizes.reduce((obj, k) => {
+      obj[k] = CONFIG.DND5E.actorSizes[k]?.label;
+      return obj;
+    }, {});
+    if ( summons.creatureTypes.size > 1 ) options.creatureTypes = summons.creatureTypes.reduce((obj, k) => {
+      obj[k] = CONFIG.DND5E.creatureTypes[k]?.label;
+      return obj;
+    }, {});
     return options;
   }
 
@@ -233,13 +280,9 @@ export default class AbilityUseDialog extends Dialog {
         target = item.actor;
         if ( ["smallest", "largest"].includes(consume.target) ) {
           label = game.i18n.localize(`DND5E.ConsumeHitDice${consume.target.capitalize()}Long`);
-          value = target.system.attributes.hd;
+          value = target.system.attributes.hd.value;
         } else {
-          value = Object.values(item.actor.classes ?? {}).reduce((acc, cls) => {
-            if ( cls.system.hitDice !== consume.target ) return acc;
-            const hd = cls.system.levels - cls.system.hitDiceUsed;
-            return acc + hd;
-          }, 0);
+          value = item.actor.system.attributes.hd.bySize[consume.target] ?? 0;
           label = `${game.i18n.localize("DND5E.HitDice")} (${consume.target})`;
         }
         break;
@@ -247,6 +290,15 @@ export default class AbilityUseDialog extends Dialog {
     }
 
     if ( !target ) return null;
+
+    const consumesSpellSlot = consume.target.match(/spells\.([^.]+)\.value/);
+    if ( consumesSpellSlot ) {
+      const [, key] = consumesSpellSlot;
+      const spells = item.actor.system.spells[key] ?? {};
+      const level = spells.level || 0;
+      const minimum = (item.type === "spell") ? Math.max(item.system.level, level) : level;
+      return this._createSpellSlotOptions(item.actor, minimum);
+    }
 
     const max = Math.min(cap, value);
     return Array.fromRange(max, 1).reduce((acc, n) => {
@@ -324,7 +376,7 @@ export default class AbilityUseDialog extends Dialog {
 
     if ( item.type === "spell" ) {
       const spellData = item.actor.system.spells[preparation.mode] ?? {};
-      if ( "level" in spellData ) levels.push(spellData.level);
+      if ( Number.isNumeric(spellData.level) ) levels.push(spellData.level);
     }
 
     if ( (scale === "slot") && data.slotOptions.every(o => !o.hasSlots) ) {
@@ -397,5 +449,73 @@ export default class AbilityUseDialog extends Dialog {
     if ( !hasUses || !uses.autoDestroy ) return false;
     const value = uses.value - consume;
     return value <= 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(jQuery) {
+    super.activateListeners(jQuery);
+    const [html] = jQuery;
+
+    html.querySelector('[name="slotLevel"]')?.addEventListener("change", this._onChangeSlotLevel.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update summoning profiles when spell slot level is changed.
+   * @param {Event} event  Triggering change event.
+   */
+  _onChangeSlotLevel(event) {
+    const level = parseInt(event.target.value.replace("spell", ""));
+    const item = this.item.clone({ "system.level": level });
+    this._updateProfilesInput(
+      "enchantmentProfile", "DND5E.Enchantment.Label", this.constructor._createEnchantmentOptions(item)
+    );
+    this._updateProfilesInput(
+      "summonsProfile", "DND5E.Summoning.Profile.Label", this.constructor._createSummoningOptions(item)
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update enchantment or summoning profiles inputs when the level changes.
+   * @param {string} name                Name of the field to update.
+   * @param {string} label               Localization key for the field's aria label.
+   * @param {object} options
+   * @param {object} [options.profiles]  Profile options to display, if multiple.
+   * @param {string} [options.profile]   Single profile to select, if only one.
+   */
+  _updateProfilesInput(name, label, options) {
+    const originalInput = this.element[0].querySelector(`[name="${name}"]`);
+    if ( !originalInput ) return;
+
+    // If multiple profiles, replace with select element
+    if ( options.profiles ) {
+      const select = document.createElement("select");
+      select.name = name;
+      select.ariaLabel = game.i18n.localize(label);
+      for ( const [id, label] of Object.entries(options.profiles) ) {
+        const option = document.createElement("option");
+        option.value = id;
+        option.innerText = label;
+        if ( id === originalInput.value ) option.selected = true;
+        select.append(option);
+      }
+      originalInput.replaceWith(select);
+    }
+
+    // If only one profile, replace with hidden input
+    else {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = options.profile ?? "";
+      originalInput.replaceWith(input);
+    }
   }
 }

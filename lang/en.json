@@ -110,6 +110,7 @@
 "DND5E.AbilityUseConsumableDestroyHint": "Using this {type} will consume its final charge and it will be destroyed.",
 "DND5E.AbilityUseConsumableDestroyResourceHint": "Using this {type} will consume the final charge off {name} and destroy it.",
 "DND5E.AbilityUseConsume": "Consume Available Usage?",
+"DND5E.AbilityUseConsumeAction": "Consume Usage",
 "DND5E.AbilityUseChargesLabel": "{value} Charges",
 "DND5E.AbilityUseConsumableLabel": "{max} per {per}",
 "DND5E.AbilityUseCast": "Cast Spell",
@@ -128,7 +129,8 @@
 "DND5E.ActionAbbr": "A",
 "DND5E.ActionPl": "Actions",
 "DND5E.ActionAbil": "Ability Check",
-"DND5E.ActionHeal": "Healing",
+"DND5E.ActionEnch": "Enchant",
+"DND5E.ActionHeal": "Heal",
 "DND5E.ActionMSAK": "Melee Spell Attack",
 "DND5E.ActionMWAK": "Melee Weapon Attack",
 "DND5E.ActionOther": "Other",
@@ -144,6 +146,7 @@
 "DND5E.ActiveEffectOverrideWarning": "This value is being modified by an Active Effect and cannot be edited. Disable the effect to edit it.",
 "DND5E.Add": "Add",
 "DND5E.AdditionalControls": "Additional Controls",
+"DND5E.AdditionalSettings": "Additional Settings",
 "DND5E.AddEmbeddedItemPromptHint": "Do you want to add these items to your character sheet?",
 "DND5E.AdvancementAbilityScoreImprovementTitle": "Ability Score Improvement",
 "DND5E.AdvancementAbilityScoreImprovementHint": "Allow the player to increase one or more ability scores or take an optional feat.",
@@ -152,6 +155,7 @@
 "DND5E.AdvancementAbilityScoreImprovementCapDisplay.one": "Max {points} point per score",
 "DND5E.AdvancementAbilityScoreImprovementCapDisplay.other": "Max {points} points per score",
 "DND5E.AdvancementAbilityScoreImprovementFeatHint": "Drop a feat here to choose one instead of an ability score improvement.",
+"DND5E.AdvancementAbilityScoreImprovementFeatLevelWarning": "Must be at least level {level} to take this feat.",
 "DND5E.AdvancementAbilityScoreImprovementFeatWarning": "Only features with the 'feat' type can be selected.",
 "DND5E.AdvancementAbilityScoreImprovementFixed": "Fixed Improvement",
 "DND5E.AdvancementAbilityScoreImprovementLockedHint": "Scores cannot be modified with a feat selected.",
@@ -195,15 +199,22 @@
 "DND5E.AdvancementHitPointsRollButton": "Roll {die}",
 "DND5E.AdvancementItemChoiceTitle": "Choose Items",
 "DND5E.AdvancementItemChoiceHint": "Present the player with a choice of items (such as equipment, features, or spells) that they can choose for their character at one or more levels.",
+"DND5E.AdvancementItemChoiceChoices": "Choices",
+"DND5E.AdvancementItemChoiceChoose": "choose {count}",
 "DND5E.AdvancementItemChoiceChosen": "Chosen: {current} of {max}",
+"DND5E.AdvancementItemChoiceFeatureLevelWarning": "Must be at least level {level} to take this feature.",
 "DND5E.AdvancementItemChoiceLevelsHint": "Specify how many choices are allowed at each level.",
+"DND5E.AdvancementItemChoiceNoOriginalError": "Previously selected choice no longer available for replacement.",
 "DND5E.AdvancementItemChoicePreviouslyChosenWarning": "This item has already been chosen at a previous level.",
+"DND5E.AdvancementItemChoiceReplacement": "Allow Replacement",
+"DND5E.AdvancementItemChoiceReplacementNone": "No Replacement",
+"DND5E.AdvancementItemChoiceReplacementTitle": "replace",
 "DND5E.AdvancementItemChoiceSpellLevelAvailable": "Any Available Level",
 "DND5E.AdvancementItemChoiceSpellLevelAvailableWarning": "Only {level} or lower spells can be chosen for this advancement.",
 "DND5E.AdvancementItemChoiceSpellLevelSpecificWarning": "Only {level} spells can be chosen for this advancement.",
 "DND5E.AdvancementItemChoiceSpellLevelHint": "Only allow choices from spells of this level.",
 "DND5E.AdvancementItemChoiceType": "Item Type",
-"DND5E.AdvancementItemChoiceTypeHint": "Restrict what Item types can be choosen.",
+"DND5E.AdvancementItemChoiceTypeHint": "Restrict what Item types can be chosen.",
 "DND5E.AdvancementItemChoiceTypeAny": "Anything",
 "DND5E.AdvancementItemChoiceTypeWarning": "Only {type} items can be selected for this choice.",
 "DND5E.AdvancementItemGrantTitle": "Grant Items",
@@ -213,7 +224,7 @@
 "DND5E.AdvancementItemGrantDuplicateWarning": "That item already exists on this advancement.",
 "DND5E.AdvancementItemGrantRecursiveWarning": "You cannot grant an item in its own advancement.",
 "DND5E.AdvancementItemGrantOptional": "Optional",
-"DND5E.AdvancementItemGrantOptionalHint": "If optional, players will be given the option to opt out of any of the following items, otherwise all of them are granted.",
+"DND5E.AdvancementItemGrantOptionalHint": "If the whole advancement is marked optional, players may opt out of any of the following items, otherwise all non-optional items are granted.",
 "DND5E.AdvancementItemTypeInvalidWarning": "{type} items cannot be added with this advancement type.",
 "DND5E.AdvancementLevelHeader": "Level {level}",
 "DND5E.AdvancementLevelAnyHeader": "Any Level",
@@ -301,6 +312,7 @@
 "DND5E.Attunement": "Attunement",
 "DND5E.AttunementMax": "Maximum Attuned Items",
 "DND5E.AttunementNone": "Attunement Not Required",
+"DND5E.AttunementOptional": "Optional Attunement",
 "DND5E.AttunementRequired": "Attunement Required",
 "DND5E.AttunementAttuned": "Attuned",
 "DND5E.AttunementOverride": "Override attunement",
@@ -380,6 +392,12 @@
 "DND5E.BonusesHint": "Define global bonuses as formulas which are added to certain rolls. For example: 1d4 + 2",
 "DND5E.BonusesInstructions": "Configure character bonuses which are added to the appropriate dice roll",
 "DND5E.Conditions": "Conditions",
+"DND5E.Controls": {
+  "Hint": "Enable various hints throughout the UI for certain mouse and keyboard controls.",
+  "LockHint": "Middle-click to lock",
+  "MiddleClick": "Middle Click",
+  "Name": "Enable Control Hints"
+},
 "DND5E.ChallengeRating": "Challenge Rating",
 "DND5E.Charged": "Charged",
 "DND5E.Charges": "Charges",
@@ -462,6 +480,10 @@
 "DND5E.ConcentrationConfigurationHint": "Configure concentration modifiers and bonuses which apply to this creature.",
 "DND5E.ConsumeTitle": "Resource Consumption",
 "DND5E.ConsumeAmount": "Consumption Amount",
+"DND5E.ConsumeHint": {
+  "Attribute": "Attribute to consume (e.g. currency.gp)",
+  "Item": "UUID of target in compendium"
+},
 "DND5E.ConsumeTarget": "Consumption Target",
 "DND5E.ConsumeType": "Consumption Category",
 "DND5E.ConsumeAmmunition": "Ammunition",
@@ -478,6 +500,7 @@
 "DND5E.ConsumeWarningNoQuantity": "{name} has run out of its designated {type}!",
 "DND5E.ConsumeWarningZeroAttribute": "{name} has run out of its designated attribute resource pool!",
 "DND5E.ConsumeResource": "Consume Resource?",
+"DND5E.ConsumeResourceAction": "Consume Resource",
 "DND5E.ConsumeRecharge": "Consume Recharge?",
 "DND5E.ConsumeScaling": "Resource Scaling",
 "DND5E.ConsumeScalingLabel": "Use Resources",
@@ -660,6 +683,7 @@
 "DND5E.DistMiAbbr": "mi",
 "DND5E.DistSelf": "Self",
 "DND5E.DistTouch": "Touch",
+"DND5E.DocumentUseWarn": "You lack permission to use an item on this document.",
 "DND5E.DocumentViewWarn": "You lack permission to view this document.",
 "DND5E.Duration": "Duration",
 "DND5E.DurationPermanent": "Permanent",
@@ -674,6 +698,80 @@
 "DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
 "DND5E.EffectApplyWarningOwnership": "Effects cannot be applied to tokens you are not the owner of.",
 "DND5E.EffectsSearch": "Search effects",
+"DND5E.Enchantment": {
+  "Action": {
+    "Apply": "Apply Enchantment",
+    "Configure": "Configure Enchantment",
+    "Create": "Create Enchantment",
+    "Delete": "Delete Enchantment",
+    "Disable": "Disable Enchantment",
+    "Edit": "Edit Enchantment",
+    "Enable": "Enable Enchantment",
+    "Remove": "Remove Enchantment"
+  },
+  "Category": {
+    "Active": "Active Enchantments",
+    "Empty": "No enchantments have been created, use the button above to create one.",
+    "General": "Enchantments",
+    "Inactive": "Inactive Enchantments"
+  },
+  "Configuration": "Enchantment Configuration",
+  "DropArea": "Place item here to enchant it…",
+  "FIELDS": {
+    "enchantment": {
+      "label": "Enchantment Configuration",
+      "classIdentifier": {
+        "hint": "Identifier used to determine whether the character level or a specific class level should be used for enchantment level limits."
+      },
+      "items": {
+        "max": {
+          "label": "Item Limit",
+          "hint": "Formula for the maximum number of enchantments of this type that can be active at a time."
+        },
+        "period": {
+          "label": "Replacement Period",
+          "hint": "How frequently the enchantments of this type can be re-bound to different items."
+        }
+      },
+      "restrictions": {
+        "label": "Restrictions",
+        "hint": "Restrictions on the type of item to which this enchantment can be applied.",
+        "allowMagical": {
+          "label": "Allow Magical",
+          "hint": "Allow items that are already magical to be enchanted."
+        },
+        "type": {
+          "label": "Item Type",
+          "hint": "Type of item to which this enchantment can be applied."
+        }
+      }
+    }
+  },
+  "Label": "Enchantment",
+  "Level": {
+    "Hint": "Range of levels required to use this enchantment."
+  },
+  "Items": {
+    "Entry": "{item} on  <em>{actor}</em>"
+  },
+  "Riders": {
+    "Effect": {
+      "Label": "Additional Effects",
+      "Hint": "These additional effects will be added to the enchanted item when this enchantment is added, and removed when the enchantment is removed."
+    },
+    "Item": {
+      "Label": "Additional Items",
+      "Hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
+    }
+  },
+  "Warning": {
+    "ConcentrationEnded": "Cannot apply this enchantment because concentration has ended.",
+    "NoMagicalItems": "Items that are already magical cannot be enchanted.",
+    "NotOnActor": "Enchantments can only be added to items, not directly to actors.",
+    "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it.",
+    "WrongType": "{incorrectType} items cannot be enchanted by this enchantment, only {allowedType} items are allowed."
+  }
+},
 "DND5E.Environment": "Environment",
 "DND5E.EquipmentBonus": "Magical Bonus",
 "DND5E.EquipmentClothing": "Clothing",
@@ -757,6 +855,12 @@
 "DND5E.EffectPassive": "Passive Effects",
 "DND5E.EffectInactive": "Inactive Effects",
 "DND5E.EffectNew": "New Effect",
+"DND5E.EffectType": {
+  "Inactive": "Inactive",
+  "Passive": "Passive",
+  "Temporary": "Temporary",
+  "Unavailable": "Unavailable"
+},
 "DND5E.EffectUnavailable": "Unavailable Effects",
 "DND5E.EffectUnavailableInfo": "Source item must be equipped or attuned to activate these",
 "DND5E.Encumbrance": "Encumbrance",
@@ -840,6 +944,7 @@
     "one": "Member",
     "other": "Members"
   },
+  "PlaceMembers": "Place Members",
   "Primary": {
     "Remove": "Remove as Primary Party",
     "Set": "Set as Primary Party"
@@ -856,6 +961,7 @@
 "DND5E.Hair": "Hair",
 "DND5E.HalfProficient": "Half Proficient",
 "DND5E.Healing": "Healing",
+"DND5E.HealingRoll": "Healing Roll",
 "DND5E.HealingTemp": "Healing (Temporary)",
 "DND5E.Height": "Height",
 "DND5E.HitPoints": "Hit Points",
@@ -887,6 +993,7 @@
 "DND5E.HitDiceRoll": "Roll Hit Dice",
 "DND5E.HitDiceUsed": "Hit Dice Used",
 "DND5E.HitDiceWarn": "{name} has no available {formula} Hit Dice remaining!",
+"DND5E.HitDiceNPCWarn": "{name} has no available Hit Dice remaining!",
 "DND5E.Ideals": "Ideals",
 "DND5E.Identified": "Identified",
 "DND5E.Identifier": "Identifier",
@@ -990,10 +1097,12 @@
 "DND5E.ItemRequiredStr": "Required Strength",
 "DND5E.ItemToolBase": "Base Tool",
 "DND5E.ItemToolBonus": "Tool Bonus",
+"DND5E.ItemToolDetails": "Tool Details",
 "DND5E.ItemToolProficiency": "Tool Proficiency",
 "DND5E.ItemToolProperties": "Tool Properties",
 "DND5E.ItemToolStatus": "Tool Status",
 "DND5E.ItemToolType": "Tool Type",
+"DND5E.ItemToolUsage": "Tool Usage",
 "DND5E.ItemView": "View Item",
 "DND5E.ItemWeaponAttack": "Weapon Attack",
 "DND5E.ItemWeaponBase": "Base Weapon",
@@ -1046,6 +1155,11 @@
 "DND5E.LevelActionDecrease": "Level Down",
 "DND5E.LevelActionIncrease": "Level Up",
 "DND5E.LevelCount": "{ordinal} Level",
+"DND5E.LevelLimit": {
+  "Label": "Level Limit",
+  "Max": "Maximum Level",
+  "Min": "Minimum Level"
+},
 "DND5E.LevelNumber": "Level {level}",
 "DND5E.LevelScaling": "Level Scaling",
 "DND5E.LimitedUses": "Limited Uses",
@@ -1136,6 +1250,17 @@
 "DND5E.PolymorphWildShape": "Wild Shape",
 "DND5E.Portrait": "Portrait",
 "DND5E.Prepared": "Prepared",
+"DND5E.Prerequisites": {
+  "Header": "Feature Prerequisites",
+  "FIELDS": {
+    "prerequisites": {
+      "level": {
+        "label": "Required Level",
+        "hint": "Character or class level required to select this feature when levelling up."
+      }
+    }
+  }
+},
 "DND5E.Price": "Price",
 "DND5E.Proficiency": "Proficiency",
 "DND5E.ProficiencyBonus": "Proficiency Bonus",
@@ -1211,8 +1336,18 @@
 "DND5E.NewDayHint": "Recover limited use abilities which recharge \"per day\"?",
 "DND5E.SaveBonus": "Saving Throw Bonus",
 "DND5E.SaveGlobalBonusHint": "This bonus applies to all saving throws made by this actor.",
-"DND5E.ScrollDetails": "Scroll Details",
-"DND5E.ScrollRequiresConcentration": "Requires Concentration",
+"DND5E.Scroll": {
+  "CreateFrom": "Create Scroll from {spell}",
+  "CreateScroll": "Create Scroll",
+  "Details": "Scroll Details",
+  "Explanation": {
+    "Label": "Explanation",
+    "Hint": "Amount of the rules on using spell scrolls to include in the created scroll.",
+    "Complete": "Complete",
+    "Reference": "Reference"
+  },
+  "RequiresConcentration": "Requires Concentration"
+},
 "DND5E.Senses": "Senses",
 "DND5E.SensesConfig": "Configure Senses",
 "DND5E.SensesConfigHint": "Configure any special sensory perception abilities that this actor possesses.",
@@ -1232,6 +1367,7 @@
 "DND5E.SheetClassMapLocation": "Default 5e Map Location Sheet",
 "DND5E.SheetClassNPC": "Default 5e NPC Sheet",
 "DND5E.SheetClassRule": "Default 5e Rule Sheet",
+"DND5E.SheetClassSpellList": "Default 5e Spell List Sheet",
 "DND5E.SheetClassToken": "Default 5e Token Sheet",
 "DND5E.SheetClassVehicle": "Default 5e Vehicle Sheet",
 "DND5E.SheetModeEdit": "Edit",
@@ -1375,6 +1511,7 @@
 "DND5E.SpellNone": "None",
 "DND5E.SpellPrepAtWill": "At-Will",
 "DND5E.SpellPrepInnate": "Innate Spellcasting",
+"DND5E.SpellPrepRitual": "Ritual Only",
 "DND5E.SpellPrepPrepared": "Prepared",
 "DND5E.SpellPrepAlways": "Always Prepared",
 "DND5E.SpellPreparation": "Spell Preparation",
@@ -1451,7 +1588,8 @@
     "Configure": "Configure Summons",
     "Place": "Place Summons",
     "Remove": "Remove Profile",
-    "Summon": "Summon"
+    "Summon": "Summon",
+    "View": "View Summon"
   },
   "Bonuses": {
     "ArmorClass": {
@@ -1466,6 +1604,10 @@
       "Label": "Bonus Healing",
       "Hint": "Additional healing provided by healing abilities."
     },
+    "HitDice": {
+      "Label": "Bonus Hit Dice",
+      "Hint": "Additional hit dice added to the creature on top of what is derived from the HP formula in their statblock. Can only be used when summoning NPC actors."
+    },
     "HitPoints": {
       "Label": "Bonus Hit Points",
       "Hint": "Additional hit points added to the creature on top of what is specified in their statblock."
@@ -1476,15 +1618,30 @@
     }
   },
   "Configuration": "Summoning Configuration",
+  "Count": {
+    "Label": "Count"
+  },
   "CreatureChanges": {
     "Label": "Creature Changes",
-    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats."
+    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats. Summoned creature's stats can be referenced using @summon (e.g. @summon.attributes.hd.max to reference the creature's hit dice count)."
   },
-  "DisplayName": "Display Name",
+  "CreatureSizes": {
+    "Label": "Creature Sizes",
+    "Hint": "Summoned creature and token will be changed to this size. If more than one size is selected, then the player will be able to choose from these sizes when summoning."
+  },
+  "CreatureTypes": {
+    "Label": "Creature Types",
+    "Hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
+  },
+  "DisplayName": "Profile Name",
   "DropHint": "Drop creature here",
   "ItemChanges": {
     "Label": "Item Changes",
     "Hint": "Changes made to items on the summoned creature."
+  },
+  "Level": {
+    "Hint": "Range of levels required to use this profile.",
+    "IdentifierHint": "Identifier used to determine whether the character level or a specific class level should be used for profile level limits."
   },
   "Match": {
     "Attacks": {
@@ -1582,7 +1739,7 @@
   "ScaleCorrection": "Scale Correction",
   "Subject": {
     "Label": "Subject Path",
-    "Hint": "Explicitly specify a path for the artwork placed over the dynamic token ring. If not provided, the subject image will attempt to be inferred by adding “-subject” to the end of the normal token image path."
+    "Hint": "Explicitly specify a path for the artwork placed over the dynamic token ring. If not provided, the subject image will be set to the normal token artwork."
   },
   "Title": "Dynamic Ring"
 },
@@ -1652,6 +1809,7 @@
 "DND5E.UsesMax": "Maximum Uses",
 "DND5E.UsesPeriod": "Recovery Period",
 "DND5E.UsesPeriods": {
+  "AtWill": "At Will",
   "Charges": "Charges",
   "ChargesAbbreviation": "Charges",
   "Dawn": "Dawn",
@@ -1662,6 +1820,7 @@
   "DuskAbbreviation": "Dusk",
   "Lr": "Long Rest",
   "LrAbbreviation": "LR",
+  "Never": "Never",
   "Sr": "Short Rest",
   "SrAbbreviation": "SR"
 },
@@ -1713,6 +1872,25 @@
 "DND5E.WeaponSimpleProficiency": "Simple",
 "DND5E.WeaponSimpleR": "Simple Ranged",
 "DND5E.Weight": "Weight",
+"DND5E.WeightUnit": {
+  "Label": "Weight Units",
+  "Kilograms": {
+    "Label": "Kilograms",
+    "Abbreviation": "kg"
+  },
+  "Megagrams": {
+    "Label": "Tonnes",
+    "Abbreviation": "t"
+  },
+  "Pounds": {
+    "Label": "Pounds",
+    "Abbreviation": "lb"
+  },
+  "Tons": {
+    "Label": "Tons",
+    "Abbreviation": "tn"
+  }
+},
 "DND5E.WhisperedTo": "Whispered to",
 "DND5E.Wiki": "Wiki",
 "DND5E.available": "available",
@@ -1736,7 +1914,11 @@
   "RollRequest": "Roll Request",
   "SaveShort": "{save}",
   "SaveLong": "{save} saving throw",
-  "SpecificCheck": "{ability} ({type})"
+  "SpecificCheck": "{ability} ({type})",
+  "Warning": {
+    "NoActor": "No selected or assigned actor could be found to execute this roll.",
+    "NoItemOnActor": "{actor} does not have an Item with name {item}."
+  }
 },
 
 "EFFECT.DND5E": {
@@ -1764,39 +1946,75 @@
 "TYPES.JournalEntryPage.class": "Class Summary",
 "TYPES.JournalEntryPage.map": "Map Location",
 "TYPES.JournalEntryPage.rule": "Rule",
-"JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipment": "Equipment",
-"JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipmentHint": "List of equipment granted by this class if taken at first level.",
-"JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPoints": "Additional Hit Points Description",
-"JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPointsHint": "Additional descriptive text displayed beneath the auto-generated hit points section.",
-"JOURNALENTRYPAGE.DND5E.Class.AdditionalTraits": "Additional Proficiencies Description",
-"JOURNALENTRYPAGE.DND5E.Class.AdditionalTraitsHint": "Additional descriptive text displayed beneath list of proficiencies granted by this class.",
-"JOURNALENTRYPAGE.DND5E.Class.Description": "Introduction",
-"JOURNALENTRYPAGE.DND5E.Class.DescriptionHint": "Primary description of the class that will appear first.",
-"JOURNALENTRYPAGE.DND5E.Class.EquipmentHeader": "Equipment",
-"JOURNALENTRYPAGE.DND5E.Class.FeaturesHeader": "Class Features",
-"JOURNALENTRYPAGE.DND5E.Class.FeaturesDescription": "As a {lowercaseName}, you gain the following class features, which are summarized in the {name} table.",
-"JOURNALENTRYPAGE.DND5E.Class.HitDice": "<strong>Hit Dice:</strong> {dice} per {class} level",
-"JOURNALENTRYPAGE.DND5E.Class.HitPointsHeader": "Hit Points",
-"JOURNALENTRYPAGE.DND5E.Class.HitPointsLevel1": "<strong>Hit Points at 1st Level:</strong> {max} + your Constitution modifier",
-"JOURNALENTRYPAGE.DND5E.Class.HitPointsLevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your Constitution modifier per {class} level after 1st",
-"JOURNALENTRYPAGE.DND5E.Class.Item": "Selected Class",
-"JOURNALENTRYPAGE.DND5E.Class.ItemHint": "Drop a class here",
-"JOURNALENTRYPAGE.DND5E.Class.NoValidClass": "No valid class selected, press the edit button to add a class.",
-"JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption": "Optional Class Features",
-"JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesDescription": "The following section contains options {class} features. These features are not granted automatically, and you can choose one, some, or all of them at your DM's discretion.",
-"JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel": "Slot Level",
-"JOURNALENTRYPAGE.DND5E.Class.SpellSlots": "Spell Slots",
-"JOURNALENTRYPAGE.DND5E.Class.SpellSlotsPerSpellLevel": "—Spell Slots per Spell Level—",
-"JOURNALENTRYPAGE.DND5E.Class.SubclassHeader": "Subclass Header",
-"JOURNALENTRYPAGE.DND5E.Class.SubclassHint": "Drop subclasses here",
-"JOURNALENTRYPAGE.DND5E.Class.SubclassDescription": "Subclass Introduction",
-"JOURNALENTRYPAGE.DND5E.Class.SubclassDescriptionHint": "Introduction that will be displayed before this class's subclasses.",
-"JOURNALENTRYPAGE.DND5E.Class.SubclassItems": "Subclasses",
-"JOURNALENTRYPAGE.DND5E.Class.TableCaption": "The {class}",
-"JOURNALENTRYPAGE.DND5E.Class.TableOptionalCaption": "Optional {class} Features",
-"JOURNALENTRYPAGE.DND5E.Class.TraitsHeader": "Proficiencies",
-"JOURNALENTRYPAGE.DND5E.EditDescription": "Edit",
-"JOURNALENTRYPAGE.DND5E.TableTOC": "Table: {caption}",
+"TYPES.JournalEntryPage.spells": "Spell List",
+"TYPES.JournalEntryPage.subclass": "Subclass Summary",
+"JOURNALENTRYPAGE.DND5E": {
+  "Class": {
+    "AdditionalEquipment": "Additional Equipment Description",
+    "AdditionalEquipmentHint": "Additional descriptive text displayed beneath the starting equipment section.",
+    "AdditionalHitPoints": "Additional Hit Points Description",
+    "AdditionalHitPointsHint": "Additional descriptive text displayed beneath the auto-generated hit points section.",
+    "AdditionalTraits": "Additional Proficiencies Description",
+    "AdditionalTraitsHint": "Additional descriptive text displayed beneath list of proficiencies granted by this class.",
+    "Description": "Introduction",
+    "DescriptionHint": "Primary description of the class that will appear first.",
+    "EquipmentHeader": "Equipment",
+    "EquipmentDescription": "You start with the following equipment, in addition to the equipment granted by your background:",
+    "FeaturesHeader": "Class Features",
+    "FeaturesDescription": "As a {lowercaseName}, you gain the following class features, which are summarized in the {name} table.",
+    "HitDice": "<strong>Hit Dice:</strong> {dice} per {class} level",
+    "HitPointsHeader": "Hit Points",
+    "HitPointsLevel1": "<strong>Hit Points at 1st Level:</strong> {max} + your Constitution modifier",
+    "HitPointsLevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your Constitution modifier per {class} level after 1st",
+    "Item": "Selected Class",
+    "ItemHint": "Drop a class here",
+    "NoValidClass": "No valid class selected, press the edit button to add a class.",
+    "OptionalFeaturesCaption": "Optional Class Features",
+    "OptionalFeaturesDescription": "The following section contains options {class} features. These features are not granted automatically, and you can choose one, some, or all of them at your DM's discretion.",
+    "SpellSlotLevel": "Slot Level",
+    "SpellSlots": "Spell Slots",
+    "SpellSlotsPerSpellLevel": "—Spell Slots per Spell Level—",
+    "SubclassHeader": "Subclass Header",
+    "SubclassHint": "Drop subclasses here",
+    "SubclassDescription": "Subclass Introduction",
+    "SubclassDescriptionHint": "Introduction that will be displayed before this class's subclasses.",
+    "SubclassItems": "Subclasses",
+    "TableCaption": "The {class}",
+    "TableOptionalCaption": "Optional {class} Features",
+    "TraitsHeader": "Proficiencies"
+  },
+  "EditDescription": "Edit",
+  "TableTOC": "Table: {caption}",
+  "SpellList": {
+    "DropHint": "Drop spells or folders of spells here to add to the list",
+    "Grouping": {
+      "Label": "Grouping Mode",
+      "Hint": "Controls how the spells will be grouped by default in the spell list.",
+      "Alphabetical": "By First Letter",
+      "Level": "By Level",
+      "None": "No Grouping",
+      "School": "By School"
+    },
+    "IdentifierHint": "Identifier should match that defined on the associated document, if applicable. For example, when creating a spell list for the Wizard class, the identifier should be 'wizard'.",
+    "Type": {
+      "Label": "Spell List Type",
+      "Other": "Uncategorized"
+    },
+    "UnlinkedSpells": {
+      "Label": "Unlinked Spells",
+      "Add": "Add Unlinked Spell",
+      "Configuration": "Spell Configuration",
+      "Edit": "Edit Unlinked Spell"
+    }
+  },
+  "Subclass": {
+    "Description": "Introduction",
+    "DescriptionHint": "Description of the subclass that will appear before any listed features.",
+    "Item": "Selected Subclass",
+    "ItemHint": "Drop a subclass here",
+    "NoValidSubclass": "No valid subclass selected, press the edit button to add a subclass."
+  }
+},
 
 "MACRO.5eMissingTargetWarn": "Your controlled actor '{actor}' does not have an {type} with name '{name}'.",
 "MACRO.5eMultipleTargetsWarn": "Your controlled actor '{actor}' has more than one {type} with name '{name}'. The first match will be chosen.",
@@ -1815,7 +2033,7 @@
 "SETTINGS.5eAutoSpellTemplateN": "Always place Spell Template",
 "SETTINGS.5eChallengeVisibility": {
   "Name": "Challenge Visibility",
-  "Hint": "Control what roll DCs are visible to the players and whether successess/failures are highlighted.",
+  "Hint": "Control what roll DCs are visible to the players and whether successes/failures are highlighted.",
   "All": "Show all",
   "None": "Hide all",
   "Player": "Show only from other players"
@@ -1876,6 +2094,13 @@
     "Name": "Allow Summoning",
     "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
   },
+  "COLLAPSETRAYS": {
+    "Name": "Collapse Trays in Chat",
+    "Hint": "Automatically collapse damage, hit, and effect trays that appear in chat cards.",
+    "Always": "Collapse All",
+    "Older": "Collapse Older Trays",
+    "Never": "Expand All"
+  },
   "THEME": {
     "Name": "Theme",
     "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."
@@ -1891,5 +2116,6 @@
   }
 },
 
-"SOURCE.BOOK.SRD": "System Reference Document 5.1"
+"SOURCE.BOOK.SRD": "System Reference Document 5.1",
+"SIDEBAR.SortModePriority": "Sort by priority"
 }
