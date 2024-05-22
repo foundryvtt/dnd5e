@@ -431,6 +431,7 @@ export class ItemDataModel extends SystemDataModel {
     const context = {
       name, type, img, price, weight, uses, school, materials, activation,
       config: CONFIG.DND5E,
+      controlHints: game.settings.get("dnd5e", "controlHints"),
       labels: foundry.utils.deepClone(this.parent.labels),
       tags: this.parent.labels?.components?.tags,
       subtitle: subtitle.filterJoin(" &bull; "),
