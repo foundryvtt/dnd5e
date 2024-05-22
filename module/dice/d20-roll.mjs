@@ -9,6 +9,10 @@
  * @param {number} [options.fumble]              The value of d20 result which represents a critical failure
  * @param {(number)} [options.targetValue]       Assign a target value against which the result of this roll should be
  *                                               compared
+ *
+ * @param {number} [options.minimumRoll]         The lowest allowed result of a roll
+ * @param {number} [options.maximumRoll]         The highest allowed result of a roll
+ *
  * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
@@ -144,7 +148,10 @@ export default class D20Roll extends Roll {
     if ( this.options.halflingLucky ) d20.modifiers.push("r1=1");
 
     // Reliable Talent
-    if ( this.options.reliableTalent ) d20.modifiers.push("min10");
+    if ( this.options.reliableTalent && !this.options.minimumRoll ) d20.modifiers.push("min10");
+
+    if ( this.options.minimumRoll ) d20.modifiers.push(`min${this.options.minimumRoll}`);
+    if ( this.options.maximumRoll ) d20.modifiers.push(`max${this.options.maximumRoll}`);
 
     // Handle Advantage or Disadvantage
     if ( this.hasAdvantage ) {

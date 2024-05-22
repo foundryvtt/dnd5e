@@ -1336,12 +1336,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
+    const minimumRoll = reliableTalent ? Math.max(skl.check.minimum ?? 1, 10) : skl.check.minimum;
+    const maximumRoll = skl.check.maximum;
+
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
     const rollData = foundry.utils.mergeObject({
       data: data,
       title: `${flavor}: ${this.name}`,
       flavor,
+      minimumRoll,
+      maximumRoll,
       chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent,

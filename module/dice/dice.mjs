@@ -20,6 +20,9 @@
  *                                     `null` will prevent critical failures.
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
  *
+ * @property {number} [minimumRoll]    The minimum possible result of the d20.
+ * @property {number} [maximumRoll]    The maximum possible result of the d20.
+ *
  * ## Flags
  * @property {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
  * @property {boolean} [halflingLucky]   Allow Halfling Luck to modify this roll?
@@ -51,6 +54,7 @@
 export async function d20Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue,
+  minimumRoll, maximumRoll,
   elvenAccuracy, halflingLucky, reliableTalent,
   fastForward, chooseModifier=false, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
@@ -76,6 +80,8 @@ export async function d20Roll({
     critical,
     fumble,
     targetValue,
+    minimumRoll,
+    maximumRoll,
     elvenAccuracy,
     halflingLucky,
     reliableTalent
