@@ -15,7 +15,8 @@ export default Base => class extends Base {
   _onChangeInputDelta(event) {
     const input = event.target;
     const target = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId) ?? this.actor;
-    parseInputDelta(input, target);
+    const result = parseInputDelta(input, target);
+    if ( result !== undefined ) target.update({ [input.dataset.name]: result });
   }
 
   /* -------------------------------------------- */
