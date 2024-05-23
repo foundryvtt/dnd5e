@@ -1336,8 +1336,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
-    const minimumRoll = reliableTalent ? Math.max(skl.check.minimum ?? 1, 10) : skl.check.minimum;
-    const maximumRoll = skl.check.maximum;
+    const minimumRoll = reliableTalent ? Math.max(skl.roll.min ?? 1, 10) : skl.roll.min;
+    const maximumRoll = skl.roll.max;
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
