@@ -209,6 +209,88 @@
         opacity: 0.5;
         font-size: 0.75em;
       }
+      
+      // Description @Embeds
+      figure.content-embed {
+
+        margin: 0.5em 0;
+
+        // "inline" captions (non-rolltables) need some 
+        // space between the user provided
+        // caption and the caption document link border
+        strong.embed-caption {
+          margin-right: 0.3em;
+        }
+
+        .roll-table-embed {
+          // Numerical ranges in the first column of roll tables
+          // are best displayed without line breaks.
+          // Centering follows wotc styling.
+          thead tr th:first-child,
+          tbody tr td:first-child {
+            white-space: nowrap;
+            text-align: center;
+            padding-right: 2px;
+          }
+        }
+
+        // 'caption-top' is useful for embedding extended item text within
+        // another item, such as RollTables. Tweak stock formatting to look
+        // more like the surrounding parent text.
+        &.caption-top {
+
+          display: flex;
+          flex-direction: column;
+          margin-top: 0;
+
+          p + p {
+            margin-top: 0;
+          }
+
+          .roll-table-embed,
+          img {
+            order: 2;
+          }
+
+          // Removing padding from descriptions since 
+          // item sheets are usually smaller
+          figcaption {
+            padding: initial;
+            margin-top: 0;
+            text-align: left;
+          }
+
+          .embed-caption {
+            text-align: left;
+            font-style: inherit;
+          }
+
+          // RollTable embeds place their HTML description within the caption.
+          // Inherit weight from parent container and style the citation
+          // to look like the others
+          .roll-table-embed + figcaption {
+            font-weight: inherit;
+
+            cite {
+              display: block;
+              font-weight: bold;
+              margin-top: 0.5em;
+            }
+          }
+        }
+
+        // When embedding in another item, it may be better 
+        // for readability to suppress any table elements.
+        &.no-tables table {
+          display: none;
+        }
+
+        // Similar for secrets, as they may be intended
+        // for usage notes specific to said embedded doc
+        &.no-secrets .secret {
+          display: none;
+        }
+      }
     }
   }
 
