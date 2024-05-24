@@ -515,7 +515,6 @@ Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOpt
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
-Hooks.on("applyTokenStatusEffect", canvas.Token5e.onApplyTokenStatusEffect);
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
 /* -------------------------------------------- */
