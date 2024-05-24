@@ -15,7 +15,9 @@ export default class Combatant5e extends Combatant {
    */
   refreshDynamicRing() {
     if ( !this.token?.hasDynamicRing ) return;
-    this.token.object.ring.configureVisuals(foundry.utils.deepClone(this.token.getFlag("dnd5e", "tokenRing") ?? {}));
+    if ( game.release.generation < 12 ) {
+      this.token.object?.ring.configureVisuals(foundry.utils.deepClone(this.token.getFlag("dnd5e", "tokenRing") ?? {}));
+    } else this.token.object?.renderFlags.set({refreshRingVisuals: true});
   }
 
   /* -------------------------------------------- */
