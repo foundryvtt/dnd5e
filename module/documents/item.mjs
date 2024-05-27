@@ -2814,7 +2814,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         desc = [
           "<p><em>",
           CONFIG.DND5E.spellLevels[level] ?? level,
-          "&Reference[Spell Scroll]",
+          " &Reference[Spell Scroll]",
           isConc ? `, ${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}` : null,
           "</em></p>",
           description.value
