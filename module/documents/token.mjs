@@ -29,6 +29,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @type {string}
    */
   get subjectPath() {
+    if ( game.release.generation >= 12 ) return this.ring.subject.texture;
     const subject = this.getFlag("dnd5e", "tokenRing")?.textures?.subject;
     if ( subject ) return subject;
     this.#subjectPath ??= this.constructor.inferSubjectPath(this.texture.src);
@@ -206,8 +207,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
     const textureChange = foundry.utils.hasProperty(data, "texture.src");
-    const tokenRingChange = foundry.utils.hasProperty(data, "flags.dnd5e.tokenRings.enabled");
-    if ( textureChange || tokenRingChange ) this.#subjectPath = null;
+    if ( textureChange ) this.#subjectPath = undefined;
     super._onUpdate(data, options, userId);
   }
 
