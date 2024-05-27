@@ -330,7 +330,7 @@ export default class AdvancementManager extends Application {
    * @private
    */
   createLevelChangeSteps(classItem, levelDelta) {
-    const raceItem = this.clone.system?.details?.race;
+    const raceItem = this.clone.system?.details?.race instanceof Item ? this.clone.system.details.race : null;
     const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => ({ flow, ...data })));
     const getItemFlows = characterLevel => this.clone.items.contents.flatMap(i => {
       if ( ["class", "subclass", "race"].includes(i.type) ) return [];
