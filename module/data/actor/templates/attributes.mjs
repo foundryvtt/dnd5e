@@ -3,7 +3,7 @@ import MovementField from "../../shared/movement-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
-import { simplifyBonus } from "../../../utils.mjs";
+import { convertWeight, simplifyBonus } from "../../../utils.mjs";
 
 /**
  * Shared contents of the attributes schema between various actor types.
@@ -153,8 +153,10 @@ export default class AttributesFields {
    * Calculate encumbrance details for an Actor.
    * @this {CharacterData|NPCData|VehicleData}
    * @param {object} rollData  The Actor's roll data.
+   * @param {object} [options]
+   * @param {Function} [options.validateItem]  Determine whether an item's weight should count toward encumbrance.
    */
-  static prepareEncumbrance(rollData) {
+  static prepareEncumbrance(rollData, { validateItem }={}) {
     const config = CONFIG.DND5E.encumbrance;
     const encumbrance = this.attributes.encumbrance ??= {};
     const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[this.parent.type]
@@ -163,7 +165,7 @@ export default class AttributesFields {
 
     // Get the total weight from items
     let weight = this.parent.items
-      .filter(item => !item.container)
+      .filter(item => !item.container && (validateItem?.(item) ?? true))
       .reduce((weight, item) => weight + (item.system.totalWeightIn?.(baseUnits[unitSystem]) ?? 0), 0);
 
     // [Optional] add Currency Weight (for non-transformed actors)
@@ -171,7 +173,11 @@ export default class AttributesFields {
     if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
       const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
       const currencyPerWeight = config.currencyPerWeight[unitSystem];
-      weight += numCoins / currencyPerWeight;
+      weight += convertWeight(
+        numCoins / currencyPerWeight,
+        config.baseUnits.default[unitSystem],
+        baseUnits[unitSystem]
+      );
     }
 
     // Determine the Encumbrance size class
