@@ -418,6 +418,7 @@ async function enrichEmbed(config, label, options) {
     switch ( config.doc.type ) {
       case "image": return embedImagePage(config, label, options);
       case "text":
+      case "map":
       case "rule": return embedTextPage(config, label, options);
       case "spells": return embedSpellList(config, label, options);
     }
