@@ -49,8 +49,11 @@ Hooks.once("init", function() {
   console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
   // TODO: Remove when v11 support is dropped.
-  CONFIG.compatibility.excludePatterns.push(/\{\{filePicker}}/);
+  CONFIG.compatibility.excludePatterns.push(/filePicker|select/);
   CONFIG.compatibility.excludePatterns.push(/foundry\.dice\.terms/);
+  CONFIG.compatibility.excludePatterns.push(
+    /aggregateDamageRoll|configureDamage|preprocessFormula|simplifyRollFormula/
+  );
   CONFIG.compatibility.excludePatterns.push(/core\.sourceId/);
   if ( game.release.generation < 12 ) Math.clamp = Math.clamped;
 
