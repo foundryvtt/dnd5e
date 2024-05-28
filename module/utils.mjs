@@ -225,6 +225,7 @@ export function linkForUuid(uuid, { tooltip }={}) {
   }
   const a = doc.toAnchor();
   if ( tooltip ) a.dataset.tooltip = tooltip;
+  if ( game.release.generation < 12 ) a.setAttribute("draggable", true);
   return a.outerHTML;
 }
 
