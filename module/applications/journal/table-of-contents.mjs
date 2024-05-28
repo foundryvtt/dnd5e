@@ -52,17 +52,14 @@ export default class TableOfContentsCompendium extends Compendium {
       }
 
       const data = {
-        type,
+        type, flags,
         id: entry.id,
         name: flags.title ?? entry.name,
         pages: Array.from(entry.pages).map(({ flags, id, name, sort }) => ({
+          id, sort, flags,
           name: flags.dnd5e?.title ?? name,
-          id,
-          entryId: entry.id,
-          sort,
-          flags
-        })),
-        flags
+          entryId: entry.id
+        }))
       };
 
       if ( type === "special" ) {
