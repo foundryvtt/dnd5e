@@ -157,7 +157,7 @@ export default class VehicleData extends CommonTemplate {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    const rollData = this.getRollData({ deterministic: true });
+    const rollData = this.parent.getRollData({ deterministic: true });
     const { originalSaves } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
