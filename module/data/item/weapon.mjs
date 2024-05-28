@@ -91,7 +91,6 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.prepareDerivedEquippableData();
     this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
   }
 
@@ -100,6 +99,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalActivatedEffectData();
+    this.prepareFinalEquippableData();
   }
 
   /* -------------------------------------------- */
