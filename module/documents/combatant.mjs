@@ -3,7 +3,7 @@
  */
 export default class Combatant5e extends Combatant {
   /** @override */
-  getInitiativeRoll(formula="1d20") {
+  getInitiativeRoll(formula) {
     if ( !this.actor ) return new CONFIG.Dice.D20Roll(formula ?? "1d20", {});
     return this.actor.getInitiativeRoll();
   }
