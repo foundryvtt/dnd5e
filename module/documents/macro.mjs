@@ -16,7 +16,7 @@ export async function create5eMacro(dropData, slot) {
       foundry.utils.mergeObject(macroData, {
         name: itemData.name,
         img: itemData.img,
-        command: `dnd5e.documents.macro.rollItem("${itemData.name}")`,
+        command: `dnd5e.documents.macro.rollItem("${itemData._source.name}")`,
         flags: {"dnd5e.itemMacro": true}
       });
       break;
@@ -65,7 +65,7 @@ function getMacroTarget(name, documentType) {
   const collection = (documentType === "Item") ? actor.items : Array.from(actor.allApplicableEffects());
 
   // Find item in collection
-  const documents = collection.filter(i => i.name === name);
+  const documents = collection.filter(i => i._source.name === name);
   const type = game.i18n.localize(`DOCUMENT.${documentType}`);
   if ( documents.length === 0 ) {
     ui.notifications.warn(game.i18n.format("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));
