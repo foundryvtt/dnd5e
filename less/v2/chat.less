@@ -255,6 +255,9 @@
 
 .dice-roll {
   cursor: pointer;
+
+  .dice-flavor { display: none; }
+
   &.expanded {
     .dice-total::after { transform: rotate(-90deg); }
     .dice-tooltip-collapser { grid-template-rows: 1fr; }
@@ -451,18 +454,6 @@
     }
   }
 
-  &.collapsed {
-    label .fa-caret-down { transform: rotate(-90deg); }
-    .collapsible-content { grid-template-rows: 0fr; }
-  }
-
-  .collapsible-content {
-    display: grid;
-    grid-template-rows: 1fr;
-    transition: grid-template-rows 250ms ease;
-    > .wrapper { overflow: hidden; }
-  }
-
   .target-source-control {
     &:not([hidden]) { display: flex; }
     justify-content: space-evenly;
@@ -603,7 +594,7 @@
     }
   }
 
-  .targets + button {
+  .wrapper > button {
     margin: 3px;
     width: calc(100% - 6px);
     margin-block-start: 6px;
@@ -615,6 +606,53 @@
 [data-display-challenge] {
   .hidden-dc { display: none; }
   .visible-dc { display: contents; }
+}
+
+/* ---------------------------------- */
+/*  Enchantment                       */
+/* ---------------------------------- */
+
+enchantment-application {
+  .drop-area {
+    display: grid;
+    gap: 4px;
+    min-block-size: 40px;
+    margin: 4px;
+    border: 1px dashed var(--dnd5e-color-crimson);
+    border-radius: 4px;
+    padding: 4px;
+    background: var(--dnd5e-color-card);
+
+    p {
+      place-content: center;
+      text-align: center;
+    }
+
+    .preview {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      &:not(:last-child) {
+        border-block-end: 1px dotted var(--color-border-light-2);
+        padding-block-end: 4px;
+      }
+
+      > img {
+        block-size: 32px;
+        inline-size: 32px;
+        flex: 0 0 32px;
+      }
+      > .name {
+        flex: 1;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+      }
+      > a {
+        flex: 0 0 20px;
+      }
+    }
+  }
 }
 
 /* ---------------------------------- */

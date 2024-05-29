@@ -3,6 +3,7 @@ import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
+import { EnchantmentData } from "./fields/enchantment-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -27,7 +28,7 @@ export default class FeatData extends ItemDataModel.mixin(
 ) {
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.Prerequisites"];
+  static LOCALIZATION_PREFIXES = ["DND5E.Enchantment", "DND5E.Prerequisites"];
 
   /** @inheritdoc */
   static defineSchema() {
@@ -144,6 +145,17 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritdoc */
   get hasLimitedUses() {
     return this.isActive && (!!this.recharge.value || super.hasLimitedUses);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this feature represent a group of individual enchantments (e.g. the "Infuse Item" feature stores data about
+   * all of the character's infusions).
+   * @type {boolean}
+   */
+  get isEnchantmentSource() {
+    return EnchantmentData.isEnchantmentSource(this);
   }
 
   /* -------------------------------------------- */

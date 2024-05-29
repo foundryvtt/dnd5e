@@ -1,4 +1,4 @@
-import HitDice from "../../documents/actor/HitDice.mjs";
+import HitDice from "../../documents/actor/hit-dice.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
@@ -174,10 +174,7 @@ export default class CharacterData extends CreatureTemplate {
     this.attributes.attunement.value = 0;
 
     for ( const item of this.parent.items ) {
-      // Attuned items
-      if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
-        this.attributes.attunement.value += 1;
-      }
+      if ( item.system.attuned ) this.attributes.attunement.value += 1;
     }
 
     // Character proficiency bonus
@@ -191,10 +188,11 @@ export default class CharacterData extends CreatureTemplate {
     else {
       const required = xp.max - xp.min;
       const pct = Math.round((xp.value - xp.min) * 100 / required);
-      xp.pct = Math.clamped(pct, 0, 100);
+      xp.pct = Math.clamp(pct, 0, 100);
     }
 
     AttributesFields.prepareBaseArmorClass.call(this);
+    AttributesFields.prepareBaseEncumbrance.call(this);
   }
 
   /* -------------------------------------------- */
@@ -207,10 +205,12 @@ export default class CharacterData extends CreatureTemplate {
       AttributesFields.prepareRace.call(this, this.details.race);
       this.details.type = this.details.race.system.type;
     } else {
-      this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
-      this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
       this.details.type = new CreatureTypeField({ swarm: false }).initialize({ value: "humanoid" }, this);
     }
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses[key] ??= 0;
+    this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
+    this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
   }
 
   /* -------------------------------------------- */
@@ -219,10 +219,11 @@ export default class CharacterData extends CreatureTemplate {
    * Prepare remaining character data.
    */
   prepareDerivedData() {
-    const rollData = this.getRollData({ deterministic: true });
+    const rollData = this.parent.getRollData({ deterministic: true });
     const { originalSaves } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
     AttributesFields.prepareConcentration.call(this, rollData);
@@ -242,19 +243,6 @@ export default class CharacterData extends CreatureTemplate {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  getRollData({ deterministic=false }={}) {
-    const data = super.getRollData({ deterministic });
-    data.classes = {};
-    for ( const [identifier, cls] of Object.entries(this.parent.classes) ) {
-      data.classes[identifier] = {...cls.system};
-      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
-    }
-    return data;
-  }
-
   /* -------------------------------------------- */
 
   /**

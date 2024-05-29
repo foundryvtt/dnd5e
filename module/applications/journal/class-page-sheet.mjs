@@ -1,3 +1,4 @@
+import { linkForUuid } from "../../utils.mjs";
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
@@ -179,8 +180,6 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     if ( scaleValues.length ) cols.push({class: "scale", span: scaleValues.length});
     if ( spellProgression ) cols.push(...spellProgression.cols);
 
-    const makeLink = async uuid => (await fromUuid(uuid))?.toAnchor({classes: ["content-link"]}).outerHTML;
-
     const rows = [];
     for ( const level of Array.fromRange((CONFIG.DND5E.maxLevel - (initialLevel - 1)), initialLevel) ) {
       const features = [];
@@ -191,7 +190,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
             continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(i => makeLink(i.uuid))));
+            features.push(...await Promise.all(advancement.configuration.items.map(i => linkForUuid(i.uuid))));
             break;
         }
       }
@@ -315,8 +314,6 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       { class: "features", span: 1 }
     ];
 
-    const makeLink = async uuid => (await fromUuid(uuid))?.toAnchor({classes: ["content-link"]}).outerHTML;
-
     const rows = [];
     for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
       const features = [];
@@ -324,7 +321,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
             if ( !advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(i => makeLink(i.uuid))));
+            features.push(...await Promise.all(advancement.configuration.items.map(i => linkForUuid(i.uuid))));
             break;
         }
       }

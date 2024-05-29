@@ -1,6 +1,6 @@
 {
   "_id": "h1gM8SH3BNRtFevE",
-  "name": "Ki: Quivering Palm",
+  "name": "Quivering Palm",
   "ownership": {
     "default": 0
   },
@@ -46,9 +46,9 @@
       "prompt": true
     },
     "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
+      "type": "charges",
+      "target": "Compendium.dnd5e.classfeatures.Item.10b6z2W1txNkrGP7",
+      "amount": 3,
       "scale": false
     },
     "ability": "",
@@ -93,10 +93,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234407,
-    "modifiedTime": 1704824718109,
+    "modifiedTime": 1712173665151,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!h1gM8SH3BNRtFevE"
