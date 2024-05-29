@@ -1,3 +1,4 @@
+import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
 import ActorMovementConfig from "../actor/movement-config.mjs";
@@ -8,6 +9,7 @@ import AdvancementMigrationDialog from "../advancement/advancement-migration-dia
 import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
 import SourceConfig from "../source-config.mjs";
+import EnchantmentConfig from "./enchantment-config.mjs";
 import StartingEquipmentConfig from "./starting-equipment-config.mjs";
 import SummoningConfig from "./summoning-config.mjs";
 
@@ -130,8 +132,16 @@ export default class ItemSheet5e extends ItemSheet {
       // Advancement
       advancement: this._getItemAdvancement(item),
 
+      // Enchantment
+      appliedEnchantments: item.system.enchantment?.appliedEnchantments?.map(enchantment => ({
+        enchantment,
+        name: enchantment.parent._source.name,
+        actor: enchantment.parent.actor,
+        item: enchantment.parent
+      })),
+
       // Prepare Active Effects
-      effects: EffectsElement.prepareCategories(item.effects),
+      effects: EffectsElement.prepareCategories(item.effects, { parent: this.item }),
       elements: this.options.elements,
 
       concealDetails: !game.user.isGM && (this.document.system.identified === false)
@@ -145,7 +155,10 @@ export default class ItemSheet5e extends ItemSheet {
     if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
       context.properties = item.system.validProperties.reduce((obj, k) => {
         const v = CONFIG.DND5E.itemProperties[k];
-        obj[k] = { label: v.label, selected: item.system.properties.has(k) };
+        obj[k] = {
+          label: v.label,
+          selected: item.system.properties.has(k)
+        };
         return obj;
       }, {});
       if ( item.type !== "spell" ) context.properties = sortObjectEntries(context.properties, "label");
@@ -353,6 +366,28 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve the list of fields that are currently modified by Active Effects on the Item.
+   * @returns {string[]}
+   * @protected
+   */
+  _getItemOverrides() {
+    const overrides = Object.keys(foundry.utils.flattenObject(this.item.overrides ?? {}));
+    this.item.system.getItemOverrides?.(overrides);
+    if ( "properties" in this.item.system ) {
+      ActiveEffect5e.addOverriddenChoices(this.item, "system.properties", "system.properties", overrides);
+    }
+    if ( ("damage" in this.item.system) && foundry.utils.getProperty(this.item.overrides, "system.damage.parts") ) {
+      overrides.push("damage-control");
+      Array.fromRange(2).forEach(index => overrides.push(
+        `system.damage.parts.${index}.0`, `system.damage.parts.${index}.1`
+      ));
+    }
+    return overrides;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the Array of item properties which are used in the small sidebar of the description tab.
    * @returns {string[]}   List of property labels to be shown.
    * @private
@@ -429,12 +464,14 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Handle Damage array
     const damage = formData.system?.damage;
-    if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+    if ( damage && !foundry.utils.getProperty(this.item.overrides, "system.damage.parts") ) {
+      damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+    }
 
     // Handle properties
     if ( foundry.utils.hasProperty(formData, "system.properties") ) {
       const keys = new Set(Object.keys(formData.system.properties));
-      const preserve = this.object.system.properties.difference(keys);
+      const preserve = new Set(this.item._source.system.properties ?? []).difference(keys);
       formData.system.properties = [...filteredKeys(formData.system.properties), ...preserve];
     }
 
@@ -487,15 +524,29 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.isEditable ) {
       html.find(".config-button").click(this._onConfigMenu.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
+      html.find(".enchantment-button").click(this._onEnchantmentAction.bind(this));
       html.find(".advancement .item-control").click(event => {
         const t = event.currentTarget;
         if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
       });
       html.find(".description-edit").click(event => {
+        if ( event.currentTarget.ariaDisabled ) return;
         this.editingDescriptionTarget = event.currentTarget.dataset.target;
         this.render();
       });
+      for ( const override of this._getItemOverrides() ) {
+        for ( const element of html[0].querySelectorAll(`[name="${override}"]`) ) {
+          element.disabled = true;
+          element.dataset.tooltip = "DND5E.Enchantment.Warning.Override";
+        }
+        for ( const element of html[0].querySelectorAll(`[data-target="${override}"]`) ) {
+          element.ariaDisabled = true;
+          element.dataset.tooltip = "DND5E.Enchantment.Warning.Override";
+        }
+        if ( override === "damage-control" ) html[0].querySelectorAll(".damage-control").forEach(e => e.remove());
+      }
     }
+    html[0].querySelectorAll('[data-action="view"]').forEach(e => e.addEventListener("click", this._onView.bind(this)));
 
     // Advancement context menu
     const contextOptions = this._getAdvancementContextMenuOptions();
@@ -558,6 +609,9 @@ export default class ItemSheet5e extends ItemSheet {
     const button = event.currentTarget;
     let app;
     switch ( button.dataset.action ) {
+      case "enchantment":
+        app = new EnchantmentConfig(this.item);
+        break;
       case "movement":
         app = new ActorMovementConfig(this.item, { keyPath: "system.movement" });
         break;
@@ -607,6 +661,38 @@ export default class ItemSheet5e extends ItemSheet {
       damage.parts.splice(Number(li.dataset.damagePart), 1);
       return this.item.update({"system.damage.parts": damage.parts});
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle actions on entries in the enchanted items list.
+   * @param {PointerEvent} event  Triggering click event.
+   * @private
+   */
+  async _onEnchantmentAction(event) {
+    event.preventDefault();
+    const enchantment = fromUuidSync(event.currentTarget.closest("[data-enchantment-uuid]")?.dataset.enchantmentUuid);
+    if ( !enchantment ) return;
+    switch ( event.currentTarget.dataset.action ) {
+      case "removeEnchantment":
+        await enchantment.delete();
+        this.render();
+        break;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle actions on a view sheet button.
+   * @param {PointerEvent} event  Triggering click event.
+   * @private
+   */
+  async _onView(event) {
+    event.preventDefault();
+    const doc = await fromUuid(event.currentTarget.dataset.uuid);
+    doc?.sheet.render(true);
   }
 
   /* -------------------------------------------- */
@@ -687,12 +773,24 @@ export default class ItemSheet5e extends ItemSheet {
    */
   async _onDropActiveEffect(event, data) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
-    if ( !this.item.isOwner || !effect ) return false;
-    if ( (this.item.uuid === effect.parent?.uuid) || (this.item.uuid === effect.origin) ) return false;
-    return ActiveEffect.create({
-      ...effect.toObject(),
-      origin: this.item.uuid
-    }, {parent: this.item});
+    if ( !this.item.isOwner || !effect
+      || (this.item.uuid === effect.parent?.uuid)
+      || (this.item.uuid === effect.origin) ) return false;
+    const effectData = effect.toObject();
+    let keepOrigin = false;
+
+    // Validate against the enchantment's restraints on the origin item
+    if ( effect.getFlag("dnd5e", "type") === "enchantment" ) {
+      const errors = effect.parent.system.enchantment?.canEnchant(this.item);
+      if ( errors?.length ) {
+        errors.forEach(err => ui.notifications.error(err.message));
+        return false;
+      }
+      effectData.origin ??= effect.parent.uuid;
+      keepOrigin = true;
+    }
+
+    return ActiveEffect.create(effectData, {parent: this.item, keepOrigin});
   }
 
   /* -------------------------------------------- */

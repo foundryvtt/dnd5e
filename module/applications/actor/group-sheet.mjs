@@ -142,7 +142,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const displayXP = !game.settings.get("dnd5e", "disableExperienceTracking");
     for ( const [index, memberData] of this.object.system.members.entries() ) {
       const member = memberData.actor;
-      const multiplier = type === "encounter" ? memberData.quantity.value : 1;
+      const multiplier = type === "encounter" ? (memberData.quantity.value ?? 1) : 1;
 
       const m = {
         index,
@@ -159,7 +159,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       const hp = member.system.attributes.hp;
       m.hp.current = hp.value + (hp.temp || 0);
       m.hp.max = Math.max(0, hp.effectiveMax);
-      m.hp.pct = Math.clamped((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
+      m.hp.pct = Math.clamp((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
       m.hp.color = dnd5e.documents.Actor5e.getHPColor(m.hp.current, m.hp.max).css;
       stats.currentHP += (m.hp.current * multiplier);
       stats.maxHP += (m.hp.max * multiplier);
@@ -170,8 +170,8 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * multiplier);
       }
 
-      if ( member.type === "vehicle" ) stats.nVehicles++;
-      else stats.nMembers++;
+      if ( member.type === "vehicle" ) stats.nVehicles += multiplier;
+      else stats.nMembers += multiplier;
       sections[member.type].members.push(m);
     }
     for ( const [k, section] of Object.entries(sections) ) {

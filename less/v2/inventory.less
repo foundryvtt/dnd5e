@@ -155,7 +155,7 @@
         width: 22px;
         text-align: left;
         font-weight: bold;
-        background: none;
+        background: color-mix(in oklab, var(--dnd5e-color-card), black 7%);
         border: none;
         padding: 0;
         transition: box-shadow 250ms ease;
@@ -342,6 +342,7 @@
         }
         input { text-align: end; }
       }
+      .spell-uses { display: none; }
 
       /* Item Recovery */
       .item-recovery { width: 60px; }
@@ -410,17 +411,6 @@
       /* Effect Duration */
       .effect-name {
         .name { flex: 1; }
-        .duration {
-          padding: .25rem;
-          border: 1px dashed var(--color-border-light-1);
-          border-radius: 4px;
-          font-family: var(--dnd5e-font-roboto-condensed);
-          text-transform: uppercase;
-          font-size: var(--font-size-11);
-          color: var(--color-text-dark-5);
-
-          .separator, .least-significant { color: var(--color-text-light-6); }
-        }
       }
 
       /* Effect Source */
@@ -470,10 +460,12 @@
         padding-right: .75rem;
         justify-content: end;
         color: var(--color-text-light-0);
+        align-items: center;
       }
 
       @container (min-width: 600px) {
-        .item-price, .item-formula { display: flex; }
+        .item-price, .item-formula, .spell-uses { display: flex; }
+        .subtitle-uses { display: none; }
       }
 
       @container (min-width: 650px) {
@@ -504,6 +496,18 @@
       }
       &:last-child { border: none; }
     }
+  }
+
+  .effect-name .duration, &.effect-tooltip .duration {
+    padding: .25rem;
+    border: 1px dashed var(--color-border-light-1);
+    border-radius: 4px;
+    font-family: var(--dnd5e-font-roboto-condensed);
+    text-transform: uppercase;
+    font-size: var(--font-size-11);
+    color: var(--color-text-dark-5);
+
+    .separator, .least-significant { color: var(--color-text-light-6); }
   }
 }
 

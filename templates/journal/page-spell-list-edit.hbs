@@ -40,13 +40,26 @@
     </div>
 
     <div class="right spell-list">
-        <h3>{{ localize "ITEM.TypeSpellPl" }}</h3>
+        <h3 class="flexrow">
+            {{ localize "ITEM.TypeSpellPl" }}
+            <a data-action="add-unlinked" data-tooltip="JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Add"
+               aria-label="{{ localize 'JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Add' }}">
+                <i class="fa-solid fa-plus" inert></i>
+            </a>
+        </h3>
         <ol class="items-list">
             {{#each spells}}
-            <li class="item flexrow" data-item-uuid="{{this.uuid}}">
-                <div class="item-name">{{{ dnd5e-linkForUuid this.uuid }}}</div>
+            <li class="item flexrow" data-item-uuid="{{ spell.uuid }}" data-unlinked-id="{{ unlinked._id }}">
+                <div class="item-name">{{{ display }}}</div>
                 <div class="item-controls flexrow">
-                    <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete"
+                    {{#if unlinked}}
+                    <a class="item-control" data-action="edit-unlinked"
+                       data-tooltip="JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Edit"
+                       aria-label="{{ localize 'JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Edit' }}">
+                        <i class="fa-solid fa-cog" inert></i>
+                    </a>
+                    {{/if}}
+                    <a class="item-control" data-action="delete" data-tooltip="DND5E.ItemDelete"
                        aria-label="{{ localize 'DND5E.ItemDelete' }}">
                         <i class="fa-solid fa-trash" inert></i>
                     </a>

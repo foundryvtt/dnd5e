@@ -127,6 +127,20 @@
     }
   }
 
+  .collapsible {
+    &.collapsed {
+      label .fa-caret-down { transform: rotate(-90deg); }
+      .collapsible-content { grid-template-rows: 0fr; }
+    }
+    .fa-caret-down { transition: transform 250ms ease; }
+    .collapsible-content {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows 250ms ease;
+      > .wrapper { overflow: hidden; }
+    }
+  }
+
   .unlist {
     list-style: none;
     padding: 0;
@@ -388,6 +402,44 @@
   }
 
   /* ---------------------------------- */
+  /*  Lists                             */
+  /* ---------------------------------- */
+
+  .separated-list, &.separated-list {
+    padding: 0;
+    list-style: none;
+    gap: 12px;
+
+    > li:not(.empty) {
+      position: relative;
+      padding: 8px;
+      background: var(--dnd5e-color-card);
+      border: 2px solid var(--dnd5e-color-gold);
+      border-radius: 4px;
+      box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+
+      .details {
+        gap: 4px;
+        input { height: unset; }
+        input::placeholder { opacity: .5; }
+      }
+      .list-controls {
+        flex: 0;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        gap: inherit;
+
+        button {
+          --size: 26px;
+          flex: 0 0 var(--size);
+          block-size: var(--size);
+          inline-size: var(--size);
+        }
+      }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Form Elements                     */
   /* ---------------------------------- */
 
@@ -425,8 +477,6 @@
 
   button {
     background: var(--dnd5e-background-card);
-    font-family: var(--dnd5e-font-roboto);
-    font-weight: bold;
     font-size: var(--font-size-13);
     text-transform: uppercase;
     padding: 3px;
@@ -437,6 +487,10 @@
     justify-content: center;
     gap: .25rem;
 
+    &:not(.fas, .far, .fa-solid, .fa-regular, .fa-light, .fa-duotone, .fa-thin) {
+      font-family: var(--dnd5e-font-roboto);
+      font-weight: bold;
+    }
     &:disabled {
       cursor: default;
       color: var(--color-text-dark-inactive);
@@ -811,6 +865,7 @@
       border-bottom: var(--border-style);
       border-right: var(--border-style);
       color: var(--color-text-light-6);
+      background: unset;
       --icon-fill: var(--color-text-light-6);
       --icon-stroke: var(--dnd5e-color-card);
 
@@ -895,18 +950,13 @@
 :is(.dnd5e2, .dnd5e2-journal) .window-resizable-handle {
   border-radius: 0;
   border: none;
-  background: transparent;
   color: var(--dnd5e-color-black);
   overflow: hidden;
-  font-size: 16px;
+  width: 11px;
+  height: 11px;
   cursor: nwse-resize;
-  opacity: .4;
+  opacity: .7;
+  background: transparent url('ui/resize-handle.webp') no-repeat center / contain;
 
-  > i {
-    position: absolute;
-    bottom: -3px;
-    right: 1px;
-
-    &::before { content: "\f7a5"; }
-  }
+  > i { display: none; }
 }

@@ -1,6 +1,23 @@
 import { IdentifierField } from "../fields.mjs";
+import SourceField from "../shared/source-field.mjs";
 
-const { HTMLField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, DocumentIdField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
+/**
+ * Data needed to display spells that aren't able to be linked (outside SRD & current module).
+ *
+ * @typedef {object} UnlinkedSpellConfiguration
+ * @property {string} _id            Unique ID for this entry.
+ * @property {string} name           Name of the spell.
+ * @property {object} system
+ * @property {number} system.level   Spell level.
+ * @property {string} system.school  Spell school.
+ * @property {object} source
+ * @property {string} source.book    Book/publication where the spell originated.
+ * @property {string} source.page    Page or section where the spell can be found.
+ * @property {string} source.custom  Fully custom source label.
+ * @property {string} source.uuid    UUID of the spell, if available in another module.
+ */
 
 /**
  * Data model for spell list data.
@@ -11,6 +28,7 @@ const { HTMLField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {object} description
  * @property {string} description.value  Description to display before spell list.
  * @property {Set<string>} spells        UUIDs of spells to display.
+ * @property {UnlinkedSpellConfiguration[]} unlinkedSpells  Unavailable spells that are entered manually.
  */
 export default class SpellListJournalPageData extends foundry.abstract.DataModel {
   static defineSchema() {
@@ -27,7 +45,16 @@ export default class SpellListJournalPageData extends foundry.abstract.DataModel
       description: new SchemaField({
         value: new HTMLField({label: "DND5E.Description"})
       }),
-      spells: new SetField(new StringField(), {label: "DND5E.ItemTypeSpellPl"})
+      spells: new SetField(new StringField(), {label: "DND5E.ItemTypeSpellPl"}),
+      unlinkedSpells: new ArrayField(new SchemaField({
+        _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
+        name: new StringField({required: true, label: "Name"}),
+        system: new SchemaField({
+          level: new NumberField({min: 0, integer: true, label: "DND5E.Level"}),
+          school: new StringField({label: "DND5E.School"})
+        }),
+        source: new SourceField({license: false, uuid: new StringField()})
+      }), {label: "JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Label"})
     };
   }
 

@@ -1,27 +1,45 @@
 import { FormulaField } from "../fields.mjs";
 
+const { SchemaField, SetField, StringField } = foundry.data.fields;
+
 export default class SpellConfigurationData extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      ability: new foundry.data.fields.StringField({label: "DND5E.AbilityModifier"}),
-      preparation: new foundry.data.fields.StringField({label: "DND5E.SpellPreparationMode"}),
-      uses: new foundry.data.fields.SchemaField({
+      ability: new SetField(new StringField()),
+      preparation: new StringField({label: "DND5E.SpellPreparationMode"}),
+      uses: new SchemaField({
         max: new FormulaField({deterministic: true, label: "DND5E.UsesMax"}),
-        per: new foundry.data.fields.StringField({label: "DND5E.UsesPeriod"})
+        per: new StringField({label: "DND5E.UsesPeriod"})
       }, {label: "DND5E.LimitedUses"})
     };
   }
 
   /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    if ( foundry.utils.getType(source.ability) === "string" ) {
+      source.ability = source.ability ? [source.ability] : [];
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
 
   /**
    * Changes that this spell configuration indicates should be performed on spells.
-   * @type {object}
+   * @param {object} data  Data for the advancement process.
+   * @returns {object}
    */
-  get spellChanges() {
+  getSpellChanges(data={}) {
     const updates = {};
-    if ( this.ability ) updates["system.ability"] = this.ability;
+    if ( this.ability.size ) {
+      updates["system.ability"] = this.ability.has(data.ability) ? data.ability : this.ability.first();
+    }
     if ( this.preparation ) updates["system.preparation.mode"] = this.preparation;
     if ( this.uses.max && this.uses.per ) {
       updates["system.uses.max"] = this.uses.max;

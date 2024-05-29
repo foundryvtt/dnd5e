@@ -168,14 +168,20 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Skills & tools.
+    const baseAbility = (prop, key) => {
+      let src = source.system[prop]?.[key]?.ability;
+      if ( src ) return src;
+      if ( prop === "skills" ) src = CONFIG.DND5E.skills[key]?.ability;
+      return src ?? "int";
+    };
     ["skills", "tools"].forEach(prop => {
       for ( const [key, entry] of Object.entries(context[prop]) ) {
         entry.abbreviation = CONFIG.DND5E.abilities[entry.ability]?.abbreviation;
         entry.icon = this._getProficiencyIcon(entry.value);
         entry.hover = CONFIG.DND5E.proficiencyLevels[entry.value];
-        entry.label = prop === "skills" ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, {trait: "tool"});
+        entry.label = (prop === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, {trait: "tool"});
         entry.baseValue = source.system[prop]?.[key]?.value ?? 0;
-        entry.baseAbility = source.system[prop]?.[key]?.ability ?? "int";
+        entry.baseAbility = baseAbility(prop, key);
       }
     });
 
@@ -427,7 +433,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       }
     }
 
-    // Pact magic users have cantrips and a pact magic section
+    // Create spellbook sections for all alternative spell preparation modes that have spell slots.
     for ( const [k, v] of Object.entries(CONFIG.DND5E.spellPreparationModes) ) {
       if ( !(k in levels) || !v.upcast || !levels[k].max ) continue;
 
@@ -1030,10 +1036,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    */
   _onDropResetData(itemData) {
     if ( !itemData.system ) return;
-    ["equipped", "proficient", "prepared"].forEach(k => delete itemData.system[k]);
-    if ( "attunement" in itemData.system ) {
-      itemData.system.attunement = Math.min(itemData.system.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
-    }
+    ["attuned", "equipped", "proficient", "prepared"].forEach(k => delete itemData.system[k]);
   }
 
   /* -------------------------------------------- */
@@ -1054,36 +1057,41 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const { level, preparationMode } = header?.closest("[data-level]")?.dataset ?? {};
 
     // Determine the actor's spell slot progressions, if any.
+    const spellcastKeys = Object.keys(CONFIG.DND5E.spellcastingTypes);
     const progs = Object.values(this.document.classes).reduce((acc, cls) => {
-      if ( cls.spellcasting?.type === "pact" ) acc.pact = true;
-      else if ( cls.spellcasting?.type === "leveled" ) acc.leveled = true;
+      const type = cls.spellcasting?.type;
+      if ( spellcastKeys.includes(type) ) acc.add(type);
       return acc;
-    }, {pact: false, leveled: false});
+    }, new Set());
+
+    const prep = itemData.system.preparation;
 
     // Case 1: Drop a cantrip.
     if ( itemData.system.level === 0 ) {
-      if ( ["pact", "prepared"].includes(preparationMode) ) {
-        itemData.system.preparation.mode = "prepared";
+      const modes = CONFIG.DND5E.spellPreparationModes;
+      if ( modes[preparationMode]?.cantrips ) {
+        prep.mode = "prepared";
       } else if ( !preparationMode ) {
-        const isCaster = this.document.system.details.spellLevel || progs.pact || progs.leveled;
-        itemData.system.preparation.mode = isCaster ? "prepared" : "innate";
+        const isCaster = this.document.system.details.spellLevel || progs.size;
+        prep.mode = isCaster ? "prepared" : "innate";
       } else {
-        itemData.system.preparation.mode = preparationMode;
+        prep.mode = preparationMode;
       }
-      if ( itemData.system.preparation.mode === "prepared" ) itemData.system.preparation.prepared = true;
+      if ( modes[prep.mode]?.prepares ) prep.prepared = true;
     }
 
     // Case 2: Drop a leveled spell in a section without a mode.
     else if ( (level === "0") || !preparationMode ) {
       if ( this.document.type === "npc" ) {
-        itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
+        prep.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {
-        itemData.system.preparation.mode = progs.leveled ? "prepared" : progs.pact ? "pact" : "innate";
+        const m = progs.has("leveled") ? "prepared" : (progs.first() ?? "innate");
+        prep.mode = progs.has(prep.mode) ? prep.mode : m;
       }
     }
 
     // Case 3: Drop a leveled spell in a specific section.
-    else itemData.system.preparation.mode = preparationMode;
+    else prep.mode = preparationMode;
   }
 
   /* -------------------------------------------- */

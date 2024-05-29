@@ -108,6 +108,7 @@ export default class TokenPlacement {
         this.#currentPlacement++;
         const obj = canvas.tokens.preview.addChild(this.#previews[this.#currentPlacement].object);
         await obj.draw();
+        obj.eventMode = "none";
         const placement = await this.#requestPlacement();
         if ( placement ) placements.push(placement);
       }
@@ -184,7 +185,6 @@ export default class TokenPlacement {
         reject,
         rotate: this.#onRotatePlacement.bind(this),
         skip: this.#onSkipPlacement.bind(this)
-
       };
 
       // Activate listeners

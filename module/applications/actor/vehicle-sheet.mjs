@@ -31,36 +31,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /*  Context Preparation                         */
   /* -------------------------------------------- */
 
-  /**
-   * Compute the total weight of the vehicle's cargo.
-   * @param {number} totalWeight    The cumulative item weight from inventory items
-   * @param {object} actorData      The data object for the Actor being rendered
-   * @returns {{max: number, value: number, pct: number}}
-   * @private
-   */
-  _computeEncumbrance(totalWeight, actorData) {
-
-    // Compute currency weight
-    const totalCoins = Object.values(actorData.system.currency).reduce((acc, denom) => acc + denom, 0);
-
-    const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
-      ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
-      : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
-    totalWeight += totalCoins / currencyPerWeight;
-
-    // Vehicle weights are an order of magnitude greater.
-    totalWeight /= game.settings.get("dnd5e", "metricWeightUnits")
-      ? CONFIG.DND5E.encumbrance.vehicleWeightMultiplier.metric
-      : CONFIG.DND5E.encumbrance.vehicleWeightMultiplier.imperial;
-
-    // Compute overall encumbrance
-    const max = actorData.system.attributes.capacity.cargo;
-    const pct = Math.clamped((totalWeight * 100) / max, 0, 100);
-    return {value: totalWeight.toNearest(0.1), max, pct};
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   _getMovementSpeed(actorData, largestPrimary=true) {
     return super._getMovementSpeed(actorData, largestPrimary);
@@ -210,14 +180,13 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         }, {
           label: game.i18n.localize("DND5E.Weight"),
           css: "item-weight",
-          property: "system.weight",
+          property: "system.weight.value",
           editable: "Number"
         }]
       }
     };
 
     // Classify items owned by the vehicle and compute total cargo weight
-    let totalWeight = 0;
     for ( const item of context.items ) {
       const ctx = context.itemContext[item.id] ??= {};
       this._prepareCrewedItem(item, ctx);
@@ -225,7 +194,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       // Handle cargo explicitly
       const isCargo = item.flags.dnd5e?.vehicleCargo === true;
       if ( isCargo ) {
-        totalWeight += item.system.totalWeight ?? 0;
         cargo.cargo.items.push(item);
         continue;
       }
@@ -245,7 +213,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           else features.actions.items.push(item);
           break;
         default:
-          totalWeight += item.system.totalWeight ?? 0;
           cargo.cargo.items.push(item);
       }
     }
@@ -254,7 +221,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     context.inventoryFilters = false;
     context.features = Object.values(features);
     context.cargo = Object.values(cargo);
-    context.encumbrance = this._computeEncumbrance(totalWeight, context);
+    context.encumbrance = context.system.attributes.encumbrance;
   }
 
   /* -------------------------------------------- */

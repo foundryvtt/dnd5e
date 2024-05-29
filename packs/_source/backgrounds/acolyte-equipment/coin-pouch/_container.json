@@ -21,7 +21,10 @@
     },
     "container": null,
     "quantity": 1,
-    "weight": 0,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
     "price": {
       "value": 0,
       "denomination": "gp"
@@ -50,10 +53,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1709765145012,
-    "modifiedTime": 1709765193997,
+    "modifiedTime": 1715374598468,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!dQaOdm9dbVN0RZYP"

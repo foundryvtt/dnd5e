@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "ench",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -90,19 +90,186 @@
       "somatic",
       "concentration"
     ],
-    "crewed": false
+    "crewed": false,
+    "enchantment": {
+      "restrictions": {
+        "allowMagical": false,
+        "type": "weapon"
+      },
+      "prompt": false
+    }
   },
   "sort": 0,
   "flags": {},
   "img": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Magic Weapon, +1",
+      "icon": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
+      "flags": {
+        "dnd5e": {
+          "type": "enchantment",
+          "enchantment": {
+            "level": {
+              "min": null,
+              "max": 3
+            },
+            "riders": []
+          }
+        }
+      },
+      "_id": "SLSudYaACjmmmZsU",
+      "changes": [
+        {
+          "key": "name",
+          "mode": 5,
+          "value": "{}, +1",
+          "priority": null
+        },
+        {
+          "key": "system.properties",
+          "mode": 2,
+          "value": "mgc",
+          "priority": null
+        },
+        {
+          "key": "system.magicalBonus",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>This weapon becomes a magic weapon with a +1 bonus to Attack rolls and Damage Rolls.</p>",
+      "origin": null,
+      "transfer": false,
+      "statuses": [],
+      "tint": null,
+      "_key": "!items.effects!Sgjrf8qqv97CCWM4.SLSudYaACjmmmZsU"
+    },
+    {
+      "name": "Magic Weapon, +2",
+      "icon": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
+      "flags": {
+        "dnd5e": {
+          "type": "enchantment",
+          "enchantment": {
+            "level": {
+              "min": 4,
+              "max": 5
+            },
+            "riders": []
+          }
+        }
+      },
+      "changes": [
+        {
+          "key": "name",
+          "mode": 5,
+          "value": "{}, +2",
+          "priority": null
+        },
+        {
+          "key": "system.properties",
+          "mode": 2,
+          "value": "mgc",
+          "priority": null
+        },
+        {
+          "key": "system.magicalBonus",
+          "mode": 5,
+          "value": "2",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>This weapon becomes a magic weapon with a +2 bonus to Attack rolls and Damage Rolls.</p>",
+      "origin": null,
+      "transfer": false,
+      "statuses": [],
+      "tint": null,
+      "_id": "8OhsRxK3dF1JeQXO",
+      "_key": "!items.effects!Sgjrf8qqv97CCWM4.8OhsRxK3dF1JeQXO"
+    },
+    {
+      "name": "Magic Weapon, +3",
+      "icon": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
+      "flags": {
+        "dnd5e": {
+          "type": "enchantment",
+          "enchantment": {
+            "level": {
+              "min": 6,
+              "max": null
+            },
+            "riders": []
+          }
+        }
+      },
+      "changes": [
+        {
+          "key": "name",
+          "mode": 5,
+          "value": "{}, +3",
+          "priority": null
+        },
+        {
+          "key": "system.properties",
+          "mode": 2,
+          "value": "mgc",
+          "priority": null
+        },
+        {
+          "key": "system.magicalBonus",
+          "mode": 5,
+          "value": "3",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>This weapon becomes a magic weapon with a +3 bonus to Attack rolls and Damage Rolls.</p>",
+      "origin": null,
+      "transfer": false,
+      "statuses": [],
+      "tint": null,
+      "_id": "7L1wKfaEdN85IA0Z",
+      "_key": "!items.effects!Sgjrf8qqv97CCWM4.7L1wKfaEdN85IA0Z"
+    }
+  ],
   "folder": "Qi4Se3we69ukl2V9",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234141,
-    "modifiedTime": 1704823523963,
+    "modifiedTime": 1715375403560,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Sgjrf8qqv97CCWM4"
