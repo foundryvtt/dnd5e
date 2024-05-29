@@ -36,6 +36,7 @@ export default class SpellData extends ItemDataModel.mixin(
         required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
       }),
       school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
+      sourceClass: new foundry.data.fields.StringField({label: "DND5E.SpellSourceClass"}),
       properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
         label: "DND5E.SpellComponents"
       }),
@@ -156,7 +157,15 @@ export default class SpellData extends ItemDataModel.mixin(
 
   /** @inheritdoc */
   get _typeAbilityMod() {
-    return this.parent?.actor?.system.attributes.spellcasting || "int";
+    return this.parent?.system?.ability
+    || (
+      this.parent?.system?.sourceClass
+        ? this.parent.actor?.classes[this.parent.system.sourceClass]?.system?.spellcasting?.ability
+        : null
+    )
+    || this.parent?.actor?.activeSpellCastingClass?.system?.spellcasting?.ability
+    || this.parent?.actor?.system?.attributes?.spellcasting
+    || "int";
   }
 
   /* -------------------------------------------- */
