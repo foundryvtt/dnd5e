@@ -3,9 +3,21 @@
 /* ---------------------------------- */
 
 .dnd5e2.sheet.actor.npc {
-  border: 1px solid var(--dnd5e-color-gold);
+  --dnd5e-sheet-header-height: 68px;
+  --dnd5e-sheet-sidebar-width: 180px;
   min-width: 700px;
   min-height: 700px;
+  box-shadow: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    border: var(--dnd5e-border-gold);
+    box-shadow: 0 0 20px var(--color-shadow-dark);
+    border-radius: 5px;
+  }
 
   /* ---------------------------------- */
   /*  Outer Window                      */
@@ -28,11 +40,11 @@
   /* ---------------------------------- */
 
   .sheet-header {
-    gap: 22px;
-    padding: 38px 12px 8px;
+    gap: 12px;
+    padding: 38px 12px 4px;
     align-items: stretch;
 
-    > .left { flex: 0 0 190px; }
+    > .left { flex: 0 0 var(--dnd5e-sheet-sidebar-width); }
 
     input { background: var(--dnd5e-background-5); }
 
@@ -41,8 +53,8 @@
       position: relative;
 
       > img {
-        width: 190px;
-        height: 190px;
+        width: var(--dnd5e-sheet-sidebar-width);
+        height: var(--dnd5e-sheet-sidebar-width);
         border-radius: 100%;
         border: 4px solid var(--dnd5e-color-gold);
         box-shadow: 0 0 6px var(--dnd5e-color-black);
@@ -110,7 +122,7 @@
         }
       }
 
-      > .bottom { margin-top: 32px; }
+      > .bottom { margin-top: 22px; }
     }
 
     /* Name */
@@ -307,7 +319,7 @@
     .vitals {
       display: flex;
       margin-top: -40px;
-      padding: 0 8px;
+      padding: 0 12px 0 6px;
       transform: scale(1.1);
 
       .right {
@@ -400,9 +412,8 @@
     scrollbar-color: var(--dnd5e-color-gold) transparent;
 
     .main-content {
-      --sidebar-width: 200px;
       --sidebar-padding: 8px;
-      --sidebar-size: calc(var(--sidebar-width) + var(--sidebar-padding));
+      --sidebar-size: calc(var(--dnd5e-sheet-sidebar-width) + var(--sidebar-padding));
       flex: 1;
       padding: 0 0 0 var(--sidebar-padding);
       display: flex;
@@ -426,8 +437,8 @@
 
       /* Sidebar */
       .sidebar {
-        padding-top: 8px;
-        flex: 0 0 var(--sidebar-width);
+        padding-top: 12px;
+        flex: 0 0 var(--dnd5e-sheet-sidebar-width);
         display: flex;
         flex-direction: column;
         gap: 8px;
@@ -453,13 +464,16 @@
       .tab-body {
         flex: 1;
 
-        .tab[data-tab] {
+        .tab {
           display: flex;
           padding: 8px 12px 0 16px;
+
+          &:not(.active) { display: none; }
 
           dnd5e-inventory {
             gap: 8px;
             width: 100%;
+            > .top { display: none; /* TODO */ }
             .items-list { gap: 8px; }
             .item-formula { display: flex; }
           }

@@ -3,7 +3,6 @@ import * as Trait from "../../documents/actor/trait.mjs";
 import { simplifyBonus, staticID } from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
-import Tabs5e from "../tabs.mjs";
 import ActorSheet5eCharacter from "./character-sheet.mjs";
 import ActorSheetV2Mixin from "./sheet-v2-mixin.mjs";
 
@@ -52,18 +51,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     2: "double"
   };
 
-  /**
-   * @typedef {object} SheetTabDescriptor5e
-   * @property {string} tab     The tab key.
-   * @property {string} label   The tab label's localization key.
-   * @property {string} [icon]  A font-awesome icon.
-   * @property {string} [svg]   An SVG icon.
-   */
-
-  /**
-   * Sheet tabs.
-   * @type {SheetTabDescriptor5e[]}
-   */
+  /** @override */
   static TABS = [
     { tab: "details", label: "DND5E.Details", icon: "fas fa-cog" },
     { tab: "inventory", label: "DND5E.Inventory", svg: "backpack" },
@@ -98,46 +86,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _renderOuter() {
-    const html = await super._renderOuter();
-
-    if ( !game.user.isGM && this.actor.limited ) {
-      html[0].classList.add("limited");
-      return html;
-    }
-
-    // Render tabs.
-    const nav = document.createElement("nav");
-    nav.classList.add("tabs");
-    nav.dataset.group = "primary";
-    nav.append(...this.constructor.TABS.map(({ tab, label, icon, svg }) => {
-      const item = document.createElement("a");
-      item.classList.add("item", "control");
-      item.dataset.group = "primary";
-      item.dataset.tab = tab;
-      item.dataset.tooltip = label;
-      item.setAttribute("aria-label", label);
-      if ( icon ) item.innerHTML = `<i class="${icon}"></i>`;
-      else if ( svg ) item.innerHTML = `<dnd5e-icon src="systems/dnd5e/icons/svg/${svg}.svg"></dnd5e-icon>`;
-      return item;
-    }));
-    html[0].insertAdjacentElement("afterbegin", nav);
-    this._tabs = this.options.tabs.map(t => {
-      t.callback = this._onChangeTab.bind(this);
-      if ( this._tabs?.[0]?.active !== t.initial ) t.initial = this._tabs?.[0]?.active ?? t.initial;
-      return new Tabs5e(t);
-    });
-
-    // Set theme
-    // TODO: Re-enable this when we support V12 only
-    // setTheme(html[0], this.actor.getFlag("dnd5e", "theme"));
-
-    return html;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   async _render(force=false, options={}) {
     await super._render(force, options);
     if ( !this.rendered ) return;
@@ -154,10 +102,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   async getData(options) {
     this._concentration = this.actor.concentration; // Cache concentration so it's not called for every item.
     const context = await super.getData(options);
-    const activeTab = (game.user.isGM || !this.actor.limited) ? this._tabs?.[0]?.active ?? "details" : "biography";
-    context.cssClass += ` tab-${activeTab}`;
-    context.sidebarCollapsed = !!game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
-    if ( context.sidebarCollapsed ) context.cssClass += " collapsed";
     const { attributes, details, traits } = this.actor.system;
 
     // Class
@@ -560,10 +504,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /** @inheritDoc */
   _onChangeTab(event, tabs, active) {
     super._onChangeTab(event, tabs, active);
-    this.form.className = this.form.className.replace(/tab-\w+/g, "");
-    this.form.classList.add(`tab-${active}`);
-    const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${active}.collapseSidebar`);
-    if ( sidebarCollapsed !== undefined ) this._toggleSidebar(sidebarCollapsed);
     const createChild = this.form.querySelector(".create-child");
     createChild.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
       type: game.i18n.localize(`DOCUMENT.${active === "effects" ? "ActiveEffect" : "Item"}`)

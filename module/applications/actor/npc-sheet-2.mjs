@@ -11,9 +11,20 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       classes: ["dnd5e2", "sheet", "actor", "npc"],
       width: 700,
       height: 700,
-      resizable: true
+      resizable: true,
+      scrollY: [".main-content"],
+      tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "details" }]
     });
   }
+
+  /** @override */
+  static TABS = [
+    { tab: "features", label: "DND5E.Features", icon: "fas fa-list" },
+    { tab: "inventory", label: "DND5E.Inventory", svg: "backpack" },
+    { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
+    { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
+    { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" }
+  ];
 
   /* -------------------------------------------- */
 
@@ -28,10 +39,6 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   async getData(options) {
     const context = await super.getData(options);
     const { attributes, details, resources } = this.actor.system;
-
-    // Sidebar
-    context.sidebarCollapsed = !!game.user.getFlag("dnd5e", "sheetPrefs.npc.tabs.details.collapseSidebar");
-    if ( context.sidebarCollapsed ) context.cssClass += " collapsed";
 
     // CR
     context.labels.cr = {
@@ -114,6 +121,38 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _prepareItems(context) {
+    super._prepareItems(context);
+    const inventory = {};
+    const inventoryTypes = Object.entries(CONFIG.Item.dataModels)
+      .filter(([, model]) => model.metadata?.inventoryItem)
+      .sort(([, lhs], [, rhs]) => (lhs.metadata.inventoryOrder - rhs.metadata.inventoryOrder));
+    for ( const [type] of inventoryTypes ) {
+      inventory[type] = { label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], dataset: { type } };
+    }
+    context.features = context.features.filter(section => {
+      if ( section.dataset.type === "loot" ) {
+        section.items.forEach(i => inventory[i.type]?.items.push(i));
+        return false;
+      }
+      if ( (section.dataset.type === "feat") && !("activation.type" in section.dataset) ) {
+        section.dataset.type = "passive";
+      }
+      if ( section.dataset.type === "weapon" ) inventory.weapon.items = section.items;
+      return true;
+    });
+    // TODO: These labels should be pluralised.
+    Object.entries(CONFIG.DND5E.abilityActivationTypes).forEach(([type, label]) => context.features.push({
+      label, items: [], hasActions: true, dataset: { type }
+    }));
+    // TODO: Containers.
+    context.inventory = Object.values(inventory);
+    context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   _prepareItem(item, ctx) {
     const { system } = item;
@@ -156,13 +195,5 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     event.preventDefault();
     await this._onSubmit(event);
     return this.actor.longRest();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onToggleSidebar() {
-    const collapsed = this._toggleSidebar();
-    game.user.setFlag("dnd5e", "sheetPrefs.npc.tabs.details.collapseSidebar", collapsed);
   }
 }

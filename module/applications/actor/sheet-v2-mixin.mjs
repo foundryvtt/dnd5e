@@ -1,5 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import { formatNumber, simplifyBonus } from "../../utils.mjs";
+import Tabs5e from "../tabs.mjs";
 
 /**
  * Adds common V2 sheet functionality.
@@ -8,6 +9,20 @@ import { formatNumber, simplifyBonus } from "../../utils.mjs";
  */
 export default function ActorSheetV2Mixin(Base) {
   return class ActorSheetV2 extends Base {
+    /**
+     * @typedef {object} SheetTabDescriptor5e
+     * @property {string} tab     The tab key.
+     * @property {string} label   The tab label's localization key.
+     * @property {string} [icon]  A font-awesome icon.
+     * @property {string} [svg]   An SVG icon.
+     */
+
+    /**
+     * Sheet tabs.
+     * @type {SheetTabDescriptor5e[]}
+     */
+    static TABS = [];
+
     /**
      * Available sheet modes.
      * @enum {number}
@@ -29,6 +44,12 @@ export default function ActorSheetV2Mixin(Base) {
     /** @inheritDoc */
     async _renderOuter() {
       const html = await super._renderOuter();
+
+      if ( !game.user.isGM && this.actor.limited ) {
+        html[0].classList.add("limited");
+        return html;
+      }
+
       const header = html[0].querySelector(".window-header");
 
       // Add edit <-> play slide toggle.
@@ -58,6 +79,28 @@ export default function ActorSheetV2Mixin(Base) {
         idLink.classList.add("header-button");
       }
 
+      // Render tabs.
+      const nav = document.createElement("nav");
+      nav.classList.add("tabs");
+      nav.dataset.group = "primary";
+      nav.append(...this.constructor.TABS.map(({ tab, label, icon, svg }) => {
+        const item = document.createElement("a");
+        item.classList.add("item", "control");
+        item.dataset.group = "primary";
+        item.dataset.tab = tab;
+        item.dataset.tooltip = label;
+        item.setAttribute("aria-label", label);
+        if ( icon ) item.innerHTML = `<i class="${icon}"></i>`;
+        else if ( svg ) item.innerHTML = `<dnd5e-icon src="systems/dnd5e/icons/svg/${svg}.svg"></dnd5e-icon>`;
+        return item;
+      }));
+      html[0].insertAdjacentElement("afterbegin", nav);
+      this._tabs = this.options.tabs.map(t => {
+        t.callback = this._onChangeTab.bind(this);
+        if ( this._tabs?.[0]?.active !== t.initial ) t.initial = this._tabs?.[0]?.active ?? t.initial;
+        return new Tabs5e(t);
+      });
+
       return html;
     }
 
@@ -68,6 +111,10 @@ export default function ActorSheetV2Mixin(Base) {
       const context = await super.getData(options);
       context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
       context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
+      const activeTab = (game.user.isGM || !this.actor.limited) ? this._tabs?.[0]?.active ?? "details" : "biography";
+      context.cssClass += ` tab-${activeTab}`;
+      context.sidebarCollapsed = !!game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
+      if ( context.sidebarCollapsed ) context.cssClass += " collapsed";
       const { attributes } = this.actor.system;
 
       // Portrait
@@ -211,6 +258,17 @@ export default function ActorSheetV2Mixin(Base) {
       this._mode = toggle.checked ? MODES.EDIT : MODES.PLAY;
       await this.submit();
       this.render();
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    _onChangeTab(event, tabs, active) {
+      super._onChangeTab(event, tabs, active);
+      this.form.className = this.form.className.replace(/tab-\w+/g, "");
+      this.form.classList.add(`tab-${active}`);
+      const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${active}.collapseSidebar`);
+      if ( sidebarCollapsed !== undefined ) this._toggleSidebar(sidebarCollapsed);
     }
 
     /* -------------------------------------------- */

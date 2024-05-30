@@ -1,8 +1,8 @@
 <{{ elements.inventory }} class="inventory-element" v2>
 
     {{!-- Searching, Filtering, & Sorting --}}
-    <item-list-controls for="features" label="{{ localize "DND5E.FeatureSearch" }}" sort="toggle"
-                        group-label="{{ localize "DND5E.FilterGroupOrigin" }}" collection="items">
+    <item-list-controls for="features" label="{{ localize "DND5E.FeatureSearch" }}" sort="toggle" group
+                        group-label="{{ localize "DND5E.FilterGroupAction" }}" collection="items">
         <datalist>
             <option value="action">{{ localize "DND5E.Action" }}</option>
             <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
@@ -35,7 +35,8 @@
 
                 {{!-- Items --}}
                 <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
-                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}">
+                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}" data-grouped="{{ ctx.group }}"
+                    data-ungrouped="{{ ../dataset.type }}">
 
                     {{!-- Item Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
