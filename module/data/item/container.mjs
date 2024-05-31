@@ -40,6 +40,15 @@ export default class ContainerData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true,
+    inventoryItem: true,
+    inventoryOrder: 500
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -75,19 +84,9 @@ export default class ContainerData extends ItemDataModel.mixin(
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  prepareDerivedData() {
-    const system = this;
-    Object.defineProperty(this.capacity, "weightless", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `system.capacity.weightless` value on containers has migrated to the 'weightlessContents' property.",
-          { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-        );
-        return system.properties.has("weightlessContents");
-      },
-      configurable: true
-    });
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalEquippableData();
   }
 
   /* -------------------------------------------- */
@@ -192,7 +191,9 @@ export default class ContainerData extends ItemDataModel.mixin(
    */
   get contentsWeight() {
     if ( this.parent?.pack && !this.parent?.isEmbedded ) return this.#contentsWeight();
-    return this.contents.reduce((weight, item) => weight + item.system.totalWeight, this.currencyWeight);
+    return this.contents.reduce((weight, item) =>
+      weight + item.system.totalWeightIn(this.weight.units), this.currencyWeight
+    );
   }
 
   /**
@@ -201,7 +202,9 @@ export default class ContainerData extends ItemDataModel.mixin(
    */
   async #contentsWeight() {
     const contents = await this.contents;
-    return contents.reduce(async (weight, item) => await weight + await item.system.totalWeight, this.currencyWeight);
+    return contents.reduce(async (weight, item) =>
+      await weight + await item.system.totalWeightIn(this.weight.units), this.currencyWeight
+    );
   }
 
   /* -------------------------------------------- */
@@ -211,10 +214,10 @@ export default class ContainerData extends ItemDataModel.mixin(
    * @type {number|Promise<number>}
    */
   get totalWeight() {
-    if ( this.properties.has("weightlessContents") ) return this.weight;
+    if ( this.properties.has("weightlessContents") ) return this.weight.value;
     const containedWeight = this.contentsWeight;
-    if ( containedWeight instanceof Promise ) return containedWeight.then(c => this.weight + c);
-    return this.weight + containedWeight;
+    if ( containedWeight instanceof Promise ) return containedWeight.then(c => this.weight.value + c);
+    return this.weight.value + containedWeight;
   }
 
   /* -------------------------------------------- */
@@ -241,7 +244,7 @@ export default class ContainerData extends ItemDataModel.mixin(
       context.value = await this.contentsCount;
       context.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
     }
-    context.pct = Math.clamped(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
+    context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;
   }
 

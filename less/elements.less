@@ -183,3 +183,21 @@ item-list-controls search {
 
   .filter-control[data-action="sort"] { padding-left: .625rem; }
 }
+
+/* ---------------------------------- */
+/*  Multi Select                      */
+/* ---------------------------------- */
+
+.dnd5e multi-select .tags {
+  flex-wrap: wrap;
+  .tag { cursor: pointer; }
+}
+
+/* ---------------------------------- */
+/*  Document Tags                     */
+/* ---------------------------------- */
+
+document-tags:has(> .content-link) {
+  display: flex;
+  flex-wrap: wrap;
+}

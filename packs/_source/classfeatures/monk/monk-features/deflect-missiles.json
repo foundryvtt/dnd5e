@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Starting at 3rd level, you can use your reaction to deflect or catch the missile when you are hit by a ranged weapon attack. When you do so, the damage you take from the attack is reduced by 1d10 + your Dexterity modifier + your monk level.</p><p>If you reduce the damage to 0, you can catch the missile if it is small enough for you to hold in one hand and you have at least one hand free. If you catch a missile in this way, you can spend 1 @UUID[Compendium.dnd5e.classfeatures.Item.10b6z2W1txNkrGP7]{Ki} point to make a ranged attack with the weapon or piece of ammunition you just caught, as part of the same reaction. You make this attack with proficiency, regardless of your weapon proficiencies, and the missile counts as a monk weapon for the attack, which has a normal range of 20 feet and a long range of 60 feet.</p><section class=\"secret foundry-note\" id=\"secret-ilfImwMJMJ8c9dEF\"><p><strong>Foundry Note</strong></p><p>The reduce damage roll is calculated by the Other Formula.</p></section>",
+      "value": "<p>Starting at 3rd level, you can use your reaction to deflect or catch the missile when you are hit by a ranged weapon attack. When you do so, the damage you take from the attack is reduced by [[/r 1d10 + @abilities.dex.mod + @classes.monk.levels]]{1d10 + your Dexterity modifier + your monk level}.</p><p>If you reduce the damage to 0, you can catch the missile if it is small enough for you to hold in one hand and you have at least one hand free. If you catch a missile in this way, you can spend 1 @UUID[Compendium.dnd5e.classfeatures.Item.10b6z2W1txNkrGP7]{Ki} point to make a ranged attack with the weapon or piece of ammunition you just caught, as part of the same reaction. You make this attack with proficiency, regardless of your weapon proficiencies, and the missile counts as a monk weapon for the attack, which has a normal range of 20 feet and a long range of 60 feet.</p>",
       "chat": ""
     },
     "source": {
@@ -19,7 +19,7 @@
     "activation": {
       "type": "reaction",
       "cost": 1,
-      "condition": "Can be thrown back using 1 ki point"
+      "condition": ""
     },
     "duration": {
       "value": "",
@@ -46,9 +46,9 @@
       "prompt": true
     },
     "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
+      "type": "charges",
+      "target": "Compendium.dnd5e.classfeatures.Item.10b6z2W1txNkrGP7",
+      "amount": 1,
       "scale": false
     },
     "ability": "dex",
@@ -68,7 +68,7 @@
       ],
       "versatile": ""
     },
-    "formula": "1d10 + @mod + @classes.monk.levels",
+    "formula": "",
     "save": {
       "ability": "",
       "dc": null,
@@ -76,7 +76,7 @@
     },
     "type": {
       "value": "class",
-      "subtype": ""
+      "subtype": "ki"
     },
     "requirements": "Monk 3",
     "recharge": {
@@ -93,10 +93,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234421,
-    "modifiedTime": 1704824718710,
+    "modifiedTime": 1712173646267,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!mzweVbnsJPQiVkAe"

@@ -6,6 +6,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
+import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 
 /**
  * Data definition for Tool items.
@@ -14,6 +15,7 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
+ * @mixes ActivatedEffectTemplate
  *
  * @property {string} ability     Default ability when this tool is being used.
  * @property {string} chatFlavor  Additional text added to chat when this tool is used.
@@ -21,7 +23,8 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @property {string} bonus       Bonus formula added to tool rolls.
  */
 export default class ToolData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate
+  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
+  PhysicalItemTemplate, EquippableItemTemplate, ActivatedEffectTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
@@ -40,6 +43,15 @@ export default class ToolData extends ItemDataModel.mixin(
       bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
     });
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true,
+    inventoryItem: true,
+    inventoryOrder: 400
+  }, {inplace: false}));
 
   /* -------------------------------------------- */
   /*  Migrations                                  */
@@ -69,6 +81,13 @@ export default class ToolData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalEquippableData();
   }
 
   /* -------------------------------------------- */

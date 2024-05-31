@@ -33,7 +33,7 @@
             <div class="weight">
                 {{#if weight}}
                 <i class="fas fa-weight-hanging"></i>
-                <span>{{ weight }}</span>
+                <span>{{ weight.value }}</span>
                 {{/if}}
             </div>
         </div>
@@ -88,4 +88,10 @@
         {{/each}}
         {{/if}}
     </ul>
+    {{#if controlHints}}
+    <div class="lock-hint">
+        <img src="systems/dnd5e/icons/svg/mouse-middle.svg" alt="{{ localize "DND5E.Controls.MiddleClick" }}">
+        <span>{{ localize "DND5E.Controls.LockHint" }}</span>
+    </div>
+    {{/if}}
 </section>

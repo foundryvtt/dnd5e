@@ -313,17 +313,18 @@ preLocalize("alignments");
 
 /**
  * An enumeration of item attunement types.
- * @enum {number}
+ * @enum {string}
  */
 DND5E.attunementTypes = {
-  NONE: 0,
-  REQUIRED: 1,
-  ATTUNED: 2
+  required: "DND5E.AttunementRequired",
+  optional: "DND5E.AttunementOptional"
 };
+preLocalize("attunementTypes");
 
 /**
  * An enumeration of item attunement states.
  * @type {{"0": string, "1": string, "2": string}}
+ * @deprecated since 3.2, available until 3.4
  */
 DND5E.attunements = {
   0: "DND5E.AttunementNone",
@@ -642,25 +643,6 @@ DND5E.actorSizes = {
   }
 };
 preLocalize("actorSizes", { keys: ["label", "abbreviation"] });
-patchConfig("actorSizes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
-
-/**
- * Default token image size for the values of `DND5E.actorSizes`.
- * @enum {number}
- * @deprecated since DnD5e 3.0, available until DnD5e 3.2
- */
-Object.defineProperty(DND5E, "tokenSizes", {
-  get() {
-    foundry.utils.logCompatibilityWarning(
-      "DND5E.tokenSizes has been deprecated and is now accessible through the .token property on DND5E.actorSizes.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-    );
-    return Object.entries(DND5E.actorSizes).reduce((obj, [k, v]) => {
-      obj[k] = v.token ?? 1;
-      return obj;
-    }, {});
-  }
-});
 
 /* -------------------------------------------- */
 /*  Canvas                                      */
@@ -727,96 +709,95 @@ DND5E.creatureTypes = {
   aberration: {
     label: "DND5E.CreatureAberration",
     plural: "DND5E.CreatureAberrationPl",
-    icon: "/icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp",
+    icon: "icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.yy50qVC1JhPHt4LC",
     detectAlignment: true
   },
   beast: {
     label: "DND5E.CreatureBeast",
     plural: "DND5E.CreatureBeastPl",
-    icon: "/icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+    icon: "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6bTHn7pZek9YX2tv"
   },
   celestial: {
     label: "DND5E.CreatureCelestial",
     plural: "DND5E.CreatureCelestialPl",
-    icon: "/icons/creatures/abilities/wings-birdlike-blue.webp",
+    icon: "icons/creatures/abilities/wings-birdlike-blue.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.T5CJwxjhBbi6oqaM",
     detectAlignment: true
   },
   construct: {
     label: "DND5E.CreatureConstruct",
     plural: "DND5E.CreatureConstructPl",
-    icon: "/icons/creatures/magical/construct-stone-earth-gray.webp",
+    icon: "icons/creatures/magical/construct-stone-earth-gray.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jQGAJZBZTqDFod8d"
   },
   dragon: {
     label: "DND5E.CreatureDragon",
     plural: "DND5E.CreatureDragonPl",
-    icon: "/icons/creatures/abilities/dragon-fire-breath-orange.webp",
+    icon: "icons/creatures/abilities/dragon-fire-breath-orange.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.k2IRXZwGk9W0PM2S"
   },
   elemental: {
     label: "DND5E.CreatureElemental",
     plural: "DND5E.CreatureElementalPl",
-    icon: "/icons/creatures/magical/spirit-fire-orange.webp",
+    icon: "icons/creatures/magical/spirit-fire-orange.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.7z1LXGGkXpHuzkFh",
     detectAlignment: true
   },
   fey: {
     label: "DND5E.CreatureFey",
     plural: "DND5E.CreatureFeyPl",
-    icon: "/icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
+    icon: "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.OFsRUt3pWljgm8VC",
     detectAlignment: true
   },
   fiend: {
     label: "DND5E.CreatureFiend",
     plural: "DND5E.CreatureFiendPl",
-    icon: "/icons/magic/death/skull-horned-goat-pentagram-red.webp",
+    icon: "icons/magic/death/skull-horned-goat-pentagram-red.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ElHKBJeiJPC7gj6k",
     detectAlignment: true
   },
   giant: {
     label: "DND5E.CreatureGiant",
     plural: "DND5E.CreatureGiantPl",
-    icon: "/icons/creatures/magical/humanoid-giant-forest-blue.webp",
+    icon: "icons/creatures/magical/humanoid-giant-forest-blue.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.AOXn3Mv5vPZwo0Uf"
   },
   humanoid: {
     label: "DND5E.CreatureHumanoid",
     plural: "DND5E.CreatureHumanoidPl",
-    icon: "/icons/magic/unholy/strike-body-explode-disintegrate.webp",
+    icon: "icons/magic/unholy/strike-body-explode-disintegrate.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iFzQs4AenN8ALRvw"
   },
   monstrosity: {
     label: "DND5E.CreatureMonstrosity",
     plural: "DND5E.CreatureMonstrosityPl",
-    icon: "/icons/creatures/abilities/mouth-teeth-rows-red.webp",
+    icon: "icons/creatures/abilities/mouth-teeth-rows-red.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TX0yPEFTn79AMZ8P"
   },
   ooze: {
     label: "DND5E.CreatureOoze",
     plural: "DND5E.CreatureOozePl",
-    icon: "/icons/creatures/slimes/slime-movement-pseudopods-green.webp",
+    icon: "icons/creatures/slimes/slime-movement-pseudopods-green.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.cgzIC1ecG03D97Fg"
   },
   plant: {
     label: "DND5E.CreaturePlant",
     plural: "DND5E.CreaturePlantPl",
-    icon: "/icons/magic/nature/tree-animated-strike.webp",
+    icon: "icons/magic/nature/tree-animated-strike.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.1oT7t6tHE4kZuSN1"
   },
   undead: {
     label: "DND5E.CreatureUndead",
     plural: "DND5E.CreatureUndeadPl",
-    icon: "/icons/magic/death/skull-horned-worn-fire-blue.webp",
+    icon: "icons/magic/death/skull-horned-worn-fire-blue.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.D2BdqS1GeD5rcZ6q",
     detectAlignment: true
   }
 };
 preLocalize("creatureTypes", { keys: ["label", "plural"], sort: true });
-patchConfig("creatureTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 
@@ -829,10 +810,11 @@ DND5E.itemActionTypes = {
   rwak: "DND5E.ActionRWAK",
   msak: "DND5E.ActionMSAK",
   rsak: "DND5E.ActionRSAK",
+  abil: "DND5E.ActionAbil",
   save: "DND5E.ActionSave",
+  ench: "DND5E.ActionEnch",
   summ: "DND5E.ActionSumm",
   heal: "DND5E.ActionHeal",
-  abil: "DND5E.ActionAbil",
   util: "DND5E.ActionUtil",
   other: "DND5E.ActionOther"
 };
@@ -887,7 +869,7 @@ DND5E.limitedUseFormulaPeriods = {
  * @typedef {object} LimitedUsePeriodConfiguration
  * @property {string} label           Localized label.
  * @property {string} abbreviation    Shorthand form of the label.
- * @property {boolean} [formula]      Whether this limited use period restores chargs via formula.
+ * @property {boolean} [formula]      Whether this limited use period restores charges via formula.
  */
 
 /**
@@ -925,6 +907,25 @@ DND5E.limitedUsePeriods = {
 };
 preLocalize("limitedUsePeriods", { keys: ["label", "abbreviation"] });
 patchConfig("limitedUsePeriods", "label", { since: "DnD5e 3.1", until: "DnD5e 3.3" });
+
+/* -------------------------------------------- */
+
+/**
+ * Periods at which enchantments can be re-bound to new items.
+ * @enum {{ label: string }}
+ */
+DND5E.enchantmentPeriods = {
+  sr: {
+    label: "DND5E.UsesPeriods.Sr"
+  },
+  lr: {
+    label: "DND5E.UsesPeriods.Lr"
+  },
+  atwill: {
+    label: "DND5E.UsesPeriods.AtWill"
+  }
+};
+preLocalize("enchantmentPeriods", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -1127,7 +1128,6 @@ DND5E.consumableTypes = {
     label: "DND5E.ConsumableTrinket"
   }
 };
-patchConfig("consumableTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 preLocalize("consumableTypes", { key: "label", sort: true });
 preLocalize("consumableTypes.ammo.subtypes", { sort: true });
 preLocalize("consumableTypes.poison.subtypes", { sort: true });
@@ -1241,6 +1241,13 @@ DND5E.featureTypes = {
   race: {
     label: "DND5E.Feature.Race"
   },
+  enchantment: {
+    label: "DND5E.Enchantment.Label",
+    subtypes: {
+      artificerInfusion: "DND5E.Feature.Class.ArtificerInfusion",
+      rune: "DND5E.Feature.Class.Rune"
+    }
+  },
   feat: {
     label: "DND5E.Feature.Feat"
   },
@@ -1255,6 +1262,7 @@ DND5E.featureTypes = {
 };
 preLocalize("featureTypes", { key: "label" });
 preLocalize("featureTypes.class.subtypes", { sort: true });
+preLocalize("featureTypes.enchantment.subtypes", { sort: true });
 preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
 
 /* -------------------------------------------- */
@@ -1513,20 +1521,6 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 /* -------------------------------------------- */
 
 /**
- * Types of damage that are considered physical.
- * @deprecated since DnD5e 3.0, available until DnD5e 3.2
- * @enum {string}
- */
-DND5E.physicalDamageTypes = {
-  bludgeoning: "DND5E.DamageBludgeoning",
-  piercing: "DND5E.DamagePiercing",
-  slashing: "DND5E.DamageSlashing"
-};
-preLocalize("physicalDamageTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
  * Configuration data for damage types.
  *
  * @typedef {object} DamageTypeConfiguration
@@ -1534,6 +1528,7 @@ preLocalize("physicalDamageTypes", { sort: true });
  * @property {string} icon           Icon representing this type.
  * @property {boolean} [isPhysical]  Is this a type that can be bypassed by magical or silvered weapons?
  * @property {string} [reference]    Reference to a rule page describing this damage type.
+ * @property {Color} Color           Visual color of the damage type.
  */
 
 /**
@@ -1544,73 +1539,85 @@ DND5E.damageTypes = {
   acid: {
     label: "DND5E.DamageAcid",
     icon: "systems/dnd5e/icons/svg/damage/acid.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.IQhbKRPe1vCPdh8v"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.IQhbKRPe1vCPdh8v",
+    color: new Color(0x839D50)
   },
   bludgeoning: {
     label: "DND5E.DamageBludgeoning",
     icon: "systems/dnd5e/icons/svg/damage/bludgeoning.svg",
     isPhysical: true,
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.39LFrlef94JIYO8m"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.39LFrlef94JIYO8m",
+    color: new Color(0x0000A0)
   },
   cold: {
     label: "DND5E.DamageCold",
     icon: "systems/dnd5e/icons/svg/damage/cold.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4xsFUooHDEdfhw6g"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4xsFUooHDEdfhw6g",
+    color: new Color(0xADD8E6)
   },
   fire: {
     label: "DND5E.DamageFire",
     icon: "systems/dnd5e/icons/svg/damage/fire.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.f1S66aQJi4PmOng6"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.f1S66aQJi4PmOng6",
+    color: new Color(0xFF4500)
   },
   force: {
     label: "DND5E.DamageForce",
     icon: "systems/dnd5e/icons/svg/damage/force.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.eFTWzngD8dKWQuUR"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.eFTWzngD8dKWQuUR",
+    color: new Color(0x800080)
   },
   lightning: {
     label: "DND5E.DamageLightning",
     icon: "systems/dnd5e/icons/svg/damage/lightning.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9SaxFJ9bM3SutaMC"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9SaxFJ9bM3SutaMC",
+    color: new Color(0x1E90FF)
   },
   necrotic: {
     label: "DND5E.DamageNecrotic",
     icon: "systems/dnd5e/icons/svg/damage/necrotic.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.klOVUV5G1U7iaKoG"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.klOVUV5G1U7iaKoG",
+    color: new Color(0x006400)
   },
   piercing: {
     label: "DND5E.DamagePiercing",
     icon: "systems/dnd5e/icons/svg/damage/piercing.svg",
     isPhysical: true,
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.95agSnEGTdAmKhyC"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.95agSnEGTdAmKhyC",
+    color: new Color(0xC0C0C0)
   },
   poison: {
     label: "DND5E.DamagePoison",
-    icon: "systems/dnd5e/icons/svg/statuses/poisoned.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.k5wOYXdWPzcWwds1"
+    icon: "systems/dnd5e/icons/svg/damage/poison.svg",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.k5wOYXdWPzcWwds1",
+    color: new Color(0x8A2BE2)
   },
   psychic: {
     label: "DND5E.DamagePsychic",
     icon: "systems/dnd5e/icons/svg/damage/psychic.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.YIKbDv4zYqbE5teJ"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.YIKbDv4zYqbE5teJ",
+    color: new Color(0xFF1493)
   },
   radiant: {
     label: "DND5E.DamageRadiant",
     icon: "systems/dnd5e/icons/svg/damage/radiant.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.5tcK9buXWDOw8yHH"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.5tcK9buXWDOw8yHH",
+    color: new Color(0xFFD700)
   },
   slashing: {
     label: "DND5E.DamageSlashing",
     icon: "systems/dnd5e/icons/svg/damage/slashing.svg",
     isPhysical: true,
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.sz2XKQ5lgsdPEJOa"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.sz2XKQ5lgsdPEJOa",
+    color: new Color(0x8B0000)
   },
   thunder: {
     label: "DND5E.DamageThunder",
     icon: "systems/dnd5e/icons/svg/damage/thunder.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iqsmMHk7FSpiNkQy"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iqsmMHk7FSpiNkQy",
+    color: new Color(0x708090)
   }
 };
-patchConfig("damageTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 preLocalize("damageTypes", { keys: ["label"], sort: true });
 
 /* -------------------------------------------- */
@@ -1624,14 +1631,15 @@ preLocalize("damageTypes", { keys: ["label"], sort: true });
 DND5E.healingTypes = {
   healing: {
     label: "DND5E.Healing",
-    icon: "systems/dnd5e/icons/svg/damage/healing.svg"
+    icon: "systems/dnd5e/icons/svg/damage/healing.svg",
+    color: new Color(0x46C252)
   },
   temphp: {
     label: "DND5E.HealingTemp",
-    icon: "systems/dnd5e/icons/svg/damage/temphp.svg"
+    icon: "systems/dnd5e/icons/svg/damage/temphp.svg",
+    color: new Color(0x4B66DE)
   }
 };
-patchConfig("healingTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 preLocalize("healingTypes", { keys: ["label"] });
 
 /* -------------------------------------------- */
@@ -1697,17 +1705,62 @@ preLocalize("distanceUnits");
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for a weight unit.
+ *
+ * @typedef {object} WeightUnitConfiguration
+ * @property {string} label         Localized label for the unit.
+ * @property {string} abbreviation  Localized abbreviation for the unit.
+ * @property {number} conversion    Number that by which this unit should be multiplied to arrive at a standard value.
+ * @property {string} type          Whether this is an "imperial" or "metric" unit.
+ */
+
+/**
+ * The valid units for measurement of weight.
+ * @enum {WeightUnitConfiguration}
+ */
+DND5E.weightUnits = {
+  lb: {
+    label: "DND5E.WeightUnit.Pounds.Label",
+    abbreviation: "DND5E.WeightUnit.Pounds.Abbreviation",
+    conversion: 1,
+    type: "imperial"
+  },
+  tn: {
+    label: "DND5E.WeightUnit.Tons.Label",
+    abbreviation: "DND5E.WeightUnit.Tons.Abbreviation",
+    conversion: 2000,
+    type: "imperial"
+  },
+  kg: {
+    label: "DND5E.WeightUnit.Kilograms.Label",
+    abbreviation: "DND5E.WeightUnit.Kilograms.Abbreviation",
+    conversion: 2.5,
+    type: "metric"
+  },
+  Mg: {
+    label: "DND5E.WeightUnit.Megagrams.Label",
+    abbreviation: "DND5E.WeightUnit.Megagrams.Abbreviation",
+    conversion: 2500,
+    type: "metric"
+  }
+};
+preLocalize("weightUnits", { keys: ["label", "abbreviation"] });
+
+/* -------------------------------------------- */
+
+/**
  * Encumbrance configuration data.
  *
  * @typedef {object} EncumbranceConfiguration
  * @property {Record<string, number>} currencyPerWeight  Pieces of currency that equal a base weight (lbs or kgs).
- * @property {Record<string, object>} effects            Data used to create encumbrance-replated Active Effects.
+ * @property {Record<string, object>} effects            Data used to create encumbrance-related Active Effects.
  * @property {object} threshold                          Amount to multiply strength to get given capacity threshold.
  * @property {Record<string, number>} threshold.encumbered
  * @property {Record<string, number>} threshold.heavilyEncumbered
  * @property {Record<string, number>} threshold.maximum
  * @property {Record<string, {ft: number, m: number}>} speedReduction  Speed reduction caused by encumbered status.
  * @property {Record<string, number>} vehicleWeightMultiplier  Multiplier used to determine vehicle carrying capacity.
+ * @property {Record<string, Record<string, string>>} baseUnits  Base units used to calculate carrying weight.
  */
 
 /**
@@ -1736,15 +1789,15 @@ DND5E.encumbrance = {
   threshold: {
     encumbered: {
       imperial: 5,
-      metric: 2.2
+      metric: 2.5
     },
     heavilyEncumbered: {
       imperial: 10,
-      metric: 4.5
+      metric: 5
     },
     maximum: {
       imperial: 15,
-      metric: 6.8
+      metric: 7.5
     }
   },
   speedReduction: {
@@ -1761,20 +1814,17 @@ DND5E.encumbrance = {
       m: 1.5
     }
   },
-  vehicleWeightMultiplier: {
-    imperial: 2000, // 2000 lbs in an imperial ton
-    metric: 1000 // 1000 kg in a metric ton
+  baseUnits: {
+    default: {
+      imperial: "lb",
+      metric: "kg"
+    },
+    vehicle: {
+      imperial: "tn",
+      metric: "Mg"
+    }
   }
 };
-Object.defineProperty(DND5E.encumbrance, "strMultiplier", {
-  get() {
-    foundry.utils.logCompatibilityWarning(
-      "`DND5E.encumbrance.strMultiplier` has been moved to `DND5E.encumbrance.threshold.maximum`.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-    );
-    return this.threshold.maximum;
-  }
-});
 preLocalize("encumbrance.effects", { key: "name" });
 
 /* -------------------------------------------- */
@@ -2040,7 +2090,9 @@ DND5E.spellUpcastModes = ["always", "pact", "prepared"];
  * Configuration data for different types of spellcasting supported.
  *
  * @typedef {object} SpellcastingTypeConfiguration
- * @property {string} label                                                        Localized label.
+ * @property {string} label                               Localized label.
+ * @property {string} img                                 Image used when rendered as a favorite on the sheet.
+ * @property {boolean} [shortRest]                        Are these spell slots additionally restored on a short rest?
  * @property {Object<string, SpellcastingProgressionConfiguration>} [progression]  Any progression modes for this type.
  */
 
@@ -2060,6 +2112,7 @@ DND5E.spellUpcastModes = ["always", "pact", "prepared"];
 DND5E.spellcastingTypes = {
   leveled: {
     label: "DND5E.SpellProgLeveled",
+    img: "systems/dnd5e/icons/spell-tiers/{id}.webp",
     progression: {
       full: {
         label: "DND5E.SpellProgFull",
@@ -2081,7 +2134,9 @@ DND5E.spellcastingTypes = {
     }
   },
   pact: {
-    label: "DND5E.SpellProgPact"
+    label: "DND5E.SpellProgPact",
+    img: "icons/magic/unholy/silhouette-robe-evil-power.webp",
+    shortRest: true
   }
 };
 preLocalize("spellcastingTypes", { key: "label", sort: true });
@@ -2271,7 +2326,6 @@ DND5E.spellSchools = {
   }
 };
 preLocalize("spellSchools", { key: "label", sort: true });
-patchConfig("spellSchools", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 
@@ -2329,52 +2383,14 @@ preLocalize("weaponTypes");
 /* -------------------------------------------- */
 
 /**
- * A subset of weapon properties that determine the physical characteristics of the weapon.
- * These properties are used for determining physical resistance bypasses.
- * @deprecated since DnD5e 3.0, available until DnD5e 3.2
- * @enum {string}
- */
-DND5E.physicalWeaponProperties = {
-  ada: "DND5E.WeaponPropertiesAda",
-  mgc: "DND5E.WeaponPropertiesMgc",
-  sil: "DND5E.WeaponPropertiesSil"
-};
-preLocalize("physicalWeaponProperties", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * The set of weapon property flags which can exist on a weapon.
- * @deprecated since DnD5e 3.0, available until DnD5e 3.2
- * @enum {string}
- */
-DND5E.weaponProperties = {
-  ...DND5E.physicalWeaponProperties,
-  amm: "DND5E.WeaponPropertiesAmm",
-  fin: "DND5E.WeaponPropertiesFin",
-  fir: "DND5E.WeaponPropertiesFir",
-  foc: "DND5E.WeaponPropertiesFoc",
-  hvy: "DND5E.WeaponPropertiesHvy",
-  lgt: "DND5E.WeaponPropertiesLgt",
-  lod: "DND5E.WeaponPropertiesLod",
-  rch: "DND5E.WeaponPropertiesRch",
-  rel: "DND5E.WeaponPropertiesRel",
-  ret: "DND5E.WeaponPropertiesRet",
-  spc: "DND5E.WeaponPropertiesSpc",
-  thr: "DND5E.WeaponPropertiesThr",
-  two: "DND5E.WeaponPropertiesTwo",
-  ver: "DND5E.WeaponPropertiesVer"
-};
-preLocalize("weaponProperties", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
  * Compendium packs used for localized items.
  * @enum {string}
  */
 DND5E.sourcePacks = {
-  ITEMS: "dnd5e.items"
+  BACKGROUNDS: "dnd5e.backgrounds",
+  CLASSES: "dnd5e.classes",
+  ITEMS: "dnd5e.items",
+  RACES: "dnd5e.races"
 };
 
 /* -------------------------------------------- */
@@ -2522,9 +2538,10 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _StatusEffectConfig5e
- * @property {string} icon         Icon used to represent the condition on the token.
- * @property {string} [reference]  UUID of a journal entry with details on this condition.
- * @property {string} [special]    Set this condition as a special status effect under this name.
+ * @property {string} icon            Icon used to represent the condition on the token.
+ * @property {string} [reference]     UUID of a journal entry with details on this condition.
+ * @property {string} [special]       Set this condition as a special status effect under this name.
+ * @property {string[]} [riders]      Additional conditions, by id, to apply as part of this condition.
  */
 
 /**
@@ -2579,7 +2596,8 @@ DND5E.conditionTypes = {
   diseased: {
     label: "DND5E.ConDiseased",
     icon: "systems/dnd5e/icons/svg/statuses/diseased.svg",
-    pseudo: true
+    pseudo: true,
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.oNQWvyRZkTOJ8PBq"
   },
   exhaustion: {
     label: "DND5E.ConExhaustion",
@@ -2659,11 +2677,11 @@ DND5E.conditionTypes = {
     label: "DND5E.ConUnconscious",
     icon: "systems/dnd5e/icons/svg/statuses/unconscious.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd",
-    statuses: ["incapacitated", "prone"]
+    statuses: ["incapacitated"],
+    riders: ["prone"]
   }
 };
 preLocalize("conditionTypes", { key: "label", sort: true });
-patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 
@@ -2732,7 +2750,7 @@ DND5E.statusEffects = {
   sleeping: {
     name: "EFFECT.DND5E.StatusSleeping",
     icon: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
-    statuses: ["incapacitated", "prone", "unconscious"]
+    statuses: ["incapacitated", "unconscious"]
   },
   stable: {
     name: "EFFECT.DND5E.StatusStable",
@@ -3390,7 +3408,8 @@ DND5E.rules = {
   telepathy: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.geTidcFIYWuUvD2L",
   legendaryactions: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.C1awOyZh78pq1xmY",
   lairactions: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.07PtjpMxiRIhkBEp",
-  regionaleffects: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.uj8W27NKFyzygPUd"
+  regionaleffects: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.uj8W27NKFyzygPUd",
+  disease: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.oNQWvyRZkTOJ8PBq"
 };
 
 /* -------------------------------------------- */

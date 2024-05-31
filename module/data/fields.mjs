@@ -158,12 +158,11 @@ export class FormulaField extends foundry.data.fields.StringField {
 
   /** @inheritdoc */
   _validateType(value) {
+    Roll.validate(value);
     if ( this.options.deterministic ) {
       const roll = new Roll(value);
       if ( !roll.isDeterministic ) throw new Error("must not contain dice terms");
-      Roll.safeEval(roll.formula);
     }
-    else Roll.validate(value);
     super._validateType(value);
   }
 }
@@ -359,7 +358,7 @@ export class MappingField extends foundry.data.fields.ObjectField {
   _validateType(value, options={}) {
     if ( foundry.utils.getType(value) !== "Object" ) throw new Error("must be an Object");
     const errors = this._validateValues(value, options);
-    if ( !foundry.utils.isEmpty(errors) ) throw new foundry.data.fields.ModelValidationError(errors);
+    if ( !foundry.utils.isEmpty(errors) ) throw new foundry.data.validation.DataModelValidationError(errors);
   }
 
   /* -------------------------------------------- */

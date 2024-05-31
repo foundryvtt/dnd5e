@@ -45,11 +45,12 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.Identifier" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="system.identifier" value="{{system.identifier}}"
-                           placeholder="{{item.identifier}}">
+                    <input type="text" name="system.identifier" value="{{ system.identifier }}"
+                           placeholder="{{ item.identifier }}">
                 </div>
                 <p class="hint">
-                    {{{localize "DND5E.ClassIdentifierHint" identifier=item.identifier}}}
+                    {{{ localize "DND5E.ClassIdentifierHint" identifier=item.identifier }}}
+                    {{ localize "DND5E.IdentifierError" }}
                 </p>
             </div>
 

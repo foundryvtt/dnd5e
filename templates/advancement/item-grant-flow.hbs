@@ -1,5 +1,14 @@
-<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
-    <h3>{{{title}}}</h3>
+<form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}">
+    <h3>{{{ title }}}</h3>
+
+    {{#if abilities.options}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.SpellAbility" }}</label>
+        <select name="ability">
+            {{ selectOptions abilities.options selected=abilities.selected }}
+        </select>
+    </div>
+    {{/if}}
 
     {{#each items}}
     <div class="item-name flexrow">

@@ -57,18 +57,6 @@ export default class IdentifiableTemplate extends SystemDataModel {
     if ( !this.identified && this.unidentified.name ) {
       this.parent.name = this.unidentified.name;
     }
-
-    const description = this.unidentified.description ?? null;
-    Object.defineProperty(this.description, "unidentified", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "Item's unidentified description has moved to `system.unidentified.description`.",
-          { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-        );
-        return description;
-      },
-      configurable: true
-    });
   }
 
   /* -------------------------------------------- */

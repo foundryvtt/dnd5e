@@ -69,7 +69,7 @@
       "hp": {
         "value": 16,
         "max": 16,
-        "temp": null,
+        "temp": 0,
         "tempmax": 0,
         "formula": "3d8 + 3"
       },
@@ -114,7 +114,7 @@
         "custom": ""
       },
       "environment": "Underdark",
-      "cr": 1,
+      "cr": 0.5,
       "spellLevel": 0,
       "source": {
         "custom": "",
@@ -924,10 +924,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.1",
     "coreVersion": "11.315",
     "createdTime": 1661787232815,
-    "modifiedTime": 1704847047579,
+    "modifiedTime": 1716920618923,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!QGcQYZbVl4bWzi4E"

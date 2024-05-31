@@ -1,4 +1,5 @@
 import { formatNumber } from "../../utils.mjs";
+import ChatTrayElement from "./chat-tray-element.mjs";
 
 /**
  * List of multiplier options as tuples containing their numeric value and rendered text.
@@ -9,7 +10,7 @@ const MULTIPLIERS = [[-1, "-1"], [0, "0"], [.25, "¼"], [.5, "½"], [1, "1"], [2
 /**
  * Application to handle applying damage from a chat card.
  */
-export default class DamageApplicationElement extends HTMLElement {
+export default class DamageApplicationElement extends ChatTrayElement {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -119,7 +120,8 @@ export default class DamageApplicationElement extends HTMLElement {
     // Build the frame HTML only once
     if ( !this.targetList ) {
       const div = document.createElement("div");
-      div.classList.add("card-tray", "damage-tray", "collapsible", "collapsed");
+      div.classList.add("card-tray", "damage-tray", "collapsible");
+      if ( !this.open ) div.classList.add("collapsed");
       div.innerHTML = `
         <label class="roboto-upper">
           <i class="fa-solid fa-heart-crack"></i>
@@ -153,9 +155,7 @@ export default class DamageApplicationElement extends HTMLElement {
         b.addEventListener("click", this._onChangeTargetMode.bind(this))
       );
       if ( !this.chatMessage.getFlag("dnd5e", "targets")?.length ) this.targetSourceControl.hidden = true;
-      div.querySelector(".collapsible-content").addEventListener("click", event => {
-        event.stopImmediatePropagation();
-      });
+      div.addEventListener("click", this._handleClickHeader.bind(this));
     }
 
     this.targetingMode = this.targetSourceControl.hidden ? "selected" : "targeted";
@@ -372,7 +372,7 @@ export default class DamageApplicationElement extends HTMLElement {
       const options = this.getTargetOptions(target.dataset.targetUuid);
       await token?.applyDamage(this.damages, options);
     }
-    this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
+    this.open = false;
   }
 
   /* -------------------------------------------- */

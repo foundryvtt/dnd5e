@@ -103,8 +103,8 @@ export default class Tooltips5e {
    * @protected
    */
   async _onHoverContentLink(doc) {
-    if ( !doc.system?.richTooltip ) return;
-    const { content, classes } = await doc.system.richTooltip();
+    const { content, classes } = await (doc.richTooltip?.() ?? doc.system?.richTooltip?.() ?? {});
+    if ( !content ) return;
     this.tooltip.innerHTML = content;
     classes?.forEach(c => this.tooltip.classList.add(c));
     const { tooltipDirection } = game.tooltip.element.dataset;
@@ -172,25 +172,33 @@ export default class Tooltips5e {
 
   /**
    * Position a tooltip after rendering.
-   * @param {string} [direction="LEFT"]  The direction to position the tooltip.
+   * @param {string} [direction]  The direction to position the tooltip.
    * @protected
    */
-  _positionItemTooltip(direction=TooltipManager.TOOLTIP_DIRECTIONS.LEFT) {
-    const tooltip = this.tooltip;
-    const { clientWidth, clientHeight } = document.documentElement;
-    const tooltipBox = tooltip.getBoundingClientRect();
-    const targetBox = game.tooltip.element.getBoundingClientRect();
-    const maxTop = clientHeight - tooltipBox.height;
-    const top = Math.min(maxTop, targetBox.bottom - ((targetBox.height + tooltipBox.height) / 2));
-    const left = targetBox.left - tooltipBox.width - game.tooltip.constructor.TOOLTIP_MARGIN_PX;
-    const right = targetBox.right + game.tooltip.constructor.TOOLTIP_MARGIN_PX;
-    const { RIGHT, LEFT } = TooltipManager.TOOLTIP_DIRECTIONS;
-    if ( (direction === LEFT) && (left < 0) ) direction = RIGHT;
-    else if ( (direction === RIGHT) && (right + targetBox.width > clientWidth) ) direction = LEFT;
-    tooltip.style.top = `${Math.max(0, top)}px`;
-    tooltip.style.right = "";
-    if ( direction === RIGHT ) tooltip.style.left = `${Math.min(right, clientWidth - tooltipBox.width)}px`;
-    else tooltip.style.left = `${Math.max(0, left)}px`;
+  _positionItemTooltip(direction) {
+    if ( !direction ) {
+      direction = TooltipManager.TOOLTIP_DIRECTIONS.LEFT;
+      game.tooltip._setAnchor(direction);
+    }
+
+    const pos = this.tooltip.getBoundingClientRect();
+    const dirs = TooltipManager.TOOLTIP_DIRECTIONS;
+    switch ( direction ) {
+      case dirs.UP:
+        if ( pos.y - TooltipManager.TOOLTIP_MARGIN_PX <= 0 ) direction = dirs.DOWN;
+        break;
+      case dirs.DOWN:
+        if ( pos.y + this.tooltip.offsetHeight > window.innerHeight ) direction = dirs.UP;
+        break;
+      case dirs.LEFT:
+        if ( pos.x - TooltipManager.TOOLTIP_MARGIN_PX <= 0 ) direction = dirs.RIGHT;
+        break;
+      case dirs.RIGHT:
+        if ( pos.x + this.tooltip.offsetWidth > window.innerWith ) direction = dirs.LEFT;
+        break;
+    }
+
+    game.tooltip._setAnchor(direction);
 
     // Set overflowing styles for item tooltips.
     if ( tooltip.classList.contains("item-tooltip") ) {

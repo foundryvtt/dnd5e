@@ -1,3 +1,6 @@
+import { EnchantmentData } from "../../data/item/fields/enchantment-field.mjs";
+import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+
 /**
  * A specialized Dialog subclass for ability usage.
  *
@@ -59,6 +62,7 @@ export default class AbilityUseDialog extends Dialog {
       item,
       ...config,
       slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
+      enchantmentOptions: this._createEnchantmentOptions(item),
       summoningOptions: this._createSummoningOptions(item),
       resourceOptions: resourceOptions,
       resourceArray: Array.isArray(resourceOptions),
@@ -144,7 +148,7 @@ export default class AbilityUseDialog extends Dialog {
       const label = CONFIG.DND5E.spellLevels[i];
       const l = actor.system.spells[`spell${i}`] || {max: 0, override: null};
       let max = parseInt(l.override || l.max || 0);
-      let slots = Math.clamped(parseInt(l.value || 0), 0, max);
+      let slots = Math.clamp(parseInt(l.value || 0), 0, max);
       if ( max > 0 ) lmax = i;
       arr.push({
         key: `spell${i}`,
@@ -177,22 +181,58 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
-   * Create an array of summoning profiles.
+   * Create details on enchantment that can be applied.
    * @param {Item5e} item  The item.
-   * @returns {{ profiles: object, creatureTypes: object }|null}   Array of select options.
+   * @returns {{ enchantments: object }|null}
+   */
+  static _createEnchantmentOptions(item) {
+    const enchantments = EnchantmentData.availableEnchantments(item);
+    if ( !enchantments.length ) return null;
+    const options = {};
+    if ( enchantments.length > 1 ) options.profiles = Object.fromEntries(enchantments.map(e => [e._id, e.name]));
+    else options.profile = enchantments[0]._id;
+    return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create details on the summoning profiles and other related options.
+   * @param {Item5e} item  The item.
+   * @returns {{ profiles: object, creatureTypes: object }|null}
    */
   static _createSummoningOptions(item) {
     const summons = item.system.summons;
     if ( !summons?.profiles.length ) return null;
     const options = {};
-    if ( summons.profiles.length > 1 ) options.profiles = summons.profiles.reduce((obj, profile) => {
-      const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
-      if ( !profile.uuid || doc ) obj[profile._id] = profile.name ? profile.name : (doc?.name ?? "—");
+    const rollData = item.getRollData();
+    const level = summons.relevantLevel;
+    options.profiles = Object.fromEntries(
+      summons.profiles
+        .map(profile => {
+          const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
+          const withinRange = ((profile.level.min ?? -Infinity) <= level) && (level <= (profile.level.max ?? Infinity));
+          if ( !doc || !withinRange ) return null;
+          let label = profile.name ? profile.name : (doc?.name ?? "—");
+          let count = simplifyRollFormula(Roll.replaceFormulaData(profile.count ?? "1", rollData));
+          if ( Number.isNumeric(count) ) {
+            count = parseInt(count);
+            if ( count > 1 ) label = `${count} x ${label}`;
+          } else if ( count ) label = `${count} x ${label}`;
+          return [profile._id, label];
+        })
+        .filter(f => f)
+    );
+    if ( Object.values(options.profiles).length <= 1 ) {
+      options.profile = Object.keys(options.profiles)[0];
+      options.profiles = null;
+    }
+    if ( summons.creatureSizes.size > 1 ) options.creatureSizes = summons.creatureSizes.reduce((obj, k) => {
+      obj[k] = CONFIG.DND5E.actorSizes[k]?.label;
       return obj;
     }, {});
-    else options.profile = summons.profiles[0]._id;
     if ( summons.creatureTypes.size > 1 ) options.creatureTypes = summons.creatureTypes.reduce((obj, k) => {
-      obj[k] = CONFIG.DND5E.creatureTypes[k].label;
+      obj[k] = CONFIG.DND5E.creatureTypes[k]?.label;
       return obj;
     }, {});
     return options;
@@ -409,5 +449,73 @@ export default class AbilityUseDialog extends Dialog {
     if ( !hasUses || !uses.autoDestroy ) return false;
     const value = uses.value - consume;
     return value <= 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(jQuery) {
+    super.activateListeners(jQuery);
+    const [html] = jQuery;
+
+    html.querySelector('[name="slotLevel"]')?.addEventListener("change", this._onChangeSlotLevel.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update summoning profiles when spell slot level is changed.
+   * @param {Event} event  Triggering change event.
+   */
+  _onChangeSlotLevel(event) {
+    const level = parseInt(event.target.value.replace("spell", ""));
+    const item = this.item.clone({ "system.level": level });
+    this._updateProfilesInput(
+      "enchantmentProfile", "DND5E.Enchantment.Label", this.constructor._createEnchantmentOptions(item)
+    );
+    this._updateProfilesInput(
+      "summonsProfile", "DND5E.Summoning.Profile.Label", this.constructor._createSummoningOptions(item)
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update enchantment or summoning profiles inputs when the level changes.
+   * @param {string} name                Name of the field to update.
+   * @param {string} label               Localization key for the field's aria label.
+   * @param {object} options
+   * @param {object} [options.profiles]  Profile options to display, if multiple.
+   * @param {string} [options.profile]   Single profile to select, if only one.
+   */
+  _updateProfilesInput(name, label, options) {
+    const originalInput = this.element[0].querySelector(`[name="${name}"]`);
+    if ( !originalInput ) return;
+
+    // If multiple profiles, replace with select element
+    if ( options.profiles ) {
+      const select = document.createElement("select");
+      select.name = name;
+      select.ariaLabel = game.i18n.localize(label);
+      for ( const [id, label] of Object.entries(options.profiles) ) {
+        const option = document.createElement("option");
+        option.value = id;
+        option.innerText = label;
+        if ( id === originalInput.value ) option.selected = true;
+        select.append(option);
+      }
+      originalInput.replaceWith(select);
+    }
+
+    // If only one profile, replace with hidden input
+    else {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = options.profile ?? "";
+      originalInput.replaceWith(input);
+    }
   }
 }
