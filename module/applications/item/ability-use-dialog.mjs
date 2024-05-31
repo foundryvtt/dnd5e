@@ -58,10 +58,16 @@ export default class AbilityUseDialog extends Dialog {
     const concentrationOptions = this._createConcentrationOptions(item);
     const resourceOptions = this._createResourceOptions(item);
 
+    const slotOptions = this._createSpellSlotOptions(item.actor, item.system.level);
+    if ( item.type === "spell" ) {
+      const slot = slotOptions.find(s => s.key === config.slotLevel) ?? slotOptions.find(s => s.canCast);
+      if ( slot ) item = item.clone({ "system.level": slot.level });
+    }
+
     const data = {
       item,
       ...config,
-      slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
+      slotOptions: config.consumeSpellSlot ? slotOptions : [],
       enchantmentOptions: this._createEnchantmentOptions(item),
       summoningOptions: this._createSummoningOptions(item),
       resourceOptions: resourceOptions,
@@ -470,8 +476,10 @@ export default class AbilityUseDialog extends Dialog {
    * @param {Event} event  Triggering change event.
    */
   _onChangeSlotLevel(event) {
-    const level = parseInt(event.target.value.replace("spell", ""));
-    const item = this.item.clone({ "system.level": level });
+    const level = event.target.value === "pact"
+      ? this.item.actor?.system.spells?.pact?.level
+      : parseInt(event.target.value.replace("spell", ""));
+    const item = this.item.clone({ "system.level": level ?? this.item.system.level });
     this._updateProfilesInput(
       "enchantmentProfile", "DND5E.Enchantment.Label", this.constructor._createEnchantmentOptions(item)
     );
