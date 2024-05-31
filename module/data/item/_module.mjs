@@ -25,6 +25,7 @@ export {
   ToolData,
   WeaponData
 };
+export {default as EnchantmentField, EnchantmentData, EnchantmentError} from "./fields/enchantment-field.mjs";
 export {default as ItemTypeField} from "./fields/item-type-field.mjs";
 export {default as SummonsField, SummonsData} from "./fields/summons-field.mjs";
 export {default as ActionTemplate} from "./templates/action.mjs";

@@ -14,7 +14,10 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 2,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 1,
       "denomination": "sp"
@@ -62,7 +65,6 @@
     },
     "ability": "dex",
     "actionType": "rwak",
-    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -91,17 +93,24 @@
     },
     "unidentified": {
       "description": ""
-    }
+    },
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "enchantment": null,
+    "summons": null,
+    "magicalBonus": null
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233876,
-    "modifiedTime": 1704823159685,
+    "modifiedTime": 1715374636013,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "j01YDOu2AolsRvdN",

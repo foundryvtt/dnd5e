@@ -23,7 +23,7 @@ export default class JournalSheet5e extends JournalSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getPageData() {
     const pageData = super._getPageData();
 
@@ -41,5 +41,22 @@ export default class JournalSheet5e extends JournalSheet {
     }
 
     return pageData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add class to journal pages also.
+   * @param {JournalPageSheet} page  The journal page application.
+   * @param {jQuery} jQuery          The rendered Application HTML.
+   * @param {object} context         Rendering context provided.
+   */
+  static onRenderJournalPageSheet(page, jQuery, context) {
+    if ( page.object.parent.sheet instanceof JournalSheet5e ) {
+      let element;
+      if ( context.editable ) element = jQuery[0];
+      else element = jQuery[0].parentElement;
+      element?.classList.add("dnd5e2-journal");
+    }
   }
 }

@@ -112,6 +112,22 @@
             {{ labels.abilityCheck }}
         </button>
         {{/if}}
+
+        {{!-- Consume Use --}}
+        {{#if consumeUsage}}
+        <button type="button" data-action="consumeUsage">
+            <i class="fa-solid fa-xmarks-lines" inert></i>
+            {{ localize "DND5E.AbilityUseConsumeAction" }}
+        </button>
+        {{/if}}
+
+        {{!-- Consume Resource --}}
+        {{#if consumeResource}}
+        <button type="button" data-action="consumeResource">
+            <i class="fa-solid fa-cubes-stacked" inert></i>
+            {{ localize "DND5E.ConsumeResourceAction" }}
+        </button>
+        {{/if}}
     </div>
     {{/if}}
 

@@ -2,7 +2,7 @@
 <div class="form-group select">
     <label>{{ localize "DND5E.ItemActionType" }}</label>
     <select name="system.actionType">
-        {{selectOptions config.itemActionTypes selected=system.actionType blank=""}}
+        {{ selectOptions config.itemActionTypes selected=system.actionType blank="" }}
     </select>
 </div>
 {{#if system.actionType}}
@@ -120,6 +120,50 @@
     </div>
 </div>
 
+{{!-- Enchantment --}}
+{{#if system.isEnchantment}}
+<div class="form-group enchantment">
+    <label>{{ localize "DND5E.Enchantment.Label" }}</label>
+    <div class="form-fields">
+        <a class="config-button" data-action="enchantment">
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+            {{ localize "DND5E.Enchantment.Action.Configure" }}
+        </a>
+    </div>
+    {{#if appliedEnchantments.length}}
+    <ul class="separated-list dnd5e2">
+        {{#each appliedEnchantments}}
+        <li class="item" data-enchantment-uuid="{{ enchantment.uuid }}">
+            <div class="details flexrow">
+                <img class="gold-icon" src="{{ item.img }}" alt="{{ name }}">
+                <span class="name">
+                    {{#if actor}}
+                    {{{ localize "DND5E.Enchantment.Items.Entry" item=name actor=actor.name }}}
+                    {{else}}
+                    {{ name }}
+                    {{/if}}
+                </span>
+                <div class="list-controls flexrow">
+                    {{#if item.isOwner}}
+                    <button type="button" class="unbutton" data-action="view" data-uuid="{{ item.uuid }}"
+                            data-tooltip="DND5E.ItemView" aria-label="{{ localize 'DND5E.ItemView' }}">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="enchantment-button unbutton" data-action="removeEnchantment"
+                            data-tooltip="DND5E.Enchantment.Action.Remove"
+                            aria-label="{{ localize 'DND5E.Enchantment.Action.Remove' }}">
+                        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                    </button>
+                    {{/if}}
+                </div>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</div>
+{{/if}}
+
 {{!-- Summoning --}}
 {{#if (eq system.actionType "summ")}}
 <div class="form-group summoning">
@@ -134,6 +178,27 @@
             {{ localize "DND5E.Summoning.Prompt.Label" }}
         </label>
     </div>
+    {{#with system.summons.summonedCreatures as |summonedCreatures|}}
+    {{#if summonedCreatures.length}}
+    <ul class="separated-list dnd5e2">
+        {{#each summonedCreatures}}
+        <li class="item" data-summon-uuid="{{ uuid }}">
+            <div class="details flexrow">
+                <img class="gold-icon" src="{{ img }}" alt="{{ name }}">
+                <span class="name">{{ name }}</span>
+                <div class="list-controls flexrow">
+                    <button type="button" class="unbutton" data-action="view" data-uuid="{{ uuid }}"
+                            data-tooltip="DND5E.Summoning.Action.View"
+                            aria-label="{{ localize 'DND5E.Summoning.Action.View' }}">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+    {{/with}}
 </div>
 {{/if}}
 

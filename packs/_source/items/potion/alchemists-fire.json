@@ -15,7 +15,10 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 50,
       "denomination": "gp"
@@ -62,7 +65,6 @@
     },
     "ability": "dex",
     "actionType": "rwak",
-    "attackBonus": "",
     "chatFlavor": "improvised weapon",
     "critical": {
       "threshold": null,
@@ -92,7 +94,14 @@
     },
     "container": null,
     "crewed": false,
-    "properties": []
+    "properties": [],
+    "attack": {
+      "bonus": "",
+      "flat": false
+    },
+    "enchantment": null,
+    "summons": null,
+    "magicalBonus": null
   },
   "effects": [],
   "folder": "gyBZp72zKb56Da84",
@@ -103,10 +112,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233552,
-    "modifiedTime": 1704823147141,
+    "modifiedTime": 1715374592064,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!FvNOwWbh5FXyX4xe"

@@ -30,6 +30,7 @@ export default function AdoptedStyleSheetMixin(Base) {
 
     /**
      * Retrieves the cached stylesheet, or generates a new one.
+     * @returns {CSSStyleSheet}
      * @protected
      */
     _getStyleSheet() {
@@ -50,5 +51,5 @@ export default function AdoptedStyleSheetMixin(Base) {
      * @abstract
      */
     _adoptStyleSheet(sheet) {}
-  }
+  };
 }

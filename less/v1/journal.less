@@ -70,6 +70,9 @@
 
       li {
         font-size: var(--font-size-16);
+        &.special-entry > a {
+          font-weight: bold;
+        }
       }
     }
 
@@ -162,10 +165,23 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
       padding-block: 0.35em 0;
       padding-inline: 2px;
 
-      .item-controls { flex: 0; }
+      .item-controls {
+        flex: 0;
+        flex-wrap: nowrap;
+        gap: 8px;
+      }
     }
     .items-list .item:not(:last-of-type) {
       border-bottom: 1px solid var(--color-border-light-secondary);
+    }
+
+    h3 {
+      justify-content: space-between;
+      a {
+        flex: 0;
+        padding-inline-end: 12px;
+        font-size: var(--font-size-14);
+      }
     }
   }
 }
@@ -262,7 +278,7 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
   }
 }
 
-.journal-entry-page.spells {
+.journal-entry-page.spells, .content-embed.spells {
   .grouping {
     font-size: var(--font-size-12);
  

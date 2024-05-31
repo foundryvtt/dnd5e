@@ -1,3 +1,5 @@
+import ActiveEffect5e from "../../documents/active-effect.mjs";
+
 /**
  * An abstract class containing common functionality between actor sheet configuration apps.
  * @extends {DocumentSheet}
@@ -48,9 +50,6 @@ export default class BaseConfigSheet extends DocumentSheet {
    * @internal
    */
   _addOverriddenChoices(prefix, path, overrides) {
-    const source = new Set(foundry.utils.getProperty(this.document._source, path) ?? []);
-    const current = foundry.utils.getProperty(this.document, path) ?? new Set();
-    const delta = current.symmetricDifference(source);
-    for ( const choice of delta ) overrides.push(`${prefix}.${choice}`);
+    ActiveEffect5e.addOverriddenChoices(this.document, prefix, path, overrides);
   }
 }
