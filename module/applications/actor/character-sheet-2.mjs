@@ -1196,9 +1196,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @returns {Promise|void}
    * @protected
    */
-  _onUseFavorite(event) {
+  async _onUseFavorite(event) {
+    if ( !this.isEditable ) return;
     const { favoriteId } = event.currentTarget.closest("[data-favorite-id]").dataset;
-    const favorite = fromUuidSync(favoriteId, { relative: this.actor });
+    const favorite = await fromUuid(favoriteId, { relative: this.actor });
     if ( favorite instanceof dnd5e.documents.Item5e ) return favorite.use({}, { event });
     if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) return favorite.update({ disabled: !favorite.disabled });
   }
@@ -1232,7 +1233,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     return resources.concat(await this.actor.system.favorites.reduce(async (arr, f) => {
       const { id, type, sort } = f;
-      const favorite = fromUuidSync(id, { relative: this.actor });
+      const favorite = await fromUuid(id, { relative: this.actor });
       if ( !favorite && ((type === "item") || (type === "effect")) ) return arr;
       arr = await arr;
 
