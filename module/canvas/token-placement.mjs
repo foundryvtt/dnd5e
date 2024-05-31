@@ -111,7 +111,7 @@ export default class TokenPlacement {
         obj.eventMode = "none";
         const placement = await this.#requestPlacement();
         if ( placement ) placements.push(placement);
-        else this.#previews[this.#currentPlacement]?.object.clear();
+        else obj.clear();
       }
       return placements;
     } finally {
