@@ -613,11 +613,12 @@
 /* ---------------------------------- */
 
 enchantment-application {
+  margin: 4px;
+
   .drop-area {
     display: grid;
     gap: 4px;
     min-block-size: 40px;
-    margin: 4px;
     border: 1px dashed var(--dnd5e-color-crimson);
     border-radius: 4px;
     padding: 4px;
@@ -652,6 +653,14 @@ enchantment-application {
         flex: 0 0 20px;
       }
     }
+  }
+
+  .count-area {
+    margin-block-start: 2px;
+    margin-inline-end: 4px;
+    font-size: var(--font-size-10);
+    text-align: end;
+    font-variant: small-caps;
   }
 }
 
