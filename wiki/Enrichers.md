@@ -92,6 +92,22 @@ The formula can also include formula values that will be evaluated before the da
 While healing can be provided using the standard damage enricher using one of the healing types (`healing` or `temp`), there is also a dedicated enricher to make it a bit clearer. This can be used in the format of `[[/healing {formula}]]` for normal healing and `[[/healing {formula} temp]]` for temporary HP. This also accepts the `average` parameter just like the damage enricher.
 
 
+## Item Use Enrichers
+Item enrichers allow you to use an item from an enriched link. There are several different methods to create an Item enricher, which will determine how the item is used:  
+**By Item Name:**  
+`[[/item Bite]]`  
+This functions similarly to a system macro, as if you have dragged that item to the macro hotbar. When clicked on it will check for a selected token, or your assigned actor, if a the found token or actor has an item of a matching name it will be used, if the found token or actor does not have an item of that name a warning will be displayed.  
+
+**By UUID:**  
+`[[/item Actor.p26xCjCCTQm5fRN3.Item.amUUCouL69OK1GZU]]`  
+A UUID contains references to an Actor and an Item it owns. When clicked on the enricher will find the specified Actor and use the specified Item.  
+
+**By Relative ID:**  
+`[[/item amUUCouL69OK1GZU]]`  
+`[[/item .amUUCouL69OK1GZU]]`   
+A Relative ID can contain a reference to an owned Item either by an Id, a relative Id (note the preceding `.`). When clicked on the enricher will use its location (either in an Actor Sheet, Item Sheet, or Chat Card) to determine the Token or Actor that owns that card or sheet to use the specified item from that owner.
+![Item Enricher](https://github.com/foundryvtt/dnd5e/assets/86370342/0e97f88a-992e-42ed-a8f0-19b35f152cdb)
+
 ## Lookup Enrichers
 
 The lookup enricher allows for referencing data within an actor's roll data and displaying it in a description. This is most useful for automatically including a creature's name (`[[lookup @name]]`) or their type (`[[lookup @details.type.config.label]]`), but can be used to reference any values normally available in [roll data](Roll-Formulas.md).
