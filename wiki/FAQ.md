@@ -13,8 +13,8 @@ Unsoluble has a great video guide available here https://www.youtube.com/watch?v
 ## How to create Spell Scrolls
 There are two ways to create a Spell Scroll from a spell, either by using the Right Click context menu and using the "Create Scroll" option or by dragging a Spell onto an Actor's Inventory tab. A dialog will be displayed with options as to what description should be shown and what levels the spell should be created at (defaults to the spell's base level). A reference to the spell scroll rules or their entire text from the SRD rules will be added to the spell's description.
 
-## What are the plans for the upcoming 2024 rulebook release?
+## What are the plans for the upcoming 2024 rulebook releases?
 In September Foundry will be publishing an official premium module for the updated Player's Handbook. Until the revised SRD is published in 2025 this will be the only way to access pre-made content from the new rulebooks in the system. Once the revised SRD is made available the content will be added to the system in the same way the SRD 5.1 content is currently available.
 
 > [!IMPORTANT]
-> The current D&D 5e system will remain compatible with all content based on both the 2014 and revised 2024 rulebooks.
+> The current Dungeons & Dragons 5th Edition system will remain compatible with all content based on both the 2014 and the 2024 rulebook update.
