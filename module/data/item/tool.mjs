@@ -165,6 +165,13 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.toolTypes;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * The proficiency multiplier for this item.
    * @returns {number}

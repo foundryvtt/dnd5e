@@ -88,4 +88,11 @@ export default class LootData extends ItemDataModel.mixin(
       this.priceLabel
     ];
   }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.lootTypes;
+  }
 }
