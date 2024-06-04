@@ -476,9 +476,7 @@ export default class AbilityUseDialog extends Dialog {
    * @param {Event} event  Triggering change event.
    */
   _onChangeSlotLevel(event) {
-    const level = event.target.value === "pact"
-      ? this.item.actor?.system.spells?.pact?.level
-      : parseInt(event.target.value.replace("spell", ""));
+    const level = this.item.actor?.system.spells?.[event.target.value]?.level;
     const item = this.item.clone({ "system.level": level ?? this.item.system.level });
     this._updateProfilesInput(
       "enchantmentProfile", "DND5E.Enchantment.Label", this.constructor._createEnchantmentOptions(item)
