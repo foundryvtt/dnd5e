@@ -1,3 +1,4 @@
+import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 
@@ -677,8 +678,10 @@ DND5E.tokenRingColors = {
 
 /**
  * Configuration data for a map marker style. Options not included will fall back to the value set in `default` style.
+ * Any additional styling options added will be passed into the custom marker class and be available for rendering.
  *
  * @typedef {object} MapLocationMarkerStyle
+ * @property {typeof PIXI.Container} [icon]  Map marker class used to render the icon.
  * @property {number} [backgroundColor]      Color of the background inside the circle.
  * @property {number} [borderColor]          Color of the border in normal state.
  * @property {number} [borderHoverColor]     Color of the border when hovering over the marker.
@@ -693,6 +696,7 @@ DND5E.tokenRingColors = {
  */
 DND5E.mapLocationMarker = {
   default: {
+    icon: MapLocationControlIcon,
     backgroundColor: 0xFBF8F5,
     borderColor: 0x000000,
     borderHoverColor: 0xFF5500,
