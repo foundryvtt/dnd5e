@@ -8,6 +8,14 @@ export const migrateWorld = async function() {
 
   const migrationData = await getMigrationData();
 
+  // Temporarily disable rendering of the sidebar while migrating.
+  const actorsApps = game.actors.apps;
+  const itemsApps = game.items.apps;
+  const scenesApps = game.scenes.apps;
+  game.actors.apps = [];
+  game.items.apps = [];
+  game.scenes.apps = [];
+
   // Migrate World Actors
   const actors = game.actors.map(a => [a, true])
     .concat(Array.from(game.actors.invalidDocumentIds).map(id => [game.actors.getInvalid(id), false]));
@@ -131,6 +139,11 @@ export const migrateWorld = async function() {
     if ( !["Actor", "Item", "Scene"].includes(p.documentName) ) continue;
     await migrateCompendium(p);
   }
+
+  // Restore sidebar rendering.
+  game.actors.apps = actorsApps;
+  game.items.apps = itemsApps;
+  game.scenes.apps = scenesApps;
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
