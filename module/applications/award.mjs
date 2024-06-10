@@ -315,7 +315,13 @@ export default class Award extends DialogMixin(FormApplication) {
     }
 
     try {
-      const { currency, xp, party, each } = this.parseAwardCommand(message);
+      let { currency, xp, party, each } = this.parseAwardCommand(message);
+
+      if (xp) {
+        const roll = new Roll(xp);
+        await roll.evaluate();
+        xp = roll.total;
+      }
 
       for ( const [key, formula] of Object.entries(currency) ) {
         const roll = new Roll(formula);
