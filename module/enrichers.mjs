@@ -1,6 +1,6 @@
 import { formatNumber, getSceneTargets, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
-import { damageRoll } from "./dice/_module.mjs";
+import { Roll5e, damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import Item5e from "./documents/item.mjs";
 import { rollItem } from "./documents/macro.mjs";
@@ -371,8 +371,8 @@ async function enrichDamage(config, label, options) {
   if ( config.average ) {
     localizationType = "Long";
     if ( config.average === true ) {
-      const minRoll = Roll.create(config.formula).evaluate({ minimize: true });
-      const maxRoll = Roll.create(config.formula).evaluate({ maximize: true });
+      const minRoll = Roll5e.create(config.formula).evaluate({ minimize: true });
+      const maxRoll = Roll5e.create(config.formula).evaluate({ maximize: true });
       localizationData.average = Math.floor(((await minRoll).total + (await maxRoll).total) / 2);
     } else if ( Number.isNumeric(config.average) ) {
       localizationData.average = config.average;
