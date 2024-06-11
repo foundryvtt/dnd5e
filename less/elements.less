@@ -1,4 +1,56 @@
 /* ---------------------------------- */
+/*  Filter State                      */
+/* ---------------------------------- */
+
+filter-state {
+  --filter-state-background-color: var(--checkbox-background-color);
+  --filter-state-focus-color: var(--color-warm-2);
+  --filter-state-positive-color: rgb(0 128 0);
+  --filter-state-negative-color: rgb(185 46 36);
+  --filter-state-size: 1em;
+
+  display: inline-block;
+  flex: 0 0 var(--filter-state-size);
+  width: var(--filter-state-size);
+  height: var(--filter-state-size);
+
+  &:focus, &:focus-visible { outline: none; }
+
+  .indicator {
+    transition: all 250ms ease;
+    border-radius: 3px;
+    outline: 2px solid transparent;
+    transition: outline-color 0.5s;
+
+    &::before {
+      content: "\f0c8";
+      width: var(--filter-state-size);
+      height: var(--filter-state-size);
+      color: var(--filter-state-background-color);
+      font-family: var(--font-awesome);
+      font-size: var(--filter-state-size);
+      font-weight: bold;
+      line-height: var(--filter-state-size);
+    }
+    &[data-value="1"]::before {
+      content: "\f151";
+      color: var(--filter-state-positive-color);
+    }
+    &[data-value="-1"]::before {
+      content: "\f150";
+      color: var(--filter-state-negative-color);
+    }
+  }
+
+  &:not(:disabled) .indicator {
+    cursor: pointer;
+  }
+  &:focus-visible .indicator {
+    outline: 2px solid var(--filter-state-focus-color);
+  }
+}
+
+/* ---------------------------------- */
 /*  Slide Toggles                     */
 /* ---------------------------------- */
 

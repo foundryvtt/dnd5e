@@ -21,6 +21,25 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Create attunement filter configuration.
+   * @returns {CompendiumBrowserFilterDefinitionEntry}
+   */
+  static get compendiumBrowserAttunementFilter() {
+    return {
+      label: "DND5E.Attunement",
+      type: "boolean",
+      createFilter: (filters, value, def) => {
+        if ( value === 0 ) return;
+        const filter = { k: "system.attunement", o: "in", v: ["required", 1] };
+        if ( value === 1 ) filters.push(filter);
+        else filters.push({ o: "NOT", v: filter });
+      }
+    };
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 

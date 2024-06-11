@@ -31,6 +31,7 @@ export function uniqueKeys(filter=[]) {
     for ( const f of filters ) {
       const operator = f.o in OPERATOR_FUNCTIONS;
       if ( operator && (foundry.utils.getType(f.v) === "Array") ) _uniqueKeys(f.v);
+      else if ( f.o === "NOT" ) _uniqueKeys([f.v]);
       else if ( !operator ) keys.add(f.k);
     }
   };

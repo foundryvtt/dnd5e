@@ -1,0 +1,62 @@
+<div class="flexcol">
+    <h3>{{ localize "DND5E.CompendiumBrowser.Filters.Label" }}</h3>
+    {{#each additional as |filter filterKey|}}
+    {{#if (eq type "boolean")}}
+    <div class="filter form-group" data-filter-id="{{ filterKey }}">
+        <label for="{{ @root.partId }}-{{ filterKey }}">{{ localize label }}</label>
+        <div class="form-fields">
+            <filter-state id="{{ @root.partId }}-{{ filterKey }}" name="additional.{{ filterKey }}"
+                          value="{{ filter.value }}" {{ disabled filter.locked }}></filter-state>
+        </div>
+    </div>
+    {{else if (eq type "range")}}
+    <div class="filter form-group" data-filter-id="{{ filterKey }}">
+        <label>{{ localize label }}</label>
+        <div class="form-fields">
+            <input type="number" name="additional.{{ filterKey }}.min" value="{{ filter.value.min }}"
+                   min="{{ config.min }}" max="{{ config.max }}" step="any" placeholder="{{ config.min }}"
+                   {{ disabled filter.locked.min }}>
+            <span class="sep">&ndash;</span>
+            <input type="number" name="additional.{{ filterKey }}.max" value="{{ filter.value.max }}"
+                   min="{{ config.min }}" max="{{ config.max }}" step="any" placeholder="{{ config.max }}"
+                   {{ disabled filter.locked.max }}>
+        </div>
+    </div>
+    {{else if (eq type "set")}}
+    <div class="filter collapsible" data-filter-id="{{ filterKey }}">
+        <div class="filter-header">
+            <label data-action="toggleCollapse">
+                <span>{{ localize label }}</span>
+                <i class="fa-solid fa-caret-down"></i>
+            </label>
+        </div>
+        <div class="collapsible-content">
+            <div class="wrapper">
+                {{#if config.blank}}
+                <div class="filter-choice">
+                    <filter-state id="{{ @root.partId }}-{{ filterKey }}-_blank"
+                                  name="additional.{{ filterKey }}._blank"
+                                  value="{{ filter.value._blank }}"
+                                  {{ disabled filter.locked._blank }}></filter-state>
+                    <label for="{{ @root.partId }}-{{ filterKey }}-_blank">{{ localize config.blank }}</label>
+                </div>
+                {{/if}}
+                {{#each config.choices}}
+                <div class="filter-choice">
+                    <filter-state id="{{ @root.partId }}-{{ filterKey }}-{{ @key }}"
+                                  name="additional.{{ filterKey }}.{{ @key }}"
+                                  value="{{ lookup filter.value @key }}"
+                                  {{ disabled (lookup filter.locked @key) }}></filter-state>
+                    <label for="{{ @root.partId }}-{{ filterKey }}-{{ @key }}">
+                        {{ifThen label label this }}
+                    </label>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="filter" data-filter-id="{{ filterKey }}">{{ label }}</div>
+    {{/if}}
+    {{/each}}
+</div>

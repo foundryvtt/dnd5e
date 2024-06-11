@@ -53,6 +53,25 @@ export default class WeaponData extends ItemDataModel.mixin(
   }, {inplace: false}));
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["type", {
+        label: "DND5E.ItemWeaponType",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.weaponTypes,
+          keyPath: "system.type.value"
+        }
+      }],
+      ["attunement", this.compendiumBrowserAttunementFilter],
+      ...this.compendiumBrowserPhysicalItemFilters,
+      ["properties", this.compendiumBrowserPropertiesFilter("weapon")]
+    ]);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
