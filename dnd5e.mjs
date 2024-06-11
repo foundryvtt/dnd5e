@@ -331,6 +331,9 @@ function _configureStatusEffects() {
   for ( const [id, {label: name, ...data}] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
     addEffect(CONFIG.statusEffects, { id, name, ...data });
   }
+  for ( const [id, data] of Object.entries(CONFIG.DND5E.encumbrance.effects) ) {
+    addEffect(CONFIG.statusEffects, { id, ...data, hud: false });
+  }
 }
 
 /* -------------------------------------------- */
