@@ -116,8 +116,9 @@ export default class TokenPlacement {
         obj.eventMode = "none";
         const placement = await this.#requestPlacement();
         if ( placement ) {
-          uniqueTokens.set(placement.prototypeToken, (uniqueTokens.get(placement.prototypeToken) ?? -1) + 1);
-          placement.index = { total: total++, unique: uniqueTokens.get(placement.prototypeToken) };
+          const actorId = placement.prototypeToken.parent.id;
+          uniqueTokens.set(actorId, (uniqueTokens.get(actorId) ?? -1) + 1);
+          placement.index = { total: total++, unique: uniqueTokens.get(actorId) };
           placements.push(placement);
         } else obj.clear();
       }
