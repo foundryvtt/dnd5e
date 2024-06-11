@@ -72,6 +72,25 @@ export default class EquipmentData extends ItemDataModel.mixin(
   }, {inplace: false}));
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["type", {
+        label: "DND5E.ItemEquipmentType",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.equipmentTypes,
+          keyPath: "system.type.value"
+        }
+      }],
+      ["attunement", this.compendiumBrowserAttunementFilter],
+      ...this.compendiumBrowserPhysicalItemFilters,
+      ["properties", this.compendiumBrowserPropertiesFilter("equipment")]
+    ]);
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
