@@ -52,6 +52,25 @@ export default class ConsumableData extends ItemDataModel.mixin(
   }, {inplace: false}));
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["type", {
+        label: "DND5E.ItemConsumableType",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.consumableTypes,
+          keyPath: "system.type.value"
+        }
+      }],
+      ["attunement", this.compendiumBrowserAttunementFilter],
+      ...this.compendiumBrowserPhysicalItemFilters,
+      ["properties", this.compendiumBrowserPropertiesFilter("consumable")]
+    ]);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
