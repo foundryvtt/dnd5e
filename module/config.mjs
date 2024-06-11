@@ -3134,6 +3134,7 @@ preLocalize("groupTypes");
  * @typedef {object} AdvancementTypeConfiguration
  * @property {typeof Advancement} documentClass  The advancement's document class.
  * @property {Set<string>} validItemTypes        What item types this advancement can be used with.
+ * @property {boolean} [hidden]                  Should this advancement type be hidden in the selection dialog?
  */
 
 const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
