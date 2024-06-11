@@ -147,6 +147,8 @@ export default class AbilityUseDialog extends Dialog {
    * @private
    */
   static _createSpellSlotOptions(actor, level) {
+    if ( !actor.system.spells ) return [];
+
     // Determine the levels which are feasible
     let lmax = 0;
     const options = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length).reduce((arr, i) => {

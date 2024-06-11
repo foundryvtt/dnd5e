@@ -1274,12 +1274,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Identify the consumed resource and its current quantity
     let resource = null;
     let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 0);
-    if ( amount in as.spells ) amount = consume.amount || 0;
+    if ( as.spells && (amount in as.spells) ) amount = consume.amount || 0;
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
         const amt = usageConfig.resourceAmount;
-        const target = (amt in as.spells) ? `spells.${amt}.value` : consume.target;
+        const target = as.spells && (amt in as.spells) ? `spells.${amt}.value` : consume.target;
         resource = foundry.utils.getProperty(as, target);
         quantity = resource || 0;
         break;
