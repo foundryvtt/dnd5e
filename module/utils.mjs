@@ -83,12 +83,12 @@ export function parseInputDelta(input, target) {
  * If the attribute is not found in the provided data, display a warning on the actor.
  * @param {string} formula           The original formula within which to replace.
  * @param {object} data              The data object which provides replacements.
- * @param {object} options
- * @param {Actor5e} [options.actor]  Actor upon which to display the preparation warnings.
- * @param {string} options.property  Name of the property to which this formula belongs.
+ * @param {object} [options={}]
+ * @param {Item5e} [options.item]      Item for which the value is being prepared.
+ * @param {string} [options.property]  Name of the property to which this formula belongs.
  * @returns {string}                 Formula with replaced data.
  */
-export function replaceFormulaData(formula, data, { actor, property }) {
+export function replaceFormulaData(formula, data, { item, property }={}) {
   const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
   const missingReferences = new Set();
   formula = formula.replace(dataRgx, (match, term) => {
@@ -99,12 +99,12 @@ export function replaceFormulaData(formula, data, { actor, property }) {
     }
     return String(value).trim();
   });
-  if ( (missingReferences.size > 0) && actor ) {
+  if ( (missingReferences.size > 0) && item.parent && property ) {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
     const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
-      property, name: this.name, references: listFormatter.format(missingReferences)
+      property, name: item.name, references: listFormatter.format(missingReferences)
     });
-    actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
+    item.parent._preparationWarnings.push({ message, link: item.uuid, type: "warning" });
   }
   return formula;
 }

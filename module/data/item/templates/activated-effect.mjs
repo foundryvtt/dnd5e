@@ -184,7 +184,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     const property = game.i18n.localize(label);
     try {
       foundry.utils.setProperty(
-        this, keyPath, Roll.safeEval(replaceFormulaData(value, rollData, { actor: this.parent.actor, property }))
+        this, keyPath, Roll.safeEval(replaceFormulaData(value, rollData, { item: this.parent, property }))
       );
     } catch(err) {
       if ( this.parent.isEmbedded ) {
