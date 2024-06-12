@@ -107,8 +107,10 @@ export default class TokenConfig5e extends TokenConfig {
       return arr;
     }, []) ?? [];
     if ( items.length ) {
+      const group = game.i18n.localize("DND5E.ConsumeCharges");
       items.sort(([, a], [, b]) => a.localeCompare(b, game.i18n.lang));
-      attributes[game.i18n.localize("DND5E.ConsumeCharges")] = items.map(i => i[0]);
+      if ( game.release.generation < 12 ) attributes[group] = items.map(i => i[0]);
+      else attributes.push(...items.map(([value, label]) => ({ group, value, label })));
     }
   }
 

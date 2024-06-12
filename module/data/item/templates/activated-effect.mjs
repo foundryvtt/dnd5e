@@ -163,7 +163,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
 
     // Substitute source UUIDs in consumption targets
     if ( !this.parent.isEmbedded ) return;
-    if ( ["ammo", "charges", "material"].includes(this.consume.type) && this.consume.target.includes(".") ) {
+    if ( ["ammo", "charges", "material"].includes(this.consume.type) && this.consume.target?.includes(".") ) {
       const item = this.parent.actor.sourcedItems?.get(this.consume.target);
       if ( item ) this.consume.target = item.id;
     }
@@ -184,7 +184,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     const property = game.i18n.localize(label);
     try {
       foundry.utils.setProperty(
-        this, keyPath, Roll.safeEval(replaceFormulaData(value, rollData, { actor: this.parent.actor, property }))
+        this, keyPath, Roll.safeEval(replaceFormulaData(value, rollData, { item: this.parent, property }))
       );
     } catch(err) {
       if ( this.parent.isEmbedded ) {

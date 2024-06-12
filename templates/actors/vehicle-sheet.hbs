@@ -58,7 +58,7 @@
                     <h4 class="attribute-name box-title">{{localize 'DND5E.ArmorClass'}}</h4>
                     <div class="attribute-value">
                         {{numberInput system.attributes.ac.flat name="system.attributes.ac.flat" min=0 step=1
-                                      placeholder="&mdash;"}}
+                                      placeholder="—"}}
                     </div>
                     <footer class="attribute-footer">
                         <input type="text" name="system.attributes.ac.motionless"
@@ -142,15 +142,15 @@
                         <h4>{{localize 'DND5E.VehicleActionThresholds'}}</h4>
                         <div class="counter-value">
                             <span class="sep">&lt;</span>
-                            {{numberInput system.attributes.actions.thresholds.[2] min=0 step=1 placeholder="&mdash;"
+                            {{numberInput system.attributes.actions.thresholds.[2] min=0 step=1 placeholder="—"
                                           name="system.attributes.actions.thresholds.2"
                                           title=(localize "DND5E.VehicleActionThresholdsFull")}}
                             <span class="sep">&lt;</span>
-                            {{numberInput system.attributes.actions.thresholds.[1] min=0 step=1 placeholder="&mdash;"
+                            {{numberInput system.attributes.actions.thresholds.[1] min=0 step=1 placeholder="—"
                                           name="system.attributes.actions.thresholds.1"
                                           title=(localize "DND5E.VehicleActionThresholdsMid")}}
                             <span class="sep">&lt;</span>
-                            {{numberInput system.attributes.actions.thresholds.[0] min=0 step=1 placeholder="&mdash;"
+                            {{numberInput system.attributes.actions.thresholds.[0] min=0 step=1 placeholder="—"
                                           name="system.attributes.actions.thresholds.0"
                                           title=(localize "DND5E.VehicleActionThresholdsMin")}}
                         </div>

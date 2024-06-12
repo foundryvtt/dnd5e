@@ -176,6 +176,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  *allApplicableEffects() {
+    for ( const effect of super.allApplicableEffects() ) {
+      if ( (effect.getFlag("dnd5e", "type") !== "enchantment") && !effect.getFlag("dnd5e", "rider") ) yield effect;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   prepareDerivedData() {
     const origin = this.getFlag("dnd5e", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
@@ -3332,7 +3341,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const fill = CONFIG.DND5E.tokenHPColors[key];
 
     for ( const token of tokens ) {
-      if ( !token.object?.visible || !token.object?.renderable ) continue;
+      if ( !token.object?.visible || token.isSecret ) continue;
       if ( token.hasDynamicRing ) token.flashRing(key);
       const t = token.object;
       canvas.interface.createScrollingText(t.center, value.signedString(), {

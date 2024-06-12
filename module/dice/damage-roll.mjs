@@ -118,6 +118,11 @@ export default class DamageRoll extends Roll {
     for ( let [i, term] of this.terms.entries() ) {
       // Multiply dice terms
       if ( term instanceof DiceTerm ) {
+        if ( (game.release.generation > 11) && (term._number instanceof Roll) ) {
+          // Complex number term.
+          if ( !term._number.isDeterministic ) continue;
+          if ( !term._number._evaluated ) term._number.evaluateSync();
+        }
         term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
         term.number = term.options.baseNumber;
         if ( this.isCritical ) {

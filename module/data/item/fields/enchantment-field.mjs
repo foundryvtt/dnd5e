@@ -98,7 +98,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    * @returns {boolean}
    */
   static isEnchantment(data) {
-    return (data.actionType === "ench") || (data.type?.value === "enchantment");
+    return data.actionType === "ench";
   }
 
   /**

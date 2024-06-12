@@ -10,21 +10,6 @@ export default class Token5e extends Token {
   /* -------------------------------------------- */
 
   /**
-   * Callback invoked when a status effect is applied on a token.
-   * @param {Token5e} token         The token whose status effect is applied.
-   * @param {string} statusId       The status effect ID being applied, from CONFIG.specialStatusEffects
-   * @param {boolean} active        Is the special status effect now active?
-   */
-  static onApplyTokenStatusEffect(token, statusId, active) {
-    const applicableEffects = [CONFIG.specialStatusEffects.DEFEATED, CONFIG.specialStatusEffects.INVISIBLE];
-    if ( !applicableEffects.includes(statusId) || !token.ring.enabled ) return;
-    const tokenRingFlag = token.document.getFlag("dnd5e", "tokenRing") || {};
-    token.ring.configureVisuals(foundry.utils.deepClone(tokenRingFlag));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Update the token ring when this token is targeted.
    * @param {User5e} user         The user whose targeting has changed.
    * @param {Token5e} token       The token that was targeted.
@@ -127,7 +112,7 @@ export default class Token5e extends Token {
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    if ( !CONFIG.Token.ringClass.enabled || (game.release.generation > 11) ) return;
+    if ( (game.release.generation >= 12) || !CONFIG.Token.ringClass.enabled ) return;
 
     // Update ring names if necessary
     const shapeChange = ("height" in data) || ("width" in data) || ("texture" in data);
@@ -153,7 +138,7 @@ export default class Token5e extends Token {
 
   /** @inheritDoc */
   _refreshShader() {
-    if ( CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
+    if ( (game.release.generation < 12) && CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
       this.mesh?.setShaderClass(CONFIG.Token.ringClass.tokenRingSamplerShader);
     } else super._refreshShader();
   }
@@ -161,10 +146,42 @@ export default class Token5e extends Token {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _onApplyStatusEffect(statusId, active) {
+    const applicableEffects = [CONFIG.specialStatusEffects.DEFEATED, CONFIG.specialStatusEffects.INVISIBLE];
+    if ( applicableEffects.includes(statusId) ) {
+      if ( game.release.generation < 12 ) {
+        if ( this.ring.enabled ) {
+          const tokenRingFlag = this.document.getFlag("dnd5e", "tokenRing") || {};
+          this.ring.configureVisuals(foundry.utils.deepClone(tokenRingFlag));
+        }
+      } else if ( this.hasDynamicRing ) this.renderFlags.set({refreshRingVisuals: true});
+    }
+    super._onApplyStatusEffect(statusId, active);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _configureFilterEffect(statusId, active) {
-    if ( (statusId === CONFIG.specialStatusEffects.INVISIBLE) && CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
-      active = false;
+    if ( statusId === CONFIG.specialStatusEffects.INVISIBLE ) {
+      if ( game.release.generation < 12 ) {
+        if ( CONFIG.Token.ringClass.enabled && this.ring.enabled ) active = false;
+      } else if ( this.hasDynamicRing ) active = false;
     }
     return super._configureFilterEffect(statusId, active);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  getRingColors() {
+    return this.document.getRingColors();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  getRingEffects() {
+    return this.document.getRingEffects();
   }
 }

@@ -1,3 +1,6 @@
+/**
+ * Custom control icon used to display Map Location journal pages when pinned to the map.
+ */
 export default class MapLocationControlIcon extends PIXI.Container {
   constructor({code, size=40, ...style}={}, ...args) {
     super(...args);
@@ -20,7 +23,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
     // Drop Shadow
     this.shadow = this.addChild(new PIXI.Graphics());
     this.shadow.clear()
-      .beginFill(this.style.borderColor, 0.65)
+      .beginFill(this.style.shadowColor, 0.65)
       .drawCircle(this.radius + 8, this.radius + 8, this.radius + 10)
       .endFill();
     this.shadow.filters = [new PIXI.filters.BlurFilter(16)];
@@ -86,7 +89,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
     style.dropShadow = false;
     style.fill = Color.from(this.style.textColor);
     style.strokeThickness = 0;
-    style.fontFamily = ["Roboto Slab", "Signika"];
+    style.fontFamily = ["Signika"];
     if ( this.style.fontFamily ) style.fontFamily.unshift(this.style.fontFamily);
     style.fontSize = characterCount > 2 ? size * .5 : size * .6;
     return style;

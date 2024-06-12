@@ -282,7 +282,7 @@ export default class ChatMessage5e extends ChatMessage {
     // Dice rolls
     if ( this.isContentVisible ) {
       html.querySelectorAll(".dice-tooltip").forEach((el, i) => {
-        if ( !(roll instanceof DamageRoll) ) this._enrichRollTooltip(this.rolls[i], el);
+        if ( !(roll instanceof DamageRoll) && this.rolls[i] ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
       this._enrichEnchantmentTooltip(html);
