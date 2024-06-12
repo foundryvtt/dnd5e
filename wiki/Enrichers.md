@@ -107,7 +107,7 @@ A UUID contains references to an Actor and an Item it owns. When clicked, the en
 
 A Relative ID can contain a reference to an owned Item either by an ID, or a relative UUID (note the preceding `.`). When clicked, the enricher will use its location (either in an Actor Sheet, Item Sheet, or Chat Card) to determine the Token or Actor that owns that card or sheet in order to use the specified item from that owner.
 
-![Item Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-item.jpg)
+![Item Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-item.png)
 
 ## Lookup Enrichers
 
