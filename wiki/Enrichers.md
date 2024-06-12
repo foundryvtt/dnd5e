@@ -97,17 +97,15 @@ Item enrichers allow you to use an item from an enriched link. There are several
 
 **By Item Name**: `[[/item Bite]]`
 
-This functions similarly to a system macro, as if you have dragged that item to the macro hotbar. When clicked on it will check for a selected token, or your assigned actor, if a the found token or actor has an item of a matching name it will be used, if the found token or actor does not have an item of that name a warning will be displayed.
-
+This functions similarly to a system macro, as if you had dragged that item to the macro hotbar. When clicked, it will check for a selected token, or your assigned actor. If the token or actor has an item of a matching name, it will be used, otherwise a warning will be displayed.
 
 **By UUID**: `[[/item Actor.p26xCjCCTQm5fRN3.Item.amUUCouL69OK1GZU]]`
 
-A UUID contains references to an Actor and an Item it owns. When clicked on the enricher will find the specified Actor and use the specified Item.
+A UUID contains references to an Actor and an Item it owns. When clicked, the enricher will find the specified Actor and use the specified Item.
 
+**By Relative ID:** `[[/item amUUCouL69OK1GZU]]` or `[[/item .amUUCouL69OK1GZU]]`
 
-**By Relative ID:** `[[/item amUUCouL69OK1GZU]]`  or `[[/item .amUUCouL69OK1GZU]]`
-
-A Relative ID can contain a reference to an owned Item either by an Id, a relative Id (note the preceding `.`). When clicked on the enricher will use its location (either in an Actor Sheet, Item Sheet, or Chat Card) to determine the Token or Actor that owns that card or sheet to use the specified item from that owner.
+A Relative ID can contain a reference to an owned Item either by an ID, or a relative UUID (note the preceding `.`). When clicked, the enricher will use its location (either in an Actor Sheet, Item Sheet, or Chat Card) to determine the Token or Actor that owns that card or sheet in order to use the specified item from that owner.
 
 ![Item Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-item.jpg)
 
