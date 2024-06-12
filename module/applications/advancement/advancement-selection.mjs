@@ -56,7 +56,7 @@ export default class AdvancementSelection extends Dialog {
         };
       }
       const advancement = config.documentClass;
-      if ( !config.validItemTypes?.has(this.item.type) ) continue;
+      if ( config.hidden || !config.validItemTypes?.has(this.item.type) ) continue;
       context.types[name] = {
         label: advancement.metadata.title,
         icon: advancement.metadata.icon,

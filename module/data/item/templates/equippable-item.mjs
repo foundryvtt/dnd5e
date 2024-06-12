@@ -63,7 +63,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
   /**
    * Ensure items that cannot be attuned are not marked as attuned.
    */
-  prepareDerivedEquippableData() {
+  prepareFinalEquippableData() {
     if ( !this.attunement ) this.attuned = false;
   }
 

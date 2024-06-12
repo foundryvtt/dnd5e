@@ -10,6 +10,9 @@
  *
  * @typedef {object} PlacementData
  * @property {PrototypeToken} prototypeToken
+ * @property {object} index
+ * @property {number} index.total             Index of the placement across all placements.
+ * @property {number} index.unique            Index of the placement across placements with the same original token.
  * @property {number} x
  * @property {number} y
  * @property {number} rotation
@@ -104,12 +107,20 @@ export default class TokenPlacement {
     this.#createPreviews();
     try {
       const placements = [];
+      let total = 0;
+      const uniqueTokens = new Map();
       while ( this.#currentPlacement < this.config.tokens.length - 1 ) {
         this.#currentPlacement++;
         const obj = canvas.tokens.preview.addChild(this.#previews[this.#currentPlacement].object);
         await obj.draw();
+        obj.eventMode = "none";
         const placement = await this.#requestPlacement();
-        if ( placement ) placements.push(placement);
+        if ( placement ) {
+          const actorId = placement.prototypeToken.parent.id;
+          uniqueTokens.set(actorId, (uniqueTokens.get(actorId) ?? -1) + 1);
+          placement.index = { total: total++, unique: uniqueTokens.get(actorId) };
+          placements.push(placement);
+        } else obj.clear();
       }
       return placements;
     } finally {
@@ -184,7 +195,6 @@ export default class TokenPlacement {
         reject,
         rotate: this.#onRotatePlacement.bind(this),
         skip: this.#onSkipPlacement.bind(this)
-
       };
 
       // Activate listeners
@@ -270,5 +280,23 @@ export default class TokenPlacement {
   async #onSkipPlacement(event) {
     await this.#finishPlacement(event);
     this.#events.resolve(false);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust the appended number on an unlinked token to account for multiple placements.
+   * @param {TokenDocument|object} tokenDocument  Document or data object to adjust.
+   * @param {PlacementData} placement             Placement data associated with this token document.
+   */
+  static adjustAppendedNumber(tokenDocument, placement) {
+    const regex = new RegExp(/\((\d+)\)$/);
+    const match = tokenDocument.name?.match(regex);
+    if ( !match ) return;
+    const name = tokenDocument.name.replace(regex, `(${Number(match[1]) + placement.index.unique})`);
+    if ( tokenDocument instanceof TokenDocument ) tokenDocument.updateSource({ name });
+    else tokenDocument.name = name;
   }
 }

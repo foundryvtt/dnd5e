@@ -305,7 +305,11 @@ export class SummonsData extends foundry.abstract.DataModel {
       });
     } else {
       // Template actor (linked) found in world, create a copy for this user's item.
-      return actor.clone({"flags.dnd5e.summonedCopy": true, "flags.core.sourceId": actor.uuid}, {save: true});
+      return actor.clone({
+        "flags.dnd5e.summonedCopy": true,
+        "flags.core.sourceId": actor.uuid,
+        "_stats.compendiumSource": actor.uuid
+      }, {save: true});
     }
   }
 
@@ -585,6 +589,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, {keepId: true});
     } else {
       tokenDocument.delta.updateSource(actorUpdates);
+      if ( actor.prototypeToken.appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
     }
 
     return tokenDocument.toObject();

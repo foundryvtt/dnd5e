@@ -306,6 +306,8 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   async _onChangeInputDelta(event) {
+    // If this is already handled by the parent sheet, skip.
+    if ( this.#app?._onChangeInputDelta ) return;
     const input = event.target;
     const itemId = input.closest("[data-item-id]")?.dataset.itemId;
     const item = await this.getItem(itemId);

@@ -370,7 +370,7 @@ async function enrichDamage(config, label, options) {
     if ( config.average === true ) {
       const minRoll = Roll.create(config.formula).evaluate({ minimize: true, async: true });
       const maxRoll = Roll.create(config.formula).evaluate({ maximize: true, async: true });
-      localizationData.average = Math.floor((await minRoll.total + await maxRoll.total) / 2);
+      localizationData.average = Math.floor(((await minRoll).total + (await maxRoll).total) / 2);
     } else if ( Number.isNumeric(config.average) ) {
       localizationData.average = config.average;
     }
@@ -418,6 +418,7 @@ async function enrichEmbed(config, label, options) {
     switch ( config.doc.type ) {
       case "image": return embedImagePage(config, label, options);
       case "text":
+      case "map":
       case "rule": return embedTextPage(config, label, options);
       case "spells": return embedSpellList(config, label, options);
     }
@@ -496,7 +497,11 @@ function embedImagePage(config, label, options) {
   if ( showCaption || showCite ) {
     const figcaption = document.createElement("figcaption");
     if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
-    if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+    if ( showCite ) {
+      const citeLink = config.doc.toAnchor();
+      if ( game.release.generation < 12 ) citeLink.setAttribute("draggable", true);
+      figcaption.innerHTML += `<cite>${citeLink.outerHTML}</cite>`;
+    }
     figure.insertAdjacentElement("beforeend", figcaption);
   }
   return figure;
@@ -683,7 +688,11 @@ function wrapEmbeddedText(enriched, config, label, options) {
   if ( showCaption || showCite ) {
     const figcaption = document.createElement("figcaption");
     if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
-    if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+    if ( showCite ) {
+      const citeLink = config.doc.toAnchor();
+      if ( game.release.generation < 12 ) citeLink.setAttribute("draggable", true);
+      figcaption.innerHTML += `<cite>${citeLink.outerHTML}</cite>`;
+    }
     figure.insertAdjacentElement("beforeend", figcaption);
   }
 

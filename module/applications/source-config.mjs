@@ -32,7 +32,8 @@ export default class SourceConfig extends DocumentSheet {
     context.appId = this.id;
     context.CONFIG = CONFIG.DND5E;
     context.source = foundry.utils.getProperty(this.document, this.options.keyPath);
-    context.sourceUuid = foundry.utils.getProperty(this.document, "flags.core.sourceId");
+    context.sourceUuid = this.document._stats.compendiumSource
+      ?? foundry.utils.getProperty(this.document, "flags.core.sourceId");
     context.hasSourceId = !!(await fromUuid(context.sourceUuid));
     return context;
   }

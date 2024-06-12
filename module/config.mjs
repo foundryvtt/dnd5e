@@ -676,15 +676,28 @@ DND5E.tokenRingColors = {
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for a map marker style. Options not included will fall back to the value set in `default` style.
+ *
+ * @typedef {object} MapLocationMarkerStyle
+ * @property {number} [backgroundColor]      Color of the background inside the circle.
+ * @property {number} [borderColor]          Color of the border in normal state.
+ * @property {number} [borderHoverColor]     Color of the border when hovering over the marker.
+ * @property {string} [fontFamily]           Font used for rendering the code on the marker.
+ * @property {number} [shadowColor]          Color of the shadow under the marker.
+ * @property {number} [textColor]            Color of the text on the marker.
+ */
+
+/**
  * Settings used to render map location markers on the canvas.
- * @type {object}
+ * @enum {MapLocationMarkerStyle}
  */
 DND5E.mapLocationMarker = {
   default: {
     backgroundColor: 0xFBF8F5,
     borderColor: 0x000000,
     borderHoverColor: 0xFF5500,
-    font: null,
+    fontFamily: "Roboto Slab",
+    shadowColor: 0x000000,
     textColor: 0x000000
   }
 };
@@ -3134,6 +3147,7 @@ preLocalize("groupTypes");
  * @typedef {object} AdvancementTypeConfiguration
  * @property {typeof Advancement} documentClass  The advancement's document class.
  * @property {Set<string>} validItemTypes        What item types this advancement can be used with.
+ * @property {boolean} [hidden]                  Should this advancement type be hidden in the selection dialog?
  */
 
 const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
