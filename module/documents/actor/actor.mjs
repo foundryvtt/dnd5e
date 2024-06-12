@@ -206,6 +206,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._prepareArmorClass();
     this._prepareInitiative(rollData, checkBonus);
     this._prepareSpellcasting();
+
+    // Apply condition immunities
+    if ( game.release.generation >= 12 ) {
+      const conditionImmunities = this.system.traits?.ci?.value;
+      if ( conditionImmunities ) {
+        for ( const condition of conditionImmunities ) this.statuses.delete(condition);
+      }
+    }
   }
 
   /* -------------------------------------------- */
