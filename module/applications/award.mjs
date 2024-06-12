@@ -366,7 +366,7 @@ export default class Award extends DialogMixin(FormApplication) {
       try {
         new Roll(amount);
         if ( label in CONFIG.DND5E.currencies ) currency[label] = amount;
-        else if ( label === "xp" ) xp = amount;
+        else if ( label === "xp" ) xp = Number(amount);
         else if ( part === "each" ) each = true;
         else if ( part === "party" ) party = true;
         else throw new Error();
