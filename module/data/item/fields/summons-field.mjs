@@ -589,6 +589,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, {keepId: true});
     } else {
       tokenDocument.delta.updateSource(actorUpdates);
+      if ( actor.prototypeToken.appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
     }
 
     return tokenDocument.toObject();
