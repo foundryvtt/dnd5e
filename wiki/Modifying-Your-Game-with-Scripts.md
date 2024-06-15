@@ -31,12 +31,17 @@ To include your Javascript file in your world, first, shut down Foundry complete
 ```
 4. Add the path to your Javascript file to the esmodules array. If your Javascript file is stored in the root of the world directory as suggested above, just write the filename in quotation marks. It will look like this when you're done: `"esmodules": [ "my-script.js" ],` Note the comma is required at the end of the line, unless you've added this as the very last key in the JSON file. If you are unsure if your world.json file is formatted correctly, you can check it with an online JSON validator such as [JSONLint](https://jsonlint.com/).
 5. Save and close world.json.
-6. Open Foundry and launch your world. Whenever you change the world.json, you must re-launch the world for the changes to take effect.
+6. Create a file called my-script.js in the same directory of world.json
+7. Copy an example from the next chapter into it
+8. Open Foundry and launch your world. Whenever you change the world.json, you must re-launch the world for the changes to take effect.
 
 
 # Examples
 Scripts rely on Hooks to automatically execute, see [Hooks](Hooks.md) for system specific Hooks that you can use, or the [Foundry API](https://foundryvtt.com/api/modules/hookEvents.html) for Hooks provided by the Core Foundry Software.
-The examples below modify different aspects of the dnd5e system's configuration, to explore the configuration to see what you can modify, open the Console with F12 and type in `CONFIG.DND5E` then hit Enter.
+When you do a change to your my-script.js it is sufficient to press F5, which will reload foundry client and your script.
+The examples below modify different aspects of the dnd5e system's configuration, to explore the configuration to see what you can modify, press F12, this will open the inspector on the right side of the screen. Click on "Console" at the top, then scroll all the way to the bottom of the page, until you see a prompt ">". There type in `CONFIG.DND5E` then hit Enter.
+You will see a "ASCII:" tag you can expand by clicking on the arrow. The information presented are all the variables currently available in the DND5E module. For example you can inspect all the skills available by clicking on "skills".
+If there is an error in your my-script.js you can find it in the F12 Console. To do so you need to scroll all the way to the top, and click on the node "Foundry VTT | Before DOMContentLoaded". Here you can find the error with the indication of the line number.
 Need Help? Feel free to jump in the Foundry VTT discord's [#dnd5e](https://discord.com/channels/170995199584108546/670336046164213761) or [#macro-polo](https://discord.com/channels/170995199584108546/699750150674972743) channels for assistance from the community.
 
 ## Add a new Ability
