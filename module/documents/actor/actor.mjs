@@ -2887,11 +2887,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
       d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
     }
-    foundry.utils.setProperty(d.prototypeToken, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
-      foundry.utils.getProperty(d.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
-      foundry.utils.getProperty(source.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
-      { inplace: false }
-    ));
+    if ( game.release.generation >= 12 ) d.prototypeToken.ring = source.prototypeToken.ring;
+    else {
+      foundry.utils.setProperty(d.prototypeToken, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
+        foundry.utils.getProperty(d.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
+        foundry.utils.getProperty(source.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
+        { inplace: false }
+      ));
+    }
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
@@ -3079,7 +3082,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         }));
         return;
       }
-      const prototypeTokenData = await baseActor.getTokenDocument();
+      const prototypeTokenData = (await baseActor.getTokenDocument()).toObject();
       const actorData = this.token.getFlag("dnd5e", "previousActorData");
       const tokenUpdate = this.token.toObject();
       actorData._id = tokenUpdate.delta._id;
@@ -3091,11 +3094,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
         tokenUpdate.texture[k] = prototypeTokenData.texture[k];
       }
-      foundry.utils.setProperty(tokenUpdate, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
-        foundry.utils.getProperty(tokenUpdate, "flags.dnd5e.tokenRing") ?? {},
-        foundry.utils.getProperty(prototypeTokenData, "flags.dnd5e.tokenRing") ?? {},
-        { inplace: false }
-      ));
+      if ( game.release.generation >= 12 ) tokenUpdate.ring = prototypeTokenData.ring;
+      else {
+        foundry.utils.setProperty(tokenUpdate, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
+          foundry.utils.getProperty(tokenUpdate, "flags.dnd5e.tokenRing") ?? {},
+          foundry.utils.getProperty(prototypeTokenData, "flags.dnd5e.tokenRing") ?? {},
+          { inplace: false }
+        ));
+      }
       tokenUpdate.sight = prototypeTokenData.sight;
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
 
@@ -3129,7 +3135,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         update._id = t.id;
         delete update.x;
         delete update.y;
-        if ( !foundry.utils.getProperty(tokenData, "flags.dnd5e.tokenRing") ) {
+        if ( (game.release.generation < 12) && !foundry.utils.getProperty(tokenData, "flags.dnd5e.tokenRing") ) {
           foundry.utils.setProperty(update, "flags.dnd5e.tokenRing", {});
         }
         return update;
