@@ -16,7 +16,7 @@ export default class Token5e extends Token {
    * @param {boolean} targeted    Is the token targeted or not?
    */
   static onTargetToken(user, token, targeted) {
-    if ( !targeted || !token.ring?.enabled ) return;
+    if ( !targeted || !token.document.ring?.enabled ) return;
     const color = Color.from(user.color);
     token.ring.flashColor(color, { duration: 500, easing: CONFIG.Token.ringClass.easeTwoPeaks });
   }
