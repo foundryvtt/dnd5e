@@ -1,0 +1,13 @@
+<tr data-uuid="{{ entry.uuid }}">
+    <!-- TODO: Selection column here if set -->
+    <td class="icon">
+        {{#if entry.img}}
+        <img class="gold-icon" src="{{ entry.img }}" alt="{{ entry.name }}">
+        {{/if}}
+    </td>
+    <td class="name">
+        <a data-action="openLink">{{ entry.name }}</a>
+    </td>
+    <!-- TODO: Display dynamic columns as appropriate -->
+    <!-- TODO: Display source column -->
+</tr>

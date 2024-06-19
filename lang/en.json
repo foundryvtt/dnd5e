@@ -421,6 +421,23 @@
 "DND5E.ClassOriginal": "Original Class",
 "DND5E.ClassSaves": "Saving Throws",
 "DND5E.Confirm": "Confirm",
+"DND5E.CompendiumBrowser": {
+  "Title": "Compendium Browser",
+  "Action": {
+    "Open": "Open Compendium Browser"
+  },
+  "Column": {
+    "Icon": "Icon",
+    "Name": "Name"
+  },
+  "Filters": {
+    "Label": "Filters"
+  },
+  "Types": {
+    "Label": "Types"
+  },
+  "Locked": "Locked"
+},
 "DND5E.ComponentMaterial": "Material",
 "DND5E.ComponentMaterialAbbr": "M",
 "DND5E.ComponentSomatic": "Somatic",
@@ -1067,6 +1084,9 @@
 "DND5E.ItemName": "Item Name",
 "DND5E.ItemNew": "New {type}",
 "DND5E.Item": {
+  "Category": {
+    "Physical": "Physical"
+  },
   "Property": {
     "Adamantine": "Adamantine",
     "Ammunition": "Ammunition",

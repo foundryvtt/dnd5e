@@ -1,0 +1,99 @@
+.dnd5e2.compendium-browser {
+  --icon-size: 32px;
+
+  .window-content {
+    display: grid;
+    grid-template-areas:
+      "sidebar results"
+      "sidebar footer";
+    grid-template-columns: 200px auto;
+    grid-template-rows: auto 0px;
+    height: calc(100% - var(--header-height));
+
+    .sidebar { grid-area: sidebar; }
+    [data-application-part="results"] { grid-area: results; }
+    [data-application-part="footer"] { grid-area: footer; }
+  }
+
+  .sidebar {
+    height: 100%;
+    overflow-y: auto;
+    gap: 6px;
+    padding-block: 3px;
+    padding-inline: 2px;
+
+    h3 {
+      width: 100%;
+      margin-block-end: 4px;
+      border-block-end: 1px solid black;
+      font-size: var(--font-size-18);
+    }
+
+    [data-application-part="types"] {
+      display: flex;
+      flex-direction: column;
+
+      .type-entry, .type-group-header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        align-items: center;
+      }
+      .type-group .wrapper {
+        margin-inline-start: 20px;
+      }
+      [data-action="toggleCollapse"] {
+        width: 20px;
+        margin-inline-start: auto;
+        cursor: pointer;
+        text-align: center;
+      }
+    }
+
+    input[type="checkbox"]:disabled:checked {
+      position: relative;
+
+      &::before { content: "\f0c8"; }
+      &::after {
+        content: "\f023";
+        position: absolute;
+        color: var(--color-light-1);
+        font-family: var(--font-awesome);
+        font-size: var(--font-size-12);
+        font-weight: bold;
+        inset-block: 3px;
+        inset-inline: 3.5px;
+      }
+    }
+
+    input[type="checkbox"]:indeterminate::before {
+      content: "\f146";
+    }
+  }
+
+  .results {
+    height: 100%;
+    overflow-y: auto;
+
+    table {
+      margin: 0;
+      border: none;
+      border-radius: 0;
+
+      thead {
+        position: sticky;
+        inset-block-start: 0;
+      }
+    }
+
+    .icon {
+      width: calc(var(--icon-size) + 8px);
+      padding: 4px;
+
+      img {
+        width: var(--icon-size);
+        height: var(--icon-size);
+      }
+    }
+  }
+}
