@@ -19,6 +19,7 @@ import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as enrichers from "./module/enrichers.mjs";
+import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
@@ -36,6 +37,7 @@ globalThis.dnd5e = {
   dice,
   documents,
   enrichers,
+  Filter,
   migrations,
   utils
 };
@@ -516,6 +518,7 @@ Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(m
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
+Hooks.on("renderCompendiumDirectory", (app, [html], data) => applications.CompendiumBrowser.injectSidebarButton(html));
 Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
 Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
 
@@ -534,6 +537,7 @@ export {
   dice,
   documents,
   enrichers,
+  Filter,
   migrations,
   utils,
   DND5E
