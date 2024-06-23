@@ -50,11 +50,11 @@
       "units": "ft"
     },
     "uses": {
-      "value": 10,
+      "value": 50,
       "max": "50",
-      "per": "charges",
+      "per": "dawn",
       "recovery": "4d6 + 2",
-      "prompt": true
+      "prompt": false
     },
     "consume": {
       "type": "",
@@ -78,7 +78,7 @@
       ],
       "versatile": "1d8 + @mod"
     },
-    "formula": "",
+    "formula": "1d20",
     "save": {
       "ability": "",
       "dc": null,
@@ -94,13 +94,14 @@
       "conditions": ""
     },
     "properties": [
-      "ver",
-      "mgc"
+      "foc",
+      "mgc",
+      "ver"
     ],
     "proficient": null,
     "type": {
       "value": "simpleM",
-      "baseItem": ""
+      "baseItem": "quarterstaff"
     },
     "unidentified": {
       "description": ""
@@ -115,7 +116,57 @@
     "summons": null,
     "enchantment": null
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Staff of the Magi",
+      "origin": "Compendium.dnd5e.items.Item.l3V7V8VCXpmAAysQ",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "flags": {},
+      "img": "icons/weapons/staves/staff-engraved-red.webp",
+      "_id": "eppPFRx8i3sCHN2E",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.bonuses.msak.attack",
+          "mode": 2,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.rsak.attack",
+          "mode": 2,
+          "value": "2",
+          "priority": null
+        }
+      ],
+      "description": "<p>While holding this staff, you gain a +2 bonus to spell attack rolls.</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.327",
+        "systemId": "dnd5e",
+        "systemVersion": "3.2.1",
+        "createdTime": 1719169698066,
+        "modifiedTime": 1719169728114,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!items.effects!l3V7V8VCXpmAAysQ.eppPFRx8i3sCHN2E"
+    }
+  ],
   "folder": "MLMTCAvKsuFE3vYA",
   "sort": 0,
   "ownership": {
@@ -124,11 +175,12 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
+    "systemVersion": "3.2.1",
+    "coreVersion": "12.327",
     "createdTime": 1661787233842,
-    "modifiedTime": 1715374638909,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1719169749057,
+    "lastModifiedBy": "dnd5ebuilder0000",
+    "duplicateSource": null
   },
   "_key": "!items!l3V7V8VCXpmAAysQ"
 }
