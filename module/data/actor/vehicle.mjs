@@ -150,16 +150,20 @@ export default class VehicleData extends CommonTemplate {
   prepareBaseData() {
     this.attributes.prof = 0;
     AttributesFields.prepareBaseArmorClass.call(this);
+    AttributesFields.prepareBaseEncumbrance.call(this);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   prepareDerivedData() {
-    const rollData = this.getRollData({ deterministic: true });
+    const rollData = this.parent.getRollData({ deterministic: true });
     const { originalSaves } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    AttributesFields.prepareEncumbrance.call(this, rollData, { validateItem: item =>
+      (item.flags.dnd5e?.vehicleCargo === true) || !["weapon", "equipment"].includes(item.type)
+    });
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp);
   }
 }

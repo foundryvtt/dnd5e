@@ -137,7 +137,7 @@
         font-size: var(--font-size-13);
       }
 
-      [name="system.price.denomination"] {
+      :is([name="system.price.denomination"], [name="system.weight.units"]) {
         border: none;
       }
     }
@@ -183,8 +183,13 @@
             inset-inline-end: 0;
             padding: 6px;
           }
+          
+          &[aria-disabled] {
+            cursor: not-allowed;
+            &:hover { text-shadow: none; }
+          }
         }
-        &:hover .description-edit {
+        &:hover .description-edit:not[aria-disabled] {
           opacity: 100%;
         }
       }
@@ -203,6 +208,88 @@
         align-self: center;
         opacity: 0.5;
         font-size: 0.75em;
+      }
+      
+      // Description @Embeds
+      figure.content-embed {
+
+        margin: 0.5em 0;
+
+        // "inline" captions (non-rolltables) need some 
+        // space between the user provided
+        // caption and the caption document link border
+        strong.embed-caption {
+          margin-right: 0.3em;
+        }
+
+        .roll-table-embed {
+          // Numerical ranges in the first column of roll tables
+          // are best displayed without line breaks.
+          // Centering follows wotc styling.
+          thead tr th:first-child,
+          tbody tr td:first-child {
+            white-space: nowrap;
+            text-align: center;
+            padding-right: 2px;
+          }
+        }
+
+        // 'caption-top' is useful for embedding extended item text within
+        // another item, such as RollTables. Tweak stock formatting to look
+        // more like the surrounding parent text.
+        &.caption-top {
+
+          display: flex;
+          flex-direction: column;
+          margin-top: 0;
+
+          p + p {
+            margin-top: 0;
+          }
+
+          .roll-table-embed,
+          img {
+            order: 2;
+          }
+
+          // Removing padding from descriptions since 
+          // item sheets are usually smaller
+          figcaption {
+            padding: initial;
+            margin-top: 0;
+            text-align: left;
+          }
+
+          .embed-caption {
+            text-align: left;
+            font-style: inherit;
+          }
+
+          // RollTable embeds place their HTML description within the caption.
+          // Inherit weight from parent container and style the citation
+          // to look like the others
+          .roll-table-embed + figcaption {
+            font-weight: inherit;
+
+            cite {
+              display: block;
+              font-weight: bold;
+              margin-top: 0.5em;
+            }
+          }
+        }
+
+        // When embedding in another item, it may be better 
+        // for readability to suppress any table elements.
+        &.no-tables table {
+          display: none;
+        }
+
+        // Similar for secrets, as they may be intended
+        // for usage notes specific to said embedded doc
+        &.no-secrets .secret {
+          display: none;
+        }
       }
     }
   }
@@ -250,17 +337,20 @@
       }
     }
 
-    .form-group.uses-per, .form-group.consumption {
+    .form-group.uses-per {
       .form-fields {
         flex-wrap: nowrap;
-      }
-      &.consumption input {
-        flex: 0 0 32px;
       }
       span {
         flex: 0 0 16px;
         margin: 0 4px 0 0;
       }
+    }
+    .form-group.consumption .form-fields {
+      flex-wrap: wrap;
+      > * { margin: 0; }
+      [name="system.consume.amount"] { flex: 0 0 32px; }
+      [name="system.consume.type"] { flex: 0 0 100%; }
     }
     span.sep {
       flex: 0 0 8px;
@@ -349,10 +439,26 @@
     }
   }
 
-  .summoning.form-group {
+  :is(.enchantment, .summoning).form-group {
     .config-button {
       opacity: 1;
       font-size: var(--font-size-12);
+    }
+    .separated-list {
+      flex: 1 0 100%;
+      .gold-icon {
+        flex: 0 0 32px;
+        width: 32px;
+        height: 32px;
+      }
+      .name {
+        flex: 1 0 175px;
+        text-align: start;
+      }
+      .details {
+        align-items: center;
+      }
+      .list-controls button { --size: 32px; }
     }
   }
 
@@ -541,10 +647,12 @@
 }
 
 /* ----------------------------------------- */
-/*  Summoning Configuration                  */
+/*  Enchantment & Summoning Configuration    */
 /* ----------------------------------------- */
 
-.dnd5e.summoning-config {
+.dnd5e:is(.enchantment-config, .summoning-config) {
+  max-block-size: 90vh;
+
   .unbutton {
     width: unset;
     border: none;
@@ -555,45 +663,53 @@
     &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
     &:focus-visible { outline: 2px solid black; }
   }
-
   .form-header {
     justify-content: space-between;
     button { flex: unset; }
   }
 
-  ul.profiles {
-    padding: 0;
-    list-style: none;
-    gap: 12px;
-  }
-  li.profile {
-    position: relative;
-    padding: 8px;
-    background: var(--dnd5e-color-card);
-    border: 2px solid var(--dnd5e-color-gold);
-    border-radius: 4px;
-    box-shadow: 0 0 4px var(--dnd5e-shadow-45);
-
-    .details {
-      gap: 4px;
-      input { height: unset; }
-      input::placeholder { opacity: .5; }
-    }
-    [data-action="delete-profile"] {
-      --size: 26px;
-      flex: 0 0 var(--size);
-      block-size: var(--size);
-      inline-size: var(--size);
-    }
-    .content-link, .drop-area {
+  .separated-list {
+    .content-link, .drop-area, .name {
       flex: 0 0 175px;
       display: flex;
       align-items: center;
+      align-content: center;
     }
+    .content-link {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .name { flex: 1 0 175px; }
     .drop-area {
       border: 1px dashed black;
       border-radius: 4px;
       padding-inline: 4px;
+    }
+    input::placeholder { opacity: .5; }
+  }
+  .additional-tray {
+    margin-block-start: 8px;
+
+    > label {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      gap: .25rem;
+      font-size: var(--font-size-11);
+
+      > span { flex: none; }
+      .fa-gears { color: var(--color-text-light-6); }
+
+      &::before, &::after {
+        content: "";
+        flex-basis: 50%;
+        border-top: 1px dotted var(--dnd5e-color-gold);
+        align-self: center;
+      }
+    }
+    .form-group:last-child {
+      margin-block-end: -3px;
     }
   }
 }

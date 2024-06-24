@@ -15,7 +15,8 @@ export default Base => class extends Base {
   _onChangeInputDelta(event) {
     const input = event.target;
     const target = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId) ?? this.actor;
-    parseInputDelta(input, target);
+    const result = parseInputDelta(input, target);
+    if ( result !== undefined ) target.update({ [input.dataset.name]: result });
   }
 
   /* -------------------------------------------- */
@@ -26,7 +27,7 @@ export default Base => class extends Base {
    * @returns {Promise<Item5e>|null}  If a duplicate was found, returns the adjusted item stack.
    */
   _onDropStackConsumables(itemData) {
-    const droppedSourceId = itemData.flags.core?.sourceId;
+    const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags.core?.sourceId;
     if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
     const similarItem = this.actor.items.find(i => {
       const sourceId = i.getFlag("core", "sourceId");

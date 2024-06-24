@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -87,9 +87,27 @@
     },
     "properties": [
       "vocal",
-      "somatic"
+      "somatic",
+      "mgc"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "bonuses": {
+        "ac": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "profiles": [
+        {
+          "name": "",
+          "_id": "H4LmY7OuwtEQFipO",
+          "uuid": "Compendium.dnd5e.monsters.Actor.zwT2WjWo7cTm2631"
+        }
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -98,10 +116,10 @@
   "folder": "Z8kZlnggh1PtuF3Y",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234148,
-    "modifiedTime": 1704823524140,
+    "modifiedTime": 1712088767209,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Utk1OQRwYkMkFRD3"

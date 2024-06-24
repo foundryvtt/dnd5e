@@ -23,6 +23,14 @@ export default class SummoningConfig extends DocumentSheet {
   /* -------------------------------------------- */
 
   /**
+   * Expanded states for each profile.
+   * @type {Map<string, boolean>}
+   */
+  expandedProfiles = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
    * Shortcut to the summoning profiles.
    * @type {object[]}
    */
@@ -44,14 +52,23 @@ export default class SummoningConfig extends DocumentSheet {
   /** @inheritDoc */
   async getData(options={}) {
     const context = await super.getData(options);
+    context.isSpell = this.document.type === "spell";
     context.profiles = this.profiles.map(p => {
-      const profile = { id: p._id, ...p };
+      const profile = { id: p._id, ...p, collapsed: this.expandedProfiles.get(p._id) ? "" : "collapsed" };
       if ( p.uuid ) profile.document = fromUuidSync(p.uuid);
       return profile;
     }).sort((lhs, rhs) =>
       (lhs.name || lhs.document?.name || "").localeCompare(rhs.name || rhs.document?.name || "", game.i18n.lang)
     );
     context.summons = this.document.system.summons;
+    context.creatureSizes = Object.entries(CONFIG.DND5E.actorSizes).reduce((obj, [k, c]) => {
+      obj[k] = { label: c.label, selected: context.summons?.creatureSizes.has(k) ? "selected" : "" };
+      return obj;
+    }, {});
+    context.creatureTypes = Object.entries(CONFIG.DND5E.creatureTypes).reduce((obj, [k, c]) => {
+      obj[k] = { label: c.label, selected: context.summons?.creatureTypes.has(k) ? "selected" : "" };
+      return obj;
+    }, {});
     return context;
   }
 
@@ -70,6 +87,21 @@ export default class SummoningConfig extends DocumentSheet {
         profileId: event.target.closest("[data-profile-id]")?.dataset.profileId
       } }));
     }
+
+    for ( const element of html.querySelectorAll("multi-select") ) {
+      element.addEventListener("change", this._onChangeInput.bind(this));
+    }
+
+    for ( const element of html.querySelectorAll(".collapsible") ) {
+      element.addEventListener("click", event => {
+        if ( event.target.closest(".collapsible-content") ) return;
+        event.currentTarget.classList.toggle("collapsed");
+        this.expandedProfiles.set(
+          event.target.closest("[data-profile-id]").dataset.profileId,
+          !event.currentTarget.classList.contains("collapsed")
+        );
+      });
+    }
   }
 
   /* -------------------------------------------- */
@@ -77,6 +109,8 @@ export default class SummoningConfig extends DocumentSheet {
   /** @inheritDoc */
   _getSubmitData(...args) {
     const data = foundry.utils.expandObject(super._getSubmitData(...args));
+    data.creatureSizes ??= [];
+    data.creatureTypes ??= [];
     data.profiles = Object.values(data.profiles ?? {});
 
     switch ( data.action ) {

@@ -113,7 +113,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
     else {
       this.assignments[key] = Math.min(
-        Math.clamped(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
+        Math.clamp(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
         this.advancement.configuration.cap ?? Infinity
       );
     }
@@ -200,6 +200,14 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
     if ( (item.type !== "feat") || (item.system.type.value !== "feat") ) {
       ui.notifications.error("DND5E.AdvancementAbilityScoreImprovementFeatWarning", {localize: true});
+      return null;
+    }
+
+    // If a feat has a level pre-requisite, make sure it is less than or equal to current character level
+    if ( (item.system.prerequisites?.level ?? -Infinity) > this.advancement.actor.system.details.level ) {
+      ui.notifications.error(game.i18n.format("DND5E.AdvancementAbilityScoreImprovementFeatLevelWarning", {
+        level: item.system.prerequisites.level
+      }));
       return null;
     }
 

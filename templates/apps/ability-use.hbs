@@ -10,7 +10,15 @@
         <label>{{ localize "DND5E.ConsumeScalingLabel" }}</label>
         <div class="form-fields">
             <select name="resourceAmount">
+                {{#if resourceArray}}
+                {{#select item.system.consume.target}}
+                {{#each resourceOptions}}
+                <option value="{{key}}" {{disabled (not canCast)}}>{{label}}</option>
+                {{/each}}
+                {{/select}}
+                {{else}}
                 {{selectOptions resourceOptions selected=resourceAmount localize=true}}
+                {{/if}}
             </select>
         </div>
     </div>
@@ -85,21 +93,57 @@
     </div>
     {{/if}}
 
+    {{#if enchantmentOptions.profiles}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Enchantment.Label" }}
+        </label>
+        <div class="form-fields">
+            <select name="enchantmentProfile" aria-label="{{ localize 'DND5E.Enchantment.Label' }}">
+                {{ selectOptions enchantmentOptions.profiles selected=enchantmentProfile }}
+            </select>
+        </div>
+    </div>
+    {{else if enchantmentOptions.profile}}
+    <input type="hidden" name="enchantmentProfile" value="{{ enchantmentOptions.profile }}">
+    {{/if}}
+
     {{#if (ne createSummons null)}}
     <div class="form-group">
         <label class="checkbox">
             <input type="checkbox" name="createSummons" {{ checked createSummons }}>
             {{ localize "DND5E.Summoning.Action.Place" }}
         </label>
-        {{#if summoningOptions}}
+        {{#if summoningOptions.profiles}}
         <div class="form-fields">
             <select name="summonsProfile" aria-label="{{ localize 'DND5E.Summoning.Profile.Label' }}">
-                {{ selectOptions summoningOptions selected=summonsProfile }}
+                {{ selectOptions summoningOptions.profiles selected=summonsProfile }}
             </select>
         </div>
         {{else}}
-        <input type="hidden" name="summonsProfile" value="{{ summonsProfile }}">
+        <input type="hidden" name="summonsProfile" value="{{ summoningOptions.profile }}">
         {{/if}}
     </div>
+    
+    {{#if summoningOptions.creatureSizes}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Size" }}</label>
+        <div class="form-fields">
+            <select name="summonsOptions.creatureSize">
+                {{ selectOptions summoningOptions.creatureSizes }}
+            </select>
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if summoningOptions.creatureTypes}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.CreatureType" }}</label>
+        <div class="form-fields">
+            <select name="summonsOptions.creatureType">
+                {{ selectOptions summoningOptions.creatureTypes }}
+            </select>
+        </div>
+    </div>
+    {{/if}}
     {{/if}}
 </form>

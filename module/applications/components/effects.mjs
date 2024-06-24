@@ -72,21 +72,41 @@ export default class EffectsElement extends HTMLElement {
 
   /**
    * Prepare the data structure for Active Effects which are currently applied to an Actor or Item.
-   * @param {ActiveEffect5e[]} effects  The array of Active Effect instances for which to prepare sheet data.
+   * @param {ActiveEffect5e[]} effects         The array of Active Effect instances for which to prepare sheet data.
+   * @param {object} [options={}]
+   * @param {Actor5e|Item5e} [options.parent]  Document that owns these active effects.
    * @returns {object}                  Data for rendering.
    */
-  static prepareCategories(effects) {
+  static prepareCategories(effects, { parent }={}) {
     // Define effect header categories
     const categories = {
+      enchantment: {
+        type: "enchantment",
+        label: game.i18n.localize("DND5E.Enchantment.Category.General"),
+        effects: [],
+        isEnchantment: true
+      },
       temporary: {
         type: "temporary",
         label: game.i18n.localize("DND5E.EffectTemporary"),
         effects: []
       },
+      enchantmentActive: {
+        type: "activeEnchantment",
+        label: game.i18n.localize("DND5E.Enchantment.Category.Active"),
+        effects: [],
+        isEnchantment: true
+      },
       passive: {
         type: "passive",
         label: game.i18n.localize("DND5E.EffectPassive"),
         effects: []
+      },
+      enchantmentInactive: {
+        type: "inactiveEnchantment",
+        label: game.i18n.localize("DND5E.Enchantment.Category.Inactive"),
+        effects: [],
+        isEnchantment: true
       },
       inactive: {
         type: "inactive",
@@ -105,12 +125,25 @@ export default class EffectsElement extends HTMLElement {
     // Iterate over active effects, classifying them into categories
     for ( const e of effects ) {
       if ( (e.parent.system?.identified === false) && !game.user.isGM ) continue;
-      if ( e.isSuppressed ) categories.suppressed.effects.push(e);
+      if ( e.isAppliedEnchantment ) {
+        if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
+        else categories.enchantmentActive.effects.push(e);
+      }
+      else if ( e.getFlag("dnd5e", "type") === "enchantment" ) categories.enchantment.effects.push(e);
+      else if ( e.isSuppressed ) categories.suppressed.effects.push(e);
       else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
       else categories.passive.effects.push(e);
     }
+    categories.enchantment.hidden = !parent?.system.isEnchantment;
+    categories.enchantmentActive.hidden = !categories.enchantmentActive.effects.length;
+    categories.enchantmentInactive.hidden = !categories.enchantmentInactive.effects.length;
     categories.suppressed.hidden = !categories.suppressed.effects.length;
+
+    for ( const category of Object.values(categories) ) {
+      category.localizationPrefix = category.isEnchantment ? "DND5E.Enchantment.Action." : "DND5E.Effect";
+    }
+
     return categories;
   }
 
@@ -243,14 +276,16 @@ export default class EffectsElement extends HTMLElement {
    * @returns {Promise<ActiveEffect5e>}
    */
   async _onCreate(target) {
-    const isActor = this.document instanceof Actor;
     const li = target.closest("li");
+    const isActor = this.document instanceof Actor;
+    const isEnchantment = li.dataset.effectType.startsWith("enchantment");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
       name: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
-      origin: this.document.uuid,
+      origin: isEnchantment ? undefined : this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
-      disabled: li.dataset.effectType === "inactive"
+      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType),
+      "flags.dnd5e.type": isEnchantment ? "enchantment" : undefined
     }]);
   }
 

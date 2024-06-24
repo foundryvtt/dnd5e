@@ -2,10 +2,10 @@
   "_id": "Ajyq6nGwF7FtLhDQ",
   "name": "Mace",
   "type": "weapon",
-  "img": "icons/weapons/maces/mace-round-spiked-black.webp",
+  "img": "icons/weapons/maces/mace-flanged-steel-grey.webp",
   "system": {
     "description": {
-      "value": "<p>A heavy bludgeoning weapon mounted to the end of a metal club. The head features spikes and blades designed to puncture armor and shatter the bones below.</p>",
+      "value": "<p>A heavy metal head mounted to the end of a sturdy haft meant to deliver powerful, crushing blows capable of shattering armor and bone alike.</p>",
       "chat": ""
     },
     "source": {
@@ -15,7 +15,10 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 4,
+    "weight": {
+      "value": 4,
+      "units": "lb"
+    },
     "price": {
       "value": 5,
       "denomination": "gp"
@@ -105,15 +108,9 @@
       "bonus": "",
       "flat": false
     },
-    "summons": {
-      "match": {
-        "attacks": false,
-        "proficiency": false,
-        "saves": false
-      },
-      "profiles": []
-    },
-    "magicalBonus": null
+    "summons": null,
+    "magicalBonus": null,
+    "enchantment": null
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -124,10 +121,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233508,
-    "modifiedTime": 1709659525660,
+    "modifiedTime": 1715374584095,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Ajyq6nGwF7FtLhDQ"

@@ -2,10 +2,10 @@
   "_id": "UrH3sMdnUDckIHJ6",
   "name": "Flail",
   "type": "weapon",
-  "img": "icons/weapons/maces/mace-round-spiked-black.webp",
+  "img": "icons/weapons/maces/flail-studded-grey.webp",
   "system": {
     "description": {
-      "value": "<p>A set of chain-linked spiked balls lashed to a stout wooden shaft. The flail deals devastating damage when whirled in a deadly arc.</p>",
+      "value": "<p>A heavy iron ball attached to a stout wooden shaft with a heavy chain, allowing it to deal devastating damage at the end of wide, sweeping swings.</p>",
       "chat": ""
     },
     "source": {
@@ -15,7 +15,10 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 2,
+    "weight": {
+      "value": 2,
+      "units": "lb"
+    },
     "price": {
       "value": 10,
       "denomination": "gp"
@@ -105,15 +108,9 @@
       "bonus": "",
       "flat": false
     },
-    "summons": {
-      "match": {
-        "attacks": false,
-        "proficiency": false,
-        "saves": false
-      },
-      "profiles": []
-    },
-    "magicalBonus": null
+    "summons": null,
+    "magicalBonus": null,
+    "enchantment": null
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -124,10 +121,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233680,
-    "modifiedTime": 1709659527806,
+    "modifiedTime": 1715374612619,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!UrH3sMdnUDckIHJ6"

@@ -15,7 +15,10 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 3,
+    "weight": {
+      "value": 3,
+      "units": "lb"
+    },
     "price": {
       "value": 10,
       "denomination": "gp"
@@ -36,7 +39,43 @@
       "description": ""
     },
     "container": null,
-    "properties": []
+    "properties": [],
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "crewed": false,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "",
+      "prompt": true
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "prompt": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null,
+      "scale": false
+    }
   },
   "effects": [],
   "folder": "uvZXbqK3cHirDzeT",
@@ -47,10 +86,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233812,
-    "modifiedTime": 1704823158843,
+    "modifiedTime": 1715374633092,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hJS8yEVkqgJjwfWa"

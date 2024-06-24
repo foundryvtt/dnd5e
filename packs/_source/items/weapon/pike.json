@@ -2,7 +2,7 @@
   "_id": "tC0kcqZT9HHAO0PD",
   "name": "Pike",
   "type": "weapon",
-  "img": "icons/weapons/polearms/halberd-crescent-stone-worn.webp",
+  "img": "icons/weapons/polearms/pike-flared-red.webp",
   "system": {
     "description": {
       "value": "<p>A sturdy blade mounted upon the end of a long metal haft. Designed as a defensive weapon with considerable reach to both fend off and menace foes.</p>",
@@ -15,7 +15,10 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 18,
+    "weight": {
+      "value": 18,
+      "units": "lb"
+    },
     "price": {
       "value": 5,
       "denomination": "gp"
@@ -109,15 +112,9 @@
       "bonus": "",
       "flat": false
     },
-    "summons": {
-      "match": {
-        "attacks": false,
-        "proficiency": false,
-        "saves": false
-      },
-      "profiles": []
-    },
-    "magicalBonus": null
+    "summons": null,
+    "magicalBonus": null,
+    "enchantment": null
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -128,10 +125,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233905,
-    "modifiedTime": 1709659531246,
+    "modifiedTime": 1715374651974,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!tC0kcqZT9HHAO0PD"

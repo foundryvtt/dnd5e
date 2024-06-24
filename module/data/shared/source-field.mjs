@@ -10,13 +10,15 @@ const { SchemaField, StringField } = foundry.data.fields;
  */
 export default class SourceField extends SchemaField {
   constructor(fields={}, options={}) {
-    super({
+    fields = {
       book: new StringField({label: "DND5E.SourceBook"}),
       page: new StringField({label: "DND5E.SourcePage"}),
       custom: new StringField({label: "DND5E.SourceCustom"}),
       license: new StringField({label: "DND5E.SourceLicense"}),
       ...fields
-    }, { label: "DND5E.Source", ...options });
+    };
+    Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
+    super(fields, { label: "DND5E.Source", ...options });
   }
 
   /* -------------------------------------------- */
@@ -41,6 +43,12 @@ export default class SourceField extends SchemaField {
           { since: "DnD5e 2.4", until: "DnD5e 3.1" }
         );
         return obj.label;
+      },
+      enumerable: false
+    });
+    Object.defineProperty(obj, "directlyEditable", {
+      get() {
+        return (this.custom ?? "") === this.label;
       },
       enumerable: false
     });

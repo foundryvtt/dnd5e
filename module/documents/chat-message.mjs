@@ -22,6 +22,8 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _highlighted = null;
 
+  /* -------------------------------------------- */
+
   /**
    * Should the apply damage options appear?
    * @type {boolean}
@@ -31,6 +33,8 @@ export default class ChatMessage5e extends ChatMessage {
     if ( type && (type !== "damage") ) return false;
     return this.isRoll && this.isContentVisible && !!canvas.tokens?.controlled.length;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Should the select targets options appear?
@@ -71,7 +75,7 @@ export default class ChatMessage5e extends ChatMessage {
     }
 
     this._enrichChatCard(html[0]);
-    requestAnimationFrame(() => html.find(".card-tray, .effects-tray").each((i, el) => el.classList.add("collapsed")));
+    this._collapseTrays(html[0]);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -83,6 +87,28 @@ export default class ChatMessage5e extends ChatMessage {
     Hooks.callAll("dnd5e.renderChatMessage", this, html[0]);
 
     return html;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle collapsing or expanding trays depending on user settings.
+   * @param {HTMLElement} html  Rendered contents of the message.
+   */
+  _collapseTrays(html) {
+    let collapse;
+    switch ( game.settings.get("dnd5e", "autoCollapseChatTrays") ) {
+      case "always": collapse = true; break;
+      case "never": collapse = false; break;
+      // Collapse chat message trays older than 5 minutes
+      case "older": collapse = this.timestamp < Date.now() - (5 * 60 * 1000); break;
+    }
+    for ( const tray of html.querySelectorAll(".card-tray, .effects-tray") ) {
+      tray.classList.toggle("collapsed", collapse);
+    }
+    for ( const element of html.querySelectorAll("damage-application") ) {
+      element.toggleAttribute("open", !collapse);
+    }
   }
 
   /* -------------------------------------------- */
@@ -108,10 +134,14 @@ export default class ChatMessage5e extends ChatMessage {
       // If the user is the message author or the actor owner, proceed
       let actor = game.actors.get(this.speaker.actor);
       if ( game.user.isGM || actor?.isOwner || (this.user.id === game.user.id) ) {
-        const summonsButton = chatCard[0].querySelector('button[data-action="summon"]');
-        if ( summonsButton && !SummonsData.canSummon ) summonsButton.style.display = "none";
-        const template = chatCard[0].querySelector('button[data-action="placeTemplate"]');
-        if ( template && !game.user.can("TEMPLATE_CREATE") ) template.style.display = "none";
+        const optionallyHide = (selector, hide) => {
+          const element = chatCard[0].querySelector(selector);
+          if ( element && hide ) element.style.display = "none";
+        };
+        optionallyHide('button[data-action="summon"]', !SummonsData.canSummon);
+        optionallyHide('button[data-action="placeTemplate"]', !game.user.can("TEMPLATE_CREATE"));
+        optionallyHide('button[data-action="consumeUsage"]', this.getFlag("dnd5e", "use.consumedUsage"));
+        optionallyHide('button[data-action="consumeResource"]', this.getFlag("dnd5e", "use.consumedResource"));
         return;
       }
 
@@ -182,8 +212,9 @@ export default class ChatMessage5e extends ChatMessage {
       nameText = this.user.name;
     }
 
-    const avatar = document.createElement("div");
+    const avatar = document.createElement("a");
     avatar.classList.add("avatar");
+    if ( actor ) avatar.dataset.uuid = actor.uuid;
     avatar.innerHTML = `<img src="${img}" alt="${nameText}">`;
 
     const name = document.createElement("span");
@@ -251,13 +282,18 @@ export default class ChatMessage5e extends ChatMessage {
     // Dice rolls
     if ( this.isContentVisible ) {
       html.querySelectorAll(".dice-tooltip").forEach((el, i) => {
-        if ( !(roll instanceof DamageRoll) ) this._enrichRollTooltip(this.rolls[i], el);
+        if ( !(roll instanceof DamageRoll) && this.rolls[i] ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
+      this._enrichEnchantmentTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
     }
+
+    avatar.addEventListener("click", this._onTargetMouseDown.bind(this));
+    avatar.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
+    avatar.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -317,8 +353,8 @@ export default class ChatMessage5e extends ChatMessage {
     }).sort((a, b) => (a[1] === b[1]) ? 0 : a[1] ? 1 : -1).reduce((str, [li]) => str + li, "");
     evaluation.querySelectorAll("li.target").forEach(target => {
       target.addEventListener("click", this._onTargetMouseDown.bind(this));
-      target.addEventListener("mouseover", this._onTargetHoverIn.bind(this));
-      target.addEventListener("mouseout", this._onTargetHoverOut.bind(this));
+      target.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
+      target.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
     });
     html.querySelector(".message-content")?.appendChild(evaluation);
   }
@@ -417,6 +453,28 @@ export default class ChatMessage5e extends ChatMessage {
       }
       if ( term instanceof NumericTerm ) aggregate.constant += value * multiplier;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display the enrichment application interface if necessary.
+   * @param {HTMLLIElement} html   The chat card.
+   * @protected
+   */
+  _enrichEnchantmentTooltip(html) {
+    const enchantmentProfile = this.getFlag("dnd5e", "use.enchantmentProfile");
+    if ( !enchantmentProfile ) return;
+
+    // Ensure concentration is still being maintained
+    const concentrationId = this.getFlag("dnd5e", "use.concentrationId");
+    if ( concentrationId && !this.getAssociatedActor()?.effects.get(concentrationId) ) return;
+
+    // Create the enchantment tray
+    const enchantmentApplication = document.createElement("enchantment-application");
+    enchantmentApplication.classList.add("dnd5e2");
+    const afterElement = html.querySelector(".card-footer") ?? html.querySelector(".effects-tray");
+    afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
   }
 
   /* -------------------------------------------- */
@@ -640,5 +698,37 @@ export default class ChatMessage5e extends ChatMessage {
         setTimeout(() => ui.chat.scrollBottom(), 250);
       });
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the Actor which is the author of a chat card.
+   * @returns {Actor|void}
+   */
+  getAssociatedActor() {
+    if ( this.speaker.scene && this.speaker.token ) {
+      const scene = game.scenes.get(this.speaker.scene);
+      const token = scene?.tokens.get(this.speaker.token);
+      if ( token ) return token.actor;
+    }
+    return game.actors.get(this.speaker.actor);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the item associated with this chat card.
+   * @returns {Item5e|void}
+   */
+  getAssociatedItem() {
+    const actor = this.getAssociatedActor();
+    if ( !actor ) return;
+    const storedData = this.getFlag("dnd5e", "itemData");
+    return storedData
+      ? new Item.implementation(storedData, { parent: actor })
+      : actor.items.get(this.getFlag("dnd5e", "use.itemId"));
   }
 }

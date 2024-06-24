@@ -2,7 +2,7 @@
   "_id": "F65ANO66ckP8FDMa",
   "name": "Trident",
   "type": "weapon",
-  "img": "icons/skills/melee/spear-tips-triple-orange.webp",
+  "img": "icons/weapons/polearms/trident-silver-blue.webp",
   "system": {
     "description": {
       "value": "<p>A multi-pronged spear designed to impale a target in multiple locations, pinning them in place. Often used in combination with a net to entrap and harass foes.</p>",
@@ -15,7 +15,10 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 4,
+    "weight": {
+      "value": 4,
+      "units": "lb"
+    },
     "price": {
       "value": 5,
       "denomination": "gp"
@@ -108,15 +111,9 @@
       "bonus": "",
       "flat": false
     },
-    "summons": {
-      "match": {
-        "attacks": false,
-        "proficiency": false,
-        "saves": false
-      },
-      "profiles": []
-    },
-    "magicalBonus": null
+    "summons": null,
+    "magicalBonus": null,
+    "enchantment": null
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -127,10 +124,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233540,
-    "modifiedTime": 1709659526097,
+    "modifiedTime": 1715374590180,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!F65ANO66ckP8FDMa"

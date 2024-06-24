@@ -9,6 +9,10 @@
  * Data for token placement on the scene.
  *
  * @typedef {object} PlacementData
+ * @property {PrototypeToken} prototypeToken
+ * @property {object} index
+ * @property {number} index.total             Index of the placement across all placements.
+ * @property {number} index.unique            Index of the placement across placements with the same original token.
  * @property {number} x
  * @property {number} y
  * @property {number} rotation
@@ -32,6 +36,14 @@ export default class TokenPlacement {
    * @type {TokenPlacementConfiguration}
    */
   config;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Index of the token configuration currently being placed in the scene.
+   * @param {number}
+   */
+  #currentPlacement = -1;
 
   /* -------------------------------------------- */
 
@@ -94,7 +106,23 @@ export default class TokenPlacement {
   async place() {
     this.#createPreviews();
     try {
-      return await this.#activatePreviewListeners();
+      const placements = [];
+      let total = 0;
+      const uniqueTokens = new Map();
+      while ( this.#currentPlacement < this.config.tokens.length - 1 ) {
+        this.#currentPlacement++;
+        const obj = canvas.tokens.preview.addChild(this.#previews[this.#currentPlacement].object);
+        await obj.draw();
+        obj.eventMode = "none";
+        const placement = await this.#requestPlacement();
+        if ( placement ) {
+          const actorId = placement.prototypeToken.parent.id;
+          uniqueTokens.set(actorId, (uniqueTokens.get(actorId) ?? -1) + 1);
+          placement.index = { total: total++, unique: uniqueTokens.get(actorId) };
+          placements.push(placement);
+        } else obj.clear();
+      }
+      return placements;
     } finally {
       this.#destroyPreviews();
     }
@@ -110,12 +138,13 @@ export default class TokenPlacement {
     this.#previews = [];
     for ( const prototypeToken of this.config.tokens ) {
       const tokenData = prototypeToken.toObject();
+      tokenData.sight.enabled = false;
+      tokenData._id = foundry.utils.randomID();
       if ( tokenData.randomImg ) tokenData.texture.src = prototypeToken.actor.img;
       const cls = getDocumentClass("Token");
       const doc = new cls(tokenData, { parent: canvas.scene });
-      this.#placements.push({ x: 0, y: 0, rotation: 0 });
+      this.#placements.push({ prototypeToken, x: 0, y: 0, rotation: tokenData.rotation ?? 0 });
       this.#previews.push(doc);
-      doc.object.draw();
     }
   }
 
@@ -154,23 +183,24 @@ export default class TokenPlacement {
 
   /**
    * Activate listeners for the placement preview.
-   * @returns {Promise}  A promise that resolves with the final placement if created.
+   * @returns {Promise<PlacementData|false>}  A promise that resolves with the final placement if created,
+   *                                          or false if the placement was skipped.
    */
-  #activatePreviewListeners() {
+  #requestPlacement() {
     return new Promise((resolve, reject) => {
       this.#events = {
-        cancel: this.#onCancelPlacement.bind(this),
         confirm: this.#onConfirmPlacement.bind(this),
         move: this.#onMovePlacement.bind(this),
         resolve,
         reject,
-        rotate: this.#onRotatePlacement.bind(this)
+        rotate: this.#onRotatePlacement.bind(this),
+        skip: this.#onSkipPlacement.bind(this)
       };
 
       // Activate listeners
       canvas.stage.on("mousemove", this.#events.move);
       canvas.stage.on("mousedown", this.#events.confirm);
-      canvas.app.view.oncontextmenu = this.#events.cancel;
+      canvas.app.view.oncontextmenu = this.#events.skip;
       canvas.app.view.onwheel = this.#events.rotate;
     });
   }
@@ -182,7 +212,6 @@ export default class TokenPlacement {
    * @param {Event} event  Triggering event that ended the placement.
    */
   async #finishPlacement(event) {
-    canvas.tokens._onDragLeftCancel(event);
     canvas.stage.off("mousemove", this.#events.move);
     canvas.stage.off("mousedown", this.#events.confirm);
     canvas.app.view.oncontextmenu = null;
@@ -199,17 +228,18 @@ export default class TokenPlacement {
     event.stopPropagation();
     if ( this.#throttle ) return;
     this.#throttle = true;
-    const preview = this.#previews[0];
+    const idx = this.#currentPlacement;
+    const preview = this.#previews[idx];
     const adjustment = this.#getSnapAdjustment(preview);
     const point = event.data.getLocalPosition(canvas.tokens);
     const center = canvas.grid.getCenter(point.x - adjustment.x, point.y - adjustment.y);
     preview.updateSource({
-      x: center[0] + adjustment.x - Math.round((this.config.tokens[0].width * canvas.dimensions.size) / 2),
-      y: center[1] + adjustment.y - Math.round((this.config.tokens[0].height * canvas.dimensions.size) / 2)
+      x: center[0] + adjustment.x - Math.round((this.config.tokens[idx].width * canvas.dimensions.size) / 2),
+      y: center[1] + adjustment.y - Math.round((this.config.tokens[idx].height * canvas.dimensions.size) / 2)
     });
-    this.#placements[0].x = preview.x;
-    this.#placements[0].y = preview.y;
-    preview.object.refresh();
+    this.#placements[idx].x = preview.x;
+    this.#placements[idx].y = preview.y;
+    canvas.tokens.preview.children[this.#currentPlacement]?.refresh();
     requestAnimationFrame(() => this.#throttle = false);
   }
 
@@ -224,10 +254,10 @@ export default class TokenPlacement {
     event.stopPropagation();
     const delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
     const snap = event.shiftKey ? delta : 5;
-    const preview = this.#previews[0];
-    this.#placements[0].rotation += snap * Math.sign(event.deltaY);
-    preview.updateSource({ rotation: this.#placements[0].rotation });
-    preview.object.refresh();
+    const preview = this.#previews[this.#currentPlacement];
+    this.#placements[this.#currentPlacement].rotation += snap * Math.sign(event.deltaY);
+    preview.updateSource({ rotation: this.#placements[this.#currentPlacement].rotation });
+    canvas.tokens.preview.children[this.#currentPlacement]?.refresh();
   }
 
   /* -------------------------------------------- */
@@ -238,17 +268,35 @@ export default class TokenPlacement {
    */
   async #onConfirmPlacement(event) {
     await this.#finishPlacement(event);
-    this.#events.resolve(this.#placements);
+    this.#events.resolve(this.#placements[this.#currentPlacement]);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Cancel placement when the right mouse button is clicked.
+   * Skip placement when the right mouse button is clicked.
    * @param {Event} event  Triggering mouse event.
    */
-  async #onCancelPlacement(event) {
+  async #onSkipPlacement(event) {
     await this.#finishPlacement(event);
-    this.#events.reject();
+    this.#events.resolve(false);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust the appended number on an unlinked token to account for multiple placements.
+   * @param {TokenDocument|object} tokenDocument  Document or data object to adjust.
+   * @param {PlacementData} placement             Placement data associated with this token document.
+   */
+  static adjustAppendedNumber(tokenDocument, placement) {
+    const regex = new RegExp(/\((\d+)\)$/);
+    const match = tokenDocument.name?.match(regex);
+    if ( !match ) return;
+    const name = tokenDocument.name.replace(regex, `(${Number(match[1]) + placement.index.unique})`);
+    if ( tokenDocument instanceof TokenDocument ) tokenDocument.updateSource({ name });
+    else tokenDocument.name = name;
   }
 }

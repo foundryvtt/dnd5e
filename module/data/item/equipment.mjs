@@ -63,6 +63,15 @@ export default class EquipmentData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true,
+    inventoryItem: true,
+    inventoryOrder: 200
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
@@ -151,6 +160,14 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivatedEffectData();
+    this.prepareFinalEquippableData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getFavoriteData() {
     return foundry.utils.mergeObject(await super.getFavoriteData(), {
       subtitle: [this.type.label, this.parent.labels.activation],
@@ -224,29 +241,5 @@ export default class EquipmentData extends ItemDataModel.mixin(
     const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
     const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does this armor impose disadvantage on stealth checks?
-   * @type {boolean}
-   * @deprecated since DnD5e 3.0, available until DnD5e 3.2
-   */
-  get stealth() {
-    foundry.utils.logCompatibilityWarning(
-      "The `system.stealth` value on equipment has migrated to the 'stealthDisadvantage' property.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-    );
-    return this.properties.has("stealthDisadvantage");
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  get validProperties() {
-    const valid = super.validProperties;
-    if ( this.isArmor ) valid.add("stealthDisadvantage");
-    return valid;
   }
 }

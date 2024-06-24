@@ -79,7 +79,10 @@
       "charged": false
     },
     "crewed": false,
-    "properties": []
+    "properties": [],
+    "prerequisites": {
+      "level": 7
+    }
   },
   "flags": {},
   "img": "icons/magic/air/wind-vortex-swirl-blue.webp",
@@ -88,10 +91,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234374,
-    "modifiedTime": 1704824716643,
+    "modifiedTime": 1712073581480,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!QBk1RsuTIEF4GEBC"

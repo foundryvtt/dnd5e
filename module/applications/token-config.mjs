@@ -8,7 +8,7 @@ export default class TokenConfig5e extends TokenConfig {
   /** @inheritdoc */
   static get defaultOptions() {
     const options = super.defaultOptions;
-    if ( !game.settings.get("dnd5e", "disableTokenRings") ) options.tabs.push({
+    options.tabs.push({
       navSelector: '.tabs[data-group="appearance"]', contentSelector: '.tab[data-tab="appearance"]', initial: "token"
     });
     return options;
@@ -51,7 +51,7 @@ export default class TokenConfig5e extends TokenConfig {
    * @protected
    */
   async _addTokenRingConfiguration(html) {
-    if ( game.settings.get("dnd5e", "disableTokenRings") ) return;
+    if ( game.release.generation > 11 ) return;
 
     const tab = html.querySelector('.tab[data-tab="appearance"]');
 
@@ -107,8 +107,10 @@ export default class TokenConfig5e extends TokenConfig {
       return arr;
     }, []) ?? [];
     if ( items.length ) {
+      const group = game.i18n.localize("DND5E.ConsumeCharges");
       items.sort(([, a], [, b]) => a.localeCompare(b, game.i18n.lang));
-      attributes[game.i18n.localize("DND5E.ConsumeCharges")] = items.map(i => i[0]);
+      if ( game.release.generation < 12 ) attributes[group] = items.map(i => i[0]);
+      else attributes.push(...items.map(([value, label]) => ({ group, value, label })));
     }
   }
 
@@ -159,7 +161,7 @@ export default class TokenConfig5e extends TokenConfig {
 
   /** @inheritDoc */
   _previewChanges(change) {
-    if ( change && (this.preview instanceof TokenDocument5e) ) {
+    if ( change && (this.preview instanceof TokenDocument5e) && (game.release.generation < 12) ) {
       const flags = foundry.utils.getProperty(foundry.utils.expandObject(change), "flags.dnd5e.tokenRing") ?? {};
       const redraw = ("textures" in flags) || ("enabled" in flags);
       if ( redraw ) this.preview.object.renderFlags.set({ redraw });
