@@ -23,16 +23,16 @@ export class DetectionModeBlindsight extends DetectionMode {
 
   /** @override */
   _canDetect(visionSource, target) {
-    // Blindsight can detect anything.
+    if ( visionSource.object.document.hasStatusEffect(CONFIG.specialStatusEffects.BURROW) ) return false;
+    if ( target instanceof Token ) {
+      if ( target.document.hasStatusEffect(CONFIG.specialStatusEffects.BURROW) ) return false;
+    }
     return true;
   }
 
   /** @override */
   _testLOS(visionSource, mode, target, test) {
-    const polygonBackend = foundry.utils.isNewerVersion(game.version, 11)
-      ? CONFIG.Canvas.polygonBackends.sight
-      : CONFIG.Canvas.losBackend;
-    return !polygonBackend.testCollision(
+    return !CONFIG.Canvas.polygonBackends.sight.testCollision(
       { x: visionSource.x, y: visionSource.y },
       test.point,
       {
