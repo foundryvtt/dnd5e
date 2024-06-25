@@ -1,6 +1,7 @@
 import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -21,6 +22,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  * @mixes MountableTemplate
+ * @mixes ActivitiesTemplate
  *
  * @property {object} armor               Armor details and equipment type information.
  * @property {number} armor.value         Base armor class or shield bonus.
@@ -35,7 +37,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  */
 export default class EquipmentData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
-  ActivatedEffectTemplate, ActionTemplate, MountableTemplate
+  ActivatedEffectTemplate, ActionTemplate, MountableTemplate, ActivitiesTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
@@ -97,6 +99,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     EquipmentData.#migrateArmor(source);
     EquipmentData.#migrateType(source);
     EquipmentData.#migrateStrength(source);

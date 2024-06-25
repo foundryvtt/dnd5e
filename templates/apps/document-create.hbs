@@ -1,6 +1,7 @@
 <form id="document-create" autocomplete="off">
     <header>
-        <input type="text" class="document-name uninput" name="name" value="{{ name }}" autofocus>
+        <input type="text" class="document-name uninput" name="name" value="{{ name }}" autofocus
+               placeholder="{{ localize 'Name' }}">
         {{#if hasFolders}}
         <select class="unselect" name="folder" form="document-create">
             {{ selectOptions folders selected=folder labelAttr="name" nameAttr="id"

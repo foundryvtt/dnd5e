@@ -344,6 +344,21 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* --------------------------------------------- */
 
   /**
+   * Define any pseudo document collections available in system data.
+   * @type {Record<string, Collection>}
+   */
+  get pseudoDocumentHierarchy() {
+    const hierarchy = {};
+    for ( const [fieldName, field] of this.system.schema.entries() ) {
+      if ( field.constructor.hierarchical ) hierarchy[fieldName] = field;
+    }
+    Object.defineProperty(this, "pseudoDocumentHierarchy", { value: Object.freeze(hierarchy), writable: false });
+    return this.pseudoDocumentHierarchy;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
    * Does this item require concentration?
    * @type {boolean}
    */
@@ -514,6 +529,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
     if ( !this.actor || this.actor._embeddedPreparation ) this.applyActiveEffects();
+    for ( const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {}) ) {
+      for ( const e of this.getEmbeddedCollection(collectionName) ) e.prepareData?.();
+    }
   }
 
   /* -------------------------------------------- */
@@ -2413,6 +2431,26 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       throw new Error(`The key ${id} does not exist in the ${embeddedName} Collection`);
     }
     return advancement;
+  }
+
+  /* -------------------------------------------- */
+  /*  Embedded Operations                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static getCollectionName(name) {
+    if ( name === "Activity" ) name = "activities";
+    if ( ["activities"].includes(name) ) return name;
+    return super.getCollectionName(name);
+  }
+
+  /* <><><><> <><><><> <><><><> <><><><> */
+
+  /** @inheritDoc */
+  getEmbeddedCollection(embeddedName) {
+    const collectionName = this.constructor.getCollectionName(embeddedName);
+    const field = this.pseudoDocumentHierarchy[collectionName];
+    return field ? this.system[collectionName] : super.getEmbeddedCollection(embeddedName);
   }
 
   /* -------------------------------------------- */

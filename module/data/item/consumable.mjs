@@ -2,6 +2,7 @@ import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -20,6 +21,7 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
  * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
+ * @mixes ActivitiesTemplate
  *
  * @property {number} magicalBonus       Magical bonus added to attack & damage rolls by ammunition.
  * @property {Set<string>} properties    Ammunition properties.
@@ -28,7 +30,7 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
  */
 export default class ConsumableData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
-  ActivatedEffectTemplate, ActionTemplate
+  ActivatedEffectTemplate, ActionTemplate, ActivitiesTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
@@ -77,6 +79,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     ConsumableData.#migratePropertiesData(source);
   }
 

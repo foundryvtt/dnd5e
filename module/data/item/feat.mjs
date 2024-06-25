@@ -1,6 +1,7 @@
 import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import { EnchantmentData } from "./fields/enchantment-field.mjs";
@@ -14,6 +15,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @mixes ItemTypeTemplate
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
+ * @mixes ActivitiesTemplate
  *
  * @property {object} prerequisites
  * @property {number} prerequisites.level           Character or class level required to choose this feature.
@@ -24,7 +26,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {boolean} recharge.charged             Does this feature have a charge remaining?
  */
 export default class FeatData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate
+  ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate, ActivitiesTemplate
 ) {
 
   /** @override */
@@ -117,6 +119,7 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     FeatData.#migrateType(source);
     FeatData.#migrateRecharge(source);
   }

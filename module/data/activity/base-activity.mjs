@@ -1,4 +1,5 @@
-import { FormulaField } from "../fields.mjs";
+import FormulaField from "../fields/formula-field.mjs";
+import UsesField from "../shared/uses-field.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, FilePathField, NumberField, SchemaField, StringField
@@ -69,14 +70,14 @@ const {
  * @property {string} uses.max                   Formula for the maximum number of uses.
  * @property {UsesRecoveryData[]} uses.recovery  Recovery profiles for this activity's uses.
  */
-export default class BaseActivity extends foundry.abstract.DataModel {
+export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ACTIVITY"];
+  static LOCALIZATION_PREFIXES = ["DND5E.ACTIVITY", "DND5E.USES"];
 
   /* -------------------------------------------- */
 
@@ -140,17 +141,31 @@ export default class BaseActivity extends foundry.abstract.DataModel {
           special: new StringField()
         })
       }),
-      uses: new SchemaField({
-        spent: new NumberField({ initial: 0, integer: true }),
-        max: new FormulaField({ deterministic: true }),
-        recovery: new ArrayField(
-          new SchemaField({
-            period: new StringField({ initial: "lr" }),
-            type: new StringField({ initial: "recoverAll" }),
-            formula: new FormulaField()
-          })
-        )
-      })
+      uses: new UsesField()
     };
   }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data related to this activity.
+   */
+  prepareData() {
+    this.name = this.name || game.i18n.localize(this.metadata?.title);
+    this.img = this.img || this.metadata?.img;
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Perform preliminary operations before an Activity is created.
+   * @param {object} data     The initial data object provided to the document creation request.
+   * @returns {boolean|void}  A return value of false indicates the creation operation should be cancelled.
+   * @protected
+   */
+  _preCreate(data) {}
 }
