@@ -4,6 +4,20 @@ const ApplicationV2 = foundry.applications?.api?.ApplicationV2 ?? (class {});
 const HandlebarsApplicationMixin = foundry.applications?.api?.HandlebarsApplicationMixin ?? (cls => cls);
 
 /**
+ * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
+ * @property {{locked: CompendiumBrowserFilters, initial: CompendiumBrowserFilters}} filters  Filters to set to start.
+ *                                              Locked filters won't be able to be changed by the user. Initial filters
+ *                                              will be set to start but can be changed.
+ * @property {CompendiumBrowserSelectionConfiguration} selection  Configuration used to define document selections.
+ */
+
+/**
+ * @typedef {object} CompendiumBrowserSelectionConfiguration
+ * @property {number|null} min                  Minimum number of documents that must be selected.
+ * @property {number|null} max                  Maximum number of documents that must be selected.
+ */
+
+/**
  * @typedef {object} CompendiumBrowserFilters
  * @property {string} [documentClass]  Document type to fetch (e.g. Actor or Item).
  * @property {Set<string>} [types]     Individual document subtypes to filter upon (e.g. "loot", "class", "npc").
@@ -35,6 +49,7 @@ const HandlebarsApplicationMixin = foundry.applications?.api?.HandlebarsApplicat
  * Application for browsing, filtering, and searching for content between multiple compendiums.
  * @extends ApplicationV2
  * @mixes HandlebarsApplicationMixin
+ * @template CompendiumBrowserConfiguration
  */
 export default class CompendiumBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
   constructor(...args) {
@@ -63,6 +78,10 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
       setType: CompendiumBrowser.#onSetType,
       toggleCollapse: CompendiumBrowser.#onToggleCollapse
     },
+    form: {
+      handler: CompendiumBrowser.#onHandleSubmit,
+      closeOnSubmit: true
+    },
     position: {
       width: 1024,
       height: 640
@@ -72,6 +91,10 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
       initial: {
         documentClass: "Item"
       }
+    },
+    selection: {
+      min: null,
+      max: null
     }
   };
 
@@ -113,6 +136,16 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
   /* -------------------------------------------- */
 
   /**
+   * Should the selection controls be displayed?
+   * @type {boolean}
+   */
+  get displaySelection() {
+    return !!this.options.selection.min || !!this.options.selection.max;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Currently define filters.
    */
   #filters;
@@ -138,6 +171,34 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
    * @type {Promise<object[]|Document[]>}
    */
   #results;
+
+  /* -------------------------------------------- */
+
+  /**
+   * UUIDs of currently selected documents.
+   * @type {Set<string>}
+   */
+  #selected = new Set();
+
+  get selected() {
+    return this.#selected;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Suffix used for localization selection messages based on min and max values.
+   * @type {string|null}
+   */
+  get #selectionLocalizationSuffix() {
+    const max = this.options.selection.max;
+    const min = this.options.selection.min;
+    if ( !min && !max ) return null;
+    if ( !min && max ) return "Max";
+    if ( min && !max ) return "Min";
+    if ( min !== max ) return "Range";
+    return "Single";
+  }
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
@@ -180,7 +241,29 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
       case "types":
       case "filters": return this._prepareSidebarContext(partId, context, options);
       case "results": return this._prepareResultsContext(context, options);
+      case "footer": return this._prepareFooterContext(context, options);
     }
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the footer context.
+   * @param {ApplicationRenderContext} context     Shared context provided by _prepareContext.
+   * @param {HandlebarsRenderOptions} options      Options which configure application rendering behavior.
+   * @returns {Promise<ApplicationRenderContext>}  Context data for a specific part.
+   */
+  async _prepareFooterContext(context, options) {
+    const value = this.#selected.size;
+    const { max, min } = this.options.selection;
+
+    context.displaySelection = this.displaySelection;
+    context.invalid = (value < (min || -Infinity)) || (value > (max || Infinity)) ? "invalid" : "";
+    const suffix = this.#selectionLocalizationSuffix;
+    context.summary = suffix ? game.i18n.format(
+      `DND5E.CompendiumBrowser.Selection.Summary.${suffix}`, { max, min, value }
+    ) : value;
     return context;
   }
 
@@ -249,6 +332,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
         filters: CompendiumBrowser.applyFilters(context.filterDefinitions, context.filters.additional)
       }
     );
+    context.displaySelection = this.displaySelection;
     return context;
   }
 
@@ -261,7 +345,11 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
   async _renderResults() {
     let rendered = [];
     for ( const entry of await this.#results ) {
-      const context = { entry };
+      const context = {
+        entry,
+        displaySelection: this.displaySelection,
+        selected: this.#selected.has(entry.uuid)
+      };
       rendered.push(
         renderTemplate("systems/dnd5e/templates/compendium/browser-entry.hbs", context)
           .then(html => {
@@ -317,7 +405,47 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
 
   /** @override */
   _onChangeForm(formConfig, event) {
+    if ( event.target.name === "selected" ) {
+      if ( event.target.checked ) this.#selected.add(event.target.value);
+      else this.#selected.delete(event.target.value);
+      this.render({ parts: ["footer"] });
+    }
     if ( event.target.name?.startsWith("additional.") ) CompendiumBrowser.#onSetFilter.call(this, event, event.target);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle form submission with selection.
+   * @param {SubmitEvent} event          The form submission event.
+   * @param {HTMLFormElement} form       The submitted form element.
+   * @param {FormDataExtended} formData  The data from the submitted form.
+   */
+  static async #onHandleSubmit(event, form, formData) {
+    if ( !this.displaySelection ) return;
+
+    const value = this.#selected.size;
+    const { max, min } = this.options.selection;
+    if ( (value < (min || -Infinity)) || (value > (max || Infinity)) ) {
+      const suffix = this.#selectionLocalizationSuffix;
+      const pr = new Intl.PluralRules(game.i18n.lang);
+      throw new Error(game.i18n.format(
+        `DND5E.CompendiumBrowser.Selection.Warning.${suffix}`,
+        {
+          max, min, value,
+          document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
+        }
+      ));
+    }
+
+    /**
+     * Hook event that calls when a compendium browser is submitted with selected items.
+     * @function dnd5e.compendiumBrowserSelection
+     * @memberof hookEvents
+     * @param {CompendiumBrowser} browser  Compendium Browser application being submitted.
+     * @param {Set<string>} selected       Set of document UUIDs that are selected.
+     */
+    Hooks.callAll("dnd5e.compendiumBrowserSelection", this, this.#selected);
   }
 
   /* -------------------------------------------- */
@@ -461,6 +589,39 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     }
 
     return documents;
+  }
+
+  /* -------------------------------------------- */
+  /*  Factory Methods                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Factory method used to spawn a compendium browser and wait for the results of a selection.
+   * @param {CompendiumBrowserConfiguration} options
+   * @returns {Promise<Set<string>|null>}
+   */
+  static async select(options) {
+    return new Promise((resolve, reject) => {
+      const browser = new CompendiumBrowser(options);
+      browser.addEventListener("close", event => {
+        resolve(browser.selected?.size ? browser.selected : null);
+      }, { once: true });
+      browser.render({ force: true });
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Factory method used to spawn a compendium browser and return a single selected item or null if canceled.
+   * @param {CompendiumBrowserConfiguration} options
+   * @returns {Promise<string|null>}
+   */
+  static async selectOne(options) {
+    const result = await this.select(
+      foundry.utils.mergeObject(options, { selection: { min: 1, max: 1 } }, { inplace: false })
+    );
+    return result?.size ? result.first() : null;
   }
 
   /* -------------------------------------------- */

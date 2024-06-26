@@ -435,6 +435,27 @@
     "HasDarkvision": "Has Darkvision",
     "HasSpellcasting": "Has Spellcasting"
   },
+  "Loading": "Loading…",
+  "Selection": {
+    "Label": "Selected: {summary}",
+    "Select": "Select",
+    "Summary": {
+      "Max": "<span class=\"value\">{value}</span> of up to {max}",
+      "Min": "<span class=\"value\">{value}</span> of at least {min}",
+      "Range": "<span class=\"value\">{value}</span> of {min} to {max}",
+      "Single": "<span class=\"value\">{value}</span> of {max}"
+    },
+    "Warning": {
+      "Document": {
+        "one": "document",
+        "other": "documents"
+      },
+      "Max": "Must select at most {max} {document}, {value} selected.",
+      "Min": "Must select at least {min} {document}, {value} selected.",
+      "Range": "Must select between {min} and {max} documents, {value} selected.",
+      "Single": "Must select {max} {document}, {value} selected."
+    }
+  },
   "Types": {
     "Label": "Types"
   },
