@@ -1,5 +1,9 @@
 <tr data-uuid="{{ entry.uuid }}">
-    <!-- TODO: Selection column here if set -->
+    {{#if displaySelection}}
+    <td class="selection">
+        <input type="checkbox" name="selected" value="{{ entry.uuid }}" {{ checked selected }}>
+    </td>
+    {{/if}}
     <td class="icon">
         {{#if entry.img}}
         <img class="gold-icon" loading="lazy" src="{{ entry.img }}" alt="{{ entry.name }}">
