@@ -20,7 +20,7 @@ export default class SubclassJournalPageData extends foundry.abstract.TypeDataMo
     return {
       item: new StringField({ required: true }),
       description: new SchemaField({
-        value: new HTMLField()
+        value: new HTMLField({ textSearch: true })
       }),
       style: new StringField()
     };

@@ -44,7 +44,7 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
         hint: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Hint"
       }),
       description: new SchemaField({
-        value: new HTMLField({label: "DND5E.Description"})
+        value: new HTMLField({textSearch: true, label: "DND5E.Description"})
       }),
       spells: new SetField(new StringField(), {label: "DND5E.ItemTypeSpellPl"}),
       unlinkedSpells: new ArrayField(new SchemaField({
