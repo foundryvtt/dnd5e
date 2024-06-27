@@ -123,7 +123,11 @@ export function simplifyBonus(bonus, data={}) {
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
-    return roll.isDeterministic ? Roll.safeEval(roll.formula) : 0;
+    return roll.isDeterministic
+      ? game.release.generation < 12
+        ? Roll.safeEval(roll.formula)
+        : roll.evaluateSync().total
+      : 0;
   } catch(error) {
     console.error(error);
     return 0;
