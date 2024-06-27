@@ -171,6 +171,7 @@ export default function ActorSheetV2Mixin(Base) {
       html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
       html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
       html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
+      html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
       this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
       this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
       if ( this.isEditable ) {
@@ -195,16 +196,21 @@ export default function ActorSheetV2Mixin(Base) {
         values = values.map(key => {
           const value = { label: Trait.keyLabel(key, { trait }) ?? key };
           const icons = value.icons = [];
-          if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses);
+          if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses.map(p => {
+            const type = CONFIG.DND5E.itemProperties[p]?.label;
+            return { icon: p, label: game.i18n.format("DND5E.DamagePhysicalBypassesShort", { type }) };
+          }));
           return value;
         });
         if ( data.custom ) data.custom.split(";").forEach(v => values.push({ label: v.trim() }));
         if ( values.length ) traits[trait] = values;
       }
+
       // If petrified, display "All Damage" instead of all damage types separately
       if ( this.document.hasConditionEffect("petrification") ) {
         traits.dr = [{ label: game.i18n.localize("DND5E.DamageAll") }];
       }
+
       // Combine damage & condition immunities in play mode.
       if ( (this._mode === this.constructor.MODES.PLAY) && traits.ci ) {
         traits.di ??= [];
@@ -224,7 +230,10 @@ export default function ActorSheetV2Mixin(Base) {
             color: total > 0 ? "maroon" : "green"
           };
           const icons = value.icons = [];
-          if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses);
+          if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses.map(p => {
+            const type = CONFIG.DND5E.itemProperties[p]?.label;
+            return { icon: p, label: game.i18n.format("DND5E.DamagePhysicalBypassesShort", { type }) };
+          }));
           return value;
         }).filter(f => f);
         if ( values.length ) traits.dm = values;
@@ -269,6 +278,27 @@ export default function ActorSheetV2Mixin(Base) {
       this.form.classList.add(`tab-${active}`);
       const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${active}.collapseSidebar`);
       if ( sidebarCollapsed !== undefined ) this._toggleSidebar(sidebarCollapsed);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle performing some action on an owned Item.
+     * @param {PointerEvent} event  The triggering event.
+     * @protected
+     */
+    _onItemAction(event) {
+      if ( event.target.closest("select") ) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const itemId = event.currentTarget.closest("[data-item-id]")?.dataset.itemId;
+      const action = event.currentTarget.dataset.action;
+      const item = this.actor.items.get(itemId);
+
+      switch ( action ) {
+        case "edit": item?.sheet.render(true); break;
+        case "delete": item?.deleteDialog(); break;
+      }
     }
 
     /* -------------------------------------------- */

@@ -4,38 +4,6 @@
             aria-pressed="{{ filled }}"></button>
 {{/inline}}
 
-{{#*inline "traits"}}
-    {{#if (or @root.editable values)}}
-    <div class="pills-group {{#unless values}}empty{{/unless}}">
-        <h3 class="icon">
-            {{#if icon}}<i class="{{ icon }}"></i>
-            {{~else if svg}}<dnd5e-icon src="systems/dnd5e/icons/svg/{{svg}}.svg"></dnd5e-icon>{{/if}}
-            <span class="roboto-upper">{{ localize label }}</span>
-            {{#if @root.editable}}
-            <a class="trait-selector" data-trait="{{ key }}"
-               data-tooltip="{{ localize "DND5E.TraitConfig" trait=(localize label) }}"
-               aria-label="{{ localize "DND5E.TraitConfig" trait=(localize label) }}">
-                <i class="fas fa-cog"></i>
-            </a>
-            {{/if}}
-        </h3>
-        <ul class="pills">
-            {{#each values}}
-            <li class="pill {{ ../color }} {{ color }}">
-                {{#each icons}}
-                {{#with (lookup (lookup @root.config.itemProperties this) "label") as |label|}}
-                <i class="{{ ../this }}" data-tooltip="{{ localize 'DND5E.DamagePhysicalBypassesShort' type=label }}"
-                   aria-label="{{ localize 'DND5E.DamagePhysicalBypassesShort' type=label }}"></i>
-                {{/with}}
-                {{/each}}
-                <span class="label">{{ label }}</span>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
-    {{/if}}
-{{/inline}}
-
 <form class="{{ cssClass }}" autocomplete="off">
 
     {{!-- Header --}}
@@ -64,9 +32,10 @@
                      {{#if (and editable portrait.path)}}data-edit="{{ portrait.path }}"{{/if}}>
 
                 <div class="initiative {{#unless editable}}{{ rollableClass }}{{/unless}}"
-                    {{#if editable}}data-action="rollInitiative" data-tooltip="DND5E.InitiativeConfig"
-                     aria-label="{{ localize "DND5E.InitiativeConfig" }}"
-                    {{else}}data-tooltip="DND5E.Initiative" aria-label="{{ localize "DND5E.Initiative" }}"{{/if}}>
+                    {{#if editable}}data-tooltip="DND5E.InitiativeConfig"
+                    aria-label="{{ localize "DND5E.InitiativeConfig" }}"
+                    {{else}}data-tooltip="DND5E.Initiative" aria-label="{{ localize "DND5E.Initiative" }}"
+                    data-action="rollInitiative"{{/if}}>
                     {{#if editable}}
                         <a class="config-button" data-action="initiative"><i class="fas fa-cog"></i></a>
                     {{else}}
@@ -421,6 +390,9 @@
                     <ul class="pills">
                         {{#each speed}}
                         <li class="pill">
+                            {{#each icons}}
+                            <i class="{{ icon }}" data-tooltip="{{ label }}" aria-label="{{ label }}"></i>
+                            {{/each}}
                             <span class="label">{{ label }}</span>
                             {{#if value}}
                             <span class="separator">&vert;</span>
@@ -480,24 +452,31 @@
                 </div>
 
                 {{!-- Resistances --}}
-                {{> "traits" values=traits.dr key="dr" color="green" icon="fas fa-shield-halved" label="DND5E.Resistances" }}
+                {{> "dnd5e.actor-trait-pills" values=traits.dr key="dr" color="green" icon="fas fa-shield-halved"
+                    label="DND5E.Resistances" }}
 
                 {{!-- Immunities --}}
                 {{#if editable}}
-                    {{> "traits" values=traits.di key="di" color="green" icon="fas fa-shield" label="DND5E.DamImm" }}
+                    {{> "dnd5e.actor-trait-pills" values=traits.di key="di" color="green" icon="fas fa-shield"
+                        label="DND5E.DamImm" }}
                 {{else}}
-                    {{> "traits" values=traits.di key="di" color="green" icon="fas fa-shield" label="DND5E.Immunities" }}
+                    {{> "dnd5e.actor-trait-pills" values=traits.di key="di" color="green" icon="fas fa-shield"
+                        label="DND5E.Immunities" }}
                 {{/if}}
-                {{> "traits" values=traits.ci key="ci" color="green" svg="rosa-shield" label="DND5E.ConImm" }}
+                {{> "dnd5e.actor-trait-pills" values=traits.ci key="ci" color="green" svg="rosa-shield"
+                    label="DND5E.ConImm" }}
 
                 {{!-- Vulnerabilities --}}
-                {{> "traits" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack" label="DND5E.Vulnerabilities" }}
+                {{> "dnd5e.actor-trait-pills" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack"
+                    label="DND5E.Vulnerabilities" }}
 
                 {{!-- Damage Modification --}}
-                {{> "traits" values=traits.dm key="dm" icon="fas fa-heart-circle-plus" label="DND5E.DamageModification.Label" }}
+                {{> "dnd5e.actor-trait-pills" values=traits.dm key="dm" icon="fas fa-heart-circle-plus"
+                    label="DND5E.DamageModification.Label" }}
 
                 {{!-- Languages --}}
-                {{> "traits" values=traits.languages key="languages" icon="fas fa-flag" label="DND5E.Languages" }}
+                {{> "dnd5e.actor-trait-pills" values=traits.languages key="languages" icon="fas fa-flag"
+                    label="DND5E.Languages" }}
 
             </div>
 
@@ -506,7 +485,7 @@
 
                 {{!-- Features --}}
                 <div class="tab features" data-group="primary" data-tab="features">
-                    {{> "dnd5e.npc-features" sections=features }}
+                    {{> "dnd5e.creature-features" sections=features.sections filters=features.filters }}
                 </div>
 
                 {{!-- Inventory --}}

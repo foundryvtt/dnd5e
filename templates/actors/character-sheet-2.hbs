@@ -477,7 +477,8 @@
 
                 {{!-- Features --}}
                 <div class="tab features" data-group="primary" data-tab="features">
-                    {{> "dnd5e.character-features" sections=features }}
+                    {{> "dnd5e.creature-features" sections=features.sections filters=features.filters
+                        showClassDrop=true }}
                 </div>
 
                 {{!-- Spells --}}

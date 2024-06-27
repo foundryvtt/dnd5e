@@ -54,9 +54,11 @@
     {{/dnd5e-itemContext}}
     {{/if}}
     {{else}}
+    {{#if showClassDrop}}
     <div class="pill-lg empty roboto-upper" data-action="findItem" data-item-type="class">
         {{ localize "DND5E.ClassAdd" }}
     </div>
+    {{/if}}
     {{/each}}
 </section>
 
@@ -67,13 +69,9 @@
     <item-list-controls for="features" label="{{ localize "DND5E.FeatureSearch" }}" sort="toggle" group
                         group-label="{{ localize "DND5E.FilterGroupOrigin" }}" collection="items">
         <datalist>
-            <option value="action">{{ localize "DND5E.Action" }}</option>
-            <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
-            <option value="reaction">{{ localize "DND5E.Reaction" }}</option>
-            <option value="sr">{{ localize "DND5E.ShortRest" }}</option>
-            <option value="lr">{{ localize "DND5E.LongRest" }}</option>
-            <option value="concentration">{{ localize "DND5E.Concentration" }}</option>
-            <option value="mgc">{{ localize "DND5E.Item.Property.Magical" }}</option>
+            {{#each filters}}
+            <option value="{{ key }}">{{ localize label }}</option>
+            {{/each}}
         </datalist>
     </item-list-controls>
 
@@ -87,9 +85,9 @@
             {{!-- Section Header --}}
             <div class="items-header header">
                 <h3 class="item-name">{{ localize label }}</h3>
-                <div class="item-header item-uses">{{ localize "DND5E.Uses" }}</div>
-                <div class="item-header item-recovery">{{ localize "DND5E.Recovery" }}</div>
-                <div class="item-header item-controls"></div>
+                {{#each categories}}
+                <div class="item-header {{ classes }}">{{#if label}}{{ localize label }}{{/if}}</div>
+                {{/each}}
             </div>
 
             {{!-- Section Contents --}}
@@ -100,7 +98,7 @@
                 {{!-- Items --}}
                 <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
                     data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}" data-grouped="{{ ctx.group }}"
-                    data-ungrouped="{{#if ../hasActions}}active{{else}}passive{{/if}}">
+                    data-ungrouped="{{ ctx.ungroup }}">
 
                     {{!-- Item Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
@@ -123,55 +121,9 @@
                         </div>
                     </div>
 
-                    {{!-- Item Uses --}}
-                    {{#if item.isOnCooldown}}
-                    <div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip="{{item.labels.recharge}}" aria-label="{{item.labels.recharge}}">
-                        <a class="item-action" data-action="recharge"><i class="fa-solid fa-arrows-rotate"></i></a>
-                    {{else if item.system.recharge.value}}
-                    <div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip="{{item.labels.recharge}}" aria-label="{{item.labels.recharge}}">
-                        <i class="fa-solid fa-bolt"></i>
-                    {{else if ctx.hasUses}}
-                    <div class="item-detail item-uses">
-                        <input type="text" value="{{ item.system.uses.value }}" placeholder="0" data-dtype="Number"
-                               data-name="system.uses.value" inputmode="numeric" pattern="[+=\-]?\d*">
-                        <span class="separator">&sol;</span>
-                        <span class="max">{{ item.system.uses.max }}</span>
-                    {{else}}
-                    <div class="item-detail item-uses empty">
-                    {{/if}}
-                    </div>
-
-                    {{!-- Item Recovery --}}
-                    <div class="item-detail item-recovery {{#unless item.system.uses.per}}empty{{/unless}}">
-                        {{#if item.system.uses.per}}
-                        <span class="condensed">{{ item.labels.recovery }}</span>
-                        {{/if}}
-                    </div>
-
-                    {{!-- Item Status --}}
-                    <div class="item-detail item-controls">
-
-                        {{#if @root.editable}}
-                        {{!-- Editing --}}
-                        <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit"
-                           aria-label="{{ localize "DND5E.ItemEdit" }}">
-                            <i class="fas fa-pen-to-square"></i>
-                        </a>
-
-                        {{!-- Deleting --}}
-                        <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
-                           aria-label="{{ localize "DND5E.ItemDelete" }}">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                        {{/if}}
-
-                        {{!-- Context Menu --}}
-                        <a class="item-control interface-only" data-context-menu
-                           aria-label="{{ localize "DND5E.AdditionalControls" }}">
-                            <i class="fas fa-ellipsis-vertical"></i>
-                        </a>
-
-                    </div>
+                    {{#each ../categories}}
+                        {{> (lookup . "partial") }}
+                    {{/each}}
 
                 </li>
 

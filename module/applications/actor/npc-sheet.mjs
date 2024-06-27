@@ -64,7 +64,10 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
       ctx.canToggle = false;
       // Item grouping
-      ctx.group = item.system.activation.type || "passive";
+      ctx.group = item.system.activation?.type || "passive";
+      ctx.ungroup = "feat";
+      if ( item.type === "weapon" ) ctx.ungroup = "weapon";
+      if ( ctx.group === "passive" ) ctx.ungroup = "passive";
       // Individual item preparation
       this._prepareItem(item, ctx);
       if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => ({
@@ -159,7 +162,10 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
       case "rollDeathSave":
-        return this.actor.rollDeathSave({event: event});
+        return this.actor.rollDeathSave({ event });
+
+      case "rollInitiative":
+        return this.actor.rollInitiativeDialog({ event });
     }
   }
 

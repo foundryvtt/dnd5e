@@ -301,17 +301,24 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials
+    "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs",
     "systems/dnd5e/templates/actors/parts/actor-traits.hbs",
     "systems/dnd5e/templates/actors/parts/actor-inventory.hbs",
     "systems/dnd5e/templates/actors/parts/actor-features.hbs",
     "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
-    "systems/dnd5e/templates/actors/tabs/character-features.hbs",
+    "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
     "systems/dnd5e/templates/actors/tabs/character-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
     "systems/dnd5e/templates/actors/tabs/group-members.hbs",
-    "systems/dnd5e/templates/actors/tabs/npc-features.hbs",
+
+    // Actor Sheet Item Summary Columns
+    "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-recovery.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-controls.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-roll.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-formula.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",

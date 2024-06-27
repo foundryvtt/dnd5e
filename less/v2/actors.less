@@ -220,6 +220,93 @@
   }
 
   /* ---------------------------------- */
+  /*  Classes                           */
+  /* ---------------------------------- */
+
+  .tab.features.active {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tab.features .classes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .5rem;
+
+    .class {
+      width: 240px;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding-right: .75rem;
+
+      .icons, .name-stacked, .level { position: relative; }
+
+      .icons {
+        display: flex;
+        justify-content: center;
+        gap: .375rem;
+
+        img {
+          cursor: pointer;
+          &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+        }
+
+        > .controls {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          gap: .375rem;
+
+          > .item-control {
+            color: var(--dnd5e-color-red);
+            align-items: start;
+            width: 32px;
+            height: 32px;
+            position: relative;
+            left: 2px;
+            bottom: 2px;
+          }
+        }
+      }
+
+      .name-stacked { flex: 1; }
+
+      .level {
+        > span, > select {
+          font-family: var(--dnd5e-font-roboto-slab);
+          font-size: var(--font-size-20);
+          font-weight: bold;
+        }
+
+        > span {
+          text-shadow: 0 0 12px var(--dnd5e-shadow-15);
+          color: var(--dnd5e-color-gold);
+        }
+
+        > select {
+          width: 55px;
+          text-align: center;
+          padding: 0;
+          height: unset;
+          border: none;
+          background: none;
+
+          option {
+            font-family: var(--dnd5e-font-roboto);
+            font-size: var(--font-size-13);
+          }
+        }
+      }
+    }
+
+    &.editing { padding-right: .5rem; }
+    .pill-lg.empty { width: 240px; }
+  }
+
+  /* ---------------------------------- */
   /*  Minimized                         */
   /* ---------------------------------- */
 

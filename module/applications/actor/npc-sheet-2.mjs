@@ -66,7 +66,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     }
 
     // Show Death Saves
-    context.showDeathSaves = this.actor.getFlag("dnd5e", "showDeathSaves");
+    context.showDeathSaves = !foundry.utils.isEmpty(this.actor.classes)
+      || this.actor.getFlag("dnd5e", "showDeathSaves");
 
     // Proficiency
     context.prof = {
@@ -77,7 +78,12 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
       const value = attributes.movement[k];
-      if ( value ) obj[k] = { label, value };
+      if ( value ) {
+        obj[k] = { label, value };
+        if ( (k === "fly") && attributes.movement.hover ) obj.fly.icons = [{
+          icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MovementHover")
+        }];
+      }
       return obj;
     }, {});
 
@@ -124,6 +130,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   /** @inheritDoc */
   _prepareItems(context) {
     super._prepareItems(context);
+    const classes = [];
     const inventory = {};
     const inventoryTypes = Object.entries(CONFIG.Item.dataModels)
       .filter(([, model]) => model.metadata?.inventoryItem)
@@ -131,24 +138,51 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     for ( const [type] of inventoryTypes ) {
       inventory[type] = { label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], dataset: { type } };
     }
-    context.features = context.features.filter(section => {
+    const features = context.features.filter(section => {
       if ( section.dataset.type === "loot" ) {
         section.items.forEach(i => inventory[i.type]?.items.push(i));
         return false;
       }
-      if ( (section.dataset.type === "feat") && !("activation.type" in section.dataset) ) {
-        section.dataset.type = "passive";
+      if ( (section.dataset.type === "feat") ) {
+        if ( !("activation.type" in section.dataset) ) section.dataset.type = "passive";
+        for ( let i = section.items.length; i--; ) {
+          const item = section.items[i];
+          if ( (item.type === "class") || (item.type === "subclass") ) {
+            classes.push(item);
+            section.items.splice(i, 1);
+            context.itemContext[item.id].prefixedImage = item.img ? foundry.utils.getRoute(item.img) : null;
+          }
+        }
       }
       if ( section.dataset.type === "weapon" ) inventory.weapon.items = section.items;
       return true;
     });
     // TODO: These labels should be pluralised.
-    Object.entries(CONFIG.DND5E.abilityActivationTypes).forEach(([type, label]) => context.features.push({
+    Object.entries(CONFIG.DND5E.abilityActivationTypes).forEach(([type, label]) => features.push({
       label, items: [], hasActions: true, dataset: { type }
     }));
+    context.features = {
+      sections: features,
+      filters: [
+        { key: "action", label: "DND5E.Action" },
+        { key: "bonus", label: "DND5E.BonusAction" },
+        { key: "reaction", label: "DND5E.Reaction" },
+        { key: "legendary", label: "DND5E.LegendaryActionLabel" },
+        { key: "lair", label: "DND5E.LairActionLabel" }
+      ]
+    };
+    features.forEach(section => {
+      section.categories = [
+        { classes: "item-uses", label: "DND5E.Uses", partial: "dnd5e.column-uses" },
+        { classes: "item-roll", label: "DND5E.SpellHeader.Roll", partial: "dnd5e.column-roll" },
+        { classes: "item-formula", label: "DND5E.SpellHeader.Formula", partial: "dnd5e.column-formula" },
+        { classes: "item-controls", partial: "dnd5e.column-controls" }
+      ];
+    });
     // TODO: Containers.
     context.inventory = Object.values(inventory);
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
+    context.classes = classes;
   }
 
   /* -------------------------------------------- */

@@ -300,15 +300,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
 
     // Remove races & background as they are shown on the details tab instead.
-    context.features = context.features.filter(f => (f.dataset.type !== "background") && (f.dataset.type !== "race"));
-    context.features.forEach(f => {
+    const features = context.features.filter(f => (f.dataset.type !== "background") && (f.dataset.type !== "race"));
+    features.forEach(f => {
       if ( f.hasActions ) f.dataset.type = "active";
       else f.dataset.type = "passive";
     });
 
     // Add extra categories for features grouping.
     Object.values(this.actor.classes ?? {}).sort((a, b) => b.system.levels - a.system.levels).forEach(cls => {
-      context.features.push({
+      features.push({
         label: game.i18n.format("DND5E.FeaturesClass", { class: cls.name }),
         items: [],
         dataset: { type: cls.identifier }
@@ -316,15 +316,37 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     });
 
     if ( this.actor.system.details.race instanceof dnd5e.documents.Item5e ) {
-      context.features.push({ label: "DND5E.FeaturesRace", items: [], dataset: { type: "race" } });
+      features.push({ label: "DND5E.FeaturesRace", items: [], dataset: { type: "race" } });
     }
 
     if ( this.actor.system.details.background instanceof dnd5e.documents.Item5e ) {
-      context.features.push({ label: "DND5E.FeaturesBackground", items: [], dataset: { type: "background" } });
+      features.push({ label: "DND5E.FeaturesBackground", items: [], dataset: { type: "background" } });
     }
 
-    context.features.push({ label: "DND5E.FeaturesOther", items: [], dataset: { type: "other" } });
-    context.classes = context.features.findSplice(f => f.isClass)?.items;
+    features.push({ label: "DND5E.FeaturesOther", items: [], dataset: { type: "other" } });
+    context.classes = features.findSplice(f => f.isClass)?.items;
+
+    context.features = {
+      sections: features,
+      filters: [
+        { key: "action", label: "DND5E.Action" },
+        { key: "bonus", label: "DND5E.BonusAction" },
+        { key: "reaction", label: "DND5E.Reaction" },
+        { key: "sr", label: "DND5E.ShortRest" },
+        { key: "lr", label: "DND5E.LongRest" },
+        { key: "concentration", label: "DND5E.Concentration" },
+        { key: "mgc", label: "DND5E.Item.Property.Magical" }
+      ]
+    };
+
+    // TODO: Customise this per-section.
+    features.forEach(section => {
+      section.categories = [
+        { classes: "item-uses", label: "DND5E.Uses", partial: "dnd5e.column-uses" },
+        { classes: "item-recovery", label: "DND5E.Recovery", partial: "dnd5e.column-recovery" },
+        { classes: "item-controls", partial: "dnd5e.column-controls" }
+      ];
+    });
 
     // Spell slots
     const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
@@ -445,7 +467,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     super.activateListeners(html);
     html.find(".death-tab").on("click", () => this._toggleDeathTray());
     html.find("[data-action]").on("click", this._onAction.bind(this));
-    html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
 
     // Prevent default middle-click scrolling when locking a tooltip.
     this.form.addEventListener("pointerdown", event => {
@@ -689,27 +710,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   _onToggleSpellcasting(event) {
     const ability = event.currentTarget.closest("[data-ability]")?.dataset.ability;
     this.actor.update({ "system.attributes.spellcasting": ability });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle performing some action on an owned Item.
-   * @param {PointerEvent} event  The triggering event.
-   * @protected
-   */
-  _onItemAction(event) {
-    if ( event.target.closest("select") ) return;
-    event.preventDefault();
-    event.stopPropagation();
-    const itemId = event.currentTarget.closest("[data-item-id]")?.dataset.itemId;
-    const action = event.currentTarget.dataset.action;
-    const item = this.actor.items.get(itemId);
-
-    switch ( action ) {
-      case "edit": item?.sheet.render(true); break;
-      case "delete": item?.deleteDialog(); break;
-    }
   }
 
   /* -------------------------------------------- */
