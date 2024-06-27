@@ -1634,6 +1634,14 @@ DND5E.damageTypes = {
 preLocalize("damageTypes", { keys: ["label"], sort: true });
 
 /* -------------------------------------------- */
+
+/**
+ * Display aggregated damage in chat cards.
+ * @type {boolean}
+ */
+DND5E.aggregateDamageDisplay = true;
+
+/* -------------------------------------------- */
 /*  Movement                                    */
 /* -------------------------------------------- */
 
