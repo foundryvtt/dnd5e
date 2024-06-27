@@ -406,8 +406,9 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _enrichDamageTooltip(rolls, html) {
     if ( !rolls.length ) return;
-    let { formula, total, breakdown } = aggregateDamageRolls(rolls).reduce((obj, r) => {
-      obj.formula.push(r.formula);
+    const aggregatedRolls = CONFIG.DND5E.aggregateDamageDisplay ? aggregateDamageRolls(rolls) : rolls;
+    let { formula, total, breakdown } = aggregatedRolls.reduce((obj, r) => {
+      obj.formula.push(CONFIG.DND5E.aggregateDamageDisplay ? r.formula : ` + ${r.formula}`);
       obj.total += r.total;
       this._aggregateDamageRoll(r, obj.breakdown);
       return obj;
