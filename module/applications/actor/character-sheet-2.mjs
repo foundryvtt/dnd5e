@@ -964,7 +964,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @param {string} type  The item type.
    * @protected
    */
-  _onFindItem(type) {
+  async _onFindItem(type) {
     if ( game.release.generation < 12 ) {
       switch ( type ) {
         case "class": game.packs.get(CONFIG.DND5E.sourcePacks.CLASSES)?.render(true); break;
@@ -972,10 +972,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         case "background": game.packs.get(CONFIG.DND5E.sourcePacks.BACKGROUNDS)?.render(true); break;
       }
     } else {
-      new CompendiumBrowser({
-        filters: { locked: { types: new Set([type]) } },
-        selection: { min: 1, max: 1 }
-      }).render(true);
+      const result = await CompendiumBrowser.selectOne({ filters: { locked: { types: new Set([type]) } } });
+      if ( result ) this._onDropItemCreate(await fromUuid(result));
     }
   }
 
