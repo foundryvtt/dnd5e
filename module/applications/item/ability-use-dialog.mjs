@@ -59,7 +59,7 @@ export default class AbilityUseDialog extends Dialog {
     const resourceOptions = this._createResourceOptions(item);
 
     const slotOptions = this._createSpellSlotOptions(item.actor, item.system.level);
-    if ( item.type === "spell" ) {
+    if ( (item.type === "spell") && (item.system.level > 0) ) {
       const slot = slotOptions.find(s => s.key === config.slotLevel) ?? slotOptions.find(s => s.canCast);
       if ( slot ) item = item.clone({ "system.level": slot.level });
     }
