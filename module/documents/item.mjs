@@ -732,7 +732,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Actor spell-DC based scaling
     if ( save.scaling === "spell" ) {
-      save.dc = this.isOwned ? this.actor.system.attributes.spelldc : null;
+      save.dc = this.isOwned ? this.actor.system.abilities?.[this.system.abilityMod]?.dc
+        ?? this.actor.system.attributes.spelldc : null;
     }
 
     // Ability-score based scaling
