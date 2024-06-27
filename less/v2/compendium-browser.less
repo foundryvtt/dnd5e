@@ -50,7 +50,7 @@
       }
     }
 
-    input[type="checkbox"]:disabled:checked {
+    input[type="checkbox"]:disabled:checked, filter-state:disabled .indicator:not([data-value="0"]) {
       position: relative;
 
       &::before { content: "\f0c8"; }
@@ -59,15 +59,24 @@
         position: absolute;
         color: var(--color-light-1);
         font-family: var(--font-awesome);
-        font-size: var(--font-size-12);
         font-weight: bold;
-        inset-block: 3px;
-        inset-inline: 3.5px;
       }
+    }
+
+    input[type="checkbox"]:disabled:checked::after {
+      font-size: var(--font-size-12);
+      inset-block: 3px;
+      inset-inline: 3.5px;
     }
 
     input[type="checkbox"]:indeterminate::before {
       content: "\f146";
+    }
+
+    filter-state:disabled .indicator:not([data-value="0"])::after {
+      font-size: calc(var(--filter-state-size) * .6);
+      inset-block: 3.5px;
+      inset-inline: 2.5px;
     }
   }
 

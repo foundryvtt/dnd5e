@@ -63,6 +63,32 @@ export default class SpellData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["level", {
+        label: "DND5E.Level",
+        type: "range",
+        config: {
+          keyPath: "system.level",
+          min: 0,
+          max: Object.keys(CONFIG.DND5E.spellLevels).length - 1
+        }
+      }],
+      ["school", {
+        label: "DND5E.School",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.spellSchools,
+          keyPath: "system.school"
+        }
+      }],
+      ["properties", this.compendiumBrowserPropertiesFilter("spell")]
+    ]);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 

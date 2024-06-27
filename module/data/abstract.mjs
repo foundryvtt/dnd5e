@@ -86,6 +86,16 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------- */
 
+  /**
+   * Filters available for this item type when using the compendium browser.
+   * @returns {CompendiumBrowserFilterDefinition}
+   */
+  static get compendiumBrowserFilters() {
+    return new Map();
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static defineSchema() {
     const schema = {};

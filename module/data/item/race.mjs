@@ -34,6 +34,24 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   }, {inplace: false}));
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["hasDarkvision", {
+        label: "DND5E.CompendiumBrowser.Filters.HasDarkvision",
+        type: "boolean",
+        createFilter: (filters, value, def) => {
+          if ( value === 0 ) return;
+          const filter = { k: "system.senses.darkvision", o: "gt", v: 0 };
+          if ( value === 1 ) filters.push(filter);
+          else filters.push({ o: "NOT", v: filter });
+        }
+      }]
+    ]);
+  }
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 

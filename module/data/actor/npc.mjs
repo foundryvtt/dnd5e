@@ -144,6 +144,54 @@ export default class NPCData extends CreatureTemplate {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["size", {
+        label: "DND5E.Size",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.actorSizes,
+          keyPath: "system.traits.size"
+        }
+      }],
+      ["type", {
+        label: "DND5E.CreatureType",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.creatureTypes,
+          keyPath: "system.details.type.value"
+        }
+      }],
+      ["cr", {
+        label: "DND5E.ChallengeRating",
+        type: "range",
+        config: {
+          keyPath: "system.details.cr",
+          min: 0,
+          max: 30
+        }
+      }],
+      ["movement", {
+        label: "DND5E.Movement",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.movementTypes
+        },
+        createFilter: (filters, value, def) => {
+          for ( const [k, v] of Object.entries(value ?? {}) ) {
+            if ( v === 1 ) filters.push({ k: `system.attributes.movement.${k}`, o: "gt", v: 0 });
+            if ( v === -1 ) filters.push({ k: `system.attributes.movement.${k}`, v: 0 });
+          }
+        }
+      }]
+    ]);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);

@@ -51,6 +51,34 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["category", {
+        label: "DND5E.Item.Category.Label",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.featureTypes,
+          keyPath: "system.type.value"
+        }
+      }],
+      ["subtype", {
+        label: "DND5E.ItemFeatureType",
+        type: "set",
+        config: {
+          choices: Object.values(CONFIG.DND5E.featureTypes).reduce((obj, config) => {
+            for ( const [key, label] of Object.entries(config.subtypes ?? {}) ) obj[key] = label;
+            return obj;
+          }, {}),
+          keyPath: "system.type.subtype"
+        }
+      }],
+      ["properties", this.compendiumBrowserPropertiesFilter("feat")]
+    ]);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
