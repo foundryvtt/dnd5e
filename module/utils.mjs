@@ -91,7 +91,7 @@ export function parseInputDelta(input, target) {
 export function replaceFormulaData(formula, data, { item, property }={}) {
   const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
   const missingReferences = new Set();
-  formula = formula.replace(dataRgx, (match, term) => {
+  formula = String(formula).replace(dataRgx, (match, term) => {
     let value = foundry.utils.getProperty(data, term);
     if ( value == null ) {
       missingReferences.add(match);
