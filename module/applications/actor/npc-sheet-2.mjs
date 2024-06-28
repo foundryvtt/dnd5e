@@ -112,6 +112,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
         };
       });
     });
+    context.hasLegendaries = resources.legact.max || resources.legres.max || resources.lair.initiative;
 
     return context;
   }
@@ -183,6 +184,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     context.inventory = Object.values(inventory);
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
     context.classes = classes;
+    context.hasClasses = classes.length;
   }
 
   /* -------------------------------------------- */

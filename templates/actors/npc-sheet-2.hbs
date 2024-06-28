@@ -304,50 +304,58 @@
                 {{/each}}
             </div>
 
-            {{!-- Legendary Actions & Resistances, & Lair Actions --}}
-            <div class="bottom legendary">
+            {{!-- Legendary Actions & Resistances, Lair Actions, & Classes --}}
+            <div class="bottom">
 
-                {{#if editable}}
-                <label class="legact">
-                    <span class="label roboto-upper">{{ localize "DND5E.LegAct" }}</span>
-                    {{ numberInput source.resources.legact.max name="system.resources.legact.max" step=1 min=0 }}
-                </label>
-                <label class="legres">
-                    <span class="label roboto-upper">{{ localize "DND5E.LegRes" }}</span>
-                    {{ numberInput source.resources.legres.max name="system.resources.legres.max" step=1 min=0 }}
-                </label>
-                <label class="lair">
-                    <span class="label roboto-upper">{{ localize "DND5E.LairActionLabel" }}</span>
-                    {{ numberInput source.resources.lair.initiative name="system.resources.lair.initiative"
-                                   placeholder="—" step=1 min=0 }}
-                </label>
-                {{else}}
-                {{#if system.resources.legact.max}}
-                <div class="legact">
-                    <span class="label roboto-upper">{{ localize "DND5E.LegAct" }}</span>
-                    <div class="pips" data-prop="system.resources.legact.value">
-                        {{#each legact}}
-                            {{> pip }}
-                        {{/each}}
+                {{#if hasClasses}}
+                {{> "dnd5e.actor-classes" }}
+                {{/if}}
+
+                {{#if (or hasLegendaries editable)}}
+                <div class="legendary">
+                    {{#if editable}}
+                    <label class="legact">
+                        <span class="label roboto-upper">{{ localize "DND5E.LegAct" }}</span>
+                        {{ numberInput source.resources.legact.max name="system.resources.legact.max" step=1 min=0 }}
+                    </label>
+                    <label class="legres">
+                        <span class="label roboto-upper">{{ localize "DND5E.LegRes" }}</span>
+                        {{ numberInput source.resources.legres.max name="system.resources.legres.max" step=1 min=0 }}
+                    </label>
+                    <label class="lair">
+                        <span class="label roboto-upper">{{ localize "DND5E.LairActionLabel" }}</span>
+                        {{ numberInput source.resources.lair.initiative name="system.resources.lair.initiative"
+                                       placeholder="—" step=1 min=0 }}
+                    </label>
+                    {{else}}
+                    {{#if system.resources.legact.max}}
+                    <div class="legact">
+                        <span class="label roboto-upper">{{ localize "DND5E.LegAct" }}</span>
+                        <div class="pips" data-prop="system.resources.legact.value">
+                            {{#each legact}}
+                                {{> pip }}
+                            {{/each}}
+                        </div>
                     </div>
-                </div>
-                {{/if}}
-                {{#if system.resources.legres.max}}
-                <div class="legres">
-                    <span class="label roboto-upper">{{ localize "DND5E.LegRes" }}</span>
-                    <div class="pips" data-prop="system.resources.legres.value">
-                        {{#each legres}}
-                            {{> pip }}
-                        {{/each}}
+                    {{/if}}
+                    {{#if system.resources.legres.max}}
+                    <div class="legres">
+                        <span class="label roboto-upper">{{ localize "DND5E.LegRes" }}</span>
+                        <div class="pips" data-prop="system.resources.legres.value">
+                            {{#each legres}}
+                                {{> pip }}
+                            {{/each}}
+                        </div>
                     </div>
+                    {{/if}}
+                    {{#if system.resources.lair.initiative}}
+                    <label class="lair">
+                        <span class="label roboto-upper">{{ localize "DND5E.LairActionLabel" }}</span>
+                        <span class="value">{{ system.resources.lair.initiative }}</span>
+                    </label>
+                    {{/if}}
+                    {{/if}}
                 </div>
-                {{/if}}
-                {{#if system.resources.lair.initiative}}
-                <label class="lair">
-                    <span class="label roboto-upper">{{ localize "DND5E.LairActionLabel" }}</span>
-                    <span class="value">{{ system.resources.lair.initiative }}</span>
-                </label>
-                {{/if}}
                 {{/if}}
 
             </div>

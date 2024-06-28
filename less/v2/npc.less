@@ -41,7 +41,7 @@
 
   .sheet-header {
     gap: 12px;
-    padding: 38px 12px 4px;
+    padding: 38px 12px 0;
     align-items: stretch;
 
     > .left { flex: 0 0 var(--dnd5e-sheet-sidebar-width); }
@@ -94,6 +94,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+      justify-content: space-evenly;
       gap: 8px;
       margin-top: -10px;
 
@@ -122,7 +123,18 @@
         }
       }
 
-      > .bottom { margin-top: 22px; }
+      > .bottom {
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+
+        .classes {
+          padding-top: 2px;
+          .gold-icon { margin: 0; }
+        }
+
+        .classes + .legendary { margin-top: 8px; }
+      }
     }
 
     /* Name */
