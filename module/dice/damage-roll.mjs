@@ -1,3 +1,5 @@
+import { Roll5e } from "../dice/_module.mjs";
+
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
  * @param {string} formula                       The string formula to parse
@@ -9,7 +11,7 @@
  * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
  * @param {string} [options.criticalBonusDamage]      An extra damage term that is applied only on a critical hit
  */
-export default class DamageRoll extends Roll {
+export default class DamageRoll extends Roll5e {
   constructor(formula, data, options) {
     super(formula, data, options);
     if ( !this.options.preprocessed ) this.preprocessFormula();
@@ -130,7 +132,8 @@ export default class DamageRoll extends Roll {
 
           // Powerful critical - maximize damage and reduce the multiplier by 1
           if ( this.options.powerfulCritical ) {
-            let bonus = term.number * term.faces;
+            const MaxRoll = new Roll5e(term.formula, this.data, term.options);
+            let bonus = MaxRoll.evaluateSync({ maximize: true })?.total ?? 0;
             if ( bonus > 0 ) {
               const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
               flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);

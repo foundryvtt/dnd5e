@@ -76,6 +76,7 @@ Hooks.once("init", function() {
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
   CONFIG.Dice.D20Roll = dice.D20Roll;
+  CONFIG.Dice.Roll5e = dice.Roll5e;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.Note.objectClass = canvas.Note5e;
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
@@ -100,6 +101,8 @@ Hooks.once("init", function() {
   // Register Roll Extensions
   CONFIG.Dice.rolls.push(dice.D20Roll);
   CONFIG.Dice.rolls.push(dice.DamageRoll);
+  CONFIG.Dice.rolls.push(dice.Roll5e);
+
 
   // Hook up system data types
   CONFIG.Actor.dataModels = dataModels.actor.config;
