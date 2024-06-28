@@ -1,5 +1,4 @@
 import { EnchantmentData } from "../../data/item/fields/enchantment-field.mjs";
-import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 
 /**
  * A specialized Dialog subclass for ability usage.
@@ -218,19 +217,16 @@ export default class AbilityUseDialog extends Dialog {
     options.profiles = Object.fromEntries(
       summons.profiles
         .map(profile => {
-          const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
+          if ( !summons.mode && !fromUuidSync(profile.uuid) ) return null;
           const withinRange = ((profile.level.min ?? -Infinity) <= level) && (level <= (profile.level.max ?? Infinity));
-          if ( !doc || !withinRange ) return null;
-          let label = profile.name ? profile.name : (doc?.name ?? "—");
-          let count = simplifyRollFormula(Roll.replaceFormulaData(profile.count ?? "1", rollData));
-          if ( Number.isNumeric(count) ) {
-            count = parseInt(count);
-            if ( count > 1 ) label = `${count} x ${label}`;
-          } else if ( count ) label = `${count} x ${label}`;
-          return [profile._id, label];
+          if ( !withinRange ) return null;
+          return [profile._id, summons.getProfileLabel(profile, rollData)];
         })
         .filter(f => f)
     );
+    if ( Object.values(options.profiles).every(p => p.startsWith("1 x ")) ) {
+      Object.entries(options.profiles).forEach(([k, v]) => options.profiles[k] = v.replace("1 x ", ""));
+    }
     if ( Object.values(options.profiles).length <= 1 ) {
       options.profile = Object.keys(options.profiles)[0];
       options.profiles = null;
