@@ -21,8 +21,8 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       order: 20,
       icon: "icons/magic/symbols/star-solid-gold.webp",
       typeIcon: "systems/dnd5e/icons/svg/ability-score-improvement.svg",
-      title: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementTitle"),
-      hint: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementHint"),
+      title: game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Title"),
+      hint: game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Hint"),
       apps: {
         config: AbilityScoreImprovementConfig,
         flow: AbilityScoreImprovementFlow
@@ -107,7 +107,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
         return `<span class="tag">${name} <strong>${formatter.format(value)}</strong></span>`;
       });
       if ( this.configuration.points ) entries.push(`<span class="tag">${
-        game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementPoints")}: <strong>${
+        game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.label")}: <strong>${
         this.configuration.points}</strong></span>`
       );
       return entries.filterJoin("\n");
