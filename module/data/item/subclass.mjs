@@ -1,6 +1,7 @@
 import { ItemDataModel } from "../abstract.mjs";
 import { AdvancementField, IdentifierField } from "../fields.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import SpellCastingFields from "./templates/spell-casting.mjs";
 
 /**
  * Data definition for Subclass items.
@@ -22,12 +23,7 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
         required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
       }),
       advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
-      spellcasting: new foundry.data.fields.SchemaField({
-        progression: new foundry.data.fields.StringField({
-          required: true, initial: "none", blank: false, label: "DND5E.SpellProgression"
-        }),
-        ability: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellAbility"})
-      }, {label: "DND5E.Spellcasting"})
+      spellcasting: SpellCastingFields.spellCasting
     });
   }
 }

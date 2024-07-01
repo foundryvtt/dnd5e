@@ -3,8 +3,9 @@ import { ItemDataModel } from "../abstract.mjs";
 import { AdvancementField, FormulaField, IdentifierField } from "../fields.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
+import SpellCastingFields from "./templates/spell-casting.mjs";
 
-const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Class items.
@@ -37,12 +38,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
         required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.HitDiceUsed"
       }),
       advancement: new ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
-      spellcasting: new SchemaField({
-        progression: new StringField({
-          required: true, initial: "none", blank: false, label: "DND5E.SpellProgression"
-        }),
-        ability: new StringField({required: true, label: "DND5E.SpellAbility"})
-      }, {label: "DND5E.Spellcasting"}),
+      spellcasting: SpellCastingFields.spellCasting,
       wealth: new FormulaField({label: "DND5E.StartingEquipment.Wealth.Label"})
     });
   }
