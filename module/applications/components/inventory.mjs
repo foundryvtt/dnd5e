@@ -242,9 +242,9 @@ export default class InventoryElement extends HTMLElement {
     });
 
     // Toggle Charged State
-    if ( item.isOnCooldown || item.system.recharge.value ) options.push({
-      name: item.system.recharge?.charged ? "DND5E.ContextMenuActionExpendCharge" : "DND5E.ContextMenuActionCharge",
-      icon: "<i class='fa-solid fa-bolt'></i>",
+    if ( item.system.recharge?.value ) options.push({
+      name: item.system.recharge.charged ? "DND5E.ContextMenuActionExpendCharge" : "DND5E.ContextMenuActionCharge",
+      icon: '<i class="fa-solid fa-bolt"></i>',
       condition: () => item.isOwner,
       callback: li => this._onAction(li[0], "toggleCharge"),
       group: "state"

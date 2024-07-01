@@ -83,7 +83,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Item usage
       ctx.hasUses = item.hasLimitedUses;
-      ctx.isDepleted = item.isOnCooldown && ctx.hasUses && (uses.value > 0);
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
       // Unidentified items

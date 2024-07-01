@@ -304,8 +304,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @see {@link ActionTemplate#isOnCooldown}
    */
   get isOnCooldown() {
-    const chg = this.system.recharge;
-    return (chg && !!chg.value && (chg.charged === false)) ?? false;
+    const { recharge } = this.system;
+    return (recharge?.value > 0) && (recharge?.charged === false);
   }
 
   /* --------------------------------------------- */

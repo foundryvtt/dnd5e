@@ -142,7 +142,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       ctx.canToggle = false;
       ctx.isExpanded = this._expanded.has(item.id);
       ctx.hasUses = uses && (uses.max > 0);
-      ctx.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
     });
 
     const cargo = {
