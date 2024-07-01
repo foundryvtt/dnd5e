@@ -53,9 +53,18 @@ export default class SummoningConfig extends DocumentSheet {
   async getData(options={}) {
     const context = await super.getData(options);
     context.isSpell = this.document.type === "spell";
+    context.modes = {
+      cr: "DND5E.Summoning.Mode.CR"
+    };
     context.profiles = this.profiles.map(p => {
       const profile = { id: p._id, ...p, collapsed: this.expandedProfiles.get(p._id) ? "" : "collapsed" };
       if ( p.uuid ) profile.document = fromUuidSync(p.uuid);
+      if ( this.document.system.summons.mode === "cr" ) {
+        profile.creatureTypes = Object.entries(CONFIG.DND5E.creatureTypes).reduce((obj, [k, c]) => {
+          obj[k] = { label: c.label, selected: p.types.has(k) ? "selected" : "" };
+          return obj;
+        }, {});
+      }
       return profile;
     }).sort((lhs, rhs) =>
       (lhs.name || lhs.document?.name || "").localeCompare(rhs.name || rhs.document?.name || "", game.i18n.lang)
