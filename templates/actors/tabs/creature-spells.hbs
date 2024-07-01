@@ -4,9 +4,20 @@
     <div class="spellcasting card {{#if primary}}primary{{/if}}" data-ability="{{ ability.ability }}">
         <div class="header">
             <h3>{{ label }}</h3>
+            {{#if @root.isNPC}}
+            {{#if (and @root.editable noSpellcaster)}}
+            <select name="system.attributes.spellcasting">
+                {{ selectOptions @root.abilities selected=ability.ability labelAttr="label" nameAttr="key"
+                                 valueAttr="key" }}
+            </select>
+            {{else}}
+            <span class="spellcasting-ability roboto-upper">{{ ability.label }}</span>
+            {{/if}}
+            {{else}}
             <button type="button" class="radio-button" data-action="spellcasting"
                     data-tooltip="DND5E.SpellAbilitySet" aria-pressed="{{#if primary}}true{{else}}false{{/if}}"
                     aria-label="{{ localize "DND5E.SpellAbilitySet" }}"></button>
+            {{/if}}
         </div>
         <div class="info">
             <div class="ability">
@@ -27,6 +38,30 @@
                 <span class="label">{{ localize "DND5E.SpellDC" }}</span>
                 <span class="value">{{ save }}</span>
             </div>
+            {{#if @root.isNPC}}
+            <div class="level">
+                <span class="label">{{ localize "DND5E.Level" }}</span>
+                {{#if (and @root.editable noSpellcaster)}}
+                {{ numberInput @root.system.details.spellLevel name="system.details.spellLevel" min=0 step=1
+                               placeholder="—" }}
+                {{else}}
+                <span class="value">{{ level }}</span>
+                {{/if}}
+            </div>
+            <div class="concentration" data-ability="concentration">
+                <span class="label">{{ localize "DND5E.Concentration" }}</span>
+                {{#if @root.editable}}
+                <a class="config-button" data-action="ability" data-tooltip="{{ tooltip }}" aria-label="{{ tooltip }}">
+                    <i class="fas fa-cog"></i>
+                </a>
+                {{else}}
+                <span class="value">
+                    <span class="sign">{{ concentration.sign }}</span>
+                    {{ concentration.mod }}
+                </span>
+                {{/if}}
+            </div>
+            {{/if}}
         </div>
     </div>
     {{/each}}
@@ -67,7 +102,7 @@
                 <div class="item-header item-target">{{ localize "DND5E.SpellHeader.Target" }}</div>
                 <div class="item-header item-roll">{{ localize "DND5E.SpellHeader.Roll" }}</div>
                 <div class="item-header item-uses spell-uses">{{ localize "DND5E.Uses" }}</div>
-                <div class="item-header item-formula">{{ localize "DND5E.SpellHeader.Formula" }}</div>
+                <div class="item-header item-formula spell-formula">{{ localize "DND5E.SpellHeader.Formula" }}</div>
                 <div class="item-header item-controls"></div>
                 {{#if (and usesSlots @root.editable)}}
                 <a class="config-button" data-action="spellSlots" data-tooltip="DND5E.SpellSlotsConfig"
@@ -189,7 +224,7 @@
                     </div>
 
                     {{!-- Spell Formula --}}
-                    <div class="item-detail item-formula {{#unless item.labels.derivedDamage}}empty{{/unless}}">
+                    <div class="item-detail item-formula spell-formula {{#unless item.labels.derivedDamage}}empty{{/unless}}">
                         {{#each item.labels.derivedDamage}}
                         <div class="row">
                             <span class="formula">{{ formula }}</span>

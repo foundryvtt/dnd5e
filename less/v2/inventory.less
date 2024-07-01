@@ -405,10 +405,9 @@
       }
 
       /* Spell Target & Formula */
-      .item-target, .item-formula { width: 80px; }
+      .item-target, .item-formula, .spell-formula { width: 80px; }
 
-      .item-formula {
-        display: none;
+      .item-formula, .spell-formula {
         flex-direction: column;
 
         dnd5e-icon {
@@ -421,6 +420,9 @@
           gap: .1875rem;
         }
       }
+
+      .item-formula { display: flex; }
+      .spell-formula { display: none; }
 
       /* Effect Duration */
       .effect-name {
@@ -477,12 +479,20 @@
         align-items: center;
       }
 
-      @container (min-width: 600px) {
-        .item-price, .item-formula, .spell-uses { display: flex; }
+      @container (min-width: 580px) {
+        .spell-uses { display: flex; }
         .subtitle-uses { display: none; }
       }
 
-      @container (min-width: 650px) {
+      @container (min-width: 600px) {
+        .item-price { display: flex; }
+      }
+
+      @container (min-width: 640px) {
+        .spell-formula { display: flex; }
+      }
+
+      @container (min-width: 660px) {
         .item-school { display: flex; }
       }
     }

@@ -68,13 +68,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
    */
   _deathTrayOpen = false;
 
-  /**
-   * The cached concentration information for the character.
-   * @type {{items: Set<Item5e>, effects: Set<ActiveEffect5e>}}
-   * @internal
-   */
-  _concentration;
-
   /* -------------------------------------------- */
 
   /** @override */
@@ -100,7 +93,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /** @inheritDoc */
   async getData(options) {
-    this._concentration = this.actor.concentration; // Cache concentration so it's not called for every item.
     const context = await super.getData(options);
     const { attributes, details, traits } = this.actor.system;
 
@@ -223,48 +215,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       });
     }
 
-    // Effects & Conditions
-    const conditionIds = new Set();
-    context.conditions = Object.entries(CONFIG.DND5E.conditionTypes).reduce((arr, [k, c]) => {
-      if ( c.pseudo ) return arr; // Filter out pseudo-conditions.
-      const { label: name, icon, reference } = c;
-      const id = staticID(`dnd5e${k}`);
-      conditionIds.add(id);
-      const existing = this.actor.effects.get(id);
-      const { disabled, img } = existing ?? {};
-      arr.push({
-        name, reference,
-        id: k,
-        icon: img ?? icon,
-        disabled: existing ? disabled : true
-      });
-      return arr;
-    }, []);
-
-    for ( const category of Object.values(context.effects) ) {
-      category.effects = await category.effects.reduce(async (arr, effect) => {
-        effect.updateDuration();
-        if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
-        const { id, name, img, disabled, duration } = effect;
-        const toggleable = !this._concentration?.effects.has(effect);
-        let source = await effect.getSource();
-        // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
-        if ( (source instanceof dnd5e.documents.ActiveEffect5e) && (source.target !== this.object) ) {
-          source = source.target;
-        }
-        arr = await arr;
-        arr.push({
-          id, name, img, disabled, duration, source, toggleable,
-          parentId: effect.target === effect.parent ? null : effect.parent.id,
-          durationParts: duration.remaining ? duration.label.split(", ") : [],
-          hasTooltip: source instanceof dnd5e.documents.Item5e
-        });
-        return arr;
-      }, []);
-    }
-
-    context.effects.suppressed.info = context.effects.suppressed.info[0];
-
     // Characteristics
     context.characteristics = [
       "alignment", "eyes", "height", "faith", "hair", "weight", "gender", "skin", "age"
@@ -341,117 +291,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         { classes: "item-controls", partial: "dnd5e.column-feature-controls" }
       ];
     });
-
-    // Spell slots
-    const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
-    context.spellbook.forEach(section => {
-      if ( !section.usesSlots ) return;
-      const spells = foundry.utils.getProperty(this.actor.system.spells, section.prop);
-      const max = spells.override ?? spells.max ?? 0;
-      section.pips = Array.fromRange(max, 1).map(n => {
-        const filled = spells.value >= n;
-        const label = filled
-          ? game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n })
-          : game.i18n.localize("DND5E.SpellSlotExpended");
-        const classes = ["pip"];
-        if ( filled ) classes.push("filled");
-        return { n, label, filled, tooltip: label, classes: classes.join(" ") };
-      });
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _prepareItem(item, ctx) {
-    const { system } = item;
-
-    // Spells
-    if ( item.type === "spell" ) {
-
-      // Activation
-      const cost = system.activation?.cost;
-      const abbr = {
-        action: "DND5E.ActionAbbr",
-        bonus: "DND5E.BonusActionAbbr",
-        reaction: "DND5E.ReactionAbbr",
-        minute: "DND5E.TimeMinuteAbbr",
-        hour: "DND5E.TimeHourAbbr",
-        day: "DND5E.TimeDayAbbr"
-      }[system.activation.type];
-      ctx.activation = cost && abbr ? `${cost}${game.i18n.localize(abbr)}` : item.labels.activation;
-
-      // Range
-      const units = system.range?.units;
-      if ( units && (units !== "none") ) {
-        if ( units in CONFIG.DND5E.movementUnits ) {
-          ctx.range = {
-            distance: true,
-            value: system.range.value,
-            unit: game.i18n.localize(`DND5E.Dist${units.capitalize()}Abbr`)
-          };
-        }
-        else ctx.range = { distance: false };
-      }
-
-      // To Hit
-      const toHit = parseInt(item.labels.modifier);
-      if ( item.hasAttack && !isNaN(toHit) ) {
-        ctx.toHit = {
-          sign: Math.sign(toHit) < 0 ? "-" : "+",
-          abs: Math.abs(toHit)
-        };
-      }
-
-      // Prepared
-      const mode = system.preparation?.mode;
-      const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
-      if ( config.prepares ) {
-        const isAlways = mode === "always";
-        const prepared = isAlways || system.preparation.prepared;
-        ctx.preparation = {
-          applicable: true,
-          disabled: !item.isOwner || isAlways,
-          cls: prepared ? "active" : "",
-          icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}"></i>`,
-          title: isAlways
-            ? CONFIG.DND5E.spellPreparationModes.always.label
-            : prepared
-              ? CONFIG.DND5E.spellPreparationModes.prepared.label
-              : game.i18n.localize("DND5E.SpellUnprepared")
-        };
-      }
-      else ctx.preparation = { applicable: false };
-    }
-
-    // Gear
-    else {
-
-      // Attuned
-      if ( ctx.attunement ) {
-        ctx.attunement.applicable = true;
-        ctx.attunement.disabled = !item.isOwner;
-        ctx.attunement.cls = ctx.attunement.cls === "attuned" ? "active" : "";
-      }
-      else ctx.attunement = { applicable: false };
-
-      // Equipped
-      if ( "equipped" in system ) {
-        ctx.equip = {
-          applicable: true,
-          cls: system.equipped ? "active" : "",
-          title: `DND5E.${system.equipped ? "Equipped" : "Unequipped"}`,
-          disabled: !item.isOwner
-        };
-      }
-      else ctx.equip = { applicable: false };
-
-      // Subtitles
-      ctx.subtitle = [system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
-    }
-
-    // Concentration
-    if ( this._concentration.items.has(item) ) ctx.concentration = true;
   }
 
   /* -------------------------------------------- */

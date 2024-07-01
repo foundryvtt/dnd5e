@@ -482,9 +482,9 @@
           flex: 1;
           display: flex;
           padding: 8px 12px 8px 16px;
+          gap: 8px;
 
-          &.features { gap: 8px; }
-
+          &.spells { flex-direction: column; }
           &:not(.active) { display: none; }
         }
       }
@@ -495,7 +495,6 @@
         width: 100%;
 
         .items-list { gap: 8px; }
-        .item-formula { display: flex; }
 
         .encumbrance {
           width: 100%;
@@ -505,6 +504,54 @@
           box-shadow: 0 0 6px var(--dnd5e-shadow-45);
 
           .meter { border-radius: 3px; }
+        }
+      }
+
+      /* Spells */
+      .spellcasting.card {
+        width: 375px;
+
+        input {
+          background: var(--dnd5e-background-5);
+          border: 1px solid transparent;
+          transition: all 250ms ease;
+          text-align: center;
+          font-weight: bold;
+          font-family: var(--dnd5e-font-roboto-slab);
+          font-size: var(--font-size-16);
+          height: 22px;
+
+          &:hover, &:focus {
+            border: 1px solid var(--dnd5e-color-gold);
+            box-shadow: 0 0 6px var(--dnd5e-color-gold);
+          }
+        }
+
+        select {
+          border: none;
+          background: none;
+
+          option { color: var(--color-text-dark-primary); }
+        }
+
+        .config-button {
+          flex: 1;
+          display: grid;
+          place-content: center;
+        }
+
+        .spellcasting-ability { color: var(--dnd5e-color-gold); }
+      }
+
+      /* Effects */
+      .effects-element {
+        flex: 1;
+
+        .effects-list { flex-grow: 0; }
+
+        .conditions-list {
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          .condition { padding: 9px 10px; }
         }
       }
     }

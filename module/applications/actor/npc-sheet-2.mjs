@@ -1,5 +1,6 @@
 import ActorSheet5eNPC from "./npc-sheet.mjs";
 import ActorSheetV2Mixin from "./sheet-v2-mixin.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 
 /**
  * An Actor sheet for NPCs.
@@ -12,7 +13,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       width: 700,
       height: 700,
       resizable: true,
-      scrollY: [".main-content"],
+      scrollY: [".sheet-body"],
       tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "details" }]
     });
   }
@@ -115,6 +116,9 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     });
     context.hasLegendaries = resources.legact.max || resources.legres.max || resources.lair.initiative;
 
+    // Spellcasting
+    this._prepareSpellcasting(context);
+
     return context;
   }
 
@@ -190,20 +194,41 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
   /* -------------------------------------------- */
 
-  /** @override */
-  _prepareItem(item, ctx) {
-    const { system } = item;
-
-    // To Hit
-    const toHit = parseInt(item.labels.modifier);
-    if ( item.hasAttack && !isNaN(toHit) ) {
-      ctx.toHit = {
-        sign: toHit < 0 ? "-" : "+",
-        abs: Math.abs(toHit)
-      };
-    }
-
-    ctx.subtitle = [system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
+  /**
+   * Prepare spellcasting data for display.
+   * @param {object} context  The display context.
+   * @protected
+   */
+  _prepareSpellcasting(context) {
+    const { abilities, attributes, bonuses, details } = this.actor.system;
+    context.spellcasting = [];
+    const msak = simplifyBonus(bonuses.msak.attack, context.rollData);
+    const rsak = simplifyBonus(bonuses.rsak.attack, context.rollData);
+    // TODO: Consider if we want to handle multiclassing for NPC spellcasters.
+    const spellcaster = Object.values(this.actor.classes).find(cls => cls.system.spellcasting.progression !== "none");
+    const ability = spellcaster?.spellcasting.ability ?? attributes.spellcasting;
+    const spellAbility = abilities[ability];
+    const mod = spellAbility?.mod ?? 0;
+    const attackBonus = msak === rsak ? msak : 0;
+    const attack = mod + attributes.prof + attackBonus;
+    context.spellcasting.push({
+      label: game.i18n.format("DND5E.SpellcastingClass", { class: spellcaster?.name ?? game.i18n.format("DND5E.NPC") }),
+      level: spellcaster?.system.levels ?? details.spellLevel,
+      ability: {
+        ability,
+        sign: mod < 0 ? "-" : "+",
+        value: Math.abs(mod),
+        label: CONFIG.DND5E.abilities[ability]?.abbreviation
+      },
+      attack: { sign: attack < 0 ? "-" : "+", value: Math.abs(attack) },
+      save: spellAbility?.dc ?? 0,
+      noSpellcaster: !spellcaster,
+      concentration: {
+        mod: Math.abs(attributes.concentration.save),
+        sign: attributes.concentration.save < 0 ? "-" : "+",
+        tooltip: game.i18n.format("DND5E.AbilityConfigure", { ability: game.i18n.localize("DND5E.Concentration") })
+      }
+    });
   }
 
   /* -------------------------------------------- */
