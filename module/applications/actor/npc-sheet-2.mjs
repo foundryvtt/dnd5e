@@ -39,6 +39,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   async getData(options) {
     const context = await super.getData(options);
     const { attributes, details, resources } = this.actor.system;
+    context.encumbrance = attributes.encumbrance;
 
     // CR
     context.labels.cr = {
@@ -138,6 +139,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       .sort(([, lhs], [, rhs]) => (lhs.metadata.inventoryOrder - rhs.metadata.inventoryOrder));
     for ( const [type] of inventoryTypes ) {
       inventory[type] = { label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], dataset: { type } };
+      if ( type === "container" ) context.containers = inventory.container.items;
     }
     const features = context.features.filter(section => {
       if ( section.dataset.type === "loot" ) {
@@ -177,10 +179,9 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
         { classes: "item-uses", label: "DND5E.Uses", partial: "dnd5e.column-uses" },
         { classes: "item-roll", label: "DND5E.SpellHeader.Roll", partial: "dnd5e.column-roll" },
         { classes: "item-formula", label: "DND5E.SpellHeader.Formula", partial: "dnd5e.column-formula" },
-        { classes: "item-controls", partial: "dnd5e.column-controls" }
+        { classes: "item-controls", partial: "dnd5e.column-feature-controls" }
       ];
     });
-    // TODO: Containers.
     context.inventory = Object.values(inventory);
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
     context.classes = classes;

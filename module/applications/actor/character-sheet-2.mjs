@@ -223,12 +223,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       });
     }
 
-    // Containers
-    for ( const container of context.containers ) {
-      const ctx = context.itemContext[container.id];
-      ctx.capacity = await container.system.computeCapacity();
-    }
-
     // Effects & Conditions
     const conditionIds = new Set();
     context.conditions = Object.entries(CONFIG.DND5E.conditionTypes).reduce((arr, [k, c]) => {
@@ -344,7 +338,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       section.categories = [
         { classes: "item-uses", label: "DND5E.Uses", partial: "dnd5e.column-uses" },
         { classes: "item-recovery", label: "DND5E.Recovery", partial: "dnd5e.column-recovery" },
-        { classes: "item-controls", partial: "dnd5e.column-controls" }
+        { classes: "item-controls", partial: "dnd5e.column-feature-controls" }
       ];
     });
 

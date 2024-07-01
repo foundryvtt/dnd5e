@@ -317,7 +317,7 @@ export async function preloadHandlebarsTemplates() {
     // Actor Sheet Item Summary Columns
     "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
     "systems/dnd5e/templates/actors/parts/columns/column-recovery.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-controls.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-feature-controls.hbs",
     "systems/dnd5e/templates/actors/parts/columns/column-roll.hbs",
     "systems/dnd5e/templates/actors/parts/columns/column-formula.hbs",
 

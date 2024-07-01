@@ -115,7 +115,7 @@ export default function ActorSheetV2Mixin(Base) {
       context.cssClass += ` tab-${activeTab}`;
       context.sidebarCollapsed = !!game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
       if ( context.sidebarCollapsed ) context.cssClass += " collapsed";
-      const { attributes } = this.actor.system;
+      const { attributes, traits } = this.actor.system;
 
       // Portrait
       const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
@@ -158,6 +158,13 @@ export default function ActorSheetV2Mixin(Base) {
       if ( attributes.senses.special ) attributes.senses.special.split(";").forEach((v, i) => {
         context.senses[`custom${i + 1}`] = { label: v.trim() };
       });
+
+      // Containers
+      for ( const container of context.containers ) {
+        const ctx = context.itemContext[container.id];
+        ctx.capacity = await container.system.computeCapacity();
+        ctx.capacity.maxLabel = Number.isFinite(ctx.capacity.max) ? ctx.capacity.max : "&infin;";
+      }
 
       return context;
     }

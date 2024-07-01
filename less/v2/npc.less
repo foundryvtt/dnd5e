@@ -426,11 +426,11 @@
     .main-content {
       --sidebar-padding: 8px;
       --sidebar-size: calc(var(--dnd5e-sheet-sidebar-width) + var(--sidebar-padding));
-      flex: 1;
       padding: 0 0 0 var(--sidebar-padding);
       display: flex;
       position: absolute;
-      inset: 0 0 0 0;
+      width: 100%;
+      min-height: 100%;
 
       /* Sidebar Collapser */
       .sidebar-collapser {
@@ -475,22 +475,36 @@
       /* Tabbed Content */
       .tab-body {
         flex: 1;
+        display: flex;
+        flex-direction: column;
 
         .tab {
+          flex: 1;
           display: flex;
           padding: 8px 12px 8px 16px;
 
           &.features { gap: 8px; }
 
           &:not(.active) { display: none; }
+        }
+      }
 
-          dnd5e-inventory {
-            gap: 8px;
-            width: 100%;
-            > .top { display: none; /* TODO */ }
-            .items-list { gap: 8px; }
-            .item-formula { display: flex; }
-          }
+      /* Inventory */
+      .inventory-element {
+        gap: 8px;
+        width: 100%;
+
+        .items-list { gap: 8px; }
+        .item-formula { display: flex; }
+
+        .encumbrance {
+          width: 100%;
+          position: sticky;
+          bottom: 0;
+          margin-top: auto;
+          box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+
+          .meter { border-radius: 3px; }
         }
       }
     }
