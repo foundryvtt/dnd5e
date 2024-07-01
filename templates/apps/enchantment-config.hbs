@@ -92,4 +92,26 @@
         </select>
         <p class="hint">{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.type.hint" }}</p>
     </div>
+    {{#if validCategories}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.categories.label" }}</label>
+        <multi-select name="restrictions.categories">
+            {{#each validCategories}}
+            <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+            {{/each}}
+        </multi-select>
+        <p class="hint">{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.categories.hint" }}</p>
+    </div>
+    {{/if}}
+    {{#if validProperties}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.properties.label" }}</label>
+        <multi-select name="restrictions.properties">
+            {{#each validProperties}}
+            <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+            {{/each}}
+        </multi-select>
+        <p class="hint">{{ localize "DND5E.Enchantment.FIELDS.enchantment.restrictions.properties.hint" }}</p>
+    </div>
+    {{/if}}
 </form>

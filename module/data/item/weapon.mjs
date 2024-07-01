@@ -169,6 +169,13 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.weaponTypes;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * The proficiency multiplier for this item.
    * @returns {number}
