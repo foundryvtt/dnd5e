@@ -1,5 +1,6 @@
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
+import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
@@ -9,9 +10,9 @@ import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import { getSceneTargets } from "../utils.mjs";
-import Advancement from "./advancement/advancement.mjs";
-import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
+import SelectChoices from "./actor/select-choices.mjs";
+import Advancement from "./advancement/advancement.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
 
 /**
@@ -33,6 +34,38 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {object}
    */
   overrides = this.overrides ?? {};
+
+  /* -------------------------------------------- */
+
+  /**
+   * Types that can be selected within the compendium browser.
+   * @param {object} [options={}]
+   * @param {Set<string>} [options.chosen]  Types that have been selected.
+   * @returns {SelectChoices}
+   */
+  static compendiumBrowserTypes({ chosen=new Set() }={}) {
+    const [generalTypes, physicalTypes] = Item.TYPES.reduce(([g, p], t) => {
+      if ( ![CONST.BASE_DOCUMENT_TYPE, "backpack"].includes(t) ) {
+        if ( CONFIG.Item.dataModels[t]?.metadata?.inventoryItem ) p.push(t);
+        else g.push(t);
+      }
+      return [g, p];
+    }, [[], []]);
+
+    const makeChoices = (types, categoryChosen) => types.reduce((obj, type) => {
+      obj[type] = {
+        label: CONFIG.Item.typeLabels[type],
+        chosen: chosen.has(type) || categoryChosen
+      };
+      return obj;
+    }, {});
+    const choices = makeChoices(generalTypes);
+    choices.physical = {
+      label: game.i18n.localize("DND5E.Item.Category.Physical"),
+      children: makeChoices(physicalTypes, chosen.has("physical"))
+    };
+    return new SelectChoices(choices);
+  }
 
   /* -------------------------------------------- */
   /*  Migrations                                  */

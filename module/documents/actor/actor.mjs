@@ -1,15 +1,16 @@
-import Proficiency from "./proficiency.mjs";
-import * as Trait from "./trait.mjs";
-import SystemDocumentMixin from "../mixins/document.mjs";
-import { d20Roll } from "../../dice/dice.mjs";
-import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { SummonsData } from "../../data/item/fields/summons-field.mjs";
+import { d20Roll } from "../../dice/dice.mjs";
+import { createRollLabel } from "../../enrichers.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
-import { createRollLabel } from "../../enrichers.mjs";
+import SystemDocumentMixin from "../mixins/document.mjs";
+import Proficiency from "./proficiency.mjs";
+import SelectChoices from "./select-choices.mjs";
+import * as Trait from "./trait.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -28,6 +29,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Map<string, Item5e>}
    */
   sourcedItems = this.sourcedItems;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Types that can be selected within the compendium browser.
+   * @param {object} [options={}]
+   * @param {Set<string>} [options.chosen]  Types that have been selected.
+   * @returns {SelectChoices}
+   */
+  static compendiumBrowserTypes({ chosen=new Set() }={}) {
+    return new SelectChoices(Actor.TYPES.filter(t => t !== CONST.BASE_DOCUMENT_TYPE).reduce((obj, type) => {
+      obj[type] = {
+        label: CONFIG.Actor.typeLabels[type],
+        chosen: chosen.has(type)
+      };
+      return obj;
+    }, {}));
+  }
 
   /* -------------------------------------------- */
   /*  Properties                                  */

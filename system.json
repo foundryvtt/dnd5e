@@ -31,7 +31,9 @@
       "path": "packs/heroes",
       "type": "Actor",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["character"]
+      }
     },
     {
       "name": "monsters",
@@ -40,7 +42,9 @@
       "path": "packs/monsters",
       "type": "Actor",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["npc"]
+      }
     },
     {
       "name": "items",
@@ -49,7 +53,9 @@
       "path": "packs/items",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
+      }
     },
     {
       "name": "tradegoods",
@@ -58,7 +64,9 @@
       "path": "packs/tradegoods",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["loot"]
+      }
     },
     {
       "name": "spells",
@@ -67,7 +75,9 @@
       "path": "packs/spells",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["spell"]
+      }
     },
     {
       "name": "backgrounds",
@@ -76,7 +86,9 @@
       "path": "packs/backgrounds",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["background", "feat"]
+      }
     },
     {
       "name": "classes",
@@ -85,7 +97,9 @@
       "path": "packs/classes",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["class"]
+      }
     },
     {
       "name": "subclasses",
@@ -94,7 +108,9 @@
       "path": "packs/subclasses",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["subclass"]
+      }
     },
     {
       "name": "classfeatures",
@@ -103,7 +119,9 @@
       "path": "packs/classfeatures",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["feat", "weapon"]
+      }
     },
     {
       "name": "races",
@@ -112,7 +130,9 @@
       "path": "packs/races",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["race", "feat"]
+      }
     },
     {
       "name": "monsterfeatures",
@@ -121,7 +141,9 @@
       "path": "packs/monsterfeatures",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "types": ["feat", "weapon"]
+      }
     },
     {
       "name": "rules",
