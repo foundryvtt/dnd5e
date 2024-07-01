@@ -63,7 +63,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Partition items by category
     let {items, spells, feats, races, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
-      const {quantity, uses, recharge} = item.system;
+      const {quantity, uses} = item.system;
 
       // Item details
       const ctx = context.itemContext[item.id] ??= {};
@@ -83,8 +83,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Item usage
       ctx.hasUses = item.hasLimitedUses;
-      ctx.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
-      ctx.isDepleted = ctx.isOnCooldown && ctx.hasUses && (uses.value > 0);
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
       // Unidentified items
