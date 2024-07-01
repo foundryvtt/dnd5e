@@ -650,7 +650,8 @@ function _migrateActorAC(actorData, updateData) {
   if ( ac?.formula ) {
     try {
       const roll = new Roll(ac.formula);
-      Roll.safeEval(roll.formula);
+      if ( game.release.generation < 12 ) Roll.safeEval(roll.formula);
+      else roll.evaluateSync();
     } catch( e ) {
       updateData["system.attributes.ac.formula"] = "";
     }

@@ -500,14 +500,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
         rollData.attributes.ac = ac;
         try {
-          const replaced = Roll.replaceFormulaData(formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          if ( game.release.generation < 12 ) {
+            const replaced = Roll.replaceFormulaData(formula, rollData);
+            ac.base = Roll.safeEval(replaced);
+          } else {
+            const roll = new Roll(formula, rollData);
+            ac.base = roll.evaluateSync().total;
+          }
         } catch(err) {
           this._preparationWarnings.push({
             message: game.i18n.localize("DND5E.WarnBadACFormula"), link: "armor", type: "error"
           });
-          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          if ( game.release.generation < 12 ) {
+            const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
+            ac.base = Roll.safeEval(replaced);
+          } else {
+            const roll = new Roll(CONFIG.DND5E.armorClasses.default.formula, rollData);
+            ac.base = roll.evaluateSync().total;
+          }
         }
         break;
     }
