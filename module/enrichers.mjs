@@ -12,9 +12,9 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  * Set up custom text enrichers.
  */
 export function registerCustomEnrichers() {
+  const stringNames = ["award", "check", "concentration", "damage", "healing", "item", "save", "skill", "tool"];
   CONFIG.TextEditor.enrichers.push({
-    pattern:
-      /\[\[\/(?<type>award|check|damage|healing|item|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")}) (?<config>[^\\]]+)]](?:{(?<label>[^}]+)})?`, "gi"),
     enricher: enrichString
   },
   {
@@ -57,6 +57,7 @@ async function enrichString(match, options) {
     case "skill":
     case "tool": return enrichCheck(config, label, options);
     case "lookup": return enrichLookup(config, label, options);
+    case "concentration": config._isConcentration = true;
     case "save": return enrichSave(config, label, options);
     case "embed": return enrichEmbed(config, label, options);
     case "item": return enrichItem(config, label, options);
@@ -236,7 +237,7 @@ async function enrichCheck(config, label, options) {
   }
   if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
-  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
+  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
 
   if ( invalid ) return null;
 
@@ -272,6 +273,15 @@ async function enrichCheck(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity
  * </a>
  * ```
+ *
+ * @example Create a concentration check:
+ * ```[[/concentration 10]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="concentration" data-dc="10">
+ *   <i class="fa-solid fa-dice-d20"></i> DC 10 concentration
+ * </a>
+ * ```
  */
 async function enrichSave(config, label, options) {
   for ( const value of config.values ) {
@@ -281,15 +291,15 @@ async function enrichSave(config, label, options) {
   }
 
   const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
-  if ( !abilityConfig ) {
+  if ( !abilityConfig && !config._isConcentration ) {
     console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
     return null;
   }
   if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
-  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
+  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
 
-  config = { type: "save", ...config };
+  config = { type: config._isConcentration ? "concentration" : "save", ...config };
   if ( !label ) label = createRollLabel(config);
   return createRollLink(label, config);
 }
