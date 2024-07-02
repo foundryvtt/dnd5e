@@ -49,7 +49,7 @@
                 {{/if}}
             </div>
             <div class="concentration" data-ability="concentration">
-                <span class="label">{{ localize "DND5E.Concentration" }}</span>
+                <a class="label saving-throw {{ @root.rollableClass }}">{{ localize "DND5E.Concentration" }}</a>
                 {{#if @root.editable}}
                 <a class="config-button" data-action="ability" data-tooltip="{{ tooltip }}" aria-label="{{ tooltip }}">
                     <i class="fas fa-cog"></i>

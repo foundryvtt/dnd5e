@@ -426,9 +426,11 @@
                     <ul class="pills">
                         {{#each skills}}
                         <li class="pill">
-                            <span class="label">{{ label }}</span>
-                            <span class="separator">&vert;</span>
-                            <span class="value">{{ dnd5e-numberFormat total signDisplay="always" }}</span>
+                            <a class="{{ @root.rollableClass }} skill-name" data-key="{{ @key }}">
+                                <span class="label">{{ label }}</span>
+                                <span class="separator">&vert;</span>
+                                <span class="value">{{ dnd5e-numberFormat total signDisplay="always" }}</span>
+                            </a>
                         </li>
                         {{/each}}
                     </ul>

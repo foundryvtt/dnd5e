@@ -1,0 +1,19 @@
+<form autocomplete="off">
+    <header>{{ localize "DND5E.SkillsConfig" }}</header>
+    <div class="card">
+        <ol class="unlist form-grid form-grid-50 skills-list">
+            {{#each this}}
+            <li class="skill-row" data-key="{{ key }}">
+                <proficiency-cycle type="skill" name="system.skills.{{ key }}.value" value="{{ value }}"
+                                   data-tooltip="{{ tooltip }}" aria-label="{{ localize tooltip }}"></proficiency-cycle>
+                <span class="name">{{ label }}</span>
+                <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
+                <a class="config-button" data-action="configure" data-tooltip="DND5E.ConfigureSkill"
+                   aria-label="{{ localize "DND5E.ConfigureSkill" }}">
+                    <i class="fas fa-cog"></i>
+                </a>
+            </li>
+            {{/each}}
+        </ol>
+    </div>
+</form>

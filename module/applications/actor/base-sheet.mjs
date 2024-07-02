@@ -766,6 +766,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         const skill = event.currentTarget.closest("[data-key]").dataset.key;
         app = new ProficiencyConfig(this.actor, {property: "skills", key: skill});
         break;
+      case "skills":
+        app = new dnd5e.applications.actor.ActorSkillsConfig(this.actor);
+        break;
       case "spellSlots":
         app = new ActorSpellSlotsConfig(this.actor);
         break;

@@ -13,6 +13,7 @@ export {default as ActorConcentrationConfig} from "./concentration-config.mjs";
 export {default as DamageModificationConfig} from "./damage-modification-config.mjs";
 export {default as ActorHitDiceConfig} from "./hit-dice-config.mjs";
 export {default as ActorHitPointsConfig} from "./hit-points-config.mjs";
+export {default as ActorSkillsConfig} from "./skills-config.mjs";
 export {default as ActorSpellSlotsConfig} from "./spell-slots-config.mjs";
 export {default as ActorInitiativeConfig} from "./initiative-config.mjs";
 export {default as LongRestDialog} from "./long-rest.mjs";
