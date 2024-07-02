@@ -357,15 +357,6 @@ export default function ActorSheetV2Mixin(Base) {
           else ctx.range = { distance: false };
         }
 
-        // To Hit
-        const toHit = parseInt(item.labels.modifier);
-        if ( item.hasAttack && !isNaN(toHit) ) {
-          ctx.toHit = {
-            sign: Math.sign(toHit) < 0 ? "-" : "+",
-            abs: Math.abs(toHit)
-          };
-        }
-
         // Prepared
         const mode = system.preparation?.mode;
         const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
@@ -415,6 +406,10 @@ export default function ActorSheetV2Mixin(Base) {
 
       // Concentration
       if ( this._concentration.items.has(item) ) ctx.concentration = true;
+
+      // To Hit
+      const toHit = parseInt(item.labels.modifier);
+      ctx.toHit = item.hasAttack && !isNaN(toHit) ? toHit : null;
     }
 
     /* -------------------------------------------- */

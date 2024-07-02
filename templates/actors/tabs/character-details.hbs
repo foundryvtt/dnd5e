@@ -11,7 +11,7 @@
         <div class="ability roboto-upper">{{ abbreviation }}</div>
         {{/if}}
         <a class="name {{ @root.rollableClass }} {{ roll }}">{{ label }}</a>
-        <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
+        <div class="bonus">{{ dnd5e-formatModifier total }}</div>
         {{#if @root.editable}}
         <a class="config-button" data-action="{{ type }}" data-tooltip="{{ config }}"
            aria-label="{{ localize config }}">
@@ -34,7 +34,7 @@
         {{/if}}
         <a class="name saving-throw full {{ @root.rollableClass }}">{{ label }}</a>
         <a class="name saving-throw abbr {{ @root.rollableClass }}">{{ abbr }}</a>
-        <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
+        <div class="bonus">{{ dnd5e-formatModifier save }}</div>
         {{#if @root.editable}}
         <a class="config-button" data-action="ability" data-tooltip="{{ config }}" aria-label="{{ localize config }}">
             <i class="fas fa-cog"></i>

@@ -7,7 +7,7 @@
                 <proficiency-cycle type="skill" name="system.skills.{{ key }}.value" value="{{ value }}"
                                    data-tooltip="{{ tooltip }}" aria-label="{{ localize tooltip }}"></proficiency-cycle>
                 <span class="name">{{ label }}</span>
-                <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
+                <div class="bonus">{{ dnd5e-formatModifier total }}</div>
                 <a class="config-button" data-action="configure" data-tooltip="DND5E.ConfigureSkill"
                    aria-label="{{ localize "DND5E.ConfigureSkill" }}">
                     <i class="fas fa-cog"></i>

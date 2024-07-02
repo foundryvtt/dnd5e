@@ -15,7 +15,7 @@
                 <i class="fas fa-cog"></i>
             </a>
             {{else}}
-            <span class="sign">{{ sign }}</span>{{ mod }}
+            {{ dnd5e-formatModifier mod }}
             {{/if}}
         </div>
         <div class="score">
@@ -384,11 +384,8 @@
                                     {{/with}}
 
                                     {{!-- Modifiers --}}
-                                    {{else if modifier}}
-                                    {{#with modifier}}
-                                    <span class="sign">{{ sign }}</span>
-                                    <span class="value">{{ abs }}</span>
-                                    {{/with}}
+                                    {{else if modifier includeZero=true}}
+                                    {{ dnd5e-formatModifier modifier }}
 
                                     {{!-- Passive Score --}}
                                     {{#if passive}}

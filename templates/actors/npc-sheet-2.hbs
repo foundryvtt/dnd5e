@@ -244,7 +244,7 @@
 
                         <div class="proficiency">
                             <span>{{ localize "DND5E.Proficiency" }}</span>
-                            <strong><span class="sign">{{ prof.sign }}</span>{{ prof.mod }}</strong>
+                            <strong>{{ dnd5e-formatModifier system.attributes.prof }}</strong>
                         </div>
 
                     </div>
@@ -277,7 +277,7 @@
                             <i class="fas fa-cog"></i>
                         </a>
                         {{else}}
-                        <span class="sign">{{ sign }}</span>{{ mod }}
+                        {{ dnd5e-formatModifier mod }}
                         {{/if}}
                     </div>
                     <div class="score">
@@ -295,9 +295,7 @@
                                            data-tooltip="{{ hover }}" aria-label="{{ localize hover }}"
                                            value="{{#if @root.editable}}{{ baseProf }}{{else}}{{ proficient }}{{/if}}"
                                            {{ disabled (not @root.editable) }}></proficiency-cycle>
-                        {{#with (lookup @root.saves key)}}
-                        <span class="save"><span class="sign">{{ sign }}</span>{{ mod }}</span>
-                        {{/with}}
+                        <span class="save">{{ dnd5e-formatModifier save }}</span>
                         <i class="fas fa-shield-heart" inert></i>
                     </div>
                 </div>

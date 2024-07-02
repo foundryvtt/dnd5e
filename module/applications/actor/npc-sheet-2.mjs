@@ -53,29 +53,13 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     Object.entries(context.abilities).forEach(([k, ability]) => {
       ability.key = k;
       ability.abbr = CONFIG.DND5E.abilities[k]?.abbreviation ?? "";
-      ability.sign = ability.mod < 0 ? "-" : "+";
-      ability.mod = Math.abs(ability.mod);
       ability.baseValue = context.source.abilities[k]?.value ?? 0;
       ability.icon = CONFIG.DND5E.abilities[k]?.icon;
     });
 
-    // Saving Throws
-    context.saves = {};
-    for ( const ability of Object.values(context.abilities) ) {
-      const save = context.saves[ability.key] = {};
-      save.sign = ability.save < 0 ? "-" : "+";
-      save.mod = Math.abs(ability.save);
-    }
-
     // Show Death Saves
     context.showDeathSaves = !foundry.utils.isEmpty(this.actor.classes)
       || this.actor.getFlag("dnd5e", "showDeathSaves");
-
-    // Proficiency
-    context.prof = {
-      mod: attributes.prof,
-      sign: attributes.prof < 0 ? "-" : "+"
-    };
 
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
@@ -210,22 +194,18 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     const spellAbility = abilities[ability];
     const mod = spellAbility?.mod ?? 0;
     const attackBonus = msak === rsak ? msak : 0;
-    const attack = mod + attributes.prof + attackBonus;
     context.spellcasting.push({
       label: game.i18n.format("DND5E.SpellcastingClass", { class: spellcaster?.name ?? game.i18n.format("DND5E.NPC") }),
       level: spellcaster?.system.levels ?? details.spellLevel,
       ability: {
-        ability,
-        sign: mod < 0 ? "-" : "+",
-        value: Math.abs(mod),
+        ability, mod,
         label: CONFIG.DND5E.abilities[ability]?.abbreviation
       },
-      attack: { sign: attack < 0 ? "-" : "+", value: Math.abs(attack) },
+      attack: mod + attributes.prof + attackBonus,
       save: spellAbility?.dc ?? 0,
       noSpellcaster: !spellcaster,
       concentration: {
-        mod: Math.abs(attributes.concentration.save),
-        sign: attributes.concentration.save < 0 ? "-" : "+",
+        mod: attributes.concentration.save,
         tooltip: game.i18n.format("DND5E.AbilityConfigure", { ability: game.i18n.localize("DND5E.Concentration") })
       }
     });

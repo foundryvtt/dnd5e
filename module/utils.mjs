@@ -467,6 +467,18 @@ function concealSection(conceal, options) {
 /* -------------------------------------------- */
 
 /**
+ * Format a modifier for display with its sign separate.
+ * @param {number} mod  The modifier.
+ * @returns {Handlebars.SafeString}
+ */
+function formatModifier(mod) {
+  if ( !Number.isFinite(mod) ) return new Handlebars.SafeString("");
+  return new Handlebars.SafeString(`<span class="sign">${mod < 0 ? "-" : "+"}</span>${Math.abs(mod)}`);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Register custom Handlebars helpers used by 5e.
  */
 export function registerHandlebarsHelpers() {
@@ -478,7 +490,8 @@ export function registerHandlebarsHelpers() {
     "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-itemContext": itemContext,
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
-    "dnd5e-textFormat": formatText
+    "dnd5e-textFormat": formatText,
+    "dnd5e-formatModifier": formatModifier
   });
 }
 

@@ -29,8 +29,7 @@ export default class ActorSkillsConfig extends DialogMixin(DocumentSheet) {
         key,
         label: CONFIG.DND5E.skills[key]?.label,
         value: source[key]?.value,
-        sign: skill.total < 0 ? "-" : "+",
-        mod: Math.abs(skill.total),
+        total: skill.total,
         tooltip: CONFIG.DND5E.proficiencyLevels[skill.value]
       });
     }

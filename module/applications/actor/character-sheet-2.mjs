@@ -130,8 +130,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     context.abilityRows = Object.entries(context.abilities).reduce((obj, [k, ability]) => {
       ability.key = k;
       ability.abbr = CONFIG.DND5E.abilities[k]?.abbreviation ?? "";
-      ability.sign = Math.sign(ability.mod) < 0 ? "-" : "+";
-      ability.mod = Math.abs(ability.mod);
       ability.baseValue = context.source.abilities[k]?.value ?? 0;
       if ( obj.bottom.length > 5 ) obj.top.push(ability);
       else obj.bottom.push(ability);
@@ -145,8 +143,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       ability = context.saves[ability.key] = { ...ability };
       ability.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? ability.baseProf : ability.proficient];
       ability.hover = CONFIG.DND5E.proficiencyLevels[ability.proficient];
-      ability.sign = Math.sign(ability.save) < 0 ? "-" : "+";
-      ability.mod = Math.abs(ability.save);
     }
 
     if ( this.actor.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) || context.editable ) {
@@ -155,8 +151,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         class: "colspan concentration",
         label: game.i18n.localize("DND5E.Concentration"),
         abbr: game.i18n.localize("DND5E.Concentration"),
-        mod: Math.abs(attributes.concentration.save),
-        sign: attributes.concentration.save < 0 ? "-" : "+"
+        save: attributes.concentration.save
       };
     }
 
@@ -170,8 +165,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     // Skills & Tools
     for ( const [key, entry] of Object.entries(context.skills).concat(Object.entries(context.tools)) ) {
       entry.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? entry.baseValue : entry.value];
-      entry.sign = Math.sign(entry.total) < 0 ? "-" : "+";
-      entry.mod = Math.abs(entry.total);
       if ( key in CONFIG.DND5E.skills ) entry.reference = CONFIG.DND5E.skills[key].reference;
       else if ( key in CONFIG.DND5E.toolIds ) entry.reference = Trait.getBaseItemUUID(CONFIG.DND5E.toolIds[key]);
     }
@@ -204,12 +197,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       const ability = this.actor.system.abilities[sc.ability];
       const mod = ability?.mod ?? 0;
       const attackBonus = msak === rsak ? msak : 0;
-      const attack = mod + this.actor.system.attributes.prof + attackBonus;
       const name = item.system.spellcasting.progression === sc.progression ? item.name : item.subclass?.name;
       context.spellcasting.push({
         label: game.i18n.format("DND5E.SpellcastingClass", { class: name }),
-        ability: { sign: Math.sign(mod) < 0 ? "-" : "+", value: Math.abs(mod), ability: sc.ability },
-        attack: { sign: Math.sign(attack) < 0 ? "-" : "+", value: Math.abs(attack) },
+        ability: { mod, ability: sc.ability },
+        attack: mod + this.actor.system.attributes.prof + attackBonus,
         primary: this.actor.system.attributes.spellcasting === sc.ability,
         save: ability?.dc ?? 0
       });
@@ -734,7 +726,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       if ( uses?.max > 100 ) css.push("uses-sm");
       if ( modifier !== undefined ) {
         const value = Number(modifier.replace?.(/\s+/g, "") ?? modifier);
-        if ( !isNaN(value) ) modifier = { abs: Math.abs(value), sign: value < 0 ? "-" : "+" };
+        if ( !isNaN(value) ) modifier = value;
       }
 
       const rollableClass = [];
