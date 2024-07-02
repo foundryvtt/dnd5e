@@ -47,6 +47,13 @@ export default class ChatMessage5e extends ChatMessage {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  get isRoll() {
+    return super.isRoll && !this.flags.dnd5e?.rest;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Should roll DCs and other challenge details be displayed on this card?
    * @type {boolean}
