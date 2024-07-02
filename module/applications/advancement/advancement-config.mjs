@@ -85,7 +85,8 @@ export default class AdvancementConfig extends FormApplication {
       src: this.advancement.toObject(),
       default: {
         title: this.advancement.constructor.metadata.title,
-        icon: this.advancement.constructor.metadata.icon
+        icon: this.advancement.constructor.metadata.icon,
+        hint: ""
       },
       levels,
       showClassRestrictions: this.item.type === "class",

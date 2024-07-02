@@ -1,5 +1,6 @@
 <form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
     <h3>{{{this.title}}}</h3>
+    {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
 
     <p>
         <span class="initial-scale-value {{#unless initial}}none{{/unless}}">
