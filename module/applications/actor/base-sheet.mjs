@@ -165,6 +165,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a]?.label;
       abl.baseProf = source.system.abilities[a]?.proficient ?? 0;
+      abl.key = a;
     }
 
     // Skills & tools.

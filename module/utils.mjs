@@ -301,16 +301,25 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials
+    "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs",
     "systems/dnd5e/templates/actors/parts/actor-traits.hbs",
     "systems/dnd5e/templates/actors/parts/actor-inventory.hbs",
     "systems/dnd5e/templates/actors/parts/actor-features.hbs",
     "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-classes.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
-    "systems/dnd5e/templates/actors/tabs/character-features.hbs",
-    "systems/dnd5e/templates/actors/tabs/character-spells.hbs",
+    "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
+    "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
     "systems/dnd5e/templates/actors/tabs/group-members.hbs",
+
+    // Actor Sheet Item Summary Columns
+    "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-recovery.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-feature-controls.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-roll.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-formula.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
@@ -458,6 +467,18 @@ function concealSection(conceal, options) {
 /* -------------------------------------------- */
 
 /**
+ * Format a modifier for display with its sign separate.
+ * @param {number} mod  The modifier.
+ * @returns {Handlebars.SafeString}
+ */
+function formatModifier(mod) {
+  if ( !Number.isFinite(mod) ) return new Handlebars.SafeString("");
+  return new Handlebars.SafeString(`<span class="sign">${mod < 0 ? "-" : "+"}</span>${Math.abs(mod)}`);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Register custom Handlebars helpers used by 5e.
  */
 export function registerHandlebarsHelpers() {
@@ -469,7 +490,8 @@ export function registerHandlebarsHelpers() {
     "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-itemContext": itemContext,
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
-    "dnd5e-textFormat": formatText
+    "dnd5e-textFormat": formatText,
+    "dnd5e-formatModifier": formatModifier
   });
 }
 

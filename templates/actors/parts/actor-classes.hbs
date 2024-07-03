@@ -1,0 +1,62 @@
+<section class="classes pills-lg {{#if @root.editable}}editing{{/if}}">
+    {{#each classes as |cls|}}
+    {{#if (eq cls.type "class")}}
+    {{#dnd5e-itemContext cls as |ctx|}}
+    <div class="class pill-lg" data-item-id="{{ cls.id }}" style="--underlay: url('{{ ctx.prefixedImage }}');">
+        <div class="icons {{#if cls.subclass}}subclass{{/if}}">
+            <img class="gold-icon item-tooltip" src="{{ cls.img }}" alt="{{ cls.name }}" data-action="edit"
+                 data-item-id="{{ cls.id }}">
+            {{#if cls.subclass}}
+            <img class="gold-icon item-tooltip" src="{{ cls.subclass.img }}" alt="{{ cls.subclass.name }}"
+                 data-action="edit" data-item-id="{{ cls.subclass.id }}">
+            {{/if}}
+            {{#if @root.editable}}
+            <div class="controls">
+                <a class="deletion-control item-control item-action" data-action="delete"
+                   data-tooltip="DND5E.ItemDelete" data-item-id="{{ cls.id }}"
+                   aria-label="{{ localize "DND5E.ItemDelete" }}">
+                    <i class="fas fa-circle-xmark"></i>
+                </a>
+                {{#if cls.subclass}}
+                <a class="deletion-control item-control item-action" data-action="delete"
+                   data-tooltip="DND5E.ItemDelete" data-item-id="{{ cls.subclass.id }}"
+                   aria-label="{{ localize "DND5E.ItemDelete" }}">
+                    <i class="fas fa-circle-xmark"></i>
+                </a>
+                {{/if}}
+            </div>
+            {{/if}}
+        </div>
+        <div class="name-stacked">
+            <div class="title">{{ cls.name }}</div>
+            {{#if cls.subclass}}
+            <div class="subtitle">{{ cls.subclass.name }}</div>
+            {{/if}}
+        </div>
+        <div class="level">
+            {{#if @root.editable}}
+            <select class="level-selector">
+                {{#select 0}}
+                {{#each ctx.availableLevels}}
+                <option value="{{ delta }}" {{ disabled this.disabled }}>
+                    {{ level }}
+                    {{#if delta}}({{ dnd5e-numberFormat delta signDisplay="always"}}){{/if}}
+                </option>
+                {{/each}}
+                {{/select}}
+            </select>
+            {{else}}
+            <span>{{ cls.system.levels }}</span>
+            {{/if}}
+        </div>
+    </div>
+    {{/dnd5e-itemContext}}
+    {{/if}}
+    {{else}}
+    {{#if showClassDrop}}
+    <div class="pill-lg empty roboto-upper" data-action="findItem" data-item-type="class">
+        {{ localize "DND5E.ClassAdd" }}
+    </div>
+    {{/if}}
+    {{/each}}
+</section>

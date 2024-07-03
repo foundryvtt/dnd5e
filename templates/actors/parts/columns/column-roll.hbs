@@ -1,0 +1,12 @@
+<div class="item-detail item-roll {{#if (and (not item.system.save.ability) (eq ctx.toHit null))}}empty{{/if}}">
+    {{#if ctx.toHit includeZero=true}}
+    <span class="value">{{ dnd5e-formatModifier ctx.toHit }}</span>
+    {{else if item.system.save.ability}}
+    <div class="stacked">
+        <span class="ability">
+            {{ lookup (lookup @root.config.abilities item.system.save.ability) "abbreviation" }}
+        </span>
+        <span class="value">{{ item.system.save.dc }}</span>
+    </div>
+    {{/if}}
+</div>
