@@ -14,6 +14,16 @@
     </a>
     {{/if}}
 
+    {{!-- Expand/Collapse --}}
+    <a class="item-control interface-only" data-toggle-description
+       aria-label="{{ localize "DND5E.ToggleDescription" }}">
+        {{#if ctx.isExpanded}}
+        <i class="fas fa-compress"></i>
+        {{else}}
+        <i class="fas fa-expand"></i>
+        {{/if}}
+    </a>
+
     {{!-- Context Menu --}}
     <a class="item-control interface-only" data-context-menu
        aria-label="{{ localize "DND5E.AdditionalControls" }}">

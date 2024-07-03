@@ -246,10 +246,16 @@
       &.green { background-color: var(--dnd5e-color-green); }
       &.maroon { background-color: var(--dnd5e-color-maroon); }
 
-      &.pill-sm {
+      &.transparent, &.pill-sm {
         color: #4e4e4e;
         border: 1px dotted var(--color-border-dark-5);
         background-color: transparent;
+      }
+
+      &.pill-xs {
+        font-size: var(--font-size-10);
+        padding: 2px 4px;
+        gap: 3px;
       }
 
       > .separator { color: var(--color-text-light-6); }

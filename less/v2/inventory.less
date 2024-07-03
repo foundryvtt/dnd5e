@@ -214,11 +214,13 @@
   .items-section {
 
     .items-header, .item {
-      display: flex;
-      align-items: stretch;
-
       &[hidden] { display: none; }
       .condensed { font-family: var(--dnd5e-font-roboto-condensed); }
+
+      .item-row {
+        display: flex;
+        align-items: stretch;
+      }
 
       .item-name {
         flex: 1;
@@ -441,7 +443,7 @@
 
       /* Item Controls */
       .item-controls {
-        width: 60px;
+        width: 70px;
         align-items: stretch;
         justify-content: center;
         gap: .375rem;
@@ -479,6 +481,16 @@
         align-items: center;
       }
 
+      /* Item Description */
+      .item-description {
+        font-size: var(--font-size-11);
+
+        .item-summary {
+          padding: 1px 8px 8px;
+          background: var(--dnd5e-color-parchment);
+        }
+      }
+
       @container (min-width: 580px) {
         .spell-uses { display: flex; }
         .subtitle-uses { display: none; }
@@ -498,6 +510,9 @@
     }
 
     .items-header {
+      display: flex;
+      align-items: stretch;
+
       .config-button {
         position: absolute;
         inset: .5rem 1.5rem auto auto;
@@ -514,6 +529,11 @@
     .item {
       border-bottom: var(--dnd5e-border-dotted);
       &:last-child { border: none; }
+    }
+
+    .effect {
+      display: flex;
+      align-items: stretch;
     }
   }
 

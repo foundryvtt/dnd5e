@@ -50,11 +50,13 @@ export default class ContainerSheet extends ItemSheet5e {
     context.itemContext = {};
 
     for ( const item of context.items ) {
+      const enrichment = { secrets: this.actor.isOwner };
+      const chatData = item.system.getCardData ? item.system.getCardData(enrichment) : item.getChatData(enrichment);
       const ctx = context.itemContext[item.id] ??= {};
       ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
       ctx.isExpanded = this._expanded.has(item.id);
       ctx.isStack = item.system.quantity > 1;
-      ctx.expanded = this._expanded.has(item.id) ? await item.getChatData({secrets: this.item.isOwner}) : null;
+      ctx.expanded = this._expanded.has(item.id) ? await chatData : null;
     }
     context.isContainer = true;
     context.inventory = {

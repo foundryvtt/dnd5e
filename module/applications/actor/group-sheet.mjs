@@ -73,7 +73,9 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     context.expandedData = {};
     for ( const id of this._expanded ) {
       const item = this.actor.items.get(id);
-      if ( item ) context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+      const enrichment = { secrets: this.actor.isOwner };
+      const chatData = item.system.getCardData ? item.system.getCardData(enrichment) : item.getChatData(enrichment);
+      if ( item ) context.expandedData[id] = await chatData;
     }
     context.inventoryFilters = false;
     context.rollableClass = this.isEditable ? "rollable" : "";

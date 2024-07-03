@@ -195,7 +195,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     for ( const id of this._expanded ) {
       const item = this.actor.items.get(id);
       if ( item ) {
-        context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+        const enrichment = { secrets: this.actor.isOwner };
+        const chatData = item.system.getCardData ? item.system.getCardData(enrichment) : item.getChatData(enrichment);
+        context.expandedData[id] = await chatData;
         if ( context.itemContext[id] ) context.itemContext[id].expanded = context.expandedData[id];
       }
     }

@@ -229,6 +229,7 @@ export default function ActorSheetV2Mixin(Base) {
       html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
       html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
       html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
+      html.find("[data-toggle-description]").on("click", this._onToggleDescription.bind(this));
       this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
       this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
       if ( this.isEditable ) {
@@ -486,6 +487,40 @@ export default function ActorSheetV2Mixin(Base) {
       label.hidden = edit;
       input.hidden = !edit;
       if ( edit ) input.focus();
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle toggling an Item's description.
+     * @param {MouseEvent} event  The triggering event.
+     * @protected
+     */
+    async _onToggleDescription(event) {
+      const target = event.currentTarget;
+      const icon = target.querySelector(":scope > i");
+      const row = target.closest("[data-item-id]");
+      const summary = row.querySelector(":scope > .item-description > .wrapper");
+      const { itemId } = row.dataset;
+      const expanded = this._expanded.has(itemId);
+      const item = this.actor.items.get(itemId);
+      if ( !item ) return;
+
+      if ( expanded ) {
+        summary.addEventListener("transitionend", () => {
+          if ( row.classList.contains("collapsed") ) summary.replaceChildren();
+        }, { once: true });
+        this._expanded.delete(itemId);
+      } else {
+        const context = await item.system.getCardData({ secrets: item.isOwner });
+        summary.innerHTML = await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", context);
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        this._expanded.add(itemId);
+      }
+
+      row.classList.toggle("collapsed", expanded);
+      icon.classList.toggle("fa-compress", !expanded);
+      icon.classList.toggle("fa-expand", expanded);
     }
 
     /* -------------------------------------------- */
