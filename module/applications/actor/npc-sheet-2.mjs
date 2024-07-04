@@ -115,7 +115,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
     // Senses
     context.senses.passivePerception = {
-      label: game.i18n.localize("DND5E.PassivePerception"), value: context.skills.prc.passive
+      label: game.i18n.localize("DND5E.PassivePerception"), value: this.actor.system.skills.prc.passive
     };
 
     // Legendary Actions & Resistances
@@ -275,7 +275,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
    * Take a short rest, calling the relevant function on the Actor instance.
    * @param {Event} event             The triggering click event.
    * @returns {Promise<RestResult>}  Result of the rest action.
-   * @private
+   * @protected
    */
   async _onShortRest(event) {
     event.preventDefault();
@@ -289,7 +289,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
    * Take a long rest, calling the relevant function on the Actor instance.
    * @param {Event} event             The triggering click event.
    * @returns {Promise<RestResult>}  Result of the rest action.
-   * @private
+   * @protected
    */
   async _onLongRest(event) {
     event.preventDefault();
