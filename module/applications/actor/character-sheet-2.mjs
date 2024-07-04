@@ -11,14 +11,6 @@ import ActorSheetV2Mixin from "./sheet-v2-mixin.mjs";
  * @mixes ActorSheetV2
  */
 export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet5eCharacter) {
-  constructor(object, options={}) {
-    const key = `character${object.limited ? ":limited" : ""}`;
-    const { width, height } = game.user.getFlag("dnd5e", `sheetPrefs.${key}`) ?? {};
-    if ( width && !("width" in options) ) options.width = width;
-    if ( height && !("height" in options) ) options.height = height;
-    super(object, options);
-  }
-
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -306,10 +298,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       onOpen: (...args) => featuresElement._onOpenContextMenu(...args)
     });
 
-    if ( this.isEditable ) {
-      html.find(".create-child").on("click", this._onCreateChild.bind(this));
-    }
-
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
       html.find(".tab.details .item-action").on("click", this._onItemAction.bind(this));
@@ -343,17 +331,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   _disableFields(form) {
     super._disableFields(form);
     form.querySelectorAll(".interface-only").forEach(input => input.disabled = false);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onChangeTab(event, tabs, active) {
-    super._onChangeTab(event, tabs, active);
-    const createChild = this.form.querySelector(".create-child");
-    createChild.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
-      type: game.i18n.localize(`DOCUMENT.${active === "effects" ? "ActiveEffect" : "Item"}`)
-    }));
   }
 
   /* -------------------------------------------- */
@@ -467,42 +444,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /* -------------------------------------------- */
 
   /**
-   * Handle creating a new embedded child.
-   * @returns {ActiveEffect5e|Item5e|void}
-   * @protected
-   */
-  _onCreateChild() {
-    const activeTab = this._tabs?.[0]?.active ?? "details";
-
-    if ( activeTab === "effects" ) return ActiveEffect.implementation.create({
-      name: game.i18n.localize("DND5E.EffectNew"),
-      icon: "icons/svg/aura.svg"
-    }, { parent: this.actor, renderSheet: true });
-
-    if ( activeTab === "spells" ) return Item.implementation.create({
-      name: game.i18n.format("DOCUMENT.New", { type: game.i18n.format(CONFIG.Item.typeLabels.spell) }),
-      type: "spell",
-      img: Item.implementation.getDefaultArtwork({ type: "spell" })?.img ?? Item.implementation.DEFAULT_ICON
-    }, { parent: this.actor, renderSheet: true });
-
-    let types = {
-      inventory: ["weapon", "equipment", "consumable", "tool", "container", "loot"],
-      features: ["feat", "race", "background", "class", "subclass"]
-    }[activeTab] ?? [];
-
-    types = types.filter(type => {
-      const model = CONFIG.Item.dataModels[type];
-      return !model.metadata?.singleton || !this.actor.itemTypes[type].length;
-    });
-
-    if ( types.length ) return Item.implementation.createDialog({}, {
-      parent: this.actor, pack: this.actor.pack, types
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Show available items of a given type.
    * @param {string} type  The item type.
    * @protected
@@ -535,16 +476,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   _onToggleSpellcasting(event) {
     const ability = event.currentTarget.closest("[data-ability]")?.dataset.ability;
     this.actor.update({ "system.attributes.spellcasting": ability });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onResize(event) {
-    super._onResize(event);
-    const { width, height } = this.position;
-    const key = `character${this.actor.limited ? ":limited": ""}`;
-    game.user.setFlag("dnd5e", `sheetPrefs.${key}`, { width, height });
   }
 
   /* -------------------------------------------- */

@@ -453,10 +453,10 @@
           position: absolute;
           inset-block: 0;
           inset-inline-end: 0;
-          width: 1.5rem;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: end;
+          padding: 0 12px 0 5px;
         }
       }
 
@@ -475,6 +475,8 @@
         .item-summary {
           padding: 1px 8px 8px;
           background: var(--dnd5e-color-parchment);
+          .item-properties { padding-top: 7px; }
+          > * + .item-properties { padding-top: 0; }
         }
       }
 

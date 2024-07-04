@@ -9,6 +9,14 @@ import Tabs5e from "../tabs.mjs";
  */
 export default function ActorSheetV2Mixin(Base) {
   return class ActorSheetV2 extends Base {
+    constructor(object, options={}) {
+      const key = `${object.type}${object.limited ? ":limited" : ""}`;
+      const { width, height } = game.user.getFlag("dnd5e", `sheetPrefs.${key}`) ?? {};
+      if ( width && !("width" in options) ) options.width = width;
+      if ( height && !("height" in options) ) options.height = height;
+      super(object, options);
+    }
+
     /**
      * @typedef {object} SheetTabDescriptor5e
      * @property {string} tab     The tab key.
@@ -47,17 +55,26 @@ export default function ActorSheetV2Mixin(Base) {
     _concentration;
 
     /* -------------------------------------------- */
+    /*  Rendering                                   */
+    /* -------------------------------------------- */
 
     /** @inheritDoc */
     async _renderOuter() {
       const html = await super._renderOuter();
+      const header = html[0].querySelector(".window-header");
+
+      // Adjust header buttons.
+      header.querySelectorAll(".header-button").forEach(btn => {
+        const label = btn.querySelector(":scope > i").nextSibling;
+        btn.dataset.tooltip = label.textContent;
+        btn.setAttribute("aria-label", label.textContent);
+        label.remove();
+      });
 
       if ( !game.user.isGM && this.actor.limited ) {
         html[0].classList.add("limited");
         return html;
       }
-
-      const header = html[0].querySelector(".window-header");
 
       // Add edit <-> play slide toggle.
       if ( this.isEditable ) {
@@ -70,14 +87,6 @@ export default function ActorSheetV2Mixin(Base) {
         toggle.addEventListener("dblclick", event => event.stopPropagation());
         header.insertAdjacentElement("afterbegin", toggle);
       }
-
-      // Adjust header buttons.
-      header.querySelectorAll(".header-button").forEach(btn => {
-        const label = btn.querySelector(":scope > i").nextSibling;
-        btn.dataset.tooltip = label.textContent;
-        btn.setAttribute("aria-label", label.textContent);
-        label.remove();
-      });
 
       const idLink = header.querySelector(".document-id-link");
       if ( idLink ) {
@@ -119,11 +128,14 @@ export default function ActorSheetV2Mixin(Base) {
       const context = await super.getData(options);
       context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
       context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
-      const activeTab = (game.user.isGM || !this.actor.limited) ? this._tabs?.[0]?.active ?? "details" : "biography";
+      const activeTab = (game.user.isGM || !this.actor.limited)
+        ? this._tabs?.[0]?.active ?? this.options.tabs[0].initial
+        : "biography";
+      const sheetPrefs = `sheetPrefs.${this.actor.type}.tabs.${activeTab}`;
       context.cssClass += ` tab-${activeTab}`;
-      context.sidebarCollapsed = !!game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
+      context.sidebarCollapsed = !!game.user.getFlag("dnd5e", `${sheetPrefs}.collapseSidebar`);
       if ( context.sidebarCollapsed ) context.cssClass += " collapsed";
-      const { attributes, traits } = this.actor.system;
+      const { attributes } = this.actor.system;
 
       // Portrait
       const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
@@ -217,25 +229,6 @@ export default function ActorSheetV2Mixin(Base) {
       context.effects.suppressed.info = context.effects.suppressed.info[0];
 
       return context;
-    }
-
-    /* -------------------------------------------- */
-
-    /** @inheritDoc */
-    activateListeners(html) {
-      super.activateListeners(html);
-      html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
-      html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
-      html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
-      html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
-      html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
-      html.find("[data-toggle-description]").on("click", this._onToggleDescription.bind(this));
-      this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
-      this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
-      if ( this.isEditable ) {
-        html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
-        html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
-      }
     }
 
     /* -------------------------------------------- */
@@ -423,6 +416,28 @@ export default function ActorSheetV2Mixin(Base) {
     }
 
     /* -------------------------------------------- */
+    /*  Event Listeners & Handlers                  */
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    activateListeners(html) {
+      super.activateListeners(html);
+      html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
+      html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
+      html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
+      html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
+      html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
+      html.find("[data-toggle-description]").on("click", this._onToggleDescription.bind(this));
+      this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
+      this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
+      if ( this.isEditable ) {
+        html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
+        html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
+        html.find(".create-child").on("click", this._onCreateChild.bind(this));
+      }
+    }
+
+    /* -------------------------------------------- */
 
     /**
      * Handle the user toggling the sheet mode.
@@ -447,8 +462,52 @@ export default function ActorSheetV2Mixin(Base) {
       super._onChangeTab(event, tabs, active);
       this.form.className = this.form.className.replace(/tab-\w+/g, "");
       this.form.classList.add(`tab-${active}`);
-      const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${active}.collapseSidebar`);
+      const sheetPrefs = `sheetPrefs.${this.actor.type}.tabs.${active}`;
+      const sidebarCollapsed = game.user.getFlag("dnd5e", `${sheetPrefs}.collapseSidebar`);
       if ( sidebarCollapsed !== undefined ) this._toggleSidebar(sidebarCollapsed);
+      const createChild = this.form.querySelector(".create-child");
+      createChild.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
+        type: game.i18n.localize(`DOCUMENT.${active === "effects" ? "ActiveEffect" : "Item"}`)
+      }));
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle creating a new embedded child.
+     * @returns {ActiveEffect5e|Item5e|void}
+     * @protected
+     */
+    _onCreateChild() {
+      const activeTab = this._tabs?.[0]?.active ?? this.options.tabs[0].initial;
+
+      if ( activeTab === "effects" ) return ActiveEffect.implementation.create({
+        name: game.i18n.localize("DND5E.EffectNew"),
+        icon: "icons/svg/aura.svg"
+      }, { parent: this.actor, renderSheet: true });
+
+      if ( activeTab === "spells" ) return Item.implementation.create({
+        name: game.i18n.format("DOCUMENT.New", { type: game.i18n.format(CONFIG.Item.typeLabels.spell) }),
+        type: "spell",
+        img: Item.implementation.getDefaultArtwork({ type: "spell" })?.img ?? Item.implementation.DEFAULT_ICON
+      }, { parent: this.actor, renderSheet: true });
+
+      const features = ["feat", "race", "background", "class", "subclass"];
+      if ( this.actor.type === "npc" ) features.push("weapon");
+
+      let types = {
+        features,
+        inventory: ["weapon", "equipment", "consumable", "tool", "container", "loot"]
+      }[activeTab] ?? [];
+
+      types = types.filter(type => {
+        const model = CONFIG.Item.dataModels[type];
+        return !model.metadata?.singleton || !this.actor.itemTypes[type].length;
+      });
+
+      if ( types.length ) return Item.implementation.createDialog({}, {
+        parent: this.actor, pack: this.actor.pack, types
+      });
     }
 
     /* -------------------------------------------- */
@@ -487,6 +546,16 @@ export default function ActorSheetV2Mixin(Base) {
       label.hidden = edit;
       input.hidden = !edit;
       if ( edit ) input.focus();
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    _onResize(event) {
+      super._onResize(event);
+      const { width, height } = this.position;
+      const key = `${this.actor.type}${this.actor.limited ? ":limited": ""}`;
+      game.user.setFlag("dnd5e", `sheetPrefs.${key}`, { width, height });
     }
 
     /* -------------------------------------------- */
@@ -550,7 +619,7 @@ export default function ActorSheetV2Mixin(Base) {
     _onToggleSidebar() {
       const collapsed = this._toggleSidebar();
       const activeTab = this._tabs?.[0]?.active ?? "details";
-      game.user.setFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`, collapsed);
+      game.user.setFlag("dnd5e", `sheetPrefs.${this.actor.type}.tabs.${activeTab}.collapseSidebar`, collapsed);
     }
 
     /* -------------------------------------------- */
@@ -609,8 +678,8 @@ export default function ActorSheetV2Mixin(Base) {
       }
       if ( !uuid ) return;
       element.dataset.tooltip = `
-      <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-    `;
+        <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+      `;
       element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
       element.dataset.tooltipDirection ??= "LEFT";
     }
@@ -626,8 +695,8 @@ export default function ActorSheetV2Mixin(Base) {
       if ( "tooltip" in element.dataset ) return;
       const uuid = element.dataset.referenceTooltip;
       element.dataset.tooltip = `
-      <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-    `;
+        <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+      `;
     }
-  }
+  };
 }

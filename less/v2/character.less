@@ -643,8 +643,9 @@
         }
       }
 
-      .tab:not(.details) {
-        padding-inline: .5rem;
+      .tab:not(.details) { padding-inline: .5rem; }
+
+      .tab:not(.details, .biography) {
         // enough room that the "create new" button doesn't overlap when scrolled all the way down
         padding-bottom: calc(1.5rem + 30px);
       }
@@ -1000,18 +1001,6 @@
   form:not(.tab-details) .ability-scores { display: none; }
 
   /* ---------------------------------- */
-  /*  Child Creation                     */
-  /* ---------------------------------- */
-
-  .create-child {
-    display: none;
-    position: absolute;
-    inset: auto 1rem 1rem auto;
-  }
-
-  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects) .create-child { display: block; }
-
-  /* ---------------------------------- */
   /*  Spells                            */
   /* ---------------------------------- */
 
@@ -1146,43 +1135,6 @@
         }
       }
     }
-
-    textarea {
-      font-family: var(--dnd5e-font-roboto);
-      font-size: var(--font-size-12);
-      padding: .375rem;
-      height: 60px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
-      background: var(--dnd5e-background-5);
-
-      &::-webkit-scrollbar-track {
-        box-shadow: none;
-        border-radius: 0;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        border: none;
-        background: var(--dnd5e-color-scrollbar);
-      }
-    }
-
-    .prosemirror menu {
-      .pm-dropdown {
-        background: none;
-        &:hover { background: var(--color-hover-bg); }
-      }
-
-      button {
-        display: unset;
-        text-transform: unset;
-        box-shadow: none;
-        font-family: var(--font-primary);
-        font-size: var(--font-size-14);
-        font-weight: normal;
-        line-height: 28px;
-      }
-    }
   }
 
   /* ---------------------------------- */
@@ -1240,7 +1192,7 @@
     }
 
     .tab.biography > .bottom {
-      padding: .5rem .5rem 1.5rem;
+      padding: .5rem;
       .editor { min-height: unset; }
     }
 
