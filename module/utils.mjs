@@ -308,10 +308,12 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
     "systems/dnd5e/templates/actors/parts/actor-classes.hbs",
+    "systems/dnd5e/templates/actors/parts/biography-textbox.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
     "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
     "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
+    "systems/dnd5e/templates/actors/tabs/npc-biography.hbs",
     "systems/dnd5e/templates/actors/tabs/group-members.hbs",
 
     // Actor Sheet Item Summary Columns

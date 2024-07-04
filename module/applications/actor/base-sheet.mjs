@@ -724,7 +724,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /**
    * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options.
    * @param {Event} event   The click event which originated the selection.
-   * @private
+   * @protected
    */
   _onConfigMenu(event) {
     event.preventDefault();

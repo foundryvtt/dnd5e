@@ -14,7 +14,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       height: 700,
       resizable: true,
       scrollY: [".sheet-body"],
-      tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "details" }]
+      tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "features" }]
     });
   }
 
@@ -27,11 +27,48 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" }
   ];
 
+  /**
+   * The description currently being edited.
+   * @type {string|null}
+   */
+  editingDescriptionTarget = null;
+
   /* -------------------------------------------- */
 
   get template() {
     if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet-2.hbs";
     return "systems/dnd5e/templates/actors/npc-sheet-2.hbs";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _renderOuter() {
+    const html = await super._renderOuter();
+    const source = document.createElement("div");
+    source.classList.add("source-book");
+    source.innerHTML = `
+      <span></span>
+      <a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig"
+         aria-label="${game.i18n.localize("DND5E.SourceConfig")}">
+        <i class="fas fa-cog"></i>
+      </a>
+    `;
+    html[0].querySelector(".window-title")?.insertAdjacentElement("afterend", source);
+    source.querySelector(".config-button").addEventListener("click", this._onConfigMenu.bind(this));
+    return html;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _render(force=false, options={}) {
+    await super._render(force, options);
+    const [source] = this.element.find(".source-book");
+    if ( !source ) return;
+    const sourceEditable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
+    source.querySelector(".config-button")?.toggleAttribute("hidden", !sourceEditable);
+    source.querySelector(":scope > span").innerText = this.actor.system.details.source.label;
   }
 
   /* -------------------------------------------- */
@@ -103,6 +140,23 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     // Spellcasting
     this._prepareSpellcasting(context);
 
+    // Biographies
+    const enrichmentOptions = {
+      secrets: this.actor.isOwner, async: true, relativeTo: this.actor, rollData: context.rollData
+    };
+
+    context.enriched = {
+      public: await TextEditor.enrichHTML(this.actor.system.details.biography.public, enrichmentOptions),
+      value: context.biographyHTML
+    };
+
+    if ( this.editingDescriptionTarget ) {
+      context.editingDescriptionTarget = this.editingDescriptionTarget;
+      context.enriched.editing = this.editingDescriptionTarget.endsWith("public")
+        ? context.enriched.public
+        : context.enriched.value;
+    }
+
     return context;
   }
 
@@ -113,6 +167,10 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     super.activateListeners(html);
     html.find(".short-rest").on("click", this._onShortRest.bind(this));
     html.find(".long-rest").on("click", this._onLongRest.bind(this));
+
+    if ( this.isEditable ) {
+      html.find(".editor-edit").on("click", this._onEditBiography.bind(this));
+    }
   }
 
   /* -------------------------------------------- */
@@ -237,5 +295,36 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     event.preventDefault();
     await this._onSubmit(event);
     return this.actor.longRest();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async activateEditor(name, options={}, initialContent="") {
+    options.relativeLinks = true;
+    options.plugins = {
+      menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
+        compact: true,
+        destroyOnSave: true,
+        onSave: () => {
+          this.saveEditor(name, { remove: true });
+          this.editingDescriptionTarget = null;
+        }
+      })
+    };
+    return super.activateEditor(name, options, initialContent);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing a biography section.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onEditBiography(event) {
+    const { target } = event.currentTarget.closest("[data-target]").dataset;
+    this.editingDescriptionTarget = target;
+    this.render();
   }
 }

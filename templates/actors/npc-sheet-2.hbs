@@ -511,10 +511,19 @@
                     {{> "dnd5e.active-effects2" }}
                 </div>
 
+                {{!-- Biography --}}
+                {{~> "dnd5e.npc-biography" ~}}
+
             </section>
 
         </div>
 
     </section>
+
+    {{!-- Child Creation --}}
+    <button type="button" class="create-child gold-button"
+            aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
+        <i class="fas fa-plus"></i>
+    </button>
 
 </form>

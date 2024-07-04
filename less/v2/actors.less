@@ -319,6 +319,59 @@
   }
 
   /* ---------------------------------- */
+  /*  Biography                         */
+  /* ---------------------------------- */
+
+  .textbox textarea {
+    font-family: var(--dnd5e-font-roboto);
+    font-size: var(--font-size-12);
+    padding: .375rem;
+    height: 60px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+    background: var(--dnd5e-background-5);
+
+    &::-webkit-scrollbar-track {
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: none;
+      background: var(--dnd5e-color-scrollbar);
+    }
+  }
+
+  .prosemirror menu {
+    .pm-dropdown {
+      background: none;
+      &:hover { background: var(--color-hover-bg); }
+    }
+
+    button {
+      display: unset;
+      text-transform: unset;
+      box-shadow: none;
+      font-family: var(--font-primary);
+      font-size: var(--font-size-14);
+      font-weight: normal;
+      line-height: 28px;
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Child Creation                    */
+  /* ---------------------------------- */
+
+  .create-child {
+    display: none;
+    position: absolute;
+    inset: auto 16px 16px auto;
+  }
+
+  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects) .create-child { display: block; }
+
+  /* ---------------------------------- */
   /*  Minimized                         */
   /* ---------------------------------- */
 

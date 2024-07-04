@@ -306,23 +306,33 @@
     </section>
 
     {{#if isNPC}}
-    {{!-- Encumbrance --}}
-    <div class="encumbrance">
-        {{#with encumbrance}}
-        <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
-             aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
-            <div class="label">
-                <i class="fas fa-weight-hanging"></i>
-                <span class="value">{{ value }}</span>
-                <span class="separator">&sol;</span>
-                <span class="max">{{ max }}</span>
+    <div class="bottom">
+
+        {{!-- Encumbrance --}}
+        <div class="encumbrance">
+            {{#with encumbrance}}
+            <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
+                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
+                <div class="label">
+                    <i class="fas fa-weight-hanging"></i>
+                    <span class="value">{{ value }}</span>
+                    <span class="separator">&sol;</span>
+                    <span class="max">{{ max }}</span>
+                </div>
+                <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-low  arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
             </div>
-            <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
-            <i class="breakpoint encumbrance-low  arrow-down" role="presentation"></i>
-            <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
-            <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
+            {{/with}}
         </div>
-        {{/with}}
+
+        {{!-- Child Creation --}}
+        <button type="button" class="create-child gold-button"
+                aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
+            <i class="fas fa-plus"></i>
+        </button>
+
     </div>
     {{/if}}
 </{{ elements.inventory }}>

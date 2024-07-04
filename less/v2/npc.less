@@ -25,6 +25,29 @@
 
   > header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-background-25); }
 
+  .window-header .source-book {
+    flex: none;
+    color: var(--color-text-dark-primary);
+    font-family: var(--dnd5e-font-roboto-condensed);
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    margin-top: 7px;
+    gap: 4px;
+
+    a {
+      margin: 0;
+      display: grid;
+      place-content: center;
+      &[hidden] { display: none; }
+    }
+
+    i {
+      font-size: var(--font-size-11);
+      color: var(--color-text-light-6);
+    }
+  }
+
   .window-content {
     background: url("ui/texture1.webp") no-repeat top center / auto 770px,
       var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
@@ -484,8 +507,13 @@
           padding: 8px 12px 8px 16px;
           gap: 8px;
 
-          &.spells { flex-direction: column; }
+          &.spells, &.biography { flex-direction: column; }
           &:not(.active) { display: none; }
+
+          &:not(.biography, .inventory) {
+            // enough room that the "create new" button doesn't overlap when scrolled all the way down
+            padding-bottom: calc(1.5rem + 30px);
+          }
         }
       }
 
@@ -495,15 +523,30 @@
         width: 100%;
 
         .items-list { gap: 8px; }
+        .spells-list { gap: 12px; }
 
-        .encumbrance {
+        .bottom {
           width: 100%;
           position: sticky;
           bottom: 0;
           margin-top: auto;
-          box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+          display: flex;
+          gap: 8px;
 
-          .meter { border-radius: 3px; }
+          .encumbrance {
+            box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+            flex: 1;
+          }
+
+          .meter {
+            border-radius: 3px;
+            height: 100%;
+          }
+
+          .create-child {
+            position: relative;
+            inset: unset;
+          }
         }
       }
 
@@ -552,8 +595,40 @@
           .condition { padding: 9px 10px; }
         }
       }
+
+      /* Biography */
+      .tab.biography {
+        .top {
+          display: flex;
+          align-items: stretch;
+          gap: 8px;
+        }
+
+        :is(.middle, .bottom) > h3 {
+          margin-right: 24px;
+          position: relative;
+
+          .editor-edit {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            inset: auto auto -3px 100%;
+            font-size: var(--font-size-18);
+            color: var(--color-text-dark-primary);
+            padding: 0;
+          }
+        }
+
+        > .editor { flex: 1; }
+      }
     }
   }
+
+  /* ---------------------------------- */
+  /*  Child Creation                    */
+  /* ---------------------------------- */
+
+  form.tab-inventory > .create-child { display: none; }
 
   /* ---------------------------------- */
   /*  Edit Mode                         */
@@ -635,4 +710,10 @@
     .sheet-body .main-content .sidebar-collapser { left: 0; }
     .sidebar { margin-left: calc(var(--sidebar-size) * -1); }
   }
+
+  /* ---------------------------------- */
+  /*  Interactable                      */
+  /* ---------------------------------- */
+
+  form:is(.interactable, .editable) .biography .editor-edit { display: block; }
 }
