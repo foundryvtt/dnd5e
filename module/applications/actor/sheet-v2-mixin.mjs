@@ -55,6 +55,8 @@ export default function ActorSheetV2Mixin(Base) {
     _concentration;
 
     /* -------------------------------------------- */
+    /*  Rendering                                   */
+    /* -------------------------------------------- */
 
     /** @inheritDoc */
     async _renderOuter() {
@@ -227,26 +229,6 @@ export default function ActorSheetV2Mixin(Base) {
       context.effects.suppressed.info = context.effects.suppressed.info[0];
 
       return context;
-    }
-
-    /* -------------------------------------------- */
-
-    /** @inheritDoc */
-    activateListeners(html) {
-      super.activateListeners(html);
-      html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
-      html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
-      html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
-      html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
-      html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
-      html.find("[data-toggle-description]").on("click", this._onToggleDescription.bind(this));
-      this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
-      this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
-      if ( this.isEditable ) {
-        html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
-        html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
-        html.find(".create-child").on("click", this._onCreateChild.bind(this));
-      }
     }
 
     /* -------------------------------------------- */
@@ -431,6 +413,28 @@ export default function ActorSheetV2Mixin(Base) {
       const labels = super._getLabels();
       labels.damageAndHealing = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
       return labels;
+    }
+
+    /* -------------------------------------------- */
+    /*  Event Listeners & Handlers                  */
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    activateListeners(html) {
+      super.activateListeners(html);
+      html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
+      html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
+      html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
+      html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
+      html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
+      html.find("[data-toggle-description]").on("click", this._onToggleDescription.bind(this));
+      this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
+      this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
+      if ( this.isEditable ) {
+        html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
+        html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
+        html.find(".create-child").on("click", this._onCreateChild.bind(this));
+      }
     }
 
     /* -------------------------------------------- */
@@ -674,8 +678,8 @@ export default function ActorSheetV2Mixin(Base) {
       }
       if ( !uuid ) return;
       element.dataset.tooltip = `
-      <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-    `;
+        <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+      `;
       element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
       element.dataset.tooltipDirection ??= "LEFT";
     }
@@ -691,8 +695,8 @@ export default function ActorSheetV2Mixin(Base) {
       if ( "tooltip" in element.dataset ) return;
       const uuid = element.dataset.referenceTooltip;
       element.dataset.tooltip = `
-      <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-    `;
+        <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+      `;
     }
-  }
+  };
 }
