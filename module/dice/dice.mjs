@@ -207,7 +207,7 @@ export async function damageRoll({
 
   // Evaluate the configured roll
   for ( const roll of rolls ) {
-    const rollMode = roll.options.rollMode ?? defaultRollMode;
+    const rollMode = rolls.at(-1).options.rollMode ?? defaultRollMode;
     await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
   }
 

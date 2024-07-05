@@ -203,10 +203,9 @@ export default class DamageRoll extends Roll {
    *                                         true, or the Object of prepared chatData otherwise.
    */
   static async toMessage(rolls, messageData={}, {rollMode, create=true}={}) {
-    rollMode ??= messageData.rollMode ?? game.settings.get("core", "rollMode");
+    rollMode = rolls.at(-1)?.options.rollMode ?? rollMode ?? game.settings.get("core", "rollMode");
     let isCritical = false;
     for ( const roll of rolls ) {
-      if ( roll.options.rollMode ) rollMode = roll.options.rollMode;
       if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
       messageData.flavor ??= roll.options.flavor;
       isCritical ||= roll.isCritical;
