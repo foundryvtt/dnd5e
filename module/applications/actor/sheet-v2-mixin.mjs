@@ -180,7 +180,7 @@ export default function ActorSheetV2Mixin(Base) {
       });
 
       // Containers
-      for ( const container of context.containers ) {
+      for ( const container of context.containers ?? [] ) {
         const ctx = context.itemContext[container.id];
         ctx.capacity = await container.system.computeCapacity();
         ctx.capacity.maxLabel = Number.isFinite(ctx.capacity.max) ? ctx.capacity.max : "&infin;";

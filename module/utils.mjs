@@ -326,7 +326,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
     "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/group-members.hbs",
-    "systems/dnd5e/templates/actors/tabs/npc-biography.hbs",
 
     // Actor Sheet Item Summary Columns
     "systems/dnd5e/templates/actors/parts/columns/column-feature-controls.hbs",
