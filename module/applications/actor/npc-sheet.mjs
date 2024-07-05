@@ -63,6 +63,13 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       ctx.hasUses = uses && (uses.max > 0);
       ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
       ctx.canToggle = false;
+      // Item grouping
+      ctx.group = item.system.activation?.type || "passive";
+      ctx.ungroup = "feat";
+      if ( item.type === "weapon" ) ctx.ungroup = "weapon";
+      if ( ctx.group === "passive" ) ctx.ungroup = "passive";
+      // Individual item preparation
+      this._prepareItem(item, ctx);
       if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => ({
         level, delta: level - item.system.levels, disabled: (level - item.system.levels) > maxLevelDelta
       }));
@@ -110,6 +117,16 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * A helper method to establish the displayed preparation state for an item.
+   * @param {Item5e} item     Item being prepared for display.
+   * @param {object} context  Context data for display.
+   * @protected
+   */
+  _prepareItem(item, context) {}
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers
   /* -------------------------------------------- */
 
@@ -137,7 +154,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /**
    * Handle mouse click events for NPC sheet actions.
    * @param {MouseEvent} event  The originating click event.
-   * @returns {Promise}         Dialog or roll result.
+   * @returns {Promise|void}
    * @private
    */
   _onSheetAction(event) {
@@ -145,7 +162,10 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
       case "rollDeathSave":
-        return this.actor.rollDeathSave({event: event});
+        return this.actor.rollDeathSave({ event });
+
+      case "rollInitiative":
+        return this.actor.rollInitiativeDialog({ event });
     }
   }
 

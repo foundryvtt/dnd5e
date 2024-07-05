@@ -173,10 +173,11 @@ export default class InventoryElement extends HTMLElement {
   /**
    * Prepare an array of context menu options which are available for inventory items.
    * @param {Item5e} item           The Item for which the context menu is activated.
+   * @param {HTMLElement} [element] The element the context menu was spawned from.
    * @returns {ContextMenuEntry[]}  An array of context menu options offered for the Item.
    * @protected
    */
-  _getContextOptions(item) {
+  _getContextOptions(item, element) {
     // Standard Options
     const options = [
       {
@@ -280,6 +281,15 @@ export default class InventoryElement extends HTMLElement {
         group: "state"
       });
     }
+
+    // Toggle collapsed state.
+    const expanded = this._app._expanded.has(item.id);
+    options.push({
+      name: expanded ? "Collapse" : "Expand",
+      icon: `<i class="fas fa-${expanded ? "compress" : "expand"}"></i>`,
+      callback: () => element.closest("[data-item-id]")?.querySelector("[data-toggle-description]")?.click(),
+      group: "collapsible"
+    });
 
     return options;
   }
@@ -463,7 +473,7 @@ export default class InventoryElement extends HTMLElement {
     const item = this.getItem(element.closest("[data-item-id]")?.dataset.itemId);
     // Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
     if ( !item || (item instanceof Promise) ) return;
-    ui.context.menuItems = this._getContextOptions(item);
+    ui.context.menuItems = this._getContextOptions(item, element);
     Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
   }
 }

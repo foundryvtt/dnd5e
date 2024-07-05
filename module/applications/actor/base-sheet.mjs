@@ -165,6 +165,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a]?.label;
       abl.baseProf = source.system.abilities[a]?.proficient ?? 0;
+      abl.key = a;
     }
 
     // Skills & tools.
@@ -721,7 +722,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /**
    * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options.
    * @param {Event} event   The click event which originated the selection.
-   * @private
+   * @protected
    */
   _onConfigMenu(event) {
     event.preventDefault();

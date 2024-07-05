@@ -89,6 +89,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
 
       // Item grouping
+      ctx.ungroup = "passive";
       const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
       const group = this.actor.items.get(originId);
       switch ( group?.type ) {
@@ -170,7 +171,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         hasActions: false, dataset: {type: "feat"} }
     };
     for ( const feat of feats ) {
-      if ( feat.system.activation?.type ) features.active.items.push(feat);
+      if ( feat.system.activation?.type ) {
+        features.active.items.push(feat);
+        context.itemContext[feat.id].ungroup = "active";
+      }
       else features.passive.items.push(feat);
     }
 

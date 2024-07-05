@@ -291,7 +291,9 @@ export default class NPCData extends CreatureTemplate {
     TraitsFields.prepareResistImmune.call(this);
 
     // Hit Dice
-    this.attributes.hd.value = Math.max(0, this.attributes.hd.max - this.attributes.hd.spent);
+    const { hd } = this.attributes;
+    hd.value = Math.max(0, hd.max - hd.spent);
+    hd.pct = Math.clamp(hd.max ? (hd.value / hd.max) * 100 : 0, 0, 100);
 
     // Hit Points
     const hpOptions = {
