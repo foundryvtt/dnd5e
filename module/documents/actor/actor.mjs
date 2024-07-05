@@ -2,7 +2,7 @@ import Proficiency from "./proficiency.mjs";
 import * as Trait from "./trait.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
-import { simplifyBonus } from "../../utils.mjs";
+import { replaceFormulaData, simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
@@ -499,26 +499,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         else ac.dex = this.system.abilities.dex?.mod ?? 0;
 
         rollData.attributes.ac = ac;
-        try {
-          if ( game.release.generation < 12 ) {
-            const replaced = Roll.replaceFormulaData(formula, rollData);
-            ac.base = Roll.safeEval(replaced);
-          } else {
-            const roll = new Roll(formula, rollData);
-            ac.base = roll.evaluateSync().total;
-          }
-        } catch(err) {
-          this._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnBadACFormula"), link: "armor", type: "error"
-          });
-          if ( game.release.generation < 12 ) {
-            const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-            ac.base = Roll.safeEval(replaced);
-          } else {
-            const roll = new Roll(CONFIG.DND5E.armorClasses.default.formula, rollData);
-            ac.base = roll.evaluateSync().total;
-          }
-        }
+        const replaced = replaceFormulaData(formula, rollData, {
+          actor: this, property: game.i18n.localize("DND5E.ArmorClass")
+        });
+        ac.base = replaced ? game.release.generation < 12
+          ? Roll.safeEval(replaced) : new Roll(replaced).evaluateSync().total
+          : 0;
         break;
     }
 
