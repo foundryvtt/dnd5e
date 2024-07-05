@@ -2456,6 +2456,7 @@ DND5E.transformationPresets = {
     options: {
       keepBio: true,
       keepClass: true,
+      keepFeats: true,
       keepMental: true,
       mergeSaves: true,
       mergeSkills: true,

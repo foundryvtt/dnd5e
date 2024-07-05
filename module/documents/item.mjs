@@ -332,6 +332,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* --------------------------------------------- */
 
   /**
+   * Is the item on recharge cooldown?
+   * @type {boolean}
+   * @see {@link ActionTemplate#isOnCooldown}
+   */
+  get isOnCooldown() {
+    const { recharge } = this.system;
+    return (recharge?.value > 0) && (recharge?.charged === false);
+  }
+
+  /* --------------------------------------------- */
+
+  /**
    * Does this item require concentration?
    * @type {boolean}
    */
