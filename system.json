@@ -32,7 +32,9 @@
       "type": "Actor",
       "private": false,
       "flags": {
-        "types": ["character"]
+        "dnd5e": {
+          "types": ["character"]
+        }
       }
     },
     {
@@ -43,7 +45,9 @@
       "type": "Actor",
       "private": false,
       "flags": {
-        "types": ["npc"]
+        "dnd5e": {
+          "types": ["npc"]
+        }
       }
     },
     {
@@ -54,7 +58,9 @@
       "type": "Item",
       "private": false,
       "flags": {
-        "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
+        "dnd5e": {
+          "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
+        }
       }
     },
     {
@@ -65,7 +71,9 @@
       "type": "Item",
       "private": false,
       "flags": {
-        "types": ["loot"]
+        "dnd5e": {
+          "types": ["loot"]
+        }
       }
     },
     {
@@ -76,7 +84,9 @@
       "type": "Item",
       "private": false,
       "flags": {
-        "types": ["spell"]
+        "dnd5e": {
+          "types": ["spell"]
+        }
       }
     },
     {
@@ -87,7 +97,9 @@
       "type": "Item",
       "private": false,
       "flags": {
-        "types": ["background", "feat"]
+        "dnd5e": {
+          "types": ["background", "feat"]
+        }
       }
     },
     {
@@ -98,7 +110,9 @@
       "type": "Item",
       "private": false,
       "flags": {
-        "types": ["class"]
+        "dnd5e": {
+          "types": ["class"]
+        }
       }
     },
     {
@@ -109,7 +123,9 @@
       "type": "Item",
       "private": false,
       "flags": {
-        "types": ["subclass"]
+        "dnd5e": {
+          "types": ["subclass"]
+        }
       }
     },
     {
@@ -120,7 +136,9 @@
       "type": "Item",
       "private": false,
       "flags": {
-        "types": ["feat", "weapon"]
+        "dnd5e": {
+          "types": ["feat", "weapon"]
+        }
       }
     },
     {
@@ -131,7 +149,9 @@
       "type": "Item",
       "private": false,
       "flags": {
-        "types": ["race", "feat"]
+        "dnd5e": {
+          "types": ["race", "feat"]
+        }
       }
     },
     {
@@ -142,7 +162,9 @@
       "type": "Item",
       "private": false,
       "flags": {
-        "types": ["feat", "weapon"]
+        "dnd5e": {
+          "types": ["feat", "weapon"]
+        }
       }
     },
     {
