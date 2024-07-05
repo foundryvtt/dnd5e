@@ -154,6 +154,25 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    context.filters = this.currentFilters;
+
+    let dataModels = Object.entries(CONFIG[context.filters.documentClass].dataModels);
+    if ( context.filters.types?.size ) dataModels = dataModels.filter(([type]) => context.filters.types.has(type));
+    context.filterDefinitions = dataModels
+      .map(([, d]) => d.compendiumBrowserFilters ?? new Map())
+      .reduce((first, second) => {
+        if ( !first ) return second;
+        return CompendiumBrowser.intersectFilters(first, second);
+      }, null);
+
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     await super._preparePartContext(partId, context, options);
     switch (partId) {
@@ -175,7 +194,6 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
    * @returns {Promise<ApplicationRenderContext>}  Context data for a specific part.
    */
   async _prepareSidebarContext(partId, context, options) {
-    context.filters = this.currentFilters;
     context.isLocked = {};
     context.isLocked.filters = ("additional" in this.options.filters.locked);
     context.isLocked.types = ("types" in this.options.filters.locked) || context.isLocked.filters;
@@ -199,20 +217,13 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     }
 
     else if ( partId === "filters" ) {
-      let dataModels = Object.entries(CONFIG[context.filters.documentClass].dataModels);
-      if ( context.filters.types?.size ) dataModels = dataModels.filter(([type]) => context.filters.types.has(type));
-      context.additional = dataModels
-        .map(([, d]) => d.compendiumBrowserFilters ?? new Map())
-        .reduce((first, second) => {
-          if ( !first ) return second;
-          return CompendiumBrowser.intersectFilters(first, second);
-        }, null);
-      for ( const [key, data] of context.additional?.entries() ?? [] ) {
-        data.value = context.filters.additional?.[key];
-        data.locked = this.options.filters.locked?.additional?.[key];
-      }
-      // Convert into object because Handlebars' {{each}} helper doesn't properly handle iterating over maps
-      context.additional = Object.fromEntries(context.additional?.entries() ?? []);
+      context.additional = Array.from(context.filterDefinitions?.entries() ?? []).reduce((obj, [key, data]) => {
+        obj[key] = foundry.utils.mergeObject(data, {
+          value: context.filters.additional?.[key],
+          locked: this.options.filters.locked?.additional?.[key]
+        }, {inplace: false});
+        return obj;
+      }, {});
     }
 
     return context;
@@ -227,16 +238,13 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
    * @returns {Promise<ApplicationRenderContext>}  Context data for a specific part.
    */
   async _prepareResultsContext(context, options) {
-    const currentFilters = this.currentFilters;
-    const filterDefinitions = CONFIG[currentFilters.documentClass].dataModels[currentFilters.types?.first()]
-      ?.compendiumBrowserFilters ?? new Map();
     // TODO: Determine if new set of results need to be fetched, otherwise use old results and re-sort as necessary
     // Sorting changes alone shouldn't require a re-fetch, but any change to filters will
     this.#results = CompendiumBrowser.fetch(
-      CONFIG[currentFilters.documentClass].documentClass,
+      CONFIG[context.filters.documentClass].documentClass,
       {
-        types: currentFilters.types,
-        filters: CompendiumBrowser.applyFilters(filterDefinitions, currentFilters.additional)
+        types: context.filters.types,
+        filters: CompendiumBrowser.applyFilters(context.filterDefinitions, context.filters.additional)
       }
     );
     return context;
@@ -472,6 +480,9 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
         continue;
       }
       switch ( def.type ) {
+        case "boolean":
+          if ( value ) filters.push({ k: def.config.keyPath, v: value === 1 });
+          break;
         case "range":
           const min = Number(value.min);
           const max = Number(value.max);
@@ -480,9 +491,11 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
           break;
         case "set":
           const [positive, negative] = Object.entries(value ?? {}).reduce(([positive, negative], [k, v]) => {
-            if ( k === "_blank" ) k = "";
-            if ( v === 1 ) positive.push(k);
-            else if ( v === -1 ) negative.push(k);
+            if ( k in def.config.choices ) {
+              if ( k === "_blank" ) k = "";
+              if ( v === 1 ) positive.push(k);
+              else if ( v === -1 ) negative.push(k);
+            }
             return [positive, negative];
           }, [[], []]);
           if ( positive.length ) filters.push(
@@ -538,7 +551,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
       if ( firstConfig.type !== secondConfig?.type ) continue;
       const finalConfig = foundry.utils.deepClone(firstConfig);
 
-      switch (firstConfig.type) {
+      switch ( firstConfig.type ) {
         case "range":
           if ( ("min" in firstConfig.config) || ("min" in secondConfig.config) ) {
             if ( !("min" in firstConfig.config) || !("min" in secondConfig.config) ) continue;
@@ -553,9 +566,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
           break;
         case "set":
           Object.keys(finalConfig.config.choices).forEach(k => {
-            if ( !(k in firstConfig.config.choices) || !(k in secondConfig.config.choices) ) {
-              delete finalConfig.config.choices[k];
-            }
+            if ( !(k in secondConfig.config.choices) ) delete finalConfig.config.choices[k];
           });
           if ( foundry.utils.isEmpty(finalConfig.config.choices) ) continue;
           break;
