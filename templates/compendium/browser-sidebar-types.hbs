@@ -15,7 +15,7 @@
             <input type="checkbox" id="{{ @root.partId }}-{{ @key }}" data-action="setType"
                    {{ checked chosen }} {{ disabled @root.isLocked.types }}>
             <label for="{{ @root.partId }}-{{ @key }}">{{ localize label }}</label>
-            <label data-action="toggleCollapse"><i class="fa-solid fa-caret-down"></i></label>
+            <div data-action="toggleCollapse"><i class="fa-solid fa-caret-down"></i></div>
         </div>
         <div class="collapsible-content">
             <div class="wrapper">

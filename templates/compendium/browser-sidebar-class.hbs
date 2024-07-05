@@ -4,13 +4,13 @@
         {{#if (and (eq filters.documentClass 'Actor') isLocked.documentClass)}}
         <i class="fa-solid fa-lock" aria-label="{{ localize 'DND5E.CompendiumBrowser.Locked' }}"></i>
         {{/if}}
-        {{ localize "Actor" }}
+        {{ localize "DOCUMENT.Actor" }}
     </button>
     <button type="button" class="toggle-button" data-action="setFilter" name="documentClass" value="Item"
             aria-pressed="{{ eq filters.documentClass 'Item' }}" {{ disabled isLocked.documentClass }}>
         {{#if (and (eq filters.documentClass 'Item') isLocked.documentClass)}}
         <i class="fa-solid fa-lock" aria-label="{{ localize 'DND5E.CompendiumBrowser.Locked' }}"></i>
         {{/if}}
-        {{ localize "Item" }}
+        {{ localize "DOCUMENT.Item" }}
     </button>
 </div>

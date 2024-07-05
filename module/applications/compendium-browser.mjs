@@ -128,7 +128,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     await super._preparePartContext(partId, context, options);
-    switch (partId) {
+    switch ( partId ) {
       case "documentClass":
       case "types": return this._prepareSidebarContext(partId, context, options);
       case "results": return this._prepareResultsContext(context, options);
@@ -144,6 +144,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
    * @param {ApplicationRenderContext} context     Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options      Options which configure application rendering behavior.
    * @returns {Promise<ApplicationRenderContext>}  Context data for a specific part.
+   * @protected
    */
   async _prepareSidebarContext(partId, context, options) {
     context.filters = this.currentFilters;
@@ -178,6 +179,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
    * @param {ApplicationRenderContext} context     Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options      Options which configure application rendering behavior.
    * @returns {Promise<ApplicationRenderContext>}  Context data for a specific part.
+   * @protected
    */
   async _prepareResultsContext(context, options) {
     const currentFilters = this.currentFilters;
@@ -196,6 +198,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
 
   /**
    * Render results once loaded to avoid holding up initial app display.
+   * @protected
    */
   async _renderResults() {
     let rendered = [];
@@ -209,11 +212,11 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
             const element = template.content.firstElementChild;
             element.dataset.tooltip = `
               <section class="loading" data-uuid="${entry.uuid}">
-                <i class="fa-solid fa-splinner fa-spin-pulse"></i>
-              </seciton>
+                <i class="fa-solid fa-spinner fa-spin-pulse" inert></i>
+              </section>
             `;
             element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
-            element.dataset.tooltipDirection ??= "LEFT";
+            element.dataset.tooltipDirection ??= "RIGHT";
             return element;
           })
       );
@@ -365,7 +368,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
       // TODO: Filter packs by visibility & system setting
 
         // And if types are set and specified in compendium flag, only include those that include the correct types
-        && (!types.size || !p.metadata.flags.types || new Set(p.metadata.flags.types).intersects(types)))
+        && (!types.size || !p.metadata.flags.dnd5e?.types || new Set(p.metadata.flags.dnd5e.types).intersects(types)))
 
       // Generate an index based on the needed fields
       .map(async p => await Promise.all((await p.getIndex({ fields: Array.from(indexFields) }))
@@ -405,7 +408,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     button.type = "button";
     button.classList.add("open-compendium-browser");
     button.innerHTML = `
-      <i class="fa-solid fa-book-open-reader"></i>
+      <i class="fa-solid fa-book-open-reader" inert></i>
       ${game.i18n.localize("DND5E.CompendiumBrowser.Action.Open")}
     `;
     button.addEventListener("click", event => (new CompendiumBrowser()).render({ force: true }));
