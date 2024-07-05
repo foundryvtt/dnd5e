@@ -2,9 +2,9 @@
  * A filter description.
  *
  * @typedef {object} FilterDescription
- * @property {string} k - Key on the data object to check.
- * @property {*} v - Value to compare.
- * @property {string} [o=_] - Operator or comparison function to use.
+ * @property {string} k        Key on the data object to check.
+ * @property {any} v           Value to compare.
+ * @property {string} [o="_"]  Operator or comparison function to use.
  */
 
 /**
@@ -160,9 +160,8 @@ export function NOT(data, filter) {
  * @enum {Function}
  */
 export const COMPARISON_FUNCTIONS = {
-  _: exact, exact, iexact, contains, icontains,
-  startswith, istartswith, endswith, iendswith,
-  has, hasAny, hasAll, in: in_, gt, gte, lt, lte
+  _: exact, exact, contains, startswith, endswith,
+  has, hasany, hasall, in: in_, gt, gte, lt, lte
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -180,18 +179,6 @@ export function exact(data, value) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Case-insensitive exact match.
- * @param {*} data
- * @param {*} value
- * @returns {boolean}
- */
-export function iexact(data, value) {
-  return exact(String(data).toLowerCase(), String(value).toLowerCase());
-}
-
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
-
-/**
  * Check that data contains value.
  * @param {*} data
  * @param {*} value
@@ -199,18 +186,6 @@ export function iexact(data, value) {
  */
 export function contains(data, value) {
   return String(data).includes(String(value));
-}
-
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
-
-/**
- * Case-insensitive check that data contains value.
- * @param {*} data
- * @param {*} value
- * @returns {boolean}
- */
-export function icontains(data, value) {
-  return contains(String(data).toLowerCase(), String(value).toLowerCase());
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -228,18 +203,6 @@ export function startswith(data, value) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Case-insensitive check that data starts with value.
- * @param {*} data
- * @param {*} value
- * @returns {boolean}
- */
-export function istartswith(data, value) {
-  return startswith(String(data).toLowerCase(), String(value).toLowerCase());
-}
-
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
-
-/**
  * Check that data ends with value.
  * @param {*} data
  * @param {*} value
@@ -247,18 +210,6 @@ export function istartswith(data, value) {
  */
 export function endswith(data, value) {
   return String(data).endsWith(String(value));
-}
-
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
-
-/**
- * Case-insensitive check that data ends with value.
- * @param {*} data
- * @param {*} value
- * @returns {boolean}
- */
-export function iendswith(data, value) {
-  return endswith(String(data).toLowerCase(), String(value).toLowerCase());
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -281,7 +232,7 @@ export function has(data, value) {
  * @param {*} value
  * @returns {boolean}
  */
-export function hasAny(data, value) {
+export function hasany(data, value) {
   return Array.from(value).some(v => has(data, v));
 }
 
@@ -293,7 +244,7 @@ export function hasAny(data, value) {
  * @param {*} value
  * @returns {boolean}
  */
-export function hasAll(data, value) {
+export function hasall(data, value) {
   return Array.from(value).every(v => has(data, v));
 }
 
@@ -322,7 +273,7 @@ export function in_(data, value) {
  * @returns {boolean}
  */
 export function gt(data, value) {
-  return Number(data) > Number(value);
+  return data > value;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -334,7 +285,7 @@ export function gt(data, value) {
  * @returns {boolean}
  */
 export function gte(data, value) {
-  return Number(data) >= Number(value);
+  return data >= value;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -346,7 +297,7 @@ export function gte(data, value) {
  * @returns {boolean}
  */
 export function lt(data, value) {
-  return Number(data) < Number(value);
+  return data < value;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -358,5 +309,5 @@ export function lt(data, value) {
  * @returns {boolean}
  */
 export function lte(data, value) {
-  return Number(data) <= Number(value);
+  return data <= value;
 }
