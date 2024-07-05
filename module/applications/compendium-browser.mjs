@@ -258,10 +258,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
   async _renderResults() {
     let rendered = [];
     for ( const entry of await this.#results ) {
-      const context = {
-        img: entry.img ?? game.dnd5e.moduleArt.map.get(entry.uuid.replace("Actor.", ""))?.actor,
-        entry
-      };
+      const context = { entry };
       rendered.push(
         renderTemplate("systems/dnd5e/templates/compendium/browser-entry.hbs", context)
           .then(html => {
@@ -437,7 +434,10 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
         && (!types.size || !p.metadata.flags.types || new Set(p.metadata.flags.types).intersects(types)))
 
       // Generate an index based on the needed fields
-      .map(async p => await Promise.all((await p.getIndex({ fields: Array.from(indexFields) }))
+      .map(async p => await Promise.all((await p.getIndex({ fields: Array.from(indexFields) })
+
+        // Apply module art to the new index
+        .then(index => game.dnd5e.moduleArt.apply(index)))
 
         // Remove any documents that don't match the specified types or the provided filters
         .filter(i => (!types.size || types.has(i.type)) && (!filters.length || Filter.performCheck(i, filters)))
