@@ -135,8 +135,19 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   _prepareItems(context) {
     super._prepareItems(context);
     const classes = [];
+    const inventory = {};
+    const inventoryTypes = Object.entries(CONFIG.Item.dataModels)
+      .filter(([, model]) => model.metadata?.inventoryItem)
+      .sort(([, lhs], [, rhs]) => (lhs.metadata.inventoryOrder - rhs.metadata.inventoryOrder));
+    for ( const [type] of inventoryTypes ) {
+      inventory[type] = { label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], dataset: { type } };
+      if ( type === "container" ) context.containers = inventory.container.items;
+    }
     const features = context.features.filter(section => {
-      if ( section.dataset.type === "loot" ) return false;
+      if ( section.dataset.type === "loot" ) {
+        section.items.forEach(i => inventory[i.type]?.items.push(i));
+        return false;
+      }
       if ( (section.dataset.type === "feat") ) {
         if ( !("activation.type" in section.dataset) ) section.dataset.type = "passive";
         for ( let i = section.items.length; i--; ) {
@@ -148,6 +159,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
           }
         }
       }
+      if ( section.dataset.type === "weapon" ) inventory.weapon.items = section.items;
       return true;
     });
     // TODO: These labels should be pluralised.
@@ -172,6 +184,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
         { classes: "item-controls", partial: "dnd5e.column-feature-controls" }
       ];
     });
+    context.inventory = Object.values(inventory);
+    context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
     context.classes = classes;
     context.hasClasses = classes.length;
   }

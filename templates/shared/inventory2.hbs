@@ -1,6 +1,7 @@
 <{{ elements.inventory }} class="inventory-element" v2>
 
     {{!-- Encumbrance & Containers --}}
+    {{#unless isNPC}}
     <div class="top">
 
         {{!-- Encumbrance --}}
@@ -58,6 +59,7 @@
         </ul>
 
     </div>
+    {{/unless}}
 
     {{!-- Currency --}}
     <section class="currency">
@@ -116,10 +118,14 @@
             {{!-- Section Header --}}
             <div class="items-header header">
                 <h3 class="item-name">{{ localize label }}</h3>
+                {{#if (eq dataset.type "container")}}
+                <div class="item-header item-capacity"></div>
+                {{else}}
                 <div class="item-header item-price">{{ localize "DND5E.Price" }}</div>
                 <div class="item-header item-weight">{{ localize "DND5E.Weight" }}</div>
                 <div class="item-header item-quantity">{{ localize "DND5E.Quantity" }}</div>
                 <div class="item-header item-uses">{{ localize "DND5E.Charges" }}</div>
+                {{/if}}
                 <div class="item-header item-controls"></div>
             </div>
 
@@ -161,7 +167,24 @@
                             </div>
                         </div>
 
+                        {{#if (eq item.type "container")}}
 
+                        <div class="item-detail item-capacity">
+                            {{#with ctx.capacity}}
+                            <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
+                                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}"
+                                 style="--bar-percentage: {{ pct }}%">
+                                <div class="label">
+                                    <i class="fas fa-weight-hanging"></i>
+                                    <span class="value">{{ value }}</span>
+                                    <span class="separator">&sol;</span>
+                                    <span class="max">{{{ maxLabel }}}</span>
+                                </div>
+                            </div>
+                            {{/with}}
+                        </div>
+
+                        {{else}}
 
                         {{!-- Item Price --}}
                             <div class="item-detail item-price {{#unless item.system.price.value}}empty{{/unless}}">
@@ -205,6 +228,7 @@
                                 {{/if}}
                             </div>
 
+                        {{/if}}
 
                         {{!-- Item Status --}}
                         <div class="item-detail item-controls">
@@ -280,4 +304,35 @@
         {{/each}}
 
     </section>
+
+    {{#if isNPC}}
+    <div class="bottom">
+
+        {{!-- Encumbrance --}}
+        <div class="encumbrance">
+            {{#with encumbrance}}
+            <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
+                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
+                <div class="label">
+                    <i class="fas fa-weight-hanging"></i>
+                    <span class="value">{{ value }}</span>
+                    <span class="separator">&sol;</span>
+                    <span class="max">{{ max }}</span>
+                </div>
+                <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-low  arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
+                <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
+            </div>
+            {{/with}}
+        </div>
+
+        {{!-- Child Creation --}}
+        <button type="button" class="create-child gold-button"
+                aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
+            <i class="fas fa-plus"></i>
+        </button>
+
+    </div>
+    {{/if}}
 </{{ elements.inventory }}>
