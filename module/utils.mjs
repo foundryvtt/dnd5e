@@ -487,6 +487,7 @@ export function registerHandlebarsHelpers() {
     getProperty: foundry.utils.getProperty,
     "dnd5e-concealSection": concealSection,
     "dnd5e-dataset": dataset,
+    "dnd5e-formatCR": formatCR,
     "dnd5e-formatModifier": formatModifier,
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-itemContext": itemContext,

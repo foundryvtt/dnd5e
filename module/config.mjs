@@ -26,6 +26,7 @@ _______________________________`;
  * @property {Object<string, number|string>}  [defaults]  Default values for this ability based on actor type.
  *                                                        If a string is used, the system will attempt to fetch.
  *                                                        the value of the specified ability.
+ * @property {string} [icon]                              An SVG icon that represents the ability.
  */
 
 /**
