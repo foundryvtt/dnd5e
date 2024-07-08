@@ -250,11 +250,12 @@
                     </div>
 
                     {{!-- CR --}}
-                    <div class="right cr-badge badge" aria-label="{{ localize "DND5E.CRLabel" cr=system.details.cr }}">
+                    <div class="right cr-badge badge" aria-label="{{ localize "DND5E.CRLabel" cr=system.details.cr }}"
+                         {{#unless editable}}data-tooltip="DND5E.ChallengeRating"{{/unless}}>
                         {{#if editable}}
                         <input type="text" class="uninput" name="system.details.cr" value="{{ source.details.cr }}">
                         {{else}}
-                        {{{ labels.cr }}}
+                        {{{ dnd5e-formatCR system.details.cr }}}
                         {{/if}}
                     </div>
 

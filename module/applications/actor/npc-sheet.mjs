@@ -63,6 +63,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       ctx.hasUses = uses && (uses.max > 0);
       ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
       ctx.canToggle = false;
+      ctx.totalWeight = item.system.totalWeight?.toNearest(0.1);
       // Item grouping
       ctx.group = item.system.activation?.type || "passive";
       ctx.ungroup = "feat";

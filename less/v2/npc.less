@@ -174,6 +174,7 @@
       font-family: var(--dnd5e-font-roboto-condensed);
 
       li + li::before { content: "•"; }
+      li:has(> span:empty) { display: none; }
     }
 
     /* CR */
@@ -464,7 +465,7 @@
         color: var(--dnd5e-color-gold);
         transition: left 450ms ease;
 
-        &:hover, &:focus {
+        &:hover, &:focus-visible {
           box-shadow: none;
           background: var(--dnd5e-background-5);
         }
@@ -581,7 +582,10 @@
           place-content: center;
         }
 
-        .spellcasting-ability { color: var(--dnd5e-color-gold); }
+        .spellcasting-ability {
+          color: var(--dnd5e-color-gold);
+          text-shadow: 0 0 6px var(--dnd5e-shadow-45);
+        }
       }
 
       /* Effects */

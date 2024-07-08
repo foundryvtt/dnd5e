@@ -20,12 +20,12 @@ export default class ActorSkillsConfig extends DialogMixin(DocumentSheet) {
 
   /** @override */
   getData(options={}) {
-    const context = [];
+    const context = { skills: [] };
     const source = this.document._source.system.skills;
     const { skills } = this.document.system;
 
     for ( const [key, skill] of Object.entries(skills) ) {
-      context.push({
+      context.skills.push({
         key,
         label: CONFIG.DND5E.skills[key]?.label,
         value: source[key]?.value,
@@ -34,12 +34,14 @@ export default class ActorSkillsConfig extends DialogMixin(DocumentSheet) {
       });
     }
 
-    context.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+    context.skills.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+    context.rows = Math.ceil(context.skills.length / 2);
     return context;
   }
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".config-button").on("click", this._onConfigureSkill.bind(this));

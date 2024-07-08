@@ -786,8 +786,11 @@
   .card { padding: 6px 10px; }
 
   .skills-list {
+    --skill-rows: 9;
     gap: 0;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1px), 0 calc(100% - 1px));
+    grid-auto-flow: column;
+    grid-template-rows: repeat(var(--skill-rows), auto);
   }
 
   .skill-row {

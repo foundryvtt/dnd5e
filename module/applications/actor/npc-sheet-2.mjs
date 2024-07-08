@@ -41,6 +41,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   }
 
   /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   async _renderOuter() {
@@ -76,15 +78,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    const { attributes, details, resources } = this.actor.system;
+    const { attributes, resources } = this.actor.system;
     context.encumbrance = attributes.encumbrance;
-
-    // CR
-    context.labels.cr = {
-      "0.125": "&frac18;",
-      "0.25": "&frac14;",
-      "0.5": "&frac12;"
-    }[details.cr] ?? details.cr;
 
     // Ability Scores
     Object.entries(context.abilities).forEach(([k, ability]) => {
@@ -158,19 +153,6 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     }
 
     return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find(".short-rest").on("click", this._onShortRest.bind(this));
-    html.find(".long-rest").on("click", this._onLongRest.bind(this));
-
-    if ( this.isEditable ) {
-      html.find(".editor-edit").on("click", this._onEditBiography.bind(this));
-    }
   }
 
   /* -------------------------------------------- */
@@ -267,6 +249,21 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
         tooltip: game.i18n.format("DND5E.AbilityConfigure", { ability: game.i18n.localize("DND5E.Concentration") })
       }
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.find(".short-rest").on("click", this._onShortRest.bind(this));
+    html.find(".long-rest").on("click", this._onLongRest.bind(this));
+
+    if ( this.isEditable ) {
+      html.find(".editor-edit").on("click", this._onEditBiography.bind(this));
+    }
   }
 
   /* -------------------------------------------- */
