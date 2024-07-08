@@ -2,6 +2,7 @@ export {default as ActorSheet5e} from "./base-sheet.mjs";
 export {default as ActorSheet5eCharacter} from "./character-sheet.mjs";
 export {default as ActorSheet5eCharacter2} from "./character-sheet-2.mjs";
 export {default as ActorSheet5eNPC} from "./npc-sheet.mjs";
+export {default as ActorSheet5eNPC2} from "./npc-sheet-2.mjs";
 export {default as ActorSheet5eVehicle} from "./vehicle-sheet.mjs";
 export {default as GroupActorSheet} from "./group-sheet.mjs";
 
