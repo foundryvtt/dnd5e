@@ -96,27 +96,30 @@ export function parseInputDelta(input, target) {
  * @param {string} formula           The original formula within which to replace.
  * @param {object} data              The data object which provides replacements.
  * @param {object} [options={}]
- * @param {Item5e} [options.item]      Item for which the value is being prepared.
- * @param {string} [options.property]  Name of the property to which this formula belongs.
+ * @param {Actor5e} [options.actor]            Actor for which the value is being prepared.
+ * @param {Item5e} [options.item]              Item for which the value is being prepared.
+ * @param {string|null} [options.missing="0"]  Value to use when replacing missing references, or `null` to not replace.
+ * @param {string} [options.property]          Name of the property to which this formula belongs.
  * @returns {string}                 Formula with replaced data.
  */
-export function replaceFormulaData(formula, data, { item, property }={}) {
+export function replaceFormulaData(formula, data, { actor, item, missing="0", property }={}) {
   const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
   const missingReferences = new Set();
   formula = String(formula).replace(dataRgx, (match, term) => {
     let value = foundry.utils.getProperty(data, term);
     if ( value == null ) {
       missingReferences.add(match);
-      return "0";
+      return missing ?? match[0];
     }
     return String(value).trim();
   });
-  if ( (missingReferences.size > 0) && item.parent && property ) {
+  actor ??= item?.parent;
+  if ( (missingReferences.size > 0) && actor && property ) {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
     const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
-      property, name: item.name, references: listFormatter.format(missingReferences)
+      property, name: item?.name ?? actor.name, references: listFormatter.format(missingReferences)
     });
-    item.parent._preparationWarnings.push({ message, link: item.uuid, type: "warning" });
+    actor._preparationWarnings.push({ message, link: item?.uuid ?? actor.uuid, type: "warning" });
   }
   return formula;
 }
@@ -135,7 +138,11 @@ export function simplifyBonus(bonus, data={}) {
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
-    return roll.isDeterministic ? Roll.safeEval(roll.formula) : 0;
+    return roll.isDeterministic
+      ? game.release.generation < 12
+        ? Roll.safeEval(roll.formula)
+        : roll.evaluateSync().total
+      : 0;
   } catch(error) {
     console.error(error);
     return 0;
