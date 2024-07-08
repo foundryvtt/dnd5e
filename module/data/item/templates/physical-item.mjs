@@ -55,6 +55,36 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   static MAX_DEPTH = 5;
 
   /* -------------------------------------------- */
+
+  /**
+   * Create filter configurations shared by all physical items.
+   * @returns {[string, CompendiumBrowserFilterDefinitionEntry][]}
+   */
+  static get compendiumBrowserPhysicalItemFilters() {
+    return [
+      ["price", {
+        label: "DND5E.Price",
+        type: "range",
+        config: {
+          keyPath: "system.price.value"
+        }
+      }],
+      ["rarity", {
+        label: "DND5E.Rarity",
+        type: "set",
+        config: {
+          blank: game.i18n.localize("DND5E.ItemRarityMundane").capitalize(),
+          choices: Object.entries(CONFIG.DND5E.itemRarity).reduce((obj, [key, label]) => {
+            obj[key] = { label: label.capitalize() };
+            return obj;
+          }, {}),
+          keyPath: "system.rarity"
+        }
+      }]
+    ];
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
