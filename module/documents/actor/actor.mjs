@@ -499,12 +499,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         else ac.dex = this.system.abilities.dex?.mod ?? 0;
 
         rollData.attributes.ac = ac;
-        const replaced = replaceFormulaData(formula, rollData, {
-          actor: this, property: game.i18n.localize("DND5E.ArmorClass")
-        });
-        ac.base = replaced ? game.release.generation < 12
-          ? Roll.safeEval(replaced) : new Roll(replaced).evaluateSync().total
-          : 0;
+        try {
+          const replaced = replaceFormulaData(formula, rollData, {
+            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
+          });
+          ac.base = replaced ? game.release.generation < 12
+            ? Roll.safeEval(replaced) : new Roll(replaced).evaluateSync().total
+            : 0;
+        } catch(err) {
+          this._preparationWarnings.push({
+            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
+          });
+          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
+          ac.base = game.release.generation < 12 ? Roll.safeEval(replaced) : new Roll(replaced).evaluateSync().total;
+        }
         break;
     }
 
