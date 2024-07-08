@@ -35,6 +35,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   }
 
   /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   async _renderOuter() {
@@ -183,10 +185,6 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     super.activateListeners(html);
     html.find(".short-rest").on("click", this._onShortRest.bind(this));
     html.find(".long-rest").on("click", this._onLongRest.bind(this));
-
-    if ( this.isEditable ) {
-      html.find(".editor-edit").on("click", this._onEditBiography.bind(this));
-    }
   }
 
   /* -------------------------------------------- */
