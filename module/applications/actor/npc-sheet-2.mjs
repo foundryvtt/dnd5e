@@ -126,6 +126,9 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     });
     context.hasLegendaries = resources.legact.max || resources.legres.max || resources.lair.initiative;
 
+    // Spellcasting
+    this._prepareSpellcasting(context);
+
     return context;
   }
 
@@ -188,6 +191,41 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
     context.classes = classes;
     context.hasClasses = classes.length;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare spellcasting data for display.
+   * @param {object} context  The display context.
+   * @protected
+   */
+  _prepareSpellcasting(context) {
+    const { abilities, attributes, bonuses, details } = this.actor.system;
+    context.spellcasting = [];
+    const msak = simplifyBonus(bonuses.msak.attack, context.rollData);
+    const rsak = simplifyBonus(bonuses.rsak.attack, context.rollData);
+    // TODO: Consider if we want to handle multiclassing for NPC spellcasters.
+    const spellcaster = Object.values(this.actor.classes).find(cls => cls.system.spellcasting.progression !== "none");
+    const ability = spellcaster?.spellcasting.ability ?? attributes.spellcasting;
+    const spellAbility = abilities[ability];
+    const mod = spellAbility?.mod ?? 0;
+    const attackBonus = msak === rsak ? msak : 0;
+    context.spellcasting.push({
+      label: game.i18n.format("DND5E.SpellcastingClass", { class: spellcaster?.name ?? game.i18n.format("DND5E.NPC") }),
+      level: spellcaster?.system.levels ?? details.spellLevel,
+      ability: {
+        ability, mod,
+        label: CONFIG.DND5E.abilities[ability]?.abbreviation
+      },
+      attack: mod + attributes.prof + attackBonus,
+      save: spellAbility?.dc ?? 0,
+      noSpellcaster: !spellcaster,
+      concentration: {
+        mod: attributes.concentration.save,
+        tooltip: game.i18n.format("DND5E.AbilityConfigure", { ability: game.i18n.localize("DND5E.Concentration") })
+      }
+    });
   }
 
   /* -------------------------------------------- */
