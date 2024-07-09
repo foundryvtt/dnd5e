@@ -20,7 +20,7 @@ export default Base => class extends Base {
   prepareData() {
     super.prepareData();
     if ( ("dnd5e" in this.flags) && this._systemFlagsDataModel ) {
-      this.flags.dnd5e = new this._systemFlagsDataModel(this._source.flags.dnd5e, { parent: this });
+      this.flags.dnd5e = new this._systemFlagsDataModel(this.flags.dnd5e, { parent: this });
     }
   }
 
