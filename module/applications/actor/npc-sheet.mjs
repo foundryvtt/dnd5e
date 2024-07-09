@@ -162,6 +162,12 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     event.preventDefault();
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
+      case "editDescription":
+        const { target } = button.closest("[data-target]").dataset;
+        const editor = this.editors[target];
+        editor.initial = foundry.utils.getProperty(this.actor, target);
+        return this.activateEditor(name, {}, editor.initial);
+
       case "rollDeathSave":
         return this.actor.rollDeathSave({ event });
 

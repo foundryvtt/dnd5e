@@ -601,6 +601,32 @@
           .condition { padding: 9px 10px; }
         }
       }
+
+      /* Biography */
+      .tab.biography {
+        .top {
+          display: flex;
+          align-items: stretch;
+          gap: 8px;
+        }
+
+        :is(.middle, .bottom) > h3 {
+          margin-right: 24px;
+          position: relative;
+
+          .editor-edit {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            inset: auto auto -3px 100%;
+            font-size: var(--font-size-18);
+            color: var(--color-text-dark-primary);
+            padding: 0;
+          }
+        }
+
+        > .editor { flex: 1; }
+      }
     }
   }
 
@@ -690,4 +716,10 @@
     .sheet-body .main-content .sidebar-collapser { left: 0; }
     .sidebar { margin-left: calc(var(--sidebar-size) * -1); }
   }
+
+  /* ---------------------------------- */
+  /*  Interactable                      */
+  /* ---------------------------------- */
+
+  form:is(.interactable, .editable) .biography .editor-edit { display: block; }
 }
