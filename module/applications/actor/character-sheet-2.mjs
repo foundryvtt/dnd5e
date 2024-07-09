@@ -285,13 +285,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     html.find(".death-tab").on("click", () => this._toggleDeathTray());
     html.find("[data-action]").on("click", this._onAction.bind(this));
 
-    // Prevent default middle-click scrolling when locking a tooltip.
-    this.form.addEventListener("pointerdown", event => {
-      if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
-        event.preventDefault();
-      }
-    });
-
     // Apply special context menus for items outside inventory elements
     const featuresElement = html[0].querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
     if ( featuresElement ) new ContextMenu5e(html, ".pills-lg [data-item-id]", [], {
@@ -301,11 +294,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
       html.find(".tab.details .item-action").on("click", this._onItemAction.bind(this));
-    }
-
-    // Play mode only.
-    else {
-      html.find(".portrait").on("click", this._onShowPortrait.bind(this));
     }
   }
 
@@ -386,19 +374,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     this._deathTrayOpen = tray.classList.contains("open");
     tab.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`;
     tab.setAttribute("aria-label", game.i18n.localize(tab.dataset.tooltip));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle showing the character's portrait or token art.
-   * @protected
-   */
-  _onShowPortrait() {
-    const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
-    const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
-    const img = showTokenPortrait ? token.texture.src : this.actor.img;
-    new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
   }
 
   /* -------------------------------------------- */

@@ -535,6 +535,8 @@
           gap: 8px;
 
           .encumbrance {
+            border: var(--dnd5e-border-gold);
+            border-radius: 3px;
             box-shadow: 0 0 6px var(--dnd5e-shadow-45);
             flex: 1;
           }
@@ -585,6 +587,18 @@
         .spellcasting-ability {
           color: var(--dnd5e-color-gold);
           text-shadow: 0 0 6px var(--dnd5e-shadow-45);
+        }
+      }
+
+      /* Effects */
+      .effects-element {
+        flex: 1;
+
+        .effects-list { flex-grow: 0; }
+
+        .conditions-list {
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          .condition { padding: 9px 10px; }
         }
       }
     }
