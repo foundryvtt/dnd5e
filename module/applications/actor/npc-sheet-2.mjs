@@ -27,6 +27,12 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" }
   ];
 
+  /**
+   * The description currently being edited.
+   * @type {string|null}
+   */
+  editingDescriptionTarget = null;
+
   /* -------------------------------------------- */
 
   get template() {
@@ -128,6 +134,23 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
     // Spellcasting
     this._prepareSpellcasting(context);
+
+    // Biographies
+    const enrichmentOptions = {
+      secrets: this.actor.isOwner, async: true, relativeTo: this.actor, rollData: context.rollData
+    };
+
+    context.enriched = {
+      public: await TextEditor.enrichHTML(this.actor.system.details.biography.public, enrichmentOptions),
+      value: context.biographyHTML
+    };
+
+    if ( this.editingDescriptionTarget ) {
+      context.editingDescriptionTarget = this.editingDescriptionTarget;
+      context.enriched.editing = this.editingDescriptionTarget.endsWith("public")
+        ? context.enriched.public
+        : context.enriched.value;
+    }
 
     return context;
   }
@@ -237,6 +260,10 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     super.activateListeners(html);
     html.find(".short-rest").on("click", this._onShortRest.bind(this));
     html.find(".long-rest").on("click", this._onLongRest.bind(this));
+
+    if ( this.isEditable ) {
+      html.find(".editor-edit").on("click", this._onEditBiography.bind(this));
+    }
   }
 
   /* -------------------------------------------- */
@@ -265,5 +292,36 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     event.preventDefault();
     await this._onSubmit(event);
     return this.actor.longRest();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async activateEditor(name, options={}, initialContent="") {
+    options.relativeLinks = true;
+    options.plugins = {
+      menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
+        compact: true,
+        destroyOnSave: true,
+        onSave: () => {
+          this.saveEditor(name, { remove: true });
+          this.editingDescriptionTarget = null;
+        }
+      })
+    };
+    return super.activateEditor(name, options, initialContent);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing a biography section.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onEditBiography(event) {
+    const { target } = event.currentTarget.closest("[data-target]").dataset;
+    this.editingDescriptionTarget = target;
+    this.render();
   }
 }
