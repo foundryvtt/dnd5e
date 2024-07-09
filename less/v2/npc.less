@@ -524,6 +524,7 @@
         width: 100%;
 
         .items-list { gap: 8px; }
+        .spells-list { gap: 12px; }
 
         .bottom {
           width: 100%;
@@ -547,6 +548,43 @@
             position: relative;
             inset: unset;
           }
+        }
+      }
+
+      /* Spells */
+      .spellcasting.card {
+        input {
+          background: var(--dnd5e-background-5);
+          border: 1px solid transparent;
+          transition: all 250ms ease;
+          text-align: center;
+          font-weight: bold;
+          font-family: var(--dnd5e-font-roboto-slab);
+          font-size: var(--font-size-16);
+          height: 22px;
+
+          &:hover, &:focus {
+            border: 1px solid var(--dnd5e-color-gold);
+            box-shadow: 0 0 6px var(--dnd5e-color-gold);
+          }
+        }
+
+        select {
+          border: none;
+          background: none;
+
+          option { color: var(--color-text-dark-primary); }
+        }
+
+        .config-button {
+          flex: 1;
+          display: grid;
+          place-content: center;
+        }
+
+        .spellcasting-ability {
+          color: var(--dnd5e-color-gold);
+          text-shadow: 0 0 6px var(--dnd5e-shadow-45);
         }
       }
     }
