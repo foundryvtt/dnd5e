@@ -430,10 +430,23 @@ export default function ActorSheetV2Mixin(Base) {
       html.find("[data-toggle-description]").on("click", this._onToggleDescription.bind(this));
       this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
       this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
+
+      // Prevent default middle-click scrolling when locking a tooltip.
+      this.form.addEventListener("pointerdown", event => {
+        if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
+          event.preventDefault();
+        }
+      });
+
       if ( this.isEditable ) {
         html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
         html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
         html.find(".create-child").on("click", this._onCreateChild.bind(this));
+      }
+
+      // Play mode only.
+      if ( this._mode === this.constructor.MODES.PLAY ) {
+        html.find(".portrait").on("click", this._onShowPortrait.bind(this));
       }
     }
 
@@ -556,6 +569,19 @@ export default function ActorSheetV2Mixin(Base) {
       const { width, height } = this.position;
       const key = `${this.actor.type}${this.actor.limited ? ":limited": ""}`;
       game.user.setFlag("dnd5e", `sheetPrefs.${key}`, { width, height });
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle showing the character's portrait or token art.
+     * @protected
+     */
+    _onShowPortrait() {
+      const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
+      const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
+      const img = showTokenPortrait ? token.texture.src : this.actor.img;
+      new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
     }
 
     /* -------------------------------------------- */
