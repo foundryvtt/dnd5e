@@ -272,7 +272,7 @@
 
 `@skills.rel` - Religion
 
-`@skills.stl` - Slight of Hand
+`@skills.slt` - Sleight of Hand
 
 `@skills.ste` - Stealth
 
