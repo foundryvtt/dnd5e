@@ -18,7 +18,7 @@ export function performCheck(data, filter=[]) {
   return AND(data, filter);
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Determine the unique keys referenced by a set of filters.
@@ -39,7 +39,7 @@ export function uniqueKeys(filter=[]) {
   return keys;
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Internal check implementation.
@@ -60,9 +60,9 @@ function _check(data, keyPath, value, operation="_") {
   return comparison(foundry.utils.getProperty(data, keyPath), value);
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
-/*                   Operator Functions                  */
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
+/*  Operator Functions                          */
+/* -------------------------------------------- */
 
 /**
  * Operator functions.
@@ -72,7 +72,7 @@ export const OPERATOR_FUNCTIONS = {
   AND, NAND, OR, NOR, XOR, NOT
 };
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Perform an AND check against all filters.
@@ -84,7 +84,7 @@ export function AND(data, filter) {
   return filter.every(({k, v, o}) => _check(data, k, v, o));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Perform an NAND check against all filters.
@@ -96,7 +96,7 @@ export function NAND(data, filter) {
   return !filter.every(({k, v, o}) => _check(data, k, v, o));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Perform an OR check against all filters.
@@ -108,7 +108,7 @@ export function OR(data, filter) {
   return filter.some(({k, v, o}) => _check(data, k, v, o));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Perform an NOR check against all filters.
@@ -120,7 +120,7 @@ export function NOR(data, filter) {
   return !filter.some(({k, v, o}) => _check(data, k, v, o));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Perform an XOR check against all filters.
@@ -129,17 +129,16 @@ export function NOR(data, filter) {
  * @returns {boolean}
  */
 export function XOR(data, filter) {
-  let currentResult = false;
-  for ( const { k, v, o } of filter ) {
-    if ( _check(data, k, v, o) ) {
-      if ( !currentResult ) currentResult = true;
-      else return false;
-    }
+  if ( !filter.length ) return false;
+  let currentResult = _check(data, filter[0].k, filter[0].v, filter[0].o);
+  for ( let i = 1; i < filter.length; i++ ) {
+    const { k, v, o } = filter[i];
+    currentResult ^= _check(data, k, v, o);
   }
-  return currentResult;
+  return Boolean(currentResult);
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Invert the result of a nested check,
@@ -152,20 +151,20 @@ export function NOT(data, filter) {
   return !_check(data, k, v, o);
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
-/*                  Comparison Functions                 */
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
+/*  Comparison Functions                        */
+/* -------------------------------------------- */
 
 /**
  * Currently supported comparison functions.
  * @enum {Function}
  */
 export const COMPARISON_FUNCTIONS = {
-  _: exact, exact, contains, startswith, endswith,
+  _: exact, exact, contains, startswith, istartswith, endswith,
   has, hasany, hasall, in: in_, gt, gte, lt, lte
 };
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check for an exact match. The default comparison mode if none is provided.
@@ -177,7 +176,7 @@ export function exact(data, value) {
   return data === value;
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that data contains value.
@@ -189,7 +188,7 @@ export function contains(data, value) {
   return String(data).includes(String(value));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that data starts with value.
@@ -201,7 +200,19 @@ export function startswith(data, value) {
   return String(data).startsWith(String(value));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
+
+/**
+ * Case-insensitive check that data starts with value.
+ * @param {*} data
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function istartswith(data, value) {
+  return startswith(String(data).toLocaleLowerCase(game.i18n.lang), String(value).toLocaleLowerCase(game.i18n.lang));
+}
+
+/* -------------------------------------------- */
 
 /**
  * Check that data ends with value.
@@ -213,7 +224,7 @@ export function endswith(data, value) {
   return String(data).endsWith(String(value));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that the data collection has the provided value.
@@ -225,7 +236,7 @@ export function has(data, value) {
   return in_(value, data);
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that the data collection has any of the provided values.
@@ -237,7 +248,7 @@ export function hasany(data, value) {
   return Array.from(value).some(v => has(data, v));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that the data collection has all of the provided values.
@@ -249,7 +260,7 @@ export function hasall(data, value) {
   return Array.from(value).every(v => has(data, v));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that data matches one of the provided values.
@@ -265,7 +276,7 @@ export function in_(data, value) {
   }
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that value is greater than data.
@@ -277,7 +288,7 @@ export function gt(data, value) {
   return data > value;
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that value is greater than or equal to data.
@@ -289,7 +300,7 @@ export function gte(data, value) {
   return data >= value;
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that value is less than data.
@@ -301,7 +312,7 @@ export function lt(data, value) {
   return data < value;
 }
 
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/* -------------------------------------------- */
 
 /**
  * Check that value is less than or equal to data.

@@ -8,7 +8,9 @@ const AbstractFormInputElement = foundry.applications?.elements?.AbstractFormInp
  */
 export default class FilterStateElement extends AbstractFormInputElement {
   constructor(...args) {
-    if ( game.release.generation < 12 ) throw Error("FilterStateInput only works in Foundry V12 or later");
+    if ( game.release.generation < 12 ) {
+      throw Error("FilterStateInput can only be used in Foundry VTT version 12 or later.");
+    }
     super(...args);
     this._value = this.getAttribute("value") ?? 0;
   }

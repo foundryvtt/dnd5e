@@ -1,21 +1,22 @@
-<div>
-    <table>
-        <thead>
-            <tr>
-                {{#if displaySelection}}
-                <th scope="col" class="selection"></th>
-                {{/if}}
-                <th scope="col" class="icon"></th>
-                <th scope="col" class="name">{{ localize "DND5E.CompendiumBrowser.Column.Name" }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="results-loading">
-                <td colspan="{{ ifThen displaySelection '3' '2' }}"><!-- TODO: Update colspan to ensure spans full width -->
-                    <i class="fa-solid fa-spinner fa-spin-pulse" inert></i>
-                    {{ localize "DND5E.CompendiumBrowser.Loading" }}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="inventory-element">
+
+    <section class="items-list browser-results">
+
+        <div class="items-section card">
+
+            <div class="items-header header">
+
+                <h3 class="item-name">{{ localize "DND5E.CompendiumBrowser.Column.Results" }}</h3>
+                <div class="item-header item-controls"></div>
+
+            </div>
+
+            <div class="results-loading"><i class="fas fa-spinner fa-spin-pulse" inert></i></div>
+
+            <ol class="item-list unlist"></ol>
+
+        </div>
+
+    </section>
+
 </div>
