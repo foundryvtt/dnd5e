@@ -15,7 +15,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e2", "sheet", "actor", "character"],
+      classes: ["dnd5e2", "sheet", "actor", "character", "vertical-tabs"],
       tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "details" }],
       dragDrop: [
         { dragSelector: ".item-list .item", dropSelector: null },
@@ -432,8 +432,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         case "background": game.packs.get(CONFIG.DND5E.sourcePacks.BACKGROUNDS)?.render(true); break;
       }
     } else {
-      const result = await CompendiumBrowser.selectOne({ filters: { locked: { types: new Set([type]) } } });
-      if ( result ) this._onDropItemCreate(await fromUuid(result));
+      new CompendiumBrowser({ filters: { locked: { types: new Set([type]) } } }).render(true);
     }
   }
 

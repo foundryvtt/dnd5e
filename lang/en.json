@@ -148,6 +148,7 @@
 "DND5E.AdditionalControls": "Additional Controls",
 "DND5E.AdditionalSettings": "Additional Settings",
 "DND5E.AddEmbeddedItemPromptHint": "Do you want to add these items to your character sheet?",
+"DND5E.Advanced": "Advanced",
 "DND5E.AdvancementAbilityScoreImprovementTitle": "Ability Score Improvement",
 "DND5E.AdvancementAbilityScoreImprovementHint": "Allow the player to increase one or more ability scores or take an optional feat.",
 "DND5E.AdvancementAbilityScoreImprovementCap": "Point Cap",
@@ -428,14 +429,15 @@
   },
   "Column": {
     "Icon": "Icon",
-    "Name": "Name"
+    "Name": "Name",
+    "Results": "Results"
   },
   "Filters": {
     "Label": "Filters",
     "HasDarkvision": "Has Darkvision",
-    "HasSpellcasting": "Has Spellcasting"
+    "HasSpellcasting": "Has Spellcasting",
+    "SearchResults": "Search results"
   },
-  "Loading": "Loading…",
   "Selection": {
     "Label": "Selected: {summary}",
     "Select": "Select",
@@ -456,10 +458,14 @@
       "Single": "Must select {max} {document}, {value} selected."
     }
   },
+  "Tabs": {
+    "Feat.other": "Feats",
+    "Item.other": "Items",
+    "Monster.other": "Monsters"
+  },
   "Types": {
     "Label": "Types"
   },
-  "Loading": "Loading…",
   "Locked": "Locked"
 },
 "DND5E.ComponentMaterial": "Material",

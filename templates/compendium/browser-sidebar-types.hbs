@@ -1,20 +1,23 @@
 {{#*inline "type-entry"}}
 <div class="type-entry">
-    <input type="checkbox" value="{{ @key }}" id="{{ @root.partId }}-{{ @key }}" data-action="setType"
-           {{ checked chosen }} {{ disabled @root.isLocked.types }}>
-    <label for="{{ @root.partId }}-{{ @key }}">{{ localize label }}</label>
+    <label>
+        <dnd5e-checkbox value="{{ @key }}" data-action="setType" {{ checked chosen }}
+                        {{ disabled @root.isLocked.types }}></dnd5e-checkbox>
+        <span>{{ localize label }}</span>
+    </label>
 </div>
 {{/inline}}
 
-<div class="flexcol">
-    <h3>{{ localize "DND5E.CompendiumBrowser.Types.Label" }}</h3>
+<div class="flexcol" {{#unless showTypes}}hidden{{/unless}}>
     {{#each types}}
     {{#if children}}
     <div class="type-group collapsible">
         <div class="type-group-header">
-            <input type="checkbox" id="{{ @root.partId }}-{{ @key }}" data-action="setType"
-                   {{ checked chosen }} {{ disabled @root.isLocked.types }}>
-            <label for="{{ @root.partId }}-{{ @key }}">{{ localize label }}</label>
+            <label>
+                <dnd5e-checkbox data-action="setType" {{ checked chosen }}
+                                {{ disabled @root.isLocked.types }}></dnd5e-checkbox>
+                <span>{{ localize label }}</span>
+            </label>
             <div data-action="toggleCollapse"><i class="fa-solid fa-caret-down"></i></div>
         </div>
         <div class="collapsible-content">

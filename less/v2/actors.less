@@ -42,50 +42,7 @@
   /* ---------------------------------- */
 
   nav.tabs {
-    --tab-full-width: 44px;
-    --tab-inactive-width: 34px;
-    position: absolute;
-    left: 100%;
     top: calc(var(--dnd5e-sheet-header-height) + 1rem);
-    display: flex;
-    flex-direction: column;
-    gap: .25rem;
-    z-index: -1;
-
-    > .item {
-      width: var(--tab-full-width);
-      height: 40px;
-      position: relative;
-      display: flex;
-      justify-content: end;
-      align-items: center;
-      padding-right: 12px;
-      background: var(--dnd5e-color-black);
-      color: var(--dnd5e-color-gold);
-      --icon-fill: var(--dnd5e-color-gold);
-      border: 1px solid transparent;
-      border-radius: 0 8px 8px 0;
-      font-size: var(--font-size-14);
-      margin-left: calc((var(--tab-full-width) - var(--tab-inactive-width)) * -1);
-      transition: all 250ms ease;
-
-      &.active, &:hover {
-        text-shadow: none;
-        margin: 0;
-        border-color: var(--dnd5e-color-gold);
-        box-shadow: 0 0 6px var(--dnd5e-color-gold);
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        inset: 4px 4px 4px 0;
-        border-radius: 0 5px 5px 0;
-        border: 1px solid var(--dnd5e-color-gold);
-        border-left: none;
-        pointer-events: none;
-      }
-    }
   }
 
   /* ---------------------------------- */
