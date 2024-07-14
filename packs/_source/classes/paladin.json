@@ -492,7 +492,8 @@
     ],
     "spellcasting": {
       "progression": "half",
-      "ability": "cha"
+      "ability": "cha",
+      "preparationFormula": "@abilities.cha.mod + floor(@classes.paladin.levels / 2)"
     },
     "startingEquipment": [
       {
