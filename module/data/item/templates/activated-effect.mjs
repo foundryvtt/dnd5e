@@ -163,7 +163,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
 
     // Substitute source UUIDs in consumption targets
     if ( !this.parent.isEmbedded ) return;
-    if ( ["ammo", "charges", "material"].includes(this.consume.type) && this.consume.target.includes(".") ) {
+    if ( ["ammo", "charges", "material"].includes(this.consume.type) && this.consume.target?.includes(".") ) {
       const item = this.parent.actor.sourcedItems?.get(this.consume.target);
       if ( item ) this.consume.target = item.id;
     }
@@ -183,9 +183,13 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     if ( !value ) return;
     const property = game.i18n.localize(label);
     try {
-      foundry.utils.setProperty(
-        this, keyPath, Roll.safeEval(replaceFormulaData(value, rollData, { actor: this.parent.actor, property }))
-      );
+      const formula = replaceFormulaData(value, rollData, { item: this.parent, property });
+      if ( game.release.generation < 12 ) {
+        foundry.utils.setProperty(this, keyPath, Roll.safeEval(formula));
+      } else {
+        const roll = new Roll(formula);
+        foundry.utils.setProperty(this, keyPath, roll.evaluateSync().total);
+      }
     } catch(err) {
       if ( this.parent.isEmbedded ) {
         const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.parent.name });

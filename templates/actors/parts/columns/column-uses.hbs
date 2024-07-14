@@ -1,0 +1,16 @@
+{{#if item.isOnCooldown}}
+<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip="{{item.labels.recharge}}" aria-label="{{item.labels.recharge}}">
+    <a class="item-action" data-action="recharge"><i class="fa-solid fa-arrows-rotate"></i></a>
+{{else if item.system.recharge.value}}
+<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip="{{item.labels.recharge}}" aria-label="{{item.labels.recharge}}">
+    <i class="fa-solid fa-bolt"></i>
+{{else if ctx.hasUses}}
+<div class="item-detail item-uses">
+    <input type="text" value="{{ item.system.uses.value }}" placeholder="0" data-dtype="Number"
+           data-name="system.uses.value" inputmode="numeric" pattern="[+=\-]?\d*">
+    <span class="separator">&sol;</span>
+    <span class="max">{{ item.system.uses.max }}</span>
+{{else}}
+<div class="item-detail item-uses empty">
+{{/if}}
+</div>

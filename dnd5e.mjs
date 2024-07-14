@@ -123,6 +123,11 @@ Hooks.once("init", function() {
   Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eNPC, {
     types: ["npc"],
     makeDefault: true,
+    label: "DND5E.SheetClassNPCLegacy"
+  });
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eNPC2, {
+    types: ["npc"],
+    makeDefault: true,
     label: "DND5E.SheetClassNPC"
   });
   Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eVehicle, {
@@ -330,6 +335,9 @@ function _configureStatusEffects() {
   }, []);
   for ( const [id, {label: name, ...data}] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
     addEffect(CONFIG.statusEffects, { id, name, ...data });
+  }
+  for ( const [id, data] of Object.entries(CONFIG.DND5E.encumbrance.effects) ) {
+    addEffect(CONFIG.statusEffects, { id, ...data, hud: false });
   }
 }
 

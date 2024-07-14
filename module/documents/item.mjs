@@ -299,6 +299,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* --------------------------------------------- */
 
   /**
+   * Is the item on recharge cooldown?
+   * @type {boolean}
+   * @see {@link ActionTemplate#isOnCooldown}
+   */
+  get isOnCooldown() {
+    const { recharge } = this.system;
+    return (recharge?.value > 0) && (recharge?.charged === false);
+  }
+
+  /* --------------------------------------------- */
+
+  /**
    * Does this item require concentration?
    * @type {boolean}
    */
@@ -1329,12 +1341,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Identify the consumed resource and its current quantity
     let resource = null;
     let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 0);
-    if ( amount in as.spells ) amount = consume.amount || 0;
+    if ( as.spells && (amount in as.spells) ) amount = consume.amount || 0;
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
         const amt = usageConfig.resourceAmount;
-        const target = (amt in as.spells) ? `spells.${amt}.value` : consume.target;
+        const target = as.spells && (amt in as.spells) ? `spells.${amt}.value` : consume.target;
         resource = foundry.utils.getProperty(as, target);
         quantity = resource || 0;
         break;
@@ -1580,6 +1592,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const elvenAccuracy = (flags.elvenAccuracy
       && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
 
+    // Targets
+    const targets = this.constructor._formatAttackTargets();
+
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
       actor: this.actor,
@@ -1588,6 +1603,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       title,
       flavor: title,
       elvenAccuracy,
+      targetValue: targets.length === 1 ? targets[0].ac : undefined,
       halflingLucky: flags.halflingLucky,
       dialogOptions: {
         width: 400,
@@ -1596,7 +1612,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       messageData: {
         "flags.dnd5e": {
-          targets: this.constructor._formatAttackTargets(),
+          targets,
           roll: { type: "attack", itemId: this.id, itemUuid: this.uuid }
         },
         speaker: ChatMessage.getSpeaker({actor: this.actor})
@@ -1650,7 +1666,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static _formatAttackTargets() {
     const targets = new Map();
     for ( const token of game.user.targets ) {
-      const { name, img, system, uuid } = token.actor ?? {};
+      const { name } = token;
+      const { img, system, uuid } = token.actor ?? {};
       const ac = system?.attributes?.ac ?? {};
       if ( uuid && Number.isNumeric(ac.value) ) targets.set(uuid, { name, img, uuid, ac: ac.value });
     }
@@ -1899,7 +1916,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preRollFormula", this, rollConfig) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    const roll = await new Roll(rollConfig.formula, rollConfig.data)
+      .roll({ allowInteractive: game.settings.get("core", "rollMode") !== CONST.DICE_ROLL_MODES.BLIND });
 
     if ( rollConfig.chatMessage ) {
       roll.toMessage({

@@ -43,7 +43,9 @@
         },
         "level": 1,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "dK0oEtM8ovrLJxi3",
@@ -69,7 +71,9 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "tSywlKq0aE3GYMmi",
@@ -86,7 +90,9 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "xZ55SColbUbJOW2i",
@@ -104,7 +110,9 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "bN13f0XX9ZVaUiaC",
@@ -133,18 +141,28 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.LzJ5ayHt0OlSVGxi",
-            "Compendium.dnd5e.classfeatures.i6tPm3FNK13Ftc9v"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.LzJ5ayHt0OlSVGxi",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.i6tPm3FNK13Ftc9v",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [
+              ""
+            ],
             "preparation": "",
             "uses": {
               "max": "",
@@ -162,12 +180,20 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.swK0r5TOIxredxWS",
-            "Compendium.dnd5e.classfeatures.u6Du2P9s81SWuGbi"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.swK0r5TOIxredxWS",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.u6Du2P9s81SWuGbi",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [
+              ""
+            ],
             "preparation": "",
             "uses": {
               "max": "",
@@ -185,12 +211,20 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.cVDEQo0ow1WJT7Wl",
-            "Compendium.dnd5e.classfeatures.xvgPu1O57DgXCM86"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.cVDEQo0ow1WJT7Wl",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.xvgPu1O57DgXCM86",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [
+              ""
+            ],
             "preparation": "",
             "uses": {
               "max": "",
@@ -208,11 +242,16 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.ip4bvmGoz3qkoqes"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.ip4bvmGoz3qkoqes",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [
+              ""
+            ],
             "preparation": "",
             "uses": {
               "max": "",
@@ -399,13 +438,37 @@
         },
         "level": 1,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
+      },
+      {
+        "_id": "PKUB0owJROhnfPwq",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "wild-shape-uses",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "2": {
+              "value": 2
+            },
+            "20": {
+              "value": 99
+            }
+          }
+        },
+        "value": {},
+        "title": "Wild Shape Uses",
+        "icon": null
       }
     ],
     "spellcasting": {
       "progression": "full",
       "ability": "wis",
-      "needToPrepare": true
+      "preparationFormula": "@abilities.wis.mod + @classes.druid.levels"
     },
     "startingEquipment": [
       {
@@ -504,10 +567,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
+    "systemVersion": "3.2.1",
     "coreVersion": "11.315",
     "createdTime": 1661787234284,
-    "modifiedTime": 1709764580003,
+    "modifiedTime": 1717014927840,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ygVYgPbJkaH0tH1N"

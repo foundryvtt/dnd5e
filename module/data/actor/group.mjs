@@ -209,8 +209,10 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       });
       for ( const placement of placements ) {
         const actor = placement.prototypeToken.actor;
+        const appendNumber = !placement.prototypeToken.actorLink && placement.prototypeToken.appendNumber;
         delete placement.prototypeToken;
         const tokenDocument = await actor.getTokenDocument(placement);
+        if ( appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
         tokensData.push(tokenDocument.toObject());
       }
     } finally {
