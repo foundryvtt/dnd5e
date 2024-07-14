@@ -1,4 +1,6 @@
-const { SchemaField, StringField, BooleanField } = foundry.data.fields;
+import { FormulaField } from "../../fields.mjs"; 
+
+const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Shared contents of the spellcasting schema.
