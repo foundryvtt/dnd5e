@@ -1,9 +1,9 @@
 import TraitAdvancement from "../../documents/advancement/trait.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import { AdvancementField, FormulaField, IdentifierField } from "../fields.mjs";
+import SpellcastingField from "./fields/spellcasting-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
-import SpellCastingFields from "./templates/spell-casting.mjs";
 
 const { ArrayField, NumberField, StringField } = foundry.data.fields;
 
@@ -20,6 +20,8 @@ const { ArrayField, NumberField, StringField } = foundry.data.fields;
  * @property {object} spellcasting      Details on class's spellcasting ability.
  * @property {string} spellcasting.progression  Spell progression granted by class as from `DND5E.spellProgression`.
  * @property {string} spellcasting.ability      Ability score to use for spellcasting.
+ * @property {string} spellcasting.preparationFormula Spellcasting preparation formula.
+ * @property {string} [spellcasting.spellPreparationLimit] Spell preparation limit, if any.
  * @property {string} wealth            Formula used to determine starting wealth.
  */
 export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
@@ -38,7 +40,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
         required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.HitDiceUsed"
       }),
       advancement: new ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
-      spellcasting: SpellCastingFields.spellCasting,
+      spellcasting: new SpellcastingField(),
       wealth: new FormulaField({label: "DND5E.StartingEquipment.Wealth.Label"})
     });
   }
@@ -53,6 +55,12 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
     if ( this.parent.subclass ) context.subtitle = this.parent.subclass.name;
     context.value = this.levels;
     return context;
+  }
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.spellcasting.spellPreparationLimit = SpellcastingField
+      .calculatePreparationLimit(this.spellcasting, this.parent.getRollData({ deterministic: true }));
   }
 
   /* -------------------------------------------- */
