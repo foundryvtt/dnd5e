@@ -63,7 +63,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Partition items by category
     let {items, spells, feats, races, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
-      const {quantity, uses, recharge} = item.system;
+      const {quantity, uses} = item.system;
 
       // Item details
       const ctx = context.itemContext[item.id] ??= {};
@@ -83,14 +83,13 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Item usage
       ctx.hasUses = item.hasLimitedUses;
-      ctx.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
-      ctx.isDepleted = ctx.isOnCooldown && ctx.hasUses && (uses.value > 0);
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
       // Unidentified items
       ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
 
       // Item grouping
+      ctx.ungroup = "passive";
       const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
       const group = this.actor.items.get(originId);
       switch ( group?.type ) {
@@ -172,7 +171,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         hasActions: false, dataset: {type: "feat"} }
     };
     for ( const feat of feats ) {
-      if ( feat.system.activation?.type ) features.active.items.push(feat);
+      if ( feat.system.activation?.type ) {
+        features.active.items.push(feat);
+        context.itemContext[feat.id].ungroup = "active";
+      }
       else features.passive.items.push(feat);
     }
 

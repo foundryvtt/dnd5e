@@ -2,7 +2,7 @@ import Proficiency from "./proficiency.mjs";
 import * as Trait from "./trait.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
-import { simplifyBonus } from "../../utils.mjs";
+import { replaceFormulaData, simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
@@ -42,6 +42,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !["character", "npc"].includes(this.type) ) return this._classes = {};
     return this._classes = this.items.filter(item => item.type === "class").reduce((obj, cls) => {
       obj[cls.identifier] = cls;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get all classes which have spellcasting ability.
+   * @type {Record<string, Item5e>}
+   */
+  get spellcastingClasses() {
+    return Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
+      if ( cls.spellcasting && (cls.spellcasting.progression !== "none") ) obj[identifier] = cls;
       return obj;
     }, {});
   }
@@ -487,14 +500,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
         rollData.attributes.ac = ac;
         try {
-          const replaced = Roll.replaceFormulaData(formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          const replaced = replaceFormulaData(formula, rollData, {
+            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
+          });
+          ac.base = replaced ? game.release.generation < 12
+            ? Roll.safeEval(replaced) : new Roll(replaced).evaluateSync().total
+            : 0;
         } catch(err) {
           this._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnBadACFormula"), link: "armor", type: "error"
+            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
           });
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          ac.base = game.release.generation < 12 ? Roll.safeEval(replaced) : new Roll(replaced).evaluateSync().total;
         }
         break;
     }
@@ -2412,7 +2429,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         name: this.name,
         dice: longRest ? dhd : -dhd,
         health: dhp
-      })
+      }),
+      "flags.dnd5e.rest": { type: longRest ? "long" : "short" }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
@@ -3341,7 +3359,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const fill = CONFIG.DND5E.tokenHPColors[key];
 
     for ( const token of tokens ) {
-      if ( !token.object?.visible || !token.object?.renderable ) continue;
+      if ( !token.object?.visible || token.isSecret ) continue;
       if ( token.hasDynamicRing ) token.flashRing(key);
       const t = token.object;
       canvas.interface.createScrollingText(t.center, value.signedString(), {

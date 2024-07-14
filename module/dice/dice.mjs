@@ -95,7 +95,7 @@ export async function d20Roll({
   } else roll.options.rollMode ??= defaultRollMode;
 
   // Evaluate the configured roll
-  await roll.evaluate({async: true});
+  await roll.evaluate({ allowInteractive: (roll.options.rollMode ?? defaultRollMode) !== CONST.DICE_ROLL_MODES.BLIND });
 
   // Attach original message ID to the message
   messageData = foundry.utils.expandObject(messageData);
@@ -207,7 +207,8 @@ export async function damageRoll({
 
   // Evaluate the configured roll
   for ( const roll of rolls ) {
-    await roll.evaluate({async: true});
+    const rollMode = rolls.at(-1).options.rollMode ?? defaultRollMode;
+    await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
   }
 
   // Attach original message ID to the message
