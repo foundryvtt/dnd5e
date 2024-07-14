@@ -2,6 +2,7 @@ import { ItemDataModel } from "../abstract.mjs";
 import { AdvancementField, IdentifierField } from "../fields.mjs";
 import SpellcastingField from "./fields/spellcasting-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import SpellCastingFields from "./templates/spell-casting.mjs";
 
 /**
  * Data definition for Subclass items.

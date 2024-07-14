@@ -197,6 +197,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         primary: this.actor.system.attributes.spellcasting === sc.ability,
         save: ability?.dc ?? 0,
         spellPreparationLimit: sc.spellPreparationLimit
+        sourceClass: item.system.identifier,
+        spellPreparationLimit: sc.spellPreparationLimit,
+        preparedSpellsCount: sc.preparedSpellsCount,
+        valid: (sc.spellPreparationLimit ?? 0) >= (sc.preparedSpellsCount ?? 0)
       });
     }
 
@@ -452,6 +456,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   _onToggleSpellcasting(event) {
     const ability = event.currentTarget.closest("[data-ability]")?.dataset.ability;
     this.actor.update({ "system.attributes.spellcasting": ability });
+    const sc = event.currentTarget.closest("[data-ability]")?.dataset;
+    this.actor.update(
+      {
+        "system.attributes.spellcasting": sc?.ability,
+        "system.attributes.activeSpellcastingClass": sc?.sourceClass
+      }
+    );
   }
 
   /* -------------------------------------------- */

@@ -59,6 +59,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, {});
   }
 
+  /**
+   * Get the actual active spell casting class.
+   * @type {Item5e}
+   */
+  get activeSpellCastingClass() {
+    if (this.system.attributes.activeSpellcastingClass
+      && this.classes[this.system.attributes.activeSpellcastingClass]) {
+      return this.classes[this.system.attributes.activeSpellcastingClass];
+    }
+    return Object.values(this.classes).find(({spellcasting}) => spellcasting
+    && spellcasting.progression !== "none" );
+  }
+
   /* -------------------------------------------- */
 
   /**

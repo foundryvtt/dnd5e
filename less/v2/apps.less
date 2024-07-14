@@ -116,6 +116,10 @@
           font-family: var(--dnd5e-font-roboto-slab);
           font-weight: bold;
           font-size: var(--font-size-16);
+          &[data-item-valid="false"] {
+            font-weight: bolder;
+            color: var(--dnd5e-color-red);
+          }
         }
 
         .sign { color: var(--color-text-light-6); }

@@ -157,7 +157,15 @@ export default class SpellData extends ItemDataModel.mixin(
 
   /** @inheritdoc */
   get _typeAbilityMod() {
-    return this.parent?.actor?.system.attributes.spellcasting || "int";
+    return this.parent?.system?.ability
+    || (
+      this.parent?.system?.sourceClass
+        ? this.parent.actor?.classes[this.parent.system.sourceClass]?.system?.spellcasting?.ability
+        : null
+    )
+    || this.parent?.actor?.activeSpellCastingClass?.system?.spellcasting?.ability
+    || this.parent?.actor?.system?.attributes?.spellcasting
+    || "int";
   }
 
   /* -------------------------------------------- */

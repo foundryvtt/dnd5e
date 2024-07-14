@@ -4,6 +4,7 @@ import { AdvancementField, FormulaField, IdentifierField } from "../fields.mjs";
 import SpellcastingField from "./fields/spellcasting-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
+import SpellCastingFields from "./templates/spell-casting.mjs";
 
 const { ArrayField, NumberField, StringField } = foundry.data.fields;
 
