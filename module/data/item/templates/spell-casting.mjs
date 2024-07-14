@@ -25,10 +25,9 @@ export default class SpellCastingFields {
           required: true,
           label: "DND5E.SpellAbility"
         }),
-        needToPrepare: new BooleanField({
-          required: false,
-          initial: false,
-          label: "DND5E.needToPrepare"
+        preparationFormula: new FormulaField({
+          deterministic: true
+          label: "DND5E.SpellPreparation.Formula"
         })
       },
       { label: "DND5E.Spellcasting" }
