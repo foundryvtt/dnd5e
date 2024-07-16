@@ -267,22 +267,3 @@
     }
   }
 }
-
-/* Undo App v2 dark theme styles until we have dark theme available for the compendium browser */
-.theme-dark .dnd5e2.compendium-browser {
-  --color-text-primary: var(--color-text-dark-primary);
-
-  .window-content {
-    backdrop-filter: unset;
-    -webkit-backdrop-filter: unset;
-  }
-
-  input {
-    --input-background-color: var(--dnd5e-background-10);
-    --input-text-color: var(--color-text-dark-primary);
-    --input-placeholder-color: var(--color-text-dark-secondary);
-  }
-
-  .window-resize-handle { filter: none; }
-  .items-section { border: var(--dnd5e-border-gold); }
-}
