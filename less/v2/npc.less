@@ -9,14 +9,9 @@
   min-height: 700px;
   box-shadow: none;
 
-  &::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    inset: 0;
-    border: var(--dnd5e-border-gold);
+  &.minimized {
     box-shadow: 0 0 20px var(--color-shadow-dark);
-    border-radius: 5px;
+    .window-header .source-book { display: none; }
   }
 
   /* ---------------------------------- */
@@ -264,9 +259,9 @@
         top: calc(100% + 10px);
         margin: auto;
         width: 80%;
-        background: var(--dnd5e-color-card);
+        background: var(--dnd5e-background-card);
         border-radius: 0 0 3px 3px;
-        border: 1px solid var(--dnd5e-color-gold);
+        border: var(--dnd5e-border-gold);
         padding: 4px;
         display: flex;
         align-items: center;
@@ -404,7 +399,7 @@
         justify-content: center;
         align-items: center;
         margin-top: -8px;
-        padding-right: 16px;
+        padding-right: 2px;
 
         > button {
           width: 28px;

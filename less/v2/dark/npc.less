@@ -1,0 +1,44 @@
+:is(.dnd5e-theme-dark, .theme-dark) .dnd5e2.sheet.actor.npc,
+.dnd5e2.sheet.actor.npc.dnd5e-theme-dark {
+
+  .window-content {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 300px;
+      border-radius: 5px 5px 0 0;
+      /* TODO: Replace with different art pending WotC approval
+      opacity: .2;
+      background: url("ui/official/banner-npc-dark.webp") no-repeat top center / cover;
+      filter: grayscale(1); *REMOVE*
+      */
+      opacity: .45;
+      background: url("ui/official/banner-character-dark.webp") no-repeat top center / cover;
+      filter: grayscale(1);
+      -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+      mask-image: linear-gradient(to bottom, black, transparent);
+    }
+
+    > form { position: relative; }
+
+    form.editable .sheet-header {
+      .document-name,
+      .labels :is(.creature-size select, .creature-type a, .creature-alignment input),
+      > .left label.slide-toggle {
+        background: rgb(0 0 0 / 45%);
+      }
+    }
+  }
+
+  .window-header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-color-iron-gray); }
+
+  form.editable .sheet-header .cr-badge input { background: unset; }
+
+  label.slide-toggle .fa-toggle-on { color: var(--dnd5e-color-gold); }
+
+  .ability-score {
+    --color-border-light-1: var(--dnd5e-color-blue-gray-3);
+    > img { filter: invert(1); }
+  }
+}

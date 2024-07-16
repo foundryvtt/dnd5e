@@ -11,14 +11,9 @@
   min-height: 700px;
   box-shadow: none;
 
-  &::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    inset: 0;
-    border: var(--dnd5e-border-gold);
+  &.minimized {
+    background: url("../../ui/denim075.png");
     box-shadow: 0 0 20px var(--color-shadow-dark);
-    border-radius: 5px;
   }
 
   .window-resizable-handle {
