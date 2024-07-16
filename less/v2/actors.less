@@ -4,6 +4,16 @@
   /*  Outer Window                      */
   /* ---------------------------------- */
 
+  &::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    border: var(--dnd5e-border-gold);
+    box-shadow: 0 0 20px var(--color-shadow-dark);
+    border-radius: 5px;
+  }
+
   > header {
     background: transparent;
     position: relative;
@@ -376,14 +386,17 @@
   /* ---------------------------------- */
 
   &.minimized {
-    background: url("../ui/denim075.png");
+    background: url("../../ui/denim075.png");
     border: unset;
+
+    &::after { content: unset; }
 
     > header {
       align-items: center;
       .header-button, .document-id-link { margin-top: 0; }
       .window-title { visibility: visible; }
     }
+
     nav.tabs { display: none; }
   }
 

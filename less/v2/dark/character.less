@@ -2,20 +2,16 @@
 .dnd5e2.sheet.actor.character.dnd5e-theme-dark {
   &:not(.minimized) { background: none; }
 
-  .window-content {
-    background: var(--dnd5e-color-dark-gray) url("../../ui/denim075.png");
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 300px;
-      border-radius: 5px 5px 0 0;
-      opacity: .5;
-      background: url("ui/official/banner-character-dark.webp") no-repeat top center / cover;
-      -webkit-mask-image: linear-gradient(to bottom, black, transparent);
-      mask-image: linear-gradient(to bottom, black, transparent);
-    }
+  .window-content::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 300px;
+    border-radius: 5px 5px 0 0;
+    opacity: .5;
+    background: url("ui/official/banner-character-dark.webp") no-repeat top center / cover;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+    mask-image: linear-gradient(to bottom, black, transparent);
   }
 
   .sheet-header {
@@ -49,16 +45,5 @@
     .pills-group.empty > h3 > a { color: var(--color-text-light-0); }
   }
 
-  .tab.biography textarea { color: var(--dnd5e-color-blue-white); }
-
-  .ability-score {
-    &::before { background-image: url("ui/ability-score-tab-dark.svg"); }
-    .label { font-weight: bold; }
-    .mod { color: var(--dnd5e-color-blue-white); }
-  }
-
-  .content-link, .roll-link a, .reference-link a, .inline-roll, .award-link {
-    background: var(--dnd5e-color-dark-gray);
-    border-color: var(--dnd5e-border-dark)
-  }
+  .ability-score::before { background-image: url("ui/ability-score-tab-dark.svg"); }
 }
