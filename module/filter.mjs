@@ -160,7 +160,7 @@ export function NOT(data, filter) {
  * @enum {Function}
  */
 export const COMPARISON_FUNCTIONS = {
-  _: exact, exact, contains, startswith, istartswith, endswith,
+  _: exact, exact, contains, icontains, startswith, istartswith, endswith,
   has, hasany, hasall, in: in_, gt, gte, lt, lte
 };
 
@@ -186,6 +186,18 @@ export function exact(data, value) {
  */
 export function contains(data, value) {
   return String(data).includes(String(value));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Case-insensitive check that data contains value.
+ * @param {*} data
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function icontains(data, value) {
+  return contains(String(data).toLocaleLowerCase(game.i18n.lang), String(value).toLocaleLowerCase(game.i18n.lang));
 }
 
 /* -------------------------------------------- */
