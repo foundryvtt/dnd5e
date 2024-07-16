@@ -241,9 +241,9 @@
           font-size: var(--font-size-13);
         }
 
+        .name { flex: 1; }
+
         .tags {
-          position: absolute;
-          right: .5rem;
           opacity: .25;
           font-size: var(--font-size-14);
           display: flex;
@@ -376,6 +376,8 @@
           display: flex;
           flex-direction: column;
           align-items: center;
+
+          .value { font-size: var(--font-size-13); }
         }
 
         &.item-detail { font-weight: bold; }
