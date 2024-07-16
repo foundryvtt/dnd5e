@@ -562,7 +562,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     // Sorting changes alone shouldn't require a re-fetch, but any change to filters will
     const filters = CompendiumBrowser.applyFilters(context.filterDefinitions, context.filters.additional);
     // Add the name filter
-    if ( this.#filters.name?.length ) filters.push({ k: "name", o: "istartswith", v: this.#filters.name });
+    if ( this.#filters.name?.length ) filters.push({ k: "name", o: "icontains", v: this.#filters.name });
     this.#results = CompendiumBrowser.fetch(CONFIG[context.filters.documentClass].documentClass, {
       filters,
       types: context.filters.types,
