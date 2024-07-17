@@ -276,7 +276,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
      * The number of entries to load per batch.
      */
     SIZE: 50
-  }
+  };
 
   /* -------------------------------------------- */
 
@@ -383,7 +383,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
 
   /**
    * The function to invoke when searching results by name.
-   * @type {function}
+   * @type {Function}
    */
   _debouncedSearch = foundry.utils.debounce(this._onSearchName.bind(this), this.constructor.SEARCH_DELAY);
 
@@ -424,7 +424,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
       .reduce((first, second) => {
         if ( !first ) return second;
         return CompendiumBrowser.intersectFilters(first, second);
-      }, null);
+      }, null) ?? new Map();
 
     return context;
   }
@@ -565,7 +565,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     if ( this.#filters.name?.length ) filters.push({ k: "name", o: "icontains", v: this.#filters.name });
     this.#results = CompendiumBrowser.fetch(CONFIG[context.filters.documentClass].documentClass, {
       filters,
-      types: context.filters.types,
+      types: context.filters.types
     });
     context.displaySelection = this.displaySelection;
     return context;
@@ -644,7 +644,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     for ( let i = 0; i < batchEnd; i++ ) {
       rendered.push(this._renderResult(results[i], documentClass));
     }
-    this.element.querySelector('.results-loading').hidden = true;
+    this.element.querySelector(".results-loading").hidden = true;
     this.element.querySelector('[data-application-part="results"] .item-list')
       .replaceChildren(...(await Promise.all(rendered)));
     this.#resultIndex = batchEnd;
@@ -672,6 +672,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     this.element.addEventListener("scroll", this._onScrollResults.bind(this), { capture: true, passive: true });
     this.element.addEventListener("dragstart", this._onDragStart.bind(this));
     this.element.addEventListener("keydown", this._debouncedSearch, { passive: true });
+    this.element.addEventListener("keydown", this._onKeyAction.bind(this), { passive: true });
     this.element.addEventListener("pointerdown", event => {
       if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
         event.preventDefault();
@@ -778,6 +779,21 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     } catch (e) {
       console.error(e);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle triggering an action via keyboard.
+   * @param {KeyboardEvent} event  The originating event.
+   * @protected
+   */
+  _onKeyAction(event) {
+    const target = event.target.closest("[data-action]");
+    if ( (event.key !== " ") || !target ) return;
+    const { action } = target.dataset;
+    const handler = this.options.actions[action];
+    if ( handler ) handler.call(this, event, target);
   }
 
   /* -------------------------------------------- */
@@ -916,6 +932,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     }
 
     else {
+      target.indeterminate = false;
       for ( const child of target.closest(".type-group").querySelectorAll("dnd5e-checkbox[value]") ) {
         child.checked = target.checked;
         if ( target.checked ) this.#filters.types.add(child.defaultValue);

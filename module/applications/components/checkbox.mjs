@@ -211,7 +211,8 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(AbstractForm
   /* -------------------------------------------- */
 
   /** @override */
-  _onClick(_event) {
+  _onClick(event) {
+    event.preventDefault();
     this.checked = !this.checked;
   }
 }
