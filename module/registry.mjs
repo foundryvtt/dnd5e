@@ -247,6 +247,131 @@ class MessageRegistry {
 }
 
 /* -------------------------------------------- */
+/*  Spell Lists                                 */
+/* -------------------------------------------- */
+
+class SpellListRegistry {
+  /**
+   * Registration of spell lists grouped by type and identifier.
+   * @type {Map<string, SpellList>}
+   */
+  static #lists = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve a specific spell list from the registry.
+   * @param {string} type        Type of list as defined in `CONFIG.DND5E.spellListTypes`.
+   * @param {string} identifier  Identifier of the specific spell list.
+   * @returns {SpellList|null}
+   */
+  static list(type, identifier) {
+    return this.#lists.get(`${type}.${identifier}`) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Register a spell list journal entry page.
+   * @param {string} uuid  UUID of a spell list journal entry page.
+   */
+  static async register(uuid) {
+    if ( !game.ready ) {
+      Hooks.once("ready", () => this.register(uuid));
+      return;
+    }
+
+    const page = await fromUuid(uuid);
+    if ( !page ) throw new Error(`Journal entry page "${uuid}" could not be found to register as spell list.`);
+    if ( page.type !== "spells" ) throw new Error(`Journal entry page "${uuid}" is not a Spell List.`);
+
+    const id = `${page.system.type}.${page.system.identifier}`;
+    if ( !SpellListRegistry.#lists.has(id) ) SpellListRegistry.#lists.set(id, new SpellList());
+    SpellListRegistry.#lists.get(id).contribute(page);
+  }
+}
+
+/**
+ * Type that represents a unified spell list for a specific class, subclass, species, or something else.
+ */
+export class SpellList {
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Indexes for the available spells sorted by name.
+   * @returns {object[]}
+   */
+  get indexes() {
+    return Array.from(this.#spells.keys())
+      .map(s => fromUuidSync(s))
+      .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {SpellData}
+   * @property {string} page  UUID of the original page.
+   */
+
+  /**
+   * Spells represented by this spell list.
+   * @type {Map<string, SpellList.SpellData>}
+   */
+  #spells = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Unlinked spell definitions.
+   * @type {UnlinkedSpellConfiguration[]}
+   */
+  #unlinked = [];
+
+  /* -------------------------------------------- */
+
+  /**
+   * UUIDs of all of the spells in this list.
+   * @type {Set<string>}
+   */
+  get uuids() {
+    return new Set(this.#spells.keys());
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Add a spell list page to this unified spell list.
+   * @param {JournalEntryPage} page  Spells page to contribute.
+   */
+  contribute(page) {
+    page.system.spells.forEach(s => this.#spells.set(s, { page: page.uuid }));
+
+    for ( const unlinked of page.system.unlinkedSpells ) {
+      if ( fromUuidSync(unlinked.source?.uuid) ) {
+        this.#spells.set(unlinked.source.uuid, { page: page.uuid });
+      } else {
+        this.#unlinked.push(foundry.utils.mergeObject({ page: page.uuid }, unlinked));
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * All of the spells represented by this list.
+   * @returns {Promise<Item5e>}
+   */
+  async getSpells() {
+    return Promise.all(Array.from(this.#spells.keys()).map(s => fromUuid(s)));
+  }
+}
+
+/* -------------------------------------------- */
 /*  Summons                                     */
 /* -------------------------------------------- */
 
@@ -301,5 +426,6 @@ export default {
   classes: new ItemRegistry("class"),
   enchantments: EnchantmentRegisty,
   messages: MessageRegistry,
+  spellLists: SpellListRegistry,
   summons: SummonRegistry
 };

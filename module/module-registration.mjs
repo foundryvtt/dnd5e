@@ -3,31 +3,43 @@
  */
 export default function registerModuleData() {
   console.groupCollapsed("D&D 5e | Registering Module Data");
-  for ( const module of game.modules ) {
-    if ( !module.active ) continue;
+  for ( const manifest of [game.system, ...game.modules.filter(m => m.active), game.world] ) {
     try {
-      const complete = methods.map(m => m(module)).filter(r => r);
+      const complete = methods.map(m => m(manifest)).filter(r => r);
       if ( complete.length ) {
-        console.log(`D&D 5e | Registered ${module.title} data: ${complete.join(", ")}`);
+        console.log(`D&D 5e | Registered ${manifest.title} data: ${complete.join(", ")}`);
       }
     } catch(err) {
-      console.error(`D&D 5e | Error registering ${module.title}\n`, err.message);
+      console.error(`D&D 5e | Error registering ${manifest.title}\n`, err.message);
     }
   }
   console.groupEnd();
 }
 
-const methods = [registerSourceBooks];
+const methods = [registerSourceBooks, registerSpellLists];
 
 /* -------------------------------------------- */
 
 /**
- * Register module source books from `flags.sourceBooks`.
- * @param {Module} module  Module from which to register data.
- * @returns {string|void}  Description of the data registered.
+ * Register package source books from `flags.dnd5e.sourceBooks`.
+ * @param {Module|System|World} manifest  Manifest from which to register data.
+ * @returns {string|void}                 Description of the data registered.
  */
-function registerSourceBooks(module) {
-  if ( !module.flags.dnd5e?.sourceBooks ) return;
-  Object.assign(CONFIG.DND5E.sourceBooks, module.flags.sourceBooks);
+function registerSourceBooks(manifest) {
+  if ( !manifest.flags.dnd5e?.sourceBooks ) return;
+  Object.assign(CONFIG.DND5E.sourceBooks, manifest.flags.sourceBooks);
   return "source book";
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Register package spell lists from `flags.dnd5e.spellLists`.
+ * @param {Module|System|World} manifest  Manifest from which to register data.
+ * @returns {string|void}                 Description of the data registered.
+ */
+function registerSpellLists(manifest) {
+  if ( foundry.utils.getType(manifest.flags.dnd5e?.spellLists) !== "Array" ) return;
+  manifest.flags.dnd5e.spellLists.forEach(uuid => dnd5e.registry.spellLists.register(uuid));
+  return "spell lists";
 }
