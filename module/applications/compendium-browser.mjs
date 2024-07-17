@@ -1100,8 +1100,10 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
           if ( Number.isFinite(max) ) filters.push({ k: def.config.keyPath, o: "lte", v: max });
           break;
         case "set":
+          const choices = foundry.utils.deepClone(def.config.choices);
+          if ( def.config.blank ) def.config.choices._blank = "";
           const [positive, negative] = Object.entries(value ?? {}).reduce(([positive, negative], [k, v]) => {
-            if ( k in def.config.choices ) {
+            if ( k in choices ) {
               if ( k === "_blank" ) k = "";
               if ( v === 1 ) positive.push(k);
               else if ( v === -1 ) negative.push(k);
