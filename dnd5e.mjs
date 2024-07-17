@@ -189,6 +189,9 @@ Hooks.once("init", function() {
 
   // Exhaustion handling
   documents.ActiveEffect5e.registerHUDListeners();
+
+  // Chat message listeners
+  documents.ChatMessage5e.activateListeners();
 });
 
 /* -------------------------------------------- */

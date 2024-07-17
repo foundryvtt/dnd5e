@@ -263,7 +263,9 @@ export default class ChatMessage5e extends ChatMessage {
 
     // Context menu
     const metadata = html.querySelector(".message-metadata");
-    metadata.querySelector(".message-delete")?.remove();
+    let deleteButton = metadata.querySelector(".message-delete");
+    if (!game.user.isGM) deleteButton?.remove();
+    if (deleteButton) deleteButton.style.display = "none";
     const anchor = document.createElement("a");
     anchor.setAttribute("aria-label", game.i18n.localize("DND5E.AdditionalControls"));
     anchor.classList.add("chat-control");
@@ -736,6 +738,23 @@ export default class ChatMessage5e extends ChatMessage {
         setTimeout(() => ui.chat.scrollBottom(), 250);
       });
     }
+  }
+
+  static activateListeners() {
+    document.addEventListener("keydown", event => {
+      let deleteButtons = document.querySelectorAll(".chat-message .message-delete");
+      if (!deleteButtons.length) return;
+      if (event.key === "Shift" && deleteButtons[0].style.display === "none") {
+        deleteButtons.forEach(btn => btn.style.display = "");
+      }
+    });
+    document.addEventListener("keyup", event => {
+      let deleteButtons = document.querySelectorAll(".chat-message .message-delete");
+      if (!deleteButtons.length) return;
+      if (event.key === "Shift" && deleteButtons[0].style.display === "") {
+        deleteButtons.forEach(btn => btn.style.display = "none");
+      }
+    });
   }
 
   /* -------------------------------------------- */
