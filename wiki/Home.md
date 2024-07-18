@@ -18,6 +18,7 @@
 - [Enrichers](Enrichers.md)
 - [Frequently Asked Questions](FAQ.md)
 - [Hooks](Hooks.md)
+- [Journal Pages](Journal-Pages.md)
 - [Roll Formulas](Roll-Formulas.md)
 - [Summoning](Summoning.md)
 - Tutorials
