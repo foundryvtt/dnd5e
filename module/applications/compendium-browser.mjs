@@ -1101,7 +1101,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
           break;
         case "set":
           const choices = foundry.utils.deepClone(def.config.choices);
-          if ( def.config.blank ) def.config.choices._blank = "";
+          if ( def.config.blank ) choices._blank = "";
           const [positive, negative] = Object.entries(value ?? {}).reduce(([positive, negative], [k, v]) => {
             if ( k in choices ) {
               if ( k === "_blank" ) k = "";
