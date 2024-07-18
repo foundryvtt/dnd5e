@@ -20,6 +20,7 @@
 - [Enrichers](Enrichers.md)
 - [Frequently Asked Questions](FAQ.md)
 - [Hooks](Hooks.md)
+- [Journal Pages](Journal-Pages.md)
 - [Roll Formulas](Roll-Formulas.md)
 - [Modifying Your Game with World Scripts](Modifying-Your-Game-with-Scripts.md)
 - [Summoning](Summoning.md)
