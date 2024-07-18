@@ -1,5 +1,6 @@
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
+import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
@@ -9,9 +10,9 @@ import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import { getSceneTargets } from "../utils.mjs";
-import Advancement from "./advancement/advancement.mjs";
-import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
+import SelectChoices from "./actor/select-choices.mjs";
+import Advancement from "./advancement/advancement.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
 
 /**
@@ -33,6 +34,38 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {object}
    */
   overrides = this.overrides ?? {};
+
+  /* -------------------------------------------- */
+
+  /**
+   * Types that can be selected within the compendium browser.
+   * @param {object} [options={}]
+   * @param {Set<string>} [options.chosen]  Types that have been selected.
+   * @returns {SelectChoices}
+   */
+  static compendiumBrowserTypes({ chosen=new Set() }={}) {
+    const [generalTypes, physicalTypes] = Item.TYPES.reduce(([g, p], t) => {
+      if ( ![CONST.BASE_DOCUMENT_TYPE, "backpack"].includes(t) ) {
+        if ( CONFIG.Item.dataModels[t]?.metadata?.inventoryItem ) p.push(t);
+        else g.push(t);
+      }
+      return [g, p];
+    }, [[], []]);
+
+    const makeChoices = (types, categoryChosen) => types.reduce((obj, type) => {
+      obj[type] = {
+        label: CONFIG.Item.typeLabels[type],
+        chosen: chosen.has(type) || categoryChosen
+      };
+      return obj;
+    }, {});
+    const choices = makeChoices(generalTypes);
+    choices.physical = {
+      label: game.i18n.localize("DND5E.Item.Category.Physical"),
+      children: makeChoices(physicalTypes, chosen.has("physical"))
+    };
+    return new SelectChoices(choices);
+  }
 
   /* -------------------------------------------- */
   /*  Migrations                                  */
@@ -294,6 +327,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get isVersatile() {
     return this.system.isVersatile ?? false;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Is the item on recharge cooldown?
+   * @type {boolean}
+   * @see {@link ActionTemplate#isOnCooldown}
+   */
+  get isOnCooldown() {
+    const { recharge } = this.system;
+    return (recharge?.value > 0) && (recharge?.charged === false);
   }
 
   /* --------------------------------------------- */
@@ -732,7 +777,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Actor spell-DC based scaling
     if ( save.scaling === "spell" ) {
-      save.dc = this.isOwned ? this.actor.system.attributes.spelldc : null;
+      save.dc = this.isOwned ? this.actor.system.abilities?.[this.system.abilityMod]?.dc
+        ?? this.actor.system.attributes.spelldc : null;
     }
 
     // Ability-score based scaling
@@ -1525,6 +1571,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const elvenAccuracy = (flags.elvenAccuracy
       && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
 
+    // Targets
+    const targets = this.constructor._formatAttackTargets();
+
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
       actor: this.actor,
@@ -1533,6 +1582,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       title,
       flavor: title,
       elvenAccuracy,
+      targetValue: targets.length === 1 ? targets[0].ac : undefined,
       halflingLucky: flags.halflingLucky,
       dialogOptions: {
         width: 400,
@@ -1541,7 +1591,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       messageData: {
         "flags.dnd5e": {
-          targets: this.constructor._formatAttackTargets(),
+          targets,
           roll: { type: "attack", itemId: this.id, itemUuid: this.uuid }
         },
         speaker: ChatMessage.getSpeaker({actor: this.actor})
@@ -1595,7 +1645,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static _formatAttackTargets() {
     const targets = new Map();
     for ( const token of game.user.targets ) {
-      const { name, img, system, uuid } = token.actor ?? {};
+      const { name } = token;
+      const { img, system, uuid } = token.actor ?? {};
       const ac = system?.attributes?.ac ?? {};
       if ( uuid && Number.isNumeric(ac.value) ) targets.set(uuid, { name, img, uuid, ac: ac.value });
     }
@@ -1844,7 +1895,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preRollFormula", this, rollConfig) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    const roll = await new Roll(rollConfig.formula, rollConfig.data)
+      .roll({ allowInteractive: game.settings.get("core", "rollMode") !== CONST.DICE_ROLL_MODES.BLIND });
 
     if ( rollConfig.chatMessage ) {
       roll.toMessage({

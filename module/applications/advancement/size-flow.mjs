@@ -19,7 +19,7 @@ export default class SizeFlow extends AdvancementFlow {
     const sizes = this.advancement.configuration.sizes;
     return foundry.utils.mergeObject(super.getData(), {
       singleSize: sizes.size === 1 ? sizes.first() : null,
-      hint: this.advancement.configuration.hint || this.advancement.automaticHint,
+      hint: this.advancement.hint || this.advancement.automaticHint,
       selectedSize: this.retainedData?.size ?? this.advancement.value.size,
       sizes: Array.from(sizes).reduce((obj, key) => {
         obj[key] = CONFIG.DND5E.actorSizes[key].label;

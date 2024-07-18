@@ -109,7 +109,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         return (a.classRestriction !== "secondary") && (a.level === 1);
       });
       if ( !advancement ) return game.i18n.localize("None");
-      return advancement.configuration.hint || Trait.localizedList(advancement.configuration);
+      return advancement.hint || Trait.localizedList(advancement.configuration);
     };
     if ( traits.length ) {
       advancement.traits = {

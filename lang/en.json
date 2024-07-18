@@ -148,6 +148,7 @@
 "DND5E.AdditionalControls": "Additional Controls",
 "DND5E.AdditionalSettings": "Additional Settings",
 "DND5E.AddEmbeddedItemPromptHint": "Do you want to add these items to your character sheet?",
+"DND5E.Advanced": "Advanced",
 "DND5E.AdvancementAbilityScoreImprovementTitle": "Ability Score Improvement",
 "DND5E.AdvancementAbilityScoreImprovementHint": "Allow the player to increase one or more ability scores or take an optional feat.",
 "DND5E.AdvancementAbilityScoreImprovementCap": "Point Cap",
@@ -365,6 +366,7 @@
 "DND5E.BackgroundName": "Background Name",
 "DND5E.Biography": "Biography",
 "DND5E.BiographyPublic": "Public Biography",
+"DND5E.BiopgrahyPublicEdit": "Edit Public Biography",
 "DND5E.Bonds": "Bonds",
 "DND5E.Bonus": "Bonus",
 "DND5E.BonusAbility": "Global Ability Bonuses",
@@ -420,6 +422,52 @@
 "DND5E.ClassOriginal": "Original Class",
 "DND5E.ClassSaves": "Saving Throws",
 "DND5E.Confirm": "Confirm",
+"DND5E.CompendiumBrowser": {
+  "Title": "Compendium Browser",
+  "Action": {
+    "Open": "Open Compendium Browser"
+  },
+  "Column": {
+    "Icon": "Icon",
+    "Name": "Name",
+    "Results": "Results"
+  },
+  "Filters": {
+    "Label": "Filters",
+    "HasDarkvision": "Has Darkvision",
+    "HasSpellcasting": "Has Spellcasting",
+    "SearchResults": "Search results"
+  },
+  "Selection": {
+    "Label": "Selected: {summary}",
+    "Select": "Select",
+    "Summary": {
+      "Max": "<span class=\"value\">{value}</span> of up to {max}",
+      "Min": "<span class=\"value\">{value}</span> of at least {min}",
+      "Range": "<span class=\"value\">{value}</span> of {min} to {max}",
+      "Single": "<span class=\"value\">{value}</span> of {max}"
+    },
+    "Warning": {
+      "Document": {
+        "one": "document",
+        "other": "documents"
+      },
+      "Max": "Must select at most {max} {document}, {value} selected.",
+      "Min": "Must select at least {min} {document}, {value} selected.",
+      "Range": "Must select between {min} and {max} documents, {value} selected.",
+      "Single": "Must select {max} {document}, {value} selected."
+    }
+  },
+  "Tabs": {
+    "Feat.other": "Feats",
+    "Item.other": "Items",
+    "Monster.other": "Monsters"
+  },
+  "Types": {
+    "Label": "Types"
+  },
+  "Locked": "Locked"
+},
 "DND5E.ComponentMaterial": "Material",
 "DND5E.ComponentMaterialAbbr": "M",
 "DND5E.ComponentSomatic": "Somatic",
@@ -439,6 +487,8 @@
 "DND5E.ContextMenuActionEquip": "Equip",
 "DND5E.ContextMenuActionUnequip": "Unequip",
 "DND5E.ContextMenuActionPrepare": "Prepare",
+"DND5E.ContextMenuActionExpendCharge": "Uncharge",
+"DND5E.ContextMenuActionCharge": "Charge",
 "DND5E.ContextMenuActionUnprepare": "Unprepare",
 "DND5E.ContextMenuActionAttune": "Attune",
 "DND5E.ContextMenuActionUnattune": "Unattune",
@@ -572,6 +622,7 @@
 "DND5E.Critical": "Critical",
 "DND5E.CriticalHit": "Critical Hit",
 "DND5E.PowerfulCritical": "Powerful Critical",
+"DND5E.CRLabel": "CR {cr}",
 "DND5E.Currency": "Currency",
 "DND5E.CurrencyAbbrCP": "cp",
 "DND5E.CurrencyAbbrEP": "ep",
@@ -668,6 +719,7 @@
 "DND5E.DescriptionSummary": "Summary Description",
 "DND5E.DescriptionUnidentified": "Unidentified Description",
 "DND5E.Details": "Details",
+"DND5E.DetailsEdit": "Edit Details",
 "DND5E.Dimensions": "Dimensions",
 "DND5E.Disadvantage": "Disadvantage",
 "DND5E.Discord": "Discord",
@@ -717,6 +769,7 @@
   },
   "Configuration": "Enchantment Configuration",
   "DropArea": "Place item here to enchant it…",
+  "Enchanted": "{current} &sol; {max} enchanted",
   "FIELDS": {
     "enchantment": {
       "label": "Enchantment Configuration",
@@ -752,7 +805,7 @@
     "Hint": "Range of levels required to use this enchantment."
   },
   "Items": {
-    "Entry": "{item} on  <em>{actor}</em>"
+    "Entry": "{item} on <em>{actor}</em>"
   },
   "Riders": {
     "Effect": {
@@ -867,6 +920,7 @@
 "DND5E.IdentifierCopy": "Copy Identifier",
 "DND5E.IdentifierCopied": "Copied!",
 "DND5E.ItemRarityCommon": "common",
+"DND5E.ItemRarityMundane": "mundane",
 "DND5E.ItemRarityUncommon": "uncommon",
 "DND5E.ItemRarityRare": "rare",
 "DND5E.ItemRarityVeryRare": "very rare",
@@ -894,6 +948,7 @@
 "DND5E.FilterClear": "Clear Filters",
 "DND5E.FilterGroupCategory": "Group by Category",
 "DND5E.FilterGroupOrigin": "Group by Origin",
+"DND5E.FilterGroupAction": "Group by Action",
 "DND5E.FilterNoSpells": "No spells found for this set of filters.",
 "DND5E.NoSpellLevels": "This character has no spellcaster levels, but you may add spells manually.",
 "DND5E.FlagsInstructions": "Configure character features and traits which fine-tune behaviors of the DnD5e system.",
@@ -1001,6 +1056,7 @@
 "DND5E.Identify": "Identify",
 "DND5E.Immunities": "Immunities",
 "DND5E.Initiative": "Initiative",
+"DND5E.InitiativeAbbr": "Init",
 "DND5E.InitiativeBonus": "Initiative Bonus",
 "DND5E.InitiativeRoll": "Initiative Roll",
 "DND5E.InitiativeConfig": "Configure Initiative",
@@ -1060,6 +1116,10 @@
 "DND5E.ItemName": "Item Name",
 "DND5E.ItemNew": "New {type}",
 "DND5E.Item": {
+  "Category": {
+    "Label": "Category",
+    "Physical": "Physical"
+  },
   "Property": {
     "Adamantine": "Adamantine",
     "Ammunition": "Ammunition",
@@ -1144,10 +1204,18 @@
 "DND5E.LanguagesThievesCant": "Thieves' Cant",
 "DND5E.LanguagesUndercommon": "Undercommon",
 "DND5E.LegAct": "Legendary Actions",
+"DND5E.LegActN.one": "1st Legendary Action",
+"DND5E.LegActN.two": "2nd Legendary Action",
+"DND5E.LegActN.few": "3rd Legendary Action",
+"DND5E.LegActN.other": "{n}th Legendary Action",
 "DND5E.LegActMax": "Maximum Legendary Actions",
 "DND5E.LegActRemaining": "Remaining Legendary Actions",
 "DND5E.LegendaryActionLabel": "Legendary Action",
 "DND5E.LegRes": "Legendary Resistance",
+"DND5E.LegResN.one": "1st Legendary Resistance",
+"DND5E.LegResN.two": "2nd Legendary Resistance",
+"DND5E.LegResN.few": "3rd Legendary Resistance",
+"DND5E.LegResN.other": "{n}th Legendary Resistance",
 "DND5E.LegResMax": "Maximum Legendary Resistances",
 "DND5E.LegResRemaining": "Remaining Legendary Resistances",
 "DND5E.Level": "Level",
@@ -1208,9 +1276,11 @@
 "DND5E.Normal": "Normal",
 "DND5E.NotProficient": "Not Proficient",
 "DND5E.Notes": "Notes",
+"DND5E.NPC": "NPC",
 "DND5E.OtherFormula": "Other Formula",
 "DND5E.PactMagic": "Pact Magic",
 "DND5E.Passive": "Passive",
+"DND5E.PassivePerception": "Passive Perception",
 "DND5E.PersonalityTraits": "Personality Traits",
 "DND5E.PlaceTemplate": "Place Measured Template",
 "DND5E.PlaceTemplateError": "Failed to place measured template",
@@ -1271,6 +1341,7 @@
 "DND5E.Properties": "Properties",
 "DND5E.PropertyBase": "Base",
 "DND5E.PropertyTotal": "Total",
+"DND5E.Public": "Public",
 "DND5E.Quantity": "Quantity",
 "DND5E.QuantityAbbr": "Qty",
 "DND5E.QuantityFormula": "Quantity Formula",
@@ -1366,6 +1437,7 @@
 "DND5E.SheetClassJournalEntry": "Default 5e Journal Entry Sheet",
 "DND5E.SheetClassMapLocation": "Default 5e Map Location Sheet",
 "DND5E.SheetClassNPC": "Default 5e NPC Sheet",
+"DND5E.SheetClassNPCLegacy": "Legacy 5e NPC Sheet",
 "DND5E.SheetClassRule": "Default 5e Rule Sheet",
 "DND5E.SheetClassSpellList": "Default 5e Spell List Sheet",
 "DND5E.SheetClassToken": "Default 5e Token Sheet",
@@ -1374,6 +1446,7 @@
 "DND5E.SheetModePlay": "Play",
 "DND5E.SavingThrow": "Saving Throw",
 "DND5E.SavingThrowDC": "DC {dc} {ability} Saving Throw",
+"DND5E.SavingThrowRoll": "Roll {ability} Saving Throw",
 "DND5E.SaveDC": "DC {dc} {ability}",
 "DND5E.SavePromptTitle": "{ability} Saving Throw",
 "DND5E.ScalingFormula": "Scaling Formula",
@@ -1435,6 +1508,7 @@
 "DND5E.SkillPromptTitle": "{skill} Skill Check",
 "DND5E.SkillConfigureTitle": "Configure {skill}",
 "DND5E.SkillConfigure": "Configure Skill",
+"DND5E.SkillsConfig": "Configure Skills",
 "DND5E.SkillBonuses": "Skill Bonuses",
 "DND5E.SkillBonusCheck": "Check Bonus",
 "DND5E.SkillBonusPassive": "Passive Bonus",
@@ -1516,6 +1590,7 @@
 "DND5E.SpellPrepAlways": "Always Prepared",
 "DND5E.SpellPreparation": "Spell Preparation",
 "DND5E.SpellPreparationMode": "Spell Preparation Mode",
+"DND5E.SpellSourceClass": "Source Class",
 "DND5E.SpellPrepared": "Prepared",
 "DND5E.SpellProgArt": "Artificer",
 "DND5E.SpellProgAvailable": "Available slots",
@@ -1657,10 +1732,18 @@
       "Hint": "Modify to saving throw DCs on the summoned creature's abilities to match that of the summoner."
     }
   },
+  "Mode": {
+    "Label": "Mode",
+    "Hint": "Sets how the creatures that are to be summoned are specified.",
+    "CR": "By Challenge Rating & Type",
+    "Direct": "By Direct Link"
+  },
   "Profile": {
     "Label": "Summons Profile",
     "LabelPl": "Summons Profiles",
-    "Empty": "Click above to add a profile or drop an creature to summon here."
+    "ChallengeRatingLabel": "Challenge Rating of {cr} or lower",
+    "Empty": "Click above to add a profile.",
+    "EmptyDrop": "Click above to add a profile or drop a creature to summon here."
   },
   "Prompt": {
     "Label": "Summon Prompt",
@@ -1668,6 +1751,7 @@
   },
   "Warning": {
     "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
+    "CRV11": "Summoning based on creature challenge rating only works in Foundry V12 or higher.",
     "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
     "NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
     "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
@@ -1677,6 +1761,7 @@
 "DND5E.Supply": "Supply",
 "DND5E.Suppressed": "Suppressed",
 "DND5E.Target": "Target",
+"DND5E.TargetPl": "Targets",
 "DND5E.TargetAlly": "Ally",
 "DND5E.TargetAny": "Any",
 "DND5E.TargetCone": "Cone",
@@ -1743,6 +1828,7 @@
   },
   "Title": "Dynamic Ring"
 },
+"DND5E.ToggleDescription": "Toggle Description",
 "DND5E.ToolArtisans": "Artisan's Tools",
 "DND5E.ToolBonuses": "Tool Bonuses",
 "DND5E.ToolCheck": "Tool Check",
@@ -1857,7 +1943,7 @@
 "DND5E.VersatileDamage": "Versatile Damage",
 "DND5E.VsDC": "vs DC.",
 "DND5E.Vulnerabilities": "Vulnerabilities",
-"DND5E.WarnBadACFormula": "The provided AC formula could not be evaluated.",
+"DND5E.WarnBadACFormula": "The provided AC formula \"{formula}\" could not be evaluated.",
 "DND5E.WarnCantAddMultipleAdvancements": "It is not currently possible to add multiple items with advancements to an actor at the same time. Please add them individually.",
 "DND5E.WarnMultipleArmor": "More than one suit of armor equipped, AC calculation may be incorrect.",
 "DND5E.WarnMultipleShields": "More than one shield equipped, AC calculation may be incorrect.",

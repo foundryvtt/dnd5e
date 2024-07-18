@@ -1,3 +1,4 @@
+import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 
@@ -26,6 +27,7 @@ _______________________________`;
  * @property {Object<string, number|string>}  [defaults]  Default values for this ability based on actor type.
  *                                                        If a string is used, the system will attempt to fetch.
  *                                                        the value of the specified ability.
+ * @property {string} [icon]                              An SVG icon that represents the ability.
  */
 
 /**
@@ -38,21 +40,24 @@ DND5E.abilities = {
     abbreviation: "DND5E.AbilityStrAbbr",
     type: "physical",
     fullKey: "strength",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.nUPv6C66Ur64BIUH"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.nUPv6C66Ur64BIUH",
+    icon: "systems/dnd5e/icons/svg/abilities/strength.svg"
   },
   dex: {
     label: "DND5E.AbilityDex",
     abbreviation: "DND5E.AbilityDexAbbr",
     type: "physical",
     fullKey: "dexterity",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ER8CKDUWLsFXuARJ"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ER8CKDUWLsFXuARJ",
+    icon: "systems/dnd5e/icons/svg/abilities/dexterity.svg"
   },
   con: {
     label: "DND5E.AbilityCon",
     abbreviation: "DND5E.AbilityConAbbr",
     type: "physical",
     fullKey: "constitution",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.MpA4jnwD17Q0RPg7"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.MpA4jnwD17Q0RPg7",
+    icon: "systems/dnd5e/icons/svg/abilities/constitution.svg"
   },
   int: {
     label: "DND5E.AbilityInt",
@@ -60,6 +65,7 @@ DND5E.abilities = {
     type: "mental",
     fullKey: "intelligence",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.WzWWcTIppki35YvF",
+    icon: "systems/dnd5e/icons/svg/abilities/intelligence.svg",
     defaults: { vehicle: 0 }
   },
   wis: {
@@ -68,6 +74,7 @@ DND5E.abilities = {
     type: "mental",
     fullKey: "wisdom",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.v3IPyTtqvXqN934s",
+    icon: "systems/dnd5e/icons/svg/abilities/wisdom.svg",
     defaults: { vehicle: 0 }
   },
   cha: {
@@ -76,6 +83,7 @@ DND5E.abilities = {
     type: "mental",
     fullKey: "charisma",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9FyghudYFV5QJOuG",
+    icon: "systems/dnd5e/icons/svg/abilities/charisma.svg",
     defaults: { vehicle: 0 }
   },
   hon: {
@@ -677,8 +685,10 @@ DND5E.tokenRingColors = {
 
 /**
  * Configuration data for a map marker style. Options not included will fall back to the value set in `default` style.
+ * Any additional styling options added will be passed into the custom marker class and be available for rendering.
  *
  * @typedef {object} MapLocationMarkerStyle
+ * @property {typeof PIXI.Container} [icon]  Map marker class used to render the icon.
  * @property {number} [backgroundColor]      Color of the background inside the circle.
  * @property {number} [borderColor]          Color of the border in normal state.
  * @property {number} [borderHoverColor]     Color of the border when hovering over the marker.
@@ -693,6 +703,7 @@ DND5E.tokenRingColors = {
  */
 DND5E.mapLocationMarker = {
   default: {
+    icon: MapLocationControlIcon,
     backgroundColor: 0xFBF8F5,
     borderColor: 0x000000,
     borderHoverColor: 0xFF5500,
@@ -1634,6 +1645,14 @@ DND5E.damageTypes = {
 preLocalize("damageTypes", { keys: ["label"], sort: true });
 
 /* -------------------------------------------- */
+
+/**
+ * Display aggregated damage in chat cards.
+ * @type {boolean}
+ */
+DND5E.aggregateDamageDisplay = true;
+
+/* -------------------------------------------- */
 /*  Movement                                    */
 /* -------------------------------------------- */
 
@@ -2456,6 +2475,7 @@ DND5E.transformationPresets = {
     options: {
       keepBio: true,
       keepClass: true,
+      keepFeats: true,
       keepMental: true,
       mergeSaves: true,
       mergeSkills: true,

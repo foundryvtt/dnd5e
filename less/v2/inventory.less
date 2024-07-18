@@ -155,7 +155,7 @@
         width: 22px;
         text-align: left;
         font-weight: bold;
-        background: color-mix(in oklab, var(--dnd5e-color-card), black 7%);
+        background: var(--dnd5e-background-5);
         border: none;
         padding: 0;
         transition: box-shadow 250ms ease;
@@ -213,11 +213,13 @@
   .items-section {
 
     .items-header, .item {
-      display: flex;
-      align-items: stretch;
-
       &[hidden] { display: none; }
       .condensed { font-family: var(--dnd5e-font-roboto-condensed); }
+
+      .item-row {
+        display: flex;
+        align-items: stretch;
+      }
 
       .item-name {
         flex: 1;
@@ -239,9 +241,9 @@
           font-size: var(--font-size-13);
         }
 
+        .name { flex: 1; }
+
         .tags {
-          position: absolute;
-          right: .5rem;
           opacity: .25;
           font-size: var(--font-size-14);
           display: flex;
@@ -341,6 +343,7 @@
           text-align: start;
         }
         input { text-align: end; }
+        i.fa-bolt { color: var(--dnd5e-color-gold); }
       }
       .spell-uses { display: none; }
 
@@ -349,6 +352,18 @@
 
       /* Spell School, Cast Time, & To Hit / DC */
       .item-school, .item-usage, .item-roll { width: 40px; }
+
+      /* Capacity */
+      .item-capacity {
+        width: 200px;
+
+        .meter {
+          width: 100%;
+          height: 25px;
+
+          i { font-size: var(--font-size-9); }
+        }
+      }
 
       .item-school {
         --icon-fill: var(--dnd5e-color-gold);
@@ -361,6 +376,8 @@
           display: flex;
           flex-direction: column;
           align-items: center;
+
+          .value { font-size: var(--font-size-13); }
         }
 
         &.item-detail { font-weight: bold; }
@@ -391,10 +408,9 @@
       }
 
       /* Spell Target & Formula */
-      .item-target, .item-formula { width: 80px; }
+      .item-target, .item-formula, .spell-formula { width: 80px; }
 
-      .item-formula {
-        display: none;
+      .item-formula, .spell-formula {
         flex-direction: column;
 
         dnd5e-icon {
@@ -407,6 +423,9 @@
           gap: .1875rem;
         }
       }
+
+      .item-formula { display: flex; }
+      .spell-formula { display: none; }
 
       /* Effect Duration */
       .effect-name {
@@ -425,7 +444,7 @@
 
       /* Item Controls */
       .item-controls {
-        width: 60px;
+        width: 70px;
         align-items: stretch;
         justify-content: center;
         gap: .375rem;
@@ -448,10 +467,10 @@
           position: absolute;
           inset-block: 0;
           inset-inline-end: 0;
-          width: 1.5rem;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: end;
+          padding: 0 12px 0 5px;
         }
       }
 
@@ -463,17 +482,40 @@
         align-items: center;
       }
 
-      @container (min-width: 600px) {
-        .item-price, .item-formula, .spell-uses { display: flex; }
+      /* Item Description */
+      .item-description {
+        font-size: var(--font-size-11);
+
+        .item-summary {
+          padding: 1px 8px 8px;
+          background: var(--dnd5e-color-parchment);
+          .item-properties { padding-top: 7px; }
+          > * + .item-properties { padding-top: 0; }
+        }
+      }
+
+      @container (min-width: 580px) {
+        .spell-uses { display: flex; }
         .subtitle-uses { display: none; }
       }
 
-      @container (min-width: 650px) {
+      @container (min-width: 600px) {
+        .item-price { display: flex; }
+      }
+
+      @container (min-width: 640px) {
+        .spell-formula { display: flex; }
+      }
+
+      @container (min-width: 660px) {
         .item-school { display: flex; }
       }
     }
 
     .items-header {
+      display: flex;
+      align-items: stretch;
+
       .config-button {
         position: absolute;
         inset: .5rem 1.5rem auto auto;
@@ -490,6 +532,11 @@
     .item {
       border-bottom: var(--dnd5e-border-dotted);
       &:last-child { border: none; }
+    }
+
+    .effect {
+      display: flex;
+      align-items: stretch;
     }
   }
 

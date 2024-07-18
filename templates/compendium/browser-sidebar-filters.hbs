@@ -1,0 +1,54 @@
+<div class="flexcol">
+    {{#each additional}}
+    {{#if (eq type "boolean")}}
+    <div class="filter filter-boolean form-group" data-filter-id="{{ key }}">
+        <label>
+            <filter-state name="additional.{{ key }}" value="{{ value }}" {{ disabled locked }}></filter-state>
+            <span>{{ localize label }}</span>
+        </label>
+    </div>
+    {{else if (eq type "range")}}
+    <div class="filter filter-range form-group" data-filter-id="{{ key }}">
+        <label class="roboto-upper">{{ localize label }}</label>
+        <div class="form-fields">
+            <input type="number" name="additional.{{ key }}.min" value="{{ value.min }}"
+                   min="{{ config.min }}" max="{{ config.max }}" step="any" placeholder="{{ config.min }}"
+                   {{ disabled locked.min }}>
+            <span class="sep"><dnd5e-icon src="systems/dnd5e/icons/svg/range-connector.svg"></dnd5e-icon></span>
+            <input type="number" name="additional.{{ key }}.max" value="{{ value.max }}"
+                   min="{{ config.min }}" max="{{ config.max }}" step="any" placeholder="{{ config.max }}"
+                   {{ disabled locked.max }}>
+        </div>
+    </div>
+    {{else if (eq type "set")}}
+    <div class="filter filter-set collapsible" data-filter-id="{{ key }}">
+        <div class="filter-header">
+            <label data-action="toggleCollapse">
+                <span class="roboto-upper">{{ localize label }}</span>
+                <i class="fa-solid fa-caret-down"></i>
+            </label>
+        </div>
+        <div class="collapsible-content">
+            <div class="wrapper">
+                {{#if config.blank}}
+                <label class="filter-choice">
+                    <filter-state name="additional.{{ key }}._blank" value="{{ value._blank }}"
+                                  {{ disabled locked._blank }}></filter-state>
+                    <span>{{ localize config.blank }}</span>
+                </label>
+                {{/if}}
+                {{#each config.choices}}
+                <label class="filter-choice">
+                    <filter-state name="additional.{{ ../key }}.{{ @key }}" value="{{ lookup ../value @key }}"
+                                  {{ disabled (lookup ../locked @key) }}></filter-state>
+                    <span>{{ ifThen label label this }}</span>
+                </label>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="filter" data-filter-id="{{ key }}">{{ label }}</div>
+    {{/if}}
+    {{/each}}
+</div>

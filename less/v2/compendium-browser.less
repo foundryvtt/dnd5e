@@ -1,0 +1,269 @@
+.dnd5e2.compendium-browser {
+  --icon-size: 32px;
+  border: none;
+  background: none;
+  min-width: 750px;
+  min-height: 600px;
+
+  > header {
+    background: none;
+
+    .window-title { visibility: hidden; }
+
+    button.header-control {
+      border-radius: 100%;
+      background: var(--dnd5e-background-25);
+      width: 18px;
+      height: 18px;
+      aspect-ratio: 1;
+      line-height: unset;
+      display: grid;
+      place-content: center;
+      box-shadow: none;
+      font-size: var(--font-size-14);
+      flex: none;
+
+      &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
+    }
+  }
+
+  .window-resize-handle {
+    inset: auto 0 0 auto;
+    z-index: 1;
+  }
+
+  .window-content {
+    background: url("ui/texture1.webp") no-repeat top center / auto 770px,
+      var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "sidebar results"
+      "sidebar footer";
+    grid-template-columns: 230px auto;
+    grid-template-rows: min-content auto 2.75rem;
+    margin-top: calc(var(--header-height) * -1);
+    padding-top: var(--header-height);
+    overflow: hidden;
+
+    &:has(> .footer:empty) { grid-template-rows: min-content auto 0; }
+
+    .sidebar { grid-area: sidebar; }
+    .results { grid-area: results; }
+    .footer { grid-area: footer; }
+    .header { grid-area: header; }
+
+    h2 {
+      color: var(--color-text-dark-primary);
+      text-shadow: none;
+      font-size: var(--font-size-24);
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      text-align: center;
+      margin: 0 0 10px 0;
+    }
+
+    .mode-toggle {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      z-index: 1;
+      font-family: var(--dnd5e-font-roboto-condensed);
+
+      slide-toggle {
+        --slide-toggle-track-color-unchecked: var(--dnd5e-background-25);
+        --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
+      }
+    }
+
+    .sidebar, .results { scrollbar-color: var(--dnd5e-color-scrollbar) transparent; }
+  }
+
+  nav.tabs {
+    top: 64px;
+
+    > .item {
+      --icon-size: 20px;
+      height: 44px;
+
+      i { font-size: var(--font-size-20); }
+    }
+  }
+
+  .sidebar {
+    height: 100%;
+    overflow-y: auto;
+    gap: 12px;
+    padding: 6px 12px 3px;
+    font-family: var(--dnd5e-font-roboto-condensed);
+
+    [data-application-part="types"] {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      &[hidden] { display: none; }
+      .type-group-header { margin-bottom: 4px; }
+
+      .type-entry, .type-group-header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        align-items: center;
+
+        label {
+          cursor: pointer;
+          display: flex;
+          gap: 4px;
+          align-items: center;
+        }
+      }
+
+      .type-group .wrapper {
+        margin-inline-start: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      [data-action="toggleCollapse"] {
+        width: 20px;
+        margin-inline-start: auto;
+        cursor: pointer;
+        text-align: center;
+      }
+    }
+
+    [data-application-part="filters"] { gap: 8px; }
+
+    .filter-header > label {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      font-size: var(--font-size-11);
+
+      > span { flex: none; }
+
+      &::before, &::after {
+        content: "";
+        flex-basis: 50%;
+        border-top: 1px dotted var(--dnd5e-color-gold);
+        align-self: center;
+      }
+    }
+
+    filter-state { --filter-state-background-color: var(--dnd5e-color-gold); }
+
+    filter-state:disabled .indicator:not([data-value="0"]) {
+      position: relative;
+      font-weight: bold;
+
+      &::before { content: "\f0c8"; }
+      &::after {
+        content: "\f023";
+        position: absolute;
+        color: var(--color-light-1);
+        font-family: var(--font-awesome);
+        font-size: calc(var(--filter-state-size) * .6);
+        inset-block: 3.5px;
+        inset-inline: 2.5px;
+      }
+    }
+
+    .filter {
+      > label { line-height: 1; }
+
+      &.filter-set .filter-choice, &.filter-boolean > label { cursor: pointer; }
+
+      &.filter-set .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      &.filter-range {
+        flex-direction: column;
+        align-items: start;
+        gap: 4px;
+
+        > label {
+          font-weight: normal;
+          font-size: var(--font-size-11);
+        }
+
+        .sep {
+          --icon-size: 16px;
+          --icon-fill: var(--color-text-light-6);
+        }
+
+        input[type=number] {
+          --input-border-color: transparent;
+          transition: all 250ms ease;
+          outline: 0;
+          text-align: center;
+          height: unset;
+          line-height: normal;
+          font-family: var(--dnd5e-font-roboto);
+          font-size: var(--font-size-11);
+          padding: 6px;
+
+          &:hover, &:focus {
+            --input-border-color: var(--dnd5e-color-gold);
+            outline: 0;
+            box-shadow: 0 0 6px var(--dnd5e-color-gold);
+          }
+        }
+      }
+    }
+  }
+
+  .results {
+    --results-padding: 6px;
+    padding: var(--results-padding) 12px 12px;
+    overflow-y: auto;
+
+    .results-loading {
+      text-align: center;
+      padding: 20px;
+      font-size: 18px;
+      color: var(--color-text-light-6);
+      > i { height: 16px; }
+    }
+
+    .items-header {
+      position: sticky;
+      top: calc(var(--results-padding) * -1);
+      z-index: 1;
+    }
+
+    .items-section .item .item-controls {
+      width: 50px;
+      align-items: center;
+      padding: 0;
+    }
+
+    .item.selected { border-left: 4px solid var(--dnd5e-color-gold); }
+    ol li { margin: 0; }
+  }
+
+  .footer:not(:empty) {
+    padding: 4px 24px;
+    font-family: var(--dnd5e-font-roboto-condensed);
+    font-size: var(--font-size-14);
+
+    .count {
+      .value { font-weight: bold; }
+      &:not(.invalid) .value { color: var(--dnd5e-color-green); }
+      &.invalid .value { color: var(--dnd5e-color-maroon); }
+    }
+
+    button:hover {
+      background: var(--dnd5e-background-card);
+      color: var(--color-text-dark-primary);
+    }
+  }
+}

@@ -38,7 +38,7 @@ export default class TraitFlow extends AdvancementFlow {
     this.chosen ??= await this.prepareInitialValue();
     const available = await this.advancement.availableChoices(this.chosen);
     return foundry.utils.mergeObject(super.getData(), {
-      hint: this.advancement.configuration.hint ? this.advancement.configuration.hint : Trait.localizedList({
+      hint: this.advancement.hint ? this.advancement.hint : Trait.localizedList({
         grants: this.advancement.configuration.grants, choices: this.advancement.configuration.choices
       }),
       slots: this.prepareTraitSlots(available),

@@ -1,6 +1,6 @@
 :is(.dnd5e-theme-dark, .theme-dark) .dnd5e2,
 .dnd5e2.dnd5e-theme-dark {
-  &.sheet {
+  &.sheet, &.compendium-browser {
     /* TODO: Move these out once dark themes have been ported to all apps, not just the character sheet. */
     --color-text-dark-primary: var(--dnd5e-color-blue-white);
     --color-text-dark-secondary: var(--color-text-light-6);
@@ -15,9 +15,10 @@
     --dnd5e-border-gold: 1px solid var(--dnd5e-color-blue-gray-1);
     --filigree-background-color: var(--dnd5e-color-blue-gray-2);
     --filigree-border-color: var(--dnd5e-color-blue-gray-3);
+    --dnd5e-background-5: var(--dnd5e-highlight-10);
 
     select option { background: var(--dnd5e-color-blue-gray-2); }
-    .window-resizable-handle { color: var(--dnd5e-color-blue-white); }
+    .window-resizable-handle { filter: invert(1); }
 
     .card .header {
       background: linear-gradient(to right, #491d25, #311b1f);
@@ -42,6 +43,11 @@
       &.green, &.maroon {
         border-color: var(--dnd5e-color-blue-gray-1);
         color: var(--dnd5e-color-blue-white);
+      }
+
+      &.transparent, &.pill-sm {
+        color: var(--color-text-dark-primary);
+        border-style: solid;
       }
     }
 
@@ -109,13 +115,5 @@
   .filter-control {
     color: var(--dnd5e-color-blue-gray-3);
     &.active { color: var(--dnd5e-color-gold); }
-  }
-}
-
-:is(.dnd5e-theme-dark, .theme-dark) .dnd5e2.sheet.actor.character .effects-element {
-  .conditions-list .condition.content-link {
-    background: unset;
-    border-color: var(--dnd5e-color-blue-gray-3);
-    &:hover { background: var(--dnd5e-color-blue-gray-3); }
   }
 }

@@ -52,7 +52,7 @@
     "uses": {
       "value": 10,
       "max": "10",
-      "per": "charges",
+      "per": "dawn",
       "recovery": "1d6 + 4",
       "prompt": true
     },
@@ -63,7 +63,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "heal",
+    "actionType": "other",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -73,7 +73,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "",
+    "formula": "1d20",
     "save": {
       "ability": "",
       "dc": null,
@@ -89,6 +89,7 @@
       "conditions": ""
     },
     "properties": [
+      "foc",
       "mgc"
     ],
     "proficient": null,
@@ -118,11 +119,12 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
+    "systemVersion": "3.2.1",
+    "coreVersion": "12.327",
     "createdTime": 1661787233689,
-    "modifiedTime": 1715374614391,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1719169314650,
+    "lastModifiedBy": "dnd5ebuilder0000",
+    "duplicateSource": null
   },
   "_key": "!items!WLVQJVpCWiPkCAtZ"
 }
