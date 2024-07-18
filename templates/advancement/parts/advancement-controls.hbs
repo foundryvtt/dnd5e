@@ -1,27 +1,27 @@
 <div class="form-group">
-    <label>{{localize "DND5E.AdvancementCustomTitle"}}</label>
+    <label>{{ localize "DND5E.AdvancementCustomTitle" }}</label>
     <div class="form-fields">
-        <input type="text" name="title" value="{{src.title}}" placeholder="{{default.title}}">
+        <input type="text" name="title" value="{{ src.title }}" placeholder="{{ default.title }}">
     </div>
 </div>
 
 <div class="form-group">
-    <label>{{localize "DND5E.AdvancementCustomIcon"}}</label>
+    <label>{{ localize "DND5E.AdvancementCustomIcon" }}</label>
     <div class="form-fields">
-        {{filePicker type="image" target="icon"}}
-        <input type="text" name="icon" value="{{src.icon}}" placeholder="{{default.icon}}">
+        {{ filePicker type="image" target="icon" }}
+        <input type="text" name="icon" value="{{ src.icon }}" placeholder="{{ default.icon }}">
     </div>
 </div>
 
 {{#if showClassRestrictions}}
 <div class="form-group">
-    <label>{{localize "DND5E.AdvancementClassRestriction"}}</label>
+    <label>{{ localize "DND5E.AdvancementClassRestriction" }}</label>
     <div class="form-fields">
         <select name="classRestriction">
             {{#select classRestriction}}
-            <option value="">{{localize "DND5E.AdvancementClassRestrictionNone"}}</option>
-            <option value="primary">{{localize "DND5E.AdvancementClassRestrictionPrimary"}}</option>
-            <option value="secondary">{{localize "DND5E.AdvancementClassRestrictionSecondary"}}</option>
+            <option value="">{{ localize "DND5E.AdvancementClassRestrictionNone" }}</option>
+            <option value="primary">{{ localize "DND5E.AdvancementClassRestrictionPrimary" }}</option>
+            <option value="secondary">{{ localize "DND5E.AdvancementClassRestrictionSecondary" }}</option>
             {{/select}}
         </select>
     </div>
@@ -30,11 +30,16 @@
 
 {{#if showLevelSelector}}
 <div class="form-group">
-    <label>{{localize "DND5E.Level"}}</label>
+    <label>{{ localize "DND5E.Level" }}</label>
     <div class="form-fields">
         <select name="level" data-dtype="Number">
-            {{selectOptions levels selected=level}}
+            {{ selectOptions levels selected=level }}
         </select>
     </div>
 </div>
 {{/if}}
+
+<div class="form-group">
+    <label>{{ localize "DND5E.AdvancementHint" }}</label>
+    <textarea name="hint" {{~#if default.hint}} placeholder="{{ default.hint }}"{{/if}}>{{ hint }}</textarea>
+</div>
