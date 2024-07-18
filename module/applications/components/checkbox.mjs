@@ -130,11 +130,16 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(AbstractForm
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get value() {
+    return super.value;
+  }
+
   /**
    * Override AbstractFormInputElement#value setter because we want to emit input/change events when the checked state
    * changes, and not when the value changes.
    * @override
-   * */
+   */
   set value(value) {
     this._setValue(value);
   }

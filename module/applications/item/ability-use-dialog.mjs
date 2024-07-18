@@ -211,7 +211,7 @@ export default class AbilityUseDialog extends Dialog {
   static _createSummoningOptions(item) {
     const summons = item.system.summons;
     if ( !summons?.profiles.length ) return null;
-    const options = {};
+    const options = { mode: summons.mode };
     const rollData = item.getRollData();
     const level = summons.relevantLevel;
     options.profiles = Object.fromEntries(
@@ -433,6 +433,11 @@ export default class AbilityUseDialog extends Dialog {
     } else if ( data.beginConcentrating && !item.actor.system.attributes?.concentration?.limit ) {
       const locale = "DND5E.ConcentratingWarnLimitZero";
       warnings.push(game.i18n.localize(locale));
+    }
+
+    // Display warning about CR summoning in V11
+    if ( (game.release.generation < 12) && (data.summoningOptions?.mode === "cr") ) {
+      warnings.push(game.i18n.localize("DND5E.Summoning.Warning.CRV11"));
     }
 
     data.warnings = warnings;
