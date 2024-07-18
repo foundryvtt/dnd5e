@@ -1,5 +1,6 @@
 import TokenPlacement from "../../../canvas/token-placement.mjs";
-import { staticID } from "../../../utils.mjs";
+import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
+import { formatCR, simplifyBonus, staticID } from "../../../utils.mjs";
 import { FormulaField, IdentifierField } from "../../fields.mjs";
 
 const {
@@ -21,13 +22,15 @@ export default class SummonsField extends EmbeddedDataField {
  * Information for a single summoned creature.
  *
  * @typedef {object} SummonsProfile
- * @property {string} _id        Unique ID for this profile.
- * @property {string} count      Formula for the number of creatures to summon.
+ * @property {string} _id         Unique ID for this profile.
+ * @property {string} count       Formula for the number of creatures to summon.
+ * @property {string} cr          Formula for the CR of summoned creatures if in CR mode.
  * @property {object} level
- * @property {number} level.min  Minimum level at which this profile can be used.
- * @property {number} level.max  Maximum level at which this profile can be used.
- * @property {string} name       Display name for this profile if it differs from actor's name.
- * @property {string} uuid       UUID of the actor to summon.
+ * @property {number} level.min   Minimum level at which this profile can be used.
+ * @property {number} level.max   Maximum level at which this profile can be used.
+ * @property {string} name        Display name for this profile if it differs from actor's name.
+ * @property {Set<string>} types  Types of summoned creatures if in CR mode.
+ * @property {string} uuid        UUID of the actor to summon if in default mode.
  */
 
 /**
@@ -47,6 +50,7 @@ export default class SummonsField extends EmbeddedDataField {
  * @property {boolean} match.attacks        Match the to hit values on summoned actor's attack to the summoner.
  * @property {boolean} match.proficiency    Match proficiency on summoned actor to the summoner.
  * @property {boolean} match.saves          Match the save DC on summoned actor's abilities to the summoner.
+ * @property {""|"cr"} mode                 Method of determining what type of creature is summoned.
  * @property {SummonsProfile[]} profiles    Information on creatures that can be summoned.
  * @property {boolean} prompt               Should the player be prompted to place the summons?
  */
@@ -92,14 +96,17 @@ export class SummonsData extends foundry.abstract.DataModel {
           label: "DND5E.Summoning.Match.Saves.Label", hint: "DND5E.Summoning.Match.Saves.Hint"
         })
       }),
+      mode: new StringField({label: "DND5E.Summoning.Mode.Label", hint: "DND5E.Summoning.Mode.Hint"}),
       profiles: new ArrayField(new SchemaField({
         _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
         count: new FormulaField(),
+        cr: new FormulaField({deterministic: true}),
         level: new SchemaField({
           min: new NumberField({integer: true, min: 0}),
           max: new NumberField({integer: true, min: 0})
         }),
         name: new StringField(),
+        types: new SetField(new StringField()),
         uuid: new StringField()
       })),
       prompt: new BooleanField({
@@ -593,6 +600,42 @@ export class SummonsData extends foundry.abstract.DataModel {
     }
 
     return tokenDocument.toObject();
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the label for a profile in the ability use dialog.
+   * @param {SummonsProfile} profile  Profile for which to generate the label.
+   * @param {object} rollData         Roll data used to prepare the count.
+   * @returns {string}
+   */
+  getProfileLabel(profile, rollData) {
+    let label;
+    if ( profile.name ) label = profile.name;
+    else {
+      switch ( this.mode ) {
+        case "cr":
+          const cr = simplifyBonus(profile.cr, rollData);
+          label = game.i18n.format("DND5E.Summoning.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
+          break;
+        default:
+          const doc = fromUuidSync(profile.uuid);
+          if ( doc ) label = doc.name;
+          break;
+      }
+    }
+    label ??= "—";
+
+    let count = simplifyRollFormula(Roll.replaceFormulaData(profile.count ?? "1", rollData));
+    if ( Number.isNumeric(count) ) {
+      count = parseInt(count);
+      label = `${count} × ${label}`;
+    } else if ( count ) label = `${count} × ${label}`;
+
+    return label;
   }
 
   /* -------------------------------------------- */
