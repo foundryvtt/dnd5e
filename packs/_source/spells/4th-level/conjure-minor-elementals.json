@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -90,7 +90,77 @@
       "somatic",
       "concentration"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "mode": "cr",
+      "bonuses": {
+        "ac": "",
+        "hd": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "profiles": [
+        {
+          "count": "1 * min(3, floor((@item.level - 2) / 2))",
+          "cr": "2",
+          "name": "",
+          "_id": "GXYOvyt5u1zbrtH5",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "elemental"
+          ]
+        },
+        {
+          "count": "2 * min(3, floor((@item.level - 2) / 2))",
+          "cr": "1",
+          "name": "",
+          "_id": "ip4lVc7sx8WcM7Vd",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "elemental"
+          ]
+        },
+        {
+          "count": "4 * min(3, floor((@item.level - 2) / 2))",
+          "cr": "0.5",
+          "name": "",
+          "_id": "1jJHfKlD44tW61sJ",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "elemental"
+          ]
+        },
+        {
+          "count": "8 * min(3, floor((@item.level - 2) / 2))",
+          "cr": "0.25",
+          "name": "",
+          "_id": "7sGiKZLEAIU83Lqx",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "elemental"
+          ]
+        }
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -99,10 +169,10 @@
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.3.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234117,
-    "modifiedTime": 1704823523272,
+    "modifiedTime": 1721324756744,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!KgEw3sDr39C6g8nY"
