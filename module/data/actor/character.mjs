@@ -79,6 +79,7 @@ export default class CharacterData extends CreatureTemplate {
       attributes: new foundry.data.fields.SchemaField({
         ...AttributesFields.common,
         ...AttributesFields.creature,
+        activeSpellcastingClass: new StringField({ label: "DND5E.ActiveSpellcastingClass" }),
         ac: new SchemaField({
           flat: new NumberField({integer: true, min: 0, label: "DND5E.ArmorClassFlat"}),
           calc: new StringField({initial: "default", label: "DND5E.ArmorClassCalculation"}),
