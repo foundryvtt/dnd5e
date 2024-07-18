@@ -1,4 +1,4 @@
-![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
+![Up to date as of 3.3.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
 
 The award system can be used by DMs to grant their players currency and XP rewards. It can be accessed in three ways, the `/award` command in chat, `[[/award]]` enrichers in journal entries, and the `"Award"` button in group actors.
 
@@ -45,9 +45,6 @@ If the origin button text isn't desired, it can be customized using the enricher
 
 Rather than awarding gold and experience points directly to players in the middle of combat, the DM may wish to grant them first to the group and dole them out at the end of a session. Any XP and gold sent to the primary party using the award command or enrichers will be tracked and can be granted to players using the `"Award"` button just below the experience points tracker.
 
-> [!Note]
-> If experience points tracking is disabled in system settings, then the award button will not appear. Instead DMs can use the currency manager in the inventory tab to distribute just currency to players.
-
-Any awards sent from a group are capped by the amount available in that group, so if a group has 400 XP tracked and the DM grants each player in a five person party 100 XP, the amount each character will receive will only be 80 XP and the tracked XP in the group will be reduced two zero.
+Any awards sent from a group are capped by the amount available in that group, so if a group has 400 XP tracked and the DM grants each player in a five person party 100 XP, the amount each character will receive will only be 80 XP and the tracked XP in the group will be reduced to zero.
 
 For encounter groups, the XP is calculated based on the combined XP of all NPCs within the encounter. This allows the use of the award button to easily grant players the XP for the entire encounter.

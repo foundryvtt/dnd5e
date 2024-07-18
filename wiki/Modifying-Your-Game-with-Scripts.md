@@ -212,7 +212,7 @@ Hooks.once("init", () => {
 
 ## Add new Weapon Types
 You will need a compendium (a [shared compendium module](https://foundryvtt.com/article/module-maker/) works well for this) in which you store a base item, just like the system already has the 'Items SRD' compendium with all the different weapons.
-Then, for each item you want to add as a new 'base weapon', copy the uuid from the item's header - right-click the book icon. Do not left-click.
+Then, for each item you want to add as a new 'base weapon', copy the uuid from the item's header using the book button (right-click in Foundry V11 or lower, left-click in Foundry V12 or higher).
 
 ```js
 // Adds new Weapon types of Hand Cannon and Magnum
