@@ -58,7 +58,7 @@ export default class BaseAdvancement extends SparseDataModel {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   static migrateData(source) {
     super.migrateData(source);
     if ( source.configuration?.hint ) source.hint = source.configuration.hint;
