@@ -1,4 +1,4 @@
-![Up to date as of 3.2.0](https://img.shields.io/static/v1?label=dnd5e&message=3.2.0&color=informational)
+![Up to date as of 3.3.0](https://img.shields.io/static/v1?label=dnd5e&message=3.2.0&color=informational)
 
 The D&D system includes a system for automatically bringing summoned creatures into your world. This allows you to reference a list of creatures to be summoned from a feature or spell, modify the actors before they are brought into the world, and place them where you wish in the scene.
 
@@ -28,9 +28,19 @@ Clicking the "Configure Summons" button will open the summoning configuration sc
 
 ### Summoning Profiles
 
-The top section that reads "Summoning Profiles" is where the actors that will be summoned are set up. It is easy to add actors here by dragging and dropping them from the world or a compendium into the app. By default the name displayed to users will match the actor name, but that can be changed by entering a custom label in the box to the right of the link. Any extra entries can be deleted using the delete button.
+The top section that reads "Summoning Profiles" is where the actors that will be summoned are set up. There are two different modes that can be configured:
+- **By Direct Link**: Each profile links to a specific actor that will be summoned
+- **By Challenge Rating & Type**: Each profile specifies a maximum challenge rating and optional creature types
+
+In *Direct Link* mode it is easy to add actors here by dragging and dropping them from the world or a compendium into the app. By default the name displayed to users will match the actor name, but that can be changed by entering a custom label in the box to the right of the link. Any extra entries can be deleted using the delete button.
 
 In the example above, the spell "Summon Beast" from *Tasha's Cauldron of Everything*, there are three profiles created to match with the three variants of Bestial Spirit that can be created: Air, Land, and Water. Custom labels have been added to make the usage window more legible to players.
+
+![Summoning by Challenge Rating & Type](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-cr-configuration.jpg)
+
+In *Challenge Rating & Type* mode the actor drop area is replaced with a formula for the maximum CR that can be summoned for that profile. The above example of "Conjure Animals" in the SRD specifies four profiles with descending CRs and increasing quantities (with a complex formula to handle the spell's doubling at certain levels).
+
+In the other example of "Conjure Elemental" in the SRD, only a single profile is specified but its CR scales based on the level at which the spell is cast. Within the "Additional Settings" dropdown is a "Creature Types" input for restricting the selection to certain types, in this case "Elemental".
 
 ![Summoning Quantity & Level](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-quantity-level.jpg)
 
@@ -57,6 +67,13 @@ Once configuration is complete, summoning is very easy. Simply activate the feat
 ![Summoning Prompt](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-prompt.jpg)
 
 The "Place Summons" checkbox controls whether a summoned creature will be placed automatically and if there is more than one summoning profile the dropdown will allow player to select what type to summon. After this screen the player's sheet will be minimized and they will be able to place the summon in the current scene.
+
+![Summoning Prompt for CR Mode](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-cr-prompt.jpg)
+
+When summoning in *Challenge Rating & Type* mode, the compendium browser will be brought up after the profile is selected allowing the player to choose which specific creature they wish to summon.
+
+> [!IMPORTANT]
+> Summoning based on challenge rating can only be used when running Foundry V12 or later due to its reliance on the compendium browser. This type of summoning can still be configured in Foundry V11, but no actor will actually be summoned.
 
 ![Summoning Chat Message](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-chat-message.jpg)
 
