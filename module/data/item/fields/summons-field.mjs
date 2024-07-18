@@ -1,3 +1,4 @@
+import CompendiumBrowser from "../../../applications/compendium-browser.mjs";
 import TokenPlacement from "../../../canvas/token-placement.mjs";
 import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
 import { formatCR, simplifyBonus, staticID } from "../../../utils.mjs";
@@ -188,6 +189,7 @@ export class SummonsData extends foundry.abstract.DataModel {
    */
   async summon(profileId, options={}) {
     if ( !this.canSummon || !canvas.scene ) return;
+    if ( (game.release.generation < 12) && (this.mode === "cr") ) return;
 
     const profile = this.profiles.find(p => p._id === profileId);
     if ( !profile ) {
@@ -206,7 +208,9 @@ export class SummonsData extends foundry.abstract.DataModel {
     if ( Hooks.call("dnd5e.preSummon", this.item, profile, options) === false ) return;
 
     // Fetch the actor that will be summoned
-    const actor = await this.fetchActor(profile.uuid);
+    const summonUuid = this.mode === "cr" ? await this.queryActor(profile) : profile.uuid;
+    if ( !summonUuid ) return;
+    const actor = await this.fetchActor(summonUuid);
 
     // Verify ownership of actor
     if ( !actor.isOwner ) {
@@ -318,6 +322,28 @@ export class SummonsData extends foundry.abstract.DataModel {
         "_stats.compendiumSource": actor.uuid
       }, {save: true});
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Request a specific actor to summon from the player.
+   * @param {SummonsProfile} profile  Profile used for summoning.
+   * @returns {Promise<string|null>}  UUID of the concrete actor to summon or `null` if canceled.
+   */
+  async queryActor(profile) {
+    const locked = {
+      documentClass: "Actor",
+      types: new Set(["npc"]),
+      additional: {
+        cr: { max: simplifyBonus(profile.cr, this.item.getRollData({ deterministic: true })) }
+      }
+    };
+    if ( profile.types.size ) locked.additional.type = Array.from(profile.types).reduce((obj, type) => {
+      obj[type] = 1;
+      return obj;
+    }, {});
+    return CompendiumBrowser.selectOne({ filters: { locked } });
   }
 
   /* -------------------------------------------- */
