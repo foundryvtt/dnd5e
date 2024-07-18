@@ -21,7 +21,7 @@ The browser can also be activated from elsewhere in the system in locked mode. I
 
 ## Module Support
 
-The compendium browser will automatically pick up content from any enabled modules, displaying results to players so long as they are able to view a given compendium pack. There is no need to modules to do anything for their users to gain access to content through the compendium browser, but additional hints may be provided to aid in its functionality.
+The compendium browser will automatically pick up content from any enabled modules, displaying results to players so long as they are able to view a given compendium pack. There is no need for modules to do anything for their users to gain access to content through the compendium browser, but additional hints may be provided to aid in its functionality.
 
 When searching for content the compendium browser will use type hints on compendium pack definitions in the module manifest if provided to determine what kind of content is included in the compendium. If no hints are provided, the compendium will always be scanned, but if specific types are specified then it might be skipped if the user isn't searching for those types, potentially improving performance.
 
