@@ -3,7 +3,6 @@
 - [Active Effects Guide](Active-Effect-Guide.md)
 - [Advancement Overview](Advancement.md)
   - [Advancement User Guide](Advancement-User-Guide.md)
-  - [Custom Class Example](Custom-Class-Advancement.md)
   - Advancement Types
     - [Advancement Type: Ability Score Improvement](Advancement-Type-Ability-Score-Improvement.md)
     - [Advancement Type: Hit Points](Advancement-Type-Hit-Points.md)
@@ -12,15 +11,18 @@
     - [Advancement Type: Scale Value](Advancement-Type-Scale-Value.md)
     - [Advancement Type: Size](Advancement-Type-Size.md)
     - [Advancement Type: Trait](Advancement-Type-Trait.md)
-- Tutorials
-  - [Custom Races](Custom-Race-Tutorial.md)
 - [Awards](Awards.md)
+- [Compendium Browser](Compendium-Browser.md)
 - [Dynamic Module Art](Dynamic-Module-Art.md)
 - [Enchantment](Enchantment.md)
 - [Enrichers](Enrichers.md)
 - [Frequently Asked Questions](FAQ.md)
 - [Hooks](Hooks.md)
 - [Roll Formulas](Roll-Formulas.md)
-- [Modifying Your Game with World Scripts](Modifying-Your-Game-with-Scripts.md)
 - [Summoning](Summoning.md)
-- [Contributing to the Wiki](Contributing-to-the-Wiki.md)
+- Tutorials
+  - [Custom Classes](Custom-Class-Advancement.md)
+  - [Custom Races](Custom-Race-Tutorial.md)
+  - [Modifying Your Game with World Scripts](Modifying-Your-Game-with-Scripts.md)
+
+This wiki accepts community updates. Check out the [Contributing to the Wiki](Contributing-to-the-Wiki.md) guide for information on how to make a change.
