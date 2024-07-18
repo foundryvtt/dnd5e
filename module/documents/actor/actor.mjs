@@ -19,10 +19,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
-   * @type {Object<Item5e>}
+   * @type {Record<string, Item5e>}
    * @private
    */
   _classes;
+
+  /**
+   * Cached spellcasting classes.
+   * @type {Record<string, Item5e>}
+   * @private
+   */
+  _spellcastingClasses;
 
   /**
    * Mapping of item source IDs to the items.
@@ -54,7 +61,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * A mapping of classes belonging to this Actor.
-   * @type {Object<Item5e>}
+   * @type {Record<string, Item5e>}
    */
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
@@ -72,7 +79,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Record<string, Item5e>}
    */
   get spellcastingClasses() {
-    return Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
+    if ( this._spellcastingClasses !== undefined ) return this._spellcastingClasses;
+    return this._spellcastingClasses = Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
       if ( cls.spellcasting && (cls.spellcasting.progression !== "none") ) obj[identifier] = cls;
       return obj;
     }, {});
@@ -175,10 +183,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   prepareData() {
     if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
-    this._classes = undefined;
+    this._clearCachedValues();
     this._preparationWarnings = [];
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Clear cached class collections.
+   * @internal
+   */
+  _clearCachedValues() {
+    this._classes = undefined;
+    this._spellcastingClasses = undefined;
   }
 
   /* --------------------------------------------- */
