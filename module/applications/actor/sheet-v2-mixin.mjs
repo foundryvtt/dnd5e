@@ -93,6 +93,7 @@ export default function ActorSheetV2Mixin(Base) {
         const firstButton = header.querySelector(".header-button");
         firstButton?.insertAdjacentElement("beforebegin", idLink);
         idLink.classList.add("header-button");
+        idLink.dataset.tooltipDirection = "DOWN";
       }
 
       // Render tabs.
@@ -140,9 +141,10 @@ export default function ActorSheetV2Mixin(Base) {
       // Portrait
       const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
       const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
+      const defaultArtwork = Actor.implementation.getDefaultArtwork(context.source)?.img;
       context.portrait = {
         token: showTokenPortrait,
-        src: showTokenPortrait ? token.texture.src : this.actor.img,
+        src: showTokenPortrait ? token.texture.src : this.actor.img ?? defaultArtwork,
         // TODO: Not sure the best way to update the parent texture from this sheet if this is a token actor.
         path: showTokenPortrait ? this.actor.isToken ? "" : "prototypeToken.texture.src" : "img"
       };

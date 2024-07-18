@@ -33,38 +33,32 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(AbstractForm
       width: var(--checkbox-size, 18px);
       height: var(--checkbox-size, 18px);
       aspect-ratio: 1;
-      
-      > div {
-        width: 100%;
-        height: 100%;
-        border-radius: var(--checkbox-border-radius, 3px);
-        border: var(--checkbox-border-width, 2px) solid var(--checkbox-border-color, var(--dnd5e-color-gold));
-        background: var(--checkbox-empty-color, transparent);
-        box-sizing: border-box;
-      }
-      
-      .checked, .disabled, .indeterminate {
-        display: none;
-        height: 100%;
-        width: 100%;
-        background: var(--checkbox-fill-color, var(--dnd5e-color-gold));
-        align-items: center;
-        justify-content: center;
-      }
+    }
+    
+    :host > div {
+      width: 100%;
+      height: 100%;
+      border-radius: var(--checkbox-border-radius, 3px);
+      border: var(--checkbox-border-width, 2px) solid var(--checkbox-border-color, var(--dnd5e-color-gold));
+      background: var(--checkbox-empty-color, transparent);
+      box-sizing: border-box;
+    }
+    
+    :host :is(.checked, .disabled, .indeterminate) {
+      display: none;
+      height: 100%;
+      width: 100%;
+      background: var(--checkbox-fill-color, var(--dnd5e-color-gold));
+      align-items: center;
+      justify-content: center;
     }
     
     :host([checked]) .checked { display: flex; }
-    
-    :host([indeterminate]) {
-      .indeterminate { display: flex; }
-      .checked { display: none; }
-    }
-    
-    :host(:disabled) {
-      .disabled { display: flex; }
-      .checked { display: none; }
-      .indeterminate { display: none; }
-    }
+    :host([indeterminate]) .indeterminate { display: flex; }
+    :host([indeterminate]) .checked { display: none; }
+    :host(:disabled) .disabled { display: flex; }
+    :host(:disabled) .checked { display: none; }
+    :host(:disabled) .indeterminate { display: none; }
   `;
 
   /* -------------------------------------------- */
