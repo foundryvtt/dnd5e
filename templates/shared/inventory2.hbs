@@ -99,7 +99,8 @@
             <span class="value">{{ value }}</span>
             <span class="separator">&sol;</span>
             {{#if @root.editable}}
-            {{ numberInput max name="system.attributes.attunement.max" class="max" min=0 step=1 }}
+            {{ numberInput @root.source.attributes.attunement.max name="system.attributes.attunement.max" class="max"
+                           min=0 step=1 }}
             {{else}}
             <span class="max">{{ max }}</span>
             {{/if}}
