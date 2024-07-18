@@ -224,8 +224,8 @@ export default class AbilityUseDialog extends Dialog {
         })
         .filter(f => f)
     );
-    if ( Object.values(options.profiles).every(p => p.startsWith("1 x ")) ) {
-      Object.entries(options.profiles).forEach(([k, v]) => options.profiles[k] = v.replace("1 x ", ""));
+    if ( Object.values(options.profiles).every(p => p.startsWith("1 × ")) ) {
+      Object.entries(options.profiles).forEach(([k, v]) => options.profiles[k] = v.replace("1 × ", ""));
     }
     if ( Object.values(options.profiles).length <= 1 ) {
       options.profile = Object.keys(options.profiles)[0];

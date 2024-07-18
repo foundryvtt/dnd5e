@@ -616,7 +616,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     let label;
     if ( profile.name ) label = profile.name;
     else {
-      switch (this.mode) {
+      switch ( this.mode ) {
         case "cr":
           const cr = simplifyBonus(profile.cr, rollData);
           label = game.i18n.format("DND5E.Summoning.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
@@ -632,8 +632,8 @@ export class SummonsData extends foundry.abstract.DataModel {
     let count = simplifyRollFormula(Roll.replaceFormulaData(profile.count ?? "1", rollData));
     if ( Number.isNumeric(count) ) {
       count = parseInt(count);
-      label = `${count} x ${label}`;
-    } else if ( count ) label = `${count} x ${label}`;
+      label = `${count} × ${label}`;
+    } else if ( count ) label = `${count} × ${label}`;
 
     return label;
   }
