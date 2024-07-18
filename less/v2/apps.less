@@ -14,7 +14,7 @@
 
     .header-button {
       border-radius: 100%;
-      background: rgb(0 0 0 / 25%);
+      background: var(--dnd5e-background-25);
       width: 18px;
       height: 18px;
       aspect-ratio: 1;
@@ -40,6 +40,103 @@
     padding: 0;
     background: var(--dnd5e-color-parchment);
     overflow: visible;
+  }
+
+  /* ---------------------------------- */
+  /*  Navigation                        */
+  /* ---------------------------------- */
+
+  &.vertical-tabs {
+    box-shadow: none;
+    overflow: visible;
+
+    &::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      inset: 0;
+      border: var(--dnd5e-border-gold);
+      box-shadow: 0 0 20px var(--color-shadow-dark);
+      border-radius: 5px;
+    }
+
+    nav.tabs {
+      --tab-full-width: 44px;
+      --tab-inactive-width: 34px;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      z-index: -1;
+
+      > .item {
+        --icon-size: 14px;
+        width: var(--tab-full-width);
+        height: 40px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: var(--dnd5e-color-black);
+        color: var(--dnd5e-color-gold);
+        --icon-fill: var(--dnd5e-color-gold);
+        border: 1px solid transparent;
+        transition: all 250ms ease;
+        flex: none;
+
+        i { font-size: var(--font-size-14); }
+
+        &.active, &:hover {
+          text-shadow: none;
+          border-color: var(--dnd5e-color-gold);
+          box-shadow: 0 0 6px var(--dnd5e-color-gold);
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          border: 1px solid var(--dnd5e-color-gold);
+          pointer-events: none;
+        }
+      }
+
+      &.tabs-left {
+        right: 100%;
+
+        > .item {
+          padding-inline-start: 12px;
+          justify-content: start;
+          border-radius: 8px 0 0 8px;
+          margin-inline-end: calc((var(--tab-full-width) - var(--tab-inactive-width)) * -1);
+
+          &::after {
+            inset: 4px 0 4px 4px;
+            border-radius: 5px 0 0 5px;
+            border-inline-end: none;
+          }
+
+          &.active, &:hover { margin: 0; }
+        }
+      }
+
+      &.tabs-right {
+        left: 100%;
+
+        > .item {
+          padding-inline-end: 12px;
+          justify-content: end;
+          border-radius: 0 8px 8px 0;
+          margin-inline-start: calc((var(--tab-full-width) - var(--tab-inactive-width)) * -1);
+
+          &::after {
+            inset: 4px 4px 4px 0;
+            border-radius: 0 5px 5px 0;
+            border-inline-start: none;
+          }
+
+          &.active, &:hover { margin: 0; }
+        }
+      }
+    }
   }
 
   /* ---------------------------------- */
@@ -125,7 +222,7 @@
 
   .collapsible {
     &.collapsed {
-      label .fa-caret-down { transform: rotate(-90deg); }
+      .fa-caret-down { transform: rotate(-90deg); }
       .collapsible-content { grid-template-rows: 0fr; }
     }
     .fa-caret-down { transition: transform 250ms ease; }
@@ -149,29 +246,32 @@
     font-weight: bold;
   }
 
-  h2 { font-size: 1.4em; }
   h1 { font-size: 1.5em; }
+  h2 { font-size: 1.4em; }
 
-  h3.icon {
+  h3 {
+    padding-bottom: 4px;
+    margin-bottom: 6px;
     border-bottom: 1px solid var(--dnd5e-color-black);
-    display: flex;
-    align-items: center;
-    gap: .25rem;
-    padding-bottom: .25rem;
-    margin-bottom: .375rem;
 
-    > i { font-size: var(--font-size-14); }
-    > span { font-size: var(--font-size-13); }
+    &.icon {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
 
-    > dnd5e-icon {
-      font-size: var(--font-size-14);
-      --icon-fill: var(--color-text-dark-primary);
-    }
+      > i { font-size: var(--font-size-14); }
+      > span { font-size: var(--font-size-13); }
 
-    > a {
-      margin-left: auto;
-      font-size: var(--font-size-12);
-      color: var(--color-text-light-6);
+      > dnd5e-icon {
+        font-size: var(--font-size-14);
+        --icon-fill: var(--color-text-dark-primary);
+      }
+
+      > a {
+        margin-left: auto;
+        font-size: var(--font-size-12);
+        color: var(--color-text-light-6);
+      }
     }
   }
 
@@ -838,7 +938,6 @@
     padding: .25rem .5rem;
 
     li {
-      padding: .25rem .5rem;
       border-bottom: var(--dnd5e-border-dotted);
 
       &:hover { background: var(--dnd5e-color-parchment); }
@@ -846,6 +945,7 @@
     }
 
     label {
+      padding: 4px 8px;
       display: flex;
       align-items: center;
       gap: 1rem;

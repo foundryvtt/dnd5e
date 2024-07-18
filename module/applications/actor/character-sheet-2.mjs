@@ -1,6 +1,7 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { simplifyBonus, staticID } from "../../utils.mjs";
+import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
 import ActorSheet5eCharacter from "./character-sheet.mjs";
@@ -14,7 +15,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e2", "sheet", "actor", "character"],
+      classes: ["dnd5e2", "sheet", "actor", "character", "vertical-tabs"],
       tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "details" }],
       dragDrop: [
         { dragSelector: ".item-list .item", dropSelector: null },
@@ -423,11 +424,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
    * @param {string} type  The item type.
    * @protected
    */
-  _onFindItem(type) {
-    switch ( type ) {
-      case "class": game.packs.get(CONFIG.DND5E.sourcePacks.CLASSES)?.render(true); break;
-      case "race": game.packs.get(CONFIG.DND5E.sourcePacks.RACES)?.render(true); break;
-      case "background": game.packs.get(CONFIG.DND5E.sourcePacks.BACKGROUNDS)?.render(true); break;
+  async _onFindItem(type) {
+    if ( game.release.generation < 12 ) {
+      switch ( type ) {
+        case "class": game.packs.get(CONFIG.DND5E.sourcePacks.CLASSES)?.render(true); break;
+        case "race": game.packs.get(CONFIG.DND5E.sourcePacks.RACES)?.render(true); break;
+        case "background": game.packs.get(CONFIG.DND5E.sourcePacks.BACKGROUNDS)?.render(true); break;
+      }
+    } else {
+      new CompendiumBrowser({ filters: { locked: { types: new Set([type]) } } }).render(true);
     }
   }
 

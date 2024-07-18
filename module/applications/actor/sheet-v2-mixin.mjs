@@ -97,7 +97,7 @@ export default function ActorSheetV2Mixin(Base) {
 
       // Render tabs.
       const nav = document.createElement("nav");
-      nav.classList.add("tabs");
+      nav.classList.add("tabs", "tabs-right");
       nav.dataset.group = "primary";
       nav.append(...this.constructor.TABS.map(({ tab, label, icon, svg }) => {
         const item = document.createElement("a");

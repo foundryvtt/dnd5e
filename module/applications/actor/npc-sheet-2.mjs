@@ -9,7 +9,7 @@ import { simplifyBonus } from "../../utils.mjs";
 export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC) {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e2", "sheet", "actor", "npc"],
+      classes: ["dnd5e2", "sheet", "actor", "npc", "vertical-tabs"],
       width: 700,
       height: 700,
       resizable: true,

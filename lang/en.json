@@ -148,6 +148,7 @@
 "DND5E.AdditionalControls": "Additional Controls",
 "DND5E.AdditionalSettings": "Additional Settings",
 "DND5E.AddEmbeddedItemPromptHint": "Do you want to add these items to your character sheet?",
+"DND5E.Advanced": "Advanced",
 "DND5E.AdvancementAbilityScoreImprovementTitle": "Ability Score Improvement",
 "DND5E.AdvancementAbilityScoreImprovementHint": "Allow the player to increase one or more ability scores or take an optional feat.",
 "DND5E.AdvancementAbilityScoreImprovementCap": "Point Cap",
@@ -421,6 +422,52 @@
 "DND5E.ClassOriginal": "Original Class",
 "DND5E.ClassSaves": "Saving Throws",
 "DND5E.Confirm": "Confirm",
+"DND5E.CompendiumBrowser": {
+  "Title": "Compendium Browser",
+  "Action": {
+    "Open": "Open Compendium Browser"
+  },
+  "Column": {
+    "Icon": "Icon",
+    "Name": "Name",
+    "Results": "Results"
+  },
+  "Filters": {
+    "Label": "Filters",
+    "HasDarkvision": "Has Darkvision",
+    "HasSpellcasting": "Has Spellcasting",
+    "SearchResults": "Search results"
+  },
+  "Selection": {
+    "Label": "Selected: {summary}",
+    "Select": "Select",
+    "Summary": {
+      "Max": "<span class=\"value\">{value}</span> of up to {max}",
+      "Min": "<span class=\"value\">{value}</span> of at least {min}",
+      "Range": "<span class=\"value\">{value}</span> of {min} to {max}",
+      "Single": "<span class=\"value\">{value}</span> of {max}"
+    },
+    "Warning": {
+      "Document": {
+        "one": "document",
+        "other": "documents"
+      },
+      "Max": "Must select at most {max} {document}, {value} selected.",
+      "Min": "Must select at least {min} {document}, {value} selected.",
+      "Range": "Must select between {min} and {max} documents, {value} selected.",
+      "Single": "Must select {max} {document}, {value} selected."
+    }
+  },
+  "Tabs": {
+    "Feat.other": "Feats",
+    "Item.other": "Items",
+    "Monster.other": "Monsters"
+  },
+  "Types": {
+    "Label": "Types"
+  },
+  "Locked": "Locked"
+},
 "DND5E.ComponentMaterial": "Material",
 "DND5E.ComponentMaterialAbbr": "M",
 "DND5E.ComponentSomatic": "Somatic",
@@ -873,6 +920,7 @@
 "DND5E.IdentifierCopy": "Copy Identifier",
 "DND5E.IdentifierCopied": "Copied!",
 "DND5E.ItemRarityCommon": "common",
+"DND5E.ItemRarityMundane": "mundane",
 "DND5E.ItemRarityUncommon": "uncommon",
 "DND5E.ItemRarityRare": "rare",
 "DND5E.ItemRarityVeryRare": "very rare",
@@ -1068,6 +1116,10 @@
 "DND5E.ItemName": "Item Name",
 "DND5E.ItemNew": "New {type}",
 "DND5E.Item": {
+  "Category": {
+    "Label": "Category",
+    "Physical": "Physical"
+  },
   "Property": {
     "Adamantine": "Adamantine",
     "Ammunition": "Ammunition",
