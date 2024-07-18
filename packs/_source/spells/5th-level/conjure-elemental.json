@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -91,7 +91,35 @@
       "material",
       "concentration"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "mode": "cr",
+      "bonuses": {
+        "ac": "",
+        "hd": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "profiles": [
+        {
+          "count": "1",
+          "cr": "@item.level",
+          "name": "",
+          "_id": "BFnNfSl7Ojcw4Rm2",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "elemental"
+          ]
+        }
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -100,10 +128,10 @@
   "folder": "bG9QTayc46rfNkv2",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.3.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234056,
-    "modifiedTime": 1704823521541,
+    "modifiedTime": 1721324844592,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!1LkZvINag7KqBmDR"
