@@ -17,7 +17,7 @@ Specify the image using the img src attribute within the figure block and the te
     </article>
 </div>
 ```
-![](https://raw.githubusercontent.com/MaxPat931/dnd5e/stylez/wiki/images/styles/fvttadvice.png)
+![](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttadvice.png)
 
 ## Narrative
 The fvtt narrative class creates a text box for read-aloud text.
@@ -27,7 +27,7 @@ The fvtt narrative class creates a text box for read-aloud text.
     <p>The horses’ saddlebags have been looted. An empty leather map case lies nearby.</p>
 </div>
 ```
-![](https://raw.githubusercontent.com/MaxPat931/dnd5e/stylez/wiki/images/styles/fvttnarrative.png)
+![](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttnarrative.png)
 
 ## Notable
 The notable class is used within an aside tag to create a callout box for additional information.
@@ -38,4 +38,4 @@ The notable class is used within an aside tag to create a callout box for additi
     <p>If the party helps Steve, the thief privately approaches certain members of the group and urges them to join the Secret Society of Stealing.</p>
 </aside>
 ```
-![](https://raw.githubusercontent.com/MaxPat931/dnd5e/stylez/wiki/images/styles/fvttnotable.png)
+![](https://raw.githubusercontent.com/MaxPat931/dnd5e/publish-wiki/wiki/images/styles/fvttnotable.png)
