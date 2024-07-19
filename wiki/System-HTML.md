@@ -38,4 +38,4 @@ The notable class is used within an aside tag to create a callout box for additi
     <p>If the party helps Steve, the thief privately approaches certain members of the group and urges them to join the Secret Society of Stealing.</p>
 </aside>
 ```
-![](https://raw.githubusercontent.com/MaxPat931/dnd5e/publish-wiki/wiki/images/styles/fvttnotable.png)
+![](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttnotable.png)
