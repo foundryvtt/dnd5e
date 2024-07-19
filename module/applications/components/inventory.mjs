@@ -285,14 +285,16 @@ export default class InventoryElement extends HTMLElement {
       });
     }
 
-    // Toggle collapsed state.
-    const expanded = this._app._expanded.has(item.id);
-    options.push({
-      name: expanded ? "Collapse" : "Expand",
-      icon: `<i class="fas fa-${expanded ? "compress" : "expand"}"></i>`,
-      callback: () => element.closest("[data-item-id]")?.querySelector("[data-toggle-description]")?.click(),
-      group: "collapsible"
-    });
+    // Toggle Collapsed State
+    if ( this._app.canExpand?.(item) ) {
+      const expanded = this._app._expanded.has(item.id);
+      options.push({
+        name: expanded ? "Collapse" : "Expand",
+        icon: `<i class="fas fa-${expanded ? "compress" : "expand"}"></i>`,
+        callback: () => element.closest("[data-item-id]")?.querySelector("[data-toggle-description]")?.click(),
+        group: "collapsible"
+      });
+    }
 
     return options;
   }

@@ -726,5 +726,18 @@ export default function ActorSheetV2Mixin(Base) {
         <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
       `;
     }
+
+    /* -------------------------------------------- */
+    /*  Helpers                                     */
+    /* -------------------------------------------- */
+
+    /**
+     * Can an item be expanded on the sheet?
+     * @param {Item5e} item  Item on the sheet.
+     * @returns {boolean}
+     */
+    canExpand(item) {
+      return !["class", "subclass"].includes(item.type);
+    }
   };
 }

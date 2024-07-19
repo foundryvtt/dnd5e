@@ -1,6 +1,6 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { simplifyBonus, staticID } from "../../utils.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
@@ -716,5 +716,14 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       else if ( type === "skill" ) ({ icon: img, label: title, reference } = CONFIG.DND5E.skills[id]);
       return { img, title, subtitle, modifier: total, passive, reference };
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  canExpand(item) {
+    return !["background", "race"].includes(item.type) && super.canExpand(item);
   }
 }
