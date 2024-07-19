@@ -490,7 +490,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": null,
+      "src": "systems/dnd5e/tokens/heroes/PaladinHammer.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1310,7 +1310,7 @@
       "type": "weapon",
       "system": {
         "description": {
-          "value": "<p>A lengthy stright blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p>",
+          "value": "<p>A lengthy straight blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p>",
           "chat": ""
         },
         "source": {
@@ -1423,12 +1423,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "3.3.1",
+        "coreVersion": "11.315",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1721406909938,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Dh1AA6w104V17V6w.JVygpNYgNviQlQDL"
     },
@@ -3369,10 +3369,10 @@
   "_id": "Dh1AA6w104V17V6w",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.2",
+    "systemVersion": "3.3.1",
     "coreVersion": "11.315",
     "createdTime": 1661787232161,
-    "modifiedTime": 1707505942110,
+    "modifiedTime": 1721406909938,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Dh1AA6w104V17V6w"
