@@ -376,7 +376,7 @@ export function registerDeferredSettings() {
     name: "SETTINGS.DND5E.THEME.Name",
     hint: "SETTINGS.DND5E.THEME.Hint",
     scope: "client",
-    config: game.release.generation < 12,
+    config: false,
     default: "",
     type: String,
     choices: {
@@ -394,16 +394,13 @@ export function registerDeferredSettings() {
   });
 
   // Hook into core color scheme setting.
-  if ( game.release.generation > 11 ) {
-    const setting = game.settings.settings.get("core.colorScheme");
-    const { onChange } = setting ?? {};
-    if ( onChange ) setting.onChange = s => {
-      onChange();
-      setTheme(document.body, s);
-    };
-    setTheme(document.body, game.settings.get("core", "colorScheme"));
-  }
-  else setTheme(document.body, game.settings.get("dnd5e", "theme"));
+  const setting = game.settings.settings.get("core.colorScheme");
+  const { onChange } = setting ?? {};
+  if ( onChange ) setting.onChange = s => {
+    onChange();
+    setTheme(document.body, s);
+  };
+  setTheme(document.body, game.settings.get("core", "colorScheme"));
 }
 
 /* -------------------------------------------- */

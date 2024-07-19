@@ -36,16 +36,6 @@ export default class SourceField extends SchemaField {
       },
       enumerable: false
     });
-    Object.defineProperty(obj, "toString", {
-      value: () => {
-        foundry.utils.logCompatibilityWarning(
-          "Source has been converted to an object, the label can now be accessed using the `source#label` property.",
-          { since: "DnD5e 2.4", until: "DnD5e 3.1" }
-        );
-        return obj.label;
-      },
-      enumerable: false
-    });
     Object.defineProperty(obj, "directlyEditable", {
       get() {
         return (this.custom ?? "") === this.label;

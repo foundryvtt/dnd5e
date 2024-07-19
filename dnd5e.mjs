@@ -57,7 +57,6 @@ Hooks.once("init", function() {
     /aggregateDamageRoll|configureDamage|preprocessFormula|simplifyRollFormula/
   );
   CONFIG.compatibility.excludePatterns.push(/core\.sourceId/);
-  if ( game.release.generation < 12 ) Math.clamp = Math.clamped;
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -72,7 +71,6 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
-  CONFIG.Token.ringClass = canvas.TokenRing;
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
@@ -371,10 +369,6 @@ Hooks.once("setup", function() {
   // Apply custom item compendium
   game.packs.filter(p => p.metadata.type === "Item")
     .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
-
-  // Configure token rings
-  CONFIG.DND5E.tokenRings.shaderClass ??= canvas.TokenRingSamplerShaderV11;
-  CONFIG.Token.ringClass.initialize();
 });
 
 /* --------------------------------------------- */
@@ -431,27 +425,6 @@ Hooks.once("ready", function() {
     ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});
   }
   migrations.migrateWorld();
-});
-
-/* -------------------------------------------- */
-/*  Canvas Initialization                       */
-/* -------------------------------------------- */
-
-Hooks.on("canvasInit", gameCanvas => {
-  if ( game.release.generation < 12 ) {
-    gameCanvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
-    SquareGrid.prototype.measureDistances = canvas.measureDistances;
-  }
-  CONFIG.Token.ringClass.pushToLoad(gameCanvas.loadTexturesOptions.additionalSources);
-});
-
-/* -------------------------------------------- */
-/*  Canvas Draw                                 */
-/* -------------------------------------------- */
-
-Hooks.on("canvasDraw", gameCanvas => {
-  // The sprite sheet has been loaded now, we can create the uvs for each texture
-  CONFIG.Token.ringClass.createAssetsUVs();
 });
 
 /* -------------------------------------------- */

@@ -1,16 +1,14 @@
 import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
-const AbstractFormInputElement = foundry.applications?.elements?.AbstractFormInputElement ?? (class {});
 
 /**
  * A custom checkbox implementation with more styling options.
  * @mixes AdoptedStyleSheetMixin
  * @extends {AbstractFormInputElement}
  */
-export default class CheckboxElement extends AdoptedStyleSheetMixin(AbstractFormInputElement) {
+export default class CheckboxElement extends AdoptedStyleSheetMixin(
+  foundry.applications.elements.AbstractFormInputElement
+) {
   constructor(...args) {
-    if ( game.release.version < 12 ) {
-      throw Error("CheckboxElement can only be used in Foundry VTT version 12 or later.");
-    }
     super(...args);
     this._internals.role = "checkbox";
     this._value = this.getAttribute("value");

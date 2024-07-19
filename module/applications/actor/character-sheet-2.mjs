@@ -425,15 +425,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
    * @protected
    */
   async _onFindItem(type) {
-    if ( game.release.generation < 12 ) {
-      switch ( type ) {
-        case "class": game.packs.get(CONFIG.DND5E.sourcePacks.CLASSES)?.render(true); break;
-        case "race": game.packs.get(CONFIG.DND5E.sourcePacks.RACES)?.render(true); break;
-        case "background": game.packs.get(CONFIG.DND5E.sourcePacks.BACKGROUNDS)?.render(true); break;
-      }
-    } else {
-      new CompendiumBrowser({ filters: { locked: { types: new Set([type]) } } }).render(true);
-    }
+    new CompendiumBrowser({ filters: { locked: { types: new Set([type]) } } }).render(true);
   }
 
   /* -------------------------------------------- */

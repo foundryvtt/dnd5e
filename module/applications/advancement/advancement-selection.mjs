@@ -45,16 +45,6 @@ export default class AdvancementSelection extends Dialog {
   getData() {
     const context = { types: {} };
     for ( let [name, config] of Object.entries(CONFIG.DND5E.advancementTypes) ) {
-      if ( config.prototype instanceof Advancement ) {
-        foundry.utils.logCompatibilityWarning(
-          "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
-          { since: "DnD5e 3.1", until: "DnD5e 3.3", once: true }
-        );
-        config = {
-          documentClass: config,
-          validItemTypes: config.metadata.validItemTypes
-        };
-      }
       const advancement = config.documentClass;
       if ( config.hidden || !config.validItemTypes?.has(this.item.type) ) continue;
       context.types[name] = {

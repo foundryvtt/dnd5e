@@ -856,26 +856,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Replace referenced data attributes in the roll formula with values from the provided data.
-   * If the attribute is not found in the provided data, display a warning on the actor.
-   * @param {string} formula           The original formula within which to replace.
-   * @param {object} data              The data object which provides replacements.
-   * @param {object} options
-   * @param {string} options.property  Name of the property to which this formula belongs.
-   * @returns {string}                 Formula with replaced data.
-   * @deprecated since DnD5e 3.2, available until DnD5e 3.4
-   */
-  replaceFormulaData(formula, data, { property }) {
-    foundry.utils.logCompatibilityWarning(
-      "Item5e#replaceFormulaData has been moved to dnd5e.utils.replaceFormulaData.",
-      { since: "DnD5e 3.2", until: "DnD5e 3.4" }
-    );
-    return dnd5e.utils.replaceFormulaData(formula, data, { actor: this.actor, property });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Render a rich tooltip for this item.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
    * @returns {Promise<{content: string, classes: string[]}>|null}
@@ -1460,8 +1440,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
       flags: {"core.canPopout": true}
     };
-    // TODO: Remove when v11 support is dropped.
-    if ( game.release.generation < 12 ) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
 
     // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message
     if ( (this.type === "consumable") && !this.actor.items.has(this.id) ) {
@@ -2331,18 +2309,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
     if ( !this.system.advancement ) return this;
 
-    let config = CONFIG.DND5E.advancementTypes[type];
+    const config = CONFIG.DND5E.advancementTypes[type];
     if ( !config ) throw new Error(`${type} not found in CONFIG.DND5E.advancementTypes`);
-    if ( config.prototype instanceof Advancement ) {
-      foundry.utils.logCompatibilityWarning(
-        "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3", once: true }
-      );
-      config = {
-        documentClass: config,
-        validItemTypes: config.metadata.validItemTypes
-      };
-    }
     const cls = config.documentClass;
 
     if ( !config.validItemTypes.has(this.type) || !cls.availableForItem(this) ) {

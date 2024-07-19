@@ -138,11 +138,7 @@ export function simplifyBonus(bonus, data={}) {
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
-    return roll.isDeterministic
-      ? game.release.generation < 12
-        ? Roll.safeEval(roll.formula)
-        : roll.evaluateSync().total
-      : 0;
+    return roll.isDeterministic ? roll.evaluateSync().total : 0;
   } catch(error) {
     console.error(error);
     return 0;
@@ -244,7 +240,6 @@ export function linkForUuid(uuid, { tooltip }={}) {
   }
   const a = doc.toAnchor();
   if ( tooltip ) a.dataset.tooltip = tooltip;
-  if ( game.release.generation < 12 ) a.setAttribute("draggable", true);
   return a.outerHTML;
 }
 

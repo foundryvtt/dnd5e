@@ -5,13 +5,6 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
-  /** @inheritDoc */
-  _initialize(options = {}) {
-    super._initialize(options);
-    // TODO: Remove when v11 support is dropped.
-    if ( game.release.generation > 11 ) Object.defineProperty(this, "user", { value: this.author, configurable: true });
-  }
-
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -59,10 +52,10 @@ export default class ChatMessage5e extends ChatMessage {
    * @type {boolean}
    */
   get shouldDisplayChallenge() {
-    if ( game.user.isGM || (this.user === game.user) ) return true;
+    if ( game.user.isGM || (this.author === game.user) ) return true;
     switch ( game.settings.get("dnd5e", "challengeVisibility") ) {
       case "all": return true;
-      case "player": return !this.user.isGM;
+      case "player": return !this.author.isGM;
       default: return false;
     }
   }
@@ -135,12 +128,14 @@ export default class ChatMessage5e extends ChatMessage {
 
       // Conceal effects that the user cannot apply.
       chatCard.find(".effects-tray .effect").each((i, el) => {
-        if ( !game.user.isGM && ((el.dataset.transferred === "false") || (this.user.id !== game.user.id)) ) el.remove();
+        if ( !game.user.isGM && ((el.dataset.transferred === "false") || (this.author.id !== game.user.id)) ) {
+          el.remove();
+        }
       });
 
       // If the user is the message author or the actor owner, proceed
       let actor = game.actors.get(this.speaker.actor);
-      if ( game.user.isGM || actor?.isOwner || (this.user.id === game.user.id) ) {
+      if ( game.user.isGM || actor?.isOwner || (this.author.id === game.user.id) ) {
         const optionallyHide = (selector, hide) => {
           const element = chatCard[0].querySelector(selector);
           if ( element && hide ) element.style.display = "none";
@@ -237,11 +232,11 @@ export default class ChatMessage5e extends ChatMessage {
     let img;
     let nameText;
     if ( this.isContentVisible ) {
-      img = actor?.img ?? this.user.avatar;
+      img = actor?.img ?? this.author.avatar;
       nameText = this.alias;
     } else {
-      img = this.user.avatar;
-      nameText = this.user.name;
+      img = this.author.avatar;
+      nameText = this.author.name;
     }
 
     const avatar = document.createElement("a");
@@ -256,7 +251,7 @@ export default class ChatMessage5e extends ChatMessage {
     const subtitle = document.createElement("span");
     subtitle.classList.add("subtitle");
     if ( this.whisper.length ) subtitle.innerText = html.querySelector(".whisper-to")?.innerText ?? "";
-    if ( (nameText !== this.user?.name) && !subtitle.innerText.length ) subtitle.innerText = this.user?.name ?? "";
+    if ( (nameText !== this.author?.name) && !subtitle.innerText.length ) subtitle.innerText = this.author?.name ?? "";
 
     name.appendChild(subtitle);
 
