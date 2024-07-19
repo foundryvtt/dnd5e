@@ -189,7 +189,6 @@ export class SummonsData extends foundry.abstract.DataModel {
    */
   async summon(profileId, options={}) {
     if ( !this.canSummon || !canvas.scene ) return;
-    if ( (game.release.generation < 12) && (this.mode === "cr") ) return;
 
     const profile = this.profiles.find(p => p._id === profileId);
     if ( !profile ) {

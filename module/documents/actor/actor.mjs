@@ -259,11 +259,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._prepareSpellcasting();
 
     // Apply condition immunities
-    if ( game.release.generation >= 12 ) {
-      const conditionImmunities = this.system.traits?.ci?.value;
-      if ( conditionImmunities ) {
-        for ( const condition of conditionImmunities ) this.statuses.delete(condition);
-      }
+    const conditionImmunities = this.system.traits?.ci?.value;
+    if ( conditionImmunities ) {
+      for ( const condition of conditionImmunities ) this.statuses.delete(condition);
     }
   }
 
@@ -549,15 +547,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           const replaced = replaceFormulaData(formula, rollData, {
             actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
           });
-          ac.base = replaced ? game.release.generation < 12
-            ? Roll.safeEval(replaced) : new Roll(replaced).evaluateSync().total
-            : 0;
+          ac.base = replaced ? new Roll(replaced).evaluateSync().total : 0;
         } catch(err) {
           this._preparationWarnings.push({
             message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
           });
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = game.release.generation < 12 ? Roll.safeEval(replaced) : new Roll(replaced).evaluateSync().total;
+          ac.base = new Roll(replaced).evaluateSync().total;
         }
         break;
     }
@@ -2345,17 +2341,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @private
    */
   async _rest(config, result={}, ...args) {
-    if ( args.length ) {
-      foundry.utils.logCompatibilityWarning(
-        "Actor5e._rest now takes a config object and a results object as parameters.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
-      );
-      const [longRest, dhd, dhp] = args;
-      config = { chat: config, newDay: result };
-      config.type = longRest ? "long" : "short";
-      result = { dhd, dhp };
-    }
-
     if ( (foundry.utils.getType(this.system.rest) === "function")
       && (await this.system.rest(config, result) === false) ) return;
 
@@ -2933,14 +2918,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
       d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
     }
-    if ( game.release.generation >= 12 ) d.prototypeToken.ring = source.prototypeToken.ring;
-    else {
-      foundry.utils.setProperty(d.prototypeToken, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
-        foundry.utils.getProperty(d.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
-        foundry.utils.getProperty(source.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
-        { inplace: false }
-      ));
-    }
+    d.prototypeToken.ring = source.prototypeToken.ring;
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
@@ -3140,14 +3118,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
         tokenUpdate.texture[k] = prototypeTokenData.texture[k];
       }
-      if ( game.release.generation >= 12 ) tokenUpdate.ring = prototypeTokenData.ring;
-      else {
-        foundry.utils.setProperty(tokenUpdate, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
-          foundry.utils.getProperty(tokenUpdate, "flags.dnd5e.tokenRing") ?? {},
-          foundry.utils.getProperty(prototypeTokenData, "flags.dnd5e.tokenRing") ?? {},
-          { inplace: false }
-        ));
-      }
+      tokenUpdate.ring = prototypeTokenData.ring;
       tokenUpdate.sight = prototypeTokenData.sight;
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
 
@@ -3181,9 +3152,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         update._id = t.id;
         delete update.x;
         delete update.y;
-        if ( (game.release.generation < 12) && !foundry.utils.getProperty(tokenData, "flags.dnd5e.tokenRing") ) {
-          foundry.utils.setProperty(update, "flags.dnd5e.tokenRing", {});
-        }
         return update;
       });
       await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates, { diff: false, recursive: false });

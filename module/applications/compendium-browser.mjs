@@ -1,8 +1,5 @@
 import * as Filter from "../filter.mjs";
 
-const ApplicationV2 = foundry.applications?.api?.ApplicationV2 ?? (class {});
-const HandlebarsApplicationMixin = foundry.applications?.api?.HandlebarsApplicationMixin ?? (cls => cls);
-
 /**
  * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
  * @property {{locked: CompendiumBrowserFilters, initial: CompendiumBrowserFilters}} filters  Filters to set to start.
@@ -52,9 +49,10 @@ const HandlebarsApplicationMixin = foundry.applications?.api?.HandlebarsApplicat
  * @mixes HandlebarsApplicationMixin
  * @template CompendiumBrowserConfiguration
  */
-export default class CompendiumBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
+export default class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(
+  foundry.applications.api.ApplicationV2
+) {
   constructor(...args) {
-    if ( game.release.generation < 12 ) throw Error("Compendium Browser only works in Foundry V12 or later");
     super(...args);
 
     this.#filters = this.options.filters?.initial ?? {};
@@ -1135,7 +1133,6 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
    * @param {HTMLElement} html  HTML of the sidebar being rendered.
    */
   static injectSidebarButton(html) {
-    if ( game.release.generation < 12 ) return;
     const button = document.createElement("button");
     button.type = "button";
     button.classList.add("open-compendium-browser");

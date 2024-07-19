@@ -435,11 +435,6 @@ export default class AbilityUseDialog extends Dialog {
       warnings.push(game.i18n.localize(locale));
     }
 
-    // Display warning about CR summoning in V11
-    if ( (game.release.generation < 12) && (data.summoningOptions?.mode === "cr") ) {
-      warnings.push(game.i18n.localize("DND5E.Summoning.Warning.CRV11"));
-    }
-
     data.warnings = warnings;
   }
 

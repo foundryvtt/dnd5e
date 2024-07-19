@@ -184,12 +184,8 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     const property = game.i18n.localize(label);
     try {
       const formula = replaceFormulaData(value, rollData, { item: this.parent, property });
-      if ( game.release.generation < 12 ) {
-        foundry.utils.setProperty(this, keyPath, Roll.safeEval(formula));
-      } else {
-        const roll = new Roll(formula);
-        foundry.utils.setProperty(this, keyPath, roll.evaluateSync().total);
-      }
+      const roll = new Roll(formula);
+      foundry.utils.setProperty(this, keyPath, roll.evaluateSync().total);
     } catch(err) {
       if ( this.parent.isEmbedded ) {
         const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.parent.name });

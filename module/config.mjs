@@ -117,41 +117,6 @@ DND5E.defaultAbilities = {
   concentration: "con"
 };
 
-Object.defineProperties(DND5E, {
-  hitPointsAbility: {
-    get: function() {
-      foundry.utils.logCompatibilityWarning(
-        "DND5E.hitPointsAbility has been deprecated and is now accessible through DND5E.defaultAbilities.hitPoints.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
-      );
-      return DND5E.defaultAbilities.hitPoints;
-    },
-    set: function(value) {
-      foundry.utils.logCompatibilityWarning(
-        "DND5E.hitPointsAbility has been deprecated and is now accessible through DND5E.defaultAbilities.hitPoints.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
-      );
-      DND5E.defaultAbilities.hitPoints = value;
-    }
-  },
-  initiativeAbility: {
-    get: function() {
-      foundry.utils.logCompatibilityWarning(
-        "DND5E.initiativeAbility has been deprecated and is now accessible through DND5E.defaultAbilities.initiative.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
-      );
-      return DND5E.defaultAbilities.initiative;
-    },
-    set: function(value) {
-      foundry.utils.logCompatibilityWarning(
-        "DND5E.initiativeAbility has been deprecated and is now accessible through DND5E.defaultAbilities.initiative.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
-      );
-      DND5E.defaultAbilities.initiative = value;
-    }
-  }
-});
-
 /* -------------------------------------------- */
 
 /**
@@ -875,19 +840,6 @@ preLocalize("itemRarity");
 /* -------------------------------------------- */
 
 /**
- * The limited use periods that support a recovery formula.
- * @deprecated since DnD5e 3.1, available until DnD5e 3.3
- * @enum {string}
- */
-DND5E.limitedUseFormulaPeriods = {
-  charges: "DND5E.Charges",
-  dawn: "DND5E.Dawn",
-  dusk: "DND5E.Dusk"
-};
-
-/* -------------------------------------------- */
-
-/**
  * Configuration data for limited use periods.
  *
  * @typedef {object} LimitedUsePeriodConfiguration
@@ -930,7 +882,6 @@ DND5E.limitedUsePeriods = {
   }
 };
 preLocalize("limitedUsePeriods", { keys: ["label", "abbreviation"] });
-patchConfig("limitedUsePeriods", "label", { since: "DnD5e 3.1", until: "DnD5e 3.3" });
 
 /* -------------------------------------------- */
 
@@ -2105,16 +2056,6 @@ DND5E.spellPreparationModes = {
   }
 };
 preLocalize("spellPreparationModes", { key: "label" });
-patchConfig("spellPreparationModes", "label", { since: "DnD5e 3.1", until: "DnD5e 3.3" });
-
-/* -------------------------------------------- */
-
-/**
- * Subset of `DND5E.spellPreparationModes` that consume spell slots.
- * @deprecated since DnD5e 3.1, available until DnD5e 3.3
- * @type {string[]}
- */
-DND5E.spellUpcastModes = ["always", "pact", "prepared"];
 
 /* -------------------------------------------- */
 
@@ -2222,74 +2163,6 @@ DND5E.spellScalingModes = {
   level: "DND5E.SpellLevel"
 };
 preLocalize("spellScalingModes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * Configuration data for spell components.
- *
- * @typedef {object} SpellComponentConfiguration
- * @property {string} label         Localized label.
- * @property {string} abbr          Localized abbreviation.
- * @property {string} [reference]   Reference to a rule page describing this component.
- */
-
-/**
- * Types of components that can be required when casting a spell.
- * @deprecated since DnD5e 3.0, available until DnD5e 3.3
- * @enum {SpellComponentConfiguration}
- */
-DND5E.spellComponents = {
-  vocal: {
-    label: "DND5E.ComponentVerbal",
-    abbr: "DND5E.ComponentVerbalAbbr",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6UXTNWMCQ0nSlwwx"
-  },
-  somatic: {
-    label: "DND5E.ComponentSomatic",
-    abbr: "DND5E.ComponentSomaticAbbr",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.qwUNgUNilEmZkSC9"
-  },
-  material: {
-    label: "DND5E.ComponentMaterial",
-    abbr: "DND5E.ComponentMaterialAbbr",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.AeH5eDS4YeM9RETC"
-  }
-};
-preLocalize("spellComponents", { keys: ["label", "abbr"] });
-
-/* -------------------------------------------- */
-
-/**
- * Configuration data for spell tags.
- *
- * @typedef {object} SpellTagConfiguration
- * @property {string} label         Localized label.
- * @property {string} abbr          Localized abbreviation.
- * @property {string} icon          Icon representing this tag.
- * @property {string} [reference]   Reference to a rule page describing this tag.
- */
-
-/**
- * Supplementary rules keywords that inform a spell's use.
- * @deprecated since DnD5e 3.0, available until DnD5e 3.3
- * @enum {SpellTagConfiguration}
- */
-DND5E.spellTags = {
-  concentration: {
-    label: "DND5E.Concentration",
-    abbr: "DND5E.ConcentrationAbbr",
-    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH"
-  },
-  ritual: {
-    label: "DND5E.Ritual",
-    abbr: "DND5E.RitualAbbr",
-    icon: "systems/dnd5e/icons/svg/items/spell.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA"
-  }
-};
-preLocalize("spellTags", { keys: ["label", "abbr"] });
 
 /* -------------------------------------------- */
 
@@ -2844,7 +2717,6 @@ preLocalize("languages", { key: "label" });
 preLocalize("languages.standard.children", { key: "label", sort: true });
 preLocalize("languages.exotic.children", { key: "label", sort: true });
 preLocalize("languages.exotic.children.primordial.children", { sort: true });
-patchConfig("languages", "label", { since: "DnD5e 2.4", until: "DnD5e 3.1" });
 
 /* -------------------------------------------- */
 

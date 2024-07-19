@@ -49,12 +49,8 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
         try {
           const rollData = this.parent.parent.actor.getRollData({ deterministic: true });
           const formula = Roll.replaceFormulaData(this.uses.max, rollData, {missing: 0});
-          if ( game.release.generation < 12 ) {
-            updates["system.uses.value"] = Roll.safeEval(formula);
-          } else {
-            const roll = new Roll(formula);
-            updates["system.uses.value"] = roll.evaluateSync().total;
-          }
+          const roll = new Roll(formula);
+          updates["system.uses.value"] = roll.evaluateSync().total;
         } catch(e) { }
       }
     }

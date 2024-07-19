@@ -509,7 +509,6 @@ function embedImagePage(config, label, options) {
     if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
     if ( showCite ) {
       const citeLink = config.doc.toAnchor();
-      if ( game.release.generation < 12 ) citeLink.setAttribute("draggable", true);
       figcaption.innerHTML += `<cite>${citeLink.outerHTML}</cite>`;
     }
     figure.insertAdjacentElement("beforeend", figcaption);
@@ -700,7 +699,6 @@ function wrapEmbeddedText(enriched, config, label, options) {
     if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
     if ( showCite ) {
       const citeLink = config.doc.toAnchor();
-      if ( game.release.generation < 12 ) citeLink.setAttribute("draggable", true);
       figcaption.innerHTML += `<cite>${citeLink.outerHTML}</cite>`;
     }
     figure.insertAdjacentElement("beforeend", figcaption);
@@ -1145,8 +1143,6 @@ async function rollAction(event) {
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})
     };
-    // TODO: Remove when v11 support is dropped.
-    if ( game.release.generation < 12 ) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
     return MessageClass.create(chatData);
   }
 }
