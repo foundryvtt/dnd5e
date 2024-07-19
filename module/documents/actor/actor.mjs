@@ -103,7 +103,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Item5e|null}
    */
   get armor() {
-    return this.system.attributes.ac.equippedArmor ?? null;
+    return this.system.attributes?.ac?.equippedArmor ?? null;
   }
 
   /* -------------------------------------------- */
@@ -113,7 +113,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Item5e|null}
    */
   get shield() {
-    return this.system.attributes.ac.equippedShield ?? null;
+    return this.system.attributes?.ac?.equippedShield ?? null;
   }
 
   /* -------------------------------------------- */
