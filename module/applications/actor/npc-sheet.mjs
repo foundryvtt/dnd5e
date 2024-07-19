@@ -172,6 +172,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
         return this.actor.rollDeathSave({ event });
 
       case "rollInitiative":
+        event.stopPropagation();
         return this.actor.rollInitiativeDialog({ event });
     }
   }
