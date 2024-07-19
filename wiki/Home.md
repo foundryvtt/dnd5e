@@ -21,6 +21,7 @@
 - [Journal Pages](Journal-Pages.md)
 - [Roll Formulas](Roll-Formulas.md)
 - [Summoning](Summoning.md)
+- [System HTML](System-HTML.md)
 - Tutorials
   - [Custom Classes](Custom-Class-Advancement.md)
   - [Custom Races](Custom-Race-Tutorial.md)
