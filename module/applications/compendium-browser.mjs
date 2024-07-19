@@ -776,7 +776,7 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
     try {
       const { type } = foundry.utils.parseUuid(uuid);
       event.dataTransfer.setData("text/plain", JSON.stringify({ type, uuid }));
-    } catch (e) {
+    } catch(e) {
       console.error(e);
     }
   }
@@ -966,8 +966,11 @@ export default class CompendiumBrowser extends HandlebarsApplicationMixin(Applic
   static #onToggleMode(event, target) {
     // TODO: Consider persisting this choice in a client setting.
     this._mode = target.checked ? this.constructor.MODES.ADVANCED : this.constructor.MODES.BASIC;
-    const types = target.checked ? [] : ["class"];
+    const tabs = foundry.utils.deepClone(this.constructor.TABS.filter(t => !!t.advanced === target.checked));
+    const activeTab = tabs.find(t => t.tab === this.tabGroups.primary) ?? tabs[0];
+    const types = target.checked ? [] : (activeTab?.types ?? ["class"]);
     this._applyModeFilters(this._mode);
+    this._applyTabFilters(activeTab?.tab);
     this.render({ parts: ["results", "filters", "types", "tabs"], dnd5e: { browser: { types } } });
   }
 
