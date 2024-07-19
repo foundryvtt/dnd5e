@@ -378,7 +378,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
     if ( ("damage" in this.item.system) && foundry.utils.getProperty(this.item.overrides, "system.damage.parts") ) {
       overrides.push("damage-control");
-      Array.fromRange(2).forEach(index => overrides.push(
+      Array.fromRange(this.item.system.damage.parts.length).forEach(index => overrides.push(
         `system.damage.parts.${index}.0`, `system.damage.parts.${index}.1`
       ));
     }
