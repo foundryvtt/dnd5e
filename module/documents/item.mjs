@@ -2677,7 +2677,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
         const spell = await fromUuid(makeUuid(li));
-        Item5e.create(await Item5e.createScrollFromSpell(spell));
+        const scroll = await Item5e.createScrollFromSpell(spell);
+        if ( scroll ) Item5e.create(scroll);
       },
       condition: li => {
         const item = fromUuidSync(makeUuid(li));
@@ -2700,7 +2701,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
         const spell = game.items.get(li.data("documentId"));
-        Item5e.create(await Item5e.createScrollFromSpell(spell));
+        const scroll = await Item5e.createScrollFromSpell(spell);
+        if ( scroll ) Item5e.create(scroll);
       },
       condition: li => {
         const item = game.items.get(li.data("documentId"));
@@ -2770,7 +2772,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {Item5e|object} spell                   The spell or item data to be made into a scroll.
    * @param {object} [options]                      Additional options that modify the created scroll.
    * @param {SpellScrollConfiguration} [config={}]  Configuration options for scroll creation.
-   * @returns {Promise<Item5e>}                     The created scroll consumable item.
+   * @returns {Promise<Item5e|void>}                The created scroll consumable item.
    */
   static async createScrollFromSpell(spell, options={}, config={}) {
     config = foundry.utils.mergeObject({
