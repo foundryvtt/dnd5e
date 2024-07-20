@@ -3,7 +3,7 @@
 The D&D system provides several new CSS classes for formatting text. These styles can be applied to any text field by editing the Source HTML </> and following the examples below.
 
 ## Advice and Quest Blocks
-The fvtt advice and fvtt quest classes share the same format, displaying an image on the left with accompanying text in a boxed layout on the right.  
+The `fvtt advice` and `fvtt quest` classes share the same format, displaying an image on the left with accompanying text in a boxed layout on the right.  
 Specify the image using the img src attribute within the figure block and the text within the article block.
 
 ```html
@@ -20,7 +20,7 @@ Specify the image using the img src attribute within the figure block and the te
 ![](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttadvice.png)
 
 ## Narrative
-The fvtt narrative class creates a text box for read-aloud text.
+The `fvtt narrative` class creates a text box for read-aloud text.
 
 ```html
 <div class="fvtt narrative">
@@ -30,7 +30,7 @@ The fvtt narrative class creates a text box for read-aloud text.
 ![](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttnarrative.png)
 
 ## Notable
-The notable class is used within an aside tag to create a callout box for additional information.
+The `notable` class is used within an aside tag to create a callout box for additional information.
 
 ```html
 <aside class="notable">
