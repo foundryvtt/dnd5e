@@ -339,6 +339,22 @@ export function registerSystemSettings() {
     type: Boolean,
     default: true
   });
+
+  if (game.release.generation >= 12) {
+    game.settings.register("dnd5e", "defaultSkills", {
+      name: "SETTINGS.5eDefaultSkillsN",
+      hint: "SETTINGS.5eDefaultSkillsH",
+      type: new foundry.data.fields.SetField(
+        new foundry.data.fields.StringField({
+          choices: () => CONFIG.DND5E.skills
+        }), {
+          type: "checkboxes"
+        }
+      ),
+      default: [],
+      config: true
+    });
+  }
 }
 
 /**
