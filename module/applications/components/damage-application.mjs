@@ -154,7 +154,13 @@ export default class DamageApplicationElement extends ChatTrayElement {
       this.targetSourceControl.querySelectorAll("button").forEach(b =>
         b.addEventListener("click", this._onChangeTargetMode.bind(this))
       );
-      if ( !this.chatMessage.getFlag("dnd5e", "targets")?.length ) this.targetSourceControl.hidden = true;
+
+      if ( !game.user.isGM || !this.chatMessage.getFlag("dnd5e", "targets")?.length ) {
+        this.targetSourceControl.hidden = true;
+      }
+      div.querySelector(".collapsible-content").addEventListener("click", event => {
+        event.stopImmediatePropagation();
+      });
       div.addEventListener("click", this._handleClickHeader.bind(this));
     }
 
@@ -168,7 +174,8 @@ export default class DamageApplicationElement extends ChatTrayElement {
    */
   buildTargetsList() {
     let targetedTokens;
-    switch ( this.targetingMode ) {
+    const mode = game.user.isGM ? this.targetingMode : "selected";
+    switch ( mode ) {
       case "targeted":
         targetedTokens = (this.chatMessage.getFlag("dnd5e", "targets") ?? []).map(t => t.uuid);
         break;

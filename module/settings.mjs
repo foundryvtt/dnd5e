@@ -28,6 +28,16 @@ export function registerSystemSettings() {
     }
   });
 
+  // Player damage application
+  game.settings.register("dnd5e", "allowPlayerDamageApplication", {
+    name: "SETTINGS.5eAllowPlayerDamageApplication.Name",
+    hint: "SETTINGS.5eAllowPlayerDamageApplication.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Encumbrance tracking
   game.settings.register("dnd5e", "encumbrance", {
     name: "SETTINGS.5eEncumbrance.Name",
