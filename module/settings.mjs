@@ -342,14 +342,12 @@ export function registerSystemSettings() {
 
   if (game.release.generation >= 12) {
     game.settings.register("dnd5e", "defaultSkills", {
-      name: "SETTINGS.5eDefaultSkillsN",
-      hint: "SETTINGS.5eDefaultSkillsH",
+      name: "SETTINGS.DND5E.DEFAULTSKILLS.Name",
+      hint: "SETTINGS.DND5E.DEFAULTSKILLS.Hint",
       type: new foundry.data.fields.SetField(
         new foundry.data.fields.StringField({
           choices: () => CONFIG.DND5E.skills
-        }), {
-          type: "checkboxes"
-        }
+        })
       ),
       default: [],
       config: true

@@ -2132,8 +2132,6 @@
 "SETTINGS.5eCriticalModifiersL": "Make critical hits more deadly by multiplying non-dice modifiers in addition to rolled dice.",
 "SETTINGS.5eCurWtL": "Carried currency affects character encumbrance following the rules on PHB pg. 143.",
 "SETTINGS.5eCurWtN": "Apply Currency Weight",
-"SETTINGS.5eDefaultSkillsN": "Default Skills",
-"SETTINGS.5eDefaultSkillsH": "The default skills that appear on NPC sheets regardless of level of proficiency.",
 "SETTINGS.5eDiagEuclidean": "Euclidean (7.07 ft. Diagonal)",
 "SETTINGS.5eDiagL": "Configure which diagonal movement rule should be used for games within this system.",
 "SETTINGS.5eDiagN": "Diagonal Movement Rule",
@@ -2190,6 +2188,10 @@
     "Always": "Collapse All",
     "Older": "Collapse Older Trays",
     "Never": "Expand All"
+  },
+  "DEFAULTSKILLS": {
+    "Name": "Default Skills",
+    "Hint": "The default skills that appear on NPC sheets regardless of level of proficiency."
   },
   "THEME": {
     "Name": "Theme",
