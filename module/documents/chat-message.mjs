@@ -172,6 +172,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( !this.isContentVisible || !this.rolls.length ) return;
     const originatingMessage = game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
     const displayChallenge = originatingMessage?.shouldDisplayChallenge;
+    const displayAttackResult = game.user.isGM || (game.settings.get("dnd5e", "attackRollVisibility") !== "none");
 
     /**
      * Create an icon to indicate success or failure.
@@ -202,7 +203,9 @@ export default class ChatMessage5e extends ChatMessage {
       if ( !total ) continue;
       // Only attack rolls and death saves can crit or fumble.
       const canCrit = ["attack", "death"].includes(this.getFlag("dnd5e", "roll.type"));
-      if ( d.options.target && displayChallenge ) {
+      const isAttack = this.getFlag("dnd5e", "roll.type") === "attack";
+      const showResult = isAttack ? displayAttackResult : displayChallenge;
+      if ( d.options.target && showResult ) {
         if ( d20Roll.total >= d.options.target ) total.classList.add("success");
         else total.classList.add("failure");
       }
