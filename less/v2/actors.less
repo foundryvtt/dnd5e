@@ -353,6 +353,42 @@
   form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects) .create-child { display: block; }
 
   /* ---------------------------------- */
+  /*  Warnings                          */
+  /* ---------------------------------- */
+
+  dialog.warnings:is(#tooltip, .locked-tooltip) { /* :is used here to override specificity of base tooltip styles */
+    position: fixed;
+    width: 300px;
+    max-width: unset;
+    max-height: unset;
+    margin: 0;
+    outline: none;
+    padding: 4px 8px;
+    font-family: var(--dnd5e-font-roboto-condensed);
+
+    li {
+      padding: 6px 8px;
+      border-bottom: 1px dotted var(--dnd5e-color-gold);
+      &:last-child { border: none; }
+
+      a:hover {
+        text-shadow: none;
+        text-decoration: underline dotted;
+      }
+
+      &.warning::before, &.error::before {
+        font-family: var(--font-awesome);
+        font-weight: bold;
+        color: var(--color-text-dark-5);
+        margin-right: 2px;
+      }
+
+      &.warning::before { content: "\f071"; }
+      &.error::before { content: "\f06a"; }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Minimized                         */
   /* ---------------------------------- */
 
