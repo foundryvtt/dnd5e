@@ -38,7 +38,7 @@ export default class DetailsField {
       bond: new StringField({required: true, label: "DND5E.Bonds"}),
       flaw: new StringField({required: true, label: "DND5E.Flaws"}),
       race: new LocalDocumentField(foundry.documents.BaseItem, {
-        required: true, fallback: true, label: "DND5E.Race"
+        required: true, fallback: true, label: "DND5E.Species"
       })
     };
   }
