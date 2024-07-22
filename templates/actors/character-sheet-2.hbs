@@ -90,8 +90,12 @@
                     {{else}}
                     <span class="value">{{ dnd5e-numberFormat value }}</span>
                     {{/if}}
+                    {{#if @root.epicBoonsEarned}}
+                    <span class="boons">{{ @root.epicBoonsEarned }}</span>
+                    {{else}}
                     <span class="separator">&sol;</span>
                     <span class="max">{{ dnd5e-numberFormat max }}</span>
+                    {{/if}}
                 </div>
                 <div class="xp-bar" role="meter" aria-label="{{ localize "DND5E.ExperiencePointsLabel" }}"
                      aria-valuemin="{{ min }}" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
