@@ -28,6 +28,20 @@ export function registerSystemSettings() {
     }
   });
 
+  game.settings.register("dnd5e", "attackRollVisibility", {
+    name: "SETTINGS.5eAttackRollVisibility.Name",
+    hint: "SETTINGS.5eAttackRollVisibility.Hint",
+    scope: "world",
+    config: true,
+    default: "none",
+    type: String,
+    choices: {
+      all: "SETTINGS.5eAttackRollVisibility.All",
+      hideAC: "SETTINGS.5eAttackRollVisibility.HideAC",
+      none: "SETTINGS.5eAttackRollVisibility.None"
+    }
+  });
+
   // Encumbrance tracking
   game.settings.register("dnd5e", "encumbrance", {
     name: "SETTINGS.5eEncumbrance.Name",

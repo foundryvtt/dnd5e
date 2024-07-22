@@ -172,6 +172,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( !this.isContentVisible || !this.rolls.length ) return;
     const originatingMessage = game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
     const displayChallenge = originatingMessage?.shouldDisplayChallenge;
+    const displayAttackResult = game.user.isGM || (game.settings.get("dnd5e", "attackRollVisibility") !== "none");
 
     /**
      * Create an icon to indicate success or failure.
@@ -202,7 +203,9 @@ export default class ChatMessage5e extends ChatMessage {
       if ( !total ) continue;
       // Only attack rolls and death saves can crit or fumble.
       const canCrit = ["attack", "death"].includes(this.getFlag("dnd5e", "roll.type"));
-      if ( d.options.target && displayChallenge ) {
+      const isAttack = this.getFlag("dnd5e", "roll.type") === "attack";
+      const showResult = isAttack ? displayAttackResult : displayChallenge;
+      if ( d.options.target && showResult ) {
         if ( d20Roll.total >= d.options.target ) total.classList.add("success");
         else total.classList.add("failure");
       }
@@ -359,7 +362,9 @@ export default class ChatMessage5e extends ChatMessage {
   _enrichAttackTargets(html) {
     const attackRoll = this.rolls[0];
     const targets = this.getFlag("dnd5e", "targets");
-    if ( !game.user.isGM || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
+    const visibility = game.settings.get("dnd5e", "attackRollVisibility");
+    const isVisible = game.user.isGM || (visibility !== "none");
+    if ( !isVisible || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
     const tray = document.createElement("div");
     tray.classList.add("dnd5e2");
     tray.innerHTML = `
@@ -376,15 +381,18 @@ export default class ChatMessage5e extends ChatMessage {
     `;
     const evaluation = tray.querySelector("ul");
     evaluation.innerHTML = targets.map(({ name, ac, uuid }) => {
+      if ( !game.user.isGM && (visibility !== "all") ) ac = "";
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
       return [`
         <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
           <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
           <div class="name">${name}</div>
+          ${ac ? `
           <div class="ac">
             <i class="fas fa-shield-halved"></i>
             <span>${ac}</span>
           </div>
+          ` : ""}
         </li>
       `, isMiss];
     }).sort((a, b) => (a[1] === b[1]) ? 0 : a[1] ? 1 : -1).reduce((str, [li]) => str + li, "");
