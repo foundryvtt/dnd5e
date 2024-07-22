@@ -403,9 +403,11 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Create additional effects that are applied separately from an enchantment.
+   * @param {object} options  Options passed to the effect creation.
    */
-  async createRiderEnchantments() {
-    const origin = await fromUuid(this.origin);
+  async createRiderEnchantments(options) {
+    const origin = await fromUuid(this.origin)?? game.messages.get(options?.chatMessageOrigin)?.getAssociatedItem();
+    if ( !origin ) return;
 
     // Create Effects
     const riderEffects = (this.getFlag("dnd5e", "enchantment.riders.effect") ?? []).map(id => {
@@ -469,7 +471,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     super._onCreate(data, options, userId);
     if ( userId === game.userId ) {
       if ( this.active && (this.parent instanceof Actor) ) await this.createRiderConditions();
-      if ( this.isAppliedEnchantment ) await this.createRiderEnchantments();
+      if ( this.isAppliedEnchantment ) await this.createRiderEnchantments(options);
     }
     if ( options.chatMessageOrigin ) {
       document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)

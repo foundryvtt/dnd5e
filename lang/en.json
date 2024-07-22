@@ -842,6 +842,7 @@
 "DND5E.ExperiencePoints": "Experience Points",
 "DND5E.ExperiencePointsAbbr": "XP",
 "DND5E.ExperiencePointsCurrent": "Current XP",
+"DND5E.ExperiencePointsFormat": "{value} XP",
 "DND5E.ExperiencePointsLabel": "Progress to next level",
 "DND5E.ExperiencePointsMax": "XP for Next Level",
 "DND5E.ExperiencePointsMin": "Minimum XP for This Level",
@@ -1028,6 +1029,7 @@
 "DND5E.HitPointsMin": "Minimum Hit Points",
 "DND5E.HitPointsOverride": "Maximum Hit Points Override",
 "DND5E.HitPointsTemp": "Temporary Hit Points",
+"DND5E.HitPointsTempShort": "Temporary HP",
 "DND5E.HitPointsTempMax": "Temporary Maximum Hit Points",
 "DND5E.HitPointsTempMaxShort": "Temp Max HP",
 "DND5E.HP": "HP",
@@ -2117,6 +2119,13 @@
 "SETTINGS.5eAutoCollapseCardN": "Collapse Item Cards in Chat",
 "SETTINGS.5eAutoSpellTemplateL": "When a spell is cast, defaults to begin the process to create the corresponding Measured Template if any (requires TRUSTED or higher player role)",
 "SETTINGS.5eAutoSpellTemplateN": "Always place Spell Template",
+"SETTINGS.5eAttackRollVisibility": {
+  "Name": "Attack Result Visibility",
+  "Hint": "Control visibility of attack roll results in chat cards for players.",
+  "All": "Show results & target ACs",
+  "HideAC": "Show only results",
+  "None": "Hide all"
+},
 "SETTINGS.5eChallengeVisibility": {
   "Name": "Challenge Visibility",
   "Hint": "Control what roll DCs are visible to the players and whether successes/failures are highlighted.",

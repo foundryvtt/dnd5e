@@ -207,7 +207,10 @@ export default class InventoryElement extends HTMLElement {
       {
         name: "DND5E.Scroll.CreateScroll",
         icon: '<i class="fa-solid fa-scroll"></i>',
-        callback: async li => Item5e.create(await Item5e.createScrollFromSpell(item), { parent: this.actor }),
+        callback: async li => {
+          const scroll = await Item5e.createScrollFromSpell(item);
+          if ( scroll ) Item5e.create(scroll, { parent: this.actor });
+        },
         condition: li => (item.type === "spell") && this.actor?.isOwner,
         group: "action"
       },
@@ -282,14 +285,16 @@ export default class InventoryElement extends HTMLElement {
       });
     }
 
-    // Toggle collapsed state.
-    const expanded = this._app._expanded.has(item.id);
-    options.push({
-      name: expanded ? "Collapse" : "Expand",
-      icon: `<i class="fas fa-${expanded ? "compress" : "expand"}"></i>`,
-      callback: () => element.closest("[data-item-id]")?.querySelector("[data-toggle-description]")?.click(),
-      group: "collapsible"
-    });
+    // Toggle Collapsed State
+    if ( this._app.canExpand?.(item) ) {
+      const expanded = this._app._expanded.has(item.id);
+      options.push({
+        name: expanded ? "Collapse" : "Expand",
+        icon: `<i class="fas fa-${expanded ? "compress" : "expand"}"></i>`,
+        callback: () => element.closest("[data-item-id]")?.querySelector("[data-toggle-description]")?.click(),
+        group: "collapsible"
+      });
+    }
 
     return options;
   }

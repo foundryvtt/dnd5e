@@ -88,13 +88,23 @@ export default function ActorSheetV2Mixin(Base) {
         header.insertAdjacentElement("afterbegin", toggle);
       }
 
+      // Document UUID link.
+      const firstButton = header.querySelector(".header-button");
       const idLink = header.querySelector(".document-id-link");
       if ( idLink ) {
-        const firstButton = header.querySelector(".header-button");
         firstButton?.insertAdjacentElement("beforebegin", idLink);
         idLink.classList.add("header-button");
         idLink.dataset.tooltipDirection = "DOWN";
       }
+
+      // Preparation warnings.
+      const warnings = document.createElement("a");
+      warnings.classList.add("header-button", "preparation-warnings");
+      warnings.dataset.tooltip = "Warnings";
+      warnings.setAttribute("aria-label", game.i18n.localize("Warnings"));
+      warnings.innerHTML = '<i class="fas fa-triangle-exclamation"></i>';
+      warnings.addEventListener("click", this._onOpenWarnings.bind(this));
+      firstButton?.insertAdjacentElement("beforebegin", warnings);
 
       // Render tabs.
       const nav = document.createElement("nav");
@@ -119,6 +129,15 @@ export default function ActorSheetV2Mixin(Base) {
       });
 
       return html;
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    async _render(force=false, options={}) {
+      await super._render(force, options);
+      const [warnings] = this.element.find(".header-button.preparation-warnings");
+      warnings?.toggleAttribute("hidden", !this.actor._preparationWarnings?.length);
     }
 
     /* -------------------------------------------- */
@@ -430,6 +449,7 @@ export default function ActorSheetV2Mixin(Base) {
       html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
       html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
       html.find("[data-toggle-description]").on("click", this._onToggleDescription.bind(this));
+      html.find("dialog.warnings").on("click", this._onCloseWarnings.bind(this));
       this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
       this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
 
@@ -484,6 +504,18 @@ export default function ActorSheetV2Mixin(Base) {
       createChild.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
         type: game.i18n.localize(`DOCUMENT.${active === "effects" ? "ActiveEffect" : "Item"}`)
       }));
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle closing the warnings dialog.
+     * @param {PointerEvent} event  The triggering event.
+     * @protected
+     */
+    _onCloseWarnings(event) {
+      if ( event.target instanceof HTMLDialogElement ) event.target.close();
+      if ( event.target instanceof HTMLAnchorElement ) event.target.closest("dialog")?.close();
     }
 
     /* -------------------------------------------- */
@@ -544,6 +576,22 @@ export default function ActorSheetV2Mixin(Base) {
         case "edit": item?.sheet.render(true); break;
         case "delete": item?.deleteDialog(); break;
       }
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle opening the warnings dialog.
+     * @param {PointerEvent} event  The triggering event.
+     * @protected
+     */
+    _onOpenWarnings(event) {
+      event.stopImmediatePropagation();
+      const { top, left, height } = event.target.getBoundingClientRect();
+      const { clientWidth } = document.documentElement;
+      const dialog = this.form.querySelector("dialog.warnings");
+      Object.assign(dialog.style, { top: `${top + height}px`, left: `${Math.min(left - 16, clientWidth - 300)}px` });
+      dialog.showModal();
     }
 
     /* -------------------------------------------- */
@@ -725,6 +773,19 @@ export default function ActorSheetV2Mixin(Base) {
       element.dataset.tooltip = `
         <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
       `;
+    }
+
+    /* -------------------------------------------- */
+    /*  Helpers                                     */
+    /* -------------------------------------------- */
+
+    /**
+     * Can an item be expanded on the sheet?
+     * @param {Item5e} item  Item on the sheet.
+     * @returns {boolean}
+     */
+    canExpand(item) {
+      return !["class", "subclass"].includes(item.type);
     }
   };
 }

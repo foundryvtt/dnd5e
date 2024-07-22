@@ -11,7 +11,7 @@
 
   &.minimized {
     box-shadow: 0 0 20px var(--color-shadow-dark);
-    .window-header .source-book { display: none; }
+    .window-header .header-elements { display: none; }
   }
 
   /* ---------------------------------- */
@@ -20,7 +20,7 @@
 
   > header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-background-25); }
 
-  .window-header .source-book {
+  .window-header .header-elements {
     flex: none;
     color: var(--color-text-dark-primary);
     font-family: var(--dnd5e-font-roboto-condensed);
@@ -29,6 +29,14 @@
     line-height: 1;
     margin-top: 7px;
     gap: 4px;
+
+    > div:has(> span:not(:empty)) + div::before { content: " • "; }
+
+    .source-book {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 
     a {
       margin: 0;
@@ -40,6 +48,7 @@
     i {
       font-size: var(--font-size-11);
       color: var(--color-text-light-6);
+      margin: 0;
     }
   }
 
@@ -80,6 +89,7 @@
         object-fit: cover;
         object-position: top;
         margin: 0;
+        display: block;
       }
 
       &.token > img {
