@@ -1,3 +1,5 @@
+import Application5e from "../api/application.mjs";
+
 /**
  * Dialog rendering options for a roll configuration dialog.
  *
@@ -16,9 +18,9 @@
  * @param {BasicRollMessageConfiguration} [message={}]        Message configuration.
  * @param {BasicRollConfigurationDialogOptions} [options={}]  Dialog rendering options.
  */
-export default class RollConfigurationDialog extends FormApplication {
+export default class RollConfigurationDialog extends Application5e {
   constructor(config={}, message={}, options={}) {
-    super(null, options);
+    super(options);
 
     /**
      * Roll configuration.
@@ -27,23 +29,51 @@ export default class RollConfigurationDialog extends FormApplication {
     Object.defineProperty(this, "config", { value: config, writable: false });
 
     this.message = message;
-    this.object = this._buildRolls(foundry.utils.deepClone(this.config));
+    this.rolls = this.#buildRolls(foundry.utils.deepClone(this.config));
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/dice/roll-configuration-dialog.hbs",
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["roll-configuration"],
+    tag: "form",
+    window: {
       title: "DND5E.RollConfiguration.Title",
-      classes: ["dnd5e", "dialog", "roll"],
-      width: 400,
-      submitOnChange: true,
-      closeOnSubmit: false,
-      jQuery: false,
-      rollType: CONFIG.Dice.BasicRoll
-    });
+      icon: "fa-solid fa-dice",
+      minimizable: false
+    },
+    form: {
+      handler: RollConfigurationDialog.#handleFormSubmission
+    },
+    position: {
+      width: 400
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    formulas: {
+      template: "systems/dnd5e/templates/dice/roll-formulas.hbs"
+    },
+    configuration: {
+      template: "systems/dnd5e/templates/dice/roll-configuration.hbs"
+    },
+    buttons: {
+      template: "systems/dnd5e/templates/dice/roll-buttons.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll type to use when constructing the rolls.
+   * @type {BasicRoll}
+   */
+  static get rollType() {
+    return CONFIG.Dice.BasicRoll;
   }
 
   /* -------------------------------------------- */
@@ -62,41 +92,84 @@ export default class RollConfigurationDialog extends FormApplication {
    * The rolls being configured.
    * @type {BasicRoll[]}
    */
-  get rolls() {
-    return this.object;
-  }
+  rolls;
 
-  set rolls(rolls) {
-    this.object = rolls;
+  /* -------------------------------------------- */
+
+  /**
+   * Roll type to use when constructing the rolls.
+   * @type {BasicRoll}
+   */
+  get rollType() {
+    return this.options.rollType ?? this.constructor.rollType;
   }
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /**
-   * Buttons displayed in the configuration dialog.
-   * @returns {object}
-   * @protected
-   */
-  _getButtons() {
-    return {
-      roll: { label: game.i18n.localize("DND5E.Roll") }
-    };
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    switch (partId) {
+      case "buttons":
+        return this._prepareButtonsContext(context, options);
+      case "configuration":
+        return this._prepareConfigurationContext(context, options);
+      case "formulas":
+        return this._prepareFormulasContext(context, options);
+      default:
+        return context;
+    }
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  getData(options={}) {
-    return foundry.utils.mergeObject({
-      CONFIG: CONFIG.DND5E,
-      rolls: this.rolls,
-      rollMode: this.message.rollMode ?? this.options.default?.rollMode,
-      rollModes: CONFIG.Dice.rollModes,
-      situational: this.rolls[0].data.situational,
-      buttons: this._getButtons()
-    }, super.getData(options));
+  /**
+   * Prepare the context for the buttons.
+   * @param {ApplicationRenderContext} context  Shared context provided by _prepareContext.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  _prepareButtonsContext(context, options) {
+    context.buttons = {
+      roll: {
+        icon: '<i class="fa-solid fa-dice"></i>',
+        label: game.i18n.localize("DND5E.Roll")
+      }
+    };
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the context for the roll configuration section.
+   * @param {ApplicationRenderContext} context  Shared context provided by _prepareContext.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  _prepareConfigurationContext(context, options) {
+    context.rollMode = this.message.rollMode ?? this.options.default?.rollMode;
+    context.rollModesOptions = CONFIG.Dice.rollModes;
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the context for the formulas list.
+   * @param {ApplicationRenderContext} context  Shared context provided by _prepareContext.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  _prepareFormulasContext(context, options) {
+    context.rolls = this.rolls;
+    context.situational = this.rolls[0].data.situational;
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -106,12 +179,12 @@ export default class RollConfigurationDialog extends FormApplication {
   /**
    * Build a roll from the provided configuration objects.
    * @param {BasicRollProcessConfiguration} config  Roll configuration data.
-   * @param {object} [formData={}]                  Any data entered into the rolling prompt.
+   * @param {FormDataExtended} [formData]           Any data entered into the rolling prompt.
    * @returns {BasicRoll[]}
-   * @internal
+   * @private
    */
-  _buildRolls(config, formData={}) {
-    const RollType = this.options.rollType ?? CONFIG.Dice.BasicRoll;
+  #buildRolls(config, formData) {
+    const RollType = this.rollType;
     return config.rolls?.map((config, index) => RollType.create(this._buildConfig(config, formData, index))) ?? [];
   }
 
@@ -120,7 +193,7 @@ export default class RollConfigurationDialog extends FormApplication {
   /**
    * Prepare individual configuration object before building a roll.
    * @param {BasicRollConfiguration} config  Roll configuration data.
-   * @param {object} formData                Any data entered into the rolling prompt.
+   * @param {FormDataExtended} [formData]    Any data entered into the rolling prompt.
    * @param {number} index                   Index of the roll within all rolls being prepared.
    * @returns {BasicRollConfiguration}
    * @protected
@@ -134,14 +207,14 @@ export default class RollConfigurationDialog extends FormApplication {
      * @memberof hookEvents
      * @param {RollConfigurationDialog} app    Roll configuration dialog.
      * @param {BasicRollConfiguration} config  Roll configuration data.
-     * @param {object} formData                Any data entered into the rolling prompt.
+     * @param {FormDataExtended} [formData]    Any data entered into the rolling prompt.
      * @param {number} index                   Index of the roll within all rolls being prepared.
      */
     Hooks.callAll("dnd5e.buildRollConfig", this, config, formData, index);
 
-    if ( formData.situational && (config.situational !== false) ) {
+    if ( formData?.get("situational") && (config.situational !== false) ) {
       config.parts.push("@situational");
-      config.data.situational = formData.situational;
+      config.data.situational = formData.get("situational");
     }
 
     return config;
@@ -153,6 +226,7 @@ export default class RollConfigurationDialog extends FormApplication {
    * Make any final modifications to rolls based on the button clicked.
    * @param {string} action  Action on the button clicked.
    * @returns {BasicRoll[]}
+   * @protected
    */
   _finalizeRolls(action) {
     return this.rolls;
@@ -164,37 +238,42 @@ export default class RollConfigurationDialog extends FormApplication {
    * Rebuild rolls based on an updated config and re-render the dialog.
    */
   rebuild() {
-    this._onSubmit(new Event("change"));
+    this._onChangeForm(this.options.form, new Event("change"));
   }
 
   /* -------------------------------------------- */
   /*  Event Handling                              */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async close(options={}) {
-    this.options.resolve?.([]);
-    return super.close(options);
+  /**
+   * Handle submission of the dialog using the form buttons.
+   * @param {Event|SubmitEvent} event    The form submission event.
+   * @param {HTMLFormElement} form       The submitted form.
+   * @param {FormDataExtended} formData  Data from the dialog.
+   * @private
+   */
+  static async #handleFormSubmission(event, form, formData) {
+    const rolls = this._finalizeRolls(event.submitter?.dataset?.action);
+    await this.close({ dnd5e: { rolls } });
   }
 
-  /* -------------------------------------------- */
+  /* <><><><> <><><><> <><><><> <><><><> */
 
   /** @inheritDoc */
-  _updateObject(event, formData) {
-    if ( formData.rollMode ) this.message.rollMode = formData.rollMode;
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
 
-    // If one of the buttons was clicked, finalize the roll, resolve the promise, and close
-    if ( event.type === "submit" ) {
-      const rolls = this._finalizeRolls(event.submitter?.dataset.action);
-      this.options.resolve?.(rolls);
-      this.close({ submit: false, force: true });
-    }
+    const formData = new FormDataExtended(this.element);
+    if (formData.has("rollMode")) this.message.rollMode = formData.get("rollMode");
+    this.rolls = this.#buildRolls(foundry.utils.deepClone(this.config), formData);
+    this.render({ parts: ["formulas"] });
+  }
 
-    // Otherwise, re-build the in-memory rolls and re-render the dialog
-    else {
-      this.rolls = this._buildRolls(foundry.utils.deepClone(this.config), formData);
-      this.render();
-    }
+  /* <><><><> <><><><> <><><><> <><><><> */
+
+  /** @override */
+  _onClose(options = {}) {
+    this.options.resolve?.(options[game.system.id]?.rolls ?? []);
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,14 @@
+<fieldset class="roll-formulas">
+    <legend>{{ localize "DND5E.RollConfiguration.Rolls" }}</legend>
+    {{#each rolls}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Formula" }} {{#if type}}({{ type }}){{/if}}</label>
+        <input type="text" name="formula" value="{{ formula }}" disabled>
+    </div>
+    {{/each}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.RollSituationalBonus" }}</label>
+        <input type="text" name="situational" value="{{ situational }}"
+               placeholder="{{ localize 'DND5E.RollExample' }}">
+    </div>
+</fieldset>
