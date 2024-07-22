@@ -28,17 +28,17 @@ export function registerSystemSettings() {
     }
   });
 
-  game.settings.register("dnd5e", "attackRollCheckVisibility", {
-    name: "SETTINGS.5eAttackRollCheckVisibility.Name",
-    hint: "SETTINGS.5eAttackRollCheckVisibility.Hint",
-    scope: "world", // Applies to the entire world, not just individual users
-    config: true, // Shows this setting in the Configure Settings menu
-    default: "gm", // Sets "gm" as the default value
-    type: String, // Specifies that the setting is a string choice
+  game.settings.register("dnd5e", "attackRollVisibility", {
+    name: "SETTINGS.5eAttackRollVisibility.Name",
+    hint: "SETTINGS.5eAttackRollVisibility.Hint",
+    scope: "world",
+    config: true,
+    default: "none",
+    type: String,
     choices: {
-      gm: "SETTINGS.5eAttackRollCheckVisibility.GM",
-      players: "SETTINGS.5eAttackRollCheckVisibility.Players",
-      players_hideac: "SETTINGS.5eAttackRollCheckVisibility.PlayersHideAC"
+      all: "SETTINGS.5eAttackRollVisibility.All",
+      hideAC: "SETTINGS.5eAttackRollVisibility.HideAC",
+      none: "SETTINGS.5eAttackRollVisibility.None"
     }
   });
 
