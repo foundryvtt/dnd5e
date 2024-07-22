@@ -51,6 +51,14 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /**
+   * Additional custom registered collections for filtering.
+   * @type {Object<string, Function>}
+   */
+  static FILTER_COLLECTIONS = {};
+
+  /* -------------------------------------------- */
+
+  /**
    * Track the most recent drag event.
    * @type {DragEvent}
    * @protected
@@ -492,7 +500,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /**
    * Filter child embedded Documents based on the current set of filters.
-   * @param {string} collection    The embedded collection name.
+   * @param {string} collection    The embedded or custom collection name.
    * @param {Set<string>} filters  Filters to apply to the children.
    * @returns {Document[]}
    * @protected
@@ -502,7 +510,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "items": return this._filterItems(this.actor.items, filters);
       case "effects": return this._filterEffects(Array.from(this.actor.allApplicableEffects()), filters);
     }
-    return [];
+    const fn = this.constructor.FILTER_COLLECTIONS[collection];
+    return ( fn instanceof Function ) ? fn.call(this, collection, filters) : [];
   }
 
   /* -------------------------------------------- */
