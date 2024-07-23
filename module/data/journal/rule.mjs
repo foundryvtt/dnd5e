@@ -6,7 +6,7 @@ const { HTMLField, StringField } = foundry.data.fields;
  * @property {string} tooltip  Content to display in tooltip in place of page's text content.
  * @property {string} type     Type of rule represented. Should match an entry defined in `CONFIG.DND5E.ruleTypes`.
  */
-export default class RuleJournalPageData extends foundry.abstract.DataModel {
+export default class RuleJournalPageData extends foundry.abstract.TypeDataModel {
 
   /** @inheritDoc */
   static defineSchema() {
@@ -35,5 +35,12 @@ export default class RuleJournalPageData extends foundry.abstract.DataModel {
       content: await renderTemplate("systems/dnd5e/templates/journal/page-rule-tooltip.hbs", context),
       classes: ["dnd5e-tooltip", "rule-tooltip"]
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async toEmbed(config, options={}) {
+    return this.parent._embedTextPage(config, options);
   }
 }
