@@ -116,7 +116,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     }, {});
 
     // Skills & Tools
-    const skillSetting = game.release.generation < 12 ? new Set() : new Set(game.settings.get("dnd5e", "defaultSkills"));
+    const skillSetting = new Set(game.settings.get("dnd5e", "defaultSkills"));
     context.skills = Object.fromEntries(Object.entries(context.skills).filter(([k, v]) => {
       return v.value || skillSetting.has(k);
     }));

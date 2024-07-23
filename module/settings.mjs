@@ -340,19 +340,18 @@ export function registerSystemSettings() {
     default: true
   });
 
-  if (game.release.generation >= 12) {
-    game.settings.register("dnd5e", "defaultSkills", {
-      name: "SETTINGS.DND5E.DEFAULTSKILLS.Name",
-      hint: "SETTINGS.DND5E.DEFAULTSKILLS.Hint",
-      type: new foundry.data.fields.SetField(
-        new foundry.data.fields.StringField({
-          choices: () => CONFIG.DND5E.skills
-        })
-      ),
-      default: [],
-      config: true
-    });
-  }
+  // NPC sheet default skills
+  game.settings.register("dnd5e", "defaultSkills", {
+    name: "SETTINGS.DND5E.DEFAULTSKILLS.Name",
+    hint: "SETTINGS.DND5E.DEFAULTSKILLS.Hint",
+    type: new foundry.data.fields.SetField(
+      new foundry.data.fields.StringField({
+        choices: () => CONFIG.DND5E.skills
+      })
+    ),
+    default: [],
+    config: true
+  });
 }
 
 /**
