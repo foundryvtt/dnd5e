@@ -2792,6 +2792,18 @@ DND5E.statusEffects = {
 };
 
 /* -------------------------------------------- */
+
+/**
+ * Configuration for the special bloodied status effect.
+ * @type {{ name: string, icon: string, threshold: number }}
+ */
+DND5E.bloodied = {
+  name: "EFFECT.DND5E.StatusBloodied",
+  icon: "systems/dnd5e/icons/svg/statuses/bloodied.svg",
+  threshold: .5
+};
+
+/* -------------------------------------------- */
 /*  Languages                                   */
 /* -------------------------------------------- */
 
