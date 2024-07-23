@@ -245,7 +245,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     });
 
     if ( this.actor.system.details.race instanceof dnd5e.documents.Item5e ) {
-      features.push({ label: "DND5E.FeaturesRace", items: [], dataset: { type: "race" } });
+      features.push({ label: "DND5E.Species.Features", items: [], dataset: { type: "race" } });
     }
 
     if ( this.actor.system.details.background instanceof dnd5e.documents.Item5e ) {

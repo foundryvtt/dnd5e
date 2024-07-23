@@ -1214,7 +1214,7 @@ DND5E.featureTypes = {
     label: "DND5E.Feature.Monster"
   },
   race: {
-    label: "DND5E.Feature.Race"
+    label: "DND5E.Feature.Species"
   },
   enchantment: {
     label: "DND5E.Enchantment.Label",

@@ -1,5 +1,4 @@
 import { SummonsData } from "../data/item/fields/summons-field.mjs";
-import TokenSystemFlags from "../data/token/token-system-flags.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
@@ -17,13 +16,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    */
   get hasDynamicRing() {
     return this.ring.enabled;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get _systemFlagsDataModel() {
-    return TokenSystemFlags;
   }
 
   /* -------------------------------------------- */
