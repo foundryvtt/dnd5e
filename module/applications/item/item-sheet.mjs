@@ -176,7 +176,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Enrich HTML description
     const enrichmentOptions = {
-      secrets: item.isOwner, async: true, relativeTo: this.item, rollData: context.rollData
+      secrets: item.isOwner, relativeTo: this.item, rollData: context.rollData
     };
     context.enriched = {
       description: await TextEditor.enrichHTML(item.system.description.value, enrichmentOptions),

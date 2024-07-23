@@ -2062,7 +2062,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.preRollHitDie", this, rollConfig, denomination) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    const roll = await new Roll(rollConfig.formula, rollConfig.data).evaluate();
     if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
 
     const hp = this.system.attributes.hp;
@@ -2130,7 +2130,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
-    await roll.evaluate({async: true});
+    await roll.evaluate();
 
     /**
      * A hook event that fires after hit points haven been rolled for a character's class.
@@ -2182,7 +2182,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
-    await roll.evaluate({async: true});
+    await roll.evaluate();
 
     /**
      * A hook event that fires after hit points are rolled for an NPC.

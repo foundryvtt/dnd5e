@@ -1492,7 +1492,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Rich text description
     data.description.value = await TextEditor.enrichHTML(data.description.value, {
-      async: true,
       relativeTo: this,
       rollData: this.getRollData(),
       ...htmlOptions
@@ -1928,7 +1927,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preRollRecharge", this, rollConfig) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    const roll = await new Roll(rollConfig.formula, rollConfig.data).evaluate();
     const success = roll.total >= rollConfig.target;
 
     if ( rollConfig.chatMessage ) {

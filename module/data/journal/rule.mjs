@@ -28,7 +28,7 @@ export default class RuleJournalPageData extends foundry.abstract.TypeDataModel 
       page: this.parent,
       type: CONFIG.DND5E.ruleTypes[this.type].label,
       content: await TextEditor.enrichHTML(this.tooltip || this.parent.text.content, {
-        secrets: false, async: true, relativeTo: this.parent, ...enrichmentOptions
+        secrets: false, relativeTo: this.parent, ...enrichmentOptions
       })
     };
     return {

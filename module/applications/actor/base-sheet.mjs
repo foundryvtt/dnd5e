@@ -204,7 +204,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     context.biographyHTML = await TextEditor.enrichHTML(context.system.details.biography.value, {
       secrets: this.actor.isOwner,
       rollData: context.rollData,
-      async: true,
       relativeTo: this.actor
     });
 

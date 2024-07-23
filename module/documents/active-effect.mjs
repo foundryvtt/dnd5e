@@ -742,9 +742,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       content: await renderTemplate(
         "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", {
           effect: this,
-          description: await TextEditor.enrichHTML(this.description ?? "", {
-            async: true, relativeTo: this, ...enrichmentOptions
-          }),
+          description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),
           durationParts: this.duration.remaining ? this.duration.label.split(", ") : [],
           properties: properties.map(p => game.i18n.localize(p))
         }

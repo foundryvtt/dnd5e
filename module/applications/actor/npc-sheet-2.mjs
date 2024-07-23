@@ -147,7 +147,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
     // Biographies
     const enrichmentOptions = {
-      secrets: this.actor.isOwner, async: true, relativeTo: this.actor, rollData: context.rollData
+      secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
 
     context.enriched = {

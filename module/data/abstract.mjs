@@ -490,10 +490,10 @@ export class ItemDataModel extends SystemDataModel {
       subtitle: subtitle.filterJoin(" &bull; "),
       description: {
         value: await TextEditor.enrichHTML(description ?? "", {
-          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+          rollData, relativeTo: this.parent, ...enrichmentOptions
         }),
         chat: await TextEditor.enrichHTML(chat ?? "", {
-          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+          rollData, relativeTo: this.parent, ...enrichmentOptions
         })
       }
     };
