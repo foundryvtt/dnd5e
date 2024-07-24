@@ -449,9 +449,9 @@
         width: 70px;
         align-items: stretch;
         justify-content: center;
-        gap: .375rem;
+        gap: 4px;
         color: var(--color-text-light-6);
-        padding: 0 1.5rem 0 .25rem;
+        padding: 0 38px 0 4px;
         position: relative;
 
         .item-control {
@@ -465,14 +465,18 @@
           &[aria-pressed="true"]::before { background: var(--color-border-dark-5); }
         }
 
-        [data-context-menu] {
+        [data-context-menu], [data-toggle-description] {
           position: absolute;
-          inset-block: 0;
-          inset-inline-end: 0;
+          inset: 0 0 0 auto;
           display: flex;
           align-items: center;
           justify-content: end;
-          padding: 0 12px 0 5px;
+          padding: 0 10px 0 5px;
+        }
+
+        [data-toggle-description] {
+          right: 20px;
+          padding: 0;
         }
       }
 
