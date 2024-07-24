@@ -57,7 +57,8 @@ These examples are common across item types, meaning they'll work equally well f
 name
 img
 system.description.value
-system.description.chat
+                   chat
+       properties
 ```
 
 #### Changing the Name
@@ -82,21 +83,9 @@ You can reference the original description using a pair of curly brackets (`{}`)
 | -------------------------- | ----------- | ------------ | ---------- |
 | `system.description.value` | Override    | `[string]`   | No         |
 
-### Weapon Examples
+#### Adding Item Properties
 
-```
-system.proficient
-system.properties
-system.magicalBonus
-```
-
-#### Grant Proficiency with the Weapon
-
-| Attribute Key       | Change Mode | Effect Value | Roll Data? |
-| ------------------- | ----------- | ------------ | ---------- |
-| `system.proficient` | Upgrade     | `1`          | No         |
-
-#### Add Weapon Properties
+The valid effect values depend on the item type, and in the case of consumables the subtype, which are documented below.
 
 | Attribute Key       | Change Mode | Effect Value | Roll Data? |
 | ------------------- | ----------- | ------------ | ---------- |
@@ -129,38 +118,6 @@ system.magicalBonus
 >
 > </details>
 
-#### Make Weapon Magical
-
-Make the weapon magical by adding the Magical property and an optional Magical Bonus that will be added to attack and damage rolls.
-
-| Attribute Key         | Change Mode | Effect Value | Roll Data? |
-| --------------------- | ----------- | ------------ | ---------- |
-| `system.properties`   | Add         | `mgc`        | No         |
-| `system.magicalBonus` | Override    | `[number]`   | No         |
-
-### Equipment Examples
-
-```
-system.proficient
-       properties
-       armor.value
-             magicalBonus
-             dex
-       strength
-```
-
-#### Grant Proficiency with the Equipment
-
-| Attribute Key       | Change Mode | Effect Value | Roll Data? |
-| ------------------- | ----------- | ------------ | ---------- |
-| `system.proficient` | Upgrade     | `1`          | No         |
-
-#### Add Equipment Properties
-
-| Attribute Key       | Change Mode | Effect Value | Roll Data? |
-| ------------------- | ----------- | ------------ | ---------- |
-| `system.properties` | Add         | `[string]`   | No         |
-
 > <details>
 > <summary>Equipment Properties</summary>
 >
@@ -174,37 +131,6 @@ system.proficient
 >
 > </details>
 
-#### Make Armor Magical
-
-Make the armor magical by adding the Magical property and an optional Magical Bonus that will be added to AC.
-
-| Attribute Key         | Change Mode | Effect Value | Roll Data? |
-| --------------------- | ----------- | ------------ | ---------- |
-| `system.properties`   | Add         | `mgc`        | No         |
-| `system.magicalBonus` | Override    | `[number]`   | No         |
-
-### Tool Examples
-
-```
-system.properties
-       proficient
-       ability
-       bonus
-       chatFlavor
-```
-
-#### Grant Proficiency with the Tool
-
-| Attribute Key       | Change Mode | Effect Value | Roll Data? |
-| ------------------- | ----------- | ------------ | ---------- |
-| `system.proficient` | Upgrade     | `1`          | No         |
-
-#### Add Tool Properties
-
-| Attribute Key       | Change Mode | Effect Value | Roll Data? |
-| ------------------- | ----------- | ------------ | ---------- |
-| `system.properties` | Add         | `[string]`   | No         |
-
 > <details>
 > <summary>Tool Properties</summary>
 >
@@ -216,27 +142,6 @@ system.properties
 > Source: `CONFIG.DND5E.validProperties.tool`
 >
 > </details>
-
-#### Add Bonus to Tool
-
-| Attribute Key  | Change Mode | Effect Value | Roll Data? |
-| -------------- | ----------- | ------------ | ---------- |
-| `system.bonus` | Add         | `[formula]`  | Yes        |
-
-### Consumable Examples
-
-```
-system.properties
-       magicalBonus
-```
-
-#### Add Consumable Properties
-
-Some consumable types have different properties so there are different lists calling those out below.
-
-| Attribute Key       | Change Mode | Effect Value | Roll Data? |
-| ------------------- | ----------- | ------------ | ---------- |
-| `system.properties` | Add         | `[string]`   | No         |
 
 > <details>
 > <summary>Ammunition Properties</summary>
@@ -277,29 +182,6 @@ Some consumable types have different properties so there are different lists cal
 >
 > </details>
 
-#### Make Ammunition Magical
-
-Make ammunition magical by adding the Magical property and an optional Magical Bonus that will be added to the attack/damage rolls.
-
-| Attribute Key         | Change Mode | Effect Value | Roll Data? |
-| --------------------- | ----------- | ------------ | ---------- |
-| `system.properties`   | Add         | `mgc`        | No         |
-| `system.magicalBonus` | Override    | `[number]`   | No         |
-
-### Container Examples
-
-```
-system.properties
-       capacity.value
-                type
-```
-
-#### Add Container Properties
-
-| Attribute Key       | Change Mode | Effect Value | Roll Data? |
-| ------------------- | ----------- | ------------ | ---------- |
-| `system.properties` | Add         | `[string]`   | No         |
-
 > <details>
 > <summary>Container Properties</summary>
 >
@@ -312,24 +194,6 @@ system.properties
 >
 > </details>
 
-#### Make Contents Weightless
-
-| Attribute Key       | Change Mode | Effect Value         | Roll Data? |
-| ------------------- | ----------- | -------------------- | ---------- |
-| `system.properties` | Add         | `weightlessContents` | No         |
-
-### Loot Examples
-
-```
-system.properties
-```
-
-#### Add Loot Properties
-
-| Attribute Key       | Change Mode | Effect Value | Roll Data? |
-| ------------------- | ----------- | ------------ | ---------- |
-| `system.properties` | Add         | `[string]`   | No         |
-
 > <details>
 > <summary>Loot Properties</summary>
 >
@@ -340,6 +204,102 @@ system.properties
 > Source: `CONFIG.DND5E.validProperties.loot`
 >
 > </details>
+
+### Weapon Examples
+
+```
+system.proficient
+       magicalBonus
+```
+
+#### Grant Proficiency with the Weapon
+
+| Attribute Key       | Change Mode | Effect Value | Roll Data? |
+| ------------------- | ----------- | ------------ | ---------- |
+| `system.proficient` | Upgrade     | `1`          | No         |
+
+#### Make Weapon Magical
+
+Make the weapon magical by adding the Magical property and an optional Magical Bonus that will be added to attack and damage rolls.
+
+| Attribute Key         | Change Mode | Effect Value | Roll Data? |
+| --------------------- | ----------- | ------------ | ---------- |
+| `system.properties`   | Add         | `mgc`        | No         |
+| `system.magicalBonus` | Override    | `[number]`   | No         |
+
+### Equipment Examples
+
+```
+system.proficient
+       armor.value
+             magicalBonus
+             dex
+       strength
+```
+
+#### Grant Proficiency with the Equipment
+
+| Attribute Key       | Change Mode | Effect Value | Roll Data? |
+| ------------------- | ----------- | ------------ | ---------- |
+| `system.proficient` | Upgrade     | `1`          | No         |
+
+#### Make Armor Magical
+
+Make the armor magical by adding the Magical property and an optional Magical Bonus that will be added to AC.
+
+| Attribute Key         | Change Mode | Effect Value | Roll Data? |
+| --------------------- | ----------- | ------------ | ---------- |
+| `system.properties`   | Add         | `mgc`        | No         |
+| `system.magicalBonus` | Override    | `[number]`   | No         |
+
+### Tool Examples
+
+```
+system.proficient
+       ability
+       bonus
+       chatFlavor
+```
+
+#### Grant Proficiency with the Tool
+
+| Attribute Key       | Change Mode | Effect Value | Roll Data? |
+| ------------------- | ----------- | ------------ | ---------- |
+| `system.proficient` | Upgrade     | `1`          | No         |
+
+#### Add Bonus to Tool
+
+| Attribute Key  | Change Mode | Effect Value | Roll Data? |
+| -------------- | ----------- | ------------ | ---------- |
+| `system.bonus` | Add         | `[formula]`  | Yes        |
+
+### Consumable Examples
+
+```
+system.magicalBonus
+```
+
+#### Make Ammunition Magical
+
+Make ammunition magical by adding the Magical property and an optional Magical Bonus that will be added to the attack/damage rolls.
+
+| Attribute Key         | Change Mode | Effect Value | Roll Data? |
+| --------------------- | ----------- | ------------ | ---------- |
+| `system.properties`   | Add         | `mgc`        | No         |
+| `system.magicalBonus` | Override    | `[number]`   | No         |
+
+### Container Examples
+
+```
+system.capacity.value
+                type
+```
+
+#### Make Contents Weightless
+
+| Attribute Key       | Change Mode | Effect Value         | Roll Data? |
+| ------------------- | ----------- | -------------------- | ---------- |
+| `system.properties` | Add         | `weightlessContents` | No         |
 
 ### Common Usage Examples
 
