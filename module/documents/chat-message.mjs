@@ -418,15 +418,15 @@ export default class ChatMessage5e extends ChatMessage {
     let { formula, total, breakdown } = aggregatedRolls.reduce((obj, r) => {
       obj.formula.push(CONFIG.DND5E.aggregateDamageDisplay ? r.formula : ` + ${r.formula}`);
       obj.total += r.total;
-      this._aggregateDamageRoll(r, obj.breakdown);
+      obj.breakdown.push(this._simplifyDamageRoll(r));
       return obj;
-    }, { formula: [], total: 0, breakdown: {} });
+    }, { formula: [], total: 0, breakdown: [] });
     formula = formula.join("").replace(/^ \+ /, "");
     html.querySelectorAll(".dice-roll").forEach(el => el.remove());
     const roll = document.createElement("div");
     roll.classList.add("dice-roll");
 
-    const tooltipContents = Object.entries(breakdown).reduce((str, [type, { total, constant, dice }]) => {
+    const tooltipContents = breakdown.reduce((str, { type, total, constant, dice }) => {
       const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
       return `${str}
         <section class="tooltip-part">
@@ -477,13 +477,13 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /**
-   * Aggregate damage roll information by damage type.
-   * @param {DamageRoll} roll  The damage roll.
-   * @param {Record<string, {total: number, constant: number, dice: {result: string, classes: string}[]}>} breakdown
+   * Simplify damage roll information for use by damage tooltip.
+   * @param {DamageRoll} roll   The damage roll to simplify.
+   * @returns {object}          The object holding simplified damage roll data.
    * @protected
    */
-  _aggregateDamageRoll(roll, breakdown) {
-    const aggregate = breakdown[roll.options.type] ??= { total: roll.total, constant: 0, dice: [] };
+  _simplifyDamageRoll(roll) {
+    const aggregate = { type: roll.options.type, total: roll.total, constant: 0, dice: [] };
     for ( let i = roll.terms.length - 1; i >= 0; ) {
       const term = roll.terms[i--];
       if ( !(term instanceof NumericTerm) && !(term instanceof DiceTerm) ) continue;
@@ -499,6 +499,8 @@ export default class ChatMessage5e extends ChatMessage {
       }
       if ( term instanceof NumericTerm ) aggregate.constant += value * multiplier;
     }
+
+    return aggregate;
   }
 
   /* -------------------------------------------- */
