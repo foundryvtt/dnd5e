@@ -1,0 +1,61 @@
+<div class="tab biography" data-group="primary" data-tab="biography">
+
+    {{#if editingDescriptionTarget}}
+
+    {{ editor enriched.editing target=editingDescriptionTarget button=false editable=true engine="prosemirror"
+              collaborate=true }}
+
+    {{else}}
+
+    {{!-- Ideals, Bonds, & Flaws --}}
+    <div class="top flexrow">
+
+        {{~> "dnd5e.biography-textbox" name="system.details.ideal" value=system.details.ideal label="DND5E.Ideals"
+            icon="fas fa-seedling" ~}}
+
+        {{~> "dnd5e.biography-textbox" name="system.details.bond" value=system.details.bond label="DND5E.Bonds"
+            icon="fas fa-link" ~}}
+
+        {{~> "dnd5e.biography-textbox" name="system.details.flaw" value=system.details.flaw label="DND5E.Flaws"
+            icon="fas fa-heart-crack" ~}}
+
+    </div>
+
+    {{!-- Public Information --}}
+    <div class="middle" data-target="system.details.biography.public">
+
+        <h3 class="icon">
+            <a class="editor-edit" data-action="editDescription"
+               aria-label="{{ localize "DND5E.BiographyPublicEdit" }}">
+                <i class="fas fa-feather"></i>
+            </a>
+            <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
+            <span class="roboto-upper">{{ localize "DND5E.Public" }}</span>
+        </h3>
+
+        <div class="editor">
+            <div class="editor-content">{{{ enriched.public }}}</div>
+        </div>
+
+    </div>
+
+    {{!-- Details --}}
+    <div class="bottom" data-target="system.details.biography.value">
+
+        <h3 class="icon">
+            <a class="editor-edit" data-action="editDescription" aria-label="{{ localize "DND5E.DetailsEdit" }}">
+                <i class="fas fa-feather"></i>
+            </a>
+            <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
+            <span class="roboto-upper">{{ localize "DND5E.Details" }}</span>
+        </h3>
+
+        <div class="editor">
+            <div class="editor-content">{{{ enriched.value }}}</div>
+        </div>
+
+    </div>
+
+    {{/if}}
+
+</div>

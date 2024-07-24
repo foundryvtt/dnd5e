@@ -80,7 +80,7 @@ export default class TraitAdvancement extends Advancement {
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
     if ( configMode ) {
-      if ( this.configuration.hint ) return `<p>${this.configuration.hint}</p>`;
+      if ( this.hint ) return `<p>${this.hint}</p>`;
       return `<p>${Trait.localizedList({
         grants: this.configuration.grants, choices: this.configuration.choices
       })}</p>`;

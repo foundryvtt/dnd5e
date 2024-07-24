@@ -264,8 +264,6 @@ export default class Award extends DialogMixin(FormApplication) {
         content,
         whisper: whisper ? whisperTargets : []
       };
-      // TODO: Remove when v11 support is dropped.
-      if ( game.release.generation < 12 ) messageData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
       messages.push(messageData);
     }
     if ( messages.length ) cls.createDocuments(messages);

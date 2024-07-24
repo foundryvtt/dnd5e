@@ -5,7 +5,7 @@
   "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
   "system": {
     "description": {
-      "value": "<p>A lengthy stright blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
+      "value": "<p>A lengthy straight blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p><p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": ""
     },
     "source": {
@@ -62,7 +62,7 @@
       "amount": null,
       "scale": false
     },
-    "ability": null,
+    "ability": "",
     "actionType": "mwak",
     "chatFlavor": "",
     "critical": {
@@ -94,8 +94,8 @@
       "conditions": ""
     },
     "properties": [
-      "ver",
-      "mgc"
+      "mgc",
+      "ver"
     ],
     "proficient": null,
     "type": {
@@ -124,10 +124,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
+    "systemVersion": "3.3.1",
     "coreVersion": "11.315",
     "createdTime": 1661787233875,
-    "modifiedTime": 1715374645990,
+    "modifiedTime": 1721406287697,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!pC3202gDTy8G5i4r"

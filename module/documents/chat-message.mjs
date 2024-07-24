@@ -5,13 +5,6 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
-  /** @inheritDoc */
-  _initialize(options = {}) {
-    super._initialize(options);
-    // TODO: Remove when v11 support is dropped.
-    if ( game.release.generation > 11 ) Object.defineProperty(this, "user", { value: this.author, configurable: true });
-  }
-
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -47,15 +40,22 @@ export default class ChatMessage5e extends ChatMessage {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  get isRoll() {
+    return super.isRoll && !this.flags.dnd5e?.rest;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Should roll DCs and other challenge details be displayed on this card?
    * @type {boolean}
    */
   get shouldDisplayChallenge() {
-    if ( game.user.isGM || (this.user === game.user) ) return true;
+    if ( game.user.isGM || (this.author === game.user) ) return true;
     switch ( game.settings.get("dnd5e", "challengeVisibility") ) {
       case "all": return true;
-      case "player": return !this.user.isGM;
+      case "player": return !this.author.isGM;
       default: return false;
     }
   }
@@ -128,12 +128,14 @@ export default class ChatMessage5e extends ChatMessage {
 
       // Conceal effects that the user cannot apply.
       chatCard.find(".effects-tray .effect").each((i, el) => {
-        if ( !game.user.isGM && ((el.dataset.transferred === "false") || (this.user.id !== game.user.id)) ) el.remove();
+        if ( !game.user.isGM && ((el.dataset.transferred === "false") || (this.author.id !== game.user.id)) ) {
+          el.remove();
+        }
       });
 
       // If the user is the message author or the actor owner, proceed
       let actor = game.actors.get(this.speaker.actor);
-      if ( game.user.isGM || actor?.isOwner || (this.user.id === game.user.id) ) {
+      if ( game.user.isGM || actor?.isOwner || (this.author.id === game.user.id) ) {
         const optionallyHide = (selector, hide) => {
           const element = chatCard[0].querySelector(selector);
           if ( element && hide ) element.style.display = "none";
@@ -165,6 +167,19 @@ export default class ChatMessage5e extends ChatMessage {
     if ( !this.isContentVisible || !this.rolls.length ) return;
     const originatingMessage = game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
     const displayChallenge = originatingMessage?.shouldDisplayChallenge;
+    const displayAttackResult = game.user.isGM || (game.settings.get("dnd5e", "attackRollVisibility") !== "none");
+
+    /**
+     * Create an icon to indicate success or failure.
+     * @param {string} cls  The icon class.
+     * @returns {HTMLElement}
+     */
+    function makeIcon(cls) {
+      const icon = document.createElement("i");
+      icon.classList.add("fas", cls);
+      icon.setAttribute("inert", "");
+      return icon;
+    }
 
     // Highlight rolls where the first part is a d20 roll
     for ( let [index, d20Roll] of this.rolls.entries() ) {
@@ -181,12 +196,24 @@ export default class ChatMessage5e extends ChatMessage {
       // Highlight successes and failures
       const total = html.find(".dice-total")[index];
       if ( !total ) continue;
-      if ( d20Roll.isCritical ) total.classList.add("critical");
-      else if ( d20Roll.isFumble ) total.classList.add("fumble");
-      else if ( d.options.target && displayChallenge ) {
+      // Only attack rolls and death saves can crit or fumble.
+      const canCrit = ["attack", "death"].includes(this.getFlag("dnd5e", "roll.type"));
+      const isAttack = this.getFlag("dnd5e", "roll.type") === "attack";
+      const showResult = isAttack ? displayAttackResult : displayChallenge;
+      if ( d.options.target && showResult ) {
         if ( d20Roll.total >= d.options.target ) total.classList.add("success");
         else total.classList.add("failure");
       }
+      if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
+      if ( canCrit && d20Roll.isFumble ) total.classList.add("fumble");
+
+      const icons = document.createElement("div");
+      icons.classList.add("icons");
+      if ( total.classList.contains("critical") ) icons.append(makeIcon("fa-check"), makeIcon("fa-check"));
+      else if ( total.classList.contains("fumble") ) icons.append(makeIcon("fa-xmark"), makeIcon("fa-xmark"));
+      else if ( total.classList.contains("success") ) icons.append(makeIcon("fa-check"));
+      else if ( total.classList.contains("failure") ) icons.append(makeIcon("fa-xmark"));
+      if ( icons.children.length ) total.append(icons);
     }
   }
 
@@ -205,11 +232,11 @@ export default class ChatMessage5e extends ChatMessage {
     let img;
     let nameText;
     if ( this.isContentVisible ) {
-      img = actor?.img ?? this.user.avatar;
+      img = actor?.img ?? this.author.avatar;
       nameText = this.alias;
     } else {
-      img = this.user.avatar;
-      nameText = this.user.name;
+      img = this.author.avatar;
+      nameText = this.author.name;
     }
 
     const avatar = document.createElement("a");
@@ -224,7 +251,7 @@ export default class ChatMessage5e extends ChatMessage {
     const subtitle = document.createElement("span");
     subtitle.classList.add("subtitle");
     if ( this.whisper.length ) subtitle.innerText = html.querySelector(".whisper-to")?.innerText ?? "";
-    if ( (nameText !== this.user?.name) && !subtitle.innerText.length ) subtitle.innerText = this.user?.name ?? "";
+    if ( (nameText !== this.author?.name) && !subtitle.innerText.length ) subtitle.innerText = this.author?.name ?? "";
 
     name.appendChild(subtitle);
 
@@ -330,24 +357,37 @@ export default class ChatMessage5e extends ChatMessage {
   _enrichAttackTargets(html) {
     const attackRoll = this.rolls[0];
     const targets = this.getFlag("dnd5e", "targets");
-    if ( !game.user.isGM || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
-    const evaluation = document.createElement("ul");
-    evaluation.classList.add("dnd5e2", "evaluation");
-    evaluation.innerHTML = targets.map(({ name, img, ac, uuid }) => {
+    const visibility = game.settings.get("dnd5e", "attackRollVisibility");
+    const isVisible = game.user.isGM || (visibility !== "none");
+    if ( !isVisible || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
+    const tray = document.createElement("div");
+    tray.classList.add("dnd5e2");
+    tray.innerHTML = `
+      <div class="card-tray targets-tray collapsible collapsed">
+        <label class="roboto-upper">
+          <i class="fas fa-bullseye" inert></i>
+          <span>${game.i18n.localize("DND5E.TargetPl")}</span>
+          <i class="fas fa-caret-down" inert></i>
+        </label>
+        <div class="collapsible-content">
+          <ul class="dnd5e2 unlist evaluation wrapper"></ul>
+        </div>
+      </div>
+    `;
+    const evaluation = tray.querySelector("ul");
+    evaluation.innerHTML = targets.map(({ name, ac, uuid }) => {
+      if ( !game.user.isGM && (visibility !== "all") ) ac = "";
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
       return [`
         <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
-          <img src="${img}" alt="${name}">
-          <div class="name-stacked">
-            <span class="title">
-              ${name}
-              <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
-            </span>
-          </div>
+          <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
+          <div class="name">${name}</div>
+          ${ac ? `
           <div class="ac">
             <i class="fas fa-shield-halved"></i>
             <span>${ac}</span>
           </div>
+          ` : ""}
         </li>
       `, isMiss];
     }).sort((a, b) => (a[1] === b[1]) ? 0 : a[1] ? 1 : -1).reduce((str, [li]) => str + li, "");
@@ -356,7 +396,7 @@ export default class ChatMessage5e extends ChatMessage {
       target.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
       target.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
     });
-    html.querySelector(".message-content")?.appendChild(evaluation);
+    html.querySelector(".message-content")?.appendChild(tray);
   }
 
   /* -------------------------------------------- */
@@ -369,8 +409,9 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _enrichDamageTooltip(rolls, html) {
     if ( !rolls.length ) return;
-    let { formula, total, breakdown } = aggregateDamageRolls(rolls).reduce((obj, r) => {
-      obj.formula.push(r.formula);
+    const aggregatedRolls = CONFIG.DND5E.aggregateDamageDisplay ? aggregateDamageRolls(rolls) : rolls;
+    let { formula, total, breakdown } = aggregatedRolls.reduce((obj, r) => {
+      obj.formula.push(CONFIG.DND5E.aggregateDamageDisplay ? r.formula : ` + ${r.formula}`);
       obj.total += r.total;
       this._aggregateDamageRoll(r, obj.breakdown);
       return obj;
@@ -556,6 +597,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   async _onTargetMouseDown(event) {
+    event.stopPropagation();
     const uuid = event.currentTarget.dataset.uuid;
     const actor = fromUuidSync(uuid);
     const token = actor?.token?.object ?? actor?.getActiveTokens()[0];

@@ -28,6 +28,20 @@ export function registerSystemSettings() {
     }
   });
 
+  game.settings.register("dnd5e", "attackRollVisibility", {
+    name: "SETTINGS.5eAttackRollVisibility.Name",
+    hint: "SETTINGS.5eAttackRollVisibility.Hint",
+    scope: "world",
+    config: true,
+    default: "none",
+    type: String,
+    choices: {
+      all: "SETTINGS.5eAttackRollVisibility.All",
+      hideAC: "SETTINGS.5eAttackRollVisibility.HideAC",
+      none: "SETTINGS.5eAttackRollVisibility.None"
+    }
+  });
+
   // Encumbrance tracking
   game.settings.register("dnd5e", "encumbrance", {
     name: "SETTINGS.5eEncumbrance.Name",
@@ -59,20 +73,22 @@ export function registerSystemSettings() {
   });
 
   // Diagonal Movement Rule
-  game.settings.register("dnd5e", "diagonalMovement", {
-    name: "SETTINGS.5eDiagN",
-    hint: "SETTINGS.5eDiagL",
-    scope: "world",
-    config: true,
-    default: "555",
-    type: String,
-    choices: {
-      555: "SETTINGS.5eDiagPHB",
-      5105: "SETTINGS.5eDiagDMG",
-      EUCL: "SETTINGS.5eDiagEuclidean"
-    },
-    onChange: rule => canvas.grid.diagonalRule = rule
-  });
+  if ( game.release.generation < 12 ) {
+    game.settings.register("dnd5e", "diagonalMovement", {
+      name: "SETTINGS.5eDiagN",
+      hint: "SETTINGS.5eDiagL",
+      scope: "world",
+      config: true,
+      default: "555",
+      type: String,
+      choices: {
+        555: "SETTINGS.5eDiagPHB",
+        5105: "SETTINGS.5eDiagDMG",
+        EUCL: "SETTINGS.5eDiagEuclidean"
+      },
+      onChange: rule => canvas.grid.diagonalRule = rule
+    });
+  }
 
   // Allow rotating square templates
   game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
@@ -360,7 +376,7 @@ export function registerDeferredSettings() {
     name: "SETTINGS.DND5E.THEME.Name",
     hint: "SETTINGS.DND5E.THEME.Hint",
     scope: "client",
-    config: game.release.generation < 12,
+    config: false,
     default: "",
     type: String,
     choices: {
@@ -378,16 +394,13 @@ export function registerDeferredSettings() {
   });
 
   // Hook into core color scheme setting.
-  if ( game.release.generation > 11 ) {
-    const setting = game.settings.settings.get("core.colorScheme");
-    const { onChange } = setting ?? {};
-    if ( onChange ) setting.onChange = s => {
-      onChange();
-      setTheme(document.body, s);
-    };
-    setTheme(document.body, game.settings.get("core", "colorScheme"));
-  }
-  else setTheme(document.body, game.settings.get("dnd5e", "theme"));
+  const setting = game.settings.settings.get("core.colorScheme");
+  const { onChange } = setting ?? {};
+  if ( onChange ) setting.onChange = s => {
+    onChange();
+    setTheme(document.body, s);
+  };
+  setTheme(document.body, game.settings.get("core", "colorScheme"));
 }
 
 /* -------------------------------------------- */

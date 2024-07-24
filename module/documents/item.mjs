@@ -1,5 +1,6 @@
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
+import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
@@ -9,9 +10,9 @@ import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import { getSceneTargets } from "../utils.mjs";
-import Advancement from "./advancement/advancement.mjs";
-import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
+import SelectChoices from "./actor/select-choices.mjs";
+import Advancement from "./advancement/advancement.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
 
 /**
@@ -33,6 +34,38 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {object}
    */
   overrides = this.overrides ?? {};
+
+  /* -------------------------------------------- */
+
+  /**
+   * Types that can be selected within the compendium browser.
+   * @param {object} [options={}]
+   * @param {Set<string>} [options.chosen]  Types that have been selected.
+   * @returns {SelectChoices}
+   */
+  static compendiumBrowserTypes({ chosen=new Set() }={}) {
+    const [generalTypes, physicalTypes] = Item.TYPES.reduce(([g, p], t) => {
+      if ( ![CONST.BASE_DOCUMENT_TYPE, "backpack"].includes(t) ) {
+        if ( CONFIG.Item.dataModels[t]?.metadata?.inventoryItem ) p.push(t);
+        else g.push(t);
+      }
+      return [g, p];
+    }, [[], []]);
+
+    const makeChoices = (types, categoryChosen) => types.reduce((obj, type) => {
+      obj[type] = {
+        label: CONFIG.Item.typeLabels[type],
+        chosen: chosen.has(type) || categoryChosen
+      };
+      return obj;
+    }, {});
+    const choices = makeChoices(generalTypes);
+    choices.physical = {
+      label: game.i18n.localize("DND5E.Item.Category.Physical"),
+      children: makeChoices(physicalTypes, chosen.has("physical"))
+    };
+    return new SelectChoices(choices);
+  }
 
   /* -------------------------------------------- */
   /*  Migrations                                  */
@@ -294,6 +327,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get isVersatile() {
     return this.system.isVersatile ?? false;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Is the item on recharge cooldown?
+   * @type {boolean}
+   * @see {@link ActionTemplate#isOnCooldown}
+   */
+  get isOnCooldown() {
+    const { recharge } = this.system;
+    return (recharge?.value > 0) && (recharge?.charged === false);
   }
 
   /* --------------------------------------------- */
@@ -732,7 +777,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Actor spell-DC based scaling
     if ( save.scaling === "spell" ) {
-      save.dc = this.isOwned ? this.actor.system.attributes.spelldc : null;
+      save.dc = this.isOwned ? this.actor.system.abilities?.[this.system.abilityMod]?.dc
+        ?? this.actor.system.attributes.spelldc : null;
     }
 
     // Ability-score based scaling
@@ -805,26 +851,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }) || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
     return { rollData, parts };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Replace referenced data attributes in the roll formula with values from the provided data.
-   * If the attribute is not found in the provided data, display a warning on the actor.
-   * @param {string} formula           The original formula within which to replace.
-   * @param {object} data              The data object which provides replacements.
-   * @param {object} options
-   * @param {string} options.property  Name of the property to which this formula belongs.
-   * @returns {string}                 Formula with replaced data.
-   * @deprecated since DnD5e 3.2, available until DnD5e 3.4
-   */
-  replaceFormulaData(formula, data, { property }) {
-    foundry.utils.logCompatibilityWarning(
-      "Item5e#replaceFormulaData has been moved to dnd5e.utils.replaceFormulaData.",
-      { since: "DnD5e 3.2", until: "DnD5e 3.4" }
-    );
-    return dnd5e.utils.replaceFormulaData(formula, data, { actor: this.actor, property });
   }
 
   /* -------------------------------------------- */
@@ -1414,8 +1440,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
       flags: {"core.canPopout": true}
     };
-    // TODO: Remove when v11 support is dropped.
-    if ( game.release.generation < 12 ) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
 
     // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message
     if ( (this.type === "consumable") && !this.actor.items.has(this.id) ) {
@@ -1468,7 +1492,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Rich text description
     data.description.value = await TextEditor.enrichHTML(data.description.value, {
-      async: true,
       relativeTo: this,
       rollData: this.getRollData(),
       ...htmlOptions
@@ -1525,6 +1548,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const elvenAccuracy = (flags.elvenAccuracy
       && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
 
+    // Targets
+    const targets = this.constructor._formatAttackTargets();
+
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
       actor: this.actor,
@@ -1533,6 +1559,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       title,
       flavor: title,
       elvenAccuracy,
+      targetValue: targets.length === 1 ? targets[0].ac : undefined,
       halflingLucky: flags.halflingLucky,
       dialogOptions: {
         width: 400,
@@ -1541,7 +1568,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       messageData: {
         "flags.dnd5e": {
-          targets: this.constructor._formatAttackTargets(),
+          targets,
           roll: { type: "attack", itemId: this.id, itemUuid: this.uuid }
         },
         speaker: ChatMessage.getSpeaker({actor: this.actor})
@@ -1595,7 +1622,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static _formatAttackTargets() {
     const targets = new Map();
     for ( const token of game.user.targets ) {
-      const { name, img, system, uuid } = token.actor ?? {};
+      const { name } = token;
+      const { img, system, uuid } = token.actor ?? {};
       const ac = system?.attributes?.ac ?? {};
       if ( uuid && Number.isNumeric(ac.value) ) targets.set(uuid, { name, img, uuid, ac: ac.value });
     }
@@ -1844,7 +1872,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preRollFormula", this, rollConfig) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    const roll = await new Roll(rollConfig.formula, rollConfig.data)
+      .roll({ allowInteractive: game.settings.get("core", "rollMode") !== CONST.DICE_ROLL_MODES.BLIND });
 
     if ( rollConfig.chatMessage ) {
       roll.toMessage({
@@ -1898,7 +1927,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preRollRecharge", this, rollConfig) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    const roll = await new Roll(rollConfig.formula, rollConfig.data).evaluate();
     const success = roll.total >= rollConfig.target;
 
     if ( rollConfig.chatMessage ) {
@@ -2279,18 +2308,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
     if ( !this.system.advancement ) return this;
 
-    let config = CONFIG.DND5E.advancementTypes[type];
+    const config = CONFIG.DND5E.advancementTypes[type];
     if ( !config ) throw new Error(`${type} not found in CONFIG.DND5E.advancementTypes`);
-    if ( config.prototype instanceof Advancement ) {
-      foundry.utils.logCompatibilityWarning(
-        "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3", once: true }
-      );
-      config = {
-        documentClass: config,
-        validItemTypes: config.metadata.validItemTypes
-      };
-    }
     const cls = config.documentClass;
 
     if ( !config.validItemTypes.has(this.type) || !cls.availableForItem(this) ) {
@@ -2625,7 +2644,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
         const spell = await fromUuid(makeUuid(li));
-        Item5e.create(await Item5e.createScrollFromSpell(spell));
+        const scroll = await Item5e.createScrollFromSpell(spell);
+        if ( scroll ) Item5e.create(scroll);
       },
       condition: li => {
         const item = fromUuidSync(makeUuid(li));
@@ -2648,7 +2668,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
         const spell = game.items.get(li.data("documentId"));
-        Item5e.create(await Item5e.createScrollFromSpell(spell));
+        const scroll = await Item5e.createScrollFromSpell(spell);
+        if ( scroll ) Item5e.create(scroll);
       },
       condition: li => {
         const item = game.items.get(li.data("documentId"));
@@ -2718,7 +2739,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {Item5e|object} spell                   The spell or item data to be made into a scroll.
    * @param {object} [options]                      Additional options that modify the created scroll.
    * @param {SpellScrollConfiguration} [config={}]  Configuration options for scroll creation.
-   * @returns {Promise<Item5e>}                     The created scroll consumable item.
+   * @returns {Promise<Item5e|void>}                The created scroll consumable item.
    */
   static async createScrollFromSpell(spell, options={}, config={}) {
     config = foundry.utils.mergeObject({

@@ -35,6 +35,7 @@
   --dnd5e-color-green: #205b15;
   --dnd5e-color-maroon: #741b2b;
   --dnd5e-color-parchment: #f1ebe8;
+  --dnd5e-color-purple: #c44dff;
   --dnd5e-color-scrollbar: var(--dnd5e-color-gold);
   --dnd5e-color-card: #f8f4f1;
   --dnd5e-color-hp-1: #1b4b29;
@@ -61,6 +62,7 @@
   --dnd5e-color-application-damage: #9c5b47;
   --dnd5e-color-application-healing: #3c7f58;
   --dnd5e-color-application-temp: #007F7F;
+  --dnd5e-background-25: rgb(0 0 0 / 25%);
   --dnd5e-background-10: rgb(0 0 0 / 10%);
   --dnd5e-background-5: rgb(0 0 0 / 5%);
   --dnd5e-background-card: var(--dnd5e-color-card);
@@ -77,6 +79,7 @@
   --dnd5e-sheet-background: url("ui/parchment.jpg") repeat;
   --dnd5e-shadow-45: rgb(0 0 0 / 45%);
   --dnd5e-shadow-15: rgb(0 0 0 / 15%);
+  --dnd5e-highlight-10: rgb(255 255 255 / 10%);
   --dnd5e-highlight-45: rgb(255 255 255 / 45%);
   --font-size-9: 0.5625rem;
   --font-size-10: 0.625rem;
@@ -91,39 +94,4 @@
   --dnd5e-capacity-background-color: oklch(62% 0.05 246);
   --dnd5e-capacity-border-color: oklch(91% 0.044 252.5);
   --dnd5e-capacity-text-color: oklch(95% 0 0);
-}
-
-/* ----------------------------------------- */
-/*  Flexbox                                  */
-/* ----------------------------------------- */
-
-.flexrow {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-
-  > * {
-    flex: 1;
-  }
-
-  .flex1 { flex: 1; }
-  .flex2 { flex: 2; }
-  .flex3 { flex: 3; }
-  .flex4 { flex: 4; }
-}
-
-.flexcol {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-
-  > * {
-    flex: 1;
-  }
-
-  .flex1 { flex: 1; }
-  .flex2 { flex: 2; }
-  .flex3 { flex: 3; }
-  .flex4 { flex: 4; }
 }

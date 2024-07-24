@@ -1,15 +1,16 @@
-import Proficiency from "./proficiency.mjs";
-import * as Trait from "./trait.mjs";
-import SystemDocumentMixin from "../mixins/document.mjs";
-import { d20Roll } from "../../dice/dice.mjs";
-import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { SummonsData } from "../../data/item/fields/summons-field.mjs";
+import { d20Roll } from "../../dice/dice.mjs";
+import { createRollLabel } from "../../enrichers.mjs";
+import { replaceFormulaData, simplifyBonus } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
-import { createRollLabel } from "../../enrichers.mjs";
+import SystemDocumentMixin from "../mixins/document.mjs";
+import Proficiency from "./proficiency.mjs";
+import SelectChoices from "./select-choices.mjs";
+import * as Trait from "./trait.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -18,10 +19,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
-   * @type {Object<Item5e>}
+   * @type {Record<string, Item5e>}
    * @private
    */
   _classes;
+
+  /**
+   * Cached spellcasting classes.
+   * @type {Record<string, Item5e>}
+   * @private
+   */
+  _spellcastingClasses;
 
   /**
    * Mapping of item source IDs to the items.
@@ -30,18 +38,50 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   sourcedItems = this.sourcedItems;
 
   /* -------------------------------------------- */
+
+  /**
+   * Types that can be selected within the compendium browser.
+   * @param {object} [options={}]
+   * @param {Set<string>} [options.chosen]  Types that have been selected.
+   * @returns {SelectChoices}
+   */
+  static compendiumBrowserTypes({ chosen=new Set() }={}) {
+    return new SelectChoices(Actor.TYPES.filter(t => t !== CONST.BASE_DOCUMENT_TYPE).reduce((obj, type) => {
+      obj[type] = {
+        label: CONFIG.Actor.typeLabels[type],
+        chosen: chosen.has(type)
+      };
+      return obj;
+    }, {}));
+  }
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
    * A mapping of classes belonging to this Actor.
-   * @type {Object<Item5e>}
+   * @type {Record<string, Item5e>}
    */
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
     if ( !["character", "npc"].includes(this.type) ) return this._classes = {};
     return this._classes = this.items.filter(item => item.type === "class").reduce((obj, cls) => {
       obj[cls.identifier] = cls;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get all classes which have spellcasting ability.
+   * @type {Record<string, Item5e>}
+   */
+  get spellcastingClasses() {
+    if ( this._spellcastingClasses !== undefined ) return this._spellcastingClasses;
+    return this._spellcastingClasses = Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
+      if ( cls.spellcasting && (cls.spellcasting.progression !== "none") ) obj[identifier] = cls;
       return obj;
     }, {});
   }
@@ -63,7 +103,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Item5e|null}
    */
   get armor() {
-    return this.system.attributes.ac.equippedArmor ?? null;
+    return this.system.attributes?.ac?.equippedArmor ?? null;
   }
 
   /* -------------------------------------------- */
@@ -73,7 +113,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Item5e|null}
    */
   get shield() {
-    return this.system.attributes.ac.equippedShield ?? null;
+    return this.system.attributes?.ac?.equippedShield ?? null;
   }
 
   /* -------------------------------------------- */
@@ -143,10 +183,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   prepareData() {
     if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
-    this._classes = undefined;
+    this._clearCachedValues();
     this._preparationWarnings = [];
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Clear cached class collections.
+   * @internal
+   */
+  _clearCachedValues() {
+    this._classes = undefined;
+    this._spellcastingClasses = undefined;
   }
 
   /* --------------------------------------------- */
@@ -206,6 +257,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._prepareArmorClass();
     this._prepareInitiative(rollData, checkBonus);
     this._prepareSpellcasting();
+
+    // Apply condition immunities
+    const conditionImmunities = this.system.traits?.ci?.value;
+    if ( conditionImmunities ) {
+      for ( const condition of conditionImmunities ) this.statuses.delete(condition);
+    }
   }
 
   /* -------------------------------------------- */
@@ -487,14 +544,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
         rollData.attributes.ac = ac;
         try {
-          const replaced = Roll.replaceFormulaData(formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          const replaced = replaceFormulaData(formula, rollData, {
+            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
+          });
+          ac.base = replaced ? new Roll(replaced).evaluateSync().total : 0;
         } catch(err) {
           this._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnBadACFormula"), link: "armor", type: "error"
+            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
           });
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          ac.base = new Roll(replaced).evaluateSync().total;
         }
         break;
     }
@@ -2125,7 +2184,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
-    await roll.evaluate({async: true});
+    await roll.evaluate();
 
     /**
      * A hook event that fires after hit points haven been rolled for a character's class.
@@ -2177,7 +2236,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
-    await roll.evaluate({async: true});
+    await roll.evaluate();
 
     /**
      * A hook event that fires after hit points are rolled for an NPC.
@@ -2336,17 +2395,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @private
    */
   async _rest(config, result={}, ...args) {
-    if ( args.length ) {
-      foundry.utils.logCompatibilityWarning(
-        "Actor5e._rest now takes a config object and a results object as parameters.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
-      );
-      const [longRest, dhd, dhp] = args;
-      config = { chat: config, newDay: result };
-      config.type = longRest ? "long" : "short";
-      result = { dhd, dhp };
-    }
-
     if ( (foundry.utils.getType(this.system.rest) === "function")
       && (await this.system.rest(config, result) === false) ) return;
 
@@ -2466,7 +2514,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         name: this.name,
         dice: longRest ? dhd : -dhd,
         health: dhp
-      })
+      }),
+      "flags.dnd5e.rest": { type: longRest ? "long" : "short" }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
@@ -2923,11 +2972,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
       d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
     }
-    foundry.utils.setProperty(d.prototypeToken, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
-      foundry.utils.getProperty(d.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
-      foundry.utils.getProperty(source.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
-      { inplace: false }
-    ));
+    d.prototypeToken.ring = source.prototypeToken.ring;
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
@@ -3115,7 +3160,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         }));
         return;
       }
-      const prototypeTokenData = await baseActor.getTokenDocument();
+      const prototypeTokenData = (await baseActor.getTokenDocument()).toObject();
       const actorData = this.token.getFlag("dnd5e", "previousActorData");
       const tokenUpdate = this.token.toObject();
       actorData._id = tokenUpdate.delta._id;
@@ -3127,11 +3172,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
         tokenUpdate.texture[k] = prototypeTokenData.texture[k];
       }
-      foundry.utils.setProperty(tokenUpdate, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
-        foundry.utils.getProperty(tokenUpdate, "flags.dnd5e.tokenRing") ?? {},
-        foundry.utils.getProperty(prototypeTokenData, "flags.dnd5e.tokenRing") ?? {},
-        { inplace: false }
-      ));
+      tokenUpdate.ring = prototypeTokenData.ring;
       tokenUpdate.sight = prototypeTokenData.sight;
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
 
@@ -3165,9 +3206,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         update._id = t.id;
         delete update.x;
         delete update.y;
-        if ( !foundry.utils.getProperty(tokenData, "flags.dnd5e.tokenRing") ) {
-          foundry.utils.setProperty(update, "flags.dnd5e.tokenRing", {});
-        }
         return update;
       });
       await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates, { diff: false, recursive: false });

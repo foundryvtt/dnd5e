@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -90,7 +90,80 @@
       "somatic",
       "concentration"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "mode": "cr",
+      "bonuses": {
+        "ac": "",
+        "hd": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "profiles": [
+        {
+          "count": "1 * min(3, floor((@item.level - 1) / 2))",
+          "cr": "2",
+          "name": "",
+          "_id": "L0UhkCz2NI01zinq",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "beast"
+          ]
+        },
+        {
+          "count": "2 * min(3, floor((@item.level - 1) / 2))",
+          "cr": "1",
+          "name": "",
+          "_id": "CFJttKXu4rVgI4hX",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "beast"
+          ]
+        },
+        {
+          "count": "4 * min(3, floor((@item.level - 1) / 2))",
+          "cr": "0.5",
+          "name": "",
+          "_id": "D5jhKf0u1tiEPE88",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "beast"
+          ]
+        },
+        {
+          "count": "8 * min(3, floor((@item.level - 1) / 2))",
+          "cr": "0.25",
+          "name": "",
+          "_id": "04lzPfFqexz2myIV",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "beast"
+          ]
+        }
+      ],
+      "creatureTypes": [
+        "fey"
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -99,10 +172,10 @@
   "folder": "5Si35RRLLaaoWvC3",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.3.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234055,
-    "modifiedTime": 1704823521528,
+    "modifiedTime": 1721324536686,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!1Drt0SHxbEAHxprN"

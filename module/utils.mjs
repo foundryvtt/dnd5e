@@ -14,6 +14,18 @@ export function formatCR(value) {
 /* -------------------------------------------- */
 
 /**
+ * Format a modifier for display with its sign separate.
+ * @param {number} mod  The modifier.
+ * @returns {Handlebars.SafeString}
+ */
+function formatModifier(mod) {
+  if ( !Number.isFinite(mod) ) return new Handlebars.SafeString("");
+  return new Handlebars.SafeString(`<span class="sign">${mod < 0 ? "-" : "+"}</span>${Math.abs(mod)}`);
+}
+
+/* -------------------------------------------- */
+
+/**
  * A helper for using Intl.NumberFormat within handlebars.
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
@@ -84,27 +96,30 @@ export function parseInputDelta(input, target) {
  * @param {string} formula           The original formula within which to replace.
  * @param {object} data              The data object which provides replacements.
  * @param {object} [options={}]
- * @param {Item5e} [options.item]      Item for which the value is being prepared.
- * @param {string} [options.property]  Name of the property to which this formula belongs.
+ * @param {Actor5e} [options.actor]            Actor for which the value is being prepared.
+ * @param {Item5e} [options.item]              Item for which the value is being prepared.
+ * @param {string|null} [options.missing="0"]  Value to use when replacing missing references, or `null` to not replace.
+ * @param {string} [options.property]          Name of the property to which this formula belongs.
  * @returns {string}                 Formula with replaced data.
  */
-export function replaceFormulaData(formula, data, { item, property }={}) {
+export function replaceFormulaData(formula, data, { actor, item, missing="0", property }={}) {
   const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
   const missingReferences = new Set();
-  formula = formula.replace(dataRgx, (match, term) => {
+  formula = String(formula).replace(dataRgx, (match, term) => {
     let value = foundry.utils.getProperty(data, term);
     if ( value == null ) {
       missingReferences.add(match);
-      return "0";
+      return missing ?? match[0];
     }
     return String(value).trim();
   });
-  if ( (missingReferences.size > 0) && item.parent && property ) {
+  actor ??= item?.parent;
+  if ( (missingReferences.size > 0) && actor && property ) {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
     const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
-      property, name: item.name, references: listFormatter.format(missingReferences)
+      property, name: item?.name ?? actor.name, references: listFormatter.format(missingReferences)
     });
-    item.parent._preparationWarnings.push({ message, link: item.uuid, type: "warning" });
+    actor._preparationWarnings.push({ message, link: item?.uuid ?? actor.uuid, type: "warning" });
   }
   return formula;
 }
@@ -123,7 +138,7 @@ export function simplifyBonus(bonus, data={}) {
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
-    return roll.isDeterministic ? Roll.safeEval(roll.formula) : 0;
+    return roll.isDeterministic ? roll.evaluateSync().total : 0;
   } catch(error) {
     console.error(error);
     return 0;
@@ -225,7 +240,6 @@ export function linkForUuid(uuid, { tooltip }={}) {
   }
   const a = doc.toAnchor();
   if ( tooltip ) a.dataset.tooltip = tooltip;
-  if ( game.release.generation < 12 ) a.setAttribute("draggable", true);
   return a.outerHTML;
 }
 
@@ -295,22 +309,34 @@ export async function preloadHandlebarsTemplates() {
   const partials = [
     // Shared Partials
     "systems/dnd5e/templates/shared/active-effects.hbs",
+    "systems/dnd5e/templates/shared/active-effects2.hbs",
     "systems/dnd5e/templates/shared/inventory.hbs",
     "systems/dnd5e/templates/shared/inventory2.hbs",
-    "systems/dnd5e/templates/shared/active-effects2.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials
+    "systems/dnd5e/templates/actors/parts/actor-classes.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs",
     "systems/dnd5e/templates/actors/parts/actor-traits.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-inventory.hbs",
     "systems/dnd5e/templates/actors/parts/actor-features.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-inventory.hbs",
     "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
-    "systems/dnd5e/templates/actors/tabs/character-details.hbs",
-    "systems/dnd5e/templates/actors/tabs/character-features.hbs",
-    "systems/dnd5e/templates/actors/tabs/character-spells.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs",
+    "systems/dnd5e/templates/actors/parts/biography-textbox.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
+    "systems/dnd5e/templates/actors/tabs/character-details.hbs",
+    "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
+    "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/group-members.hbs",
+    "systems/dnd5e/templates/actors/tabs/npc-biography.hbs",
+
+    // Actor Sheet Item Summary Columns
+    "systems/dnd5e/templates/actors/parts/columns/column-feature-controls.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-formula.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-recovery.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-roll.hbs",
+    "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
@@ -465,9 +491,11 @@ export function registerHandlebarsHelpers() {
     getProperty: foundry.utils.getProperty,
     "dnd5e-concealSection": concealSection,
     "dnd5e-dataset": dataset,
+    "dnd5e-formatCR": formatCR,
+    "dnd5e-formatModifier": formatModifier,
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
-    "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-itemContext": itemContext,
+    "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
     "dnd5e-textFormat": formatText
   });

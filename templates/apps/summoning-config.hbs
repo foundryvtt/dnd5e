@@ -6,18 +6,32 @@
             {{ localize 'DND5E.Summoning.Action.Add' }}
         </button>
     </h3>
+    <div class="form-group">
+        <label>{{ localize "DND5E.Summoning.Mode.Label" }}</label>
+        <select name="mode">
+            {{ selectOptions modes selected=summons.mode localize=true blank=(localize "DND5E.Summoning.Mode.Direct") }}
+        </select>
+    </div>
     <ul class="dnd5e2 separated-list profiles flexcol">
         {{#each profiles}}
         <li class="profile dnd5e2" data-profile-id="{{ id }}">
             <div class="details flexrow">
                 <input type="text" name="profiles.{{ id }}.count" value="{{ count }}" placeholder="1"
-                       aria-label="{{ localize 'DND5E.Summoning.Count.Label' }}">
+                    aria-label="{{ localize 'DND5E.Summoning.Count.Label' }}">
+                <span class="sep">&times;</span>
+                {{#if (eq @root.summons.mode "cr")}}
+                <label>
+                    <strong>{{ localize 'DND5E.AbbreviationCR' }}</strong>
+                    <input type="text" name="profiles.{{ id }}.cr" value="{{ cr }}">
+                </label>
+                {{else}}
                 {{#if document}}
                 {{{ dnd5e-linkForUuid uuid }}}
                 {{else}}
                 <div class="drop-area">
-                    {{localize "DND5E.Summoning.DropHint"}}
+                    {{ localize "DND5E.Summoning.DropHint" }}
                 </div>
+                {{/if}}
                 {{/if}}
                 <input type="text" name="profiles.{{ id }}.name" value="{{ name }}" aria-label="{{ localize 'Name' }}"
                        placeholder="{{#if document}}{{ document.name }}{{else}}
@@ -40,6 +54,16 @@
                 </label>
                 <div class="collapsible-content">
                     <div class="wrapper">
+                        {{#if (eq @root.summons.mode "cr")}}
+                        <div class="form-group">
+                            <label>{{ localize "DND5E.Summoning.CreatureTypes.Label" }}</label>
+                            <multi-select name="profiles.{{ id }}.types">
+                                {{#each creatureTypes}}
+                                <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+                                {{/each}}
+                            </multi-select>
+                        </div>
+                        {{/if}}
                         <div class="form-group">
                             <label>{{ localize "DND5E.LevelLimit.Label" }}</label>
                             <div class="form-fields">
@@ -56,7 +80,10 @@
             </div>
         </li>
         {{else}}
-        <li class="empty">{{ localize "DND5E.Summoning.Profile.Empty" }}</li>
+        <li class="empty">
+            {{#unless summons.mode}}{{ localize "DND5E.Summoning.Profile.EmptyDrop" }}
+            {{~else}}{{ localize "DND5E.Summoning.Profile.Empty" }}{{/unless}}
+        </li>
         {{/each}}
     </ul>
 

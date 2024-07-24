@@ -28,7 +28,6 @@ export default class JournalRulePageSheet extends JournalTextPageSheet {
     context.enrichedTooltip = await TextEditor.enrichHTML(this.object.system.tooltip, {
       relativeTo: this.object,
       secrets: this.object.isOwner,
-      async: true
     });
     return context;
   }

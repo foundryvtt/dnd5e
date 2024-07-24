@@ -165,6 +165,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a]?.label;
       abl.baseProf = source.system.abilities[a]?.proficient ?? 0;
+      abl.key = a;
     }
 
     // Skills & tools.
@@ -203,7 +204,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     context.biographyHTML = await TextEditor.enrichHTML(context.system.details.biography.value, {
       secrets: this.actor.isOwner,
       rollData: context.rollData,
-      async: true,
       relativeTo: this.actor
     });
 
@@ -721,7 +721,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /**
    * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options.
    * @param {Event} event   The click event which originated the selection.
-   * @private
+   * @protected
    */
   _onConfigMenu(event) {
     event.preventDefault();
@@ -764,6 +764,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "skill":
         const skill = event.currentTarget.closest("[data-key]").dataset.key;
         app = new ProficiencyConfig(this.actor, {property: "skills", key: skill});
+        break;
+      case "skills":
+        app = new dnd5e.applications.actor.ActorSkillsConfig(this.actor);
         break;
       case "spellSlots":
         app = new ActorSpellSlotsConfig(this.actor);

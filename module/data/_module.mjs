@@ -7,5 +7,4 @@ export * as collection from "./collection/_module.mjs";
 export * as item from "./item/_module.mjs";
 export * as journal from "./journal/_module.mjs";
 export * as shared from "./shared/_module.mjs";
-export * as token from "./token/_module.mjs";
 export * as user from "./user/_module.mjs";

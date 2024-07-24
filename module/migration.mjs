@@ -504,7 +504,7 @@ export const migrateCopyActorTransferEffects = function(actor, effects, { actorU
  */
 export const migrateEffectData = function(effect, migrationData, { parent }={}) {
   const updateData = {};
-  _migrateDocumentIcon(effect, updateData, {...migrationData, field: game.release.generation < 12 ? "icon" : "img"});
+  _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
   _migrateEffectArmorClass(effect, updateData);
   if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
     _migrateTransferEffect(effect, parent, updateData);
@@ -650,7 +650,7 @@ function _migrateActorAC(actorData, updateData) {
   if ( ac?.formula ) {
     try {
       const roll = new Roll(ac.formula);
-      Roll.safeEval(roll.formula);
+      roll.evaluateSync();
     } catch( e ) {
       updateData["system.attributes.ac.formula"] = "";
     }

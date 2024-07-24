@@ -55,16 +55,22 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Start by classifying items into groups for rendering
     const maxLevelDelta = CONFIG.DND5E.maxLevel - (this.actor.system.details.level ?? 0);
-    let [spells, other] = context.items.reduce((arr, item) => {
-      const {quantity, uses, recharge, target} = item.system;
+    const [spells, other] = context.items.reduce((arr, item) => {
+      const {quantity, uses, target} = item.system;
       const ctx = context.itemContext[item.id] ??= {};
       ctx.isStack = Number.isNumeric(quantity) && (quantity !== 1);
       ctx.isExpanded = this._expanded.has(item.id);
       ctx.hasUses = uses && (uses.max > 0);
-      ctx.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
-      ctx.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
       ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
       ctx.canToggle = false;
+      ctx.totalWeight = item.system.totalWeight?.toNearest(0.1);
+      // Item grouping
+      ctx.group = item.system.activation?.type || "passive";
+      ctx.ungroup = "feat";
+      if ( item.type === "weapon" ) ctx.ungroup = "weapon";
+      if ( ctx.group === "passive" ) ctx.ungroup = "passive";
+      // Individual item preparation
+      this._prepareItem(item, ctx);
       if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => ({
         level, delta: level - item.system.levels, disabled: (level - item.system.levels) > maxLevelDelta
       }));
@@ -72,10 +78,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       else arr[1].push(item);
       return arr;
     }, [[], []]);
-
-    // Apply item filters
-    spells = this._filterItems(spells, this._filters.spellbook.properties);
-    other = this._filterItems(other, this._filters.features.properties);
 
     // Organize Spellbook
     const spellbook = this._prepareSpellbook(context, spells);
@@ -112,6 +114,16 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * A helper method to establish the displayed preparation state for an item.
+   * @param {Item5e} item     Item being prepared for display.
+   * @param {object} context  Context data for display.
+   * @protected
+   */
+  _prepareItem(item, context) {}
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers
   /* -------------------------------------------- */
 
@@ -139,15 +151,25 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /**
    * Handle mouse click events for NPC sheet actions.
    * @param {MouseEvent} event  The originating click event.
-   * @returns {Promise}         Dialog or roll result.
+   * @returns {Promise|void}
    * @private
    */
   _onSheetAction(event) {
     event.preventDefault();
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
+      case "editDescription":
+        const { target } = button.closest("[data-target]").dataset;
+        const editor = this.editors[target];
+        editor.initial = foundry.utils.getProperty(this.actor, target);
+        return this.activateEditor(name, {}, editor.initial);
+
       case "rollDeathSave":
-        return this.actor.rollDeathSave({event: event});
+        return this.actor.rollDeathSave({ event });
+
+      case "rollInitiative":
+        event.stopPropagation();
+        return this.actor.rollInitiativeDialog({ event });
     }
   }
 

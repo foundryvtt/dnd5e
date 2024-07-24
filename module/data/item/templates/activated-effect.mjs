@@ -183,9 +183,9 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     if ( !value ) return;
     const property = game.i18n.localize(label);
     try {
-      foundry.utils.setProperty(
-        this, keyPath, Roll.safeEval(replaceFormulaData(value, rollData, { item: this.parent, property }))
-      );
+      const formula = replaceFormulaData(value, rollData, { item: this.parent, property });
+      const roll = new Roll(formula);
+      foundry.utils.setProperty(this, keyPath, roll.evaluateSync().total);
     } catch(err) {
       if ( this.parent.isEmbedded ) {
         const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.parent.name });

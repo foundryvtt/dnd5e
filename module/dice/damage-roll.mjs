@@ -118,7 +118,7 @@ export default class DamageRoll extends Roll {
     for ( let [i, term] of this.terms.entries() ) {
       // Multiply dice terms
       if ( term instanceof DiceTerm ) {
-        if ( (game.release.generation > 11) && (term._number instanceof Roll) ) {
+        if ( term._number instanceof Roll ) {
           // Complex number term.
           if ( !term._number.isDeterministic ) continue;
           if ( !term._number._evaluated ) term._number.evaluateSync();
@@ -203,18 +203,17 @@ export default class DamageRoll extends Roll {
    *                                         true, or the Object of prepared chatData otherwise.
    */
   static async toMessage(rolls, messageData={}, {rollMode, create=true}={}) {
+    rollMode = rolls.at(-1)?.options.rollMode ?? rollMode ?? game.settings.get("core", "rollMode");
     let isCritical = false;
     for ( const roll of rolls ) {
-      if ( !roll._evaluated ) await roll.evaluate({async: true});
+      if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
       messageData.flavor ??= roll.options.flavor;
-      rollMode = roll.options.rollMode;
       isCritical ||= roll.isCritical;
     }
     if ( isCritical ) {
       const label = game.i18n.localize("DND5E.CriticalHit");
       messageData.flavor = messageData.flavor ? `${messageData.flavor} (${label})` : label;
     }
-    rollMode ??= messageData.rollMode;
 
     // Prepare chat data
     messageData = foundry.utils.mergeObject({
@@ -222,8 +221,6 @@ export default class DamageRoll extends Roll {
       sound: CONFIG.sounds.dice
     }, messageData);
     messageData.rolls = rolls;
-    // TODO: Remove when v11 support is dropped.
-    if ( game.release.generation < 12 ) messageData.type = CONST.CHAT_MESSAGE_TYPES.ROLL;
 
     // Either create the message or just return the chat data
     const cls = getDocumentClass("ChatMessage");

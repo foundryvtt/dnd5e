@@ -52,7 +52,7 @@
       "scale": false
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "summ",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -90,7 +90,39 @@
       "somatic",
       "concentration"
     ],
-    "crewed": false
+    "crewed": false,
+    "summons": {
+      "prompt": true,
+      "mode": "cr",
+      "bonuses": {
+        "ac": "",
+        "hd": "",
+        "hp": "",
+        "attackDamage": "",
+        "saveDamage": "",
+        "healing": ""
+      },
+      "profiles": [
+        {
+          "count": "1",
+          "cr": "@item.level",
+          "name": "",
+          "_id": "bsUNlHWgMcYsorA1",
+          "uuid": "",
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "types": [
+            "beast",
+            "fey"
+          ]
+        }
+      ],
+      "creatureTypes": [
+        "fey"
+      ]
+    }
   },
   "sort": 0,
   "flags": {},
@@ -99,10 +131,10 @@
   "folder": "0pdesvXqKd55VOh2",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
+    "systemVersion": "3.3.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234242,
-    "modifiedTime": 1704823526339,
+    "modifiedTime": 1721324879876,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!yN3XZZujhR4aVvPa"

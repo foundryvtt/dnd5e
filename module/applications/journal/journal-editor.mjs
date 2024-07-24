@@ -35,7 +35,7 @@ export default class JournalEditor extends DocumentSheet {
     const rawText = foundry.utils.getProperty(this.document, this.options.textKeyPath) ?? "";
     return foundry.utils.mergeObject(data, {
       enriched: await TextEditor.enrichHTML(rawText, {
-        relativeTo: this.document, secrets: this.document.isOwner, async: true
+        relativeTo: this.document, secrets: this.document.isOwner
       })
     });
   }

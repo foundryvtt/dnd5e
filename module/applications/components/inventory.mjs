@@ -173,10 +173,11 @@ export default class InventoryElement extends HTMLElement {
   /**
    * Prepare an array of context menu options which are available for inventory items.
    * @param {Item5e} item           The Item for which the context menu is activated.
+   * @param {HTMLElement} [element] The element the context menu was spawned from.
    * @returns {ContextMenuEntry[]}  An array of context menu options offered for the Item.
    * @protected
    */
-  _getContextOptions(item) {
+  _getContextOptions(item, element) {
     // Standard Options
     const options = [
       {
@@ -206,7 +207,10 @@ export default class InventoryElement extends HTMLElement {
       {
         name: "DND5E.Scroll.CreateScroll",
         icon: '<i class="fa-solid fa-scroll"></i>',
-        callback: async li => Item5e.create(await Item5e.createScrollFromSpell(item), { parent: this.actor }),
+        callback: async li => {
+          const scroll = await Item5e.createScrollFromSpell(item);
+          if ( scroll ) Item5e.create(scroll, { parent: this.actor });
+        },
         condition: li => (item.type === "spell") && this.actor?.isOwner,
         group: "action"
       },
@@ -241,6 +245,15 @@ export default class InventoryElement extends HTMLElement {
       group: "state"
     });
 
+    // Toggle Charged State
+    if ( item.system.recharge?.value ) options.push({
+      name: item.system.recharge.charged ? "DND5E.ContextMenuActionExpendCharge" : "DND5E.ContextMenuActionCharge",
+      icon: '<i class="fa-solid fa-bolt"></i>',
+      condition: () => item.isOwner,
+      callback: li => this._onAction(li[0], "toggleCharge"),
+      group: "state"
+    });
+
     // Toggle Prepared State
     else if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared") ) options.push({
       name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
@@ -269,6 +282,17 @@ export default class InventoryElement extends HTMLElement {
         condition: () => item.isOwner,
         callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
         group: "state"
+      });
+    }
+
+    // Toggle Collapsed State
+    if ( this._app.canExpand?.(item) ) {
+      const expanded = this._app._expanded.has(item.id);
+      options.push({
+        name: expanded ? "Collapse" : "Expand",
+        icon: `<i class="fas fa-${expanded ? "compress" : "expand"}"></i>`,
+        callback: () => element.closest("[data-item-id]")?.querySelector("[data-toggle-description]")?.click(),
+        group: "collapsible"
       });
     }
 
@@ -384,6 +408,8 @@ export default class InventoryElement extends HTMLElement {
         return item.update({"system.preparation.prepared": !item.system.preparation?.prepared});
       case "recharge":
         return item.rollRecharge();
+      case "toggleCharge":
+        return item.update({"system.recharge.charged": !item.system.recharge?.charged});
       case "unfavorite":
         return this.actor.system.removeFavorite(item.getRelativeUUID(this.actor));
       case "use":
@@ -433,9 +459,8 @@ export default class InventoryElement extends HTMLElement {
       summary.slideUp(200, () => summary.remove());
       this._app._expanded.delete(item.id);
     } else {
-      const enrichment = {secrets: this.document.isOwner};
-      const chatData = item.system.getCardData ? item.system.getCardData(enrichment) : item.getChatData(enrichment);
-      const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", await chatData));
+      const chatData = await item.getChatData({secrets: this.document.isOwner});
+      const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
       $(li).append(summary.hide());
       summary.slideDown(200);
       this._app._expanded.add(item.id);
@@ -453,7 +478,7 @@ export default class InventoryElement extends HTMLElement {
     const item = this.getItem(element.closest("[data-item-id]")?.dataset.itemId);
     // Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
     if ( !item || (item instanceof Promise) ) return;
-    ui.context.menuItems = this._getContextOptions(item);
+    ui.context.menuItems = this._getContextOptions(item, element);
     Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
   }
 }
