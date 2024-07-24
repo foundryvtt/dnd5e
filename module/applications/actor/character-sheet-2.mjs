@@ -425,7 +425,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
    * @protected
    */
   async _onFindItem(type) {
-    new CompendiumBrowser({ filters: { locked: { types: new Set([type]) } } }).render(true);
+    const result = await CompendiumBrowser.selectOne({ filters: { locked: { types: new Set([type]) } } });
+    if ( result ) this._onDropItemCreate(await fromUuid(result));
   }
 
   /* -------------------------------------------- */
