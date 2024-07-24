@@ -194,14 +194,18 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
-  // Disable Experience Tracking
-  game.settings.register("dnd5e", "disableExperienceTracking", {
-    name: "SETTINGS.5eNoExpN",
-    hint: "SETTINGS.5eNoExpL",
+  // Leveling Mode
+  game.settings.register("dnd5e", "levelingMode", {
+    name: "SETTINGS.DND5E.LEVELING.Name",
+    hint: "SETTINGS.DND5E.LEVELING.Hint",
     scope: "world",
     config: true,
-    default: false,
-    type: Boolean
+    default: "xpBoons",
+    choices: {
+      milestone: "SETTINGS.DND5E.LEVELING.Milestone",
+      xp: "SETTINGS.DND5E.LEVELING.XP",
+      xpBoons: "SETTINGS.DND5E.LEVELING.XPBoons"
+    }
   });
 
   // Disable Advancements

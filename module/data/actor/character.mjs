@@ -186,11 +186,13 @@ export default class CharacterData extends CreatureTemplate {
       const required = xp.max - xp.min;
       const pct = Math.round((xp.value - xp.min) * 100 / required);
       xp.pct = Math.clamp(pct, 0, 100);
-    } else {
+    } else if ( game.settings.get("dnd5e", "levelingMode") === "xpBoons" ) {
       const overflow = xp.value - this.parent.getLevelExp(CONFIG.DND5E.maxLevel);
       xp.boonsEarned = Math.max(0, Math.floor(overflow / CONFIG.DND5E.epicBoonInterval));
       const progress = overflow - (CONFIG.DND5E.epicBoonInterval * xp.boonsEarned);
       xp.pct = Math.clamp(Math.round((progress / CONFIG.DND5E.epicBoonInterval) * 100), 0, 100);
+    } else {
+      xp.pct = 100;
     }
 
     AttributesFields.prepareBaseArmorClass.call(this);
