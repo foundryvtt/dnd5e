@@ -1,7 +1,7 @@
 import FormulaField from "../fields.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, FilePathField, NumberField, ObjectField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentIdField, FilePathField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -33,7 +33,6 @@ const {
  * @property {string} type                       Type name of the activity used to build a specific activity class.
  * @property {string} name                       Name for this activity.
  * @property {string} img                        Image that represents this activity.
- * @property {*} system                          Type-specific data.
  * @property {object} activation
  * @property {string} activation.type            Activation type (e.g. action, legendary action, minutes).
  * @property {number} activation.value           Scalar value associated with the activation.
@@ -54,7 +53,7 @@ const {
  * @property {object} target
  * @property {object} target.template
  * @property {string} target.template.count      Number of templates created.
- * @property {boolean} target.template.connected  Must all created areas be connected to one another?
+ * @property {boolean} target.template.contiguous  Must all created areas be connected to one another?
  * @property {string} target.template.type       Type of area of effect caused by this activity.
  * @property {string} target.template.size       Size of the activity's area of effect on its primary axis.
  * @property {string} target.template.width      Width of line area of effect.
@@ -92,7 +91,6 @@ export default class BaseActivity extends foundry.abstract.DataModel {
       }),
       name: new StringField({initial: undefined}),
       img: new FilePathField({initial: undefined, categories: ["IMAGE"]}),
-      system: new ObjectField(),
       activation: new SchemaField({
         type: new StringField(),
         value: new NumberField({min: 0, integer: true}),
@@ -128,7 +126,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
       target: new SchemaField({
         template: new SchemaField({
           count: new FormulaField({ deterministic: true }),
-          connected: new BooleanField(),
+          contiguous: new BooleanField(),
           type: new StringField(),
           size: new FormulaField({ deterministic: true }),
           width: new FormulaField({ deterministic: true }),

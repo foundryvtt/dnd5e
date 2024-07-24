@@ -230,8 +230,8 @@
       },
       "template": {
         "label": "Area of Effect",
-        "connected": {
-          "label": "Connected Areas",
+        "contiguous": {
+          "label": "Contiguous Areas",
           "hint": "Must all created areas be connected to one another?"
         },
         "count": {
