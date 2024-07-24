@@ -2947,9 +2947,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( !keepSelf ) {
       const sightSource = keepVision ? o.prototypeToken : source.prototypeToken;
-      for ( const k of ["range", "angle", "visionMode", "color", "attenuation", "brightness", "saturation", "contrast", "enabled"] ) {
+      for ( const k of ["range", "angle", "visionMode", "color", "attenuation", "brightness", "saturation", "contrast"] ) {
         d.prototypeToken.sight[k] = sightSource.sight[k];
       }
+      d.prototypeToken.sight.enabled = o.prototypeToken.sight.enabled;
       d.prototypeToken.detectionModes = sightSource.detectionModes;
 
       // Transfer ability scores
