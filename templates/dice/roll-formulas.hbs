@@ -3,7 +3,7 @@
     {{#each rolls}}
     <div class="form-group">
         <label>{{ localize "DND5E.Formula" }} {{#if type}}({{ type }}){{/if}}</label>
-        <input type="text" name="formula" value="{{ formula }}" disabled>
+        {{ formula }}
     </div>
     {{/each}}
     <div class="form-group">

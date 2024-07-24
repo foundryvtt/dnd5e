@@ -1992,10 +1992,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * @typedef {BasicRollProcessConfiguration} HitDieRollProcessConfiguration
-   * @property {string} [denomination]      The hit denomination of hit die to roll with the leading letter (e.g. `d8`).
-   *                                        If no denomination is provided, the first available hit die will be used.
-   * @property {boolean} [modifyHitDice]    Should the actor's spent hit die count be updated?
-   * @property {boolean} [modifyHitPoints]  Should the actor's hit points be updated after the roll?
+   * @property {string} [denomination]  The denomination of hit die to roll with the leading letter (e.g. `d8`).
+   *                                    If no denomination is provided, the first available hit die will be used.
+   * @property {boolean} [modifyHitDice=true]    Should the actor's spent hit dice count be updated?
+   * @property {boolean} [modifyHitPoints=true]  Should the actor's hit points be updated after the roll?
    */
 
   /**
@@ -2003,7 +2003,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
    * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
    * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
-   * @returns {Promise<BasicRoll[]|null>}            The created Roll instance, or null if no hit die was rolled.
+   * @returns {Promise<BasicRoll[]|null>}            The created Roll instances, or `null` if no hit die was rolled.
    */
   async rollHitDie(config={}, dialog={}, message={}) {
     let formula;
@@ -2080,12 +2080,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * A hook event that fires before a hit die is rolled for an Actor.
      * @function dnd5e.preRollHitDie
      * @memberof hookEvents
+     * @param {Actor5e} actor                          Actor performing the roll.
      * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
      * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
      * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
      * @returns {boolean}                              Explicitly return `false` to prevent hit die from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollHitDieV2", rollConfig, dialogConfig, messageConfig) === false ) return;
+    if ( Hooks.call("dnd5e.preRollHitDieV2", this, rollConfig, dialogConfig, messageConfig) === false ) return;
 
     if ( "dnd5e.preRollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(

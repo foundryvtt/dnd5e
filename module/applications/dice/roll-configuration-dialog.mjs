@@ -7,14 +7,12 @@ import Application5e from "../api/application.mjs";
  * @property {typeof BasicRoll} rollType  Roll type to use when constructing final roll.
  * @property {object} [default]
  * @property {number} [default.rollMode]  Default roll mode to have selected.
- * @property {*} [resolve]                Method to call when resolving successfully.
- * @property {*} [reject]                 Method to call when the dialog is closed or process fails.
  */
 
 /**
  * Dialog for configuring one or more rolls.
  *
- * @param {BasicRollProcessConfiguration} [config={}]          Initial roll configuration.
+ * @param {BasicRollProcessConfiguration} [config={}]         Initial roll configuration.
  * @param {BasicRollMessageConfiguration} [message={}]        Message configuration.
  * @param {BasicRollConfigurationDialogOptions} [options={}]  Dialog rendering options.
  */
@@ -22,14 +20,9 @@ export default class RollConfigurationDialog extends Application5e {
   constructor(config={}, message={}, options={}) {
     super(options);
 
-    /**
-     * Roll configuration.
-     * @type {BasicRollProcessConfiguration}
-     */
-    Object.defineProperty(this, "config", { value: config, writable: false });
-
-    this.message = message;
-    this.rolls = this.#buildRolls(foundry.utils.deepClone(this.config));
+    this.#config = config;
+    this.#message = message;
+    this.#buildRolls(foundry.utils.deepClone(this.#config));
   }
 
   /* -------------------------------------------- */
@@ -70,7 +63,7 @@ export default class RollConfigurationDialog extends Application5e {
 
   /**
    * Roll type to use when constructing the rolls.
-   * @type {BasicRoll}
+   * @type {typeof BasicRoll}
    */
   static get rollType() {
     return CONFIG.Dice.BasicRoll;
@@ -81,10 +74,26 @@ export default class RollConfigurationDialog extends Application5e {
   /* -------------------------------------------- */
 
   /**
+   * Roll configuration.
+   * @type {BasicRollProcessConfiguration}
+   */
+  #config;
+
+  get config() {
+    return this.#config;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Configuration information for the roll message.
    * @type {BasicRollMessageConfiguration}
    */
-  message;
+  #message;
+
+  get message() {
+    return this.#message;
+  }
 
   /* -------------------------------------------- */
 
@@ -92,13 +101,17 @@ export default class RollConfigurationDialog extends Application5e {
    * The rolls being configured.
    * @type {BasicRoll[]}
    */
-  rolls;
+  #rolls;
+
+  get rolls() {
+    return this.#rolls;
+  }
 
   /* -------------------------------------------- */
 
   /**
    * Roll type to use when constructing the rolls.
-   * @type {BasicRoll}
+   * @type {typeof BasicRoll}
    */
   get rollType() {
     return this.options.rollType ?? this.constructor.rollType;
@@ -111,7 +124,7 @@ export default class RollConfigurationDialog extends Application5e {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    switch (partId) {
+    switch ( partId ) {
       case "buttons":
         return this._prepareButtonsContext(context, options);
       case "configuration":
@@ -180,12 +193,12 @@ export default class RollConfigurationDialog extends Application5e {
    * Build a roll from the provided configuration objects.
    * @param {BasicRollProcessConfiguration} config  Roll configuration data.
    * @param {FormDataExtended} [formData]           Any data entered into the rolling prompt.
-   * @returns {BasicRoll[]}
-   * @private
    */
   #buildRolls(config, formData) {
     const RollType = this.rollType;
-    return config.rolls?.map((config, index) => RollType.create(this._buildConfig(config, formData, index))) ?? [];
+    this.#rolls = config.rolls?.map((config, index) =>
+      RollType.create(this._buildConfig(config, formData, index))
+    ) ?? [];
   }
 
   /* -------------------------------------------- */
@@ -247,33 +260,33 @@ export default class RollConfigurationDialog extends Application5e {
 
   /**
    * Handle submission of the dialog using the form buttons.
+   * @this {RollConfigurationDialog}
    * @param {Event|SubmitEvent} event    The form submission event.
    * @param {HTMLFormElement} form       The submitted form.
    * @param {FormDataExtended} formData  Data from the dialog.
-   * @private
    */
   static async #handleFormSubmission(event, form, formData) {
-    const rolls = this._finalizeRolls(event.submitter?.dataset?.action);
-    await this.close({ dnd5e: { rolls } });
+    this.#rolls = this._finalizeRolls(event.submitter?.dataset?.action);
+    await this.close({ dnd5e: { submitted: true } });
   }
 
-  /* <><><><> <><><><> <><><><> <><><><> */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
 
     const formData = new FormDataExtended(this.element);
-    if (formData.has("rollMode")) this.message.rollMode = formData.get("rollMode");
-    this.rolls = this.#buildRolls(foundry.utils.deepClone(this.config), formData);
+    if ( formData.has("rollMode") ) this.message.rollMode = formData.get("rollMode");
+    this.#buildRolls(foundry.utils.deepClone(this.#config), formData);
     this.render({ parts: ["formulas"] });
   }
 
-  /* <><><><> <><><><> <><><><> <><><><> */
+  /* -------------------------------------------- */
 
   /** @override */
   _onClose(options = {}) {
-    this.options.resolve?.(options[game.system.id]?.rolls ?? []);
+    if ( !options.dnd5e?.submitted ) this.#rolls = [];
   }
 
   /* -------------------------------------------- */
@@ -285,11 +298,13 @@ export default class RollConfigurationDialog extends Application5e {
    * @param {BasicRollProcessConfiguration} [config]        Initial roll configuration.
    * @param {BasicRollConfigurationDialogOptions} [dialog]  Dialog configuration options.
    * @param {BasicRollMessageConfiguration} [message]       Message configuration.
-   * @returns {Promise}
+   * @returns {Promise<BasicRoll[]>}
    */
   static async configure(config={}, dialog={}, message={}) {
-    return new Promise((resolve, reject) => {
-      new this(config, message, { ...(dialog.options ?? {}), resolve, reject }).render(true);
+    return new Promise(resolve => {
+      const app = new this(config, message, dialog.options);
+      app.addEventListener("close", () => resolve(app.rolls), { once: true });
+      app.render({ force: true });
     });
   }
 }

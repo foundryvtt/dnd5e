@@ -88,18 +88,17 @@ export default class BasicRoll extends Roll {
     this.applyKeybindings(config, dialog, message);
 
     let rolls;
-    if ( dialog.configure !== false ) {
-      let DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
+    if ( dialog.configure === false ) rolls = config.rolls?.map(config => this.create(config)) ?? [];
+    else {
+      const DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
       rolls = await DialogClass.configure(config, dialog, message);
-    } else {
-      rolls = config.rolls?.map(config => this.create(config)) ?? [];
     }
 
     for ( const roll of rolls ) await roll.evaluate();
 
     if ( rolls?.length && (message.create !== false) ) {
       await this.toMessage(rolls, message.data, {
-        rollMode: message.rollMode ?? rolls.reduce(r => mode ?? r.options.rollMode)
+        rollMode: message.rollMode ?? rolls.reduce((mode, r) => mode ?? r.options.rollMode)
       });
     }
 
@@ -127,7 +126,7 @@ export default class BasicRoll extends Roll {
    * @type {boolean|void}
    */
   get isFailure() {
-    if ( !this._evaluated ) return undefined;
+    if ( !this._evaluated ) return;
     if ( !Number.isNumeric(this.options.target) ) return false;
     return this.total < this.options.target;
   }
@@ -139,7 +138,7 @@ export default class BasicRoll extends Roll {
    * @type {boolean|void}
    */
   get isSuccess() {
-    if ( !this._evaluated ) return undefined;
+    if ( !this._evaluated ) return;
     if ( !Number.isNumeric(this.options.target) ) return false;
     return this.total >= this.options.target;
   }
@@ -150,7 +149,7 @@ export default class BasicRoll extends Roll {
 
   /**
    * Transform a Roll instance into a ChatMessage, displaying the roll result.
-   * This function can either create the ChatMessage directly, or return the data object that will be used to create.
+   * This function can either create the ChatMessage directly, or return the data object that will be used to create it.
    *
    * @param {BasicRoll[]} rolls              Rolls to add to the message.
    * @param {object} messageData             The data object to use when creating the message
@@ -163,15 +162,11 @@ export default class BasicRoll extends Roll {
    */
   static async toMessage(rolls, messageData={}, { rollMode, create=true }={}) {
     for ( const roll of rolls ) {
-      if ( !roll._evaluated ) await roll.evaluate({async: true});
+      if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
     }
 
     // Prepare chat data
-    messageData = foundry.utils.mergeObject({
-      user: game.user.id,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-      sound: CONFIG.sounds.dice
-    }, messageData);
+    messageData = foundry.utils.mergeObject({ sound: CONFIG.sounds.dice }, messageData);
     messageData.rolls = rolls;
 
     // Process the chat data
