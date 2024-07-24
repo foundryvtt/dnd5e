@@ -115,7 +115,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 > | Versatile       | `ver` |
 >
 > Source: `CONFIG.DND5E.validProperties.weapon`
->
 > </details>
 
 > <details>
@@ -128,7 +127,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 > | Stealth Disadvantage | `stealthDisadvantage` |
 >
 > Source: `CONFIG.DND5E.validProperties.equipment`
->
 > </details>
 
 > <details>
@@ -140,7 +138,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 > | Magical              | `mgc`                 |
 >
 > Source: `CONFIG.DND5E.validProperties.tool`
->
 > </details>
 
 > <details>
@@ -153,7 +150,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 > | Silvered            | `sil`        |
 >
 > Source: `CONFIG.DND5E.validProperties.consumable` and `CONFIG.DND5E.itemProperties` that have `isPhysical: true`
->
 > </details>
 
 > <details>
@@ -168,7 +164,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 > | Verbal          | `verbal`        |
 >
 > Source: `CONFIG.DND5E.validProperties.consumable` and `CONFIG.DND5E.validProperties.spell` minus `material`
->
 > </details>
 
 > <details>
@@ -179,7 +174,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 > | Magical             | `mgc`                 |
 >
 > Source: `CONFIG.DND5E.validProperties.consumable`
->
 > </details>
 
 > <details>
@@ -191,7 +185,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 > | Weightless Contents | `weightlessContents` |
 >
 > Source: `CONFIG.DND5E.validProperties.container`
->
 > </details>
 
 > <details>
@@ -202,7 +195,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 > | Magical       | `mgc`        |
 >
 > Source: `CONFIG.DND5E.validProperties.loot`
->
 > </details>
 
 ### Weapon Examples
@@ -358,7 +350,6 @@ system.activation.type
 > | Dusk       | `dusk`       |
 >
 > Source: `CONFIG.DND5E.limitedUsePeriods`
->
 > </details>
 
 > [!warning]
@@ -424,5 +415,4 @@ Since damage is both a roll formula and damage type, you need to include both wh
 > | Thunder     | `thunder`     |
 >
 > Source: `CONFIG.DND5E.damageTypes`
->
 > </details>
