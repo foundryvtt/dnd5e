@@ -1,3 +1,5 @@
+const { HTMLField, SchemaField, StringField } = foundry.data.fields;
+
 /**
  * Data definition for Subclass Summary journal entry pages.
  *
@@ -5,13 +7,13 @@
  * @property {object} description
  * @property {string} description.value  Introductory description for the subclass.
  */
-export default class SubclassJournalPageData extends foundry.abstract.DataModel {
+export default class SubclassJournalPageData extends foundry.abstract.TypeDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      item: new foundry.data.fields.StringField({required: true, label: "JOURNALENTRYPAGE.DND5E.Subclass.Item"}),
-      description: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.HTMLField({
+      item: new StringField({required: true, label: "JOURNALENTRYPAGE.DND5E.Subclass.Item"}),
+      description: new SchemaField({
+        value: new HTMLField({
           label: "JOURNALENTRYPAGE.DND5E.Class.Description",
           hint: "JOURNALENTRYPAGE.DND5E.Class.DescriptionHint"
         })

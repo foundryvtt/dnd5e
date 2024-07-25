@@ -1,0 +1,31 @@
+<li class="item" data-uuid="{{ entry.uuid }}" draggable="true">
+
+    <div class="item-row">
+
+        <div class="item-name rollable" role="button" data-action="openLink">
+
+            {{#if entry.img}}
+            <img class="item-image gold-icon" loading="lazy" src="{{ entry.img }}" alt="{{ entry.name }}">
+            {{/if}}
+
+            <div class="name name-stacked">
+                <span class="title">{{ entry.name }}</span>
+                <span class="subtitle">{{ localize entry.subtitle }}</span>
+            </div>
+
+        </div>
+
+        {{!-- TODO: Display dynamic columns as appropriate --}}
+        {{!-- TODO: Display source column --}}
+
+        <div class="item-detail item-controls">
+
+            {{#if displaySelection}}
+            <dnd5e-checkbox name="selected" value="{{ entry.uuid }}" {{ checked selected }}></dnd5e-checkbox>
+            {{/if}}
+
+        </div>
+
+    </div>
+
+</li>

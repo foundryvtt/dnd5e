@@ -192,102 +192,104 @@
       tr:nth-child(odd) { background-color: var(--dnd5e-color-table-row-odd); }
       td { padding: .375rem; }
     }
+  }
+}
 
-    /* Narrative Blocks */
-    .fvtt.narrative {
-      position: relative;
-      margin: 1.5rem 1rem;
-      padding: 1rem 1.5rem;
-      background-color: var(--dnd5e-color-card);
-      border-left: 1px solid var(--dnd5e-color-gold);
-      border-right: 1px solid var(--dnd5e-color-gold);
-      text-align: justify;
-      --dot-size: 8px;
+:is(.dnd5e, .dnd5e2, .dnd5e2-journal) {
+  /* Narrative Blocks */
+  .fvtt.narrative {
+    position: relative;
+    margin: 1.5rem 1rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--dnd5e-color-card);
+    border-left: 1px solid var(--dnd5e-color-gold);
+    border-right: 1px solid var(--dnd5e-color-gold);
+    text-align: justify;
+    --dot-size: 8px;
 
-      &::before, &::after, > p:last-of-type::before, > p:last-of-type::after {
-        content: "";
-        position: absolute;
-        width: var(--dot-size);
-        height: var(--dot-size);
-        border-radius: 100%;
-        background: var(--dnd5e-color-gold);
-      }
-
-      &::before, &::after { top: calc(var(--dot-size) / -2); }
-      &::before, > p:last-of-type::before { left: calc(var(--dot-size) / -2); }
-      &::after, > p:last-of-type::after { right: calc(var(--dot-size) / -2); }
-      > p:last-of-type::before, > p:last-of-type::after { bottom: calc(var(--dot-size) / -2); }
+    &::before, &::after, > p:last-of-type::before, > p:last-of-type::after {
+      content: "";
+      position: absolute;
+      width: var(--dot-size);
+      height: var(--dot-size);
+      border-radius: 100%;
+      background: var(--dnd5e-color-gold);
     }
 
-    /* Quest Blocks */
-    .fvtt:is(.quest, .advice) {
-      --img-size: 64px;
-      position: relative;
-      background-color: var(--dnd5e-color-card);
-      border: 2px solid var(--dnd5e-color-gold);
-      box-shadow: 1px 3px 5px var(--dnd5e-shadow-15);
-      margin: 1rem  1rem 1rem calc(var(--img-size) / 2);
-      padding: .75rem .75rem .75rem calc(var(--img-size) / 2 + .75rem);
+    &::before, &::after { top: calc(var(--dot-size) / -2); }
+    &::before, > p:last-of-type::before { left: calc(var(--dot-size) / -2); }
+    &::after, > p:last-of-type::after { right: calc(var(--dot-size) / -2); }
+    > p:last-of-type::before, > p:last-of-type::after { bottom: calc(var(--dot-size) / -2); }
+  }
 
-      article > p:last-child { margin-bottom: 0; }
+  /* Quest Blocks */
+  .fvtt:is(.quest, .advice) {
+    --img-size: 64px;
+    position: relative;
+    background-color: var(--dnd5e-color-card);
+    border: 2px solid var(--dnd5e-color-gold);
+    box-shadow: 1px 3px 5px var(--dnd5e-shadow-15);
+    margin: 1rem  1rem 1rem calc(var(--img-size) / 2);
+    padding: .75rem .75rem .75rem calc(var(--img-size) / 2 + .75rem);
 
-      > figure {
-        position: absolute;
-        width: var(--img-size);
-        height: var(--img-size);
-        margin: 0;
-        left: calc(var(--img-size) / -2);
-        top: calc(50% - var(--img-size) / 2);
+    article > p:last-child { margin-bottom: 0; }
 
-        img {
-          border: none;
-          width: 100%;
-          height: 100%;
+    > figure {
+      position: absolute;
+      width: var(--img-size);
+      height: var(--img-size);
+      margin: 0;
+      left: calc(var(--img-size) / -2);
+      top: calc(50% - var(--img-size) / 2);
 
-          &.round {
-            background: var(--dnd5e-color-light-gray);
-            border: 4px solid var(--dnd5e-color-gold);
-            border-radius: 100%;
-            box-shadow: 0 0 4px var(--dnd5e-shadow-45);
-          }
+      img {
+        border: none;
+        width: 100%;
+        height: 100%;
+
+        &.round {
+          background: var(--dnd5e-color-light-gray);
+          border: 4px solid var(--dnd5e-color-gold);
+          border-radius: 100%;
+          box-shadow: 0 0 4px var(--dnd5e-shadow-45);
         }
       }
     }
+  }
 
-    /* Notable Callout */
-    aside.notable {
-      background-color: #d8e3e3;
-      margin: 30px 5px;
-      padding: 20px 28px 25px 30px;
-      border-width: 3px 1px;
-      border-style: solid;
-      border-color: #231f20 #b3b3b3;;
-      filter: drop-shadow(0 5px 8px var(--dnd5e-shadow-15));
+  /* Notable Callout */
+  aside.notable {
+    background-color: #d8e3e3;
+    margin: 30px 5px;
+    padding: 20px 28px 25px 30px;
+    border-width: 3px 1px;
+    border-style: solid;
+    border-color: #231f20 #b3b3b3;;
+    filter: drop-shadow(0 5px 8px var(--dnd5e-shadow-15));
 
-      &::before, &::after {
-        content: "";
-        background-image: url(ui/notable-right-corner.svg), url(ui/notable-left-corner.svg);
-        background-position: 0, 100%;
-        background-size: contain;
-        background-repeat: no-repeat;
-        height: 11px;
-        position: absolute;
-        left: 0;
-        z-index: -1;
-      }
-
-      &::before {
-        top: -13px;
-        right: 0;
-      }
-
-      &::after {
-        bottom: -13px;
-        right: 0;
-        transform: scaleY(-1);
-      }
-
-      p:last-of-type { margin-bottom: 0; }
+    &::before, &::after {
+      content: "";
+      background-image: url(ui/notable-right-corner.svg), url(ui/notable-left-corner.svg);
+      background-position: 0, 100%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 11px;
+      position: absolute;
+      left: 0;
+      z-index: -1;
     }
+
+    &::before {
+      top: -13px;
+      right: 0;
+    }
+
+    &::after {
+      bottom: -13px;
+      right: 0;
+      transform: scaleY(-1);
+    }
+
+    p:last-of-type { margin-bottom: 0; }
   }
 }

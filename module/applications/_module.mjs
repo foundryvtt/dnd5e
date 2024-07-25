@@ -1,12 +1,15 @@
 export * as actor from "./actor/_module.mjs";
 export * as advancement from "./advancement/_module.mjs";
+export * as api from "./api/_module.mjs";
 export * as combat from "./combat/_module.mjs";
 export * as components from "./components/_module.mjs";
+export * as dice from "./dice/_module.mjs";
 export * as item from "./item/_module.mjs";
 export * as journal from "./journal/_module.mjs";
 
 export {default as Accordion} from "./accordion.mjs";
 export {default as Award} from "./award.mjs";
+export {default as CompendiumBrowser} from "./compendium-browser.mjs";
 export {default as ContextMenu5e} from "./context-menu.mjs";
 export {default as CurrencyManager} from "./currency-manager.mjs";
 export {default as DialogMixin} from "./dialog-mixin.mjs";

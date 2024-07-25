@@ -1,15 +1,16 @@
-import Proficiency from "./proficiency.mjs";
-import * as Trait from "./trait.mjs";
-import SystemDocumentMixin from "../mixins/document.mjs";
-import { d20Roll } from "../../dice/dice.mjs";
-import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { SummonsData } from "../../data/item/fields/summons-field.mjs";
+import { d20Roll } from "../../dice/dice.mjs";
+import { createRollLabel } from "../../enrichers.mjs";
+import { replaceFormulaData, simplifyBonus } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
-import { createRollLabel } from "../../enrichers.mjs";
+import SystemDocumentMixin from "../mixins/document.mjs";
+import Proficiency from "./proficiency.mjs";
+import SelectChoices from "./select-choices.mjs";
+import * as Trait from "./trait.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -18,10 +19,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
-   * @type {Object<Item5e>}
+   * @type {Record<string, Item5e>}
    * @private
    */
   _classes;
+
+  /**
+   * Cached spellcasting classes.
+   * @type {Record<string, Item5e>}
+   * @private
+   */
+  _spellcastingClasses;
 
   /**
    * Mapping of item source IDs to the items.
@@ -30,18 +38,50 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   sourcedItems = this.sourcedItems;
 
   /* -------------------------------------------- */
+
+  /**
+   * Types that can be selected within the compendium browser.
+   * @param {object} [options={}]
+   * @param {Set<string>} [options.chosen]  Types that have been selected.
+   * @returns {SelectChoices}
+   */
+  static compendiumBrowserTypes({ chosen=new Set() }={}) {
+    return new SelectChoices(Actor.TYPES.filter(t => t !== CONST.BASE_DOCUMENT_TYPE).reduce((obj, type) => {
+      obj[type] = {
+        label: CONFIG.Actor.typeLabels[type],
+        chosen: chosen.has(type)
+      };
+      return obj;
+    }, {}));
+  }
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
    * A mapping of classes belonging to this Actor.
-   * @type {Object<Item5e>}
+   * @type {Record<string, Item5e>}
    */
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
     if ( !["character", "npc"].includes(this.type) ) return this._classes = {};
     return this._classes = this.items.filter(item => item.type === "class").reduce((obj, cls) => {
       obj[cls.identifier] = cls;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get all classes which have spellcasting ability.
+   * @type {Record<string, Item5e>}
+   */
+  get spellcastingClasses() {
+    if ( this._spellcastingClasses !== undefined ) return this._spellcastingClasses;
+    return this._spellcastingClasses = Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
+      if ( cls.spellcasting && (cls.spellcasting.progression !== "none") ) obj[identifier] = cls;
       return obj;
     }, {});
   }
@@ -63,7 +103,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Item5e|null}
    */
   get armor() {
-    return this.system.attributes.ac.equippedArmor ?? null;
+    return this.system.attributes?.ac?.equippedArmor ?? null;
   }
 
   /* -------------------------------------------- */
@@ -73,7 +113,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Item5e|null}
    */
   get shield() {
-    return this.system.attributes.ac.equippedShield ?? null;
+    return this.system.attributes?.ac?.equippedShield ?? null;
   }
 
   /* -------------------------------------------- */
@@ -143,10 +183,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   prepareData() {
     if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
-    this._classes = undefined;
+    this._clearCachedValues();
     this._preparationWarnings = [];
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Clear cached class collections.
+   * @internal
+   */
+  _clearCachedValues() {
+    this._classes = undefined;
+    this._spellcastingClasses = undefined;
   }
 
   /* --------------------------------------------- */
@@ -206,6 +257,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._prepareArmorClass();
     this._prepareInitiative(rollData, checkBonus);
     this._prepareSpellcasting();
+
+    // Apply condition immunities
+    const conditionImmunities = this.system.traits?.ci?.value;
+    if ( conditionImmunities ) {
+      for ( const condition of conditionImmunities ) this.statuses.delete(condition);
+    }
   }
 
   /* -------------------------------------------- */
@@ -487,14 +544,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
         rollData.attributes.ac = ac;
         try {
-          const replaced = Roll.replaceFormulaData(formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          const replaced = replaceFormulaData(formula, rollData, {
+            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
+          });
+          ac.base = replaced ? new Roll(replaced).evaluateSync().total : 0;
         } catch(err) {
           this._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnBadACFormula"), link: "armor", type: "error"
+            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
           });
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          ac.base = new Roll(replaced).evaluateSync().total;
         }
         break;
     }
@@ -1932,18 +1991,42 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
-   * @param {string} [denomination]  The hit denomination of hit die to roll. Example "d8".
-   *                                 If no denomination is provided, the first available HD will be used
-   * @param {object} options         Additional options which modify the roll.
-   * @returns {Promise<Roll|null>}   The created Roll instance, or null if no hit die was rolled
+   * @typedef {BasicRollProcessConfiguration} HitDieRollProcessConfiguration
+   * @property {string} [denomination]  The denomination of hit die to roll with the leading letter (e.g. `d8`).
+   *                                    If no denomination is provided, the first available hit die will be used.
+   * @property {boolean} [modifyHitDice=true]    Should the actor's spent hit dice count be updated?
+   * @property {boolean} [modifyHitPoints=true]  Should the actor's hit points be updated after the roll?
    */
-  async rollHitDie(denomination, options={}) {
+
+  /**
+   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
+   * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
+   * @returns {Promise<BasicRoll[]|null>}            The created Roll instances, or `null` if no hit die was rolled.
+   */
+  async rollHitDie(config={}, dialog={}, message={}) {
+    let formula;
+    let oldFormat = false;
+
+    // Handle deprecated calling pattern
+    if ( config && (foundry.utils.getType(config) !== "Object") ) {
+      foundry.utils.logCompatibilityWarning(
+        "Actor5e.rollHitDie now takes roll, dialog, and message config objects as parameters.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      oldFormat = true;
+      formula = dialog.formula;
+      config = { denomination: config, data: dialog.data };
+      message = { create: dialog.chatMessage, data: dialog.messageData };
+      dialog = {};
+    }
+
     let cls = null;
 
-    // NPCs only have on denomination
+    // NPCs only have one denomination
     if ( this.type === "npc" ) {
-      denomination = `d${this.system.attributes.hd.denomination}`;
+      config.denomination = `d${this.system.attributes.hd.denomination}`;
 
       // If no hit dice are available, display an error notification
       if ( !this.system.attributes.hd.value ) {
@@ -1955,81 +2038,112 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Otherwise check classes
     else {
       // If no denomination was provided, choose the first available
-      if ( !denomination ) {
+      if ( !config.denomination ) {
         cls = this.system.attributes.hd.classes.find(c => c.system.hitDiceUsed < c.system.levels);
         if ( !cls ) return null;
-        denomination = cls.system.hitDice;
+        config.denomination = cls.system.hitDice;
       }
 
       // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
       else cls = this.system.attributes.hd.classes.find(i => {
-        return (i.system.hitDice === denomination) && (i.system.hitDiceUsed < i.system.levels);
+        return (i.system.hitDice === config.denomination) && (i.system.hitDiceUsed < i.system.levels);
       });
 
       // If no class is available, display an error notification
       if ( !cls ) {
-        ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: denomination}));
+        ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: config.denomination}));
         return null;
       }
     }
 
-    // Prepare roll data
+    formula ??= `max(0, 1${config.denomination} + @abilities.con.mod)`;
+    const rollConfig = foundry.utils.deepClone(config);
+    rollConfig.origin = this;
+    rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
+
+    const dialogConfig = foundry.utils.mergeObject({
+      configure: false
+    }, dialog);
+
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
-    const rollConfig = foundry.utils.mergeObject({
-      formula: `max(0, 1${denomination} + @abilities.con.mod)`,
-      data: this.getRollData(),
-      chatMessage: true,
-      messageData: {
+    const messageConfig = foundry.utils.mergeObject({
+      rollMode: game.settings.get("core", "rollMode"),
+      data: {
         speaker: ChatMessage.implementation.getSpeaker({actor: this}),
         flavor,
         title: `${flavor}: ${this.name}`,
-        rollMode: game.settings.get("core", "rollMode"),
         "flags.dnd5e.roll": {type: "hitDie"}
       }
-    }, options);
+    }, message);
 
     /**
      * A hook event that fires before a hit die is rolled for an Actor.
      * @function dnd5e.preRollHitDie
      * @memberof hookEvents
-     * @param {Actor5e} actor               Actor for which the hit die is to be rolled.
-     * @param {object} config               Configuration data for the pending roll.
-     * @param {string} config.formula       Formula that will be rolled.
-     * @param {object} config.data          Data used when evaluating the roll.
-     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
-     * @param {object} config.messageData   Data used to create the chat message.
-     * @param {string} denomination         Size of hit die to be rolled.
-     * @returns {boolean}                   Explicitly return `false` to prevent hit die from being rolled.
+     * @param {Actor5e} actor                          Actor performing the roll.
+     * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
+     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
+     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
+     * @returns {boolean}                              Explicitly return `false` to prevent hit die from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollHitDie", this, rollConfig, denomination) === false ) return;
+    if ( Hooks.call("dnd5e.preRollHitDieV2", this, rollConfig, dialogConfig, messageConfig) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
-    if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
+    if ( "dnd5e.preRollHitDie" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preRollHitDie` hook has been deprecated and replaced with `dnd5e.preRollHitDieV2`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      const hookData = {
+        formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
+        chatMessage: messageConfig.create, messageData: messageConfig.data
+      };
+      if ( Hooks.call("dnd5e.preRollHitDie", this, hookData, rollConfig.denomination) === false ) return;
+      rollConfig.rolls[0].parts[0] = hookData.formula;
+      rollConfig.rolls[0].data = hookData.data;
+      messageConfig.create = hookData.chatMessage;
+      messageConfig.data = hookData.messageData;
+    }
 
+    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
+    const returnValue = oldFormat && rolls?.length ? rolls[0] : rolls;
+
+    const updates = { actor: {}, class: {} };
+    if ( rollConfig.modifyHitDice !== false ) {
+      if ( cls ) updates.class["system.hitDiceUsed"] = cls.system.hitDiceUsed + 1;
+      else updates.actor["system.attributes.hd.spent"] = this.system.attributes.hd.spent + 1;
+    }
     const hp = this.system.attributes.hp;
-    const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, roll.total);
-    const updates = { actor: {"system.attributes.hp.value": hp.value + dhp} };
-    if ( cls ) updates.class = {"system.hitDiceUsed": cls.system.hitDiceUsed + 1};
-    else updates.actor["system.attributes.hd.spent"] = this.system.attributes.hd.spent + 1;
+    if ( rollConfig.modifyHitPoints !== false ) {
+      const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, rolls.reduce((t, r) => t + r.total, 0));
+      updates.actor["system.attributes.hp.value"] = hp.value + dhp;
+    }
 
     /**
      * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
      * @function dnd5e.rollHitDie
      * @memberof hookEvents
      * @param {Actor5e} actor           Actor for which the hit die has been rolled.
-     * @param {Roll} roll               The resulting roll.
+     * @param {BasicRoll[]} rolls       The resulting rolls.
      * @param {object} updates
      * @param {object} updates.actor    Updates that will be applied to the actor.
      * @param {object} [updates.class]  Updates that will be applied to the class.
      * @returns {boolean}               Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
+    if ( Hooks.call("dnd5e.rollHitDieV2", this, rolls, updates) === false ) return returnValue;
+
+    if ( "dnd5e.rollHitDie" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.rollHitDie` hook has been deprecated and replaced with `dnd5e.rollHitDieV2`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      if ( Hooks.call("dnd5e.rollHitDie", this, rolls[0], updates) === false ) return;
+    }
 
     // Perform updates
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
     if ( !foundry.utils.isEmpty(updates.class) ) await cls.update(updates.class);
 
-    return roll;
+    return returnValue;
   }
 
   /* -------------------------------------------- */
@@ -2071,7 +2185,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
-    await roll.evaluate({async: true});
+    await roll.evaluate();
 
     /**
      * A hook event that fires after hit points haven been rolled for a character's class.
@@ -2123,7 +2237,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
-    await roll.evaluate({async: true});
+    await roll.evaluate();
 
     /**
      * A hook event that fires after hit points are rolled for an NPC.
@@ -2282,17 +2396,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @private
    */
   async _rest(config, result={}, ...args) {
-    if ( args.length ) {
-      foundry.utils.logCompatibilityWarning(
-        "Actor5e._rest now takes a config object and a results object as parameters.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
-      );
-      const [longRest, dhd, dhp] = args;
-      config = { chat: config, newDay: result };
-      config.type = longRest ? "long" : "short";
-      result = { dhd, dhp };
-    }
-
     if ( (foundry.utils.getType(this.system.rest) === "function")
       && (await this.system.rest(config, result) === false) ) return;
 
@@ -2412,7 +2515,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         name: this.name,
         dice: longRest ? dhd : -dhd,
         health: dhp
-      })
+      }),
+      "flags.dnd5e.rest": { type: longRest ? "long" : "short" }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
@@ -2869,11 +2973,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
       d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
     }
-    foundry.utils.setProperty(d.prototypeToken, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
-      foundry.utils.getProperty(d.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
-      foundry.utils.getProperty(source.prototypeToken, "flags.dnd5e.tokenRing") ?? {},
-      { inplace: false }
-    ));
+    d.prototypeToken.ring = source.prototypeToken.ring;
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
@@ -3061,7 +3161,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         }));
         return;
       }
-      const prototypeTokenData = await baseActor.getTokenDocument();
+      const prototypeTokenData = (await baseActor.getTokenDocument()).toObject();
       const actorData = this.token.getFlag("dnd5e", "previousActorData");
       const tokenUpdate = this.token.toObject();
       actorData._id = tokenUpdate.delta._id;
@@ -3073,11 +3173,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
         tokenUpdate.texture[k] = prototypeTokenData.texture[k];
       }
-      foundry.utils.setProperty(tokenUpdate, "flags.dnd5e.tokenRing", foundry.utils.mergeObject(
-        foundry.utils.getProperty(tokenUpdate, "flags.dnd5e.tokenRing") ?? {},
-        foundry.utils.getProperty(prototypeTokenData, "flags.dnd5e.tokenRing") ?? {},
-        { inplace: false }
-      ));
+      tokenUpdate.ring = prototypeTokenData.ring;
       tokenUpdate.sight = prototypeTokenData.sight;
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
 
@@ -3111,9 +3207,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         update._id = t.id;
         delete update.x;
         delete update.y;
-        if ( !foundry.utils.getProperty(tokenData, "flags.dnd5e.tokenRing") ) {
-          foundry.utils.setProperty(update, "flags.dnd5e.tokenRing", {});
-        }
         return update;
       });
       await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates, { diff: false, recursive: false });
@@ -3341,7 +3434,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const fill = CONFIG.DND5E.tokenHPColors[key];
 
     for ( const token of tokens ) {
-      if ( !token.object?.visible || !token.object?.renderable ) continue;
+      if ( !token.object?.visible || token.isSecret ) continue;
       if ( token.hasDynamicRing ) token.flashRing(key);
       const t = token.object;
       canvas.interface.createScrollingText(t.center, value.signedString(), {

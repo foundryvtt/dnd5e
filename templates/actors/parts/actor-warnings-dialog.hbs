@@ -1,0 +1,11 @@
+<dialog class="warnings locked-tooltip dnd5e-tooltip active">
+    <ul class="unlist">
+        {{#each warnings}}
+        <li class="{{ type }}">
+            {{#if link}}<a data-target="{{ link }}">{{/if}}
+            {{ message }}
+            {{#if link}}</a>{{/if}}
+        </li>
+        {{/each}}
+    </ul>
+</dialog>

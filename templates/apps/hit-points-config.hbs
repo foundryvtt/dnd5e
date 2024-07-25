@@ -34,6 +34,13 @@
     <hr>
 
     <div class="form-group">
+        <label>{{ localize "DND5E.HitPointsTempShort" }}</label>
+        <div class="form-fields">
+            {{ numberInput source.temp name="hp.temp" min=0 step=1 }}
+        </div>
+    </div>
+
+    <div class="form-group">
         <label>{{localize "DND5E.HitPointsTempMaxShort"}}</label>
         <div class="form-fields">
             <input type="number" name="hp.tempmax" value="{{source.tempmax}}">

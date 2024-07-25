@@ -72,7 +72,8 @@ export default class ProficiencyConfig extends BaseConfigSheet {
       isTool: this.isTool,
       isSkill: this.isSkill,
       key: this.options.key,
-      property: this.options.property
+      property: this.options.property,
+      system: this.document.system
     };
   }
 

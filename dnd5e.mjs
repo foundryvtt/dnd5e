@@ -19,6 +19,7 @@ import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as enrichers from "./module/enrichers.mjs";
+import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
@@ -36,6 +37,7 @@ globalThis.dnd5e = {
   dice,
   documents,
   enrichers,
+  Filter,
   migrations,
   utils
 };
@@ -55,7 +57,6 @@ Hooks.once("init", function() {
     /aggregateDamageRoll|configureDamage|preprocessFormula|simplifyRollFormula/
   );
   CONFIG.compatibility.excludePatterns.push(/core\.sourceId/);
-  if ( game.release.generation < 12 ) Math.clamp = Math.clamped;
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -70,10 +71,10 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
-  CONFIG.Token.ringClass = canvas.TokenRing;
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
+  CONFIG.Dice.BasicRoll = dice.BasicRoll;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.Dice.Roll5e = dice.Roll5e;
@@ -99,10 +100,7 @@ Hooks.once("init", function() {
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
   // Register Roll Extensions
-  CONFIG.Dice.rolls.push(dice.D20Roll);
-  CONFIG.Dice.rolls.push(dice.DamageRoll);
-  CONFIG.Dice.rolls.push(dice.Roll5e);
-
+  CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
 
   // Hook up system data types
   CONFIG.Actor.dataModels = dataModels.actor.config;
@@ -124,6 +122,11 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClassCharacter"
   });
   Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eNPC, {
+    types: ["npc"],
+    makeDefault: true,
+    label: "DND5E.SheetClassNPCLegacy"
+  });
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eNPC2, {
     types: ["npc"],
     makeDefault: true,
     label: "DND5E.SheetClassNPC"
@@ -334,6 +337,9 @@ function _configureStatusEffects() {
   for ( const [id, {label: name, ...data}] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
     addEffect(CONFIG.statusEffects, { id, name, ...data });
   }
+  for ( const [id, data] of Object.entries(CONFIG.DND5E.encumbrance.effects) ) {
+    addEffect(CONFIG.statusEffects, { id, ...data, hud: false });
+  }
 }
 
 /* -------------------------------------------- */
@@ -364,10 +370,6 @@ Hooks.once("setup", function() {
   // Apply custom item compendium
   game.packs.filter(p => p.metadata.type === "Item")
     .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
-
-  // Configure token rings
-  CONFIG.DND5E.tokenRings.shaderClass ??= canvas.TokenRingSamplerShaderV11;
-  CONFIG.Token.ringClass.initialize();
 });
 
 /* --------------------------------------------- */
@@ -424,27 +426,6 @@ Hooks.once("ready", function() {
     ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});
   }
   migrations.migrateWorld();
-});
-
-/* -------------------------------------------- */
-/*  Canvas Initialization                       */
-/* -------------------------------------------- */
-
-Hooks.on("canvasInit", gameCanvas => {
-  if ( game.release.generation < 12 ) {
-    gameCanvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
-    SquareGrid.prototype.measureDistances = canvas.measureDistances;
-  }
-  CONFIG.Token.ringClass.pushToLoad(gameCanvas.loadTexturesOptions.additionalSources);
-});
-
-/* -------------------------------------------- */
-/*  Canvas Draw                                 */
-/* -------------------------------------------- */
-
-Hooks.on("canvasDraw", gameCanvas => {
-  // The sprite sheet has been loaded now, we can create the uvs for each texture
-  CONFIG.Token.ringClass.createAssetsUVs();
 });
 
 /* -------------------------------------------- */
@@ -516,6 +497,7 @@ Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(m
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
+Hooks.on("renderCompendiumDirectory", (app, [html], data) => applications.CompendiumBrowser.injectSidebarButton(html));
 Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
 Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
 
@@ -534,6 +516,7 @@ export {
   dice,
   documents,
   enrichers,
+  Filter,
   migrations,
   utils,
   DND5E

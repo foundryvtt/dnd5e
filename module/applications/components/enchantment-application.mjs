@@ -18,6 +18,14 @@ export default class EnchantmentApplicationElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * Area where the enchantment limit & current count is displayed.
+   * @type {HTMLElement}
+   */
+  countArea;
+
+  /* -------------------------------------------- */
+
+  /**
    * Area where items can be dropped to enchant.
    * @type {HTMLElement}
    */
@@ -53,6 +61,30 @@ export default class EnchantmentApplicationElement extends HTMLElement {
       this.addEventListener("click", this._onRemoveEnchantment.bind(this));
     }
 
+    // Calculate the maximum targets
+    let item = this.enchantmentItem;
+    const spellLevel = this.chatMessage.getFlag("dnd5e", "use.spellLevel");
+    if ( spellLevel ) {
+      item = item.clone({ "system.level": spellLevel });
+      item.prepareData();
+      item.prepareFinalAttributes();
+    }
+    const maxTargets = item.system.target?.value;
+    if ( maxTargets ) {
+      if ( !this.countArea ) {
+        const div = document.createElement("div");
+        div.classList.add("count-area");
+        this.querySelector(".enchantment-control").append(div);
+        this.countArea = this.querySelector(".count-area");
+      }
+      this.countArea.innerHTML = game.i18n.format("DND5E.Enchantment.Enchanted", {
+        current: '<span class="current">0</span>',
+        max: `<span class="max">${maxTargets}<span>`
+      });
+    } else if ( this.countArea ) {
+      this.countArea.remove();
+    }
+
     this.buildItemList();
   }
 
@@ -86,6 +118,9 @@ export default class EnchantmentApplicationElement extends HTMLElement {
       this.dropArea.replaceChildren(...enchantedItems);
     } else {
       this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5E.Enchantment.DropArea")}</p>`;
+    }
+    if ( this.countArea ) {
+      this.countArea.querySelector(".current").innerText = enchantedItems.length;
     }
   }
 

@@ -52,9 +52,9 @@
     "uses": {
       "value": 20,
       "max": "20",
-      "per": "charges",
+      "per": "dawn",
       "recovery": "2d8 + 4",
-      "prompt": true
+      "prompt": false
     },
     "consume": {
       "type": "",
@@ -78,7 +78,7 @@
       ],
       "versatile": "1d8 + @mod"
     },
-    "formula": "",
+    "formula": "1d20",
     "save": {
       "ability": "",
       "dc": null,
@@ -94,13 +94,14 @@
       "conditions": ""
     },
     "properties": [
-      "ver",
-      "mgc"
+      "foc",
+      "mgc",
+      "ver"
     ],
     "proficient": null,
     "type": {
       "value": "simpleM",
-      "baseItem": ""
+      "baseItem": "quarterstaff"
     },
     "unidentified": {
       "description": ""
@@ -124,6 +125,24 @@
           "mode": 2,
           "value": "2",
           "priority": null
+        },
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.msak.attack",
+          "mode": 2,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.rsak.attack",
+          "mode": 2,
+          "value": "2",
+          "priority": null
         }
       ],
       "disabled": false,
@@ -136,14 +155,27 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/weapons/staves/staff-skull-brown.webp",
       "origin": "Compendium.dnd5e.items.eM5gEe4SEOvA2Y9t",
       "transfer": true,
       "flags": {},
-      "tint": null,
-      "name": "+2 to AC",
-      "description": "",
+      "tint": "#ffffff",
+      "name": "Staff of Power",
+      "description": "<p>While holding this staff, you gain a +2 bonus to Armor Class, saving throws, and spell attack rolls.</p>",
       "statuses": [],
+      "_stats": {
+        "coreVersion": "12.327",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": 1719169411762,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "img": "icons/weapons/staves/staff-skull-brown.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!eM5gEe4SEOvA2Y9t.313kehq7ifkqiz2u"
     }
   ],
@@ -155,11 +187,12 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
+    "systemVersion": "3.2.1",
+    "coreVersion": "12.327",
     "createdTime": 1661787233783,
-    "modifiedTime": 1715374627567,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1719169439166,
+    "lastModifiedBy": "dnd5ebuilder0000",
+    "duplicateSource": null
   },
   "_key": "!items!eM5gEe4SEOvA2Y9t"
 }

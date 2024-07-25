@@ -23,7 +23,6 @@ const {
 /**
  * Configuration data for Item Choice advancement.
  *
- * @property {string} hint                                    Brief hint about the choice to be made.
  * @property {Record<number, ItemChoiceLevelConfig>} choices  Choices & config for specific levels.
  * @property {boolean} allowDrops                             Should players be able to drop non-listed items?
  * @property {string} type                                    Type of item allowed, if it should be restricted.
@@ -38,7 +37,6 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      hint: new StringField({label: "DND5E.AdvancementHint"}),
       choices: new MappingField(new SchemaField({
         count: new NumberField({integer: true, min: 0}),
         replacement: new BooleanField({label: "DND5E.AdvancementItemChoiceReplacement"})
@@ -63,6 +61,16 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
         level: new StringField({label: "DND5E.SpellLevel"})
       })
     };
+  }
+
+  /* -------------------------------------------- */
+
+  get hint() {
+    foundry.utils.logCompatibilityWarning(
+      "Advancement hints are now part of the base data model.",
+      { since: "DnD5e 3.3", until: "DnD5e 4.1" }
+    );
+    return this.parent.hint ?? "";
   }
 
   /* -------------------------------------------- */

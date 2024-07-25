@@ -22,11 +22,15 @@ export const migrateWorld = async function() {
         if ( flags.persistSourceMigration ) {
           updateData = foundry.utils.mergeObject(source, updateData, {inplace: false});
         }
-        await actor.update(updateData, {enforceTypes: false, diff: valid && !flags.persistSourceMigration});
+        await actor.update(updateData, {
+          enforceTypes: false, diff: valid && !flags.persistSourceMigration, render: false
+        });
       }
       if ( actor.effects && actor.items && foundry.utils.isNewerVersion("3.0.3", version) ) {
         const deleteIds = _duplicatedEffects(actor);
-        if ( deleteIds.size ) await actor.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds));
+        if ( deleteIds.size ) await actor.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds), {
+          render: false
+        });
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Actor ${actor.name}: ${err.message}`;
@@ -47,7 +51,9 @@ export const migrateWorld = async function() {
         if ( flags.persistSourceMigration ) {
           updateData = foundry.utils.mergeObject(source, updateData, {inplace: false});
         }
-        await item.update(updateData, {enforceTypes: false, diff: valid && !flags.persistSourceMigration});
+        await item.update(updateData, {
+          enforceTypes: false, diff: valid && !flags.persistSourceMigration, render: false
+        });
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Item ${item.name}: ${err.message}`;
@@ -61,7 +67,7 @@ export const migrateWorld = async function() {
       const updateData = migrateMacroData(m.toObject(), migrationData);
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Macro document ${m.name}`);
-        await m.update(updateData, {enforceTypes: false});
+        await m.update(updateData, {enforceTypes: false, render: false});
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Macro ${m.name}: ${err.message}`;
@@ -75,7 +81,7 @@ export const migrateWorld = async function() {
       const updateData = migrateRollTableData(table.toObject(), migrationData);
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating RollTable document ${table.name}`);
-        await table.update(updateData, { enforceTypes: false });
+        await table.update(updateData, { enforceTypes: false, render: false });
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for RollTable ${table.name}: ${err.message}`;
@@ -89,7 +95,7 @@ export const migrateWorld = async function() {
       const updateData = migrateSceneData(s, migrationData);
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Scene document ${s.name}`);
-        await s.update(updateData, {enforceTypes: false});
+        await s.update(updateData, {enforceTypes: false, render: false});
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Scene ${s.name}: ${err.message}`;
@@ -116,7 +122,9 @@ export const migrateWorld = async function() {
               }
             });
           }
-          await token.actor.update(updateData, { enforceTypes: false, diff: !flags.persistSourceMigration });
+          await token.actor.update(updateData, {
+            enforceTypes: false, diff: !flags.persistSourceMigration, render: false
+          });
         }
       } catch(err) {
         err.message = `Failed dnd5e system migration for ActorDelta [${token.id}]: ${err.message}`;
@@ -496,7 +504,7 @@ export const migrateCopyActorTransferEffects = function(actor, effects, { actorU
  */
 export const migrateEffectData = function(effect, migrationData, { parent }={}) {
   const updateData = {};
-  _migrateDocumentIcon(effect, updateData, {...migrationData, field: game.release.generation < 12 ? "icon" : "img"});
+  _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
   _migrateEffectArmorClass(effect, updateData);
   if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
     _migrateTransferEffect(effect, parent, updateData);
@@ -642,7 +650,7 @@ function _migrateActorAC(actorData, updateData) {
   if ( ac?.formula ) {
     try {
       const roll = new Roll(ac.formula);
-      Roll.safeEval(roll.formula);
+      roll.evaluateSync();
     } catch( e ) {
       updateData["system.attributes.ac.formula"] = "";
     }

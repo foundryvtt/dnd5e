@@ -1,0 +1,92 @@
+{{!-- Classes --}}
+{{#unless isNPC}}
+    {{> "dnd5e.actor-classes" }}
+{{/unless}}
+
+{{!-- Features --}}
+<{{elements.inventory}} class="inventory-element" v2>
+
+    {{!-- Searching, Filtering, & Sorting --}}
+    <item-list-controls for="features" label="{{ localize "DND5E.FeatureSearch" }}" sort="toggle" group
+                        group-label="{{ localize "DND5E.FilterGroupOrigin" }}" collection="items">
+        <datalist>
+            {{#each filters}}
+            <option value="{{ key }}">{{ localize label }}</option>
+            {{/each}}
+        </datalist>
+    </item-list-controls>
+
+    {{!-- Features List --}}
+    <section class="items-list features-list" data-item-list="features">
+
+        {{!-- Sections / Categories --}}
+        {{#each sections}}
+        <div class="items-section card" {{ dnd5e-dataset dataset }}>
+
+            {{!-- Section Header --}}
+            <div class="items-header header">
+                <h3 class="item-name">{{ localize label }}</h3>
+                {{#each categories}}
+                <div class="item-header {{ classes }}">{{#if label}}{{ localize label }}{{/if}}</div>
+                {{/each}}
+            </div>
+
+            {{!-- Section Contents --}}
+            <ol class="item-list unlist">
+                {{#each items as |item|}}
+                {{#dnd5e-itemContext item as |ctx|}}
+
+                {{!-- Items --}}
+                <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-item-id="{{ item.id }}"
+                    data-entry-id="{{ item.id }}" data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}"
+                    data-grouped="{{ ctx.group }}" data-ungrouped="{{ ctx.ungroup }}">
+
+                    <div class="item-row">
+
+                        {{!-- Item Name --}}
+                        <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
+                             data-action="use" aria-label="{{ item.name }}">
+                            <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+                            <div class="name name-stacked">
+                                <span class="title">{{ item.name }}</span>
+                                {{#if ctx.subtitle}}
+                                <span class="subtitle">{{{ ctx.subtitle }}}</span>
+                                {{/if}}
+                            </div>
+                            <div class="tags">
+                                {{#each item.labels.properties}}
+                                {{#if icon}}
+                                <span aria-label="{{ label }}">
+                                    <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                                </span>
+                                {{/if}}
+                                {{/each}}
+                            </div>
+                        </div>
+
+                        {{#each ../categories}}
+                            {{> (lookup . "partial") item=item ctx=ctx }}
+                        {{/each}}
+
+                    </div>
+
+                    <div class="item-description collapsible-content">
+                        <div class="wrapper">
+                            {{#if ctx.isExpanded}}
+                                {{> "dnd5e.item-summary" ctx.expanded }}
+                            {{/if}}
+                        </div>
+                    </div>
+
+                </li>
+
+                {{/dnd5e-itemContext}}
+                {{/each}}
+            </ol>
+
+        </div>
+        {{/each}}
+
+    </section>
+
+</{{elements.inventory}}>

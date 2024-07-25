@@ -1,0 +1,10 @@
+<nav data-group="primary">
+    {{#each tabs}}
+    <a class="item control {{#if active}}active{{/if}}" data-group="primary" data-tab="{{ tab }}" data-action="tab"
+       data-tooltip="{{ label }}" aria-label="{{ localize label }}" data-document-class="{{ documentClass }}"
+       data-types="{{ types }}">
+        {{#if icon}}<i class="{{ icon }}"></i>{{/if}}
+        {{#if svg}}<dnd5e-icon src="{{ svg }}"></dnd5e-icon>{{/if}}
+    </a>
+    {{/each}}
+</nav>

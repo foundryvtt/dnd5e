@@ -320,13 +320,7 @@
     },
     "EYiQZ3rFL25fEJY5": {
       "actor": "systems/dnd5e/tokens/beast/DireWolf.webp",
-      "token": {
-        "texture": {
-          "src": "systems/dnd5e/tokens/beast/DireWolf.webp",
-          "scaleX": 1.5,
-          "scaleY": 1.5
-        }
-      }
+      "token": "systems/dnd5e/tokens/beast/DireWolf.webp"
     },
     "Bupo3E9X5Ptx6XeT": {
       "actor": "systems/dnd5e/tokens/beast/DraftHorse.webp",
@@ -388,13 +382,7 @@
     },
     "cJGY1ZywUOo6heNR": {
       "actor": "systems/dnd5e/tokens/beast/GiantBadger.webp",
-      "token": {
-        "texture": {
-          "src": "systems/dnd5e/tokens/beast/GiantBadger.webp",
-          "scaleX": 1.1,
-          "scaleY": 1.1
-        }
-      }
+      "token": "systems/dnd5e/tokens/beast/GiantBadger.webp"
     },
     "SoK7l5zJQKxTVgLL": {
       "actor": "systems/dnd5e/tokens/beast/GiantBat.webp",
@@ -708,13 +696,7 @@
     },
     "AijNdqMurWxDxUSl": {
       "actor": "systems/dnd5e/tokens/beast/Panther.webp",
-      "token": {
-        "texture": {
-          "src": "systems/dnd5e/tokens/beast/Panther.webp",
-          "scaleX": 1.5,
-          "scaleY": 1.5
-        }
-      }
+      "token": "systems/dnd5e/tokens/beast/Panther.webp"
     },
     "4OeZZguYgJcsZoM9": {
       "actor": "systems/dnd5e/tokens/beast/Plesiosaurus.webp",
@@ -828,13 +810,7 @@
     },
     "gKRtiMNAjZiCVfwz": {
       "actor": "systems/dnd5e/tokens/beast/Stirge.webp",
-      "token": {
-        "texture": {
-          "src": "systems/dnd5e/tokens/beast/Stirge.webp",
-          "scaleX": 0.9,
-          "scaleY": 0.9
-        }
-      }
+      "token": "systems/dnd5e/tokens/beast/Stirge.webp"
     },
     "PcZ0QjIG6bHpffp9": {
       "actor": "systems/dnd5e/tokens/beast/SwarmBats.webp",
@@ -847,8 +823,8 @@
       }
     },
     "XfQMBoTh892XSnCX": {
-      "actor": "systems/dnd5e/tokens/beast/SwarmpoisonousSnakes.webp",
-      "token": "systems/dnd5e/tokens/beast/SwarmpoisonousSnakes.webp"
+      "actor": "systems/dnd5e/tokens/beast/SwarmPoisonousSnakes.webp",
+      "token": "systems/dnd5e/tokens/beast/SwarmPoisonousSnakes.webp"
     },
     "dZZFmG8LiBlgWi76": {
       "actor": "systems/dnd5e/tokens/beast/SwarmBeetles.webp",
@@ -2077,6 +2053,18 @@
           "src": "systems/dnd5e/tokens/dragon/BlueDragonAdult.webp",
           "scaleX": 2.33,
           "scaleY": 2.33
+        }
+      }
+    },
+    "SNT0JNVSngUTsj4m": {
+      "actor": "systems/dnd5e/tokens/dragon/BlueDragonAncient.webp",
+      "token": {
+        "width": 13,
+        "height": 13,
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/BlueDragonAncient.webp",
+          "scaleX": 3,
+          "scaleY": 3
         }
       }
     },

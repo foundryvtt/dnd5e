@@ -86,6 +86,26 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------- */
 
+  /**
+   * Filters available for this item type when using the compendium browser.
+   * @returns {CompendiumBrowserFilterDefinition}
+   */
+  static get compendiumBrowserFilters() {
+    return new Map();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Key path to the description used for default embeds.
+   * @type {string|null}
+   */
+  get embeddedDescriptionKeyPath() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static defineSchema() {
     const schema = {};
@@ -110,7 +130,6 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
     Object.assign(a, b);
     return a;
   }
-
 
   /* -------------------------------------------- */
   /*  Data Cleaning                               */
@@ -295,6 +314,23 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
     return Base;
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async toEmbed(config, options={}) {
+    const keyPath = this.embeddedDescriptionKeyPath;
+    if ( !keyPath || !foundry.utils.hasProperty(this, keyPath) ) return null;
+    const enriched = await TextEditor.enrichHTML(foundry.utils.getProperty(this, keyPath), {
+      ...options,
+      relativeTo: this.parent
+    });
+    const container = document.createElement("div");
+    container.innerHTML = enriched;
+    return container.children;
+  }
 }
 
 /* -------------------------------------------- */
@@ -316,6 +352,13 @@ export class ActorDataModel extends SystemDataModel {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get embeddedDescriptionKeyPath() {
+    return "details.biography.value";
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -379,6 +422,15 @@ export class ItemDataModel extends SystemDataModel {
   static ITEM_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get embeddedDescriptionKeyPath() {
+    return game.user.isGM || (this.identified !== false) ? "description.value" : "unidentified.description";
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -438,10 +490,10 @@ export class ItemDataModel extends SystemDataModel {
       subtitle: subtitle.filterJoin(" &bull; "),
       description: {
         value: await TextEditor.enrichHTML(description ?? "", {
-          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+          rollData, relativeTo: this.parent, ...enrichmentOptions
         }),
         chat: await TextEditor.enrichHTML(chat ?? "", {
-          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+          rollData, relativeTo: this.parent, ...enrichmentOptions
         })
       }
     };

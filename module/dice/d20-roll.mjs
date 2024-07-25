@@ -177,9 +177,13 @@ export default class D20Roll extends Roll5e {
 
   /** @inheritdoc */
   async toMessage(messageData={}, options={}) {
+    // Record the preferred rollMode
+    options.rollMode ??= this.options.rollMode;
+    if ( options.rollMode === "roll" ) options.rollMode = undefined;
+    options.rollMode ||= game.settings.get("core", "rollMode");
 
     // Evaluate the roll now so we have the results available to determine whether reliable talent came into play
-    if ( !this._evaluated ) await this.evaluate({async: true});
+    if ( !this._evaluated ) await this.evaluate({ allowInteractive: options.rollMode !== CONST.DICE_ROLL_MODES.BLIND });
 
     // Add appropriate advantage mode message flavor and dnd5e roll flags
     messageData.flavor = messageData.flavor || this.options.flavor;
@@ -194,8 +198,6 @@ export default class D20Roll extends Roll5e {
       if ( isRT ) d20.options.flavor = d20.options.flavor ? `${d20.options.flavor} (${label})` : label;
     }
 
-    // Record the preferred rollMode
-    options.rollMode = options.rollMode ?? this.options.rollMode;
     return super.toMessage(messageData, options);
   }
 

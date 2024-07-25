@@ -79,7 +79,13 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     context.noReplacement = !this.advancement.actor.items.has(this.replacement);
     if ( context.replaceable && !context.noReplacement ) max++;
     if ( this.selected.size > max ) {
-      this.selected = new Set(Array.from(this.selected).slice(0, max));
+      const [kept, lost] = Array.from(Array.from(this.selected).entries()).reduce(([kept, lost], [index, value]) => {
+        if ( index < max ) kept.push(value);
+        else lost.push(value);
+        return [kept, lost];
+      }, [[], []]);
+      this.selected = new Set(kept);
+      this.dropped = this.dropped.filter(i => !lost.includes(i.uuid));
     }
     context.choices = { max, current: this.selected.size, full: this.selected.size >= max };
 
@@ -164,7 +170,10 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /** @inheritdoc */
   async _onDrop(event) {
-    if ( this.selected.size >= this.advancement.configuration.choices[this.level].count ) return false;
+    const levelConfig = this.advancement.configuration.choices[this.level];
+    let max = levelConfig.count ?? 0;
+    if ( levelConfig.replacement && this.advancement.actor.items.has(this.replacement) ) max++;
+    if ( this.selected.size >= max ) return false;
 
     // Try to extract the data
     let data;

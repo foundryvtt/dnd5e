@@ -65,7 +65,7 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false, det
   // If the formula contains multiplication or division we cannot easily simplify
   if ( /[*/]/.test(roll.formula) ) {
     if ( roll.isDeterministic && !/d\(/.test(roll.formula) && (!/\[/.test(roll.formula) || !preserveFlavor) ) {
-      return Roll.safeEval(roll.formula).toString();
+      return String(roll.evaluateSync().total);
     }
     else return roll.constructor.getFormula(roll.terms);
   }
@@ -179,8 +179,10 @@ function _simplifyDiceTerms(terms) {
 function _expandParentheticalTerms(terms) {
   terms = terms.reduce((acc, term) => {
     if ( term instanceof ParentheticalTerm ) {
-      if ( term.isDeterministic ) term = new NumericTerm({ number: Roll.safeEval(term.term) });
-      else {
+      if ( term.isDeterministic ) {
+        const roll = new Roll(term.term);
+        term = new NumericTerm({ number: roll.evaluateSync().total });
+      } else {
         const subterms = new Roll(term.term).terms;
         term = _expandParentheticalTerms(subterms);
       }

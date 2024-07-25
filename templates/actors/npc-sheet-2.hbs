@@ -1,0 +1,533 @@
+{{!-- Components --}}
+{{#*inline "pip"}}
+    <button type="button" class="{{ classes }}" data-n="{{ n }}" data-tooltip="{{ tooltip }}" aria-label="{{ label }}"
+            aria-pressed="{{ filled }}"></button>
+{{/inline}}
+
+<form class="{{ cssClass }}" autocomplete="off">
+
+    {{!-- Header --}}
+    <header class="sheet-header">
+
+        {{!-- Portrait & Vitals --}}
+        <div class="left">
+
+            {{!-- Portrait --}}
+            {{#if editable}}
+            <label class="slide-toggle">
+                <input type="checkbox" name="flags.dnd5e.showTokenPortrait" {{ checked portrait.token }}>
+                {{#if portrait.token}}
+                    {{ localize "DOCUMENT.Token" }}
+                    <i class="fas fa-toggle-on"></i>
+                {{else}}
+                    {{ localize "DND5E.Portrait" }}
+                    <i class="fas fa-toggle-off"></i>
+                {{/if}}
+            </label>
+            {{/if}}
+
+            <div class="portrait {{#if portrait.token}}token{{/if}}">
+
+                <img src="{{ portrait.src }}" alt="{{ actor.name }}"
+                     {{#if (and editable portrait.path)}}data-edit="{{ portrait.path }}"{{/if}}>
+
+                <div class="initiative {{#unless editable}}{{ rollableClass }}{{/unless}}"
+                    {{#if editable}}data-tooltip="DND5E.InitiativeConfig"
+                    aria-label="{{ localize "DND5E.InitiativeConfig" }}"
+                    {{else}}data-tooltip="DND5E.Initiative" aria-label="{{ localize "DND5E.Initiative" }}"
+                    data-action="rollInitiative"{{/if}}>
+                    {{#if editable}}
+                        <a class="config-button" data-action="initiative"><i class="fas fa-cog"></i></a>
+                    {{else}}
+                        <span>
+                            {{ dnd5e-numberFormat system.attributes.init.total signDisplay="always" }}
+                        </span>
+                    {{/if}}
+                </div>
+            </div>
+
+            {{!-- Vitals --}}
+            <div class="bottom vitals">
+
+                {{!-- AC --}}
+                <div class="left ac">
+
+                    <div class="ac-badge badge" aria-label="{{ localize "DND5E.ArmorClass" }}">
+                        {{#if editable}}
+                        <a class="config-button" data-action="armor" data-tooltip="DND5E.ArmorConfig"
+                           aria-label="{{ localize "DND5E.ArmorConfig" }}">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                        {{else}}
+                        <div data-attribution="attributes.ac" data-attribution-caption="DND5E.ArmorClass"
+                             data-tooltip-direction="DOWN">
+                            {{ system.attributes.ac.value }}
+                        </div>
+                        {{/if}}
+                    </div>
+
+                </div>
+
+                {{!-- HP, HD, & Death Saves --}}
+                <div class="right">
+
+                    {{!-- HP --}}
+                    {{#with system.attributes.hp}}
+                    <div class="meter hit-points sectioned">
+                        <div class="progress hit-points {{#if (gt tempmax 0)}}temp-positive{{else if (lt tempmax 0)}}temp-negative{{/if}}"
+                             role="meter" aria-valuemin="0" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
+                             style="--bar-percentage: {{ pct }}%">
+                            <div class="label">
+                                <span class="value">{{ value }}</span>
+                                <span class="separator">&sol;</span>
+                                <span class="max">{{ effectiveMax }}</span>
+                                {{#if tempmax}}
+                                <span class="bonus">{{ dnd5e-numberFormat tempmax signDisplay="always" }}</span>
+                                {{/if}}
+                                {{#if @root.editable}}
+                                <a class="config-button" data-action="hitPoints" data-tooltip="DND5E.HitPointsConfig"
+                                   aria-label="{{ localize "DND5E.HitPointsConfig" }}">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                                {{/if}}
+                            </div>
+                            <input type="text" name="system.attributes.hp.value" data-dtype="Number" placeholder="0"
+                                   value="{{ value }}" inputmode="numeric" pattern="[+=\-]?\d*" hidden>
+                        </div>
+                        {{#if showDeathSaves}}
+                        <div class="tmp">
+                            <input type="text" name="system.attributes.hp.temp" data-dtype="Number" inputmode="numeric"
+                                   placeholder="{{ localize "DND5E.TMP" }}" value="{{ temp }}" pattern="[+=\-]?\d*">
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/with}}
+
+                    {{#if showDeathSaves}}
+                    {{!-- HD --}}
+                    {{#with system.attributes.hd}}
+                    <div class="meter hit-dice progress" role="meter" aria-valuemin="0" aria-valuenow="{{ value }}"
+                         aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
+                        <div class="label">
+                            <span class="max">{{ max }}</span>
+                            <span class="separator">&sol;</span>
+                            <span class="value">{{ value }}</span>
+                        </div>
+                    </div>
+                    {{/with}}
+
+                    {{!-- Death Saves --}}
+                    <div class="death-saves">
+
+                        {{!-- Death Save Successes --}}
+                        <div class="pips" data-prop="system.attributes.death.success">
+                            {{#each death.success}}
+                                {{> pip}}
+                            {{/each}}
+                        </div>
+
+                        {{!-- Roll Death Save --}}
+                        <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"
+                                aria-label="{{ localize "DND5E.DeathSaveRoll" }}"
+                                class="{{ rollableClass }} death-save unbutton">
+                            <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/dead.svg"></dnd5e-icon>
+                        </button>
+
+                        {{!-- Death Save Failures --}}
+                        <div class="pips" data-prop="system.attributes.death.failure">
+                            {{#each death.failure}}
+                                {{> pip}}
+                            {{/each}}
+                        </div>
+
+                    </div>
+                    {{else}}
+                    {{!-- Temp & Tempmax --}}
+                    {{#with system.attributes.hp}}
+                    <div class="meter sectioned split">
+                        <div class="temp">
+                            <input type="text" name="system.attributes.hp.temp" data-dtype="Number" inputmode="numeric"
+                                   placeholder="{{ localize "DND5E.TMP" }}" value="{{ temp }}" pattern="[+=\-]?\d*">
+                        </div>
+                        <div class="tempmax">
+                            <input type="text" name="system.attributes.hp.tempmax" data-dtype="Number"
+                                   inputmode="numeric" placeholder="+{{ localize "DND5E.Max" }}" value="{{ tempmax }}"
+                                   pattern="[+=\-]?\d*">
+                        </div>
+                    </div>
+                    {{/with}}
+                    {{/if}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {{!-- Ability Scores & Other Statistics --}}
+        <div class="right stats">
+
+            <div class="top">
+
+                {{!-- Name, Type, Size, & Alignment --}}
+                <div class="left">
+
+                    {{!-- Name --}}
+                    {{#if editable}}
+                    <input type="text" name="name" class="document-name uninput" value="{{ actor.name }}">
+                    {{else}}
+                    <div class="document-name">{{ actor.name }}</div>
+                    {{/if}}
+
+                    {{!-- Size, Type, & Alignment --}}
+                    <ul class="labels unlist">
+
+                        {{!-- Size --}}
+                        <li class="creature-size">
+                            {{#if editable}}
+                            <select class="unselect" name="system.traits.size">
+                                {{ selectOptions config.actorSizes selected=source.traits.size labelAttr="label" }}
+                            </select>
+                            {{else}}
+                            <span>{{ lookup (lookup config.actorSizes system.traits.size) "label" }}</span>
+                            {{/if}}
+                        </li>
+
+                        {{!-- Type --}}
+                        <li class="creature-type">
+                            {{#if editable}}
+                            <a class="config-button" data-action="type" data-tooltip="DND5E.CreatureTypeConfig"
+                               aria-label="{{ localize "DND5E.CreatureTypeConfig" }}">
+                                <span>{{ labels.type }}</span>
+                                <i class="fas fa-cog"></i>
+                            </a>
+                            {{else}}
+                            <span>{{ labels.type }}</span>
+                            {{/if}}
+                        </li>
+
+                        {{!-- Alignment --}}
+                        <li class="creature-alignment">
+                            {{#if editable}}
+                            <input type="text" name="system.details.alignment" value="{{ source.details.alignment }}"
+                                   placeholder="{{ localize "DND5E.Alignment" }}">
+                            {{else}}
+                            <span>{{ system.details.alignment }}</span>
+                            {{/if}}
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                {{!-- Resting, Special Traits, & Proficiency --}}
+                {{#if actor.isOwner}}
+                <div class="right">
+
+                    <div class="left">
+
+                        <div class="sheet-header-buttons">
+                            <button type="button" class="short-rest gold-button" data-tooltip="DND5E.ShortRest"
+                                    aria-label="{{ localize "DND5E.ShortRest" }}">
+                                <i class="fas fa-utensils"></i>
+                            </button>
+                            <button type="button" class="long-rest gold-button" data-tooltip="DND5E.LongRest"
+                                    aria-label="{{ localize "DND5E.LongRest" }}">
+                                <i class="fas fa-campground"></i>
+                            </button>
+                            <button type="button" class="config-button gold-button" data-action="flags"
+                                    data-tooltip="DND5E.SpecialTraits"
+                                    aria-label="{{ localize "DND5E.SpecialTraits" }}">
+                                <i class="fas fa-star"></i>
+                            </button>
+                        </div>
+
+                        <div class="proficiency">
+                            <span>{{ localize "DND5E.Proficiency" }}</span>
+                            <strong>{{ dnd5e-formatModifier system.attributes.prof }}</strong>
+                        </div>
+
+                    </div>
+
+                    {{!-- CR --}}
+                    <div class="right cr-badge badge" aria-label="{{ localize "DND5E.CRLabel" cr=system.details.cr }}"
+                         {{#unless editable}}data-tooltip="DND5E.ChallengeRating"{{/unless}}>
+                        {{#if editable}}
+                        <input type="text" class="uninput" name="system.details.cr" value="{{ source.details.cr }}">
+                        {{else}}
+                        {{{ dnd5e-formatCR system.details.cr }}}
+                        {{/if}}
+                    </div>
+
+                </div>
+                {{/if}}
+
+            </div>
+
+            {{!-- Ability Scores --}}
+            <div class="middle ability-scores card flexrow">
+                {{#each abilities}}
+                <div class="ability-score" data-ability="{{ key }}">
+                    {{#if icon}}<img src="{{ icon }}" alt="{{ label }}">{{/if}}
+                    <a class="label {{ @root.rollableClass }} ability-check">{{ abbr }}</a>
+                    <div class="mod">
+                        {{#if @root.editable}}
+                        <a class="config-button" data-action="ability"
+                           data-tooltip="{{ localize "DND5E.AbilityConfigure" ability=label }}"
+                           aria-label="{{ localize "DND5E.AbilityConfigure" ability=label }}">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                        {{else}}
+                        {{ dnd5e-formatModifier mod }}
+                        {{/if}}
+                    </div>
+                    <div class="score">
+                        {{#if @root.editable}}
+                        <input type="text" name="system.abilities.{{ key }}.value" value="{{ baseValue }}"
+                               placeholder="10" data-dtype="Number" class="uninput">
+                        {{else}}
+                        {{ value }}
+                        {{/if}}
+                    </div>
+                    <div class="save-tab saving-throw {{#unless @root.editable}}{{ @root.rollableClass }}{{/unless}}"
+                         {{#unless @root.editable}}data-tooltip="{{ localize "DND5E.SavingThrowRoll" ability=label }}"
+                         aria-label="{{ localize "DND5E.SavingThrowRoll" ability=label }}"{{/unless}}>
+                        <proficiency-cycle type="ability" name="{{ concat "system.abilities." key ".proficient" }}"
+                                           data-tooltip="{{ hover }}" aria-label="{{ localize hover }}"
+                                           value="{{#if @root.editable}}{{ baseProf }}{{else}}{{ proficient }}{{/if}}"
+                                           {{ disabled (not @root.editable) }}></proficiency-cycle>
+                        <span class="save">{{ dnd5e-formatModifier save }}</span>
+                        <i class="fas fa-shield-heart" inert></i>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+            {{!-- Legendary Actions & Resistances, Lair Actions, & Classes --}}
+            <div class="bottom">
+
+                {{#if hasClasses}}
+                {{> "dnd5e.actor-classes" }}
+                {{/if}}
+
+                {{#if (or hasLegendaries editable)}}
+                <div class="legendary">
+                    {{#if editable}}
+                    <label class="legact">
+                        <span class="label roboto-upper">{{ localize "DND5E.LegAct" }}</span>
+                        {{ numberInput source.resources.legact.max name="system.resources.legact.max" step=1 min=0 }}
+                    </label>
+                    <label class="legres">
+                        <span class="label roboto-upper">{{ localize "DND5E.LegRes" }}</span>
+                        {{ numberInput source.resources.legres.max name="system.resources.legres.max" step=1 min=0 }}
+                    </label>
+                    <label class="lair">
+                        <span class="label roboto-upper">{{ localize "DND5E.LairActionLabel" }}</span>
+                        {{ numberInput source.resources.lair.initiative name="system.resources.lair.initiative"
+                                       placeholder="—" step=1 min=0 }}
+                    </label>
+                    {{else}}
+                    {{#if system.resources.legact.max}}
+                    <div class="legact">
+                        <span class="label roboto-upper">{{ localize "DND5E.LegAct" }}</span>
+                        <div class="pips" data-prop="system.resources.legact.value">
+                            {{#each legact}}
+                                {{> pip }}
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if system.resources.legres.max}}
+                    <div class="legres">
+                        <span class="label roboto-upper">{{ localize "DND5E.LegRes" }}</span>
+                        <div class="pips" data-prop="system.resources.legres.value">
+                            {{#each legres}}
+                                {{> pip }}
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if system.resources.lair.initiative}}
+                    <label class="lair">
+                        <span class="label roboto-upper">{{ localize "DND5E.LairActionLabel" }}</span>
+                        <span class="value">{{ system.resources.lair.initiative }}</span>
+                    </label>
+                    {{/if}}
+                    {{/if}}
+                </div>
+                {{/if}}
+
+            </div>
+
+        </div>
+
+    </header>
+
+    {{!-- Body --}}
+    <section class="sheet-body">
+
+        {{!-- Main Content --}}
+        <div class="main-content">
+
+            {{!-- Sidebar Collapser --}}
+            <button type="button" class="sidebar-collapser unbutton interface-only"
+                {{#if sidebarCollapsed}}
+                data-tooltip="JOURNAL.ViewExpand" aria-label="{{ localize "JOURNAL.ViewExpand" }}"
+                {{else}}
+                data-tooltip="JOURNAL.ViewCollapse" aria-label="{{ localize "JOURNAL.ViewCollapse" }}"
+                {{/if}}>
+                <i class="fas fa-caret-{{#if sidebarCollapsed}}right{{else}}left{{/if}}"></i>
+            </button>
+
+            {{!-- Sidebar --}}
+            <div class="sidebar">
+
+                {{!-- Speed --}}
+                <div class="pills-group {{#unless speed}}empty{{/unless}}">
+                    <h3 class="icon">
+                        <i class="fas fa-shoe-prints"></i>
+                        <span class="roboto-upper">{{ localize "DND5E.Speed" }}</span>
+                        {{#if editable}}
+                        <a class="config-button" data-action="movement" data-tooltip="DND5E.MovementConfig"
+                           aria-label="{{ localize "DND5E.MovementConfig" }}">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                        {{/if}}
+                    </h3>
+                    <ul class="pills">
+                        {{#each speed}}
+                        <li class="pill">
+                            {{#each icons}}
+                            <i class="{{ icon }}" data-tooltip="{{ label }}" aria-label="{{ label }}"></i>
+                            {{/each}}
+                            <span class="label">{{ label }}</span>
+                            {{#if value}}
+                            <span class="separator">&vert;</span>
+                            <span class="value">{{ value }}</span>
+                            {{/if}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+
+                {{!-- Skills --}}
+                <div class="pills-group {{#unless skills}}empty{{/unless}}">
+                    <h3 class="icon">
+                        <i class="fas fa-briefcase"></i>
+                        <span class="roboto-upper">{{ localize "DND5E.Skills" }}</span>
+                        {{#if editable}}
+                        <a class="config-button" data-action="skills" data-tooltip="DND5E.SkillsConfig"
+                           aria-label="{{ localize "DND5E.SkillsConfig" }}">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                        {{/if}}
+                    </h3>
+                    <ul class="pills">
+                        {{#each skills}}
+                        <li class="pill">
+                            <a class="{{ @root.rollableClass }} skill-name" data-key="{{ @key }}">
+                                <span class="label">{{ label }}</span>
+                                <span class="separator">&vert;</span>
+                                <span class="value">{{ dnd5e-numberFormat total signDisplay="always" }}</span>
+                            </a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+
+                {{!-- Senses --}}
+                <div class="pills-group {{#unless senses}}empty{{/unless}}">
+                    <h3 class="icon">
+                        <i class="fas fa-eye"></i>
+                        <span class="roboto-upper">{{ localize "DND5E.Senses" }}</span>
+                        {{#if editable}}
+                        <a class="config-button" data-action="senses" data-tooltip="DND5E.SensesConfig"
+                           aria-label="{{ localize "DND5E.SensesConfig" }}">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                        {{/if}}
+                    </h3>
+                    <ul class="pills">
+                        {{#each senses}}
+                        <li class="pill">
+                            <span class="label">{{ label }}</span>
+                            {{#if value}}
+                            <span class="separator">&vert;</span>
+                            <span class="value">{{ value }}</span>
+                            {{/if}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+
+                {{!-- Resistances --}}
+                {{> "dnd5e.actor-trait-pills" values=traits.dr key="dr" color="green" icon="fas fa-shield-halved"
+                    label="DND5E.Resistances" }}
+
+                {{!-- Immunities --}}
+                {{#if editable}}
+                    {{> "dnd5e.actor-trait-pills" values=traits.di key="di" color="green" icon="fas fa-shield"
+                        label="DND5E.DamImm" }}
+                {{else}}
+                    {{> "dnd5e.actor-trait-pills" values=traits.di key="di" color="green" icon="fas fa-shield"
+                        label="DND5E.Immunities" }}
+                {{/if}}
+                {{> "dnd5e.actor-trait-pills" values=traits.ci key="ci" color="green" svg="rosa-shield"
+                    label="DND5E.ConImm" }}
+
+                {{!-- Vulnerabilities --}}
+                {{> "dnd5e.actor-trait-pills" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack"
+                    label="DND5E.Vulnerabilities" }}
+
+                {{!-- Damage Modification --}}
+                {{> "dnd5e.actor-trait-pills" values=traits.dm key="dm" icon="fas fa-heart-circle-plus"
+                    label="DND5E.DamageModification.Label" }}
+
+                {{!-- Languages --}}
+                {{> "dnd5e.actor-trait-pills" values=traits.languages key="languages" icon="fas fa-flag"
+                    label="DND5E.Languages" }}
+
+            </div>
+
+            {{!-- Tabbed Content --}}
+            <section class="tab-body">
+
+                {{!-- Features --}}
+                <div class="tab features" data-group="primary" data-tab="features">
+                    {{> "dnd5e.creature-features" sections=features.sections filters=features.filters }}
+                </div>
+
+                {{!-- Inventory --}}
+                <div class="tab inventory" data-group="primary" data-tab="inventory">
+                    {{> "dnd5e.inventory2" sections=inventory }}
+                </div>
+
+                {{!-- Spells --}}
+                <div class="tab spells" data-group="primary" data-tab="spells">
+                    {{> "dnd5e.creature-spells" }}
+                </div>
+
+                {{!-- Effects --}}
+                <div class="tab effects" data-group="primary" data-tab="effects">
+                    {{> "dnd5e.active-effects2" }}
+                </div>
+
+                {{!-- Biography --}}
+                {{~> "dnd5e.npc-biography" ~}}
+
+            </section>
+
+        </div>
+
+    </section>
+
+    {{!-- Child Creation --}}
+    <button type="button" class="create-child gold-button"
+            aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    {{!-- Warnings --}}
+    {{> "dnd5e.actor-warnings-dialog" }}
+
+</form>

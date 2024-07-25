@@ -52,9 +52,9 @@
     "uses": {
       "value": 10,
       "max": "10",
-      "per": "charges",
+      "per": "dawn",
       "recovery": "1d6 + 4",
-      "prompt": true
+      "prompt": false
     },
     "consume": {
       "type": "",
@@ -73,7 +73,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "",
+    "formula": "1d20",
     "save": {
       "ability": "",
       "dc": null,
@@ -89,6 +89,7 @@
       "conditions": ""
     },
     "properties": [
+      "foc",
       "mgc"
     ],
     "proficient": null,
@@ -109,7 +110,51 @@
     "magicalBonus": null,
     "enchantment": null
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Staff of Frost",
+      "origin": "Compendium.dnd5e.items.Item.xEtBeZjJnkDXojQM",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "flags": {},
+      "img": "icons/weapons/staves/staff-ornate-engraved-blue.webp",
+      "_id": "cY6gjrYWTbo4ezzH",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "cold",
+          "priority": null
+        }
+      ],
+      "description": "<p>You have resistance to cold damage while you hold this staff.</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.327",
+        "systemId": "dnd5e",
+        "systemVersion": "3.2.1",
+        "createdTime": 1719169175692,
+        "modifiedTime": 1719169195077,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!items.effects!xEtBeZjJnkDXojQM.cY6gjrYWTbo4ezzH"
+    }
+  ],
   "folder": "MLMTCAvKsuFE3vYA",
   "sort": 0,
   "ownership": {
@@ -118,11 +163,12 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
+    "systemVersion": "3.2.1",
+    "coreVersion": "12.327",
     "createdTime": 1661787233964,
-    "modifiedTime": 1715374657924,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1719169310995,
+    "lastModifiedBy": "dnd5ebuilder0000",
+    "duplicateSource": null
   },
   "_key": "!items!xEtBeZjJnkDXojQM"
 }

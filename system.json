@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "3.2.1",
+  "version": "4.0.0",
   "compatibility": {
-    "minimum": "11.315",
+    "minimum": "12.329",
     "verified": "12"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-3.2.1/dnd5e-release-3.2.1.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-4.0.0/dnd5e-release-4.0.0.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -31,7 +31,11 @@
       "path": "packs/heroes",
       "type": "Actor",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["character"]
+        }
+      }
     },
     {
       "name": "monsters",
@@ -40,7 +44,11 @@
       "path": "packs/monsters",
       "type": "Actor",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["npc"]
+        }
+      }
     },
     {
       "name": "items",
@@ -49,7 +57,11 @@
       "path": "packs/items",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
+        }
+      }
     },
     {
       "name": "tradegoods",
@@ -58,7 +70,11 @@
       "path": "packs/tradegoods",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["loot"]
+        }
+      }
     },
     {
       "name": "spells",
@@ -67,7 +83,11 @@
       "path": "packs/spells",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["spell"]
+        }
+      }
     },
     {
       "name": "backgrounds",
@@ -76,7 +96,11 @@
       "path": "packs/backgrounds",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["background", "feat"]
+        }
+      }
     },
     {
       "name": "classes",
@@ -85,7 +109,11 @@
       "path": "packs/classes",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["class"]
+        }
+      }
     },
     {
       "name": "subclasses",
@@ -94,7 +122,11 @@
       "path": "packs/subclasses",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["subclass"]
+        }
+      }
     },
     {
       "name": "classfeatures",
@@ -103,7 +135,11 @@
       "path": "packs/classfeatures",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["feat", "weapon"]
+        }
+      }
     },
     {
       "name": "races",
@@ -112,7 +148,11 @@
       "path": "packs/races",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["race", "feat"]
+        }
+      }
     },
     {
       "name": "monsterfeatures",
@@ -121,7 +161,11 @@
       "path": "packs/monsterfeatures",
       "type": "Item",
       "private": false,
-      "flags": {}
+      "flags": {
+        "dnd5e": {
+          "types": ["feat", "weapon"]
+        }
+      }
     },
     {
       "name": "rules",
@@ -210,8 +254,6 @@
     }
   ],
   "socket": true,
-  "gridDistance": 5,
-  "gridUnits": "ft",
   "grid": {
     "distance": 5,
     "units": "ft"

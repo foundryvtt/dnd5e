@@ -264,8 +264,6 @@ export default class Award extends DialogMixin(FormApplication) {
         content,
         whisper: whisper ? whisperTargets : []
       };
-      // TODO: Remove when v11 support is dropped.
-      if ( game.release.generation < 12 ) messageData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
       messages.push(messageData);
     }
     if ( messages.length ) cls.createDocuments(messages);
@@ -366,7 +364,7 @@ export default class Award extends DialogMixin(FormApplication) {
       try {
         new Roll(amount);
         if ( label in CONFIG.DND5E.currencies ) currency[label] = amount;
-        else if ( label === "xp" ) xp = amount;
+        else if ( label === "xp" ) xp = Number(amount);
         else if ( part === "each" ) each = true;
         else if ( part === "party" ) party = true;
         else throw new Error();

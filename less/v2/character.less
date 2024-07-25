@@ -11,72 +11,14 @@
   min-height: 700px;
   box-shadow: none;
 
-  &::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    inset: 0;
-    border: var(--dnd5e-border-gold);
+  &.minimized {
+    background: url("../../ui/denim075.png");
     box-shadow: 0 0 20px var(--color-shadow-dark);
-    border-radius: 5px;
   }
 
   .window-resizable-handle {
     bottom: 0;
     right: 1px;
-  }
-
-  /* ---------------------------------- */
-  /*  Outer Window                      */
-  /* ---------------------------------- */
-
-  > header {
-    background: transparent;
-    position: relative;
-    z-index: 1;
-
-    .window-title { visibility: hidden; }
-
-    /* Edit Mode Toggle */
-    > slide-toggle {
-      --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
-      --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray);
-      flex: none;
-
-      .slide-toggle-thumb {
-        line-height: 12px;
-
-        &::before {
-          content: "\f0ad";
-          font-family: var(--font-awesome);
-          color: var(--dnd5e-color-light-gray);
-          font-weight: bold;
-          font-size: var(--font-size-9);
-        }
-      }
-
-      &[checked] .slide-toggle-thumb::before {
-        color: var(--dnd5e-color-gold);
-      }
-    }
-  }
-
-  .window-content { margin-top: -30px; }
-
-  /* ---------------------------------- */
-  /*  Minimized                         */
-  /* ---------------------------------- */
-
-  &.minimized {
-    background: url("../../ui/denim075.png");
-    border: unset;
-
-    > header {
-      align-items: center;
-      .header-button, .document-id-link { margin-top: 0; }
-      .window-title { visibility: visible; }
-    }
-    nav.tabs { display: none; }
   }
 
   /* ---------------------------------- */
@@ -92,17 +34,6 @@
     grid-template-columns: 1fr var(--dnd5e-sheet-header-right-width);
     align-items: center;
 
-    input {
-      background: rgb(0 0 0 / 45%);
-      border: 1px solid transparent;
-      transition: all 250ms ease;
-
-      &:hover, &:focus {
-        border: 1px solid var(--dnd5e-color-gold);
-        box-shadow: 0 0 6px var(--dnd5e-color-gold);
-      }
-    }
-
     /* Name */
     .document-name {
       color: var(--color-text-light-0);
@@ -113,7 +44,7 @@
       letter-spacing: 2px;
       padding: 0;
       margin: 0;
-      transition: font-size 250ms ease;
+      transition: all 250ms ease;
     }
 
     /* Name & Class */
@@ -155,17 +86,11 @@
       position: relative;
 
       /* Level */
-      .level {
+      .level-badge {
         width: var(--level-size);
         height: var(--level-size);
-        background: transparent url("ui/level-badge.webp") no-repeat center / contain;
-        font-family: var(--dnd5e-font-roboto);
-        font-weight: bold;
-        color: var(--color-text-light-0);
-        display: grid;
-        place-content: center;
+        background-image: url("ui/level-badge.webp");
         margin-left: auto;
-        font-size: var(--font-size-30);
       }
 
       /* Inspiration */
@@ -217,9 +142,6 @@
 
         /* Resting & Special Traits */
         .sheet-header-buttons {
-          display: flex;
-          align-items: center;
-          gap: .5rem;
           position: absolute;
           top: 1.5625rem;
         }
@@ -254,57 +176,6 @@
             display: block;
           }
         }
-      }
-    }
-  }
-
-  /* ---------------------------------- */
-  /*  Navigation                        */
-  /* ---------------------------------- */
-
-  nav.tabs {
-    --tab-full-width: 44px;
-    --tab-inactive-width: 34px;
-    position: absolute;
-    left: 100%;
-    top: calc(var(--dnd5e-sheet-header-height) + 1rem);
-    display: flex;
-    flex-direction: column;
-    gap: .25rem;
-    z-index: -1;
-
-    > .item {
-      width: var(--tab-full-width);
-      height: 40px;
-      position: relative;
-      display: flex;
-      justify-content: end;
-      align-items: center;
-      padding-right: 12px;
-      background: var(--dnd5e-color-black);
-      color: var(--dnd5e-color-gold);
-      --icon-fill: var(--dnd5e-color-gold);
-      border: 1px solid transparent;
-      border-radius: 0 8px 8px 0;
-      font-size: var(--font-size-14);
-      margin-left: calc((var(--tab-full-width) - var(--tab-inactive-width)) * -1);
-      transition: all 250ms ease;
-
-      &.active, &:hover {
-        text-shadow: none;
-        margin: 0;
-        border-color: var(--dnd5e-color-gold);
-        box-shadow: 0 0 6px var(--dnd5e-color-gold);
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        inset: 4px 4px 4px 0;
-        border-radius: 0 5px 5px 0;
-        border: 1px solid var(--dnd5e-color-gold);
-        border-left: none;
-        pointer-events: none;
       }
     }
   }
@@ -459,7 +330,6 @@
           padding-bottom: .5rem;
           border-radius: 0 0 3px 3px;
 
-          /* AC & Exhaustion */
           .top {
             display: flex;
             align-items: start;
@@ -471,26 +341,6 @@
               content: "\f54c";
               font-family: var(--font-awesome);
               font-size: var(--font-size-11);
-            }
-
-            /* AC */
-            .ac {
-              width: 68px;
-              height: 68px;
-              text-align: center;
-              line-height: 62px;
-              background: transparent url("ui/ac-badge.webp") no-repeat center / contain;
-              color: var(--color-text-light-0);
-              font-size: var(--font-size-23);
-              font-family: var(--dnd5e-font-roboto);
-              font-weight: bold;
-              margin-top: -21px;
-              filter: drop-shadow(0 0 6px var(--color-shadow-dark));
-
-              .config-button {
-                color: inherit;
-                font-size: inherit;
-              }
             }
           }
 
@@ -563,65 +413,6 @@
             justify-content: space-between;
 
             > .config-button { color: var(--dnd5e-color-gold); }
-          }
-        }
-
-        .meter {
-          &.hit-points {
-            height: 32px;
-            font-size: var(--font-size-16);
-
-            .progress::before {
-              background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%);
-              border-right: var(--border-width) solid var(--dnd5e-color-hp-3);
-              border-radius: 4px 0 0 4px;
-            }
-            .temp-positive .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, blue 25%); }
-            .temp-negative .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, red 25%); }
-          }
-
-          &.hit-dice {
-            height: 25px;
-            font-size: var(--font-size-14);
-
-            &.progress::before {
-              background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%);
-              border-right: var(--border-width) solid var(--dnd5e-color-hd-3);
-            }
-          }
-
-          &.sectioned {
-            input {
-              width: 100%;
-              height: 100%;
-              text-align: center;
-              border: none;
-              font-weight: bold;
-              background: none;
-              color: var(--color-text-light-0);
-
-              &:hover, &:focus { box-shadow: 0 0 8px var(--dnd5e-color-gold); }
-            }
-
-            > div { height: 100%; }
-
-            > .hit-points {
-              flex: 1;
-              position: relative;
-              display: flex;
-              align-items: center;
-              cursor: pointer;
-
-              > input { position: relative; }
-            }
-
-            > .tmp {
-              flex: none;
-              width: 50px;
-              border-left: 1px dashed var(--dnd5e-color-gold);
-
-              > input { color: var(--dnd5e-color-blue); }
-            }
           }
         }
 
@@ -835,8 +626,6 @@
         grid-template-columns: var(--skills-col-width) 1fr;
         gap: .75rem;
 
-        &.tab:not(.active) { display: none; }
-
         > .left, .right {
           display: flex;
           flex-direction: column;
@@ -849,8 +638,9 @@
         }
       }
 
-      .tab:not(.details) {
-        padding-inline: .5rem;
+      .tab:not(.details) { padding-inline: .5rem; }
+
+      .tab:not(.details, .biography) {
         // enough room that the "create new" button doesn't overlap when scrolled all the way down
         padding-bottom: calc(1.5rem + 30px);
       }
@@ -1038,19 +828,7 @@
         > h3 > a { color: var(--dnd5e-color-black); }
       }
 
-      .pill {
-        padding: .25rem .5rem;
-
-        > i {
-          font-family: var(--font-awesome);
-          font-weight: bold;
-          font-style: normal;
-
-          &.ada::before { content: "\f132"; }
-          &.mgc::before { content: "\f72b"; }
-          &.sil::before { content: "\53"; }
-        }
-      }
+      .pill { padding: .25rem .5rem; }
     }
   }
 
@@ -1150,7 +928,7 @@
         text-align: center;
         font-size: var(--font-size-13);
         color: var(--dnd5e-color-gold);
-        background: black;
+        background: var(--dnd5e-color-black);
         border-radius: 3px;
         margin-top: -2px;
 
@@ -1206,105 +984,6 @@
   form:not(.tab-details) .ability-scores { display: none; }
 
   /* ---------------------------------- */
-  /*  Child Creation                     */
-  /* ---------------------------------- */
-
-  .create-child {
-    display: none;
-    position: absolute;
-    inset: auto 1rem 1rem auto;
-  }
-
-  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects) .create-child { display: block; }
-
-  /* ---------------------------------- */
-  /*  Classes                           */
-  /* ---------------------------------- */
-
-  .tab.features.active {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .tab.features .classes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: .5rem;
-
-    .class {
-      width: 240px;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      padding-right: .75rem;
-
-      .icons, .name-stacked, .level { position: relative; }
-
-      .icons {
-        display: flex;
-        justify-content: center;
-        gap: .375rem;
-
-        img {
-          cursor: pointer;
-          &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
-        }
-
-        > .controls {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          gap: .375rem;
-
-          > .item-control {
-            color: var(--dnd5e-color-red);
-            align-items: start;
-            width: 32px;
-            height: 32px;
-            position: relative;
-            left: 2px;
-            bottom: 2px;
-          }
-        }
-      }
-
-      .name-stacked { flex: 1; }
-
-      .level {
-        > span, > select {
-          font-family: var(--dnd5e-font-roboto-slab);
-          font-size: var(--font-size-20);
-          font-weight: bold;
-        }
-
-        > span {
-          text-shadow: 0 0 12px var(--dnd5e-shadow-15);
-          color: var(--dnd5e-color-gold);
-        }
-
-        > select {
-          width: 55px;
-          text-align: center;
-          padding: 0;
-          height: unset;
-          border: none;
-          background: none;
-
-          option {
-            font-family: var(--dnd5e-font-roboto);
-            font-size: var(--font-size-13);
-          }
-        }
-      }
-    }
-
-    &.editing { padding-right: .5rem; }
-    .pill-lg.empty { width: 240px; }
-  }
-
-  /* ---------------------------------- */
   /*  Spells                            */
   /* ---------------------------------- */
 
@@ -1320,17 +999,7 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    > .card {
-      width: 230px;
-
-      .header {
-        background: linear-gradient(to right, var(--dnd5e-color-sc-1), var(--dnd5e-color-sc-2));
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-right: .5rem;
-      }
-    }
+    .card.spellcasting { width: 230px; }
   }
 
   .spells-list .items-header .item-name { cursor: pointer; }
@@ -1449,43 +1118,6 @@
         }
       }
     }
-
-    textarea {
-      font-family: var(--dnd5e-font-roboto);
-      font-size: var(--font-size-12);
-      padding: .375rem;
-      height: 60px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
-      background: var(--dnd5e-background-5);
-
-      &::-webkit-scrollbar-track {
-        box-shadow: none;
-        border-radius: 0;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        border: none;
-        background: var(--dnd5e-color-scrollbar);
-      }
-    }
-
-    .prosemirror menu {
-      .pm-dropdown {
-        background: none;
-        &:hover { background: var(--color-hover-bg); }
-      }
-
-      button {
-        display: unset;
-        text-transform: unset;
-        box-shadow: none;
-        font-family: var(--font-primary);
-        font-size: var(--font-size-14);
-        font-weight: normal;
-        line-height: 28px;
-      }
-    }
   }
 
   /* ---------------------------------- */
@@ -1543,7 +1175,7 @@
     }
 
     .tab.biography > .bottom {
-      padding: .5rem .5rem 1.5rem;
+      padding: .5rem;
       .editor { min-height: unset; }
     }
 
@@ -1561,14 +1193,6 @@
     :is(.skills, .tools, .saves) {
       > ul > li { gap: .25rem; }
     }
-  }
-
-  /* ---------------------------------- */
-  /*  Locked                            */
-  /* ---------------------------------- */
-
-  form.locked {
-    .sheet-body .sidebar .card .meter.sectioned > .hit-points { cursor: default; }
   }
 
   /* ---------------------------------- */

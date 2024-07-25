@@ -33,10 +33,10 @@
             <ul class="summary flexrow">
                 <li class="race">
                     {{#if system.details.race.name}}
-                        <span data-tooltip="DND5E.Race">{{system.details.race.name}}</span>
+                        <span data-tooltip="DND5E.Species">{{system.details.race.name}}</span>
                     {{else}}
                         <input type="text" name="system.details.race" value="{{system.details.race}}"
-                               placeholder="{{ localize 'DND5E.Race' }}">
+                               placeholder="{{ localize 'DND5E.Species' }}">
                     {{/if}}
                 </li>
                 <li class="background">

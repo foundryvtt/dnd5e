@@ -36,6 +36,7 @@ export default class SpellData extends ItemDataModel.mixin(
         required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
       }),
       school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
+      sourceClass: new foundry.data.fields.StringField({label: "DND5E.SpellSourceClass"}),
       properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
         label: "DND5E.SpellComponents"
       }),
@@ -60,6 +61,32 @@ export default class SpellData extends ItemDataModel.mixin(
         formula: new FormulaField({required: true, nullable: true, initial: null, label: "DND5E.ScalingFormula"})
       }, {label: "DND5E.LevelScaling"})
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["level", {
+        label: "DND5E.Level",
+        type: "range",
+        config: {
+          keyPath: "system.level",
+          min: 0,
+          max: Object.keys(CONFIG.DND5E.spellLevels).length - 1
+        }
+      }],
+      ["school", {
+        label: "DND5E.School",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.spellSchools,
+          keyPath: "system.school"
+        }
+      }],
+      ["properties", this.compendiumBrowserPropertiesFilter("spell")]
+    ]);
   }
 
   /* -------------------------------------------- */
@@ -156,7 +183,9 @@ export default class SpellData extends ItemDataModel.mixin(
 
   /** @inheritdoc */
   get _typeAbilityMod() {
-    return this.parent?.actor?.system.attributes.spellcasting || "int";
+    return this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+      ?? this.parent?.actor?.system.attributes?.spellcasting
+      ?? "int";
   }
 
   /* -------------------------------------------- */

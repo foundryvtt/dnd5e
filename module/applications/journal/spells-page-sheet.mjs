@@ -59,9 +59,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 
     context.title = Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1]));
 
-    context.description = await TextEditor.enrichHTML(context.system.description.value, {
-      async: true, relativeTo: this
-    });
+    context.description = await TextEditor.enrichHTML(context.system.description.value, { relativeTo: this });
     if ( context.description === "<p></p>" ) context.description = "";
 
     context.GROUPING_MODES = this.constructor.GROUPING_MODES;

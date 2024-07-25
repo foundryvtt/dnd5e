@@ -17,7 +17,7 @@ export default class Combat5e extends Combat {
     const previous = this.combatant;
     await super.nextTurn();
     if ( previous && (previous !== this.combatant) ) previous.refreshDynamicRing();
-    this.combatant.refreshDynamicRing();
+    this.combatant?.refreshDynamicRing();
     return this;
   }
 
@@ -28,7 +28,7 @@ export default class Combat5e extends Combat {
     const previous = this.combatant;
     await super.previousTurn();
     if ( previous && (previous !== this.combatant) ) previous.refreshDynamicRing();
-    this.combatant.refreshDynamicRing();
+    this.combatant?.refreshDynamicRing();
     return this;
   }
 

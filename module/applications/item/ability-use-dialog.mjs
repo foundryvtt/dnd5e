@@ -1,5 +1,4 @@
 import { EnchantmentData } from "../../data/item/fields/enchantment-field.mjs";
-import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 
 /**
  * A specialized Dialog subclass for ability usage.
@@ -58,10 +57,16 @@ export default class AbilityUseDialog extends Dialog {
     const concentrationOptions = this._createConcentrationOptions(item);
     const resourceOptions = this._createResourceOptions(item);
 
+    const slotOptions = this._createSpellSlotOptions(item.actor, item.system.level);
+    if ( (item.type === "spell") && (item.system.level > 0) ) {
+      const slot = slotOptions.find(s => s.key === config.slotLevel) ?? slotOptions.find(s => s.canCast);
+      if ( slot ) item = item.clone({ "system.level": slot.level });
+    }
+
     const data = {
       item,
       ...config,
-      slotOptions: config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [],
+      slotOptions: config.consumeSpellSlot ? slotOptions : [],
       enchantmentOptions: this._createEnchantmentOptions(item),
       summoningOptions: this._createSummoningOptions(item),
       resourceOptions: resourceOptions,
@@ -141,6 +146,8 @@ export default class AbilityUseDialog extends Dialog {
    * @private
    */
   static _createSpellSlotOptions(actor, level) {
+    if ( !actor.system.spells ) return [];
+
     // Determine the levels which are feasible
     let lmax = 0;
     const options = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length).reduce((arr, i) => {
@@ -204,25 +211,22 @@ export default class AbilityUseDialog extends Dialog {
   static _createSummoningOptions(item) {
     const summons = item.system.summons;
     if ( !summons?.profiles.length ) return null;
-    const options = {};
+    const options = { mode: summons.mode };
     const rollData = item.getRollData();
     const level = summons.relevantLevel;
     options.profiles = Object.fromEntries(
       summons.profiles
         .map(profile => {
-          const doc = profile.uuid ? fromUuidSync(profile.uuid) : null;
+          if ( !summons.mode && !fromUuidSync(profile.uuid) ) return null;
           const withinRange = ((profile.level.min ?? -Infinity) <= level) && (level <= (profile.level.max ?? Infinity));
-          if ( !doc || !withinRange ) return null;
-          let label = profile.name ? profile.name : (doc?.name ?? "—");
-          let count = simplifyRollFormula(Roll.replaceFormulaData(profile.count ?? "1", rollData));
-          if ( Number.isNumeric(count) ) {
-            count = parseInt(count);
-            if ( count > 1 ) label = `${count} x ${label}`;
-          } else if ( count ) label = `${count} x ${label}`;
-          return [profile._id, label];
+          if ( !withinRange ) return null;
+          return [profile._id, summons.getProfileLabel(profile, rollData)];
         })
         .filter(f => f)
     );
+    if ( Object.values(options.profiles).every(p => p.startsWith("1 × ")) ) {
+      Object.entries(options.profiles).forEach(([k, v]) => options.profiles[k] = v.replace("1 × ", ""));
+    }
     if ( Object.values(options.profiles).length <= 1 ) {
       options.profile = Object.keys(options.profiles)[0];
       options.profiles = null;
@@ -470,8 +474,8 @@ export default class AbilityUseDialog extends Dialog {
    * @param {Event} event  Triggering change event.
    */
   _onChangeSlotLevel(event) {
-    const level = parseInt(event.target.value.replace("spell", ""));
-    const item = this.item.clone({ "system.level": level });
+    const level = this.item.actor?.system.spells?.[event.target.value]?.level;
+    const item = this.item.clone({ "system.level": level ?? this.item.system.level });
     this._updateProfilesInput(
       "enchantmentProfile", "DND5E.Enchantment.Label", this.constructor._createEnchantmentOptions(item)
     );

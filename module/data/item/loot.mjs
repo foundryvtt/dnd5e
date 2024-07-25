@@ -35,6 +35,24 @@ export default class LootData extends ItemDataModel.mixin(
   }, {inplace: false}));
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["type", {
+        label: "DND5E.ItemLootType",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.lootTypes,
+          keyPath: "system.type.value"
+        }
+      }],
+      ...this.compendiumBrowserPhysicalItemFilters,
+      ["properties", this.compendiumBrowserPropertiesFilter("loot")]
+    ]);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -55,7 +73,7 @@ export default class LootData extends ItemDataModel.mixin(
   get chatProperties() {
     return [
       this.type.label,
-      this.weight ? `${this.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null,
+      this.weight ? `${this.weight.value} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null,
       this.priceLabel
     ];
   }

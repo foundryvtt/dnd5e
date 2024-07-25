@@ -57,4 +57,28 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   get validProperties() {
     return new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Create the properties filter configuration for a type.
+   * @param {string} type  Item type.
+   * @returns {CompendiumBrowserFilterDefinitionEntry}
+   */
+  static compendiumBrowserPropertiesFilter(type) {
+    return {
+      label: "DND5E.Properties",
+      type: "set",
+      config: {
+        choices: Object.entries(CONFIG.DND5E.itemProperties).reduce((obj, [k, v]) => {
+          if ( CONFIG.DND5E.validProperties[type]?.has(k) ) obj[k] = v;
+          return obj;
+        }, {}),
+        keyPath: "system.properties",
+        multiple: true
+      }
+    };
+  }
 }
