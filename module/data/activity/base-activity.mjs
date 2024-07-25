@@ -1,4 +1,4 @@
-import FormulaField from "../fields.mjs";
+import { FormulaField } from "../fields.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, FilePathField, NumberField, SchemaField, StringField
