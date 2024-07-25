@@ -73,7 +73,6 @@ Hooks.once("init", function() {
   CONFIG.Dice.BasicRoll = dice.BasicRoll;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
   CONFIG.Dice.D20Roll = dice.D20Roll;
-  CONFIG.Dice.Roll5e = dice.Roll5e;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.Note.objectClass = canvas.Note5e;
   CONFIG.ui.combat = applications.combat.CombatTracker5e;

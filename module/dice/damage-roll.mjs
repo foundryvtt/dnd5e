@@ -1,3 +1,5 @@
+import BasicRoll from "./basic-roll.mjs";
+
 const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, StringTerm } = foundry.dice.terms;
 
 /**
@@ -41,8 +43,6 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
  * @property {string} [powerfulCritical]  Maximize result of extra dice added by critical, rather than rolling.
  */
 
-import { Roll5e } from "../dice/_module.mjs";
-
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
  * @param {string} formula                       The string formula to parse
@@ -54,7 +54,7 @@ import { Roll5e } from "../dice/_module.mjs";
  * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
  * @param {string} [options.criticalBonusDamage]      An extra damage term that is applied only on a critical hit
  */
-export default class DamageRoll extends Roll5e {
+export default class DamageRoll extends Roll {
   constructor(formula, data, options) {
     super(formula, data, options);
     if ( !this.options.preprocessed ) this.preprocessFormula();
@@ -175,8 +175,13 @@ export default class DamageRoll extends Roll5e {
 
           // Powerful critical - maximize damage and reduce the multiplier by 1
           if ( this.options.powerfulCritical ) {
-            const MaxRoll = new Roll5e(term.formula, this.data, term.options);
-            let bonus = MaxRoll.evaluateSync({ maximize: true })?.total ?? 0;
+            const bonus = BasicRoll.create({
+              parts: [term.formula],
+              data: this.data,
+              situational: false,
+              options: this.options
+            }).evaluateSync({ maximize: true })
+              .total ?? 0;
             if ( bonus > 0 ) {
               const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
               flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);

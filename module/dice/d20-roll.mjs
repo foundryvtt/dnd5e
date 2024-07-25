@@ -29,8 +29,6 @@ const { Die, NumericTerm, OperatorTerm } = foundry.dice.terms;
  * @property {number} minimum          Minimum number the d20 die can roll.
  */
 
-import { Roll5e } from "../dice/_module.mjs";
-
 /**
  * A type of Roll specific to a d20-based check, save, or attack roll in the 5e system.
  * @param {string} formula                       The string formula to parse
@@ -46,7 +44,7 @@ import { Roll5e } from "../dice/_module.mjs";
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
  */
-export default class D20Roll extends Roll5e {
+export default class D20Roll extends Roll {
   constructor(formula, data, options) {
     super(formula, data, options);
     if ( !this.options.configured ) this.configureModifiers();
