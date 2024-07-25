@@ -2013,7 +2013,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config && (foundry.utils.getType(config) !== "Object") ) {
       foundry.utils.logCompatibilityWarning(
         "Actor5e.rollHitDie now takes roll, dialog, and message config objects as parameters.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
       oldFormat = true;
       formula = dialog.formula;
@@ -2091,7 +2091,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.preRollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollHitDie` hook has been deprecated and replaced with `dnd5e.preRollHitDieV2`.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
       const hookData = {
         formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
@@ -2134,7 +2134,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.rollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.rollHitDie` hook has been deprecated and replaced with `dnd5e.rollHitDieV2`.",
-        { since: "DnD5e 3.1", until: "DnD5e 3.3" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
       if ( Hooks.call("dnd5e.rollHitDie", this, rolls[0], updates) === false ) return;
     }
