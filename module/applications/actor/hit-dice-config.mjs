@@ -81,7 +81,7 @@ export default class ActorHitDiceConfig extends BaseConfigSheet {
   async _onRollHitDie(event) {
     event.preventDefault();
     const button = event.currentTarget;
-    await this.object.rollHitDie(button.dataset.hdDenom);
+    await this.object.rollHitDie({ denomination: button.dataset.hdDenom });
 
     // Re-render dialog to reflect changed hit dice quantities
     this.render();

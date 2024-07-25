@@ -74,6 +74,7 @@ Hooks.once("init", function() {
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
+  CONFIG.Dice.BasicRoll = dice.BasicRoll;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
@@ -98,8 +99,7 @@ Hooks.once("init", function() {
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
   // Register Roll Extensions
-  CONFIG.Dice.rolls.push(dice.D20Roll);
-  CONFIG.Dice.rolls.push(dice.DamageRoll);
+  CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
 
   // Hook up system data types
   CONFIG.Actor.dataModels = dataModels.actor.config;
