@@ -258,14 +258,14 @@ export default Base => class extends Base {
   /**
    * Spawn a dialog for creating a new Activity.
    * @param {object} [data]  Data to pre-populate the Activity with.
-   * @param {object} [context]
-   * @param {Item5e} [context.parent]        A parent for the Activity.
+   * @param {object} context
+   * @param {Item5e} context.parent        A parent for the Activity.
    * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
    * @returns {Promise<Item5e|null>}
    */
-  static async createDialog(data={}, { parent=null, types=null, ...options }={}) {
+  static async createDialog(data={}, { parent, types=null, ...options }={}) {
     types ??= Object.keys(this.documentConfig);
-    if ( !types.length ) return null;
+    if ( !types.length || !parent ) return null;
 
     const label = game.i18n.localize(`DOCUMENT.DND5E.${this.documentName}`);
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
@@ -275,11 +275,11 @@ export default Base => class extends Base {
     const content = await renderTemplate("systems/dnd5e/templates/apps/document-create.hbs", {
       name, type,
       types: types.reduce((arr, type) => {
-        const label = this.documentConfig[type]?.metadata?.title;
+        const label = this.documentConfig[type]?.documentClass?.metadata?.title;
         arr.push({
           type,
           label: game.i18n.has(label) ? game.i18n.localize(label) : type,
-          icon: this.documentConfig[type]?.metadata?.img
+          icon: this.documentConfig[type]?.documentClass?.metadata?.img
         });
         return arr;
       }, []).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
@@ -305,7 +305,7 @@ export default Base => class extends Base {
         const fd = new FormDataExtended(form);
         const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
         if ( !createData.name?.trim() ) delete createData.name;
-        return this.create(createData, { parent, renderSheet: true });
+        parent[`create${this.documentName}`](createData.type, createData);
       },
       rejectClose: false,
       options: { ...options, jQuery: false, width: 350, classes: ["dnd5e2", "create-document", "dialog"] }

@@ -263,9 +263,6 @@
   "flags": {
     "needsMigrationVersion": "3.1.0",
     "compatibleMigrationVersion": "0.8",
-    "documentTypes": {
-      "Activity": ["utility"]
-    },
     "hotReload": {
       "extensions": ["css", "hbs", "json"],
       "paths": ["dnd5e.css", "templates", "lang"]

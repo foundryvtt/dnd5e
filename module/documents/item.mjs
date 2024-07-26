@@ -514,9 +514,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
     if ( !this.actor || this.actor._embeddedPreparation ) this.applyActiveEffects();
-    for ( const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {}) ) {
-      for ( const e of this.getEmbeddedCollection(collectionName) ) e.prepareData?.();
-    }
   }
 
   /* -------------------------------------------- */
@@ -2315,7 +2312,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     const createData = foundry.utils.deepClone(data);
     const activity = new cls({ type, ...data }, { parent: this });
-    if ( activity._preCreate?.(createData) === false ) return;
+    if ( activity._preCreate(createData) === false ) return;
 
     await this.update({ [`system.activities.${activity.id}`]: activity.toObject() });
     const created = this.system.activities.get(activity.id);
