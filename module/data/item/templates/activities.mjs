@@ -42,7 +42,13 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} source  Candidate source data to migrate.
    */
   static #migrateUses(source) {
-    if ( foundry.utils.getType(source.uses.recovery) !== "string" ) return;
+    const charged = source.recharge?.charged;
+    if ( charged !== undefined ) {
+      source.uses ??= {};
+      source.uses.spent = charged ? 0 : 1;
+    }
+
+    if ( foundry.utils.getType(source.uses?.recovery) !== "string" ) return;
 
     // If period is charges, set the recovery type to `formula`
     if ( source.uses.per === "charges" ) {
@@ -57,15 +63,18 @@ export default class ActivitiesTemplate extends SystemDataModel {
     // Otherwise, check to see if recharge is set
     else if ( source.recharge?.value ) {
       source.uses.recovery = [{ period: "recharge", formula: source.recharge.value }];
-      source.uses.max = 1;
-      source.uses.spent = source.recharge.charged ? 0 : 1;
-      return;
     }
+  }
 
-    else return;
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
 
-    if ( ("value" in source) && Number.isNumeric(source.uses.max) ) {
-      source.uses.spent = Number(source.uses.max) - source.uses.value;
-    }
+  /**
+   * Prepare final data for the activities & uses.
+   * @param {object} rollData
+   */
+  prepareFinalActivityData(rollData) {
+    UsesField.prepareData.call(this, rollData);
   }
 }

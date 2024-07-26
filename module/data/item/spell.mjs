@@ -141,6 +141,7 @@ export default class SpellData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalActivatedEffectData();
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
   }
 
   /* -------------------------------------------- */

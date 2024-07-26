@@ -109,6 +109,7 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareFinalData() {
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
     this.prepareFinalEquippableData();
   }
 

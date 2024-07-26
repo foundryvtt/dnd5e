@@ -25,10 +25,6 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {number} range.value           Regular targeting distance for item's effect.
  * @property {number} range.long            Maximum targeting distance for features that have a separate long range.
  * @property {string} range.units           Units used for value and long as defined in `DND5E.distanceUnits`.
- * @property {object} uses                  Effect's limited uses.
- * @property {number} uses.value            Current available uses.
- * @property {string} uses.max              Maximum possible uses or a formula to derive that number.
- * @property {string} uses.per              Recharge time for limited uses as defined in `DND5E.limitedUsePeriods`.
  * @property {object} consume               Effect's resource consumption.
  * @property {string} consume.type          Type of resource to consume as defined in `DND5E.abilityConsumptionTypes`.
  * @property {string} consume.target        Item ID or resource key path of resource to consume.
@@ -64,7 +60,6 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
         long: new NumberField({required: true, min: 0, label: "DND5E.RangeLong"}),
         units: new StringField({required: true, blank: true, label: "DND5E.RangeUnits"})
       }, {label: "DND5E.Range"}),
-      uses: new this.ItemUsesField({}, {label: "DND5E.LimitedUses"}),
       consume: new SchemaField({
         type: new StringField({required: true, blank: true, label: "DND5E.ConsumeType"}),
         target: new StringField({

@@ -63,7 +63,6 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.documentClass = documents.Actor5e;
-  documents.activity.setupConfiguration();
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;

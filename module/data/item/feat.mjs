@@ -7,7 +7,7 @@ import ItemTypeTemplate from "./templates/item-type.mjs";
 import { EnchantmentData } from "./fields/enchantment-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
-const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Feature items.
@@ -42,13 +42,7 @@ export default class FeatData extends ItemDataModel.mixin(
       properties: new SetField(new StringField(), {
         label: "DND5E.ItemFeatureProperties"
       }),
-      requirements: new StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
-      recharge: new SchemaField({
-        value: new NumberField({
-          required: true, integer: true, min: 1, label: "DND5E.FeatureRechargeOn"
-        }),
-        charged: new BooleanField({required: true, label: "DND5E.Charged"})
-      }, {label: "DND5E.FeatureActionRecharge"})
+      requirements: new StringField({required: true, nullable: true, label: "DND5E.Requirements"})
     });
   }
 
@@ -100,6 +94,30 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalActivatedEffectData();
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
+
+    const uses = this.uses;
+    this.recharge ??= {};
+    Object.defineProperty(this.recharge, "value", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "Recharge data has been merged into uses data. Recharge state can now be determined by checking whether"
+          + " `system.uses.period` is `recharge` and the recharge value can be found at `system.uses.formula`.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        );
+        return uses.period === "recharge" ? Number(uses.formula) : null;
+      }
+    });
+    Object.defineProperty(this.recharge, "charged", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "Recharge data has been merged into uses data. Determining charged state can now be done by determining"
+          + " whether `system.uses.value` is greater than `0`.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        );
+        return uses.value > 0;
+      }
+    });
   }
 
   /* -------------------------------------------- */

@@ -1,5 +1,6 @@
 import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
+import UsesField from "../shared/uses-field.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
@@ -38,9 +39,9 @@ export default class ConsumableData extends ItemDataModel.mixin(
       type: new ItemTypeField({value: "potion", baseItem: false}, {label: "DND5E.ItemConsumableType"}),
       magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
       properties: new SetField(new StringField(), { label: "DND5E.ItemAmmoProperties" }),
-      uses: new ActivatedEffectTemplate.ItemUsesField({
+      uses: new UsesField({
         autoDestroy: new BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
-      }, {label: "DND5E.LimitedUses"})
+      })
     });
   }
 
@@ -115,6 +116,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalActivatedEffectData();
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
     this.prepareFinalEquippableData();
   }
 

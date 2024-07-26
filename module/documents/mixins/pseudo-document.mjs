@@ -1,5 +1,5 @@
 /**
- * A mixin which extends a DataModel to provide a CRUD-layer similar to normal Documents.
+ * A mixin which extends a DataModel to provide behavior shared between activities & advancements.
  * @param {typeof DataModel} Base  The base DataModel to be mixed.
  * @returns {typeof PseudoDocument}
  * @mixin
@@ -45,15 +45,12 @@ export default Base => class extends Base {
    *
    * @typedef {object} PseudoDocumentsMetadata
    * @property {string} name        Base type name of this PseudoDocument (e.g. "Activity", "Advancement").
-   * @property {string} collection  Location of the collection of pseudo documents within system data.
    */
 
   /**
    * Configuration information for PseudoDocuments.
    * @type {PseudoDocumentsMetadata}
    */
-  static metadata = Object.freeze({});
-
   get metadata() {
     return this.constructor.metadata;
   }
@@ -61,15 +58,15 @@ export default Base => class extends Base {
   /* -------------------------------------------- */
 
   /**
-   * The named collection to which this PseudoDocument belongs.
-   * @type {string}
+   * Configuration object that defines types.
+   * @type {object}
    */
-  static get collectionName() {
-    return this.metadata.collection;
+  static get documentConfig() {
+    return CONFIG.DND5E[`${this.documentName.toLowerCase()}Types`];
   }
 
-  get collectionName() {
-    return this.constructor.collectionName;
+  get documentConfig() {
+    return this.constructor.documentConfig;
   }
 
   /* -------------------------------------------- */
@@ -190,141 +187,14 @@ export default Base => class extends Base {
   /* -------------------------------------------- */
 
   /**
-   * Remove unnecessary keys from the context before passing it through to the update.
-   * @param {DocumentModificationContext} context
-   * @returns {DocumentModificationContext}
-   * @internal
-   */
-  static _clearedDocumentModificationContext(context) {
-    context = foundry.utils.deepClone(context);
-    delete context.parent;
-    delete context.pack;
-    delete context.keepId;
-    delete context.keepEmbeddedIds;
-    delete context.renderSheet;
-    return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Validate that a PseudoDocument can be created.
-   * @param {object} data                               Data for creating a single PseudoDocument.
-   * @param {DocumentModificationContext} [context={}]  Additional context which customizes the creation workflow.
-   * @throws
-   */
-  static _validateDocumentCreation(data, context) {}
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create multiple PseudoDocuments using provided input data.
-   * Data is provided as an array of objects where each individual object becomes one new PseudoDocument.
-   * See Foundry's Document#createDocuments documentation for more information.
-   *
-   * @param {object[]} data                             An array of data objects to create multiple PseudoDocuments.
-   * @param {DocumentModificationContext} [context={}]  Additional context which customizes the creation workflow.
-   * @returns {Promise<PseudoDocument[]>}               An array of created PseudoDocuments instances.
-   */
-  static async createDocuments(data=[], context={}) {
-    if ( !context.parent ) throw new Error("Cannot create pseudo documents without a parent.");
-
-    const updates = data.reduce((updates, data) => {
-      if ( !context.keepId || !data._id ) data._id = foundry.utils.randomID();
-      const cls = CONFIG[this.documentName].documentClasses[data.type];
-      const createData = foundry.utils.deepClone(data);
-      const created = new cls(data, { parent: context.parent });
-      if ( created._preCreate?.(createData) !== false ) {
-        updates[data._id] = created.toObject();
-        this._validateDocumentCreation(data, context);
-      }
-      return updates;
-    }, {});
-
-    await context.parent.update(
-      { [`system.${this.collectionName}`]: updates },
-      this._clearedDocumentModificationContext(context)
-    );
-    const documents = Object.keys(updates).map(id => context.parent.getEmbeddedDocument(this.documentName, id));
-    if ( context.renderSheet ) documents.forEach(d => d.sheet.render(true));
-    return documents;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Update multiple PseudoDocuments instances using provided differential data.
-   * Data is provided as an array of objects where each individual object updates one existing PseudoDocuments.
-   * See Foundry's Document#updateDocuments documentation for more information.
-   *
-   * @param {object[]} updates                          An array of differential data objects, each used to update
-   *                                                    a single PseudoDocuments.
-   * @param {DocumentModificationContext} [context={}]  Additional context which customizes the update workflow.
-   * @returns {Promise<PseudoDocument[]>}               An array of updated PseudoDocuments instances.
-   */
-  static async updateDocuments(updates=[], context={}) {
-    if ( !context.parent ) throw new Error("Cannot update pseudo documents without a parent.");
-
-    updates = updates.reduce((updates, data) => {
-      if ( !data._id ) throw new Error("ID must be provided when updating an pseudo document");
-      const cls = CONFIG[this.documentName].documentClasses[
-        data.type ?? context.parent.getEmbeddedDocument(this.documentName, data._id)?.type
-      ];
-      const removals = Object.entries(foundry.utils.flattenObject(data)).reduce((obj, [k, v]) => {
-        if ( k.includes("-=") ) obj[k] = v;
-        return obj;
-      }, {});
-      updates[data._id] = foundry.utils.mergeObject(
-        cls?.cleanData(foundry.utils.expandObject(data), { partial: true }) ?? data,
-        removals
-      );
-      return updates;
-    }, {});
-
-    await context.parent.update(
-      { [`system.${this.collectionName}`]: updates },
-      this._clearedDocumentModificationContext(context)
-    );
-    return Object.keys(updates).map(id => context.parent.getEmbeddedDocument(this.documentName, id));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Delete one or multiple existing Documents using an array of provided ids.
-   * Data is provided as an array of string ids for the PseudoDocuments to delete.
-   * See Foundry's Document#deleteDocuments documentation for more information.
-   *
-   * @param {string[]} ids                              An array of string ids for the PseudoDocuments to be deleted.
-   * @param {DocumentModificationContext} [context={}]  Additional context which customizes the deletion workflow.
-   * @returns {Promise<PseudoDocument[]>}               An array of deleted PseudoDocument instances.
-   */
-  static async deleteDocuments(ids, context={}) {
-    if ( !context.parent ) throw new Error("Cannot delete pseudo documents without a parent.");
-
-    const { updates, documents } = ids.reduce(({ updates, documents }, id) => {
-      documents.push(context.parent.getEmbeddedDocument(this.documentName, id));
-      updates[`system.${this.collectionName}.-=${id}`] = null;
-      return { updates, documents };
-    }, { updates: {}, documents: [] }
-    );
-
-    await context.parent.update(updates, this._clearedDocumentModificationContext(context));
-    return documents;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Update this PseudoDocument.
-   * @param {object} [data={}]                          Updates to apply to this PseudoDocument.
-   * @param {DocumentModificationContext} [context={}]  Additional context which customizes the update workflow.
-   * @returns {Promise<PseudoDocument>}                 This PseudoDocument after updates have been applied.
+   * @param {string} id                  ID of the PseudoDocument to update.
+   * @param {object} updates             Updates to apply to this PseudoDocument.
+   * @param {object} [options={}]        Additional context which customizes the update workflow.
+   * @returns {Promise<PseudoDocument>}  This PseudoDocument after updates have been applied.
    */
-  async update(data={}, context={}) {
-    const updated = await this.item.updateEmbeddedDocuments(this.documentName, [{ ...data, _id: this.id }], context);
-    if ( context.render !== false ) this.render();
-    return updated.shift();
+  async update(id, updates, options={}) {
+    return await this.item[`update${this.documentName}`](this.id, updates, options);
   }
 
   /* -------------------------------------------- */
@@ -343,12 +213,11 @@ export default Base => class extends Base {
 
   /**
    * Delete this PseudoDocument, removing it from the database.
-   * @param {DocumentModificationContext} [context={}]  Additional context which customizes the deletion workflow.
-   * @returns {Promise<PseudoDocument>}                 The deleted PseudoDocument instance.
+   * @param {object} [options={}]        Additional context which customizes the deletion workflow.
+   * @returns {Promise<PseudoDocument>}  The deleted PseudoDocument instance.
    */
-  async delete(context={}) {
-    const deleted = await this.item.deleteEmbeddedDocuments(this.documentName, [this.id], context);
-    return deleted.shift();
+  async delete(options={}) {
+    return await this.item[`delete${this.documentName}`](this.id, options);
   }
 
   /* -------------------------------------------- */
@@ -378,7 +247,7 @@ export default Base => class extends Base {
    */
   toDragData() {
     const dragData = { type: this.documentName, data: this.toObject() };
-    if (this.id) dragData.uuid = this.uuid;
+    if ( this.id ) dragData.uuid = this.uuid;
     return dragData;
   }
 
@@ -395,22 +264,22 @@ export default Base => class extends Base {
    * @returns {Promise<Item5e|null>}
    */
   static async createDialog(data={}, { parent=null, types=null, ...options }={}) {
-    types ??= CONFIG[this.documentName].documentTypes;
+    types ??= Object.keys(this.documentConfig);
     if ( !types.length ) return null;
 
     const label = game.i18n.localize(`DOCUMENT.DND5E.${this.documentName}`);
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
-    let type = data.type || CONFIG[this.documentName].defaultType;
+    let type = data.type;
 
     if ( !types.includes(type) ) type = types[0];
     const content = await renderTemplate("systems/dnd5e/templates/apps/document-create.hbs", {
       name, type,
       types: types.reduce((arr, type) => {
-        const label = CONFIG[this.documentName].documentClasses[type]?.metadata?.title;
+        const label = this.documentConfig[type]?.metadata?.title;
         arr.push({
           type,
           label: game.i18n.has(label) ? game.i18n.localize(label) : type,
-          icon: CONFIG[this.documentName].documentClasses[type]?.metadata?.img
+          icon: this.documentConfig[type]?.metadata?.img
         });
         return arr;
       }, []).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
@@ -459,9 +328,8 @@ export default Base => class extends Base {
    */
   toAnchor({ attrs={}, dataset={}, classes=[], name, icon }={}) {
     // Build dataset
-    const documentConfig = CONFIG[this.documentName];
     const documentName = game.i18n.localize(`DOCUMENT.DND5E.${this.documentName}`);
-    let anchorIcon = icon ?? documentConfig.sidebarIcon ?? "fas fa-suitcase";
+    let anchorIcon = icon ?? "fas fa-suitcase";
     dataset = foundry.utils.mergeObject(
       {
         uuid: this.uuid,
