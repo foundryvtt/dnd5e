@@ -20,8 +20,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @type {PseudoDocumentsMetadata}
    */
   static metadata = Object.freeze({
-    name: "Activity",
-    collection: "activities"
+    name: "Activity"
   });
 
   /* -------------------------------------------- */

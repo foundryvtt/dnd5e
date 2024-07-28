@@ -2,17 +2,12 @@ import BaseActivityData from "../activity/base-activity.mjs";
 import MappingField from "./mapping-field.mjs";
 
 /**
- * Field that stories activities on an item.
+ * Field that stores activities on an item.
  */
 export class ActivitiesField extends MappingField {
   constructor(options) {
     super(new ActivityField(), options);
   }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static hierarchical = true;
 
   /* -------------------------------------------- */
 
@@ -59,7 +54,7 @@ export class ActivityField extends foundry.data.fields.ObjectField {
   /** @override */
   initialize(value, model, options = {}) {
     const cls = this.getModel(value);
-    if (cls) return new cls(value, { parent: model, ...options });
+    if ( cls ) return new cls(value, { parent: model, ...options });
     return foundry.utils.deepClone(value);
   }
 
@@ -79,7 +74,7 @@ export class ActivityField extends foundry.data.fields.ObjectField {
 /* -------------------------------------------- */
 
 /**
- * Specialized collection type for storied activities.
+ * Specialized collection type for stored activities.
  * @param {DataModel} model                   The parent DataModel to which this ActivityCollection belongs.
  * @param {Record<string, Activity>} entries  Object containing the activities to store.
  */
@@ -90,9 +85,6 @@ export class ActivityCollection extends Collection {
     for ( const [id, entry] of Object.entries(entries) ) {
       if ( !(entry instanceof BaseActivityData) ) continue;
       this.set(id, entry);
-      if ( !this.#types.has(entry.type) ) this.#types.set(entry.type, []);
-      this.#types[entry.type] ??= [];
-      this.#types.get(entry.type).push(entry);
     }
   }
 
@@ -129,12 +121,31 @@ export class ActivityCollection extends Collection {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  set(key, value) {
+    if ( !this.#types.has(value.type) ) this.#types.set(value.type, []);
+    const values = this.#types.get(value.type);
+    if ( !values.find(v => v._id === value._id) ) values.push(value);
+    return super.set(key, value);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  delete(key) {
+    const type = this.get(key)?.type;
+    if ( type && this.#types.get(type) ) this.#types.get(type).findSplice(v => v._id === key);
+    return super.delete(key);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Convert the ActivityCollection to an array of simple objects.
    * @param {boolean} [source=true]  Draw data for contained Documents from the underlying data source?
    * @returns {object[]}             The extracted array of primitive objects.
    */
-  toObject(source = true) {
+  toObject(source=true) {
     return this.map(doc => doc.toObject(source));
   }
 }

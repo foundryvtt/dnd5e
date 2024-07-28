@@ -5,8 +5,8 @@
  * @mixin
  */
 export default Base => class extends Base {
-  constructor(data, { parent = null, ...options } = {}) {
-    if (parent instanceof Item) parent = parent.system;
+  constructor(data, { parent=null, ...options }={}) {
+    if ( parent instanceof Item ) parent = parent.system;
     super(data, { parent, ...options });
   }
 
@@ -142,7 +142,7 @@ export default Base => class extends Base {
    * @type {ApplicationV2|null}
    */
   get sheet() {
-    // TODO: Implement when pseudo document sheet registration is set up
+    // TODO: Implement when sheet applications are implemented
   }
 
   /* -------------------------------------------- */
@@ -188,12 +188,11 @@ export default Base => class extends Base {
 
   /**
    * Update this PseudoDocument.
-   * @param {string} id                  ID of the PseudoDocument to update.
    * @param {object} updates             Updates to apply to this PseudoDocument.
    * @param {object} [options={}]        Additional context which customizes the update workflow.
    * @returns {Promise<PseudoDocument>}  This PseudoDocument after updates have been applied.
    */
-  async update(id, updates, options={}) {
+  async update(updates, options={}) {
     return await this.item[`update${this.documentName}`](this.id, updates, options);
   }
 
