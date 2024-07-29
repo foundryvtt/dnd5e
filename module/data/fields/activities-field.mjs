@@ -102,7 +102,7 @@ export class ActivityCollection extends Collection {
 
   /**
    * Pre-organized arrays of activities by type.
-   * @type {Map<string, Activity[]>}
+   * @type {Map<string, Set<string>>}
    */
   #types = new Map();
 
@@ -116,16 +116,15 @@ export class ActivityCollection extends Collection {
    * @returns {Activity[]}
    */
   getByType(type) {
-    return this.#types.get(type) ?? [];
+    return Array.from(this.#types.get(type) ?? []).map(key => this.get(key));
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   set(key, value) {
-    if ( !this.#types.has(value.type) ) this.#types.set(value.type, []);
-    const values = this.#types.get(value.type);
-    if ( !values.find(v => v._id === value._id) ) values.push(value);
+    if ( !this.#types.has(value.type) ) this.#types.set(value.type, new Set());
+    this.#types.get(value.type).add(key);
     return super.set(key, value);
   }
 
@@ -133,8 +132,7 @@ export class ActivityCollection extends Collection {
 
   /** @inheritDoc */
   delete(key) {
-    const type = this.get(key)?.type;
-    if ( type && this.#types.get(type) ) this.#types.get(type).findSplice(v => v._id === key);
+    this.#types.get(this.get(key)?.type)?.delete(key);
     return super.delete(key);
   }
 
