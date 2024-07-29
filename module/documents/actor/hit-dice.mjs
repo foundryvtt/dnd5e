@@ -72,6 +72,20 @@ export default class HitDice {
   /* -------------------------------------------- */
 
   /**
+   * The smallest die size of those available.
+   * @type {string}
+   */
+  get smallestAvailable() {
+    const bySize = this.bySize;
+    for ( const faces of Array.from(this.sizes).sort((a, b) => a - b) ) {
+      if ( bySize[`d${faces}`] ) return `d${faces}`;
+    }
+    return "d0";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The smallest die size.
    * @type {number}
    */
@@ -87,6 +101,20 @@ export default class HitDice {
    */
   get largest() {
     return `d${this.largestFace}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The largest die size of those available.
+   * @type {string}
+   */
+  get largestAvailable() {
+    const bySize = this.bySize;
+    for ( const faces of Array.from(this.sizes).sort((a, b) => b - a) ) {
+      if ( bySize[`d${faces}`] ) return `d${faces}`;
+    }
+    return "d0";
   }
 
   /* -------------------------------------------- */
