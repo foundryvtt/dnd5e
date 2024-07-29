@@ -2,6 +2,7 @@ import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -22,6 +23,7 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  * @mixes MountableTemplate
+ * @mixes ActivitiesTemplate
  *
  * @property {number} magicalBonus     Magical bonus added to attack & damage rolls.
  * @property {Set<string>} properties  Weapon's properties.
@@ -29,7 +31,7 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  */
 export default class WeaponData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
-  ActivatedEffectTemplate, ActionTemplate, MountableTemplate
+  ActivatedEffectTemplate, ActionTemplate, MountableTemplate, ActivitiesTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
@@ -78,6 +80,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     WeaponData.#migratePropertiesData(source);
     WeaponData.#migrateProficient(source);
   }
@@ -118,6 +121,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalActivatedEffectData();
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
     this.prepareFinalEquippableData();
   }
 

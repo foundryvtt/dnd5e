@@ -1,1 +1,1 @@
-export {default as BaseActivity} from "./base-activity.mjs";
+export {default as BaseActivityData} from "./base-activity.mjs";

@@ -1,7 +1,9 @@
 import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
+import UsesField from "../shared/uses-field.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -20,6 +22,7 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
  * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
+ * @mixes ActivitiesTemplate
  *
  * @property {number} magicalBonus       Magical bonus added to attack & damage rolls by ammunition.
  * @property {Set<string>} properties    Ammunition properties.
@@ -28,7 +31,7 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
  */
 export default class ConsumableData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
-  ActivatedEffectTemplate, ActionTemplate
+  ActivatedEffectTemplate, ActionTemplate, ActivitiesTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
@@ -36,9 +39,9 @@ export default class ConsumableData extends ItemDataModel.mixin(
       type: new ItemTypeField({value: "potion", baseItem: false}, {label: "DND5E.ItemConsumableType"}),
       magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
       properties: new SetField(new StringField(), { label: "DND5E.ItemAmmoProperties" }),
-      uses: new ActivatedEffectTemplate.ItemUsesField({
+      uses: new UsesField({
         autoDestroy: new BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
-      }, {label: "DND5E.LimitedUses"})
+      })
     });
   }
 
@@ -77,6 +80,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     ConsumableData.#migratePropertiesData(source);
   }
 
@@ -112,6 +116,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalActivatedEffectData();
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
     this.prepareFinalEquippableData();
   }
 

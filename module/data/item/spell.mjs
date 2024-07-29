@@ -3,6 +3,7 @@ import { ItemDataModel } from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
@@ -10,6 +11,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @mixes ItemDescriptionTemplate
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
+ * @mixes ActivitiesTemplate
  *
  * @property {number} level                      Base level of the spell.
  * @property {string} school                     Magical school to which this spell belongs.
@@ -27,7 +29,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {string} scaling.formula            Dice formula used for scaling.
  */
 export default class SpellData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate
+  ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate, ActivitiesTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
@@ -96,6 +98,7 @@ export default class SpellData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     SpellData.#migrateScaling(source);
   }
 
@@ -138,6 +141,7 @@ export default class SpellData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalActivatedEffectData();
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
   }
 
   /* -------------------------------------------- */

@@ -7,6 +7,10 @@
 "ACTOR.TypeVehiclePl": "Vehicles",
 "ACTOR.TypeGroup": "Group",
 
+"DOCUMENT.DND5E": {
+  "Activity": "Activity"
+},
+
 "TYPES.Actor.character": "Player Character",
 "TYPES.Actor.characterPl": "Player Characters",
 "TYPES.Actor.npc": "Non-Player Character",
@@ -259,22 +263,10 @@
           "hint": "Width of a line affected if applicable."
         }
       }
-    },
-    "uses": {
-      "label": "Uses",
-      "max": {
-        "label": "Maximum Uses",
-        "hint": "Formula for the maximum number of uses."
-      },
-      "recovery": {
-        "label": "Use Recovery",
-        "hint": "Recovery profiles for this activity's uses."
-      },
-      "spent": {
-        "label": "Spent Uses",
-        "hint": "Number of uses that have been spent."
-      }
     }
+  },
+  "Utility": {
+    "Title": "Utility"
   }
 },
 
@@ -2055,6 +2047,25 @@
   "Never": "Never",
   "Sr": "Short Rest",
   "SrAbbreviation": "SR"
+},
+"DND5E.USES": {
+  "FIELDS": {
+    "uses": {
+      "label": "Uses",
+      "max": {
+        "label": "Maximum Uses",
+        "hint": "Formula for the maximum number of uses."
+      },
+      "recovery": {
+        "label": "Use Recovery",
+        "hint": "Recovery profiles for this activity's uses."
+      },
+      "spent": {
+        "label": "Spent Uses",
+        "hint": "Number of uses that have been spent."
+      }
+    }
+  }
 },
 "DND5E.Vehicle": "Vehicle",
 "DND5E.VehicleActions": "Actions",

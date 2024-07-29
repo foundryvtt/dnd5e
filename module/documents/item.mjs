@@ -2292,7 +2292,59 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-  /*  Advancements                                */
+  /*  Activities & Advancements                   */
+  /* -------------------------------------------- */
+
+  /**
+   * Create a new activity of the specified type.
+   * @param {string} type                          Type of activity to create.
+   * @param {object} [data]                        Data to use when creating the activity.
+   * @param {object} [options={}]
+   * @param {boolean} [options.renderSheet=true]  Should the sheet be rendered after creation?
+   * @returns {Promise<ActivitySheet|null>}
+   */
+  async createActivity(type, data={}, { renderSheet=true }={}) {
+    if ( !this.system.activities ) return;
+
+    const config = CONFIG.DND5E.activityTypes[type];
+    if ( !config ) throw new Error(`${type} not found in CONFIG.DND5E.activityTypes`);
+    const cls = config.documentClass;
+
+    const createData = foundry.utils.deepClone(data);
+    const activity = new cls({ type, ...data }, { parent: this });
+    if ( activity._preCreate(createData) === false ) return;
+
+    await this.update({ [`system.activities.${activity.id}`]: activity.toObject() });
+    const created = this.system.activities.get(activity.id);
+    if ( renderSheet ) return created.sheet?.render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update an activity belonging to this item.
+   * @param {string} id          ID of the activity to update.
+   * @param {object} updates     Updates to apply to this activity.
+   * @returns {Promise<Item5e>}  This item with the changes applied.
+   */
+  updateActivity(id, updates) {
+    if ( !this.system.activities ) return this;
+    if ( !this.system.activities.has(id) ) throw new Error(`Activity of ID ${id} could not be found to update`);
+    return this.update({ [`system.activities.${id}`]: updates });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove an activity from this item.
+   * @param {string} id          ID of the activity to remove.
+   * @returns {Promise<Item5e>}  This item with the changes applied.
+   */
+  deleteActivity(id) {
+    if ( !this.system.activities ) return this;
+    return this.update({ [`system.activities.-=${id}`]: null });
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -2407,12 +2459,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /** @inheritdoc */
   getEmbeddedDocument(embeddedName, id, options) {
-    if ( embeddedName !== "Advancement" ) return super.getEmbeddedDocument(embeddedName, id, options);
-    const advancement = this.advancement.byId[id];
+    let doc;
+    switch ( embeddedName ) {
+      case "Activity": doc = this.system.activities?.get(id); break;
+      case "Advancement": doc = this.advancement.byId[id]; break;
+      default: return super.getEmbeddedDocument(embeddedName, id, options);
+    }
     if ( options?.strict && (advancement === undefined) ) {
       throw new Error(`The key ${id} does not exist in the ${embeddedName} Collection`);
     }
-    return advancement;
+    return doc;
   }
 
   /* -------------------------------------------- */

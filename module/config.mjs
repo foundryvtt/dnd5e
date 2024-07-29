@@ -1,4 +1,5 @@
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
+import * as activities from "./documents/activity/_module.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 
@@ -3030,6 +3031,21 @@ DND5E.groupTypes = {
   encounter: "DND5E.Group.TypeEncounter"
 };
 preLocalize("groupTypes");
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration information for activity types.
+ *
+ * @typedef {object} ActivityTypeConfiguration
+ * @property {typeof Activity} documentClass  The activity's document class.
+ * @property {boolean} [hidden]               Should this activity type be hidden in the selection dialog?
+ */
+DND5E.activityTypes = {
+  utility: {
+    documentClass: activities.UtilityActivity
+  }
+};
 
 /* -------------------------------------------- */
 
