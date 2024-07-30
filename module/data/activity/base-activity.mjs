@@ -168,4 +168,63 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @protected
    */
   _preCreate(data) {}
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Generate a list of targets for the "Attribute" consumption type.
+   * @this {Activity}
+   * @returns {FormSelectOption[]}
+   */
+  static validAttributeTargets() {
+    // TODO: Fetch valid targets from actor data model
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Generate a list of targets for the "Hit Dice" consumption type.
+   * @this {Activity}
+   * @returns {FormSelectOption[]}
+   */
+  static validHitDiceTargets() {
+    return [
+      { value: "smallest", label: game.i18n.localize("DND5E.ConsumeHitDiceSmallest") },
+      ...CONFIG.DND5E.hitDieTypes.map(d => ({ value: d, label: d })),
+      { value: "largest", label: game.i18n.localize("DND5E.ConsumeHitDiceLargest") }
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Generate a list of targets for the "Item Uses" consumption type.
+   * @this {Activity}
+   * @returns {FormSelectOption[]}
+   */
+  static validItemUsesTargets() {
+    return [
+      { value: "", label: game.i18n.localize("DND5E.Consumption.Type.ItemUses.ThisItem") },
+      ...(this.actor?.items ?? [])
+        .filter(i => i.system.uses?.max && i !== this.item)
+        .map(i => ({ value: i.id, label: i.name }))
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Generate a list of targets for the "Spell Slots" consumption type.
+   * @this {Activity}
+   * @returns {FormSelectOption[]}
+   */
+  static validSpellSlotsTargets() {
+    return Object.entries(CONFIG.DND5E.spellLevels).reduce((arr, [value, label]) => {
+      if ( value !== "0" ) arr.push({ value, label });
+      return arr;
+    }, []);
+  }
 }

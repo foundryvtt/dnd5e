@@ -221,7 +221,7 @@ export default class ActivitySheet extends Application5e {
         ] : null,
         showTargets: "validTargets" in typeConfig,
         targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.Consumption.Target.ThisItem") : null,
-        validTargets: showTextTarget ? null : typeConfig.validTargets?.(this.activity)
+        validTargets: showTextTarget ? null : typeConfig.validTargets?.call(this.activity)
       };
     });
 

@@ -1,3 +1,4 @@
+import BaseActivityData from "./data/activity/base-activity.mjs";
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
@@ -600,7 +601,7 @@ DND5E.activityActivationTypes = {
   },
   crew: {
     label: "DND5E.VehicleCrewAction",
-    group: "DND5E.Activation.Category.Monster",
+    group: "DND5E.Activation.Category.Vehicle",
     scalar: true
   },
   special: {
@@ -636,8 +637,8 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 
 /**
  * @callback ConsumptionValidTargetsFunction
- * @param {Activity} activity  Activity to which the consumption belongs.
- * @returns {{value: string, label: string}[]}
+ * @this {Activity}
+ * @returns {FormSelectOption[]}
  */
 
 /**
@@ -651,33 +652,21 @@ DND5E.activityConsumptionTypes = {
   itemUses: {
     label: "DND5E.Consumption.Type.ItemUses.Label",
     targetRequiresEmbedded: true,
-    validTargets: activity => [
-      { value: "", label: game.i18n.localize("DND5E.Consumption.Type.ItemUses.ThisItem") },
-      ...(activity.actor?.items ?? [])
-        .filter(i => i.system.uses?.max && i !== activity.item)
-        .map(i => ({ value: i.id, label: i.name }))
-    ]
+    validTargets: BaseActivityData.validItemUsesTargets
   },
   hitDice: {
     label: "DND5E.Consumption.Type.HitDice.Label",
-    validTargets: activity => [
-      { value: "smallest", label: game.i18n.localize("DND5E.ConsumeHitDiceSmallest") },
-      ...DND5E.hitDieTypes.map(d => ({ value: d, label: d })),
-      { value: "largest", label: game.i18n.localize("DND5E.ConsumeHitDiceLargest") }
-    ]
+    validTargets: BaseActivityData.validHitDiceTargets
   },
   spellSlots: {
     label: "DND5E.Consumption.Type.SpellSlots.Label",
     scalingModes: [{ value: "level", label: "DND5E.Consumption.Scaling.SlotLevel" }],
-    validTargets: activity => Object.entries(CONFIG.DND5E.spellLevels).reduce((arr, [value, label]) => {
-      if ( value !== "0" ) arr.push({ value, label });
-      return arr;
-    }, [])
+    validTargets: BaseActivityData.validSpellSlotsTargets
   },
   attribute: {
     label: "DND5E.Consumption.Type.Attribute.Label",
-    targetRequiresEmbedded: true
-    // TODO: Fetch valid targets from actor data model
+    targetRequiresEmbedded: true,
+    validTargets: BaseActivityData.validAttributeTargets
   }
 };
 preLocalize("activityConsumptionTypes", { key: "label" });
@@ -1966,6 +1955,9 @@ preLocalize("individualTargetTypes");
  * @property {string} label        Localized label for this type.
  * @property {string} template     Type of `MeasuredTemplate` create for this target type.
  * @property {string} [reference]  Reference to a rule page describing this area of effect.
+ * @property {string[]} [sizes]    List of available sizes for this template. Options are chosen from the list:
+ *                                 "radius", "width", "height", "length", "thickness". No more than 3 dimensions may
+ *                                 be specified.
  */
 
 /**
