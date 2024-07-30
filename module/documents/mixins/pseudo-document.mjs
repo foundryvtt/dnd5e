@@ -142,7 +142,12 @@ export default Base => class extends Base {
    * @type {ApplicationV2|null}
    */
   get sheet() {
-    // TODO: Implement when sheet applications are implemented
+    const cls = this.constructor.metadata.sheetClass ?? this.constructor.metadata.apps?.config;
+    if ( !cls ) return null;
+    if ( !this.constructor._sheets.has(this.uuid) ) {
+      this.constructor._sheets.set(this.uuid, new cls({ document: this }));
+    }
+    return this.constructor._sheets.get(this.uuid);
   }
 
   /* -------------------------------------------- */
@@ -151,11 +156,10 @@ export default Base => class extends Base {
 
   /**
    * Render all of the Application instances which are connected to this PseudoDocument.
-   * @param {boolean} [force=false]  Force rendering
-   * @param {object} [context={}]    Optional context
+   * @param {RenderOptions} [options]  Rendering options.
    */
-  render(force=false, context={}) {
-    for ( const app of this.constructor._apps.get(this.uuid) ?? [] ) app.render(force, context);
+  render(options) {
+    for ( const app of this.constructor._apps.get(this.uuid) ?? [] ) app.render(options);
   }
 
   /* -------------------------------------------- */
@@ -193,7 +197,9 @@ export default Base => class extends Base {
    * @returns {Promise<PseudoDocument>}  This PseudoDocument after updates have been applied.
    */
   async update(updates, options={}) {
-    return await this.item[`update${this.documentName}`](this.id, updates, options);
+    const result = await this.item[`update${this.documentName}`](this.id, updates, options);
+    this.render();
+    return result;
   }
 
   /* -------------------------------------------- */

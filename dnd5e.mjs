@@ -390,7 +390,10 @@ function expandAttributeList(attributes) {
 /**
  * Perform one-time pre-localization and sorting of some configuration objects
  */
-Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
+Hooks.once("i18nInit", () => {
+  utils.performPreLocalization(CONFIG.DND5E);
+  Localization.localizeDataModel(dnd5e.documents.activity.UtilityActivity);
+});
 
 /* -------------------------------------------- */
 /*  Foundry VTT Ready                           */

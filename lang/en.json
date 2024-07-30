@@ -146,7 +146,18 @@
 "DND5E.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}",
 "DND5E.ActionWarningNoToken": "You must have one or more controlled Tokens in order to use this option.",
 
+"DND5E.Activation": {
+  "Category": {
+    "Standard": "Standard",
+    "Time": "Time",
+    "Monster": "Monster",
+    "Vehicle": "Vehicle"
+  }
+},
+
 "DND5E.ACTIVITY": {
+  "Label": "Activity",
+  "LabelPl": "Activities",
   "FIELDS": {
     "activation": {
       "label": "Activation",
@@ -195,6 +206,12 @@
         "label": "Duration Value",
         "hint": "Value of the duration in the specified units, if applicable."
       }
+    },
+    "img": {
+      "label": "Icon"
+    },
+    "name": {
+      "label": "Name"
     },
     "range": {
       "label": "Range",
@@ -264,6 +281,12 @@
         }
       }
     }
+  },
+  "SECTIONS": {
+    "Activation": "Activation",
+    "Effect": "Effect",
+    "Identity": "Identity",
+    "Time": "Time"
   },
   "Utility": {
     "Title": "Utility"
@@ -447,7 +470,17 @@
 "DND5E.AttunementAttuned": "Attuned",
 "DND5E.AttunementOverride": "Override attunement",
 "DND5E.Attuned": "Attuned",
-"DND5E.AreaOfEffect": "Area of Effect",
+"DND5E.AreaOfEffect": {
+  "Label": "Area of EFfect",
+  "Size": {
+    "Label": "Size",
+    "Height": "Height",
+    "Length": "Length",
+    "Radius": "Radius",
+    "Thickness": "Thickness",
+    "Width": "Width"
+  }
+},
 "DND5E.Armor": "Armor",
 "DND5E.ArmorClass": "Armor Class",
 "DND5E.ArmorClassEquipment": "Equipped Armor",
@@ -705,6 +738,38 @@
 "DND5E.ConsumableUnitWarn": "units remaining",
 "DND5E.ConsumableLastChargeWarn": "This is the last charge of this unit and consuming it will also reduce the item's quantity by 1",
 "DND5E.ConsumableWithoutCharges": "available units to use",
+"DND5E.Consumption": {
+  "Action": {
+    "Add": "Add Consumption Target",
+    "Delete": "Delete Consumption Target"
+  },
+  "Scaling": {
+    "Amount": "Amount",
+    "Automatic": "Automatic",
+    "None": "No Scaling",
+    "SlotLevel": "Slot Level"
+  },
+  "Target": {
+    "ThisItem": "This Item"
+  },
+  "Type": {
+    "ActivityUses": {
+      "Label": "Activity Uses"
+    },
+    "Attribute": {
+      "Label": "Attribute"
+    },
+    "HitDice": {
+      "Label": "Hit Dice"
+    },
+    "ItemUses": {
+      "Label": "Item Uses"
+    },
+    "SpellSlots": {
+      "Label": "Spell Slots"
+    }
+  }
+},
 "DND5E.Consumed": "Consumed",
 "DND5E.Cover": "Cover",
 "DND5E.CoverHalf": "Half",
@@ -1908,6 +1973,7 @@
 "DND5E.TargetCube": "Cube",
 "DND5E.TargetCylinder": "Cylinder",
 "DND5E.TargetEnemy": "Enemy",
+"DND5E.TargetEvery": "Every",
 "DND5E.TargetLine": "Line",
 "DND5E.TargetObject": "Object",
 "DND5E.TargetRadius": "Radius",
@@ -2064,6 +2130,17 @@
         "label": "Spent Uses",
         "hint": "Number of uses that have been spent."
       }
+    }
+  },
+  "Recovery": {
+    "Action": {
+      "Add": "Add Recovery Profile",
+      "Delete": "Delete Recovery Profile"
+    },
+    "Type": {
+      "Formula": "Custom Formula",
+      "LoseAll": "Lose All Uses",
+      "RecoverAll": "Recover All Uses"
     }
   }
 },

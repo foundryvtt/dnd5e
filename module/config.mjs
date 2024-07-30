@@ -1,3 +1,4 @@
+import BaseActivityData from "./data/activity/base-activity.mjs";
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
@@ -546,6 +547,71 @@ preLocalize("abilityActivationTypes");
 /* -------------------------------------------- */
 
 /**
+ * @typedef {ActivityActivationTypeConfig}
+ * @property {string} label            Localized label for the activation type.
+ * @property {string} [group]          Localized label for the presentational group.
+ * @property {boolean} [scalar=false]  Does this activation type have a numeric value attached?
+ */
+
+/**
+ * Configuration data for activation types on activities.
+ * @enum {ActivityActivationTypeConfig}
+ */
+DND5E.activityActivationTypes = {
+  action: {
+    label: "DND5E.Action",
+    group: "DND5E.Activation.Category.Standard"
+  },
+  bonus: {
+    label: "DND5E.BonusAction",
+    group: "DND5E.Activation.Category.Standard"
+  },
+  reaction: {
+    label: "DND5E.Reaction",
+    group: "DND5E.Activation.Category.Standard"
+  },
+  minute: {
+    label: "DND5E.TimeMinute",
+    group: "DND5E.Activation.Category.Time",
+    scalar: true
+  },
+  hour: {
+    label: "DND5E.TimeHour",
+    group: "DND5E.Activation.Category.Time",
+    scalar: true
+  },
+  day: {
+    label: "DND5E.TimeDay",
+    group: "DND5E.Activation.Category.Time",
+    scalar: true
+  },
+  legendary: {
+    label: "DND5E.LegendaryActionLabel",
+    group: "DND5E.Activation.Category.Monster",
+    scalar: true
+  },
+  mythic: {
+    label: "DND5E.MythicActionLabel",
+    group: "DND5E.Activation.Category.Monster",
+    scalar: true
+  },
+  lair: {
+    label: "DND5E.LairActionLabel",
+    group: "DND5E.Activation.Category.Monster"
+  },
+  crew: {
+    label: "DND5E.VehicleCrewAction",
+    group: "DND5E.Activation.Category.Vehicle",
+    scalar: true
+  },
+  special: {
+    label: "DND5E.Special"
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * Different things that an ability can consume upon use.
  * @enum {string}
  */
@@ -557,6 +623,53 @@ DND5E.abilityConsumptionTypes = {
   charges: "DND5E.ConsumeCharges"
 };
 preLocalize("abilityConsumptionTypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {object} ActivityConsumptionTargetConfig
+ * @property {string} label                                     Localized label for the target type.
+ * @property {{value: string, label: string}[]} [scalingModes]  Additional scaling modes for this consumption type in
+ *                                                              addition to the default "amount" scaling.
+ * @property {boolean} [targetRequiresEmbedded]                 Use text input rather than select when not embedded.
+ * @property {ConsumptionValidTargetsFunction} [validTargets]   Method for creating an array of consumption targets.
+ */
+
+/**
+ * @callback ConsumptionValidTargetsFunction
+ * @this {Activity}
+ * @returns {FormSelectOption[]}
+ */
+
+/**
+ * Configuration information for different consumption targets.
+ * @enum {ActivityConsumptionTargetConfig}
+ */
+DND5E.activityConsumptionTypes = {
+  activityUses: {
+    label: "DND5E.Consumption.Type.ActivityUses.Label"
+  },
+  itemUses: {
+    label: "DND5E.Consumption.Type.ItemUses.Label",
+    targetRequiresEmbedded: true,
+    validTargets: BaseActivityData.validItemUsesTargets
+  },
+  hitDice: {
+    label: "DND5E.Consumption.Type.HitDice.Label",
+    validTargets: BaseActivityData.validHitDiceTargets
+  },
+  spellSlots: {
+    label: "DND5E.Consumption.Type.SpellSlots.Label",
+    scalingModes: [{ value: "level", label: "DND5E.Consumption.Scaling.SlotLevel" }],
+    validTargets: BaseActivityData.validSpellSlotsTargets
+  },
+  attribute: {
+    label: "DND5E.Consumption.Type.Attribute.Label",
+    targetRequiresEmbedded: true,
+    validTargets: BaseActivityData.validAttributeTargets
+  }
+};
+preLocalize("activityConsumptionTypes", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -854,13 +967,13 @@ preLocalize("itemRarity");
  * @enum {LimitedUsePeriodConfiguration}
  */
 DND5E.limitedUsePeriods = {
-  sr: {
-    label: "DND5E.UsesPeriods.Sr",
-    abbreviation: "DND5E.UsesPeriods.SrAbbreviation"
-  },
   lr: {
     label: "DND5E.UsesPeriods.Lr",
     abbreviation: "DND5E.UsesPeriods.LrAbbreviation"
+  },
+  sr: {
+    label: "DND5E.UsesPeriods.Sr",
+    abbreviation: "DND5E.UsesPeriods.SrAbbreviation"
   },
   day: {
     label: "DND5E.UsesPeriods.Day",
@@ -869,7 +982,8 @@ DND5E.limitedUsePeriods = {
   charges: {
     label: "DND5E.UsesPeriods.Charges",
     abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
-    formula: true
+    formula: true,
+    deprecated: true
   },
   dawn: {
     label: "DND5E.UsesPeriods.Dawn",
@@ -1841,6 +1955,9 @@ preLocalize("individualTargetTypes");
  * @property {string} label        Localized label for this type.
  * @property {string} template     Type of `MeasuredTemplate` create for this target type.
  * @property {string} [reference]  Reference to a rule page describing this area of effect.
+ * @property {string[]} [sizes]    List of available sizes for this template. Options are chosen from the list:
+ *                                 "radius", "width", "height", "length", "thickness". No more than 3 dimensions may
+ *                                 be specified.
  */
 
 /**
@@ -1850,40 +1967,48 @@ preLocalize("individualTargetTypes");
 DND5E.areaTargetTypes = {
   radius: {
     label: "DND5E.TargetRadius",
-    template: "circle"
+    template: "circle",
+    sizes: ["radius"]
   },
   sphere: {
     label: "DND5E.TargetSphere",
     template: "circle",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.npdEWb2egUPnB5Fa"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.npdEWb2egUPnB5Fa",
+    sizes: ["radius"]
   },
   cylinder: {
     label: "DND5E.TargetCylinder",
     template: "circle",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jZFp4R7tXsIqkiG3"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jZFp4R7tXsIqkiG3",
+    sizes: ["radius", "height"]
   },
   cone: {
     label: "DND5E.TargetCone",
     template: "cone",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DqqAOr5JnX71OCOw"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DqqAOr5JnX71OCOw",
+    sizes: ["length"]
   },
   square: {
     label: "DND5E.TargetSquare",
-    template: "rect"
+    template: "rect",
+    sizes: ["width"]
   },
   cube: {
     label: "DND5E.TargetCube",
     template: "rect",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.dRfDIwuaHmUQ06uA"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.dRfDIwuaHmUQ06uA",
+    sizes: ["width"]
   },
   line: {
     label: "DND5E.TargetLine",
     template: "ray",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6DOoBgg7okm9gBc6"
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6DOoBgg7okm9gBc6",
+    sizes: ["length", "width"]
   },
   wall: {
     label: "DND5E.TargetWall",
-    template: "ray"
+    template: "ray",
+    sizes: ["length", "thickness", "height"]
   }
 };
 preLocalize("areaTargetTypes", { key: "label", sort: true });
@@ -3144,7 +3269,7 @@ DND5E.ruleTypes = {
     references: "enrichmentLookup.abilities"
   },
   areaOfEffect: {
-    label: "DND5E.AreaOfEffect",
+    label: "DND5E.AreaOfEffect.Label",
     references: "areaTargetTypes"
   },
   condition: {

@@ -1,0 +1,48 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <!-- TODO: (override checkbox) -->
+    <fieldset>
+        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.range.label" }}</legend>
+        {{#if scalar.range}}{{ formField fields.range.fields.value value=source.range.value }}{{/if}}
+        {{ formField fields.range.fields.units value=source.range.units options=rangeUnits }}
+        {{#if activity.range.units}}{{ formField fields.range.fields.special value=source.range.special }}{{/if}}
+    </fieldset>
+
+    {{#with fields.target.fields.affects.fields as |fields|}}
+    <fieldset>
+        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.target.affects.label" }}</legend>
+        {{#if ../scalar.target}}
+        {{ formField fields.count value=../source.target.affects.count placeholder=../affectsPlaceholder }}
+        {{/if}}
+        {{ formField fields.type value=../source.target.affects.type choices=../CONFIG.individualTargetTypes }}
+        {{#if ../activity.target.affects.type}}
+        {{ formField fields.special value=../source.target.affects.special }}
+        {{#if ../activity.target.template.type}}
+        {{ formField fields.choice value=../source.target.affects.choice }}
+        {{/if}}
+        {{/if}}
+    </fieldset>
+    {{/with}}
+
+    {{#with fields.target.fields.template.fields as |fields|}}
+    <fieldset>
+        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.target.template.label" }}</legend>
+        {{#if ../activity.target.template.type}}
+        {{ formField fields.count value=../source.target.template.count }}
+        {{/if}}
+        {{ formField fields.type value=../source.target.template.type choices=../CONFIG.areaTargetTypes }}
+        {{#with ../dimensions}}
+        {{ formField fields.size value=@root.source.target.template.size label=(localize size) hint=false }}
+        {{#if width}}
+        {{ formField fields.width value=@root.source.target.template.width label=(localize width) hint=false }}
+        {{/if}}
+        {{#if height}}
+        {{ formField fields.height value=@root.source.target.template.height label=(localize height) hint=false }}
+        {{/if}}
+        {{ formField fields.units value=@root.source.target.template.units choices=@root.CONFIG.movementUnits }}
+        {{/with}}
+        {{#if (and ../activity.target.template.type (gt ../activity.target.template.count 1))}}
+        {{ formField fields.contiguous value=../source.target.template.contiguous }}
+        {{/if}}
+    </fieldset>
+    {{/with}}
+</section>
