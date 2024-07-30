@@ -106,7 +106,8 @@ export default class FeatData extends ItemDataModel.mixin(
           { since: "DnD5e 4.0", until: "DnD5e 4.4" }
         );
         return uses.period === "recharge" ? Number(uses.formula) : null;
-      }
+      },
+      configurable: true
     });
     Object.defineProperty(this.recharge, "charged", {
       get() {
@@ -116,7 +117,8 @@ export default class FeatData extends ItemDataModel.mixin(
           { since: "DnD5e 4.0", until: "DnD5e 4.4" }
         );
         return uses.value > 0;
-      }
+      },
+      configurable: true
     });
   }
 

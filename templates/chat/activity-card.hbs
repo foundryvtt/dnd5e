@@ -1,0 +1,66 @@
+<div class="dnd5e2 chat-card activation-card">
+    <section class="card-header description collapsible">
+        <header class="summary">
+            <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+            <div class="name-stacked border">
+                <span class="title">{{ item.name }}</span>
+                {{#if subtitle}}
+                <span class="subtitle">{{{ subtitle }}}</span>
+                {{/if}}
+            </div>
+            <i class="fa-solid fa-chevron-down fa-fw" inert></i>
+        </header>
+        <section class="details collapsible-content card-content">
+            <div class="wrapper">{{{ description }}}</div>
+        </section>
+    </section>
+
+    {{#if buttons}}
+    <div class="card-buttons">
+        {{#each buttons}}
+        <button type="button" name="{{ @key }}" {{ dnd5e-dataset dataset }}>{{{ label }}}</button>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{#each supplements}}
+    <p class="supplement">{{{ this }}}</p>
+    {{/each}}
+
+    {{#if properties}}
+    <ul class="card-footer pills unlist">
+        {{#each properties}}
+        <li class="pill transparent">
+            <span class="label">{{ this }}</span>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
+    {{!-- TODO
+    <div class="card-tray effects-tray collapsible collapsed">
+        <label class="roboto-upper">
+            <i class="fas fa-bolt"></i>
+            <span>{{ localize "DND5E.Effects" }}</span>
+            <i class="fas fa-caret-down"></i>
+        </label>
+        <div class="collapsible-content">
+            <ul class="effects unlist wrapper">
+                {{~#each effects~}}
+                <li class="effect" data-effect-id="{{ id }}" data-uuid="{{ uuid }}" data-transferred="{{ transfer }}">
+                    <img class="gold-icon" alt="{{ name }}" src="{{ img }}">
+                    <div class="name-stacked">
+                        <span class="title">{{ name }}</span>
+                        <span class="subtitle">{{ duration.label }}</span>
+                    </div>
+                    <button type="button" class="apply-effect" data-action="applyEffect"
+                            data-tooltip="DND5E.EffectsApplyTokens" aria-label="{{ localize "DND5E.EffectsApplyTokens" }}">
+                        <i class="fas fa-reply-all fa-flip-horizontal"></i>
+                    </button>
+                </li>
+                {{~/each~}}
+            </ul>
+        </div>
+    </div>
+    --}}
+</div>
