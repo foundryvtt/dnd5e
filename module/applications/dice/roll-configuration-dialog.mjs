@@ -197,7 +197,7 @@ export default class RollConfigurationDialog extends Application5e {
   #buildRolls(config, formData) {
     const RollType = this.rollType;
     this.#rolls = config.rolls?.map((config, index) =>
-      RollType.create(this._buildConfig(config, formData, index))
+      RollType.fromConfig(this._buildConfig(config, formData, index))
     ) ?? [];
   }
 

@@ -70,7 +70,7 @@ export default class BasicRoll extends Roll {
    * @param {BasicRollConfiguration} config  Configuration info for the roll.
    * @returns {BasicRoll}
    */
-  static create(config) {
+  static fromConfig(config) {
     const formula = (config.parts ?? []).join(" + ");
     return new this(formula, config.data, config.options);
   }
@@ -88,7 +88,7 @@ export default class BasicRoll extends Roll {
     this.applyKeybindings(config, dialog, message);
 
     let rolls;
-    if ( dialog.configure === false ) rolls = config.rolls?.map(config => this.create(config)) ?? [];
+    if ( dialog.configure === false ) rolls = config.rolls?.map(config => this.fromConfig(config)) ?? [];
     else {
       const DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
       rolls = await DialogClass.configure(config, dialog, message);
