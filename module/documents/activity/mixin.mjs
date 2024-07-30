@@ -24,6 +24,30 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   });
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Is this activity on a spell?
+   * @type {boolean}
+   */
+  get isSpell() {
+    return this.item.type === "spell";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Consumption targets that can be use for this activity.
+   * @type {Set<string>}
+   */
+  get validConsumptionTypes() {
+    const types = new Set(Object.keys(CONFIG.DND5E.activityConsumptionTypes));
+    if ( this.isSpell ) types.delete("spellSlots");
+    return types;
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 

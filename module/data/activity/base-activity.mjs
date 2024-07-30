@@ -90,11 +90,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         required: true,
         readOnly: true
       }),
-      name: new StringField({initial: undefined}),
-      img: new FilePathField({initial: undefined, categories: ["IMAGE"]}),
+      name: new StringField({ initial: undefined }),
+      img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
       activation: new SchemaField({
-        type: new StringField(),
-        value: new NumberField({min: 0, integer: true}),
+        type: new StringField({ initial: "action" }),
+        value: new NumberField({ min: 0, integer: true }),
         condition: new StringField()
       }),
       consumption: new SchemaField({
@@ -116,7 +116,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }),
       duration: new SchemaField({
         value: new FormulaField({ deterministic: true }),
-        units: new StringField(),
+        units: new StringField({ initial: "inst" }),
         special: new StringField()
       }),
       range: new SchemaField({

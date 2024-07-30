@@ -6,7 +6,7 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 export default class Application5e extends HandlebarsApplicationMixin(ApplicationV2) {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["dnd5e"]
+    classes: ["dnd5e2"]
   };
 
   /* -------------------------------------------- */

@@ -1,0 +1,21 @@
+<fieldset class="uses-config">
+    <legend>{{ localize "DND5E.USES.FIELDS.uses.recovery.label" }}</legend>
+    <ul class="unlist">
+        {{#each usesRecovery}}
+        <li data-index="{{ @index }}">
+            {{ formField fields.period name=(concat prefix "period") value=data.period options=periods }}
+            <!-- TODO: Recharge formula -->
+            {{ formField fields.type name=(concat prefix "type") value=data.type options=types }}
+            {{#if (eq source.type "formula")}}
+            {{ formField fields.formula name=(concat prefix "formula") value=data.formula }}
+            {{/if}}
+            <button type="button" class="unbutton" data-action="deleteRecovery">
+                {{ localize "DND5E.USES.Recovery.Action.Delete" }}
+            </button>
+        </li>
+        {{/each}}
+    </ul>
+    <button type="button" class="unbutton" data-action="addRecovery">
+        {{ localize "DND5E.USES.Recovery.Action.Add" }}
+    </button>
+</fieldset>

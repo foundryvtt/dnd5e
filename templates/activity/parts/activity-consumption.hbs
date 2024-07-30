@@ -1,0 +1,44 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.consumption.label" }}</legend>
+        <ul class="unlist">
+            {{#each consumptionTargets}}
+            <li data-index="{{ @index }}">
+                {{ formField fields.type name=(concat prefix "type") value=data.type options=typeOptions }}
+                {{#if showTargets}}
+                {{ formField fields.target name=(concat prefix "target") value=data.target options=validTargets
+                   placeholder=targetPlaceholder }}
+                {{/if}}
+                {{ formField fields.value name=(concat prefix "amount") value=data.value }}
+                {{#if scalingModes}}
+                {{ formField fields.scaling.fields.mode name=(concat prefix "scaling.mode") value=data.scaling.mode
+                   options=scalingModes }}
+                {{#if data.scaling.mode}}
+                {{ formField fields.scaling.fields.formula name=(concat prefix "scaling.formula")
+                   value=data.scaling.formula placeholder=(localize "DND5E.Consumption.Scaling.Automatic") }}
+                {{/if}}
+                {{/if}}
+                <button type="button" class="unbutton" data-action="deleteConsumption">
+                    {{ localize "DND5E.Consumption.Action.Delete" }}
+                </button>
+            </li>
+            {{/each}}
+        </ul>
+        <button type="button" class="unbutton" data-action="addConsumption">
+            {{ localize "DND5E.Consumption.Action.Add" }}
+        </button>
+    </fieldset>
+
+    {{#with fields.consumption.fields.scaling.fields as |fields|}}
+    <fieldset>
+        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.consumption.scaling.label" }}</legend>
+        {{ formField fields.allowed value=../activity.consumption.scaling.allowed }}
+        {{#if ../activity.consumption.scaling.allowed}}
+        {{ formField fields.max value=../activity.consumption.scaling.max placeholder="∞" }}
+        {{/if}}
+    </fieldset>
+    {{/with}}
+
+    {{> "systems/dnd5e/templates/shared/uses-values.hbs" }}
+    {{> "systems/dnd5e/templates/shared/uses-recovery.hbs" }}
+</section>
