@@ -24,8 +24,10 @@ export default class ActivitySheet extends Application5e {
     },
     actions: {
       addConsumption: ActivitySheet.#addConsumption,
+      addEffect: ActivitySheet.#addEffect,
       addRecovery: ActivitySheet.#addRecovery,
       deleteConsumption: ActivitySheet.#deleteConsumption,
+      deleteEffect: ActivitySheet.#deleteEffect,
       deleteRecovery: ActivitySheet.#deleteRecovery
     },
     form: {
@@ -59,7 +61,10 @@ export default class ActivitySheet extends Application5e {
       ]
     },
     effect: {
-      template: "systems/dnd5e/templates/activity/effect.hbs"
+      template: "systems/dnd5e/templates/activity/effect.hbs",
+      templates: [
+        "systems/dnd5e/templates/activity/parts/activity-effects.hbs"
+      ]
     }
   };
 
@@ -277,6 +282,12 @@ export default class ActivitySheet extends Application5e {
    */
   async _prepareEffectContext(context) {
     context.tab = context.tabs.effect;
+
+    const appliedEffects = new Set(context.activity.effects.map(e => e.id));
+    context.allEffects = this.item.effects.map(effect => ({
+      value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
+    }));
+
     return context;
   }
 
@@ -358,7 +369,7 @@ export default class ActivitySheet extends Application5e {
   /** @override */
   _canRender(options) {
     if ( !this.isVisible ) throw new Error(game.i18n.format("SHEETS.DocumentSheetPrivate", {
-      type: game.i18n.localize("DND5E.ACTIVITY.Label")
+      type: game.i18n.localize("DND5E.ACTIVITY.Title.one")
     }));
   }
 
@@ -375,6 +386,15 @@ export default class ActivitySheet extends Application5e {
   /** @override */
   _onClose(_options) {
     this.activity.constructor._unregisterApp(this.activity, this);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _renderFrame(options) {
+    const frame = await super._renderFrame(options);
+    frame.autocomplete = "off";
+    return frame;
   }
 
   /* -------------------------------------------- */
@@ -397,6 +417,25 @@ export default class ActivitySheet extends Application5e {
         { type: filteredTypes.first() ?? types.first() }
       ]
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle creating a new active effect and adding it to the applied effects list.
+   * @this {ActivityConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #addEffect(event, target) {
+    const effectData = {
+      name: this.item.name,
+      icon: this.item.img,
+      origin: this.item.uuid,
+      transfer: false
+    };
+    const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData]);
+    this.activity.update({ effects: [...this.activity.toObject().effects, { id: created.id }] });
   }
 
   /* -------------------------------------------- */
@@ -438,6 +477,23 @@ export default class ActivitySheet extends Application5e {
   /* -------------------------------------------- */
 
   /**
+   * Handle deleting an active effect and removing it from the applied effects list.
+   * @this {ActivityConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #deleteEffect(event, target) {
+    const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
+    const result = await this.item.effects.get(effectId)?.deleteDialog();
+    if ( result !== false ) {
+      const effects = this.activity.toObject().effects.filter(e => e.id !== effectId);
+      this.activity.update({ effects });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle removing an entry from the uses recovery list.
    * @this {ActivityConfig}
    * @param {Event} event         Triggering click event.
@@ -474,6 +530,14 @@ export default class ActivitySheet extends Application5e {
    */
   _prepareSubmitData(event, formData) {
     const submitData = foundry.utils.expandObject(formData.object);
+    if ( foundry.utils.hasProperty(submitData, "appliedEffects") ) {
+      const effects = submitData.effects ?? this.activity.toObject().effects;
+      submitData.effects = effects.filter(e => submitData.appliedEffects.includes(e.id));
+      for ( const id of submitData.appliedEffects ) {
+        if ( submitData.effects.find(e => e.id === id) ) continue;
+        submitData.effects.push({ id });
+      }
+    }
     if ( foundry.utils.hasProperty(submitData, "consumption.targets") ) {
       submitData.consumption.targets = Object.values(submitData.consumption.targets);
     }

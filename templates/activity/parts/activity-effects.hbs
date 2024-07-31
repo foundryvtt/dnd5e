@@ -1,0 +1,20 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ACTIVITY.FIELDS.effects.label" }}</legend>
+    <multi-select name="appliedEffects">
+        {{ selectOptions allEffects }}
+    </multi-select>
+    <ul class="unlist">
+        {{#each activity.effects}}
+        <li data-index="{{ @index }}" data-effect-id="{{ id }}" class="flexrow">
+            <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
+            <span class="name">{{{ dnd5e-linkForUuid effect.uuid }}}</span>
+            <button type="button" class="unbutton" data-action="deleteEffect">
+                {{ localize "DND5E.EFFECT.Action.Delete" }}
+            </button>
+        </li>
+        {{/each}}
+    </ul>
+    <button type="button" class="unbutton" data-action="addEffect">
+        {{ localize "DND5E.EFFECT.Action.Create" }}
+    </button>
+</fieldset>

@@ -156,8 +156,10 @@
 },
 
 "DND5E.ACTIVITY": {
-  "Label": "Activity",
-  "LabelPl": "Activities",
+  "Title": {
+    "one": "Activity",
+    "other": "Activities"
+  },
   "FIELDS": {
     "activation": {
       "label": "Activation",
@@ -206,6 +208,9 @@
         "label": "Duration Value",
         "hint": "Value of the duration in the specified units, if applicable."
       }
+    },
+    "effects": {
+      "label": "Applied Effects"
     },
     "img": {
       "label": "Icon"
@@ -740,7 +745,7 @@
 "DND5E.ConsumableWithoutCharges": "available units to use",
 "DND5E.Consumption": {
   "Action": {
-    "Add": "Add Consumption Target",
+    "Create": "Create Consumption Target",
     "Delete": "Delete Consumption Target"
   },
   "Scaling": {
@@ -943,6 +948,12 @@
 "DND5E.Dusk": "Dusk",
 "DND5E.Effect": "Effect",
 "DND5E.Effects": "Effects",
+"DND5E.EFFECT": {
+  "Action": {
+    "Create": "Create Effect",
+    "Delete": "Delete Effect"
+  }
+},
 "DND5E.EffectsApplyTokens": "Apply to selected tokens",
 "DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
 "DND5E.EffectApplyWarningOwnership": "Effects cannot be applied to tokens you are not the owner of.",
@@ -2137,7 +2148,7 @@
   },
   "Recovery": {
     "Action": {
-      "Add": "Add Recovery Profile",
+      "Create": "Create Recovery Profile",
       "Delete": "Delete Recovery Profile"
     },
     "Recharge": {
