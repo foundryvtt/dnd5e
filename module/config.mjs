@@ -654,6 +654,11 @@ DND5E.activityConsumptionTypes = {
     targetRequiresEmbedded: true,
     validTargets: BaseActivityData.validItemUsesTargets
   },
+  material: {
+    label: "DND5E.Consumption.Type.Material.Label",
+    targetRequiresEmbedded: true,
+    validTargets: BaseActivityData.validMaterialTargets
+  },
   hitDice: {
     label: "DND5E.Consumption.Type.HitDice.Label",
     validTargets: BaseActivityData.validHitDiceTargets

@@ -1,3 +1,4 @@
+import { formatNumber } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
 
@@ -84,7 +85,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
+      _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
       type: new StringField({
         blank: false,
         required: true,
@@ -155,6 +156,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareData() {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
+    UsesField.prepareData.call(this, this.getRollData({ determinstic: true }));
   }
 
   /* -------------------------------------------- */
@@ -179,8 +181,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {FormSelectOption[]}
    */
   static validAttributeTargets() {
-    // TODO: Fetch valid targets from actor data model
-    return [];
+    if ( !this.actor ) return [];
+    return TokenDocument.implementation.getConsumedAttributes(this.actor.type).map(attr => {
+      return { value: attr, label: attr };
+    });
   }
 
   /* -------------------------------------------- */
@@ -206,12 +210,35 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {FormSelectOption[]}
    */
   static validItemUsesTargets() {
+    const makeLabel = (name, item) => {
+      let label;
+      const uses = item.system.uses;
+      if ( uses.max && (uses.recovery?.length === 1) && (uses.recovery[0].type === "recoverAll") ) {
+        const per = CONFIG.DND5E.limitedUsePeriods[uses.recovery[0].period]?.abbreviation;
+        label = game.i18n.format("DND5E.AbilityUseConsumableLabel", { max: uses.max, per });
+      }
+      else if ( uses.value ) label = game.i18n.format("DND5E.AbilityUseChargesLabel", { value: uses.value });
+      return label ? `${name} (${label})` : name;
+    };
     return [
-      { value: "", label: game.i18n.localize("DND5E.Consumption.Type.ItemUses.ThisItem") },
+      { value: "", label: makeLabel(game.i18n.localize("DND5E.Consumption.Target.ThisItem"), this.item) },
       ...(this.actor?.items ?? [])
-        .filter(i => i.system.uses?.max && i !== this.item)
-        .map(i => ({ value: i.id, label: i.name }))
+        .filter(i => i.system.uses?.max && (i !== this.item))
+        .map(i => ({ value: i.id, label: makeLabel(i.name, i) }))
     ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Generate a list of targets for the "Material" consumption type.
+   * @this {Activity}
+   * @returns {FormSelectOption[]}
+   */
+  static validMaterialTargets() {
+    return (this.actor?.items ?? [])
+      .filter(i => ["consumable", "loot"].includes(i.type) && !i.system.activities?.size)
+      .map(i => ({ value: i.id, label: `${i.name} (${formatNumber(i.system.quantity)})` }));
   }
 
   /* -------------------------------------------- */
