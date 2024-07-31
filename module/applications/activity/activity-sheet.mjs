@@ -430,7 +430,7 @@ export default class ActivitySheet extends Application5e {
   static async #addEffect(event, target) {
     const effectData = {
       name: this.item.name,
-      icon: this.item.img,
+      img: this.item.img,
       origin: this.item.uuid,
       transfer: false
     };
@@ -485,7 +485,7 @@ export default class ActivitySheet extends Application5e {
   static async #deleteEffect(event, target) {
     const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
     const result = await this.item.effects.get(effectId)?.deleteDialog();
-    if ( result !== false ) {
+    if ( result instanceof ActiveEffect ) {
       const effects = this.activity.toObject().effects.filter(e => e.id !== effectId);
       this.activity.update({ effects });
     }
