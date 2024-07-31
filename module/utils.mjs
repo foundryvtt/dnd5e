@@ -39,6 +39,20 @@ export function formatNumber(value, options) {
 /* -------------------------------------------- */
 
 /**
+ * A helper for using Intl.NumberFormat within handlebars for format a range.
+ * @param {number} min      The lower end of the range.
+ * @param {number} max      The upper end of the range.
+ * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
+ * @returns {string}
+ */
+export function formatRange(min, max, options) {
+  const formatter = new Intl.NumberFormat(game.i18n.lang, options);
+  return formatter.formatRange(min, max);
+}
+
+/* -------------------------------------------- */
+
+/**
  * A helper function to format textarea text to HTML with linebreaks.
  * @param {string} value  The text to format.
  * @returns {Handlebars.SafeString}

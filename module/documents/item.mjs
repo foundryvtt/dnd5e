@@ -513,6 +513,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
+    for ( const activity of this.system.activities ?? [] ) activity.prepareData();
     if ( !this.actor || this.actor._embeddedPreparation ) this.applyActiveEffects();
   }
 

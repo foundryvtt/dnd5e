@@ -1,3 +1,4 @@
+import { formatNumber, formatRange } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -34,5 +35,19 @@ export default class UsesField extends SchemaField {
   static prepareData(rollData) {
     // TODO: Move maximum uses preparation from `ActivatedEffectTemplate`
     this.uses.value = Math.clamp(this.uses.max - this.uses.spent, 0, this.uses.max);
+
+    for ( const recovery of this.uses.recovery ) {
+      if ( recovery.period === "recharge" ) {
+        recovery.type = "recoverAll";
+        recovery.recharge = {
+          options: Array.fromRange(5, 2).reverse().map(min => ({
+            value: min,
+            label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
+              range: min === 6 ? formatNumber(6) : formatRange(min, 6)
+            })
+          }))
+        };
+      }
+    }
   }
 }

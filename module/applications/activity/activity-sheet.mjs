@@ -231,7 +231,8 @@ export default class ActivitySheet extends Application5e {
         .filter(([, config]) => !config.deprecated)
         .map(([value, config]) => ({
           value, label: config.label, group: game.i18n.localize("DND5E.DurationTime")
-        }))
+        })),
+      { value: "recharge", label: game.i18n.localize("DND5E.USES.Recovery.Recharge.Label") }
     ];
     const usesRecoveryTypes = [
       { value: "recoverAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.RecoverAll") },
@@ -244,7 +245,8 @@ export default class ActivitySheet extends Application5e {
       prefix: `uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
       periods: usesRecoveryPeriods,
-      types: usesRecoveryTypes
+      types: usesRecoveryTypes,
+      formulaOptions: data.period === "recharge" ? data.recharge?.options : null
     }));
 
     // Template dimensions

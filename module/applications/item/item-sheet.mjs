@@ -146,7 +146,6 @@ export default class ItemSheet5e extends ItemSheet {
 
       concealDetails: !game.user.isGM && (this.document.system.identified === false)
     });
-    context.abilityConsumptionTargets = this._getItemConsumptionTargets();
     if ( !item.isEmbedded && foundry.utils.isEmpty(context.abilityConsumptionTargets) ) {
       context.abilityConsumptionHint = (this.item.system.consume?.type === "attribute")
         ? "DND5E.ConsumeHint.Attribute" : "DND5E.ConsumeHint.Item";
@@ -265,77 +264,6 @@ export default class ItemSheet5e extends ItemSheet {
       items[name] = baseItem.name;
     }
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1], game.i18n.lang)));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the valid item consumption targets which exist on the actor
-   * @returns {Object<string>}   An object of potential consumption targets
-   * @private
-   */
-  _getItemConsumptionTargets() {
-    const consume = this.item.system.consume || {};
-    if ( !consume.type ) return [];
-    const actor = this.item.actor;
-    if ( !actor && (consume.type !== "hitDice") ) return {};
-
-    // Ammunition
-    if ( consume.type === "ammo" ) {
-      return actor.itemTypes.consumable.reduce((ammo, i) => {
-        if ( i.system.type.value === "ammo" ) ammo[i.id] = `${i.name} (${i.system.quantity})`;
-        return ammo;
-      }, {});
-    }
-
-    // Attributes
-    else if ( consume.type === "attribute" ) {
-      const attrData = actor.type;
-      return TokenDocument.implementation.getConsumedAttributes(attrData).reduce((obj, attr) => {
-        obj[attr] = attr;
-        return obj;
-      }, {});
-    }
-
-    // Hit Dice
-    else if ( consume.type === "hitDice" ) {
-      return {
-        smallest: game.i18n.localize("DND5E.ConsumeHitDiceSmallest"),
-        ...CONFIG.DND5E.hitDieTypes.reduce((obj, hd) => { obj[hd] = hd; return obj; }, {}),
-        largest: game.i18n.localize("DND5E.ConsumeHitDiceLargest")
-      };
-    }
-
-    // Materials
-    else if ( consume.type === "material" ) {
-      return actor.items.reduce((obj, i) => {
-        if ( ["consumable", "loot"].includes(i.type) && !i.system.activation ) {
-          obj[i.id] = `${i.name} (${i.system.quantity})`;
-        }
-        return obj;
-      }, {});
-    }
-
-    // Charges
-    else if ( consume.type === "charges" ) {
-      return actor.items.reduce((obj, i) => {
-
-        // Limited-use items
-        const uses = i.system.uses || {};
-        if ( uses.per && uses.max ) {
-          const label = CONFIG.DND5E.limitedUsePeriods[uses.per]?.formula
-            ? ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})`
-            : ` (${game.i18n.format("DND5E.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
-          obj[i.id] = i.name + label;
-        }
-
-        // Recharging items
-        const recharge = i.system.recharge || {};
-        if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("DND5E.Recharge")})`;
-        return obj;
-      }, {});
-    }
-    else return {};
   }
 
   /* -------------------------------------------- */
