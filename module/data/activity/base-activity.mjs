@@ -20,6 +20,13 @@ const {
  */
 
 /**
+ * Data for effects that can be applied.
+ *
+ * @typedef {object} EffectApplicationData
+ * @property {string} effect  ID of the effect to apply.
+ */
+
+/**
  * Data for a recovery profile for an activity's uses.
  *
  * @typedef {object} UsesRecoveryData
@@ -48,6 +55,7 @@ const {
  * @property {string} duration.value             Scalar value for the activity's duration.
  * @property {string} duration.units             Units that are used for the duration.
  * @property {string} duration.special           Description of any special duration details.
+ * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
  * @property {object} range
  * @property {string} range.value                Scalar value for the activity's range.
  * @property {string} range.units                Units that are used for the range.
@@ -120,6 +128,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         units: new StringField({ initial: "inst" }),
         special: new StringField()
       }),
+      effects: new ArrayField(new SchemaField({
+        id: new DocumentIdField()
+      })),
       range: new SchemaField({
         value: new FormulaField({ deterministic: true }),
         units: new StringField(),
@@ -156,6 +167,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareData() {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
+    const item = this.item;
+    this.effects.forEach(e => Object.defineProperty(e, "effect", {
+      get() { return item.effects.get(e.id); },
+      configurable: true
+    }));
     UsesField.prepareData.call(this, this.getRollData({ deterministic: true }));
   }
 

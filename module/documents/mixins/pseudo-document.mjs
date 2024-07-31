@@ -159,7 +159,9 @@ export default Base => class extends Base {
    * @param {RenderOptions} [options]  Rendering options.
    */
   render(options) {
-    for ( const app of this.constructor._apps.get(this.uuid) ?? [] ) app.render(options);
+    for ( const app of this.constructor._apps.get(this.uuid) ?? [] ) {
+      app.render({ window: { title: app.title }, ...options });
+    }
   }
 
   /* -------------------------------------------- */
