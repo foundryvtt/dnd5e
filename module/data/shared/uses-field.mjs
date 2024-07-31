@@ -33,7 +33,6 @@ export default class UsesField extends SchemaField {
    * @param {object} rollData
    */
   static prepareData(rollData) {
-    console.log("UsesField#prepareData");
     // TODO: Move maximum uses preparation from `ActivatedEffectTemplate`
     this.uses.value = Math.clamp(this.uses.max - this.uses.spent, 0, this.uses.max);
 

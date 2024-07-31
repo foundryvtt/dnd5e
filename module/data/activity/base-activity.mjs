@@ -156,7 +156,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareData() {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
-    UsesField.prepareData.call(this, this.getRollData({ determinstic: true }));
+    UsesField.prepareData.call(this, this.getRollData({ deterministic: true }));
   }
 
   /* -------------------------------------------- */
@@ -217,8 +217,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         const per = CONFIG.DND5E.limitedUsePeriods[uses.recovery[0].period]?.abbreviation;
         label = game.i18n.format("DND5E.AbilityUseConsumableLabel", { max: uses.max, per });
       }
-      else if ( uses.value ) label = game.i18n.format("DND5E.AbilityUseChargesLabel", { value: uses.value });
-      return label ? `${name} (${label})` : name;
+      else label = game.i18n.format("DND5E.AbilityUseChargesLabel", { value: uses.value });
+      return `${name} (${label})`;
     };
     return [
       { value: "", label: makeLabel(game.i18n.localize("DND5E.Consumption.Target.ThisItem"), this.item) },
