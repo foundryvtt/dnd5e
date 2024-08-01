@@ -40,9 +40,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @type {boolean}
    */
   get canScale() {
-    if ( !this.consumption.scaling.allowed ) return false;
-    if ( !this.isSpell ) return true;
-    return this.requiresSpellSlot;
+    return this.consumption.scaling.allowed || (this.isSpell && this.item.system.level > 0);
   }
 
   /* -------------------------------------------- */
@@ -62,7 +60,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @type {boolean}
    */
   get requiresSpellSlot() {
-    if ( !this.isSpell || !this.actor?.system.spellcasting ) return false;
+    if ( !this.isSpell || !this.actor?.system.spells ) return false;
+    // TODO: Check against specific preparation modes here
     return this.item.system.level > 0;
   }
 
@@ -95,7 +94,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @property {boolean|string[]} consume.resources  Set to `true` or `false` to enable or disable all resource
    *                                                 consumption or provide a list of consumption type keys defined in
    *                                                 `CONFIG.DND5E.activityConsumptionTypes` to only enable those types.
-   * @property {boolean} consume.spellSlot           Should this spell consumes a spell slot?
+   * @property {boolean} consume.spellSlot           Should this spell consume a spell slot?
    * @property {Event} event                         The browser event which triggered the item usage, if any.
    * @property {boolean|number} scaling              Number of steps above baseline to scale this usage, or `false` if
    *                                                 scaling is not allowed.
@@ -109,6 +108,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @typedef {object} ActivityDialogConfiguration
    * @property {boolean} [configure=true]  Display a configuration dialog for the item usage, if applicable?
    * @property {typeof ActivityActivationDialog} [applicationClass]  Alternate activation dialog to use.
+   * @property {object} [options]          Options passed through to the dialog.
    */
 
   /**
@@ -125,11 +125,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * Details of final changes performed by the usage.
    *
    * @typedef {object} ActivityUsageResults
-   * @property {ActiveEffect5e[]} effects                            Active effects that were created or deleted.
-   * @property {ChatMessage5e|ActivityMessageConfiguration} message  The chat message created for the activation,
-   *                                                                 or the message data if create was `false`.
-   * @property {MeasuredTemplateDocument[]} templates                Created measured templates.
-   * @property {ActivityUsageUpdates} updates                        Updates to the actor & items.
+   * @property {ActiveEffect5e[]} effects              Active effects that were created or deleted.
+   * @property {ChatMessage5e|object} message          The chat message created for the activation, or the message data
+   *                                                   if `create` in ActivityMessageConfiguration was `false`.
+   * @property {MeasuredTemplateDocument[]} templates  Created measured templates.
+   * @property {ActivityUsageUpdates} updates          Updates to the actor & items.
    */
 
   /**
@@ -163,8 +163,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       data: {
         flags: {
           dnd5e: {
-            activityType: this.type, activityId: this.id, activityUuid: this.uuid,
-            type: this.item.type, itemId: this.item.id, itemUuid: this.item.uuid
+            activity: { type: this.type, id: this.id, uuid: this.uuid },
+            item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
           }
         }
       }
@@ -184,7 +184,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     if ( "dnd5e.preUseItem" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preUseItem` hook has been deprecated and replaced with `dnd5e.preActivateActivity`.",
+        "The `dnd5e.preUseItem` hook has been deprecated and replaced with `dnd5e.preUseItem`.",
         { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
       const { config, options } = this._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
@@ -289,7 +289,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.consumed", usageConfig.consume);
 
     /**
-     * A hook event that fires after an item's resource consumption is calculated, but before an updates are performed.
+     * A hook event that fires after an item's resource consumption is calculated, but before any updates are performed.
      * @function dnd5e.activityConsumption
      * @memberof hookEvents
      * @param {Activity} activity                           Activity being activated.
@@ -469,7 +469,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       config.concentration.begin ??= true;
       const { effects } = this.actor.concentration;
       const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
-      if ( limit && (limit <= effects.size) ) config.endConcentration = effects.find(e => {
+      if ( limit && (limit <= effects.size) ) config.concentration.end = effects.find(e => {
         const data = e.flags.dnd5e?.itemData ?? {};
         return (data === this.id) || (data._id === this.id);
       })?.id ?? effects.first()?.id ?? null;
@@ -494,6 +494,17 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
+   * Update data produced by activity usage.
+   *
+   * @typedef {object} ActivityUsageUpdates
+   * @property {object} activity  Updates applied to activity that performed the activation.
+   * @property {object} actor     Updates applied to the actor that performed the activation.
+   * @property {string[]} delete  IDs of items to be deleted from the actor.
+   * @property {object[]} item    Updates applied to items on the actor that performed the activation.
+   * @property {Roll[]} rolls     Any rolls performed as part of the activation.
+   */
+
+  /**
    * Calculate changes to actor, items, & this activity based on resource consumption.
    * @param {ActivityUseConfiguration} config  Usage configuration.
    * @returns {ActivityUsageUpdates}
@@ -515,11 +526,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @protected
    */
   _requiresConfigurationDialog(config) {
-    if ( (foundry.utils.getType(config.consume) === "object") && Object.values(config.consume).some(v => v) ) {
-      return true;
-    }
-    if ( config.scaling !== false ) return true;
-    return false;
+    const checkObject = obj => (foundry.utils.getType(obj) === "Object") && Object.values(obj).some(v => v);
+    return config.concentration?.begin === true
+      || checkObject(config.create)
+      || checkObject(config.consume)
+      || (config.scaling !== false);
   }
 
   /* -------------------------------------------- */
@@ -557,7 +568,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /**
    * Display a chat message for this usage.
    * @param {ActivityMessageConfiguration} message  Configuration info for the created message.
-   * @returns {Promise<ChatMessage5e|ActivityMessageConfiguration>}
+   * @returns {Promise<ChatMessage5e|object>}
    * @protected
    */
   async _createUsageMessage(message) {
@@ -583,14 +594,14 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     Hooks.callAll("dnd5e.preCreateUsageMessage", this, messageConfig);
 
     ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
-    const card = messageConfig.create === false ? messageConfig : await ChatMessage.create(messageConfig.data);
+    const card = messageConfig.create === false ? messageConfig.data : await ChatMessage.create(messageConfig.data);
 
     /**
      * A hook event that fires after an activity usage card is created.
      * @function dnd5e.postCreateUsageMessage
      * @memberof hookEvents
-     * @param {Activity} activity                                Activity for which the card was created.
-     * @param {ChatMessage5e|ActivityMessageConfiguration} card  Created card or configuration data if not created.
+     * @param {Activity} activity          Activity for which the card was created.
+     * @param {ChatMessage5e|object} card  Created card or configuration data if not created.
      */
     Hooks.callAll("dnd5e.postCreateUsageMessage", this, card);
 

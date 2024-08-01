@@ -910,7 +910,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       { since: "DnD5e 4.0", until: "DnD5e 4.4" }
     );
     if ( this.system.activities ) {
-      const activity = Array.from(this.system.activities.values())[0];
+      const activity = this.system.activities.contents[0];
       if ( activity ) {
         const usageConfig = {};
         const dialogConfig = {};
@@ -982,7 +982,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       { since: "DnD5e 4.0", until: "DnD5e 4.4" }
     );
     if ( this.system.activities ) {
-      const activity = Array.from(this.system.activities.values())[0];
+      const activity = this.system.activities.contents[0];
       if ( activity ) {
         const usageConfig = {};
         const dialogConfig = {};
