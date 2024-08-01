@@ -86,7 +86,7 @@ export class DamageData extends foundry.abstract.DataModel {
     let formula;
     const number = (this.number ?? 0) + increase;
     if ( number && this.denomination ) formula = `${number}d${this.denomination}`;
-    if ( this.bonus ) formula = formula ? `${formula} + ${bonus}` : bonus;
+    if ( this.bonus ) formula = formula ? `${formula} + ${this.bonus}` : this.bonus;
     return formula ?? "";
   }
 
@@ -104,6 +104,7 @@ export class DamageData extends foundry.abstract.DataModel {
       default: increase = 0; break;
     }
     if ( !increase ) return this.formula;
+    let formula;
 
     // If dice count scaling, increase the count on the first die rolled
     const dieIncrease = (this.scaling.number ?? 0) * increase;
