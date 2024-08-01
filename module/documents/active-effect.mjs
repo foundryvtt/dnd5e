@@ -23,6 +23,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   static FORMULA_FIELDS = new Set([
     "system.attributes.ac.bonus",
+    "system.attributes.ac.min",
     "system.attributes.encumbrance.bonuses.encumbered",
     "system.attributes.encumbrance.bonuses.heavilyEncumbered",
     "system.attributes.encumbrance.bonuses.maximum",
