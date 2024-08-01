@@ -568,8 +568,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Compute total AC and return
+    ac.min = simplifyBonus(ac.min, rollData);
     ac.bonus = simplifyBonus(ac.bonus, rollData);
-    ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
+    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
   }
 
   /* -------------------------------------------- */
