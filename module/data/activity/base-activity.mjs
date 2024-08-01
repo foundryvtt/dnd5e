@@ -74,6 +74,7 @@ const {
  * @property {string} target.affects.type        Type of targets that can be affected (e.g. creatures, objects, spaces).
  * @property {boolean} target.affects.choice     When targeting an area, can the user choose who it affects?
  * @property {string} target.affects.special     Description of special targeting.
+ * @property {boolean} target.prompt             Should the player be prompted to place the template?
  * @property {object} uses
  * @property {number} uses.spent                 Number of uses that have been spent.
  * @property {string} uses.max                   Formula for the maximum number of uses.
@@ -151,7 +152,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
           type: new StringField(),
           choice: new BooleanField(),
           special: new StringField()
-        })
+        }),
+        prompt: new BooleanField({ initial: true })
       }),
       uses: new UsesField()
     };
@@ -168,7 +170,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
     const item = this.item;
-    this.effects.forEach(e => Object.defineProperty(e, "effect", {
+    this.effects?.forEach(e => Object.defineProperty(e, "effect", {
       get() { return item.effects.get(e.id); },
       configurable: true
     }));

@@ -393,6 +393,7 @@ function expandAttributeList(attributes) {
 Hooks.once("i18nInit", () => {
   utils.performPreLocalization(CONFIG.DND5E);
   Localization.localizeDataModel(dnd5e.documents.activity.AttackActivity);
+  Localization.localizeDataModel(dnd5e.documents.activity.SummonActivity);
   Localization.localizeDataModel(dnd5e.documents.activity.UtilityActivity);
 });
 
