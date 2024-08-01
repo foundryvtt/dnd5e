@@ -1612,7 +1612,31 @@ DND5E.currencies = {
 preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
-/*  Damage Types                                */
+/*  Damage                                      */
+/* -------------------------------------------- */
+
+/**
+ * Standard dice spread available for things like damage.
+ * @type {number[]}
+ */
+DND5E.dieSteps = [4, 6, 8, 10, 12, 20, 100];
+
+/* -------------------------------------------- */
+
+/**
+ * Methods by which damage scales relative to the overall scaling increase.
+ * @enum {{ label: string }}
+ */
+DND5E.damageScalingModes = {
+  whole: {
+    label: "DND5E.DAMAGE.Scaling.Whole"
+  },
+  half: {
+    label: "DND5E.DAMAGE.Scaling.Half"
+  }
+};
+preLocalize("damageScalingModes", { key: "label" });
+
 /* -------------------------------------------- */
 
 /**
@@ -2081,6 +2105,43 @@ DND5E.senses = {
   truesight: "DND5E.SenseTruesight"
 };
 preLocalize("senses", { sort: true });
+
+/* -------------------------------------------- */
+/*  Attacks                                     */
+/* -------------------------------------------- */
+
+/**
+ * Classifications of attacks based on what is performing them.
+ * @enum {{ label: string }}
+ */
+DND5E.attackClassifications = {
+  weapon: {
+    label: "DND5E.ATTACK.Classification.Weapon"
+  },
+  spell: {
+    label: "DND5E.ATTACK.Classification.Spell"
+  },
+  unarmed: {
+    label: "DND5E.ATTACK.Classification.Unarmed"
+  }
+};
+preLocalize("attackClassifications", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
+ * Types of attacks based on range.
+ * @enum {{ label: string }}
+ */
+DND5E.attackTypes = Object.seal({
+  melee: {
+    label: "DND5E.ATTACK.Type.Melee"
+  },
+  ranged: {
+    label: "DND5E.ATTACK.Type.Ranged"
+  }
+});
+preLocalize("attackTypes", { key: "label" });
 
 /* -------------------------------------------- */
 /*  Spellcasting                                */
@@ -3172,6 +3233,9 @@ preLocalize("groupTypes");
  * @property {boolean} [hidden]               Should this activity type be hidden in the selection dialog?
  */
 DND5E.activityTypes = {
+  attack: {
+    documentClass: activities.AttackActivity
+  },
   utility: {
     documentClass: activities.UtilityActivity
   }

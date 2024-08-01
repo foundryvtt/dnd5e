@@ -292,9 +292,6 @@
     "Effect": "Effect",
     "Identity": "Identity",
     "Time": "Time"
-  },
-  "Utility": {
-    "Title": "Utility"
   }
 },
 
@@ -506,6 +503,62 @@
 "DND5E.ArmorLightProficiency": "Light",
 "DND5E.ArmorMediumProficiency": "Medium",
 "DND5E.AC": "AC",
+
+"DND5E.ATTACK": {
+  "Title": {
+    "one": "Attack",
+    "other": "Attacks"
+  },
+  "FIELDS": {
+    "ability": {
+      "label": "Attack Ability",
+      "hint": "Ability used for make the attack and determine damage. Available using @mod in formulas."
+    },
+    "attack": {
+      "label": "Attack Details",
+      "bonus": {
+        "label": "To Hit Bonus",
+        "hint": "Bonus added to the to hit roll for the attack."
+      },
+      "flat": {
+        "label": "Flat To Hit",
+        "hint": "Ignore the ability modifier, proficiency, and any other bonuses from the actor and only use the bonus defined by the activity when calculating to hit."
+      },
+      "type": {
+        "label": "Attack Type",
+        "value": {
+          "label": "Attack Type",
+          "hint": "Is this a melee or ranged attack?"
+        },
+        "classification": {
+          "label": "Attack Classification",
+          "hint": "Is this an unarmed, weapon, or spell attack?"
+        }
+      }
+    },
+    "damage": {
+      "label": "Attack Damage",
+      "includeBase": {
+        "label": "Include Base Damage",
+        "hint": "Include the item's base damage with any additional damage parts."
+      },
+      "parts": {
+        "label": "Damage Parts",
+        "hint": "Individual damage parts to include with the roll."
+      }
+    }
+  },
+  "Classification": {
+    "Spell": "Spell",
+    "Unarmed": "Unarmed",
+    "Weapon": "Weapon"
+  },
+  "Type": {
+    "Melee": "Melee",
+    "Ranged": "Ranged"
+  }
+},
+
 "DND5E.Attack": "Attack",
 "DND5E.AttackPl": "Attacks",
 "DND5E.AttackRoll": "Attack Roll",
@@ -848,6 +901,63 @@
     "Action": "Transfer Selected",
     "All": "All",
     "Half": "Half"
+  }
+},
+"DND5E.DAMAGE": {
+  "FIELDS": {
+    "number": {
+      "label": "Die Number",
+      "hint": "Number of dice to roll."
+    },
+    "denomination": {
+      "label": "Die Denomination",
+      "hint": "Denomination of the dice to roll."
+    },
+    "bonus": {
+      "label": "Damage Bonus",
+      "hint": "Bonus added to the damage roll."
+    },
+    "types": {
+      "label": "Damage Types",
+      "hint": "Type of damage inflicted or multiple for the user to select from."
+    },
+    "custom": {
+      "label": "Custom Damage Formula",
+      "enabled": {
+        "label": "Enable Custom Formula",
+        "hint": "Should the custom formula be used rather than the default dice."
+      },
+      "formula": {
+        "label": "Damage Formula",
+        "hint": "Custom damage formula."
+      }
+    },
+    "scaling": {
+      "label": "Damage Scaling",
+      "mode": {
+        "label": "Scaling Mode",
+        "hint": "Method by which the scaling increase is calculated."
+      },
+      "number": {
+        "label": "Dice Scaling",
+        "hint": "Number of dice to increase for each scaling step. Will be applied to the first die found in the damage formula if more than one is present."
+      },
+      "formula": {
+        "label": "Scaling Formula",
+        "hint": "Arbitrary scaling formula that will be multiplied for each scaling step and added to the original formula."
+      }
+    }
+  },
+  "Part": {
+    "Action": {
+      "Create": "Create Damage Part",
+      "Delete": "Delete Damage Part"
+    }
+  },
+  "Scaling": {
+    "Half": "Every Other Level",
+    "None": "No Scaling",
+    "Whole": "Every Level"
   }
 },
 "DND5E.DamImm": "Damage Immunities",
@@ -2128,6 +2238,7 @@
   "Sr": "Short Rest",
   "SrAbbreviation": "SR"
 },
+
 "DND5E.USES": {
   "FIELDS": {
     "uses": {
@@ -2162,6 +2273,11 @@
     }
   }
 },
+
+"DND5E.UTILITY": {
+  "Title": "Utility"
+},
+
 "DND5E.Vehicle": "Vehicle",
 "DND5E.VehicleActions": "Actions",
 "DND5E.VehicleActionsHint": "Actions taken with full crew complement",
