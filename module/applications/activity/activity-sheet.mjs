@@ -204,8 +204,7 @@ export default class ActivitySheet extends Application5e {
     };
 
     // Consumption targets
-    const canScale = this.activity.consumption.scaling.allowed
-      || (this.item.type === "spell" && this.item.system.level !== 0);
+    const canScale = this.activity.canScale;
     const consumptionTypeOptions = Array.from(this.activity.validConsumptionTypes).map(value => ({
       value,
       label: CONFIG.DND5E.activityConsumptionTypes[value].label

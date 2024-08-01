@@ -29,6 +29,7 @@
         </button>
     </fieldset>
 
+    {{#unless activity.isSpell}}
     {{#with fields.consumption.fields.scaling.fields as |fields|}}
     <fieldset>
         <legend>{{ localize "DND5E.ACTIVITY.FIELDS.consumption.scaling.label" }}</legend>
@@ -38,6 +39,7 @@
         {{/if}}
     </fieldset>
     {{/with}}
+    {{/unless}}
 
     {{> "systems/dnd5e/templates/shared/uses-values.hbs" }}
     {{> "systems/dnd5e/templates/shared/uses-recovery.hbs" }}

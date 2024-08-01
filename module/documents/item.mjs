@@ -903,52 +903,27 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {ItemUseOptions} [options]           Options used for configuring item usage.
    * @returns {Promise<ChatMessage|object|void>} Chat message if options.createMessage is true, message data if it is
    *                                             false, and nothing if the roll wasn't performed.
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   async use(config={}, options={}) {
-    if ( !this.isOwner ) {
-      ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
-      return null;
+    foundry.utils.logCompatibilityWarning(
+      "The `Item5e#use` method has been deprecated and should now be called directly on the activity to be used.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
+    if ( this.system.activities ) {
+      const activity = this.system.activities.contents[0];
+      if ( activity ) {
+        const usageConfig = {};
+        const dialogConfig = {};
+        const messageConfig = {};
+        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
+        return activity.use(usageConfig, dialogConfig, messageConfig);
+      }
     }
-    let item = this;
-    const is = item.system;
-    const as = item.actor.system;
+    if ( this.actor ) return this.displayCard();
+    else return;
 
-    // Ensure the options object is ready
-    options = foundry.utils.mergeObject({
-      configureDialog: true,
-      createMessage: true,
-      "flags.dnd5e.use": {type: this.type, itemId: this.id, itemUuid: this.uuid}
-    }, options);
-
-    // Define follow-up actions resulting from the item usage
-    if ( config.consumeSlotLevel ) {
-      console.warn("You are passing 'consumeSlotLevel' to the ItemUseConfiguration object, which now expects a key as 'slotLevel'.");
-      config.slotLevel = config.consumeSlotLevel;
-      delete config.consumeSlotLevel;
-    }
-    config = foundry.utils.mergeObject(this._getUsageConfig(), config);
-
-    /**
-     * A hook event that fires before an item usage is configured.
-     * @function dnd5e.preUseItem
-     * @memberof hookEvents
-     * @param {Item5e} item                  Item being used.
-     * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
-     * @param {ItemUseOptions} options       Additional options used for configuring item usage.
-     * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
-     */
-    if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
-
-    // Are any default values necessitating a prompt?
-    const needsConfiguration = Object.values(config).includes(true);
-
-    // Display configuration dialog
-    if ( (options.configureDialog !== false) && needsConfiguration ) {
-      const configuration = await AbilityUseDialog.create(item, config);
-      if ( !configuration ) return;
-      foundry.utils.mergeObject(config, configuration);
-    }
-
+    // TODO: Remove this reference code once EnchantmentActivity and SummoningActivity are created and scaling is added
     // Store selected enchantment profile in flag
     if ( config.enchantmentProfile ) {
       foundry.utils.setProperty(options.flags, "dnd5e.use.enchantmentProfile", config.enchantmentProfile);
@@ -981,37 +956,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Calculate and consume item consumption
     if ( await this.consume(item, config, options) === false ) return;
 
-    // Initiate or end concentration.
-    const effects = [];
-    if ( config.beginConcentrating ) {
-      const effect = await item.actor.beginConcentrating(item);
-      if ( effect ) {
-        effects.push(effect);
-        foundry.utils.setProperty(options.flags, "dnd5e.use.concentrationId", effect.id);
-      }
-      if ( config.endConcentration ) {
-        const deleted = await item.actor.endConcentration(config.endConcentration);
-        effects.push(...deleted);
-      }
-    }
-
-    // Prepare card data & display it if options.createMessage is true
-    const cardData = await item.displayCard(options);
-
-    // Initiate measured template creation
-    let templates;
-    if ( config.createMeasuredTemplate ) {
-      try {
-        templates = await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
-      } catch(err) {
-        Hooks.onError("Item5e#use", err, {
-          msg: game.i18n.localize("DND5E.PlaceTemplateError"),
-          log: "error",
-          notify: "error"
-        });
-      }
-    }
-
     // Initiate summons creation
     let summoned;
     if ( config.createSummons ) {
@@ -1021,21 +965,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         Hooks.onError("Item5e#use", err, { log: "error", notify: "error" });
       }
     }
-
-    /**
-     * A hook event that fires when an item is used, after the measured template has been created if one is needed.
-     * @function dnd5e.useItem
-     * @memberof hookEvents
-     * @param {Item5e} item                                Item being used.
-     * @param {ItemUseConfiguration} config                Configuration data for the roll.
-     * @param {ItemUseOptions} options                     Additional options for configuring item usage.
-     * @param {MeasuredTemplateDocument[]|null} templates  The measured templates if they were created.
-     * @param {ActiveEffect5e[]} effects                   The active effects that were created or deleted.
-     * @param {TokenDocument5e[]|null} summoned            Summoned tokens if they were created.
-     */
-    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null, effects, summoned ?? null);
-
-    return cardData;
   }
 
   /* -------------------------------------------- */
@@ -1046,117 +975,44 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
    * @param {ItemUseOptions} options       Additional options used for configuring item usage.
    * @returns {false|void}                 Returns `false` if any further usage should be canceled.
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   async consume(item, config, options) {
-    /**
-     * A hook event that fires before an item's resource consumption has been calculated.
-     * @function dnd5e.preItemUsageConsumption
-     * @memberof hookEvents
-     * @param {Item5e} item                  Item being used.
-     * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
-     * @param {ItemUseOptions} options       Additional options used for configuring item usage.
-     * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
-     */
-    if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return false;
-
-    // Determine whether the item can be used by testing the chosen values of the config.
-    const usage = item._getUsageUpdates(config);
-    if ( !usage ) return false;
-
-    options.flags ??= {};
-    if ( config.consumeUsage ) foundry.utils.setProperty(options.flags, "dnd5e.use.consumedUsage", true);
-    if ( config.consumeResource ) foundry.utils.setProperty(options.flags, "dnd5e.use.consumedResource", true);
-    if ( config.consumeSpellSlot ) foundry.utils.setProperty(options.flags, "dnd5e.use.consumedSpellSlot", true);
-
-    /**
-     * A hook event that fires after an item's resource consumption has been calculated but before any
-     * changes have been made.
-     * @function dnd5e.itemUsageConsumption
-     * @memberof hookEvents
-     * @param {Item5e} item                     Item being used.
-     * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
-     * @param {ItemUseOptions} options          Additional options used for configuring item usage.
-     * @param {object} usage
-     * @param {object} usage.actorUpdates       Updates that will be applied to the actor.
-     * @param {object} usage.itemUpdates        Updates that will be applied to the item being used.
-     * @param {object[]} usage.resourceUpdates  Updates that will be applied to other items on the actor.
-     * @param {Set<string>} usage.deleteIds     Item ids for those which consumption will delete.
-     * @returns {boolean}                       Explicitly return `false` to prevent item from being used.
-     */
-    if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return false;
-
-    // Commit pending data updates
-    const { actorUpdates, itemUpdates, resourceUpdates, deleteIds } = usage;
-    if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( !foundry.utils.isEmpty(deleteIds) ) await this.actor.deleteEmbeddedDocuments("Item", [...deleteIds]);
-    if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
-    if ( !foundry.utils.isEmpty(resourceUpdates) ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
+    foundry.utils.logCompatibilityWarning(
+      "The `Item5e#consume` method has been deprecated and should now be called directly on the activity.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
+    if ( this.system.activities ) {
+      const activity = this.system.activities.contents[0];
+      if ( activity ) {
+        const usageConfig = {};
+        const dialogConfig = {};
+        const messageConfig = {};
+        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
+        return activity.consume(usageConfig, messageConfig);
+      }
+    }
+    return false;
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Prepare an object of possible and default values for item usage. A value that is `null` is ignored entirely.
-   * @returns {ItemUseConfiguration}  Configuration data for the roll.
-   */
+  /** @deprecated */
   _getUsageConfig() {
-    const { consume, uses, summons, target, level, preparation } = this.system;
+    return;
 
-    const config = {
-      createMeasuredTemplate: null,
-      createSummons: null,
-      consumeResource: null,
-      consumeSpellSlot: null,
-      consumeUsage: null,
-      enchantmentProfile: null,
-      promptEnchantment: null,
-      slotLevel: null,
-      summonsProfile: null,
-      resourceAmount: null,
-      beginConcentrating: null,
-      endConcentration: null
-    };
+    // TODO: Remove this reference code once EnchantmentActivity & SummoningActivity are created
 
-    const scaling = this.usageScaling;
-    if ( scaling === "slot" ) {
-      const spells = this.actor.system.spells ?? {};
-      config.consumeSpellSlot = true;
-      config.slotLevel = (preparation?.mode in spells) ? preparation.mode : `spell${level}`;
-    } else if ( scaling === "resource" ) {
-      config.resourceAmount = consume.amount || 1;
-    }
-    if ( this.hasLimitedUses ) config.consumeUsage = uses.prompt;
-    if ( this.hasResource ) {
-      config.consumeResource = true;
-      // Do not suggest consuming your own uses if also consuming them through resources.
-      if ( consume.target === this.id ) config.consumeUsage = null;
-    }
-    if ( game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget && canvas.scene ) {
-      config.createMeasuredTemplate = target.prompt;
-    }
     if ( this.system.isEnchantment ) {
       const availableEnchantments = EnchantmentData.availableEnchantments(this);
       config.promptEnchantment = availableEnchantments.length > 1;
       config.enchantmentProfile = availableEnchantments[0]?.id;
     }
+
     if ( this.system.hasSummoning && this.system.summons.canSummon && canvas.scene ) {
       config.createSummons = summons.prompt;
       config.summonsProfile = this.system.summons.profiles[0]._id;
     }
-    if ( this.requiresConcentration && !game.settings.get("dnd5e", "disableConcentration") ) {
-      config.beginConcentrating = true;
-      const { effects } = this.actor.concentration;
-      const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
-      if ( limit && (limit <= effects.size) ) {
-        const id = effects.find(e => {
-          const data = e.flags.dnd5e?.itemData ?? {};
-          return (data === this.id) || (data._id === this.id);
-        })?.id ?? effects.first()?.id ?? null;
-        config.endConcentration = id;
-      }
-    }
-
-    return config;
   }
 
   /* -------------------------------------------- */
