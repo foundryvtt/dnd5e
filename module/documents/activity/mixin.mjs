@@ -46,6 +46,16 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
+   * Can this activity's damage be scaled?
+   * @type {boolean}
+   */
+  get canScaleDamage() {
+    return this.consumption.scaling.allowed || this.isSpell;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this activity on a spell?
    * @type {boolean}
    */
