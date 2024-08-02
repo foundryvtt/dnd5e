@@ -143,11 +143,21 @@ Hooks.once("init", function() {
   DocumentSheetConfig.unregisterSheet(Item, "core", ItemSheet);
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
+    label: "DND5E.SheetClassItemLegacy"
+  });
+  DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e2, {
+    // TODO: Make default once complete.
     label: "DND5E.SheetClassItem"
   });
   DocumentSheetConfig.unregisterSheet(Item, "dnd5e", applications.item.ItemSheet5e, { types: ["container"] });
+  DocumentSheetConfig.unregisterSheet(Item, "dnd5e", applications.item.ItemSheet5e2, { types: ["container"] });
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ContainerSheet, {
     makeDefault: true,
+    types: ["container"],
+    label: "DND5E.SheetClassContainerLegacy"
+  });
+  DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ContainerSheet2, {
+    // TODO: Make default once complete.
     types: ["container"],
     label: "DND5E.SheetClassContainer"
   });

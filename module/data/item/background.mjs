@@ -28,6 +28,16 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
   }, {inplace: false}));
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [{ label: context.itemType }];
+    context.singleDescription = true;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 

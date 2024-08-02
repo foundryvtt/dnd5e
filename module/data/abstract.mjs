@@ -555,6 +555,15 @@ export class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Prepare type-specific data for the Item sheet.
+   * @param {object} context  Sheet context data.
+   * @returns {Promise<void>}
+   */
+  async getSheetData(context) {}
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare a data object which defines the data schema used by dice roll commands against this Item.
    * @param {object} [options]
    * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be

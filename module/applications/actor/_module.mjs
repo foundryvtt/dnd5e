@@ -26,3 +26,4 @@ export {default as TraitSelector} from "./trait-selector.mjs";
 export {default as ToolSelector} from "./tool-selector.mjs";
 export {default as ActorTypeConfig} from "./type-config.mjs";
 export {default as ActorSheetMixin} from "./sheet-mixin.mjs";
+export {default as ActorSheetV2Mixin} from "./sheet-v2-mixin.mjs";

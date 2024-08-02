@@ -111,6 +111,16 @@ export default class ContainerData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: context.itemType },
+      ...this.physicalItemSheetFields
+    ];
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 

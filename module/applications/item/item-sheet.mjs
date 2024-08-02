@@ -46,7 +46,9 @@ export default class ItemSheet5e extends ItemSheet {
       }],
       elements: {
         effects: "dnd5e-effects"
-      }
+      },
+      legacyDisplay: true,
+      contextMenu: ContextMenu
     });
   }
 
@@ -485,7 +487,7 @@ export default class ItemSheet5e extends ItemSheet {
      * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
      */
     Hooks.call("dnd5e.getItemAdvancementContext", html, contextOptions);
-    if ( contextOptions ) new ContextMenu(html, ".advancement-item", contextOptions);
+    if ( contextOptions ) new this.options.contextMenu(html, ".advancement-item", contextOptions);
   }
 
   /* -------------------------------------------- */

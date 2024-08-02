@@ -137,6 +137,17 @@ export default class WeaponData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: context.itemType },
+      { label: this.type.label },
+      ...this.physicalItemSheetFields
+    ];
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 

@@ -30,4 +30,13 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
       }, {label: "DND5E.Spellcasting"})
     });
   }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [{ label: context.itemType }];
+  }
 }
