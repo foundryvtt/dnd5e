@@ -1,0 +1,21 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>{{ localize "DND5E.SUMMON.CreatureChanges.Label" }}</legend>
+        <p>{{ localize "DND5E.SUMMON.CreatureChanges.Hint" }}</p>
+        {{ formField fields.match.fields.proficiency value=source.match.proficiency }}
+        {{ formField fields.bonuses.fields.ac value=source.bonuses.ac }}
+        {{ formField fields.bonuses.fields.hd value=source.bonuses.hd }}
+        {{ formField fields.bonuses.fields.hp value=source.bonuses.hp }}
+        {{ formField fields.creatureSizes value=source.creatureSizes options=creatureSizeOptions }}
+        {{ formField fields.creatureTypes value=source.creatureTypes options=creatureTypeOptions }}
+    </fieldset>
+    <fieldset>
+        <legend>{{ localize "DND5E.SUMMON.ItemChanges.Label" }}</legend>  
+        <p>{{ localize "DND5E.SUMMON.ItemChanges.Hint" }}</p>
+        {{ formField fields.match.fields.attacks value=source.match.attacks }}
+        {{ formField fields.match.fields.saves value=source.match.saves }}
+        {{ formField fields.bonuses.fields.attackDamage value=source.bonuses.attackDamage }}
+        {{ formField fields.bonuses.fields.saveDamage value=source.bonuses.saveDamage }}
+        {{ formField fields.bonuses.fields.healing value=source.bonuses.healing }}
+    </fieldset>
+</section>

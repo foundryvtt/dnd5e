@@ -1,0 +1,5 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{> "templates/generic/tab-navigation.hbs" tabs=tabs.effect.tabs }}
+    {{> "systems/dnd5e/templates/activity/parts/summon-profiles.hbs" tab=tabs.effect.tabs.profiles }}
+    {{> "systems/dnd5e/templates/activity/parts/summon-changes.hbs" tab=tabs.effect.tabs.changes }}
+</section>

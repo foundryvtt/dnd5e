@@ -285,7 +285,7 @@ export default class ActivitySheet extends Application5e {
   async _prepareEffectContext(context) {
     context.tab = context.tabs.effect;
 
-    const appliedEffects = new Set(context.activity.effects.map(e => e.id));
+    const appliedEffects = new Set(context.activity.effects?.map(e => e.id) ?? []);
     context.allEffects = this.item.effects.map(effect => ({
       value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
     }));

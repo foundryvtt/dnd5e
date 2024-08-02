@@ -1,0 +1,80 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>{{ localize "DND5E.SUMMON.FIELDS.profiles.label" }}</legend>
+        {{#with fields.summon.fields as |fields|}}
+        {{ formField fields.mode value=../source.summon.mode options=../profileModes }}
+        {{#unless activity.isSpell}}{{ formField fields.identifier value=../source.summon.identifier }}{{/unless}}
+        {{/with}}
+        <ul class="separated-list flexcol">
+            {{#each profiles}}
+            <li data-index="{{ index }}" data-profile-id="{{ data._id }}">
+                {{> ".profile" }}
+            </li>
+            {{else}}
+            <li class="empty">
+                {{#unless source.summon.mode}}{{ localize "DND5E.SUMMON.Profile.EmptyDrop"}}
+                {{~else}}{{ localize "DND5E.SUMMON.Profile.Empty" }}{{/unless}}
+            </li>
+            {{/each}}
+        </ul>
+        <button type="button" class="unbutton" data-action="addProfile">
+            {{ localize "DND5E.SUMMON.Profile.Action.Create" }}
+        </button>
+    </fieldset>
+</section>
+
+{{#*inline ".profile"}}
+    <div class="details flexrow">
+        {{ formInput fields.count name=(concat prefix "count") value=data.count placeholder="1" }}
+        <!-- aria-label="{{ localize 'DND5E.Summoning.Count.Label' }}" -->
+        <span class="sep">&times;</span>
+        {{#if (eq mode "cr")}}
+        <label>
+            <strong>{{ localize "DND5E.AbbreviationCR" }}</strong>
+            {{ formInput fields.cr name=(concat prefix "cr") value=data.cr }}
+        </label>
+        {{else}}
+        {{#if document}}{{{ dnd5e-linkForUuid data.uuid }}}{{else~}}
+        <div class="drop-area">{{ localize "DND5E.SUMMON.Profile.DropHint" }}</div>{{/if}}
+        {{/if}}
+        {{ formInput fields.name name=(concat prefix "name") value=data.name placeholder=(ifThen
+           document document.name (localize "DND5E.SUMMON.FIELDS.profiles.*.name.label")) }}
+        <!-- aria-label="{{ localize 'Name' }}" -->
+        <div class="list-controls">
+            <button type="button" class="unbutton" data-action="deleteProfile"
+                    data-tooltip="DND5E.SUMMON.Profile.Action.Delete"
+                    aria-label="{{ localize 'DND5E.SUMMON.Profile.Action.Delete' }}">
+                <i class="fa-solid fa-trash fa-fw" inert></i>
+            </button>
+        </div>
+    </div>
+    <input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
+    <input type="hidden" name="{{ prefix }}uuid" value="{{ data.uuid }}">
+    <div class="additional-tray collapsible {{ collapsed }}" data-action="toggleCollapsed">
+        <label class="roboto-upper">
+            <i class="fa-solid fa-gears" inert></i>
+            <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+            <i class="fa-solid fa-caret-down" inert></i>
+        </label>
+        <div class="collapsible-content">
+            <div class="wrapper">
+                {{#if (eq mode "cr")}}
+                {{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions }}
+                {{/if}}
+                <div class="form-group">
+                    <label>{{ localize "DND5E.SUMMON.FIELDS.profiles.*.level.label" }}</label>
+                    <div class="form-fields">
+                        {{ formInput fields.level.fields.min name=(concat prefix "level.min")
+                           value=data.level.min placeholder="0" }}
+                        <!-- aria-label="{{ localize 'DND5E.LevelLimit.Min' }}" -->
+                        <span class="sep">&ndash;</span>
+                        {{ formInput fields.level.fields.max name=(concat prefix "level.max")
+                           value=data.level.max placeholder="∞" }}
+                        <!-- aria-label="{{ localize 'DND5E.LevelLimit.Max' }}" -->
+                    </div>
+                    <p class="hint">{{ localize "DND5E.SUMMON.FIELDS.profiles.*.level.hint" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/inline}}
