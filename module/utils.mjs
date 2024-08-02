@@ -18,7 +18,7 @@ export function formatCR(value) {
  * @param {number} mod  The modifier.
  * @returns {Handlebars.SafeString}
  */
-function formatModifier(mod) {
+export function formatModifier(mod) {
   if ( !Number.isFinite(mod) ) return new Handlebars.SafeString("");
   return new Handlebars.SafeString(`<span class="sign">${mod < 0 ? "-" : "+"}</span>${Math.abs(mod)}`);
 }
@@ -362,6 +362,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-source.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
     "systems/dnd5e/templates/items/parts/item-tooltip.hbs",
+    "systems/dnd5e/templates/items/parts/spell-block.hbs",
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",

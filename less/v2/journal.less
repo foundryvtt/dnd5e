@@ -73,126 +73,6 @@
 
     > i::before { content: "\f52d"; }
   }
-
-  /* Content */
-  .journal-page-content {
-    font-family: var(--dnd5e-font-roboto-condensed);
-
-    /* Content Links & Enrichers */
-    .passive-check {
-      text-decoration-color: currentcolor;
-      text-decoration-style: dashed;
-      text-underline-offset: 2px;
-    }
-
-    a:is(.content-link, .inline-roll), :is(.roll-link, .reference-link) a {
-      background: transparent;
-      border: none;
-      text-decoration: underline currentcolor;
-      text-underline-offset: 2px;
-
-      > i {
-        color: var(--dnd5e-color-black);
-        opacity: .75;
-        transition: opacity 250ms ease;
-      }
-
-      &.broken {
-        color: var(--dnd5e-color-maroon);
-        cursor: not-allowed;
-        > i { color: currentcolor; }
-      }
-
-      &:hover {
-        text-shadow: none;
-        > i { opacity: 1; }
-      }
-
-      &:focus-visible { text-shadow: 0 0 8px var(--color-shadow-primary); }
-    }
-
-    a.enricher-action {
-      text-decoration: none;
-
-      &::before {
-        content: "\f105";
-        font-family: var(--font-awesome);
-        font-weight: bold;
-        margin: 0 4px 0 -6px;
-        font-size: var(--font-size-10);
-        color: var(--color-text-light-6);
-      }
-    }
-
-    .roll-link a > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      background: url("../../icons/svg/d20-black.svg") no-repeat center / contain;
-      vertical-align: middle;
-
-      &::before { content: unset; }
-    }
-
-    /* Embed Captions */
-    .content-embed figcaption cite {
-      display: block;
-      text-align: right;
-      &::before { content: "-"; }
-    }
-
-    /* Embedded Roll Tables */
-    figure.content-embed.caption-top {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      margin: 0 0 2rem 0;
-
-      table, img { order: 2; }
-
-      cite {
-        position: absolute;
-        inset: 100% 0 auto auto;
-      }
-
-      .embed-caption {
-        font-weight: normal;
-        text-align: left;
-        font-style: italic;
-      }
-    }
-
-    /* Tables */
-    table {
-      --dnd5e-color-table-row-even: var(--dnd5e-color-parchment);
-      --dnd5e-color-table-row-odd: var(--dnd5e-color-card);
-      background: var(--dnd5e-color-card);
-      border-color: var(--dnd5e-color-gold);
-
-      caption {
-        margin-block-end: 2px;
-        font-family: var(--dnd5e-font-roboto-slab);
-        font-variant: small-caps;
-        font-weight: bold;
-      }
-
-      thead {
-        background: linear-gradient(to right, var(--dnd5e-color-hd-1), var(--dnd5e-color-hd-2));
-        color: var(--color-text-light-0);
-        text-align: center;
-        font-family: var(--dnd5e-font-roboto-slab);
-        font-weight: bold;
-        text-shadow: none;
-        border-color: var(--dnd5e-color-gold);
-
-        tr:nth-child(n) { background: unset; }
-      }
-
-      tr:nth-child(even) { background-color: var(--dnd5e-color-table-row-even); }
-      tr:nth-child(odd) { background-color: var(--dnd5e-color-table-row-odd); }
-      td { padding: .375rem; }
-    }
-  }
 }
 
 :is(.dnd5e, .dnd5e2, .dnd5e2-journal) {
@@ -291,5 +171,145 @@
     }
 
     p:last-of-type { margin-bottom: 0; }
+  }
+}
+
+:is(.dnd5e2, .dnd5e2-journal) {
+  .journal-page-content, .editor-content {
+    font-family: var(--dnd5e-font-roboto-condensed);
+
+    h3 { padding-bottom: 0; }
+
+    /* Content Links & Enrichers */
+    .passive-check {
+      text-decoration-color: currentcolor;
+      text-decoration-style: dashed;
+      text-underline-offset: 2px;
+    }
+
+    /* Embed Captions */
+    .content-embed figcaption cite {
+      display: block;
+      text-align: right;
+      &::before { content: "-"; }
+    }
+
+    /* Embedded Roll Tables */
+    figure.content-embed.caption-top {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      margin: 0 0 2rem 0;
+
+      table, img { order: 2; }
+
+      cite {
+        position: absolute;
+        inset: 100% 0 auto auto;
+      }
+
+      .embed-caption {
+        font-weight: normal;
+        text-align: left;
+        font-style: italic;
+      }
+    }
+
+    /* Tables */
+    table {
+      --dnd5e-color-table-row-even: var(--dnd5e-color-parchment);
+      --dnd5e-color-table-row-odd: var(--dnd5e-color-card);
+      background: var(--dnd5e-color-card);
+      border-color: var(--dnd5e-color-gold);
+
+      caption {
+        margin-block-end: 2px;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-variant: small-caps;
+        font-weight: bold;
+      }
+
+      thead {
+        background: linear-gradient(to right, var(--dnd5e-color-hd-1), var(--dnd5e-color-hd-2));
+        color: var(--color-text-light-0);
+        text-align: center;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+        text-shadow: none;
+        border-color: var(--dnd5e-color-gold);
+
+        tr:nth-child(n) { background: unset; }
+      }
+
+      tr:nth-child(even) { background-color: var(--dnd5e-color-table-row-even); }
+      tr:nth-child(odd) { background-color: var(--dnd5e-color-table-row-odd); }
+      td { padding: .375rem; }
+    }
+  }
+
+  a:is(.content-link, .inline-roll), :is(.roll-link, .reference-link) a {
+    background: transparent;
+    border: none;
+    text-decoration: underline currentcolor;
+    text-underline-offset: 2px;
+
+    > i {
+      color: var(--dnd5e-color-black);
+      opacity: .75;
+      transition: opacity 250ms ease;
+    }
+
+    &.broken {
+      color: var(--dnd5e-color-maroon);
+      cursor: not-allowed;
+      > i { color: currentcolor; }
+    }
+
+    &:hover {
+      text-shadow: none;
+      > i { opacity: 1; }
+    }
+
+    &:focus-visible { text-shadow: 0 0 8px var(--color-shadow-primary); }
+  }
+
+  a.enricher-action {
+    text-decoration: none;
+
+    &::before {
+      content: "\f105";
+      font-family: var(--font-awesome);
+      font-weight: bold;
+      margin: 0 4px 0 -6px;
+      font-size: var(--font-size-10);
+      color: var(--color-text-light-6);
+    }
+  }
+
+  .roll-link a > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: url("../../icons/svg/d20-black.svg") no-repeat center / contain;
+    vertical-align: middle;
+
+    &::before { content: unset; }
+  }
+
+  .prosemirror menu {
+    .pm-dropdown {
+      background: none;
+      &:hover { background: var(--color-hover-bg); }
+    }
+
+    button {
+      display: unset;
+      text-transform: unset;
+      box-shadow: none;
+      font-family: var(--font-primary);
+      font-size: var(--font-size-14);
+      font-weight: normal;
+      line-height: 28px;
+    }
   }
 }

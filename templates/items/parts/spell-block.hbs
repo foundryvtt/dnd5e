@@ -1,0 +1,32 @@
+<ul class="spell-block unlist">
+    <li>
+        <strong>{{ localize "DND5E.SpellCastTime" }}:</strong>
+        <span class="value">
+            {{ labels.activation }}
+            {{#if activation.condition}}
+            <span class="condition">({{ activation.condition }})</span>
+            {{/if}}
+        </span>
+    </li>
+    <li>
+        <strong>{{ localize "DND5E.Range" }}:</strong>
+        <span class="value">{{ labels.range }}</span>
+    </li>
+    <li>
+        <strong>{{ localize "DND5E.Target" }}:</strong>
+        <span class="value">{{ labels.target }}</span>
+    </li>
+    <li>
+        <strong>{{ localize "DND5E.Components" }}:</strong>
+        <span class="value">
+            {{ labels.components.vsm }}
+            {{#if labels.materials}}
+            <span class="materials">({{ labels.materials }})</span>
+            {{/if}}
+        </span>
+    </li>
+    <li>
+        <strong>{{ localize "DND5E.Duration" }}:</strong>
+        <span class="value">{{ labels.concentrationDuration }}</span>
+    </li>
+</ul>

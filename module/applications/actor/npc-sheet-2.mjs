@@ -35,6 +35,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
   /* -------------------------------------------- */
 
+  /** @override */
   get template() {
     if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet-2.hbs";
     return "systems/dnd5e/templates/actors/npc-sheet-2.hbs";
@@ -47,20 +48,9 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   /** @inheritDoc */
   async _renderOuter() {
     const html = await super._renderOuter();
-    const elements = document.createElement("div");
-    elements.classList.add("header-elements");
-    elements.innerHTML = `
-      <div class="source-book">
-        <a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig"
-           aria-label="${game.i18n.localize("DND5E.SourceConfig")}">
-          <i class="fas fa-cog"></i>
-        </a>
-        <span></span>
-      </div>
-      <div class="cr-xp"></div>
-    `;
-    html[0].querySelector(".window-title")?.insertAdjacentElement("afterend", elements);
-    elements.querySelector(".config-button").addEventListener("click", this._onConfigMenu.bind(this));
+    this._renderSourceOuter(html);
+    // XP value.
+    html[0].querySelector(".header-elements")?.insertAdjacentHTML("beforeend", '<div class="cr-xp"></div>');
     return html;
   }
 
@@ -69,17 +59,11 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   /** @inheritDoc */
   async _render(force=false, options={}) {
     await super._render(force, options);
+    this._renderSource();
     const [elements] = this.element.find(".header-elements");
     if ( !elements ) return;
-    const { details } = this.actor.system;
-    const editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
-    const sourceLabel = details.source.label;
-    elements.querySelector(".config-button")?.toggleAttribute("hidden", !editable);
-    elements.querySelector(".source-book > span").innerText = editable
-      ? (sourceLabel || game.i18n.localize("DND5E.Source"))
-      : sourceLabel;
     elements.querySelector(".cr-xp").innerText = game.i18n.format("DND5E.ExperiencePointsFormat", {
-      value: new Intl.NumberFormat(game.i18n.lang).format(details.xp.value)
+      value: new Intl.NumberFormat(game.i18n.lang).format(this.actor.system.details.xp.value)
     });
   }
 
