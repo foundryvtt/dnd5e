@@ -7,11 +7,7 @@ export default class AttackSheet extends ActivitySheet {
 
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["attack-activity"],
-    actions: {
-      addDamagePart: AttackSheet.#addDamagePart,
-      deleteDamagePart: AttackSheet.#deleteDamagePart
-    }
+    classes: ["attack-activity"]
   };
 
   /* -------------------------------------------- */
@@ -52,27 +48,6 @@ export default class AttackSheet extends ActivitySheet {
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label }))
     ];
 
-    const denominationOptions = [
-      { value: "", label: "" },
-      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
-    ];
-    const scalingOptions = [
-      { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
-      ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
-    ];
-    context.damageParts = context.activity.damage.parts.map((data, index) => ({
-      data,
-      fields: this.activity.schema.fields.damage.fields.parts.element.fields,
-      prefix: `damage.parts.${index}.`,
-      source: context.source.damage.parts[index] ?? data,
-      canScale: this.activity.canScaleDamage,
-      denominationOptions,
-      scalingOptions,
-      typeOptions: Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({
-        value, label: config.label, selected: data.types.has(value)
-      }))
-    }));
-
     return context;
   }
 
@@ -94,46 +69,5 @@ export default class AttackSheet extends ActivitySheet {
     ];
 
     return context;
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
-  /* -------------------------------------------- */
-
-  /**
-   * Handle adding a new entry to the damage parts list.
-   * @this {ActivityConfig}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static #addDamagePart(event, target) {
-    this.activity.update({ "damage.parts": [...this.activity.toObject().damage.parts, {}] });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle removing an entry from the damage parts list.
-   * @this {ActivityConfig}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static #deleteDamagePart(event, target) {
-    const parts = this.activity.toObject().damage.parts;
-    parts.splice(target.closest("[data-index]").dataset.index, 1);
-    this.activity.update({ "damage.parts": parts });
-  }
-
-  /* -------------------------------------------- */
-  /*  Form Handling                               */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _prepareSubmitData(event, formData) {
-    const submitData = super._prepareSubmitData(event, formData);
-    if ( foundry.utils.hasProperty(submitData, "damage.parts") ) {
-      submitData.damage.parts = Object.values(submitData.damage.parts);
-    }
-    return submitData;
   }
 }

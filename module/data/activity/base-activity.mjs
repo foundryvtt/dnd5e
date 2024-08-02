@@ -117,9 +117,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         units: new StringField({ initial: "inst" }),
         special: new StringField()
       }),
-      effects: new ArrayField(new SchemaField({
-        id: new DocumentIdField()
-      })),
+      effects: new ArrayField(new SchemaField(this.defineEffectSchema())),
       range: new SchemaField({
         value: new FormulaField({ deterministic: true }),
         units: new StringField(),
@@ -144,6 +142,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         prompt: new BooleanField({ initial: true })
       }),
       uses: new UsesField()
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return the fields that will be included in the schema for applied effects.
+   * @returns {Record<string, DataField>}
+   */
+  static defineEffectSchema() {
+    return {
+      id: new DocumentIdField()
     };
   }
 

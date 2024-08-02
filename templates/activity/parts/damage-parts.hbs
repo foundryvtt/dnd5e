@@ -1,10 +1,13 @@
-<ul class="unlist">
+<ul class="separated-list damage-list">
     {{#each damageParts}}
     <li data-index="{{ @index }}">
-        <div class="formula flexrow">
+        <div class="details formula flexrow">
+            {{ formInput fields.custom.fields.enabled name=(concat prefix "custom.enabled")
+               value=data.custom.enabled }}
             {{#unless data.custom.enabled}}
 
             {{ formField fields.number name=(concat prefix "number") value=data.number stacked=true hint=false }}
+            <span class="seperator">d</span>
             {{ formField fields.denomination name=(concat prefix "denomination") value=data.denomination
                options=denominationOptions stacked=true hint=false }}
             <span class="seperator">+</span>
@@ -20,9 +23,16 @@
             <input type="hidden" name="{{ prefix }}bonus" value="{{ data.bonus }}">
 
             {{/unless}}
-            {{ formField fields.custom.fields.enabled name=(concat prefix "custom.enabled")
-               value=data.custom.enabled stacked=true hint=false }}
+
+            <div class="list-controls">
+                <button type="button" class="unbutton" data-action="deleteDamagePart"
+                        data-tooltip="DND5E.DAMAGE.Part.Action.Delete"
+                        aria-label="{{ localize 'DND5E.DAMAGE.Part.Action.Delete' }}">
+                    <i class="fa-solid fa-trash fa-fw" inert></i>
+                </button>
+            </div>
         </div>
+
         {{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions hint=false }}
 
         {{#if canScale}}
@@ -40,9 +50,6 @@
         {{/with}}
         {{/if}}
 
-        <button type="button" class="unbutton" data-action="deleteDamagePart">
-            {{ localize "DND5E.DAMAGE.Part.Action.Delete" }}
-        </button>
     </li>
     {{/each}}
 </ul>

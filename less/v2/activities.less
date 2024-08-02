@@ -26,23 +26,11 @@
       margin-block-end: -3px;
     }
   }
-}
-
-/* ----------------------------------------- */
-/*  Summon Activity                          */
-/* ----------------------------------------- */
-
-.summon-activity.sheet {
   .separated-list {
     .details { align-items: stretch; }
-    .content-link, .drop-area, .name {
-      flex: 0 0 175px;
-      display: flex;
-      align-items: center;
-      align-content: center;
-    }
     .content-link {
       display: block;
+      align-content: center;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -52,6 +40,26 @@
       border-radius: 4px;
       padding-inline: 4px;
     }
+    .gold-icon {
+      flex: 0 0 32px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Summon Activity                          */
+/* ----------------------------------------- */
+
+.summon-activity.sheet {
+  .content-link, .drop-area, .name {
+    flex: 0 0 175px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+  .separated-list {
     input::placeholder { opacity: .5; }
     .details > label {
       display: flex;

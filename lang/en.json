@@ -1756,6 +1756,46 @@
 "DND5E.MovementUnits": "Units",
 "DND5E.NewDay": "Is New Day?",
 "DND5E.NewDayHint": "Recover limited use abilities which recharge \"per day\"?",
+
+"DND5E.SAVE": {
+  "Title": {
+    "one": "Save",
+    "other": "Saves"
+  },
+  "FIELDS": {
+    "ability": {
+      "label": "Challenge Ability",
+      "hint": "Ability that must be rolled to attempt to save."
+    },
+    "damage": {
+      "label": "Save Damage",
+      "onSave": {
+        "label": "Damage on Save",
+        "hint": "How much damage should be applied on a successful save?",
+        "Full": "Full Damage",
+        "Half": "Half Damage",
+        "None": "No Damage"
+      }
+    },
+    "save": {
+      "label": "Save Details",
+      "dc": {
+        "label": "Difficulty Class",
+        "calculation": {
+          "label": "DC Calculation",
+          "hint": "Method or ability used to calculate the difficulty class."
+        },
+        "formula": {
+          "label": "DC Formula",
+          "hint": "Custom formula or flat value for defining the save DC."
+        },
+        "CustomFormula": "Custom Formula",
+        "DefaultFormula": "8 + Ability + Proficiency"
+      }
+    }
+  }
+},
+
 "DND5E.SaveBonus": "Saving Throw Bonus",
 "DND5E.SaveGlobalBonusHint": "This bonus applies to all saving throws made by this actor.",
 "DND5E.Scroll": {

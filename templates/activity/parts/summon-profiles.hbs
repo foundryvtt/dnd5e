@@ -7,7 +7,7 @@
         {{/with}}
         <ul class="separated-list flexcol">
             {{#each profiles}}
-            <li data-index="{{ index }}" data-profile-id="{{ data._id }}">
+            <li data-index="{{ index }}" data-profile-id="{{ data._id }}" data-expand-id="profile-{{ data._id }}">
                 {{> ".profile" }}
             </li>
             {{else}}
@@ -50,7 +50,7 @@
     </div>
     <input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
     <input type="hidden" name="{{ prefix }}uuid" value="{{ data.uuid }}">
-    <div class="additional-tray collapsible {{ collapsed }}" data-action="toggleCollapsed">
+    <div class="additional-tray collapsible" data-action="toggleCollapsed">
         <label class="roboto-upper">
             <i class="fa-solid fa-gears" inert></i>
             <span>{{ localize "DND5E.AdditionalSettings" }}</span>
