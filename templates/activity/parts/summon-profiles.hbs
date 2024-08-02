@@ -38,7 +38,7 @@
         <div class="drop-area">{{ localize "DND5E.SUMMON.Profile.DropHint" }}</div>{{/if}}
         {{/if}}
         {{ formInput fields.name name=(concat prefix "name") value=data.name placeholder=(ifThen
-           document document.name (localize "DND5E.SUMMON.FIELDS.profiles.*.name.label")) }}
+           document document.name (localize "DND5E.SUMMON.FIELDS.profiles.FIELDS.name.label")) }}
         <!-- aria-label="{{ localize 'Name' }}" -->
         <div class="list-controls">
             <button type="button" class="unbutton" data-action="deleteProfile"
@@ -62,7 +62,7 @@
                 {{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions }}
                 {{/if}}
                 <div class="form-group">
-                    <label>{{ localize "DND5E.SUMMON.FIELDS.profiles.*.level.label" }}</label>
+                    <label>{{ localize "DND5E.SUMMON.FIELDS.profiles.FIELDS.level.label" }}</label>
                     <div class="form-fields">
                         {{ formInput fields.level.fields.min name=(concat prefix "level.min")
                            value=data.level.min placeholder="0" }}
@@ -72,7 +72,7 @@
                            value=data.level.max placeholder="∞" }}
                         <!-- aria-label="{{ localize 'DND5E.LevelLimit.Max' }}" -->
                     </div>
-                    <p class="hint">{{ localize "DND5E.SUMMON.FIELDS.profiles.*.level.hint" }}</p>
+                    <p class="hint">{{ localize "DND5E.SUMMON.FIELDS.profiles.FIELDS.level.hint" }}</p>
                 </div>
             </div>
         </div>
