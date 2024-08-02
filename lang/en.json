@@ -2323,7 +2323,20 @@
 },
 
 "DND5E.UTILITY": {
-  "Title": "Utility"
+  "Title": "Utility",
+  "FIELDS": {
+    "roll": {
+      "label": "Utility Roll",
+      "formula": {
+        "label": "Roll Formula",
+        "hint": "Formula for an arbitrary roll."
+      },
+      "name": {
+        "label": "Roll Label",
+        "hint": "Display name for the rolling button."
+      }
+    }
+  }
 },
 
 "DND5E.Vehicle": "Vehicle",
