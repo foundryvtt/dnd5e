@@ -156,9 +156,9 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
       this.parent.labels.range = range.filterJoin(" ");
     } else this.parent.labels.range = game.i18n.localize("DND5E.None");
 
-    if ( this.recharge ) this.parent.labels.recharge = `${game.i18n.localize("DND5E.Recharge")} [
-      ${this.recharge.value}${parseInt(this.recharge.value) < 6 ? "+" : ""}
-    ]`;
+    if ( this.recharge ) this.parent.labels.recharge = `${game.i18n.localize("DND5E.Recharge")} [${
+      `${this.recharge.value}${parseInt(this.recharge.value) < 6 ? "+" : ""}`
+    }]`;
 
     // Substitute source UUIDs in consumption targets
     if ( !this.parent.isEmbedded ) return;

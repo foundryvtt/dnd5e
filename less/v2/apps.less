@@ -442,25 +442,28 @@
     font-size: var(--font-size-11);
   }
 
-  .separator.ampersand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
+  hr.ampersand {
+    position: relative;
+    height: 20px;
+    border: none;
+    background: url("ui/official/ampersand-gold.svg") no-repeat center / contain;
+    margin: 0;
 
     &::before, &::after {
       content: "";
-      width: 50%;
-      height: 1px;
+      position: absolute;
+      inset-block: 9.5px;
+      inset-inline: 0;
     }
 
-    &::before { background: linear-gradient(to left, var(--dnd5e-color-gold), transparent); }
-    &::after { background: linear-gradient(to right, var(--dnd5e-color-gold), transparent); }
+    &::before {
+      background: linear-gradient(to left, var(--dnd5e-color-gold), transparent);
+      inset-inline-end: calc(50% + 14px);
+    }
 
-    > div {
-      width: 20px;
-      height: 20px;
-      background: url("ui/official/ampersand-gold.svg") no-repeat center / contain;
+    &::after {
+      background: linear-gradient(to right, var(--dnd5e-color-gold), transparent);
+      inset-inline-start: calc(50% + 14px);
     }
   }
 
