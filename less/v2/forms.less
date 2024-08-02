@@ -1,0 +1,293 @@
+.dnd5e2 {
+  /* Reset button & input styles */
+  input.uninput, button.unbutton {
+    --border: none;
+    border: var(--border);
+    box-shadow: none;
+    outline: none;
+
+    &:hover, &:focus {
+      box-shadow: none;
+      border: var(--border);
+      outline: none;
+    }
+  }
+
+  input.uninput {
+    color: inherit;
+    font-weight: inherit;
+    height: unset;
+  }
+
+  button.unbutton {
+    background: none;
+    margin: 0;
+    border-radius: 0;
+    line-height: normal;
+
+    > i { margin: 0; }
+  }
+
+  /* Inputs & Buttons */
+  input, button {
+    transition: all 250ms ease;
+  }
+
+  button {
+    background: var(--dnd5e-background-card);
+    font-size: var(--font-size-13);
+    text-transform: uppercase;
+    padding: 3px;
+    border: 1px solid var(--color-border-light-2);
+    box-shadow: 0 0 8px var(--dnd5e-shadow-15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .25rem;
+
+    &:not(.fas, .far, .fa-solid, .fa-regular, .fa-light, .fa-duotone, .fa-thin) {
+      font-family: var(--dnd5e-font-roboto);
+      font-weight: bold;
+    }
+    &:disabled {
+      cursor: default;
+      color: var(--color-text-dark-inactive);
+    }
+    &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
+  }
+
+  button.radio-button {
+    width: 13px;
+    height: 13px;
+    border-radius: 100%;
+    background: none;
+    box-shadow: inset 0 0 6px var(--dnd5e-shadow-45);
+    padding: 3px;
+    display: grid;
+    border: none;
+    justify-content: unset;
+
+    &:hover { filter: drop-shadow(0 0 6px var(--dnd5e-color-gold)); }
+
+    &[aria-pressed="true"]::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      border-radius: 100%;
+      background: var(--color-border-dark-5);
+    }
+  }
+
+  /* Reset select styles */
+  select {
+    color: inherit;
+
+    &.unselect {
+      border: none;
+      padding: 0;
+      background: transparent;
+      height: unset;
+    }
+  }
+
+  /* Reset textarea styles */
+  textarea.untext {
+    background: none;
+    border: none;
+
+    &:focus { box-shadow: none; }
+  }
+
+  .form-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    justify-content: center;
+
+    &.form-grid-20 > * { flex-basis: 20%; }
+
+    &.form-grid-50 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    input {
+      border: 2px solid var(--dnd5e-color-gold);
+      border-radius: 8px;
+      padding: .5rem;
+      background: var(--dnd5e-color-parchment);
+      font-size: var(--font-size-14);
+      height: unset;
+      width: 100%;
+
+      &:focus { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+      &::placeholder {
+        --input-placeholder-color: var(--color-text-light-6);
+        opacity: unset;
+        color: var(--input-placeholder-color);
+      }
+    }
+
+    input[type="number"] {
+      font-weight: bold;
+    }
+  }
+
+  label.input-stack {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      text-align: center;
+      font-size: var(--font-size-10);
+      color: var(--color-text-dark-5);
+    }
+
+    input { text-align: center; }
+  }
+
+  label.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    > span { line-height: calc(var(--form-field-height) + 1px); }
+  }
+
+  /* Fieldset */
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border-light-tertiary);
+
+    > legend {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: var(--font-size-11);
+      color: var(--color-text-dark-5);
+      padding: 0 6px;
+    }
+  }
+
+  /* Form Groups */
+  .form-group {
+    margin: 0;
+
+    > label {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      font-size: var(--font-size-12);
+    }
+
+    &.label-top {
+      flex-direction: column;
+      align-items: start;
+      gap: 2px;
+
+      > * { flex: unset; }
+
+      > label {
+        font-family: var(--dnd5e-font-roboto);
+        text-transform: uppercase;
+        font-size: var(--font-size-10);
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      + .form-group { align-self: end; }
+    }
+
+    /* Nested Groups */
+    > .form-fields > .form-group {
+      flex-wrap: nowrap;
+      &:not(.label-top) { gap: 4px; }
+      > * { flex: unset; }
+    }
+
+    select, input {
+      --input-border-color: transparent;
+      border: 1px solid var(--input-border-color);
+      font-size: var(--font-size-11);
+      transition: all 250ms ease;
+      line-height: normal;
+      padding: 6px;
+      background: var(--input-background-color);
+
+      &:focus-visible, &:hover {
+        --input-border-color: var(--dnd5e-color-gold);
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      }
+    }
+
+    input::placeholder {
+      --input-placeholder-color: var(--color-text-light-6);
+      opacity: unset;
+      color: var(--input-placeholder-color);
+    }
+
+    option { background: var(--dnd5e-color-parchment); }
+    input[type=number] { text-align: center; }
+    select { cursor: pointer; }
+  }
+
+  .form-fields > dnd5e-checkbox { flex: none; }
+
+  .form-group.checkbox > label, label.checkbox {
+    font-weight: normal;
+    font-family: var(--dnd5e-font-roboto);
+    font-size: var(--font-size-11);
+  }
+
+  .form-group.checkbox { justify-content: space-evenly; }
+
+  /* Checkbox Grid */
+  .checkbox-grid {
+    --num-cols: 4;
+
+    &.checkbox-grid-3 { --num-cols: 3; }
+
+    > .form-fields {
+      display: grid;
+      grid-template-columns: repeat(var(--num-cols), 1fr);
+
+      > label { text-align: unset; }
+    }
+  }
+
+  /* FA icon-based slide-toggle */
+  label.slide-toggle {
+    display: block;
+
+    > input { display: none; }
+    &:has(input:not([disabled])) { cursor: pointer; }
+  }
+
+  /* Pips */
+  .pips {
+    display: flex;
+    gap: 5px;
+    padding: 10px 12px;
+
+    .pip {
+      --pip-size: 16px;
+      background: var(--dnd5e-color-light-gray);
+      border: 2px solid var(--dnd5e-color-gold);
+      border-radius: 100%;
+      width: var(--pip-size);
+      height: var(--pip-size);
+      display: grid;
+      place-content: center;
+      font-weight: bold;
+      font-size: var(--font-size-18);
+      box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+      margin: 0;
+
+      &.filled { background: var(--dnd5e-color-gold); }
+      &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+    }
+  }
+}

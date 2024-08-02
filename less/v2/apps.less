@@ -442,6 +442,38 @@
     font-size: var(--font-size-11);
   }
 
+  .separator.ampersand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    &::before, &::after {
+      content: "";
+      width: 50%;
+      height: 1px;
+    }
+
+    &::before { background: linear-gradient(to left, var(--dnd5e-color-gold), transparent); }
+    &::after { background: linear-gradient(to right, var(--dnd5e-color-gold), transparent); }
+
+    > div {
+      width: 20px;
+      height: 20px;
+      background: url("ui/official/ampersand-gold.svg") no-repeat center / contain;
+    }
+  }
+
+  .spell-block {
+    text-align: left;
+    font-size: var(--font-size-12);
+
+    .materials, .condition {
+      font-size: var(--font-size-11);
+      color: var(--color-text-dark-5);
+    }
+  }
+
   /* ---------------------------------- */
   /*  Meters                            */
   /* ---------------------------------- */
@@ -543,185 +575,6 @@
           inline-size: var(--size);
         }
       }
-    }
-  }
-
-  /* ---------------------------------- */
-  /*  Form Elements                     */
-  /* ---------------------------------- */
-
-  /* Reset button & input styles */
-  input.uninput, button.unbutton {
-    --border: none;
-    border: var(--border);
-    box-shadow: none;
-
-    &:hover, &:focus {
-      box-shadow: none;
-      border: var(--border);
-    }
-  }
-
-  input.uninput {
-    color: inherit;
-    font-weight: inherit;
-    height: unset;
-  }
-
-  button.unbutton {
-    background: none;
-    margin: 0;
-    border-radius: 0;
-    line-height: normal;
-
-    > i { margin: 0; }
-  }
-
-  /* Inputs & Buttons */
-  input, button {
-    transition: all 250ms ease;
-  }
-
-  button {
-    background: var(--dnd5e-background-card);
-    font-size: var(--font-size-13);
-    text-transform: uppercase;
-    padding: 3px;
-    border: 1px solid var(--color-border-light-2);
-    box-shadow: 0 0 8px var(--dnd5e-shadow-15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .25rem;
-
-    &:not(.fas, .far, .fa-solid, .fa-regular, .fa-light, .fa-duotone, .fa-thin) {
-      font-family: var(--dnd5e-font-roboto);
-      font-weight: bold;
-    }
-    &:disabled {
-      cursor: default;
-      color: var(--color-text-dark-inactive);
-    }
-    &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
-  }
-
-  button.radio-button {
-    width: 13px;
-    height: 13px;
-    border-radius: 100%;
-    background: none;
-    box-shadow: inset 0 0 6px var(--dnd5e-shadow-45);
-    padding: 3px;
-    display: grid;
-    border: none;
-    justify-content: unset;
-
-    &:hover { filter: drop-shadow(0 0 6px var(--dnd5e-color-gold)); }
-
-    &[aria-pressed="true"]::before {
-      content: "";
-      width: 100%;
-      height: 100%;
-      display: inline-block;
-      border-radius: 100%;
-      background: var(--color-border-dark-5);
-    }
-  }
-
-  /* Reset select styles */
-  select {
-    color: inherit;
-
-    &.unselect {
-      border: none;
-      padding: 0;
-      background: transparent;
-      height: unset;
-    }
-  }
-
-  /* Reset textarea styles */
-  textarea.untext {
-    background: none;
-    border: none;
-
-    &:focus { box-shadow: none; }
-  }
-
-  .form-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .75rem;
-    justify-content: center;
-
-    &.form-grid-20 > * { flex-basis: 20%; }
-
-    &.form-grid-50 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    input {
-      border: 2px solid var(--dnd5e-color-gold);
-      border-radius: 8px;
-      padding: .5rem;
-      background: var(--dnd5e-color-parchment);
-      font-size: var(--font-size-14);
-      height: unset;
-      width: 100%;
-
-      &:focus { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
-      &::placeholder { color: var(--color-text-light-6); }
-    }
-
-    input[type="number"] {
-      font-weight: bold;
-    }
-  }
-
-  label.input-stack {
-    display: flex;
-    flex-direction: column;
-
-    span {
-      text-align: center;
-      font-size: var(--font-size-10);
-      color: var(--color-text-dark-5);
-    }
-
-    input { text-align: center; }
-  }
-
-  /* FA icon-based slide-toggle */
-  label.slide-toggle {
-    display: block;
-
-    > input { display: none; }
-    &:has(input:not([disabled])) { cursor: pointer; }
-  }
-
-  /* Pips */
-  .pips {
-    display: flex;
-    gap: 5px;
-    padding: 10px 12px;
-
-    .pip {
-      --pip-size: 16px;
-      background: var(--dnd5e-color-light-gray);
-      border: 2px solid var(--dnd5e-color-gold);
-      border-radius: 100%;
-      width: var(--pip-size);
-      height: var(--pip-size);
-      display: grid;
-      place-content: center;
-      font-weight: bold;
-      font-size: var(--font-size-18);
-      box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-      margin: 0;
-
-      &.filled { background: var(--dnd5e-color-gold); }
-      &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
     }
   }
 

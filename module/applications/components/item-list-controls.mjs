@@ -181,7 +181,7 @@ export default class ItemListControlsElement extends HTMLElement {
         <li>
           <button type="button" class="unbutton filter-control" data-action="clear" data-tooltip="DND5E.FilterClear"
                   aria-label="${game.i18n.localize("DND5E.FilterClear")}">
-            <i class="fas fa-xmark"></i>        
+            <i class="fas fa-xmark"></i>
           </button>
         </li>
       </ul>
@@ -302,7 +302,7 @@ export default class ItemListControlsElement extends HTMLElement {
       el.hidden = true;
     });
     for ( const entry of entries ) {
-      const el = elementMap[`${entry.parent.id}.${entry.id}`] ?? elementMap[entry.id];
+      const el = elementMap[`${entry.parent?.id}.${entry.id}`] ?? elementMap[entry.id];
       if ( el ) el.hidden = false;
     }
     this.list.querySelectorAll(".items-section:has(.item-list .item:not([hidden]))").forEach(el => el.hidden = false);

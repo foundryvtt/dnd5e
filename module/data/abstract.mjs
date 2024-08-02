@@ -471,7 +471,7 @@ export class ItemDataModel extends SystemDataModel {
   async getCardData(enrichmentOptions={}) {
     const { name, type, img } = this.parent;
     let {
-      price, weight, uses, identified, unidentified, description, school, materials, activation, properties
+      price, weight, uses, identified, unidentified, description, school, materials, activation
     } = this;
     const rollData = this.parent.getRollData();
     const isIdentified = identified !== false;
@@ -506,14 +506,6 @@ export class ItemDataModel extends SystemDataModel {
         ...this.activatedEffectCardProperties ?? [],
         ...this.equippableItemCardProperties ?? []
       );
-    }
-
-    if ( context.labels.duration ) {
-      context.labels.concentrationDuration = properties?.has("concentration")
-        ? game.i18n.format("DND5E.ConcentrationDuration", {
-          duration: context.labels.duration.toLocaleLowerCase(game.i18n.lang)
-        })
-        : context.labels.duration;
     }
 
     context.properties = context.properties.filter(_ => _);

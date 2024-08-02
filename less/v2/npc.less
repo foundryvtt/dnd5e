@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     line-height: 1;
-    margin-top: 7px;
+    margin-top: 6px;
     gap: 4px;
 
     > div:has(> span:not(:empty)) + div::before { content: " • "; }
@@ -263,6 +263,7 @@
       .score {
         text-align: center;
         font-size: var(--font-size-13);
+        > input { text-align: center; }
       }
 
       .save-tab {
@@ -526,10 +527,8 @@
 
       /* Inventory */
       .inventory-element {
-        gap: 8px;
         width: 100%;
 
-        .items-list { gap: 8px; }
         .spells-list { gap: 12px; }
 
         .bottom {

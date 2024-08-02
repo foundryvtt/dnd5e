@@ -613,7 +613,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       else obj.vsm.push(abbr);
       return obj;
     }, {all: [], vsm: [], tags: []});
-    this.labels.components.vsm = new Intl.ListFormat(game.i18n.lang, { style: "narrow", type: "conjunction" })
+    this.labels.components.vsm = game.i18n.getListFormatter({ style: "narrow", type: "conjunction" })
       .format(this.labels.components.vsm);
     this.labels.materials = this.system?.materials?.value ?? null;
   }
@@ -745,7 +745,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {{damageType: string, formula: string, label: string}[]}
    */
   getDerivedDamageLabel() {
-    if ( !this.hasDamage || !this.isOwned ) return [];
+    if ( !this.hasDamage ) return [];
     const rollData = this.getRollData();
     const damageLabels = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
     const derivedDamage = this.system.damage?.parts?.map((damagePart, index) => {

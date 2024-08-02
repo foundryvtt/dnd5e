@@ -1,15 +1,15 @@
 <div class="flexcol">
     {{#each additional}}
     {{#if (eq type "boolean")}}
-    <div class="filter filter-boolean form-group" data-filter-id="{{ key }}">
+    <div class="filter filter-boolean" data-filter-id="{{ key }}">
         <label>
             <filter-state name="additional.{{ key }}" value="{{ value }}" {{ disabled locked }}></filter-state>
             <span>{{ localize label }}</span>
         </label>
     </div>
     {{else if (eq type "range")}}
-    <div class="filter filter-range form-group" data-filter-id="{{ key }}">
-        <label class="roboto-upper">{{ localize label }}</label>
+    <div class="filter filter-range form-group label-top" data-filter-id="{{ key }}">
+        <label>{{ localize label }}</label>
         <div class="form-fields">
             <input type="number" name="additional.{{ key }}.min" value="{{ value.min }}"
                    min="{{ config.min }}" max="{{ config.max }}" step="any" placeholder="{{ config.min }}"

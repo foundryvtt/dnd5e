@@ -531,7 +531,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     return items.filter(item => {
 
       // Subclass-specific logic.
-      const filtered = this._filterItem(item);
+      const filtered = this._filterItem(item, filters);
       if ( filtered !== undefined ) return filtered;
 
       // Action usage
@@ -566,11 +566,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /**
    * Determine whether an Item will be shown based on the current set of filters.
-   * @param {Item5e} item  The item.
+   * @param {Item5e} item          The item.
+   * @param {Set<string>} filters  Filters applied to the Item.
    * @returns {boolean|void}
    * @protected
    */
-  _filterItem(item) {}
+  _filterItem(item, filters) {}
 
   /* -------------------------------------------- */
 

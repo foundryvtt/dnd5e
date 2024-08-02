@@ -151,7 +151,7 @@ export default class SpellData extends ItemDataModel.mixin(
     const context = await super.getCardData(enrichmentOptions);
     context.isSpell = true;
     context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
-    if ( this.parent.labels.components.vsm ) context.tags = [this.parent.labels.components.vsm, ...context.tags];
+    context.properties = context.tags;
     return context;
   }
 
