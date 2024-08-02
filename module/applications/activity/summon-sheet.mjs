@@ -76,7 +76,7 @@ export default class SummonSheet extends ActivitySheet {
       collapsed: this.#expandedProfiles.get(data._id) ? "" : "collapsed",
       fields: this.activity.schema.fields.profiles.element.fields,
       prefix: `profiles.${index}.`,
-      source: this.activity.toObject().profiles[index] ?? data,
+      source: context.source.profiles[index] ?? data,
       document: data.uuid ? fromUuidSync(data.uuid) : null,
       mode: this.activity.summon.mode,
       typeOptions: this.activity.summon.mode === "cr" ? context.creatureTypeOptions.map(t => ({
@@ -128,19 +128,7 @@ export default class SummonSheet extends ActivitySheet {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #addProfile(event, target) {
-    this.addProfile();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Add a new summoning profile.
-   * @param {object} [data={}]  Initial creation data for the new profile.
-   */
-  addProfile(data={}) {
-    this.activity.update({
-      profiles: [...this.activity.toObject().profiles, { _id: foundry.utils.randomID(), ...data }]
-    });
+    this.activity.update({ profiles: [...this.activity.toObject().profiles, {}] });
   }
 
   /* -------------------------------------------- */
@@ -200,7 +188,7 @@ export default class SummonSheet extends ActivitySheet {
     }
 
     // Otherwise create a new profile
-    else this.addProfile({ uuid: actor.uuid });
+    else this.activity.update({ profiles: [...this.activity.toObject().profiles, { uuid: actor.uuid }] });
   }
 
   /* -------------------------------------------- */
