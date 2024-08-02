@@ -28,15 +28,6 @@ export default Base => class extends Base {
   static _sheets = new Map();
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _initialize(options) {
-    super._initialize(options);
-    if ( !game._documentsReady ) return;
-    return this.prepareData();
-  }
-
-  /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 

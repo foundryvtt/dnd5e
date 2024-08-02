@@ -630,7 +630,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     results.templates = [];
     if ( config.create?.measuredTemplate ) {
       try {
-        results.templates = await (dnd5e.canvas.AbilityTemplate.fromItem(this.item))?.drawPreview();
+        for ( const template of dnd5e.canvas.AbilityTemplate.fromActivity(this) ) {
+          const result = await template.drawPreview();
+          if ( result ) results.templates.push(result);
+        }
       } catch(err) {
         Hooks.onError("Activity#use", err, {
           msg: game.i18n.localize("DND5E.PlaceTemplateError"),
