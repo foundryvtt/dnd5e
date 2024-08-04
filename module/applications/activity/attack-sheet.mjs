@@ -28,6 +28,7 @@ export default class AttackSheet extends ActivitySheet {
         ...super.PARTS.effect.templates,
         "systems/dnd5e/templates/activity/parts/attack-damage.hbs",
         "systems/dnd5e/templates/activity/parts/attack-details.hbs",
+        "systems/dnd5e/templates/activity/parts/damage-part.hbs",
         "systems/dnd5e/templates/activity/parts/damage-parts.hbs"
       ]
     }

@@ -548,6 +548,7 @@ export default class ActivitySheet extends Application5e {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #addEffect(event, target) {
+    if ( !this.activity.effects ) return;
     const effectData = this._addEffectData();
     const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData]);
     this.activity.update({ effects: [...this.activity.toObject().effects, { _id: created.id }] });
@@ -629,6 +630,7 @@ export default class ActivitySheet extends Application5e {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #deleteEffect(event, target) {
+    if ( !this.activity.effects ) return;
     const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
     const result = await this.item.effects.get(effectId)?.deleteDialog();
     if ( result instanceof ActiveEffect ) {

@@ -936,48 +936,63 @@
     "Half": "Half"
   }
 },
+
 "DND5E.DAMAGE": {
+  "Title": "Damage",
   "FIELDS": {
-    "number": {
-      "label": "Die Number",
-      "hint": "Number of dice to roll."
-    },
-    "denomination": {
-      "label": "Die Denomination",
-      "hint": "Denomination of the dice to roll."
-    },
-    "bonus": {
-      "label": "Damage Bonus",
-      "hint": "Bonus added to the damage roll."
-    },
-    "types": {
-      "label": "Damage Types",
-      "hint": "Type of damage inflicted or multiple for the user to select from."
-    },
-    "custom": {
-      "label": "Custom Damage Formula",
-      "enabled": {
-        "label": "Enable Custom Formula",
-        "hint": "Should the custom formula be used rather than the default dice."
+    "damage": {
+      "label": "Damage",
+      "allowCritical": {
+        "label": "Allow Critical",
+        "hint": "Should the use be able to roll critical damage?"
       },
-      "formula": {
-        "label": "Damage Formula",
-        "hint": "Custom damage formula."
-      }
-    },
-    "scaling": {
-      "label": "Damage Scaling",
-      "mode": {
-        "label": "Scaling Mode",
-        "hint": "Method by which the scaling increase is calculated."
-      },
-      "number": {
-        "label": "Dice Scaling",
-        "hint": "Number of dice to increase for each scaling step. Will be applied to the first die found in the damage formula if more than one is present."
-      },
-      "formula": {
-        "label": "Scaling Formula",
-        "hint": "Arbitrary scaling formula that will be multiplied for each scaling step and added to the original formula."
+      "parts": {
+        "label": "Damage Parts",
+        "hint": "Individual damage parts to include with the roll.",
+        "FIELDS": {
+          "bonus": {
+            "label": "Damage Bonus",
+            "hint": "Bonus added to the damage roll."
+          },
+          "custom": {
+            "label": "Custom Damage Formula",
+            "enabled": {
+              "label": "Enable Custom Formula",
+              "hint": "Should the custom formula be used rather than the default dice."
+            },
+            "formula": {
+              "label": "Damage Formula",
+              "hint": "Custom damage formula."
+            }
+          },
+          "denomination": {
+            "label": "Die Denomination",
+            "hint": "Denomination of the dice to roll."
+          },
+          "number": {
+            "label": "Die Number",
+            "hint": "Number of dice to roll."
+          },
+          "scaling": {
+            "label": "Damage Scaling",
+            "mode": {
+              "label": "Scaling Mode",
+              "hint": "Method by which the scaling increase is calculated."
+            },
+            "number": {
+              "label": "Dice Scaling",
+              "hint": "Number of dice to increase for each scaling step. Will be applied to the first die found in the damage formula if more than one is present."
+            },
+            "formula": {
+              "label": "Scaling Formula",
+              "hint": "Arbitrary scaling formula that will be multiplied for each scaling step and added to the original formula."
+            }
+          },
+          "types": {
+            "label": "Damage Types",
+            "hint": "Type of damage inflicted or multiple for the user to select from."
+          }
+        }
       }
     }
   },
@@ -993,6 +1008,7 @@
     "Whole": "Every Level"
   }
 },
+
 "DND5E.DamImm": "Damage Immunities",
 "DND5E.DamMod": "Damage Modification",
 "DND5E.DamRes": "Damage Resistances",
@@ -1401,6 +1417,58 @@
 },
 "DND5E.Hair": "Hair",
 "DND5E.HalfProficient": "Half Proficient",
+
+"DND5E.HEALING": {
+  "Title": "Healing",
+  "FIELDS": {
+    "healing": {
+      "label": "Healing",
+      "bonus": {
+        "label": "Healing Bonus",
+        "hint": "Bonus added to the healing roll."
+      },
+      "custom": {
+        "label": "Custom Healing Formula",
+        "enabled": {
+          "label": "Enable Custom Formula",
+          "hint": "Should the custom formula be used rather than the default dice."
+        },
+        "formula": {
+          "label": "Healing Formula",
+          "hint": "Custom healing formula."
+        }
+      },
+      "denomination": {
+        "label": "Die Denomination",
+        "hint": "Denomination of the dice to roll."
+      },
+      "number": {
+        "label": "Die Number",
+        "hint": "Number of dice to roll."
+      },
+      "scaling": {
+        "label": "Healing Scaling",
+        "mode": {
+          "label": "Scaling Mode",
+          "hint": "Method by which the scaling increase is calculated."
+        },
+        "number": {
+          "label": "Dice Scaling",
+          "hint": "Number of dice to increase for each scaling step. Will be applied to the first die found in the healing formula if more than one is present."
+        },
+        "formula": {
+          "label": "Scaling Formula",
+          "hint": "Arbitrary scaling formula that will be multiplied for each scaling step and added to the original formula."
+        }
+      },
+      "types": {
+        "label": "Healing Types",
+        "hint": "Type of healing inflicted or multiple for the user to select from."
+      }
+    }
+  }
+},
+
 "DND5E.Healing": "Healing",
 "DND5E.HealingRoll": "Healing Roll",
 "DND5E.HealingTemp": "Healing (Temporary)",
@@ -1813,6 +1881,10 @@
         "Full": "Full Damage",
         "Half": "Half Damage",
         "None": "No Damage"
+      },
+      "parts": {
+        "label": "Damage Parts",
+        "hint": "Individual damage parts to include with the roll."
       }
     },
     "save": {
