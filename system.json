@@ -23,6 +23,82 @@
   "styles": [
     "dnd5e.css"
   ],
+  "documentTypes": {
+    "Actor": {
+      "character": {
+        "htmlFields": ["details.biography.value", "details.biography.public"]
+      },
+      "npc": {
+        "htmlFields": ["details.biography.value", "details.biography.public"]
+      },
+      "vehicle": {
+        "htmlFields": ["details.biography.value", "details.biography.public"]
+      },
+      "group": {
+        "htmlFields": ["description.full", "description.summary"]
+      }
+    },
+    "Item": {
+      "weapon": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "equipment": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "consumable": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "tool": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "loot": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "race": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "background": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "class": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "subclass": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "spell": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "feat": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "container": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "backpack": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      }
+    },
+    "JournalEntryPage": {
+      "class": {
+        "htmlFields": [
+          "details.value",
+          "details.additionalHitPoints",
+          "description.additionalTraits",
+          "description.additionalEquipment",
+          "description.subclass"
+        ]
+      },
+      "map": {},
+      "rule": {
+        "htmlFields": ["tooltip"]
+      },
+      "spells": {},
+      "subclass": {
+        "htmlFields": ["details.value"]
+      }
+    }
+  },
   "packs": [
     {
       "name": "heroes",
