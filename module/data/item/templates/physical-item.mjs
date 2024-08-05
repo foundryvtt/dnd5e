@@ -109,6 +109,24 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Field specifications for physical items.
+   * @type {object[]}
+   */
+  get physicalItemSheetFields() {
+    return [{
+      label: CONFIG.DND5E.itemRarity[this.rarity],
+      value: this._source.rarity,
+      requiresIdentification: true,
+      field: this.schema.getField("rarity"),
+      choices: CONFIG.DND5E.itemRarity,
+      blank: "DND5E.Rarity",
+      classes: "item-rarity"
+    }];
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 

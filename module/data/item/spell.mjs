@@ -168,6 +168,17 @@ export default class SpellData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: context.labels.level },
+      { label: context.labels.school },
+      { label: context.itemStatus }
+    ];
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 

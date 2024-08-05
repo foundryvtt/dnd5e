@@ -1,0 +1,218 @@
+.dnd5e2.sheet.item {
+
+  /* ---------------------------------- */
+  /*  Outer Window                      */
+  /* ---------------------------------- */
+
+  --dnd5e-sheet-header-height: 150px; /* Only needs to be an estimate */
+  border: var(--dnd5e-border-gold);
+
+  > header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-background-25); }
+
+  .window-header .header-elements {
+    flex: none;
+    color: var(--color-text-dark-primary);
+    font-family: var(--dnd5e-font-roboto-condensed);
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    margin-top: 6px;
+    gap: 4px;
+
+    .source-book {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    a {
+      margin: 0;
+      display: grid;
+      place-content: center;
+      &[hidden] { display: none; }
+    }
+
+    i {
+      font-size: var(--font-size-11);
+      color: var(--color-text-light-6);
+      margin: 0;
+    }
+  }
+
+  .window-content {
+    background: url("ui/texture-gray1.webp") no-repeat top left,
+      url("ui/texture-gray2.webp") no-repeat bottom right,
+      var(--dnd5e-color-parchment);
+
+    > form {
+      display: flex;
+      flex-direction: column;
+      padding: 38px 12px 8px;
+      gap: 8px;
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Sheet Header                      */
+  /* ---------------------------------- */
+
+  .sheet-header {
+    display: flex;
+    padding: 0 12px;
+    align-items: stretch;
+    gap: 8px;
+
+    input, select { background: var(--dnd5e-background-5); }
+
+    > .left { flex: none; }
+
+    > .middle {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    > .right {
+      flex: 0 0 96px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: end;
+    }
+
+    /* Icon */
+    .item-image {
+      width: 96px;
+      height: 96px;
+      border-radius: 100%;
+      border: 4px solid var(--dnd5e-color-gold);
+      box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+      object-fit: cover;
+      background: var(--dnd5e-color-light-gray);
+      margin: 0;
+    }
+
+    /* Name */
+    .document-name {
+      text-align: center;
+      font-size: var(--font-size-32);
+      font-family: var(--dnd5e-font-modesto);
+      font-weight: bold;
+    }
+
+    input.document-name { text-align: center; }
+
+    /* Subtitles */
+    .identity-info .subtitles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px;
+      font-family: var(--dnd5e-font-roboto-condensed);
+      font-size: var(--font-size-14);
+      height: 32px;
+
+      &:empty { display: none; }
+
+      li {
+        &::before {
+          content: "•";
+          margin-right: 4px;
+        }
+
+        &:first-child::before { content: ""; }
+      }
+
+      /* Rarity */
+      .item-rarity {
+        text-transform: capitalize;
+        > select { text-transform: capitalize; }
+      }
+    }
+
+    /* Spell School */
+    .school {
+      --icon-size: 48px;
+      --icon-fill: var(--dnd5e-color-gold);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+    }
+
+    /* Weight, Price, & Quantity */
+    .common-fields {
+      color: var(--color-text-dark-5);
+      font-size: var(--font-size-13);
+      gap: 8px;
+
+      &.physical {
+        justify-content: start;
+        padding-top: 10px;
+      }
+
+      .weight, .price, .quantity {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      input { text-align: center; }
+
+      select {
+        color: var(--color-text-dark-primary);
+        font-size: var(--font-size-11);
+        padding: 0;
+      }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Tabs                              */
+  /* ---------------------------------- */
+
+  nav.tabs {
+    justify-content: space-evenly;
+    font-family: var(--dnd5e-font-roboto);
+    text-transform: uppercase;
+    font-size: var(--font-size-13);
+    font-weight: bold;
+    color: var(--color-text-dark-5);
+    align-items: start;
+
+    .item {
+      text-align: center;
+      flex: 1;
+
+      > span { padding-bottom: 1px; }
+
+      &.active {
+        color: var(--color-text-dark-primary);
+        text-shadow: none;
+        > span { border-bottom: 3px solid var(--dnd5e-color-gold); }
+      }
+    }
+  }
+
+  form > hr.ampersand { margin-bottom: -4px; }
+
+  /* ---------------------------------- */
+  /*  Editable                          */
+  /* ---------------------------------- */
+
+  form.editable {
+    .sheet-header {
+      .common-fields {
+        gap: 4px;
+        .separator { padding: 0 4px 0 6px; }
+        &.physical {
+          justify-content: center;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+}

@@ -133,6 +133,18 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: this.type.label },
+      { label: this.parent.labels.featType },
+      { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
+        placeholder: "DND5E.Requirements" }
+    ];
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 

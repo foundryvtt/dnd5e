@@ -78,6 +78,14 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [{ label: context.itemType }];
+    context.singleDescription = true;
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
