@@ -28,7 +28,8 @@
                 {{#if @root.editable}}
                 {{#if field}}
                 <li {{#if classes}}class="{{ classes }}"{{/if}}>
-                    {{ formInput field value=value choices=choices blank=blank placeholder=placeholder localize=true }}
+                    {{ formInput field value=value choices=choices blank=blank placeholder=(localize placeholder)
+                                 localize=true }}
                 </li>
                 {{/if}}
                 {{else}}
