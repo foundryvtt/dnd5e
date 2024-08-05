@@ -156,11 +156,6 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareData() {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
-    const item = this.item;
-    this.effects?.forEach(e => Object.defineProperty(e, "effect", {
-      get() { return item.effects.get(e._id); },
-      configurable: true
-    }));
     UsesField.prepareData.call(this, this.getRollData({ deterministic: true }));
   }
 

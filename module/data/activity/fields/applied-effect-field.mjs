@@ -12,4 +12,19 @@ export default class AppliedEffectField extends SchemaField {
       ...fields
     }, options);
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  initialize(value, model, options={}) {
+    const obj = super.initialize(value, model, options);
+    const item = model.item;
+
+    Object.defineProperty(obj, "effect", {
+      get() { return item?.effects.get(this._id); },
+      configurable: true
+    });
+
+    return obj;
+  }
 }
