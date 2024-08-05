@@ -4,7 +4,7 @@
 export default class EnchantmentConfig extends DocumentSheet {
   constructor() {
     throw new Error(
-      "EnchantmentConfig has been deprecated. Configuring enchating should now be performed through the Enchant activity."
+      "EnchantmentConfig has been deprecated. Configuring enchanting should now be performed through the Enchant activity."
     );
   }
 }

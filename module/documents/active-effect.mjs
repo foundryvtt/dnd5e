@@ -73,6 +73,20 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _initializeSource(data, options={}) {
+    if ( data.flags?.dnd5e?.type === "enchantment" ) {
+      data.type = "enchantment";
+      delete data.flags.dnd5e.type;
+    }
+
+    return super._initializeSource(data, options);
+  }
+
+  /* -------------------------------------------- */
   /*  Effect Application                          */
   /* -------------------------------------------- */
 
@@ -290,20 +304,6 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
     if ( parent === doc ) return `.${parts.join(".")}`;
     return this.uuid;
-  }
-
-  /* -------------------------------------------- */
-  /*  Data Migration                              */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static migrateData(source) {
-    source = super.migrateData(source);
-    if ( source.flags?.dnd5e?.type === "enchantment" ) {
-      source.type = "enchantment";
-      delete source.flags.dnd5e.type;
-    }
-    return source;
   }
 
   /* -------------------------------------------- */
