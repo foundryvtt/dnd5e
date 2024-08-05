@@ -24,6 +24,9 @@
     "dnd5e.css"
   ],
   "documentTypes": {
+    "ActiveEffect": {
+      "enchantment": {}
+    },
     "Actor": {
       "character": {
         "htmlFields": ["details.biography.value", "details.biography.public"]

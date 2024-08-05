@@ -1,0 +1,5 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{> "templates/generic/tab-navigation.hbs" tabs=tabs.effect.tabs }}
+    {{> "systems/dnd5e/templates/activity/parts/enchant-enchantments.hbs" tab=tabs.effect.tabs.enchantments }}
+    {{> "systems/dnd5e/templates/activity/parts/enchant-restrictions.hbs" tab=tabs.effect.tabs.restrictions }}
+</section>

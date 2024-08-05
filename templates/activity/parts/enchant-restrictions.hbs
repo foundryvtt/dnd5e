@@ -1,0 +1,9 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>{{ localize "DND5E.ENCHANT.FIELDS.restrictions.label" }}</legend>
+        {{#with fields.restrictions.fields as |fields|}}
+        {{ formField fields.allowMagical value=../source.restrictions.allowMagical }}
+        {{ formField fields.type value=../source.restrictions.type options=../typeOptions }}
+        {{/with}}
+    </fieldset>
+</section>

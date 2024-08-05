@@ -87,7 +87,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    * @type {ActiveEffect5e[]}
    */
   get enchantments() {
-    return this.item.effects.filter(ae => ae.getFlag("dnd5e", "type") === "enchantment");
+    return this.item.effects.filter(ae => ae.type === "enchantment");
   }
 
   /* -------------------------------------------- */
@@ -159,7 +159,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
         : "details.level";
     const level = foundry.utils.getProperty(item.getRollData(), keyPath) ?? 0;
     return item.effects.filter(e => {
-      if ( (e.getFlag("dnd5e", "type") !== "enchantment") || e.isAppliedEnchantment ) return false;
+      if ( (e.type !== "enchantment") || e.isAppliedEnchantment ) return false;
       const { min, max } = e.getFlag("dnd5e", "enchantment.level") ?? {};
       return ((min ?? -Infinity) <= level) && (level <= (max ?? Infinity));
     });

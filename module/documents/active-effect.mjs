@@ -40,8 +40,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @type {boolean}
    */
   get isAppliedEnchantment() {
-    return (this.getFlag("dnd5e", "type") === "enchantment")
-      && !!this.origin && (this.origin !== this.parent.uuid);
+    return (this.type === "enchantment") && !!this.origin && (this.origin !== this.parent.uuid);
   }
 
   /* -------------------------------------------- */
@@ -271,7 +270,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
-    if ( this.getFlag("dnd5e", "type") === "enchantment" ) return;
+    if ( this.type === "enchantment" ) return;
     if ( this.parent instanceof dnd5e.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
   }
 
@@ -291,6 +290,20 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
     if ( parent === doc ) return `.${parts.join(".")}`;
     return this.uuid;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    source = super.migrateData(source);
+    if ( source.flags?.dnd5e?.type === "enchantment" ) {
+      source.type = "enchantment";
+      delete source.flags.dnd5e.type;
+    }
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -410,7 +423,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
 
     // Enchantments cannot be added directly to actors
-    if ( (this.getFlag("dnd5e", "type") === "enchantment") && (this.parent instanceof Actor) ) {
+    if ( (this.type === "enchantment") && (this.parent instanceof Actor) ) {
       ui.notifications.error("DND5E.Enchantment.Warning.NotOnActor", { localize: true });
       return false;
     }
@@ -736,7 +749,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     else if ( this.disabled ) properties.push("DND5E.EffectType.Inactive");
     else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
     else properties.push("DND5E.EffectType.Passive");
-    if ( this.getFlag("dnd5e", "type") === "enchantment" ) properties.push("DND5E.Enchantment.Label");
+    if ( this.type === "enchantment" ) properties.push("DND5E.Enchantment.Label");
 
     return {
       content: await renderTemplate(

@@ -1,7 +1,7 @@
 import ActivitySheet from "./activity-sheet.mjs";
 
 /**
- * Default sheet for activities.
+ * Sheet for the summon activity.
  */
 export default class SummonSheet extends ActivitySheet {
 
@@ -67,6 +67,7 @@ export default class SummonSheet extends ActivitySheet {
     ];
     context.profiles = this.activity.profiles.map((data, index) => ({
       data, index,
+      collapsed: this.expandedSections.get(`profiles.${effect.id}`) ? "" : "collapsed",
       fields: this.activity.schema.fields.profiles.element.fields,
       prefix: `profiles.${index}.`,
       source: context.source.profiles[index] ?? data,
