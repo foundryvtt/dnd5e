@@ -260,6 +260,13 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.equipmentTypes;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * The proficiency multiplier for this item.
    * @returns {number}

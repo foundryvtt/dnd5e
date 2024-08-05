@@ -1,6 +1,6 @@
 import { FormulaField, IdentifierField } from "../../fields.mjs";
 
-const { BooleanField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, EmbeddedDataField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * A field for storing summons data.
@@ -30,13 +30,15 @@ export default class EnchantmentField extends EmbeddedDataField {
 /**
  * Data model for enchantment configuration.
  *
- * @property {string} classIdentifier             Class identifier that will be used to determine applicable level.
+ * @property {string} classIdentifier               Class identifier that will be used to determine applicable level.
  * @property {object} items
- * @property {string} items.max                   Maximum number of items that can have this enchantment.
- * @property {string} items.period                Frequency at which the enchantment be swapped.
+ * @property {string} items.max                     Maximum number of items that can have this enchantment.
+ * @property {string} items.period                  Frequency at which the enchantment be swapped.
  * @property {object} restrictions
- * @property {boolean} restrictions.allowMagical  Allow enchantments to be applied to items that are already magical.
- * @property {string} restrictions.type           Item type to which this enchantment can be applied.
+ * @property {boolean} restrictions.allowMagical    Allow enchantments to be applied to items that are already magical.
+ * @property {string} restrictions.type             Item type to which this enchantment can be applied.
+ * @property {Set<string>} restrictions.categories  Item categories to restrict to.
+ * @property {Set<string>} restrictions.properties  Item properties to restrict to.
  */
 export class EnchantmentData extends foundry.abstract.DataModel {
 
@@ -50,7 +52,9 @@ export class EnchantmentData extends foundry.abstract.DataModel {
       }),
       restrictions: new SchemaField({
         allowMagical: new BooleanField(),
-        type: new StringField()
+        type: new StringField(),
+        categories: new SetField(new StringField()),
+        properties: new SetField(new StringField())
       })
     };
   }
@@ -185,6 +189,48 @@ export class EnchantmentData extends foundry.abstract.DataModel {
         allowedType: game.i18n.localize(CONFIG.Item.typeLabels[this.restrictions.type])
       })));
     }
+
+    if ( this.restrictions.categories.size && !this.restrictions.categories.has(item.system.type?.value) ) {
+      const getLabel = key => {
+        const config = CONFIG.Item.dataModels[this.restrictions.type]?.itemCategories[key];
+        if ( !config ) return key;
+        if ( foundry.utils.getType(config) === "string" ) return config;
+        return config.label;
+      };
+      errors.push(new EnchantmentError(game.i18n.format(
+        `DND5E.Enchantment.Warning.${item.system.type?.value ? "WrongType" : "NoSubtype"}`,
+        {
+          allowedType: game.i18n.getListFormatter({ type: "disjunction" }).format(
+            Array.from(this.restrictions.categories).map(c => getLabel(c).toLowerCase())
+          ),
+          incorrectType: getLabel(item.system.type?.value)
+        }
+      )));
+    }
+
+    if ( this.restrictions.properties.size
+      && !this.restrictions.properties.intersection(item.system.properties ?? new Set()).size ) {
+      errors.push(new EnchantmentError(game.i18n.format(
+        "DND5E.Enchantment.Warning.MissingProperty",
+        {
+          validProperties: game.i18n.getListFormatter({ type: "disjunction" }).format(
+            Array.from(this.restrictions.properties).map(p => CONFIG.DND5E.itemProperties[p]?.label ?? p)
+          )
+        }
+      )));
+    }
+
+    /**
+     * A hook event that fires while validating whether an enchantment can be applied to a specific item.
+     * @function dnd5e.canEnchant
+     * @memberof hookEvents
+     * @param {EnchantmentData} enchantment  The enchantment configuration.
+     * @param {Item5e} item                  Item to which the enchantment will be applied.
+     * @param {EnchantmentError[]} errors    List of errors containing failed restrictions. The item will be enchanted
+     *                                       so long as no errors are listed, otherwise the provided errors will be
+     *                                       displayed to the user.
+     */
+    Hooks.callAll("dnd5e.canEnchant", this, item, errors);
 
     return errors.length ? errors : true;
   }

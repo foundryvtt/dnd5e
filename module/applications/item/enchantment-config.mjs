@@ -71,6 +71,27 @@ export default class EnchantmentConfig extends DocumentSheet {
       riderItems: effect.flags.dnd5e?.enchantment?.riders?.item?.join(",") ?? ""
     }));
 
+    const type = context.enchantment?.restrictions.type;
+    const typeDataModel = CONFIG.Item.dataModels[type];
+    if ( typeDataModel ) {
+      context.validCategories = Object.entries(typeDataModel.itemCategories ?? {}).reduce((obj, [k, v]) => {
+        obj ??= {};
+        obj[k] = {
+          label: foundry.utils.getType(v) === "string" ? v : v.label,
+          selected: context.enchantment?.restrictions.categories.has(k) ? "selected" : ""
+        };
+        return obj;
+      }, null);
+    }
+    context.validProperties = (CONFIG.DND5E.validProperties[type] ?? []).reduce((obj, k) => {
+      obj ??= {};
+      obj[k] = {
+        label: CONFIG.DND5E.itemProperties[k]?.label ?? k,
+        selected: context.enchantment?.restrictions.properties.has(k) ? "selected" : ""
+      };
+      return obj;
+    }, null);
+
     return context;
   }
 
@@ -102,6 +123,18 @@ export default class EnchantmentConfig extends DocumentSheet {
         this.expandedEnchantments.set(id, !event.currentTarget.classList.contains("collapsed"));
       });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _getSubmitData(...args) {
+    const data = super._getSubmitData(...args);
+    // Fix bug with <multi-select> in V11
+    data["restrictions.categories"] ??= [];
+    data["restrictions.properties"] ??= [];
+    // End bug fix
+    return data;
   }
 
   /* -------------------------------------------- */
