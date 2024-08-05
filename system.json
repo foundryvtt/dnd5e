@@ -40,43 +40,43 @@
     },
     "Item": {
       "weapon": {
-        "htmlFields": ["details.value", "details.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "equipment": {
-        "htmlFields": ["details.value", "details.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "consumable": {
-        "htmlFields": ["details.value", "details.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "tool": {
-        "htmlFields": ["details.value", "details.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "loot": {
-        "htmlFields": ["details.value", "details.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "race": {
-        "htmlFields": ["details.value", "details.chat"]
+        "htmlFields": ["description.value", "description.chat"]
       },
       "background": {
-        "htmlFields": ["details.value", "details.chat"]
+        "htmlFields": ["description.value", "description.chat"]
       },
       "class": {
-        "htmlFields": ["details.value", "details.chat"]
+        "htmlFields": ["description.value", "description.chat"]
       },
       "subclass": {
-        "htmlFields": ["details.value", "details.chat"]
+        "htmlFields": ["description.value", "description.chat"]
       },
       "spell": {
-        "htmlFields": ["details.value", "details.chat"]
+        "htmlFields": ["description.value", "description.chat"]
       },
       "feat": {
-        "htmlFields": ["details.value", "details.chat"]
+        "htmlFields": ["description.value", "description.chat"]
       },
       "container": {
-        "htmlFields": ["details.value", "details.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "backpack": {
-        "htmlFields": ["details.value", "details.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       }
     },
     "JournalEntryPage": {
