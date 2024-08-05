@@ -191,7 +191,32 @@
       },
       "targets": {
         "label": "Consumption Targets",
-        "hint": "Targets of possible consumption when this activity is activated."
+        "hint": "Targets of possible consumption when this activity is activated.",
+        "FIELDS": {
+          "type": {
+            "label": "Consumption Type",
+            "hint": "Type of consumption target."
+          },
+          "target": {
+            "label": "Consumption Target",
+            "hint": "Specific target to be consumed."
+          },
+          "value": {
+            "label": "Consumption Amount",
+            "hint": "Amount to consume of the target."
+          },
+          "scaling": {
+            "label": "Consumption Scaling",
+            "mode": {
+              "label": "Scaling Mode",
+              "hint": "How consumption should be scaled."
+            },
+            "formula": {
+              "label": "Scaling Formula",
+              "hint": "Custom scaling of consumption amount per level."
+            }
+          }
+        }
       }
     },
     "duration": {
@@ -2041,7 +2066,7 @@
     },
     "profiles": {
       "label": "Summons Profiles",
-      "*": {
+      "FIELDS": {
         "count": {
           "label": "Count"
         },
@@ -2297,7 +2322,21 @@
       },
       "recovery": {
         "label": "Use Recovery",
-        "hint": "Recovery profiles for this activity's uses."
+        "hint": "Recovery profiles for this activity's uses.",
+        "FIELDS": {
+          "period": {
+            "label": "Recovery Period",
+            "hint": "Time when this recovery will occur."
+          },
+          "type": {
+            "label": "Recovery Type",
+            "hint": "How uses are recovered."
+          },
+          "formula": {
+            "label": "Recovery Formula",
+            "hint": "Formula used to determine how many uses are recovered."
+          }
+        }
       },
       "spent": {
         "label": "Spent Uses",

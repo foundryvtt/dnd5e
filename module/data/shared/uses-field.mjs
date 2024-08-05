@@ -4,7 +4,20 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * Data for a recovery profile for an activity's uses.
+ *
+ * @typedef {object} UsesRecoveryData
+ * @property {string} period   Period at which this profile is activated.
+ * @property {string} type     Whether uses are reset to full, reset to zero, or recover a certain number of uses.
+ * @property {string} formula  Formula used to determine recovery if type is not reset.
+ */
+
+/**
  * Field for storing uses data.
+ *
+ * @property {number} spent                 Number of uses that have been spent.
+ * @property {string} max                   Formula for the maximum number of uses.
+ * @property {UsesRecoveryData[]} recovery  Recovery profiles for this activity's uses.
  */
 export default class UsesField extends SchemaField {
   constructor(fields={}, options={}) {

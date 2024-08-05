@@ -27,15 +27,6 @@ const {
  */
 
 /**
- * Data for a recovery profile for an activity's uses.
- *
- * @typedef {object} UsesRecoveryData
- * @property {string} period   Period at which this profile is activated.
- * @property {string} type     Whether uses are reset to full, reset to zero, or recover a certain number of uses.
- * @property {string} formula  Formula used to determine recovery if type is not reset.
- */
-
-/**
  * Data model for activities.
  *
  * @property {string} _id                        Unique ID for the activity on an item.
@@ -75,10 +66,7 @@ const {
  * @property {boolean} target.affects.choice     When targeting an area, can the user choose who it affects?
  * @property {string} target.affects.special     Description of special targeting.
  * @property {boolean} target.prompt             Should the player be prompted to place the template?
- * @property {object} uses
- * @property {number} uses.spent                 Number of uses that have been spent.
- * @property {string} uses.max                   Formula for the maximum number of uses.
- * @property {UsesRecoveryData[]} uses.recovery  Recovery profiles for this activity's uses.
+ * @property {UsesField} uses                    Uses available to this activity.
  */
 export default class BaseActivityData extends foundry.abstract.DataModel {
 

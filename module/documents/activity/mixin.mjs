@@ -32,6 +32,32 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   });
 
   /* -------------------------------------------- */
+
+  /**
+   * Perform the pre-localization of this data model.
+   */
+  static localize() {
+    Localization.localizeDataModel(this);
+    const fields = this.schema.fields;
+    if ( fields.damage?.fields.parts ) this._localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE"]);
+    this._localizeSchema(fields.consumption.fields.targets.element, ["DND5E.ACTIVITY.FIELDS.consumption.targets"]);
+    this._localizeSchema(fields.uses.fields.recovery.element, ["DND5E.USES.FIELDS.uses.recovery"]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform pre-localization on the contents of a SchemaField. Necessary because the `localizeSchema` method
+   * on `Localization` is private.
+   * @param {SchemaField} schema
+   * @param {string[]} prefixes
+   * @internal
+   */
+  static _localizeSchema(schema, prefixes) {
+    Localization.localizeDataModel({ schema }, { prefixes });
+  }
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 

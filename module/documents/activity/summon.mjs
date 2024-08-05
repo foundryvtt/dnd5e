@@ -24,4 +24,12 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       sheetClass: SummonSheet
     }, { inplace: false })
   );
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static localize() {
+    super.localize();
+    this._localizeSchema(this.schema.fields.profiles.element, ["DND5E.SUMMON.FIELDS.profiles"]);
+  }
 }

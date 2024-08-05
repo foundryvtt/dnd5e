@@ -4,35 +4,37 @@
         <div class="formula flexrow">
             {{#unless data.custom.enabled}}
 
-            {{ formField fields.number name=(concat prefix "number") value=data.number }}
+            {{ formField fields.number name=(concat prefix "number") value=data.number stacked=true hint=false }}
             {{ formField fields.denomination name=(concat prefix "denomination") value=data.denomination
-               options=denominationOptions }}
+               options=denominationOptions stacked=true hint=false }}
             <span class="seperator">+</span>
-            {{ formField fields.bonus name=(concat prefix "bonus") value=data.bonus }}
+            {{ formField fields.bonus name=(concat prefix "bonus") value=data.bonus stacked=true hint=false }}
             <input type="hidden" name="{{ prefix }}custom.formula" value="{{ data.custom.formula }}">
 
             {{else}}
 
             {{ formField fields.custom.fields.formula name=(concat prefix "custom.formula")
-               value=data.custom.formula }}
+               value=data.custom.formula stacked=true hint=false }}
             <input type="hidden" name="{{ prefix }}number" value="{{ data.number }}">
             <input type="hidden" name="{{ prefix }}denomination" value="{{ data.denomination }}">
             <input type="hidden" name="{{ prefix }}bonus" value="{{ data.bonus }}">
 
             {{/unless}}
             {{ formField fields.custom.fields.enabled name=(concat prefix "custom.enabled")
-               value=data.custom.enabled }}
+               value=data.custom.enabled stacked=true hint=false }}
         </div>
-        {{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions }}
+        {{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions hint=false }}
 
         {{#if canScale}}
         {{#with fields.scaling.fields as |fields|}}
         <div class="scaling flexrow">
             {{ formField fields.mode name=(concat ../prefix "scaling.mode") value=../data.scaling.mode
-               options=../scalingOptions }}
+               options=../scalingOptions stacked=true hint=false }}
             {{#if ../data.scaling.mode}}
-            {{ formField fields.number name=(concat ../prefix "scaling.number") value=../data.scaling.number }}
-            {{ formField fields.formula name=(concat ../prefix "scaling.formula") value=../data.scaling.formula }}
+            {{ formField fields.number name=(concat ../prefix "scaling.number") value=../data.scaling.number
+               stacked=true hint=false }}
+            {{ formField fields.formula name=(concat ../prefix "scaling.formula") value=../data.scaling.formula
+               stacked=true hint=false }}
             {{/if}}
         </div>
         {{/with}}
