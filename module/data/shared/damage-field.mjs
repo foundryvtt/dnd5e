@@ -36,11 +36,6 @@ export class DamageData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.DAMAGE"];
-
-  /* -------------------------------------------- */
-
-  /** @override */
   static defineSchema() {
     return {
       number: new NumberField({ min: 0, integer: true }),

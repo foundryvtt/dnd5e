@@ -39,7 +39,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   static localize() {
     Localization.localizeDataModel(this);
     const fields = this.schema.fields;
-    if ( fields.damage?.fields.parts ) this._localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE"]);
+    if ( fields.damage?.fields.parts ) {
+      this._localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE.FIELDS.damage.parts"]);
+    }
     this._localizeSchema(fields.consumption.fields.targets.element, ["DND5E.ACTIVITY.FIELDS.consumption.targets"]);
     this._localizeSchema(fields.uses.fields.recovery.element, ["DND5E.USES.FIELDS.uses.recovery"]);
   }
