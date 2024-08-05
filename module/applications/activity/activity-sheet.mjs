@@ -116,6 +116,10 @@ export default class ActivitySheet extends Application5e {
    */
   #expandedSections = new Map();
 
+  get expandedSections() {
+    return this.#expandedSections;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -334,12 +338,15 @@ export default class ActivitySheet extends Application5e {
 
     if ( context.activity.effects ) {
       const appliedEffects = new Set(context.activity.effects?.map(e => e._id) ?? []);
-      context.allEffects = this.item.effects.map(effect => ({
-        value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
-      }));
+      context.allEffects = this.item.effects
+        .filter(e => e.type !== "enchantment")
+        .map(effect => ({
+          value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
+        }));
       context.appliedEffects = context.activity.effects.map((data, index) => {
         const effect = {
           data,
+          collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
           effect: data.effect,
           fields: this.activity.schema.fields.effects.element.fields,
           prefix: `effects.${index}.`,
@@ -541,14 +548,25 @@ export default class ActivitySheet extends Application5e {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #addEffect(event, target) {
-    const effectData = {
+    const effectData = this._addEffectData();
+    const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData]);
+    this.activity.update({ effects: [...this.activity.toObject().effects, { _id: created.id }] });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The data for a newly created applied effect.
+   * @returns {object}
+   * @protected
+   */
+  _addEffectData() {
+    return {
       name: this.item.name,
       img: this.item.img,
       origin: this.item.uuid,
       transfer: false
     };
-    const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData]);
-    this.activity.update({ effects: [...this.activity.toObject().effects, { _id: created.id }] });
   }
 
   /* -------------------------------------------- */
@@ -646,7 +664,7 @@ export default class ActivitySheet extends Application5e {
     target.classList.toggle("collapsed");
     this.#expandedSections.set(
       target.closest("[data-expand-id]")?.dataset.expandId,
-      !event.currentTarget.classList.contains("collapsed")
+      !target.classList.contains("collapsed")
     );
   }
 

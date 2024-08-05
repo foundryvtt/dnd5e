@@ -1,0 +1,68 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>{{ localize "DND5E.ENCHANT.FIELDS.enchant.label" }}</legend>
+        {{#with fields.enchant.fields as |fields|}}
+        {{#unless ../activity.isSpell}}{{ formField fields.identifier value=../source.enchant.identifier }}{{/unless}}
+        {{/with}}
+        <multi-select name="appliedEffects">
+            {{ selectOptions allEnchantments }}
+        </multi-select>
+        <ul class="separated-list enchantments flexcol">
+            {{#each appliedEffects}}
+            <li data-index="{{ index }}" data-effect-id="{{ effect.id }}" data-expand-id="effects.{{ effect.id }}">
+                {{> ".enchantment" }}
+            </li>
+            {{else}}
+            <li class="empty">
+                {{ localize "DND5E.ENCHANT.Enchantment.Empty" }}
+            </li>
+            {{/each}}
+        </ul>
+        <button type="button" class="unbutton" data-action="addEffect">
+            {{ localize "DND5E.ENCHANT.Enchantment.Action.Create" }}
+        </button>
+    </fieldset>
+</section>
+
+{{#*inline ".enchantment"}}
+<div class="details flexrow">
+    <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
+    {{{ dnd5e-linkForUuid effect.uuid }}}
+    <div class="list-controls flexrow">
+        <button type="button" class="unbutton" data-action="deleteEffect"
+                data-tooltip="DND5E.ENCHANT.Enchantment.Action.Delete"
+                aria-label="{{ localize 'DND5E.ENCHANT.Enchantment.Action.Delete' }}">
+            <i class="fa-solid fa-trash fa-fw" inert></i>
+        </button>
+    </div>
+</div>
+<input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
+<div class="additional-tray collapsible {{ collapsed }}" data-action="toggleCollapsed">
+    <label class="roboto-upper">
+        <i class="fa-solid fa-gears" inert></i>
+        <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+        <i class="fas fa-caret-down" inert></i>
+    </label>
+    <div class="collapsible-content">
+        <div class="wrapper">
+            <div class="form-group">
+                <label>{{ localize "DND5E.ENCHANT.FIELDS.effects.FIELDS.level.label" }}</label>
+                <div class="form-fields">
+                    {{ formInput fields.level.fields.min name=(concat prefix "level.min")
+                       value=data.level.min placeholder="0" }}
+                    <!-- aria-label="{{ localize 'DND5E.LevelLimit.Min' }}" -->
+                    <span class="sep">&ndash;</span>
+                    {{ formInput fields.level.fields.max name=(concat prefix "level.max")
+                       value=data.level.max placeholder="∞" }}
+                    <!-- aria-label="{{ localize 'DND5E.LevelLimit.Max' }}" -->
+                </div>
+                <p class="hint">{{ localize "DND5E.ENCHANT.FIELDS.effects.FIELDS.level.hint" }}</p>
+            </div>
+            {{#with fields.riders.fields as |fields|}}
+            {{ formField fields.effect name=(concat ../prefix "riders.effect") options=../effectOptions }}
+            {{ formField fields.item name=(concat ../prefix "riders.item") value=../data.riders.item }}
+            {{/with}}
+        </div>
+    </div>
+</div>
+{{/inline}}

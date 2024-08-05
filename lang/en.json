@@ -20,6 +20,9 @@
 "TYPES.Actor.group": "Group",
 "TYPES.Actor.groupPl": "Groups",
 
+"TYPES.ActiveEffect.enchantment": "Enchantment",
+"TYPES.ActiveEffect.enchantmentPl": "Enchantments",
+
 "ITEM.TypeBackground": "Background",
 "ITEM.TypeBackgroundPl": "Backgrounds",
 "ITEM.TypeContainer": "Container",
@@ -1098,20 +1101,83 @@
 "DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
 "DND5E.EffectApplyWarningOwnership": "Effects cannot be applied to tokens you are not the owner of.",
 "DND5E.EffectsSearch": "Search effects",
-"DND5E.Enchantment": {
+
+"DND5E.ENCHANT": {
+  "Title": "Enchant",
+  "FIELDS": {
+    "effects": {
+      "FIELDS": {
+        "level": {
+          "label": "Level Limit",
+          "hint": "Range of levels required to use this enchantment.",
+          "max": {
+            "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
+          }
+        },
+        "riders": {
+          "label": "Attached",
+          "effect": {
+            "label": "Additional Effects",
+            "hint": "These additional effects will be added to the enchanted item when this enchantment is added, and removed when the enchantment is removed."
+          },
+          "item": {
+            "label": "Additional Items",
+            "hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
+          }
+        }
+      }
+    },
+    "enchant": {
+      "label": "Enchantment Configuration",
+      "identifier": {
+        "label": "Class Identifier",
+        "hint": "Identifier used to determine whether the character level or a specific class level should be used for enchantment level limits."
+      }
+    },
+    "restrictions": {
+      "label": "Restrictions",
+      "hint": "Restrictions on the type of item to which this enchantment can be applied.",
+      "allowMagical": {
+        "label": "Allow Magical",
+        "hint": "Allow items that are already magical to be enchanted."
+      },
+      "type": {
+        "label": "Item Type",
+        "hint": "Type of item to which this enchantment can be applied.",
+        "Any": "Any Enchantable Type"
+      }
+    }
+  },
+  "SECTIONS": {
+    "Enchanting": "Enchanting",
+    "Enchantments": "Enchantments",
+    "Restrictions": "Restrictions"
+  },
+  "Enchantment": {
+    "Action": {
+      "Create": "Create Enchantment",
+      "Delete": "Delete Enchantment"
+    },
+    "Empty": "No associated enchantments, use the button below to create one or select an existing enchantment from the control above."
+  }
+},
+
+"DND5E.ENCHANTMENT": {
   "Action": {
     "Apply": "Apply Enchantment",
-    "Configure": "Configure Enchantment",
-    "Create": "Create Enchantment",
-    "Delete": "Delete Enchantment",
     "Disable": "Disable Enchantment",
     "Edit": "Edit Enchantment",
     "Enable": "Enable Enchantment",
     "Remove": "Remove Enchantment"
-  },
+  }
+},
+
+"DND5E.Enchantment": {
   "Category": {
     "Active": "Active Enchantments",
-    "Empty": "No enchantments have been created, use the button above to create one.",
     "General": "Enchantments",
     "Inactive": "Inactive Enchantments"
   },
@@ -1121,9 +1187,6 @@
   "FIELDS": {
     "enchantment": {
       "label": "Enchantment Configuration",
-      "classIdentifier": {
-        "hint": "Identifier used to determine whether the character level or a specific class level should be used for enchantment level limits."
-      },
       "items": {
         "max": {
           "label": "Item Limit",
@@ -1133,37 +1196,12 @@
           "label": "Replacement Period",
           "hint": "How frequently the enchantments of this type can be re-bound to different items."
         }
-      },
-      "restrictions": {
-        "label": "Restrictions",
-        "hint": "Restrictions on the type of item to which this enchantment can be applied.",
-        "allowMagical": {
-          "label": "Allow Magical",
-          "hint": "Allow items that are already magical to be enchanted."
-        },
-        "type": {
-          "label": "Item Type",
-          "hint": "Type of item to which this enchantment can be applied."
-        }
       }
     }
   },
   "Label": "Enchantment",
-  "Level": {
-    "Hint": "Range of levels required to use this enchantment."
-  },
   "Items": {
     "Entry": "{item} on <em>{actor}</em>"
-  },
-  "Riders": {
-    "Effect": {
-      "Label": "Additional Effects",
-      "Hint": "These additional effects will be added to the enchanted item when this enchantment is added, and removed when the enchantment is removed."
-    },
-    "Item": {
-      "Label": "Additional Items",
-      "Hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
-    }
   },
   "Warning": {
     "ConcentrationEnded": "Cannot apply this enchantment because concentration has ended.",
@@ -2119,11 +2157,11 @@
         "level": {
           "label": "Level Limit",
           "hint": "Range of levels required to use this profile.",
-          "min": {
-            "label": "Minimum Level"
-          },
           "max": {
             "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
           }
         },
         "name": {
