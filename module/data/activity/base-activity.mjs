@@ -1,6 +1,7 @@
 import { formatNumber } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
+import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, FilePathField, NumberField, SchemaField, StringField
@@ -23,7 +24,7 @@ const {
  * Data for effects that can be applied.
  *
  * @typedef {object} EffectApplicationData
- * @property {string} effect  ID of the effect to apply.
+ * @property {string} _id  ID of the effect to apply.
  */
 
 /**
@@ -117,7 +118,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         units: new StringField({ initial: "inst" }),
         special: new StringField()
       }),
-      effects: new ArrayField(new SchemaField(this.defineEffectSchema())),
+      effects: new ArrayField(new AppliedEffectField()),
       range: new SchemaField({
         value: new FormulaField({ deterministic: true }),
         units: new StringField(),
@@ -146,18 +147,6 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Return the fields that will be included in the schema for applied effects.
-   * @returns {Record<string, DataField>}
-   */
-  static defineEffectSchema() {
-    return {
-      id: new DocumentIdField()
-    };
-  }
-
-  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -169,7 +158,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     this.img = this.img || this.metadata?.img;
     const item = this.item;
     this.effects?.forEach(e => Object.defineProperty(e, "effect", {
-      get() { return item.effects.get(e.id); },
+      get() { return item.effects.get(e._id); },
       configurable: true
     }));
     UsesField.prepareData.call(this, this.getRollData({ deterministic: true }));

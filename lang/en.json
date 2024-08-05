@@ -1790,7 +1790,7 @@
           "hint": "Custom formula or flat value for defining the save DC."
         },
         "CustomFormula": "Custom Formula",
-        "DefaultFormula": "8 + Ability + Proficiency"
+        "DefaultFormula": "8 + @mod + @prof"
       }
     }
   }

@@ -7,7 +7,7 @@
     {{ formField fields.formula value=../source.save.dc.formula }}
     {{else}}
     {{ formField fields.formula name="" value=(localize "DND5E.SAVE.FIELDS.save.dc.DefaultFormula") disabled=true }}
-    <input type="hidden" name="save.dc.formula" value="{{ ../source.save.dv.formula }}">
+    <input type="hidden" name="save.dc.formula" value="{{ ../source.save.dc.formula }}">
     {{/if}}
     {{/with}}
 </fieldset>

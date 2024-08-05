@@ -1,6 +1,7 @@
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
+import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
 const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fields;
 
@@ -12,7 +13,7 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
 /**
  * Data model for an save activity.
  *
- * @property {string} ability                       Ability used to make the attack and determine damage.
+ * @property {string} ability                       Make the saving throw with this ability.
  * @property {object} damage
  * @property {string} damage.onSave                 How much damage is done on a successful save?
  * @property {DamageData[]} damage.parts            Parts of damage to inflict.
@@ -32,25 +33,15 @@ export default class SaveActivityData extends BaseActivityData {
         onSave: new StringField(),
         parts: new ArrayField(new DamageField())
       }),
+      effects: new ArrayField(new AppliedEffectField({
+        onSave: new BooleanField()
+      })),
       save: new SchemaField({
         dc: new SchemaField({
           calculation: new StringField(),
           formula: new FormulaField({ deterministic: true })
         })
       })
-    };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return the fields that will be included in the schema for applied effects.
-   * @returns {Record<string, DataField>}
-   */
-  static defineEffectSchema() {
-    return {
-      ...super.defineEffectSchema(),
-      onSave: new BooleanField()
     };
   }
 

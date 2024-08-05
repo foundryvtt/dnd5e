@@ -5,7 +5,7 @@
     </multi-select>
     <ul class="separated-list effects-list">
         {{#each appliedEffects}}
-        <li data-index="{{ @index }}" data-effect-id="{{ id }}" data-expand-id="effects.{{ id }}">
+        <li data-index="{{ @index }}" data-effect-id="{{ effect.id }}" data-expand-id="effects.{{ effect.id }}">
             {{> ".effect" }}
         </li>
         {{/each}}
@@ -27,7 +27,7 @@
         </button>
     </div>
 </div>
-<input type="hidden" name="{{ prefix }}id" value="{{ data.id }}">
+<input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
 {{#if additionalSettings}}
 <div class="additional-tray collapsible" data-action="toggleCollapsed">
     <label class="roboto-upper">

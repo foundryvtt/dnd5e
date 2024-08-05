@@ -333,7 +333,7 @@ export default class ActivitySheet extends Application5e {
     context.tab = context.tabs.effect;
 
     if ( context.activity.effects ) {
-      const appliedEffects = new Set(context.activity.effects?.map(e => e.id) ?? []);
+      const appliedEffects = new Set(context.activity.effects?.map(e => e._id) ?? []);
       context.allEffects = this.item.effects.map(effect => ({
         value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
       }));
@@ -548,7 +548,7 @@ export default class ActivitySheet extends Application5e {
       transfer: false
     };
     const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData]);
-    this.activity.update({ effects: [...this.activity.toObject().effects, { id: created.id }] });
+    this.activity.update({ effects: [...this.activity.toObject().effects, { _id: created.id }] });
   }
 
   /* -------------------------------------------- */
@@ -614,7 +614,7 @@ export default class ActivitySheet extends Application5e {
     const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
     const result = await this.item.effects.get(effectId)?.deleteDialog();
     if ( result instanceof ActiveEffect ) {
-      const effects = this.activity.toObject().effects.filter(e => e.id !== effectId);
+      const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
       this.activity.update({ effects });
     }
   }
@@ -681,10 +681,10 @@ export default class ActivitySheet extends Application5e {
     }
     if ( foundry.utils.hasProperty(submitData, "appliedEffects") ) {
       const effects = submitData.effects ?? this.activity.toObject().effects;
-      submitData.effects = effects.filter(e => submitData.appliedEffects.includes(e.id));
-      for ( const id of submitData.appliedEffects ) {
-        if ( submitData.effects.find(e => e.id === id) ) continue;
-        submitData.effects.push({ id });
+      submitData.effects = effects.filter(e => submitData.appliedEffects.includes(e._id));
+      for ( const _id of submitData.appliedEffects ) {
+        if ( submitData.effects.find(e => e._id === _id) ) continue;
+        submitData.effects.push({ _id });
       }
     }
     return submitData;
