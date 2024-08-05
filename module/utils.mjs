@@ -357,6 +357,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-activation.hbs",
     "systems/dnd5e/templates/items/parts/item-advancement.hbs",
     "systems/dnd5e/templates/items/parts/item-description.hbs",
+    "systems/dnd5e/templates/items/parts/item-description2.hbs",
     "systems/dnd5e/templates/items/parts/item-mountable.hbs",
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
     "systems/dnd5e/templates/items/parts/item-source.hbs",

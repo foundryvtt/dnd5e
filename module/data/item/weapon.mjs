@@ -145,6 +145,19 @@ export default class WeaponData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+    context.info = [{ label: "DND5E.ToHit", value: dnd5e.utils.formatModifier(parseInt(this.parent.labels.modifier)) }];
+    if ( this.parent.labels.derivedDamage?.length ) {
+      const config = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
+      context.info.push({ value: this.parent.labels.derivedDamage.reduce((str, { formula, damageType }) => {
+        const { label, icon } = config[damageType];
+        return `${str}
+          <span class="formula">${formula}</span>
+          <span class="damage-type" data-tooltip="${label}" aria-label="${label}">
+            <dnd5e-icon src="${icon}"></dnd5e-icon>
+          </span>
+        `;
+      }, ""), classes: "damage" });
+    }
   }
 
   /* -------------------------------------------- */

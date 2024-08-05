@@ -176,6 +176,7 @@ export default class SpellData extends ItemDataModel.mixin(
       { label: context.labels.school },
       { label: context.itemStatus }
     ];
+    context.properties.active = this.parent.labels?.components?.tags;
   }
 
   /* -------------------------------------------- */
