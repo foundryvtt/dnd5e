@@ -3236,6 +3236,9 @@ DND5E.activityTypes = {
   attack: {
     documentClass: activities.AttackActivity
   },
+  save: {
+    documentClass: activities.SaveActivity
+  },
   summon: {
     documentClass: activities.SummonActivity
   },

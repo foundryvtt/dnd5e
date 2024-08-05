@@ -10,8 +10,7 @@ export default class SummonSheet extends ActivitySheet {
     classes: ["summon-activity"],
     actions: {
       addProfile: SummonSheet.#addProfile,
-      deleteProfile: SummonSheet.#deleteProfile,
-      toggleCollapsed: SummonSheet.#toggleCollapsed
+      deleteProfile: SummonSheet.#deleteProfile
     }
   };
 
@@ -35,22 +34,17 @@ export default class SummonSheet extends ActivitySheet {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  static CLEAN_ARRAYS = [...super.CLEAN_ARRAYS, "profiles"];
+
+  /* -------------------------------------------- */
+
   /** @override */
   tabGroups = {
     sheet: "identity",
     activation: "time",
     effect: "profiles"
   };
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Expanded states for each profile.
-   * @type {Map<string, boolean>}
-   */
-  #expandedProfiles = new Map();
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
@@ -73,7 +67,6 @@ export default class SummonSheet extends ActivitySheet {
     ];
     context.profiles = this.activity.profiles.map((data, index) => ({
       data, index,
-      collapsed: this.#expandedProfiles.get(data._id) ? "" : "collapsed",
       fields: this.activity.schema.fields.profiles.element.fields,
       prefix: `profiles.${index}.`,
       source: context.source.profiles[index] ?? data,
@@ -146,23 +139,6 @@ export default class SummonSheet extends ActivitySheet {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Handle toggling the collapsed state of an additional settings section.
-   * @this {ActivityConfig}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static #toggleCollapsed(event, target) {
-    if ( event.target.closest(".collapsible-content") ) return;
-    target.classList.toggle("collapsed");
-    this.#expandedProfiles.set(
-      target.closest("[data-profile-id]").dataset.profileId,
-      !event.currentTarget.classList.contains("collapsed")
-    );
-  }
-
-  /* -------------------------------------------- */
   /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
@@ -189,23 +165,5 @@ export default class SummonSheet extends ActivitySheet {
 
     // Otherwise create a new profile
     else this.activity.update({ profiles: [...this.activity.toObject().profiles, { uuid: actor.uuid }] });
-  }
-
-  /* -------------------------------------------- */
-  /*  Form Handling                               */
-  /* -------------------------------------------- */
-
-  /**
-   * Perform any pre-processing of the form data to prepare it for updating.
-   * @param {SubmitEvent} event          Triggering submit event.
-   * @param {FormDataExtended} formData  Data from the submitted form.
-   * @returns {object}
-   */
-  _prepareSubmitData(event, formData) {
-    const submitData = foundry.utils.expandObject(formData.object);
-    if ( foundry.utils.hasProperty(submitData, "profiles") ) {
-      submitData.profiles = Object.values(submitData.profiles);
-    }
-    return submitData;
   }
 }

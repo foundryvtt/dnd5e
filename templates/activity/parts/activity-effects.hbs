@@ -3,14 +3,10 @@
     <multi-select name="appliedEffects">
         {{ selectOptions allEffects }}
     </multi-select>
-    <ul class="unlist">
-        {{#each activity.effects}}
-        <li data-index="{{ @index }}" data-effect-id="{{ id }}" class="flexrow">
-            <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
-            <span class="name">{{{ dnd5e-linkForUuid effect.uuid }}}</span>
-            <button type="button" class="unbutton" data-action="deleteEffect">
-                {{ localize "DND5E.EFFECT.Action.Delete" }}
-            </button>
+    <ul class="separated-list effects-list">
+        {{#each appliedEffects}}
+        <li data-index="{{ @index }}" data-effect-id="{{ effect.id }}" data-expand-id="effects.{{ effect.id }}">
+            {{> ".effect" }}
         </li>
         {{/each}}
     </ul>
@@ -18,3 +14,32 @@
         {{ localize "DND5E.EFFECT.Action.Create" }}
     </button>
 </fieldset>
+
+{{#*inline ".effect"}}
+<div class="details flexrow">
+    <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
+    {{{ dnd5e-linkForUuid effect.uuid }}}
+    <div class="list-controls flexrow">
+        <button type="button" class="unbutton" data-action="deleteEffect"
+                data-tooltip="DND5E.EFFECT.Action.Delete"
+                aria-label="{{ localize 'DND5E.EFFECT.Action.Delete' }}">
+            <i class="fa-solid fa-trash fa-fw" inert></i>
+        </button>
+    </div>
+</div>
+<input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
+{{#if additionalSettings}}
+<div class="additional-tray collapsible" data-action="toggleCollapsed">
+    <label class="roboto-upper">
+        <i class="fa-solid fa-gears" inert></i>
+        <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+        <i class="fa-solid fa-caret-down" inert></i>
+    </label>
+    <div class="collapsible-content">
+        <div class="wrapper">
+            {{> (lookup . "additionalSettings") }}
+        </div>
+    </div>
+</div>
+{{/if}}
+{{/inline}}

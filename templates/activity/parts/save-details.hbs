@@ -1,0 +1,13 @@
+<fieldset>
+    <legend>{{ localize "DND5E.SAVE.FIELDS.save.label" }}</legend>
+    {{ formField fields.ability value=source.ability options=abilityOptions }}
+    {{#with fields.save.fields.dc.fields as |fields|}}
+    {{ formField fields.calculation value=../source.save.dc.calculation options=../calculationOptions }}
+    {{#if (eq ../source.save.dc.calculation "custom")}}
+    {{ formField fields.formula value=../source.save.dc.formula }}
+    {{else}}
+    {{ formField fields.formula name="" value=(localize "DND5E.SAVE.FIELDS.save.dc.DefaultFormula") disabled=true }}
+    <input type="hidden" name="save.dc.formula" value="{{ ../source.save.dc.formula }}">
+    {{/if}}
+    {{/with}}
+</fieldset>

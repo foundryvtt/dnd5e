@@ -1,6 +1,7 @@
 import { formatNumber } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
+import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, FilePathField, NumberField, SchemaField, StringField
@@ -23,7 +24,7 @@ const {
  * Data for effects that can be applied.
  *
  * @typedef {object} EffectApplicationData
- * @property {string} effect  ID of the effect to apply.
+ * @property {string} _id  ID of the effect to apply.
  */
 
 /**
@@ -117,9 +118,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         units: new StringField({ initial: "inst" }),
         special: new StringField()
       }),
-      effects: new ArrayField(new SchemaField({
-        id: new DocumentIdField()
-      })),
+      effects: new ArrayField(new AppliedEffectField()),
       range: new SchemaField({
         value: new FormulaField({ deterministic: true }),
         units: new StringField(),
@@ -157,11 +156,6 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareData() {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
-    const item = this.item;
-    this.effects?.forEach(e => Object.defineProperty(e, "effect", {
-      get() { return item.effects.get(e.id); },
-      configurable: true
-    }));
     UsesField.prepareData.call(this, this.getRollData({ deterministic: true }));
   }
 

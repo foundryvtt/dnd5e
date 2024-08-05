@@ -24,11 +24,14 @@ export default class ActivitySheet extends Application5e {
     },
     actions: {
       addConsumption: ActivitySheet.#addConsumption,
+      addDamagePart: ActivitySheet.#addDamagePart,
       addEffect: ActivitySheet.#addEffect,
       addRecovery: ActivitySheet.#addRecovery,
       deleteConsumption: ActivitySheet.#deleteConsumption,
+      deleteDamagePart: ActivitySheet.#deleteDamagePart,
       deleteEffect: ActivitySheet.#deleteEffect,
-      deleteRecovery: ActivitySheet.#deleteRecovery
+      deleteRecovery: ActivitySheet.#deleteRecovery,
+      toggleCollapsed: ActivitySheet.#toggleCollapsed
     },
     form: {
       handler: ActivitySheet.#onSubmitForm,
@@ -73,6 +76,14 @@ export default class ActivitySheet extends Application5e {
 
   /* -------------------------------------------- */
 
+  /**
+   * Key paths to the parts of the submit data stored in arrays that will need special handling on submission.
+   * @type {string[]}
+   */
+  static CLEAN_ARRAYS = ["consumption.targets", "damage.parts", "effects", "uses.recovery"];
+
+  /* -------------------------------------------- */
+
   /** @override */
   tabGroups = {
     sheet: "identity",
@@ -96,6 +107,14 @@ export default class ActivitySheet extends Application5e {
    * @type {string}
    */
   #activityId;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Expanded states for additional settings sections.
+   * @type {Map<string, boolean>}
+   */
+  #expandedSections = new Map();
 
   /* -------------------------------------------- */
 
@@ -169,8 +188,9 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Prepare rendering context for the activation tab.
-   * @param {object} context  Context being prepared.
-   * @returns {object}
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @returns {ApplicationRenderContext}
+   * @protected
    */
   async _prepareActivationContext(context) {
     context.tab = context.tabs.activation;
@@ -278,17 +298,83 @@ export default class ActivitySheet extends Application5e {
   /* -------------------------------------------- */
 
   /**
-   * Prepare rendering context for the effect tab.
-   * @param {object} context  Context being prepared.
+   * Prepare a specific applied effect if present in the activity data.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {object} effect                     Applied effect context being prepared.
    * @returns {object}
+   * @protected
+   */
+  _prepareAppliedEffectContext(context, effect) {
+    return effect;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a specific damage part if present in the activity data.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {object} part                       Damage part context being prepared.
+   * @returns {object}
+   * @protected
+   */
+  _prepareDamagePartContext(context, part) {
+    return part;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare rendering context for the effect tab.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @returns {ApplicationRenderContext}
+   * @protected
    */
   async _prepareEffectContext(context) {
     context.tab = context.tabs.effect;
 
-    const appliedEffects = new Set(context.activity.effects?.map(e => e.id) ?? []);
-    context.allEffects = this.item.effects.map(effect => ({
-      value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
-    }));
+    if ( context.activity.effects ) {
+      const appliedEffects = new Set(context.activity.effects?.map(e => e._id) ?? []);
+      context.allEffects = this.item.effects.map(effect => ({
+        value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
+      }));
+      context.appliedEffects = context.activity.effects.map((data, index) => {
+        const effect = {
+          data,
+          effect: data.effect,
+          fields: this.activity.schema.fields.effects.element.fields,
+          prefix: `effects.${index}.`,
+          source: context.source.effects[index] ?? data,
+          additionalSettings: null
+        };
+        return this._prepareAppliedEffectContext(context, effect);
+      });
+    }
+
+    if ( context.activity.damage?.parts ) {
+      const denominationOptions = [
+        { value: "", label: "" },
+        ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: value }))
+      ];
+      const scalingOptions = [
+        { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
+        ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
+      ];
+      context.damageParts = context.activity.damage.parts.map((data, index) => {
+        const part = {
+          data,
+          fields: this.activity.schema.fields.damage.fields.parts.element.fields,
+          prefix: `damage.parts.${index}.`,
+          source: context.source.damage.parts[index] ?? data,
+          canScale: this.activity.canScaleDamage,
+          denominationOptions,
+          scalingOptions,
+          typeOptions: Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({
+            value, label: config.label, selected: data.types.has(value)
+          }))
+        };
+        return this._prepareDamagePartContext(context, part);
+      });
+    }
 
     return context;
   }
@@ -297,8 +383,9 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Prepare rendering context for the identity tab.
-   * @param {object} context  Context being prepared.
-   * @returns {object}
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @returns {ApplicationRenderContext}
+   * @protected
    */
   async _prepareIdentityContext(context) {
     context.tab = context.tabs.identity;
@@ -385,6 +472,17 @@ export default class ActivitySheet extends Application5e {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _onRender(context, options) {
+    super._onRender(context, options);
+    for ( const element of this.element.querySelectorAll("[data-expand-id]") ) {
+      element.querySelector(".collapsible")?.classList
+        .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   _onClose(_options) {
     this.activity.constructor._unregisterApp(this.activity, this);
@@ -424,6 +522,19 @@ export default class ActivitySheet extends Application5e {
   /* -------------------------------------------- */
 
   /**
+   * Handle adding a new entry to the damage parts list.
+   * @this {ActivityConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #addDamagePart(event, target) {
+    if ( !this.activity.damage?.parts ) return;
+    this.activity.update({ "damage.parts": [...this.activity.toObject().damage.parts, {}] });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle creating a new active effect and adding it to the applied effects list.
    * @this {ActivityConfig}
    * @param {Event} event         Triggering click event.
@@ -437,7 +548,7 @@ export default class ActivitySheet extends Application5e {
       transfer: false
     };
     const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData]);
-    this.activity.update({ effects: [...this.activity.toObject().effects, { id: created.id }] });
+    this.activity.update({ effects: [...this.activity.toObject().effects, { _id: created.id }] });
   }
 
   /* -------------------------------------------- */
@@ -479,6 +590,21 @@ export default class ActivitySheet extends Application5e {
   /* -------------------------------------------- */
 
   /**
+   * Handle removing an entry from the damage parts list.
+   * @this {ActivityConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #deleteDamagePart(event, target) {
+    if ( !this.activity.damage?.parts ) return;
+    const parts = this.activity.toObject().damage.parts;
+    parts.splice(target.closest("[data-index]").dataset.index, 1);
+    this.activity.update({ "damage.parts": parts });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle deleting an active effect and removing it from the applied effects list.
    * @this {ActivityConfig}
    * @param {Event} event         Triggering click event.
@@ -488,7 +614,7 @@ export default class ActivitySheet extends Application5e {
     const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
     const result = await this.item.effects.get(effectId)?.deleteDialog();
     if ( result instanceof ActiveEffect ) {
-      const effects = this.activity.toObject().effects.filter(e => e.id !== effectId);
+      const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
       this.activity.update({ effects });
     }
   }
@@ -505,6 +631,23 @@ export default class ActivitySheet extends Application5e {
     const recovery = this.activity.toObject().uses.recovery;
     recovery.splice(target.closest("[data-index]").dataset.index, 1);
     this.activity.update({ "uses.recovery": recovery });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling the collapsed state of an additional settings section.
+   * @this {ActivityConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #toggleCollapsed(event, target) {
+    if ( event.target.closest(".collapsible-content") ) return;
+    target.classList.toggle("collapsed");
+    this.#expandedSections.set(
+      target.closest("[data-expand-id]")?.dataset.expandId,
+      !event.currentTarget.classList.contains("collapsed")
+    );
   }
 
   /* -------------------------------------------- */
@@ -532,19 +675,17 @@ export default class ActivitySheet extends Application5e {
    */
   _prepareSubmitData(event, formData) {
     const submitData = foundry.utils.expandObject(formData.object);
+    for ( const keyPath of this.constructor.CLEAN_ARRAYS ) {
+      const data = foundry.utils.getProperty(submitData, keyPath);
+      if ( data ) foundry.utils.setProperty(submitData, keyPath, Object.values(data));
+    }
     if ( foundry.utils.hasProperty(submitData, "appliedEffects") ) {
       const effects = submitData.effects ?? this.activity.toObject().effects;
-      submitData.effects = effects.filter(e => submitData.appliedEffects.includes(e.id));
-      for ( const id of submitData.appliedEffects ) {
-        if ( submitData.effects.find(e => e.id === id) ) continue;
-        submitData.effects.push({ id });
+      submitData.effects = effects.filter(e => submitData.appliedEffects.includes(e._id));
+      for ( const _id of submitData.appliedEffects ) {
+        if ( submitData.effects.find(e => e._id === _id) ) continue;
+        submitData.effects.push({ _id });
       }
-    }
-    if ( foundry.utils.hasProperty(submitData, "consumption.targets") ) {
-      submitData.consumption.targets = Object.values(submitData.consumption.targets);
-    }
-    if ( foundry.utils.hasProperty(submitData, "uses.recovery") ) {
-      submitData.uses.recovery = Object.values(submitData.uses.recovery);
     }
     return submitData;
   }
