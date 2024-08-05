@@ -54,10 +54,10 @@ export default class SpellData extends ItemDataModel.mixin(
       }, {label: "DND5E.SpellMaterials"}),
       preparation: new foundry.data.fields.SchemaField({
         mode: new foundry.data.fields.StringField({
-          required: true, initial: "prepared", label: "DND5E.SpellPreparationMode"
+          required: true, initial: "prepared", label: "DND5E.SpellPreparation.Mode"
         }),
         prepared: new foundry.data.fields.BooleanField({required: true, label: "DND5E.SpellPrepared"})
-      }, {label: "DND5E.SpellPreparation"}),
+      }, {label: "DND5E.SpellPreparation.Label"}),
       scaling: new foundry.data.fields.SchemaField({
         mode: new foundry.data.fields.StringField({required: true, initial: "none", label: "DND5E.ScalingMode"}),
         formula: new FormulaField({required: true, nullable: true, initial: null, label: "DND5E.ScalingFormula"})

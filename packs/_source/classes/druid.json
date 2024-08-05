@@ -467,7 +467,10 @@
     ],
     "spellcasting": {
       "progression": "full",
-      "ability": "wis"
+      "ability": "wis",
+      "preparation": {
+        "formula": "@abilities.wis.mod + @classes.druid.levels"
+      }
     },
     "startingEquipment": [
       {
