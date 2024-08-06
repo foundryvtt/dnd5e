@@ -154,7 +154,7 @@ function _simplifyDiceTerms(terms) {
     const modifiers = isCoin ? "" : curr.modifiers.filterJoin("");
     const key = `${unannotated[i - 1].operator}${face}${modifiers}`;
     obj[key] ??= {};
-    if ( (curr._number instanceof Roll) && (curr._number.isDeterministic)) curr._number.evaluateSync();
+    if ( (curr._number instanceof Roll) && (curr._number.isDeterministic) ) curr._number.evaluateSync();
     obj[key].number = (obj[key].number ?? 0) + curr.number;
     if ( !isCoin ) obj[key].modifiers = (obj[key].modifiers ?? []).concat(curr.modifiers);
     return obj;
