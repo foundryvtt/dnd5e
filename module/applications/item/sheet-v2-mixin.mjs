@@ -24,6 +24,16 @@ export default function ItemSheetV2Mixin(Base) {
      */
     _collapsed = {};
 
+    /**
+     * Track the set of filters which are applied.
+     * @type {Record<string, FilterState5e>}
+     * @protected
+     */
+    _filters = {
+      effects: { name: "", properties: new Set() },
+      inventory: { name: "", properties: new Set() }
+    };
+
     /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */

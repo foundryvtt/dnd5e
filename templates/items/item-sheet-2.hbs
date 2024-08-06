@@ -122,6 +122,11 @@
     {{!-- Body --}}
     <section class="sheet-body">
 
+        {{!-- Contents --}}
+        <div class="tab contents" data-group="primary" data-tab="contents">
+            {{> "dnd5e.inventory2" sections=inventory }}
+        </div>
+
         {{!-- Description Tab --}}
         {{> "dnd5e.item-description2" }}
 

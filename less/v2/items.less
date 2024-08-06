@@ -52,6 +52,20 @@
     }
   }
 
+  &.minimized {
+    box-shadow: 0 0 20px var(--color-shadow-dark);
+    background: url("../../ui/denim075.png");
+    border: unset;
+
+    .window-header .header-elements { display: none; }
+
+    > header {
+      align-items: center;
+      .header-button, .document-id-link { margin-top: 0; }
+      .window-title { visibility: visible; }
+    }
+  }
+
   /* ---------------------------------- */
   /*  Sheet Header                      */
   /* ---------------------------------- */
@@ -365,6 +379,36 @@
         min-height: 300px;
       }
     }
+
+    /* Container Contents */
+    .inventory-element {
+      .top .containers { justify-content: end; }
+
+      .items-section {
+        .item-uses { display: none; }
+        .item-price { display: flex; }
+      }
+
+      .bottom {
+        position: sticky;
+        bottom: -6px;
+
+        .encumbrance {
+          border: var(--dnd5e-border-gold);
+          border-radius: 3px;
+          box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+          width: unset;
+
+          .meter {
+            border-radius: 3px;
+
+            .progress::before { border-radius: 4px; }
+          }
+        }
+      }
+    }
+
+
   }
 
   /* ---------------------------------- */
@@ -381,6 +425,16 @@
           padding: 0;
         }
       }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Locked                            */
+  /* ---------------------------------- */
+
+  form.locked {
+    .sheet-body {
+      .item-descriptions .description:not(.collapsible) > .header { display: none; }
     }
   }
 
