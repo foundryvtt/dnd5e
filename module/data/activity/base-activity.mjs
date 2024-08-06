@@ -1,4 +1,4 @@
-import { formatNumber } from "../../utils.mjs";
+import { formatNumber, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
@@ -144,6 +144,244 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }),
       uses: new UsesField()
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Static ID used for the automatically generated activity created during migration.
+   * @type {string}
+   */
+  static INITIAL_ID = staticID("dnd5eactivity");
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate data from the item to a newly created activity.
+   * @param {object} source  Item's candidate source data to migrate.
+   */
+  static migrateInitialActivity(source) {
+    const activityData = this.transformTypeData(source, {
+      _id: this.INITIAL_ID,
+      type: this.metadata.type,
+      activation: this.transformActivationData(source),
+      consumption: this.transformConsumptionData(source),
+      duration: this.transformDurationData(source),
+      effects: this.transformEffectsData(source),
+      range: this.transformRangeData(source),
+      target: this.transformTargetData(source)
+    });
+    foundry.utils.setProperty(source, `system.activities.${this.INITIAL_ID}`, activityData);
+    foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch activation data from the item source and transform it into an activity's activation object.
+   * @param {object} source  Item's candidate source data to transform.
+   * @returns {object}       Creation data for new activity.
+   */
+  static transformActivationData(source) {
+    return {
+      type: source.system.activation?.type === "none" ? "" : (source.system.activation?.type ?? ""),
+      value: source.system.activation?.cost ?? null,
+      condition: source.system.activation?.condition ?? ""
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch activation data from the item source and transform it into an activity's consumption object.
+   * @param {object} source  Item's candidate source data to transform.
+   * @returns {object}       Creation data for new activity.
+   */
+  static transformConsumptionData(source) {
+    const targets = [];
+
+    const type = {
+      attribute: "attribute",
+      hitDice: "hitDice",
+      material: "material",
+      charges: "itemUses"
+    }[source.system.consume?.type];
+
+    if ( type ) targets.push({
+      type,
+      target: source.system.consume?.target ?? "",
+      value: source.system.consume?.amount ?? "1",
+      scaling: {
+        mode: source.system.consume?.scale ? "amount" : "",
+        formula: ""
+      }
+    });
+
+    // If no target type set but this item has max uses, set consumption type to itemUses with blank target
+    else if ( source.system.uses?.max ) targets.push({
+      type: "itemUses",
+      target: "",
+      value: "1",
+      scaling: {
+        mode: source.system.consume?.scale ? "amount" : "",
+        formula: ""
+      }
+    });
+
+    return {
+      targets,
+      scaling: {
+        allowed: source.system.consume?.scale ?? false,
+        max: ""
+      }
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch action data from the item source and transform it into an activity's damage parts array.
+   * @param {object} source  Item's candidate source data to transform.
+   * @param {string[]} part  The damage part to transform.
+   * @returns {object}       Creation data for new activity.
+   */
+  static transformDamagePartData(source, [formula, type]) {
+    const data = {
+      number: null,
+      denomination: null,
+      bonus: "",
+      types: type ? [type] : [],
+      custom: {
+        enabled: false,
+        formula: ""
+      },
+      scaling: {
+        mode: source?.system.scaling?.mode !== "none" ? "whole" : "",
+        number: null,
+        formula: source?.system.scaling?.formula ?? ""
+      }
+    };
+
+    const parsed = (formula ?? "").match(/^\s*(\d+)d(\d+)(?:\s*([+|-])\s*(@?[\w\d.]+))?\s*$/i);
+    if ( parsed && CONFIG.DND5E.dieSteps.includes(Number(parsed[2])) ) {
+      data.number = Number(parsed[1]);
+      data.denomination = Number(parsed[2]);
+      if ( parsed[4] ) data.bonus = parsed[3] === "-" ? `-${parsed[4]}` : parsed[4];
+    } else {
+      data.custom.enabled = true;
+      data.custom.formula = formula;
+    }
+
+    // If scaling denomination matches the damage denomination, set scaling using number rather than formula
+    const scaling = data.scaling.formula.match(/^\s*(\d+)d(\d+)\s*$/i);
+    if ( (scaling && (Number(scaling[2]) === data.denomination)) || (source.system.scaling?.mode === "cantrip") ) {
+      data.scaling.number = Number(scaling?.[1] || 1);
+      data.scaling.formula = "";
+    }
+
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch activation data from the item source and transform it into an activity's duration object.
+   * @param {object} source  Item's candidate source data to transform.
+   * @returns {object}       Creation data for new activity.
+   */
+  static transformDurationData(source) {
+    return {
+      value: source.system.duration?.value ?? null,
+      units: source.system.duration?.units ?? "inst",
+      special: ""
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch activation data from the item source and transform it into an activity's effects array.
+   * @param {object} source  Item's candidate source data to transform.
+   * @returns {object[]}     Creation data for new activity.
+   */
+  static transformEffectsData(source) {
+    return source.effects
+      .filter(e => !e.transfer && (e.type !== "enchantment") && (e.flags?.dnd5e?.type !== "enchantment"))
+      .map(e => ({ _id: e._id }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch activation data from the item source and transform it into an activity's range object.
+   * @param {object} source  Item's candidate source data to transform.
+   * @returns {object}       Creation data for new activity.
+   */
+  static transformRangeData(source) {
+    return {
+      value: source.system.range?.value ?? null,
+      units: source.system.range?.units ?? "",
+      special: ""
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch activation data from the item source and transform it into an activity's target object.
+   * @param {object} source  Item's candidate source data to transform.
+   * @returns {object}       Creation data for new activity.
+   */
+  static transformTargetData(source) {
+    const data = {
+      template: {
+        count: "",
+        contiguous: false,
+        type: "",
+        size: "",
+        width: "",
+        height: "",
+        units: source.system.target?.units ?? "ft"
+      },
+      affects: {
+        count: "",
+        type: "",
+        choice: false,
+        special: ""
+      },
+      prompt: source.system.target?.prompt ?? true
+    };
+
+    if ( source.system.target?.type in CONFIG.DND5E.areaTargetTypes ) foundry.utils.mergeObject(data, {
+      template: {
+        type: source.system.target?.type ?? "",
+        size: source.system.target?.value ?? "",
+        width: source.system.target?.width ?? ""
+      }
+    });
+
+    else foundry.utils.mergeObject(data, {
+      affects: {
+        count: source.system.target?.value ?? "",
+        type: source.system.target?.type ?? ""
+      }
+    });
+
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform any type-specific data transformations.
+   * @param {object} source        Item's candidate source data to transform.
+   * @param {object} activityData  In progress creation data.
+   * @returns {object}             Creation data for new activity.
+   */
+  static transformTypeData(source, activityData) {
+    return activityData;
   }
 
   /* -------------------------------------------- */

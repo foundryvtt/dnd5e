@@ -1,4 +1,5 @@
 import SystemDataModel from "../../abstract.mjs";
+import BaseActivityData from "../../activity/base-activity.mjs";
 import { ActivitiesField } from "../../fields/activities-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
 
@@ -32,7 +33,55 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} source  Candidate source data to migrate.
    */
   static migrateActivities(source) {
-    ActivitiesTemplate.#migrateUses(source);
+    if ( source.system ) ActivitiesTemplate.#migrateUses(source.system);
+    // TODO: Handle migration of data kept on spells and inferred by activities
+    // TODO: Handle migration of base damage, range, & ammunition on weapons
+    if ( this.#shouldMigrateActivity(source) ) this.#migrateInitialActivity(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Method to determine whether the activity creation migration should be performed. This migration should only be
+   * performed on whole item data rather than partial updates, so check to ensure all of the necessary data is present.
+   * @param {object} source  Candidate source data to migrate.
+   * @returns {boolean}
+   */
+  static #shouldMigrateActivity(source) {
+    // If source data doesn't have effects or system data, then is only a partial migration
+    if ( !source.effects || !source.system ) return false;
+
+    // If item doesn't have an action type or activation, then it doesn't need an activity
+    if ( !source.system.actionType || !source.system.activation?.type ) return false;
+
+    // If the initial activity has already been created, no reason to create it again
+    if ( !foundry.utils.isEmpty(source.system.activities) ) return false;
+
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate data from ActionTemplate and ActivatedEffectTemplate into a newly created activity.
+   * @param {object} source  Candidate source data to migrate.
+   */
+  static #migrateInitialActivity(source) {
+    let type = {
+      mwak: "attack",
+      rwak: "attack",
+      msak: "attack",
+      rsak: "attack",
+      abil: null, // TODO: No specific activity type for this, perhaps UtilityActivity with the ability as an enricher?
+      save: "save",
+      ench: "enchant",
+      summ: "summon",
+      heal: "heal"
+    }[source.system.actionType] ?? "utility";
+    if ( (type === "utility") && source.system.damage?.parts?.length ) type = "damage";
+
+    const cls = CONFIG.DND5E.activityTypes[type].documentClass;
+    cls.migrateInitialActivity(source);
   }
 
   /* -------------------------------------------- */

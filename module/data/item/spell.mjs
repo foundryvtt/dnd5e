@@ -98,7 +98,6 @@ export default class SpellData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
-    ActivitiesTemplate.migrateActivities(source);
     SpellData.#migrateScaling(source);
   }
 

@@ -67,7 +67,7 @@ export default class SummonSheet extends ActivitySheet {
     ];
     context.profiles = this.activity.profiles.map((data, index) => ({
       data, index,
-      collapsed: this.expandedSections.get(`profiles.${effect.id}`) ? "" : "collapsed",
+      collapsed: this.expandedSections.get(`profiles.${data._id}`) ? "" : "collapsed",
       fields: this.activity.schema.fields.profiles.element.fields,
       prefix: `profiles.${index}.`,
       source: context.source.profiles[index] ?? data,

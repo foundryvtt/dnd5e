@@ -99,7 +99,6 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
-    ActivitiesTemplate.migrateActivities(source);
     EquipmentData.#migrateArmor(source);
     EquipmentData.#migrateType(source);
     EquipmentData.#migrateStrength(source);

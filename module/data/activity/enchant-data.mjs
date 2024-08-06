@@ -49,4 +49,31 @@ export default class EnchantActivityData extends BaseActivityData {
       })
     };
   }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static transformEffectsData(source) {
+    const effects = [];
+    for ( const effect of source.effects ) {
+      if ( (effect.type !== "enchantment") && (effect.flags?.dnd5e?.type !== "enchantment") ) continue;
+      effects.push({ _id: effect._id, ...(effect.flags?.dnd5e?.enchantment ?? {}) });
+      delete effect.flags?.dnd5e?.enchantment;
+    }
+    return effects;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static transformTypeData(source, activityData) {
+    return foundry.utils.mergeObject(activityData, {
+      enchant: {
+        identifier: source.system.enchantment?.classIdentifier ?? ""
+      },
+      restrictions: source.system.enchantment?.restrictions ?? []
+    });
+  }
 }

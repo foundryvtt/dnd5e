@@ -6,6 +6,7 @@ import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import { EnchantmentData } from "../data/item/fields/enchantment-field.mjs";
+import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
@@ -2884,6 +2885,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
     else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
     else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
+    ActivitiesTemplate.migrateActivities(source);
     return source;
   }
 }

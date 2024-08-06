@@ -80,7 +80,6 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
-    ActivitiesTemplate.migrateActivities(source);
     WeaponData.#migratePropertiesData(source);
     WeaponData.#migrateProficient(source);
   }

@@ -7,7 +7,7 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
 
 /**
  * @typedef {EffectApplicationData} SaveEffectApplicationData
- * @property {string} onSave  Should this effect still be applied on a successful save?
+ * @property {boolean} onSave  Should this effect still be applied on a successful save?
  */
 
 /**
@@ -43,6 +43,31 @@ export default class SaveActivityData extends BaseActivityData {
         })
       })
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static transformTypeData(source, activityData) {
+    let calculation = source.system.save?.scaling;
+    if ( calculation === "flat" ) calculation = "custom";
+    else if ( calculation === "spell" ) calculation = "spellcasting";
+
+    return foundry.utils.mergeObject(activityData, {
+      ability: source.system.save?.ability ?? Object.keys(CONFIG.DND5E.abilities)[0],
+      damage: {
+        onSave: (source.type === "spell") && (source.system.level === 0) ? "none" : "half",
+        parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
+      },
+      save: {
+        dc: {
+          calculation,
+          formula: String(source.system.save?.dc ?? "")
+        }
+      }
+    });
   }
 
   /* -------------------------------------------- */

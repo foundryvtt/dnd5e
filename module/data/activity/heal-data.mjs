@@ -14,4 +14,15 @@ export default class HealActivityData extends BaseActivityData {
       healing: new DamageField()
     };
   }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static transformTypeData(source, activityData) {
+    return foundry.utils.mergeObject(activityData, {
+      healing: this.transformDamagePartData(source, source.system.damage?.parts?.[0] ?? ["", ""])
+    });
+  }
 }
