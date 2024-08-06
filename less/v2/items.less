@@ -199,6 +199,175 @@
   form > hr.ampersand { margin-bottom: -4px; }
 
   /* ---------------------------------- */
+  /*  Sheet Body                        */
+  /* ---------------------------------- */
+
+  .sheet-body {
+    .tab {
+      max-height: calc(70vh - var(--dnd5e-sheet-header-height));
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: -6px -11px -6px -6px;
+      padding: 6px 2px 6px 6px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+      scrollbar-gutter: stable;
+
+      &:not(.active) { display: none; }
+      &.effects { padding: 12px 2px 58px 6px; }
+
+      > .pills .pill {
+        font-size: var(--font-size-10);
+        padding: 3px 6px;
+        line-height: 1;
+      }
+
+      &.single-description {
+        padding-right: 5px;
+        scrollbar-gutter: auto;
+
+        > .editor {
+          padding-right: 6px;
+          scrollbar-width: thin;
+          scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+        }
+      }
+    }
+
+    .spell-block {
+      width: 250px;
+      margin: 4px auto 4px;
+    }
+
+    .info-block {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 16px;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .label {
+          font-family: var(--dnd5e-font-roboto-condensed);
+          font-size: var(--font-size-11);
+          color: var(--color-text-dark-5);
+          text-transform: uppercase;
+        }
+
+        .value {
+          font-family: var(--dnd5e-font-roboto-slab);
+          font-weight: bold;
+          font-size: var(--font-size-24);
+        }
+
+        .sign {
+          color: var(--color-text-light-6);
+          font-size: var(--font-size-18);
+        }
+
+        &.damage > {
+          flex: none;
+
+          .value {
+            --icon-fill: var(--color-text-dark-5);
+            color: var(--color-text-dark-5);
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 4px;
+            font-size: var(--font-size-14);
+            font-family: var(--dnd5e-font-roboto);
+            font-weight: normal;
+          }
+        }
+      }
+    }
+
+    /* Descriptions */
+    .item-descriptions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .description {
+        padding: 8px;
+        font-family: var(--dnd5e-font-roboto-condensed);
+        box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+
+        > .header {
+          background: none;
+          border: none;
+          color: var(--color-text-dark-primary);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          > span {
+            flex: 1;
+            font-family: var(--dnd5e-font-roboto-slab);
+            font-weight: bold;
+            text-align: center;
+            font-size: var(--font-size-14);
+          }
+
+          > button {
+            flex: none;
+            width: unset;
+
+            &:hover, &:focus-visible {
+              box-shadow: none;
+              text-shadow: 0 0 8px var(--color-shadow-primary);
+            }
+          }
+        }
+
+        &:not(.collapsible) > .header { padding-left: 14px; }
+
+        &.collapsible {
+          > .header {
+            cursor: pointer;
+
+            &::before {
+              content: "\f078";
+              font-family: var(--font-awesome);
+              font-weight: bold;
+              color: var(--color-text-dark-5);
+              transition: all 250ms ease;
+            }
+          }
+
+          &.empty > .header {
+            cursor: unset;
+            &::before { visibility: hidden; }
+          }
+
+          &.collapsed > .header::before { transform: rotate(-90deg); }
+
+          .editor { overflow: hidden; }
+        }
+
+        .editor { padding: 0 6px; }
+      }
+    }
+
+    .editor.prosemirror {
+      .editor-content {
+        position: unset;
+        min-height: 300px;
+      }
+
+      > textarea {
+        flex: none;
+        min-height: 300px;
+      }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Editable                          */
   /* ---------------------------------- */
 

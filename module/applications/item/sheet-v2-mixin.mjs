@@ -17,6 +17,13 @@ export default function ItemSheetV2Mixin(Base) {
       { tab: "advancement", label: "DND5E.AdvancementTitle", condition: this.itemHasAdvancements.bind(this) }
     ];
 
+    /**
+     * Store the collapsed state of the description boxes.
+     * @type {Record<string, boolean>}
+     * @protected
+     */
+    _collapsed = {};
+
     /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */
@@ -45,6 +52,13 @@ export default function ItemSheetV2Mixin(Base) {
       const { identified, schema, unidentified } = this.item.system;
       context.fields = schema.fields;
 
+      // Set some default collapsed states on first open.
+      if ( foundry.utils.isEmpty(this._collapsed) ) Object.assign(this._collapsed, {
+        "system.description.chat": true,
+        "system.unidentified.description": game.user.isGM
+      });
+      context.collapsed = this._collapsed;
+
       // Tabs
       const activeTab = this._tabs?.[0]?.active ?? this.options.tabs[0].initial;
       context.cssClass += ` tab-${activeTab}`;
@@ -71,8 +85,24 @@ export default function ItemSheetV2Mixin(Base) {
         };
       }
 
+      // Properties
+      context.properties = {
+        active: [],
+        object: Object.fromEntries((context.source.properties ?? []).map(p => [p, true])),
+        options: Object.entries(context.properties ?? {}).map(([k, v]) => ({ value: k, ...v }))
+      };
+      if ( game.user.isGM || (identified !== false) ) {
+        context.properties.active.push(
+          ...this.item.system.cardProperties ?? [],
+          ...this.item.system.activatedEffectCardProperties ?? [],
+          ...this.item.system.equippableItemCardProperties ?? []
+        );
+      }
+
       // Sub-type context
       await this.item.system.getSheetData?.(context);
+
+      context.properties.active = context.properties.active.filter(_ => _);
 
       return context;
     }
@@ -94,11 +124,27 @@ export default function ItemSheetV2Mixin(Base) {
     /** @inheritDoc */
     activateListeners(html) {
       super.activateListeners(html);
+      html.find(".description.collapsible > .header").on("click", this._onToggleOwnDescription.bind(this));
 
       // Play mode only.
       if ( this._mode === this.constructor.MODES.PLAY ) {
         html.find(".item-image").on("click", this._onShowIcon.bind(this));
       }
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle toggling one of the item's description categories.
+     * @param {PointerEvent} event  The triggering event.
+     * @protected
+     */
+    _onToggleOwnDescription(event) {
+      const description = event.currentTarget.closest("[data-target]");
+      if ( !description ) return;
+      const { target } = description.dataset;
+      description.classList.toggle("collapsed");
+      this._collapsed[target] = description.classList.contains("collapsed");
     }
 
     /* -------------------------------------------- */

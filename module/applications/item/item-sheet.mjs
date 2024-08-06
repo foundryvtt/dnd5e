@@ -459,6 +459,7 @@ export default class ItemSheet5e extends ItemSheet {
       });
       html.find(".description-edit").click(event => {
         if ( event.currentTarget.ariaDisabled ) return;
+        event.stopPropagation();
         this.editingDescriptionTarget = event.currentTarget.dataset.target;
         this.render();
       });

@@ -206,6 +206,13 @@ export default class EquipmentData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+    if ( this.armor.value ) {
+      context.properties.active.shift();
+      context.info = [{
+        label: "DND5E.ArmorClass",
+        value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
+      }];
+    }
   }
 
   /* -------------------------------------------- */
