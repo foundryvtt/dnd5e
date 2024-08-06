@@ -340,8 +340,17 @@
             }
           }
 
+          &.empty > .header {
+            cursor: unset;
+            &::before { visibility: hidden; }
+          }
+
           &.collapsed > .header::before { transform: rotate(-90deg); }
+
+          .editor { overflow: hidden; }
         }
+
+        .editor { padding: 0 6px; }
       }
     }
 

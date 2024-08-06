@@ -1,5 +1,5 @@
 {{#*inline "description"}}
-    <div class="card description {{#if collapsible}}collapsible{{/if}} {{#if (lookup @root.collapsed target)}}collapsed{{/if}}"
+    <div class="card description {{#if collapsible}}collapsible{{/if}} {{#if (lookup @root.collapsed target)}}collapsed{{/if}} {{#unless enriched}}empty{{/unless}}"
          data-target="{{ target }}">
         <div class="header">
             <span>{{ localize label }}</span>
