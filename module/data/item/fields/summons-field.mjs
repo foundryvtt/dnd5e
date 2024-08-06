@@ -298,7 +298,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       // Has been cloned for summoning use
       a.getFlag("dnd5e", "summonedCopy")
       // Sourced from the desired actor UUID
-      && (a.getFlag("core", "sourceId") === uuid)
+      && (a._stats?.compendiumSource === uuid)
       // Unlinked or created from this item specifically
       && ((a.getFlag("dnd5e", "summon.origin") === this.item.uuid) || !a.prototypeToken.actorLink)
     );

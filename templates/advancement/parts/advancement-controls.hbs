@@ -8,8 +8,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.AdvancementCustomIcon" }}</label>
     <div class="form-fields">
-        {{ filePicker type="image" target="icon" }}
-        <input type="text" name="icon" value="{{ src.icon }}" placeholder="{{ default.icon }}">
+        <file-picker type="image" name="icon" value="{{ src.icon }}" placeholder="{{ default.icon }}"></file-picker>
     </div>
 </div>
 
