@@ -1,3 +1,5 @@
+const { OperatorTerm, RollTerm } = foundry.dice.terms;
+
 /**
  * Parse the provided rolls, splitting parts based on damage types & properties, taking flavor into account.
  * @param {DamageRoll[]} rolls                   Evaluated damage rolls to aggregate.
@@ -60,14 +62,14 @@ function chunkTerms(terms, type) {
 
   for ( let term of terms ) {
     // Plus or minus operators split chunks
-    if ( (term instanceof foundry.dice.terms.OperatorTerm) && ["+", "-"].includes(term.operator) ) {
+    if ( (term instanceof OperatorTerm) && ["+", "-"].includes(term.operator) ) {
       if ( currentChunk ) pushChunk();
       if ( term.operator === "-" ) negative = !negative;
       continue;
     }
 
     // All other terms get added to the current chunk
-    term = foundry.dice.terms.RollTerm.fromData(foundry.utils.deepClone(term.toJSON()));
+    term = RollTerm.fromData(foundry.utils.deepClone(term.toJSON()));
     currentChunk ??= { terms: [], negative, type: null };
     currentChunk.terms.push(term);
     const flavor = term.flavor?.toLowerCase().trim();

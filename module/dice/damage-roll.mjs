@@ -1,4 +1,4 @@
-const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm } = foundry.dice.terms;
+const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, StringTerm } = foundry.dice.terms;
 
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.

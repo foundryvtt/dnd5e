@@ -490,7 +490,7 @@ export default class ChatMessage5e extends ChatMessage {
       })));
       let multiplier = 1;
       let operator = roll.terms[i];
-      while ( operator instanceof OperatorTerm ) {
+      while ( operator instanceof foundry.dice.terms.OperatorTerm ) {
         if ( operator.operator === "-" ) multiplier *= -1;
         operator = roll.terms[--i];
       }
