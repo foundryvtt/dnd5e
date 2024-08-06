@@ -30,7 +30,7 @@ export default Base => class extends Base {
     const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags.core?.sourceId;
     if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
     const similarItem = this.actor.items.find(i => {
-      const sourceId = i.getFlag("core", "sourceId");
+      const sourceId = i._stats?.compendiumSource;
       return sourceId && (sourceId === droppedSourceId) && (i.type === "consumable") && (i.name === itemData.name);
     });
     if ( !similarItem ) return null;

@@ -826,7 +826,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
 
-    const sourceId = this.getFlag("core", "sourceId");
+    const sourceId = this._stats?.compendiumSource;
     if ( sourceId?.startsWith("Compendium.") ) return;
 
     // Configure prototype token settings

@@ -481,18 +481,20 @@ export default class ChatMessage5e extends ChatMessage {
     const aggregate = { type: roll.options.type, total: roll.total, constant: 0, dice: [] };
     for ( let i = roll.terms.length - 1; i >= 0; ) {
       const term = roll.terms[i--];
-      if ( !(term instanceof NumericTerm) && !(term instanceof DiceTerm) ) continue;
+      if ( !(term instanceof foundry.dice.terms.NumericTerm) && !(term instanceof foundry.dice.terms.DiceTerm) ) {
+        continue;
+      }
       const value = term.total;
-      if ( term instanceof DiceTerm ) aggregate.dice.push(...term.results.map(r => ({
+      if ( term instanceof foundry.dice.terms.DiceTerm ) aggregate.dice.push(...term.results.map(r => ({
         result: term.getResultLabel(r), classes: term.getResultCSS(r).filterJoin(" ")
       })));
       let multiplier = 1;
       let operator = roll.terms[i];
-      while ( operator instanceof OperatorTerm ) {
+      while ( operator instanceof foundry.dice.terms.OperatorTerm ) {
         if ( operator.operator === "-" ) multiplier *= -1;
         operator = roll.terms[--i];
       }
-      if ( term instanceof NumericTerm ) aggregate.constant += value * multiplier;
+      if ( term instanceof foundry.dice.terms.NumericTerm ) aggregate.constant += value * multiplier;
     }
 
     return aggregate;

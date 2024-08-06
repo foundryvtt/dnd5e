@@ -1,3 +1,5 @@
+const { Die, NumericTerm, OperatorTerm } = foundry.dice.terms;
+
 /**
  * A type of Roll specific to a d20-based check, save, or attack roll in the 5e system.
  * @param {string} formula                       The string formula to parse

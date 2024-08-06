@@ -232,10 +232,10 @@ export default class TokenPlacement {
     const preview = this.#previews[idx];
     const adjustment = this.#getSnapAdjustment(preview);
     const point = event.data.getLocalPosition(canvas.tokens);
-    const center = canvas.grid.getCenter(point.x - adjustment.x, point.y - adjustment.y);
+    const center = canvas.grid.getCenterPoint({ x: point.x - adjustment.x, y: point.y - adjustment.y });
     preview.updateSource({
-      x: center[0] + adjustment.x - Math.round((this.config.tokens[idx].width * canvas.dimensions.size) / 2),
-      y: center[1] + adjustment.y - Math.round((this.config.tokens[idx].height * canvas.dimensions.size) / 2)
+      x: center.x + adjustment.x - Math.round((this.config.tokens[idx].width * canvas.dimensions.size) / 2),
+      y: center.y + adjustment.y - Math.round((this.config.tokens[idx].height * canvas.dimensions.size) / 2)
     });
     this.#placements[idx].x = preview.x;
     this.#placements[idx].y = preview.y;

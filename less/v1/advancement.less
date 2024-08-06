@@ -6,8 +6,8 @@
       box-shadow: none;
     }
   }
-  .form-group .form-fields button {
-    flex: 0;
+  .form-group .form-fields {
+    :not(file-picker) > button { flex: 0; }
   }
   .form-group .form-field-readonly {
     color: #999;
@@ -445,7 +445,7 @@
     }
     span.none { font-style: italic; }
   }
-  
+
   form[data-type="Trait"] {
     select {
       min-width: min(20em, 100%);

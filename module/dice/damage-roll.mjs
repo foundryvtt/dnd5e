@@ -1,3 +1,5 @@
+const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, StringTerm } = foundry.dice.terms;
+
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
  * @param {string} formula                       The string formula to parse
@@ -89,7 +91,7 @@ export default class DamageRoll extends Roll {
       }
 
       // Merge any parenthetical terms followed by string terms
-      else if ( (term instanceof ParentheticalTerm || term instanceof MathTerm) && (nextTerm instanceof StringTerm)
+      else if ( (term instanceof ParentheticalTerm || term instanceof FunctionTerm) && (nextTerm instanceof StringTerm)
         && nextTerm.term.match(/^d[0-9]*$/)) {
         if ( term.isDeterministic ) {
           const newFormula = `${term.evaluate().total}${nextTerm.term}`;
