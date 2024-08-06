@@ -1,3 +1,5 @@
+import BasicRoll from "./basic-roll.mjs";
+
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
  * @param {string} formula                       The string formula to parse
@@ -130,7 +132,13 @@ export default class DamageRoll extends Roll {
 
           // Powerful critical - maximize damage and reduce the multiplier by 1
           if ( this.options.powerfulCritical ) {
-            let bonus = term.number * term.faces;
+            const bonus = BasicRoll.create({
+              parts: [term.formula],
+              data: this.data,
+              situational: false,
+              options: this.options
+            }).evaluateSync({ maximize: true })
+              .total ?? 0;
             if ( bonus > 0 ) {
               const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
               flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);
