@@ -3242,8 +3242,8 @@ DND5E.activityTypes = {
   enchant: {
     documentClass: activities.EnchantActivity
   },
-  healing: {
-    documentClass: activities.HealingActivity
+  heal: {
+    documentClass: activities.HealActivity
   },
   save: {
     documentClass: activities.SaveActivity
