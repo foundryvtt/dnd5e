@@ -1,3 +1,7 @@
+const {
+  Coin, DiceTerm, Die, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, RollTerm
+} = foundry.dice.terms;
+
 /**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula.
  *
@@ -196,8 +200,8 @@ function _expandParentheticalTerms(terms) {
 /* -------------------------------------------- */
 
 /**
- * A helper function to group terms into PoolTerms, DiceTerms, MathTerms, and NumericTerms.
- * MathTerms are included as NumericTerms if they are deterministic.
+ * A helper function to group terms into PoolTerms, DiceTerms, FunctionTerms, and NumericTerms.
+ * FunctionTerms are included as NumericTerms if they are deterministic.
  * @param {RollTerm[]} terms  An array of roll terms.
  * @returns {object}          An object mapping term types to arrays containing roll terms of that type.
  */
@@ -208,7 +212,7 @@ function _groupTermsByType(terms) {
   return terms.reduce((obj, term, i) => {
     let type;
     if ( term instanceof DiceTerm ) type = DiceTerm;
-    else if ( (term instanceof MathTerm) && (term.isDeterministic) ) type = NumericTerm;
+    else if ( (term instanceof FunctionTerm) && (term.isDeterministic) ) type = NumericTerm;
     else type = term.constructor;
     const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 

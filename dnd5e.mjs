@@ -52,11 +52,6 @@ Hooks.once("init", function() {
 
   // TODO: Remove when v11 support is dropped.
   CONFIG.compatibility.excludePatterns.push(/filePicker|select/);
-  CONFIG.compatibility.excludePatterns.push(/foundry\.dice\.terms/);
-  CONFIG.compatibility.excludePatterns.push(
-    /aggregateDamageRoll|configureDamage|preprocessFormula|simplifyRollFormula/
-  );
-  CONFIG.compatibility.excludePatterns.push(/core\.sourceId/);
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;

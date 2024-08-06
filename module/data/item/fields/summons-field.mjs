@@ -317,7 +317,6 @@ export class SummonsData extends foundry.abstract.DataModel {
       // Template actor (linked) found in world, create a copy for this user's item.
       return actor.clone({
         "flags.dnd5e.summonedCopy": true,
-        "flags.core.sourceId": actor.uuid,
         "_stats.compendiumSource": actor.uuid
       }, {save: true});
     }

@@ -1682,10 +1682,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Attempt to simplify by combining like dice terms
     let simplified = false;
-    if ( (s.terms[0] instanceof Die) && (s.terms.length === 1) ) {
+    if ( (s.terms[0] instanceof foundry.dice.terms.Die) && (s.terms.length === 1) ) {
       const d0 = p0.terms[0];
       const s0 = s.terms[0];
-      if ( (d0 instanceof Die) && (d0.faces === s0.faces) && d0.modifiers.equals(s0.modifiers) ) {
+      if ( (d0 instanceof foundry.dice.terms.Die) && (d0.faces === s0.faces) && d0.modifiers.equals(s0.modifiers) ) {
         d0.number += s0.number;
         parts[0] = p0.formula;
         simplified = true;
