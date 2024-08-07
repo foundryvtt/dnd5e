@@ -317,14 +317,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _disableFields(form) {
-    super._disableFields(form);
-    form.querySelectorAll(".interface-only").forEach(input => input.disabled = false);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   async activateEditor(name, options={}, initialContent="") {
     options.relativeLinks = true;
     options.plugins = {

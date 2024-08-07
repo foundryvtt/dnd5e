@@ -182,6 +182,14 @@ export default function DocumentSheetV2Mixin(Base) {
 
     /* -------------------------------------------- */
 
+    /** @inheritDoc */
+    _disableFields(form) {
+      super._disableFields(form);
+      form.querySelectorAll(".interface-only").forEach(input => input.disabled = false);
+    }
+
+    /* -------------------------------------------- */
+
     /**
      * Handle the user toggling the sheet mode.
      * @param {Event} event  The triggering event.
