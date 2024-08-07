@@ -130,7 +130,17 @@
         {{!-- Description Tab --}}
         {{> "dnd5e.item-description2" }}
 
+        {{!-- Effects Tab --}}
+        <div class="tab effects" data-group="primary" data-tab="effects">
+            {{> "dnd5e.active-effects2" }}
+        </div>
 
     </section>
+
+    {{!-- Effect Creation --}}
+    <button type="button" class="create-child gold-button"
+            aria-label="{{ localize "SIDEBAR.Create" type=(localize "DOCUMENT.ActiveEffect") }}">
+        <i class="fas fa-plus"></i>
+    </button>
 
 </form>
