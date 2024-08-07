@@ -1,4 +1,4 @@
-![Up to date as of 3.2.0](https://img.shields.io/static/v1?label=dnd5e&message=3.2.0&color=informational)
+![Up to date as of 3.3.0](https://img.shields.io/static/v1?label=dnd5e&message=3.3.0&color=informational)
 
 The D&D system includes an item activation method that allows for adding enchantments to items. These enchantments can modify the stats of an item (such as *Magic Weapon* giving a mundane weapon a +1 magical bonus), carry effects that apply to an actor (such as the *Fire Rune* granting a player double proficiency on tool checks), and carry items that are added to the actor (such as the *Arcane Propulsive Armor* give the player a set of gauntlets that can be used to attack).
 
@@ -42,7 +42,7 @@ In the activation chat message a drop area will appear. Any player may drop an i
 
 ## Enchantment Active Effects
 
-This describes how to create Active Effects used as an Enchantment. This differs from the [Active Effect Guide](Active-Effect-Guide) in that these are changes to items instead of the actors. If you're creating an Active Effect to add to the Additional Effects section when configuring an Enchantment, then use that guide.
+This describes how to create Active Effects used as Enchantments. This differs from the [Active Effect Guide](Active-Effect-Guide) in that these are changes to items instead of the actors. If you're creating an Active Effect to add to the Additional Effects section when configuring an Enchantment, then use that guide.
 
 Because of the differences in item types, there are separate sections for each type that can be enchanted. This uses the same [Legend](Active-Effect-Guide#legend) that the Active Effect Guide does in addition to:
 
