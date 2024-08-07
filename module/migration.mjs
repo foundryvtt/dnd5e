@@ -135,15 +135,33 @@ export const migrateWorld = async function() {
 
   // Migrate World Compendium Packs
   for ( let p of game.packs ) {
-    if ( p.metadata.packageType !== "world" ) continue;
-    if ( !["Actor", "Item", "Scene"].includes(p.documentName) ) continue;
-    await migrateCompendium(p);
+    if ( _shouldMigrateCompendium(p) ) await migrateCompendium(p);
   }
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
   ui.notifications.info(game.i18n.format("MIGRATION.5eComplete", {version}), {permanent: true});
 };
+
+/* -------------------------------------------- */
+
+/**
+ * Determine whether a compendium pack should be migrated during `migrateWorld`.
+ * @param {Compendium} pack
+ * @returns {boolean}
+ */
+function _shouldMigrateCompendium(pack) {
+  // We only care about actor, item or scene migrations
+  if ( !["Actor", "Item", "Scene"].includes(pack.documentName) ) return false;
+
+  // World compendiums should all be migrated, system ones should never by migrated
+  if ( pack.metadata.packageType === "world" ) return true;
+  if ( pack.metadata.packageType === "system" ) return false;
+
+  // Module compendiums should only be migrated if they don't have a download or manifest URL
+  const module = game.modules.get(pack.metadata.packageName);
+  return !module.download && !module.manifest;
+}
 
 /* -------------------------------------------- */
 
