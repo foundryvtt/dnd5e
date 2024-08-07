@@ -81,6 +81,7 @@ export default class ToolData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     ToolData.#migrateAbility(source);
   }
 

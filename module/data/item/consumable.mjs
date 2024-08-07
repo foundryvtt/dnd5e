@@ -80,6 +80,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     ConsumableData.#migratePropertiesData(source);
   }
 

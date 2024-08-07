@@ -90,6 +90,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( options.pack || options.parent?.pack ) Hooks.callAll("dnd5e.initializeItemSource", this, data, options);
 
+    ActivitiesTemplate.initializeActivities(data);
     return super._initializeSource(data, options);
   }
 
@@ -2885,7 +2886,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
     else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
     else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
-    ActivitiesTemplate.migrateActivities(source);
     return source;
   }
 }

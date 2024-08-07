@@ -160,9 +160,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Migrate data from the item to a newly created activity.
-   * @param {object} source  Item's candidate source data to migrate.
+   * @param {object} source  Item's candidate source data.
    */
-  static migrateInitialActivity(source) {
+  static createInitialActivity(source) {
     const activityData = this.transformTypeData(source, {
       _id: this.INITIAL_ID,
       type: this.metadata.type,
