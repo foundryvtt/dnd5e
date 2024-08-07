@@ -169,6 +169,20 @@ export default function ItemSheetV2Mixin(Base) {
     }
 
     /* -------------------------------------------- */
+
+    /** @override */
+    _onCreateChild() {
+      const activeTab = this._tabs?.[0]?.active ?? this.options.tabs[0].initial;
+
+      if ( activeTab === "effects" ) {
+        return ActiveEffect.implementation.create({
+          name: game.i18n.localize("DND5E.EffectNew"),
+          img: "icons/svg/aura.svg"
+        }, { parent: this.item, renderSheet: true });
+      }
+    }
+
+    /* -------------------------------------------- */
     /*  Helpers                                     */
     /* -------------------------------------------- */
 

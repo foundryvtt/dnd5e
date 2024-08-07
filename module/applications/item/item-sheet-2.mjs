@@ -27,6 +27,34 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   }
 
   /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getData(options) {
+    const context = await super.getData(options);
+
+    // Effects
+    for ( const category of Object.values(context.effects) ) {
+      category.effects = await category.effects.reduce(async (arr, effect) => {
+        effect.updateDuration();
+        const { id, name, img, disabled, duration } = effect;
+        const source = await effect.getSource();
+        arr = await arr;
+        arr.push({
+          id, name, img, disabled, duration, source,
+          parent,
+          durationParts: duration.remaining ? duration.label.split(", ") : [],
+          hasTooltip: true
+        });
+        return arr;
+      }, []);
+    }
+
+    return context;
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners & Handlers                  */
   /* -------------------------------------------- */
 
@@ -44,5 +72,21 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
         }));
       });
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Filtering                                   */
+  /* -------------------------------------------- */
+
+  /**
+   * Filter child embedded ActiveEffects based on the current set of filters.
+   * @param {string} collection    The embedded collection name.
+   * @param {Set<string>} filters  Filters to apply to the children.
+   * @returns {Document[]}
+   * @protected
+   */
+  _filterChildren(collection, filters) {
+    if ( collection === "effects" ) return Array.from(this.item.effects);
+    return [];
   }
 }
