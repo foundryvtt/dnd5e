@@ -14,7 +14,8 @@ export default class HitPointsAdvancement extends Advancement {
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       order: 10,
-      icon: "systems/dnd5e/icons/svg/hit-points.svg",
+      icon: "icons/magic/life/heart-pink.webp",
+      typeIcon: "systems/dnd5e/icons/svg/hit-points.svg",
       title: game.i18n.localize("DND5E.AdvancementHitPointsTitle"),
       hint: game.i18n.localize("DND5E.AdvancementHitPointsHint"),
       multiLevel: true,
@@ -67,9 +68,9 @@ export default class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  titleForLevel(level, { configMode=false }={}) {
+  titleForLevel(level, { configMode=false, legacyDisplay=false }={}) {
     const hp = this.valueForLevel(level);
-    if ( !hp || configMode ) return this.title;
+    if ( !hp || configMode || !legacyDisplay ) return this.title;
     return `${this.title}: <strong>${hp}</strong>`;
   }
 

@@ -180,6 +180,10 @@ export default function ItemSheetV2Mixin(Base) {
           img: "icons/svg/aura.svg"
         }, { parent: this.item, renderSheet: true });
       }
+
+      if ( activeTab === "advancement" ) {
+        return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
+      }
     }
 
     /* -------------------------------------------- */

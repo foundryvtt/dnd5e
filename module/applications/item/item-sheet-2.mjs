@@ -55,6 +55,26 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  _getItemAdvancementTags(advancement) {
+    if ( this.item.isEmbedded && (this._mode !== this.constructor.MODES.EDIT) ) return [];
+    const tags = [];
+    if ( advancement.classRestriction === "primary" ) {
+      tags.push({
+        label: "DND5E.AdvancementClassRestrictionPrimary",
+        icon: "systems/dnd5e/icons/svg/original-class.svg"
+      });
+    } else if ( advancement.classRestriction === "secondary" ) {
+      tags.push({
+        label: "DND5E.AdvancementClassRestrictionSecondary",
+        icon: "systems/dnd5e/icons/svg/multiclass.svg"
+      });
+    }
+    return tags;
+  }
+
+  /* -------------------------------------------- */
   /*  Filtering                                   */
   /* -------------------------------------------- */
 

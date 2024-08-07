@@ -2989,7 +2989,7 @@ DND5E.traits = {
       title: "DND5E.ClassSaves",
       localization: "DND5E.TraitSavesPlural"
     },
-    icon: "systems/dnd5e/icons/svg/trait-saves.svg",
+    icon: "icons/magic/life/ankh-gold-blue.webp",
     actorKeyPath: "system.abilities",
     configKey: "abilities",
     labelKeyPath: "label"
@@ -2999,7 +2999,7 @@ DND5E.traits = {
       title: "DND5E.Skills",
       localization: "DND5E.TraitSkillsPlural"
     },
-    icon: "systems/dnd5e/icons/svg/trait-skills.svg",
+    icon: "icons/tools/instruments/harp-yellow-teal.webp",
     actorKeyPath: "system.skills",
     labelKeyPath: "label",
     expertise: true
@@ -3009,14 +3009,14 @@ DND5E.traits = {
       title: "DND5E.Languages",
       localization: "DND5E.TraitLanguagesPlural"
     },
-    icon: "systems/dnd5e/icons/svg/trait-languages.svg"
+    icon: "icons/skills/social/diplomacy-peace-alliance.webp"
   },
   armor: {
     labels: {
       title: "DND5E.TraitArmorProf",
       localization: "DND5E.TraitArmorPlural"
     },
-    icon: "systems/dnd5e/icons/svg/trait-armor-proficiencies.svg",
+    icon: "icons/equipment/chest/breastplate-helmet-metal.webp",
     actorKeyPath: "system.traits.armorProf",
     configKey: "armorProficiencies",
     subtypes: { keyPath: "armor.type", ids: ["armorIds", "shieldIds"] }
@@ -3026,7 +3026,7 @@ DND5E.traits = {
       title: "DND5E.TraitWeaponProf",
       localization: "DND5E.TraitWeaponPlural"
     },
-    icon: "systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg",
+    icon: "icons/skills/melee/weapons-crossed-swords-purple.webp",
     actorKeyPath: "system.traits.weaponProf",
     configKey: "weaponProficiencies",
     subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
@@ -3036,7 +3036,7 @@ DND5E.traits = {
       title: "DND5E.TraitToolProf",
       localization: "DND5E.TraitToolPlural"
     },
-    icon: "systems/dnd5e/icons/svg/trait-tool-proficiencies.svg",
+    icon: "icons/skills/trades/smithing-anvil-silver-red.webp",
     actorKeyPath: "system.tools",
     configKey: "toolProficiencies",
     subtypes: { keyPath: "toolType", ids: ["toolIds"] },

@@ -202,6 +202,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( !item.system.advancement ) return {};
     const advancement = {};
     const configMode = !item.parent || this.advancementConfigurationMode;
+    const legacyDisplay = this.options.legacyDisplay;
     const maxLevel = !configMode
       ? (item.system.levels ?? item.class?.system.levels ?? item.parent.system.details?.level ?? -1) : -1;
 
@@ -214,7 +215,9 @@ export default class ItemSheet5e extends ItemSheet {
           title: a.title,
           icon: a.icon,
           classRestriction: a.classRestriction,
-          configured: false
+          configured: false,
+          tags: this._getItemAdvancementTags(a),
+          classes: [a.icon?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
         })),
         configured: "partial"
       };
@@ -226,11 +229,14 @@ export default class ItemSheet5e extends ItemSheet {
       const items = advancements.map(advancement => ({
         id: advancement.id,
         order: advancement.sortingValueForLevel(level),
-        title: advancement.titleForLevel(level, { configMode }),
+        title: advancement.titleForLevel(level, { configMode, legacyDisplay }),
         icon: advancement.icon,
         classRestriction: advancement.classRestriction,
-        summary: advancement.summaryForLevel(level, { configMode }),
-        configured: advancement.configuredForLevel(level)
+        summary: advancement.summaryForLevel(level, { configMode, legacyDisplay }),
+        configured: advancement.configuredForLevel(level),
+        tags: this._getItemAdvancementTags(advancement),
+        value: advancement.valueForLevel?.(level),
+        classes: [advancement.icon?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
       }));
       if ( !items.length ) continue;
       advancement[level] = {
@@ -239,6 +245,18 @@ export default class ItemSheet5e extends ItemSheet {
       };
     }
     return advancement;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare tags for an Advancement.
+   * @param {Advancement} advancement  The Advancement.
+   * @returns {{label: string, icon: string}[]}
+   * @protected
+   */
+  _getItemAdvancementTags(advancement) {
+    return [];
   }
 
   /* -------------------------------------------- */

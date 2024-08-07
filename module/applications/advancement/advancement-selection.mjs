@@ -49,7 +49,7 @@ export default class AdvancementSelection extends Dialog {
       if ( config.hidden || !config.validItemTypes?.has(this.item.type) ) continue;
       context.types[name] = {
         label: advancement.metadata.title,
-        icon: advancement.metadata.icon,
+        icon: advancement.metadata.typeIcon,
         hint: advancement.metadata.hint,
         disabled: !advancement.availableForItem(this.item)
       };
