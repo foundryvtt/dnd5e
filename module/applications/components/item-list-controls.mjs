@@ -176,11 +176,11 @@ export default class ItemListControlsElement extends HTMLElement {
     const search = document.createElement("search");
     search.setAttribute("aria-label", this.getAttribute("label"));
     search.innerHTML = `
-      <input type="text" placeholder="${this.getAttribute("label")}">
+      <input type="text" class="interface-only" placeholder="${this.getAttribute("label")}">
       <ul class="unlist controls">
         <li>
-          <button type="button" class="unbutton filter-control" data-action="clear" data-tooltip="DND5E.FilterClear"
-                  aria-label="${game.i18n.localize("DND5E.FilterClear")}">
+          <button type="button" class="unbutton filter-control interface-only" data-action="clear"
+                  data-tooltip="DND5E.FilterClear" aria-label="${game.i18n.localize("DND5E.FilterClear")}">
             <i class="fas fa-xmark"></i>
           </button>
         </li>
@@ -194,7 +194,7 @@ export default class ItemListControlsElement extends HTMLElement {
       const item = document.createElement("li");
       item.classList.add("dropdown");
       item.innerHTML = `
-        <button type="button" class="unbutton filter-control filter" data-action="filter"
+        <button type="button" class="unbutton filter-control filter interface-only" data-action="filter"
                 aria-label="${game.i18n.localize("DND5E.Filter")}">
           <i class="fas fa-filter"></i>
         </button>
@@ -206,7 +206,9 @@ export default class ItemListControlsElement extends HTMLElement {
       options.forEach(option => {
         const item = document.createElement("li");
         item.innerHTML = `
-          <button type="button" class="filter-item" data-filter="${option.value}">${option.innerText}</button>
+          <button type="button" class="filter-item interface-only" data-filter="${option.value}">
+            ${option.innerText}
+          </button>
         `;
         list.appendChild(item);
       });
@@ -217,7 +219,7 @@ export default class ItemListControlsElement extends HTMLElement {
     if ( ["toggle", "multi"].includes(sortMode) ) {
       const item = document.createElement("li");
       item.innerHTML = `
-        <button type="button" class="unbutton filter-control active" data-action="sort"
+        <button type="button" class="unbutton filter-control active interface-only" data-action="sort"
                 data-tooltip="SIDEBAR.SortModeManual" aria-label="${game.i18n.localize("SIDEBAR.SortModeManual")}">
           <i class="fas fa-arrow-down-short-wide"></i>
         </button>
