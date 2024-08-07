@@ -54,6 +54,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
     // If item doesn't have an action type or activation, then it doesn't need an activity
     if ( !source.system.actionType || !source.system.activation?.type ) return false;
 
+    // If item was updated after `4.0.0`, it shouldn't need the migration
+    if ( foundry.utils.isNewerVersion(source._stats.systemVersion ?? "0.0.0", "3.9.9") ) return false;
+
     // If the initial activity has already been created, no reason to create it again
     if ( !foundry.utils.isEmpty(source.system.activities) ) return false;
 

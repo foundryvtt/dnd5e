@@ -264,7 +264,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }
     };
 
-    const parsed = (formula ?? "").match(/^\s*(\d+)d(\d+)(?:\s*([+|-])\s*(@?[\w\d.]+))?\s*$/i);
+    const parsed = (formula ?? "").match(/^\s*(\d+)d(\d+)(?:\s*([+|-])\s*(@?[\w\d.-]+))?\s*$/i);
     if ( parsed && CONFIG.DND5E.dieSteps.includes(Number(parsed[2])) ) {
       data.number = Number(parsed[1]);
       data.denomination = Number(parsed[2]);
