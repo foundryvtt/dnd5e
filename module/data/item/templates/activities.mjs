@@ -67,6 +67,63 @@ export default class ActivitiesTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Modify data before initialization to create initial activity if necessary.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static initializeActivities(source) {
+    // TODO: Handle migration of data kept on spells and inferred by activities
+    // TODO: Handle migration of base damage, range, & ammunition on weapons
+    if ( this.#shouldCreateInitialActivity(source) ) this.#createInitialActivity(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Method to determine whether the activity creation migration should be performed. This migration should only be
+   * performed on whole item data rather than partial updates, so check to ensure all of the necessary data is present.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   * @returns {boolean}
+   */
+  static #shouldCreateInitialActivity(source) {
+    // If item doesn't have an action type or activation, then it doesn't need an activity
+    if ( !source.system.actionType || !source.system.activation?.type ) return false;
+
+    // If item was updated after `4.0.0`, it shouldn't need the migration
+    if ( !foundry.utils.isNewerVersion("4.0.0", source._stats.systemVersion ?? "0.0.0") ) return false;
+
+    // If the initial activity has already been created, no reason to create it again
+    if ( !foundry.utils.isEmpty(source.system.activities) ) return false;
+
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate data from ActionTemplate and ActivatedEffectTemplate into a newly created activity.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #createInitialActivity(source) {
+    let type = {
+      mwak: "attack",
+      rwak: "attack",
+      msak: "attack",
+      rsak: "attack",
+      abil: null, // TODO: No specific activity type for this, perhaps UtilityActivity with the ability as an enricher?
+      save: "save",
+      ench: "enchant",
+      summ: "summon",
+      heal: "heal"
+    }[source.system.actionType] ?? "utility";
+    if ( (type === "utility") && source.system.damage?.parts?.length ) type = "damage";
+
+    const cls = CONFIG.DND5E.activityTypes[type].documentClass;
+    cls.createInitialActivity(source);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 

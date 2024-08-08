@@ -3,11 +3,11 @@ import ActivitySheet from "./activity-sheet.mjs";
 /**
  * Sheet for the healing activity.
  */
-export default class HealingSheet extends ActivitySheet {
+export default class HealSheet extends ActivitySheet {
 
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["healing-activity"]
+    classes: ["heal-activity"]
   };
 
   /* -------------------------------------------- */
@@ -16,11 +16,11 @@ export default class HealingSheet extends ActivitySheet {
   static PARTS = {
     ...super.PARTS,
     effect: {
-      template: "systems/dnd5e/templates/activity/healing-effect.hbs",
+      template: "systems/dnd5e/templates/activity/heal-effect.hbs",
       templates: [
         ...super.PARTS.effect.templates,
         "systems/dnd5e/templates/activity/parts/damage-part.hbs",
-        "systems/dnd5e/templates/activity/parts/healing-damage.hbs"
+        "systems/dnd5e/templates/activity/parts/heal-healing.hbs"
       ]
     }
   };

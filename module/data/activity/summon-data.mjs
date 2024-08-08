@@ -84,4 +84,24 @@ export default class SummonActivityData extends BaseActivityData {
       })
     };
   }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static transformTypeData(source, activityData) {
+    return foundry.utils.mergeObject(activityData, {
+      bonuses: source.system.summons?.bonuses ?? {},
+      creatureSizes: source.system.summons?.creatureSizes ?? [],
+      creatureTypes: source.system.summons?.creatureTypes ?? [],
+      match: source.system.summons?.match ?? {},
+      profiles: source.system.summons?.profiles ?? [],
+      summon: {
+        identifier: source.system.summons?.classIdentifier ?? "",
+        mode: source.system.summons?.mode ?? "",
+        prompt: source.system.summons?.prompt ?? true
+      }
+    });
+  }
 }

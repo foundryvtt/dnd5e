@@ -21,4 +21,18 @@ export default class UtilityActivityData extends BaseActivityData {
       })
     };
   }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static transformTypeData(source, activityData) {
+    return foundry.utils.mergeObject(activityData, {
+      roll: {
+        formula: source.system.formula ?? "",
+        name: ""
+      }
+    });
+  }
 }

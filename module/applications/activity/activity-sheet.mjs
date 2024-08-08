@@ -199,11 +199,14 @@ export default class ActivitySheet extends Application5e {
   async _prepareActivationContext(context) {
     context.tab = context.tabs.activation;
 
-    context.activationTypes = Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, config]) => ({
-      value,
-      label: game.i18n.localize(config.label),
-      group: game.i18n.localize(config.group)
-    }));
+    context.activationTypes = [
+      ...Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, config]) => ({
+        value,
+        label: game.i18n.localize(config.label),
+        group: game.i18n.localize(config.group)
+      })),
+      { value: "", label: game.i18n.localize("DND5E.NoneActionLabel") }
+    ];
     context.affectsPlaceholder = game.i18n.localize(
       `DND5E.Target${context.activity.target.template.type ? "Every" : "Any"}`
     );

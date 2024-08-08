@@ -21,4 +21,18 @@ export default class DamageActivityData extends BaseActivityData {
       })
     };
   }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static transformTypeData(source, activityData) {
+    return foundry.utils.mergeObject(activityData, {
+      damage: {
+        allowCritical: false,
+        parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
+      }
+    });
+  }
 }

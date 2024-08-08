@@ -38,4 +38,27 @@ export default class AttackActivityData extends BaseActivityData {
       })
     };
   }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static transformTypeData(source, activityData) {
+    return foundry.utils.mergeObject(activityData, {
+      ability: source.system.ability ?? "",
+      attack: {
+        bonus: source.system.attack?.bonus ?? "",
+        flat: source.system.attack?.flat ?? false,
+        type: {
+          value: source.system.actionType.startsWith("m") ? "melee" : "ranged",
+          classification: source.system.actionType.endsWith("wak") ? "weapon" : "spell"
+        }
+      },
+      damage: {
+        includeBase: true,
+        parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
+      }
+    });
+  }
 }

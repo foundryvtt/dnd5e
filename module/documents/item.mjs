@@ -6,6 +6,7 @@ import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import { EnchantmentData } from "../data/item/fields/enchantment-field.mjs";
+import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
@@ -89,6 +90,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( options.pack || options.parent?.pack ) Hooks.callAll("dnd5e.initializeItemSource", this, data, options);
 
+    ActivitiesTemplate.initializeActivities(data);
     return super._initializeSource(data, options);
   }
 
