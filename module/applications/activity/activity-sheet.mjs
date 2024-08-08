@@ -171,6 +171,7 @@ export default class ActivitySheet extends Application5e {
       ...await super._prepareContext(options),
       activity: this.activity,
       fields: this.activity.schema.fields,
+      inferred: this.activity._inferredSource,
       source: this.activity.toObject(),
       tabs: this._getTabs()
     };
@@ -199,6 +200,13 @@ export default class ActivitySheet extends Application5e {
   async _prepareActivationContext(context) {
     context.tab = context.tabs.activation;
 
+    context.data = {};
+    context.disabled = {};
+    for ( const field of ["activation", "duration", "range", "target"] ) {
+      context.data[field] = this.activity[field].override ? context.source[field] : context.inferred[field];
+      context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override;
+    }
+
     context.activationTypes = [
       ...Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, config]) => ({
         value,
@@ -208,7 +216,7 @@ export default class ActivitySheet extends Application5e {
       { value: "", label: game.i18n.localize("DND5E.NoneActionLabel") }
     ];
     context.affectsPlaceholder = game.i18n.localize(
-      `DND5E.Target${context.activity.target.template.type ? "Every" : "Any"}`
+      `DND5E.Target${context.data.target.template.type ? "Every" : "Any"}`
     );
     context.durationUnits = [
       { value: "inst", label: game.i18n.localize("DND5E.TimeInst") },
@@ -226,12 +234,6 @@ export default class ActivitySheet extends Application5e {
         value, label, group: game.i18n.localize("DND5E.RangeDistance")
       }))
     ];
-    context.scalar = {
-      activation: context.activity.activation.scalar,
-      duration: context.activity.duration.scalar,
-      range: context.activity.range.scalar,
-      target: context.activity.target.affects.scalar
-    };
 
     // Consumption targets
     const canScale = this.activity.canScale;
@@ -284,7 +286,7 @@ export default class ActivitySheet extends Application5e {
     }));
 
     // Template dimensions
-    const sizes = CONFIG.DND5E.areaTargetTypes[context.activity.target.template.type]?.sizes;
+    const sizes = CONFIG.DND5E.areaTargetTypes[context.data.target.template.type]?.sizes;
     if ( sizes ) {
       context.dimensions = {
         size: "DND5E.AreaOfEffect.Size.Label",

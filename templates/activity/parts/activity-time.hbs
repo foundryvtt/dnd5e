@@ -1,16 +1,25 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
-    <fieldset>
+    {{#if activity.activation.canOverride}}
+    {{ formField fields.activation.fields.override value=source.activation.override }}
+    {{/if}}
+
+    <fieldset {{ disabled disabled.activation }}>
         <legend>{{ localize "DND5E.ACTIVATION.FIELDS.activation.label" }}</legend>
-        {{#if scalar.activation}}{{ formField fields.activation.fields.value value=source.activation.value }}{{/if}}
-        {{ formField fields.activation.fields.type value=source.activation.type options=activationTypes }}
-        {{ formField fields.activation.fields.condition value=source.activation.condition }}
+        {{#if activity.activation.scalar}}
+        {{ formField fields.activation.fields.value value=data.activation.value }}
+        {{/if}}
+        {{ formField fields.activation.fields.type value=data.activation.type options=activationTypes }}
+        {{ formField fields.activation.fields.condition value=data.activation.condition }}
     </fieldset>
 
-    <fieldset>
+    {{#if activity.duration.canOverride}}
+    {{ formField fields.duration.fields.override value=source.duration.override }}
+    {{/if}}
+
+    <fieldset {{ disabled disabled.duration }}>
         <legend>{{ localize "DND5E.DURATION.FIELDS.duration.label" }}</legend>
-        <!-- TODO: (override checkbox) -->
-        {{#if scalar.duration}}{{ formField fields.duration.fields.value value=source.duration.value }}{{/if}}
-        {{ formField fields.duration.fields.units value=source.duration.units options=durationUnits }}
-        {{ formField fields.duration.fields.special value=source.duration.special }}
+        {{#if activity.duration.scalar}}{{ formField fields.duration.fields.value value=data.duration.value }}{{/if}}
+        {{ formField fields.duration.fields.units value=data.duration.units options=durationUnits }}
+        {{ formField fields.duration.fields.special value=data.duration.special }}
     </fieldset>
 </section>

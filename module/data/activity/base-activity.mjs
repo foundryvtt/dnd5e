@@ -76,7 +76,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }),
       name: new StringField({ initial: undefined }),
       img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
-      activation: new ActivationField(),
+      activation: new ActivationField({
+        override: new BooleanField()
+      }),
       consumption: new SchemaField({
         targets: new ArrayField(
           new SchemaField({
@@ -97,10 +99,15 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       description: new SchemaField({
         chatFlavor: new StringField()
       }),
-      duration: new DurationField(),
+      duration: new DurationField({
+        override: new BooleanField()
+      }),
       effects: new ArrayField(new AppliedEffectField()),
-      range: new RangeField(),
+      range: new RangeField({
+        override: new BooleanField()
+      }),
       target: new TargetField({
+        override: new BooleanField(),
         prompt: new BooleanField({ initial: true })
       }),
       uses: new UsesField()
@@ -398,7 +405,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {object} rollData  Deterministic roll data from the item.
    */
   prepareFinalData(rollData) {
-    // TODO: Copy inferred data over from item source data where necessary
+    this._setOverride("activation");
+    this._setOverride("duration");
+    this._setOverride("range");
+    this._setOverride("target");
+
+    Object.defineProperty(this, "_inferredSource", {
+      value: Object.freeze(this.toObject(false)),
+      configurable: false,
+      enumerable: false,
+      writable: false
+    });
 
     ActivationField.prepareData.call(this, rollData);
     DurationField.prepareData.call(this, rollData);
@@ -439,6 +456,26 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Add an `canOverride` property to the provided object and, if `override` is `true`, replace the data on the
+   * activity with data from the item.
+   * @param {string} keyPath  Path of the property to set on the activity.
+   * @internal
+   */
+  _setOverride(keyPath) {
+    const obj = foundry.utils.getProperty(this, keyPath);
+    Object.defineProperty(obj, "canOverride", {
+      value: foundry.utils.hasProperty(this.item.system, keyPath),
+      configurable: true,
+      enumerable: false
+    });
+    if ( obj.canOverride && !obj.override ) {
+      foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, keyPath));
+    }
+  }
+
   /* -------------------------------------------- */
 
   /**

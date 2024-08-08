@@ -157,6 +157,10 @@
         "label": "Activation Condition",
         "hint": "Condition required to activate this activity."
       },
+      "override": {
+        "label": "Override Activation",
+        "hint": "Override the activation information from the item with values for this activity."
+      },
       "type": {
         "label": "Activation Type",
         "hint": "Activation type (e.g. action, legendary action, minutes)."
@@ -1051,6 +1055,10 @@
   "FIELDS": {
     "duration": {
       "label": "Duration",
+      "override": {
+        "label": "Override Duration",
+        "hint": "Override the duration information from the item with values for this activity."
+      },
       "special": {
         "label": "Special Duration",
         "hint": "Description of any special duration details."
@@ -1776,12 +1784,16 @@
   "FIELDS": {
     "range": {
       "label": "Range",
-      "reach": {
-        "label": "Reach"
-      },
       "long": {
         "label": "Long Range",
         "hint": "Far attack range of the weapon, if present on the weapon."
+      },
+      "override": {
+        "label": "Override Range",
+        "hint": "Override the range information from the item with values for this activity."
+      },
+      "reach": {
+        "label": "Reach"
       },
       "special": {
         "label": "Special Range",
@@ -2332,6 +2344,10 @@
           "label": "Target Type",
           "hint": "Type of targets that can be affected (e.g. creatures, objects, spaces)."
         }
+      },
+      "override": {
+        "label": "Override Target",
+        "hint": "Override the target information from the item with values for this activity."
       },
       "prompt": {
         "label": "Measured Template Prompt",
