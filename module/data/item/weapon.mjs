@@ -1,6 +1,8 @@
 import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
+import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
@@ -8,7 +10,6 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import MountableTemplate from "./templates/mountable.mjs";
-import ItemTypeField from "./fields/item-type-field.mjs";
 
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -94,8 +95,28 @@ export default class WeaponData extends ItemDataModel.mixin(
   static _migrateData(source) {
     super._migrateData(source);
     ActivitiesTemplate.migrateActivities(source);
+    WeaponData.#migrateDamage(source);
     WeaponData.#migratePropertiesData(source);
     WeaponData.#migrateProficient(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate weapon damage from old parts.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateDamage(source) {
+    const systemData = { system: { scaling: { mode: "none" } } };
+    if ( source.damage?.parts?.[0] ) {
+      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts?.[0]);
+      if ( source.damage.base.bonus === "@mod" ) source.damage.base.bonus = "";
+      delete source.damage.parts;
+    }
+    if ( foundry.utils.getType(source.damage?.versatile) === "string" ) {
+      source.damage.versatile = BaseActivityData.transformDamagePartData(systemData, [source.damage?.versatile, ""]);
+      if ( source.damage.versatile.bonus === "@mod" ) source.damage.versatile.bonus = "";
+    }
   }
 
   /* -------------------------------------------- */
