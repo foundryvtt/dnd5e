@@ -19,7 +19,8 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
         value: AbilityScoreImprovementValueData
       },
       order: 20,
-      icon: "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+      icon: "icons/magic/symbols/star-solid-gold.webp",
+      typeIcon: "systems/dnd5e/icons/svg/ability-score-improvement.svg",
       title: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementTitle"),
       hint: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementHint"),
       apps: {

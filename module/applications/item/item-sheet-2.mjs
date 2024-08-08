@@ -55,6 +55,46 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  _getItemAdvancementTags(advancement) {
+    if ( this.item.isEmbedded && (this._mode !== this.constructor.MODES.EDIT) ) return [];
+    const tags = [];
+    if ( advancement.classRestriction === "primary" ) {
+      tags.push({
+        label: "DND5E.AdvancementClassRestrictionPrimary",
+        icon: "systems/dnd5e/icons/svg/original-class.svg"
+      });
+    } else if ( advancement.classRestriction === "secondary" ) {
+      tags.push({
+        label: "DND5E.AdvancementClassRestrictionSecondary",
+        icon: "systems/dnd5e/icons/svg/multiclass.svg"
+      });
+    }
+    return tags;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    for ( const control of html[0].querySelectorAll(".tab.advancement [data-context-menu]") ) {
+      control.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const { clientX, clientY } = event;
+        event.currentTarget.closest("[data-id]").dispatchEvent(new PointerEvent("contextmenu", {
+          view: window, bubbles: true, cancelable: true, clientX, clientY
+        }));
+      });
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Filtering                                   */
   /* -------------------------------------------- */
 

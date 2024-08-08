@@ -58,6 +58,7 @@ export default class Advancement extends BaseAdvancement {
    * @property {DataModel} value          Data model used for validating value data.
    * @property {number} order          Number used to determine default sorting order of advancement items.
    * @property {string} icon           Icon used for this advancement type if no user icon is specified.
+   * @property {string} typeIcon       Icon used when selecting this advancement type during advancement creation.
    * @property {string} title          Title to be displayed if no user title is specified.
    * @property {string} hint           Description of this type shown in the advancement selection dialog.
    * @property {boolean} multiLevel    Can this advancement affect more than one level? If this is set to true,
@@ -78,6 +79,7 @@ export default class Advancement extends BaseAdvancement {
     return {
       order: 100,
       icon: "icons/svg/upgrade.svg",
+      typeIcon: "icons/svg/upgrade.svg",
       title: game.i18n.localize("DND5E.AdvancementTitle"),
       hint: "",
       multiLevel: false,
@@ -220,14 +222,15 @@ export default class Advancement extends BaseAdvancement {
 
   /**
    * Title displayed in advancement list for a specific level.
-   * @param {number} level                       Level for which to generate a title.
+   * @param {number} level                           Level for which to generate a title.
    * @param {object} [options={}]
-   * @param {object} [options.configMode=false]  Is the advancement's item sheet in configuration mode? When in
-   *                                             config mode, the choices already made on this actor should not
-   *                                             be displayed.
-   * @returns {string}                           HTML title with any level-specific information.
+   * @param {boolean} [options.legacyDisplay=false]  Use legacy formatting?
+   * @param {boolean} [options.configMode=false]     Is the advancement's item sheet in configuration mode? When in
+   *                                                 config mode, the choices already made on this actor should not
+   *                                                 be displayed.
+   * @returns {string}                               HTML title with any level-specific information.
    */
-  titleForLevel(level, { configMode=false }={}) {
+  titleForLevel(level, options={}) {
     return this.title;
   }
 
@@ -235,14 +238,15 @@ export default class Advancement extends BaseAdvancement {
 
   /**
    * Summary content displayed beneath the title in the advancement list.
-   * @param {number} level                       Level for which to generate the summary.
+   * @param {number} level                           Level for which to generate the summary.
    * @param {object} [options={}]
-   * @param {object} [options.configMode=false]  Is the advancement's item sheet in configuration mode? When in
-   *                                             config mode, the choices already made on this actor should not
-   *                                             be displayed.
-   * @returns {string}                           HTML content of the summary.
+   * @param {boolean} [options.legacyDisplay=false]  Use legacy formatting?
+   * @param {boolean} [options.configMode=false]     Is the advancement's item sheet in configuration mode? When in
+   *                                                 config mode, the choices already made on this actor should not
+   *                                                 be displayed.
+   * @returns {string}                               HTML content of the summary.
    */
-  summaryForLevel(level, { configMode=false }={}) {
+  summaryForLevel(level, options={}) {
     return "";
   }
 

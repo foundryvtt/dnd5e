@@ -408,7 +408,67 @@
       }
     }
 
+    /* Advancements */
+    .tab.advancement {
+      padding: 12px 2px 58px 6px;
 
+      .items-header {
+        .item-controls {
+          align-items: center;
+          justify-content: end;
+          padding-right: 12px;
+        }
+
+        .info-control, .item-control {
+          position: unset;
+          color: var(--dnd5e-color-gold);
+        }
+      }
+
+      .item-name {
+        .name {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .tags { --icon-size: 18px; }
+
+        .title {
+          font-family: var(--dnd5e-font-roboto-slab);
+          font-size: var(--font-size-13);
+          font-weight: bold;
+        }
+
+        .summary {
+          font-size: var(--font-size-10);
+          color: var(--color-text-dark-5);
+
+          p { margin: 0; }
+
+          .content-link {
+            color: var(--color-text-dark-primary);
+            text-decoration-style: dotted;
+            > i { color: var(--color-text-dark-primary); }
+          }
+
+          .tag {
+            padding: 0 3px;
+            text-decoration: underline dotted;
+          }
+        }
+      }
+
+      .advancement-value { width: 50px; }
+
+      .item-detail.advancement-value { font-size: var(--font-size-13); }
+
+      .svg .item-image {
+        border: none;
+        background: none;
+        box-shadow: none;
+      }
+    }
   }
 
   /* ---------------------------------- */

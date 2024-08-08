@@ -232,8 +232,8 @@ export default class ItemListControlsElement extends HTMLElement {
       const groupLabel = this.getAttribute("group-label");
       const item = document.createElement("li");
       item.innerHTML = `
-        <button type="button" class="unbutton filter-control active" data-action="group" data-tooltip="${groupLabel}"
-                aria-label="${groupLabel}">
+        <button type="button" class="unbutton filter-control active interface-only" data-action="group"
+                data-tooltip="${groupLabel}" aria-label="${groupLabel}">
           <i class="fas fa-layer-group"></i>
         </button>
       `;
