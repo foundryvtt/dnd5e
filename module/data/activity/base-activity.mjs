@@ -1,11 +1,13 @@
 import { formatNumber, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import ActivationField from "../shared/activation-field.mjs";
+import DurationField from "../shared/duration-field.mjs";
+import RangeField from "../shared/range-field.mjs";
+import TargetField from "../shared/target-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
-const {
-  ArrayField, BooleanField, DocumentIdField, FilePathField, NumberField, SchemaField, StringField
-} = foundry.data.fields;
+const { ArrayField, BooleanField, DocumentIdField, FilePathField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data for a consumption target.
@@ -34,38 +36,18 @@ const {
  * @property {string} type                       Type name of the activity used to build a specific activity class.
  * @property {string} name                       Name for this activity.
  * @property {string} img                        Image that represents this activity.
- * @property {object} activation
- * @property {string} activation.type            Activation type (e.g. action, legendary action, minutes).
- * @property {number} activation.value           Scalar value associated with the activation.
- * @property {string} activation.condition       Condition required to activate this activity.
+ * @property {ActivationField} activation        Activation time & conditions.
  * @property {object} consumption
  * @property {ConsumptionTargetData[]} consumption.targets  Collection of consumption targets.
  * @property {object} consumption.scaling
  * @property {boolean} consumption.scaling.allowed  Can this non-spell activity be activated at higher levels?
  * @property {string} consumption.scaling.max    Maximum number of scaling levels for this item.
- * @property {object} duration
- * @property {string} duration.value             Scalar value for the activity's duration.
- * @property {string} duration.units             Units that are used for the duration.
- * @property {string} duration.special           Description of any special duration details.
+ * @property {object} description
+ * @property {string} description.chatFlavor     Extra text displayed in the activation chat message.
+ * @property {DurationField} duration            Duration of the effect.
  * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
  * @property {object} range
- * @property {string} range.value                Scalar value for the activity's range.
- * @property {string} range.units                Units that are used for the range.
- * @property {string} range.special              Description of any special range details.
- * @property {object} target
- * @property {object} target.template
- * @property {string} target.template.count      Number of templates created.
- * @property {boolean} target.template.contiguous  Must all created areas be connected to one another?
- * @property {string} target.template.type       Type of area of effect caused by this activity.
- * @property {string} target.template.size       Size of the activity's area of effect on its primary axis.
- * @property {string} target.template.width      Width of line area of effect.
- * @property {string} target.template.height     Height of cylinder area of effect.
- * @property {string} target.template.units      Units used to measure the area of effect sizes.
- * @property {object} target.affects
- * @property {string} target.affects.count       Number of individual targets that can be affected.
- * @property {string} target.affects.type        Type of targets that can be affected (e.g. creatures, objects, spaces).
- * @property {boolean} target.affects.choice     When targeting an area, can the user choose who it affects?
- * @property {string} target.affects.special     Description of special targeting.
+ * @property {TargetField} target
  * @property {boolean} target.prompt             Should the player be prompted to place the template?
  * @property {UsesField} uses                    Uses available to this activity.
  */
@@ -91,11 +73,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }),
       name: new StringField({ initial: undefined }),
       img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
-      activation: new SchemaField({
-        type: new StringField({ initial: "action" }),
-        value: new NumberField({ min: 0, integer: true }),
-        condition: new StringField()
-      }),
+      activation: new ActivationField(),
       consumption: new SchemaField({
         targets: new ArrayField(
           new SchemaField({
@@ -113,37 +91,30 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
           max: new FormulaField({ deterministic: true })
         })
       }),
-      duration: new SchemaField({
-        value: new FormulaField({ deterministic: true }),
-        units: new StringField({ initial: "inst" }),
-        special: new StringField()
+      description: new SchemaField({
+        chatFlavor: new StringField()
       }),
+      duration: new DurationField(),
       effects: new ArrayField(new AppliedEffectField()),
-      range: new SchemaField({
-        value: new FormulaField({ deterministic: true }),
-        units: new StringField(),
-        special: new StringField()
-      }),
-      target: new SchemaField({
-        template: new SchemaField({
-          count: new FormulaField({ deterministic: true }),
-          contiguous: new BooleanField(),
-          type: new StringField(),
-          size: new FormulaField({ deterministic: true }),
-          width: new FormulaField({ deterministic: true }),
-          height: new FormulaField({ deterministic: true }),
-          units: new StringField({ initial: "ft" })
-        }),
-        affects: new SchemaField({
-          count: new FormulaField({ deterministic: true }),
-          type: new StringField(),
-          choice: new BooleanField(),
-          special: new StringField()
-        }),
+      range: new RangeField(),
+      target: new TargetField({
         prompt: new BooleanField({ initial: true })
       }),
       uses: new UsesField()
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Helper property to translate this activity type into the old `actionType`.
+   * @type {string}
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   */
+  get actionType() {
+    return this.metadata.data;
   }
 
   /* -------------------------------------------- */
@@ -168,6 +139,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       type: this.metadata.type,
       activation: this.transformActivationData(source),
       consumption: this.transformConsumptionData(source),
+      description: this.transformDescriptionData(source),
       duration: this.transformDurationData(source),
       effects: this.transformEffectsData(source),
       range: this.transformRangeData(source),
@@ -180,7 +152,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Fetch activation data from the item source and transform it into an activity's activation object.
+   * Fetch data from the item source and transform it into an activity's activation object.
    * @param {object} source  Item's candidate source data to transform.
    * @returns {object}       Creation data for new activity.
    */
@@ -195,7 +167,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Fetch activation data from the item source and transform it into an activity's consumption object.
+   * Fetch data from the item source and transform it into an activity's consumption object.
    * @param {object} source  Item's candidate source data to transform.
    * @returns {object}       Creation data for new activity.
    */
@@ -242,7 +214,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Fetch action data from the item source and transform it into an activity's damage parts array.
+   * Transform an old damage part into the new damage part format.
    * @param {object} source  Item's candidate source data to transform.
    * @param {string[]} part  The damage part to transform.
    * @returns {object}       Creation data for new activity.
@@ -287,7 +259,20 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Fetch activation data from the item source and transform it into an activity's duration object.
+   * Fetch data from the item source and transform it into an activity's description object.
+   * @param {object} source  Item's candidate source data to transform.
+   * @returns {object}       Creation data for new activity.
+   */
+  static transformDescriptionData(source) {
+    return {
+      chatFlavor: source.system.chatFlavor ?? ""
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch data from the item source and transform it into an activity's duration object.
    * @param {object} source  Item's candidate source data to transform.
    * @returns {object}       Creation data for new activity.
    */
@@ -302,7 +287,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Fetch activation data from the item source and transform it into an activity's effects array.
+   * Fetch data from the item source and transform it into an activity's effects array.
    * @param {object} source  Item's candidate source data to transform.
    * @returns {object[]}     Creation data for new activity.
    */
@@ -315,7 +300,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Fetch activation data from the item source and transform it into an activity's range object.
+   * Fetch data from the item source and transform it into an activity's range object.
    * @param {object} source  Item's candidate source data to transform.
    * @returns {object}       Creation data for new activity.
    */
@@ -330,7 +315,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Fetch activation data from the item source and transform it into an activity's target object.
+   * Fetch data from the item source and transform it into an activity's target object.
    * @param {object} source  Item's candidate source data to transform.
    * @returns {object}       Creation data for new activity.
    */

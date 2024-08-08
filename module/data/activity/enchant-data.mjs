@@ -51,6 +51,15 @@ export default class EnchantActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get actionType() {
+    return "ench";
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 

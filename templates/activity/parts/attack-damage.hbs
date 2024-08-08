@@ -3,5 +3,6 @@
     {{#if hasBaseDamage}}
     {{ formField fields.damage.fields.includeBase value=source.damage.includeBase }}
     {{/if}}
+    {{ formField fields.damage.fields.critical.fields.bonus value=source.damage.critical.bonus }}
     {{> "systems/dnd5e/templates/activity/parts/damage-parts.hbs" }}
 </fieldset>

@@ -1,23 +1,21 @@
 import { ItemDataModel } from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
-import ItemTypeField from "./fields/item-type-field.mjs";
-import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 
 /**
  * Data definition for Tool items.
+ * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
- * @mixes ActivatedEffectTemplate
- * @mixes ActivitiesTemplate
  *
  * @property {string} ability     Default ability when this tool is being used.
  * @property {string} chatFlavor  Additional text added to chat when this tool is used.
@@ -25,8 +23,8 @@ import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
  * @property {string} bonus       Bonus formula added to tool rolls.
  */
 export default class ToolData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
-  PhysicalItemTemplate, EquippableItemTemplate, ActivatedEffectTemplate, ActivitiesTemplate
+  ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
+  PhysicalItemTemplate, EquippableItemTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
@@ -101,6 +99,7 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
+    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
   }

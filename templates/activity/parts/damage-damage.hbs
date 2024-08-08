@@ -1,5 +1,10 @@
 <fieldset>
     <legend>{{ localize "DND5E.DAMAGE.FIELDS.damage.label" }}</legend>
-    {{ formField fields.damage.fields.allowCritical value=source.damage.allowCritical }}
+    {{#with fields.damage.fields.critical.fields as |fields|}}
+    {{ formField fields.allow value=../source.damage.critical.allow }}
+    {{#if ../source.damage.critical.allow}}
+    {{ formField fields.bonus value=../source.damage.critical.bonus }}
+    {{/if}}
+    {{/with}}
     {{> "systems/dnd5e/templates/activity/parts/damage-parts.hbs" }}
 </fieldset>

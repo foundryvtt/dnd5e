@@ -86,6 +86,15 @@ export default class SummonActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get actionType() {
+    return "summ";
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 

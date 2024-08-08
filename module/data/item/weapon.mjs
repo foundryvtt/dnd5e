@@ -1,7 +1,6 @@
 import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
-import ActionTemplate from "./templates/action.mjs";
-import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import DamageField from "../shared/damage-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
@@ -11,36 +10,50 @@ import ItemTypeTemplate from "./templates/item-type.mjs";
 import MountableTemplate from "./templates/mountable.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
-const { NumberField, SetField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Weapon items.
+ * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
- * @mixes ActivatedEffectTemplate
- * @mixes ActionTemplate
  * @mixes MountableTemplate
- * @mixes ActivitiesTemplate
  *
- * @property {number} magicalBonus     Magical bonus added to attack & damage rolls.
- * @property {Set<string>} properties  Weapon's properties.
- * @property {number} proficient       Does the weapon's owner have proficiency?
+ * @property {object} damage
+ * @property {DamageData} damage.base       Weapon's base damage.
+ * @property {DamageData} damage.versatile  Weapon's versatile damage.
+ * @property {number} magicalBonus          Magical bonus added to attack & damage rolls.
+ * @property {Set<string>} properties       Weapon's properties.
+ * @property {number} proficient            Does the weapon's owner have proficiency?
+ * @property {object} range
+ * @property {number} range.value           Short range of the weapon.
+ * @property {number} range.long            Long range of the weapon.
+ * @property {string} range.units           Units used to measure the weapon's range.
  */
 export default class WeaponData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
-  ActivatedEffectTemplate, ActionTemplate, MountableTemplate, ActivitiesTemplate
+  ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
+  PhysicalItemTemplate, EquippableItemTemplate, MountableTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
+      damage: new SchemaField({
+        base: new DamageField(),
+        versatile: new DamageField()
+      }),
       magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
       properties: new SetField(new StringField(), {label: "DND5E.ItemWeaponProperties"}),
       proficient: new NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
+      }),
+      range: new SchemaField({
+        value: new NumberField({ min: 0, label: "DND5E.RangeNormal" }),
+        long: new NumberField({ min: 0, label: "DND5E.RangeLong" }),
+        units: new StringField({ label: "DND5E.RangeUnits" })
       })
     });
   }
@@ -112,6 +125,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
+    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
   }
@@ -120,7 +134,6 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivatedEffectData();
     this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
     this.prepareFinalEquippableData();
   }
