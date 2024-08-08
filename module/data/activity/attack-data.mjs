@@ -66,6 +66,14 @@ export default class AttackActivityData extends BaseActivityData {
 
   /** @override */
   static transformTypeData(source, activityData) {
+    // For weapons, separate the first part from the rest to be used as the weapon's base damage and keep the rest
+    let damageParts = source.system.damage?.parts ?? [];
+    if ( (source.type === "weapon") && damageParts.length ) {
+      const [base, ...rest] = damageParts;
+      source.system.damage.parts = [base];
+      damageParts = rest;
+    }
+
     return foundry.utils.mergeObject(activityData, {
       ability: source.system.ability ?? "",
       attack: {
@@ -84,7 +92,7 @@ export default class AttackActivityData extends BaseActivityData {
           bonus: source.system.critical?.damage
         },
         includeBase: true,
-        parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
+        parts: damageParts.map(part => this.transformDamagePartData(source, part)) ?? []
       }
     });
   }
