@@ -81,7 +81,7 @@ export default function DocumentSheetV2Mixin(Base) {
       const idLink = header.querySelector(".document-id-link");
       if ( idLink ) {
         firstButton?.insertAdjacentElement("beforebegin", idLink);
-        idLink.classList.add("header-button");
+        idLink.classList.add("pseudo-header-button");
         idLink.dataset.tooltipDirection = "DOWN";
       }
 

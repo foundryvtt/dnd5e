@@ -41,6 +41,28 @@ export default function ItemSheetV2Mixin(Base) {
     /** @inheritDoc */
     async _renderOuter() {
       const html = await super._renderOuter();
+
+      // Equipped & Identified
+      if ( this.isEditable ) {
+        const buttons = [];
+        if ( "identified" in this.item.system ) buttons.push({
+          property: "system.identified", icon: "fas fa-wand-sparkles", classes: "state-toggle toggle-identified"
+        });
+        if ( "equipped" in this.item.system ) buttons.push({
+          property: "system.equipped", icon: "fas fa-shield-halved", classes: "state-toggle toggle-equipped"
+        });
+
+        const title = html[0].querySelector(".window-title");
+        for ( const { property, icon, classes } of buttons ) {
+          const anchor = document.createElement("a");
+          anchor.className = `pseudo-header-button ${classes}`;
+          Object.assign(anchor.dataset, { property, tooltipDirection: "DOWN" });
+          anchor.innerHTML = `<i class="${icon}" inert></i>`;
+          title.insertAdjacentElement("afterend", anchor);
+          anchor.addEventListener("click", this._onToggleState.bind(this), { passive: true });
+        }
+      }
+
       this._renderSourceOuter(html);
       return html;
     }
@@ -50,6 +72,25 @@ export default function ItemSheetV2Mixin(Base) {
     /** @inheritDoc */
     async _render(force=false, options={}) {
       await super._render(force, options);
+
+      const [identified] = this.element.find(".toggle-identified");
+      if ( identified ) {
+        const isIdentified = this.item.system.identified;
+        const label = isIdentified ? "DND5E.Identified" : "DND5E.Unidentified.Title";
+        identified.setAttribute("aria-label", game.i18n.localize(label));
+        identified.dataset.tooltip = label;
+        identified.classList.toggle("active", isIdentified);
+      }
+
+      const [equipped] = this.element.find(".toggle-equipped");
+      if ( equipped ) {
+        const isEquipped = this.item.system.equipped;
+        const label = isEquipped ? "DND5E.Equipped" : "DND5E.Unequipped";
+        equipped.setAttribute("aria-label", game.i18n.localize(label));
+        equipped.dataset.tooltip = label;
+        equipped.classList.toggle("active", isEquipped);
+      }
+
       this._renderSource();
     }
 
@@ -155,6 +196,19 @@ export default function ItemSheetV2Mixin(Base) {
       const { target } = description.dataset;
       description.classList.toggle("collapsed");
       this._collapsed[target] = description.classList.contains("collapsed");
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle toggling Item state.
+     * @param {PointerEvent} event  The triggering event.
+     * @protected
+     */
+    _onToggleState(event) {
+      const { property } = event.currentTarget.dataset;
+      const state = event.currentTarget.classList.contains("active");
+      this.item.update({ [property]: !state });
     }
 
     /* -------------------------------------------- */

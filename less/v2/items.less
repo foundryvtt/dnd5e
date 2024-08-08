@@ -39,6 +39,8 @@
     }
   }
 
+  .window-header .state-toggle.active { color: var(--color-text-dark-primary); }
+
   .window-content {
     background: url("ui/texture-gray1.webp") no-repeat top left,
       url("ui/texture-gray2.webp") no-repeat bottom right,
@@ -61,7 +63,7 @@
 
     > header {
       align-items: center;
-      .header-button, .document-id-link { margin-top: 0; }
+      .header-button, .pseudo-header-button { margin-top: 0; }
       .window-title { visibility: visible; }
     }
   }
