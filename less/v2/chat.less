@@ -141,14 +141,14 @@
       transition: all 250ms ease;
     }
 
-    &.success, &.critical {
+    &.success:not(.fumble), &.critical {
       background: var(--dnd5e-color-success-background);
       border: 1px solid var(--dnd5e-color-success);
       color: var(--dnd5e-color-success-critical);
       &::after { color: var(--dnd5e-color-success); }
     }
 
-    &.failure, &.fumble {
+    &.failure:not(.critical), &.fumble {
       background: var(--dnd5e-color-failure-background);
       border: 1px solid var(--dnd5e-color-failure);
       color: var(--dnd5e-color-failure-critical);
