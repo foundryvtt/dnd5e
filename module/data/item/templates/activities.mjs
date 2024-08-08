@@ -76,6 +76,16 @@ export default class ActivitiesTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Does the Item implement an attack roll as part of its usage?
+   * @type {boolean}
+   */
+  get hasAttack() {
+    return !!this.activities.getByType("attack").size;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this Item limited in its ability to be used by charges or by recharge?
    * @type {boolean}
    */
@@ -86,11 +96,52 @@ export default class ActivitiesTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Does the Item implement a saving throw as part of its usage?
+   * @type {boolean}
+   */
+  get hasSave() {
+    return !!this.activities.getByType("save").size;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this Item implement summoning as part of its usage?
+   * @type {boolean}
+   */
+  get hasSummoning() {
+    const activity = this.activities.getByType("summon")[0];
+    return activity && activity.profiles.length > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this Item an activatable item?
    * @type {boolean}
    */
   get isActive() {
     return this.activities.size > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Can this item enchant other items?
+   * @type {boolean}
+   */
+  get isEnchantment() {
+    return !!this.activities.getByType("enchant").size;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item provide an amount of healing instead of conventional damage?
+   * @type {boolean}
+   */
+  get isHealing() {
+    return !!this.activities.getByType("heal").size;
   }
 
   /* -------------------------------------------- */
@@ -261,17 +312,19 @@ export default class ActivitiesTemplate extends SystemDataModel {
           damage: activity?.damage?.critical?.bonus ?? ""
         };
       },
-      dammage: () => ({ parts: [], versatile: "" }),
+      damage: () => {
+        const activity = this.activities.getByType("attack")[0] || this.activities.getByType("damage")[0]
+          || this.activities.getByType("save")[0];
+        return {
+          parts: activity?.damage.parts.map(d => ([d.formula, d.types.first() ?? ""])) ?? [],
+          versatile: ""
+        };
+      },
       enchantment: () => this.activities.getByType("enchant")[0],
       formula: () => this.activities.getByType("utility")[0]?.roll?.formula ?? "",
       hasAbilityCheck: () => false,
-      hasAttack: () => !!this.activities.getByType("attack").size,
       hasDamage: () => !!this.activities.find(a => a.damage?.parts?.length),
-      hasSave: () => !!this.activities.getByType("save").size,
-      hasSummoning: () => !!this.activities.getByType("summon").size,
-      isEnchantment: () => !!this.activities.getByType("enchant").size,
-      isHealing: () => !!this.activities.getByType("heal").size,
-      isVersatile: () => this.actionType && this.properties?.has("ver"),
+      isVersatile: () => this.properties?.has("ver"),
       save: () => {
         const activity = this.activities.getByType("save")[0] ?? {};
         return {

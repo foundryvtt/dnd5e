@@ -11,15 +11,15 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * @property {object} attack
  * @property {string} attack.bonus                Arbitrary bonus added to the attack.
  * @property {object} attack.critical
- * @property {number} attack.critical.threshold   Minimum value on the D20 needed to rolling a critical hit.
+ * @property {number} attack.critical.threshold   Minimum value on the D20 needed to roll a critical hit.
  * @property {boolean} attack.flat                Should the bonus be used in place of proficiency & ability modifier?
  * @property {object} attack.type
  * @property {string} attack.type.value           Is this a melee or ranged attack?
  * @property {string} attack.type.classification  Is this a unarmed, weapon, or spell attack?
  * @property {object} damage
  * @property {object} damage.critical
- * @property {string} damage.critical.bonus       Extra damage applied when a critical is rolled. Will be added to the
- *                                                base damage or first damage part.
+ * @property {string} damage.critical.bonus       Extra damage applied when a critical is rolled. Added to the base
+ *                                                damage or first damage part.
  * @property {boolean} damage.includeBase         Should damage defined by the item be included with other damage parts?
  * @property {DamageData[]} damage.parts          Parts of damage to inflict.
  */

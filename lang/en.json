@@ -563,7 +563,7 @@
       "critical": {
         "threshold": {
           "label": "Critical Threshold",
-          "hint": "Minimum value on the D20 needed to rolling a critical hit."
+          "hint": "Minimum value on the D20 needed to roll a critical hit."
         }
       },
       "flat": {
@@ -587,7 +587,7 @@
       "critical": {
         "bonus": {
           "label": "Extra Critical Damage",
-          "hint": "Extra damage applied when a critical is rolled. Will be added to the base damage or first damage part."
+          "hint": "Extra damage applied when a critical is rolled. Added to the base damage or first damage part."
         }
       },
       "includeBase": {
@@ -968,7 +968,7 @@
         },
         "bonus": {
           "label": "Extra Critical Damage",
-          "hint": "Extra damage applied when a critical is rolled. Will be added to the first damage part."
+          "hint": "Extra damage applied when a critical is rolled. Added to the first damage part."
         }
       },
       "parts": {

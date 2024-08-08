@@ -230,6 +230,16 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Does the Weapon implement a versatile damage roll as part of its usage?
+   * @type {boolean}
+   */
+  get isVersatile() {
+    return this.properties.has("ver");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The proficiency multiplier for this item.
    * @returns {number}
    */
