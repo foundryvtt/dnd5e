@@ -105,6 +105,33 @@ export function parseInputDelta(input, target) {
 /* -------------------------------------------- */
 
 /**
+ * Prepare the final formula value for a model field.
+ * @param {ItemDataModel|BaseActivityData} model  Model for which the value is being prepared.
+ * @param {string} keyPath                        Path to the field within the model.
+ * @param {string} label                          Label to use in preparation warnings.
+ * @param {object} rollData                       Roll data to use when replacing formula values.
+ */
+export function prepareFormulaValue(model, keyPath, label, rollData) {
+  const value = foundry.utils.getProperty(model, keyPath);
+  if ( !value ) return;
+  const item = model.item ?? model.parent;
+  const property = game.i18n.localize(label);
+  try {
+    const formula = replaceFormulaData(value, rollData, { item, property });
+    const roll = new Roll(formula);
+    foundry.utils.setProperty(model, keyPath, roll.evaluateSync().total);
+  } catch(err) {
+    if ( item.isEmbedded ) {
+      const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: model.name ?? item.name });
+      item.actor._preparationWarnings.push({ message, link: item.uuid, type: "error" });
+      console.error(message, err);
+    }
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
  * Replace referenced data attributes in the roll formula with values from the provided data.
  * If the attribute is not found in the provided data, display a warning on the actor.
  * @param {string} formula           The original formula within which to replace.

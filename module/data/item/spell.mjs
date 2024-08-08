@@ -7,6 +7,8 @@ import TargetField from "../shared/target-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
 /**
  * Data definition for Spell items.
  * @mixes ActivitiesTemplate
@@ -33,36 +35,38 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {TargetData} target                 Information on area and individual targets.
  */
 export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, ItemDescriptionTemplate) {
-  /** @inheritdoc */
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = [
+    "DND5E.ACTIVATION", "DND5E.DURATION", "DND5E.RANGE", "DND5E.TARGET"
+  ];
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       activation: new ActivationField(),
       duration: new DurationField(),
-      level: new foundry.data.fields.NumberField({
-        required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
-      }),
-      materials: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellMaterialsDescription"}),
-        consumed: new foundry.data.fields.BooleanField({required: true, label: "DND5E.SpellMaterialsConsumed"}),
-        cost: new foundry.data.fields.NumberField({
-          required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsCost"
-        }),
-        supply: new foundry.data.fields.NumberField({
-          required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsSupply"
-        })
-      }, {label: "DND5E.SpellMaterials"}),
-      preparation: new foundry.data.fields.SchemaField({
-        mode: new foundry.data.fields.StringField({
-          required: true, initial: "prepared", label: "DND5E.SpellPreparationMode"
-        }),
-        prepared: new foundry.data.fields.BooleanField({required: true, label: "DND5E.SpellPrepared"})
-      }, {label: "DND5E.SpellPreparation"}),
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.SpellComponents"
-      }),
+      level: new NumberField({ required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel" }),
+      materials: new SchemaField({
+        value: new StringField({ required: true, label: "DND5E.SpellMaterialsDescription" }),
+        consumed: new BooleanField({ required: true, label: "DND5E.SpellMaterialsConsumed" }),
+        cost: new NumberField({ required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsCost" }),
+        supply: new NumberField({ required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsSupply" })
+      }, { label: "DND5E.SpellMaterials" }),
+      preparation: new SchemaField({
+        mode: new StringField({ required: true, initial: "prepared", label: "DND5E.SpellPreparationMode" }),
+        prepared: new BooleanField({ required: true, label: "DND5E.SpellPrepared" })
+      }, { label: "DND5E.SpellPreparation" }),
+      properties: new SetField(new StringField(), { label: "DND5E.SpellComponents" }),
       range: new RangeField(),
-      school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
-      sourceClass: new foundry.data.fields.StringField({label: "DND5E.SpellSourceClass"}),
+      school: new StringField({ required: true, label: "DND5E.SpellSchool" }),
+      sourceClass: new StringField({ label: "DND5E.SpellSourceClass" }),
       target: new TargetField()
     });
   }
@@ -97,7 +101,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ActivitiesTemplate.migrateActivities(source);
@@ -170,7 +174,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
+    const rollData = this.parent.getRollData({ deterministic: true });
+    const labels = this.parent.labels ?? {};
+    ActivationField.prepareData.call(this, rollData, labels);
+    DurationField.prepareData.call(this, rollData, labels);
+    RangeField.prepareData.call(this, rollData, labels);
+    TargetField.prepareData.call(this, rollData, labels);
+    this.prepareFinalActivityData(rollData);
   }
 
   /* -------------------------------------------- */

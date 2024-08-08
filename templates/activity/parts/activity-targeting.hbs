@@ -1,7 +1,7 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     <!-- TODO: (override checkbox) -->
     <fieldset>
-        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.range.label" }}</legend>
+        <legend>{{ localize "DND5E.RANGE.FIELDS.range.label" }}</legend>
         {{#if scalar.range}}{{ formField fields.range.fields.value value=source.range.value }}{{/if}}
         {{ formField fields.range.fields.units value=source.range.units options=rangeUnits }}
         {{#if activity.range.units}}{{ formField fields.range.fields.special value=source.range.special }}{{/if}}
@@ -9,7 +9,7 @@
 
     {{#with fields.target.fields.affects.fields as |fields|}}
     <fieldset>
-        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.target.affects.label" }}</legend>
+        <legend>{{ localize "DND5E.TARGET.FIELDS.target.affects.label" }}</legend>
         {{#if ../scalar.target}}
         {{ formField fields.count value=../source.target.affects.count placeholder=../affectsPlaceholder }}
         {{/if}}
@@ -25,7 +25,7 @@
 
     {{#with fields.target.fields.template.fields as |fields|}}
     <fieldset>
-        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.target.template.label" }}</legend>
+        <legend>{{ localize "DND5E.TARGET.FIELDS.target.template.label" }}</legend>
         {{#if ../activity.target.template.type}}
         {{ formField fields.count value=../source.target.template.count }}
         {{/if}}

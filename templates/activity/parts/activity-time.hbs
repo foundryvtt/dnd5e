@@ -1,13 +1,13 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     <fieldset>
-        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.activation.label" }}</legend>
+        <legend>{{ localize "DND5E.ACTIVATION.FIELDS.activation.label" }}</legend>
         {{#if scalar.activation}}{{ formField fields.activation.fields.value value=source.activation.value }}{{/if}}
         {{ formField fields.activation.fields.type value=source.activation.type options=activationTypes }}
         {{ formField fields.activation.fields.condition value=source.activation.condition }}
     </fieldset>
 
     <fieldset>
-        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.duration.label" }}</legend>
+        <legend>{{ localize "DND5E.DURATION.FIELDS.duration.label" }}</legend>
         <!-- TODO: (override checkbox) -->
         {{#if scalar.duration}}{{ formField fields.duration.fields.value value=source.duration.value }}{{/if}}
         {{ formField fields.duration.fields.units value=source.duration.units options=durationUnits }}

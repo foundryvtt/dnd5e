@@ -157,6 +157,16 @@ export default class WeaponData extends ItemDataModel.mixin(
   prepareFinalData() {
     this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
     this.prepareFinalEquippableData();
+
+    const labels = this.parent.labels ??= {};
+    if ( this.hasRange ) {
+      const parts = [
+        this.range.value,
+        this.range.long ? `/ ${this.range.long}` : null,
+        game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`)
+      ];
+      labels.range = parts.filterJoin(" ");
+    } else labels.range = game.i18n.localize("DND5E.None");
   }
 
   /* -------------------------------------------- */
@@ -199,6 +209,16 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Attack type offered by this weapon.
+   * @type {"melee"|"ranged"|null}
+   */
+  get attackType() {
+    return CONFIG.DND5E.weaponTypeMap[this.type.value] ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Properties displayed in chat.
    * @type {string[]}
    */
@@ -235,6 +255,16 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritdoc */
   get _typeCriticalThreshold() {
     return this.parent?.actor?.flags.dnd5e?.weaponCriticalThreshold ?? Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is the range value relevant to this weapon?
+   * @type {boolean}
+   */
+  get hasRange() {
+    return (this.attackType === "ranged") || this.properties.has("thr");
   }
 
   /* -------------------------------------------- */

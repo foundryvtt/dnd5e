@@ -1,3 +1,4 @@
+import { prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
@@ -18,5 +19,36 @@ export default class RangeField extends SchemaField {
       ...fields
     };
     super(fields, options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data for this field. Should be called during the `prepareFinalData` stage.
+   * @this {ItemDataModel|BaseActivityData}
+   * @param {object} rollData  Roll data used for formula replacements.
+   * @param {object} [labels]  Object in which to insert generated labels.
+   */
+  static prepareData(rollData, labels) {
+    Object.defineProperty(this.range, "scalar", {
+      get() { return this.units in CONFIG.DND5E.movementUnits; },
+      configurable: true
+    });
+
+    if ( this.range.scalar ) {
+      prepareFormulaValue(this, "range.value", "DND5E.RANGE.FIELDS.range.value.label", rollData);
+    } else this.range.value = null;
+
+    if ( labels && this.range.units ) {
+      const parts = [this.range.value];
+      if ( this.range.units in CONFIG.DND5E.movementUnits ) {
+        parts.push(game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`));
+      } else {
+        parts.push(CONFIG.DND5E.distanceUnits[this.range.units]);
+      }
+      labels.range = parts.filterJoin(" ");
+    } else if ( labels ) labels.range = game.i18n.localize("DND5E.None");
   }
 }

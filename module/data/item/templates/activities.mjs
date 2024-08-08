@@ -185,6 +185,11 @@ export default class ActivitiesTemplate extends SystemDataModel {
     else if ( source.recharge?.value ) {
       source.uses.recovery = [{ period: "recharge", formula: source.recharge.value }];
     }
+
+    // Prevent a string value for uses recovery from being cleaned into an default recovery entry
+    else if ( source.uses?.recovery === "" ) {
+      delete source.uses.recovery;
+    }
   }
 
   /* -------------------------------------------- */
@@ -194,8 +199,6 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static initializeActivities(source) {
-    // TODO: Handle migration of data kept on spells and inferred by activities
-    // TODO: Handle migration of base damage, range, & ammunition on weapons
     if ( this.#shouldCreateInitialActivity(source) ) this.#createInitialActivity(source);
   }
 
@@ -253,7 +256,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} rollData
    */
   prepareFinalActivityData(rollData) {
-    UsesField.prepareData.call(this, rollData);
+    const labels = this.parent.labels ?? {};
+    UsesField.prepareData.call(this, rollData, labels);
+    for ( const activity of this.activities ) activity.prepareFinalData(rollData);
   }
 
   /* -------------------------------------------- */
