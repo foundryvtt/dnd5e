@@ -24,6 +24,127 @@ export default class ActivitiesTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Which ability score modifier is used by this item?
+   * @type {string|null}
+   */
+  get abilityMod() {
+    return this._typeAbilityMod || null;
+  }
+
+  /**
+   * Default ability key defined for this type.
+   * @type {string|null}
+   * @internal
+   */
+  get _typeAbilityMod() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * What is the critical hit threshold for this item? Uses the smallest value from among the following sources:
+   *  - `critical.threshold` defined on the item
+   *  - `critical.threshold` defined on ammunition, if consumption mode is set to ammo
+   *  - Type-specific critical threshold
+   * @type {number|null}
+   */
+  get criticalThreshold() {
+    // TODO: Re-write this when `rollAttack` is moved into attack activity
+    if ( !this.hasAttack ) return null;
+    let ammoThreshold = Infinity;
+    if ( this.hasAmmo ) {
+      ammoThreshold = this.parent?.actor?.items.get(this.consume.target)?.system.critical.threshold ?? Infinity;
+    }
+    const threshold = Math.min(this.critical.threshold ?? Infinity, this._typeCriticalThreshold, ammoThreshold);
+    return threshold < Infinity ? threshold : 20;
+  }
+
+  /**
+   * Default critical threshold for this type.
+   * @type {number}
+   * @internal
+   */
+  get _typeCriticalThreshold() {
+    return Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement an attack roll as part of its usage?
+   * @type {boolean}
+   */
+  get hasAttack() {
+    return !!this.activities.getByType("attack").size;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item limited in its ability to be used by charges or by recharge?
+   * @type {boolean}
+   */
+  get hasLimitedUses() {
+    return this.uses.max > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a saving throw as part of its usage?
+   * @type {boolean}
+   */
+  get hasSave() {
+    return !!this.activities.getByType("save").size;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this Item implement summoning as part of its usage?
+   * @type {boolean}
+   */
+  get hasSummoning() {
+    const activity = this.activities.getByType("summon")[0];
+    return activity && activity.profiles.length > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item an activatable item?
+   * @type {boolean}
+   */
+  get isActive() {
+    return this.activities.size > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Can this item enchant other items?
+   * @type {boolean}
+   */
+  get isEnchantment() {
+    return !!this.activities.getByType("enchant").size;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item provide an amount of healing instead of conventional damage?
+   * @type {boolean}
+   */
+  get isHealing() {
+    return !!this.activities.getByType("heal").size;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -133,5 +254,136 @@ export default class ActivitiesTemplate extends SystemDataModel {
    */
   prepareFinalActivityData(rollData) {
     UsesField.prepareData.call(this, rollData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve information on available uses for display.
+   * @returns {{value: number, max: number, name: string}}
+   */
+  getUsesData() {
+    return { value: this.uses.value, max: this.uses.max, name: "system.uses.value" };
+  }
+
+  /* -------------------------------------------- */
+  /*  Shims                                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Apply shims for data removed from ActionTemplate & ActivatedEffectTemplate.
+   * @this {ItemDataModel}
+   */
+  static _applyActivityShims() {
+    const shim = (template, property, get) => {
+      if ( property in this ) return;
+      Object.defineProperty(this, property, {
+        get: () => {
+          foundry.utils.logCompatibilityWarning(
+            `The \`${property}\` property on \`${template}\` has been deprecated.`,
+            { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+          );
+          return get();
+        },
+        configurable: true,
+        enumerable: false
+      });
+    };
+    const addShims = (template, shims) => Object.entries(shims).forEach(([key, method]) => shim(template, key, method));
+    const firstActivity = this.activities.contents[0] ?? {};
+
+    addShims("ActionTemplate", {
+      ability: () => firstActivity.ability ?? null,
+      actionType: () => firstActivity.actionType ?? "",
+      attack: () => {
+        const activity = this.activities.getByType("attack")[0] ?? {};
+        return {
+          bonus: activity.attack?.bonus ?? "",
+          flat: activity.attack?.flat ?? false
+        };
+      },
+      chatFlavor: () => firstActivity.description?.chatFlavor ?? "",
+      critical: () => {
+        const activity = this.activities.getByType("attack")[0] || this.activities.getByType("damage")[0];
+        return {
+          threshold: activity?.attack?.critical?.threshold ?? null,
+          damage: activity?.damage?.critical?.bonus ?? ""
+        };
+      },
+      damage: () => {
+        const activity = this.activities.getByType("attack")[0] || this.activities.getByType("damage")[0]
+          || this.activities.getByType("save")[0];
+        return {
+          parts: activity?.damage.parts.map(d => ([d.formula, d.types.first() ?? ""])) ?? [],
+          versatile: ""
+        };
+      },
+      enchantment: () => this.activities.getByType("enchant")[0],
+      formula: () => this.activities.getByType("utility")[0]?.roll?.formula ?? "",
+      hasAbilityCheck: () => false,
+      hasDamage: () => !!this.activities.find(a => a.damage?.parts?.length),
+      isVersatile: () => this.properties?.has("ver"),
+      save: () => {
+        const activity = this.activities.getByType("save")[0] ?? {};
+        return {
+          ability: activity.ability ?? null,
+          dc: activity.save?.dc?.formula ?? null,
+          scaling: activity.save?.dc?.calculation ?? ""
+        };
+      },
+      summons: () => this.activities.getByType("summon")[0]
+    });
+
+    addShims("ActivatedEffectTemplate", {
+      activatedEffectCardProperties: () => [
+        this.parent.labels.activation,
+        this.parent.labels.target,
+        this.parent.labels.range,
+        this.parent.labels.duration
+      ],
+      activation: () => {
+        const activation = firstActivity.activation ?? {};
+        return {
+          type: activation.type ?? "",
+          cost: activation.value ?? null,
+          condition: activation.condition ?? ""
+        };
+      },
+      consume: () => {
+        const consumption = firstActivity.consumption ?? {};
+        const target = consumption.targets?.[0] ?? {};
+        return {
+          type: target.type ?? "",
+          target: target.target ?? "",
+          amount: target.value ?? 1,
+          scale: consumption.scaling?.allowed ?? false
+        };
+      },
+      duration: () => firstActivity.duration ?? { value: null, units: "" },
+      hasAmmo: () => {
+        const consume = this.consume;
+        return this.isActive && !!consume.target && !!consume.type && this.hasAttack && (consume.type === "ammo");
+      },
+      hasAreaTarget: () => this.isActive && this.target.template?.type,
+      hasIndividualTarget: () => this.isActive && this.target.affects?.type,
+      hasResource: () => this.isActive && !!consume.target && !!consume.type && !this.hasAttack,
+      hasScalarDuration: () => this.duration.units in CONFIG.DND5E.scalarTimePeriods,
+      hasScalarRange: () => this.range.units in CONFIG.DND5E.movementUnits,
+      hasScalarTarget: () => this.target.template?.type || ![null, "", "self"].includes(this.target.affects?.type),
+      hasTarget: () => this.isActive && (this.target.template?.type || this.target.affects?.type),
+      range: () => firstActivity.range ?? { value: null, type: "" },
+      target: () => {
+        const target = firstActivity.target ?? {};
+        return {
+          value: target.affects?.count || target.template?.size || "",
+          width: target.template?.width ?? "",
+          units: target.template?.units ?? "",
+          type: target.affects?.type ?? target.template?.type,
+          prompt: target.prompt ?? true
+        };
+      }
+    });
   }
 }

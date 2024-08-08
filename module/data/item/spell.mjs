@@ -1,21 +1,20 @@
 import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
-import { FormulaField } from "../fields.mjs";
-import ActionTemplate from "./templates/action.mjs";
-import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import ActivationField from "../shared/activation-field.mjs";
+import DurationField from "../shared/duration-field.mjs";
+import RangeField from "../shared/range-field.mjs";
+import TargetField from "../shared/target-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data definition for Spell items.
- * @mixes ItemDescriptionTemplate
- * @mixes ActivatedEffectTemplate
- * @mixes ActionTemplate
  * @mixes ActivitiesTemplate
+ * @mixes ItemDescriptionTemplate
  *
+ * @property {ActivationData} activation         Casting time & conditions.
+ * @property {DurationData} duration             Duration of the spell effect.
  * @property {number} level                      Base level of the spell.
- * @property {string} school                     Magical school to which this spell belongs.
- * @property {Set<string>} properties            General components and tags for this spell.
  * @property {object} materials                  Details on material components required for this spell.
  * @property {string} materials.value            Description of the material components required for casting.
  * @property {boolean} materials.consumed        Are these material components consumed during casting?
@@ -24,23 +23,23 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {object} preparation                Details on how this spell is prepared.
  * @property {string} preparation.mode           Spell preparation mode as defined in `DND5E.spellPreparationModes`.
  * @property {boolean} preparation.prepared      Is the spell currently prepared?
+ * @property {Set<string>} properties            General components and tags for this spell.
+ * @property {RangeData} range                   Range of the spell
  * @property {object} scaling                    Details on how casting at higher levels affects this spell.
  * @property {string} scaling.mode               Spell scaling mode as defined in `DND5E.spellScalingModes`.
  * @property {string} scaling.formula            Dice formula used for scaling.
+ * @property {string} school                     Magical school to which this spell belongs.
+ * @property {string} sourceClass                Associated spellcasting class when this spell is on an actor.
+ * @property {TargetData} target                 Information on area and individual targets.
  */
-export default class SpellData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate, ActivitiesTemplate
-) {
+export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, ItemDescriptionTemplate) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      activation: new ActivationField(),
+      duration: new DurationField(),
       level: new foundry.data.fields.NumberField({
         required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
-      }),
-      school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
-      sourceClass: new foundry.data.fields.StringField({label: "DND5E.SpellSourceClass"}),
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.SpellComponents"
       }),
       materials: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellMaterialsDescription"}),
@@ -58,10 +57,13 @@ export default class SpellData extends ItemDataModel.mixin(
         }),
         prepared: new foundry.data.fields.BooleanField({required: true, label: "DND5E.SpellPrepared"})
       }, {label: "DND5E.SpellPreparation"}),
-      scaling: new foundry.data.fields.SchemaField({
-        mode: new foundry.data.fields.StringField({required: true, initial: "none", label: "DND5E.ScalingMode"}),
-        formula: new FormulaField({required: true, nullable: true, initial: null, label: "DND5E.ScalingFormula"})
-      }, {label: "DND5E.LevelScaling"})
+      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+        label: "DND5E.SpellComponents"
+      }),
+      range: new RangeField(),
+      school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
+      sourceClass: new foundry.data.fields.StringField({label: "DND5E.SpellSourceClass"}),
+      target: new TargetField()
     });
   }
 
@@ -132,6 +134,7 @@ export default class SpellData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
+    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.properties.add("mgc");
   }
@@ -140,7 +143,6 @@ export default class SpellData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivatedEffectData();
     this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
   }
 
@@ -219,5 +221,17 @@ export default class SpellData extends ItemDataModel.mixin(
    */
   get proficiencyMultiplier() {
     return 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Shims                                       */
+  /* -------------------------------------------- */
+
+  get scaling() {
+    foundry.utils.logCompatibilityWarning(
+      "The `scaling` property on `SpellData` has been deprecated and is now handled by individual damage parts",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+    );
+    return { mode: "none", formula: null };
   }
 }

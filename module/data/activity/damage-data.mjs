@@ -1,3 +1,4 @@
+import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
@@ -7,8 +8,10 @@ const { ArrayField, BooleanField, SchemaField } = foundry.data.fields;
  * Data model for an damage activity.
  *
  * @property {object} damage
- * @property {boolean} damage.allowCritical  Can this damage be critical?
- * @property {DamageData[]} damage.parts     Parts of damage to inflict.
+ * @property {boolean} damage.critical.allow  Can this damage be critical?
+ * @property {boolean} damage.critical.bonus  Extra damage applied when a critical is rolled. Added to the first
+ *                                            damage part.
+ * @property {DamageData[]} damage.parts      Parts of damage to inflict.
  */
 export default class DamageActivityData extends BaseActivityData {
   /** @inheritDoc */
@@ -16,7 +19,10 @@ export default class DamageActivityData extends BaseActivityData {
     return {
       ...super.defineSchema(),
       damage: new SchemaField({
-        allowCritical: new BooleanField(),
+        critical: new SchemaField({
+          allow: new BooleanField(),
+          bonus: new FormulaField()
+        }),
         parts: new ArrayField(new DamageField())
       })
     };
@@ -30,7 +36,10 @@ export default class DamageActivityData extends BaseActivityData {
   static transformTypeData(source, activityData) {
     return foundry.utils.mergeObject(activityData, {
       damage: {
-        allowCritical: false,
+        critical: {
+          allow: false,
+          bonus: source.system.critical?.damage ?? ""
+        },
         parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
       }
     });

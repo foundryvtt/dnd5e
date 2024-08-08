@@ -178,6 +178,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @returns {Promise<ActivityUsageResults|void>}  Details on the usage process if not canceled.
    */
   async use(usage={}, dialog={}, message={}) {
+    if ( !this.item.isEmbedded ) return;
     if ( !this.item.isOwner ) {
       ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
       return;
@@ -596,7 +597,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       buttons: null,
       description: data.description.chat,
       properties: properties.length ? properties : null,
-      subtitle: data.subtitle ?? this.item.system.chatFlavor,
+      subtitle: this.description.chatFlavor ?? data.subtitle,
       supplements
     };
   }

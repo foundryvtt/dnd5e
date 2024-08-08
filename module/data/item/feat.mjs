@@ -1,6 +1,4 @@
 import { ItemDataModel } from "../abstract.mjs";
-import ActionTemplate from "./templates/action.mjs";
-import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
@@ -11,11 +9,9 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Feature items.
+ * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
- * @mixes ActivatedEffectTemplate
- * @mixes ActionTemplate
- * @mixes ActivitiesTemplate
  *
  * @property {object} prerequisites
  * @property {number} prerequisites.level           Character or class level required to choose this feature.
@@ -26,7 +22,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {boolean} recharge.charged             Does this feature have a charge remaining?
  */
 export default class FeatData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate, ActivitiesTemplate
+  ActivitiesTemplate, ItemDescriptionTemplate, ItemTypeTemplate
 ) {
 
   /** @override */
@@ -80,6 +76,7 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
+    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
 
     if ( this.type.value ) {
@@ -93,7 +90,6 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivatedEffectData();
     this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
 
     const uses = this.uses;

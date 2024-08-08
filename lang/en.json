@@ -222,6 +222,13 @@
         }
       }
     },
+    "description": {
+      "label": "Description",
+      "chatFlavor": {
+        "label": "Chat Flavor",
+        "hint": "Additional text displayed in the activation chat message."
+      }
+    },
     "duration": {
       "label": "Duration",
       "special": {
@@ -553,6 +560,12 @@
         "label": "To Hit Bonus",
         "hint": "Bonus added to the to hit roll for the attack."
       },
+      "critical": {
+        "threshold": {
+          "label": "Critical Threshold",
+          "hint": "Minimum value on the D20 needed to roll a critical hit."
+        }
+      },
       "flat": {
         "label": "Flat To Hit",
         "hint": "Ignore the ability modifier, proficiency, and any other bonuses from the actor and only use the bonus defined by the activity when calculating to hit."
@@ -571,6 +584,12 @@
     },
     "damage": {
       "label": "Attack Damage",
+      "critical": {
+        "bonus": {
+          "label": "Extra Critical Damage",
+          "hint": "Extra damage applied when a critical is rolled. Added to the base damage or first damage part."
+        }
+      },
       "includeBase": {
         "label": "Include Base Damage",
         "hint": "Include the item's base damage with any additional damage parts."
@@ -942,9 +961,15 @@
   "FIELDS": {
     "damage": {
       "label": "Damage",
-      "allowCritical": {
-        "label": "Allow Critical",
-        "hint": "Should the use be able to roll critical damage?"
+      "critical": {
+        "allow": {
+          "label": "Allow Critical",
+          "hint": "Should the use be able to roll critical damage?"
+        },
+        "bonus": {
+          "label": "Extra Critical Damage",
+          "hint": "Extra damage applied when a critical is rolled. Added to the first damage part."
+        }
       },
       "parts": {
         "label": "Damage Parts",

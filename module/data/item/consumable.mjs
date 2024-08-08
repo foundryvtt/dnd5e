@@ -1,8 +1,6 @@
 import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import UsesField from "../shared/uses-field.mjs";
-import ActionTemplate from "./templates/action.mjs";
-import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
@@ -15,14 +13,12 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
 
 /**
  * Data definition for Consumable items.
+ * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
- * @mixes ActivatedEffectTemplate
- * @mixes ActionTemplate
- * @mixes ActivitiesTemplate
  *
  * @property {number} magicalBonus       Magical bonus added to attack & damage rolls by ammunition.
  * @property {Set<string>} properties    Ammunition properties.
@@ -30,8 +26,8 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
  * @property {boolean} uses.autoDestroy  Should this item be destroyed when it runs out of uses.
  */
 export default class ConsumableData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
-  ActivatedEffectTemplate, ActionTemplate, ActivitiesTemplate
+  ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
+  PhysicalItemTemplate, EquippableItemTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
@@ -101,6 +97,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
+    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     if ( !this.type.value ) return;
     const config = CONFIG.DND5E.consumableTypes[this.type.value];
@@ -115,7 +112,6 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivatedEffectData();
     this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
     this.prepareFinalEquippableData();
   }

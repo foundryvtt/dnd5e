@@ -4,5 +4,6 @@
     {{#with fields.attack.fields as |fields|}}
     {{ formField fields.bonus value=../source.attack.bonus }}
     {{ formField fields.flat value=../source.attack.flat }}
+    {{ formField fields.critical.fields.threshold value=../source.attack.critical.threshold }}
     {{/with}}
 </fieldset>
