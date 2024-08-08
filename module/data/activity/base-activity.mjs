@@ -157,6 +157,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}       Creation data for new activity.
    */
   static transformActivationData(source) {
+    if ( source.type === "spell" ) return {};
     return {
       type: source.system.activation?.type === "none" ? "" : (source.system.activation?.type ?? ""),
       value: source.system.activation?.cost ?? null,
@@ -277,6 +278,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}       Creation data for new activity.
    */
   static transformDurationData(source) {
+    if ( source.type === "spell" ) return {};
     return {
       value: source.system.duration?.value ?? null,
       units: source.system.duration?.units ?? "inst",
@@ -305,6 +307,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}       Creation data for new activity.
    */
   static transformRangeData(source) {
+    if ( source.type === "spell" ) return {};
     return {
       value: source.system.range?.value ?? null,
       units: source.system.range?.units ?? "",
@@ -320,6 +323,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}       Creation data for new activity.
    */
   static transformTargetData(source) {
+    if ( source.type === "spell" ) return {
+      prompt: source.system.target?.prompt ?? true
+    };
+
     const data = {
       template: {
         count: "",
