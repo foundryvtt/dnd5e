@@ -135,6 +135,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+    context.parts = ["dnd5e.details-consumable", "dnd5e.details-activation"];
   }
 
   /* -------------------------------------------- */

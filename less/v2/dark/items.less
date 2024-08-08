@@ -1,8 +1,27 @@
 .theme-dark .dnd5e2.sheet.item,
 .dnd5e2.sheet.item.dnd5e-theme-dark {
+  .window-content {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto  0;
+      height: 150px;
+      border-radius: 5px 5px 0 0;
+      opacity: .2;
+      /* TODO: Replace with item-specific banner pending WotC approval
+      background: url("ui/official/banner-item-dark-3.png") no-repeat top center / cover; */
+      background: url("ui/official/banner-npc-dark.webp") no-repeat top center / cover;
+      mask-image: linear-gradient(to bottom, black, transparent);
+    }
+
+    > form { position: relative; }
+  }
+
+  .window-header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-color-iron-gray); }
+  .window-header .state-toggle.active { color: var(--dnd5e-color-gold); }
 
   .sheet-body {
-
+    .item-descriptions .description .header button { color: var(--color-text-dark-5); }
 
     .tab.advancement {
       .svg .item-image {

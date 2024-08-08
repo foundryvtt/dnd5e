@@ -216,6 +216,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       { label: context.itemStatus }
     ];
     context.properties.active = this.parent.labels?.components?.tags;
+    context.parts = ["dnd5e.details-spell", "dnd5e.details-activation"];
   }
 
   /* -------------------------------------------- */

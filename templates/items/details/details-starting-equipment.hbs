@@ -1,0 +1,23 @@
+<fieldset>
+    <legend>
+        <span>{{ localize "DND5E.StartingEquipment.Title" }}</span>
+        <a class="config-button" data-action="starting-equipment"
+           data-tooltip="DND5E.StartingEquipment.Action.Configure"
+           aria-label="{{ localize "DND5E.StartingEquipment.Action.Configure" }}">
+            <i class="fas fa-cog" inert></i>
+        </a>
+    </legend>
+
+    {{!-- Starting Equipment --}}
+    <section class="starting-equipment {{#unless system.startingEquipmentDescription}}empty{{/unless}}">
+        {{#if system.startingEquipmentDescription}}
+            {{{ system.startingEquipmentDescription }}}
+        {{else}}
+            {{ localize "None" }}
+        {{/if}}
+    </section>
+
+    {{!-- Starting Wealth --}}
+    {{ formField fields.wealth value=source.wealth localize=true }}
+
+</fieldset>

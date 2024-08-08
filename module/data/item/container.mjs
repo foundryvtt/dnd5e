@@ -118,6 +118,7 @@ export default class ContainerData extends ItemDataModel.mixin(
       { label: context.itemType },
       ...this.physicalItemSheetFields
     ];
+    context.parts = ["dnd5e.details-container"];
   }
 
   /* -------------------------------------------- */
