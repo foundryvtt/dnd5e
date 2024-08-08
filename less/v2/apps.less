@@ -27,9 +27,17 @@
     }
   }
 
-  &.window-app.minimized .window-header .document-id-link {
-    display: grid;
-    margin-top: 0;
+  &.window-app.minimized .window-header {
+    .window-title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .document-id-link {
+      display: grid;
+      margin-top: 0;
+    }
   }
 
   .window-content {
