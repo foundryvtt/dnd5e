@@ -1,0 +1,44 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemContainerDetails" }}</legend>
+
+    {{!-- Container Properties --}}
+    {{ formField fields.properties options=properties.options label="DND5E.ItemContainerProperties" localize=true
+                 input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid checkbox-grid-3" }}
+
+    {{!-- Capacity --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.ItemContainerCapacity" }}</label>
+        <div class="form-fields">
+
+            {{!-- Amount --}}
+            {{ formField fields.capacity.fields.value value=source.capacity.value label="DND5E.Amount" localize=true
+                         classes="label-top" placeholder="—" }}
+
+            {{!-- Type --}}
+            {{ formField fields.capacity.fields.type value=source.capacity.type label="DND5E.Type" localize=true
+                         classes="label-top" choices=config.itemCapacityTypes }}
+
+        </div>
+    </div>
+
+    {{!-- Attunement --}}
+    {{#if properties.object.mgc}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Attunement" }}</label>
+        <div class="form-fields">
+
+            {{!-- Attuned --}}
+            {{#if source.attunement}}
+            {{ formInput fields.attuned value=source.attuned input=inputs.createCheckboxInput
+                         ariaLabel=(localize "DND5E.Attuned") dataset=(dnd5e-object tooltip="DND5E.Attuned") }}
+            {{/if}}
+
+            {{!-- Attunement --}}
+            {{ formInput fields.attunement value=source.attunement choices=config.attunementTypes
+                         blank="DND5E.AttunementNone" localize=true }}
+
+        </div>
+    </div>
+    {{/if}}
+
+</fieldset>

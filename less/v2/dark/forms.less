@@ -1,7 +1,7 @@
 .theme-dark .dnd5e2,
 .dnd5e2.dnd5e-theme-dark {
   fieldset {
-    border-color: var(--dnd5e-color-blue-gray-3);
+    --color-fieldset-border: var(--dnd5e-color-blue-gray-3);
     > legend { color: var(--dnd5e-color-gold); }
   }
 
@@ -10,5 +10,9 @@
       border: var(--dnd5e-border-gold);
       background: var(--dnd5e-background-parchment);
     }
+
+    &.card { background: var(--dnd5e-background-10); }
   }
+
+  .control-button { color: var(--dnd5e-color-gold); }
 }

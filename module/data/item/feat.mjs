@@ -138,6 +138,7 @@ export default class FeatData extends ItemDataModel.mixin(
       { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
         placeholder: "DND5E.Requirements" }
     ];
+    context.parts = ["dnd5e.details-feat", "dnd5e.details-activation"];
   }
 
   /* -------------------------------------------- */

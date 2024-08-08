@@ -1,0 +1,52 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemToolProperties" }}</legend>
+
+    {{!-- Tool Type --}}
+    {{ formField fields.type.fields.value value=source.type.value choices=config.toolTypes label="DND5E.ItemToolType"
+                 blank="" localize=true }}
+
+    {{!-- Base Tool --}}
+    {{ formField fields.type.fields.baseItem value=source.type.baseItem choices=baseItems label="DND5E.ItemToolBase"
+                 blank="" localize=true }}
+
+    {{!-- Tool Properties --}}
+    {{ formField fields.properties options=properties.options label="DND5E.ItemToolProperties" localize=true
+                 input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid checkbox-grid-3" }}
+
+    {{!-- Ability Check --}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.ActionAbil" }}</label>
+        <div class="form-fields">
+
+            {{!-- Proficiency --}}
+            {{ formField fields.proficient value=source.proficient choices=config.proficiencyLevels
+                         label="DND5E.Proficiency" blank="DND5E.Automatic" localize=true classes="label-top" }}
+
+            {{!-- Ability --}}
+            {{ formField fields.ability value=source.ability choices=config.abilities labelAttr="label"
+                         label="DND5E.Ability" blank="DND5E.Default" localize=true classes="label-top" }}
+        </div>
+    </div>
+
+    {{!-- Tool Bonus --}}
+    {{ formField fields.bonus value=source.bonus localize=true }}
+
+    {{!-- Attunement --}}
+    {{#if properties.object.mgc}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Attunement" }}</label>
+        <div class="form-fields">
+
+            {{!-- Attuned --}}
+            {{#if source.attunement}}
+            {{ formInput fields.attuned value=source.attuned input=inputs.createCheckboxInput
+                         ariaLabel=(localize "DND5E.Attuned") dataset=(dnd5e-object tooltip="DND5E.Attuned") }}
+            {{/if}}
+
+            {{!-- Attunement --}}
+            {{ formInput fields.attunement value=source.attunement choices=config.attunementTypes
+                         blank="DND5E.AttunementNone" localize=true }}
+        </div>
+    </div>
+    {{/if}}
+</fieldset>

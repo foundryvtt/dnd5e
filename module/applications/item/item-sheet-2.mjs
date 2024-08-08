@@ -51,6 +51,53 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       }, []);
     }
 
+    // Hit Dice
+    context.hitDieTypes = CONFIG.DND5E.hitDieTypes.map(d => ({ label: d, value: d }));
+
+    // Targets
+    context.targetTypes = [
+      ...Object.entries(CONFIG.DND5E.individualTargetTypes).map(([value, label]) => {
+        return { value, label, group: "DND5E.TargetTypeIndividual" };
+      }),
+      ...Object.entries(CONFIG.DND5E.areaTargetTypes).map(([value, { label }]) => {
+        return { value, label, group: "DND5E.TargetTypeArea" };
+      })
+    ];
+
+    // Range
+    context.rangeTypes = [
+      ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
+      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, label]) => {
+        return { value, label, group: "DND5E.RangeDistance" };
+      })
+    ];
+
+    // Equipment
+    context.equipmentTypes = [
+      ...Object.entries(CONFIG.DND5E.miscEquipmentTypes).map(([value, label]) => ({ value, label })),
+      ...Object.entries(CONFIG.DND5E.armorTypes).map(([value, label]) => ({ value, label, group: "DND5E.Armor" }))
+    ];
+
+    // Limited Uses
+    context.recoveryPeriods = [
+      ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
+        .filter(([, { deprecated }]) => !deprecated)
+        .map(([value, { label }]) => ({ value, label, group: "DND5E.DurationTime" })),
+      { value: "recharge", label: "DND5E.USES.Recovery.Recharge.Label" }
+    ];
+    context.recoveryTypes = [
+      { value: "recoverAll", label: "DND5E.USES.Recovery.Type.RecoverAll" },
+      { value: "loseAll", label: "DND5E.USES.Recovery.Type.LoseAll" },
+      { value: "formula", label: "DND5E.USES.Recovery.Type.Formula" }
+    ];
+    context.usesRecovery = (context.source.uses?.recovery ?? []).map((data, index) => ({
+      data,
+      fields: context.fields.uses.fields.recovery.element.fields,
+      prefix: `system.uses.recovery.${index}.`,
+      source: context.source.uses.recovery[index] ?? data,
+      formulaOptions: data.period === "recharge" ? data.recharge?.options : null
+    }));
+
     return context;
   }
 
@@ -92,6 +139,60 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
         }));
       });
     }
+
+    if ( this.isEditable ) {
+      html.find("button.control-button").on("click", this._onSheetAction.bind(this));
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a new recovery profile.
+   * @protected
+   */
+  _onAddRecovery() {
+    return this.submit({ updateData: { "system.uses.recovery": [...this.item.system.toObject().uses.recovery, {}] } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Delete a recovery profile.
+   * @param {HTMLElement} target  The deletion event target.
+   * @protected
+   */
+  _onDeleteRecovery(target) {
+    const recovery = this.item.system.toObject().uses.recovery;
+    recovery.splice(target.closest("[data-index]").dataset.index, 1);
+    return this.submit({ updateData: { "system.uses.recovery": recovery } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle performing some sheet action.
+   * @param {PointerEvent} event  The originating event.
+   * @protected
+   */
+  _onSheetAction(event) {
+    const target = event.currentTarget;
+    const { action } = target.dataset;
+    switch ( action ) {
+      case "addRecovery": return this._onAddRecovery();
+      case "deleteRecovery": return this._onDeleteRecovery(target);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _updateObject(event, formData) {
+    const expanded = foundry.utils.expandObject(formData);
+    if ( foundry.utils.hasProperty(expanded, "uses.recovery") ) {
+      formData.uses.recovery = Object.values(formData.uses.recovery);
+    }
+    return super._updateObject(event, formData);
   }
 
   /* -------------------------------------------- */

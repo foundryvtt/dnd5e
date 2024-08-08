@@ -35,6 +35,7 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
   async getSheetData(context) {
     context.subtitles = [{ label: context.itemType }];
     context.singleDescription = true;
+    context.parts = ["dnd5e.details-background", "dnd5e.details-starting-equipment"];
   }
 
   /* -------------------------------------------- */

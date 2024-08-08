@@ -1,0 +1,153 @@
+<fieldset>
+    <legend>{{ localize "DND5E.Usage" }}</legend>
+
+    {{!-- Activation --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.ItemActivation" }}</label>
+        <div class="form-fields">
+
+            {{!-- Amount --}}
+            {{#if (and source.activation.type (not isCostlessAction))}}
+            {{ formField fields.activation.fields.cost value=source.activation.cost label="DND5E.Amount" placeholder="—"
+                         localize=true classes="label-top" }}
+            {{/if}}
+
+            {{!-- Cost --}}
+            {{ formField fields.activation.fields.type value=source.activation.type label="DND5E.Cost" localize=true
+                         classes="label-top" choices=config.abilityActivationTypes blank="" }}
+        </div>
+
+        {{!-- Condition --}}
+        {{ formInput fields.activation.fields.condition value=source.activation.condition input=inputs.createTextInput
+                     placeholder=(localize "DND5E.ItemActivationCondition") localize=true classes="full-width" }}
+    </div>
+
+    {{!-- Target --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Target" }}</label>
+        <div class="form-fields">
+
+            {{!-- Value --}}
+            {{#if (and system.hasScalarTarget (not system.hasAreaTarget))}}
+            {{ formField fields.target.fields.value value=source.target.value label="DND5E.Amount" placeholder="—"
+                         localize=true classes="label-top" }}
+            {{/if}}
+
+            {{!-- Type --}}
+            {{ formField fields.target.fields.type value=source.target.type label="DND5E.Type" options=targetTypes
+                         blank="DND5E.None" localize=true classes="label-top" }}
+        </div>
+    </div>
+
+    {{!-- Dimensions --}}
+    {{#if system.hasAreaTarget}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Dimensions" }}</label>
+        <div class="form-fields">
+
+            {{!-- Size --}}
+            {{ formField fields.target.fields.value value=source.target.value label="DND5E.Size" placeholder="—"
+                         localize=true classes="label-top" }}
+
+            {{!-- Width --}}
+            {{#if isLine}}
+            {{ formField fields.target.fields.width value=source.target.width label="DND5E.AreaOfEffect.Size.Width"
+                         placeholder="—" localize=true classes="label-top" }}
+            {{/if}}
+
+            {{!-- Units --}}
+            {{ formField fields.target.fields.units value=source.target.units label="DND5E.MovementUnits"
+                         choices=config.movementUnits localize=true classes="label-top" }}
+        </div>
+    </div>
+    {{/if}}
+
+    {{!-- Area Prompt --}}
+    {{#if item.hasAreaTarget}}
+    {{ formField fields.target.fields.prompt value=source.target.prompt hint="DND5E.TemplatePromptTooltip"
+                 localize=true input=inputs.createCheckboxInput }}
+    {{/if}}
+
+    {{!-- Range --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Range" }}</label>
+        <div class="form-fields">
+
+            {{#if system.hasScalarRange}}
+            {{!-- Normal --}}
+            {{ formField fields.range.fields.value value=source.range.value label="DND5E.Normal" localize=true
+                         classes="label-top" }}
+
+            {{!-- Long --}}
+            {{ formField fields.range.fields.long value=source.range.long label="DND5E.Long" localize=true
+                         classes="label-top" }}
+            {{/if}}
+
+            {{!-- Units --}}
+            {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits"
+                         blank="DND5E.None" localize=true options=rangeTypes classes="label-top" }}
+        </div>
+    </div>
+
+    {{!-- Uses --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.LimitedUses" }}</label>
+        <div class="form-fields">
+
+            {{!-- Current --}}
+            <div class="form-group label-top">
+                <label>{{ localize "DND5E.Current" }}</label>
+                <div class="form-fields">
+                    <input type="number" name="system.uses.value" min="0" step="1" placeholder="0">
+                </div>
+            </div>
+
+            {{!-- Max --}}
+            {{ formField fields.uses.fields.max value=source.uses.max label="DND5E.Max" localize=true hint=""
+                         classes="label-top" }}
+        </div>
+    </div>
+</fieldset>
+
+{{#if source.uses.max}}
+<fieldset>
+    <legend>
+        <span>{{ localize "DND5E.Recovery" }}</span>
+        <button type="button" class="unbutton control-button" data-action="addRecovery"
+                data-tooltip="DND5E.USES.Recovery.Action.Create"
+                aria-label="{{ localize "DND5E.USES.Recovery.Action.Create" }}">
+            <i class="fas fa-plus" inert></i>
+        </button>
+    </legend>
+    {{#each usesRecovery}}
+    <div class="form-group split-group full-width card" data-index="{{ @index }}">
+        <div class="form-fields">
+
+            {{!-- Period --}}
+            {{ formField fields.period name=(concat prefix "period") value=source.period options=@root.recoveryPeriods
+                         label="DND5E.Period" localize=true classes="label-top" }}
+
+            {{!-- Type --}}
+            {{#unless (eq source.period "recharge")}}
+            {{ formField fields.type name=(concat prefix "type") value=source.type options=@root.recoveryTypes
+                         label="DND5E.Recovery" localize=true classes="label-top" }}
+            {{/unless}}
+
+            {{!-- Formula --}}
+            {{#if (or (eq source.type "formula") formulaOptions)}}
+            {{ formField fields.formula name=(concat prefix "formula") value=source.formula options=formulaOptions
+                         label="DND5E.Formula" localize=true classes="label-top" }}
+            {{/if}}
+
+            <button type="button" class="unbutton control-button" data-action="deleteRecovery"
+                    data-tooltip="DND5E.USES.Recovery.Action.Delete"
+                    aria-label="{{ localize "DND5E.USES.Recovery.Action.Delete" }}">
+                <i class="fas fa-minus" inert></i>
+            </button>
+        </div>
+    </div>
+    {{else}}
+    <div class="empty">{{ localize "DND5E.UsesPeriods.Never" }}</div>
+    {{/each}}
+</fieldset>
+{{/if}}

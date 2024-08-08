@@ -1,0 +1,11 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemSubclassDetails" }}</legend>
+
+    {{!-- Identifier --}}
+    {{ formField fields.identifier value=source.identifier placeholder=item.identifier hint="DND5E.IdentifierError"
+                 localize=true }}
+
+    {{!-- Class Identifier --}}
+    {{ formField fields.classIdentifier value=source.classIdentifier hint="DND5E.SubclassIdentifierHint"
+                 localize=true }}
+</fieldset>

@@ -34,6 +34,9 @@ export default function ItemSheetV2Mixin(Base) {
       inventory: { name: "", properties: new Set() }
     };
 
+    /** @inheritDoc */
+    static _customElements = super._customElements.concat(["dnd5e-checkbox"]);
+
     /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */

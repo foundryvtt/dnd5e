@@ -90,8 +90,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( options.pack || options.parent?.pack ) Hooks.callAll("dnd5e.initializeItemSource", this, data, options);
 
-    ActivitiesTemplate.initializeActivities(data);
     return super._initializeSource(data, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static fromSource(data, options={}) {
+    ActivitiesTemplate.initializeActivities(data);
+    return super.fromSource(data, options);
   }
 
   /* -------------------------------------------- */
