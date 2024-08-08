@@ -101,7 +101,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   static _migrateData(source) {
     super._migrateData(source);
     ActivitiesTemplate.migrateActivities(source);
-    SpellData.#migrateScaling(source);
+    SpellData.#migrateActivation(source);
+    SpellData.#migrateTarget(source);
   }
 
   /* -------------------------------------------- */
@@ -120,12 +121,37 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /**
-   * Migrate spell scaling.
+   * Migrate activation data.
+   * Added in DnD5e 4.0.0.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static #migrateScaling(source) {
-    if ( !("scaling" in source) ) return;
-    if ( (source.scaling.mode === "") || (source.scaling.mode === null) ) source.scaling.mode = "none";
+  static #migrateActivation(source) {
+    if ( source.activation?.cost ) source.activation.value = source.activation.cost;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate target data.
+   * Added in DnD5e 4.0.0.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateTarget(source) {
+    if ( !("target" in source) ) return;
+    source.target.affects ??= {};
+    source.target.template ??= {};
+
+    if ( "units" in source.target ) source.target.template.units = source.target.units;
+    if ( "width" in source.target ) source.target.template.width = source.target.width;
+
+    const type = source.target.type ?? source.target.template.type ?? source.target.affects.type;
+    if ( type in CONFIG.DND5E.areaTargetTypes ) {
+      if ( "type" in source.target ) source.target.template.type = type;
+      if ( "value" in source.target ) source.target.template.size = source.target.value;
+    } else if ( type in CONFIG.DND5E.individualTargetTypes ) {
+      if ( "type" in source.target ) source.target.affects.type = type;
+      if ( "value" in source.target ) source.target.affects.count = source.target.value;
+    }
   }
 
   /* -------------------------------------------- */
@@ -135,6 +161,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /** @inheritDoc */
   prepareDerivedData() {
     ActivitiesTemplate._applyActivityShims.call(this);
+    this._applySpellShims();
     super.prepareDerivedData();
     this.properties.add("mgc");
   }
@@ -227,11 +254,87 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /*  Shims                                       */
   /* -------------------------------------------- */
 
-  get scaling() {
-    foundry.utils.logCompatibilityWarning(
-      "The `scaling` property on `SpellData` has been deprecated and is now handled by individual damage parts",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
-    );
-    return { mode: "none", formula: null };
+  /**
+   * Add additional data shims for spells.
+   */
+  _applySpellShims() {
+    Object.defineProperty(this.activation, "cost", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `activation.cost` property on `SpellData` has been renamed `activation.value`.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+        );
+        return this.value;
+      },
+      configurable: true,
+      enumerable: false
+    });
+    Object.defineProperty(this, "scaling", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `scaling` property on `SpellData` has been deprecated and is now handled by individual damage parts.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+        );
+        return { mode: "none", formula: null };
+      },
+      configurable: true,
+      enumerable: false
+    });
+    Object.defineProperty(this.target, "value", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `target.value` property on `SpellData` has been split into `target.template.size` and `target.affects.count`.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+        );
+        return this.template.size || this.affects.count;
+      },
+      configurable: true,
+      enumerable: false
+    });
+    Object.defineProperty(this.target, "width", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `target.width` property on `SpellData` has been moved to `target.template.width`.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+        );
+        return this.template.width;
+      },
+      configurable: true,
+      enumerable: false
+    });
+    Object.defineProperty(this.target, "units", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `target.units` property on `SpellData` has been moved to `target.template.units`.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+        );
+        return this.template.units;
+      },
+      configurable: true,
+      enumerable: false
+    });
+    Object.defineProperty(this.target, "type", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `target.type` property on `SpellData` has been split into `target.template.type` and `target.affects.type`.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+        );
+        return this.template.type || this.affects.type;
+      },
+      configurable: true,
+      enumerable: false
+    });
+    const firstActivity = this.activities.contents[0] ?? {};
+    Object.defineProperty(this.target, "prompt", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `target.prompt` property on `SpellData` has moved into its activity.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+        );
+        return firstActivity.target?.prompt;
+      },
+      configurable: true,
+      enumerable: false
+    });
   }
 }
