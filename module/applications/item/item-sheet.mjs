@@ -811,7 +811,7 @@ export default class ItemSheet5e extends ItemSheet {
         return this.item.deleteAdvancement(id);
       case "duplicate": return this.item.duplicateAdvancement(id);
       case "modify-choices":
-        const level = target.closest("li")?.dataset.level;
+        const level = target.closest("[data-level]")?.dataset.level;
         manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
         if ( manager.steps.length ) manager.render(true);
         return;
