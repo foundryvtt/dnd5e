@@ -34,16 +34,15 @@ export default function ActorSheetV2Mixin(Base) {
       const html = await super._renderOuter();
       if ( !game.user.isGM && this.actor.limited ) return html;
       const header = html[0].querySelector(".window-header");
-      const firstButton = header.querySelector(".header-button");
 
       // Preparation warnings.
       const warnings = document.createElement("a");
-      warnings.classList.add("header-button", "preparation-warnings");
+      warnings.classList.add("pseudo-header-button", "preparation-warnings");
       warnings.dataset.tooltip = "Warnings";
       warnings.setAttribute("aria-label", game.i18n.localize("Warnings"));
       warnings.innerHTML = '<i class="fas fa-triangle-exclamation"></i>';
       warnings.addEventListener("click", this._onOpenWarnings.bind(this));
-      firstButton?.insertAdjacentElement("beforebegin", warnings);
+      header.querySelector(".window-title").insertAdjacentElement("afterend", warnings);
 
       // Render tabs.
       const nav = document.createElement("nav");
@@ -75,7 +74,7 @@ export default function ActorSheetV2Mixin(Base) {
     /** @inheritDoc */
     async _render(force=false, options={}) {
       await super._render(force, options);
-      const [warnings] = this.element.find(".header-button.preparation-warnings");
+      const [warnings] = this.element.find(".pseudo-header-button.preparation-warnings");
       warnings?.toggleAttribute("hidden", !this.actor._preparationWarnings?.length);
     }
 

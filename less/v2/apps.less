@@ -12,7 +12,7 @@
     border: none;
     align-items: center;
 
-    .header-button {
+    .header-button, .pseudo-header-button {
       border-radius: 100%;
       background: var(--dnd5e-background-25);
       width: 18px;
@@ -20,12 +20,11 @@
       aspect-ratio: 1;
       line-height: unset;
       place-content: center;
+      margin-top: 4px;
 
       &:not([hidden]) { display: grid; }
       > i { margin: 0 }
     }
-
-    .header-button, .document-id-link { margin-top: .25rem; }
   }
 
   &.window-app.minimized .window-header .document-id-link {
