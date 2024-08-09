@@ -42,12 +42,28 @@ export default class AttackSheet extends ActivitySheet {
   async _prepareEffectContext(context) {
     context = await super._prepareEffectContext(context);
 
-    // TODO: Add better default label to indicate what ability will be chosen
-    // TODO: Add spellcasting option to automatically select spellcasting ability
+    const availableAbilities = this.activity.availableAbilities;
     context.abilityOptions = [
-      { value: "", label: "" },
-      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label }))
+      {
+        value: "", label: game.i18n.format("DND5E.DefaultSpecific", {
+          default: this.activity.type.classification === "spell"
+            ? game.i18n.localize("DND5E.Spellcasting").toLowerCase()
+            : availableAbilities.size
+              ? game.i18n.getListFormatter({ style: "short", type: "disjunction" }).format(
+                Array.from(availableAbilities).map(a => CONFIG.DND5E.abilities[a].label.toLowerCase())
+              )
+              : game.i18n.localize("DND5E.None").toLowerCase()
+        })
+      },
+      // TODO: Stick an <hr> here when possible
+      { value: "none", label: game.i18n.localize("DND5E.None") },
+      { value: "spellcasting", label: game.i18n.localize("DND5E.Spellcasting") },
+      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({
+        value, label: config.label, group: game.i18n.localize("DND5E.Abilities")
+      }))
     ];
+
+    context.hasBaseDamage = this.item.system.damage?.base;
 
     return context;
   }
@@ -58,16 +74,23 @@ export default class AttackSheet extends ActivitySheet {
   async _prepareIdentityContext(context) {
     context = await super._prepareIdentityContext(context);
 
-    // TODO: Add better default label to indicate what type is inferred from the item
-    context.attackTypeOptions = [
-      { value: "", label: "" },
-      ...Object.entries(CONFIG.DND5E.attackTypes).map(([value, config]) => ({ value, label: config.label }))
-    ];
-    // TODO: Add better default label to indicate what classification is inferred from the item
-    context.attackClassificationOptions = [
-      { value: "", label: "" },
-      ...Object.entries(CONFIG.DND5E.attackClassifications).map(([value, config]) => ({ value, label: config.label }))
-    ];
+    context.attackTypeOptions = Object.entries(CONFIG.DND5E.attackTypes)
+      .map(([value, config]) => ({ value, label: config.label }));
+    if ( this.item.system.attackType ) context.attackTypeOptions.unshift({
+      value: "",
+      label: game.i18n.format("DND5E.DefaultSpecific", {
+        default: CONFIG.DND5E.attackTypes[this.item.system.attackType].label.toLowerCase()
+      })
+    });
+
+    context.attackClassificationOptions = Object.entries(CONFIG.DND5E.attackClassifications)
+      .map(([value, config]) => ({ value, label: config.label }));
+    if ( this.item.system.attackClassification ) context.attackClassificationOptions.unshift({
+      value: "",
+      label: game.i18n.format("DND5E.DefaultSpecific", {
+        default: CONFIG.DND5E.attackClassifications[this.item.system.attackClassification].label.toLowerCase()
+      })
+    });
 
     return context;
   }

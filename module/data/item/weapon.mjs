@@ -217,7 +217,17 @@ export default class WeaponData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Attack classification of this weapon.
+   * @type {"weapon"|"unarmed"}
+   */
+  get attackClassification() {
+    return CONFIG.DND5E.weaponClassificationMap[this.type.value] ?? "weapon";
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -226,6 +236,16 @@ export default class WeaponData extends ItemDataModel.mixin(
    */
   get attackType() {
     return CONFIG.DND5E.weaponTypeMap[this.type.value] ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get availableAbilities() {
+    const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;
+    const ranged = CONFIG.DND5E.defaultAbilities.rangedAttack;
+    if ( this.properties.has("fin") ) return new Set([melee, ranged]);
+    return new Set([this.attackType === "melee" ? melee : ranged]);
   }
 
   /* -------------------------------------------- */
@@ -257,9 +277,12 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritdoc */
   get _typeAbilityMod() {
-    const { str, dex } = this.parent?.actor?.system.abilities ?? {};
-    if ( this.properties.has("fin") && str && dex ) return (dex.mod > str.mod) ? "dex" : "str";
-    return { simpleM: "str", martialM: "str", simpleR: "dex", martialR: "dex" }[this.type.value] ?? null;
+    const availableAbilities = this.availableAbilities;
+    if ( availableAbilities.size === 1 ) return availableAbilities.first();
+    const abilities = this.parent?.actor?.system.abilities ?? {};
+    return availableAbilities.reduce((largest, ability) =>
+      (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest
+    , availableAbilities.first());
   }
 
   /* -------------------------------------------- */

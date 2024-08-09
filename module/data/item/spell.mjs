@@ -219,7 +219,26 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Attack classification of this spell.
+   * @type {"spell"}
+   */
+  get attackClassification() {
+    return "spell";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get availableAbilities() {
+    const spellcasting = this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+      ?? this.parent?.actor?.system.attributes?.spellcasting;
+    return new Set(spellcasting ? [spellcasting] : []);
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -238,9 +257,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritdoc */
   get _typeAbilityMod() {
-    return this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
-      ?? this.parent?.actor?.system.attributes?.spellcasting
-      ?? "int";
+    return availableAbilities.first() ?? "int";
   }
 
   /* -------------------------------------------- */

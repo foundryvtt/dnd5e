@@ -2200,7 +2200,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Item5e>}  This item with the changes applied.
    */
   deleteActivity(id) {
-    if ( !this.system.activities ) return this;
+    const activity = this.system.activities?.get(id);
+    if ( !activity ) return this;
+    activity.constructor._apps.get(activity.uuid)?.forEach(a => a.close());
     return this.update({ [`system.activities.-=${id}`]: null });
   }
 

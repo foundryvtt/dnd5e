@@ -1,7 +1,9 @@
 <ul class="separated-list damage-list">
     {{#each damageParts}}
-    <li data-index="{{ @index }}">
-        {{> "systems/dnd5e/templates/activity/parts/damage-part.hbs" }}
+    <li {{~#if data.base}} class="base-part"{{/if}} data-index="{{ index }}">
+        <fieldset class="unfieldset" {{~#if data.base}} disabled{{/if}}>
+            {{> "systems/dnd5e/templates/activity/parts/damage-part.hbs" }}
+        </fieldset>
     </li>
     {{/each}}
 </ul>

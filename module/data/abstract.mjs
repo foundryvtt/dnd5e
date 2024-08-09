@@ -425,6 +425,16 @@ export class ItemDataModel extends SystemDataModel {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
+  /**
+   * Set of abilities that can automatically be associated with this item.
+   * @type {Set<string>|null}
+   */
+  get availableAbilities() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   get embeddedDescriptionKeyPath() {
     return game.user.isGM || (this.identified !== false) ? "description.value" : "unidentified.description";

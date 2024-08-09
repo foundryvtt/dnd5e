@@ -371,12 +371,14 @@ export default class ActivitySheet extends Application5e {
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
         ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
       ];
+      let indexOffset = 0;
       context.damageParts = context.activity.damage.parts.map((data, index) => {
+        if ( data.base ) indexOffset--;
         const part = {
           data,
           fields: this.activity.schema.fields.damage.fields.parts.element.fields,
-          prefix: `damage.parts.${index}.`,
-          source: context.source.damage.parts[index] ?? data,
+          prefix: `damage.parts.${index + indexOffset}.`,
+          source: context.source.damage.parts[index + indexOffset] ?? data,
           canScale: this.activity.canScaleDamage,
           denominationOptions,
           scalingOptions,
@@ -497,7 +499,7 @@ export default class ActivitySheet extends Application5e {
 
   /** @override */
   _onClose(_options) {
-    this.activity.constructor._unregisterApp(this.activity, this);
+    this.activity?.constructor._unregisterApp(this.activity, this);
   }
 
   /* -------------------------------------------- */
