@@ -459,7 +459,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Add an `canOverride` property to the provided object and, if `override` is `true`, replace the data on the
+   * Add an `canOverride` property to the provided object and, if `override` is `false`, replace the data on the
    * activity with data from the item.
    * @param {string} keyPath  Path of the property to set on the activity.
    * @internal
