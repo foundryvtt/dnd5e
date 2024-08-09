@@ -333,6 +333,17 @@ DND5E.weaponProficienciesMap = {
 };
 
 /**
+ * A mapping between `DND5E.weaponTypes` and `DND5E.attackTypes`.
+ * @enum {string}
+ */
+DND5E.weaponTypeMap = {
+  simpleM: "melee",
+  simpleR: "ranged",
+  martialM: "melee",
+  martialR: "ranged"
+};
+
+/**
  * The basic weapon types in 5e. This enables specific weapon proficiencies or
  * starting equipment provided by classes and backgrounds.
  * @enum {string}
@@ -560,54 +571,55 @@ preLocalize("abilityActivationTypes");
 DND5E.activityActivationTypes = {
   action: {
     label: "DND5E.Action",
-    group: "DND5E.Activation.Category.Standard"
+    group: "DND5E.ACTIVATION.Category.Standard"
   },
   bonus: {
     label: "DND5E.BonusAction",
-    group: "DND5E.Activation.Category.Standard"
+    group: "DND5E.ACTIVATION.Category.Standard"
   },
   reaction: {
     label: "DND5E.Reaction",
-    group: "DND5E.Activation.Category.Standard"
+    group: "DND5E.ACTIVATION.Category.Standard"
   },
   minute: {
     label: "DND5E.TimeMinute",
-    group: "DND5E.Activation.Category.Time",
+    group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
   hour: {
     label: "DND5E.TimeHour",
-    group: "DND5E.Activation.Category.Time",
+    group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
   day: {
     label: "DND5E.TimeDay",
-    group: "DND5E.Activation.Category.Time",
+    group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
   legendary: {
     label: "DND5E.LegendaryActionLabel",
-    group: "DND5E.Activation.Category.Monster",
+    group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },
   mythic: {
     label: "DND5E.MythicActionLabel",
-    group: "DND5E.Activation.Category.Monster",
+    group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },
   lair: {
     label: "DND5E.LairActionLabel",
-    group: "DND5E.Activation.Category.Monster"
+    group: "DND5E.ACTIVATION.Category.Monster"
   },
   crew: {
     label: "DND5E.VehicleCrewAction",
-    group: "DND5E.Activation.Category.Vehicle",
+    group: "DND5E.ACTIVATION.Category.Vehicle",
     scalar: true
   },
   special: {
     label: "DND5E.Special"
   }
 };
+preLocalize("activityActivationTypes", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -647,29 +659,29 @@ preLocalize("abilityConsumptionTypes", { sort: true });
  */
 DND5E.activityConsumptionTypes = {
   activityUses: {
-    label: "DND5E.Consumption.Type.ActivityUses.Label"
+    label: "DND5E.CONSUMPTION.Type.ActivityUses.Label"
   },
   itemUses: {
-    label: "DND5E.Consumption.Type.ItemUses.Label",
+    label: "DND5E.CONSUMPTION.Type.ItemUses.Label",
     targetRequiresEmbedded: true,
     validTargets: BaseActivityData.validItemUsesTargets
   },
   material: {
-    label: "DND5E.Consumption.Type.Material.Label",
+    label: "DND5E.CONSUMPTION.Type.Material.Label",
     targetRequiresEmbedded: true,
     validTargets: BaseActivityData.validMaterialTargets
   },
   hitDice: {
-    label: "DND5E.Consumption.Type.HitDice.Label",
+    label: "DND5E.CONSUMPTION.Type.HitDice.Label",
     validTargets: BaseActivityData.validHitDiceTargets
   },
   spellSlots: {
-    label: "DND5E.Consumption.Type.SpellSlots.Label",
-    scalingModes: [{ value: "level", label: "DND5E.Consumption.Scaling.SlotLevel" }],
+    label: "DND5E.CONSUMPTION.Type.SpellSlots.Label",
+    scalingModes: [{ value: "level", label: "DND5E.CONSUMPTION.Scaling.SlotLevel" }],
     validTargets: BaseActivityData.validSpellSlotsTargets
   },
   attribute: {
-    label: "DND5E.Consumption.Type.Attribute.Label",
+    label: "DND5E.CONSUMPTION.Type.Attribute.Label",
     targetRequiresEmbedded: true,
     validTargets: BaseActivityData.validAttributeTargets
   }

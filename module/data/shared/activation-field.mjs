@@ -17,4 +17,25 @@ export default class ActivationField extends SchemaField {
     };
     super(fields, options);
   }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data for this field. Should be called during the `prepareFinalData` stage.
+   * @this {ItemDataModel|BaseActivityData}
+   * @param {object} rollData  Roll data used for formula replacements.
+   * @param {object} [labels]  Object in which to insert generated labels.
+   */
+  static prepareData(rollData, labels) {
+    this.activation.scalar = CONFIG.DND5E.activityActivationTypes[this.type]?.scalar ?? false;
+    if ( !this.activation.scalar ) this.activation.value = null;
+
+    if ( labels && this.activation.type ) {
+      labels.activation = [
+        this.activation.value, CONFIG.DND5E.activityActivationTypes[this.activation.type]?.label
+      ].filterJoin(" ");
+    }
+  }
 }

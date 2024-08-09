@@ -58,7 +58,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ACTIVITY", "DND5E.USES"];
+  static LOCALIZATION_PREFIXES = [
+    "DND5E.ACTIVITY", "DND5E.ACTIVATION", "DND5E.CONSUMPTION",
+    "DND5E.DURATION", "DND5E.RANGE", "DND5E.TARGET", "DND5E.USES"
+  ];
 
   /* -------------------------------------------- */
 
@@ -386,7 +389,40 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareData() {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
-    UsesField.prepareData.call(this, this.getRollData({ deterministic: true }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform final preparation after containing item is prepared.
+   * @param {object} rollData  Deterministic roll data from the item.
+   */
+  prepareFinalData(rollData) {
+    // TODO: Copy inferred data over from item source data where necessary
+
+    ActivationField.prepareData.call(this, rollData);
+    DurationField.prepareData.call(this, rollData);
+    RangeField.prepareData.call(this, rollData);
+    TargetField.prepareData.call(this, rollData);
+    UsesField.prepareData.call(this, rollData);
+
+    const actor = this.item.actor;
+    if ( !actor ) return;
+    for ( const target of this.consumption.targets ) {
+      if ( !["itemUses", "material"].includes(target.type) || !target.target ) continue;
+
+      // Re-link UUIDs in consumption fields to explicit items on the actor
+      if ( target.target.includes(".") ) {
+        const item = actor.sourcedItems?.get(target.target);
+        if ( item ) target.target = item.id;
+      }
+
+      // If targeted item isn't found, display preparation warning
+      if ( !actor.items.get(target.target) ) {
+        const message = game.i18n.format("DND5E.CONSUMPTION", { activity: this.name, item: this.item.name });
+        actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
+      }
+    }
   }
 
   /* -------------------------------------------- */
@@ -451,7 +487,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       return `${name} (${label})`;
     };
     return [
-      { value: "", label: makeLabel(game.i18n.localize("DND5E.Consumption.Target.ThisItem"), this.item) },
+      { value: "", label: makeLabel(game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem"), this.item) },
       ...(this.actor?.items ?? [])
         .filter(i => i.system.uses?.max && (i !== this.item))
         .map(i => ({ value: i.id, label: makeLabel(i.name, i) }))

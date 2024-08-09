@@ -1,6 +1,6 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     <fieldset>
-        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.consumption.label" }}</legend>
+        <legend>{{ localize "DND5E.CONSUMPTION.FIELDS.consumption.label" }}</legend>
         <ul class="unlist">
             {{#each consumptionTargets}}
             <li data-index="{{ @index }}">
@@ -15,24 +15,24 @@
                    options=scalingModes }}
                 {{#if data.scaling.mode}}
                 {{ formField fields.scaling.fields.formula name=(concat prefix "scaling.formula")
-                   value=data.scaling.formula placeholder=(localize "DND5E.Consumption.Scaling.Automatic") }}
+                   value=data.scaling.formula placeholder=(localize "DND5E.CONSUMPTION.Scaling.Automatic") }}
                 {{/if}}
                 {{/if}}
                 <button type="button" class="unbutton" data-action="deleteConsumption">
-                    {{ localize "DND5E.Consumption.Action.Delete" }}
+                    {{ localize "DND5E.CONSUMPTION.Action.Delete" }}
                 </button>
             </li>
             {{/each}}
         </ul>
         <button type="button" class="unbutton" data-action="addConsumption">
-            {{ localize "DND5E.Consumption.Action.Create" }}
+            {{ localize "DND5E.CONSUMPTION.Action.Create" }}
         </button>
     </fieldset>
 
     {{#unless activity.isSpell}}
     {{#with fields.consumption.fields.scaling.fields as |fields|}}
     <fieldset>
-        <legend>{{ localize "DND5E.ACTIVITY.FIELDS.consumption.scaling.label" }}</legend>
+        <legend>{{ localize "DND5E.CONSUMPTION.FIELDS.consumption.scaling.label" }}</legend>
         {{ formField fields.allowed value=../activity.consumption.scaling.allowed }}
         {{#if ../activity.consumption.scaling.allowed}}
         {{ formField fields.max value=../activity.consumption.scaling.max placeholder="∞" }}

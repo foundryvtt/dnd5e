@@ -227,10 +227,10 @@ export default class ActivitySheet extends Application5e {
       }))
     ];
     context.scalar = {
-      activation: CONFIG.DND5E.activityActivationTypes[context.activity.activation.type]?.scalar,
-      duration: context.activity.duration.units in CONFIG.DND5E.scalarTimePeriods,
-      range: context.activity.range.units in CONFIG.DND5E.movementUnits,
-      target: !["", "self", "any"].includes(context.activity.target.affects.type)
+      activation: context.activity.activation.scalar,
+      duration: context.activity.duration.scalar,
+      range: context.activity.range.scalar,
+      target: context.activity.target.affects.scalar
     };
 
     // Consumption targets
@@ -249,12 +249,12 @@ export default class ActivitySheet extends Application5e {
         source: context.source.consumption.targets[index] ?? data,
         typeOptions: consumptionTypeOptions,
         scalingModes: canScale ? [
-          { value: "", label: game.i18n.localize("DND5E.Consumption.Scaling.None") },
-          { value: "amount", label: game.i18n.localize("DND5E.Consumption.Scaling.Amount") },
+          { value: "", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.None") },
+          { value: "amount", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.Amount") },
           ...(typeConfig.scalingModes ?? []).map(({ value, label }) => ({ value, label: game.i18n.localize(label) }))
         ] : null,
         showTargets: "validTargets" in typeConfig,
-        targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.Consumption.Target.ThisItem") : null,
+        targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : null,
         validTargets: showTextTarget ? null : typeConfig.validTargets?.call(this.activity)
       };
     });
@@ -429,11 +429,11 @@ export default class ActivitySheet extends Application5e {
           },
           consumption: {
             id: "consumption", group: "activation", icon: "fa-solid fa-boxes-stacked",
-            label: "DND5E.ACTIVITY.FIELDS.consumption.label"
+            label: "DND5E.CONSUMPTION.FIELDS.consumption.label"
           },
           targeting: {
             id: "activation-targeting", group: "activation", icon: "fa-solid fa-bullseye",
-            label: "DND5E.ACTIVITY.FIELDS.target.label"
+            label: "DND5E.TARGET.FIELDS.target.label"
           }
         }
       },

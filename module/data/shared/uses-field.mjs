@@ -1,4 +1,4 @@
-import { formatNumber, formatRange } from "../../utils.mjs";
+import { formatNumber, formatRange, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -41,12 +41,13 @@ export default class UsesField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
-   * Prepare data for the uses field. Should be called during the `prepareFinalData` stage.
+   * Prepare data for this field. Should be called during the `prepareFinalData` stage.
    * @this {ItemDataModel|BaseActivityData}
-   * @param {object} rollData
+   * @param {object} rollData  Roll data used for formula replacements.
+   * @param {object} [labels]  Object in which to insert generated labels.
    */
-  static prepareData(rollData) {
-    // TODO: Move maximum uses preparation from `ActivatedEffectTemplate`
+  static prepareData(rollData, labels) {
+    prepareFormulaValue(this, "uses.max", "DND5E.USES.FIELDS.uses.max.label", rollData);
     this.uses.value = Math.clamp(this.uses.max - this.uses.spent, 0, this.uses.max);
 
     for ( const recovery of this.uses.recovery ) {
@@ -60,6 +61,8 @@ export default class UsesField extends SchemaField {
             })
           }))
         };
+        if ( labels ) labels.recharge ??= `${game.i18n.localize("DND5E.Recharge")} [${
+          recovery.formula}${parseInt(recovery.formula) < 6 ? "+" : ""}]`;
       }
     }
   }

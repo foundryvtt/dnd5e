@@ -1,3 +1,4 @@
+import { prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
@@ -40,5 +41,53 @@ export default class TargetField extends SchemaField {
       ...fields
     };
     super(fields, options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data for this field. Should be called during the `prepareFinalData` stage.
+   * @this {ItemDataModel|BaseActivityData}
+   * @param {object} rollData  Roll data used for formula replacements.
+   * @param {object} [labels]  Object in which to insert generated labels.
+   */
+  static prepareData(rollData, labels) {
+    this.target.affects.scalar = !["", "self", "any"].includes(this.type);
+    if ( this.target.affects.scalar ) {
+      prepareFormulaValue(this, "target.affects.count", "DND5E.TARGET.FIELDS.target.affects.count.label", rollData);
+    } else this.target.affects.count = null;
+
+    if ( this.target.template.type ) {
+      this.target.template.count ||= "1";
+      prepareFormulaValue(this, "target.template.count", "DND5E.TARGET.FIELDS.target.template.count.label", rollData);
+      prepareFormulaValue(this, "target.template.size", "DND5E.TARGET.FIELDS.target.template.size.label", rollData);
+      prepareFormulaValue(this, "target.template.width", "DND5E.TARGET.FIELDS.target.template.width.label", rollData);
+      prepareFormulaValue(this, "target.template.height", "DND5E.TARGET.FIELDS.target.template.height.label", rollData);
+    } else {
+      this.target.template.count = null;
+      this.target.template.size = null;
+      this.target.template.width = null;
+      this.target.template.height = null;
+    }
+
+    if ( labels ) {
+      const parts = [];
+
+      if ( this.target.template.type ) {
+        if ( this.target.template.count > 1 ) parts.push(`${this.target.template.count} ×`);
+        parts.push(this.target.template.size);
+        parts.push(game.i18n.localize(`DND5E.Dist${this.target.template.units.capitalize()}Abbr`));
+        parts.push(CONFIG.DND5E.areaTargetTypes[this.target.template.type]?.label);
+      }
+
+      else if ( this.target.affects.type ) {
+        if ( this.target.affects.scalar ) parts.push(this.target.affects.count);
+        parts.push(CONFIG.DND5E.individualTargetTypes[this.target.affects.type]);
+      }
+
+      labels.target = parts.filterJoin(" ");
+    }
   }
 }

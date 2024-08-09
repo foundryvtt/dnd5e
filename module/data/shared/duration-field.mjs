@@ -1,3 +1,4 @@
+import { prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
@@ -18,5 +19,30 @@ export default class DurationField extends SchemaField {
       ...fields
     };
     super(fields, options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data for this field. Should be called during the `prepareFinalData` stage.
+   * @this {ItemDataModel|BaseActivityData}
+   * @param {object} rollData  Roll data used for formula replacements.
+   * @param {object} [labels]  Object in which to insert generated labels.
+   */
+  static prepareData(rollData, labels) {
+    this.duration.scalar = this.units in CONFIG.DND5E.scalarTimePeriods;
+    if ( this.duration.scalar ) {
+      prepareFormulaValue(this, "duration.value", "DND5E.DURATION.FIELDS.duration.value.label", rollData);
+    } else this.duration.value = null;
+
+    if ( labels && this.duration.units ) {
+      let duration = CONFIG.DND5E.timePeriods[this.duration.units] ?? "";
+      if ( this.duration.value ) duration = `${this.duration.value} ${duration.toLowerCase()}`;
+      labels.duration = duration;
+      labels.concentrationDuration = this.properties?.has("concentration")
+        ? game.i18n.format("DND5E.ConcentrationDuration", { duration }) : duration;
+    }
   }
 }

@@ -149,20 +149,7 @@
 "DND5E.ActionWarningNoItem": "The requested item {item} no longer exists on Actor {name}",
 "DND5E.ActionWarningNoToken": "You must have one or more controlled Tokens in order to use this option.",
 
-"DND5E.Activation": {
-  "Category": {
-    "Standard": "Standard",
-    "Time": "Time",
-    "Monster": "Monster",
-    "Vehicle": "Vehicle"
-  }
-},
-
-"DND5E.ACTIVITY": {
-  "Title": {
-    "one": "Activity",
-    "other": "Activities"
-  },
+"DND5E.ACTIVATION": {
   "FIELDS": {
     "activation": {
       "label": "Activation",
@@ -178,70 +165,27 @@
         "label": "Activation Value",
         "hint": "Scalar value associated with the activation."
       }
-    },
-    "consumption": {
-      "label": "Consumption",
-      "scaling": {
-        "label": "Consumption Scaling",
-        "allowed": {
-          "label": "Allow Scaling",
-          "hint": "Can an activity not on a spell be activated at higher levels?"
-        },
-        "max": {
-          "label": "Max Scaling",
-          "hint": "Maximum number of scaling levels for this item, including the base level."
-        }
-      },
-      "targets": {
-        "label": "Consumption Targets",
-        "hint": "Targets of possible consumption when this activity is activated.",
-        "FIELDS": {
-          "type": {
-            "label": "Consumption Type",
-            "hint": "Type of consumption target."
-          },
-          "target": {
-            "label": "Consumption Target",
-            "hint": "Specific target to be consumed."
-          },
-          "value": {
-            "label": "Consumption Amount",
-            "hint": "Amount to consume of the target."
-          },
-          "scaling": {
-            "label": "Consumption Scaling",
-            "mode": {
-              "label": "Scaling Mode",
-              "hint": "How consumption should be scaled."
-            },
-            "formula": {
-              "label": "Scaling Formula",
-              "hint": "Custom scaling of consumption amount per level."
-            }
-          }
-        }
-      }
-    },
+    }
+  },
+  "Category": {
+    "Standard": "Standard",
+    "Time": "Time",
+    "Monster": "Monster",
+    "Vehicle": "Vehicle"
+  }
+},
+
+"DND5E.ACTIVITY": {
+  "Title": {
+    "one": "Activity",
+    "other": "Activities"
+  },
+  "FIELDS": {
     "description": {
       "label": "Description",
       "chatFlavor": {
         "label": "Chat Flavor",
         "hint": "Additional text displayed in the activation chat message."
-      }
-    },
-    "duration": {
-      "label": "Duration",
-      "special": {
-        "label": "Special Duration",
-        "hint": "Description of any special duration details."
-      },
-      "units": {
-        "label": "Duration Units",
-        "hint": "Units used to measure duration."
-      },
-      "value": {
-        "label": "Duration Value",
-        "hint": "Value of the duration in the specified units, if applicable."
       }
     },
     "effects": {
@@ -252,78 +196,6 @@
     },
     "name": {
       "label": "Name"
-    },
-    "range": {
-      "label": "Range",
-      "special": {
-        "label": "Special Range",
-        "hint": "Description of any special range details."
-      },
-      "units": {
-        "label": "Range Units",
-        "hint": "Units used to measure range."
-      },
-      "value": {
-        "label": "Range Value",
-        "hint": "Value of the range in the specified units, if applicable."
-      }
-    },
-    "target": {
-      "label": "Targeting",
-      "affects": {
-        "label": "Affected Targets",
-        "choice": {
-          "label": "Choose Targets",
-          "hint": "When targeting an area, can the user choose who it affects?"
-        },
-        "count": {
-          "label": "Target Count",
-          "hint": "Number of individual targets that can be affected."
-        },
-        "special": {
-          "label": "Special Targeting",
-          "hint": "Description of any special targeting details."
-        },
-        "type": {
-          "label": "Target Type",
-          "hint": "Type of targets that can be affected (e.g. creatures, objects, spaces)."
-        }
-      },
-      "prompt": {
-        "label": "Measured Template Prompt",
-        "hint": "Should the player be prompted to place a measured template? Players will still be able to place templates from the chat card if prompt is disabled."
-      },
-      "template": {
-        "label": "Area of Effect",
-        "contiguous": {
-          "label": "Contiguous Areas",
-          "hint": "Must all created areas be connected to one another?"
-        },
-        "count": {
-          "label": "Area Count",
-          "hint": "Number of distinct areas that can be targeted."
-        },
-        "height": {
-          "label": "Area Height",
-          "hint": "Height of a cylinder affected if applicable."
-        },
-        "size": {
-          "label": "Area Size",
-          "hint": "Size of the area of effect on its primary axis."
-        },
-        "type": {
-          "label": "Area Type",
-          "hint": "Type of area of effect targeted."
-        },
-        "units": {
-          "label": "Area Units",
-          "hint": "Units used to measure the area of effect sizes."
-        },
-        "width": {
-          "label": "Area Width",
-          "hint": "Width of a line affected if applicable."
-        }
-      }
     }
   },
   "SECTIONS": {
@@ -848,7 +720,53 @@
 "DND5E.ConsumableUnitWarn": "units remaining",
 "DND5E.ConsumableLastChargeWarn": "This is the last charge of this unit and consuming it will also reduce the item's quantity by 1",
 "DND5E.ConsumableWithoutCharges": "available units to use",
-"DND5E.Consumption": {
+
+"DND5E.CONSUMPTION": {
+  "FIELDS": {
+    "consumption": {
+      "label": "Consumption",
+      "scaling": {
+        "label": "Consumption Scaling",
+        "allowed": {
+          "label": "Allow Scaling",
+          "hint": "Can an activity not on a spell be activated at higher levels?"
+        },
+        "max": {
+          "label": "Max Scaling",
+          "hint": "Maximum number of scaling levels for this item, including the base level."
+        }
+      },
+      "targets": {
+        "label": "Consumption Targets",
+        "hint": "Targets of possible consumption when this activity is activated.",
+        "FIELDS": {
+          "type": {
+            "label": "Consumption Type",
+            "hint": "Type of consumption target."
+          },
+          "target": {
+            "label": "Consumption Target",
+            "hint": "Specific target to be consumed."
+          },
+          "value": {
+            "label": "Consumption Amount",
+            "hint": "Amount to consume of the target."
+          },
+          "scaling": {
+            "label": "Consumption Scaling",
+            "mode": {
+              "label": "Scaling Mode",
+              "hint": "How consumption should be scaled."
+            },
+            "formula": {
+              "label": "Scaling Formula",
+              "hint": "Custom scaling of consumption amount per level."
+            }
+          }
+        }
+      }
+    }
+  },
   "Action": {
     "Create": "Create Consumption Target",
     "Delete": "Delete Consumption Target"
@@ -881,8 +799,12 @@
     "SpellSlots": {
       "Label": "Spell Slots"
     }
+  },
+  "Warning": {
+    "MissingTarget": "Item configured to be consumed by {activity} activity on {item} could not be found."
   }
 },
+
 "DND5E.Consumed": "Consumed",
 "DND5E.Cover": "Cover",
 "DND5E.CoverHalf": "Half",
@@ -1124,6 +1046,27 @@
 "DND5E.DistTouch": "Touch",
 "DND5E.DocumentUseWarn": "You lack permission to use an item on this document.",
 "DND5E.DocumentViewWarn": "You lack permission to view this document.",
+
+"DND5E.DURATION": {
+  "FIELDS": {
+    "duration": {
+      "label": "Duration",
+      "special": {
+        "label": "Special Duration",
+        "hint": "Description of any special duration details."
+      },
+      "units": {
+        "label": "Duration Units",
+        "hint": "Units used to measure duration."
+      },
+      "value": {
+        "label": "Duration Value",
+        "hint": "Value of the duration in the specified units, if applicable."
+      }
+    }
+  }
+},
+
 "DND5E.Duration": "Duration",
 "DND5E.DurationPermanent": "Permanent",
 "DND5E.DurationTime": "Time",
@@ -1828,6 +1771,34 @@
 "DND5E.QuantityFormula": "Quantity Formula",
 "DND5E.QuantityRoll": "Roll Quantities",
 "DND5E.RacialTraits": "Racial Traits",
+
+"DND5E.RANGE": {
+  "FIELDS": {
+    "range": {
+      "label": "Range",
+      "reach": {
+        "label": "Reach"
+      },
+      "long": {
+        "label": "Long Range",
+        "hint": "Far attack range of the weapon, if present on the weapon."
+      },
+      "special": {
+        "label": "Special Range",
+        "hint": "Description of any special range details."
+      },
+      "units": {
+        "label": "Range Units",
+        "hint": "Units used to measure range."
+      },
+      "value": {
+        "label": "Range Value",
+        "hint": "Value of the range in the specified units, if applicable."
+      }
+    }
+  }
+},
+
 "DND5E.Range": "Range",
 "DND5E.RangeDistance": "Distance",
 "DND5E.RangeLong": "Long Range",
@@ -2338,6 +2309,69 @@
 },
 "DND5E.Supply": "Supply",
 "DND5E.Suppressed": "Suppressed",
+
+"DND5E.TARGET": {
+  "FIELDS": {
+    "target": {
+      "label": "Targeting",
+      "affects": {
+        "label": "Affected Targets",
+        "choice": {
+          "label": "Choose Targets",
+          "hint": "When targeting an area, can the user choose who it affects?"
+        },
+        "count": {
+          "label": "Target Count",
+          "hint": "Number of individual targets that can be affected."
+        },
+        "special": {
+          "label": "Special Targeting",
+          "hint": "Description of any special targeting details."
+        },
+        "type": {
+          "label": "Target Type",
+          "hint": "Type of targets that can be affected (e.g. creatures, objects, spaces)."
+        }
+      },
+      "prompt": {
+        "label": "Measured Template Prompt",
+        "hint": "Should the player be prompted to place a measured template? Players will still be able to place templates from the chat card if prompt is disabled."
+      },
+      "template": {
+        "label": "Area of Effect",
+        "contiguous": {
+          "label": "Contiguous Areas",
+          "hint": "Must all created areas be connected to one another?"
+        },
+        "count": {
+          "label": "Area Count",
+          "hint": "Number of distinct areas that can be targeted."
+        },
+        "height": {
+          "label": "Area Height",
+          "hint": "Height of a cylinder affected if applicable."
+        },
+        "size": {
+          "label": "Area Size",
+          "hint": "Size of the area of effect on its primary axis."
+        },
+        "type": {
+          "label": "Area Type",
+          "hint": "Type of area of effect targeted."
+        },
+        "units": {
+          "label": "Area Units",
+          "hint": "Units used to measure the area of effect sizes."
+        },
+        "width": {
+          "label": "Area Width",
+          "hint": "Width of a line affected if applicable."
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Target": "Target",
 "DND5E.TargetPl": "Targets",
 "DND5E.TargetAlly": "Ally",
