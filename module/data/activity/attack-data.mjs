@@ -61,6 +61,30 @@ export default class AttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Abilities that could potentially be used with this attack. Unless a specific ability is specified then
+   * whichever ability has the highest modifier will be selected when making an attack.
+   * @type {Set<string>}
+   */
+  get availableAbilities() {
+    // Defer to item if available
+    if ( this.item.system.availableAbilities ) return this.item.system.availableAbilities;
+
+    // Spell attack not associated with a single class, use highest spellcasting ability on actor
+    if ( this.attack.type.classification === "spell" ) return new Set([
+      this.parent?.actor?.system.attributes?.spellcasting,
+      ...Object.values(this.parent?.actor?.spellcastingClasses ?? {}).map(c => c.spellcasting.ability)
+    ].filter(a => a));
+
+    // Weapon & unarmed attacks uses melee or ranged ability depending on type, or both if actor is an NPC
+    const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;
+    const ranged = CONFIG.DND5E.defaultAbilities.rangedAttack;
+    if ( this.actor?.type === "npc" ) return new Set([melee, ranged]);
+    return new Set([this.attack.type.value === "melee" ? melee : ranged]);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -95,5 +119,23 @@ export default class AttackActivityData extends BaseActivityData {
         parts: damageParts.map(part => this.transformDamagePartData(source, part)) ?? []
       }
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data related to this activity.
+   */
+  prepareData() {
+    super.prepareData();
+    this.attack.type.value ||= this.item.system.attackType ?? "";
+    this.attack.type.classification ||= this.item.system.attackClassification ?? "";
+    if ( this.damage.includeBase && this.item.system.damage?.base?.formula ) {
+      const basePart = this.item.system.damage.base.clone();
+      basePart.base = true;
+      this.damage.parts.unshift(basePart);
+    }
   }
 }

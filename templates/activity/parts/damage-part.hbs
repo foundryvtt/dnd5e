@@ -20,7 +20,7 @@
     <input type="hidden" name="{{ prefix }}bonus" value="{{ data.bonus }}">
 
     {{/unless}}
-    {{#unless singleton}}
+    {{#unless (or singleton data.base)}}
     <div class="list-controls">
         <button type="button" class="unbutton" data-action="deleteDamagePart"
                 data-tooltip="DND5E.DAMAGE.Part.Action.Delete"
@@ -31,7 +31,9 @@
     {{/unless}}
 </div>
 
-{{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions hint=false }}
+{{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions hint=false
+   disabled=data.base }}
+<!-- TODO: This disabled is only necessary because of https://github.com/foundryvtt/foundryvtt/issues/11564 -->
 
 {{#if canScale}}
 {{#with fields.scaling.fields as |fields|}}

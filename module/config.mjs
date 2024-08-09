@@ -114,6 +114,8 @@ preLocalize("abilities", { keys: ["label", "abbreviation"] });
  * @enum {string}
  */
 DND5E.defaultAbilities = {
+  meleeAttack: "str",
+  rangedAttack: "dex",
   initiative: "dex",
   hitPoints: "con",
   concentration: "con"
@@ -330,6 +332,15 @@ DND5E.weaponProficienciesMap = {
   simpleR: "sim",
   martialM: "mar",
   martialR: "mar"
+};
+
+/**
+ * A mapping between `DND5E.weaponTypes` and `DND5E.attackClassifications`. Unlisted types are assumed to be
+ * of the "weapon" classification.
+ * @enum {string}
+ */
+DND5E.weaponClassificationMap = {
+  natural: "unarmed"
 };
 
 /**
