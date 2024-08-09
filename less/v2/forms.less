@@ -270,6 +270,24 @@
     &:has(input:not([disabled])) { cursor: pointer; }
   }
 
+  /* Control buttons */
+  button.control-button {
+    padding: 0;
+    width: unset;
+    display: inline-block;
+    color: var(--color-text-dark-5);
+
+    &:focus-visible, &:hover {
+      box-shadow: none;
+      text-shadow: 0 0 5px var(--color-shadow-primary);
+    }
+  }
+
+  .form-fields > .control-button {
+    align-self: end;
+    padding: 0 4px;
+  }
+
   /* Pips */
   .pips {
     display: flex;
