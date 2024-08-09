@@ -72,10 +72,11 @@ export default class AttackActivityData extends BaseActivityData {
     if ( this.item.system.availableAbilities ) return this.item.system.availableAbilities;
 
     // Spell attack not associated with a single class, use highest spellcasting ability on actor
-    if ( this.attack.type.classification === "spell" ) return new Set([
-      this.parent?.actor?.system.attributes?.spellcasting,
-      ...Object.values(this.parent?.actor?.spellcastingClasses ?? {}).map(c => c.spellcasting.ability)
-    ].filter(a => a));
+    if ( this.attack.type.classification === "spell" ) return new Set(
+      this.actor?.system.attributes?.spellcasting
+        ? [this.actor.system.attributes.spellcasting]
+        : Object.values(this.actor?.spellcastingClasses ?? {}).map(c => c.spellcasting.ability)
+    );
 
     // Weapon & unarmed attacks uses melee or ranged ability depending on type, or both if actor is an NPC
     const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;

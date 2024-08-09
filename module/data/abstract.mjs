@@ -427,10 +427,10 @@ export class ItemDataModel extends SystemDataModel {
 
   /**
    * Set of abilities that can automatically be associated with this item.
-   * @type {Set<string>}
+   * @type {Set<string>|null}
    */
   get availableAbilities() {
-    return new Set();
+    return null;
   }
 
   /* -------------------------------------------- */

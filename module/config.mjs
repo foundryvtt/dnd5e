@@ -339,9 +339,7 @@ DND5E.weaponProficienciesMap = {
  * of the "weapon" classification.
  * @enum {string}
  */
-DND5E.weaponClassificationMap = {
-  natural: "unarmed"
-};
+DND5E.weaponClassificationMap = {};
 
 /**
  * A mapping between `DND5E.weaponTypes` and `DND5E.attackTypes`.
