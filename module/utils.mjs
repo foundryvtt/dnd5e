@@ -382,6 +382,7 @@ export async function preloadHandlebarsTemplates() {
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
     "systems/dnd5e/templates/items/parts/item-activation.hbs",
+    "systems/dnd5e/templates/items/parts/item-activities.hbs",
     "systems/dnd5e/templates/items/parts/item-advancement.hbs",
     "systems/dnd5e/templates/items/parts/item-advancement2.hbs",
     "systems/dnd5e/templates/items/parts/item-description.hbs",

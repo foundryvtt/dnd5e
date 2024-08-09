@@ -232,7 +232,7 @@
       scrollbar-gutter: stable;
 
       &:not(.active) { display: none; }
-      &.effects { padding: 12px 2px 58px 6px; }
+      &.effects, &.activities { padding: 12px 2px 58px 6px; }
 
       > .pills .pill {
         font-size: var(--font-size-10);
@@ -471,6 +471,44 @@
         box-shadow: none;
       }
     }
+
+    /* Activities */
+    .activities .activity {
+      padding: 6px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+
+      > .icon {
+        --icon-size: 24px;
+        --icon-fill: var(--color-text-dark-primary);
+        flex: none;
+        width: 24px;
+        height: 24px;
+      }
+
+      > .name {
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+        flex: 1;
+        font-size: var(--font-size-14);
+        cursor: pointer;
+        text-align: center;
+
+        &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }
+      }
+
+      > .controls {
+        flex: 0 0 50px;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 2px;
+        padding-right: 4px;
+      }
+    }
+
   }
 
   /* ---------------------------------- */

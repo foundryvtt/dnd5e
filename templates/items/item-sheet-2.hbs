@@ -130,6 +130,9 @@
         {{!-- Description Tab --}}
         {{> "dnd5e.item-description2" }}
 
+        {{!-- Activities --}}
+        {{> "dnd5e.item-activities" }}
+
         {{!-- Advancement Tab --}}
         {{> "dnd5e.item-advancement2" }}
 
@@ -140,10 +143,9 @@
 
     </section>
 
-    {{!-- Effect Creation --}}
-    <button type="button" class="create-child gold-button"
-            aria-label="{{ localize "SIDEBAR.Create" type=(localize "DOCUMENT.ActiveEffect") }}">
-        <i class="fas fa-plus"></i>
+    {{!-- Child Creation --}}
+    <button type="button" class="create-child gold-button" aria-label="{{ localize "CONTROLS.CommonCreate" }}">
+        <i class="fas fa-plus" inert></i>
     </button>
 
 </form>

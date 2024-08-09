@@ -238,6 +238,12 @@ export default function ItemSheetV2Mixin(Base) {
       if ( activeTab === "advancement" ) {
         return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
       }
+
+      if ( activeTab === "activities" ) {
+        return dnd5e.documents.activity.UtilityActivity.createDialog({}, {
+          parent: this.item, types: Object.keys(CONFIG.DND5E.activityTypes)
+        });
+      }
     }
 
     /* -------------------------------------------- */

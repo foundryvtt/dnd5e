@@ -92,6 +92,55 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
         }));
       });
     }
+
+    if ( this.isEditable ) {
+      html.find(".activities .activity .name").on("click", this._onEditActivity.bind(this));
+      html.find("button.control-button").on("click", this._onSheetAction.bind(this));
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Delete an activity.
+   * @param {HTMLElement} target  The deletion even target.
+   * @returns {Promise|void}
+   * @protected
+   */
+  _onDeleteActivity(target) {
+    const { id } = target.closest("[data-id]").dataset;
+    const activity = this.item.system.activities.get(id);
+    return activity?.deleteDialog();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Edit an activity.
+   * @param {PointerEvent} event  The triggering event.
+   * @returns {Promise|void}
+   * @protected
+   */
+  _onEditActivity(event) {
+    const { id } = event.currentTarget.closest("[data-id]").dataset;
+    const activity = this.item.system.activities.get(id);
+    return activity?.sheet?.render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle performing some sheet action.
+   * @param {PointerEvent} event  The originating event.
+   * @returns {Promise|void}
+   * @protected
+   */
+  _onSheetAction(event) {
+    const target = event.currentTarget;
+    const { action } = target.dataset;
+    switch ( action ) {
+      case "deleteActivity": return this._onDeleteActivity(target);
+    }
   }
 
   /* -------------------------------------------- */
