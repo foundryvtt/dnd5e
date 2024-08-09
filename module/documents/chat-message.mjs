@@ -742,16 +742,18 @@ export default class ChatMessage5e extends ChatMessage {
 
   static activateListeners() {
     document.addEventListener("keydown", event => {
+      if (event.key !== "Shift") return;
       let deleteButtons = document.querySelectorAll(".chat-message .message-delete");
       if (!deleteButtons.length) return;
-      if (event.key === "Shift" && deleteButtons[0].style.display === "none") {
+      if (deleteButtons[0].style.display === "none") {
         deleteButtons.forEach(btn => btn.style.display = "");
       }
     });
     document.addEventListener("keyup", event => {
+      if (event.key !== "Shift") return;
       let deleteButtons = document.querySelectorAll(".chat-message .message-delete");
       if (!deleteButtons.length) return;
-      if (event.key === "Shift" && deleteButtons[0].style.display === "") {
+      if (deleteButtons[0].style.display === "") {
         deleteButtons.forEach(btn => btn.style.display = "none");
       }
     });
