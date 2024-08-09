@@ -33,6 +33,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
+    const { activities } = this.item.system;
 
     // Effects
     for ( const category of Object.values(context.effects) ) {
@@ -50,6 +51,12 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
         return arr;
       }, []);
     }
+
+    // Activities
+    context.activities = (activities ?? []).map(({ _id: id, name, img }) => ({
+      id, name,
+      img: { src: img, svg: img?.endsWith(".svg") }
+    }));
 
     return context;
   }
@@ -93,8 +100,9 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       });
     }
 
+    html.find(".activities .activity .name").on("click", this._onEditActivity.bind(this));
+
     if ( this.isEditable ) {
-      html.find(".activities .activity .name").on("click", this._onEditActivity.bind(this));
       html.find("button.control-button").on("click", this._onSheetAction.bind(this));
     }
   }
