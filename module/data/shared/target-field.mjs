@@ -54,7 +54,7 @@ export default class TargetField extends SchemaField {
    * @param {object} [labels]  Object in which to insert generated labels.
    */
   static prepareData(rollData, labels) {
-    this.target.affects.scalar = !["", "self", "any"].includes(this.type);
+    this.target.affects.scalar = !["", "self", "any"].includes(this.target.affects.type);
     if ( this.target.affects.scalar ) {
       prepareFormulaValue(this, "target.affects.count", "DND5E.TARGET.FIELDS.target.affects.count.label", rollData);
     } else this.target.affects.count = null;

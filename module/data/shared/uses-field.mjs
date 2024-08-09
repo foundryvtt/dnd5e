@@ -50,6 +50,7 @@ export default class UsesField extends SchemaField {
     prepareFormulaValue(this, "uses.max", "DND5E.USES.FIELDS.uses.max.label", rollData);
     this.uses.value = Math.clamp(this.uses.max - this.uses.spent, 0, this.uses.max);
 
+    const periods = [];
     for ( const recovery of this.uses.recovery ) {
       if ( recovery.period === "recharge" ) {
         recovery.type = "recoverAll";
@@ -63,7 +64,11 @@ export default class UsesField extends SchemaField {
         };
         if ( labels ) labels.recharge ??= `${game.i18n.localize("DND5E.Recharge")} [${
           recovery.formula}${parseInt(recovery.formula) < 6 ? "+" : ""}]`;
+      } else if ( recovery.period in CONFIG.DND5E.limitedUsePeriods ) {
+        const config = CONFIG.DND5E.limitedUsePeriods[recovery.period];
+        periods.push(config.abbreviation ?? config.label);
       }
     }
+    if ( labels ) labels.recovery = game.i18n.getListFormatter({ style: "narrow" }).format(periods);
   }
 }

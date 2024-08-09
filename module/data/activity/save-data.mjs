@@ -1,3 +1,4 @@
+import { simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
@@ -13,12 +14,12 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
 /**
  * Data model for an save activity.
  *
- * @property {string} ability                       Make the saving throw with this ability.
  * @property {object} damage
  * @property {string} damage.onSave                 How much damage is done on a successful save?
  * @property {DamageData[]} damage.parts            Parts of damage to inflict.
  * @property {SaveEffectApplicationData[]} effects  Linked effects that can be applied.
  * @property {object} save
+ * @property {string} save.ability                  Make the saving throw with this ability.
  * @property {object} save.dc
  * @property {string} save.dc.calculation           Method or ability used to calculate the difficulty class.
  * @property {string} save.dc.formula               Custom DC formula or flat value.
@@ -28,7 +29,6 @@ export default class SaveActivityData extends BaseActivityData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      ability: new StringField({ initial: () => Object.keys(CONFIG.DND5E.abilities)[0] }),
       damage: new SchemaField({
         onSave: new StringField(),
         parts: new ArrayField(new DamageField())
@@ -37,12 +37,28 @@ export default class SaveActivityData extends BaseActivityData {
         onSave: new BooleanField()
       })),
       save: new SchemaField({
+        ability: new StringField({ initial: () => Object.keys(CONFIG.DND5E.abilities)[0] }),
         dc: new SchemaField({
           calculation: new StringField(),
           formula: new FormulaField({ deterministic: true })
         })
       })
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get ability() {
+    if ( this.save.dc.calculation in CONFIG.DND5E.abilities ) return this.save.dc.calculation;
+    if ( this.save.dc.calculation === "spellcasting" ) {
+      let ability = this.isSpell ? this.item.system.availableAbilities?.first() : null;
+      ability ??= this.actor?.system.attributes?.spellcasting;
+      return ability ?? null;
+    }
+    return this.save.ability;
   }
 
   /* -------------------------------------------- */
@@ -56,12 +72,12 @@ export default class SaveActivityData extends BaseActivityData {
     else if ( calculation === "spell" ) calculation = "spellcasting";
 
     return foundry.utils.mergeObject(activityData, {
-      ability: source.system.save?.ability ?? Object.keys(CONFIG.DND5E.abilities)[0],
       damage: {
         onSave: (source.type === "spell") && (source.system.level === 0) ? "none" : "half",
         parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
       },
       save: {
+        ability: source.system.save?.ability ?? Object.keys(CONFIG.DND5E.abilities)[0],
         dc: {
           calculation,
           formula: String(source.system.save?.dc ?? "")
@@ -81,5 +97,35 @@ export default class SaveActivityData extends BaseActivityData {
     super.prepareData();
     if ( !this.damage.onSave ) this.damage.onSave = this.isSpell && (this.item.system.level === 0) ? "none" : "half";
     if ( !this.save.dc.calculation ) this.save.dc.calculation = this.isSpell ? "spellcasting" : "custom";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData(rollData) {
+    rollData ??= this.getRollData({ deterministic: true });
+    super.prepareFinalData(rollData);
+    this.prepareDamageLabel(this.damage.parts, rollData);
+
+    let ability;
+    switch ( this.save.dc.calculation ) {
+      case "custom":
+        this.save.dc.value = simplifyBonus(this.save.dc.formula, rollData);
+        break;
+      case "spellcasting":
+        ability = this.isSpell ? this.item.system.availableAbilities?.first() : null;
+        ability ??= this.actor?.system.attributes?.spellcasting;
+        break;
+      default:
+        ability = this.save.dc.calculation;
+        break;
+    }
+    if ( ability ) this.save.dc.value = this.actor?.system.abilities?.[ability]?.dc
+      ?? 8 + (this.actor?.system.attributes?.prof ?? 0);
+
+    if ( this.save.dc.value ) this.labels.save = game.i18n.format("DND5E.SaveDC", {
+      dc: this.save.dc.value,
+      ability: CONFIG.DND5E.abilities[ability]?.label ?? ""
+    });
   }
 }

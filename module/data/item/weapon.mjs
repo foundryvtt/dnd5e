@@ -161,6 +161,13 @@ export default class WeaponData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
+
+    const labels = this.parent.labels ??= {};
+    labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
+    labels.damage = this.damage.base.formula;
+    labels.damageTypes = game.i18n.getListFormatter({ style: "narrow" }).format(
+      Array.from(this.damage.base.types).map(t => CONFIG.DND5E.damageTypes[t]?.label).filter(t => t)
+    );
   }
 
   /* -------------------------------------------- */

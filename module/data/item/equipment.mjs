@@ -174,6 +174,9 @@ export default class EquipmentData extends ItemDataModel.mixin(
     this.armor.value = (this._source.armor.value ?? 0) + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
+
+    const labels = this.parent.labels ??= {};
+    labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
   }
 
   /* -------------------------------------------- */

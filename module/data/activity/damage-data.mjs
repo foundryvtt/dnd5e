@@ -44,4 +44,15 @@ export default class DamageActivityData extends BaseActivityData {
       }
     });
   }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData(rollData) {
+    rollData ??= this.getRollData({ deterministic: true });
+    super.prepareFinalData(rollData);
+    this.prepareDamageLabel(this.damage.parts, rollData);
+  }
 }

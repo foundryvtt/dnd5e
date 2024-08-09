@@ -167,7 +167,24 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     ActivitiesTemplate._applyActivityShims.call(this);
     this._applySpellShims();
     super.prepareDerivedData();
+    this.preparation.mode ||= "prepared";
     this.properties.add("mgc");
+
+    const labels = this.parent.labels ??= {};
+    labels.level = CONFIG.DND5E.spellLevels[this.level];
+    labels.school = CONFIG.DND5E.spellSchools[this.school]?.label;
+    labels.materials = this.materials.value;
+
+    labels.components = this.properties.reduce((obj, c) => {
+      const config = this.validProperties.has(c) ? CONFIG.DND5E.itemProperties[c] : null;
+      if ( !config ) return obj;
+      const { abbreviation: abbr, label, icon } = config;
+      obj.all.push({ abbr, icon, tag: config.isTag });
+      if ( config.isTag ) obj.tags.push(label);
+      else obj.vsm.push(abbr);
+      return obj;
+    }, { all: [], vsm: [], tags: [] });
+    labels.components.vsm = game.i18n.getListFormatter({ style: "narrow" }).format(labels.components.vsm);
   }
 
   /* -------------------------------------------- */
@@ -175,7 +192,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /** @inheritDoc */
   prepareFinalData() {
     const rollData = this.parent.getRollData({ deterministic: true });
-    const labels = this.parent.labels ?? {};
+    const labels = this.parent.labels ??= {};
     this.prepareFinalActivityData(rollData);
     ActivationField.prepareData.call(this, rollData, labels);
     DurationField.prepareData.call(this, rollData, labels);

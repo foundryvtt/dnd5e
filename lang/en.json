@@ -430,12 +430,12 @@
     "other": "Attacks"
   },
   "FIELDS": {
-    "ability": {
-      "label": "Attack Ability",
-      "hint": "Ability used for make the attack and determine damage. Available using @mod in formulas."
-    },
     "attack": {
       "label": "Attack Details",
+      "ability": {
+        "label": "Attack Ability",
+        "hint": "Ability used for make the attack and determine damage. Available using @mod in formulas."
+      },
       "bonus": {
         "label": "To Hit Bonus",
         "hint": "Bonus added to the to hit roll for the attack."
@@ -1883,10 +1883,6 @@
     "other": "Saves"
   },
   "FIELDS": {
-    "ability": {
-      "label": "Challenge Ability",
-      "hint": "Ability that must be rolled to attempt to save."
-    },
     "damage": {
       "label": "Save Damage",
       "onSave": {
@@ -1903,6 +1899,10 @@
     },
     "save": {
       "label": "Save Details",
+      "ability": {
+        "label": "Challenge Ability",
+        "hint": "Ability that must be rolled to attempt to save."
+      },
       "dc": {
         "label": "Difficulty Class",
         "calculation": {

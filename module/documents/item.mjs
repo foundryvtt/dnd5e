@@ -145,6 +145,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item implement an ability check as part of its usage?
    * @type {boolean}
    * @see {@link ActionTemplate#hasAbilityCheck}
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   get hasAbilityCheck() {
     return this.system.hasAbilityCheck ?? false;
@@ -166,6 +167,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item have an area of effect target?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasAreaTarget}
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   get hasAreaTarget() {
     return this.system.hasAreaTarget ?? false;
@@ -188,6 +190,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item implement a damage roll as part of its usage?
    * @type {boolean}
    * @see {@link ActionTemplate#hasDamage}
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   get hasDamage() {
     return this.system.hasDamage ?? false;
@@ -199,6 +202,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item target one or more distinct targets?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasIndividualTarget}
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   get hasIndividualTarget() {
     return this.system.hasIndividualTarget ?? false;
@@ -222,6 +226,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does this Item draw from a resource?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasResource}
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   get hasResource() {
     return this.system.hasResource ?? false;
@@ -233,6 +238,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does this Item draw from ammunition?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasAmmo}
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   get hasAmmo() {
     return this.system.hasAmmo ?? false;
@@ -255,6 +261,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item have a target?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasTarget}
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   get hasTarget() {
     return this.system.hasTarget ?? false;
@@ -346,6 +353,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @see {@link ActionTemplate#isOnCooldown}
    */
   get isOnCooldown() {
+    // TODO: Re-implement
     const { recharge } = this.system;
     return (recharge?.value > 0) && (recharge?.charged === false);
   }
@@ -357,8 +365,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {boolean}
    */
   get requiresConcentration() {
+    // TODO: Add to activity
     const isValid = this.system.validProperties.has("concentration") && this.system.properties.has("concentration");
-    return isValid && this.isActive && this.system.hasScalarDuration;
+    return isValid && this.isActive;
   }
 
   /* -------------------------------------------- */
@@ -409,6 +418,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {string|null}
    */
   get usageScaling() {
+    // TODO: Re-implement on activity
     const { level, preparation, consume } = this.system;
     const isLeveled = (this.type === "spell") && (level > 0);
     if ( isLeveled && CONFIG.DND5E.spellPreparationModes[preparation.mode]?.upcast ) return "slot";
@@ -530,8 +540,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /** @inheritDoc */
   prepareDerivedData() {
+    this.labels ??= {};
     super.prepareDerivedData();
-    this.labels = {};
 
     // Clear out linked item cache
     this._classLink = undefined;
@@ -552,117 +562,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }, []);
     }
 
-    // Specialized preparation per Item type
-    switch ( this.type ) {
-      case "equipment":
-        this._prepareEquipment(); break;
-      case "feat":
-        this._prepareFeat(); break;
-      case "spell":
-        this._prepareSpell(); break;
-      case "weapon":
-        this._prepareWeapon(); break;
-    }
-
-    // Activated Items
-    this._prepareAction();
-    this._prepareRecovery();
-
     // Un-owned items can have their final preparation done here, otherwise this needs to happen in the owning Actor
     if ( !this.isOwned ) this.prepareFinalAttributes();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare derived data for an equipment-type item and define labels.
-   * @protected
-   */
-  _prepareEquipment() {
-    this.labels.armor = this.system.armor.value ? `${this.system.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare derived data for a feat-type item and define labels.
-   * @protected
-   */
-  _prepareFeat() {
-    const act = this.system.activation;
-    if ( act?.type === "legendary" ) this.labels.featType = game.i18n.localize("DND5E.LegendaryActionLabel");
-    else if ( act?.type === "lair" ) this.labels.featType = game.i18n.localize("DND5E.LairActionLabel");
-    else if ( act?.type ) {
-      const isAttack = /\w\wak$/.test(this.system.actionType);
-      this.labels.featType = game.i18n.localize(isAttack ? "DND5E.Attack" : "DND5E.Action");
-    }
-    else this.labels.featType = game.i18n.localize("DND5E.Passive");
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare derived data for a spell-type item and define labels.
-   * @protected
-   */
-  _prepareSpell() {
-    const attributes = this.system?.validProperties.reduce((obj, k) => {
-      obj[k] = CONFIG.DND5E.itemProperties[k];
-      return obj;
-    }, {});
-    this.system.preparation.mode ||= "prepared";
-    this.labels.level = CONFIG.DND5E.spellLevels[this.system.level];
-    this.labels.school = CONFIG.DND5E.spellSchools[this.system.school]?.label;
-    this.labels.components = this.system.properties.reduce((obj, c) => {
-      const config = attributes[c];
-      if ( !config ) return obj;
-      const { abbreviation: abbr, label, icon } = config;
-      obj.all.push({ abbr, label, icon, tag: config.isTag });
-      if ( config.isTag ) obj.tags.push(label);
-      else obj.vsm.push(abbr);
-      return obj;
-    }, {all: [], vsm: [], tags: []});
-    this.labels.components.vsm = game.i18n.getListFormatter({ style: "narrow", type: "conjunction" })
-      .format(this.labels.components.vsm);
-    this.labels.materials = this.system?.materials?.value ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare derived data for a weapon-type item and define labels.
-   * @protected
-   */
-  _prepareWeapon() {
-    this.labels.armor = this.system.armor.value ? `${this.system.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare derived data and labels for items which have an action which deals damage.
-   * @protected
-   */
-  _prepareAction() {
-    if ( !("actionType" in this.system) ) return;
-    let dmg = this.system.damage || {};
-    if ( dmg.parts ) {
-      const types = CONFIG.DND5E.damageTypes;
-      this.labels.damage = dmg.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
-      this.labels.damageTypes = dmg.parts.map(d => types[d[1]]?.label).join(", ");
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare recovery labels.
-   * @protected
-   */
-  _prepareRecovery() {
-    const { per } = this.system.uses ?? {};
-    const config = CONFIG.DND5E.limitedUsePeriods[per] ?? {};
-    this.labels.recovery = config.abbreviation ?? config.label;
   }
 
   /* -------------------------------------------- */
@@ -721,85 +622,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Otherwise, it will be called at the end of `Item5e#prepareDerivedData`.
    */
   prepareFinalAttributes() {
-    this.system.prepareFinalData?.();
-
-    // Proficiency
     this._prepareProficiency();
-
-    // Class data
-    if ( this.type === "class" ) this.system.isOriginalClass = this.isOriginalClass;
-
-    // Action usage
-    if ( "actionType" in this.system ) {
-      this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
-        ability: CONFIG.DND5E.abilities[this.system.ability]?.label ?? ""
-      });
-
-      // Saving throws
-      this.getSaveDC();
-
-      // To Hit
-      this.getAttackToHit();
-
-      // Damage Label
-      this.getDerivedDamageLabel();
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Populate a label with the compiled and simplified damage formula based on owned item
-   * actor data. This is only used for display purposes and is not related to `Item5e#rollDamage`.
-   * @returns {{damageType: string, formula: string, label: string}[]}
-   */
-  getDerivedDamageLabel() {
-    if ( !this.hasDamage ) return [];
-    const rollData = this.getRollData();
-    const damageLabels = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
-    const derivedDamage = this.system.damage?.parts?.map((damagePart, index) => {
-      let formula;
-      try {
-        formula = damagePart[0];
-        if ( (index === 0) && this.system.magicAvailable ) formula = `${formula} + ${this.system.magicalBonus ?? 0}`;
-        const roll = new Roll(formula, rollData);
-        formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
-      }
-      catch(err) {
-        const parentInfo = this.parent ? ` on ${this.parent.name} (${this.parent.id})` : "";
-        console.warn(`Unable to simplify formula for ${this.name} (${this.id})${parentInfo}`, err);
-      }
-      const damageType = damagePart[1];
-      return { formula, damageType, label: `${formula} ${damageLabels[damageType]?.label ?? ""}` };
-    });
-    return this.labels.derivedDamage = derivedDamage;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Update the derived spell DC for an item that requires a saving throw.
-   * @returns {number|null}
-   */
-  getSaveDC() {
-    if ( !this.hasSave ) return null;
-    const save = this.system.save;
-
-    // Actor spell-DC based scaling
-    if ( save.scaling === "spell" ) {
-      save.dc = this.isOwned ? this.actor.system.abilities?.[this.system.abilityMod]?.dc
-        ?? this.actor.system.attributes.spelldc : null;
-    }
-
-    // Ability-score based scaling
-    else if ( save.scaling !== "flat" ) {
-      save.dc = this.isOwned ? this.actor.system.abilities[save.scaling].dc : null;
-    }
-
-    // Update labels
-    const abl = CONFIG.DND5E.abilities[save.ability]?.label ?? "";
-    this.labels.save = game.i18n.format("DND5E.SaveDC", {dc: save.dc || "", ability: abl});
-    return save.dc;
+    this.system.prepareFinalData?.();
   }
 
   /* -------------------------------------------- */
@@ -813,6 +637,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {{rollData: object, parts: string[]}|null}  Data used in the item's Attack roll.
    */
   getAttackToHit() {
+    foundry.utils.logCompatibilityWarning(
+      "The `getAttackToHit` method on `Item5e` has moved to `getAttackData` on `AttackActivity`.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+    );
+    // TODO: Replace this implementation with a call to the method on the activity once `rollAttack` has been moved
+
     if ( !this.hasAttack ) return null;
     const flat = this.system.attack.flat;
     const rollData = this.getRollData();

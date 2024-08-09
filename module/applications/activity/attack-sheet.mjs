@@ -46,7 +46,7 @@ export default class AttackSheet extends ActivitySheet {
     context.abilityOptions = [
       {
         value: "", label: game.i18n.format("DND5E.DefaultSpecific", {
-          default: this.activity.type.classification === "spell"
+          default: this.activity.attack.type.classification === "spell"
             ? game.i18n.localize("DND5E.Spellcasting").toLowerCase()
             : availableAbilities.size
               ? game.i18n.getListFormatter({ style: "short", type: "disjunction" }).format(
@@ -63,7 +63,7 @@ export default class AttackSheet extends ActivitySheet {
       }))
     ];
 
-    context.hasBaseDamage = this.item.system.damage?.base;
+    context.hasBaseDamage = this.activity._safePropertyExists(this.item.system, "damage.base");
 
     return context;
   }
