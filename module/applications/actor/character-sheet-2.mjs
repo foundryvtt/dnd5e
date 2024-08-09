@@ -1,6 +1,6 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { simplifyBonus } from "../../utils.mjs";
+import { formatNumber, simplifyBonus } from "../../utils.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
@@ -213,6 +213,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     // Favorites
     context.favorites = await this._prepareFavorites();
     context.favorites.sort((a, b) => a.sort - b.sort);
+
+    // Epic Boons
+    if ( context.system.details.xp.boonsEarned !== undefined ) {
+      const pluralRules = new Intl.PluralRules(game.i18n.lang);
+      context.epicBoonsEarned = game.i18n.format(
+        `DND5E.ExperiencePointsBoons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
+        { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
+      );
+    }
 
     return context;
   }

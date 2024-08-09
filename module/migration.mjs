@@ -7,6 +7,7 @@ export const migrateWorld = async function() {
   ui.notifications.info(game.i18n.format("MIGRATION.5eBegin", {version}), {permanent: true});
 
   const migrationData = await getMigrationData();
+  await migrateSettings();
 
   // Migrate World Actors
   const actors = game.actors.map(a => [a, true])
@@ -352,6 +353,21 @@ export const migrateArmorClass = async function(pack) {
   await pack.configure({locked: wasLocked});
   console.log(`Migrated the AC of all Actors from Compendium ${pack.collection}`);
 };
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate system settings to new data types.
+ */
+export async function migrateSettings() {
+  // Migrate Disable Experience Tracking to Leveling Mode
+  const disableExperienceTracking = game.settings.storage.get("world")
+    ?.find(s => s.key === "dnd5e.disableExperienceTracking")?.value;
+  const levelingMode = game.settings.storage.get("world")?.find(s => s.key === "dnd5e.levelingMode")?.value;
+  if ( (disableExperienceTracking !== undefined) && (levelingMode === undefined) ) {
+    await game.settings.set("dnd5e", "levelingMode", "milestone");
+  }
+}
 
 /* -------------------------------------------- */
 /*  Document Type Migration Helpers             */
