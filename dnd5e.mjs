@@ -23,6 +23,7 @@ import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
+import registerModuleData from "./module/module-registration.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 
 /* -------------------------------------------- */
@@ -80,8 +81,9 @@ Hooks.once("init", function() {
   // Register System Settings
   registerSystemSettings();
 
-  // Configure module art
+  // Configure module art & register module data
   game.dnd5e.moduleArt = new ModuleArt();
+  registerModuleData();
 
   // Configure tooltips
   game.dnd5e.tooltips = new Tooltips5e();
