@@ -66,14 +66,6 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false, det
   // Perform arithmetic simplification on the existing roll terms.
   roll.terms = _simplifyOperatorTerms(roll.terms);
 
-  // If the formula contains multiplication or division we cannot easily simplify
-  if ( /[*/]/.test(roll.formula) ) {
-    if ( roll.isDeterministic && !/d\(/.test(roll.formula) && (!/\[/.test(roll.formula) || !preserveFlavor) ) {
-      return String(roll.evaluateSync().total);
-    }
-    else return roll.constructor.getFormula(roll.terms);
-  }
-
   // Flatten the roll formula and eliminate string terms.
   roll.terms = _expandParentheticalTerms(roll.terms);
   roll.terms = Roll.simplifyTerms(roll.terms);
