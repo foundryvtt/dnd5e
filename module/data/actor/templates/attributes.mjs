@@ -113,7 +113,7 @@ export default class AttributesFields {
     const ac = this.attributes.ac;
     ac.armor = 10;
     ac.shield = ac.cover = 0;
-    ac.bonus = "";
+    ac.min = ac.bonus = "";
   }
 
   /* -------------------------------------------- */
