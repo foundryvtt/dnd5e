@@ -32,12 +32,23 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {object} range
  * @property {number} range.value           Short range of the weapon.
  * @property {number} range.long            Long range of the weapon.
- * @property {string} range.units           Units used to measure the weapon's range.
+ * @property {number} range.reach           Reach of the weapon.
+ * @property {string} range.units           Units used to measure the weapon's range and reach.
  */
 export default class WeaponData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
   PhysicalItemTemplate, EquippableItemTemplate, MountableTemplate
 ) {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.RANGE"];
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
@@ -52,9 +63,10 @@ export default class WeaponData extends ItemDataModel.mixin(
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
       }),
       range: new SchemaField({
-        value: new NumberField({ min: 0, label: "DND5E.RangeNormal" }),
-        long: new NumberField({ min: 0, label: "DND5E.RangeLong" }),
-        units: new StringField({ label: "DND5E.RangeUnits" })
+        value: new NumberField({ min: 0 }),
+        long: new NumberField({ min: 0 }),
+        reach: new NumberField({ min: 0 }),
+        units: new StringField()
       })
     });
   }

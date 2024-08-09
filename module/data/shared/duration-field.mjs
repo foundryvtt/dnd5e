@@ -32,11 +32,7 @@ export default class DurationField extends SchemaField {
    * @param {object} [labels]  Object in which to insert generated labels.
    */
   static prepareData(rollData, labels) {
-    Object.defineProperty(this.duration, "scalar", {
-      get() { return this.units in CONFIG.DND5E.scalarTimePeriods; },
-      configurable: true
-    });
-
+    this.duration.scalar = this.units in CONFIG.DND5E.scalarTimePeriods;
     if ( this.duration.scalar ) {
       prepareFormulaValue(this, "duration.value", "DND5E.DURATION.FIELDS.duration.value.label", rollData);
     } else this.duration.value = null;

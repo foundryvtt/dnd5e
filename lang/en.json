@@ -1776,6 +1776,13 @@
   "FIELDS": {
     "range": {
       "label": "Range",
+      "reach": {
+        "label": "Reach"
+      },
+      "long": {
+        "label": "Long Range",
+        "hint": "Far attack range of the weapon, if present on the weapon."
+      },
       "special": {
         "label": "Special Range",
         "hint": "Description of any special range details."
