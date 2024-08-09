@@ -380,11 +380,11 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
 
     // Item Sheet Partials
-    "systems/dnd5e/templates/items/details/details-activation.hbs",
     "systems/dnd5e/templates/items/details/details-background.hbs",
     "systems/dnd5e/templates/items/details/details-class.hbs",
     "systems/dnd5e/templates/items/details/details-consumable.hbs",
     "systems/dnd5e/templates/items/details/details-container.hbs",
+    "systems/dnd5e/templates/items/details/details-damage.hbs",
     "systems/dnd5e/templates/items/details/details-equipment.hbs",
     "systems/dnd5e/templates/items/details/details-feat.hbs",
     "systems/dnd5e/templates/items/details/details-loot.hbs",
@@ -395,6 +395,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-starting-equipment.hbs",
     "systems/dnd5e/templates/items/details/details-subclass.hbs",
     "systems/dnd5e/templates/items/details/details-tool.hbs",
+    "systems/dnd5e/templates/items/details/details-uses.hbs",
     "systems/dnd5e/templates/items/details/details-weapon.hbs",
     "systems/dnd5e/templates/items/parts/item-action.hbs",
     "systems/dnd5e/templates/items/parts/item-activation.hbs",

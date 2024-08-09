@@ -30,7 +30,11 @@ export default class MountableTemplate extends SystemDataModel {
         max: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.HitPointsMax" }),
         dt: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.DamageThreshold" }),
         conditions: new StringField({required: true, label: "DND5E.HealthConditions"})
-      }, {label: "DND5E.HitPoints"})
+      }, {label: "DND5E.HitPoints"}),
+      speed: new SchemaField({
+        value: new NumberField({required: true, min: 0, label: "DND5E.Speed"}),
+        conditions: new StringField({required: true, label: "DND5E.SpeedConditions"})
+      }, {label: "DND5E.Speed"})
     };
   }
 }

@@ -36,7 +36,8 @@ export default class ConsumableData extends ItemDataModel.mixin(
       magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
       properties: new SetField(new StringField(), { label: "DND5E.ItemAmmoProperties" }),
       uses: new UsesField({
-        autoDestroy: new BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
+        autoDestroy: new BooleanField({required: true, label: "DND5E.ItemDestroyEmpty",
+          hint: "DND5E.ItemDestroyEmptyTooltip"})
       })
     });
   }
@@ -135,7 +136,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
-    context.parts = ["dnd5e.details-consumable", "dnd5e.details-activation"];
+    context.parts = ["dnd5e.details-consumable", "dnd5e.details-uses"];
   }
 
   /* -------------------------------------------- */

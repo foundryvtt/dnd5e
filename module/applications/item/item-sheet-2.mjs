@@ -33,6 +33,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
+    const { properties, target, type } = this.item.system;
 
     // Effects
     for ( const category of Object.values(context.effects) ) {
@@ -71,6 +72,38 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
         return { value, label, group: "DND5E.RangeDistance" };
       })
     ];
+    context.hasRange = (this.item.type === "weapon")
+      && (properties.has("thr") || ["simpleR", "martialR"].includes(type?.value));
+
+    // Duration
+    context.durationUnits = [
+      ...Object.entries(CONFIG.DND5E.specialTimePeriods).map(([value, label]) => ({ value, label })),
+      ...Object.entries(CONFIG.DND5E.scalarTimePeriods).map(([value, label]) => {
+        return { value, label, group: "DND5E.DurationTime" };
+      }),
+      ...Object.entries(CONFIG.DND5E.permanentTimePeriods).map(([value, label]) => {
+        return { value, label, group: "DND5E.DurationPermanent" };
+      })
+    ];
+
+    // Templates
+    const { sizes } = CONFIG.DND5E.areaTargetTypes[target?.template?.type] ?? {};
+    if ( sizes ) {
+      context.dimensions = {
+        size: "DND5E.AreaOfEffect.Size.Label",
+        width: sizes.includes("width") && (sizes.includes("length") || sizes.includes("radius")),
+        height: sizes.includes("height")
+      };
+      if ( sizes.includes("radius") ) context.dimensions.size = "DND5E.AreaOfEffect.Size.Radius";
+      else if ( sizes.includes("length") ) context.dimensions.size = "DND5E.AreaOfEffect.Size.Length";
+      else if ( sizes.includes("width") ) context.dimensions.size = "DND5E.AreaOfEffect.Size.Width";
+      if ( sizes.includes("thickness") ) context.dimensions.width = "DND5E.AreaOfEffect.Size.Thickness";
+      else if ( context.dimensions.width ) context.dimensions.width = "DND5E.AreaOfEffect.Size.Width";
+      if ( context.dimensions.height ) context.dimensions.height = "DND5E.AreaOfEffect.Size.Height";
+    }
+
+    // Targets
+    context.scalarTarget = !["", "self", "any"].includes(target?.affects?.type);
 
     // Equipment
     context.equipmentTypes = [
@@ -97,6 +130,12 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       source: context.source.uses.recovery[index] ?? data,
       formulaOptions: data.period === "recharge" ? data.recharge?.options : null
     }));
+
+    // Damage
+    context.denominationOptions = [
+      { value: "", label: "" },
+      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
+    ];
 
     return context;
   }
@@ -141,6 +180,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     }
 
     if ( this.isEditable ) {
+      html.find(".activities .activity .name").on("click", this._onEditActivity.bind(this));
       html.find("button.control-button").on("click", this._onSheetAction.bind(this));
     }
   }
@@ -149,6 +189,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
 
   /**
    * Create a new recovery profile.
+   * @returns {Promise}
    * @protected
    */
   _onAddRecovery() {
@@ -158,8 +199,23 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /* -------------------------------------------- */
 
   /**
+   * Delete an activity.
+   * @param {HTMLElement} target  The deletion even target.
+   * @returns {Promise|void}
+   * @protected
+   */
+  _onDeleteActivity(target) {
+    const { id } = target.closest("[data-id]").dataset;
+    const activity = this.item.system.activities.get(id);
+    return activity?.deleteDialog();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Delete a recovery profile.
    * @param {HTMLElement} target  The deletion event target.
+   * @returns {Promise}
    * @protected
    */
   _onDeleteRecovery(target) {
@@ -171,8 +227,23 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /* -------------------------------------------- */
 
   /**
+   * Edit an activity.
+   * @param {PointerEvent} event  The triggering event.
+   * @returns {Promise|void}
+   * @protected
+   */
+  _onEditActivity(event) {
+    const { id } = event.currentTarget.closest("[data-id]").dataset;
+    const activity = this.item.system.activities.get(id);
+    return activity?.sheet?.render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle performing some sheet action.
    * @param {PointerEvent} event  The originating event.
+   * @returns {Promise|void}
    * @protected
    */
   _onSheetAction(event) {
@@ -180,6 +251,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     const { action } = target.dataset;
     switch ( action ) {
       case "addRecovery": return this._onAddRecovery();
+      case "deleteActivity": return this._onDeleteActivity(target);
       case "deleteRecovery": return this._onDeleteRecovery(target);
     }
   }

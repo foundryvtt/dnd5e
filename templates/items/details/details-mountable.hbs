@@ -39,11 +39,11 @@
             {{!-- Value --}}
             {{ formField fields.speed.fields.value value=source.speed.value placeholder="0" label="DND5E.Value"
                          localize=true classes="label-top" }}
-
-            {{!-- Conditions --}}
-            {{ formInput fields.speed.fields.conditions value=source.speed.conditions input=inputs.createTextInput
-                         placeholder=(localize "DND5E.SpeedConditions") localize=true classes="full-width" }}
         </div>
+
+        {{!-- Conditions --}}
+        {{ formInput fields.speed.fields.conditions value=source.speed.conditions input=inputs.createTextInput
+                     placeholder=(localize "DND5E.SpeedConditions") localize=true classes="full-width" }}
     </div>
     {{/if}}
 </fieldset>

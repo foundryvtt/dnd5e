@@ -211,6 +211,8 @@
     }
 
     label.label-icon {
+      position: relative;
+
       &::after {
         content: "";
         display: inline-block;
@@ -258,7 +260,7 @@
       font-size: var(--font-size-11);
       transition: all 250ms ease;
       line-height: normal;
-      padding: 6px;
+      padding: 0 6px;
       background: var(--input-background-color);
 
       &:focus-visible, &:hover {

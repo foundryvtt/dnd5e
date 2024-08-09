@@ -214,7 +214,7 @@ export default class WeaponData extends ItemDataModel.mixin(
         `;
       }, ""), classes: "damage" });
     }
-    context.parts = ["dnd5e.details-weapon", "dnd5e.details-activation"];
+    context.parts = ["dnd5e.details-weapon", "dnd5e.details-damage", "dnd5e.details-uses"];
   }
 
   /* -------------------------------------------- */

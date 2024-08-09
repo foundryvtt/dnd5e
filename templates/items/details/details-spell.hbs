@@ -61,4 +61,172 @@
         </div>
     </div>
 
+    {{!-- Source Class --}}
+    {{#if isEmbedded}}
+    {{ formField fields.sourceClass value=source.sourceClass localize=true choices=item.parent.spellcastingClasses
+                 labelAttr="name" blank="" }}
+    {{/if}}
+</fieldset>
+
+<fieldset>
+    <legend>{{ localize "DND5E.Casting" }}</legend>
+
+    {{!-- Activation --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.SpellCastTime" }}</label>
+        <div class="form-fields">
+
+            {{!-- Amount --}}
+            {{#if (and source.activation.type (not isCostlessAction))}}
+                {{ formField fields.activation.fields.value value=source.activation.value label="DND5E.Amount" placeholder="—"
+                             localize=true hint=false classes="label-top" }}
+            {{/if}}
+
+            {{!-- Type --}}
+            {{ formField fields.activation.fields.type value=source.activation.type label="DND5E.Cost" localize=true
+                         classes="label-top" hint=false choices=config.abilityActivationTypes blank="" }}
+        </div>
+
+        {{!-- Condition --}}
+        {{ formInput fields.activation.fields.condition value=source.activation.condition input=inputs.createTextInput
+                     placeholder=(localize "DND5E.ItemActivationCondition") classes="full-width" }}
+    </div>
+
+    {{!-- Range --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Range" }}</label>
+        <div class="form-fields">
+
+            {{!-- Value --}}
+            {{#if system.hasScalarRange}}
+            {{ formField fields.range.fields.value value=source.range.value label="DND5E.Value" localize=true
+                         hint=false classes="label-top" }}
+            {{/if}}
+
+            {{!-- Units --}}
+            {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true
+                         hint=false blank="DND5E.None" localize=true options=rangeTypes classes="label-top" }}
+        </div>
+
+        {{!-- Condition --}}
+        {{#if source.range.units}}
+        {{ formInput fields.range.fields.special value=source.range.special input=inputs.createTextInput
+                     placeholder=(localize "DND5E.RANGE.FIELDS.range.special.label") localize=true
+                     classes="full-width" }}
+        {{/if}}
+    </div>
+
+    {{!-- Duration --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Duration" }}</label>
+        <div class="form-fields">
+
+            {{!-- Amount --}}
+            {{#if system.hasScalarDuration}}
+            {{ formField fields.duration.fields.value value=source.duration.value label="DND5E.Amount" localize=true
+                         hint=false placeholder="—" classes="label-top" }}
+            {{/if}}
+
+            {{!-- Time --}}
+            {{ formField fields.duration.fields.units value=source.duration.units label="DND5E.DurationTime"
+                         blank="DND5E.None" localize=true hint=false options=durationUnits classes="label-top" }}
+        </div>
+
+        {{!-- Conditions --}}
+        {{#if (eq source.duration.units "spec")}}
+        {{ formInput fields.duration.fields.special value=source.duration.special input=inputs.createTextInput
+                     placeholder=(localize "DND5E.DURATION.FIELDS.duration.special.label") classes="full-width" }}
+        {{/if}}
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>{{ localize "DND5E.TargetTypeArea" }}</legend>
+
+    {{!-- Template Type --}}
+    {{ formField fields.target.fields.template.fields.type value=source.target.template.type label="DND5E.Shape"
+                 localize=true hint=false choices=config.areaTargetTypes }}
+
+    {{!-- Dimensions --}}
+    {{#if source.target.template.type}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Dimensions" }}</label>
+        <div class="form-fields">
+
+            {{!-- Size --}}
+            {{ formField fields.target.fields.template.fields.size value=source.target.template.size
+                         label=dimensions.size localize=true hint=false classes="label-top" }}
+
+            {{!-- Width --}}
+            {{#if dimensions.width}}
+            {{ formField fields.target.fields.template.fields.width value=source.target.template.width
+                         label=dimensions.width localize=true hint=false classes="label-top" }}
+            {{/if}}
+
+            {{!-- Height --}}
+            {{#if dimensions.height}}
+            {{ formField fields.target.fields.template.fields.height value=source.target.template.height
+                         label=dimensions.height localize=true hint=false classes="label-top" }}
+            {{/if}}
+
+            {{!-- Units --}}
+            {{ formField fields.target.fields.template.fields.units value=source.target.template.units
+                         label="DND5E.MovementUnits" localize=true hint=false choices=config.movementUnits
+                         classes="label-top" }}
+        </div>
+    </div>
+
+    {{!-- Multiple --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Multiple" }}</label>
+        <div class="form-fields">
+
+            {{!-- Amount --}}
+            {{ formField fields.target.fields.template.fields.count value=source.target.template.count
+                         label="DND5E.Amount" placeholder="1" localize=true hint=false classes="label-top" }}
+
+            {{!-- Contiguous --}}
+            {{ formField fields.target.fields.template.fields.contiguous value=source.target.template.contiguous
+                         label="DND5E.Contiguous" localize=true hint=false input=inputs.createCheckboxInput
+                         classes="checkbox" }}
+        </div>
+    </div>
+    {{/if}}
+
+    {{!-- TODO: Template prompt? --}}
+</fieldset>
+
+<fieldset>
+    <legend>{{ localize "DND5E.TargetPl" }}</legend>
+
+    {{!-- Target Type --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Type" }}</label>
+        <div class="form-fields">
+
+            {{!-- Amount --}}
+            {{#if scalarTarget}}
+            {{ formField fields.target.fields.affects.fields.count value=source.target.affects.count label="DND5E.Amount"
+                         localize=true hint=false classes="label-top" }}
+            {{/if}}
+
+            {{!-- Type --}}
+            {{ formField fields.target.fields.affects.fields.type value=source.target.affects.type label="DND5E.Type"
+                         localize=true hint=false choices=config.individualTargetTypes classes="label-top" }}
+        </div>
+
+        {{!-- Special --}}
+        {{#if source.target.affects.type}}
+        {{ formInput fields.target.fields.affects.fields.special value=source.target.affects.special
+                     placeholder=(localize "DND5E.TARGET.FIELDS.target.affects.special.label")
+                     input=inputs.createTextInput classes="full-width" }}
+        {{/if}}
+    </div>
+
+    {{!-- Choose Targets --}}
+    {{#if source.target.template.type}}
+    {{ formField fields.target.fields.affects.fields.choice value=source.target.affects.choice
+                 label="DND5E.TARGET.FIELDS.target.affects.choice.label" localize=true
+                 hint="DND5E.TARGET.FIELDS.target.affects.choice.hint" input=inputs.createCheckboxInput }}
+    {{/if}}
 </fieldset>

@@ -19,6 +19,27 @@
     {{ formField fields.properties options=properties.options label="DND5E.ItemWeaponProperties" localize=true
                  input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid" }}
 
+    {{!-- Range --}}
+    {{#if hasRange}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Range" }}</label>
+        <div class="form-fields">
+
+            {{!-- Normal --}}
+            {{ formField fields.range.fields.value value=source.range.value label="DND5E.Normal" localize=true
+                         hint=false classes="label-top" }}
+
+            {{!-- Long --}}
+            {{ formField fields.range.fields.long value=source.range.long label="DND5E.Long" localize=true
+                         hint=false classes="label-top" }}
+
+            {{!-- Units --}}
+            {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true
+                         hint=false choices=config.movementUnits classes="label-top" }}
+        </div>
+    </div>
+    {{/if}}
+
     {{!-- Magical Properties --}}
     {{#if properties.object.mgc}}
     <div class="form-group split-group">

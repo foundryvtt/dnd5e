@@ -180,6 +180,8 @@
 },
 
 "DND5E.ACTIVITY": {
+  "Create": "Create Activity",
+  "Delete": "Delete Activity",
   "Title": {
     "one": "Activity",
     "other": "Activities"
@@ -390,7 +392,7 @@
 "DND5E.AttunementOverride": "Override attunement",
 "DND5E.Attuned": "Attuned",
 "DND5E.AreaOfEffect": {
-  "Label": "Area of EFfect",
+  "Label": "Area of Effect",
   "Size": {
     "Label": "Size",
     "Height": "Height",
@@ -542,6 +544,7 @@
 "DND5E.Bonuses": "Global Bonuses",
 "DND5E.BonusesHint": "Define global bonuses as formulas which are added to certain rolls. For example: 1d4 + 2",
 "DND5E.BonusesInstructions": "Configure character bonuses which are added to the appropriate dice roll",
+"DND5E.Casting": "Casting",
 "DND5E.Conditions": "Conditions",
 "DND5E.Controls": {
   "Hint": "Enable various hints throughout the UI for certain mouse and keyboard controls.",
@@ -643,6 +646,7 @@
 "DND5E.ContextMenuActionUnattune": "Unattune",
 "DND5E.ContextMenuActionEnable": "Enable",
 "DND5E.ContextMenuActionDisable": "Disable",
+"DND5E.Contiguous": "Contiguous",
 "DND5E.ConBlinded": "Blinded",
 "DND5E.ConCharmed": "Charmed",
 "DND5E.ConDeafened": "Deafened",
@@ -883,6 +887,7 @@
     "Half": "Half"
   }
 },
+"DND5E.Current": "Current",
 
 "DND5E.DAMAGE": {
   "Title": "Damage",
@@ -1036,6 +1041,7 @@
 "DND5E.DescriptionUnidentified": "Unidentified Description",
 "DND5E.Details": "Details",
 "DND5E.DetailsEdit": "Edit Details",
+"DND5E.Die": "Die",
 "DND5E.Dimensions": "Dimensions",
 "DND5E.Disadvantage": "Disadvantage",
 "DND5E.Discord": "Discord",
@@ -1531,7 +1537,7 @@
 "DND5E.ItemCritExtraDamage": "Extra Critical Hit Damage",
 "DND5E.ItemDelete": "Delete Item",
 "DND5E.ItemDestroyEmpty": "Destroy on Empty",
-"DND5E.ItemDestroyEmptyTooltip": "If this item has limited uses, it will be destroyed when none are left.",
+"DND5E.ItemDestroyEmptyTooltip": "Reduce the item's quantity by 1 whenever all of its limited uses are expended.",
 "DND5E.ItemEdit": "Edit Item",
 "DND5E.ItemEquipmentAction": "Equipment Action",
 "DND5E.ItemEquipmentBase": "Base Equipment",
@@ -1708,6 +1714,7 @@
 "DND5E.ModuleArtPriorityDecrease": "Decrease Priority",
 "DND5E.ModuleArtPriorityHint": "Use the arrows to adjust the priority of the art sources. When a single Actor has art provided from multiple sources, the one with the highest priority will be used.",
 "DND5E.ModuleArtPriorityIncrease": "Increase Priority",
+"DND5E.Multiple": "Multiple",
 "DND5E.Multiplier": "Multiplier",
 "DND5E.MythicActionLabel": "Mythic Action",
 "DND5E.Name": "Character Name",
@@ -1719,6 +1726,7 @@
 "DND5E.NotProficient": "Not Proficient",
 "DND5E.Notes": "Notes",
 "DND5E.NPC": "NPC",
+"DND5E.Number": "Number",
 "DND5E.OtherFormula": "Other Formula",
 "DND5E.PactMagic": "Pact Magic",
 "DND5E.Passive": "Passive",
@@ -1949,6 +1957,7 @@
 "DND5E.SenseTruesight": "Truesight",
 "DND5E.SenseUnits": "Units",
 "DND5E.SenseSpecial": "Special Senses",
+"DND5E.Shape": "Shape",
 "DND5E.SheetClassCharacter": "Default 5e Character Sheet",
 "DND5E.SheetClassCharacterLegacy": "Legacy 5e Character Sheet",
 "DND5E.SheetClassClassSummary": "Default 5e Class Summary Sheet",

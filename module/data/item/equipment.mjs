@@ -47,10 +47,6 @@ export default class EquipmentData extends ItemDataModel.mixin(
       properties: new SetField(new StringField(), {
         label: "DND5E.ItemEquipmentProperties"
       }),
-      speed: new SchemaField({
-        value: new NumberField({required: true, min: 0, label: "DND5E.Speed"}),
-        conditions: new StringField({required: true, label: "DND5E.SpeedConditions"})
-      }, {label: "DND5E.Speed"}),
       strength: new NumberField({
         required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr"
       }),
@@ -209,7 +205,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
         value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
       }];
     }
-    context.parts = ["dnd5e.details-equipment", "dnd5e.details-activation"];
+    context.parts = ["dnd5e.details-equipment", "dnd5e.details-uses"];
   }
 
   /* -------------------------------------------- */

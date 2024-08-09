@@ -1,3 +1,29 @@
 <div class="tab activities" data-group="primary" data-tab="activities">
+    {{#each system.activities}}
+    <div class="activity card" data-id="{{ _id }}">
 
+        {{!-- TODO: Add drag handle for re-ordering --}}
+
+        {{!-- Icon --}}
+        <div class="icon">
+            <dnd5e-icon src="{{ img }}"></dnd5e-icon>
+        </div>
+
+        {{!-- Name --}}
+        <div class="name">{{ name }}</div>
+
+        {{!-- Controls --}}
+        <div class="controls">
+
+            {{#if @root.editable}}
+            {{!-- Delete --}}
+            <button type="button" class="unbutton control-button" data-action="deleteActivity"
+                    data-tooltip="DND5E.ACTIVITY.Delete" aria-label="{{ localize "DND5E.ACTIVITY.Delete" }}">
+                <i class="fas fa-trash" inert></i>
+            </button>
+            {{/if}}
+        </div>
+
+    </div>
+    {{/each}}
 </div>

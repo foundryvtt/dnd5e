@@ -130,7 +130,7 @@ export default class ToolData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
-    context.parts = ["dnd5e.details-tool", "dnd5e.details-activation"];
+    context.parts = ["dnd5e.details-tool", "dnd5e.details-uses"];
   }
 
   /* -------------------------------------------- */

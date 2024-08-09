@@ -138,7 +138,7 @@ export default class FeatData extends ItemDataModel.mixin(
       { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
         placeholder: "DND5E.Requirements" }
     ];
-    context.parts = ["dnd5e.details-feat", "dnd5e.details-activation"];
+    context.parts = ["dnd5e.details-feat", "dnd5e.details-uses"];
   }
 
   /* -------------------------------------------- */
@@ -198,13 +198,6 @@ export default class FeatData extends ItemDataModel.mixin(
    */
   get cardProperties() {
     return [this.requirements];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  get hasLimitedUses() {
-    return this.isActive && (!!this.recharge.value || super.hasLimitedUses);
   }
 
   /* -------------------------------------------- */
