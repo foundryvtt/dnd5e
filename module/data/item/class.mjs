@@ -19,7 +19,6 @@ const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.field
  * @property {object} spellcasting      Details on class's spellcasting ability.
  * @property {string} spellcasting.progression  Spell progression granted by class as from `DND5E.spellProgression`.
  * @property {string} spellcasting.ability      Ability score to use for spellcasting.
- * @property {string} wealth            Formula used to determine starting wealth.
  */
 export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
   /** @inheritdoc */
@@ -42,8 +41,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
           required: true, initial: "none", blank: false, label: "DND5E.SpellProgression"
         }),
         ability: new StringField({required: true, label: "DND5E.SpellAbility"})
-      }, {label: "DND5E.Spellcasting"}),
-      wealth: new FormulaField({label: "DND5E.StartingEquipment.Wealth.Label"})
+      }, {label: "DND5E.Spellcasting"})
     });
   }
 
@@ -83,6 +81,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   async getSheetData(context) {
     context.subtitles = [{ label: context.itemType }];
     context.singleDescription = true;
+    context.parts = ["dnd5e.details-class", "dnd5e.details-spellcasting", "dnd5e.details-starting-equipment"];
   }
 
   /* -------------------------------------------- */

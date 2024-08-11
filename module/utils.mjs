@@ -380,6 +380,14 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
 
     // Item Sheet Partials
+    "systems/dnd5e/templates/items/details/details-background.hbs",
+    "systems/dnd5e/templates/items/details/details-class.hbs",
+    "systems/dnd5e/templates/items/details/details-container.hbs",
+    "systems/dnd5e/templates/items/details/details-loot.hbs",
+    "systems/dnd5e/templates/items/details/details-species.hbs",
+    "systems/dnd5e/templates/items/details/details-spellcasting.hbs",
+    "systems/dnd5e/templates/items/details/details-starting-equipment.hbs",
+    "systems/dnd5e/templates/items/details/details-subclass.hbs",
     "systems/dnd5e/templates/items/parts/item-action.hbs",
     "systems/dnd5e/templates/items/parts/item-activation.hbs",
     "systems/dnd5e/templates/items/parts/item-activities.hbs",
@@ -387,6 +395,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-advancement2.hbs",
     "systems/dnd5e/templates/items/parts/item-description.hbs",
     "systems/dnd5e/templates/items/parts/item-description2.hbs",
+    "systems/dnd5e/templates/items/parts/item-details.hbs",
     "systems/dnd5e/templates/items/parts/item-mountable.hbs",
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
     "systems/dnd5e/templates/items/parts/item-source.hbs",
@@ -529,6 +538,17 @@ function concealSection(conceal, options) {
 /* -------------------------------------------- */
 
 /**
+ * Construct an object from the provided arguments.
+ * @param {object} options  Handlebars options.
+ * @returns {object}
+ */
+function makeObject({ hash }) {
+  return hash;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Register custom Handlebars helpers used by 5e.
  */
 export function registerHandlebarsHelpers() {
@@ -542,6 +562,7 @@ export function registerHandlebarsHelpers() {
     "dnd5e-itemContext": itemContext,
     "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
+    "dnd5e-object": makeObject,
     "dnd5e-textFormat": formatText
   });
 }
