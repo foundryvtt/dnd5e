@@ -9,7 +9,7 @@ export function createCheckboxInput(field, config) {
   input.name = config.name;
   if ( config.value ) input.checked = true;
   foundry.applications.fields.setInputAttributes(input, config);
-  if ( "ariaLabel" in config ) input.arialLabel = config.ariaLabel;
+  if ( "ariaLabel" in config ) input.ariaLabel = config.ariaLabel;
   return input;
 }
 
