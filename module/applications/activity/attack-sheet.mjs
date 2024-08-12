@@ -1,3 +1,4 @@
+import { safePropertyExists } from "../../utils.mjs";
 import ActivitySheet from "./activity-sheet.mjs";
 
 /**
@@ -63,7 +64,7 @@ export default class AttackSheet extends ActivitySheet {
       }))
     ];
 
-    context.hasBaseDamage = this.activity._safePropertyExists(this.item.system, "damage.base");
+    context.hasBaseDamage = safePropertyExists(this.item.system, "damage.base");
 
     return context;
   }

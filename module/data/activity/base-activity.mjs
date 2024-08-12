@@ -1,5 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
-import { formatNumber, staticID } from "../../utils.mjs";
+import { formatNumber, safePropertyExists, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
@@ -517,33 +517,13 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   _setOverride(keyPath) {
     const obj = foundry.utils.getProperty(this, keyPath);
     Object.defineProperty(obj, "canOverride", {
-      value: this._safePropertyExists(this.item.system, keyPath),
+      value: safePropertyExists(this.item.system, keyPath),
       configurable: true,
       enumerable: false
     });
     if ( obj.canOverride && !obj.override ) {
       foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, keyPath));
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Check whether an object exists without triggering potential deprecation warnings.
-   * This can be removed in DnD5e 4.4 when the data shims are removed.
-   * @param {object} object
-   * @param {string} keyPath
-   * @returns {boolean}
-   * @internal
-   */
-  _safePropertyExists(object, keyPath) {
-    const parts = keyPath.split(".");
-    for ( const part of parts ) {
-      const descriptor = Object.getOwnPropertyDescriptor(object, part);
-      if ( !descriptor || !("value" in descriptor) ) return false;
-      object = object[part];
-    }
-    return true;
   }
 
   /* -------------------------------------------- */

@@ -218,6 +218,24 @@ export function filteredKeys(obj, filter) {
 /* -------------------------------------------- */
 
 /**
+ * Check whether an object exists without transversing any getters, preventing any deprecation warnings from triggering.
+ * @param {object} object
+ * @param {string} keyPath
+ * @returns {boolean}
+ */
+export function safePropertyExists(object, keyPath) {
+  const parts = keyPath.split(".");
+  for ( const part of parts ) {
+    const descriptor = Object.getOwnPropertyDescriptor(object, part);
+    if ( !descriptor || !("value" in descriptor) ) return false;
+    object = object[part];
+  }
+  return true;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Sort the provided object by its values or by an inner sortKey.
  * @param {object} obj                 The object to sort.
  * @param {string|Function} [sortKey]  An inner key upon which to sort or sorting function.

@@ -108,18 +108,8 @@ export default class SaveActivityData extends BaseActivityData {
     this.prepareDamageLabel(this.damage.parts, rollData);
 
     let ability;
-    switch ( this.save.dc.calculation ) {
-      case "custom":
-        this.save.dc.value = simplifyBonus(this.save.dc.formula, rollData);
-        break;
-      case "spellcasting":
-        ability = this.isSpell ? this.item.system.availableAbilities?.first() : null;
-        ability ??= this.actor?.system.attributes?.spellcasting;
-        break;
-      default:
-        ability = this.save.dc.calculation;
-        break;
-    }
+    if ( this.save.dc.calculation === "custom" ) this.save.dc.value = simplifyBonus(this.save.dc.formula, rollData);
+    else ability = this.ability;
     if ( ability ) this.save.dc.value = this.actor?.system.abilities?.[ability]?.dc
       ?? 8 + (this.actor?.system.attributes?.prof ?? 0);
 

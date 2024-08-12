@@ -1,4 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import { safePropertyExists } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
@@ -151,7 +152,7 @@ export default class AttackActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   prepareFinalData(rollData) {
-    if ( this.damage.includeBase && this._safePropertyExists(this.item.system, "damage.base")
+    if ( this.damage.includeBase && safePropertyExists(this.item.system, "damage.base")
       && this.item.system.damage.base.formula ) {
       const basePart = this.item.system.damage.base.clone();
       basePart.base = true;
