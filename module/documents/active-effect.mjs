@@ -533,7 +533,7 @@ export default class ActiveEffect5e extends ActiveEffect {
         type: game.i18n.localize(`TYPES.Item.${item.type}`)
       }),
       duration: ActiveEffect5e.getEffectDurationFromItem(item),
-      "flags.dnd5e.itemData": item.actor.items.has(item.id) ? item.id : item.toObject(),
+      "flags.dnd5e.item.data": item.actor.items.has(item.id) ? item.id : item.toObject(),
       origin: item.uuid,
       statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
     }, data, {inplace: false});
@@ -662,7 +662,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       return;
     }
     const choices = effects.reduce((acc, effect) => {
-      const data = effect.getFlag("dnd5e", "itemData");
+      const data = effect.getFlag("dnd5e", "item.data");
       acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
       return acc;
     }, {});

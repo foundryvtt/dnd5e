@@ -202,6 +202,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       data: {
         flags: {
           dnd5e: {
+            messageType: "usage",
             activity: { type: this.type, id: this.id, uuid: this.uuid },
             item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
           }
@@ -509,7 +510,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       const { effects } = this.actor.concentration;
       const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
       if ( limit && (limit <= effects.size) ) config.concentration.end = effects.find(e => {
-        const data = e.flags.dnd5e?.itemData ?? {};
+        const data = e.flags.dnd5e?.item?.data ?? {};
         return (data === this.id) || (data._id === this.id);
       })?.id ?? effects.first()?.id ?? null;
     }

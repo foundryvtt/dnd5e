@@ -1738,7 +1738,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( !( isTargetted || game.user.isGM || actor.isOwner ) ) return;
 
       // Get the Item from stored flag data or by the item ID on the Actor
-      const storedData = message.getFlag("dnd5e", "itemData");
+      const storedData = message.getFlag("dnd5e", "item.data");
       let item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
       if ( !item ) {
         ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {
