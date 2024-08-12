@@ -4,6 +4,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import { EnchantmentData } from "./fields/enchantment-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
+import { FormulaField } from "../fields/_module.mjs";
 
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -13,6 +14,9 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  *
+ * @property {object} enchant
+ * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
+ * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
  * @property {object} prerequisites
  * @property {number} prerequisites.level           Character or class level required to choose this feature.
  * @property {Set<string>} properties               General properties of a feature item.
@@ -31,6 +35,10 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      enchant: new SchemaField({
+        max: new FormulaField({deterministic: true}),
+        period: new StringField()
+      }),
       type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
       prerequisites: new SchemaField({
         level: new NumberField({integer: true, min: 0})
@@ -158,9 +166,25 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    FeatData.#migrateEnchantment(source);
     ActivitiesTemplate.migrateActivities(source);
     FeatData.#migrateType(source);
     FeatData.#migrateRecharge(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate enchantment data format.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateEnchantment(source) {
+    if ( !("enchantment" in source) || !("items" in source.enchantment) ) return;
+    const { items } = source.enchantment;
+    source.enchant ??= {};
+    if ( "max" in items ) source.enchant.max = items.max;
+    if ( "period" in items ) source.enchant.period = items.period;
+    delete source.enchantment.items;
   }
 
   /* -------------------------------------------- */

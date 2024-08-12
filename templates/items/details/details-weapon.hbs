@@ -19,27 +19,6 @@
     {{ formField fields.properties options=properties.options label="DND5E.ItemWeaponProperties" localize=true
                  input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid" }}
 
-    {{!-- Range --}}
-    {{#if hasRange}}
-    <div class="form-group split-group">
-        <label>{{ localize "DND5E.Range" }}</label>
-        <div class="form-fields">
-
-            {{!-- Normal --}}
-            {{ formField fields.range.fields.value value=source.range.value label="DND5E.Normal" localize=true
-                         hint=false classes="label-top" }}
-
-            {{!-- Long --}}
-            {{ formField fields.range.fields.long value=source.range.long label="DND5E.Long" localize=true
-                         hint=false classes="label-top" }}
-
-            {{!-- Units --}}
-            {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true
-                         hint=false choices=config.movementUnits classes="label-top" }}
-        </div>
-    </div>
-    {{/if}}
-
     {{!-- Magical Properties --}}
     {{#if properties.object.mgc}}
     <div class="form-group split-group">
@@ -70,6 +49,56 @@
                          localize=true classes="label-top" }}
         </div>
     </div>
+    {{/if}}
+</fieldset>
+
+<fieldset>
+    <legend>{{ localize "DND5E.Range" }}</legend>
+
+    {{#if hasRange}}
+
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.RangeDistance" }}</label>
+        <div class="form-fields">
+
+            {{!-- Normal --}}
+            {{ formField fields.range.fields.value value=source.range.value label="DND5E.Normal" localize=true
+                         hint=false classes="label-top" }}
+
+            {{!-- Long --}}
+            {{ formField fields.range.fields.long value=source.range.long label="DND5E.Long" localize=true
+                         hint=false classes="label-top" }}
+
+            {{!-- Reach --}}
+            {{#if (eq system.attackType "melee")}}
+            {{ formField fields.range.fields.reach value=source.range.reach label="DND5E.RANGE.FIELDS.range.reach.label"
+                         placeholder="5" localize=true classes="label-top" }}
+            {{/if}}
+        </div>
+    </div>
+
+    {{!-- Units --}}
+    {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true hint=false
+                 choices=config.movementUnits }}
+
+    {{else}}
+
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.RangeDistance" }}</label>
+        <div class="form-fields">
+
+            {{!-- Reach --}}
+            {{#if (eq system.attackType "melee")}}
+            {{ formField fields.range.fields.reach value=source.range.reach label="DND5E.RANGE.FIELDS.range.reach.label"
+                         placeholder="5" classes="label-top" localize=true }}
+            {{/if}}
+
+            {{!-- Units --}}
+            {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true
+                         hint=false choices=config.movementUnits classes="label-top" }}
+        </div>
+    </div>
+
     {{/if}}
 </fieldset>
 
