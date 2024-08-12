@@ -60,9 +60,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         supply: new NumberField({ required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsSupply" })
       }, { label: "DND5E.SpellMaterials" }),
       preparation: new SchemaField({
-        mode: new StringField({ required: true, initial: "prepared", label: "DND5E.SpellPreparationMode" }),
+        mode: new StringField({ required: true, initial: "prepared", label: "DND5E.SpellPreparation.Mode" }),
         prepared: new BooleanField({ required: true, label: "DND5E.SpellPrepared" })
-      }, { label: "DND5E.SpellPreparation" }),
+      }, { label: "DND5E.SpellPreparation.Label" }),
       properties: new SetField(new StringField(), { label: "DND5E.SpellComponents" }),
       range: new RangeField(),
       school: new StringField({ required: true, label: "DND5E.SpellSchool" }),
