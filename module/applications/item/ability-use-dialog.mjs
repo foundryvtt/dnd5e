@@ -127,7 +127,7 @@ export default class AbilityUseDialog extends Dialog {
   static _createConcentrationOptions(item) {
     const { effects } = item.actor.concentration;
     return effects.reduce((acc, effect) => {
-      const data = effect.getFlag("dnd5e", "itemData");
+      const data = effect.getFlag("dnd5e", "item.data");
       acc.push({
         name: effect.id,
         label: data?.name ?? item.actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless")

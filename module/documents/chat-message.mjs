@@ -61,6 +61,38 @@ export default class ChatMessage5e extends ChatMessage {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    source = super.migrateData(source);
+    if ( foundry.utils.hasProperty(source, "flags.dnd5e.itemData") ) {
+      foundry.utils.setProperty(source, "flags.dnd5e.item.data", source.flags.dnd5e.itemData);
+      delete source.flags.dnd5e.itemData;
+    }
+    if ( foundry.utils.hasProperty(source, "flags.dnd5e.use") ) {
+      const use = source.flags.dnd5e.use;
+      foundry.utils.setProperty(source, "flags.dnd5e.messageType", "usage");
+      foundry.utils.setProperty(source, "flags.dnd5e.item.type", use.type);
+      foundry.utils.setProperty(source, "flags.dnd5e.item.id", use.itemId);
+      foundry.utils.setProperty(source, "flags.dnd5e.item.uuid", use.itemUuid);
+      delete source.flags.dnd5e.use;
+    }
+    return source;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    this.#shimFlags();
+  }
+
+  /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
@@ -772,9 +804,43 @@ export default class ChatMessage5e extends ChatMessage {
   getAssociatedItem() {
     const actor = this.getAssociatedActor();
     if ( !actor ) return;
-    const storedData = this.getFlag("dnd5e", "itemData");
+    const storedData = this.getFlag("dnd5e", "item.data");
     return storedData
       ? new Item.implementation(storedData, { parent: actor })
-      : actor.items.get(this.getFlag("dnd5e", "use.itemId"));
+      : actor.items.get(this.getFlag("dnd5e", "item.id")) ?? actor.items.get(this.getFlag("dnd5e", "use.itemId"));
+  }
+
+  /* -------------------------------------------- */
+  /*  Shims                                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Apply shims to maintain access to the old `use` and `itemData` flags.
+   */
+  #shimFlags() {
+    const flags = foundry.utils.getProperty(this, "flags.dnd5e");
+    if ( flags?.messageType === "usage" ) Object.defineProperty(flags, "use", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The item data in the `dnd5e.use` flag on `ChatMessage` is now `dnd5e.item.type`, `dnd5e.item.id`, and "
+          + "`dnd5e.item.uuid`. Checking for usage can now be done using the `dnd5e.messageType` flag.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+        );
+        return { type: flags.item?.type, itemId: flags.item?.id, itemUuid: flags.item?.uuid };
+      },
+      configurable: true,
+      enumerable: false
+    });
+    if ( flags.item?.data ) Object.defineProperty(flags, "itemData", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `dnd5e.itemData` flag on `ChatMessage` is now `dnd5e.item.data`.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+        );
+        return this.item.data;
+      },
+      configurable: true,
+      enumerable: false
+    });
   }
 }
