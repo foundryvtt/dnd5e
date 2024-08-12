@@ -70,6 +70,7 @@ export default class LootData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+    context.parts = ["dnd5e.details-loot"];
   }
 
   /* -------------------------------------------- */
