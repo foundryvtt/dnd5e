@@ -14,7 +14,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @property {string} type                              Type name of this activity.
    * @property {string} img                               Default icon.
    * @property {string} title                             Default title.
+   * @property {typeof ActivitySheet} sheetClass          Sheet class used to configure this activity.
    * @property {object} usage
+   * @property {Record<string, Function>} usage.actions   Actions that can be triggered from the chat card.
    * @property {string} usage.chatCard                    Template used to render the chat card.
    * @property {typeof ActivityUsageDialog} usage.dialog  Default usage prompt.
    */
@@ -26,6 +28,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   static metadata = Object.freeze({
     name: "Activity",
     usage: {
+      actions: {},
       chatCard: "systems/dnd5e/templates/chat/activity-card.hbs",
       dialog: ActivityUsageDialog
     }
@@ -595,12 +598,31 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       actor: this.item.actor,
       item: this.item,
       token: this.item.actor?.token,
-      buttons: null,
+      buttons: this._usageChatButtons(),
       description: data.description.chat,
       properties: properties.length ? properties : null,
       subtitle: this.description.chatFlavor ?? data.subtitle,
       supplements
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {object} ActivityUsageChatButton
+   * @property {string} label    Label to display on the button.
+   * @property {string} icon     Icon to display on the button.
+   * @property {string} classes  Classes for the button.
+   * @property {object} dataset  Data attributes attached to the button.
+   */
+
+  /**
+   * Create the buttons that will be displayed in chat.
+   * @returns {ActivityUsageChatButton[]|null}
+   * @protected
+   */
+  _usageChatButtons() {
+    return null;
   }
 
   /* -------------------------------------------- */
@@ -673,6 +695,49 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       }
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Activate listeners on a chat message.
+   * @param {ChatMessage} message  Associated chat message.
+   * @param {HTMLElement} html     Element in the chat log.
+   */
+  activateChatListeners(message, html) {
+    html.addEventListener("click", event => {
+      const target = event.target.closest("[data-action]");
+      if ( target ) this.#onChatAction(event, target, message);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle an action activated from an activity's chat message.
+   * @param {PointerEvent} event     Triggering click event.
+   * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
+   * @param {ChatMessage5e} message  Message associated with the activation.
+   */
+  async #onChatAction(event, target, message) {
+    const action = target.dataset.action;
+    const handler = this.metadata.usage?.actions?.[action];
+    if ( handler ) handler.call(this, event, target, message);
+    else this._onChatAction(event, target);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle an action activated from an activity's chat message. Action handlers in metadata are called first.
+   * This method is only called for actions which have no defined handler.
+   * @param {PointerEvent} event     Triggering click event.
+   * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
+   * @param {ChatMessage5e} message  Message associated with the activation.
+   * @protected
+   */
+  async _onChatAction(event, target, message) {}
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
