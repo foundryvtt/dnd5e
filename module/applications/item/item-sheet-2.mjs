@@ -78,8 +78,6 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
         return { value, label, group: "DND5E.RangeDistance" };
       })
     ];
-    context.hasRange = (this.item.type === "weapon")
-      && (properties.has("thr") || ["simpleR", "martialR"].includes(type?.value));
 
     // Duration
     context.durationUnits = [

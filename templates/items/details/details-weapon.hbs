@@ -55,7 +55,7 @@
 <fieldset>
     <legend>{{ localize "DND5E.Range" }}</legend>
 
-    {{#if hasRange}}
+    {{#if system.hasRange}}
 
     <div class="form-group split-group">
         <label>{{ localize "DND5E.RangeDistance" }}</label>
@@ -72,7 +72,8 @@
             {{!-- Reach --}}
             {{#if (eq system.attackType "melee")}}
             {{ formField fields.range.fields.reach value=source.range.reach label="DND5E.RANGE.FIELDS.range.reach.label"
-                         placeholder="5" localize=true classes="label-top" }}
+                         placeholder=(ifThen (eq system.range.reach null) "—" system.range.reach) localize=true
+                         classes="label-top" }}
             {{/if}}
         </div>
     </div>
@@ -90,7 +91,8 @@
             {{!-- Reach --}}
             {{#if (eq system.attackType "melee")}}
             {{ formField fields.range.fields.reach value=source.range.reach label="DND5E.RANGE.FIELDS.range.reach.label"
-                         placeholder="5" classes="label-top" localize=true }}
+                         placeholder=(ifThen (eq system.range.reach null) "—" system.range.reach) classes="label-top"
+                         localize=true }}
             {{/if}}
 
             {{!-- Units --}}
