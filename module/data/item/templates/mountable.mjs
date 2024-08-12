@@ -14,6 +14,10 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {number} hp.max         Max hit points.
  * @property {number} hp.dt          Damage threshold.
  * @property {string} hp.conditions  Conditions that are triggered when this equipment takes damage.
+ * @property {object} speed               Speed granted by a piece of vehicle equipment.
+ * @property {number} speed.value         Speed granted by this piece of equipment measured in feet or meters
+ *                                        depending on system setting.
+ * @property {string} speed.conditions    Conditions that may affect item's speed.
  * @mixin
  */
 export default class MountableTemplate extends SystemDataModel {
@@ -34,7 +38,7 @@ export default class MountableTemplate extends SystemDataModel {
       speed: new SchemaField({
         value: new NumberField({required: true, min: 0, label: "DND5E.Speed"}),
         conditions: new StringField({required: true, label: "DND5E.SpeedConditions"})
-      }, {label: "DND5E.Speed"})
+      }, {required: false, initial: undefined, label: "DND5E.Speed"})
     };
   }
 }

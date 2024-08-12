@@ -55,6 +55,11 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     // Hit Dice
     context.hitDieTypes = CONFIG.DND5E.hitDieTypes.map(d => ({ label: d, value: d }));
 
+    // Activation
+    context.activationTypes = Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, { label, group }]) => {
+      return { value, label, group };
+    });
+
     // Targets
     context.targetTypes = [
       ...Object.entries(CONFIG.DND5E.individualTargetTypes).map(([value, label]) => {

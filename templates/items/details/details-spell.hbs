@@ -77,14 +77,14 @@
         <div class="form-fields">
 
             {{!-- Amount --}}
-            {{#if (and source.activation.type (not isCostlessAction))}}
+            {{#if system.activation.scalar}}
                 {{ formField fields.activation.fields.value value=source.activation.value label="DND5E.Amount" placeholder="—"
                              localize=true hint=false classes="label-top" }}
             {{/if}}
 
             {{!-- Type --}}
             {{ formField fields.activation.fields.type value=source.activation.type label="DND5E.Cost" localize=true
-                         classes="label-top" hint=false choices=config.abilityActivationTypes blank="" }}
+                         classes="label-top" hint=false options=activationTypes blank="DND5E.None" }}
         </div>
 
         {{!-- Condition --}}
@@ -98,7 +98,7 @@
         <div class="form-fields">
 
             {{!-- Value --}}
-            {{#if system.hasScalarRange}}
+            {{#if system.range.scalar}}
             {{ formField fields.range.fields.value value=source.range.value label="DND5E.Value" localize=true
                          hint=false classes="label-top" }}
             {{/if}}
@@ -122,7 +122,7 @@
         <div class="form-fields">
 
             {{!-- Amount --}}
-            {{#if system.hasScalarDuration}}
+            {{#if system.duration.scalar}}
             {{ formField fields.duration.fields.value value=source.duration.value label="DND5E.Amount" localize=true
                          hint=false placeholder="—" classes="label-top" }}
             {{/if}}
@@ -205,7 +205,7 @@
         <div class="form-fields">
 
             {{!-- Amount --}}
-            {{#if scalarTarget}}
+            {{#if system.target.affects.scalar}}
             {{ formField fields.target.fields.affects.fields.count value=source.target.affects.count label="DND5E.Amount"
                          localize=true hint=false classes="label-top" }}
             {{/if}}
