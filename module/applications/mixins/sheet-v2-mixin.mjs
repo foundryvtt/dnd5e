@@ -149,6 +149,10 @@ export default function DocumentSheetV2Mixin(Base) {
       this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
 
       if ( this.isEditable ) {
+        this.form.querySelectorAll("multi-select .tag").forEach(tag => {
+          tag.classList.add("remove");
+          tag.querySelector(":scope > span")?.classList.add("remove");
+        });
         html.find(".create-child").on("click", this._onCreateChild.bind(this));
       }
     }

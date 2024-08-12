@@ -33,7 +33,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    const { activities, properties, target, type } = this.item.system;
+    const { activities, damage, properties, target, type } = this.item.system;
 
     // Effects
     for ( const category of Object.values(context.effects) ) {
@@ -64,6 +64,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
         return { value, label, group: "DND5E.TargetTypeArea" };
       })
     ];
+    context.scalarTarget = !["", "self", "any"].includes(target?.affects?.type);
 
     // Range
     context.rangeTypes = [
@@ -102,9 +103,6 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       if ( context.dimensions.height ) context.dimensions.height = "DND5E.AreaOfEffect.Size.Height";
     }
 
-    // Targets
-    context.scalarTarget = !["", "self", "any"].includes(target?.affects?.type);
-
     // Equipment
     context.equipmentTypes = [
       ...Object.entries(CONFIG.DND5E.miscEquipmentTypes).map(([value, label]) => ({ value, label })),
@@ -136,6 +134,12 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       { value: "", label: "" },
       ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
     ];
+    context.damageTypes = ["base", "versatile"].reduce((obj, k) => {
+      obj[k] = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
+        return { value, label, selected: damage?.[k]?.types?.has(value) };
+      });
+      return obj;
+    }, {});
 
     // Activities
     context.activities = (activities ?? []).map(({ _id: id, name, img }) => ({

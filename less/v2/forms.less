@@ -287,6 +287,15 @@
       height: var(--form-field-height);
       cursor: pointer;
     }
+
+    multi-select .tag {
+      cursor: pointer;
+      font-size: var(--font-size-10);
+      border: var(--dnd5e-border-gold);
+      background: var(--dnd5e-background-card);
+      border-radius: 3px;
+      &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
+    }
   }
 
   .form-fields > dnd5e-checkbox { flex: none; }

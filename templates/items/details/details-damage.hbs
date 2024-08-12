@@ -20,9 +20,8 @@
     </div>
 </div>
 
-{{#unless source.custom.enabled}}
-
 {{!-- Simple Input --}}
+{{#unless source.custom.enabled}}
 <div class="form-group split-group">
     <label>{{ localize "DND5E.DAMAGE.Title" }}</label>
     <div class="form-fields">
@@ -40,20 +39,24 @@
                      classes="label-top" }}
     </div>
 </div>
-
 {{/unless}}
+
+{{!-- Type --}}
+{{ formField fields.types name=(concat prefix "types") value=source.types options=types label="DND5E.Type"
+             localize=true }}
 
 {{/inline}}
 
 <fieldset>
     <legend>{{ localize "DND5E.DAMAGE.Title" }}</legend>
-    {{> ".damage" fields=fields.damage.fields.base.fields source=source.damage.base prefix="system.damage.base." }}
+    {{> ".damage" fields=fields.damage.fields.base.fields source=source.damage.base types=damageTypes.base
+        prefix="system.damage.base." }}
 </fieldset>
 
 {{#if properties.object.ver}}
 <fieldset>
     <legend>{{ localize "DND5E.Versatile" }}</legend>
     {{> ".damage" fields=fields.damage.fields.versatile.fields source=source.damage.versatile
-        prefix="system.damage.versatile." }}
+        types=damageTypes.versatile prefix="system.damage.versatile." }}
 </fieldset>
 {{/if}}
