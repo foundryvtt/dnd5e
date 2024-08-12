@@ -1,0 +1,62 @@
+{{!-- TODO: Unify this with activity damage part --}}
+{{#*inline ".damage"}}
+
+{{!-- Custom Formula --}}
+<div class="form-group split-group">
+    <label>{{ localize "DND5E.Formula" }}</label>
+    <div class="form-fields">
+
+        {{!-- Enable --}}
+        {{ formInput fields.custom.fields.enabled name=(concat prefix "custom.enabled") value=source.custom.enabled
+                     input=inputs.createCheckboxInput }}
+
+        {{!-- Formula --}}
+        {{#if source.custom.enabled}}
+        {{ formInput fields.custom.fields.formula name=(concat prefix "custom.formula") value=source.custom.formula }}
+        <input type="hidden" name="{{ prefix }}number" value="{{ source.number }}" data-dtype="Number">
+        <input type="hidden" name="{{ prefix }}denomination" value="{{ source.denomination }}" data-dtype="Number">
+        <input type="hidden" name="{{ prefix }}bonus" value="{{ source.bonus }}">
+        {{/if}}
+    </div>
+</div>
+
+{{!-- Simple Input --}}
+{{#unless source.custom.enabled}}
+<div class="form-group split-group">
+    <label>{{ localize "DND5E.DAMAGE.Title" }}</label>
+    <div class="form-fields">
+
+        {{!-- Number --}}
+        {{ formField fields.number name=(concat prefix "number") value=source.number label="DND5E.Number" localize=true
+                     classes="label-top" }}
+
+        {{!-- Die --}}
+        {{ formField fields.denomination name=(concat prefix "denomination") value=source.denomination label="DND5E.Die"
+                     localize=true options=denominationOptions classes="label-top" }}
+
+        {{!-- Bonus --}}
+        {{ formField fields.bonus name=(concat prefix "bonus") value=source.bonus label="DND5E.Bonus" localize=true
+                     classes="label-top" }}
+    </div>
+</div>
+{{/unless}}
+
+{{!-- Type --}}
+{{ formField fields.types name=(concat prefix "types") value=source.types options=types label="DND5E.Type"
+             localize=true }}
+
+{{/inline}}
+
+<fieldset>
+    <legend>{{ localize "DND5E.DAMAGE.Title" }}</legend>
+    {{> ".damage" fields=fields.damage.fields.base.fields source=source.damage.base types=damageTypes.base
+        prefix="system.damage.base." }}
+</fieldset>
+
+{{#if properties.object.ver}}
+<fieldset>
+    <legend>{{ localize "DND5E.Versatile" }}</legend>
+    {{> ".damage" fields=fields.damage.fields.versatile.fields source=source.damage.versatile
+        types=damageTypes.versatile prefix="system.damage.versatile." }}
+</fieldset>
+{{/if}}
