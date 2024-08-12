@@ -4,7 +4,7 @@ import IdentifierField from "../../fields/identifier-field.mjs";
 const { BooleanField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * A field for storing summons data.
+ * A field for storing enchantment data.
  */
 export default class EnchantmentField extends EmbeddedDataField {
   /**

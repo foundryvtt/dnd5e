@@ -24,10 +24,6 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {number} armor.value         Base armor class or shield bonus.
  * @property {number} armor.dex           Maximum dex bonus added to armor class.
  * @property {number} armor.magicalBonus  Bonus added to AC from the armor's magical nature.
- * @property {object} speed               Speed granted by a piece of vehicle equipment.
- * @property {number} speed.value         Speed granted by this piece of equipment measured in feet or meters
- *                                        depending on system setting.
- * @property {string} speed.conditions    Conditions that may affect item's speed.
  * @property {number} strength            Minimum strength required to use a piece of armor.
  * @property {number} proficient          Does the owner have proficiency in this piece of equipment?
  */
@@ -47,10 +43,6 @@ export default class EquipmentData extends ItemDataModel.mixin(
       properties: new SetField(new StringField(), {
         label: "DND5E.ItemEquipmentProperties"
       }),
-      speed: new SchemaField({
-        value: new NumberField({required: true, min: 0, label: "DND5E.Speed"}),
-        conditions: new StringField({required: true, label: "DND5E.SpeedConditions"})
-      }, {label: "DND5E.Speed"}),
       strength: new NumberField({
         required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr"
       }),
@@ -212,6 +204,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
         value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
       }];
     }
+    context.parts = ["dnd5e.details-equipment", "dnd5e.details-uses"];
   }
 
   /* -------------------------------------------- */
