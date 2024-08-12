@@ -2078,7 +2078,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     /**
      * A hook event that fires before a hit die is rolled for an Actor.
-     * @function dnd5e.preRollHitDie
+     * @function dnd5e.preRollHitDieV2
      * @memberof hookEvents
      * @param {Actor5e} actor                          Actor performing the roll.
      * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
@@ -2120,7 +2120,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     /**
      * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
-     * @function dnd5e.rollHitDie
+     * @function dnd5e.rollHitDieV2
      * @memberof hookEvents
      * @param {Actor5e} actor           Actor for which the hit die has been rolled.
      * @param {BasicRoll[]} rolls       The resulting rolls.

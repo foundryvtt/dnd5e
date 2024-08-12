@@ -76,6 +76,7 @@ export default class ChatMessage5e extends ChatMessage {
 
     this._enrichChatCard(html[0]);
     this._collapseTrays(html[0]);
+    this._activateActivityListeners(html[0]);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -595,6 +596,18 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /**
+   * Add event listeners for chat messages created from activities.
+   * @param {HTMLElement} html  The chat message HTML.
+   */
+  _activateActivityListeners(html) {
+    if ( !this.getFlag("dnd5e", "activity") ) return;
+    const activity = this.getAssociatedActivity();
+    activity?.activateChatListeners(this, html);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle target selection and panning.
    * @param {Event} event   The triggering event.
    * @returns {Promise}     A promise that resolves once the canvas pan has completed.
@@ -748,6 +761,16 @@ export default class ChatMessage5e extends ChatMessage {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the Activity that created this chat card.
+   * @returns {Activity|void}
+   */
+  getAssociatedActivity() {
+    return fromUuidSync(this.getFlag("dnd5e", "activity.uuid"));
+  }
+
   /* -------------------------------------------- */
 
   /**

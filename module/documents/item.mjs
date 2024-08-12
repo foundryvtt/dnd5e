@@ -1714,52 +1714,22 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} [options]
    * @param {boolean} [options.spellLevel]  Level at which a spell is cast.
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   async rollFormula({spellLevel}={}) {
-    if ( !this.system.formula ) throw new Error("This Item does not have a formula to roll!");
+    foundry.utils.logCompatibilityWarning(
+      "The Item5e#rollFormula method has been deprecated and should now be called directly on the utility activity.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
 
-    const rollConfig = {
-      formula: this.system.formula,
-      data: this.getRollData(),
-      chatMessage: true
-    };
-    if ( spellLevel ) rollConfig.data.item.level = spellLevel;
+    let item = this;
+    if ( spellLevel && (this.type === "spell") ) item = item.clone({ "system.item.level": spellLevel });
 
-    /**
-     * A hook event that fires before a formula is rolled for an Item.
-     * @function dnd5e.preRollFormula
-     * @memberof hookEvents
-     * @param {Item5e} item                 Item for which the roll is being performed.
-     * @param {object} config               Configuration data for the pending roll.
-     * @param {string} config.formula       Formula that will be rolled.
-     * @param {object} config.data          Data used when evaluating the roll.
-     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
-     * @returns {boolean}                   Explicitly return false to prevent the roll from being performed.
-     */
-    if ( Hooks.call("dnd5e.preRollFormula", this, rollConfig) === false ) return;
+    const activity = item.system.activities?.getByType("utility")[0];
+    if ( !activity ) throw new Error("This Item does not have a Utility activity to roll!");
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data)
-      .roll({ allowInteractive: game.settings.get("core", "rollMode") !== CONST.DICE_ROLL_MODES.BLIND });
-
-    if ( rollConfig.chatMessage ) {
-      roll.toMessage({
-        speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        flavor: `${this.name} - ${game.i18n.localize("DND5E.OtherFormula")}`,
-        rollMode: game.settings.get("core", "rollMode"),
-        messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id, itemUuid: this.uuid}}
-      });
-    }
-
-    /**
-     * A hook event that fires after a formula has been rolled for an Item.
-     * @function dnd5e.rollFormula
-     * @memberof hookEvents
-     * @param {Item5e} item  Item for which the roll was performed.
-     * @param {Roll} roll    The resulting roll.
-     */
-    Hooks.callAll("dnd5e.rollFormula", this, roll);
-
-    return roll;
+    const rolls = await activity.rollFormula({}, { configure: false });
+    return rolls?.[0];
   }
 
   /* -------------------------------------------- */

@@ -18,7 +18,9 @@
     {{#if buttons}}
     <div class="card-buttons">
         {{#each buttons}}
-        <button type="button" name="{{ @key }}" {{ dnd5e-dataset dataset }}>{{{ label }}}</button>
+        <button type="button" name="{{ @key }}" {{ dnd5e-dataset dataset }}>
+            {{{ icon }}} {{{ label }}}
+        </button>
         {{/each}}
     </div>
     {{/if}}
