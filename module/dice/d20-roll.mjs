@@ -1,6 +1,35 @@
 const { Die, NumericTerm, OperatorTerm } = foundry.dice.terms;
 
 /**
+ * Configuration data for the process of rolling d20 rolls.
+ *
+ * @typedef {BasicRollProcessConfiguration} D20RollProcessConfiguration
+ * @property {boolean} elvenAccuracy         Use three dice when rolling with advantage.
+ * @property {boolean} halflingLucky         Add a re-roll once modifier to the d20 die.
+ * @property {D20RollConfiguration[]} rolls  Configuration data for individual rolls.
+ */
+
+/**
+ * D20 roll configuration data.
+ *
+ * @typedef {BasicRollConfiguration} D20RollConfiguration
+ * @property {string[]} parts          Parts used to construct the roll formula, not including the d20 die.
+ * @property {D20RollOptions} options  Options passed through to the roll.
+ */
+
+/**
+ * Options that describe a d20 roll.
+ *
+ * @typedef {BasicRollOptions} D20RollOptions
+ * @property {boolean} advantage       Is the roll granted advantage?
+ * @property {boolean} disadvantage    Is the roll granted disadvantage?
+ * @property {number} criticalSuccess  The value of the d20 die to be considered a critical success.
+ * @property {number} criticalFailure  The value of the d20 die to be considered a critical failure.
+ * @property {number} maximum          Maximum number the d20 die can roll.
+ * @property {number} minimum          Minimum number the d20 die can roll.
+ */
+
+/**
  * A type of Roll specific to a d20-based check, save, or attack roll in the 5e system.
  * @param {string} formula                       The string formula to parse
  * @param {object} data                          The data object against which to parse attributes within the formula
