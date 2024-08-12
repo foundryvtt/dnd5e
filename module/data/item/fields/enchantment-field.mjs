@@ -1,4 +1,5 @@
-import { FormulaField, IdentifierField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
+import IdentifierField from "../../fields/identifier-field.mjs";
 
 const { BooleanField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
 

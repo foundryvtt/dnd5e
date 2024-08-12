@@ -2,7 +2,8 @@ import CompendiumBrowser from "../../../applications/compendium-browser.mjs";
 import TokenPlacement from "../../../canvas/token-placement.mjs";
 import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
 import { formatCR, simplifyBonus, staticID } from "../../../utils.mjs";
-import { FormulaField, IdentifierField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
+import IdentifierField from "../../fields/identifier-field.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, NumberField, SchemaField, SetField, StringField

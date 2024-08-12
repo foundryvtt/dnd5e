@@ -1,6 +1,6 @@
 import { replaceFormulaData } from "../../../utils.mjs";
 import SystemDataModel from "../../abstract.mjs";
-import { FormulaField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
 
 const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 

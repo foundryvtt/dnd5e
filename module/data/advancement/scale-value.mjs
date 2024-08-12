@@ -1,4 +1,7 @@
-import { IdentifierField, MappingField } from "../fields.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
+import MappingField from "../fields/mapping-field.mjs";
+
+const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data model for the Scale Value advancement type.
@@ -13,14 +16,12 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
-      type: new foundry.data.fields.StringField({
+      identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
+      type: new StringField({
         required: true, initial: "string", choices: TYPES, label: "DND5E.AdvancementScaleValueTypeLabel"
       }),
-      distance: new foundry.data.fields.SchemaField({
-        units: new foundry.data.fields.StringField({required: true, label: "DND5E.MovementUnits"})
-      }),
-      scale: new MappingField(new ScaleValueEntryField(), {required: true})
+      distance: new SchemaField({ units: new StringField({required: true, label: "DND5E.MovementUnits"}) }),
+      scale: new MappingField(new ScaleValueEntryField(), { required: true })
     };
   }
 
@@ -77,7 +78,7 @@ export class ScaleValueType extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      value: new foundry.data.fields.StringField({required: true})
+      value: new StringField({ required: true })
     };
   }
 

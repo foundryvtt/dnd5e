@@ -1,6 +1,7 @@
 import TraitAdvancement from "../../documents/advancement/trait.mjs";
 import { ItemDataModel } from "../abstract.mjs";
-import { AdvancementField, FormulaField, IdentifierField } from "../fields.mjs";
+import AdvancementField from "../fields/advancement-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 

@@ -1,6 +1,9 @@
 import { ItemDataModel } from "../abstract.mjs";
-import { AdvancementField, IdentifierField } from "../fields.mjs";
+import AdvancementField from "../fields/advancement-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+
+const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Subclass items.
@@ -17,17 +20,17 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
+      identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
       classIdentifier: new IdentifierField({
         required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
       }),
-      advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
-      spellcasting: new foundry.data.fields.SchemaField({
-        progression: new foundry.data.fields.StringField({
+      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
+      spellcasting: new SchemaField({
+        progression: new StringField({
           required: true, initial: "none", blank: false, label: "DND5E.SpellProgression"
         }),
-        ability: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellAbility"})
-      }, {label: "DND5E.Spellcasting"})
+        ability: new StringField({ required: true, label: "DND5E.SpellAbility" })
+      }, { label: "DND5E.Spellcasting" })
     });
   }
 

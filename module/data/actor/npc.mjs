@@ -1,5 +1,5 @@
 import Proficiency from "../../documents/actor/proficiency.mjs";
-import { FormulaField } from "../fields.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
 import SourceField from "../shared/source-field.mjs";

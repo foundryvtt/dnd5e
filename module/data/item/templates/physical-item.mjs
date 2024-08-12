@@ -1,6 +1,8 @@
 import { convertWeight } from "../../../utils.mjs";
 import SystemDataModel from "../../abstract.mjs";
 
+const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
+
 /**
  * Data model template with information on physical items.
  *
@@ -19,30 +21,30 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      container: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseItem, {
+      container: new ForeignDocumentField(foundry.documents.BaseItem, {
         idOnly: true, label: "DND5E.Container"
       }),
-      quantity: new foundry.data.fields.NumberField({
+      quantity: new NumberField({
         required: true, nullable: false, integer: true, initial: 1, min: 0, label: "DND5E.Quantity"
       }),
-      weight: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
+      weight: new SchemaField({
+        value: new NumberField({
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
         }),
-        units: new foundry.data.fields.StringField({
+        units: new StringField({
           required: true, label: "DND5E.WeightUnit.Label",
           initial: () => game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
         })
       }, {label: "DND5E.Weight"}),
-      price: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
+      price: new SchemaField({
+        value: new NumberField({
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Price"
         }),
-        denomination: new foundry.data.fields.StringField({
+        denomination: new StringField({
           required: true, blank: false, initial: "gp", label: "DND5E.Currency"
         })
       }, {label: "DND5E.Price"}),
-      rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"})
+      rarity: new StringField({required: true, blank: true, label: "DND5E.Rarity"})
     };
   }
 

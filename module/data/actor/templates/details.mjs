@@ -1,4 +1,4 @@
-import { LocalDocumentField } from "../../fields.mjs";
+import LocalDocumentField from "../../fields/local-document-field.mjs";
 const { HTMLField, SchemaField, StringField } = foundry.data.fields;
 
 /**

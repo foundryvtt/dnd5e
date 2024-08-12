@@ -1,8 +1,11 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import { ItemDataModel } from "../abstract.mjs";
-import { AdvancementField, IdentifierField } from "../fields.mjs";
+import AdvancementField from "../fields/advancement-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import { CreatureTypeField, MovementField, SensesField } from "../shared/_module.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+
+const { ArrayField } = foundry.data.fields;
 
 /**
  * Data definition for Race items.
@@ -18,8 +21,8 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({label: "DND5E.Identifier"}),
-      advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
+      identifier: new IdentifierField({ label: "DND5E.Identifier" }),
+      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       movement: new MovementField(),
       senses: new SensesField(),
       type: new CreatureTypeField({ swarm: false }, { initial: { value: "humanoid" } })

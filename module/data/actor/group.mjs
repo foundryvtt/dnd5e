@@ -1,6 +1,6 @@
 import TokenPlacement from "../../canvas/token-placement.mjs";
 import { ActorDataModel } from "../abstract.mjs";
-import { FormulaField } from "../fields.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
 
@@ -48,33 +48,31 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new SchemaField({
-        value: new StringField({initial: "party", label: "DND5E.Group.Type"})
+        value: new StringField({ initial: "party", label: "DND5E.Group.Type" })
       }),
       description: new SchemaField({
-        full: new HTMLField({label: "DND5E.Description"}),
-        summary: new HTMLField({label: "DND5E.DescriptionSummary"})
+        full: new HTMLField({ label: "DND5E.Description" }),
+        summary: new HTMLField({ label: "DND5E.DescriptionSummary" })
       }),
       members: new ArrayField(new SchemaField({
         actor: new ForeignDocumentField(foundry.documents.BaseActor),
         quantity: new SchemaField({
-          value: new NumberField({initial: 1, integer: true, min: 0, label: "DND5E.Quantity"}),
-          formula: new FormulaField({label: "DND5E.QuantityFormula"})
+          value: new NumberField({ initial: 1, integer: true, min: 0, label: "DND5E.Quantity" }),
+          formula: new FormulaField({ label: "DND5E.QuantityFormula" })
         })
-      }), {label: "DND5E.GroupMembers"}),
+      }), { label: "DND5E.GroupMembers" }),
       attributes: new SchemaField({
         movement: new SchemaField({
-          land: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementLand"}),
-          water: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementWater"}),
-          air: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementAir"})
+          land: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementLand" }),
+          water: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementWater" }),
+          air: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementAir" })
         })
-      }, {label: "DND5E.Attributes"}),
+      }, { label: "DND5E.Attributes" }),
       details: new SchemaField({
-        xp: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.NumberField({
-            integer: true, min: 0, label: "DND5E.ExperiencePointsCurrent"
-          })
-        }, {label: "DND5E.ExperiencePoints"})
-      }, {label: "DND5E.Details"})
+        xp: new SchemaField({
+          value: new NumberField({ integer: true, min: 0, label: "DND5E.ExperiencePointsCurrent" })
+        }, { label: "DND5E.ExperiencePoints" })
+      }, { label: "DND5E.Details" })
     });
   }
 

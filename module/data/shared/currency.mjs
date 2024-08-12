@@ -1,5 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
-import { MappingField } from "../fields.mjs";
+import MappingField from "../fields/mapping-field.mjs";
 
 /**
  * A template for currently held currencies.

@@ -1,5 +1,5 @@
 import { ItemDataModel } from "../abstract.mjs";
-import { FormulaField } from "../fields.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
@@ -7,6 +7,8 @@ import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
+
+const { NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Tool items.
@@ -29,18 +31,14 @@ export default class ToolData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({subtype: false}, {label: "DND5E.ItemToolType"}),
-      ability: new foundry.data.fields.StringField({
-        required: true, blank: true, label: "DND5E.DefaultAbilityCheck"
-      }),
-      chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
-      proficient: new foundry.data.fields.NumberField({
+      type: new ItemTypeField({ subtype: false }, { label: "DND5E.ItemToolType" }),
+      ability: new StringField({ required: true, blank: true, label: "DND5E.DefaultAbilityCheck" }),
+      chatFlavor: new StringField({ required: true, label: "DND5E.ChatFlavor" }),
+      proficient: new NumberField({
         required: true, initial: null, min: 0, max: 2, step: 0.5, label: "DND5E.ItemToolProficiency"
       }),
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.ItemToolProperties"
-      }),
-      bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
+      properties: new SetField(new StringField(), { label: "DND5E.ItemToolProperties" }),
+      bonus: new FormulaField({ required: true, label: "DND5E.ItemToolBonus" })
     });
   }
 

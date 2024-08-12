@@ -5,6 +5,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Container items.
@@ -24,18 +25,14 @@ export default class ContainerData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      quantity: new foundry.data.fields.NumberField({min: 1, max: 1}),
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.ItemContainerProperties"
-      }),
-      capacity: new foundry.data.fields.SchemaField({
-        type: new foundry.data.fields.StringField({
+      quantity: new NumberField({ min: 1, max: 1 }),
+      properties: new SetField(new StringField(), { label: "DND5E.ItemContainerProperties" }),
+      capacity: new SchemaField({
+        type: new StringField({
           required: true, initial: "weight", blank: false, label: "DND5E.ItemContainerCapacityType"
         }),
-        value: new foundry.data.fields.NumberField({
-          required: true, min: 0, label: "DND5E.ItemContainerCapacityMax"
-        })
-      }, {label: "DND5E.ItemContainerCapacity"})
+        value: new NumberField({ required: true, min: 0, label: "DND5E.ItemContainerCapacityMax" })
+      }, { label: "DND5E.ItemContainerCapacity" })
     });
   }
 

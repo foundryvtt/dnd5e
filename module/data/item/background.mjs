@@ -1,7 +1,10 @@
 import { ItemDataModel } from "../abstract.mjs";
-import { AdvancementField, IdentifierField } from "../fields.mjs";
+import AdvancementField from "../fields/advancement-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
+
+const { ArrayField } = foundry.data.fields;
 
 /**
  * Data definition for Background items.
@@ -16,7 +19,7 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
-      advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"})
+      advancement: new ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"})
     });
   }
 

@@ -1,5 +1,5 @@
 import JournalSpellListPageSheet from "../../applications/journal/spells-page-sheet.mjs";
-import { IdentifierField } from "../fields.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 
 const { ArrayField, DocumentIdField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;

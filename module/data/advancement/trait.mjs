@@ -1,3 +1,5 @@
+const { ArrayField, BooleanField, NumberField, SetField, SchemaField, StringField } = foundry.data.fields;
+
 /**
  * Configuration for a specific trait choice.
  *
@@ -19,22 +21,18 @@
 export class TraitConfigurationData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      mode: new foundry.data.fields.StringField({initial: "default", label: "DND5E.AdvancementTraitMode"}),
-      allowReplacements: new foundry.data.fields.BooleanField({
+      mode: new StringField({ initial: "default", label: "DND5E.AdvancementTraitMode" }),
+      allowReplacements: new BooleanField({
         required: true, label: "DND5E.AdvancementTraitAllowReplacements",
         hint: "DND5E.AdvancementTraitAllowReplacementsHint"
       }),
-      grants: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        required: true, label: "DND5E.AdvancementTraitGrants"
-      }),
-      choices: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-        count: new foundry.data.fields.NumberField({
+      grants: new SetField(new StringField(), { required: true, label: "DND5E.AdvancementTraitGrants" }),
+      choices: new ArrayField(new SchemaField({
+        count: new NumberField({
           required: true, positive: true, integer: true, initial: 1, label: "DND5E.AdvancementTraitCount"
         }),
-        pool: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-          required: false, label: "DOCUMENT.Items"
-        })
-      }), {label: "DND5E.AdvancementTraitChoices"})
+        pool: new SetField(new StringField(), { required: false, label: "DOCUMENT.Items" })
+      }), { label: "DND5E.AdvancementTraitChoices" })
     };
   }
 
@@ -57,7 +55,7 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
 export class TraitValueData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      chosen: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), { required: false })
+      chosen: new SetField(new StringField(), { required: false })
     };
   }
 }
