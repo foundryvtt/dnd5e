@@ -32,7 +32,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {object} range
  * @property {number} range.value           Short range of the weapon.
  * @property {number} range.long            Long range of the weapon.
- * @property {number} range.reach           Reach of the weapon.
+ * @property {number|null} range.reach      Reach of the weapon.
  * @property {string} range.units           Units used to measure the weapon's range and reach.
  */
 export default class WeaponData extends ItemDataModel.mixin(
@@ -161,6 +161,8 @@ export default class WeaponData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
+    if ( this.attackType === "ranged" ) this.range.reach = null;
+    else if ( this.range.reach === null ) this.range.reach = this.properties.has("rch") ? 10 : 5;
   }
 
   /* -------------------------------------------- */
