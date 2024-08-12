@@ -1,4 +1,5 @@
-import { formatNumber, staticID } from "../../utils.mjs";
+import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import { formatNumber, safePropertyExists, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
@@ -116,6 +117,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The primary ability for this activity that will be available as `@mod` in roll data.
+   * @type {string|null}
+   */
+  get ability() {
+    return null;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -396,15 +407,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareData() {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
+    this.labels ??= {};
   }
 
   /* -------------------------------------------- */
 
   /**
    * Perform final preparation after containing item is prepared.
-   * @param {object} rollData  Deterministic roll data from the item.
+   * @param {object} [rollData]  Deterministic roll data from the activity.
    */
   prepareFinalData(rollData) {
+    rollData ??= this.getRollData({ deterministic: true });
+
     this._setOverride("activation");
     this._setOverride("duration");
     this._setOverride("range");
@@ -417,11 +431,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       writable: false
     });
 
-    ActivationField.prepareData.call(this, rollData);
-    DurationField.prepareData.call(this, rollData);
-    RangeField.prepareData.call(this, rollData);
-    TargetField.prepareData.call(this, rollData);
-    UsesField.prepareData.call(this, rollData);
+    ActivationField.prepareData.call(this, rollData, this.labels);
+    DurationField.prepareData.call(this, rollData, this.labels);
+    RangeField.prepareData.call(this, rollData, this.labels);
+    TargetField.prepareData.call(this, rollData, this.labels);
+    UsesField.prepareData.call(this, rollData, this.labels);
 
     const actor = this.item.actor;
     if ( !actor ) return;
@@ -440,6 +454,42 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
       }
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the label for a compiled and simplified damage formula.
+   * @param {DamageData[]} parts  Damage parts to create labels for.
+   * @param {object} rollData     Deterministic roll data from the item.
+   */
+  prepareDamageLabel(parts, rollData) {
+    this.labels.damage = parts.map(part => {
+      let formula;
+      try {
+        formula = part.formula;
+        if ( part.base && this.item.system.magicAvailable ) {
+          formula = `${formula} + ${this.item.system.magicalBonus ?? 0}`;
+        }
+        const roll = new Roll(formula, rollData);
+        formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
+      } catch(err) {
+        console.warn(`Unable to simplify formula for ${this.name} in item ${this.item.name}${
+          this.actor ? ` on ${this.actor.name} (${this.actor.id})` : ""
+        } (${this.uuid})`, err);
+      }
+
+      let label = formula;
+      if ( part.types.size ) {
+        label = `${formula} ${game.i18n.getListFormatter({ type: "conjunction" }).format(
+          Array.from(part.types)
+            .map(p => CONFIG.DND5E.damageTypes[p]?.label ?? CONFIG.DND5E.healingTypes[p]?.label)
+            .filter(t => t)
+        )}`;
+      }
+
+      return { formula, damageType: part.types.size === 1 ? part.types.first() : null, label };
+    });
   }
 
   /* -------------------------------------------- */
@@ -467,7 +517,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   _setOverride(keyPath) {
     const obj = foundry.utils.getProperty(this, keyPath);
     Object.defineProperty(obj, "canOverride", {
-      value: foundry.utils.hasProperty(this.item.system, keyPath),
+      value: safePropertyExists(this.item.system, keyPath),
       configurable: true,
       enumerable: false
     });

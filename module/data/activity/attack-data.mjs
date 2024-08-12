@@ -1,3 +1,5 @@
+import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import { safePropertyExists } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
@@ -7,8 +9,8 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
 /**
  * Data model for an attack activity.
  *
- * @property {string} ability                     Ability used to make the attack and determine damage.
  * @property {object} attack
+ * @property {string} attack.ability              Ability used to make the attack and determine damage.
  * @property {string} attack.bonus                Arbitrary bonus added to the attack.
  * @property {object} attack.critical
  * @property {number} attack.critical.threshold   Minimum value on the D20 needed to roll a critical hit.
@@ -28,8 +30,8 @@ export default class AttackActivityData extends BaseActivityData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      ability: new StringField(),
       attack: new SchemaField({
+        ability: new StringField(),
         bonus: new FormulaField(),
         critical: new SchemaField({
           threshold: new NumberField({ integer: true, positive: true })
@@ -52,6 +54,19 @@ export default class AttackActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get ability() {
+    const availableAbilities = this.availableAbilities;
+    if ( !availableAbilities?.size ) return null;
+    if ( availableAbilities?.size === 1 ) return availableAbilities.first();
+    const abilities = this.actor?.system.abilities ?? {};
+    return availableAbilities.reduce((largest, ability) =>
+      (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest
+    , availableAbilities.first());
+  }
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -100,8 +115,8 @@ export default class AttackActivityData extends BaseActivityData {
     }
 
     return foundry.utils.mergeObject(activityData, {
-      ability: source.system.ability ?? "",
       attack: {
+        ability: source.system.ability ?? "",
         bonus: source.system.attack?.bonus ?? "",
         critical: {
           threshold: source.system.critical?.threshold
@@ -126,17 +141,69 @@ export default class AttackActivityData extends BaseActivityData {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /**
-   * Prepare data related to this activity.
-   */
+  /** @inheritDoc */
   prepareData() {
     super.prepareData();
     this.attack.type.value ||= this.item.system.attackType ?? "";
     this.attack.type.classification ||= this.item.system.attackClassification ?? "";
-    if ( this.damage.includeBase && this.item.system.damage?.base?.formula ) {
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData(rollData) {
+    if ( this.damage.includeBase && safePropertyExists(this.item.system, "damage.base")
+      && this.item.system.damage.base.formula ) {
       const basePart = this.item.system.damage.base.clone();
       basePart.base = true;
       this.damage.parts.unshift(basePart);
     }
+
+    rollData ??= this.getRollData({ deterministic: true });
+    super.prepareFinalData(rollData);
+    this.prepareDamageLabel(this.damage.parts, rollData);
+
+    const { data, parts } = this.getAttackData();
+    const roll = new Roll(parts.join("+"), data);
+    this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }) || "0";
+    const formula = simplifyRollFormula(roll.formula) || "0";
+    this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the roll parts used to create to the attack roll.
+   * @returns {{ data: object, parts: string[] }}
+   */
+  getAttackData() {
+    const data = this.getRollData();
+    const parts = [];
+    const item = this.item.system;
+
+    if ( this.actor && !this.attack.flat ) {
+      // Ability modifier & proficiency bonus
+      if ( this.attack.ability !== "none" ) parts.push("@mod");
+      if ( item.prof?.hasProficiency ) {
+        parts.push("@prof");
+        data.prof = item.prof.term;
+      }
+
+      // Actor-level global bonus to attack rolls
+      const actorBonus = this.actor.system.bonuses?.[this.actionType];
+      if ( actorBonus?.attack ) parts.push(actorBonus.attack);
+
+      // TODO: Ammunition
+    }
+
+    // Include the activity's attack bonus & item's magical bonus
+    if ( this.attack.bonus ) parts.push(this.attack.bonus);
+    if ( item.magicalBonus && item.magicAvailable && !this.attack.flat ) parts.push(item.magicalBonus);
+
+    // TODO: One-time ammunition bonus
+
+    return { data, parts };
   }
 }

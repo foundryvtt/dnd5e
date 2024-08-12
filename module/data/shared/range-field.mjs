@@ -32,7 +32,7 @@ export default class RangeField extends SchemaField {
    * @param {object} [labels]  Object in which to insert generated labels.
    */
   static prepareData(rollData, labels) {
-    this.range.scalar = this.units in CONFIG.DND5E.movementUnits;
+    this.range.scalar = this.range.units in CONFIG.DND5E.movementUnits;
     if ( this.range.scalar ) {
       prepareFormulaValue(this, "range.value", "DND5E.RANGE.FIELDS.range.value.label", rollData);
     } else this.range.value = null;

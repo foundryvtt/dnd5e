@@ -1,6 +1,6 @@
 <fieldset>
     <legend>{{ localize "DND5E.SAVE.FIELDS.save.label" }}</legend>
-    {{ formField fields.ability value=source.ability options=abilityOptions }}
+    {{ formField fields.save.fields.ability value=source.save.ability options=abilityOptions }}
     {{#with fields.save.fields.dc.fields as |fields|}}
     {{ formField fields.calculation value=../activity.save.dc.calculation options=../calculationOptions }}
     {{#if (eq ../source.save.dc.calculation "custom")}}

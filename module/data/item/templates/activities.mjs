@@ -256,9 +256,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} rollData
    */
   prepareFinalActivityData(rollData) {
-    const labels = this.parent.labels ?? {};
+    const labels = this.parent.labels ??= {};
     UsesField.prepareData.call(this, rollData, labels);
-    for ( const activity of this.activities ) activity.prepareFinalData(rollData);
+    for ( const activity of this.activities ) activity.prepareFinalData();
   }
 
   /* -------------------------------------------- */
@@ -373,7 +373,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       },
       hasAreaTarget: () => this.isActive && this.target.template?.type,
       hasIndividualTarget: () => this.isActive && this.target.affects?.type,
-      hasResource: () => this.isActive && !!consume.target && !!consume.type && !this.hasAttack,
+      hasResource: () => this.isActive && !!this.consume.target && !!this.consume.type && !this.hasAttack,
       hasScalarDuration: () => this.duration.units in CONFIG.DND5E.scalarTimePeriods,
       hasScalarRange: () => this.range.units in CONFIG.DND5E.movementUnits,
       hasScalarTarget: () => this.target.template?.type || ![null, "", "self"].includes(this.target.affects?.type),

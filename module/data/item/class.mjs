@@ -69,6 +69,13 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareFinalData() {
+    this.isOriginalClass = this.parent.isOriginalClass;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getFavoriteData() {
     const context = await super.getFavoriteData();
     if ( this.parent.subclass ) context.subtitle = this.parent.subclass.name;

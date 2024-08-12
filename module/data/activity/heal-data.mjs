@@ -25,4 +25,15 @@ export default class HealActivityData extends BaseActivityData {
       healing: this.transformDamagePartData(source, source.system.damage?.parts?.[0] ?? ["", ""])
     });
   }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData(rollData) {
+    rollData ??= this.getRollData({ deterministic: true });
+    super.prepareFinalData(rollData);
+    this.prepareDamageLabel([this.healing], rollData);
+  }
 }

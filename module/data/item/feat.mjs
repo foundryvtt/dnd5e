@@ -84,6 +84,16 @@ export default class FeatData extends ItemDataModel.mixin(
       if ( config ) this.type.label = config.subtypes?.[this.type.subtype] ?? null;
       else this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.feat);
     }
+
+    let label;
+    const activation = this.activities.contents[0]?.activation.type;
+    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryActionLabel");
+    else if ( activation === "lair" ) label = game.i18n.localize("DND5E.LairActionLabel");
+    else if ( activation === "action" && this.hasAttack ) label = game.i18n.localize("DND5E.Attack");
+    else if ( activation ) label = game.i18n.localize("DND5E.Action");
+    else label = game.i18n.localize("DND5E.Passive");
+    this.parent.labels ??= {};
+    this.parent.labels.featType = label;
   }
 
   /* -------------------------------------------- */
