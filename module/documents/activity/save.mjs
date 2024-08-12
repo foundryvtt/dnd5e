@@ -1,5 +1,6 @@
 import SaveSheet from "../../applications/activity/save-sheet.mjs";
 import SaveActivityData from "../../data/activity/save-data.mjs";
+import { getSceneTargets } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -21,7 +22,57 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
       type: "save",
       img: "systems/dnd5e/icons/svg/activity/save.svg",
       title: "DND5E.SAVE.Title.one",
-      sheetClass: SaveSheet
+      sheetClass: SaveSheet,
+      usage: {
+        actions: {
+          rollSave: SaveActivity.#rollSave
+        }
+      }
     }, { inplace: false })
   );
+
+  /* -------------------------------------------- */
+  /*  Activation                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _usageChatButtons() {
+    const ability = CONFIG.DND5E.abilities[this.save.ability]?.label ?? "";
+    const dc = this.save.dc.value;
+    return [{
+      label: `
+        <span class="visible-dc">${game.i18n.format("DND5E.SavingThrowDC", { dc, ability })}</span>
+        <span class="hidden-dc">${game.i18n.format("DND5E.SavePromptTitle", { ability })}</span>
+      `,
+      icon: '<i class="fa-solid fa-shield-heart" inert></i>',
+      dataset: {
+        ability, dc,
+        action: "rollSave",
+        visibility: "all"
+      }
+    }];
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle performing a saving throw.
+   * @this {UtilityActivity}
+   * @param {PointerEvent} event     Triggering click event.
+   * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
+   * @param {ChatMessage5e} message  Message associated with the activation.
+   */
+  static async #rollSave(event, target, message) {
+    const targets = getSceneTargets();
+    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
+    const dc = parseInt(target.dataset.dc);
+    for ( const token of targets ) {
+      const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document });
+      await token.actor.rollAbilitySave(target.dataset.ability ?? this.save.ability, {
+        event, speaker, targetValue: Number.isFinite(dc) ? dc : this.save.dc.value
+      });
+    }
+  }
 }
