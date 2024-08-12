@@ -19,7 +19,7 @@
     <div class="card-buttons">
         {{#each buttons}}
         <button type="button" name="{{ @key }}" {{ dnd5e-dataset dataset }}>
-            {{{ icon }}} {{{ label }}}
+            {{{ icon }}} <span>{{{ label }}}</span>
         </button>
         {{/each}}
     </div>

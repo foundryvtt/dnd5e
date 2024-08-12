@@ -600,9 +600,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {HTMLElement} html  The chat message HTML.
    */
   _activateActivityListeners(html) {
-    if ( !this.getFlag("dnd5e", "activity") ) return;
-    const activity = this.getAssociatedActivity();
-    activity?.activateChatListeners(this, html);
+    this.getAssociatedActivity()?.activateChatListeners(this, html);
   }
 
   /* -------------------------------------------- */

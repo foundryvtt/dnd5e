@@ -66,9 +66,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     const rollConfig = foundry.utils.deepClone(config);
     rollConfig.rolls = [{ parts: [this.roll.formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
-    const dialogConfig = foundry.utils.mergeObject({
-      configure: true
-    }, dialog);
+    const dialogConfig = foundry.utils.mergeObject({ configure: true }, dialog);
 
     const messageConfig = foundry.utils.mergeObject({
       create: true,

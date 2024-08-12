@@ -707,7 +707,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   activateChatListeners(message, html) {
     html.addEventListener("click", event => {
-      const target = event.target.closest("[data-action");
+      const target = event.target.closest("[data-action]");
       if ( target ) this.#onChatAction(event, target, message);
     });
   }
