@@ -9,4 +9,8 @@
     {{ formField fields.spellcasting.fields.ability value=source.spellcasting.ability choices=config.abilities
                  labelAttr="label" blank="" localize=true }}
 
+    {{!-- Preparation Formula --}}
+    {{ formField fields.spellcasting.fields.preparation.fields.formula value=source.spellcasting.formula localize=true
+                 placeholder="—" }}
+
 </fieldset>
