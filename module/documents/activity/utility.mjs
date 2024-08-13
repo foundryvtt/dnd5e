@@ -41,7 +41,8 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
       label: this.roll.label || game.i18n.localize("DND5E.Roll"),
       icon: '<i class="fa-solid fa-dice" inert></i>',
       dataset: {
-        action: "rollFormula"
+        action: "rollFormula",
+        visibility: this.roll.visible ? "all" : "creator"
       }
     }];
   }
@@ -66,7 +67,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     const rollConfig = foundry.utils.deepClone(config);
     rollConfig.rolls = [{ parts: [this.roll.formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
-    const dialogConfig = foundry.utils.mergeObject({ configure: true }, dialog);
+    const dialogConfig = foundry.utils.mergeObject({ configure: this.roll.prompt }, dialog);
 
     const messageConfig = foundry.utils.mergeObject({
       create: true,

@@ -2628,6 +2628,14 @@
       "name": {
         "label": "Roll Label",
         "hint": "Display name for the rolling button."
+      },
+      "prompt": {
+        "label": "Utility Roll Prompt",
+        "hint": "Should the roll configuration dialog be displayed when rolling?"
+      },
+      "visible": {
+        "label": "Visible to All",
+        "hint": "Should the rolling button be visible to all players?"
       }
     }
   }
