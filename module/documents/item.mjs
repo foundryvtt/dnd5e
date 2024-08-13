@@ -1690,9 +1690,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             versatile: action === "versatile"
           });
           break;
-        case "formula":
-          await item.rollFormula({event, spellLevel});
-          break;
         case "placeTemplate":
           try {
             await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
@@ -1701,16 +1698,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
               msg: game.i18n.localize("DND5E.PlaceTemplateError"),
               log: "error",
               notify: "error"
-            });
-          }
-          break;
-        case "save":
-          targets = this._getChatCardTargets(card);
-          for ( let token of targets ) {
-            const dc = parseInt(button.dataset.dc);
-            const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
-            await token.actor.rollAbilitySave(button.dataset.ability, {
-              event, speaker, targetValue: Number.isFinite(dc) ? dc : undefined
             });
           }
           break;

@@ -1271,7 +1271,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     return ChatMessage.implementation.create({
       content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
-        dataset: { ...dataset, type: "concentration" },
+        dataset: { ...dataset, type: "concentration", visbility: "all" },
         buttonLabel: createRollLabel({ ...dataset, ...config }),
         hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
       }),

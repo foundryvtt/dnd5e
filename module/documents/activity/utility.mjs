@@ -42,7 +42,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
       icon: '<i class="fa-solid fa-dice" inert></i>',
       dataset: {
         action: "rollFormula",
-        visibility: this.roll.visible ? "all" : "creator"
+        visibility: this.roll.visible ? "all" : undefined
       }
     }];
   }

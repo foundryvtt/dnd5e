@@ -640,6 +640,17 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
+   * Determine whether the provided button in a chat message should be visible.
+   * @param {HTMLButtonElement} button
+   * @returns {boolean}
+   */
+  shouldHideChatButton(button) {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Display a chat message for this usage.
    * @param {ActivityMessageConfiguration} message  Configuration info for the created message.
    * @returns {Promise<ChatMessage5e|object>}
@@ -735,8 +746,13 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   async #onChatAction(event, target, message) {
     const action = target.dataset.action;
     const handler = this.metadata.usage?.actions?.[action];
-    if ( handler ) handler.call(this, event, target, message);
-    else this._onChatAction(event, target);
+    target.disabled = true;
+    try {
+      if ( handler ) await handler.call(this, event, target, message);
+      else await this._onChatAction(event, target);
+    } finally {
+      target.disabled = false;
+    }
   }
 
   /* -------------------------------------------- */

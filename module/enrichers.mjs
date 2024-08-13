@@ -815,7 +815,7 @@ async function rollAction(event) {
       content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
         buttonLabel: createRollLabel({ ...target.dataset, format: "short", icon: true }),
         hiddenLabel: createRollLabel({ ...target.dataset, format: "short", icon: true, hideDC: true }),
-        dataset: { ...target.dataset, action: "rollRequest" }
+        dataset: { ...target.dataset, action: "rollRequest", visibility: "all" }
       }),
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})

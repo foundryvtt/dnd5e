@@ -179,7 +179,7 @@ export default class FeatData extends ItemDataModel.mixin(
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateEnchantment(source) {
-    if ( !("enchantment" in source) || !("items" in source.enchantment) ) return;
+    if ( foundry.utils.getType(source.enchantment?.items) !== "Object" ) return;
     const { items } = source.enchantment;
     source.enchant ??= {};
     if ( "max" in items ) source.enchant.max = items.max;

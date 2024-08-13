@@ -166,26 +166,36 @@ export default class ChatMessage5e extends ChatMessage {
         }
       });
 
-      // If the user is the message author or the actor owner, proceed
-      let actor = game.actors.get(this.speaker.actor);
-      if ( game.user.isGM || actor?.isOwner || (this.author.id === game.user.id) ) {
-        const optionallyHide = (selector, hide) => {
-          const element = chatCard[0].querySelector(selector);
-          if ( element && hide ) element.style.display = "none";
-        };
-        optionallyHide('button[data-action="summon"]', !SummonsData.canSummon);
-        optionallyHide('button[data-action="placeTemplate"]', !game.user.can("TEMPLATE_CREATE"));
-        optionallyHide('button[data-action="consumeUsage"]', this.getFlag("dnd5e", "use.consumedUsage"));
-        optionallyHide('button[data-action="consumeResource"]', this.getFlag("dnd5e", "use.consumedResource"));
-        return;
+      const actor = game.actors.get(this.speaker.actor);
+      const isCreator = game.user.isGM || actor?.isOwner || (this.author.id === game.user.id);
+      for ( const button of html[0].querySelectorAll(".card-buttons button") ) {
+        if ( button.dataset.visibility === "all" ) continue;
+
+        // GM buttons should only be visible to GMs, otherwise button should only be visible to message's creator
+        if ( ((button.dataset.visibility === "gm") && !game.user.isGM) || !isCreator
+          || this.getAssociatedActivity()?.shouldHideChatButton(button) ) button.hidden = true;
       }
 
-      // Otherwise conceal action buttons except for saving throw
-      const buttons = chatCard.find("button[data-action]:not(.apply-effect)");
-      buttons.each((i, btn) => {
-        if ( ["save", "rollRequest", "concentration"].includes(btn.dataset.action) ) return;
-        btn.style.display = "none";
-      });
+      // TODO: Refer some of this more complex hiding behavior to activity when these buttons are re-implemented
+      // // If the user is the message author or the actor owner, proceed
+      // if ( game.user.isGM || actor?.isOwner || (this.author.id === game.user.id) ) {
+      //   const optionallyHide = (selector, hide) => {
+      //     const element = chatCard[0].querySelector(selector);
+      //     if ( element && hide ) element.style.display = "none";
+      //   };
+      //   optionallyHide('button[data-action="summon"]', !SummonsData.canSummon);
+      //   optionallyHide('button[data-action="placeTemplate"]', !game.user.can("TEMPLATE_CREATE"));
+      //   optionallyHide('button[data-action="consumeUsage"]', this.getFlag("dnd5e", "use.consumedUsage"));
+      //   optionallyHide('button[data-action="consumeResource"]', this.getFlag("dnd5e", "use.consumedResource"));
+      //   return;
+      // }
+
+      // // Otherwise conceal action buttons except for saving throw
+      // const buttons = chatCard.find("button[data-action]:not(.apply-effect)");
+      // buttons.each((i, btn) => {
+      //   if ( ["save", "rollRequest", "concentration"].includes(btn.dataset.action) ) return;
+      //   btn.style.display = "none";
+      // });
     }
   }
 
@@ -875,7 +885,7 @@ export default class ChatMessage5e extends ChatMessage {
       });
     }
 
-    if ( flags.item?.data ) Object.defineProperty(flags, "itemData", {
+    if ( flags?.item?.data ) Object.defineProperty(flags, "itemData", {
       get() {
         foundry.utils.logCompatibilityWarning(
           "The `dnd5e.itemData` flag on `ChatMessage` is now `dnd5e.item.data`.",

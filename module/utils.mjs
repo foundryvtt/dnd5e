@@ -459,6 +459,7 @@ export async function preloadHandlebarsTemplates() {
 function dataset(object, options) {
   const entries = [];
   for ( let [key, value] of Object.entries(object ?? {}) ) {
+    if ( value === undefined ) continue;
     key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
     entries.push(`data-${key}="${value}"`);
   }
