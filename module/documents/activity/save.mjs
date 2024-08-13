@@ -25,6 +25,7 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
       sheetClass: SaveSheet,
       usage: {
         actions: {
+          rollDamage: SaveActivity.#rollDamage,
           rollSave: SaveActivity.#rollSave
         }
       }
@@ -39,7 +40,7 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
   _usageChatButtons() {
     const ability = CONFIG.DND5E.abilities[this.save.ability]?.label ?? "";
     const dc = this.save.dc.value;
-    return [{
+    const buttons = [{
       label: `
         <span class="visible-dc">${game.i18n.format("DND5E.SavingThrowDC", { dc, ability })}</span>
         <span class="hidden-dc">${game.i18n.format("DND5E.SavePromptTitle", { ability })}</span>
@@ -51,6 +52,28 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
         visibility: "all"
       }
     }];
+    if ( this.damage.parts.length ) buttons.push({
+      label: game.i18n.localize("DND5E.Damage"),
+      icon: '<i class="fas fa-burst" inert></i>',
+      dataset: {
+        action: "rollDamage"
+      }
+    });
+    return buttons;
+  }
+
+  /* -------------------------------------------- */
+  /*  Rolling                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async rollDamage(config={}, dialog={}, message={}) {
+    message = foundry.utils.mergeObject({
+      "data.flags.dnd5e.roll": {
+        damageOnSave: this.damage.onSave
+      }
+    }, message);
+    return super.rollDamage(config, dialog, message);
   }
 
   /* -------------------------------------------- */
@@ -58,8 +81,21 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
   /* -------------------------------------------- */
 
   /**
+   * Handle performing a damage roll.
+   * @this {SaveActivity}
+   * @param {PointerEvent} event     Triggering click event.
+   * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
+   * @param {ChatMessage5e} message  Message associated with the activation.
+   */
+  static #rollDamage(event, target, message) {
+    this.rollDamage({ event });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle performing a saving throw.
-   * @this {UtilityActivity}
+   * @this {SaveActivity}
    * @param {PointerEvent} event     Triggering click event.
    * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
    * @param {ChatMessage5e} message  Message associated with the activation.

@@ -82,7 +82,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
           }
         }
       }
-    });
+    }, message);
 
     /**
      * A hook event that fires before a formula is rolled for an Utility activity.
