@@ -166,8 +166,8 @@ export default class ChatMessage5e extends ChatMessage {
         }
       });
 
-      let actor = game.actors.get(this.speaker.actor);
-      const isCreator = actor?.isOwner || (this.author.id === game.user.id);
+      const actor = game.actors.get(this.speaker.actor);
+      const isCreator = game.user.isGM || actor?.isOwner || (this.author.id === game.user.id);
       for ( const button of html[0].querySelectorAll(".card-buttons button") ) {
         if ( button.dataset.visibility === "all" ) continue;
 
