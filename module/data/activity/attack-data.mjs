@@ -101,6 +101,23 @@ export default class AttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Critical threshold for attacks with this activity.
+   * @type {number}
+   */
+  get criticalThreshold() {
+    let ammoThreshold;
+    // TODO: Fetch threshold from ammo
+    const threshold = Math.min(
+      this.attack.critical.threshold ?? Infinity,
+      this.item.system.criticalThreshold ?? Infinity,
+      ammoThreshold ?? Infinity
+    );
+    return threshold < Infinity ? threshold : 20;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 

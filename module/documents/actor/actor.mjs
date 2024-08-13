@@ -2080,13 +2080,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * A hook event that fires before a hit die is rolled for an Actor.
      * @function dnd5e.preRollHitDieV2
      * @memberof hookEvents
-     * @param {Actor5e} actor                          Actor performing the roll.
      * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
      * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
      * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
      * @returns {boolean}                              Explicitly return `false` to prevent hit die from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollHitDieV2", this, rollConfig, dialogConfig, messageConfig) === false ) return;
+    if ( Hooks.call("dnd5e.preRollHitDieV2", rollConfig, dialogConfig, messageConfig) === false ) return;
 
     if ( "dnd5e.preRollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -2122,14 +2121,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
      * @function dnd5e.rollHitDieV2
      * @memberof hookEvents
-     * @param {Actor5e} actor           Actor for which the hit die has been rolled.
-     * @param {BasicRoll[]} rolls       The resulting rolls.
-     * @param {object} updates
-     * @param {object} updates.actor    Updates that will be applied to the actor.
-     * @param {object} [updates.class]  Updates that will be applied to the class.
-     * @returns {boolean}               Explicitly return `false` to prevent updates from being performed.
+     * @param {BasicRoll[]} rolls          The resulting rolls.
+     * @param {object} data
+     * @param {Actor5e} data.actor         Actor for which the hit die has been rolled.
+     * @param {object} data.updates
+     * @param {object} data.updates.actor  Updates that will be applied to the actor.
+     * @param {object} data.updates.class  Updates that will be applied to the class.
+     * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollHitDieV2", this, rolls, updates) === false ) return returnValue;
+    if ( Hooks.call("dnd5e.rollHitDieV2", rolls, { actor: this, updates }) === false ) return returnValue;
 
     if ( "dnd5e.rollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(

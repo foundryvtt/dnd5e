@@ -89,7 +89,7 @@ export default class ChatMessage5e extends ChatMessage {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    this.#shimFlags();
+    this._shimFlags();
   }
 
   /* -------------------------------------------- */
@@ -311,7 +311,7 @@ export default class ChatMessage5e extends ChatMessage {
 
     // Enriched roll flavor
     const roll = this.getFlag("dnd5e", "roll");
-    const item = fromUuidSync(roll?.itemUuid);
+    const item = this.getAssociatedItem();
     if ( this.isContentVisible && item ) {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.options?.critical;
       const subtitle = roll.type === "damage"
@@ -837,8 +837,9 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Apply shims to maintain access to the old `use` and `itemData` flags.
+   * @internal
    */
-  #shimFlags() {
+  _shimFlags() {
     const flags = foundry.utils.getProperty(this, "flags.dnd5e");
     if ( flags?.messageType === "usage" ) Object.defineProperty(flags, "use", {
       get() {
@@ -852,6 +853,28 @@ export default class ChatMessage5e extends ChatMessage {
       configurable: true,
       enumerable: false
     });
+
+    else if ( (flags?.messageType === "roll") && flags?.roll ) {
+      const message = "The item data in the `dnd5e.roll` flag on `ChatMessage` is now `dnd5e.item.id` and "
+      + "`dnd5e.item.uuid`.";
+      Object.defineProperty(flags.roll, "itemId", {
+        get() {
+          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
+          return flags.item?.id;
+        },
+        configurable: true,
+        enumerable: false
+      });
+      Object.defineProperty(flags.roll, "itemUuid", {
+        get() {
+          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
+          return flags.item?.uuid;
+        },
+        configurable: true,
+        enumerable: false
+      });
+    }
+
     if ( flags.item?.data ) Object.defineProperty(flags, "itemData", {
       get() {
         foundry.utils.logCompatibilityWarning(

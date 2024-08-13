@@ -65,6 +65,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     }
 
     const rollConfig = foundry.utils.deepClone(config);
+    rollConfig.origin = this;
     rollConfig.rolls = [{ parts: [this.roll.formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({ configure: this.roll.prompt }, dialog);
@@ -75,9 +76,9 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
         flavor: `${this.item.name} - ${this.roll.label || game.i18n.localize("DND5E.OtherFormula")}`,
         flags: {
           dnd5e: {
+            ...this.messageFlags,
             messageType: "roll",
-            activity: { type: this.type, id: this.id, uuid: this.uuid },
-            item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
+            roll: { type: "generic" }
           }
         }
       }
@@ -87,13 +88,12 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
      * A hook event that fires before a formula is rolled for an Utility activity.
      * @function dnd5e.preRollFormulaV2
      * @memberof hookEvents
-     * @param {UtilityActivity} activity               The activity performing the roll.
      * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
      * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
      * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
      * @returns {boolean}                   Explicitly return `false` to prevent the roll from being performed.
      */
-    if ( Hooks.call("dnd5e.preRollFormulaV2", this, rollConfig, dialogConfig, messageConfig) === false ) return;
+    if ( Hooks.call("dnd5e.preRollFormulaV2", rollConfig, dialogConfig, messageConfig) === false ) return;
 
     if ( "dnd5e.preRollFormula" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -115,10 +115,11 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
      * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
      * @function dnd5e.rollFormulaV2
      * @memberof hookEvents
-     * @param {UtilityActivity} activity  The activity that performed the roll.
-     * @param {BasicRoll[]} rolls         The resulting rolls.
+     * @param {BasicRoll[]} rolls              The resulting rolls.
+     * @param {object} data
+     * @param {UtilityActivity} data.activity  The activity that performed the roll.
      */
-    Hooks.callAll("dnd5e.rollFormulaV2", this, rolls);
+    Hooks.callAll("dnd5e.rollFormulaV2", rolls, { activity: this });
 
     if ( "dnd5e.rollFormula" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(

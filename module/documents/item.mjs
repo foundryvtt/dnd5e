@@ -8,7 +8,7 @@ import SpellData from "../data/item/spell.mjs";
 import { EnchantmentData } from "../data/item/fields/enchantment-field.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import {d20Roll, damageRoll} from "../dice/dice.mjs";
+import { damageRoll } from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import { getSceneTargets } from "../utils.mjs";
 import Proficiency from "./actor/proficiency.mjs";
@@ -1213,102 +1213,25 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *
    * @param {D20RollConfiguration} options  Roll options which are configured and provided to the d20Roll function
    * @returns {Promise<D20Roll|null>}       A Promise which resolves to the created Roll instance
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
-  async rollAttack(options={}) {
-    const flags = this.actor.flags.dnd5e ?? {};
-    if ( !this.hasAttack ) throw new Error("You may not place an Attack Roll with this Item.");
-    let title = `${this.name} - ${game.i18n.localize("DND5E.AttackRoll")}`;
+  async rollAttack({ spellLevel, ...options }={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The Item5e#rollAttack method has been deprecated and should now be called directly on the attack activity.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
 
-    // Get the parts and rollData for this item's attack
-    const {parts, rollData} = this.getAttackToHit();
-    if ( options.spellLevel ) rollData.item.level = options.spellLevel;
+    let item = this;
+    if ( spellLevel && (this.type === "spell") ) item = item.clone({ "system.item.level": spellLevel });
 
-    // Handle ammunition consumption
-    let ammoUpdate = [];
-    const consume = this.system.consume;
-    const ammo = this.hasAmmo ? this.actor.items.get(consume.target) : null;
-    if ( ammo ) {
-      const q = ammo.system.quantity;
-      const consumeAmount = consume.amount ?? 0;
-      if ( q && (q - consumeAmount >= 0) ) {
-        title += ` [${ammo.name}]`;
-      }
+    const activity = item.system.activities?.getByType("attack")[0];
+    if ( !activity ) throw new Error("This Item does not have an Attack activity to roll!");
 
-      // Get pending ammunition update
-      const usage = this._getUsageUpdates({consumeResource: true});
-      if ( usage === false ) return null;
-      ammoUpdate = usage.resourceUpdates ?? [];
-    }
-
-    // Flags
-    const elvenAccuracy = (flags.elvenAccuracy
-      && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
-
-    // Targets
-    const targets = this.constructor._formatAttackTargets();
-
-    // Compose roll options
-    const rollConfig = foundry.utils.mergeObject({
-      actor: this.actor,
-      data: rollData,
-      critical: this.criticalThreshold,
-      title,
-      flavor: title,
-      elvenAccuracy,
-      targetValue: targets.length === 1 ? targets[0].ac : undefined,
-      halflingLucky: flags.halflingLucky,
-      dialogOptions: {
-        width: 400,
-        top: options.event ? options.event.clientY - 80 : null,
-        left: window.innerWidth - 710
-      },
-      messageData: {
-        "flags.dnd5e": {
-          targets,
-          roll: { type: "attack", itemId: this.id, itemUuid: this.uuid }
-        },
-        speaker: ChatMessage.getSpeaker({actor: this.actor})
-      }
-    }, options);
-    rollConfig.parts = parts.concat(options.parts ?? []);
-
-    /**
-     * A hook event that fires before an attack is rolled for an Item.
-     * @function dnd5e.preRollAttack
-     * @memberof hookEvents
-     * @param {Item5e} item                  Item for which the roll is being performed.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @returns {boolean}                    Explicitly return false to prevent the roll from being performed.
-     */
-    if ( Hooks.call("dnd5e.preRollAttack", this, rollConfig) === false ) return;
-
-    const roll = await d20Roll(rollConfig);
-    if ( roll === null ) return null;
-
-    /**
-     * A hook event that fires after an attack has been rolled for an Item.
-     * @function dnd5e.rollAttack
-     * @memberof hookEvents
-     * @param {Item5e} item          Item for which the roll was performed.
-     * @param {D20Roll} roll         The resulting roll.
-     * @param {object[]} ammoUpdate  Updates that will be applied to ammo Items as a result of this attack.
-     */
-    Hooks.callAll("dnd5e.rollAttack", this, roll, ammoUpdate);
-
-    // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
-    if ( ammoUpdate.length ) await this.actor?.updateEmbeddedDocuments("Item", ammoUpdate);
-    return roll;
+    const rolls = await activity.rollAttack(options);
+    return rolls?.[0] ?? null;
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {object} TargetDescriptor5e
-   * @property {string} uuid  The UUID of the target.
-   * @property {string} img   The target's image.
-   * @property {string} name  The target's name.
-   * @property {number} ac    The target's armor class.
-   */
 
   /**
    * Extract salient information about targeted Actors.
@@ -1316,6 +1239,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   static _formatAttackTargets() {
+    // TODO: Remove this when `rollDamage` has been moved to activities
     const targets = new Map();
     for ( const token of game.user.targets ) {
       const { name } = token;

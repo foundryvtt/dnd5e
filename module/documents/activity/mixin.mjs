@@ -97,6 +97,19 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
+   * Create the data added to messages flags.
+   * @type {object}
+   */
+  get messageFlags() {
+    return {
+      activity: { type: this.type, id: this.id, uuid: this.uuid },
+      item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does activating this activity consume a spell slot?
    * @type {boolean}
    */
@@ -205,9 +218,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       data: {
         flags: {
           dnd5e: {
-            messageType: "usage",
-            activity: { type: this.type, id: this.id, uuid: this.uuid },
-            item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
+            ...this.messageFlags,
+            messageType: "usage"
           }
         }
       }
@@ -469,7 +481,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       create: options.createMessage,
       rollMode: options.rollMode,
       data: {
-        flags: options.flags
+        flags: options.flags ?? {}
       }
     });
   }
@@ -754,5 +766,31 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const rollData = this.item.getRollData(options);
     rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
     return rollData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Important information on a targeted token.
+   *
+   * @typedef {object} TargetDescriptor5e
+   * @property {string} uuid  The UUID of the target.
+   * @property {string} img   The target's image.
+   * @property {string} name  The target's name.
+   * @property {number} ac    The target's armor class, if applicable.
+   */
+
+  /**
+   * Grab the targeted tokens and return relevant information on them.
+   * @returns {TargetDescriptor[]}
+   */
+  static getTargetDescriptors() {
+    const targets = new Map();
+    for ( const token of game.user.targets ) {
+      const { name } = token;
+      const { img, system, uuid } = token.actor ?? {};
+      if ( uuid ) targets.set(uuid, { name, img, uuid, ac: system?.attributes?.ac?.value });
+    }
+    return Array.from(targets.values());
   }
 };

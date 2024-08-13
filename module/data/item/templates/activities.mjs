@@ -47,30 +47,11 @@ export default class ActivitiesTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * What is the critical hit threshold for this item? Uses the smallest value from among the following sources:
-   *  - `critical.threshold` defined on the item
-   *  - `critical.threshold` defined on ammunition, if consumption mode is set to ammo
-   *  - Type-specific critical threshold
+   * Value on a d20 die needed to roll a critical hit with an attack from this item.
    * @type {number|null}
    */
   get criticalThreshold() {
-    // TODO: Re-write this when `rollAttack` is moved into attack activity
-    if ( !this.hasAttack ) return null;
-    let ammoThreshold = Infinity;
-    if ( this.hasAmmo ) {
-      ammoThreshold = this.parent?.actor?.items.get(this.consume.target)?.system.critical.threshold ?? Infinity;
-    }
-    const threshold = Math.min(this.critical.threshold ?? Infinity, this._typeCriticalThreshold, ammoThreshold);
-    return threshold < Infinity ? threshold : 20;
-  }
-
-  /**
-   * Default critical threshold for this type.
-   * @type {number}
-   * @internal
-   */
-  get _typeCriticalThreshold() {
-    return Infinity;
+    return this._typeCriticalThreshold ?? null;
   }
 
   /* -------------------------------------------- */
