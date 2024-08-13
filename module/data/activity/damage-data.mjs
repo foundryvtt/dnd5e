@@ -55,4 +55,19 @@ export default class DamageActivityData extends BaseActivityData {
     super.prepareFinalData(rollData);
     this.prepareDamageLabel(this.damage.parts, rollData);
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  getDamageConfig(config={}) {
+    const rollConfig = super.getDamageConfig(config);
+
+    rollConfig.critical ??= {};
+    rollConfig.critical.allow ??= this.damage.critical.allow;
+    rollConfig.critical.bonusDamage ??= this.damage.critical.bonus;
+
+    return rollConfig;
+  }
 }

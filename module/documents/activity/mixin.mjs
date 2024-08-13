@@ -1,4 +1,5 @@
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
+import { damageRoll } from "../../dice/dice.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -82,6 +83,16 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   get canScaleDamage() {
     return this.consumption.scaling.allowed || this.isSpell;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Description used in chat message flavor for messages created with `rollDamage`.
+   * @type {string}
+   */
+  get damageFlavor() {
+    return game.i18n.localize("DND5E.DamageRoll");
   }
 
   /* -------------------------------------------- */
@@ -717,6 +728,118 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         });
       }
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Rolling                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Perform a damage roll.
+   * @param {Partial<DamageRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog    Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message  Configuration for the roll message.
+   * @returns {Promise<DamageRoll[]|void>}
+   */
+  async rollDamage(config={}, dialog={}, message={}) {
+    const rollConfig = this.getDamageConfig(config);
+    rollConfig.origin = this;
+
+    const dialogConfig = foundry.utils.mergeObject({
+      configure: true,
+      options: {
+        width: 400,
+        top: config.event ? config.event.clientY - 80 : null,
+        left: window.innerWidth - 710
+      }
+    }, dialog);
+
+    const messageConfig = foundry.utils.mergeObject({
+      create: true,
+      data: {
+        flavor: `${this.item.name} - ${this.damageFlavor}`,
+        flags: {
+          dnd5e: {
+            ...this.messageFlags,
+            messageType: "roll",
+            roll: { type: "damage" },
+            targets: this.constructor.getTargetDescriptors()
+          }
+        },
+        speaker: ChatMessage.getSpeaker({ actor: this.actor })
+      }
+    });
+
+    /**
+     * A hook event that fires before damage is rolled.
+     * @function dnd5e.preRollDamageV2
+     * @memberof hookEvents
+     * @param {DamageRollProcessConfiguration} config  Configuration data for the pending roll.
+     * @param {BasicRollDialogConfiguration} dialog    Presentation data for the roll configuration dialog.
+     * @param {BasicRollMessageConfiguration} message  Configuration data for the roll's message.
+     * @returns {boolean}                              Explicitly return `false` to prevent the roll.
+     */
+    if ( Hooks.call("dnd5e.preRollDamageV2", rollConfig, dialogConfig, messageConfig) === false ) return;
+
+    const oldRollConfig = {
+      actor: this.actor,
+      rollConfigs: rollConfig.rolls.map(r => ({
+        parts: r.parts,
+        type: r.options?.types?.first(),
+        properties: r.options?.properties
+      })),
+      data: rollConfig.rolls[0]?.data ?? {},
+      event: rollConfig.event,
+      returnMultiple: rollConfig.returnMultiple,
+      allowCritical: rollConfig.rolls[0]?.critical?.allow ?? rollConfig.critical?.allow ?? true,
+      critical: rollConfig.rolls[0]?.isCritical,
+      criticalBonusDice: rollConfig.rolls[0]?.critical?.bonusDice ?? rollConfig.critical?.bonusDice,
+      criticalMultiplier: rollConfig.rolls[0]?.critical?.multiplier ?? rollConfig.critical?.multiplier,
+      multiplyNumeric: rollConfig.rolls[0]?.critical?.multiplyNumeric ?? rollConfig.critical?.multiplyNumeric,
+      powerfulCritical: rollConfig.rolls[0]?.critical?.powerfulCritical ?? rollConfig.critical?.powerfulCritical,
+      criticalBonusDamage: rollConfig.rolls[0]?.critical?.bonusDamage ?? rollConfig.critical?.bonusDamage,
+      fastForward: !dialogConfig.configure,
+      title: dialogConfig.options.title,
+      dialogOptions: dialogConfig.options,
+      chatMessage: messageConfig.create,
+      messageData: messageConfig.data,
+      rollMode: messageConfig.rollMode,
+      flavor: messageConfig.data.flavor
+    };
+
+    if ( "dnd5e.preRollDamage" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preRollDamage` hook has been deprecated and replaced with `dnd5e.preRollDamageV2`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      if ( Hooks.call("dnd5e.preRollDamage", this.item, oldRollConfig) === false ) return;
+    }
+
+    const returnMultiple = oldRollConfig.returnMultiple;
+    oldRollConfig.returnMultiple = true;
+
+    const rolls = await damageRoll(oldRollConfig);
+    if ( !rolls?.length ) return;
+
+    /**
+     * A hook event that fires after damage has been rolled.
+     * @function dnd5e.rollDamageV2
+     * @memberof hookEvents
+     * @param {DamageRoll[]} rolls        The resulting rolls.
+     * @param {object} [data]
+     * @param {Activity} [data.activity]  The activity that performed the roll.
+     */
+    Hooks.callAll("dnd5e.rollDamageV2", rolls, { activity: this });
+
+    if ( "dnd5e.rollDamage" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.rollDamage` hook has been deprecated and replaced with `dnd5e.rollDamageV2`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      Hooks.callAll("dnd5e.rollDamage", this.item, returnMultiple ? rolls : rolls[0], ammoUpdate);
+    }
+
+    return rolls;
   }
 
   /* -------------------------------------------- */

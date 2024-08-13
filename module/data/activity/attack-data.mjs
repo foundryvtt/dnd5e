@@ -192,7 +192,7 @@ export default class AttackActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /**
-   * Get the roll parts used to create to the attack roll.
+   * Get the roll parts used to create the attack roll.
    * @returns {{ data: object, parts: string[] }}
    */
   getAttackData() {

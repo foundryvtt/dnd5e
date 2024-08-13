@@ -8,7 +8,6 @@ import SpellData from "../data/item/spell.mjs";
 import { EnchantmentData } from "../data/item/fields/enchantment-field.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import { damageRoll } from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import { getSceneTargets } from "../utils.mjs";
 import Proficiency from "./actor/proficiency.mjs";
@@ -1263,9 +1262,29 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
    * @returns {Promise<DamageRoll[]>}      A Promise which resolves to the created Roll instances, or null if the action
    *                                       cannot be performed.
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
-  async rollDamage({critical, event=null, spellLevel=null, versatile=false, options={}}={}) {
-    if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
+  async rollDamage({ spellLevel, ...options }={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The Item5e#rollDamage method has been deprecated and should now be called directly on an activity.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
+
+    let item = this;
+    if ( spellLevel ) {
+      if ( this.type === "spell" ) item = item.clone({ "system.level": spellLevel });
+      options.scaling = spellLevel;
+    }
+
+    const activity = item.system.activities?.getByType("attack")[0] || item.system.activities?.getByType("damage")[0]
+      || item.system.activities?.getByType("save")[0] || item.system.activities?.getByType("heal")[0];
+    if ( !activity ) throw new Error("This Item does not have a damaging activity to roll!");
+
+    const returnMultiple = options.returnMultiple;
+    const rolls = await activity.rollDamage(options);
+    return returnMultiple ? rolls : rolls?.[0];
+
+    // TODO: Remove this reference code once rollDamage is implemented for attacks & scaling is implemented
 
     // Fetch level from tags if not specified
     let originalLevel = this.system.level;
@@ -1276,37 +1295,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       originalLevel = levelingFlag.base;
       scaling = levelingFlag.scaling;
     }
-
-    // Get roll data
-    const dmg = this.system.damage;
-    const properties = Array.from(this.system.properties).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical);
-    const rollConfigs = dmg.parts.map(([formula, type]) => ({ parts: [formula], type, properties }));
-    const rollData = this.getRollData();
-    if ( spellLevel ) rollData.item.level = spellLevel;
-
-    // Configure the damage roll
-    const actionFlavor = game.i18n.localize(this.system.actionType === "heal" ? "DND5E.Healing" : "DND5E.DamageRoll");
-    const title = `${this.name} - ${actionFlavor}`;
-    const rollConfig = {
-      actor: this.actor,
-      critical,
-      data: rollData,
-      event,
-      title: title,
-      flavor: this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title,
-      dialogOptions: {
-        width: 400,
-        top: event ? event.clientY - 80 : null,
-        left: window.innerWidth - 710
-      },
-      messageData: {
-        "flags.dnd5e": {
-          targets: this.constructor._formatAttackTargets(),
-          roll: {type: "damage", itemId: this.id, itemUuid: this.uuid}
-        },
-        speaker: ChatMessage.getSpeaker({actor: this.actor})
-      }
-    };
 
     // Adjust damage from versatile usage
     if ( versatile && dmg.versatile ) {
@@ -1335,12 +1323,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       });
     }
 
-    // Add damage bonus formula
-    const actorBonus = foundry.utils.getProperty(this.actor.system, `bonuses.${this.system.actionType}`) || {};
-    if ( actorBonus.damage && (parseInt(actorBonus.damage) !== 0) ) {
-      rollConfigs[0].parts.push(actorBonus.damage);
-    }
-
     // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
     const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
     if ( ammo ) {
@@ -1364,32 +1346,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Factor in extra weapon-specific critical damage
     if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
-
-    foundry.utils.mergeObject(rollConfig, options);
-    rollConfig.rollConfigs = rollConfigs.concat(options.rollConfigs ?? []);
-
-    /**
-     * A hook event that fires before a damage is rolled for an Item.
-     * @function dnd5e.preRollDamage
-     * @memberof hookEvents
-     * @param {Item5e} item                     Item for which the roll is being performed.
-     * @param {DamageRollConfiguration} config  Configuration data for the pending roll.
-     * @returns {boolean}                       Explicitly return false to prevent the roll from being performed.
-     */
-    if ( Hooks.call("dnd5e.preRollDamage", this, rollConfig) === false ) return;
-
-    const rolls = await damageRoll(rollConfig);
-
-    /**
-     * A hook event that fires after a damage has been rolled for an Item.
-     * @function dnd5e.rollDamage
-     * @memberof hookEvents
-     * @param {Item5e} item                    Item for which the roll was performed.
-     * @param {DamageRoll|DamageRoll[]} rolls  The resulting rolls (or single roll if `returnMultiple` is `false`).
-     */
-    if ( rolls || (rollConfig.returnMultiple && rolls?.length) ) Hooks.callAll("dnd5e.rollDamage", this, rolls);
-
-    return rolls;
   }
 
   /* -------------------------------------------- */
@@ -1477,7 +1433,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     );
 
     let item = this;
-    if ( spellLevel && (this.type === "spell") ) item = item.clone({ "system.item.level": spellLevel });
+    if ( spellLevel && (this.type === "spell") ) item = item.clone({ "system.level": spellLevel });
 
     const activity = item.system.activities?.getByType("utility")[0];
     if ( !activity ) throw new Error("This Item does not have a Utility activity to roll!");
