@@ -36,4 +36,19 @@ export default class HealActivityData extends BaseActivityData {
     super.prepareFinalData(rollData);
     this.prepareDamageLabel([this.healing], rollData);
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  getDamageConfig(config={}) {
+    if ( !this.healing.formula ) return foundry.utils.mergeObject({ rolls: [] }, config);
+
+    const scaling = config.scaling ?? 0; // TODO: Set properly once scaling is handled during activation
+    const rollConfig = foundry.utils.mergeObject({ allowCritical: false, scaling }, config);
+    rollConfig.rolls = [this.processDamagePart(this.healing, rollConfig)].concat(config.rolls ?? []);
+
+    return rollConfig;
+  }
 }
