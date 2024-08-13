@@ -119,4 +119,19 @@ export class DamageData extends foundry.abstract.DataModel {
 
     return formula;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Step the die denomination up or down by a number of steps, sticking to proper die sizes. Will return `null` if
+   * stepping reduced the denomination below minimum die size.
+   * @param {number} [steps=1]  Number of steps to increase or decrease the denomination.
+   * @returns {number|null}
+   */
+  steppedDenomination(steps=1) {
+    return CONFIG.DND5E.dieSteps[Math.min(
+      CONFIG.DND5E.dieSteps.indexOf(this.denomination) + steps,
+      CONFIG.DND5E.dieSteps.length - 1
+    )] ?? null;
+  }
 }

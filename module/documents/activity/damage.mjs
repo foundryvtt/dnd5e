@@ -39,7 +39,7 @@ export default class DamageActivity extends ActivityMixin(DamageActivityData) {
     if ( !this.damage.parts.length ) return null;
     return [{
       label: game.i18n.localize("DND5E.Damage"),
-      icon: '<i class="fas fa-burst" inert></i>',
+      icon: '<i class="fa-solid fa-burst" inert></i>',
       dataset: {
         action: "rollDamage"
       }
