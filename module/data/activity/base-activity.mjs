@@ -521,8 +521,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     const scaling = config.scaling ?? 0; // TODO: Set properly once scaling is handled during activation
     const rollConfig = foundry.utils.mergeObject({ scaling }, config);
+    const rollData = this.getRollData();
     rollConfig.rolls = this.damage.parts
-      .map(d => this.processDamagePart(d, rollConfig))
+      .map(d => this._processDamagePart(d, rollConfig, rollData))
       .filter(d => d.parts.length)
       .concat(config.rolls ?? []);
 
@@ -533,14 +534,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Process a single damage part into a roll configuration.
-   * @param {DamageData} damage                          Damage to prepare for the roll.
-   * @param {DamageRollProcessConfiguration} rollConfig  Roll configuration being built.
+   * @param {DamageData} damage                                   Damage to prepare for the roll.
+   * @param {Partial<DamageRollProcessConfiguration>} rollConfig  Roll configuration being built.
+   * @param {object} rollData                                     Roll data to populate with damage data.
    * @returns {DamageRollConfiguration}
+   * @protected
    */
-  processDamagePart(damage, rollConfig) {
+  _processDamagePart(damage, rollConfig, rollData) {
     const scaledFormula = damage.scaledFormula(rollConfig.scaling);
     const parts = scaledFormula ? [scaledFormula] : [];
-    const data = this.getRollData();
+    const data = { ...rollData };
 
     const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${this.actionType}.damage`);
     if ( bonus && (parseInt(bonus) !== 0) ) {

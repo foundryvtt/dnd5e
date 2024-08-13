@@ -1272,7 +1272,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     let item = this;
     if ( spellLevel ) {
-      if ( this.type === "spell" ) item = item.clone({ "system.item.level": spellLevel });
+      if ( this.type === "spell" ) item = item.clone({ "system.level": spellLevel });
       options.scaling = spellLevel;
     }
 
@@ -1433,7 +1433,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     );
 
     let item = this;
-    if ( spellLevel && (this.type === "spell") ) item = item.clone({ "system.item.level": spellLevel });
+    if ( spellLevel && (this.type === "spell") ) item = item.clone({ "system.level": spellLevel });
 
     const activity = item.system.activities?.getByType("utility")[0];
     if ( !activity ) throw new Error("This Item does not have a Utility activity to roll!");

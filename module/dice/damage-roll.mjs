@@ -5,7 +5,6 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
  *
  * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
  * @property {DamageRollConfiguration[]} rolls         Configuration data for individual rolls.
- * @property {boolean} [allowCritical=true]            Should critical damage be allowed for any rolls?
  * @property {CriticalDamageConfiguration} [critical]  Critical configuration for all rolls.
  * @property {number} [scaling=0]                      Scale increase above base damage.
  */
@@ -21,7 +20,7 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
  * Options that describe a damage roll.
  *
  * @typedef {BasicRollOptions} DamageRollOptions
- * @property {boolean} [isCritical]                    Should critical damage by calculated for this roll?
+ * @property {boolean} [isCritical]                    Should critical damage be calculated for this roll?
  * @property {CriticalDamageConfiguration} [critical]  Critical configuration for this roll.
  * @property {string[]} [properties]                   Physical properties of the source (e.g. magical, silvered).
  * @property {string} [type]                           Type of damage represented.
@@ -33,6 +32,7 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
  * Critical effects configuration data.
  *
  * @typedef {object} CriticalDamageConfiguration
+ * @property {boolean} [allow=true]       Should critical damage be allowed?
  * @property {number} [multiplier=2]      Amount by which to multiply critical damage.
  * @property {number} [bonusDice=0]       Additional dice added to first term when calculating critical damage.
  * @property {string} [bonusDamage]       Additional, unmodified, damage formula added when calculating a critical.

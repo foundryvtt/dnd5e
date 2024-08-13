@@ -46,8 +46,9 @@ export default class HealActivityData extends BaseActivityData {
     if ( !this.healing.formula ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
     const scaling = config.scaling ?? 0; // TODO: Set properly once scaling is handled during activation
-    const rollConfig = foundry.utils.mergeObject({ allowCritical: false, scaling }, config);
-    rollConfig.rolls = [this.processDamagePart(this.healing, rollConfig)].concat(config.rolls ?? []);
+    const rollConfig = foundry.utils.mergeObject({ critical: { allow: false }, scaling }, config);
+    const rollData = this.getRollData();
+    rollConfig.rolls = [this._processDamagePart(this.healing, rollConfig, rollData)].concat(config.rolls ?? []);
 
     return rollConfig;
   }

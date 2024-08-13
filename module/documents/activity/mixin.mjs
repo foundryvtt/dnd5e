@@ -791,7 +791,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       data: rollConfig.rolls[0]?.data ?? {},
       event: rollConfig.event,
       returnMultiple: rollConfig.returnMultiple,
-      allowCritical: rollConfig.allowCritical,
+      allowCritical: rollConfig.rolls[0]?.critical?.allow ?? rollConfig.critical?.allow ?? true,
       critical: rollConfig.rolls[0]?.isCritical,
       criticalBonusDice: rollConfig.rolls[0]?.critical?.bonusDice ?? rollConfig.critical?.bonusDice,
       criticalMultiplier: rollConfig.rolls[0]?.critical?.multiplier ?? rollConfig.critical?.multiplier,

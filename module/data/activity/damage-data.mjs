@@ -64,12 +64,9 @@ export default class DamageActivityData extends BaseActivityData {
   getDamageConfig(config={}) {
     const rollConfig = super.getDamageConfig(config);
 
-    rollConfig.allowCritical ??= this.damage.critical.allow;
-    if ( this.damage.critical.bonus ) {
-      rollConfig.critical ??= {};
-      rollConfig.critical.bonusDamage = this.damage.critical.bonus;
-    }
     rollConfig.critical ??= {};
+    rollConfig.critical.allow ??= this.damage.critical.allow;
+    rollConfig.critical.bonusDamage ??= this.damage.critical.bonus;
 
     return rollConfig;
   }
