@@ -43,7 +43,6 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   async getData() {
-    console.log(this.assignments);
     const points = {
       assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
         if ( !this.advancement.canImprove(key) || this.advancement.configuration.locked.has(key) ) return assigned;

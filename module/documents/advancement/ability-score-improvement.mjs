@@ -137,7 +137,10 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   /** @inheritdoc */
   async apply(level, data) {
     if ( data.type === "asi" ) {
-      const assignments = foundry.utils.mergeObject(this.configuration.fixed, data.assignments, {inplace: false});
+      const assignments = Object.keys(CONFIG.DND5E.abilities).reduce((obj, key) => {
+        obj[key] = (this.configuration.fixed[key] ?? 0) + (data.assignments[key] ?? 0);
+        return obj;
+      }, {});
       const updates = {};
       for ( const key of Object.keys(assignments) ) {
         const ability = this.actor.system.abilities[key];
@@ -187,6 +190,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
         const ability = this.actor.system.toObject().abilities[key];
         if ( !ability || !this.canImprove(key) ) continue;
         updates[`system.abilities.${key}.value`] = ability.value - change;
+        source.assignments[key] -= (this.configuration.fixed[key] ?? 0);
       }
       this.actor.updateSource(updates);
     }
