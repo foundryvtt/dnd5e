@@ -1,4 +1,3 @@
-import { SummonsData } from "../data/item/fields/summons-field.mjs";
 import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
 import DamageRoll from "../dice/damage-roll.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
@@ -324,19 +323,11 @@ export default class ChatMessage5e extends ChatMessage {
     const item = this.getAssociatedItem();
     if ( this.isContentVisible && item ) {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.options?.critical;
-      let subtitle;
-      if ( roll.type === "damage" ) {
-        subtitle = isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll");
-        if ( roll.damageOnSave ) subtitle = `${subtitle} (${
-          game.i18n.format("DND5E.SAVE.FIELDS.damage.onSave.Flavor", {
-            amount: game.i18n.localize(`DND5E.SAVE.FIELDS.damage.onSave.${roll.damageOnSave.capitalize()}`)
-          }).toLowerCase()
-        })`;
-      } else if ( roll.type === "attack" ) {
-        subtitle = game.i18n.localize(`DND5E.Action${item.system.actionType.toUpperCase()}`);
-      } else {
-        subtitle = item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
-      }
+      const subtitle = roll.type === "damage"
+        ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
+        : roll.type === "attack"
+          ? game.i18n.localize(`DND5E.Action${item.system.actionType.toUpperCase()}`)
+          : item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
       const flavor = document.createElement("div");
       flavor.classList.add("dnd5e2", "chat-card");
       flavor.innerHTML = `
@@ -507,6 +498,16 @@ export default class ChatMessage5e extends ChatMessage {
       </div>
     `;
     html.querySelector(".message-content").appendChild(roll);
+
+    const damageOnSave = this.getFlag("dnd5e", "roll.damageOnSave");
+    if ( damageOnSave ) {
+      const p = document.createElement("p");
+      p.classList.add("supplement");
+      p.innerHTML = game.i18n.format("DND5E.SAVE.FIELDS.damage.onSave.Flavor", {
+        amount: game.i18n.localize(`DND5E.SAVE.FIELDS.damage.onSave.${damageOnSave.capitalize()}`)
+      });
+      html.querySelector(".chat-card").appendChild(p);
+    }
 
     if ( game.user.isGM ) {
       const damageApplication = document.createElement("damage-application");
