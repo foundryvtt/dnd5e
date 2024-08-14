@@ -118,4 +118,18 @@ export default class SaveActivityData extends BaseActivityData {
       ability: CONFIG.DND5E.abilities[ability]?.label ?? ""
     });
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getDamageConfig(config={}) {
+    const rollConfig = super.getDamageConfig(config);
+
+    rollConfig.critical ??= {};
+    rollConfig.critical.allow ??= false;
+
+    return rollConfig;
+  }
 }

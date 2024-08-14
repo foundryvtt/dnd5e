@@ -1,4 +1,3 @@
-import { SummonsData } from "../data/item/fields/summons-field.mjs";
 import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
 import DamageRoll from "../dice/damage-roll.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
@@ -499,6 +498,16 @@ export default class ChatMessage5e extends ChatMessage {
       </div>
     `;
     html.querySelector(".message-content").appendChild(roll);
+
+    const damageOnSave = this.getFlag("dnd5e", "roll.damageOnSave");
+    if ( damageOnSave ) {
+      const p = document.createElement("p");
+      p.classList.add("supplement");
+      p.innerHTML = game.i18n.format("DND5E.SAVE.FIELDS.damage.onSave.Flavor", {
+        amount: game.i18n.localize(`DND5E.SAVE.FIELDS.damage.onSave.${damageOnSave.capitalize()}`)
+      });
+      html.querySelector(".chat-card").appendChild(p);
+    }
 
     if ( game.user.isGM ) {
       const damageApplication = document.createElement("damage-application");

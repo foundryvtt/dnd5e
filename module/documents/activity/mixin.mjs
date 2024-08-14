@@ -768,7 +768,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         },
         speaker: ChatMessage.getSpeaker({ actor: this.actor })
       }
-    });
+    }, message);
 
     /**
      * A hook event that fires before damage is rolled.
