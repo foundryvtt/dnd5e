@@ -103,6 +103,41 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [{ label: context.itemType }];
+    context.info = [{
+      label: "DND5E.CreatureType",
+      classes: "info-sm",
+      value: this.typeLabel,
+      config: "type",
+      tooltip: "DND5E.CreatureTypeTitle"
+    },
+    {
+      label: "DND5E.Movement",
+      classes: "info-sm info-grid",
+      config: "movement",
+      tooltip: "DND5E.MovementConfig",
+      value: Object.entries(CONFIG.DND5E.movementTypes).reduce((str, [k, label]) => {
+        const value = this.movement[k];
+        if ( !value ) return str;
+        return `${str}
+          <span class="key">${label}</span>
+          <span class="value">${value}</span>
+        `;
+      }, "")
+    },
+    {
+      label: "DND5E.Senses",
+      classes: "info-sm info-grid",
+      config: "senses",
+      tooltip: "DND5E.SensesConfig",
+      value: Object.entries(CONFIG.DND5E.senses).reduce((str, [k, label]) => {
+        const value = this.senses[k];
+        if ( !value ) return str;
+        return `${str}
+          <span class="key">${label}</span>
+          <span class="value">${value}</span>
+        `;
+      }, "")
+    }];
     context.parts = ["dnd5e.details-species"];
   }
 

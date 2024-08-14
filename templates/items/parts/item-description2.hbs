@@ -33,8 +33,18 @@
     <div class="info-block">
         {{#each info}}
         <div {{#if classes}}class="{{ classes }}"{{/if}}>
-            {{#if label}}<span class="label">{{ localize label }}</span>{{/if}}
-            <span class="value">{{{ value }}}</span>
+            {{#if label}}
+            <div class="label">
+                <span>{{ localize label }}</span>
+                {{#if (and @root.editable config)}}
+                <a class="config-button" data-action="{{ config }}" data-tooltip="{{ tooltip }}"
+                   aria-label="{{ localize tooltip }}">
+                    <i class="fas fa-cog"></i>
+                </a>
+                {{/if}}
+            </div>
+            {{/if}}
+            <div class="value">{{{ value }}}</div>
         </div>
         {{/each}}
     </div>

@@ -211,7 +211,11 @@ export default class WeaponData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
-    context.info = [{ label: "DND5E.ToHit", value: dnd5e.utils.formatModifier(parseInt(this.parent.labels.modifier)) }];
+    context.info = [{
+      label: "DND5E.ToHit",
+      classes: "info-lg",
+      value: dnd5e.utils.formatModifier(parseInt(this.parent.labels.modifier))
+    }];
     if ( this.parent.labels.derivedDamage?.length ) {
       const config = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
       context.info.push({ value: this.parent.labels.derivedDamage.reduce((str, { formula, damageType }) => {
@@ -222,7 +226,7 @@ export default class WeaponData extends ItemDataModel.mixin(
             <dnd5e-icon src="${icon}"></dnd5e-icon>
           </span>
         `;
-      }, ""), classes: "damage" });
+      }, ""), classes: "info-grid damage" });
     }
     context.parts = ["dnd5e.details-weapon", "dnd5e.details-damage", "dnd5e.details-uses"];
   }

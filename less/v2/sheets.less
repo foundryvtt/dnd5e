@@ -44,6 +44,7 @@
 
   .sheet-header {
     input, select {
+      --input-placeholder-color: var(--color-text-light-6);
       --input-height: var(--form-field-height, 26px);
       background: rgb(0 0 0 / 45%);
       border: 1px solid transparent;
@@ -57,6 +58,8 @@
         box-shadow: 0 0 6px var(--dnd5e-color-gold);
       }
     }
+
+    input::placeholder { color: var(--input-placeholder-color); }
   }
 
   /* ---------------------------------- */
