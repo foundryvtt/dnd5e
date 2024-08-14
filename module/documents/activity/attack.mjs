@@ -25,7 +25,8 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       sheetClass: AttackSheet,
       usage: {
         actions: {
-          rollAttack: AttackActivity.#rollAttack
+          rollAttack: AttackActivity.#rollAttack,
+          rollDamage: AttackActivity.#rollDamage
         }
       }
     }, { inplace: false })
@@ -37,13 +38,21 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
 
   /** @override */
   _usageChatButtons() {
-    return [{
+    const buttons = [{
       label: game.i18n.localize("DND5E.Attack"),
       icon: '<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg" inert></i>',
       dataset: {
         action: "rollAttack"
       }
     }];
+    if ( this.damage.parts.length ) buttons.push({
+      label: game.i18n.localize("DND5E.Damage"),
+      icon: '<i class="fa-solid fa-burst" inert></i>',
+      dataset: {
+        action: "rollDamage"
+      }
+    });
+    return buttons;
   }
 
   /* -------------------------------------------- */
@@ -209,5 +218,18 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
    */
   static #rollAttack(event, target, message) {
     this.rollAttack({ event });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle performing a damage roll.
+   * @this {AttackActivity}
+   * @param {PointerEvent} event     Triggering click event.
+   * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
+   * @param {ChatMessage5e} message  Message associated with the activation.
+   */
+  static #rollDamage(event, target, message) {
+    this.rollDamage({ event });
   }
 }

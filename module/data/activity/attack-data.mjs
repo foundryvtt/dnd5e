@@ -223,4 +223,85 @@ export default class AttackActivityData extends BaseActivityData {
 
     return { data, parts };
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {AttackDamageRollProcessConfiguration} [config={}]
+   * @property {"oneHanded"|"twoHanded"|"offHand"|"thrown"} mode  Attack mode.
+   */
+
+  /**
+   * Get the roll parts used to create the damage rolls.
+   * @param {Partial<AttackDamageRollProcessConfiguration>} [config={}]
+   * @returns {AttackDamageRollProcessConfiguration}
+   */
+  getDamageConfig(config={}) {
+    const rollConfig = super.getDamageConfig(config);
+
+    // TODO: Handle ammunition
+    // If base part is present, add ammunition physical properties to it
+    // If ammo has its own damage, create a new damage part of it
+
+    // const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
+    // if ( ammo ) {
+    //   const properties = Array.from(ammo.system.properties).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical);
+    //   if ( this.system.properties.has("mgc") && !properties.includes("mgc") ) properties.push("mgc");
+    //   const ammoConfigs = ammo.system.damage.parts.map((([formula, type]) => ({ parts: [formula], type, properties })));
+    //   if ( ammo.system.magicalBonus && ammo.system.magicAvailable ) {
+    //     rollConfigs[0].parts.push("@ammo");
+    //     properties.forEach(p => {
+    //       if ( !rollConfigs[0].properties.includes(p) ) rollConfigs[0].properties.push(p);
+    //     });
+    //     rollData.ammo = ammo.system.magicalBonus;
+    //   }
+    //   rollConfigs.push(...ammoConfigs);
+    // }
+
+    if ( this.damage.critical.bonus ) {
+      rollConfig.critical ??= {};
+      rollConfig.critical.bonusDamage ??= this.damage.critical.bonus;
+    }
+
+    return rollConfig;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _processDamagePart(damage, rollConfig, rollData) {
+    if ( !damage.base ) super._processDamagePart(damage, rollConfig, rollData);
+
+    // Swap base damage for versatile if two-handed attack is made on versatile weapon
+    if ( this.item.system.isVersatile && (rollConfig.mode === "twoHanded") ) {
+      const versatile = this.item.system.damage.versatile.clone();
+      versatile.base = true;
+      versatile.denomination ||= damage.steppedDenomination();
+      versatile.number ||= damage.number;
+      versatile.types = damage.types;
+      damage = versatile;
+    }
+
+    const roll = super._processDamagePart(damage, rollConfig, rollData);
+    roll.base = true;
+
+    if ( this.item.type === "weapon" ) {
+      // Ensure `@mod` is present in damage unless it is positive and an off-hand attack
+      const includeMod = (rollConfig.mode !== "offHand") || (roll.data.mod < 0);
+      if ( includeMod && !roll.parts.some(p => p.includes("@mod")) ) roll.parts.push("@mod");
+
+      // Add magical bonus
+      if ( this.item.system.magicalBonus && this.item.system.magicAvailable ) {
+        roll.parts.push("@magicalBonus");
+        roll.data.magicalBonus = this.item.system.magicalBonus;
+      }
+    }
+
+    const criticalBonusDice = this.actor?.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
+    if ( (this.actionType === "mwak") && (parseInt(criticalBonusDice) !== 0) ) {
+      foundry.utils.setProperty(roll, "options.critical.bonusDice", criticalBonusDice);
+    }
+
+    return roll;
+  }
 }

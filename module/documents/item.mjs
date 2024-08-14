@@ -1284,7 +1284,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const rolls = await activity.rollDamage(options);
     return returnMultiple ? rolls : rolls?.[0];
 
-    // TODO: Remove this reference code once rollDamage is implemented for attacks & scaling is implemented
+    // TODO: Remove this reference code once scaling is implemented
 
     // Fetch level from tags if not specified
     let originalLevel = this.system.level;
@@ -1294,17 +1294,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       spellLevel = levelingFlag.value;
       originalLevel = levelingFlag.base;
       scaling = levelingFlag.scaling;
-    }
-
-    // Adjust damage from versatile usage
-    if ( versatile && dmg.versatile ) {
-      rollConfigs[0].parts[0] = dmg.versatile;
-      rollConfig.messageData["flags.dnd5e"].roll.versatile = true;
-    }
-
-    // Add magical damage if available
-    if ( this.system.magicalBonus && this.system.magicAvailable ) {
-      rollConfigs[0].parts.push(this.system.magicalBonus);
     }
 
     // Scale damage from up-casting spells
@@ -1322,30 +1311,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         }
       });
     }
-
-    // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
-    const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
-    if ( ammo ) {
-      const properties = Array.from(ammo.system.properties).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical);
-      if ( this.system.properties.has("mgc") && !properties.includes("mgc") ) properties.push("mgc");
-      const ammoConfigs = ammo.system.damage.parts.map((([formula, type]) => ({ parts: [formula], type, properties })));
-      if ( ammo.system.magicalBonus && ammo.system.magicAvailable ) {
-        rollConfigs[0].parts.push("@ammo");
-        properties.forEach(p => {
-          if ( !rollConfigs[0].properties.includes(p) ) rollConfigs[0].properties.push(p);
-        });
-        rollData.ammo = ammo.system.magicalBonus;
-      }
-      rollConfigs.push(...ammoConfigs);
-    }
-
-    // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
-    if ( this.system.actionType === "mwak" ) {
-      rollConfig.criticalBonusDice = this.actor.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
-    }
-
-    // Factor in extra weapon-specific critical damage
-    if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
   }
 
   /* -------------------------------------------- */
