@@ -13,6 +13,8 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
   }
 
   /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   getData() {
@@ -23,6 +25,7 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
         key,
         name: `configuration.fixed.${key}`,
         label: data.label,
+        locked: this.advancement.configuration.locked.has(key),
         value: fixed,
         canIncrease: true,
         canDecrease: true
@@ -35,13 +38,23 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
       points: {
         key: "points",
         name: "configuration.points",
-        label: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementPoints"),
+        label: game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.label"),
         min: 0,
         value: this.advancement.configuration.points,
         canIncrease: true,
         canDecrease: this.advancement.configuration.points > 0
       }
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async prepareConfigurationUpdate(configuration) {
+    configuration.locked = configuration.locked?.filter(l => l);
+    return configuration;
   }
 
   /* -------------------------------------------- */
