@@ -239,10 +239,10 @@ system.proficient
 
 Make the armor magical by adding the Magical property and an optional Magical Bonus that will be added to AC.
 
-| Attribute Key         | Change Mode | Effect Value | Roll Data? |
-| --------------------- | ----------- | ------------ | ---------- |
-| `system.properties`   | Add         | `mgc`        | No         |
-| `system.magicalBonus` | Override    | `[number]`   | No         |
+| Attribute Key               | Change Mode | Effect Value | Roll Data? |
+| --------------------------- | ----------- | ------------ | ---------- |
+| `system.properties`         | Add         | `mgc`        | No         |
+| `system.armor.magicalBonus` | Override    | `[number]`   | No         |
 
 ### Tool Examples
 
