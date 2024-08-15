@@ -48,7 +48,7 @@ export default class UsesField extends SchemaField {
    */
   static prepareData(rollData, labels) {
     prepareFormulaValue(this, "uses.max", "DND5E.USES.FIELDS.uses.max.label", rollData);
-    this.uses.value = Math.clamp(this.uses.max - this.uses.spent, 0, this.uses.max);
+    this.uses.value = this.uses.max ? Math.clamp(this.uses.max - this.uses.spent, 0, this.uses.max) : 0;
 
     const periods = [];
     for ( const recovery of this.uses.recovery ) {

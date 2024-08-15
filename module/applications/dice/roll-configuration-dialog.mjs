@@ -255,7 +255,7 @@ export default class RollConfigurationDialog extends Application5e {
   }
 
   /* -------------------------------------------- */
-  /*  Event Handling                              */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
@@ -285,12 +285,12 @@ export default class RollConfigurationDialog extends Application5e {
   /* -------------------------------------------- */
 
   /** @override */
-  _onClose(options = {}) {
+  _onClose(options={}) {
     if ( !options.dnd5e?.submitted ) this.#rolls = [];
   }
 
   /* -------------------------------------------- */
-  /*  Constructor                                 */
+  /*  Factory Methods                             */
   /* -------------------------------------------- */
 
   /**

@@ -668,34 +668,40 @@ preLocalize("abilityConsumptionTypes", { sort: true });
  */
 DND5E.activityConsumptionTypes = {
   activityUses: {
-    label: "DND5E.CONSUMPTION.Type.ActivityUses.Label"
+    label: "DND5E.CONSUMPTION.Type.ActivityUses.Label",
+    prompt: "DND5E.CONSUMPTION.Type.ActivityUses.Prompt"
   },
   itemUses: {
     label: "DND5E.CONSUMPTION.Type.ItemUses.Label",
+    prompt: "DND5E.CONSUMPTION.Type.ItemUses.Prompt",
     targetRequiresEmbedded: true,
     validTargets: BaseActivityData.validItemUsesTargets
   },
   material: {
     label: "DND5E.CONSUMPTION.Type.Material.Label",
+    prompt: "DND5E.CONSUMPTION.Type.Material.Prompt",
     targetRequiresEmbedded: true,
     validTargets: BaseActivityData.validMaterialTargets
   },
   hitDice: {
     label: "DND5E.CONSUMPTION.Type.HitDice.Label",
+    prompt: "DND5E.CONSUMPTION.Type.HitDice.Prompt",
     validTargets: BaseActivityData.validHitDiceTargets
   },
   spellSlots: {
     label: "DND5E.CONSUMPTION.Type.SpellSlots.Label",
+    prompt: "DND5E.CONSUMPTION.Type.SpellSlots.Prompt",
     scalingModes: [{ value: "level", label: "DND5E.CONSUMPTION.Scaling.SlotLevel" }],
     validTargets: BaseActivityData.validSpellSlotsTargets
   },
   attribute: {
     label: "DND5E.CONSUMPTION.Type.Attribute.Label",
+    prompt: "DND5E.CONSUMPTION.Type.Attribute.Prompt",
     targetRequiresEmbedded: true,
     validTargets: BaseActivityData.validAttributeTargets
   }
 };
-preLocalize("activityConsumptionTypes", { key: "label" });
+preLocalize("activityConsumptionTypes", { keys: ["label", "prompt"] });
 
 /* -------------------------------------------- */
 

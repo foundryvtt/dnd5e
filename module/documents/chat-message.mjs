@@ -847,7 +847,7 @@ export default class ChatMessage5e extends ChatMessage {
     const storedData = this.getFlag("dnd5e", "item.data");
     return storedData
       ? new Item.implementation(storedData, { parent: actor })
-      : actor.items.get(this.getFlag("dnd5e", "item.id")) ?? actor.items.get(this.getFlag("dnd5e", "use.itemId"));
+      : actor.items.get(this.getFlag("dnd5e", "item.id"));
   }
 
   /* -------------------------------------------- */

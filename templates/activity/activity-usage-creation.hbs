@@ -1,0 +1,11 @@
+<section>
+    {{> "dnd5e.activity-usage-notes" }}
+    {{#if hasCreation}}
+    <fieldset>
+        <legend>{{ localize "DND5E.USAGE.SECTION.Creation" }}</legend>
+        {{#if template}}
+            {{ formField template.field name=template.name value=template.value }}
+        {{/if}}
+    </fieldset>
+    {{/if}}
+</section>

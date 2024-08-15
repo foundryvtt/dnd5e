@@ -9,7 +9,7 @@
                 {{ formField fields.target name=(concat prefix "target") value=data.target options=validTargets
                    placeholder=targetPlaceholder }}
                 {{/if}}
-                {{ formField fields.value name=(concat prefix "amount") value=data.value }}
+                {{ formField fields.value name=(concat prefix "value") value=data.value }}
                 {{#if scalingModes}}
                 {{ formField fields.scaling.fields.mode name=(concat prefix "scaling.mode") value=data.scaling.mode
                    options=scalingModes }}
