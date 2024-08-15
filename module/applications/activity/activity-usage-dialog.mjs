@@ -296,20 +296,20 @@ export default class ActivityUsageDialog extends Application5e {
     context.hasScaling = true;
     context.notes = [];
 
-    if ( this.actor.system.spells && this.activity.isSpell && (this.item.system.level > 0) ) {
+    if ( this.activity.requiresSpellSlot ) {
       const minimumLevel = this.item.system.level ?? 1;
       const maximumLevel = Object.values(this.actor.system.spells)
         .reduce((max, d) => d.max ? Math.max(max, d.level) : max, 0);
 
       const spellSlotOptions = Object.entries(this.actor.system.spells).map(([value, slot]) => {
         if ( (slot.level < minimumLevel) || (slot.level > maximumLevel) ) return null;
-        let label = slot.label;
-        if ( slot.type === "pact" ) label = `${label} [${CONFIG.DND5E.spellLevels[slot.level]}]`;
-        return {
-          value,
-          label: game.i18n.format("DND5E.SpellLevelSlot", { level: label, n: slot.value }),
-          disabled: (slot.value === 0) && this.config.consume?.spellSlot
-        };
+        let label;
+        if ( slot.type === "leveled" ) {
+          label = game.i18n.format("DND5E.SpellLevelSlot", { level: slot.label, n: slot.value });
+        } else {
+          label = game.i18n.format(`DND5E.SpellLevel${slot.type.capitalize()}`, { level: slot.level, n: slot.value });
+        }
+        return { value, label, disabled: (slot.value === 0) && this.config.consume?.spellSlot };
       }).filter(o => o);
 
       if ( spellSlotOptions ) context.spellSlots = {
