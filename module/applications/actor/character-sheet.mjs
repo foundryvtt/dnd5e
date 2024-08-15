@@ -84,7 +84,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       // Item usage
       ctx.hasRecharge = item.hasRecharge;
       ctx.hasUses = item.hasLimitedUses;
-      ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
       // Unidentified items
       ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
@@ -172,7 +171,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         hasActions: false, dataset: {type: "feat"} }
     };
     for ( const feat of feats ) {
-      if ( feat.system.activation?.type ) {
+      if ( feat.system.activities.size ) {
         features.active.items.push(feat);
         context.itemContext[feat.id].ungroup = "active";
       }

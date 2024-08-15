@@ -185,22 +185,22 @@
                         </div>
 
                         {{!-- Spell Target --}}
-                        <div class="item-detail item-target {{#unless item.system.target.type}}empty{{/unless}}">
-                            {{#if item.system.target.type}}
+                        <div class="item-detail item-target {{#unless item.labels.target}}empty{{/unless}}">
+                            {{#if item.labels.target}}
                             <span class="condensed">{{ item.labels.target }}</span>
                             {{/if}}
                         </div>
 
                         {{!-- Spell Attack / DC --}}
-                        <div class="item-detail item-roll {{#if (and (not item.system.save.ability) (eq ctx.toHit null))}}empty{{/if}}">
+                        <div class="item-detail item-roll {{#if (and (not ctx.save.ability) (eq ctx.toHit null))}}empty{{/if}}">
                             {{#if ctx.toHit}}
                             <span class="value">{{ dnd5e-formatModifier ctx.toHit }}</span>
-                            {{else if item.system.save.ability}}
+                            {{else if ctx.save.ability}}
                             <div class="stacked">
                                 <span class="ability">
-                                    {{ lookup (lookup @root.config.abilities item.system.save.ability) "abbreviation" }}
+                                    {{ lookup (lookup @root.config.abilities ctx.save.ability) "abbreviation" }}
                                 </span>
-                                <span class="value">{{ item.system.save.dc }}</span>
+                                <span class="value">{{ ctx.save.dc.value }}</span>
                             </div>
                             {{/if}}
                         </div>
@@ -216,8 +216,8 @@
                         </div>
 
                         {{!-- Spell Formula --}}
-                        <div class="item-detail item-formula spell-formula {{#unless item.labels.derivedDamage}}empty{{/unless}}">
-                            {{#each item.labels.derivedDamage}}
+                        <div class="item-detail item-formula spell-formula {{#unless item.labels.damages}}empty{{/unless}}">
+                            {{#each item.labels.damages}}
                             <div class="row">
                                 <span class="formula">{{ formula }}</span>
                                 {{#with (lookup @root.labels.damageAndHealing damageType)}}

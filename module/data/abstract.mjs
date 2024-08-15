@@ -481,7 +481,7 @@ export class ItemDataModel extends SystemDataModel {
   async getCardData(enrichmentOptions={}) {
     const { name, type, img } = this.parent;
     let {
-      price, weight, uses, identified, unidentified, description, school, materials, activation
+      price, weight, uses, identified, unidentified, description, school, materials
     } = this;
     const rollData = this.parent.getRollData();
     const isIdentified = identified !== false;
@@ -492,7 +492,7 @@ export class ItemDataModel extends SystemDataModel {
 
     const subtitle = [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
     const context = {
-      name, type, img, price, weight, uses, school, materials, activation,
+      name, type, img, price, weight, uses, school, materials,
       config: CONFIG.DND5E,
       controlHints: game.settings.get("dnd5e", "controlHints"),
       labels: foundry.utils.deepClone(this.parent.labels),
@@ -513,7 +513,7 @@ export class ItemDataModel extends SystemDataModel {
     if ( game.user.isGM || isIdentified ) {
       context.properties.push(
         ...this.cardProperties ?? [],
-        ...this.activatedEffectCardProperties ?? [],
+        ...Object.values(this.parent.labels.activations[0] ?? {}),
         ...this.equippableItemCardProperties ?? []
       );
     }

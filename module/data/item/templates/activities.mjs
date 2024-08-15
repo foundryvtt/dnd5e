@@ -61,7 +61,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasAttack() {
-    return !!this.activities.getByType("attack").size;
+    return !!this.activities.getByType("attack").length;
   }
 
   /* -------------------------------------------- */
@@ -81,7 +81,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasSave() {
-    return !!this.activities.getByType("save").size;
+    return !!this.activities.getByType("save").length;
   }
 
   /* -------------------------------------------- */
@@ -112,7 +112,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get isEnchantment() {
-    return !!this.activities.getByType("enchant").size;
+    return !!this.activities.getByType("enchant").length;
   }
 
   /* -------------------------------------------- */
@@ -122,7 +122,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get isHealing() {
-    return !!this.activities.getByType("heal").size;
+    return !!this.activities.getByType("heal").length;
   }
 
   /* -------------------------------------------- */
@@ -198,7 +198,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( !source._id || !source.type || !source.system || !source.effects ) return false;
 
     // If item doesn't have an action type or activation, then it doesn't need an activity
-    if ( !source.system.actionType || !source.system.activation?.type ) return false;
+    if ( !source.system.actionType && !source.system.activation?.type ) return false;
 
     // If item was updated after `4.0.0`, it shouldn't need the migration
     if ( !foundry.utils.isNewerVersion("4.0.0", source._stats.systemVersion ?? "0.0.0") ) return false;

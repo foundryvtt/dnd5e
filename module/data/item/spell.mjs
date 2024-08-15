@@ -207,7 +207,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const context = await super.getCardData(enrichmentOptions);
     context.isSpell = true;
     context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
-    context.properties = context.tags;
+    context.properties = [];
     return context;
   }
 
@@ -219,7 +219,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       subtitle: [this.parent.labels.components.vsm, this.parent.labels.activation],
       modifier: this.parent.labels.modifier,
       range: this.range,
-      save: this.save
+      save: this.activities.getByType("save")[0]?.save
     });
   }
 

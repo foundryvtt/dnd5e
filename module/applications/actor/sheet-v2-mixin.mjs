@@ -362,6 +362,9 @@ export default function ActorSheetV2Mixin(Base) {
       // To Hit
       const toHit = parseInt(item.labels.modifier);
       ctx.toHit = item.hasAttack && !isNaN(toHit) ? toHit : null;
+
+      // Save
+      ctx.save = item.system.activities?.getByType("save")[0]?.save;
     }
 
     /* -------------------------------------------- */

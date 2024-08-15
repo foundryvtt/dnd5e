@@ -393,12 +393,12 @@
                                     {{/if}}
 
                                     {{!-- Saves --}}
-                                    {{else if save.dc}}
+                                    {{else if save.dc.value}}
                                     {{#with save}}
                                     <span class="ability">
                                         {{ lookup (lookup @root.config.abilities ability) "abbreviation" }}
                                     </span>
-                                    <span class="value">{{ dc }}</span>
+                                    <span class="value">{{ dc.value }}</span>
                                     {{/with}}
 
                                     {{!-- Other Value --}}

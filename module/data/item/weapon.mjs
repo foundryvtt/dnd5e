@@ -197,7 +197,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getFavoriteData() {
     return foundry.utils.mergeObject(await super.getFavoriteData(), {
-      subtitle: CONFIG.DND5E.itemActionTypes[this.actionType],
+      subtitle: CONFIG.DND5E.itemActionTypes[this.activities.contents[0]?.actionType],
       modifier: this.parent.labels.modifier,
       range: this.range
     });
@@ -217,9 +217,9 @@ export default class WeaponData extends ItemDataModel.mixin(
       classes: "info-lg",
       value: dnd5e.utils.formatModifier(parseInt(this.parent.labels.modifier))
     }];
-    if ( this.parent.labels.derivedDamage?.length ) {
+    if ( this.parent.labels.damages?.length ) {
       const config = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
-      context.info.push({ value: this.parent.labels.derivedDamage.reduce((str, { formula, damageType }) => {
+      context.info.push({ value: this.parent.labels.damages.reduce((str, { formula, damageType }) => {
         const { label, icon } = config[damageType];
         return `${str}
           <span class="formula">${formula}</span>

@@ -622,6 +622,36 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   prepareFinalAttributes() {
     this._prepareProficiency();
     this.system.prepareFinalData?.();
+    this._prepareLabels();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare top-level summary labels based on configured activities.
+   * @protected
+   */
+  _prepareLabels() {
+    const activations = this.labels.activations = [];
+    const attacks = this.labels.attacks = [];
+    const damages = this.labels.damages = [];
+    if ( !this.system.activities?.size ) return;
+    for ( const activity of this.system.activities ) {
+      if ( activity.activation.type ) {
+        const { activation, concentrationDuration, duration, range, target } = activity.labels;
+        activations.push({ activation, concentrationDuration, duration, range, target });
+      }
+      if ( activity.type === "attack" ) {
+        const { toHit, modifier } = activity.labels;
+        attacks.push({ toHit, modifier });
+      }
+      if ( activity.labels?.damage?.length ) damages.push(...activity.labels.damage);
+    }
+    if ( activations.length ) {
+      Object.assign(this.labels, activations[0]);
+      delete activations[0].concentrationDuration;
+    }
+    if ( attacks.length ) Object.assign(this.labels, attacks[0]);
   }
 
   /* -------------------------------------------- */
@@ -1195,7 +1225,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     data.properties = [
       ...this.system.chatProperties ?? [],
       ...this.system.equippableItemCardProperties ?? [],
-      ...this.system.activatedEffectCardProperties ?? []
+      ...Object.values(this.labels.activations[0] ?? {})
     ].filter(p => p);
 
     return data;
