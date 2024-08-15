@@ -246,8 +246,8 @@ export default class InventoryElement extends HTMLElement {
     });
 
     // Toggle Charged State
-    if ( item.system.recharge?.value ) options.push({
-      name: item.system.recharge.charged ? "DND5E.ContextMenuActionExpendCharge" : "DND5E.ContextMenuActionCharge",
+    if ( item.hasRecharge ) options.push({
+      name: item.isOnCooldown ? "DND5E.ContextMenuActionCharge" : "DND5E.ContextMenuActionExpendCharge",
       icon: '<i class="fa-solid fa-bolt"></i>',
       condition: () => item.isOwner,
       callback: li => this._onAction(li[0], "toggleCharge"),
@@ -337,7 +337,13 @@ export default class InventoryElement extends HTMLElement {
     const item = await this.getItem(itemId);
     if ( !item ) return;
     const result = parseInputDelta(input, item);
-    if ( result !== undefined ) item.update({ [input.dataset.name]: result });
+    if ( result !== undefined ) {
+      // Special case handling for Item uses.
+      if ( input.dataset.name === "system.uses.value" ) {
+        item.update({ "system.uses.spent": item.system.uses.max - result });
+      }
+      else item.update({ [input.dataset.name]: result });
+    }
   }
 
   /* -------------------------------------------- */
@@ -409,7 +415,7 @@ export default class InventoryElement extends HTMLElement {
       case "recharge":
         return item.rollRecharge();
       case "toggleCharge":
-        return item.update({"system.recharge.charged": !item.system.recharge?.charged});
+        return item.update({ "system.uses.spent": 1 - item.system.uses.spent });
       case "unfavorite":
         return this.actor.system.removeFavorite(item.getRelativeUUID(this.actor));
       case "use":

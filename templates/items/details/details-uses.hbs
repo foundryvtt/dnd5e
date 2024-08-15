@@ -6,14 +6,9 @@
         <label>{{ localize "DND5E.LimitedUses" }}</label>
         <div class="form-fields">
 
-            {{!-- Current --}}
-            <div class="form-group label-top">
-                <label>{{ localize "DND5E.Current" }}</label>
-                <div class="form-fields">
-                    <input type="number" name="system.uses.value" value="{{ system.uses.value }}" min="0" step="1"
-                           placeholder="0">
-                </div>
-            </div>
+            {{!-- Spent --}}
+            {{ formField fields.uses.fields.spent value=source.uses.spent label="DND5E.Spent" localize=true hint=""
+                         classes="label-top" }}
 
             {{!-- Max --}}
             {{ formField fields.uses.fields.max value=source.uses.max label="DND5E.Max" localize=true hint=""

@@ -33,7 +33,9 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    const { activities, damage, properties, target, type } = this.item.system;
+    const { activities } = this.item.system;
+    const target = this.item.type === "spell" ? this.item.system.target : null;
+    const damage = this.item.type === "weapon" ? this.item.system.damage : null;
 
     // Effects
     for ( const category of Object.values(context.effects) ) {
@@ -124,7 +126,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       { value: "loseAll", label: "DND5E.USES.Recovery.Type.LoseAll" },
       { value: "formula", label: "DND5E.USES.Recovery.Type.Formula" }
     ];
-    context.usesRecovery = (context.source.uses?.recovery ?? []).map((data, index) => ({
+    context.usesRecovery = (context.system.uses?.recovery ?? []).map((data, index) => ({
       data,
       fields: context.fields.uses.fields.recovery.element.fields,
       prefix: `system.uses.recovery.${index}.`,

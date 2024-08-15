@@ -119,6 +119,7 @@ export default class WeaponData extends ItemDataModel.mixin(
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateDamage(source) {
+    if ( "base" in source.damage ?? {} ) return;
     const systemData = { system: { scaling: { mode: "none" } } };
     if ( source.damage?.parts?.[0] ) {
       source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts?.[0]);

@@ -115,8 +115,9 @@ export default class FeatData extends ItemDataModel.mixin(
     Object.defineProperty(this.recharge, "value", {
       get() {
         foundry.utils.logCompatibilityWarning(
-          "Recharge data has been merged into uses data. Recharge state can now be determined by checking whether"
-          + " `system.uses.period` is `recharge` and the recharge value can be found at `system.uses.formula`.",
+          "Recharge data has been merged into uses data. Recharge state can now be determined by checking"
+          + " `system.uses.recovery` for a profile with a `period` of 'recharge', and checking its `formula` for the"
+          + " recharge formula.",
           { since: "DnD5e 4.0", until: "DnD5e 4.4" }
         );
         return uses.period === "recharge" ? Number(uses.formula) : null;
@@ -232,13 +233,6 @@ export default class FeatData extends ItemDataModel.mixin(
    */
   get cardProperties() {
     return [this.requirements];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  get hasLimitedUses() {
-    return this.isActive && (!!this.recharge.value || super.hasLimitedUses);
   }
 
   /* -------------------------------------------- */

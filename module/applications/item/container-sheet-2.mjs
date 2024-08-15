@@ -33,11 +33,25 @@ export default class ContainerSheet2 extends ItemSheetV2Mixin(ContainerSheet) {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    context.encumbrance = context.capacity;
+
+    context.items = [];
+    context.itemContext = {};
+    context.encumbrance = await this.item.system.computeCapacity();
+    context.isContainer = true;
 
     if ( !Number.isFinite(context.encumbrance.max) ) context.encumbrance.maxLabel = "&infin;";
 
     // Contents
+    for ( const item of await this.item.system.contents ) {
+      const ctx = context.itemContext[item.id] ??= {};
+      ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
+      ctx.isExpanded = this._expanded.has(item.id);
+      ctx.isStack = item.system.quantity > 1;
+      ctx.expanded = this._expanded.has(item.id) ? await item.getChatData({ secrets: this.item.isOwner }) : null;
+      context.items.push(item);
+    }
+    context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+
     const inventory = {};
     const inventoryTypes = Object.entries(CONFIG.Item.dataModels)
       .filter(([, model]) => model.metadata?.inventoryItem)

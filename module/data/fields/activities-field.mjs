@@ -139,6 +139,17 @@ export class ActivityCollection extends Collection {
   /* -------------------------------------------- */
 
   /**
+   * Test the given predicate against every entry in the Collection.
+   * @param {function(*, number, ActivityCollection): boolean} predicate  The predicate.
+   * @returns {boolean}
+   */
+  every(predicate) {
+    return this.reduce((pass, v, i) => pass && predicate(v, i, this), true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Convert the ActivityCollection to an array of simple objects.
    * @param {boolean} [source=true]  Draw data for contained Documents from the underlying data source?
    * @returns {object[]}             The extracted array of primitive objects.

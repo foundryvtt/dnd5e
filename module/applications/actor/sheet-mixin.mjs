@@ -16,7 +16,13 @@ export default Base => class extends Base {
     const input = event.target;
     const target = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId) ?? this.actor;
     const result = parseInputDelta(input, target);
-    if ( result !== undefined ) target.update({ [input.dataset.name]: result });
+    if ( result !== undefined ) {
+      // Special case handling for Item uses.
+      if ( input.dataset.name === "system.uses.value" ) {
+        target.update({ "system.uses.spent": target.system.uses.max - result });
+      }
+      else target.update({ [input.dataset.name]: result });
+    }
   }
 
   /* -------------------------------------------- */

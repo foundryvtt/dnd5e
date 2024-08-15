@@ -527,7 +527,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    * @protected
    */
   _filterItems(items, filters) {
+    const alwaysPrepared = ["innate", "always"];
+    const actions = ["action", "bonus", "reaction"];
+    const recoveries = ["lr", "sr"];
     const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
+    const schoolFilter = spellSchools.intersection(filters);
+
     return items.filter(item => {
 
       // Subclass-specific logic.
@@ -535,17 +540,22 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( filtered !== undefined ) return filtered;
 
       // Action usage
-      for ( let f of ["action", "bonus", "reaction"] ) {
-        if ( filters.has(f) && (item.system.activation?.type !== f) ) return false;
+      for ( const f of actions ) {
+        if ( !filters.has(f) ) continue;
+        if ( item.type === "spell" ) {
+          if ( item.system.activation.type !== f ) return false;
+          continue;
+        }
+        if ( !item.system.activities?.size ) return false;
+        if ( item.system.activities.every(a => a.activation.type !== f) ) return false;
       }
 
       // Spell-specific filters
       if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
-      const schoolFilter = spellSchools.intersection(filters);
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
       if ( filters.has("prepared") ) {
-        if ( ["innate", "always"].includes(item.system.preparation?.mode) ) return true;
+        if ( alwaysPrepared.includes(item.system.preparation?.mode) ) return true;
         if ( this.actor.type === "npc" ) return true;
         return item.system.preparation?.prepared;
       }
@@ -554,9 +564,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
       if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
 
-      // Feature-specific filters
-      if ( filters.has("lr") && (item.system.uses?.per !== "lr") ) return false;
-      if ( filters.has("sr") && (item.system.uses?.per !== "sr") ) return false;
+      // Recovery
+      for ( const f of recoveries ) {
+        if ( !filters.has(f) ) continue;
+        if ( !item.system.uses?.recovery.length ) return false;
+        if ( item.system.uses.recovery.every(r => r.period !== f) ) return false;
+      }
 
       return true;
     });

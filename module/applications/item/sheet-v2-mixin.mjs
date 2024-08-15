@@ -1,4 +1,5 @@
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
+import EffectsElement from "../components/effects.mjs";
 
 /**
  * Adds common V2 Item sheet functionality.
@@ -101,9 +102,37 @@ export default function ItemSheetV2Mixin(Base) {
 
     /** @inheritDoc */
     async getData(options) {
-      const context = await super.getData(options);
+      const { system, labels, isEmbedded } = this.item;
+      const context = {
+        system, labels, isEmbedded,
+        source: this.item.system.toObject(),
+        item: this.item,
+        owner: this.item.isOwner,
+        config: CONFIG.DND5E,
+
+        // Physical items
+        baseItems: await this._getItemBaseTypes(),
+        isPhysical: "quantity" in this.item.system,
+
+        // Identified state
+        isIdentifiable: "identified" in this.item.system,
+        isIdentified: this.item.system.identified !== false,
+
+        // Armor
+        hasDexModifier: this.item.isArmor && (this.item.system.type.value !== "shield"),
+
+        // Advancement
+        advancement: this._getItemAdvancement(this.item),
+
+        // Active Effects
+        effects: EffectsElement.prepareCategories(this.item.effects, { parent: this.item }),
+        elements: this.options.elements
+      };
+
+      context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
+      context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
       context.inputs = { ...foundry.applications.fields, ...dnd5e.applications.fields };
-      const { identified, schema, unidentified } = this.item.system;
+      const { description, identified, properties, schema, unidentified, validProperties } = this.item.system;
       context.fields = schema.fields;
 
       // Set some default collapsed states on first open.
@@ -143,13 +172,43 @@ export default function ItemSheetV2Mixin(Base) {
       context.properties = {
         active: [],
         object: Object.fromEntries((context.source.properties ?? []).map(p => [p, true])),
-        options: Object.entries(context.properties ?? {}).map(([k, v]) => ({ value: k, ...v }))
+        options: (validProperties ?? []).reduce((arr, k) => {
+          const { label } = CONFIG.DND5E.itemProperties[k];
+          arr.push({ label, value: k, selected: properties.has(k) });
+          return arr;
+        }, [])
       };
+      if ( this.item.type !== "spell" ) {
+        context.properties.options.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+      }
       if ( game.user.isGM || (identified !== false) ) {
         context.properties.active.push(
           ...this.item.system.cardProperties ?? [],
           ...this.item.system.activatedEffectCardProperties ?? [],
           ...this.item.system.equippableItemCardProperties ?? []
+        );
+      }
+
+      // Item sub-types
+      if ( ["feat", "loot", "consumable"].includes(this.item.type) ) {
+        const name = this.item.type === "feat" ? "feature" : this.item.type;
+        const itemTypes = CONFIG.DND5E[`${name}Types`][this.item.system.type.value];
+        if ( itemTypes ) context.itemSubtypes = itemTypes.subtypes;
+      }
+
+      // Enrich HTML description
+      const enrichmentOptions = {
+        secrets: this.item.isOwner, relativeTo: this.item, rollData: this.item.getRollData()
+      };
+      context.enriched = {
+        description: await TextEditor.enrichHTML(description.value, enrichmentOptions),
+        unidentified: await TextEditor.enrichHTML(unidentified?.description, enrichmentOptions),
+        chat: await TextEditor.enrichHTML(description.chat, enrichmentOptions)
+      };
+      if ( this.editingDescriptionTarget ) {
+        context.editingDescriptionTarget = this.editingDescriptionTarget;
+        context.enriched.editing = await TextEditor.enrichHTML(
+          foundry.utils.getProperty(context, this.editingDescriptionTarget), enrichmentOptions
         );
       }
 

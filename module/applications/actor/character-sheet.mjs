@@ -82,6 +82,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.isExpanded = this._expanded.has(item.id);
 
       // Item usage
+      ctx.hasRecharge = item.hasRecharge;
       ctx.hasUses = item.hasLimitedUses;
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 

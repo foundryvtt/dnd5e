@@ -285,7 +285,7 @@ export default function ActorSheetV2Mixin(Base) {
       if ( item.type === "spell" ) {
 
         // Activation
-        const cost = system.activation?.cost;
+        const cost = system.activation?.value ?? "";
         const abbr = {
           action: "DND5E.ActionAbbr",
           bonus: "DND5E.BonusActionAbbr",
@@ -294,7 +294,7 @@ export default function ActorSheetV2Mixin(Base) {
           hour: "DND5E.TimeHourAbbr",
           day: "DND5E.TimeDayAbbr"
         }[system.activation.type];
-        ctx.activation = cost && abbr ? `${cost}${game.i18n.localize(abbr)}` : item.labels.activation;
+        ctx.activation = abbr ? `${cost}${game.i18n.localize(abbr)}` : item.labels.activation;
 
         // Range
         const units = system.range?.units;

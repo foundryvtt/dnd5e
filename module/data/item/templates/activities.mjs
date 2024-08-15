@@ -144,6 +144,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} source  Candidate source data to migrate.
    */
   static #migrateUses(source) {
+    if ( Array.isArray(source.uses?.recovery) ) return;
+
     const charged = source.recharge?.charged;
     if ( charged !== undefined ) {
       source.uses ??= {};
@@ -167,7 +169,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       source.uses.recovery = [{ period: "recharge", formula: source.recharge.value }];
     }
 
-    // Prevent a string value for uses recovery from being cleaned into an default recovery entry
+    // Prevent a string value for uses recovery from being cleaned into a default recovery entry
     else if ( source.uses?.recovery === "" ) {
       delete source.uses.recovery;
     }
@@ -192,6 +194,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @returns {boolean}
    */
   static #shouldCreateInitialActivity(source) {
+    // Do not attempt to migrate partial source data.
+    if ( !source._id || !source.type || !source.system || !source.effects ) return false;
+
     // If item doesn't have an action type or activation, then it doesn't need an activity
     if ( !source.system.actionType || !source.system.activation?.type ) return false;
 

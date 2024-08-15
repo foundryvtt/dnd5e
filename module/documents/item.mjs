@@ -93,14 +93,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static fromSource(data, options={}) {
-    ActivitiesTemplate.initializeActivities(data);
-    return super.fromSource(data, options);
-  }
-
-  /* -------------------------------------------- */
   /*  Item Properties                             */
   /* -------------------------------------------- */
 
@@ -344,17 +336,24 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return this.system.isVersatile ?? false;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Is the item rechargeable?
+   * @type {boolean}
+   */
+  get hasRecharge() {
+    return this.hasLimitedUses && (this.system.uses?.recovery[0]?.period === "recharge");
+  }
+
   /* --------------------------------------------- */
 
   /**
    * Is the item on recharge cooldown?
    * @type {boolean}
-   * @see {@link ActionTemplate#isOnCooldown}
    */
   get isOnCooldown() {
-    // TODO: Re-implement
-    const { recharge } = this.system;
-    return (recharge?.value > 0) && (recharge?.charged === false);
+    return this.hasRecharge && (this.system.uses.value < 1);
   }
 
   /* --------------------------------------------- */
@@ -1411,16 +1410,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Perform an ability recharge test for an item which uses the d6 recharge mechanic.
-   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll|void>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge() {
-    const recharge = this.system.recharge ?? {};
-    if ( !recharge.value ) return;
+    const recharge = this.system.uses?.recovery.find(({ period }) => period === "recharge");
+    if ( !recharge ) return;
 
     const rollConfig = {
       formula: "1d6",
       data: this.getRollData(),
-      target: parseInt(recharge.value),
+      target: parseInt(recharge.formula),
       chatMessage: true
     };
 
@@ -1460,7 +1459,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( Hooks.call("dnd5e.rollRecharge", this, roll) === false ) return roll;
 
     // Update the Item data
-    if ( success ) this.update({"system.recharge.charged": true});
+    if ( success ) this.update({ "system.uses.spent": 0 });
 
     return roll;
   }
@@ -2527,6 +2526,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
     else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
     else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
+    ActivitiesTemplate.initializeActivities(source);
     return source;
   }
 }
