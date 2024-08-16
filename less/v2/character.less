@@ -132,6 +132,22 @@
         }
       }
 
+      /* Epic Boons */
+      .boon-badge {
+        --size: 36px;
+        position: absolute;
+        right: calc(var(--padding-right) + var(--level-size) / 6 - var(--size) / 2);
+        top: calc(var(--level-size) / 5 - var(--size) / 2);
+        width: var(--size);
+        height: var(--size);
+        background: transparent url("ui/boon-badge.webp") no-repeat center / contain;
+        filter: drop-shadow(0 3px 4px var(--dnd5e-shadow-45));
+        font-size: var(--font-size-18);
+        display: flex;
+        padding-top: 4px;
+        text-shadow: 0 0 2px black;
+      }
+
       /* XP & Buttons */
       > div:last-child {
         display: flex;
