@@ -3336,6 +3336,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
     if ( userId === game.userId ) {
+      await this.updateBloodied(options);
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
     }
@@ -3478,6 +3479,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       effect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
       return ActiveEffect.implementation.create(effect, { parent: this, keepId: true });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle applying/removing the bloodied status.
+   * @param {DocumentModificationContext} options  Additional options supplied with the update.
+   * @returns {Promise<ActiveEffect>|void}
+   */
+  updateBloodied(options) {
+    const hp = this.system.attributes?.hp;
+    if ( !hp?.effectiveMax || (game.settings.get("dnd5e", "bloodied") === "none") ) return;
+
+    const effect = this.effects.get(ActiveEffect5e.ID.BLOODIED);
+    if ( hp.value > hp.effectiveMax * CONFIG.DND5E.bloodied.threshold ) return effect?.delete();
+    if ( effect ) return;
+
+    return ActiveEffect.implementation.create({
+      _id: ActiveEffect5e.ID.BLOODIED,
+      name: game.i18n.localize(CONFIG.DND5E.bloodied.name),
+      img: CONFIG.DND5E.bloodied.icon,
+      statuses: ["bloodied"]
+    }, { parent: this, keepId: true });
   }
 
   /* -------------------------------------------- */

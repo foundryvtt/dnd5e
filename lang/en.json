@@ -2788,6 +2788,7 @@
 
 "EFFECT.DND5E": {
   "StatusBleeding": "Bleeding",
+  "StatusBloodied": "Bloodied",
   "StatusBurrowing": "Burrowing",
   "StatusConcentrating": "Concentrating",
   "StatusCursed": "Cursed",
@@ -2965,6 +2966,13 @@
   "ALLOWSUMMONING": {
     "Name": "Allow Summoning",
     "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
+  },
+  "BLOODIED": {
+    "Name": "Bloodied Status",
+    "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",
+    "All": "Display for Allies & Enemies",
+    "Player": "Only Display for Allies",
+    "None": "Never Display"
   },
   "COLLAPSETRAYS": {
     "Name": "Collapse Trays in Chat",
