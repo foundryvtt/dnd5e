@@ -502,13 +502,23 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       config.consume.spellSlot ??= this.requiresSpellSlot;
     }
 
-    if ( this.canScale ) config.scaling ??= 0;
-    else config.scaling = false;
-
-    if ( this.isSpell ) {
-      const mode = this.item.system.preparation.mode;
+    const levelingFlag = this.item.getFlag("dnd5e", "spellLevel");
+    if ( levelingFlag ) {
+      // Handle fixed scaling from spell scrolls
+      config.scaling = false;
       config.spell ??= {};
-      config.spell.slot ??= (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
+      config.spell.slot = levelingFlag.value;
+    }
+
+    else {
+      if ( this.canScale ) config.scaling ??= 0;
+      else config.scaling = false;
+
+      if ( this.isSpell ) {
+        const mode = this.item.system.preparation.mode;
+        config.spell ??= {};
+        config.spell.slot ??= (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
+      }
     }
 
     if ( this.item.requiresConcentration && !game.settings.get("dnd5e", "disableConcentration") ) {
@@ -535,7 +545,19 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @protected
    */
   _prepareUsageScaling(usageConfig, messageConfig, item) {
-    // TODO: Implement scaling
+    const levelingFlag = this.item.getFlag("dnd5e", "spellLevel");
+    if ( levelingFlag ) {
+      usageConfig.scaling = Math.max(0, levelingFlag.value - levelingFlag.base);
+    } else if ( this.isSpell ) {
+      const level = this.actor.system.spells?.[usageConfig.spell?.slot]?.level;
+      if ( level ) usageConfig.scaling = level - item.system.level;
+    }
+
+    if ( usageConfig.scaling ) {
+      foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.scaling", usageConfig.scaling);
+      item.updateSource({ "flags.dnd5e.scaling": usageConfig.scaling });
+      item.prepareFinalAttributes();
+    }
   }
 
   /* -------------------------------------------- */
@@ -848,12 +870,16 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   async #onChatAction(event, target, message) {
+    const scaling = message.getFlag("dnd5e", "scaling") ?? 0;
+    const item = scaling ? this.item.clone({ "flags.dnd5e.scaling": scaling }, { keepId: true }) : this.item;
+    const activity = item.system.activities.get(this.id);
+
     const action = target.dataset.action;
     const handler = this.metadata.usage?.actions?.[action];
     target.disabled = true;
     try {
-      if ( handler ) await handler.call(this, event, target, message);
-      else await this._onChatAction(event, target);
+      if ( handler ) await handler.call(activity, event, target, message);
+      else await activity._onChatAction(event, target);
     } finally {
       target.disabled = false;
     }
