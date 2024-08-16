@@ -1,5 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
-import { formatNumber, safePropertyExists, staticID } from "../../utils.mjs";
+import { safePropertyExists, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
@@ -7,23 +7,11 @@ import RangeField from "../shared/range-field.mjs";
 import TargetField from "../shared/target-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
+import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, FilePathField, IntegerSortField, SchemaField, StringField
 } = foundry.data.fields;
-
-/**
- * Data for a consumption target.
- *
- * @typedef {object} ConsumptionTargetData
- * @property {string} type             Type of consumption (e.g. activity uses, item uses, hit die, spell slot).
- * @property {string} target           Target of the consumption depending on the selected type (e.g. item's ID, hit
- *                                     die denomination, spell slot level).
- * @property {string} value            Formula that determines amount consumed or recovered.
- * @property {object} scaling
- * @property {string} scaling.mode     Scaling mode (e.g. no scaling, scale target amount, scale spell level).
- * @property {string} scaling.formula  Specific scaling formula if not automatically calculated from target's value.
- */
 
 /**
  * Data for effects that can be applied.
@@ -83,17 +71,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField()
       }),
       consumption: new SchemaField({
-        targets: new ArrayField(
-          new SchemaField({
-            type: new StringField(),
-            target: new StringField(),
-            value: new FormulaField({ initial: "1" }),
-            scaling: new SchemaField({
-              mode: new StringField(),
-              formula: new FormulaField()
-            })
-          })
-        ),
+        targets: new ConsumptionTargetsField(),
         scaling: new SchemaField({
           allowed: new BooleanField(),
           max: new FormulaField({ deterministic: true })
@@ -147,6 +125,37 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Is scaling possible with this activity?
+   * @type {boolean}
+   */
+  get canScale() {
+    return this.consumption.scaling.allowed || (this.isSpell && this.item.system.level > 0
+      && CONFIG.DND5E.spellPreparationModes[this.item.system.preparation.mode]?.upcast);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Can this activity's damage be scaled?
+   * @type {boolean}
+   */
+  get canScaleDamage() {
+    return this.consumption.scaling.allowed || this.isSpell;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this activity on a spell?
+   * @type {boolean}
+   */
+  get isSpell() {
+    return this.item.type === "spell";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does this activity or its item require concentration?
    * @type {boolean}
    */
@@ -162,8 +171,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   get requiresSpellSlot() {
     if ( !this.isSpell || !this.actor?.system.spells ) return false;
-    // TODO: Check against specific preparation modes here
-    return this.item.system.level > 0;
+    return this.canScale;
   }
 
   /* -------------------------------------------- */
@@ -604,87 +612,5 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     if ( obj.canOverride && !obj.override ) {
       foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, keyPath));
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Generate a list of targets for the "Attribute" consumption type.
-   * @this {Activity}
-   * @returns {FormSelectOption[]}
-   */
-  static validAttributeTargets() {
-    if ( !this.actor ) return [];
-    return TokenDocument.implementation.getConsumedAttributes(this.actor.type).map(attr => {
-      return { value: attr, label: attr };
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Generate a list of targets for the "Hit Dice" consumption type.
-   * @this {Activity}
-   * @returns {FormSelectOption[]}
-   */
-  static validHitDiceTargets() {
-    return [
-      { value: "smallest", label: game.i18n.localize("DND5E.ConsumeHitDiceSmallest") },
-      ...CONFIG.DND5E.hitDieTypes.map(d => ({ value: d, label: d })),
-      { value: "largest", label: game.i18n.localize("DND5E.ConsumeHitDiceLargest") }
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Generate a list of targets for the "Item Uses" consumption type.
-   * @this {Activity}
-   * @returns {FormSelectOption[]}
-   */
-  static validItemUsesTargets() {
-    const makeLabel = (name, item) => {
-      let label;
-      const uses = item.system.uses;
-      if ( uses.max && (uses.recovery?.length === 1) && (uses.recovery[0].type === "recoverAll") ) {
-        const per = CONFIG.DND5E.limitedUsePeriods[uses.recovery[0].period]?.abbreviation;
-        label = game.i18n.format("DND5E.AbilityUseConsumableLabel", { max: uses.max, per });
-      }
-      else label = game.i18n.format("DND5E.AbilityUseChargesLabel", { value: uses.value });
-      return `${name} (${label})`;
-    };
-    return [
-      { value: "", label: makeLabel(game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem"), this.item) },
-      ...(this.actor?.items ?? [])
-        .filter(i => i.system.uses?.max && (i !== this.item))
-        .map(i => ({ value: i.id, label: makeLabel(i.name, i) }))
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Generate a list of targets for the "Material" consumption type.
-   * @this {Activity}
-   * @returns {FormSelectOption[]}
-   */
-  static validMaterialTargets() {
-    return (this.actor?.items ?? [])
-      .filter(i => ["consumable", "loot"].includes(i.type) && !i.system.activities?.size)
-      .map(i => ({ value: i.id, label: `${i.name} (${formatNumber(i.system.quantity)})` }));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Generate a list of targets for the "Spell Slots" consumption type.
-   * @this {Activity}
-   * @returns {FormSelectOption[]}
-   */
-  static validSpellSlotsTargets() {
-    return Object.entries(CONFIG.DND5E.spellLevels).reduce((arr, [value, label]) => {
-      if ( value !== "0" ) arr.push({ value, label });
-      return arr;
-    }, []);
   }
 }

@@ -730,10 +730,6 @@
 "DND5E.ConsumeHitDiceSmallestLong": "Smallest Hit Dice Available",
 "DND5E.ConsumeMaterial": "Material",
 "DND5E.ConsumeCharges": "Item Uses",
-"DND5E.ConsumeWarningNoResource": "{name} is designated to consume {type} but no resource is specified!",
-"DND5E.ConsumeWarningNoSource": "The designated {type} source that {name} consumes no longer exists!",
-"DND5E.ConsumeWarningNoQuantity": "{name} has run out of its designated {type}!",
-"DND5E.ConsumeWarningZeroAttribute": "{name} has run out of its designated attribute resource pool!",
 "DND5E.ConsumeResource": "Consume Resource?",
 "DND5E.ConsumeResourceAction": "Consume Resource",
 "DND5E.ConsumeRecharge": "Consume Recharge?",
@@ -824,31 +820,42 @@
   "Type": {
     "ActivityUses": {
       "Label": "Activity Uses",
-      "Prompt": "Consume Activity Use?"
+      "Prompt": "Consume Activity Use?",
+      "Warning": "uses on {item}'s activity {activity}"
     },
     "Attribute": {
       "Label": "Attribute",
-      "Prompt": "Consume Attribute?"
+      "Prompt": "Consume Attribute?",
+      "Warning": "{attribute} amount"
     },
     "HitDice": {
       "Label": "Hit Dice",
-      "Prompt": "Consume Hit Die?"
+      "Prompt": "Consume Hit Die?",
+      "Warning": "{denomination} hit dice"
     },
     "ItemUses": {
       "Label": "Item Uses",
-      "Prompt": "Consume Item Use?"
+      "Prompt": "Consume Item Use?",
+      "Warning": "uses on {name}"
     },
     "Material": {
       "Label": "Material",
-      "Prompt": "Consume Material?"
+      "Prompt": "Consume Material?",
+      "Warning": "of {name}"
     },
     "SpellSlots": {
       "Label": "Spell Slots",
-      "Prompt": "Consume Spell Slot?"
+      "Prompt": "Consume Spell Slot?",
+      "Warning": "{level} slots"
     }
   },
   "Warning": {
-    "MissingTarget": "Item configured to be consumed by {activity} activity on {item} could not be found."
+    "MissingAttribute": "Attribute {attribute} configured to be consumed by {activity} activity on {item} could not be found.",
+    "MissingHitDice": "Actor does not have a class with a {denomination} hit die.",
+    "MissingItem": "Item configured to be consumed by {activity} activity on {item} could not be found.",
+    "MissingSpellSlot": "No {level} slots available.",
+    "None": "No {type} available to spend, {cost} required.",
+    "NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available."
   }
 },
 
@@ -1354,7 +1361,6 @@
 "DND5E.ItemRarityVeryRare": "very rare",
 "DND5E.ItemRarityLegendary": "legendary",
 "DND5E.ItemRarityArtifact": "artifact",
-"DND5E.ItemNoUses": "{name} has no available uses remaining.",
 "DND5E.Eyes": "Eyes",
 "DND5E.Faith": "Faith",
 "DND5E.FeatureActive": "Active Abilities",

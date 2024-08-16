@@ -9,3 +9,6 @@ export {default as SummonActivityData} from "./summon-data.mjs";
 export {default as UtilityActivityData} from "./utility-data.mjs";
 
 export {default as AppliedEffectField} from "./fields/applied-effect-field.mjs";
+export {
+  default as ConsumptionTargetsField, ConsumptionTargetData, ConsumptionError
+} from "./fields/consumption-targets-field.mjs";
