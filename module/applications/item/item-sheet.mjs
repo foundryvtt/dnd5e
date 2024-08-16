@@ -37,7 +37,7 @@ export default class ItemSheet5e extends ItemSheet {
       ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       dragDrop: [
-        {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
+        {dragSelector: "[data-effect-id]", dropSelector: "form"},
         {dragSelector: ".advancement-item", dropSelector: ".advancement"}
       ],
       accordions: [{
@@ -697,6 +697,8 @@ export default class ItemSheet5e extends ItemSheet {
     switch ( data.type ) {
       case "ActiveEffect":
         return this._onDropActiveEffect(event, data);
+      case "Activity":
+        return this._onDropActivity(event, data);
       case "Advancement":
       case "Item":
         return this._onDropAdvancement(event, data);
