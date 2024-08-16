@@ -201,7 +201,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( !source.system.actionType && !source.system.activation?.type ) return false;
 
     // If item was updated after `4.0.0`, it shouldn't need the migration
-    if ( !foundry.utils.isNewerVersion("4.0.0", source._stats.systemVersion ?? "0.0.0") ) return false;
+    if ( !foundry.utils.isNewerVersion("4.0.0", source._stats?.systemVersion ?? "0.0.0") ) return false;
 
     // If the initial activity has already been created, no reason to create it again
     if ( !foundry.utils.isEmpty(source.system.activities) ) return false;
