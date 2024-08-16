@@ -20,16 +20,19 @@
         <hr>
 
         <div class="form-group">
-            <label>{{localize "DND5E.Identifier"}}</label>
+            <label>{{ localize "DND5E.Identifier" }}</label>
             <div class="form-fields">
-                <input name="configuration.identifier" type="text" value="{{configuration.identifier}}"
-                       placeholder="{{previewIdentifier}}">
+                <input name="configuration.identifier" type="text" value="{{ configuration.identifier }}"
+                       placeholder="{{ previewIdentifier }}">
             </div>
             <p class="hint identifier-hint">
-                {{{localize "DND5E.AdvancementScaleValueIdentifierHint" class=classIdentifier identifier=previewIdentifier}}}
-                <a class="identifier-hint-copy" data-tooltip="DND5E.IdentifierCopy">
-                    <i class="far fa-clipboard"></i>
-                </a>
+                {{#if (eq configuration.type "dice")}}
+                {{{ localize "DND5E.AdvancementScaleValueIdentifierDiceHint" class=classIdentifier
+                             identifier=previewIdentifier }}}
+                {{else}}
+                {{{ localize "DND5E.AdvancementScaleValueIdentifierHint" class=classIdentifier
+                             identifier=previewIdentifier }}}
+                {{/if}}
             </p>
         </div>
     </div>
