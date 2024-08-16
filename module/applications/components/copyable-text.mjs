@@ -26,6 +26,7 @@ export default class CopyableTextElement extends HTMLElement {
 
   /** @override */
   disconnectedCallback() {
+    this.#controller.abort();
     this.querySelector("button")?.remove();
   }
 

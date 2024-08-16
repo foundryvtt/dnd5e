@@ -26,10 +26,11 @@
                        placeholder="{{ previewIdentifier }}">
             </div>
             <p class="hint identifier-hint">
-                {{{ localize "DND5E.AdvancementScaleValueIdentifierHint" class=classIdentifier
-                             identifier=previewIdentifier }}}
                 {{#if (eq configuration.type "dice")}}
                 {{{ localize "DND5E.AdvancementScaleValueIdentifierDiceHint" class=classIdentifier
+                             identifier=previewIdentifier }}}
+                {{else}}
+                {{{ localize "DND5E.AdvancementScaleValueIdentifierHint" class=classIdentifier
                              identifier=previewIdentifier }}}
                 {{/if}}
             </p>
