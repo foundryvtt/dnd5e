@@ -433,6 +433,9 @@ export async function preloadHandlebarsTemplates() {
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
+    // Activity Partials
+    "systems/dnd5e/templates/activity/activity-usage-notes.hbs",
+
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",
     "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs",
@@ -567,7 +570,8 @@ function concealSection(conceal, options) {
 
 /**
  * Construct an object from the provided arguments.
- * @param {object} options  Handlebars options.
+ * @param {object} options       Handlebars options.
+ * @param {object} options.hash
  * @returns {object}
  */
 function makeObject({ hash }) {

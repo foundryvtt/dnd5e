@@ -121,18 +121,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
-   * Does activating this activity consume a spell slot?
-   * @type {boolean}
-   */
-  get requiresSpellSlot() {
-    if ( !this.isSpell || !this.actor?.system.spells ) return false;
-    // TODO: Check against specific preparation modes here
-    return this.item.system.level > 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Consumption targets that can be use for this activity.
    * @type {Set<string>}
    */
@@ -156,9 +144,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @property {boolean} concentration.begin         Should this usage initiate concentration?
    * @property {string|null} concentration.end       ID of an active effect to end concentration on.
    * @property {object|false} consume
-   * @property {boolean|string[]} consume.resources  Set to `true` or `false` to enable or disable all resource
-   *                                                 consumption or provide a list of consumption type keys defined in
-   *                                                 `CONFIG.DND5E.activityConsumptionTypes` to only enable those types.
+   * @property {boolean|number[]} consume.resources  Set to `true` or `false` to enable or disable all resource
+   *                                                 consumption or provide a list of consumption target indexes
+   *                                                 to only enable those targets.
    * @property {boolean} consume.spellSlot           Should this spell consume a spell slot?
    * @property {Event} event                         The browser event which triggered the item usage, if any.
    * @property {boolean|number} scaling              Number of steps above baseline to scale this usage, or `false` if
@@ -468,33 +456,27 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
     else if ( (config.consumeResource === false) && config.consumeUsage ) resources = usageTypes;
 
-    foundry.utils.mergeObject(usageConfig, {
-      create: {
-        measuredTemplate: config.createMeasuredTemplate
-      },
-      concentration: {
-        begin: config.beginConcentrating,
-        end: config.endConcentration
-      },
-      consume: {
-        resources,
-        spellSlot: config.consumeSpellSlot
-      },
-      scaling: config.resourceAmount,
-      spell: {
-        slot: config.slotLevel
-      }
-    });
-    foundry.utils.mergeObject(dialogConfig, {
-      configure: options.configureDialog
-    });
-    foundry.utils.mergeObject(messageConfig, {
-      create: options.createMessage,
-      rollMode: options.rollMode,
-      data: {
-        flags: options.flags ?? {}
-      }
-    });
+    // Set property so long as the value is not undefined
+    // Avoids problems with `mergeObject` overwriting values with `undefined`
+    const set = (config, keyPath, value) => {
+      if ( value === undefined ) return;
+      foundry.utils.setProperty(config, keyPath, value);
+    };
+
+    set(usageConfig, "create.measuredTemplate", config.createMeasuredTemplate);
+    set(usageConfig, "concentration.begin", config.beginConcentrating);
+    set(usageConfig, "concentration.end", config.endConcentration);
+    set(usageConfig, "consume.resources", resources);
+    set(usageConfig, "consume.spellSlot", config.consumeSpellSlot);
+    set(usageConfig, "scaling", config.resourceAmount);
+    set(usageConfig, "spell.slot", config.slotLevel);
+    set(dialogConfig, "configure", options.configureDialog);
+    set(messageConfig, "create", options.createMessage);
+    set(messageConfig, "rollMode", options.rollMode);
+    if ( options.flags ) {
+      messageConfig.data ??= {};
+      messageConfig.data.flags = foundry.utils.mergeObject(messageConfig.data.flags ?? {}, options.flags);
+    }
   }
 
   /* -------------------------------------------- */
@@ -510,8 +492,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     if ( config.create !== false ) {
       config.create ??= {};
-      config.create.measuredTemplate ??= !!this.target.template.type;
-      // TODO: Re-implement `system.target.prompt` from item data
+      config.create.measuredTemplate ??= !!this.target.template.type && this.target.prompt;
       // TODO: Handle permissions checks in `ActivityUsageDialog`
     }
 

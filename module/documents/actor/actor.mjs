@@ -761,8 +761,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
     for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
       const slot = spells[`spell${level}`] ??= { value: 0 };
+      slot.label = CONFIG.DND5E.spellLevels[level];
       slot.level = level;
       slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
+      slot.type = "leveled";
     }
   }
 
@@ -785,6 +787,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     let keyLevel = Math.clamp(progression[key], 0, CONFIG.DND5E.maxLevel);
     spells[key] ??= {};
+    spells[key].type = key;
     const override = Number.isNumeric(spells[key].override) ? parseInt(spells[key].override) : null;
 
     // Slot override
@@ -816,6 +819,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   static preparePactSlots(spells, actor, progression) {
     this.prepareAltSlots(spells, actor, progression, "pact", CONFIG.DND5E.pactCastingProgression);
+    spells.pact.label = game.i18n.localize("DND5E.PactMagic");
   }
 
   /* -------------------------------------------- */

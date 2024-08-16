@@ -822,22 +822,28 @@
   },
   "Type": {
     "ActivityUses": {
-      "Label": "Activity Uses"
+      "Label": "Activity Uses",
+      "Prompt": "Consume Activity Use?"
     },
     "Attribute": {
-      "Label": "Attribute"
+      "Label": "Attribute",
+      "Prompt": "Consume Attribute?"
     },
     "HitDice": {
-      "Label": "Hit Dice"
+      "Label": "Hit Dice",
+      "Prompt": "Consume Hit Die?"
     },
     "ItemUses": {
-      "Label": "Item Uses"
+      "Label": "Item Uses",
+      "Prompt": "Consume Item Use?"
     },
     "Material": {
-      "Label": "Material"
+      "Label": "Material",
+      "Prompt": "Consume Material?"
     },
     "SpellSlots": {
-      "Label": "Spell Slots"
+      "Label": "Spell Slots",
+      "Prompt": "Consume Spell Slot?"
     }
   },
   "Warning": {
@@ -2016,6 +2022,7 @@
 "DND5E.SavePromptTitle": "{ability} Saving Throw",
 "DND5E.ScalingFormula": "Scaling Formula",
 "DND5E.ScalingMode": "Scaling Mode",
+"DND5E.ScalingValue": "Scaling Value",
 "DND5E.School": "School",
 "DND5E.SchoolAbj": "Abjuration",
 "DND5E.SchoolCon": "Conjuration",
@@ -2573,6 +2580,15 @@
 "DND5E.Unidentified.Value": "???",
 "DND5E.Unknown": "Unknown",
 "DND5E.Unlimited": "Unlimited",
+
+"DND5E.USAGE": {
+  "SECTION": {
+    "Consumption": "Consumption",
+    "Creation": "Creation",
+    "Scaling": "Scaling"
+  }
+},
+
 "DND5E.Usage": "Usage",
 "DND5E.Use": "Use",
 "DND5E.UseItem": "Use {item}",

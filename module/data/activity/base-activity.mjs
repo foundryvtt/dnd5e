@@ -142,6 +142,28 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Does this activity or its item require concentration?
+   * @type {boolean}
+   */
+  get requiresConcentration() {
+    return this.item.requiresConcentration;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does activating this activity consume a spell slot?
+   * @type {boolean}
+   */
+  get requiresSpellSlot() {
+    if ( !this.isSpell || !this.actor?.system.spells ) return false;
+    // TODO: Check against specific preparation modes here
+    return this.item.system.level > 0;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 

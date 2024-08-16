@@ -38,7 +38,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
   _usageChatButtons() {
     if ( !this.roll.formula ) return null;
     return [{
-      label: this.roll.label || game.i18n.localize("DND5E.Roll"),
+      label: this.roll.name || game.i18n.localize("DND5E.Roll"),
       icon: '<i class="fa-solid fa-dice" inert></i>',
       dataset: {
         action: "rollFormula",
