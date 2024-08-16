@@ -5,10 +5,11 @@
 copyable-text {
   text-decoration: underline;
   text-decoration-style: dashed;
-  &:has(button:focus-visible, button:hover) {
+  cursor: pointer;
+  &:hover, &:has(:focus-visible) {
     text-decoration-color: var(--color-shadow-primary);
+    button { text-shadow: 0 0 4px var(--color-shadow-primary); }
   }
-
   button.copy-button {
     display: inline;
     block-size: unset;
@@ -24,7 +25,6 @@ copyable-text {
     line-height: normal;
 
     &:hover, &:focus { box-shadow: none; }
-    &:hover, &:focus-visible { text-shadow: 0 0 4px var(--color-shadow-primary); }
   }
 }
 

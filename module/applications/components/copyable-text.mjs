@@ -4,14 +4,23 @@
 export default class CopyableTextElement extends HTMLElement {
   /** @override */
   connectedCallback() {
+    this.#controller = new AbortController();
     const button = document.createElement("button");
     button.ariaLabel = this.getAttribute("label") ?? game.i18n.localize("DND5E.Copy");
     button.classList.add("copy-button");
     button.dataset.tooltip = button.ariaLabel;
     button.innerHTML = '<i class="fa-regular fa-clipboard" inert></i>';
-    button.addEventListener("click", this._onClick.bind(this));
+    this.addEventListener("click", this._onClick.bind(this), { signal: this.#controller.signal });
     this.append(button);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Controller for removing listeners automatically.
+   * @type {AbortController}
+   */
+  #controller;
 
   /* -------------------------------------------- */
 
