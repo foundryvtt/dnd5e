@@ -8,7 +8,9 @@ import TargetField from "../shared/target-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
-const { ArrayField, BooleanField, DocumentIdField, FilePathField, SchemaField, StringField } = foundry.data.fields;
+const {
+  ArrayField, BooleanField, DocumentIdField, FilePathField, IntegerSortField, SchemaField, StringField
+} = foundry.data.fields;
 
 /**
  * Data for a consumption target.
@@ -111,7 +113,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField(),
         prompt: new BooleanField({ initial: true })
       }),
-      uses: new UsesField()
+      uses: new UsesField(),
+      sort: new IntegerSortField()
     };
   }
 

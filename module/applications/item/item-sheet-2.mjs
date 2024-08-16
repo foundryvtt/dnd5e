@@ -7,7 +7,7 @@ import ContextMenu5e from "../context-menu.mjs";
  */
 export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
+    const options = foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e2", "sheet", "item"],
       width: 500,
       height: "auto",
@@ -17,6 +17,8 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       legacyDisplay: false,
       contextMenu: ContextMenu5e
     });
+    options.dragDrop.push({ dragSelector: ".activity[data-id]", dropSelector: "form" });
+    return options;
   }
 
   /* -------------------------------------------- */
@@ -147,10 +149,10 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     }, {});
 
     // Activities
-    context.activities = (activities ?? []).map(({ _id: id, name, img }) => ({
-      id, name,
+    context.activities = (activities ?? []).map(({ _id: id, name, img, sort }) => ({
+      id, name, sort,
       img: { src: img, svg: img?.endsWith(".svg") }
-    }));
+    })).sort((a, b) => a.sort - b.sort);
 
     return context;
   }
@@ -281,6 +283,48 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       formData.uses.recovery = Object.values(formData.uses.recovery);
     }
     return super._updateObject(event, formData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onDragStart(event) {
+    const { id } = event.target.closest(".activity[data-id]")?.dataset ?? {};
+    const activity = this.item.system.activities.get(id);
+    if ( !activity ) return super._onDragStart(event);
+    event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping an Activity onto the sheet.
+   * @param {DragEvent} event       The drag event.
+   * @param {object} transfer       The dropped data.
+   * @param {object} transfer.data  The Activity data.
+   * @protected
+   */
+  _onDropActivity(event, { data }) {
+    const { _id: id, type } = data;
+    const source = this.item.system.activities.get(id);
+
+    // Reordering
+    if ( source ) {
+      const targetId = event.target.closest(".activity[data-id]")?.dataset.id;
+      const target = this.item.system.activities.get(targetId);
+      if ( !target || (target === source) ) return;
+      const siblings = this.item.system.activities.filter(a => a._id !== id);
+      const sortUpdates = SortingHelpers.performIntegerSort(source, { target, siblings });
+      const updateData = Object.fromEntries(sortUpdates.map(({ target, update }) => {
+        return [target._id, { sort: update.sort }];
+      }));
+      this.item.update({ "system.activities": updateData });
+    }
+
+    // Copying
+    else this.item.createActivity(type, data, { renderSheet: false });
   }
 
   /* -------------------------------------------- */
