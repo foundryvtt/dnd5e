@@ -2108,13 +2108,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           // If no applicable tokens selected, attempt to apply based on the active sheet.
           if ( !applied ) {
             const app = ui.activeWindow;
+            const actors = [];
             if ( app instanceof dnd5e.applications.actor.ActorSheet5e ) {
               await this._applyEffectToActor(effect, app.object, { concentration, effectData });
+              actors.push(app.object);
             } else if ( app instanceof dnd5e.applications.actor.GroupActorSheet ) {
               for ( const actorId of app._selected ) {
-                await this._applyEffectToActor(effect, game.actors.get(actorId), { concentration, effectData });
+                const actor = game.actors.get(actorId);
+                await this._applyEffectToActor(effect, actor, { concentration, effectData });
+                actors.push(actor);
               }
             }
+            if ( actors.length ) ui.notifications.info(
+              `Applied effect to: ${game.i18n.getListFormatter().format(actors.map(a => a.name))}`
+            );
           }
           break;
         case "attack":
