@@ -1238,7 +1238,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     let item = this;
     if ( spellLevel && (this.type === "spell") ) {
-      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, item.system.level - spellLevel) }, { keepId: true });
+      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, spellLevel - item.system.level) }, { keepId: true });
     }
 
     const activity = item.system.activities?.getByType("attack")[0];
@@ -1290,7 +1290,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     let item = this;
     if ( spellLevel && (this.type === "spell") ) {
-      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, item.system.level - spellLevel) }, { keepId: true });
+      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, spellLevel - item.system.level) }, { keepId: true });
     }
 
     const activity = item.system.activities?.getByType("attack")[0] || item.system.activities?.getByType("damage")[0]
@@ -1320,7 +1320,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     let item = this;
     if ( spellLevel && (this.type === "spell") ) {
-      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, item.system.level - spellLevel) }, { keepId: true });
+      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, spellLevel - item.system.level) }, { keepId: true });
     }
 
     const activity = item.system.activities?.getByType("utility")[0];

@@ -189,6 +189,18 @@ export default class NPCData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Level used to determine cantrip scaling.
+   * @type {number}
+   */
+  get cantripLevel() {
+    return Math.max(this.details.level, this.details.spellLevel, this.details.cr);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 

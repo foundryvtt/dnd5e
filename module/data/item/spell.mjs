@@ -299,14 +299,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   get scalingIncrease() {
-    const actor = this.parent.actor;
-    if ( (this.level !== 0) || !actor ) return null;
-    let level = actor.system.details?.level;
-    if ( !level && (actor.type === "npc") ) {
-      if ( this.preparation.mode === "innate" ) level = Math.ceil(actor.system.details.cr);
-      else level = actor.system.details.spellLevel;
-    }
-    return Math.floor(((level ?? 0) + 1) / 6);
+    if ( this.level !== 0 ) return null;
+    return Math.floor(((this.parent.actor?.system.cantripLevel ?? 0) + 1) / 6);
   }
 
   /* -------------------------------------------- */

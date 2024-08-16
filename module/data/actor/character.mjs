@@ -152,6 +152,18 @@ export default class CharacterData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Level used to determine cantrip scaling.
+   * @type {number}
+   */
+  get cantripLevel() {
+    return this.details.level;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 

@@ -556,7 +556,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( usageConfig.scaling ) {
       foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.scaling", usageConfig.scaling);
       item.updateSource({ "flags.dnd5e.scaling": usageConfig.scaling });
-      item.prepareData();
       item.prepareFinalAttributes();
     }
   }
