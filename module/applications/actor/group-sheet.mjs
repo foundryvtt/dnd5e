@@ -18,6 +18,13 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
    */
   _expanded = new Set();
 
+  /**
+   * IDs of group members currently selected.
+   * @type {Set<string>}
+   * @internal
+   */
+  _selected = new Set();
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -170,6 +177,9 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * multiplier);
       }
 
+      // Selection
+      m.selected = this._selected.has(member.id);
+
       if ( member.type === "vehicle" ) stats.nVehicles += multiplier;
       else stats.nMembers += multiplier;
       sections[member.type].members.push(m);
@@ -290,6 +300,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   _onClickActionButton(event) {
     event.preventDefault();
     const button = event.currentTarget;
+    const { actorId } = button.closest("[data-actor-id]")?.dataset ?? {};
     switch ( button.dataset.action ) {
       case "award":
         const award = new Award(this.object, { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") });
@@ -306,16 +317,35 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         this.actor.system.placeMembers();
         break;
       case "removeMember":
-        const removeMemberId = button.closest("li.group-member").dataset.actorId;
-        this.actor.system.removeMember(removeMemberId);
+        this.actor.system.removeMember(actorId);
         break;
       case "rollQuantities":
         this.actor.system.rollQuantities();
+        break;
+      case "selectMember":
+        this._selectMember(actorId, { releaseOthers: !event.shiftKey });
         break;
       case "shortRest":
         this.actor.shortRest({ advanceTime: true });
         break;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Select a member of the group.
+   * @param {string} actorId  The ID of the group member.
+   * @param {object} [options]
+   * @param {boolean} [options.releaseOthers=true]  Whether to de-select currently-selected members.
+   * @protected
+   */
+  _selectMember(actorId, { releaseOthers=true }={}) {
+    const selected = this._selected.has(actorId);
+    if ( releaseOthers ) this._selected.clear();
+    if ( selected ) this._selected.delete(actorId);
+    else this._selected.add(actorId);
+    this.render();
   }
 
   /* -------------------------------------------- */

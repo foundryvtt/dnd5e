@@ -48,7 +48,8 @@
     </header>
     <ol class="members-list directory-list">
         {{#each section.members as |member|}}
-        <li class="group-member directory-item flexrow" data-actor-id="{{member.id}}">
+        <li class="group-member directory-item flexrow {{#if member.selected}}selected{{/if}}"
+            data-actor-id="{{member.id}}">
             <input type="hidden" name="system.members.{{index}}.actor" value="{{member.id}}">
             <div class="name flexrow">
                 <img class="thumbnail" src="{{member.img}}">
@@ -86,6 +87,7 @@
             </div>
             {{/if}}
             <div class="controls">
+                <a class="action-button" data-action="selectMember"><i class="fas fa-bullseye"></i></a>
                 <a class="action-button" data-action="removeMember"><i class="fa-solid fa-close"></i></a>
             </div>
         </li>
