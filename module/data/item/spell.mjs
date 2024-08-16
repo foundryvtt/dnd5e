@@ -300,7 +300,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /** @inheritDoc */
   get scalingIncrease() {
     if ( this.level !== 0 ) return null;
-    return Math.floor(((this.parent.actor?.system.cantripLevel ?? 0) + 1) / 6);
+    return Math.floor(((this.parent.actor?.system.cantripLevel?.(this.parent) ?? 0) + 1) / 6);
   }
 
   /* -------------------------------------------- */

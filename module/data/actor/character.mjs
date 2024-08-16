@@ -152,18 +152,6 @@ export default class CharacterData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Level used to determine cantrip scaling.
-   * @type {number}
-   */
-  get cantripLevel() {
-    return this.details.level;
-  }
-
-  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -253,6 +241,17 @@ export default class CharacterData extends CreatureTemplate {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Level used to determine cantrip scaling.
+   * @param {Item5e} spell  Spell for which to fetch the cantrip level.
+   * @returns {number}
+   */
+  cantripLevel(spell) {
+    return this.details.level;
+  }
+
   /* -------------------------------------------- */
 
   /**

@@ -189,18 +189,6 @@ export default class NPCData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Level used to determine cantrip scaling.
-   * @type {number}
-   */
-  get cantripLevel() {
-    return Math.max(this.details.level, this.details.spellLevel, this.details.cr);
-  }
-
-  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -361,5 +349,19 @@ export default class NPCData extends CreatureTemplate {
       mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Level used to determine cantrip scaling.
+   * @param {Item5e} spell  Spell for which to fetch the cantrip level.
+   * @returns {number}
+   */
+  cantripLevel(spell) {
+    if ( spell.system.preparation.mode === "innate" ) return this.details.cr;
+    return this.details.level ? this.details.level : this.details.spellLevel;
   }
 }
