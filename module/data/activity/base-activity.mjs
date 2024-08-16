@@ -563,7 +563,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @protected
    */
   _processDamagePart(damage, rollConfig, rollData) {
-    const scaledFormula = damage.scaledFormula(rollConfig.scaling);
+    const scaledFormula = damage.scaledFormula(rollData.scaling);
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
 

@@ -10,6 +10,7 @@ import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import { getSceneTargets } from "../utils.mjs";
+import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
 import Advancement from "./advancement/advancement.mjs";
@@ -412,6 +413,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Scaling increase for this item based on flag or item-type specific details.
+   * @type {number}
+   */
+  get scalingIncrease() {
+    return this.system?.scalingIncrease ?? this.getFlag("dnd5e", "scaling") ?? 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does this item scale with any kind of consumption?
    * @type {string|null}
    */
@@ -795,30 +806,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( config.enchantmentProfile ) {
       foundry.utils.setProperty(options.flags, "dnd5e.use.enchantmentProfile", config.enchantmentProfile);
     }
-
-    // Handle upcasting
-    if ( item.type === "spell" ) {
-      let level = null;
-      if ( config.resourceAmount in as.spells ) config.slotLevel = config.resourceAmount;
-      if ( config.slotLevel ) {
-        // A spell slot was consumed.
-        if ( Number.isInteger(config.slotLevel) ) level = config.slotLevel;
-        else if ( config.slotLevel in as.spells ) {
-          if ( /^spell([0-9]+)$/.test(config.slotLevel) ) level = parseInt(config.slotLevel.replace("spell", ""));
-          else level = as.spells[config.slotLevel].level;
-        }
-      } else if ( config.resourceAmount ) {
-        // A quantity of the resource was consumed.
-        const diff = config.resourceAmount - (this.system.consume.amount || 1);
-        level = is.level + diff;
-      }
-      if ( level && (level !== is.level) ) {
-        item = item.clone({"system.level": level}, {keepId: true});
-        item.prepareData();
-        item.prepareFinalAttributes();
-      }
-    }
-    if ( item.type === "spell" ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
     // Calculate and consume item consumption
     if ( await this.consume(item, config, options) === false ) return;
@@ -1250,7 +1237,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     );
 
     let item = this;
-    if ( spellLevel && (this.type === "spell") ) item = item.clone({ "system.item.level": spellLevel });
+    if ( spellLevel && (this.type === "spell") ) {
+      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, item.system.level - spellLevel) }, { keepId: true });
+    }
 
     const activity = item.system.activities?.getByType("attack")[0];
     if ( !activity ) throw new Error("This Item does not have an Attack activity to roll!");
@@ -1300,9 +1289,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     );
 
     let item = this;
-    if ( spellLevel ) {
-      if ( this.type === "spell" ) item = item.clone({ "system.level": spellLevel });
-      options.scaling = spellLevel;
+    if ( spellLevel && (this.type === "spell") ) {
+      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, item.system.level - spellLevel) }, { keepId: true });
     }
 
     const activity = item.system.activities?.getByType("attack")[0] || item.system.activities?.getByType("damage")[0]
@@ -1312,102 +1300,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const returnMultiple = options.returnMultiple;
     const rolls = await activity.rollDamage(options);
     return returnMultiple ? rolls : rolls?.[0];
-
-    // TODO: Remove this reference code once scaling is implemented
-
-    // Fetch level from tags if not specified
-    let originalLevel = this.system.level;
-    let scaling = this.system.scaling;
-    const levelingFlag = this.getFlag("dnd5e", "spellLevel");
-    if ( !spellLevel && levelingFlag ) {
-      spellLevel = levelingFlag.value;
-      originalLevel = levelingFlag.base;
-      scaling = levelingFlag.scaling;
-    }
-
-    // Scale damage from up-casting spells
-    if ( (this.type === "spell") || scaling ) {
-      if ( scaling.mode === "cantrip" ) {
-        let level;
-        if ( this.actor.type === "character" ) level = this.actor.system.details.level;
-        else if ( this.system.preparation.mode === "innate" ) level = Math.ceil(this.actor.system.details.cr);
-        else level = this.actor.system.details.spellLevel;
-        rollConfigs.forEach(c => this._scaleCantripDamage(c.parts, scaling.formula, level, rollData));
-      }
-      else if ( spellLevel && (scaling.mode === "level") ) rollConfigs.forEach(c => {
-        if ( scaling.formula || c.parts.length ) {
-          this._scaleSpellDamage(c.parts, originalLevel, spellLevel, scaling.formula || c.parts[0], rollData);
-        }
-      });
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Adjust a cantrip damage formula to scale it for higher level characters and monsters.
-   * @param {string[]} parts   The original parts of the damage formula.
-   * @param {string} scale     The scaling formula.
-   * @param {number} level     Level at which the spell is being cast.
-   * @param {object} rollData  A data object that should be applied to the scaled damage roll.
-   * @returns {string[]}       The parts of the damage formula with the scaling applied.
-   * @private
-   */
-  _scaleCantripDamage(parts, scale, level, rollData) {
-    const add = Math.floor((level + 1) / 6);
-    if ( add === 0 ) return [];
-    return this._scaleDamage(parts, scale || parts.join(" + "), add, rollData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Adjust the spell damage formula to scale it for spell level up-casting.
-   * @param {string[]} parts      The original parts of the damage formula.
-   * @param {number} baseLevel    Default level for the spell.
-   * @param {number} spellLevel   Level at which the spell is being cast.
-   * @param {string} formula      The scaling formula.
-   * @param {object} rollData     A data object that should be applied to the scaled damage roll.
-   * @returns {string[]}          The parts of the damage formula with the scaling applied.
-   * @private
-   */
-  _scaleSpellDamage(parts, baseLevel, spellLevel, formula, rollData) {
-    const upcastLevels = Math.max(spellLevel - baseLevel, 0);
-    if ( upcastLevels === 0 ) return parts;
-    return this._scaleDamage(parts, formula, upcastLevels, rollData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Scale an array of damage parts according to a provided scaling formula and scaling multiplier.
-   * @param {string[]} parts    The original parts of the damage formula.
-   * @param {string} scaling    The scaling formula.
-   * @param {number} times      A number of times to apply the scaling formula.
-   * @param {object} rollData   A data object that should be applied to the scaled damage roll
-   * @returns {string[]}        The parts of the damage formula with the scaling applied.
-   * @private
-   */
-  _scaleDamage(parts, scaling, times, rollData) {
-    if ( times <= 0 ) return parts;
-    const p0 = new Roll(parts[0], rollData);
-    const s = new Roll(scaling, rollData).alter(times);
-
-    // Attempt to simplify by combining like dice terms
-    let simplified = false;
-    if ( (s.terms[0] instanceof foundry.dice.terms.Die) && (s.terms.length === 1) ) {
-      const d0 = p0.terms[0];
-      const s0 = s.terms[0];
-      if ( (d0 instanceof foundry.dice.terms.Die) && (d0.faces === s0.faces) && d0.modifiers.equals(s0.modifiers) ) {
-        d0.number += s0.number;
-        parts[0] = p0.formula;
-        simplified = true;
-      }
-    }
-
-    // Otherwise, add to the first part
-    if ( !simplified ) parts[0] = `${parts[0]} + ${s.formula}`;
-    return parts;
   }
 
   /* -------------------------------------------- */
@@ -1427,7 +1319,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     );
 
     let item = this;
-    if ( spellLevel && (this.type === "spell") ) item = item.clone({ "system.level": spellLevel });
+    if ( spellLevel && (this.type === "spell") ) {
+      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, item.system.level - spellLevel) }, { keepId: true });
+    }
 
     const activity = item.system.activities?.getByType("utility")[0];
     if ( !activity ) throw new Error("This Item does not have a Utility activity to roll!");
@@ -1528,6 +1422,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       data.item.flags = { ...this.flags };
       data.item.name = this.name;
     }
+    data.scaling = new Scaling(this.scalingIncrease);
     return data;
   }
 
@@ -1620,25 +1515,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             }
           }
           break;
-        case "attack":
-          await item.rollAttack({
-            event: event,
-            spellLevel: spellLevel
-          });
-          break;
         case "consumeUsage":
           await item.consume(item, { consumeUsage: true }, messageUpdates);
           break;
         case "consumeResource":
           await item.consume(item, { consumeResource: true }, messageUpdates);
-          break;
-        case "damage":
-        case "versatile":
-          await item.rollDamage({
-            event: event,
-            spellLevel: spellLevel,
-            versatile: action === "versatile"
-          });
           break;
         case "placeTemplate":
           try {

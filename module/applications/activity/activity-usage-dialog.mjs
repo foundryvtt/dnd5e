@@ -130,7 +130,7 @@ export default class ActivityUsageDialog extends Application5e {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    // TODO: Adjust item scaling when scaling is changed
+    this.#item = this.#item.clone({ "flags.dnd5e.scaling": this.config.scaling ?? 0 });
     return {
       ...await super._prepareContext(options),
       activity: this.activity
@@ -296,7 +296,7 @@ export default class ActivityUsageDialog extends Application5e {
     context.hasScaling = true;
     context.notes = [];
 
-    if ( this.activity.requiresSpellSlot ) {
+    if ( this.activity.requiresSpellSlot && (this.config.scaling !== false) ) {
       const minimumLevel = this.item.system.level ?? 1;
       const maximumLevel = Object.values(this.actor.system.spells)
         .reduce((max, d) => d.max ? Math.max(max, d.level) : max, 0);
@@ -326,7 +326,7 @@ export default class ActivityUsageDialog extends Application5e {
       });
     }
 
-    else if ( this.activity.consumption.scaling.allowed ) {
+    else if ( this.activity.consumption.scaling.allowed && (this.config.scaling !== false) ) {
       const scale = this.activity.consumption.scaling;
       const max = scale.max ? simplifyBonus(scale.max, this.activity.getRollData({ deterministic: true })) : Infinity;
       context.scaling = {

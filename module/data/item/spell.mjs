@@ -296,6 +296,31 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get scalingIncrease() {
+    const actor = this.parent.actor;
+    if ( (this.level !== 0) || !actor ) return null;
+    let level = actor.system.details?.level;
+    if ( !level && (actor.type === "npc") ) {
+      if ( this.preparation.mode === "innate" ) level = Math.ceil(actor.system.details.cr);
+      else level = actor.system.details.spellLevel;
+    }
+    return Math.floor(((level ?? 0) + 1) / 6);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(...options) {
+    const data = super.getRollData(...options);
+    data.item.level = data.item.level + (this.parent.getFlag("dnd5e", "scaling") ?? 0);
+    return data;
+  }
+
+  /* -------------------------------------------- */
   /*  Shims                                       */
   /* -------------------------------------------- */
 
