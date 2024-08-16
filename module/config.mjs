@@ -2992,7 +2992,7 @@ DND5E.CR_EXP_LEVELS = [
 ];
 
 /**
- * XP intervals above the maximum XP that result in an epic boon.
+ * Intervals above the maximum XP that result in an epic boon.
  * @type {number}
  */
 DND5E.epicBoonInterval = 30000;

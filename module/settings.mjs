@@ -202,7 +202,7 @@ export function registerSystemSettings() {
     config: true,
     default: "xpBoons",
     choices: {
-      milestone: "SETTINGS.DND5E.LEVELING.Milestone",
+      noxp: "SETTINGS.DND5E.LEVELING.NoXP",
       xp: "SETTINGS.DND5E.LEVELING.XP",
       xpBoons: "SETTINGS.DND5E.LEVELING.XPBoons"
     }

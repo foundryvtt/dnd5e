@@ -35,7 +35,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     const classes = this.actor.itemTypes.class;
     return foundry.utils.mergeObject(context, {
-      disableExperience: game.settings.get("dnd5e", "levelingMode") === "milestone",
+      disableExperience: game.settings.get("dnd5e", "levelingMode") === "noxp",
       classLabels: classes.map(c => c.name).join(", "),
       labels: {
         type: context.system.details.type.label

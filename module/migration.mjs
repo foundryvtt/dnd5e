@@ -365,7 +365,7 @@ export async function migrateSettings() {
     ?.find(s => s.key === "dnd5e.disableExperienceTracking")?.value;
   const levelingMode = game.settings.storage.get("world")?.find(s => s.key === "dnd5e.levelingMode")?.value;
   if ( (disableExperienceTracking !== undefined) && (levelingMode === undefined) ) {
-    await game.settings.set("dnd5e", "levelingMode", "milestone");
+    await game.settings.set("dnd5e", "levelingMode", "noxp");
   }
 }
 

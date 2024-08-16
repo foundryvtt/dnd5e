@@ -63,7 +63,9 @@
 
             {{!-- Epic Boons --}}
             {{#if system.details.xp.boonsEarned}}
-            <div class="boon-badge badge" aria-label="{{ epicBoonsEarned }}">{{ system.details.xp.boonsEarned }}</div>
+            <div class="boon-badge badge" data-tooltip="{{ epicBoonsEarned }}" aria-label="{{ epicBoonsEarned }}">
+                {{ system.details.xp.boonsEarned }}
+            </div>
             {{/if}}
 
             <div>

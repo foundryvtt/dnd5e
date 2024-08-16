@@ -63,7 +63,7 @@ export default class Award extends DialogMixin(FormApplication) {
     }, {});
     context.destinations = Award.prepareDestinations(this.transferDestinations, this.options.savedDestinations);
     context.each = this.options.each ?? false;
-    context.hideXP = game.settings.get("dnd5e", "levelingMode") === "milestone";
+    context.hideXP = game.settings.get("dnd5e", "levelingMode") === "noxp";
     context.noPrimaryParty = !game.settings.get("dnd5e", "primaryParty")?.actor && !this.isPartyAward;
     context.xp = this.options.xp ?? this.object?.system.details.xp.value ?? this.object?.system.details.xp.derived;
 
