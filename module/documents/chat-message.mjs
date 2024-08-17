@@ -264,8 +264,8 @@ export default class ChatMessage5e extends ChatMessage {
     // Context menu
     const metadata = html.querySelector(".message-metadata");
     let deleteButton = metadata.querySelector(".message-delete");
-    if (!game.user.isGM) deleteButton?.remove();
-    if (deleteButton) deleteButton.style.display = "none";
+    if ( !game.user.isGM ) deleteButton?.remove();
+    if ( deleteButton ) deleteButton.style.display = "none";
     const anchor = document.createElement("a");
     anchor.setAttribute("aria-label", game.i18n.localize("DND5E.AdditionalControls"));
     anchor.classList.add("chat-control");
