@@ -265,7 +265,7 @@ export default class ChatMessage5e extends ChatMessage {
     const metadata = html.querySelector(".message-metadata");
     let deleteButton = metadata.querySelector(".message-delete");
     if ( !game.user.isGM ) deleteButton?.remove();
-    if ( deleteButton ) deleteButton.style.display = "none";
+    deleteButton?.toggleAttribute("hidden", true);
     const anchor = document.createElement("a");
     anchor.setAttribute("aria-label", game.i18n.localize("DND5E.AdditionalControls"));
     anchor.classList.add("chat-control");
@@ -740,23 +740,26 @@ export default class ChatMessage5e extends ChatMessage {
     }
   }
 
+  /**
+   * Listen for shift key being pressed to show the chat message "delete" icon, or released (or focus lost) to hide it.
+   */
   static activateListeners() {
     document.addEventListener("keydown", event => {
-      if (event.key !== "Shift") return;
-      let deleteButtons = document.querySelectorAll(".chat-message .message-delete");
-      if (!deleteButtons.length) return;
-      if (deleteButtons[0].style.display === "none") {
-        deleteButtons.forEach(btn => btn.style.display = "");
-      }
-    });
+      if ( event.key === "Shift" ) this.toggleDeleteButtons(false);
+    }, { passive: true });
     document.addEventListener("keyup", event => {
-      if (event.key !== "Shift") return;
-      let deleteButtons = document.querySelectorAll(".chat-message .message-delete");
-      if (!deleteButtons.length) return;
-      if (deleteButtons[0].style.display === "") {
-        deleteButtons.forEach(btn => btn.style.display = "none");
-      }
-    });
+      if ( event.key === "Shift" ) this.toggleDeleteButtons(true);
+    }, { passive: true });
+    window.addEventListener("blur", () => this.toggleDeleteButtons(true), { passive: true });
+  }
+
+  /**
+   * Hides or shows the "delete" button on each chat message.
+   * @param {boolean} hide  Whether the delete buttons should be hidden.
+   */
+  static toggleDeleteButtons(hide) {
+    const deleteButtons = document.querySelectorAll(".chat-message .message-delete");
+    deleteButtons.forEach(btn => btn.toggleAttribute("hidden", hide));
   }
 
   /* -------------------------------------------- */
