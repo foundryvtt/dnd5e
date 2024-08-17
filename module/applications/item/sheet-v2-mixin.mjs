@@ -171,7 +171,7 @@ export default function ItemSheetV2Mixin(Base) {
       // Properties
       context.properties = {
         active: [],
-        object: Object.fromEntries((context.source.properties ?? []).map(p => [p, true])),
+        object: Object.fromEntries((context.system.properties ?? []).map(p => [p, true])),
         options: (validProperties ?? []).reduce((arr, k) => {
           const { label } = CONFIG.DND5E.itemProperties[k];
           arr.push({ label, value: k, selected: properties.has(k) });

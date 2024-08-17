@@ -340,7 +340,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   prepareDerivedData() {
     super.prepareDerivedData();
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
-    if ( this.isAppliedEnchantment ) EnchantmentData.trackEnchantment(this.origin, this.uuid);
+    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantment.track(this.origin, this.uuid);
   }
 
   /* -------------------------------------------- */
@@ -450,13 +450,13 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     // Enchantments cannot be added directly to actors
     if ( (this.type === "enchantment") && (this.parent instanceof Actor) ) {
-      ui.notifications.error("DND5E.Enchantment.Warning.NotOnActor", { localize: true });
+      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor", { localize: true });
       return false;
     }
 
     if ( this.isAppliedEnchantment ) {
       const origin = await fromUuid(this.origin);
-      const errors = origin?.system.enchantment?.canEnchant(this.parent);
+      const errors = origin?.canEnchant(this.parent);
       if ( errors?.length ) {
         errors.forEach(err => console.error(err));
         return false;
@@ -530,7 +530,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
-    if ( this.isAppliedEnchantment ) EnchantmentData.untrackEnchantment(this.origin, this.uuid);
+    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantment.untrack(this.origin, this.uuid);
     document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.uuid}"]`)
       .forEach(element => element.buildItemList());
   }
@@ -783,7 +783,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     else if ( this.disabled ) properties.push("DND5E.EffectType.Inactive");
     else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
     else properties.push("DND5E.EffectType.Passive");
-    if ( this.type === "enchantment" ) properties.push("DND5E.Enchantment.Label");
+    if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
 
     return {
       content: await renderTemplate(

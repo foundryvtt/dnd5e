@@ -82,7 +82,7 @@ export default class EffectsElement extends HTMLElement {
     const categories = {
       enchantment: {
         type: "enchantment",
-        label: game.i18n.localize("DND5E.Enchantment.Category.General"),
+        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.General"),
         effects: [],
         isEnchantment: true
       },
@@ -93,7 +93,7 @@ export default class EffectsElement extends HTMLElement {
       },
       enchantmentActive: {
         type: "activeEnchantment",
-        label: game.i18n.localize("DND5E.Enchantment.Category.Active"),
+        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Active"),
         effects: [],
         isEnchantment: true
       },
@@ -104,7 +104,7 @@ export default class EffectsElement extends HTMLElement {
       },
       enchantmentInactive: {
         type: "inactiveEnchantment",
-        label: game.i18n.localize("DND5E.Enchantment.Category.Inactive"),
+        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Inactive"),
         effects: [],
         isEnchantment: true
       },
@@ -141,7 +141,7 @@ export default class EffectsElement extends HTMLElement {
     categories.suppressed.hidden = !categories.suppressed.effects.length;
 
     for ( const category of Object.values(categories) ) {
-      category.localizationPrefix = category.isEnchantment ? "DND5E.Enchantment.Action." : "DND5E.Effect";
+      category.localizationPrefix = category.isEnchantment ? "DND5E.ENCHANTMENT.Action." : "DND5E.Effect";
     }
 
     return categories;

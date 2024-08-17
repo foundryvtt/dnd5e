@@ -7,3 +7,4 @@ export {default as SummonSheet} from "./summon-sheet.mjs";
 export {default as UtilitySheet} from "./utility-sheet.mjs";
 
 export {default as ActivityUsageDialog} from "./activity-usage-dialog.mjs";
+export {default as EnchantUsageDialog} from "./enchant-usage-dialog.mjs";

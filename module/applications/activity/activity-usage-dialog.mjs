@@ -14,6 +14,7 @@ export default class ActivityUsageDialog extends Application5e {
     this.#config = options.config;
   }
 
+  /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["activity-usage"],
     tag: "form",
@@ -35,6 +36,7 @@ export default class ActivityUsageDialog extends Application5e {
     }
   };
 
+  /** @override */
   static PARTS = {
     scaling: {
       template: "systems/dnd5e/templates/activity/activity-usage-scaling.hbs"
@@ -388,7 +390,10 @@ export default class ActivityUsageDialog extends Application5e {
    */
   _prepareSubmitData(event, formData) {
     const submitData = foundry.utils.expandObject(formData.object);
-    if ( "scalingValue" in submitData ) {
+    if ( foundry.utils.hasProperty(submitData, "spell.slot") ) {
+      const level = this.actor.system.spells?.[submitData.spell.slot]?.level ?? 0;
+      submitData.scaling = Math.max(0, level - this.item.system.level);
+    } else if ( "scalingValue" in submitData ) {
       submitData.scaling = submitData.scalingValue - 1;
       delete submitData.scalingValue;
     }

@@ -5,7 +5,6 @@ import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
-import { EnchantmentData } from "../data/item/fields/enchantment-field.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
@@ -801,12 +800,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.actor ) return this.displayCard();
     else return;
 
-    // TODO: Remove this reference code once EnchantmentActivity and SummoningActivity are created and scaling is added
-    // Store selected enchantment profile in flag
-    if ( config.enchantmentProfile ) {
-      foundry.utils.setProperty(options.flags, "dnd5e.use.enchantmentProfile", config.enchantmentProfile);
-    }
-
+    // TODO: Remove this reference code once SummoningActivity is added
     // Initiate summons creation
     let summoned;
     if ( config.createSummons ) {
@@ -850,16 +844,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /** @deprecated */
   _getUsageConfig() {
-    return;
-
-    // TODO: Remove this reference code once EnchantmentActivity & SummoningActivity are created
-
-    if ( this.system.isEnchantment ) {
-      const availableEnchantments = EnchantmentData.availableEnchantments(this);
-      config.promptEnchantment = availableEnchantments.length > 1;
-      config.enchantmentProfile = availableEnchantments[0]?.id;
-    }
-
+    // TODO: Remove this reference code once SummoningActivity is created
     if ( this.system.hasSummoning && this.system.summons.canSummon && canvas.scene ) {
       config.createSummons = summons.prompt;
       config.summonsProfile = this.system.summons.profiles[0]._id;

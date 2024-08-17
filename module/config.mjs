@@ -1380,7 +1380,7 @@ DND5E.featureTypes = {
     label: "DND5E.Feature.Species"
   },
   enchantment: {
-    label: "DND5E.Enchantment.Label",
+    label: "DND5E.ENCHANTMENT.Label",
     subtypes: {
       artificerInfusion: "DND5E.Feature.Class.ArtificerInfusion",
       rune: "DND5E.Feature.Class.Rune"

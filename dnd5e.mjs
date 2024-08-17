@@ -21,6 +21,7 @@ import * as documents from "./module/documents/_module.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
+import {default as registry} from "./module/registry.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
 import registerModuleData from "./module/module-registration.mjs";
@@ -40,6 +41,7 @@ globalThis.dnd5e = {
   enrichers,
   Filter,
   migrations,
+  registry,
   utils
 };
 
@@ -520,6 +522,7 @@ export {
   enrichers,
   Filter,
   migrations,
+  registry,
   utils,
   DND5E
 };

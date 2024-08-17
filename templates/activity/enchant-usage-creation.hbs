@@ -1,0 +1,16 @@
+<section>
+    {{> "dnd5e.activity-usage-notes" }}
+    {{#if hasCreation}}
+    <fieldset>
+        <legend>{{ localize "DND5E.USAGE.SECTION.Creation" }}</legend>
+        {{#if enchantment.field}}
+        {{ formField enchantment.field name=enchantment.name value=enchantment.value options=enchantment.options }}
+        {{else if enchantment}}
+        <input type="hidden" name="enchantmentProfile" value="{{ enchantment }}">
+        {{/if}}
+        {{#if template}}
+        {{ formField template.field name=template.name value=template.value }}
+        {{/if}}
+    </fieldset>
+    {{/if}}
+</section>

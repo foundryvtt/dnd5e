@@ -1,5 +1,3 @@
-import { EnchantmentData } from "../../data/item/fields/enchantment-field.mjs";
-
 /**
  * A specialized Dialog subclass for ability usage.
  *
@@ -67,7 +65,6 @@ export default class AbilityUseDialog extends Dialog {
       item,
       ...config,
       slotOptions: config.consumeSpellSlot ? slotOptions : [],
-      enchantmentOptions: this._createEnchantmentOptions(item),
       summoningOptions: this._createSummoningOptions(item),
       resourceOptions: resourceOptions,
       resourceArray: Array.isArray(resourceOptions),
@@ -182,22 +179,6 @@ export default class AbilityUseDialog extends Dialog {
       }
     }
 
-    return options;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create details on enchantment that can be applied.
-   * @param {Item5e} item  The item.
-   * @returns {{ enchantments: object }|null}
-   */
-  static _createEnchantmentOptions(item) {
-    const enchantments = EnchantmentData.availableEnchantments(item);
-    if ( !enchantments.length ) return null;
-    const options = {};
-    if ( enchantments.length > 1 ) options.profiles = Object.fromEntries(enchantments.map(e => [e._id, e.name]));
-    else options.profile = enchantments[0]._id;
     return options;
   }
 
@@ -476,9 +457,6 @@ export default class AbilityUseDialog extends Dialog {
   _onChangeSlotLevel(event) {
     const level = this.item.actor?.system.spells?.[event.target.value]?.level;
     const item = this.item.clone({ "system.level": level ?? this.item.system.level });
-    this._updateProfilesInput(
-      "enchantmentProfile", "DND5E.Enchantment.Label", this.constructor._createEnchantmentOptions(item)
-    );
     this._updateProfilesInput(
       "summonsProfile", "DND5E.Summoning.Profile.Label", this.constructor._createSummoningOptions(item)
     );

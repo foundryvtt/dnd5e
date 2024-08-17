@@ -2,7 +2,6 @@ import { ItemDataModel } from "../abstract.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
-import { EnchantmentData } from "./fields/enchantment-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 import { FormulaField } from "../fields/_module.mjs";
 
@@ -30,7 +29,7 @@ export default class FeatData extends ItemDataModel.mixin(
 ) {
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.Enchantment", "DND5E.Prerequisites"];
+  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.Prerequisites"];
 
   /** @inheritdoc */
   static defineSchema() {
@@ -243,7 +242,8 @@ export default class FeatData extends ItemDataModel.mixin(
    * @type {boolean}
    */
   get isEnchantmentSource() {
-    return EnchantmentData.isEnchantmentSource(this);
+    return CONFIG.DND5E.featureTypes[data.type?.value]?.subtypes?.[data.type?.subtype]
+      && (data.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
   }
 
   /* -------------------------------------------- */

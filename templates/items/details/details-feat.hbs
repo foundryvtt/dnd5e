@@ -23,17 +23,17 @@
 
 {{#if system.isEnchantmentSource}}
 <fieldset>
-    <legend>{{ localize "DND5E.Enchantment.Label" }}</legend>
+    <legend>{{ localize "DND5E.ENCHANTMENT.Label" }}</legend>
 
     {{!-- Max Enchantments --}}
     {{ formField fields.enchant.fields.max value=source.enchantment.max localize=true
-                 label="DND5E.Enchantment.FIELDS.enchantment.items.max.label"
-                 hint="DND5E.Enchantment.FIELDS.enchantment.items.max.hint" }}
+                 label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.label"
+                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.hint" }}
 
     {{!-- Enchantment Replacement --}}
     {{ formField fields.enchant.fields.period value=source.enchantment.period localize=true
                  choices=config.enchantmentPeriods labelAttr="label" blank="DND5E.UsesPeriods.Never"
-                 label="DND5E.Enchantment.FIELDS.enchantment.items.period.label"
-                 hint="DND5E.Enchantment.FIELDS.enchantment.items.period.hint" }}
+                 label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.label"
+                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.hint" }}
 </fieldset>
 {{/if}}
