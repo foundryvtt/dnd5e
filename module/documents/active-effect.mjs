@@ -11,6 +11,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @type {Record<string, string>}
    */
   static ID = {
+    BLOODIED: staticID("dnd5ebloodied"),
     ENCUMBERED: staticID("dnd5eencumbered"),
     EXHAUSTION: staticID("dnd5eexhaustion")
   };
@@ -23,6 +24,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   static FORMULA_FIELDS = new Set([
     "system.attributes.ac.bonus",
+    "system.attributes.ac.min",
     "system.attributes.encumbrance.bonuses.encumbered",
     "system.attributes.encumbrance.bonuses.heavilyEncumbered",
     "system.attributes.encumbrance.bonuses.maximum",
@@ -46,10 +48,34 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
+   * Should this status effect be hidden from the current user?
+   * @type {boolean}
+   */
+  get isConcealed() {
+    if ( this.target?.testUserPermission(game.user, "OBSERVER") ) return false;
+
+    // Hide bloodied status effect from players unless the token is friendly
+    if ( (this.id === this.constructor.ID.BLOODIED) && (game.settings.get("dnd5e", "bloodied") === "player") ) {
+      return this.target?.token?.disposition !== foundry.CONST.TOKEN_DISPOSITIONS.FRIENDLY;
+    }
+
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this active effect currently suppressed?
    * @type {boolean}
    */
   isSuppressed = false;
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get isTemporary() {
+    return super.isTemporary && !this.isConcealed;
+  }
 
   /* -------------------------------------------- */
 
@@ -507,6 +533,14 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( this.isAppliedEnchantment ) EnchantmentData.untrackEnchantment(this.origin, this.uuid);
     document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.uuid}"]`)
       .forEach(element => element.buildItemList());
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _displayScrollingStatus(enabled) {
+    if ( this.isConcealed ) return;
+    super._displayScrollingStatus(enabled);
   }
 
   /* -------------------------------------------- */

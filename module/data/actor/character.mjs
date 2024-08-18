@@ -244,6 +244,17 @@ export default class CharacterData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /**
+   * Level used to determine cantrip scaling.
+   * @param {Item5e} spell  Spell for which to fetch the cantrip level.
+   * @returns {number}
+   */
+  cantripLevel(spell) {
+    return this.details.level;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Checks whether the item with the given relative UUID has been favorited
    * @param {string} favoriteId  The relative UUID of the item to check.
    * @returns {boolean}

@@ -357,7 +357,8 @@
 "DND5E.AdvancementSaveButton": "Save Advancement",
 "DND5E.AdvancementScaleValueTitle": "Scale Value",
 "DND5E.AdvancementScaleValueHint": "A single value that changes as a class increases in level that is made available in roll formulas (such as a Monk's martial arts die).",
-"DND5E.AdvancementScaleValueIdentifierHint": "This scale value for the current level will be available using <strong>@scale.{class}.{identifier}</strong> in a formula.",
+"DND5E.AdvancementScaleValueIdentifierHint": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text>",
+"DND5E.AdvancementScaleValueIdentifierDiceHint": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text> - whole formula (<code>4d6</code>)<br><copyable-text>@scale.{class}.{identifier}.die</copyable-text> - whole die (<code>d6</code>)<br><copyable-text>@scale.{class}.{identifier}.number</copyable-text> - number of dice (<code>4</code>)<br><copyable-text>@scale.{class}.{identifier}.faces</copyable-text> - number of faces (<code>6</code>)",
 "DND5E.AdvancementScaleValueTypeCR": "Challenge Rating",
 "DND5E.AdvancementScaleValueTypeDice": "Dice",
 "DND5E.AdvancementScaleValueTypeDistance": "Distance",
@@ -853,6 +854,8 @@
 },
 
 "DND5E.Consumed": "Consumed",
+"DND5E.Copy": "Copy Text",
+"DND5E.Copied": "Copied {value}",
 "DND5E.Cover": "Cover",
 "DND5E.CoverHalf": "Half",
 "DND5E.CoverThreeQuarters": "Three Quarters",
@@ -1345,8 +1348,6 @@
 "DND5E.EffectUnavailable": "Unavailable Effects",
 "DND5E.EffectUnavailableInfo": "Source item must be equipped or attuned to activate these",
 "DND5E.Encumbrance": "Encumbrance",
-"DND5E.IdentifierCopy": "Copy Identifier",
-"DND5E.IdentifierCopied": "Copied!",
 "DND5E.ItemRarityCommon": "common",
 "DND5E.ItemRarityMundane": "mundane",
 "DND5E.ItemRarityUncommon": "uncommon",
@@ -2788,6 +2789,7 @@
 
 "EFFECT.DND5E": {
   "StatusBleeding": "Bleeding",
+  "StatusBloodied": "Bloodied",
   "StatusBurrowing": "Burrowing",
   "StatusConcentrating": "Concentrating",
   "StatusCursed": "Cursed",
@@ -2966,12 +2968,23 @@
     "Name": "Allow Summoning",
     "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
   },
+  "BLOODIED": {
+    "Name": "Bloodied Status",
+    "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",
+    "All": "Display for Allies & Enemies",
+    "Player": "Only Display for Allies",
+    "None": "Never Display"
+  },
   "COLLAPSETRAYS": {
     "Name": "Collapse Trays in Chat",
     "Hint": "Automatically collapse damage, hit, and effect trays that appear in chat cards.",
     "Always": "Collapse All",
     "Older": "Collapse Older Trays",
     "Never": "Expand All"
+  },
+  "DEFAULTSKILLS": {
+    "Name": "Default Skills",
+    "Hint": "The default skills that appear on NPC sheets regardless of level of proficiency."
   },
   "THEME": {
     "Name": "Theme",

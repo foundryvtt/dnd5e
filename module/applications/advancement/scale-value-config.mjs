@@ -121,20 +121,6 @@ export default class ScaleValueConfig extends AdvancementConfig {
   activateListeners(html) {
     super.activateListeners(html);
     this.form.querySelector("input[name='title']").addEventListener("input", this._onChangeTitle.bind(this));
-    this.form.querySelector(".identifier-hint-copy").addEventListener("click", this._onIdentifierHintCopy.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Copies the full scale identifier hint to the clipboard.
-   * @param {Event} event  The triggering click event.
-   * @protected
-   */
-  _onIdentifierHintCopy(event) {
-    const data = this.getData();
-    game.clipboard.copyPlainText(`@scale.${data.classIdentifier}.${data.previewIdentifier}`);
-    game.tooltip.activate(event.target, {text: game.i18n.localize("DND5E.IdentifierCopied"), direction: "UP"});
   }
 
   /* -------------------------------------------- */

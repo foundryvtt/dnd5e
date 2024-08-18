@@ -1,4 +1,34 @@
 /* ---------------------------------- */
+/*  Copyable Text                     */
+/* ---------------------------------- */
+
+copyable-text {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  cursor: pointer;
+  &:hover, &:has(:focus-visible) {
+    text-decoration-color: var(--color-shadow-primary);
+    button { text-shadow: 0 0 4px var(--color-shadow-primary); }
+  }
+  button.copy-button {
+    display: inline;
+    block-size: unset;
+    inline-size: unset;
+    margin: 0;
+    margin-inline-start: 3px;
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    color: currentcolor;
+    font-size: inherit;
+    line-height: normal;
+
+    &:hover, &:focus { box-shadow: none; }
+  }
+}
+
+/* ---------------------------------- */
 /*  Filter State                      */
 /* ---------------------------------- */
 

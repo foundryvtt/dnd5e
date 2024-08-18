@@ -1,3 +1,4 @@
+import Scaling from "../../documents/scaling.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, EmbeddedDataField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -89,10 +90,12 @@ export class DamageData extends foundry.abstract.DataModel {
 
   /**
    * Scale the damage by a number of steps using its configured scaling configuration.
-   * @param {number} increase  Number of steps above base damage to scaling.
+   * @param {number|Scaling} increase  Number of steps above base damage to scaling.
    * @returns {string}
    */
   scaledFormula(increase) {
+    if ( increase instanceof Scaling ) increase = increase.increase;
+
     switch ( this.scaling.mode ) {
       case "whole": break;
       case "half": increase = Math.floor(increase * .5); break;

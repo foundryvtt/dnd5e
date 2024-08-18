@@ -17,3 +17,4 @@ export {default as SelectChoices} from "./actor/select-choices.mjs";
 export * as Trait from "./actor/trait.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export * as macro from "./macro.mjs";
+export {default as Scaling} from "./scaling.mjs";

@@ -441,6 +441,16 @@ export class ItemDataModel extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Scaling increase for this item type.
+   * @type {number|null}
+   */
+  get scalingIncrease() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 

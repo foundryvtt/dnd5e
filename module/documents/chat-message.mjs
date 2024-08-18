@@ -531,6 +531,7 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _simplifyDamageRoll(roll) {
     const aggregate = { type: roll.options.type, total: roll.total, constant: 0, dice: [] };
+    let hasMultiplication = false;
     for ( let i = roll.terms.length - 1; i >= 0; ) {
       const term = roll.terms[i--];
       if ( !(term instanceof foundry.dice.terms.NumericTerm) && !(term instanceof foundry.dice.terms.DiceTerm) ) {
@@ -543,12 +544,13 @@ export default class ChatMessage5e extends ChatMessage {
       let multiplier = 1;
       let operator = roll.terms[i];
       while ( operator instanceof foundry.dice.terms.OperatorTerm ) {
+        if ( !["+", "-"].includes(operator.operator) ) hasMultiplication = true;
         if ( operator.operator === "-" ) multiplier *= -1;
         operator = roll.terms[--i];
       }
       if ( term instanceof foundry.dice.terms.NumericTerm ) aggregate.constant += value * multiplier;
     }
-
+    if ( hasMultiplication ) aggregate.constant = null;
     return aggregate;
   }
 
