@@ -26,7 +26,14 @@ export default class ActivityUsageDialog extends Application5e {
       use: ActivityUsageDialog.#onUse
     },
     activity: null,
+    button: {
+      icon: null,
+      label: null
+    },
     config: null,
+    display: {
+      all: true
+    },
     form: {
       handler: ActivityUsageDialog.#onSubmitForm,
       submitOnChange: true
@@ -132,7 +139,7 @@ export default class ActivityUsageDialog extends Application5e {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    this.#item = this.#item.clone({ "flags.dnd5e.scaling": this.config.scaling ?? 0 });
+    if ( "scaling" in this.config ) this.#item = this.#item.clone({ "flags.dnd5e.scaling": this.config.scaling });
     return {
       ...await super._prepareContext(options),
       activity: this.activity
@@ -166,7 +173,7 @@ export default class ActivityUsageDialog extends Application5e {
     context.hasConcentration = this.activity.requiresConcentration
       && !game.settings.get("dnd5e", "disableConcentration");
     context.notes = [];
-    if ( !context.hasConcentration ) return context;
+    if ( !context.hasConcentration || !this._shouldDisplay("concentration") ) return context;
 
     context.fields = [{
       field: new BooleanField({ label: game.i18n.localize("DND5E.Concentration") }),
@@ -215,27 +222,29 @@ export default class ActivityUsageDialog extends Application5e {
     context.fields = [];
     context.notes = [];
 
-    if ( this.activity.requiresSpellSlot ) context.spellSlot = {
+    if ( this.activity.requiresSpellSlot && this._shouldDisplay("consume.spellSlot") ) context.spellSlot = {
       field: new BooleanField({ label: game.i18n.localize("DND5E.SpellCastConsume") }),
       name: "consume.spellSlot",
       value: this.config.consume?.spellSlot
     };
 
-    const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
-    const resources = this.activity.consumption.targets.map((target, value) => {
-      return {
-        value,
-        label: CONFIG.DND5E.activityConsumptionTypes[target.type].prompt,
-        selected: (isArray && this.config.consume.resources.includes(value))
-          || (!isArray && (this.config.consume?.resources !== false) && (this.config.consume !== false))
+    if ( this._shouldDisplay("consume.resources") ) {
+      const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
+      const resources = this.activity.consumption.targets.map((target, value) => {
+        return {
+          value,
+          label: CONFIG.DND5E.activityConsumptionTypes[target.type].prompt,
+          selected: (isArray && this.config.consume.resources.includes(value))
+            || (!isArray && (this.config.consume?.resources !== false) && (this.config.consume !== false))
+        };
+      });
+      if ( resources.length ) context.resources = {
+        field: new SetField(new NumberField()),
+        name: "consume.resources",
+        options: resources,
+        dataset: { dtype: "Number" }
       };
-    });
-    if ( resources.length ) context.resources = {
-      field: new SetField(new NumberField()),
-      name: "consume.resources",
-      options: resources,
-      dataset: { dtype: "Number" }
-    };
+    }
 
     context.hasConsumption = context.spellSlot || context.resources;
 
@@ -255,7 +264,7 @@ export default class ActivityUsageDialog extends Application5e {
    */
   async _prepareCreationContext(context, options) {
     context.hasCreation = false;
-    if ( this.activity.target.template.type ) {
+    if ( this.activity.target.template.type && this._shouldDisplay("create.measuredTemplate") ) {
       context.hasCreation = true;
       context.template = {
         field: new BooleanField({ label: game.i18n.localize("DND5E.PlaceTemplate") }),
@@ -278,8 +287,8 @@ export default class ActivityUsageDialog extends Application5e {
   async _prepareFooterContext(context, options) {
     context.buttons = [{
       action: "use",
-      icon: `fa-solid fa-${this.activity.isSpell ? "magic" : "fist-raised"}`,
-      label: `DND5E.AbilityUse${this.activity.isSpell ? "Cast" : "Use"}`,
+      icon: this.options.button.icon ?? `fa-solid fa-${this.activity.isSpell ? "magic" : "fist-raised"}`,
+      label: this.options.button.label ?? `DND5E.AbilityUse${this.activity.isSpell ? "Cast" : "Use"}`,
       type: "button"
     }];
     return context;
@@ -297,6 +306,10 @@ export default class ActivityUsageDialog extends Application5e {
   async _prepareScalingContext(context, options) {
     context.hasScaling = true;
     context.notes = [];
+    if ( !this._shouldDisplay("scaling") ) {
+      context.hasScaling = false;
+      return context;
+    }
 
     if ( this.activity.requiresSpellSlot && (this.config.scaling !== false) ) {
       const minimumLevel = this.item.system.level ?? 1;
@@ -346,6 +359,21 @@ export default class ActivityUsageDialog extends Application5e {
     }
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether a particular element should be displayed based on the `display` options.
+   * @param {string} section  Key path describing the section to be displayed.
+   * @returns {boolean}
+   */
+  _shouldDisplay(section) {
+    const display = this.options.display;
+    if ( foundry.utils.hasProperty(display, section) ) return foundry.utils.getProperty(display, section);
+    const group = section.split(".")[0];
+    if ( (group !== section) && (group in display) ) return display[group];
+    return this.options.display.all ?? true;
   }
 
   /* -------------------------------------------- */

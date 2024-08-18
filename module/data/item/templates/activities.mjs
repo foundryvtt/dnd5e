@@ -136,6 +136,17 @@ export default class ActivitiesTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Creatures summoned by this item.
+   * @type {Actor5e[]}
+   */
+  get summonedCreatures() {
+    if ( !this.actor ) return [];
+    return this.activities.getByType("summon").map(a => a.summonedCreatures).flat();
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 

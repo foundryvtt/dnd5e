@@ -152,7 +152,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Actor5e[]}
    */
   get summonedCreatures() {
-    return SummonsData.summonedCreatures(this);
+    return dnd5e.registry.summons.creatures(this);
   }
 
   /* -------------------------------------------- */
@@ -239,7 +239,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   prepareDerivedData() {
     const origin = this.getFlag("dnd5e", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
-    if ( origin && this.token?.id ) SummonsData.trackSummon(origin.split(".Item.")[0], this.uuid);
+    if ( origin && this.token?.id ) dnd5e.registry.summons.track(origin.split(".Item.")[0], this.uuid);
 
     if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
 
@@ -3420,7 +3420,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const origin = this.getFlag("dnd5e", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
-    if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.uuid);
+    if ( origin ) dnd5e.registry.summons.untrack(origin.split(".Item.")[0], this.uuid);
   }
 
   /* -------------------------------------------- */

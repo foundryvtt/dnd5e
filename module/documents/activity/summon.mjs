@@ -1,5 +1,9 @@
 import SummonSheet from "../../applications/activity/summon-sheet.mjs";
+import SummonUsageDialog from "../../applications/activity/summon-usage-dialog.mjs";
+import CompendiumBrowser from "../../applications/compendium-browser.mjs";
+import TokenPlacement from "../../canvas/token-placement.mjs";
 import SummonActivityData from "../../data/activity/summon-data.mjs";
+import { simplifyBonus, staticID } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -21,7 +25,13 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       type: "summon",
       img: "systems/dnd5e/icons/svg/activity/summon.svg",
       title: "DND5E.SUMMON.Title",
-      sheetClass: SummonSheet
+      sheetClass: SummonSheet,
+      usage: {
+        actions: {
+          placeSummons: SummonActivity.#placeSummons
+        },
+        dialog: SummonUsageDialog
+      }
     }, { inplace: false })
   );
 
@@ -31,5 +41,613 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
   static localize() {
     super.localize();
     this._localizeSchema(this.schema.fields.profiles.element, ["DND5E.SUMMON.FIELDS.profiles"]);
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Does the user have permissions to summon?
+   * @type {boolean}
+   */
+  get canSummon() {
+    return game.user.can("TOKEN_CREATE") && (game.user.isGM || game.settings.get("dnd5e", "allowSummoning"));
+  }
+
+  /* -------------------------------------------- */
+  /*  Activation                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {ActivityUseConfiguration} SummonUseConfiguration
+   * @property {object|false} create
+   * @property {string} create.summons                    Should a summoned creature be created?
+   * @property {Partial<SummoningConfiguration>} summons  Options for configuring summoning behavior.
+   */
+
+  /**
+   * Configuration data for summoning behavior.
+   *
+   * @typedef {object} SummoningConfiguration
+   * @property {string} profile         ID of the summoning profile to use.
+   * @property {string} [creatureSize]  Selected creature size if multiple are available.
+   * @property {string} [creatureType]  Selected creature type if multiple are available.
+   */
+
+  /**
+   * @typedef {ActivityUsageResults} SummonUsageResults
+   * @property {Token5e[]} summoned  Summoned tokens.
+   */
+
+  /** @inheritDoc */
+  _createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig) {
+    const config = super._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
+    config.createSummons = usageConfig.create?.summons ?? null;
+    config.summonsProfile = usageConfig.summons?.profile ?? null;
+    config.summonsOptions = {
+      creatureSize: usageConfig.summons?.creatureSize,
+      creatureType: usageConfig.summons?.creatureType
+    };
+    return config;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options) {
+    super._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
+    const set = (config, keyPath, value) => {
+      if ( value === undefined ) return;
+      foundry.utils.setProperty(config, keyPath, value);
+    };
+    set(usageConfig, "create.summons", config.createSummons);
+    set(usageConfig, "summons.profile", config.summonsProfile);
+    set(usageConfig, "summons.creatureSize", config.summonsOptions?.creatureSize);
+    set(usageConfig, "summons.creatureType", config.summonsOptions?.creatureType);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _prepareUsageConfig(config) {
+    config = super._prepareUsageConfig(config);
+    const summons = this.availableProfiles;
+    config.create ??= {};
+    config.create.summons ??= this.canSummon && canvas.scene && summons.length && this.summon.prompt;
+    config.summons ??= {};
+    config.summons.profile ??= summons[0]?._id ?? null;
+    config.summons.creatureSize ??= this.creatureSizes.first() ?? null;
+    config.summons.creatureType ??= this.creatureTypes.first() ?? null;
+    return config;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _usageChatButtons() {
+    if ( !this.availableProfiles.length ) return null;
+    return [{
+      label: game.i18n.localize("DND5E.SUMMON.Action.Summon"),
+      icon: '<i class="fa-solid fa-spaghetti-monster-flying" inert></i>',
+      dataset: {
+        action: "placeSummons"
+      }
+    }];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _finalizeUsage(config, results) {
+    await super._finalizeUsage(config, results);
+    if ( config.create?.summons ) {
+      try {
+        results.summoned = await this.placeSummons(config.summons);
+      } catch(err) {
+        results.summoned = [];
+        Hooks.onError("SummonActivity#use", err, { log: "error", notify: "error" });
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Summoning                                   */
+  /* -------------------------------------------- */
+
+  /**
+   * Process for summoning actor to the scene.
+   * @param {SummoningConfiguration} options  Configuration data for summoning behavior.
+   * @returns {Token5e[]|void}
+   */
+  async placeSummons(options) {
+    if ( !this.canSummon || !canvas.scene ) return;
+
+    const profile = this.profiles.find(p => p._id === options?.profile);
+    if ( !profile ) throw new Error(
+      game.i18n.format("DND5E.SUMMON.Warning.NoProfile", { profileId: options.profile, item: this.item.name })
+    );
+
+    /**
+     * A hook event that fires before summoning is performed.
+     * @function dnd5e.preSummon
+     * @memberof hookEvents
+     * @param {SummonActivity} activity         The activity that is performing the summoning.
+     * @param {SummonsProfile} profile          Profile used for summoning.
+     * @param {SummoningConfiguration} options  Additional summoning options.
+     * @returns {boolean}                       Explicitly return `false` to prevent summoning.
+     */
+    if ( Hooks.call("dnd5e.preSummon", this, profile, options) === false ) return;
+
+    // Fetch the actor that will be summoned
+    const summonUuid = this.summon.mode === "cr" ? await this.queryActor(profile) : profile.uuid;
+    if ( !summonUuid ) return;
+    const actor = await this.fetchActor(summonUuid);
+
+    // Verify ownership of actor
+    if ( !actor.isOwner ) {
+      throw new Error(game.i18n.format("DND5E.SUMMON.Warning.NoOwnership", { actor: actor.name }));
+    }
+
+    const tokensData = [];
+    const minimized = !this.actor?.sheet._minimized;
+    await this.actor?.sheet.minimize();
+    try {
+      // Figure out where to place the summons
+      const placements = await this.getPlacement(actor.prototypeToken, profile, options);
+
+      for ( const placement of placements ) {
+        // Prepare changes to actor data, re-calculating per-token for potentially random values
+        const tokenUpdateData = {
+          actor,
+          placement,
+          ...(await this.getChanges(actor, profile, options))
+        };
+
+        /**
+         * A hook event that fires before a specific token is summoned. After placement has been determined but before
+         * the final token data is constructed.
+         * @function dnd5e.preSummonToken
+         * @memberof hookEvents
+         * @param {SummonActivity} activity         The activity that is performing the summoning.
+         * @param {SummonsProfile} profile          Profile used for summoning.
+         * @param {TokenUpdateData} config          Configuration for creating a modified token.
+         * @param {SummoningConfiguration} options  Additional summoning options.
+         * @returns {boolean}                       Explicitly return `false` to prevent this token from being summoned.
+         */
+        if ( Hooks.call("dnd5e.preSummonToken", this, profile, tokenUpdateData, options) === false ) continue;
+
+        // Create a token document and apply updates
+        const tokenData = await this.getTokenData(tokenUpdateData);
+
+        /**
+         * A hook event that fires after token creation data is prepared, but before summoning occurs.
+         * @function dnd5e.summonToken
+         * @memberof hookEvents
+         * @param {SummonActivity} activity         The activity that is performing the summoning.
+         * @param {SummonsProfile} profile          Profile used for summoning.
+         * @param {object} tokenData                Data for creating a token.
+         * @param {SummoningConfiguration} options  Additional summoning options.
+         */
+        Hooks.callAll("dnd5e.summonToken", this, profile, tokenData, options);
+
+        tokensData.push(tokenData);
+      }
+    } finally {
+      if ( minimized ) this.actor?.sheet.maximize();
+    }
+
+    const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData);
+
+    /**
+     * A hook event that fires when summoning is complete.
+     * @function dnd5e.postSummon
+     * @memberof hookEvents
+     * @param {SummonActivity} activity         The activity that is performing the summoning.
+     * @param {SummonsProfile} profile          Profile used for summoning.
+     * @param {Token5e[]} tokens                Tokens that have been created.
+     * @param {SummoningConfiguration} options  Additional summoning options.
+     */
+    Hooks.callAll("dnd5e.postSummon", this, profile, createdTokens, options);
+
+    return createdTokens;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * If actor to be summoned is in a compendium, create a local copy or use an already imported version if present.
+   * @param {string} uuid  UUID of actor that will be summoned.
+   * @returns {Actor5e}    Local copy of actor.
+   */
+  async fetchActor(uuid) {
+    const actor = await fromUuid(uuid);
+    if ( !actor ) throw new Error(game.i18n.format("DND5E.SUMMON.Warning.NoActor", { uuid }));
+
+    const actorLink = actor.prototypeToken.actorLink;
+    if ( !actor.pack && (!actorLink || actor.getFlag("dnd5e", "summon.origin") === this.uuid )) return actor;
+
+    // Search world actors to see if any usable summoned actor instances are present from prior summonings.
+    // Linked actors must match the summoning origin (activity) to be considered.
+    const localActor = game.actors.find(a =>
+      // Has been cloned for summoning use
+      a.getFlag("dnd5e", "summonedCopy")
+      // Sourced from the desired actor UUID
+      && (a._stats?.compendiumSource === uuid)
+      // Unlinked or created from this activity specifically
+      && ((a.getFlag("dnd5e", "summon.origin") === this.uuid) || !a.prototypeToken.actorLink)
+    );
+    if ( localActor ) return localActor;
+
+    // Check permissions to create actors before importing
+    if ( !game.user.can("ACTOR_CREATE") ) throw new Error(game.i18n.localize("DND5E.SUMMON.Warning.CreateActor"));
+
+    // No suitable world actor was found, create a new actor for this summoning instance.
+    if ( actor.pack ) {
+      // Template actor resides only in compendium, import the actor into the world and set the flag.
+      return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
+        "flags.dnd5e.summonedCopy": true
+      });
+    } else {
+      // Template actor (linked) found in world, create a copy for this user's item.
+      return actor.clone({
+        "flags.dnd5e.summonedCopy": true,
+        "_stats.compendiumSource": actor.uuid
+      }, {save: true});
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Request a specific actor to summon from the player.
+   * @param {SummonsProfile} profile  Profile used for summoning.
+   * @returns {Promise<string|null>}  UUID of the concrete actor to summon or `null` if canceled.
+   */
+  async queryActor(profile) {
+    const locked = {
+      documentClass: "Actor",
+      types: new Set(["npc"]),
+      additional: {
+        cr: { max: simplifyBonus(profile.cr, this.getRollData({ deterministic: true })) }
+      }
+    };
+    if ( profile.types.size ) locked.additional.type = Array.from(profile.types).reduce((obj, type) => {
+      obj[type] = 1;
+      return obj;
+    }, {});
+    return CompendiumBrowser.selectOne({ filters: { locked } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the updates to apply to the summoned actor and its token.
+   * @param {Actor5e} actor                   Actor that will be modified.
+   * @param {SummonsProfile} profile          Summoning profile used to summon the actor.
+   * @param {SummoningConfiguration} options  Configuration data for summoning behavior.
+   * @returns {Promise<{actorChanges: object, tokenChanges: object}>}  Changes that will be applied to the actor,
+   *                                                                   its items, and its token.
+   */
+  async getChanges(actor, profile, options) {
+    const actorUpdates = { effects: [], items: [] };
+    const tokenUpdates = {};
+    const rollData = { ...this.getRollData(), summon: actor.getRollData() };
+    const prof = rollData.attributes?.prof ?? 0;
+
+    // Add flags
+    actorUpdates["flags.dnd5e.summon"] = {
+      level: this.relevantLevel,
+      mod: rollData.mod,
+      origin: this.uuid,
+      profile: profile._id
+    };
+
+    // Match proficiency
+    if ( this.match.proficiency ) {
+      const proficiencyEffect = new ActiveEffect({
+        _id: staticID("dnd5eMatchProficiency"),
+        changes: [{
+          key: "system.attributes.prof",
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: prof
+        }],
+        disabled: false,
+        icon: "icons/skills/targeting/crosshair-bars-yellow.webp",
+        name: game.i18n.localize("DND5E.Summoning.Match.Proficiency.Label")
+      });
+      actorUpdates.effects.push(proficiencyEffect.toObject());
+    }
+
+    // Add bonus to AC
+    if ( this.bonuses.ac ) {
+      const acBonus = new Roll(this.bonuses.ac, rollData);
+      await acBonus.evaluate();
+      if ( acBonus.total ) {
+        if ( actor.system.attributes.ac.calc === "flat" ) {
+          actorUpdates["system.attributes.ac.flat"] = (actor.system.attributes.ac.flat ?? 0) + acBonus.total;
+        } else {
+          actorUpdates.effects.push((new ActiveEffect({
+            _id: staticID("dnd5eACBonus"),
+            changes: [{
+              key: "system.attributes.ac.bonus",
+              mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+              value: acBonus.total
+            }],
+            disabled: false,
+            icon: "icons/magic/defensive/shield-barrier-blue.webp",
+            name: game.i18n.localize("DND5E.Summoning.Bonuses.ArmorClass.Label")
+          })).toObject());
+        }
+      }
+    }
+
+    // Add bonus to HD
+    if ( this.bonuses.hd && (actor.type === "npc") ) {
+      const hdBonus = new Roll(this.bonuses.hd, rollData);
+      await hdBonus.evaluate();
+      if ( hdBonus.total ) {
+        actorUpdates.effects.push((new ActiveEffect({
+          _id: staticID("dnd5eHDBonus"),
+          changes: [{
+            key: "system.attributes.hd.max",
+            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+            value: hdBonus.total
+          }],
+          disabled: false,
+          icon: "icons/sundries/gaming/dice-runed-brown.webp",
+          name: game.i18n.localize("DND5E.Summoning.Bonuses.HitDice.Label")
+        })).toObject());
+      }
+    }
+
+    // Add bonus to HP
+    if ( this.bonuses.hp ) {
+      const hpBonus = new Roll(this.bonuses.hp, rollData);
+      await hpBonus.evaluate();
+
+      // If non-zero hp bonus, apply as needed for this actor.
+      // Note: Only unlinked actors will have their current HP set to their new max HP
+      if ( hpBonus.total ) {
+
+        // Helper function for modifying max HP ('bonuses.overall' or 'max')
+        const maxHpEffect = hpField => {
+          return (new ActiveEffect({
+            _id: staticID("dnd5eHPBonus"),
+            changes: [{
+              key: `system.attributes.hp.${hpField}`,
+              mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+              value: hpBonus.total
+            }],
+            disabled: false,
+            icon: "icons/magic/life/heart-glowing-red.webp",
+            name: game.i18n.localize("DND5E.Summoning.Bonuses.HitPoints.Label")
+          })).toObject();
+        };
+
+        if ( !foundry.utils.isEmpty(actor.classes) && !actor._source.system.attributes.hp.max ) {
+          // Actor has classes without a hard-coded max -- apply bonuses to 'overall'
+          actorUpdates.effects.push(maxHpEffect("bonuses.overall"));
+        } else if ( actor.prototypeToken.actorLink ) {
+          // Otherwise, linked actors boost HP via 'max' AE
+          actorUpdates.effects.push(maxHpEffect("max"));
+        } else {
+          // Unlinked actors assumed to always be "fresh" copies with bonus HP added to both
+          // Max HP and Current HP
+          actorUpdates["system.attributes.hp.max"] = actor.system.attributes.hp.max + hpBonus.total;
+          actorUpdates["system.attributes.hp.value"] = actor.system.attributes.hp.value + hpBonus.total;
+        }
+      }
+    }
+
+    // Change creature size
+    if ( this.creatureSizes.size ) {
+      const size = this.creatureSizes.has(options.creatureSize) ? options.creatureSize : this.creatureSizes.first();
+      const config = CONFIG.DND5E.actorSizes[size];
+      if ( config ) {
+        actorUpdates["system.traits.size"] = size;
+        tokenUpdates.width = config.token ?? 1;
+        tokenUpdates.height = config.token ?? 1;
+      }
+    }
+
+    // Change creature type
+    if ( this.creatureTypes.size ) {
+      const type = this.creatureTypes.has(options.creatureType) ? options.creatureType : this.creatureTypes.first();
+      if ( actor.system.details?.race instanceof Item ) {
+        actorUpdates.items.push({ _id: actor.system.details.race.id, "system.type.value": type });
+      } else {
+        actorUpdates["system.details.type.value"] = type;
+      }
+    }
+
+    const attackDamageBonus = Roll.replaceFormulaData(this.bonuses.attackDamage, rollData);
+    const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage, rollData);
+    const healingBonus = Roll.replaceFormulaData(this.bonuses.healing, rollData);
+    for ( const item of actor.items ) {
+      const changes = [];
+
+      // Match attacks
+      if ( this.match.attacks && item.hasAttack ) {
+        const ability = this.item.abilityMod ?? rollData.attributes?.spellcasting;
+        const typeMapping = { mwak: "msak", rwak: "rsak" };
+        const parts = [
+          rollData.abilities?.[ability]?.mod,
+          prof,
+          rollData.bonuses?.[typeMapping[item.system.actionType] ?? item.system.actionType]?.attack
+        ].filter(p => p);
+        changes.push({
+          key: "system.attack.bonus",
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: parts.join(" + ")
+        }, {
+          key: "system.attack.flat",
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: true
+        });
+      }
+
+      // Match saves
+      if ( this.match.saves && item.hasSave ) changes.push({
+        key: "system.save.dc",
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: rollData.item.save.dc ?? rollData.attributes.spelldc
+      }, {
+        key: "system.save.scaling",
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: "flat"
+      });
+
+      // Damage bonus
+      let damageBonus;
+      if ( item.hasAttack ) damageBonus = attackDamageBonus;
+      else if ( item.system.actionType === "save" ) damageBonus = saveDamageBonus;
+      else if ( item.isHealing ) damageBonus = healingBonus;
+      if ( damageBonus && item.hasDamage ) changes.push({
+        key: "system.damage.parts",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: JSON.stringify([[`${damageBonus}`, ""]])
+      });
+
+      if ( changes.length ) {
+        const effect = (new ActiveEffect({
+          _id: staticID("dnd5eItemChanges"),
+          changes,
+          disabled: false,
+          icon: "icons/skills/melee/strike-slashes-orange.webp",
+          name: game.i18n.localize("DND5E.Summoning.ItemChanges.Label"),
+          origin: this.uuid,
+          flags: {
+            dnd5e: { type: "enchantment" }
+          }
+        })).toObject();
+        actorUpdates.items.push({ _id: item.id, effects: [effect] });
+      }
+    }
+
+    return { actorUpdates, tokenUpdates };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine where the summons should be placed on the scene.
+   * @param {PrototypeToken} token            Token to be placed.
+   * @param {SummonsProfile} profile          Profile used for summoning.
+   * @param {SummoningConfiguration} options  Additional summoning options.
+   * @returns {Promise<PlacementData[]>}
+   */
+  async getPlacement(token, profile, options) {
+    // Ensure the token matches the final size
+    if ( this.creatureSizes.size ) {
+      const size = this.creatureSizes.has(options.creatureSize) ? options.creatureSize : this.creatureSizes.first();
+      const config = CONFIG.DND5E.actorSizes[size];
+      if ( config ) token = token.clone({ width: config.token ?? 1, height: config.token ?? 1 });
+    }
+
+    const rollData = this.getRollData();
+    const count = new Roll(profile.count || "1", rollData);
+    await count.evaluate();
+    return TokenPlacement.place({ tokens: Array(count.total).fill(token) });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Configuration for creating a modified token.
+   *
+   * @typedef {object} TokenUpdateData
+   * @property {Actor5e} actor            Original actor from which the token will be created.
+   * @property {PlacementData} placement  Information on the location to summon the token.
+   * @property {object} tokenUpdates      Additional updates that will be applied to token data.
+   * @property {object} actorUpdates      Updates that will be applied to actor delta.
+   */
+
+  /**
+   * Create token data ready to be summoned.
+   * @param {config} TokenUpdateData  Configuration for creating a modified token.
+   * @returns {object}
+   */
+  async getTokenData({ actor, placement, tokenUpdates, actorUpdates }) {
+    if ( actor.prototypeToken.randomImg && !game.user.can("FILES_BROWSE") ) {
+      tokenUpdates.texture ??= {};
+      tokenUpdates.texture.src ??= actor.img;
+      ui.notifications.warn("DND5E.SUMMON.Warning.Wildcard", { localize: true });
+    }
+
+    delete placement.prototypeToken;
+    const tokenDocument = await actor.getTokenDocument(foundry.utils.mergeObject(placement, tokenUpdates));
+
+    // Linked summons require more explicit updates before token creation.
+    // Unlinked summons can take actor delta directly.
+    if ( tokenDocument.actorLink ) {
+      const { effects, items, ...rest } = actorUpdates;
+      await tokenDocument.actor.update(rest);
+      await tokenDocument.actor.updateEmbeddedDocuments("Item", items);
+
+      const { newEffects, oldEffects } = effects.reduce((acc, curr) => {
+        const target = tokenDocument.actor.effects.get(curr._id) ? "oldEffects" : "newEffects";
+        acc[target].push(curr);
+        return acc;
+      }, { newEffects: [], oldEffects: [] });
+
+      await tokenDocument.actor.updateEmbeddedDocuments("ActiveEffect", oldEffects);
+      await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, {keepId: true});
+    } else {
+      tokenDocument.delta.updateSource(actorUpdates);
+      if ( actor.prototypeToken.appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
+    }
+
+    return tokenDocument.toObject();
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle placing a summons from the chat card.
+   * @this {SummonActivity}
+   * @param {PointerEvent} event     Triggering click event.
+   * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
+   * @param {ChatMessage5e} message  Message associated with the activation.
+   */
+  static async #placeSummons(event, target, message) {
+    const config = {
+      create: { summons: true },
+      summons: {}
+    };
+    let needsConfiguration = false;
+
+    // No profile specified and only one profile on item, use that one
+    const profiles = this.availableProfiles;
+    if ( profiles.length === 1 ) config.summons.profile = profiles[0]._id;
+    else needsConfiguration = true;
+
+    // More than one creature size or type requires configuration
+    if ( (this.creatureSizes.size > 1) || (this.creatureTypes.size > 1) ) needsConfiguration = true;
+
+    if ( needsConfiguration ) {
+      try {
+        await SummonUsageDialog.create(this, config, {
+          button: {
+            icon: "fa-solid fa-spaghetti-monster-flying",
+            label: "DND5E.SUMMON.Action.Summon"
+          },
+          display: {
+            all: false,
+            create: { summons: true }
+          }
+        });
+      } catch(err) {
+        return;
+      }
+    }
+
+    try {
+      await this.placeSummons(config.summons);
+    } catch(err) {
+      Hooks.onError("SummonsActivity#placeSummons", err, { log: "error", notify: "error" });
+    }
   }
 }

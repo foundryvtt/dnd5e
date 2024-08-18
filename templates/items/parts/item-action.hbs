@@ -162,7 +162,7 @@
 {{#if (eq system.actionType "summ")}}
 <div class="form-group summoning">
     <label>{{ localize "DND5E.Summoning.Label" }}</label>
-    {{#with system.summons.summonedCreatures as |summonedCreatures|}}
+    {{#with system.summonedCreatures as |summonedCreatures|}}
     {{#if summonedCreatures.length}}
     <ul class="separated-list dnd5e2">
         {{#each summonedCreatures}}

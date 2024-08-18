@@ -175,6 +175,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
     const origin = this.actor?.getFlag("dnd5e", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
-    if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.actor.uuid);
+    if ( origin ) dnd5e.registry.summons.untrack(origin.split(".Item.")[0], this.actor.uuid);
   }
 }

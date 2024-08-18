@@ -95,6 +95,42 @@ export default class SummonActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Summons that can be performed based on spell/character/class level.
+   * @type {SummonsProfile[]}
+   */
+  get availableProfiles() {
+    const level = this.relevantLevel;
+    return this.profiles.filter(e => ((e.level.min ?? -Infinity) <= level) && (level <= (e.level.max ?? Infinity)));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the level used to determine profile limits, based on the spell level for spells or either the
+   * character or class level, depending on whether `classIdentifier` is set.
+   * @type {number}
+   */
+  get relevantLevel() {
+    const keyPath = this.item.type === "spell" ? "item.level"
+      : this.summon.identifier ? `classes.${this.summon.identifier}.levels` : "details.level";
+    return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Creatures summoned by this activity.
+   * @type {Actor5e[]}
+   */
+  get summonedCreatures() {
+    if ( !this.actor ) return [];
+    return dnd5e.registry.summons.creatures(this.actor)
+      .filter(i => i?.getFlag("dnd5e", "summon.origin") === this.uuid);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
