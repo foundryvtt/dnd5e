@@ -2680,6 +2680,8 @@ DND5E.consumableResources = [
  * @property {boolean} [pseudo]    Is this a pseudo-condition, i.e. one that does not appear in the conditions appendix
  *                                 but acts as a status effect?
  * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
+ * @property {{ rolls: number, speed: number }} [reduction]  Amount D20 Tests & Speed are reduced per exhaustion level
+ *                                                           when using the modern rules.
  */
 
 /**
@@ -2728,7 +2730,8 @@ DND5E.conditionTypes = {
     label: "DND5E.ConExhaustion",
     icon: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv",
-    levels: 6
+    levels: 6,
+    reduction: { rolls: 2, speed: 5 }
   },
   frightened: {
     label: "DND5E.ConFrightened",

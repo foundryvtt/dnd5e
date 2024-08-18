@@ -71,6 +71,20 @@ export function registerSystemSettings() {
     }
   });
 
+  // Rules version
+  game.settings.register("dnd5e", "rulesVersion", {
+    name: "SETTINGS.DND5E.RULESVERSION.Name",
+    hint: "SETTINGS.DND5E.RULESVERSION.Hint",
+    scope: "world",
+    config: true,
+    default: "modern",
+    type: String,
+    choices: {
+      modern: "SETTINGS.DND5E.RULESVERSION.Modern",
+      legacy: "SETTINGS.DND5E.RULESVERSION.Legacy"
+    }
+  });
+
   // Rest Recovery Rules
   game.settings.register("dnd5e", "restVariant", {
     name: "SETTINGS.5eRestN",

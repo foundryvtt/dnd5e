@@ -328,11 +328,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
     const level = this.system.attributes?.exhaustion ?? null;
     const imms = this.system.traits?.ci?.value ?? new Set();
+    const applyExhaustion = (level !== null) && !imms.has("exhaustion")
+      && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
     const statuses = this.statuses;
     return props.some(k => {
       const l = Number(k.split("-").pop());
-      return (statuses.has(k) && !imms.has(k))
-        || (!imms.has("exhaustion") && (level !== null) && Number.isInteger(l) && (level >= l));
+      return (statuses.has(k) && !imms.has(k)) || (applyExhaustion && Number.isInteger(l) && (level >= l));
     });
   }
 
@@ -593,8 +594,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Initiative proficiency
     const prof = this.system.attributes.prof ?? 0;
-    const ra = flags.remarkableAthlete && ["str", "dex", "con"].includes(abilityId);
-    init.prof = new Proficiency(prof, (flags.jackOfAllTrades || ra) ? 0.5 : 0, !ra);
+    const joat = flags.jackOfAllTrades && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
+    const ra = this._isRemarkableAthlete(abilityId);
+    init.prof = new Proficiency(prof, (joat || ra) ? 0.5 : 0, !ra);
 
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, bonusData);
@@ -1294,12 +1296,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @private
    */
   _isRemarkableAthlete(ability) {
-    return this.getFlag("dnd5e", "remarkableAthlete")
+    return (game.settings.get("dnd5e", "rulesVersion") === "legacy") && this.getFlag("dnd5e", "remarkableAthlete")
       && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
   /* -------------------------------------------- */
   /*  Rolling                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Add the reduction to this roll from exhaustion if using the modern rules.
+   * @param {string[]} parts  Roll parts.
+   * @param {object} data     Roll data.
+   */
+  addRollExhaustion(parts, data) {
+    if ( (game.settings.get("dnd5e", "rulesVersion") !== "modern") || !this.system.attributes?.exhaustion ) return;
+    const amount = this.system.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.rolls ?? 0);
+    if ( amount ) {
+      parts.push("@exhaustion");
+      data.exhaustion = -amount;
+    }
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -1348,6 +1366,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       parts.push("@skillBonus");
       data.skillBonus = Roll.replaceFormulaData(globalBonuses.skill, data);
     }
+
+    // Add exhaustion reduction
+    this.addRollExhaustion(parts, data);
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
@@ -1440,6 +1461,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( options.bonus ) bonus.push(Roll.replaceFormulaData(options.bonus, data));
       data.toolBonus = bonus.join(" + ");
     }
+
+    // Add exhaustion reduction
+    this.addRollExhaustion(parts, data);
 
     // Reliable Talent applies to any tool check we have full or better proficiency in
     const reliableTalent = (prof?.multiplier >= 1 && this.getFlag("dnd5e", "reliableTalent"));
@@ -1549,6 +1573,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
     }
 
+    // Add exhaustion reduction
+    this.addRollExhaustion(parts, data);
+
     // Roll and return
     const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject({
@@ -1628,6 +1655,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
     }
 
+    // Add exhaustion reduction
+    this.addRollExhaustion(parts, data);
+
     // Roll and return
     const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject({
@@ -1702,6 +1732,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       parts.push("@saveBonus");
       data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
     }
+
+    // Add exhaustion reduction
+    this.addRollExhaustion(parts, data);
 
     // Evaluate the roll
     const flavor = game.i18n.localize("DND5E.DeathSavingThrow");
@@ -1872,7 +1905,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const abilityId = init?.ability || CONFIG.DND5E.defaultAbilities.initiative;
     const data = this.getRollData();
     const flags = this.flags.dnd5e || {};
-    if ( flags.initiativeAdv ) options.advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
+    const remarkableAthlete = flags.remarkableAthlete && (game.settings.get("dnd5e", "rulesVersion") === "modern");
+    if ( flags.initiativeAdv || remarkableAthlete ) options.advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
 
     // Standard initiative formula
     const parts = ["1d20"];
@@ -1913,6 +1947,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       parts.push("@alertBonus");
       data.alertBonus = 5;
     }
+
+    // Add exhaustion reduction
+    this.addRollExhaustion(parts, data);
 
     // Ability score tiebreaker
     const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
@@ -2624,15 +2661,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    *
    * @param {object} [options]
    * @param {number} [options.maxHitDice]  Maximum number of hit dice to recover.
+   * @param {number} [options.fraction]    Fraction of max hit dice to recover. Used for NPC recovery and for PCs if
+   *                                       `maxHitDice` isn't specified.
    * @returns {object}                     Array of item updates and number of hit dice recovered.
    * @protected
    */
-  _getRestHitDiceRecovery({maxHitDice}={}) {
+  _getRestHitDiceRecovery({ maxHitDice, fraction }={}) {
+    fraction ??= game.settings.get("dnd5e", "rulesVersion") === "modern" ? 1 : 0.5;
+
     // Handle simpler HD recovery for NPCs
     if ( this.type === "npc" ) {
       const hd = this.system.attributes.hd;
       const recovered = Math.min(
-        Math.max(1, Math.floor(hd.max * 0.5)), hd.spent, maxHitDice ?? Infinity
+        Math.max(1, Math.floor(hd.max * fraction)), hd.spent, maxHitDice ?? Infinity
       );
       return {
         actorUpdates: { "system.attributes.hd.spent": hd.spent - recovered },
@@ -2640,7 +2681,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       };
     }
 
-    return this.system.attributes.hd.createHitDiceUpdates({maxHitDice});
+    return this.system.attributes.hd.createHitDiceUpdates({ maxHitDice, fraction });
   }
 
   /* -------------------------------------------- */
