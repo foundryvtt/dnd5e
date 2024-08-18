@@ -10,6 +10,11 @@
     {{{ enriched.value }}}
 
     <h{{ title.level2 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.FeaturesHeader" }}</h{{ title.level2 }}>
+
+    {{#if primaryAbility}}
+    <strong>{{ localize "DND5E.CLASS.FIELDS.primaryAbility.label" }}:</strong> {{ primaryAbility }}
+    {{/if}}
+
     <p>
         {{ localize "JOURNALENTRYPAGE.DND5E.Class.FeaturesDescription" name=linked.name
            lowercaseName=linked.lowercaseName }}

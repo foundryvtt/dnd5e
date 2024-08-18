@@ -79,6 +79,10 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       lhs.name.localeCompare(rhs.name, game.i18n.lang)
     );
 
+    if ( linked.system.primaryAbility ) {
+      context.primaryAbility = CONFIG.DND5E.abilities[linked.system.primaryAbility]?.label;
+    }
+
     return context;
   }
 
@@ -349,6 +353,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   async _getFeatures(item, optional=false) {
     const prepareFeature = async f => {
       const document = await fromUuid(f.uuid);
+      if ( !document ) return null;
       return {
         document,
         name: document.name,
@@ -364,7 +369,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       features.push(...advancement.configuration.items.map(prepareFeature));
     }
     features = await Promise.all(features);
-    return features;
+    return features.filter(f => f);
   }
 
   /* -------------------------------------------- */

@@ -13,9 +13,12 @@
         </p>
     </div>
 
+    {{!-- Primary Ability --}}
+    {{ formGroup fields.primaryAbility value=source.primaryAbility choices=config.abilities }}
+
     {{!-- Hit Dice --}}
     <div class="form-group split-group">
-        <label>{{ localize "DND5E.HitDice" }}</label>
+        <label>{{ localize "DND5E.CLASS.FIELDS.hitDice.label" }}</label>
         <div class="form-fields">
 
             {{!-- Denomination --}}
