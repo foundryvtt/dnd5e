@@ -32,7 +32,7 @@ export function formatModifier(mod) {
  * @param {boolean} [options.numerals]  Format the number as roman numerals.
  * @returns {string}
  */
-export function formatNumber(value, { numerals, ...options }) {
+export function formatNumber(value, { numerals, ...options }={}) {
   if ( numerals ) return _formatNumberAsNumerals(value);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);
