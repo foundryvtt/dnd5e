@@ -1271,6 +1271,10 @@
 "DND5E.ExhaustionLevel": "Exhaustion Level {n}",
 "DND5E.ExperiencePoints": "Experience Points",
 "DND5E.ExperiencePointsAbbr": "XP",
+"DND5E.ExperiencePointsBoons": {
+  "one": "{number} Boon",
+  "other": "{number} Boons"
+},
 "DND5E.ExperiencePointsCurrent": "Current XP",
 "DND5E.ExperiencePointsFormat": "{value} XP",
 "DND5E.ExperiencePointsLabel": "Progress to next level",
@@ -2948,8 +2952,6 @@
 "SETTINGS.5eNoAdvancementsL": "Do not prompt for level-up or character creation choices.",
 "SETTINGS.5eNoConcentrationN": "Disable concentration tracking",
 "SETTINGS.5eNoConcentrationL": "Disable the system's automated tracking of concentration.",
-"SETTINGS.5eNoExpL": "Remove experience bars from character sheets.",
-"SETTINGS.5eNoExpN": "Disable Experience Tracking",
 "SETTINGS.5eProfBonus": "PHB: Bonus (+2, +3, +4, +5, +6)",
 "SETTINGS.5eProfDice": "DMG: Dice (1d4, 1d6, 1d8, 1d10, 1d12)",
 "SETTINGS.5eProfL": "Configure proficiency modifier to use a fixed bonus or a dice roll. Reloading the world is required for this change to take effect.",
@@ -2991,6 +2993,13 @@
   "DEFAULTSKILLS": {
     "Name": "Default Skills",
     "Hint": "The default skills that appear on NPC sheets regardless of level of proficiency."
+  },
+  "LEVELING": {
+    "Name": "Leveling Mode",
+    "Hint": "Determine how the players gain new levels.",
+    "NoXP": "Level Advancement without XP",
+    "XP": "Experience Points",
+    "XPBoons": "Experience Points with Epic Boons"
   },
   "THEME": {
     "Name": "Theme",

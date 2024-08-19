@@ -61,6 +61,13 @@
                     aria-label="{{ localize "DND5E.Inspiration" }}" data-tooltip="DND5E.Inspiration"
                     aria-pressed="{{ system.attributes.inspiration }}"></button>
 
+            {{!-- Epic Boons --}}
+            {{#if system.details.xp.boonsEarned}}
+            <div class="boon-badge badge" data-tooltip="{{ epicBoonsEarned }}" aria-label="{{ epicBoonsEarned }}">
+                {{ dnd5e-numberFormat system.details.xp.boonsEarned numerals=true }}
+            </div>
+            {{/if}}
+
             <div>
                 {{!-- Resting & Special Traits --}}
                 {{#if actor.isOwner}}
@@ -90,8 +97,10 @@
                     {{else}}
                     <span class="value">{{ dnd5e-numberFormat value }}</span>
                     {{/if}}
+                    {{#unless @root.epicBoonsEarned}}
                     <span class="separator">&sol;</span>
                     <span class="max">{{ dnd5e-numberFormat max }}</span>
+                    {{/unless}}
                 </div>
                 <div class="xp-bar" role="meter" aria-label="{{ localize "DND5E.ExperiencePointsLabel" }}"
                      aria-valuemin="{{ min }}" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"

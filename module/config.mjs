@@ -2992,16 +2992,10 @@ DND5E.CR_EXP_LEVELS = [
 ];
 
 /**
- * @typedef {object} CharacterFlagConfig
- * @property {string} name
- * @property {string} hint
- * @property {string} section
- * @property {typeof boolean|string|number} type
- * @property {string} placeholder
- * @property {string[]} [abilities]
- * @property {Object<string, string>} [choices]
- * @property {string[]} [skills]
+ * Intervals above the maximum XP that result in an epic boon.
+ * @type {number}
  */
+DND5E.epicBoonInterval = 30000;
 
 /* -------------------------------------------- */
 
@@ -3155,6 +3149,18 @@ DND5E.traitModes = {
 preLocalize("traitModes", { keys: ["label", "hint"] });
 
 /* -------------------------------------------- */
+
+/**
+ * @typedef {object} CharacterFlagConfig
+ * @property {string} name
+ * @property {string} hint
+ * @property {string} section
+ * @property {typeof boolean|string|number} type
+ * @property {string} placeholder
+ * @property {string[]} [abilities]
+ * @property {Object<string, string>} [choices]
+ * @property {string[]} [skills]
+ */
 
 /**
  * Special character flags.
