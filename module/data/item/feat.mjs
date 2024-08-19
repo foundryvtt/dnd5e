@@ -242,8 +242,8 @@ export default class FeatData extends ItemDataModel.mixin(
    * @type {boolean}
    */
   get isEnchantmentSource() {
-    return CONFIG.DND5E.featureTypes[data.type?.value]?.subtypes?.[data.type?.subtype]
-      && (data.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
+    return CONFIG.DND5E.featureTypes[this.type?.value]?.subtypes?.[this.type?.subtype]
+      && (this.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
   }
 
   /* -------------------------------------------- */
