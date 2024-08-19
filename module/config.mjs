@@ -1371,7 +1371,13 @@ DND5E.featureTypes = {
     }
   },
   feat: {
-    label: "DND5E.Feature.Feat"
+    label: "DND5E.Feature.Feat.Label",
+    subtypes: {
+      general: "DND5E.Feature.Feat.General",
+      origin: "DND5E.Feature.Feat.Origin",
+      fightingStyle: "DND5E.Feature.Feat.FightingStyle",
+      epicBoon: "DND5E.Feature.Feat.EpicBoon"
+    }
   },
   supernaturalGift: {
     label: "DND5E.Feature.SupernaturalGift.Label",
@@ -1385,6 +1391,7 @@ DND5E.featureTypes = {
 preLocalize("featureTypes", { key: "label" });
 preLocalize("featureTypes.class.subtypes", { sort: true });
 preLocalize("featureTypes.enchantment.subtypes", { sort: true });
+preLocalize("featureTypes.feat.subtypes", { sort: true });
 preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
 
 /* -------------------------------------------- */
