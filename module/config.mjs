@@ -1,5 +1,5 @@
-import BaseActivityData from "./data/activity/base-activity.mjs";
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
+import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
@@ -650,6 +650,8 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 /**
  * @typedef {object} ActivityConsumptionTargetConfig
  * @property {string} label                                     Localized label for the target type.
+ * @property {string} prompt                                    Localized label displayed in the usage dialog.
+ * @property {ConsumptionConsumeFunction} consume               Method used to consume according to this type.
  * @property {{value: string, label: string}[]} [scalingModes]  Additional scaling modes for this consumption type in
  *                                                              addition to the default "amount" scaling.
  * @property {boolean} [targetRequiresEmbedded]                 Use text input rather than select when not embedded.
@@ -657,8 +659,16 @@ preLocalize("abilityConsumptionTypes", { sort: true });
  */
 
 /**
+ * @callback ConsumptionConsumeFunction
+ * @this {ConsumptionTargetData}
+ * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+ * @param {ActivityUsageUpdates} updates     Updates to be performed.
+ * @throws ConsumptionError
+ */
+
+/**
  * @callback ConsumptionValidTargetsFunction
- * @this {Activity}
+ * @this {ConsumptionTargetData}
  * @returns {FormSelectOption[]}
  */
 
@@ -669,36 +679,42 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 DND5E.activityConsumptionTypes = {
   activityUses: {
     label: "DND5E.CONSUMPTION.Type.ActivityUses.Label",
-    prompt: "DND5E.CONSUMPTION.Type.ActivityUses.Prompt"
+    prompt: "DND5E.CONSUMPTION.Type.ActivityUses.Prompt",
+    consume: ConsumptionTargetData.consumeActivityUses
   },
   itemUses: {
     label: "DND5E.CONSUMPTION.Type.ItemUses.Label",
     prompt: "DND5E.CONSUMPTION.Type.ItemUses.Prompt",
+    consume: ConsumptionTargetData.consumeItemUses,
     targetRequiresEmbedded: true,
-    validTargets: BaseActivityData.validItemUsesTargets
+    validTargets: ConsumptionTargetData.validItemUsesTargets
   },
   material: {
     label: "DND5E.CONSUMPTION.Type.Material.Label",
     prompt: "DND5E.CONSUMPTION.Type.Material.Prompt",
+    consume: ConsumptionTargetData.consumeMaterial,
     targetRequiresEmbedded: true,
-    validTargets: BaseActivityData.validMaterialTargets
+    validTargets: ConsumptionTargetData.validMaterialTargets
   },
   hitDice: {
     label: "DND5E.CONSUMPTION.Type.HitDice.Label",
     prompt: "DND5E.CONSUMPTION.Type.HitDice.Prompt",
-    validTargets: BaseActivityData.validHitDiceTargets
+    consume: ConsumptionTargetData.consumeHitDice,
+    validTargets: ConsumptionTargetData.validHitDiceTargets
   },
   spellSlots: {
     label: "DND5E.CONSUMPTION.Type.SpellSlots.Label",
     prompt: "DND5E.CONSUMPTION.Type.SpellSlots.Prompt",
+    consume: ConsumptionTargetData.consumeSpellSlots,
     scalingModes: [{ value: "level", label: "DND5E.CONSUMPTION.Scaling.SlotLevel" }],
-    validTargets: BaseActivityData.validSpellSlotsTargets
+    validTargets: ConsumptionTargetData.validSpellSlotsTargets
   },
   attribute: {
     label: "DND5E.CONSUMPTION.Type.Attribute.Label",
     prompt: "DND5E.CONSUMPTION.Type.Attribute.Prompt",
+    consume: ConsumptionTargetData.consumeAttribute,
     targetRequiresEmbedded: true,
-    validTargets: BaseActivityData.validAttributeTargets
+    validTargets: ConsumptionTargetData.validAttributeTargets
   }
 };
 preLocalize("activityConsumptionTypes", { keys: ["label", "prompt"] });

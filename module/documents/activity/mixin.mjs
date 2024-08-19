@@ -1,4 +1,5 @@
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
+import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { damageRoll } from "../../dice/dice.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
@@ -68,41 +69,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
-   * Is scaling possible with this activity?
-   * @type {boolean}
-   */
-  get canScale() {
-    return this.consumption.scaling.allowed || (this.isSpell && this.item.system.level > 0);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Can this activity's damage be scaled?
-   * @type {boolean}
-   */
-  get canScaleDamage() {
-    return this.consumption.scaling.allowed || this.isSpell;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Description used in chat message flavor for messages created with `rollDamage`.
    * @type {string}
    */
   get damageFlavor() {
     return game.i18n.localize("DND5E.DamageRoll");
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this activity on a spell?
-   * @type {boolean}
-   */
-  get isSpell() {
-    return this.item.type === "spell";
   }
 
   /* -------------------------------------------- */
@@ -340,7 +311,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const updates = await this._prepareUsageUpdates(usageConfig);
     if ( !updates ) return false;
 
-    foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.consumed", usageConfig.consume);
+    foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.consumed", usageConfig.consume);
 
     /**
      * A hook event that fires after an item's resource consumption is calculated, but before any updates are performed.
@@ -514,7 +485,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       if ( this.canScale ) config.scaling ??= 0;
       else config.scaling = false;
 
-      if ( this.isSpell ) {
+      if ( this.requiresSpellSlot ) {
         const mode = this.item.system.preparation.mode;
         config.spell ??= {};
         config.spell.slot ??= (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
@@ -526,7 +497,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       config.concentration.begin ??= true;
       const { effects } = this.actor.concentration;
       const limit = this.actor.system.attributes?.concentration?.limit ?? 0;
-      if ( limit && (limit <= effects.size) ) config.concentration.end = effects.find(e => {
+      if ( limit && (limit <= effects.size) ) config.concentration.end ??= effects.find(e => {
         const data = e.flags.dnd5e?.item?.data ?? {};
         return (data === this.id) || (data._id === this.id);
       })?.id ?? effects.first()?.id ?? null;
@@ -576,13 +547,65 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /**
    * Calculate changes to actor, items, & this activity based on resource consumption.
    * @param {ActivityUseConfiguration} config  Usage configuration.
-   * @returns {ActivityUsageUpdates}
+   * @returns {ActivityUsageUpdates|false}     Updates to perform, or `false` if a consumption error occured.
    * @protected
    */
   async _prepareUsageUpdates(config) {
     const updates = { activity: {}, actor: {}, delete: [], item: [], rolls: [] };
-    // TODO: Handle consumption
-    return updates;
+    if ( config.consume === false ) return updates;
+    const errors = [];
+
+    // Handle consumption targets
+    if ( (config.consume === true) || config.consume.resources ) {
+      const indexes = config.consume.resources === true ? this.consumption.targets.keys() : config.consume.resources;
+      for ( const index of indexes ) {
+        const target = this.consumption.targets[index];
+        try {
+          await target.consume(config, updates);
+        } catch(err) {
+          if ( err instanceof ConsumptionError ) errors.push(err);
+          else throw err;
+        }
+      }
+    }
+
+    // Handle spell slot consumption
+    if ( ((config.consume === true) || config.consume.spellSlot) && this.requiresSpellSlot ) {
+      const mode = this.item.system.preparation.mode;
+      const isLeveled = ["always", "prepared"].includes(mode);
+      const slot = config.spell?.slot ?? (isLeveled ? `spell${this.item.system.level}` : mode);
+      const slotData = this.actor.system.spells?.[slot];
+      if ( slotData ) {
+        if ( slotData.value ) {
+          foundry.utils.mergeObject(updates.actor, { [`system.spells.${slot}.value`]: Math.max(slotData.value - 1, 0) });
+        } else {
+          const err = new ConsumptionError(game.i18n.format("DND5E.SpellCastNoSlots", {
+            name: this.item.name, level: slotData.label
+          }));
+          errors.push(err);
+        }
+      }
+    }
+
+    // Ensure concentration can be handled
+    if ( config.concentration?.begin ) {
+      const { effects } = this.actor.concentration;
+      // Ensure existing concentration effect exists when replacing concentration
+      if ( config.concentration.end ) {
+        const replacedEffect = effects.find(i => i.id === config.concentration.end);
+        if ( !replacedEffect ) errors.push(
+          new ConsumptionError(game.i18n.localize("DND5E.ConcentratingMissingItem"))
+        );
+      }
+
+      // Cannot begin more concentrations than the limit
+      else if ( effects.size >= this.actor.system.attributes?.concentration?.limit ) errors.push(
+        new ConsumptionError(game.i18n.localize("DND5E.ConcentratingLimited"))
+      );
+    }
+
+    errors.forEach(err => ui.notifications.error(err.message, { console: false }));
+    return errors.length ? false : updates;
   }
 
   /* -------------------------------------------- */
