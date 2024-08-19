@@ -61,7 +61,58 @@ class EnchantmentRegisty {
   }
 }
 
+/* -------------------------------------------- */
+/*  Summons                                     */
+/* -------------------------------------------- */
+
+class SummonsRegistry {
+  /**
+   * Registration of summoned creatures mapped to a specific summoner. The map is keyed by the UUID of
+   * summoner while the set contains UUID of actors that have been summoned.
+   * @type {Map<string, Set<string>>}
+   */
+  static #creatures = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch creatures summoned by an actor.
+   * @param {Actor5e} actor  Actor for which to find the summoned creatures.
+   * @returns {Actor5e[]}
+   */
+  static creatures(actor) {
+    return Array.from(SummonsRegistry.#creatures.get(actor.uuid) ?? []).map(uuid => fromUuidSync(uuid));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a new summoned creature to the list of summoned creatures.
+   * @param {string} summoner  UUID of the actor who performed the summoning.
+   * @param {string} summoned  UUID of the summoned creature to track.
+   */
+  static track(summoner, summoned) {
+    if ( summoned.startsWith("Compendium.") ) return;
+    if ( !SummonsRegistry.#creatures.has(summoner) ) {
+      SummonsRegistry.#creatures.set(summoner, new Set());
+    }
+    SummonsRegistry.#creatures.get(summoner).add(summoned);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stop tracking a summoned creature.
+   * @param {string} summoner  UUID of the actor who performed the summoning.
+   * @param {string} summoned  UUID of the summoned creature to stop tracking.
+   */
+  static untrack(summoner, summoned) {
+    SummonsRegistry.#creatures.get(summoner)?.delete(summoned);
+  }
+}
+
 
 export default {
-  enchantment: EnchantmentRegisty
+  enchantment: EnchantmentRegisty,
+  summons: SummonsRegistry
 };

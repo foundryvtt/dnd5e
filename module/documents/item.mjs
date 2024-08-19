@@ -798,18 +798,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }
     }
     if ( this.actor ) return this.displayCard();
-    else return;
-
-    // TODO: Remove this reference code once SummoningActivity is added
-    // Initiate summons creation
-    let summoned;
-    if ( config.createSummons ) {
-      try {
-        summoned = await item.system.summons.summon(config.summonsProfile, config.summonsOptions);
-      } catch(err) {
-        Hooks.onError("Item5e#use", err, { log: "error", notify: "error" });
-      }
-    }
   }
 
   /* -------------------------------------------- */
@@ -838,17 +826,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }
     }
     return false;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @deprecated */
-  _getUsageConfig() {
-    // TODO: Remove this reference code once SummoningActivity is created
-    if ( this.system.hasSummoning && this.system.summons.canSummon && canvas.scene ) {
-      config.createSummons = summons.prompt;
-      config.summonsProfile = this.system.summons.profiles[0]._id;
-    }
   }
 
   /* -------------------------------------------- */
@@ -1279,10 +1256,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             });
           }
           break;
-        case "summon":
-          if ( spellLevel ) item = item.clone({ "system.level": spellLevel }, { keepId: true });
-          await this._onChatCardSummon(message, item);
-          break;
         case "toolCheck":
           await item.rollToolCheck({event});
           break;
@@ -1340,55 +1313,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const applied = await ActiveEffect.implementation.create(effectData, { parent: token.actor });
     if ( concentration ) await concentration.addDependent(applied);
     return applied;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle summoning from a chat card.
-   * @param {ChatMessage5e} message  The message that was clicked.
-   * @param {Item5e} item            The item from which to summon.
-   */
-  static async _onChatCardSummon(message, item) {
-    let summonsProfile;
-    let summonsOptions = {};
-    let needsConfiguration = false;
-
-    // No profile specified and only one profile on item, use that one
-    if ( item.system.summons.profiles.length === 1 ) summonsProfile = item.system.summons.profiles[0]._id;
-    else needsConfiguration = true;
-
-    // More than one creature type requires configuration
-    if ( item.system.summons.creatureSizes.size > 1
-      || item.system.summons.creatureTypes.size > 1 ) needsConfiguration = true;
-
-    // Show the item use dialog to get the profile and other options
-    if ( needsConfiguration ) {
-      let config = await AbilityUseDialog.create(item, {
-        beginConcentrating: null,
-        consumeResource: null,
-        consumeSpellSlot: null,
-        consumeUsage: null,
-        createMeasuredTemplate: null,
-        createSummons: true
-      }, {
-        button: {
-          icon: '<i class="fa-solid fa-spaghetti-monster-flying"></i>',
-          label: game.i18n.localize("DND5E.Summoning.Action.Summon")
-        },
-        disableScaling: true
-      });
-      if ( !config?.summonsProfile ) return;
-      config = foundry.utils.expandObject(config);
-      summonsProfile = config.summonsProfile;
-      summonsOptions = config.summonsOptions;
-    }
-
-    try {
-      await item.system.summons.summon(summonsProfile, summonsOptions);
-    } catch(err) {
-      Hooks.onError("Item5e#_onChatCardSummon", err, { log: "error", notify: "error" });
-    }
   }
 
   /* -------------------------------------------- */

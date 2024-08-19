@@ -24,7 +24,7 @@ export default class EnchantUsageDialog extends ActivityUsageDialog {
     context = await super._prepareCreationContext(context, options);
 
     const enchantments = this.activity.availableEnchantments;
-    if ( enchantments.length > 1 ) {
+    if ( (enchantments.length > 1) && this._shouldDisplay("create.enchantment") ) {
       context.hasCreation = true;
       context.enchantment = {
         field: new StringField({ label: game.i18n.localize("DND5E.ENCHANTMENT.Label") }),
