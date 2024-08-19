@@ -189,9 +189,6 @@ Hooks.once("init", function() {
 
   // Exhaustion handling
   documents.ActiveEffect5e.registerHUDListeners();
-
-  // Chat message listeners
-  documents.ChatMessage5e.activateListeners();
 });
 
 /* -------------------------------------------- */
@@ -414,6 +411,9 @@ Hooks.once("ready", function() {
       return false;
     }
   });
+
+  // Chat message listeners
+  documents.ChatMessage5e.activateListeners();
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;

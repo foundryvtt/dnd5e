@@ -32,6 +32,8 @@
   .message-header {
     margin-bottom: .375rem;
 
+    .message-delete { display: none; }
+
     .message-sender {
       display: flex;
       align-items: start;
@@ -92,6 +94,11 @@
       font-style: italic;
     }
   }
+}
+
+/* Modifier Keys */
+:is(.chat-popout, #chat-log)[data-modifier-shift] {
+  .message .message-header .message-delete { display: unset; }
 }
 
 /* ---------------------------------- */

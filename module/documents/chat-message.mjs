@@ -263,9 +263,8 @@ export default class ChatMessage5e extends ChatMessage {
 
     // Context menu
     const metadata = html.querySelector(".message-metadata");
-    let deleteButton = metadata.querySelector(".message-delete");
+    const deleteButton = metadata.querySelector(".message-delete");
     if ( !game.user.isGM ) deleteButton?.remove();
-    deleteButton?.toggleAttribute("hidden", true);
     const anchor = document.createElement("a");
     anchor.setAttribute("aria-label", game.i18n.localize("DND5E.AdditionalControls"));
     anchor.classList.add("chat-control");
@@ -740,26 +739,31 @@ export default class ChatMessage5e extends ChatMessage {
     }
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Listen for shift key being pressed to show the chat message "delete" icon, or released (or focus lost) to hide it.
    */
   static activateListeners() {
-    document.addEventListener("keydown", event => {
-      if ( event.key === "Shift" ) this.toggleDeleteButtons(false);
-    }, { passive: true });
-    document.addEventListener("keyup", event => {
-      if ( event.key === "Shift" ) this.toggleDeleteButtons(true);
-    }, { passive: true });
-    window.addEventListener("blur", () => this.toggleDeleteButtons(true), { passive: true });
+    window.addEventListener("keydown", this.toggleModifiers, { passive: true });
+    window.addEventListener("keyup", this.toggleModifiers, { passive: true });
+    window.addEventListener("blur", () => this.toggleModifiers({ releaseAll: true }), { passive: true });
   }
 
+  /* -------------------------------------------- */
+
   /**
-   * Hides or shows the "delete" button on each chat message.
-   * @param {boolean} hide  Whether the delete buttons should be hidden.
+   * Toggles attributes on the chatlog based on which modifier keys are being held.
+   * @param {object} [options]
+   * @param {boolean} [options.releaseAll=false]  Force all modifiers to be considered released.
    */
-  static toggleDeleteButtons(hide) {
-    const deleteButtons = document.querySelectorAll(".chat-message .message-delete");
-    deleteButtons.forEach(btn => btn.toggleAttribute("hidden", hide));
+  static toggleModifiers({ releaseAll=false }={}) {
+    document.querySelectorAll(".chat-sidebar > ol").forEach(chatlog => {
+      for ( const key of Object.values(KeyboardManager.MODIFIER_KEYS) ) {
+        if ( game.keyboard.isModifierActive(key) && !releaseAll ) chatlog.dataset[`modifier${key}`] = "";
+        else delete chatlog.dataset[`modifier${key}`];
+      }
+    });
   }
 
   /* -------------------------------------------- */
