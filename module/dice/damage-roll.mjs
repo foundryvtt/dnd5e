@@ -173,7 +173,7 @@ export default class DamageRoll extends Roll {
 
           // Powerful critical - maximize damage and reduce the multiplier by 1
           if ( this.options.powerfulCritical ) {
-            let bonus = term.number * term.faces;
+            const bonus = Roll.create(term.formula).evaluateSync({ maximize: true }).total;
             if ( bonus > 0 ) {
               const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
               flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);
