@@ -60,6 +60,42 @@ export default class EnchantActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Enchantments that have been applied by this activity.
+   * @type {ActiveEffect5e[]}
+   */
+  get appliedEnchantments() {
+    return dnd5e.registry.enchantment.applied(this.uuid);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Enchantments that can be applied based on spell/character/class level.
+   * @type {EnchantEffectApplicationData[]}
+   */
+  get availableEnchantments() {
+    const keyPath = this.item.type === "spell" ? "item.level"
+      : this.classIdentifier ? `classes.${this.classIdentifier}.levels` : "details.level";
+    const level = foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
+    return this.effects.filter(e => ((e.level.min ?? -Infinity) <= level) && (level <= (e.level.max ?? Infinity)));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * List of item types that are enchantable.
+   * @type {Set<string>}
+   */
+  static get enchantableTypes() {
+    return Object.entries(CONFIG.Item.dataModels).reduce((set, [k, v]) => {
+      if ( v.metadata?.enchantable ) set.add(k);
+      return set;
+    }, new Set());
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 

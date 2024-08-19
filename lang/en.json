@@ -1236,12 +1236,19 @@
     "Enchantments": "Enchantments",
     "Restrictions": "Restrictions"
   },
+  "DropArea": "Place item here to enchant it…",
+  "Enchanted": "{current} &sol; {max} enchanted",
   "Enchantment": {
     "Action": {
       "Create": "Create Enchantment",
       "Delete": "Delete Enchantment"
     },
     "Empty": "No associated enchantments, use the button below to create one or select an existing enchantment from the control above."
+  },
+  "Warning": {
+    "ConcentrationEnded": "Cannot apply this enchantment because concentration has ended.",
+    "NoMagicalItems": "Items that are already magical cannot be enchanted.",
+    "WrongType": "{incorrectType} items cannot be enchanted by this enchantment, only {allowedType} items are allowed."
   }
 },
 
@@ -1252,18 +1259,12 @@
     "Edit": "Edit Enchantment",
     "Enable": "Enable Enchantment",
     "Remove": "Remove Enchantment"
-  }
-},
-
-"DND5E.Enchantment": {
+  },
   "Category": {
     "Active": "Active Enchantments",
     "General": "Enchantments",
     "Inactive": "Inactive Enchantments"
   },
-  "Configuration": "Enchantment Configuration",
-  "DropArea": "Place item here to enchant it…",
-  "Enchanted": "{current} &sol; {max} enchanted",
   "FIELDS": {
     "enchantment": {
       "label": "Enchantment Configuration",
@@ -1279,18 +1280,16 @@
       }
     }
   },
-  "Label": "Enchantment",
   "Items": {
     "Entry": "{item} on <em>{actor}</em>"
   },
+  "Label": "Enchantment",
   "Warning": {
-    "ConcentrationEnded": "Cannot apply this enchantment because concentration has ended.",
-    "NoMagicalItems": "Items that are already magical cannot be enchanted.",
     "NotOnActor": "Enchantments can only be added to items, not directly to actors.",
-    "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it.",
-    "WrongType": "{incorrectType} items cannot be enchanted by this enchantment, only {allowedType} items are allowed."
+    "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it."
   }
 },
+
 "DND5E.Environment": "Environment",
 "DND5E.EquipmentBonus": "Magical Bonus",
 "DND5E.EquipmentClothing": "Clothing",

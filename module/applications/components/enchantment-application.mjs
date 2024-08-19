@@ -1,5 +1,3 @@
-import { EnchantmentData } from "../../data/item/fields/enchantment-field.mjs";
-
 /**
  * Application to handle applying enchantments to items from a chat card.
  */
@@ -34,6 +32,16 @@ export default class EnchantmentApplicationElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * Activity providing the enchantment that will be applied.
+   * @type {Item5e}
+   */
+  get enchantmentActivity() {
+    return this.chatMessage.getAssociatedActivity();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Item providing the enchantment that will be applied.
    * @type {Item5e}
    */
@@ -63,13 +71,14 @@ export default class EnchantmentApplicationElement extends HTMLElement {
 
     // Calculate the maximum targets
     let item = this.enchantmentItem;
-    const spellLevel = this.chatMessage.getFlag("dnd5e", "use.spellLevel");
-    if ( spellLevel ) {
-      item = item.clone({ "system.level": spellLevel });
+    const scaling = this.chatMessage.getFlag("dnd5e", "scaling");
+    if ( scaling ) {
+      item = item.clone({ "flags.dnd5e.scaling": scaling });
       item.prepareData();
       item.prepareFinalAttributes();
     }
-    const maxTargets = item.system.target?.value;
+    const activity = item.system.activities.get(this.enchantmentActivity.id);
+    const maxTargets = activity.target?.affects?.count;
     if ( maxTargets ) {
       if ( !this.countArea ) {
         const div = document.createElement("div");
@@ -77,7 +86,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
         this.querySelector(".enchantment-control").append(div);
         this.countArea = this.querySelector(".count-area");
       }
-      this.countArea.innerHTML = game.i18n.format("DND5E.Enchantment.Enchanted", {
+      this.countArea.innerHTML = game.i18n.format("DND5E.ENCHANT.Enchanted", {
         current: '<span class="current">0</span>',
         max: `<span class="max">${maxTargets}<span>`
       });
@@ -95,7 +104,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
    * the card list.
    */
   async buildItemList() {
-    const enchantedItems = (await EnchantmentData.appliedEnchantments(this.enchantmentItem.uuid)).map(enchantment => {
+    const enchantedItems = await dnd5e.registry.enchantment.applied(this.enchantmentActivity.uuid).map(enchantment => {
       const item = enchantment.parent;
       const div = document.createElement("div");
       div.classList.add("preview");
@@ -106,9 +115,9 @@ export default class EnchantmentApplicationElement extends HTMLElement {
       `;
       if ( item.isOwner ) {
         const control = document.createElement("a");
-        control.ariaLabel = game.i18n.localize("DND5E.Enchantment.Action.Remove");
+        control.ariaLabel = game.i18n.localize("DND5E.ENCHANTMENT.Action.Remove");
         control.dataset.action = "removeEnchantment";
-        control.dataset.tooltip = "DND5E.Enchantment.Action.Remove";
+        control.dataset.tooltip = "DND5E.ENCHANTMENT.Action.Remove";
         control.innerHTML = '<i class="fa-solid fa-rotate-left" inert></i>';
         div.append(control);
       }
@@ -117,7 +126,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
     if ( enchantedItems.length ) {
       this.dropArea.replaceChildren(...enchantedItems);
     } else {
-      this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5E.Enchantment.DropArea")}</p>`;
+      this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5E.ENCHANT.DropArea")}</p>`;
     }
     if ( this.countArea ) {
       this.countArea.querySelector(".current").innerText = enchantedItems.length;
@@ -140,9 +149,9 @@ export default class EnchantmentApplicationElement extends HTMLElement {
     const droppedItem = await Item.implementation.fromDropData(data);
 
     // Validate against the enchantment's restraints on the origin item
-    const errors = this.enchantmentItem.system.enchantment?.canEnchant(droppedItem);
+    const errors = this.enchantmentActivity.canEnchant(droppedItem);
     if ( errors?.length ) {
-      errors.forEach(err => ui.notifications.error(err.message));
+      errors.forEach(err => ui.notifications.error(err.message, { console: false }));
       return;
     }
 
@@ -150,16 +159,16 @@ export default class EnchantmentApplicationElement extends HTMLElement {
     const concentrationId = this.chatMessage.getFlag("dnd5e", "use.concentrationId");
     const concentration = effect.parent.actor.effects.get(concentrationId);
     if ( concentrationId && !concentration ) {
-      ui.notifications.error("DND5E.Enchantment.Warning.ConcentrationEnded", { localize: true });
+      ui.notifications.error("DND5E.ENCHANT.Warning.ConcentrationEnded", { console: false, localize: true });
       return;
     }
     if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
-      ui.notifications.error("DND5E.EffectApplyWarningConcentration", { localize: true });
+      ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false, localize: true });
       return;
     }
 
     const effectData = effect.toObject();
-    effectData.origin = this.enchantmentItem.uuid;
+    effectData.origin = this.enchantmentActivity.uuid;
     const applied = await ActiveEffect.create(effectData, {
       parent: droppedItem, keepOrigin: true, chatMessageOrigin: this.chatMessage.id
     });

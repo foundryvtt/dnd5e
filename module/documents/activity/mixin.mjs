@@ -521,7 +521,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       usageConfig.scaling = Math.max(0, levelingFlag.value - levelingFlag.base);
     } else if ( this.isSpell ) {
       const level = this.actor.system.spells?.[usageConfig.spell?.slot]?.level;
-      if ( level ) usageConfig.scaling = level - item.system.level;
+      if ( level ) {
+        usageConfig.scaling = level - item.system.level;
+        foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.spellLevel", level);
+      }
     }
 
     if ( usageConfig.scaling ) {

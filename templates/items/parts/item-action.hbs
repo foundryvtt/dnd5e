@@ -123,7 +123,7 @@
 {{!-- Enchantment --}}
 {{#if system.isEnchantment}}
 <div class="form-group enchantment">
-    <label>{{ localize "DND5E.Enchantment.Label" }}</label>
+    <label>{{ localize "DND5E.ENCHANTMENT.Label" }}</label>
     {{#if appliedEnchantments.length}}
     <ul class="separated-list dnd5e2">
         {{#each appliedEnchantments}}
@@ -132,7 +132,7 @@
                 <img class="gold-icon" src="{{ item.img }}" alt="{{ name }}">
                 <span class="name">
                     {{#if actor}}
-                    {{{ localize "DND5E.Enchantment.Items.Entry" item=name actor=actor.name }}}
+                    {{{ localize "DND5E.ENCHANTMENT.Items.Entry" item=name actor=actor.name }}}
                     {{else}}
                     {{ name }}
                     {{/if}}
@@ -144,8 +144,8 @@
                         <i class="fa-solid fa-eye" aria-hidden="true"></i>
                     </button>
                     <button type="button" class="enchantment-button unbutton" data-action="removeEnchantment"
-                            data-tooltip="DND5E.Enchantment.Action.Remove"
-                            aria-label="{{ localize 'DND5E.Enchantment.Action.Remove' }}">
+                            data-tooltip="DND5E.ENCHANTMENT.Action.Remove"
+                            aria-label="{{ localize 'DND5E.ENCHANTMENT.Action.Remove' }}">
                         <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
                     </button>
                     {{/if}}

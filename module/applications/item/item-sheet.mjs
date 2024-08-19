@@ -133,7 +133,7 @@ export default class ItemSheet5e extends ItemSheet {
       advancement: this._getItemAdvancement(item),
 
       // Enchantment
-      appliedEnchantments: item.system.enchantment?.appliedEnchantments?.map(enchantment => ({
+      appliedEnchantments: item.system.appliedEnchantments?.map(enchantment => ({
         enchantment,
         name: enchantment.parent._source.name,
         actor: enchantment.parent.actor,
@@ -484,11 +484,11 @@ export default class ItemSheet5e extends ItemSheet {
       for ( const override of this._getItemOverrides() ) {
         for ( const element of html[0].querySelectorAll(`[name="${override}"]`) ) {
           element.disabled = true;
-          element.dataset.tooltip = "DND5E.Enchantment.Warning.Override";
+          element.dataset.tooltip = "DND5E.ENCHANTMENT.Warning.Override";
         }
         for ( const element of html[0].querySelectorAll(`[data-target="${override}"]`) ) {
           element.ariaDisabled = true;
-          element.dataset.tooltip = "DND5E.Enchantment.Warning.Override";
+          element.dataset.tooltip = "DND5E.ENCHANTMENT.Warning.Override";
         }
         if ( override === "damage-control" ) html[0].querySelectorAll(".damage-control").forEach(e => e.remove());
       }

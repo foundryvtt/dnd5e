@@ -47,6 +47,16 @@ export default class ActivitiesTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Enchantments that have been applied by this item.
+   * @type {ActiveEffect5e[]}
+   */
+  get appliedEnchantments() {
+    return dnd5e.registry.enchantment.applied(this.parent.uuid);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Value on a d20 die needed to roll a critical hit with an attack from this item.
    * @type {number|null}
    */
