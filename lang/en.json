@@ -610,7 +610,14 @@
     },
     "primaryAbility": {
       "label": "Primary Ability",
-      "hint": "Ability used most by this class. Used to determine multi-classing restrictions."
+      "hint": "Abilities used most by this class. Used to determine multi-classing restrictions.",
+      "all": {
+        "label": "Require All",
+        "hint": "Require all primary abilities to meet the minimum in order to multi-class."
+      },
+      "value": {
+        "label": "Abilities"
+      }
     }
   }
 },

@@ -80,7 +80,9 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     );
 
     if ( linked.system.primaryAbility ) {
-      context.primaryAbility = CONFIG.DND5E.abilities[linked.system.primaryAbility]?.label;
+      context.primaryAbility = game.i18n.getListFormatter(
+        { type: linked.system.primaryAbility.all ? "conjunction" : "disjunction" }
+      ).format(Array.from(linked.system.primaryAbility.value).map(v => CONFIG.DND5E.abilities[v]?.label));
     }
 
     return context;
