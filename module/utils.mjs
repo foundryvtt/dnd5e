@@ -29,11 +29,37 @@ export function formatModifier(mod) {
  * A helper for using Intl.NumberFormat within handlebars.
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
+ * @param {boolean} [options.numerals]  Format the number as roman numerals.
  * @returns {string}
  */
-export function formatNumber(value, options) {
+export function formatNumber(value, { numerals, ...options }) {
+  if ( numerals ) return _formatNumberAsNumerals(value);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);
+}
+
+/**
+ * Roman numerals.
+ * @type {Record<string, number>}
+ */
+const _roman = {
+  M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1
+};
+
+/**
+ * Format a number as roman numerals.
+ * @param {number} n  The number to format.
+ * @returns {string}
+ */
+function _formatNumberAsNumerals(n) {
+  let out = "";
+  if ( (n < 1) || !Number.isInteger(n) ) return out;
+  for ( const [numeral, decimal] of Object.entries(_roman) ) {
+    const quotient = Math.floor(n / decimal);
+    n -= quotient * decimal;
+    out += numeral.repeat(quotient);
+  }
+  return out;
 }
 
 /* -------------------------------------------- */

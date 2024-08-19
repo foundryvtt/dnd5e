@@ -64,7 +64,7 @@
             {{!-- Epic Boons --}}
             {{#if system.details.xp.boonsEarned}}
             <div class="boon-badge badge" data-tooltip="{{ epicBoonsEarned }}" aria-label="{{ epicBoonsEarned }}">
-                {{ system.details.xp.boonsEarned }}
+                {{ dnd5e-numberFormat system.details.xp.boonsEarned numerals=true }}
             </div>
             {{/if}}
 
