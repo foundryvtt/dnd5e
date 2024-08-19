@@ -187,8 +187,8 @@
 
     &.card > legend {
       background: var(--dnd5e-background-card);
-      isolation: isolate;
       position: relative;
+      border-radius: 2px;
 
       &::before {
         content: "";
@@ -196,7 +196,6 @@
         inset: 0;
         border-radius: 2px;
         box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-        clip-path: rect(-10px -10px 50% 200%);
         outline: var(--dnd5e-border-gold);
         z-index: -1;
       }
@@ -280,49 +279,50 @@
       color: var(--color-text-dark-5);
       margin: 4px 0 0;
     }
+  }
 
-    select, input {
-      --input-border-color: transparent;
-      border: 1px solid var(--input-border-color);
-      font-size: var(--font-size-11);
-      transition: all 250ms ease;
-      line-height: normal;
-      padding: 0 6px;
-      background: var(--input-background-color);
+  select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
+    --input-border-color: transparent;
+    border: 1px solid var(--input-border-color);
+    font-size: var(--font-size-11);
+    transition: all 250ms ease;
+    line-height: normal;
+    padding: 0 6px;
+    background: var(--input-background-color);
 
-      &:focus-visible, &:hover {
-        --input-border-color: var(--dnd5e-color-gold);
-        box-shadow: 0 0 6px var(--dnd5e-color-gold);
-      }
+    &:focus { outline: none; }
+    &:focus-visible, &:hover {
+      --input-border-color: var(--dnd5e-color-gold);
+      box-shadow: 0 0 6px var(--dnd5e-color-gold);
     }
+  }
 
-    input::placeholder {
-      --input-placeholder-color: var(--color-text-light-6);
-      opacity: unset;
-      color: var(--input-placeholder-color);
-    }
+  input::placeholder {
+    --input-placeholder-color: var(--color-text-light-6);
+    opacity: unset;
+    color: var(--input-placeholder-color);
+  }
 
-    input.full-width {
-      flex: 0 0 100%;
-      margin-top: 4px;
-    }
+  input.full-width {
+    flex: 0 0 100%;
+    margin-top: 4px;
+  }
 
-    option, optgroup { --color-select-option-bg: var(--dnd5e-background-parchment); }
-    input[type=number] { text-align: center; }
+  option, optgroup { --color-select-option-bg: var(--dnd5e-background-parchment); }
+  input[type=number] { text-align: center; }
 
-    select {
-      height: var(--form-field-height);
-      cursor: pointer;
-    }
+  select {
+    height: var(--form-field-height);
+    cursor: pointer;
+  }
 
-    multi-select .tag {
-      cursor: pointer;
-      font-size: var(--font-size-10);
-      border: var(--dnd5e-border-gold);
-      background: var(--dnd5e-background-card);
-      border-radius: 3px;
-      &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
-    }
+  multi-select .tag {
+    cursor: pointer;
+    font-size: var(--font-size-10);
+    border: var(--dnd5e-border-gold);
+    background: var(--dnd5e-background-card);
+    border-radius: 3px;
+    &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
   }
 
   .form-fields > dnd5e-checkbox { flex: none; }

@@ -38,9 +38,9 @@ export default class WeaponsConfig extends BaseConfigSheet {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    context.data = this.document.system.traits.weaponProf;
+    context.data = this.document.toObject().system.traits.weaponProf;
     context.checkbox = new foundry.data.fields.BooleanField();
-    context.choices = await Trait.choices("weapon", { chosen: context.data.value });
+    context.choices = await Trait.choices("weapon", { chosen: new Set(context.data.value) });
     context.fields = this.document.system.schema.fields.traits.fields.weaponProf.fields;
 
     // Handle custom weapons not in a top-level category
@@ -76,28 +76,11 @@ export default class WeaponsConfig extends BaseConfigSheet {
         choice.disabled = true;
       }
       choice.mastery = {
-        chosen: data.mastery.has(key),
+        chosen: data.mastery.includes(key),
         disabled: !choice.chosen
       };
       if ( choice.children ) this._processChoices(data, choice.children, choice.chosen);
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  _getActorOverrides() {
-    const overrides = super._getActorOverrides();
-    const path = "system.traits.weaponProf";
-    this._addOverriddenChoices(`${path}.value`, `${path}.value`, overrides);
-    this._addOverriddenChoices(`${path}.mastery`, `${path}.mastery`, overrides);
-    const pathCustom = `${path}.custom`;
-    const sourceCustom = foundry.utils.getProperty(this.document._source, pathCustom);
-    const currentCustom = foundry.utils.getProperty(this.document, pathCustom);
-    if ( sourceCustom !== currentCustom ) overrides.push(pathCustom);
-    return overrides;
   }
 
   /* -------------------------------------------- */
@@ -107,27 +90,11 @@ export default class WeaponsConfig extends BaseConfigSheet {
   /** @inheritDoc */
   _processFormData(event, form, formData) {
     const submitData = super._processFormData(event, form, formData);
-    this._prepareChoices("system.traits.weaponProf.value", submitData);
-    this._prepareChoices("system.traits.weaponProf.mastery", submitData);
+    const filter = keyPath => foundry.utils.setProperty(submitData, keyPath, filteredKeys(
+      foundry.utils.getProperty(submitData, keyPath) ?? {}
+    ).sort((a, b) => a.localeCompare(b, "en")));
+    filter("system.traits.weaponProf.value");
+    filter("system.traits.weaponProf.mastery");
     return submitData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Filter a list of choices that begin with the provided key for update.
-   * @param {string} keyPath     Path in actor data where the final choices will be saved.
-   * @param {object} submitData  Form data being prepared. *Will be mutated.*
-   * @internal
-   */
-  _prepareChoices(keyPath, submitData) {
-    const chosen = new Set(filteredKeys(foundry.utils.getProperty(submitData, keyPath) ?? {}));
-
-    // Add choices from the source that have been removed by an override: if we didn't, the override would be persisted
-    const source = new Set(foundry.utils.getProperty(this.document._source, keyPath));
-    const current = foundry.utils.getProperty(this.document, keyPath);
-    for ( const choice of source.difference(current) ) chosen.add(choice);
-
-    foundry.utils.setProperty(submitData, keyPath, Array.from(chosen).sort((a, b) => a.localeCompare(b, "en")));
   }
 }

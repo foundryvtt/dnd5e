@@ -28,7 +28,8 @@
     <li>
         <label class="name">{{ localize "DND5E.TraitAll" category=label }}</label>
         <div class="proficiency">
-            {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.value." @key) value=chosen }}
+            {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.value." @key) value=chosen
+                         input=@root.inputs.createCheckboxInput }}
         </div>
     </li>
     {{/if}}
@@ -37,14 +38,14 @@
         <label class="name">{{ label }}</label>
         <div class="proficiency">
             {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.value." @key) value=chosen
-                         disabled=disabled }}
+                         disabled=disabled input=@root.inputs.createCheckboxInput }}
         </div>
         {{#if children}}
         {{> ".weapon-list" choices=children topLevel=false }}
         {{else}}
         <div class="mastery">
             {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.mastery." @key) value=mastery.chosen
-                         disabled=mastery.disabled }}
+                         disabled=mastery.disabled input=@root.inputs.createCheckboxInput }}
         </div>
         {{/if}}
     </li>
