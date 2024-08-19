@@ -408,6 +408,9 @@ Hooks.once("ready", function() {
     }
   });
 
+  // Chat message listeners
+  documents.ChatMessage5e.activateListeners();
+
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
   const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.flags.dnd5e?.version;

@@ -303,7 +303,8 @@ export default class ChatMessage5e extends ChatMessage {
 
     // Context menu
     const metadata = html.querySelector(".message-metadata");
-    metadata.querySelector(".message-delete")?.remove();
+    const deleteButton = metadata.querySelector(".message-delete");
+    if ( !game.user.isGM ) deleteButton?.remove();
     const anchor = document.createElement("a");
     anchor.setAttribute("aria-label", game.i18n.localize("DND5E.AdditionalControls"));
     anchor.classList.add("chat-control");
@@ -808,6 +809,33 @@ export default class ChatMessage5e extends ChatMessage {
         setTimeout(() => ui.chat.scrollBottom(), 250);
       });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Listen for shift key being pressed to show the chat message "delete" icon, or released (or focus lost) to hide it.
+   */
+  static activateListeners() {
+    window.addEventListener("keydown", this.toggleModifiers, { passive: true });
+    window.addEventListener("keyup", this.toggleModifiers, { passive: true });
+    window.addEventListener("blur", () => this.toggleModifiers({ releaseAll: true }), { passive: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Toggles attributes on the chatlog based on which modifier keys are being held.
+   * @param {object} [options]
+   * @param {boolean} [options.releaseAll=false]  Force all modifiers to be considered released.
+   */
+  static toggleModifiers({ releaseAll=false }={}) {
+    document.querySelectorAll(".chat-sidebar > ol").forEach(chatlog => {
+      for ( const key of Object.values(KeyboardManager.MODIFIER_KEYS) ) {
+        if ( game.keyboard.isModifierActive(key) && !releaseAll ) chatlog.dataset[`modifier${key}`] = "";
+        else delete chatlog.dataset[`modifier${key}`];
+      }
+    });
   }
 
   /* -------------------------------------------- */
