@@ -7,36 +7,50 @@ import SpellcastingField from "./fields/spellcasting-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 
-const { ArrayField, NumberField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Class items.
  * @mixes ItemDescriptionTemplate
  * @mixes StartingEquipmentTemplate
  *
- * @property {string} identifier        Identifier slug for this class.
- * @property {number} levels            Current number of levels in this class.
- * @property {string} hitDice           Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
- * @property {number} hitDiceUsed       Number of hit dice consumed.
- * @property {object[]} advancement     Advancement objects for this class.
- * @property {SpellcastingField} spellcasting  Details on class's spellcasting ability.
+ * @property {string} identifier                Identifier slug for this class.
+ * @property {number} levels                    Current number of levels in this class.
+ * @property {object} primaryAbility
+ * @property {Set<string>} primaryAbility.value List of primary abilities used by this class.
+ * @property {boolean} primaryAbility.all       If multiple abilities are selected, does multiclassing require all of
+ *                                              them to be 13 or just one.
+ * @property {string} hitDice                   Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
+ * @property {number} hitDiceUsed               Number of hit dice consumed.
+ * @property {object[]} advancement             Advancement objects for this class.
+ * @property {SpellcastingField} spellcasting   Details on class's spellcasting ability.
  */
 export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.CLASS"];
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
-      levels: new NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 1, label: "DND5E.ClassLevels"
+      identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
+      levels: new NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 1 }),
+      primaryAbility: new SchemaField({
+        value: new SetField(new StringField()),
+        all: new BooleanField({ initial: true })
       }),
       hitDice: new StringField({
-        required: true, initial: "d6", blank: false, label: "DND5E.HitDice",
+        required: true, initial: "d6", blank: false,
         validate: v => /d\d+/.test(v), validationError: "must be a dice value in the format d#"
       }),
-      hitDiceUsed: new NumberField({
-        required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.HitDiceUsed"
-      }),
-      advancement: new ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
+      hitDiceUsed: new NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 }),
+      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       spellcasting: new SpellcastingField()
     });
   }
@@ -89,6 +103,9 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
     context.subtitles = [{ label: context.itemType }];
     context.singleDescription = true;
     context.parts = ["dnd5e.details-class", "dnd5e.details-spellcasting", "dnd5e.details-starting-equipment"];
+    context.primaryAbilities = Object.entries(CONFIG.DND5E.abilities).map(([value, data]) => ({
+      value, label: data.label, selected: this.primaryAbility.value.has(value)
+    }));
   }
 
   /* -------------------------------------------- */
