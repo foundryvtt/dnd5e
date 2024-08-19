@@ -316,16 +316,24 @@ export default class DamageRoll extends Roll {
   static async configureDialog(rolls, {
     title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
 
+    const damageTypeLabel = k => CONFIG.DND5E.damageTypes[k]?.label ?? CONFIG.DND5E.healingTypes[k]?.label;
+
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.EVALUATION_TEMPLATE, {
       formulas: rolls.map((roll, index) => ({
         formula: `${roll.formula}${index === 0 ? " + @bonus" : ""}`,
-        type: CONFIG.DND5E.damageTypes[roll.options.type]?.label
-          ?? CONFIG.DND5E.healingTypes[roll.options.type]?.label ?? null
+        type: roll.options.types?.length ? null : damageTypeLabel(roll.options.type) ?? null,
+        types: roll.options.types?.map(value => ({ value, label: damageTypeLabel(value) }))
       })),
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes
     });
+
+    const handleSubmit = (html, isCritical) => {
+      const formData = new FormDataExtended(html[0].querySelector("form"));
+      const submitData = foundry.utils.expandObject(formData.object);
+      return rolls.map((r, i) => r._onDialogSubmit(submitData, isCritical, i));
+    };
 
     // Create the Dialog window and await submission of the form
     return new Promise(resolve => {
@@ -336,11 +344,11 @@ export default class DamageRoll extends Roll {
           critical: {
             condition: allowCritical,
             label: game.i18n.localize("DND5E.CriticalHit"),
-            callback: html => resolve(rolls.map((r, i) => r._onDialogSubmit(html, true, i === 0)))
+            callback: html => resolve(handleSubmit(html, true))
           },
           normal: {
             label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
-            callback: html => resolve(rolls.map((r, i) => r._onDialogSubmit(html, false, i === 0)))
+            callback: html => resolve(handleSubmit(html, false))
           }
         },
         default: defaultCritical ? "critical" : "normal",
@@ -353,25 +361,27 @@ export default class DamageRoll extends Roll {
 
   /**
    * Handle submission of the Roll evaluation configuration Dialog
-   * @param {jQuery} html         The submitted dialog content
+   * @param {object} submitData   The submitted dialog data.
    * @param {boolean} isCritical  Is the damage a critical hit?
-   * @param {boolean} isFirst     Is this the first roll being prepared?
+   * @param {number} index        Index of the roll.
    * @returns {DamageRoll}        This damage roll.
    * @private
    */
-  _onDialogSubmit(html, isCritical, isFirst) {
-    const form = html[0].querySelector("form");
+  _onDialogSubmit(submitData, isCritical, index) {
+    // Set damage types on rolls
+    const rollData = submitData.roll?.[index] ?? {};
+    if ( rollData.type ) this.options.type = rollData.type;
 
     // Append a situational bonus term
-    if ( form.bonus.value && isFirst ) {
-      const bonus = new DamageRoll(form.bonus.value, this.data);
+    if ( submitData.bonus && (index === 0) ) {
+      const bonus = new DamageRoll(submitData.bonus, this.data);
       if ( !(bonus.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms = this.terms.concat(bonus.terms);
     }
 
     // Apply advantage or disadvantage
     this.options.critical = isCritical;
-    this.options.rollMode = form.rollMode.value;
+    this.options.rollMode = submitData.rollMode;
     this.configureDamage();
     return this;
   }

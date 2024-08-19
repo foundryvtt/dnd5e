@@ -587,7 +587,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     return {
       data, parts,
       options: {
-        types: damage.types,
+        types: Array.from(damage.types),
         properties: Array.from(this.item.system.properties ?? [])
           .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
       }
