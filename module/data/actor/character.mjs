@@ -10,7 +10,9 @@ import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
 
-const { ArrayField, BooleanField, IntegerSortField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const {
+  ArrayField, BooleanField, IntegerSortField, NumberField, SchemaField, SetField, StringField
+} = foundry.data.fields;
 
 /**
  * @typedef {object} ActorFavorites5e
@@ -135,7 +137,11 @@ export default class CharacterData extends CreatureTemplate {
       traits: new SchemaField({
         ...TraitsFields.common,
         ...TraitsFields.creature,
-        weaponProf: TraitsFields.makeSimpleTrait({ label: "DND5E.TraitWeaponProf" }),
+        weaponProf: TraitsFields.makeSimpleTrait({ label: "DND5E.TraitWeaponProf" }, {
+          extraFields: {
+            mastery: new SetField(new StringField())
+          }
+        }),
         armorProf: TraitsFields.makeSimpleTrait({ label: "DND5E.TraitArmorProf" })
       }, { label: "DND5E.Traits" }),
       resources: new SchemaField({

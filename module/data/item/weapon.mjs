@@ -27,6 +27,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {DamageData} damage.base       Weapon's base damage.
  * @property {DamageData} damage.versatile  Weapon's versatile damage.
  * @property {number} magicalBonus          Magical bonus added to attack & damage rolls.
+ * @property {string} mastery               Mastery Property usable with this weapon.
  * @property {Set<string>} properties       Weapon's properties.
  * @property {number} proficient            Does the weapon's owner have proficiency?
  * @property {object} range
@@ -45,7 +46,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.RANGE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.RANGE"];
 
   /* -------------------------------------------- */
 
@@ -58,6 +59,7 @@ export default class WeaponData extends ItemDataModel.mixin(
         versatile: new DamageField()
       }),
       magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
+      mastery: new StringField(),
       properties: new SetField(new StringField(), {label: "DND5E.ItemWeaponProperties"}),
       proficient: new NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
@@ -91,6 +93,14 @@ export default class WeaponData extends ItemDataModel.mixin(
         config: {
           choices: CONFIG.DND5E.weaponTypes,
           keyPath: "system.type.value"
+        }
+      }],
+      ["mastery", {
+        label: "DND5E.WEAPON.Mastery.Label",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.weaponMasteries,
+          keyPath: "system.mastery"
         }
       }],
       ["attunement", this.compendiumBrowserAttunementFilter],

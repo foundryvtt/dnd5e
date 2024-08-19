@@ -746,6 +746,44 @@
 }
 
 /* ---------------------------------- */
+/*  Configuration Sheets              */
+/* ---------------------------------- */
+
+.dnd5e2.config-sheet {
+  background: url("ui/texture-gray1.webp") no-repeat top left,
+    url("ui/texture-gray2.webp") no-repeat bottom right,
+    var(--dnd5e-color-parchment);
+  border: 1px solid var(--dnd5e-color-gold);
+
+  &:not(.minimized) .window-header {
+    position: relative;
+    overflow: visible;
+    justify-content: flex-end;
+    margin-block-end: calc(var(--font-size-24) + 12px);
+    background: none;
+
+    h1 {
+      position: absolute;
+      inset-block-start: calc(var(--header-height) - 4px);
+      inset-inline: 0;
+      color: var(--color-dark-2);
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      font-size: var(--font-size-24);
+      text-align: center;
+    }
+    .header-control {
+      background: var(--dnd5e-background-25);
+    }
+  }
+  .window-content {
+    background: transparent;
+    padding-block-end: 14px;
+    padding-inline: 14px;
+  }
+}
+
+/* ---------------------------------- */
 /*  Skill Configuration Dialog        */
 /* ---------------------------------- */
 
@@ -781,6 +819,53 @@
     }
 
     .sign { color: var(--color-text-light-6); }
+  }
+}
+
+/* ---------------------------------- */
+/*  Weapons Config Sheet              */
+/* ---------------------------------- */
+
+.dnd5e2.weapons.trait-selector {
+  [data-application-part="traits"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-start;
+
+    fieldset.traits { flex: 1; }
+    fieldset:not(.traits) { flex: 1 0 100%; }
+  }
+  .traits {
+    display: grid;
+    grid-template-columns: [name] 2fr [proficiency] 1fr [mastery] 1fr;
+
+    .header, ol, li {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: subgrid;
+    }
+    .header {
+      margin-inline: -10px;
+      padding-block: 2px;
+      padding-inline: 10px;
+      border-radius: 0;
+    }
+    .name { grid-column: name; }
+    .proficiency { grid-column: proficiency; }
+    .mastery { grid-column: mastery; }
+    .proficiency, .mastery { text-align: center; }
+    li {
+      align-items: center;
+      &:not(:last-of-type) {
+        border-bottom: var(--dnd5e-border-dotted);
+      }
+    }
+    input[type="checkbox"] {
+      --checkbox-size: 16px;
+      width: var(--checkbox-size);
+      margin-block: 1px;
+    }
   }
 }
 

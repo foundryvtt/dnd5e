@@ -311,6 +311,25 @@ DND5E.attunements = {
 preLocalize("attunements");
 
 /* -------------------------------------------- */
+/*  Weapon Details                              */
+/* -------------------------------------------- */
+
+/**
+ * The set of types which a weapon item can take.
+ * @enum {string}
+ */
+DND5E.weaponTypes = {
+  simpleM: "DND5E.WeaponSimpleM",
+  simpleR: "DND5E.WeaponSimpleR",
+  martialM: "DND5E.WeaponMartialM",
+  martialR: "DND5E.WeaponMartialR",
+  natural: "DND5E.WeaponNatural",
+  improv: "DND5E.WeaponImprov",
+  siege: "DND5E.WeaponSiege"
+};
+preLocalize("weaponTypes");
+
+/* -------------------------------------------- */
 
 /**
  * General weapon categories.
@@ -321,6 +340,48 @@ DND5E.weaponProficiencies = {
   mar: "DND5E.WeaponMartialProficiency"
 };
 preLocalize("weaponProficiencies");
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {object} WeaponMasterConfiguration
+ * @property {string} label        Localized label for the mastery
+ * @property {string} [reference]  Reference to a rule page describing this mastery.
+ */
+
+/**
+ * Weapon masteries.
+ * @enum {WeaponMasterConfiguration}
+ */
+DND5E.weaponMasteries = {
+  cleave: {
+    label: "DND5E.WEAPON.Mastery.Cleave"
+  },
+  graze: {
+    label: "DND5E.WEAPON.Mastery.Graze"
+  },
+  nick: {
+    label: "DND5E.WEAPON.Mastery.Nick"
+  },
+  push: {
+    label: "DND5E.WEAPON.Mastery.Push"
+  },
+  sap: {
+    label: "DND5E.WEAPON.Mastery.Sap"
+  },
+  slow: {
+    label: "DND5E.WEAPON.Mastery.Slow"
+  },
+  topple: {
+    label: "DND5E.WEAPON.Mastery.Topple"
+  },
+  vex: {
+    label: "DND5E.WEAPON.Mastery.Vex"
+  }
+};
+preLocalize("weaponMasteries", { key: "label", sort: true });
+
+/* -------------------------------------------- */
 
 /**
  * A mapping between `DND5E.weaponTypes` and `DND5E.weaponProficiencies` that
@@ -334,12 +395,16 @@ DND5E.weaponProficienciesMap = {
   martialR: "mar"
 };
 
+/* -------------------------------------------- */
+
 /**
  * A mapping between `DND5E.weaponTypes` and `DND5E.attackClassifications`. Unlisted types are assumed to be
  * of the "weapon" classification.
  * @enum {string}
  */
 DND5E.weaponClassificationMap = {};
+
+/* -------------------------------------------- */
 
 /**
  * A mapping between `DND5E.weaponTypes` and `DND5E.attackTypes`.
@@ -351,6 +416,8 @@ DND5E.weaponTypeMap = {
   martialM: "melee",
   martialR: "ranged"
 };
+
+/* -------------------------------------------- */
 
 /**
  * The basic weapon types in 5e. This enables specific weapon proficiencies or
@@ -410,6 +477,8 @@ DND5E.ammoIds = {
   slingBullet: "z9SbsMIBZzuhZOqT"
 };
 
+/* -------------------------------------------- */
+/*  Tool Details                                */
 /* -------------------------------------------- */
 
 /**
@@ -2509,25 +2578,6 @@ DND5E.spellScrollIds = {
 };
 
 /* -------------------------------------------- */
-/*  Weapon Details                              */
-/* -------------------------------------------- */
-
-/**
- * The set of types which a weapon item can take.
- * @enum {string}
- */
-DND5E.weaponTypes = {
-  simpleM: "DND5E.WeaponSimpleM",
-  simpleR: "DND5E.WeaponSimpleR",
-  martialM: "DND5E.WeaponMartialM",
-  martialR: "DND5E.WeaponMartialR",
-  natural: "DND5E.WeaponNatural",
-  improv: "DND5E.WeaponImprov",
-  siege: "DND5E.WeaponSiege"
-};
-preLocalize("weaponTypes");
-
-/* -------------------------------------------- */
 
 /**
  * Compendium packs used for localized items.
@@ -3454,6 +3504,10 @@ DND5E.ruleTypes = {
   spellTag: {
     label: "DND5E.SpellTag",
     references: "itemProperties"
+  },
+  weaponMastery: {
+    label: "DND5E.WEAPON.Mastery.Label",
+    references: "weaponMasteries"
   }
 };
 preLocalize("ruleTypes", { key: "label" });

@@ -1,5 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
+import { splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
@@ -23,6 +24,7 @@ import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
+import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -294,7 +296,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]}`;
     }
-    if ( senses.special ) senses.special.split(";").forEach((c, i) => tags[`custom${i+1}`] = c.trim());
+    if ( senses.special ) splitSemicolons(senses.special).forEach((c, i) => tags[`custom${i + 1}`] = c);
     return tags;
   }
 
@@ -356,7 +358,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       }
 
       // Add custom entries
-      if ( data.custom ) data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
+      if ( data.custom ) splitSemicolons(data.custom).forEach((c, i) => data.selected[`custom${i + 1}`] = c);
       data.cssClass = !foundry.utils.isEmpty(data.selected) ? "" : "inactive";
 
       // If petrified, display "All Damage" instead of all damage types separately
@@ -1237,6 +1239,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const trait = event.currentTarget.dataset.trait;
     if ( trait === "tool" ) return new ToolSelector(this.actor, trait).render(true);
     else if ( trait === "dm" ) return new DamageModificationConfig(this.actor).render(true);
+    else if ( trait === "weapon" ) return new WeaponsConfig({ document: this.actor }).render({ force: true });
     return new TraitSelector(this.actor, trait).render(true);
   }
 

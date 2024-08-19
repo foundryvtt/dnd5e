@@ -184,6 +184,23 @@
       text-align: center;
       color: var(--color-text-dark-5);
     }
+
+    &.card > legend {
+      background: var(--dnd5e-background-card);
+      isolation: isolate;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 2px;
+        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+        clip-path: rect(-10px -10px 50% 200%);
+        outline: var(--dnd5e-border-gold);
+        z-index: -1;
+      }
+    }
   }
 
   /* Form Groups */
