@@ -1208,6 +1208,10 @@ DND5E.armorClasses = {
     label: "DND5E.ArmorClassUnarmoredBarbarian",
     formula: "10 + @abilities.dex.mod + @abilities.con.mod"
   },
+  unarmoredBard: {
+    label: "DND5E.ArmorClassUnarmoredBard",
+    formula: "10 + @abilities.dex.mod + @abilities.cha.mod"
+  },
   custom: {
     label: "DND5E.ArmorClassCustom"
   }
