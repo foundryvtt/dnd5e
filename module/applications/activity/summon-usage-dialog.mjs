@@ -103,10 +103,8 @@ export default class SummonUsageDialog extends ActivityUsageDialog {
     label ??= "—";
 
     let count = simplifyRollFormula(Roll.replaceFormulaData(profile.count ?? "1", rollData));
-    if ( Number.isNumeric(count) ) {
-      count = parseInt(count);
-      label = `${count} × ${label}`;
-    } else if ( count ) label = `${count} × ${label}`;
+    if ( Number.isNumeric(count) ) count = parseInt(count);
+    if ( count ) label = `${count} × ${label}`;
 
     return label;
   }

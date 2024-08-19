@@ -517,9 +517,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           icon: "icons/skills/melee/strike-slashes-orange.webp",
           name: game.i18n.localize("DND5E.Summoning.ItemChanges.Label"),
           origin: this.uuid,
-          flags: {
-            dnd5e: { type: "enchantment" }
-          }
+          type: "enchantment"
         })).toObject();
         actorUpdates.items.push({ _id: item.id, effects: [effect] });
       }
@@ -548,7 +546,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     const rollData = this.getRollData();
     const count = new Roll(profile.count || "1", rollData);
     await count.evaluate();
-    return TokenPlacement.place({ tokens: Array(count.total).fill(token) });
+    return TokenPlacement.place({ tokens: Array(praseInt(count.total)).fill(token) });
   }
 
   /* -------------------------------------------- */

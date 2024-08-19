@@ -371,7 +371,7 @@ export default class ActivityUsageDialog extends Application5e {
   _shouldDisplay(section) {
     const display = this.options.display;
     if ( foundry.utils.hasProperty(display, section) ) return foundry.utils.getProperty(display, section);
-    const group = section.split(".")[0];
+    const [group] = section.split(".");
     if ( (group !== section) && (group in display) ) return display[group];
     return this.options.display.all ?? true;
   }
