@@ -1,5 +1,7 @@
 import RollConfigurationDialog from "../applications/dice/roll-configuration-dialog.mjs";
 
+const { DiceTerm, NumericTerm } = foundry.dice.terms;
+
 /**
  * Configuration data for the process of creating one or more basic rolls.
  *
@@ -207,59 +209,58 @@ export default class BasicRoll extends Roll {
    * Replaces all dice terms that have modifiers with their maximum/minimum value.
    *
    * @param {object} [options={}]            Extra optional arguments which describe or modify the BasicRoll.
-   * @returns {RollTerm[]}                   Returns the array of RollTerms.
    */
   preCalculateDiceTerms(options={}) {
-    if ( !this._evaluated && ((options.maximize ?? false) || (options.minimize ?? false)) ) {
-      this.terms = this.terms.map(term => {
-        if ( term instanceof foundry.dice.terms.DiceTerm && term.modifiers.length ) {
-          const minimize = ( options.maximize ?? false ) ? false : ( options.minimize ?? false );
-          return new foundry.dice.terms.NumericTerm({
-            number: this.constructor.preCalculateTerm(term, { minimize: minimize }),
-            options: term.options
-          });
-        }
-        return term;
-      });
-    }
-    return this.terms;
+    if ( this._evaluated || (!options.maximize && !options.minimize) ) return;
+    this.terms = this.terms.map(term => {
+      if ( (term instanceof DiceTerm) && term.modifiers.length ) {
+        const minimize = !options.maximize;
+        const number = this.constructor.preCalculateTerm(term, { minimize });
+        if ( Number.isFinite(number) ) return new NumericTerm({ number, options: term.options });
+      }
+      return term;
+    });
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Gets die information from passed die and calculates the maximum value that could be rolled.
+   * Gets information from passed die and calculates the maximum or minimum value that could be rolled.
    *
    * @param {DiceTerm} die                            DiceTerm to get the maximum/minimum value.
-   * @param {object} [preCalculateOptions={}]         Additional options to modify preCalculate funtionality.
+   * @param {object} [preCalculateOptions={}]         Additional options to modify preCalculate functionality.
    * @param {boolean} [preCalculateOptions.minimize=false]  Calculate the minimum value instead of the maximum.
-   * @returns {number}                                Maximum/Minimum value that could be rolled as an integer.
+   * @returns {number|null}                                 Maximum/Minimum value that could be rolled as an integer, or
+   *                                                        null if the modifiers could not be precalculated.
    */
-  static preCalculateTerm(die, {minimize=false}={}) {
+  static preCalculateTerm(die, { minimize=false }={}) {
     let face = minimize ? 1 : die.faces;
     let number = die.number;
     const currentModifiers = foundry.utils.deepClone(die.modifiers);
     const keep = new Set(["k", "kh", "kl"]);
     const drop = new Set(["d", "dh", "dl"]);
     const validModifiers = new Set([...keep, ...drop, "max", "min"]);
+    let matchedModifier = false;
 
     for ( const modifier of currentModifiers ) {
       const rgx = /(m[ai][xn]|[kd][hl]?)(\d+)?/i;
       const match = modifier.match(rgx);
       if ( !match ) continue;
-      if ( match && (match[0].length < match.input.length) ) currentModifiers.push(match.input.slice(match[0].length));
+      if ( match[0].length < match.input.length ) currentModifiers.push(match.input.slice(match[0].length));
       let [, command, value] = match;
       command = command.toLowerCase();
-      const amount = parseInt(value) || (command === "max" || command === "min" ? -1 : 1);
+      if ( !validModifiers.has(command) ) continue;
 
-      if (validModifiers.has(command) && amount > 0 ) {
+      matchedModifier = true;
+      const amount = parseInt(value) || (command === "max" || command === "min" ? -1 : 1);
+      if ( amount > 0 ) {
         if ( (command === "max" && minimize) || (command === "min" && !minimize) ) continue;
-        else if ((command === "max" || command === "min")) face = Math.min(die.faces, amount);
+        else if ( (command === "max" || command === "min") ) face = Math.min(die.faces, amount);
         else if ( keep.has(command) ) number = Math.min(number, amount);
         else if ( drop.has(command) ) number = Math.max(1, number - amount);
       }
     }
 
-    return face * number;
+    return matchedModifier ? face * number : null;
   }
 }
