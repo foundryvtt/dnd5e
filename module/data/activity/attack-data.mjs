@@ -196,8 +196,8 @@ export default class AttackActivityData extends BaseActivityData {
    * @returns {{ data: object, parts: string[] }}
    */
   getAttackData() {
-    const data = this.getRollData();
     const parts = [];
+    const data = this.getRollData();
     const item = this.item.system;
 
     if ( this.actor && !this.attack.flat ) {
@@ -213,6 +213,9 @@ export default class AttackActivityData extends BaseActivityData {
       if ( actorBonus?.attack ) parts.push(actorBonus.attack);
 
       // TODO: Ammunition
+
+      // Add exhaustion reduction
+      this.actor.addRollExhaustion(parts, data);
     }
 
     // Include the activity's attack bonus & item's magical bonus

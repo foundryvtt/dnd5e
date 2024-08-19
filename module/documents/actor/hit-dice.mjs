@@ -169,11 +169,13 @@ export default class HitDice {
    * Create item updates for recovering hit dice during a rest.
    * @param {object} [options]
    * @param {number} [options.maxHitDice]                       Maximum number of hit dice to recover.
+   * @param {number} [options.fraction=0.5]                     Fraction of max hit dice to recover. Only used if
+   *                                                            `maxHitDice` isn't specified.
    * @param {boolean} [options.largest]                         Whether to restore the largest hit dice first.
    * @returns {{updates: object[], hitDiceRecovered: number}}   Array of item updates and number of hit dice recovered.
    */
-  createHitDiceUpdates({ maxHitDice, largest=true }={}) {
-    if ( !Number.isInteger(maxHitDice) ) maxHitDice = Math.max(Math.floor(this.max / 2), 1);
+  createHitDiceUpdates({ maxHitDice, fraction=0.5, largest=true }={}) {
+    if ( !Number.isInteger(maxHitDice) ) maxHitDice = Math.max(Math.floor(this.max * fraction), 1);
     const classes = Array.from(this.classes).sort((a, b) => {
       a = parseInt(a.system.hitDice.slice(1));
       b = parseInt(b.system.hitDice.slice(1));
