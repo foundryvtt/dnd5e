@@ -13,23 +13,6 @@
         </p>
     </div>
 
-    {{!-- Primary Ability --}}
-    <div class="form-group">
-        <label>{{ localize "DND5E.CLASS.FIELDS.primaryAbility.label" }}</label>
-        <div class="form-fields">
-
-            {{!-- Abilities --}}
-            {{ formInput fields.primaryAbility.fields.value value=source.primaryAbility.value options=primaryAbilities }}
-
-            {{!-- All Required --}}
-            {{#if (gt source.primaryAbility.value.length 1)}}
-            {{ formField fields.primaryAbility.fields.all value=source.primaryAbility.all
-                         hint=false classes="label-top checkbox-top" }}
-            {{/if}}
-        </div>
-        <p class="hint">{{ localize "DND5E.CLASS.FIELDS.primaryAbility.hint" }}</p>
-    </div>
-
     {{!-- Hit Dice --}}
     <div class="form-group split-group">
         <label>{{ localize "DND5E.CLASS.FIELDS.hitDice.label" }}</label>
@@ -44,4 +27,16 @@
                          classes="label-top" }}
         </div>
     </div>
+</fieldset>
+
+<fieldset>
+    <legend>{{ localize "DND5E.CLASS.Multiclass.Title" }}</legend>
+
+    {{!-- Primary Ability --}}
+    {{ formField fields.primaryAbility.fields.value value=source.primaryAbility.value options=primaryAbilities }}
+
+    {{!-- All Required --}}
+    {{#if (gt source.primaryAbility.value.length 1)}}
+    {{ formField fields.primaryAbility.fields.all value=source.primaryAbility.all input=inputs.createCheckboxInput }}
+    {{/if}}
 </fieldset>

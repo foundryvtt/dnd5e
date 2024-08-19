@@ -17,7 +17,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {string} identifier                Identifier slug for this class.
  * @property {number} levels                    Current number of levels in this class.
  * @property {object} primaryAbility
- * @property {Set<string} primaryAbility.value  List of primary abilities used by this class.
+ * @property {Set<string>} primaryAbility.value List of primary abilities used by this class.
  * @property {boolean} primaryAbility.all       If multiple abilities are selected, does multiclassing require all of
  *                                              them to be 13 or just one.
  * @property {string} hitDice                   Denomination of hit dice available as defined in `DND5E.hitDieTypes`.

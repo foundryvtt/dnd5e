@@ -598,6 +598,9 @@
 "DND5E.CheckBonus": "Check Bonus",
 
 "DND5E.CLASS": {
+  "Multiclass": {
+    "Title": "Multiclassing"
+  },
   "FIELDS": {
     "hitDice": {
       "label": "Hit Point Die"
@@ -609,14 +612,13 @@
       "label": "Class Levels"
     },
     "primaryAbility": {
-      "label": "Primary Ability",
-      "hint": "Abilities used most by this class. Used to determine multi-classing restrictions.",
       "all": {
         "label": "Require All",
         "hint": "Require all primary abilities to meet the minimum in order to multi-class."
       },
       "value": {
-        "label": "Abilities"
+        "label": "Primary Ability",
+        "hint": "Abilities used most by this class. Used to determine multi-classing restrictions."
       }
     }
   }
