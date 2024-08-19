@@ -302,8 +302,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       }));
     }
 
-    if ( cost < 0 && !levelData.spent ) return;
-    updates.actor[`system.spells.spell${levelNumber}.value`] = Math.clamp(newValue, 0, levelData.max);
+    updates.actor[`system.spells.spell${levelNumber}.value`] = Math.max(0, newValue);
   }
 
   /* -------------------------------------------- */

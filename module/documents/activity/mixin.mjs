@@ -604,12 +604,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       );
     }
 
-    if ( errors.length ) {
-      errors.forEach(err => ui.notifications.error(err.message, { console: false }));
-      return false;
-    }
-
-    return updates;
+    errors.forEach(err => ui.notifications.error(err.message, { console: false }));
+    return errors.length ? false : updates;
   }
 
   /* -------------------------------------------- */
