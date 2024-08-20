@@ -2939,6 +2939,10 @@ DND5E.statusEffects = {
     icon: "systems/dnd5e/icons/svg/statuses/flying.svg",
     special: "FLY"
   },
+  halfCover: {
+    name: "EFFECT.DND5E.StatusHalfCover",
+    icon: "systems/dnd5e/icons/svg/checked-shield.svg"
+  },
   hiding: {
     name: "EFFECT.DND5E.StatusHiding",
     icon: "systems/dnd5e/icons/svg/statuses/hiding.svg"
@@ -2960,10 +2964,6 @@ DND5E.statusEffects = {
   stable: {
     name: "EFFECT.DND5E.StatusStable",
     icon: "systems/dnd5e/icons/svg/statuses/stable.svg"
-  },
-  halfCover: {
-    name: "EFFECT.DND5E.StatusHalfCover",
-    icon: "systems/dnd5e/icons/svg/checked-shield.svg"
   },
   threeQuartersCover: {
     name: "EFFECT.DND5E.StatusThreeQuartersCover",
