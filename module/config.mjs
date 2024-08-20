@@ -3194,8 +3194,8 @@ DND5E.characterFlags = {
     type: Boolean
   },
   enhancedDualWielding: {
-    name: "DND5E.FLAGS.EnhancedDuelWielding.Name",
-    hint: "DND5E.FLAGS.EnhancedDuelWielding.Hint",
+    name: "DND5E.FLAGS.EnhancedDualWielding.Name",
+    hint: "DND5E.FLAGS.EnhancedDualWielding.Hint",
     section: "DND5E.Feats",
     type: Boolean
   },
