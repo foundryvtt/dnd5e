@@ -169,6 +169,7 @@
     gap: 4px;
     border-radius: 4px;
     border: 1px solid var(--color-fieldset-border);
+    margin: 0;
 
     > legend {
       text-transform: uppercase;
@@ -189,6 +190,7 @@
       background: var(--dnd5e-background-card);
       position: relative;
       border-radius: 2px;
+      padding: 2px 6px 0;
 
       &::before {
         content: "";
@@ -272,13 +274,13 @@
 
       & + .full-width { margin-top: 2px; }
     }
+  }
 
-    /* Hints */
-    .hint {
-      font-size: var(--font-size-11);
-      color: var(--color-text-dark-5);
-      margin: 4px 0 0;
-    }
+  /* Hints */
+  :is(.form-group, fieldset) .hint {
+    font-size: var(--font-size-11);
+    color: var(--color-text-dark-5);
+    margin: 4px 0 0;
   }
 
   select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
@@ -316,7 +318,7 @@
     cursor: pointer;
   }
 
-  multi-select .tag {
+  multi-select .tags .tag {
     cursor: pointer;
     font-size: var(--font-size-10);
     border: var(--dnd5e-border-gold);
