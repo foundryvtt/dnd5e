@@ -376,6 +376,13 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.weaponTypes;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Does the Weapon implement a versatile damage roll as part of its usage?
    * @type {boolean}

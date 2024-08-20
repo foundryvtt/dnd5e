@@ -127,6 +127,45 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
       })));
     }
 
+    if ( this.restrictions.categories.size && !this.restrictions.categories.has(item.system.type?.value) ) {
+      const getLabel = key => {
+        const config = CONFIG.Item.dataModels[this.restrictions.type]?.itemCategories[key];
+        if ( !config ) return key;
+        if ( foundry.utils.getType(config) === "string" ) return config;
+        return config.label;
+      };
+      errors.push(new EnchantmentError(game.i18n.format(
+        `DND5E.ENCHANT.Warning.${item.system.type?.value ? "WrongType" : "NoSubtype"}`,
+        {
+          allowedType: game.i18n.getListFormatter({ type: "disjunction" }).format(
+            Array.from(this.restrictions.categories).map(c => getLabel(c).toLowerCase())
+          ),
+          incorrectType: getLabel(item.system.type?.value)
+        }
+      )));
+    }
+
+    if ( this.restrictions.properties.size
+      && !this.restrictions.properties.intersection(item.system.properties ?? new Set()).size ) {
+      errors.push(new EnchantmentError(game.i18n.format("DND5E.Enchantment.Warning.MissingProperty", {
+        validProperties: game.i18n.getListFormatter({ type: "disjunction" }).format(
+          Array.from(this.restrictions.properties).map(p => CONFIG.DND5E.itemProperties[p]?.label ?? p)
+        )
+      })));
+    }
+
+    /**
+     * A hook event that fires while validating whether an enchantment can be applied to a specific item.
+     * @function dnd5e.canEnchant
+     * @memberof hookEvents
+     * @param {EnchantActivity} activity   The activity performing the enchanting.
+     * @param {Item5e} item                Item to which the enchantment will be applied.
+     * @param {EnchantmentError[]} errors  List of errors containing failed restrictions. The item will be enchanted
+     *                                     so long as no errors are listed, otherwise the provided errors will be
+     *                                     displayed to the user.
+     */
+    Hooks.callAll("dnd5e.canEnchant", this, item, errors);
+
     return errors.length ? errors : true;
   }
 }

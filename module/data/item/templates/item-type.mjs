@@ -12,6 +12,22 @@ import SystemDataModel from "../../abstract.mjs";
 export default class ItemTypeTemplate extends SystemDataModel {
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Item categories used to populate `system.type.value`.
+   * @type {Record<string, string>}
+   */
+  static get itemCategories() {
+    return {};
+  }
+
+  get itemCategories() {
+    return this.constructor.itemCategories();
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 

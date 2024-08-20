@@ -57,6 +57,7 @@ export default class EnchantSheet extends ActivitySheet {
       .map(effect => ({
         value: effect.id, label: effect.name, selected: appliedEnchantments.has(effect.id)
       }));
+
     const enchantableTypes = this.activity.enchantableTypes;
     context.typeOptions = [
       { value: "", label: game.i18n.localize("DND5E.ENCHANT.FIELDS.restrictions.type.Any") },
@@ -64,6 +65,14 @@ export default class EnchantSheet extends ActivitySheet {
         .filter(t => enchantableTypes.has(t))
         .map(value => ({ value, label: game.i18n.localize(CONFIG.Item.typeLabels[value]) }))
     ];
+
+    const type = context.source.restrictions.type;
+    const typeDataModel = CONFIG.Item.dataModels[type];
+    if ( typeDataModel ) context.categoryOptions = Object.entries(typeDataModel.itemCategories ?? {})
+      .map(([value, config]) => ({ value, label: foundry.utils.getType(config) === "string" ? config : config.label }));
+
+    context.propertyOptions = (CONFIG.DND5E.validProperties[type] ?? [])
+      .map(value => ({ value, label: CONFIG.DND5E.itemProperties[value]?.label ?? value }));
 
     return context;
   }

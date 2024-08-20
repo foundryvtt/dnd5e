@@ -22,8 +22,10 @@ const {
  * @property {object} enchant
  * @property {string} enchant.identifier    Class identifier that will be used to determine applicable level.
  * @property {object} restrictions
- * @property {boolean} restrictions.allowMagical  Allow enchantments to be applied to items that are already magical.
- * @property {string} restrictions.type           Item type to which this enchantment can be applied.
+ * @property {boolean} restrictions.allowMagical    Allow enchantments to be applied to items that are already magical.
+ * @property {Set<string>} restrictions.categories  Item categories to restrict to.
+ * @property {Set<string>} restrictions.properties  Item properties to restrict to.
+ * @property {string} restrictions.type             Item type to which this enchantment can be applied.
  */
 export default class EnchantActivityData extends BaseActivityData {
   /** @inheritDoc */
@@ -45,6 +47,8 @@ export default class EnchantActivityData extends BaseActivityData {
       }),
       restrictions: new SchemaField({
         allowMagical: new BooleanField(),
+        categories: new SetField(new StringField()),
+        properties: new SetField(new StringField()),
         type: new StringField()
       })
     };
