@@ -40,15 +40,21 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
       border: var(--checkbox-border-width, 2px) solid var(--checkbox-border-color, var(--dnd5e-color-gold));
       background: var(--checkbox-empty-color, transparent);
       box-sizing: border-box;
+      position: relative;
     }
 
     :host :is(.checked, .disabled, .indeterminate) {
       display: none;
       height: 100%;
       width: 100%;
-      background: var(--checkbox-fill-color, var(--dnd5e-color-gold));
       align-items: center;
       justify-content: center;
+      position: absolute;
+      inset: 0;
+    }
+
+    :host([checked]) :is(.checked, .disabled, .indeterminate) {
+      background: var(--checkbox-fill-color, var(--dnd5e-color-gold));
     }
 
     :host([checked]) .checked { display: flex; }

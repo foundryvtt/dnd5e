@@ -7,6 +7,8 @@ export {default as ActorSheet5eVehicle} from "./vehicle-sheet.mjs";
 export {default as GroupActorSheet} from "./group-sheet.mjs";
 
 export {default as BaseConfigSheet} from "./base-config.mjs";
+export {default as BaseConfigSheetV2} from "./api/base-config-sheet.mjs";
+
 export {default as ActorAbilityConfig} from "./ability-config.mjs";
 export {default as ActorArmorConfig} from "./armor-config.mjs";
 export {default as ActorConcentrationConfig} from "./concentration-config.mjs";
@@ -27,3 +29,4 @@ export {default as ToolSelector} from "./tool-selector.mjs";
 export {default as ActorTypeConfig} from "./type-config.mjs";
 export {default as ActorSheetMixin} from "./sheet-mixin.mjs";
 export {default as ActorSheetV2Mixin} from "./sheet-v2-mixin.mjs";
+export {default as WeaponsConfig} from "./config/weapons-config.mjs";

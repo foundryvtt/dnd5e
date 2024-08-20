@@ -1,5 +1,5 @@
 import * as Trait from "../../documents/actor/trait.mjs";
-import { formatNumber, simplifyBonus, staticID } from "../../utils.mjs";
+import { formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
 import Tabs5e from "../tabs.mjs";
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
 
@@ -132,8 +132,8 @@ export default function ActorSheetV2Mixin(Base) {
         return obj;
       }, {});
 
-      if ( attributes.senses.special ) attributes.senses.special.split(";").forEach((v, i) => {
-        context.senses[`custom${i + 1}`] = { label: v.trim() };
+      if ( attributes.senses.special ) splitSemicolons(attributes.senses.special).forEach((label, i) => {
+        context.senses[`custom${i + 1}`] = { label };
       });
 
       // Containers
@@ -203,7 +203,7 @@ export default function ActorSheetV2Mixin(Base) {
         else if ( values instanceof Set ) values = Array.from(values);
         else if ( !Array.isArray(values) ) values = [values];
         values = values.map(key => {
-          const value = { label: Trait.keyLabel(key, { trait }) ?? key };
+          const value = { key, label: Trait.keyLabel(key, { trait }) ?? key };
           const icons = value.icons = [];
           if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses.map(p => {
             const type = CONFIG.DND5E.itemProperties[p]?.label;
@@ -211,7 +211,7 @@ export default function ActorSheetV2Mixin(Base) {
           }));
           return value;
         });
-        if ( data.custom ) data.custom.split(";").forEach(v => values.push({ label: v.trim() }));
+        if ( data.custom ) splitSemicolons(data.custom).forEach(label => values.push({ label }));
         if ( values.length ) traits[trait] = values;
       }
 
@@ -246,6 +246,17 @@ export default function ActorSheetV2Mixin(Base) {
           return value;
         }).filter(f => f);
         if ( values.length ) traits.dm = values;
+      }
+
+      // Display weapon masteries
+      for ( const key of this.actor.system.traits?.weaponProf?.mastery ?? [] ) {
+        let value = traits.weapon?.find(w => w.key === key);
+        if ( !value ) {
+          value = { key, label: Trait.keyLabel(key, { trait: "weapon" }) ?? key, icons: [] };
+          traits.weapon ??= [];
+          traits.weapon.push(value);
+        }
+        value.icons.push({ icon: "mastery", label: game.i18n.format("DND5E.WEAPON.Mastery.Label") });
       }
 
       return traits;

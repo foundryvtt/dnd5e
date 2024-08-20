@@ -2148,6 +2148,7 @@
 "DND5E.SourcePageDisplay": "pg. {page}",
 "DND5E.SourceUUID": "Original Source",
 "DND5E.Special": "Special",
+"DND5E.SpecialHint": "Special values separated by semi-colons.",
 "DND5E.SpecialTraits": "Special Traits",
 "DND5E.Species": {
   "Label": "Species",
@@ -2581,6 +2582,7 @@
 "DND5E.ToolPromptTitle": "{tool} Check",
 "DND5E.ToolThieves": "Thieves' Tools",
 "DND5E.ToolVehicle": "Vehicles",
+"DND5E.TraitAll": "All {category}",
 "DND5E.TraitArmorPlural.one": "Armor Training",
 "DND5E.TraitArmorPlural.other": "Armor Training",
 "DND5E.TraitArmorProf": "Armor Training",
@@ -2770,12 +2772,34 @@
 "DND5E.WarnCantAddMultipleAdvancements": "It is not currently possible to add multiple items with advancements to an actor at the same time. Please add them individually.",
 "DND5E.WarnMultipleArmor": "More than one suit of armor equipped, AC calculation may be incorrect.",
 "DND5E.WarnMultipleShields": "More than one shield equipped, AC calculation may be incorrect.",
+
+"DND5E.WEAPON": {
+  "FIELDS": {
+    "mastery": {
+      "label": "Mastery",
+      "hint": "Special weapon ability unlocked for characters who have Weapon Mastery or a related feature."
+    }
+  },
+  "Mastery": {
+    "Label": "Weapon Mastery",
+    "Cleave": "Cleave",
+    "Graze": "Graze",
+    "Nick": "Nick",
+    "Push": "Push",
+    "Sap": "Sap",
+    "Slow": "Slow",
+    "Topple": "Topple",
+    "Vex": "Vex"
+  }
+},
+
 "DND5E.WeaponCategory": "{category} Weapon",
 "DND5E.WeaponImprov": "Improvised",
 "DND5E.WeaponMartialM": "Martial Melee",
 "DND5E.WeaponMartialProficiency": "Martial",
 "DND5E.WeaponMartialR": "Martial Ranged",
 "DND5E.WeaponNatural": "Natural",
+"DND5E.WeaponOtherProficiency": "Other",
 "DND5E.WeaponSiege": "Siege Weapon",
 "DND5E.WeaponSimpleM": "Simple Melee",
 "DND5E.WeaponSimpleProficiency": "Simple",

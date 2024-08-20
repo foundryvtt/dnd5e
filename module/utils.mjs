@@ -795,6 +795,17 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Split a semi-colon-separated list and clean out any empty entries.
+ * @param {string} input
+ * @returns {string}
+ */
+export function splitSemicolons(input) {
+  return input.split(";").map(t => t.trim()).filter(t => t);
+}
+
+/* -------------------------------------------- */
 /*  Migration                                   */
 /* -------------------------------------------- */
 

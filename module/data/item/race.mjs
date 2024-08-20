@@ -1,4 +1,5 @@
 import Actor5e from "../../documents/actor/actor.mjs";
+import { splitSemicolons } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
@@ -83,7 +84,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
       const value = this.senses[k];
       if ( value ) arr.push(`${label} ${value} ${units}`);
       return arr;
-    }, []).concat(this.senses.special.split(";").filter(l => l));
+    }, []).concat(splitSemicolons(this.senses.special));
   }
 
   /* -------------------------------------------- */

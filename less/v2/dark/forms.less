@@ -3,15 +3,26 @@
   fieldset {
     --color-fieldset-border: var(--dnd5e-color-blue-gray-3);
     > legend { color: var(--dnd5e-color-gold); }
+
+    &.card {
+      select, input { background: var(--dnd5e-background-25); }
+    }
   }
 
   .form-group {
-    select, input {
-      border: var(--dnd5e-border-gold);
-      background: var(--dnd5e-background-parchment);
-    }
-
     &.card { background: var(--dnd5e-background-10); }
+  }
+
+  :is(.form-group, fieldset) :is(select, input) {
+    border: var(--dnd5e-border-gold);
+    background: var(--dnd5e-background-parchment);
+  }
+
+  dnd5e-checkbox {
+    &[disabled]:not([checked]) {
+      --checkbox-border-color: var(--dnd5e-color-blue-gray-3);
+      --checkbox-empty-color: var(--dnd5e-color-blue-gray-3);
+    }
   }
 
   .control-button { color: var(--dnd5e-color-gold); }
