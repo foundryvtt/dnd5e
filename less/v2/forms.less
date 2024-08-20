@@ -285,18 +285,23 @@
 
   select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
     --input-border-color: transparent;
-    border: 1px solid var(--input-border-color);
-    font-size: var(--font-size-11);
     transition: all 250ms ease;
     line-height: normal;
     padding: 0 6px;
     background: var(--input-background-color);
+    outline: none;
 
     &:focus { outline: none; }
     &:focus-visible, &:hover {
       --input-border-color: var(--dnd5e-color-gold);
       box-shadow: 0 0 6px var(--dnd5e-color-gold);
     }
+  }
+
+  :is(.form-group, fieldset) :is(select, input) {
+    color: var(--color-text-dark-primary);
+    border: 1px solid var(--input-border-color);
+    font-size: var(--font-size-11);
   }
 
   input::placeholder {
@@ -325,6 +330,14 @@
     background: var(--dnd5e-background-card);
     border-radius: 3px;
     &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
+  }
+
+  /* Checkboxes */
+  dnd5e-checkbox {
+    &[disabled]:not([checked]) {
+      --checkbox-border-color: var(--color-text-light-6);
+      --checkbox-empty-color: var(--color-text-light-6);
+    }
   }
 
   .form-fields > dnd5e-checkbox { flex: none; }

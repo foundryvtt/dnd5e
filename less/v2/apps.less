@@ -753,7 +753,8 @@
   background: url("ui/texture-gray1.webp") no-repeat top left,
     url("ui/texture-gray2.webp") no-repeat bottom right,
     var(--dnd5e-color-parchment);
-  border: 1px solid var(--dnd5e-color-gold);
+  border: var(--dnd5e-border-gold);
+  color: var(--color-text-dark-primary);
 
   &:not(.minimized) .window-header {
     position: relative;
@@ -766,7 +767,7 @@
       position: absolute;
       inset-block-start: calc(var(--header-height) - 4px);
       inset-inline: 0;
-      color: var(--color-dark-2);
+      color: var(--color-text-dark-primary);
       font-family: var(--dnd5e-font-roboto-slab);
       font-weight: bold;
       font-size: var(--font-size-24);
@@ -837,6 +838,7 @@
     fieldset:not(.traits) { flex: 1 0 100%; }
   }
   .traits {
+    --checkbox-size: 16px;
     display: grid;
     grid-template-columns: [name] 2fr [proficiency] 1fr [mastery] 1fr;
 
