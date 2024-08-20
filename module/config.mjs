@@ -2960,6 +2960,14 @@ DND5E.statusEffects = {
   stable: {
     name: "EFFECT.DND5E.StatusStable",
     icon: "systems/dnd5e/icons/svg/statuses/stable.svg"
+  },
+  halfCover: {
+    name: "EFFECT.DND5E.StatusHalfCover",
+    icon: "systems/dnd5e/icons/svg/checked-shield.svg"
+  },
+  threeQuartersCover: {
+    name: "EFFECT.DND5E.StatusThreeQuartersCover",
+    icon: "systems/dnd5e/icons/svg/rosa-shield.svg"
   }
 };
 
