@@ -235,12 +235,12 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( this.parent.labels.damages?.length ) {
       const config = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
       context.info.push({ value: this.parent.labels.damages.reduce((str, { formula, damageType }) => {
-        const { label, icon } = config[damageType];
+        const type = config[damageType];
         return `${str}
           <span class="formula">${formula}</span>
-          <span class="damage-type" data-tooltip="${label}" aria-label="${label}">
-            <dnd5e-icon src="${icon}"></dnd5e-icon>
-          </span>
+          ${type ? `<span class="damage-type" data-tooltip="${type.label}" aria-label="${type.label}">
+            <dnd5e-icon src="${type.icon}"></dnd5e-icon>
+          </span>` : ""}
         `;
       }, ""), classes: "info-grid damage" });
     }

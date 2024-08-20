@@ -45,7 +45,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         action: "rollAttack"
       }
     }];
-    if ( this.damage.parts.length ) buttons.push({
+    if ( this.damage.parts.length || this.item.system.properties?.has("amm") ) buttons.push({
       label: game.i18n.localize("DND5E.Damage"),
       icon: '<i class="fa-solid fa-burst" inert></i>',
       dataset: {
@@ -61,7 +61,15 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
 
   /**
    * @typedef {D20RollProcessConfiguration} AttackRollProcessConfiguration
-   * @param {string} [attackMode]  Mode to use for making the attack and rolling damage.
+   * @param {string|boolean} [ammunition]  Specific ammunition to consume, or `false` to prevent any ammo consumption.
+   * @param {string} [attackMode]          Mode to use for making the attack and rolling damage.
+   */
+
+  /**
+   * @typedef {object} AmmunitionUpdate
+   * @property {string} id        ID of the ammunition item to update.
+   * @property {boolean} destroy  Will the ammunition item be deleted?
+   * @property {number} quantity  New quantity after the ammunition is spent.
    */
 
   /**
@@ -75,22 +83,19 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     const { parts, data } = this.getAttackData();
     const targets = this.constructor.getTargetDescriptors();
 
-    let ammoUpdate = [];
-    // TODO: Handle ammunition consumption
-    // const consume = this.system.consume;
-    // const ammo = this.hasAmmo ? this.actor.items.get(consume.target) : null;
-    // if ( ammo ) {
-    //   const q = ammo.system.quantity;
-    //   const consumeAmount = consume.amount ?? 0;
-    //   if ( q && (q - consumeAmount >= 0) ) {
-    //     title += ` [${ammo.name}]`;
-    //   }
-    //
-    //   // Get pending ammunition update
-    //   const usage = this._getUsageUpdates({consumeResource: true});
-    //   if ( usage === false ) return null;
-    //   ammoUpdate = usage.resourceUpdates ?? [];
-    // }
+    let ammunitionOptions;
+    if ( this.item.system.properties?.has("amm") && this.actor ) ammunitionOptions = this.actor.items
+      .filter(i => (i.type === "consumable") && (i.system.type?.value === "ammo")
+        && (!this.item.system.ammunition?.type || (i.system.type.subtype === this.item.system.ammunition.type)))
+      .map(i => ({
+        value: i.id, label: `${i.name} (${i.system.quantity})`, item: i,
+        disabled: !i.system.quantity, selected: i.id === config.ammunition
+      }))
+      .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+    // TODO: Fetch last used ammunition to select as default
+    if ( (foundry.utils.getType(config.ammunition) !== "string") && ammunitionOptions?.[0] ) {
+      ammunitionOptions[0].selected = true;
+    }
 
     const rollConfig = foundry.utils.mergeObject({
       elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
@@ -112,6 +117,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         width: 400,
         top: config.event ? config.event.clientY - 80 : null,
         left: window.innerWidth - 710,
+        ammunitionOptions: rollConfig.ammunition !== false ? ammunitionOptions : undefined,
         attackModes: this.item.system.attackModes
       }
     }, dialog);
@@ -157,6 +163,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       halflingLucky: rollConfig.halflingLucky,
       reliableTalent: rollConfig.rolls[0].options.minimum === 10,
       fastForward: !dialogConfig.configure,
+      ammunitionOptions: dialogConfig.options.ammunitionOptions,
       attackModes: dialogConfig.options.attackModes,
       title: dialogConfig.options.title,
       dialogOptions: dialogConfig.options,
@@ -177,14 +184,21 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     const roll = await d20Roll(oldRollConfig);
     if ( roll === null ) return;
 
+    const ammo = this.actor?.items.get(roll.options.ammunition);
+    let ammoUpdate = null;
+    if ( ammo ) {
+      ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
+      ammoUpdate.destroy = ammo.system.uses.autoDestroy && (ammoUpdate.quantity === 0);
+    }
+
     /**
      * A hook event that fires after an attack has been rolled but before any ammunition is consumed.
      * @function dnd5e.rollAttackV2
      * @memberof hookEvents
-     * @param {D20Roll[]} rolls               The resulting rolls.
+     * @param {D20Roll[]} rolls                        The resulting rolls.
      * @param {object} data
-     * @param {AttackActivity} data.activity  The activity that performed the attack.
-     * @param {object[]} data.ammoUpdate      Any updates related to ammo consumption for this attack.
+     * @param {AttackActivity} data.activity           The activity that performed the attack.
+     * @param {AmmunitionUpdate|null} data.ammoUpdate  Any updates related to ammo consumption for this attack.
      */
     Hooks.callAll("dnd5e.rollAttackV2", [roll], { activity: this, ammoUpdate });
 
@@ -193,11 +207,25 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         "The `dnd5e.rollAttack` hook has been deprecated and replaced with `dnd5e.rollAttackV2`.",
         { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
-      Hooks.callAll("dnd5e.rollAttack", this.item, roll, ammoUpdate);
+      const oldAmmoUpdate = [{ _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }];
+      Hooks.callAll("dnd5e.rollAttack", this.item, roll, oldAmmoUpdate);
+      if ( oldAmmoUpdate[0] ) {
+        ammoUpdate.id = oldAmmoUpdate[0]._id;
+        ammoUpdate.quantity = foundry.utils.getProperty(oldAmmoUpdate[0], "system.quantity");
+      }
     }
 
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
-    if ( ammoUpdate.length ) await this.actor?.updateEmbeddedDocuments("Item", ammoUpdate);
+    if ( ammoUpdate?.destroy ) {
+      // If ammunition was deleted, store a copy of it in the roll message
+      const data = ammo.toObject();
+      const id = rollConfig.event?.target.closest("[data-message-id]")?.dataset.messageId;
+      const attackMessage = dnd5e.registry.messages.messages(id, "attack").pop();
+      await attackMessage?.setFlag("dnd5e", "roll.ammunitionData", data);
+      this.actor?.deleteEmbeddedDocuments("Item", [ammoUpdate.id]);
+    } else if ( ammoUpdate ) {
+      this.actor?.updateEmbeddedDocuments("Item", [{ _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }]);
+    }
 
     /**
      * A hook event that fires after an attack has been rolled and ammunition has been consumed.
@@ -239,6 +267,17 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
   static #rollDamage(event, target, message) {
     const lastAttack = message.getAssociatedRolls("attack").pop();
     const attackMode = lastAttack?.getFlag("dnd5e", "roll.attackMode");
-    this.rollDamage({ event, attackMode });
+
+    // Fetch the ammunition used with the last attack roll
+    let ammunition;
+    const actor = lastAttack?.getAssociatedActor();
+    if ( actor ) {
+      const storedData = lastAttack.getFlag("dnd5e", "roll.ammunitionData");
+      ammunition = storedData
+        ? new Item.implementation(storedData, { parent: actor })
+        : actor.items.get(lastAttack.getFlag("dnd5e", "roll.ammunition"));
+    }
+
+    this.rollDamage({ event, ammunition, attackMode });
   }
 }

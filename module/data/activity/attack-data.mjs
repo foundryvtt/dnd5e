@@ -233,6 +233,7 @@ export default class AttackActivityData extends BaseActivityData {
 
   /**
    * @typedef {AttackDamageRollProcessConfiguration} [config={}]
+   * @property {Item5e} ammunition                                      Ammunition used with the attack.
    * @property {"oneHanded"|"twoHanded"|"offhand"|"thrown"} attackMode  Attack mode.
    */
 
@@ -244,24 +245,38 @@ export default class AttackActivityData extends BaseActivityData {
   getDamageConfig(config={}) {
     const rollConfig = super.getDamageConfig(config);
 
-    // TODO: Handle ammunition
-    // If base part is present, add ammunition physical properties to it
-    // If ammo has its own damage, create a new damage part of it
+    // Handle ammunition
+    const ammo = config.ammunition?.system;
+    if ( ammo ) {
+      const properties = Array.from(ammo.properties).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical);
+      if ( this.item.system.properties?.has("mgc") && !properties.includes("mgc") ) properties.push("mgc");
 
-    // const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
-    // if ( ammo ) {
-    //   const properties = Array.from(ammo.system.properties).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical);
-    //   if ( this.system.properties.has("mgc") && !properties.includes("mgc") ) properties.push("mgc");
-    //   const ammoConfigs = ammo.system.damage.parts.map((([formula, type]) => ({ parts: [formula], type, properties })));
-    //   if ( ammo.system.magicalBonus && ammo.system.magicAvailable ) {
-    //     rollConfigs[0].parts.push("@ammo");
-    //     properties.forEach(p => {
-    //       if ( !rollConfigs[0].properties.includes(p) ) rollConfigs[0].properties.push(p);
-    //     });
-    //     rollData.ammo = ammo.system.magicalBonus;
-    //   }
-    //   rollConfigs.push(...ammoConfigs);
-    // }
+      // Add any new physical properties from the ammunition to the damage properties
+      for ( const roll of rollConfig.rolls ) {
+        for ( const property of properties ) {
+          if ( !roll.options.properties.includes(property) ) roll.options.properties.push(property);
+        }
+      }
+
+      // Add the ammunition's damage
+      if ( ammo.damage.base.formula ) {
+        const basePartIndex = rollConfig.rolls.findIndex(i => i.base);
+        const damage = ammo.damage.base.clone();
+        const rollData = this.getRollData();
+
+        // If mode is "replace" and base part is present, replace the base part
+        if ( ammo.damage.replace & (basePartIndex !== -1) ) {
+          damage.base = true;
+          rollConfig.rolls.splice(basePartIndex, 1, super._processDamagePart(damage, config, rollData));
+        }
+
+        // Otherwise stick the ammo damage after base part (or as first part)
+        else {
+          damage.ammo = true;
+          rollConfig.rolls.splice(basePartIndex + 1, 0, super._processDamagePart(damage, rollConfig, rollData));
+        }
+      }
+    }
 
     if ( this.damage.critical.bonus ) {
       rollConfig.critical ??= {};
@@ -275,7 +290,7 @@ export default class AttackActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   _processDamagePart(damage, rollConfig, rollData) {
-    if ( !damage.base ) super._processDamagePart(damage, rollConfig, rollData);
+    if ( !damage.base ) return super._processDamagePart(damage, rollConfig, rollData);
 
     // Swap base damage for versatile if two-handed attack is made on versatile weapon
     if ( this.item.system.isVersatile && (rollConfig.attackMode === "twoHanded") ) {
@@ -299,6 +314,13 @@ export default class AttackActivityData extends BaseActivityData {
       if ( this.item.system.magicalBonus && this.item.system.magicAvailable ) {
         roll.parts.push("@magicalBonus");
         roll.data.magicalBonus = this.item.system.magicalBonus;
+      }
+
+      // Add ammunition bonus
+      const ammo = rollConfig.ammunition?.system;
+      if ( ammo?.magicAvailable && ammo.magicalBonus ) {
+        roll.parts.push("@ammoBonus");
+        roll.data.ammoBonus = ammo.magicalBonus;
       }
     }
 

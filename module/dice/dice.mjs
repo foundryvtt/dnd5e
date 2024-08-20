@@ -1,3 +1,5 @@
+const { NumericTerm, OperatorTerm } = foundry.dice.terms;
+
 /* -------------------------------------------- */
 /* D20 Roll                                     */
 /* -------------------------------------------- */
@@ -27,6 +29,7 @@
  *
  * ## Roll Configuration Dialog
  * @property {boolean} [fastForward]             Should the roll configuration dialog be skipped?
+ * @property {FormSelectOptions[]} [ammunitionOptions]  Options for ammunition to use with an attack.
  * @property {FormSelectOption[]} [attackModes]  Modes that can be used when making an attack.
  * @property {boolean} [chooseModifier=false]    If the configuration dialog is shown, should the ability modifier be
  *                                               configurable within that interface?
@@ -53,7 +56,7 @@ export async function d20Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue,
   elvenAccuracy, halflingLucky, reliableTalent,
-  fastForward, attackModes, chooseModifier=false, template, title, dialogOptions,
+  fastForward, ammunitionOptions, attackModes, chooseModifier=false, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
@@ -86,6 +89,7 @@ export async function d20Roll({
   if ( !isFF ) {
     const configured = await roll.configureDialog({
       title,
+      ammunitionOptions,
       attackModes,
       chooseModifier,
       defaultRollMode,
@@ -94,7 +98,17 @@ export async function d20Roll({
       template
     }, dialogOptions);
     if ( configured === null ) return null;
-  } else roll.options.rollMode ??= defaultRollMode;
+  } else {
+    roll.options.ammunition ??= ammunitionOptions?.[0]?.value;
+    roll.options.rollMode ??= defaultRollMode;
+  }
+
+  // If ammunition has a magical bonus, add it to the roll
+  const ammo = ammunitionOptions?.find(a => a.value === roll.options.ammunition);
+  if ( ammo?.item.system.magicAvailable && ammo.item.system.magicalBonus ) {
+    roll.terms.push(new OperatorTerm({ operator: "+" }), new NumericTerm({ number: ammo.item.system.magicalBonus }));
+    roll.resetFormula();
+  }
 
   // Evaluate the configured roll
   await roll.evaluate({ allowInteractive: (roll.options.rollMode ?? defaultRollMode) !== CONST.DICE_ROLL_MODES.BLIND });
@@ -104,10 +118,13 @@ export async function d20Roll({
   const messageId = event?.target.closest("[data-message-id]")?.dataset.messageId;
   if ( messageId ) foundry.utils.setProperty(messageData, "flags.dnd5e.originatingMessage", messageId);
 
+  // Store the ammunition used in the chat message
+  if ( ammo ) foundry.utils.setProperty(messageData, "flags.dnd5e.roll.ammunition", ammo.value);
+
   // Set the attack mode
-  if ( roll.options.attackMode || attackModes?.length ) {
-    foundry.utils.setProperty(messageData, "flags.dnd5e.roll.attackMode", roll.options.attackMode ?? attackModes[0]);
-  }
+  if ( roll.options.attackMode || attackModes?.length ) foundry.utils.setProperty(
+    messageData, "flags.dnd5e.roll.attackMode", roll.options.attackMode ?? attackModes[0].value
+  );
 
   // Create a Chat Message
   if ( roll && chatMessage ) await roll.toMessage(messageData);
