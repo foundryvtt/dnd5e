@@ -61,9 +61,7 @@ export default class ActivitySheet extends Application5e {
       templates: [
         "systems/dnd5e/templates/activity/parts/activity-time.hbs",
         "systems/dnd5e/templates/activity/parts/activity-targeting.hbs",
-        "systems/dnd5e/templates/activity/parts/activity-consumption.hbs",
-        "systems/dnd5e/templates/shared/uses-recovery.hbs",
-        "systems/dnd5e/templates/shared/uses-values.hbs"
+        "systems/dnd5e/templates/activity/parts/activity-consumption.hbs"
       ]
     },
     effect: {
@@ -262,7 +260,7 @@ export default class ActivitySheet extends Application5e {
     });
 
     // Uses recovery
-    const usesRecoveryPeriods = [
+    context.recoveryPeriods = [
       ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
         .filter(([, config]) => !config.deprecated)
         .map(([value, config]) => ({
@@ -270,7 +268,7 @@ export default class ActivitySheet extends Application5e {
         })),
       { value: "recharge", label: game.i18n.localize("DND5E.USES.Recovery.Recharge.Label") }
     ];
-    const usesRecoveryTypes = [
+    context.recoveryTypes = [
       { value: "recoverAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.RecoverAll") },
       { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
       { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
@@ -280,8 +278,6 @@ export default class ActivitySheet extends Application5e {
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
       prefix: `uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      periods: usesRecoveryPeriods,
-      types: usesRecoveryTypes,
       formulaOptions: data.period === "recharge" ? data.recharge?.options : null
     }));
 
@@ -493,6 +489,7 @@ export default class ActivitySheet extends Application5e {
       element.querySelector(".collapsible")?.classList
         .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
     }
+    this.#toggleNestedTabs();
   }
 
   /* -------------------------------------------- */
@@ -513,6 +510,27 @@ export default class ActivitySheet extends Application5e {
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  changeTab(tab, group, options={}) {
+    super.changeTab(tab, group, options);
+    if ( group !== "sheet" ) return;
+    this.#toggleNestedTabs();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply nested tab classes.
+   */
+  #toggleNestedTabs() {
+    const primary = this.element.querySelector('.window-content > [data-application-part="tabs"]');
+    const active = this.element.querySelector('.tab.active[data-group="sheet"]');
+    if ( !primary || !active ) return;
+    primary.classList.toggle("nested-tabs", active.querySelector(":scope > .sheet-tabs"));
+  }
+
   /* -------------------------------------------- */
 
   /**

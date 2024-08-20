@@ -746,10 +746,10 @@
 }
 
 /* ---------------------------------- */
-/*  Configuration Sheets              */
+/*  App V2                            */
 /* ---------------------------------- */
 
-.dnd5e2.config-sheet {
+.dnd5e2.application {
   background: url("ui/texture-gray1.webp") no-repeat top left,
     url("ui/texture-gray2.webp") no-repeat bottom right,
     var(--dnd5e-color-parchment);
@@ -760,27 +760,80 @@
     position: relative;
     overflow: visible;
     justify-content: flex-end;
-    margin-block-end: calc(var(--font-size-24) + 12px);
+    margin-block-end: calc(var(--font-size-24) + 6px);
     background: none;
 
     h1 {
       position: absolute;
-      inset-block-start: calc(var(--header-height) - 4px);
+      inset-block-start: calc(var(--header-height) - 20px);
       inset-inline: 0;
       color: var(--color-text-dark-primary);
       font-family: var(--dnd5e-font-roboto-slab);
       font-weight: bold;
       font-size: var(--font-size-24);
       text-align: center;
+      pointer-events: none;
     }
-    .header-control {
-      background: var(--dnd5e-background-25);
+
+    .header-control { background: var(--dnd5e-background-25); }
+
+    .window-icon {
+      margin-right: auto;
+      color: var(--color-text-dark-5);
     }
   }
+
   .window-content {
     background: transparent;
     padding-block-end: 14px;
     padding-inline: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Tabs */
+  .sheet-tabs {
+    font-family: var(--dnd5e-font-roboto);
+    font-size: var(--font-size-13);
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--color-text-dark-5);
+    align-items: start;
+    border: none;
+    margin: 0 0 8px;
+
+    [data-tab] {
+      flex: 1;
+      padding: 0;
+
+      label { padding-bottom: 1px; }
+
+      &.active {
+        color: var(--color-text-dark-primary);
+        text-shadow: none;
+        label { border-bottom: 3px solid var(--dnd5e-color-gold); }
+      }
+    }
+
+    &.nested-tabs {
+      position: relative;
+      margin-bottom: 17px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 -14px 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--dnd5e-color-gold), transparent);
+      }
+    }
+  }
+
+  .tab[data-tab] {
+    &.active { display: flex; }
+    flex-direction: column;
+    gap: 8px;
   }
 }
 

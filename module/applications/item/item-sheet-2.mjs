@@ -59,9 +59,12 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     context.hitDieTypes = CONFIG.DND5E.hitDieTypes.map(d => ({ label: d, value: d }));
 
     // Activation
-    context.activationTypes = Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, { label, group }]) => {
-      return { value, label, group };
-    });
+    context.activationTypes = [
+      ...Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, { label, group }]) => {
+        return { value, label, group };
+      }),
+      { value: "", label: "DND5E.NoneActionLabel" }
+    ];
 
     // Targets
     context.targetTypes = [
@@ -116,6 +119,8 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     ];
 
     // Limited Uses
+    context.data = { uses: context.source.uses };
+    context.hasLimitedUses = this.item.system.hasLimitedUses;
     context.recoveryPeriods = [
       ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
         .filter(([, { deprecated }]) => !deprecated)

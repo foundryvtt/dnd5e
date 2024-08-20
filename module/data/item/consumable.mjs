@@ -177,7 +177,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { rule: true },
       ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
     ];
-    context.parts = ["dnd5e.details-consumable", "dnd5e.details-uses"];
+    context.parts = ["dnd5e.details-consumable", "dnd5e.field-uses"];
   }
 
   /* -------------------------------------------- */

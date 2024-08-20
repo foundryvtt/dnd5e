@@ -162,7 +162,7 @@
         "hint": "Use these activation values instead of the item's when using this activity."
       },
       "type": {
-        "label": "Activation Type",
+        "label": "Activation Cost",
         "hint": "Activation type (e.g. action, legendary action, minutes)."
       },
       "value": {
@@ -847,6 +847,7 @@
     "consumption": {
       "label": "Consumption",
       "scaling": {
+        "abbr": "Scaling",
         "label": "Consumption Scaling",
         "allowed": {
           "label": "Allow Scaling",

@@ -72,25 +72,8 @@
     <legend>{{ localize "DND5E.Casting" }}</legend>
 
     {{!-- Activation --}}
-    <div class="form-group split-group">
-        <label>{{ localize "DND5E.SpellCastTime" }}</label>
-        <div class="form-fields">
-
-            {{!-- Amount --}}
-            {{#if system.activation.scalar}}
-                {{ formField fields.activation.fields.value value=source.activation.value label="DND5E.Amount" placeholder="—"
-                             localize=true hint=false classes="label-top" }}
-            {{/if}}
-
-            {{!-- Type --}}
-            {{ formField fields.activation.fields.type value=source.activation.type label="DND5E.Cost" localize=true
-                         classes="label-top" hint=false options=activationTypes blank="DND5E.None" }}
-        </div>
-
-        {{!-- Condition --}}
-        {{ formInput fields.activation.fields.condition value=source.activation.condition input=inputs.createTextInput
-                     placeholder=(localize "DND5E.ItemActivationCondition") classes="full-width" }}
-    </div>
+    {{> "dnd5e.field-activation" activation=system.activation fields=fields.activation.fields data=source.activation
+        activationTypes=activationTypes inputs=inputs label="DND5E.SpellCastTime" }}
 
     {{!-- Range --}}
     <div class="form-group split-group">
@@ -117,27 +100,8 @@
     </div>
 
     {{!-- Duration --}}
-    <div class="form-group split-group">
-        <label>{{ localize "DND5E.Duration" }}</label>
-        <div class="form-fields">
-
-            {{!-- Amount --}}
-            {{#if system.duration.scalar}}
-            {{ formField fields.duration.fields.value value=source.duration.value label="DND5E.Amount" localize=true
-                         hint=false placeholder="—" classes="label-top" }}
-            {{/if}}
-
-            {{!-- Time --}}
-            {{ formField fields.duration.fields.units value=source.duration.units label="DND5E.DurationTime"
-                         blank="DND5E.None" localize=true hint=false options=durationUnits classes="label-top" }}
-        </div>
-
-        {{!-- Conditions --}}
-        {{#if (eq source.duration.units "spec")}}
-        {{ formInput fields.duration.fields.special value=source.duration.special input=inputs.createTextInput
-                     placeholder=(localize "DND5E.DURATION.FIELDS.duration.special.label") classes="full-width" }}
-        {{/if}}
-    </div>
+    {{> "dnd5e.field-duration" duration=system.duration fields=fields.duration.fields data=source.duration
+        durationUnits=durationUnits inputs=inputs }}
 </fieldset>
 
 <fieldset>

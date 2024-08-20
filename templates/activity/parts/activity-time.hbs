@@ -5,11 +5,8 @@
 
     <fieldset {{ disabled disabled.activation }}>
         <legend>{{ localize "DND5E.ACTIVATION.FIELDS.activation.label" }}</legend>
-        {{#if activity.activation.scalar}}
-        {{ formField fields.activation.fields.value value=data.activation.value }}
-        {{/if}}
-        {{ formField fields.activation.fields.type value=data.activation.type options=activationTypes }}
-        {{ formField fields.activation.fields.condition value=data.activation.condition }}
+        {{> "dnd5e.field-activation" activation=activity.activation fields=fields.activation.fields data=data.activation
+            activationTypes=activationTypes inputs=inputs label="DND5E.ACTIVATION.FIELDS.activation.type.label" }}
     </fieldset>
 
     {{#if activity.duration.canOverride}}
@@ -18,8 +15,7 @@
 
     <fieldset {{ disabled disabled.duration }}>
         <legend>{{ localize "DND5E.DURATION.FIELDS.duration.label" }}</legend>
-        {{#if activity.duration.scalar}}{{ formField fields.duration.fields.value value=data.duration.value }}{{/if}}
-        {{ formField fields.duration.fields.units value=data.duration.units options=durationUnits }}
-        {{ formField fields.duration.fields.special value=data.duration.special }}
+        {{> "dnd5e.field-duration" duration=activity.duration fields=fields.duration.fields data=data.duration
+            durationUnits=durationUnits inputs=inputs }}
     </fieldset>
 </section>
