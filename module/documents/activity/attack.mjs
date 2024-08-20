@@ -238,7 +238,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
    */
   static #rollDamage(event, target, message) {
     const lastAttack = message.getAssociatedRolls("attack").pop();
-    const mode = lastAttack?.getFlag("dnd5e", "roll.mode");
-    this.rollDamage({ event, mode });
+    const attackMode = lastAttack?.getFlag("dnd5e", "roll.attackMode");
+    this.rollDamage({ event, attackMode });
   }
 }

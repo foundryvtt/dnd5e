@@ -106,7 +106,7 @@ export async function d20Roll({
 
   // Set the attack mode
   if ( roll.options.attackMode || attackModes?.length ) {
-    foundry.utils.setProperty(messageData, "flags.dnd5e.roll.mode", roll.options.attackMode ?? attackModes[0]);
+    foundry.utils.setProperty(messageData, "flags.dnd5e.roll.attackMode", roll.options.attackMode ?? attackModes[0]);
   }
 
   // Create a Chat Message

@@ -88,7 +88,7 @@ export default class ChatMessage5e extends ChatMessage {
   prepareData() {
     super.prepareData();
     this._shimFlags();
-    dnd5e.registry.rollMessages.track(this);
+    dnd5e.registry.messages.track(this);
   }
 
   /* -------------------------------------------- */
@@ -845,7 +845,7 @@ export default class ChatMessage5e extends ChatMessage {
   /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    dnd5e.registry.rollMessages.untrack(this);
+    dnd5e.registry.messages.untrack(this);
   }
 
   /* -------------------------------------------- */
@@ -898,7 +898,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {ChatMessage5e[]}
    */
   getAssociatedRolls(type) {
-    return dnd5e.registry.rollMessages.messages(this.id, type);
+    return dnd5e.registry.messages.messages(this.id, type);
   }
 
   /* -------------------------------------------- */

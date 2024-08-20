@@ -65,10 +65,10 @@ class EnchantmentRegisty {
 /*  Message Rolls                               */
 /* -------------------------------------------- */
 
-class RollMessageRegistry {
+class MessageRegistry {
   /**
    * Registration of roll chat messages that originated at a specific message. The map is keyed by the ID of
-   * the originating message and contains sets or IDs for each roll type.
+   * the originating message and contains sets of IDs for each roll type.
    * @type {Map<string, Map<string, Set<string>>}
    */
   static #messages = new Map();
@@ -82,7 +82,7 @@ class RollMessageRegistry {
    * @returns {ChatMessage5e[]}
    */
   static messages(origin, type) {
-    const originMap = RollMessageRegistry.#messages.get(origin);
+    const originMap = MessageRegistry.#messages.get(origin);
     if ( !originMap ) return [];
     let ids;
     if ( type ) ids = Array.from(originMap.get(type)) ?? [];
@@ -103,8 +103,8 @@ class RollMessageRegistry {
     const origin = message.getFlag("dnd5e", "originatingMessage");
     const type = message.getFlag("dnd5e", "roll.type");
     if ( !origin || !type ) return;
-    if ( !RollMessageRegistry.#messages.has(origin) ) RollMessageRegistry.#messages.set(origin, new Map());
-    const originMap = RollMessageRegistry.#messages.get(origin);
+    if ( !MessageRegistry.#messages.has(origin) ) MessageRegistry.#messages.set(origin, new Map());
+    const originMap = MessageRegistry.#messages.get(origin);
     if ( !originMap.has(type) ) originMap.set(type, new Set());
     originMap.get(type).add(message.id);
   }
@@ -118,7 +118,7 @@ class RollMessageRegistry {
   static untrack(message) {
     const origin = message.getFlag("dnd5e", "originatingMessage");
     const type = message.getFlag("dnd5e", "roll.type");
-    RollMessageRegistry.#messages.get(origin)?.get(type)?.delete(message.id);
+    MessageRegistry.#messages.get(origin)?.get(type)?.delete(message.id);
   }
 }
 
@@ -175,6 +175,6 @@ class SummonRegistry {
 
 export default {
   enchantments: EnchantmentRegisty,
-  rollMessages: RollMessageRegistry,
+  messages: MessageRegistry,
   summons: SummonRegistry
 };
