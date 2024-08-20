@@ -104,7 +104,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
    * the card list.
    */
   async buildItemList() {
-    const enchantedItems = await dnd5e.registry.enchantment.applied(this.enchantmentActivity.uuid).map(enchantment => {
+    const enchantedItems = await dnd5e.registry.enchantments.applied(this.enchantmentActivity.uuid).map(enchantment => {
       const item = enchantment.parent;
       const div = document.createElement("div");
       div.classList.add("preview");

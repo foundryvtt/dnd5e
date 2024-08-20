@@ -256,6 +256,41 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get attackModes() {
+    const modes = [];
+
+    // Thrown ranged weapons will just display the "Thrown" mode
+    if ( !(this.properties.has("thr") && (this.attackType === "ranged")) ) {
+      // Weapons without the "Two-Handed" property or with the "Versatile" property will have One-Handed attack
+      if ( this.isVersatile || !this.properties.has("two") ) modes.push({
+        value: "oneHanded", label: game.i18n.localize("DND5E.ATTACK.Mode.OneHanded")
+      });
+
+      // Weapons with the "Two-Handed" property or with the "Versatile" property will have Two-Handed attack
+      if ( this.isVersatile || this.properties.has("two") ) modes.push({
+        value: "twoHanded", label: game.i18n.localize("DND5E.ATTACK.Mode.TwoHanded")
+      });
+    }
+
+    // Weapons with the "Light" property will have Offhand attack
+    // If player has the "Enhanced Duel Wielding" flag, then allow any melee weapon without the "Two-Handed" property
+    if ( this.properties.has("lgt") || (this.parent.actor?.getFlag("dnd5e", "enhancedDualWielding")
+      && ((this.attackType === "melee") && !this.properties.has("two"))) ) modes.push({
+      value: "offhand", label: game.i18n.localize("DND5E.ATTACK.Mode.Offhand")
+    });
+
+    // Weapons with the "Thrown" property will have Thrown attack
+    if ( this.properties.has("thr") ) {
+      if ( modes.length ) modes.push({ rule: true });
+      modes.push({ value: "thrown", label: game.i18n.localize("DND5E.ATTACK.Mode.Thrown") });
+    }
+
+    return modes;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Attack type offered by this weapon.
    * @type {"melee"|"ranged"|null}

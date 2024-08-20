@@ -231,7 +231,7 @@ export default class AttackActivityData extends BaseActivityData {
 
   /**
    * @typedef {AttackDamageRollProcessConfiguration} [config={}]
-   * @property {"oneHanded"|"twoHanded"|"offHand"|"thrown"} mode  Attack mode.
+   * @property {"oneHanded"|"twoHanded"|"offhand"|"thrown"} attackMode  Attack mode.
    */
 
   /**
@@ -276,7 +276,7 @@ export default class AttackActivityData extends BaseActivityData {
     if ( !damage.base ) super._processDamagePart(damage, rollConfig, rollData);
 
     // Swap base damage for versatile if two-handed attack is made on versatile weapon
-    if ( this.item.system.isVersatile && (rollConfig.mode === "twoHanded") ) {
+    if ( this.item.system.isVersatile && (rollConfig.attackMode === "twoHanded") ) {
       const versatile = this.item.system.damage.versatile.clone();
       versatile.base = true;
       versatile.denomination ||= damage.steppedDenomination();
@@ -290,7 +290,7 @@ export default class AttackActivityData extends BaseActivityData {
 
     if ( this.item.type === "weapon" ) {
       // Ensure `@mod` is present in damage unless it is positive and an off-hand attack
-      const includeMod = (rollConfig.mode !== "offHand") || (roll.data.mod < 0);
+      const includeMod = (rollConfig.attackMode !== "offhand") || (roll.data.mod < 0);
       if ( includeMod && !roll.parts.some(p => p.includes("@mod")) ) roll.parts.push("@mod");
 
       // Add magical bonus
