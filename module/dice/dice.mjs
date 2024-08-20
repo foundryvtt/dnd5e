@@ -150,6 +150,8 @@ export async function d20Roll({
  * @typedef {object} SingleDamageRollConfiguration
  * @property {string[]} parts         The dice roll component parts.
  * @property {string} [type]          Damage type represented by the roll.
+ * @property {string[]} [types]       List of damage types selectable in the configuration app. If no
+ *                                    type is provided, then the first of these types will be used.
  * @property {string[]} [properties]  Physical properties of the damage source (e.g. magical, silvered).
  */
 
@@ -181,10 +183,10 @@ export async function damageRoll({
   multiplyNumeric ??= game.settings.get("dnd5e", "criticalDamageModifiers");
   powerfulCritical ??= game.settings.get("dnd5e", "criticalDamageMaxDice");
   critical = isFF ? isCritical : false;
-  for ( const [index, { parts, type, properties }] of rollConfigs.entries() ) {
+  for ( const [index, { parts, type, types, properties }] of rollConfigs.entries() ) {
     const formula = parts.join(" + ");
     const rollOptions = {
-      flavor, rollMode, critical, criticalMultiplier, multiplyNumeric, powerfulCritical, type, properties
+      flavor, rollMode, critical, criticalMultiplier, multiplyNumeric, powerfulCritical, type, types, properties
     };
     if ( index === 0 ) {
       rollOptions.criticalBonusDice = criticalBonusDice;
@@ -208,6 +210,7 @@ export async function damageRoll({
   // Evaluate the configured roll
   for ( const roll of rolls ) {
     const rollMode = rolls.at(-1).options.rollMode ?? defaultRollMode;
+    if ( !roll.options.type ) roll.options.type = roll.options.types?.[0];
     await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
   }
 

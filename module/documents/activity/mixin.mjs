@@ -814,7 +814,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       actor: this.actor,
       rollConfigs: rollConfig.rolls.map(r => ({
         parts: r.parts,
-        type: r.options?.types?.first(),
+        types: r.options?.types,
         properties: r.options?.properties
       })),
       data: rollConfig.rolls[0]?.data ?? {},

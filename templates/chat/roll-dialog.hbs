@@ -4,6 +4,14 @@
         <label>{{ localize "DND5E.Formula" }} {{#if type}}({{type}}){{/if}}</label>
         <input type="text" name="formula" value="{{formula}}" disabled>
     </div>
+    {{#if types}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.DamageType" }}</label>
+        <select name="roll.{{ @index }}.type">
+            {{ selectOptions types }}
+        </select>
+    </div>
+    {{/if}}
     {{/each}}
     {{#if chooseModifier}}
     <div class="form-group">
