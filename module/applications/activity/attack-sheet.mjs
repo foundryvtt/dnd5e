@@ -64,7 +64,7 @@ export default class AttackSheet extends ActivitySheet {
       }))
     ];
 
-    context.hasBaseDamage = safePropertyExists(this.item.system, "damage.base");
+    context.hasBaseDamage = this.item.system.offersBaseDamage;
 
     return context;
   }

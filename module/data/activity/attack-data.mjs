@@ -123,9 +123,11 @@ export default class AttackActivityData extends BaseActivityData {
 
   /** @override */
   static transformTypeData(source, activityData) {
-    // For weapons, separate the first part from the rest to be used as the weapon's base damage and keep the rest
+    // For weapons and ammunition, separate the first part from the rest to be used as the base damage and keep the rest
     let damageParts = source.system.damage?.parts ?? [];
-    if ( (source.type === "weapon") && damageParts.length ) {
+    const hasBase = (source.type === "weapon")
+      || ((source.type === "consumable") && (source.system?.type?.value === "ammo"));
+    if ( hasBase && damageParts.length ) {
       const [base, ...rest] = damageParts;
       source.system.damage.parts = [base];
       damageParts = rest;
@@ -169,7 +171,7 @@ export default class AttackActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   prepareFinalData(rollData) {
-    if ( this.damage.includeBase && safePropertyExists(this.item.system, "damage.base")
+    if ( this.damage.includeBase && this.item.system.offersBaseDamage
       && this.item.system.damage.base.formula ) {
       const basePart = this.item.system.damage.base.clone();
       basePart.base = true;

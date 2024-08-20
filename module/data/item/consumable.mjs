@@ -1,5 +1,7 @@
 import { filteredKeys } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
+import BaseActivityData from "../activity/base-activity.mjs";
+import DamageField from "../shared/damage-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
@@ -9,7 +11,7 @@ import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
-const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Consumable items.
@@ -20,6 +22,9 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  *
+ * @property {object} damage
+ * @property {DamageData} damage.base    Damage caused by this ammunition.
+ * @property {string} damage.replace     Should ammunition damage replace the base weapon's damage?
  * @property {number} magicalBonus       Magical bonus added to attack & damage rolls by ammunition.
  * @property {Set<string>} properties    Ammunition properties.
  * @property {object} uses
@@ -29,15 +34,28 @@ export default class ConsumableData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
   PhysicalItemTemplate, EquippableItemTemplate
 ) {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.CONSUMABLE"];
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "potion", baseItem: false}, {label: "DND5E.ItemConsumableType"}),
-      magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
-      properties: new SetField(new StringField(), { label: "DND5E.ItemAmmoProperties" }),
+      type: new ItemTypeField({ value: "potion", baseItem: false }, { label: "DND5E.ItemConsumableType" }),
+      damage: new SchemaField({
+        base: new DamageField(),
+        replace: new BooleanField()
+      }),
+      magicalBonus: new NumberField({ min: 0, integer: true }),
+      properties: new SetField(new StringField()),
       uses: new UsesField({
-        autoDestroy: new BooleanField({required: true, label: "DND5E.ItemDestroyEmpty",
-          hint: "DND5E.ItemDestroyEmptyTooltip"})
+        autoDestroy: new BooleanField({ required: true })
       })
     });
   }
@@ -78,7 +96,22 @@ export default class ConsumableData extends ItemDataModel.mixin(
   static _migrateData(source) {
     super._migrateData(source);
     ActivitiesTemplate.migrateActivities(source);
+    ConsumableData.#migrateDamage(source);
     ConsumableData.#migratePropertiesData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate weapon damage from old parts.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateDamage(source) {
+    if ( "base" in (source.damage ?? {}) ) return;
+    const systemData = { system: { scaling: { mode: "none" } } };
+    if ( source.damage?.parts?.[0] ) {
+      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts.shift());
+    }
   }
 
   /* -------------------------------------------- */
@@ -136,6 +169,14 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+    context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
+      return { value, label, selected: this.damage.base.types.has(value) };
+    });
+    context.denominationOptions = [
+      { value: "", label: "" },
+      { rule: true },
+      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
+    ];
     context.parts = ["dnd5e.details-consumable", "dnd5e.details-uses"];
   }
 
@@ -168,6 +209,16 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @override */
   static get itemCategories() {
     return CONFIG.DND5E.consumableTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this item have base damage defined in `damage.base` to offer to an activity?
+   * @type {boolean}
+   */
+  get offersBaseDamage() {
+    return this.type.value === "ammo";
   }
 
   /* -------------------------------------------- */
