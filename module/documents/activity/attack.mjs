@@ -60,8 +60,13 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
   /* -------------------------------------------- */
 
   /**
+   * @typedef {D20RollProcessConfiguration} AttackRollProcessConfiguration
+   * @param {string} [attackMode]  Mode to use for making the attack and rolling damage.
+   */
+
+  /**
    * Perform an attack roll.
-   * @param {D20RollProcessConfiguration} config     Configuration information for the roll.
+   * @param {AttackRollProcessConfiguration} config  Configuration information for the roll.
    * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
    * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
    * @returns {Promise<D20Roll[]|void>}
@@ -106,7 +111,8 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       options: {
         width: 400,
         top: config.event ? config.event.clientY - 80 : null,
-        left: window.innerWidth - 710
+        left: window.innerWidth - 710,
+        attackModes: this.item.system.attackModes
       }
     }, dialog);
 
@@ -130,7 +136,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
      * A hook event that fires before an attack is rolled.
      * @function dnd5e.preRollAttackV2
      * @memberof hookEvents
-     * @param {D20RollProcessConfiguration} config     Configuration data for the pending roll.
+     * @param {AttackRollProcessConfiguration} config  Configuration data for the pending roll.
      * @param {BasicRollDialogConfiguration} dialog    Presentation data for the roll configuration dialog.
      * @param {BasicRollMessageConfiguration} message  Configuration data for the roll's message.
      * @returns {boolean}                              Explicitly return `false` to prevent the roll.
@@ -151,6 +157,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       halflingLucky: rollConfig.halflingLucky,
       reliableTalent: rollConfig.rolls[0].options.minimum === 10,
       fastForward: !dialogConfig.configure,
+      attackModes: dialogConfig.options.attackModes,
       title: dialogConfig.options.title,
       dialogOptions: dialogConfig.options,
       chatMessage: messageConfig.create,
@@ -230,6 +237,8 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static #rollDamage(event, target, message) {
-    this.rollDamage({ event });
+    const lastAttack = message.getAssociatedRolls("attack").pop();
+    const mode = lastAttack?.getFlag("dnd5e", "roll.mode");
+    this.rollDamage({ event, mode });
   }
 }

@@ -88,6 +88,7 @@ export default class ChatMessage5e extends ChatMessage {
   prepareData() {
     super.prepareData();
     this._shimFlags();
+    dnd5e.registry.rollMessages.track(this);
   }
 
   /* -------------------------------------------- */
@@ -838,6 +839,16 @@ export default class ChatMessage5e extends ChatMessage {
   }
 
   /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    dnd5e.registry.rollMessages.untrack(this);
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
@@ -877,6 +888,17 @@ export default class ChatMessage5e extends ChatMessage {
     return storedData
       ? new Item.implementation(storedData, { parent: actor })
       : actor.items.get(this.getFlag("dnd5e", "item.id"));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get a list of all chat messages containing rolls that originated from this message.
+   * @param {string} [type]  Type of rolls to get. If empty, all roll types will be fetched.
+   * @returns {ChatMessage5e[]}
+   */
+  getAssociatedRolls(type) {
+    return dnd5e.registry.rollMessages.messages(this.id, type);
   }
 
   /* -------------------------------------------- */

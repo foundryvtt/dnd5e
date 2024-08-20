@@ -340,7 +340,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   prepareDerivedData() {
     super.prepareDerivedData();
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
-    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantment.track(this.origin, this.uuid);
+    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantments.track(this.origin, this.uuid);
   }
 
   /* -------------------------------------------- */
@@ -530,7 +530,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
-    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantment.untrack(this.origin, this.uuid);
+    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantments.untrack(this.origin, this.uuid);
     document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.uuid}"]`)
       .forEach(element => element.buildItemList());
   }

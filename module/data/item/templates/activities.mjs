@@ -51,7 +51,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @type {ActiveEffect5e[]}
    */
   get appliedEnchantments() {
-    return dnd5e.registry.enchantment.applied(this.parent.uuid);
+    return dnd5e.registry.enchantments.applied(this.parent.uuid);
   }
 
   /* -------------------------------------------- */

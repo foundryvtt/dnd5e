@@ -240,6 +240,7 @@ export default class D20Roll extends Roll {
    * @param {string} [data.title]             The title of the shown dialog window
    * @param {number} [data.defaultRollMode]   The roll mode that the roll mode select element should default to
    * @param {number} [data.defaultAction]     The button marked as default
+   * @param {FormSelectOption[]} [data.attackModes]  Selectable attack modes.
    * @param {boolean} [data.chooseModifier]   Choose which ability modifier should be applied to the roll?
    * @param {string} [data.defaultAbility]    For tool rolls, the default ability modifier applied to the roll
    * @param {string} [data.template]          A custom path to an HTML template to use instead of the default
@@ -247,14 +248,17 @@ export default class D20Roll extends Roll {
    * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the
    *                                          dialog was closed
    */
-  async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false,
-    defaultAbility, template}={}, options={}) {
+  async configureDialog({
+    title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, attackModes,
+    chooseModifier=false, defaultAbility, template
+  }={}, options={}) {
 
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formulas: [{formula: `${this.formula} + @bonus`}],
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes,
+      attackModes,
       chooseModifier,
       defaultAbility,
       abilities: CONFIG.DND5E.abilities
@@ -301,18 +305,22 @@ export default class D20Roll extends Roll {
    * @private
    */
   _onDialogSubmit(html, advantageMode) {
-    const form = html[0].querySelector("form");
+    const formData = new FormDataExtended(html[0].querySelector("form"));
+    const submitData = foundry.utils.expandObject(formData.object);
 
     // Append a situational bonus term
-    if ( form.bonus.value ) {
-      const bonus = new Roll(form.bonus.value, this.data);
+    if ( submitData.bonus ) {
+      const bonus = new Roll(submitData.bonus, this.data);
       if ( !(bonus.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms = this.terms.concat(bonus.terms);
     }
 
+    // Set the attack mode
+    if ( submitData.attackMode ) this.options.attackMode = submitData.attackMode;
+
     // Customize the modifier
-    if ( form.ability?.value ) {
-      const abl = this.data.abilities[form.ability.value];
+    if ( submitData.ability ) {
+      const abl = this.data.abilities[submitData.ability];
       this.terms = this.terms.flatMap(t => {
         if ( t.term === "@mod" ) return new NumericTerm({number: abl.mod});
         if ( t.term === "@abilityCheckBonus" ) {
@@ -322,12 +330,12 @@ export default class D20Roll extends Roll {
         }
         return t;
       });
-      this.options.flavor += ` (${CONFIG.DND5E.abilities[form.ability.value]?.label ?? ""})`;
+      this.options.flavor += ` (${CONFIG.DND5E.abilities[submitData.ability]?.label ?? ""})`;
     }
 
     // Apply advantage or disadvantage
     this.options.advantageMode = advantageMode;
-    this.options.rollMode = form.rollMode.value;
+    this.options.rollMode = submitData.rollMode;
     this.configureModifiers();
     return this;
   }

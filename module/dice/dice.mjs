@@ -26,12 +26,13 @@
  * @property {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
  *
  * ## Roll Configuration Dialog
- * @property {boolean} [fastForward]           Should the roll configuration dialog be skipped?
- * @property {boolean} [chooseModifier=false]  If the configuration dialog is shown, should the ability modifier be
- *                                             configurable within that interface?
- * @property {string} [template]               The HTML template used to display the roll configuration dialog.
- * @property {string} [title]                  Title of the roll configuration dialog.
- * @property {object} [dialogOptions]          Additional options passed to the roll configuration dialog.
+ * @property {boolean} [fastForward]             Should the roll configuration dialog be skipped?
+ * @property {FormSelectOption[]} [attackModes]  Modes that can be used when making an attack.
+ * @property {boolean} [chooseModifier=false]    If the configuration dialog is shown, should the ability modifier be
+ *                                               configurable within that interface?
+ * @property {string} [template]                 The HTML template used to display the roll configuration dialog.
+ * @property {string} [title]                    Title of the roll configuration dialog.
+ * @property {object} [dialogOptions]            Additional options passed to the roll configuration dialog.
  *
  * ## Chat Message
  * @property {boolean} [chatMessage=true]  Should a chat message be created for this roll?
@@ -52,7 +53,7 @@ export async function d20Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue,
   elvenAccuracy, halflingLucky, reliableTalent,
-  fastForward, chooseModifier=false, template, title, dialogOptions,
+  fastForward, attackModes, chooseModifier=false, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
@@ -85,6 +86,7 @@ export async function d20Roll({
   if ( !isFF ) {
     const configured = await roll.configureDialog({
       title,
+      attackModes,
       chooseModifier,
       defaultRollMode,
       defaultAction: advantageMode,
@@ -101,6 +103,11 @@ export async function d20Roll({
   messageData = foundry.utils.expandObject(messageData);
   const messageId = event?.target.closest("[data-message-id]")?.dataset.messageId;
   if ( messageId ) foundry.utils.setProperty(messageData, "flags.dnd5e.originatingMessage", messageId);
+
+  // Set the attack mode
+  if ( roll.options.attackMode || attackModes?.length ) {
+    foundry.utils.setProperty(messageData, "flags.dnd5e.roll.mode", roll.options.attackMode ?? attackModes[0]);
+  }
 
   // Create a Chat Message
   if ( roll && chatMessage ) await roll.toMessage(messageData);

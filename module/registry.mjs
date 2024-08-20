@@ -62,10 +62,71 @@ class EnchantmentRegisty {
 }
 
 /* -------------------------------------------- */
+/*  Message Rolls                               */
+/* -------------------------------------------- */
+
+class RollMessageRegistry {
+  /**
+   * Registration of roll chat messages that originated at a specific message. The map is keyed by the ID of
+   * the originating message and contains sets or IDs for each roll type.
+   * @type {Map<string, Map<string, Set<string>>}
+   */
+  static #messages = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch roll messages for an origin message, in chronological order.
+   * @param {string} origin  ID of the origin message.
+   * @param {string} [type]  Type of roll messages to fetch.
+   * @returns {ChatMessage5e[]}
+   */
+  static messages(origin, type) {
+    const originMap = RollMessageRegistry.#messages.get(origin);
+    if ( !originMap ) return [];
+    let ids;
+    if ( type ) ids = Array.from(originMap.get(type)) ?? [];
+    else ids = Array.from(originMap.values()).map(v => Array.from(v)).flat();
+    return ids
+      .map(id => game.messages.get(id))
+      .filter(m => m)
+      .sort((lhs, rhs) => lhs.timestamp - rhs.timestamp);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a new roll message to the registry.
+   * @param {ChatMessage5e} message  Message to add to the registry.
+   */
+  static track(message) {
+    const origin = message.getFlag("dnd5e", "originatingMessage");
+    const type = message.getFlag("dnd5e", "roll.type");
+    if ( !origin || !type ) return;
+    if ( !RollMessageRegistry.#messages.has(origin) ) RollMessageRegistry.#messages.set(origin, new Map());
+    const originMap = RollMessageRegistry.#messages.get(origin);
+    if ( !originMap.has(type) ) originMap.set(type, new Set());
+    originMap.get(type).add(message.id);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove a roll message to the registry.
+   * @param {ChatMessage5e} message  Message to remove from the registry.
+   */
+  static untrack(message) {
+    const origin = message.getFlag("dnd5e", "originatingMessage");
+    const type = message.getFlag("dnd5e", "roll.type");
+    RollMessageRegistry.#messages.get(origin)?.get(type)?.delete(message.id);
+  }
+}
+
+/* -------------------------------------------- */
 /*  Summons                                     */
 /* -------------------------------------------- */
 
-class SummonsRegistry {
+class SummonRegistry {
   /**
    * Registration of summoned creatures mapped to a specific summoner. The map is keyed by the UUID of
    * summoner while the set contains UUID of actors that have been summoned.
@@ -113,6 +174,7 @@ class SummonsRegistry {
 
 
 export default {
-  enchantment: EnchantmentRegisty,
-  summons: SummonsRegistry
+  enchantments: EnchantmentRegisty,
+  rollMessages: RollMessageRegistry,
+  summons: SummonRegistry
 };

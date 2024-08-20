@@ -66,7 +66,7 @@ export default class EnchantActivityData extends BaseActivityData {
    * @type {ActiveEffect5e[]}
    */
   get appliedEnchantments() {
-    return dnd5e.registry.enchantment.applied(this.uuid);
+    return dnd5e.registry.enchantments.applied(this.uuid);
   }
 
   /* -------------------------------------------- */

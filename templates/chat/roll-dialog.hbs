@@ -5,6 +5,14 @@
         <input type="text" name="formula" value="{{formula}}" disabled>
     </div>
     {{/each}}
+    {{#if attackModes}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.ATTACK.Mode.Label" }}</label>
+        <select name="attackMode">
+            {{ selectOptions attackModes }}
+        </select>
+    </div>
+    {{/if}}
     {{#if chooseModifier}}
     <div class="form-group">
         <label>{{ localize "DND5E.AbilityModifier" }}</label>

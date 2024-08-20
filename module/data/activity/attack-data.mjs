@@ -290,7 +290,7 @@ export default class AttackActivityData extends BaseActivityData {
 
     if ( this.item.type === "weapon" ) {
       // Ensure `@mod` is present in damage unless it is positive and an off-hand attack
-      const includeMod = (rollConfig.mode !== "offHand") || (roll.data.mod < 0);
+      const includeMod = (rollConfig.mode !== "offhand") || (roll.data.mod < 0);
       if ( includeMod && !roll.parts.some(p => p.includes("@mod")) ) roll.parts.push("@mod");
 
       // Add magical bonus

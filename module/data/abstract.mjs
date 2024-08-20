@@ -426,6 +426,16 @@ export class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Modes that can be used when making an attack with this item.
+   * @type {FormSelectOption[]}
+   */
+  get attackModes() {
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Set of abilities that can automatically be associated with this item.
    * @type {Set<string>|null}
    */
