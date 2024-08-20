@@ -301,7 +301,7 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Create a Dialog prompt used to configure evaluation of one or more daamge rolls.
+   * Create a Dialog prompt used to configure evaluation of one or more damage rolls.
    * @param {DamageRoll[]} rolls                Damage rolls to configure.
    * @param {object} [data={}]                  Dialog configuration data
    * @param {string} [data.title]               The title of the shown dialog window
@@ -322,8 +322,10 @@ export default class DamageRoll extends Roll {
     const content = await renderTemplate(template ?? this.EVALUATION_TEMPLATE, {
       formulas: rolls.map((roll, index) => ({
         formula: `${roll.formula}${index === 0 ? " + @bonus" : ""}`,
-        type: roll.options.types?.length ? null : damageTypeLabel(roll.options.type) ?? null,
-        types: roll.options.types?.map(value => ({ value, label: damageTypeLabel(value) }))
+        type: roll.options.types?.length > 1 ? null
+          : damageTypeLabel(roll.options.types?.[0] ?? roll.options.type) ?? null,
+        types: roll.options.types?.length > 1
+          ? roll.options.types?.map(value => ({ value, label: damageTypeLabel(value) })) : null
       })),
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes
