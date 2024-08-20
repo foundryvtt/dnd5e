@@ -3193,6 +3193,12 @@ DND5E.characterFlags = {
     section: "DND5E.Feats",
     type: Boolean
   },
+  enhancedDualWielding: {
+    name: "DND5E.FLAGS.EnhancedDuelWielding.Name",
+    hint: "DND5E.FLAGS.EnhancedDuelWielding.Hint",
+    section: "DND5E.Feats",
+    type: Boolean
+  },
   elvenAccuracy: {
     name: "DND5E.FlagsElvenAccuracy",
     hint: "DND5E.FlagsElvenAccuracyHint",

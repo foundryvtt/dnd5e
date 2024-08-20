@@ -264,7 +264,9 @@ export default class WeaponData extends ItemDataModel.mixin(
     }
 
     // Weapons with the "Light" property will have Offhand attack
-    if ( this.properties.has("lgt") ) modes.push({
+    // If player has the "Enhanced Duel Wielding" flag, then allow any melee weapon without the "Two-Handed" property
+    if ( this.properties.has("lgt") || (this.parent.actor?.getFlag("dnd5e", "enhancedDualWielding")
+      && ((this.attackType === "melee") && !this.properties.has("two"))) ) modes.push({
       value: "offhand", label: game.i18n.localize("DND5E.ATTACK.Mode.Offhand")
     });
 
