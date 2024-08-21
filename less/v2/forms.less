@@ -30,6 +30,7 @@
 
   fieldset.unfieldset {
     display: contents;
+    + fieldset.unfieldset > .form-group.full-width { margin-top: 2px; }
   }
 
   /* Inputs & Buttons */
@@ -177,6 +178,14 @@
       font-size: var(--font-size-11);
       color: var(--color-text-dark-5);
       padding: 0 6px;
+
+      > label.checkbox {
+        --checkbox-size: 14px;
+        font-weight: bold;
+        height: 13px;
+
+        dnd5e-checkbox { margin-bottom: 1px; }
+      }
     }
 
     > .empty {
@@ -201,6 +210,10 @@
         outline: var(--dnd5e-border-gold);
         z-index: -1;
       }
+    }
+
+    &:disabled {
+      .form-group label, .hint { color: var(--color-text-light-6); }
     }
   }
 
@@ -236,6 +249,20 @@
         min-width: max-content;
         align-items: center;
       }
+
+      &.multi-select {
+        position: relative;
+
+        multi-select .tags.input-element-tags {
+          min-height: 10px;
+          padding-left: 40%;
+        }
+
+        > label {
+          position: absolute;
+          inset: auto auto calc(var(--form-field-height) + 2px) 0;
+        }
+      }
     }
 
     label.label-icon {
@@ -262,8 +289,6 @@
 
     /* Split Groups */
     &.split-group > .form-fields {
-      position: relative;
-      padding-right: 20px;
 
       &.field-groups {
         flex-direction: column;
@@ -282,10 +307,22 @@
         > * { flex: unset; }
       }
 
-      > .control-button {
+      > .control-button, .field-group > .control-button {
         position: absolute;
         inset: auto 0 0 auto;
       }
+
+      .singleton {
+        align-self: center;
+        margin: 0 6px;
+      }
+
+      multi-select .tags.input-element-tags .tag { background: var(--dnd5e-background-parchment); }
+    }
+
+    &.split-group.full-width > .form-fields {
+      position: relative;
+      padding-right: 20px;
     }
 
     /* Full-Width Groups */
@@ -346,7 +383,7 @@
     cursor: pointer;
   }
 
-  multi-select .tags .tag {
+  multi-select .tags.input-element-tags .tag {
     cursor: pointer;
     font-size: var(--font-size-10);
     border: var(--dnd5e-border-gold);
@@ -354,6 +391,8 @@
     border-radius: 3px;
     &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
   }
+
+  multi-select.hidden-tags .tags.input-element-tags { display: none; }
 
   file-picker > button {
     --button-focus-outline-color: none;
@@ -417,7 +456,7 @@
     }
   }
 
-  .form-fields > .control-button {
+  .form-fields > .control-button, .form-fields .field-group > .control-button {
     align-self: end;
     padding: 0 4px;
   }

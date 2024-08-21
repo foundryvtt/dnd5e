@@ -20,4 +20,18 @@ export default class Application5e extends HandlebarsApplicationMixin(Applicatio
     context.inputs = { ...foundry.applications.fields, ...dnd5e.applications.fields };
     return context;
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender(context, options) {
+    super._onRender(context, options);
+    this.element.querySelectorAll("multi-select").forEach(select => {
+      if ( select.disabled ) return;
+      select.querySelectorAll(".tag").forEach(tag => {
+        tag.classList.add("remove");
+        tag.querySelector(":scope > span")?.classList.add("remove");
+      });
+    });
+  }
 }

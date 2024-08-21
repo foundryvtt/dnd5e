@@ -18,6 +18,10 @@
     background: var(--dnd5e-background-parchment);
   }
 
+  :is(input, select):disabled {
+    background: var(--dnd5e-color-dark-gray);
+  }
+
   dnd5e-checkbox {
     &[disabled]:not([checked]) {
       --checkbox-border-color: var(--dnd5e-color-blue-gray-3);

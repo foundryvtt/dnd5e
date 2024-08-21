@@ -458,6 +458,8 @@ export async function preloadHandlebarsTemplates() {
     // Field Partials
     "systems/dnd5e/templates/shared/fields/field-activation.hbs",
     "systems/dnd5e/templates/shared/fields/field-duration.hbs",
+    "systems/dnd5e/templates/shared/fields/field-range.hbs",
+    "systems/dnd5e/templates/shared/fields/field-targets.hbs",
     "systems/dnd5e/templates/shared/fields/field-uses.hbs",
 
     // Journal Partials

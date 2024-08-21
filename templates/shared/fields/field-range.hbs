@@ -1,0 +1,19 @@
+{{!-- Range --}}
+<div class="form-group split-group">
+    <label>{{ localize "DND5E.Range" }}</label>
+    <div class="form-fields">
+
+        {{!-- Value --}}
+        {{#if range.scalar}}
+        {{ formField fields.value value=data.value label="DND5E.Value" localize=true hint=false classes="label-top" }}
+        {{/if}}
+
+        {{!-- Units --}}
+        {{ formField fields.units value=data.units label="DND5E.MovementUnits" localize=true hint=false localize=true
+                     options=rangeTypes classes="label-top" }}
+    </div>
+
+    {{!-- Condition --}}
+    {{ formInput fields.special value=data.special input=inputs.createTextInput localize=true classes="full-width"
+                 placeholder=(localize "DND5E.RANGE.FIELDS.range.special.label") }}
+</div>

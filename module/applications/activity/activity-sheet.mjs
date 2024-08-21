@@ -361,7 +361,7 @@ export default class ActivitySheet extends Application5e {
     if ( context.activity.damage?.parts ) {
       const denominationOptions = [
         { value: "", label: "" },
-        ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: value }))
+        ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
       ];
       const scalingOptions = [
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
@@ -732,6 +732,10 @@ export default class ActivitySheet extends Application5e {
         submitData.effects.push({ _id });
       }
     }
+    // Workaround for https://github.com/foundryvtt/foundryvtt/issues/11610
+    this.element.querySelectorAll("fieldset legend :is(input, select, dnd5e-checkbox)").forEach(input => {
+      foundry.utils.setProperty(submitData, input.name, input.value);
+    });
     return submitData;
   }
 

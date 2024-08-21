@@ -109,6 +109,7 @@ export default function ItemSheetV2Mixin(Base) {
         item: this.item,
         owner: this.item.isOwner,
         config: CONFIG.DND5E,
+        CONFIG: CONFIG.DND5E,
 
         // Physical items
         baseItems: await this._getItemBaseTypes(),
