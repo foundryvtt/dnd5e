@@ -37,7 +37,6 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     const context = await super.getData(options);
     const { activities } = this.item.system;
     const target = this.item.type === "spell" ? this.item.system.target : null;
-    const damage = this.item.type === "weapon" ? this.item.system.damage : null;
 
     // Effects
     for ( const category of Object.values(context.effects) ) {
@@ -135,18 +134,6 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       source: context.source.uses.recovery[index] ?? data,
       formulaOptions: data.period === "recharge" ? data.recharge?.options : null
     }));
-
-    // Damage
-    context.denominationOptions = [
-      { value: "", label: "" },
-      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
-    ];
-    context.damageTypes = ["base", "versatile"].reduce((obj, k) => {
-      obj[k] = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-        return { value, label, selected: damage?.[k]?.types?.has(value) };
-      });
-      return obj;
-    }, {});
 
     // Activities
     context.activities = (activities ?? []).map(({ _id: id, name, img, sort }) => ({
@@ -306,7 +293,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
    * @protected
    */
   _onOpenActivityContext(target) {
-    const { id } = target.closest(".activity[data-id]")?.dataset;
+    const { id } = target.closest(".activity[data-id]")?.dataset ?? {};
     const activity = this.item.system.activities.get(id);
     if ( !activity ) return;
     const menuItems = this._getActivityContextMenuOptions(activity);
@@ -314,7 +301,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     /**
      * A hook even that fires when the context menu for an Activity is opened.
      * @function dnd5e.getItemActivityContext
-     * @memberOf hookEvents
+     * @memberof hookEvents
      * @param {Activity} activity             The Activity.
      * @param {HTMLElement} target            The element that menu was triggered for.
      * @param {ContextMenuEntry[]} menuItems  The context menu entries.

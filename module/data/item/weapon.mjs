@@ -23,6 +23,8 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes EquippableItemTemplate
  * @mixes MountableTemplate
  *
+ * @property {object} ammunition
+ * @property {string} ammunition.type       Type of ammunition fired by this weapon.
  * @property {object} damage
  * @property {DamageData} damage.base       Weapon's base damage.
  * @property {DamageData} damage.versatile  Weapon's versatile damage.
@@ -54,6 +56,9 @@ export default class WeaponData extends ItemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
+      ammunition: new SchemaField({
+        type: new StringField()
+      }),
       damage: new SchemaField({
         base: new DamageField(),
         versatile: new DamageField()
@@ -239,7 +244,21 @@ export default class WeaponData extends ItemDataModel.mixin(
         `;
       }, ""), classes: "info-grid damage" });
     }
-    context.parts = ["dnd5e.details-weapon", "dnd5e.details-damage", "dnd5e.details-uses"];
+    context.parts = ["dnd5e.details-weapon", "dnd5e.details-uses"];
+
+    // Damage
+    context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
+      return { value, label, selected: this.damage.base.types.has(value) };
+    });
+    const makeDenominationOptions = placeholder => [
+      { value: "", label: placeholder ? `d${placeholder}` : "" },
+      { rule: true },
+      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
+    ];
+    context.denominationOptions = {
+      base: makeDenominationOptions(),
+      versatile: makeDenominationOptions(this.damage.base.denomination ? this.damage.base.steppedDenomination() : "")
+    };
   }
 
   /* -------------------------------------------- */
@@ -389,6 +408,16 @@ export default class WeaponData extends ItemDataModel.mixin(
    */
   get isVersatile() {
     return this.properties.has("ver");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this item have base damage defined in `damage.base` to offer to an activity?
+   * @type {boolean}
+   */
+  get offersBaseDamage() {
+    return true;
   }
 
   /* -------------------------------------------- */

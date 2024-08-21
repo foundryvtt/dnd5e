@@ -1303,40 +1303,41 @@ preLocalize("armorClasses", { key: "label" });
  */
 DND5E.consumableTypes = {
   ammo: {
-    label: "DND5E.ConsumableAmmo",
+    label: "DND5E.CONSUMABLE.Type.Ammunition.Label",
     subtypes: {
-      arrow: "DND5E.ConsumableAmmoArrow",
-      blowgunNeedle: "DND5E.ConsumableAmmoBlowgunNeedle",
-      crossbowBolt: "DND5E.ConsumableAmmoCrossbowBolt",
-      slingBullet: "DND5E.ConsumableAmmoSlingBullet"
+      arrow: "DND5E.CONSUMABLE.Type.Ammunition.Arrow",
+      crossbowBolt: "DND5E.CONSUMABLE.Type.Ammunition.Bolt",
+      firearmBullet: "DND5E.CONSUMABLE.Type.Ammunition.BulletFirearm",
+      slingBullet: "DND5E.CONSUMABLE.Type.Ammunition.BulletSling",
+      blowgunNeedle: "DND5E.CONSUMABLE.Type.Ammunition.Needle"
     }
   },
   potion: {
-    label: "DND5E.ConsumablePotion"
+    label: "DND5E.CONSUMABLE.Type.Potion.Label"
   },
   poison: {
-    label: "DND5E.ConsumablePoison",
+    label: "DND5E.CONSUMABLE.Type.Poison.Label",
     subtypes: {
-      contact: "DND5E.ConsumablePoisonContact",
-      ingested: "DND5E.ConsumablePoisonIngested",
-      inhaled: "DND5E.ConsumablePoisonInhaled",
-      injury: "DND5E.ConsumablePoisonInjury"
+      contact: "DND5E.CONSUMABLE.Type.Poison.Contact",
+      ingested: "DND5E.CONSUMABLE.Type.Poison.Ingested",
+      inhaled: "DND5E.CONSUMABLE.Type.Poison.Inhaled",
+      injury: "DND5E.CONSUMABLE.Type.Poison.Injury"
     }
   },
   food: {
-    label: "DND5E.ConsumableFood"
+    label: "DND5E.CONSUMABLE.Type.Food.Label"
   },
   scroll: {
-    label: "DND5E.ConsumableScroll"
+    label: "DND5E.CONSUMABLE.Type.Scroll.Label"
   },
   wand: {
-    label: "DND5E.ConsumableWand"
+    label: "DND5E.CONSUMABLE.Type.Wand.Label"
   },
   rod: {
-    label: "DND5E.ConsumableRod"
+    label: "DND5E.CONSUMABLE.Type.Rod.Label"
   },
   trinket: {
-    label: "DND5E.ConsumableTrinket"
+    label: "DND5E.CONSUMABLE.Type.Trinket.Label"
   }
 };
 preLocalize("consumableTypes", { key: "label", sort: true });
