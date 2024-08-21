@@ -267,13 +267,13 @@ export default class AttackActivityData extends BaseActivityData {
         // If mode is "replace" and base part is present, replace the base part
         if ( ammo.damage.replace & (basePartIndex !== -1) ) {
           damage.base = true;
-          rollConfig.rolls.splice(basePartIndex, 1, super._processDamagePart(damage, config, rollData));
+          rollConfig.rolls.splice(basePartIndex, 1, this._processDamagePart(damage, config, rollData));
         }
 
         // Otherwise stick the ammo damage after base part (or as first part)
         else {
           damage.ammo = true;
-          rollConfig.rolls.splice(basePartIndex + 1, 0, super._processDamagePart(damage, rollConfig, rollData));
+          rollConfig.rolls.splice(basePartIndex + 1, 0, this._processDamagePart(damage, rollConfig, rollData));
         }
       }
     }
