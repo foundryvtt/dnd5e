@@ -167,30 +167,35 @@ export default class HitDice {
 
   /**
    * Create item updates for recovering hit dice during a rest.
-   * @param {object} [options]
-   * @param {number} [options.maxHitDice]                       Maximum number of hit dice to recover.
-   * @param {number} [options.fraction=0.5]                     Fraction of max hit dice to recover. Only used if
-   *                                                            `maxHitDice` isn't specified.
-   * @param {boolean} [options.largest]                         Whether to restore the largest hit dice first.
-   * @returns {{updates: object[], hitDiceRecovered: number}}   Array of item updates and number of hit dice recovered.
+   * @param {RestConfiguration} [config]
+   * @param {number} [config.maxHitDice]    Maximum number of hit dice to recover.
+   * @param {number} [config.fraction=0.5]  Fraction of max hit dice to recover. Only used if
+   *                                        `maxHitDice` isn't specified.
+   * @param {boolean} [config.largest]      Whether to restore the largest hit dice first.
+   * @param {RestResult} [result={}]        Rest result being constructed.
    */
-  createHitDiceUpdates({ maxHitDice, fraction=0.5, largest=true }={}) {
+  createHitDiceUpdates({ maxHitDice, fraction=0.5, largest=true, ...config }={}, result={}) {
     if ( !Number.isInteger(maxHitDice) ) maxHitDice = Math.max(Math.floor(this.max * fraction), 1);
     const classes = Array.from(this.classes).sort((a, b) => {
       a = parseInt(a.system.hitDice.slice(1));
       b = parseInt(b.system.hitDice.slice(1));
       return largest ? (b - a) : (a - b);
     });
-    const updates = [];
+    const updateItems = [];
     let recovered = 0;
     for ( const item of classes ) {
       const used = item.system.hitDiceUsed;
       if ( (recovered < maxHitDice) && (used > 0) ) {
         const delta = Math.min(used, maxHitDice - recovered);
         recovered += delta;
-        updates.push({ _id: item.id, "system.hitDiceUsed": used - delta });
+        updateItems.push({ _id: item.id, "system.hitDiceUsed": used - delta });
       }
     }
-    return { updates, hitDiceRecovered: recovered };
+    foundry.utils.mergeObject(result, {
+      deltas: {
+        hitDice: (result?.deltas?.hitDice ?? 0) + recovered
+      },
+      updateItems
+    });
   }
 }

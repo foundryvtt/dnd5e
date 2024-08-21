@@ -71,4 +71,71 @@ export default class UsesField extends SchemaField {
     }
     if ( labels ) labels.recovery = game.i18n.getListFormatter({ style: "narrow" }).format(periods);
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Determine uses recovery.
+   * @this {ItemDataModel|BaseActivityData}
+   * @param {string[]} periods  Recovery periods to check.
+   * @param {object} rollData   Roll data to use when evaluating recover formulas.
+   * @returns {Promise<{ updates: object, rolls: BasicRoll[] }|false>}
+   */
+  static async recoverUses(periods, rollData) {
+    if ( !this.uses.recovery.length ) return false;
+
+    // Search the recovery profiles in order to find the first matching period,
+    // and then find the first profile that uses that recovery period
+    const matchingPeriod = periods.find(p => this.uses.recovery.find(r => r.period === p));
+    const profile = this.uses.recovery.find(r => r.period === matchingPeriod);
+    if ( !profile ) return false;
+
+    const updates = {};
+    const rolls = [];
+    const item = this.item ?? this.parent;
+
+    if ( profile.type === "recoverAll" ) updates.spent = 0;
+    else if ( profile.type === "loseAll" ) updates.spent = this.uses.max;
+    else if ( profile.formula ) {
+      let roll;
+      let total;
+      try {
+        roll = new CONFIG.Dice.BasicRoll(profile.formula, rollData);
+        if ( ["day", "dawn", "dusk"].includes(profile.period)
+          && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
+          roll.alter(7, 0, { multiplyNumeric: true });
+        }
+        total = (await roll.evaluate()).total;
+      } catch(err) {
+        Hooks.onError("UsesField#recoverUses", err, {
+          msg: game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
+            name: item.name, formula: profile.formula, uuid: this.uuid ?? item.uuid
+          }),
+          log: "error",
+          notify: "error"
+        });
+        return false;
+      }
+
+      const newSpent = Math.clamp(this.uses.spent - total, 0, this.uses.max);
+      if ( newSpent !== this.uses.spent ) {
+        updates.spent = newSpent;
+        if ( !roll.isDeterministic ) {
+          rolls.push(roll);
+          const diff = this.uses.spent - newSpent;
+          const isMax = newSpent === 0;
+          const localizationKey = `DND5E.Item${diff < 0 ? "Loss" : "Recovery"}Roll${isMax ? "Max" : ""}`;
+          await roll.toMessage({
+            user: game.user.id,
+            speaker: { actor: item.actor, alias: item.name },
+            flavor: game.i18n.format(localizationKey, { name: item.name, count: Math.abs(diff) })
+          });
+        }
+      }
+    }
+
+    return { updates, rolls };
+  }
 }
