@@ -142,7 +142,7 @@ class SummonRegistry {
    * @returns {Actor5e[]}
    */
   static creatures(actor) {
-    return Array.from(SummonsRegistry.#creatures.get(actor.uuid) ?? []).map(uuid => fromUuidSync(uuid));
+    return Array.from(SummonRegistry.#creatures.get(actor.uuid) ?? []).map(uuid => fromUuidSync(uuid));
   }
 
   /* -------------------------------------------- */
@@ -154,10 +154,10 @@ class SummonRegistry {
    */
   static track(summoner, summoned) {
     if ( summoned.startsWith("Compendium.") ) return;
-    if ( !SummonsRegistry.#creatures.has(summoner) ) {
-      SummonsRegistry.#creatures.set(summoner, new Set());
+    if ( !SummonRegistry.#creatures.has(summoner) ) {
+      SummonRegistry.#creatures.set(summoner, new Set());
     }
-    SummonsRegistry.#creatures.get(summoner).add(summoned);
+    SummonRegistry.#creatures.get(summoner).add(summoned);
   }
 
   /* -------------------------------------------- */
@@ -168,7 +168,7 @@ class SummonRegistry {
    * @param {string} summoned  UUID of the summoned creature to stop tracking.
    */
   static untrack(summoner, summoned) {
-    SummonsRegistry.#creatures.get(summoner)?.delete(summoned);
+    SummonRegistry.#creatures.get(summoner)?.delete(summoned);
   }
 }
 

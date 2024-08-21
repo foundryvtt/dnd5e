@@ -317,7 +317,7 @@ export default class ActivityUsageDialog extends Application5e {
         .reduce((max, d) => d.max ? Math.max(max, d.level) : max, 0);
 
       const spellSlotOptions = Object.entries(this.actor.system.spells).map(([value, slot]) => {
-        if ( (slot.level < minimumLevel) || (slot.level > maximumLevel) ) return null;
+        if ( (slot.level < minimumLevel) || (slot.level > maximumLevel) || !slot.type ) return null;
         let label;
         if ( slot.type === "leveled" ) {
           label = game.i18n.format("DND5E.SpellLevelSlot", { level: slot.label, n: slot.value });
