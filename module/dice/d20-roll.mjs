@@ -240,7 +240,8 @@ export default class D20Roll extends Roll {
    * @param {string} [data.title]             The title of the shown dialog window
    * @param {number} [data.defaultRollMode]   The roll mode that the roll mode select element should default to
    * @param {number} [data.defaultAction]     The button marked as default
-   * @param {FormSelectOption[]} [data.attackModes]  Selectable attack modes.
+   * @param {FormSelectOption[]} [data.ammunitionOptions]  Selectable ammunition options.
+   * @param {FormSelectOption[]} [data.attackModes]        Selectable attack modes.
    * @param {boolean} [data.chooseModifier]   Choose which ability modifier should be applied to the roll?
    * @param {string} [data.defaultAbility]    For tool rolls, the default ability modifier applied to the roll
    * @param {string} [data.template]          A custom path to an HTML template to use instead of the default
@@ -249,8 +250,8 @@ export default class D20Roll extends Roll {
    *                                          dialog was closed
    */
   async configureDialog({
-    title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, attackModes,
-    chooseModifier=false, defaultAbility, template
+    title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, ammunitionOptions,
+    attackModes, chooseModifier=false, defaultAbility, template
   }={}, options={}) {
 
     // Render the Dialog inner HTML
@@ -258,6 +259,7 @@ export default class D20Roll extends Roll {
       formulas: [{formula: `${this.formula} + @bonus`}],
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes,
+      ammunitionOptions,
       attackModes,
       chooseModifier,
       defaultAbility,
@@ -314,6 +316,9 @@ export default class D20Roll extends Roll {
       if ( !(bonus.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms = this.terms.concat(bonus.terms);
     }
+
+    // Set the ammunition
+    if ( submitData.ammunition ) this.options.ammunition = submitData.ammunition;
 
     // Set the attack mode
     if ( submitData.attackMode ) this.options.attackMode = submitData.attackMode;

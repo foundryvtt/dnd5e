@@ -21,6 +21,14 @@
         </select>
     </div>
     {{/if}}
+    {{#if ammunitionOptions}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.CONSUMABLE.Type.Ammunition.Label" }}</label>
+        <select name="ammunition">
+            {{ selectOptions ammunitionOptions blank="" }}
+        </select>
+    </div>
+    {{/if}}
     {{#if chooseModifier}}
     <div class="form-group">
         <label>{{ localize "DND5E.AbilityModifier" }}</label>
