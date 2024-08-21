@@ -1,6 +1,5 @@
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
-import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
@@ -2103,12 +2102,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /** @inheritdoc */
   static migrateData(source) {
+    ActivitiesTemplate.initializeActivities(source);
     source = super.migrateData(source);
     if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
     else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
     else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
     else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
-    ActivitiesTemplate.initializeActivities(source);
     return source;
   }
 }

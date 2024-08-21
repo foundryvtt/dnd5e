@@ -168,7 +168,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( Array.isArray(source.uses?.recovery) ) return;
 
     const charged = source.recharge?.charged;
-    if ( charged !== undefined ) {
+    if ( (source.recharge?.value !== null) && (charged !== undefined) ) {
       source.uses ??= {};
       source.uses.spent = charged ? 0 : 1;
     }
@@ -252,6 +252,13 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
     const cls = CONFIG.DND5E.activityTypes[type].documentClass;
     cls.createInitialActivity(source);
+
+    if ( (type !== "save") && source.system.save.ability ) {
+      CONFIG.DND5E.activityTypes.save.documentClass.createInitialActivity(source, 1);
+    }
+    if ( (type !== "utility") && source.system.formula ) {
+      CONFIG.DND5E.activityTypes.utility.documentClass.createInitialActivity(source, 2);
+    }
   }
 
   /* -------------------------------------------- */

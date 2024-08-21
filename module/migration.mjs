@@ -183,7 +183,6 @@ export const migrateCompendium = async function(pack) {
   dnd5e.moduleArt.suppressArt = true;
 
   // Begin by requesting server-side data model migration and get the migrated content
-  await pack.migrate();
   const documents = await pack.getDocuments();
 
   // Iterate over compendium entries - applying fine-tuned migration functions
@@ -293,7 +292,6 @@ export async function refreshCompendium(pack) {
   const DocumentClass = CONFIG[pack.documentName].documentClass;
   const wasLocked = pack.locked;
   await pack.configure({locked: false});
-  await pack.migrate();
 
   ui.notifications.info(`Beginning to refresh Compendium ${pack.collection}`);
   const documents = await pack.getDocuments();

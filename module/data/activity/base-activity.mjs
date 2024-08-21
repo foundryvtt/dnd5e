@@ -189,10 +189,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Migrate data from the item to a newly created activity.
    * @param {object} source  Item's candidate source data.
+   * @param {number} offset  Adjust the default ID using this number when creating multiple activities.
    */
-  static createInitialActivity(source) {
+  static createInitialActivity(source, offset=0) {
     const activityData = this.transformTypeData(source, {
-      _id: this.INITIAL_ID,
+      _id: this.INITIAL_ID.replace("0", offset),
       type: this.metadata.type,
       activation: this.transformActivationData(source),
       consumption: this.transformConsumptionData(source),
@@ -202,7 +203,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       range: this.transformRangeData(source),
       target: this.transformTargetData(source)
     });
-    foundry.utils.setProperty(source, `system.activities.${this.INITIAL_ID}`, activityData);
+    foundry.utils.setProperty(source, `system.activities.${activityData._id}`, activityData);
     foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
   }
 
