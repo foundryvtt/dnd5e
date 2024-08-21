@@ -546,7 +546,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     const rollData = this.getRollData();
     const count = new Roll(profile.count || "1", rollData);
     await count.evaluate();
-    return TokenPlacement.place({ tokens: Array(praseInt(count.total)).fill(token) });
+    return TokenPlacement.place({ tokens: Array(parseInt(count.total)).fill(token) });
   }
 
   /* -------------------------------------------- */
