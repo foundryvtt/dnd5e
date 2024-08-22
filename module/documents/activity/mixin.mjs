@@ -960,7 +960,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   async #placeTemplate() {
     const templates = [];
     try {
-      for ( const template of dnd5e.canvas.AbilityTemplate.fromActivity(this) ) {
+      for ( const template of AbilityTemplate.fromActivity(this) ) {
         const result = await template.drawPreview();
         if ( result ) templates.push(result);
       }
