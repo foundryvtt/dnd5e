@@ -59,7 +59,7 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
         action: "rollDamage"
       }
     });
-    return buttons;
+    return buttons.concat(super._usageChatButtons());
   }
 
   /* -------------------------------------------- */

@@ -72,11 +72,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
     // Calculate the maximum targets
     let item = this.enchantmentItem;
     const scaling = this.chatMessage.getFlag("dnd5e", "scaling");
-    if ( scaling ) {
-      item = item.clone({ "flags.dnd5e.scaling": scaling });
-      item.prepareData();
-      item.prepareFinalAttributes();
-    }
+    if ( scaling ) item = item.clone({ "flags.dnd5e.scaling": scaling });
     const activity = item.system.activities.get(this.enchantmentActivity.id);
     const maxTargets = activity.target?.affects?.count;
     if ( maxTargets ) {

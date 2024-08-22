@@ -52,7 +52,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         action: "rollDamage"
       }
     });
-    return buttons;
+    return buttons.concat(super._usageChatButtons());
   }
 
   /* -------------------------------------------- */

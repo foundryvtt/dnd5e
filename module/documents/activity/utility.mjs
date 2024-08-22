@@ -36,7 +36,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
 
   /** @override */
   _usageChatButtons() {
-    if ( !this.roll.formula ) return null;
+    if ( !this.roll.formula ) return super._usageChatButtons();
     return [{
       label: this.roll.name || game.i18n.localize("DND5E.Roll"),
       icon: '<i class="fa-solid fa-dice" inert></i>',
@@ -44,7 +44,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
         action: "rollFormula",
         visibility: this.roll.visible ? "all" : undefined
       }
-    }];
+    }].concat(super._usageChatButtons());
   }
 
   /* -------------------------------------------- */
