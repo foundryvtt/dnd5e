@@ -135,7 +135,7 @@ export default class SummonActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
-  static transformTypeData(source, activityData) {
+  static transformTypeData(source, activityData, options) {
     return foundry.utils.mergeObject(activityData, {
       bonuses: source.system.summons?.bonuses ?? {},
       creatureSizes: source.system.summons?.creatureSizes ?? [],

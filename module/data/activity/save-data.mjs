@@ -66,7 +66,7 @@ export default class SaveActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
-  static transformTypeData(source, activityData) {
+  static transformTypeData(source, activityData, options) {
     let calculation = source.system.save?.scaling;
     if ( calculation === "flat" ) calculation = "custom";
     else if ( calculation === "spell" ) calculation = "spellcasting";

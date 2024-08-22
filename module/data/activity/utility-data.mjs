@@ -31,7 +31,7 @@ export default class UtilityActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
-  static transformTypeData(source, activityData) {
+  static transformTypeData(source, activityData, options) {
     return foundry.utils.mergeObject(activityData, {
       roll: {
         formula: source.system.formula ?? "",
