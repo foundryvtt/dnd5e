@@ -2092,12 +2092,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /** @inheritdoc */
   static migrateData(source) {
+    ActivitiesTemplate.initializeActivities(source);
     source = super.migrateData(source);
     if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
     else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
     else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
     else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
-    ActivitiesTemplate.initializeActivities(source);
     return source;
   }
 }
