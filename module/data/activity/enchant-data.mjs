@@ -104,7 +104,7 @@ export default class EnchantActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
-  static transformEffectsData(source) {
+  static transformEffectsData(source, options) {
     const effects = [];
     for ( const effect of source.effects ) {
       if ( (effect.type !== "enchantment") && (effect.flags?.dnd5e?.type !== "enchantment") ) continue;

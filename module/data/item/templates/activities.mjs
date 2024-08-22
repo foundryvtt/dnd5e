@@ -254,10 +254,13 @@ export default class ActivitiesTemplate extends SystemDataModel {
     cls.createInitialActivity(source);
 
     if ( (type !== "save") && source.system.save.ability ) {
-      CONFIG.DND5E.activityTypes.save.documentClass.createInitialActivity(source, 1);
+      CONFIG.DND5E.activityTypes.save.documentClass.createInitialActivity(source, { offset: 1 });
+    }
+    if ( (source.type !== "weapon") && source.system.damage?.versatile ) {
+      CONFIG.DND5E.activityTypes.damage.documentClass.createInitialActivity(source, { offset: 2, versatile: true });
     }
     if ( (type !== "utility") && source.system.formula ) {
-      CONFIG.DND5E.activityTypes.utility.documentClass.createInitialActivity(source, 2);
+      CONFIG.DND5E.activityTypes.utility.documentClass.createInitialActivity(source, { offset: 3 });
     }
   }
 

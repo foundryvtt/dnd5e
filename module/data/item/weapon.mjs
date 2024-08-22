@@ -125,6 +125,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     WeaponData.#migrateDamage(source);
     WeaponData.#migratePropertiesData(source);
     WeaponData.#migrateProficient(source);
+    WeaponData.#migrateReach(source);
   }
 
   /* -------------------------------------------- */
@@ -166,6 +167,23 @@ export default class WeaponData extends ItemDataModel.mixin(
    */
   static #migrateProficient(source) {
     if ( typeof source.proficient === "boolean" ) source.proficient = Number(source.proficient);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the range value to the reach field for melee weapons without the thrown property.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateReach(source) {
+    if ( !source.properties || !source.range?.value || !source.type?.value ) return;
+    if ( (CONFIG.DND5E.weaponTypeMap[source.type.value] !== "melee") || source.properties.includes("thr") ) return;
+    // Range of `0` or greater than `10` is always included, and so is range longer than `5` without reach property
+    if ( (source.range.value === 0) || (source.range.value > 10)
+      || (!source.properties.includes("rch") && (source.range.value > 5)) ) {
+      source.range.reach = source.range.value;
+    }
+    source.range.value = null;
   }
 
   /* -------------------------------------------- */

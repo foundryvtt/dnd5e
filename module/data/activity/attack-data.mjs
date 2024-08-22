@@ -122,7 +122,7 @@ export default class AttackActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
-  static transformTypeData(source, activityData) {
+  static transformTypeData(source, activityData, options) {
     // For weapons and ammunition, separate the first part from the rest to be used as the base damage and keep the rest
     let damageParts = source.system.damage?.parts ?? [];
     const hasBase = (source.type === "weapon")

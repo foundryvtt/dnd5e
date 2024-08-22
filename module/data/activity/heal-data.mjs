@@ -20,7 +20,7 @@ export default class HealActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
-  static transformTypeData(source, activityData) {
+  static transformTypeData(source, activityData, options) {
     return foundry.utils.mergeObject(activityData, {
       healing: this.transformDamagePartData(source, source.system.damage?.parts?.[0] ?? ["", ""])
     });

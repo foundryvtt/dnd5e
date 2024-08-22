@@ -188,21 +188,22 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Migrate data from the item to a newly created activity.
-   * @param {object} source  Item's candidate source data.
-   * @param {number} offset  Adjust the default ID using this number when creating multiple activities.
+   * @param {object} source              Item's candidate source data.
+   * @param {object} [options={}]
+   * @param {number} [options.offset=0]  Adjust the default ID using this number when creating multiple activities.
    */
-  static createInitialActivity(source, offset=0) {
+  static createInitialActivity(source, { offset=0, ...options }={}) {
     const activityData = this.transformTypeData(source, {
       _id: this.INITIAL_ID.replace("0", offset),
       type: this.metadata.type,
-      activation: this.transformActivationData(source),
-      consumption: this.transformConsumptionData(source),
-      description: this.transformDescriptionData(source),
-      duration: this.transformDurationData(source),
-      effects: this.transformEffectsData(source),
-      range: this.transformRangeData(source),
-      target: this.transformTargetData(source)
-    });
+      activation: this.transformActivationData(source, options),
+      consumption: this.transformConsumptionData(source, options),
+      description: this.transformDescriptionData(source, options),
+      duration: this.transformDurationData(source, options),
+      effects: this.transformEffectsData(source, options),
+      range: this.transformRangeData(source, options),
+      target: this.transformTargetData(source, options)
+    }, options);
     foundry.utils.setProperty(source, `system.activities.${activityData._id}`, activityData);
     foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
   }
@@ -212,9 +213,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Fetch data from the item source and transform it into an activity's activation object.
    * @param {object} source  Item's candidate source data to transform.
+   * @param {object} options       Additional options passed to the creation process.
    * @returns {object}       Creation data for new activity.
    */
-  static transformActivationData(source) {
+  static transformActivationData(source, options) {
     if ( source.type === "spell" ) return {};
     return {
       type: source.system.activation?.type === "none" ? "" : (source.system.activation?.type ?? ""),
@@ -228,9 +230,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Fetch data from the item source and transform it into an activity's consumption object.
    * @param {object} source  Item's candidate source data to transform.
+   * @param {object} options       Additional options passed to the creation process.
    * @returns {object}       Creation data for new activity.
    */
-  static transformConsumptionData(source) {
+  static transformConsumptionData(source, options) {
     const targets = [];
 
     const type = {
@@ -320,9 +323,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Fetch data from the item source and transform it into an activity's description object.
    * @param {object} source  Item's candidate source data to transform.
+   * @param {object} options       Additional options passed to the creation process.
    * @returns {object}       Creation data for new activity.
    */
-  static transformDescriptionData(source) {
+  static transformDescriptionData(source, options) {
     return {
       chatFlavor: source.system.chatFlavor ?? ""
     };
@@ -333,9 +337,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Fetch data from the item source and transform it into an activity's duration object.
    * @param {object} source  Item's candidate source data to transform.
+   * @param {object} options       Additional options passed to the creation process.
    * @returns {object}       Creation data for new activity.
    */
-  static transformDurationData(source) {
+  static transformDurationData(source, options) {
     if ( source.type === "spell" ) return {};
     return {
       value: source.system.duration?.value ?? null,
@@ -349,9 +354,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Fetch data from the item source and transform it into an activity's effects array.
    * @param {object} source  Item's candidate source data to transform.
+   * @param {object} options       Additional options passed to the creation process.
    * @returns {object[]}     Creation data for new activity.
    */
-  static transformEffectsData(source) {
+  static transformEffectsData(source, options) {
     return source.effects
       .filter(e => !e.transfer && (e.type !== "enchantment") && (e.flags?.dnd5e?.type !== "enchantment"))
       .map(e => ({ _id: e._id }));
@@ -362,9 +368,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Fetch data from the item source and transform it into an activity's range object.
    * @param {object} source  Item's candidate source data to transform.
+   * @param {object} options       Additional options passed to the creation process.
    * @returns {object}       Creation data for new activity.
    */
-  static transformRangeData(source) {
+  static transformRangeData(source, options) {
     if ( source.type === "spell" ) return {};
     return {
       value: source.system.range?.value ?? null,
@@ -378,9 +385,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Fetch data from the item source and transform it into an activity's target object.
    * @param {object} source  Item's candidate source data to transform.
+   * @param {object} options       Additional options passed to the creation process.
    * @returns {object}       Creation data for new activity.
    */
-  static transformTargetData(source) {
+  static transformTargetData(source, options) {
     if ( source.type === "spell" ) return {
       prompt: source.system.target?.prompt ?? true
     };
@@ -428,9 +436,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Perform any type-specific data transformations.
    * @param {object} source        Item's candidate source data to transform.
    * @param {object} activityData  In progress creation data.
+   * @param {object} options       Additional options passed to the creation process.
    * @returns {object}             Creation data for new activity.
    */
-  static transformTypeData(source, activityData) {
+  static transformTypeData(source, activityData, options) {
     return activityData;
   }
 

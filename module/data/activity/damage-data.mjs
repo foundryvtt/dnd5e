@@ -33,14 +33,16 @@ export default class DamageActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
-  static transformTypeData(source, activityData) {
+  static transformTypeData(source, activityData, options) {
     return foundry.utils.mergeObject(activityData, {
       damage: {
         critical: {
           allow: false,
           bonus: source.system.critical?.damage ?? ""
         },
-        parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
+        parts: options.versatile
+          ? [this.transformDamagePartData(source, [source.system.damage?.versatile, ""])]
+          : (source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? [])
       }
     });
   }

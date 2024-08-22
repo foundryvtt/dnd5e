@@ -168,10 +168,12 @@ function _shouldMigrateCompendium(pack) {
 
 /**
  * Apply migration rules to all Documents within a single Compendium pack
- * @param {CompendiumCollection} pack  Pack to be migrated.
+ * @param {CompendiumCollection} pack       Pack to be migrated.
+ * @param {object} [options={}]
+ * @param {boolean} [options.strict=false]  Migrate errors should stop the whole process.
  * @returns {Promise}
  */
-export const migrateCompendium = async function(pack) {
+export async function migrateCompendium(pack, { strict=false }={}) {
   const documentName = pack.documentName;
   if ( !["Actor", "Item", "Scene"].includes(documentName) ) return;
 
@@ -179,57 +181,61 @@ export const migrateCompendium = async function(pack) {
 
   // Unlock the pack for editing
   const wasLocked = pack.locked;
-  await pack.configure({locked: false});
-  dnd5e.moduleArt.suppressArt = true;
+  try {
+    await pack.configure({locked: false});
+    dnd5e.moduleArt.suppressArt = true;
 
-  // Begin by requesting server-side data model migration and get the migrated content
-  const documents = await pack.getDocuments();
+    // Begin by requesting server-side data model migration and get the migrated content
+    const documents = await pack.getDocuments();
 
-  // Iterate over compendium entries - applying fine-tuned migration functions
-  for ( let doc of documents ) {
-    let updateData = {};
-    try {
-      const flags = { persistSourceMigration: false };
-      const source = doc.toObject();
-      switch ( documentName ) {
-        case "Actor":
-          updateData = migrateActorData(source, migrationData, flags, { actorUuid: doc.uuid });
-          if ( (documentName === "Actor") && source.effects && source.items
-            && foundry.utils.isNewerVersion("3.0.3", source._stats.systemVersion) ) {
-            const deleteIds = _duplicatedEffects(source);
-            if ( deleteIds.size ) {
-              if ( flags.persistSourceMigration ) source.effects = source.effects.filter(e => !deleteIds.has(e._id));
-              else await doc.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds));
+    // Iterate over compendium entries - applying fine-tuned migration functions
+    for ( let doc of documents ) {
+      let updateData = {};
+      try {
+        const flags = { persistSourceMigration: false };
+        const source = doc.toObject();
+        switch ( documentName ) {
+          case "Actor":
+            updateData = migrateActorData(source, migrationData, flags, { actorUuid: doc.uuid });
+            if ( (documentName === "Actor") && source.effects && source.items
+              && foundry.utils.isNewerVersion("3.0.3", source._stats.systemVersion) ) {
+              const deleteIds = _duplicatedEffects(source);
+              if ( deleteIds.size ) {
+                if ( flags.persistSourceMigration ) source.effects = source.effects.filter(e => !deleteIds.has(e._id));
+                else await doc.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds));
+              }
             }
-          }
-          break;
-        case "Item":
-          updateData = migrateItemData(source, migrationData, flags);
-          break;
-        case "Scene":
-          updateData = migrateSceneData(source, migrationData, flags);
-          break;
+            break;
+          case "Item":
+            updateData = migrateItemData(source, migrationData, flags);
+            break;
+          case "Scene":
+            updateData = migrateSceneData(source, migrationData, flags);
+            break;
+        }
+
+        // Save the entry, if data was changed
+        if ( foundry.utils.isEmpty(updateData) ) continue;
+        if ( flags.persistSourceMigration ) updateData = foundry.utils.mergeObject(source, updateData);
+        await doc.update(updateData, { diff: !flags.persistSourceMigration });
+        console.log(`Migrated ${documentName} document ${doc.name} in Compendium ${pack.collection}`);
       }
 
-      // Save the entry, if data was changed
-      if ( foundry.utils.isEmpty(updateData) ) continue;
-      if ( flags.persistSourceMigration ) updateData = foundry.utils.mergeObject(source, updateData);
-      await doc.update(updateData, { diff: !flags.persistSourceMigration });
-      console.log(`Migrated ${documentName} document ${doc.name} in Compendium ${pack.collection}`);
+      // Handle migration failures
+      catch(err) {
+        err.message = `Failed dnd5e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
+        console.error(err);
+        if ( strict ) throw err;
+      }
     }
 
-    // Handle migration failures
-    catch(err) {
-      err.message = `Failed dnd5e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
-      console.error(err);
-    }
+    console.log(`Migrated all ${documentName} documents from Compendium ${pack.collection}`);
+  } finally {
+    // Apply the original locked status for the pack
+    await pack.configure({locked: wasLocked});
+    dnd5e.moduleArt.suppressArt = false;
   }
-
-  // Apply the original locked status for the pack
-  await pack.configure({locked: wasLocked});
-  dnd5e.moduleArt.suppressArt = false;
-  console.log(`Migrated all ${documentName} documents from Compendium ${pack.collection}`);
-};
+}
 
 /* -------------------------------------------- */
 
@@ -273,10 +279,12 @@ export function reparentCompendiums(from, to) {
 
 /**
  * Update all compendium packs using the new system data model.
+ * @param {object} [options={}]
+ * @param {boolean} [options.migrate=true]  Also perform a system migration before refreshing.
  */
-export async function refreshAllCompendiums() {
+export async function refreshAllCompendiums(options) {
   for ( const pack of game.packs ) {
-    await refreshCompendium(pack);
+    await refreshCompendium(pack, options);
   }
 }
 
@@ -285,9 +293,21 @@ export async function refreshAllCompendiums() {
 /**
  * Update all Documents in a compendium using the new system data model.
  * @param {CompendiumCollection} pack  Pack to refresh.
+ * @param {object} [options={}]
+ * @param {boolean} [options.migrate=true]  Also perform a system migration before refreshing.
  */
-export async function refreshCompendium(pack) {
+export async function refreshCompendium(pack, { migrate=true }={}) {
   if ( !pack?.documentName ) return;
+  if ( migrate ) {
+    try {
+      await migrateCompendium(pack, { strict: true });
+    } catch( err ) {
+      err.message = `Failed dnd5e system migration pack ${pack.collection}: ${err.message}`;
+      console.error(err);
+      return;
+    }
+  }
+
   dnd5e.moduleArt.suppressArt = true;
   const DocumentClass = CONFIG[pack.documentName].documentClass;
   const wasLocked = pack.locked;
