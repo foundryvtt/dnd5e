@@ -31,6 +31,7 @@ export default class ActivitySheet extends Application5e {
       deleteDamagePart: ActivitySheet.#deleteDamagePart,
       deleteEffect: ActivitySheet.#deleteEffect,
       deleteRecovery: ActivitySheet.#deleteRecovery,
+      dissociateEffect: ActivitySheet.#dissociateEffect,
       toggleCollapsed: ActivitySheet.#toggleCollapsed
     },
     form: {
@@ -61,9 +62,7 @@ export default class ActivitySheet extends Application5e {
       templates: [
         "systems/dnd5e/templates/activity/parts/activity-time.hbs",
         "systems/dnd5e/templates/activity/parts/activity-targeting.hbs",
-        "systems/dnd5e/templates/activity/parts/activity-consumption.hbs",
-        "systems/dnd5e/templates/shared/uses-recovery.hbs",
-        "systems/dnd5e/templates/shared/uses-values.hbs"
+        "systems/dnd5e/templates/activity/parts/activity-consumption.hbs"
       ]
     },
     effect: {
@@ -262,7 +261,7 @@ export default class ActivitySheet extends Application5e {
     });
 
     // Uses recovery
-    const usesRecoveryPeriods = [
+    context.recoveryPeriods = [
       ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
         .filter(([, config]) => !config.deprecated)
         .map(([value, config]) => ({
@@ -270,7 +269,7 @@ export default class ActivitySheet extends Application5e {
         })),
       { value: "recharge", label: game.i18n.localize("DND5E.USES.Recovery.Recharge.Label") }
     ];
-    const usesRecoveryTypes = [
+    context.recoveryTypes = [
       { value: "recoverAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.RecoverAll") },
       { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
       { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
@@ -280,8 +279,6 @@ export default class ActivitySheet extends Application5e {
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
       prefix: `uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      periods: usesRecoveryPeriods,
-      types: usesRecoveryTypes,
       formulaOptions: data.period === "recharge" ? data.recharge?.options : null
     }));
 
@@ -366,7 +363,7 @@ export default class ActivitySheet extends Application5e {
     if ( context.activity.damage?.parts ) {
       const denominationOptions = [
         { value: "", label: "" },
-        ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: value }))
+        ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
       ];
       const scalingOptions = [
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
@@ -494,6 +491,7 @@ export default class ActivitySheet extends Application5e {
       element.querySelector(".collapsible")?.classList
         .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
     }
+    this.#toggleNestedTabs();
   }
 
   /* -------------------------------------------- */
@@ -516,9 +514,30 @@ export default class ActivitySheet extends Application5e {
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  changeTab(tab, group, options={}) {
+    super.changeTab(tab, group, options);
+    if ( group !== "sheet" ) return;
+    this.#toggleNestedTabs();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply nested tab classes.
+   */
+  #toggleNestedTabs() {
+    const primary = this.element.querySelector('.window-content > [data-application-part="tabs"]');
+    const active = this.element.querySelector('.tab.active[data-group="sheet"]');
+    if ( !primary || !active ) return;
+    primary.classList.toggle("nested-tabs", active.querySelector(":scope > .sheet-tabs"));
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle adding a new entry to the consumption list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -538,7 +557,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle adding a new entry to the damage parts list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -551,7 +570,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle creating a new active effect and adding it to the applied effects list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -582,7 +601,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle adding a new entry to the uses recovery list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -604,7 +623,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle removing an entry from the consumption targets list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -618,7 +637,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle removing an entry from the damage parts list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -633,7 +652,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle deleting an active effect and removing it from the applied effects list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -651,7 +670,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle removing an entry from the uses recovery list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -664,8 +683,23 @@ export default class ActivitySheet extends Application5e {
   /* -------------------------------------------- */
 
   /**
+   * Handle dissociating an Active Effect from this Activity.
+   * @this {ActivitySheet}
+   * @param {PointerEvent} event  The triggering click event.
+   * @param {HTMLElement} target  The button that was clicked.
+   */
+  static #dissociateEffect(event, target) {
+    const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
+    if ( !this.activity.effects || !effectId ) return;
+    const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
+    this.activity.update({ effects });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle toggling the collapsed state of an additional settings section.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -715,6 +749,10 @@ export default class ActivitySheet extends Application5e {
         submitData.effects.push({ _id });
       }
     }
+    // Workaround for https://github.com/foundryvtt/foundryvtt/issues/11610
+    this.element.querySelectorAll("fieldset legend :is(input, select, dnd5e-checkbox)").forEach(input => {
+      foundry.utils.setProperty(submitData, input.name, input.value);
+    });
     return submitData;
   }
 

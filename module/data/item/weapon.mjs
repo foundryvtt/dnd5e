@@ -244,7 +244,7 @@ export default class WeaponData extends ItemDataModel.mixin(
         `;
       }, ""), classes: "info-grid damage" });
     }
-    context.parts = ["dnd5e.details-weapon", "dnd5e.details-uses"];
+    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
 
     // Damage
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {

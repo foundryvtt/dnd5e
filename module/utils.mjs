@@ -440,7 +440,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-starting-equipment.hbs",
     "systems/dnd5e/templates/items/details/details-subclass.hbs",
     "systems/dnd5e/templates/items/details/details-tool.hbs",
-    "systems/dnd5e/templates/items/details/details-uses.hbs",
     "systems/dnd5e/templates/items/details/details-weapon.hbs",
     "systems/dnd5e/templates/items/parts/item-action.hbs",
     "systems/dnd5e/templates/items/parts/item-activation.hbs",
@@ -456,6 +455,13 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
     "systems/dnd5e/templates/items/parts/item-tooltip.hbs",
     "systems/dnd5e/templates/items/parts/spell-block.hbs",
+
+    // Field Partials
+    "systems/dnd5e/templates/shared/fields/field-activation.hbs",
+    "systems/dnd5e/templates/shared/fields/field-duration.hbs",
+    "systems/dnd5e/templates/shared/fields/field-range.hbs",
+    "systems/dnd5e/templates/shared/fields/field-targets.hbs",
+    "systems/dnd5e/templates/shared/fields/field-uses.hbs",
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",

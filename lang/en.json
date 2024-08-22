@@ -162,7 +162,7 @@
         "hint": "Use these activation values instead of the item's when using this activity."
       },
       "type": {
-        "label": "Activation Type",
+        "label": "Activation Cost",
         "hint": "Activation type (e.g. action, legendary action, minutes)."
       },
       "value": {
@@ -847,6 +847,7 @@
     "consumption": {
       "label": "Consumption",
       "scaling": {
+        "abbr": "Scaling",
         "label": "Consumption Scaling",
         "allowed": {
           "label": "Allow Scaling",
@@ -1047,7 +1048,7 @@
             "label": "Custom Damage Formula",
             "enabled": {
               "label": "Enable Custom Formula",
-              "hint": "Should the custom formula be used rather than the default dice."
+              "hint": "Use a custom formula rather than the default dice."
             },
             "formula": {
               "label": "Damage Formula",
@@ -1066,10 +1067,12 @@
             "label": "Damage Scaling",
             "mode": {
               "label": "Scaling Mode",
+              "abbr": "Scaling",
               "hint": "Method by which the scaling increase is calculated."
             },
             "number": {
               "label": "Dice Scaling",
+              "abbr": "Dice",
               "hint": "Number of dice to increase for each scaling step. Will be applied to the first die found in the damage formula if more than one is present."
             },
             "formula": {
@@ -1228,8 +1231,10 @@
 "DND5E.EFFECT": {
   "Action": {
     "Create": "Create Effect",
-    "Delete": "Delete Effect"
-  }
+    "Delete": "Delete Effect",
+    "Dissociate": "Dissociate Effect"
+  },
+  "Label": "Available Effects"
 },
 "DND5E.EffectsApplyTokens": "Apply to selected tokens",
 "DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",

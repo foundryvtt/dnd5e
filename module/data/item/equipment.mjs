@@ -205,7 +205,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
         value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
       }];
     }
-    context.parts = ["dnd5e.details-equipment", "dnd5e.details-uses"];
+    context.parts = ["dnd5e.details-equipment", "dnd5e.field-uses"];
   }
 
   /* -------------------------------------------- */

@@ -1,18 +1,27 @@
 <fieldset>
-    <legend>{{ localize "DND5E.ACTIVITY.FIELDS.effects.label" }}</legend>
-    <multi-select name="appliedEffects">
-        {{ selectOptions allEffects }}
-    </multi-select>
-    <ul class="separated-list effects-list">
+    <legend>
+        <span>{{ localize "DND5E.ACTIVITY.FIELDS.effects.label" }}</span>
+        <button type="button" class="unbutton control-button" data-action="addEffect"
+                data-tooltip="DND5E.EFFECT.Action.Create"
+                aria-label="{{ localize "DND5E.EFFECT.Action.Create" }}">
+            <i class="fas fa-plus" inert></i>
+        </button>
+    </legend>
+    <div class="form-group">
+        <label>{{ localize "DND5E.EFFECT.Label" }}</label>
+        <div class="form-fields">
+            <multi-select name="appliedEffects" class="hidden-tags">
+                {{ selectOptions allEffects }}
+            </multi-select>
+        </div>
+    </div>
+    <ul class="separated-list effects-list unlist">
         {{#each appliedEffects}}
         <li data-index="{{ @index }}" data-effect-id="{{ effect.id }}" data-expand-id="effects.{{ effect.id }}">
             {{> ".effect" }}
         </li>
         {{/each}}
     </ul>
-    <button type="button" class="unbutton" data-action="addEffect">
-        {{ localize "DND5E.EFFECT.Action.Create" }}
-    </button>
 </fieldset>
 
 {{#*inline ".effect"}}
@@ -20,10 +29,15 @@
     <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
     {{{ contentLink }}}
     <div class="list-controls flexrow">
-        <button type="button" class="unbutton" data-action="deleteEffect"
+        <button type="button" class="unbutton control-button" data-action="dissociateEffect"
+                data-tooltip="DND5E.EFFECT.Action.Dissociate"
+                aria-label="{{ localize 'DND5E.EFFECT.Action.Dissociate' }}">
+            <i class="fa-solid fa-minus" inert></i>
+        </button>
+        <button type="button" class="unbutton control-button" data-action="deleteEffect"
                 data-tooltip="DND5E.EFFECT.Action.Delete"
                 aria-label="{{ localize 'DND5E.EFFECT.Action.Delete' }}">
-            <i class="fa-solid fa-trash fa-fw" inert></i>
+            <i class="fa-solid fa-trash" inert></i>
         </button>
     </div>
 </div>

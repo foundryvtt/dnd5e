@@ -1,13 +1,10 @@
-<ul class="separated-list damage-list">
-    {{#each damageParts}}
-    <li {{~#if data.base}} class="base-part"{{/if}} data-index="{{ index }}">
-        <fieldset class="unfieldset" {{~#if data.base}} disabled{{/if}}>
+{{#each damageParts}}
+<fieldset class="unfieldset" {{ disabled data.base }}>
+    <div class="form-group split-group full-width card" {{#if data.base}}class="base-part"{{/if}}
+         data-index="{{ index }}">
+        <div class="form-fields field-groups">
             {{> "systems/dnd5e/templates/activity/parts/damage-part.hbs" }}
-        </fieldset>
-    </li>
-    {{/each}}
-</ul>
-
-<button type="button" class="unbutton" data-action="addDamagePart">
-    {{ localize "DND5E.DAMAGE.Part.Action.Create" }}
-</button>
+        </div>
+    </div>
+</fieldset>
+{{/each}}

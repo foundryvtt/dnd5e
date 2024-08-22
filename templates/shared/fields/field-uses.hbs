@@ -7,23 +7,23 @@
         <div class="form-fields">
 
             {{!-- Spent --}}
-            {{ formField fields.uses.fields.spent value=source.uses.spent label="DND5E.Spent" localize=true hint=""
+            {{ formField fields.uses.fields.spent value=data.uses.spent label="DND5E.Spent" localize=true hint=false
                          classes="label-top" }}
 
             {{!-- Max --}}
-            {{ formField fields.uses.fields.max value=source.uses.max label="DND5E.Max" localize=true hint=""
+            {{ formField fields.uses.fields.max value=data.uses.max label="DND5E.Max" localize=true hint=false
                          classes="label-top" }}
         </div>
     </div>
 
     {{!-- Auto-Destroy --}}
     {{#if fields.uses.fields.autoDestroy}}
-    {{ formField fields.uses.fields.autoDestroy value=source.uses.autoDestroy localize=true
+    {{ formField fields.uses.fields.autoDestroy value=data.uses.autoDestroy localize=true
                  input=inputs.createCheckboxInput }}
     {{/if}}
 </fieldset>
 
-{{#if system.hasLimitedUses}}
+{{#if hasLimitedUses}}
 <fieldset>
     <legend>
         <span>{{ localize "DND5E.Recovery" }}</span>
@@ -39,18 +39,18 @@
 
             {{!-- Period --}}
             {{ formField fields.period name=(concat prefix "period") value=source.period options=@root.recoveryPeriods
-                         label="DND5E.Period" localize=true classes="label-top" }}
+                         label="DND5E.Period" localize=true hint=false classes="label-top" }}
 
             {{!-- Type --}}
             {{#unless (eq source.period "recharge")}}
             {{ formField fields.type name=(concat prefix "type") value=source.type options=@root.recoveryTypes
-                         label="DND5E.Recovery" localize=true classes="label-top" }}
+                         label="DND5E.Recovery" localize=true hint=false classes="label-top" }}
             {{/unless}}
 
             {{!-- Formula --}}
             {{#if (or (eq source.type "formula") formulaOptions)}}
             {{ formField fields.formula name=(concat prefix "formula") value=source.formula options=formulaOptions
-                         label="DND5E.Formula" localize=true classes="label-top" }}
+                         label="DND5E.Formula" localize=true hint=false classes="label-top" }}
             {{/if}}
 
             <button type="button" class="unbutton control-button" data-action="deleteRecovery"

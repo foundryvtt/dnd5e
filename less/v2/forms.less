@@ -30,6 +30,7 @@
 
   fieldset.unfieldset {
     display: contents;
+    + fieldset.unfieldset > .form-group.full-width { margin-top: 2px; }
   }
 
   /* Inputs & Buttons */
@@ -177,6 +178,14 @@
       font-size: var(--font-size-11);
       color: var(--color-text-dark-5);
       padding: 0 6px;
+
+      > label.checkbox {
+        --checkbox-size: 14px;
+        font-weight: bold;
+        height: 13px;
+
+        dnd5e-checkbox { margin-bottom: 1px; }
+      }
     }
 
     > .empty {
@@ -201,6 +210,10 @@
         outline: var(--dnd5e-border-gold);
         z-index: -1;
       }
+    }
+
+    &:disabled {
+      .form-group label, .hint { color: var(--color-text-light-6); }
     }
   }
 
@@ -236,6 +249,20 @@
         min-width: max-content;
         align-items: center;
       }
+
+      &.multi-select {
+        position: relative;
+
+        multi-select .tags.input-element-tags {
+          min-height: 10px;
+          padding-left: 40%;
+        }
+
+        > label {
+          position: absolute;
+          inset: auto auto calc(var(--form-field-height) + 2px) 0;
+        }
+      }
     }
 
     label.label-icon {
@@ -261,10 +288,41 @@
     }
 
     /* Split Groups */
-    &.split-group > .form-fields > .form-group {
-      flex-wrap: nowrap;
-      &:not(.label-top) { gap: 4px; }
-      > * { flex: unset; }
+    &.split-group > .form-fields {
+
+      &.field-groups {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .field-group {
+        display: flex;
+        gap: 4px;
+        > .form-group { flex: 1; }
+      }
+
+      .form-group {
+        flex-wrap: nowrap;
+        &:not(.label-top) { gap: 4px; }
+        > * { flex: unset; }
+      }
+
+      > .control-button, .field-group > .control-button {
+        position: absolute;
+        inset: auto 0 0 auto;
+      }
+
+      .singleton {
+        align-self: center;
+        margin: 0 6px;
+      }
+
+      multi-select .tags.input-element-tags .tag { background: var(--dnd5e-background-parchment); }
+    }
+
+    &.split-group.full-width > .form-fields {
+      position: relative;
+      padding-right: 20px;
     }
 
     /* Full-Width Groups */
@@ -283,7 +341,9 @@
     margin: 4px 0 0;
   }
 
+  /* Form Fields */
   select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
+    --input-height: var(--form-field-height);
     --input-border-color: transparent;
     transition: all 250ms ease;
     line-height: normal;
@@ -323,13 +383,24 @@
     cursor: pointer;
   }
 
-  multi-select .tags .tag {
+  multi-select .tags.input-element-tags .tag {
     cursor: pointer;
     font-size: var(--font-size-10);
     border: var(--dnd5e-border-gold);
     background: var(--dnd5e-background-card);
     border-radius: 3px;
     &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
+  }
+
+  multi-select.hidden-tags .tags.input-element-tags { display: none; }
+
+  file-picker > button {
+    --button-focus-outline-color: none;
+    --button-hover-background-color: var(--dnd5e-background-card);
+    --button-text-color: var(--color-text-dark-primary);
+    --button-hover-text-color: var(--color-text-dark-primary);
+    height: var(--form-field-height);
+    border: var(--dnd5e-border-gold);
   }
 
   /* Checkboxes */
@@ -385,7 +456,7 @@
     }
   }
 
-  .form-fields > .control-button {
+  .form-fields > .control-button, .form-fields .field-group > .control-button {
     align-self: end;
     padding: 0 4px;
   }

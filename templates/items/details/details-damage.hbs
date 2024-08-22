@@ -1,5 +1,3 @@
-{{!-- TODO: Unify this with activity damage part --}}
-
 {{!-- Custom Formula --}}
 <div class="form-group split-group">
     <label>{{ localize "DND5E.Formula" }}</label>
@@ -12,9 +10,6 @@
         {{!-- Formula --}}
         {{#if source.custom.enabled}}
         {{ formInput fields.custom.fields.formula name=(concat prefix "custom.formula") value=source.custom.formula }}
-        <input type="hidden" name="{{ prefix }}number" value="{{ source.number }}" data-dtype="Number">
-        <input type="hidden" name="{{ prefix }}denomination" value="{{ source.denomination }}" data-dtype="Number">
-        <input type="hidden" name="{{ prefix }}bonus" value="{{ source.bonus }}">
         {{/if}}
     </div>
 </div>

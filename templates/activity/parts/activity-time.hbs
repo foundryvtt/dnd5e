@@ -1,25 +1,33 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
-    {{#if activity.activation.canOverride}}
-    {{ formField fields.activation.fields.override value=source.activation.override }}
-    {{/if}}
-
     <fieldset {{ disabled disabled.activation }}>
-        <legend>{{ localize "DND5E.ACTIVATION.FIELDS.activation.label" }}</legend>
-        {{#if activity.activation.scalar}}
-        {{ formField fields.activation.fields.value value=data.activation.value }}
-        {{/if}}
-        {{ formField fields.activation.fields.type value=data.activation.type options=activationTypes }}
-        {{ formField fields.activation.fields.condition value=data.activation.condition }}
+        <legend>
+            <label class="checkbox">
+                {{ localize "DND5E.ACTIVATION.FIELDS.activation.label" }}
+                {{#if activity.activation.canOverride}}
+                {{ formInput fields.activation.fields.override value=source.activation.override
+                             input=inputs.createCheckboxInput
+                             dataset=(dnd5e-object tooltip="DND5E.ACTIVATION.FIELDS.activation.override.hint")
+                             ariaLabel=(localize "DND5E.ACTIVATION.FIELDS.activation.override.hint") }}
+                {{/if}}
+            </label>
+        </legend>
+        {{> "dnd5e.field-activation" activation=activity.activation fields=fields.activation.fields data=data.activation
+            activationTypes=activationTypes inputs=inputs label="DND5E.ACTIVATION.FIELDS.activation.type.label" }}
     </fieldset>
 
-    {{#if activity.duration.canOverride}}
-    {{ formField fields.duration.fields.override value=source.duration.override }}
-    {{/if}}
-
     <fieldset {{ disabled disabled.duration }}>
-        <legend>{{ localize "DND5E.DURATION.FIELDS.duration.label" }}</legend>
-        {{#if activity.duration.scalar}}{{ formField fields.duration.fields.value value=data.duration.value }}{{/if}}
-        {{ formField fields.duration.fields.units value=data.duration.units options=durationUnits }}
-        {{ formField fields.duration.fields.special value=data.duration.special }}
+        <legend>
+            <label class="checkbox">
+                {{ localize "DND5E.DURATION.FIELDS.duration.label" }}
+                {{#if activity.duration.canOverride}}
+                {{ formInput fields.duration.fields.override value=source.duration.override
+                             input=inputs.createCheckboxInput
+                             dataset=(dnd5e-object tooltip="DND5E.DURATION.FIELDS.duration.override.hint")
+                             ariaLabel=(localize "DND5E.DURATION.FIELDS.duration.override.hint") }}
+                {{/if}}
+            </label>
+        </legend>
+        {{> "dnd5e.field-duration" duration=activity.duration fields=fields.duration.fields data=data.duration
+            durationUnits=durationUnits inputs=inputs }}
     </fieldset>
 </section>
