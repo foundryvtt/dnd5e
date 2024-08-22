@@ -12,7 +12,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     foundry.utils.logCompatibilityWarning(
-      "The `ActivtedEffectTemplate` data model has been deprecated in favor of `ActivitiesTemplate`.",
+      "The `ActivatedEffectTemplate` data model has been deprecated in favor of `ActivitiesTemplate`.",
       { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
     );
     return {

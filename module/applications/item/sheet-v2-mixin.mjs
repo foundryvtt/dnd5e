@@ -247,6 +247,14 @@ export default function ItemSheetV2Mixin(Base) {
 
     /* -------------------------------------------- */
 
+    /** @override */
+    _disableOverriddenFields(html) {
+      // When in edit mode, field values will be the base value, rather than the derived value, so it should not be
+      // necessary to disable them anymore.
+    }
+
+    /* -------------------------------------------- */
+
     /**
      * Handle toggling one of the item's description categories.
      * @param {PointerEvent} event  The triggering event.

@@ -226,16 +226,6 @@ export default class ActionTemplate extends ItemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Can this item enchant other items?
-   * @type {boolean}
-   */
-  get isEnchantment() {
-    return EnchantmentData.isEnchantment(this);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the Item provide an amount of healing instead of conventional damage?
    * @type {boolean}
    */

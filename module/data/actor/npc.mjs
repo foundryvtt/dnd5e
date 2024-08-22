@@ -104,7 +104,7 @@ export default class NPCData extends CreatureTemplate {
         type: new CreatureTypeField(),
         environment: new StringField({required: true, label: "DND5E.Environment"}),
         cr: new NumberField({
-          required: true, nullable: false, min: 0, initial: 1, label: "DND5E.ChallengeRating"
+          required: true, nullable: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
         }),
         spellLevel: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"

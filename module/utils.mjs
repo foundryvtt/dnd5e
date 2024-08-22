@@ -8,6 +8,7 @@
  * @returns {string}
  */
 export function formatCR(value) {
+  if ( value === null ) return "—";
   return { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[value] ?? formatNumber(value);
 }
 
