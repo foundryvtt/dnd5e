@@ -356,6 +356,7 @@ export default class ActivitySheet extends Application5e {
           fields: this.activity.schema.fields.effects.element.fields,
           prefix: `effects.${index}.`,
           source: context.source.effects[index] ?? data,
+          contentLink: data.effect.toAnchor().outerHTML,
           additionalSettings: null
         };
         return this._prepareAppliedEffectContext(context, effect);
