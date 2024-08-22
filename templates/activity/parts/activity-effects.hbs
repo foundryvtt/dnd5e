@@ -29,10 +29,15 @@
     <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
     {{{ dnd5e-linkForUuid effect.uuid }}}
     <div class="list-controls flexrow">
+        <button type="button" class="unbutton control-button" data-action="dissociateEffect"
+                data-tooltip="DND5E.EFFECT.Action.Dissociate"
+                aria-label="{{ localize 'DND5E.EFFECT.Action.Dissociate' }}">
+            <i class="fa-solid fa-minus" inert></i>
+        </button>
         <button type="button" class="unbutton control-button" data-action="deleteEffect"
                 data-tooltip="DND5E.EFFECT.Action.Delete"
                 aria-label="{{ localize 'DND5E.EFFECT.Action.Delete' }}">
-            <i class="fa-solid fa-minus" inert></i>
+            <i class="fa-solid fa-trash" inert></i>
         </button>
     </div>
 </div>

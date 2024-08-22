@@ -76,6 +76,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       })
     ];
     context.scalarTarget = !["", "self", "any"].includes(target?.affects?.type);
+    context.affectsPlaceholder = game.i18n.localize(`DND5E.Target${target?.template?.type ? "Every" : "Any"}`);
 
     // Range
     context.rangeTypes = [

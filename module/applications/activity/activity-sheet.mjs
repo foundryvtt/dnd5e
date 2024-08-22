@@ -31,6 +31,7 @@ export default class ActivitySheet extends Application5e {
       deleteDamagePart: ActivitySheet.#deleteDamagePart,
       deleteEffect: ActivitySheet.#deleteEffect,
       deleteRecovery: ActivitySheet.#deleteRecovery,
+      dissociateEffect: ActivitySheet.#dissociateEffect,
       toggleCollapsed: ActivitySheet.#toggleCollapsed
     },
     form: {
@@ -535,7 +536,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle adding a new entry to the consumption list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -555,7 +556,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle adding a new entry to the damage parts list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -568,7 +569,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle creating a new active effect and adding it to the applied effects list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -599,7 +600,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle adding a new entry to the uses recovery list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -621,7 +622,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle removing an entry from the consumption targets list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -635,7 +636,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle removing an entry from the damage parts list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -650,7 +651,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle deleting an active effect and removing it from the applied effects list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -668,7 +669,7 @@ export default class ActivitySheet extends Application5e {
 
   /**
    * Handle removing an entry from the uses recovery list.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -681,8 +682,23 @@ export default class ActivitySheet extends Application5e {
   /* -------------------------------------------- */
 
   /**
+   * Handle dissociating an Active Effect from this Activity.
+   * @this {ActivitySheet}
+   * @param {PointerEvent} event  The triggering click event.
+   * @param {HTMLElement} target  The button that was clicked.
+   */
+  static #dissociateEffect(event, target) {
+    const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
+    if ( !this.activity.effects || !effectId ) return;
+    const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
+    this.activity.update({ effects });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle toggling the collapsed state of an additional settings section.
-   * @this {ActivityConfig}
+   * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */

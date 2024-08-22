@@ -13,7 +13,7 @@
             {{!-- Amount --}}
             {{#if target.affects.scalar}}
             {{ formField fields.affects.fields.count value=data.affects.count label="DND5E.Amount" localize=true
-                         hint=false classes="label-top" }}
+                         hint=false classes="label-top" placeholder=affectsPlaceholder }}
             {{/if}}
 
             {{!-- Type --}}

@@ -1,9 +1,9 @@
 import ActivitySheet from "./activity-sheet.mjs";
 
 /**
- * Sheet for the attack activity.
+ * Sheet for the save activity.
  */
-export default class AttackSheet extends ActivitySheet {
+export default class SaveSheet extends ActivitySheet {
 
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
