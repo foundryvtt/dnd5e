@@ -281,6 +281,35 @@ export default class ActivitiesTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Perform any item & activity uses recovery.
+   * @param {string[]} periods  Recovery periods to check.
+   * @param {object} rollData   Roll data to use when evaluating recover formulas.
+   * @returns {Promise<{ updates: object, rolls: BasicRoll[] }>}
+   */
+  async recoverUses(periods, rollData) {
+    const updates = {};
+    const rolls = [];
+
+    const result = await UsesField.recoverUses.call(this, periods, rollData);
+    if ( result ) {
+      foundry.utils.mergeObject(updates, { "system.uses": result.updates });
+      rolls.push(...result.rolls);
+    }
+
+    for ( const activity of this.activities ) {
+      const result = await UsesField.recoverUses.call(activity, periods, rollData);
+      if ( result ) {
+        foundry.utils.mergeObject(updates, { [`system.activities.${activity.id}.uses`]: result.updates });
+        rolls.push(...result.rolls);
+      }
+    }
+
+    return { updates, rolls };
+  }
+
+  /* -------------------------------------------- */
   /*  Shims                                       */
   /* -------------------------------------------- */
 

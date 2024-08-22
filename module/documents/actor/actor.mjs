@@ -1,7 +1,6 @@
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
-import { SummonsData } from "../../data/item/fields/summons-field.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import { replaceFormulaData, simplifyBonus } from "../../utils.mjs";
@@ -2318,13 +2317,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Results from a rest operation.
    *
    * @typedef {object} RestResult
-   * @property {number} dhp            Hit points recovered during the rest.
-   * @property {number} dhd            Hit dice recovered or spent during the rest.
-   * @property {object} updateData     Updates applied to the actor.
-   * @property {object[]} updateItems  Updates applied to actor's items.
-   * @property {boolean} longRest      Whether the rest type was a long rest.
-   * @property {boolean} newDay        Whether a new day occurred during the rest.
-   * @property {Roll[]} rolls          Any rolls that occurred during the rest process, not including hit dice.
+   * @property {string} type              Type of rest performed.
+   * @property {object} deltas
+   * @property {number} deltas.hitPoints  Hit points recovered during the rest.
+   * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
+   * @property {object} updateData        Updates applied to the actor.
+   * @property {object[]} updateItems     Updates applied to actor's items.
+   * @property {boolean} newDay           Whether a new day occurred during the rest.
+   * @property {Roll[]} rolls             Any rolls that occurred during the rest process, not including hit dice.
    */
 
   /* -------------------------------------------- */
@@ -2431,49 +2431,38 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Perform all of the changes needed for a short or long rest.
    *
-   * @param {RestConfiguration} config  Configuration data for the rest occurring.
-   * @param {RestResult} [result={}]    Results of the rest operation being built.
-   * @param {*[]} [args]
+   * @param {RestConfiguration} config         Configuration data for the rest occurring.
+   * @param {Partial<RestResult>} [result={}]  Results of the rest operation being built.
    * @returns {Promise<RestResult>}  Consolidated results of the rest workflow.
    * @private
    */
-  async _rest(config, result={}, ...args) {
+  async _rest(config, result={}) {
     if ( (foundry.utils.getType(this.system.rest) === "function")
       && (await this.system.rest(config, result) === false) ) return;
 
-    let hitPointsRecovered = 0;
-    let hpActorUpdates = {};
-    let hitDiceRecovered = 0;
-    let hdActorUpdates = {};
-    let hdItemUpdates = [];
-    const rolls = [];
-    const longRest = config.type === "long";
-    const newDay = config.newDay === true;
-
-    // Recover hit points & hit dice on long rest
-    if ( longRest ) {
-      ({ updates: hpActorUpdates, hitPointsRecovered } = this._getRestHitPointRecovery());
-      ({ updates: hdItemUpdates, actorUpdates: hdActorUpdates, hitDiceRecovered } = this._getRestHitDiceRecovery());
-    }
-
-    // Figure out the rest of the changes
-    foundry.utils.mergeObject(result, {
-      dhd: (result.dhd ?? 0) + hitDiceRecovered,
-      dhp: (result.dhp ?? 0) + hitPointsRecovered,
-      updateData: {
-        ...(hdActorUpdates ?? {}),
-        ...hpActorUpdates,
-        ...this._getRestResourceRecovery({ recoverShortRestResources: !longRest, recoverLongRestResources: longRest }),
-        ...this._getRestSpellRecovery({ recoverLong: longRest })
+    result = foundry.utils.mergeObject({
+      type: config.type,
+      deltas: {
+        hitPoints: 0,
+        hitDice: 0
       },
-      updateItems: [
-        ...(hdItemUpdates ?? []),
-        ...(await this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay, rolls }))
-      ],
-      longRest,
-      newDay
-    });
-    result.rolls = rolls;
+      updateData: {},
+      updateItems: [],
+      newDay: config.newDay === true,
+      rolls: []
+    }, result);
+    if ( "dhp" in result ) result.deltas.hitPoints = result.dhp;
+    if ( "dhd" in result ) result.deltas.hitDice = result.dhd;
+
+    this._getRestHitDiceRecovery(config, result);
+    this._getRestHitPointRecovery(config, result);
+    this._getRestResourceRecovery(config, result);
+    this._getRestSpellRecovery(config, result);
+    await this._getRestItemUsesRecovery(config, result);
+
+    result.dhp = result.deltas.hitPoints;
+    result.dhd = result.deltas.hitDice;
+    result.longRest = result.type === "long";
 
     /**
      * A hook event that fires after rest result is calculated, but before any updates are performed.
@@ -2494,7 +2483,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
 
     // Display a Chat Message summarizing the rest effects
-    if ( config.chat ) await this._displayRestResultMessage(result, longRest);
+    if ( config.chat ) await this._displayRestResultMessage(result, result.longRest);
 
     /**
      * A hook event that fires when the rest process is completed for an actor.
@@ -2587,86 +2576,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Recovers actor hit points and eliminates any temp HP.
-   * @param {object} [options]
-   * @param {boolean} [options.recoverTemp=true]     Reset temp HP to zero.
-   * @param {boolean} [options.recoverTempMax=true]  Reset temp max HP to zero.
-   * @returns {object}                               Updates to the actor and change in hit points.
-   * @protected
-   */
-  _getRestHitPointRecovery({recoverTemp=true, recoverTempMax=true}={}) {
-    const hp = this.system.attributes.hp;
-    let max = hp.max;
-    let updates = {};
-    if ( recoverTempMax ) updates["system.attributes.hp.tempmax"] = 0;
-    else max = Math.max(0, hp.effectiveMax);
-    updates["system.attributes.hp.value"] = max;
-    if ( recoverTemp ) updates["system.attributes.hp.temp"] = 0;
-    return { updates, hitPointsRecovered: Math.max(0, max - hp.value) };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Recovers actor resources.
-   * @param {object} [options]
-   * @param {boolean} [options.recoverShortRestResources=true]  Recover resources that recharge on a short rest.
-   * @param {boolean} [options.recoverLongRestResources=true]   Recover resources that recharge on a long rest.
-   * @returns {object}                                          Updates to the actor.
-   * @protected
-   */
-  _getRestResourceRecovery({recoverShortRestResources=true, recoverLongRestResources=true}={}) {
-    let updates = {};
-    for ( let [k, r] of Object.entries(this.system.resources ?? {}) ) {
-      if ( Number.isNumeric(r.max) && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
-        updates[`system.resources.${k}.value`] = Number(r.max);
-      }
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Recovers expended spell slots.
-   * @param {object} [options]
-   * @param {boolean} [options.recoverShort=true]    Recover slots that return on short rests.
-   * @param {boolean} [options.recoverLong=true]     Recover slots that return on long rests.
-   * @returns {object}                               Updates to the actor.
-   * @protected
-   */
-  _getRestSpellRecovery({recoverShort=true, recoverLong=true}={}) {
-    const spells = this.system.spells;
-    let updates = {};
-    if ( !spells ) return updates;
-
-    Object.entries(CONFIG.DND5E.spellPreparationModes).forEach(([k, v]) => {
-      const isSR = CONFIG.DND5E.spellcastingTypes[k === "prepared" ? "leveled" : k]?.shortRest;
-      if ( v.upcast && ((recoverShort && isSR) || recoverLong) ) {
-        if ( k === "prepared" ) {
-          Object.entries(spells).forEach(([m, n]) => {
-            if ( /^spell\d+/.test(m) && n.level ) updates[`system.spells.${m}.value`] = n.max;
-          });
-        }
-        else if ( k !== "always" ) updates[`system.spells.${k}.value`] = spells[k].max;
-      }
-    });
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Recovers class hit dice during a long rest.
    *
-   * @param {object} [options]
-   * @param {number} [options.maxHitDice]  Maximum number of hit dice to recover.
-   * @param {number} [options.fraction]    Fraction of max hit dice to recover. Used for NPC recovery and for PCs if
-   *                                       `maxHitDice` isn't specified.
-   * @returns {object}                     Array of item updates and number of hit dice recovered.
+   * @param {RestConfiguration} [config]
+   * @param {number} [config.maxHitDice]  Maximum number of hit dice to recover.
+   * @param {number} [config.fraction]    Fraction of max hit dice to recover. Used for NPC recovery and for PCs if
+   *                                      `maxHitDice` isn't specified.
+   * @param {RestResult} [result={}]      Rest result being constructed.
    * @protected
    */
-  _getRestHitDiceRecovery({ maxHitDice, fraction }={}) {
+  _getRestHitDiceRecovery({ maxHitDice, fraction, ...config }={}, result={}) {
+    const restConfig = CONFIG.DND5E.restTypes[config.type];
+    if ( !this.system.attributes.hd || !restConfig?.recoverHitDice ) return;
     fraction ??= game.settings.get("dnd5e", "rulesVersion") === "modern" ? 1 : 0.5;
 
     // Handle simpler HD recovery for NPCs
@@ -2675,76 +2596,126 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const recovered = Math.min(
         Math.max(1, Math.floor(hd.max * fraction)), hd.spent, maxHitDice ?? Infinity
       );
-      return {
-        actorUpdates: { "system.attributes.hd.spent": hd.spent - recovered },
-        hitDiceRecovered: recovered
-      };
+      foundry.utils.mergeObject(result, {
+        deltas: {
+          hitDice: (result.deltas?.hitDice ?? 0) + recovered
+        },
+        updateData: {
+          "system.attributes.hd.spent": hd.spent - recovered
+        }
+      });
+      return;
     }
 
-    return this.system.attributes.hd.createHitDiceUpdates({ maxHitDice, fraction });
+    this.system.attributes.hd.createHitDiceUpdates({ maxHitDice, fraction, ...config }, result);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers actor hit points and eliminates any temp HP.
+   * @param {RestConfiguration} [config={}]
+   * @param {boolean} [config.recoverTemp=true]     Reset temp HP to zero.
+   * @param {boolean} [config.recoverTempMax=true]  Reset temp max HP to zero.
+   * @param {RestResult} [result={}]                Rest result being constructed.
+   * @protected
+   */
+  _getRestHitPointRecovery({ recoverTemp, recoverTempMax, ...config }={}, result={}) {
+    const restConfig = CONFIG.DND5E.restTypes[config.type ?? "long"];
+    const hp = this.system.attributes?.hp;
+    if ( !hp || !restConfig.recoverHitPoints ) return;
+
+    let max = hp.max;
+    result.updateData ??= {};
+    if ( recoverTempMax ) result.updateData["system.attributes.hp.tempmax"] = 0;
+    else max = Math.max(0, hp.effectiveMax);
+    result.updateData["system.attributes.hp.value"] = max;
+    if ( recoverTemp ) result.updateData["system.attributes.hp.temp"] = 0;
+    foundry.utils.setProperty(
+      result, "deltas.hitPoints", (result.deltas?.hitPoints ?? 0) + Math.max(0, max - hp.value)
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers actor resources.
+   * @param {object} [config={}]
+   * @param {boolean} [config.recoverShortRestResources]  Recover resources that recharge on a short rest.
+   * @param {boolean} [config.recoverLongRestResources]   Recover resources that recharge on a long rest.
+   * @param {RestResult} [result={}]                      Rest result being constructed.
+   * @protected
+   */
+  _getRestResourceRecovery({recoverShortRestResources, recoverLongRestResources, ...config}={}, result={}) {
+    recoverShortRestResources ??= config.type === "short";
+    recoverLongRestResources ??= config.type === "long";
+    for ( let [k, r] of Object.entries(this.system.resources ?? {}) ) {
+      if ( Number.isNumeric(r.max) && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
+        result.updateData[`system.resources.${k}.value`] = Number(r.max);
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers expended spell slots.
+   * @param {RestConfiguration} [config={}]
+   * @param {boolean} [config.recoverShort]    Recover slots that return on short rests.
+   * @param {boolean} [config.recoverLong]     Recover slots that return on long rests.
+   * @param {RestResult} [result={}]           Rest result being constructed.
+   * @protected
+   */
+  _getRestSpellRecovery({ recoverShort, recoverLong, ...config }={}, result={}) {
+    const restConfig = CONFIG.DND5E.restTypes[config.type];
+    if ( !this.system.spells ) return;
+
+    let types = restConfig.recoverSpellSlotTypes;
+    if ( !types ) {
+      types = new Set();
+      for ( const [key, { shortRest }] of Object.entries(CONFIG.DND5E.spellcastingTypes) ) {
+        if ( recoverLong || (recoverShort && shortRest) ) types.add(key);
+      }
+    }
+    for ( const [key, slot] of Object.entries(this.system.spells) ) {
+      if ( !types.has(slot.type) ) continue;
+      result.updateData[`system.spells.${key}.value`] = slot.max;
+    }
   }
 
   /* -------------------------------------------- */
 
   /**
    * Recovers item uses during short or long rests.
-   * @param {object} [options]
-   * @param {boolean} [options.recoverShortRestUses=true]  Recover uses for items that recharge after a short rest.
-   * @param {boolean} [options.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
-   * @param {boolean} [options.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
-   * @param {Roll[]} [options.rolls]                       Rolls that have been performed as part of this rest.
-   * @returns {Promise<object[]>}                          Array of item updates.
+   * @param {object} [config]
+   * @param {boolean} [config.recoverShortRestUses=true]  Recover uses for items that recharge after a short rest.
+   * @param {boolean} [config.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
+   * @param {boolean} [config.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
+   * @param {RestResult} [result={}]                      Rest result being constructed.
    * @protected
    */
-  async _getRestItemUsesRecovery({recoverShortRestUses=true, recoverLongRestUses=true,
-    recoverDailyUses=true, rolls}={}) {
-    let recovery = [];
-    if ( recoverShortRestUses ) recovery.push("sr");
-    if ( recoverLongRestUses ) recovery.push("lr");
-    if ( recoverDailyUses ) recovery.push("day");
-    let updates = [];
-    for ( let item of this.items ) {
-      const uses = item.system.uses ?? {};
-      if ( recovery.includes(uses.per) ) {
-        updates.push({_id: item.id, "system.uses.value": uses.max});
-      }
-      if ( recoverLongRestUses && item.system.recharge?.value ) {
-        updates.push({_id: item.id, "system.recharge.charged": true});
-      }
+  async _getRestItemUsesRecovery({
+    recoverShortRestUses, recoverLongRestUses, recoverDailyUses, ...config
+  }={}, result={}) {
+    const restConfig = CONFIG.DND5E.restTypes[config.type];
+    const recovery = Array.from(restConfig.recoverPeriods ?? []);
+    if ( recoverShortRestUses ) recovery.unshift("sr");
+    if ( recoverLongRestUses ) recovery.unshift("lr");
+    if ( recoverDailyUses || config.newDay ) recovery.unshift("day", "dawn", "dusk");
 
-      // Items that roll to gain charges via a formula
-      if ( recoverDailyUses && uses.recovery && CONFIG.DND5E.limitedUsePeriods[uses.per]?.formula ) {
-        const roll = new Roll(uses.recovery, item.getRollData());
-        if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
-          roll.alter(7, 0, {multiplyNumeric: true});
-        }
-
-        let total = 0;
-        try {
-          total = (await roll.evaluate()).total;
-        } catch(err) {
-          ui.notifications.warn(game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
-            name: item.name,
-            formula: uses.recovery
-          }));
-        }
-
-        const newValue = Math.clamp(uses.value + total, 0, uses.max);
-        if ( newValue !== uses.value ) {
-          const diff = newValue - uses.value;
-          const isMax = newValue === uses.max;
-          const locKey = `DND5E.Item${diff < 0 ? "Loss" : "Recovery"}Roll${isMax ? "Max" : ""}`;
-          updates.push({_id: item.id, "system.uses.value": newValue});
-          rolls.push(roll);
-          await roll.toMessage({
-            user: game.user.id,
-            speaker: {actor: this, alias: this.name},
-            flavor: game.i18n.format(locKey, {name: item.name, count: Math.abs(diff)})
-          });
-        }
+    const rollData = this.getRollData();
+    result.updateItems ??= [];
+    result.rolls ??= [];
+    for ( const item of this.items ) {
+      if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+      const { updates, rolls } = await item.system.recoverUses(recovery, rollData);
+      if ( !foundry.utils.isEmpty(updates) ) {
+        const updateTarget = result.updateItems.find(i => i._id === item.id);
+        if ( updateTarget ) foundry.utils.mergeObject(updateTarget, updates);
+        else result.updateItems.push({ _id: item.id, ...updates });
       }
+      result.rolls.push(...rolls);
     }
-    return updates;
   }
 
   /* -------------------------------------------- */

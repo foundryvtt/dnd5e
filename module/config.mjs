@@ -2192,7 +2192,13 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * Configuration data for rest types.
  *
  * @typedef {object} RestConfiguration
- * @property {Record<string, number>} duration  Duration of different rest variants in minutes.
+ * @property {Record<string, number>} duration    Duration of different rest variants in minutes.
+ * @property {boolean} recoverHitDice             Should hit dice be recovered during this rest?
+ * @property {boolean} recoverHitPoints           Should hit points be recovered during this rest?
+ * @property {string[]} recoverPeriods            What recovery periods should be applied when this rest is taken. The
+ *                                                ordering of the periods determines which is applied if more than one
+ *                                                recovery profile is found.
+ * @property {Set<string>} recoverSpellSlotTypes  Types of spellcasting slots to recover during this rest.
  */
 
 /**
@@ -2205,14 +2211,20 @@ DND5E.restTypes = {
       normal: 60,
       gritty: 480,
       epic: 1
-    }
+    },
+    recoverPeriods: ["sr"],
+    recoverSpellSlotTypes: new Set(["pact"])
   },
   long: {
     duration: {
       normal: 480,
       gritty: 10080,
       epic: 60
-    }
+    },
+    recoverHitDice: true,
+    recoverHitPoints: true,
+    recoverPeriods: ["lr", "sr"],
+    recoverSpellSlotTypes: new Set(["leveled", "pact"])
   }
 };
 
