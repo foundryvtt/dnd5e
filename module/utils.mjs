@@ -429,7 +429,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-class.hbs",
     "systems/dnd5e/templates/items/details/details-consumable.hbs",
     "systems/dnd5e/templates/items/details/details-container.hbs",
-    "systems/dnd5e/templates/items/details/details-damage.hbs",
     "systems/dnd5e/templates/items/details/details-equipment.hbs",
     "systems/dnd5e/templates/items/details/details-feat.hbs",
     "systems/dnd5e/templates/items/details/details-loot.hbs",
@@ -458,6 +457,7 @@ export async function preloadHandlebarsTemplates() {
 
     // Field Partials
     "systems/dnd5e/templates/shared/fields/field-activation.hbs",
+    "systems/dnd5e/templates/shared/fields/field-damage.hbs",
     "systems/dnd5e/templates/shared/fields/field-duration.hbs",
     "systems/dnd5e/templates/shared/fields/field-range.hbs",
     "systems/dnd5e/templates/shared/fields/field-targets.hbs",

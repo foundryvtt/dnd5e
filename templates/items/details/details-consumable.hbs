@@ -53,7 +53,7 @@
 <fieldset>
     <legend>{{ localize "DND5E.CONSUMABLE.FIELDS.damage.label" }}</legend>
     {{ formField fields.damage.fields.replace value=source.damage.replace input=inputs.createCheckboxInput }}
-    {{> "dnd5e.details-damage" fields=fields.damage.fields.base.fields source=source.damage.base
+    {{> "dnd5e.field-damage" fields=fields.damage.fields.base.fields source=source.damage.base
         types=damageTypes prefix="system.damage.base." }}
 </fieldset>
 {{/if}}

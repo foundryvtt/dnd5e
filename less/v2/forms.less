@@ -394,13 +394,22 @@
 
   multi-select.hidden-tags .tags.input-element-tags { display: none; }
 
-  file-picker > button {
+  :is(file-picker, document-tags) > button {
     --button-focus-outline-color: none;
     --button-hover-background-color: var(--dnd5e-background-card);
     --button-text-color: var(--color-text-dark-primary);
     --button-hover-text-color: var(--color-text-dark-primary);
+    --button-hover-border-color: transparent;
     height: var(--form-field-height);
     border: var(--dnd5e-border-gold);
+  }
+
+  /* Numeric Range Fields */
+  .form-fields.range-fields {
+    .sep {
+      --icon-size: 16px;
+      --icon-fill: var(--color-text-light-6);
+    }
   }
 
   /* Checkboxes */

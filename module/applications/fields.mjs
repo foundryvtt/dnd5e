@@ -40,6 +40,22 @@ export function createMultiCheckboxInput(field, config) {
 /* -------------------------------------------- */
 
 /**
+ * Create a number input for a NumberField.
+ * @param {NumberField} field               The field.
+ * @param {FormInputConfig<number>} config  The input configuration.
+ * @returns {HTMLElement|HTMLCollection}
+ */
+export function createNumberInput(field, config) {
+  delete config.input;
+  const input = field.toInput(config);
+  if ( "ariaLabel" in config ) input.ariaLabel = config.ariaLabel;
+  if ( "classes" in config ) input.className = config.classes;
+  return input;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Create a text input for a StringField.
  * @param {StringField} field               The field.
  * @param {FormInputConfig<string>} config  The input configuration.
