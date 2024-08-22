@@ -1,5 +1,4 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
-import { safePropertyExists } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";

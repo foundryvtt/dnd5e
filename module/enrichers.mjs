@@ -570,7 +570,7 @@ async function enrichItem(config, label, options) {
   if ( givenItem.startsWith(".") ) {
     try {
       foundItem = await fromUuid(givenItem, { relative: options.relativeTo });
-    } catch { return null; }
+    } catch(err) { return null; }
   }
 
   if ( foundItem ) {

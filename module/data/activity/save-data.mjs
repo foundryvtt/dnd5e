@@ -90,9 +90,7 @@ export default class SaveActivityData extends BaseActivityData {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /**
-   * Prepare data related to this activity.
-   */
+  /** @inheritDoc */
   prepareData() {
     super.prepareData();
     if ( !this.damage.onSave ) this.damage.onSave = this.isSpell && (this.item.system.level === 0) ? "none" : "half";

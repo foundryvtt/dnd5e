@@ -1225,15 +1225,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       else spellLevel = parseInt(card.dataset.spellLevel) || null;
 
       // Handle different actions
-      let targets;
       switch ( action ) {
-        case "abilityCheck":
-          targets = this._getChatCardTargets(card);
-          for ( let token of targets ) {
-            const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
-            await token.actor.rollAbilityTest(button.dataset.ability, { event, speaker });
-          }
-          break;
         case "applyEffect":
           const li = button.closest("li.effect");
           let effect = item.effects.get(li.dataset.effectId);
@@ -1247,9 +1239,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
               Hooks.onError("Item5e._applyEffectToToken", err, { notify: "warn", log: "warn" });
             }
           }
-          break;
-        case "toolCheck":
-          await item.rollToolCheck({event});
           break;
       }
 

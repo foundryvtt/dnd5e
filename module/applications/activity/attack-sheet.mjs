@@ -56,7 +56,7 @@ export default class AttackSheet extends ActivitySheet {
               : game.i18n.localize("DND5E.None").toLowerCase()
         })
       },
-      // TODO: Stick an <hr> here when possible
+      { rule: true },
       { value: "none", label: game.i18n.localize("DND5E.None") },
       { value: "spellcasting", label: game.i18n.localize("DND5E.Spellcasting") },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({

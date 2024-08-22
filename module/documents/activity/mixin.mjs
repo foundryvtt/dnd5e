@@ -1,3 +1,4 @@
+import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
@@ -30,6 +31,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   static metadata = Object.freeze({
     name: "Activity",
+    sheetClass: ActivitySheet,
     usage: {
       actions: {},
       chatCard: "systems/dnd5e/templates/chat/activity-card.hbs",
