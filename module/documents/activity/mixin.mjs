@@ -650,7 +650,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       actor: this.item.actor,
       item: this.item,
       token: this.item.actor?.token,
-      buttons: buttons.length ? this._usageChatButtons() : null,
+      buttons: buttons.length ? buttons : null,
       description: data.description.chat,
       properties: properties.length ? properties : null,
       subtitle: this.description.chatFlavor ?? data.subtitle,
