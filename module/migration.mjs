@@ -816,6 +816,7 @@ function _migrateItemUses(item, itemData, updateData, flags) {
     foundry.utils.setProperty(updateData, "system.uses.spent", parseInt(max) - parseInt(value));
     flags.persistSourceMigration = true;
   }
+  updateData["flags.dnd5e.-=migratedUses"] = null;
 }
 
 /* -------------------------------------------- */
