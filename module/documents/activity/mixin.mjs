@@ -1,4 +1,5 @@
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
+import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { damageRoll } from "../../dice/dice.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
@@ -172,8 +173,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     // Create an item clone to work with throughout the rest of the process
     let item = this.item.clone({}, { keepId: true });
-    item.prepareData();
-    item.prepareFinalAttributes();
     let activity = item.system.activities.get(this.id);
 
     const usageConfig = activity._prepareUsageConfig(usage);
@@ -311,7 +310,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const updates = await this._prepareUsageUpdates(usageConfig);
     if ( !updates ) return false;
 
-    foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.consumed", usageConfig.consume);
+    foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.consumed", usageConfig.consume);
 
     /**
      * A hook event that fires after an item's resource consumption is calculated, but before any updates are performed.
@@ -645,12 +644,13 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( data.materials?.value ) {
       supplements.push(`<strong>${game.i18n.localize("DND5E.Materials")}</strong> ${data.materials.value}`);
     }
+    const buttons = this._usageChatButtons();
     return {
       activity: this,
       actor: this.item.actor,
       item: this.item,
       token: this.item.actor?.token,
-      buttons: this._usageChatButtons(),
+      buttons: buttons.length ? this._usageChatButtons() : null,
       description: data.description.chat,
       properties: properties.length ? properties : null,
       subtitle: this.description.chatFlavor ?? data.subtitle,
@@ -670,21 +670,45 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
   /**
    * Create the buttons that will be displayed in chat.
-   * @returns {ActivityUsageChatButton[]|null}
+   * @returns {ActivityUsageChatButton[]}
    * @protected
    */
   _usageChatButtons() {
-    return null;
+    const buttons = [];
+
+    if ( this.target?.template?.type ) buttons.push({
+      label: game.i18n.localize("DND5E.TARGET.Action.PlaceTemplate"),
+      icon: '<i class="fas fa-bullseye" inert></i>',
+      dataset: {
+        action: "placeTemplate"
+      }
+    });
+
+    if ( this.consumption.targets.length ) buttons.push({
+      label: game.i18n.localize("DND5E.CONSUMPTION.Action.ConsumeResource"),
+      icon: '<i class="fa-solid fa-cubes-stacked" inert></i>',
+      dataset: {
+        action: "consumeResource"
+      }
+    });
+
+    return buttons;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Determine whether the provided button in a chat message should be visible.
-   * @param {HTMLButtonElement} button
+   * @param {HTMLButtonElement} button  The button to check.
+   * @param {ChatMessage5e} message     Chat message containing the button.
    * @returns {boolean}
    */
-  shouldHideChatButton(button) {
+  shouldHideChatButton(button, message) {
+    const flag = message.getFlag("dnd5e", "use.consumed");
+    switch ( button.dataset.action ) {
+      case "consumeResource": return (flag?.resources === true) || flag?.resources?.length;
+      case "placeTemplate": return !game.user.can("TEMPLATE_CREATE") || !game.canvas.scene;
+    }
     return false;
   }
 
@@ -742,21 +766,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @protected
    */
   async _finalizeUsage(config, results) {
-    results.templates = [];
-    if ( config.create?.measuredTemplate ) {
-      try {
-        for ( const template of dnd5e.canvas.AbilityTemplate.fromActivity(this) ) {
-          const result = await template.drawPreview();
-          if ( result ) results.templates.push(result);
-        }
-      } catch(err) {
-        Hooks.onError("Activity#use", err, {
-          msg: game.i18n.localize("DND5E.PlaceTemplateError"),
-          log: "error",
-          notify: "error"
-        });
-      }
-    }
+    results.templates = config.create?.measuredTemplate ? await this.#placeTemplate() : [];
   }
 
   /* -------------------------------------------- */
@@ -905,7 +915,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     target.disabled = true;
     try {
       if ( handler ) await handler.call(activity, event, target, message);
-      else await activity._onChatAction(event, target);
+      else if ( action === "consumeResource" ) await this.#consumeResource(event, target, message);
+      else if ( action === "placeTemplate" ) await this.#placeTemplate();
+      else await activity._onChatAction(event, target, message);
+    } catch(err) {
+      Hooks.onError("Activity#onChatAction", err, { log: "error", notify: "error" });
     } finally {
       target.disabled = false;
     }
@@ -922,6 +936,43 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @protected
    */
   async _onChatAction(event, target, message) {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle consuming resources from the chat card.
+   * @param {PointerEvent} event     Triggering click event.
+   * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
+   * @param {ChatMessage5e} message  Message associated with the activation.
+   */
+  async #consumeResource(event, target, message) {
+    const messageConfig = {};
+    await this.consume({ consume: { resources: true }, event }, messageConfig);
+    if ( !foundry.utils.isEmpty(messageConfig.data) ) await message.update(messageConfig.data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle placing a measured template in the scene.
+   * @returns {MeasuredTemplateDocument[]}
+   */
+  async #placeTemplate() {
+    const templates = [];
+    try {
+      for ( const template of dnd5e.canvas.AbilityTemplate.fromActivity(this) ) {
+        const result = await template.drawPreview();
+        if ( result ) templates.push(result);
+      }
+    } catch(err) {
+      Hooks.onError("Activity#placeTemplate", err, {
+        msg: game.i18n.localize("DND5E.TARGET.Warning.PlaceTemplate"),
+        log: "error",
+        notify: "error"
+      });
+    }
+    return templates;
+  }
 
   /* -------------------------------------------- */
   /*  Helpers                                     */

@@ -170,10 +170,10 @@ export default class ActivityUsageDialog extends Application5e {
    * @protected
    */
   async _prepareConcentrationContext(context, options) {
-    context.hasConcentration = this.activity.requiresConcentration
-      && !game.settings.get("dnd5e", "disableConcentration");
+    if ( !this.activity.requiresConcentration || game.settings.get("dnd5e", "disableConcentration")
+      || !this._shouldDisplay("concentration") ) return context;
+    context.hasConcentration = true;
     context.notes = [];
-    if ( !context.hasConcentration || !this._shouldDisplay("concentration") ) return context;
 
     context.fields = [{
       field: new BooleanField({ label: game.i18n.localize("DND5E.Concentration") }),
@@ -264,10 +264,10 @@ export default class ActivityUsageDialog extends Application5e {
    */
   async _prepareCreationContext(context, options) {
     context.hasCreation = false;
-    if ( this.activity.target.template.type && this._shouldDisplay("create.measuredTemplate") ) {
+    if ( this.activity.target?.template?.type && this._shouldDisplay("create.measuredTemplate") ) {
       context.hasCreation = true;
       context.template = {
-        field: new BooleanField({ label: game.i18n.localize("DND5E.PlaceTemplate") }),
+        field: new BooleanField({ label: game.i18n.localize("DND5E.TARGET.Action.PlaceTemplate") }),
         name: "create.measuredTemplate",
         value: this.config.create?.measuredTemplate
       };

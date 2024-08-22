@@ -1,6 +1,5 @@
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
-import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
@@ -531,6 +530,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
     return !this.system.attuned && (this.system.attunement === "required");
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Initialization                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  clone(...args) {
+    const item = super.clone(...args);
+    if ( !item.parent ) item.prepareFinalAttributes();
+    return item;
   }
 
   /* -------------------------------------------- */
@@ -1159,7 +1169,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {HTML} html  Rendered chat message.
    */
   static chatListeners(html) {
-    html.on("click", ".chat-card button[data-action]", this._onChatCardAction.bind(this));
     html.on("click", ".item-name, .collapsible", this._onChatCardToggleContent.bind(this));
     html[0].addEventListener("click", event => {
       if ( event.target.closest("[data-context-menu]") ) {
@@ -1216,7 +1225,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
       // Handle different actions
       let targets;
-      let messageUpdates = {};
       switch ( action ) {
         case "abilityCheck":
           targets = this._getChatCardTargets(card);
@@ -1239,31 +1247,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             }
           }
           break;
-        case "consumeUsage":
-          await item.consume(item, { consumeUsage: true }, messageUpdates);
-          break;
-        case "consumeResource":
-          await item.consume(item, { consumeResource: true }, messageUpdates);
-          break;
-        case "placeTemplate":
-          try {
-            await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
-          } catch(err) {
-            Hooks.onError("Item5e#_onChatCardAction", err, {
-              msg: game.i18n.localize("DND5E.PlaceTemplateError"),
-              log: "error",
-              notify: "error"
-            });
-          }
-          break;
         case "toolCheck":
           await item.rollToolCheck({event});
           break;
       }
-      if ( !foundry.utils.isEmpty(messageUpdates) ) await message.update(messageUpdates);
 
-    } catch(err) {
-      Hooks.onError("Item5e._onChatCardAction", err, { log: "error", notify: "error" });
     } finally {
       // Re-enable the button
       button.disabled = false;

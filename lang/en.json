@@ -768,7 +768,6 @@
 "DND5E.ConsumeMaterial": "Material",
 "DND5E.ConsumeCharges": "Item Uses",
 "DND5E.ConsumeResource": "Consume Resource?",
-"DND5E.ConsumeResourceAction": "Consume Resource",
 "DND5E.ConsumeRecharge": "Consume Recharge?",
 "DND5E.ConsumeScaling": "Resource Scaling",
 "DND5E.ConsumeScalingLabel": "Use Resources",
@@ -889,6 +888,7 @@
     }
   },
   "Action": {
+    "ConsumeResource": "Consume Resource",
     "Create": "Create Consumption Target",
     "Delete": "Delete Consumption Target"
   },
@@ -1886,8 +1886,6 @@
 "DND5E.PassivePerception": "Passive Perception",
 "DND5E.Period": "Period",
 "DND5E.PersonalityTraits": "Personality Traits",
-"DND5E.PlaceTemplate": "Place Measured Template",
-"DND5E.PlaceTemplateError": "Failed to place measured template",
 "DND5E.Polymorph": "Polymorph",
 "DND5E.PolymorphAcceptSettings": "Custom Settings",
 "DND5E.PolymorphCustomTransformation": "Custom Transformation",
@@ -2565,6 +2563,12 @@
         }
       }
     }
+  },
+  "Action": {
+    "PlaceTemplate": "Place Measured Template"
+  },
+  "Warning": {
+    "PlaceTemplate": "Failed to place measured template."
   }
 },
 
