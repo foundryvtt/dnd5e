@@ -177,7 +177,11 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
     // If period is charges, set the recovery type to `formula`
     if ( source.uses.per === "charges" ) {
-      source.uses.recovery = [{ period: "lr", type: "formula", formula: source.uses.recovery }];
+      if ( source.uses.recovery ) {
+        source.uses.recovery = [{ period: "lr", type: "formula", formula: source.uses.recovery }];
+      } else {
+        delete source.uses.recovery;
+      }
     }
 
     // If period is not blank, set recovery type to `recoverAll`
@@ -204,6 +208,10 @@ export default class ActivitiesTemplate extends SystemDataModel {
    */
   static initializeActivities(source) {
     if ( this.#shouldCreateInitialActivity(source) ) this.#createInitialActivity(source);
+    const uses = source.system?.uses ?? {};
+    if ( source._id && source.type && ("value" in uses) && uses.max ) {
+      foundry.utils.setProperty(source, "flags.dnd5e.migratedUses", uses.value);
+    }
   }
 
   /* -------------------------------------------- */
