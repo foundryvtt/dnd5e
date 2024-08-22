@@ -88,8 +88,15 @@ export default class UsesField extends SchemaField {
 
     // Search the recovery profiles in order to find the first matching period,
     // and then find the first profile that uses that recovery period
-    const matchingPeriod = periods.find(p => this.uses.recovery.find(r => r.period === p));
-    const profile = this.uses.recovery.find(r => r.period === matchingPeriod);
+    let profile;
+    for ( const period of periods ) {
+      for ( const recovery of this.uses.recovery ) {
+        if ( recovery.period === period ) {
+          profile = recovery;
+          break;
+        }
+      }
+    }
     if ( !profile ) return false;
 
     const updates = {};
