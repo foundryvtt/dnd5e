@@ -1,7 +1,7 @@
-import { simplifyBonus } from "../../utils.mjs";
+import { filteredKeys, simplifyBonus } from "../../utils.mjs";
 import Application5e from "../api/application.mjs";
 
-const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Dialog for configuring the usage of an activity.
@@ -233,26 +233,23 @@ export default class ActivityUsageDialog extends Application5e {
     };
 
     if ( this._shouldDisplay("consume.resources") ) {
+      context.resources = [];
       const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
-      const resources = this.activity.consumption.targets.map((target, value) => {
-        return {
-          value,
-          label: CONFIG.DND5E.activityConsumptionTypes[target.type].prompt,
-          selected: (isArray && this.config.consume.resources.includes(value))
-            || (!isArray && (this.config.consume?.resources !== false) && (this.config.consume !== false))
-        };
-      });
-      if ( resources.length ) context.resources = {
-        field: new SetField(new NumberField()),
-        name: "consume.resources",
-        options: resources,
-        dataset: { dtype: "Number" }
-      };
+      for ( const [index, target] of this.activity.consumption.targets.entries() ) {
+        context.resources.push({
+          field: new BooleanField({
+            label: CONFIG.DND5E.activityConsumptionTypes[target.type].prompt,
+            hint: target.getConsumptionHint(this.config)
+          }),
+          name: `consume.resources.${index}`,
+          value: (isArray && this.config.consume.resources.includes(index))
+            || (!isArray && (this.config.consume?.resources !== false) && (this.config.consume !== false)),
+          input: context.inputs.createCheckboxInput
+        });
+      }
     }
 
     context.hasConsumption = context.spellSlot || context.resources;
-
-    // TODO: Add improved consumption hints once consumption is implemented
 
     return context;
   }
@@ -440,6 +437,9 @@ export default class ActivityUsageDialog extends Application5e {
     } else if ( "scalingValue" in submitData ) {
       submitData.scaling = submitData.scalingValue - 1;
       delete submitData.scalingValue;
+    }
+    if ( foundry.utils.getType(submitData.consume?.resources) === "Object" ) {
+      submitData.consume.resources = filteredKeys(submitData.consume.resources).map(i => Number(i));
     }
     return submitData;
   }

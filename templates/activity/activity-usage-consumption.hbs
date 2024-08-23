@@ -6,10 +6,15 @@
         {{#if spellSlot}}
             {{ formField spellSlot.field name=spellSlot.name value=spellSlot.value input=inputs.createCheckboxInput }}
         {{/if}}
-        {{#if resources}}
-            {{ formInput resources.field name=resources.name options=resources.options type="checkboxes"
-               dataset=resources.dataset }}
-        {{/if}}
+        {{#each resources}}
+        <div class="form-group">
+            <label>{{ field.label }}</label>
+            <div class="form-fields">
+                {{ formInput field name=name value=value input=input }}
+            </div>
+            {{#if field.hint}}<p class="hint">{{{ field.hint }}}{{/if}}
+        </div>
+        {{/each}}
     </fieldset>
     {{/if~}}
 </section>

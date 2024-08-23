@@ -1,3 +1,4 @@
+import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
 import { formatNumber } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
@@ -285,7 +286,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   static async consumeSpellSlots(config, updates) {
     const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
-    const levelNumber = (await this.resolveLevel({ config, rolls: updates.rolls })).total;
+    const levelNumber = this.resolveLevel({ config, rolls: updates.rolls });
 
     // Check to see if enough slots are available at the specified level
     const levelData = this.actor.system.spells?.[`spell${levelNumber}`];
@@ -327,6 +328,150 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     );
 
     return { spent: uses.spent + cost };
+  }
+
+  /* -------------------------------------------- */
+  /*  Consumption Hints                           */
+  /* -------------------------------------------- */
+
+  /**
+   * Create hint text indicating how much of this resource will be consumed/recovered.
+   * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+   * @returns {string}
+   */
+  getConsumptionHint(config) {
+    const typeConfig = CONFIG.DND5E.activityConsumptionTypes[this.type];
+    if ( !typeConfig?.consumptionHint ) return "";
+    return typeConfig.consumptionHint.call(this, config);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create hint text indicating how much of this resource will be consumed/recovered.
+   * @this {ConsumptionTargetData}
+   * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+   * @returns {string}
+   */
+  static consumptionHintActivityUses(config) {
+    const { cost, isNegative, pluralRule } = this._resolveHintCost(config);
+    return game.i18n.format(
+      `DND5E.CONSUMPTION.Type.ActivityUses.PromptHint${isNegative ? "Increase" : "Decrease"}`,
+      { cost, use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`) }
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create hint text indicating how much of this resource will be consumed/recovered.
+   * @this {ConsumptionTargetData}
+   * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+   * @returns {string}
+   */
+  static consumptionHintAttribute(config) {
+    const { cost, isNegative } = this._resolveHintCost(config);
+    return game.i18n.format(
+      `DND5E.CONSUMPTION.Type.Attribute.PromptHint${isNegative ? "Increase" : "Decrease"}`,
+      { cost, attribute: this.target }
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create hint text indicating how much of this resource will be consumed/recovered.
+   * @this {ConsumptionTargetData}
+   * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+   * @returns {string}
+   */
+  static consumptionHintHitDice(config) {
+    const { cost, isNegative, pluralRule } = this._resolveHintCost(config);
+    let denomination;
+    if ( this.target === "smallest" ) denomination = game.i18n.localize("DND5E.ConsumeHitDiceSmallest");
+    else if ( this.target === "largest" ) denomination = game.i18n.localize("DND5E.ConsumeHitDiceLargest");
+    else denomination = this.target;
+    return game.i18n.format(
+      `DND5E.CONSUMPTION.Type.HitDice.PromptHint${isNegative ? "Increase" : "Decrease"}`,
+      {
+        cost, denomination: denomination.toLowerCase(),
+        die: game.i18n.localize(`DND5E.CONSUMPTION.Type.HitDie.${pluralRule}`)
+      }
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create hint text indicating how much of this resource will be consumed/recovered.
+   * @this {ConsumptionTargetData}
+   * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+   * @returns {string}
+   */
+  static consumptionHintItemUses(config) {
+    const { cost, isNegative, pluralRule } = this._resolveHintCost(config);
+    const item = this.actor.items.get(this.target);
+    return game.i18n.format(
+      `DND5E.CONSUMPTION.Type.ItemUses.PromptHint${isNegative ? "Increase" : "Decrease"}`,
+      {
+        cost, use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`),
+        item: item ? `<em>${item.name}</em>` : game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase()
+      }
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create hint text indicating how much of this resource will be consumed/recovered.
+   * @this {ConsumptionTargetData}
+   * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+   * @returns {string}
+   */
+  static consumptionHintMaterial(config) {
+    const { cost, isNegative } = this._resolveHintCost(config);
+    return game.i18n.format(
+      `DND5E.CONSUMPTION.Type.Material.PromptHint${isNegative ? "Increase" : "Decrease"}`,
+      { cost, item: `<em>${this.actor.items.get(this.target).name}</em>` }
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create hint text indicating how much of this resource will be consumed/recovered.
+   * @this {ConsumptionTargetData}
+   * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+   * @returns {string}
+   */
+  static consumptionHintSpellSlots(config) {
+    const { cost, isNegative, pluralRule } = this._resolveHintCost(config);
+    const levelNumber = this.resolveLevel({ config });
+    const level = CONFIG.DND5E.spellLevels[levelNumber].toLowerCase();
+    return game.i18n.format(
+      `DND5E.CONSUMPTION.Type.SpellSlots.PromptHint${isNegative ? "Increase" : "Decrease"}`,
+      { cost, slot: game.i18n.format(`DND5E.CONSUMPTION.Type.SpellSlot.${pluralRule}`, { level }) }
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Resolve the cost for the consumption hint.
+   * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+   * @returns {{ cost: string, isNegative: boolean, pluralRule: string }}
+   */
+  _resolveHintCost(config) {
+    const costRoll = this.resolveCost({ config, evaluate: false });
+    let cost = costRoll.isDeterministic
+      ? String(costRoll.evaluateSync().total)
+      : simplifyRollFormula(costRoll.formula);
+    const isNegative = cost.startsWith("-");
+    if ( isNegative ) cost = cost.replace("-", "");
+    let pluralRule;
+    if ( costRoll.isDeterministic ) pluralRule = new Intl.PluralRules(game.i18n.lang).select(Number(cost));
+    else pluralRule = "other";
+    return { cost, isNegative, pluralRule };
   }
 
   /* -------------------------------------------- */
@@ -423,9 +568,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {ActivityUseConfiguration} [options.config]  Usage configuration.
    * @param {boolean} [options.evaluate=true]            Should the cost roll be evaluated?
    * @param {BasicRoll[]} [options.rolls]                Rolls performed as part of the usages.
-   * @returns {Promise<BasicRoll>}
+   * @returns {Promise<BasicRoll>|BasicRoll}             Returns Promise if evaluate is `true`.
    */
-  async resolveCost({ config={}, ...options }={}) {
+  resolveCost({ config={}, ...options }={}) {
     return this._resolveScaledRoll(this.value, this.scaling.mode === "amount" ? config.scaling ?? 0 : 0, options);
   }
 
@@ -435,12 +580,15 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Resolve the spell level to consume, taking scaling into account.
    * @param {object} [options={}]
    * @param {ActivityUseConfiguration} [options.config]  Usage configuration.
-   * @param {boolean} [options.evaluate=true]            Should the slot roll be evaluated?
    * @param {BasicRoll[]} [options.rolls]                Rolls performed as part of the usages.
-   * @returns {Promise<BasicRoll>}
+   * @returns {number}
    */
-  async resolveLevel({ config={}, ...options }={}) {
-    return this._resolveScaledRoll(this.value, this.scaling.mode === "level" ? config.scaling ?? 0 : 0, options);
+  resolveLevel({ config={}, ...options }={}) {
+    const roll = this._resolveScaledRoll(
+      this.target, this.scaling.mode === "level" ? config.scaling ?? 0 : 0, { ...options, evaluate: false }
+    );
+    roll.evaluateSync();
+    return roll.total;
   }
 
   /* -------------------------------------------- */
@@ -455,7 +603,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @returns {Promise<BasicRoll>}
    * @internal
    */
-  async _resolveScaledRoll(formula, scaling, { evaluate=true, rolls }={}) {
+  _resolveScaledRoll(formula, scaling, { evaluate=true, rolls }={}) {
     const rollData = this.activity.getRollData();
     const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
 
@@ -477,7 +625,10 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       roll.resetFormula();
     }
 
-    if ( evaluate ) await roll.evaluate();
+    if ( evaluate ) return roll.evaluate().then(roll => {
+      if ( rolls && !roll.isDeterministic ) rolls.push(roll);
+      return roll;
+    });
     if ( rolls && !roll.isDeterministic ) rolls.push(roll);
     return roll;
   }
