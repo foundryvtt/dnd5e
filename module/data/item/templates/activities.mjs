@@ -227,7 +227,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( !source._id || !source.type || !source.system || !source.effects ) return false;
 
     // If item doesn't have an action type or activation, then it doesn't need an activity
-    if ( !source.system.actionType && !source.system.activation?.type ) return false;
+    if ( !source.system.actionType && !source.system.activation?.type
+      && (source.type !== "tool") ) return false;
 
     // If item was updated after `4.0.0`, it shouldn't need the migration
     if ( !foundry.utils.isNewerVersion("4.0.0", source._stats?.systemVersion ?? "0.0.0") ) return false;
@@ -250,13 +251,14 @@ export default class ActivitiesTemplate extends SystemDataModel {
       rwak: "attack",
       msak: "attack",
       rsak: "attack",
-      abil: null, // TODO: No specific activity type for this, perhaps UtilityActivity with the ability as an enricher?
+      abil: "check",
       save: "save",
       ench: "enchant",
       summ: "summon",
       heal: "heal"
     }[source.system.actionType] ?? "utility";
     if ( (type === "utility") && source.system.damage?.parts?.length ) type = "damage";
+    if ( source.type === "tool" ) type = "check";
 
     const cls = CONFIG.DND5E.activityTypes[type].documentClass;
     cls.createInitialActivity(source);

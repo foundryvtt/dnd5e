@@ -3381,6 +3381,9 @@ DND5E.activityTypes = {
   attack: {
     documentClass: activities.AttackActivity
   },
+  check: {
+    documentClass: activities.CheckActivity
+  },
   damage: {
     documentClass: activities.DamageActivity
   },
