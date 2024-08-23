@@ -414,7 +414,8 @@ DND5E.weaponTypeMap = {
   simpleM: "melee",
   simpleR: "ranged",
   martialM: "melee",
-  martialR: "ranged"
+  martialR: "ranged",
+  siege: "ranged"
 };
 
 /* -------------------------------------------- */

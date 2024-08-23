@@ -456,6 +456,10 @@
                                         {{ units }}
                                     </span>
                                     {{/with}}
+
+                                    {{!-- Reach --}}
+                                    {{else if range.reach}}
+                                    <span class="range">{{ range.reach }} {{ range.units }}</span>
                                     {{/if}}
                                 </div>
                             </div>
