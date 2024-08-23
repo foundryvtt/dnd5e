@@ -1027,7 +1027,14 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    .card.spellcasting { width: 230px; }
+    .card.spellcasting {
+      width: 230px;
+
+      .prepared .value {
+        font-size: var(--font-size-14);
+        .separator, .max { color: var(--color-text-light-6) }
+      }
+    }
   }
 
   .spells-list .items-header .item-name { cursor: pointer; }

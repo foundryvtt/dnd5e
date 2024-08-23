@@ -32,6 +32,16 @@
                 <span class="label">{{ localize "DND5E.SpellDC" }}</span>
                 <span class="value">{{ save }}</span>
             </div>
+            {{#if preparation.max}}
+            <div class="prepared">
+                <span class="label">{{ localize "DND5E.Prepared" }}</span>
+                <span class="value">
+                    <span class="count">{{ preparation.value }}</span>
+                    <span class="separator">&sol;</span>
+                    <span class="max">{{ preparation.max }}</span>
+                </span>
+            </div>
+            {{/if}}
             {{#if @root.isNPC}}
             <div class="level">
                 <span class="label">{{ localize "DND5E.Level" }}</span>

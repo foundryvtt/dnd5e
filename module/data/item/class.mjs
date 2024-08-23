@@ -80,6 +80,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /** @inheritDoc */
   prepareFinalData() {
     this.isOriginalClass = this.parent.isOriginalClass;
+    this.spellcasting.preparation.value ??= 0;
     this.spellcasting.preparation.max = simplifyBonus(
       this.spellcasting.preparation.formula,
       this.parent.getRollData({ deterministic: true})
