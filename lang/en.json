@@ -2098,6 +2098,12 @@
         "hint": "Individual damage parts to include with the roll."
       }
     },
+    "effects": {
+      "onSave": {
+        "label": "Always Apply",
+        "hint": "This effect will always be applied, even if the target succeeds on its saving throw."
+      }
+    },
     "save": {
       "label": "Save Details",
       "ability": {
