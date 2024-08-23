@@ -121,14 +121,14 @@
     <div class="form-fields">
         <p class="hint">{{ localize "DND5E.WEAPON.FIELDS.damage.hint" }}</p>
     </div>
-    {{> "dnd5e.details-damage" fields=fields.damage.fields.base.fields source=source.damage.base types=damageTypes
+    {{> "dnd5e.field-damage" fields=fields.damage.fields.base.fields source=source.damage.base types=damageTypes
         prefix="system.damage.base." denominationOptions=denominationOptions.base }}
 </fieldset>
 
 {{#if properties.object.ver}}
 <fieldset>
     <legend>{{ localize "DND5E.Versatile" }}</legend>
-    {{> "dnd5e.details-damage" fields=fields.damage.fields.versatile.fields source=source.damage.versatile
+    {{> "dnd5e.field-damage" fields=fields.damage.fields.versatile.fields source=source.damage.versatile
         prefix="system.damage.versatile." bonus=false numberPlaceholder=source.damage.base.number
         denominationOptions=denominationOptions.versatile }}
 </fieldset>

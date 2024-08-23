@@ -39,7 +39,7 @@ export default class ActivitySheet extends Application5e {
       submitOnChange: true
     },
     position: {
-      width: 540,
+      width: 500,
       height: "auto"
     }
   };
@@ -362,11 +362,11 @@ export default class ActivitySheet extends Application5e {
       }, []);
     }
 
+    context.denominationOptions = [
+      { value: "", label: "" },
+      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
+    ];
     if ( context.activity.damage?.parts ) {
-      const denominationOptions = [
-        { value: "", label: "" },
-        ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
-      ];
       const scalingOptions = [
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
         ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
@@ -380,7 +380,6 @@ export default class ActivitySheet extends Application5e {
           prefix: `damage.parts.${index + indexOffset}.`,
           source: context.source.damage.parts[index + indexOffset] ?? data,
           canScale: this.activity.canScaleDamage,
-          denominationOptions,
           scalingOptions,
           typeOptions: Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({
             value, label: config.label, selected: data.types.has(value)

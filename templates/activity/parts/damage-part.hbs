@@ -17,7 +17,7 @@
                  localize=true classes="label-top" }}
 
     {{ formField fields.denomination name=(concat prefix "denomination") value=data.denomination
-                 options=denominationOptions label="DND5E.Die" hint=false localize=true classes="label-top" }}
+                 options=@root.denominationOptions label="DND5E.Die" hint=false localize=true classes="label-top" }}
 
     {{ formField fields.bonus name=(concat prefix "bonus") value=data.bonus label="DND5E.Bonus" hint=false localize=true
                  classes="label-top" }}
@@ -25,7 +25,7 @@
     <input type="hidden" name="{{ prefix }}custom.formula" value="{{ data.custom.formula }}">
 
     {{/if}}
-    {{#unless (or singleton data.base)}}
+    {{#unless data.base}}
     <button type="button" class="unbutton control-button" data-action="deleteDamagePart"
             data-tooltip="DND5E.DAMAGE.Part.Action.Delete"
             aria-label="{{ localize 'DND5E.DAMAGE.Part.Action.Delete' }}">

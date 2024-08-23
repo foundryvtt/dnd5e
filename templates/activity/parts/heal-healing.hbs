@@ -1,5 +1,5 @@
 <fieldset>
     <legend>{{ localize "DND5E.HEAL.FIELDS.healing.label" }}</legend>
-    {{> "systems/dnd5e/templates/activity/parts/damage-part.hbs" singleton=true
-        fields=fields.healing.fields data=source.healing prefix="healing." }}
+    {{> "dnd5e.field-damage" fields=fields.healing.fields source=source.healing prefix="healing." heal=true
+        types=typeOptions }}
 </fieldset>

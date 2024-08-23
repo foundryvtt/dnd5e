@@ -1289,7 +1289,7 @@
       },
       "properties": {
         "label": "Valid Properties",
-        "hint": "Specific item properties to which must be present for this enchantment can be applied."
+        "hint": "Specific item properties which must be present for this enchantment to be applied."
       },
       "type": {
         "label": "Item Type",
@@ -1310,7 +1310,7 @@
       "Create": "Create Enchantment",
       "Delete": "Delete Enchantment"
     },
-    "Empty": "No associated enchantments, use the button below to create one or select an existing enchantment from the control above."
+    "Empty": "No associated enchantments. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing enchantment from the drop-down."
   },
   "Warning": {
     "ConcentrationEnded": "Cannot apply this enchantment because concentration has ended.",
@@ -2406,7 +2406,7 @@
       },
       "saves": {
         "label": "Match Saves",
-        "hint": "Modify to saving throw DCs on the summoned creature's abilities to match that of the summoner."
+        "hint": "Modify saving throw DCs on the summoned creature's abilities to match that of the summoner."
       }
     },
     "profiles": {
@@ -2417,6 +2417,7 @@
         },
         "cr": {
           "label": "Challenge Rating",
+          "abbr": "CR",
           "hint": "Maximum CR of the summoned creature."
         },
         "level": {
@@ -2472,7 +2473,7 @@
   },
   "CreatureChanges": {
     "Label": "Creature Changes",
-    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats. Summoned creature's stats can be referenced using @summon (e.g. @summon.attributes.hd.max to reference the creature's hit dice count)."
+    "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats. Summoned creatures' stats can be referenced using @summon (e.g. @summon.attributes.hd.max to reference the creature's hit dice count)."
   },
   "ItemChanges": {
     "Label": "Item Changes",
@@ -2486,8 +2487,8 @@
     },
     "ChallengeRatingLabel": "Challenge Rating of {cr} or lower",
     "DropHint": "Drop creature here",
-    "Empty": "Click below to create a profile.",
-    "EmptyDrop": "Click below to create a profile or drop a creature to summon here."
+    "Empty": "Click the <i class=\"fas fa-plus\"></i> button above to create a profile.",
+    "EmptyDrop": "Click the <i class=\"fas fa-plus\"></i> button above to create a profile or drop a creature to summon here."
   },
   "Warning": {
     "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",

@@ -3,14 +3,23 @@
   .window-content { overflow-y: auto; }
 
   .additional-tray {
-    margin-block-start: 8px;
+    margin-block-start: 4px;
+    transition: all 250ms ease;
+
+    &.collapsed { margin-block: 1px -4px; }
+
+    .wrapper {
+      padding-inline: 6px;
+      > :first-child { margin-block-start: 8px; }
+      > :last-child { margin-block-end: 3px; }
+    }
 
     > label {
       cursor: pointer;
       display: flex;
       justify-content: center;
       gap: .25rem;
-      font-size: var(--font-size-11);
+      font-size: var(--font-size-10);
 
       > span { flex: none; }
       .fa-gears { color: var(--color-text-light-6); }
@@ -22,9 +31,6 @@
         align-self: center;
       }
     }
-    .form-group:last-child {
-      margin-block-end: -3px;
-    }
   }
   .separated-list {
     margin-top: 4px;
@@ -32,6 +38,15 @@
       padding: 6px;
       border: var(--dnd5e-border-gold);
       box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+
+      &.empty {
+        border: none;
+        box-shadow: none;
+        font-style: italic;
+        color: var(--color-text-dark-5);
+        padding-block: 0;
+      }
+
       .list-controls button.control-button { --size: 24px; }
     }
     .details { align-items: stretch; }
@@ -45,7 +60,7 @@
     }
     .name { flex: 1 0 175px; }
     .drop-area {
-      border: 1px dashed black;
+      border: 1px dashed var(--color-border-light-2);
       border-radius: 4px;
       padding-inline: 4px;
     }
@@ -53,6 +68,22 @@
       flex: 0 0 24px;
       height: 24px;
       border-width: 1px;
+    }
+
+    &.enchantments > li { padding-top: 9px; }
+
+    .split-group.full-width {
+      padding: 0;
+      box-shadow: none;
+
+      > .form-fields { align-items: end; }
+
+      .sep {
+        height: var(--form-field-height);
+        display: grid;
+        place-content: center;
+        padding: 0 1px;
+      }
     }
   }
 }
@@ -63,17 +94,23 @@
 
 .summon-activity.sheet {
   .content-link, .drop-area, .name {
-    flex: 0 0 175px;
     display: flex;
     align-items: center;
     align-content: center;
   }
-  .separated-list {
-    input::placeholder { opacity: .5; }
-    .details > label {
-      display: flex;
-      gap: 4px;
-      strong { align-self: center; }
-    }
+
+  .drop-area {
+    justify-content: center;
+    font-size: var(--font-size-11);
+    font-style: italic;
+    height: var(--form-field-height);
+    color: var(--color-text-dark-5);
+  }
+
+  .content-link {
+    height: var(--form-field-height);
+    text-align: center;
+    border: 1px dashed var(--color-border-light-2);
+    border-radius: 4px;
   }
 }

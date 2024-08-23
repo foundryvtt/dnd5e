@@ -17,20 +17,20 @@
 {{!-- Simple Input --}}
 {{#unless source.custom.enabled}}
 <div class="form-group split-group">
-    <label>{{ localize "DND5E.DAMAGE.Title" }}</label>
+    <label>{{#if heal}}{{ localize "DND5E.HEAL.Title" }}{{else}}{{ localize "DND5E.DAMAGE.Title" }}{{/if}}</label>
     <div class="form-fields">
 
         {{!-- Number --}}
         {{ formField fields.number name=(concat prefix "number") value=source.number label="DND5E.Number" localize=true
-                     classes="label-top" placeholder=numberPlaceholder }}
+                     hint=false classes="label-top" placeholder=numberPlaceholder }}
 
         {{!-- Die --}}
         {{ formField fields.denomination name=(concat prefix "denomination") value=source.denomination label="DND5E.Die"
-                     localize=true options=denominationOptions classes="label-top" }}
+                     hint=false localize=true options=denominationOptions classes="label-top" }}
 
         {{!-- Bonus --}}
         {{ formField fields.bonus name=(concat prefix "bonus") value=source.bonus label="DND5E.Bonus" localize=true
-                     classes="label-top" }}
+                     hint=false classes="label-top" }}
     </div>
 </div>
 {{/unless}}

@@ -2,6 +2,6 @@
     {{> "systems/dnd5e/templates/activity/parts/activity-identity.hbs" }}
     <fieldset>
         <legend>{{ localize "DND5E.ACTIVITY.SECTIONS.Behavior" }}</legend>
-        {{ formField fields.target.fields.prompt value=source.target.prompt }}
+        {{ formField fields.target.fields.prompt value=source.target.prompt input=inputs.createCheckboxInput }}
     </fieldset>
 </section>
