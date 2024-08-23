@@ -48,7 +48,7 @@ export default class SaveSheet extends ActivitySheet {
       value, label: config.label
     }));
     context.calculationOptions = [
-      { value: "custom", label: game.i18n.localize("DND5E.SAVE.FIELDS.save.dc.CustomFormula") },
+      { value: "", label: game.i18n.localize("DND5E.SAVE.FIELDS.save.dc.CustomFormula") },
       { rule: true },
       { value: "spellcasting", label: game.i18n.localize("DND5E.SpellAbility") },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({

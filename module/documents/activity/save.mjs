@@ -47,7 +47,8 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
       `,
       icon: '<i class="fa-solid fa-shield-heart" inert></i>',
       dataset: {
-        ability: this.save.ability, dc,
+        dc,
+        ability: this.save.ability,
         action: "rollSave",
         visibility: "all"
       }

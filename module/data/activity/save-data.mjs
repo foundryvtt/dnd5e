@@ -39,7 +39,7 @@ export default class SaveActivityData extends BaseActivityData {
       save: new SchemaField({
         ability: new StringField({ initial: () => Object.keys(CONFIG.DND5E.abilities)[0] }),
         dc: new SchemaField({
-          calculation: new StringField(),
+          calculation: new StringField({ initial: "initial" }),
           formula: new FormulaField({ deterministic: true })
         })
       })
@@ -68,7 +68,7 @@ export default class SaveActivityData extends BaseActivityData {
   /** @override */
   static transformTypeData(source, activityData, options) {
     let calculation = source.system.save?.scaling;
-    if ( calculation === "flat" ) calculation = "custom";
+    if ( calculation === "flat" ) calculation = "";
     else if ( calculation === "spell" ) calculation = "spellcasting";
 
     return foundry.utils.mergeObject(activityData, {
@@ -94,7 +94,7 @@ export default class SaveActivityData extends BaseActivityData {
   prepareData() {
     super.prepareData();
     if ( !this.damage.onSave ) this.damage.onSave = this.isSpell && (this.item.system.level === 0) ? "none" : "half";
-    if ( !this.save.dc.calculation ) this.save.dc.calculation = this.isSpell ? "spellcasting" : "custom";
+    if ( this.save.dc.calculation === "initial" ) this.save.dc.calculation = this.isSpell ? "spellcasting" : "";
   }
 
   /* -------------------------------------------- */
@@ -106,8 +106,8 @@ export default class SaveActivityData extends BaseActivityData {
     this.prepareDamageLabel(this.damage.parts, rollData);
 
     let ability;
-    if ( this.save.dc.calculation === "custom" ) this.save.dc.value = simplifyBonus(this.save.dc.formula, rollData);
-    else ability = this.ability;
+    if ( this.save.dc.calculation ) ability = this.ability;
+    else this.save.dc.value = simplifyBonus(this.save.dc.formula, rollData);
     if ( ability ) this.save.dc.value = this.actor?.system.abilities?.[ability]?.dc
       ?? 8 + (this.actor?.system.attributes?.prof ?? 0);
 

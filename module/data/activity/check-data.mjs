@@ -97,8 +97,8 @@ export default class CheckActivityData extends BaseActivityData {
     }
 
     let ability;
-    if ( !this.check.dc.calculation ) this.check.dc.value = simplifyBonus(this.check.dc.formula, rollData);
-    else ability = this.ability;
+    if ( this.check.dc.calculation ) ability = this.ability;
+    else this.check.dc.value = simplifyBonus(this.check.dc.formula, rollData);
     if ( ability ) this.check.dc.value = this.actor?.system.abilities?.[ability]?.dc
       ?? 8 + (this.actor?.system.attributes?.prof ?? 0);
 
