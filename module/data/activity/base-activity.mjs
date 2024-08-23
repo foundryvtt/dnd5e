@@ -28,6 +28,7 @@ const {
  * @property {string} name                       Name for this activity.
  * @property {string} img                        Image that represents this activity.
  * @property {ActivationField} activation        Activation time & conditions.
+ * @property {boolean} activation.override       Override activation values inferred from item.
  * @property {object} consumption
  * @property {ConsumptionTargetData[]} consumption.targets  Collection of consumption targets.
  * @property {object} consumption.scaling
@@ -36,9 +37,13 @@ const {
  * @property {object} description
  * @property {string} description.chatFlavor     Extra text displayed in the activation chat message.
  * @property {DurationField} duration            Duration of the effect.
+ * @property {boolean} duration.concentration    Does this effect require concentration?
+ * @property {boolean} duration.override         Override duration values inferred from item.
  * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
  * @property {object} range
+ * @property {boolean} range.override            Override range values inferred from item.
  * @property {TargetField} target
+ * @property {boolean} target.override           Override target values inferred from item.
  * @property {boolean} target.prompt             Should the player be prompted to place the template?
  * @property {UsesField} uses                    Uses available to this activity.
  */
@@ -81,6 +86,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         chatFlavor: new StringField()
       }),
       duration: new DurationField({
+        concentration: new BooleanField(),
         override: new BooleanField()
       }),
       effects: new ArrayField(new AppliedEffectField()),
@@ -160,7 +166,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get requiresConcentration() {
-    return this.item.requiresConcentration;
+    return this.duration.concentration;
   }
 
   /* -------------------------------------------- */
@@ -342,7 +348,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   static transformDurationData(source, options) {
     if ( source.type === "spell" ) return {};
+    const concentration = !!source.system.properties?.findSplice(p => p === "concentration");
     return {
+      concentration,
       value: source.system.duration?.value ?? null,
       units: source.system.duration?.units ?? "inst",
       special: ""

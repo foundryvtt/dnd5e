@@ -1612,12 +1612,10 @@ DND5E.validProperties = {
     "weightlessContents"
   ]),
   equipment: new Set([
-    "concentration",
     "mgc",
     "stealthDisadvantage"
   ]),
   feat: new Set([
-    "concentration",
     "mgc"
   ]),
   loot: new Set([
@@ -1650,7 +1648,6 @@ DND5E.validProperties = {
     "ritual"
   ]),
   tool: new Set([
-    "concentration",
     "mgc"
   ])
 };

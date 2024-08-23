@@ -169,6 +169,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     super.prepareDerivedData();
     this.preparation.mode ||= "prepared";
     this.properties.add("mgc");
+    this.duration.concentration = this.properties.has("concentration");
 
     const labels = this.parent.labels ??= {};
     labels.level = CONFIG.DND5E.spellLevels[this.level];
