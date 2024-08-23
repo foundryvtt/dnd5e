@@ -7,7 +7,12 @@
     transition: all 250ms ease;
 
     &.collapsed { margin-block: 1px -4px; }
-    &:not(.collapsed) .wrapper { padding: 8px 6px 6px; }
+
+    .wrapper {
+      padding-inline: 6px;
+      > :first-child { margin-block-start: 8px; }
+      > :last-child { margin-block-end: 3px; }
+    }
 
     > label {
       cursor: pointer;
@@ -25,9 +30,6 @@
         border-top: 1px dotted var(--dnd5e-color-gold);
         align-self: center;
       }
-    }
-    .form-group:last-child {
-      margin-block-end: -3px;
     }
   }
   .separated-list {

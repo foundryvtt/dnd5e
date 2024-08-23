@@ -1,7 +1,9 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     <fieldset>
         <legend>{{ localize "DND5E.SUMMON.CreatureChanges.Label" }}</legend>
-        <p class="hint">{{ localize "DND5E.SUMMON.CreatureChanges.Hint" }}</p>
+        <div class="form-group">
+            <p class="hint">{{ localize "DND5E.SUMMON.CreatureChanges.Hint" }}</p>
+        </div>
         {{ formField fields.match.fields.proficiency value=source.match.proficiency input=inputs.createCheckboxInput }}
         {{ formField fields.bonuses.fields.ac value=source.bonuses.ac }}
         {{ formField fields.bonuses.fields.hd value=source.bonuses.hd }}
@@ -11,7 +13,9 @@
     </fieldset>
     <fieldset>
         <legend>{{ localize "DND5E.SUMMON.ItemChanges.Label" }}</legend>
-        <p class="hint">{{ localize "DND5E.SUMMON.ItemChanges.Hint" }}</p>
+        <div class="form-group">
+            <p class="hint">{{ localize "DND5E.SUMMON.ItemChanges.Hint" }}</p>
+        </div>
         {{ formField fields.match.fields.attacks value=source.match.attacks input=inputs.createCheckboxInput }}
         {{ formField fields.match.fields.saves value=source.match.saves input=inputs.createCheckboxInput }}
         {{ formField fields.bonuses.fields.attackDamage value=source.bonuses.attackDamage }}
