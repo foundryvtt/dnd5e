@@ -303,7 +303,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       data.number = Number(parsed[1]);
       data.denomination = Number(parsed[2]);
       if ( parsed[4] ) data.bonus = parsed[3] === "-" ? `-${parsed[4]}` : parsed[4];
-    } else {
+    } else if ( formula ) {
       data.custom.enabled = true;
       data.custom.formula = formula;
     }
