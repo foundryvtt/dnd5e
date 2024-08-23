@@ -97,6 +97,11 @@ Hooks.once("init", function() {
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
+  // Set half-casters to round down with legacy rules.
+  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
+    delete DND5E.spellcastingTypes.leveled.progression.half.roundUp;
+  }
+
   // Register Roll Extensions
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
 

@@ -2419,7 +2419,8 @@ DND5E.spellcastingTypes = {
       },
       half: {
         label: "DND5E.SpellProgHalf",
-        divisor: 2
+        divisor: 2,
+        roundUp: true
       },
       third: {
         label: "DND5E.SpellProgThird",

@@ -82,7 +82,8 @@ export function registerSystemSettings() {
     choices: {
       modern: "SETTINGS.DND5E.RULESVERSION.Modern",
       legacy: "SETTINGS.DND5E.RULESVERSION.Legacy"
-    }
+    },
+    requiresReload: true
   });
 
   // Rest Recovery Rules
