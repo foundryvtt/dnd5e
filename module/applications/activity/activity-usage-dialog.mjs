@@ -17,10 +17,12 @@ export default class ActivityUsageDialog extends Application5e {
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["activity-usage"],
-    tag: "form",
+    tag: "dialog",
     window: {
+      title: "DND5E.AbilityUseConfig",
       icon: "",
-      minimizable: false
+      minimizable: false,
+      contentTag: "form"
     },
     actions: {
       use: ActivityUsageDialog.#onUse
@@ -117,8 +119,8 @@ export default class ActivityUsageDialog extends Application5e {
   /* -------------------------------------------- */
 
   /** @override */
-  get title() {
-    return `${this.item.name} - ${this.activity.name} - ${game.i18n.localize("DND5E.AbilityUseConfig")}`;
+  get subtitle() {
+    return `${this.item.name}: ${this.activity.name}`;
   }
 
   /* -------------------------------------------- */
@@ -158,6 +160,7 @@ export default class ActivityUsageDialog extends Application5e {
       case "footer": return this._prepareFooterContext(context, options);
       case "scaling": return this._prepareScalingContext(context, options);
     }
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -178,7 +181,8 @@ export default class ActivityUsageDialog extends Application5e {
     context.fields = [{
       field: new BooleanField({ label: game.i18n.localize("DND5E.Concentration") }),
       name: "concentration.begin",
-      value: this.config.concentration?.begin
+      value: this.config.concentration?.begin,
+      input: context.inputs.createCheckboxInput
     }];
     if ( this.config.concentration?.begin ) {
       const existingConcentration = Array.from(this.actor.concentration.effects).map(effect => {
@@ -380,6 +384,18 @@ export default class ActivityUsageDialog extends Application5e {
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _attachFrameListeners() {
+    super._attachFrameListeners();
+
+    // Add event listeners to the form manually (see https://github.com/foundryvtt/foundryvtt/issues/11621)
+    const form = this.element.querySelector("form");
+    form.addEventListener("submit", this._onSubmitForm.bind(this, this.options.form));
+    form.addEventListener("change", this._onChangeForm.bind(this, this.options.form));
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle form submission.
    * @this {ActivityUsageDialog}
@@ -401,7 +417,7 @@ export default class ActivityUsageDialog extends Application5e {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #onUse(event, target) {
-    const formData = new FormDataExtended(this.element);
+    const formData = new FormDataExtended(this.element.querySelector("form"));
     const submitData = this._prepareSubmitData(event, formData);
     foundry.utils.mergeObject(this.#config, submitData);
     this.#used = true;

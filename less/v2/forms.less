@@ -412,6 +412,34 @@
     }
   }
 
+  range-picker {
+    input[type="range"] {
+      --range-thumb-background-color: var(--dnd5e-color-card);
+      --range-thumb-border-color: var(--dnd5e-color-gold);
+      --range-track-border-color: transparent;
+      border: none;
+
+      &:hover, &:focus-visible {
+        --range-track-border-color: var(--dnd5e-color-gold);
+        &::-moz-range-track, &::-webkit-slider-runnable-track {
+          box-shadow: 0 0 6px var(--dnd5e-color-gold);
+        }
+      }
+
+      &::-moz-range-thumb, &::-moz-range-track, &::-webkit-slider-thumb, &::-webkit-slider-runnable-track {
+        transition: all 250ms ease;
+      }
+      &::-moz-range-thumb, &::-webkit-slider-thumb {
+        border-radius: 100%;
+        box-shadow: 0 0 3px var(--dnd5e-shadow-45);
+      }
+      &::-moz-range-track, &::-webkit-slider-runnable-track {
+        border: 1px solid var(--range-track-border-color);
+        box-shadow: none;
+      }
+    }
+  }
+
   /* Checkboxes */
   dnd5e-checkbox {
     &[disabled]:not([checked]) {
