@@ -362,9 +362,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {boolean}
    */
   get requiresConcentration() {
-    // TODO: Add to activity
-    const isValid = this.system.validProperties.has("concentration") && this.system.properties.has("concentration");
-    return isValid && this.isActive;
+    if ( this.system.validProperties.has("concentration") && this.system.properties.has("concentration") ) return true;
+    return this.system.activities?.contents[0]?.duration.concentration ?? false;
   }
 
   /* -------------------------------------------- */

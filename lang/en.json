@@ -1199,6 +1199,10 @@
   "FIELDS": {
     "duration": {
       "label": "Duration",
+      "concentration": {
+        "label": "Concentration",
+        "hint": "User must maintain concentration while active."
+      },
       "override": {
         "label": "Override Duration",
         "hint": "Use these duration values instead of the item's when using this activity."

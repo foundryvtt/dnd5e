@@ -29,5 +29,7 @@
         </legend>
         {{> "dnd5e.field-duration" duration=activity.duration fields=fields.duration.fields data=data.duration
             durationUnits=durationUnits inputs=inputs }}
+        {{ formField fields.duration.fields.concentration value=data.duration.concentration
+           input=inputs.createCheckboxInput }}
     </fieldset>
 </section>
