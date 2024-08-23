@@ -75,16 +75,6 @@ export default class CheckActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  prepareData() {
-    super.prepareData();
-    if ( !this.check.ability && (this.item.type !== "tool") ) {
-      this.check.ability = Object.keys(CONFIG.DND5E.abilities)[0];
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
@@ -94,6 +84,8 @@ export default class CheckActivityData extends BaseActivityData {
       if ( !this.check.ability ) this.check.ability = this.item.system.ability
         || this.actor?.system.tools?.[this.check.associated]?.ability
         || Object.keys(CONFIG.DND5E.abilities)[0];
+    } else if ( !this.check.ability && (this.checkType === "skill") ) {
+      this.check.ability = CONFIG.DND5E.skills[this.check.associated].ability;
     }
 
     let ability;

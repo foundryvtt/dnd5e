@@ -33,17 +33,17 @@ export default class CheckSheet extends ActivitySheet {
   async _prepareEffectContext(context) {
     context = await super._prepareEffectContext(context);
 
-    context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({
-      value, label: config.label
-    }));
-    if ( this.item.type === "tool" ) {
-      const ability = CONFIG.DND5E.abilities[this.item.system.ability]?.label?.toLowerCase();
-      context.abilityOptions.unshift(
-        { value: "", label: ability ? game.i18n.format("DND5E.DefaultSpecific", { default: ability })
-          : game.i18n.localize("DND5E.Default") },
-        { rule: true }
-      );
-    }
+    context.abilityOptions = [
+      { value: "", label: "" },
+      { rule: true },
+      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label }))
+    ];
+    let ability;
+    if ( this.item.type === "tool" ) ability = CONFIG.DND5E.abilities[this.item.system.ability]?.label?.toLowerCase();
+    else if ( this.activity.checkType === "skill" ) ability = CONFIG.DND5E.abilities[
+      CONFIG.DND5E.skills[this.activity.check.associated].ability
+    ]?.label?.toLowerCase();
+    if ( ability ) context.abilityOptions[0].label = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
 
     context.associatedOptions = [
       { value: "", label: this.item.type === "tool" ? game.i18n.format("DND5E.DefaultSpecific", {

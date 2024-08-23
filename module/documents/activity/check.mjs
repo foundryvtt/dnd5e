@@ -38,7 +38,8 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
 
   /** @override */
   _usageChatButtons() {
-    const ability = CONFIG.DND5E.abilities[this.check.ability]?.label ?? "";
+    const ability = CONFIG.DND5E.abilities[this.check.ability]?.label;
+    if ( !ability ) return super._usageChatButtons();
     const dc = this.check.dc.value;
 
     let label = ability;
