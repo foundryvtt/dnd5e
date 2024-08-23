@@ -348,7 +348,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   static transformDurationData(source, options) {
     if ( source.type === "spell" ) return {};
-    const concentration = !!source.sytem.properties?.findSplice(p => p === "concentration");
+    const concentration = !!source.system.properties?.findSplice(p => p === "concentration");
     return {
       concentration,
       value: source.system.duration?.value ?? null,
