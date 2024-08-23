@@ -272,7 +272,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {number}       DC of the required concentration save.
    */
   getConcentrationDC(damage) {
-    return Math.max(10, Math.floor(damage * .5));
+    return Math.clamp(
+      Math.floor(damage / 2), 10, game.settings.get("dnd5e", "rulesVersion") === "modern" ? 30 : Infinity
+    );
   }
 
   /* -------------------------------------------- */
