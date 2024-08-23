@@ -35,7 +35,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    const { activities } = this.item.system;
+    const { activities, spellcasting } = this.item.system;
     const target = this.item.type === "spell" ? this.item.system.target : null;
 
     // Effects
@@ -57,6 +57,12 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
 
     // Hit Dice
     context.hitDieTypes = CONFIG.DND5E.hitDieTypes.map(d => ({ label: d, value: d }));
+
+    // If using modern rules, do not show redundant artificer progression unless it is already selected.
+    context.spellProgression = { ...CONFIG.DND5E.spellProgression };
+    if ( (game.settings.get("dnd5e", "rulesVersion") === "modern") && (spellcasting?.progression !== "artificer") ) {
+      delete context.spellProgression.artificer;
+    }
 
     // Activation
     context.activationTypes = [
