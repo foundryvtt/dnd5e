@@ -345,7 +345,8 @@ export default class ActivitySheet extends Application5e {
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
-      context.appliedEffects = context.activity.effects.map((data, index) => {
+      context.appliedEffects = context.activity.effects.reduce((arr, data, index) => {
+        if ( !data.effect ) return arr;
         const effect = {
           data,
           collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
@@ -356,8 +357,9 @@ export default class ActivitySheet extends Application5e {
           contentLink: data.effect.toAnchor().outerHTML,
           additionalSettings: null
         };
-        return this._prepareAppliedEffectContext(context, effect);
-      });
+        arr.push(this._prepareAppliedEffectContext(context, effect));
+        return arr;
+      }, []);
     }
 
     if ( context.activity.damage?.parts ) {
