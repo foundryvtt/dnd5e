@@ -259,6 +259,7 @@ export default class ActivitySheet extends Application5e {
         validTargets: showTextTarget ? null : data.validTargets
       };
     });
+    context.showConsumeSpellSlot = this.activity.isSpell && (this.item.system.level !== 0);
 
     // Uses recovery
     context.recoveryPeriods = [

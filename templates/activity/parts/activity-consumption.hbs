@@ -46,6 +46,11 @@
         {{else}}
         <div class="empty">{{ localize "DND5E.None" }}</div>
         {{/each}}
+
+        {{#if showConsumeSpellSlot}}
+        {{ formField fields.consumption.fields.spellSlot value=source.consumption.spellSlot
+           input=inputs.createCheckboxInput }}
+        {{/if}}
     </fieldset>
 
     {{#unless activity.isSpell}}
