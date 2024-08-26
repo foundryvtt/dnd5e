@@ -19,8 +19,6 @@ export default class ActivityUsageDialog extends Application5e {
     classes: ["activity-usage"],
     tag: "dialog",
     window: {
-      title: "DND5E.AbilityUseConfig",
-      icon: "",
       minimizable: false,
       contentTag: "form"
     },
@@ -119,8 +117,15 @@ export default class ActivityUsageDialog extends Application5e {
   /* -------------------------------------------- */
 
   /** @override */
+  get title() {
+    return this.item.name;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   get subtitle() {
-    return `${this.item.name}: ${this.activity.name}`;
+    return this.activity.name;
   }
 
   /* -------------------------------------------- */
@@ -363,6 +368,19 @@ export default class ActivityUsageDialog extends Application5e {
     }
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _renderFrame(options) {
+    const frame = await super._renderFrame(options);
+    const icon = frame.querySelector(".window-icon");
+    const newIcon = document.createElement(this.activity.img.endsWith(".svg") ? "dnd5e-icon" : "img");
+    newIcon.classList.add("window-icon");
+    newIcon.src = this.activity.img;
+    icon.replaceWith(newIcon);
+    return frame;
   }
 
   /* -------------------------------------------- */

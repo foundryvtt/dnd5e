@@ -788,13 +788,22 @@
     .header-control { background: var(--dnd5e-background-25); }
 
     .window-icon {
+      --icon-size: var(--button-size);
+      block-size: var(--button-size);
+      inline-size: var(--button-size);
       margin-right: auto;
+
+      --icon-fill: var(--color-text-dark-5);
       color: var(--color-text-dark-5);
     }
+    dnd5e-icon.window-icon { margin-block-start: 2px; }
+    img.window-icon {
+      border: var(--dnd5e-border-gold);
+      border-radius: 4px;
+    }
   }
-  &.minimized .window-header {
-    h2 { display: none; }
-  }
+  &.minimized .window-header h2 { display: none; }
+  .window-header dnd5e-icon.window-icon { display: block; }
 
   .window-content {
     background: transparent;
