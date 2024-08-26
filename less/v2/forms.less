@@ -228,6 +228,7 @@
     }
 
     &.label-top {
+      --label-height: 10px;
       flex-direction: column;
       align-items: stretch;
       gap: 2px;
@@ -239,7 +240,27 @@
         text-transform: uppercase;
         font-size: var(--font-size-10);
         font-weight: bold;
-        line-height: 1;
+        line-height: var(--label-height);
+        height: var(--label-height);
+
+        > p.hint {
+          cursor: help;
+          font-size: var(--font-size-10);
+          display: inline-block;
+          margin: 0 0 0 3px;
+          line-height: var(--label-height);
+          height: var(--label-height);
+
+          &:empty { min-height: unset; }
+          &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }
+
+          &::before {
+            content: "\f059";
+            font-family: var(--font-awesome);
+            font-weight: normal;
+            color: var(--color-text-dark-5);
+          }
+        }
       }
 
       + .form-group { align-self: end; }
