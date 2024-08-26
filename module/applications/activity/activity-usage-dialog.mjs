@@ -367,19 +367,6 @@ export default class ActivityUsageDialog extends Application5e {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async _renderFrame(options) {
-    const frame = await super._renderFrame(options);
-    const icon = frame.querySelector(".window-icon");
-    const newIcon = document.createElement(this.activity.img.endsWith(".svg") ? "dnd5e-icon" : "img");
-    newIcon.classList.add("window-icon");
-    newIcon.src = this.activity.img;
-    icon.replaceWith(newIcon);
-    return frame;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Determine whether a particular element should be displayed based on the `display` options.
    * @param {string} section  Key path describing the section to be displayed.

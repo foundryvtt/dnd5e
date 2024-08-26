@@ -917,6 +917,67 @@ dialog.dnd5e2.application {
 }
 
 /* ---------------------------------- */
+/*  Roll Configuration Dialog         */
+/* ---------------------------------- */
+
+.dnd5e2.application.roll-configuration {
+  .rolls {
+    .dice {
+      margin-top: 6px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      img {
+        border: none;
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+        object-position: bottom;
+      }
+
+      .label {
+        display: block;
+        width: 50%;
+        text-align: center;
+        margin-top: -6px;
+        color: var(--dnd5e-color-gold);
+        padding: 2px 0;
+        background: var(--dnd5e-color-black);
+        border-radius: 3px;
+      }
+    }
+
+    .formulas {
+      padding: 6px;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .formula {
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+      }
+
+      .label {
+        color: var(--color-text-dark-5);
+        font-style: italic;
+        font-size: var(--font-size-12);
+      }
+    }
+  }
+}
+
+/* ---------------------------------- */
 /*  Weapons Config Sheet              */
 /* ---------------------------------- */
 
