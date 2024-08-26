@@ -286,7 +286,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   static async consumeSpellSlots(config, updates) {
     const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
-    const levelNumber = this.resolveLevel({ config, rolls: updates.rolls });
+    const levelNumber = Math.clamp(
+      this.resolveLevel({ config, rolls: updates.rolls }), 1, Object.keys(CONFIG.DND5E.spellLevels).length - 1
+    );
 
     // Check to see if enough slots are available at the specified level
     const levelData = this.actor.system.spells?.[`spell${levelNumber}`];
@@ -335,14 +337,14 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Create hint text indicating how much of this resource will be consumed/recovered.
-   * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @returns {string}
+   * Create label and hint text indicating how much of this resource will be consumed/recovered.
+   * @param {ActivityUseConfiguration} config    Configuration data for the activity usage.
+   * @returns {{ label: string, hint: string }}  Label and hint text.
    */
-  getConsumptionHint(config) {
+  getConsumptionLabels(config) {
     const typeConfig = CONFIG.DND5E.activityConsumptionTypes[this.type];
-    if ( !typeConfig?.consumptionHint ) return "";
-    return typeConfig.consumptionHint.call(this, config);
+    if ( !typeConfig?.consumptionLabels ) return "";
+    return typeConfig.consumptionLabels.call(this, config);
   }
 
   /* -------------------------------------------- */
@@ -353,12 +355,15 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
    * @returns {string}
    */
-  static consumptionHintActivityUses(config) {
-    const { cost, isNegative, pluralRule } = this._resolveHintCost(config);
-    return game.i18n.format(
-      `DND5E.CONSUMPTION.Type.ActivityUses.PromptHint${isNegative ? "Increase" : "Decrease"}`,
-      { cost, use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`) }
-    );
+  static consumptionLabelsActivityUses(config) {
+    const { cost, increaseKey, pluralRule } = this._resolveHintCost(config);
+    return {
+      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.ActivityUses.Prompt${increaseKey}`),
+      hint: game.i18n.format(
+        `DND5E.CONSUMPTION.Type.ActivityUses.PromptHint${increaseKey}`,
+        { cost, use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`) }
+      )
+    };
   }
 
   /* -------------------------------------------- */
@@ -369,12 +374,15 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
    * @returns {string}
    */
-  static consumptionHintAttribute(config) {
-    const { cost, isNegative } = this._resolveHintCost(config);
-    return game.i18n.format(
-      `DND5E.CONSUMPTION.Type.Attribute.PromptHint${isNegative ? "Increase" : "Decrease"}`,
-      { cost, attribute: this.target }
-    );
+  static consumptionLabelsAttribute(config) {
+    const { cost, increaseKey } = this._resolveHintCost(config);
+    return {
+      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.Attribute.Prompt${increaseKey}`),
+      hint: game.i18n.format(
+        `DND5E.CONSUMPTION.Type.Attribute.PromptHint${increaseKey}`,
+        { cost, attribute: this.target }
+      )
+    };
   }
 
   /* -------------------------------------------- */
@@ -385,19 +393,22 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
    * @returns {string}
    */
-  static consumptionHintHitDice(config) {
-    const { cost, isNegative, pluralRule } = this._resolveHintCost(config);
+  static consumptionLabelsHitDice(config) {
+    const { cost, increaseKey, pluralRule } = this._resolveHintCost(config);
     let denomination;
     if ( this.target === "smallest" ) denomination = game.i18n.localize("DND5E.ConsumeHitDiceSmallest");
     else if ( this.target === "largest" ) denomination = game.i18n.localize("DND5E.ConsumeHitDiceLargest");
     else denomination = this.target;
-    return game.i18n.format(
-      `DND5E.CONSUMPTION.Type.HitDice.PromptHint${isNegative ? "Increase" : "Decrease"}`,
-      {
-        cost, denomination: denomination.toLowerCase(),
-        die: game.i18n.localize(`DND5E.CONSUMPTION.Type.HitDie.${pluralRule}`)
-      }
-    );
+    return {
+      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.HitDice.Prompt${increaseKey}`),
+      hint: game.i18n.format(
+        `DND5E.CONSUMPTION.Type.HitDice.PromptHint${increaseKey}`,
+        {
+          cost, denomination: denomination.toLowerCase(),
+          die: game.i18n.localize(`DND5E.CONSUMPTION.Type.HitDie.${pluralRule}`)
+        }
+      )
+    };
   }
 
   /* -------------------------------------------- */
@@ -408,16 +419,19 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
    * @returns {string}
    */
-  static consumptionHintItemUses(config) {
-    const { cost, isNegative, pluralRule } = this._resolveHintCost(config);
+  static consumptionLabelsItemUses(config) {
+    const { cost, increaseKey, pluralRule } = this._resolveHintCost(config);
     const item = this.actor.items.get(this.target);
-    return game.i18n.format(
-      `DND5E.CONSUMPTION.Type.ItemUses.PromptHint${isNegative ? "Increase" : "Decrease"}`,
-      {
-        cost, use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`),
-        item: item ? `<em>${item.name}</em>` : game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase()
-      }
-    );
+    return {
+      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.ItemUses.Prompt${increaseKey}`),
+      hint: game.i18n.format(
+        `DND5E.CONSUMPTION.Type.ItemUses.PromptHint${increaseKey}`,
+        {
+          cost, use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`),
+          item: item ? `<em>${item.name}</em>` : game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase()
+        }
+      )
+    };
   }
 
   /* -------------------------------------------- */
@@ -428,12 +442,15 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
    * @returns {string}
    */
-  static consumptionHintMaterial(config) {
-    const { cost, isNegative } = this._resolveHintCost(config);
-    return game.i18n.format(
-      `DND5E.CONSUMPTION.Type.Material.PromptHint${isNegative ? "Increase" : "Decrease"}`,
-      { cost, item: `<em>${this.actor.items.get(this.target).name}</em>` }
-    );
+  static consumptionLabelsMaterial(config) {
+    const { cost, increaseKey } = this._resolveHintCost(config);
+    return {
+      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.Material.Prompt${increaseKey}`),
+      hint: game.i18n.format(
+        `DND5E.CONSUMPTION.Type.Material.PromptHint${increaseKey}`,
+        { cost, item: `<em>${this.actor.items.get(this.target).name}</em>` }
+      )
+    };
   }
 
   /* -------------------------------------------- */
@@ -444,14 +461,17 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
    * @returns {string}
    */
-  static consumptionHintSpellSlots(config) {
-    const { cost, isNegative, pluralRule } = this._resolveHintCost(config);
-    const levelNumber = this.resolveLevel({ config });
+  static consumptionLabelsSpellSlots(config) {
+    const { cost, increaseKey, pluralRule } = this._resolveHintCost(config);
+    const levelNumber = Math.clamp(this.resolveLevel({ config }), 1, Object.keys(CONFIG.DND5E.spellLevels).length - 1);
     const level = CONFIG.DND5E.spellLevels[levelNumber].toLowerCase();
-    return game.i18n.format(
-      `DND5E.CONSUMPTION.Type.SpellSlots.PromptHint${isNegative ? "Increase" : "Decrease"}`,
-      { cost, slot: game.i18n.format(`DND5E.CONSUMPTION.Type.SpellSlot.${pluralRule}`, { level }) }
-    );
+    return {
+      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.SpellSlots.Prompt${increaseKey}`),
+      hint: game.i18n.format(
+        `DND5E.CONSUMPTION.Type.SpellSlots.PromptHint${increaseKey}`,
+        { cost, slot: game.i18n.format(`DND5E.CONSUMPTION.Type.SpellSlot.${pluralRule}`, { level }) }
+      )
+    };
   }
 
   /* -------------------------------------------- */
@@ -459,7 +479,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   /**
    * Resolve the cost for the consumption hint.
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @returns {{ cost: string, isNegative: boolean, pluralRule: string }}
+   * @returns {{ cost: string, increaseKey: string, pluralRule: string }}
    */
   _resolveHintCost(config) {
     const costRoll = this.resolveCost({ config, evaluate: false });
@@ -471,7 +491,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     let pluralRule;
     if ( costRoll.isDeterministic ) pluralRule = new Intl.PluralRules(game.i18n.lang).select(Number(cost));
     else pluralRule = "other";
-    return { cost, isNegative, pluralRule };
+    return { cost, increaseKey: isNegative ? "Increase" : "Decrease", pluralRule };
   }
 
   /* -------------------------------------------- */

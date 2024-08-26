@@ -237,10 +237,7 @@ export default class ActivityUsageDialog extends Application5e {
       const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
       for ( const [index, target] of this.activity.consumption.targets.entries() ) {
         context.resources.push({
-          field: new BooleanField({
-            label: CONFIG.DND5E.activityConsumptionTypes[target.type].prompt,
-            hint: target.getConsumptionHint(this.config)
-          }),
+          field: new BooleanField(target.getConsumptionLabels(this.config)),
           name: `consume.resources.${index}`,
           value: (isArray && this.config.consume.resources.includes(index))
             || (!isArray && (this.config.consume?.resources !== false) && (this.config.consume !== false)),

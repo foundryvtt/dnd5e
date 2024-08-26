@@ -935,21 +935,24 @@
   "Type": {
     "ActivityUses": {
       "Label": "Activity Uses",
-      "Prompt": "Consume Activity Use?",
+      "PromptDecrease": "Consume Activity Use?",
+      "PromptIncrease": "Restore Activity Use?",
       "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of this activity.",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of this activity.",
       "Warning": "uses on {item}'s activity {activity}"
     },
     "Attribute": {
       "Label": "Attribute",
-      "Prompt": "Consume Attribute?",
+      "PromptDecrease": "Consume Attribute?",
+      "PromptIncrease": "Restore Attribute?",
       "PromptHintDecrease": "Decrease <code>{attribute}</code> by <strong>{cost}</strong>.",
       "PromptHintIncrease": "Increase <code>{attribute}</code> by <strong>{cost}</strong>.",
       "Warning": "{attribute} amount"
     },
     "HitDice": {
       "Label": "Hit Dice",
-      "Prompt": "Consume Hit Die?",
+      "PromptDecrease": "Consume Hit Die?",
+      "PromptIncrease": "Restore Hit Die?",
       "PromptHintDecrease": "Spend <strong>{cost}</strong> {denomination} {die}.",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {denomination} {die}.",
       "Warning": "{denomination} hit dice"
@@ -960,14 +963,16 @@
     },
     "ItemUses": {
       "Label": "Item Uses",
-      "Prompt": "Consume Item Use?",
+      "PromptDecrease": "Consume Item Use?",
+      "PromptIncrease": "Restore Item Use?",
       "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of {item}.",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of {item}.",
       "Warning": "uses on {name}"
     },
     "Material": {
       "Label": "Material",
-      "Prompt": "Consume Material?",
+      "PromptDecrease": "Consume Material?",
+      "PromptIncrease": "Restore Material?",
       "PromptHintDecrease": "Reduce quantity of {item} by <strong>{cost}</strong>.",
       "PromptHintIncrease": "Increase quantity of {item} by <strong>{cost}</strong>.",
       "Warning": "of {name}"
@@ -978,7 +983,8 @@
     },
     "SpellSlots": {
       "Label": "Spell Slots",
-      "Prompt": "Consume Spell Slot?",
+      "PromptDecrease": "Consume Spell Slot?",
+      "PromptIncrease": "Restore Spell Slot?",
       "PromptHintDecrease": "Spend <strong>{cost}</strong> {slot}.",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {slot}.",
       "Warning": "{level} slots"
