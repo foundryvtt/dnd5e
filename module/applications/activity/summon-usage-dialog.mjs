@@ -34,7 +34,8 @@ export default class SummonUsageDialog extends ActivityUsageDialog {
       if ( !foundry.utils.hasProperty(this.options.display, "create.summons") ) context.summonsFields.push({
         field: new BooleanField({ label: game.i18n.localize("DND5E.SUMMON.Action.Place") }),
         name: "create.summons",
-        value: this.config.create?.summons
+        value: this.config.create?.summons,
+        input: context.inputs.createCheckboxInput
       });
 
       if ( this.config.create?.summons ) {

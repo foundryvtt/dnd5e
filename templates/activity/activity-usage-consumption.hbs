@@ -1,15 +1,15 @@
 <section>
+    {{~#if hasConsumption}}
     {{> "dnd5e.activity-usage-notes" }}
-    {{#if hasConsumption}}
     <fieldset>
         <legend>{{ localize "DND5E.USAGE.SECTION.Consumption" }}</legend>
         {{#if spellSlot}}
-            {{ formField spellSlot.field name=spellSlot.name value=spellSlot.value }}
+            {{ formField spellSlot.field name=spellSlot.name value=spellSlot.value input=inputs.createCheckboxInput }}
         {{/if}}
         {{#if resources}}
             {{ formInput resources.field name=resources.name options=resources.options type="checkboxes"
                dataset=resources.dataset }}
         {{/if}}
     </fieldset>
-    {{/if}}
+    {{/if~}}
 </section>

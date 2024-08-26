@@ -19,7 +19,7 @@ export function createCheckboxInput(field, config) {
 /**
  * Create a grid of checkboxes.
  * @param {DataField} field         The field.
- * @param {FormInputCOnfig} config  The input configuration.
+ * @param {FormInputConfig} config  The input configuration.
  * @returns {HTMLCollection}
  */
 export function createMultiCheckboxInput(field, config) {

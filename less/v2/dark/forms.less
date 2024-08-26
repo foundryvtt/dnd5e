@@ -14,12 +14,12 @@
     &.label-top > label > p.hint::before { color: var(--dnd5e-color-gold); }
   }
 
-  :is(.form-group, fieldset) :is(select, input) {
+  :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
     border: var(--dnd5e-border-gold);
     background: var(--dnd5e-background-parchment);
   }
 
-  :is(input, select):disabled {
+  :is(input, select):not([type="range"]):disabled {
     background: var(--dnd5e-color-dark-gray);
   }
 

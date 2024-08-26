@@ -1,11 +1,12 @@
 <section>
+    {{~#if hasConcentration}}
     {{> "dnd5e.activity-usage-notes" }}
-    {{#if hasConcentration}}
+
     <fieldset>
         <legend>{{ localize "DND5E.Concentration" }}</legend>
         {{#each fields}}
-            {{ formField field name=name value=value options=options }}
+            {{ formField field name=name value=value options=options input=input }}
         {{/each}}
     </fieldset>
-    {{/if}}
+    {{/if~}}
 </section>
