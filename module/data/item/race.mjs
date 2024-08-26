@@ -104,6 +104,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [{ label: context.itemType }];
+    context.singleDescription = true;
     context.info = [{
       label: "DND5E.CreatureType",
       classes: "info-sm",

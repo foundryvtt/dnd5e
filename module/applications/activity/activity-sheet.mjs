@@ -201,7 +201,7 @@ export default class ActivitySheet extends Application5e {
 
     context.data = {};
     context.disabled = {};
-    for ( const field of ["activation", "duration", "range", "target"] ) {
+    for ( const field of ["activation", "duration", "range", "target", "uses"] ) {
       context.data[field] = this.activity[field].override ? context.source[field] : context.inferred[field];
       context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override;
     }
@@ -481,6 +481,7 @@ export default class ActivitySheet extends Application5e {
   _onFirstRender(context, options) {
     super._onFirstRender(context, options);
     this.activity.constructor._registerApp(this.activity, this);
+    this.item.apps[this.id] = this;
   }
 
   /* -------------------------------------------- */
@@ -500,6 +501,7 @@ export default class ActivitySheet extends Application5e {
   /** @override */
   _onClose(_options) {
     this.activity?.constructor._unregisterApp(this.activity, this);
+    delete this.item.apps[this.id];
   }
 
   /* -------------------------------------------- */
