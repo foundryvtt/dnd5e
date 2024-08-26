@@ -1846,6 +1846,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @property {boolean} [dialog=true]                           Present scroll creation dialog?
    * @property {"full"|"reference"|"none"} [explanation="full"]  Length of spell scroll rules text to include.
    * @property {number} [level]                                  Level at which the spell should be cast.
+   * @property {Partial<SpellScrollValues>} [values]             Spell scroll DC and attack bonus.
    */
 
   /**
@@ -1887,8 +1888,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( Number.isNumeric(config.level) ) {
       flags.dnd5e = { spellLevel: {
         value: config.level,
-        base: spell.system.level,
-        scaling: spell.system.scaling
+        base: spell.system.level
       } };
       itemData.system.level = config.level;
     }
@@ -1904,10 +1904,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preCreateScrollFromSpell", itemData, options, config) === false ) return;
 
-    let {
-      actionType, description, source, activation, duration, target, summons,
-      range, damage, formula, save, level, attack, ability, properties
-    } = itemData.system;
+    let { activities, description, level, properties, source } = itemData.system;
 
     // Get scroll data
     let scrollUuid;
@@ -1960,13 +1957,28 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         break;
     }
 
-    // Used a fixed attack modifier and saving throw according to the level of spell scroll.
-    if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
-      attack = { bonus: scrollData.system.attack.bonus };
+    let values = {};
+    for ( const level of Array.fromRange(itemData.system.level + 1).reverse() ) {
+      values = CONFIG.DND5E.spellScrollValues[level];
+      if ( values ) break;
     }
-    if ( save.ability ) {
-      save.scaling = "flat";
-      save.dc = scrollData.system.save.dc;
+    values = foundry.utils.mergeObject(values, config.values ?? {}, { inplace: false });
+
+    // Apply inferred spell activation, duration, range, and target data to activities
+    for ( const activity of Object.values(activities) ) {
+      for ( const key of ["activation", "duration", "range", "target"] ) {
+        if ( activity[key]?.override !== false ) continue;
+        activity[key].override = true;
+        foundry.utils.mergeObject(activity[key], itemData.system[key]);
+      }
+      activity.consumption.targets.push({ type: "itemUses", target: "", value: "1" });
+      if ( activity.type === "attack" ) {
+        activity.attack.flat = true;
+        activity.attack.bonus = values.bonus;
+      } else if ( activity.type === "save" ) {
+        activity.save.dc.calculation = "";
+        activity.save.dc.formula = values.dc;
+      }
     }
 
     // Create the spell scroll data
@@ -1976,8 +1988,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       effects: itemData.effects ?? [],
       flags,
       system: {
-        description: {value: desc.trim()}, source, actionType, activation, duration, target, summons,
-        range, damage, formula, save, level, ability, properties, attack: {bonus: attack.bonus, flat: true}
+        activities, description: { value: desc.trim() }, properties, source
       }
     });
     foundry.utils.mergeObject(spellScrollData, options);

@@ -735,6 +735,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       }
     }, message);
 
+    // If the Item was destroyed in the process, embed a copy of its data
+    if ( !this.actor?.items.has(this.item.id) ) {
+      foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.item.data", this.item.toObject());
+    }
+
     /**
      * A hook event that fires before an activity usage card is created.
      * @function dnd5e.preCreateUsageMessage
