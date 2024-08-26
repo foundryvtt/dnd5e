@@ -58,7 +58,11 @@
       cursor: default;
       color: var(--color-text-dark-inactive);
     }
-    &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
+    &:hover:not(:disabled), &:focus {
+      background: var(--dnd5e-background-card);
+      box-shadow: 0 0 5px var(--color-shadow-primary);
+      color: var(--color-text-dark-primary);
+    }
   }
 
   button.radio-button {
@@ -358,7 +362,7 @@
     }
   }
 
-  :is(.form-group, fieldset) :is(select, input) {
+  :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
     color: var(--color-text-dark-primary);
     border: 1px solid var(--input-border-color);
     font-size: var(--font-size-11);
