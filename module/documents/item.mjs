@@ -460,27 +460,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const finalSC = foundry.utils.deepClone(
       ( subclassSC && (subclassSC.progression !== "none") ) ? subclassSC : classSC
     );
-    if ( !finalSC ) return null;
-    finalSC.levels = this.isEmbedded ? (this.system.levels ?? this.class?.system.levels) : null;
-
-    // Temp method for determining spellcasting type until this data is available directly using advancement
-    if ( CONFIG.DND5E.spellcastingTypes[finalSC.progression] ) finalSC.type = finalSC.progression;
-    else finalSC.type = Object.entries(CONFIG.DND5E.spellcastingTypes).find(([type, data]) => {
-      return !!data.progression?.[finalSC.progression];
-    })?.[0];
-
-    if ( this.isOwned ) {
-      const ability = this.actor.system.abilities?.[finalSC.ability];
-      const mod = ability?.mod ?? 0;
-      const modProf = mod + (this.actor.system.attributes?.prof ?? 0);
-      const rollData = this.getRollData({ determinstic: true });
-      const msak = simplifyBonus(this.actor.system.bonuses?.msak?.attack, rollData);
-      const rsak = simplifyBonus(this.actor.system.bonuses?.rsak?.attack, rollData);
-      finalSC.attack = modProf + (msak === rsak ? msak : 0);
-      finalSC.save = ability?.dc ?? (8 + modProf);
-    }
-
-    return finalSC;
+    return finalSC ?? null;
   }
 
   /* -------------------------------------------- */

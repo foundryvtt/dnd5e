@@ -1,5 +1,4 @@
 import TraitAdvancement from "../../documents/advancement/trait.mjs";
-import { simplifyBonus } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
@@ -87,10 +86,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /** @inheritDoc */
   prepareFinalData() {
     this.isOriginalClass = this.parent.isOriginalClass;
-    this.spellcasting.preparation.max = simplifyBonus(
-      this.spellcasting.preparation.formula,
-      this.parent.getRollData({ deterministic: true})
-    );
+    SpellcastingField.prepareData.call(this, this.parent.getRollData({ deterministic: true }));
   }
 
   /* -------------------------------------------- */
