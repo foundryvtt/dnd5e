@@ -30,10 +30,11 @@ const {
  * @property {ActivationField} activation        Activation time & conditions.
  * @property {boolean} activation.override       Override activation values inferred from item.
  * @property {object} consumption
- * @property {ConsumptionTargetData[]} consumption.targets  Collection of consumption targets.
  * @property {object} consumption.scaling
- * @property {boolean} consumption.scaling.allowed  Can this non-spell activity be activated at higher levels?
- * @property {string} consumption.scaling.max    Maximum number of scaling levels for this item.
+ * @property {boolean} consumption.scaling.allowed          Can this non-spell activity be activated at higher levels?
+ * @property {string} consumption.scaling.max               Maximum number of scaling levels for this item.
+ * @property {boolean} consumption.spellSlot                If this is on a spell, should it consume a spell slot?
+ * @property {ConsumptionTargetData[]} consumption.targets  Collection of consumption targets.
  * @property {object} description
  * @property {string} description.chatFlavor     Extra text displayed in the activation chat message.
  * @property {DurationField} duration            Duration of the effect.
@@ -76,11 +77,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField()
       }),
       consumption: new SchemaField({
-        targets: new ConsumptionTargetsField(),
         scaling: new SchemaField({
           allowed: new BooleanField(),
           max: new FormulaField({ deterministic: true })
-        })
+        }),
+        spellSlot: new BooleanField({ initial: true }),
+        targets: new ConsumptionTargetsField()
       }),
       description: new SchemaField({
         chatFlavor: new StringField()

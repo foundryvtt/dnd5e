@@ -8,6 +8,12 @@
                 <i class="fas fa-plus" inert></i>
             </button>
         </legend>
+
+        {{#if showConsumeSpellSlot}}
+        {{ formField fields.consumption.fields.spellSlot value=source.consumption.spellSlot
+                     input=inputs.createCheckboxInput }}
+        {{/if}}
+
         {{#each consumptionTargets}}
         <div class="form-group split-group full-width card" data-index="{{ @index }}">
             <div class="form-fields field-groups">

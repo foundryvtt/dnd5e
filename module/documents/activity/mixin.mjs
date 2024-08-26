@@ -471,7 +471,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( config.consume !== false ) {
       config.consume ??= {};
       config.consume.resources ??= this.consumption.targets.length > 0;
-      config.consume.spellSlot ??= this.requiresSpellSlot;
+      config.consume.spellSlot ??= this.requiresSpellSlot && this.consumption.spellSlot;
     }
 
     const levelingFlag = this.item.getFlag("dnd5e", "spellLevel");

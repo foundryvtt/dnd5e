@@ -222,7 +222,8 @@ export default class ActivityUsageDialog extends Application5e {
     context.fields = [];
     context.notes = [];
 
-    if ( this.activity.requiresSpellSlot && this._shouldDisplay("consume.spellSlot") ) context.spellSlot = {
+    if ( this.activity.requiresSpellSlot && this.activity.consumption.spellSlot
+      && this._shouldDisplay("consume.spellSlot") ) context.spellSlot = {
       field: new BooleanField({ label: game.i18n.localize("DND5E.SpellCastConsume") }),
       name: "consume.spellSlot",
       value: this.config.consume?.spellSlot
