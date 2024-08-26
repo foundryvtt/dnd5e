@@ -720,12 +720,12 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 /**
  * @typedef {object} ActivityConsumptionTargetConfig
  * @property {string} label                                     Localized label for the target type.
- * @property {string} prompt                                    Localized label displayed in the usage dialog.
- * @property {ConsumptionConsumeFunction} consume               Method used to consume according to this type.
+ * @property {ConsumptionConsumeFunction} consume               Function used to consume according to this type.
+ * @property {ConsumptionLabelsFunction} consumptionLabels      Function used to generate a hint of consumption amount.
  * @property {{value: string, label: string}[]} [scalingModes]  Additional scaling modes for this consumption type in
  *                                                              addition to the default "amount" scaling.
  * @property {boolean} [targetRequiresEmbedded]                 Use text input rather than select when not embedded.
- * @property {ConsumptionValidTargetsFunction} [validTargets]   Method for creating an array of consumption targets.
+ * @property {ConsumptionValidTargetsFunction} [validTargets]   Function for creating an array of consumption targets.
  */
 
 /**
@@ -734,6 +734,13 @@ preLocalize("abilityConsumptionTypes", { sort: true });
  * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
  * @param {ActivityUsageUpdates} updates     Updates to be performed.
  * @throws ConsumptionError
+ */
+
+/**
+ * @callback ConsumptionLabelsFunction
+ * @this {ConsumptionTargetData}
+ * @param {ActivityUseConfiguration} config    Configuration data for the activity usage.
+ * @returns {{ label: string, hint: string }}  Label and hint text.
  */
 
 /**
@@ -749,45 +756,45 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 DND5E.activityConsumptionTypes = {
   activityUses: {
     label: "DND5E.CONSUMPTION.Type.ActivityUses.Label",
-    prompt: "DND5E.CONSUMPTION.Type.ActivityUses.Prompt",
-    consume: ConsumptionTargetData.consumeActivityUses
+    consume: ConsumptionTargetData.consumeActivityUses,
+    consumptionLabels: ConsumptionTargetData.consumptionLabelsActivityUses
   },
   itemUses: {
     label: "DND5E.CONSUMPTION.Type.ItemUses.Label",
-    prompt: "DND5E.CONSUMPTION.Type.ItemUses.Prompt",
     consume: ConsumptionTargetData.consumeItemUses,
+    consumptionLabels: ConsumptionTargetData.consumptionLabelsItemUses,
     targetRequiresEmbedded: true,
     validTargets: ConsumptionTargetData.validItemUsesTargets
   },
   material: {
     label: "DND5E.CONSUMPTION.Type.Material.Label",
-    prompt: "DND5E.CONSUMPTION.Type.Material.Prompt",
     consume: ConsumptionTargetData.consumeMaterial,
+    consumptionLabels: ConsumptionTargetData.consumptionLabelsMaterial,
     targetRequiresEmbedded: true,
     validTargets: ConsumptionTargetData.validMaterialTargets
   },
   hitDice: {
     label: "DND5E.CONSUMPTION.Type.HitDice.Label",
-    prompt: "DND5E.CONSUMPTION.Type.HitDice.Prompt",
     consume: ConsumptionTargetData.consumeHitDice,
+    consumptionLabels: ConsumptionTargetData.consumptionLabelsHitDice,
     validTargets: ConsumptionTargetData.validHitDiceTargets
   },
   spellSlots: {
     label: "DND5E.CONSUMPTION.Type.SpellSlots.Label",
-    prompt: "DND5E.CONSUMPTION.Type.SpellSlots.Prompt",
     consume: ConsumptionTargetData.consumeSpellSlots,
+    consumptionLabels: ConsumptionTargetData.consumptionLabelsSpellSlots,
     scalingModes: [{ value: "level", label: "DND5E.CONSUMPTION.Scaling.SlotLevel" }],
     validTargets: ConsumptionTargetData.validSpellSlotsTargets
   },
   attribute: {
     label: "DND5E.CONSUMPTION.Type.Attribute.Label",
-    prompt: "DND5E.CONSUMPTION.Type.Attribute.Prompt",
     consume: ConsumptionTargetData.consumeAttribute,
+    consumptionLabels: ConsumptionTargetData.consumptionLabelsAttribute,
     targetRequiresEmbedded: true,
     validTargets: ConsumptionTargetData.validAttributeTargets
   }
 };
-preLocalize("activityConsumptionTypes", { keys: ["label", "prompt"] });
+preLocalize("activityConsumptionTypes", { key: "label" });
 
 /* -------------------------------------------- */
 
