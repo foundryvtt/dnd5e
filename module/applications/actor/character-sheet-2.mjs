@@ -181,23 +181,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
     // Spellcasting
     context.spellcasting = [];
-    const msak = simplifyBonus(this.actor.system.bonuses.msak.attack, context.rollData);
-    const rsak = simplifyBonus(this.actor.system.bonuses.rsak.attack, context.rollData);
-
     for ( const item of Object.values(this.actor.classes).sort((a, b) => b.system.levels - a.system.levels) ) {
       const sc = item.spellcasting;
       if ( !sc?.progression || (sc.progression === "none") ) continue;
       const ability = this.actor.system.abilities[sc.ability];
       const mod = ability?.mod ?? 0;
-      const attackBonus = msak === rsak ? msak : 0;
       const name = item.system.spellcasting.progression === sc.progression ? item.name : item.subclass?.name;
       context.spellcasting.push({
         label: game.i18n.format("DND5E.SpellcastingClass", { class: name }),
         ability: { mod, ability: sc.ability },
-        attack: mod + this.actor.system.attributes.prof + attackBonus,
+        attack: sc.attack,
+        preparation: sc.preparation,
         primary: this.actor.system.attributes.spellcasting === sc.ability,
-        save: ability?.dc ?? 0,
-        preparation: sc.preparation
+        save: sc.save
       });
     }
 

@@ -1,5 +1,6 @@
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
+import CreateScrollDialog from "../applications/item/create-scroll-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
@@ -7,7 +8,7 @@ import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
-import { getSceneTargets } from "../utils.mjs";
+import { getSceneTargets, simplifyBonus } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -467,6 +468,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     else finalSC.type = Object.entries(CONFIG.DND5E.spellcastingTypes).find(([type, data]) => {
       return !!data.progression?.[finalSC.progression];
     })?.[0];
+
+    if ( this.isOwned ) {
+      const ability = this.actor.system.abilities?.[finalSC.ability];
+      const mod = ability?.mod ?? 0;
+      const modProf = mod + (this.actor.system.attributes?.prof ?? 0);
+      const rollData = this.getRollData({ determinstic: true });
+      const msak = simplifyBonus(this.actor.system.bonuses?.msak?.attack, rollData);
+      const rsak = simplifyBonus(this.actor.system.bonuses?.rsak?.attack, rollData);
+      finalSC.attack = modProf + (msak === rsak ? msak : 0);
+      finalSC.save = ability?.dc ?? (8 + modProf);
+    }
 
     return finalSC;
   }
@@ -1857,27 +1869,27 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Item5e|void>}                The created scroll consumable item.
    */
   static async createScrollFromSpell(spell, options={}, config={}) {
+    const values = {};
+    if ( (spell instanceof Item5e) && spell.isOwned && (game.settings.get("dnd5e", "rulesVersion") === "modern") ) {
+      const spellcastingClass = spell.actor.spellcastingClasses?.[spell.system.sourceClass];
+      if ( spellcastingClass ) {
+        values.bonus = spellcastingClass.spellcasting.attack;
+        values.dc = spellcastingClass.spellcasting.save;
+      } else {
+        values.bonus = spell.actor.system.attributes?.spellmod;
+        values.dc = spell.actor.system.attributes?.spelldc;
+      }
+    }
+
     config = foundry.utils.mergeObject({
       explanation: game.user.getFlag("dnd5e", "creation.scrollExplanation") ?? "reference",
-      level: spell.system.level
+      level: spell.system.level,
+      values
     }, config);
 
     if ( config.dialog !== false ) {
-      const anchor = spell instanceof Item5e ? spell.toAnchor().outerHTML : `<span>${spell.name}</span>`;
-      const result = await Dialog.prompt({
-        title: game.i18n.format("DND5E.Scroll.CreateFrom", { spell: spell.name }),
-        label: game.i18n.localize("DND5E.Scroll.CreateScroll"),
-        content: await renderTemplate("systems/dnd5e/templates/apps/spell-scroll-dialog.hbs", {
-          ...config, anchor, spellLevels: Object.entries(CONFIG.DND5E.spellLevels).reduce((obj, [k, v]) => {
-            if ( Number(k) >= spell.system.level ) obj[k] = v;
-            return obj;
-          }, {})
-        }),
-        callback: dialog => (new FormDataExtended(dialog.querySelector("form"))).object,
-        rejectClose: false,
-        options: { jQuery: false }
-      });
-      if ( result === null ) return;
+      const result = await CreateScrollDialog.create(spell, config);
+      if ( !result ) return;
       foundry.utils.mergeObject(config, result);
       await game.user.setFlag("dnd5e", "creation.scrollExplanation", config.explanation);
     }
@@ -1957,12 +1969,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         break;
     }
 
-    let values = {};
     for ( const level of Array.fromRange(itemData.system.level + 1).reverse() ) {
-      values = CONFIG.DND5E.spellScrollValues[level];
-      if ( values ) break;
+      const values = CONFIG.DND5E.spellScrollValues[level];
+      if ( values ) {
+        config.values.bonus ??= values.bonus;
+        config.values.dc ??= values.dc;
+        break;
+      }
     }
-    values = foundry.utils.mergeObject(values, config.values ?? {}, { inplace: false });
 
     // Apply inferred spell activation, duration, range, and target data to activities
     for ( const activity of Object.values(activities) ) {
