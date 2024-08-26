@@ -572,8 +572,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   getDamageConfig(config={}) {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
-    const scaling = config.scaling ?? 0; // TODO: Set properly once scaling is handled during activation
-    const rollConfig = foundry.utils.mergeObject({ scaling }, config);
+    const rollConfig = foundry.utils.mergeObject({ scaling: 0 }, config);
     const rollData = this.getRollData();
     rollConfig.rolls = this.damage.parts
       .map(d => this._processDamagePart(d, rollConfig, rollData))

@@ -222,10 +222,11 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       const id = rollConfig.event?.target.closest("[data-message-id]")?.dataset.messageId;
       const attackMessage = dnd5e.registry.messages.messages(id, "attack").pop();
       await attackMessage?.setFlag("dnd5e", "roll.ammunitionData", data);
-      this.actor?.deleteEmbeddedDocuments("Item", [ammoUpdate.id]);
-    } else if ( ammoUpdate ) {
-      this.actor?.updateEmbeddedDocuments("Item", [{ _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }]);
+      await this.actor?.deleteEmbeddedDocuments("Item", [ammoUpdate.id]);
     }
+    else if ( ammoUpdate ) await this.actor?.updateEmbeddedDocuments("Item", [
+      { _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }
+    ]);
 
     /**
      * A hook event that fires after an attack has been rolled and ammunition has been consumed.

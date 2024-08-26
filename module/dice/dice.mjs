@@ -29,7 +29,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  *
  * ## Roll Configuration Dialog
  * @property {boolean} [fastForward]             Should the roll configuration dialog be skipped?
- * @property {FormSelectOptions[]} [ammunitionOptions]  Options for ammunition to use with an attack.
+ * @property {FormSelectOption[]} [ammunitionOptions]  Options for ammunition to use with an attack.
  * @property {FormSelectOption[]} [attackModes]  Modes that can be used when making an attack.
  * @property {boolean} [chooseModifier=false]    If the configuration dialog is shown, should the ability modifier be
  *                                               configurable within that interface?

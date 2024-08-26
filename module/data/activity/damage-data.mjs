@@ -9,8 +9,7 @@ const { ArrayField, BooleanField, SchemaField } = foundry.data.fields;
  *
  * @property {object} damage
  * @property {boolean} damage.critical.allow  Can this damage be critical?
- * @property {boolean} damage.critical.bonus  Extra damage applied when a critical is rolled. Added to the first
- *                                            damage part.
+ * @property {string} damage.critical.bonus   Extra damage applied to the first damage part when a critical is rolled.
  * @property {DamageData[]} damage.parts      Parts of damage to inflict.
  */
 export default class DamageActivityData extends BaseActivityData {

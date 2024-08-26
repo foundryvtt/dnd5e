@@ -1093,11 +1093,11 @@
       "critical": {
         "allow": {
           "label": "Allow Critical",
-          "hint": "Should the use be able to roll critical damage?"
+          "hint": "Should the creature be able to roll critical damage?"
         },
         "bonus": {
           "label": "Extra Critical Damage",
-          "hint": "Extra damage applied when a critical is rolled. Added to the first damage part."
+          "hint": "Extra damage applied to the first damage part when a critical is rolled."
         }
       },
       "parts": {

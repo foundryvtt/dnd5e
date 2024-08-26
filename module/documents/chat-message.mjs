@@ -877,7 +877,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {ChatMessage5e[]}
    */
   getAssociatedRolls(type) {
-    return dnd5e.registry.messages.messages(this.id, type);
+    return dnd5e.registry.messages.get(this.id, type);
   }
 
   /* -------------------------------------------- */
