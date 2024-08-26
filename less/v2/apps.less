@@ -788,16 +788,16 @@
     .header-control { background: var(--dnd5e-background-25); }
 
     .window-icon {
-      --icon-size: var(--button-size);
-      block-size: var(--button-size);
-      inline-size: var(--button-size);
-      margin-right: auto;
-
+      --icon-size: 20px;
       --icon-fill: var(--color-text-dark-5);
-      color: var(--color-text-dark-5);
+      margin-right: auto;
+      color: var(--icon-fill);
+      font-size: calc(var(--icon-size) * .75);
     }
     dnd5e-icon.window-icon { margin-block-start: 2px; }
     img.window-icon {
+      block-size: calc(var(--icon-size) + 2px);
+      inline-size: calc(var(--icon-size) + 2px);
       border: var(--dnd5e-border-gold);
       border-radius: 4px;
     }
