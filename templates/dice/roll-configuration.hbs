@@ -1,9 +1,6 @@
 <fieldset>
     <legend>{{ localize "DND5E.RollConfiguration.Configuration" }}</legend>
-    <div class="form-group">
-        <label>{{ localize "DND5E.RollMode" }}</label>
-        <select name="rollMode">
-            {{ selectOptions rollModesOptions selected=rollMode localize=true }}
-        </select>
-    </div>
+    {{#each fields}}
+        {{ formField field name=name value=value options=options input=input }}
+    {{/each}}
 </fieldset>

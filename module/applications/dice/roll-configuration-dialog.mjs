@@ -165,8 +165,12 @@ export default class RollConfigurationDialog extends Application5e {
    * @protected
    */
   _prepareConfigurationContext(context, options) {
-    context.rollMode = this.message.rollMode ?? this.options.default?.rollMode;
-    context.rollModesOptions = CONFIG.Dice.rollModes;
+    context.fields = [{
+      field: new foundry.data.fields.StringField({ label: game.i18n.localize("DND5E.RollMode") }),
+      name: "rollMode",
+      value: this.message.rollMode ?? this.options.default?.rollMode,
+      options: Object.entries(CONFIG.Dice.rollModes).map(([value, l]) => ({ value, label: game.i18n.localize(l) }))
+    }];
     return context;
   }
 
