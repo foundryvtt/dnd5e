@@ -803,7 +803,18 @@
     }
   }
   &.minimized .window-header h2 { display: none; }
-  .window-header dnd5e-icon.window-icon { display: block; }
+
+  .window-header {
+    --button-size: 20px;
+
+    button.header-control {
+      --color-light-text-heading: var(--color-light-1);
+      font-size: var(--font-size-12);
+      &:hover { color: var(--color-light-text-heading); }
+    }
+
+    dnd5e-icon.window-icon { display: block; }
+  }
 
   .window-content {
     background: transparent;
