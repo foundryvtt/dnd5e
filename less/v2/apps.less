@@ -392,7 +392,12 @@
       border-radius: 3px;
     }
 
-    &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+    &:not(:disabled):is(:hover, :focus) {
+      box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      background: var(--dnd5e-color-black);
+      color: var(--dnd5e-color-gold);
+    }
+
     > i { margin: 0; }
   }
 
