@@ -103,7 +103,17 @@ class ItemRegistry {
    * Has initial loading been completed?
    * @type {number}
    */
-  #status = 0;
+  #status = ItemRegistry.#STATUS_STATES.NONE;
+
+  /**
+   * Possible preparation states for the item registry.
+   * @enum {number}
+   */
+  static #STATUS_STATES = Object.freeze({
+    NONE: 0,
+    LOADING: 1,
+    READY: 2
+  });
 
   /* -------------------------------------------- */
 
@@ -149,12 +159,12 @@ class ItemRegistry {
    * Scan compendium packs to register matching items of this type.
    */
   async initialize() {
-    if ( this.#status > 0 ) return;
+    if ( this.#status > ItemRegistry.#STATUS_STATES.NONE ) return;
     if ( !game.ready ) {
       Hooks.once("ready", () => this.initialize());
       return;
     }
-    this.#status = 1;
+    this.#status = ItemRegistry.#STATUS_STATES.LOADING;
 
     const indexes = await CompendiumBrowser.fetch(Item, {
       types: new Set([this.#itemType]),
@@ -171,7 +181,7 @@ class ItemRegistry {
       itemData.sources.push(item.uuid);
     }
 
-    this.#status = 2;
+    this.#status = ItemRegistry.#STATUS_STATES.READY;
   }
 }
 
