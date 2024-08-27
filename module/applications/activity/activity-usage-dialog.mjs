@@ -1,12 +1,12 @@
 import { filteredKeys, simplifyBonus } from "../../utils.mjs";
-import Application5e from "../api/application.mjs";
+import Dialog5e from "../api/dialog.mjs";
 
 const { BooleanField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Dialog for configuring the usage of an activity.
  */
-export default class ActivityUsageDialog extends Application5e {
+export default class ActivityUsageDialog extends Dialog5e {
   constructor(options={}) {
     super(options);
     this.#activityId = options.activity.id;
@@ -17,11 +17,6 @@ export default class ActivityUsageDialog extends Application5e {
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["activity-usage"],
-    tag: "dialog",
-    window: {
-      minimizable: false,
-      contentTag: "form"
-    },
     actions: {
       use: ActivityUsageDialog.#onUse
     },
@@ -157,7 +152,7 @@ export default class ActivityUsageDialog extends Application5e {
 
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
-    context = foundry.utils.deepClone(await super._preparePartContext(partId, context, options));
+    context = await super._preparePartContext(partId, context, options);
     switch ( partId ) {
       case "concentration": return this._prepareConcentrationContext(context, options);
       case "consumption": return this._prepareConsumptionContext(context, options);
@@ -382,18 +377,6 @@ export default class ActivityUsageDialog extends Application5e {
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _attachFrameListeners() {
-    super._attachFrameListeners();
-
-    // Add event listeners to the form manually (see https://github.com/foundryvtt/foundryvtt/issues/11621)
-    const form = this.element.querySelector("form");
-    form.addEventListener("submit", this._onSubmitForm.bind(this, this.options.form));
-    form.addEventListener("change", this._onChangeForm.bind(this, this.options.form));
-  }
-
   /* -------------------------------------------- */
 
   /**

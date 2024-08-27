@@ -1,4 +1,3 @@
-import { simplifyBonus } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
@@ -68,11 +67,7 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.spellcasting.preparation.value ??= 0;
-    this.spellcasting.preparation.max = simplifyBonus(
-      this.spellcasting.preparation.formula,
-      this.parent.getRollData({ deterministic: true})
-    );
+    SpellcastingField.prepareData.call(this, this.parent.getRollData({ deterministic: true }));
   }
 
   /* -------------------------------------------- */
