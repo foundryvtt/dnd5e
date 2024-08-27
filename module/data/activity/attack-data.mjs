@@ -271,13 +271,15 @@ export default class AttackActivityData extends BaseActivityData {
         // If mode is "replace" and base part is present, replace the base part
         if ( ammo.damage.replace & (basePartIndex !== -1) ) {
           damage.base = true;
-          rollConfig.rolls.splice(basePartIndex, 1, this._processDamagePart(damage, config, rollData));
+          rollConfig.rolls.splice(basePartIndex, 1, this._processDamagePart(damage, config, rollData, basePartIndex));
         }
 
         // Otherwise stick the ammo damage after base part (or as first part)
         else {
           damage.ammo = true;
-          rollConfig.rolls.splice(basePartIndex + 1, 0, this._processDamagePart(damage, rollConfig, rollData));
+          rollConfig.rolls.splice(
+            basePartIndex + 1, 0, this._processDamagePart(damage, rollConfig, rollData, basePartIndex + 1)
+          );
         }
       }
     }
@@ -293,8 +295,8 @@ export default class AttackActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _processDamagePart(damage, rollConfig, rollData) {
-    if ( !damage.base ) return super._processDamagePart(damage, rollConfig, rollData);
+  _processDamagePart(damage, rollConfig, rollData, index=0) {
+    if ( !damage.base ) return super._processDamagePart(damage, rollConfig, rollData, index);
 
     // Swap base damage for versatile if two-handed attack is made on versatile weapon
     if ( this.item.system.isVersatile && (rollConfig.attackMode === "twoHanded") ) {
@@ -306,7 +308,7 @@ export default class AttackActivityData extends BaseActivityData {
       damage = versatile;
     }
 
-    const roll = super._processDamagePart(damage, rollConfig, rollData);
+    const roll = super._processDamagePart(damage, rollConfig, rollData, index);
     roll.base = true;
 
     if ( this.item.type === "weapon" ) {
