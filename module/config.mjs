@@ -2609,7 +2609,7 @@ DND5E.spellScrollIds = {
  */
 
 /**
- * Spell scroll save DCs and attack bonus values based on level in the 2014 rules. If matching level isn't found,
+ * Spell scroll save DCs and attack bonus values based on spell level. If matching level isn't found,
  * then the nearest level lower than it will be selected.
  * @enum {SpellScrollValues}
  */
