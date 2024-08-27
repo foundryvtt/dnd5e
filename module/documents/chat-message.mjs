@@ -138,7 +138,7 @@ export default class ChatMessage5e extends ChatMessage {
     for ( const tray of html.querySelectorAll(".card-tray, .effects-tray") ) {
       tray.classList.toggle("collapsed", collapse);
     }
-    for ( const element of html.querySelectorAll("damage-application") ) {
+    for ( const element of html.querySelectorAll("damage-application, effect-application") ) {
       element.toggleAttribute("open", !collapse);
     }
   }
@@ -157,13 +157,6 @@ export default class ChatMessage5e extends ChatMessage {
       if ( flavor.text() === html.find(".item-name").text() ) flavor.remove();
 
       if ( this.shouldDisplayChallenge ) chatCard[0].dataset.displayChallenge = "";
-
-      // Conceal effects that the user cannot apply.
-      chatCard.find(".effects-tray .effect").each((i, el) => {
-        if ( !game.user.isGM && ((el.dataset.transferred === "false") || (this.author.id !== game.user.id)) ) {
-          el.remove();
-        }
-      });
 
       const actor = game.actors.get(this.speaker.actor);
       const isCreator = game.user.isGM || actor?.isOwner || (this.author.id === game.user.id);
@@ -338,6 +331,9 @@ export default class ChatMessage5e extends ChatMessage {
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
     }
+
+    // Effects tray
+    this._enrichUsageEffects(html);
 
     avatar.addEventListener("click", this._onTargetMouseDown.bind(this));
     avatar.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
@@ -553,6 +549,26 @@ export default class ChatMessage5e extends ChatMessage {
     enchantmentApplication.classList.add("dnd5e2");
     const afterElement = html.querySelector(".card-footer") ?? html.querySelector(".effects-tray");
     afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display the effects tray with effects the user can apply.
+   * @param {HTMLLiElement} html  The chat card.
+   * @protected
+   */
+  _enrichUsageEffects(html) {
+    const item = this.getAssociatedItem();
+    const effects = this.getFlag("dnd5e", "use.effects")
+      ?.map(id => item?.effects.get(id))
+      .filter(e => game.user.isGM || (e.transfer && (this.author.id === game.user.id)));
+    if ( !effects?.length ) return;
+
+    const effectApplication = document.createElement("effect-application");
+    effectApplication.classList.add("dnd5e2");
+    effectApplication.effects = effects;
+    html.querySelector(".message-content").appendChild(effectApplication);
   }
 
   /* -------------------------------------------- */
