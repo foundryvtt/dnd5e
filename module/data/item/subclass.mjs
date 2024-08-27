@@ -34,6 +34,13 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareBaseData() {
+    this.spellcasting.preparation.value = 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   prepareFinalData() {
     this.spellcasting.preparation.value ??= 0;
     this.spellcasting.preparation.max = simplifyBonus(

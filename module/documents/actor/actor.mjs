@@ -65,10 +65,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
     if ( !["character", "npc"].includes(this.type) ) return this._classes = {};
-    return this._classes = this.items.filter(item => item.type === "class").reduce((obj, cls) => {
-      obj[cls.identifier] = cls;
-      return obj;
-    }, {});
+    return this._classes = Object.fromEntries(this.itemTypes.class.map(cls => [cls.identifier, cls]));
   }
 
   /* -------------------------------------------- */
@@ -627,30 +624,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Translate the list of classes into spellcasting progression
     const progression = { slot: 0, pact: 0 };
     const types = {};
-    const preparations = {};
-    let classes = {};
 
     // Grab all classes with spellcasting
-    for ( const item of this.items ) {
-      if ( item.type === "class" ) {
-        const type = item.spellcasting.type;
-        if ( !type ) continue;
-        types[type] = (types[type] ?? 0) + 1;
-        classes[item.identifier] = item;
-      } else if ( item.type === "spell" ) {
-        const { preparation, sourceClass } = item.system;
-        const { mode, prepared } = preparation ?? {};
-        const config = CONFIG.DND5E.spellPreparationModes[mode];
-        if ( sourceClass && config?.prepares && ((mode === "always") || prepared) ) {
-          preparations[sourceClass] = (preparations[sourceClass] ?? 0) + 1;
-        }
-      }
-    }
-    Object.entries(preparations).forEach(([id, value]) => {
-      const cls = classes[id];
-      if ( cls ) cls.system.spellcasting.preparation.value = value;
+    const classes = this.items.filter(cls => {
+      if ( cls.type !== "class" ) return false;
+      const type = cls.spellcasting.type;
+      if ( !type ) return false;
+      types[type] ??= 0;
+      types[type] += 1;
+      return true;
     });
-    classes = Object.values(classes);
 
     for ( const cls of classes ) this.constructor.computeClassProgression(
       progression, cls, { actor: this, count: types[cls.spellcasting.type] }
