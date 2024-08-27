@@ -1,3 +1,4 @@
+import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import EnchantActivity from "./documents/activity/enchant.mjs";
 
 /* -------------------------------------------- */
@@ -58,6 +59,119 @@ class EnchantmentRegisty {
    */
   static untrack(source, enchanted) {
     EnchantmentRegisty.#appliedEnchantments.get(source)?.delete(enchanted);
+  }
+}
+
+/* -------------------------------------------- */
+/*  Item Registry                               */
+/* -------------------------------------------- */
+
+class ItemRegistry {
+  constructor(itemsType) {
+    this.#itemType = itemsType;
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {object} RegisteredItemData
+   * @property {string} name        Name of the item.
+   * @property {string} identifier  Item identifier.
+   * @property {string} img         Item's icon.
+   * @property {string[]} sources   UUIDs of different compendium items matching this identifier.
+   */
+
+  /**
+   * Items grouped by identifiers.
+   * @type {Map<string, RegisteredItemData>}
+   */
+  #items = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Type of item represented by this registry.
+   * @type {string}
+   */
+  #itemType;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Has initial loading been completed?
+   * @type {number}
+   */
+  #status = 0;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Choices object.
+   * @type {Record<string, string>}
+   */
+  get choices() {
+    return this.options.reduce((obj, { value, label }) => {
+      obj[value] = label;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * All items formatted for a select input.
+   * @type {FormSelectOption[]}
+   */
+  get options() {
+    return Array.from(this.#items.entries())
+      .map(([value, data]) => ({ value, label: data.name }))
+      .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label));
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get information on a single item based on its identifier.
+   * @param {string} identifier
+   * @returns {RegisteredItemData|void}
+   */
+  get(identifier) {
+    return this.#items.get(identifier);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Scan compendium packs to register matching items of this type.
+   */
+  async initialize() {
+    if ( this.#status > 0 ) return;
+    if ( !game.ready ) {
+      Hooks.once("ready", () => this.initialize());
+      return;
+    }
+    this.#status = 1;
+
+    const indexes = await CompendiumBrowser.fetch(Item, {
+      types: new Set([this.#itemType]),
+      indexFields: new Set(["system.identifier"]),
+      sort: false
+    });
+    for ( const item of indexes ) {
+      const identifier = item.system?.identifier ?? slugify(item.name, { strict: true });
+      if ( !this.#items.has(identifier) ) this.#items.set(identifier, { sources: [] });
+      const itemData = this.#items.get(identifier);
+      itemData.name = item.name;
+      itemData.img = item.img;
+      itemData.identifier = identifier;
+      itemData.sources.push(item.uuid);
+    }
+
+    this.#status = 2;
   }
 }
 
@@ -174,6 +288,7 @@ class SummonRegistry {
 
 
 export default {
+  classes: new ItemRegistry("class"),
   enchantments: EnchantmentRegisty,
   messages: MessageRegistry,
   summons: SummonRegistry
