@@ -45,9 +45,9 @@ export default class SpellcastingField extends SchemaField {
     // Temp method for determining spellcasting type until this data is available directly using advancement
     if ( CONFIG.DND5E.spellcastingTypes[this.spellcasting.progression] ) {
       this.spellcasting.type = this.spellcasting.progression;
-    } else this.spellcasting.type = Object.entries(CONFIG.DND5E.spellcastingTypes).find(([type, data]) => {
-      return !!data.progression?.[this.spellcasting.progression];
-    })?.[0];
+    } else this.spellcasting.type = Object.entries(CONFIG.DND5E.spellcastingTypes).find(([, { progression }]) =>
+      progression?.[this.spellcasting.progression]
+    )?.[0];
 
     const actor = this.parent.actor;
     if ( !actor ) return;

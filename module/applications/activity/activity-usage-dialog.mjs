@@ -152,7 +152,7 @@ export default class ActivityUsageDialog extends Dialog5e {
 
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
-    context = foundry.utils.deepClone(await super._preparePartContext(partId, context, options));
+    context = await super._preparePartContext(partId, context, options);
     switch ( partId ) {
       case "concentration": return this._prepareConcentrationContext(context, options);
       case "consumption": return this._prepareConsumptionContext(context, options);

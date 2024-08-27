@@ -41,7 +41,7 @@ export default class Dialog5e extends Application5e {
 
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
-    context = foundry.utils.deepClone(await super._preparePartContext(partId, context, options));
+    context = { ...(await super._preparePartContext(partId, context, options)) };
     if ( partId === "content" ) return this._prepareContentContext(context, options);
     if ( partId === "footer" ) return this._prepareFooterContext(context, options);
     return context;
