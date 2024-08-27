@@ -9,10 +9,18 @@ const { DiceTerm } = foundry.dice.terms;
  * @property {typeof BasicRoll} rollType  Roll type to use when constructing final roll.
  * @property {object} [default]
  * @property {number} [default.rollMode]  Default roll mode to have selected.
- * @property {object} [rendering]
- * @property {number} [rendering.maxDice=5]  The maximum number of dice to display in the large dice breakdown. If the
- *                                           given rolls contain more dice than this, then the large breakdown is not
- *                                           shown.
+ * @property {BasicRollConfigurationDialogRenderOptions} [rendering]
+ */
+
+/**
+ * @typedef BasicRollConfigurationDialogRenderOptions
+ * @property {object} [dice]
+ * @property {number} [dice.max=5]               The maximum number of dice to display in the large dice breakdown. If
+ *                                               the given rolls contain more dice than this, then the large breakdown
+ *                                               is not shown.
+ * @property {Set<string>} [dice.denominations]  Valid die denominations to display in the large dice breakdown. If any
+ *                                               of the given rolls contain an invalid denomination, then the large
+ *                                               breakdown is not shown.
  */
 
 /**
@@ -49,7 +57,10 @@ export default class RollConfigurationDialog extends Application5e {
       width: 400
     },
     rendering: {
-      maxDice: 5
+      dice: {
+        max: 5,
+        denominations: new Set(["d4", "d6", "d8", "d10", "d12", "d20"])
+      }
     }
   };
 
@@ -148,6 +159,9 @@ export default class RollConfigurationDialog extends Application5e {
       if ( !(term instanceof DiceTerm) ) return;
       // If any of the terms have complex components, do not attempt to display only some dice, bail out entirely.
       if ( !Number.isFinite(term.number) || !Number.isFinite(term.faces) ) return shouldDisplay = false;
+      // If any of the terms are of an unsupported denomination, do not attempt to display only some dice, bail out
+      // entirely.
+      if ( !this.options.rendering.dice.denominations.has(term.denomination) ) return shouldDisplay = false;
       for ( let i = 0; i < term.number; i++ ) dice.push({
         icon: `systems/dnd5e/icons/svg/dice/${term.denomination}.svg`,
         label: term.denomination
@@ -166,7 +180,7 @@ export default class RollConfigurationDialog extends Application5e {
     };
 
     this.rolls.forEach(roll => identifyDice(roll.terms));
-    if ( !dice.length || (dice.length > this.options.rendering.maxDice) ) shouldDisplay = false;
+    if ( !dice.length || (dice.length > this.options.rendering.dice.max) ) shouldDisplay = false;
     return shouldDisplay ? dice : [];
   }
 
