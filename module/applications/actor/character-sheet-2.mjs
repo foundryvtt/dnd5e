@@ -196,7 +196,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         ability: { mod, ability: sc.ability },
         attack: mod + this.actor.system.attributes.prof + attackBonus,
         primary: this.actor.system.attributes.spellcasting === sc.ability,
-        save: ability?.dc ?? 0
+        save: ability?.dc ?? 0,
+        preparation: sc.preparation
       });
     }
 
