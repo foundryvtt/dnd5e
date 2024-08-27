@@ -913,7 +913,7 @@ async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollI
   const actor = rollItemActor ? await fromUuid(rollItemActor) : null;
 
   // If no actor is specified or player isn't owner, fall back to the macro rolling logic
-  if ( !actor?.isOwner ) return rollItem(rollItemName, rollActivityName);
+  if ( !actor?.isOwner ) return rollItem(rollItemName, { activityName: rollActivityName });
   const token = canvas.tokens.controlled[0];
 
   // If a token is controlled, and it has an item with the correct name, activate it
