@@ -44,7 +44,7 @@
 {{#with fields.scaling.fields as |fields|}}
 <div class="field-group">
     {{ formField fields.mode name=(concat ../prefix "scaling.mode") value=../data.scaling.mode
-                 options=../scalingOptions label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.mode.abbr" hint=false
+                 options=../scalingOptions label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.abbr" hint=false
                  localize=true classes="label-top" }}
     {{#if ../data.scaling.mode}}
     {{ formField fields.number name=(concat ../prefix "scaling.number") value=../data.scaling.number

@@ -35,6 +35,10 @@ export default class HealSheet extends ActivitySheet {
     context.typeOptions = Object.entries(CONFIG.DND5E.healingTypes).map(([value, config]) => ({
       value, label: config.label, selected: context.activity.healing.types.has(value)
     }));
+    context.scalingOptions = [
+      { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
+      ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { label }]) => ({ value, label }))
+    ];
     return context;
   }
 }

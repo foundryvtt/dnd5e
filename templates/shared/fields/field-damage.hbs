@@ -40,3 +40,29 @@
 {{ formField fields.types name=(concat prefix "types") value=source.types options=types label="DND5E.Type"
              localize=true }}
 {{/if}}
+
+{{!-- Scaling --}}
+{{#if canScale}}
+<div class="form-group split-group">
+    <label>{{ localize "DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.abbr" }}</label>
+    <div class="form-fields">
+
+        {{!-- Mode --}}
+        {{ formField fields.scaling.fields.mode name=(concat prefix "scaling.mode") value=source.scaling.mode
+                     options=scalingOptions label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.mode.abbr" hint=false
+                     localize=true classes="label-top" }}
+
+        {{!-- Dice --}}
+        {{#if source.scaling.mode}}
+        {{ formField fields.scaling.fields.number name=(concat prefix "scaling.number") value=source.scaling.number
+                     label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.number.abbr" hint=false localize=true
+                     classes="label-top" }}
+        {{/if}}
+    </div>
+</div>
+
+{{!-- Formula --}}
+{{#if source.scaling.mode}}
+{{ formField fields.scaling.fields.formula name=(concat prefix "scaling.formula") value=source.scaling.formula }}
+{{/if}}
+{{/if}}
