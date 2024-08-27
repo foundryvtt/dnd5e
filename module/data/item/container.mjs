@@ -15,6 +15,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes EquippableItemTemplate
  * @mixes CurrencyTemplate
  *
+ * @property {Set<string>} properties       Container properties.
  * @property {object} capacity              Information on container's carrying capacity.
  * @property {string} capacity.type         Method for tracking max capacity as defined in `DND5E.itemCapacityTypes`.
  * @property {number} capacity.value        Total amount of the type this container can carry.

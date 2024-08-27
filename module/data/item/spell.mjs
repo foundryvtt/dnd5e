@@ -27,9 +27,6 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {boolean} preparation.prepared      Is the spell currently prepared?
  * @property {Set<string>} properties            General components and tags for this spell.
  * @property {RangeData} range                   Range of the spell
- * @property {object} scaling                    Details on how casting at higher levels affects this spell.
- * @property {string} scaling.mode               Spell scaling mode as defined in `DND5E.spellScalingModes`.
- * @property {string} scaling.formula            Dice formula used for scaling.
  * @property {string} school                     Magical school to which this spell belongs.
  * @property {string} sourceClass                Associated spellcasting class when this spell is on an actor.
  * @property {TargetData} target                 Information on area and individual targets.
