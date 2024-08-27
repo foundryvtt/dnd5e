@@ -30,6 +30,32 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["class", {
+        label: "TYPES.Item.class",
+        type: "set",
+        config: {
+          choices: dnd5e.registry.classes.choices,
+          keyPath: "system.classIdentifier"
+        }
+      }],
+      ["hasSpellcasting", {
+        label: "DND5E.CompendiumBrowser.Filters.HasSpellcasting",
+        type: "boolean",
+        createFilter: (filters, value, def) => {
+          if ( value === 0 ) return;
+          const filter = { k: "system.spellcasting.progression", v: "none" };
+          if ( value === -1 ) filters.push(filter);
+          else filters.push({ o: "NOT", v: filter });
+        }
+      }]
+    ]);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
