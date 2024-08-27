@@ -263,7 +263,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     const cls = CONFIG.DND5E.activityTypes[type].documentClass;
     cls.createInitialActivity(source);
 
-    if ( (type !== "save") && source.system.save.ability ) {
+    if ( (type !== "save") && source.system.save?.ability ) {
       CONFIG.DND5E.activityTypes.save.documentClass.createInitialActivity(source, { offset: 1 });
     }
     if ( (source.type !== "weapon") && source.system.damage?.versatile ) {
