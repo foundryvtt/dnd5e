@@ -186,7 +186,7 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _highlightCriticalSuccessFailure(html) {
     if ( !this.isContentVisible || !this.rolls.length ) return;
-    const originatingMessage = game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
+    const originatingMessage = this.getOriginatingMessage();
     const displayChallenge = originatingMessage?.shouldDisplayChallenge;
     const displayAttackResult = game.user.isGM || (game.settings.get("dnd5e", "attackRollVisibility") !== "none");
 
@@ -247,8 +247,7 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _enrichChatCard(html) {
     // Header matter
-    const { scene: sceneId, token: tokenId, actor: actorId } = this.speaker;
-    const actor = game.scenes.get(sceneId)?.tokens.get(tokenId)?.actor ?? game.actors.get(actorId);
+    const actor = this.getAssociatedActor();
 
     let img;
     let nameText;
@@ -486,7 +485,7 @@ export default class ChatMessage5e extends ChatMessage {
       p.innerHTML = game.i18n.format("DND5E.SAVE.FIELDS.damage.onSave.Flavor", {
         amount: game.i18n.localize(`DND5E.SAVE.FIELDS.damage.onSave.${damageOnSave.capitalize()}`)
       });
-      html.querySelector(".chat-card").appendChild(p);
+      html.querySelector(".chat-card, .message-content")?.appendChild(p);
     }
 
     if ( game.user.isGM ) {
@@ -836,7 +835,9 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Activity|void}
    */
   getAssociatedActivity() {
-    return fromUuidSync(this.getFlag("dnd5e", "activity.uuid"));
+    const activity = fromUuidSync(this.getFlag("dnd5e", "activity.uuid"));
+    if ( activity ) return activity;
+    return this.getAssociatedItem()?.system.activities?.get(this.getFlag("dnd5e", "activity.id"));
   }
 
   /* -------------------------------------------- */
@@ -861,12 +862,12 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Item5e|void}
    */
   getAssociatedItem() {
+    const item = fromUuidSync(this.getFlag("dnd5e", "item.uuid"));
+    if ( item ) return item;
     const actor = this.getAssociatedActor();
     if ( !actor ) return;
-    const storedData = this.getFlag("dnd5e", "item.data");
-    return storedData
-      ? new Item.implementation(storedData, { parent: actor })
-      : actor.items.get(this.getFlag("dnd5e", "item.id"));
+    const storedData = this.getFlag("dnd5e", "item.data") ?? this.getOriginatingMessage().getFlag("dnd5e", "item.data");
+    if ( storedData ) return new Item.implementation(storedData, { parent: actor });
   }
 
   /* -------------------------------------------- */
@@ -878,6 +879,17 @@ export default class ChatMessage5e extends ChatMessage {
    */
   getAssociatedRolls(type) {
     return dnd5e.registry.messages.get(this.id, type);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the original chat message from which this message was created. If no originating message exists,
+   * will return this message.
+   * @type {ChatMessage5e}
+   */
+  getOriginatingMessage() {
+    return game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
   }
 
   /* -------------------------------------------- */

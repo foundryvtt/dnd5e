@@ -2603,6 +2603,27 @@ DND5E.spellScrollIds = {
 /* -------------------------------------------- */
 
 /**
+ * @typedef {object} SpellScrollValues
+ * @property {number} bonus  Attack to hit bonus.
+ * @property {number} dc     Saving throw DC.
+ */
+
+/**
+ * Spell scroll save DCs and attack bonus values based on spell level. If matching level isn't found,
+ * then the nearest level lower than it will be selected.
+ * @enum {SpellScrollValues}
+ */
+DND5E.spellScrollValues = {
+  0: { dc: 13, bonus: 5 },
+  3: { dc: 15, bonus: 7 },
+  5: { dc: 17, bonus: 9 },
+  7: { dc: 18, bonus: 10 },
+  9: { dc: 19, bonus: 11 }
+};
+
+/* -------------------------------------------- */
+
+/**
  * Compendium packs used for localized items.
  * @enum {string}
  */
