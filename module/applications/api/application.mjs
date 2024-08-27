@@ -52,9 +52,21 @@ export default class Application5e extends HandlebarsApplicationMixin(Applicatio
   /** @inheritDoc */
   async _renderFrame(options) {
     const frame = await super._renderFrame(options);
+
+    // Subtitles
     const subtitle = document.createElement("h2");
     subtitle.classList.add("window-subtitle");
     frame.querySelector(".window-title").insertAdjacentElement("afterend", subtitle);
+
+    // Icon
+    if ( (this.options.window?.icon ?? "").includes(".") ) {
+      const icon = frame.querySelector(".window-icon");
+      const newIcon = document.createElement(this.options.window.icon?.endsWith(".svg") ? "dnd5e-icon" : "img");
+      newIcon.classList.add("window-icon");
+      newIcon.src = this.options.window.icon;
+      icon.replaceWith(newIcon);
+    }
+
     return frame;
   }
 

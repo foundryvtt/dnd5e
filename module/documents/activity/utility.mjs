@@ -68,7 +68,16 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     rollConfig.origin = this;
     rollConfig.rolls = [{ parts: [this.roll.formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
-    const dialogConfig = foundry.utils.mergeObject({ configure: this.roll.prompt }, dialog);
+    const dialogConfig = foundry.utils.mergeObject({
+      configure: this.roll.prompt,
+      options: {
+        window: {
+          title: this.item.name,
+          subtitle: "DND5E.RollConfiguration.Title",
+          icon: this.item.img
+        }
+      }
+    }, dialog);
 
     const messageConfig = foundry.utils.mergeObject({
       create: true,
