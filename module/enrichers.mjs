@@ -512,7 +512,7 @@ async function enrichReference(config, label, options) {
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {Promise<HTMLElement|null>}  An HTML link if the item link could be built, otherwise null.
  *
- * @example Use an item from a Name:
+ * @example Use an Item from a name:
  * ```[[/item Heavy Crossbow]]```
  * becomes
  * ```html
@@ -538,6 +538,25 @@ async function enrichReference(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> Bite
  * </a>
  * ```
+ *
+ * @example Use an Activity on an Item from a name:
+ * ```[[/item Heavy Crossbow activity=Poison]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item" data-roll-item-name="Heavy Crossbow" data-roll-activity-name="Poison">
+ *   <i class="fa-solid fa-dice-d20"></i> Heavy Crossbow: Poison
+ * </a>
+ * ```
+ *
+ * @example Use an Activity on an Item:
+ * ```[[/item amUUCouL69OK1GZU activity=G8ng63Tjqy5W52OP]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item"
+ *    data-roll-activity-uuid="Actor.M4eX4Mu5IHCr3TMf.Item.amUUCouL69OK1GZU.Activity.G8ng63Tjqy5W52OP">
+ *   <i class="fa-solid fa-dice-d20"></i> Bite: Save
+ * </a>
+ * ```
  */
 async function enrichItem(config, label, options) {
   const givenItem = config.values.join(" ");
@@ -550,7 +569,7 @@ async function enrichItem(config, label, options) {
     if ( !label ) {
       const item = await fromUuid(givenItem);
       if ( !item ) {
-        console.warn(`Item not found while enriching ${givenItem}.`);
+        console.warn(`Item not found while enriching ${config._input}.`);
         return null;
       }
       label = item.name;
@@ -574,13 +593,27 @@ async function enrichItem(config, label, options) {
   }
 
   if ( foundItem ) {
+    let foundActivity;
+    if ( config.activity ) {
+      foundActivity = foundItem.system.activities?.get(config.activity)
+        ?? foundItem.system.activities?.getName(config.activity);
+      if ( !foundActivity ) {
+        console.warn(`Activity ${config.activity} not found on ${foundItem.name} while enriching ${config._input}.`);
+        return null;
+      }
+      if ( !label ) label = `${foundItem.name}: ${foundActivity.name}`;
+      return createRollLink(label, { type: "item", rollActivityUuid: foundActivity.uuid });
+    }
+
     if ( !label ) label = foundItem.name;
     return createRollLink(label, { type: "item", rollItemUuid: foundItem.uuid });
   }
 
   // Finally, if config is an item name
-  if ( !label ) label = givenItem;
-  return createRollLink(label, { type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem });
+  if ( !label ) label = config.activity ? `${givenItem}: ${config.activity}` : givenItem;
+  return createRollLink(label, {
+    type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem, rollActivityName: config.activity
+  });
 }
 
 /* -------------------------------------------- */
@@ -864,20 +897,23 @@ async function rollDamage(event) {
 /**
  * Use an Item from an Item enricher.
  * @param {object} [options]
- * @param {string} [options.rollItemUuid]   Lookup the Item by UUID.
- * @param {string} [options.rollItemName]   Lookup the Item by name.
- * @param {string} [options.rollItemActor]  The UUID of a specific Actor that should use the Item.
+ * @param {string} [options.rollActivityUuid]  Lookup the Activity by UUID.
+ * @param {string} [options.rollActivityName]  Lookup the Activity by name.
+ * @param {string} [options.rollItemUuid]      Lookup the Item by UUID.
+ * @param {string} [options.rollItemName]      Lookup the Item by name.
+ * @param {string} [options.rollItemActor]     The UUID of a specific Actor that should use the Item.
  * @returns {Promise}
  */
-async function useItem({ rollItemUuid, rollItemName, rollItemActor }={}) {
+async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollItemName, rollItemActor }={}) {
   // If UUID is provided, always roll that item directly
+  if ( rollActivityUuid ) return (await fromUuid(rollActivityUuid))?.use();
   if ( rollItemUuid ) return (await fromUuid(rollItemUuid))?.use();
 
   if ( !rollItemName ) return;
   const actor = rollItemActor ? await fromUuid(rollItemActor) : null;
 
   // If no actor is specified or player isn't owner, fall back to the macro rolling logic
-  if ( !actor?.isOwner ) return rollItem(rollItemName);
+  if ( !actor?.isOwner ) return rollItem(rollItemName, { activityName: rollActivityName });
   const token = canvas.tokens.controlled[0];
 
   // If a token is controlled, and it has an item with the correct name, activate it
@@ -895,10 +931,22 @@ async function useItem({ rollItemUuid, rollItemName, rollItemActor }={}) {
     );
   }
 
-  if ( item ) return item.use();
+  if ( item ) {
+    if ( rollActivityName ) {
+      const activity = item.system.activities?.getName(rollActivityName);
+      if ( activity ) return activity.use();
+
+      // If no activity could be found at all, display a warning
+      else ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoActivityOnItem", {
+        activity: rollActivityName, actor: actor.name, item: rollItemName
+      }));
+    }
+
+    else return item.use();
+  }
 
   // If no item could be found at all, display a warning
-  ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
-    actor: actor.name, name: rollItemName, type: game.i18n.localize("DOCUMENT.Item")
+  else ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
+    actor: actor.name, item: rollItemName
   }));
 }
