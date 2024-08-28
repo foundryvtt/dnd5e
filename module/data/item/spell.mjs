@@ -187,14 +187,17 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     }, { all: [], vsm: [], tags: [] });
     labels.components.vsm = game.i18n.getListFormatter({ style: "narrow" }).format(labels.components.vsm);
 
-    dnd5e.registry.whenReady(() => {
-      labels.classes = game.i18n.getListFormatter({ style: "narrow" }).format(
-        Array.from(dnd5e.registry.spellLists
-          .forSpell(this.parent._stats.compendiumSource ?? this.parent.uuid))
-          .filter(list => list.metadata.type === "class")
-          .map(list => list.name)
-          .sort((lhs, rhs) => lhs.localeCompare(rhs))
-      );
+    const uuid = this.parent._stats.compendiumSource ?? this.parent.uuid;
+    Object.defineProperty(labels, "classes", {
+      get() {
+        return game.i18n.getListFormatter({ style: "narrow" }).format(
+          Array.from(dnd5e.registry.spellLists.forSpell(uuid))
+            .filter(list => list.metadata.type === "class")
+            .map(list => list.name)
+            .sort((lhs, rhs) => lhs.localeCompare(rhs))
+        );
+      },
+      configurable: true
     });
   }
 

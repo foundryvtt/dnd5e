@@ -380,7 +380,7 @@ export class SpellList {
 
   /**
    * Information on the spell list.
-   * @type {{ identifier: string, type: string }}
+   * @type {{ identifier: string, name: string, type: string }}
    */
   #metadata;
 
@@ -521,7 +521,7 @@ class SummonRegistry {
 }
 
 /* -------------------------------------------- */
-/*  Public API                                  */
+/*  Ready API                                   */
 /* -------------------------------------------- */
 
 /**
@@ -529,47 +529,48 @@ class SummonRegistry {
  * @type {Map<string, boolean>}
  */
 const RegistryStatus = new class extends Map {
-  /**
-   * Callbacks to call when spell lists are ready.
-   * @type {Function[]}
-   */
-  callbacks = [];
+  constructor(iterable) {
+    super(iterable);
+    const { promise, resolve } = Promise.withResolvers();
+    this.#ready = promise;
+    this.#resolve = resolve;
+  }
 
   /* -------------------------------------------- */
 
   /**
-   * Are all registries ready?
-   * @returns {boolean}
+   * Promise that resolves when the registry is ready.
+   * @type {Promise}
    */
-  get isReady() {
-    return Array.from(this.values()).every(s => s);
+  #ready;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Promise that resolves when all registries are ready.
+   * @returns {Promise}
+   */
+  get ready() {
+    return this.#ready;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Internal method called when registry is ready.
+   * @type {Function}
+   */
+  #resolve;
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   set(key, value) {
     super.set(key, value);
-    if ( this.isReady ) {
-      let callback = this.callbacks.shift();
-      while ( callback ) {
-        callback();
-        callback = this.callbacks.shift();
-      }
-    }
+    if ( Array.from(this.values()).every(s => s) ) this.#resolve();
+    return this;
   }
 }();
-
-/* -------------------------------------------- */
-
-/**
- * Execute a callback when all registries have finished loading.
- * @param {Function} callback
- */
-function whenReady(callback) {
-  if ( RegistryStatus.isReady ) callback();
-  RegistryStatus.callbacks.push(callback);
-}
 
 /* -------------------------------------------- */
 
@@ -577,7 +578,7 @@ export default {
   classes: new ItemRegistry("class"),
   enchantments: EnchantmentRegisty,
   messages: MessageRegistry,
+  ready: RegistryStatus.ready,
   spellLists: SpellListRegistry,
-  summons: SummonRegistry,
-  whenReady
+  summons: SummonRegistry
 };
