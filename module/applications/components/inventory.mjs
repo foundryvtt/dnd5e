@@ -33,7 +33,7 @@ export default class InventoryElement extends HTMLElement {
 
     for ( const control of this.querySelectorAll(".item-action[data-action]") ) {
       control.addEventListener("click", event => {
-        this._onAction(event, event.currentTarget, event.currentTarget.dataset.action);
+        this._onAction(event.currentTarget, event.currentTarget.dataset.action, { event });
       });
     }
 
@@ -370,13 +370,14 @@ export default class InventoryElement extends HTMLElement {
 
   /**
    * Handle item actions.
-   * @param {PointerEvent} event  The triggering event.
-   * @param {Element} target      Button or context menu entry that triggered this action.
-   * @param {string} action       Action being triggered.
+   * @param {Element} target                Button or context menu entry that triggered this action.
+   * @param {string} action                 Action being triggered.
+   * @param {object} [options]
+   * @param {PointerEvent} [options.event]  The original triggering event.
    * @returns {Promise}
    * @protected
    */
-  async _onAction(event, target, action) {
+  async _onAction(target, action, { event }={}) {
     const inventoryEvent = new CustomEvent("inventory", {
       bubbles: true,
       cancelable: true,
