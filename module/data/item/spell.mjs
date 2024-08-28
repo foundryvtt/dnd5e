@@ -183,6 +183,19 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       return obj;
     }, { all: [], vsm: [], tags: [] });
     labels.components.vsm = game.i18n.getListFormatter({ style: "narrow" }).format(labels.components.vsm);
+
+    const uuid = this.parent._stats.compendiumSource ?? this.parent.uuid;
+    Object.defineProperty(labels, "classes", {
+      get() {
+        return game.i18n.getListFormatter({ style: "narrow" }).format(
+          Array.from(dnd5e.registry.spellLists.forSpell(uuid))
+            .filter(list => list.metadata.type === "class")
+            .map(list => list.name)
+            .sort((lhs, rhs) => lhs.localeCompare(rhs))
+        );
+      },
+      configurable: true
+    });
   }
 
   /* -------------------------------------------- */
@@ -237,7 +250,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     context.subtitles = [
       { label: context.labels.level },
       { label: context.labels.school },
-      { label: context.itemStatus }
+      { label: context.itemStatus },
+      { label: context.labels.classes, classes: "full-width" }
     ];
     context.properties.active = this.parent.labels?.components?.tags;
     context.parts = ["dnd5e.details-spell", "dnd5e.field-uses"];

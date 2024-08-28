@@ -139,6 +139,13 @@
         }
 
         &:first-child::before { content: ""; }
+
+        &.full-width {
+          flex: 1 0 100%;
+          font-size: var(--font-size-12);
+          text-align: center;
+          &::before { display: none; }
+        }
       }
 
       /* Rarity */

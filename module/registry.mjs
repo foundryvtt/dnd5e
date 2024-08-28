@@ -160,6 +160,7 @@ class ItemRegistry {
    */
   async initialize() {
     if ( this.#status > ItemRegistry.#STATUS_STATES.NONE ) return;
+    RegistryStatus.set(this.#itemType, false);
     if ( !game.ready ) {
       Hooks.once("ready", () => this.initialize());
       return;
@@ -182,6 +183,7 @@ class ItemRegistry {
     }
 
     this.#status = ItemRegistry.#STATUS_STATES.READY;
+    RegistryStatus.set(this.#itemType, true);
   }
 }
 
@@ -252,10 +254,49 @@ class MessageRegistry {
 
 class SpellListRegistry {
   /**
+   * Spell lists organized by the UUID of a spell they contain.
+   * @type {Map<string, Set<SpellList>>}
+   */
+  static #bySpell = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
    * Registration of spell lists grouped by type and identifier.
    * @type {Map<string, SpellList>}
    */
-  static #lists = new Map();
+  static #byType = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * UUIDs of spell lists in the process of being loaded.
+   * @type {Set<string>}
+   */
+  static #loading = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Have spell lists finished loading?
+   * @type {boolean}
+   */
+  static get ready() {
+    return this.#loading.size === 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve a list of spell lists a spell belongs to.
+   * @param {string} uuid  UUID of a spell item.
+   * @returns {Set<SpellList>}
+   */
+  static forSpell(uuid) {
+    return this.#bySpell.get(uuid) ?? new Set();
+  }
 
   /* -------------------------------------------- */
 
@@ -265,8 +306,8 @@ class SpellListRegistry {
    * @param {string} identifier  Identifier of the specific spell list.
    * @returns {SpellList|null}
    */
-  static list(type, identifier) {
-    return this.#lists.get(`${type}.${identifier}`) ?? null;
+  static forType(type, identifier) {
+    return this.#byType.get(`${type}.${identifier}`) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -276,6 +317,8 @@ class SpellListRegistry {
    * @param {string} uuid  UUID of a spell list journal entry page.
    */
   static async register(uuid) {
+    RegistryStatus.set("spellLists", false);
+    this.#loading.add(uuid);
     if ( !game.ready ) {
       Hooks.once("ready", () => this.register(uuid));
       return;
@@ -286,8 +329,18 @@ class SpellListRegistry {
     if ( page.type !== "spells" ) throw new Error(`Journal entry page "${uuid}" is not a Spell List.`);
 
     const id = `${page.system.type}.${page.system.identifier}`;
-    if ( !SpellListRegistry.#lists.has(id) ) SpellListRegistry.#lists.set(id, new SpellList());
-    SpellListRegistry.#lists.get(id).contribute(page);
+    if ( !SpellListRegistry.#byType.has(id) ) SpellListRegistry.#byType.set(id, new SpellList({
+      identifier: page.system.identifier, name: page.name, type: page.system.type
+    }));
+
+    const list = SpellListRegistry.#byType.get(id);
+    list.contribute(page).forEach(uuid => {
+      if ( !SpellListRegistry.#bySpell.has(uuid) ) SpellListRegistry.#bySpell.set(uuid, new Set());
+      SpellListRegistry.#bySpell.get(uuid).add(list);
+    });
+
+    this.#loading.delete(uuid);
+    if ( this.ready ) RegistryStatus.set("spellLists", true);
   }
 }
 
@@ -295,6 +348,20 @@ class SpellListRegistry {
  * Type that represents a unified spell list for a specific class, subclass, species, or something else.
  */
 export class SpellList {
+  constructor(metadata) {
+    this.#metadata = Object.freeze(metadata);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Mapping of spell list types to item registries.
+   * @enum {string}
+   */
+  static #REGISTRIES = {
+    class: "classes"
+  };
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -307,6 +374,29 @@ export class SpellList {
     return Array.from(this.#spells.keys())
       .map(s => fromUuidSync(s))
       .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Information on the spell list.
+   * @type {{ identifier: string, name: string, type: string }}
+   */
+  #metadata;
+
+  get metadata() {
+    return this.#metadata;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display name for the spell list.
+   * @type {string}
+   */
+  get name() {
+    return dnd5e.registry[SpellList.#REGISTRIES[this.metadata.type]]?.get(this.metadata.identifier)?.name
+      ?? this.metadata.name;
   }
 
   /* -------------------------------------------- */
@@ -347,17 +437,26 @@ export class SpellList {
   /**
    * Add a spell list page to this unified spell list.
    * @param {JournalEntryPage} page  Spells page to contribute.
+   * @returns {Set<string>}          Newly added UUIDs.
    */
   contribute(page) {
-    page.system.spells.forEach(s => this.#spells.set(s, { page: page.uuid }));
+    const added = new Set();
+
+    page.system.spells.forEach(s => {
+      if ( !this.#spells.has(s) ) added.add(s);
+      this.#spells.set(s, { page: page.uuid });
+    });
 
     for ( const unlinked of page.system.unlinkedSpells ) {
       if ( fromUuidSync(unlinked.source?.uuid) ) {
+        if ( !this.#spells.has(unlinked.source.uuid) ) added.add(unlinked.source.uuid);
         this.#spells.set(unlinked.source.uuid, { page: page.uuid });
       } else {
         this.#unlinked.push(foundry.utils.mergeObject({ page: page.uuid }, unlinked));
       }
     }
+
+    return added;
   }
 
   /* -------------------------------------------- */
@@ -421,11 +520,65 @@ class SummonRegistry {
   }
 }
 
+/* -------------------------------------------- */
+/*  Ready API                                   */
+/* -------------------------------------------- */
+
+/**
+ * Track the ready status of various registries.
+ * @type {Map<string, boolean>}
+ */
+const RegistryStatus = new class extends Map {
+  constructor(iterable) {
+    super(iterable);
+    const { promise, resolve } = Promise.withResolvers();
+    this.#ready = promise;
+    this.#resolve = resolve;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Promise that resolves when the registry is ready.
+   * @type {Promise}
+   */
+  #ready;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Promise that resolves when all registries are ready.
+   * @returns {Promise}
+   */
+  get ready() {
+    return this.#ready;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Internal method called when registry is ready.
+   * @type {Function}
+   */
+  #resolve;
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  set(key, value) {
+    super.set(key, value);
+    if ( Array.from(this.values()).every(s => s) ) this.#resolve();
+    return this;
+  }
+}();
+
+/* -------------------------------------------- */
 
 export default {
   classes: new ItemRegistry("class"),
   enchantments: EnchantmentRegisty,
   messages: MessageRegistry,
+  ready: RegistryStatus.ready,
   spellLists: SpellListRegistry,
   summons: SummonRegistry
 };
