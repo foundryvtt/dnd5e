@@ -200,4 +200,24 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
 
     if ( needsMigration ) foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onCreate(data, options, userId) {
+    await super._onCreate(data, options, userId);
+    const actor = this.parent.actor;
+    if ( !actor || (userId !== game.user.id) ) return;
+
+    if ( actor.type === "character" ) {
+      const pc = actor.items.get(actor.system.details.originalClass);
+      if ( !pc ) await this.parent._assignPrimaryClass();
+    }
+
+    if ( !actor.system.attributes?.spellcasting && this.parent.spellcasting?.ability ) {
+      await actor.update({ "system.attributes.spellcasting": this.parent.spellcasting.ability });
+    }
+  }
 }
