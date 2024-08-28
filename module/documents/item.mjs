@@ -801,8 +801,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let usageConfig = config;
       let dialogConfig = dialog;
       let messageConfig = message;
-      let activity = this.system.activities.contents[0];
-      if ( (this.system.activities.size > 1) && !event?.shiftKey ) activity = await ActivityChoiceDialog.create(this);
+      const activities = this.system.activities.contents.sort((a, b) => a.sort - b.sort);
+      let activity = activities[0];
+      if ( (activities.length > 1) && !event?.shiftKey ) activity = await ActivityChoiceDialog.create(this);
       if ( !activity ) return;
       if ( config.legacy !== false ) {
         usageConfig = {};

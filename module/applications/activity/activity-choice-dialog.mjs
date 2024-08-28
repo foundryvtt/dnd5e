@@ -85,10 +85,11 @@ export default class ActivityChoiceDialog extends Application5e {
         `<img src="systems/dnd5e/icons/svg/mouse-left.svg" alt="${game.i18n.localize("DND5E.Controls.LeftClick")}">`
       );
     }
+    const activities = this.#item.system.activities.map(this._prepareActivityContext.bind(this));
+    activities.sort((a, b) => a.sort - b.sort);
     return {
       ...await super._prepareContext(options),
-      controlHint,
-      activities: this.#item.system.activities.map(this._prepareActivityContext.bind(this))
+      controlHint, activities
     };
   }
 
@@ -98,6 +99,7 @@ export default class ActivityChoiceDialog extends Application5e {
    * @typedef ActivityChoiceDialogContext
    * @property {string} id
    * @property {string} name
+   * @property {number} sort
    * @property {object} icon
    * @property {string} icon.src
    * @property {boolean} icon.svg
@@ -110,9 +112,9 @@ export default class ActivityChoiceDialog extends Application5e {
    * @protected
    */
   _prepareActivityContext(activity) {
-    const { id, name, img } = activity;
+    const { id, name, img, sort } = activity;
     return {
-      id, name,
+      id, name, sort,
       icon: {
         src: img,
         svg: img.endsWith(".svg")
