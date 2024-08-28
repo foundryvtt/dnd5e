@@ -457,4 +457,15 @@ export default class WeaponData extends ItemDataModel.mixin(
     const isProficient = natural || improvised || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _preCreate(data, options, user) {
+    super._preCreate(data, options, user);
+    const activityData = new CONFIG.DND5E.activityTypes.attack.documentClass({}, { parent: this.parent }).toObject();
+    this.parent.updateSource({ [`system.activities.${activityData._id}`]: activityData });
+  }
 }
