@@ -907,7 +907,7 @@ async function rollDamage(event) {
 async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollItemName, rollItemActor }={}) {
   // If UUID is provided, always roll that item directly
   if ( rollActivityUuid ) return (await fromUuid(rollActivityUuid))?.use();
-  if ( rollItemUuid ) return (await fromUuid(rollItemUuid))?.use();
+  if ( rollItemUuid ) return (await fromUuid(rollItemUuid))?.use({ legacy: false });
 
   if ( !rollItemName ) return;
   const actor = rollItemActor ? await fromUuid(rollItemActor) : null;
@@ -942,7 +942,7 @@ async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollI
       }));
     }
 
-    else return item.use();
+    else return item.use({ legacy: false });
   }
 
   // If no item could be found at all, display a warning

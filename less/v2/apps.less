@@ -489,6 +489,38 @@
     }
   }
 
+  .control-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 0 0;
+    margin-bottom: -4px;
+    font-size: var(--font-size-10);
+    color: var(--color-text-dark-5);
+
+    img {
+      height: 1em;
+      aspect-ratio: 1;
+      border: none;
+      transform: scale(1.35);
+      opacity: .6;
+    }
+
+    kbd {
+      background: #eee;
+      border-radius: 2px;
+      box-shadow: 0 1px 1px rgb(0 0 0 / 20%), 0 2px 0 0 rgb(255 255 255 / 70%) inset;
+      color: #333;
+      display: inline-block;
+      font-weight: bold;
+      line-height: 1;
+      padding: 1px 4px;
+      font-variant: all-small-caps;
+      font-family: var(--dnd5e-font-roboto);
+    }
+  }
+
   /* ---------------------------------- */
   /*  Meters                            */
   /* ---------------------------------- */

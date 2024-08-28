@@ -1,0 +1,22 @@
+<section>
+    <menu class="unlist">
+        {{#each activities}}
+        <li>
+            <button type="button" data-action="choose" data-activity-id="{{ id }}">
+                {{#with icon}}
+                {{#if svg}}
+                <dnd5e-icon src="{{ src }}"></dnd5e-icon>
+                {{else}}
+                <img src="{{ src }}" alt="{{ ../name }}">
+                {{/if}}
+                {{/with}}
+                <span>{{ name }}</span>
+            </button>
+        </li>
+        {{/each}}
+    </menu>
+
+    {{#if controlHint}}
+    <div class="control-hint ff-hint">{{{ controlHint }}}</div>
+    {{/if}}
+</section>

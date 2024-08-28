@@ -33,7 +33,7 @@ export default class InventoryElement extends HTMLElement {
 
     for ( const control of this.querySelectorAll(".item-action[data-action]") ) {
       control.addEventListener("click", event => {
-        this._onAction(event.currentTarget, event.currentTarget.dataset.action);
+        this._onAction(event, event.currentTarget, event.currentTarget.dataset.action);
       });
     }
 
@@ -370,18 +370,19 @@ export default class InventoryElement extends HTMLElement {
 
   /**
    * Handle item actions.
-   * @param {Element} target  Button or context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
+   * @param {PointerEvent} event  The triggering event.
+   * @param {Element} target      Button or context menu entry that triggered this action.
+   * @param {string} action       Action being triggered.
    * @returns {Promise}
    * @protected
    */
-  async _onAction(target, action) {
-    const event = new CustomEvent("inventory", {
+  async _onAction(event, target, action) {
+    const inventoryEvent = new CustomEvent("inventory", {
       bubbles: true,
       cancelable: true,
       detail: action
     });
-    if ( target.dispatchEvent(event) === false ) return;
+    if ( target.dispatchEvent(inventoryEvent) === false ) return;
 
     const itemId = target.closest("[data-item-id]")?.dataset.itemId;
     const item = await this.getItem(itemId);
@@ -419,7 +420,7 @@ export default class InventoryElement extends HTMLElement {
       case "unfavorite":
         return this.actor.system.removeFavorite(item.getRelativeUUID(this.actor));
       case "use":
-        return item.use({}, { event });
+        return item.use({ legacy: false, event });
     }
   }
 

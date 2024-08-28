@@ -14,6 +14,7 @@ import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
+import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
 
 /**
  * Override and extend the basic Item implementation.
@@ -777,27 +778,39 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
 
   /**
-   * Trigger an item usage, optionally creating a chat message with followup actions.
-   * @param {ItemUseConfiguration} [config]      Initial configuration data for the usage.
-   * @param {ItemUseOptions} [options]           Options used for configuring item usage.
-   * @returns {Promise<ChatMessage|object|void>} Chat message if options.createMessage is true, message data if it is
-   *                                             false, and nothing if the roll wasn't performed.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * Trigger an Item usage, optionally creating a chat message with followup actions.
+   * @param {ActivityUseConfiguration} config       Configuration info for the activation.
+   * @param {boolean} [config.legacy=true]          Whether this is a legacy invocation, using the old signature.
+   * @param {ActivityDialogConfiguration} dialog    Configuration info for the usage dialog.
+   * @param {ActivityMessageConfiguration} message  Configuration info for the created chat message.
+   * @returns {Promise<ActivityUsageResults|ChatMessage|object|void>}  Returns the usage results for the triggered
+   *                                                                   activity, or the chat message if the Item had no
+   *                                                                   activities and was posted directly to chat.
    */
-  async use(config={}, options={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `Item5e#use` method has been deprecated and should now be called directly on the activity to be used.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-    if ( this.system.activities ) {
-      const activity = this.system.activities.contents[0];
-      if ( activity ) {
-        const usageConfig = {};
-        const dialogConfig = {};
-        const messageConfig = {};
-        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
-        return activity.use(usageConfig, dialogConfig, messageConfig);
+  async use(config={}, dialog={}, message={}) {
+    let event = config.event;
+    if ( config.legacy !== false ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `Item5e#use` method has a different signature. Pass the `legacy: false` option to suppress this warning "
+        + " once the appropriate updates have been made.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      event = dialog?.event;
+    }
+    if ( this.system.activities.size ) {
+      let usageConfig = config;
+      let dialogConfig = dialog;
+      let messageConfig = message;
+      let activity = this.system.activities.contents[0];
+      if ( (this.system.activities.size > 1) && !event?.shiftKey ) activity = await ActivityChoiceDialog.create(this);
+      if ( !activity ) return;
+      if ( config.legacy !== false ) {
+        usageConfig = {};
+        dialogConfig = {};
+        messageConfig = {};
+        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, dialog);
       }
+      return activity.use(usageConfig, dialogConfig, messageConfig);
     }
     if ( this.actor ) return this.displayCard();
   }

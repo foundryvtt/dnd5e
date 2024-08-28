@@ -136,3 +136,32 @@
     padding: 0;
   }
 }
+
+/* ---------------------------------- */
+/*  Choice Dialog                     */
+/* ---------------------------------- */
+
+.activity-choice {
+  menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  button {
+    --icon-fill: var(--color-text-dark-primary);
+    --icon-size: 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 6px 56px 6px 6px;
+
+    > span {
+      flex: 1;
+      text-transform: none;
+      font-family: var(--dnd5e-font-roboto-slab);
+      line-height: normal;
+      font-size: var(--font-size-14);
+    }
+  }
+}

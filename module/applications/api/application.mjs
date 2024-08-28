@@ -13,7 +13,7 @@ export default class Application5e extends HandlebarsApplicationMixin(Applicatio
   };
 
   /* -------------------------------------------- */
-  /*  Rendering                                   */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -59,11 +59,11 @@ export default class Application5e extends HandlebarsApplicationMixin(Applicatio
     frame.querySelector(".window-title").insertAdjacentElement("afterend", subtitle);
 
     // Icon
-    if ( (this.options.window?.icon ?? "").includes(".") ) {
+    if ( (options.window?.icon ?? "").includes(".") ) {
       const icon = frame.querySelector(".window-icon");
-      const newIcon = document.createElement(this.options.window.icon?.endsWith(".svg") ? "dnd5e-icon" : "img");
+      const newIcon = document.createElement(options.window.icon?.endsWith(".svg") ? "dnd5e-icon" : "img");
       newIcon.classList.add("window-icon");
-      newIcon.src = this.options.window.icon;
+      newIcon.src = options.window.icon;
       icon.replaceWith(newIcon);
     }
 

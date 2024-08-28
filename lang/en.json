@@ -588,9 +588,13 @@
 "DND5E.Conditions": "Conditions",
 "DND5E.Controls": {
   "Hint": "Enable various hints throughout the UI for certain mouse and keyboard controls.",
+  "LeftClick": "Left Click",
   "LockHint": "Middle-click to lock",
   "MiddleClick": "Middle Click",
-  "Name": "Enable Control Hints"
+  "Name": "Enable Control Hints",
+  "Activity": {
+    "FastForwardHint": "<kbd>Shift</kbd> + <left-click> the item to skip this dialog"
+  }
 },
 "DND5E.ChallengeRating": "Challenge Rating",
 "DND5E.Charged": "Charged",
