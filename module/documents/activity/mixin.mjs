@@ -655,7 +655,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       buttons: buttons.length ? buttons : null,
       description: data.description.chat,
       properties: properties.length ? properties : null,
-      subtitle: this.description.chatFlavor ?? data.subtitle,
+      subtitle: this.description.chatFlavor || data.subtitle,
       supplements
     };
   }
