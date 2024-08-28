@@ -524,8 +524,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       let formula;
       try {
         formula = part.formula;
-        if ( part.base && this.item.system.magicAvailable ) {
-          formula = `${formula} + ${this.item.system.magicalBonus ?? 0}`;
+        if ( part.base ) {
+          if ( this.item.system.magicAvailable ) formula += ` + ${this.item.system.magicalBonus ?? 0}`;
+          if ( (this.item.type === "weapon") && !/@mod\b/.test(formula) ) formula += " + @mod";
         }
         const roll = new Roll(formula, rollData);
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
