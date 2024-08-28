@@ -336,6 +336,40 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _preCreate(data, options, user) {
+    if ( super._preCreate(data, options, user) === false ) return false;
+    if ( !this.parent.isEmbedded || ["atwill", "innate"].includes(this.preparation.mode) ) return;
+    const classes = new Set(Object.keys(this.parent.actor.spellcastingClasses));
+    if ( !classes.size ) return;
+
+    // If only a single spellcasting class is present, use that
+    if ( classes.size === 1 ) {
+      this.parent.updateSource({ "system.sourceClass": classes.first() });
+      return;
+    }
+
+    // If preparation mode is "pact" and pact class exists, set as that class
+    if ( this.preparation.mode === "pact" ) {
+      const pactClass = classes.find(i => this.parent.actor.classes[i].spellcasting.type === "pact");
+      if ( pactClass ) {
+        this.parent.updateSource({ "system.sourceClass": pactClass });
+        return;
+      }
+    }
+
+    // Create intersection of spellcasting classes and classes that offer the spell
+    const spellClasses = new Set(
+      dnd5e.registry.spellLists.forSpell(this.parent._stats.compendiumSource).map(l => l.metadata.identifier)
+    );
+    const intersection = classes.intersection(spellClasses);
+    this.parent.updateSource({ "system.sourceClass": intersection.first() ?? classes.first() });
+  }
+
+  /* -------------------------------------------- */
   /*  Shims                                       */
   /* -------------------------------------------- */
 
