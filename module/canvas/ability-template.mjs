@@ -12,6 +12,14 @@ export default class AbilityTemplate extends MeasuredTemplate {
   /* -------------------------------------------- */
 
   /**
+   * Current token that is highlighted when using adjusted size template.
+   * @type {Token5e}
+   */
+  #hoveredToken;
+
+  /* -------------------------------------------- */
+
+  /**
    * The initially active CanvasLayer to re-activate after the workflow is complete.
    * @type {CanvasLayer}
    */
@@ -51,7 +59,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
         dimensions: {
           size: target.size,
           width: target.width,
-          height: target.height
+          height: target.height,
+          adjustedSize: target.type === "radius"
         },
         origin: activity.uuid,
         spellLevel: activity.item.system.level
@@ -208,6 +217,10 @@ export default class AbilityTemplate extends MeasuredTemplate {
     canvas.stage.off("mousedown", this.#events.confirm);
     canvas.app.view.oncontextmenu = null;
     canvas.app.view.onwheel = null;
+    if ( this.#hoveredToken ) {
+      this.#hoveredToken._onHoverOut(event);
+      this.#hoveredToken = null;
+    }
     this.#initialLayer.activate();
     await this.actorSheet?.maximize();
   }
@@ -223,7 +236,27 @@ export default class AbilityTemplate extends MeasuredTemplate {
     const now = Date.now(); // Apply a 20ms throttle
     if ( now - this.#moveTime <= 20 ) return;
     const center = event.data.getLocalPosition(this.layer);
-    this.document.updateSource(canvas.templates.getSnappedPoint(center));
+    const updates = canvas.templates.getSnappedPoint(center);
+
+    // Adjust template size to take hovered token into account if `adjustedSize` is set
+    const baseDistance = this.document.flags.dnd5e?.dimensions?.size;
+    if ( this.document.flags.dnd5e?.dimensions?.adjustedSize && baseDistance ) {
+      const rectangle = new PIXI.Rectangle(center.x, center.y, 1, 1);
+      const hoveredToken = canvas.tokens.placeables
+        .find(t => t.visible && !t.document.isSecret && t._overlapsSelection(rectangle));
+      if ( hoveredToken && (hoveredToken !== this.#hoveredToken) ) {
+        this.#hoveredToken = hoveredToken;
+        this.#hoveredToken._onHoverIn(event);
+        const size = Math.max(hoveredToken.document.width, hoveredToken.document.height);
+        updates.distance = baseDistance + (size * canvas.grid.distance * .5);
+      } else if ( !hoveredToken && this.#hoveredToken ) {
+        this.#hoveredToken._onHoverOut(event);
+        this.#hoveredToken = null;
+        updates.distance = baseDistance;
+      }
+    }
+
+    this.document.updateSource(updates);
     this.refresh();
     this.#moveTime = now;
   }

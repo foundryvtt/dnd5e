@@ -104,20 +104,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     ];
 
     // Templates
-    const { sizes } = CONFIG.DND5E.areaTargetTypes[target?.template?.type] ?? {};
-    if ( sizes ) {
-      context.dimensions = {
-        size: "DND5E.AreaOfEffect.Size.Label",
-        width: sizes.includes("width") && (sizes.includes("length") || sizes.includes("radius")),
-        height: sizes.includes("height")
-      };
-      if ( sizes.includes("radius") ) context.dimensions.size = "DND5E.AreaOfEffect.Size.Radius";
-      else if ( sizes.includes("length") ) context.dimensions.size = "DND5E.AreaOfEffect.Size.Length";
-      else if ( sizes.includes("width") ) context.dimensions.size = "DND5E.AreaOfEffect.Size.Width";
-      if ( sizes.includes("thickness") ) context.dimensions.width = "DND5E.AreaOfEffect.Size.Thickness";
-      else if ( context.dimensions.width ) context.dimensions.width = "DND5E.AreaOfEffect.Size.Width";
-      if ( context.dimensions.height ) context.dimensions.height = "DND5E.AreaOfEffect.Size.Height";
-    }
+    context.dimensions = target?.template?.dimensions;
 
     // Equipment
     context.equipmentTypes = [
