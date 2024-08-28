@@ -883,7 +883,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       user: game.user.id,
       content: html,
       speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
-      flags: {"core.canPopout": true}
+      flags: {
+        "core.canPopout": true,
+        "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
+      }
     };
 
     // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message

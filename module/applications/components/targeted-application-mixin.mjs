@@ -96,18 +96,18 @@ export default function TargetedApplicationMixin(Base) {
      */
     buildTargetsList() {
       if ( !this.targetList ) throw new Error("Must create a element to contain the target list.");
-      let targetedTokens;
+      const targetedTokens = new Map();
       switch ( this.targetingMode ) {
         case "targeted":
-          targetedTokens = (this.chatMessage?.getFlag("dnd5e", "targets") ?? [])
-            .map(t => ({ uuid: t.uuid, name: t.name }));
+          this.chatMessage?.getFlag("dnd5e", "targets")?.forEach(t => targetedTokens.set(t.uuid, t.name));
           break;
         case "selected":
-          targetedTokens = canvas.tokens?.controlled?.map(t => ({ uuid: t.actor.uuid, name: t.name })) ?? [];
+          canvas.tokens?.controlled?.forEach(t => targetedTokens.set(t.actor.uuid, t.name));
           break;
       }
-      targetedTokens = Array.from(new Set(targetedTokens));
-      const targets = targetedTokens.map(t => this.buildTargetListEntry(t)).filter(t => t);
+      const targets = Array.from(targetedTokens.entries())
+        .map(([uuid, name]) => this.buildTargetListEntry({ uuid, name }))
+        .filter(t => t);
       if ( targets.length ) this.targetList.replaceChildren(...targets);
       else {
         const li = document.createElement("li");
@@ -125,6 +125,7 @@ export default function TargetedApplicationMixin(Base) {
      * @param {string} data.uuid  UUID of the targeted actor.
      * @param {string} data.name  Name of the targeted token.
      * @returns {HTMLLIElement|void}
+     * @abstract
      */
     buildTargetListEntry({ uuid, name }) {}
 

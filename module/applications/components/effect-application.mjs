@@ -35,14 +35,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /* -------------------------------------------- */
 
   /**
-   * Currently registered hook for monitoring for changes to selected tokens.
-   * @type {number|null}
-   */
-  selectedTokensHook = null;
-
-  /* -------------------------------------------- */
-
-  /**
    * Checked status for application targets.
    * @type {Map<string, boolean>}
    */
@@ -69,7 +61,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     if ( !this.chatMessage ) return;
 
     // Build the frame HTML only once
-    if ( !this.effects.list || !this.targetList ) {
+    if ( !this.effectsList || !this.targetList ) {
       const div = document.createElement("div");
       div.classList.add("card-tray", "effects-tray", "collapsible");
       if ( !this.open ) div.classList.add("collapsed");
