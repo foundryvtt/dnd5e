@@ -170,13 +170,22 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       throw new Error(game.i18n.localize("DND5E.EffectApplyWarningOwnership"));
     }
 
+    const effectFlags = {
+      flags: {
+        dnd5e: {
+          scaling: this.chatMessage.getFlag("dnd5e", "scaling"),
+          spellLevel: this.chatMessage.getFlag("dnd5e", "use.spellLevel")
+        }
+      }
+    };
+
     // Enable an existing effect on the target if it originated from this effect
     const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update(foundry.utils.mergeObject({
         ...effect.constructor.getInitialDuration(),
         disabled: false
-      }, effectData));
+      }, effectFlags));
     }
 
     if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
@@ -188,14 +197,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       ...effect.toObject(),
       disabled: false,
       transfer: false,
-      origin: origin.uuid,
-      flags: {
-        dnd5e: {
-          scaling: this.chatMessage.getFlag("dnd5e", "scaling"),
-          spellLevel: this.chatMessage.getFlag("dnd5e", "use.spellLevel")
-        }
-      }
-    });
+      origin: origin.uuid
+    }, effectFlags);
     const applied = await ActiveEffect.implementation.create(effectData, { parent: actor });
     if ( concentration ) await concentration.addDependent(applied);
     return applied;
