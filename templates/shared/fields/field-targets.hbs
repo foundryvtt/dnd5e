@@ -42,7 +42,7 @@
 
     {{!-- Template Type --}}
     {{ formField fields.template.fields.type value=data.template.type label="DND5E.Shape" localize=true hint=false
-                 choices=CONFIG.areaTargetTypes }}
+                 options=CONFIG.areaTargetOptions }}
 
     {{!-- Dimensions --}}
     {{#if data.template.type}}

@@ -2116,6 +2116,7 @@ preLocalize("individualTargetTypes");
  * @property {string[]} [sizes]    List of available sizes for this template. Options are chosen from the list:
  *                                 "radius", "width", "height", "length", "thickness". No more than 3 dimensions may
  *                                 be specified.
+ * @property {boolean} [standard]  Is this a standard area of effect as defined explicitly by the rules?
  */
 
 /**
@@ -2123,45 +2124,56 @@ preLocalize("individualTargetTypes");
  * @enum {AreaTargetDefinition}
  */
 DND5E.areaTargetTypes = {
-  radius: {
-    label: "DND5E.TargetRadius",
+  circle: {
+    label: "DND5E.TargetCircle",
     template: "circle",
     sizes: ["radius"]
-  },
-  sphere: {
-    label: "DND5E.TargetSphere",
-    template: "circle",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.npdEWb2egUPnB5Fa",
-    sizes: ["radius"]
-  },
-  cylinder: {
-    label: "DND5E.TargetCylinder",
-    template: "circle",
-    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jZFp4R7tXsIqkiG3",
-    sizes: ["radius", "height"]
   },
   cone: {
     label: "DND5E.TargetCone",
     template: "cone",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DqqAOr5JnX71OCOw",
-    sizes: ["length"]
-  },
-  square: {
-    label: "DND5E.TargetSquare",
-    template: "rect",
-    sizes: ["width"]
+    sizes: ["length"],
+    standard: true
   },
   cube: {
     label: "DND5E.TargetCube",
     template: "rect",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.dRfDIwuaHmUQ06uA",
-    sizes: ["width"]
+    sizes: ["width"],
+    standard: true
+  },
+  cylinder: {
+    label: "DND5E.TargetCylinder",
+    template: "circle",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jZFp4R7tXsIqkiG3",
+    sizes: ["radius", "height"],
+    standard: true
   },
   line: {
     label: "DND5E.TargetLine",
     template: "ray",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6DOoBgg7okm9gBc6",
-    sizes: ["length", "width"]
+    sizes: ["length", "width"],
+    standard: true
+  },
+  radius: {
+    label: "DND5E.TargetRadius",
+    template: "circle",
+    sizes: ["radius"],
+    standard: true
+  },
+  sphere: {
+    label: "DND5E.TargetSphere",
+    template: "circle",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.npdEWb2egUPnB5Fa",
+    sizes: ["radius"],
+    standard: true
+  },
+  square: {
+    label: "DND5E.TargetSquare",
+    template: "rect",
+    sizes: ["width"]
   },
   wall: {
     label: "DND5E.TargetWall",
@@ -2170,6 +2182,18 @@ DND5E.areaTargetTypes = {
   }
 };
 preLocalize("areaTargetTypes", { key: "label", sort: true });
+
+Object.defineProperty(DND5E, "areaTargetOptions", {
+  get() {
+    const { primary, secondary } = Object.entries(this.areaTargetTypes).reduce((obj, [value, data]) => {
+      const entry = { value, label: data.label };
+      if ( data.standard ) obj.primary.push(entry);
+      else obj.secondary.push(entry);
+      return obj;
+    }, { primary: [], secondary: [] });
+    return [{ value: "", label: "" }, ...primary, { rule: true }, ...secondary];
+  }
+});
 
 /* -------------------------------------------- */
 
