@@ -140,6 +140,14 @@ export default class ActivityUsageDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _configureRenderOptions(options) {
+    super._configureRenderOptions(options);
+    if ( options.isFirstRender ) options.window.icon ||= this.activity.img;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _prepareContext(options) {
     if ( "scaling" in this.config ) this.#item = this.#item.clone({ "flags.dnd5e.scaling": this.config.scaling });
     return {
