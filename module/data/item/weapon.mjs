@@ -464,7 +464,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   _preCreate(data, options, user) {
-    super._preCreate(data, options, user);
+    if ( super._preCreate(data, options, user) === false ) return false;
     const activityData = new CONFIG.DND5E.activityTypes.attack.documentClass({}, { parent: this.parent }).toObject();
     this.parent.updateSource({ [`system.activities.${activityData._id}`]: activityData });
   }
