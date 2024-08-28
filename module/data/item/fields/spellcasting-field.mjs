@@ -39,7 +39,6 @@ export default class SpellcastingField extends SchemaField {
    * @param {object} rollData  Roll data used for formula replacements.
    */
   static prepareData(rollData) {
-    this.spellcasting.preparation.value ??= 0;
     this.spellcasting.preparation.max = simplifyBonus(this.spellcasting.preparation.formula, rollData);
 
     // Temp method for determining spellcasting type until this data is available directly using advancement

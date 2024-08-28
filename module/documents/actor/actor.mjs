@@ -183,6 +183,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._preparationWarnings = [];
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
+    this._prepareSpellcasting();
   }
 
   /* --------------------------------------------- */
@@ -252,7 +253,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._prepareTools(rollData, globalBonuses, checkBonus);
     this._prepareArmorClass();
     this._prepareInitiative(rollData, checkBonus);
-    this._prepareSpellcasting();
 
     // Apply condition immunities
     const conditionImmunities = this.system.traits?.ci?.value;
@@ -626,8 +626,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const types = {};
 
     // Grab all classes with spellcasting
-    const classes = this.items.filter(cls => {
-      if ( cls.type !== "class" ) return false;
+    const classes = this.itemTypes.class.filter(cls => {
       const type = cls.spellcasting.type;
       if ( !type ) return false;
       types[type] ??= 0;
