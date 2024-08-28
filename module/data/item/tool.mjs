@@ -185,4 +185,15 @@ export default class ToolData extends ItemDataModel.mixin(
     const categoryProf = actor.system.tools?.[this.type.value];
     return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _preCreate(data, options, user) {
+    if ( super._preCreate(data, options, user) === false ) return false;
+    const activityData = new CONFIG.DND5E.activityTypes.check.documentClass({}, { parent: this.parent }).toObject();
+    this.parent.updateSource({ [`system.activities.${activityData._id}`]: activityData });
+  }
 }

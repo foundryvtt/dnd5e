@@ -67,9 +67,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     return {
       _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
       type: new StringField({
-        blank: false,
-        required: true,
-        readOnly: true
+        blank: false, required: true, readOnly: true, initial: () => this.metadata.type
       }),
       name: new StringField({ initial: undefined }),
       img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
