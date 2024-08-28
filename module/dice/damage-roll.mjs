@@ -323,9 +323,10 @@ export default class DamageRoll extends Roll {
       formulas: rolls.map((roll, index) => ({
         formula: `${roll.formula}${index === 0 ? " + @bonus" : ""}`,
         type: roll.options.types?.length > 1 ? null
-          : damageTypeLabel(roll.options.types?.[0] ?? roll.options.type) ?? null,
-        types: roll.options.types?.length > 1
-          ? roll.options.types?.map(value => ({ value, label: damageTypeLabel(value) })) : null
+          : damageTypeLabel(roll.options.type ?? roll.options.types?.[0]) ?? null,
+        types: roll.options.types?.length > 1 ? roll.options.types?.map(value =>
+          ({ value, label: damageTypeLabel(value), selected: value === roll.options.type })
+        ) : null
       })),
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes

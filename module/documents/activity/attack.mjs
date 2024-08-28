@@ -84,18 +84,22 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     const targets = this.constructor.getTargetDescriptors();
 
     let ammunitionOptions;
+    const selectedAmmunition = config.ammunition ?? this.item.getFlag("dnd5e", `last.${this.id}.ammunition`);
     if ( this.item.system.properties?.has("amm") && this.actor ) ammunitionOptions = this.actor.items
       .filter(i => (i.type === "consumable") && (i.system.type?.value === "ammo")
         && (!this.item.system.ammunition?.type || (i.system.type.subtype === this.item.system.ammunition.type)))
       .map(i => ({
         value: i.id, label: `${i.name} (${i.system.quantity})`, item: i,
-        disabled: !i.system.quantity, selected: i.id === config.ammunition
+        disabled: !i.system.quantity, selected: i.id === selectedAmmunition
       }))
       .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
-    // TODO: Fetch last used ammunition to select as default
-    if ( (foundry.utils.getType(config.ammunition) !== "string") && ammunitionOptions?.[0] ) {
+    if ( (foundry.utils.getType(selectedAmmunition) !== "string") && ammunitionOptions?.[0] ) {
       ammunitionOptions[0].selected = true;
     }
+
+    const selectedAttackMode = config.attackMode ?? this.item.getFlag("dnd5e", `last.${this.id}.attackMode`);
+    const attackModes = Array.from(this.item.system.attackModes)
+      .map(m => ({ ...m, selected: m.value === selectedAttackMode }));
 
     const rollConfig = foundry.utils.mergeObject({
       elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
@@ -118,7 +122,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         top: config.event ? config.event.clientY - 80 : null,
         left: window.innerWidth - 710,
         ammunitionOptions: rollConfig.ammunition !== false ? ammunitionOptions : undefined,
-        attackModes: this.item.system.attackModes
+        attackModes
       }
     }, dialog);
 
@@ -189,6 +193,11 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( ammo ) {
       ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
       ammoUpdate.destroy = ammo.system.uses.autoDestroy && (ammoUpdate.quantity === 0);
+      await this.item.setFlag("dnd5e", `last.${this.id}.ammunition`, roll.options.ammunition);
+    }
+
+    if ( roll.options.attackMode ) {
+      await this.item.setFlag("dnd5e", `last.${this.id}.attackMode`, roll.options.attackMode);
     }
 
     /**

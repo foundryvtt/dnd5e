@@ -831,6 +831,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       actor: this.actor,
       rollConfigs: rollConfig.rolls.map(r => ({
         parts: r.parts,
+        type: r.options?.type,
         types: r.options?.types,
         properties: r.options?.properties
       })),
@@ -866,6 +867,13 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     const rolls = await damageRoll(oldRollConfig);
     if ( !rolls?.length ) return;
+    const lastDamageTypes = rolls.reduce((obj, roll, index) => {
+      if ( roll.options.type ) obj[index] = roll.options.type;
+      return obj;
+    }, {});
+    if ( !foundry.utils.isEmpty(lastDamageTypes) ) {
+      await this.item.setFlag("dnd5e", `last.${this.id}.damageType`, lastDamageTypes);
+    }
 
     /**
      * A hook event that fires after damage has been rolled.

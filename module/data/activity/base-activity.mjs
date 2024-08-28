@@ -575,7 +575,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const rollConfig = foundry.utils.mergeObject({ scaling: 0 }, config);
     const rollData = this.getRollData();
     rollConfig.rolls = this.damage.parts
-      .map(d => this._processDamagePart(d, rollConfig, rollData))
+      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index))
       .filter(d => d.parts.length)
       .concat(config.rolls ?? []);
 
@@ -589,10 +589,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {DamageData} damage                                   Damage to prepare for the roll.
    * @param {Partial<DamageRollProcessConfiguration>} rollConfig  Roll configuration being built.
    * @param {object} rollData                                     Roll data to populate with damage data.
+   * @param {number} [index=0]                                    Index of the damage part.
    * @returns {DamageRollConfiguration}
    * @protected
    */
-  _processDamagePart(damage, rollConfig, rollData) {
+  _processDamagePart(damage, rollConfig, rollData, index=0) {
     const scaledFormula = damage.scaledFormula(rollData.scaling);
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
@@ -606,6 +607,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     return {
       data, parts,
       options: {
+        type: this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`) ?? damage.types.first(),
         types: Array.from(damage.types),
         properties: Array.from(this.item.system.properties ?? [])
           .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
