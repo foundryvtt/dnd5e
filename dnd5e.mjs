@@ -267,6 +267,7 @@ function _configureConsumableAttributes() {
     ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
     "attributes.ac.flat",
     "attributes.hp.value",
+    "attributes.exhaustion",
     ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
     ...Object.keys(DND5E.movementTypes).map(type => `attributes.movement.${type}`),
     ...Object.keys(DND5E.currencies).map(denom => `currency.${denom}`),

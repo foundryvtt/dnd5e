@@ -1,5 +1,5 @@
 import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
-import { formatNumber } from "../../../utils.mjs";
+import { formatNumber, getHumanReadableAttributeLabel } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
 const { ArrayField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
@@ -54,7 +54,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
   /**
    * Actor containing this consumption target, if embedded.
-   * @type {Activity}
+   * @type {Actor5e}
    */
   get actor() {
     return this.activity.actor;
@@ -506,7 +506,14 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   static validAttributeTargets() {
     if ( !this.actor ) return [];
     return TokenDocument.implementation.getConsumedAttributes(this.actor.type).map(attr => {
-      return { value: attr, label: attr };
+      let group;
+      if ( attr.startsWith("abilities.") ) group = game.i18n.localize("DND5E.AbilityScorePl");
+      else if ( attr.startsWith("currency.") ) group = game.i18n.localize("DND5E.Currency");
+      else if ( attr.startsWith("spells.") ) group = game.i18n.localize("DND5E.CONSUMPTION.Type.SpellSlots.Label");
+      else if ( attr.startsWith("attributes.movement.") ) group = game.i18n.localize("DND5E.Speed");
+      else if ( attr.startsWith("attributes.senses.") ) group = game.i18n.localize("DND5E.Senses");
+      else if ( attr.startsWith("resources.") ) group = game.i18n.localize("DND5E.Resources");
+      return { group, value: attr, label: getHumanReadableAttributeLabel(attr, { actor: this.actor }) || attr };
     });
   }
 

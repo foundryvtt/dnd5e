@@ -362,7 +362,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
         }],
         disabled: false,
         icon: "icons/skills/targeting/crosshair-bars-yellow.webp",
-        name: game.i18n.localize("DND5E.Summoning.Match.Proficiency.Label")
+        name: game.i18n.localize("DND5E.SUMMON.FIELDS.match.proficiency.label")
       });
       actorUpdates.effects.push(proficiencyEffect.toObject());
     }
@@ -384,7 +384,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
             }],
             disabled: false,
             icon: "icons/magic/defensive/shield-barrier-blue.webp",
-            name: game.i18n.localize("DND5E.Summoning.Bonuses.ArmorClass.Label")
+            name: game.i18n.localize("DND5E.SUMMON.FIELDS.bonuses.ac.label")
           })).toObject());
         }
       }
@@ -404,7 +404,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           }],
           disabled: false,
           icon: "icons/sundries/gaming/dice-runed-brown.webp",
-          name: game.i18n.localize("DND5E.Summoning.Bonuses.HitDice.Label")
+          name: game.i18n.localize("DND5E.SUMMON.FIELDS.bonuses.hd.label")
         })).toObject());
       }
     }
@@ -429,7 +429,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
             }],
             disabled: false,
             icon: "icons/magic/life/heart-glowing-red.webp",
-            name: game.i18n.localize("DND5E.Summoning.Bonuses.HitPoints.Label")
+            name: game.i18n.localize("DND5E.SUMMON.FIELDS.bonuses.hp.label")
           })).toObject();
         };
 
@@ -523,7 +523,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           changes,
           disabled: false,
           icon: "icons/skills/melee/strike-slashes-orange.webp",
-          name: game.i18n.localize("DND5E.Summoning.ItemChanges.Label"),
+          name: game.i18n.localize("DND5E.SUMMON.ItemChanges.Label"),
           origin: this.uuid,
           type: "enchantment"
         })).toObject();

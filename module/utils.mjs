@@ -736,8 +736,9 @@ const _attributeLabelCache = new Map();
 export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   // Check any actor-specific names first.
   if ( attr.startsWith("resources.") && actor ) {
-    const resource = foundry.utils.getProperty(actor, `system.${attr}`);
-    if ( resource.label ) return resource.label;
+    const key = attr.replace(/\.value$/, "");
+    const resource = foundry.utils.getProperty(actor, `system.${key}`);
+    if ( resource?.label ) return resource.label;
   }
 
   if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
@@ -755,7 +756,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
 
   // Derived fields.
   if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
-  else if ( attr === "attributes.ac.value" ) label = "DND5E.ArmorClass";
+  else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
   else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
 
   // Abilities.
@@ -779,6 +780,12 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
       const level = Number(key.slice(5));
       label = game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level });
     }
+  }
+
+  // Currency
+  else if ( attr.startsWith("currency.") ) {
+    const [, key] = attr.split(".");
+    label = CONFIG.DND5E.currencies[key]?.label;
   }
 
   // Attempt to find the attribute in a data model.
