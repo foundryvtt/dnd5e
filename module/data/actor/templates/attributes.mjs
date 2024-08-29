@@ -71,9 +71,7 @@ export default class AttributesFields {
         })
       }, { label: "DND5E.Attunement" }),
       senses: new SensesField(),
-      spellcasting: new StringField({
-        required: true, blank: true, initial: "int", label: "DND5E.SpellAbility"
-      }),
+      spellcasting: new StringField({ required: true, blank: true, label: "DND5E.SpellAbility" }),
       exhaustion: new NumberField({
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
       }),

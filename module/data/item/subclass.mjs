@@ -78,4 +78,18 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
     context.singleDescription = true;
     context.parts = ["dnd5e.details-subclass", "dnd5e.details-spellcasting"];
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onCreate(data, options, userId) {
+    await super._onCreate(data, options, userId);
+    const actor = this.parent.actor;
+    if ( !actor || (userId !== game.user.id) ) return;
+    if ( !actor.system.attributes?.spellcasting && this.parent.spellcasting?.ability ) {
+      await actor.update({ "system.attributes.spellcasting": this.parent.spellcasting.ability });
+    }
+  }
 }

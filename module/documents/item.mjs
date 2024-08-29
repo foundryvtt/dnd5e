@@ -1463,20 +1463,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async _onCreate(data, options, userId) {
-    super._onCreate(data, options, userId);
-    if ( (userId !== game.user.id) || !this.parent ) return;
-
-    // Assign a new original class
-    if ( (this.parent.type === "character") && (this.type === "class") ) {
-      const pc = this.parent.items.get(this.parent.system.details.originalClass);
-      if ( !pc ) await this.parent._assignPrimaryClass();
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
 
