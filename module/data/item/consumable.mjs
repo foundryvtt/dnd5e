@@ -44,7 +44,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({ value: "potion", baseItem: false }, { label: "DND5E.ItemConsumableType" }),
@@ -62,7 +62,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: true,
     inventoryItem: true,
@@ -92,7 +92,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ActivitiesTemplate.migrateActivities(source);
@@ -198,7 +198,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get _typeAbilityMod() {
     if ( this.type.value !== "scroll" ) return null;
     return this.parent?.actor?.system.attributes.spellcasting || "int";
@@ -234,7 +234,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get validProperties() {
     const valid = super.validProperties;
     if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5E.itemProperties).forEach(([k, v]) => {

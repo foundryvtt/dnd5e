@@ -18,7 +18,7 @@ export class AbilityScoreImprovementConfigurationData extends foundry.abstract.D
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       cap: new NumberField({ integer: true, min: 1, initial: 2 }),
@@ -37,7 +37,7 @@ export class AbilityScoreImprovementConfigurationData extends foundry.abstract.D
  * @property {Object<string, string>}  Feat that was selected.
  */
 export class AbilityScoreImprovementValueData extends SparseDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       type: new StringField({ required: true, initial: "asi", choices: ["asi", "feat"] }),

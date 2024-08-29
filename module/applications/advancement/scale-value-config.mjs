@@ -6,7 +6,7 @@ import { TYPES } from "../../data/advancement/scale-value.mjs";
  */
 export default class ScaleValueConfig extends AdvancementConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "scale-value", "two-column"],
@@ -17,7 +17,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     const config = this.advancement.configuration;
     const type = TYPES[config.type];
@@ -89,7 +89,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _cleanedObject(object) {
     return Object.entries(object).reduce((obj, [key, value]) => {
       if ( Object.keys(value ?? {}).some(k => value[k]) ) obj[key] = value;
@@ -100,7 +100,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareConfigurationUpdate(configuration) {
     // Ensure multiple values in a row are not the same
     let lastValue = null;
@@ -117,7 +117,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     this.form.querySelector("input[name='title']").addEventListener("input", this._onChangeTitle.bind(this));
@@ -136,7 +136,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const updates = foundry.utils.expandObject(formData);
     const typeChange = "configuration.type" in formData;

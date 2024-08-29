@@ -16,7 +16,7 @@ const { ArrayField } = foundry.data.fields;
  * @property {SpellcastingField} spellcasting  Details on subclass's spellcasting ability.
  */
 export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),

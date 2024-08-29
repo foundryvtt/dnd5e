@@ -10,7 +10,7 @@ import { simplifyBonus } from "../../utils.mjs";
  */
 export default class HitPointsAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       order: 10,
@@ -30,7 +30,7 @@ export default class HitPointsAdvancement extends Advancement {
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get levels() {
     return Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1);
   }
@@ -60,14 +60,14 @@ export default class HitPointsAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
     return this.valueForLevel(level) !== null;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   titleForLevel(level, { configMode=false, legacyDisplay=false }={}) {
     const hp = this.valueForLevel(level);
     if ( !hp || configMode || !legacyDisplay ) return this.title;
@@ -130,7 +130,7 @@ export default class HitPointsAdvancement extends Advancement {
   /*  Editing Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static availableForItem(item) {
     return !item.advancement.byType.HitPoints?.length;
   }
@@ -153,7 +153,7 @@ export default class HitPointsAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   apply(level, data) {
     let value = this.constructor.valueForLevel(data, this.hitDieValue, level);
     if ( value === undefined ) return;
@@ -165,14 +165,14 @@ export default class HitPointsAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   restore(level, data) {
     this.apply(level, data);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   reverse(level) {
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;

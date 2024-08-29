@@ -19,7 +19,7 @@ import Proficiency from "../documents/actor/proficiency.mjs";
  */
 export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _enableV10Validation = true;
 
   /**
@@ -106,7 +106,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     const schema = {};
     for ( const template of this._schemaTemplates ) {
@@ -135,7 +135,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   /*  Data Cleaning                               */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static cleanData(source, options) {
     this._cleanData(source, options);
     return super.cleanData(source, options);
@@ -159,7 +159,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   /*  Data Initialization                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static *_initializationOrder() {
     for ( const template of this._schemaTemplates ) {
       for ( const entry of template._initializationOrder() ) {
@@ -202,7 +202,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   /*  Data Validation                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   validate(options={}) {
     if ( this.constructor._enableV10Validation === false ) return true;
     return super.validate(options);
@@ -210,7 +210,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static validateJoint(data) {
     this._validateJoint(data);
     return super.validateJoint(data);
@@ -234,7 +234,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static migrateData(source) {
     this._migrateData(source);
     return super.migrateData(source);
@@ -255,7 +255,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static shimData(data, options) {
     this._shimData(data, options);
     return super.shimData(data, options);
@@ -613,7 +613,7 @@ export class ItemDataModel extends SystemDataModel {
  * Data Model variant that does not export fields with an `undefined` value during `toObject(true)`.
  */
 export class SparseDataModel extends foundry.abstract.DataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   toObject(source=true) {
     if ( !source ) return super.toObject(source);
     const clone = foundry.utils.flattenObject(this._source);

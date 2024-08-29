@@ -28,7 +28,7 @@ export default class ToolData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
   PhysicalItemTemplate, EquippableItemTemplate
 ) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({ subtype: false }, { label: "DND5E.ItemToolType" }),
@@ -44,7 +44,7 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: true,
     inventoryItem: true,
@@ -74,7 +74,7 @@ export default class ToolData extends ItemDataModel.mixin(
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ActivitiesTemplate.migrateActivities(source);

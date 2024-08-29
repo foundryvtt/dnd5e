@@ -294,7 +294,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get _typeAbilityMod() {
     return availableAbilities.first() ?? "int";
   }

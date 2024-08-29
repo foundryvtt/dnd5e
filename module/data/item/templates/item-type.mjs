@@ -31,7 +31,7 @@ export default class ItemTypeTemplate extends SystemDataModel {
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ItemTypeTemplate.#migrateType(source);

@@ -44,7 +44,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  * });
  */
 export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new SchemaField({
@@ -78,7 +78,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     systemFlagsModel: GroupSystemFlags
   }, {inplace: false}));
@@ -106,7 +106,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     GroupActor.#migrateMembers(source);
@@ -130,7 +130,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareBaseData() {
     const memberIds = new Set();
     this.members = this.members.filter((member, index) => {
@@ -156,7 +156,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareDerivedData() {
     const system = this;
     Object.defineProperty(this.details.xp, "derived", {

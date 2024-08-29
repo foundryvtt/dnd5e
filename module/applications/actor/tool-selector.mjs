@@ -6,7 +6,7 @@ import * as Trait from "../../documents/actor/trait.mjs";
  * @extends {TraitSelector}
  */
 export default class ToolSelector extends TraitSelector {
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     return {
       ...super.getData(),
@@ -16,14 +16,14 @@ export default class ToolSelector extends TraitSelector {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getActorOverrides() {
     return Object.keys(foundry.utils.flattenObject(this.document.overrides));
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     return this.document.update(Object.entries(formData).reduce((obj, [k, v]) => {
       const [, key] = k.split(".");

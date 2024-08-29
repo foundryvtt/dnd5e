@@ -40,7 +40,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
       initialKeys: null,
@@ -51,7 +51,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _cleanType(value, options) {
     Object.entries(value).forEach(([k, v]) => value[k] = this.model.clean(v, options));
     return value;
@@ -59,7 +59,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getInitialValue(data) {
     let keys = this.initialKeys;
     const initial = super.getInitialValue(data);
@@ -125,7 +125,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getField(path) {
     if ( path.length === 0 ) return this;
     else if ( path.length === 1 ) return this.model;

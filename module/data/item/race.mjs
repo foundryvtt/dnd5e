@@ -19,7 +19,7 @@ const { ArrayField } = foundry.data.fields;
  * @property {CreatureType} type
  */
 export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       identifier: new IdentifierField({ label: "DND5E.Identifier" }),
@@ -32,7 +32,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     singleton: true
   }, {inplace: false}));

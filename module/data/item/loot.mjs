@@ -17,7 +17,7 @@ const { SetField, StringField } = foundry.data.fields;
 export default class LootData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate
 ) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       properties: new SetField(new StringField(), { label: "DND5E.ItemLootProperties" }),
@@ -27,7 +27,7 @@ export default class LootData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: true,
     inventoryItem: true,

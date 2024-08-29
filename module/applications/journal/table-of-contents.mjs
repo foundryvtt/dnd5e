@@ -2,7 +2,7 @@
  * Compendium that renders pages as a table of contents.
  */
 export default class TableOfContentsCompendium extends Compendium {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["table-of-contents"],
@@ -30,7 +30,7 @@ export default class TableOfContentsCompendium extends Compendium {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
     const documents = await this.collection.getDocuments();
@@ -97,7 +97,7 @@ export default class TableOfContentsCompendium extends Compendium {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find("a").on("click", this._onClickLink.bind(this));
@@ -121,7 +121,7 @@ export default class TableOfContentsCompendium extends Compendium {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onDragStart(event) {
     let dragData;
     if ( ui.context ) ui.context.close({animate: false});

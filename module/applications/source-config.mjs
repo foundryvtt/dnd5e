@@ -3,7 +3,7 @@
  */
 export default class SourceConfig extends DocumentSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "source-config", "dialog"],
@@ -26,7 +26,7 @@ export default class SourceConfig extends DocumentSheet {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData(options) {
     const context = super.getData(options);
     context.appId = this.id;

@@ -23,7 +23,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       width: 560,
@@ -69,7 +69,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get template() {
     return `systems/dnd5e/templates/items/${this.item.type}.hbs`;
   }
@@ -384,7 +384,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async activateEditor(name, options={}, initialContent="") {
     options.relativeLinks = true;
     options.plugins = {
@@ -638,7 +638,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _canDragStart(selector) {
     if ( [".advancement-item", "[data-effect-id]"].includes(selector) ) return true;
     return this.isEditable;
@@ -653,7 +653,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onDragStart(event) {
     const li = event.currentTarget;
     if ( event.target.classList.contains("content-link") ) return;
@@ -677,7 +677,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
     const item = this.item;
@@ -825,7 +825,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onSubmit(...args) {
     if ( this._tabs[0].active === "details" ) this.position.height = "auto";
     await super._onSubmit(...args);

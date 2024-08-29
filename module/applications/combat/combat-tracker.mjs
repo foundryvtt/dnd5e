@@ -15,7 +15,7 @@ export default class CombatTracker5e extends CombatTracker {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onCombatantControl(event) {
     const btn = event.currentTarget;
     const combatantId = btn.closest(".combatant").dataset.combatantId;

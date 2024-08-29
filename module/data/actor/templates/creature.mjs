@@ -111,7 +111,7 @@ export default class CreatureTemplate extends CommonTemplate {
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     CreatureTemplate.#migrateSensesData(source);
@@ -175,7 +175,7 @@ export default class CreatureTemplate extends CommonTemplate {
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getRollData({ deterministic=false }={}) {
     const data = super.getRollData({ deterministic });
     data.classes = {};

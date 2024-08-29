@@ -25,7 +25,7 @@ const { NumberField, SchemaField } = foundry.data.fields;
  */
 export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplate) {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       abilities: new MappingField(new SchemaField({
@@ -73,7 +73,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     CommonTemplate.#migrateACData(source);

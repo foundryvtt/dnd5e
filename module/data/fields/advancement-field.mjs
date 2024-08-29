@@ -15,7 +15,7 @@ export default class AdvancementField extends foundry.data.fields.ObjectField {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _cleanType(value, options) {
     if ( !(typeof value === "object") ) value = {};
 
@@ -26,7 +26,7 @@ export default class AdvancementField extends foundry.data.fields.ObjectField {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   initialize(value, model, options={}) {
     const cls = this.getModelForType(value.type);
     if ( cls ) return new cls(value, {parent: model, ...options});

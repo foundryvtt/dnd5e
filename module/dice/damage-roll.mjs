@@ -225,7 +225,7 @@ export default class DamageRoll extends Roll {
   /*  Chat Messages                               */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   toMessage(messageData={}, options={}) {
     return this.constructor.toMessage([this], messageData, options);
   }
@@ -391,7 +391,7 @@ export default class DamageRoll extends Roll {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static fromData(data) {
     const roll = super.fromData(data);
     roll._formula = this.getFormula(roll.terms);

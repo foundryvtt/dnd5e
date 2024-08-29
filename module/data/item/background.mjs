@@ -15,7 +15,7 @@ const { ArrayField } = foundry.data.fields;
  * @property {object[]} advancement  Advancement objects for this background.
  */
 export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
@@ -25,7 +25,7 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     singleton: true
   }, {inplace: false}));

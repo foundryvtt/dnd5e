@@ -11,7 +11,7 @@ export default class Items5e extends Items {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async importFromCompendium(pack, id, updateData={}, options={}) {
     const created = await super.importFromCompendium(pack, id, updateData, options);
 

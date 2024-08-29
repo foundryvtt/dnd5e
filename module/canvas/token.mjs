@@ -18,7 +18,7 @@ export default class Token5e extends Token {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _drawBar(number, bar, data) {
     if ( data.attribute === "attributes.hp" ) return this._drawHPBar(number, bar, data);
     return super._drawBar(number, bar, data);

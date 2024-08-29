@@ -53,7 +53,7 @@ export default class SummonsField extends EmbeddedDataField {
  * @property {boolean} prompt               Should the player be prompted to place the summons?
  */
 export class SummonsData extends foundry.abstract.DataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       bonuses: new SchemaField({

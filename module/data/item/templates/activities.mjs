@@ -15,7 +15,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       activities: new ActivitiesField(),

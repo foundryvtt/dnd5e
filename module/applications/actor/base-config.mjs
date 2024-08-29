@@ -16,7 +16,7 @@ export default class BaseConfigSheet extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     if ( this.isEditable ) {

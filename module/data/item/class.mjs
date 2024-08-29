@@ -35,7 +35,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
@@ -115,7 +115,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ClassData.#migrateLevels(source);

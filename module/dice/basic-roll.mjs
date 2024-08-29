@@ -187,7 +187,7 @@ export default class BasicRoll extends Roll {
   /*  Evaluate Methods                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async evaluate(options={}) {
     this.preCalculateDiceTerms(options);
     return super.evaluate(options);
@@ -195,7 +195,7 @@ export default class BasicRoll extends Roll {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   evaluateSync(options={}) {
     this.preCalculateDiceTerms(options);
     return super.evaluateSync(options);

@@ -21,7 +21,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: "form" }],
@@ -31,7 +31,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async retainData(data) {
     await super.retainData(data);
     this.assignments = this.retainedData.assignments ?? {};
@@ -41,7 +41,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const points = {
       assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
@@ -96,7 +96,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".adjustment-button").click(this._onClickButton.bind(this));
@@ -106,7 +106,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onChangeInput(event) {
     super._onChangeInput(event);
     const input = event.currentTarget;
@@ -156,7 +156,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     // TODO: Pass through retained feat data
     await this.advancement.apply(this.level, {
@@ -184,7 +184,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDrop(event) {
     if ( !this.advancement.allowFeat ) return false;
 

@@ -65,7 +65,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async close(options={}) {
     await super.close(options);
     delete this.advancement?.apps[this.appId];
@@ -73,7 +73,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     const levels = Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => [l, l]));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
@@ -108,7 +108,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -122,7 +122,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   render(force=false, options={}) {
     this.advancement.apps[this.appId] = this;
     return super.render(force, options);
@@ -130,7 +130,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData);
     if ( updates.configuration ) updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
@@ -181,14 +181,14 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _canDragDrop() {
     return this.isEditable;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDrop(event) {
     if ( !this.options.dropKeyPath ) throw new Error(
       "AdvancementConfig#options.dropKeyPath must be configured or #_onDrop must be overridden to support"

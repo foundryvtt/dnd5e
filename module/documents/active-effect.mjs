@@ -92,7 +92,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static async _fromStatusEffect(statusId, { reference, ...effectData }, options) {
     if ( !("description" in effectData) && reference ) effectData.description = `@Embed[${reference} inline]`;
     return super._fromStatusEffect?.(statusId, effectData, options) ?? new this(effectData, options);
@@ -116,7 +116,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /*  Effect Application                          */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   apply(actor, change) {
     if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
 
@@ -236,7 +236,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _applyAdd(actor, change, current, delta, changes) {
     if ( current instanceof Set ) {
       const handle = v => {
@@ -253,7 +253,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _applyOverride(actor, change, current, delta, changes) {
     if ( current instanceof Set ) {
       current.clear();
@@ -266,7 +266,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* --------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _applyUpgrade(actor, change, current, delta, changes) {
     if ( current === null ) return this._applyOverride(actor, change, current, delta, changes);
     return super._applyUpgrade(actor, change, current, delta, changes);
@@ -467,7 +467,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if ( userId === game.userId ) {

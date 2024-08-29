@@ -204,7 +204,7 @@ export default class D20Roll extends Roll {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async toMessage(messageData={}, options={}) {
     // Record the preferred rollMode
     options.rollMode ??= this.options.rollMode;

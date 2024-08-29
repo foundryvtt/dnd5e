@@ -155,7 +155,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /*  Methods                                     */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _initializeSource(source, options={}) {
     source = super._initializeSource(source, options);
     if ( !source._id || !options.pack || dnd5e.moduleArt.suppressArt ) return source;
@@ -826,7 +826,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
 
@@ -848,7 +848,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
 
@@ -1992,7 +1992,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async rollInitiative(options={}, rollOptions={}) {
     this._cachedInitiativeRoll ??= this.getInitiativeRoll(rollOptions);
 
@@ -3342,7 +3342,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
     if ( userId === game.userId ) {

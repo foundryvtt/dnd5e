@@ -58,7 +58,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "flow"],
@@ -70,7 +70,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     const visibleSteps = this.steps.filter(s => !s.automatic);
     const visibleIndex = visibleSteps.indexOf(this.step);
@@ -83,7 +83,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get id() {
     return `actor-${this.actor.id}-advancement`;
   }
@@ -400,7 +400,7 @@ export default class AdvancementManager extends Application {
   /*  Form Rendering                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     if ( !this.step ) return {};
 
@@ -428,7 +428,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   render(...args) {
     if ( this.steps.length && (this._stepIndex === null) ) this._stepIndex = 0;
 
@@ -462,7 +462,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _render(force, options) {
     await super._render(force, options);
     if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
@@ -476,7 +476,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find("button[data-action]").click(event => {
@@ -503,7 +503,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async close(options={}) {
     if ( !options.skipConfirmation ) {
       return new Dialog({

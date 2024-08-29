@@ -11,7 +11,7 @@
  */
 export default class FormulaField extends foundry.data.fields.StringField {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
       deterministic: false
@@ -20,7 +20,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _validateType(value) {
     Roll.validate(value);
     if ( this.options.deterministic ) {

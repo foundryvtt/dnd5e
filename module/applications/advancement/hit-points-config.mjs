@@ -5,7 +5,7 @@ import AdvancementConfig from "./advancement-config.mjs";
  */
 export default class HitPointsConfig extends AdvancementConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/hit-points-config.hbs"
@@ -14,7 +14,7 @@ export default class HitPointsConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     return foundry.utils.mergeObject(super.getData(), {
       hitDie: this.advancement.hitDie

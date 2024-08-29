@@ -18,7 +18,7 @@ const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.
  * @mixin
  */
 export default class PhysicalItemTemplate extends SystemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       container: new ForeignDocumentField(foundry.documents.BaseItem, {
@@ -132,7 +132,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     PhysicalItemTemplate.#migratePrice(source);
@@ -212,21 +212,21 @@ export default class PhysicalItemTemplate extends SystemDataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onCreate(data, options, userId) {
     this._renderContainers();
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     this._renderContainers({ formerContainer: options.formerContainer });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onDelete(options, userId) {
     this._renderContainers();
   }

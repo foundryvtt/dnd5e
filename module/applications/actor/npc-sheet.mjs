@@ -137,7 +137,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onConfigMenu(event) {
     event.preventDefault();
     event.stopPropagation();

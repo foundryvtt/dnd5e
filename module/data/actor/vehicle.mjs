@@ -45,12 +45,12 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  */
 export default class VehicleData extends CommonTemplate {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _systemType = "vehicle";
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       vehicleType: new StringField({ required: true, initial: "water", label: "DND5E.VehicleType" }),
@@ -125,7 +125,7 @@ export default class VehicleData extends CommonTemplate {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     AttributesFields._migrateInitiative(source.attributes);

@@ -5,7 +5,7 @@ import { getHumanReadableAttributeLabel } from "../utils.mjs";
  * Custom token configuration application for handling dynamic rings & resource labels.
  */
 export default class TokenConfig5e extends TokenConfig {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.tabs.push({

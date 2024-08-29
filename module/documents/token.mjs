@@ -37,7 +37,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /*  Methods                                     */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getBarAttribute(barName, options={}) {
     const attribute = options.alternative || this[barName]?.attribute;
     if ( attribute?.startsWith(".") ) {
@@ -68,7 +68,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static getTrackedAttributeChoices(attributes) {
     const groups = super.getTrackedAttributeChoices(attributes);
     const abilities = [];

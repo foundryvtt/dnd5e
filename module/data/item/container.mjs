@@ -23,7 +23,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 export default class ContainerData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate
 ) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       quantity: new NumberField({ min: 1, max: 1 }),
@@ -39,7 +39,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: true,
     inventoryItem: true,
@@ -61,7 +61,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ContainerData.#migrateQuantity(source);
@@ -272,7 +272,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onUpdate(changed, options, userId) {
     // Keep contents folder synchronized with container
     if ( (game.user.id === userId) && foundry.utils.hasProperty(changed, "folder") ) {

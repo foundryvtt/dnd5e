@@ -13,7 +13,7 @@ const { SchemaField, HTMLField } = foundry.data.fields;
  * @mixin
  */
 export default class ItemDescriptionTemplate extends SystemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       description: new SchemaField({
@@ -28,7 +28,7 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ItemDescriptionTemplate.#migrateSource(source);

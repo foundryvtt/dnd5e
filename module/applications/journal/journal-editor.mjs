@@ -7,7 +7,7 @@
  */
 export default class JournalEditor extends DocumentSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["journal-editor"],
@@ -21,7 +21,7 @@ export default class JournalEditor extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     if ( this.options.title ) return `${this.document.name}: ${this.options.title}`;
     else return this.document.name;
@@ -29,7 +29,7 @@ export default class JournalEditor extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const data = super.getData();
     const rawText = foundry.utils.getProperty(this.document, this.options.textKeyPath) ?? "";
@@ -42,7 +42,7 @@ export default class JournalEditor extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _updateObject(event, formData) {
     this.document.update(formData);
   }

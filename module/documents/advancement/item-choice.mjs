@@ -9,7 +9,7 @@ import ItemGrantAdvancement from "./item-grant.mjs";
  */
 export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
@@ -33,7 +33,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get levels() {
     return Array.from(Object.keys(this.configuration.choices));
   }
@@ -42,14 +42,14 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
     return (this.value.added?.[level] !== undefined) || !this.configuration.choices[level]?.count;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   titleForLevel(level, { configMode=false }={}) {
     const data = this.configuration.choices[level] ?? {};
     let tag;
@@ -61,7 +61,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     const items = this.value.added?.[level];
     if ( !items || configMode ) return "";
@@ -101,7 +101,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   restore(level, data) {
     const original = this.actor.items.get(data.replaced?.original);
     if ( data.replaced && !original ) data.items = data.items.filter(i => i._id !== data.replaced.replacement);

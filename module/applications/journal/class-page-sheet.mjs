@@ -9,7 +9,7 @@ import JournalEditor from "./journal-editor.mjs";
  */
 export default class JournalClassPageSheet extends JournalPageSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     const options = foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{dropSelector: ".drop-target"}],
@@ -25,14 +25,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get template() {
     return `systems/dnd5e/templates/journal/page-${this.document.type}-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   toc = {};
 
   /* -------------------------------------------- */
@@ -49,7 +49,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData(options) {
     const context = super.getData(options);
     context.system = context.document.system;
@@ -413,7 +413,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _renderInner(...args) {
     const html = await super._renderInner(...args);
     this.toc = JournalEntryPage.buildTOC(html.get());
@@ -424,7 +424,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html[0].querySelectorAll(".item-delete").forEach(e => {
@@ -475,7 +475,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
 

@@ -28,7 +28,7 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @override */
   static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.Prerequisites"];
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       enchant: new SchemaField({
@@ -160,7 +160,7 @@ export default class FeatData extends ItemDataModel.mixin(
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     FeatData.#migrateEnchantment(source);

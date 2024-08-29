@@ -52,19 +52,19 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  */
 export default class NPCData extends CreatureTemplate {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _systemType = "npc";
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       attributes: new SchemaField({
@@ -192,7 +192,7 @@ export default class NPCData extends CreatureTemplate {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     NPCData.#migrateSource(source);
@@ -270,7 +270,7 @@ export default class NPCData extends CreatureTemplate {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareBaseData() {
     this.details.level = 0;
     this.attributes.attunement.value = 0;
@@ -326,7 +326,7 @@ export default class NPCData extends CreatureTemplate {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareDerivedData() {
     const rollData = this.parent.getRollData({ deterministic: true });
     const { originalSaves } = this.parent.getOriginalStats();

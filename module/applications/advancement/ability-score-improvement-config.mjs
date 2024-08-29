@@ -5,7 +5,7 @@ import AdvancementConfig from "./advancement-config.mjs";
  */
 export default class AbilityScoreImprovementConfig extends AdvancementConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/ability-score-improvement-config.hbs"
@@ -16,7 +16,7 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
       if ( !this.advancement.canImprove(key) ) return obj;
@@ -59,7 +59,7 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".adjustment-button").click(this._onClickButton.bind(this));

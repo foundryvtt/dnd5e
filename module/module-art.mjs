@@ -155,7 +155,7 @@ export class ModuleArt {
  * A class responsible for allowing GMs to configure art provided by installed modules.
  */
 export class ModuleArtConfig extends FormApplication {
-  /** @inheritdoc */
+  /** @inheritDoc */
   constructor(object={}, options={}) {
     object = foundry.utils.mergeObject(game.settings.get("dnd5e", "moduleArtConfiguration"), object, {inplace: false});
     super(object, options);
@@ -163,7 +163,7 @@ export class ModuleArtConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       title: game.i18n.localize("DND5E.ModuleArtConfigL"),
@@ -177,7 +177,7 @@ export class ModuleArtConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData(options={}) {
     const context = super.getData(options);
     context.config = [];
@@ -232,7 +232,7 @@ export class ModuleArtConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     await game.settings.set("dnd5e", "moduleArtConfiguration", foundry.utils.expandObject(formData));
     return SettingsConfig.reloadConfirm({world: true});

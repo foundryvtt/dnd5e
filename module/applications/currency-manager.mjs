@@ -7,7 +7,7 @@ import DialogMixin from "./dialog-mixin.mjs";
  */
 export default class CurrencyManager extends DialogMixin(FormApplication) {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e2", "currency-manager", "dialog"],
@@ -46,7 +46,7 @@ export default class CurrencyManager extends DialogMixin(FormApplication) {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData(options={}) {
     const context = super.getData(options);
 
@@ -61,7 +61,7 @@ export default class CurrencyManager extends DialogMixin(FormApplication) {
   /*  Event Handling                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(jQuery) {
     super.activateListeners(jQuery);
     const html = jQuery[0];
@@ -111,7 +111,7 @@ export default class CurrencyManager extends DialogMixin(FormApplication) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const data = foundry.utils.expandObject(formData);
     switch ( event.submitter?.name ) {

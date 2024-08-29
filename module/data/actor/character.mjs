@@ -64,19 +64,19 @@ const {
  */
 export default class CharacterData extends CreatureTemplate {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _systemType = "character";
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       attributes: new SchemaField({
@@ -161,7 +161,7 @@ export default class CharacterData extends CreatureTemplate {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     AttributesFields._migrateInitiative(source.attributes);
@@ -171,7 +171,7 @@ export default class CharacterData extends CreatureTemplate {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareBaseData() {
     this.attributes.hd = new HitDice(this.parent);
     this.details.level = this.attributes.hd.max;

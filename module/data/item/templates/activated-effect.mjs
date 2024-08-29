@@ -9,7 +9,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @mixin
  */
 export default class ActivatedEffectTemplate extends SystemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     foundry.utils.logCompatibilityWarning(
       "The `ActivatedEffectTemplate` data model has been deprecated in favor of `ActivitiesTemplate`.",
@@ -175,7 +175,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ActivatedEffectTemplate.#migrateFormulaFields(source);

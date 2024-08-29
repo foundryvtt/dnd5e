@@ -29,7 +29,7 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
       nullable: true,
@@ -50,7 +50,7 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _validateType(value) {
     if ( !this.options.fallback ) super._validateType(value);
   }
@@ -75,7 +75,7 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   toObject(value) {
     return value?._id ?? value;
   }

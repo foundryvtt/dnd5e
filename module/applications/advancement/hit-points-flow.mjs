@@ -6,7 +6,7 @@ import Advancement from "../../documents/advancement/advancement.mjs";
  */
 export default class HitPointsFlow extends AdvancementFlow {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/hit-points-flow.hbs"
@@ -15,7 +15,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     const source = this.retainedData ?? this.advancement.value;
     const value = source[this.level];
@@ -40,7 +40,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     this.form.querySelector(".averageCheckbox")?.addEventListener("change", event => {
       this.form.querySelector(".rollResult").disabled = event.target.checked;
@@ -67,7 +67,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _updateObject(event, formData) {
     let value;
     if ( formData.useMax ) value = "max";

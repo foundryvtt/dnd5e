@@ -1413,7 +1413,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getEmbeddedDocument(embeddedName, id, options) {
     let doc;
     switch ( embeddedName ) {
@@ -1431,7 +1431,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
 
@@ -1462,7 +1462,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
 
@@ -1495,7 +1495,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( userId !== game.user.id ) return;
@@ -1585,7 +1585,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async deleteDialog(options={}) {
     // If item has advancement, handle it separately
     if ( this.actor?.system.metadata?.supportsAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
@@ -1975,7 +1975,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /*  Migrations & Deprecations                   */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static migrateData(source) {
     ActivitiesTemplate.initializeActivities(source);
     source = super.migrateData(source);

@@ -6,7 +6,7 @@ import DialogMixin from "./dialog-mixin.mjs";
  */
 export default class Award extends DialogMixin(FormApplication) {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e2", "award", "dialog"],
@@ -52,7 +52,7 @@ export default class Award extends DialogMixin(FormApplication) {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData(options={}) {
     const context = super.getData(options);
 
@@ -123,7 +123,7 @@ export default class Award extends DialogMixin(FormApplication) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const data = foundry.utils.expandObject(formData);
     const destinations = this.transferDestinations.filter(d => data.destination[d.id]);

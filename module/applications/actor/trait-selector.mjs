@@ -30,7 +30,7 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "trait-selector",
@@ -44,21 +44,21 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get id() {
     return `${this.constructor.name}-${this.trait}-Actor-${this.document.id}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     return `${this.document.name}: ${Trait.traitLabel(this.trait)}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const path = Trait.actorKeyPath(this.trait);
     const data = foundry.utils.getProperty(this.document, path);
@@ -79,7 +79,7 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -90,7 +90,7 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getActorOverrides() {
     const overrides = super._getActorOverrides();
     const path = Trait.actorKeyPath(this.trait);
@@ -105,7 +105,7 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onChangeInput(event) {
     super._onChangeInput(event);
 

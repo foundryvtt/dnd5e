@@ -18,7 +18,7 @@ export default class CreatureTypeField extends foundry.data.fields.SchemaField {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   initialize(value, model, options={}) {
     const obj = super.initialize(value, model, options);
 

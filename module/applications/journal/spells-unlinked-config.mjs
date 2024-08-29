@@ -55,7 +55,7 @@ export default class SpellsUnlinkedConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _updateObject(event, formData) {
     const unlinkedSpells = this.document.toObject().system.unlinkedSpells;
     const editing = unlinkedSpells.find(s => s._id === this.unlinkedId);

@@ -52,7 +52,7 @@ export default class TraitConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "traits", "two-column"],
@@ -65,7 +65,7 @@ export default class TraitConfig extends AdvancementConfig {
   /*  Context Preparation                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const context = super.getData();
 
@@ -110,7 +110,7 @@ export default class TraitConfig extends AdvancementConfig {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -155,7 +155,7 @@ export default class TraitConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onChangeInput(event) {
     // Display new set of trait choices
     if ( event.target.name === "selectedTrait" ) {
@@ -184,7 +184,7 @@ export default class TraitConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async prepareConfigurationUpdate(configuration={}) {
     const choicesCollection = foundry.utils.deepClone(this.config.choices);
 

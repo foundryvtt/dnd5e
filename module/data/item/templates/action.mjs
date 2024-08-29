@@ -10,7 +10,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * @mixin
  */
 export default class ActionTemplate extends ItemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     foundry.utils.logCompatibilityWarning(
       "The `ActionTemplate` data model has been deprecated in favor of `ActivitiesTemplate`.",
@@ -49,7 +49,7 @@ export default class ActionTemplate extends ItemDataModel {
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ActionTemplate.#migrateAbility(source);

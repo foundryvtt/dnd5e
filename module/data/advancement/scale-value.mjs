@@ -13,7 +13,7 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @property {Object<string, *>} scale  Scale values for each level. Value format is determined by type.
  */
 export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
@@ -27,7 +27,7 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static migrateData(source) {
     super.migrateData(source);
     if ( source.type === "numeric" ) source.type = "number";
@@ -75,7 +75,7 @@ export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
  * @property {string} value  String value.
  */
 export class ScaleValueType extends foundry.abstract.DataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       value: new StringField({ required: true })
@@ -151,7 +151,7 @@ export class ScaleValueType extends foundry.abstract.DataModel {
  * @property {number} value  Numeric value.
  */
 export class ScaleValueTypeNumber extends ScaleValueType {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({required: true})
@@ -160,7 +160,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeNumber",
@@ -171,7 +171,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static convertFrom(original, options) {
     const value = Number(original.formula);
     if ( Number.isNaN(value) ) return null;
@@ -186,7 +186,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
  * @property {number} value  CR value.
  */
 export class ScaleValueTypeCR extends ScaleValueTypeNumber {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({required: true, min: 0})
@@ -196,7 +196,7 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeCR",
@@ -206,7 +206,7 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get display() {
     switch ( this.value ) {
       case 0.125: return "&frac18;";
@@ -225,7 +225,7 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
  * @property {number} faces   Die faces.
  */
 export class ScaleValueTypeDice extends ScaleValueType {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     const fields = foundry.data.fields;
     return {
@@ -237,7 +237,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeDice",
@@ -255,7 +255,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static convertFrom(original, options) {
     const [number, faces] = (original.formula ?? "").split("d");
     if ( !faces || !Number.isNumeric(number) || !Number.isNumeric(faces) ) return null;
@@ -264,7 +264,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get formula() {
     if ( !this.faces ) return null;
     return `${this.number ?? ""}${this.die}`;
@@ -307,7 +307,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static migrateData(source) {
     if ( source.n ) source.number = source.n;
     if ( source.die ) source.faces = source.die;
@@ -321,7 +321,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
  * @property {number} value  Numeric value.
  */
 export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeDistance",
@@ -331,7 +331,7 @@ export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get display() {
     return `${this.value} ${CONFIG.DND5E.movementUnits[this.parent.configuration.distance?.units ?? "ft"]}`;
   }

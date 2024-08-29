@@ -11,7 +11,7 @@ import {
  */
 export default class AbilityScoreImprovementAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
@@ -34,7 +34,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   /*  Preparation Methods                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _preCreate(data) {
     if ( super._preCreate(data) === false ) return false;
     if ( this.item.type !== "class" || foundry.utils.hasProperty(data, "configuration.points") ) return;
@@ -89,7 +89,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   titleForLevel(level, { configMode=false }={}) {
     if ( this.value.selected !== "feat" ) return this.title;
     return game.i18n.localize("DND5E.Feature.Feat");
@@ -97,7 +97,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
     if ( configMode ) {
@@ -134,7 +134,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async apply(level, data) {
     if ( data.type === "asi" ) {
       const assignments = Object.keys(CONFIG.DND5E.abilities).reduce((obj, key) => {
@@ -172,7 +172,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   restore(level, data) {
     data.featUuid = Object.values(data.feat ?? {})[0];
     this.apply(level, data);
@@ -180,7 +180,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   reverse(level) {
     const source = this.value.toObject();
 

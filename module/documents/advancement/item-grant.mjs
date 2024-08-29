@@ -10,7 +10,7 @@ import Advancement from "./advancement.mjs";
  */
 export default class ItemGrantAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
@@ -40,14 +40,14 @@ export default class ItemGrantAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
     return !foundry.utils.isEmpty(this.value);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
     if ( !this.value.added || configMode ) return this.configuration.items.filter(i => fromUuidSync(i.uuid))
@@ -114,7 +114,7 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   restore(level, data) {
     const updates = {};
     for ( const item of data.items ) {
@@ -129,7 +129,7 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   reverse(level) {
     const items = [];
     const keyPath = this.storagePath(level);

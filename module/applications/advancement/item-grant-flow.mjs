@@ -5,7 +5,7 @@ import AdvancementFlow from "./advancement-flow.mjs";
  */
 export default class ItemGrantFlow extends AdvancementFlow {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/item-grant-flow.hbs"
@@ -38,7 +38,7 @@ export default class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData(options={}) {
     return foundry.utils.mergeObject(super.getData(options), await this.getContext());
   }
@@ -63,7 +63,7 @@ export default class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find("a[data-uuid]").click(this._onClickFeature.bind(this));
@@ -85,7 +85,7 @@ export default class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const retainedData = this.retainedData?.items.reduce((obj, i) => {
       obj[foundry.utils.getProperty(i, "flags.dnd5e.sourceId")] = i;

@@ -12,7 +12,7 @@ import { filteredKeys } from "../../utils.mjs";
  */
 export default class TraitAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
@@ -61,14 +61,14 @@ export default class TraitAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
     return !!this.value.chosen?.size;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   sortingValueForLevel(levels) {
     const traitOrder = Object.keys(CONFIG.DND5E.traits).findIndex(k => k === this.representedTraits().first());
     const modeOrder = Object.keys(CONFIG.DND5E.traitModes).findIndex(k => k === this.configuration.mode);
@@ -78,7 +78,7 @@ export default class TraitAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     if ( configMode ) {
       if ( this.hint ) return `<p>${this.hint}</p>`;
@@ -94,7 +94,7 @@ export default class TraitAdvancement extends Advancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async apply(level, data) {
     const updates = {};
     if ( !data.chosen ) return;
@@ -119,14 +119,14 @@ export default class TraitAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async restore(level, data) {
     this.apply(level, data);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async reverse(level) {
     const updates = {};
     if ( !this.value.chosen ) return;

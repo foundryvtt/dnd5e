@@ -3,7 +3,7 @@ import FormulaField from "../fields/formula-field.mjs";
 const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class SpellConfigurationData extends foundry.abstract.DataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       ability: new SetField(new StringField()),

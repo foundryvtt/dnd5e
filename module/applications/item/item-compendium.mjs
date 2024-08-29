@@ -5,7 +5,7 @@ import Item5e from "../../documents/item.mjs";
  */
 export default class ItemCompendium5e extends Compendium {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _render(...args) {
     await super._render(...args);
     let items = this.collection;
@@ -23,7 +23,7 @@ export default class ItemCompendium5e extends Compendium {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _handleDroppedEntry(target, data) {
     // Obtain the dropped Document
     let item = await Item.fromDropData(data);

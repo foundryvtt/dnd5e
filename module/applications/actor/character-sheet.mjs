@@ -228,7 +228,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onConfigMenu(event) {
     event.preventDefault();
     event.stopPropagation();
