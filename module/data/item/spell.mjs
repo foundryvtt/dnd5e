@@ -336,6 +336,46 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _preCreate(data, options, user) {
+    if ( super._preCreate(data, options, user) === false ) return false;
+    if ( !this.parent.isEmbedded || ["atwill", "innate"].includes(this.preparation.mode) || this.sourceClass ) return;
+    const classes = new Set(Object.keys(this.parent.actor.spellcastingClasses));
+    if ( !classes.size ) return;
+
+    // Set the source class, and ensure the preparation mode is pact if adding a prepared spell to a pact class
+    const setClass = cls => {
+      const update = { "system.sourceClass": cls };
+      if ( (this.parent.actor.classes[cls].spellcasting.type === "pact") && (this.preparation.mode === "prepared")
+        && (this.level > 0) ) update["system.preparation.mode"] = "pact";
+      this.parent.updateSource(update);
+    };
+
+    // If preparation mode is "pact" and pact class exists, set as that class
+    if ( this.preparation.mode === "pact" ) {
+      const pactClasses = classes.filter(i => this.parent.actor.classes[i].spellcasting.type === "pact");
+      if ( pactClasses.size === 1 ) setClass(pactClasses.first());
+      return;
+    }
+
+    // If only a single spellcasting class is present, use that
+    if ( classes.size === 1 ) {
+      setClass(classes.first());
+      return;
+    }
+
+    // Create intersection of spellcasting classes and classes that offer the spell
+    const spellClasses = new Set(
+      dnd5e.registry.spellLists.forSpell(this.parent._stats.compendiumSource).map(l => l.metadata.identifier)
+    );
+    const intersection = classes.intersection(spellClasses);
+    if ( intersection.size === 1 ) setClass(intersection.first());
+  }
+
+  /* -------------------------------------------- */
   /*  Shims                                       */
   /* -------------------------------------------- */
 
