@@ -3041,7 +3041,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Transfer classes for NPCs
       if ( !keepClass && ("cr" in d.system.details) ) {
         if ( keepHP ) {
-          let profOverride = d.effects.find(e => e._id === staticID("dnd5eTransformProf"));
+          let profOverride = d.effects.findSplice(e => e._id === staticID("dnd5eTransformProf"));
           if ( !profOverride ) profOverride = new ActiveEffect.implementation({
             _id: staticID("dnd5eTransformProf"),
             name: game.i18n.localize("DND5E.Proficiency"),
@@ -3074,7 +3074,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( keepType ) d.system.details.type = o.system.details.type;
 
       // Keep HP & HD
-      if ( keepHP ) d.system.attributes.hp = o.system.attributes.hp;
+      if ( keepHP ) d.system.attributes.hp = { ...this.system.attributes.hp };
 
       // Add temporary hit points
       if ( addTemp ) d.system.attributes.hp.temp = target.system.attributes.hp.max;
