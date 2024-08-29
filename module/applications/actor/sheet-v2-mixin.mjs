@@ -339,6 +339,12 @@ export default function ActorSheetV2Mixin(Base) {
           };
         }
         else ctx.preparation = { applicable: false };
+
+        // Subtitle
+        ctx.subtitle = [
+          this.actor.classes[system.sourceClass]?.name,
+          item.labels.components.vsm
+        ].filterJoin(" &bull; ");
       }
 
       // Gear
