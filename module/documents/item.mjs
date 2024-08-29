@@ -650,7 +650,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const damages = this.labels.damages = [];
     if ( !this.system.activities?.size ) return;
     for ( const activity of this.system.activities ) {
-      if ( activity.activation.type ) {
+      if ( activity.activation.type && (this.type !== "spell") ) {
         const { activation, concentrationDuration, duration, range, target } = activity.labels;
         activations.push({ activation, concentrationDuration, duration, range, target });
       }
