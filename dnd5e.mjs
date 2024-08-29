@@ -97,9 +97,18 @@ Hooks.once("init", function() {
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
-  // Set half-casters to round down with legacy rules.
+  // Legacy rules.
   if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
+
+    // Set half-casters to round down.
     delete DND5E.spellcastingTypes.leveled.progression.half.roundUp;
+
+    // Adjust Wild Shape and Polymorph presets.
+    delete DND5E.transformationPresets.wildshape.options.keepHP;
+    delete DND5E.transformationPresets.wildshape.options.keepType;
+    delete DND5E.transformationPresets.polymorph.options.addTemp;
+    delete DND5E.transformationPresets.polymorph.options.keepHP;
+    delete DND5E.transformationPresets.polymorph.options.keepType;
   }
 
   // Register Roll Extensions
