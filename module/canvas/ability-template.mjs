@@ -242,13 +242,13 @@ export default class AbilityTemplate extends MeasuredTemplate {
     const baseDistance = this.document.flags.dnd5e?.dimensions?.size;
     if ( this.document.flags.dnd5e?.dimensions?.adjustedSize && baseDistance ) {
       const rectangle = new PIXI.Rectangle(center.x, center.y, 1, 1);
-      const hoveredToken = canvas.tokens.placeables
-        .find(t => t.visible && !t.document.isSecret && t._overlapsSelection(rectangle));
+      const hoveredToken = canvas.tokens.quadtree.getObjects(rectangle, {
+        collisionTest: ({ t }) => t.visible && !t.document.isSecret }).first();
       if ( hoveredToken && (hoveredToken !== this.#hoveredToken) ) {
         this.#hoveredToken = hoveredToken;
         this.#hoveredToken._onHoverIn(event);
         const size = Math.max(hoveredToken.document.width, hoveredToken.document.height);
-        updates.distance = baseDistance + (size * canvas.grid.distance * .5);
+        updates.distance = baseDistance + (size * canvas.grid.distance / 2);
       } else if ( !hoveredToken && this.#hoveredToken ) {
         this.#hoveredToken._onHoverOut(event);
         this.#hoveredToken = null;

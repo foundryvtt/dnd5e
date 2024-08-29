@@ -98,7 +98,7 @@ export default class TargetField extends SchemaField {
   /**
    * Create the template dimensions labels for a template type.
    * @param {string} type  Area of effect type.
-   * @returns {{ size: string, width: [string], height: [string] }}
+   * @returns {{ size: string, [width]: string, [height]: string }}
    */
   static templateDimensions(type) {
     const sizes = CONFIG.DND5E.areaTargetTypes[type]?.sizes;
