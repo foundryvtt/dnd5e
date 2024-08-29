@@ -431,6 +431,26 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Mastery options that can be used when attacking with this weapon.
+   * @type {FormSelectOption[]|null}
+   */
+  get masteryOptions() {
+    if ( !this.parent.actor?.system.traits?.weaponProf?.mastery?.has(this.type.baseItem) || !this.mastery ) return null;
+    const extras = [];
+    for ( const mastery of this.parent.actor.system.traits.weaponProf.bonusMasteries ?? [] ) {
+      if ( mastery === this.mastery ) continue;
+      if ( !extras.length ) extras.push({ rule: true });
+      extras.push({ value: mastery, label: CONFIG.DND5E.weaponMasteries[mastery]?.label ?? mastery });
+    }
+    return [
+      { value: this.mastery, label: CONFIG.DND5E.weaponMasteries[this.mastery]?.label ?? this.mastery },
+      ...extras
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does this item have base damage defined in `damage.base` to offer to an activity?
    * @type {boolean}
    */

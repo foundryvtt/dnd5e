@@ -21,6 +21,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  * @property {number|null} [fumble=1]  The value of the d20 result which represents a critical failure,
  *                                     `null` will prevent critical failures.
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
+ * @property {string} [mastery]        Weapon mastery to use with an attack roll.
  *
  * ## Flags
  * @property {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
@@ -33,6 +34,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  * @property {FormSelectOption[]} [attackModes]  Modes that can be used when making an attack.
  * @property {boolean} [chooseModifier=false]    If the configuration dialog is shown, should the ability modifier be
  *                                               configurable within that interface?
+ * @property {FormSelectOption[]} [masteryOptions]  Weapon masteries that can be selected when making an attack.
  * @property {string} [template]                 The HTML template used to display the roll configuration dialog.
  * @property {string} [title]                    Title of the roll configuration dialog.
  * @property {object} [dialogOptions]            Additional options passed to the roll configuration dialog.
@@ -54,9 +56,9 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  */
 export async function d20Roll({
   parts=[], data={}, event,
-  advantage, disadvantage, critical=20, fumble=1, targetValue,
+  advantage, disadvantage, critical=20, fumble=1, targetValue, mastery,
   elvenAccuracy, halflingLucky, reliableTalent,
-  fastForward, ammunitionOptions, attackModes, chooseModifier=false, template, title, dialogOptions,
+  fastForward, ammunitionOptions, attackModes, chooseModifier=false, masteryOptions, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
@@ -80,6 +82,7 @@ export async function d20Roll({
     critical,
     fumble,
     targetValue,
+    mastery,
     elvenAccuracy,
     halflingLucky,
     reliableTalent
@@ -95,6 +98,7 @@ export async function d20Roll({
       defaultRollMode,
       defaultAction: advantageMode,
       defaultAbility: data?.item?.ability || data?.defaultAbility,
+      masteryOptions,
       template
     }, dialogOptions);
     if ( configured === null ) return null;

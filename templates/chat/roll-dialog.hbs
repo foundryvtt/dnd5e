@@ -37,6 +37,14 @@
         </select>
     </div>
     {{/if}}
+    {{#if masteryOptions}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.WEAPON.Mastery.Label" }}</label>
+        <select name="mastery">
+            {{ selectOptions masteryOptions }}
+        </select>
+    </div>
+    {{/if}}
     <div class="form-group">
         <label>{{ localize "DND5E.RollSituationalBonus" }}</label>
         <input type="text" name="bonus" value="" placeholder="{{ localize 'DND5E.RollExample' }}"/>
