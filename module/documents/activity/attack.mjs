@@ -134,8 +134,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
           dnd5e: {
             ...this.messageFlags,
             messageType: "roll",
-            roll: { type: "attack" },
-            targets
+            roll: { type: "attack" }
           }
         },
         speaker: ChatMessage.getSpeaker({ actor: this.actor })

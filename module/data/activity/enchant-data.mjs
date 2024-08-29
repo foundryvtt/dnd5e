@@ -65,6 +65,13 @@ export default class EnchantActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get applicableEffects() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Enchantments that have been applied by this activity.
    * @type {ActiveEffect5e[]}

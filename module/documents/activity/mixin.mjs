@@ -88,7 +88,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   get messageFlags() {
     return {
       activity: { type: this.type, id: this.id, uuid: this.uuid },
-      item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
+      item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid },
+      targets: this.constructor.getTargetDescriptors()
     };
   }
 
@@ -190,7 +191,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         flags: {
           dnd5e: {
             ...this.messageFlags,
-            messageType: "usage"
+            messageType: "usage",
+            use: {
+              effects: this.applicableEffects?.map(e => e.id)
+            }
           }
         }
       }
@@ -808,8 +812,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
           dnd5e: {
             ...this.messageFlags,
             messageType: "roll",
-            roll: { type: "damage" },
-            targets: this.constructor.getTargetDescriptors()
+            roll: { type: "damage" }
           }
         },
         speaker: ChatMessage.getSpeaker({ actor: this.actor })

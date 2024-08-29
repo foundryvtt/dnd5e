@@ -131,6 +131,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Effects that can be applied from this activity.
+   * @type {ActiveEffect5e[]|null}
+   */
+  get applicableEffects() {
+    return this.effects?.map(e => e.effect).filter(e => e) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is scaling possible with this activity?
    * @type {boolean}
    */
