@@ -62,6 +62,8 @@ export async function actorValues(actor, trait) {
     data.value.forEach(v => setValue(v, 1));
   }
 
+  if ( (trait === "weapon") ) data.mastery?.forEach(v => setValue(v, 2));
+
   return values;
 }
 

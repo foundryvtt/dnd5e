@@ -100,7 +100,8 @@ export default class TraitAdvancement extends Advancement {
     if ( !data.chosen ) return;
 
     for ( const key of data.chosen ) {
-      const keyPath = Trait.changeKeyPath(key);
+      const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery"
+        : Trait.changeKeyPath(key);
       let existingValue = updates[keyPath] ?? foundry.utils.getProperty(this.actor, keyPath);
 
       if ( ["Array", "Set"].includes(foundry.utils.getType(existingValue)) ) {
@@ -132,7 +133,8 @@ export default class TraitAdvancement extends Advancement {
     if ( !this.value.chosen ) return;
 
     for ( const key of this.value.chosen ) {
-      const keyPath = Trait.changeKeyPath(key);
+      const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery"
+        : Trait.changeKeyPath(key);
       let existingValue = updates[keyPath] ?? foundry.utils.getProperty(this.actor, keyPath);
 
       if ( ["Array", "Set"].includes(foundry.utils.getType(existingValue)) ) {
@@ -168,9 +170,9 @@ export default class TraitAdvancement extends Advancement {
     const available = new Set();
 
     // If "default" mode is selected, return all traits
-    // If any other mode is selected, only return traits that support expertise
+    // If any other mode is selected, only return traits that support expertise or mastery
     const traitTypes = this.configuration.mode === "default" ? Object.keys(CONFIG.DND5E.traits)
-      : filteredKeys(CONFIG.DND5E.traits, t => t.expertise);
+      : filteredKeys(CONFIG.DND5E.traits, t => t[this.configuration.mode === "mastery" ? "mastery" : "expertise"]);
 
     for ( const trait of traitTypes ) {
       const actorValues = await Trait.actorValues(this.actor, trait);
@@ -180,6 +182,12 @@ export default class TraitAdvancement extends Advancement {
         if ( this.configuration.mode === "default" ) {
           if ( value >= 1 ) selected.add(key);
           else available.add(key);
+        } else if ( this.configuration.mode === "mastery" ) {
+          const split = key.split(":");
+          split.pop();
+          const category = split.join(":");
+          if ( value === 2 ) selected.add(key);
+          if ( (value === 1) || (actorValues[category] === 1) ) available.add(key);
         } else {
           if ( value === 2 ) selected.add(key);
           if ( (this.configuration.mode === "expertise") && (value === 1) ) available.add(key);
