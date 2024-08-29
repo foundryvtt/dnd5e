@@ -3496,6 +3496,10 @@ DND5E.advancementTypes = {
     documentClass: advancement.SizeAdvancement,
     validItemTypes: new Set(["race"])
   },
+  Subclass: {
+    documentClass: advancement.SubclassAdvancement,
+    validItemTypes: new Set(["class"])
+  },
   Trait: {
     documentClass: advancement.TraitAdvancement,
     validItemTypes: new Set(_ALL_ITEM_TYPES)

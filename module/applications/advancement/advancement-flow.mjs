@@ -92,6 +92,7 @@ export default class AdvancementFlow extends FormApplication {
       advancement: this.advancement,
       type: this.advancement.constructor.typeName,
       title: this.title,
+      hint: this.advancement.hint,
       summary: this.advancement.summaryForLevel(this.level),
       level: this.level
     };
