@@ -2160,7 +2160,6 @@ DND5E.areaTargetTypes = {
   radius: {
     label: "DND5E.TargetRadius",
     template: "circle",
-    sizes: ["radius"],
     standard: true
   },
   sphere: {

@@ -72,6 +72,8 @@ export default class TargetField extends SchemaField {
       this.target.template.height = null;
     }
 
+    this.target.template.dimensions = TargetField.templateDimensions(this.target.template.type);
+
     if ( labels ) {
       const parts = [];
 
@@ -89,5 +91,28 @@ export default class TargetField extends SchemaField {
 
       labels.target = parts.filterJoin(" ");
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the template dimensions labels for a template type.
+   * @param {string} type  Area of effect type.
+   * @returns {{ size: string, [width]: string, [height]: string }}
+   */
+  static templateDimensions(type) {
+    const sizes = CONFIG.DND5E.areaTargetTypes[type]?.sizes;
+    const dimensions = { size: "DND5E.AreaOfEffect.Size.Label" };
+    if ( sizes ) {
+      dimensions.width = sizes.includes("width") && (sizes.includes("length") || sizes.includes("radius"));
+      dimensions.height = sizes.includes("height");
+      if ( sizes.includes("radius") ) dimensions.size = "DND5E.AreaOfEffect.Size.Radius";
+      else if ( sizes.includes("length") ) dimensions.size = "DND5E.AreaOfEffect.Size.Length";
+      else if ( sizes.includes("width") ) dimensions.size = "DND5E.AreaOfEffect.Size.Width";
+      if ( sizes.includes("thickness") ) dimensions.width = "DND5E.AreaOfEffect.Size.Thickness";
+      else if ( dimensions.width ) dimensions.width = "DND5E.AreaOfEffect.Size.Width";
+      if ( dimensions.height ) dimensions.height = "DND5E.AreaOfEffect.Size.Height";
+    }
+    return dimensions;
   }
 }
