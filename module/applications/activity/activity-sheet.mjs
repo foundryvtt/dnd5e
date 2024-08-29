@@ -235,7 +235,7 @@ export default class ActivitySheet extends Application5e {
     ];
 
     // Consumption targets
-    const canScale = this.activity.canScale;
+    const canScale = this.activity.canConfigureScaling;
     const consumptionTypeOptions = Array.from(this.activity.validConsumptionTypes).map(value => ({
       value,
       label: CONFIG.DND5E.activityConsumptionTypes[value].label

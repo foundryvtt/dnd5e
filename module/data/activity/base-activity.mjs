@@ -141,6 +141,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Can consumption scaling be configured?
+   * @type {boolean}
+   */
+  get canConfigureScaling() {
+    return this.consumption.scaling.allowed || (this.isSpell && (this.item.system.level > 0));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is scaling possible with this activity?
    * @type {boolean}
    */
