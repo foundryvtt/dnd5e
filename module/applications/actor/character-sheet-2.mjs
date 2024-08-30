@@ -1,6 +1,6 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { formatNumber, simplifyBonus } from "../../utils.mjs";
+import { formatNumber } from "../../utils.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
@@ -385,7 +385,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   _onAction(event) {
     const target = event.currentTarget;
     switch ( target.dataset.action ) {
-      case "findItem": this._onFindItem(target.dataset.itemType); break;
+      case "findItem":
+        this._onFindItem(target.dataset.itemType, { classIdentifier: target.dataset.classIdentifier });
+        break;
       case "removeFavorite": this._onRemoveFavorite(event); break;
       case "spellcasting": this._onToggleSpellcasting(event); break;
       case "toggleInspiration": this._onToggleInspiration(); break;
@@ -419,11 +421,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /**
    * Show available items of a given type.
-   * @param {string} type  The item type.
+   * @param {string} type                       The item type.
+   * @param {object} [options={}]
+   * @param {string} [options.classIdentifier]  Identifier of the class when finding a subclass.
    * @protected
    */
-  async _onFindItem(type) {
-    const result = await CompendiumBrowser.selectOne({ filters: { locked: { types: new Set([type]) } } });
+  async _onFindItem(type, { classIdentifier }={}) {
+    const filters = { locked: { types: new Set([type]) } };
+    if ( classIdentifier ) filters.locked.additional = { class: { [classIdentifier]: 1 } };
+    const result = await CompendiumBrowser.selectOne({ filters });
     if ( result ) this._onDropItemCreate(await fromUuid(result));
   }
 

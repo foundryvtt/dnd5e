@@ -63,7 +63,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Partition items by category
     let {items, spells, feats, races, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
-      const {quantity, uses} = item.system;
+      const { quantity } = item.system;
 
       // Item details
       const ctx = context.itemContext[item.id] ??= {};
@@ -142,6 +142,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const identifier = cls.system.identifier || cls.name.slugify({strict: true});
       const subclass = subclasses.findSplice(s => s.system.classIdentifier === identifier);
       if ( subclass ) arr.push(subclass);
+      else {
+        const subclassAdvancement = cls.advancement.byType.Subclass?.[0];
+        if ( subclassAdvancement && (subclassAdvancement.level <= cls.system.levels) ) ctx.needsSubclass = true;
+      }
       return arr;
     }, []);
     for ( const subclass of subclasses ) {

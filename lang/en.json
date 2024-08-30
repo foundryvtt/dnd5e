@@ -264,6 +264,11 @@
       "Level": "Must be at least level {level} to take this feat.",
       "Type": "Only features with the \"feat\" type can be selected."
     }
+  },
+  "Subclass": {
+    "Title": "Subclass",
+    "Hint": "Specify what level this class receives its subclass.",
+    "FlowHint": "Select a subclass in the Features tab after level up has completed."
   }
 },
 
@@ -2436,6 +2441,7 @@
     "Hint": "Formula in GP that can be used in place of starting equipment."
   }
 },
+"DND5E.SubclassAdd": "Add Subclass",
 "DND5E.SubclassIdentifierHint": "This identifier should match the identifier on the parent class to ensure they are properly linked.",
 "DND5E.SubclassAssignmentError": "{class} already has a subclass. Remove the existing '{subclass}' subclass before adding a new one.",
 "DND5E.SubclassDuplicateError": "A subclass with the identifier {identifier} already exists on this actor.",
