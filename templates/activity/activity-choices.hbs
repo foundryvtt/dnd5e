@@ -3,14 +3,16 @@
         {{#each activities}}
         <li>
             <button type="button" data-action="choose" data-activity-id="{{ id }}">
-                {{#with icon}}
-                {{#if svg}}
-                <dnd5e-icon src="{{ src }}"></dnd5e-icon>
-                {{else}}
-                <img src="{{ src }}" alt="{{ ../name }}">
-                {{/if}}
-                {{/with}}
-                <span>{{ name }}</span>
+                <span class="icon">
+                    {{#with icon}}
+                    {{#if svg}}
+                    <dnd5e-icon src="{{ src }}"></dnd5e-icon>
+                    {{else}}
+                    <img src="{{ src }}" alt="{{ ../name }}" class="gold-icon">
+                    {{/if}}
+                    {{/with}}
+                </span>
+                <span class="name">{{ name }}</span>
             </button>
         </li>
         {{/each}}
