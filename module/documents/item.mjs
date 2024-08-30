@@ -1294,10 +1294,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {string} id          ID of the activity to remove.
    * @returns {Promise<Item5e>}  This item with the changes applied.
    */
-  deleteActivity(id) {
+  async deleteActivity(id) {
     const activity = this.system.activities?.get(id);
     if ( !activity ) return this;
-    activity.constructor._apps.get(activity.uuid)?.forEach(a => a.close());
+    await Promise.allSettled(activity.constructor._apps.get(activity.uuid)?.map(a => a.close()) ?? []);
     return this.update({ [`system.activities.-=${id}`]: null });
   }
 
