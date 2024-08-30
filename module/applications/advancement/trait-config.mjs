@@ -181,7 +181,7 @@ export default class TraitConfig extends AdvancementConfig {
     // If mode is changed from default to one of the others, change selected type if current type is not valid
     if ( (event.target.name === "configuration.mode")
       && (event.target.value !== "default")
-      && (this.config.mode === "default") ) {
+      && (event.target.value !== this.config.mode) ) {
       const checkKey = event.target.value === "mastery" ? "mastery" : "expertise";
       const validTraitTypes = filteredKeys(CONFIG.DND5E.traits, c => c[checkKey]);
       if ( !validTraitTypes.includes(this.trait) ) this.trait = validTraitTypes[0];
@@ -230,7 +230,7 @@ export default class TraitConfig extends AdvancementConfig {
 
     // If one of the expertise modes is selected, filter out any traits that are not of a valid type
     if ( (configuration.mode ?? this.config.mode) !== "default" ) {
-      const checkKey = (configuration.mode ?? this.config.mode) === "mastery" ? "mastery" : "experties";
+      const checkKey = (configuration.mode ?? this.config.mode) === "mastery" ? "mastery" : "expertise";
       const validTraitTypes = filteredKeys(CONFIG.DND5E.traits, c => c[checkKey]);
       configuration.grants = configuration.grants.filter(k => validTraitTypes.some(t => k.startsWith(t)));
       configuration.choices.forEach(c => c.pool = c.pool?.filter(k => validTraitTypes.some(t => k.startsWith(t))));
