@@ -249,7 +249,7 @@ export default function ActorSheetV2Mixin(Base) {
       }
 
       // Display weapon masteries
-      for ( const key of this.actor.system.traits?.weaponProf?.mastery ?? [] ) {
+      for ( const key of this.actor.system.traits?.weaponProf?.mastery?.value ?? [] ) {
         let value = traits.weapon?.find(w => w.key === key);
         if ( !value ) {
           value = { key, label: Trait.keyLabel(key, { trait: "weapon" }) ?? key, icons: [] };

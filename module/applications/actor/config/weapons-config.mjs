@@ -76,7 +76,7 @@ export default class WeaponsConfig extends BaseConfigSheet {
         choice.disabled = true;
       }
       choice.mastery = {
-        chosen: data.mastery.includes(key),
+        chosen: data.mastery.value?.includes(key),
         disabled: !choice.chosen
       };
       if ( choice.children ) this._processChoices(data, choice.children, choice.chosen);
@@ -94,7 +94,7 @@ export default class WeaponsConfig extends BaseConfigSheet {
       foundry.utils.getProperty(submitData, keyPath) ?? {}
     ).sort((a, b) => a.localeCompare(b, "en")));
     filter("system.traits.weaponProf.value");
-    filter("system.traits.weaponProf.mastery");
+    filter("system.traits.weaponProf.mastery.value");
     return submitData;
   }
 }
