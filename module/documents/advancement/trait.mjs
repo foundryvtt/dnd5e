@@ -100,7 +100,7 @@ export default class TraitAdvancement extends Advancement {
     if ( !data.chosen ) return;
 
     for ( const key of data.chosen ) {
-      const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery"
+      const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery.value"
         : Trait.changeKeyPath(key);
       let existingValue = updates[keyPath] ?? foundry.utils.getProperty(this.actor, keyPath);
 
@@ -133,7 +133,7 @@ export default class TraitAdvancement extends Advancement {
     if ( !this.value.chosen ) return;
 
     for ( const key of this.value.chosen ) {
-      const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery"
+      const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery.value"
         : Trait.changeKeyPath(key);
       let existingValue = updates[keyPath] ?? foundry.utils.getProperty(this.actor, keyPath);
 

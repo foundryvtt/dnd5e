@@ -55,6 +55,7 @@ const {
  * @property {string} details.flaw                        Character's flaws.
  * @property {object} traits
  * @property {SimpleTraitData} traits.weaponProf             Character's weapon proficiencies.
+ * @property {object} traits.weaponProf.mastery
  * @property {Set<string>} traits.weaponProf.mastery.value   Weapon masteries.
  * @property {Set<string>} traits.weaponProf.mastery.bonus   Extra mastery properties that can be chosen when making an
  *                                                           attack with a weapon that has mastery.
