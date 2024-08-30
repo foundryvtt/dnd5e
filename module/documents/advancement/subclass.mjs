@@ -24,11 +24,11 @@ export default class SubclassAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryforLevel(level, { configMode=false }={}) {
     const subclass = this.item.subclass;
-    if ( configMode || !item ) return "";
-    return subclass.toAnchor({ classes: ["content-link"] }).outerHTML;
+    if ( configMode || !subclass ) return "";
+    return subclass.toAnchor().outerHTML;
   }
 
   /* -------------------------------------------- */
