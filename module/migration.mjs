@@ -812,7 +812,7 @@ function _migrateEffectArmorClass(effect, updateData) {
 function _migrateItemUses(item, itemData, updateData, flags) {
   const value = foundry.utils.getProperty(itemData, "flags.dnd5e.migratedUses");
   const max = foundry.utils.getProperty(item, "system.uses.max");
-  if ( (value !== undefined) && (max !== undefined) && Number.isNumeric(max) ) {
+  if ( (value !== undefined) && (max !== undefined) && Number.isNumeric(value) && Number.isNumeric(max) ) {
     foundry.utils.setProperty(updateData, "system.uses.spent", parseInt(max) - parseInt(value));
     flags.persistSourceMigration = true;
   }
