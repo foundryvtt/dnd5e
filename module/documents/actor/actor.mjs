@@ -3,7 +3,7 @@ import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import { replaceFormulaData, simplifyBonus } from "../../utils.mjs";
+import { replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
@@ -2919,22 +2919,27 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean} [keepEquipmentAE=true]     Keep effects which originate on actors equipment
    * @property {boolean} [keepClassAE=true]         Keep effects which originate from actors class/subclass
    * @property {boolean} [keepBackgroundAE=true]    Keep effects which originate from actors background
+   * @property {boolean} [keepHP=false]             Keep HP & HD
+   * @property {boolean} [keepType=false]           Keep creature type
+   * @property {boolean} [addTemp=false]            Add temporary hit points equal to the target's max HP
    * @property {boolean} [transformTokens=true]     Transform linked tokens too
+   * @property {string} [preset]                    The transformation preset used (if any).
    */
 
   /**
    * Transform this Actor into another one.
    *
-   * @param {Actor5e} target                      The target Actor.
-   * @param {TransformationOptions} [options={}]  Options that determine how the transformation is performed.
-   * @param {boolean} [options.renderSheet=true]  Render the sheet of the transformed actor after the polymorph
-   * @returns {Promise<Array<Token>>|null}        Updated token if the transformation was performed.
+   * @param {Actor5e} target                           The target Actor.
+   * @param {TransformationOptions} [options={}]       Options that determine how the transformation is performed.
+   * @param {object} [sheetOptions]
+   * @param {boolean} [sheetOptions.renderSheet=true]  Render the sheet of the transformed actor after the polymorph
+   * @returns {Promise<Array<Token>>|null}             Updated token if the transformation was performed.
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false, keepItems=false,
     keepBio=false, keepVision=false, keepSelf=false, keepAE=false, keepOriginAE=true, keepOtherOriginAE=true,
     keepSpellAE=true, keepEquipmentAE=true, keepFeatAE=true, keepClassAE=true, keepBackgroundAE=true,
-    transformTokens=true}={}, {renderSheet=true}={}) {
+    keepHP=false, keepType=false, addTemp=false, transformTokens=true, preset}={}, {renderSheet=true}={}) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -3026,20 +3031,37 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // Keep specific items from the original data
       d.items = d.items.concat(o.items.filter(i => {
-        if ( ["class", "subclass"].includes(i.type) ) return keepClass;
+        if ( ["class", "subclass"].includes(i.type) ) return keepClass || keepHP;
         else if ( i.type === "feat" ) return keepFeats;
         else if ( i.type === "spell" ) return keepSpells;
+        else if ( i.type === "race" ) return keepType;
         else return keepItems;
       }));
 
       // Transfer classes for NPCs
-      if ( !keepClass && d.system.details.cr ) {
-        const cls = new dnd5e.dataModels.item.ClassData({levels: d.system.details.cr});
-        d.items.push({
-          type: "class",
-          name: game.i18n.localize("DND5E.PolymorphTmpClass"),
-          system: cls.toObject()
-        });
+      if ( !keepClass && ("cr" in d.system.details) ) {
+        if ( keepHP ) {
+          let profOverride = d.effects.findSplice(e => e._id === staticID("dnd5eTransformProf"));
+          if ( !profOverride ) profOverride = new ActiveEffect.implementation({
+            _id: staticID("dnd5eTransformProf"),
+            name: game.i18n.localize("DND5E.Proficiency"),
+            img: "icons/skills/social/diplomacy-peace-alliance.webp",
+            disabled: false
+          }).toObject();
+          profOverride.changes = [{
+            key: "system.attributes.prof",
+            mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+            value: target.system.attributes.prof
+          }];
+          d.effects.push(profOverride);
+        } else {
+          const cls = new dnd5e.dataModels.item.ClassData({ levels: d.system.details.cr });
+          d.items.push({
+            type: "class",
+            name: game.i18n.localize("DND5E.PolymorphTmpClass"),
+            system: cls.toObject()
+          });
+        }
       }
 
       // Keep biography
@@ -3048,6 +3070,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Keep senses
       if ( keepVision ) d.system.traits.senses = o.system.traits.senses;
 
+      // Keep creature type
+      if ( keepType ) d.system.details.type = o.system.details.type;
+
+      // Keep HP & HD
+      if ( keepHP ) d.system.attributes.hp = { ...this.system.attributes.hp };
+
+      // Add temporary hit points
+      if ( addTemp ) d.system.attributes.hp.temp = target.system.attributes.hp.max;
+
       // Remove active effects
       const oEffects = foundry.utils.deepClone(d.effects);
       const originEffectIds = new Set(oEffects.filter(effect => {
@@ -3055,6 +3086,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }).map(e => e._id));
       d.effects = d.effects.filter(e => {
         if ( keepAE ) return true;
+        if ( keepHP && !keepClass && (e._id === staticID("dnd5eTransformProf")) ) return true;
         const origin = e.origin?.startsWith("Actor") || e.origin?.startsWith("Item") ? fromUuidSync(e.origin) : {};
         const originIsSelf = origin?.parent?.uuid === this.uuid;
         const isOriginEffect = originEffectIds.has(e._id);
@@ -3113,7 +3145,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills, keepClass, keepFeats, keepSpells,
       keepItems, keepBio, keepVision, keepSelf, keepAE, keepOriginAE, keepOtherOriginAE, keepSpellAE,
-      keepEquipmentAE, keepFeatAE, keepClassAE, keepBackgroundAE, transformTokens
+      keepEquipmentAE, keepFeatAE, keepClassAE, keepBackgroundAE, keepHP, keepType, addTemp, transformTokens, preset
     }, {renderSheet});
 
     // Create new Actor with transformed data

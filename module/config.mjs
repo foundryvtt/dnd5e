@@ -2676,7 +2676,10 @@ DND5E.polymorphSettings = {
   keepItems: "DND5E.PolymorphKeepItems",
   keepBio: "DND5E.PolymorphKeepBio",
   keepVision: "DND5E.PolymorphKeepVision",
-  keepSelf: "DND5E.PolymorphKeepSelf"
+  keepSelf: "DND5E.PolymorphKeepSelf",
+  keepType: "DND5E.PolymorphKeepType",
+  keepHP: "DND5E.PolymorphKeepHP",
+  addTemp: "DND5E.PolymorphAddTemp"
 };
 preLocalize("polymorphSettings", { sort: true });
 
@@ -2708,27 +2711,35 @@ DND5E.transformationPresets = {
       keepBio: true,
       keepClass: true,
       keepFeats: true,
+      keepHP: true,
       keepMental: true,
+      keepType: true,
       mergeSaves: true,
       mergeSkills: true,
-      keepEquipmentAE: false
+      keepEquipmentAE: false,
+      preset: "wildshape"
     }
   },
   polymorph: {
     icon: '<i class="fas fa-pastafarianism"></i>',
     label: "DND5E.Polymorph",
     options: {
+      addTemp: true,
+      keepHP: true,
+      keepType: true,
       keepEquipmentAE: false,
       keepClassAE: false,
       keepFeatAE: false,
-      keepBackgroundAE: false
+      keepBackgroundAE: false,
+      preset: "polymorph"
     }
   },
   polymorphSelf: {
     icon: '<i class="fas fa-eye"></i>',
     label: "DND5E.PolymorphSelf",
     options: {
-      keepSelf: true
+      keepSelf: true,
+      preset: "polymorphSelf"
     }
   }
 };
