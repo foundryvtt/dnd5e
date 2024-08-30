@@ -193,6 +193,7 @@ export default class ToolData extends ItemDataModel.mixin(
   /** @inheritDoc */
   _preCreate(data, options, user) {
     if ( super._preCreate(data, options, user) === false ) return false;
+    if ( this.activities.size ) return;
     const activityData = new CONFIG.DND5E.activityTypes.check.documentClass({}, { parent: this.parent }).toObject();
     this.parent.updateSource({ [`system.activities.${activityData._id}`]: activityData });
   }
