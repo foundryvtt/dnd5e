@@ -56,6 +56,7 @@ export default function DocumentSheetV2Mixin(Base) {
         const label = btn.querySelector(":scope > i").nextSibling;
         btn.dataset.tooltip = label.textContent;
         btn.setAttribute("aria-label", label.textContent);
+        btn.addEventListener("dblclick", event => event.stopPropagation());
         label.remove();
       });
 

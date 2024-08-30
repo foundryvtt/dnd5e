@@ -64,6 +64,7 @@ export default function ItemSheetV2Mixin(Base) {
           anchor.innerHTML = `<i class="${icon}" inert></i>`;
           title.insertAdjacentElement("afterend", anchor);
           anchor.addEventListener("click", this._onToggleState.bind(this), { passive: true });
+          anchor.addEventListener("dblclick", event => event.stopPropagation());
         }
       }
 
