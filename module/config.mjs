@@ -3164,6 +3164,7 @@ DND5E.epicBoonInterval = 30000;
  * @property {object} [children]           Mapping of category key to an object defining its children.
  * @property {boolean} [sortCategories]    Whether top-level categories should be sorted.
  * @property {boolean} [expertise]         Can an actor receive expertise in this trait?
+ * @property {boolean} [mastery]           Can an actor receive mastery in this trait?
  */
 
 /**
@@ -3216,7 +3217,8 @@ DND5E.traits = {
     icon: "icons/skills/melee/weapons-crossed-swords-purple.webp",
     actorKeyPath: "system.traits.weaponProf",
     configKey: "weaponProficiencies",
-    subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
+    subtypes: { keyPath: "weaponType", ids: ["weaponIds"] },
+    mastery: true
   },
   tool: {
     labels: {
@@ -3288,6 +3290,10 @@ DND5E.traitModes = {
   upgrade: {
     label: "DND5E.AdvancementTraitModeUpgradeLabel",
     hint: "DND5E.AdvancementTraitModeUpgradeHint"
+  },
+  mastery: {
+    label: "DND5E.AdvancementTraitModeMasteryLabel",
+    hint: "DND5E.AdvancementTraitModeMasteryHint"
   }
 };
 preLocalize("traitModes", { keys: ["label", "hint"] });

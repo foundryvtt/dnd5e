@@ -84,6 +84,19 @@ export default class SelectChoices {
   /* -------------------------------------------- */
 
   /**
+   * Execute the provided function for each entry in the object.
+   * @param {Function} func  Function to execute on each entry. Receives the trait key and value.
+   */
+  forEach(func) {
+    for ( const [key, value] of Object.entries(this) ) {
+      func(key, value);
+      if ( value.children ) value.children.forEach(func);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Merge another SelectChoices object into this one.
    * @param {SelectChoices} other
    * @param {object} [options={}]
