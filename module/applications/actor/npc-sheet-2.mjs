@@ -119,7 +119,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     context.skills = Object.fromEntries(Object.entries(context.skills).filter(([, v]) => v.value));
 
     // Senses
-    context.senses.passivePerception = {
+    if (Object.hasOwn(this.actor.system.skills, 'prc')) {
+      context.senses.passivePerception = {
       label: game.i18n.localize("DND5E.PassivePerception"), value: this.actor.system.skills.prc.passive
     };
 
