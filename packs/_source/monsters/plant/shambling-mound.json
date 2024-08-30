@@ -844,13 +844,13 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
             "effects": [],
             "range": {
-              "units": "",
+              "units": "self",
               "special": "",
               "override": false
             },
@@ -882,21 +882,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 2,
-                  "denomination": 8,
-                  "bonus": "@mod",
-                  "types": [
-                    "bludgeoning"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 2,
+                  "denomination": "8",
+                  "bonus": "@mod",
+                  "types": [
+                    "bludgeoning"
+                  ]
                 }
               ]
             },
@@ -904,10 +899,13 @@
               "ability": "con",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "14"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -933,8 +931,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387412087,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!gGeLeV411iQ5Yijs.N42BQALoCmeYphD1"
     },

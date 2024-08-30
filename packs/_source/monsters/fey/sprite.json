@@ -1361,7 +1361,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -1403,10 +1403,13 @@
               "ability": "cha",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "10"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1432,8 +1435,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387394720,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!MUpBNDoJEr09bLaO.qJHrH8Q3q1JB5xe5"
     }

@@ -1630,10 +1630,13 @@
               "ability": "wis",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "19"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1659,8 +1662,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387660824,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!qNdFhY3JOkCfhG3d.M3VJyuM63OKH7JH0"
     },
@@ -2307,12 +2310,8 @@
               "targets": [
                 {
                   "type": "attribute",
-                  "target": "resources.legact.value",
                   "value": "2",
-                  "scaling": {
-                    "mode": "",
-                    "formula": ""
-                  }
+                  "target": "resources.legact.value"
                 }
               ],
               "scaling": {
@@ -2327,7 +2326,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -2366,21 +2365,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 2,
-                  "denomination": 6,
-                  "bonus": "@mod",
-                  "types": [
-                    "bludgeoning"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 2,
+                  "denomination": "6",
+                  "bonus": "@mod",
+                  "types": [
+                    "bludgeoning"
+                  ]
                 }
               ]
             },
@@ -2388,15 +2382,19 @@
               "ability": "dex",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "23"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -2412,8 +2410,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387668637,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!qNdFhY3JOkCfhG3d.i4ggPCju3QyYJslH"
     },

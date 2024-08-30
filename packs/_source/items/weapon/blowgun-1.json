@@ -57,14 +57,14 @@
       },
       "base": {
         "number": null,
-        "denomination": null,
-        "bonus": "",
+        "denomination": 0,
+        "bonus": "1",
         "types": [
           "piercing"
         ],
         "custom": {
-          "enabled": true,
-          "formula": "1 + @mod"
+          "enabled": false,
+          "formula": ""
         },
         "scaling": {
           "mode": "",
@@ -179,7 +179,10 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {
+      "type": ""
+    },
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -194,7 +197,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037172743,
-    "modifiedTime": 1725037172743,
+    "modifiedTime": 1725041083961,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!N8XNP3vjVZmM2r9S"

@@ -57,14 +57,15 @@
       },
       "base": {
         "number": null,
-        "denomination": null,
+        "denomination": 0,
         "types": [],
         "custom": {
           "enabled": false
         },
         "scaling": {
           "number": 1
-        }
+        },
+        "bonus": ""
       }
     },
     "armor": {
@@ -157,11 +158,12 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "mastery": ""
   },
   "effects": [],
-  "folder": "MLMTCAvKsuFE3vYA",
-  "sort": 0,
+  "folder": "UnUwTG4YIgd0kaUJ",
+  "sort": 200000,
   "ownership": {
     "default": 0
   },
@@ -172,7 +174,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037313094,
-    "modifiedTime": 1725037313094,
+    "modifiedTime": 1725041129126,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!uXOT4fYbgPY8DGdd"

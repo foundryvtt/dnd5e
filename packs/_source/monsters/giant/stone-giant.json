@@ -1131,7 +1131,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -1168,39 +1168,25 @@
             },
             "damage": {
               "onSave": "half",
-              "parts": [
-                {
-                  "number": 4,
-                  "denomination": 10,
-                  "bonus": "@mod",
-                  "types": [
-                    "bludgeoning"
-                  ],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
-                }
-              ]
+              "parts": []
             },
             "save": {
               "ability": "str",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "17"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -1216,8 +1202,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387233716,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!SOin81NWijHRvXFK.eiNNUlTgJyVFcQkO"
     },

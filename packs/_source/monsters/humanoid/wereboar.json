@@ -788,25 +788,7 @@
             },
             "damage": {
               "onSave": "half",
-              "parts": [
-                {
-                  "number": 2,
-                  "denomination": 6,
-                  "bonus": "",
-                  "types": [
-                    "slashing"
-                  ],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
-                }
-              ]
+              "parts": []
             },
             "save": {
               "ability": "str",
@@ -837,8 +819,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387833671,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!J9hgSaZODGjrNl9B.TizBVS6hRuBa8JYY"
     },
@@ -1341,7 +1323,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -1378,39 +1360,25 @@
             },
             "damage": {
               "onSave": "half",
-              "parts": [
-                {
-                  "number": 2,
-                  "denomination": 6,
-                  "bonus": "@mod",
-                  "types": [
-                    "slashing"
-                  ],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
-                }
-              ]
+              "parts": []
             },
             "save": {
               "ability": "con",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "12"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -1426,8 +1394,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387827746,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!J9hgSaZODGjrNl9B.3TD2NpdjIDJxeLl9"
     },

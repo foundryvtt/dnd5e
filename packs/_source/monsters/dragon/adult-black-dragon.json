@@ -1444,10 +1444,13 @@
               "ability": "wis",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "16"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1473,8 +1476,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387178700,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!M4eX4Mu5IHCr3TMf.A3azHlbNcHLRgogu"
     },
@@ -1713,12 +1716,8 @@
               "targets": [
                 {
                   "type": "itemUses",
-                  "target": "",
                   "value": "1",
-                  "scaling": {
-                    "mode": "",
-                    "formula": ""
-                  }
+                  "target": ""
                 }
               ],
               "scaling": {
@@ -1771,21 +1770,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 12,
-                  "denomination": 8,
-                  "bonus": "",
-                  "types": [
-                    "acid"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 12,
+                  "denomination": "8",
+                  "bonus": "",
+                  "types": [
+                    "acid"
+                  ]
                 }
               ]
             },
@@ -1793,10 +1787,13 @@
               "ability": "dex",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "18"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1822,8 +1819,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387188142,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!M4eX4Mu5IHCr3TMf.6bromElr0abqNXJL"
     },

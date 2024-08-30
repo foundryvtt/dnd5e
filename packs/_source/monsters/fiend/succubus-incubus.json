@@ -1000,7 +1000,7 @@
       "img": "icons/magic/air/wind-tornado-spiral-pink-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>One humanoid the fiend can see within 30 feet of it must make a <strong>Wisdom</strong> saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands.</p><p>If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours.The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends.</p></section><p>One humanoid the fiend can see within 30 feet of it must make a <strong>Wisdom</strong> saving throw.</p>",
+          "value": "<section class=\"secret\" id=\"secret-JgJC4PuKfndwnA7h\"><p>One humanoid the fiend can see within 30 feet of it must make a <strong>DC 15</strong> <strong>Wisdom</strong> saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands.</p><p>If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours.The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends.</p></section><p>One humanoid the fiend can see within 30 feet of it must make a <strong>Wisdom</strong> saving throw.</p>",
           "chat": ""
         },
         "source": {
@@ -1087,10 +1087,13 @@
               "ability": "wis",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "15"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1116,8 +1119,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387471681,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!VmdyZDjqAc8vdncY.2bFCfFfjRNmhyE8A"
     },
@@ -1172,13 +1175,13 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
             "effects": [],
             "range": {
-              "units": "",
+              "units": "self",
               "special": "",
               "override": false
             },
@@ -1210,21 +1213,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 5,
-                  "denomination": 10,
-                  "bonus": "@mod",
-                  "types": [
-                    "psychic"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 5,
+                  "denomination": "10",
+                  "bonus": "@mod",
+                  "types": [
+                    "psychic"
+                  ]
                 }
               ]
             },
@@ -1232,10 +1230,13 @@
               "ability": "con",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "15"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1261,8 +1262,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387480759,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!VmdyZDjqAc8vdncY.eb0O9cQ8N6lovLyI"
     },
