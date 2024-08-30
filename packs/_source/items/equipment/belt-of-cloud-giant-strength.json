@@ -23,62 +23,16 @@
       "value": 18000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "legendary",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
     "crewed": false,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": 0,
@@ -108,16 +62,11 @@
     "properties": [
       "mgc"
     ],
-    "attack": {
-      "bonus": "",
-      "flat": false
-    },
-    "enchantment": null,
-    "summons": null
+    "activities": {},
+    "attuned": false
   },
   "effects": [
     {
-      "icon": "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",
       "origin": "Compendium.dnd5e.items.NRj0lC3SM03s1YB3",
       "duration": {
         "startTime": null,
@@ -138,12 +87,26 @@
           "priority": null
         }
       ],
-      "tint": null,
+      "tint": "#ffffff",
       "transfer": true,
       "flags": {},
       "name": "Belt of Cloud Giant Strength",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!NRj0lC3SM03s1YB3.iGbcuTRYb2okyQeS"
     }
   ],
@@ -154,11 +117,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233631,
-    "modifiedTime": 1715374603056,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037173921,
+    "modifiedTime": 1725037173921,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!NRj0lC3SM03s1YB3"

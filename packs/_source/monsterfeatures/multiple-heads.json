@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] has five heads. While it has more than one head, the [[lookup @name lowercase]] has<strong> advantage </strong>on saving throws <strong>against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious</strong><strong>. </strong></p><p>Whenever the [[lookup @name lowercase]] takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the [[lookup @name lowercase]] dies.</p><p>At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken <em>fire damage</em> since its last turn. the [[lookup @name lowercase]] regains <strong>10 hit points</strong> for each head regrown in this way.</p>\n</section>\n<p>the [[lookup @name lowercase]] has five heads. While it has more than one head, the [[lookup @name lowercase]] has<strong> advantage </strong>on saving throws <strong>against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious</strong>.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,65 +16,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/skills/melee/strike-sword-stabbed-brown.webp",
@@ -83,11 +39,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234574,
-    "modifiedTime": 1672335799733,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037409645,
+    "modifiedTime": 1725037409645,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!dvSoAF3bOeUeIrxf"

@@ -23,61 +23,15 @@
       "value": 6000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "rare",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": 0,
@@ -108,12 +62,8 @@
     "properties": [
       "mgc"
     ],
-    "attack": {
-      "bonus": "",
-      "flat": false
-    },
-    "enchantment": null,
-    "summons": null
+    "activities": {},
+    "attuned": false
   },
   "effects": [
     {
@@ -136,14 +86,27 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/equipment/wrist/bracer-segmented-leather.webp",
       "origin": "Compendium.dnd5e.items.DSHi7yT6OUyDoCcu",
       "transfer": true,
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
       "name": "+2 to AC",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/equipment/wrist/bracer-segmented-leather.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!DSHi7yT6OUyDoCcu.ul7rjl68p1kyv4z2"
     }
   ],
@@ -154,11 +117,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233523,
-    "modifiedTime": 1715374587129,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037131688,
+    "modifiedTime": 1725037131688,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!DSHi7yT6OUyDoCcu"

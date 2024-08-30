@@ -453,7 +453,10 @@
       "environment": "",
       "cr": 0,
       "spellLevel": 0,
-      "source": {}
+      "source": {},
+      "ideal": "",
+      "bond": "",
+      "flaw": ""
     },
     "resources": {
       "legact": {
@@ -512,7 +515,12 @@
       "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
-      "rotation": 0
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
     },
     "width": 1,
     "height": 1,
@@ -547,7 +555,10 @@
       "darkness": {
         "min": 0,
         "max": 1
-      }
+      },
+      "negative": false,
+      "priority": 0,
+      "color": null
     },
     "sight": {
       "enabled": false,
@@ -557,18 +568,34 @@
       "attenuation": 0.1,
       "brightness": 0,
       "saturation": 0,
-      "contrast": 0
+      "contrast": 0,
+      "color": null
     },
     "detectionModes": [],
     "flags": {},
-    "randomImg": false
+    "randomImg": false,
+    "hexagonalShape": 0,
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    }
   },
   "items": [],
   "effects": [
     {
       "name": "Invisible",
       "_id": "huO2iAgLJJHGXWix",
-      "icon": "systems/dnd5e/icons/svg/statuses/invisible.svg",
       "statuses": [
         "invisible"
       ],
@@ -591,6 +618,21 @@
           "sourceId": "Actor.eIQIKf1xngnKcRpg.ActiveEffect.dnd5einvisible00"
         }
       },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "systems/dnd5e/icons/svg/statuses/invisible.svg",
+      "type": "base",
+      "system": {},
+      "tint": "#ffffff",
+      "sort": 0,
       "_key": "!actors.effects!BTQz2q4JJVQn8W5W.huO2iAgLJJHGXWix"
     }
   ],
@@ -600,11 +642,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1712088776020,
-    "modifiedTime": 1714077048621,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725036925220,
+    "modifiedTime": 1725036925220,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!BTQz2q4JJVQn8W5W"

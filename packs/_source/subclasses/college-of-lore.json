@@ -20,7 +20,6 @@
         "_id": "GgjL1Z4CKIkVLcyz",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -35,7 +34,9 @@
         },
         "level": 3,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "pxolz5oyrvbez6aj",
@@ -44,12 +45,18 @@
         "title": "Features",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.e9ytGikyLFgwZ5wi",
-            "Compendium.dnd5e.classfeatures.5zPmHPQUne7RDfaU"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.e9ytGikyLFgwZ5wi",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.5zPmHPQUne7RDfaU",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -64,11 +71,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.myBu3zi5eYvQIcuy"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.myBu3zi5eYvQIcuy",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -87,11 +97,14 @@
         "title": "Features",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.pquwueEMweRhiWaq"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.pquwueEMweRhiWaq",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -105,15 +118,17 @@
         "_id": "zmBtra2UDx5BYyR7",
         "type": "ItemChoice",
         "configuration": {
-          "hint": "Learn two spells of your choice from any class. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip.",
           "choices": {
-            "6": 2
+            "6": {
+              "count": 2,
+              "replacement": false
+            }
           },
           "allowDrops": true,
           "type": "spell",
           "pool": [],
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -126,13 +141,18 @@
             "level": "available"
           }
         },
-        "value": {},
-        "title": "Additional Magical Secrets"
+        "value": {
+          "added": {},
+          "replaced": {}
+        },
+        "title": "Additional Magical Secrets",
+        "hint": "Learn two spells of your choice from any class. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip."
       }
     ],
     "spellcasting": {
       "progression": "none",
-      "ability": ""
+      "ability": "",
+      "preparation": {}
     }
   },
   "effects": [],
@@ -144,11 +164,12 @@
   "flags": {},
   "_id": "MNvsEc4D2ccX7dQT",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234294,
-    "modifiedTime": 1704824716309,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037372893,
+    "modifiedTime": 1725037372893,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!MNvsEc4D2ccX7dQT"

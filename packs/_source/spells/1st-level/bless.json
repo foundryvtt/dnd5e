@@ -16,56 +16,32 @@
     },
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "1",
       "units": "minute"
     },
-    "cover": null,
     "target": {
-      "value": 3,
-      "width": null,
-      "units": "",
-      "type": "creature",
-      "prompt": true
+      "affects": {
+        "type": "creature",
+        "count": "3",
+        "choice": false
+      },
+      "template": {
+        "units": "",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 30,
-      "long": null,
+      "value": "30",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "util",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "1d4",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 1,
     "school": "enc",
@@ -79,17 +55,69 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "level",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
       "material",
       "concentration"
     ],
-    "crewed": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [
+          {
+            "_id": "8rP3gwmXVTgZqYZE"
+          }
+        ],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "roll": {
+          "formula": "1d4",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    }
   },
   "effects": [
     {
@@ -99,27 +127,32 @@
         {
           "key": "system.bonuses.abilities.save",
           "mode": 2,
-          "value": "1d4"
+          "value": "1d4",
+          "priority": null
         },
         {
           "key": "system.bonuses.mwak.attack",
           "mode": 2,
-          "value": "1d4"
+          "value": "1d4",
+          "priority": null
         },
         {
           "key": "system.bonuses.msak.attack",
           "mode": 2,
-          "value": "1d4"
+          "value": "1d4",
+          "priority": null
         },
         {
           "key": "system.bonuses.rsak.attack",
           "mode": 2,
-          "value": "1d4"
+          "value": "1d4",
+          "priority": null
         },
         {
           "key": "system.bonuses.rwak.attack",
           "mode": 2,
-          "value": "1d4"
+          "value": "1d4",
+          "priority": null
         }
       ],
       "disabled": true,
@@ -132,13 +165,26 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/magic/control/buff-flight-wings-blue.webp",
       "origin": "Item.kZZAZ6kp9YzgPQEe",
-      "tint": null,
+      "tint": "#ffffff",
       "transfer": false,
       "name": "Bless",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/control/buff-flight-wings-blue.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE"
     }
   ],
@@ -149,11 +195,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234081,
-    "modifiedTime": 1706147328149,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037349054,
+    "modifiedTime": 1725037349054,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!8dzaICjGy6mTUaUr"

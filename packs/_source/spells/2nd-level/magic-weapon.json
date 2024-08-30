@@ -18,56 +18,29 @@
     },
     "activation": {
       "type": "bonus",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "1",
       "units": "hour"
     },
-    "cover": null,
     "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
+      "affects": {
+        "choice": false
+      },
+      "template": {
+        "units": "",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": null,
-      "long": null,
       "units": "touch"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "ench",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 2,
     "school": "trs",
@@ -81,22 +54,91 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "level",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
       "concentration"
     ],
-    "crewed": false,
-    "enchantment": {
-      "restrictions": {
-        "allowMagical": false,
-        "type": "weapon"
-      },
-      "prompt": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "enchant",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [
+          {
+            "_id": "SLSudYaACjmmmZsU",
+            "level": {
+              "min": null,
+              "max": 3
+            },
+            "riders": []
+          },
+          {
+            "_id": "8OhsRxK3dF1JeQXO",
+            "level": {
+              "min": 4,
+              "max": 5
+            },
+            "riders": []
+          },
+          {
+            "_id": "7L1wKfaEdN85IA0Z",
+            "level": {
+              "min": 6,
+              "max": null
+            },
+            "riders": []
+          }
+        ],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "enchant": {
+          "identifier": ""
+        },
+        "restrictions": {
+          "allowMagical": false,
+          "type": "weapon",
+          "categories": [],
+          "properties": []
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     }
   },
   "sort": 0,
@@ -105,10 +147,8 @@
   "effects": [
     {
       "name": "Magic Weapon, +1",
-      "icon": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
       "flags": {
         "dnd5e": {
-          "type": "enchantment",
           "enchantment": {
             "level": {
               "min": null,
@@ -153,15 +193,27 @@
       "origin": null,
       "transfer": false,
       "statuses": [],
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
+      "type": "enchantment",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!Sgjrf8qqv97CCWM4.SLSudYaACjmmmZsU"
     },
     {
       "name": "Magic Weapon, +2",
-      "icon": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
       "flags": {
         "dnd5e": {
-          "type": "enchantment",
           "enchantment": {
             "level": {
               "min": 4,
@@ -205,16 +257,28 @@
       "origin": null,
       "transfer": false,
       "statuses": [],
-      "tint": null,
+      "tint": "#ffffff",
       "_id": "8OhsRxK3dF1JeQXO",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
+      "type": "enchantment",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!Sgjrf8qqv97CCWM4.8OhsRxK3dF1JeQXO"
     },
     {
       "name": "Magic Weapon, +3",
-      "icon": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
       "flags": {
         "dnd5e": {
-          "type": "enchantment",
           "enchantment": {
             "level": {
               "min": 6,
@@ -258,18 +322,33 @@
       "origin": null,
       "transfer": false,
       "statuses": [],
-      "tint": null,
+      "tint": "#ffffff",
       "_id": "7L1wKfaEdN85IA0Z",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
+      "type": "enchantment",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!Sgjrf8qqv97CCWM4.7L1wKfaEdN85IA0Z"
     }
   ],
   "folder": "Qi4Se3we69ukl2V9",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234141,
-    "modifiedTime": 1715375403560,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037356520,
+    "modifiedTime": 1725037356520,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Sgjrf8qqv97CCWM4"

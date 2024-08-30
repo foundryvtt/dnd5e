@@ -31,7 +31,6 @@
         "_id": "svCkv1ECxsmu2Q7U",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -41,13 +40,14 @@
         },
         "level": 1,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "hZPJWA6MdmFIZuQD",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -62,13 +62,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "tRCVvsqiLStPNyFl",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -84,13 +85,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "wVBCjoHg0ftdHj3m",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -102,13 +104,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "eNU6FoX5sNVbDx13",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -124,12 +127,13 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -146,12 +150,13 @@
         "title": "",
         "_id": "8oBIVC96av3lm5uk",
         "classRestriction": "secondary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -168,13 +173,14 @@
         "title": "",
         "_id": "ELIXk3XCH4EmyiqN",
         "classRestriction": "secondary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "cwu9uhmtcKhqli8W",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "expertise",
           "allowReplacements": false,
           "grants": [],
@@ -189,12 +195,13 @@
         },
         "level": 3,
         "title": "Expertise",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "expertise",
           "allowReplacements": false,
           "grants": [],
@@ -210,18 +217,26 @@
         "level": 10,
         "title": "Expertise",
         "_id": "O2cVH7Y5kNfoUyLg",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.u4NLajXETJhJU31v",
-            "Compendium.dnd5e.classfeatures.hpLNiGq7y67d2EHA"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.u4NLajXETJhJU31v",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.hpLNiGq7y67d2EHA",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -232,19 +247,24 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "oNNPhAIeXhAweeBN"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.ezWijmCnlnQ9ZRX2",
-            "Compendium.dnd5e.classfeatures.he8RpPXwSl2lVSIk"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.ezWijmCnlnQ9ZRX2",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.he8RpPXwSl2lVSIk",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -255,19 +275,24 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "V3KCwHELag3C3YVj"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.ILhzFHiRrqgQ9dFJ",
-            "Compendium.dnd5e.classfeatures.aQLg7BWdRnm4Hr9S"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.ILhzFHiRrqgQ9dFJ",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.aQLg7BWdRnm4Hr9S",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -278,18 +303,20 @@
         "value": {},
         "level": 3,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "MSF1wogSoeJqfxAR"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.3VDZGs5Ug3hIE322"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.3VDZGs5Ug3hIE322",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -300,18 +327,20 @@
         "value": {},
         "level": 5,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "I7HqKmtMcat8Dm08"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.SEJmsjkEhdAZ90ki"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.SEJmsjkEhdAZ90ki",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -322,18 +351,20 @@
         "value": {},
         "level": 6,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "UThCJ6mGUL0XQUb8"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.aonJ2YjkqkYB9WYB"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.aonJ2YjkqkYB9WYB",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -344,18 +375,20 @@
         "value": {},
         "level": 10,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "2fX3mtdNC16A1z7S"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.GBYN5rH4nh1ocRlY"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.GBYN5rH4nh1ocRlY",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -366,23 +399,30 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "ZwU2MLhnY219t78q"
       },
       {
         "type": "ItemChoice",
         "configuration": {
-          "hint": "Choose two spells from any classes, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip.",
           "choices": {
-            "10": 2,
-            "14": 2,
-            "18": 2
+            "10": {
+              "count": 2,
+              "replacement": false
+            },
+            "14": {
+              "count": 2,
+              "replacement": false
+            },
+            "18": {
+              "count": 2,
+              "replacement": false
+            }
           },
           "allowDrops": true,
           "type": "spell",
           "pool": [],
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -395,10 +435,13 @@
             "level": "available"
           }
         },
-        "value": {},
+        "value": {
+          "added": {},
+          "replaced": {}
+        },
         "title": "Magical Secrets",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
-        "_id": "EC1yNAV6khHilOhz"
+        "_id": "EC1yNAV6khHilOhz",
+        "hint": "Choose two spells from any classes, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip."
       },
       {
         "type": "ScaleValue",
@@ -411,25 +454,28 @@
           "scale": {
             "1": {
               "number": null,
-              "faces": 6
+              "faces": 6,
+              "modifiers": []
             },
             "5": {
               "number": null,
-              "faces": 8
+              "faces": 8,
+              "modifiers": []
             },
             "10": {
               "number": null,
-              "faces": 10
+              "faces": 10,
+              "modifiers": []
             },
             "15": {
               "number": null,
-              "faces": 12
+              "faces": 12,
+              "modifiers": []
             }
           }
         },
         "value": {},
         "title": "Bardic Inspiration Die",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "0Ybu5yMjplpTAHiE"
       },
       {
@@ -443,25 +489,28 @@
           "scale": {
             "2": {
               "number": null,
-              "faces": 6
+              "faces": 6,
+              "modifiers": []
             },
             "9": {
               "number": null,
-              "faces": 8
+              "faces": 8,
+              "modifiers": []
             },
             "13": {
               "number": null,
-              "faces": 10
+              "faces": 10,
+              "modifiers": []
             },
             "17": {
               "number": null,
-              "faces": 12
+              "faces": 12,
+              "modifiers": []
             }
           }
         },
         "value": {},
         "title": "Song of Rest Die",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "TK2RAm9EFQtVjDrU"
       },
       {
@@ -486,7 +535,6 @@
         },
         "value": {},
         "title": "Cantrips Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "ovKbtrhfIkYTuThu"
       },
       {
@@ -550,7 +598,6 @@
         },
         "value": {},
         "title": "Spells Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "9FXWVh7OmbPr1iR9"
       },
       {
@@ -565,14 +612,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "sbzvEEntzYcE5JfN"
       },
       {
@@ -587,14 +634,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "adpq4VPJ5oVt8m06"
       },
       {
@@ -609,14 +656,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "jl333Hy4RIPs6J9p"
       },
       {
@@ -631,14 +678,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "Eweg6iXNJ6qIC6rY"
       },
       {
@@ -654,7 +701,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -668,14 +716,13 @@
         "configuration": {},
         "value": {},
         "level": 3,
-        "title": "Bard College",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Bard College"
       }
     ],
     "spellcasting": {
       "progression": "full",
-      "ability": "cha"
+      "ability": "cha",
+      "preparation": {}
     },
     "startingEquipment": [
       {
@@ -787,7 +834,11 @@
         "requiresProficiency": false
       }
     ],
-    "wealth": "5d4 * 10"
+    "wealth": "5d4 * 10",
+    "primaryAbility": {
+      "value": [],
+      "all": true
+    }
   },
   "effects": [],
   "folder": "T6msdzH93deRLFQg",
@@ -797,11 +848,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234279,
-    "modifiedTime": 1709764534497,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037370947,
+    "modifiedTime": 1725037370947,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ILvRZGEx3aXqSVUt"
