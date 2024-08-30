@@ -1,5 +1,4 @@
 import FormulaField from "../data/fields/formula-field.mjs";
-import { EnchantmentData } from "../data/item/fields/enchantment-field.mjs";
 import { staticID } from "../utils.mjs";
 
 /**
@@ -125,9 +124,6 @@ export default class ActiveEffect5e extends ActiveEffect {
       ? actor.system.schema.getField(change.key.slice(7))
       : actor.schema.getField(change.key);
 
-    // Get the current value of the target field
-    const current = foundry.utils.getProperty(actor, change.key) ?? null;
-
     const getTargetType = field => {
       if ( (field instanceof FormulaField) || ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) return "formula";
       else if ( field instanceof foundry.data.fields.ArrayField ) return "Array";
@@ -140,6 +136,9 @@ export default class ActiveEffect5e extends ActiveEffect {
     const targetType = getTargetType(field);
     if ( !targetType ) return super.apply(actor, change);
     const modes = CONST.ACTIVE_EFFECT_MODES;
+
+    // Get the current value of the target field
+    const current = foundry.utils.getProperty(actor, change.key) ?? null;
 
     // Special handling for FormulaField
     if ( targetType === "formula" ) {
@@ -192,6 +191,14 @@ export default class ActiveEffect5e extends ActiveEffect {
     // Apply all changes to the Actor data
     foundry.utils.mergeObject(actor, changes);
     return changes;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _applyLegacy(actor, change, changes) {
+    if ( this.system._applyLegacy?.(actor, change, changes) === false ) return;
+    super._applyLegacy(actor, change, changes);
   }
 
   /* -------------------------------------------- */
@@ -456,7 +463,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     if ( this.isAppliedEnchantment ) {
       const origin = await fromUuid(this.origin);
-      const errors = origin?.canEnchant(this.parent);
+      const errors = origin?.canEnchant?.(this.parent);
       if ( errors?.length ) {
         errors.forEach(err => console.error(err));
         return false;

@@ -531,8 +531,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /** @inheritDoc */
   clone(data={}, options={}) {
     if ( options.save ) return super.clone(data, options);
+    if ( this.parent ) this.parent._embeddedPreparation = true;
     const item = super.clone(data, options);
-    if ( item.parent ) item.prepareFinalAttributes();
+    if ( item.parent ) {
+      delete item.parent._embeddedPreparation;
+      item.prepareFinalAttributes();
+    }
     return item;
   }
 

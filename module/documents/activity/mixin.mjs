@@ -1005,6 +1005,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   getRollData(options) {
     const rollData = this.item.getRollData(options);
+    rollData.activity = { ...this };
     rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
     return rollData;
   }
