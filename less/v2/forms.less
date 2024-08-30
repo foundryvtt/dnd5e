@@ -26,6 +26,7 @@
     line-height: normal;
 
     > i { margin: 0; }
+    &:hover, &:focus { background: none; }
   }
 
   fieldset.unfieldset {
@@ -522,6 +523,7 @@
     &:focus-visible, &:hover {
       box-shadow: none;
       text-shadow: 0 0 5px var(--color-shadow-primary);
+      background: none;
     }
   }
 
@@ -551,7 +553,12 @@
       margin: 0;
 
       &.filled { background: var(--dnd5e-color-gold); }
-      &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+
+      &:not(:disabled):is(:hover, :focus) {
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+        background: var(--dnd5e-color-light-gray);
+        &.filled { background: var(--dnd5e-color-gold); }
+      }
     }
   }
 }

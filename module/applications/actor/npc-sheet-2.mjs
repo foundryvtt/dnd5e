@@ -201,14 +201,34 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     };
     features.forEach(section => {
       section.categories = [
-        { classes: "item-uses", label: "DND5E.Uses", partial: "dnd5e.column-uses" },
-        { classes: "item-roll", label: "DND5E.SpellHeader.Roll", partial: "dnd5e.column-roll" },
-        { classes: "item-formula", label: "DND5E.SpellHeader.Formula", partial: "dnd5e.column-formula" },
-        { classes: "item-controls", partial: "dnd5e.column-feature-controls" }
+        {
+          classes: "item-uses", label: "DND5E.Uses", itemPartial: "dnd5e.column-uses",
+          activityPartial: "dnd5e.activity-column-uses"
+        },
+        {
+          classes: "item-roll", label: "DND5E.SpellHeader.Roll", itemPartial: "dnd5e.column-roll",
+          activityPartial: "dnd5e.activity-column-roll"
+        },
+        {
+          classes: "item-formula", label: "DND5E.SpellHeader.Formula", itemPartial: "dnd5e.column-formula",
+          activityPartial: "dnd5e.activity-column-formula"
+        },
+        {
+          classes: "item-controls", itemPartial: "dnd5e.column-feature-controls",
+          activityPartial: "dnd5e.activity-column-controls"
+        }
       ];
     });
     context.inventory = Object.values(inventory);
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
+    context.inventory.forEach(section => {
+      section.categories = [
+        { activityPartial: "dnd5e.activity-column-price" },
+        { activityPartial: "dnd5e.activity-column-weight" },
+        { activityPartial: "dnd5e.activity-column-quantity" },
+        { activityPartial: "dnd5e.activity-column-uses" }
+      ];
+    });
     context.classes = classes;
     context.hasClasses = classes.length;
   }

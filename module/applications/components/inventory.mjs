@@ -333,14 +333,18 @@ export default class InventoryElement extends HTMLElement {
     // If this is already handled by the parent sheet, skip.
     if ( this.#app?._onChangeInputDelta ) return;
     const input = event.target;
-    const itemId = input.closest("[data-item-id]")?.dataset.itemId;
+    const { itemId } = input.closest("[data-item-id]")?.dataset ?? {};
+    const { activityId } = input.closest("[data-activity-id]")?.dataset ?? {};
     const item = await this.getItem(itemId);
     if ( !item ) return;
-    const result = parseInputDelta(input, item);
+    const activity = item.system.activities?.get(activityId);
+    const result = parseInputDelta(input, activity ?? item);
     if ( result !== undefined ) {
       // Special case handling for Item uses.
       if ( input.dataset.name === "system.uses.value" ) {
         item.update({ "system.uses.spent": item.system.uses.max - result });
+      } else if ( activity && (input.dataset.name === "uses.value") ) {
+        item.updateActivity(activityId, { "uses.spent": activity.uses.max - result });
       }
       else item.update({ [input.dataset.name]: result });
     }
@@ -385,11 +389,15 @@ export default class InventoryElement extends HTMLElement {
     });
     if ( target.dispatchEvent(inventoryEvent) === false ) return;
 
-    const itemId = target.closest("[data-item-id]")?.dataset.itemId;
+    const { itemId } = target.closest("[data-item-id]")?.dataset ?? {};
+    const { activityId } = target.closest("[data-activity-id]")?.dataset ?? {};
     const item = await this.getItem(itemId);
     if ( !["create", "currency"].includes(action) && !item ) return;
+    const activity = item.system.activities?.get(activityId);
 
     switch ( action ) {
+      case "activity-use":
+        return activity?.use({ event });
       case "attune":
         return item.update({"system.attuned": !item.system.attuned});
       case "create":

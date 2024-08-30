@@ -241,6 +241,8 @@
           font-size: var(--font-size-13);
         }
 
+        &.activity-name .title { font-size: var(--font-size-12); }
+
         .name { flex: 1; }
 
         .tags {
@@ -291,6 +293,17 @@
         object-fit: cover;
         min-width: 32px;
         min-height: 32px;
+
+        &.activity-image {
+          --icon-size: 24px;
+          --icon-fill: var(--color-text-dark-primary);
+          width: 24px;
+          height: 24px;
+          min-width: 24px;
+          min-height: 24px;
+          border-width: 1px;
+          border-radius: 3px;
+        }
       }
 
       /* Item Weight & Price */
@@ -543,6 +556,23 @@
     .effect {
       display: flex;
       align-items: stretch;
+    }
+
+    .activities .activity-row {
+      position: relative;
+      border-top: 1px dotted #ddd;
+      padding-left: 20px;
+
+      &:last-child { border-bottom: 1px dotted #ddd; }
+
+      &::before {
+        content: "┗";
+        position: absolute;
+        inset: 9px auto auto 5px;
+        font-size: var(--font-size-12);
+        font-weight: bold;
+        color: var(--color-text-light-6);
+      }
     }
   }
 

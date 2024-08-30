@@ -1,0 +1,8 @@
+<div class="item-detail item-uses {{#unless uses.max}}empty{{/unless}}">
+    {{#if uses.max}}
+    <input type="text" value="{{ uses.value }}" placeholder="0" data-dtype="Number" data-name="uses.value"
+           inputmode="numeric" pattern="[+=\-]?\d">
+    <span class="separator">&sol;</span>
+    <span class="max">{{ uses.max }}</span>
+    {{/if}}
+</div>

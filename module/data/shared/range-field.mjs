@@ -38,10 +38,10 @@ export default class RangeField extends SchemaField {
     } else this.range.value = null;
 
     if ( labels && this.range.units ) {
-      const parts = [this.range.value];
-      if ( this.range.units in CONFIG.DND5E.movementUnits ) {
-        parts.push(game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`));
-      } else {
+      const parts = [];
+      if ( this.range.scalar && this.range.value ) {
+        parts.push(this.range.value, game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`));
+      } else if ( !this.range.scalar ) {
         parts.push(CONFIG.DND5E.distanceUnits[this.range.units]);
       }
       labels.range = parts.filterJoin(" ");

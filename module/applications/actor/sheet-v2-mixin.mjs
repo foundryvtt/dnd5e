@@ -382,6 +382,28 @@ export default function ActorSheetV2Mixin(Base) {
 
       // Save
       ctx.save = item.system.activities?.getByType("save")[0]?.save;
+
+      // Activities
+      ctx.activities = item.system.activities?.map(this._prepareActivity.bind(this));
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Prepare activity data.
+     * @param {Activity} activity  The activity.
+     * @returns {object}
+     * @protected
+     */
+    _prepareActivity(activity) {
+      const { _id, img, labels, name, uses } = activity;
+      return {
+        _id, labels, name, uses,
+        icon: {
+          src: img,
+          svg: img.endsWith(".svg")
+        }
+      };
     }
 
     /* -------------------------------------------- */
