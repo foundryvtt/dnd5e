@@ -54,8 +54,11 @@ const {
  * @property {string} details.bond                        Character's bonds.
  * @property {string} details.flaw                        Character's flaws.
  * @property {object} traits
- * @property {SimpleTraitData} traits.weaponProf          Character's weapon proficiencies.
- * @property {SimpleTraitData} traits.armorProf           Character's armor proficiencies.
+ * @property {SimpleTraitData} traits.weaponProf             Character's weapon proficiencies.
+ * @property {Set<string>} traits.weaponProf.mastery.value   Weapon masteries.
+ * @property {Set<string>} traits.weaponProf.mastery.bonus   Extra mastery properties that can be chosen when making an
+ *                                                           attack with a weapon that has mastery.
+ * @property {SimpleTraitData} traits.armorProf              Character's armor proficiencies.
  * @property {object} resources
  * @property {CharacterResourceData} resources.primary    Resource number one.
  * @property {CharacterResourceData} resources.secondary  Resource number two.
@@ -139,7 +142,10 @@ export default class CharacterData extends CreatureTemplate {
         ...TraitsFields.creature,
         weaponProf: TraitsFields.makeSimpleTrait({ label: "DND5E.TraitWeaponProf" }, {
           extraFields: {
-            mastery: new SetField(new StringField())
+            mastery: new SchemaField({
+              value: new SetField(new StringField()),
+              bonus: new SetField(new StringField())
+            })
           }
         }),
         armorProf: TraitsFields.makeSimpleTrait({ label: "DND5E.TraitArmorProf" })

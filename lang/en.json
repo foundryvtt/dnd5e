@@ -2142,7 +2142,6 @@
       "onSave": {
         "label": "Damage on Save",
         "hint": "How much damage should be applied on a successful save?",
-        "Flavor": "<strong>On Save</strong> {amount}",
         "Full": "Full Damage",
         "Half": "Half Damage",
         "None": "No Damage"
@@ -2178,7 +2177,8 @@
         "DefaultFormula": "8 + @mod + @prof"
       }
     }
-  }
+  },
+  "OnSave": "On Save"
 },
 
 "DND5E.SaveBonus": "Saving Throw Bonus",
@@ -2965,6 +2965,7 @@
   },
   "Mastery": {
     "Label": "Weapon Mastery",
+    "Flavor": "Mastery",
     "Cleave": "Cleave",
     "Graze": "Graze",
     "Nick": "Nick",

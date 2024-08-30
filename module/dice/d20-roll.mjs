@@ -244,6 +244,7 @@ export default class D20Roll extends Roll {
    * @param {FormSelectOption[]} [data.attackModes]        Selectable attack modes.
    * @param {boolean} [data.chooseModifier]   Choose which ability modifier should be applied to the roll?
    * @param {string} [data.defaultAbility]    For tool rolls, the default ability modifier applied to the roll
+   * @param {FormSelectOption[]} [data.masteryOptions]     Selectable weapon masteries.
    * @param {string} [data.template]          A custom path to an HTML template to use instead of the default
    * @param {object} options                  Additional Dialog customization options
    * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the
@@ -251,7 +252,7 @@ export default class D20Roll extends Roll {
    */
   async configureDialog({
     title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, ammunitionOptions,
-    attackModes, chooseModifier=false, defaultAbility, template
+    attackModes, chooseModifier=false, defaultAbility, masteryOptions, template
   }={}, options={}) {
 
     // Render the Dialog inner HTML
@@ -263,6 +264,7 @@ export default class D20Roll extends Roll {
       attackModes,
       chooseModifier,
       defaultAbility,
+      masteryOptions,
       abilities: CONFIG.DND5E.abilities
     });
 
@@ -337,6 +339,9 @@ export default class D20Roll extends Roll {
       });
       this.options.flavor += ` (${CONFIG.DND5E.abilities[submitData.ability]?.label ?? ""})`;
     }
+
+    // Set the mastery
+    if ( submitData.mastery ) this.options.mastery = submitData.mastery;
 
     // Apply advantage or disadvantage
     this.options.advantageMode = advantageMode;

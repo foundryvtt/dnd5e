@@ -373,10 +373,25 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _enrichAttackTargets(html) {
     const attackRoll = this.rolls[0];
-    const targets = this.getFlag("dnd5e", "targets");
     const visibility = game.settings.get("dnd5e", "attackRollVisibility");
     const isVisible = game.user.isGM || (visibility !== "none");
-    if ( !isVisible || !(attackRoll instanceof dnd5e.dice.D20Roll) || !targets?.length ) return;
+    if ( !isVisible || !(attackRoll instanceof dnd5e.dice.D20Roll) ) return;
+
+    const masteryConfig = CONFIG.DND5E.weaponMasteries[attackRoll.options.mastery];
+    if ( masteryConfig ) {
+      const p = document.createElement("p");
+      p.classList.add("supplement");
+      let mastery = masteryConfig.label;
+      if ( masteryConfig.reference ) mastery = `
+        <a class="content-link" draggable="true" data-link data-uuid="${masteryConfig.reference}"
+           data-tooltip="${mastery}">${mastery}</a>
+      `;
+      p.innerHTML = `<strong>${game.i18n.format("DND5E.WEAPON.Mastery.Flavor")}</strong> ${mastery}`;
+      (html.querySelector(".chat-card") ?? html.querySelector(".message-content"))?.appendChild(p);
+    }
+
+    const targets = this.getFlag("dnd5e", "targets");
+    if ( !targets?.length ) return;
     const tray = document.createElement("div");
     tray.classList.add("dnd5e2");
     tray.innerHTML = `
@@ -478,9 +493,9 @@ export default class ChatMessage5e extends ChatMessage {
     if ( damageOnSave ) {
       const p = document.createElement("p");
       p.classList.add("supplement");
-      p.innerHTML = game.i18n.format("DND5E.SAVE.FIELDS.damage.onSave.Flavor", {
-        amount: game.i18n.localize(`DND5E.SAVE.FIELDS.damage.onSave.${damageOnSave.capitalize()}`)
-      });
+      p.innerHTML = `<strong>${game.i18n.format("DND5E.SAVE.OnSave")}</strong> ${
+        game.i18n.localize(`DND5E.SAVE.FIELDS.damage.onSave.${damageOnSave.capitalize()}`)
+      }`;
       html.querySelector(".chat-card, .message-content")?.appendChild(p);
     }
 

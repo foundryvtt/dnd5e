@@ -44,8 +44,8 @@
         {{> ".weapon-list" choices=children topLevel=false }}
         {{else}}
         <div class="mastery">
-            {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.mastery." @key) value=mastery.chosen
-                         disabled=mastery.disabled input=@root.inputs.createCheckboxInput }}
+            {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.mastery.value." @key)
+                         value=mastery.chosen disabled=mastery.disabled input=@root.inputs.createCheckboxInput }}
         </div>
         {{/if}}
     </li>

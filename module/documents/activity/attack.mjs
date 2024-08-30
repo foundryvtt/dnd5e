@@ -115,6 +115,18 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       }
     }].concat(config.rolls ?? []);
 
+    const masteryOptions = this.item.system.masteryOptions;
+    if ( config.mastery ) rollConfig.rolls[0].options.mastery = config.mastery;
+    else {
+      const stored = this.item.getFlag("dnd5e", `last.${this.id}.mastery`);
+      const match = masteryOptions.find(m => m.value === stored);
+      if ( match ) {
+        rollConfig.rolls[0].options.mastery = stored;
+        match.selected = true;
+      }
+    }
+    if ( masteryOptions?.length ) rollConfig.rolls[0].options.mastery ??= masteryOptions[0].value;
+
     const dialogConfig = foundry.utils.mergeObject({
       configure: true,
       options: {
@@ -122,7 +134,8 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         top: config.event ? config.event.clientY - 80 : null,
         left: window.innerWidth - 710,
         ammunitionOptions: rollConfig.ammunition !== false ? ammunitionOptions : undefined,
-        attackModes
+        attackModes,
+        masteryOptions: (masteryOptions?.length > 1) && !config.mastery ? masteryOptions : undefined
       }
     }, dialog);
 
@@ -162,12 +175,14 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       critical: rollConfig.rolls[0].options.criticalSuccess,
       fumble: rollConfig.rolls[0].options.criticalFailure,
       targetValue: rollConfig.rolls[0].options.target,
+      mastery: rollConfig.rolls[0].options.mastery,
       elvenAccuracy: rollConfig.elvenAccuracy,
       halflingLucky: rollConfig.halflingLucky,
       reliableTalent: rollConfig.rolls[0].options.minimum === 10,
       fastForward: !dialogConfig.configure,
       ammunitionOptions: dialogConfig.options.ammunitionOptions,
       attackModes: dialogConfig.options.attackModes,
+      masteryOptions: dialogConfig.options.masteryOptions,
       title: dialogConfig.options.title,
       dialogOptions: dialogConfig.options,
       chatMessage: messageConfig.create,
@@ -187,17 +202,17 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     const roll = await d20Roll(oldRollConfig);
     if ( roll === null ) return;
 
+    const flags = {};
     const ammo = this.actor?.items.get(roll.options.ammunition);
     let ammoUpdate = null;
     if ( ammo ) {
       ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
       ammoUpdate.destroy = ammo.system.uses.autoDestroy && (ammoUpdate.quantity === 0);
-      await this.item.setFlag("dnd5e", `last.${this.id}.ammunition`, roll.options.ammunition);
+      flags.ammunition = roll.options.ammunition;
     }
-
-    if ( roll.options.attackMode ) {
-      await this.item.setFlag("dnd5e", `last.${this.id}.attackMode`, roll.options.attackMode);
-    }
+    if ( roll.options.attackMode ) flags.attackMode = roll.options.attackMode;
+    if ( roll.options.mastery ) flags.mastery = roll.options.mastery;
+    if ( !foundry.utils.isEmpty(flags) ) await this.item.setFlag("dnd5e", `last.${this.id}`, flags);
 
     /**
      * A hook event that fires after an attack has been rolled but before any ammunition is consumed.
