@@ -115,7 +115,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       }
     }].concat(config.rolls ?? []);
 
-    const masteryOptions = this.item.system.masteryOptions;
+    const masteryOptions = this.item.system.masteryOptions ?? [];
     if ( config.mastery ) rollConfig.rolls[0].options.mastery = config.mastery;
     else {
       const stored = this.item.getFlag("dnd5e", `last.${this.id}.mastery`);
