@@ -43,8 +43,9 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
     if ( this.preparation ) foundry.utils.setProperty(itemData, "system.preparation.mode", this.preparation);
 
     if ( this.uses.max && this.uses.per ) {
-      foundry.utils.setProperty(itemData, "system.uses.per", this.uses.per);
       foundry.utils.setProperty(itemData, "system.uses.max", this.uses.max);
+      itemData.system.uses.recovery ??= [];
+      itemData.system.uses.recovery.push({ period: this.uses.per, type: "recoverAll" });
 
       const preparationConfig = CONFIG.DND5E.spellPreparationModes[itemData.system.preparation?.mode];
       const createForwardActivity = !this.uses.requireSlot && preparationConfig?.upcast;
