@@ -382,8 +382,8 @@
 
       .item-school {
         --icon-fill: var(--dnd5e-color-gold);
+        --icon-size: 18px;
         display: none;
-        &.item-detail { font-size: var(--font-size-18); }
       }
 
       .item-roll {
@@ -502,15 +502,12 @@
       }
 
       /* Item Description */
-      .item-description {
+      .item-description .item-summary {
         font-size: var(--font-size-11);
-
-        .item-summary {
-          padding: 1px 8px 8px;
-          background: var(--dnd5e-color-parchment);
-          .item-properties { padding-top: 7px; }
-          > * + .item-properties { padding-top: 0; }
-        }
+        padding: 1px 8px 8px;
+        background: var(--dnd5e-color-parchment);
+        .item-properties { padding-top: 7px; }
+        > * + .item-properties { padding-top: 0; }
       }
 
       @container (min-width: 580px) {

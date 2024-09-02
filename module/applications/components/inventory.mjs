@@ -396,6 +396,8 @@ export default class InventoryElement extends HTMLElement {
     const activity = item.system.activities?.get(activityId);
 
     switch ( action ) {
+      case "activity-recharge":
+        return activity?.uses?.rollRecharge();
       case "activity-use":
         return activity?.use({ event });
       case "attune":
