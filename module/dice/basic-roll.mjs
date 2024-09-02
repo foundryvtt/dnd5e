@@ -56,6 +56,35 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  * Custom base roll type with methods for building rolls, presenting prompts, and creating messages.
  */
 export default class BasicRoll extends Roll {
+  constructor(formula, data={}, options={}) {
+    super(formula, data, options);
+    this.#configure();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Replace roll terms with numeric values.
+   */
+  #configure() {
+    for ( const die of this.dice ) {
+      const n = die._number;
+      if ( (n instanceof BasicRoll) && n.isDeterministic ) die._number = n.evaluateSync().total;
+      const f = die._faces;
+      if ( (f instanceof BasicRoll) && f.isDeterministic ) die._faces = f.evaluateSync().total;
+
+      // Preserve flavor.
+      if ( f.terms?.[0]?.flavor ) die.options.flavor = f.terms[0].flavor;
+    }
+
+    for ( const [i, term] of this.terms.entries() ) {
+      if ( (term.roll instanceof BasicRoll) && term.isDeterministic ) {
+        this.terms[i] = new foundry.dice.terms.NumericTerm({ number: term.roll.evaluateSync().total });
+      }
+    }
+
+    this.resetFormula();
+  }
 
   /**
    * Default application used for the roll configuration prompt.
