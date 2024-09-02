@@ -214,7 +214,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     if ( "dnd5e.preUseItem" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preUseItem` hook has been deprecated and replaced with `dnd5e.preUseItem`.",
+        "The `dnd5e.preUseItem` hook has been deprecated and replaced with `dnd5e.preUseActivity`.",
         { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
       const { config, options } = this._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
