@@ -92,6 +92,30 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
           keyPath: "system.school"
         }
       }],
+      ["spelllist", {
+        label: "TYPES.JournalEntryPage.spells",
+        type: "set",
+        createFilter: (filters, value, def) => {
+          let include = new Set();
+          let exclude = new Set();
+          for ( const [type, identifiers] of Object.entries(value ?? {}) ) {
+            for ( const [identifier, v] of Object.entries(identifiers) ) {
+              const list = dnd5e.registry.spellLists.forType(type, identifier);
+              if ( !list || (v === 0) ) continue;
+              if ( v === 1 ) include = include.union(list.uuids);
+              else if ( v === -1 ) exclude = exclude.union(list.uuids);
+            }
+          }
+          if ( include.size ) filters.push({ k: "uuid", o: "in", v: include });
+          if ( exclude.size ) filters.push({ o: "NOT", v: { k: "uuid", o: "in", v: exclude } });
+        },
+        config: {
+          choices: dnd5e.registry.spellLists.options.reduce((obj, entry) => {
+            obj[`${entry.type}.${entry.value}`] = entry.label;
+            return obj;
+          }, {})
+        }
+      }],
       ["properties", this.compendiumBrowserPropertiesFilter("spell")]
     ]);
   }
@@ -193,7 +217,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
           Array.from(dnd5e.registry.spellLists.forSpell(uuid))
             .filter(list => list.metadata.type === "class")
             .map(list => list.name)
-            .sort((lhs, rhs) => lhs.localeCompare(rhs))
+            .sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang))
         );
       },
       configurable: true

@@ -137,7 +137,7 @@ class ItemRegistry {
   get options() {
     return Array.from(this.#items.entries())
       .map(([value, data]) => ({ value, label: data.name }))
-      .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label));
+      .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
@@ -263,7 +263,7 @@ class SpellListRegistry {
 
   /**
    * Registration of spell lists grouped by type and identifier.
-   * @type {Map<string, SpellList>}
+   * @type {Map<string, Map<string, SpellList>>}
    */
   static #byType = new Map();
 
@@ -274,6 +274,22 @@ class SpellListRegistry {
    * @type {Set<string>}
    */
   static #loading = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Options for each registered spell list, grouped by type.
+   * @type {FormSelectOption[]}
+   */
+  static get options() {
+    return Object.entries(CONFIG.DND5E.spellListTypes).map(([type, group]) => {
+      const lists = this.#byType.get(type);
+      if ( !lists ) return [];
+      return Array.from(lists.entries())
+        .map(([value, list]) => ({ value, label: list.name, group, type }))
+        .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+    }).flat();
+  }
 
   /* -------------------------------------------- */
 
@@ -295,7 +311,7 @@ class SpellListRegistry {
    * @returns {Set<SpellList>}
    */
   static forSpell(uuid) {
-    return this.#bySpell.get(uuid) ?? new Set();
+    return SpellListRegistry.#bySpell.get(uuid) ?? new Set();
   }
 
   /* -------------------------------------------- */
@@ -307,7 +323,7 @@ class SpellListRegistry {
    * @returns {SpellList|null}
    */
   static forType(type, identifier) {
-    return this.#byType.get(`${type}.${identifier}`) ?? null;
+    return SpellListRegistry.#byType.get(type)?.get(identifier) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -328,12 +344,14 @@ class SpellListRegistry {
     if ( !page ) throw new Error(`Journal entry page "${uuid}" could not be found to register as spell list.`);
     if ( page.type !== "spells" ) throw new Error(`Journal entry page "${uuid}" is not a Spell List.`);
 
-    const id = `${page.system.type}.${page.system.identifier}`;
-    if ( !SpellListRegistry.#byType.has(id) ) SpellListRegistry.#byType.set(id, new SpellList({
+    if ( !SpellListRegistry.#byType.has(page.system.type) ) SpellListRegistry.#byType.set(page.system.type, new Map());
+
+    const type = SpellListRegistry.#byType.get(page.system.type);
+    if ( !type.has(page.system.identifier) ) type.set(page.system.identifier, new SpellList({
       identifier: page.system.identifier, name: page.name, type: page.system.type
     }));
 
-    const list = SpellListRegistry.#byType.get(id);
+    const list = type.get(page.system.identifier);
     list.contribute(page).forEach(uuid => {
       if ( !SpellListRegistry.#bySpell.has(uuid) ) SpellListRegistry.#bySpell.set(uuid, new Set());
       SpellListRegistry.#bySpell.get(uuid).add(list);
@@ -373,7 +391,7 @@ export class SpellList {
   get indexes() {
     return Array.from(this.#spells.keys())
       .map(s => fromUuidSync(s))
-      .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+      .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
