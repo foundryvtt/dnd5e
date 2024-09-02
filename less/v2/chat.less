@@ -305,7 +305,6 @@
     border: none;
     position: absolute;
     inset: 0 0 auto 0;
-    height: 54px;
     z-index: 1;
     padding: 7px 6px 0 0;
 
@@ -333,6 +332,11 @@
       margin: 0;
       box-shadow: 0 0 20px var(--color-shadow-dark);
     }
+  }
+
+  &.minimized {
+    background: url("../../ui/denim075.png");
+    max-height: var(--header-height);
   }
 
   .message-metadata { padding-right: 18px; }
