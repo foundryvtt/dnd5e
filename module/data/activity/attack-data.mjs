@@ -179,6 +179,7 @@ export default class AttackActivityData extends BaseActivityData {
     if ( this.damage.includeBase && this.item.system.offersBaseDamage && this.item.system.damage.base.formula ) {
       const basePart = this.item.system.damage.base.clone();
       basePart.base = true;
+      basePart.locked = true;
       this.damage.parts.unshift(basePart);
     }
 

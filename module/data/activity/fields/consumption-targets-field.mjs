@@ -627,7 +627,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {object} [options={}]
    * @param {boolean} [options.evaluate=true]  Should the slot roll be evaluated?
    * @param {BasicRoll[]} [options.rolls]      Rolls performed as part of the usages.
-   * @returns {Promise<BasicRoll>}
+   * @returns {Promise<BasicRoll>|BasicRoll}
    * @internal
    */
   _resolveScaledRoll(formula, scaling, { evaluate=true, rolls }={}) {
