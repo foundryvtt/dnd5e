@@ -106,9 +106,11 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     }));
 
     // Senses
-    context.senses.passivePerception = {
-      label: game.i18n.localize("DND5E.PassivePerception"), value: this.actor.system.skills.prc.passive
-    };
+    if ( this.actor.system.skills.prc ) {
+      context.senses.passivePerception = {
+        label: game.i18n.localize("DND5E.PassivePerception"), value: this.actor.system.skills.prc.passive
+      };
+    }
 
     // Legendary Actions & Resistances
     const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
