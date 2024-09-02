@@ -697,6 +697,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "critical": {
                 "allow": false,
@@ -721,10 +726,6 @@
                   }
                 }
               ]
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           },
@@ -781,6 +782,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "onSave": "half",
               "parts": [
@@ -809,10 +815,6 @@
                 "calculation": "",
                 "formula": "15"
               }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1093,15 +1095,16 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1283,6 +1286,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "attack": {
               "ability": "str",
               "bonus": "",
@@ -1301,10 +1309,6 @@
               },
               "includeBase": true,
               "parts": []
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1485,6 +1489,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "attack": {
               "ability": "str",
               "bonus": "",
@@ -1503,10 +1512,6 @@
               },
               "includeBase": true,
               "parts": []
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1633,6 +1638,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "healing": {
               "number": 2,
               "denomination": 8,
@@ -1649,10 +1659,6 @@
                 "number": null,
                 "formula": ""
               }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1784,15 +1790,16 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2086,15 +2093,16 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2218,15 +2226,16 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2349,6 +2358,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "healing": {
               "number": 2,
               "denomination": 8,
@@ -2365,10 +2379,6 @@
                 "number": null,
                 "formula": ""
               }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2504,15 +2514,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2640,15 +2651,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2779,15 +2791,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2933,6 +2946,11 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "onSave": "half",
               "parts": []
@@ -2943,10 +2961,6 @@
                 "calculation": "spellcasting",
                 "formula": "14"
               }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -3094,6 +3108,11 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "attack": {
               "ability": "",
               "bonus": "",
@@ -3112,10 +3131,6 @@
               },
               "includeBase": true,
               "parts": []
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           },
@@ -3168,6 +3183,11 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "onSave": "half",
               "parts": []
@@ -3178,10 +3198,6 @@
                 "calculation": "spellcasting",
                 "formula": "14"
               }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -3327,6 +3343,11 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "onSave": "half",
               "parts": []
@@ -3337,10 +3358,6 @@
                 "calculation": "spellcasting",
                 "formula": "14"
               }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -3386,8 +3403,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725036930357,
-    "modifiedTime": 1725036930357,
+    "createdTime": 1725299621831,
+    "modifiedTime": 1725299621831,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!G9PENY6nw0xRxCJW"

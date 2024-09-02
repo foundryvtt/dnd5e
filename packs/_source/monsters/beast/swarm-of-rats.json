@@ -877,6 +877,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "attack": {
               "ability": "dex",
               "bonus": "",
@@ -895,10 +900,6 @@
               },
               "includeBase": true,
               "parts": []
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -939,8 +940,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725036921789,
-    "modifiedTime": 1725036921789,
+    "createdTime": 1725299613303,
+    "modifiedTime": 1725299613303,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!8ihbbjkaOFTPbI73"

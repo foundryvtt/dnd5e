@@ -40,7 +40,7 @@
           "targets": [
             {
               "type": "attribute",
-              "target": "resources.legact.value",
+              "target": "",
               "value": "2",
               "scaling": {
                 "mode": "",
@@ -88,6 +88,11 @@
           },
           "prompt": true,
           "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
         },
         "damage": {
           "critical": {
@@ -131,10 +136,6 @@
             }
           ]
         },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
         "sort": 0
       },
       "dnd5eactivity100": {
@@ -150,7 +151,7 @@
           "targets": [
             {
               "type": "attribute",
-              "target": "resources.legact.value",
+              "target": "",
               "value": "2",
               "scaling": {
                 "mode": "",
@@ -198,6 +199,11 @@
           },
           "prompt": true,
           "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
         },
         "damage": {
           "onSave": "half",
@@ -245,10 +251,6 @@
             "formula": "23"
           }
         },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
         "sort": 0
       }
     },
@@ -268,8 +270,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037401313,
-    "modifiedTime": 1725037401313,
+    "createdTime": 1725300164879,
+    "modifiedTime": 1725300164879,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!5OYruoI92fxTOLts"

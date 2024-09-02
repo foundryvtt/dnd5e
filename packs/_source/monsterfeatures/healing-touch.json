@@ -94,6 +94,11 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
         "healing": {
           "number": null,
           "denomination": null,
@@ -109,10 +114,6 @@
             "formula": ""
           }
         },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
         "sort": 0
       }
     },
@@ -122,7 +123,11 @@
     },
     "properties": []
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "migratedUses": 3
+    }
+  },
   "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
   "effects": [],
   "folder": null,
@@ -132,8 +137,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037413507,
-    "modifiedTime": 1725037413507,
+    "createdTime": 1725300179146,
+    "modifiedTime": 1725300179146,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!r3Ugp8f5Ckw2EUHL"

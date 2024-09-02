@@ -735,6 +735,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "attack": {
               "ability": "",
               "bonus": "",
@@ -753,10 +758,6 @@
               },
               "includeBase": true,
               "parts": []
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -797,8 +798,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725036945958,
-    "modifiedTime": 1725036945958,
+    "createdTime": 1725299638545,
+    "modifiedTime": 1725299638545,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Tac7eq0AXJco0nml"

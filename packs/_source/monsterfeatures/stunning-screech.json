@@ -95,6 +95,11 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
         "damage": {
           "onSave": "half",
           "parts": []
@@ -106,10 +111,6 @@
             "formula": "14"
           }
         },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
         "sort": 0
       }
     },
@@ -119,7 +120,11 @@
     },
     "properties": []
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "migratedUses": 1
+    }
+  },
   "img": "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
   "effects": [],
   "folder": null,
@@ -129,8 +134,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037408616,
-    "modifiedTime": 1725037408616,
+    "createdTime": 1725300173554,
+    "modifiedTime": 1725300173554,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!aD3HKoBnJtZL6cDj"

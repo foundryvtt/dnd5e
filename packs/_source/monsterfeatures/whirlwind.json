@@ -43,7 +43,17 @@
           "override": false
         },
         "consumption": {
-          "targets": [],
+          "targets": [
+            {
+              "type": "activityUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
           "scaling": {
             "allowed": false,
             "max": ""
@@ -85,15 +95,22 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "1",
+          "recovery": [
+            {
+              "period": "recharge",
+              "type": "recoverAll",
+              "formula": "4"
+            }
+          ]
+        },
         "roll": {
           "formula": "",
           "name": "",
           "prompt": false,
           "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
         },
         "sort": 0
       },
@@ -107,7 +124,17 @@
           "override": false
         },
         "consumption": {
-          "targets": [],
+          "targets": [
+            {
+              "type": "activityUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
           "scaling": {
             "allowed": false,
             "max": ""
@@ -149,6 +176,17 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "1",
+          "recovery": [
+            {
+              "period": "recharge",
+              "type": "recoverAll",
+              "formula": "4"
+            }
+          ]
+        },
         "damage": {
           "onSave": "half",
           "parts": []
@@ -159,10 +197,6 @@
             "calculation": "",
             "formula": "13"
           }
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
         },
         "sort": 0
       }
@@ -183,8 +217,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037413087,
-    "modifiedTime": 1725037413087,
+    "createdTime": 1725300178748,
+    "modifiedTime": 1725300178748,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ocmSrMY2NX3e43uN"

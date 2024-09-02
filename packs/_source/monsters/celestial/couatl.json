@@ -644,7 +644,23 @@
         "equipped": true,
         "rarity": "",
         "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
         "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
         "range": {
           "value": 5,
           "long": null,
@@ -652,11 +668,34 @@
           "reach": null
         },
         "uses": {
+          "value": null,
           "max": "",
+          "per": null,
           "recovery": [],
+          "prompt": true,
           "spent": 0
         },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "dex",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "piercing"
+            ]
+          ],
           "versatile": {
             "number": null,
             "denomination": null,
@@ -689,6 +728,12 @@
               "formula": ""
             }
           }
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": 13,
+          "scaling": "flat"
         },
         "armor": {
           "value": 10
@@ -766,6 +811,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "attack": {
               "ability": "dex",
               "bonus": "",
@@ -784,10 +834,6 @@
               },
               "includeBase": true,
               "parts": []
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           },
@@ -844,6 +890,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "onSave": "half",
               "parts": [
@@ -873,10 +924,6 @@
                 "formula": "13"
               }
             },
-            "uses": {
-              "spent": 0,
-              "recovery": []
-            },
             "sort": 0
           }
         },
@@ -896,14 +943,14 @@
         }
       },
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y",
-        "duplicateSource": null,
+        "systemId": null,
+        "systemVersion": null,
         "coreVersion": "12.331",
-        "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "compendiumSource": "Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.7M1OrMoMMTCEKxta"
     },
@@ -936,7 +983,23 @@
         "equipped": true,
         "rarity": "",
         "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
         "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
         "range": {
           "value": 5,
           "long": null,
@@ -944,11 +1007,34 @@
           "reach": null
         },
         "uses": {
+          "value": null,
           "max": "",
+          "per": null,
           "recovery": [],
+          "prompt": true,
           "spent": 0
         },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
+          "parts": [
+            [
+              "2d6 + @mod",
+              "bludgeoning"
+            ]
+          ],
           "versatile": {
             "number": null,
             "denomination": null,
@@ -981,6 +1067,12 @@
               "formula": ""
             }
           }
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "armor": {
           "value": 10
@@ -1058,6 +1150,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "attack": {
               "ability": "str",
               "bonus": "",
@@ -1077,10 +1174,6 @@
               "includeBase": true,
               "parts": []
             },
-            "uses": {
-              "spent": 0,
-              "recovery": []
-            },
             "sort": 0
           }
         },
@@ -1096,14 +1189,14 @@
       },
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
+        "systemId": null,
+        "systemVersion": null,
         "coreVersion": "12.331",
-        "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.8LkzioyaScFxfst7"
     },
@@ -1123,16 +1216,70 @@
           "page": "",
           "license": "CC-BY-4.0"
         },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
         "uses": {
+          "value": null,
           "max": "",
+          "per": null,
           "recovery": [],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "type": {
           "value": "",
           "subtype": ""
         },
         "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "crewed": false,
         "properties": [],
         "activities": {
           "dnd5eactivity000": {
@@ -1187,15 +1334,16 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1217,14 +1365,14 @@
         }
       },
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy",
-        "duplicateSource": null,
+        "systemId": null,
+        "systemVersion": null,
         "coreVersion": "12.331",
-        "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "compendiumSource": "Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.iw2q07K1D0X01DZO"
     },
@@ -1244,22 +1392,70 @@
           "page": "",
           "license": "CC-BY-4.0"
         },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
         "uses": {
+          "value": null,
           "max": "",
-          "spent": 0,
-          "recovery": []
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "type": {
           "value": "",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
-        "activities": {},
-        "enchant": {},
-        "prerequisites": {
-          "level": null
-        }
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1273,14 +1469,14 @@
         }
       },
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4",
-        "duplicateSource": null,
+        "systemId": null,
+        "systemVersion": null,
         "coreVersion": "12.331",
-        "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "compendiumSource": "Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.J40yeoOnwpvtVpHt"
     },
@@ -1300,22 +1496,70 @@
           "page": "",
           "license": "CC-BY-4.0"
         },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
         "uses": {
+          "value": null,
           "max": "",
-          "spent": 0,
-          "recovery": []
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "type": {
           "value": "",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
-        "activities": {},
-        "enchant": {},
-        "prerequisites": {
-          "level": null
-        }
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1329,14 +1573,14 @@
         }
       },
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS",
-        "duplicateSource": null,
+        "systemId": null,
+        "systemVersion": null,
         "coreVersion": "12.331",
-        "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "compendiumSource": "Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.3qE2LLHPANSEPmIN"
     },
@@ -1356,22 +1600,70 @@
           "page": "",
           "license": "CC-BY-4.0"
         },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
         "uses": {
+          "value": null,
           "max": "",
-          "spent": 0,
-          "recovery": []
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "type": {
           "value": "",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
-        "activities": {},
-        "enchant": {},
-        "prerequisites": {
-          "level": null
-        }
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1385,14 +1677,14 @@
         }
       },
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.monsterfeatures.SrmR5UfLMFxTErTp",
-        "duplicateSource": null,
+        "systemId": null,
+        "systemVersion": null,
         "coreVersion": "12.331",
-        "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "compendiumSource": "Compendium.dnd5e.monsterfeatures.SrmR5UfLMFxTErTp",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.MGh9IkfXNn7FmwL5"
     },
@@ -1416,6 +1708,7 @@
         },
         "activation": {
           "type": "action",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -1423,7 +1716,13 @@
           "value": "10",
           "units": "minute"
         },
+        "cover": null,
         "target": {
+          "value": 30,
+          "width": null,
+          "units": "ft",
+          "type": "radius",
+          "prompt": true,
           "affects": {
             "choice": false
           },
@@ -1435,12 +1734,41 @@
           }
         },
         "range": {
+          "value": null,
+          "long": null,
           "units": "self"
         },
         "uses": {
+          "value": null,
           "max": "",
+          "per": null,
           "recovery": [],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "level": 1,
         "school": "div",
@@ -1454,11 +1782,16 @@
           "mode": "atwill",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic",
           "concentration"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -1499,15 +1832,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1523,14 +1857,14 @@
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234128,
+        "modifiedTime": 1661791116658,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.Mzh95utKDPIrjiH8"
     },
@@ -1554,6 +1888,7 @@
         },
         "activation": {
           "type": "action",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -1561,7 +1896,13 @@
           "value": "10",
           "units": "minute"
         },
+        "cover": null,
         "target": {
+          "value": 30,
+          "width": null,
+          "units": "ft",
+          "type": "radius",
+          "prompt": true,
           "affects": {
             "choice": false
           },
@@ -1573,12 +1914,41 @@
           }
         },
         "range": {
+          "value": null,
+          "long": null,
           "units": "self"
         },
         "uses": {
+          "value": null,
           "max": "",
+          "per": null,
           "recovery": [],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "level": 1,
         "school": "div",
@@ -1592,12 +1962,17 @@
           "mode": "atwill",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic",
           "ritual",
           "concentration"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -1638,15 +2013,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1662,14 +2038,14 @@
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234192,
+        "modifiedTime": 1661791116658,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.ghXTfe7sgCbgf1Q8"
     },
@@ -1693,6 +2069,7 @@
         },
         "activation": {
           "type": "action",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -1700,7 +2077,13 @@
           "value": "1",
           "units": "minute"
         },
+        "cover": null,
         "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true,
           "affects": {
             "type": "creature",
             "count": "1",
@@ -1713,12 +2096,40 @@
         },
         "range": {
           "value": "30",
+          "long": null,
           "units": "ft"
         },
         "uses": {
+          "value": null,
           "max": "",
+          "per": null,
           "recovery": [],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "scaling": "spell"
         },
         "level": 2,
         "school": "div",
@@ -1732,12 +2143,17 @@
           "mode": "atwill",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic",
           "material",
           "concentration"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -1778,6 +2194,11 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "onSave": "half",
               "parts": []
@@ -1788,10 +2209,6 @@
                 "calculation": "spellcasting",
                 "formula": "14"
               }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1807,14 +2224,14 @@
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.ppWAAEul0QHtm4er",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234229,
+        "modifiedTime": 1661791116659,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.ppWAAEul0QHtm4er",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.ppWAAEul0QHtm4er"
     },
@@ -1836,6 +2253,7 @@
         },
         "activation": {
           "type": "action",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -1843,7 +2261,13 @@
           "value": "1",
           "units": "minute"
         },
+        "cover": null,
         "target": {
+          "value": 3,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true,
           "affects": {
             "type": "creature",
             "count": "3",
@@ -1856,17 +2280,45 @@
         },
         "range": {
           "value": "30",
+          "long": null,
           "units": "ft"
         },
         "uses": {
+          "value": 3,
           "max": "3",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "1d4",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "level": 1,
         "school": "enc",
@@ -1880,12 +2332,17 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic",
           "material",
           "concentration"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -1940,15 +2397,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "1d4",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2007,14 +2465,14 @@
           "description": "",
           "statuses": [],
           "_stats": {
-            "compendiumSource": null,
-            "duplicateSource": null,
             "coreVersion": "12.331",
-            "systemId": "dnd5e",
-            "systemVersion": "4.0.0",
+            "systemId": null,
+            "systemVersion": null,
             "createdTime": null,
             "modifiedTime": null,
-            "lastModifiedBy": null
+            "lastModifiedBy": null,
+            "compendiumSource": null,
+            "duplicateSource": null
           },
           "img": "icons/magic/control/buff-flight-wings-blue.webp",
           "type": "base",
@@ -2031,20 +2489,17 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr"
-        },
-        "dnd5e": {
-          "migratedUses": 3
         }
       },
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234081,
+        "modifiedTime": 1661791116659,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.8dzaICjGy6mTUaUr"
     },
@@ -2068,6 +2523,7 @@
         },
         "activation": {
           "type": "action",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -2075,7 +2531,13 @@
           "value": "",
           "units": "inst"
         },
+        "cover": null,
         "target": {
+          "value": null,
+          "width": null,
+          "units": "any",
+          "type": "space",
+          "prompt": true,
           "affects": {
             "type": "space",
             "choice": false
@@ -2087,17 +2549,45 @@
         },
         "range": {
           "value": "30",
+          "long": null,
           "units": "ft"
         },
         "uses": {
+          "value": 3,
           "max": "3",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "level": 3,
         "school": "con",
@@ -2111,10 +2601,15 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -2165,15 +2660,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2183,23 +2679,20 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.BV0mpbHh29IbbIj5"
-        },
-        "dnd5e": {
-          "migratedUses": 3
         }
       },
       "img": "icons/magic/nature/leaf-glow-teal.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.BV0mpbHh29IbbIj5",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234092,
+        "modifiedTime": 1661791116659,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.BV0mpbHh29IbbIj5",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.BV0mpbHh29IbbIj5"
     },
@@ -2223,6 +2716,7 @@
         },
         "activation": {
           "type": "action",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -2230,7 +2724,13 @@
           "value": "",
           "units": "inst"
         },
+        "cover": null,
         "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true,
           "affects": {
             "type": "creature",
             "count": "1",
@@ -2242,17 +2742,51 @@
           }
         },
         "range": {
+          "value": null,
+          "long": null,
           "units": "touch"
         },
         "uses": {
+          "value": 3,
           "max": "3",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d8 + @mod",
+              "healing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "level": 1,
         "school": "evo",
@@ -2266,10 +2800,15 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d8"
+        },
         "properties": [
           "vocal",
           "somatic"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -2320,6 +2859,11 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "healing": {
               "number": 1,
               "denomination": 8,
@@ -2337,10 +2881,6 @@
                 "formula": ""
               }
             },
-            "uses": {
-              "spent": 0,
-              "recovery": []
-            },
             "sort": 0
           }
         }
@@ -2349,23 +2889,20 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
-        },
-        "dnd5e": {
-          "migratedUses": 3
         }
       },
       "img": "icons/magic/life/heart-cross-green.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234236,
+        "modifiedTime": 1661791116660,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.uUWb1wZgtMou0TVP"
     },
@@ -2389,6 +2926,7 @@
         },
         "activation": {
           "type": "action",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -2396,7 +2934,13 @@
           "value": "",
           "units": "inst"
         },
+        "cover": null,
         "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true,
           "affects": {
             "type": "creature",
             "count": "1",
@@ -2408,17 +2952,46 @@
           }
         },
         "range": {
+          "value": null,
+          "long": null,
           "units": "touch"
         },
         "uses": {
+          "value": 3,
           "max": "3",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "level": 2,
         "school": "abj",
@@ -2432,10 +3005,15 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -2486,15 +3064,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2504,23 +3083,20 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.F0GsG0SJzsIOacwV"
-        },
-        "dnd5e": {
-          "migratedUses": 3
         }
       },
       "img": "icons/magic/life/heart-cross-blue.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.F0GsG0SJzsIOacwV",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234103,
+        "modifiedTime": 1661791116660,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.F0GsG0SJzsIOacwV",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.F0GsG0SJzsIOacwV"
     },
@@ -2544,6 +3120,7 @@
         },
         "activation": {
           "type": "bonus",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -2551,7 +3128,13 @@
           "value": "1",
           "units": "minute"
         },
+        "cover": null,
         "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true,
           "affects": {
             "type": "creature",
             "count": "1",
@@ -2564,17 +3147,45 @@
         },
         "range": {
           "value": "30",
+          "long": null,
           "units": "ft"
         },
         "uses": {
+          "value": 3,
           "max": "3",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "scaling": "spell"
         },
         "level": 1,
         "school": "abj",
@@ -2588,11 +3199,16 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic",
           "material"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -2643,6 +3259,11 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "onSave": "half",
               "parts": []
@@ -2654,10 +3275,6 @@
                 "formula": "14"
               }
             },
-            "uses": {
-              "spent": 0,
-              "recovery": []
-            },
             "sort": 0
           }
         }
@@ -2666,23 +3283,20 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
-        },
-        "dnd5e": {
-          "migratedUses": 3
         }
       },
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234193,
+        "modifiedTime": 1661791116660,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.gvdA9nPuWLck4tBl"
     },
@@ -2704,6 +3318,7 @@
         },
         "activation": {
           "type": "reaction",
+          "cost": 1,
           "condition": "Which you take when you are hit by an attack or targeted by the magic missile spell",
           "value": 1
         },
@@ -2711,7 +3326,13 @@
           "value": "1",
           "units": "round"
         },
+        "cover": null,
         "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self",
+          "prompt": true,
           "affects": {
             "type": "self",
             "choice": false
@@ -2722,17 +3343,46 @@
           }
         },
         "range": {
+          "value": null,
+          "long": null,
           "units": "self"
         },
         "uses": {
+          "value": 3,
           "max": "3",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "level": 1,
         "school": "abj",
@@ -2746,10 +3396,15 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -2804,15 +3459,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -2847,14 +3503,14 @@
           "description": "",
           "statuses": [],
           "_stats": {
-            "compendiumSource": null,
-            "duplicateSource": null,
             "coreVersion": "12.331",
-            "systemId": "dnd5e",
-            "systemVersion": "4.0.0",
+            "systemId": null,
+            "systemVersion": null,
             "createdTime": null,
             "modifiedTime": null,
-            "lastModifiedBy": null
+            "lastModifiedBy": null,
+            "compendiumSource": null,
+            "duplicateSource": null
           },
           "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
           "type": "base",
@@ -2871,20 +3527,17 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
-        },
-        "dnd5e": {
-          "migratedUses": 3
         }
       },
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234244,
+        "modifiedTime": 1661791116660,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.z1mx84ONwkXKUZd7"
     },
@@ -2908,6 +3561,7 @@
         },
         "activation": {
           "type": "minute",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -2915,7 +3569,13 @@
           "value": "8",
           "units": "hour"
         },
+        "cover": null,
         "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true,
           "affects": {
             "type": "creature",
             "count": "1",
@@ -2927,17 +3587,51 @@
           }
         },
         "range": {
+          "value": null,
+          "long": null,
           "units": "self"
         },
         "uses": {
+          "value": 1,
           "max": "1",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "3d6",
+              "psychic"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "scaling": "spell"
         },
         "level": 5,
         "school": "ill",
@@ -2951,11 +3645,16 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic",
           "material"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -3005,6 +3704,11 @@
                 "choice": false
               },
               "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
             },
             "damage": {
               "onSave": "half",
@@ -3035,10 +3739,6 @@
                 "formula": "14"
               }
             },
-            "uses": {
-              "spent": 0,
-              "recovery": []
-            },
             "sort": 0
           }
         }
@@ -3047,23 +3747,20 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.kSPRpeIx3w3nihrF"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/magic/air/fog-gas-smoke-swirling-pink.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.kSPRpeIx3w3nihrF",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234214,
+        "modifiedTime": 1661791116661,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.kSPRpeIx3w3nihrF",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.kSPRpeIx3w3nihrF"
     },
@@ -3087,6 +3784,7 @@
         },
         "activation": {
           "type": "action",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -3094,7 +3792,13 @@
           "value": "",
           "units": "inst"
         },
+        "cover": null,
         "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true,
           "affects": {
             "type": "creature",
             "count": "1",
@@ -3106,17 +3810,46 @@
           }
         },
         "range": {
+          "value": null,
+          "long": null,
           "units": "touch"
         },
         "uses": {
+          "value": 1,
           "max": "1",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "level": 5,
         "school": "abj",
@@ -3130,11 +3863,16 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic",
           "material"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -3185,15 +3923,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -3203,23 +3942,20 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/magic/life/heart-cross-strong-flame-blue.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234154,
+        "modifiedTime": 1661791116661,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.WzvJ7G3cqvIubsLk"
     },
@@ -3243,6 +3979,7 @@
         },
         "activation": {
           "type": "minute",
+          "cost": 10,
           "condition": "",
           "value": 10
         },
@@ -3250,7 +3987,13 @@
           "value": "10",
           "units": "minute"
         },
+        "cover": null,
         "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true,
           "affects": {
             "type": "creature",
             "count": "1",
@@ -3262,17 +4005,46 @@
           }
         },
         "range": {
+          "value": null,
+          "long": null,
           "units": "self"
         },
         "uses": {
+          "value": 1,
           "max": "1",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "scaling": "spell"
         },
         "level": 5,
         "school": "div",
@@ -3286,12 +4058,17 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic",
           "material",
           "concentration"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -3342,6 +4119,11 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "onSave": "half",
               "parts": []
@@ -3353,10 +4135,6 @@
                 "formula": "14"
               }
             },
-            "uses": {
-              "spent": 0,
-              "recovery": []
-            },
             "sort": 0
           }
         }
@@ -3365,23 +4143,20 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.fVbCxFRaORalHB20"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.fVbCxFRaORalHB20",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234189,
+        "modifiedTime": 1661791116662,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.fVbCxFRaORalHB20",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.fVbCxFRaORalHB20"
     },
@@ -3405,6 +4180,7 @@
         },
         "activation": {
           "type": "action",
+          "cost": 1,
           "condition": "",
           "value": 1
         },
@@ -3412,7 +4188,13 @@
           "value": "1",
           "units": "hour"
         },
+        "cover": null,
         "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature",
+          "prompt": true,
           "affects": {
             "type": "creature",
             "count": "1",
@@ -3424,17 +4206,46 @@
           }
         },
         "range": {
+          "value": null,
+          "long": null,
           "units": "touch"
         },
         "uses": {
+          "value": 3,
           "max": "3",
+          "per": "day",
           "recovery": [
             {
               "period": "day",
               "type": "recoverAll"
             }
           ],
+          "prompt": true,
           "spent": 0
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
         },
         "level": 2,
         "school": "abj",
@@ -3448,10 +4259,15 @@
           "mode": "innate",
           "prepared": true
         },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        },
         "properties": [
           "vocal",
           "somatic"
         ],
+        "crewed": false,
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -3502,15 +4318,16 @@
               },
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "roll": {
               "formula": "",
               "name": "",
               "prompt": false,
               "visible": false
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -3520,23 +4337,20 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.MAxM77CDUu8dgIRQ"
-        },
-        "dnd5e": {
-          "migratedUses": 3
         }
       },
       "img": "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "compendiumSource": "Compendium.dnd5e.spells.MAxM77CDUu8dgIRQ",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "2.0.0",
+        "coreVersion": "12.331",
+        "createdTime": 1661787234123,
+        "modifiedTime": 1661791116662,
+        "lastModifiedBy": "dnd5ebuilder0000",
+        "compendiumSource": "Compendium.dnd5e.spells.MAxM77CDUu8dgIRQ",
+        "duplicateSource": null
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.MAxM77CDUu8dgIRQ"
     }
@@ -3549,13 +4363,13 @@
   },
   "flags": {},
   "_stats": {
-    "duplicateSource": null,
-    "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725036951569,
-    "modifiedTime": 1725036951569,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "coreVersion": "12.331",
+    "createdTime": 1661787232895,
+    "modifiedTime": 1725299570888,
+    "lastModifiedBy": "dnd5ebuilder0000",
+    "duplicateSource": null
   },
   "_key": "!actors!ZaP1H91t4FzbRqR5"
 }

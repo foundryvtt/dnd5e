@@ -80,6 +80,11 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
         "damage": {
           "onSave": "half",
           "parts": []
@@ -90,10 +95,6 @@
             "calculation": "",
             "formula": ""
           }
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
         },
         "sort": 0
       }
@@ -114,8 +115,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037413023,
-    "modifiedTime": 1725037413023,
+    "createdTime": 1725300178674,
+    "modifiedTime": 1725300178674,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!o8G8BNPJOWoCKzR5"

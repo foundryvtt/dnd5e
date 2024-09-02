@@ -95,15 +95,16 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
         "roll": {
           "formula": "",
           "name": "",
           "prompt": false,
           "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
         },
         "sort": 0
       },
@@ -170,6 +171,11 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
         "damage": {
           "onSave": "half",
           "parts": []
@@ -181,10 +187,6 @@
             "formula": "10"
           }
         },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
         "sort": 0
       }
     },
@@ -194,7 +196,11 @@
     },
     "properties": []
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "migratedUses": 1
+    }
+  },
   "img": "icons/creatures/unholy/demon-winged-cyclops-drooling.webp",
   "effects": [],
   "folder": null,
@@ -204,8 +210,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037410377,
-    "modifiedTime": 1725037410377,
+    "createdTime": 1725300175760,
+    "modifiedTime": 1725300175760,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gqrKcFwxHhmwrP2q"

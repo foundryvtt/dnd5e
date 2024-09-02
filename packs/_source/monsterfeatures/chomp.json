@@ -40,7 +40,7 @@
           "targets": [
             {
               "type": "attribute",
-              "target": "resources.legact.value",
+              "target": "",
               "value": "2",
               "scaling": {
                 "mode": "",
@@ -89,15 +89,16 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
         "roll": {
           "formula": "",
           "name": "",
           "prompt": false,
           "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
         },
         "sort": 0
       }
@@ -118,8 +119,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037401440,
-    "modifiedTime": 1725037401440,
+    "createdTime": 1725300165017,
+    "modifiedTime": 1725300165017,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!5rr8YdsGtL8WxEuE"

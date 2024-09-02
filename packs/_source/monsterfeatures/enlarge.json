@@ -94,15 +94,16 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
         "roll": {
           "formula": "",
           "name": "",
           "prompt": false,
           "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
         },
         "sort": 0
       }
@@ -113,7 +114,11 @@
     },
     "properties": []
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "migratedUses": 1
+    }
+  },
   "img": "icons/magic/control/energy-stream-link-large-blue.webp",
   "effects": [],
   "folder": null,
@@ -123,8 +128,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037411389,
-    "modifiedTime": 1725037411389,
+    "createdTime": 1725300177033,
+    "modifiedTime": 1725300177033,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!jZgeHxCR8pF6FOmQ"

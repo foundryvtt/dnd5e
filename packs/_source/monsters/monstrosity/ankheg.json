@@ -755,6 +755,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "attack": {
               "ability": "str",
               "bonus": "",
@@ -791,10 +796,6 @@
                   }
                 }
               ]
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -870,7 +871,17 @@
               "override": false
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "activityUses",
+                  "target": "",
+                  "value": "1",
+                  "scaling": {
+                    "mode": "",
+                    "formula": ""
+                  }
+                }
+              ],
               "scaling": {
                 "allowed": false,
                 "max": ""
@@ -912,6 +923,17 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "1",
+              "recovery": [
+                {
+                  "period": "recharge",
+                  "type": "recoverAll",
+                  "formula": "6"
+                }
+              ]
+            },
             "damage": {
               "onSave": "half",
               "parts": [
@@ -940,10 +962,6 @@
                 "calculation": "",
                 "formula": "13"
               }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -989,8 +1007,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725036948939,
-    "modifiedTime": 1725036948939,
+    "createdTime": 1725299642433,
+    "modifiedTime": 1725299642433,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Wcsjbl25uiUsyQwn"

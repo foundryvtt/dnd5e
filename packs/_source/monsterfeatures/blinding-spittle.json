@@ -43,7 +43,17 @@
           "override": false
         },
         "consumption": {
-          "targets": [],
+          "targets": [
+            {
+              "type": "activityUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
           "scaling": {
             "allowed": false,
             "max": ""
@@ -86,6 +96,17 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "1",
+          "recovery": [
+            {
+              "period": "recharge",
+              "type": "recoverAll",
+              "formula": "5"
+            }
+          ]
+        },
         "damage": {
           "onSave": "half",
           "parts": []
@@ -96,10 +117,6 @@
             "calculation": "",
             "formula": "13"
           }
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
         },
         "sort": 0
       }
@@ -120,8 +137,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037400322,
-    "modifiedTime": 1725037400322,
+    "createdTime": 1725300163749,
+    "modifiedTime": 1725300163749,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!0awyZX05OnVLF4k2"

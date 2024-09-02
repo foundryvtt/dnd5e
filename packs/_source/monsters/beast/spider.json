@@ -810,6 +810,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "attack": {
               "ability": "",
               "bonus": "",
@@ -846,10 +851,6 @@
                   }
                 }
               ]
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           },
@@ -905,6 +906,11 @@
               "prompt": true,
               "override": false
             },
+            "uses": {
+              "spent": 0,
+              "max": "",
+              "recovery": []
+            },
             "damage": {
               "onSave": "half",
               "parts": [
@@ -933,10 +939,6 @@
                 "calculation": "",
                 "formula": "9"
               }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
             },
             "sort": 0
           }
@@ -1093,8 +1095,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725036913373,
-    "modifiedTime": 1725036913373,
+    "createdTime": 1725299604782,
+    "modifiedTime": 1725299604782,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!28gU50HtG8Kp7uIz"

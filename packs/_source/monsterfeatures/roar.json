@@ -95,15 +95,16 @@
           "prompt": true,
           "override": false
         },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
         "roll": {
           "formula": "",
           "name": "",
           "prompt": false,
           "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
         },
         "sort": 0
       }
@@ -114,7 +115,11 @@
     },
     "properties": []
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "migratedUses": 3
+    }
+  },
   "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
   "effects": [],
   "folder": null,
@@ -124,8 +129,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725037406392,
-    "modifiedTime": 1725037406392,
+    "createdTime": 1725300171201,
+    "modifiedTime": 1725300171201,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!QCNJD2GuOZSTT4Wt"

@@ -75,12 +75,7 @@
       },
       "init": {
         "ability": "",
-        "bonus": "0",
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
-        }
+        "bonus": "0"
       },
       "movement": {
         "burrow": 0,
@@ -103,32 +98,7 @@
         "special": ""
       },
       "spellcasting": "",
-      "exhaustion": 0,
-      "concentration": {
-        "ability": "",
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
-        },
-        "bonuses": {
-          "save": ""
-        },
-        "limit": 1
-      },
-      "hd": {
-        "spent": 0
-      },
-      "death": {
-        "ability": "",
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
-        },
-        "success": 0,
-        "failure": 0
-      }
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -151,10 +121,7 @@
         "book": "SRD 5.1",
         "page": "",
         "license": "CC-BY-4.0"
-      },
-      "ideal": "",
-      "bond": "",
-      "flaw": ""
+      }
     },
     "traits": {
       "size": "lg",
@@ -200,11 +167,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "ani": {
@@ -213,11 +175,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "arc": {
@@ -226,11 +183,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "ath": {
@@ -239,11 +191,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "dec": {
@@ -252,11 +199,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "his": {
@@ -265,11 +207,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "ins": {
@@ -278,11 +215,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "itm": {
@@ -291,11 +223,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "inv": {
@@ -304,11 +231,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "med": {
@@ -317,11 +239,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "nat": {
@@ -330,11 +247,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "prc": {
@@ -343,11 +255,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "prf": {
@@ -356,11 +263,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "per": {
@@ -369,11 +271,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "rel": {
@@ -382,11 +279,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "slt": {
@@ -395,11 +287,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "ste": {
@@ -408,11 +295,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       },
       "sur": {
@@ -421,11 +303,6 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "roll": {
-          "min": null,
-          "max": null,
-          "mode": 0
         }
       }
     },
@@ -610,13 +487,13 @@
   },
   "flags": {},
   "_stats": {
-    "duplicateSource": null,
-    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
-    "createdTime": 1725036972995,
-    "modifiedTime": 1725036972995,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "systemVersion": "3.0.0",
+    "coreVersion": "12.331",
+    "createdTime": 1661787233200,
+    "modifiedTime": 1704847053802,
+    "lastModifiedBy": "dnd5ebuilder0000",
+    "duplicateSource": null
   },
   "_key": "!actors!rLl22hYeAH3ljhdI"
 }
