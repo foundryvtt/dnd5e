@@ -88,16 +88,15 @@ export default class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
-    const spellChanges = this.configuration.spell?.getSpellChanges({
-      ability: data.ability ?? this.retainedData?.ability ?? this.value?.ability
-    }) ?? {};
     for ( const uuid of filteredKeys(data) ) {
       let itemData = retainedData[uuid];
       if ( !itemData ) {
         itemData = await this.createItemData(uuid);
         if ( !itemData ) continue;
       }
-      if ( itemData.type === "spell" ) foundry.utils.mergeObject(itemData, spellChanges);
+      if ( itemData.type === "spell" ) this.configuration.spell?.applySpellChanges(itemData, {
+        ability: data.ability ?? this.retainedData?.ability ?? this.value?.ability
+      });
 
       items.push(itemData);
       updates[itemData._id] = uuid;

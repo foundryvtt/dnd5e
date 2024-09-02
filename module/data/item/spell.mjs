@@ -14,6 +14,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
  *
+ * @property {string} ability                    Override of default spellcasting ability.
  * @property {ActivationData} activation         Casting time & conditions.
  * @property {DurationData} duration             Duration of the spell effect.
  * @property {number} level                      Base level of the spell.
@@ -47,6 +48,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      ability: new StringField({ label: "DND5E.SpellAbility" }),
       activation: new ActivationField(),
       duration: new DurationField(),
       level: new NumberField({ required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel" }),
@@ -247,6 +249,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   async getSheetData(context) {
+    if ( this.parent.actor ) {
+      const ability = CONFIG.DND5E.abilities[
+        this.parent.actor.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+          ?? this.parent.actor.system.attributes?.spellcasting
+      ]?.label?.toLowerCase();
+      if ( ability ) context.defaultAbility = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
+      else context.defaultAbility = game.i18n.localize("DND5E.Default");
+    }
     context.subtitles = [
       { label: context.labels.level },
       { label: context.labels.school },
@@ -273,6 +283,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @override */
   get availableAbilities() {
+    if ( this.ability ) return new Set([this.ability]);
     const spellcasting = this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
       ?? this.parent?.actor?.system.attributes?.spellcasting;
     return new Set(spellcasting ? [spellcasting] : []);
