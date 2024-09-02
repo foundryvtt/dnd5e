@@ -19,9 +19,8 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
    * @returns {boolean|void}             Return false to prevent normal application from occurring.
    */
   _applyLegacy(item, change, changes) {
-    console.log("EnchantmentData#_applyLegacy", item, change, changes);
     let key = change.key.replace("system.", "");
-    switch (change.key) {
+    switch ( change.key ) {
       case "system.attack.bonus":
       case "system.attack.flat":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
@@ -39,19 +38,16 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
             value.enchantment = true;
             value.locked = true;
             changes[`system.activities.${activity.id}.damage.parts`] = ActiveEffect.applyField(
-              activity, { ...change, key: "damage.parts", value: value }
+              activity, { ...change, key, value: value }
             );
           }
           return false;
-        } catch(err) {
-          console.log(err);
-        }
+        } catch(err) {}
       case "system.save.dc":
       case "system.save.scaling":
         let value = change.value;
-        if ( key === "save.dc" ) {
-          key = "save.dc.formula";
-        } else {
+        if ( key === "save.dc" ) key = "save.dc.formula";
+        else {
           key = "save.dc.calculation";
           if ( value === "flat" ) value = "";
           else if ( (value === "") && (item.type === "spell") ) value = "spellcasting";
