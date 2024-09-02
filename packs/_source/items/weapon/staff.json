@@ -72,11 +72,11 @@
     "damage": {
       "parts": [
         [
-          "1d4 + @mod",
+          "1d6 + @mod",
           "bludgeoning"
         ]
       ],
-      "versatile": ""
+      "versatile": "1d8 + @mod"
     },
     "formula": "",
     "save": {
@@ -94,12 +94,13 @@
       "conditions": ""
     },
     "properties": [
-      "foc"
+      "foc",
+      "ver"
     ],
     "proficient": null,
     "type": {
       "value": "simpleM",
-      "baseItem": ""
+      "baseItem": "quarterstaff"
     },
     "unidentified": {
       "description": ""
