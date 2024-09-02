@@ -102,6 +102,14 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [{ label: context.itemType }];
     context.singleDescription = true;

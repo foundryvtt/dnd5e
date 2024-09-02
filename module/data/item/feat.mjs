@@ -82,6 +82,7 @@ export default class FeatData extends ItemDataModel.mixin(
   prepareDerivedData() {
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
+    this.prepareDescriptionData();
 
     if ( this.type.value ) {
       const config = CONFIG.DND5E.featureTypes[this.type.value];

@@ -66,6 +66,14 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   prepareFinalData() {
     SpellcastingField.prepareData.call(this, this.parent.getRollData({ deterministic: true }));
   }

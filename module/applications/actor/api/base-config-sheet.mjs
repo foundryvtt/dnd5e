@@ -1,27 +1,15 @@
-const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;
+import DocumentSheet5e from "../../api/document-sheet.mjs";
 
 /**
- * Base document sheet from which all system applications should be based.
+ * Base document sheet from which all actor configuration sheets should be based.
  */
-export default class BaseConfigSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
+export default class BaseConfigSheet extends DocumentSheet5e {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["dnd5e2", "config-sheet"],
+    classes: ["config-sheet"],
     sheetConfig: false,
     form: {
       submitOnChange: true
     }
   };
-
-  /* -------------------------------------------- */
-  /*  Rendering                                   */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    context.CONFIG = CONFIG.DND5E;
-    context.inputs = { ...foundry.applications.fields, ...dnd5e.applications.fields };
-    return context;
-  }
 }

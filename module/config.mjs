@@ -3800,9 +3800,7 @@ preLocalize("tokenRings.effects");
  * List of books available as sources.
  * @enum {string}
  */
-DND5E.sourceBooks = {
-  "SRD 5.1": "SOURCE.BOOK.SRD"
-};
+DND5E.sourceBooks = {};
 preLocalize("sourceBooks", { sort: true });
 
 /* -------------------------------------------- */
