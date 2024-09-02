@@ -233,6 +233,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       ?.items?.sort((a, b) => a.sort - b.sort);
     context.inventory = context.inventory.filter(entry => entry.items.length);
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
+    context.inventory.forEach(section => {
+      section.categories = [
+        { activityPartial: "dnd5e.activity-column-price" },
+        { activityPartial: "dnd5e.activity-column-weight" },
+        { activityPartial: "dnd5e.activity-column-quantity" },
+        { activityPartial: "dnd5e.activity-column-uses" },
+        { activityPartial: "dnd5e.activity-column-controls" }
+      ];
+    });
 
     // Remove races & background as they are shown on the details tab instead.
     const features = context.features.filter(f => (f.dataset.type !== "background") && (f.dataset.type !== "race"));
@@ -277,9 +286,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     // TODO: Customise this per-section.
     features.forEach(section => {
       section.categories = [
-        { classes: "item-uses", label: "DND5E.Uses", partial: "dnd5e.column-uses" },
-        { classes: "item-recovery", label: "DND5E.Recovery", partial: "dnd5e.column-recovery" },
-        { classes: "item-controls", partial: "dnd5e.column-feature-controls" }
+        {
+          classes: "item-uses", label: "DND5E.Uses", itemPartial: "dnd5e.column-uses",
+          activityPartial: "dnd5e.activity-column-uses"
+        },
+        {
+          classes: "item-recovery", label: "DND5E.Recovery", itemPartial: "dnd5e.column-recovery",
+          activityPartial: "dnd5e.activity-column-recovery"
+        },
+        {
+          classes: "item-controls", itemPartial: "dnd5e.column-feature-controls",
+          activityPartial: "dnd5e.activity-column-controls"
+        }
       ];
     });
   }

@@ -563,7 +563,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         )}`;
       }
 
-      return { formula, damageType: part.types.size === 1 ? part.types.first() : null, label };
+      return { formula, damageType: part.types.size === 1 ? part.types.first() : null, label, base: part.base };
     });
   }
 
