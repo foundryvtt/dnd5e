@@ -27,15 +27,18 @@
       "affects": {
         "type": "creature",
         "count": "1",
-        "choice": false
+        "choice": false,
+        "special": ""
       },
       "template": {
         "units": "",
-        "contiguous": false
+        "contiguous": false,
+        "type": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "uses": {
       "max": "",
@@ -124,19 +127,13 @@
       "flags": {},
       "changes": [
         {
-          "key": "system.attributes.ac.formula",
+          "key": "system.attributes.ac.min",
+          "mode": 5,
           "value": "16",
-          "mode": 5,
-          "priority": null
-        },
-        {
-          "key": "system.attributes.ac.calc",
-          "value": "custom",
-          "mode": 5,
           "priority": null
         }
       ],
-      "disabled": true,
+      "disabled": false,
       "duration": {
         "startTime": null,
         "seconds": 3600,
@@ -159,8 +156,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725313057364,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
       "type": "base",
@@ -181,7 +178,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037353022,
-    "modifiedTime": 1725037353022,
+    "modifiedTime": 1725313073856,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!JPwIEfgUPVebr5AH"
