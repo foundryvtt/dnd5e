@@ -635,23 +635,7 @@
         "equipped": true,
         "rarity": "",
         "identified": true,
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
         "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": "",
-          "prompt": true
-        },
         "range": {
           "value": 5,
           "long": null,
@@ -659,34 +643,11 @@
           "reach": null
         },
         "uses": {
-          "value": null,
           "max": "",
-          "per": null,
           "recovery": [],
-          "prompt": true,
           "spent": 0
         },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null,
-          "scale": false
-        },
-        "ability": "str",
-        "actionType": "mwak",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
         "damage": {
-          "parts": [
-            [
-              "2d4 + @mod",
-              "bludgeoning"
-            ]
-          ],
           "versatile": {
             "number": null,
             "denomination": null,
@@ -719,12 +680,6 @@
               "formula": ""
             }
           }
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
         },
         "armor": {
           "value": 10
@@ -843,14 +798,14 @@
         }
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
+        "compendiumSource": "Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O",
+        "duplicateSource": null,
         "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null,
-        "compendiumSource": "Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O",
-        "duplicateSource": null
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!rz8UTUnFT87BsAFR.CwpmLFcikAet169F"
     }
@@ -863,13 +818,13 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "coreVersion": "12.331",
-    "createdTime": 1661787233208,
-    "modifiedTime": 1725299583454,
-    "lastModifiedBy": "dnd5ebuilder0000",
-    "duplicateSource": null
+    "createdTime": 1725305110116,
+    "modifiedTime": 1725305110116,
+    "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!rz8UTUnFT87BsAFR"
 }

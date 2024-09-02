@@ -635,23 +635,7 @@
         "equipped": true,
         "rarity": "",
         "identified": true,
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
         "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": "",
-          "prompt": true
-        },
         "range": {
           "value": 5,
           "long": null,
@@ -659,34 +643,11 @@
           "reach": null
         },
         "uses": {
-          "value": null,
           "max": "",
-          "per": null,
           "recovery": [],
-          "prompt": true,
           "spent": 0
         },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null,
-          "scale": false
-        },
-        "ability": "",
-        "actionType": "mwak",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
         "damage": {
-          "parts": [
-            [
-              "1",
-              "piercing"
-            ]
-          ],
           "versatile": {
             "number": null,
             "denomination": null,
@@ -719,12 +680,6 @@
               "formula": ""
             }
           }
-        },
-        "formula": "1d8",
-        "save": {
-          "ability": "con",
-          "dc": 9,
-          "scaling": "flat"
         },
         "armor": {
           "value": 10
@@ -994,14 +949,14 @@
       },
       "flags": {},
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
         "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null,
-        "compendiumSource": null,
-        "duplicateSource": null
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!Y0vxQVF7w2P38FK2.ltue5DUb1SZfphHE"
     }
@@ -1014,13 +969,13 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "coreVersion": "12.331",
-    "createdTime": 1661787232880,
-    "modifiedTime": 1725299570019,
-    "lastModifiedBy": "dnd5ebuilder0000",
-    "duplicateSource": null
+    "createdTime": 1725305086182,
+    "modifiedTime": 1725305086182,
+    "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Y0vxQVF7w2P38FK2"
 }

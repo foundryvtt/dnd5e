@@ -1067,9 +1067,6 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "_stats": {
@@ -1157,7 +1154,7 @@
           "license": "CC-BY-4.0"
         },
         "uses": {
-          "max": "",
+          "max": "1",
           "recovery": [
             {
               "period": "recharge",
@@ -1186,7 +1183,7 @@
             "consumption": {
               "targets": [
                 {
-                  "type": "activityUses",
+                  "type": "itemUses",
                   "target": "",
                   "value": "1",
                   "scaling": {
@@ -1238,14 +1235,8 @@
             },
             "uses": {
               "spent": 0,
-              "max": "1",
-              "recovery": [
-                {
-                  "period": "recharge",
-                  "type": "recoverAll",
-                  "formula": "6"
-                }
-              ]
+              "max": "",
+              "recovery": []
             },
             "damage": {
               "onSave": "half",
@@ -1442,9 +1433,6 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/magic/air/air-burst-spiral-blue-gray.webp",
@@ -1475,8 +1463,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725299640201,
-    "modifiedTime": 1725299640201,
+    "createdTime": 1725305083517,
+    "modifiedTime": 1725305083517,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!UthHOT7QfZfEIUue"

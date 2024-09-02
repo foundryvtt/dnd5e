@@ -622,24 +622,8 @@
         "rarity": "",
         "attunement": "",
         "equipped": true,
-        "activation": {
-          "type": "bonus",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
         "cover": null,
         "crewed": false,
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creatureOrObject",
-          "prompt": true
-        },
         "range": {
           "value": null,
           "long": null,
@@ -647,37 +631,11 @@
           "reach": null
         },
         "uses": {
-          "value": null,
           "max": "",
-          "per": null,
           "recovery": [],
-          "prompt": true,
           "spent": 0
         },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null,
-          "scale": false
-        },
-        "ability": "",
-        "actionType": "msak",
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
         "damage": {
-          "parts": [
-            [
-              "(4 + 2 * (@flags.dnd5e.summon.level - 5))d8",
-              "force"
-            ]
-          ],
           "versatile": {
             "number": null,
             "denomination": null,
@@ -711,13 +669,6 @@
             }
           }
         },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "summons": null,
         "armor": {
           "value": null
         },
@@ -823,14 +774,14 @@
       },
       "flags": {},
       "_stats": {
-        "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "12.331",
-        "createdTime": 1712086481956,
-        "modifiedTime": 1712086570667,
-        "lastModifiedBy": "dnd5ebuilder0000",
         "compendiumSource": null,
-        "duplicateSource": null
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!iHj5Tkm6HRgXuaWP.flSMgvK8J2USFtGo"
     },
@@ -838,70 +789,16 @@
       "name": "Forceful Hand",
       "type": "feat",
       "system": {
-        "activation": {
-          "type": "bonus",
-          "cost": null,
-          "condition": ""
-        },
         "description": {
           "value": "<p>The hand attempts to push a creature within 5 feet of it in a direction you choose. Make a check with the hand's [[/check strength]] contested by the [[/skill strength athletics]] check of the target. If the target is Medium or smaller, you have advantage on the check. If you succeed, the hand pushes the target up to 5 feet plus a number of feet equal to five times your Spellcasting ability modifier. The hand moves with the target to remain within 5 feet of it.</p>",
           "chat": ""
         },
         "source": {},
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature",
-          "prompt": true
-        },
-        "range": {
-          "value": 5,
-          "long": null,
-          "units": "ft"
-        },
         "uses": {
-          "value": null,
           "max": "",
-          "per": null,
           "recovery": [],
-          "prompt": true,
           "spent": 0
         },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null,
-          "scale": false
-        },
-        "ability": "str",
-        "actionType": "abil",
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "summons": null,
         "type": {
           "value": "monster",
           "subtype": ""
@@ -911,10 +808,6 @@
         },
         "properties": [],
         "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -993,14 +886,14 @@
       },
       "flags": {},
       "_stats": {
-        "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "12.331",
-        "createdTime": 1712086582444,
-        "modifiedTime": 1712086650968,
-        "lastModifiedBy": "dnd5ebuilder0000",
         "compendiumSource": null,
-        "duplicateSource": null
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!iHj5Tkm6HRgXuaWP.kKg1WU7qO2fLSB0e"
     },
@@ -1008,75 +901,16 @@
       "name": "Grasping Hand",
       "type": "feat",
       "system": {
-        "activation": {
-          "type": "bonus",
-          "cost": null,
-          "condition": ""
-        },
         "description": {
           "value": "<p>The hand attempts to grapple a Huge or smaller creature within 5 feet of it. You use the hand's Strength score to resolve the grapple. If the target is Medium or smaller, you have advantage on the check. While the hand is Grappling the target, you can use a Bonus Action to have the hand crush it. When you do so, the target takes bludgeoning damage equal to 2d6 + your Spellcasting ability modifier.</p>",
           "chat": ""
         },
         "source": {},
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature",
-          "prompt": true
-        },
-        "range": {
-          "value": 5,
-          "long": null,
-          "units": "ft"
-        },
         "uses": {
-          "value": null,
           "max": "",
-          "per": null,
           "recovery": [],
-          "prompt": true,
           "spent": 0
         },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null,
-          "scale": false
-        },
-        "ability": "",
-        "actionType": "other",
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "(2 + 2 * (@flags.dnd5e.summon.level - 5))d6",
-              "bludgeoning"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "summons": null,
         "type": {
           "value": "monster",
           "subtype": ""
@@ -1086,10 +920,6 @@
         },
         "properties": [],
         "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -1189,14 +1019,14 @@
       },
       "flags": {},
       "_stats": {
-        "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "12.331",
-        "createdTime": 1712086583134,
-        "modifiedTime": 1712086787357,
-        "lastModifiedBy": "dnd5ebuilder0000",
         "compendiumSource": null,
-        "duplicateSource": null
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!iHj5Tkm6HRgXuaWP.rne03sCadusyP3Yg"
     },
@@ -1204,70 +1034,16 @@
       "name": "Interposing Hand",
       "type": "feat",
       "system": {
-        "activation": {
-          "type": "bonus",
-          "cost": null,
-          "condition": ""
-        },
         "description": {
           "value": "<p>The hand interposes itself between you and a creature you choose until you give the hand a different command. The hand moves to stay between you and the target, providing you with half cover against the target. The target can't move through the hand's space if its Strength score is less than or equal to the hand's Strength score. If its Strength score is higher than the hand's Strength score, the target can move toward you through the hand's space, but that space is difficult terrain for the target.</p>",
           "chat": ""
         },
         "source": {},
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature",
-          "prompt": true
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
         "uses": {
-          "value": null,
           "max": "",
-          "per": null,
           "recovery": [],
-          "prompt": true,
           "spent": 0
         },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null,
-          "scale": false
-        },
-        "ability": null,
-        "actionType": "",
-        "attack": {
-          "bonus": "",
-          "flat": false
-        },
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "summons": null,
         "type": {
           "value": "monster",
           "subtype": ""
@@ -1277,10 +1053,6 @@
         },
         "properties": [],
         "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -1360,14 +1132,14 @@
       },
       "flags": {},
       "_stats": {
-        "systemId": "dnd5e",
-        "systemVersion": "3.2.0",
-        "coreVersion": "12.331",
-        "createdTime": 1712086583316,
-        "modifiedTime": 1712086823286,
-        "lastModifiedBy": "dnd5ebuilder0000",
         "compendiumSource": null,
-        "duplicateSource": null
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!iHj5Tkm6HRgXuaWP.vgK74YR1Lv2WrGCx"
     }
@@ -1379,13 +1151,13 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "coreVersion": "12.331",
-    "createdTime": 1712086409403,
-    "modifiedTime": 1725299576872,
-    "lastModifiedBy": "dnd5ebuilder0000",
-    "duplicateSource": null
+    "createdTime": 1725305098535,
+    "modifiedTime": 1725305098535,
+    "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!iHj5Tkm6HRgXuaWP"
 }

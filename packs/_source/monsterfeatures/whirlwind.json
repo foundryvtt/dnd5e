@@ -17,7 +17,7 @@
       "license": "CC-BY-4.0"
     },
     "uses": {
-      "max": "",
+      "max": "1",
       "recovery": [
         {
           "period": "recharge",
@@ -45,7 +45,7 @@
         "consumption": {
           "targets": [
             {
-              "type": "activityUses",
+              "type": "itemUses",
               "target": "",
               "value": "1",
               "scaling": {
@@ -97,14 +97,8 @@
         },
         "uses": {
           "spent": 0,
-          "max": "1",
-          "recovery": [
-            {
-              "period": "recharge",
-              "type": "recoverAll",
-              "formula": "4"
-            }
-          ]
+          "max": "",
+          "recovery": []
         },
         "roll": {
           "formula": "",
@@ -126,7 +120,7 @@
         "consumption": {
           "targets": [
             {
-              "type": "activityUses",
+              "type": "itemUses",
               "target": "",
               "value": "1",
               "scaling": {
@@ -178,14 +172,8 @@
         },
         "uses": {
           "spent": 0,
-          "max": "1",
-          "recovery": [
-            {
-              "period": "recharge",
-              "type": "recoverAll",
-              "formula": "4"
-            }
-          ]
+          "max": "",
+          "recovery": []
         },
         "damage": {
           "onSave": "half",
@@ -207,7 +195,11 @@
     },
     "properties": []
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "migratedUses": null
+    }
+  },
   "img": "icons/magic/air/wind-tornado-cyclone-white.webp",
   "effects": [],
   "folder": null,
@@ -217,8 +209,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725300178748,
-    "modifiedTime": 1725300178748,
+    "createdTime": 1725304977009,
+    "modifiedTime": 1725304977009,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ocmSrMY2NX3e43uN"

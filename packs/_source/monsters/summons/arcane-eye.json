@@ -453,7 +453,10 @@
       "environment": "",
       "cr": 0,
       "spellLevel": 0,
-      "source": {}
+      "source": {},
+      "ideal": "",
+      "bond": "",
+      "flaw": ""
     },
     "resources": {
       "legact": {
@@ -618,14 +621,14 @@
         }
       },
       "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
         "coreVersion": "12.331",
-        "systemId": null,
-        "systemVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null,
-        "compendiumSource": null,
-        "duplicateSource": null
+        "lastModifiedBy": null
       },
       "img": "systems/dnd5e/icons/svg/statuses/invisible.svg",
       "type": "base",
@@ -641,13 +644,13 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
+    "duplicateSource": null,
     "coreVersion": "12.331",
-    "createdTime": 1712086234744,
-    "modifiedTime": 1714077048621,
-    "lastModifiedBy": "dnd5ebuilder0000",
-    "duplicateSource": null
+    "systemId": "dnd5e",
+    "systemVersion": "4.0.0",
+    "createdTime": 1725305112320,
+    "modifiedTime": 1725305112320,
+    "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!tuHyePQ9GazMTyc0"
 }

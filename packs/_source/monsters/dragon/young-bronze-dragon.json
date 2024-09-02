@@ -887,7 +887,7 @@
           "license": "CC-BY-4.0"
         },
         "uses": {
-          "max": "",
+          "max": "1",
           "recovery": [
             {
               "period": "recharge",
@@ -916,7 +916,7 @@
             "consumption": {
               "targets": [
                 {
-                  "type": "activityUses",
+                  "type": "itemUses",
                   "target": "",
                   "value": "1",
                   "scaling": {
@@ -968,14 +968,8 @@
             },
             "uses": {
               "spent": 0,
-              "max": "1",
-              "recovery": [
-                {
-                  "period": "recharge",
-                  "type": "recoverAll",
-                  "formula": "5"
-                }
-              ]
+              "max": "",
+              "recovery": []
             },
             "roll": {
               "formula": "",
@@ -1640,8 +1634,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725299631361,
-    "modifiedTime": 1725299631361,
+    "createdTime": 1725305076100,
+    "modifiedTime": 1725305076100,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!NmQLj0zv4FmfuSan"

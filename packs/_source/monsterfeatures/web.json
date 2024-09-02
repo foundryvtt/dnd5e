@@ -17,7 +17,7 @@
       "license": "CC-BY-4.0"
     },
     "uses": {
-      "max": "",
+      "max": "1",
       "recovery": [
         {
           "period": "recharge",
@@ -45,7 +45,7 @@
         "consumption": {
           "targets": [
             {
-              "type": "activityUses",
+              "type": "itemUses",
               "target": "",
               "value": "1",
               "scaling": {
@@ -98,14 +98,8 @@
         },
         "uses": {
           "spent": 0,
-          "max": "1",
-          "recovery": [
-            {
-              "period": "recharge",
-              "type": "recoverAll",
-              "formula": "5"
-            }
-          ]
+          "max": "",
+          "recovery": []
         },
         "attack": {
           "ability": "dex",
@@ -140,7 +134,7 @@
         "consumption": {
           "targets": [
             {
-              "type": "activityUses",
+              "type": "itemUses",
               "target": "",
               "value": "1",
               "scaling": {
@@ -193,14 +187,8 @@
         },
         "uses": {
           "spent": 0,
-          "max": "1",
-          "recovery": [
-            {
-              "period": "recharge",
-              "type": "recoverAll",
-              "formula": "5"
-            }
-          ]
+          "max": "",
+          "recovery": []
         },
         "damage": {
           "onSave": "half",
@@ -222,7 +210,11 @@
     },
     "properties": []
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "migratedUses": null
+    }
+  },
   "img": "icons/creatures/webs/web-spider-glowing-purple.webp",
   "effects": [],
   "folder": null,
@@ -232,8 +224,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725300176209,
-    "modifiedTime": 1725300176209,
+    "createdTime": 1725304975024,
+    "modifiedTime": 1725304975024,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!i8WDjw4J1gJWQmqG"

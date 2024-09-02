@@ -292,7 +292,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     });
 
     if ( source.system.recharge?.value ) targets.push({
-      type: "activityUses",
+      type: source.system.uses?.max ? "activityUses" : "itemUses",
       target: "",
       value: "1",
       scaling: { mode: "", formula: "" }
@@ -488,7 +488,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformUsesData(source, options) {
-    if ( !source.system.recharge?.value ) return { spent: 0, max: "", recovery: [] };
+    if ( !source.system.recharge?.value || !source.system.uses?.max ) return { spent: 0, max: "", recovery: [] };
     return {
       spent: source.system.recharge.charged ? 0 : 1,
       max: "1",

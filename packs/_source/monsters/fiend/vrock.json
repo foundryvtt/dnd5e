@@ -1214,7 +1214,7 @@
           "license": "CC-BY-4.0"
         },
         "uses": {
-          "max": "",
+          "max": "1",
           "recovery": [
             {
               "period": "recharge",
@@ -1243,7 +1243,7 @@
             "consumption": {
               "targets": [
                 {
-                  "type": "activityUses",
+                  "type": "itemUses",
                   "target": "",
                   "value": "1",
                   "scaling": {
@@ -1295,14 +1295,8 @@
             },
             "uses": {
               "spent": 0,
-              "max": "1",
-              "recovery": [
-                {
-                  "period": "recharge",
-                  "type": "recoverAll",
-                  "formula": "6"
-                }
-              ]
+              "max": "",
+              "recovery": []
             },
             "damage": {
               "onSave": "half",
@@ -1493,9 +1487,6 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.aD3HKoBnJtZL6cDj"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "_stats": {
@@ -1523,8 +1514,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725299609603,
-    "modifiedTime": 1725299609603,
+    "createdTime": 1725305054450,
+    "modifiedTime": 1725305054450,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!6oc29m5uzzzb0pk3"
