@@ -206,14 +206,14 @@ export default class TokenPlacement {
    */
   #onMovePlacement(event) {
     event.stopPropagation();
-    if (this.#throttle) return;
+    if ( this.#throttle ) return;
     this.#throttle = true;
     const idx = this.#currentPlacement;
     const preview = this.#previews[idx];
     const clone = preview.object;
     const local = event.data.getLocalPosition(canvas.tokens);
-    local.x = local.x - clone.w / 2;
-    local.y = local.y - clone.h / 2;
+    local.x = local.x - (clone.w / 2);
+    local.y = local.y - (clone.h / 2);
     const dest = !event.shiftKey ? clone.getSnappedPosition(local) : local;
     preview.updateSource({x: dest.x, y: dest.y});
     this.#placements[idx].x = preview.x;
