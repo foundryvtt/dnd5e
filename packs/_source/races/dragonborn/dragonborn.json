@@ -20,26 +20,48 @@
         "_id": "QIrBmvSmNOTEJLWn",
         "type": "ItemChoice",
         "configuration": {
-          "hint": "You have draconic ancestry. Choose one type of dragon from the list. Your breath weapon and damage resistance are determined by the dragon type.",
           "choices": {
-            "0": 1
+            "0": {
+              "count": 1,
+              "replacement": false
+            }
           },
           "allowDrops": false,
           "type": "feat",
           "pool": [
-            "Compendium.dnd5e.races.NnSZlrsHCFeH3cCq",
-            "Compendium.dnd5e.races.KVgvW5yhKcmQUanz",
-            "Compendium.dnd5e.races.JrUcwLR2aQC09iUM",
-            "Compendium.dnd5e.races.pJzMSk9qYywYy65w",
-            "Compendium.dnd5e.races.bFpLM0N3uTeHLdzu",
-            "Compendium.dnd5e.races.YPQQBZAuRiSwuBfh",
-            "Compendium.dnd5e.races.lXIxndsBaQglHBtO",
-            "Compendium.dnd5e.races.kB61JPKQrDBbSNU7",
-            "Compendium.dnd5e.races.pAYTdRGftNr8AitK",
-            "Compendium.dnd5e.races.KL7wx9Q8XNJQir0k"
+            {
+              "uuid": "Compendium.dnd5e.races.NnSZlrsHCFeH3cCq"
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.KVgvW5yhKcmQUanz"
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.JrUcwLR2aQC09iUM"
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.pJzMSk9qYywYy65w"
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.bFpLM0N3uTeHLdzu"
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.YPQQBZAuRiSwuBfh"
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.lXIxndsBaQglHBtO"
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.kB61JPKQrDBbSNU7"
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.pAYTdRGftNr8AitK"
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.KL7wx9Q8XNJQir0k"
+            }
           ],
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -52,8 +74,12 @@
             "level": ""
           }
         },
-        "value": {},
-        "title": "Draconic Ancestry"
+        "value": {
+          "added": {},
+          "replaced": {}
+        },
+        "title": "Draconic Ancestry",
+        "hint": "You have draconic ancestry. Choose one type of dragon from the list. Your breath weapon and damage resistance are determined by the dragon type."
       },
       {
         "_id": "Z9hvZFkWUNvowbQX",
@@ -68,7 +94,8 @@
             "wis": 0,
             "cha": 1
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -88,19 +115,23 @@
           "scale": {
             "0": {
               "number": 2,
-              "faces": 6
+              "faces": 6,
+              "modifiers": []
             },
             "6": {
               "number": 3,
-              "faces": 6
+              "faces": 6,
+              "modifiers": []
             },
             "11": {
               "number": 4,
-              "faces": 6
+              "faces": 6,
+              "modifiers": []
             },
             "16": {
               "number": 5,
-              "faces": 6
+              "faces": 6,
+              "modifiers": []
             }
           }
         },
@@ -111,7 +142,6 @@
         "_id": "9D8XNnmTLWfzN32K",
         "type": "Size",
         "configuration": {
-          "hint": "Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.",
           "sizes": [
             "med"
           ]
@@ -120,13 +150,13 @@
           "size": ""
         },
         "level": 1,
-        "title": ""
+        "title": "",
+        "hint": "Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium."
       },
       {
         "_id": "6WUcKNSLh5WJ3Q24",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -137,13 +167,14 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "2f4dkpTYlhOgRgxu",
         "type": "Trait",
         "configuration": {
-          "hint": "You have resistance to the damage type associated with your draconic ancestry.",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -162,7 +193,10 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        },
+        "hint": "You have resistance to the damage type associated with your draconic ancestry."
       }
     ],
     "movement": {
@@ -194,11 +228,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1677180157568,
-    "modifiedTime": 1704824711146,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037392732,
+    "modifiedTime": 1725037392732,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

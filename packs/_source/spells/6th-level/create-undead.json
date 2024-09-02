@@ -18,56 +18,32 @@
     },
     "activation": {
       "type": "minute",
-      "cost": 1,
-      "condition": "You can cast this spell only at night."
+      "condition": "You can cast this spell only at night.",
+      "value": 1
     },
     "duration": {
       "value": "",
       "units": "inst"
     },
-    "cover": null,
     "target": {
-      "value": 3,
-      "width": null,
-      "units": "spec",
-      "type": "creature",
-      "prompt": true
+      "affects": {
+        "type": "creature",
+        "count": "3",
+        "choice": false
+      },
+      "template": {
+        "units": "spec",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 10,
-      "long": null,
+      "value": "10",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "summ",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 6,
     "school": "nec",
@@ -81,68 +57,122 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "level",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
       "material"
     ],
-    "crewed": false,
-    "summons": {
-      "prompt": true,
-      "bonuses": {
-        "ac": "",
-        "hd": "",
-        "hp": "",
-        "attackDamage": "",
-        "saveDamage": "",
-        "healing": ""
-      },
-      "profiles": [
-        {
-          "count": "@item.level - 6",
-          "name": "",
-          "_id": "GGQa2fXx4sJFOhCv",
-          "uuid": "Compendium.dnd5e.monsters.Actor.IyIybE5t2adMEVUM",
-          "level": {
-            "min": 8,
-            "max": null
-          }
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "summon",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
         },
-        {
-          "count": "@item.level - 3",
-          "name": "",
-          "_id": "439tNP7qngefOmVd",
-          "uuid": "Compendium.dnd5e.monsters.Actor.OBujQLLPSmlJiZnL",
-          "level": {
-            "min": null,
-            "max": null
-          }
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
         },
-        {
-          "count": "@item.level - 7",
-          "name": "",
-          "_id": "8377f4szK4aEYLqD",
-          "uuid": "Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8",
-          "level": {
-            "min": 9,
-            "max": null
-          }
+        "description": {
+          "chatFlavor": ""
         },
-        {
-          "count": "@item.level - 6",
-          "name": "",
-          "_id": "1wXs9fpxffiMlT1j",
-          "uuid": "Compendium.dnd5e.monsters.Actor.rbyp54px2D0ql4QK",
-          "level": {
-            "min": 8,
-            "max": null
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "bonuses": {
+          "ac": "",
+          "hd": "",
+          "hp": "",
+          "attackDamage": "",
+          "saveDamage": "",
+          "healing": ""
+        },
+        "creatureSizes": [],
+        "creatureTypes": [],
+        "match": {
+          "attacks": false,
+          "proficiency": false,
+          "saves": false
+        },
+        "profiles": [
+          {
+            "count": "@item.level - 6",
+            "name": "",
+            "_id": "GGQa2fXx4sJFOhCv",
+            "uuid": "Compendium.dnd5e.monsters.Actor.IyIybE5t2adMEVUM",
+            "level": {
+              "min": 8,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "count": "@item.level - 3",
+            "name": "",
+            "_id": "439tNP7qngefOmVd",
+            "uuid": "Compendium.dnd5e.monsters.Actor.OBujQLLPSmlJiZnL",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "count": "@item.level - 7",
+            "name": "",
+            "_id": "8377f4szK4aEYLqD",
+            "uuid": "Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8",
+            "level": {
+              "min": 9,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "count": "@item.level - 6",
+            "name": "",
+            "_id": "1wXs9fpxffiMlT1j",
+            "uuid": "Compendium.dnd5e.monsters.Actor.rbyp54px2D0ql4QK",
+            "level": {
+              "min": 8,
+              "max": null
+            },
+            "types": []
           }
-        }
-      ]
+        ],
+        "summon": {
+          "identifier": "",
+          "mode": "",
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     }
   },
   "sort": 0,
@@ -151,11 +181,12 @@
   "effects": [],
   "folder": "0pdesvXqKd55VOh2",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234100,
-    "modifiedTime": 1714076897049,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037351363,
+    "modifiedTime": 1725037351363,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!E4NXux0RHvME1XgP"

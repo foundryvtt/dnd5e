@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] fixes its gaze on one creature it can see within 10 feet of it. The target must succeed on a  <strong>DC 18 Wisdom</strong> saving throw against this magic or become grappled for 1 minute. The grappled target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the [[lookup @name lowercase]]'s gaze for the next 24 hours.</p>\n</section>\n<p>the [[lookup @name lowercase]] fixes its gaze on one creature it can see within 10 feet of it. The target must make a <strong>Wisdom</strong> saving throw.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,65 +16,104 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "legendary",
-      "cost": 2,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "creature"
-    },
-    "range": {
-      "value": 10,
-      "long": null,
-      "units": "ft"
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "attribute",
-      "target": null,
-      "amount": 2
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "wis",
-      "dc": 18,
-      "scaling": "flat"
+      "recovery": [],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "legendary",
+          "value": 2,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "attribute",
+              "target": "",
+              "value": "2",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "10",
+          "units": "ft",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "1",
+            "type": "creature",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "wis",
+          "dc": {
+            "calculation": "",
+            "formula": "18"
+          }
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
@@ -83,11 +121,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234571,
-    "modifiedTime": 1672335640862,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304973559,
+    "modifiedTime": 1725304973559,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!cpnrDGQrqgPlSmwR"

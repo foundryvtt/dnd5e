@@ -23,62 +23,16 @@
       "value": 6750,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "veryRare",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
     "crewed": false,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": 15,
@@ -109,12 +63,8 @@
       "mgc",
       "stealthDisadvantage"
     ],
-    "attack": {
-      "bonus": "",
-      "flat": false
-    },
-    "summons": null,
-    "enchantment": null
+    "activities": {},
+    "attuned": false
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -124,11 +74,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233705,
-    "modifiedTime": 1715374617707,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037213098,
+    "modifiedTime": 1725037213098,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!YFarUKR3OrM5raf5"

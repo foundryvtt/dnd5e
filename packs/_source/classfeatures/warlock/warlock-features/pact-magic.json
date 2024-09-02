@@ -16,70 +16,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Warlock 1",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "crewed": false,
-    "properties": []
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    }
   },
   "flags": {},
   "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
@@ -87,11 +39,12 @@
   "folder": "5vh3H3BfNi3v9LeS",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234440,
-    "modifiedTime": 1704824719705,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037390044,
+    "modifiedTime": 1725037390044,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!x6IJZwr6f0SGral7"

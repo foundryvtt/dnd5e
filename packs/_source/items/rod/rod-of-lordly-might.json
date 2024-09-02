@@ -23,67 +23,35 @@
       "value": 28000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "legendary",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": "Button presses are a bonus action."
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": 5,
-      "long": null,
-      "units": "ft"
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
+      "recovery": [],
       "autoDestroy": false,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "str",
-    "actionType": "mwak",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0
     },
     "damage": {
-      "parts": [
-        [
-          "1d6 +@mod +3",
+      "base": {
+        "number": null,
+        "denomination": null,
+        "bonus": "",
+        "types": [
           "bludgeoning"
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "flat"
+        ],
+        "custom": {
+          "enabled": true,
+          "formula": "1d6 +@mod +3"
+        },
+        "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+        }
+      },
+      "replace": false
     },
     "type": {
       "value": "rod",
@@ -93,17 +61,109 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [
       "mgc"
     ],
-    "attack": {
-      "bonus": "3",
-      "flat": false
+    "magicalBonus": null,
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "attack",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "Button presses are a bonus action.",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "5",
+          "units": "ft",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "attack": {
+          "ability": "str",
+          "bonus": "3",
+          "critical": {
+            "threshold": null
+          },
+          "flat": false,
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
+          }
+        },
+        "damage": {
+          "critical": {
+            "bonus": ""
+          },
+          "includeBase": true,
+          "parts": [
+            {
+              "number": null,
+              "denomination": null,
+              "bonus": "",
+              "types": [
+                "bludgeoning"
+              ],
+              "custom": {
+                "enabled": true,
+                "formula": "1d6 +@mod +3"
+              },
+              "scaling": {
+                "mode": "whole",
+                "number": null,
+                "formula": ""
+              }
+            }
+          ]
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "enchantment": null,
-    "summons": null,
-    "magicalBonus": null
+    "attuned": false
   },
   "effects": [],
   "folder": "609zLs23BLj5hyYp",
@@ -113,11 +173,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233740,
-    "modifiedTime": 1715374624803,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037232621,
+    "modifiedTime": 1725037232621,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!d5HNCmLIPCpPoX2w"

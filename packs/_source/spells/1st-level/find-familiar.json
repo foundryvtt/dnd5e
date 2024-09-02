@@ -18,56 +18,31 @@
     },
     "activation": {
       "type": "hour",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "",
       "units": "inst"
     },
-    "cover": null,
     "target": {
-      "value": null,
-      "width": null,
-      "units": "any",
-      "type": "space",
-      "prompt": true
+      "affects": {
+        "type": "space",
+        "choice": false
+      },
+      "template": {
+        "units": "any",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 10,
-      "long": null,
+      "value": "10",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "summ",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 1,
     "school": "con",
@@ -81,10 +56,6 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "none",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
@@ -92,98 +63,226 @@
       "ritual",
       "mgc"
     ],
-    "crewed": false,
-    "summons": {
-      "prompt": true,
-      "bonuses": {
-        "ac": "",
-        "hp": "",
-        "attackDamage": "",
-        "saveDamage": "",
-        "healing": ""
-      },
-      "creatureTypes": [
-        "celestial",
-        "fey",
-        "fiend"
-      ],
-      "profiles": [
-        {
-          "name": "",
-          "_id": "HShhzdPtYkhNleyj",
-          "uuid": "Compendium.dnd5e.monsters.Actor.qav2dvMIUiMQCCsy"
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "summon",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
         },
-        {
-          "name": "",
-          "_id": "NIHXnk03LvysDp7t",
-          "uuid": "Compendium.dnd5e.monsters.Actor.hIf83RD3ZVW4Egfi"
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
         },
-        {
-          "name": "",
-          "_id": "L59Xqchh128r45Rc",
-          "uuid": "Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1"
+        "description": {
+          "chatFlavor": ""
         },
-        {
-          "name": "Fish",
-          "_id": "kaiiJrnUWOqlQHt3",
-          "uuid": "Compendium.dnd5e.monsters.Actor.nkyCGJ9wXeAZkyyz"
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
         },
-        {
-          "name": "",
-          "_id": "zGRnQq2EkrfRb14O",
-          "uuid": "Compendium.dnd5e.monsters.Actor.EZgiprHXA2D7Uyb3"
+        "range": {
+          "override": false
         },
-        {
-          "name": "",
-          "_id": "n2fhgnH9XTc8MbKt",
-          "uuid": "Compendium.dnd5e.monsters.Actor.fnkPNfIpS62LqOu4"
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
         },
-        {
-          "name": "",
-          "_id": "bZJcnv1H2Vjm5XI6",
-          "uuid": "Compendium.dnd5e.monsters.Actor.I2x01hzOjVN4NUjf"
+        "bonuses": {
+          "ac": "",
+          "hp": "",
+          "attackDamage": "",
+          "saveDamage": "",
+          "healing": ""
         },
-        {
-          "name": "",
-          "_id": "aqC42mfjOB5PB5JU",
-          "uuid": "Compendium.dnd5e.monsters.Actor.3UUNbGiG2Yf1ZPxM"
+        "creatureSizes": [],
+        "creatureTypes": [
+          "celestial",
+          "fey",
+          "fiend"
+        ],
+        "match": {
+          "attacks": false,
+          "proficiency": false,
+          "saves": false
         },
-        {
-          "name": "",
-          "_id": "9sLcKSCGrnG7gO7O",
-          "uuid": "Compendium.dnd5e.monsters.Actor.d0prpsGSAorDadec"
+        "profiles": [
+          {
+            "name": "",
+            "_id": "HShhzdPtYkhNleyj",
+            "uuid": "Compendium.dnd5e.monsters.Actor.qav2dvMIUiMQCCsy",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "NIHXnk03LvysDp7t",
+            "uuid": "Compendium.dnd5e.monsters.Actor.hIf83RD3ZVW4Egfi",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "L59Xqchh128r45Rc",
+            "uuid": "Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "Fish",
+            "_id": "kaiiJrnUWOqlQHt3",
+            "uuid": "Compendium.dnd5e.monsters.Actor.nkyCGJ9wXeAZkyyz",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "zGRnQq2EkrfRb14O",
+            "uuid": "Compendium.dnd5e.monsters.Actor.EZgiprHXA2D7Uyb3",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "n2fhgnH9XTc8MbKt",
+            "uuid": "Compendium.dnd5e.monsters.Actor.fnkPNfIpS62LqOu4",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "bZJcnv1H2Vjm5XI6",
+            "uuid": "Compendium.dnd5e.monsters.Actor.I2x01hzOjVN4NUjf",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "aqC42mfjOB5PB5JU",
+            "uuid": "Compendium.dnd5e.monsters.Actor.3UUNbGiG2Yf1ZPxM",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "9sLcKSCGrnG7gO7O",
+            "uuid": "Compendium.dnd5e.monsters.Actor.d0prpsGSAorDadec",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "IxXkUKUna11rHprj",
+            "uuid": "Compendium.dnd5e.monsters.Actor.D5rwVIxmfFrdyyxT",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "0t4KAcZWZ7fY9A5u",
+            "uuid": "Compendium.dnd5e.monsters.Actor.pozQUPTnLZW8epox",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "op4FTfM9QWefJxOJ",
+            "uuid": "Compendium.dnd5e.monsters.Actor.LPdX5YLlwci0NDZx",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "1gJGQBWi5LJYjONw",
+            "uuid": "Compendium.dnd5e.monsters.Actor.FWSDiq9SZsdiBAa8",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "7hgp23Fe02ITFtIw",
+            "uuid": "Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "name": "",
+            "_id": "czhL1VUn6ecvG0WV",
+            "uuid": "Compendium.dnd5e.monsters.Actor.WOdeacKCYVhgLDuN",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          }
+        ],
+        "summon": {
+          "identifier": "",
+          "mode": "",
+          "prompt": true
         },
-        {
-          "name": "",
-          "_id": "IxXkUKUna11rHprj",
-          "uuid": "Compendium.dnd5e.monsters.Actor.D5rwVIxmfFrdyyxT"
+        "uses": {
+          "spent": 0,
+          "recovery": []
         },
-        {
-          "name": "",
-          "_id": "0t4KAcZWZ7fY9A5u",
-          "uuid": "Compendium.dnd5e.monsters.Actor.pozQUPTnLZW8epox"
-        },
-        {
-          "name": "",
-          "_id": "op4FTfM9QWefJxOJ",
-          "uuid": "Compendium.dnd5e.monsters.Actor.LPdX5YLlwci0NDZx"
-        },
-        {
-          "name": "",
-          "_id": "1gJGQBWi5LJYjONw",
-          "uuid": "Compendium.dnd5e.monsters.Actor.FWSDiq9SZsdiBAa8"
-        },
-        {
-          "name": "",
-          "_id": "7hgp23Fe02ITFtIw",
-          "uuid": "Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz"
-        },
-        {
-          "name": "",
-          "_id": "czhL1VUn6ecvG0WV",
-          "uuid": "Compendium.dnd5e.monsters.Actor.WOdeacKCYVhgLDuN"
-        }
-      ]
+        "sort": 0
+      }
     }
   },
   "sort": 0,
@@ -192,11 +291,12 @@
   "effects": [],
   "folder": "ERuXllkhTQF51rDJ",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234112,
-    "modifiedTime": 1711665544993,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037352867,
+    "modifiedTime": 1725037352867,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!JGT5bNqu9REL7Fuz"

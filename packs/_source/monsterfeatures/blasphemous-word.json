@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] utters a blasphemous word. Each non-[[lookup @details.type.config.label lowercase]] creature within 10 feet of the [[lookup @name lowercase]] that can hear the magical utterance must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be stunned until the end of the [[lookup @name lowercase]]'s next turn.</p>\n</section>\n<p>the [[lookup @name lowercase]] utters a blasphemous word. Each non-[[lookup @details.type.config.label lowercase]] creature within 10 feet of the [[lookup @name lowercase]] that can hear the magical utterance must make a <strong>Constitution</strong> saving throw.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,65 +16,103 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "legendary",
-      "cost": 2,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": 10,
-      "width": null,
-      "units": "ft",
-      "type": "radius"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": "self"
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "attribute",
-      "target": null,
-      "amount": 2
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "con",
-      "dc": 16,
-      "scaling": "flat"
+      "recovery": [],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "legendary",
+          "value": 2,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "attribute",
+              "target": "",
+              "value": "2",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "radius",
+            "size": "10",
+            "width": "",
+            "height": "",
+            "units": "ft"
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "con",
+          "dc": {
+            "calculation": "",
+            "formula": "16"
+          }
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
@@ -83,11 +120,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234563,
-    "modifiedTime": 1672335560632,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304972634,
+    "modifiedTime": 1725304972634,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Xwj2GPqTxngS0j2L"

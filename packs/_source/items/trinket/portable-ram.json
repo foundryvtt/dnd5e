@@ -23,67 +23,33 @@
       "value": 4,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "object",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": "touch"
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
+      "recovery": [],
       "autoDestroy": false,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "str",
-    "actionType": "abil",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0
     },
     "damage": {
-      "parts": [
-        [
-          "d20 + @abilities.str.mod +4",
-          ""
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "base": {
+        "number": null,
+        "denomination": null,
+        "bonus": "",
+        "types": [],
+        "custom": {
+          "enabled": true,
+          "formula": "d20 + @abilities.str.mod +4"
+        },
+        "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+        }
+      },
+      "replace": false
     },
     "type": {
       "value": "trinket",
@@ -93,15 +59,73 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [],
-    "attack": {
-      "bonus": "",
-      "flat": false
+    "magicalBonus": null,
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "check",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "touch",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "1",
+            "type": "object",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "check": {
+          "ability": "str",
+          "dc": {}
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "enchantment": null,
-    "summons": null,
-    "magicalBonus": null
+    "attuned": false
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
@@ -111,11 +135,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233902,
-    "modifiedTime": 1715374651360,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037304892,
+    "modifiedTime": 1725037304892,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!srTRzwTfWKO5opOo"

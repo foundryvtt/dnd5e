@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] is given a quarry by its summoner. the [[lookup @name lowercase]] knows the direction and distance to its quarry as long as the two of them are on the same plane of existence. the [[lookup @name lowercase]] also knows the location of its summoner.</p>\n</section>\n<p>The stalker knows the direction and distance to its quarry as long as the two of them are on the same plane of existence.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,65 +16,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
@@ -83,11 +39,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234516,
-    "modifiedTime": 1672335675523,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304967406,
+    "modifiedTime": 1725304967406,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!E8SiDA7Z3Ybd6wt0"

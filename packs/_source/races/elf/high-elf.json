@@ -20,12 +20,18 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV",
-            "Compendium.dnd5e.races.4v2PiBrAbqDizdSJ"
+            {
+              "uuid": "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.4v2PiBrAbqDizdSJ",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -36,22 +42,25 @@
         "value": {},
         "level": 0,
         "title": "Grant Items",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "9SgUOZ9mjqyA8Q2d"
       },
       {
         "_id": "l1Pw82BvhrSkYiyF",
         "type": "ItemChoice",
         "configuration": {
-          "hint": "You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.",
           "choices": {
-            "0": 1
+            "0": {
+              "count": 1,
+              "replacement": false
+            }
           },
           "allowDrops": true,
           "type": "spell",
           "pool": [],
           "spell": {
-            "ability": "int",
+            "ability": [
+              "int"
+            ],
             "preparation": "innate",
             "uses": {
               "max": "",
@@ -64,8 +73,12 @@
             "level": "0"
           }
         },
-        "value": {},
-        "title": "Cantrip"
+        "value": {
+          "added": {},
+          "replaced": {}
+        },
+        "title": "Cantrip",
+        "hint": "You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it."
       },
       {
         "_id": "Z9hvZFkWUNvowbQX",
@@ -80,7 +93,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -92,7 +106,6 @@
         "_id": "eqSwyWvm0gYgBzJJ",
         "type": "Size",
         "configuration": {
-          "hint": "Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.",
           "sizes": [
             "med"
           ]
@@ -101,13 +114,13 @@
           "size": ""
         },
         "level": 1,
-        "title": ""
+        "title": "",
+        "hint": "Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium."
       },
       {
         "_id": "eAv9eLr0ackU7WO2",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -117,13 +130,14 @@
         },
         "level": 0,
         "title": "Keen Senses",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "vNyszlmxQeXRjYIH",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -141,13 +155,14 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "ZwJOJ5Ywagq7rWNI",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -160,7 +175,9 @@
         },
         "level": 0,
         "title": "Elf Weapon Training",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       }
     ],
     "senses": {
@@ -192,11 +209,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1677179211328,
-    "modifiedTime": 1704824711086,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037392601,
+    "modifiedTime": 1725037392601,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,
