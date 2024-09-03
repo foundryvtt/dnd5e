@@ -56,17 +56,10 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  * Custom base roll type with methods for building rolls, presenting prompts, and creating messages.
  */
 export default class BasicRoll extends Roll {
-  constructor(formula, data={}, options={}) {
-    super(formula, data, options);
-    this.#configure();
-  }
-
-  /* -------------------------------------------- */
-
   /**
-   * Replace roll terms with numeric values.
+   * Replace number and faces of dice terms with numeric values.
    */
-  #configure() {
+  simplifyDice() {
     for ( const die of this.dice ) {
       const n = die._number;
       if ( (n instanceof BasicRoll) && n.isDeterministic ) die._number = n.evaluateSync().total;
@@ -75,12 +68,6 @@ export default class BasicRoll extends Roll {
 
       // Preserve flavor.
       if ( f.terms?.[0]?.flavor ) die.options.flavor = f.terms[0].flavor;
-    }
-
-    for ( const [i, term] of this.terms.entries() ) {
-      if ( (term.roll instanceof BasicRoll) && term.isDeterministic ) {
-        this.terms[i] = new foundry.dice.terms.NumericTerm({ number: term.roll.evaluateSync().total });
-      }
     }
 
     this.resetFormula();
