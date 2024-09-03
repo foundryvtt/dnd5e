@@ -263,4 +263,25 @@ export default class BasicRoll extends Roll {
 
     return matchedModifier ? face * number : null;
   }
+
+  /* -------------------------------------------- */
+  /*  Simplification Methods                      */
+  /* -------------------------------------------- */
+
+  /**
+   * Replace number and faces of dice terms with numeric values where possible.
+   */
+  simplify() {
+    for ( const die of this.dice ) {
+      const n = die._number;
+      if ( (n instanceof BasicRoll) && n.isDeterministic ) die._number = n.evaluateSync().total;
+      const f = die._faces;
+      if ( (f instanceof BasicRoll) && f.isDeterministic ) die._faces = f.evaluateSync().total;
+
+      // Preserve flavor.
+      if ( f.terms?.[0]?.flavor ) die.options.flavor = f.terms[0].flavor;
+    }
+
+    this.resetFormula();
+  }
 }
