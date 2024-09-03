@@ -38,58 +38,19 @@
             </div>
         </div>
     </section>
-    {{#if (eq type "spell")}}
-    <ul class="info unlist">
-        <li>
-            <strong>{{ localize "DND5E.SpellCastTime" }}:</strong>
-            <span class="value">
-                {{ labels.activation }}
-                {{#if activation.condition}}
-                <span class="condition">({{ activation.condition }})</span>
-                {{/if}}
-            </span>
-        </li>
-        <li>
-            <strong>{{ localize "DND5E.Range" }}:</strong>
-            <span class="value">{{ labels.range }}</span>
-        </li>
-        <li>
-            <strong>{{ localize "DND5E.Target" }}:</strong>
-            <span class="value">{{ labels.target }}</span>
-        </li>
-        <li>
-            <strong>{{ localize "DND5E.Components" }}:</strong>
-            <span class="value">
-                {{ labels.components.vsm }}
-                {{#if materials.value}}
-                <span class="materials">({{ materials.value }})</span>
-                {{/if}}
-            </span>
-        </li>
-        <li>
-            <strong>{{ localize "DND5E.Duration" }}:</strong>
-            <span class="value">{{ labels.concentrationDuration }}</span>
-        </li>
-    </ul>
+    {{#if isSpell}}
+        {{> "dnd5e.spell-block" }}
     {{/if}}
     <section class="description">{{{ description.value }}}</section>
     <ul class="pills">
-        {{#if isSpell}}
-        {{#each tags}}
-        <li class="pill transparent">
-            <span class="label">{{ this }}</span>
-        </li>
-        {{/each}}
-        {{else}}
         {{#each properties}}
         <li class="pill transparent">
             <span class="label">{{ this }}</span>
         </li>
         {{/each}}
-        {{/if}}
     </ul>
     {{#if controlHints}}
-    <div class="lock-hint">
+    <div class="control-hint lock-hint">
         <img src="systems/dnd5e/icons/svg/mouse-middle.svg" alt="{{ localize "DND5E.Controls.MiddleClick" }}">
         <span>{{ localize "DND5E.Controls.LockHint" }}</span>
     </div>

@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "3.3.1",
+  "version": "4.0.0",
   "compatibility": {
-    "minimum": "11.315",
+    "minimum": "12.331",
     "verified": "12"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-3.3.1/dnd5e-release-3.3.1.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-4.0.0/dnd5e-release-4.0.0.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -23,6 +23,85 @@
   "styles": [
     "dnd5e.css"
   ],
+  "documentTypes": {
+    "ActiveEffect": {
+      "enchantment": {}
+    },
+    "Actor": {
+      "character": {
+        "htmlFields": ["details.biography.value", "details.biography.public"]
+      },
+      "npc": {
+        "htmlFields": ["details.biography.value", "details.biography.public"]
+      },
+      "vehicle": {
+        "htmlFields": ["details.biography.value", "details.biography.public"]
+      },
+      "group": {
+        "htmlFields": ["description.full", "description.summary"]
+      }
+    },
+    "Item": {
+      "weapon": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "equipment": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "consumable": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "tool": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "loot": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "race": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "background": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "class": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "subclass": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "spell": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "feat": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
+      "container": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "backpack": {
+        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      }
+    },
+    "JournalEntryPage": {
+      "class": {
+        "htmlFields": [
+          "details.value",
+          "details.additionalHitPoints",
+          "description.additionalTraits",
+          "description.additionalEquipment",
+          "description.subclass"
+        ]
+      },
+      "map": {},
+      "rule": {
+        "htmlFields": ["tooltip"]
+      },
+      "spells": {},
+      "subclass": {
+        "htmlFields": ["details.value"]
+      }
+    }
+  },
   "packs": [
     {
       "name": "heroes",
@@ -254,8 +333,6 @@
     }
   ],
   "socket": true,
-  "gridDistance": 5,
-  "gridUnits": "ft",
   "grid": {
     "distance": 5,
     "units": "ft"
@@ -263,7 +340,22 @@
   "primaryTokenAttribute": "attributes.hp",
   "background": "systems/dnd5e/ui/official/dnd5e-background.webp",
   "flags": {
-    "needsMigrationVersion": "3.1.0",
+    "dnd5e": {
+      "sourceBooks": {
+        "SRD 5.1": "SOURCE.BOOK.SRD"
+      },
+      "spellLists": [
+        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.ziBzRlrpBm1KVV0j",
+        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.cuG9d7J9fQH9InYT",
+        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.MWiN7ILEO0Vd3zAZ",
+        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.FhucONA0yRZQjMmb",
+        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.sANq9JMycfSq3A5d",
+        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.PVgly1xB2S2I8GLQ",
+        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.mx4TsSbBIAaAkhQ7",
+        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.k7Rs5EyXeA0SFTXD"
+      ]
+    },
+    "needsMigrationVersion": "4.0.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
       "extensions": ["css", "hbs", "json"],

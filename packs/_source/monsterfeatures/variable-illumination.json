@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>the [[lookup @name lowercase]] sheds bright light in a 5- to <strong>20-foot radius</strong> and dim light for an additional number of<strong> ft.</strong> equal to the chosen radius. the [[lookup @name lowercase]] can alter the radius as a bonus action.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,65 +16,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
@@ -83,11 +39,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234588,
-    "modifiedTime": 1672336149760,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304975312,
+    "modifiedTime": 1725304975312,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!iQGaWIinmYFPRF94"

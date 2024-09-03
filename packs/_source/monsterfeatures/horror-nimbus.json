@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<section class=\"secret\"><p>the [[lookup @name lowercase]] magically emits scintillating, multicolored light. Each creature within 15 feet of the [[lookup @name lowercase]] that can see the light must succeed on a  <strong>DC 15 Wisdom</strong> saving throw or be frightened for 1 minute. </p><p>A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the [[lookup @name lowercase]]'s Horror Nimbus for the next 24 hours.</p></section><p>A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the [[lookup @name lowercase]]'s Horror Nimbus for the next 24 hours.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,77 +16,126 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "1",
-      "units": "minute"
-    },
-    "cover": null,
-    "target": {
-      "value": 15,
-      "width": null,
-      "units": "ft",
-      "type": "radius"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": "self"
-    },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "wis",
-      "dc": 15,
-      "scaling": "flat"
+      "max": "1",
+      "recovery": [
+        {
+          "period": "recharge",
+          "formula": "5",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": 5,
-      "charged": true
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "1",
+          "units": "minute",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "radius",
+            "size": "15",
+            "width": "",
+            "height": "",
+            "units": "ft"
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "wis",
+          "dc": {
+            "calculation": "",
+            "formula": "15"
+          }
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
+  },
+  "flags": {
+    "dnd5e": {
+      "migratedUses": null
     }
   },
-  "flags": {},
   "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234583,
-    "modifiedTime": 1672335890789,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304974869,
+    "modifiedTime": 1725304974869,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hu2pgYS1RD7hglvg"

@@ -4,26 +4,10 @@
   background: none;
 
   > header {
-    background: none;
-
     .window-title { visibility: hidden; }
-
-    button.header-control {
-      border-radius: 100%;
-      background: var(--dnd5e-background-25);
-      width: 18px;
-      height: 18px;
-      aspect-ratio: 1;
-      line-height: unset;
-      display: grid;
-      place-content: center;
-      box-shadow: none;
-      font-size: var(--font-size-14);
-      flex: none;
-
-      &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
-    }
   }
+
+  &:not(.minimized) .window-header { margin: 0; }
 
   .window-resize-handle {
     inset: auto 0 0 auto;
@@ -41,7 +25,7 @@
     grid-template-columns: 230px auto;
     grid-template-rows: min-content auto 2.75rem;
     margin-top: calc(var(--header-height) * -1);
-    padding-top: var(--header-height);
+    padding: var(--header-height) 0 0;
     overflow: hidden;
 
     &:has(> .footer:empty) { grid-template-rows: min-content auto 0; }
@@ -257,11 +241,6 @@
       .value { font-weight: bold; }
       &:not(.invalid) .value { color: var(--dnd5e-color-green); }
       &.invalid .value { color: var(--dnd5e-color-maroon); }
-    }
-
-    button:hover {
-      background: var(--dnd5e-background-card);
-      color: var(--color-text-dark-primary);
     }
   }
 

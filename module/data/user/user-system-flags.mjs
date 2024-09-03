@@ -1,4 +1,4 @@
-import { MappingField } from "../fields.mjs";
+import MappingField from "../fields/mapping-field.mjs";
 
 const { BooleanField, ForeignDocumentField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 

@@ -56,16 +56,17 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Start by classifying items into groups for rendering
     const maxLevelDelta = CONFIG.DND5E.maxLevel - (this.actor.system.details.level ?? 0);
     const [spells, other] = context.items.reduce((arr, item) => {
-      const {quantity, uses, target} = item.system;
+      const { quantity } = item.system;
       const ctx = context.itemContext[item.id] ??= {};
       ctx.isStack = Number.isNumeric(quantity) && (quantity !== 1);
       ctx.isExpanded = this._expanded.has(item.id);
-      ctx.hasUses = uses && (uses.max > 0);
-      ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
+      ctx.hasRecharge = item.hasRecharge;
+      ctx.hasUses = item.hasLimitedUses;
+      ctx.hasTarget = !!item.labels.target;
       ctx.canToggle = false;
       ctx.totalWeight = item.system.totalWeight?.toNearest(0.1);
       // Item grouping
-      ctx.group = item.system.activation?.type || "passive";
+      ctx.group = item.system.activities?.contents[0]?.activation.type || "passive";
       ctx.ungroup = "feat";
       if ( item.type === "weapon" ) ctx.ungroup = "weapon";
       if ( ctx.group === "passive" ) ctx.ungroup = "passive";
@@ -86,7 +87,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     for ( let item of other ) {
       if ( item.type === "weapon" ) features.weapons.items.push(item);
       else if ( ["background", "class", "feat", "race", "subclass"].includes(item.type) ) {
-        if ( item.system.activation?.type ) features.actions.items.push(item);
+        if ( item.system.activities?.size ) features.actions.items.push(item);
         else features.passive.items.push(item);
       }
       else features.equipment.items.push(item);
@@ -136,7 +137,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onConfigMenu(event) {
     event.preventDefault();
     event.stopPropagation();

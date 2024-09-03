@@ -89,7 +89,6 @@
       .level-badge {
         width: var(--level-size);
         height: var(--level-size);
-        background-image: url("ui/level-badge.webp");
         margin-left: auto;
       }
 
@@ -131,6 +130,23 @@
         @media (prefers-reduced-motion) {
           &[aria-pressed="true"]::after { animation: none; }
         }
+      }
+
+      /* Epic Boons */
+      .boon-badge {
+        --size: 36px;
+        position: absolute;
+        right: calc(var(--padding-right) + var(--level-size) / 6 - var(--size) / 2);
+        top: calc(var(--level-size) / 5 - var(--size) / 2);
+        width: var(--size);
+        height: var(--size);
+        background: transparent url("ui/boon-badge.webp") no-repeat center / contain;
+        filter: drop-shadow(0 3px 4px var(--dnd5e-shadow-45));
+        font-size: var(--font-size-15);
+        font-family: var(--dnd5e-font-roboto-slab);
+        display: flex;
+        padding-top: 4px;
+        text-shadow: 0 0 2px black;
       }
 
       /* XP & Buttons */
@@ -830,6 +846,17 @@
 
       .pill { padding: .25rem .5rem; }
     }
+
+    /* Item Sections */
+    .inventory-element {
+      gap: 16px;
+      .items-list { gap: 16px; }
+    }
+
+    .effects-element {
+      gap: 16px;
+      .effects-list { gap: 16px; }
+    }
   }
 
   /* ---------------------------------- */
@@ -939,6 +966,7 @@
           height: 23px;
           border-radius: 3px;
           border: 1px solid transparent;
+          text-align: center;
 
           &:hover, &:focus {
             border: 1px solid var(--dnd5e-color-gold);
@@ -999,7 +1027,14 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    .card.spellcasting { width: 230px; }
+    .card.spellcasting {
+      width: 230px;
+
+      .prepared .value {
+        &.max-preparations { font-size: var(--font-size-14); }
+        .separator, .max { color: var(--color-text-light-6) }
+      }
+    }
   }
 
   .spells-list .items-header .item-name { cursor: pointer; }
@@ -1097,6 +1132,7 @@
         input {
           height: unset;
           padding: .25rem;
+          background: transparent;
         }
 
         .value {

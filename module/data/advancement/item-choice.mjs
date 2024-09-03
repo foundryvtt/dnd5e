@@ -1,4 +1,4 @@
-import { MappingField } from "../fields.mjs";
+import MappingField from "../fields/mapping-field.mjs";
 import SpellConfigurationData from "./spell-config.mjs";
 
 const {

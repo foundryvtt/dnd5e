@@ -1,9 +1,11 @@
-import { FormulaField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import { convertWeight, simplifyBonus } from "../../../utils.mjs";
+
+const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Shared contents of the attributes schema between various actor types.
@@ -29,7 +31,7 @@ export default class AttributesFields {
     return {
       init: new RollConfigField({
         ability: "",
-        bonus: new FormulaField({required: true, label: "DND5E.InitiativeBonus"})
+        bonus: new FormulaField({ required: true, label: "DND5E.InitiativeBonus" })
       }, { label: "DND5E.Initiative" }),
       movement: new MovementField()
     };
@@ -63,25 +65,23 @@ export default class AttributesFields {
    */
   static get creature() {
     return {
-      attunement: new foundry.data.fields.SchemaField({
-        max: new foundry.data.fields.NumberField({
+      attunement: new SchemaField({
+        max: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 3, label: "DND5E.AttunementMax"
         })
-      }, {label: "DND5E.Attunement"}),
+      }, { label: "DND5E.Attunement" }),
       senses: new SensesField(),
-      spellcasting: new foundry.data.fields.StringField({
-        required: true, blank: true, initial: "int", label: "DND5E.SpellAbility"
-      }),
-      exhaustion: new foundry.data.fields.NumberField({
+      spellcasting: new StringField({ required: true, blank: true, label: "DND5E.SpellAbility" }),
+      exhaustion: new NumberField({
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
       }),
       concentration: new RollConfigField({
         ability: "",
-        bonuses: new foundry.data.fields.SchemaField({
-          save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
+        bonuses: new SchemaField({
+          save: new FormulaField({ required: true, label: "DND5E.SaveBonus" })
         }),
-        limit: new foundry.data.fields.NumberField({integer: true, min: 0, initial: 1, label: "DND5E.AttrConcentration.Limit"})
-      }, {label: "DND5E.Concentration"})
+        limit: new NumberField({ integer: true, min: 0, initial: 1, label: "DND5E.AttrConcentration.Limit" })
+      }, { label: "DND5E.Concentration" })
     };
   }
 
@@ -113,7 +113,7 @@ export default class AttributesFields {
     const ac = this.attributes.ac;
     ac.armor = 10;
     ac.shield = ac.cover = 0;
-    ac.bonus = "";
+    ac.min = ac.bonus = "";
   }
 
   /* -------------------------------------------- */
@@ -267,8 +267,10 @@ export default class AttributesFields {
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
     const units = this.attributes.movement.units;
+    const reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
+      ? this.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     for ( const type in CONFIG.DND5E.movementTypes ) {
-      let speed = this.attributes.movement[type];
+      let speed = Math.max(0, this.attributes.movement[type] - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
         if ( halfMovement ) speed *= 0.5;

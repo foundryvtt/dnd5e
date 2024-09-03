@@ -1,0 +1,54 @@
+<section>
+    {{#each choices}}
+    <fieldset class="traits card">
+        <legend>{{ label }}</legend>
+        <div class="header">
+            <div class="proficiency">
+                <i class="fa-regular fa-circle-dot" data-tooltip="DND5E.Proficiency"
+                   aria-label="{{ localize 'DND5E.Proficiency' }}"></i>
+            </div>
+            <div class="mastery">
+                <i class="fa-solid fa-award" data-tooltip="DND5E.WEAPON.FIELDS.mastery.label"
+                   aria-label="{{ localize 'DND5E.WEAPON.FIELDS.mastery.label' }}"></i>
+            </div>
+        </div>
+        {{> ".weapon-list" choices=children topLevel=true }}
+    </fieldset>
+    {{/each}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Special" }}</legend>
+        {{ formInput fields.custom value=data.custom }}
+        <p class="hint">{{ localize "DND5E.SpecialHint" }}</p>
+    </fieldset>
+</section>
+
+{{#*inline ".weapon-list"}}
+<ol class="unlist trait-list">
+    {{#if (and children topLevel (not otherGroup))}}
+    <li>
+        <label class="name">{{ localize "DND5E.TraitAll" category=label }}</label>
+        <div class="proficiency">
+            {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.value." @key) value=chosen
+                         input=@root.inputs.createCheckboxInput }}
+        </div>
+    </li>
+    {{/if}}
+    {{#each choices}}
+    <li {{~#if category}} class="category"{{/if}}>
+        <label class="name">{{ label }}</label>
+        <div class="proficiency">
+            {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.value." @key) value=chosen
+                         disabled=disabled input=@root.inputs.createCheckboxInput }}
+        </div>
+        {{#if children}}
+        {{> ".weapon-list" choices=children topLevel=false }}
+        {{else}}
+        <div class="mastery">
+            {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.mastery.value." @key)
+                         value=mastery.chosen disabled=mastery.disabled input=@root.inputs.createCheckboxInput }}
+        </div>
+        {{/if}}
+    </li>
+    {{/each}}
+</ol>
+{{/inline}}

@@ -1,8 +1,11 @@
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import { simplifyBonus } from "../../../utils.mjs";
 import { ActorDataModel } from "../../abstract.mjs";
-import { FormulaField, MappingField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
+import MappingField from "../../fields/mapping-field.mjs";
 import CurrencyTemplate from "../../shared/currency.mjs";
+
+const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * @typedef {object} AbilityData
@@ -22,23 +25,23 @@ import CurrencyTemplate from "../../shared/currency.mjs";
  */
 export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplate) {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      abilities: new MappingField(new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
+      abilities: new MappingField(new SchemaField({
+        value: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
         }),
-        proficient: new foundry.data.fields.NumberField({
+        proficient: new NumberField({
           required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel"
         }),
-        max: new foundry.data.fields.NumberField({
+        max: new NumberField({
           required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax"
         }),
-        bonuses: new foundry.data.fields.SchemaField({
-          check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
-          save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
-        }, {label: "DND5E.AbilityBonuses"})
+        bonuses: new SchemaField({
+          check: new FormulaField({ required: true, label: "DND5E.AbilityCheckBonus" }),
+          save: new FormulaField({ required: true, label: "DND5E.SaveBonus" })
+        }, { label: "DND5E.AbilityBonuses" })
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
         initialKeysOnly: true, label: "DND5E.Abilities"
@@ -70,7 +73,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     CommonTemplate.#migrateACData(source);

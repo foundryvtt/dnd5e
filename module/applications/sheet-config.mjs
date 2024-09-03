@@ -5,7 +5,7 @@ import { setTheme } from "../settings.mjs";
  */
 export default class SheetConfig5e extends DocumentSheetConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/shared/sheet-config.hbs"
@@ -14,7 +14,7 @@ export default class SheetConfig5e extends DocumentSheetConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData(options) {
     const context = super.getData(options);
     context.CONFIG = CONFIG.DND5E;

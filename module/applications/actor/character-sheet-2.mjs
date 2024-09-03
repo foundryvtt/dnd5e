@@ -1,6 +1,6 @@
 import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { simplifyBonus } from "../../utils.mjs";
+import { formatNumber } from "../../utils.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
@@ -181,22 +181,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
     // Spellcasting
     context.spellcasting = [];
-    const msak = simplifyBonus(this.actor.system.bonuses.msak.attack, context.rollData);
-    const rsak = simplifyBonus(this.actor.system.bonuses.rsak.attack, context.rollData);
-
     for ( const item of Object.values(this.actor.classes).sort((a, b) => b.system.levels - a.system.levels) ) {
       const sc = item.spellcasting;
       if ( !sc?.progression || (sc.progression === "none") ) continue;
       const ability = this.actor.system.abilities[sc.ability];
       const mod = ability?.mod ?? 0;
-      const attackBonus = msak === rsak ? msak : 0;
       const name = item.system.spellcasting.progression === sc.progression ? item.name : item.subclass?.name;
       context.spellcasting.push({
         label: game.i18n.format("DND5E.SpellcastingClass", { class: name }),
         ability: { mod, ability: sc.ability },
-        attack: mod + this.actor.system.attributes.prof + attackBonus,
+        attack: sc.attack,
+        preparation: sc.preparation,
         primary: this.actor.system.attributes.spellcasting === sc.ability,
-        save: ability?.dc ?? 0
+        save: sc.save
       });
     }
 
@@ -214,6 +211,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     context.favorites = await this._prepareFavorites();
     context.favorites.sort((a, b) => a.sort - b.sort);
 
+    // Epic Boons
+    if ( context.system.details.xp.boonsEarned !== undefined ) {
+      const pluralRules = new Intl.PluralRules(game.i18n.lang);
+      context.epicBoonsEarned = game.i18n.format(
+        `DND5E.ExperiencePointsBoons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
+        { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
+      );
+    }
+
     return context;
   }
 
@@ -227,6 +233,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       ?.items?.sort((a, b) => a.sort - b.sort);
     context.inventory = context.inventory.filter(entry => entry.items.length);
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
+    context.inventory.forEach(section => {
+      section.categories = [
+        { activityPartial: "dnd5e.activity-column-price" },
+        { activityPartial: "dnd5e.activity-column-weight" },
+        { activityPartial: "dnd5e.activity-column-quantity" },
+        { activityPartial: "dnd5e.activity-column-uses" },
+        { activityPartial: "dnd5e.activity-column-controls" }
+      ];
+    });
 
     // Remove races & background as they are shown on the details tab instead.
     const features = context.features.filter(f => (f.dataset.type !== "background") && (f.dataset.type !== "race"));
@@ -245,7 +260,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     });
 
     if ( this.actor.system.details.race instanceof dnd5e.documents.Item5e ) {
-      features.push({ label: "DND5E.FeaturesRace", items: [], dataset: { type: "race" } });
+      features.push({ label: "DND5E.Species.Features", items: [], dataset: { type: "race" } });
     }
 
     if ( this.actor.system.details.background instanceof dnd5e.documents.Item5e ) {
@@ -271,9 +286,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     // TODO: Customise this per-section.
     features.forEach(section => {
       section.categories = [
-        { classes: "item-uses", label: "DND5E.Uses", partial: "dnd5e.column-uses" },
-        { classes: "item-recovery", label: "DND5E.Recovery", partial: "dnd5e.column-recovery" },
-        { classes: "item-controls", partial: "dnd5e.column-feature-controls" }
+        {
+          classes: "item-uses", label: "DND5E.Uses", itemPartial: "dnd5e.column-uses",
+          activityPartial: "dnd5e.activity-column-uses"
+        },
+        {
+          classes: "item-recovery", label: "DND5E.Recovery", itemPartial: "dnd5e.column-recovery",
+          activityPartial: "dnd5e.activity-column-recovery"
+        },
+        {
+          classes: "item-controls", itemPartial: "dnd5e.column-feature-controls",
+          activityPartial: "dnd5e.activity-column-controls"
+        }
       ];
     });
   }
@@ -312,14 +336,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   _getSubmitData(updateData={}) {
     // Skip over ActorSheet#_getSubmitData to allow for editing overridden values.
     return FormApplication.prototype._getSubmitData.call(this, updateData);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _disableFields(form) {
-    super._disableFields(form);
-    form.querySelectorAll(".interface-only").forEach(input => input.disabled = false);
   }
 
   /* -------------------------------------------- */
@@ -387,7 +403,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   _onAction(event) {
     const target = event.currentTarget;
     switch ( target.dataset.action ) {
-      case "findItem": this._onFindItem(target.dataset.itemType); break;
+      case "findItem":
+        this._onFindItem(target.dataset.itemType, { classIdentifier: target.dataset.classIdentifier });
+        break;
       case "removeFavorite": this._onRemoveFavorite(event); break;
       case "spellcasting": this._onToggleSpellcasting(event); break;
       case "toggleInspiration": this._onToggleInspiration(); break;
@@ -421,19 +439,16 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /**
    * Show available items of a given type.
-   * @param {string} type  The item type.
+   * @param {string} type                       The item type.
+   * @param {object} [options={}]
+   * @param {string} [options.classIdentifier]  Identifier of the class when finding a subclass.
    * @protected
    */
-  async _onFindItem(type) {
-    if ( game.release.generation < 12 ) {
-      switch ( type ) {
-        case "class": game.packs.get(CONFIG.DND5E.sourcePacks.CLASSES)?.render(true); break;
-        case "race": game.packs.get(CONFIG.DND5E.sourcePacks.RACES)?.render(true); break;
-        case "background": game.packs.get(CONFIG.DND5E.sourcePacks.BACKGROUNDS)?.render(true); break;
-      }
-    } else {
-      new CompendiumBrowser({ filters: { locked: { types: new Set([type]) } } }).render(true);
-    }
+  async _onFindItem(type, { classIdentifier }={}) {
+    const filters = { locked: { types: new Set([type]) } };
+    if ( classIdentifier ) filters.locked.additional = { class: { [classIdentifier]: 1 } };
+    const result = await CompendiumBrowser.selectOne({ filters });
+    if ( result ) this._onDropItemCreate(await fromUuid(result));
   }
 
   /* -------------------------------------------- */

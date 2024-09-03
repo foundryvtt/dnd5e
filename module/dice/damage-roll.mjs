@@ -1,3 +1,46 @@
+const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, StringTerm } = foundry.dice.terms;
+
+/**
+ * Configuration data for the process of rolling a damage roll.
+ *
+ * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
+ * @property {DamageRollConfiguration[]} rolls         Configuration data for individual rolls.
+ * @property {CriticalDamageConfiguration} [critical]  Critical configuration for all rolls.
+ * @property {number} [scaling=0]                      Scale increase above base damage.
+ */
+
+/**
+ * Damage roll configuration data.
+ *
+ * @typedef {BasicRollConfiguration} DamageRollConfiguration
+ * @property {DamageRollOptions} [options] - Options passed through to the roll.
+ */
+
+/**
+ * Options that describe a damage roll.
+ *
+ * @typedef {BasicRollOptions} DamageRollOptions
+ * @property {boolean} [isCritical]                    Should critical damage be calculated for this roll?
+ * @property {CriticalDamageConfiguration} [critical]  Critical configuration for this roll.
+ * @property {string[]} [properties]                   Physical properties of the source (e.g. magical, silvered).
+ * @property {string} [type]                           Type of damage represented.
+ * @property {string[]} [types]                        List of damage types selectable in the configuration app. If no
+ *                                                     type is provided, then the first of these types will be used.
+ */
+
+/**
+ * Critical effects configuration data.
+ *
+ * @typedef {object} CriticalDamageConfiguration
+ * @property {boolean} [allow=true]       Should critical damage be allowed?
+ * @property {number} [multiplier=2]      Amount by which to multiply critical damage.
+ * @property {number} [bonusDice=0]       Additional dice added to first term when calculating critical damage.
+ * @property {string} [bonusDamage]       Additional, unmodified, damage formula added when calculating a critical.
+ * @property {boolean} [multiplyDice]     Should dice result be multiplied rather than number of dice rolled increased?
+ * @property {boolean} [multiplyNumeric]  Should numeric terms be multiplied along side dice during criticals?
+ * @property {string} [powerfulCritical]  Maximize result of extra dice added by critical, rather than rolling.
+ */
+
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
  * @param {string} formula                       The string formula to parse
@@ -89,7 +132,7 @@ export default class DamageRoll extends Roll {
       }
 
       // Merge any parenthetical terms followed by string terms
-      else if ( (term instanceof ParentheticalTerm || term instanceof MathTerm) && (nextTerm instanceof StringTerm)
+      else if ( (term instanceof ParentheticalTerm || term instanceof FunctionTerm) && (nextTerm instanceof StringTerm)
         && nextTerm.term.match(/^d[0-9]*$/)) {
         if ( term.isDeterministic ) {
           const newFormula = `${term.evaluate().total}${nextTerm.term}`;
@@ -118,7 +161,7 @@ export default class DamageRoll extends Roll {
     for ( let [i, term] of this.terms.entries() ) {
       // Multiply dice terms
       if ( term instanceof DiceTerm ) {
-        if ( (game.release.generation > 11) && (term._number instanceof Roll) ) {
+        if ( term._number instanceof Roll ) {
           // Complex number term.
           if ( !term._number.isDeterministic ) continue;
           if ( !term._number._evaluated ) term._number.evaluateSync();
@@ -130,7 +173,7 @@ export default class DamageRoll extends Roll {
 
           // Powerful critical - maximize damage and reduce the multiplier by 1
           if ( this.options.powerfulCritical ) {
-            let bonus = term.number * term.faces;
+            const bonus = Roll.create(term.formula).evaluateSync({ maximize: true }).total;
             if ( bonus > 0 ) {
               const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
               flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);
@@ -182,7 +225,7 @@ export default class DamageRoll extends Roll {
   /*  Chat Messages                               */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   toMessage(messageData={}, options={}) {
     return this.constructor.toMessage([this], messageData, options);
   }
@@ -221,8 +264,6 @@ export default class DamageRoll extends Roll {
       sound: CONFIG.sounds.dice
     }, messageData);
     messageData.rolls = rolls;
-    // TODO: Remove when v11 support is dropped.
-    if ( game.release.generation < 12 ) messageData.type = CONST.CHAT_MESSAGE_TYPES.ROLL;
 
     // Either create the message or just return the chat data
     const cls = getDocumentClass("ChatMessage");
@@ -260,7 +301,7 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Create a Dialog prompt used to configure evaluation of one or more daamge rolls.
+   * Create a Dialog prompt used to configure evaluation of one or more damage rolls.
    * @param {DamageRoll[]} rolls                Damage rolls to configure.
    * @param {object} [data={}]                  Dialog configuration data
    * @param {string} [data.title]               The title of the shown dialog window
@@ -275,16 +316,27 @@ export default class DamageRoll extends Roll {
   static async configureDialog(rolls, {
     title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
 
+    const damageTypeLabel = k => CONFIG.DND5E.damageTypes[k]?.label ?? CONFIG.DND5E.healingTypes[k]?.label;
+
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.EVALUATION_TEMPLATE, {
       formulas: rolls.map((roll, index) => ({
         formula: `${roll.formula}${index === 0 ? " + @bonus" : ""}`,
-        type: CONFIG.DND5E.damageTypes[roll.options.type]?.label
-          ?? CONFIG.DND5E.healingTypes[roll.options.type]?.label ?? null
+        type: roll.options.types?.length > 1 ? null
+          : damageTypeLabel(roll.options.type ?? roll.options.types?.[0]) ?? null,
+        types: roll.options.types?.length > 1 ? roll.options.types?.map(value =>
+          ({ value, label: damageTypeLabel(value), selected: value === roll.options.type })
+        ) : null
       })),
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes
     });
+
+    const handleSubmit = (html, isCritical) => {
+      const formData = new FormDataExtended(html[0].querySelector("form"));
+      const submitData = foundry.utils.expandObject(formData.object);
+      return rolls.map((r, i) => r._onDialogSubmit(submitData, isCritical, i));
+    };
 
     // Create the Dialog window and await submission of the form
     return new Promise(resolve => {
@@ -295,11 +347,11 @@ export default class DamageRoll extends Roll {
           critical: {
             condition: allowCritical,
             label: game.i18n.localize("DND5E.CriticalHit"),
-            callback: html => resolve(rolls.map((r, i) => r._onDialogSubmit(html, true, i === 0)))
+            callback: html => resolve(handleSubmit(html, true))
           },
           normal: {
             label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
-            callback: html => resolve(rolls.map((r, i) => r._onDialogSubmit(html, false, i === 0)))
+            callback: html => resolve(handleSubmit(html, false))
           }
         },
         default: defaultCritical ? "critical" : "normal",
@@ -312,32 +364,34 @@ export default class DamageRoll extends Roll {
 
   /**
    * Handle submission of the Roll evaluation configuration Dialog
-   * @param {jQuery} html         The submitted dialog content
+   * @param {object} submitData   The submitted dialog data.
    * @param {boolean} isCritical  Is the damage a critical hit?
-   * @param {boolean} isFirst     Is this the first roll being prepared?
+   * @param {number} index        Index of the roll.
    * @returns {DamageRoll}        This damage roll.
    * @private
    */
-  _onDialogSubmit(html, isCritical, isFirst) {
-    const form = html[0].querySelector("form");
+  _onDialogSubmit(submitData, isCritical, index) {
+    // Set damage types on rolls
+    const rollData = submitData.roll?.[index] ?? {};
+    if ( rollData.type ) this.options.type = rollData.type;
 
     // Append a situational bonus term
-    if ( form.bonus.value && isFirst ) {
-      const bonus = new DamageRoll(form.bonus.value, this.data);
+    if ( submitData.bonus && (index === 0) ) {
+      const bonus = new DamageRoll(submitData.bonus, this.data);
       if ( !(bonus.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms = this.terms.concat(bonus.terms);
     }
 
     // Apply advantage or disadvantage
     this.options.critical = isCritical;
-    this.options.rollMode = form.rollMode.value;
+    this.options.rollMode = submitData.rollMode;
     this.configureDamage();
     return this;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static fromData(data) {
     const roll = super.fromData(data);
     roll._formula = this.getFormula(roll.terms);

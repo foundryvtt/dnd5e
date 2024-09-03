@@ -1,37 +1,21 @@
 import { ItemDataModel } from "../../abstract.mjs";
-import { FormulaField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
 import {default as EnchantmentField, EnchantmentData} from "../fields/enchantment-field.mjs";
 import SummonsField from "../fields/summons-field.mjs";
 
 const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Data model template for item actions.
- *
- * @property {string} ability               Ability score to use when determining modifier.
- * @property {string} actionType            Action type as defined in `DND5E.itemActionTypes`.
- * @property {object} attack                Information how attacks are handled.
- * @property {string} attack.bonus          Numeric or dice bonus to attack rolls.
- * @property {boolean} attack.flat          Is the attack bonus the only bonus to attack rolls?
- * @property {string} chatFlavor            Extra text displayed in chat.
- * @property {object} critical              Information on how critical hits are handled.
- * @property {number} critical.threshold    Minimum number on the dice to roll a critical hit.
- * @property {string} critical.damage       Extra damage on critical hit.
- * @property {object} damage                Item damage formulas.
- * @property {string[][]} damage.parts      Array of damage formula and types.
- * @property {string} damage.versatile      Special versatile damage formula.
- * @property {EnchantmentData} enchantment  Enchantment configuration associated with this type.
- * @property {string} formula               Other roll formula.
- * @property {object} save                  Item saving throw data.
- * @property {string} save.ability          Ability required for the save.
- * @property {number} save.dc               Custom saving throw value.
- * @property {string} save.scaling          Method for automatically determining saving throw DC.
- * @property {SummonsData} summons
+ * @deprecated since 4.0, targeted for removal in 4.4
  * @mixin
  */
 export default class ActionTemplate extends ItemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
+    foundry.utils.logCompatibilityWarning(
+      "The `ActionTemplate` data model has been deprecated in favor of `ActivitiesTemplate`.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+    );
     return {
       ability: new StringField({required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"}),
       actionType: new StringField({required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"}),
@@ -65,7 +49,7 @@ export default class ActionTemplate extends ItemDataModel {
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ActionTemplate.#migrateAbility(source);
@@ -237,16 +221,6 @@ export default class ActionTemplate extends ItemDataModel {
    */
   get hasSummoning() {
     return (this.actionType === "summ") && !!this.summons?.profiles.length;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Can this item enchant other items?
-   * @type {boolean}
-   */
-  get isEnchantment() {
-    return EnchantmentData.isEnchantment(this);
   }
 
   /* -------------------------------------------- */

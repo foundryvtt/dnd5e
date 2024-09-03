@@ -38,7 +38,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
@@ -48,7 +48,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async retainData(data) {
     await super.retainData(data);
     this.replacement = data.replaced?.original;
@@ -57,7 +57,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getContext() {
     const context = {};
     this.selected ??= new Set(Object.values(this.advancement.value.added?.[this.level] ?? {}));
@@ -131,7 +131,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".item-delete").click(this._onItemDelete.bind(this));
@@ -139,7 +139,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onChangeInput(event) {
     if ( event.target.type === "checkbox" ) {
       if ( event.target.checked ) this.selected.add(event.target.name);
@@ -168,7 +168,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDrop(event) {
     const levelConfig = this.advancement.configuration.choices[this.level];
     let max = levelConfig.count ?? 0;

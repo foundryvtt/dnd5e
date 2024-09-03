@@ -22,61 +22,15 @@
       "value": 10,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": null,
@@ -105,12 +59,8 @@
     "container": null,
     "crewed": false,
     "properties": [],
-    "attack": {
-      "bonus": "",
-      "flat": false
-    },
-    "enchantment": null,
-    "summons": null
+    "activities": {},
+    "attuned": false
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -121,11 +71,12 @@
   "flags": {},
   "_id": "N0in6FE8DQdZrHei",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233629,
-    "modifiedTime": 1715374602492,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037172440,
+    "modifiedTime": 1725037172440,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!N0in6FE8DQdZrHei"

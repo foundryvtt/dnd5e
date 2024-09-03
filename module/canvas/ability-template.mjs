@@ -12,6 +12,14 @@ export default class AbilityTemplate extends MeasuredTemplate {
   /* -------------------------------------------- */
 
   /**
+   * Current token that is highlighted when using adjusted size template.
+   * @type {Token5e}
+   */
+  #hoveredToken;
+
+  /* -------------------------------------------- */
+
+  /**
    * The initially active CanvasLayer to re-activate after the workflow is complete.
    * @type {CanvasLayer}
    */
@@ -28,13 +36,13 @@ export default class AbilityTemplate extends MeasuredTemplate {
   /* -------------------------------------------- */
 
   /**
-   * A factory method to create an AbilityTemplate instance using provided data from an Item5e instance
-   * @param {Item5e} item               The Item object for which to construct the template
+   * A factory method to create an AbilityTemplate instance using provided data from an Activity instance.
+   * @param {Activity} activity         The Activity for which to construct the template.
    * @param {object} [options={}]       Options to modify the created template.
-   * @returns {AbilityTemplate|null}    The template object, or null if the item does not produce a template
+   * @returns {AbilityTemplate[]|null}  The template objects, or null if the item does not produce a template.
    */
-  static fromItem(item, options={}) {
-    const target = item.system.target ?? {};
+  static fromActivity(activity, options={}) {
+    const target = activity.target?.template ?? {};
     const templateShape = dnd5e.config.areaTargetTypes[target.type]?.template;
     if ( !templateShape ) return null;
 
@@ -42,12 +50,21 @@ export default class AbilityTemplate extends MeasuredTemplate {
     const templateData = foundry.utils.mergeObject({
       t: templateShape,
       user: game.user.id,
-      distance: target.value,
+      distance: target.size,
       direction: 0,
       x: 0,
       y: 0,
       fillColor: game.user.color,
-      flags: { dnd5e: { origin: item.uuid, spellLevel: item.system.level } }
+      flags: { dnd5e: {
+        dimensions: {
+          size: target.size,
+          width: target.width,
+          height: target.height,
+          adjustedSize: target.type === "radius"
+        },
+        origin: activity.uuid,
+        spellLevel: activity.item.system.level
+      } }
     }, options);
 
     // Additional type-specific data
@@ -56,9 +73,9 @@ export default class AbilityTemplate extends MeasuredTemplate {
         templateData.angle = CONFIG.MeasuredTemplate.defaults.angle;
         break;
       case "rect": // 5e rectangular AoEs are always cubes
-        templateData.width = target.value;
+        templateData.width = target.size;
         if ( game.settings.get("dnd5e", "gridAlignedSquareTemplates") ) {
-          templateData.distance = Math.hypot(target.value, target.value);
+          templateData.distance = Math.hypot(target.size, target.size);
           templateData.direction = 45;
         } else {
           // Override as 'ray' to make the template able to be rotated without morphing its shape
@@ -73,32 +90,71 @@ export default class AbilityTemplate extends MeasuredTemplate {
     }
 
     /**
-     * A hook event that fires before a template is created for an Item.
-     * @function dnd5e.preCreateItemTemplate
+     * A hook event that fires before a template is created for an Activity.
+     * @function dnd5e.preCreateActivityTemplate
      * @memberof hookEvents
-     * @param {Item5e} item                     Item for which the template is being placed.
-     * @param {object} templateData             Data used to create the new template.
-     * @returns {boolean}                       Explicitly return false to prevent the template from being placed.
+     * @param {Activity} activity    Activity for which the template is being placed.
+     * @param {object} templateData  Data used to create the new template.
+     * @returns {boolean}            Explicitly return `false` to prevent the template from being placed.
      */
-    if ( Hooks.call("dnd5e.preCreateItemTemplate", item, templateData) === false ) return null;
+    if ( Hooks.call("dnd5e.preCreateActivityTemplate", activity, templateData) === false ) return null;
 
-    // Return the template constructed from the item data
+    if ( "dnd5e.preCreateItemTemplate" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preCreateItemTemplate` hook has been deprecated and replaced with `dnd5e.preCreateActivityTemplate`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      if ( Hooks.call("dnd5e.preCreateItemTemplate", activity.item, templateData) === false ) return null;
+    }
+
+    // Construct the templates from activity data
     const cls = CONFIG.MeasuredTemplate.documentClass;
-    const template = new cls(templateData, {parent: canvas.scene});
-    const object = new this(template);
-    object.item = item;
-    object.actorSheet = item.actor?.sheet || null;
+    const created = Array.fromRange(target.count || 1).map(() => {
+      const template = new cls(foundry.utils.deepClone(templateData), { parent: canvas.scene });
+      const object = new this(template);
+      object.activity = activity;
+      object.item = activity.item;
+      object.actorSheet = activity.actor?.sheet || null;
+      return object;
+    });
 
     /**
-     * A hook event that fires after a template is created for an Item.
-     * @function dnd5e.createItemTemplate
+     * A hook event that fires after a template are created for an Activity.
+     * @function dnd5e.createActivityTemplate
      * @memberof hookEvents
-     * @param {Item5e} item                Item for which the template is being placed.
-     * @param {AbilityTemplate} template   The template being placed.
+     * @param {Activity} activity            Activity for which the template is being placed.
+     * @param {AbilityTemplate[]} templates  The templates being placed.
      */
-    Hooks.callAll("dnd5e.createItemTemplate", item, object);
+    Hooks.callAll("dnd5e.createActivityTemplate", activity, created);
 
-    return object;
+    if ( "dnd5e.createItemTemplate" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.createItemTemplate` hook has been deprecated and replaced with `dnd5e.createActivityTemplate`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      Hooks.callAll("dnd5e.createItemTemplate", activity.item, created[0]);
+    }
+
+    return created;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A factory method to create an AbilityTemplate instance using provided data from an Item5e instance
+   * @param {Item5e} item               The Item object for which to construct the template
+   * @param {object} [options={}]       Options to modify the created template.
+   * @returns {AbilityTemplate|null}    The template object, or null if the item does not produce a template
+   * @deprecated since DnD5e 4.0, available until DnD5e 4.4
+   */
+  static fromItem(item, options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The `AbilityTemplate#fromItem` method has been deprecated and replaced with `fromActivity`.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
+    const activity = this.system.activities?.contents[0];
+    if ( activity ) return this.fromActivity(activity, options)?.[0] ?? null;
+    return null;
   }
 
   /* -------------------------------------------- */
@@ -161,6 +217,10 @@ export default class AbilityTemplate extends MeasuredTemplate {
     canvas.stage.off("mousedown", this.#events.confirm);
     canvas.app.view.oncontextmenu = null;
     canvas.app.view.onwheel = null;
+    if ( this.#hoveredToken ) {
+      this.#hoveredToken._onHoverOut(event);
+      this.#hoveredToken = null;
+    }
     this.#initialLayer.activate();
     await this.actorSheet?.maximize();
   }
@@ -176,9 +236,27 @@ export default class AbilityTemplate extends MeasuredTemplate {
     const now = Date.now(); // Apply a 20ms throttle
     if ( now - this.#moveTime <= 20 ) return;
     const center = event.data.getLocalPosition(this.layer);
-    const interval = canvas.grid.type === CONST.GRID_TYPES.GRIDLESS ? 0 : 2;
-    const snapped = canvas.grid.getSnappedPosition(center.x, center.y, interval);
-    this.document.updateSource({x: snapped.x, y: snapped.y});
+    const updates = canvas.templates.getSnappedPoint(center);
+
+    // Adjust template size to take hovered token into account if `adjustedSize` is set
+    const baseDistance = this.document.flags.dnd5e?.dimensions?.size;
+    if ( this.document.flags.dnd5e?.dimensions?.adjustedSize && baseDistance ) {
+      const rectangle = new PIXI.Rectangle(center.x, center.y, 1, 1);
+      const hoveredToken = canvas.tokens.quadtree.getObjects(rectangle, {
+        collisionTest: ({ t }) => t.visible && !t.document.isSecret }).first();
+      if ( hoveredToken && (hoveredToken !== this.#hoveredToken) ) {
+        this.#hoveredToken = hoveredToken;
+        this.#hoveredToken._onHoverIn(event);
+        const size = Math.max(hoveredToken.document.width, hoveredToken.document.height);
+        updates.distance = baseDistance + (size * canvas.grid.distance / 2);
+      } else if ( !hoveredToken && this.#hoveredToken ) {
+        this.#hoveredToken._onHoverOut(event);
+        this.#hoveredToken = null;
+        updates.distance = baseDistance;
+      }
+    }
+
+    this.document.updateSource(updates);
     this.refresh();
     this.#moveTime = now;
   }
@@ -207,8 +285,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   async _onConfirmPlacement(event) {
     await this._finishPlacement(event);
-    const interval = canvas.grid.type === CONST.GRID_TYPES.GRIDLESS ? 0 : 2;
-    const destination = canvas.grid.getSnappedPosition(this.document.x, this.document.y, interval);
+    const destination = canvas.templates.getSnappedPoint({ x: this.document.x, y: this.document.y });
     this.document.updateSource(destination);
     this.#events.resolve(canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.document.toObject()]));
   }

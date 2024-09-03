@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,65 +16,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
@@ -83,11 +39,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234544,
-    "modifiedTime": 1672335852792,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304970631,
+    "modifiedTime": 1725304970631,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!P0DMM1rgpoiBodDT"

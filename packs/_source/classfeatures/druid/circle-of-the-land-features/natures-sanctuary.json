@@ -16,70 +16,92 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "wis",
-      "dc": null,
-      "scaling": "wis"
+      "recovery": [],
+      "spent": 0
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Circle of the Land 14",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "",
+          "value": null,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "wis",
+          "dc": {
+            "calculation": "wis",
+            "formula": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "crewed": false,
-    "properties": []
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    }
   },
   "flags": {},
   "img": "icons/magic/control/encase-creature-humanoid-hold.webp",
@@ -87,11 +109,12 @@
   "folder": "oPF5p4Kt9rOawCdU",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234353,
-    "modifiedTime": 1704824715711,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037381924,
+    "modifiedTime": 1725037381924,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!EuX1kJNIw1F68yus"

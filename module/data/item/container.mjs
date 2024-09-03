@@ -5,6 +5,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Container items.
@@ -14,6 +15,7 @@ import CurrencyTemplate from "../shared/currency.mjs";
  * @mixes EquippableItemTemplate
  * @mixes CurrencyTemplate
  *
+ * @property {Set<string>} properties       Container properties.
  * @property {object} capacity              Information on container's carrying capacity.
  * @property {string} capacity.type         Method for tracking max capacity as defined in `DND5E.itemCapacityTypes`.
  * @property {number} capacity.value        Total amount of the type this container can carry.
@@ -21,27 +23,23 @@ import CurrencyTemplate from "../shared/currency.mjs";
 export default class ContainerData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate
 ) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      quantity: new foundry.data.fields.NumberField({min: 1, max: 1}),
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.ItemContainerProperties"
-      }),
-      capacity: new foundry.data.fields.SchemaField({
-        type: new foundry.data.fields.StringField({
+      quantity: new NumberField({ min: 1, max: 1 }),
+      properties: new SetField(new StringField(), { label: "DND5E.ItemContainerProperties" }),
+      capacity: new SchemaField({
+        type: new StringField({
           required: true, initial: "weight", blank: false, label: "DND5E.ItemContainerCapacityType"
         }),
-        value: new foundry.data.fields.NumberField({
-          required: true, min: 0, label: "DND5E.ItemContainerCapacityMax"
-        })
-      }, {label: "DND5E.ItemContainerCapacity"})
+        value: new NumberField({ required: true, min: 0, label: "DND5E.ItemContainerCapacityMax" })
+      }, { label: "DND5E.ItemContainerCapacity" })
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: true,
     inventoryItem: true,
@@ -63,7 +61,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ContainerData.#migrateQuantity(source);
@@ -96,6 +94,14 @@ export default class ContainerData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalEquippableData();
   }
@@ -108,6 +114,17 @@ export default class ContainerData extends ItemDataModel.mixin(
     const capacity = await this.computeCapacity();
     if ( Number.isFinite(capacity.max) ) return foundry.utils.mergeObject(await data, { uses: capacity });
     return await data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: context.itemType },
+      ...this.physicalItemSheetFields
+    ];
+    context.parts = ["dnd5e.details-container"];
   }
 
   /* -------------------------------------------- */
@@ -263,7 +280,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onUpdate(changed, options, userId) {
     // Keep contents folder synchronized with container
     if ( (game.user.id === userId) && foundry.utils.hasProperty(changed, "folder") ) {

@@ -62,6 +62,8 @@ export async function actorValues(actor, trait) {
     data.value.forEach(v => setValue(v, 1));
   }
 
+  if ( trait === "weapon" ) data.mastery?.value?.forEach(v => setValue(v, 2));
+
   return values;
 }
 
@@ -268,16 +270,6 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
   const fields = traitIndexFields();
   const promise = collection.getIndex({ fields }).then(index => {
     const store = index.reduce((obj, entry) => {
-      for ( const field of fields ) {
-        const val = foundry.utils.getProperty(entry, field);
-        if ( (field !== "system.type.value") && (val !== undefined) ) {
-          foundry.utils.setProperty(entry, "system.type.value", val);
-          foundry.utils.logCompatibilityWarning(
-            `The '${field}' property has been deprecated in favor of a standardized \`system.type.value\` property.`,
-            { since: "DnD5e 3.0", until: "DnD5e 3.4", once: true }
-          );
-        }
-      }
       obj[entry._id] = entry;
       return obj;
     }, {});
@@ -385,15 +377,6 @@ export function traitLabel(trait, count) {
  * keyLabel("shortsword", { trait: "weapon" });
  */
 export function keyLabel(key, config={}) {
-  if ( foundry.utils.getType(config) === "string" ) {
-    foundry.utils.logCompatibilityWarning(
-      "Trait.keyLabel(trait, key) is now Trait.keyLabel(key, { trait }).",
-      { since: "DnD5e 2.4", until: "DnD5e 3.1" }
-    );
-    const tmp = config;
-    config = { trait: key };
-    key = tmp;
-  }
   let { count, trait, final } = config;
 
   let parts = key.split(":");

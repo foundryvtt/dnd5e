@@ -1,4 +1,5 @@
-import { IdentifierField } from "../fields.mjs";
+import JournalSpellListPageSheet from "../../applications/journal/spells-page-sheet.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 
 const { ArrayField, DocumentIdField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -30,7 +31,7 @@ const { ArrayField, DocumentIdField, HTMLField, NumberField, SchemaField, SetFie
  * @property {Set<string>} spells        UUIDs of spells to display.
  * @property {UnlinkedSpellConfiguration[]} unlinkedSpells  Unavailable spells that are entered manually.
  */
-export default class SpellListJournalPageData extends foundry.abstract.DataModel {
+export default class SpellListJournalPageData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
       type: new StringField({
@@ -70,4 +71,22 @@ export default class SpellListJournalPageData extends foundry.abstract.DataModel
     level: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Level",
     school: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.School"
   };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async toEmbed(config, options={}) {
+    for ( const value of config.values ) {
+      if ( value === "table" ) config.table = true;
+      else if ( value in JournalSpellListPageSheet.GROUPING_MODES ) config.grouping = value;
+    }
+    if ( config.table ) config.grouping = "level";
+
+    const sheet = new JournalSpellListPageSheet(this.parent, {
+      editable: false, displayAsTable: config.table, embedRendering: true, grouping: config.grouping
+    });
+    const rendered = await sheet._renderInner(await sheet.getData());
+    config.classes = config.classes ? `spells ${config.classes ?? ""}` : "spells";
+    return rendered[0];
+  }
 }

@@ -1,5 +1,6 @@
 import { formatNumber } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
+import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
 /**
  * List of multiplier options as tuples containing their numeric value and rendered text.
@@ -10,7 +11,7 @@ const MULTIPLIERS = [[-1, "-1"], [0, "0"], [.25, "¼"], [.5, "½"], [1, "1"], [2
 /**
  * Application to handle applying damage from a chat card.
  */
-export default class DamageApplicationElement extends ChatTrayElement {
+export default class DamageApplicationElement extends TargetedApplicationMixin(ChatTrayElement) {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -41,49 +42,6 @@ export default class DamageApplicationElement extends ChatTrayElement {
   /* -------------------------------------------- */
 
   /**
-   * Currently registered hook for monitoring for changes to selected tokens.
-   * @type {number|null}
-   */
-  selectedTokensHook = null;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Currently target selection mode.
-   * @type {"targeted"|"selected"}
-   */
-  get targetingMode() {
-    if ( this.targetSourceControl.hidden ) return "selected";
-    return this.targetSourceControl.querySelector('[aria-pressed="true"]')?.dataset.mode ?? "targeted";
-  }
-
-  set targetingMode(mode) {
-    if ( this.targetSourceControl.hidden ) mode = "selected";
-    const toPress = this.targetSourceControl.querySelector(`[data-mode="${mode}"]`);
-    const currentlyPressed = this.targetSourceControl.querySelector('[aria-pressed="true"]');
-    if ( currentlyPressed ) currentlyPressed.ariaPressed = false;
-    toPress.ariaPressed = true;
-
-    this.buildTargetsList();
-    if ( (mode === "targeted") && (this.selectedTokensHook !== null) ) {
-      Hooks.off("controlToken", this.selectedTokensHook);
-      this.selectedTokensHook = null;
-    } else if ( (mode === "selected") && (this.selectedTokensHook === null) ) {
-      this.selectedTokensHook = Hooks.on("controlToken", foundry.utils.debounce(() => this.buildTargetsList(), 50));
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The list of application targets.
-   * @type {HTMLUListElement}
-   */
-  targetList;
-
-  /* -------------------------------------------- */
-
-  /**
    * Options for each application target.
    * @type {Map<string, DamageApplicationOptions>}
    */
@@ -98,14 +56,6 @@ export default class DamageApplicationElement extends ChatTrayElement {
     if ( !this.#targetOptions.has(uuid) ) this.#targetOptions.set(uuid, { multiplier: 1 });
     return this.#targetOptions.get(uuid);
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The controls for selecting target source mode.
-   * @type {HTMLElement}
-   */
-  targetSourceControl;
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
@@ -130,15 +80,6 @@ export default class DamageApplicationElement extends ChatTrayElement {
         </label>
         <div class="collapsible-content">
           <div class="wrapper">
-            <div class="target-source-control">
-              <button type="button" class="unbutton" data-mode="targeted" aria-pressed="false">
-                <i class="fa-solid fa-bullseye" inert></i> ${game.i18n.localize("DND5E.Tokens.Targeted")}
-              </button>
-              <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
-                <i class="fa-solid fa-expand" inert></i> ${game.i18n.localize("DND5E.Tokens.Selected")}
-              </button>
-            </div>
-            <ul class="targets unlist"></ul>
             <button class="apply-damage" type="button" data-action="applyDamage">
               <i class="fa-solid fa-reply-all fa-flip-horizontal" inert></i>
               ${game.i18n.localize("DND5E.Apply")}
@@ -149,12 +90,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
       this.replaceChildren(div);
       this.applyButton = div.querySelector(".apply-damage");
       this.applyButton.addEventListener("click", this._onApplyDamage.bind(this));
-      this.targetList = div.querySelector(".targets");
-      this.targetSourceControl = this.querySelector(".target-source-control");
-      this.targetSourceControl.querySelectorAll("button").forEach(b =>
-        b.addEventListener("click", this._onChangeTargetMode.bind(this))
-      );
-      if ( !this.chatMessage.getFlag("dnd5e", "targets")?.length ) this.targetSourceControl.hidden = true;
+      div.querySelector(".wrapper").prepend(...this.buildTargetContainer());
       div.addEventListener("click", this._handleClickHeader.bind(this));
     }
 
@@ -163,44 +99,14 @@ export default class DamageApplicationElement extends ChatTrayElement {
 
   /* -------------------------------------------- */
 
-  /**
-   * Build a list of targeted tokens based on current mode & replace any existing targets.
-   */
-  buildTargetsList() {
-    let targetedTokens;
-    switch ( this.targetingMode ) {
-      case "targeted":
-        targetedTokens = (this.chatMessage.getFlag("dnd5e", "targets") ?? []).map(t => t.uuid);
-        break;
-      case "selected":
-        targetedTokens = canvas.tokens?.controlled?.map(t => t.actor?.uuid) ?? [];
-        break;
-    }
-    targetedTokens = Array.from(new Set(targetedTokens));
-    const targets = targetedTokens.map(t => this.buildTargetListEntry(t)).filter(t => t);
-    if ( targets.length ) this.targetList.replaceChildren(...targets);
-    else {
-      const li = document.createElement("li");
-      li.classList.add("none");
-      li.innerText = game.i18n.localize(`DND5E.Tokens.None${this.targetingMode.capitalize()}`);
-      this.targetList.replaceChildren(li);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create a list entry for a single target.
-   * @param {string} uuid  UUID of the token represented by this entry.
-   * @returns {HTMLLIElement|void}
-   */
-  buildTargetListEntry(uuid) {
-    const token = fromUuidSync(uuid);
-    if ( !token?.isOwner ) return;
+  /** @override */
+  buildTargetListEntry({ uuid, name }) {
+    const actor = fromUuidSync(uuid);
+    if ( !actor?.isOwner ) return;
 
     // Calculate damage to apply
     const targetOptions = this.getTargetOptions(uuid);
-    const { temp, total, active } = this.calculateDamage(token, targetOptions);
+    const { temp, total, active } = this.calculateDamage(actor, targetOptions);
 
     const types = [];
     for ( const [change, values] of Object.entries(active) ) {
@@ -228,9 +134,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
     li.classList.add("target");
     li.dataset.targetUuid = uuid;
     li.innerHTML = `
-      <img class="gold-icon" alt="${token.name}" src="${token.img}">
+      <img class="gold-icon" alt="${name}" src="${actor.img}">
       <div class="name-stacked">
-        <span class="title">${token.name}</span>
+        <span class="title">${name}</span>
         ${changeSources ? `<span class="subtitle">${changeSources}</span>` : ""}
       </div>
       <div class="calculated damage">
@@ -253,7 +159,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
       menu.append(entry);
     }
 
-    this.refreshListEntry(token, li, targetOptions);
+    this.refreshListEntry(actor, li, targetOptions);
     li.addEventListener("click", this._onChangeOptions.bind(this));
 
     return li;
@@ -421,16 +327,5 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const token = fromUuidSync(uuid);
     const entry = this.targetList.querySelector(`[data-target-uuid="${token.uuid}"]`);
     this.refreshListEntry(token, entry, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clicking on the target mode buttons.
-   * @param {PointerEvent} event  Triggering click event.
-   */
-  async _onChangeTargetMode(event) {
-    event.preventDefault();
-    this.targetingMode = event.currentTarget.dataset.mode;
   }
 }

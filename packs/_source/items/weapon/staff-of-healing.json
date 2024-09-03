@@ -2,7 +2,7 @@
   "_id": "WLVQJVpCWiPkCAtZ",
   "name": "Staff of Healing",
   "type": "weapon",
-  "img": "icons/weapons/staves/staff-simple-green.webp",
+  "img": "icons/weapons/staves/staff-ornate-cross.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement by a bard, cleric, or druid)</em></p><p>This staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spellcasting ability modifier: @UUID[Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP]{Cure Wounds} (1 charge per spell level, up to 4th), @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser Restoration} (2 charges), or @UUID[Compendium.dnd5e.spells.Item.Pyzmm8R7rVsNAPsd]{Mass Cure Wounds} (5 charges).</p><p>The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff vanishes in a flash of light, lost forever.</p>",
@@ -23,61 +23,54 @@
       "value": 13000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "veryRare",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
     "range": {
       "value": null,
       "long": null,
-      "units": ""
+      "units": "",
+      "reach": null
     },
     "uses": {
-      "value": 10,
       "max": "10",
-      "per": "dawn",
-      "recovery": "1d6 + 4",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "other",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "recovery": [
+        {
+          "period": "dawn",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "1d20",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "versatile": {
+        "number": null,
+        "denomination": null,
+        "bonus": "",
+        "types": [],
+        "custom": {
+          "enabled": false,
+          "formula": ""
+        },
+        "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+        }
+      },
+      "base": {
+        "number": null,
+        "denomination": null,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        }
+      }
     },
     "armor": {
       "value": 10
@@ -102,13 +95,85 @@
     },
     "container": null,
     "crewed": false,
-    "attack": {
-      "bonus": "",
-      "flat": false
-    },
-    "summons": null,
     "magicalBonus": null,
-    "enchantment": null
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "roll": {
+          "formula": "1d20",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    },
+    "attuned": false,
+    "ammunition": {}
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -118,13 +183,13 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.1",
-    "coreVersion": "12.327",
-    "createdTime": 1661787233689,
-    "modifiedTime": 1719169314650,
-    "lastModifiedBy": "dnd5ebuilder0000",
-    "duplicateSource": null
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037204182,
+    "modifiedTime": 1725037204182,
+    "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!WLVQJVpCWiPkCAtZ"
 }

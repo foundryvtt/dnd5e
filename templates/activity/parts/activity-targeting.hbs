@@ -1,0 +1,19 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset {{ disabled disabled.range }}>
+        <legend>
+            <label class="checkbox">
+                {{ localize "DND5E.RANGE.FIELDS.range.label" }}
+                {{#if activity.range.canOverride}}
+                {{ formInput fields.range.fields.override value=source.range.override input=inputs.createCheckboxInput
+                             dataset=(dnd5e-object tooltip="DND5E.RANGE.FIELDS.range.override.hint")
+                             ariaLabel=(localize "DND5E.RANGE.FIELDS.range.override.hint")}}
+                {{/if}}
+            </label>
+        </legend>
+        {{> "dnd5e.field-range" range=activity.range fields=fields.range.fields data=data.range rangeTypes=rangeUnits
+            inputs=inputs }}
+    </fieldset>
+
+    {{> "dnd5e.field-targets" target=activity.target fields=fields.target.fields data=data.target source=source.target
+        inputs=inputs disabled=disabled.target }}
+</section>

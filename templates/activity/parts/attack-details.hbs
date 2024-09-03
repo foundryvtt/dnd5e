@@ -1,0 +1,9 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ATTACK.FIELDS.attack.label" }}</legend>
+    {{#with fields.attack.fields as |fields|}}
+    {{ formField fields.ability value=../source.attack.ability options=../abilityOptions }}
+    {{ formField fields.bonus value=../source.attack.bonus }}
+    {{ formField fields.flat value=../source.attack.flat input=@root.inputs.createCheckboxInput }}
+    {{ formField fields.critical.fields.threshold value=../source.attack.critical.threshold }}
+    {{/with}}
+</fieldset>

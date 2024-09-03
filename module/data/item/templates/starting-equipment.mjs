@@ -1,5 +1,6 @@
-import { formatNumber } from "../../../utils.mjs";
+import { formatNumber, linkForUuid } from "../../../utils.mjs";
 import SystemDataModel from "../../abstract.mjs";
+import { FormulaField } from "../../fields/_module.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, IntegerSortField, NumberField, StringField
@@ -9,11 +10,14 @@ const {
  * Data model template representing a background & class's starting equipment.
  *
  * @property {EquipmentEntryData[]} startingEquipment  Different equipment entries that will be granted.
+ * @property {string} wealth                           Formula used to determine starting wealth.
  */
 export default class StartingEquipmentTemplate extends SystemDataModel {
   static defineSchema() {
     return {
-      startingEquipment: new ArrayField(new EmbeddedDataField(EquipmentEntryData), {required: true})
+      startingEquipment: new ArrayField(new EmbeddedDataField(EquipmentEntryData), {required: true}),
+      wealth: new FormulaField({ label: "DND5E.StartingEquipment.Wealth.Label",
+        hint: "DND5E.StartingEquipment.Wealth.Hint" })
     };
   }
 
@@ -111,7 +115,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
@@ -155,8 +159,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 
       // For linked type, fetch the name using the index
       case "linked":
-        const index = fromUuidSync(this.key);
-        if ( index ) label = index.name;
+        label = linkForUuid(this.key);
         break;
 
       // For category types, grab category information from config
@@ -165,8 +168,8 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
         break;
     }
 
-    if ( !label ) return;
-    if ( this.count > 1 ) label = `${formatNumber(this.count)} ${label}`;
+    if ( !label ) return "";
+    if ( this.count > 1 ) label = `${formatNumber(this.count)}&times; ${label}`;
     else if ( this.type !== "linked" ) label = game.i18n.format("DND5E.TraitConfigChooseAnyUncounted", { type: label });
     if ( (this.type === "linked") && this.requiresProficiency ) {
       label += ` (${game.i18n.localize("DND5E.StartingEquipment.IfProficient").toLowerCase()})`;

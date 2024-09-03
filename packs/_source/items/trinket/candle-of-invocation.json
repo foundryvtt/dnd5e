@@ -23,62 +23,29 @@
       "value": 12000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "veryRare",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "4",
-      "units": "hour"
-    },
-    "cover": null,
-    "target": {
-      "value": 30,
-      "width": null,
-      "units": "ft",
-      "type": "radius",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": 1,
       "max": "1",
-      "per": "charges",
-      "recovery": "",
+      "recovery": [],
       "autoDestroy": false,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0
     },
     "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "base": {
+        "number": null,
+        "denomination": null,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        }
+      },
+      "replace": false
     },
     "type": {
       "value": "trinket",
@@ -88,17 +55,87 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [
       "mgc"
     ],
-    "attack": {
-      "bonus": "",
-      "flat": false
+    "magicalBonus": null,
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "4",
+          "units": "hour",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "radius",
+            "size": "30",
+            "width": "",
+            "height": "",
+            "units": "ft"
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "roll": {
+          "formula": "",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "enchantment": null,
-    "summons": null,
-    "magicalBonus": null
+    "attuned": false
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
@@ -108,11 +145,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233718,
-    "modifiedTime": 1715374620239,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037220102,
+    "modifiedTime": 1725037220102,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ZoUVmRA3HfAK2eZy"

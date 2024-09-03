@@ -18,56 +18,31 @@
     },
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "1",
       "units": "minute"
     },
-    "cover": null,
     "target": {
-      "value": null,
-      "width": null,
-      "units": "any",
-      "type": "space",
-      "prompt": true
+      "affects": {
+        "type": "space",
+        "choice": false
+      },
+      "template": {
+        "units": "any",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 120,
-      "long": null,
+      "value": "120",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "summ",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 0,
     "school": "evo",
@@ -81,49 +56,101 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "none",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
       "material",
       "concentration"
     ],
-    "crewed": false,
-    "summons": {
-      "prompt": true,
-      "bonuses": {
-        "ac": "",
-        "hd": "",
-        "hp": "",
-        "attackDamage": "",
-        "saveDamage": "",
-        "healing": ""
-      },
-      "profiles": [
-        {
-          "count": "",
-          "name": "",
-          "_id": "VCE7UzvbkVLU3yGQ",
-          "uuid": "Compendium.dnd5e.monsters.Actor.JNmHqTwkWayvkH37",
-          "level": {
-            "min": null,
-            "max": null
-          }
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "summon",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
         },
-        {
-          "count": "4",
-          "name": "",
-          "_id": "HC2PKEK56d2l8mFi",
-          "uuid": "Compendium.dnd5e.monsters.Actor.UrXp9O9N7DvdH9nL",
-          "level": {
-            "min": null,
-            "max": null
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "bonuses": {
+          "ac": "",
+          "hd": "",
+          "hp": "",
+          "attackDamage": "",
+          "saveDamage": "",
+          "healing": ""
+        },
+        "creatureSizes": [],
+        "creatureTypes": [],
+        "match": {
+          "attacks": false,
+          "proficiency": false,
+          "saves": false
+        },
+        "profiles": [
+          {
+            "count": "",
+            "name": "",
+            "_id": "VCE7UzvbkVLU3yGQ",
+            "uuid": "Compendium.dnd5e.monsters.Actor.JNmHqTwkWayvkH37",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          },
+          {
+            "count": "4",
+            "name": "",
+            "_id": "HC2PKEK56d2l8mFi",
+            "uuid": "Compendium.dnd5e.monsters.Actor.UrXp9O9N7DvdH9nL",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
           }
-        }
-      ]
+        ],
+        "summon": {
+          "identifier": "",
+          "mode": "",
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     }
   },
   "sort": 0,
@@ -132,11 +159,12 @@
   "effects": [],
   "folder": "Z8kZlnggh1PtuF3Y",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234094,
-    "modifiedTime": 1714077073151,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037350862,
+    "modifiedTime": 1725037350862,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!CAxSzHWizrafT033"

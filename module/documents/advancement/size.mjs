@@ -8,7 +8,7 @@ import { SizeConfigurationData, SizeValueData } from "../../data/advancement/siz
  */
 export default class SizeAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
@@ -16,7 +16,8 @@ export default class SizeAdvancement extends Advancement {
         value: SizeValueData
       },
       order: 25,
-      icon: "systems/dnd5e/icons/svg/size.svg",
+      icon: "icons/environment/wilderness/tree-ash.webp",
+      typeIcon: "systems/dnd5e/icons/svg/size.svg",
       title: game.i18n.localize("DND5E.AdvancementSizeTitle"),
       hint: game.i18n.localize("DND5E.AdvancementSizeHint"),
       apps: {
@@ -48,7 +49,7 @@ export default class SizeAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get levels() {
     return [0];
   }
@@ -57,7 +58,7 @@ export default class SizeAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     const sizes = configMode ? Array.from(this.configuration.sizes) : this.value.size ? [this.value.size] : [];
     return sizes.map(s => `<span class="tag">${CONFIG.DND5E.actorSizes[s].label}</span>`).join("");
@@ -67,7 +68,7 @@ export default class SizeAdvancement extends Advancement {
   /*  Editing Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static availableForItem(item) {
     return !item.advancement.byType.Size?.length;
   }
@@ -76,7 +77,7 @@ export default class SizeAdvancement extends Advancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async apply(level, data) {
     this.actor.updateSource({"system.traits.size": data.size ?? "med"});
     this.updateSource({ value: data });
@@ -84,14 +85,14 @@ export default class SizeAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async restore(level, data) {
     this.apply(level, data);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async reverse(level) {
     this.actor.updateSource({"system.traits.size": "med"});
     this.updateSource({ "value.size": null });

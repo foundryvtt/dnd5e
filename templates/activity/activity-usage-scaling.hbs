@@ -1,0 +1,26 @@
+<section>
+    {{~#if hasScaling}}
+    {{> "dnd5e.activity-usage-notes" }}
+    <fieldset>
+        <legend>{{ localize "DND5E.USAGE.SECTION.Scaling" }}</legend>
+        {{#if spellSlots}}
+        {{ formField spellSlots.field name=spellSlots.name value=spellSlots.value options=spellSlots.options }}
+        {{/if}}
+        {{#if scaling}}
+        <div class="form-group scaling-fields">
+            <label>{{ localize "DND5E.ScalingValue" }}</label>
+            <div class="form-fields">
+                {{#if scaling.showRange}}
+                <range-picker name="{{ scaling.name }}" value="{{ scaling.value }}" min="1" max="{{ scaling.max }}"
+                              step="1"></range-picker>
+                {{else}}
+                {{ formInput scaling.field name=scaling.name value=scaling.value }}
+                {{/if}}
+                <span class="separator">/</span>
+                <span class="max">{{ dnd5e-numberFormat scaling.max }}</span>
+            </div>
+        </div>
+        {{/if}}
+    </fieldset>
+    {{/if~}}
+</section>

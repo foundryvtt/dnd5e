@@ -1,16 +1,11 @@
-const AbstractFormInputElement = foundry.applications?.elements?.AbstractFormInputElement ?? (class {});
-
 /**
  * Input element that represents a three-state filter (include, exclude, or ignore). This is used for filters in
  * the compendium browser and in the inventory element. Returns a number with `1` indicating this filter should be
  * positively applied (show items that match the filter), `-1` indicating it should be negatively applied (hide
  * items that match the filter), and `0` indicating this filter should be ignored.
  */
-export default class FilterStateElement extends AbstractFormInputElement {
+export default class FilterStateElement extends foundry.applications.elements.AbstractFormInputElement {
   constructor(...args) {
-    if ( game.release.generation < 12 ) {
-      throw Error("FilterStateInput can only be used in Foundry VTT version 12 or later.");
-    }
     super(...args);
     this._value = this.getAttribute("value") ?? 0;
   }

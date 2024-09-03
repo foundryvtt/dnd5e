@@ -1,6 +1,10 @@
 import { ItemDataModel } from "../abstract.mjs";
-import { AdvancementField, IdentifierField } from "../fields.mjs";
+import AdvancementField from "../fields/advancement-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
+import SpellcastingField from "./fields/spellcasting-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+
+const { ArrayField } = foundry.data.fields;
 
 /**
  * Data definition for Subclass items.
@@ -9,25 +13,91 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {string} identifier       Identifier slug for this subclass.
  * @property {string} classIdentifier  Identifier slug for the class with which this subclass should be associated.
  * @property {object[]} advancement    Advancement objects for this subclass.
- * @property {object} spellcasting              Details on subclass's spellcasting ability.
- * @property {string} spellcasting.progression  Spell progression granted by class as from `DND5E.spellProgression`.
- * @property {string} spellcasting.ability      Ability score to use for spellcasting.
+ * @property {SpellcastingField} spellcasting  Details on subclass's spellcasting ability.
  */
 export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
+      identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
       classIdentifier: new IdentifierField({
         required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
       }),
-      advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
-      spellcasting: new foundry.data.fields.SchemaField({
-        progression: new foundry.data.fields.StringField({
-          required: true, initial: "none", blank: false, label: "DND5E.SpellProgression"
-        }),
-        ability: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellAbility"})
-      }, {label: "DND5E.Spellcasting"})
+      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
+      spellcasting: new SpellcastingField()
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["class", {
+        label: "TYPES.Item.class",
+        type: "set",
+        config: {
+          choices: dnd5e.registry.classes.choices,
+          keyPath: "system.classIdentifier"
+        }
+      }],
+      ["hasSpellcasting", {
+        label: "DND5E.CompendiumBrowser.Filters.HasSpellcasting",
+        type: "boolean",
+        createFilter: (filters, value, def) => {
+          if ( value === 0 ) return;
+          const filter = { k: "system.spellcasting.progression", v: "none" };
+          if ( value === -1 ) filters.push(filter);
+          else filters.push({ o: "NOT", v: filter });
+        }
+      }]
+    ]);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    this.spellcasting.preparation.value = 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    SpellcastingField.prepareData.call(this, this.parent.getRollData({ deterministic: true }));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [{ label: context.itemType }];
+    context.singleDescription = true;
+    context.parts = ["dnd5e.details-subclass", "dnd5e.details-spellcasting"];
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onCreate(data, options, userId) {
+    await super._onCreate(data, options, userId);
+    const actor = this.parent.actor;
+    if ( !actor || (userId !== game.user.id) ) return;
+    if ( !actor.system.attributes?.spellcasting && this.parent.spellcasting?.ability ) {
+      await actor.update({ "system.attributes.spellcasting": this.parent.spellcasting.ability });
+    }
   }
 }

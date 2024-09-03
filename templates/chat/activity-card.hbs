@@ -1,0 +1,41 @@
+<div class="dnd5e2 chat-card activation-card">
+    <section class="card-header description collapsible">
+        <header class="summary">
+            <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+            <div class="name-stacked border">
+                <span class="title">{{ item.name }}</span>
+                {{#if subtitle}}
+                <span class="subtitle">{{{ subtitle }}}</span>
+                {{/if}}
+            </div>
+            <i class="fa-solid fa-chevron-down fa-fw" inert></i>
+        </header>
+        <section class="details collapsible-content card-content">
+            <div class="wrapper">{{{ description }}}</div>
+        </section>
+    </section>
+
+    {{#if buttons}}
+    <div class="card-buttons">
+        {{#each buttons}}
+        <button type="button" {{ dnd5e-dataset dataset }}>
+            {{{ icon }}} <span>{{{ label }}}</span>
+        </button>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{#each supplements}}
+    <p class="supplement">{{{ this }}}</p>
+    {{/each}}
+
+    {{#if properties}}
+    <ul class="card-footer pills unlist">
+        {{#each properties}}
+        <li class="pill transparent">
+            <span class="label">{{ this }}</span>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</div>

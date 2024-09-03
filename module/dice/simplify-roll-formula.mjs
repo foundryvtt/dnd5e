@@ -1,3 +1,7 @@
+const {
+  Coin, DiceTerm, Die, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, RollTerm
+} = foundry.dice.terms;
+
 /**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula.
  *
@@ -65,7 +69,7 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false, det
   // If the formula contains multiplication or division we cannot easily simplify
   if ( /[*/]/.test(roll.formula) ) {
     if ( roll.isDeterministic && !/d\(/.test(roll.formula) && (!/\[/.test(roll.formula) || !preserveFlavor) ) {
-      return String(game.release.generation < 12 ? Roll.safeEval(roll.formula) : roll.evaluateSync().total);
+      return String(new Roll(roll.formula).evaluateSync().total);
     }
     else return roll.constructor.getFormula(roll.terms);
   }
@@ -154,6 +158,7 @@ function _simplifyDiceTerms(terms) {
     const modifiers = isCoin ? "" : curr.modifiers.filterJoin("");
     const key = `${unannotated[i - 1].operator}${face}${modifiers}`;
     obj[key] ??= {};
+    if ( (curr._number instanceof Roll) && (curr._number.isDeterministic) ) curr._number.evaluateSync();
     obj[key].number = (obj[key].number ?? 0) + curr.number;
     if ( !isCoin ) obj[key].modifiers = (obj[key].modifiers ?? []).concat(curr.modifiers);
     return obj;
@@ -180,13 +185,8 @@ function _expandParentheticalTerms(terms) {
   terms = terms.reduce((acc, term) => {
     if ( term instanceof ParentheticalTerm ) {
       if ( term.isDeterministic ) {
-        let number;
-        if ( game.release.generation < 12 ) number = Roll.safeEval(term.term);
-        else {
-          const roll = new Roll(term.term);
-          number = roll.evaluateSync().total;
-        }
-        term = new NumericTerm({ number });
+        const roll = new Roll(term.term);
+        term = new NumericTerm({ number: roll.evaluateSync().total });
       } else {
         const subterms = new Roll(term.term).terms;
         term = _expandParentheticalTerms(subterms);
@@ -201,8 +201,8 @@ function _expandParentheticalTerms(terms) {
 /* -------------------------------------------- */
 
 /**
- * A helper function to group terms into PoolTerms, DiceTerms, MathTerms, and NumericTerms.
- * MathTerms are included as NumericTerms if they are deterministic.
+ * A helper function to group terms into PoolTerms, DiceTerms, FunctionTerms, and NumericTerms.
+ * FunctionTerms are included as NumericTerms if they are deterministic.
  * @param {RollTerm[]} terms  An array of roll terms.
  * @returns {object}          An object mapping term types to arrays containing roll terms of that type.
  */
@@ -213,7 +213,7 @@ function _groupTermsByType(terms) {
   return terms.reduce((obj, term, i) => {
     let type;
     if ( term instanceof DiceTerm ) type = DiceTerm;
-    else if ( (term instanceof MathTerm) && (term.isDeterministic) ) type = NumericTerm;
+    else if ( (term instanceof FunctionTerm) && (term.isDeterministic) ) type = NumericTerm;
     else type = term.constructor;
     const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 

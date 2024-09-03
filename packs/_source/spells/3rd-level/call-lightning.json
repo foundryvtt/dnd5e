@@ -18,61 +18,32 @@
     },
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "10",
       "units": "minute"
     },
-    "cover": null,
     "target": {
-      "value": 60,
-      "width": null,
-      "units": "ft",
-      "type": "cylinder",
-      "prompt": true
+      "affects": {
+        "choice": false
+      },
+      "template": {
+        "units": "ft",
+        "type": "cylinder",
+        "size": "60",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 120,
-      "long": null,
+      "value": "120",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "3d10",
-          "lightning"
-        ]
-      ],
-      "versatile": "4d10"
-    },
-    "formula": "",
-    "save": {
-      "ability": "dex",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 3,
     "school": "con",
@@ -86,16 +57,155 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "level",
-      "formula": "1d10"
-    },
     "properties": [
       "vocal",
       "somatic",
       "concentration"
     ],
-    "crewed": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": [
+            {
+              "number": 3,
+              "denomination": 10,
+              "bonus": "",
+              "types": [
+                "lightning"
+              ],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "whole",
+                "number": 1,
+                "formula": ""
+              }
+            }
+          ]
+        },
+        "save": {
+          "ability": "dex",
+          "dc": {
+            "calculation": "spellcasting",
+            "formula": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      },
+      "dnd5eactivity200": {
+        "_id": "dnd5eactivity200",
+        "type": "damage",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "damage": {
+          "critical": {
+            "allow": false,
+            "bonus": ""
+          },
+          "parts": [
+            {
+              "number": 4,
+              "denomination": 10,
+              "bonus": "",
+              "types": [],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "whole",
+                "number": 1,
+                "formula": ""
+              }
+            }
+          ]
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    }
   },
   "sort": 0,
   "flags": {},
@@ -103,11 +213,12 @@
   "effects": [],
   "folder": "5Si35RRLLaaoWvC3",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234186,
-    "modifiedTime": 1704823525109,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037361893,
+    "modifiedTime": 1725037361893,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ehvmg9U9fcMEhE4z"

@@ -15,7 +15,7 @@ import * as Trait from "../../documents/actor/trait.mjs";
  */
 export default class ProficiencyConfig extends BaseConfigSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
@@ -47,7 +47,7 @@ export default class ProficiencyConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     const label = this.isSkill ? CONFIG.DND5E.skills[this.options.key].label
       : Trait.keyLabel(this.options.key, { trait: "tool" });
@@ -56,14 +56,14 @@ export default class ProficiencyConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get id() {
     return `ProficiencyConfig-${this.document.documentName}-${this.document.id}-${this.options.key}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData(options={}) {
     return {
       abilities: CONFIG.DND5E.abilities,
@@ -79,7 +79,7 @@ export default class ProficiencyConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     if ( this.isTool ) return super._updateObject(event, formData);
     const passive = formData[`system.skills.${this.options.key}.bonuses.passive`];

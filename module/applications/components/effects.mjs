@@ -82,7 +82,7 @@ export default class EffectsElement extends HTMLElement {
     const categories = {
       enchantment: {
         type: "enchantment",
-        label: game.i18n.localize("DND5E.Enchantment.Category.General"),
+        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.General"),
         effects: [],
         isEnchantment: true
       },
@@ -93,7 +93,7 @@ export default class EffectsElement extends HTMLElement {
       },
       enchantmentActive: {
         type: "activeEnchantment",
-        label: game.i18n.localize("DND5E.Enchantment.Category.Active"),
+        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Active"),
         effects: [],
         isEnchantment: true
       },
@@ -104,7 +104,7 @@ export default class EffectsElement extends HTMLElement {
       },
       enchantmentInactive: {
         type: "inactiveEnchantment",
-        label: game.i18n.localize("DND5E.Enchantment.Category.Inactive"),
+        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Inactive"),
         effects: [],
         isEnchantment: true
       },
@@ -129,7 +129,7 @@ export default class EffectsElement extends HTMLElement {
         if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
         else categories.enchantmentActive.effects.push(e);
       }
-      else if ( e.getFlag("dnd5e", "type") === "enchantment" ) categories.enchantment.effects.push(e);
+      else if ( e.type === "enchantment" ) categories.enchantment.effects.push(e);
       else if ( e.isSuppressed ) categories.suppressed.effects.push(e);
       else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
@@ -141,7 +141,7 @@ export default class EffectsElement extends HTMLElement {
     categories.suppressed.hidden = !categories.suppressed.effects.length;
 
     for ( const category of Object.values(categories) ) {
-      category.localizationPrefix = category.isEnchantment ? "DND5E.Enchantment.Action." : "DND5E.Effect";
+      category.localizationPrefix = category.isEnchantment ? "DND5E.ENCHANTMENT.Action." : "DND5E.Effect";
     }
 
     return categories;
@@ -280,12 +280,12 @@ export default class EffectsElement extends HTMLElement {
     const isActor = this.document instanceof Actor;
     const isEnchantment = li.dataset.effectType.startsWith("enchantment");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
+      type: isEnchantment ? "enchantment" : "base",
       name: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
       origin: isEnchantment ? undefined : this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
-      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType),
-      "flags.dnd5e.type": isEnchantment ? "enchantment" : undefined
+      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType)
     }]);
   }
 

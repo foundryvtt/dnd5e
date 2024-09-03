@@ -9,7 +9,7 @@ import JournalEditor from "./journal-editor.mjs";
  */
 export default class JournalClassPageSheet extends JournalPageSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     const options = foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{dropSelector: ".drop-target"}],
@@ -25,14 +25,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get template() {
     return `systems/dnd5e/templates/journal/page-${this.document.type}-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   toc = {};
 
   /* -------------------------------------------- */
@@ -49,7 +49,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData(options) {
     const context = super.getData(options);
     context.system = context.document.system;
@@ -78,6 +78,12 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     if ( context.subclasses?.length ) context.subclasses?.sort((lhs, rhs) =>
       lhs.name.localeCompare(rhs.name, game.i18n.lang)
     );
+
+    if ( linked.system.primaryAbility ) {
+      context.primaryAbility = game.i18n.getListFormatter(
+        { type: linked.system.primaryAbility.all ? "conjunction" : "disjunction" }
+      ).format(Array.from(linked.system.primaryAbility.value).map(v => CONFIG.DND5E.abilities[v]?.label));
+    }
 
     return context;
   }
@@ -138,8 +144,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       .map(async ([id, text]) => {
         const enriched = await TextEditor.enrichHTML(text, {
           relativeTo: this.object,
-          secrets: this.object.isOwner,
-          async: true
+          secrets: this.object.isOwner
         });
         return [id, enriched];
       })
@@ -186,7 +191,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "AbilityScoreImprovement":
-            features.push(game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementTitle"));
+            features.push(game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Title"));
             continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
@@ -350,11 +355,12 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   async _getFeatures(item, optional=false) {
     const prepareFeature = async f => {
       const document = await fromUuid(f.uuid);
+      if ( !document ) return null;
       return {
         document,
         name: document.name,
         description: await TextEditor.enrichHTML(document.system.description.value, {
-          relativeTo: item, secrets: false, async: true
+          relativeTo: item, secrets: false
         })
       };
     };
@@ -365,7 +371,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       features.push(...advancement.configuration.items.map(prepareFeature));
     }
     features = await Promise.all(features);
-    return features;
+    return features.filter(f => f);
   }
 
   /* -------------------------------------------- */
@@ -398,7 +404,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       document: item,
       name: item.name,
       description: await TextEditor.enrichHTML(item.system.description.value, {
-        relativeTo: item, secrets: false, async: true
+        relativeTo: item, secrets: false
       }),
       features: await this._getFeatures(item),
       table: await this._getTable(item, parseInt(initialLevel))
@@ -407,7 +413,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _renderInner(...args) {
     const html = await super._renderInner(...args);
     this.toc = JournalEntryPage.buildTOC(html.get());
@@ -418,7 +424,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html[0].querySelectorAll(".item-delete").forEach(e => {
@@ -469,7 +475,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
 

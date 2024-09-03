@@ -18,61 +18,32 @@
     },
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "1",
       "units": "minute"
     },
-    "cover": null,
     "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "creature",
-      "prompt": true
+      "affects": {
+        "type": "creature",
+        "count": "1",
+        "choice": false
+      },
+      "template": {
+        "units": "",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 60,
-      "long": null,
+      "value": "60",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "summ",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "3d10",
-          "force"
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 7,
     "school": "evo",
@@ -86,10 +57,6 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "none",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
@@ -97,28 +64,82 @@
       "concentration",
       "mgc"
     ],
-    "crewed": false,
-    "summons": {
-      "match": {
-        "proficiency": false,
-        "attacks": true,
-        "saves": false
-      },
-      "bonuses": {
-        "ac": "",
-        "hp": "",
-        "attackDamage": "",
-        "saveDamage": "",
-        "healing": ""
-      },
-      "creatureTypes": [],
-      "profiles": [
-        {
-          "name": "",
-          "_id": "wPuXJHCG0YZ72HSI",
-          "uuid": "Compendium.dnd5e.monsters.Actor.Tac7eq0AXJco0nml"
-        }
-      ]
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "summon",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "bonuses": {
+          "ac": "",
+          "hp": "",
+          "attackDamage": "",
+          "saveDamage": "",
+          "healing": ""
+        },
+        "creatureSizes": [],
+        "creatureTypes": [],
+        "match": {
+          "proficiency": false,
+          "attacks": true,
+          "saves": false
+        },
+        "profiles": [
+          {
+            "name": "",
+            "_id": "wPuXJHCG0YZ72HSI",
+            "uuid": "Compendium.dnd5e.monsters.Actor.Tac7eq0AXJco0nml",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          }
+        ],
+        "summon": {
+          "identifier": "",
+          "mode": "",
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     }
   },
   "sort": 0,
@@ -127,11 +148,12 @@
   "effects": [],
   "folder": "irCSpQWIMtp978TA",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234120,
-    "modifiedTime": 1712087139676,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037353959,
+    "modifiedTime": 1725037353959,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LTDNWoFVJNLjiiNa"

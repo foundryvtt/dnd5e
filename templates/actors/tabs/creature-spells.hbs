@@ -32,6 +32,18 @@
                 <span class="label">{{ localize "DND5E.SpellDC" }}</span>
                 <span class="value">{{ save }}</span>
             </div>
+            {{#if (or preparation.value preparation.max)}}
+            <div class="prepared">
+                <span class="label">{{ localize "DND5E.Prepared" }}</span>
+                <span class="value {{#if preparation.max}}max-preparations{{/if}}">
+                    <span class="count">{{ preparation.value }}</span>
+                    {{#if preparation.max}}
+                    <span class="separator">&sol;</span>
+                    <span class="max">{{ preparation.max }}</span>
+                    {{/if}}
+                </span>
+            </div>
+            {{/if}}
             {{#if @root.isNPC}}
             <div class="level">
                 <span class="label">{{ localize "DND5E.Level" }}</span>
@@ -122,7 +134,7 @@
 
                 {{!-- Spells --}}
                 <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-item-id="{{ item.id }}"
-                    data-entry-id="{{ item.id }}" data-item-level="{{ item.system.level }}"
+                    data-entry-id="{{ item.id }}" data-item-level="{{ item.system.level }}" data-uuid="{{ item.uuid }}"
                     data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}"
                     data-item-preparation-mode="{{ item.system.preparation.mode }}"
                     data-item-preparation-prepared="{{ item.system.preparation.prepared }}">
@@ -140,7 +152,7 @@
                             <div class="name name-stacked">
                                 <span class="title">{{ item.name }}</span>
                                 <span class="subtitle">
-                                    {{ item.labels.components.vsm }}
+                                    {{{ ctx.subtitle }}}
                                     {{#if ctx.hasUses}}
                                     <span class="subtitle-uses">
                                         — {{ item.system.uses.value }} &sol; {{ item.system.uses.max }}
@@ -185,22 +197,22 @@
                         </div>
 
                         {{!-- Spell Target --}}
-                        <div class="item-detail item-target {{#unless item.system.target.type}}empty{{/unless}}">
-                            {{#if item.system.target.type}}
+                        <div class="item-detail item-target {{#unless item.labels.target}}empty{{/unless}}">
+                            {{#if item.labels.target}}
                             <span class="condensed">{{ item.labels.target }}</span>
                             {{/if}}
                         </div>
 
                         {{!-- Spell Attack / DC --}}
-                        <div class="item-detail item-roll {{#if (and (not item.system.save.ability) (eq ctx.toHit null))}}empty{{/if}}">
+                        <div class="item-detail item-roll {{#if (and (not ctx.save.ability) (eq ctx.toHit null))}}empty{{/if}}">
                             {{#if ctx.toHit}}
                             <span class="value">{{ dnd5e-formatModifier ctx.toHit }}</span>
-                            {{else if item.system.save.ability}}
+                            {{else if ctx.save.ability}}
                             <div class="stacked">
                                 <span class="ability">
-                                    {{ lookup (lookup @root.config.abilities item.system.save.ability) "abbreviation" }}
+                                    {{ lookup (lookup @root.config.abilities ctx.save.ability) "abbreviation" }}
                                 </span>
-                                <span class="value">{{ item.system.save.dc }}</span>
+                                <span class="value">{{ ctx.save.dc.value }}</span>
                             </div>
                             {{/if}}
                         </div>
@@ -216,8 +228,8 @@
                         </div>
 
                         {{!-- Spell Formula --}}
-                        <div class="item-detail item-formula spell-formula {{#unless item.labels.derivedDamage}}empty{{/unless}}">
-                            {{#each item.labels.derivedDamage}}
+                        <div class="item-detail item-formula spell-formula {{#unless item.labels.damages}}empty{{/unless}}">
+                            {{#each item.labels.damages}}
                             <div class="row">
                                 <span class="formula">{{ formula }}</span>
                                 {{#with (lookup @root.labels.damageAndHealing damageType)}}
@@ -278,8 +290,19 @@
 
                     <div class="item-description collapsible-content">
                         <div class="wrapper">
+
+                            {{!-- Activities --}}
+                            {{#if (gt ctx.activities.length 1)}}
+                            <div class="activities">
+                                {{#each ctx.activities}}
+                                {{> "dnd5e.activity-row-summary" categories=../../categories }}
+                                {{/each}}
+                            </div>
+                            {{/if}}
+
+                            {{!-- Item Description --}}
                             {{#if ctx.isExpanded}}
-                                {{> "dnd5e.item-summary" ctx.expanded }}
+                            {{> "dnd5e.item-summary" ctx.expanded }}
                             {{/if}}
                         </div>
                     </div>

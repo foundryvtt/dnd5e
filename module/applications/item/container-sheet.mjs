@@ -3,7 +3,7 @@ import ItemSheet5e from "./item-sheet.mjs";
 
 export default class ContainerSheet extends ItemSheet5e {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       width: 600,
@@ -23,7 +23,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get template() {
     return "systems/dnd5e/templates/items/container.hbs";
   }
@@ -41,7 +41,7 @@ export default class ContainerSheet extends ItemSheet5e {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData(options={}) {
     const context = await super.getData(options);
 
@@ -73,7 +73,7 @@ export default class ContainerSheet extends ItemSheet5e {
   /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDragStart(event) {
     const li = event.currentTarget;
     if ( event.target.classList.contains("content-link") ) return;
@@ -89,7 +89,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
     if ( !["Item", "Folder"].includes(data.type) ) return super._onDrop(event, data);

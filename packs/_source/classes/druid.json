@@ -31,7 +31,6 @@
         "_id": "GsMQJqy3R8DVF485",
         "type": "Trait",
         "configuration": {
-          "hint": "Light Armor, Medium Armor, & Shields (druids will not wear armor or use shields made of metal)",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -45,13 +44,13 @@
         "title": "",
         "value": {
           "chosen": []
-        }
+        },
+        "hint": "Light Armor, Medium Armor, & Shields (druids will not wear armor or use shields made of metal)"
       },
       {
         "_id": "dK0oEtM8ovrLJxi3",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -79,7 +78,6 @@
         "_id": "tSywlKq0aE3GYMmi",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -98,7 +96,6 @@
         "_id": "xZ55SColbUbJOW2i",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -118,7 +115,6 @@
         "_id": "bN13f0XX9ZVaUiaC",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -160,9 +156,7 @@
           ],
           "optional": false,
           "spell": {
-            "ability": [
-              ""
-            ],
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -173,7 +167,6 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "pkkBT3JrxyLuTmwm"
       },
       {
@@ -191,9 +184,7 @@
           ],
           "optional": false,
           "spell": {
-            "ability": [
-              ""
-            ],
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -204,7 +195,6 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "kDrm5stUR4Vp6oE3"
       },
       {
@@ -222,9 +212,7 @@
           ],
           "optional": false,
           "spell": {
-            "ability": [
-              ""
-            ],
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -235,7 +223,6 @@
         "value": {},
         "level": 18,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "IRKvBsuqs6C3ktQu"
       },
       {
@@ -249,9 +236,7 @@
           ],
           "optional": false,
           "spell": {
-            "ability": [
-              ""
-            ],
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -262,7 +247,6 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "UpHHo8cfTCVk92Th"
       },
       {
@@ -287,7 +271,6 @@
         },
         "value": {},
         "title": "Wild Shape CR",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "eX43MTPVUV9VB0dK"
       },
       {
@@ -312,7 +295,6 @@
         },
         "value": {},
         "title": "Cantrips Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "Gfzu57bEFMsekg7v"
       },
       {
@@ -327,14 +309,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "2T62G1BtLjN7m0D9"
       },
       {
@@ -349,14 +331,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "uXaQWuJioxGLKVfy"
       },
       {
@@ -371,14 +353,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "GiktwdfAHfCAEXzm"
       },
       {
@@ -393,14 +375,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "9QF2H24Ez8ZdH42N"
       },
       {
@@ -416,7 +398,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -428,7 +411,6 @@
         "_id": "miieZ5i2DxMvyWKG",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -463,11 +445,22 @@
         "value": {},
         "title": "Wild Shape Uses",
         "icon": null
+      },
+      {
+        "_id": "p9otj81aosxpn6wn",
+        "type": "Subclass",
+        "configuration": {},
+        "value": {},
+        "level": 2,
+        "title": "Druid Circle"
       }
     ],
     "spellcasting": {
       "progression": "full",
-      "ability": "wis"
+      "ability": "wis",
+      "preparation": {
+        "formula": "@abilities.wis.mod + @classes.druid.levels"
+      }
     },
     "startingEquipment": [
       {
@@ -555,7 +548,11 @@
         "requiresProficiency": false
       }
     ],
-    "wealth": "2d4 * 10"
+    "wealth": "2d4 * 10",
+    "primaryAbility": {
+      "value": [],
+      "all": true
+    }
   },
   "effects": [],
   "folder": "lxQ0CSa4jrl17HgP",
@@ -565,11 +562,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234284,
-    "modifiedTime": 1717014927840,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037371622,
+    "modifiedTime": 1725037371622,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ygVYgPbJkaH0tH1N"

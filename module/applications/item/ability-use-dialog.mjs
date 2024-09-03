@@ -1,5 +1,3 @@
-import { EnchantmentData } from "../../data/item/fields/enchantment-field.mjs";
-
 /**
  * A specialized Dialog subclass for ability usage.
  *
@@ -67,8 +65,6 @@ export default class AbilityUseDialog extends Dialog {
       item,
       ...config,
       slotOptions: config.consumeSpellSlot ? slotOptions : [],
-      enchantmentOptions: this._createEnchantmentOptions(item),
-      summoningOptions: this._createSummoningOptions(item),
       resourceOptions: resourceOptions,
       resourceArray: Array.isArray(resourceOptions),
       concentration: {
@@ -127,7 +123,7 @@ export default class AbilityUseDialog extends Dialog {
   static _createConcentrationOptions(item) {
     const { effects } = item.actor.concentration;
     return effects.reduce((acc, effect) => {
-      const data = effect.getFlag("dnd5e", "itemData");
+      const data = effect.getFlag("dnd5e", "item.data");
       acc.push({
         name: effect.id,
         label: data?.name ?? item.actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless")
@@ -182,63 +178,6 @@ export default class AbilityUseDialog extends Dialog {
       }
     }
 
-    return options;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create details on enchantment that can be applied.
-   * @param {Item5e} item  The item.
-   * @returns {{ enchantments: object }|null}
-   */
-  static _createEnchantmentOptions(item) {
-    const enchantments = EnchantmentData.availableEnchantments(item);
-    if ( !enchantments.length ) return null;
-    const options = {};
-    if ( enchantments.length > 1 ) options.profiles = Object.fromEntries(enchantments.map(e => [e._id, e.name]));
-    else options.profile = enchantments[0]._id;
-    return options;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create details on the summoning profiles and other related options.
-   * @param {Item5e} item  The item.
-   * @returns {{ profiles: object, creatureTypes: object }|null}
-   */
-  static _createSummoningOptions(item) {
-    const summons = item.system.summons;
-    if ( !summons?.profiles.length ) return null;
-    const options = { mode: summons.mode };
-    const rollData = item.getRollData();
-    const level = summons.relevantLevel;
-    options.profiles = Object.fromEntries(
-      summons.profiles
-        .map(profile => {
-          if ( !summons.mode && !fromUuidSync(profile.uuid) ) return null;
-          const withinRange = ((profile.level.min ?? -Infinity) <= level) && (level <= (profile.level.max ?? Infinity));
-          if ( !withinRange ) return null;
-          return [profile._id, summons.getProfileLabel(profile, rollData)];
-        })
-        .filter(f => f)
-    );
-    if ( Object.values(options.profiles).every(p => p.startsWith("1 × ")) ) {
-      Object.entries(options.profiles).forEach(([k, v]) => options.profiles[k] = v.replace("1 × ", ""));
-    }
-    if ( Object.values(options.profiles).length <= 1 ) {
-      options.profile = Object.keys(options.profiles)[0];
-      options.profiles = null;
-    }
-    if ( summons.creatureSizes.size > 1 ) options.creatureSizes = summons.creatureSizes.reduce((obj, k) => {
-      obj[k] = CONFIG.DND5E.actorSizes[k]?.label;
-      return obj;
-    }, {});
-    if ( summons.creatureTypes.size > 1 ) options.creatureTypes = summons.creatureTypes.reduce((obj, k) => {
-      obj[k] = CONFIG.DND5E.creatureTypes[k]?.label;
-      return obj;
-    }, {});
     return options;
   }
 
@@ -435,11 +374,6 @@ export default class AbilityUseDialog extends Dialog {
       warnings.push(game.i18n.localize(locale));
     }
 
-    // Display warning about CR summoning in V11
-    if ( (game.release.generation < 12) && (data.summoningOptions?.mode === "cr") ) {
-      warnings.push(game.i18n.localize("DND5E.Summoning.Warning.CRV11"));
-    }
-
     data.warnings = warnings;
   }
 
@@ -458,73 +392,5 @@ export default class AbilityUseDialog extends Dialog {
     if ( !hasUses || !uses.autoDestroy ) return false;
     const value = uses.value - consume;
     return value <= 0;
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Handlers                              */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(jQuery) {
-    super.activateListeners(jQuery);
-    const [html] = jQuery;
-
-    html.querySelector('[name="slotLevel"]')?.addEventListener("change", this._onChangeSlotLevel.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Update summoning profiles when spell slot level is changed.
-   * @param {Event} event  Triggering change event.
-   */
-  _onChangeSlotLevel(event) {
-    const level = this.item.actor?.system.spells?.[event.target.value]?.level;
-    const item = this.item.clone({ "system.level": level ?? this.item.system.level });
-    this._updateProfilesInput(
-      "enchantmentProfile", "DND5E.Enchantment.Label", this.constructor._createEnchantmentOptions(item)
-    );
-    this._updateProfilesInput(
-      "summonsProfile", "DND5E.Summoning.Profile.Label", this.constructor._createSummoningOptions(item)
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Update enchantment or summoning profiles inputs when the level changes.
-   * @param {string} name                Name of the field to update.
-   * @param {string} label               Localization key for the field's aria label.
-   * @param {object} options
-   * @param {object} [options.profiles]  Profile options to display, if multiple.
-   * @param {string} [options.profile]   Single profile to select, if only one.
-   */
-  _updateProfilesInput(name, label, options) {
-    const originalInput = this.element[0].querySelector(`[name="${name}"]`);
-    if ( !originalInput ) return;
-
-    // If multiple profiles, replace with select element
-    if ( options.profiles ) {
-      const select = document.createElement("select");
-      select.name = name;
-      select.ariaLabel = game.i18n.localize(label);
-      for ( const [id, label] of Object.entries(options.profiles) ) {
-        const option = document.createElement("option");
-        option.value = id;
-        option.innerText = label;
-        if ( id === originalInput.value ) option.selected = true;
-        select.append(option);
-      }
-      originalInput.replaceWith(select);
-    }
-
-    // If only one profile, replace with hidden input
-    else {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = options.profile ?? "";
-      originalInput.replaceWith(input);
-    }
   }
 }

@@ -35,7 +35,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     const classes = this.actor.itemTypes.class;
     return foundry.utils.mergeObject(context, {
-      disableExperience: game.settings.get("dnd5e", "disableExperienceTracking"),
+      disableExperience: game.settings.get("dnd5e", "levelingMode") === "noxp",
       classLabels: classes.map(c => c.name).join(", "),
       labels: {
         type: context.system.details.type.label
@@ -63,7 +63,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Partition items by category
     let {items, spells, feats, races, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
-      const {quantity, uses} = item.system;
+      const { quantity } = item.system;
 
       // Item details
       const ctx = context.itemContext[item.id] ??= {};
@@ -82,8 +82,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.isExpanded = this._expanded.has(item.id);
 
       // Item usage
+      ctx.hasRecharge = item.hasRecharge;
       ctx.hasUses = item.hasLimitedUses;
-      ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
       // Unidentified items
       ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
@@ -142,6 +142,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const identifier = cls.system.identifier || cls.name.slugify({strict: true});
       const subclass = subclasses.findSplice(s => s.system.classIdentifier === identifier);
       if ( subclass ) arr.push(subclass);
+      else {
+        const subclassAdvancement = cls.advancement.byType.Subclass?.[0];
+        if ( subclassAdvancement && (subclassAdvancement.level <= cls.system.levels) ) ctx.needsSubclass = true;
+      }
       return arr;
     }, []);
     for ( const subclass of subclasses ) {
@@ -171,7 +175,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         hasActions: false, dataset: {type: "feat"} }
     };
     for ( const feat of feats ) {
-      if ( feat.system.activation?.type ) {
+      if ( feat.system.activities.size ) {
         features.active.items.push(feat);
         context.itemContext[feat.id].ungroup = "active";
       }
@@ -228,7 +232,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onConfigMenu(event) {
     event.preventDefault();
     event.stopPropagation();

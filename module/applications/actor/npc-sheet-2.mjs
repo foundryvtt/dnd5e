@@ -35,6 +35,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
   /* -------------------------------------------- */
 
+  /** @override */
   get template() {
     if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet-2.hbs";
     return "systems/dnd5e/templates/actors/npc-sheet-2.hbs";
@@ -47,20 +48,9 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   /** @inheritDoc */
   async _renderOuter() {
     const html = await super._renderOuter();
-    const elements = document.createElement("div");
-    elements.classList.add("header-elements");
-    elements.innerHTML = `
-      <div class="source-book">
-        <a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig"
-           aria-label="${game.i18n.localize("DND5E.SourceConfig")}">
-          <i class="fas fa-cog"></i>
-        </a>
-        <span></span>
-      </div>
-      <div class="cr-xp"></div>
-    `;
-    html[0].querySelector(".window-title")?.insertAdjacentElement("afterend", elements);
-    elements.querySelector(".config-button").addEventListener("click", this._onConfigMenu.bind(this));
+    this._renderSourceOuter(html);
+    // XP value.
+    html[0].querySelector(".header-elements")?.insertAdjacentHTML("beforeend", '<div class="cr-xp"></div>');
     return html;
   }
 
@@ -69,17 +59,11 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   /** @inheritDoc */
   async _render(force=false, options={}) {
     await super._render(force, options);
+    this._renderSource();
     const [elements] = this.element.find(".header-elements");
     if ( !elements ) return;
-    const { details } = this.actor.system;
-    const editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
-    const sourceLabel = details.source.label;
-    elements.querySelector(".config-button")?.toggleAttribute("hidden", !editable);
-    elements.querySelector(".source-book > span").innerText = editable
-      ? (sourceLabel || game.i18n.localize("DND5E.Source"))
-      : sourceLabel;
     elements.querySelector(".cr-xp").innerText = game.i18n.format("DND5E.ExperiencePointsFormat", {
-      value: new Intl.NumberFormat(game.i18n.lang).format(details.xp.value)
+      value: new Intl.NumberFormat(game.i18n.lang).format(this.actor.system.details.xp.value)
     });
   }
 
@@ -116,12 +100,17 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     }, {});
 
     // Skills & Tools
-    context.skills = Object.fromEntries(Object.entries(context.skills).filter(([, v]) => v.value));
+    const skillSetting = new Set(game.settings.get("dnd5e", "defaultSkills"));
+    context.skills = Object.fromEntries(Object.entries(context.skills).filter(([k, v]) => {
+      return v.value || skillSetting.has(k) || v.bonuses.check || v.bonuses.passive;
+    }));
 
     // Senses
-    context.senses.passivePerception = {
-      label: game.i18n.localize("DND5E.PassivePerception"), value: this.actor.system.skills.prc.passive
-    };
+    if ( this.actor.system.skills.prc ) {
+      context.senses.passivePerception = {
+        label: game.i18n.localize("DND5E.PassivePerception"), value: this.actor.system.skills.prc.passive
+      };
+    }
 
     // Legendary Actions & Resistances
     const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
@@ -147,7 +136,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
     // Biographies
     const enrichmentOptions = {
-      secrets: this.actor.isOwner, async: true, relativeTo: this.actor, rollData: context.rollData
+      secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
 
     context.enriched = {
@@ -214,14 +203,34 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     };
     features.forEach(section => {
       section.categories = [
-        { classes: "item-uses", label: "DND5E.Uses", partial: "dnd5e.column-uses" },
-        { classes: "item-roll", label: "DND5E.SpellHeader.Roll", partial: "dnd5e.column-roll" },
-        { classes: "item-formula", label: "DND5E.SpellHeader.Formula", partial: "dnd5e.column-formula" },
-        { classes: "item-controls", partial: "dnd5e.column-feature-controls" }
+        {
+          classes: "item-uses", label: "DND5E.Uses", itemPartial: "dnd5e.column-uses",
+          activityPartial: "dnd5e.activity-column-uses"
+        },
+        {
+          classes: "item-roll", label: "DND5E.SpellHeader.Roll", itemPartial: "dnd5e.column-roll",
+          activityPartial: "dnd5e.activity-column-roll"
+        },
+        {
+          classes: "item-formula", label: "DND5E.SpellHeader.Formula", itemPartial: "dnd5e.column-formula",
+          activityPartial: "dnd5e.activity-column-formula"
+        },
+        {
+          classes: "item-controls", itemPartial: "dnd5e.column-feature-controls",
+          activityPartial: "dnd5e.activity-column-controls"
+        }
       ];
     });
     context.inventory = Object.values(inventory);
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
+    context.inventory.forEach(section => {
+      section.categories = [
+        { activityPartial: "dnd5e.activity-column-price" },
+        { activityPartial: "dnd5e.activity-column-weight" },
+        { activityPartial: "dnd5e.activity-column-quantity" },
+        { activityPartial: "dnd5e.activity-column-uses" }
+      ];
+    });
     context.classes = classes;
     context.hasClasses = classes.length;
   }

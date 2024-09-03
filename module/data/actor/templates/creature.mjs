@@ -1,6 +1,9 @@
-import { FormulaField, MappingField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
+import MappingField from "../../fields/mapping-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import CommonTemplate from "./common.mjs";
+
+const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * @typedef {object} SkillData
@@ -31,50 +34,50 @@ import CommonTemplate from "./common.mjs";
 export default class CreatureTemplate extends CommonTemplate {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      bonuses: new foundry.data.fields.SchemaField({
-        mwak: makeAttackBonuses({label: "DND5E.BonusMWAttack"}),
-        rwak: makeAttackBonuses({label: "DND5E.BonusRWAttack"}),
-        msak: makeAttackBonuses({label: "DND5E.BonusMSAttack"}),
-        rsak: makeAttackBonuses({label: "DND5E.BonusRSAttack"}),
-        abilities: new foundry.data.fields.SchemaField({
-          check: new FormulaField({required: true, label: "DND5E.BonusAbilityCheck"}),
-          save: new FormulaField({required: true, label: "DND5E.BonusAbilitySave"}),
-          skill: new FormulaField({required: true, label: "DND5E.BonusAbilitySkill"})
-        }, {label: "DND5E.BonusAbility"}),
-        spell: new foundry.data.fields.SchemaField({
-          dc: new FormulaField({required: true, deterministic: true, label: "DND5E.BonusSpellDC"})
-        }, {label: "DND5E.BonusSpell"})
-      }, {label: "DND5E.Bonuses"}),
+      bonuses: new SchemaField({
+        mwak: makeAttackBonuses({ label: "DND5E.BonusMWAttack" }),
+        rwak: makeAttackBonuses({ label: "DND5E.BonusRWAttack" }),
+        msak: makeAttackBonuses({ label: "DND5E.BonusMSAttack" }),
+        rsak: makeAttackBonuses({ label: "DND5E.BonusRSAttack" }),
+        abilities: new SchemaField({
+          check: new FormulaField({ required: true, label: "DND5E.BonusAbilityCheck" }),
+          save: new FormulaField({ required: true, label: "DND5E.BonusAbilitySave" }),
+          skill: new FormulaField({ required: true, label: "DND5E.BonusAbilitySkill" })
+        }, { label: "DND5E.BonusAbility" }),
+        spell: new SchemaField({
+          dc: new FormulaField({ required: true, deterministic: true, label: "DND5E.BonusSpellDC" })
+        }, { label: "DND5E.BonusSpell" })
+      }, { label: "DND5E.Bonuses" }),
       skills: new MappingField(new RollConfigField({
-        value: new foundry.data.fields.NumberField({
+        value: new NumberField({
           required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
         }),
         ability: "dex",
-        bonuses: new foundry.data.fields.SchemaField({
-          check: new FormulaField({required: true, label: "DND5E.SkillBonusCheck"}),
-          passive: new FormulaField({required: true, label: "DND5E.SkillBonusPassive"})
-        }, {label: "DND5E.SkillBonuses"})
+        bonuses: new SchemaField({
+          check: new FormulaField({ required: true, label: "DND5E.SkillBonusCheck" }),
+          passive: new FormulaField({ required: true, label: "DND5E.SkillBonusPassive" })
+        }, { label: "DND5E.SkillBonuses" })
       }), {
         initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue,
         initialKeysOnly: true, label: "DND5E.Skills"
       }),
       tools: new MappingField(new RollConfigField({
-        value: new foundry.data.fields.NumberField({
+        value: new NumberField({
           required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 1, label: "DND5E.ProficiencyLevel"
         }),
         ability: "int",
-        bonuses: new foundry.data.fields.SchemaField({
-          check: new FormulaField({required: true, label: "DND5E.CheckBonus"})
-        }, {label: "DND5E.ToolBonuses"})
+        bonuses: new SchemaField({
+          check: new FormulaField({ required: true, label: "DND5E.CheckBonus" })
+        }, { label: "DND5E.ToolBonuses" })
       })),
-      spells: new MappingField(new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
+      spells: new MappingField(new SchemaField({
+        value: new NumberField({
           nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"
         }),
-        override: new foundry.data.fields.NumberField({
+        override: new NumberField({
           integer: true, min: 0, label: "DND5E.SpellProgOverride"
         })
-      }), {initialKeys: this._spellLevels, label: "DND5E.SpellLevels"})
+      }), { initialKeys: this._spellLevels, label: "DND5E.SpellLevels" })
     });
   }
 
@@ -108,7 +111,7 @@ export default class CreatureTemplate extends CommonTemplate {
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     CreatureTemplate.#migrateSensesData(source);
@@ -172,7 +175,7 @@ export default class CreatureTemplate extends CommonTemplate {
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getRollData({ deterministic=false }={}) {
     const data = super.getRollData({ deterministic });
     data.classes = {};
@@ -210,7 +213,7 @@ export default class CreatureTemplate extends CommonTemplate {
  * @returns {AttackBonusesData}
  */
 function makeAttackBonuses(schemaOptions={}) {
-  return new foundry.data.fields.SchemaField({
+  return new SchemaField({
     attack: new FormulaField({required: true, label: "DND5E.BonusAttack"}),
     damage: new FormulaField({required: true, label: "DND5E.BonusDamage"})
   }, schemaOptions);

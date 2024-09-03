@@ -18,56 +18,32 @@
     },
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "1",
       "units": "minute"
     },
-    "cover": null,
     "target": {
-      "value": 30,
-      "width": null,
-      "units": "ft",
-      "type": "cube",
-      "prompt": true
+      "affects": {
+        "choice": false
+      },
+      "template": {
+        "units": "ft",
+        "type": "cube",
+        "size": "30",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 120,
-      "long": null,
+      "value": "120",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "wis",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 3,
     "school": "ill",
@@ -81,16 +57,74 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "none",
-      "formula": ""
-    },
     "properties": [
       "somatic",
       "material",
       "concentration"
     ],
-    "crewed": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [
+          {
+            "_id": "SQnfuD2rHVcyLZ4j",
+            "onSave": false
+          }
+        ],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "wis",
+          "dc": {
+            "calculation": "spellcasting",
+            "formula": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    }
   },
   "sort": 0,
   "flags": {},
@@ -98,7 +132,6 @@
   "effects": [
     {
       "name": "Hypnotic Pattern",
-      "icon": "icons/magic/air/air-burst-spiral-pink.webp",
       "origin": "Compendium.dnd5e.spells.Item.6g3WLOZ2u0EbaLAd",
       "duration": {
         "startTime": null,
@@ -115,27 +148,32 @@
         {
           "key": "system.attributes.movement.burrow",
           "mode": 5,
-          "value": "0"
+          "value": "0",
+          "priority": null
         },
         {
           "key": "system.attributes.movement.climb",
           "mode": 5,
-          "value": "0"
+          "value": "0",
+          "priority": null
         },
         {
           "key": "system.attributes.movement.fly",
           "mode": 5,
-          "value": "0"
+          "value": "0",
+          "priority": null
         },
         {
           "key": "system.attributes.movement.swim",
           "mode": 5,
-          "value": "0"
+          "value": "0",
+          "priority": null
         },
         {
           "key": "system.attributes.movement.walk",
           "mode": 5,
-          "value": "0"
+          "value": "0",
+          "priority": null
         }
       ],
       "description": "<p>The creature is Charmed for the duration. While charmed by this spell, the creature is Incapacitated and has a speed of 0.</p>",
@@ -145,17 +183,32 @@
         "incapacitated"
       ],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/air/air-burst-spiral-pink.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!6g3WLOZ2u0EbaLAd.SQnfuD2rHVcyLZ4j"
     }
   ],
   "folder": "5Si35RRLLaaoWvC3",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234072,
-    "modifiedTime": 1706146392236,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037347867,
+    "modifiedTime": 1725037347867,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!6g3WLOZ2u0EbaLAd"

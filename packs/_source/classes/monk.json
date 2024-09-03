@@ -31,7 +31,6 @@
         "_id": "mmAxx3U7FvXNAcKc",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -42,13 +41,14 @@
         },
         "level": 1,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "QPXy59CQGY9HB0c3",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -65,13 +65,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "4M8MQ1E64zbcRg6B",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -83,13 +84,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "7HRRCPk80Ng2Evdx",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -110,13 +112,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "BQWHr3mt5flvkfIj",
         "type": "Trait",
         "configuration": {
-          "hint": "Your mastery of the ki flowing through you makes you immune to disease and poison.",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -128,19 +131,31 @@
         },
         "level": 10,
         "title": "Purity of Body",
-        "value": {}
+        "value": {
+          "chosen": []
+        },
+        "hint": "Your mastery of the ki flowing through you makes you immune to disease and poison."
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.UAvV7N7T4zJhxdfI",
-            "Compendium.dnd5e.classfeatures.l50hjTxO2r0iecKw",
-            "Compendium.dnd5e.classfeatures.eGxoNmSMWKNzChCO"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.UAvV7N7T4zJhxdfI",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.l50hjTxO2r0iecKw",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.eGxoNmSMWKNzChCO",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -151,22 +166,36 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "n0q8XyiGA3vLPgpK"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.10b6z2W1txNkrGP7",
-            "Compendium.dnd5e.classfeatures.5MwNlVZK7m6VolOH",
-            "Compendium.dnd5e.classfeatures.TDglPcxIVEzvVSgK",
-            "Compendium.dnd5e.classfeatures.yrSFIGTaQOH2PFRI",
-            "Compendium.dnd5e.classfeatures.zCeqyQ8uIPNdYJSW"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.10b6z2W1txNkrGP7",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.5MwNlVZK7m6VolOH",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.TDglPcxIVEzvVSgK",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.yrSFIGTaQOH2PFRI",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.zCeqyQ8uIPNdYJSW",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -177,19 +206,24 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "7TyDqpGGi3r3nsp0"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.rtpQdX77dYWbDIOH",
-            "Compendium.dnd5e.classfeatures.mzweVbnsJPQiVkAe"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.rtpQdX77dYWbDIOH",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.mzweVbnsJPQiVkAe",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -200,18 +234,20 @@
         "value": {},
         "level": 3,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "2sLHTw6k15DSW8WB"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.KQz9bqxVkXjDl8gK"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.KQz9bqxVkXjDl8gK",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -222,19 +258,24 @@
         "value": {},
         "level": 4,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "Zc1jOZK1b9mIKekq"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo",
-            "Compendium.dnd5e.classfeatures.pvRc6GAu1ok6zihC"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.pvRc6GAu1ok6zihC",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -245,18 +286,20 @@
         "value": {},
         "level": 5,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "j9LeWmxlsENKaMLo"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.7flZKruSSu6dHg6D"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.7flZKruSSu6dHg6D",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -267,19 +310,24 @@
         "value": {},
         "level": 6,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "psobDjMqtA2216Db"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.a4P4DNMmH8CqSNkC",
-            "Compendium.dnd5e.classfeatures.ZmC31XKS4YNENnoc"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.a4P4DNMmH8CqSNkC",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.ZmC31XKS4YNENnoc",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -290,18 +338,20 @@
         "value": {},
         "level": 7,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "K38aFaEMxMqRB0BC"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.bqWA7t9pDELbNRkp"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.bqWA7t9pDELbNRkp",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -312,18 +362,20 @@
         "value": {},
         "level": 10,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "eLqmJotmwzlGNrxG"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.XjuGBeB8Y0C3A5D4"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.XjuGBeB8Y0C3A5D4",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -334,18 +386,20 @@
         "value": {},
         "level": 13,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "N0geIQiuofqYgswj"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.7D2EkLdISwShEDlN"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.7D2EkLdISwShEDlN",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -356,18 +410,20 @@
         "value": {},
         "level": 14,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "N1hjizyI82UPp8UI"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.gDH8PMrKvLHaNmEI"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.gDH8PMrKvLHaNmEI",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -378,18 +434,20 @@
         "value": {},
         "level": 15,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "TcLZS9WzC7bPETSd"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.3jwFt3hSqDswBlOH"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.3jwFt3hSqDswBlOH",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -400,18 +458,20 @@
         "value": {},
         "level": 18,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "tRb3a0tA5IpehPs8"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.mQNPg89YIs7g5tG4"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.mQNPg89YIs7g5tG4",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -422,7 +482,6 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "sEQz9c9XhWYjS9x5"
       },
       {
@@ -436,25 +495,28 @@
           "scale": {
             "1": {
               "number": null,
-              "faces": 4
+              "faces": 4,
+              "modifiers": []
             },
             "5": {
               "number": null,
-              "faces": 6
+              "faces": 6,
+              "modifiers": []
             },
             "11": {
               "number": null,
-              "faces": 8
+              "faces": 8,
+              "modifiers": []
             },
             "17": {
               "number": null,
-              "faces": 10
+              "faces": 10,
+              "modifiers": []
             }
           }
         },
         "value": {},
         "title": "Martial Arts Die",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "MXFbf0nxMiyLdPbX"
       },
       {
@@ -485,7 +547,6 @@
         },
         "value": {},
         "title": "Unarmored Movement",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "1OzfWDWCquoHMeX5"
       },
       {
@@ -500,14 +561,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "ofNSUhSHKhhDuPSR"
       },
       {
@@ -522,14 +583,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "s3t9o57hP6iUHirr"
       },
       {
@@ -544,14 +605,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "O24MWOKc1ImsKaml"
       },
       {
@@ -566,14 +627,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "xdqWoLtgO3uyl3nJ"
       },
       {
@@ -589,18 +650,28 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 19,
         "title": ""
+      },
+      {
+        "_id": "0awj2yq115ev9u9o",
+        "type": "Subclass",
+        "configuration": {},
+        "value": {},
+        "level": 3,
+        "title": "Monastic Tradition"
       }
     ],
     "spellcasting": {
       "progression": "none",
-      "ability": ""
+      "ability": "",
+      "preparation": {}
     },
     "startingEquipment": [
       {
@@ -663,7 +734,11 @@
         "requiresProficiency": false
       }
     ],
-    "wealth": "5d4"
+    "wealth": "5d4",
+    "primaryAbility": {
+      "value": [],
+      "all": true
+    }
   },
   "effects": [],
   "folder": "HQ1Oy7HkbnxnE63o",
@@ -673,11 +748,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234277,
-    "modifiedTime": 1709764614205,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037370616,
+    "modifiedTime": 1725037370616,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!6VoZrWxhOEKGYhnq"

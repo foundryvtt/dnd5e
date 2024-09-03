@@ -9,11 +9,11 @@ const { SchemaField, HTMLField } = foundry.data.fields;
  * @property {object} description               Various item descriptions.
  * @property {string} description.value         Full item description.
  * @property {string} description.chat          Description displayed in chat card.
- * @property {SourceField} source               Adventure or sourcebook where this item originated.
+ * @property {SourceData} source                Adventure or sourcebook where this item originated.
  * @mixin
  */
 export default class ItemDescriptionTemplate extends SystemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       description: new SchemaField({
@@ -28,7 +28,7 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ItemDescriptionTemplate.#migrateSource(source);
@@ -44,6 +44,18 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
     if ( ("source" in source) && (foundry.utils.getType(source.source) !== "Object") ) {
       source.source = { custom: source.source };
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the source label.
+   */
+  prepareDescriptionData() {
+    const uuid = this.parent.flags.dnd5e?.sourceId ?? this.parent._stats?.compendiumSource ?? this.parent.uuid;
+    SourceField.prepareData.call(this.source, uuid);
   }
 
   /* -------------------------------------------- */

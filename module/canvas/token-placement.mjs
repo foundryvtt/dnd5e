@@ -158,26 +158,6 @@ export default class TokenPlacement {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Pixel offset to ensure snapping occurs in middle of grid space.
-   * @param {PrototypeToken} token  Token for which to calculate the adjustment.
-   * @returns {{x: number, y: number}}
-   */
-  #getSnapAdjustment(token) {
-    const size = canvas.dimensions.size;
-    switch ( canvas.grid.type ) {
-      case CONST.GRID_TYPES.SQUARE:
-        return {
-          x: token.width % 2 === 0 ? Math.round(size * 0.5) : 0,
-          y: token.height % 2 === 0 ? Math.round(size * 0.5) : 0
-        };
-      default:
-        return { x: 0, y: 0 };
-    }
-  }
-
-  /* -------------------------------------------- */
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
@@ -230,13 +210,12 @@ export default class TokenPlacement {
     this.#throttle = true;
     const idx = this.#currentPlacement;
     const preview = this.#previews[idx];
-    const adjustment = this.#getSnapAdjustment(preview);
-    const point = event.data.getLocalPosition(canvas.tokens);
-    const center = canvas.grid.getCenter(point.x - adjustment.x, point.y - adjustment.y);
-    preview.updateSource({
-      x: center[0] + adjustment.x - Math.round((this.config.tokens[idx].width * canvas.dimensions.size) / 2),
-      y: center[1] + adjustment.y - Math.round((this.config.tokens[idx].height * canvas.dimensions.size) / 2)
-    });
+    const clone = preview.object;
+    const local = event.data.getLocalPosition(canvas.tokens);
+    local.x = local.x - (clone.w / 2);
+    local.y = local.y - (clone.h / 2);
+    const dest = !event.shiftKey ? clone.getSnappedPosition(local) : local;
+    preview.updateSource({x: dest.x, y: dest.y});
     this.#placements[idx].x = preview.x;
     this.#placements[idx].y = preview.y;
     canvas.tokens.preview.children[this.#currentPlacement]?.refresh();

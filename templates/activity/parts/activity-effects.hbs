@@ -1,0 +1,58 @@
+<fieldset>
+    <legend>
+        <span>{{ localize "DND5E.ACTIVITY.FIELDS.effects.label" }}</span>
+        <button type="button" class="unbutton control-button" data-action="addEffect"
+                data-tooltip="DND5E.EFFECT.Action.Create"
+                aria-label="{{ localize "DND5E.EFFECT.Action.Create" }}">
+            <i class="fas fa-plus" inert></i>
+        </button>
+    </legend>
+    <multi-select name="appliedEffects" class="hidden-tags">
+        {{ selectOptions allEffects }}
+    </multi-select>
+    <ul class="separated-list effects-list unlist">
+        {{#each appliedEffects}}
+        <li data-index="{{ @index }}" data-effect-id="{{ effect.id }}" data-expand-id="effects.{{ effect.id }}">
+            {{> ".effect" }}
+        </li>
+        {{else}}
+        <li class="empty">
+            {{{ localize "DND5E.EFFECT.Empty" }}}
+        </li>
+        {{/each}}
+    </ul>
+</fieldset>
+
+{{#*inline ".effect"}}
+<div class="details flexrow">
+    <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
+    {{{ contentLink }}}
+    <div class="list-controls flexrow">
+        <button type="button" class="unbutton control-button" data-action="dissociateEffect"
+                data-tooltip="DND5E.EFFECT.Action.Dissociate"
+                aria-label="{{ localize 'DND5E.EFFECT.Action.Dissociate' }}">
+            <i class="fa-solid fa-minus" inert></i>
+        </button>
+        <button type="button" class="unbutton control-button" data-action="deleteEffect"
+                data-tooltip="DND5E.EFFECT.Action.Delete"
+                aria-label="{{ localize 'DND5E.EFFECT.Action.Delete' }}">
+            <i class="fa-solid fa-trash" inert></i>
+        </button>
+    </div>
+</div>
+<input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
+{{#if additionalSettings}}
+<div class="additional-tray collapsible {{ collapsed }}" data-action="toggleCollapsed">
+    <label class="roboto-upper">
+        <i class="fa-solid fa-gears" inert></i>
+        <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+        <i class="fa-solid fa-caret-down" inert></i>
+    </label>
+    <div class="collapsible-content">
+        <div class="wrapper">
+            {{> (lookup . "additionalSettings") }}
+        </div>
+    </div>
+</div>
+{{/if}}
+{{/inline}}

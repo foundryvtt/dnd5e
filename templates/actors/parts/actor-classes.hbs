@@ -9,6 +9,12 @@
             {{#if cls.subclass}}
             <img class="gold-icon item-tooltip" src="{{ cls.subclass.img }}" alt="{{ cls.subclass.name }}"
                  data-action="edit" data-item-id="{{ cls.subclass.id }}">
+            {{else if ctx.needsSubclass}}
+            <a class="gold-icon subclass-icon" data-action="findItem" data-item-type="subclass"
+               data-class-identifier="{{ cls.identifier }}" data-tooltip="DND5E.SubclassAdd"
+               aria-label="{{ localize 'DND5E.SubclassAdd' }}">
+               <i class="fa-solid fa-circle-plus" inert></i>
+            </a>
             {{/if}}
             {{#if @root.editable}}
             <div class="controls">

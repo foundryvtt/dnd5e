@@ -2,7 +2,7 @@
   "_id": "w56FIjFafs2rN6iK",
   "name": "Mace of Smiting",
   "type": "weapon",
-  "img": "icons/weapons/maces/mace-spiked-wood-grey.webp",
+  "img": "icons/weapons/maces/mace-studded-steel.webp",
   "system": {
     "description": {
       "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. The bonus increases to +3 when you use the mace to attack a construct.</p><p>When you roll a 20 on an attack roll made with this weapon, the target takes an extra 2d6 bludgeoning damage, or 4d6 bludgeoning damage if it's a construct. If a construct has 25 hit points or fewer after taking this damage, it is destroyed.</p><section class=\"secret foundry-note\" id=\"secret-AY4O41uMKnbhqve5\"><p><strong>Foundry Note</strong></p><p>The bonus to attack and damage rolls has been set at the +1. In the instances of hitting a construct, please remember to +2 to both of these results. Additionally, on a hit of 20 against a construct, please use the Other Formula one more time.</p></section>",
@@ -23,66 +23,55 @@
       "value": 7000,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "rare",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
     "range": {
-      "value": 5,
+      "value": null,
       "long": null,
-      "units": "ft"
+      "units": "ft",
+      "reach": null
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "mwak",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "recovery": [],
+      "spent": 0
     },
     "damage": {
-      "parts": [
-        [
-          "1d6 + @mod",
+      "versatile": {
+        "number": null,
+        "denomination": null,
+        "bonus": "",
+        "types": [],
+        "custom": {
+          "enabled": false,
+          "formula": ""
+        },
+        "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+        }
+      },
+      "base": {
+        "number": 1,
+        "denomination": 6,
+        "bonus": "",
+        "types": [
           "bludgeoning"
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "2d6",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+        ],
+        "custom": {
+          "enabled": false,
+          "formula": ""
+        },
+        "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+        }
+      }
     },
     "armor": {
       "value": 10
@@ -107,12 +96,153 @@
     "container": null,
     "crewed": false,
     "magicalBonus": 1,
-    "attack": {
-      "bonus": "",
-      "flat": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "attack",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "5",
+          "units": "ft",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "attack": {
+          "ability": "",
+          "bonus": "",
+          "critical": {
+            "threshold": null
+          },
+          "flat": false,
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
+          }
+        },
+        "damage": {
+          "critical": {
+            "bonus": ""
+          },
+          "includeBase": true,
+          "parts": []
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      },
+      "dnd5eactivity300": {
+        "_id": "dnd5eactivity300",
+        "type": "utility",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "5",
+          "units": "ft",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "roll": {
+          "formula": "2d6",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "summons": null,
-    "enchantment": null
+    "attuned": false,
+    "ammunition": {}
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -122,11 +252,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233955,
-    "modifiedTime": 1715374655934,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037317193,
+    "modifiedTime": 1725037317193,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!w56FIjFafs2rN6iK"

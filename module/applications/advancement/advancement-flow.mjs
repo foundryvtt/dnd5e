@@ -40,7 +40,7 @@ export default class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/advancement-flow.hbs",
@@ -50,14 +50,14 @@ export default class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get id() {
     return `actor-${this.advancement.item.id}-advancement-${this.advancement.id}-${this.level}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     return this.advancement.title;
   }
@@ -85,13 +85,14 @@ export default class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     return {
       appId: this.id,
       advancement: this.advancement,
       type: this.advancement.constructor.typeName,
       title: this.title,
+      hint: this.advancement.hint,
       summary: this.advancement.summaryForLevel(this.level),
       level: this.level
     };
@@ -99,7 +100,7 @@ export default class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _render(...args) {
     await super._render(...args);
 
@@ -109,14 +110,14 @@ export default class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     await this.advancement.apply(this.level, formData);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _canDragDrop(selector) {
     return true;
   }

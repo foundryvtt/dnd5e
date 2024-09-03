@@ -1,16 +1,14 @@
 import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
-const AbstractFormInputElement = foundry.applications?.elements?.AbstractFormInputElement ?? (class {});
 
 /**
  * A custom checkbox implementation with more styling options.
  * @mixes AdoptedStyleSheetMixin
  * @extends {AbstractFormInputElement}
  */
-export default class CheckboxElement extends AdoptedStyleSheetMixin(AbstractFormInputElement) {
+export default class CheckboxElement extends AdoptedStyleSheetMixin(
+  foundry.applications.elements.AbstractFormInputElement
+) {
   constructor(...args) {
-    if ( game.release.version < 12 ) {
-      throw Error("CheckboxElement can only be used in Foundry VTT version 12 or later.");
-    }
     super(...args);
     this._internals.role = "checkbox";
     this._value = this.getAttribute("value");
@@ -34,7 +32,7 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(AbstractForm
       height: var(--checkbox-size, 18px);
       aspect-ratio: 1;
     }
-    
+
     :host > div {
       width: 100%;
       height: 100%;
@@ -42,17 +40,23 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(AbstractForm
       border: var(--checkbox-border-width, 2px) solid var(--checkbox-border-color, var(--dnd5e-color-gold));
       background: var(--checkbox-empty-color, transparent);
       box-sizing: border-box;
+      position: relative;
     }
-    
+
     :host :is(.checked, .disabled, .indeterminate) {
       display: none;
       height: 100%;
       width: 100%;
-      background: var(--checkbox-fill-color, var(--dnd5e-color-gold));
       align-items: center;
       justify-content: center;
+      position: absolute;
+      inset: 0;
     }
-    
+
+    :host([checked]) :is(.checked, .disabled, .indeterminate) {
+      background: var(--checkbox-fill-color, var(--dnd5e-color-gold));
+    }
+
     :host([checked]) .checked { display: flex; }
     :host([indeterminate]) .indeterminate { display: flex; }
     :host([indeterminate]) .checked { display: none; }
@@ -136,6 +140,13 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(AbstractForm
    */
   set value(value) {
     this._setValue(value);
+  }
+
+  /** @override */
+  _getValue() {
+    // Workaround for FormElementExtended only checking the value property and not the checked property.
+    if ( typeof this._value === "string" ) return this._value;
+    return this.checked;
   }
 
   /* -------------------------------------------- */

@@ -16,70 +16,91 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "minute",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "self",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": "self"
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "dex",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Ranger 10",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "minute",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [
+          {
+            "_id": "7if4vIkT84Sw2zFm"
+          }
+        ],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "self",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "roll": {
+          "formula": "",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "crewed": false,
-    "properties": []
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    }
   },
   "flags": {},
   "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
@@ -104,25 +125,39 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "origin": "Item.r0unvWK0lPsDthDx",
       "transfer": false,
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
       "name": "Hide in Plain Sight",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!r0unvWK0lPsDthDx.7if4vIkT84Sw2zFm"
     }
   ],
   "folder": "S0rKJuStpCBy0hAf",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234428,
-    "modifiedTime": 1704824719069,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037388894,
+    "modifiedTime": 1725037388894,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!r0unvWK0lPsDthDx"

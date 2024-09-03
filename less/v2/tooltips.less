@@ -9,7 +9,8 @@
       url("ui/texture-gray2.webp") no-repeat bottom right,
       var(--dnd5e-color-parchment);
     box-shadow: 0 0 16px var(--dnd5e-shadow-45);
-    border: 2px solid var(--dnd5e-color-gold);
+    border: var(--dnd5e-border-gold);
+    border-width: 2px;
 
     .content { padding: 0 .5rem .25rem; }
 
@@ -31,7 +32,7 @@
       content: "";
       position: absolute;
       inset: 1px;
-      border: 1px solid var(--dnd5e-color-gold);
+      border: var(--dnd5e-border-gold);
       border-radius: 4px;
       pointer-events: none;
     }
@@ -39,30 +40,11 @@
     .lock-hint { display: none; }
   }
 
-  .lock-hint {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    padding: 6px 0 0;
-    margin-bottom: -4px;
-    font-size: var(--font-size-10);
-    color: var(--color-text-dark-5);
-
-    > img {
-      height: 1em;
-      aspect-ratio: 1;
-      border: none;
-      transform: scale(1.35);
-      opacity: .6;
-    }
-  }
-
   /* ---------------------------------- */
   /*  Item Tooltips                     */
   /* ---------------------------------- */
 
-  &.item-tooltip {
+  &:is(.item-tooltip, .effect-tooltip) {
     width: 300px;
 
     .loading {
@@ -133,16 +115,6 @@
         right: .75rem;
         --icon-fill: var(--dnd5e-color-gold);
         --icon-size: 32px;
-      }
-    }
-
-    .info {
-      text-align: left;
-      font-size: var(--font-size-12);
-
-      .materials, .condition {
-        font-size: var(--font-size-11);
-        color: var(--color-text-dark-5);
       }
     }
 

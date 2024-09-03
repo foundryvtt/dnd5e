@@ -5,7 +5,7 @@ import AdvancementFlow from "./advancement-flow.mjs";
  */
 export default class ScaleValueFlow extends AdvancementFlow {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/scale-value-flow.hbs"
@@ -14,7 +14,7 @@ export default class ScaleValueFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     return foundry.utils.mergeObject(super.getData(), {
       initial: this.advancement.valueForLevel(this.level - 1)?.display,

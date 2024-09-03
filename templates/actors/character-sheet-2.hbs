@@ -61,6 +61,13 @@
                     aria-label="{{ localize "DND5E.Inspiration" }}" data-tooltip="DND5E.Inspiration"
                     aria-pressed="{{ system.attributes.inspiration }}"></button>
 
+            {{!-- Epic Boons --}}
+            {{#if system.details.xp.boonsEarned}}
+            <div class="boon-badge badge" data-tooltip="{{ epicBoonsEarned }}" aria-label="{{ epicBoonsEarned }}">
+                {{ dnd5e-numberFormat system.details.xp.boonsEarned numerals=true }}
+            </div>
+            {{/if}}
+
             <div>
                 {{!-- Resting & Special Traits --}}
                 {{#if actor.isOwner}}
@@ -90,8 +97,10 @@
                     {{else}}
                     <span class="value">{{ dnd5e-numberFormat value }}</span>
                     {{/if}}
+                    {{#unless @root.epicBoonsEarned}}
                     <span class="separator">&sol;</span>
                     <span class="max">{{ dnd5e-numberFormat max }}</span>
+                    {{/unless}}
                 </div>
                 <div class="xp-bar" role="meter" aria-label="{{ localize "DND5E.ExperiencePointsLabel" }}"
                      aria-valuemin="{{ min }}" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
@@ -393,12 +402,12 @@
                                     {{/if}}
 
                                     {{!-- Saves --}}
-                                    {{else if save.dc}}
+                                    {{else if save.dc.value}}
                                     {{#with save}}
                                     <span class="ability">
                                         {{ lookup (lookup @root.config.abilities ability) "abbreviation" }}
                                     </span>
-                                    <span class="value">{{ dc }}</span>
+                                    <span class="value">{{ dc.value }}</span>
                                     {{/with}}
 
                                     {{!-- Other Value --}}
@@ -447,6 +456,10 @@
                                         {{ units }}
                                     </span>
                                     {{/with}}
+
+                                    {{!-- Reach --}}
+                                    {{else if range.reach}}
+                                    <span class="range">{{ range.reach }} {{ range.units }}</span>
                                     {{/if}}
                                 </div>
                             </div>
@@ -515,7 +528,7 @@
 
     {{!-- Child Creation --}}
     <button type="button" class="create-child gold-button"
-            aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
+            aria-label="{{ localize "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
         <i class="fas fa-plus"></i>
     </button>
 

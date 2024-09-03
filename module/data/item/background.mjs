@@ -1,7 +1,10 @@
 import { ItemDataModel } from "../abstract.mjs";
-import { AdvancementField, IdentifierField } from "../fields.mjs";
+import AdvancementField from "../fields/advancement-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
+
+const { ArrayField } = foundry.data.fields;
 
 /**
  * Data definition for Background items.
@@ -12,20 +15,39 @@ import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
  * @property {object[]} advancement  Advancement objects for this background.
  */
 export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
-      advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"})
+      advancement: new ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"})
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     singleton: true
   }, {inplace: false}));
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [{ label: context.itemType }];
+    context.singleDescription = true;
+    context.parts = ["dnd5e.details-background", "dnd5e.details-starting-equipment"];
+  }
 
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */

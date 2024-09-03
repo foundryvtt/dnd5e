@@ -6,8 +6,8 @@
       box-shadow: none;
     }
   }
-  .form-group .form-fields button {
-    flex: 0;
+  .form-group .form-fields {
+    :not(file-picker) > button { flex: 0; }
   }
   .form-group .form-field-readonly {
     color: #999;
@@ -148,7 +148,7 @@
           text-align: start;
           align-self: end;
         }
-        label {
+        label:first-child {
           grid-area: label;
           font-size: var(--font-size-18);
         }
@@ -165,7 +165,7 @@
         }
         .minus { grid-area: minus; }
         .plus { grid-area: plus; }
-        input {
+        > input {
           grid-area: value;
           height: 1.5em;
           border: none;
@@ -178,6 +178,18 @@
           font-weight: bold;
           i {
             font-size: var(--font-size-12);
+          }
+        }
+        .locked {
+          grid-column: 1 / -1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          font-size: var(--font-size-12);
+          > input {
+            width: 14px;
+            height: 14px;
           }
         }
       }
@@ -258,6 +270,10 @@
       option[value=""] {
         color: var(--color-text-light-6);
       }
+    }
+
+    copyable-text {
+      font-weight: bold;
     }
   }
 
@@ -445,7 +461,7 @@
     }
     span.none { font-style: italic; }
   }
-  
+
   form[data-type="Trait"] {
     select {
       min-width: min(20em, 100%);

@@ -23,62 +23,21 @@
       "value": 48000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "legendary",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": "Command word."
-    },
-    "duration": {
-      "value": "10",
-      "units": "minute"
-    },
     "cover": null,
     "crewed": false,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "self",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": "self"
-    },
     "uses": {
-      "value": 1,
       "max": "1",
-      "per": "day",
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "util",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [
+        {
+          "period": "day",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "armor": {
       "value": 18,
@@ -109,12 +68,83 @@
       "mgc",
       "stealthDisadvantage"
     ],
-    "attack": {
-      "bonus": "",
-      "flat": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "Command word.",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "10",
+          "units": "minute",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "self",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "roll": {
+          "formula": "",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "summons": null,
-    "enchantment": null
+    "attuned": false
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -124,11 +154,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233742,
-    "modifiedTime": 1715374625156,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037233531,
+    "modifiedTime": 1725037233531,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!dJjdWdaZU30r1zx4"

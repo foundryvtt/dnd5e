@@ -18,61 +18,32 @@
     },
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "",
       "units": "inst"
     },
-    "cover": null,
     "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "creature",
-      "prompt": true
+      "affects": {
+        "type": "creature",
+        "count": "1",
+        "choice": false
+      },
+      "template": {
+        "units": "",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 60,
-      "long": null,
+      "value": "60",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "heal",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "70",
-          "healing"
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 6,
     "school": "evo",
@@ -86,15 +57,74 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "level",
-      "formula": "10"
-    },
     "properties": [
       "vocal",
       "somatic"
     ],
-    "crewed": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "heal",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "healing": {
+          "number": null,
+          "denomination": null,
+          "bonus": "",
+          "types": [
+            "healing"
+          ],
+          "custom": {
+            "enabled": true,
+            "formula": "70"
+          },
+          "scaling": {
+            "mode": "whole",
+            "number": null,
+            "formula": "10"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    }
   },
   "sort": 0,
   "flags": {},
@@ -102,11 +132,12 @@
   "effects": [],
   "folder": "0pdesvXqKd55VOh2",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234231,
-    "modifiedTime": 1704823526007,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037365783,
+    "modifiedTime": 1725037365783,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!qcYitWoSMTnKkzM1"

@@ -5,7 +5,7 @@ import Actor5e from "../../documents/actor/actor.mjs";
  */
 export default class ActorTypeConfig extends DocumentSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "actor-type", "trait-selector"],
@@ -23,14 +23,14 @@ export default class ActorTypeConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     return `${game.i18n.localize("DND5E.CreatureTypeTitle")}: ${this.object.name}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get id() {
     return `actor-type-${this.object.id}`;
   }
@@ -48,7 +48,7 @@ export default class ActorTypeConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData(options={}) {
     // Get current value or new default
     let attr = foundry.utils.getProperty(this.object, this.options.keyPath);
@@ -100,7 +100,7 @@ export default class ActorTypeConfig extends DocumentSheet {
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find("input[name='custom']").focusin(this._onCustomFieldFocused.bind(this));
@@ -117,7 +117,7 @@ export default class ActorTypeConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onChangeInput(event) {
     super._onChangeInput(event);
     const typeObject = foundry.utils.expandObject(this._getSubmitData());

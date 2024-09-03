@@ -1,7 +1,7 @@
 .dnd5e2 .inventory-element {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 8px;
 
   /* ---------------------------------- */
   /*  Common Styles                     */
@@ -205,7 +205,7 @@
   .items-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 8px;
     container-type: inline-size;
   }
 
@@ -240,6 +240,8 @@
           transition: text-shadow 250ms ease;
           font-size: var(--font-size-13);
         }
+
+        &.activity-name .title { font-size: var(--font-size-12); }
 
         .name { flex: 1; }
 
@@ -291,6 +293,17 @@
         object-fit: cover;
         min-width: 32px;
         min-height: 32px;
+
+        &.activity-image {
+          --icon-size: 24px;
+          --icon-fill: var(--color-text-dark-primary);
+          width: 24px;
+          height: 24px;
+          min-width: 24px;
+          min-height: 24px;
+          border-width: 1px;
+          border-radius: 3px;
+        }
       }
 
       /* Item Weight & Price */
@@ -369,8 +382,8 @@
 
       .item-school {
         --icon-fill: var(--dnd5e-color-gold);
+        --icon-size: 18px;
         display: none;
-        &.item-detail { font-size: var(--font-size-18); }
       }
 
       .item-roll {
@@ -449,9 +462,9 @@
         width: 70px;
         align-items: stretch;
         justify-content: center;
-        gap: .375rem;
+        gap: 4px;
         color: var(--color-text-light-6);
-        padding: 0 1.5rem 0 .25rem;
+        padding: 0 38px 0 4px;
         position: relative;
 
         .item-control {
@@ -465,14 +478,18 @@
           &[aria-pressed="true"]::before { background: var(--color-border-dark-5); }
         }
 
-        [data-context-menu] {
+        [data-context-menu], [data-toggle-description] {
           position: absolute;
-          inset-block: 0;
-          inset-inline-end: 0;
+          inset: 0 0 0 auto;
           display: flex;
           align-items: center;
           justify-content: end;
-          padding: 0 12px 0 5px;
+          padding: 0 10px 0 5px;
+        }
+
+        [data-toggle-description] {
+          right: 20px;
+          padding: 0;
         }
       }
 
@@ -485,15 +502,12 @@
       }
 
       /* Item Description */
-      .item-description {
+      .item-description .item-summary {
         font-size: var(--font-size-11);
-
-        .item-summary {
-          padding: 1px 8px 8px;
-          background: var(--dnd5e-color-parchment);
-          .item-properties { padding-top: 7px; }
-          > * + .item-properties { padding-top: 0; }
-        }
+        padding: 1px 8px 8px;
+        background: var(--dnd5e-color-parchment);
+        .item-properties { padding-top: 7px; }
+        > * + .item-properties { padding-top: 0; }
       }
 
       @container (min-width: 580px) {
@@ -540,6 +554,23 @@
       display: flex;
       align-items: stretch;
     }
+
+    .activities .activity-row {
+      position: relative;
+      border-top: 1px dotted #ddd;
+      padding-left: 20px;
+
+      &:last-child { border-bottom: 1px dotted #ddd; }
+
+      &::before {
+        content: "┗";
+        position: absolute;
+        inset: 9px auto auto 5px;
+        font-size: var(--font-size-12);
+        font-weight: bold;
+        color: var(--color-text-light-6);
+      }
+    }
   }
 
   .effect-name .duration, &.effect-tooltip .duration {
@@ -561,7 +592,7 @@
 
 .dnd5e2 section.currency, .dnd5e2 .currency-style {
   display: flex;
-  gap: 1rem;
+  gap: 8px;
 
   label {
     position: relative;

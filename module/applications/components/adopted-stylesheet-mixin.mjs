@@ -23,7 +23,8 @@ export default function AdoptedStyleSheetMixin(Base) {
 
     /** @inheritDoc */
     adoptedCallback() {
-      this._adoptStyleSheet(this._getStyleSheet());
+      const sheet = this._getStyleSheet();
+      if ( sheet ) this._adoptStyleSheet(this._getStyleSheet());
     }
 
     /* -------------------------------------------- */
@@ -35,7 +36,7 @@ export default function AdoptedStyleSheetMixin(Base) {
      */
     _getStyleSheet() {
       let sheet = this.constructor._stylesheets.get(this.ownerDocument);
-      if ( !sheet ) {
+      if ( !sheet && this.ownerDocument.defaultView ) {
         sheet = new this.ownerDocument.defaultView.CSSStyleSheet();
         sheet.replaceSync(this.constructor.CSS);
         this.constructor._stylesheets.set(this.ownerDocument, sheet);

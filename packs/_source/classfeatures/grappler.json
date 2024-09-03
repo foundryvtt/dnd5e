@@ -16,70 +16,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "feat",
       "subtype": ""
     },
     "requirements": "STR 13 or higher",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "crewed": false,
-    "properties": []
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    }
   },
   "sort": 0,
   "flags": {},
@@ -87,11 +39,12 @@
   "effects": [],
   "folder": null,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234351,
-    "modifiedTime": 1704824715620,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037381725,
+    "modifiedTime": 1725037381725,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Dop1RcU5UdhSVLYS"

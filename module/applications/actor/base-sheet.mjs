@@ -1,5 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
+import { splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
@@ -23,6 +24,7 @@ import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
+import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -204,7 +206,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     context.biographyHTML = await TextEditor.enrichHTML(context.system.details.biography.value, {
       secrets: this.actor.isOwner,
       rollData: context.rollData,
-      async: true,
       relativeTo: this.actor
     });
 
@@ -295,13 +296,13 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]}`;
     }
-    if ( senses.special ) senses.special.split(";").forEach((c, i) => tags[`custom${i+1}`] = c.trim());
+    if ( senses.special ) splitSemicolons(senses.special).forEach((c, i) => tags[`custom${i + 1}`] = c);
     return tags;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async activateEditor(name, options={}, initialContent="") {
     options.relativeLinks = true;
     return super.activateEditor(name, options, initialContent);
@@ -357,7 +358,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       }
 
       // Add custom entries
-      if ( data.custom ) data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
+      if ( data.custom ) splitSemicolons(data.custom).forEach((c, i) => data.selected[`custom${i + 1}`] = c);
       data.cssClass = !foundry.utils.isEmpty(data.selected) ? "" : "inactive";
 
       // If petrified, display "All Damage" instead of all damage types separately
@@ -528,25 +529,35 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    * @protected
    */
   _filterItems(items, filters) {
+    const alwaysPrepared = ["innate", "always"];
+    const actions = ["action", "bonus", "reaction"];
+    const recoveries = ["lr", "sr"];
     const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
+    const schoolFilter = spellSchools.intersection(filters);
+
     return items.filter(item => {
 
       // Subclass-specific logic.
-      const filtered = this._filterItem(item);
+      const filtered = this._filterItem(item, filters);
       if ( filtered !== undefined ) return filtered;
 
       // Action usage
-      for ( let f of ["action", "bonus", "reaction"] ) {
-        if ( filters.has(f) && (item.system.activation?.type !== f) ) return false;
+      for ( const f of actions ) {
+        if ( !filters.has(f) ) continue;
+        if ( item.type === "spell" ) {
+          if ( item.system.activation.type !== f ) return false;
+          continue;
+        }
+        if ( !item.system.activities?.size ) return false;
+        if ( item.system.activities.every(a => a.activation.type !== f) ) return false;
       }
 
       // Spell-specific filters
       if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
-      const schoolFilter = spellSchools.intersection(filters);
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
       if ( filters.has("prepared") ) {
-        if ( ["innate", "always"].includes(item.system.preparation?.mode) ) return true;
+        if ( alwaysPrepared.includes(item.system.preparation?.mode) ) return true;
         if ( this.actor.type === "npc" ) return true;
         return item.system.preparation?.prepared;
       }
@@ -555,9 +566,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
       if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
 
-      // Feature-specific filters
-      if ( filters.has("lr") && (item.system.uses?.per !== "lr") ) return false;
-      if ( filters.has("sr") && (item.system.uses?.per !== "sr") ) return false;
+      // Recovery
+      for ( const f of recoveries ) {
+        if ( !filters.has(f) ) continue;
+        if ( !item.system.uses?.recovery.length ) return false;
+        if ( item.system.uses.recovery.every(r => r.period !== f) ) return false;
+      }
 
       return true;
     });
@@ -567,11 +581,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /**
    * Determine whether an Item will be shown based on the current set of filters.
-   * @param {Item5e} item  The item.
+   * @param {Item5e} item          The item.
+   * @param {Set<string>} filters  Filters applied to the Item.
    * @returns {boolean|void}
    * @protected
    */
-  _filterItem(item) {}
+  _filterItem(item, filters) {}
 
   /* -------------------------------------------- */
 
@@ -595,7 +610,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     // Property attributions
     this.form.querySelectorAll("[data-attribution], .attributable").forEach(this._applyAttributionTooltips.bind(this));
@@ -752,7 +767,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         app = new ActorSensesConfig(this.actor);
         break;
       case "source":
-        app = new SourceConfig(this.actor);
+        app = new SourceConfig({ document: this.actor });
         break;
       case "type":
         app = new ActorTypeConfig(this.actor);
@@ -808,7 +823,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onDragStart(event) {
     const li = event.currentTarget;
     if ( event.target.classList.contains("content-link") ) return;
@@ -907,7 +922,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDropActiveEffect(event, data) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
     if ( effect?.target === this.actor ) return false;
@@ -1224,6 +1239,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const trait = event.currentTarget.dataset.trait;
     if ( trait === "tool" ) return new ToolSelector(this.actor, trait).render(true);
     else if ( trait === "dm" ) return new DamageModificationConfig(this.actor).render(true);
+    else if ( trait === "weapon" ) return new WeaponsConfig({ document: this.actor }).render({ force: true });
     return new TraitSelector(this.actor, trait).render(true);
   }
 

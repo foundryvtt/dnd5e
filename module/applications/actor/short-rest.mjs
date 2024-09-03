@@ -84,7 +84,7 @@ export default class ShortRestDialog extends Dialog {
     event.preventDefault();
     const btn = event.currentTarget;
     this._denom = btn.form.hd.value;
-    await this.actor.rollHitDie(this._denom);
+    await this.actor.rollHitDie({ denomination: this._denom });
     this.render();
   }
 

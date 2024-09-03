@@ -11,7 +11,7 @@ const { BooleanField, StringField } = foundry.data.fields;
  * @mixin
  */
 export default class EquippableItemTemplate extends SystemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       attunement: new StringField({required: true, label: "DND5E.Attunement"}),
@@ -43,7 +43,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     EquippableItemTemplate.#migrateAttunement(source);

@@ -23,62 +23,29 @@
       "value": 480,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "uncommon",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": 30,
-      "width": null,
-      "units": "ft",
-      "type": "radius",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": "self"
-    },
     "uses": {
-      "value": 1,
       "max": "1",
-      "per": "charges",
-      "recovery": "",
+      "recovery": [],
       "autoDestroy": true,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0
     },
     "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "con",
-      "dc": 15,
-      "scaling": "flat"
+      "base": {
+        "number": null,
+        "denomination": null,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        }
+      },
+      "replace": false
     },
     "type": {
       "value": "trinket",
@@ -88,17 +55,92 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [
       "mgc"
     ],
-    "attack": {
-      "bonus": "",
-      "flat": false
+    "magicalBonus": null,
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "radius",
+            "size": "30",
+            "width": "",
+            "height": "",
+            "units": "ft"
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "con",
+          "dc": {
+            "calculation": "",
+            "formula": "15"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "enchantment": null,
-    "summons": null,
-    "magicalBonus": null
+    "attuned": false
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
@@ -108,11 +150,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233500,
-    "modifiedTime": 1715374582878,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037119085,
+    "modifiedTime": 1725037119085,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!9eyZY9tL3fXD1Mbm"

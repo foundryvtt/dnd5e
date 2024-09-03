@@ -8,6 +8,7 @@
  * @returns {string}
  */
 export function formatCR(value) {
+  if ( value === null ) return "—";
   return { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[value] ?? formatNumber(value);
 }
 
@@ -18,7 +19,7 @@ export function formatCR(value) {
  * @param {number} mod  The modifier.
  * @returns {Handlebars.SafeString}
  */
-function formatModifier(mod) {
+export function formatModifier(mod) {
   if ( !Number.isFinite(mod) ) return new Handlebars.SafeString("");
   return new Handlebars.SafeString(`<span class="sign">${mod < 0 ? "-" : "+"}</span>${Math.abs(mod)}`);
 }
@@ -29,11 +30,51 @@ function formatModifier(mod) {
  * A helper for using Intl.NumberFormat within handlebars.
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
+ * @param {boolean} [options.numerals]  Format the number as roman numerals.
  * @returns {string}
  */
-export function formatNumber(value, options) {
+export function formatNumber(value, { numerals, ...options }={}) {
+  if ( numerals ) return _formatNumberAsNumerals(value);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);
+}
+
+/**
+ * Roman numerals.
+ * @type {Record<string, number>}
+ */
+const _roman = {
+  M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1
+};
+
+/**
+ * Format a number as roman numerals.
+ * @param {number} n  The number to format.
+ * @returns {string}
+ */
+function _formatNumberAsNumerals(n) {
+  let out = "";
+  if ( (n < 1) || !Number.isInteger(n) ) return out;
+  for ( const [numeral, decimal] of Object.entries(_roman) ) {
+    const quotient = Math.floor(n / decimal);
+    n -= quotient * decimal;
+    out += numeral.repeat(quotient);
+  }
+  return out;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * A helper for using Intl.NumberFormat within handlebars for format a range.
+ * @param {number} min      The lower end of the range.
+ * @param {number} max      The upper end of the range.
+ * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
+ * @returns {string}
+ */
+export function formatRange(min, max, options) {
+  const formatter = new Intl.NumberFormat(game.i18n.lang, options);
+  return formatter.formatRange(min, max);
 }
 
 /* -------------------------------------------- */
@@ -91,6 +132,33 @@ export function parseInputDelta(input, target) {
 /* -------------------------------------------- */
 
 /**
+ * Prepare the final formula value for a model field.
+ * @param {ItemDataModel|BaseActivityData} model  Model for which the value is being prepared.
+ * @param {string} keyPath                        Path to the field within the model.
+ * @param {string} label                          Label to use in preparation warnings.
+ * @param {object} rollData                       Roll data to use when replacing formula values.
+ */
+export function prepareFormulaValue(model, keyPath, label, rollData) {
+  const value = foundry.utils.getProperty(model, keyPath);
+  if ( !value ) return;
+  const item = model.item ?? model.parent;
+  const property = game.i18n.localize(label);
+  try {
+    const formula = replaceFormulaData(value, rollData, { item, property });
+    const roll = new Roll(formula);
+    foundry.utils.setProperty(model, keyPath, roll.evaluateSync().total);
+  } catch(err) {
+    if ( item.isEmbedded ) {
+      const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: model.name ?? item.name });
+      item.actor._preparationWarnings.push({ message, link: item.uuid, type: "error" });
+      console.error(message, err);
+    }
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
  * Replace referenced data attributes in the roll formula with values from the provided data.
  * If the attribute is not found in the provided data, display a warning on the actor.
  * @param {string} formula           The original formula within which to replace.
@@ -138,11 +206,7 @@ export function simplifyBonus(bonus, data={}) {
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
-    return roll.isDeterministic
-      ? game.release.generation < 12
-        ? Roll.safeEval(roll.formula)
-        : roll.evaluateSync().total
-      : 0;
+    return roll.isDeterministic ? roll.evaluateSync().total : 0;
   } catch(error) {
     console.error(error);
     return 0;
@@ -176,6 +240,24 @@ export function staticID(id) {
 export function filteredKeys(obj, filter) {
   filter ??= e => e;
   return Object.entries(obj).filter(e => filter(e[1])).map(e => e[0]);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Check whether an object exists without transversing any getters, preventing any deprecation warnings from triggering.
+ * @param {object} object
+ * @param {string} keyPath
+ * @returns {boolean}
+ */
+export function safePropertyExists(object, keyPath) {
+  const parts = keyPath.split(".");
+  for ( const part of parts ) {
+    const descriptor = Object.getOwnPropertyDescriptor(object, part);
+    if ( !descriptor || !("value" in descriptor) ) return false;
+    object = object[part];
+  }
+  return true;
 }
 
 /* -------------------------------------------- */
@@ -244,7 +326,6 @@ export function linkForUuid(uuid, { tooltip }={}) {
   }
   const a = doc.toAnchor();
   if ( tooltip ) a.dataset.tooltip = tooltip;
-  if ( game.release.generation < 12 ) a.setAttribute("draggable", true);
   return a.outerHTML;
 }
 
@@ -344,18 +425,62 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
 
     // Item Sheet Partials
+    "systems/dnd5e/templates/items/details/details-background.hbs",
+    "systems/dnd5e/templates/items/details/details-class.hbs",
+    "systems/dnd5e/templates/items/details/details-consumable.hbs",
+    "systems/dnd5e/templates/items/details/details-container.hbs",
+    "systems/dnd5e/templates/items/details/details-equipment.hbs",
+    "systems/dnd5e/templates/items/details/details-feat.hbs",
+    "systems/dnd5e/templates/items/details/details-loot.hbs",
+    "systems/dnd5e/templates/items/details/details-mountable.hbs",
+    "systems/dnd5e/templates/items/details/details-species.hbs",
+    "systems/dnd5e/templates/items/details/details-spell.hbs",
+    "systems/dnd5e/templates/items/details/details-spellcasting.hbs",
+    "systems/dnd5e/templates/items/details/details-starting-equipment.hbs",
+    "systems/dnd5e/templates/items/details/details-subclass.hbs",
+    "systems/dnd5e/templates/items/details/details-tool.hbs",
+    "systems/dnd5e/templates/items/details/details-weapon.hbs",
     "systems/dnd5e/templates/items/parts/item-action.hbs",
     "systems/dnd5e/templates/items/parts/item-activation.hbs",
+    "systems/dnd5e/templates/items/parts/item-activities.hbs",
     "systems/dnd5e/templates/items/parts/item-advancement.hbs",
+    "systems/dnd5e/templates/items/parts/item-advancement2.hbs",
     "systems/dnd5e/templates/items/parts/item-description.hbs",
+    "systems/dnd5e/templates/items/parts/item-description2.hbs",
+    "systems/dnd5e/templates/items/parts/item-details.hbs",
     "systems/dnd5e/templates/items/parts/item-mountable.hbs",
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
     "systems/dnd5e/templates/items/parts/item-source.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
     "systems/dnd5e/templates/items/parts/item-tooltip.hbs",
+    "systems/dnd5e/templates/items/parts/spell-block.hbs",
+
+    // Field Partials
+    "systems/dnd5e/templates/shared/fields/field-activation.hbs",
+    "systems/dnd5e/templates/shared/fields/field-damage.hbs",
+    "systems/dnd5e/templates/shared/fields/field-duration.hbs",
+    "systems/dnd5e/templates/shared/fields/field-range.hbs",
+    "systems/dnd5e/templates/shared/fields/field-targets.hbs",
+    "systems/dnd5e/templates/shared/fields/field-uses.hbs",
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
+
+    // Activity Partials
+    "systems/dnd5e/templates/activity/columns/activity-column-controls.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-formula.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-price.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-quantity.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-range.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-recovery.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-roll.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-school.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-target.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-time.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-uses.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-weight.hbs",
+    "systems/dnd5e/templates/activity/activity-row-summary.hbs",
+    "systems/dnd5e/templates/activity/activity-usage-notes.hbs",
 
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",
@@ -383,6 +508,7 @@ export async function preloadHandlebarsTemplates() {
 function dataset(object, options) {
   const entries = [];
   for ( let [key, value] of Object.entries(object ?? {}) ) {
+    if ( value === undefined ) continue;
     key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
     entries.push(`data-${key}="${value}"`);
   }
@@ -489,6 +615,18 @@ function concealSection(conceal, options) {
 /* -------------------------------------------- */
 
 /**
+ * Construct an object from the provided arguments.
+ * @param {object} options       Handlebars options.
+ * @param {object} options.hash
+ * @returns {object}
+ */
+function makeObject({ hash }) {
+  return hash;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Register custom Handlebars helpers used by 5e.
  */
 export function registerHandlebarsHelpers() {
@@ -502,6 +640,7 @@ export function registerHandlebarsHelpers() {
     "dnd5e-itemContext": itemContext,
     "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
+    "dnd5e-object": makeObject,
     "dnd5e-textFormat": formatText
   });
 }
@@ -610,8 +749,9 @@ const _attributeLabelCache = new Map();
 export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   // Check any actor-specific names first.
   if ( attr.startsWith("resources.") && actor ) {
-    const resource = foundry.utils.getProperty(actor, `system.${attr}`);
-    if ( resource.label ) return resource.label;
+    const key = attr.replace(/\.value$/, "");
+    const resource = foundry.utils.getProperty(actor, `system.${key}`);
+    if ( resource?.label ) return resource.label;
   }
 
   if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
@@ -629,7 +769,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
 
   // Derived fields.
   if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
-  else if ( attr === "attributes.ac.value" ) label = "DND5E.ArmorClass";
+  else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
   else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
 
   // Abilities.
@@ -655,6 +795,12 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
     }
   }
 
+  // Currency
+  else if ( attr.startsWith("currency.") ) {
+    const [, key] = attr.split(".");
+    label = CONFIG.DND5E.currencies[key]?.label;
+  }
+
   // Attempt to find the attribute in a data model.
   if ( !label ) {
     const { CharacterData, NPCData, VehicleData, GroupData } = dnd5e.dataModels.actor;
@@ -673,6 +819,17 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   return label;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Split a semi-colon-separated list and clean out any empty entries.
+ * @param {string} input
+ * @returns {string}
+ */
+export function splitSemicolons(input) {
+  return input.split(";").map(t => t.trim()).filter(t => t);
 }
 
 /* -------------------------------------------- */
@@ -741,7 +898,6 @@ function _synchronizeActorSpells(actor, spellsMap) {
     Object.assign(spellData.system, {preparation, uses});
     spellData.system.save.dc = save.dc;
     foundry.utils.setProperty(spellData, "_stats.compendiumSource", source.uuid);
-    foundry.utils.setProperty(spellData, "flags.core.sourceId", source.uuid);
 
     // Record spells to be deleted and created
     toDelete.push(spell.id);

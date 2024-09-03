@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>While in contact with a web, the [[lookup @name lowercase]] knows the exact location of any other creature in contact with the same web.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,65 +16,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/control/debuff-chains-ropes-net-white.webp",
@@ -83,11 +39,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234594,
-    "modifiedTime": 1672336128334,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304976016,
+    "modifiedTime": 1725304976016,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!kjF0btAMYHUAQgOt"

@@ -16,70 +16,97 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "special",
-      "cost": null,
-      "condition": "When you roll initiative and have no uses of Bardic Inspiration"
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "charges",
-      "target": "Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA",
-      "amount": -1,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Bard 20",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "special",
+          "value": null,
+          "condition": "When you roll initiative and have no uses of Bardic Inspiration",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA",
+              "value": "-1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "roll": {
+          "formula": "",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "crewed": false,
-    "properties": []
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    }
   },
   "flags": {},
   "img": "icons/magic/earth/explosion-lava-stone-green.webp",
@@ -87,11 +114,12 @@
   "folder": "XEu43QVhYfhUcewt",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234356,
-    "modifiedTime": 1712173377397,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037382182,
+    "modifiedTime": 1725037382182,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!GBYN5rH4nh1ocRlY"

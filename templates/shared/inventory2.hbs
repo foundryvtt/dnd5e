@@ -5,6 +5,7 @@
     <div class="top">
 
         {{!-- Encumbrance --}}
+        {{#if isCharacter}}
         <div class="encumbrance card">
             {{#with encumbrance}}
             <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
@@ -39,6 +40,7 @@
                 </div>
             </div>
         </div>
+        {{/if}}
 
         {{!-- Containers --}}
         <ul class="containers unlist">
@@ -138,7 +140,7 @@
                 {{!-- Items --}}
                 <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-item-id="{{ item.id }}"
                     data-entry-id="{{ item.id }}" data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}"
-                    data-ungrouped="all" data-grouped="{{ item.type }}">
+                    data-ungrouped="all" data-grouped="{{ item.type }}" data-uuid="{{ item.uuid }}">
 
                     <div class="item-row">
 
@@ -188,46 +190,46 @@
                         {{else}}
 
                         {{!-- Item Price --}}
-                            <div class="item-detail item-price {{#unless item.system.price.value}}empty{{/unless}}">
-                                {{#if item.system.price.value}}
-                                {{ifThen ctx.concealDetails "—" (dnd5e-numberFormat item.system.price.value)}}
-                                <i class="currency {{ item.system.price.denomination }}"></i>
-                                {{/if}}
-                            </div>
+                        <div class="item-detail item-price {{#unless item.system.price.value}}empty{{/unless}}">
+                            {{#if item.system.price.value}}
+                            {{ifThen ctx.concealDetails "—" (dnd5e-numberFormat item.system.price.value)}}
+                            <i class="currency {{ item.system.price.denomination }}"></i>
+                            {{/if}}
+                        </div>
 
-                            {{!-- Item Weight --}}
-                            <div class="item-detail item-weight {{#unless ctx.totalWeight}}empty{{/unless}}">
-                                {{#if ctx.totalWeight}}
-                                <i class="fas fa-weight-hanging"></i> {{ ctx.totalWeight }}
-                                {{/if}}
-                            </div>
+                        {{!-- Item Weight --}}
+                        <div class="item-detail item-weight {{#unless ctx.totalWeight}}empty{{/unless}}">
+                            {{#if ctx.totalWeight}}
+                            <i class="fas fa-weight-hanging"></i> {{ ctx.totalWeight }}
+                            {{/if}}
+                        </div>
 
-                            {{!-- Item Quantity --}}
-                            <div class="item-detail item-quantity">
-                                {{#if @root.owner}}
-                                <a class="adjustment-button" data-action="decrease" data-property="system.quantity">
-                                    <i class="fas fa-minus"></i>
-                                </a>
-                                {{/if}}
-                                <input type="text" value="{{ item.system.quantity }}" placeholder="0" data-dtype="Number"
-                                       data-name="system.quantity" inputmode="numeric" pattern="[0-9+=\-]*" min="0">
-                                {{#if @root.owner}}
-                                <a class="adjustment-button" data-action="increase" data-property="system.quantity">
-                                    <i class="fas fa-plus"></i>
-                                </a>
-                                {{/if}}
-                            </div>
+                        {{!-- Item Quantity --}}
+                        <div class="item-detail item-quantity">
+                            {{#if @root.owner}}
+                            <a class="adjustment-button" data-action="decrease" data-property="system.quantity">
+                                <i class="fas fa-minus"></i>
+                            </a>
+                            {{/if}}
+                            <input type="text" value="{{ item.system.quantity }}" placeholder="0" data-dtype="Number"
+                                   data-name="system.quantity" inputmode="numeric" pattern="[0-9+=\-]*" min="0">
+                            {{#if @root.owner}}
+                            <a class="adjustment-button" data-action="increase" data-property="system.quantity">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            {{/if}}
+                        </div>
 
-                            {{!-- Item Uses --}}
-                            <div class="item-detail item-uses {{#unless ctx.hasUses}}empty{{/unless}}">
-                                {{#if ctx.hasUses}}
-                                <input type="text" value="{{ item.system.uses.value }}" placeholder="0"
-                                       data-dtype="Number" data-name="system.uses.value" inputmode="numeric"
-                                       pattern="[0-9+=\-]*">
-                                <span class="separator">&sol;</span>
-                                <span class="max">{{ item.system.uses.max }}</span>
-                                {{/if}}
-                            </div>
+                        {{!-- Item Uses --}}
+                        <div class="item-detail item-uses {{#unless ctx.hasUses}}empty{{/unless}}">
+                            {{#if ctx.hasUses}}
+                            <input type="text" value="{{ item.system.uses.value }}" placeholder="0"
+                                   data-dtype="Number" data-name="system.uses.value" inputmode="numeric"
+                                   pattern="[0-9+=\-]*">
+                            <span class="separator">&sol;</span>
+                            <span class="max">{{ item.system.uses.max }}</span>
+                            {{/if}}
+                        </div>
 
                         {{/if}}
 
@@ -290,8 +292,19 @@
 
                     <div class="item-description collapsible-content">
                         <div class="wrapper">
+
+                            {{!-- Activities --}}
+                            {{#if (gt ctx.activities.length 1)}}
+                            <div class="activities">
+                                {{#each ctx.activities}}
+                                {{> "dnd5e.activity-row-summary" categories=../../categories }}
+                                {{/each}}
+                            </div>
+                            {{/if}}
+
+                            {{!-- Item Description --}}
                             {{#if ctx.isExpanded}}
-                                {{> "dnd5e.item-summary" ctx.expanded }}
+                            {{> "dnd5e.item-summary" ctx.expanded }}
                             {{/if}}
                         </div>
                     </div>
@@ -306,7 +319,7 @@
 
     </section>
 
-    {{#if isNPC}}
+    {{#if (or isNPC isContainer)}}
     <div class="bottom">
 
         {{!-- Encumbrance --}}
@@ -315,13 +328,17 @@
             <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
                  aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
                 <div class="label">
+                    {{#if (eq units "Items")}}
+                    <i class="fas fa-briefcase"></i>
+                    {{else}}
                     <i class="fas fa-weight-hanging"></i>
+                    {{/if}}
                     <span class="value">{{ value }}</span>
                     <span class="separator">&sol;</span>
-                    <span class="max">{{ max }}</span>
+                    <span class="max">{{#if maxLabel}}{{{ maxLabel }}}{{else}}{{ max }}{{/if}}</span>
                 </div>
                 <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-low  arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-low arrow-down" role="presentation"></i>
                 <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
                 <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
             </div>

@@ -10,14 +10,15 @@ import Advancement from "./advancement.mjs";
  */
 export default class ItemGrantAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
         configuration: ItemGrantConfigurationData
       },
       order: 40,
-      icon: "systems/dnd5e/icons/svg/item-grant.svg",
+      icon: "icons/sundries/books/book-open-purple.webp",
+      typeIcon: "systems/dnd5e/icons/svg/item-grant.svg",
       title: game.i18n.localize("DND5E.AdvancementItemGrantTitle"),
       hint: game.i18n.localize("DND5E.AdvancementItemGrantHint"),
       apps: {
@@ -39,14 +40,14 @@ export default class ItemGrantAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
     return !foundry.utils.isEmpty(this.value);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
     if ( !this.value.added || configMode ) return this.configuration.items.filter(i => fromUuidSync(i.uuid))
@@ -87,16 +88,15 @@ export default class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
-    const spellChanges = this.configuration.spell?.getSpellChanges({
-      ability: data.ability ?? this.retainedData?.ability ?? this.value?.ability
-    }) ?? {};
     for ( const uuid of filteredKeys(data) ) {
       let itemData = retainedData[uuid];
       if ( !itemData ) {
         itemData = await this.createItemData(uuid);
         if ( !itemData ) continue;
       }
-      if ( itemData.type === "spell" ) foundry.utils.mergeObject(itemData, spellChanges);
+      if ( itemData.type === "spell" ) this.configuration.spell?.applySpellChanges(itemData, {
+        ability: data.ability ?? this.retainedData?.ability ?? this.value?.ability
+      });
 
       items.push(itemData);
       updates[itemData._id] = uuid;
@@ -113,7 +113,7 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   restore(level, data) {
     const updates = {};
     for ( const item of data.items ) {
@@ -128,7 +128,7 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   reverse(level) {
     const items = [];
     const keyPath = this.storagePath(level);

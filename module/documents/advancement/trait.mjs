@@ -12,7 +12,7 @@ import { filteredKeys } from "../../utils.mjs";
  */
 export default class TraitAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
@@ -20,7 +20,8 @@ export default class TraitAdvancement extends Advancement {
         value: TraitValueData
       },
       order: 30,
-      icon: "systems/dnd5e/icons/svg/trait.svg",
+      icon: "icons/sundries/scrolls/scroll-yellow-teal.webp",
+      typeIcon: "systems/dnd5e/icons/svg/trait.svg",
       title: game.i18n.localize("DND5E.AdvancementTraitTitle"),
       hint: game.i18n.localize("DND5E.AdvancementTraitHint"),
       apps: {
@@ -60,14 +61,14 @@ export default class TraitAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
     return !!this.value.chosen?.size;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   sortingValueForLevel(levels) {
     const traitOrder = Object.keys(CONFIG.DND5E.traits).findIndex(k => k === this.representedTraits().first());
     const modeOrder = Object.keys(CONFIG.DND5E.traitModes).findIndex(k => k === this.configuration.mode);
@@ -77,7 +78,7 @@ export default class TraitAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     if ( configMode ) {
       if ( this.hint ) return `<p>${this.hint}</p>`;
@@ -93,13 +94,14 @@ export default class TraitAdvancement extends Advancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async apply(level, data) {
     const updates = {};
     if ( !data.chosen ) return;
 
     for ( const key of data.chosen ) {
-      const keyPath = Trait.changeKeyPath(key);
+      const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery.value"
+        : Trait.changeKeyPath(key);
       let existingValue = updates[keyPath] ?? foundry.utils.getProperty(this.actor, keyPath);
 
       if ( ["Array", "Set"].includes(foundry.utils.getType(existingValue)) ) {
@@ -118,20 +120,21 @@ export default class TraitAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async restore(level, data) {
     this.apply(level, data);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async reverse(level) {
     const updates = {};
     if ( !this.value.chosen ) return;
 
     for ( const key of this.value.chosen ) {
-      const keyPath = Trait.changeKeyPath(key);
+      const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery.value"
+        : Trait.changeKeyPath(key);
       let existingValue = updates[keyPath] ?? foundry.utils.getProperty(this.actor, keyPath);
 
       if ( ["Array", "Set"].includes(foundry.utils.getType(existingValue)) ) {
@@ -167,9 +170,9 @@ export default class TraitAdvancement extends Advancement {
     const available = new Set();
 
     // If "default" mode is selected, return all traits
-    // If any other mode is selected, only return traits that support expertise
+    // If any other mode is selected, only return traits that support expertise or mastery
     const traitTypes = this.configuration.mode === "default" ? Object.keys(CONFIG.DND5E.traits)
-      : filteredKeys(CONFIG.DND5E.traits, t => t.expertise);
+      : filteredKeys(CONFIG.DND5E.traits, t => t[this.configuration.mode === "mastery" ? "mastery" : "expertise"]);
 
     for ( const trait of traitTypes ) {
       const actorValues = await Trait.actorValues(this.actor, trait);
@@ -179,6 +182,12 @@ export default class TraitAdvancement extends Advancement {
         if ( this.configuration.mode === "default" ) {
           if ( value >= 1 ) selected.add(key);
           else available.add(key);
+        } else if ( this.configuration.mode === "mastery" ) {
+          const split = key.split(":");
+          split.pop();
+          const category = split.join(":");
+          if ( value === 2 ) selected.add(key);
+          if ( (value === 1) || (actorValues[category] === 1) ) available.add(key);
         } else {
           if ( value === 2 ) selected.add(key);
           if ( (this.configuration.mode === "expertise") && (value === 1) ) available.add(key);

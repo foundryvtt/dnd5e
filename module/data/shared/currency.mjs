@@ -1,5 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
-import { MappingField } from "../fields.mjs";
+import MappingField from "../fields/mapping-field.mjs";
 
 /**
  * A template for currently held currencies.
@@ -8,7 +8,7 @@ import { MappingField } from "../fields.mjs";
  * @mixin
  */
 export default class CurrencyTemplate extends SystemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       currency: new MappingField(new foundry.data.fields.NumberField({

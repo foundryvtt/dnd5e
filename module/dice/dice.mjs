@@ -1,3 +1,5 @@
+const { NumericTerm, OperatorTerm } = foundry.dice.terms;
+
 /* -------------------------------------------- */
 /* D20 Roll                                     */
 /* -------------------------------------------- */
@@ -19,6 +21,7 @@
  * @property {number|null} [fumble=1]  The value of the d20 result which represents a critical failure,
  *                                     `null` will prevent critical failures.
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
+ * @property {string} [mastery]        Weapon mastery to use with an attack roll.
  *
  * ## Flags
  * @property {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
@@ -26,12 +29,15 @@
  * @property {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
  *
  * ## Roll Configuration Dialog
- * @property {boolean} [fastForward]           Should the roll configuration dialog be skipped?
- * @property {boolean} [chooseModifier=false]  If the configuration dialog is shown, should the ability modifier be
- *                                             configurable within that interface?
- * @property {string} [template]               The HTML template used to display the roll configuration dialog.
- * @property {string} [title]                  Title of the roll configuration dialog.
- * @property {object} [dialogOptions]          Additional options passed to the roll configuration dialog.
+ * @property {boolean} [fastForward]             Should the roll configuration dialog be skipped?
+ * @property {FormSelectOption[]} [ammunitionOptions]  Options for ammunition to use with an attack.
+ * @property {FormSelectOption[]} [attackModes]  Modes that can be used when making an attack.
+ * @property {boolean} [chooseModifier=false]    If the configuration dialog is shown, should the ability modifier be
+ *                                               configurable within that interface?
+ * @property {FormSelectOption[]} [masteryOptions]  Weapon masteries that can be selected when making an attack.
+ * @property {string} [template]                 The HTML template used to display the roll configuration dialog.
+ * @property {string} [title]                    Title of the roll configuration dialog.
+ * @property {object} [dialogOptions]            Additional options passed to the roll configuration dialog.
  *
  * ## Chat Message
  * @property {boolean} [chatMessage=true]  Should a chat message be created for this roll?
@@ -50,9 +56,9 @@
  */
 export async function d20Roll({
   parts=[], data={}, event,
-  advantage, disadvantage, critical=20, fumble=1, targetValue,
+  advantage, disadvantage, critical=20, fumble=1, targetValue, mastery,
   elvenAccuracy, halflingLucky, reliableTalent,
-  fastForward, chooseModifier=false, template, title, dialogOptions,
+  fastForward, ammunitionOptions, attackModes, chooseModifier=false, masteryOptions, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
@@ -76,6 +82,7 @@ export async function d20Roll({
     critical,
     fumble,
     targetValue,
+    mastery,
     elvenAccuracy,
     halflingLucky,
     reliableTalent
@@ -85,14 +92,27 @@ export async function d20Roll({
   if ( !isFF ) {
     const configured = await roll.configureDialog({
       title,
+      ammunitionOptions,
+      attackModes,
       chooseModifier,
       defaultRollMode,
       defaultAction: advantageMode,
       defaultAbility: data?.item?.ability || data?.defaultAbility,
+      masteryOptions,
       template
     }, dialogOptions);
     if ( configured === null ) return null;
-  } else roll.options.rollMode ??= defaultRollMode;
+  } else {
+    roll.options.ammunition ??= ammunitionOptions?.[0]?.value;
+    roll.options.rollMode ??= defaultRollMode;
+  }
+
+  // If ammunition has a magical bonus, add it to the roll
+  const ammo = ammunitionOptions?.find(a => a.value === roll.options.ammunition);
+  if ( ammo?.item.system.magicAvailable && ammo.item.system.magicalBonus ) {
+    roll.terms.push(new OperatorTerm({ operator: "+" }), new NumericTerm({ number: ammo.item.system.magicalBonus }));
+    roll.resetFormula();
+  }
 
   // Evaluate the configured roll
   await roll.evaluate({ allowInteractive: (roll.options.rollMode ?? defaultRollMode) !== CONST.DICE_ROLL_MODES.BLIND });
@@ -101,6 +121,14 @@ export async function d20Roll({
   messageData = foundry.utils.expandObject(messageData);
   const messageId = event?.target.closest("[data-message-id]")?.dataset.messageId;
   if ( messageId ) foundry.utils.setProperty(messageData, "flags.dnd5e.originatingMessage", messageId);
+
+  // Store the ammunition used in the chat message
+  if ( ammo ) foundry.utils.setProperty(messageData, "flags.dnd5e.roll.ammunition", ammo.value);
+
+  // Set the attack mode
+  if ( roll.options.attackMode || attackModes?.length ) foundry.utils.setProperty(
+    messageData, "flags.dnd5e.roll.attackMode", roll.options.attackMode ?? attackModes[0].value
+  );
 
   // Create a Chat Message
   if ( roll && chatMessage ) await roll.toMessage(messageData);
@@ -150,6 +178,8 @@ export async function d20Roll({
  * @typedef {object} SingleDamageRollConfiguration
  * @property {string[]} parts         The dice roll component parts.
  * @property {string} [type]          Damage type represented by the roll.
+ * @property {string[]} [types]       List of damage types selectable in the configuration app. If no
+ *                                    type is provided, then the first of these types will be used.
  * @property {string[]} [properties]  Physical properties of the damage source (e.g. magical, silvered).
  */
 
@@ -181,10 +211,10 @@ export async function damageRoll({
   multiplyNumeric ??= game.settings.get("dnd5e", "criticalDamageModifiers");
   powerfulCritical ??= game.settings.get("dnd5e", "criticalDamageMaxDice");
   critical = isFF ? isCritical : false;
-  for ( const [index, { parts, type, properties }] of rollConfigs.entries() ) {
+  for ( const [index, { parts, type, types, properties }] of rollConfigs.entries() ) {
     const formula = parts.join(" + ");
     const rollOptions = {
-      flavor, rollMode, critical, criticalMultiplier, multiplyNumeric, powerfulCritical, type, properties
+      flavor, rollMode, critical, criticalMultiplier, multiplyNumeric, powerfulCritical, type, types, properties
     };
     if ( index === 0 ) {
       rollOptions.criticalBonusDice = criticalBonusDice;
@@ -208,6 +238,7 @@ export async function damageRoll({
   // Evaluate the configured roll
   for ( const roll of rolls ) {
     const rollMode = rolls.at(-1).options.rollMode ?? defaultRollMode;
+    if ( !roll.options.type ) roll.options.type = roll.options.types?.[0];
     await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
   }
 

@@ -5,7 +5,7 @@ import BaseConfigSheet from "./base-config.mjs";
  */
 export default class ActorSensesConfig extends BaseConfigSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
@@ -18,14 +18,14 @@ export default class ActorSensesConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     return `${game.i18n.localize("DND5E.SensesConfig")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData(options) {
     const source = this.document.toObject();
     const senses = foundry.utils.getProperty(source, this.options.keyPath) ?? {};

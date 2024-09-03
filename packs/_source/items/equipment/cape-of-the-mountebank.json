@@ -23,61 +23,20 @@
       "value": 8000,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "rare",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": "inst"
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "self",
-      "prompt": true
-    },
-    "range": {
-      "value": 500,
-      "long": null,
-      "units": "ft"
-    },
     "uses": {
-      "value": 1,
       "max": "1",
-      "per": "day",
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [
+        {
+          "period": "day",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "armor": {
       "value": 0,
@@ -108,12 +67,84 @@
     "properties": [
       "mgc"
     ],
-    "attack": {
-      "bonus": "",
-      "flat": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "inst",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "500",
+          "units": "ft",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "self",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "roll": {
+          "formula": "",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "enchantment": null,
-    "summons": null
+    "attuned": false
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -123,11 +154,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233808,
-    "modifiedTime": 1715374632178,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037253374,
+    "modifiedTime": 1725037253374,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gpHgWLsD8k2yzbfR"

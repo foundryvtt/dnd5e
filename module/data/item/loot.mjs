@@ -5,6 +5,8 @@ import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
+const { SetField, StringField } = foundry.data.fields;
+
 /**
  * Data definition for Loot items.
  * @mixes ItemDescriptionTemplate
@@ -15,19 +17,17 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 export default class LootData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate
 ) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.ItemLootProperties"
-      }),
-      type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemLootType"})
+      properties: new SetField(new StringField(), { label: "DND5E.ItemLootProperties" }),
+      type: new ItemTypeField({ baseItem: false }, { label: "DND5E.ItemLootType" })
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: true,
     inventoryItem: true,
@@ -59,7 +59,19 @@ export default class LootData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    this.prepareDescriptionData();
     this.type.label = CONFIG.DND5E.lootTypes[this.type.value]?.label ?? game.i18n.localize(CONFIG.Item.typeLabels.loot);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: this.type.label },
+      ...this.physicalItemSheetFields
+    ];
+    context.parts = ["dnd5e.details-loot"];
   }
 
   /* -------------------------------------------- */
@@ -76,5 +88,12 @@ export default class LootData extends ItemDataModel.mixin(
       this.weight ? `${this.weight.value} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null,
       this.priceLabel
     ];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.lootTypes;
   }
 }

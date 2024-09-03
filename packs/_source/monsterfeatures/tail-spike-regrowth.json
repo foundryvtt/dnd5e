@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>the [[lookup @name lowercase]] has twenty-four tail spikes. Used spikes regrow when the [[lookup @name lowercase]] finishes a long rest.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,65 +16,27 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": 24,
       "max": "24",
-      "per": "lr",
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [
+        {
+          "period": "lr",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/creatures/mammals/wolf-shadow-black.webp",
@@ -83,11 +44,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234588,
-    "modifiedTime": 1672336207186,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304975366,
+    "modifiedTime": 1725304975366,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!iVOxckt9448v7Ho5"

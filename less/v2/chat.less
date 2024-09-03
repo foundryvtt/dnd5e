@@ -32,6 +32,8 @@
   .message-header {
     margin-bottom: .375rem;
 
+    .message-delete { display: none; }
+
     .message-sender {
       display: flex;
       align-items: start;
@@ -94,6 +96,11 @@
   }
 }
 
+/* Modifier Keys */
+:is(.chat-popout, #chat-log)[data-modifier-shift] {
+  .message .message-header .message-delete { display: unset; }
+}
+
 /* ---------------------------------- */
 /*  Dice Rolls                        */
 /* ---------------------------------- */
@@ -141,14 +148,14 @@
       transition: all 250ms ease;
     }
 
-    &.success, &.critical {
+    &.success:not(.fumble), &.critical {
       background: var(--dnd5e-color-success-background);
       border: 1px solid var(--dnd5e-color-success);
       color: var(--dnd5e-color-success-critical);
       &::after { color: var(--dnd5e-color-success); }
     }
 
-    &.failure, &.fumble {
+    &.failure:not(.critical), &.fumble {
       background: var(--dnd5e-color-failure-background);
       border: 1px solid var(--dnd5e-color-failure);
       color: var(--dnd5e-color-failure-critical);
@@ -298,7 +305,6 @@
     border: none;
     position: absolute;
     inset: 0 0 auto 0;
-    height: 54px;
     z-index: 1;
     padding: 7px 6px 0 0;
 
@@ -326,6 +332,11 @@
       margin: 0;
       box-shadow: 0 0 20px var(--color-shadow-dark);
     }
+  }
+
+  &.minimized {
+    background: url("../../ui/denim075.png");
+    max-height: var(--header-height);
   }
 
   .message-metadata { padding-right: 18px; }
@@ -421,6 +432,7 @@
     display: flex;
     flex-direction: column;
     gap: .375rem;
+    [hidden] { display: none; }
   }
 
   .pills .pill {
@@ -447,7 +459,6 @@
 .dnd5e2 :is(.card-tray, .effects-tray),
 .dnd5e2.card-tray {
   margin-top: .125rem;
-  &:has(.effects:empty) { display: none; }
   &.damage-tray { margin-block-start: 8px; }
   &.targets-tray {
     margin-top: 6px;
@@ -458,6 +469,7 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: .25rem;
     font-size: var(--font-size-11);
 

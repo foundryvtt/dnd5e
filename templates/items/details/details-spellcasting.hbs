@@ -1,0 +1,16 @@
+<fieldset>
+    <legend>{{ localize "DND5E.Spellcasting" }}</legend>
+
+    {{!-- Spellcasting Progression --}}
+    {{ formField fields.spellcasting.fields.progression value=source.spellcasting.progression localize=true
+                 choices=spellProgression }}
+
+    {{!-- Spellcasting Ability --}}
+    {{ formField fields.spellcasting.fields.ability value=source.spellcasting.ability choices=config.abilities
+                 labelAttr="label" blank="" localize=true }}
+
+    {{!-- Preparation Formula --}}
+    {{ formField fields.spellcasting.fields.preparation.fields.formula value=source.spellcasting.preparation.formula
+                 localize=true placeholder="—" }}
+
+</fieldset>

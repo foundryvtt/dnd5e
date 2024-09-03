@@ -64,7 +64,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     context.movement = this.#prepareMovementSpeed();
 
     // XP
-    if ( !game.settings.get("dnd5e", "disableExperienceTracking") ) context.xp = context.system.details.xp;
+    if ( game.settings.get("dnd5e", "levelingMode") !== "noxp" ) context.xp = context.system.details.xp;
 
     // Inventory
     context.itemContext = {};
@@ -82,7 +82,6 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     context.descriptionFull = await TextEditor.enrichHTML(this.actor.system.description.full, {
       secrets: this.actor.isOwner,
       rollData: context.rollData,
-      async: true,
       relativeTo: this.actor
     });
 
@@ -139,7 +138,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       vehicle: {label: `${CONFIG.Actor.typeLabels.vehicle}Pl`, members: []}
     };
     const type = this.actor.system.type.value;
-    const displayXP = !game.settings.get("dnd5e", "disableExperienceTracking");
+    const displayXP = game.settings.get("dnd5e", "levelingMode") !== "noxp";
     for ( const [index, memberData] of this.object.system.members.entries() ) {
       const member = memberData.actor;
       const multiplier = type === "encounter" ? (memberData.quantity.value ?? 1) : 1;

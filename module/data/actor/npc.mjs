@@ -1,5 +1,5 @@
 import Proficiency from "../../documents/actor/proficiency.mjs";
-import { FormulaField } from "../fields.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
 import SourceField from "../shared/source-field.mjs";
@@ -38,7 +38,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {string} details.environment        Common environments in which this NPC is found.
  * @property {number} details.cr                 NPC's challenge rating.
  * @property {number} details.spellLevel         Spellcasting level of this NPC.
- * @property {SourceField} details.source        Adventure or sourcebook where this NPC originated.
+ * @property {SourceData} details.source         Adventure or sourcebook where this NPC originated.
  * @property {object} resources
  * @property {object} resources.legact           NPC's legendary actions.
  * @property {number} resources.legact.value     Currently available legendary actions.
@@ -52,19 +52,19 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  */
 export default class NPCData extends CreatureTemplate {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _systemType = "npc";
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       attributes: new SchemaField({
@@ -104,7 +104,7 @@ export default class NPCData extends CreatureTemplate {
         type: new CreatureTypeField(),
         environment: new StringField({required: true, label: "DND5E.Environment"}),
         cr: new NumberField({
-          required: true, nullable: false, min: 0, initial: 1, label: "DND5E.ChallengeRating"
+          required: true, nullable: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
         }),
         spellLevel: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
@@ -192,7 +192,7 @@ export default class NPCData extends CreatureTemplate {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     NPCData.#migrateSource(source);
@@ -270,7 +270,7 @@ export default class NPCData extends CreatureTemplate {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareBaseData() {
     this.details.level = 0;
     this.attributes.attunement.value = 0;
@@ -326,7 +326,7 @@ export default class NPCData extends CreatureTemplate {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareDerivedData() {
     const rollData = this.parent.getRollData({ deterministic: true });
     const { originalSaves } = this.parent.getOriginalStats();
@@ -336,6 +336,7 @@ export default class NPCData extends CreatureTemplate {
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
     AttributesFields.prepareConcentration.call(this, rollData);
+    SourceField.prepareData.call(this.details.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareResistImmune.call(this);
 
     // Hit Dice
@@ -349,5 +350,19 @@ export default class NPCData extends CreatureTemplate {
       mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Level used to determine cantrip scaling.
+   * @param {Item5e} spell  Spell for which to fetch the cantrip level.
+   * @returns {number}
+   */
+  cantripLevel(spell) {
+    if ( spell.system.preparation.mode === "innate" ) return this.details.cr;
+    return this.details.level ? this.details.level : this.details.spellLevel;
   }
 }

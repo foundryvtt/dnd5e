@@ -253,7 +253,8 @@
                     <div class="right cr-badge badge" aria-label="{{ localize "DND5E.CRLabel" cr=system.details.cr }}"
                          {{#unless editable}}data-tooltip="DND5E.ChallengeRating"{{/unless}}>
                         {{#if editable}}
-                        <input type="text" class="uninput" name="system.details.cr" value="{{ source.details.cr }}">
+                        <input type="number" class="uninput" name="system.details.cr" value="{{ source.details.cr }}"
+                               step="any">
                         {{else}}
                         {{{ dnd5e-formatCR system.details.cr }}}
                         {{/if}}
@@ -523,7 +524,7 @@
 
     {{!-- Child Creation --}}
     <button type="button" class="create-child gold-button"
-            aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
+            aria-label="{{ localize "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
         <i class="fas fa-plus"></i>
     </button>
 

@@ -16,70 +16,103 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "bonus",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "10",
-      "units": "minute"
-    },
-    "cover": null,
-    "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "creature",
-      "prompt": true
-    },
-    "range": {
-      "value": 60,
-      "long": null,
-      "units": "ft"
-    },
     "uses": {
-      "value": 1,
       "max": "max(1, @abilities.cha.mod)",
-      "per": "lr",
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "util",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "1@scale.bard.inspiration",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [
+        {
+          "period": "lr",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Bard 1",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "bonus",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "10",
+          "units": "minute",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "60",
+          "units": "ft",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "1",
+            "type": "creature",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "roll": {
+          "formula": "1@scale.bard.inspiration",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     },
-    "crewed": false,
-    "properties": []
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    }
   },
   "flags": {},
   "img": "icons/skills/melee/unarmed-punch-fist.webp",
@@ -87,11 +120,12 @@
   "folder": "XEu43QVhYfhUcewt",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234409,
-    "modifiedTime": 1704824718178,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037387029,
+    "modifiedTime": 1725037387029,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hpLNiGq7y67d2EHA"

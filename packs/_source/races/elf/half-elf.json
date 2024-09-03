@@ -21,11 +21,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV"
+            {
+              "uuid": "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -50,7 +53,8 @@
             "wis": 0,
             "cha": 2
           },
-          "cap": 1
+          "cap": 1,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -62,7 +66,6 @@
         "_id": "r3PSgtQO6Eim49LU",
         "type": "Size",
         "configuration": {
-          "hint": "Half-elves are about the same size as humans, ranging from 5 to 6 feet tall. Your size is Medium.",
           "sizes": [
             "med"
           ]
@@ -71,13 +74,13 @@
           "size": ""
         },
         "level": 1,
-        "title": ""
+        "title": "",
+        "hint": "Half-elves are about the same size as humans, ranging from 5 to 6 feet tall. Your size is Medium."
       },
       {
         "_id": "CormRQZ5momyvS2I",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -92,13 +95,14 @@
         },
         "level": 0,
         "title": "Skill Versatility",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "U3OO7jLU0nm0Z7zw",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -116,7 +120,9 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       }
     ],
     "senses": {
@@ -148,11 +154,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1677181061205,
-    "modifiedTime": 1704824711126,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037392669,
+    "modifiedTime": 1725037392669,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

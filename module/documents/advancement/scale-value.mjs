@@ -8,14 +8,15 @@ import { ScaleValueConfigurationData, TYPES } from "../../data/advancement/scale
  */
 export default class ScaleValueAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
         configuration: ScaleValueConfigurationData
       },
       order: 60,
-      icon: "systems/dnd5e/icons/svg/scale-value.svg",
+      icon: "icons/sundries/gaming/dice-pair-white-green.webp",
+      typeIcon: "systems/dnd5e/icons/svg/scale-value.svg",
       title: game.i18n.localize("DND5E.AdvancementScaleValueTitle"),
       hint: game.i18n.localize("DND5E.AdvancementScaleValueHint"),
       multiLevel: true,
@@ -38,7 +39,7 @@ export default class ScaleValueAdvancement extends Advancement {
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get levels() {
     return Array.from(Object.keys(this.configuration.scale).map(l => Number(l)))
       .filter(l => !["class", "subclass"].includes(this.item.type) ? true : l !== 0);
@@ -58,10 +59,10 @@ export default class ScaleValueAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  titleForLevel(level, { configMode=false }={}) {
+  /** @inheritDoc */
+  titleForLevel(level, { configMode=false, legacyDisplay=false }={}) {
     const value = this.valueForLevel(level)?.display;
-    if ( !value ) return this.title;
+    if ( !value || !legacyDisplay ) return this.title;
     return `${this.title}: <strong>${value}</strong>`;
   }
 

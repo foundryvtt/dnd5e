@@ -4,12 +4,44 @@
         <label>{{ localize "DND5E.Formula" }} {{#if type}}({{type}}){{/if}}</label>
         <input type="text" name="formula" value="{{formula}}" disabled>
     </div>
+    {{#if types}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.DamageType" }}</label>
+        <select name="roll.{{ @index }}.type">
+            {{ selectOptions types }}
+        </select>
+    </div>
+    {{/if}}
     {{/each}}
+    {{#if attackModes}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.ATTACK.Mode.Label" }}</label>
+        <select name="attackMode">
+            {{ selectOptions attackModes }}
+        </select>
+    </div>
+    {{/if}}
+    {{#if ammunitionOptions}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.CONSUMABLE.Type.Ammunition.Label" }}</label>
+        <select name="ammunition">
+            {{ selectOptions ammunitionOptions blank="" }}
+        </select>
+    </div>
+    {{/if}}
     {{#if chooseModifier}}
     <div class="form-group">
         <label>{{ localize "DND5E.AbilityModifier" }}</label>
         <select name="ability">
             {{selectOptions abilities selected=defaultAbility labelAttr="label"}}
+        </select>
+    </div>
+    {{/if}}
+    {{#if masteryOptions}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.WEAPON.Mastery.Label" }}</label>
+        <select name="mastery">
+            {{ selectOptions masteryOptions }}
         </select>
     </div>
     {{/if}}

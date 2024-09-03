@@ -31,7 +31,6 @@
         "_id": "qfbfR422hrwjwWyd",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -45,13 +44,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "2pEp37GeIGCBdiqU",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -62,13 +62,14 @@
         },
         "level": 1,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "aIeuTIJdiKMaChi8",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -80,13 +81,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "ZZIWxV7EaHl6GVcu",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -107,12 +109,13 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -126,13 +129,14 @@
         "title": "",
         "_id": "qd6RxOGs50LR5Lea",
         "classRestriction": "secondary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "LYiiMtwvVVXZs8yE",
         "type": "Trait",
         "configuration": {
-          "hint": "The divine magic flowing through you makes you immune to disease.",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -142,18 +146,27 @@
         },
         "level": 3,
         "title": "Divine Health",
-        "value": {}
+        "value": {
+          "chosen": []
+        },
+        "hint": "The divine magic flowing through you makes you immune to disease."
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.E8ozg8avUVOX9N7u",
-            "Compendium.dnd5e.classfeatures.OdrvL3afwLOPeuYZ"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.E8ozg8avUVOX9N7u",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.OdrvL3afwLOPeuYZ",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -164,20 +177,28 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "HL6Kwpmrsz5yqmBK"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.Ho7dVxBlOYFlfBHk",
-            "Compendium.dnd5e.classfeatures.ihoQHsmVZlyDbPhX",
-            "Compendium.dnd5e.classfeatures.ySMPQ6zNSlvkrl2f"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.Ho7dVxBlOYFlfBHk",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.ihoQHsmVZlyDbPhX",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.ySMPQ6zNSlvkrl2f",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -188,20 +209,28 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "RwqEtAP5aJqHIW5J"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.dY9yrqkyEDuF0CG2",
-            "Compendium.dnd5e.classfeatures.olAqNsUTIef9x8xC",
-            "Compendium.dnd5e.classfeatures.8M7uOPhbTxoxxJSo"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.dY9yrqkyEDuF0CG2",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.olAqNsUTIef9x8xC",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.8M7uOPhbTxoxxJSo",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -212,18 +241,20 @@
         "value": {},
         "level": 3,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "ki8eEksoSjfOHDcF"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -234,18 +265,20 @@
         "value": {},
         "level": 5,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "WaoJQunO9O2pdC1g"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.carGDhkIdoduTC0I"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.carGDhkIdoduTC0I",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -256,18 +289,20 @@
         "value": {},
         "level": 6,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "Gs5c5ciErsG3NDyW"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.nahSkBO6LH4HkpaT"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.nahSkBO6LH4HkpaT",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -278,18 +313,20 @@
         "value": {},
         "level": 10,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "teLWeatpgzXs5uCc"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.FAk41RPCTcvCk6KI"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.FAk41RPCTcvCk6KI",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -300,18 +337,20 @@
         "value": {},
         "level": 11,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "BWhYgjLNVypoHyqZ"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.U7BIPVPsptBmwsnV"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.U7BIPVPsptBmwsnV",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -322,26 +361,35 @@
         "value": {},
         "level": 14,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "63s9ja0RR4UkfHCN"
       },
       {
         "type": "ItemChoice",
         "configuration": {
-          "hint": "Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.",
           "choices": {
-            "2": 1
+            "2": {
+              "count": 1,
+              "replacement": false
+            }
           },
           "allowDrops": true,
           "type": "feat",
           "pool": [
-            "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB",
-            "Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4",
-            "Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm",
-            "Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O"
+            }
           ],
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -354,10 +402,13 @@
             "level": ""
           }
         },
-        "value": {},
+        "value": {
+          "added": {},
+          "replaced": {}
+        },
         "title": "Fighting Style",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
-        "_id": "GPzUDRFo5bfrhU1K"
+        "_id": "GPzUDRFo5bfrhU1K",
+        "hint": "Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again."
       },
       {
         "type": "AbilityScoreImprovement",
@@ -371,14 +422,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "ASKyHbSBAKRIU6i3"
       },
       {
@@ -393,14 +444,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "iBK2dJf2hwv9vOBI"
       },
       {
@@ -415,14 +466,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "BI8DBqJZY8O9orOX"
       },
       {
@@ -437,14 +488,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "hKEbRRkEEfvA3ydq"
       },
       {
@@ -460,7 +511,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -488,11 +540,22 @@
         },
         "value": {},
         "title": "Aura Radius"
+      },
+      {
+        "_id": "n22j60yn24fqr3sy",
+        "type": "Subclass",
+        "configuration": {},
+        "value": {},
+        "level": 3,
+        "title": "Sacred Oath"
       }
     ],
     "spellcasting": {
       "progression": "half",
-      "ability": "cha"
+      "ability": "cha",
+      "preparation": {
+        "formula": "@abilities.cha.mod + floor(@classes.paladin.levels / 2)"
+      }
     },
     "startingEquipment": [
       {
@@ -612,7 +675,11 @@
         "requiresProficiency": false
       }
     ],
-    "wealth": "5d4 * 10"
+    "wealth": "5d4 * 10",
+    "primaryAbility": {
+      "value": [],
+      "all": true
+    }
   },
   "effects": [],
   "folder": "HwOKB9LPw4dA10L8",
@@ -622,11 +689,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234280,
-    "modifiedTime": 1709764634172,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037371154,
+    "modifiedTime": 1725037371154,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gZiUvbXWLs0pOp0c"

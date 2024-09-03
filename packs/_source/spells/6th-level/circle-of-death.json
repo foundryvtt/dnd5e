@@ -18,61 +18,32 @@
     },
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "",
       "units": "inst"
     },
-    "cover": null,
     "target": {
-      "value": 60,
-      "width": null,
-      "units": "ft",
-      "type": "sphere",
-      "prompt": true
+      "affects": {
+        "choice": false
+      },
+      "template": {
+        "units": "ft",
+        "type": "sphere",
+        "size": "60",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 150,
-      "long": null,
+      "value": "150",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "8d6",
-          "necrotic"
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "con",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 6,
     "school": "nec",
@@ -86,16 +57,87 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "level",
-      "formula": "2d6"
-    },
     "properties": [
       "vocal",
       "somatic",
       "material"
     ],
-    "crewed": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": [
+            {
+              "number": 8,
+              "denomination": 6,
+              "bonus": "",
+              "types": [
+                "necrotic"
+              ],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "whole",
+                "number": 2,
+                "formula": ""
+              }
+            }
+          ]
+        },
+        "save": {
+          "ability": "con",
+          "dc": {
+            "calculation": "spellcasting",
+            "formula": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    }
   },
   "sort": 0,
   "flags": {},
@@ -103,11 +145,12 @@
   "effects": [],
   "folder": "0pdesvXqKd55VOh2",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234116,
-    "modifiedTime": 1704823523256,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037353462,
+    "modifiedTime": 1725037353462,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!KeunEkg1JYbOCOhV"

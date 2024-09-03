@@ -1,0 +1,16 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>{{ localize "DND5E.ENCHANT.FIELDS.restrictions.label" }}</legend>
+        {{#with fields.restrictions.fields as |fields|}}
+        {{ formField fields.allowMagical value=../source.restrictions.allowMagical
+                     input=@root.inputs.createCheckboxInput }}
+        {{ formField fields.type value=../source.restrictions.type options=../typeOptions }}
+        {{#if ../categoryOptions}}
+        {{ formField fields.categories value=../source.restrictions.categories options=../categoryOptions }}
+        {{/if}}
+        {{#if ../propertyOptions}}
+        {{ formField fields.properties value=../source.restrictions.properties options=../propertyOptions }}
+        {{/if}}
+        {{/with}}
+    </fieldset>
+</section>

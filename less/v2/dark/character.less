@@ -45,5 +45,8 @@
     .pills-group.empty > h3 > a { color: var(--color-text-light-0); }
   }
 
-  .ability-score::before { background-image: url("ui/ability-score-tab-dark.svg"); }
+  .ability-score {
+    &::before { background-image: url("ui/ability-score-tab-dark.svg"); }
+    .score > input { background: var(--dnd5e-color-black); }
+  }
 }

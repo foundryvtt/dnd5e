@@ -52,7 +52,7 @@ export default class TraitConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "traits", "two-column"],
@@ -65,7 +65,7 @@ export default class TraitConfig extends AdvancementConfig {
   /*  Context Preparation                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const context = super.getData();
 
@@ -84,7 +84,9 @@ export default class TraitConfig extends AdvancementConfig {
     context.selectedIndex = this.selected;
 
     context.validTraitTypes = Object.entries(CONFIG.DND5E.traits).reduce((obj, [key, config]) => {
-      if ( (this.config.mode === "default") || config.expertise ) obj[key] = config.labels.title;
+      if ( (this.config.mode === "default") || (this.config.mode === "mastery" ? config.mastery : config.expertise) ) {
+        obj[key] = config.labels.title;
+      }
       return obj;
     }, {});
 
@@ -103,6 +105,11 @@ export default class TraitConfig extends AdvancementConfig {
     context.selectedTraitHeader = `${CONFIG.DND5E.traits[this.trait].labels.localization}.other`;
     context.selectedTrait = this.trait;
 
+    // Disable selecting categories in mastery mode
+    if ( this.advancement.configuration.mode === "mastery" ) {
+      context.choiceOptions.forEach((key, value) => value.disabled = !!value.children);
+    }
+
     return context;
   }
 
@@ -110,7 +117,7 @@ export default class TraitConfig extends AdvancementConfig {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -155,7 +162,7 @@ export default class TraitConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onChangeInput(event) {
     // Display new set of trait choices
     if ( event.target.name === "selectedTrait" ) {
@@ -174,8 +181,9 @@ export default class TraitConfig extends AdvancementConfig {
     // If mode is changed from default to one of the others, change selected type if current type is not valid
     if ( (event.target.name === "configuration.mode")
       && (event.target.value !== "default")
-      && (this.config.mode === "default") ) {
-      const validTraitTypes = filteredKeys(CONFIG.DND5E.traits, c => c.expertise);
+      && (event.target.value !== this.config.mode) ) {
+      const checkKey = event.target.value === "mastery" ? "mastery" : "expertise";
+      const validTraitTypes = filteredKeys(CONFIG.DND5E.traits, c => c[checkKey]);
       if ( !validTraitTypes.includes(this.trait) ) this.trait = validTraitTypes[0];
     }
 
@@ -184,7 +192,7 @@ export default class TraitConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async prepareConfigurationUpdate(configuration={}) {
     const choicesCollection = foundry.utils.deepClone(this.config.choices);
 
@@ -222,7 +230,8 @@ export default class TraitConfig extends AdvancementConfig {
 
     // If one of the expertise modes is selected, filter out any traits that are not of a valid type
     if ( (configuration.mode ?? this.config.mode) !== "default" ) {
-      const validTraitTypes = filteredKeys(CONFIG.DND5E.traits, c => c.expertise);
+      const checkKey = (configuration.mode ?? this.config.mode) === "mastery" ? "mastery" : "expertise";
+      const validTraitTypes = filteredKeys(CONFIG.DND5E.traits, c => c[checkKey]);
       configuration.grants = configuration.grants.filter(k => validTraitTypes.some(t => k.startsWith(t)));
       configuration.choices.forEach(c => c.pool = c.pool?.filter(k => validTraitTypes.some(t => k.startsWith(t))));
     }

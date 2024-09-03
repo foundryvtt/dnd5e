@@ -3,7 +3,7 @@
  */
 export default class AdvancementConfirmationDialog extends Dialog {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/advancement-confirmation-dialog.hbs",

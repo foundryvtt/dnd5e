@@ -1,3 +1,5 @@
+const { OperatorTerm, RollTerm } = foundry.dice.terms;
+
 /**
  * Parse the provided rolls, splitting parts based on damage types & properties, taking flavor into account.
  * @param {DamageRoll[]} rolls                   Evaluated damage rolls to aggregate.

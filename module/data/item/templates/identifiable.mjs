@@ -13,7 +13,7 @@ const { BooleanField, SchemaField, StringField, HTMLField } = foundry.data.field
  * @mixin
  */
 export default class IdentifiableTemplate extends SystemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       identified: new BooleanField({required: true, initial: true, label: "DND5E.Identified"}),
@@ -28,7 +28,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     IdentifiableTemplate.#migrateUnidentified(source);
@@ -52,7 +52,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareDerivedData() {
     if ( !this.identified && this.unidentified.name ) {
       this.parent.name = this.unidentified.name;

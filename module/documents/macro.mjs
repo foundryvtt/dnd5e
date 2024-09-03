@@ -80,12 +80,16 @@ function getMacroTarget(name, documentType) {
 /* -------------------------------------------- */
 
 /**
- * Trigger an item to roll when a macro is clicked.
+ * Trigger an item to be used when a macro is clicked.
  * @param {string} itemName                Name of the item on the selected actor to trigger.
- * @returns {Promise<ChatMessage|object>}  Roll result.
+ * @param {object} [options={}]
+ * @param {string} [options.activityName]  Name of a specific activity on the item to trigger.
+ * @returns {Promise<ChatMessage|object>}  Usage result.
  */
-export function rollItem(itemName) {
-  return getMacroTarget(itemName, "Item")?.use();
+export function rollItem(itemName, { activityName }={}) {
+  let target = getMacroTarget(itemName, "Item");
+  if ( activityName ) target = target?.system.activities?.getName(activityName);
+  return target?.use();
 }
 
 /* -------------------------------------------- */

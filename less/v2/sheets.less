@@ -1,0 +1,118 @@
+/* Styles common to Document sheets */
+.dnd5e2.sheet:is(.item, .actor) {
+
+  /* ---------------------------------- */
+  /*  Outer Window                      */
+  /* ---------------------------------- */
+
+  > header {
+    background: transparent;
+    position: relative;
+    z-index: 1;
+
+    .window-title { visibility: hidden; }
+
+    /* Edit Mode Toggle */
+    > slide-toggle {
+      --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
+      --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray);
+      flex: none;
+
+      .slide-toggle-thumb {
+        line-height: 12px;
+
+        &::before {
+          content: "\f0ad";
+          font-family: var(--font-awesome);
+          color: var(--dnd5e-color-light-gray);
+          font-weight: bold;
+          font-size: var(--font-size-9);
+        }
+      }
+
+      &[checked] .slide-toggle-thumb::before {
+        color: var(--dnd5e-color-gold);
+      }
+    }
+  }
+
+  .window-content { margin-top: -30px; }
+
+  /* ---------------------------------- */
+  /*  Sheet Header                      */
+  /* ---------------------------------- */
+
+  .sheet-header {
+    input, select {
+      --input-placeholder-color: var(--color-text-light-6);
+      --input-height: var(--form-field-height, 26px);
+      background: rgb(0 0 0 / 45%);
+      border: 1px solid transparent;
+      transition: all 250ms ease;
+      line-height: unset;
+      padding: 1px 4px;
+      border-radius: 3px;
+
+      &:hover, &:focus {
+        border: 1px solid var(--dnd5e-color-gold);
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      }
+    }
+
+    input::placeholder { color: var(--input-placeholder-color); }
+  }
+
+  /* ---------------------------------- */
+  /*  Badges                            */
+  /* ---------------------------------- */
+
+  .badge {
+    background: transparent no-repeat center / contain;
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    color: var(--color-text-light-0);
+    display: grid;
+    place-content: center;
+    font-size: var(--font-size-30);
+
+    .config-button {
+      color: inherit;
+      font-size: inherit;
+    }
+  }
+
+  /* AC */
+  .ac-badge {
+    width: 68px;
+    height: 68px;
+    text-align: center;
+    line-height: 62px;
+    background-image: url("ui/ac-badge.webp");
+    display: block;
+    place-content: unset;
+    font-size: var(--font-size-23);
+    margin-top: -21px;
+    filter: drop-shadow(0 0 6px var(--color-shadow-dark));
+  }
+
+  /* Level */
+  .level-badge {
+    width: 78px;
+    height: 78px;
+    background-image: url("ui/level-badge.webp");
+  }
+
+  /* ---------------------------------- */
+  /*  Child Creation                    */
+  /* ---------------------------------- */
+
+  .create-child {
+    display: none;
+    position: absolute;
+    inset: auto 16px 16px auto;
+  }
+
+  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities) .create-child {
+    display: block;
+  }
+}

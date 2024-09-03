@@ -17,5 +17,6 @@ export {default as ScaleValueConfig} from "./scale-value-config.mjs";
 export {default as ScaleValueFlow} from "./scale-value-flow.mjs";
 export {default as SizeConfig} from "./size-config.mjs";
 export {default as SizeFlow} from "./size-flow.mjs";
+export {default as SubclassFlow} from "./subclass-flow.mjs";
 export {default as TraitConfig} from "./trait-config.mjs";
 export {default as TraitFlow} from "./trait-flow.mjs";

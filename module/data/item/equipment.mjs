@@ -1,6 +1,5 @@
 import { ItemDataModel } from "../abstract.mjs";
-import ActionTemplate from "./templates/action.mjs";
-import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -13,31 +12,26 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Equipment items.
+ * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
- * @mixes ActivatedEffectTemplate
- * @mixes ActionTemplate
  * @mixes MountableTemplate
  *
  * @property {object} armor               Armor details and equipment type information.
  * @property {number} armor.value         Base armor class or shield bonus.
  * @property {number} armor.dex           Maximum dex bonus added to armor class.
  * @property {number} armor.magicalBonus  Bonus added to AC from the armor's magical nature.
- * @property {object} speed               Speed granted by a piece of vehicle equipment.
- * @property {number} speed.value         Speed granted by this piece of equipment measured in feet or meters
- *                                        depending on system setting.
- * @property {string} speed.conditions    Conditions that may affect item's speed.
  * @property {number} strength            Minimum strength required to use a piece of armor.
  * @property {number} proficient          Does the owner have proficiency in this piece of equipment?
  */
 export default class EquipmentData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
-  ActivatedEffectTemplate, ActionTemplate, MountableTemplate
+  ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
+  PhysicalItemTemplate, EquippableItemTemplate, MountableTemplate
 ) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({value: "light", subtype: false}, {label: "DND5E.ItemEquipmentType"}),
@@ -49,10 +43,6 @@ export default class EquipmentData extends ItemDataModel.mixin(
       properties: new SetField(new StringField(), {
         label: "DND5E.ItemEquipmentProperties"
       }),
-      speed: new SchemaField({
-        value: new NumberField({required: true, min: 0, label: "DND5E.Speed"}),
-        conditions: new StringField({required: true, label: "DND5E.SpeedConditions"})
-      }, {label: "DND5E.Speed"}),
       strength: new NumberField({
         required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr"
       }),
@@ -64,7 +54,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: true,
     inventoryItem: true,
@@ -94,9 +84,10 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     EquipmentData.#migrateArmor(source);
     EquipmentData.#migrateType(source);
     EquipmentData.#migrateStrength(source);
@@ -170,17 +161,22 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
+    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
+    this.prepareDescriptionData();
     this.armor.value = (this._source.armor.value ?? 0) + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
+
+    const labels = this.parent.labels ??= {};
+    labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivatedEffectData();
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
     this.prepareFinalEquippableData();
   }
 
@@ -192,6 +188,25 @@ export default class EquipmentData extends ItemDataModel.mixin(
       subtitle: [this.type.label, this.parent.labels.activation],
       uses: this.hasLimitedUses ? this.getUsesData() : null
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: this.type.label },
+      ...this.physicalItemSheetFields
+    ];
+    if ( this.armor.value ) {
+      context.properties.active.shift();
+      context.info = [{
+        label: "DND5E.ArmorClass",
+        classes: "info-lg",
+        value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
+      }];
+    }
+    context.parts = ["dnd5e.details-equipment", "dnd5e.field-uses"];
   }
 
   /* -------------------------------------------- */
@@ -242,6 +257,13 @@ export default class EquipmentData extends ItemDataModel.mixin(
    */
   get isMountable() {
     return this.type.value === "vehicle";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.equipmentTypes;
   }
 
   /* -------------------------------------------- */

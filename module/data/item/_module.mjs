@@ -27,9 +27,11 @@ export {
 };
 export {default as EnchantmentField, EnchantmentData, EnchantmentError} from "./fields/enchantment-field.mjs";
 export {default as ItemTypeField} from "./fields/item-type-field.mjs";
+export {default as SpellcastingField} from "./fields/spellcasting-field.mjs";
 export {default as SummonsField, SummonsData} from "./fields/summons-field.mjs";
 export {default as ActionTemplate} from "./templates/action.mjs";
 export {default as ActivatedEffectTemplate} from "./templates/activated-effect.mjs";
+export {default as ActivitiesTemplate} from "./templates/activities.mjs";
 export {default as EquippableItemTemplate} from "./templates/equippable-item.mjs";
 export {default as IdentifiableTemplate} from "./templates/identifiable.mjs";
 export {default as ItemDescriptionTemplate} from "./templates/item-description.mjs";

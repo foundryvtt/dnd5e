@@ -74,7 +74,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   refresh({ visible, iconColor, borderColor, borderVisible }={}) {
     if ( borderColor ) this.borderColor = borderColor;
     this.border.clear().lineStyle(2, this.borderColor, 1.0).drawCircle(...this.circle).endFill();

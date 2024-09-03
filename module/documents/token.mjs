@@ -1,5 +1,4 @@
 import { SummonsData } from "../data/item/fields/summons-field.mjs";
-import TokenSystemFlags from "../data/token/token-system-flags.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
@@ -16,31 +15,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @type {boolean}
    */
   get hasDynamicRing() {
-    if ( game.release.generation < 12 ) return !!this.getFlag("dnd5e", "tokenRing.enabled");
     return this.ring.enabled;
-  }
-
-  /* -------------------------------------------- */
-
-  #subjectPath;
-
-  /**
-   * Fetch the explicit subject texture or infer from `texture.src` for dynamic rings.
-   * @type {string}
-   */
-  get subjectPath() {
-    if ( game.release.generation >= 12 ) return this.ring.subject.texture;
-    const subject = this.getFlag("dnd5e", "tokenRing")?.textures?.subject;
-    if ( subject ) return subject;
-    this.#subjectPath ??= this.constructor.inferSubjectPath(this.texture.src);
-    return this.#subjectPath;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get _systemFlagsDataModel() {
-    return TokenSystemFlags;
   }
 
   /* -------------------------------------------- */
@@ -62,7 +37,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /*  Methods                                     */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getBarAttribute(barName, options={}) {
     const attribute = options.alternative || this[barName]?.attribute;
     if ( attribute?.startsWith(".") ) {
@@ -93,7 +68,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static getTrackedAttributeChoices(attributes) {
     const groups = super.getTrackedAttributeChoices(attributes);
     const abilities = [];
@@ -127,66 +102,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  async toggleActiveEffect(effectData, {overlay=false, active}={}) {
-    // TODO: This function as been deprecated in V12. Remove it once V11 support is dropped.
-
-    if ( foundry.utils.isNewerVersion(game.version, 12) ) {
-      foundry.utils.logCompatibilityWarning("TokenDocument#toggleActiveEffect is deprecated in favor of "
-        + "Actor#toggleStatusEffect", {since: 12, until: 14});
-    }
-
-    if ( !this.actor ) return false;
-    const statusId = effectData.id;
-    if ( !statusId ) return false;
-    const existing = [];
-
-    // Find the effect with the static _id of the status effect
-    if ( effectData._id ) {
-      const effect = this.actor.effects.get(effectData._id);
-      if ( effect ) existing.push(effect.id);
-    }
-
-    // If no static _id, find all single-status effects that have this status
-    else {
-      for ( const effect of this.actor.effects ) {
-        const statuses = effect.statuses;
-        if ( (statuses.size === 1) && statuses.has(statusId) ) existing.push(effect.id);
-      }
-    }
-
-    // Remove the existing effects unless the status effect is forced active
-    if ( existing.length ) {
-      if ( active ) return true;
-      await this.actor.deleteEmbeddedDocuments("ActiveEffect", existing);
-      return false;
-    }
-
-    // Create a new effect unless the status effect is forced inactive
-    if ( !active && (active !== undefined) ) return false;
-    const effect = await ActiveEffect.implementation.fromStatusEffect(statusId);
-    if ( overlay ) effect.updateSource({"flags.core.overlay": true});
-    await ActiveEffect.implementation.create(effect, {parent: this.actor, keepId: true});
-    return true;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Determine the subject path based on the path to the main token artwork.
-   * @param {string} path  The token's `texture.src` path.
-   * @returns {string}     Inferred subject path.
-   */
-  static inferSubjectPath(path) {
-    if ( !path ) return "";
-    for ( const [src, dest] of Object.entries(CONFIG.Token.ringClass.subjectPaths) ) {
-      if ( path.startsWith(src) ) return path.replace(src, dest);
-    }
-    return path;
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   prepareData() {
     super.prepareData();
@@ -200,15 +115,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const dts = CONFIG.DND5E.actorSizes[size].dynamicTokenScale ?? 1;
     this.texture.scaleX = this._source.texture.scaleX * dts;
     this.texture.scaleY = this._source.texture.scaleY * dts;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onUpdate(data, options, userId) {
-    const textureChange = foundry.utils.hasProperty(data, "texture.src");
-    if ( textureChange ) this.#subjectPath = undefined;
-    super._onUpdate(data, options, userId);
   }
 
   /* -------------------------------------------- */
@@ -234,7 +140,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @returns {string[]}
    */
   getRingEffects() {
-    const e = CONFIG.Token.ringClass.effects;
+    const e = foundry.canvas.tokens.TokenRing.effects;
     const effects = [];
     if ( this.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE) ) effects.push(e.INVISIBILITY);
     else if ( this === game.combat?.combatant?.token ) effects.push(e.RING_GRADIENT);
@@ -254,7 +160,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const options = {};
     if ( type === "damage" ) {
       options.duration = 500;
-      options.easing = CONFIG.Token.ringClass.easeTwoPeaks;
+      options.easing = foundry.canvas.tokens.TokenRing.easeTwoPeaks;
     }
     this.object.ring?.flashColor(Color.from(color), options);
   }
@@ -269,6 +175,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
     const origin = this.actor?.getFlag("dnd5e", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
-    if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.actor.uuid);
+    if ( origin ) dnd5e.registry.summons.untrack(origin.split(".Item.")[0], this.actor.uuid);
   }
 }
