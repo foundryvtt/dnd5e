@@ -69,7 +69,7 @@ export default class SummonUsageDialog extends ActivityUsageDialog {
           name: "summons.creatureType",
           value: this.config.summons?.creatureType,
           options: Array.from(this.activity.creatureTypes)
-            .map(k => ({ value, label: CONFIG.DND5E.creatureTypes[value]?.label }))
+            .map(value => ({ value, label: CONFIG.DND5E.creatureTypes[value]?.label }))
             .filter(k => k)
         });
       }

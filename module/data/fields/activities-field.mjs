@@ -121,6 +121,19 @@ export class ActivityCollection extends Collection {
 
   /* -------------------------------------------- */
 
+  /**
+   * Generator that yields activities for each of the provided types.
+   * @param {string[]} types  Types to fetch.
+   * @yields {Activity}
+   */
+  *getByTypes(...types) {
+    for ( const type of types ) {
+      for ( const activity of this.getByType(type) ) yield activity;
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   set(key, value) {
     if ( !this.#types.has(value.type) ) this.#types.set(value.type, new Set());

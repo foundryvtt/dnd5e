@@ -14,70 +14,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "class",
       "subtype": "fightingStyle"
     },
     "requirements": "Fighter 1, Champion 10, Ranger 2",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "crewed": false,
-    "properties": []
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    }
   },
   "effects": [
     {
@@ -101,13 +53,26 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/weapons/bows/shortbow-recurve-yellow.webp",
       "origin": "Item.SDsWYh0xtS6nWuH8",
-      "tint": null,
+      "tint": "#ffffff",
       "transfer": true,
       "name": "Fighting Style: Archery",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!8YwPFv3UAPjWVDNf.F0Bh4n8Tu1ZZnwSr"
     }
   ],
@@ -118,11 +83,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234341,
-    "modifiedTime": 1704824715211,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037380937,
+    "modifiedTime": 1725037380937,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!8YwPFv3UAPjWVDNf"

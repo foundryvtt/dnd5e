@@ -108,7 +108,7 @@ export default class SaveActivityData extends BaseActivityData {
     let ability;
     if ( this.save.dc.calculation ) ability = this.ability;
     else this.save.dc.value = simplifyBonus(this.save.dc.formula, rollData);
-    if ( ability ) this.save.dc.value = this.actor?.system.abilities?.[ability]?.dc
+    this.save.dc.value ??= this.actor?.system.abilities?.[ability]?.dc
       ?? 8 + (this.actor?.system.attributes?.prof ?? 0);
 
     if ( this.save.dc.value ) this.labels.save = game.i18n.format("DND5E.SaveDC", {

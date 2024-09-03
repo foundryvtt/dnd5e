@@ -23,7 +23,7 @@
       "value": 1,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "",
     "identified": true,
@@ -42,7 +42,8 @@
     "unidentified": {
       "description": ""
     },
-    "properties": []
+    "properties": [],
+    "attuned": false
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -52,11 +53,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233472,
-    "modifiedTime": 1715374578528,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037106528,
+    "modifiedTime": 1725037106528,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!6eMHIQ2CGKpjTtWC"

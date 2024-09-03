@@ -59,8 +59,12 @@ export default class TargetField extends SchemaField {
       prepareFormulaValue(this, "target.affects.count", "DND5E.TARGET.FIELDS.target.affects.count.label", rollData);
     } else this.target.affects.count = null;
 
+    this.target.template.dimensions = TargetField.templateDimensions(this.target.template.type);
+
     if ( this.target.template.type ) {
       this.target.template.count ||= "1";
+      if ( this.target.template.dimensions.width ) this.target.template.width ||= "5";
+      if ( this.target.template.dimensions.height ) this.target.template.height ||= "5";
       prepareFormulaValue(this, "target.template.count", "DND5E.TARGET.FIELDS.target.template.count.label", rollData);
       prepareFormulaValue(this, "target.template.size", "DND5E.TARGET.FIELDS.target.template.size.label", rollData);
       prepareFormulaValue(this, "target.template.width", "DND5E.TARGET.FIELDS.target.template.width.label", rollData);
@@ -71,8 +75,6 @@ export default class TargetField extends SchemaField {
       this.target.template.width = null;
       this.target.template.height = null;
     }
-
-    this.target.template.dimensions = TargetField.templateDimensions(this.target.template.type);
 
     if ( labels ) {
       const parts = [];

@@ -30,7 +30,7 @@
       "denomination": "gp"
     },
     "rarity": "",
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "currency": {
       "pp": 0,
@@ -43,7 +43,8 @@
     "capacity": {
       "type": "weight",
       "value": null
-    }
+    },
+    "attuned": false
   },
   "effects": [],
   "sort": 0,
@@ -52,11 +53,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1709765145012,
-    "modifiedTime": 1715374598468,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037368290,
+    "modifiedTime": 1725037368290,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!dQaOdm9dbVN0RZYP"

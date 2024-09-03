@@ -30,7 +30,6 @@
         "_id": "fjwU0G5OtTZWOkib",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -43,13 +42,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "sFas4Tifj7zKgmkY",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -60,13 +60,14 @@
         },
         "level": 1,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "CmX808i8HaWZ7VMx",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -78,13 +79,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "lD3JBViqmxFYu0kc",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -105,12 +107,13 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -122,19 +125,27 @@
         "title": "",
         "_id": "3ETNrLc8RQlHwNXP",
         "classRestriction": "secondary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "amez6rlose3eoigo",
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
-            "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -151,12 +162,18 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.SCVjqRdlZ9cvHVSR",
-            "Compendium.dnd5e.classfeatures.vt31lWAULygEl7yk"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.SCVjqRdlZ9cvHVSR",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.vt31lWAULygEl7yk",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -173,11 +190,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.TH1QAf6YNGSeBVjT"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.TH1QAf6YNGSeBVjT",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -194,12 +214,18 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo",
-            "Compendium.dnd5e.classfeatures.Kl6zifJ5OmdHlOi2"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.Kl6zifJ5OmdHlOi2",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -216,11 +242,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.NlXslw4yAqmKZWtN"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.NlXslw4yAqmKZWtN",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -237,11 +266,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.L94gyvNpUhUe0rwh"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.L94gyvNpUhUe0rwh",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -258,11 +290,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.FqfmbPgxiyrWzhYk"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.FqfmbPgxiyrWzhYk",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -279,11 +314,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.l8tUhZ5Pecm9wz7I"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.l8tUhZ5Pecm9wz7I",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -300,11 +338,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.Q1exex5ALteprrPo"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.Q1exex5ALteprrPo",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -321,11 +362,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.jVU4AgqfrFaqgXns"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.jVU4AgqfrFaqgXns",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -431,7 +475,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -452,7 +497,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -473,7 +519,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -494,7 +541,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -515,7 +563,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -529,14 +578,13 @@
         "configuration": {},
         "value": {},
         "level": 3,
-        "title": "Primal Path",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Primal Path"
       }
     ],
     "spellcasting": {
       "progression": "none",
-      "ability": ""
+      "ability": "",
+      "preparation": {}
     },
     "startingEquipment": [
       {
@@ -615,7 +663,11 @@
         "requiresProficiency": false
       }
     ],
-    "wealth": "2d4 * 10"
+    "wealth": "2d4 * 10",
+    "primaryAbility": {
+      "value": [],
+      "all": true
+    }
   },
   "effects": [],
   "folder": "ZTP0KiGOdRqUKVvZ",
@@ -625,11 +677,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234281,
-    "modifiedTime": 1709764515402,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037371252,
+    "modifiedTime": 1725037371252,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!pvEzGSv71zBhaolc"

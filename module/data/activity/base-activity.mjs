@@ -71,6 +71,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }),
       name: new StringField({ initial: undefined }),
       img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
+      sort: new IntegerSortField(),
       activation: new ActivationField({
         override: new BooleanField()
       }),
@@ -97,8 +98,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField(),
         prompt: new BooleanField({ initial: true })
       }),
-      uses: new UsesField(),
-      sort: new IntegerSortField()
+      uses: new UsesField()
     };
   }
 
@@ -228,7 +228,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       duration: this.transformDurationData(source, options),
       effects: this.transformEffectsData(source, options),
       range: this.transformRangeData(source, options),
-      target: this.transformTargetData(source, options)
+      target: this.transformTargetData(source, options),
+      uses: this.transformUsesData(source, options)
     }, options);
     foundry.utils.setProperty(source, `system.activities.${activityData._id}`, activityData);
     foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
@@ -288,6 +289,13 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         mode: source.system.consume?.scale ? "amount" : "",
         formula: ""
       }
+    });
+
+    if ( source.system.recharge?.value ) targets.push({
+      type: source.system.uses?.max ? "activityUses" : "itemUses",
+      target: "",
+      value: "1",
+      scaling: { mode: "", formula: "" }
     });
 
     return {
@@ -472,6 +480,27 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Fetch data from the item source and transform it into an activity's uses object.
+   * @param {object} source   Item's candidate source data to transform.
+   * @param {object} options  Additional options passed to the creation process.
+   * @returns {object}        Creation data for new activity.
+   */
+  static transformUsesData(source, options) {
+    if ( !source.system.recharge?.value || !source.system.uses?.max ) return { spent: 0, max: "", recovery: [] };
+    return {
+      spent: source.system.recharge.charged ? 0 : 1,
+      max: "1",
+      recovery: [{
+        period: "recharge",
+        type: "recoverAll",
+        formula: String(source.system.recharge.value)
+      }]
+    };
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -563,7 +592,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         )}`;
       }
 
-      return { formula, damageType: part.types.size === 1 ? part.types.first() : null, label };
+      return { formula, damageType: part.types.size === 1 ? part.types.first() : null, label, base: part.base };
     });
   }
 

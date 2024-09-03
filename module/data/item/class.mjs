@@ -213,7 +213,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
 
     if ( actor.type === "character" ) {
       const pc = actor.items.get(actor.system.details.originalClass);
-      if ( !pc ) await this.parent._assignPrimaryClass();
+      if ( !pc ) await actor._assignPrimaryClass();
     }
 
     if ( !actor.system.attributes?.spellcasting && this.parent.spellcasting?.ability ) {

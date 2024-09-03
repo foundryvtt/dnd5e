@@ -29,6 +29,8 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       }, {}),
       showContainerWarning: indexes.some(i => i?.type === "container"),
       showSpellConfig: this.advancement.configuration.type === "spell",
+      showRequireSpellSlot: !this.advancement.configuration.spell?.preparation
+        || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast,
       validTypes: this.advancement.constructor.VALID_TYPES.reduce((obj, type) => {
         obj[type] = game.i18n.localize(CONFIG.Item.typeLabels[type]);
         return obj;

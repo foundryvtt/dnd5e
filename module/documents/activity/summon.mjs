@@ -473,16 +473,18 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage, rollData);
     const healingBonus = Roll.replaceFormulaData(this.bonuses.healing, rollData);
     for ( const item of actor.items ) {
+      if ( !item.system.activities?.size ) continue;
       const changes = [];
 
       // Match attacks
-      if ( this.match.attacks && item.hasAttack ) {
+      if ( this.match.attacks && item.system.hasAttack ) {
         const ability = this.item.abilityMod ?? rollData.attributes?.spellcasting;
+        const actionType = item.system.activities.getByType("attack")[0].actionType;
         const typeMapping = { mwak: "msak", rwak: "rsak" };
         const parts = [
           rollData.abilities?.[ability]?.mod,
           prof,
-          rollData.bonuses?.[typeMapping[item.system.actionType] ?? item.system.actionType]?.attack
+          rollData.bonuses?.[typeMapping[actionType] ?? actionType]?.attack
         ].filter(p => p);
         changes.push({
           key: "system.attack.bonus",
@@ -496,25 +498,32 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       }
 
       // Match saves
-      if ( this.match.saves && item.hasSave ) changes.push({
-        key: "system.save.dc",
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: rollData.item.save.dc ?? rollData.attributes.spelldc
-      }, {
-        key: "system.save.scaling",
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: "flat"
-      });
+      if ( this.match.saves && item.hasSave ) {
+        let dc = rollData.attributes.spelldc;
+        if ( this.item.type === "spell" ) {
+          const ability = this.item.system.availableAbilities?.first();
+          if ( ability ) dc = rollData.abilities[ability]?.dc ?? dc;
+        }
+        changes.push({
+          key: "system.save.dc",
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: dc
+        }, {
+          key: "system.save.scaling",
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: "flat"
+        });
+      }
 
       // Damage bonus
       let damageBonus;
       if ( item.hasAttack ) damageBonus = attackDamageBonus;
-      else if ( item.system.actionType === "save" ) damageBonus = saveDamageBonus;
+      else if ( item.hasSave ) damageBonus = saveDamageBonus;
       else if ( item.isHealing ) damageBonus = healingBonus;
-      if ( damageBonus && item.hasDamage ) changes.push({
+      if ( damageBonus && item.system.activities.find(a => a.damage?.parts?.length) ) changes.push({
         key: "system.damage.parts",
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: JSON.stringify([[`${damageBonus}`, ""]])
+        value: JSON.stringify({ bonus: damageBonus })
       });
 
       if ( changes.length ) {

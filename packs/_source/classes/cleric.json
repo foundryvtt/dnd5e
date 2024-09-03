@@ -31,7 +31,6 @@
         "_id": "vLDkTMgod0IS4HJn",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -43,13 +42,14 @@
         },
         "level": 1,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "uyLXlhMnjMSHHdbs",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -60,13 +60,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "bcFNu9fM4o5He4J7",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -78,13 +79,14 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "6YQrE9NkjbvhfN8F",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -104,18 +106,26 @@
         "level": 1,
         "title": "",
         "classRestriction": "primary",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7",
-            "Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -126,19 +136,24 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "axeH6FmdvAfb3TnK"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ",
-            "Compendium.dnd5e.classfeatures.r91UIgwFdHwkXdia"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.r91UIgwFdHwkXdia",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -149,18 +164,20 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "PpE7QUl3ZRdIwbSW"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -171,18 +188,20 @@
         "value": {},
         "level": 5,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "PwcMUZPMhGxn6JnJ"
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -193,7 +212,6 @@
         "value": {},
         "level": 10,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
         "_id": "RAGsl9ESVLpLfX5u"
       },
       {
@@ -218,7 +236,6 @@
         },
         "value": {},
         "title": "Channel Divinity Uses",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "oOvaOWkQdMJHHwzo"
       },
       {
@@ -249,7 +266,6 @@
         },
         "value": {},
         "title": "Destroy Undead CR",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "bRWP2zsP33jeZcUY"
       },
       {
@@ -274,7 +290,6 @@
         },
         "value": {},
         "title": "Cantrips Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
         "_id": "b6vbDSfWTwxqyTke"
       },
       {
@@ -289,14 +304,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "PrfXQ3yQP9js943H"
       },
       {
@@ -311,14 +326,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "FLozwaTlMVqZKbaN"
       },
       {
@@ -333,14 +348,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "yplB3bqCjEXkNAAq"
       },
       {
@@ -355,14 +370,14 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
         "_id": "LoImJ16J7Sn1HXi2"
       },
       {
@@ -378,7 +393,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -392,9 +408,7 @@
         "configuration": {},
         "value": {},
         "level": 1,
-        "title": "Divine Domain",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Divine Domain"
       }
     ],
     "spellcasting": {
@@ -556,7 +570,11 @@
         "requiresProficiency": false
       }
     ],
-    "wealth": "5d4 * 10"
+    "wealth": "5d4 * 10",
+    "primaryAbility": {
+      "value": [],
+      "all": true
+    }
   },
   "effects": [],
   "folder": "m1NqJdyiVSU7ghF5",
@@ -566,11 +584,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234282,
-    "modifiedTime": 1709764556862,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037371340,
+    "modifiedTime": 1725037371340,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!tlwBnN8GmqJcTgub"

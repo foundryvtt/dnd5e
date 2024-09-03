@@ -18,7 +18,6 @@
         "_id": "wIwtQfLdf9tJdZNi",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": true,
           "grants": [
@@ -29,13 +28,14 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "9YuEhI3iqUxEfIOk",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -50,18 +50,23 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "6grrnum72rnphzi5",
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.backgrounds.64N1NWh9kC1dI7zN"
+            {
+              "uuid": "Compendium.dnd5e.backgrounds.64N1NWh9kC1dI7zN",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -152,7 +157,8 @@
         "sort": 900000,
         "requiresProficiency": false
       }
-    ]
+    ],
+    "identifier": "acolyte"
   },
   "effects": [],
   "folder": null,
@@ -163,11 +169,12 @@
   "flags": {},
   "_id": "IgJkSnLiLJOWH7eK",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234264,
-    "modifiedTime": 1709765367710,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037368262,
+    "modifiedTime": 1725037368262,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!IgJkSnLiLJOWH7eK"

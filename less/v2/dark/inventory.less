@@ -19,6 +19,13 @@
     }
 
     .item-controls .info-control { color: var(--dnd5e-color-gold); }
+
+    .activities .activity-row {
+      border-color: var(--dnd5e-color-blue-gray-4);
+      &:last-child { border-color: var(--dnd5e-color-blue-gray-4); }
+      .activity-image { --icon-fill: var(--dnd5e-color-gold); }
+      &::before { color: var(--dnd5e-color-blue-gray-3); }
+    }
   }
 
   .editable .items-section .item-controls .item-control { color: var(--color-text-light-6); }

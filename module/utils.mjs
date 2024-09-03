@@ -467,6 +467,19 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
     // Activity Partials
+    "systems/dnd5e/templates/activity/columns/activity-column-controls.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-formula.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-price.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-quantity.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-range.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-recovery.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-roll.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-school.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-target.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-time.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-uses.hbs",
+    "systems/dnd5e/templates/activity/columns/activity-column-weight.hbs",
+    "systems/dnd5e/templates/activity/activity-row-summary.hbs",
     "systems/dnd5e/templates/activity/activity-usage-notes.hbs",
 
     // Advancement Partials

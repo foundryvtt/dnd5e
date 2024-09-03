@@ -168,9 +168,10 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( Array.isArray(source.uses?.recovery) ) return;
 
     const charged = source.recharge?.charged;
-    if ( (source.recharge?.value !== null) && (charged !== undefined) ) {
+    if ( (source.recharge?.value !== null) && (charged !== undefined) && !source.uses?.max ) {
       source.uses ??= {};
       source.uses.spent = charged ? 0 : 1;
+      source.uses.max = "1";
     }
 
     if ( foundry.utils.getType(source.uses?.recovery) !== "string" ) return;
