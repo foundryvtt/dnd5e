@@ -47,7 +47,7 @@ export default class SourceConfig extends DocumentSheet5e {
     const context = await super._prepareContext(options);
     context.buttons = [{ icon: "fa-regular fa-save", label: "Submit", type: "submit" }];
     context.data = foundry.utils.getProperty(this.document, this.options.keyPath);
-    context.fields = this.document.system.schema.getField(this.options.keyPath.replace("system.", "")).fields;
+    context.fields = this.document.system.schema.getField(this.options.keyPath.replace(/^system\./, "")).fields;
     context.keyPath = this.options.keyPath;
     context.source = foundry.utils.getProperty(this.document.toObject(), this.options.keyPath);
     context.sourceUuid = this.document._stats.compendiumSource;

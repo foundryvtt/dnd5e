@@ -73,7 +73,7 @@ export default class SourceField extends SchemaField {
     }
     if ( !manifest ) return null;
     const sourceBooks = manifest.flags?.dnd5e?.sourceBooks;
-    const keys = Array.from(Object.keys(sourceBooks ?? {}));
+    const keys = Object.keys(sourceBooks ?? {});
     if ( keys.length !== 1 ) return null;
     return keys[0];
   }
