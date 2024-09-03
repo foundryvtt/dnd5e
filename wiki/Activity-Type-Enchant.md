@@ -18,7 +18,7 @@ The chat card tracks how many items have been enchanted out of the maximum allow
 
 ## Configuring Enchanting
 
-After creating the Enchant activity on an item the sheet will open. In addition to the standard activity options (see the [Activities Overview](Activities.md) for more details), Enchant also includes the "Enchanting" tab with details on enchantments and restrictions.
+After creating the Enchant activity the configuration sheet will open. In addition to the standard activity options (see the [Activities Overview](Activities.md) for more details), Enchant also includes the "Enchanting" tab with details on enchantments and restrictions.
 
 ### Enchantments
 
