@@ -21,13 +21,22 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH",
-            "Compendium.dnd5e.races.OQA1sHxKnSJq01dL",
-            "Compendium.dnd5e.races.koRPOLtj8XAFMwnW"
+            {
+              "uuid": "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.OQA1sHxKnSJq01dL",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.koRPOLtj8XAFMwnW",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -52,7 +61,8 @@
             "wis": 0,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -64,7 +74,6 @@
         "_id": "1qwH1s1GrEC8T8Qp",
         "type": "Size",
         "configuration": {
-          "hint": "Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small.",
           "sizes": [
             "sm"
           ]
@@ -73,13 +82,13 @@
           "size": ""
         },
         "level": 1,
-        "title": ""
+        "title": "",
+        "hint": "Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small."
       },
       {
         "_id": "lQjgBd250F2JZeo2",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -91,7 +100,9 @@
         "level": 0,
         "title": "",
         "icon": null,
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "3iZH8gdahsVwLPbQ",
@@ -102,12 +113,14 @@
           "grants": [
             "tool:art:tinker"
           ],
-          "choices": [],
-          "hint": ""
+          "choices": []
         },
         "level": 0,
         "title": "Tinker",
-        "icon": null
+        "icon": null,
+        "value": {
+          "chosen": []
+        }
       }
     ],
     "movement": {
@@ -139,11 +152,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.1.0",
-    "coreVersion": "11.315",
-    "createdTime": 1677181053374,
-    "modifiedTime": 1710190414679,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037392918,
+    "modifiedTime": 1725037392918,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

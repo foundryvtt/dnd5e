@@ -14,70 +14,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "class",
       "subtype": "fightingStyle"
     },
     "requirements": "Fighter 1, Champion 10, Paladin 2, Ranger 2",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "crewed": false,
-    "properties": []
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    }
   },
   "effects": [
     {
@@ -101,13 +53,26 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/skills/melee/hand-grip-sword-orange.webp",
       "origin": "Item.UOgk9fNed1qugAqH",
-      "tint": null,
+      "tint": "#ffffff",
       "transfer": true,
       "name": "Fighting Style: Dueling",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/skills/melee/hand-grip-sword-orange.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!hCop9uJrWhF1QPb4.B5KM6oYsKC7vRMgG"
     }
   ],
@@ -118,11 +83,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234407,
-    "modifiedTime": 1704824718125,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037386883,
+    "modifiedTime": 1725037386883,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hCop9uJrWhF1QPb4"

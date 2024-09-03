@@ -146,6 +146,13 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /* -------------------------------------------- */
 
   /** @override */
+  _getItemOverrides() {
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   _getItemAdvancementTags(advancement) {
     if ( this.item.isEmbedded && (this._mode !== this.constructor.MODES.EDIT) ) return [];
     const tags = [];

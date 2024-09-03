@@ -27,6 +27,8 @@ export default class ItemGrantConfig extends AdvancementConfig {
     }, {});
     context.showContainerWarning = indexes.some(i => i?.type === "container");
     context.showSpellConfig = indexes.some(i => i?.type === "spell");
+    context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation
+      || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast;
     return context;
   }
 

@@ -292,8 +292,19 @@
 
                     <div class="item-description collapsible-content">
                         <div class="wrapper">
+
+                            {{!-- Activities --}}
+                            {{#if (gt ctx.activities.length 1)}}
+                            <div class="activities">
+                                {{#each ctx.activities}}
+                                {{> "dnd5e.activity-row-summary" categories=../../categories }}
+                                {{/each}}
+                            </div>
+                            {{/if}}
+
+                            {{!-- Item Description --}}
                             {{#if ctx.isExpanded}}
-                                {{> "dnd5e.item-summary" ctx.expanded }}
+                            {{> "dnd5e.item-summary" ctx.expanded }}
                             {{/if}}
                         </div>
                     </div>

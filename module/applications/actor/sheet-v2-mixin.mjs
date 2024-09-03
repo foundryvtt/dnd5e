@@ -271,6 +271,16 @@ export default function ActorSheetV2Mixin(Base) {
       // Spell slots
       const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
       context.spellbook.forEach(section => {
+        section.categories = [
+          { activityPartial: "dnd5e.activity-column-school" },
+          { activityPartial: "dnd5e.activity-column-time" },
+          { activityPartial: "dnd5e.activity-column-range" },
+          { activityPartial: "dnd5e.activity-column-target" },
+          { activityPartial: "dnd5e.activity-column-roll" },
+          { activityPartial: "dnd5e.activity-column-uses" },
+          { activityPartial: "dnd5e.activity-column-formula" },
+          { activityPartial: "dnd5e.activity-column-controls" }
+        ];
         if ( !section.usesSlots ) return;
         const spells = foundry.utils.getProperty(this.actor.system.spells, section.prop);
         const max = spells.override ?? spells.max ?? 0;
@@ -382,6 +392,52 @@ export default function ActorSheetV2Mixin(Base) {
 
       // Save
       ctx.save = item.system.activities?.getByType("save")[0]?.save;
+
+      // Activities
+      ctx.activities = item.system.activities?.map(this._prepareActivity.bind(this));
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Prepare activity data.
+     * @param {Activity} activity  The activity.
+     * @returns {object}
+     * @protected
+     */
+    _prepareActivity(activity) {
+      let { _id, activation, img, labels, name, range, save, uses } = activity;
+
+      // To Hit
+      const toHit = parseInt(labels.toHit);
+
+      // Activation
+      const activationAbbr = {
+        action: "DND5E.ActionAbbr",
+        bonus: "DND5E.BonusActionAbbr",
+        reaction: "DND5E.ReactionAbbr",
+        minute: "DND5E.TimeMinuteAbbr",
+        hour: "DND5E.TimeHourAbbr",
+        day: "DND5E.TimeDayAbbr"
+      }[activation.type];
+
+      // Limited Uses
+      uses = { ...(uses ?? {}) };
+      uses.hasRecharge = uses.max && (uses.recovery?.[0]?.period === "recharge");
+      uses.isOnCooldown = uses.hasRecharge && (uses.value < 1);
+
+      return {
+        _id, labels, name, range, save, uses,
+        activation: activationAbbr
+          ? `${activation.value ?? ""}${game.i18n.localize(activationAbbr)}`
+          : labels.activation,
+        icon: {
+          src: img,
+          svg: img.endsWith(".svg")
+        },
+        isSpell: activity.item.type === "spell",
+        toHit: isNaN(toHit) ? null : toHit
+      };
     }
 
     /* -------------------------------------------- */

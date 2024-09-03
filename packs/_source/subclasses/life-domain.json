@@ -21,7 +21,6 @@
         "_id": "bW7chouU8WIVH0Le",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -31,19 +30,27 @@
         },
         "level": 1,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "9fyr5t01nhdg0u8n",
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW",
-            "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -60,11 +67,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.hEymt45rICi4f9eL"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.hEymt45rICi4f9eL",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -81,11 +91,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.yv49QN6Bzqs0ecCs"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.yv49QN6Bzqs0ecCs",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -102,11 +115,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.T6u5z8ZTX6UftXqE"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.T6u5z8ZTX6UftXqE",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -123,11 +139,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.4UOgxzr83vFuUash"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.4UOgxzr83vFuUash",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -151,11 +170,13 @@
           "scale": {
             "8": {
               "number": 1,
-              "faces": 8
+              "faces": 8,
+              "modifiers": []
             },
             "14": {
               "number": 2,
-              "faces": 8
+              "faces": 8,
+              "modifiers": []
             }
           }
         },
@@ -165,7 +186,8 @@
     ],
     "spellcasting": {
       "progression": "none",
-      "ability": ""
+      "ability": "",
+      "preparation": {}
     }
   },
   "effects": [],
@@ -176,11 +198,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234293,
-    "modifiedTime": 1704824715863,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037372837,
+    "modifiedTime": 1725037372837,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!H3RYLGqCiqm8BP3q"

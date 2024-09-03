@@ -134,7 +134,7 @@ export default function ItemSheetV2Mixin(Base) {
       context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
       context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
       context.inputs = { ...foundry.applications.fields, ...dnd5e.applications.fields };
-      const { description, identified, properties, schema, unidentified, validProperties } = this.item.system;
+      const { description, identified, schema, unidentified, validProperties } = this.item.system;
       context.fields = schema.fields;
 
       // Set some default collapsed states on first open.
@@ -176,7 +176,7 @@ export default function ItemSheetV2Mixin(Base) {
         object: Object.fromEntries((context.system.properties ?? []).map(p => [p, true])),
         options: (validProperties ?? []).reduce((arr, k) => {
           const { label } = CONFIG.DND5E.itemProperties[k];
-          arr.push({ label, value: k, selected: properties.has(k) });
+          arr.push({ label, value: k, selected: this.item._source.system.properties?.includes(k) });
           return arr;
         }, [])
       };

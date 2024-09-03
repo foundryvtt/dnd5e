@@ -722,13 +722,7 @@ export default class ItemSheet5e extends ItemSheet {
     const effectData = effect.toObject();
     let keepOrigin = false;
 
-    // Validate against the enchantment's restraints on the origin item
     if ( effect.type === "enchantment" ) {
-      const errors = effect.parent.system.enchantment?.canEnchant(this.item);
-      if ( errors?.length ) {
-        errors.forEach(err => ui.notifications.error(err.message));
-        return false;
-      }
       effectData.origin ??= effect.parent.uuid;
       keepOrigin = true;
     }

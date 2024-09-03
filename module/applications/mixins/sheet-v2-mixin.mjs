@@ -248,13 +248,15 @@ export default function DocumentSheetV2Mixin(Base) {
 
       const expanded = this._expanded.has(item.id);
       if ( expanded ) {
-        summary.addEventListener("transitionend", () => {
-          if ( row.classList.contains("collapsed") ) summary.replaceChildren();
+        summary.parentElement.addEventListener("transitionend", () => {
+          if ( row.classList.contains("collapsed") ) summary.querySelector(".item-summary")?.remove();
         }, { once: true });
         this._expanded.delete(item.id);
       } else {
         const context = await item.getChatData({ secrets: item.isOwner });
-        summary.innerHTML = await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", context);
+        const content = await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", context);
+        summary.querySelectorAll(".item-summary").forEach(el => el.remove());
+        summary.insertAdjacentHTML("beforeend", content);
         await new Promise(resolve => requestAnimationFrame(resolve));
         this._expanded.add(item.id);
       }

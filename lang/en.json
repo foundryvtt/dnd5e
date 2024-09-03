@@ -265,6 +265,17 @@
       "Type": "Only features with the \"feat\" type can be selected."
     }
   },
+  "SPELLCONFIG": {
+    "FIELDS": {
+      "uses": {
+        "requireSlot": {
+          "label": "Require Slot",
+          "hint": "Require a spell slot to be spent when using the limited uses. If not checked then the uses will be additional free uses that don't consume a slot."
+        }
+      }
+    },
+    "FreeCasting": "Free Casting"
+  },
   "Subclass": {
     "Title": "Subclass",
     "Hint": "Specify what level this class receives its subclass.",
@@ -1830,7 +1841,7 @@
     "WeightlessContents": "Weightless Contents"
   }
 },
-"DND5E.ItemRechargeCheck": "{name} recharge check",
+"DND5E.ItemRechargeCheck": "{name} recharge check - {result}",
 "DND5E.ItemRechargeFailure": "failure!",
 "DND5E.ItemRechargeSuccess": "success!",
 "DND5E.ItemRecoveryRoll": "{name} recovers {count} charges",

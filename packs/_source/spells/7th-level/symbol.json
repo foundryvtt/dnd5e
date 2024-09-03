@@ -18,61 +18,29 @@
     },
     "activation": {
       "type": "minute",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "",
       "units": "dstr"
     },
-    "cover": null,
     "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
+      "affects": {
+        "choice": false
+      },
+      "template": {
+        "units": "",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": null,
-      "long": null,
       "units": "touch"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "10d10",
-          "necrotic"
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "con",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 7,
     "school": "abj",
@@ -86,16 +54,104 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "none",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
       "material"
     ],
-    "crewed": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [
+          {
+            "_id": "ydHIFthrNnlBuOyx",
+            "onSave": false
+          },
+          {
+            "_id": "pSwauN9UZrF8WPMt",
+            "onSave": false
+          },
+          {
+            "_id": "yNP9RLi4ym3s5Hrl",
+            "onSave": false
+          },
+          {
+            "_id": "J8f0JYFInPaKpnMC",
+            "onSave": false
+          }
+        ],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": [
+            {
+              "number": 10,
+              "denomination": 10,
+              "bonus": "",
+              "types": [
+                "necrotic"
+              ],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "",
+                "number": null,
+                "formula": ""
+              }
+            }
+          ]
+        },
+        "save": {
+          "ability": "con",
+          "dc": {
+            "calculation": "spellcasting",
+            "formula": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    }
   },
   "sort": 0,
   "flags": {},
@@ -103,7 +159,6 @@
   "effects": [
     {
       "name": "Symbol (fear)",
-      "icon": "icons/magic/symbols/runes-star-pentagon-blue.webp",
       "origin": "Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx",
       "duration": {
         "startTime": null,
@@ -123,12 +178,25 @@
         "frightened"
       ],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/symbols/runes-star-pentagon-blue.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!B2kbmgbA2WQR00kx.ydHIFthrNnlBuOyx"
     },
     {
       "name": "Symbol (pain)",
-      "icon": "icons/magic/symbols/runes-star-pentagon-blue.webp",
       "origin": "Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx",
       "duration": {
         "startTime": null,
@@ -148,12 +216,25 @@
         "incapacitated"
       ],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/symbols/runes-star-pentagon-blue.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!B2kbmgbA2WQR00kx.pSwauN9UZrF8WPMt"
     },
     {
       "name": "Symbol (sleep)",
-      "icon": "icons/magic/symbols/runes-star-pentagon-blue.webp",
       "origin": "Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx",
       "duration": {
         "startTime": null,
@@ -174,12 +255,25 @@
         "incapacitated"
       ],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/symbols/runes-star-pentagon-blue.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!B2kbmgbA2WQR00kx.yNP9RLi4ym3s5Hrl"
     },
     {
       "name": "Symbol (stunning)",
-      "icon": "icons/magic/symbols/runes-star-pentagon-blue.webp",
       "origin": "Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx",
       "duration": {
         "startTime": null,
@@ -200,17 +294,32 @@
         "incapacitated"
       ],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/symbols/runes-star-pentagon-blue.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!B2kbmgbA2WQR00kx.J8f0JYFInPaKpnMC"
     }
   ],
   "folder": "irCSpQWIMtp978TA",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234090,
-    "modifiedTime": 1706144672863,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037350335,
+    "modifiedTime": 1725037350335,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!B2kbmgbA2WQR00kx"

@@ -531,8 +531,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /** @inheritDoc */
   clone(data={}, options={}) {
     if ( options.save ) return super.clone(data, options);
+    if ( this.parent ) this.parent._embeddedPreparation = true;
     const item = super.clone(data, options);
-    if ( item.parent ) item.prepareFinalAttributes();
+    if ( item.parent ) {
+      delete item.parent._embeddedPreparation;
+      item.prepareFinalAttributes();
+    }
     return item;
   }
 
@@ -1080,55 +1084,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Roll|void>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge() {
-    const recharge = this.system.uses?.recovery.find(({ period }) => period === "recharge");
-    if ( !recharge ) return;
-
-    const rollConfig = {
-      formula: "1d6",
-      data: this.getRollData(),
-      target: parseInt(recharge.formula),
-      chatMessage: true
-    };
-
-    /**
-     * A hook event that fires before the Item is rolled to recharge.
-     * @function dnd5e.preRollRecharge
-     * @memberof hookEvents
-     * @param {Item5e} item                 Item for which the roll is being performed.
-     * @param {object} config               Configuration data for the pending roll.
-     * @param {string} config.formula       Formula that will be used to roll the recharge.
-     * @param {object} config.data          Data used when evaluating the roll.
-     * @param {number} config.target        Total required to be considered recharged.
-     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
-     * @returns {boolean}                   Explicitly return false to prevent the roll from being performed.
-     */
-    if ( Hooks.call("dnd5e.preRollRecharge", this, rollConfig) === false ) return;
-
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).evaluate();
-    const success = roll.total >= rollConfig.target;
-
-    if ( rollConfig.chatMessage ) {
-      const resultMessage = game.i18n.localize(`DND5E.ItemRecharge${success ? "Success" : "Failure"}`);
-      roll.toMessage({
-        flavor: `${game.i18n.format("DND5E.ItemRechargeCheck", {name: this.name})} - ${resultMessage}`,
-        speaker: ChatMessage.getSpeaker({actor: this.actor, token: this.actor.token})
-      });
-    }
-
-    /**
-     * A hook event that fires after the Item has rolled to recharge, but before any changes have been performed.
-     * @function dnd5e.rollRecharge
-     * @memberof hookEvents
-     * @param {Item5e} item  Item for which the roll was performed.
-     * @param {Roll} roll    The resulting roll.
-     * @returns {boolean}    Explicitly return false to prevent the item from being recharged.
-     */
-    if ( Hooks.call("dnd5e.rollRecharge", this, roll) === false ) return roll;
-
-    // Update the Item data
-    if ( success ) this.update({ "system.uses.spent": 0 });
-
-    return roll;
+    return this.system.uses?.rollRecharge();
   }
 
   /* -------------------------------------------- */
