@@ -1029,9 +1029,9 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
     if ( sort ) {
       if ( sort === true ) sort = "name";
-      const sortFunc = foundry.utils.getType(sort) === "function" ? sort : (lhs, rhs) => {
-        return String(foundry.utils.getProperty(lhs, sort)).localeCompare(String(foundry.utils.getProperty(rhs, sort)));
-      };
+      const sortFunc = foundry.utils.getType(sort) === "function" ? sort : (lhs, rhs) =>
+        String(foundry.utils.getProperty(lhs, sort))
+          .localeCompare(String(foundry.utils.getProperty(rhs, sort)), game.i18n.lang);
       documents.sort(sortFunc);
     }
 
