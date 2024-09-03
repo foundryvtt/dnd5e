@@ -179,6 +179,7 @@ export default class AttackActivityData extends BaseActivityData {
     if ( this.damage.includeBase && this.item.system.offersBaseDamage && this.item.system.damage.base.formula ) {
       const basePart = this.item.system.damage.base.clone();
       basePart.base = true;
+      basePart.locked = true;
       this.damage.parts.unshift(basePart);
     }
 
@@ -190,7 +191,7 @@ export default class AttackActivityData extends BaseActivityData {
     const roll = new Roll(parts.join("+"), data);
     this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }) || "0";
     const formula = simplifyRollFormula(roll.formula) || "0";
-    this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
+    this.labels.toHit = !/^[+-]/.test(formula) ? `+${formula}` : formula;
   }
 
   /* -------------------------------------------- */

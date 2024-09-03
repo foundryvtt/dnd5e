@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<section class=\"secret\"><p>The [[lookup @details.type.config.label lowercase]] exhales acid in a 60-foot line that is 5 feet wide. </p><p>Each creature in that line must make a  <strong>DC 18 Dexterity</strong> saving throw, taking <strong>54 (12d8) <em>acid damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section><p>The [[lookup @details.type.config.label lowercase]] exhales acid in a 60-foot line that is 5 feet wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,77 +16,126 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": "inst"
-    },
-    "cover": null,
-    "target": {
-      "value": 60,
-      "width": null,
-      "units": "ft",
-      "type": "line"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": "self"
-    },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": "con",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "dex",
-      "dc": null,
-      "scaling": "flat"
+      "max": "1",
+      "recovery": [
+        {
+          "period": "recharge",
+          "formula": "5",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": 5,
-      "charged": true
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "inst",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "line",
+            "size": "60",
+            "width": "",
+            "height": "",
+            "units": "ft"
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "dex",
+          "dc": {
+            "calculation": "",
+            "formula": ""
+          }
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
+  },
+  "flags": {
+    "dnd5e": {
+      "migratedUses": null
     }
   },
-  "flags": {},
   "img": "icons/magic/acid/projectile-smoke-glowing.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234636,
-    "modifiedTime": 1672335453831,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304979262,
+    "modifiedTime": 1725304979262,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!zjcGly9P3Gn9MXt7"

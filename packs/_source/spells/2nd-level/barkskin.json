@@ -16,56 +16,34 @@
     },
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "1",
       "units": "hour"
     },
-    "cover": null,
     "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "creature",
-      "prompt": true
+      "affects": {
+        "type": "creature",
+        "count": "1",
+        "choice": false,
+        "special": ""
+      },
+      "template": {
+        "units": "",
+        "contiguous": false,
+        "type": ""
+      }
     },
     "range": {
-      "value": null,
-      "long": null,
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "util",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 2,
     "school": "trs",
@@ -79,17 +57,69 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "none",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
       "material",
       "concentration"
     ],
-    "crewed": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [
+          {
+            "_id": "uM6rgctYpcbCVSkn"
+          }
+        ],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "roll": {
+          "formula": "",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    }
   },
   "effects": [
     {
@@ -97,19 +127,13 @@
       "flags": {},
       "changes": [
         {
-          "key": "system.attributes.ac.formula",
+          "key": "system.attributes.ac.min",
+          "mode": 5,
           "value": "16",
-          "mode": 5,
-          "priority": null
-        },
-        {
-          "key": "system.attributes.ac.calc",
-          "value": "custom",
-          "mode": 5,
           "priority": null
         }
       ],
-      "disabled": true,
+      "disabled": false,
       "duration": {
         "startTime": null,
         "seconds": 3600,
@@ -119,13 +143,26 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
       "origin": "Item.VQMKMnQDw5rzL0zp",
-      "tint": null,
+      "tint": "#ffffff",
       "transfer": false,
       "name": "Barkskin",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": 1725313057364,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!JPwIEfgUPVebr5AH.uM6rgctYpcbCVSkn"
     }
   ],
@@ -136,11 +173,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234113,
-    "modifiedTime": 1704823523171,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037353022,
+    "modifiedTime": 1725313073856,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!JPwIEfgUPVebr5AH"

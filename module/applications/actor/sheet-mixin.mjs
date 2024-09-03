@@ -15,11 +15,15 @@ export default Base => class extends Base {
   _onChangeInputDelta(event) {
     const input = event.target;
     const target = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId) ?? this.actor;
-    const result = parseInputDelta(input, target);
+    const { activityId } = input.closest("[data-activity-id]")?.dataset ?? {};
+    const activity = target?.system.activities?.get(activityId);
+    const result = parseInputDelta(input, activity ?? target);
     if ( result !== undefined ) {
       // Special case handling for Item uses.
       if ( input.dataset.name === "system.uses.value" ) {
         target.update({ "system.uses.spent": target.system.uses.max - result });
+      } else if ( activity && (input.dataset.name === "uses.value") ) {
+        target.updateActivity(activityId, { "uses.spent": activity.uses.max - result });
       }
       else target.update({ [input.dataset.name]: result });
     }

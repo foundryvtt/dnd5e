@@ -21,11 +21,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.wrxIW5sDfmGr3u5s"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.wrxIW5sDfmGr3u5s",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -42,11 +45,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.WgQrqjmeyMqDzVt3"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.WgQrqjmeyMqDzVt3",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -63,11 +69,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.7zlTRRXT1vWSBGjX"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.7zlTRRXT1vWSBGjX",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -84,11 +93,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.a0Sq88dgnREcIMfl"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.a0Sq88dgnREcIMfl",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -104,19 +116,27 @@
         "_id": "Xr04szY7gFqZKBxP",
         "type": "ItemChoice",
         "configuration": {
-          "hint": "",
           "choices": {
-            "3": 1
+            "3": {
+              "count": 1,
+              "replacement": false
+            }
           },
           "allowDrops": false,
           "type": "feat",
           "pool": [
-            "Compendium.dnd5e.classfeatures.5gx1O0sxK08awEO9",
-            "Compendium.dnd5e.classfeatures.StfmqK1twVfukpa0",
-            "Compendium.dnd5e.classfeatures.C6sHdDGmCMo0cYHd"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.5gx1O0sxK08awEO9"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.StfmqK1twVfukpa0"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.C6sHdDGmCMo0cYHd"
+            }
           ],
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -129,26 +149,37 @@
             "level": ""
           }
         },
-        "value": {},
+        "value": {
+          "added": {},
+          "replaced": {}
+        },
         "title": "Hunter's Prey"
       },
       {
         "_id": "3UE5ZrBP2hCi52mC",
         "type": "ItemChoice",
         "configuration": {
-          "hint": "",
           "choices": {
-            "7": 1
+            "7": {
+              "count": 1,
+              "replacement": false
+            }
           },
           "allowDrops": false,
           "type": "feat",
           "pool": [
-            "Compendium.dnd5e.classfeatures.pAQMJU5R9SGUmzHU",
-            "Compendium.dnd5e.classfeatures.slelvrm83v9UAKZU",
-            "Compendium.dnd5e.classfeatures.zbHu0NvHuII8lR7W"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.pAQMJU5R9SGUmzHU"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.slelvrm83v9UAKZU"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.zbHu0NvHuII8lR7W"
+            }
           ],
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -161,25 +192,34 @@
             "level": ""
           }
         },
-        "value": {},
+        "value": {
+          "added": {},
+          "replaced": {}
+        },
         "title": "Defensive Tactics"
       },
       {
         "_id": "rKt0QvE4kJO06u9c",
         "type": "ItemChoice",
         "configuration": {
-          "hint": "",
           "choices": {
-            "11": 1
+            "11": {
+              "count": 1,
+              "replacement": false
+            }
           },
           "allowDrops": false,
           "type": "feat",
           "pool": [
-            "Compendium.dnd5e.classfeatures.l7W6JB9yWLLLtQKP",
-            "Compendium.dnd5e.classfeatures.1DY8w3CXeD7PHDXF"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.l7W6JB9yWLLLtQKP"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.1DY8w3CXeD7PHDXF"
+            }
           ],
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -192,26 +232,37 @@
             "level": ""
           }
         },
-        "value": {},
+        "value": {
+          "added": {},
+          "replaced": {}
+        },
         "title": "Multiattack"
       },
       {
         "_id": "8Ssyn9fPrW1TgBN5",
         "type": "ItemChoice",
         "configuration": {
-          "hint": "",
           "choices": {
-            "15": 1
+            "15": {
+              "count": 1,
+              "replacement": false
+            }
           },
           "allowDrops": false,
           "type": "feat",
           "pool": [
-            "Compendium.dnd5e.classfeatures.laVHAIOKIsUeezWd",
-            "Compendium.dnd5e.classfeatures.Xf763cJoDHPPWSGG",
-            "Compendium.dnd5e.classfeatures.7pyZjz5vlUWV01qQ"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.laVHAIOKIsUeezWd"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.Xf763cJoDHPPWSGG"
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.7pyZjz5vlUWV01qQ"
+            }
           ],
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -224,13 +275,17 @@
             "level": ""
           }
         },
-        "value": {},
+        "value": {
+          "added": {},
+          "replaced": {}
+        },
         "title": "Superior Hunter's Defense"
       }
     ],
     "spellcasting": {
       "progression": "none",
-      "ability": ""
+      "ability": "",
+      "preparation": {}
     }
   },
   "effects": [],
@@ -242,11 +297,12 @@
   "flags": {},
   "_id": "uqd2q6WjVfcsaaGb",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234297,
-    "modifiedTime": 1704824719510,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037373087,
+    "modifiedTime": 1725037373087,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!uqd2q6WjVfcsaaGb"

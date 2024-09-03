@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>the [[lookup @name lowercase]] has the following flaws:</p><p><em>Forbiddance</em>. the [[lookup @name lowercase]] can't enter a residence without an invitation from one of the occupants<strong>. </strong></p><p><em>Harmed by Running Water</em>. the [[lookup @name lowercase]] takes 20 <em>acid damage</em> if it ends its turn in running water<strong>. </strong></p><p><em>Stake to the Heart</em>. If a piercing weapon made of wood is driven into the [[lookup @name lowercase]]'s heart while the [[lookup @name lowercase]] is incapacitated in its resting place, the [[lookup @name lowercase]] is paralyzed until the stake is removed.</p><p><em>Sunlight Hypersensitivity</em>. the [[lookup @name lowercase]] takes 20 <em>radiant damage</em> when it starts its turn in sunlight. While in sunlight, it has<strong> disadvantage </strong>on attack rolls and ability checks.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,65 +16,22 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/control/encase-creature-monster-hold.webp",
@@ -83,11 +39,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234520,
-    "modifiedTime": 1672336152412,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304967830,
+    "modifiedTime": 1725304967830,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Ervkb8H99e2Beiae"

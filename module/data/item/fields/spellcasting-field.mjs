@@ -1,5 +1,5 @@
 import { simplifyBonus } from "../../../utils.mjs";
-import { FormulaField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
 

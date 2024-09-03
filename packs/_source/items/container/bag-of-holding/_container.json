@@ -23,7 +23,7 @@
       "value": 4000,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "uncommon",
     "identified": true,
@@ -45,7 +45,8 @@
     "properties": [
       "mgc",
       "weightlessContents"
-    ]
+    ],
+    "attuned": false
   },
   "effects": [],
   "folder": "PgtyWdfkDTDbc0ov",
@@ -55,11 +56,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.2.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233722,
-    "modifiedTime": 1715374621027,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037222092,
+    "modifiedTime": 1725037222092,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!aDHRuUs29SrumWfq"

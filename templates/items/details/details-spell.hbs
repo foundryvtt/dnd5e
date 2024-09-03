@@ -65,6 +65,9 @@
     {{#if isEmbedded}}
     {{ formField fields.sourceClass value=source.sourceClass localize=true choices=item.parent.spellcastingClasses
                  labelAttr="name" blank="" }}
+
+    {{ formField fields.ability value=source.ability localize=true choices=config.abilities
+                 labelAttr="label" blank=defaultAbility }}
     {{/if}}
 </fieldset>
 

@@ -909,7 +909,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       let newValue = item?.system.uses?.value ?? 0;
       if ( isDelta ) newValue += value;
       else newValue = value;
-      return item?.update({ "system.uses.value": newValue });
+      return item?.update({ "system.uses.spent": item.system.uses.max - newValue });
     }
     return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
   }

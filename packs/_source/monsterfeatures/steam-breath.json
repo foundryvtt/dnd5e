@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<section class=\"secret\"><p>the [[lookup @name lowercase]] exhales scalding steam in a 60-foot cone. Each creature in that area must make a  <strong>DC 18 Constitution</strong> saving throw, taking <strong>52 (15d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p>Being underwater doesn't grant resistance against this damage.</p></section><p>the [[lookup @name lowercase]] exhales scalding steam in a 60-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -17,77 +16,126 @@
       "page": "",
       "license": "CC-BY-4.0"
     },
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": "inst"
-    },
-    "cover": null,
-    "target": {
-      "value": 60,
-      "width": null,
-      "units": "ft",
-      "type": "cone"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": "self"
-    },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": "cha",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "con",
-      "dc": 18,
-      "scaling": "flat"
+      "max": "1",
+      "recovery": [
+        {
+          "period": "recharge",
+          "formula": "5",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": 5,
-      "charged": true
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "inst",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "cone",
+            "size": "60",
+            "width": "",
+            "height": "",
+            "units": "ft"
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "con",
+          "dc": {
+            "calculation": "",
+            "formula": "18"
+          }
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": []
+  },
+  "flags": {
+    "dnd5e": {
+      "migratedUses": null
     }
   },
-  "flags": {},
   "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234502,
-    "modifiedTime": 1672336232699,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304965735,
+    "modifiedTime": 1725304965735,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!4UuuUKjATTixrZGP"

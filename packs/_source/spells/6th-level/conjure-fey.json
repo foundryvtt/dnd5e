@@ -18,56 +18,31 @@
     },
     "activation": {
       "type": "minute",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "1",
       "units": "hour"
     },
-    "cover": null,
     "target": {
-      "value": null,
-      "width": null,
-      "units": "any",
-      "type": "space",
-      "prompt": true
+      "affects": {
+        "type": "space",
+        "choice": false
+      },
+      "template": {
+        "units": "any",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 90,
-      "long": null,
+      "value": "90",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "summ",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 6,
     "school": "con",
@@ -81,47 +56,95 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "level",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
       "concentration"
     ],
-    "crewed": false,
-    "summons": {
-      "prompt": true,
-      "mode": "cr",
-      "bonuses": {
-        "ac": "",
-        "hd": "",
-        "hp": "",
-        "attackDamage": "",
-        "saveDamage": "",
-        "healing": ""
-      },
-      "profiles": [
-        {
-          "count": "1",
-          "cr": "@item.level",
-          "name": "",
-          "_id": "bsUNlHWgMcYsorA1",
-          "uuid": "",
-          "level": {
-            "min": null,
-            "max": null
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "summon",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
           },
-          "types": [
-            "beast",
-            "fey"
-          ]
-        }
-      ],
-      "creatureTypes": [
-        "fey"
-      ]
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "bonuses": {
+          "ac": "",
+          "hd": "",
+          "hp": "",
+          "attackDamage": "",
+          "saveDamage": "",
+          "healing": ""
+        },
+        "creatureSizes": [],
+        "creatureTypes": [
+          "fey"
+        ],
+        "match": {
+          "attacks": false,
+          "proficiency": false,
+          "saves": false
+        },
+        "profiles": [
+          {
+            "count": "1",
+            "cr": "@item.level",
+            "name": "",
+            "_id": "bsUNlHWgMcYsorA1",
+            "uuid": "",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": [
+              "beast",
+              "fey"
+            ]
+          }
+        ],
+        "summon": {
+          "identifier": "",
+          "mode": "cr",
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
     }
   },
   "sort": 0,
@@ -130,11 +153,12 @@
   "effects": [],
   "folder": "0pdesvXqKd55VOh2",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.3.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234242,
-    "modifiedTime": 1721324879876,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037366907,
+    "modifiedTime": 1725037366907,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!yN3XZZujhR4aVvPa"

@@ -21,12 +21,18 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.lT8GsPOPgRzDC3QJ",
-            "Compendium.dnd5e.classfeatures.wKdRtFsvGfMKQHLY"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.lT8GsPOPgRzDC3QJ",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.wKdRtFsvGfMKQHLY",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -43,11 +49,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.YiK59gWSlcQ6Mbdz"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.YiK59gWSlcQ6Mbdz",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -64,11 +73,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.3FB25qKxmkmxcxuC"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.3FB25qKxmkmxcxuC",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -85,11 +97,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.OTvrJSJSUgAwXrWX"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.OTvrJSJSUgAwXrWX",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -106,11 +121,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.EuX1kJNIw1F68yus"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.EuX1kJNIw1F68yus",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -125,7 +143,8 @@
     ],
     "spellcasting": {
       "progression": "none",
-      "ability": ""
+      "ability": "",
+      "preparation": {}
     }
   },
   "effects": [],
@@ -137,11 +156,12 @@
   "flags": {},
   "_id": "4Ae2SPZRXEVbVs0M",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234293,
-    "modifiedTime": 1704824714637,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037372807,
+    "modifiedTime": 1725037372807,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!4Ae2SPZRXEVbVs0M"

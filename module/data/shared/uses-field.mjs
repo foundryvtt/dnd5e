@@ -53,6 +53,7 @@ export default class UsesField extends SchemaField {
     const periods = [];
     for ( const recovery of this.uses.recovery ) {
       if ( recovery.period === "recharge" ) {
+        recovery.formula ??= "6";
         recovery.type = "recoverAll";
         recovery.recharge = {
           options: Array.fromRange(5, 2).reverse().map(min => ({
@@ -70,6 +71,11 @@ export default class UsesField extends SchemaField {
       }
     }
     if ( labels ) labels.recovery = game.i18n.getListFormatter({ style: "narrow" }).format(periods);
+
+    Object.defineProperty(this.uses, "rollRecharge", {
+      value: UsesField.rollRecharge.bind(this.parent?.system ? this.parent : this),
+      configurable: true
+    });
   }
 
   /* -------------------------------------------- */
@@ -144,5 +150,69 @@ export default class UsesField extends SchemaField {
     }
 
     return { updates, rolls };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Rolls a recharge test for an Item or Activity that uses the d6 recharge mechanic.
+   * @this {Item5e|Activity}
+   * @returns {Promise<Roll|void>}
+   */
+  static async rollRecharge() {
+    const uses = this.system ? this.system.uses : this.uses;
+    const recharge = uses?.recovery.find(({ period }) => period === "recharge");
+    if ( !recharge ) return;
+
+    const rollConfig = {
+      formula: "1d6",
+      data: this.getRollData(),
+      target: parseInt(recharge.formula),
+      chatMessage: true
+    };
+
+    /**
+     * A hook event that fires before the Item or Activity is rolled to recharge.
+     * @function dnd5e.preRollRecharge
+     * @memberof hookEvents
+     * @param {Item5e|Activity} subject     Item or Activity for which the roll is being performed.
+     * @param {object} config               Configuration data for the pending roll.
+     * @param {string} config.formula       Formula that will be used to roll the recharge.
+     * @param {object} config.data          Data used when evaluating the roll.
+     * @param {number} config.target        Total required to be considered recharged.
+     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
+     * @returns {boolean}                   Explicitly return false to prevent the roll from being performed.
+     */
+    if ( Hooks.call("dnd5e.preRollRecharge", this, rollConfig) === false ) return;
+
+    const roll = await new Roll(rollConfig.formula, rollConfig.data).evaluate();
+    const success = roll.total >= rollConfig.target;
+
+    if ( rollConfig.chatMessage ) {
+      const resultMessage = game.i18n.localize(`DND5E.ItemRecharge${success ? "Success" : "Failure"}`);
+      roll.toMessage({
+        flavor: `${game.i18n.format("DND5E.ItemRechargeCheck", { name: this.name, result: resultMessage })}`,
+        speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
+      });
+    }
+
+    /**
+     * A hook event that fires after the Item or Activity has rolled to recharge, but before any changes have been
+     * made.
+     * @function dnd5e.rollRecharge
+     * @memberof hookEvents
+     * @param {Item5e|Activity} subject  Item or Activity for which the roll was performed.
+     * @param {Roll} roll                The resulting roll.
+     * @returns {boolean}                Explicitly return false to prevent the item from being recharged.
+     */
+    if ( Hooks.call("dnd5e.rollRecharge", this, roll) === false ) return roll;
+
+    // Recharge the Item or Activity
+    if ( success ) {
+      if ( this instanceof Item ) await this.update({ "system.uses.spent": 0 });
+      else await this.item.updateActivity(this.id, { "uses.spent": 0 });
+    }
+
+    return roll;
   }
 }
