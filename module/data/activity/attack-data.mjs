@@ -177,7 +177,7 @@ export default class AttackActivityData extends BaseActivityData {
   /** @inheritDoc */
   prepareFinalData(rollData) {
     if ( this.damage.includeBase && this.item.system.offersBaseDamage && this.item.system.damage.base.formula ) {
-      const basePart = this.item.system.damage.base.clone();
+      const basePart = this.item.system.damage.base.clone(this.item.system.damage.base.toObject(false));
       basePart.base = true;
       basePart.locked = true;
       this.damage.parts.unshift(basePart);

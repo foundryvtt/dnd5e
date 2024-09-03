@@ -267,7 +267,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
     // Damage
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-      return { value, label, selected: this.damage.base.types.has(value) };
+      return { value, label, selected: context.source.damage.base.types.includes(value) };
     });
     const makeDenominationOptions = placeholder => [
       { value: "", label: placeholder ? `d${placeholder}` : "" },
