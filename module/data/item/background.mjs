@@ -35,6 +35,14 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [{ label: context.itemType }];
     context.singleDescription = true;

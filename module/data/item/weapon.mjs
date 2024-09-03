@@ -194,6 +194,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   prepareDerivedData() {
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
+    this.prepareDescriptionData();
     this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
 
     const labels = this.parent.labels ??= {};

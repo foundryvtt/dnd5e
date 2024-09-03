@@ -41,7 +41,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * @property {PassengerData[]} cargo.crew              Creatures responsible for operating the vehicle.
  * @property {PassengerData[]} cargo.passengers        Creatures just takin' a ride.
  * @property {object} details
- * @property {SourceField} details.source              Adventure or sourcebook where this vehicle originated.
+ * @property {SourceData} details.source               Adventure or sourcebook where this vehicle originated.
  */
 export default class VehicleData extends CommonTemplate {
 
@@ -167,6 +167,7 @@ export default class VehicleData extends CommonTemplate {
       (item.flags.dnd5e?.vehicleCargo === true) || !["weapon", "equipment"].includes(item.type)
     });
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp);
+    SourceField.prepareData.call(this.details.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
   }
 }
 

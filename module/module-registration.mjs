@@ -27,8 +27,8 @@ const methods = [registerSourceBooks, registerSpellLists];
  */
 function registerSourceBooks(manifest) {
   if ( !manifest.flags.dnd5e?.sourceBooks ) return;
-  Object.assign(CONFIG.DND5E.sourceBooks, manifest.flags.sourceBooks);
-  return "source book";
+  Object.assign(CONFIG.DND5E.sourceBooks, manifest.flags.dnd5e.sourceBooks);
+  return "source books";
 }
 
 /* -------------------------------------------- */

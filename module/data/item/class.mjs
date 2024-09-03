@@ -84,6 +84,14 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   prepareFinalData() {
     this.isOriginalClass = this.parent.isOriginalClass;
     SpellcastingField.prepareData.call(this, this.parent.getRollData({ deterministic: true }));

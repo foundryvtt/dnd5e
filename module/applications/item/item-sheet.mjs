@@ -563,7 +563,7 @@ export default class ItemSheet5e extends ItemSheet {
         app = new ActorSensesConfig(this.item, { keyPath: "system.senses" });
         break;
       case "source":
-        app = new SourceConfig(this.item, { keyPath: "system.source" });
+        app = new SourceConfig({ document: this.item, keyPath: "system.source" });
         break;
       case "starting-equipment":
         app = new StartingEquipmentConfig(this.item);

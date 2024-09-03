@@ -767,7 +767,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         app = new ActorSensesConfig(this.actor);
         break;
       case "source":
-        app = new SourceConfig(this.actor);
+        app = new SourceConfig({ document: this.actor });
         break;
       case "type":
         app = new ActorTypeConfig(this.actor);

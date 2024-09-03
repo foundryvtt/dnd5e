@@ -190,6 +190,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     ActivitiesTemplate._applyActivityShims.call(this);
     this._applySpellShims();
     super.prepareDerivedData();
+    this.prepareDescriptionData();
+
     this.preparation.mode ||= "prepared";
     this.properties.add("mgc");
     this.duration.concentration = this.properties.has("concentration");
