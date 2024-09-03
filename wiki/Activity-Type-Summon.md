@@ -37,7 +37,7 @@ If the summoned creature needs to be placed again, or the initial prompt was ski
 
 ## Configuring Summoning
 
-After creating the Summon activity on an item the sheet will open on the Identity tab. In addition to the standard activity identity options (see the [Activities Overview](Activities.md) for more details), Summon also includes a *Summon Prompt* option. If this is unchecked, then the usage dialog will not attempt to summon by default, but summoning can always be performed from the chat card after the initial usage.
+After creating the Summon activity the configuration sheet will open to the "Identity" tab. In addition to the standard activity identity options (see the [Activities Overview](Activities.md) for more details), Summon also includes a *Summon Prompt* option. If this is unchecked, then the usage dialog will not attempt to summon by default, but summoning can always be performed from the chat card after the initial usage.
 
 ![Summon Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-identity.jpg)
 
