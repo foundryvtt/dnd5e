@@ -171,7 +171,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
       ...this.physicalItemSheetFields
     ];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-      return { value, label, selected: this.damage.base.types.has(value) };
+      return { value, label, selected: context.source.damage.base.types.includes(value) };
     });
     context.denominationOptions = [
       { value: "", label: "" },
