@@ -18,4 +18,14 @@
   }
 
   .roll-link a > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 { filter: invert(1); }
+
+  .fvtt:is(.quest, .advice) { background: var(--dnd5e-color-blue-gray-4); }
+
+  aside.notable {
+    border-color: #212121;
+    border-width: 2px 1px;
+    background: var(--dnd5e-color-blue-gray-4);
+
+    &::before, &::after { filter: grayscale(1); }
+  }
 }
