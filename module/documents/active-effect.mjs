@@ -413,26 +413,48 @@ export default class ActiveEffect5e extends ActiveEffect {
    * Create additional effects that are applied separately from an enchantment.
    * @param {object} options  Options passed to the effect creation.
    */
-  async createRiderEnchantments(options) {
-    const origin = await fromUuid(this.origin)?? game.messages.get(options?.chatMessageOrigin)?.getAssociatedItem();
-    if ( !origin ) return;
+  async createRiderEnchantments(options={}) {
+    let item;
+    let profile;
+    const { chatMessageOrigin } = options;
+    const { enchantmentProfile, activityId } = options.dnd5e ?? {};
+
+    if ( chatMessageOrigin ) {
+      const message = game.messages.get(options?.chatMessageOrigin);
+      item = message?.getAssociatedItem();
+      const activity = message?.getAssociatedActivity();
+      profile = activity?.effects.find(e => e._id === message?.getFlag("dnd5e", "use.enchantmentProfile"));
+    } else if ( enchantmentProfile && activityId ) {
+      let activity;
+      const origin = await fromUuid(this.origin);
+      if ( origin instanceof dnd5e.documents.activity.EnchantActivity ) {
+        activity = origin;
+        item = activity.item;
+      } else if ( origin instanceof Item ) {
+        item = origin;
+        activity = item.system.activities?.get(activityId);
+      }
+      profile = activity?.effects.find(e => e._id === enchantmentProfile);
+    }
+
+    if ( !profile || !item ) return;
 
     // Create Effects
-    const riderEffects = (this.getFlag("dnd5e", "enchantment.riders.effect") ?? []).map(id => {
-      const effectData = origin.effects.get(id)?.toObject();
+    const riderEffects = profile.riders.effect.map(id => {
+      const effectData = item.effects.get(id)?.toObject();
       if ( effectData ) {
         delete effectData._id;
         delete effectData.flags?.dnd5e?.rider;
         effectData.origin = this.origin;
       }
       return effectData;
-    });
-    const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects.filter(e => e));
+    }).filter(_ => _);
+    const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", Array.from(riderEffects));
 
     // Create Items
     let createdItems = [];
     if ( this.parent.isEmbedded ) {
-      const riderItems = await Promise.all((this.getFlag("dnd5e", "enchantment.riders.item") ?? []).map(async uuid => {
+      const riderItems = await Promise.all(profile.riders.item.map(async uuid => {
         const itemData = (await fromUuid(uuid))?.toObject();
         if ( itemData ) {
           delete itemData._id;
@@ -444,6 +466,18 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
 
     if ( createdEffects.length || createdItems.length ) this.addDependent(...createdEffects, ...createdItems);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  toDragData() {
+    const data = super.toDragData();
+    const activity = this.parent?.system.activities?.getByType("enchant").find(a => {
+      return a.effects.some(e => e._id === this.id);
+    });
+    if ( activity ) data.activityId = activity.id;
+    return data;
   }
 
   /* -------------------------------------------- */

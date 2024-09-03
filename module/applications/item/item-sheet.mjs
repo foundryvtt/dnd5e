@@ -720,14 +720,18 @@ export default class ItemSheet5e extends ItemSheet {
       || (this.item.uuid === effect.parent?.uuid)
       || (this.item.uuid === effect.origin) ) return false;
     const effectData = effect.toObject();
-    let keepOrigin = false;
+    const options = { parent: this.item, keepOrigin: false };
 
     if ( effect.type === "enchantment" ) {
       effectData.origin ??= effect.parent.uuid;
-      keepOrigin = true;
+      options.keepOrigin = true;
+      options.dnd5e = {
+        enchantmentProfile: effect.id,
+        activityId: data.activityId
+      };
     }
 
-    return ActiveEffect.create(effectData, {parent: this.item, keepOrigin});
+    return ActiveEffect.create(effectData, options);
   }
 
   /* -------------------------------------------- */

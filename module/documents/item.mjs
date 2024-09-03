@@ -1452,6 +1452,33 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if ( userId !== game.user.id ) return;
+
+    // Flag ActiveEffects as riders if they are used as such in an Enchantment Activity.
+    const riders = new Set((this.system.activities?.getByType("enchant") ?? [])
+      .flatMap(activity => activity.effects)
+      .flatMap(e => Array.from(e.riders.effect)));
+
+    const updates = this.effects.reduce((arr, e) => {
+      if ( e.getFlag("dnd5e", "rider") && !riders.has(e.id) ) arr.push({ _id: e.id, "flags.dnd5e.-=rider": null });
+      return arr;
+    }, []);
+
+    updates.push(...riders.reduce((arr, id) => {
+      const effect = this.effects.get(id);
+      if ( !effect || effect.getFlag("dnd5e", "rider") ) return arr;
+      arr.push({ _id: id, "flags.dnd5e.rider": true });
+      return arr;
+    }, []));
+
+    if ( updates.length ) this.updateEmbeddedDocuments("ActiveEffect", updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( userId !== game.user.id ) return;
