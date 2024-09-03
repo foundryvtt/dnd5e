@@ -1,6 +1,16 @@
 # Welcome to the DnD5e FoundryVTT Wiki
 
 - [Active Effects Guide](Active-Effect-Guide.md)
+- [Activities Overview](Activities.md)
+  - Activity Types
+    - [Activity Type: Attack](Activity-Type-Attack.md)
+    - [Activity Type: Check](Activity-Type-Check.md)
+    - [Activity Type: Damage](Activity-Type-Damage.md)
+    - [Activity Type: Enchant](Activity-Type-Enchant.md)
+    - [Activity Type: Heal](Activity-Type-Heal.md)
+    - [Activity Type: Save](Activity-Type-Save.md)
+    - [Activity Type: Summon](Activity-Type-Summon.md)
+    - [Activity Type: Utility](Activity-Type-Utility.md)
 - [Advancement Overview](Advancement.md)
   - [Advancement User Guide](Advancement-User-Guide.md)
   - Advancement Types
@@ -20,7 +30,6 @@
 - [Hooks](Hooks.md)
 - [Journal Pages](Journal-Pages.md)
 - [Roll Formulas](Roll-Formulas.md)
-- [Summoning](Summoning.md)
 - [System HTML](System-HTML.md)
 - Tutorials
   - [Custom Classes](Custom-Class-Advancement.md)
