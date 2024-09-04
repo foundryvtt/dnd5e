@@ -310,14 +310,23 @@ export function indexFromUuid(uuid) {
 /**
  * Creates an HTML document link for the provided UUID.
  * Try to build links to compendium content synchronously to avoid DB lookups.
- * @param {string} uuid               UUID for which to produce the link.
+ * @param {string} uuid                    UUID for which to produce the link.
  * @param {object} [options]
- * @param {string} [options.tooltip]  Tooltip to add to the link.
- * @returns {string}                  Link to the item or empty string if item wasn't found.
+ * @param {string} [options.tooltip]       Tooltip to add to the link.
+ * @param {string} [options.renderBroken]  If a UUID cannot found, render it as a broken link instead of returning the
+ *                                         empty string.
+ * @returns {string}                       Link to the item or empty string if item wasn't found.
  */
-export function linkForUuid(uuid, { tooltip }={}) {
+export function linkForUuid(uuid, { tooltip, renderBroken }={}) {
   let doc = fromUuidSync(uuid);
-  if ( !doc ) return "";
+  if ( !doc ) {
+    if ( renderBroken ) return `
+      <a class="content-link broken" data-uuid="${uuid}">
+        <i class="fas fa-unlink"></i> ${game.i18n.localize("Unknown")}
+      </a>
+    `;
+    return "";
+  }
   if ( uuid.startsWith("Compendium.") && !(doc instanceof foundry.abstract.Document) ) {
     const {collection} = foundry.utils.parseUuid(uuid);
     const cls = collection.documentClass;

@@ -149,9 +149,10 @@ export default class ItemGrantAdvancement extends Advancement {
    * @param {object} config
    * @param {boolean} [config.strict=true]  Should an error be thrown when an invalid type is encountered?
    * @returns {boolean}                     Is this type valid?
-   * @throws An error if the item is invalid and strict is `true`.
+   * @throws {Error}                        An error if the item is invalid and strict is `true`.
    */
   _validateItemType(item, { strict=true }={}) {
+    if ( !item ) return false;
     if ( this.constructor.VALID_TYPES.has(item.type) ) return true;
     const type = game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
     if ( strict ) throw new Error(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", {type}));
