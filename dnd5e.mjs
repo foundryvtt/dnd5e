@@ -411,6 +411,7 @@ Hooks.once("i18nInit", () => {
     trans.TYPES.Item.race = trans.TYPES.Item.raceLegacy;
     trans.TYPES.Item.racePl = trans.TYPES.Item.raceLegacyPl;
     trans.DND5E.LanguagesExotic = trans.DND5E.LanguagesExoticLegacy;
+    trans.DND5E.TargetRadius = trans.DND5E.TargetRadiusLegacy;
     foundry.utils.mergeObject(trans.DND5E.TraitArmorPlural, DND5E.TraitArmorLegacyPlural);
     trans.DND5E.TraitArmorProf = trans.DND5E.TraitArmorLegacyProf;
   }
