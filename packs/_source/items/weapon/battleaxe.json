@@ -41,8 +41,8 @@
     },
     "damage": {
       "versatile": {
-        "number": 1,
-        "denomination": 10,
+        "number": null,
+        "denomination": 0,
         "bonus": "",
         "types": [],
         "custom": {
@@ -177,7 +177,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -192,7 +193,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037154013,
-    "modifiedTime": 1725037154013,
+    "modifiedTime": 1725041027756,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!I0WocDSuNpGJayPb"

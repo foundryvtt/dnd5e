@@ -942,7 +942,7 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 100000,
       "ownership": {
         "default": 0
       },
@@ -958,8 +958,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387271690,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!68bAMIpe4jvDeR9G.iwN0z7f5LF9AAbRJ"
     },
@@ -1138,7 +1138,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -1177,21 +1177,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 12,
-                  "denomination": 8,
-                  "bonus": "",
-                  "types": [
-                    "lightning"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 12,
+                  "denomination": "8",
+                  "bonus": "",
+                  "types": [
+                    "lightning"
+                  ]
                 }
               ]
             },
@@ -1199,19 +1194,23 @@
               "ability": "dex",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "17"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 350000,
       "ownership": {
         "default": 0
       },
@@ -1223,8 +1222,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387275005,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!68bAMIpe4jvDeR9G.k0g8uqoYdJ4LVxcn"
     },
@@ -1345,8 +1344,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387276621,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!68bAMIpe4jvDeR9G.KUffpBEiNWnVK3W6"
     },
@@ -1528,11 +1527,12 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 300000,
       "ownership": {
         "default": 0
       },
@@ -1544,8 +1544,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387271690,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!68bAMIpe4jvDeR9G.bRdk2uZ6iTuNGUIL"
     },

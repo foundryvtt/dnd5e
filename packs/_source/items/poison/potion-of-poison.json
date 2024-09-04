@@ -162,87 +162,13 @@
           "recovery": []
         },
         "sort": 0
-      },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "spec",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "units": "touch",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "1",
-            "type": "creature",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "1d6",
-          "name": "",
-          "prompt": false,
-          "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
       }
     },
     "attuned": false
   },
   "effects": [],
   "folder": "ZzUfnm1OuSL02nLG",
-  "sort": 0,
+  "sort": 300000,
   "ownership": {
     "default": 0
   },
@@ -253,7 +179,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037292318,
-    "modifiedTime": 1725037292318,
+    "modifiedTime": 1725040923889,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!qBSEGJyHxdKIlBfj"

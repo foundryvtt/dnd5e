@@ -41,8 +41,8 @@
     },
     "damage": {
       "versatile": {
-        "number": 1,
-        "denomination": 10,
+        "number": null,
+        "denomination": 0,
         "bonus": "",
         "types": [],
         "custom": {
@@ -83,8 +83,8 @@
       "conditions": ""
     },
     "properties": [
-      "ver",
-      "mgc"
+      "mgc",
+      "ver"
     ],
     "proficient": null,
     "type": {
@@ -331,7 +331,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -346,7 +347,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037290584,
-    "modifiedTime": 1725037290584,
+    "modifiedTime": 1725041262147,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!pG6dddIcb9NmPrdt"

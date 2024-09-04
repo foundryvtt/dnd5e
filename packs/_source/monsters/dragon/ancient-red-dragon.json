@@ -1320,10 +1320,13 @@
               "ability": "wis",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "21"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1349,8 +1352,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387596953,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!vFeFRlF2FOgf2HIL.LQKBexRS91dTMEKa"
     },
@@ -1401,12 +1404,8 @@
               "targets": [
                 {
                   "type": "itemUses",
-                  "target": "",
                   "value": "1",
-                  "scaling": {
-                    "mode": "",
-                    "formula": ""
-                  }
+                  "target": ""
                 }
               ],
               "scaling": {
@@ -1459,21 +1458,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 26,
-                  "denomination": 6,
-                  "bonus": "",
-                  "types": [
-                    "fire"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 26,
+                  "denomination": "6",
+                  "bonus": "",
+                  "types": [
+                    "fire"
+                  ]
                 }
               ]
             },
@@ -1481,10 +1475,13 @@
               "ability": "dex",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "24"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1510,8 +1507,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387604008,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!vFeFRlF2FOgf2HIL.wUEVmK5TEnYsMuwJ"
     },
@@ -2212,7 +2209,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -2228,8 +2226,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387610629,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!vFeFRlF2FOgf2HIL.0fheJO7kmH1UV99g"
     },

@@ -1078,12 +1078,8 @@
               "targets": [
                 {
                   "type": "itemUses",
-                  "target": "",
                   "value": "1",
-                  "scaling": {
-                    "mode": "",
-                    "formula": ""
-                  }
+                  "target": ""
                 }
               ],
               "scaling": {
@@ -1136,21 +1132,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 10,
-                  "denomination": 8,
-                  "bonus": "",
-                  "types": [
-                    "cold"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 10,
+                  "denomination": "8",
+                  "bonus": "",
+                  "types": [
+                    "cold"
+                  ]
                 }
               ]
             },
@@ -1158,10 +1149,13 @@
               "ability": "con",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "15"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1187,8 +1181,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1725387741390,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!u1UQfHutP5eEKkjM.78LbjdfWaZcAqVE7"
     },
