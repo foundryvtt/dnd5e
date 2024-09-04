@@ -540,6 +540,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       }
     }
 
+    // Add applied effects
+    actorUpdates.effects.push(...this.effects.map(e => e.effect?.toObject()).filter(e => e));
+
     return { actorUpdates, tokenUpdates };
   }
 
