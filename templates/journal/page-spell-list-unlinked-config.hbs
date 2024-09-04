@@ -19,24 +19,24 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend>{{ localize "DND5E.Source" }}</legend>
+        <legend>{{ localize "DND5E.SOURCE.FIELDS.source.label" }}</legend>
         <div class="form-group">
-            <label>{{ localize "DND5E.SourceBook" }}</label>
+            <label>{{ localize "DND5E.SOURCE.FIELDS.source.book.label" }}</label>
             <input type="text" name="source.book" value="{{ source.book }}" list="{{ appId }}-books">
             <datalist id="{{ appId }}-books">
                 {{selectOptions CONFIG.sourceBooks}}
             </datalist>
         </div>
         <div class="form-group">
-            <label>{{ localize "DND5E.SourcePage" }}</label>
+            <label>{{ localize "DND5E.SOURCE.FIELDS.source.page.label" }}</label>
             <input type="text" name="source.page" value="{{ source.page }}">
         </div>
         <div class="form-group">
-            <label>{{ localize "DND5E.SourceCustom" }}</label>
+            <label>{{ localize "DND5E.SOURCE.FIELDS.source.custom.label" }}</label>
             <input type="text" name="source.custom" value="{{ source.custom }}">
         </div>
         <div class="form-group">
-            <label>{{ localize "DND5E.SourceUUID" }}</label>
+            <label>{{ localize "DND5E.SOURCE.FIELDS.source.uuid.label" }}</label>
             <input type="text" name="source.uuid" value="{{ source.uuid }}">
         </div>
     </fieldset>

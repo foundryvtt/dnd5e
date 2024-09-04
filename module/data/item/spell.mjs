@@ -40,7 +40,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @override */
   static LOCALIZATION_PREFIXES = [
-    "DND5E.ACTIVATION", "DND5E.DURATION", "DND5E.RANGE", "DND5E.TARGET"
+    "DND5E.ACTIVATION", "DND5E.DURATION", "DND5E.RANGE", "DND5E.SOURCE", "DND5E.TARGET"
   ];
 
   /* -------------------------------------------- */

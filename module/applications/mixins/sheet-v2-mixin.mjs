@@ -101,8 +101,8 @@ export default function DocumentSheetV2Mixin(Base) {
       elements.classList.add("header-elements");
       elements.innerHTML = `
         <div class="source-book">
-          <a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig"
-             aria-label="${game.i18n.localize("DND5E.SourceConfig")}">
+          <a class="config-button" data-action="source" data-tooltip="DND5E.SOURCE.Action.Configure"
+             aria-label="${game.i18n.localize("DND5E.SOURCE.Action.Configure")}">
             <i class="fas fa-cog"></i>
           </a>
           <span></span>
@@ -120,12 +120,12 @@ export default function DocumentSheetV2Mixin(Base) {
      */
     _renderSource() {
       const [elements] = this.element.find(".header-elements");
-      const source = this.actor?.system.details?.source ?? this.item?.system.source;
+      const source = this.document?.system.source;
       if ( !elements || !source ) return;
       const editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
       elements.querySelector(".config-button")?.toggleAttribute("hidden", !editable);
       elements.querySelector(".source-book > span").innerText = editable
-        ? (source.label || game.i18n.localize("DND5E.Source"))
+        ? (source.label || game.i18n.localize("DND5E.SOURCE.FIELDS.source.label"))
         : source.label;
     }
 

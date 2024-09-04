@@ -24,12 +24,12 @@
                 <li class="source">
                     {{#if (eq system.details.source.custom system.details.source.label)}}
                         <input type="text" name="system.details.source.custom" value="{{system.details.source.custom}}"
-                                     placeholder="{{ localize 'DND5E.Source' }}">
+                                     placeholder="{{ localize 'DND5E.SOURCE.FIELDS.source.label' }}">
                     {{else}}
                         <span data-tooltip="{{system.details.source.label}}">{{system.details.source.label}}</span>
                     {{/if}}
                     {{#if editable}}
-                        <a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig">
+                        <a class="config-button" data-action="source" data-tooltip="DND5E.SOURCE.Action.Configure">
                             <i class="fas fa-cog"></i>
                         </a>
                     {{/if}}

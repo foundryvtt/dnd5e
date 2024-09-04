@@ -746,7 +746,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     <form class="dnd5e">
       <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
       <div class="form-group">
-        <label>${game.i18n.localize("DND5E.Source")}</label>
+        <label>${game.i18n.localize("DND5E.SOURCE.FIELDS.source.label")}</label>
         <div class="form-fields">
           <select name="source">${options}</select>
         </div>

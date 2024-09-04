@@ -19,6 +19,16 @@ const { ArrayField } = foundry.data.fields;
  * @property {CreatureType} type
  */
 export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
