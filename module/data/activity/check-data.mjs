@@ -2,17 +2,17 @@ import { simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
-const { SchemaField, StringField } = foundry.data.fields;
+const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data model for a check activity.
  *
  * @property {object} check
- * @property {string} check.ability         Ability used with the check.
- * @property {string} check.associated      Skill or tool that can contribute to the check.
+ * @property {string} check.ability          Ability used with the check.
+ * @property {Set<string>} check.associated  Skills or tools that can contribute to the check.
  * @property {object} check.dc
- * @property {string} check.dc.calculation  Method or ability used to calculate the difficulty class of the check.
- * @property {string} check.dc.formula      Custom DC formula or flat value.
+ * @property {string} check.dc.calculation   Method or ability used to calculate the difficulty class of the check.
+ * @property {string} check.dc.formula       Custom DC formula or flat value.
  */
 export default class CheckActivityData extends BaseActivityData {
   /** @inheritDoc */
@@ -21,7 +21,7 @@ export default class CheckActivityData extends BaseActivityData {
       ...super.defineSchema(),
       check: new SchemaField({
         ability: new StringField(),
-        associated: new StringField(),
+        associated: new SetField(new StringField()),
         dc: new SchemaField({
           calculation: new StringField(),
           formula: new FormulaField({ deterministic: true })
@@ -46,18 +46,6 @@ export default class CheckActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Is this a flat ability check, skill check, or tool check?
-   * @type {"ability"|"skill"|"tool"}
-   */
-  get checkType() {
-    if ( this.check.associated in CONFIG.DND5E.skills ) return "skill";
-    if ( this.check.associated in CONFIG.DND5E.toolIds ) return "tool";
-    return "ability";
-  }
-
-  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -79,15 +67,6 @@ export default class CheckActivityData extends BaseActivityData {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
 
-    if ( this.item.type === "tool" ) {
-      if ( !this.check.associated ) this.check.associated = this.item.system.type.baseItem;
-      if ( !this.check.ability ) this.check.ability = this.item.system.ability
-        || this.actor?.system.tools?.[this.check.associated]?.ability
-        || Object.keys(CONFIG.DND5E.abilities)[0];
-    } else if ( !this.check.ability && (this.checkType === "skill") ) {
-      this.check.ability = CONFIG.DND5E.skills[this.check.associated].ability;
-    }
-
     let ability;
     if ( this.check.dc.calculation ) ability = this.ability;
     else this.check.dc.value = simplifyBonus(this.check.dc.formula, rollData);
@@ -95,5 +74,24 @@ export default class CheckActivityData extends BaseActivityData {
       ?? 8 + (this.actor?.system.attributes?.prof ?? 0);
 
     if ( !this.check.dc.value ) this.check.dc.value = null;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the ability to use with an associated value.
+   * @param {string} associated  Skill or tool ID.
+   * @returns {string|null}      Ability to use.
+   */
+  getAbility(associated) {
+    if ( this.check.ability ) return this.check.ability;
+    if ( associated in CONFIG.DND5E.skills ) return CONFIG.DND5E.skills[associated].ability ?? null;
+    else if ( associated in CONFIG.DND5E.toolIds ) {
+      if ( (this.item.type === "tool") && this.item.system.ability ) return this.item.system.ability;
+      return this.actor?.system.tools?.[associated]?.ability ?? null;
+    }
+    return null;
   }
 }

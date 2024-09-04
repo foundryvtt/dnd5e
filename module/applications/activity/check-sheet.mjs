@@ -39,15 +39,15 @@ export default class CheckSheet extends ActivitySheet {
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label }))
     ];
     let ability;
-    if ( this.item.type === "tool" ) ability = CONFIG.DND5E.abilities[this.item.system.ability]?.label?.toLowerCase();
-    else if ( this.activity.checkType === "skill" ) ability = CONFIG.DND5E.abilities[
-      CONFIG.DND5E.skills[this.activity.check.associated].ability
-    ]?.label?.toLowerCase();
+    const associated = this.activity.check.associated;
+    if ( (this.item.type === "tool") && !associated.size ) {
+      ability = CONFIG.DND5E.abilities[this.item.system.ability]?.label?.toLowerCase();
+    } else if ( (associated.size === 1) && (associated.first() in CONFIG.DND5E.skills) ) {
+      ability = CONFIG.DND5E.abilities[CONFIG.DND5E.skills[associated.first()].ability]?.label?.toLowerCase();
+    }
     if ( ability ) context.abilityOptions[0].label = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
 
     context.associatedOptions = [
-      { value: "", label: this.item.type === "tool" ? game.i18n.format("DND5E.DefaultSpecific", {
-        default: game.i18n.localize("DND5E.CHECK.ThisTool").toLowerCase() }) : "" },
       ...Object.entries(CONFIG.DND5E.skills).map(([value, { label }]) => ({
         value, label, group: game.i18n.localize("DND5E.Skills")
       })),
