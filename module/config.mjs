@@ -2730,10 +2730,10 @@ preLocalize("spellSchools", { key: "label", sort: true });
  * @enum {string}
  */
 DND5E.spellListTypes = {
-  class: "ITEM.TypeClass",
-  subclass: "ITEM.TypeSubclass",
-  background: "ITEM.TypeBackground",
-  race: "ITEM.TypeRace",
+  class: "TYPES.Item.class",
+  subclass: "TYPES.Item.subclass",
+  background: "TYPES.Item.background",
+  race: "TYPES.Item.race",
   other: "JOURNALENTRYPAGE.DND5E.SpellList.Type.Other"
 };
 preLocalize("spellListTypes");

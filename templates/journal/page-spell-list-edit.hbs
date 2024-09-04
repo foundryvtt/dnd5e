@@ -1,7 +1,7 @@
 <form class="{{ cssClass }}" autocomplete="off">
     <div class="left flexcol">
         {{> journalEntryPageHeader }}
-    
+
         <div class="form-group">
             <label>{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Type.Label" }}</label>
             <div class="form-fields">
@@ -10,7 +10,7 @@
                 </select>
             </div>
         </div>
-    
+
         <div class="form-group">
             <label>{{ localize "DND5E.Identifier" }}</label>
             <div class="form-fields">
@@ -18,7 +18,7 @@
             </div>
             <p class="hint">{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.IdentifierHint" }}
         </div>
-    
+
         <div class="form-group">
             <label>{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Label" }}</label>
             <div class="form-fields">
@@ -30,18 +30,18 @@
                 {{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Hint" }}
             </p>
         </div>
-    
+
         <div class="form-group">
             <label>{{ localize "DND5E.Description" }}</label>
         </div>
-    
+
         {{ editor description target="system.description.value" button=false editable=editable
            engine="prosemirror" collaborate=false }}
     </div>
 
     <div class="right spell-list">
         <h3 class="flexrow">
-            {{ localize "ITEM.TypeSpellPl" }}
+            {{ localize "TYPES.Item.spellPl" }}
             <a data-action="add-unlinked" data-tooltip="JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Add"
                aria-label="{{ localize 'JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Add' }}">
                 <i class="fa-solid fa-plus" inert></i>
