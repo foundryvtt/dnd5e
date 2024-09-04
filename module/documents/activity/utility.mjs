@@ -121,7 +121,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
 
     /**
-     * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
+     * A hook event that fires after a formula has been rolled for an Utility activity.
      * @function dnd5e.rollFormulaV2
      * @memberof hookEvents
      * @param {BasicRoll[]} rolls              The resulting rolls.
