@@ -42,7 +42,7 @@ export default class CheckSheet extends ActivitySheet {
     const associated = this.activity.check.associated;
     if ( (this.item.type === "tool") && !associated.size ) {
       ability = CONFIG.DND5E.abilities[this.item.system.ability]?.label?.toLowerCase();
-    } else if ( (associated.size === 1) && associated.first() in CONFIG.DND5E.skills ) {
+    } else if ( (associated.size === 1) && (associated.first() in CONFIG.DND5E.skills) ) {
       ability = CONFIG.DND5E.abilities[CONFIG.DND5E.skills[associated.first()].ability]?.label?.toLowerCase();
     }
     if ( ability ) context.abilityOptions[0].label = game.i18n.format("DND5E.DefaultSpecific", { default: ability });

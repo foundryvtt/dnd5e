@@ -46,28 +46,7 @@ export default class CheckActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Is this a flat ability check, skill check, or tool check?
-   * @type {"ability"|"skill"|"tool"}
-   */
-  get checkType() {
-    if ( this.check.associated in CONFIG.DND5E.skills ) return "skill";
-    if ( this.check.associated in CONFIG.DND5E.toolIds ) return "tool";
-    return "ability";
-  }
-
-  /* -------------------------------------------- */
   /*  Data Migrations                             */
-  /* -------------------------------------------- */
-
-  /** @override */
-  static migrateData(source) {
-    if ( foundry.utils.getType(source.check?.associated) === "string" ) {
-      source.check.associated = source.check.associated ? [source.check.associated] : [];
-    }
-  }
-
   /* -------------------------------------------- */
 
   /** @override */
