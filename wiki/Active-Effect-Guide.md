@@ -252,6 +252,7 @@ system.attributes.ac.bonus
                      calc
                      cover
                      flat
+                     min
 ```
 
 ### Add a Bonus to AC

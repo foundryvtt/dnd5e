@@ -308,9 +308,13 @@
 
 ## Item Properties
 
-Items have roll data same as actors, but only while said item is owned by an actor (i.e., is placed on their sheet). The roll data of item is an extension of the actor's roll data, adding `@item` as an additional property.
+Items have roll data same as actors, but only while said item is owned by an actor (i.e., is placed on their sheet). The roll data of item is an extension of the actor's roll data, adding `@scaling` & `@item` as additional properties.
 
-The most common properties are:
+`@scaling` - Current scaling of an activity when used (so a 3rd level spell cast at 3rd level would be `1`).
+
+`@scaling.increase` - Scaling steps above the baseline (so a 3rd level spell cast at 3rd level would be `0`).
+
+The most common `@item` properties are:
 
 `@item.uses.value` - The current Limited Uses available on the item.
 

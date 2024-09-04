@@ -19,6 +19,7 @@
 - [Frequently Asked Questions](FAQ.md)
 - [Hooks](Hooks.md)
 - [Journal Pages](Journal-Pages.md)
+- [Module Registration](Module-Registration.md)
 - [Roll Formulas](Roll-Formulas.md)
 - [Summoning](Summoning.md)
 - [System HTML](System-HTML.md)
