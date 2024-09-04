@@ -159,7 +159,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     for ( const [key, entry] of Object.entries(context.skills).concat(Object.entries(context.tools)) ) {
       entry.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? entry.baseValue : entry.value];
       if ( key in CONFIG.DND5E.skills ) entry.reference = CONFIG.DND5E.skills[key].reference;
-      else if ( key in CONFIG.DND5E.toolIds ) entry.reference = Trait.getBaseItemUUID(CONFIG.DND5E.toolIds[key]);
+      else if ( key in CONFIG.DND5E.tools ) entry.reference = Trait.getBaseItemUUID(CONFIG.DND5E.tools[key].id);
     }
 
     // Character Background
@@ -368,7 +368,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("spell-header");
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
-    else if ( key in CONFIG.DND5E.toolIds ) type = "tool";
+    else if ( key in CONFIG.DND5E.tools ) type = "tool";
     else if ( modes[preparationMode]?.upcast && (level !== "0") && isSlots ) type = "slots";
     if ( !type ) return super._onDragStart(event);
     const dragData = { dnd5e: { action: "favorite", type } };
