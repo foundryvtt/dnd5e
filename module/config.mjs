@@ -506,48 +506,182 @@ DND5E.toolProficiencies = {
 preLocalize("toolProficiencies", { sort: true });
 
 /**
+ * @typedef ToolConfiguration
+ * @property {string} ability  Default ability used for the tool.
+ * @property {string} id       UUID of reference tool or ID within pack defined by `DND5E.sourcePacks.ITEMS`.
+ */
+
+/**
+ * Configuration data for tools.
+ * @enum {ToolConfiguration}
+ */
+DND5E.tools = {
+  alchemist: {
+    ability: "int",
+    id: "SztwZhbhZeCqyAes"
+  },
+  bagpipes: {
+    ability: "cha",
+    id: "yxHi57T5mmVt0oDr"
+  },
+  brewer: {
+    ability: "int",
+    id: "Y9S75go1hLMXUD48"
+  },
+  calligrapher: {
+    ability: "dex",
+    id: "jhjo20QoiD5exf09"
+  },
+  card: {
+    ability: "wis",
+    id: "YwlHI3BVJapz4a3E"
+  },
+  carpenter: {
+    ability: "str",
+    id: "8NS6MSOdXtUqD7Ib"
+  },
+  cartographer: {
+    ability: "wis",
+    id: "fC0lFK8P4RuhpfaU"
+  },
+  chess: {
+    ability: "wis",
+    id: "23y8FvWKf9YLcnBL"
+  },
+  cobbler: {
+    ability: "dex",
+    id: "hM84pZnpCqKfi8XH"
+  },
+  cook: {
+    ability: "wis",
+    id: "Gflnp29aEv5Lc1ZM"
+  },
+  dice: {
+    ability: "wis",
+    id: "iBuTM09KD9IoM5L8"
+  },
+  disg: {
+    ability: "cha",
+    id: "IBhDAr7WkhWPYLVn"
+  },
+  drum: {
+    ability: "cha",
+    id: "69Dpr25pf4BjkHKb"
+  },
+  dulcimer: {
+    ability: "cha",
+    id: "NtdDkjmpdIMiX7I2"
+  },
+  flute: {
+    ability: "cha",
+    id: "eJOrPcAz9EcquyRQ"
+  },
+  forg: {
+    ability: "dex",
+    id: "cG3m4YlHfbQlLEOx"
+  },
+  glassblower: {
+    ability: "int",
+    id: "rTbVrNcwApnuTz5E"
+  },
+  herb: {
+    ability: "int",
+    id: "i89okN7GFTWHsvPy"
+  },
+  horn: {
+    ability: "cha",
+    id: "aa9KuBy4dst7WIW9"
+  },
+  jeweler: {
+    ability: "int",
+    id: "YfBwELTgPFHmQdHh"
+  },
+  leatherworker: {
+    ability: "dex",
+    id: "PUMfwyVUbtyxgYbD"
+  },
+  lute: {
+    ability: "cha",
+    id: "qBydtUUIkv520DT7"
+  },
+  lyre: {
+    ability: "cha",
+    id: "EwG1EtmbgR3bM68U"
+  },
+  mason: {
+    ability: "str",
+    id: "skUih6tBvcBbORzA"
+  },
+  navg: {
+    ability: "wis",
+    id: "YHCmjsiXxZ9UdUhU"
+  },
+  painter: {
+    ability: "wis",
+    id: "ccm5xlWhx74d6lsK"
+  },
+  panflute: {
+    ability: "cha",
+    id: "G5m5gYIx9VAUWC3J"
+  },
+  pois: {
+    ability: "int",
+    id: "il2GNi8C0DvGLL9P"
+  },
+  potter: {
+    ability: "int",
+    id: "hJS8yEVkqgJjwfWa"
+  },
+  shawm: {
+    ability: "cha",
+    id: "G3cqbejJpfB91VhP"
+  },
+  smith: {
+    ability: "str",
+    id: "KndVe2insuctjIaj"
+  },
+  thief: {
+    ability: "dex",
+    id: "woWZ1sO5IUVGzo58"
+  },
+  tinker: {
+    ability: "dex",
+    id: "0d08g1i5WXnNrCNA"
+  },
+  viol: {
+    ability: "cha",
+    id: "baoe3U5BfMMMxhCU"
+  },
+  weaver: {
+    ability: "dex",
+    id: "ap9prThUB2y9lDyj"
+  },
+  woodcarver: {
+    ability: "dex",
+    id: "xKErqkLo4ASYr5EP"
+  }
+};
+
+const _toolIds = Object.entries(DND5E.tools).reduce((obj, [k, { id }]) => {
+  obj[k] = id;
+  return obj;
+}, {});
+
+/**
  * The basic tool types in 5e. This enables specific tool proficiencies or
  * starting equipment provided by classes and backgrounds.
  * @enum {string}
  */
-DND5E.toolIds = {
-  alchemist: "SztwZhbhZeCqyAes",
-  bagpipes: "yxHi57T5mmVt0oDr",
-  brewer: "Y9S75go1hLMXUD48",
-  calligrapher: "jhjo20QoiD5exf09",
-  card: "YwlHI3BVJapz4a3E",
-  carpenter: "8NS6MSOdXtUqD7Ib",
-  cartographer: "fC0lFK8P4RuhpfaU",
-  chess: "23y8FvWKf9YLcnBL",
-  cobbler: "hM84pZnpCqKfi8XH",
-  cook: "Gflnp29aEv5Lc1ZM",
-  dice: "iBuTM09KD9IoM5L8",
-  disg: "IBhDAr7WkhWPYLVn",
-  drum: "69Dpr25pf4BjkHKb",
-  dulcimer: "NtdDkjmpdIMiX7I2",
-  flute: "eJOrPcAz9EcquyRQ",
-  forg: "cG3m4YlHfbQlLEOx",
-  glassblower: "rTbVrNcwApnuTz5E",
-  herb: "i89okN7GFTWHsvPy",
-  horn: "aa9KuBy4dst7WIW9",
-  jeweler: "YfBwELTgPFHmQdHh",
-  leatherworker: "PUMfwyVUbtyxgYbD",
-  lute: "qBydtUUIkv520DT7",
-  lyre: "EwG1EtmbgR3bM68U",
-  mason: "skUih6tBvcBbORzA",
-  navg: "YHCmjsiXxZ9UdUhU",
-  painter: "ccm5xlWhx74d6lsK",
-  panflute: "G5m5gYIx9VAUWC3J",
-  pois: "il2GNi8C0DvGLL9P",
-  potter: "hJS8yEVkqgJjwfWa",
-  shawm: "G3cqbejJpfB91VhP",
-  smith: "KndVe2insuctjIaj",
-  thief: "woWZ1sO5IUVGzo58",
-  tinker: "0d08g1i5WXnNrCNA",
-  viol: "baoe3U5BfMMMxhCU",
-  weaver: "ap9prThUB2y9lDyj",
-  woodcarver: "xKErqkLo4ASYr5EP"
-};
+DND5E.toolIds = new Proxy(_toolIds, {
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "Appending to CONFIG.DND5E.toolIds is deprecated, use CONFIG.DND5E.tools instead.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.2", once: true }
+    );
+    target[prop] ??= { ability: "int" };
+    target[prop].id = value;
+  }
+});
 
 /* -------------------------------------------- */
 

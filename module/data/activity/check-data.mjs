@@ -87,10 +87,10 @@ export default class CheckActivityData extends BaseActivityData {
    */
   getAbility(associated) {
     if ( this.check.ability ) return this.check.ability;
-    if ( associated in CONFIG.DND5E.skills ) return CONFIG.DND5E.skills[associated].ability ?? null;
-    else if ( associated in CONFIG.DND5E.toolIds ) {
+    if ( associated in CONFIG.DND5E.skills ) return CONFIG.DND5E.skills[associated]?.ability ?? null;
+    else if ( associated in CONFIG.DND5E.tools ) {
       if ( (this.item.type === "tool") && this.item.system.ability ) return this.item.system.ability;
-      return this.actor?.system.tools?.[associated]?.ability ?? null;
+      return CONFIG.DND5E.tools[associated]?.ability ?? null;
     }
     return null;
   }
