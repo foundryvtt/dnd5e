@@ -505,6 +505,16 @@ DND5E.toolProficiencies = {
 };
 preLocalize("toolProficiencies", { sort: true });
 
+/**
+ * @typedef ToolConfiguration
+ * @property {string} ability  Default ability used for the tool.
+ * @property {string} id       UUID of reference tool or ID within pack defined by `DND5E.sourcePacks.ITEMS`.
+ */
+
+/**
+ * Configuration data for tools.
+ * @enum {ToolConfiguration}
+ */
 DND5E.tools = {
   alchemist: {
     ability: "int",
