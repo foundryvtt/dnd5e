@@ -10,7 +10,7 @@
         </legend>
         {{#with fields.summon.fields as |fields|}}
         {{ formField fields.mode value=../source.summon.mode options=../profileModes }}
-        {{#unless activity.isSpell}}{{ formField fields.identifier value=../source.summon.identifier }}{{/unless}}
+        {{#unless @root.activity.isSpell}}{{ formField fields.identifier value=../source.summon.identifier }}{{/unless}}
         {{/with}}
         <ul class="separated-list unlist">
             {{#each profiles}}
