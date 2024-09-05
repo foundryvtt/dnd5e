@@ -1,4 +1,4 @@
-# Contributing to foundrynet/dnd5e
+# Contributing to foundryvtt/dnd5e
 
 Code and content contributions are accepted. Please feel free to submit issues to the issue tracker or submit merge requests for code/content changes. Approval for such requests involves code and (if necessary) design review by the Maintainers of this repo. Please reach out on the [Foundry Community Discord](https://discord.gg/foundryvtt) with any questions.
 
