@@ -44,7 +44,7 @@ export default class SourceConfig extends DocumentSheet5e {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    context.buttons = [{ icon: "fa-regular fa-save", label: "Submit", type: "submit" }];
+    context.buttons = [{ icon: "fa-regular fa-save", label: "Save", type: "Save" }];
     context.data = foundry.utils.getProperty(this.document, this.options.keyPath);
     context.fields = this.document.system.schema.getField("source").fields;
     context.keyPath = this.options.keyPath;
