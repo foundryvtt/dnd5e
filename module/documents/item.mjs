@@ -1427,9 +1427,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     if ( changed.system?.activities ) {
-      const changedData = foundry.utils.mergeObject(this.toObject(), changed, { performDeletions: true });
-      const riders = Object.values(changedData.system.activities).reduce((riders, a) => {
-        if ( a.type === "enchant" ) a.effects.forEach(e => {
+      const riders = this.clone(changed).system.activities.getByType("enchant").reduce((riders, a) => {
+        a.effects.forEach(e => {
           e.riders.activity.forEach(activity => riders.activity.add(activity));
           e.riders.effect.forEach(effect => riders.effect.add(effect));
         });
