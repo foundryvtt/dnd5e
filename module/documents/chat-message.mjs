@@ -580,7 +580,8 @@ export default class ChatMessage5e extends ChatMessage {
     if ( this.getFlag("dnd5e", "messageType") === "usage" ) {
       effects = this.getFlag("dnd5e", "use.effects")?.map(id => item?.effects.get(id));
     } else {
-      effects = item?.effects.filter(e => (e.type !== "enchantment") && !e.getFlag("dnd5e", "rider"));
+      effects = item?.effects.filter(e => (e.type !== "enchantment")
+        && !item.getFlag("dnd5e", "riders.effect")?.includes(e.id));
     }
     effects = effects?.filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
     if ( !effects?.length ) return;

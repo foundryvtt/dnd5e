@@ -67,6 +67,7 @@
                 <p class="hint">{{ localize "DND5E.ENCHANT.FIELDS.effects.FIELDS.level.hint" }}</p>
             </div>
             {{#with fields.riders.fields as |fields|}}
+            {{ formField fields.activity name=(concat ../prefix "riders.activity") options=../activityOptions }}
             {{ formField fields.effect name=(concat ../prefix "riders.effect") options=../effectOptions }}
             {{ formField fields.item name=(concat ../prefix "riders.item") value=../data.riders.item }}
             {{/with}}

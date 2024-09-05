@@ -1319,9 +1319,13 @@
         },
         "riders": {
           "label": "Attached",
+          "activity": {
+            "label": "Additional Activities",
+            "hint": "These additional activities will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
+          },
           "effect": {
             "label": "Additional Effects",
-            "hint": "These additional effects will be added to the enchanted item when this enchantment is added, and removed when the enchantment is removed."
+            "hint": "These additional effects will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
           },
           "item": {
             "label": "Additional Items",

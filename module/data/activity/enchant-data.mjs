@@ -9,11 +9,12 @@ const {
 /**
  * @typedef {EffectApplicationData} EnchantEffectApplicationData
  * @property {object} level
- * @property {number} level.min        Minimum level at which this profile can be used.
- * @property {number} level.max        Maximum level at which this profile can be used.
+ * @property {number} level.min             Minimum level at which this profile can be used.
+ * @property {number} level.max             Maximum level at which this profile can be used.
  * @property {object} riders
- * @property {string[]} riders.effect  IDs of other effects on this item that will be added with this enchantment.
- * @property {string[]} riders.item    UUIDs of items that will be added with this enchantment.
+ * @property {Set<string>} riders.activity  IDs of other activities on this item that will be added when enchanting.
+ * @property {Set<string>} riders.effect    IDs of other effects on this item that will be added when enchanting.
+ * @property {Set<string>} riders.item      UUIDs of items that will be added with this enchantment.
  */
 
 /**
@@ -38,6 +39,7 @@ export default class EnchantActivityData extends BaseActivityData {
           max: new NumberField({ min: 0, integer: true })
         }),
         riders: new SchemaField({
+          activity: new SetField(new DocumentIdField()),
           effect: new SetField(new DocumentIdField()),
           item: new SetField(new DocumentUUIDField())
         })
