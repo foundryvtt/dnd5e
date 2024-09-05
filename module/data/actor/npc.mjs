@@ -297,7 +297,8 @@ export default class NPCData extends CreatureTemplate {
     this.details.xp.value = this.parent.getCRExp(this.details.cr);
 
     // Proficiency
-    this.attributes.prof = Proficiency.calculateMod(Math.max(this.details.cr, this.details.level, 1));
+    if ( this.details.cr === null ) this.attributes.prof = null;
+    else this.attributes.prof = Proficiency.calculateMod(Math.max(this.details.cr, this.details.level, 1));
 
     // Spellcaster Level
     if ( this.attributes.spellcasting && !Number.isNumeric(this.details.spellLevel) ) {

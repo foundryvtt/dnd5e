@@ -290,10 +290,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Return the amount of experience granted by killing a creature of a certain CR.
-   * @param {number} cr     The creature's challenge rating.
-   * @returns {number}      The amount of experience granted per kill.
+   * @param {number|null} cr  The creature's challenge rating.
+   * @returns {number|null}   The amount of experience granted per kill.
    */
   getCRExp(cr) {
+    if ( cr === null ) return null;
     if ( cr < 1.0 ) return Math.max(200 * cr, 10);
     return CONFIG.DND5E.CR_EXP_LEVELS[cr];
   }

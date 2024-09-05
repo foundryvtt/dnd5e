@@ -133,12 +133,12 @@
       &:empty { display: none; }
 
       li {
-        &::before {
+        &::after {
           content: "•";
-          margin-right: 4px;
+          margin-left: 4px;
         }
 
-        &:first-child::before { content: ""; }
+        &:last-child::after { content: ""; }
 
         &.full-width {
           flex: 1 0 100%;

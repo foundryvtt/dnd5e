@@ -20,7 +20,7 @@ export function formatCR(value) {
  * @returns {Handlebars.SafeString}
  */
 export function formatModifier(mod) {
-  if ( !Number.isFinite(mod) ) return new Handlebars.SafeString("");
+  if ( !Number.isFinite(mod) ) return new Handlebars.SafeString("—");
   return new Handlebars.SafeString(`<span class="sign">${mod < 0 ? "-" : "+"}</span>${Math.abs(mod)}`);
 }
 

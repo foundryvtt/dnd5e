@@ -1,5 +1,5 @@
 /* TODO: Add .dnd5e2-journal when dark mode journal sheets are implemented */
-.theme-dark .dnd5e2,
+.theme-dark .dnd5e2:not(.chat-card, .dnd5e-tooltip),
 .dnd5e2.dnd5e-theme-dark {
   .editor-content {
     h3 { border: none; }
@@ -15,17 +15,17 @@
         background: linear-gradient(to right, #491d25, #311b1f);
       }
     }
+  }
 
-    .roll-link a > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 { filter: invert(1); }
+  .roll-link a > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 { filter: invert(1); }
 
-    .fvtt:is(.quest, .advice) { background: var(--dnd5e-color-blue-gray-4); }
+  .fvtt:is(.quest, .advice) { background: var(--dnd5e-color-blue-gray-4); }
 
-    aside.notable {
-      border-color: #212121;
-      border-width: 2px 1px;
-      background: var(--dnd5e-color-blue-gray-4);
+  aside.notable {
+    border-color: #212121;
+    border-width: 2px 1px;
+    background: var(--dnd5e-color-blue-gray-4);
 
-      &::before, &::after { filter: grayscale(1); }
-    }
+    &::before, &::after { filter: grayscale(1); }
   }
 }

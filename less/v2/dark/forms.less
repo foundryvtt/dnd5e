@@ -1,4 +1,4 @@
-.theme-dark .dnd5e2,
+.theme-dark .dnd5e2:not(.chat-card),
 .dnd5e2.dnd5e-theme-dark {
   fieldset {
     --color-fieldset-border: var(--dnd5e-color-blue-gray-3);
@@ -30,7 +30,7 @@
     }
   }
 
-  button {
+  button:not(.pip) {
     border-color: var(--dnd5e-color-blue-gray-1);
     &:hover { border-color: var(--dnd5e-color-blue-gray-1); }
   }
