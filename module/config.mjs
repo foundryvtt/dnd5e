@@ -1130,7 +1130,7 @@ DND5E.creatureTypes = {
   humanoid: {
     label: "DND5E.CreatureHumanoid",
     plural: "DND5E.CreatureHumanoidPl",
-    icon: "icons/magic/unholy/strike-body-explode-disintegrate.webp",
+    icon: "icons/environment/people/group.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iFzQs4AenN8ALRvw"
   },
   monstrosity: {
