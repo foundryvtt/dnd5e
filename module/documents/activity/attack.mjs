@@ -183,7 +183,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       ammunitionOptions: dialogConfig.options.ammunitionOptions,
       attackModes: dialogConfig.options.attackModes,
       masteryOptions: dialogConfig.options.masteryOptions,
-      title: dialogConfig.options.title,
+      title: `${this.item.name} - ${game.i18n.localize("DND5E.AttackRoll")}`,
       dialogOptions: dialogConfig.options,
       chatMessage: messageConfig.create,
       messageData: messageConfig.data,

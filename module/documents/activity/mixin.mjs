@@ -849,7 +849,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       powerfulCritical: rollConfig.rolls[0]?.critical?.powerfulCritical ?? rollConfig.critical?.powerfulCritical,
       criticalBonusDamage: rollConfig.rolls[0]?.critical?.bonusDamage ?? rollConfig.critical?.bonusDamage,
       fastForward: !dialogConfig.configure,
-      title: dialogConfig.options.title,
+      title: `${this.item.name} - ${this.damageFlavor}`,
       dialogOptions: dialogConfig.options,
       chatMessage: messageConfig.create,
       messageData: messageConfig.data,
