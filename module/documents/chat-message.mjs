@@ -563,8 +563,9 @@ export default class ChatMessage5e extends ChatMessage {
     // Create the enchantment tray
     const enchantmentApplication = document.createElement("enchantment-application");
     enchantmentApplication.classList.add("dnd5e2");
-    const afterElement = html.querySelector(".card-footer") ?? html.querySelector(".effects-tray");
-    afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
+    const afterElement = html.querySelector(".card-footer");
+    if ( afterElement ) afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
+    else html.querySelector(".chat-card")?.append(enchantmentApplication);
   }
 
   /* -------------------------------------------- */
