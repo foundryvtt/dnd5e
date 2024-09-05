@@ -477,10 +477,12 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
 
   // Migrate embedded effects
   if ( itemData.effects ) {
-    if ( itemData.flags?.dnd5e?.riders?.effect ) {
-      itemUpdateData["flags.dnd5e.riders.effect"] = itemData.flags.dnd5e.riders.effect;
-    }
+    const riders = foundry.utils.getProperty(itemData, "flags.dnd5e.riders.effect");
+    if ( riders?.length ) updateData["flags.dnd5e.riders.effect"] = riders;
     const effects = migrateEffects(itemData, migrationData, updateData);
+    if ( riders?.length === updateData["flags.dnd5e.riders.effect"]?.length ) {
+      delete updateData["flags.dnd5e.riders.effect"];
+    }
     if ( effects.length > 0 ) updateData.effects = effects;
   }
 
