@@ -2288,15 +2288,43 @@
 "DND5E.SkillPassives": "Skill Passives",
 "DND5E.Skin": "Skin",
 "DND5E.Skip": "Skip",
-"DND5E.Source": "Source",
-"DND5E.SourceBook": "Book",
-"DND5E.SourceConfig": "Configure Source",
-"DND5E.SourceCustom": "Custom Label",
-"DND5E.SourceDisplay": "{book} {page}",
-"DND5E.SourceLicense": "License",
-"DND5E.SourcePage": "Page/Section",
-"DND5E.SourcePageDisplay": "pg. {page}",
-"DND5E.SourceUUID": "Original Source",
+
+"DND5E.SOURCE": {
+  "FIELDS": {
+    "source": {
+      "label": "Source",
+      "book": {
+        "label": "Book"
+      },
+      "custom": {
+        "label": "Custom Label"
+      },
+      "license": {
+        "label": "License"
+      },
+      "page": {
+        "label": "Page/Section"
+      },
+      "revision": {
+        "label": "Revision"
+      },
+      "rules": {
+        "label": "Rules Version"
+      },
+      "uuid": {
+        "label": "Original Source"
+      }
+    }
+  },
+  "Action": {
+    "Configure": "Configure Source"
+  },
+  "Display": {
+    "Full": "{book} {page}",
+    "Page": "pg. {page}"
+  }
+},
+
 "DND5E.Special": "Special",
 "DND5E.SpecialHint": "Special values separated by semi-colons.",
 "DND5E.SpecialTraits": "Special Traits",

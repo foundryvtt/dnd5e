@@ -31,7 +31,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.CLASS"];
+  static LOCALIZATION_PREFIXES = ["DND5E.CLASS", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 

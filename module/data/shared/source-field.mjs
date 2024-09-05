@@ -1,32 +1,31 @@
-const { SchemaField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @typedef {object} SourceData
- * @property {string} book     Book/publication where the item originated.
- * @property {string} page     Page or section where the item can be found.
- * @property {string} custom   Fully custom source label.
- * @property {string} license  Type of license that covers this item.
+ * @property {string} book      Book/publication where the item originated.
+ * @property {string} page      Page or section where the item can be found.
+ * @property {string} custom    Fully custom source label.
+ * @property {string} license   Type of license that covers this item.
+ * @property {number} revision  Revision count for this item.
+ * @property {string} rules     Version of the rules for this document (e.g. 2014 vs. 2024).
  */
 
 /**
  * Data fields that stores information on the adventure or sourcebook where this document originated.
- *
- * @property {string} book     Book/publication where the item originated.
- * @property {string} page     Page or section where the item can be found.
- * @property {string} custom   Fully custom source label.
- * @property {string} license  Type of license that covers this item.
  */
 export default class SourceField extends SchemaField {
   constructor(fields={}, options={}) {
     fields = {
-      book: new StringField({label: "DND5E.SourceBook"}),
-      page: new StringField({label: "DND5E.SourcePage"}),
-      custom: new StringField({label: "DND5E.SourceCustom"}),
-      license: new StringField({label: "DND5E.SourceLicense"}),
+      book: new StringField(),
+      page: new StringField(),
+      custom: new StringField(),
+      license: new StringField(),
+      revision: new NumberField({ initial: 1 }),
+      rules: new StringField({ initial: "2024" }),
       ...fields
     };
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
-    super(fields, { label: "DND5E.Source", ...options });
+    super(fields, { label: "DND5E.SOURCE.FIELDS.source.label", ...options });
   }
 
   /* -------------------------------------------- */
@@ -45,8 +44,8 @@ export default class SourceField extends SchemaField {
     if ( this.custom ) this.label = this.custom;
     else {
       const page = Number.isNumeric(this.page)
-        ? game.i18n.format("DND5E.SourcePageDisplay", { page: this.page }) : (this.page ?? "");
-      this.label = game.i18n.format("DND5E.SourceDisplay", { book: this.book, page }).trim();
+        ? game.i18n.format("DND5E.SOURCE.Display.Page", { page: this.page }) : (this.page ?? "");
+      this.label = game.i18n.format("DND5E.SOURCE.Display.Full", { book: this.book, page }).trim();
     }
 
     Object.defineProperty(this, "directlyEditable", {
@@ -76,5 +75,26 @@ export default class SourceField extends SchemaField {
     const keys = Object.keys(sourceBooks ?? {});
     if ( keys.length !== 1 ) return null;
     return keys[0];
+  }
+
+  /* -------------------------------------------- */
+  /*  Shims                                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Add a shim for the old source path.
+   * @this {ActorDataModel}
+   */
+  static shimActor() {
+    const source = this.source;
+    Object.defineProperty(this.details, "source", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The source data for actors has been moved to `system.source`.",
+          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        );
+        return source;
+      }
+    });
   }
 }

@@ -417,6 +417,11 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
     if ( effects.length > 0 ) updateData.effects = effects;
   }
 
+  // Set source rules version to Legacy
+  if ( foundry.utils.isNewerVersion("4.0.0", actorData._stats?.systemVersion) ) {
+    updateData["system.source.rules"] = "2014";
+  }
+
   // Migrate Owned Items
   if ( !actorData.items ) return updateData;
   const items = actor.items.reduce((arr, i) => {
@@ -484,6 +489,11 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
       delete updateData["flags.dnd5e.riders.effect"];
     }
     if ( effects.length > 0 ) updateData.effects = effects;
+  }
+
+  // Set source rules version to Legacy
+  if ( foundry.utils.isNewerVersion("4.0.0", itemData._stats?.systemVersion) ) {
+    updateData["system.source.rules"] = "2014";
   }
 
   // Migrate properties

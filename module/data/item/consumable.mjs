@@ -40,7 +40,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.CONSUMABLE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.CONSUMABLE", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 

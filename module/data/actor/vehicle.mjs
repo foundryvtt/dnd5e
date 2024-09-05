@@ -40,10 +40,18 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * @property {object} cargo                            Details on this vehicle's crew and cargo capacities.
  * @property {PassengerData[]} cargo.crew              Creatures responsible for operating the vehicle.
  * @property {PassengerData[]} cargo.passengers        Creatures just takin' a ride.
- * @property {object} details
- * @property {SourceData} details.source               Adventure or sourcebook where this vehicle originated.
+ * @property {SourceData} source                       Adventure or sourcebook where this vehicle originated.
  */
 export default class VehicleData extends CommonTemplate {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static _systemType = "vehicle";
@@ -102,10 +110,8 @@ export default class VehicleData extends CommonTemplate {
           })
         }, { label: "DND5E.VehicleCargoCrew" })
       }, { label: "DND5E.Attributes" }),
-      details: new SchemaField({
-        ...DetailsFields.common,
-        source: new SourceField()
-      }, { label: "DND5E.Details" }),
+      details: new SchemaField(DetailsFields.common, { label: "DND5E.Details" }),
+      source: new SourceField(),
       traits: new SchemaField({
         ...TraitsFields.common,
         size: new StringField({ required: true, initial: "lg", label: "DND5E.Size" }),
@@ -135,13 +141,16 @@ export default class VehicleData extends CommonTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Convert source string into custom object.
+   * Convert source string into custom object & move to top-level.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateSource(source) {
-    if ( source.details?.source && (foundry.utils.getType(source.details.source) !== "Object") ) {
-      source.details.source = { custom: source.details.source };
+    let custom;
+    if ( ("details" in source) && ("source" in source.details) ) {
+      if ( foundry.utils.getType(source.details?.source) === "string" ) custom = source.details.source;
+      else source.source = source.details.source;
     }
+    if ( custom ) source.source = { custom };
   }
 
   /* -------------------------------------------- */
@@ -153,6 +162,7 @@ export default class VehicleData extends CommonTemplate {
     this.attributes.prof = 0;
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
+    SourceField.shimActor.call(this);
   }
 
   /* -------------------------------------------- */
@@ -167,7 +177,7 @@ export default class VehicleData extends CommonTemplate {
       (item.flags.dnd5e?.vehicleCargo === true) || !["weapon", "equipment"].includes(item.type)
     });
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp);
-    SourceField.prepareData.call(this.details.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
+    SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
   }
 }
 

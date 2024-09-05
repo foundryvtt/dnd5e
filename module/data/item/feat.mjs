@@ -25,8 +25,14 @@ export default class FeatData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, ItemTypeTemplate
 ) {
 
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.Prerequisites"];
+  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.Prerequisites", "DND5E.SOURCE"];
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static defineSchema() {

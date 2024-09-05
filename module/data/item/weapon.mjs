@@ -48,7 +48,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.RANGE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.RANGE", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
