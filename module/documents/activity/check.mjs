@@ -106,6 +106,7 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
         if ( (this.item.type === "tool") && !this.check.associated.size ) {
           checkData.bonus = this.item.system.bonus;
           checkData.prof = this.item.system.prof;
+          checkData.item = this.item;
         }
         await token.actor.rollToolCheck(tool, checkData);
       } else {
