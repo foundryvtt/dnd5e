@@ -29,5 +29,54 @@ export default class FormulaField extends foundry.data.fields.StringField {
     }
     super._validateType(value);
   }
+
+  /* -------------------------------------------- */
+  /*  Active Effect Integration                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _castChangeDelta(delta) {
+    return this._cast(delta).trim();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeAdd(value, delta, model, change) {
+    if (!value) return delta;
+    const operator = delta.startsWith("-") ? "-" : "+";
+    delta = delta.replace(/^[+-]?/, "").trim();
+    return `${value} ${operator} ${delta}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeMultiply(value, delta, model, change) {
+    if (!value) return delta;
+    const terms = new Roll(value).terms;
+    if ( terms.length > 1 ) return `(${value}) * ${delta}`;
+    return `${value} * ${delta}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeUpgrade(value, delta, model, change) {
+    if (!value) return delta;
+    const terms = new Roll(value).terms;
+    if ( (terms.length === 1) && (terms[0].fn === "max") ) return current.replace(/\)$/, `, ${delta})`);
+    return `max(${value}, ${delta})`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeDowngrade(value, delta, model, change) {
+    if (!value) return delta;
+    const terms = new Roll(value).terms;
+    if ( (terms.length === 1) && (terms[0].fn === "min") ) return current.replace(/\)$/, `, ${delta})`);
+    return `min(${value}, ${delta})`;
+  }
 }
 
