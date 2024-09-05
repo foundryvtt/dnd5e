@@ -214,7 +214,8 @@ export default class Award extends DialogMixin(FormApplication) {
     destinations = destinations.filter(d => ["character", "group"].includes(d.type));
     if ( !amount || !destinations.length ) return;
 
-    let originUpdate = origin ? (origin.system.details.xp.value ?? 0) : Infinity;
+    const xp = origin?.system.details.xp;
+    let originUpdate = origin ? (xp.value ?? xp.derived ?? 0) : Infinity;
     if ( each ) amount = amount * destinations.length;
     const perDestination = Math.floor(Math.min(amount, originUpdate) / destinations.length);
     originUpdate -= amount;
