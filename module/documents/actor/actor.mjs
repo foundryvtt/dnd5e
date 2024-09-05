@@ -226,7 +226,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   *allApplicableEffects() {
     for ( const effect of super.allApplicableEffects() ) {
-      if ( (effect.type !== "enchantment") && !effect.getFlag("dnd5e", "rider") ) yield effect;
+      if ( (effect.type !== "enchantment")
+        && !this.getFlag("dnd5e", "riders.effect")?.includes(effect.id) ) yield effect;
     }
   }
 

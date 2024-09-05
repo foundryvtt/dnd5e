@@ -477,7 +477,10 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
 
   // Migrate embedded effects
   if ( itemData.effects ) {
-    const effects = migrateEffects(itemData, migrationData);
+    if ( itemData.flags?.dnd5e?.riders?.effect ) {
+      itemUpdateData["flags.dnd5e.riders.effect"] = itemData.flags.dnd5e.riders.effect;
+    }
+    const effects = migrateEffects(itemData, migrationData, updateData);
     if ( effects.length > 0 ) updateData.effects = effects;
   }
 
@@ -503,22 +506,28 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
 
 /**
  * Migrate any active effects attached to the provided parent.
- * @param {object} parent           Data of the parent being migrated.
- * @param {object} [migrationData]  Additional data to perform the migration.
- * @returns {object[]}              Updates to apply on the embedded effects.
+ * @param {object} parent            Data of the parent being migrated.
+ * @param {object} [migrationData]   Additional data to perform the migration.
+ * @param {object} [itemUpdateData]  Update data for the item to apply changes back to item.
+ * @returns {object[]}               Updates to apply on the embedded effects.
  */
-export const migrateEffects = function(parent, migrationData) {
+export function migrateEffects(parent, migrationData, itemUpdateData) {
   if ( !parent.effects ) return [];
   return parent.effects.reduce((arr, e) => {
     const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
     let effectUpdate = migrateEffectData(effectData, migrationData, { parent });
+    if ( effectData.flags?.dnd5e?.rider ) {
+      itemUpdateData["flags.dnd5e.riders.effect"] ??= [];
+      itemUpdateData["flags.dnd5e.riders.effect"].push(effectData._id);
+      effectUpdate["flags.dnd5e.-=rider"] = null;
+    }
     if ( !foundry.utils.isEmpty(effectUpdate) ) {
       effectUpdate._id = effectData._id;
       arr.push(foundry.utils.expandObject(effectUpdate));
     }
     return arr;
   }, []);
-};
+}
 
 /* -------------------------------------------- */
 

@@ -85,8 +85,10 @@ export default class ActivityChoiceDialog extends Application5e {
         `<img src="systems/dnd5e/icons/svg/mouse-left.svg" alt="${game.i18n.localize("DND5E.Controls.LeftClick")}">`
       );
     }
-    const activities = this.#item.system.activities.map(this._prepareActivityContext.bind(this));
-    activities.sort((a, b) => a.sort - b.sort);
+    const activities = this.#item.system.activities
+      .filter(a => !this.#item.flags.dnd5e?.riders?.activity?.includes(a.id))
+      .map(this._prepareActivityContext.bind(this))
+      .sort((a, b) => a.sort - b.sort);
     return {
       ...await super._prepareContext(options),
       controlHint, activities

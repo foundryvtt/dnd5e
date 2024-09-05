@@ -410,7 +410,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
-   * Create additional effects that are applied separately from an enchantment.
+   * Create additional activities, effects, and items that are applied separately from an enchantment.
    * @param {object} options  Options passed to the effect creation.
    */
   async createRiderEnchantments(options={}) {
@@ -439,6 +439,20 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     if ( !profile || !item ) return;
 
+    // Create Activities
+    const riderActivities = {};
+    for ( const id of profile.riders.activity ) {
+      const activityData = item.system.activities.get(id)?.toObject();
+      if ( !activityData ) continue;
+      activityData._id = foundry.utils.randomID();
+      riderActivities[activityData._id] = activityData;
+    }
+    let createdActivities = [];
+    if ( !foundry.utils.isEmpty(riderActivities) ) {
+      await this.parent.update({ "system.activities": riderActivities });
+      createdActivities = Object.keys(riderActivities).map(id => this.parent.system.activities?.get(id));
+    }
+
     // Create Effects
     const riderEffects = profile.riders.effect.map(id => {
       const effectData = item.effects.get(id)?.toObject();
@@ -465,7 +479,9 @@ export default class ActiveEffect5e extends ActiveEffect {
       createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems.filter(i => i));
     }
 
-    if ( createdEffects.length || createdItems.length ) this.addDependent(...createdEffects, ...createdItems);
+    if ( createdActivities.length || createdEffects.length || createdItems.length ) {
+      this.addDependent(...createdActivities, ...createdEffects, ...createdItems);
+    }
   }
 
   /* -------------------------------------------- */

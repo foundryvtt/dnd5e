@@ -8,7 +8,7 @@ import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
-import { getSceneTargets, simplifyBonus } from "../utils.mjs";
+import { getSceneTargets } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -801,11 +801,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       );
       event = dialog?.event;
     }
-    if ( this.system.activities.size ) {
+    let activities = this.system.activities?.filter(a => !this.flags.dnd5e?.riders?.activity?.includes(a.id));
+    if ( activities.length ) {
       let usageConfig = config;
       let dialogConfig = dialog;
       let messageConfig = message;
-      const activities = this.system.activities.contents.sort((a, b) => a.sort - b.sort);
+      activities.sort((a, b) => a.sort - b.sort);
       let activity = activities[0];
       if ( (activities.length > 1) && !event?.shiftKey ) activity = await ActivityChoiceDialog.create(this);
       if ( !activity ) return;
@@ -871,7 +872,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       config: CONFIG.DND5E,
       tokenId: token?.uuid || null,
       item: this,
-      effects: this.effects.filter(e => (e.type !== "enchantment") && !e.getFlag("dnd5e", "rider")),
       data: await this.system.getCardData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
@@ -1426,6 +1426,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       options.formerContainer = (await this.container)?.uuid;
     }
 
+    if ( changed.system?.activities ) {
+      const changedData = foundry.utils.mergeObject(this.toObject(), changed, { performDeletions: true });
+      const riders = Object.values(changedData.system.activities).reduce((riders, a) => {
+        if ( a.type === "enchant" ) a.effects.forEach(e => {
+          e.riders.activity.forEach(activity => riders.activity.add(activity));
+          e.riders.effect.forEach(effect => riders.effect.add(effect));
+        });
+        return riders;
+      }, { activity: new Set(), effect: new Set() });
+      foundry.utils.setProperty(changed, "flags.dnd5e.riders", {
+        activity: Array.from(riders.activity), effect: Array.from(riders.effect)
+      });
+    }
+
     if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
 
     // Check to make sure the updated class level isn't below zero
@@ -1447,33 +1461,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));
       changed.system.levels -= newCharacterLevel - CONFIG.DND5E.maxLevel;
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
-    if ( userId !== game.user.id ) return;
-
-    // Flag ActiveEffects as riders if they are used as such in an Enchantment Activity.
-    const riders = new Set((this.system.activities?.getByType("enchant") ?? [])
-      .flatMap(activity => activity.effects)
-      .flatMap(e => Array.from(e.riders.effect)));
-
-    const updates = this.effects.reduce((arr, e) => {
-      if ( e.getFlag("dnd5e", "rider") && !riders.has(e.id) ) arr.push({ _id: e.id, "flags.dnd5e.-=rider": null });
-      return arr;
-    }, []);
-
-    updates.push(...riders.reduce((arr, id) => {
-      const effect = this.effects.get(id);
-      if ( !effect || effect.getFlag("dnd5e", "rider") ) return arr;
-      arr.push({ _id: id, "flags.dnd5e.rider": true });
-      return arr;
-    }, []));
-
-    if ( updates.length ) this.updateEmbeddedDocuments("ActiveEffect", updates);
   }
 
   /* -------------------------------------------- */
