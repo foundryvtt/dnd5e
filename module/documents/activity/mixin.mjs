@@ -143,10 +143,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * Message configuration for activity usage.
    *
    * @typedef {object} ActivityMessageConfiguration
-   * @property {boolean} [create=true]  Whether to automatically create a chat message (if true) or simply return
-   *                                    the prepared chat message data (if false).
-   * @property {object} [data={}]       Additional data used when creating the message.
-   * @property {string} [rollMode]      The roll display mode with which to display (or not) the card.
+   * @property {boolean} [create=true]     Whether to automatically create a chat message (if true) or simply return
+   *                                       the prepared chat message data (if false).
+   * @property {object} [data={}]          Additional data used when creating the message.
+   * @property {boolean} [hasConsumption]  Was consumption available during activation.
+   * @property {string} [rollMode]         The roll display mode with which to display (or not) the card.
    */
 
   /**
@@ -256,6 +257,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     // Create chat message
     messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
+    messageConfig.hasConsumption = usageConfig.consume !== true && !foundry.utils.isEmpty(usageConfig.consume);
     results.message = await activity._createUsageMessage(messageConfig);
 
     // Perform any final usage steps
@@ -316,8 +318,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const updates = await this._prepareUsageUpdates(usageConfig);
     if ( !updates ) return false;
 
-    foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.consumed", usageConfig.consume);
-
     /**
      * A hook event that fires after an item's resource consumption is calculated, but before any updates are performed.
      * @function dnd5e.activityConsumption
@@ -350,19 +350,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       if ( !foundry.utils.isEmpty(usage.itemUpdates) ) updates.item.push({ _id: this.item.id, ...usage.itemUpdates });
     }
 
-    // Merge activity changes into the item updates
-    if ( !foundry.utils.isEmpty(updates.activity) ) {
-      const itemIndex = updates.item.findIndex(i => i._id === this.item.id);
-      const keyPath = `system.activities.${this.id}`;
-      const activityUpdates = foundry.utils.expandObject(updates.activity);
-      if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
-      else updates.item[itemIndex][keyPath] = activityUpdates;
-    }
-
-    // Update documents with consumption
-    if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
-    if ( !foundry.utils.isEmpty(updates.delete) ) await this.actor.deleteEmbeddedDocuments("Item", updates.delete);
-    if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+    const consumed = await this.#applyUsageUpdates(updates);
+    if ( consumed ) foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.consumed", consumed);
 
     /**
      * A hook event that fires after an item's resource consumption is calculated and applied.
@@ -377,6 +366,78 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( Hooks.call("dnd5e.postActivityConsumption", this, usageConfig, messageConfig, updates) === false ) return;
 
     return updates;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Refund previously used consumption for an activity.
+   * @param {object} consumed  Data on the consumption that occurred.
+   */
+  async refund(consumed) {
+    const updates = { activity: {}, actor: {}, item: [] };
+    for ( const { keyPath, delta } of consumed.actor ?? [] ) {
+      const value = foundry.utils.getProperty(this.actor, keyPath) - delta;
+      if ( !Number.isNaN(value) ) updates.actor[keyPath] = value;
+    }
+    for ( const [id, changes] of Object.entries(consumed.item ?? {}) ) {
+      const item = this.actor.items.get(id);
+      if ( !item ) continue;
+      const itemUpdate = {};
+      for ( const { keyPath, delta } of changes ) {
+        const value = foundry.utils.getProperty(item, keyPath) - delta;
+        if ( !Number.isNaN(value) ) itemUpdate[keyPath] = value;
+      }
+      if ( !foundry.utils.isEmpty(itemUpdate) ) {
+        itemUpdate._id = id;
+        updates.item.push(itemUpdate);
+      }
+    }
+    await this.#applyUsageUpdates(updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Merge activity updates into the appropriate item updates and apply.
+   * @param {ActivityUsageUpdates} updates
+   * @returns {object}  Information on consumption performed to store in message flag.
+   */
+  async #applyUsageUpdates(updates) {
+    // Merge activity changes into the item updates
+    if ( !foundry.utils.isEmpty(updates.activity) ) {
+      const itemIndex = updates.item.findIndex(i => i._id === this.item.id);
+      const keyPath = `system.activities.${this.id}`;
+      const activityUpdates = foundry.utils.expandObject(updates.activity);
+      if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
+      else updates.item[itemIndex][keyPath] = activityUpdates;
+    }
+
+    // Create the consumed flag
+    const getDeltas = (document, updates) => {
+      updates = foundry.utils.flattenObject(updates);
+      return Object.entries(updates).map(([keyPath, value]) => {
+        const delta = value - foundry.utils.getProperty(document, keyPath);
+        if ( delta && !Number.isNaN(delta) ) return { keyPath, delta };
+        return null;
+      }).filter(_ => _);
+    };
+    const consumed = {
+      actor: getDeltas(this.actor, updates.actor),
+      item: updates.item.reduce((obj, { _id, ...changes }) => {
+        obj[_id] = getDeltas(this.actor.items.get(_id), changes);
+        return obj;
+      }, {})
+    };
+    if ( foundry.utils.isEmpty(consumed.actor) ) delete consumed.actor;
+    if ( foundry.utils.isEmpty(consumed.item) ) delete consumed.item;
+
+    // Update documents with consumption
+    if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
+    if ( !foundry.utils.isEmpty(updates.delete) ) await this.actor.deleteEmbeddedDocuments("Item", updates.delete);
+    if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+
+    return consumed;
   }
 
   /* -------------------------------------------- */
@@ -555,7 +616,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /**
    * Calculate changes to actor, items, & this activity based on resource consumption.
    * @param {ActivityUseConfiguration} config  Usage configuration.
-   * @returns {ActivityUsageUpdates|false}     Updates to perform, or `false` if a consumption error occured.
+   * @returns {ActivityUsageUpdates|false}     Updates to perform, or `false` if a consumption error occurred.
    * @protected
    */
   async _prepareUsageUpdates(config) {
@@ -565,7 +626,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     // Handle consumption targets
     if ( (config.consume === true) || config.consume.resources ) {
-      const indexes = config.consume.resources === true ? this.consumption.targets.keys() : config.consume.resources;
+      const indexes = (config.consume === true) || (config.consume.resources === true)
+        ? this.consumption.targets.keys() : config.consume.resources;
       for ( const index of indexes ) {
         const target = this.consumption.targets[index];
         try {
@@ -585,7 +647,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       const slotData = this.actor.system.spells?.[slot];
       if ( slotData ) {
         if ( slotData.value ) {
-          foundry.utils.mergeObject(updates.actor, { [`system.spells.${slot}.value`]: Math.max(slotData.value - 1, 0) });
+          const newValue = Math.max(slotData.value - 1, 0);
+          foundry.utils.mergeObject(updates.actor, { [`system.spells.${slot}.value`]: newValue });
         } else {
           const err = new ConsumptionError(game.i18n.format("DND5E.SpellCastNoSlots", {
             name: this.item.name, level: slotData.label
@@ -637,10 +700,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
   /**
    * Prepare the context used to render the usage chat card.
+   * @param {ActivityMessageConfiguration} message  Configuration info for the created message.
    * @returns {object}
    * @protected
    */
-  async _usageChatContext() {
+  async _usageChatContext(message) {
     const data = await this.item.system.getCardData();
     const properties = [...(data.tags ?? []), ...(data.properties ?? [])];
     const supplements = [];
@@ -650,7 +714,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( data.materials?.value ) {
       supplements.push(`<strong>${game.i18n.localize("DND5E.Materials")}</strong> ${data.materials.value}`);
     }
-    const buttons = this._usageChatButtons();
+    const buttons = this._usageChatButtons(message);
     return {
       activity: this,
       actor: this.item.actor,
@@ -676,10 +740,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
   /**
    * Create the buttons that will be displayed in chat.
+   * @param {ActivityMessageConfiguration} message  Configuration info for the created message.
    * @returns {ActivityUsageChatButton[]}
    * @protected
    */
-  _usageChatButtons() {
+  _usageChatButtons(message) {
     const buttons = [];
 
     if ( this.target?.template?.type ) buttons.push({
@@ -690,11 +755,17 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       }
     });
 
-    if ( this.consumption.targets.length ) buttons.push({
+    if ( message.hasConsumption ) buttons.push({
       label: game.i18n.localize("DND5E.CONSUMPTION.Action.ConsumeResource"),
       icon: '<i class="fa-solid fa-cubes-stacked" inert></i>',
       dataset: {
         action: "consumeResource"
+      }
+    }, {
+      label: game.i18n.localize("DND5E.CONSUMPTION.Action.RefundResource"),
+      icon: '<i class="fa-solid fa-clock-rotate-left"></i>',
+      dataset: {
+        action: "refundResource"
       }
     });
 
@@ -712,7 +783,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   shouldHideChatButton(button, message) {
     const flag = message.getFlag("dnd5e", "use.consumed");
     switch ( button.dataset.action ) {
-      case "consumeResource": return (flag?.resources === true) || flag?.resources?.length;
+      case "consumeResource": return !!flag;
+      case "refundResource": return !flag;
       case "placeTemplate": return !game.user.can("TEMPLATE_CREATE") || !game.canvas.scene;
     }
     return false;
@@ -727,7 +799,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @protected
    */
   async _createUsageMessage(message) {
-    const context = await this._usageChatContext();
+    const context = await this._usageChatContext(message);
     const messageConfig = foundry.utils.mergeObject({
       rollMode: game.settings.get("core", "rollMode"),
       data: {
@@ -934,6 +1006,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     try {
       if ( handler ) await handler.call(activity, event, target, message);
       else if ( action === "consumeResource" ) await this.#consumeResource(event, target, message);
+      else if ( action === "refundResource" ) await this.#refundResource(event, target, message);
       else if ( action === "placeTemplate" ) await this.#placeTemplate();
       else await activity._onChatAction(event, target, message);
     } catch(err) {
@@ -965,8 +1038,25 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   async #consumeResource(event, target, message) {
     const messageConfig = {};
-    await this.consume({ consume: { resources: true }, event }, messageConfig);
+    await this.consume({ consume: true, event }, messageConfig);
     if ( !foundry.utils.isEmpty(messageConfig.data) ) await message.update(messageConfig.data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle refunding consumption from a chat card.
+   * @param {PointerEvent} event     Triggering click event.
+   * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
+   * @param {ChatMessage5e} message  Message associated with the activation.
+   */
+  async #refundResource(event, target, message) {
+    const consumed = message.getFlag("dnd5e", "use.consumed");
+    const messageConfig = {};
+    if ( !foundry.utils.isEmpty(consumed) ) {
+      await this.refund(consumed, messageConfig);
+      await message.unsetFlag("dnd5e", "use.consumed");
+    }
   }
 
   /* -------------------------------------------- */

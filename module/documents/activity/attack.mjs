@@ -37,7 +37,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
   /* -------------------------------------------- */
 
   /** @override */
-  _usageChatButtons() {
+  _usageChatButtons(message) {
     const buttons = [{
       label: game.i18n.localize("DND5E.Attack"),
       icon: '<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg" inert></i>',
@@ -52,7 +52,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         action: "rollDamage"
       }
     });
-    return buttons.concat(super._usageChatButtons());
+    return buttons.concat(super._usageChatButtons(message));
   }
 
   /* -------------------------------------------- */
