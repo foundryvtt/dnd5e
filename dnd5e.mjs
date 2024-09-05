@@ -537,6 +537,15 @@ Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJ
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
+// TODO: Generalize this logic and make it available in the re-designed transform application.
+Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
+  const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+  if ( (options.preset !== "wildshape") || !subject.classes?.druid || isLegacy ) return;
+  let temp = subject.classes.druid.system.levels;
+  if ( subject.classes.druid.subclass?.identifier === "moon" ) temp *= 3;
+  d.system.attributes.hp.temp = temp;
+});
+
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */
 /* -------------------------------------------- */
