@@ -56,6 +56,11 @@ export default class SourceConfig extends DocumentSheet5e {
       { value: "2024", label: game.i18n.localize("SETTINGS.DND5E.RULESVERSION.Modern") },
       { value: "2014", label: game.i18n.localize("SETTINGS.DND5E.RULESVERSION.Legacy") }
     ];
+    if ( this.document.system.hasOwnProperty("identifier") ) context.identifier = {
+      field: this.document.system.schema.getField("identifier"),
+      placeholder: this.document.identifier,
+      value: this.document.toObject().system.identifier
+    };
     return context;
   }
 }

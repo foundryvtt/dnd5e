@@ -10,9 +10,8 @@ const { ArrayField } = foundry.data.fields;
  * Data definition for Subclass items.
  * @mixes ItemDescriptionTemplate
  *
- * @property {string} identifier       Identifier slug for this subclass.
- * @property {string} classIdentifier  Identifier slug for the class with which this subclass should be associated.
  * @property {object[]} advancement    Advancement objects for this subclass.
+ * @property {string} classIdentifier  Identifier slug for the class with which this subclass should be associated.
  * @property {SpellcastingField} spellcasting  Details on subclass's spellcasting ability.
  */
 export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
@@ -29,11 +28,10 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
+      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       classIdentifier: new IdentifierField({
         required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
       }),
-      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       spellcasting: new SpellcastingField()
     });
   }

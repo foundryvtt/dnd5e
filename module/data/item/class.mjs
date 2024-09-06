@@ -1,7 +1,6 @@
 import TraitAdvancement from "../../documents/advancement/trait.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
-import IdentifierField from "../fields/identifier-field.mjs";
 import SpellcastingField from "./fields/spellcasting-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
@@ -13,7 +12,6 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @mixes ItemDescriptionTemplate
  * @mixes StartingEquipmentTemplate
  *
- * @property {string} identifier                Identifier slug for this class.
  * @property {number} levels                    Current number of levels in this class.
  * @property {object} primaryAbility
  * @property {Set<string>} primaryAbility.value List of primary abilities used by this class.
@@ -38,7 +36,6 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
       levels: new NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 1 }),
       primaryAbility: new SchemaField({
         value: new SetField(new StringField()),

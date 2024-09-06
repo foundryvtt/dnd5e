@@ -13,7 +13,11 @@
     {{ formField fields.page value=source.page }}
     {{ formField fields.custom value=source.custom }}
     {{ formField fields.license value=source.license }}
+    <hr class="ampersand">
     {{ formField fields.rules value=source.rules options=rulesVersions }}
+    {{#if identifier}}
+    {{ formField identifier.field value=identifier.value placeholder=identifier.placeholder localize=true }}
+    {{/if}}
     {{ formField fields.revision value=source.revision }}
     {{#if hasSourceId}}
     <div class="form-group">
