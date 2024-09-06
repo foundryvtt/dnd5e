@@ -686,55 +686,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       "The `getAttackToHit` method on `Item5e` has moved to `getAttackData` on `AttackActivity`.",
       { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
     );
-    // TODO: Replace this implementation with a call to the method on the activity once `rollAttack` has been moved
 
-    if ( !this.hasAttack ) return null;
-    const flat = this.system.attack.flat;
-    const rollData = this.getRollData();
-    const parts = [];
-    let ammo;
-
-    if ( this.isOwned && !flat ) {
-      // Ability score modifier
-      if ( this.system.ability !== "none" ) parts.push("@mod");
-
-      // Add proficiency bonus.
-      if ( this.system.prof?.hasProficiency ) {
-        parts.push("@prof");
-        rollData.prof = this.system.prof.term;
-      }
-
-      // Actor-level global bonus to attack rolls
-      const actorBonus = this.actor.system.bonuses?.[this.system.actionType] || {};
-      if ( actorBonus.attack ) parts.push(actorBonus.attack);
-
-      ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
-    }
-
-    // Include the item's innate & magical attack bonuses
-    if ( this.system.attack.bonus ) parts.push(this.system.attack.bonus);
-    if ( this.system.magicalBonus && this.system.magicAvailable && !flat ) parts.push(this.system.magicalBonus);
-
-    // One-time bonus provided by consumed ammunition
-    if ( ammo && !flat ) {
-      const ammoItemQuantity = ammo.system.quantity;
-      const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
-      const ammoParts = [
-        Roll.replaceFormulaData(ammo.system.attack.bonus, rollData),
-        ammo.system.magicAvailable ? ammo.system.magicalBonus : null
-      ].filter(b => b);
-      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.type.value === "ammo");
-      if ( ammoCanBeConsumed && ammoParts.length && ammoIsTypeConsumable ) {
-        parts.push("@ammo");
-        rollData.ammo = ammoParts.join(" + ");
-      }
-    }
-
-    // Condense the resulting attack bonus formula into a simplified label
-    const roll = new Roll(parts.join("+"), rollData);
-    const formula = simplifyRollFormula(roll.formula) || "0";
-    this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }) || "0";
-    this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
+    const activity = this.system.activities?.getByType("attack")[0];
+    if ( !activity ) return null;
+    const { data: rollData, parts } = activity.getAttackData();
     return { rollData, parts };
   }
 

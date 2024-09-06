@@ -219,8 +219,6 @@ export default class AttackActivityData extends BaseActivityData {
       const actorBonus = this.actor.system.bonuses?.[this.actionType];
       if ( actorBonus?.attack ) parts.push(actorBonus.attack);
 
-      // TODO: Ammunition
-
       // Add exhaustion reduction
       this.actor.addRollExhaustion(parts, data);
     }
@@ -228,8 +226,6 @@ export default class AttackActivityData extends BaseActivityData {
     // Include the activity's attack bonus & item's magical bonus
     if ( this.attack.bonus ) parts.push(this.attack.bonus);
     if ( item.magicalBonus && item.magicAvailable && !this.attack.flat ) parts.push(item.magicalBonus);
-
-    // TODO: One-time ammunition bonus
 
     return { data, parts };
   }
