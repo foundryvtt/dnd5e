@@ -953,25 +953,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Extract salient information about targeted Actors.
-   * @returns {TargetDescriptor5e[]}
-   * @protected
-   */
-  static _formatAttackTargets() {
-    // TODO: Remove this when `rollDamage` has been moved to activities
-    const targets = new Map();
-    for ( const token of game.user.targets ) {
-      const { name } = token;
-      const { img, system, uuid } = token.actor ?? {};
-      const ac = system?.attributes?.ac ?? {};
-      if ( uuid && Number.isNumeric(ac.value) ) targets.set(uuid, { name, img, uuid, ac: ac.value });
-    }
-    return Array.from(targets.values());
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the damageRoll logic for the core implementation.
    * @param {object} [config]

@@ -1,8 +1,7 @@
-import { formatNumber, getSceneTargets, simplifyBonus } from "./utils.mjs";
+import { formatNumber, getSceneTargets, getTargetDescriptors, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
-import Item5e from "./documents/item.mjs";
 import { rollItem } from "./documents/macro.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "");
@@ -880,8 +879,9 @@ async function rollDamage(event) {
     title,
     messageData: {
       "flags.dnd5e": {
-        targets: Item5e._formatAttackTargets(),
-        roll: {type: "damage"}
+        messageType: "roll",
+        roll: { type: "damage" },
+        targets: getTargetDescriptors()
       },
       speaker: ChatMessage.implementation.getSpeaker()
     }

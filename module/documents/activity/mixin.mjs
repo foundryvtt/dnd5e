@@ -3,6 +3,7 @@ import ActivityUsageDialog from "../../applications/activity/activity-usage-dial
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { damageRoll } from "../../dice/dice.mjs";
+import { getTargetDescriptors } from "../../utils.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -89,7 +90,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     return {
       activity: { type: this.type, id: this.id, uuid: this.uuid },
       item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid },
-      targets: this.constructor.getTargetDescriptors()
+      targets: getTargetDescriptors()
     };
   }
 
@@ -1008,31 +1009,5 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     rollData.activity = { ...this };
     rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
     return rollData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Important information on a targeted token.
-   *
-   * @typedef {object} TargetDescriptor5e
-   * @property {string} uuid  The UUID of the target.
-   * @property {string} img   The target's image.
-   * @property {string} name  The target's name.
-   * @property {number} ac    The target's armor class, if applicable.
-   */
-
-  /**
-   * Grab the targeted tokens and return relevant information on them.
-   * @returns {TargetDescriptor[]}
-   */
-  static getTargetDescriptors() {
-    const targets = new Map();
-    for ( const token of game.user.targets ) {
-      const { name } = token;
-      const { img, system, uuid } = token.actor ?? {};
-      if ( uuid ) targets.set(uuid, { name, img, uuid, ac: system?.attributes?.ac?.value });
-    }
-    return Array.from(targets.values());
   }
 };

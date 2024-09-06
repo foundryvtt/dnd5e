@@ -1,6 +1,7 @@
 import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackActivityData from "../../data/activity/attack-data.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
+import { getTargetDescriptors } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -81,7 +82,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
    */
   async rollAttack(config={}, dialog={}, message={}) {
     const { parts, data } = this.getAttackData();
-    const targets = this.constructor.getTargetDescriptors();
+    const targets = getTargetDescriptors();
 
     let ammunitionOptions;
     const selectedAmmunition = config.ammunition ?? this.item.getFlag("dnd5e", `last.${this.id}.ammunition`);
