@@ -316,6 +316,12 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
       { inplace: false }
     );
     filters.documentClass ??= "Item";
+    if ( filters.additional?.source ) {
+      filters.additional.source = Object.entries(filters.additional.source).reduce((obj, [k, v]) => {
+        obj[k.slugify({ strict: true })] = v;
+        return obj;
+      }, {});
+    }
     return filters;
   }
 
@@ -441,7 +447,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
         choices: foundry.utils.mergeObject(
           this.#sources ?? {},
           Object.fromEntries(Object.keys(this.options.filters?.locked?.additional?.source ?? {}).map(k => {
-            return [k, CONFIG.DND5E.sourceBooks[k] ?? k];
+            return [k.slugify({ strict: true }), CONFIG.DND5E.sourceBooks[k] ?? k];
           })), { inplace: false }
         )
       }
@@ -679,19 +685,28 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
    * @protected
    */
   async _renderSourceFilters() {
-    const sources = this.#sources = {};
+    const sources = [];
     for ( const result of this.#results ) {
       const source = foundry.utils.getProperty(result, "system.source");
-      if ( source ) sources[source.slug] = CONFIG.DND5E.sourceBooks[source.value] ?? source.value;
+      if ( !source ) continue;
+      const { slug, value } = source;
+      sources.push({ slug, value: CONFIG.DND5E.sourceBooks[value] ?? value });
     }
+    sources.sort((a, b) => a.value.localeCompare(b.value, game.i18n.lang));
+    this.#sources = Object.fromEntries(sources.map(({ slug, value }) => [slug, value]));
     const filters = this.element.querySelector('[data-application-part="filters"]');
     filters.querySelector('[data-filter-id="source"]')?.remove();
-    if ( foundry.utils.isEmpty(sources) ) return;
+    if ( !sources.length ) return;
+    const locked = Object.entries(this.options.filters?.locked?.additional?.source ?? {}).reduce((obj, [k, v]) => {
+      obj[k.slugify({ strict: true })] = v;
+      return obj;
+    }, {});
     const filter = await renderTemplate("systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs", {
+      locked,
+      value: locked,
       key: "source",
       label: "DND5E.SOURCE.FIELDS.source.label",
-      locked: this.options.filters?.locked?.additional?.source,
-      config: { choices: sources }
+      config: { choices: this.#sources }
     });
     filters.insertAdjacentHTML("beforeend", filter);
   }
@@ -1072,7 +1087,6 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
         // Derive source values
         .map(i => {
-          if ( !index ) return i;
           const source = foundry.utils.getProperty(i, "system.source");
           if ( source && i.uuid ) SourceField.prepareData.call(source, i.uuid);
           return i;

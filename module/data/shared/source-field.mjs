@@ -49,7 +49,7 @@ export default class SourceField extends SchemaField {
       this.label = game.i18n.format("DND5E.SOURCE.Display.Full", { book: this.book, page }).trim();
     }
 
-    this.value = this.custom ? this.custom : this.book ? this.book : (pkg?.title ?? "");
+    this.value = this.book || (pkg?.title ?? "");
     this.slug = this.value.slugify({ strict: true });
 
     Object.defineProperty(this, "directlyEditable", {
