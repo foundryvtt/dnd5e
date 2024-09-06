@@ -2990,6 +2990,11 @@ DND5E.conditionTypes = {
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ",
     special: "BLIND"
   },
+  burning: {
+    label: "EFFECT.DND5E.StatusBurning",
+    icon: "systems/dnd5e/icons/svg/statuses/burning.svg",
+    pseudo: true
+  },
   charmed: {
     label: "DND5E.ConCharmed",
     icon: "systems/dnd5e/icons/svg/statuses/charmed.svg",
