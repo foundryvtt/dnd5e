@@ -7,8 +7,6 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
-import { getSceneTargets } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -1099,42 +1097,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       const popout = header.closest(".chat-popout");
       if ( popout ) popout.style.height = "";
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the Actor which is the author of a chat card
-   * @param {HTMLElement} card    The chat card being used
-   * @returns {Actor|null}        The Actor document or null
-   * @private
-   */
-  static async _getChatCardActor(card) {
-
-    // Case 1 - a synthetic actor from a Token
-    if ( card.dataset.tokenId ) {
-      const token = await fromUuid(card.dataset.tokenId);
-      if ( !token ) return null;
-      return token.actor;
-    }
-
-    // Case 2 - use Actor ID directory
-    const actorId = card.dataset.actorId;
-    return game.actors.get(actorId) || null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get token targets for the current chat card action and display warning of none are selected.
-   * @param {HTMLElement} card  The chat card being used.
-   * @returns {Token5e[]}       An Array of Token objects, if any.
-   * @private
-   */
-  static _getChatCardTargets(card) {
-    const targets = getSceneTargets();
-    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", {localize: true});
-    return targets;
   }
 
   /* -------------------------------------------- */
