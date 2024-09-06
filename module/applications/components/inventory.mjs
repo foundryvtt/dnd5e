@@ -397,7 +397,7 @@ export default class InventoryElement extends HTMLElement {
 
     switch ( action ) {
       case "activity-recharge":
-        return activity?.uses?.rollRecharge();
+        return activity?.uses?.rollRecharge({ event });
       case "activity-use":
         return activity?.use({ event });
       case "attune":
@@ -425,7 +425,7 @@ export default class InventoryElement extends HTMLElement {
       case "prepare":
         return item.update({"system.preparation.prepared": !item.system.preparation?.prepared});
       case "recharge":
-        return item.rollRecharge();
+        return item.system.uses?.rollRecharge({ event });
       case "toggleCharge":
         return item.update({ "system.uses.spent": 1 - item.system.uses.spent });
       case "unfavorite":

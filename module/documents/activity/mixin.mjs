@@ -793,7 +793,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   async rollDamage(config={}, dialog={}, message={}) {
     const rollConfig = this.getDamageConfig(config);
-    rollConfig.origin = this;
+    rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
       configure: true,
@@ -882,11 +882,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
      * A hook event that fires after damage has been rolled.
      * @function dnd5e.rollDamageV2
      * @memberof hookEvents
-     * @param {DamageRoll[]} rolls        The resulting rolls.
+     * @param {DamageRoll[]} rolls       The resulting rolls.
      * @param {object} [data]
-     * @param {Activity} [data.activity]  The activity that performed the roll.
+     * @param {Activity} [data.subject]  The activity that performed the roll.
      */
-    Hooks.callAll("dnd5e.rollDamageV2", rolls, { activity: this });
+    Hooks.callAll("dnd5e.rollDamageV2", rolls, { subject: this });
 
     if ( "dnd5e.rollDamage" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(

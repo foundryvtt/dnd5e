@@ -979,7 +979,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollAttack({ spellLevel, ...options }={}) {
     foundry.utils.logCompatibilityWarning(
-      "The Item5e#rollAttack method has been deprecated and should now be called directly on the attack activity.",
+      "The `Item5e#rollAttack` method has been deprecated and should now be called directly on the attack activity.",
       { since: "DnD5e 4.0", until: "DnD5e 4.4" }
     );
 
@@ -1031,7 +1031,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollDamage({ spellLevel, ...options }={}) {
     foundry.utils.logCompatibilityWarning(
-      "The Item5e#rollDamage method has been deprecated and should now be called directly on an activity.",
+      "The `Item5e#rollDamage` method has been deprecated and should now be called directly on an activity.",
       { since: "DnD5e 4.0", until: "DnD5e 4.4" }
     );
 
@@ -1061,7 +1061,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollFormula({spellLevel}={}) {
     foundry.utils.logCompatibilityWarning(
-      "The Item5e#rollFormula method has been deprecated and should now be called directly on the utility activity.",
+      "The `Item5e#rollFormula` method has been deprecated and should now be called directly on the utility activity.",
       { since: "DnD5e 4.0", until: "DnD5e 4.4" }
     );
 
@@ -1084,7 +1084,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Roll|void>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge() {
-    return this.system.uses?.rollRecharge();
+    foundry.utils.logCompatibilityWarning(
+      "The `rollRecharge` method on `Item5e` has been moved to `system.uses.rollRecharge`.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
+    return (await this.system.uses?.rollRecharge())?.[0];
   }
 
   /* -------------------------------------------- */

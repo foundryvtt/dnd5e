@@ -106,7 +106,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.ability),
       halflingLucky: this.actor?.getFlag("dnd5e", "halflingLucky")
     }, config);
-    rollConfig.origin = this;
+    rollConfig.subject = this;
     rollConfig.rolls = [{
       parts, data,
       options: {
@@ -220,10 +220,10 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
      * @memberof hookEvents
      * @param {D20Roll[]} rolls                        The resulting rolls.
      * @param {object} data
-     * @param {AttackActivity} data.activity           The activity that performed the attack.
+     * @param {AttackActivity} data.subject            The Activity that performed the attack.
      * @param {AmmunitionUpdate|null} data.ammoUpdate  Any updates related to ammo consumption for this attack.
      */
-    Hooks.callAll("dnd5e.rollAttackV2", [roll], { activity: this, ammoUpdate });
+    Hooks.callAll("dnd5e.rollAttackV2", [roll], { subject: this, ammoUpdate });
 
     if ( "dnd5e.rollAttack" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -255,11 +255,11 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
      * A hook event that fires after an attack has been rolled and ammunition has been consumed.
      * @function dnd5e.postRollAttack
      * @memberof hookEvents
-     * @param {D20Roll[]} rolls               The resulting rolls.
+     * @param {D20Roll[]} rolls              The resulting rolls.
      * @param {object} data
-     * @param {AttackActivity} data.activity  The activity that performed the attack.
+     * @param {AttackActivity} data.subject  The activity that performed the attack.
      */
-    Hooks.callAll("dnd5e.postRollAttack", [roll], { activity: this });
+    Hooks.callAll("dnd5e.postRollAttack", [roll], { subject: this });
 
     return [roll];
   }
