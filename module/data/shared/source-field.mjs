@@ -38,7 +38,8 @@ export default class SourceField extends SchemaField {
    * @param {string} uuid  Compendium source or document UUID.
    */
   static prepareData(uuid) {
-    this.bookPlaceholder = SourceField.getModuleBook(uuid) ?? "";
+    const pkg = SourceField.getPackage(uuid);
+    this.bookPlaceholder = SourceField.getModuleBook(pkg) ?? "";
     if ( !this.book ) this.book = this.bookPlaceholder;
 
     if ( this.custom ) this.label = this.custom;
@@ -47,6 +48,9 @@ export default class SourceField extends SchemaField {
         ? game.i18n.format("DND5E.SOURCE.Display.Page", { page: this.page }) : (this.page ?? "");
       this.label = game.i18n.format("DND5E.SOURCE.Display.Full", { book: this.book, page }).trim();
     }
+
+    this.value = this.book || (pkg?.title ?? "");
+    this.slug = this.value.slugify({ strict: true });
 
     Object.defineProperty(this, "directlyEditable", {
       value: (this.custom ?? "") === this.label,
@@ -57,24 +61,34 @@ export default class SourceField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
-   * Based on the provided UUID, find the associated system/module and check it if has any source books registered
-   * in its manifest. If it has only one, then return that book's key.
-   * @param {string} uuid  Compendium source or document UUID.
+   * Check if the provided package has any source books registered in its manifest. If it has only one, then return
+   * that book's key.
+   * @param {ClientPackage} pkg  The package.
    * @returns {string|null}
    */
-  static getModuleBook(uuid) {
-    let manifest;
-    const pack = foundry.utils.parseUuid(uuid)?.collection?.metadata;
-    switch ( pack?.packageType ) {
-      case "module": manifest = game.modules.get(pack.packageName); break;
-      case "system": manifest = game.system; break;
-      case "world": manifest = game.world; break;
-    }
-    if ( !manifest ) return null;
-    const sourceBooks = manifest.flags?.dnd5e?.sourceBooks;
+  static getModuleBook(pkg) {
+    if ( !pkg ) return null;
+    const sourceBooks = pkg.flags?.dnd5e?.sourceBooks;
     const keys = Object.keys(sourceBooks ?? {});
     if ( keys.length !== 1 ) return null;
     return keys[0];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the package associated with the given UUID, if any.
+   * @param {string} uuid  The UUID.
+   * @returns {ClientPackage|null}
+   */
+  static getPackage(uuid) {
+    const pack = foundry.utils.parseUuid(uuid)?.collection?.metadata;
+    switch ( pack?.packageType ) {
+      case "module": return game.modules.get(pack.packageName);
+      case "system": return game.system;
+      case "world": return game.world;
+    }
+    return null;
   }
 
   /* -------------------------------------------- */

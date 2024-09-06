@@ -159,6 +159,8 @@
     .filter {
       > label { line-height: 1; }
 
+      &.filter-set:has(> .collapsible-content > .wrapper:empty) { display: none; }
+
       &.filter-set .filter-choice, &.filter-boolean > label { cursor: pointer; }
 
       &.filter-set .wrapper {
@@ -222,7 +224,7 @@
       z-index: 1;
     }
 
-    .items-section .item .item-controls {
+    .items-section .item-controls {
       width: 50px;
       align-items: center;
       padding: 0;

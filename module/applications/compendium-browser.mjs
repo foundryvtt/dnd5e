@@ -1,4 +1,5 @@
 import * as Filter from "../filter.mjs";
+import SourceField from "../data/shared/source-field.mjs";
 
 /**
  * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
@@ -132,7 +133,8 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     filters: {
       id: "sidebar-filters",
       classes: ["sidebar-part"],
-      template: "systems/dnd5e/templates/compendium/browser-sidebar-filters.hbs"
+      template: "systems/dnd5e/templates/compendium/browser-sidebar-filters.hbs",
+      templates: ["systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs"]
     },
     results: {
       id: "results",
@@ -314,6 +316,12 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
       { inplace: false }
     );
     filters.documentClass ??= "Item";
+    if ( filters.additional?.source ) {
+      filters.additional.source = Object.entries(filters.additional.source).reduce((obj, [k, v]) => {
+        obj[k.slugify({ strict: true })] = v;
+        return obj;
+      }, {});
+    }
     return filters;
   }
 
@@ -372,6 +380,14 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
   /* -------------------------------------------- */
 
   /**
+   * The cached set of available sources to filter on.
+   * @type {Record<string, string>}
+   */
+  #sources;
+
+  /* -------------------------------------------- */
+
+  /**
    * The mode the browser is currently in.
    * @type {CompendiumBrowser.MODES}
    */
@@ -423,7 +439,19 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
         if ( !first ) return second;
         return CompendiumBrowser.intersectFilters(first, second);
       }, null) ?? new Map();
-
+    context.filterDefinitions.set("source", {
+      label: "DND5E.SOURCE.FIELDS.source.label",
+      type: "set",
+      config: {
+        keyPath: "system.source.slug",
+        choices: foundry.utils.mergeObject(
+          this.#sources ?? {},
+          Object.fromEntries(Object.keys(this.options.filters?.locked?.additional?.source ?? {}).map(k => {
+            return [k.slugify({ strict: true }), CONFIG.DND5E.sourceBooks[k] ?? k];
+          })), { inplace: false }
+        )
+      }
+    });
     return context;
   }
 
@@ -563,7 +591,8 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     if ( this.#filters.name?.length ) filters.push({ k: "name", o: "icontains", v: this.#filters.name });
     this.#results = CompendiumBrowser.fetch(CONFIG[context.filters.documentClass].documentClass, {
       filters,
-      types: context.filters.types
+      types: context.filters.types,
+      indexFields: new Set(["system.source"])
     });
     context.displaySelection = this.displaySelection;
     return context;
@@ -604,11 +633,12 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
    * @protected
    */
   async _renderResult(entry, documentClass) {
-    const { img, name, type, uuid } = entry;
+    const { img, name, type, uuid, system } = entry;
     // TODO: Provide more useful subtitles.
     const subtitle = CONFIG[documentClass].typeLabels[type] ?? "";
+    const source = system?.source?.value ?? "";
     const context = {
-      entry: { img, name, subtitle, uuid },
+      entry: { img, name, subtitle, uuid, source },
       displaySelection: this.displaySelection,
       selected: this.#selected.has(uuid)
     };
@@ -649,6 +679,39 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Show a list of applicable source filters for the available results.
+   * @protected
+   */
+  async _renderSourceFilters() {
+    const sources = [];
+    for ( const result of this.#results ) {
+      const source = foundry.utils.getProperty(result, "system.source");
+      if ( !source ) continue;
+      const { slug, value } = source;
+      sources.push({ slug, value: CONFIG.DND5E.sourceBooks[value] ?? value });
+    }
+    sources.sort((a, b) => a.value.localeCompare(b.value, game.i18n.lang));
+    this.#sources = Object.fromEntries(sources.map(({ slug, value }) => [slug, value]));
+    const filters = this.element.querySelector('[data-application-part="filters"]');
+    filters.querySelector('[data-filter-id="source"]')?.remove();
+    if ( !sources.length ) return;
+    const locked = Object.entries(this.options.filters?.locked?.additional?.source ?? {}).reduce((obj, [k, v]) => {
+      obj[k.slugify({ strict: true })] = v;
+      return obj;
+    }, {});
+    const filter = await renderTemplate("systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs", {
+      locked,
+      value: locked,
+      key: "source",
+      label: "DND5E.SOURCE.FIELDS.source.label",
+      config: { choices: this.#sources }
+    });
+    filters.insertAdjacentHTML("beforeend", filter);
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
@@ -659,7 +722,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     let { types } = target.dataset;
     types = types ? types.split(",") : [];
     this._applyTabFilters(tab);
-    this.render({ parts: ["results", "filters", "types"], dnd5e: { browser: { types } } });
+    this.render({ parts: ["results", "filters", "types"], dnd5e: { browser: { types } }, changedTab: true });
   }
 
   /* -------------------------------------------- */
@@ -683,7 +746,9 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
   /** @inheritDoc */
   _attachPartListeners(partId, htmlElement, options) {
     super._attachPartListeners(partId, htmlElement, options);
-    if ( partId === "results" ) this._renderResults();
+    if ( partId === "results" ) this._renderResults().then(() => {
+      if ( options.isFirstRender || options.changedTab ) this._renderSourceFilters();
+    });
     else if ( partId === "types" ) this.#adjustCheckboxStates(htmlElement);
   }
 
@@ -969,7 +1034,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     const types = target.checked ? [] : (activeTab?.types ?? ["class"]);
     this._applyModeFilters(this._mode);
     this._applyTabFilters(activeTab?.tab);
-    this.render({ parts: ["results", "filters", "types", "tabs"], dnd5e: { browser: { types } } });
+    this.render({ parts: ["results", "filters", "types", "tabs"], dnd5e: { browser: { types } }, changedTab: true });
   }
 
   /* -------------------------------------------- */
@@ -997,6 +1062,9 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     // If filters are provided, merge their keys with any other fields needing to be indexed
     if ( filters.length ) indexFields = indexFields.union(Filter.uniqueKeys(filters));
 
+    // Do not attempt to index derived fields as this will throw an error server-side.
+    indexFields.delete("system.source.slug");
+
     // Iterate over all packs
     let documents = game.packs
 
@@ -1016,6 +1084,13 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
         // Apply module art to the new index
         .then(index => game.dnd5e.moduleArt.apply(index)))
+
+        // Derive source values
+        .map(i => {
+          const source = foundry.utils.getProperty(i, "system.source");
+          if ( source && i.uuid ) SourceField.prepareData.call(source, i.uuid);
+          return i;
+        })
 
         // Remove any documents that don't match the specified types or the provided filters
         .filter(i => (!types.size || types.has(i.type)) && (!filters.length || Filter.performCheck(i, filters)))

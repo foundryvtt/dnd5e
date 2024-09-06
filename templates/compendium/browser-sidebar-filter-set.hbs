@@ -1,0 +1,26 @@
+<div class="filter filter-set collapsible" data-filter-id="{{ key }}">
+    <div class="filter-header">
+        <label data-action="toggleCollapse">
+            <span class="roboto-upper">{{ localize label }}</span>
+            <i class="fa-solid fa-caret-down"></i>
+        </label>
+    </div>
+    <div class="collapsible-content">
+        <div class="wrapper">
+            {{~#if config.blank}}
+            <label class="filter-choice">
+                <filter-state name="additional.{{ key }}._blank" value="{{ value._blank }}"
+                              {{ disabled locked._blank }}></filter-state>
+                <span>{{ localize config.blank }}</span>
+            </label>
+            {{/if~}}
+            {{~#each config.choices}}
+            <label class="filter-choice">
+                <filter-state name="additional.{{ ../key }}.{{ @key }}" value="{{ lookup ../value @key }}"
+                              {{ disabled (lookup ../locked @key) }}></filter-state>
+                <span>{{ ifThen label label this }}</span>
+            </label>
+            {{/each~}}
+        </div>
+    </div>
+</div>
