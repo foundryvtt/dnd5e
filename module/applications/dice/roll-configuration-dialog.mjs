@@ -210,7 +210,7 @@ export default class RollConfigurationDialog extends Application5e {
    * @returns {ApplicationRenderContext}
    * @protected
    */
-  _prepareButtonsContext(context, options) {
+  async _prepareButtonsContext(context, options) {
     context.buttons = {
       roll: {
         icon: '<i class="fa-solid fa-dice"></i>',
@@ -229,7 +229,7 @@ export default class RollConfigurationDialog extends Application5e {
    * @returns {ApplicationRenderContext}
    * @protected
    */
-  _prepareConfigurationContext(context, options) {
+  async _prepareConfigurationContext(context, options) {
     context.fields = [{
       field: new foundry.data.fields.StringField({ label: game.i18n.localize("DND5E.RollMode") }),
       name: "rollMode",
@@ -248,9 +248,8 @@ export default class RollConfigurationDialog extends Application5e {
    * @returns {ApplicationRenderContext}
    * @protected
    */
-  _prepareFormulasContext(context, options) {
-    context.rolls = this.rolls;
-    context.situational = this.rolls[0].data.situational;
+  async _prepareFormulasContext(context, options) {
+    context.rolls = this.rolls.map(roll => ({ roll }));
     context.dice = this._identifyDiceTerms() || [];
     return context;
   }
@@ -295,9 +294,12 @@ export default class RollConfigurationDialog extends Application5e {
      */
     Hooks.callAll("dnd5e.buildRollConfig", this, config, formData, index);
 
-    if ( formData?.get("situational") && (config.situational !== false) ) {
+    const situational = formData?.get(`roll.${index}.situational`);
+    if ( situational && (config.situation !== false) ) {
       config.parts.push("@situational");
-      config.data.situational = formData.get("situational");
+      config.data.situational = situational;
+    } else {
+      config.parts.findSplice(v => v === "@situational");
     }
 
     return config;

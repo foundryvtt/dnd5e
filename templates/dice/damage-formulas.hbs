@@ -14,10 +14,23 @@
     <ul class="formulas unlist">
         {{#each rolls}}
         <li>
-            {{!-- Formula --}}
+            {{!-- Formula & Type --}}
             <div class="formula-line">
                 <span class="formula">{{ roll.formula }}</span>
-                <span class="label">{{#if type}}{{ roll.type }}{{else}}{{ localize "DND5E.Formula" }}{{/if}}</span>
+                <span class="label">
+                    {{#if damageTypes}}
+                    <select name="roll.{{ @index }}.damageType">
+                        {{ selectOptions damageTypes selected=roll.options.type }}
+                    </select>
+                    {{else if damageConfig}}
+                    {{ damageConfig.label }}
+                    {{else}}
+                    {{ localize "DND5E.Formula" }}
+                    {{/if}}
+                    {{#if damageConfig.icon}}
+                    <dnd5e-icon src="{{ damageConfig.icon }}" alt="{{ damageConfig.label }}"></dnd5e-icon>
+                    {{/if}}
+                </span>
             </div>
 
             {{!-- Situational Bonus --}}

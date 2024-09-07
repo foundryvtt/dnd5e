@@ -1050,9 +1050,11 @@ dialog.dnd5e2.application {
       padding: 6px;
 
       li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        .formula-line {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
 
       .formula {
@@ -1061,11 +1063,20 @@ dialog.dnd5e2.application {
       }
 
       .label {
+        --icon-size: 20px;
+
+        display: flex;
+        align-items: center;
+        gap: 8px;
         color: var(--color-text-dark-5);
         font-style: italic;
         font-size: var(--font-size-12);
       }
     }
+  }
+
+  .dialog-buttons {
+    gap: 6px;
   }
 }
 

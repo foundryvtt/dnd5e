@@ -883,9 +883,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const dialogConfig = foundry.utils.mergeObject({
       configure: true,
       options: {
-        width: 400,
-        top: config.event ? config.event.clientY - 80 : null,
-        left: window.innerWidth - 710
+        position: {
+          width: 400,
+          top: config.event ? config.event.clientY - 80 : null,
+          left: window.innerWidth - 710
+        }
       }
     }, dialog);
 
@@ -915,45 +917,65 @@ export default Base => class extends PseudoDocumentMixin(Base) {
      */
     if ( Hooks.call("dnd5e.preRollDamageV2", rollConfig, dialogConfig, messageConfig) === false ) return;
 
-    const oldRollConfig = {
-      actor: this.actor,
-      rollConfigs: rollConfig.rolls.map(r => ({
-        parts: r.parts,
-        type: r.options?.type,
-        types: r.options?.types,
-        properties: r.options?.properties
-      })),
-      data: rollConfig.rolls[0]?.data ?? {},
-      event: rollConfig.event,
-      returnMultiple: rollConfig.returnMultiple,
-      allowCritical: rollConfig.rolls[0]?.critical?.allow ?? rollConfig.critical?.allow ?? true,
-      critical: rollConfig.rolls[0]?.isCritical,
-      criticalBonusDice: rollConfig.rolls[0]?.critical?.bonusDice ?? rollConfig.critical?.bonusDice,
-      criticalMultiplier: rollConfig.rolls[0]?.critical?.multiplier ?? rollConfig.critical?.multiplier,
-      multiplyNumeric: rollConfig.rolls[0]?.critical?.multiplyNumeric ?? rollConfig.critical?.multiplyNumeric,
-      powerfulCritical: rollConfig.rolls[0]?.critical?.powerfulCritical ?? rollConfig.critical?.powerfulCritical,
-      criticalBonusDamage: rollConfig.rolls[0]?.critical?.bonusDamage ?? rollConfig.critical?.bonusDamage,
-      fastForward: !dialogConfig.configure,
-      title: `${this.item.name} - ${this.damageFlavor}`,
-      dialogOptions: dialogConfig.options,
-      chatMessage: messageConfig.create,
-      messageData: messageConfig.data,
-      rollMode: messageConfig.rollMode,
-      flavor: messageConfig.data.flavor
-    };
-
+    let returnMultiple = rollConfig.returnMultiple ?? true;
     if ( "dnd5e.preRollDamage" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollDamage` hook has been deprecated and replaced with `dnd5e.preRollDamageV2`.",
         { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
+      const oldRollConfig = {
+        actor: this.actor,
+        rollConfigs: rollConfig.rolls.map((r, _index) => ({
+          _index,
+          parts: r.parts,
+          type: r.options?.type,
+          types: r.options?.types,
+          properties: r.options?.properties
+        })),
+        data: rollConfig.rolls[0]?.data ?? {},
+        event: rollConfig.event,
+        returnMultiple,
+        allowCritical: rollConfig.rolls[0]?.critical?.allow ?? rollConfig.critical?.allow ?? true,
+        critical: rollConfig.rolls[0]?.isCritical,
+        criticalBonusDice: rollConfig.rolls[0]?.critical?.bonusDice ?? rollConfig.critical?.bonusDice,
+        criticalMultiplier: rollConfig.rolls[0]?.critical?.multiplier ?? rollConfig.critical?.multiplier,
+        multiplyNumeric: rollConfig.rolls[0]?.critical?.multiplyNumeric ?? rollConfig.critical?.multiplyNumeric,
+        powerfulCritical: rollConfig.rolls[0]?.critical?.powerfulCritical ?? rollConfig.critical?.powerfulCritical,
+        criticalBonusDamage: rollConfig.rolls[0]?.critical?.bonusDamage ?? rollConfig.critical?.bonusDamage,
+        fastForward: !dialogConfig.configure,
+        title: `${this.item.name} - ${this.damageFlavor}`,
+        dialogOptions: dialogConfig.options,
+        chatMessage: messageConfig.create,
+        messageData: messageConfig.data,
+        rollMode: messageConfig.rollMode,
+        flavor: messageConfig.data.flavor
+      };
       if ( Hooks.call("dnd5e.preRollDamage", this.item, oldRollConfig) === false ) return;
+      rollConfig.rolls = rollConfig.rolls.map((roll, index) => {
+        const otherConfig = oldRollConfig.rollConfigs.find(r => r.index === index);
+        if ( !otherConfig ) return null;
+        roll.data = oldRollConfig.data;
+        roll.parts = otherConfig.parts;
+        roll.isCritical = oldRollConfig.critical;
+        roll.options.type = otherConfig.type;
+        roll.options.types = otherConfig.types;
+        roll.options.properties = otherConfig.properties;
+        return rolls;
+      }, [])
+        .filter(_ => _)
+        .concat(oldRollConfig.rollConfigs.filter(r => r.index === undefined));
+      returnMultiple = oldRollConfig.returnMultiple;
+      rollConfig.critical ??= {};
+      rollConfig.critical.allow = oldRollConfig.allowCritical;
+      dialogConfig.configure = !oldRollConfig.fastForward;
+      dialogConfig.options = oldRollConfig.dialogOptions;
+      messageConfig.create = oldRollConfig.chatMessage;
+      messageConfig.data = oldRollConfig.messageData;
+      messageConfig.rollMode = oldRollConfig.rollMode;
+      messageConfig.data.flavor = oldRollConfig.flavor;
     }
 
-    const returnMultiple = oldRollConfig.returnMultiple;
-    oldRollConfig.returnMultiple = true;
-
-    const rolls = await damageRoll(oldRollConfig);
+    const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
     if ( !rolls?.length ) return;
     const lastDamageTypes = rolls.reduce((obj, roll, index) => {
       if ( roll.options.type ) obj[index] = roll.options.type;
@@ -978,7 +1000,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         "The `dnd5e.rollDamage` hook has been deprecated and replaced with `dnd5e.rollDamageV2`.",
         { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
-      Hooks.callAll("dnd5e.rollDamage", this.item, returnMultiple ? rolls : rolls[0], ammoUpdate);
+      Hooks.callAll("dnd5e.rollDamage", this.item, returnMultiple ? rolls : rolls[0]);
     }
 
     return rolls;
