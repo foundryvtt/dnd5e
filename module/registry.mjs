@@ -161,7 +161,10 @@ class ItemRegistry {
   async initialize() {
     if ( this.#status > ItemRegistry.#STATUS_STATES.NONE ) return;
     RegistryStatus.set(this.#itemType, false);
-    if ( !game.ready ) {
+    if ( game.modules.get("babele")?.active && (game.babele?.initialized === false) ) {
+      Hooks.once("babele.ready", () => this.initialize());
+      return;
+    } else if ( !game.ready ) {
       Hooks.once("ready", () => this.initialize());
       return;
     }
