@@ -37,11 +37,7 @@ export default class CheckActivityData extends BaseActivityData {
   /** @override */
   get ability() {
     if ( this.check.dc.calculation in CONFIG.DND5E.abilities ) return this.check.dc.calculation;
-    if ( this.check.dc.calculation === "spellcasting" ) {
-      let ability = this.isSpell ? this.item.system.availableAbilities?.first() : null;
-      ability ??= this.actor?.system.attributes?.spellcasting;
-      return ability ?? null;
-    }
+    if ( this.check.dc.calculation === "spellcasting" ) return this.spellcastingAbility;
     return this.check.ability;
   }
 
@@ -66,6 +62,8 @@ export default class CheckActivityData extends BaseActivityData {
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
+
+    if ( this.check.ability === "spellcasting" ) this.check.ability = this.spellcastingAbility;
 
     let ability;
     if ( this.check.dc.calculation ) ability = this.ability;

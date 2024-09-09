@@ -111,11 +111,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {string|null}
    */
   get ability() {
-    if ( this.isSpell ) {
-      return this.item.system.availableAbilities?.first()
-        ?? this.actor?.system.attributes?.spellcasting ?? null;
-    }
-    return null;
+    return this.isSpell ? this.spellcastingAbility : null;
   }
 
   /* -------------------------------------------- */
@@ -198,6 +194,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   get requiresSpellSlot() {
     if ( !this.isSpell || !this.actor?.system.spells ) return false;
     return this.canScale;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the spellcasting ability that can be used with this activity.
+   * @type {string|null}
+   */
+  get spellcastingAbility() {
+    let ability;
+    if ( this.isSpell ) ability = this.item.system.availableAbilities?.first();
+    return ability ?? this.actor?.system.attributes?.spellcasting ?? null;
   }
 
   /* -------------------------------------------- */

@@ -33,10 +33,12 @@ export default class CheckSheet extends ActivitySheet {
   async _prepareEffectContext(context) {
     context = await super._prepareEffectContext(context);
 
+    const group = game.i18n.localize("DND5E.Abilities");
     context.abilityOptions = [
       { value: "", label: "" },
       { rule: true },
-      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label }))
+      { value: "spellcasting", label: game.i18n.localize("DND5E.SpellAbility") },
+      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label, group }))
     ];
     let ability;
     const associated = this.activity.check.associated;
@@ -60,9 +62,7 @@ export default class CheckSheet extends ActivitySheet {
       { value: "", label: game.i18n.localize("DND5E.SAVE.FIELDS.save.dc.CustomFormula") },
       { rule: true },
       { value: "spellcasting", label: game.i18n.localize("DND5E.SpellAbility") },
-      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({
-        value, label: config.label, group: game.i18n.localize("DND5E.Abilities")
-      }))
+      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label, group }))
     ];
 
     return context;
