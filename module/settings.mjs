@@ -1,4 +1,5 @@
 import { ModuleArtConfig } from "./module-art.mjs";
+import CompendiumBrowserSourceConfig from "./applications/compendium-browser-source-config.mjs";
 
 /**
  * Register all of the system's settings.
@@ -365,6 +366,24 @@ export function registerSystemSettings() {
         tokens: true
       }
     }
+  });
+
+  // Compendium Browser source exclusion
+  game.settings.registerMenu("dnd5e", "packSourceConfiguration", {
+    name: "DND5E.CompendiumBrowser.Sources.Name",
+    label: "DND5E.CompendiumBrowser.Sources.Label",
+    hint: "DND5E.CompendiumBrowser.Sources.Hint",
+    icon: "fas fa-book-open-reader",
+    type: CompendiumBrowserSourceConfig,
+    restricted: true
+  });
+
+  game.settings.register("dnd5e", "packSourceConfiguration", {
+    name: "Pack Source Configuration",
+    scope: "world",
+    config: false,
+    type: Object,
+    default: {}
   });
 
   // Primary Group

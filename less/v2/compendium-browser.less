@@ -3,37 +3,31 @@
   border: none;
   background: none;
 
-  > header {
-    .window-title { visibility: hidden; }
-  }
-
-  &:not(.minimized) .window-header { margin: 0; }
-
   .window-resize-handle {
     inset: auto 0 0 auto;
     z-index: 1;
   }
 
   .window-content {
+    --header-size: calc(var(--header-height) + var(--font-size-24) + 6px);
     background: url("ui/texture1.webp") no-repeat top center / auto 770px,
       var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
     display: grid;
     grid-template-areas:
-      "header header"
       "sidebar results"
       "sidebar footer";
     grid-template-columns: 230px auto;
-    grid-template-rows: min-content auto 2.75rem;
-    margin-top: calc(var(--header-height) * -1);
-    padding: var(--header-height) 0 0;
+    grid-template-rows: auto 2.75rem;
+    margin-top: calc(var(--header-size) * -1);
+    padding: var(--header-size) 0 0;
     overflow: hidden;
+    column-gap: 0;
 
-    &:has(> .footer:empty) { grid-template-rows: min-content auto 0; }
+    &:has(> .footer:empty) { grid-template-rows: auto 0; }
 
     .sidebar { grid-area: sidebar; }
     .results { grid-area: results; }
     .footer { grid-area: footer; }
-    .header { grid-area: header; }
 
     h2 {
       color: var(--color-text-dark-primary);
@@ -79,8 +73,9 @@
     height: 100%;
     overflow-y: auto;
     gap: 12px;
-    padding: 6px 12px 3px;
+    padding: 6px 4px 3px 12px;
     font-family: var(--dnd5e-font-roboto-condensed);
+    scrollbar-gutter: stable;
 
     [data-application-part="types"] {
       display: flex;
@@ -207,8 +202,9 @@
 
   .results {
     --results-padding: 6px;
-    padding: var(--results-padding) 12px 12px;
+    padding: var(--results-padding) 8px 12px 4px;
     overflow-y: auto;
+    scrollbar-gutter: stable;
 
     .results-loading {
       text-align: center;
@@ -252,5 +248,122 @@
     .mode-toggle { display: none; }
     .window-content { background: var(--dnd5e-color-dark-gray) url("../../ui/denim075.png"); }
     &::after { border-color: var(--dnd5e-color-blue-gray-1); }
+  }
+}
+
+/* ---------------------------------- */
+/*  Source Configuration              */
+/* ---------------------------------- */
+
+#compendium-browser-source-config {
+  --checkbox-size: 16px;
+
+  .window-content {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    padding: 0;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    scrollbar-gutter: stable;
+    padding: 6px 4px 0 12px;
+    overflow: hidden auto;
+
+    search { margin-bottom: 16px; }
+  }
+
+  .package-list {
+    padding: 0;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &.base {
+      padding-bottom: 8px;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--dnd5e-color-gold), transparent);
+      }
+    }
+
+    li {
+      align-items: center;
+      gap: 8px;
+
+      &:not([hidden]) { display: flex; }
+      &.active .package { font-weight: bold; }
+    }
+
+    .package {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--dnd5e-font-roboto-condensed);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+
+      &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }
+
+      .value {
+        font-family: var(--dnd5e-font-roboto);
+        font-weight: bold;
+        color: var(--color-text-dark-5);
+        font-size: var(--font-size-12);
+      }
+    }
+  }
+
+  /* Packs */
+  .packs {
+    display: flex;
+    scrollbar-gutter: stable;
+    padding: 6px 8px 0 4px;
+    overflow: hidden auto;
+    gap: 12px;
+    align-items: start;
+
+    .packs-section {
+      flex: 1;
+      max-width: 50%;
+    }
+
+    .packs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      li {
+        border-bottom: var(--dnd5e-border-dotted);
+        padding-bottom: 6px;
+
+        &:last-child {
+          border: none;
+          padding: 0;
+        }
+
+        &.all {
+          padding-top: 2px;
+          border-bottom: var(--dnd5e-border-dark);
+          .title { text-transform: capitalize; }
+        }
+
+        label {
+          font-size: unset;
+          height: unset;
+          line-height: normal;
+
+          > .title { line-height: normal; }
+        }
+      }
+    }
   }
 }
