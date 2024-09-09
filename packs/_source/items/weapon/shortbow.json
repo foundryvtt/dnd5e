@@ -83,8 +83,8 @@
       "conditions": ""
     },
     "properties": [
-      "two",
-      "amm"
+      "amm",
+      "two"
     ],
     "proficient": null,
     "type": {
@@ -178,7 +178,10 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {
+      "type": "arrow"
+    },
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -193,7 +196,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037146879,
-    "modifiedTime": 1725037146879,
+    "modifiedTime": 1725912467410,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!GJv6WkD7D2J6rP6M"

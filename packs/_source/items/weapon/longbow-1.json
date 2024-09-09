@@ -85,8 +85,8 @@
     "properties": [
       "amm",
       "hvy",
-      "two",
-      "mgc"
+      "mgc",
+      "two"
     ],
     "proficient": null,
     "type": {
@@ -180,7 +180,10 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {
+      "type": "arrow"
+    },
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -195,7 +198,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037121482,
-    "modifiedTime": 1725037121482,
+    "modifiedTime": 1725912430990,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!A2i08i8gAFscm6hZ"

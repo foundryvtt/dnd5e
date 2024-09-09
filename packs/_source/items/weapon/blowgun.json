@@ -2,7 +2,7 @@
   "_id": "wNWK6yJMHG9ANqQV",
   "name": "Blowgun",
   "type": "weapon",
-  "img": "icons/sundries/survival/icons/commodities/wood/log-rough-hickory-brown.webp",
+  "img": "icons/commodities/wood/log-rough-hickory-brown.webp",
   "system": {
     "description": {
       "value": "<p>A primitive, but deadly, weapon favored by tribes and guerrila fighters. The darts fired from this gun can puncture and deliver lethal doses of venom.</p>",
@@ -179,7 +179,7 @@
     },
     "attuned": false,
     "ammunition": {
-      "type": ""
+      "type": "blowgunNeedle"
     },
     "mastery": ""
   },
@@ -196,7 +196,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037318573,
-    "modifiedTime": 1725041073530,
+    "modifiedTime": 1725912579215,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!wNWK6yJMHG9ANqQV"

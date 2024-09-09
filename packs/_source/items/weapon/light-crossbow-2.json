@@ -83,10 +83,10 @@
       "conditions": ""
     },
     "properties": [
-      "two",
       "amm",
       "lod",
-      "mgc"
+      "mgc",
+      "two"
     ],
     "proficient": null,
     "type": {
@@ -180,7 +180,10 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {
+      "type": "crossbowBolt"
+    },
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -195,7 +198,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037320998,
-    "modifiedTime": 1725037320998,
+    "modifiedTime": 1725912515447,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!x12sDhylcf8843fT"
