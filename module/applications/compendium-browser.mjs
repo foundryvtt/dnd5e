@@ -1,5 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
+import CompendiumBrowserSourceConfig from "./compendium-browser-source-config.mjs";
 
 /**
  * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
@@ -82,6 +83,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
       resizable: true
     },
     actions: {
+      configureSources: CompendiumBrowser.#onConfigureSources,
       clearName: CompendiumBrowser.#onClearName,
       openLink: CompendiumBrowser.#onOpenLink,
       setFilter: CompendiumBrowser.#onSetFilter,
@@ -625,6 +627,21 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  async _renderFrame(options) {
+    const frame = await super._renderFrame(options);
+    if ( game.user.isGM ) {
+      frame.querySelector('[data-action="close"]').insertAdjacentHTML("beforebegin", `
+        <button type="button" class="header-control fas fa-cog" data-action="configureSources"
+                data-tooltip="DND5E.CompendiumBrowser.Sources.Label"
+                aria-label="${game.i18n.localize("DND5E.CompendiumBrowser.Sources.Label")}"></button>
+      `);
+    }
+    return frame;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Render a single result entry.
    * @param {object|Document} entry  The entry.
@@ -900,6 +917,16 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
   /* -------------------------------------------- */
 
   /**
+   * Handle configuring compendium browser sources.
+   * @this {CompendiumBrowser}
+   */
+  static #onConfigureSources() {
+    new CompendiumBrowserSourceConfig().render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle clearing the name filter.
    * @this {CompendiumBrowser}
    * @param {PointerEvent} event  The originating click event.
@@ -1065,6 +1092,9 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     // Do not attempt to index derived fields as this will throw an error server-side.
     indexFields.delete("system.source.slug");
 
+    // Collate compendium sources.
+    const sources = CompendiumBrowserSourceConfig.collateSources();
+
     // Iterate over all packs
     let documents = game.packs
 
@@ -1074,7 +1104,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
         // Do not show entries inside compendia that are not visible to the current user.
         && p.visible
 
-        // TODO: Filter packs by additional system setting
+        && sources.has(p.collection)
 
         // If types are set and specified in compendium flag, only include those that include the correct types
         && (!types.size || !p.metadata.flags.dnd5e?.types || new Set(p.metadata.flags.dnd5e.types).intersects(types)))

@@ -1,0 +1,40 @@
+{{#*inline ".package"}}
+
+<li {{#if active}}class="active"{{/if}} data-package-id="{{ id }}" data-filter="{{ filter }}">
+    <dnd5e-checkbox name="{{ id }}" {{ checked checked }} {{#if indeterminate}}indeterminate{{/if}}
+                    data-type="package"></dnd5e-checkbox>
+    <div class="package" data-action="selectPackage">
+        <span class="title">{{ title }}</span>
+        <span class="value">{{ count }}</span>
+    </div>
+</li>
+
+{{/inline}}
+
+<section class="sidebar filter-element">
+    <search aria-label="{{ localize "DND5E.CompendiumBrowser.Sources.FilterPackages" }}">
+        <input type="text" name="filter" placeholder="{{ localize "DND5E.CompendiumBrowser.Sources.FilterPackages" }}"
+               value="{{ filter }}">
+        <ul class="unlist controls">
+            <li>
+                <button type="button" class="unbutton filter-control" data-action="clearFilter"
+                        data-tooltip="DND5E.FilterClear" aria-label="{{ localize "DND5E.FilterClear" }}">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </li>
+        </ul>
+    </search>
+    <menu class="package-list unlist base">
+        {{#with packages.world}}
+        {{> ".package" title=(localize "PACKAGE.Type.world") id="world" }}
+        {{/with}}
+        {{#with packages.system}}
+        {{> ".package" title=(localize "PACKAGE.Type.system") id="system" }}
+        {{/with}}
+    </menu>
+    <menu class="package-list unlist modules">
+        {{#each packages.modules}}
+        {{> ".package" }}
+        {{/each}}
+    </menu>
+</section>

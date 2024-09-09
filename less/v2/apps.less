@@ -773,44 +773,6 @@
 }
 
 /* ---------------------------------- */
-/*  Dialogs                           */
-/* ---------------------------------- */
-
-.dnd5e2.dialog {
-  background: url("ui/texture-gray1.webp") no-repeat top left,
-    url("ui/texture-gray2.webp") no-repeat bottom right,
-    var(--dnd5e-color-parchment);
-  border: 1px solid var(--dnd5e-color-gold);
-
-  > .window-content { background: transparent; }
-
-  > .window-header .window-title { visibility: hidden; }
-
-  form {
-    padding: 0 .75rem .75rem;
-
-    > header {
-      font-family: var(--dnd5e-font-roboto-slab);
-      font-weight: bold;
-      font-size: var(--font-size-24);
-      text-align: center;
-      margin-bottom: .75rem;
-    }
-  }
-
-  .dialog-buttons {
-    padding: .5rem;
-    gap: .5rem;
-
-    button {
-      background: var(--dnd5e-color-card);
-      border: 1px solid var(--color-border-light-2);
-      &.default { border-color: var(--dnd5e-color-gold); }
-    }
-  }
-}
-
-/* ---------------------------------- */
 /*  App V2                            */
 /* ---------------------------------- */
 
@@ -951,6 +913,54 @@
 dialog.dnd5e2.application {
   margin: 0;
   padding: 0;
+}
+
+/* ---------------------------------- */
+/*  Dialogs                           */
+/* ---------------------------------- */
+
+.dnd5e2.dialog {
+  background: url("ui/texture-gray1.webp") no-repeat top left,
+    url("ui/texture-gray2.webp") no-repeat bottom right,
+    var(--dnd5e-color-parchment);
+  border: 1px solid var(--dnd5e-color-gold);
+
+  > .window-content { background: transparent; }
+
+  > .window-header .window-title { visibility: hidden; }
+
+  form {
+    padding: 0 .75rem .75rem;
+
+    > header {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      font-size: var(--font-size-24);
+      text-align: center;
+      margin-bottom: .75rem;
+    }
+  }
+
+  .dialog-buttons {
+    padding: .5rem;
+    gap: .5rem;
+
+    button {
+      background: var(--dnd5e-color-card);
+      border: 1px solid var(--color-border-light-2);
+      &.default { border-color: var(--dnd5e-color-gold); }
+    }
+  }
+}
+
+.dnd5e2.dialog-lg {
+  background: url("ui/texture1.webp") no-repeat top center / auto 770px,
+    var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
+
+  .window-resize-handle {
+    inset: auto 0 0 auto;
+    z-index: 1;
+  }
 }
 
 /* ---------------------------------- */
