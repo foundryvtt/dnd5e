@@ -815,6 +815,8 @@
 /* ---------------------------------- */
 
 .dnd5e2.application {
+  --color-scrollbar: var(--dnd5e-color-scrollbar);
+
   background: url("ui/texture-gray1.webp") no-repeat top left,
     url("ui/texture-gray2.webp") no-repeat bottom right,
     var(--dnd5e-color-parchment);
@@ -889,11 +891,14 @@
 
   .window-content {
     background: transparent;
+    margin-block-start: -8px;
+    padding-block-start: 8px;
     padding-block-end: 14px;
     padding-inline: 14px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    overflow-y: auto;
 
     > section:empty { display: none; }
   }
@@ -1059,7 +1064,7 @@ dialog.dnd5e2.application {
     gap: 12px;
     align-items: flex-start;
 
-    fieldset.traits { flex: 1; }
+    fieldset.traits { flex: 1 1 40%; }
     fieldset:not(.traits) { flex: 1 0 100%; }
   }
   .traits {
