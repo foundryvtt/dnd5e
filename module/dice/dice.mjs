@@ -280,7 +280,7 @@ export async function damageRoll({
  * @returns {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
  */
 function _determineCriticalMode({event, critical=false, fastForward}={}) {
-  const isFF = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
+  const isFF = (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey)) ?? fastForward;
   if ( event?.altKey ) critical = true;
   return {isFF: !!isFF, isCritical: critical};
 }

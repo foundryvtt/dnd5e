@@ -76,7 +76,7 @@ export default class D20Roll extends Roll {
    *                                                              mode.
    */
   static determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward}={}) {
-    const isFF = fastForward ?? (event?.shiftKey || event?.altKey || event?.ctrlKey || event?.metaKey);
+    const isFF = (event?.shiftKey || event?.altKey || event?.ctrlKey || event?.metaKey) ?? fastForward;
     let advantageMode = this.ADV_MODE.NORMAL;
     if ( advantage || event?.altKey ) advantageMode = this.ADV_MODE.ADVANTAGE;
     else if ( disadvantage || event?.ctrlKey || event?.metaKey ) advantageMode = this.ADV_MODE.DISADVANTAGE;
