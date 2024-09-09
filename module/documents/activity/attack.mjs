@@ -84,6 +84,11 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     const { parts, data } = this.getAttackData();
     const targets = getTargetDescriptors();
 
+    if ( (this.item.type === "weapon") && (this.item.system.quantity === 0) ) {
+      ui.notifications.error("DND5E.ATTACK.Warning.NoQuanity", { localize: true });
+      return;
+    }
+
     let ammunitionOptions;
     const selectedAmmunition = config.ammunition ?? this.item.getFlag("dnd5e", `last.${this.id}.ammunition`);
     if ( this.item.system.properties?.has("amm") && this.actor ) ammunitionOptions = this.actor.items
@@ -204,12 +209,17 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( roll === null ) return;
 
     const flags = {};
-    const ammo = this.actor?.items.get(roll.options.ammunition);
     let ammoUpdate = null;
-    if ( ammo ) {
-      ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
-      ammoUpdate.destroy = ammo.system.uses.autoDestroy && (ammoUpdate.quantity === 0);
-      flags.ammunition = roll.options.ammunition;
+
+    if ( roll.options.ammunition ) {
+      const ammo = this.actor?.items.get(roll.options.ammunition);
+      if ( ammo ) {
+        ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
+        ammoUpdate.destroy = ammo.system.uses.autoDestroy && (ammoUpdate.quantity === 0);
+        flags.ammunition = roll.options.ammunition;
+      }
+    } else if ( (roll.options.attackMode === "thrown") && !this.item.system.properties?.has("ret") ) {
+      ammoUpdate = { id: this.item.id, quantity: Math.max(0, this.item.system.quantity - 1) };
     }
     if ( roll.options.attackMode ) flags.attackMode = roll.options.attackMode;
     if ( roll.options.mastery ) flags.mastery = roll.options.mastery;
