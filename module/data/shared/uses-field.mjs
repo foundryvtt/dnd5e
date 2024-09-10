@@ -236,11 +236,11 @@ export default class UsesField extends SchemaField {
      * been made.
      * @function dnd5e.rollRechargeV2
      * @memberof hookEvents
-     * @param {BasicRoll[]} rolls     The resulting rolls.
+     * @param {BasicRoll[]} rolls             The resulting rolls.
      * @param {object} data
-     * @param {Actor5e} data.subject  Item or Activity for which the roll was performed.
-     * @param {object} data.updates   Updates to be applied to the subject.
-     * @returns {boolean}             Explicitly return `false` to prevent updates from being performed.
+     * @param {Item5e|Activity} data.subject  Item or Activity for which the roll was performed.
+     * @param {object} data.updates           Updates to be applied to the subject.
+     * @returns {boolean}                     Explicitly return `false` to prevent updates from being performed.
      */
     if ( Hooks.call("dnd5e.rollRechargeV2", rolls, { subject: this, updates }) === false ) return rolls;
 
