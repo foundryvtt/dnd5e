@@ -561,7 +561,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
       // If targeted item isn't found, display preparation warning
       if ( !actor.items.get(target.target) ) {
-        const message = game.i18n.format("DND5E.CONSUMPTION", { activity: this.name, item: this.item.name });
+        const message = game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
+          activity: this.name, item: this.item.name
+        });
         actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
       }
     }
