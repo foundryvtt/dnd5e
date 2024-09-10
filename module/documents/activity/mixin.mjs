@@ -199,7 +199,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
             }
           }
         }
-      }
+      },
+      hasConsumption: usageConfig.hasConsumption
     }, message);
 
     /**
@@ -258,7 +259,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     // Create chat message
     messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
-    messageConfig.hasConsumption = (usageConfig.consume !== false) && !foundry.utils.isEmpty(usageConfig.consume);
     results.message = await activity._createUsageMessage(messageConfig);
 
     // Perform any final usage steps
@@ -352,7 +352,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
 
     const consumed = await this.#applyUsageUpdates(updates);
-    if ( consumed ) foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.consumed", consumed);
+    if ( !foundry.utils.isEmpty(consumed) ) {
+      foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.consumed", consumed);
+    }
 
     /**
      * A hook event that fires after an item's resource consumption is calculated and applied.
@@ -542,9 +544,12 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
 
     if ( config.consume !== false ) {
+      const hasResourceConsumption = this.consumption.targets.length > 0;
+      const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
       config.consume ??= {};
-      config.consume.resources ??= this.consumption.targets.length > 0;
-      config.consume.spellSlot ??= this.requiresSpellSlot && this.consumption.spellSlot;
+      config.consume.resources ??= hasResourceConsumption;
+      config.consume.spellSlot ??= hasSpellSlotConsumption;
+      config.hasConsumption = hasResourceConsumption || hasSpellSlotConsumption;
     }
 
     const levelingFlag = this.item.getFlag("dnd5e", "spellLevel");
