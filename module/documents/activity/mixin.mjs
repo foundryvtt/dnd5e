@@ -257,7 +257,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     // Create chat message
     messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
-    messageConfig.hasConsumption = usageConfig.consume !== true && !foundry.utils.isEmpty(usageConfig.consume);
+    messageConfig.hasConsumption = (usageConfig.consume !== false) && !foundry.utils.isEmpty(usageConfig.consume);
     results.message = await activity._createUsageMessage(messageConfig);
 
     // Perform any final usage steps
@@ -371,8 +371,14 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
+   * @typedef ActivityConsumptionDescriptor
+   * @property {{ keyPath: string, delta: number }[]} actor                 Changes for the actor.
+   * @property {Record<string, { keyPath: string, delta: number }[]>} item  Changes for each item grouped by ID.
+   */
+
+  /**
    * Refund previously used consumption for an activity.
-   * @param {object} consumed  Data on the consumption that occurred.
+   * @param {ActivityConsumptionDescriptor} consumed  Data on the consumption that occurred.
    */
   async refund(consumed) {
     const updates = { activity: {}, actor: {}, item: [] };
@@ -401,7 +407,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /**
    * Merge activity updates into the appropriate item updates and apply.
    * @param {ActivityUsageUpdates} updates
-   * @returns {object}  Information on consumption performed to store in message flag.
+   * @returns {ActivityConsumptionDescriptor}  Information on consumption performed to store in message flag.
    */
   async #applyUsageUpdates(updates) {
     // Merge activity changes into the item updates
@@ -425,7 +431,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const consumed = {
       actor: getDeltas(this.actor, updates.actor),
       item: updates.item.reduce((obj, { _id, ...changes }) => {
-        obj[_id] = getDeltas(this.actor.items.get(_id), changes);
+        const deltas = getDeltas(this.actor.items.get(_id), changes);
+        if ( deltas.length ) obj[_id] = deltas;
         return obj;
       }, {})
     };
@@ -1052,9 +1059,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   async #refundResource(event, target, message) {
     const consumed = message.getFlag("dnd5e", "use.consumed");
-    const messageConfig = {};
     if ( !foundry.utils.isEmpty(consumed) ) {
-      await this.refund(consumed, messageConfig);
+      await this.refund(consumed);
       await message.unsetFlag("dnd5e", "use.consumed");
     }
   }
