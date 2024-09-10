@@ -312,9 +312,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
     // Apply special context menus for items outside inventory elements
     const featuresElement = html[0].querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
-    if ( featuresElement ) new ContextMenu5e(html, ".pills-lg [data-item-id]", [], {
-      onOpen: (...args) => featuresElement._onOpenContextMenu(...args)
-    });
+    if ( featuresElement ) {
+      new ContextMenu5e(html, ".pills-lg [data-item-id], .favorites [data-item-id]", [], {
+        onOpen: (...args) => featuresElement._onOpenContextMenu(...args)
+      });
+    }
 
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
@@ -592,7 +594,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( !this.isEditable ) return;
     const { favoriteId } = event.currentTarget.closest("[data-favorite-id]").dataset;
     const favorite = await fromUuid(favoriteId, { relative: this.actor });
-    if ( favorite instanceof dnd5e.documents.Item5e ) return favorite.use({}, { event });
+    if ( favorite instanceof dnd5e.documents.Item5e ) return favorite.use({ legacy: false, event });
     if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) return favorite.update({ disabled: !favorite.disabled });
   }
 

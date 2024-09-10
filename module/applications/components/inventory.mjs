@@ -48,8 +48,14 @@ export default class InventoryElement extends HTMLElement {
       });
     }
 
+    // Bind activity menu to child to work around lack of stopImmediatePropagation in ContextMenu#bind
+    new ContextMenu5e(this.querySelector(".items-list"), ".activity-row[data-activity-id]", [], {
+      onOpen: this._onOpenContextMenu.bind(this)
+    });
+
+    // Item context menus
     const MenuCls = this.hasAttribute("v2") ? ContextMenu5e : ContextMenu;
-    new MenuCls(this, "[data-item-id]", [], {onOpen: this._onOpenContextMenu.bind(this)});
+    new MenuCls(this, "[data-item-id]", [], { onOpen: this._onOpenContextMenu.bind(this) });
   }
 
   /* -------------------------------------------- */
@@ -496,7 +502,11 @@ export default class InventoryElement extends HTMLElement {
     const item = this.getItem(element.closest("[data-item-id]")?.dataset.itemId);
     // Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
     if ( !item || (item instanceof Promise) ) return;
-    ui.context.menuItems = this._getContextOptions(item, element);
-    Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
+    if ( element.closest("[data-activity-id]") ) {
+      dnd5e.documents.activity.UtilityActivity.onContextMenu(item, element);
+    } else {
+      ui.context.menuItems = this._getContextOptions(item, element);
+      Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
+    }
   }
 }
