@@ -845,8 +845,13 @@ h5 {
 /*  Token Heads-Up Display                   */
 /* ----------------------------------------- */
 
-#token-hud .status-effects .effect-control.active:not(.overlay) {
-  border: 1px solid green;
+#token-hud .status-effects {
+  width: max-content;
+  grid-template-columns: repeat(5, 25px);
+
+  .effect-control.active:not(.overlay) {
+    border: 1px solid green;
+  }
 }
 
 /* ----------------------------------------- */
