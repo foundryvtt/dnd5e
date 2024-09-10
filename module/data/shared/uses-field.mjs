@@ -185,12 +185,6 @@ export default class UsesField extends SchemaField {
       data: {
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
       },
-      preCreate: (rolls, rollConfig, messageConfig) => {
-        messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {
-          name: this.name,
-          result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
-        });
-      },
       rollMode: game.settings.get("core", "rollMode")
     }));
 
@@ -221,7 +215,15 @@ export default class UsesField extends SchemaField {
       messageConfig.create = hookData.chatMessage;
     }
 
-    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
+    const createMessage = messageConfig.create !== false;
+    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, { ...messageConfig, create: false });
+    if ( rolls?.length && createMessage ) {
+      messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {
+        name: this.name,
+        result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
+      });
+      await CONFIG.Dice.BasicRoll.toMessage(rolls, messageConfig.data, { rollMode: messageConfig.rollMode });
+    }
 
     const updates = {};
     if ( rolls[0].isSuccess ) {

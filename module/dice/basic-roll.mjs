@@ -46,18 +46,8 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  *
  * @typedef {object} BasicRollMessageConfiguration
  * @property {boolean} [create=true]  Create a message when the rolling is complete.
- * @property {PreCreateRollMessageCallback} [preCreate]  Message configuration callback.
  * @property {string} [rollMode]      The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
  * @property {object} [data={}]       Additional data used when creating the message.
- */
-
-/**
- * Method called after the rolls are completed but before the message is created for further message customization.
- *
- * @callback PreCreateRollMessageCallback
- * @param {BasicRoll[]} rolls                      Rolls that have been executed.
- * @param {BasicRollProcessConfiguration} config   Roll process configuration information.
- * @param {BasicRollMessageConfiguration} message  Message configuration information.
  */
 
 /* -------------------------------------------- */
@@ -109,10 +99,7 @@ export default class BasicRoll extends Roll {
     for ( const roll of rolls ) await roll.evaluate();
 
     if ( rolls?.length && (message.create !== false) ) {
-      if ( foundry.utils.getType(message.preCreate) === "function" ) message.preCreate(rolls, config, message);
-      await this.toMessage(rolls, message.data, {
-        rollMode: message.rollMode ?? rolls.reduce((mode, r) => mode ?? r.options.rollMode)
-      });
+      await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
     }
 
     return rolls;
@@ -176,6 +163,7 @@ export default class BasicRoll extends Roll {
   static async toMessage(rolls, messageData={}, { rollMode, create=true }={}) {
     for ( const roll of rolls ) {
       if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
+      rollMode ??= roll.options.rollMode;
     }
 
     // Prepare chat data
