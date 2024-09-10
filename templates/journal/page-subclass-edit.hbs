@@ -2,7 +2,7 @@
     {{> journalEntryPageHeader }}
 
     <div class="form-group">
-        <label>{{ localize "JOURNALENTRYPAGE.DND5E.Subclass.Item" }}</label>
+        <label>{{ localize "JOURNALENTRYPAGE.DND5E.Subclass.FIELDS.item.label" }}</label>
         <div class="form-fields">
             <ol class="items-list">
                 {{#if document.system.item}}
@@ -22,13 +22,15 @@
         </div>
     </div>
 
+    {{ formField systemFields.style value=system.style options=styleOptions }}
+
     <div class="form-group">
-        <label>{{ localize "JOURNALENTRYPAGE.DND5E.Subclass.Description" }}</label>
+        <label>{{ localize "JOURNALENTRYPAGE.DND5E.Subclass.FIELDS.description.value.label" }}</label>
         <div class="form-fields">
             <button class="launch-text-editor" data-target="system.description.value">
                 <i class="fas fa-edit" inert></i> {{ localize "JOURNALENTRYPAGE.DND5E.EditDescription" }}
             </button>
         </div>
-        <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Subclass.DescriptionHint"}}</p>
+        <p class="hint">{{ localize "JOURNALENTRYPAGE.DND5E.Subclass.FIELDS.description.value.hint" }}</p>
     </div>
 </form>

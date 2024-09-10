@@ -219,7 +219,12 @@
     font-weight: bold;
   }
 
-  table {
+  .core-traits {
+    caption, th { text-align: start; }
+    th, td { padding-inline: 8px; }
+  }
+
+  .features-table {
     th[scope="col"] {
       padding-inline: 0.25em;
     }
@@ -277,7 +282,7 @@
 .journal-entry-page.spells, .content-embed.spells {
   .grouping {
     font-size: var(--font-size-12);
- 
+
     select {
       margin-inline-start: 1em;
       height: 1.75em;

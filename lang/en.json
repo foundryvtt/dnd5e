@@ -3102,23 +3102,58 @@
 "TYPES.JournalEntryPage.subclass": "Subclass Summary",
 "JOURNALENTRYPAGE.DND5E": {
   "Class": {
-    "AdditionalEquipment": "Additional Equipment Description",
-    "AdditionalEquipmentHint": "Additional descriptive text displayed beneath the starting equipment section.",
-    "AdditionalHitPoints": "Additional Hit Points Description",
-    "AdditionalHitPointsHint": "Additional descriptive text displayed beneath the auto-generated hit points section.",
-    "AdditionalTraits": "Additional Proficiencies Description",
-    "AdditionalTraitsHint": "Additional descriptive text displayed beneath list of proficiencies granted by this class.",
-    "Description": "Introduction",
-    "DescriptionHint": "Primary description of the class that will appear first.",
+    "FIELDS": {
+      "description": {
+        "additionalEquipment": {
+          "label": "Additional Equipment Description",
+          "hint": "Additional descriptive text displayed beneath the starting equipment section."
+        },
+        "additionalHitPoints": {
+          "label": "Additional Hit Points Description",
+          "hint": "Additional descriptive text displayed beneath the auto-generated hit points section."
+        },
+        "additionalTraits": {
+          "label": "Additional Proficiencies Description",
+          "hint": "Additional descriptive text displayed beneath list of proficiencies granted by this class."
+        },
+        "subclass": {
+          "label": "Subclass Introduction",
+          "hint": "Introduction that will be displayed before this class's subclasses."
+        },
+        "value": {
+          "label": "Introduction",
+          "hint": "Primary description of the class that will appear first."
+        }
+      },
+      "item": {
+        "label": "Selected Class"
+      },
+      "style": {
+        "label": "Style",
+        "hint": "Force the page style to use modern or legacy formatting, rather than what is specified by the class."
+      },
+      "subclassHeader": {
+        "label": "Subclass Header"
+      },
+      "subclassItems": {
+        "label": "Subclasses"
+      }
+    },
     "EquipmentHeader": "Equipment",
     "EquipmentDescription": "You start with the following equipment, in addition to the equipment granted by your background:",
-    "FeaturesHeader": "Class Features",
-    "FeaturesDescription": "As a {lowercaseName}, you gain the following class features, which are summarized in the {name} table.",
-    "HitDice": "<strong>Hit Dice:</strong> {dice} per {class} level",
-    "HitPointsHeader": "Hit Points",
-    "HitPointsLevel1": "<strong>Hit Points at 1st Level:</strong> {max} + your Constitution modifier",
-    "HitPointsLevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your Constitution modifier per {class} level after 1st",
-    "Item": "Selected Class",
+    "Features": {
+      "DescriptionLegacy": "As a {lowercaseName}, you gain the following class features, which are summarized in the {name} table.",
+      "DescriptionModern": "As a {name}, you gain the following class features when you reach the specified {name} levels. These features are listed in the {name} Features table.",
+      "Header": "Class Features",
+      "Name": "Level {level}: {name}"
+    },
+    "HitPoints": {
+      "Header": "Hit Points",
+      "HitDiceLegacy": "<strong>Hit Dice:</strong> {dice} per {class} level",
+      "HitDiceModern": "{dice} per {class} level",
+      "Level1": "<strong>Hit Points at 1st Level:</strong> {max} + your Constitution modifier",
+      "LevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your Constitution modifier per {class} level after 1st"
+    },
     "ItemHint": "Drop a class here",
     "NoValidClass": "No valid class selected, press the edit button to add a class.",
     "OptionalFeaturesCaption": "Optional Class Features",
@@ -3126,14 +3161,18 @@
     "SpellSlotLevel": "Slot Level",
     "SpellSlots": "Spell Slots",
     "SpellSlotsPerSpellLevel": "—Spell Slots per Spell Level—",
-    "SubclassHeader": "Subclass Header",
+    "Style": {
+      "Inferred": "Inferred from Source",
+      "Legacy": "Legacy",
+      "Modern": "Modern"
+    },
     "SubclassHint": "Drop subclasses here",
-    "SubclassDescription": "Subclass Introduction",
-    "SubclassDescriptionHint": "Introduction that will be displayed before this class's subclasses.",
-    "SubclassItems": "Subclasses",
     "TableCaption": "The {class}",
     "TableOptionalCaption": "Optional {class} Features",
-    "TraitsHeader": "Proficiencies"
+    "Traits": {
+      "Caption": "Core {class} Traits",
+      "Header": "Proficiencies"
+    }
   },
   "EditDescription": "Edit",
   "TableTOC": "Table: {caption}",
@@ -3160,9 +3199,21 @@
     }
   },
   "Subclass": {
-    "Description": "Introduction",
-    "DescriptionHint": "Description of the subclass that will appear before any listed features.",
-    "Item": "Selected Subclass",
+    "FIELDS": {
+      "description": {
+        "value": {
+          "label": "Introduction",
+          "hint": "Description of the subclass that will appear before any listed features."
+        }
+      },
+      "item": {
+        "label": "Selected Subclass"
+      },
+      "style": {
+        "label": "Style",
+        "hint": "Force the page style to use modern or legacy formatting, rather than what is specified by the subclass."
+      }
+    },
     "ItemHint": "Drop a subclass here",
     "NoValidSubclass": "No valid subclass selected, press the edit button to add a subclass."
   }
