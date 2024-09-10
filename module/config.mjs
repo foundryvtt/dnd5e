@@ -3005,6 +3005,11 @@ DND5E.conditionTypes = {
     icon: "systems/dnd5e/icons/svg/statuses/cursed.svg",
     pseudo: true
   },
+  dehydration: {
+    label: "EFFECT.DND5E.StatusDehydration",
+    icon: "systems/dnd5e/icons/svg/statuses/dehydration.svg",
+    pseudo: true
+  },
   deafened: {
     label: "DND5E.ConDeafened",
     icon: "systems/dnd5e/icons/svg/statuses/deafened.svg",
@@ -3022,6 +3027,11 @@ DND5E.conditionTypes = {
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv",
     levels: 6,
     reduction: { rolls: 2, speed: 5 }
+  },
+  falling: {
+    label: "EFFECT.DND5E.StatusFalling",
+    icon: "systems/dnd5e/icons/svg/statuses/falling.svg",
+    pseudo: true
   },
   frightened: {
     label: "DND5E.ConFrightened",
@@ -3042,6 +3052,11 @@ DND5E.conditionTypes = {
     label: "DND5E.ConInvisible",
     icon: "systems/dnd5e/icons/svg/statuses/invisible.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u"
+  },
+  malnutrition: {
+    label: "EFFECT.DND5E.StatusMalnutrition",
+    icon: "systems/dnd5e/icons/svg/statuses/malnutrition.svg",
+    pseudo: true
   },
   paralyzed: {
     label: "DND5E.ConParalyzed",
@@ -3080,6 +3095,11 @@ DND5E.conditionTypes = {
     icon: "systems/dnd5e/icons/svg/statuses/stunned.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS",
     statuses: ["incapacitated"]
+  },
+  suffocation: {
+    label: "EFFECT.DND5E.StatusSuffocation",
+    icon: "systems/dnd5e/icons/svg/statuses/suffocation.svg",
+    pseudo: true
   },
   surprised: {
     label: "EFFECT.DND5E.StatusSurprised",
