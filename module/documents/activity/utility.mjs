@@ -94,7 +94,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     }, message);
 
     /**
-     * A hook event that fires before a formula is rolled for an Utility activity.
+     * A hook event that fires before a formula is rolled for a Utility activity.
      * @function dnd5e.preRollFormulaV2
      * @memberof hookEvents
      * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
@@ -121,7 +121,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
 
     /**
-     * A hook event that fires after a formula has been rolled for an Utility activity.
+     * A hook event that fires after a formula has been rolled for a Utility activity.
      * @function dnd5e.rollFormulaV2
      * @memberof hookEvents
      * @param {BasicRoll[]} rolls              The resulting rolls.

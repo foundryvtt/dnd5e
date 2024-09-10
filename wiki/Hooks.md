@@ -228,7 +228,7 @@ Fires after a hit die has been rolled, but before updates have been applied. Ret
 | ------------------ | ----------- | -------------------------------------------- |
 | rolls              | BasicRoll[] | The resulting rolls.                         |
 | data               | object      |                                              |
-| data.actor         | Actor5e     | Actor for which the hit die has been rolled. |
+| data.subject       | Actor5e     | Actor for which the hit die has been rolled. |
 | data.updates       | object      |                                              |
 | data.updates.actor | object      | Updates that will be applied to the actor.   |
 | data.updates.class | object      | Updates that will be applied to the class.   |
@@ -548,18 +548,18 @@ Fires after an attack has been rolled but before any ammunition is consumed.
 | --------------- | ---------------------- | -------------------------------------------------------- |
 | rolls           | D20Roll[]              | The resulting rolls.                                     |
 | data            | object                 |                                                          |
-| data.activity   | AttackActivity         | The activity that performed the attack.                  |
+| data.subject    | AttackActivity         | The activity that performed the attack.                  |
 | data.ammoUpdate | AmmunitionUpdate\|null | Any updates related to ammo consumption for this attack. |
 
 ### `dnd5e.postRollAttack`
 
 Fires after an attack has been rolled and ammunition has been consumed.
 
-| Name            | Type                   | Description                             |
-| --------------- | ---------------------- | --------------------------------------- |
-| rolls           | D20Roll[]              | The resulting rolls.                    |
-| data            | object                 |                                         |
-| data.activity   | AttackActivity         | The activity that performed the attack. |
+| Name         | Type                   | Description                             |
+| ------------ | ---------------------- | --------------------------------------- |
+| rolls        | D20Roll[]              | The resulting rolls.                    |
+| data         | object                 |                                         |
+| data.subject | AttackActivity         | The activity that performed the attack. |
 
 ### `dnd5e.preRollDamageV2`
 
@@ -575,15 +575,15 @@ Fires before damage is rolled.  Returning `false` will prevent the damage from b
 
 Fires after damage has been rolled.
 
-| Name          | Type         | Description                           |
-| ------------- | ------------ | ------------------------------------- |
-| rolls         | DamageRoll[] | The resulting rolls.                  |
-| data          | object       |                                       |
-| data.activity | Activity     | The activity that performed the roll. |
+| Name         | Type         | Description                           |
+| ------------ | ------------ | ------------------------------------- |
+| rolls        | DamageRoll[] | The resulting rolls.                  |
+| data         | object       |                                       |
+| data.subject | Activity     | The activity that performed the roll. |
 
 ### `dnd5e.preRollFormulaV2`
 
-Fires before a formula is rolled for an Utility activity. Returning `false` will prevent the formula from being rolled.
+Fires before a formula is rolled for a Utility activity. Returning `false` will prevent the formula from being rolled.
 
 | Name    | Type                          | Description                                |
 | ------- | ----------------------------- | ------------------------------------------ |
@@ -593,13 +593,13 @@ Fires before a formula is rolled for an Utility activity. Returning `false` will
 
 ### `dnd5e.rollFormulaV2`
 
-Fires after a formula has been rolled for an Utility activity
+Fires after a formula has been rolled for a Utility activity.
 
-| Name          | Type            | Description                           |
-| ------------- | --------------- | ------------------------------------- |
-| rolls         | BasicRoll[]     | The resulting rolls.                  |
-| data          | object          |                                       |
-| data.activity | UtilityActivity | The activity that performed the roll. |
+| Name         | Type            | Description                           |
+| ------------ | --------------- | ------------------------------------- |
+| rolls        | BasicRoll[]     | The resulting rolls.                  |
+| data         | object          |                                       |
+| data.subject | UtilityActivity | The activity that performed the roll. |
 
 ### `dnd5e.preSummon`
 
@@ -699,6 +699,15 @@ Fires after an item's resource consumption has been calculated but before any ch
 | usage.itemUpdates | object | Updates that will be applied to the item being used. |
 | usage.resourceUpdates | object[] | Updates that will be applied to other items on the actor. |
 
+### `dnd5e.preDisplayCardV2`
+
+Fires before an item chat card is created.
+
+| Name    | Type                         | Description                                      |
+| ------- | ---------------------------- | ------------------------------------------------ |
+| item    | Item5e                       | Item for which the chat card is being displayed. |
+| message | ActivityMessageConfiguration | Data used to create the chat message.            |
+
 ### `dnd5e.preDisplayCard` ***Deprecated***
 
 Fires before an item chat card is created.
@@ -709,13 +718,13 @@ Fires before an item chat card is created.
 | chatData | object | Data used to create the chat message. |
 | options | ItemUseOptions | Options which configure the display of the item chat card. |
 
-### `dnd5e.displayCard` ***Deprecated***
+### `dnd5e.displayCard`
 
 Fires after an item chat card is created.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the chat card is being displayed. |
+| Name | Type                | Description                                            |
+| ---- | ------------------- | ------------------------------------------------------ |
+| item | Item5e              | Item for which the chat card is being displayed.       |
 | card | ChatMessage\|object | The created ChatMessage instance or ChatMessageData depending on whether options.createMessage was set to `true`. |
 
 ### `dnd5e.useItem` ***Deprecated***
@@ -785,7 +794,17 @@ Fires after the other formula has been rolled for an Item.
 | item | Item5e | Item for which the roll was performed. |
 | roll | Roll | The resulting roll. |
 
-### `dnd5e.preRollRecharge`
+### `dnd5e.preRollRechargeV2`
+
+Fires before recharge is rolled for an Item or Activity. Returning `false` will prevent the recharge from being rolled.
+
+| Name    | Type                          | Description                                |
+| ------- | ----------------------------- | ------------------------------------------ |
+| config  | BasicRollProcessConfiguration | Configuration data for the pending roll.   |
+| dialog  | BasicRollDialogConfiguration  | Configuration for the roll dialog.         |
+| message | BasicRollMessageConfiguration | Configuration data for the roll's message. |
+
+### `dnd5e.preRollRecharge` ***Deprecated***
 
 Fires before the Item is rolled to recharge. Returning `false` will prevent the recharge from being rolled.
 
@@ -798,7 +817,18 @@ Fires before the Item is rolled to recharge. Returning `false` will prevent the 
 | config.target | number | Total required to be considered recharged. |
 | config.chatMessage | boolean | Should a chat message be created for this roll? |
 
-### `dnd5e.rollRecharge`
+### `dnd5e.rollRechargeV2`
+
+Fires after the Item has rolled to recharge, but before any changes have been performed. Returning `false` will prevent the changes from being performed.
+
+| Name         | Type             | Description                                   |
+| ------------ | ---------------- | --------------------------------------------- |
+| rolls        | BasicRoll[]      | The resulting rolls.                          |
+| data         | object           |                                               |
+| data.subject | Item5e\|Activity | The item or activity that performed the roll. |
+| data.updates | object           | Updates to be applied to the subject.         |
+
+### `dnd5e.rollRecharge` ***Deprecated***
 
 Fires after the Item has rolled to recharge, but before any changes have been performed. Returning `false` will prevent the changes from being performed.
 
