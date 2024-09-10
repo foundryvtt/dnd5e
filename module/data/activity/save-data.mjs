@@ -53,11 +53,7 @@ export default class SaveActivityData extends BaseActivityData {
   /** @override */
   get ability() {
     if ( this.save.dc.calculation in CONFIG.DND5E.abilities ) return this.save.dc.calculation;
-    if ( this.save.dc.calculation === "spellcasting" ) {
-      let ability = this.isSpell ? this.item.system.availableAbilities?.first() : null;
-      ability ??= this.actor?.system.attributes?.spellcasting;
-      return ability ?? null;
-    }
+    if ( this.save.dc.calculation === "spellcasting" ) return this.spellcastingAbility;
     return this.save.ability;
   }
 

@@ -58,9 +58,7 @@ export default class AttackActivityData extends BaseActivityData {
   /** @override */
   get ability() {
     if ( this.attack.ability === "none" ) return null;
-    if ( this.attack.ability === "spellcasting" ) {
-      return this.isSpell ? super.ability : this.actor?.system.attributes?.spellcasting ?? null;
-    }
+    if ( this.attack.ability === "spellcasting" ) return this.spellcastingAbility;
     if ( this.attack.ability in CONFIG.DND5E.abilities ) return this.attack.ability;
 
     const availableAbilities = this.availableAbilities;
