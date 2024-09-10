@@ -366,7 +366,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     };
 
     let features = [];
-    for ( const advancement of item.advancement.byType.ItemGrant ?? [] ) {
+    const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? []).sort((lhs, rhs) => lhs.level - rhs.level);
+    for ( const advancement of itemGrants ) {
       if ( !!advancement.configuration.optional !== optional ) continue;
       features.push(...advancement.configuration.items.map(prepareFeature));
     }
