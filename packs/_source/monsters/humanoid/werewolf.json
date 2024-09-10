@@ -524,7 +524,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Werewolf",
@@ -629,7 +632,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -868,7 +872,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "mastery": ""
+        "mastery": "",
+        "identifier": "bite-wolf-or-hybrid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -903,7 +908,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -986,7 +992,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack-humanoid-or-hybrid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1021,7 +1028,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1188,7 +1196,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "spear-humanoid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1223,7 +1232,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1387,7 +1397,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "claws-hybrid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1422,7 +1433,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1505,7 +1517,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "shapechanger"
       },
       "effects": [],
       "folder": null,
@@ -1544,7 +1557,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1561,7 +1575,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "keen-hearing-and-smell"
       },
       "effects": [],
       "folder": null,
@@ -1596,7 +1611,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305055875,
-    "modifiedTime": 1725305055875,
+    "modifiedTime": 1725992602145,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!7tRhrxuknTpHpYcA"

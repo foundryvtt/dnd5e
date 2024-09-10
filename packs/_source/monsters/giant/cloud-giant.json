@@ -518,7 +518,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Cloud Giant",
@@ -623,7 +626,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -640,7 +644,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "keen-smell"
       },
       "effects": [],
       "folder": null,
@@ -675,7 +680,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -692,7 +698,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -731,7 +738,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -814,7 +822,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -853,7 +862,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1019,7 +1029,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "morningstar"
       },
       "effects": [],
       "folder": null,
@@ -1058,7 +1069,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1225,7 +1237,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "rock"
       },
       "effects": [],
       "folder": null,
@@ -1262,7 +1275,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1363,7 +1377,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1402,7 +1417,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1503,7 +1519,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fog-cloud"
       },
       "sort": 0,
       "flags": {
@@ -1542,7 +1559,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1646,7 +1664,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "light"
       },
       "sort": 0,
       "flags": {
@@ -1685,7 +1704,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "reaction",
@@ -1800,7 +1820,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "feather-fall"
       },
       "sort": 0,
       "flags": {
@@ -1839,7 +1860,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1955,7 +1977,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fly"
       },
       "sort": 0,
       "flags": {
@@ -1994,7 +2017,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "bonus",
@@ -2107,7 +2131,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "misty-step"
       },
       "sort": 0,
       "flags": {
@@ -2146,7 +2171,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2262,7 +2288,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "telekinesis"
       },
       "sort": 0,
       "flags": {
@@ -2301,7 +2328,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "minute",
@@ -2417,7 +2445,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "control-weather"
       },
       "sort": 0,
       "flags": {
@@ -2456,7 +2485,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2572,7 +2602,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "gaseous-form"
       },
       "sort": 0,
       "flags": {
@@ -2609,7 +2640,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305060142,
-    "modifiedTime": 1725305060142,
+    "modifiedTime": 1725992604039,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Aw2wmqGIatxe2ImI"

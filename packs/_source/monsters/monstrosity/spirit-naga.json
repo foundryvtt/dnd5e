@@ -523,7 +523,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Spirit Naga",
@@ -628,7 +631,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -899,7 +903,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "bite"
       },
       "effects": [],
       "folder": null,
@@ -938,7 +943,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -955,7 +961,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "rejuvenation"
       },
       "effects": [],
       "folder": null,
@@ -994,7 +1001,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1011,7 +1019,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -1052,7 +1061,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1152,7 +1162,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mage-hand"
       },
       "sort": 0,
       "flags": {
@@ -1191,7 +1202,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1291,7 +1303,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "minor-illusion"
       },
       "sort": 0,
       "flags": {
@@ -1330,7 +1343,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1461,7 +1475,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "ray-of-frost"
       },
       "sort": 0,
       "flags": {
@@ -1500,7 +1515,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1605,7 +1621,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "charm-person"
       },
       "sort": 0,
       "flags": {
@@ -1644,7 +1661,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1745,7 +1763,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1782,7 +1801,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1900,7 +1920,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "sleep"
       },
       "effects": [],
       "folder": null,
@@ -1941,7 +1962,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2048,7 +2070,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-thoughts"
       },
       "sort": 0,
       "flags": {
@@ -2087,7 +2110,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2194,7 +2218,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "hold-person"
       },
       "sort": 0,
       "flags": {
@@ -2233,7 +2258,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2356,7 +2382,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "lightning-bolt"
       },
       "sort": 0,
       "flags": {
@@ -2395,7 +2422,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2497,7 +2525,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "water-breathing"
       },
       "sort": 0,
       "flags": {
@@ -2536,7 +2565,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2659,7 +2689,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "blight"
       },
       "sort": 0,
       "flags": {
@@ -2698,7 +2729,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2815,7 +2847,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "dimension-door"
       },
       "sort": 0,
       "flags": {
@@ -2854,7 +2887,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2960,7 +2994,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "dominate-person"
       },
       "sort": 0,
       "flags": {
@@ -2997,7 +3032,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305061292,
-    "modifiedTime": 1725305061292,
+    "modifiedTime": 1725992604555,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!BAT6ld8qJZetpycL"

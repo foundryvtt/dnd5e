@@ -515,7 +515,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Scorpion",
@@ -620,7 +623,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -939,7 +943,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "sting"
       },
       "effects": [],
       "folder": null,
@@ -974,7 +979,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305086182,
-    "modifiedTime": 1725305086182,
+    "modifiedTime": 1725992616425,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Y0vxQVF7w2P38FK2"

@@ -515,7 +515,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Archmage",
@@ -620,7 +623,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -637,7 +641,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -676,7 +681,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -693,7 +699,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "magic-resistance"
       },
       "effects": [],
       "folder": null,
@@ -732,7 +739,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -900,7 +908,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "dagger"
       },
       "effects": [],
       "folder": null,
@@ -941,7 +950,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1072,7 +1082,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fire-bolt"
       },
       "sort": 0,
       "flags": {
@@ -1111,7 +1122,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1215,7 +1227,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "light"
       },
       "sort": 0,
       "flags": {
@@ -1254,7 +1267,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1354,7 +1368,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mage-hand"
       },
       "sort": 0,
       "flags": {
@@ -1393,7 +1408,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1491,7 +1507,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "prestidigitation"
       },
       "sort": 0,
       "flags": {
@@ -1530,7 +1547,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1660,7 +1678,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "shocking-grasp"
       },
       "sort": 0,
       "flags": {
@@ -1699,7 +1718,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1800,7 +1820,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1839,7 +1860,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "minute",
@@ -1940,7 +1962,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "identify"
       },
       "sort": 0,
       "flags": {
@@ -1977,7 +2000,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2077,7 +2101,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mage-armor"
       },
       "effects": [
         {
@@ -2162,7 +2187,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2281,7 +2307,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "magic-missile"
       },
       "sort": 0,
       "flags": {
@@ -2320,7 +2347,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2427,7 +2455,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-thoughts"
       },
       "sort": 0,
       "flags": {
@@ -2464,7 +2493,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2562,7 +2592,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mirror-image"
       },
       "effects": [],
       "folder": null,
@@ -2603,7 +2634,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "bonus",
@@ -2701,7 +2733,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "misty-step"
       },
       "sort": 0,
       "flags": {
@@ -2740,7 +2773,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "reaction",
@@ -2839,7 +2873,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "counterspell"
       },
       "sort": 0,
       "flags": {
@@ -2878,7 +2913,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2979,7 +3015,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fly"
       },
       "sort": 0,
       "flags": {
@@ -3018,7 +3055,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3141,7 +3179,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "lightning-bolt"
       },
       "sort": 0,
       "flags": {
@@ -3180,7 +3219,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3287,7 +3327,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "banishment"
       },
       "sort": 0,
       "flags": {
@@ -3326,7 +3367,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3451,7 +3493,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fire-shield"
       },
       "sort": 0,
       "flags": {
@@ -3577,7 +3620,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3678,7 +3722,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "stoneskin"
       },
       "sort": 0,
       "flags": {
@@ -3779,7 +3824,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3902,7 +3948,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "cone-of-cold"
       },
       "sort": 0,
       "flags": {
@@ -3941,7 +3988,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "minute",
@@ -4047,7 +4095,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "scrying"
       },
       "sort": 0,
       "flags": {
@@ -4086,7 +4135,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -4188,7 +4238,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "wall-of-force"
       },
       "sort": 0,
       "flags": {
@@ -4227,7 +4278,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -4328,7 +4380,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "globe-of-invulnerability"
       },
       "sort": 0,
       "flags": {
@@ -4367,7 +4420,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -4466,7 +4520,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "teleport"
       },
       "sort": 0,
       "flags": {
@@ -4505,7 +4560,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -4604,7 +4660,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mind-blank"
       },
       "sort": 0,
       "flags": {
@@ -4643,7 +4700,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -4740,7 +4798,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "time-stop"
       },
       "sort": 0,
       "flags": {
@@ -4779,7 +4838,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -4880,7 +4940,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "invisibility"
       },
       "sort": 0,
       "flags": {
@@ -4919,7 +4980,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -5017,7 +5079,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "disguise-self"
       },
       "sort": 0,
       "flags": {
@@ -5054,7 +5117,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305060831,
-    "modifiedTime": 1725305060831,
+    "modifiedTime": 1725992604285,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!B7lBOr1AahNZs4a6"

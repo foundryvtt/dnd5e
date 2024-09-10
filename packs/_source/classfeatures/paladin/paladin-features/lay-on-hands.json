@@ -14,7 +14,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
       "max": "5 * @classes.paladin.levels",
@@ -120,7 +121,8 @@
     "enchant": {},
     "prerequisites": {
       "level": null
-    }
+    },
+    "identifier": "lay-on-hands"
   },
   "flags": {},
   "img": "icons/magic/light/orbs-hand-gray.webp",
@@ -133,7 +135,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037383620,
-    "modifiedTime": 1725037383620,
+    "modifiedTime": 1725992288225,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!OdrvL3afwLOPeuYZ"

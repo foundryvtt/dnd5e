@@ -14,7 +14,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
       "max": "1",
@@ -119,13 +120,10 @@
     "prerequisites": {
       "level": null
     },
-    "properties": []
+    "properties": [],
+    "identifier": "blinding-spittle"
   },
-  "flags": {
-    "dnd5e": {
-      "migratedUses": null
-    }
-  },
+  "flags": {},
   "img": "icons/magic/nature/root-vine-thorned-fire-purple.webp",
   "effects": [],
   "folder": null,
@@ -136,7 +134,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725304964938,
-    "modifiedTime": 1725304964938,
+    "modifiedTime": 1725992570797,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!0awyZX05OnVLF4k2"

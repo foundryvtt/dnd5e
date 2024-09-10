@@ -671,7 +671,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -785,7 +786,8 @@
             "sort": 0
           }
         },
-        "attuned": false
+        "attuned": false,
+        "identifier": "amulet-holy-symbol"
       },
       "sort": 0,
       "flags": {},
@@ -820,7 +822,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -985,7 +988,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "javelin-melee"
       },
       "sort": 0,
       "flags": {},
@@ -1020,7 +1024,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1185,7 +1190,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "javelin-thrown"
       },
       "sort": 0,
       "flags": {},
@@ -1220,7 +1226,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 5,
         "weight": {
@@ -1266,7 +1273,8 @@
         "container": null,
         "activities": {},
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "javelin"
       },
       "sort": 0,
       "flags": {
@@ -1305,7 +1313,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1326,7 +1335,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "love-letter"
       },
       "sort": 0,
       "flags": {},
@@ -1361,7 +1371,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1412,7 +1423,8 @@
         },
         "container": null,
         "activities": {},
-        "attuned": false
+        "attuned": false,
+        "identifier": "chain-mail"
       },
       "sort": 0,
       "flags": {
@@ -1451,7 +1463,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1500,7 +1513,8 @@
         "container": null,
         "properties": [],
         "activities": {},
-        "attuned": false
+        "attuned": false,
+        "identifier": "shield"
       },
       "sort": 0,
       "flags": {
@@ -1539,7 +1553,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1704,7 +1719,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "longsword"
       },
       "sort": 0,
       "flags": {
@@ -1743,7 +1759,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1852,7 +1870,8 @@
             },
             "check": {
               "ability": "",
-              "dc": {}
+              "dc": {},
+              "associated": []
             },
             "uses": {
               "spent": 0,
@@ -1941,7 +1960,8 @@
           }
         },
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "hempen-rope-50-ft"
       },
       "sort": 0,
       "flags": {
@@ -1953,9 +1973,6 @@
         },
         "core": {
           "sourceId": "Compendium.dnd5e.items.QXmaarJ4X8P0C1HV"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/sundries/survival/rope-wrapped-brown.webp",
@@ -1989,7 +2006,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2010,7 +2028,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "mess-kit"
       },
       "sort": 0,
       "flags": {
@@ -2055,7 +2074,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2076,7 +2096,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "bedroll"
       },
       "sort": 0,
       "flags": {
@@ -2121,7 +2142,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2242,15 +2265,13 @@
           }
         },
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "waterskin"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.Uv0ilmzbWvqmlCVH"
-        },
-        "dnd5e": {
-          "migratedUses": 4
         }
       },
       "img": "icons/sundries/survival/wetskin-leather-purple.webp",
@@ -2284,7 +2305,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2315,7 +2337,8 @@
         },
         "container": null,
         "properties": [],
-        "attuned": false
+        "attuned": false,
+        "identifier": "backpack"
       },
       "sort": 0,
       "flags": {
@@ -2354,7 +2377,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2449,7 +2473,8 @@
           "spent": 0,
           "recovery": []
         },
-        "attuned": false
+        "attuned": false,
+        "identifier": "smiths-tools"
       },
       "sort": 0,
       "flags": {
@@ -2488,7 +2513,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2509,7 +2535,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "tinderbox"
       },
       "sort": 0,
       "flags": {
@@ -2548,7 +2575,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "quantity": 10,
         "weight": {
@@ -2706,7 +2735,8 @@
           }
         },
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "torch"
       },
       "sort": 0,
       "flags": {
@@ -2718,9 +2748,6 @@
         },
         "core": {
           "sourceId": "Compendium.dnd5e.items.BnOCLuNWhVvzHLjl"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/sundries/lights/torch-black.webp",
@@ -2754,7 +2781,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "quantity": 10,
         "weight": {
@@ -2875,15 +2904,13 @@
           }
         },
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "rations"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.f4w4GxBi0nYXmhX4"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
@@ -2916,11 +2943,12 @@
           "custom": "",
           "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "advancement": [],
         "startingEquipment": [],
-        "identifier": ""
+        "identifier": "local-champion"
       },
       "img": "icons/environment/people/infantry-armored.webp",
       "effects": [],
@@ -2957,7 +2985,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "identifier": "paladin",
         "levels": 1,
@@ -3558,7 +3587,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "uses": {
           "max": "1 + @abilities.cha.mod",
@@ -3656,13 +3687,13 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "divine-sense"
       },
       "flags": {
         "dnd5e": {
           "sourceId": "Compendium.dnd5e.classfeatures.E8ozg8avUVOX9N7u",
-          "advancementOrigin": "xogb503g0jZcBEyb.RFgaDXztbtJFtTZ1",
-          "migratedUses": 1
+          "advancementOrigin": "xogb503g0jZcBEyb.RFgaDXztbtJFtTZ1"
         }
       },
       "img": "icons/creatures/eyes/human-single-blue.webp",
@@ -3697,7 +3728,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "uses": {
           "max": "5 * @classes.paladin.levels",
@@ -3803,13 +3836,13 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "lay-on-hands"
       },
       "flags": {
         "dnd5e": {
           "sourceId": "Compendium.dnd5e.classfeatures.OdrvL3afwLOPeuYZ",
-          "advancementOrigin": "xogb503g0jZcBEyb.RFgaDXztbtJFtTZ1",
-          "migratedUses": 5
+          "advancementOrigin": "xogb503g0jZcBEyb.RFgaDXztbtJFtTZ1"
         }
       },
       "img": "icons/magic/light/orbs-hand-gray.webp",
@@ -3842,7 +3875,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "identifier": "half-orc",
         "advancement": [
@@ -4025,7 +4059,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "uses": {
           "max": "1",
@@ -4133,13 +4169,13 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "relentless-endurance"
       },
       "flags": {
         "dnd5e": {
           "sourceId": "Compendium.dnd5e.races.97c8i9Z28thvZuA8",
-          "advancementOrigin": "PIvfnfQVQ98MdCmQ.Nj1VOKOTjxKU15J8",
-          "migratedUses": 1
+          "advancementOrigin": "PIvfnfQVQ98MdCmQ.Nj1VOKOTjxKU15J8"
         }
       },
       "img": "icons/magic/control/control-influence-rally-purple.webp",
@@ -4174,7 +4210,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -4191,7 +4228,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "savage-attacks"
       },
       "flags": {
         "dnd5e": {
@@ -4235,7 +4273,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725036839286,
-    "modifiedTime": 1725036839286,
+    "modifiedTime": 1725992447531,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Dh1AA6w104V17V6w"

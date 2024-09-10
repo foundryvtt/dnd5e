@@ -518,7 +518,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Drow",
@@ -623,7 +626,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -640,7 +644,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "fey-ancestry"
       },
       "effects": [],
       "folder": null,
@@ -679,7 +684,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -696,7 +702,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -735,7 +742,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -752,7 +760,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "sunlight-sensitivity"
       },
       "effects": [],
       "folder": null,
@@ -791,7 +800,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -955,7 +965,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "shortsword"
       },
       "effects": [],
       "folder": null,
@@ -994,7 +1005,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1247,7 +1259,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "hand-crossbow"
       },
       "effects": [],
       "folder": null,
@@ -1286,7 +1299,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1335,7 +1349,8 @@
         "crewed": false,
         "properties": [],
         "activities": {},
-        "attuned": false
+        "attuned": false,
+        "identifier": "chain-shirt"
       },
       "effects": [],
       "folder": null,
@@ -1376,7 +1391,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1492,7 +1508,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "darkness"
       },
       "sort": 0,
       "flags": {
@@ -1531,7 +1548,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1651,7 +1669,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "faerie-fire"
       },
       "sort": 0,
       "flags": {
@@ -1690,7 +1709,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1791,7 +1811,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "dancing-lights"
       },
       "sort": 0,
       "flags": {
@@ -1828,7 +1849,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305049294,
-    "modifiedTime": 1725305049294,
+    "modifiedTime": 1725992599172,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!1vaBSMUfOy6JPJ14"

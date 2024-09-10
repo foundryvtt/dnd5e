@@ -524,7 +524,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Weretiger",
@@ -629,7 +632,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -712,7 +716,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "shapechanger"
       },
       "effects": [],
       "folder": null,
@@ -751,7 +756,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -768,7 +774,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "keen-hearing-and-smell"
       },
       "effects": [],
       "folder": null,
@@ -803,7 +810,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -958,7 +966,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "pounce-tiger-or-hybrid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -993,7 +1002,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1076,7 +1086,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack-humanoid-or-hybrid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1111,7 +1122,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1350,7 +1362,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "mastery": ""
+        "mastery": "",
+        "identifier": "bite-tiger-or-hybrid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1385,7 +1398,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1549,7 +1563,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "claw-tiger-or-hybrid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1584,7 +1599,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1751,7 +1767,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "scimitar-humanoid-or-hybrid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1786,7 +1803,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1954,7 +1972,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "longbow-humanoid-or-hybrid-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1989,7 +2008,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305116433,
-    "modifiedTime": 1725305116433,
+    "modifiedTime": 1725992630737,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!zIr3NaNF0mWz5Ahq"
