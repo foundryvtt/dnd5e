@@ -43,9 +43,9 @@ export default class FormulaField extends foundry.data.fields.StringField {
 
   /** @override */
   _applyChangeAdd(value, delta, model, change) {
-    if (!value) return delta;
+    if ( !value ) return delta;
     const operator = delta.startsWith("-") ? "-" : "+";
-    delta = delta.replace(/^[+-]?/, "").trim();
+    delta = delta.replace(/^[+-]/, "").trim();
     return `${value} ${operator} ${delta}`;
   }
 
@@ -53,7 +53,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
 
   /** @override */
   _applyChangeMultiply(value, delta, model, change) {
-    if (!value) return delta;
+    if ( !value ) return delta;
     const terms = new Roll(value).terms;
     if ( terms.length > 1 ) return `(${value}) * ${delta}`;
     return `${value} * ${delta}`;
@@ -63,7 +63,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
 
   /** @override */
   _applyChangeUpgrade(value, delta, model, change) {
-    if (!value) return delta;
+    if ( !value ) return delta;
     const terms = new Roll(value).terms;
     if ( (terms.length === 1) && (terms[0].fn === "max") ) return current.replace(/\)$/, `, ${delta})`);
     return `max(${value}, ${delta})`;
@@ -73,7 +73,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
 
   /** @override */
   _applyChangeDowngrade(value, delta, model, change) {
-    if (!value) return delta;
+    if ( !value ) return delta;
     const terms = new Roll(value).terms;
     if ( (terms.length === 1) && (terms[0].fn === "min") ) return current.replace(/\)$/, `, ${delta})`);
     return `min(${value}, ${delta})`;
