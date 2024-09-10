@@ -37,7 +37,7 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
   /* -------------------------------------------- */
 
   /** @override */
-  _usageChatButtons() {
+  _usageChatButtons(message) {
     const buttons = [];
     const dc = this.check.dc.value;
 
@@ -76,7 +76,7 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
     });
     else if ( this.check.ability ) createButton(this.check.ability);
 
-    return buttons.concat(super._usageChatButtons());
+    return buttons.concat(super._usageChatButtons(message));
   }
 
   /* -------------------------------------------- */

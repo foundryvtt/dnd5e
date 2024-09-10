@@ -35,15 +35,15 @@ export default class DamageActivity extends ActivityMixin(DamageActivityData) {
   /* -------------------------------------------- */
 
   /** @override */
-  _usageChatButtons() {
-    if ( !this.damage.parts.length ) return super._usageChatButtons();
+  _usageChatButtons(message) {
+    if ( !this.damage.parts.length ) return super._usageChatButtons(message);
     return [{
       label: game.i18n.localize("DND5E.Damage"),
       icon: '<i class="fa-solid fa-burst" inert></i>',
       dataset: {
         action: "rollDamage"
       }
-    }].concat(super._usageChatButtons());
+    }].concat(super._usageChatButtons(message));
   }
 
   /* -------------------------------------------- */
