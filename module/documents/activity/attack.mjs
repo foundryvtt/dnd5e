@@ -85,8 +85,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     const targets = getTargetDescriptors();
 
     if ( (this.item.type === "weapon") && (this.item.system.quantity === 0) ) {
-      ui.notifications.error("DND5E.ATTACK.Warning.NoQuanity", { localize: true });
-      return;
+      ui.notifications.warn("DND5E.ATTACK.Warning.NoQuantity", { localize: true });
     }
 
     let ammunitionOptions;
