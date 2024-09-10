@@ -199,7 +199,7 @@ export async function damageRoll({
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
   foundry.utils.logCompatibilityWarning(
-    "The `damageRoll` standalone method has been deprecated and replaced with `CONFIG.dice.DamageRoll.build`.",
+    "The `damageRoll` standalone method has been deprecated and replaced with `CONFIG.Dice.DamageRoll.build`.",
     { since: "DnD5e 4.0", until: "DnD5e 4.4" }
   );
 

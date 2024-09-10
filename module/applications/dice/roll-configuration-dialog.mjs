@@ -218,7 +218,7 @@ export default class RollConfigurationDialog extends Application5e {
    * Prepare the context for the buttons.
    * @param {ApplicationRenderContext} context  Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
-   * @returns {ApplicationRenderContext}
+   * @returns {Promise<ApplicationRenderContext>}
    * @protected
    */
   async _prepareButtonsContext(context, options) {
@@ -237,7 +237,7 @@ export default class RollConfigurationDialog extends Application5e {
    * Prepare the context for the roll configuration section.
    * @param {ApplicationRenderContext} context  Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
-   * @returns {ApplicationRenderContext}
+   * @returns {Promise<ApplicationRenderContext>}
    * @protected
    */
   async _prepareConfigurationContext(context, options) {
@@ -256,7 +256,7 @@ export default class RollConfigurationDialog extends Application5e {
    * Prepare the context for the formulas list.
    * @param {ApplicationRenderContext} context  Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
-   * @returns {ApplicationRenderContext}
+   * @returns {Promise<ApplicationRenderContext>}
    * @protected
    */
   async _prepareFormulasContext(context, options) {
@@ -306,7 +306,7 @@ export default class RollConfigurationDialog extends Application5e {
     Hooks.callAll("dnd5e.buildRollConfig", this, config, formData, index);
 
     const situational = formData?.get(`roll.${index}.situational`);
-    if ( situational && (config.situation !== false) ) {
+    if ( situational && (config.situational !== false) ) {
       config.parts.push("@situational");
       config.data.situational = situational;
     } else {
