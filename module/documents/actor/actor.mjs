@@ -2099,7 +2099,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     formula ??= `max(0, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
-    rollConfig.origin = this;
+    rollConfig.subject = this;
     rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -2164,13 +2164,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      * @param {BasicRoll[]} rolls          The resulting rolls.
      * @param {object} data
-     * @param {Actor5e} data.actor         Actor for which the hit die has been rolled.
+     * @param {Actor5e} data.subject       Actor for which the hit die has been rolled.
      * @param {object} data.updates
      * @param {object} data.updates.actor  Updates that will be applied to the actor.
      * @param {object} data.updates.class  Updates that will be applied to the class.
      * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollHitDieV2", rolls, { actor: this, updates }) === false ) return returnValue;
+    if ( Hooks.call("dnd5e.rollHitDieV2", rolls, { subject: this, updates }) === false ) return returnValue;
 
     if ( "dnd5e.rollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -2183,6 +2183,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Perform updates
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
     if ( !foundry.utils.isEmpty(updates.class) ) await cls.update(updates.class);
+
+    /**
+     * A hook event that fires after a hit die has been rolled for an Actor and updates have been performed.
+     * @function dnd5e.postRollHitDie
+     * @memberof hookEvents
+     * @param {BasicRoll[]} rolls     The resulting rolls.
+     * @param {object} data
+     * @param {Actor5e} data.subject  Actor for which the roll was performed.
+     */
+    Hooks.callAll("dnd5e.postRollHitDie", rolls, { subject: this });
 
     return returnValue;
   }

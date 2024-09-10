@@ -157,62 +157,113 @@ export default class UsesField extends SchemaField {
   /**
    * Rolls a recharge test for an Item or Activity that uses the d6 recharge mechanic.
    * @this {Item5e|Activity}
-   * @returns {Promise<Roll|void>}
+   * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
+   * @returns {Promise<BasicRoll[]|void>}            The created Roll instances, or `null` if no die was rolled.
    */
-  static async rollRecharge() {
+  static async rollRecharge(config={}, dialog={}, message={}) {
     const uses = this.system ? this.system.uses : this.uses;
     const recharge = uses?.recovery.find(({ period }) => period === "recharge");
     if ( !recharge ) return;
 
-    const rollConfig = {
-      formula: "1d6",
-      data: this.getRollData(),
-      target: parseInt(recharge.formula),
-      chatMessage: true
-    };
+    const rollConfig = foundry.utils.mergeObject({
+      rolls: [{
+        parts: ["1d6"],
+        data: this.getRollData(),
+        options: {
+          target: parseInt(recharge.formula)
+        }
+      }]
+    }, config);
+    rollConfig.subject = this;
 
-    /**
-     * A hook event that fires before the Item or Activity is rolled to recharge.
-     * @function dnd5e.preRollRecharge
-     * @memberof hookEvents
-     * @param {Item5e|Activity} subject     Item or Activity for which the roll is being performed.
-     * @param {object} config               Configuration data for the pending roll.
-     * @param {string} config.formula       Formula that will be used to roll the recharge.
-     * @param {object} config.data          Data used when evaluating the roll.
-     * @param {number} config.target        Total required to be considered recharged.
-     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
-     * @returns {boolean}                   Explicitly return false to prevent the roll from being performed.
-     */
-    if ( Hooks.call("dnd5e.preRollRecharge", this, rollConfig) === false ) return;
+    const dialogConfig = foundry.utils.mergeObject({ configure: false }, dialog);
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).evaluate();
-    const success = roll.total >= rollConfig.target;
-
-    if ( rollConfig.chatMessage ) {
-      const resultMessage = game.i18n.localize(`DND5E.ItemRecharge${success ? "Success" : "Failure"}`);
-      roll.toMessage({
-        flavor: `${game.i18n.format("DND5E.ItemRechargeCheck", { name: this.name, result: resultMessage })}`,
+    const messageConfig = foundry.utils.mergeObject(({
+      create: true,
+      data: {
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
+      },
+      rollMode: game.settings.get("core", "rollMode")
+    }));
+
+    /**
+     * A hook event that fires before recharge is rolled for an Item or Activity.
+     * @function dnd5e.preRollRechargeV2
+     * @memberof hookEvents
+     * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
+     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
+     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
+     * @returns {boolean}                              Explicitly return `false` to prevent recharge from being rolled.
+     */
+    if ( Hooks.call("dnd5e.preRollRechargeV2", rollConfig, dialogConfig, messageConfig) === false ) return;
+
+    if ( "dnd5e.preRollRecharge" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preRollRecharge` hook has been deprecated and replaced with `dnd5e.preRollRechargeV2`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      const hookData = {
+        formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
+        target: rollConfig.rolls[0].options.target, chatMessage: messageConfig.create
+      };
+      if ( Hooks.call("dnd5e.preRollRecharge", this, hookData) === false ) return;
+      rollConfig.rolls[0].parts[0] = hookData.formula;
+      rollConfig.rolls[0].data = hookData.data;
+      rollConfig.rolls[0].options.target = hookData.target;
+      messageConfig.create = hookData.chatMessage;
+    }
+
+    const createMessage = messageConfig.create !== false;
+    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, { ...messageConfig, create: false });
+    if ( rolls?.length && createMessage ) {
+      messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {
+        name: this.name,
+        result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
       });
+      await CONFIG.Dice.BasicRoll.toMessage(rolls, messageConfig.data, { rollMode: messageConfig.rollMode });
+    }
+
+    const updates = {};
+    if ( rolls[0].isSuccess ) {
+      if ( this instanceof Item ) updates["system.uses.spent"] = 0;
+      else updates["uses.spent"] = 0;
     }
 
     /**
-     * A hook event that fires after the Item or Activity has rolled to recharge, but before any changes have been
-     * made.
-     * @function dnd5e.rollRecharge
+     * A hook event that fires after an Item or Activity has rolled to recharge, but before any usage changes have
+     * been made.
+     * @function dnd5e.rollRechargeV2
      * @memberof hookEvents
-     * @param {Item5e|Activity} subject  Item or Activity for which the roll was performed.
-     * @param {Roll} roll                The resulting roll.
-     * @returns {boolean}                Explicitly return false to prevent the item from being recharged.
+     * @param {BasicRoll[]} rolls     The resulting rolls.
+     * @param {object} data
+     * @param {Actor5e} data.subject  Item or Activity for which the roll was performed.
+     * @param {object} data.updates   Updates to be applied to the subject.
+     * @returns {boolean}             Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollRecharge", this, roll) === false ) return roll;
+    if ( Hooks.call("dnd5e.rollRechargeV2", rolls, { subject: this, updates }) === false ) return rolls;
 
-    // Recharge the Item or Activity
-    if ( success ) {
-      if ( this instanceof Item ) await this.update({ "system.uses.spent": 0 });
-      else await this.item.updateActivity(this.id, { "uses.spent": 0 });
+    if ( "dnd5e.rollRecharge" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.rollRecharge` hook has been deprecated and replaced with `dnd5e.rollRechargeV2`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      if ( Hooks.call("dnd5e.rollRecharge", this, rolls[0]) === false ) return rolls;
     }
 
-    return roll;
+    if ( !foundry.utils.isEmpty(updates) ) await this.update(updates);
+
+    /**
+     * A hook event that fires after an Item or Activity has rolled recharge and usage updates have been performed.
+     * @function dnd5e.postRollRecharge
+     * @memberof hookEvents
+     * @param {BasicRoll[]} rolls     The resulting rolls.
+     * @param {object} data
+     * @param {Actor5e} data.subject  Item or Activity for which the roll was performed.
+     */
+    Hooks.callAll("dnd5e.postRollRecharge", rolls, { subject: this });
+
+    return rolls;
   }
 }
