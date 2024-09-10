@@ -530,7 +530,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Glabrezu",
@@ -635,7 +638,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -652,7 +656,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -691,7 +696,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -708,7 +714,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "magic-resistance"
       },
       "effects": [],
       "folder": null,
@@ -747,7 +754,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -830,7 +838,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -869,7 +878,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1035,7 +1045,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "pincer"
       },
       "effects": [],
       "folder": null,
@@ -1070,7 +1081,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1234,7 +1246,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "fist"
       },
       "effects": [],
       "folder": null,
@@ -1271,7 +1284,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1372,7 +1386,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "darkness"
       },
       "sort": 0,
       "flags": {
@@ -1411,7 +1426,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1512,7 +1528,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1551,7 +1568,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1651,7 +1669,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "dispel-magic"
       },
       "sort": 0,
       "flags": {
@@ -1688,7 +1707,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1872,7 +1892,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "confusion"
       },
       "effects": [],
       "folder": null,
@@ -1913,7 +1934,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2029,7 +2051,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fly"
       },
       "sort": 0,
       "flags": {
@@ -2068,7 +2091,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2187,7 +2211,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "power-word-stun"
       },
       "sort": 0,
       "flags": {
@@ -2224,7 +2249,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305077053,
-    "modifiedTime": 1725305077053,
+    "modifiedTime": 1725992611731,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!OGPHF4sCVOAi87TU"

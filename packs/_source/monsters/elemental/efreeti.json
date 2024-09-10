@@ -519,7 +519,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Efreeti",
@@ -624,7 +627,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -641,7 +645,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "elemental-demise"
       },
       "effects": [],
       "folder": null,
@@ -680,7 +685,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -697,7 +703,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -736,7 +743,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "minute",
@@ -852,7 +860,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "conjure-elemental-fire-elemental-only"
       },
       "effects": [],
       "folder": null,
@@ -891,7 +900,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -974,7 +984,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -1013,7 +1024,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1198,7 +1210,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "scimitar"
       },
       "effects": [],
       "folder": null,
@@ -1237,7 +1250,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1403,7 +1417,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "hurl-flame"
       },
       "effects": [],
       "folder": null,
@@ -1440,7 +1455,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1541,7 +1557,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1580,7 +1597,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1702,7 +1720,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "enlarge-reduce"
       },
       "sort": 0,
       "flags": {
@@ -1741,7 +1760,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1855,7 +1875,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "tongues"
       },
       "sort": 0,
       "flags": {
@@ -1894,7 +1915,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2010,7 +2032,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "gaseous-form"
       },
       "sort": 0,
       "flags": {
@@ -2049,7 +2072,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2165,7 +2189,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "invisibility"
       },
       "sort": 0,
       "flags": {
@@ -2204,7 +2229,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2321,7 +2347,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "major-image"
       },
       "sort": 0,
       "flags": {
@@ -2360,7 +2387,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2555,7 +2583,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "plane-shift"
       },
       "sort": 0,
       "flags": {
@@ -2594,7 +2623,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2734,7 +2764,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "wall-of-fire"
       },
       "sort": 0,
       "flags": {
@@ -2771,7 +2802,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305073284,
-    "modifiedTime": 1725305073284,
+    "modifiedTime": 1725992609953,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!LTomFUTBrkRi0Pj5"

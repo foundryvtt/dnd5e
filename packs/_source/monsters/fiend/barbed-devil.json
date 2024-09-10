@@ -530,7 +530,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Barbed Devil",
@@ -635,7 +638,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -735,7 +739,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "barbed-hide"
       },
       "effects": [],
       "folder": null,
@@ -774,7 +779,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -791,7 +797,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "devils-sight"
       },
       "effects": [],
       "folder": null,
@@ -826,7 +833,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -843,7 +851,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "magic-resistance"
       },
       "effects": [],
       "folder": null,
@@ -882,7 +891,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -965,7 +975,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -1004,7 +1015,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1170,7 +1182,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "claw"
       },
       "effects": [],
       "folder": null,
@@ -1205,7 +1218,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1369,7 +1383,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "tail"
       },
       "effects": [],
       "folder": null,
@@ -1404,7 +1419,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1570,7 +1586,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "hurl-flame"
       },
       "effects": [],
       "folder": null,
@@ -1605,7 +1622,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305110478,
-    "modifiedTime": 1725305110478,
+    "modifiedTime": 1725992627968,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!sLdpiuaZF8lujJQy"

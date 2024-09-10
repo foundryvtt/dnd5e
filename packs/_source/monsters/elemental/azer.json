@@ -522,7 +522,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Azer",
@@ -627,7 +630,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -676,7 +680,8 @@
         "crewed": false,
         "properties": [],
         "activities": {},
-        "attuned": false
+        "attuned": false,
+        "identifier": "shield"
       },
       "effects": [],
       "folder": null,
@@ -715,7 +720,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -818,7 +824,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "heated-body"
       },
       "effects": [],
       "folder": null,
@@ -857,7 +864,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -874,7 +882,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "heated-weapons"
       },
       "effects": [],
       "folder": null,
@@ -913,7 +922,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -930,7 +940,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "illumination"
       },
       "effects": [],
       "folder": null,
@@ -969,7 +980,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1153,7 +1165,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "warhammer"
       },
       "effects": [],
       "folder": null,
@@ -1192,7 +1205,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305068997,
-    "modifiedTime": 1725305068997,
+    "modifiedTime": 1725992608084,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!IiEDPMWqBlzkggYD"

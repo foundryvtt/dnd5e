@@ -530,7 +530,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Pit Fiend",
@@ -635,7 +638,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -723,7 +727,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "fear-aura"
       },
       "effects": [],
       "folder": null,
@@ -762,7 +767,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -779,7 +785,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "magic-resistance"
       },
       "effects": [],
       "folder": null,
@@ -818,7 +825,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -835,7 +843,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "magic-weapons"
       },
       "effects": [],
       "folder": null,
@@ -874,7 +883,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -891,7 +901,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -930,7 +941,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1013,7 +1025,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -1052,7 +1065,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1371,7 +1385,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "bite"
       },
       "effects": [],
       "folder": null,
@@ -1410,7 +1425,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1576,7 +1592,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "claw"
       },
       "effects": [],
       "folder": null,
@@ -1611,7 +1628,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1795,7 +1813,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "mace"
       },
       "effects": [],
       "folder": null,
@@ -1834,7 +1853,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2000,7 +2020,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "tail"
       },
       "effects": [],
       "folder": null,
@@ -2037,7 +2058,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2138,7 +2160,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -2177,7 +2200,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2301,7 +2325,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fireball"
       },
       "sort": 0,
       "flags": {
@@ -2340,7 +2365,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2462,7 +2488,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "hold-monster"
       },
       "sort": 0,
       "flags": {
@@ -2501,7 +2528,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2641,7 +2669,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "wall-of-fire"
       },
       "sort": 0,
       "flags": {
@@ -2678,7 +2707,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305079716,
-    "modifiedTime": 1725305079716,
+    "modifiedTime": 1725992612891,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!RCv5y7iWlfNxkinx"

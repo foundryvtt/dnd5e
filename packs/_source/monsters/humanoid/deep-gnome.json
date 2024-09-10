@@ -519,7 +519,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Deep Gnome",
@@ -624,7 +627,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -673,7 +677,8 @@
         "crewed": false,
         "properties": [],
         "activities": {},
-        "attuned": false
+        "attuned": false,
+        "identifier": "chain-shirt"
       },
       "effects": [],
       "folder": null,
@@ -712,7 +717,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -729,7 +735,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "stone-camouflage"
       },
       "effects": [],
       "folder": null,
@@ -768,7 +775,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -785,7 +793,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "gnome-cunning"
       },
       "effects": [],
       "folder": null,
@@ -824,7 +833,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -988,7 +998,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "war-pick"
       },
       "effects": [],
       "folder": null,
@@ -1027,7 +1038,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1044,7 +1056,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -1083,7 +1096,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1339,7 +1353,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "poisoned-dart"
       },
       "effects": [],
       "folder": null,
@@ -1376,7 +1391,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1476,7 +1492,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "nondetection"
       },
       "sort": 0,
       "flags": {
@@ -1515,7 +1532,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1634,7 +1652,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "blindness-deafness"
       },
       "sort": 0,
       "flags": {
@@ -1673,7 +1692,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1786,7 +1806,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "blur"
       },
       "sort": 0,
       "flags": {
@@ -1825,7 +1846,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1938,7 +1960,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "disguise-self"
       },
       "sort": 0,
       "flags": {
@@ -1975,7 +1998,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305087259,
-    "modifiedTime": 1725305087259,
+    "modifiedTime": 1725992616907,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!ZM1P6LoYSwMiIJN9"

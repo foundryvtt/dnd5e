@@ -515,7 +515,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Crab",
@@ -620,7 +623,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -784,7 +788,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "claw"
       },
       "effects": [],
       "folder": null,
@@ -819,7 +824,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -836,7 +842,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "amphibious"
       },
       "effects": [],
       "folder": null,
@@ -875,7 +882,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305057593,
-    "modifiedTime": 1725305057593,
+    "modifiedTime": 1725992602952,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!8RgUhb31VvjUNZU1"

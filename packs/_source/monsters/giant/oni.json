@@ -518,7 +518,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Oni",
@@ -623,7 +626,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -674,7 +678,8 @@
         "container": null,
         "crewed": false,
         "activities": {},
-        "attuned": false
+        "attuned": false,
+        "identifier": "chain-mail"
       },
       "effects": [],
       "folder": null,
@@ -713,7 +718,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -881,7 +887,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "glaive"
       },
       "effects": [],
       "folder": null,
@@ -920,7 +927,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1084,7 +1092,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "claw-oni-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1119,7 +1128,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1136,7 +1146,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -1175,7 +1186,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1258,7 +1270,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -1297,7 +1310,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1391,7 +1405,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "regeneration"
       },
       "effects": [],
       "folder": null,
@@ -1430,7 +1445,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1447,7 +1463,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "magic-weapons"
       },
       "effects": [],
       "folder": null,
@@ -1486,7 +1503,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1569,7 +1587,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "change-shape"
       },
       "effects": [],
       "folder": null,
@@ -1610,7 +1629,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1711,7 +1731,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "darkness"
       },
       "sort": 0,
       "flags": {
@@ -1750,7 +1771,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1851,7 +1873,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "invisibility"
       },
       "sort": 0,
       "flags": {
@@ -1890,7 +1913,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2010,7 +2034,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "charm-person"
       },
       "sort": 0,
       "flags": {
@@ -2049,7 +2074,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2187,7 +2213,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "cone-of-cold"
       },
       "sort": 0,
       "flags": {
@@ -2226,7 +2253,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2342,7 +2370,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "gaseous-form"
       },
       "sort": 0,
       "flags": {
@@ -2379,7 +2408,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2512,7 +2542,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "sleep"
       },
       "effects": [],
       "folder": null,
@@ -2551,7 +2582,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305072782,
-    "modifiedTime": 1725305072782,
+    "modifiedTime": 1725992609736,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!L1w8yBkInMscfJ3F"

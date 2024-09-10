@@ -524,7 +524,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Couatl",
@@ -629,7 +632,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -884,7 +888,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "bite"
       },
       "effects": [],
       "folder": null,
@@ -923,7 +928,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1089,7 +1095,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "constrict"
       },
       "effects": [],
       "folder": null,
@@ -1124,7 +1131,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1207,7 +1215,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "change-shape"
       },
       "effects": [],
       "folder": null,
@@ -1246,7 +1255,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1263,7 +1273,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -1302,7 +1313,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1319,7 +1331,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "magic-weapons"
       },
       "effects": [],
       "folder": null,
@@ -1358,7 +1371,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1375,7 +1389,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "shielded-mind"
       },
       "effects": [],
       "folder": null,
@@ -1416,7 +1431,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1516,7 +1532,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-evil-and-good"
       },
       "sort": 0,
       "flags": {
@@ -1555,7 +1572,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1656,7 +1674,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1695,7 +1714,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1802,7 +1822,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-thoughts"
       },
       "sort": 0,
       "flags": {
@@ -1839,7 +1860,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1960,7 +1982,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "bless"
       },
       "effects": [
         {
@@ -2069,7 +2092,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2183,7 +2207,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "create-food-and-water"
       },
       "sort": 0,
       "flags": {
@@ -2222,7 +2247,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2347,7 +2373,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "cure-wounds"
       },
       "sort": 0,
       "flags": {
@@ -2386,7 +2413,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2500,7 +2528,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "lesser-restoration"
       },
       "sort": 0,
       "flags": {
@@ -2539,7 +2568,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "bonus",
@@ -2660,7 +2690,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "sanctuary"
       },
       "sort": 0,
       "flags": {
@@ -2697,7 +2728,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "reaction",
@@ -2814,7 +2846,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "shield"
       },
       "effects": [
         {
@@ -2899,7 +2932,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "minute",
@@ -3037,7 +3071,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "dream"
       },
       "sort": 0,
       "flags": {
@@ -3076,7 +3111,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3191,7 +3227,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "greater-restoration"
       },
       "sort": 0,
       "flags": {
@@ -3230,7 +3267,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "minute",
@@ -3351,7 +3389,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "scrying"
       },
       "sort": 0,
       "flags": {
@@ -3390,7 +3429,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3504,7 +3544,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "protection-from-poison"
       },
       "sort": 0,
       "flags": {
@@ -3541,7 +3582,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305087955,
-    "modifiedTime": 1725305087955,
+    "modifiedTime": 1725992617156,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!ZaP1H91t4FzbRqR5"

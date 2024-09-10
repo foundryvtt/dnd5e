@@ -501,6 +501,9 @@
         "value": [],
         "custom": ""
       }
+    },
+    "source": {
+      "rules": "2014"
     }
   },
   "prototypeToken": {
@@ -604,7 +607,9 @@
           "value": "",
           "chat": ""
         },
-        "source": {},
+        "source": {
+          "rules": "2014"
+        },
         "identified": true,
         "unidentified": {
           "description": ""
@@ -763,7 +768,8 @@
           }
         },
         "attuned": false,
-        "ammunition": {}
+        "ammunition": {},
+        "identifier": "attack"
       },
       "_id": "znq8nSm5Xeej3juY",
       "img": "icons/weapons/swords/sword-flanged-lightning.webp",
@@ -799,7 +805,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305082171,
-    "modifiedTime": 1725305082171,
+    "modifiedTime": 1725992614521,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Tac7eq0AXJco0nml"

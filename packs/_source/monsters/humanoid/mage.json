@@ -515,7 +515,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Mage",
@@ -620,7 +623,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -637,7 +641,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -676,7 +681,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -844,7 +850,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "dagger"
       },
       "effects": [],
       "folder": null,
@@ -885,7 +892,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1016,7 +1024,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fire-bolt"
       },
       "sort": 0,
       "flags": {
@@ -1055,7 +1064,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1159,7 +1169,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "light"
       },
       "sort": 0,
       "flags": {
@@ -1198,7 +1209,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1298,7 +1310,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mage-hand"
       },
       "sort": 0,
       "flags": {
@@ -1337,7 +1350,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1435,7 +1449,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "prestidigitation"
       },
       "sort": 0,
       "flags": {
@@ -1474,7 +1489,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1575,7 +1591,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1612,7 +1629,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1712,7 +1730,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mage-armor"
       },
       "effects": [
         {
@@ -1797,7 +1816,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1916,7 +1936,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "magic-missile"
       },
       "sort": 0,
       "flags": {
@@ -1953,7 +1974,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "reaction",
@@ -2055,7 +2077,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "shield"
       },
       "effects": [
         {
@@ -2140,7 +2163,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "bonus",
@@ -2238,7 +2262,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "misty-step"
       },
       "sort": 0,
       "flags": {
@@ -2277,7 +2302,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2383,7 +2409,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "suggestion"
       },
       "sort": 0,
       "flags": {
@@ -2422,7 +2449,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "reaction",
@@ -2521,7 +2549,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "counterspell"
       },
       "sort": 0,
       "flags": {
@@ -2560,7 +2589,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2684,7 +2714,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fireball"
       },
       "sort": 0,
       "flags": {
@@ -2723,7 +2754,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2824,7 +2856,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fly"
       },
       "sort": 0,
       "flags": {
@@ -2863,7 +2896,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2963,7 +2997,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "greater-invisibility"
       },
       "sort": 0,
       "flags": {
@@ -3002,7 +3037,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3143,7 +3179,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "ice-storm"
       },
       "sort": 0,
       "flags": {
@@ -3182,7 +3219,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3305,7 +3343,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "cone-of-cold"
       },
       "sort": 0,
       "flags": {
@@ -3342,7 +3381,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305102660,
-    "modifiedTime": 1725305102660,
+    "modifiedTime": 1725992624366,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!mQnsXanewsPiV7QE"

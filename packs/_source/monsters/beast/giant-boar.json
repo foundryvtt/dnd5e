@@ -515,7 +515,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Giant Boar",
@@ -620,7 +623,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -812,7 +816,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "charge"
       },
       "effects": [],
       "folder": null,
@@ -851,7 +856,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "1",
@@ -949,7 +955,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "relentless"
       },
       "effects": [],
       "folder": null,
@@ -988,7 +995,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1152,7 +1160,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "tusk"
       },
       "effects": [],
       "folder": null,
@@ -1187,7 +1196,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305081550,
-    "modifiedTime": 1725305081550,
+    "modifiedTime": 1725992614094,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!SsuCaF2fIEoDdFA3"

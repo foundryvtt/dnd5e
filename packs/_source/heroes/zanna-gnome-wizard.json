@@ -644,7 +644,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -755,7 +756,8 @@
           }
         },
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "component-pouch"
       },
       "sort": 0,
       "flags": {
@@ -794,7 +796,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -959,7 +962,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "quarterstaff"
       },
       "sort": 0,
       "flags": {
@@ -998,7 +1002,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1112,7 +1117,8 @@
             "sort": 0
           }
         },
-        "attuned": false
+        "attuned": false,
+        "identifier": "robes"
       },
       "sort": 0,
       "flags": {
@@ -1151,7 +1157,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1182,7 +1189,8 @@
         },
         "container": null,
         "properties": [],
-        "attuned": false
+        "attuned": false,
+        "identifier": "backpack"
       },
       "sort": 0,
       "flags": {
@@ -1221,7 +1229,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1252,7 +1261,8 @@
         },
         "container": null,
         "properties": [],
-        "attuned": false
+        "attuned": false,
+        "identifier": "pouch"
       },
       "sort": 0,
       "flags": {
@@ -1291,7 +1301,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1312,7 +1323,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "bedroll"
       },
       "sort": 0,
       "flags": {
@@ -1357,7 +1369,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1466,7 +1480,8 @@
             },
             "check": {
               "ability": "",
-              "dc": {}
+              "dc": {},
+              "associated": []
             },
             "uses": {
               "spent": 0,
@@ -1555,7 +1570,8 @@
           }
         },
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "hempen-rope-50-ft"
       },
       "sort": 0,
       "flags": {
@@ -1567,9 +1583,6 @@
         },
         "core": {
           "sourceId": "Compendium.dnd5e.items.QXmaarJ4X8P0C1HV"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/sundries/survival/rope-wrapped-brown.webp",
@@ -1603,7 +1616,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1624,7 +1638,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "mess-kit"
       },
       "sort": 0,
       "flags": {
@@ -1669,7 +1684,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "quantity": 10,
         "weight": {
@@ -1790,15 +1807,13 @@
           }
         },
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "rations"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.f4w4GxBi0nYXmhX4"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
@@ -1832,7 +1847,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1853,7 +1869,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "tinderbox"
       },
       "sort": 0,
       "flags": {
@@ -1892,7 +1909,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "quantity": 10,
         "weight": {
@@ -2050,7 +2069,8 @@
           }
         },
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "torch"
       },
       "sort": 0,
       "flags": {
@@ -2062,9 +2082,6 @@
         },
         "core": {
           "sourceId": "Compendium.dnd5e.items.BnOCLuNWhVvzHLjl"
-        },
-        "dnd5e": {
-          "migratedUses": 1
         }
       },
       "img": "icons/sundries/lights/torch-black.webp",
@@ -2098,7 +2115,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2219,15 +2238,13 @@
           }
         },
         "attuned": false,
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "waterskin"
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.Uv0ilmzbWvqmlCVH"
-        },
-        "dnd5e": {
-          "migratedUses": 4
         }
       },
       "img": "icons/sundries/survival/wetskin-leather-purple.webp",
@@ -2261,7 +2278,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2282,7 +2300,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "ink-bottle"
       },
       "sort": 0,
       "flags": {
@@ -2321,7 +2340,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2342,7 +2362,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "ink-pen"
       },
       "sort": 0,
       "flags": {
@@ -2381,7 +2402,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2402,7 +2424,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "parchment"
       },
       "sort": 0,
       "flags": {
@@ -2441,7 +2464,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2462,7 +2486,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "book-of-lore"
       },
       "sort": 0,
       "flags": {
@@ -2501,7 +2526,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2522,7 +2548,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "spellbook"
       },
       "sort": 0,
       "flags": {
@@ -2561,7 +2588,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -2582,7 +2610,8 @@
           "description": ""
         },
         "container": null,
-        "properties": []
+        "properties": [],
+        "identifier": "small-knife"
       },
       "sort": 0,
       "flags": {
@@ -2621,7 +2650,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -2703,7 +2733,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "tinker"
       },
       "sort": 0,
       "flags": {
@@ -2745,7 +2776,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2875,7 +2907,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fire-bolt"
       },
       "sort": 0,
       "flags": {
@@ -2914,7 +2947,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3017,7 +3051,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "light"
       },
       "sort": 0,
       "flags": {
@@ -3056,7 +3091,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3155,7 +3191,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mage-hand"
       },
       "sort": 0,
       "flags": {
@@ -3194,7 +3231,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "minute",
@@ -3295,7 +3333,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "alarm"
       },
       "sort": 0,
       "flags": {
@@ -3332,7 +3371,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "reaction",
@@ -3433,7 +3473,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "shield"
       },
       "effects": [
         {
@@ -3518,7 +3559,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "hour",
@@ -3618,7 +3660,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "find-familiar"
       },
       "sort": 0,
       "flags": {
@@ -3655,7 +3698,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3758,7 +3802,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mage-armor"
       },
       "effects": [
         {
@@ -3841,7 +3886,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3958,7 +4004,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "sleep"
       },
       "effects": [],
       "folder": null,
@@ -3999,7 +4046,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -4117,7 +4165,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "magic-missile"
       },
       "sort": 0,
       "flags": {
@@ -4152,11 +4201,12 @@
           "custom": "",
           "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "advancement": [],
         "startingEquipment": [],
-        "identifier": ""
+        "identifier": "scholar"
       },
       "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
       "effects": [],
@@ -4193,7 +4243,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "identifier": "wizard",
         "levels": 1,
@@ -4629,7 +4680,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -4646,7 +4698,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "spellcasting-wizard"
       },
       "flags": {
         "dnd5e": {
@@ -4686,7 +4739,9 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "uses": {
           "max": "1",
@@ -4783,13 +4838,13 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "arcane-recovery"
       },
       "flags": {
         "dnd5e": {
           "sourceId": "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9",
-          "advancementOrigin": "N4bhi6usK8wuNEnh.NhwTsEnDKEFARuzC",
-          "migratedUses": 1
+          "advancementOrigin": "N4bhi6usK8wuNEnh.NhwTsEnDKEFARuzC"
         }
       },
       "img": "icons/magic/earth/explosion-lava-stone-green.webp",
@@ -4822,7 +4877,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "identifier": "rock-gnome",
         "advancement": [
@@ -4991,7 +5047,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -5008,7 +5065,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "gnome-cunning"
       },
       "flags": {
         "dnd5e": {
@@ -5048,7 +5106,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -5065,7 +5124,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "artificers-lore"
       },
       "flags": {
         "dnd5e": {
@@ -5105,7 +5165,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -5187,7 +5248,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "tinker"
       },
       "flags": {
         "dnd5e": {
@@ -5270,7 +5332,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725036838772,
-    "modifiedTime": 1725036838772,
+    "modifiedTime": 1725992447260,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!4Jsv5vYaJ1atUEDV"

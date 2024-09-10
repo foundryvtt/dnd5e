@@ -515,7 +515,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Acolyte",
@@ -620,7 +623,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -637,7 +641,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -676,7 +681,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -842,7 +848,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "club"
       },
       "effects": [],
       "folder": null,
@@ -883,7 +890,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -987,7 +995,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "light"
       },
       "sort": 0,
       "flags": {
@@ -1026,7 +1035,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1149,7 +1159,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "sacred-flame"
       },
       "sort": 0,
       "flags": {
@@ -1188,7 +1199,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1285,7 +1297,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "thaumaturgy"
       },
       "sort": 0,
       "flags": {
@@ -1322,7 +1335,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1428,7 +1442,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "bless"
       },
       "effects": [
         {
@@ -1537,7 +1552,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "bonus",
@@ -1643,7 +1659,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "sanctuary"
       },
       "sort": 0,
       "flags": {
@@ -1682,7 +1699,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1792,7 +1810,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "cure-wounds"
       },
       "sort": 0,
       "flags": {
@@ -1829,7 +1848,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305062288,
-    "modifiedTime": 1725305062288,
+    "modifiedTime": 1725992605061,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!CHEUjiYrVM9X0vIT"

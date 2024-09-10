@@ -524,7 +524,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Rakshasa",
@@ -629,7 +632,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -646,7 +650,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "limited-magic-immunity"
       },
       "effects": [],
       "folder": null,
@@ -685,7 +690,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -702,7 +708,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -741,7 +748,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -824,7 +832,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -863,7 +872,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1027,7 +1037,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "claw"
       },
       "effects": [],
       "folder": null,
@@ -1064,7 +1075,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1171,7 +1183,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-thoughts"
       },
       "sort": 0,
       "flags": {
@@ -1210,7 +1223,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1308,7 +1322,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "disguise-self"
       },
       "sort": 0,
       "flags": {
@@ -1347,7 +1362,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1447,7 +1463,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "mage-hand"
       },
       "sort": 0,
       "flags": {
@@ -1486,7 +1503,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1586,7 +1604,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "minor-illusion"
       },
       "sort": 0,
       "flags": {
@@ -1625,7 +1644,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1745,7 +1765,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "charm-person"
       },
       "sort": 0,
       "flags": {
@@ -1784,7 +1805,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1900,7 +1922,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1939,7 +1962,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2055,7 +2079,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "invisibility"
       },
       "sort": 0,
       "flags": {
@@ -2094,7 +2119,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2211,7 +2237,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "major-image"
       },
       "sort": 0,
       "flags": {
@@ -2250,7 +2277,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2371,7 +2399,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "suggestion"
       },
       "sort": 0,
       "flags": {
@@ -2410,7 +2439,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2531,7 +2561,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "dominate-person"
       },
       "sort": 0,
       "flags": {
@@ -2570,7 +2601,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2686,7 +2718,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "fly"
       },
       "sort": 0,
       "flags": {
@@ -2725,7 +2758,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2920,7 +2954,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "plane-shift"
       },
       "sort": 0,
       "flags": {
@@ -2959,7 +2994,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -3074,7 +3110,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "true-seeing"
       },
       "sort": 0,
       "flags": {
@@ -3111,7 +3148,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305107960,
-    "modifiedTime": 1725305107960,
+    "modifiedTime": 1725992626825,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!qXzMsRTHEodqO8l2"

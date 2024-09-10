@@ -14,7 +14,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
       "max": "1 + @abilities.cha.mod",
@@ -112,7 +113,8 @@
     "enchant": {},
     "prerequisites": {
       "level": null
-    }
+    },
+    "identifier": "divine-sense"
   },
   "flags": {},
   "img": "icons/creatures/eyes/human-single-blue.webp",
@@ -125,7 +127,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037381787,
-    "modifiedTime": 1725037381787,
+    "modifiedTime": 1725992287695,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!E8ozg8avUVOX9N7u"

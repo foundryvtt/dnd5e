@@ -14,7 +14,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
       "max": "1",
@@ -113,13 +114,10 @@
     "prerequisites": {
       "level": null
     },
-    "properties": []
+    "properties": [],
+    "identifier": "haste"
   },
-  "flags": {
-    "dnd5e": {
-      "migratedUses": null
-    }
-  },
+  "flags": {},
   "img": "icons/skills/movement/feet-winged-boots-brown.webp",
   "effects": [],
   "folder": null,
@@ -130,7 +128,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725304972853,
-    "modifiedTime": 1725304972853,
+    "modifiedTime": 1725992573261,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ZIGTG2qhkJ54jEk4"

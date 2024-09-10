@@ -523,7 +523,10 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Storm Giant",
@@ -628,7 +631,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -679,7 +683,8 @@
         "container": null,
         "crewed": false,
         "activities": {},
-        "attuned": false
+        "attuned": false,
+        "identifier": "scale-mail"
       },
       "effects": [],
       "folder": null,
@@ -718,7 +723,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -735,7 +741,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "amphibious"
       },
       "effects": [],
       "folder": null,
@@ -774,7 +781,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -938,7 +946,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "greatsword"
       },
       "effects": [],
       "folder": null,
@@ -977,7 +986,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -994,7 +1004,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -1033,7 +1044,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1206,7 +1218,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "mastery": ""
+        "mastery": "",
+        "identifier": "lightning-strike"
       },
       "effects": [],
       "folder": null,
@@ -1241,7 +1254,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "uses": {
           "max": "",
@@ -1324,7 +1338,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -1363,7 +1378,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "quantity": 1,
         "weight": {
@@ -1528,7 +1544,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "mastery": ""
+        "mastery": "",
+        "identifier": "rock"
       },
       "effects": [],
       "folder": null,
@@ -1565,7 +1582,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1666,7 +1684,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1705,7 +1724,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "reaction",
@@ -1805,7 +1825,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "feather-fall"
       },
       "sort": 0,
       "flags": {
@@ -1844,7 +1865,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -1951,7 +1973,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "levitate"
       },
       "sort": 0,
       "flags": {
@@ -1990,7 +2013,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2094,7 +2118,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "light"
       },
       "sort": 0,
       "flags": {
@@ -2133,7 +2158,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "minute",
@@ -2249,7 +2275,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "control-weather"
       },
       "sort": 0,
       "flags": {
@@ -2288,7 +2315,8 @@
           "custom": "",
           "book": "SRD 5.1",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014"
         },
         "activation": {
           "type": "action",
@@ -2405,7 +2433,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "water-breathing"
       },
       "sort": 0,
       "flags": {
@@ -2442,7 +2471,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725305054188,
-    "modifiedTime": 1725305054188,
+    "modifiedTime": 1725992601387,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!68bAMIpe4jvDeR9G"
