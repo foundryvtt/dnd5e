@@ -771,7 +771,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }
       return activity.use(usageConfig, dialogConfig, messageConfig);
     }
-    if ( this.actor ) return this.displayCard();
+    if ( this.actor ) return this.displayCard(message);
   }
 
   /* -------------------------------------------- */
@@ -806,83 +806,67 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Display the chat card for an Item as a Chat Message
-   * @param {ItemUseOptions} [options]  Options which configure the display of the item chat card.
-   * @returns {ChatMessage|object}      Chat message if `createMessage` is true, otherwise an object containing
-   *                                    message data.
+   * @param {Partial<ActivityMessageConfiguration>} [message]  Configuration info for the created chat message.
+   * @returns {Promise<ChatMessage5e|object>}
    */
-  async displayCard(options={}) {
-
-    // Render the chat card template
-    const token = this.actor.token;
-    const consumeUsage = this.hasLimitedUses && !options.flags?.dnd5e?.use?.consumedUsage;
-    const consumeResource = this.hasResource && !options.flags?.dnd5e?.use?.consumedResource;
-    const hasButtons = this.hasAttack || this.hasDamage || this.isVersatile || this.hasSave || this.system.formula
-      || this.hasAreaTarget || (this.type === "tool") || this.hasAbilityCheck || this.system.hasSummoning
-      || consumeUsage || consumeResource;
-    const templateData = {
-      hasButtons,
+  async displayCard(message={}) {
+    const context = {
       actor: this.actor,
       config: CONFIG.DND5E,
-      tokenId: token?.uuid || null,
+      tokenId: this.actor.token?.uuid || null,
       item: this,
       data: await this.system.getCardData(),
-      labels: this.labels,
-      hasAttack: this.hasAttack,
-      isHealing: this.isHealing,
-      hasDamage: this.hasDamage,
-      isVersatile: this.isVersatile,
-      isSpell: this.type === "spell",
-      hasSave: this.hasSave,
-      hasAreaTarget: this.hasAreaTarget,
-      isTool: this.type === "tool",
-      hasAbilityCheck: this.hasAbilityCheck,
-      consumeUsage,
-      consumeResource
-    };
-    const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", templateData);
-
-    // Create the ChatMessage data object
-    const chatData = {
-      user: game.user.id,
-      content: html,
-      speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
-      flags: {
-        "core.canPopout": true,
-        "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
-      }
+      isSpell: this.type === "spell"
     };
 
-    // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message
-    if ( (this.type === "consumable") && !this.actor.items.has(this.id) ) {
-      chatData.flags["dnd5e.itemData"] = templateData.item.toObject();
-    }
+    const messageConfig = foundry.utils.mergeObject({
+      create: message?.createMessage ?? true,
+      data: {
+        content: await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", context),
+        flags: {
+          "core.canPopout": true,
+          "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
+        },
+        speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
+      },
+      rollMode: game.settings.get("core", "rollMode")
+    }, message);
 
     // Merge in the flags from options
-    chatData.flags = foundry.utils.mergeObject(chatData.flags, options.flags);
+    if ( foundry.utils.getType(message.flags) === "Object" ) {
+      foundry.utils.mergeObject(messageConfig.data.flags, message.flags);
+      delete messageConfig.flags;
+    }
 
     /**
-     * A hook event that fires before an item chat card is created.
-     * @function dnd5e.preDisplayCard
+     * A hook event that fires before an item chat card is created without using an activity.
+     * @function dnd5e.preDisplayCardV2
      * @memberof hookEvents
-     * @param {Item5e} item             Item for which the chat card is being displayed.
-     * @param {object} chatData         Data used to create the chat message.
-     * @param {ItemUseOptions} options  Options which configure the display of the item chat card.
+     * @param {Item5e} item                           Item for which the card will be created.
+     * @param {ActivityMessageConfiguration} message  Configuration for the roll message.
      */
-    Hooks.callAll("dnd5e.preDisplayCard", this, chatData, options);
+    Hooks.callAll("dnd5e.preDisplayCardV2", this, messageConfig);
 
-    // Apply the roll mode to adjust message visibility
-    ChatMessage.applyRollMode(chatData, options.rollMode ?? game.settings.get("core", "rollMode"));
+    if ( "dnd5e.preDisplayCard" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preDisplayCard` hook has been deprecated and replaced with `dnd5e.preDisplayCardV2`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      const hookData = { createMessage: messageConfig.create };
+      Hooks.callAll("dnd5e.preDisplayCard", this, messageConfig.data, hookData);
+      messageConfig.create = hookData.createMessage;
+    }
 
-    // Create the Chat Message or return its data
-    const card = (options.createMessage !== false) ? await ChatMessage.create(chatData) : chatData;
+    ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+    const card = messageConfig.create === false ? messageConfig.data : await ChatMessage.create(messageConfig.data);
 
     /**
      * A hook event that fires after an item chat card is created.
      * @function dnd5e.displayCard
      * @memberof hookEvents
-     * @param {Item5e} item              Item for which the chat card is being displayed.
-     * @param {ChatMessage|object} card  The created ChatMessage instance or ChatMessageData depending on whether
-     *                                   options.createMessage was set to `true`.
+     * @param {Item5e} item                Item for which the chat card is being displayed.
+     * @param {ChatMessage5e|object} card  The created ChatMessage instance or ChatMessageData depending on whether
+     *                                     options.createMessage was set to `true`.
      */
     Hooks.callAll("dnd5e.displayCard", this, card);
 
