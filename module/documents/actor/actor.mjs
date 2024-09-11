@@ -2718,6 +2718,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     result.rolls ??= [];
     for ( const item of this.items ) {
       if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+      rollData.item = {...item.system};
       const { updates, rolls } = await item.system.recoverUses(recovery, rollData);
       if ( !foundry.utils.isEmpty(updates) ) {
         const updateTarget = result.updateItems.find(i => i._id === item.id);
