@@ -74,7 +74,7 @@
                         <div class="wrapper">
 
                             {{!-- Activities --}}
-                            {{#if (gt ctx.activities.length 1)}}
+                            {{#if ctx.activities.length}}
                             <div class="activities">
                                 {{#each ctx.activities}}
                                 {{> "dnd5e.activity-row-summary" categories=../../categories }}

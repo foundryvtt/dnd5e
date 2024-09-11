@@ -1025,6 +1025,44 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
+   * Construct context menu options for this Activity.
+   * @returns {ContextMenuEntry[]}
+   */
+  getContextMenuOptions() {
+    const entries = [];
+
+    if ( this.item.isOwner && !this.item.compendium?.locked ) {
+      entries.push({
+        name: "DND5E.ContextMenuActionEdit",
+        icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
+        callback: () => this.sheet.render({ force: true })
+      }, {
+        name: "DND5E.ContextMenuActionDuplicate",
+        icon: '<i class="fas fa-copy fa-fw"></i>',
+        callback: () => {
+          const createData = this.toObject();
+          delete createData._id;
+          this.item.createActivity(createData.type, createData, { renderSheet: false });
+        }
+      }, {
+        name: "DND5E.ContextMenuActionDelete",
+        icon: '<i class="fas fa-trash fa-fw"></i>',
+        callback: () => this.deleteDialog()
+      });
+    } else {
+      entries.push({
+        name: "DND5E.ContextMenuActionView",
+        icon: '<i class="fas fa-eye fa-fw"></i>',
+        callback: () => this.sheet.render({ force: true })
+      });
+    }
+
+    return entries;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle an action activated from an activity's chat message.
    * @param {PointerEvent} event     Triggering click event.
    * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
@@ -1062,6 +1100,31 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @protected
    */
   async _onChatAction(event, target, message) {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle context menu events on activities.
+   * @param {Item5e} item         The Item the Activity belongs to.
+   * @param {HTMLElement} target  The element the menu was triggered on.
+   */
+  static onContextMenu(item, target) {
+    const { activityId } = target.closest("[data-activity-id]")?.dataset ?? {};
+    const activity = item.system.activities?.get(activityId);
+    if ( !activity ) return;
+    const menuItems = activity.getContextMenuOptions();
+
+    /**
+     * A hook even that fires when the context menu for an Activity is opened.
+     * @function dnd5e.getItemActivityContext
+     * @memberof hookEvents
+     * @param {Activity} activity             The Activity.
+     * @param {HTMLElement} target            The element that menu was triggered on.
+     * @param {ContextMenuEntry[]} menuItems  The context menu entries.
+     */
+    Hooks.callAll("dnd5e.getItemActivityContext", activity, target, menuItems);
+    ui.context.menuItems = menuItems;
+  }
 
   /* -------------------------------------------- */
 
