@@ -18,7 +18,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       classes: ["dnd5e2", "sheet", "actor", "character", "vertical-tabs"],
       tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "details" }],
       dragDrop: [
-        { dragSelector: ".item-list .item", dropSelector: null },
+        { dragSelector: ".item-list .item > .item-row", dropSelector: null },
+        { dragSelector: ".item-list .item .activity-row", dropSelector: null },
         { dragSelector: ".containers .container", dropSelector: null },
         { dragSelector: ".favorites :is([data-item-id], [data-effect-id])", dropSelector: null },
         { dragSelector: ":is(.race, .background)[data-item-id]", dropSelector: null },
@@ -357,6 +358,33 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /* -------------------------------------------- */
 
+  /**
+   * Handling beginning a drag-drop operation on an Activity.
+   * @param {DragEvent} event  The originating drag event.
+   * @protected
+   */
+  _onDragActivity(event) {
+    const { itemId } = event.target.closest("[data-item-id]").dataset;
+    const { activityId } = event.target.closest("[data-activity-id]").dataset;
+    const activity = this.actor.items.get(itemId)?.system.activities?.get(activityId);
+    if ( activity ) event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle beginning a drag-drop operation on an Item.
+   * @param {DragEvent} event  The originating drag event.
+   * @protected
+   */
+  _onDragItem(event) {
+    const { itemId } = event.target.closest("[data-item-id]").dataset;
+    const item = this.actor.items.get(itemId);
+    if ( item ) event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   _onDragStart(event) {
     // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
@@ -372,7 +400,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.tools ) type = "tool";
     else if ( modes[preparationMode]?.upcast && (level !== "0") && isSlots ) type = "slots";
-    if ( !type ) return super._onDragStart(event);
+    if ( !type ) {
+      if ( event.target.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
+      else if ( event.target.matches("[data-item-id] [data-activity-id], [data-item-id][data-activity-id]") ) {
+        return this._onDragActivity(event);
+      }
+      return super._onDragStart(event);
+    }
     const dragData = { dnd5e: { action: "favorite", type } };
     if ( type === "slots" ) dragData.dnd5e.id = (preparationMode === "prepared") ? `spell${level}` : preparationMode;
     else dragData.dnd5e.id = key;
@@ -489,7 +523,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /** @inheritDoc */
   async _onDrop(event) {
     if ( !event.target.closest(".favorites") ) return super._onDrop(event);
-    const dragData = event.dataTransfer.getData("application/json");
+    const dragData = event.dataTransfer.getData("application/json") || event.dataTransfer.getData("text/plain");
     if ( !dragData ) return super._onDrop(event);
     let data;
     try {
@@ -500,6 +534,25 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     }
     const { action, type, id } = data.dnd5e ?? {};
     if ( action === "favorite" ) return this._onDropFavorite(event, { type, id });
+    if ( data.type === "Activity" ) return this._onDropActivity(event, data);
+    return super._onDrop(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping an Activity onto the sheet.
+   * @param {DragEvent} event  The originating drag event.
+   * @param {object} data      The Activity drag data.
+   * @returns {Promise<Actor5e|void>}
+   * @protected
+   */
+  async _onDropActivity(event, data) {
+    if ( !event.target.closest(".favorites") ) return;
+    const activity = await fromUuid(data.uuid);
+    if ( !activity ) return;
+    const uuid = `${activity.item.getRelativeUUID(this.actor)}.Activity.${activity.id}`;
+    return this._onDropFavorite(event, { type: "activity", id: uuid });
   }
 
   /* -------------------------------------------- */
@@ -528,7 +581,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /**
    * Handle an owned item or effect being dropped in the favorites area.
-   * @param {PointerEvent} event         The triggering event.
+   * @param {DragEvent} event            The triggering event.
    * @param {ActorFavorites5e} favorite  The favorite that was dropped.
    * @returns {Promise<Actor5e>|void}
    * @protected
@@ -591,10 +644,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
    * @protected
    */
   async _onUseFavorite(event) {
-    if ( !this.isEditable ) return;
+    if ( !this.isEditable || (event.target.tagName === "INPUT") ) return;
     const { favoriteId } = event.currentTarget.closest("[data-favorite-id]").dataset;
     const favorite = await fromUuid(favoriteId, { relative: this.actor });
-    if ( favorite instanceof dnd5e.documents.Item5e ) return favorite.use({ legacy: false, event });
+    if ( (favorite instanceof dnd5e.documents.Item5e) || event.currentTarget.dataset.activityId ) {
+      return favorite.use({ legacy: false, event });
+    }
     if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) return favorite.update({ disabled: !favorite.disabled });
   }
 
@@ -633,7 +688,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
       let data;
       if ( type === "item" ) data = await favorite.system.getFavoriteData();
-      else if ( type === "effect" ) data = await favorite.getFavoriteData();
+      else if ( (type === "effect") || (type === "activity") ) data = await favorite.getFavoriteData();
       else data = await this._getFavoriteData(type, id);
       if ( !data ) return arr;
       let {
@@ -642,7 +697,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       } = data;
 
       const css = [];
-      if ( uses ) {
+      if ( uses?.max ) {
         css.push("uses");
         uses.value = Math.round(uses.value);
       }
@@ -651,7 +706,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       else if ( value !== undefined ) css.push("value");
 
       if ( toggle === false ) css.push("disabled");
-      if ( uses?.max > 100 ) css.push("uses-sm");
+      if ( uses?.max > 99 ) css.push("uses-sm");
       if ( modifier !== undefined ) {
         const value = Number(modifier.replace?.(/\s+/g, "") ?? modifier);
         if ( !isNaN(value) ) modifier = value;
@@ -663,11 +718,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       else if ( type === "tool" ) rollableClass.push("tool-name");
 
       if ( suppressed ) subtitle = game.i18n.localize("DND5E.Suppressed");
+      const itemId = type === "item" ? favorite.id : type === "activity" ? favorite.item.id : null;
       arr.push({
-        id, img, type, title, value, uses, sort, save, modifier, passive, range, reference, suppressed, level,
-        itemId: type === "item" ? favorite.id : null,
+        id, img, type, title, value, uses, sort, save, modifier, passive, range, reference, suppressed, level, itemId,
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
+        activityId: type === "activity" ? favorite.id : null,
         preparationMode: (type === "slots") ? (/spell\d+/.test(id) ? "prepared" : id) : null,
         key: (type === "skill") || (type === "tool") ? id : null,
         toggle: toggle === undefined ? null : { applicable: true, value: toggle },

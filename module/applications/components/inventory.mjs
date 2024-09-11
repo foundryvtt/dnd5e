@@ -280,12 +280,12 @@ export default class InventoryElement extends HTMLElement {
     });
 
     // Toggle Favorite State
-    if ( ("favorites" in this.actor.system) ) {
+    if ( "favorites" in this.actor.system ) {
       const uuid = item.getRelativeUUID(this.actor);
       const isFavorited = this.actor.system.hasFavorite(uuid);
       options.push({
         name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-        icon: "<i class='fas fa-star fa-fw'></i>",
+        icon: '<i class="fas fa-star fa-fw"></i>',
         condition: () => item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
         group: "state"

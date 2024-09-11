@@ -314,4 +314,13 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
 
     this.rollDamage({ event, ammunition, attackMode });
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), { modifier: this.labels.modifier });
+  }
 }

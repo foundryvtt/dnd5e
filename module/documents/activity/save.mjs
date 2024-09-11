@@ -112,4 +112,13 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
       });
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), { save: this.save });
+  }
 }
