@@ -1,4 +1,4 @@
-import { linkForUuid } from "../../utils.mjs";
+import { formatNumber, linkForUuid } from "../../utils.mjs";
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
@@ -53,6 +53,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   async getData(options) {
     const context = super.getData(options);
     context.system = context.document.system;
+    context.systemFields = this.document.system.schema.fields;
+
+    context.styleOptions = [
+      { value: "", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Inferred") },
+      { rule: true },
+      { value: "2024", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Modern") },
+      { value: "2014", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Legacy") }
+    ];
 
     context.title = Object.fromEntries(
       Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1])
@@ -68,16 +76,24 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       name: linked.name,
       lowercaseName: linked.name.toLowerCase()
     };
+    const modernStyle = context.modernStyle = (context.system.style || linked.system.source.rules) === "2024";
 
-    context.advancement = this._getAdvancement(linked);
+    context.advancement = this._getAdvancement(linked, { modernStyle });
     context.enriched = await this._getDescriptions(context.document);
-    context.table = await this._getTable(linked);
-    context.optionalTable = await this._getOptionalTable(linked);
-    context.features = await this._getFeatures(linked);
-    context.optionalFeatures = await this._getFeatures(linked, true);
-    if ( context.subclasses?.length ) context.subclasses?.sort((lhs, rhs) =>
-      lhs.name.localeCompare(rhs.name, game.i18n.lang)
-    );
+    context.table = await this._getTable(linked, { modernStyle });
+    context.optionalTable = await this._getOptionalTable(linked, { modernStyle });
+    context.features = await this._getFeatures(linked, { modernStyle });
+    context.optionalFeatures = await this._getFeatures(linked, { modernStyle, optional: true });
+
+    if ( context.subclasses?.length ) {
+      for ( const subclass of context.subclasses ) {
+        const initialLevel = parseInt(Object.entries(subclass.document.advancement.byLevel)
+          .find(([lvl, d]) => d.length)?.[0] ?? 1);
+        subclass.table = await this._getTable(subclass.document, { initialLevel, modernStyle });
+        subclass.features = await this._getFeatures(subclass.document, { modernStyle });
+      }
+      context.subclasses.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
+    }
 
     if ( linked.system.primaryAbility ) {
       context.primaryAbility = game.i18n.getListFormatter(
@@ -92,16 +108,19 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /**
    * Prepare features granted by various advancement types.
-   * @param {Item5e} item  Class item belonging to this journal.
-   * @returns {object}     Prepared advancement section.
+   * @param {Item5e} item                  Class item belonging to this journal.
+   * @param {object} options
+   * @param {boolean} options.modernStyle  Is the modern style being displayed?
+   * @returns {object}                     Prepared advancement section.
+   * @protected
    */
-  _getAdvancement(item) {
+  _getAdvancement(item, { modernStyle }) {
     const advancement = {};
 
     const hp = item.advancement.byType.HitPoints?.[0];
     if ( hp ) {
       advancement.hp = {
-        hitDice: `1${hp.hitDie}`,
+        hitDice: modernStyle ? hp.hitDie.toUpperCase() : `1${hp.hitDie}`,
         max: hp.hitDieValue,
         average: Math.floor(hp.hitDieValue / 2) + 1
       };
@@ -138,6 +157,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * Enrich all of the entries within the descriptions object on the sheet's system data.
    * @param {JournalEntryPage} page  Journal page being enriched.
    * @returns {Promise<object>}      Object with enriched descriptions.
+   * @protected
    */
   async _getDescriptions(page) {
     const descriptions = await Promise.all(Object.entries(page.system.description ?? {})
@@ -156,11 +176,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /**
    * Prepare table based on non-optional GrantItem advancement & ScaleValue advancement.
-   * @param {Item5e} item              Class item belonging to this journal.
-   * @param {number} [initialLevel=1]  Level at which the table begins.
-   * @returns {object}                 Prepared table.
+   * @param {Item5e} item                      Class item belonging to this journal.
+   * @param {object} options
+   * @param {number} [options.initialLevel=1]  Level at which the table begins.
+   * @param {boolean} options.modernStyle      Is the modern style being displayed?
+   * @returns {object}                         Prepared table.
+   * @protected
    */
-  async _getTable(item, initialLevel=1) {
+  async _getTable(item, { initialLevel=1, modernStyle }={}) {
     const hasFeatures = !!item.advancement.byType.ItemGrant;
     const scaleValues = (item.advancement.byType.ScaleValue ?? []);
     const spellProgression = await this._getSpellProgression(item);
@@ -208,7 +231,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       features = features.filter(_ => _);
 
       // Level & proficiency bonus
-      const cells = [{class: "level", content: level.ordinalString()}];
+      const cells = [{class: "level", content: modernStyle ? level : level.ordinalString()}];
       if ( item.type === "class" ) cells.push({class: "prof", content: `+${Proficiency.calculateMod(level)}`});
       if ( hasFeatures ) cells.push({class: "features", content: features.join(", ")});
       scaleValues.forEach(s => cells.push({class: "scale", content: s.valueForLevel(level)?.display}));
@@ -237,6 +260,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * Build out the spell progression data.
    * @param {Item5e} item  Class item belonging to this journal.
    * @returns {object}     Prepared spell progression table.
+   * @protected
    */
   async _getSpellProgression(item) {
     const spellcasting = foundry.utils.deepClone(item.spellcasting);
@@ -319,10 +343,13 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /**
    * Prepare options table based on optional GrantItem advancement.
-   * @param {Item5e} item    Class item belonging to this journal.
-   * @returns {object|null}  Prepared optional features table.
+   * @param {Item5e} item                  Class item belonging to this journal.
+   * @param {object} options
+   * @param {boolean} options.modernStyle  Is the modern style being displayed?
+   * @returns {object|null}                Prepared optional features table.
+   * @protected
    */
-  async _getOptionalTable(item) {
+  async _getOptionalTable(item, { modernStyle }) {
     const headers = [[
       { content: game.i18n.localize("DND5E.Level") },
       { content: game.i18n.localize("DND5E.Features") }
@@ -355,7 +382,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
       // Level & proficiency bonus
       const cells = [
-        { class: "level", content: level.ordinalString() },
+        { class: "level", content: modernStyle ? level : level.ordinalString() },
         { class: "features", content: features.join(", ") }
       ];
       rows.push(cells);
@@ -369,17 +396,22 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /**
    * Fetch data for each class feature listed.
-   * @param {Item5e} item               Class or subclass item belonging to this journal.
-   * @param {boolean} [optional=false]  Should optional features be fetched rather than required features?
+   * @param {Item5e} item                       Class or subclass item belonging to this journal.
+   * @param {object} options
+   * @param {boolean} options.modernStyle       Is the modern style being displayed?
+   * @param {boolean} [options.optional=false]  Should optional features be fetched rather than required features?
    * @returns {object[]}   Prepared features.
+   * @protected
    */
-  async _getFeatures(item, optional=false) {
-    const prepareFeature = async f => {
+  async _getFeatures(item, { modernStyle, optional=false }) {
+    const prepareFeature = async (f, level) => {
       const document = await fromUuid(f.uuid);
       if ( document?.type !== "feat" ) return null;
       return {
         document,
-        name: document.name,
+        name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
+          name: document.name, level: formatNumber(level)
+        }) : document.name,
         description: await TextEditor.enrichHTML(document.system.description.value, {
           relativeTo: item, secrets: false
         })
@@ -390,7 +422,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? []).sort((lhs, rhs) => lhs.level - rhs.level);
     for ( const advancement of itemGrants ) {
       if ( !!advancement.configuration.optional !== optional ) continue;
-      features.push(...advancement.configuration.items.map(prepareFeature));
+      features.push(...advancement.configuration.items.map(f => prepareFeature(f, advancement.level)));
     }
     features = await Promise.all(features);
     return features.filter(f => f);
@@ -402,6 +434,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * Fetch each subclass and their features.
    * @param {string[]} uuids   UUIDs for the subclasses to fetch.
    * @returns {object[]|null}  Prepared subclasses.
+   * @protected
    */
   async _getSubclasses(uuids) {
     const prepareSubclass = async uuid => {
@@ -419,17 +452,15 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * Prepare data for the provided subclass.
    * @param {Item5e} item  Subclass item being prepared.
    * @returns {object}     Presentation data for this subclass.
+   * @protected
    */
   async _getSubclass(item) {
-    const initialLevel = Object.entries(item.advancement.byLevel).find(([lvl, d]) => d.length)?.[0] ?? 1;
     return {
       document: item,
       name: item.name,
       description: await TextEditor.enrichHTML(item.system.description.value, {
         relativeTo: item, secrets: false
-      }),
-      features: await this._getFeatures(item),
-      table: await this._getTable(item, parseInt(initialLevel))
+      })
     };
   }
 

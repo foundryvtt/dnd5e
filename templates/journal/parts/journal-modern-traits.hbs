@@ -1,0 +1,38 @@
+<table class="core-traits">
+    <caption>{{ localize "JOURNALENTRYPAGE.DND5E.Class.Traits.Caption" class=linked.name }}</caption>
+    <tbody>
+        <tr>
+            <th scope="row">{{ localize "DND5E.CLASS.FIELDS.primaryAbility.value.label" }}</th>
+            <td>{{ primaryAbility }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ localize "DND5E.CLASS.FIELDS.hitDice.label" }}</th>
+            <td>{{ localize "JOURNALENTRYPAGE.DND5E.Class.HitPoints.HitDiceModern" dice=advancement.hp.hitDice
+                   class=linked.name }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ localize "DND5E.TraitSavesPlural.other" }}</th>
+            <td>{{ advancement.traits.saves }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ localize "DND5E.TraitSkillsPlural.other" }}</th>
+            <td>{{ advancement.traits.skills }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ localize "DND5E.TraitWeaponPlural.other" }}</th>
+            <td>{{ advancement.traits.weapons }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ localize "DND5E.TraitToolPlural.other" }}</th>
+            <td>{{ advancement.traits.tools }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ localize "DND5E.TraitArmorPlural.other" }}</th>
+            <td>{{ advancement.traits.armor }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ localize "DND5E.StartingEquipment.Title" }}</th>
+            <td>{{{ advancement.equipment }}}</td>
+        </tr>
+    </tbody>
+</table>
