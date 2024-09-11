@@ -1057,6 +1057,21 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       });
     }
 
+    if ( "favorites" in (this.actor?.system ?? {}) ) {
+      const uuid = `${this.item.getRelativeUUID(this.actor)}.Activity.${this.id}`;
+      const isFavorited = this.actor.system.hasFavorite(uuid);
+      entries.push({
+        name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
+        icon: '<i class="fas fa-star fa-fw"></i>',
+        condition: () => this.item.isOwner && !this.item.compendium?.locked,
+        callback: () => {
+          if ( isFavorited ) this.actor.system.removeFavorite(uuid);
+          else this.actor.system.addFavorite({ type: "activity", id: uuid });
+        },
+        group: "state"
+      });
+    }
+
     return entries;
   }
 
@@ -1181,6 +1196,22 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare activity favorite data.
+   * @returns {Promise<FavoriteData5e>}
+   */
+  async getFavoriteData() {
+    return {
+      img: this.img,
+      title: this.name,
+      subtitle: [this.labels.activation, this.labels.recovery],
+      range: this.range,
+      uses: { ...this.uses, name: "uses.value" }
+    };
+  }
+
   /* -------------------------------------------- */
 
   /**
