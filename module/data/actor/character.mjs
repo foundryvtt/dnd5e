@@ -16,7 +16,7 @@ const {
 
 /**
  * @typedef {object} ActorFavorites5e
- * @property {"effect"|"item"|"skill"|"slots"|"tool"|"activity"} type  The favorite type.
+ * @property {"activity"|"effect"|"item"|"skill"|"slots"|"tool"} type  The favorite type.
  * @property {string} id                                    The Document UUID, skill or tool identifier, or spell slot
  *                                                          level identifier.
  * @property {number} [sort]                                The sort value.
