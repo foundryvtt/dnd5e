@@ -1031,7 +1031,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   getContextMenuOptions() {
     const entries = [];
 
-    if ( this.item.isOwner ) {
+    if ( this.item.isOwner && !this.item.compendium?.locked ) {
       entries.push({
         name: "DND5E.ContextMenuActionEdit",
         icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
