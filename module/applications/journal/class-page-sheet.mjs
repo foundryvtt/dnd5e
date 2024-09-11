@@ -185,9 +185,15 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     if ( scaleValues.length ) cols.push({class: "scale", span: scaleValues.length});
     if ( spellProgression ) cols.push(...spellProgression.cols);
 
+    const prepareFeature = uuid => {
+      const index = fromUuidSync(uuid);
+      if ( index?.type !== "feat" ) return null;
+      return linkForUuid(uuid);
+    };
+
     const rows = [];
     for ( const level of Array.fromRange((CONFIG.DND5E.maxLevel - (initialLevel - 1)), initialLevel) ) {
-      const features = [];
+      let features = [];
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "AbilityScoreImprovement":
@@ -195,10 +201,11 @@ export default class JournalClassPageSheet extends JournalPageSheet {
             continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(i => linkForUuid(i.uuid))));
+            features.push(...await Promise.all(advancement.configuration.items.map(i => prepareFeature(i.uuid))));
             break;
         }
       }
+      features = features.filter(_ => _);
 
       // Level & proficiency bonus
       const cells = [{class: "level", content: level.ordinalString()}];
@@ -209,7 +216,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       if ( spellCells ) cells.push(...spellCells);
 
       // Skip empty rows on subclasses
-      if ( (item.type === "subclass") && !features.length && !scaleValues.length && !spellCells ) continue;
+      if ( item.type === "subclass" ) {
+        let displayRow = features.length || spellCells;
+        if ( rows.length ) displayRow ||= !rows.at(-1).some((cell, index) =>
+          (cell.class !== "scale") && (cell.content !== cells[index].content)
+        );
+        else if ( scaleValues.length ) displayRow ||= cells.filter(c => (c.class === "scale") && c.content).length;
+        if ( !displayRow ) continue;
+      }
 
       rows.push(cells);
     }
@@ -319,17 +333,24 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       { class: "features", span: 1 }
     ];
 
+    const prepareFeature = uuid => {
+      const index = fromUuidSync(uuid);
+      if ( index?.type !== "feat" ) return null;
+      return linkForUuid(uuid);
+    };
+
     const rows = [];
     for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-      const features = [];
+      let features = [];
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
             if ( !advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(i => linkForUuid(i.uuid))));
+            features.push(...await Promise.all(advancement.configuration.items.map(i => prepareFeature(i.uuid))));
             break;
         }
       }
+      features = features.filter(_ => _);
       if ( !features.length ) continue;
 
       // Level & proficiency bonus
@@ -355,7 +376,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   async _getFeatures(item, optional=false) {
     const prepareFeature = async f => {
       const document = await fromUuid(f.uuid);
-      if ( !document ) return null;
+      if ( document?.type !== "feat" ) return null;
       return {
         document,
         name: document.name,
