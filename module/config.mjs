@@ -2741,6 +2741,7 @@ DND5E.consumableResources = [
 /**
  * @typedef {object} _StatusEffectConfig5e
  * @property {string} icon            Icon used to represent the condition on the token.
+ * @property {number} [order]         Order status to the start of the token HUD, rather than alphabetically.
  * @property {string} [reference]     UUID of a journal entry with details on this condition.
  * @property {string} [special]       Set this condition as a special status effect under this name.
  * @property {string[]} [riders]      Additional conditions, by id, to apply as part of this condition.
@@ -2908,7 +2909,7 @@ DND5E.conditionEffects = {
 /**
  * Extra status effects not specified in `conditionTypes`. If the ID matches a core-provided effect, then this
  * data will be merged into the core data.
- * @enum {Omit<StatusEffectConfig5e, "img"> & {icon: string}}
+ * @enum {Omit<StatusEffectConfig5e, "img"> & { icon: string }}
  */
 DND5E.statusEffects = {
   burrowing: {
@@ -2921,10 +2922,26 @@ DND5E.statusEffects = {
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     special: "CONCENTRATING"
   },
+  coverFull: {
+    name: "EFFECT.DND5E.StatusFullCover",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-full.svg",
+    order: 4
+  },
+  coverHalf: {
+    name: "EFFECT.DND5E.StatusHalfCover",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-half.svg",
+    order: 2
+  },
+  coverThreeQuarters: {
+    name: "EFFECT.DND5E.StatusThreeQuartersCover",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-three-quarters.svg",
+    order: 3
+  },
   dead: {
     name: "EFFECT.DND5E.StatusDead",
     icon: "systems/dnd5e/icons/svg/statuses/dead.svg",
-    special: "DEFEATED"
+    special: "DEFEATED",
+    order: 1
   },
   dodging: {
     name: "EFFECT.DND5E.StatusDodging",
@@ -2938,10 +2955,6 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusFlying",
     icon: "systems/dnd5e/icons/svg/statuses/flying.svg",
     special: "FLY"
-  },
-  halfCover: {
-    name: "EFFECT.DND5E.StatusHalfCover",
-    icon: "systems/dnd5e/icons/svg/checked-shield.svg"
   },
   hiding: {
     name: "EFFECT.DND5E.StatusHiding",
@@ -2964,10 +2977,6 @@ DND5E.statusEffects = {
   stable: {
     name: "EFFECT.DND5E.StatusStable",
     icon: "systems/dnd5e/icons/svg/statuses/stable.svg"
-  },
-  threeQuartersCover: {
-    name: "EFFECT.DND5E.StatusThreeQuartersCover",
-    icon: "systems/dnd5e/icons/svg/rosa-shield.svg"
   }
 };
 

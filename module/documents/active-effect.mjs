@@ -1,5 +1,4 @@
 import FormulaField from "../data/fields/formula-field.mjs";
-import { EnchantmentData } from "../data/item/fields/enchantment-field.mjs";
 import { staticID } from "../utils.mjs";
 
 /**
