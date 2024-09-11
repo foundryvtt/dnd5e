@@ -656,10 +656,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
 
-    const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${this.actionType}.damage`);
-    if ( bonus && (parseInt(bonus) !== 0) ) {
-      parts.push("@bonus");
-      data.bonus = bonus;
+    if ( index === 0 ) {
+      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${this.actionType}.damage`);
+      if ( bonus && (parseInt(bonus) !== 0) ) {
+        parts.push("@bonus");
+        data.bonus = bonus;
+      }
     }
 
     return {
