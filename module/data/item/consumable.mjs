@@ -240,6 +240,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     const valid = super.validProperties;
     if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5E.itemProperties).forEach(([k, v]) => {
       if ( v.isPhysical ) valid.add(k);
+      valid.add("ret");
     });
     else if ( this.type.value === "scroll" ) CONFIG.DND5E.validProperties.spell
       .filter(p => p !== "material").forEach(p => valid.add(p));

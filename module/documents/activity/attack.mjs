@@ -213,11 +213,13 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( roll.options.ammunition ) {
       const ammo = this.actor?.items.get(roll.options.ammunition);
       if ( ammo ) {
-        ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
-        ammoUpdate.destroy = ammo.system.uses.autoDestroy && (ammoUpdate.quantity === 0);
+        if ( !ammo.system.properties?.has("ret") ) {
+          ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
+          ammoUpdate.destroy = ammo.system.uses.autoDestroy && (ammoUpdate.quantity === 0);
+        }
         flags.ammunition = roll.options.ammunition;
       }
-    } else if ( (roll.options.attackMode === "thrown") && !this.item.system.properties?.has("ret") ) {
+    } else if ( roll.options.attackMode?.startsWith("thrown") && !this.item.system.properties?.has("ret") ) {
       ammoUpdate = { id: this.item.id, quantity: Math.max(0, this.item.system.quantity - 1) };
     }
     if ( roll.options.attackMode ) flags.attackMode = roll.options.attackMode;
