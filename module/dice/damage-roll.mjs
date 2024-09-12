@@ -70,7 +70,7 @@ export default class DamageRoll extends BasicRoll {
   static applyKeybindings(config, dialog, message) {
     const event = config.event;
     dialog.configure ??= !(event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-    if ( event?.altKey ) config.rolls.forEach(r => r.isCritical = true);
+    if ( event?.altKey ) config.rolls.forEach(r => r.options.isCritical = true);
   }
 
   /* -------------------------------------------- */

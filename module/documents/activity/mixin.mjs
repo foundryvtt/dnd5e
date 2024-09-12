@@ -880,7 +880,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
-      configure: true,
       options: {
         position: {
           width: 400,
@@ -941,7 +940,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         multiplyNumeric: rollConfig.rolls[0]?.critical?.multiplyNumeric ?? rollConfig.critical?.multiplyNumeric,
         powerfulCritical: rollConfig.rolls[0]?.critical?.powerfulCritical ?? rollConfig.critical?.powerfulCritical,
         criticalBonusDamage: rollConfig.rolls[0]?.critical?.bonusDamage ?? rollConfig.critical?.bonusDamage,
-        fastForward: !dialogConfig.configure,
         title: `${this.item.name} - ${this.damageFlavor}`,
         dialogOptions: dialogConfig.options,
         chatMessage: messageConfig.create,
@@ -949,6 +947,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         rollMode: messageConfig.rollMode,
         flavor: messageConfig.data.flavor
       };
+      if ( "configure" in dialogConfig ) oldRollConfig.fastForward = !dialogConfig.configure;
       if ( Hooks.call("dnd5e.preRollDamage", this.item, oldRollConfig) === false ) return;
       rollConfig.rolls = rollConfig.rolls.map((roll, index) => {
         const otherConfig = oldRollConfig.rollConfigs.find(r => r.index === index);
@@ -966,7 +965,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       returnMultiple = oldRollConfig.returnMultiple;
       rollConfig.critical ??= {};
       rollConfig.critical.allow = oldRollConfig.allowCritical;
-      dialogConfig.configure = !oldRollConfig.fastForward;
+      if ( "fastForward" in oldRollConfig ) dialogConfig.configure = !oldRollConfig.fastForward;
       dialogConfig.options = oldRollConfig.dialogOptions;
       messageConfig.create = oldRollConfig.chatMessage;
       messageConfig.data = oldRollConfig.messageData;
