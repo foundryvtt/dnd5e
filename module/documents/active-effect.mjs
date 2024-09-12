@@ -1,4 +1,5 @@
 import FormulaField from "../data/fields/formula-field.mjs";
+import MappingField from "../data/fields/mapping-field.mjs";
 import { staticID } from "../utils.mjs";
 
 const { SetField, StringField } = foundry.data.fields;
@@ -140,6 +141,23 @@ export default class ActiveEffect5e extends ActiveEffect {
         else current.add(value);
       }
       return current;
+    }
+
+    // If attempting to apply active effect to empty MappingField entry, create it
+    if ( (current === undefined) && change.key.startsWith("system.") ) {
+      let mappingField = field;
+      const [, ...parts] = change.key.split(".");
+      let last;
+      while ( !(mappingField instanceof MappingField) ) {
+        last = parts.pop();
+        mappingField = model.system.schema.getField(parts.join("."));
+        if ( !mappingField || !parts.length ) break;
+      }
+      const keyPath = ["system", ...parts, last].join(".");
+      if ( mappingField && (foundry.utils.getProperty(model, keyPath) === undefined) ) {
+        const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
+        foundry.utils.setProperty(model, keyPath, created);
+      }
     }
 
     return super.applyField(model, change, field);

@@ -1,6 +1,15 @@
 const { StringField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
+ * @typedef {object} RollConfigData
+ * @property {string} ability   Default ability associated with this roll.
+ * @property {object} roll
+ * @property {number} roll.min   Minimum number on the die rolled.
+ * @property {number} roll.max   Maximum number on the die rolled.
+ * @property {number} roll.mode  Should the roll be with disadvantage or advantage by default?
+ */
+
+/**
  * Field for storing data for a specific type of roll.
  */
 export default class RollConfigField extends foundry.data.fields.SchemaField {
