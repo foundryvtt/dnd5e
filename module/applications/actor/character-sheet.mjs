@@ -175,7 +175,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         hasActions: false, dataset: {type: "feat"} }
     };
     for ( const feat of feats ) {
-      if ( feat.system.activities.size ) {
+      if ( feat.system.activities?.size ) {
         features.active.items.push(feat);
         context.itemContext[feat.id].ungroup = "active";
       }

@@ -228,7 +228,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
         return;
       } else {
         itemUpdate["system.uses.spent"] = 0;
-        itemUpdate["system.uses.quantity"] = newQuantity;
+        itemUpdate["system.quantity"] = newQuantity;
       }
     } else {
       itemUpdate["system.uses.spent"] = result.spent;

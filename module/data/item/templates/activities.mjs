@@ -284,7 +284,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} rollData
    */
   prepareFinalActivityData(rollData) {
-    const labels = this.parent.labels ??= {};
+    const labels = this.parent.labels;
     UsesField.prepareData.call(this, rollData, labels);
     for ( const activity of this.activities ) activity.prepareFinalData();
   }

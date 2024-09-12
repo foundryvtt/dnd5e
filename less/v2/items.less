@@ -143,7 +143,10 @@
           margin-left: 4px;
         }
 
-        &:last-child::after { content: ""; }
+        &:last-child::after, &:has(+ .full-width)::after {
+          content: "";
+          margin: 0;
+        }
 
         &.full-width {
           flex: 1 0 100%;
@@ -232,7 +235,7 @@
 
   .sheet-body {
     .tab {
-      max-height: calc(70vh - var(--dnd5e-sheet-header-height));
+      max-height: calc(max(70vh, 1000px) - var(--dnd5e-sheet-header-height));
       overflow: auto;
       display: flex;
       flex-direction: column;

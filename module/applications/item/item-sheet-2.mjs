@@ -289,7 +289,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @override */
   _onDragStart(event) {
     const { id } = event.target.closest(".activity[data-id]")?.dataset ?? {};
-    const activity = this.item.system.activities.get(id);
+    const activity = this.item.system.activities?.get(id);
     if ( !activity ) return super._onDragStart(event);
     event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
   }

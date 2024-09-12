@@ -545,6 +545,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareBaseData() {
+    this.labels = {};
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
     for ( const activity of this.system.activities ?? [] ) activity.prepareData();
@@ -885,23 +892,26 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {object}              An object of chat data to render.
    */
   async getChatData(htmlOptions={}) {
-    const data = this.toObject().system;
+    const context = {};
+    let { identified, unidentified, description } = this.system;
 
     // Rich text description
-    data.description.value = await TextEditor.enrichHTML(data.description.value, {
+    const isIdentified = identified !== false;
+    description = game.user.isGM || isIdentified ? description.value : unidentified?.description;
+    context.description = await TextEditor.enrichHTML(description ?? "", {
       relativeTo: this,
       rollData: this.getRollData(),
       ...htmlOptions
     });
 
     // Type specific properties
-    data.properties = [
+    context.properties = [
       ...this.system.chatProperties ?? [],
       ...this.system.equippableItemCardProperties ?? [],
       ...Object.values(this.labels.activations[0] ?? {})
     ].filter(p => p);
 
-    return data;
+    return context;
   }
 
   /* -------------------------------------------- */
