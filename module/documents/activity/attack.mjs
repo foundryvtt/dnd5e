@@ -133,7 +133,6 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( masteryOptions?.length ) rollConfig.rolls[0].options.mastery ??= masteryOptions[0].value;
 
     const dialogConfig = foundry.utils.mergeObject({
-      configure: true,
       options: {
         width: 400,
         top: config.event ? config.event.clientY - 80 : null,
@@ -184,7 +183,6 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       elvenAccuracy: rollConfig.elvenAccuracy,
       halflingLucky: rollConfig.halflingLucky,
       reliableTalent: rollConfig.rolls[0].options.minimum === 10,
-      fastForward: !dialogConfig.configure,
       ammunitionOptions: dialogConfig.options.ammunitionOptions,
       attackModes: dialogConfig.options.attackModes,
       masteryOptions: dialogConfig.options.masteryOptions,
@@ -195,6 +193,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       rollMode: messageConfig.rollMode,
       flavor: messageConfig.data.flavor
     };
+    if ( "configure" in dialogConfig ) oldRollConfig.fastForward = !dialogConfig.configure;
 
     if ( "dnd5e.preRollAttack" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(

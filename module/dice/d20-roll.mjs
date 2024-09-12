@@ -79,9 +79,9 @@ export default class D20Roll extends Roll {
    */
   static determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward}={}) {
     const keys = {
-      normal: event ? areKeysPressed(event, "d20RollFastForwardNormal") : false,
-      advantage: event ? areKeysPressed(event, "d20RollFastForwardAdvantage") : false,
-      disadvantage: event ? areKeysPressed(event, "d20RollFastForwardDisadvantage") : false
+      normal: areKeysPressed(event, "skipDialogNormal"),
+      advantage: areKeysPressed(event, "skipDialogAdvantage"),
+      disadvantage: areKeysPressed(event, "skipDialogDisadvantage")
     };
     const isFF = fastForward ?? Object.values(keys).some(k => k);
     let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
