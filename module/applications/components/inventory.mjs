@@ -400,7 +400,7 @@ export default class InventoryElement extends HTMLElement {
     const { activityId } = target.closest("[data-activity-id]")?.dataset ?? {};
     const item = await this.getItem(itemId);
     if ( !["create", "currency"].includes(action) && !item ) return;
-    const activity = item.system.activities?.get(activityId);
+    const activity = item?.system.activities?.get(activityId);
 
     switch ( action ) {
       case "activity-recharge":
