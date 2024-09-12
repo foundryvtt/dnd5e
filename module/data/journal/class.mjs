@@ -27,14 +27,14 @@ export default class ClassJournalPageData extends foundry.abstract.TypeDataModel
     return {
       item: new StringField({ required: true }),
       description: new SchemaField({
-        value: new HTMLField(),
-        additionalHitPoints: new HTMLField(),
-        additionalTraits: new HTMLField(),
-        additionalEquipment: new HTMLField(),
-        subclass: new HTMLField()
+        value: new HTMLField({ textSearch: true }),
+        additionalHitPoints: new HTMLField({ textSearch: true }),
+        additionalTraits: new HTMLField({ textSearch: true }),
+        additionalEquipment: new HTMLField({ textSearch: true }),
+        subclass: new HTMLField({ textSearch: true })
       }),
       style: new StringField(),
-      subclassHeader: new StringField(),
+      subclassHeader: new StringField({ textSearch: true }),
       subclassItems: new SetField(new StringField())
     };
   }
