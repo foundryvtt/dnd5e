@@ -3516,6 +3516,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  async toggleStatusEffect(statusId, options) {
+    const created = await super.toggleStatusEffect(statusId, options);
+    const status = CONFIG.statusEffects.find(e => e.id === statusId);
+    if ( !(created instanceof ActiveEffect) || !status.exclusiveGroup ) return created;
+
+    const others = CONFIG.statusEffects
+      .filter(e => (e.id !== statusId) && (e.exclusiveGroup === status.exclusiveGroup) && this.effects.has(e._id));
+    if ( others.length ) await this.deleteEmbeddedDocuments("ActiveEffect", others.map(e => e._id));
+
+    return created;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * TODO: Perform this as part of Actor._preUpdateOperation instead when it becomes available in v12.
    * Handle syncing the Actor's exhaustion level with the ActiveEffect.

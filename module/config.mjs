@@ -2948,10 +2948,14 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _StatusEffectConfig5e
- * @property {string} icon            Icon used to represent the condition on the token.
- * @property {string} [reference]     UUID of a journal entry with details on this condition.
- * @property {string} [special]       Set this condition as a special status effect under this name.
- * @property {string[]} [riders]      Additional conditions, by id, to apply as part of this condition.
+ * @property {string} icon              Icon used to represent the condition on the token.
+ * @property {number} [order]           Order status to the start of the token HUD, rather than alphabetically.
+ * @property {string} [reference]       UUID of a journal entry with details on this condition.
+ * @property {string} [special]         Set this condition as a special status effect under this name.
+ * @property {string[]} [riders]        Additional conditions, by id, to apply as part of this condition.
+ * @property {string} [exclusiveGroup]  Any status effects with the same group will not be able to be applied at the
+ *                                      same time through the token HUD (multiple statuses applied through other
+ *                                      effects can still coexist).
  */
 
 /**
@@ -3141,7 +3145,7 @@ DND5E.conditionEffects = {
 /**
  * Extra status effects not specified in `conditionTypes`. If the ID matches a core-provided effect, then this
  * data will be merged into the core data.
- * @enum {Omit<StatusEffectConfig5e, "img"> & {icon: string}}
+ * @enum {Omit<StatusEffectConfig5e, "img"> & { icon: string }}
  */
 DND5E.statusEffects = {
   burrowing: {
@@ -3154,10 +3158,29 @@ DND5E.statusEffects = {
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     special: "CONCENTRATING"
   },
+  coverHalf: {
+    name: "EFFECT.DND5E.StatusHalfCover",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-half.svg",
+    order: 2,
+    exclusiveGroup: "cover"
+  },
+  coverThreeQuarters: {
+    name: "EFFECT.DND5E.StatusThreeQuartersCover",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-three-quarters.svg",
+    order: 3,
+    exclusiveGroup: "cover"
+  },
+  coverTotal: {
+    name: "EFFECT.DND5E.StatusTotalCover",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-total.svg",
+    order: 4,
+    exclusiveGroup: "cover"
+  },
   dead: {
     name: "EFFECT.DND5E.StatusDead",
     icon: "systems/dnd5e/icons/svg/statuses/dead.svg",
-    special: "DEFEATED"
+    special: "DEFEATED",
+    order: 1
   },
   dodging: {
     name: "EFFECT.DND5E.StatusDodging",
