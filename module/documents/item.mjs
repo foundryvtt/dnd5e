@@ -1624,13 +1624,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     // Get spell data
-    const flags = {};
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
+    const flags = itemData.flags ?? {};
     if ( Number.isNumeric(config.level) ) {
-      flags.dnd5e = { spellLevel: {
+      flags.dnd5e ??= {};
+      flags.dnd5e.spellLevel = {
         value: config.level,
         base: spell.system.level
-      } };
+      };
       itemData.system.level = config.level;
     }
 
