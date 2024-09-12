@@ -314,6 +314,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else data = {...super.getRollData()};
     data.flags = {...this.flags};
     data.name = this.name;
+    data.statuses = {};
+    for ( const status of this.statuses ) {
+      data.statuses[status] = status === "exhaustion" ? this.system.attributes?.exhaustion ?? 1 : 1;
+    }
     return data;
   }
 
