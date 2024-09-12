@@ -2922,11 +2922,6 @@ DND5E.statusEffects = {
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     special: "CONCENTRATING"
   },
-  coverFull: {
-    name: "EFFECT.DND5E.StatusFullCover",
-    icon: "systems/dnd5e/icons/svg/statuses/cover-full.svg",
-    order: 4
-  },
   coverHalf: {
     name: "EFFECT.DND5E.StatusHalfCover",
     icon: "systems/dnd5e/icons/svg/statuses/cover-half.svg",
@@ -2936,6 +2931,11 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusThreeQuartersCover",
     icon: "systems/dnd5e/icons/svg/statuses/cover-three-quarters.svg",
     order: 3
+  },
+  coverTotal: {
+    name: "EFFECT.DND5E.StatusFullTotal",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-total.svg",
+    order: 4
   },
   dead: {
     name: "EFFECT.DND5E.StatusDead",
