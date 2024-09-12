@@ -146,12 +146,6 @@
       "environment": "Swamp",
       "cr": 21,
       "spellLevel": 0,
-      "source": {
-        "custom": "",
-        "book": "SRD 5.1",
-        "page": "",
-        "license": "CC-BY-4.0"
-      },
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -518,6 +512,11 @@
     },
     "tools": {},
     "source": {
+      "custom": "",
+      "book": "",
+      "page": "",
+      "license": "CC-BY-4.0",
+      "revision": 1,
       "rules": "2014"
     }
   },
@@ -622,10 +621,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -680,10 +680,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -814,10 +815,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -938,10 +940,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -1161,10 +1164,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -1362,10 +1366,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -1563,10 +1568,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1650,9 +1656,7 @@
               }
             },
             "sort": 0,
-            "name": "",
-            "img": "",
-            "appliedEffects": []
+            "name": ""
           }
         },
         "enchant": {},
@@ -1679,8 +1683,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": 1725387660824,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "modifiedTime": null,
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!qNdFhY3JOkCfhG3d.M3VJyuM63OKH7JH0"
     },
@@ -1696,10 +1700,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "1",
@@ -1859,10 +1864,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1917,10 +1923,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -2047,10 +2054,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -2238,10 +2246,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -2337,7 +2346,8 @@
                 {
                   "type": "attribute",
                   "value": "2",
-                  "target": "resources.legact.value"
+                  "target": "resources.legact.value",
+                  "scaling": {}
                 }
               ],
               "scaling": {
@@ -2396,11 +2406,14 @@
                     "formula": ""
                   },
                   "number": 2,
-                  "denomination": "6",
+                  "denomination": 6,
                   "bonus": "@mod",
                   "types": [
                     "bludgeoning"
-                  ]
+                  ],
+                  "scaling": {
+                    "number": 1
+                  }
                 }
               ]
             },
@@ -2412,9 +2425,7 @@
               }
             },
             "sort": 0,
-            "name": "",
-            "img": "",
-            "appliedEffects": []
+            "name": ""
           }
         },
         "attuned": false,
@@ -2437,8 +2448,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": 1725387668637,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "modifiedTime": null,
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!qNdFhY3JOkCfhG3d.i4ggPCju3QyYJslH"
     },
@@ -2454,10 +2465,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -2512,10 +2524,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -2571,8 +2584,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305107370,
-    "modifiedTime": 1725992626589,
+    "createdTime": 1726171259411,
+    "modifiedTime": 1726171450369,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!qNdFhY3JOkCfhG3d"

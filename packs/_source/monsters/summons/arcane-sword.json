@@ -453,7 +453,6 @@
       "environment": "",
       "cr": 0,
       "spellLevel": 0,
-      "source": {},
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -503,7 +502,9 @@
       }
     },
     "source": {
-      "rules": "2014"
+      "revision": 1,
+      "rules": "2014",
+      "book": ""
     }
   },
   "prototypeToken": {
@@ -608,7 +609,8 @@
           "chat": ""
         },
         "source": {
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "identified": true,
         "unidentified": {
@@ -804,8 +806,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305082171,
-    "modifiedTime": 1725992614521,
+    "createdTime": 1726171233790,
+    "modifiedTime": 1726171445218,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Tac7eq0AXJco0nml"

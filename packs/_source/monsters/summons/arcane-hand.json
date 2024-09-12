@@ -453,7 +453,6 @@
       "environment": "",
       "cr": 0,
       "spellLevel": 0,
-      "source": {},
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -503,7 +502,9 @@
       }
     },
     "source": {
-      "rules": "2014"
+      "revision": 1,
+      "rules": "2014",
+      "book": ""
     }
   },
   "prototypeToken": {
@@ -608,7 +609,8 @@
           "chat": ""
         },
         "source": {
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "identified": true,
         "unidentified": {
@@ -800,7 +802,8 @@
           "chat": ""
         },
         "source": {
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -877,7 +880,8 @@
             },
             "check": {
               "ability": "str",
-              "dc": {}
+              "dc": {},
+              "associated": []
             },
             "sort": 0
           }
@@ -915,7 +919,8 @@
           "chat": ""
         },
         "source": {
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1051,7 +1056,8 @@
           "chat": ""
         },
         "source": {
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1170,8 +1176,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305098535,
-    "modifiedTime": 1725992622312,
+    "createdTime": 1726171250692,
+    "modifiedTime": 1726171448499,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!iHj5Tkm6HRgXuaWP"

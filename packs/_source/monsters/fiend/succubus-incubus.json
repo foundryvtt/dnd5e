@@ -146,12 +146,6 @@
       "environment": "",
       "cr": 4,
       "spellLevel": 0,
-      "source": {
-        "custom": "",
-        "book": "SRD 5.1",
-        "page": "",
-        "license": "CC-BY-4.0"
-      },
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -527,6 +521,11 @@
     },
     "tools": {},
     "source": {
+      "custom": "",
+      "book": "",
+      "page": "",
+      "license": "CC-BY-4.0",
+      "revision": 1,
       "rules": "2014"
     }
   },
@@ -631,10 +630,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -689,10 +689,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -813,10 +814,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -1014,10 +1016,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1101,9 +1104,7 @@
               }
             },
             "sort": 0,
-            "name": "",
-            "img": "",
-            "appliedEffects": []
+            "name": ""
           }
         },
         "enchant": {},
@@ -1130,8 +1131,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": 1725387471681,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "modifiedTime": null,
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!VmdyZDjqAc8vdncY.2bFCfFfjRNmhyE8A"
     },
@@ -1147,10 +1148,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1230,11 +1232,14 @@
                     "formula": ""
                   },
                   "number": 5,
-                  "denomination": "10",
+                  "denomination": 10,
                   "bonus": "@mod",
                   "types": [
                     "psychic"
-                  ]
+                  ],
+                  "scaling": {
+                    "number": 1
+                  }
                 }
               ]
             },
@@ -1246,9 +1251,7 @@
               }
             },
             "sort": 0,
-            "name": "",
-            "img": "",
-            "appliedEffects": []
+            "name": ""
           }
         },
         "enchant": {},
@@ -1275,8 +1278,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": 1725387480759,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "modifiedTime": null,
+        "lastModifiedBy": null
       },
       "_key": "!actors.items!VmdyZDjqAc8vdncY.eb0O9cQ8N6lovLyI"
     },
@@ -1292,10 +1295,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
           "license": "CC-BY-4.0",
-          "rules": "2014"
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1417,8 +1421,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305084767,
-    "modifiedTime": 1725992615789,
+    "createdTime": 1726171236478,
+    "modifiedTime": 1726171445682,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!VmdyZDjqAc8vdncY"
