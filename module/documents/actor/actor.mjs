@@ -2717,11 +2717,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( recoverLongRestUses ) recovery.unshift("lr");
     if ( recoverDailyUses || config.newDay ) recovery.unshift("day", "dawn", "dusk");
 
-    const rollData = this.getRollData();
     result.updateItems ??= [];
     result.rolls ??= [];
     for ( const item of this.items ) {
       if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+      const rollData = item.getRollData();
       const { updates, rolls } = await item.system.recoverUses(recovery, rollData);
       if ( !foundry.utils.isEmpty(updates) ) {
         const updateTarget = result.updateItems.find(i => i._id === item.id);
