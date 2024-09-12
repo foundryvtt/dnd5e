@@ -4,7 +4,7 @@
   /*  Outer Window                      */
   /* ---------------------------------- */
 
-  --dnd5e-sheet-header-height: 150px; /* Only needs to be an estimate */
+  --dnd5e-sheet-header-height: 170px;
   border: var(--dnd5e-border-gold);
 
   > header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-background-25); }
@@ -235,7 +235,7 @@
 
   .sheet-body {
     .tab {
-      max-height: calc(max(70vh, 1000px) - var(--dnd5e-sheet-header-height));
+      max-height: ~"calc(min(max(70vh, 1000px), 95vh) - var(--dnd5e-sheet-header-height))";
       overflow: auto;
       display: flex;
       flex-direction: column;
