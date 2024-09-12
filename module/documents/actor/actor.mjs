@@ -1,7 +1,6 @@
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
-import { SummonsData } from "../../data/item/fields/summons-field.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import { replaceFormulaData, simplifyBonus } from "../../utils.mjs";
@@ -3495,6 +3494,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         jitter: 0.25
       });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async toggleStatusEffect(statusId, options) {
+    const created = await super.toggleStatusEffect(statusId, options);
+    const status = CONFIG.statusEffects.find(e => e.id === statusId);
+    if ( !(created instanceof ActiveEffect) || !status.exclusiveGroup ) return created;
+
+    const others = CONFIG.statusEffects
+      .filter(e => (e.id !== statusId) && (e.exclusiveGroup === status.exclusiveGroup) && this.effects.has(e._id));
+    if ( others.length ) await this.deleteEmbeddedDocuments("ActiveEffect", others.map(e => e._id));
+
+    return created;
   }
 
   /* -------------------------------------------- */
