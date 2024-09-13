@@ -145,15 +145,12 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     // If attempting to apply active effect to empty MappingField entry, create it
     if ( (current === undefined) && change.key.startsWith("system.") ) {
+      let keyPath = change.key;
       let mappingField = field;
-      const [, ...parts] = change.key.split(".");
-      let last;
-      while ( !(mappingField instanceof MappingField) ) {
-        last = parts.pop();
-        mappingField = model.system.schema.getField(parts.join("."));
-        if ( !mappingField || !parts.length ) break;
+      while ( !(mappingField instanceof MappingField) && mappingField ) {
+        if ( mappingField.name ) keyPath = keyPath.substring(0, keyPath.length - mappingField.name.length - 1);
+        mappingField = mappingField.parent;
       }
-      const keyPath = ["system", ...parts, last].join(".");
       if ( mappingField && (foundry.utils.getProperty(model, keyPath) === undefined) ) {
         const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
         foundry.utils.setProperty(model, keyPath, created);
