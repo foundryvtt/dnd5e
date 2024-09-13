@@ -701,7 +701,7 @@ Fires after an item's resource consumption has been calculated but before any ch
 
 ### `dnd5e.preDisplayCardV2`
 
-Fires before an item chat card is created.
+Fires before an item chat card is created. Returning `false` will prevent chat card from being created.
 
 | Name    | Type                         | Description                                      |
 | ------- | ---------------------------- | ------------------------------------------------ |
