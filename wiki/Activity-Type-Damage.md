@@ -5,7 +5,7 @@ The Damage activity allows for rolling damage.
 
 ## Configuring Damage
 
-![Damage Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/damage-effect.jpg)
+![Damage Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/damage-effect.jpg)
 
 After creating the Damage activity the configuration sheet will open. Navigate over to the "Effect" tab to see the Damage-specific details plus the actual damage parts:
 - *Allow Critical*: Allow critical damage to be rolled

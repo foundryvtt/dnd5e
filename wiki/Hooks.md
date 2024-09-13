@@ -62,7 +62,7 @@ Fires after a concentration effect is created.
 | item   | Item5e         | The item that is being concentrated on. |
 | effect | ActiveEffect5e | The created ActiveEffect instance.      |
 
-### `dnd5e.preEndConcentrating`
+### `dnd5e.preEndConcentration`
 
 Fires before a concentration effect is deleted. Returning `false` will prevent concentration effect from being deleted.
 
@@ -71,7 +71,7 @@ Fires before a concentration effect is deleted. Returning `false` will prevent c
 | actor  | Actor5e        | The actor ending concentration.        |
 | effect | ActiveEffect5e | The ActiveEffect that will be deleted. |
 
-### `dnd5e.endConcentrating`
+### `dnd5e.endConcentration`
 
 Fires after a concentration effect is deleted.
 
