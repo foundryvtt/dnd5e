@@ -36,6 +36,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
      * @type {DataField}
      */
     this.model = model;
+    model.parent = this;
   }
 
   /* -------------------------------------------- */

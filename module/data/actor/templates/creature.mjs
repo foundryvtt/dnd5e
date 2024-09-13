@@ -6,15 +6,6 @@ import CommonTemplate from "./common.mjs";
 const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @typedef {object} SkillData
- * @property {number} value            Proficiency level creature has in this skill.
- * @property {string} ability          Default ability used for this skill.
- * @property {object} bonuses          Bonuses for this skill.
- * @property {string} bonuses.check    Numeric or dice bonus to skill's check.
- * @property {string} bonuses.passive  Numeric bonus to skill's passive check.
- */
-
-/**
  * A template for all actors that are creatures
  *
  * @property {object} bonuses
@@ -28,8 +19,9 @@ const { NumberField, SchemaField } = foundry.data.fields;
  * @property {string} bonuses.abilities.skill        Numeric or dice bonus to skill checks.
  * @property {object} bonuses.spell                  Bonuses to spells.
  * @property {string} bonuses.spell.dc               Numeric bonus to spellcasting DC.
- * @property {Object<string, SkillData>} skills      Actor's skills.
- * @property {Object<string, SpellSlotData>} spells  Actor's spell slots.
+ * @property {Record<string, ToolData>} tools        Actor's tools.
+ * @property {Record<string, SkillData>} skills      Actor's skills.
+ * @property {Record<string, SpellSlotData>} spells  Actor's spell slots.
  */
 export default class CreatureTemplate extends CommonTemplate {
   static defineSchema() {
@@ -187,7 +179,20 @@ export default class CreatureTemplate extends CommonTemplate {
   }
 }
 
-/* -------------------------------------------- */
+/**
+ * @typedef {RollConfigData} SkillData
+ * @property {number} value            Proficiency level creature has in this skill.
+ * @property {object} bonuses          Bonuses for this skill.
+ * @property {string} bonuses.check    Numeric or dice bonus to skill's check.
+ * @property {string} bonuses.passive  Numeric bonus to skill's passive check.
+ */
+
+/**
+ * @typedef {RollConfigData} ToolData
+ * @property {number} value            Proficiency level creature has in this tool.
+ * @property {object} bonuses          Bonuses for this tool.
+ * @property {string} bonuses.check    Numeric or dice bonus to tool's check.
+ */
 
 /**
  * Data on configuration of a specific spell slot.
