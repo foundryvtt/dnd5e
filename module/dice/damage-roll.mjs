@@ -1,4 +1,5 @@
 import DamageRollConfigurationDialog from "../applications/dice/damage-configuration-dialog.mjs";
+import { areKeysPressed } from "../utils.mjs";
 import BasicRoll from "./basic-roll.mjs";
 
 const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, StringTerm } = foundry.dice.terms;
@@ -68,9 +69,20 @@ export default class DamageRoll extends BasicRoll {
 
   /** @override */
   static applyKeybindings(config, dialog, message) {
-    const event = config.event;
-    dialog.configure ??= !(event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-    if ( event?.altKey ) config.rolls.forEach(r => r.options.isCritical = true);
+    const keys = {
+      normal: areKeysPressed(config.event, "skipDialogNormal")
+        || areKeysPressed(config.event, "skipDialogDisadvantage"),
+      critical: areKeysPressed(config.event, "skipDialogAdvantage")
+    };
+
+    // Should the roll configuration dialog be displayed?
+    dialog.configure ??= Object.values(keys).every(k => !k);
+
+    // Determine critical mode
+    for ( const roll of config.rolls ) {
+      roll.options ??= {};
+      roll.options.isCritical ??= keys.critical;
+    }
   }
 
   /* -------------------------------------------- */

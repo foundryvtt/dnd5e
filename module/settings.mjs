@@ -2,6 +2,28 @@ import { ModuleArtConfig } from "./module-art.mjs";
 import CompendiumBrowserSourceConfig from "./applications/compendium-browser-source-config.mjs";
 
 /**
+ * Register all of the system's keybindings.
+ */
+export function registerSystemKeybindings() {
+  game.keybindings.register("dnd5e", "skipDialogNormal", {
+    name: "KEYBINDINGS.DND5E.SkipDialogNormal",
+    editable: [{ key: "ShiftLeft" }, { key: "ShiftRight" }]
+  });
+
+  game.keybindings.register("dnd5e", "skipDialogAdvantage", {
+    name: "KEYBINDINGS.DND5E.SkipDialogAdvantage",
+    editable: [{ key: "AltLeft" }, { key: "AltRight" }]
+  });
+
+  game.keybindings.register("dnd5e", "skipDialogDisadvantage", {
+    name: "KEYBINDINGS.DND5E.SkipDialogDisadvantage",
+    editable: [{ key: "ControlLeft" }, { key: "ControlRight" }, { key: "OsLeft" }, { key: "OsRight" }]
+  });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Register all of the system's settings.
  */
 export function registerSystemSettings() {
