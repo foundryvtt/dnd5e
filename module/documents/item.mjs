@@ -816,7 +816,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /**
    * Display the chat card for an Item as a Chat Message
    * @param {Partial<ActivityMessageConfiguration>} [message]  Configuration info for the created chat message.
-   * @returns {Promise<ChatMessage5e|object>}
+   * @returns {Promise<ChatMessage5e|object|void>}
    */
   async displayCard(message={}) {
     const context = {
@@ -853,8 +853,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @memberof hookEvents
      * @param {Item5e} item                           Item for which the card will be created.
      * @param {ActivityMessageConfiguration} message  Configuration for the roll message.
+     * @returns {boolean}                             Return `false` to prevent the card from being displayed.
      */
-    Hooks.callAll("dnd5e.preDisplayCardV2", this, messageConfig);
+    if ( Hooks.call("dnd5e.preDisplayCardV2", this, messageConfig) === false ) return;
 
     if ( "dnd5e.preDisplayCard" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
