@@ -146,12 +146,6 @@
       "environment": "Coastal",
       "cr": 11,
       "spellLevel": 0,
-      "source": {
-        "custom": "",
-        "book": "SRD 5.1",
-        "page": "",
-        "license": "CC-BY-4.0"
-      },
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -520,7 +514,15 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "custom": "",
+      "book": "",
+      "page": "",
+      "license": "CC-BY-4.0",
+      "revision": 1,
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Djinni",
@@ -623,9 +625,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -642,7 +646,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "elemental-demise"
       },
       "effects": [],
       "folder": null,
@@ -679,9 +684,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -698,7 +705,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "innate-spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -735,9 +743,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -820,7 +830,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -857,9 +868,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -1041,7 +1054,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "scimitar"
       },
       "effects": [],
       "folder": null,
@@ -1078,9 +1092,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1169,7 +1185,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "create-whirlwind"
       },
       "effects": [],
       "folder": null,
@@ -1206,9 +1223,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "revision": 1,
+          "rules": "2014"
         },
         "activation": {
           "type": "minute",
@@ -1324,7 +1343,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "conjure-air-elemental"
       },
       "effects": [],
       "folder": null,
@@ -1332,11 +1352,7 @@
       "ownership": {
         "default": 0
       },
-      "flags": {
-        "dnd5e": {
-          "migratedUses": 1
-        }
-      },
+      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1363,9 +1379,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -1465,7 +1483,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-evil-and-good"
       },
       "sort": 0,
       "flags": {
@@ -1502,9 +1521,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -1605,7 +1626,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "detect-magic"
       },
       "sort": 0,
       "flags": {
@@ -1642,9 +1664,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -1766,7 +1790,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "thunderwave"
       },
       "sort": 0,
       "flags": {
@@ -1803,9 +1828,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -1919,7 +1946,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "create-food-and-water"
       },
       "sort": 0,
       "flags": {
@@ -1956,9 +1984,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -2072,7 +2102,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "tongues"
       },
       "sort": 0,
       "flags": {
@@ -2109,9 +2140,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "minute",
@@ -2227,7 +2260,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "wind-walk"
       },
       "sort": 0,
       "flags": {
@@ -2264,9 +2298,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "minute",
@@ -2382,7 +2418,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "creation"
       },
       "sort": 0,
       "flags": {
@@ -2419,9 +2456,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -2537,7 +2576,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "gaseous-form"
       },
       "sort": 0,
       "flags": {
@@ -2574,9 +2614,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -2692,7 +2734,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "invisibility"
       },
       "sort": 0,
       "flags": {
@@ -2729,9 +2772,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -2848,7 +2893,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "major-image"
       },
       "sort": 0,
       "flags": {
@@ -2885,9 +2931,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -3082,7 +3130,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "plane-shift"
       },
       "sort": 0,
       "flags": {
@@ -3118,8 +3167,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305053049,
-    "modifiedTime": 1725305053049,
+    "createdTime": 1726171203084,
+    "modifiedTime": 1726171439660,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!5P1VGAZQwOilwZQf"

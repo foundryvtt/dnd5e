@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -87,7 +88,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -136,32 +137,32 @@
           "includeBase": true,
           "parts": [
             {
-              "number": null,
-              "denomination": null,
-              "bonus": "",
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "number": 1,
+              "denomination": "8",
+              "bonus": "@mod + 1",
               "types": [
                 "slashing"
-              ],
-              "custom": {
-                "enabled": true,
-                "formula": "1d8 + @mod +1"
-              },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
+              ]
             }
           ]
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "",
+        "img": "",
+        "appliedEffects": []
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "demon-armor"
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -176,7 +177,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037243508,
-    "modifiedTime": 1725037243508,
+    "modifiedTime": 1725992531746,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ejEt6hLQxOux04lS"

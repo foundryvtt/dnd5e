@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -49,7 +50,7 @@
       "conditions": ""
     },
     "strength": null,
-    "proficient": null,
+    "proficient": 1,
     "type": {
       "value": "medium",
       "baseItem": "chainshirt"
@@ -63,7 +64,8 @@
       "mgc"
     ],
     "activities": {},
-    "attuned": false
+    "attuned": false,
+    "identifier": "elven-chain"
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -78,7 +80,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037102426,
-    "modifiedTime": 1725037102426,
+    "modifiedTime": 1725992484702,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!6067acDZGv7KNOkP"

@@ -146,12 +146,6 @@
       "environment": "",
       "cr": 4,
       "spellLevel": 0,
-      "source": {
-        "custom": "",
-        "book": "SRD 5.1",
-        "page": "",
-        "license": "CC-BY-4.0"
-      },
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -535,7 +529,15 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "custom": "",
+      "book": "",
+      "page": "",
+      "license": "CC-BY-4.0",
+      "revision": 1,
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Ghost",
@@ -638,9 +640,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -657,7 +661,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "ethereal-sight"
       },
       "effects": [],
       "folder": null,
@@ -694,9 +699,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -713,7 +720,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "incorporeal-movement"
       },
       "effects": [],
       "folder": null,
@@ -750,9 +758,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -916,7 +926,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "withering-touch"
       },
       "effects": [],
       "folder": null,
@@ -949,9 +960,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1034,7 +1047,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "etherealness"
       },
       "effects": [],
       "folder": null,
@@ -1071,9 +1085,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1161,7 +1177,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "horrifying-visage"
       },
       "effects": [],
       "folder": null,
@@ -1198,9 +1215,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "1",
@@ -1305,7 +1324,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "possession"
       },
       "effects": [],
       "folder": null,
@@ -1343,8 +1363,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305108771,
-    "modifiedTime": 1725305108771,
+    "createdTime": 1726171260703,
+    "modifiedTime": 1726171450649,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!qoFEjfrANBdrCP6m"

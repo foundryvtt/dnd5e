@@ -38,7 +38,6 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {string} details.environment        Common environments in which this NPC is found.
  * @property {number} details.cr                 NPC's challenge rating.
  * @property {number} details.spellLevel         Spellcasting level of this NPC.
- * @property {SourceData} details.source         Adventure or sourcebook where this NPC originated.
  * @property {object} resources
  * @property {object} resources.legact           NPC's legendary actions.
  * @property {number} resources.legact.value     Currently available legendary actions.
@@ -49,8 +48,18 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {object} resources.lair             NPC's lair actions.
  * @property {boolean} resources.lair.value      Does this NPC use lair actions.
  * @property {number} resources.lair.initiative  Initiative count when lair actions are triggered.
+ * @property {SourceData} source                 Adventure or sourcebook where this NPC originated.
  */
 export default class NPCData extends CreatureTemplate {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
@@ -108,8 +117,7 @@ export default class NPCData extends CreatureTemplate {
         }),
         spellLevel: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
-        }),
-        source: new SourceField()
+        })
       }, {label: "DND5E.Details"}),
       resources: new SchemaField({
         legact: new SchemaField({
@@ -135,6 +143,7 @@ export default class NPCData extends CreatureTemplate {
           })
         }, {label: "DND5E.LairActionLabel"})
       }, {label: "DND5E.Resources"}),
+      source: new SourceField(),
       traits: new SchemaField({
         ...TraitsFields.common,
         ...TraitsFields.creature
@@ -203,13 +212,16 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Convert source string into custom object.
+   * Convert source string into custom object & move to top-level.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateSource(source) {
-    if ( source.details?.source && (foundry.utils.getType(source.details.source) !== "Object") ) {
-      source.details.source = { custom: source.details.source };
+    let custom;
+    if ( ("details" in source) && ("source" in source.details) ) {
+      if ( foundry.utils.getType(source.details?.source) === "string" ) custom = source.details.source;
+      else source.source = source.details.source;
     }
+    if ( custom ) source.source = { custom };
   }
 
   /* -------------------------------------------- */
@@ -297,7 +309,8 @@ export default class NPCData extends CreatureTemplate {
     this.details.xp.value = this.parent.getCRExp(this.details.cr);
 
     // Proficiency
-    this.attributes.prof = Proficiency.calculateMod(Math.max(this.details.cr, this.details.level, 1));
+    if ( this.details.cr === null ) this.attributes.prof = null;
+    else this.attributes.prof = Proficiency.calculateMod(Math.max(this.details.cr, this.details.level, 1));
 
     // Spellcaster Level
     if ( this.attributes.spellcasting && !Number.isNumeric(this.details.spellLevel) ) {
@@ -306,6 +319,7 @@ export default class NPCData extends CreatureTemplate {
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
+    SourceField.shimActor.call(this);
   }
 
   /* -------------------------------------------- */
@@ -336,7 +350,7 @@ export default class NPCData extends CreatureTemplate {
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
     AttributesFields.prepareConcentration.call(this, rollData);
-    SourceField.prepareData.call(this.details.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
+    SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareResistImmune.call(this);
 
     // Hit Dice

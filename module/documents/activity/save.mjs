@@ -37,7 +37,7 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
   /* -------------------------------------------- */
 
   /** @override */
-  _usageChatButtons() {
+  _usageChatButtons(message) {
     const ability = CONFIG.DND5E.abilities[this.save.ability]?.label ?? "";
     const dc = this.save.dc.value;
     const buttons = [{
@@ -60,7 +60,7 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
         action: "rollDamage"
       }
     });
-    return buttons.concat(super._usageChatButtons());
+    return buttons.concat(super._usageChatButtons(message));
   }
 
   /* -------------------------------------------- */
@@ -111,5 +111,14 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
         event, speaker, targetValue: Number.isFinite(dc) ? dc : this.save.dc.value
       });
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), { save: this.save });
   }
 }

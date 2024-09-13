@@ -454,10 +454,16 @@
     font-size: var(--font-size-11);
   }
 
+  hr {
+    height: 1px;
+    margin-block: 5px;
+    border: none;
+    background: linear-gradient(to right, transparent, var(--dnd5e-color-gold), transparent);
+  }
+
   hr.ampersand {
     position: relative;
     height: 20px;
-    border: none;
     background: url("ui/official/ampersand-gold.svg") no-repeat center / contain;
     margin: 0;
 
@@ -773,48 +779,12 @@
 }
 
 /* ---------------------------------- */
-/*  Dialogs                           */
-/* ---------------------------------- */
-
-.dnd5e2.dialog {
-  background: url("ui/texture-gray1.webp") no-repeat top left,
-    url("ui/texture-gray2.webp") no-repeat bottom right,
-    var(--dnd5e-color-parchment);
-  border: 1px solid var(--dnd5e-color-gold);
-
-  > .window-content { background: transparent; }
-
-  > .window-header .window-title { visibility: hidden; }
-
-  form {
-    padding: 0 .75rem .75rem;
-
-    > header {
-      font-family: var(--dnd5e-font-roboto-slab);
-      font-weight: bold;
-      font-size: var(--font-size-24);
-      text-align: center;
-      margin-bottom: .75rem;
-    }
-  }
-
-  .dialog-buttons {
-    padding: .5rem;
-    gap: .5rem;
-
-    button {
-      background: var(--dnd5e-color-card);
-      border: 1px solid var(--color-border-light-2);
-      &.default { border-color: var(--dnd5e-color-gold); }
-    }
-  }
-}
-
-/* ---------------------------------- */
 /*  App V2                            */
 /* ---------------------------------- */
 
 .dnd5e2.application {
+  --color-scrollbar: var(--dnd5e-color-scrollbar);
+
   background: url("ui/texture-gray1.webp") no-repeat top left,
     url("ui/texture-gray2.webp") no-repeat bottom right,
     var(--dnd5e-color-parchment);
@@ -889,11 +859,14 @@
 
   .window-content {
     background: transparent;
+    margin-block-start: -8px;
+    padding-block-start: 8px;
     padding-block-end: 14px;
     padding-inline: 14px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    overflow-y: auto;
 
     > section:empty { display: none; }
   }
@@ -946,6 +919,54 @@
 dialog.dnd5e2.application {
   margin: 0;
   padding: 0;
+}
+
+/* ---------------------------------- */
+/*  Dialogs                           */
+/* ---------------------------------- */
+
+.dnd5e2.dialog {
+  background: url("ui/texture-gray1.webp") no-repeat top left,
+    url("ui/texture-gray2.webp") no-repeat bottom right,
+    var(--dnd5e-color-parchment);
+  border: 1px solid var(--dnd5e-color-gold);
+
+  > .window-content { background: transparent; }
+
+  > .window-header .window-title { visibility: hidden; }
+
+  form {
+    padding: 0 .75rem .75rem;
+
+    > header {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      font-size: var(--font-size-24);
+      text-align: center;
+      margin-bottom: .75rem;
+    }
+  }
+
+  .dialog-buttons {
+    padding: .5rem;
+    gap: .5rem;
+
+    button {
+      background: var(--dnd5e-color-card);
+      border: 1px solid var(--color-border-light-2);
+      &.default { border-color: var(--dnd5e-color-gold); }
+    }
+  }
+}
+
+.dnd5e2.dialog-lg {
+  background: url("ui/texture1.webp") no-repeat top center / auto 770px,
+    var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
+
+  .window-resize-handle {
+    inset: auto 0 0 auto;
+    z-index: 1;
+  }
 }
 
 /* ---------------------------------- */
@@ -1029,9 +1050,11 @@ dialog.dnd5e2.application {
       padding: 6px;
 
       li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        .formula-line {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
 
       .formula {
@@ -1040,11 +1063,20 @@ dialog.dnd5e2.application {
       }
 
       .label {
+        --icon-size: 20px;
+
+        display: flex;
+        align-items: center;
+        gap: 8px;
         color: var(--color-text-dark-5);
         font-style: italic;
         font-size: var(--font-size-12);
       }
     }
+  }
+
+  .dialog-buttons {
+    gap: 6px;
   }
 }
 
@@ -1059,7 +1091,7 @@ dialog.dnd5e2.application {
     gap: 12px;
     align-items: flex-start;
 
-    fieldset.traits { flex: 1; }
+    fieldset.traits { flex: 1 1 40%; }
     fieldset:not(.traits) { flex: 1 0 100%; }
   }
   .traits {

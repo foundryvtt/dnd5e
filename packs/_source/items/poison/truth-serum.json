@@ -11,7 +11,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -57,85 +58,77 @@
     "properties": [],
     "magicalBonus": null,
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "utility",
+      "IXiAkr30YyhobMw8": {
+        "type": "save",
+        "_id": "IXiAkr30YyhobMw8",
         "activation": {
           "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
+          "value": null,
+          "override": false,
+          "condition": ""
         },
         "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": false
           },
-          "spellSlot": true
+          "spellSlot": true,
+          "targets": []
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "1",
-          "units": "hour",
-          "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "units": "",
-          "special": "",
-          "override": false
+          "override": false,
+          "units": "self",
+          "special": ""
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft",
+            "type": ""
           },
           "affects": {
-            "count": "",
-            "type": "self",
             "choice": false,
-            "special": ""
+            "count": "",
+            "type": ""
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "damage": {
+          "parts": [],
+          "onSave": "half"
+        },
+        "save": {
+          "ability": "con",
+          "dc": {
+            "calculation": "",
+            "formula": "11"
+          }
+        },
+        "name": "",
+        "img": "",
+        "appliedEffects": []
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "truth-serum"
   },
   "effects": [],
-  "sort": 0,
+  "sort": 100000,
   "flags": {},
   "_id": "a86F565Pjdzym1jH",
   "folder": "ZzUfnm1OuSL02nLG",
@@ -148,7 +141,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037220965,
-    "modifiedTime": 1725037220965,
+    "modifiedTime": 1725992524337,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!a86F565Pjdzym1jH"

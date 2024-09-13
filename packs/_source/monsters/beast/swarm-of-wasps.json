@@ -146,12 +146,6 @@
       "environment": "Underdark",
       "cr": 0.5,
       "spellLevel": 0,
-      "source": {
-        "custom": "",
-        "book": "SRD 5.1",
-        "page": "",
-        "license": "CC-BY-4.0"
-      },
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -528,7 +522,15 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "custom": "",
+      "book": "",
+      "page": "",
+      "license": "CC-BY-4.0",
+      "revision": 1,
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Swarm of Wasps",
@@ -631,9 +633,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -650,7 +654,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "swarm"
       },
       "effects": [],
       "folder": null,
@@ -687,9 +692,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -854,7 +861,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "bites"
       },
       "effects": [],
       "folder": null,
@@ -888,8 +896,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305086709,
-    "modifiedTime": 1725305086709,
+    "createdTime": 1726171238465,
+    "modifiedTime": 1726171446064,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!YUaprnengdFDNG8P"

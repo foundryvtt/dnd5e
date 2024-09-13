@@ -1,0 +1,32 @@
+{{#if (or advancement.hp enriched.additionalHitPoints)}}
+<h{{title.level3}}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.HitPoints.Header" }}</h{{ title.level3 }}>
+<p>
+    {{{ localize "JOURNALENTRYPAGE.DND5E.Class.HitPoints.HitDiceLegacy" dice=advancement.hp.hitDice
+                  class=linked.lowercaseName }}}<br>
+    {{{ localize "JOURNALENTRYPAGE.DND5E.Class.HitPoints.Level1" max=advancement.hp.max }}}<br>
+    {{{ localize "JOURNALENTRYPAGE.DND5E.Class.HitPoints.LevelX" dice=advancement.hp.hitDice
+                 average=advancement.hp.average class=linked.lowercaseName}}}
+</p>
+{{{ enriched.additionalHitPoints }}}
+{{/if}}
+
+{{#if (or advancement.traits enriched.additionalTraits)}}
+<h{{ title.level3 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.Traits.Header" }}</h{{ title.level3 }}>
+{{#if advancement.traits}}
+<p>
+    <strong>{{ localize "DND5E.Armor" }}:</strong> {{ advancement.traits.armor }}<br>
+    <strong>{{ localize "TYPES.Item.weaponPl" }}:</strong> {{ advancement.traits.weapons }}<br>
+    <strong>{{ localize "TYPES.Item.toolPl" }}:</strong> {{ advancement.traits.tools }}<br>
+    <strong>{{ localize "DND5E.ClassSaves" }}:</strong> {{ advancement.traits.saves }}<br>
+    <strong>{{ localize "DND5E.Skills" }}:</strong> {{ advancement.traits.skills }}
+</p>
+{{/if}}
+{{{ enriched.additionalTraits }}}
+{{/if}}
+
+{{#if (or advancement.equipment enriched.additionalEquipment)}}
+<h{{ title.level3 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.EquipmentHeader" }}</h{{ title.level3 }}>
+<p>{{ localize "JOURNALENTRYPAGE.DND5E.Class.EquipmentDescription" }}</p>
+{{{ advancement.equipment }}}
+{{{ enriched.additionalEquipment }}}
+{{/if}}

@@ -2,7 +2,7 @@
   "_id": "OcjcplcUWH07Kn9k",
   "name": "Brazier of Commanding Fire Elementals",
   "type": "consumable",
-  "img": "icons/magic/fire/blast-jet-stream-splash.webp",
+  "img": "icons/tools/laboratory/bowl-liquid-orange.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>While a fire burns in this brazier, you can use an action to speak the brazier's command word and summon a @UUID[Compendium.dnd5e.monsters.Actor.8SMQl75HLjhuSeau]{Fire Elemental}, as if you had cast the <em>@UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure Elemental}</em> spell. The brazier can't be used this way again until the next dawn.</p>\n<p>The brazier weighs 5 pounds.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -141,11 +142,12 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "brazier-of-commanding-fire-elementals"
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 4500000,
   "ownership": {
     "default": 0
   },
@@ -156,7 +158,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037177644,
-    "modifiedTime": 1725037177644,
+    "modifiedTime": 1725992509809,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!OcjcplcUWH07Kn9k"

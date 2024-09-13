@@ -146,12 +146,6 @@
       "environment": "",
       "cr": 2,
       "spellLevel": 4,
-      "source": {
-        "custom": "",
-        "book": "SRD 5.1",
-        "page": "",
-        "license": "CC-BY-4.0"
-      },
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -515,7 +509,15 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "custom": "",
+      "book": "",
+      "page": "",
+      "license": "CC-BY-4.0",
+      "revision": 1,
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Cult Fanatic",
@@ -618,9 +620,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -669,7 +673,8 @@
         "crewed": false,
         "properties": [],
         "activities": {},
-        "attuned": false
+        "attuned": false,
+        "identifier": "leather-armor"
       },
       "effects": [],
       "folder": null,
@@ -706,9 +711,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -725,7 +732,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "dark-devotion"
       },
       "effects": [],
       "folder": null,
@@ -762,9 +770,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -781,7 +791,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "spellcasting"
       },
       "effects": [],
       "folder": null,
@@ -818,9 +829,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -903,7 +916,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -940,9 +954,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -1110,7 +1126,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "dagger"
       },
       "effects": [],
       "folder": null,
@@ -1149,9 +1166,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -1255,7 +1274,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "light"
       },
       "sort": 0,
       "flags": {
@@ -1292,9 +1312,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -1417,7 +1439,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "sacred-flame"
       },
       "sort": 0,
       "flags": {
@@ -1454,9 +1477,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -1553,7 +1578,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "thaumaturgy"
       },
       "sort": 0,
       "flags": {
@@ -1590,9 +1616,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -1696,7 +1724,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "command"
       },
       "sort": 0,
       "flags": {
@@ -1733,9 +1762,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -1865,7 +1896,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "inflict-wounds"
       },
       "sort": 0,
       "flags": {
@@ -1902,9 +1934,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "bonus",
@@ -2006,7 +2040,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "shield-of-faith"
       },
       "sort": 0,
       "flags": {
@@ -2043,9 +2078,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "action",
@@ -2152,7 +2189,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "hold-person"
       },
       "sort": 0,
       "flags": {
@@ -2187,9 +2225,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "activation": {
           "type": "bonus",
@@ -2320,7 +2360,8 @@
             },
             "sort": 0
           }
-        }
+        },
+        "identifier": "spiritual-weapon"
       },
       "effects": [],
       "folder": null,
@@ -2358,8 +2399,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305112091,
-    "modifiedTime": 1725305112091,
+    "createdTime": 1726171263677,
+    "modifiedTime": 1726171451358,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!tYfQIxCJT0WaaKmc"

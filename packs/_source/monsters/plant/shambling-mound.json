@@ -146,12 +146,6 @@
       "environment": "Forest",
       "cr": 5,
       "spellLevel": 0,
-      "source": {
-        "custom": "",
-        "book": "SRD 5.1",
-        "page": "",
-        "license": "CC-BY-4.0"
-      },
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -524,7 +518,15 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "custom": "",
+      "book": "",
+      "page": "",
+      "license": "CC-BY-4.0",
+      "revision": 1,
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Shambling Mound",
@@ -627,9 +629,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -646,7 +650,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "lightning-absorption"
       },
       "effects": [],
       "folder": null,
@@ -683,9 +688,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -768,7 +775,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -805,9 +813,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -844,13 +854,13 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
             "effects": [],
             "range": {
-              "units": "",
+              "units": "self",
               "special": "",
               "override": false
             },
@@ -882,20 +892,18 @@
               "onSave": "half",
               "parts": [
                 {
+                  "custom": {
+                    "enabled": false,
+                    "formula": ""
+                  },
                   "number": 2,
                   "denomination": 8,
                   "bonus": "@mod",
                   "types": [
                     "bludgeoning"
                   ],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
                   "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
+                    "number": 1
                   }
                 }
               ]
@@ -904,16 +912,18 @@
               "ability": "con",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "14"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": ""
           }
         },
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "engulf"
       },
       "effects": [],
       "folder": null,
@@ -950,9 +960,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -1116,7 +1128,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "slam"
       },
       "effects": [],
       "folder": null,
@@ -1150,8 +1163,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305095487,
-    "modifiedTime": 1725305095487,
+    "createdTime": 1726171247535,
+    "modifiedTime": 1726171447828,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!gGeLeV411iQ5Yijs"

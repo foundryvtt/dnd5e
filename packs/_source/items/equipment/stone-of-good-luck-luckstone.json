@@ -2,7 +2,7 @@
   "_id": "296Zgo9RhltWShE1",
   "name": "Stone of Good Luck (Luckstone)",
   "type": "equipment",
-  "img": "icons/commodities/gems/gem-faceted-octagon-yellow.webp",
+  "img": "icons/commodities/gems/gem-rough-rectangle-red.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While this polished agate is on your person, you gain a +1 bonus to ability checks and saving throws.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -63,7 +64,8 @@
       "mgc"
     ],
     "activities": {},
-    "attuned": false
+    "attuned": false,
+    "identifier": "stone-of-good-luck-luckstone"
   },
   "effects": [
     {
@@ -128,7 +130,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037087692,
-    "modifiedTime": 1725037087692,
+    "modifiedTime": 1725992479684,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!296Zgo9RhltWShE1"

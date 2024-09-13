@@ -2,7 +2,7 @@
   "_id": "jeoZmDD9fuQdvC77",
   "name": "Vicious Dart",
   "type": "weapon",
-  "img": "icons/weapons/ammunition/arrows-war-red.webp",
+  "img": "icons/skills/ranged/dart-thrown-poison-green.webp",
   "system": {
     "description": {
       "value": "<p>A small thrown implement crafted with a short wooden shaft and crossed feathres with a sharp wooden or metal tip. Darts can be thrown with sufficient force to puncture the skin.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -179,7 +180,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "identifier": "vicious-dart"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -194,7 +196,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037265296,
-    "modifiedTime": 1725037265296,
+    "modifiedTime": 1725992538965,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!jeoZmDD9fuQdvC77"

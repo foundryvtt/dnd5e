@@ -195,47 +195,9 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       html.find("button.control-button").on("click", this._onSheetAction.bind(this));
     }
 
-    new ContextMenu5e(html, ".activity[data-id]", [], { onOpen: this._onOpenActivityContext.bind(this) });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Construct context menu options for a given Activity.
-   * @param {Activity} activity  The Activity.
-   * @returns {ContextMenuEntry[]}
-   * @protected
-   */
-  _getActivityContextMenuOptions(activity) {
-    const entries = [];
-
-    if ( this.isEditable ) {
-      entries.push({
-        name: "DND5E.ContextMenuActionEdit",
-        icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
-        callback: () => activity.sheet.render({ force: true })
-      }, {
-        name: "DND5E.ContextMenuActionDuplicate",
-        icon: '<i class="fas fa-copy fa-fw"></i>',
-        callback: () => {
-          const createData = activity.toObject();
-          delete createData._id;
-          this.item.createActivity(createData.type, createData, { renderSheet: false });
-        }
-      }, {
-        name: "DND5E.ContextMenuActionDelete",
-        icon: '<i class="fas fa-trash fa-fw"></i>',
-        callback: () => activity.deleteDialog()
-      });
-    } else {
-      entries.push({
-        name: "DND5E.ContextMenuActionView",
-        icon: '<i class="fas fa-eye fa-fw"></i>',
-        callback: () => activity.sheet.render({ force: true })
-      });
-    }
-
-    return entries;
+    new ContextMenu5e(html, ".activity[data-activity-id]", [], {
+      onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target)
+    });
   }
 
   /* -------------------------------------------- */
@@ -286,34 +248,9 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
    * @protected
    */
   _onEditActivity(event) {
-    const { id } = event.currentTarget.closest("[data-id]").dataset;
-    const activity = this.item.system.activities.get(id);
+    const { activityId } = event.currentTarget.closest("[data-activity-id]").dataset;
+    const activity = this.item.system.activities.get(activityId);
     return activity?.sheet?.render({ force: true });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle opening the context menu on an Activity.
-   * @param {HTMLElement} target  The element the menu was triggered for.
-   * @protected
-   */
-  _onOpenActivityContext(target) {
-    const { id } = target.closest(".activity[data-id]")?.dataset ?? {};
-    const activity = this.item.system.activities.get(id);
-    if ( !activity ) return;
-    const menuItems = this._getActivityContextMenuOptions(activity);
-
-    /**
-     * A hook even that fires when the context menu for an Activity is opened.
-     * @function dnd5e.getItemActivityContext
-     * @memberof hookEvents
-     * @param {Activity} activity             The Activity.
-     * @param {HTMLElement} target            The element that menu was triggered for.
-     * @param {ContextMenuEntry[]} menuItems  The context menu entries.
-     */
-    Hooks.callAll("dnd5e.getItemActivityContext", activity, target, menuItems);
-    ui.context.menuItems = menuItems;
   }
 
   /* -------------------------------------------- */
@@ -352,7 +289,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @override */
   _onDragStart(event) {
     const { id } = event.target.closest(".activity[data-id]")?.dataset ?? {};
-    const activity = this.item.system.activities.get(id);
+    const activity = this.item.system.activities?.get(id);
     if ( !activity ) return super._onDragStart(event);
     event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
   }

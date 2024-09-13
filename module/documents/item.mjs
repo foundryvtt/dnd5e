@@ -7,8 +7,6 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
-import { getSceneTargets, simplifyBonus } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -266,7 +264,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {string}
    */
   get identifier() {
-    return this.system.identifier || this.name.slugify({strict: true});
+    if ( this.system.identifier ) return this.system.identifier;
+    const identifier = this.name.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
+    return identifier.slugify({ strict: true });
   }
 
   /* --------------------------------------------- */
@@ -545,6 +545,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareBaseData() {
+    this.labels = {};
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
     for ( const activity of this.system.activities ?? [] ) activity.prepareData();
@@ -686,55 +693,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       "The `getAttackToHit` method on `Item5e` has moved to `getAttackData` on `AttackActivity`.",
       { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
     );
-    // TODO: Replace this implementation with a call to the method on the activity once `rollAttack` has been moved
 
-    if ( !this.hasAttack ) return null;
-    const flat = this.system.attack.flat;
-    const rollData = this.getRollData();
-    const parts = [];
-    let ammo;
-
-    if ( this.isOwned && !flat ) {
-      // Ability score modifier
-      if ( this.system.ability !== "none" ) parts.push("@mod");
-
-      // Add proficiency bonus.
-      if ( this.system.prof?.hasProficiency ) {
-        parts.push("@prof");
-        rollData.prof = this.system.prof.term;
-      }
-
-      // Actor-level global bonus to attack rolls
-      const actorBonus = this.actor.system.bonuses?.[this.system.actionType] || {};
-      if ( actorBonus.attack ) parts.push(actorBonus.attack);
-
-      ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
-    }
-
-    // Include the item's innate & magical attack bonuses
-    if ( this.system.attack.bonus ) parts.push(this.system.attack.bonus);
-    if ( this.system.magicalBonus && this.system.magicAvailable && !flat ) parts.push(this.system.magicalBonus);
-
-    // One-time bonus provided by consumed ammunition
-    if ( ammo && !flat ) {
-      const ammoItemQuantity = ammo.system.quantity;
-      const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
-      const ammoParts = [
-        Roll.replaceFormulaData(ammo.system.attack.bonus, rollData),
-        ammo.system.magicAvailable ? ammo.system.magicalBonus : null
-      ].filter(b => b);
-      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.type.value === "ammo");
-      if ( ammoCanBeConsumed && ammoParts.length && ammoIsTypeConsumable ) {
-        parts.push("@ammo");
-        rollData.ammo = ammoParts.join(" + ");
-      }
-    }
-
-    // Condense the resulting attack bonus formula into a simplified label
-    const roll = new Roll(parts.join("+"), rollData);
-    const formula = simplifyRollFormula(roll.formula) || "0";
-    this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }) || "0";
-    this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
+    const activity = this.system.activities?.getByType("attack")[0];
+    if ( !activity ) return null;
+    const { data: rollData, parts } = activity.getAttackData();
     return { rollData, parts };
   }
 
@@ -801,11 +763,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       );
       event = dialog?.event;
     }
-    if ( this.system.activities.size ) {
+    let activities = this.system.activities?.filter(a => !this.getFlag("dnd5e", "riders.activity")?.includes(a.id));
+    if ( activities.length ) {
       let usageConfig = config;
       let dialogConfig = dialog;
       let messageConfig = message;
-      const activities = this.system.activities.contents.sort((a, b) => a.sort - b.sort);
+      activities.sort((a, b) => a.sort - b.sort);
       let activity = activities[0];
       if ( (activities.length > 1) && !event?.shiftKey ) activity = await ActivityChoiceDialog.create(this);
       if ( !activity ) return;
@@ -817,7 +780,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }
       return activity.use(usageConfig, dialogConfig, messageConfig);
     }
-    if ( this.actor ) return this.displayCard();
+    if ( this.actor ) return this.displayCard(message);
   }
 
   /* -------------------------------------------- */
@@ -852,84 +815,68 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Display the chat card for an Item as a Chat Message
-   * @param {ItemUseOptions} [options]  Options which configure the display of the item chat card.
-   * @returns {ChatMessage|object}      Chat message if `createMessage` is true, otherwise an object containing
-   *                                    message data.
+   * @param {Partial<ActivityMessageConfiguration>} [message]  Configuration info for the created chat message.
+   * @returns {Promise<ChatMessage5e|object|void>}
    */
-  async displayCard(options={}) {
-
-    // Render the chat card template
-    const token = this.actor.token;
-    const consumeUsage = this.hasLimitedUses && !options.flags?.dnd5e?.use?.consumedUsage;
-    const consumeResource = this.hasResource && !options.flags?.dnd5e?.use?.consumedResource;
-    const hasButtons = this.hasAttack || this.hasDamage || this.isVersatile || this.hasSave || this.system.formula
-      || this.hasAreaTarget || (this.type === "tool") || this.hasAbilityCheck || this.system.hasSummoning
-      || consumeUsage || consumeResource;
-    const templateData = {
-      hasButtons,
+  async displayCard(message={}) {
+    const context = {
       actor: this.actor,
       config: CONFIG.DND5E,
-      tokenId: token?.uuid || null,
+      tokenId: this.actor.token?.uuid || null,
       item: this,
-      effects: this.effects.filter(e => (e.type !== "enchantment") && !e.getFlag("dnd5e", "rider")),
       data: await this.system.getCardData(),
-      labels: this.labels,
-      hasAttack: this.hasAttack,
-      isHealing: this.isHealing,
-      hasDamage: this.hasDamage,
-      isVersatile: this.isVersatile,
-      isSpell: this.type === "spell",
-      hasSave: this.hasSave,
-      hasAreaTarget: this.hasAreaTarget,
-      isTool: this.type === "tool",
-      hasAbilityCheck: this.hasAbilityCheck,
-      consumeUsage,
-      consumeResource
-    };
-    const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", templateData);
-
-    // Create the ChatMessage data object
-    const chatData = {
-      user: game.user.id,
-      content: html,
-      speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
-      flags: {
-        "core.canPopout": true,
-        "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
-      }
+      isSpell: this.type === "spell"
     };
 
-    // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message
-    if ( (this.type === "consumable") && !this.actor.items.has(this.id) ) {
-      chatData.flags["dnd5e.itemData"] = templateData.item.toObject();
-    }
+    const messageConfig = foundry.utils.mergeObject({
+      create: message?.createMessage ?? true,
+      data: {
+        content: await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", context),
+        flags: {
+          "core.canPopout": true,
+          "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
+        },
+        speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
+      },
+      rollMode: game.settings.get("core", "rollMode")
+    }, message);
 
     // Merge in the flags from options
-    chatData.flags = foundry.utils.mergeObject(chatData.flags, options.flags);
+    if ( foundry.utils.getType(message.flags) === "Object" ) {
+      foundry.utils.mergeObject(messageConfig.data.flags, message.flags);
+      delete messageConfig.flags;
+    }
 
     /**
-     * A hook event that fires before an item chat card is created.
-     * @function dnd5e.preDisplayCard
+     * A hook event that fires before an item chat card is created without using an activity.
+     * @function dnd5e.preDisplayCardV2
      * @memberof hookEvents
-     * @param {Item5e} item             Item for which the chat card is being displayed.
-     * @param {object} chatData         Data used to create the chat message.
-     * @param {ItemUseOptions} options  Options which configure the display of the item chat card.
+     * @param {Item5e} item                           Item for which the card will be created.
+     * @param {ActivityMessageConfiguration} message  Configuration for the roll message.
+     * @returns {boolean}                             Return `false` to prevent the card from being displayed.
      */
-    Hooks.callAll("dnd5e.preDisplayCard", this, chatData, options);
+    if ( Hooks.call("dnd5e.preDisplayCardV2", this, messageConfig) === false ) return;
 
-    // Apply the roll mode to adjust message visibility
-    ChatMessage.applyRollMode(chatData, options.rollMode ?? game.settings.get("core", "rollMode"));
+    if ( "dnd5e.preDisplayCard" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preDisplayCard` hook has been deprecated and replaced with `dnd5e.preDisplayCardV2`.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      const hookData = { createMessage: messageConfig.create };
+      Hooks.callAll("dnd5e.preDisplayCard", this, messageConfig.data, hookData);
+      messageConfig.create = hookData.createMessage;
+    }
 
-    // Create the Chat Message or return its data
-    const card = (options.createMessage !== false) ? await ChatMessage.create(chatData) : chatData;
+    ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+    const card = messageConfig.create === false ? messageConfig.data : await ChatMessage.create(messageConfig.data);
 
     /**
      * A hook event that fires after an item chat card is created.
      * @function dnd5e.displayCard
      * @memberof hookEvents
-     * @param {Item5e} item              Item for which the chat card is being displayed.
-     * @param {ChatMessage|object} card  The created ChatMessage instance or ChatMessageData depending on whether
-     *                                   options.createMessage was set to `true`.
+     * @param {Item5e} item                Item for which the chat card is being displayed.
+     * @param {ChatMessage5e|object} card  The created ChatMessage instance or ChatMessageData depending on whether
+     *                                     options.createMessage was set to `true`.
      */
     Hooks.callAll("dnd5e.displayCard", this, card);
 
@@ -946,23 +893,26 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {object}              An object of chat data to render.
    */
   async getChatData(htmlOptions={}) {
-    const data = this.toObject().system;
+    const context = {};
+    let { identified, unidentified, description } = this.system;
 
     // Rich text description
-    data.description.value = await TextEditor.enrichHTML(data.description.value, {
+    const isIdentified = identified !== false;
+    description = game.user.isGM || isIdentified ? description.value : unidentified?.description;
+    context.description = await TextEditor.enrichHTML(description ?? "", {
       relativeTo: this,
       rollData: this.getRollData(),
       ...htmlOptions
     });
 
     // Type specific properties
-    data.properties = [
+    context.properties = [
       ...this.system.chatProperties ?? [],
       ...this.system.equippableItemCardProperties ?? [],
       ...Object.values(this.labels.activations[0] ?? {})
     ].filter(p => p);
 
-    return data;
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -979,7 +929,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollAttack({ spellLevel, ...options }={}) {
     foundry.utils.logCompatibilityWarning(
-      "The Item5e#rollAttack method has been deprecated and should now be called directly on the attack activity.",
+      "The `Item5e#rollAttack` method has been deprecated and should now be called directly on the attack activity.",
       { since: "DnD5e 4.0", until: "DnD5e 4.4" }
     );
 
@@ -993,25 +943,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     const rolls = await activity.rollAttack(options);
     return rolls?.[0] ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Extract salient information about targeted Actors.
-   * @returns {TargetDescriptor5e[]}
-   * @protected
-   */
-  static _formatAttackTargets() {
-    // TODO: Remove this when `rollDamage` has been moved to activities
-    const targets = new Map();
-    for ( const token of game.user.targets ) {
-      const { name } = token;
-      const { img, system, uuid } = token.actor ?? {};
-      const ac = system?.attributes?.ac ?? {};
-      if ( uuid && Number.isNumeric(ac.value) ) targets.set(uuid, { name, img, uuid, ac: ac.value });
-    }
-    return Array.from(targets.values());
   }
 
   /* -------------------------------------------- */
@@ -1031,7 +962,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollDamage({ spellLevel, ...options }={}) {
     foundry.utils.logCompatibilityWarning(
-      "The Item5e#rollDamage method has been deprecated and should now be called directly on an activity.",
+      "The `Item5e#rollDamage` method has been deprecated and should now be called directly on an activity.",
       { since: "DnD5e 4.0", until: "DnD5e 4.4" }
     );
 
@@ -1061,7 +992,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollFormula({spellLevel}={}) {
     foundry.utils.logCompatibilityWarning(
-      "The Item5e#rollFormula method has been deprecated and should now be called directly on the utility activity.",
+      "The `Item5e#rollFormula` method has been deprecated and should now be called directly on the utility activity.",
       { since: "DnD5e 4.0", until: "DnD5e 4.4" }
     );
 
@@ -1084,7 +1015,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Roll|void>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge() {
-    return this.system.uses?.rollRecharge();
+    foundry.utils.logCompatibilityWarning(
+      "The `rollRecharge` method on `Item5e` has been moved to `system.uses.rollRecharge`.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
+    return (await this.system.uses?.rollRecharge())?.[0];
   }
 
   /* -------------------------------------------- */
@@ -1163,42 +1098,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       const popout = header.closest(".chat-popout");
       if ( popout ) popout.style.height = "";
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the Actor which is the author of a chat card
-   * @param {HTMLElement} card    The chat card being used
-   * @returns {Actor|null}        The Actor document or null
-   * @private
-   */
-  static async _getChatCardActor(card) {
-
-    // Case 1 - a synthetic actor from a Token
-    if ( card.dataset.tokenId ) {
-      const token = await fromUuid(card.dataset.tokenId);
-      if ( !token ) return null;
-      return token.actor;
-    }
-
-    // Case 2 - use Actor ID directory
-    const actorId = card.dataset.actorId;
-    return game.actors.get(actorId) || null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get token targets for the current chat card action and display warning of none are selected.
-   * @param {HTMLElement} card  The chat card being used.
-   * @returns {Token5e[]}       An Array of Token objects, if any.
-   * @private
-   */
-  static _getChatCardTargets(card) {
-    const targets = getSceneTargets();
-    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", {localize: true});
-    return targets;
   }
 
   /* -------------------------------------------- */
@@ -1392,8 +1291,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
 
     // Create class identifier based on name
-    if ( ["class", "subclass"].includes(this.type) && !this.system.identifier ) {
-      await this.updateSource({ "system.identifier": data.name.slugify({strict: true}) });
+    if ( this.system.hasOwnProperty("identifier") && !this.system.identifier ) {
+      await this.updateSource({ "system.identifier": this.identifier });
     }
 
     if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
@@ -1426,6 +1325,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       options.formerContainer = (await this.container)?.uuid;
     }
 
+    if ( changed.system?.activities ) {
+      const riders = this.clone(changed).system.activities.getByType("enchant").reduce((riders, a) => {
+        a.effects.forEach(e => {
+          e.riders.activity.forEach(activity => riders.activity.add(activity));
+          e.riders.effect.forEach(effect => riders.effect.add(effect));
+        });
+        return riders;
+      }, { activity: new Set(), effect: new Set() });
+      foundry.utils.setProperty(changed, "flags.dnd5e.riders", {
+        activity: Array.from(riders.activity), effect: Array.from(riders.effect)
+      });
+    }
+
     if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
 
     // Check to make sure the updated class level isn't below zero
@@ -1447,33 +1359,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));
       changed.system.levels -= newCharacterLevel - CONFIG.DND5E.maxLevel;
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
-    if ( userId !== game.user.id ) return;
-
-    // Flag ActiveEffects as riders if they are used as such in an Enchantment Activity.
-    const riders = new Set((this.system.activities?.getByType("enchant") ?? [])
-      .flatMap(activity => activity.effects)
-      .flatMap(e => Array.from(e.riders.effect)));
-
-    const updates = this.effects.reduce((arr, e) => {
-      if ( e.getFlag("dnd5e", "rider") && !riders.has(e.id) ) arr.push({ _id: e.id, "flags.dnd5e.-=rider": null });
-      return arr;
-    }, []);
-
-    updates.push(...riders.reduce((arr, id) => {
-      const effect = this.effects.get(id);
-      if ( !effect || effect.getFlag("dnd5e", "rider") ) return arr;
-      arr.push({ _id: id, "flags.dnd5e.rider": true });
-      return arr;
-    }, []));
-
-    if ( updates.length ) this.updateEmbeddedDocuments("ActiveEffect", updates);
   }
 
   /* -------------------------------------------- */
@@ -1750,13 +1635,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     // Get spell data
-    const flags = {};
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
+    const flags = itemData.flags ?? {};
     if ( Number.isNumeric(config.level) ) {
-      flags.dnd5e = { spellLevel: {
+      flags.dnd5e ??= {};
+      flags.dnd5e.spellLevel = {
         value: config.level,
         base: spell.system.level
-      } };
+      };
       itemData.system.level = config.level;
     }
 

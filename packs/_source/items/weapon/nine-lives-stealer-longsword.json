@@ -2,7 +2,7 @@
   "_id": "BefbYlWbRYyy6R8s",
   "name": "Nine Lives Stealer Longsword",
   "type": "weapon",
-  "img": "icons/weapons/swords/sword-broad-crystal-paired.webp",
+  "img": "icons/skills/melee/sword-engraved-glow-purple.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p><p>You gain a +2 bonus to attack and damage rolls made with this magic weapon.</p><p>The sword has 1d8 + 1 charges. If you score a critical hit against a creature that has fewer than 100 hit points, it must succeed on a DC 15 Constitution saving throw or be slain instantly as the sword tears its life force from its body (a construct or an undead is immune). The sword loses 1 charge if the creature is slain. When the sword has no charges remaining, it loses this property.</p><section class=\"secret foundry-note\" id=\"secret-ckS4CQSkeNGqH9YG\"><p><strong>Foundry Note</strong></p><p>The 9 charges reflect a fully charged blade. Please adjust accordingly as required.</p></section>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -41,8 +42,8 @@
     },
     "damage": {
       "versatile": {
-        "number": 1,
-        "denomination": 10,
+        "number": null,
+        "denomination": 0,
         "bonus": "",
         "types": [],
         "custom": {
@@ -83,8 +84,8 @@
       "conditions": ""
     },
     "properties": [
-      "ver",
-      "mgc"
+      "mgc",
+      "ver"
     ],
     "proficient": null,
     "type": {
@@ -286,7 +287,9 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "mastery": "",
+    "identifier": "nine-lives-stealer-longsword"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -301,7 +304,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037124666,
-    "modifiedTime": 1725037124666,
+    "modifiedTime": 1725992492026,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!BefbYlWbRYyy6R8s"

@@ -2,7 +2,7 @@
   "_id": "VwJjuNbBf2KHMPrY",
   "name": "Cloak of Arachnida",
   "type": "equipment",
-  "img": "icons/equipment/back/cloak-heavy-fur-blue.webp",
+  "img": "icons/equipment/back/cloak-collared-blue-iron.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits:</p>\n<ul>\n<li>You have resistance to poison damage.</li>\n<li>You have a climbing speed equal to your walking speed.</li>\n<li>You can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.</li>\n<li>You can't be caught in webs of any sort and can move through webs as if they were difficult terrain.</li>\n<li>You can use an action to cast the @UUID[Compendium.dnd5e.spells.Item.UJJu9c2UvCzVljiP]{Web} spell (save DC 13). The web created by the spell fills twice its normal area. Once used, this property of the cloak can't be used again until the next dawn.</li>\n</ul>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -149,7 +150,8 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "cloak-of-arachnida"
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -164,7 +166,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037203028,
-    "modifiedTime": 1725037203028,
+    "modifiedTime": 1725992518349,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!VwJjuNbBf2KHMPrY"

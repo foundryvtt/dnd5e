@@ -146,12 +146,6 @@
       "environment": "Arctic",
       "cr": 6,
       "spellLevel": 0,
-      "source": {
-        "custom": "",
-        "book": "SRD 5.1",
-        "page": "",
-        "license": "CC-BY-4.0"
-      },
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -520,7 +514,15 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "custom": "",
+      "book": "",
+      "page": "",
+      "license": "CC-BY-4.0",
+      "revision": 1,
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Young White Dragon",
@@ -623,9 +625,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -807,7 +811,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "bite"
       },
       "effects": [],
       "folder": null,
@@ -844,9 +849,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -1010,7 +1017,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "claw"
       },
       "effects": [],
       "folder": null,
@@ -1043,9 +1051,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "1",
@@ -1078,12 +1088,9 @@
               "targets": [
                 {
                   "type": "itemUses",
-                  "target": "",
                   "value": "1",
-                  "scaling": {
-                    "mode": "",
-                    "formula": ""
-                  }
+                  "target": "",
+                  "scaling": {}
                 }
               ],
               "scaling": {
@@ -1136,20 +1143,18 @@
               "onSave": "half",
               "parts": [
                 {
+                  "custom": {
+                    "enabled": false,
+                    "formula": ""
+                  },
                   "number": 10,
                   "denomination": 8,
                   "bonus": "",
                   "types": [
                     "cold"
                   ],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
                   "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
+                    "number": 1
                   }
                 }
               ]
@@ -1158,16 +1163,18 @@
               "ability": "con",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "15"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": ""
           }
         },
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "cold-breath"
       },
       "effects": [],
       "folder": null,
@@ -1204,9 +1211,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1223,7 +1232,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "ice-walk"
       },
       "effects": [],
       "folder": null,
@@ -1260,9 +1270,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1345,7 +1357,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "multiattack"
       },
       "effects": [],
       "folder": null,
@@ -1383,8 +1396,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305113015,
-    "modifiedTime": 1725305113015,
+    "createdTime": 1726171264487,
+    "modifiedTime": 1726171451529,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!u1UQfHutP5eEKkjM"

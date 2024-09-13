@@ -30,7 +30,7 @@
     margin-top: 6px;
     gap: 4px;
 
-    > div:has(> span:not(:empty)) + div::before { content: " • "; }
+    > div:has(> span:not(:empty)) + div:not(:empty)::before { content: " • "; }
 
     .source-book {
       display: flex;

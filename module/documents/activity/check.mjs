@@ -37,32 +37,46 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
   /* -------------------------------------------- */
 
   /** @override */
-  _usageChatButtons() {
-    const ability = CONFIG.DND5E.abilities[this.check.ability]?.label;
-    if ( !ability ) return super._usageChatButtons();
+  _usageChatButtons(message) {
+    const buttons = [];
     const dc = this.check.dc.value;
 
-    let label = ability;
-    let type;
-    if ( this.checkType === "skill" ) type = CONFIG.DND5E.skills[this.check.associated]?.label;
-    else if ( this.checkType === "tool" ) type = Trait.keyLabel(this.check.associated, { trait: "tool" });
-    if ( type ) label = game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", { ability, type });
-    else label = ability;
+    const createButton = (abilityKey, associated) => {
+      const ability = CONFIG.DND5E.abilities[abilityKey]?.label;
+      const checkType = (associated in CONFIG.DND5E.skills) ? "skill"
+        : (associated in CONFIG.DND5E.toolIds) ? "tool": "ability";
+      const dataset = { ability: abilityKey, action: "rollCheck", visibility: "all" };
+      if ( dc ) dataset.dc = dc;
+      if ( checkType !== "ability" ) dataset[checkType] = associated;
+
+      let label = ability;
+      let type;
+      if ( checkType === "skill" ) type = CONFIG.DND5E.skills[associated]?.label;
+      else if ( checkType === "tool" ) type = Trait.keyLabel(associated, { trait: "tool" });
+      if ( type ) label = game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", { ability, type });
+      else label = ability;
+
+      buttons.push({
+        label: dc ? `
+          <span class="visible-dc">${game.i18n.format("EDITOR.DND5E.Inline.DC", { dc, check: wrap(label) })}</span>
+          <span class="hidden-dc">${wrap(label)}</span>
+        ` : wrap(label),
+        icon: checkType === "tool" ? '<i class="fa-solid fa-hammer" inert></i>'
+          : '<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/ability-score-improvement.svg" inert></i>',
+        dataset
+      });
+    };
     const wrap = check => game.i18n.format("EDITOR.DND5E.Inline.CheckShort", { check });
 
-    return [{
-      label: dc ? `
-        <span class="visible-dc">${game.i18n.format("EDITOR.DND5E.Inline.DC", { dc, check: wrap(label) })}</span>
-        <span class="hidden-dc">${wrap(label)}</span>
-      ` : wrap(label),
-      icon: this.checkType === "tool" ? '<i class="fa-solid fa-hammer" inert></i>'
-        : '<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/ability-score-improvement.svg" inert></i>',
-      dataset: {
-        ability: this.check.ability, dc: dc || undefined,
-        action: "rollCheck",
-        visibility: "all"
-      }
-    }].concat(super._usageChatButtons());
+    const associated = Array.from(this.check.associated);
+    if ( !associated.length && (this.item.type === "tool") ) associated.push(this.item.system.type.baseItem);
+    if ( associated.length ) associated.forEach(a => {
+      const ability = this.getAbility(a);
+      if ( ability ) createButton(ability, a);
+    });
+    else if ( this.check.ability ) createButton(this.check.ability);
+
+    return buttons.concat(super._usageChatButtons(message));
   }
 
   /* -------------------------------------------- */
@@ -79,25 +93,24 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
   static async #rollCheck(event, target, message) {
     const targets = getSceneTargets();
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
-    const dc = parseInt(target.dataset.dc);
+    let { ability, dc, skill, tool } = target.dataset;
+    dc = parseInt(dc);
     const data = { event, targetValue: Number.isFinite(dc) ? dc : this.check.dc.value };
+
     for ( const token of targets ) {
       data.speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document });
-      switch ( this.checkType ) {
-        case "ability":
-          await token.actor.rollAbilityTest(this.check.ability, data);
-          break;
-        case "skill":
-          await token.actor.rollSkill(this.check.associated, { ...data, ability: this.check.ability });
-          break;
-        case "tool":
-          const checkData = { ...data, ability: this.check.ability };
-          if ( (this.item.type === "tool") && !this._source.check.associated ) {
-            checkData.bonus = this.item.system.bonus;
-            checkData.prof = this.item.system.prof;
-          }
-          await token.actor.rollToolCheck(this.check.associated, checkData);
-          break;
+      if ( skill ) {
+        await token.actor.rollSkill(skill, { ...data, ability });
+      } else if ( tool ) {
+        const checkData = { ...data, ability };
+        if ( (this.item.type === "tool") && !this.check.associated.size ) {
+          checkData.bonus = this.item.system.bonus;
+          checkData.prof = this.item.system.prof;
+          checkData.item = this.item;
+        }
+        await token.actor.rollToolCheck(tool, checkData);
+      } else {
+        await token.actor.rollAbilityTest(ability, data);
       }
     }
   }

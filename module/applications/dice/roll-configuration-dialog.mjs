@@ -147,7 +147,7 @@ export default class RollConfigurationDialog extends Application5e {
    * @protected
    */
   _identifyDiceTerms() {
-    const dice = [];
+    let dice = [];
     let shouldDisplay = true;
 
     /**
@@ -164,7 +164,8 @@ export default class RollConfigurationDialog extends Application5e {
       if ( !this.options.rendering.dice.denominations.has(term.denomination) ) return shouldDisplay = false;
       for ( let i = 0; i < term.number; i++ ) dice.push({
         icon: `systems/dnd5e/icons/svg/dice/${term.denomination}.svg`,
-        label: term.denomination
+        label: term.denomination,
+        denomination: term.denomination
       });
     };
 
@@ -180,7 +181,17 @@ export default class RollConfigurationDialog extends Application5e {
     };
 
     this.rolls.forEach(roll => identifyDice(roll.terms));
-    if ( !dice.length || (dice.length > this.options.rendering.dice.max) ) shouldDisplay = false;
+    if ( dice.length > this.options.rendering.dice.max ) {
+      // Compact dice display.
+      const byDenom = dice.reduce((obj, { icon, denomination }) => {
+        obj[denomination] ??= { icon, count: 0 };
+        obj[denomination].count++;
+        return obj;
+      }, {});
+      dice = Object.entries(byDenom).map(([d, { icon, count }]) => ({ icon, label: `${count}${d}` }));
+      if ( dice.length > this.options.rendering.dice.max ) shouldDisplay = false;
+    }
+    else if ( !dice.length ) shouldDisplay = false;
     return shouldDisplay ? dice : [];
   }
 
@@ -207,10 +218,10 @@ export default class RollConfigurationDialog extends Application5e {
    * Prepare the context for the buttons.
    * @param {ApplicationRenderContext} context  Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
-   * @returns {ApplicationRenderContext}
+   * @returns {Promise<ApplicationRenderContext>}
    * @protected
    */
-  _prepareButtonsContext(context, options) {
+  async _prepareButtonsContext(context, options) {
     context.buttons = {
       roll: {
         icon: '<i class="fa-solid fa-dice"></i>',
@@ -226,10 +237,10 @@ export default class RollConfigurationDialog extends Application5e {
    * Prepare the context for the roll configuration section.
    * @param {ApplicationRenderContext} context  Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
-   * @returns {ApplicationRenderContext}
+   * @returns {Promise<ApplicationRenderContext>}
    * @protected
    */
-  _prepareConfigurationContext(context, options) {
+  async _prepareConfigurationContext(context, options) {
     context.fields = [{
       field: new foundry.data.fields.StringField({ label: game.i18n.localize("DND5E.RollMode") }),
       name: "rollMode",
@@ -245,12 +256,11 @@ export default class RollConfigurationDialog extends Application5e {
    * Prepare the context for the formulas list.
    * @param {ApplicationRenderContext} context  Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
-   * @returns {ApplicationRenderContext}
+   * @returns {Promise<ApplicationRenderContext>}
    * @protected
    */
-  _prepareFormulasContext(context, options) {
-    context.rolls = this.rolls;
-    context.situational = this.rolls[0].data.situational;
+  async _prepareFormulasContext(context, options) {
+    context.rolls = this.rolls.map(roll => ({ roll }));
     context.dice = this._identifyDiceTerms() || [];
     return context;
   }
@@ -295,9 +305,12 @@ export default class RollConfigurationDialog extends Application5e {
      */
     Hooks.callAll("dnd5e.buildRollConfig", this, config, formData, index);
 
-    if ( formData?.get("situational") && (config.situational !== false) ) {
+    const situational = formData?.get(`roll.${index}.situational`);
+    if ( situational && (config.situational !== false) ) {
       config.parts.push("@situational");
-      config.data.situational = formData.get("situational");
+      config.data.situational = situational;
+    } else {
+      config.parts.findSplice(v => v === "@situational");
     }
 
     return config;

@@ -2,7 +2,7 @@
   "_id": "FpLaviCom3XR1ckP",
   "name": "Vicious Greatsword",
   "type": "weapon",
-  "img": "icons/weapons/swords/greatsword-guard-gem-blue.webp",
+  "img": "icons/weapons/swords/greatsword-crossguard-barbed.webp",
   "system": {
     "description": {
       "value": "<p>A mighty two-handed blade is over four feet long an almost five inches wide. This weapon requires extensive martial training but those proficient in its use are formidable warriors.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -179,7 +180,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "identifier": "vicious-greatsword"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -194,7 +196,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037144922,
-    "modifiedTime": 1725037144922,
+    "modifiedTime": 1725992498820,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!FpLaviCom3XR1ckP"

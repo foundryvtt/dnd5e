@@ -2,7 +2,7 @@
   "_id": "NmZMx2u6bHpRyGUa",
   "name": "Frost Brand Longsword",
   "type": "weapon",
-  "img": "icons/skills/melee/strike-weapon-polearm-ice-blue.webp",
+  "img": "icons/weapons/swords/sword-flanged-lightning.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>When you hit with an attack using this magic sword, the target takes an extra 1d6 cold damage. In addition, while you hold the sword, you have resistance to fire damage.</p>\n<p>In freezing temperatures, the blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.</p>\n<p>When you draw this weapon, you can extinguish all nonmagical flames within 30 feet of you. This property can be used no more than once per hour.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -42,12 +43,12 @@
     "damage": {
       "versatile": {
         "number": null,
-        "denomination": null,
+        "denomination": 0,
         "bonus": "",
         "types": [],
         "custom": {
-          "enabled": true,
-          "formula": "1d10 + @mod + 1d6"
+          "enabled": false,
+          "formula": ""
         },
         "scaling": {
           "mode": "",
@@ -83,8 +84,8 @@
       "conditions": ""
     },
     "properties": [
-      "ver",
-      "mgc"
+      "mgc",
+      "ver"
     ],
     "proficient": null,
     "type": {
@@ -206,7 +207,9 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "mastery": "",
+    "identifier": "frost-brand-longsword"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -221,7 +224,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037175351,
-    "modifiedTime": 1725037175351,
+    "modifiedTime": 1725992509027,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!NmZMx2u6bHpRyGUa"

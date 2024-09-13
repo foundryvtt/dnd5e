@@ -228,7 +228,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
         return;
       } else {
         itemUpdate["system.uses.spent"] = 0;
-        itemUpdate["system.uses.quantity"] = newQuantity;
+        itemUpdate["system.quantity"] = newQuantity;
       }
     } else {
       itemUpdate["system.uses.spent"] = result.spent;
@@ -318,6 +318,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {string} options.type              Type label to be used in warning messages.
    * @param {BasicRoll[]} options.rolls        Rolls performed as part of the usages.
    * @returns {{ spent: number, quantity: number }|null}
+   * @internal
    */
   async _usesConsumption(config, { uses, type, rolls }) {
     const cost = (await this.resolveCost({ config, rolls })).total;
@@ -480,6 +481,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Resolve the cost for the consumption hint.
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
    * @returns {{ cost: string, increaseKey: string, pluralRule: string }}
+   * @internal
    */
   _resolveHintCost(config) {
     const costRoll = this.resolveCost({ config, evaluate: false });

@@ -58,9 +58,7 @@ export default class AttackActivityData extends BaseActivityData {
   /** @override */
   get ability() {
     if ( this.attack.ability === "none" ) return null;
-    if ( this.attack.ability === "spellcasting" ) {
-      return this.isSpell ? super.ability : this.actor?.system.attributes?.spellcasting ?? null;
-    }
+    if ( this.attack.ability === "spellcasting" ) return this.spellcastingAbility;
     if ( this.attack.ability in CONFIG.DND5E.abilities ) return this.attack.ability;
 
     const availableAbilities = this.availableAbilities;
@@ -219,8 +217,6 @@ export default class AttackActivityData extends BaseActivityData {
       const actorBonus = this.actor.system.bonuses?.[this.actionType];
       if ( actorBonus?.attack ) parts.push(actorBonus.attack);
 
-      // TODO: Ammunition
-
       // Add exhaustion reduction
       this.actor.addRollExhaustion(parts, data);
     }
@@ -229,8 +225,6 @@ export default class AttackActivityData extends BaseActivityData {
     if ( this.attack.bonus ) parts.push(this.attack.bonus);
     if ( item.magicalBonus && item.magicAvailable && !this.attack.flat ) parts.push(item.magicalBonus);
 
-    // TODO: One-time ammunition bonus
-
     return { data, parts };
   }
 
@@ -238,8 +232,8 @@ export default class AttackActivityData extends BaseActivityData {
 
   /**
    * @typedef {AttackDamageRollProcessConfiguration} [config={}]
-   * @property {Item5e} ammunition                                      Ammunition used with the attack.
-   * @property {"oneHanded"|"twoHanded"|"offhand"|"thrown"} attackMode  Attack mode.
+   * @property {Item5e} ammunition  Ammunition used with the attack.
+   * @property {"oneHanded"|"twoHanded"|"offhand"|"thrown"|"thrown-offhand"} attackMode  Attack mode.
    */
 
   /**
@@ -314,7 +308,7 @@ export default class AttackActivityData extends BaseActivityData {
 
     if ( this.item.type === "weapon" ) {
       // Ensure `@mod` is present in damage unless it is positive and an off-hand attack
-      const includeMod = (rollConfig.attackMode !== "offhand") || (roll.data.mod < 0);
+      const includeMod = !rollConfig.attackMode?.endsWith("offhand") || (roll.data.mod < 0);
       if ( includeMod && !roll.parts.some(p => p.includes("@mod")) ) roll.parts.push("@mod");
 
       // Add magical bonus

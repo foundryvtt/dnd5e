@@ -2,7 +2,7 @@
   "_id": "QKTyxoO0YDnAsbYe",
   "name": "Whip",
   "type": "weapon",
-  "img": "icons/weapons/misc/whip-red-yellow.webp",
+  "img": "icons/sundries/survival/leather-strap-brown.webp",
   "system": {
     "description": {
       "value": "<p>A tensile lash made of leather, cord, or chain which can lash out at nearby enemies, dealing lacerations and harrying them from a distance.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -178,7 +179,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "identifier": "whip"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -193,7 +195,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037183563,
-    "modifiedTime": 1725037183563,
+    "modifiedTime": 1725992511862,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!QKTyxoO0YDnAsbYe"

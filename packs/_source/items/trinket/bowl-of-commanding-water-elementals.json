@@ -2,7 +2,7 @@
   "_id": "rRMaaGZ7qbzqMvoI",
   "name": "Bowl of Commanding Water Elementals",
   "type": "consumable",
-  "img": "icons/magic/water/pseudopod-swirl-blue.webp",
+  "img": "icons/commodities/materials/bowl-liquid-white.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>While this bowl is filled with water, you can use an action to speak the bowl's command word and summon a <em>@UUID[Compendium.dnd5e.monsters.Actor.namJz755U1EhvEJa]{Water Elemental}</em>, as if you had cast the <em>@UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure Elemental}</em> spell. The bowl can't be used this way again until the next dawn.</p>\n<p>The bowl is about 1 foot in diameter and half as deep. It weighs 3 pounds and holds about 3 gallons.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -141,11 +142,12 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "bowl-of-commanding-water-elementals"
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 9200000,
   "ownership": {
     "default": 0
   },
@@ -156,7 +158,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037298834,
-    "modifiedTime": 1725037298834,
+    "modifiedTime": 1725992550578,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!rRMaaGZ7qbzqMvoI"

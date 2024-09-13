@@ -295,7 +295,7 @@ export default class ChatMessage5e extends ChatMessage {
     const item = this.getAssociatedItem();
     const activity = this.getAssociatedActivity();
     if ( this.isContentVisible && item && roll ) {
-      const isCritical = (roll.type === "damage") && this.rolls[0]?.options?.critical;
+      const isCritical = (roll.type === "damage") && this.rolls[0]?.isCritical;
       const subtitle = roll.type === "damage"
         ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
         : roll.type === "attack"
@@ -563,8 +563,9 @@ export default class ChatMessage5e extends ChatMessage {
     // Create the enchantment tray
     const enchantmentApplication = document.createElement("enchantment-application");
     enchantmentApplication.classList.add("dnd5e2");
-    const afterElement = html.querySelector(".card-footer") ?? html.querySelector(".effects-tray");
-    afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
+    const afterElement = html.querySelector(".card-footer");
+    if ( afterElement ) afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
+    else html.querySelector(".chat-card")?.append(enchantmentApplication);
   }
 
   /* -------------------------------------------- */
@@ -580,7 +581,8 @@ export default class ChatMessage5e extends ChatMessage {
     if ( this.getFlag("dnd5e", "messageType") === "usage" ) {
       effects = this.getFlag("dnd5e", "use.effects")?.map(id => item?.effects.get(id));
     } else {
-      effects = item?.effects.filter(e => (e.type !== "enchantment") && !e.getFlag("dnd5e", "rider"));
+      effects = item?.effects.filter(e => (e.type !== "enchantment")
+        && !item.getFlag("dnd5e", "riders.effect")?.includes(e.id));
     }
     effects = effects?.filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
     if ( !effects?.length ) return;

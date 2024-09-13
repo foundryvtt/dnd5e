@@ -2,7 +2,7 @@
   "_id": "u4ewpAFZjLrWrmQv",
   "name": "Folding Boat",
   "type": "consumable",
-  "img": "icons/environment/traps/cage-simple-wood.webp",
+  "img": "icons/containers/boxes/crate-heavy-yellow.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>This object appears as a wooden box that measures 12 inches long, 6 inches wide, and 6 inches deep. It weighs 4 pounds and floats. It can be opened to store items inside. This item also has three command words, each requiring you to use an action to speak it.</p>\n<p>One command word causes the box to unfold into a boat 10 feet long, 4 feet wide, and 2 feet deep. The boat has one pair of oars, an anchor, a mast, and a lateen sail. The boat can hold up to four Medium creatures comfortably.</p>\n<p>The second command word causes the box to unfold into a ship 24 feet long, 8 feet wide, and 6 feet deep. The ship has a deck, rowing seats, five sets of oars, a steering oar, an anchor, a deck cabin, and a mast with a square sail. The ship can hold fifteen Medium creatures comfortably.</p>\n<p>When the box becomes a vessel, its weight becomes that of a normal vessel its size, and anything that was stored in the box remains in the boat.</p>\n<p>The third command word causes the folding boat to fold back into a box, provided that no creatures are aboard. Any objects in the vessel that can't fit inside the box remain outside the box as it folds. Any objects in the vessel that can fit inside the box do so.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -125,11 +126,12 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "folding-boat"
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 10300000,
   "ownership": {
     "default": 0
   },
@@ -140,7 +142,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037310887,
-    "modifiedTime": 1725037310887,
+    "modifiedTime": 1725992554594,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!u4ewpAFZjLrWrmQv"

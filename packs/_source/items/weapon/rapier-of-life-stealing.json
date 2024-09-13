@@ -2,7 +2,7 @@
   "_id": "p01JzD9RpIOkJiqK",
   "name": "Rapier of Life Stealing",
   "type": "weapon",
-  "img": "icons/creatures/claws/claw-curved-poison-purple.webp",
+  "img": "icons/weapons/swords/greatsword-crossguard-barbed.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>When you attack a creature with this magic weapon and roll a 20 on the attack roll, that target takes an extra 3d6 necrotic damage, provided that the target isn't a construct or an undead. You gain temporary hit points equal to the extra damage dealt.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -243,7 +244,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "identifier": "rapier-of-life-stealing"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -258,7 +260,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037289487,
-    "modifiedTime": 1725037289487,
+    "modifiedTime": 1725992547367,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!p01JzD9RpIOkJiqK"

@@ -14,7 +14,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
       "max": "1",
@@ -193,13 +194,10 @@
     "prerequisites": {
       "level": null
     },
-    "properties": []
+    "properties": [],
+    "identifier": "whirlwind"
   },
-  "flags": {
-    "dnd5e": {
-      "migratedUses": null
-    }
-  },
+  "flags": {},
   "img": "icons/magic/air/wind-tornado-cyclone-white.webp",
   "effects": [],
   "folder": null,
@@ -210,7 +208,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725304977009,
-    "modifiedTime": 1725304977009,
+    "modifiedTime": 1725992574557,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ocmSrMY2NX3e43uN"

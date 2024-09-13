@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -41,8 +42,8 @@
     },
     "damage": {
       "versatile": {
-        "number": 1,
-        "denomination": 10,
+        "number": null,
+        "denomination": 0,
         "bonus": "",
         "types": [],
         "custom": {
@@ -83,8 +84,8 @@
       "conditions": ""
     },
     "properties": [
-      "ver",
-      "mgc"
+      "mgc",
+      "ver"
     ],
     "proficient": null,
     "type": {
@@ -331,7 +332,9 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "mastery": "",
+    "identifier": "giant-slayer-longsword"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -346,7 +349,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037324602,
-    "modifiedTime": 1725037324602,
+    "modifiedTime": 1725992559398,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!xw2kL7Puwg4wfjW3"

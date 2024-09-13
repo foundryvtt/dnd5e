@@ -125,15 +125,15 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
   /* -------------------------------------------- */
 
   /** @override */
-  _usageChatButtons() {
-    if ( !this.availableProfiles.length ) return super._usageChatButtons();
+  _usageChatButtons(message) {
+    if ( !this.availableProfiles.length ) return super._usageChatButtons(message);
     return [{
       label: game.i18n.localize("DND5E.SUMMON.Action.Summon"),
       icon: '<i class="fa-solid fa-spaghetti-monster-flying" inert></i>',
       dataset: {
         action: "placeSummons"
       }
-    }].concat(super._usageChatButtons());
+    }].concat(super._usageChatButtons(message));
   }
 
   /* -------------------------------------------- */
@@ -539,6 +539,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
         actorUpdates.items.push({ _id: item.id, effects: [effect] });
       }
     }
+
+    // Add applied effects
+    actorUpdates.effects.push(...this.effects.map(e => e.effect?.toObject()).filter(e => e));
 
     return { actorUpdates, tokenUpdates };
   }

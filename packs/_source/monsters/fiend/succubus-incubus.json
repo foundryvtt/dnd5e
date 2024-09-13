@@ -146,12 +146,6 @@
       "environment": "",
       "cr": 4,
       "spellLevel": 0,
-      "source": {
-        "custom": "",
-        "book": "SRD 5.1",
-        "page": "",
-        "license": "CC-BY-4.0"
-      },
       "ideal": "",
       "bond": "",
       "flaw": ""
@@ -525,7 +519,15 @@
         "initiative": null
       }
     },
-    "tools": {}
+    "tools": {},
+    "source": {
+      "custom": "",
+      "book": "",
+      "page": "",
+      "license": "CC-BY-4.0",
+      "revision": 1,
+      "rules": "2014"
+    }
   },
   "prototypeToken": {
     "name": "Succubus/Incubus",
@@ -628,9 +630,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -647,7 +651,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "telepathic-bond"
       },
       "effects": [],
       "folder": null,
@@ -684,9 +689,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -769,7 +776,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "shapechanger"
       },
       "effects": [],
       "folder": null,
@@ -806,9 +814,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "quantity": 1,
         "weight": {
@@ -972,7 +982,8 @@
         },
         "attuned": false,
         "ammunition": {},
-        "magicalBonus": null
+        "magicalBonus": null,
+        "identifier": "claw-fiend-form-only"
       },
       "effects": [],
       "folder": null,
@@ -1000,14 +1011,16 @@
       "img": "icons/magic/air/wind-tornado-spiral-pink-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>One humanoid the fiend can see within 30 feet of it must make a <strong>Wisdom</strong> saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands.</p><p>If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours.The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends.</p></section><p>One humanoid the fiend can see within 30 feet of it must make a <strong>Wisdom</strong> saving throw.</p>",
+          "value": "<section class=\"secret\" id=\"secret-JgJC4PuKfndwnA7h\"><p>One humanoid the fiend can see within 30 feet of it must make a <strong>DC 15</strong> <strong>Wisdom</strong> saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands.</p><p>If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours.The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends.</p></section><p>One humanoid the fiend can see within 30 feet of it must make a <strong>Wisdom</strong> saving throw.</p>",
           "chat": ""
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1087,16 +1100,18 @@
               "ability": "wis",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "15"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": ""
           }
         },
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "charm"
       },
       "effects": [],
       "folder": null,
@@ -1133,9 +1148,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1172,13 +1189,13 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
             "effects": [],
             "range": {
-              "units": "",
+              "units": "self",
               "special": "",
               "override": false
             },
@@ -1210,20 +1227,18 @@
               "onSave": "half",
               "parts": [
                 {
+                  "custom": {
+                    "enabled": false,
+                    "formula": ""
+                  },
                   "number": 5,
                   "denomination": 10,
                   "bonus": "@mod",
                   "types": [
                     "psychic"
                   ],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
                   "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
+                    "number": 1
                   }
                 }
               ]
@@ -1232,16 +1247,18 @@
               "ability": "con",
               "dc": {
                 "calculation": "",
-                "formula": ""
+                "formula": "15"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": ""
           }
         },
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "draining-kiss"
       },
       "effects": [],
       "folder": null,
@@ -1278,9 +1295,11 @@
         },
         "source": {
           "custom": "",
-          "book": "SRD 5.1",
+          "book": "",
           "page": "",
-          "license": "CC-BY-4.0"
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
         },
         "uses": {
           "max": "",
@@ -1363,7 +1382,8 @@
         "enchant": {},
         "prerequisites": {
           "level": null
-        }
+        },
+        "identifier": "etherealness"
       },
       "effects": [],
       "folder": null,
@@ -1401,8 +1421,8 @@
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
-    "createdTime": 1725305084767,
-    "modifiedTime": 1725305084767,
+    "createdTime": 1726171236478,
+    "modifiedTime": 1726171445682,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!VmdyZDjqAc8vdncY"

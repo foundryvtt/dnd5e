@@ -1,6 +1,5 @@
 import { ItemDataModel } from "../abstract.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
-import IdentifierField from "../fields/identifier-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 
@@ -11,14 +10,22 @@ const { ArrayField } = foundry.data.fields;
  * @mixes ItemDescriptionTemplate
  * @mixes StartingEquipmentTemplate
  *
- * @property {string} identifier     Identifier slug for this background.
  * @property {object[]} advancement  Advancement objects for this background.
  */
 export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
       advancement: new ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"})
     });
   }

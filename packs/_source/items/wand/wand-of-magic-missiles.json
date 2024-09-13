@@ -2,7 +2,7 @@
   "_id": "1taRIMF9w7jpnonN",
   "name": "Wand of Magic Missiles",
   "type": "consumable",
-  "img": "icons/weapons/staves/staff-ornate-engraved-blue.webp",
+  "img": "icons/weapons/wands/wand-gem-pink.webp",
   "system": {
     "description": {
       "value": "<p>This wand has 7 charges. While holding it, you can use an action to expend 1 or more of its charges to cast the @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic Missile} spell from it. For 1 charge, you cast the 1st-level version of the spell. You can increase the spell slot level by one for each additional charge you expend.</p>\n<p>The wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -351,7 +352,8 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "wand-of-magic-missiles"
   },
   "effects": [],
   "folder": "1aDgsGVwDbPdxG2V",
@@ -366,7 +368,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037087123,
-    "modifiedTime": 1725037087123,
+    "modifiedTime": 1725992479472,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!1taRIMF9w7jpnonN"

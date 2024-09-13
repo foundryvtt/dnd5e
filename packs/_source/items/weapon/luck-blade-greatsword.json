@@ -2,7 +2,7 @@
   "_id": "fWR9EFEjR0JtFdCC",
   "name": "Luck Blade Greatsword",
   "type": "weapon",
-  "img": "icons/magic/light/projectile-beam-yellow.webp",
+  "img": "icons/weapons/swords/sword-guard-worn-gold.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. While the sword is on your person, you also gain a +1 bonus to saving throws.</p>\n<p><strong>Luck</strong>. If the sword is on your person, you can call on its luck (no action required) to reroll one attack roll, ability check, or saving throw you dislike. You must use the second roll. This property can't be used again until the next dawn.</p>\n<p><strong>Wish</strong>. The sword has 1d4 – 1 charges. While holding it, you can use an action to expend 1 charge and cast the @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell from it. This property can't be used again until the next dawn. The sword loses this property if it has no charges.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -189,7 +190,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "identifier": "luck-blade-greatsword"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -204,7 +206,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037247888,
-    "modifiedTime": 1725037247888,
+    "modifiedTime": 1725992533049,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!fWR9EFEjR0JtFdCC"

@@ -46,10 +46,8 @@ const {
 export default class SummonActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
-    const fields = super.defineSchema();
-    delete fields.effects;
     return {
-      ...fields,
+      ...super.defineSchema(),
       bonuses: new SchemaField({
         ac: new FormulaField(),
         hd: new FormulaField(),
@@ -66,12 +64,12 @@ export default class SummonActivityData extends BaseActivityData {
         saves: new BooleanField()
       }),
       profiles: new ArrayField(new SchemaField({
-        _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
+        _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
         count: new FormulaField(),
-        cr: new FormulaField({deterministic: true}),
+        cr: new FormulaField({ deterministic: true }),
         level: new SchemaField({
-          min: new NumberField({integer: true, min: 0}),
-          max: new NumberField({integer: true, min: 0})
+          min: new NumberField({ integer: true, min: 0 }),
+          max: new NumberField({ integer: true, min: 0 })
         }),
         name: new StringField(),
         types: new SetField(new StringField()),
@@ -92,6 +90,13 @@ export default class SummonActivityData extends BaseActivityData {
   /** @override */
   get actionType() {
     return "summ";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get applicableEffects() {
+    return null;
   }
 
   /* -------------------------------------------- */

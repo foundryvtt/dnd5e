@@ -506,48 +506,182 @@ DND5E.toolProficiencies = {
 preLocalize("toolProficiencies", { sort: true });
 
 /**
+ * @typedef ToolConfiguration
+ * @property {string} ability  Default ability used for the tool.
+ * @property {string} id       UUID of reference tool or ID within pack defined by `DND5E.sourcePacks.ITEMS`.
+ */
+
+/**
+ * Configuration data for tools.
+ * @enum {ToolConfiguration}
+ */
+DND5E.tools = {
+  alchemist: {
+    ability: "int",
+    id: "SztwZhbhZeCqyAes"
+  },
+  bagpipes: {
+    ability: "cha",
+    id: "yxHi57T5mmVt0oDr"
+  },
+  brewer: {
+    ability: "int",
+    id: "Y9S75go1hLMXUD48"
+  },
+  calligrapher: {
+    ability: "dex",
+    id: "jhjo20QoiD5exf09"
+  },
+  card: {
+    ability: "wis",
+    id: "YwlHI3BVJapz4a3E"
+  },
+  carpenter: {
+    ability: "str",
+    id: "8NS6MSOdXtUqD7Ib"
+  },
+  cartographer: {
+    ability: "wis",
+    id: "fC0lFK8P4RuhpfaU"
+  },
+  chess: {
+    ability: "wis",
+    id: "23y8FvWKf9YLcnBL"
+  },
+  cobbler: {
+    ability: "dex",
+    id: "hM84pZnpCqKfi8XH"
+  },
+  cook: {
+    ability: "wis",
+    id: "Gflnp29aEv5Lc1ZM"
+  },
+  dice: {
+    ability: "wis",
+    id: "iBuTM09KD9IoM5L8"
+  },
+  disg: {
+    ability: "cha",
+    id: "IBhDAr7WkhWPYLVn"
+  },
+  drum: {
+    ability: "cha",
+    id: "69Dpr25pf4BjkHKb"
+  },
+  dulcimer: {
+    ability: "cha",
+    id: "NtdDkjmpdIMiX7I2"
+  },
+  flute: {
+    ability: "cha",
+    id: "eJOrPcAz9EcquyRQ"
+  },
+  forg: {
+    ability: "dex",
+    id: "cG3m4YlHfbQlLEOx"
+  },
+  glassblower: {
+    ability: "int",
+    id: "rTbVrNcwApnuTz5E"
+  },
+  herb: {
+    ability: "int",
+    id: "i89okN7GFTWHsvPy"
+  },
+  horn: {
+    ability: "cha",
+    id: "aa9KuBy4dst7WIW9"
+  },
+  jeweler: {
+    ability: "int",
+    id: "YfBwELTgPFHmQdHh"
+  },
+  leatherworker: {
+    ability: "dex",
+    id: "PUMfwyVUbtyxgYbD"
+  },
+  lute: {
+    ability: "cha",
+    id: "qBydtUUIkv520DT7"
+  },
+  lyre: {
+    ability: "cha",
+    id: "EwG1EtmbgR3bM68U"
+  },
+  mason: {
+    ability: "str",
+    id: "skUih6tBvcBbORzA"
+  },
+  navg: {
+    ability: "wis",
+    id: "YHCmjsiXxZ9UdUhU"
+  },
+  painter: {
+    ability: "wis",
+    id: "ccm5xlWhx74d6lsK"
+  },
+  panflute: {
+    ability: "cha",
+    id: "G5m5gYIx9VAUWC3J"
+  },
+  pois: {
+    ability: "int",
+    id: "il2GNi8C0DvGLL9P"
+  },
+  potter: {
+    ability: "int",
+    id: "hJS8yEVkqgJjwfWa"
+  },
+  shawm: {
+    ability: "cha",
+    id: "G3cqbejJpfB91VhP"
+  },
+  smith: {
+    ability: "str",
+    id: "KndVe2insuctjIaj"
+  },
+  thief: {
+    ability: "dex",
+    id: "woWZ1sO5IUVGzo58"
+  },
+  tinker: {
+    ability: "dex",
+    id: "0d08g1i5WXnNrCNA"
+  },
+  viol: {
+    ability: "cha",
+    id: "baoe3U5BfMMMxhCU"
+  },
+  weaver: {
+    ability: "dex",
+    id: "ap9prThUB2y9lDyj"
+  },
+  woodcarver: {
+    ability: "dex",
+    id: "xKErqkLo4ASYr5EP"
+  }
+};
+
+const _toolIds = Object.entries(DND5E.tools).reduce((obj, [k, { id }]) => {
+  obj[k] = id;
+  return obj;
+}, {});
+
+/**
  * The basic tool types in 5e. This enables specific tool proficiencies or
  * starting equipment provided by classes and backgrounds.
  * @enum {string}
  */
-DND5E.toolIds = {
-  alchemist: "SztwZhbhZeCqyAes",
-  bagpipes: "yxHi57T5mmVt0oDr",
-  brewer: "Y9S75go1hLMXUD48",
-  calligrapher: "jhjo20QoiD5exf09",
-  card: "YwlHI3BVJapz4a3E",
-  carpenter: "8NS6MSOdXtUqD7Ib",
-  cartographer: "fC0lFK8P4RuhpfaU",
-  chess: "23y8FvWKf9YLcnBL",
-  cobbler: "hM84pZnpCqKfi8XH",
-  cook: "Gflnp29aEv5Lc1ZM",
-  dice: "iBuTM09KD9IoM5L8",
-  disg: "IBhDAr7WkhWPYLVn",
-  drum: "69Dpr25pf4BjkHKb",
-  dulcimer: "NtdDkjmpdIMiX7I2",
-  flute: "eJOrPcAz9EcquyRQ",
-  forg: "cG3m4YlHfbQlLEOx",
-  glassblower: "rTbVrNcwApnuTz5E",
-  herb: "i89okN7GFTWHsvPy",
-  horn: "aa9KuBy4dst7WIW9",
-  jeweler: "YfBwELTgPFHmQdHh",
-  leatherworker: "PUMfwyVUbtyxgYbD",
-  lute: "qBydtUUIkv520DT7",
-  lyre: "EwG1EtmbgR3bM68U",
-  mason: "skUih6tBvcBbORzA",
-  navg: "YHCmjsiXxZ9UdUhU",
-  painter: "ccm5xlWhx74d6lsK",
-  panflute: "G5m5gYIx9VAUWC3J",
-  pois: "il2GNi8C0DvGLL9P",
-  potter: "hJS8yEVkqgJjwfWa",
-  shawm: "G3cqbejJpfB91VhP",
-  smith: "KndVe2insuctjIaj",
-  thief: "woWZ1sO5IUVGzo58",
-  tinker: "0d08g1i5WXnNrCNA",
-  viol: "baoe3U5BfMMMxhCU",
-  weaver: "ap9prThUB2y9lDyj",
-  woodcarver: "xKErqkLo4ASYr5EP"
-};
+DND5E.toolIds = new Proxy(_toolIds, {
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "Appending to CONFIG.DND5E.toolIds is deprecated, use CONFIG.DND5E.tools instead.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.2", once: true }
+    );
+    target[prop] ??= { ability: "int" };
+    target[prop].id = value;
+  }
+});
 
 /* -------------------------------------------- */
 
@@ -996,7 +1130,7 @@ DND5E.creatureTypes = {
   humanoid: {
     label: "DND5E.CreatureHumanoid",
     plural: "DND5E.CreatureHumanoidPl",
-    icon: "icons/magic/unholy/strike-body-explode-disintegrate.webp",
+    icon: "icons/environment/people/group.webp",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iFzQs4AenN8ALRvw"
   },
   monstrosity: {
@@ -2596,10 +2730,10 @@ preLocalize("spellSchools", { key: "label", sort: true });
  * @enum {string}
  */
 DND5E.spellListTypes = {
-  class: "ITEM.TypeClass",
-  subclass: "ITEM.TypeSubclass",
-  background: "ITEM.TypeBackground",
-  race: "ITEM.TypeRace",
+  class: "TYPES.Item.class",
+  subclass: "TYPES.Item.subclass",
+  background: "TYPES.Item.background",
+  race: "TYPES.Item.race",
   other: "JOURNALENTRYPAGE.DND5E.SpellList.Type.Other"
 };
 preLocalize("spellListTypes");
@@ -2814,10 +2948,14 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _StatusEffectConfig5e
- * @property {string} icon            Icon used to represent the condition on the token.
- * @property {string} [reference]     UUID of a journal entry with details on this condition.
- * @property {string} [special]       Set this condition as a special status effect under this name.
- * @property {string[]} [riders]      Additional conditions, by id, to apply as part of this condition.
+ * @property {string} icon              Icon used to represent the condition on the token.
+ * @property {number} [order]           Order status to the start of the token HUD, rather than alphabetically.
+ * @property {string} [reference]       UUID of a journal entry with details on this condition.
+ * @property {string} [special]         Set this condition as a special status effect under this name.
+ * @property {string[]} [riders]        Additional conditions, by id, to apply as part of this condition.
+ * @property {string} [exclusiveGroup]  Any status effects with the same group will not be able to be applied at the
+ *                                      same time through the token HUD (multiple statuses applied through other
+ *                                      effects can still coexist).
  */
 
 /**
@@ -2856,6 +2994,11 @@ DND5E.conditionTypes = {
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ",
     special: "BLIND"
   },
+  burning: {
+    label: "EFFECT.DND5E.StatusBurning",
+    icon: "systems/dnd5e/icons/svg/statuses/burning.svg",
+    pseudo: true
+  },
   charmed: {
     label: "DND5E.ConCharmed",
     icon: "systems/dnd5e/icons/svg/statuses/charmed.svg",
@@ -2864,6 +3007,11 @@ DND5E.conditionTypes = {
   cursed: {
     label: "EFFECT.DND5E.StatusCursed",
     icon: "systems/dnd5e/icons/svg/statuses/cursed.svg",
+    pseudo: true
+  },
+  dehydration: {
+    label: "EFFECT.DND5E.StatusDehydration",
+    icon: "systems/dnd5e/icons/svg/statuses/dehydration.svg",
     pseudo: true
   },
   deafened: {
@@ -2884,6 +3032,11 @@ DND5E.conditionTypes = {
     levels: 6,
     reduction: { rolls: 2, speed: 5 }
   },
+  falling: {
+    label: "EFFECT.DND5E.StatusFalling",
+    icon: "systems/dnd5e/icons/svg/statuses/falling.svg",
+    pseudo: true
+  },
   frightened: {
     label: "DND5E.ConFrightened",
     icon: "systems/dnd5e/icons/svg/statuses/frightened.svg",
@@ -2903,6 +3056,11 @@ DND5E.conditionTypes = {
     label: "DND5E.ConInvisible",
     icon: "systems/dnd5e/icons/svg/statuses/invisible.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u"
+  },
+  malnutrition: {
+    label: "EFFECT.DND5E.StatusMalnutrition",
+    icon: "systems/dnd5e/icons/svg/statuses/malnutrition.svg",
+    pseudo: true
   },
   paralyzed: {
     label: "DND5E.ConParalyzed",
@@ -2941,6 +3099,11 @@ DND5E.conditionTypes = {
     icon: "systems/dnd5e/icons/svg/statuses/stunned.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS",
     statuses: ["incapacitated"]
+  },
+  suffocation: {
+    label: "EFFECT.DND5E.StatusSuffocation",
+    icon: "systems/dnd5e/icons/svg/statuses/suffocation.svg",
+    pseudo: true
   },
   surprised: {
     label: "EFFECT.DND5E.StatusSurprised",
@@ -2982,7 +3145,7 @@ DND5E.conditionEffects = {
 /**
  * Extra status effects not specified in `conditionTypes`. If the ID matches a core-provided effect, then this
  * data will be merged into the core data.
- * @enum {Omit<StatusEffectConfig5e, "img"> & {icon: string}}
+ * @enum {Omit<StatusEffectConfig5e, "img"> & { icon: string }}
  */
 DND5E.statusEffects = {
   burrowing: {
@@ -2995,10 +3158,29 @@ DND5E.statusEffects = {
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     special: "CONCENTRATING"
   },
+  coverHalf: {
+    name: "EFFECT.DND5E.StatusHalfCover",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-half.svg",
+    order: 2,
+    exclusiveGroup: "cover"
+  },
+  coverThreeQuarters: {
+    name: "EFFECT.DND5E.StatusThreeQuartersCover",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-three-quarters.svg",
+    order: 3,
+    exclusiveGroup: "cover"
+  },
+  coverTotal: {
+    name: "EFFECT.DND5E.StatusTotalCover",
+    icon: "systems/dnd5e/icons/svg/statuses/cover-total.svg",
+    order: 4,
+    exclusiveGroup: "cover"
+  },
   dead: {
     name: "EFFECT.DND5E.StatusDead",
     icon: "systems/dnd5e/icons/svg/statuses/dead.svg",
-    special: "DEFEATED"
+    special: "DEFEATED",
+    order: 1
   },
   dodging: {
     name: "EFFECT.DND5E.StatusDodging",

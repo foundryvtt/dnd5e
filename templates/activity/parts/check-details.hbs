@@ -4,7 +4,7 @@
     {{ formField fields.check.fields.ability value=source.check.ability options=abilityOptions }}
     {{#with fields.check.fields.dc.fields as |fields|}}
     {{ formField fields.calculation value=../activity.check.dc.calculation options=../calculationOptions }}
-    {{#if (eq ../source.check.dc.calculation "")}}
+    {{#if (not ../source.check.dc.calculation)}}
     {{ formField fields.formula value=../source.check.dc.formula }}
     {{else}}
     {{ formField fields.formula name="" value=(localize "DND5E.SAVE.FIELDS.save.dc.DefaultFormula") disabled=true }}

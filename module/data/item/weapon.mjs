@@ -48,7 +48,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.RANGE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.RANGE", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
@@ -311,10 +311,12 @@ export default class WeaponData extends ItemDataModel.mixin(
       });
     }
 
+    const isLight = this.properties.has("lgt") || (this.parent.actor?.getFlag("dnd5e", "enhancedDualWielding")
+      && ((this.attackType === "melee") && !this.properties.has("two")));
+
     // Weapons with the "Light" property will have Offhand attack
-    // If player has the "Enhanced Duel Wielding" flag, then allow any melee weapon without the "Two-Handed" property
-    if ( this.properties.has("lgt") || (this.parent.actor?.getFlag("dnd5e", "enhancedDualWielding")
-      && ((this.attackType === "melee") && !this.properties.has("two"))) ) modes.push({
+    // If player has the "Enhanced Dual Wielding" flag, then allow any melee weapon without the "Two-Handed" property
+    if ( isLight ) modes.push({
       value: "offhand", label: game.i18n.localize("DND5E.ATTACK.Mode.Offhand")
     });
 
@@ -322,6 +324,11 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( this.properties.has("thr") ) {
       if ( modes.length ) modes.push({ rule: true });
       modes.push({ value: "thrown", label: game.i18n.localize("DND5E.ATTACK.Mode.Thrown") });
+
+      // Weapons with the "Thrown" & "Light" properties will have an Offhand Throw attack
+      if ( isLight ) modes.push({
+        value: "thrown-offhand", label: game.i18n.localize("DND5E.ATTACK.Mode.ThrownOffhand")
+      });
     }
 
     return modes;

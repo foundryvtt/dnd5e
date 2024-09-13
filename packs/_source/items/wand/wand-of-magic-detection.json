@@ -2,7 +2,7 @@
   "_id": "18fbyArtidKzON01",
   "name": "Wand of Magic Detection",
   "type": "consumable",
-  "img": "icons/weapons/staves/staff-simple-green.webp",
+  "img": "icons/weapons/wands/wand-gem-purple.webp",
   "system": {
     "description": {
       "value": "<p>This wand has 3 charges. While holding it, you can expend 1 charge as an action to cast the @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{Detect Magic} spell from it. The wand regains 1d3 expended charges daily at dawn.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -141,7 +142,8 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "wand-of-magic-detection"
   },
   "effects": [],
   "folder": "1aDgsGVwDbPdxG2V",
@@ -156,7 +158,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037084495,
-    "modifiedTime": 1725037084495,
+    "modifiedTime": 1725992478594,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!18fbyArtidKzON01"

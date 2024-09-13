@@ -2,7 +2,7 @@
   "_id": "LiOD83I4MIZlpoQQ",
   "name": "Hunting Trap",
   "type": "consumable",
-  "img": "icons/environment/traps/trap-jaw-steel.webp",
+  "img": "icons/environment/traps/trap-jaw-green.webp",
   "system": {
     "description": {
       "value": "<p>When you use your action to set it, this trap forms a saw-toothed steel ring that snaps shut when a creature steps on a pressure plate in the center. The trap is affixed by a heavy chain to an immobile object, such as a tree or a spike driven into the ground. A creature that steps on the plate must succeed on a DC 13 Dexterity saving throw or take 1d4 piercing damage and stop moving. Thereafter, until the creature breaks free of the trap, its movement is limited by the length of the chain (typically 3 feet long). A creature can use its action to make a DC 13 Strength check, freeing itself or another creature within its reach on a success. Each failed check deals 1 piercing damage to the trapped creature.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -253,11 +254,12 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "hunting-trap"
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 4000000,
   "ownership": {
     "default": 0
   },
@@ -268,7 +270,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037167567,
-    "modifiedTime": 1725037167567,
+    "modifiedTime": 1725992506361,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LiOD83I4MIZlpoQQ"

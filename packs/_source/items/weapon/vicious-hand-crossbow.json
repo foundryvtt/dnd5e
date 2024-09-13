@@ -2,7 +2,7 @@
   "_id": "K7h4LT03SNt2807z",
   "name": "Vicious Hand Crossbow",
   "type": "weapon",
-  "img": "icons/weapons/crossbows/crossbow-simple-brown.webp",
+  "img": "icons/weapons/crossbows/crossbow-simple-purple.webp",
   "system": {
     "description": {
       "value": "<p>A lightweight crossbow designed to be held in one hand or strapped to one's wrist to fire light bolts.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -180,7 +181,11 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {
+      "type": "crossbowBolt"
+    },
+    "mastery": "",
+    "identifier": "vicious-hand-crossbow"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -195,7 +200,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037161491,
-    "modifiedTime": 1725037161491,
+    "modifiedTime": 1725992504361,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!K7h4LT03SNt2807z"

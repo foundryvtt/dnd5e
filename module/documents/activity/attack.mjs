@@ -1,6 +1,7 @@
 import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackActivityData from "../../data/activity/attack-data.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
+import { getTargetDescriptors } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -37,7 +38,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
   /* -------------------------------------------- */
 
   /** @override */
-  _usageChatButtons() {
+  _usageChatButtons(message) {
     const buttons = [{
       label: game.i18n.localize("DND5E.Attack"),
       icon: '<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg" inert></i>',
@@ -52,7 +53,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         action: "rollDamage"
       }
     });
-    return buttons.concat(super._usageChatButtons());
+    return buttons.concat(super._usageChatButtons(message));
   }
 
   /* -------------------------------------------- */
@@ -81,7 +82,11 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
    */
   async rollAttack(config={}, dialog={}, message={}) {
     const { parts, data } = this.getAttackData();
-    const targets = this.constructor.getTargetDescriptors();
+    const targets = getTargetDescriptors();
+
+    if ( (this.item.type === "weapon") && (this.item.system.quantity === 0) ) {
+      ui.notifications.warn("DND5E.ATTACK.Warning.NoQuantity", { localize: true });
+    }
 
     let ammunitionOptions;
     const selectedAmmunition = config.ammunition ?? this.item.getFlag("dnd5e", `last.${this.id}.ammunition`);
@@ -106,7 +111,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.ability),
       halflingLucky: this.actor?.getFlag("dnd5e", "halflingLucky")
     }, config);
-    rollConfig.origin = this;
+    rollConfig.subject = this;
     rollConfig.rolls = [{
       parts, data,
       options: {
@@ -128,7 +133,6 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( masteryOptions?.length ) rollConfig.rolls[0].options.mastery ??= masteryOptions[0].value;
 
     const dialogConfig = foundry.utils.mergeObject({
-      configure: true,
       options: {
         width: 400,
         top: config.event ? config.event.clientY - 80 : null,
@@ -179,17 +183,17 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       elvenAccuracy: rollConfig.elvenAccuracy,
       halflingLucky: rollConfig.halflingLucky,
       reliableTalent: rollConfig.rolls[0].options.minimum === 10,
-      fastForward: !dialogConfig.configure,
       ammunitionOptions: dialogConfig.options.ammunitionOptions,
       attackModes: dialogConfig.options.attackModes,
       masteryOptions: dialogConfig.options.masteryOptions,
-      title: dialogConfig.options.title,
+      title: `${this.item.name} - ${game.i18n.localize("DND5E.AttackRoll")}`,
       dialogOptions: dialogConfig.options,
       chatMessage: messageConfig.create,
       messageData: messageConfig.data,
       rollMode: messageConfig.rollMode,
       flavor: messageConfig.data.flavor
     };
+    if ( "configure" in dialogConfig ) oldRollConfig.fastForward = !dialogConfig.configure;
 
     if ( "dnd5e.preRollAttack" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -203,12 +207,19 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( roll === null ) return;
 
     const flags = {};
-    const ammo = this.actor?.items.get(roll.options.ammunition);
     let ammoUpdate = null;
-    if ( ammo ) {
-      ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
-      ammoUpdate.destroy = ammo.system.uses.autoDestroy && (ammoUpdate.quantity === 0);
-      flags.ammunition = roll.options.ammunition;
+
+    if ( roll.options.ammunition ) {
+      const ammo = this.actor?.items.get(roll.options.ammunition);
+      if ( ammo ) {
+        if ( !ammo.system.properties?.has("ret") ) {
+          ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
+          ammoUpdate.destroy = ammo.system.uses.autoDestroy && (ammoUpdate.quantity === 0);
+        }
+        flags.ammunition = roll.options.ammunition;
+      }
+    } else if ( roll.options.attackMode?.startsWith("thrown") && !this.item.system.properties?.has("ret") ) {
+      ammoUpdate = { id: this.item.id, quantity: Math.max(0, this.item.system.quantity - 1) };
     }
     if ( roll.options.attackMode ) flags.attackMode = roll.options.attackMode;
     if ( roll.options.mastery ) flags.mastery = roll.options.mastery;
@@ -220,10 +231,10 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
      * @memberof hookEvents
      * @param {D20Roll[]} rolls                        The resulting rolls.
      * @param {object} data
-     * @param {AttackActivity} data.activity           The activity that performed the attack.
+     * @param {AttackActivity} data.subject            The Activity that performed the attack.
      * @param {AmmunitionUpdate|null} data.ammoUpdate  Any updates related to ammo consumption for this attack.
      */
-    Hooks.callAll("dnd5e.rollAttackV2", [roll], { activity: this, ammoUpdate });
+    Hooks.callAll("dnd5e.rollAttackV2", [roll], { subject: this, ammoUpdate });
 
     if ( "dnd5e.rollAttack" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -255,11 +266,11 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
      * A hook event that fires after an attack has been rolled and ammunition has been consumed.
      * @function dnd5e.postRollAttack
      * @memberof hookEvents
-     * @param {D20Roll[]} rolls               The resulting rolls.
+     * @param {D20Roll[]} rolls              The resulting rolls.
      * @param {object} data
-     * @param {AttackActivity} data.activity  The activity that performed the attack.
+     * @param {AttackActivity} data.subject  The activity that performed the attack.
      */
-    Hooks.callAll("dnd5e.postRollAttack", [roll], { activity: this });
+    Hooks.callAll("dnd5e.postRollAttack", [roll], { subject: this });
 
     return [roll];
   }
@@ -303,5 +314,14 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     }
 
     this.rollDamage({ event, ammunition, attackMode });
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), { modifier: this.labels.modifier });
   }
 }

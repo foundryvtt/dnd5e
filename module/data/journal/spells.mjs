@@ -44,7 +44,7 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
         hint: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Hint"
       }),
       description: new SchemaField({
-        value: new HTMLField({label: "DND5E.Description"})
+        value: new HTMLField({textSearch: true, label: "DND5E.Description"})
       }),
       spells: new SetField(new StringField(), {label: "DND5E.ItemTypeSpellPl"}),
       unlinkedSpells: new ArrayField(new SchemaField({
@@ -54,7 +54,7 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
           level: new NumberField({min: 0, integer: true, label: "DND5E.Level"}),
           school: new StringField({label: "DND5E.School"})
         }),
-        source: new SourceField({license: false, uuid: new StringField()})
+        source: new SourceField({license: false, revision: false, rules: false, uuid: new StringField()})
       }), {label: "JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Label"})
     };
   }

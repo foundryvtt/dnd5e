@@ -149,9 +149,10 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
    * @param {object} config.restriction     Additional restrictions to be applied.
    * @param {boolean} [config.strict=true]  Should an error be thrown when an invalid type is encountered?
    * @returns {boolean}                     Is this type valid?
-   * @throws An error if the item is invalid and strict is `true`.
+   * @throws {Error}                        An error if the item is invalid and strict is `true`.
    */
   _validateItemType(item, { type, restriction, strict=true }={}) {
+    if ( !item ) return false;
     super._validateItemType(item, { strict });
     type ??= this.configuration.type;
     restriction ??= this.configuration.restriction;

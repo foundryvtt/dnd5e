@@ -161,6 +161,16 @@ export default class ActivitySheet extends Application5e {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Set to temporarily disable sheet rendering.
+   * TODO: Only needed because we cannot pass DatabaseOperation options to ClientDocument#deleteDialog.
+   * Delete this when we can.
+   * @type {boolean}
+   */
+  #disableRender = false;
+
+  /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
@@ -461,6 +471,7 @@ export default class ActivitySheet extends Application5e {
     if ( !this.isVisible ) throw new Error(game.i18n.format("SHEETS.DocumentSheetPrivate", {
       type: game.i18n.localize("DND5E.ACTIVITY.Title.one")
     }));
+    if ( this.#disableRender ) return false;
   }
 
   /* -------------------------------------------- */
@@ -568,7 +579,7 @@ export default class ActivitySheet extends Application5e {
   static async #addEffect(event, target) {
     if ( !this.activity.effects ) return;
     const effectData = this._addEffectData();
-    const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData]);
+    const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData], { render: false });
     this.activity.update({ effects: [...this.activity.toObject().effects, { _id: created.id }] });
   }
 
@@ -650,7 +661,9 @@ export default class ActivitySheet extends Application5e {
   static async #deleteEffect(event, target) {
     if ( !this.activity.effects ) return;
     const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
+    this.#disableRender = true;
     const result = await this.item.effects.get(effectId)?.deleteDialog();
+    this.#disableRender = false;
     if ( result instanceof ActiveEffect ) {
       const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
       this.activity.update({ effects });

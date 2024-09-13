@@ -14,16 +14,19 @@
     <ul class="formulas unlist">
         {{#each rolls}}
         <li>
-            <span class="formula">{{ formula }}</span>
-            <span class="label">{{#if type}}{{ type }}{{else}}{{ localize "DND5E.Formula" }}{{/if}}</span>
+            {{!-- Formula --}}
+            <div class="formula-line">
+                <span class="formula">{{ roll.formula }}</span>
+                <span class="label">{{#if type}}{{ roll.type }}{{else}}{{ localize "DND5E.Formula" }}{{/if}}</span>
+            </div>
+
+            {{!-- Situational Bonus --}}
+            <div class="form-group">
+                <input type="text" class="full-width" name="roll.{{ @index }}.situational"
+                       value="{{ roll.data.situational }}" placeholder="{{ localize "DND5E.RollSituationalBonus" }}">
+            </div>
         </li>
         {{/each}}
     </ul>
-
-    {{!-- Situational Bonus --}}
-    <div class="form-group">
-        <input type="text" class="full-width" name="situational" value="{{ situational }}"
-               placeholder="{{ localize "DND5E.RollSituationalBonus" }}">
-    </div>
 
 </div>

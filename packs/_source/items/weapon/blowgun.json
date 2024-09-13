@@ -2,7 +2,7 @@
   "_id": "wNWK6yJMHG9ANqQV",
   "name": "Blowgun",
   "type": "weapon",
-  "img": "icons/sundries/survival/leather-strap-brown.webp",
+  "img": "icons/commodities/wood/log-rough-hickory-brown.webp",
   "system": {
     "description": {
       "value": "<p>A primitive, but deadly, weapon favored by tribes and guerrila fighters. The darts fired from this gun can puncture and deliver lethal doses of venom.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -57,14 +58,14 @@
       },
       "base": {
         "number": null,
-        "denomination": null,
-        "bonus": "",
+        "denomination": 0,
+        "bonus": "1",
         "types": [
           "piercing"
         ],
         "custom": {
-          "enabled": true,
-          "formula": "1 + @mod"
+          "enabled": false,
+          "formula": ""
         },
         "scaling": {
           "mode": "",
@@ -178,7 +179,11 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {
+      "type": "blowgunNeedle"
+    },
+    "mastery": "",
+    "identifier": "blowgun"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -193,7 +198,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037318573,
-    "modifiedTime": 1725037318573,
+    "modifiedTime": 1725992557248,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!wNWK6yJMHG9ANqQV"

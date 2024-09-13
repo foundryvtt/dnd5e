@@ -2,7 +2,7 @@
   "_id": "4MtQKPn9qMWCFjDA",
   "name": "Quiver",
   "type": "container",
-  "img": "icons/containers/ammunition/arrows-quiver-black.webp",
+  "img": "icons/containers/ammunition/arrows-quiver-simple-brown.webp",
   "system": {
     "description": {
       "value": "<p>A quiver can hold up to 20 arrows.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -43,7 +44,8 @@
     },
     "container": null,
     "properties": [],
-    "attuned": false
+    "attuned": false,
+    "identifier": "quiver"
   },
   "effects": [],
   "folder": "PgtyWdfkDTDbc0ov",
@@ -58,7 +60,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037098979,
-    "modifiedTime": 1725037098979,
+    "modifiedTime": 1725992483502,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!4MtQKPn9qMWCFjDA"

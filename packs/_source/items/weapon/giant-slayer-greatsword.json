@@ -2,7 +2,7 @@
   "_id": "nBFr5xTWeChM7xrb",
   "name": "Giant Slayer Greatsword",
   "type": "weapon",
-  "img": "icons/weapons/swords/greatsword-guard-gold-worn.webp",
+  "img": "icons/weapons/swords/greatsword-crossguard-embossed-gold.webp",
   "system": {
     "description": {
       "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p>\n<p>When you hit a giant with it, the giant takes an extra 2d6 damage of the weapon's type and must succeed on a DC 15 Strength saving throw or fall prone. For the purpose of this weapon, \"giant\" refers to any creature with the giant type, including ettins and trolls.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -332,7 +333,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "identifier": "giant-slayer-greatsword"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -347,7 +349,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037281330,
-    "modifiedTime": 1725037281330,
+    "modifiedTime": 1725992544491,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!nBFr5xTWeChM7xrb"

@@ -226,7 +226,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   *allApplicableEffects() {
     for ( const effect of super.allApplicableEffects() ) {
-      if ( (effect.type !== "enchantment") && !effect.getFlag("dnd5e", "rider") ) yield effect;
+      if ( (effect.type !== "enchantment")
+        && !this.getFlag("dnd5e", "riders.effect")?.includes(effect.id) ) yield effect;
     }
   }
 
@@ -290,10 +291,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Return the amount of experience granted by killing a creature of a certain CR.
-   * @param {number} cr     The creature's challenge rating.
-   * @returns {number}      The amount of experience granted per kill.
+   * @param {number|null} cr  The creature's challenge rating.
+   * @returns {number|null}   The amount of experience granted per kill.
    */
   getCRExp(cr) {
+    if ( cr === null ) return null;
     if ( cr < 1.0 ) return Math.max(200 * cr, 10);
     return CONFIG.DND5E.CR_EXP_LEVELS[cr];
   }
@@ -312,6 +314,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else data = {...super.getRollData()};
     data.flags = {...this.flags};
     data.name = this.name;
+    data.statuses = {};
+    for ( const status of this.statuses ) {
+      data.statuses[status] = status === "exhaustion" ? this.system.attributes?.exhaustion ?? 1 : 1;
+    }
     return data;
   }
 
@@ -2097,7 +2103,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     formula ??= `max(0, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
-    rollConfig.origin = this;
+    rollConfig.subject = this;
     rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -2162,13 +2168,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      * @param {BasicRoll[]} rolls          The resulting rolls.
      * @param {object} data
-     * @param {Actor5e} data.actor         Actor for which the hit die has been rolled.
+     * @param {Actor5e} data.subject       Actor for which the hit die has been rolled.
      * @param {object} data.updates
      * @param {object} data.updates.actor  Updates that will be applied to the actor.
      * @param {object} data.updates.class  Updates that will be applied to the class.
      * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollHitDieV2", rolls, { actor: this, updates }) === false ) return returnValue;
+    if ( Hooks.call("dnd5e.rollHitDieV2", rolls, { subject: this, updates }) === false ) return returnValue;
 
     if ( "dnd5e.rollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -2181,6 +2187,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Perform updates
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
     if ( !foundry.utils.isEmpty(updates.class) ) await cls.update(updates.class);
+
+    /**
+     * A hook event that fires after a hit die has been rolled for an Actor and updates have been performed.
+     * @function dnd5e.postRollHitDie
+     * @memberof hookEvents
+     * @param {BasicRoll[]} rolls     The resulting rolls.
+     * @param {object} data
+     * @param {Actor5e} data.subject  Actor for which the roll was performed.
+     */
+    Hooks.callAll("dnd5e.postRollHitDie", rolls, { subject: this });
 
     return returnValue;
   }
@@ -2701,11 +2717,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( recoverLongRestUses ) recovery.unshift("lr");
     if ( recoverDailyUses || config.newDay ) recovery.unshift("day", "dawn", "dusk");
 
-    const rollData = this.getRollData();
     result.updateItems ??= [];
     result.rolls ??= [];
     for ( const item of this.items ) {
       if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+      const rollData = item.getRollData();
       const { updates, rolls } = await item.system.recoverUses(recovery, rollData);
       if ( !foundry.utils.isEmpty(updates) ) {
         const updateTarget = result.updateItems.find(i => i._id === item.id);
@@ -3496,6 +3512,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         jitter: 0.25
       });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async toggleStatusEffect(statusId, options) {
+    const created = await super.toggleStatusEffect(statusId, options);
+    const status = CONFIG.statusEffects.find(e => e.id === statusId);
+    if ( !(created instanceof ActiveEffect) || !status.exclusiveGroup ) return created;
+
+    const others = CONFIG.statusEffects
+      .filter(e => (e.id !== statusId) && (e.exclusiveGroup === status.exclusiveGroup) && this.effects.has(e._id));
+    if ( others.length ) await this.deleteEmbeddedDocuments("ActiveEffect", others.map(e => e._id));
+
+    return created;
   }
 
   /* -------------------------------------------- */

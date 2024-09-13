@@ -1,7 +1,7 @@
 <fieldset>
-    <legend>{{ localize "DND5E.Source" }}</legend>
+    <legend>{{ localize "DND5E.SOURCE.FIELDS.source.label" }}</legend>
     <div class="form-group">
-        <label>{{ localize "DND5E.SourceBook" }}</label>
+        <label>{{ localize "DND5E.SOURCE.FIELDS.source.book.label" }}</label>
         <div class="form-fields">
             <input type="text" name="{{ keyPath }}.book" value="{{ source.book }}" list="{{ partId }}-books"
                    placeholder="{{ data.bookPlaceholder }}">
@@ -10,12 +10,18 @@
             </datalist>
         </div>
     </div>
-    {{ formField fields.page value=source.page label="DND5E.SourcePage" localize=true }}
-    {{ formField fields.custom value=source.custom label="DND5E.SourceCustom" localize=true }}
-    {{ formField fields.license value=source.license label="DND5E.SourceLicense" localize=true }}
+    {{ formField fields.page value=source.page }}
+    {{ formField fields.custom value=source.custom }}
+    {{ formField fields.license value=source.license }}
+    <hr>
+    {{ formField fields.rules value=source.rules options=rulesVersions }}
+    {{#if identifier}}
+    {{ formField identifier.field value=identifier.value placeholder=identifier.placeholder localize=true }}
+    {{/if}}
+    {{ formField fields.revision value=source.revision }}
     {{#if hasSourceId}}
     <div class="form-group">
-        <label>{{ localize "DND5E.SourceUUID" }}</label>
+        <label>{{ localize "DND5E.SOURCE.FIELDS.source.uuid.label" }}</label>
         <div class="source-uuid">
             {{{ dnd5e-linkForUuid sourceUuid }}}
         </div>

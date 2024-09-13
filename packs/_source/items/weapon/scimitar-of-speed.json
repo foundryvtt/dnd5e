@@ -2,7 +2,7 @@
   "_id": "7wY0389wscheFkIa",
   "name": "Scimitar of Speed",
   "type": "weapon",
-  "img": "icons/skills/melee/spear-tips-triple-orange.webp",
+  "img": "icons/weapons/swords/scimitar-guard-red.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>You gain a +2 bonus to attack and damage rolls made with this magic weapon. In addition, you can make one attack with it as a bonus action on each of your turns.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -179,7 +180,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "identifier": "scimitar-of-speed"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -194,7 +196,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037110385,
-    "modifiedTime": 1725037110385,
+    "modifiedTime": 1725992487315,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!7wY0389wscheFkIa"

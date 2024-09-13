@@ -35,8 +35,8 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
   /* -------------------------------------------- */
 
   /** @override */
-  _usageChatButtons() {
-    if ( !this.roll.formula ) return super._usageChatButtons();
+  _usageChatButtons(message) {
+    if ( !this.roll.formula ) return super._usageChatButtons(message);
     return [{
       label: this.roll.name || game.i18n.localize("DND5E.Roll"),
       icon: '<i class="fa-solid fa-dice" inert></i>',
@@ -44,7 +44,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
         action: "rollFormula",
         visibility: this.roll.visible ? "all" : undefined
       }
-    }].concat(super._usageChatButtons());
+    }].concat(super._usageChatButtons(message));
   }
 
   /* -------------------------------------------- */
@@ -65,7 +65,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     }
 
     const rollConfig = foundry.utils.deepClone(config);
-    rollConfig.origin = this;
+    rollConfig.subject = this;
     rollConfig.rolls = [{ parts: [this.roll.formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -124,11 +124,11 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
      * A hook event that fires after a formula has been rolled for a Utility activity.
      * @function dnd5e.rollFormulaV2
      * @memberof hookEvents
-     * @param {BasicRoll[]} rolls              The resulting rolls.
+     * @param {BasicRoll[]} rolls             The resulting rolls.
      * @param {object} data
-     * @param {UtilityActivity} data.activity  The activity that performed the roll.
+     * @param {UtilityActivity} data.subject  The Activity that performed the roll.
      */
-    Hooks.callAll("dnd5e.rollFormulaV2", rolls, { activity: this });
+    Hooks.callAll("dnd5e.rollFormulaV2", rolls, { subject: this });
 
     if ( "dnd5e.rollFormula" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(

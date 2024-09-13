@@ -2,7 +2,7 @@
   "_id": "gBQ8xqTA5f8wP5iu",
   "name": "Blowgun Needle",
   "type": "consumable",
-  "img": "icons/weapons/ammunition/arrows-war-red.webp",
+  "img": "icons/skills/ranged/dart-thrown-poison-green.webp",
   "system": {
     "description": {
       "value": "<p>This ammunition is designed to be fired through a blowgun using the force of the wielders lungs. These needles are frequently tipped with deadly or crippling venoms.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -36,11 +37,9 @@
     "damage": {
       "base": {
         "number": null,
-        "denomination": null,
+        "denomination": 0,
         "bonus": "",
-        "types": [
-          "piercing"
-        ],
+        "types": [],
         "custom": {
           "enabled": false,
           "formula": ""
@@ -63,87 +62,9 @@
     "container": null,
     "properties": [],
     "magicalBonus": null,
-    "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "attack",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
-        },
-        "consumption": {
-          "targets": [],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "value": "5",
-          "units": "ft",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "attack": {
-          "ability": "",
-          "bonus": "",
-          "critical": {
-            "threshold": null
-          },
-          "flat": false,
-          "type": {
-            "value": "ranged",
-            "classification": "weapon"
-          }
-        },
-        "damage": {
-          "critical": {
-            "bonus": ""
-          },
-          "includeBase": true,
-          "parts": []
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
-      }
-    },
-    "attuned": false
+    "activities": {},
+    "attuned": false,
+    "identifier": "blowgun-needle"
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -158,7 +79,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037250790,
-    "modifiedTime": 1725037250790,
+    "modifiedTime": 1725992533994,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gBQ8xqTA5f8wP5iu"

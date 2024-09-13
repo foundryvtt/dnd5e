@@ -1,8 +1,11 @@
 /**
- * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs
+ * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs.
+ * @param {object} [options={}]
+ * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
+ *                                                      version stored in item stats.
  * @returns {Promise}      A Promise which resolves once the migration is completed
  */
-export const migrateWorld = async function() {
+export async function migrateWorld({ bypassVersionCheck=false }={}) {
   const version = game.system.version;
   ui.notifications.info(game.i18n.format("MIGRATION.5eBegin", {version}), {permanent: true});
 
@@ -14,7 +17,7 @@ export const migrateWorld = async function() {
     .concat(Array.from(game.actors.invalidDocumentIds).map(id => [game.actors.getInvalid(id), false]));
   for ( const [actor, valid] of actors ) {
     try {
-      const flags = { persistSourceMigration: false };
+      const flags = { bypassVersionCheck, persistSourceMigration: false };
       const source = valid ? actor.toObject() : game.data.actors.find(a => a._id === actor.id);
       const version = actor._stats.systemVersion;
       let updateData = migrateActorData(actor, source, migrationData, flags, { actorUuid: actor.uuid });
@@ -44,7 +47,7 @@ export const migrateWorld = async function() {
     .concat(Array.from(game.items.invalidDocumentIds).map(id => [game.items.getInvalid(id), false]));
   for ( const [item, valid] of items ) {
     try {
-      const flags = { persistSourceMigration: false };
+      const flags = { bypassVersionCheck, persistSourceMigration: false };
       const source = valid ? item.toObject() : game.data.items.find(i => i._id === item.id);
       let updateData = migrateItemData(item, source, migrationData, flags);
       if ( !foundry.utils.isEmpty(updateData) ) {
@@ -107,7 +110,7 @@ export const migrateWorld = async function() {
     for ( const token of s.tokens ) {
       if ( token.actorLink || !token.actor ) continue;
       try {
-        const flags = { persistSourceMigration: false };
+        const flags = { bypassVersionCheck, persistSourceMigration: false };
         const source = token.actor.toObject();
         let updateData = migrateActorData(token.actor, source, migrationData, flags, { actorUuid: token.actor.uuid });
         if ( !foundry.utils.isEmpty(updateData) ) {
@@ -142,7 +145,7 @@ export const migrateWorld = async function() {
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
   ui.notifications.info(game.i18n.format("MIGRATION.5eComplete", {version}), {permanent: true});
-};
+}
 
 /* -------------------------------------------- */
 
@@ -170,10 +173,12 @@ function _shouldMigrateCompendium(pack) {
  * Apply migration rules to all Documents within a single Compendium pack
  * @param {CompendiumCollection} pack       Pack to be migrated.
  * @param {object} [options={}]
+ * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
+ *                                                      version stored in item stats.
  * @param {boolean} [options.strict=false]  Migrate errors should stop the whole process.
  * @returns {Promise}
  */
-export async function migrateCompendium(pack, { strict=false }={}) {
+export async function migrateCompendium(pack, { bypassVersionCheck=false, strict=false }={}) {
   const documentName = pack.documentName;
   if ( !["Actor", "Item", "Scene"].includes(documentName) ) return;
 
@@ -192,7 +197,7 @@ export async function migrateCompendium(pack, { strict=false }={}) {
     for ( let doc of documents ) {
       let updateData = {};
       try {
-        const flags = { persistSourceMigration: false };
+        const flags = { bypassVersionCheck, persistSourceMigration: false };
         const source = doc.toObject();
         switch ( documentName ) {
           case "Actor":
@@ -280,6 +285,8 @@ export function reparentCompendiums(from, to) {
 /**
  * Update all compendium packs using the new system data model.
  * @param {object} [options={}]
+ * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
+ *                                                      version stored in item stats.
  * @param {boolean} [options.migrate=true]  Also perform a system migration before refreshing.
  */
 export async function refreshAllCompendiums(options) {
@@ -294,13 +301,15 @@ export async function refreshAllCompendiums(options) {
  * Update all Documents in a compendium using the new system data model.
  * @param {CompendiumCollection} pack  Pack to refresh.
  * @param {object} [options={}]
+ * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
+ *                                                      version stored in item stats.
  * @param {boolean} [options.migrate=true]  Also perform a system migration before refreshing.
  */
-export async function refreshCompendium(pack, { migrate=true }={}) {
+export async function refreshCompendium(pack, { bypassVersionCheck, migrate=true }={}) {
   if ( !pack?.documentName ) return;
   if ( migrate ) {
     try {
-      await migrateCompendium(pack, { strict: true });
+      await migrateCompendium(pack, { bypassVersionCheck, strict: true });
     } catch( err ) {
       err.message = `Failed dnd5e system migration pack ${pack.collection}: ${err.message}`;
       console.error(err);
@@ -333,7 +342,7 @@ export async function refreshCompendium(pack, { migrate=true }={}) {
  * @param {CompendiumCollection|string} pack  Pack or name of pack to migrate.
  * @returns {Promise}
  */
-export const migrateArmorClass = async function(pack) {
+export async function migrateArmorClass(pack) {
   if ( typeof pack === "string" ) pack = game.packs.get(pack);
   if ( pack.documentName !== "Actor" ) return;
   const wasLocked = pack.locked;
@@ -370,7 +379,7 @@ export const migrateArmorClass = async function(pack) {
   await pack.getDocuments(); // Force a re-prepare of all actors.
   await pack.configure({locked: wasLocked});
   console.log(`Migrated the AC of all Actors from Compendium ${pack.collection}`);
-};
+}
 
 /* -------------------------------------------- */
 
@@ -417,12 +426,17 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
     if ( effects.length > 0 ) updateData.effects = effects;
   }
 
+  // Set source rules version to Legacy
+  if ( foundry.utils.isNewerVersion("4.0.0", actorData._stats?.systemVersion) || flags.bypassVersionCheck ) {
+    updateData["system.source.rules"] = "2014";
+  }
+
   // Migrate Owned Items
   if ( !actorData.items ) return updateData;
   const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
-    const itemFlags = { persistSourceMigration: false };
+    const itemFlags = { bypassVersionCheck: flags.bypassVersionCheck ?? false, persistSourceMigration: false };
     let itemUpdate = migrateItemData(i, itemData, migrationData, itemFlags);
 
     if ( (itemData.type === "background") && (actorData.system?.details?.background !== itemData._id) ) {
@@ -477,8 +491,21 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
 
   // Migrate embedded effects
   if ( itemData.effects ) {
-    const effects = migrateEffects(itemData, migrationData);
+    const riders = foundry.utils.getProperty(itemData, "flags.dnd5e.riders.effect");
+    if ( riders?.length ) updateData["flags.dnd5e.riders.effect"] = riders;
+    const effects = migrateEffects(itemData, migrationData, updateData);
+    if ( riders?.length === updateData["flags.dnd5e.riders.effect"]?.length ) {
+      delete updateData["flags.dnd5e.riders.effect"];
+    }
     if ( effects.length > 0 ) updateData.effects = effects;
+  }
+
+  // Set source rules version to Legacy
+  if ( foundry.utils.isNewerVersion("4.0.0", itemData._stats?.systemVersion) || flags.bypassVersionCheck ) {
+    updateData["system.source.rules"] = "2014";
+    if ( Object.hasOwn(item.system, "identifier") && !itemData.system?.identifier ) {
+      updateData["system.identifier"] = item.identifier;
+    }
   }
 
   // Migrate properties
@@ -503,22 +530,28 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
 
 /**
  * Migrate any active effects attached to the provided parent.
- * @param {object} parent           Data of the parent being migrated.
- * @param {object} [migrationData]  Additional data to perform the migration.
- * @returns {object[]}              Updates to apply on the embedded effects.
+ * @param {object} parent            Data of the parent being migrated.
+ * @param {object} [migrationData]   Additional data to perform the migration.
+ * @param {object} [itemUpdateData]  Update data for the item to apply changes back to item.
+ * @returns {object[]}               Updates to apply on the embedded effects.
  */
-export const migrateEffects = function(parent, migrationData) {
+export function migrateEffects(parent, migrationData, itemUpdateData) {
   if ( !parent.effects ) return [];
   return parent.effects.reduce((arr, e) => {
     const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
     let effectUpdate = migrateEffectData(effectData, migrationData, { parent });
+    if ( effectData.flags?.dnd5e?.rider ) {
+      itemUpdateData["flags.dnd5e.riders.effect"] ??= [];
+      itemUpdateData["flags.dnd5e.riders.effect"].push(effectData._id);
+      effectUpdate["flags.dnd5e.-=rider"] = null;
+    }
     if ( !foundry.utils.isEmpty(effectUpdate) ) {
       effectUpdate._id = effectData._id;
       arr.push(foundry.utils.expandObject(effectUpdate));
     }
     return arr;
   }, []);
-};
+}
 
 /* -------------------------------------------- */
 
@@ -816,7 +849,7 @@ function _migrateItemUses(item, itemData, updateData, flags) {
     foundry.utils.setProperty(updateData, "system.uses.spent", parseInt(max) - parseInt(value));
     flags.persistSourceMigration = true;
   }
-  updateData["flags.dnd5e.-=migratedUses"] = null;
+  if ( value !== undefined ) updateData["flags.dnd5e.-=migratedUses"] = null;
 }
 
 /* -------------------------------------------- */

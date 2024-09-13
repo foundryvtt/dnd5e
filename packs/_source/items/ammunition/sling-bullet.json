@@ -2,7 +2,7 @@
   "_id": "z9SbsMIBZzuhZOqT",
   "name": "Sling Bullet",
   "type": "consumable",
-  "img": "icons/skills/ranged/bullets-triple-ball-yellow.webp",
+  "img": "icons/commodities/stone/paver-cobbles-blue.webp",
   "system": {
     "description": {
       "value": "<p>A hardened pebble of stone, bone, or metal which can be flung at high velocity using a sling.</p><section class=\"secret foundry-note\" id=\"secret-nfge79saW8cFjJrx\"><p><strong>Foundry Note</strong></p><p>It will usually be impossible to buy one sling bullet because they are worth less than a copper piece (5 bullets = 1 cp).</p></section>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -36,14 +37,15 @@
     "damage": {
       "base": {
         "number": null,
-        "denomination": null,
+        "denomination": 0,
         "types": [],
         "custom": {
           "enabled": false
         },
         "scaling": {
           "number": 1
-        }
+        },
+        "bonus": ""
       },
       "replace": false
     },
@@ -57,87 +59,9 @@
     "container": null,
     "properties": [],
     "magicalBonus": null,
-    "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "attack",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
-        },
-        "consumption": {
-          "targets": [],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "value": "30",
-          "units": "ft",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "attack": {
-          "ability": "",
-          "bonus": "",
-          "critical": {
-            "threshold": null
-          },
-          "flat": false,
-          "type": {
-            "value": "ranged",
-            "classification": "weapon"
-          }
-        },
-        "damage": {
-          "critical": {
-            "bonus": ""
-          },
-          "includeBase": true,
-          "parts": []
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
-      }
-    },
-    "attuned": false
+    "activities": {},
+    "attuned": false,
+    "identifier": "sling-bullet"
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -152,7 +76,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037328642,
-    "modifiedTime": 1725037328642,
+    "modifiedTime": 1725992560849,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!z9SbsMIBZzuhZOqT"

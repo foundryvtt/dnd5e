@@ -20,7 +20,7 @@ export function formatCR(value) {
  * @returns {Handlebars.SafeString}
  */
 export function formatModifier(mod) {
-  if ( !Number.isFinite(mod) ) return new Handlebars.SafeString("");
+  if ( !Number.isFinite(mod) ) return new Handlebars.SafeString("—");
   return new Handlebars.SafeString(`<span class="sign">${mod < 0 ? "-" : "+"}</span>${Math.abs(mod)}`);
 }
 
@@ -228,6 +228,33 @@ export function staticID(id) {
 }
 
 /* -------------------------------------------- */
+/*  Keybindings Helper                          */
+/* -------------------------------------------- */
+
+/**
+ * Based on the provided event, determine if the keys are pressed to fulfill the specified keybinding.
+ * @param {Event} event    Triggering event.
+ * @param {string} action  Keybinding action within the `dnd5e` namespace.
+ * @returns {boolean}      Is the keybinding triggered?
+ */
+export function areKeysPressed(event, action) {
+  if ( !event ) return false;
+  const activeModifiers = {};
+  const addModifiers = (key, pressed) => {
+    activeModifiers[key] = pressed;
+    KeyboardManager.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
+  };
+  addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
+  addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
+  addModifiers(KeyboardManager.MODIFIER_KEYS.ALT, event.altKey);
+  return game.keybindings.get("dnd5e", action).some(b => {
+    if ( game.keyboard.downKeys.has(b.key) && b.modifiers.every(m => activeModifiers[m]) ) return true;
+    if ( b.modifiers.length ) return false;
+    return activeModifiers[b.key];
+  });
+}
+
+/* -------------------------------------------- */
 /*  Object Helpers                              */
 /* -------------------------------------------- */
 
@@ -310,14 +337,23 @@ export function indexFromUuid(uuid) {
 /**
  * Creates an HTML document link for the provided UUID.
  * Try to build links to compendium content synchronously to avoid DB lookups.
- * @param {string} uuid               UUID for which to produce the link.
+ * @param {string} uuid                    UUID for which to produce the link.
  * @param {object} [options]
- * @param {string} [options.tooltip]  Tooltip to add to the link.
- * @returns {string}                  Link to the item or empty string if item wasn't found.
+ * @param {string} [options.tooltip]       Tooltip to add to the link.
+ * @param {string} [options.renderBroken]  If a UUID cannot found, render it as a broken link instead of returning the
+ *                                         empty string.
+ * @returns {string}                       Link to the item or empty string if item wasn't found.
  */
-export function linkForUuid(uuid, { tooltip }={}) {
+export function linkForUuid(uuid, { tooltip, renderBroken }={}) {
   let doc = fromUuidSync(uuid);
-  if ( !doc ) return "";
+  if ( !doc ) {
+    if ( renderBroken ) return `
+      <a class="content-link broken" data-uuid="${uuid}">
+        <i class="fas fa-unlink"></i> ${game.i18n.localize("Unknown")}
+      </a>
+    `;
+    return "";
+  }
   if ( uuid.startsWith("Compendium.") && !(doc instanceof foundry.abstract.Document) ) {
     const {collection} = foundry.utils.parseUuid(uuid);
     const cls = collection.documentClass;
@@ -331,6 +367,32 @@ export function linkForUuid(uuid, { tooltip }={}) {
 
 /* -------------------------------------------- */
 /*  Targeting                                   */
+/* -------------------------------------------- */
+
+/**
+ * Important information on a targeted token.
+ *
+ * @typedef {object} TargetDescriptor5e
+ * @property {string} uuid  The UUID of the target.
+ * @property {string} img   The target's image.
+ * @property {string} name  The target's name.
+ * @property {number} ac    The target's armor class, if applicable.
+ */
+
+/**
+ * Grab the targeted tokens and return relevant information on them.
+ * @returns {TargetDescriptor[]}
+ */
+export function getTargetDescriptors() {
+  const targets = new Map();
+  for ( const token of game.user.targets ) {
+    const { name } = token;
+    const { img, system, uuid } = token.actor ?? {};
+    if ( uuid ) targets.set(uuid, { name, img, uuid, ac: system?.attributes?.ac?.value });
+  }
+  return Array.from(targets.values());
+}
+
 /* -------------------------------------------- */
 
 /**
@@ -464,6 +526,8 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/shared/fields/field-uses.hbs",
 
     // Journal Partials
+    "systems/dnd5e/templates/journal/parts/journal-legacy-traits.hbs",
+    "systems/dnd5e/templates/journal/parts/journal-modern-traits.hbs",
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
     // Activity Partials
@@ -688,7 +752,8 @@ export function performPreLocalization(config) {
   // Localize & sort status effects
   CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
   CONFIG.statusEffects.sort((lhs, rhs) =>
-    lhs.id === "dead" ? -1 : rhs.id === "dead" ? 1 : lhs.name.localeCompare(rhs.name, game.i18n.lang)
+    lhs.order || rhs.order ? (lhs.order ?? Infinity) - (rhs.order ?? Infinity)
+      : lhs.name.localeCompare(rhs.name, game.i18n.lang)
   );
 }
 

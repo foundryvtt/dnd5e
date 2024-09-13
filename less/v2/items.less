@@ -4,7 +4,7 @@
   /*  Outer Window                      */
   /* ---------------------------------- */
 
-  --dnd5e-sheet-header-height: 150px; /* Only needs to be an estimate */
+  --dnd5e-sheet-header-height: 170px;
   border: var(--dnd5e-border-gold);
 
   > header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-background-25); }
@@ -100,6 +100,7 @@
 
     /* Icon */
     .item-image {
+      display: block;
       width: 96px;
       height: 96px;
       border-radius: 100%;
@@ -108,6 +109,10 @@
       object-fit: cover;
       background: var(--dnd5e-color-light-gray);
       margin: 0;
+
+      color: var(--color-light-1);
+      text-align: center;
+      align-content: center;
     }
 
     /* Name */
@@ -133,12 +138,15 @@
       &:empty { display: none; }
 
       li {
-        &::before {
+        &::after {
           content: "•";
-          margin-right: 4px;
+          margin-left: 4px;
         }
 
-        &:first-child::before { content: ""; }
+        &:last-child::after, &:has(+ .full-width)::after {
+          content: "";
+          margin: 0;
+        }
 
         &.full-width {
           flex: 1 0 100%;
@@ -227,7 +235,7 @@
 
   .sheet-body {
     .tab {
-      max-height: calc(70vh - var(--dnd5e-sheet-header-height));
+      max-height: ~"calc(min(max(70vh, 1000px), 95vh) - var(--dnd5e-sheet-header-height))";
       overflow: auto;
       display: flex;
       flex-direction: column;

@@ -2,7 +2,7 @@
   "_id": "oN4Glcmi4BhdAI3k",
   "name": "Tome of Leadership and Influence",
   "type": "consumable",
-  "img": "icons/sundries/books/book-embossed-clasp-gold-brown.webp",
+  "img": "icons/sundries/books/book-symbol-triangle-silver-purple.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>This book contains guidelines for influencing and charming others, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents and practicing its guidelines, your Charisma score increases by 2, as does your maximum for that score. The manual then loses its magic, but regains it in a century.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -135,11 +136,12 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "tome-of-leadership-and-influence"
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 8500000,
   "ownership": {
     "default": 0
   },
@@ -150,7 +152,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037285779,
-    "modifiedTime": 1725037285779,
+    "modifiedTime": 1725992546103,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!oN4Glcmi4BhdAI3k"

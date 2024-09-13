@@ -8,7 +8,7 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  * @typedef {object} BasicRollProcessConfiguration
  * @property {BasicRollConfiguration[]} rolls  Configuration data for individual rolls.
  * @property {Event} [event]                   Event that triggered the rolls.
- * @property {Document} [origin]               Document that initiated this roll.
+ * @property {Document} [subject]              Document that initiated this roll.
  */
 
 /**
@@ -99,9 +99,7 @@ export default class BasicRoll extends Roll {
     for ( const roll of rolls ) await roll.evaluate();
 
     if ( rolls?.length && (message.create !== false) ) {
-      await this.toMessage(rolls, message.data, {
-        rollMode: message.rollMode ?? rolls.reduce((mode, r) => mode ?? r.options.rollMode)
-      });
+      await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
     }
 
     return rolls;
@@ -165,6 +163,7 @@ export default class BasicRoll extends Roll {
   static async toMessage(rolls, messageData={}, { rollMode, create=true }={}) {
     for ( const roll of rolls ) {
       if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
+      rollMode ??= roll.options.rollMode;
     }
 
     // Prepare chat data

@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -178,7 +179,11 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {
+      "type": "slingBullet"
+    },
+    "mastery": "",
+    "identifier": "sling-3"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -193,7 +198,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037291718,
-    "modifiedTime": 1725037291718,
+    "modifiedTime": 1725992548162,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!q3WqP3r2emnumyUF"

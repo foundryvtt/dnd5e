@@ -111,11 +111,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {string|null}
    */
   get ability() {
-    if ( this.isSpell ) {
-      return this.item.system.availableAbilities?.first()
-        ?? this.actor?.system.attributes?.spellcasting ?? null;
-    }
-    return null;
+    return this.isSpell ? this.spellcastingAbility : null;
   }
 
   /* -------------------------------------------- */
@@ -198,6 +194,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   get requiresSpellSlot() {
     if ( !this.isSpell || !this.actor?.system.spells ) return false;
     return this.canScale;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the spellcasting ability that can be used with this activity.
+   * @type {string|null}
+   */
+  get spellcastingAbility() {
+    let ability;
+    if ( this.isSpell ) ability = this.item.system.availableAbilities?.first();
+    return ability ?? this.actor?.system.attributes?.spellcasting ?? null;
   }
 
   /* -------------------------------------------- */
@@ -553,7 +561,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
       // If targeted item isn't found, display preparation warning
       if ( !actor.items.get(target.target) ) {
-        const message = game.i18n.format("DND5E.CONSUMPTION", { activity: this.name, item: this.item.name });
+        const message = game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
+          activity: this.name, item: this.item.name
+        });
         actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
       }
     }
@@ -575,7 +585,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
           if ( this.item.system.magicAvailable ) formula += ` + ${this.item.system.magicalBonus ?? 0}`;
           if ( (this.item.type === "weapon") && !/@mod\b/.test(formula) ) formula += " + @mod";
         }
-        const roll = new Roll(formula, rollData);
+        const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
+        roll.simplify();
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       } catch(err) {
         console.warn(`Unable to simplify formula for ${this.name} in item ${this.item.name}${
@@ -646,10 +657,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
 
-    const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${this.actionType}.damage`);
-    if ( bonus && (parseInt(bonus) !== 0) ) {
-      parts.push("@bonus");
-      data.bonus = bonus;
+    if ( index === 0 ) {
+      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${this.actionType}.damage`);
+      if ( bonus && (parseInt(bonus) !== 0) ) {
+        parts.push("@bonus");
+        data.bonus = bonus;
+      }
     }
 
     return {

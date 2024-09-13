@@ -25,7 +25,7 @@
                     <input type="checkbox" name="configuration.items.{{ @index }}.optional" {{ checked optional }}>
                 </div>
                 <div class="item-name">
-                    {{{ dnd5e-linkForUuid uuid }}}
+                    {{{ dnd5e-linkForUuid uuid renderBroken=true }}}
                     <input type="hidden" name="configuration.items.{{ @index }}.uuid" value="{{ uuid }}">
                 </div>
                 <div class="item-controls flexrow">

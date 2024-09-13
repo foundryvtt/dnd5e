@@ -2,7 +2,7 @@
   "_id": "OPbdSlrhkUDNpgcS",
   "name": "Wand of the War Mage +1",
   "type": "equipment",
-  "img": "icons/weapons/staves/staff-engraved-red.webp",
+  "img": "icons/weapons/wands/wand-gem-blue.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement by a spellcaster)</em></p>\n<p>While holding this wand, you gain a bonus to spell attack rolls of +1. In addition, you ignore half cover when making a spell attack.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -63,7 +64,8 @@
       "mgc"
     ],
     "activities": {},
-    "attuned": false
+    "attuned": false,
+    "identifier": "wand-of-the-war-mage-1"
   },
   "effects": [],
   "folder": "1aDgsGVwDbPdxG2V",
@@ -78,7 +80,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037176775,
-    "modifiedTime": 1725037176775,
+    "modifiedTime": 1725992509503,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!OPbdSlrhkUDNpgcS"

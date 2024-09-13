@@ -1,5 +1,8 @@
 import FormulaField from "../data/fields/formula-field.mjs";
+import MappingField from "../data/fields/mapping-field.mjs";
 import { staticID } from "../utils.mjs";
+
+const { SetField, StringField } = foundry.data.fields;
 
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
@@ -116,81 +119,45 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  apply(actor, change) {
-    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
-
-    // Determine type using DataField
-    let field = change.key.startsWith("system.")
-      ? actor.system.schema.getField(change.key.slice(7))
-      : actor.schema.getField(change.key);
-
-    const getTargetType = field => {
-      if ( (field instanceof FormulaField) || ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) return "formula";
-      else if ( field instanceof foundry.data.fields.ArrayField ) return "Array";
-      else if ( field instanceof foundry.data.fields.ObjectField ) return "Object";
-      else if ( field instanceof foundry.data.fields.BooleanField ) return "boolean";
-      else if ( field instanceof foundry.data.fields.NumberField ) return "number";
-      else if ( field instanceof foundry.data.fields.StringField ) return "string";
-    };
-
-    const targetType = getTargetType(field);
-    if ( !targetType ) return super.apply(actor, change);
+  static applyField(model, change, field) {
+    field ??= model.schema.getField(change.key);
+    change = foundry.utils.deepClone(change);
+    const current = foundry.utils.getProperty(model, change.key);
     const modes = CONST.ACTIVE_EFFECT_MODES;
 
-    // Get the current value of the target field
-    const current = foundry.utils.getProperty(actor, change.key) ?? null;
-
-    // Special handling for FormulaField
-    if ( targetType === "formula" ) {
-      const changes = {};
-      if ( !field ) field = new FormulaField({ deterministic: true });
-      const delta = field._cast(change.value).trim();
-      this._applyFormulaField(actor, change, current, delta, changes);
-      foundry.utils.mergeObject(actor, changes);
-      return changes;
-    }
-
-    else if ( (targetType === "string") && (change.mode === modes.OVERRIDE) && change.value.includes("{}") ) {
-      change = foundry.utils.deepClone(change);
+    // Replace value when using string interpolation syntax
+    if ( (field instanceof StringField) && (change.mode === modes.OVERRIDE) && change.value.includes("{}") ) {
       change.value = change.value.replace("{}", current ?? "");
     }
 
-    let delta;
-    try {
-      if ( targetType === "Array" ) {
-        const innerType = getTargetType(field.element);
-        delta = this._castArray(change.value, innerType);
+    // If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
+    if ( (current === null) && [modes.UPGRADE, modes.DOWNGRADE].includes(change.mode) ) change.mode = modes.OVERRIDE;
+
+    // Handle removing entries from sets
+    if ( (field instanceof SetField) && (change.mode === modes.ADD) && (foundry.utils.getType(current) === "Set") ) {
+      for ( const value of field._castChangeDelta(change.value) ) {
+        const neg = value.replace(/^\s*-\s*/, "");
+        if ( neg !== value ) current.delete(neg);
+        else current.add(value);
       }
-      else delta = this._castDelta(change.value, targetType);
-    } catch(err) {
-      console.warn(`Actor [${actor.id}] | Unable to parse active effect change for ${change.key}: "${change.value}"`);
-      return;
+      return current;
     }
 
-    // Apply the change depending on the application mode
-    const changes = {};
-    switch ( change.mode ) {
-      case modes.ADD:
-        this._applyAdd(actor, change, current, delta, changes);
-        break;
-      case modes.MULTIPLY:
-        this._applyMultiply(actor, change, current, delta, changes);
-        break;
-      case modes.OVERRIDE:
-        this._applyOverride(actor, change, current, delta, changes);
-        break;
-      case modes.UPGRADE:
-      case modes.DOWNGRADE:
-        this._applyUpgrade(actor, change, current, delta, changes);
-        break;
-      default:
-        this._applyCustom(actor, change, current, delta, changes);
-        break;
+    // If attempting to apply active effect to empty MappingField entry, create it
+    if ( (current === undefined) && change.key.startsWith("system.") ) {
+      let keyPath = change.key;
+      let mappingField = field;
+      while ( !(mappingField instanceof MappingField) && mappingField ) {
+        if ( mappingField.name ) keyPath = keyPath.substring(0, keyPath.length - mappingField.name.length - 1);
+        mappingField = mappingField.parent;
+      }
+      if ( mappingField && (foundry.utils.getProperty(model, keyPath) === undefined) ) {
+        const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
+        foundry.utils.setProperty(model, keyPath, created);
+      }
     }
 
-    // Apply all changes to the Actor data
-    foundry.utils.mergeObject(actor, changes);
-    return changes;
+    return super.applyField(model, change, field);
   }
 
   /* -------------------------------------------- */
@@ -198,77 +165,15 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   _applyLegacy(actor, change, changes) {
     if ( this.system._applyLegacy?.(actor, change, changes) === false ) return;
+    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
+
+    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
+      const field = new FormulaField({ deterministic: true });
+      changes[change.key] = ActiveEffect5e.applyField(actor, change, field);
+      return;
+    }
+
     super._applyLegacy(actor, change, changes);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Custom application for FormulaFields.
-   * @param {Actor5e} actor                 The Actor to whom this effect should be applied
-   * @param {EffectChangeData} change       The change data being applied
-   * @param {string} current                The current value being modified
-   * @param {string} delta                  The parsed value of the change object
-   * @param {object} changes                An object which accumulates changes to be applied
-   */
-  _applyFormulaField(actor, change, current, delta, changes) {
-    if ( !current || change.mode === CONST.ACTIVE_EFFECT_MODES.OVERRIDE ) {
-      this._applyOverride(actor, change, current, delta, changes);
-      return;
-    }
-    const terms = (new Roll(current)).terms;
-    let fn = "min";
-    switch ( change.mode ) {
-      case CONST.ACTIVE_EFFECT_MODES.ADD:
-        const operator = delta.startsWith("-") ? "-" : "+";
-        delta = delta.replace(/^[+-]?/, "").trim();
-        changes[change.key] = `${current} ${operator} ${delta}`;
-        break;
-      case CONST.ACTIVE_EFFECT_MODES.MULTIPLY:
-        if ( terms.length > 1 ) changes[change.key] = `(${current}) * ${delta}`;
-        else changes[change.key] = `${current} * ${delta}`;
-        break;
-      case CONST.ACTIVE_EFFECT_MODES.UPGRADE:
-        fn = "max";
-      case CONST.ACTIVE_EFFECT_MODES.DOWNGRADE:
-        if ( (terms.length === 1) && (terms[0].fn === fn) ) {
-          changes[change.key] = current.replace(/\)$/, `, ${delta})`);
-        } else changes[change.key] = `${fn}(${current}, ${delta})`;
-        break;
-      default:
-        this._applyCustom(actor, change, current, delta, changes);
-        break;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _applyAdd(actor, change, current, delta, changes) {
-    if ( current instanceof Set ) {
-      const handle = v => {
-        const neg = v.replace(/^\s*-\s*/, "");
-        if ( neg !== v ) current.delete(neg);
-        else current.add(v);
-      };
-      if ( Array.isArray(delta) ) delta.forEach(item => handle(item));
-      else handle(delta);
-      return;
-    }
-    super._applyAdd(actor, change, current, delta, changes);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _applyOverride(actor, change, current, delta, changes) {
-    if ( current instanceof Set ) {
-      current.clear();
-      if ( Array.isArray(delta) ) delta.forEach(item => current.add(item));
-      else current.add(delta);
-      return;
-    }
-    return super._applyOverride(actor, change, current, delta, changes);
   }
 
   /* --------------------------------------------- */
@@ -410,7 +315,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
-   * Create additional effects that are applied separately from an enchantment.
+   * Create additional activities, effects, and items that are applied separately from an enchantment.
    * @param {object} options  Options passed to the effect creation.
    */
   async createRiderEnchantments(options={}) {
@@ -439,6 +344,20 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     if ( !profile || !item ) return;
 
+    // Create Activities
+    const riderActivities = {};
+    for ( const id of profile.riders.activity ) {
+      const activityData = item.system.activities.get(id)?.toObject();
+      if ( !activityData ) continue;
+      activityData._id = foundry.utils.randomID();
+      riderActivities[activityData._id] = activityData;
+    }
+    let createdActivities = [];
+    if ( !foundry.utils.isEmpty(riderActivities) ) {
+      await this.parent.update({ "system.activities": riderActivities });
+      createdActivities = Object.keys(riderActivities).map(id => this.parent.system.activities?.get(id));
+    }
+
     // Create Effects
     const riderEffects = profile.riders.effect.map(id => {
       const effectData = item.effects.get(id)?.toObject();
@@ -465,7 +384,9 @@ export default class ActiveEffect5e extends ActiveEffect {
       createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems.filter(i => i));
     }
 
-    if ( createdEffects.length || createdItems.length ) this.addDependent(...createdEffects, ...createdItems);
+    if ( createdActivities.length || createdEffects.length || createdItems.length ) {
+      this.addDependent(...createdActivities, ...createdEffects, ...createdItems);
+    }
   }
 
   /* -------------------------------------------- */
@@ -746,7 +667,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     <form class="dnd5e">
       <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
       <div class="form-group">
-        <label>${game.i18n.localize("DND5E.Source")}</label>
+        <label>${game.i18n.localize("DND5E.SOURCE.FIELDS.source.label")}</label>
         <div class="form-fields">
           <select name="source">${options}</select>
         </div>

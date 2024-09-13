@@ -1055,7 +1055,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    */
   _onDropResetData(itemData) {
     if ( !itemData.system ) return;
-    ["attuned", "equipped", "proficient", "prepared"].forEach(k => delete itemData.system[k]);
+    ["attuned", "equipped", "prepared"].forEach(k => delete itemData.system[k]);
   }
 
   /* -------------------------------------------- */

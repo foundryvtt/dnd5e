@@ -1,3 +1,5 @@
+import { areKeysPressed } from "../utils.mjs";
+
 const { Die, NumericTerm, OperatorTerm } = foundry.dice.terms;
 
 /**
@@ -76,10 +78,15 @@ export default class D20Roll extends Roll {
    *                                                              mode.
    */
   static determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward}={}) {
-    const isFF = fastForward ?? (event?.shiftKey || event?.altKey || event?.ctrlKey || event?.metaKey);
-    let advantageMode = this.ADV_MODE.NORMAL;
-    if ( advantage || event?.altKey ) advantageMode = this.ADV_MODE.ADVANTAGE;
-    else if ( disadvantage || event?.ctrlKey || event?.metaKey ) advantageMode = this.ADV_MODE.DISADVANTAGE;
+    const keys = {
+      normal: areKeysPressed(event, "skipDialogNormal"),
+      advantage: areKeysPressed(event, "skipDialogAdvantage"),
+      disadvantage: areKeysPressed(event, "skipDialogDisadvantage")
+    };
+    const isFF = fastForward ?? Object.values(keys).some(k => k);
+    let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
+    if ( advantage || keys.advantage ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
+    else if ( disadvantage || keys.disadvantage ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
     return {isFF: !!isFF, advantageMode};
   }
 

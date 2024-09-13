@@ -10,7 +10,7 @@
 
 // Import Configuration
 import DND5E from "./module/config.mjs";
-import { registerSystemSettings, registerDeferredSettings } from "./module/settings.mjs";
+import { registerSystemKeybindings, registerSystemSettings, registerDeferredSettings } from "./module/settings.mjs";
 
 // Import Submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -82,6 +82,7 @@ Hooks.once("init", function() {
 
   // Register System Settings
   registerSystemSettings();
+  registerSystemKeybindings();
 
   // Configure module art & register module data
   game.dnd5e.moduleArt = new ModuleArt();
@@ -406,6 +407,15 @@ function expandAttributeList(attributes) {
  * Perform one-time pre-localization and sorting of some configuration objects
  */
 Hooks.once("i18nInit", () => {
+  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
+    const trans = game.i18n.translations;
+    trans.TYPES.Item.race = trans.TYPES.Item.raceLegacy;
+    trans.TYPES.Item.racePl = trans.TYPES.Item.raceLegacyPl;
+    trans.DND5E.LanguagesExotic = trans.DND5E.LanguagesExoticLegacy;
+    trans.DND5E.TargetRadius = trans.DND5E.TargetRadiusLegacy;
+    foundry.utils.mergeObject(trans.DND5E.TraitArmorPlural, DND5E.TraitArmorLegacyPlural);
+    trans.DND5E.TraitArmorProf = trans.DND5E.TraitArmorLegacyProf;
+  }
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
 });
@@ -527,6 +537,15 @@ Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOpt
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
+
+// TODO: Generalize this logic and make it available in the re-designed transform application.
+Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
+  const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+  if ( (options.preset !== "wildshape") || !subject.classes?.druid || isLegacy ) return;
+  let temp = subject.classes.druid.system.levels;
+  if ( subject.classes.druid.subclass?.identifier === "moon" ) temp *= 3;
+  d.system.attributes.hp.temp = temp;
+});
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */

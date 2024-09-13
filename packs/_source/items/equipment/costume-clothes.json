@@ -2,7 +2,7 @@
   "_id": "E2h6sEe6FU2tnU96",
   "name": "Costume Clothes",
   "type": "equipment",
-  "img": "icons/equipment/back/cloak-hooded-pink.webp",
+  "img": "icons/equipment/head/crown-feather-brown.webp",
   "system": {
     "description": {
       "value": "<p>A complete costume usually used by performers and artists in all manner of entertainment halls or for those that simply refuse to get out of character.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -126,7 +127,8 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "costume-clothes"
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -141,7 +143,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037135672,
-    "modifiedTime": 1725037135672,
+    "modifiedTime": 1725992495704,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!E2h6sEe6FU2tnU96"

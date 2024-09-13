@@ -2,7 +2,6 @@ import Actor5e from "../../documents/actor/actor.mjs";
 import { splitSemicolons } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
-import IdentifierField from "../fields/identifier-field.mjs";
 import { CreatureTypeField, MovementField, SensesField } from "../shared/_module.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
@@ -12,17 +11,25 @@ const { ArrayField } = foundry.data.fields;
  * Data definition for Race items.
  * @mixes ItemDescriptionTemplate
  *
- * @property {string} identifier       Identifier slug for this race.
  * @property {object[]} advancement    Advancement objects for this race.
  * @property {MovementField} movement
  * @property {SensesField} senses
  * @property {CreatureType} type
  */
 export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({ label: "DND5E.Identifier" }),
       advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       movement: new MovementField(),
       senses: new SensesField(),

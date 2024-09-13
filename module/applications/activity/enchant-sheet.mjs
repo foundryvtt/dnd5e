@@ -39,6 +39,9 @@ export default class EnchantSheet extends ActivitySheet {
 
   /** @override */
   _prepareAppliedEffectContext(context, effect) {
+    effect.activityOptions = this.item.system.activities
+      .filter(a => a.id !== this.activity.id)
+      .map(a => ({ value: a.id, label: a.name, selected: effect.data.riders.activity.has(a.id) }));
     effect.effectOptions = context.allEffects.map(e => ({
       ...e, selected: effect.data.riders.effect.has(e.value)
     }));

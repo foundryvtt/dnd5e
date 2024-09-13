@@ -2,7 +2,7 @@
   "_id": "FHUDEygUW7EWCDgA",
   "name": "Vicious Scimitar",
   "type": "weapon",
-  "img": "icons/weapons/swords/sword-katana.webp",
+  "img": "icons/weapons/swords/scimitar-bone.webp",
   "system": {
     "description": {
       "value": "<p>This curved blade is wide near the wrapped handle but arcs and tapers towards a gleaming tip.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -179,7 +180,8 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "identifier": "vicious-scimitar"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -194,7 +196,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037142071,
-    "modifiedTime": 1725037142071,
+    "modifiedTime": 1725992497821,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!FHUDEygUW7EWCDgA"

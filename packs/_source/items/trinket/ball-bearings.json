@@ -2,7 +2,7 @@
   "_id": "3YSUIp4eFo26YxJr",
   "name": "Ball Bearings",
   "type": "consumable",
-  "img": "icons/commodities/gems/pearl-rock.webp",
+  "img": "icons/weapons/ammunition/shot-round-brown.webp",
   "system": {
     "description": {
       "value": "<p>As an action, you can spill these 1,000 tiny metal balls from their pouch to cover a level area 10 feet square. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone. A creature moving through the area at half speed doesn't need to make the saving throw.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1000,
     "weight": {
@@ -138,11 +139,12 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "ball-bearings"
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 800000,
   "ownership": {
     "default": 0
   },
@@ -153,7 +155,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037094429,
-    "modifiedTime": 1725037094429,
+    "modifiedTime": 1725992481901,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!3YSUIp4eFo26YxJr"

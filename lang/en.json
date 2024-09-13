@@ -1,12 +1,4 @@
 {
-"ACTOR.TypeCharacter": "Player Character",
-"ACTOR.TypeCharacterPl": "Player Characters",
-"ACTOR.TypeNpc": "Non-Player Character",
-"ACTOR.TypeNpcPl": "Non-Player Characters",
-"ACTOR.TypeVehicle": "Vehicle",
-"ACTOR.TypeVehiclePl": "Vehicles",
-"ACTOR.TypeGroup": "Group",
-
 "DOCUMENT.DND5E": {
   "Activity": "Activity"
 },
@@ -22,31 +14,6 @@
 
 "TYPES.ActiveEffect.enchantment": "Enchantment",
 "TYPES.ActiveEffect.enchantmentPl": "Enchantments",
-
-"ITEM.TypeBackground": "Background",
-"ITEM.TypeBackgroundPl": "Backgrounds",
-"ITEM.TypeContainer": "Container",
-"ITEM.TypeContainerPl": "Containers",
-"ITEM.TypeClass": "Class",
-"ITEM.TypeClassPl": "Classes",
-"ITEM.TypeConsumable": "Consumable",
-"ITEM.TypeConsumablePl": "Consumables",
-"ITEM.TypeEquipment": "Equipment",
-"ITEM.TypeEquipmentPl": "Equipment",
-"ITEM.TypeFeat": "Feature",
-"ITEM.TypeFeaturePl": "Features",
-"ITEM.TypeLoot": "Loot",
-"ITEM.TypeLootPl": "Loot",
-"ITEM.TypeRace": "Species",
-"ITEM.TypeRacePl": "Species",
-"ITEM.TypeSpell": "Spell",
-"ITEM.TypeSpellPl": "Spells",
-"ITEM.TypeSubclass": "Subclass",
-"ITEM.TypeSubclassPl": "Subclasses",
-"ITEM.TypeTool": "Tool",
-"ITEM.TypeToolPl": "Tools",
-"ITEM.TypeWeapon": "Weapon",
-"ITEM.TypeWeaponPl": "Weapons",
 
 "TYPES.Item.background": "Background",
 "TYPES.Item.backgroundPl": "Backgrounds",
@@ -64,6 +31,8 @@
 "TYPES.Item.lootPl": "Loot",
 "TYPES.Item.race": "Species",
 "TYPES.Item.racePl": "Species",
+"TYPES.Item.raceLegacy": "Race",
+"TYPES.Item.raceLegacyPl": "Races",
 "TYPES.Item.spell": "Spell",
 "TYPES.Item.spellPl": "Spells",
 "TYPES.Item.subclass": "Subclass",
@@ -540,11 +509,15 @@
     "Offhand": "Offhand",
     "OneHanded": "One-Handed",
     "Thrown": "Thrown",
+    "ThrownOffhand": "Offhand Throw",
     "TwoHanded": "Two-Handed"
   },
   "Type": {
     "Melee": "Melee",
     "Ranged": "Ranged"
+  },
+  "Warning": {
+    "NoQuantity": "Attempting to attack with a weapon with a quantity of zero."
   }
 },
 
@@ -636,8 +609,8 @@
         "hint": "Ability to use when making the check."
       },
       "associated": {
-        "label": "Associated Skill or Tool",
-        "hint": "Proficiency and bonuses with this skill or tool will contribute to the ability check."
+        "label": "Associated Skills or Tools",
+        "hint": "Present ability checks using proficiency and bonuses with these skills or tools."
       },
       "dc": {
         "label": "Difficulty Class",
@@ -702,7 +675,8 @@
   "Column": {
     "Icon": "Icon",
     "Name": "Name",
-    "Results": "Results"
+    "Results": "Results",
+    "Source": "Source"
   },
   "Filters": {
     "Label": "Filters",
@@ -729,6 +703,12 @@
       "Range": "Must select between {min} and {max} documents, {value} selected.",
       "Single": "Must select {max} {document}, {value} selected."
     }
+  },
+  "Sources": {
+    "Name": "Compendium Browser Sources",
+    "Label": "Configure Sources",
+    "FilterPackages": "Filter Packages",
+    "Hint": "Configure which compendium packs have their content available in the compendium browser."
   },
   "Tabs": {
     "Feat.other": "Feats",
@@ -947,7 +927,8 @@
   "Action": {
     "ConsumeResource": "Consume Resource",
     "Create": "Create Consumption Target",
-    "Delete": "Delete Consumption Target"
+    "Delete": "Delete Consumption Target",
+    "RefundResource": "Refund Resource"
   },
   "Scaling": {
     "Amount": "Amount",
@@ -1350,9 +1331,13 @@
         },
         "riders": {
           "label": "Attached",
+          "activity": {
+            "label": "Additional Activities",
+            "hint": "These additional activities will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
+          },
           "effect": {
             "label": "Additional Effects",
-            "hint": "These additional effects will be added to the enchanted item when this enchantment is added, and removed when the enchantment is removed."
+            "hint": "These additional effects will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
           },
           "item": {
             "label": "Additional Items",
@@ -1886,6 +1871,7 @@
 "DND5E.LanguagesDwarvish": "Dwarvish",
 "DND5E.LanguagesElvish": "Elvish",
 "DND5E.LanguagesExotic": "Rare Languages",
+"DND5E.LanguagesExoticLegacy": "Exotic Languages",
 "DND5E.LanguagesGiant": "Giant",
 "DND5E.LanguagesGith": "Gith",
 "DND5E.LanguagesGnoll": "Gnoll",
@@ -2314,15 +2300,43 @@
 "DND5E.SkillPassives": "Skill Passives",
 "DND5E.Skin": "Skin",
 "DND5E.Skip": "Skip",
-"DND5E.Source": "Source",
-"DND5E.SourceBook": "Book",
-"DND5E.SourceConfig": "Configure Source",
-"DND5E.SourceCustom": "Custom Label",
-"DND5E.SourceDisplay": "{book} {page}",
-"DND5E.SourceLicense": "License",
-"DND5E.SourcePage": "Page/Section",
-"DND5E.SourcePageDisplay": "pg. {page}",
-"DND5E.SourceUUID": "Original Source",
+
+"DND5E.SOURCE": {
+  "FIELDS": {
+    "source": {
+      "label": "Source",
+      "book": {
+        "label": "Book"
+      },
+      "custom": {
+        "label": "Custom Label"
+      },
+      "license": {
+        "label": "License"
+      },
+      "page": {
+        "label": "Page/Section"
+      },
+      "revision": {
+        "label": "Revision"
+      },
+      "rules": {
+        "label": "Rules Version"
+      },
+      "uuid": {
+        "label": "Original Source"
+      }
+    }
+  },
+  "Action": {
+    "Configure": "Configure Source"
+  },
+  "Display": {
+    "Full": "{book} {page}",
+    "Page": "pg. {page}"
+  }
+},
+
 "DND5E.Special": "Special",
 "DND5E.SpecialHint": "Special values separated by semi-colons.",
 "DND5E.SpecialTraits": "Special Traits",
@@ -2697,6 +2711,7 @@
 "DND5E.TargetLine": "Line",
 "DND5E.TargetObject": "Object",
 "DND5E.TargetRadius": "Emanation",
+"DND5E.TargetRadiusLegacy": "Radius",
 "DND5E.TargetSelf": "Self",
 "DND5E.TargetSpace": "Space",
 "DND5E.TargetSphere": "Sphere",
@@ -2771,6 +2786,9 @@
 "DND5E.TraitArmorPlural.one": "Armor Training",
 "DND5E.TraitArmorPlural.other": "Armor Training",
 "DND5E.TraitArmorProf": "Armor Training",
+"DND5E.TraitArmorLegacyPlural.one": "Armor Proficiency",
+"DND5E.TraitArmorLegacyPlural.other": "Armor Proficiencies",
+"DND5E.TraitArmorLegacyProf": "Armor Proficiencies",
 "DND5E.TraitCIPlural.one": "Condition Immunity",
 "DND5E.TraitCIPlural.other": "Condition Immunities",
 "DND5E.TraitConfig": "Configure {trait}",
@@ -3053,23 +3071,31 @@
 "EFFECT.DND5E": {
   "StatusBleeding": "Bleeding",
   "StatusBloodied": "Bloodied",
+  "StatusBurning": "Burning",
   "StatusBurrowing": "Burrowing",
   "StatusConcentrating": "Concentrating",
   "StatusCursed": "Cursed",
   "StatusDead": "Dead",
+  "StatusDehydration": "Dehydration",
   "StatusDodging": "Dodging",
   "StatusEncumbered": "Encumbered",
   "StatusEthereal": "Ethereal",
   "StatusExceedingCarryingCapacity": "Exceeding Carrying Capacity",
+  "StatusFalling": "Falling",
   "StatusFlying": "Flying",
+  "StatusHalfCover": "Half Cover",
   "StatusHeavilyEncumbered": "Heavily Encumbered",
   "StatusHiding": "Hiding",
   "StatusHovering": "Hovering",
+  "StatusMalnutrition": "Malnutrition",
   "StatusMarked": "Marked",
   "StatusSilenced": "Silenced",
   "StatusSleeping": "Sleeping",
   "StatusStable": "Stable",
+  "StatusSuffocation": "Suffocation",
   "StatusSurprised": "Surprised",
+  "StatusThreeQuartersCover": "Three-Quarters Cover",
+  "StatusTotalCover": "Total Cover",
   "StatusTransformed": "Transformed"
 },
 
@@ -3080,23 +3106,58 @@
 "TYPES.JournalEntryPage.subclass": "Subclass Summary",
 "JOURNALENTRYPAGE.DND5E": {
   "Class": {
-    "AdditionalEquipment": "Additional Equipment Description",
-    "AdditionalEquipmentHint": "Additional descriptive text displayed beneath the starting equipment section.",
-    "AdditionalHitPoints": "Additional Hit Points Description",
-    "AdditionalHitPointsHint": "Additional descriptive text displayed beneath the auto-generated hit points section.",
-    "AdditionalTraits": "Additional Proficiencies Description",
-    "AdditionalTraitsHint": "Additional descriptive text displayed beneath list of proficiencies granted by this class.",
-    "Description": "Introduction",
-    "DescriptionHint": "Primary description of the class that will appear first.",
+    "FIELDS": {
+      "description": {
+        "additionalEquipment": {
+          "label": "Additional Equipment Description",
+          "hint": "Additional descriptive text displayed beneath the starting equipment section."
+        },
+        "additionalHitPoints": {
+          "label": "Additional Hit Points Description",
+          "hint": "Additional descriptive text displayed beneath the auto-generated hit points section."
+        },
+        "additionalTraits": {
+          "label": "Additional Proficiencies Description",
+          "hint": "Additional descriptive text displayed beneath list of proficiencies granted by this class."
+        },
+        "subclass": {
+          "label": "Subclass Introduction",
+          "hint": "Introduction that will be displayed before this class's subclasses."
+        },
+        "value": {
+          "label": "Introduction",
+          "hint": "Primary description of the class that will appear first."
+        }
+      },
+      "item": {
+        "label": "Selected Class"
+      },
+      "style": {
+        "label": "Style",
+        "hint": "Force the page style to use modern or legacy formatting, rather than what is specified by the class."
+      },
+      "subclassHeader": {
+        "label": "Subclass Header"
+      },
+      "subclassItems": {
+        "label": "Subclasses"
+      }
+    },
     "EquipmentHeader": "Equipment",
     "EquipmentDescription": "You start with the following equipment, in addition to the equipment granted by your background:",
-    "FeaturesHeader": "Class Features",
-    "FeaturesDescription": "As a {lowercaseName}, you gain the following class features, which are summarized in the {name} table.",
-    "HitDice": "<strong>Hit Dice:</strong> {dice} per {class} level",
-    "HitPointsHeader": "Hit Points",
-    "HitPointsLevel1": "<strong>Hit Points at 1st Level:</strong> {max} + your Constitution modifier",
-    "HitPointsLevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your Constitution modifier per {class} level after 1st",
-    "Item": "Selected Class",
+    "Features": {
+      "DescriptionLegacy": "As a {lowercaseName}, you gain the following class features, which are summarized in the {name} table.",
+      "DescriptionModern": "As a {name}, you gain the following class features when you reach the specified {name} levels. These features are listed in the {name} Features table.",
+      "Header": "Class Features",
+      "Name": "Level {level}: {name}"
+    },
+    "HitPoints": {
+      "Header": "Hit Points",
+      "HitDiceLegacy": "<strong>Hit Dice:</strong> {dice} per {class} level",
+      "HitDiceModern": "{dice} per {class} level",
+      "Level1": "<strong>Hit Points at 1st Level:</strong> {max} + your Constitution modifier",
+      "LevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your Constitution modifier per {class} level after 1st"
+    },
     "ItemHint": "Drop a class here",
     "NoValidClass": "No valid class selected, press the edit button to add a class.",
     "OptionalFeaturesCaption": "Optional Class Features",
@@ -3104,14 +3165,18 @@
     "SpellSlotLevel": "Slot Level",
     "SpellSlots": "Spell Slots",
     "SpellSlotsPerSpellLevel": "—Spell Slots per Spell Level—",
-    "SubclassHeader": "Subclass Header",
+    "Style": {
+      "Inferred": "Inferred from Source",
+      "Legacy": "Legacy",
+      "Modern": "Modern"
+    },
     "SubclassHint": "Drop subclasses here",
-    "SubclassDescription": "Subclass Introduction",
-    "SubclassDescriptionHint": "Introduction that will be displayed before this class's subclasses.",
-    "SubclassItems": "Subclasses",
     "TableCaption": "The {class}",
     "TableOptionalCaption": "Optional {class} Features",
-    "TraitsHeader": "Proficiencies"
+    "Traits": {
+      "Caption": "Core {class} Traits",
+      "Header": "Proficiencies"
+    }
   },
   "EditDescription": "Edit",
   "TableTOC": "Table: {caption}",
@@ -3138,13 +3203,29 @@
     }
   },
   "Subclass": {
-    "Description": "Introduction",
-    "DescriptionHint": "Description of the subclass that will appear before any listed features.",
-    "Item": "Selected Subclass",
+    "FIELDS": {
+      "description": {
+        "value": {
+          "label": "Introduction",
+          "hint": "Description of the subclass that will appear before any listed features."
+        }
+      },
+      "item": {
+        "label": "Selected Subclass"
+      },
+      "style": {
+        "label": "Style",
+        "hint": "Force the page style to use modern or legacy formatting, rather than what is specified by the subclass."
+      }
+    },
     "ItemHint": "Drop a subclass here",
     "NoValidSubclass": "No valid subclass selected, press the edit button to add a subclass."
   }
 },
+
+"KEYBINDINGS.DND5E.SkipDialogNormal": "Skip Dialog",
+"KEYBINDINGS.DND5E.SkipDialogAdvantage": "Skip Dialog (roll with Advantage/Critical)",
+"KEYBINDINGS.DND5E.SkipDialogDisadvantage": "Skip Dialog (roll with Disadvantage)",
 
 "MACRO.5eMissingTargetWarn": "Your controlled actor '{actor}' does not have an {type} with name '{name}'.",
 "MACRO.5eMultipleTargetsWarn": "Your controlled actor '{actor}' has more than one {type} with name '{name}'. The first match will be chosen.",

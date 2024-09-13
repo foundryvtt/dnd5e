@@ -14,7 +14,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
       "max": "1",
@@ -118,13 +119,10 @@
     "prerequisites": {
       "level": null
     },
-    "properties": []
+    "properties": [],
+    "identifier": "steam-breath"
   },
-  "flags": {
-    "dnd5e": {
-      "migratedUses": null
-    }
-  },
+  "flags": {},
   "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
   "effects": [],
   "folder": null,
@@ -135,7 +133,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725304965735,
-    "modifiedTime": 1725304965735,
+    "modifiedTime": 1725992571061,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!4UuuUKjATTixrZGP"

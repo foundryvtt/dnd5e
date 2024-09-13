@@ -2,7 +2,7 @@
   "_id": "46ikeR4RrSim6DsN",
   "name": "Talisman of the Sphere",
   "type": "consumable",
-  "img": "icons/magic/unholy/orb-beam-pink.webp",
+  "img": "icons/commodities/treasure/broach-jeweled-pink.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>When you make an Intelligence (Arcana) check to control a Sphere of Annihilation while you are holding this talisman, you double your proficiency bonus on the check. In addition, when you start your turn with control over a Sphere of Annihilation, you can use an action to levitate it 10 feet plus a number of additional feet equal to 10 × your Intelligence modifier.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -128,11 +129,12 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "talisman-of-the-sphere"
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 1100000,
   "ownership": {
     "default": 0
   },
@@ -143,7 +145,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037098121,
-    "modifiedTime": 1725037098121,
+    "modifiedTime": 1725992483211,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!46ikeR4RrSim6DsN"

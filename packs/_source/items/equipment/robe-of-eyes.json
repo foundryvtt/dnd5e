@@ -2,7 +2,7 @@
   "_id": "U74TPNQLJZbHJyCk",
   "name": "Robe of Eyes",
   "type": "equipment",
-  "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
+  "img": "icons/equipment/head/hood-red.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>This robe is adorned with eyelike patterns. While you wear the robe, you gain the following benefits:</p>\n<ul>\n<li>The robe lets you see in all directions, and you have advantage on Wisdom (Perception) checks that rely on sight.</li>\n<li>You have darkvision out to a range of 120 feet.</li>\n<li>You can see invisible creatures and objects, as well as see into the Ethereal Plane, out to a range of 120 feet.</li>\n</ul>\n<p>The eyes on the robe can't be closed or averted. Although you can close or avert your own eyes, you are never considered to be doing so while wearing this robe.</p>\n<p>A @UUID[Compendium.dnd5e.spells.Item.Bnn9Nzajixvow9xi]{Light} spell cast on the robe or a @UUID[Compendium.dnd5e.spells.Item.BP3GCwa66IAw1yTG]{Daylight} spell cast within 5 feet of the robe causes you to be blinded for 1 minute. At the end of each of your turns, you can make a Constitution saving throw (DC 11 for light or DC 15 for daylight), ending the blindness on a success.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -134,7 +135,8 @@
         "sort": 0
       }
     },
-    "attuned": false
+    "attuned": false,
+    "identifier": "robe-of-eyes"
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -149,7 +151,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037196157,
-    "modifiedTime": 1725037196157,
+    "modifiedTime": 1725992516112,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!U74TPNQLJZbHJyCk"

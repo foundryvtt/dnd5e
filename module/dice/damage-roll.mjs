@@ -1,3 +1,7 @@
+import DamageRollConfigurationDialog from "../applications/dice/damage-configuration-dialog.mjs";
+import { areKeysPressed } from "../utils.mjs";
+import BasicRoll from "./basic-roll.mjs";
+
 const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, StringTerm } = foundry.dice.terms;
 
 /**
@@ -43,56 +47,58 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
 
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
- * @param {string} formula                       The string formula to parse
- * @param {object} data                          The data object against which to parse attributes within the formula
- * @param {object} [options={}]                  Extra optional arguments which describe or modify the DamageRoll
- * @param {number} [options.criticalBonusDice=0]      A number of bonus damage dice that are added for critical hits
- * @param {number} [options.criticalMultiplier=2]     A critical hit multiplier which is applied to critical hits
- * @param {boolean} [options.multiplyNumeric=false]   Multiply numeric terms by the critical multiplier
- * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
- * @param {string} [options.criticalBonusDamage]      An extra damage term that is applied only on a critical hit
+ * @param {string} formula                  The string formula to parse.
+ * @param {object} data                     The data object against which to parse attributes within the formula.
+ * @param {DamageRollOptions} [options={}]  Extra optional arguments which describe or modify the DamageRoll.
  */
-export default class DamageRoll extends Roll {
+export default class DamageRoll extends BasicRoll {
   constructor(formula, data, options) {
     super(formula, data, options);
     if ( !this.options.preprocessed ) this.preprocessFormula();
-    // For backwards compatibility, skip rolls which do not have the "critical" option defined
-    if ( (this.options.critical !== undefined) && !this.options.configured ) this.configureDamage();
+    if ( !this.options.configured ) this.configureDamage();
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Create a DamageRoll from a standard Roll instance.
-   * @param {Roll} roll
-   * @returns {DamageRoll}
-   */
-  static fromRoll(roll) {
-    const newRoll = new this(roll.formula, roll.data, roll.options);
-    Object.assign(newRoll, roll);
-    return newRoll;
+  /** @inheritDoc */
+  static DefaultConfigurationDialog = DamageRollConfigurationDialog;
+
+  /* -------------------------------------------- */
+  /*  Static Construction                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static applyKeybindings(config, dialog, message) {
+    const keys = {
+      normal: areKeysPressed(config.event, "skipDialogNormal")
+        || areKeysPressed(config.event, "skipDialogDisadvantage"),
+      critical: areKeysPressed(config.event, "skipDialogAdvantage")
+    };
+
+    // Should the roll configuration dialog be displayed?
+    dialog.configure ??= Object.values(keys).every(k => !k);
+
+    // Determine critical mode
+    for ( const roll of config.rolls ) {
+      roll.options ??= {};
+      roll.options.isCritical ??= keys.critical;
+    }
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * The HTML template path used to configure evaluation of this Roll
-   * @type {string}
-   */
-  static EVALUATION_TEMPLATE = "systems/dnd5e/templates/chat/roll-dialog.hbs";
-
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
-   * A convenience reference for whether this DamageRoll is a critical hit
+   * Is this damage critical.
    * @type {boolean}
    */
   get isCritical() {
-    return this.options.critical;
+    return this.options.isCritical === true;
   }
 
   /* -------------------------------------------- */
-  /*  Damage Roll Methods                         */
+  /*  Roll Configuration                          */
   /* -------------------------------------------- */
 
   /**
@@ -144,7 +150,7 @@ export default class DamageRoll extends Roll {
     }
 
     // Re-compile the underlying formula
-    this._formula = this.constructor.getFormula(this.terms);
+    this.resetFormula();
 
     // Mark configuration as complete
     this.options.preprocessed = true;
@@ -154,9 +160,14 @@ export default class DamageRoll extends Roll {
 
   /**
    * Apply optional modifiers which customize the behavior of the d20term.
+   * @param {object} [options={}]
+   * @param {CriticalDamageConfiguration} [options.critical={}]  Critical configuration to take into account, will be
+   *                                                             superseded by the roll's configuration.
    * @protected
    */
-  configureDamage() {
+  configureDamage({ critical={} }={}) {
+    foundry.utils.mergeObject(critical, this.options.critical ?? {});
+
     const flatBonus = new Map();
     for ( let [i, term] of this.terms.entries() ) {
       // Multiply dice terms
@@ -169,10 +180,10 @@ export default class DamageRoll extends Roll {
         term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
         term.number = term.options.baseNumber;
         if ( this.isCritical ) {
-          let cm = this.options.criticalMultiplier ?? 2;
+          let cm = critical.multiplier ?? 2;
 
           // Powerful critical - maximize damage and reduce the multiplier by 1
-          if ( this.options.powerfulCritical ) {
+          if ( critical.powerfulCritical ) {
             const bonus = Roll.create(term.formula).evaluateSync({ maximize: true }).total;
             if ( bonus > 0 ) {
               const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
@@ -182,25 +193,25 @@ export default class DamageRoll extends Roll {
           }
 
           // Alter the damage term
-          let cb = (this.options.criticalBonusDice && (i === 0)) ? this.options.criticalBonusDice : 0;
+          let cb = (critical.bonusDice && (i === 0)) ? critical.bonusDice : 0;
           term.alter(cm, cb);
           term.options.critical = true;
         }
       }
 
       // Multiply numeric terms
-      else if ( this.options.multiplyNumeric && (term instanceof NumericTerm) ) {
+      else if ( critical.multiplyNumeric && (term instanceof NumericTerm) ) {
         term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
         term.number = term.options.baseNumber;
         if ( this.isCritical ) {
-          term.number *= (this.options.criticalMultiplier ?? 2);
+          term.number *= (critical.multiplier ?? 2);
           term.options.critical = true;
         }
       }
     }
 
     // Add powerful critical bonus
-    if ( this.options.powerfulCritical && flatBonus.size ) {
+    if ( critical.powerfulCritical && flatBonus.size ) {
       for ( const [type, number] of flatBonus.entries() ) {
         this.terms.push(new OperatorTerm({operator: "+"}));
         this.terms.push(new NumericTerm({number, options: {flavor: type}}));
@@ -208,73 +219,17 @@ export default class DamageRoll extends Roll {
     }
 
     // Add extra critical damage term
-    if ( this.isCritical && this.options.criticalBonusDamage ) {
-      const extra = new Roll(this.options.criticalBonusDamage, this.data);
+    if ( this.isCritical && critical.bonusDamage ) {
+      const extra = new Roll(critical.bonusDamage, this.data);
       if ( !(extra.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms.push(...extra.terms);
     }
 
     // Re-compile the underlying formula
-    this._formula = this.constructor.getFormula(this.terms);
+    this.resetFormula();
 
     // Mark configuration as complete
     this.options.configured = true;
-  }
-
-  /* -------------------------------------------- */
-  /*  Chat Messages                               */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  toMessage(messageData={}, options={}) {
-    return this.constructor.toMessage([this], messageData, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Transform a Roll instance into a ChatMessage, displaying the roll result.
-   * This function can either create the ChatMessage directly, or return the data object that will be used to create.
-   *
-   * @param {DamageRoll[]} rolls             Rolls to add to the message.
-   * @param {object} messageData             The data object to use when creating the message.
-   * @param {options} [options]              Additional options which modify the created message.
-   * @param {string} [options.rollMode]      The template roll mode to use for the message from CONFIG.Dice.rollModes.
-   * @param {boolean} [options.create=true]  Whether to automatically create the chat message, or only return the
-   *                                         prepared chatData object.
-   * @returns {Promise<ChatMessage|object>}  A promise which resolves to the created ChatMessage document if create is
-   *                                         true, or the Object of prepared chatData otherwise.
-   */
-  static async toMessage(rolls, messageData={}, {rollMode, create=true}={}) {
-    rollMode = rolls.at(-1)?.options.rollMode ?? rollMode ?? game.settings.get("core", "rollMode");
-    let isCritical = false;
-    for ( const roll of rolls ) {
-      if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
-      messageData.flavor ??= roll.options.flavor;
-      isCritical ||= roll.isCritical;
-    }
-    if ( isCritical ) {
-      const label = game.i18n.localize("DND5E.CriticalHit");
-      messageData.flavor = messageData.flavor ? `${messageData.flavor} (${label})` : label;
-    }
-
-    // Prepare chat data
-    messageData = foundry.utils.mergeObject({
-      user: game.user.id,
-      sound: CONFIG.sounds.dice
-    }, messageData);
-    messageData.rolls = rolls;
-
-    // Either create the message or just return the chat data
-    const cls = getDocumentClass("ChatMessage");
-    const msg = new cls(messageData);
-
-    // Either create or return the data
-    if ( create ) return cls.create(msg.toObject(), { rollMode });
-    else {
-      if ( rollMode ) msg.applyRollMode(rollMode);
-      return msg.toObject();
-    }
   }
 
   /* -------------------------------------------- */
@@ -315,86 +270,13 @@ export default class DamageRoll extends Roll {
    */
   static async configureDialog(rolls, {
     title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
-
-    const damageTypeLabel = k => CONFIG.DND5E.damageTypes[k]?.label ?? CONFIG.DND5E.healingTypes[k]?.label;
-
-    // Render the Dialog inner HTML
-    const content = await renderTemplate(template ?? this.EVALUATION_TEMPLATE, {
-      formulas: rolls.map((roll, index) => ({
-        formula: `${roll.formula}${index === 0 ? " + @bonus" : ""}`,
-        type: roll.options.types?.length > 1 ? null
-          : damageTypeLabel(roll.options.type ?? roll.options.types?.[0]) ?? null,
-        types: roll.options.types?.length > 1 ? roll.options.types?.map(value =>
-          ({ value, label: damageTypeLabel(value), selected: value === roll.options.type })
-        ) : null
-      })),
-      defaultRollMode,
-      rollModes: CONFIG.Dice.rollModes
-    });
-
-    const handleSubmit = (html, isCritical) => {
-      const formData = new FormDataExtended(html[0].querySelector("form"));
-      const submitData = foundry.utils.expandObject(formData.object);
-      return rolls.map((r, i) => r._onDialogSubmit(submitData, isCritical, i));
-    };
-
-    // Create the Dialog window and await submission of the form
-    return new Promise(resolve => {
-      new Dialog({
-        title,
-        content,
-        buttons: {
-          critical: {
-            condition: allowCritical,
-            label: game.i18n.localize("DND5E.CriticalHit"),
-            callback: html => resolve(handleSubmit(html, true))
-          },
-          normal: {
-            label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
-            callback: html => resolve(handleSubmit(html, false))
-          }
-        },
-        default: defaultCritical ? "critical" : "normal",
-        close: () => resolve(null)
-      }, options).render(true);
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle submission of the Roll evaluation configuration Dialog
-   * @param {object} submitData   The submitted dialog data.
-   * @param {boolean} isCritical  Is the damage a critical hit?
-   * @param {number} index        Index of the roll.
-   * @returns {DamageRoll}        This damage roll.
-   * @private
-   */
-  _onDialogSubmit(submitData, isCritical, index) {
-    // Set damage types on rolls
-    const rollData = submitData.roll?.[index] ?? {};
-    if ( rollData.type ) this.options.type = rollData.type;
-
-    // Append a situational bonus term
-    if ( submitData.bonus && (index === 0) ) {
-      const bonus = new DamageRoll(submitData.bonus, this.data);
-      if ( !(bonus.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
-      this.terms = this.terms.concat(bonus.terms);
-    }
-
-    // Apply advantage or disadvantage
-    this.options.critical = isCritical;
-    this.options.rollMode = submitData.rollMode;
-    this.configureDamage();
-    return this;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static fromData(data) {
-    const roll = super.fromData(data);
-    roll._formula = this.getFormula(roll.terms);
-    return roll;
+    foundry.utils.logCompatibilityWarning(
+      "The `configureDialog` on DamageRoll has been deprecated and is now handled through `DamageRoll.build`.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
+    const DialogClass = this.DefaultConfigurationDialog;
+    return await DialogClass.configure(
+      { critical: { allow: allowCritical } }, { options: { title } }, { rollMode: defaultRollMode }
+    );
   }
 }

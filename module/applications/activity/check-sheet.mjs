@@ -33,21 +33,23 @@ export default class CheckSheet extends ActivitySheet {
   async _prepareEffectContext(context) {
     context = await super._prepareEffectContext(context);
 
+    const group = game.i18n.localize("DND5E.Abilities");
     context.abilityOptions = [
       { value: "", label: "" },
       { rule: true },
-      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label }))
+      { value: "spellcasting", label: game.i18n.localize("DND5E.SpellAbility") },
+      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label, group }))
     ];
     let ability;
-    if ( this.item.type === "tool" ) ability = CONFIG.DND5E.abilities[this.item.system.ability]?.label?.toLowerCase();
-    else if ( this.activity.checkType === "skill" ) ability = CONFIG.DND5E.abilities[
-      CONFIG.DND5E.skills[this.activity.check.associated].ability
-    ]?.label?.toLowerCase();
+    const associated = this.activity.check.associated;
+    if ( (this.item.type === "tool") && !associated.size ) {
+      ability = CONFIG.DND5E.abilities[this.item.system.ability]?.label?.toLowerCase();
+    } else if ( (associated.size === 1) && (associated.first() in CONFIG.DND5E.skills) ) {
+      ability = CONFIG.DND5E.abilities[CONFIG.DND5E.skills[associated.first()].ability]?.label?.toLowerCase();
+    }
     if ( ability ) context.abilityOptions[0].label = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
 
     context.associatedOptions = [
-      { value: "", label: this.item.type === "tool" ? game.i18n.format("DND5E.DefaultSpecific", {
-        default: game.i18n.localize("DND5E.CHECK.ThisTool").toLowerCase() }) : "" },
       ...Object.entries(CONFIG.DND5E.skills).map(([value, { label }]) => ({
         value, label, group: game.i18n.localize("DND5E.Skills")
       })),
@@ -60,9 +62,7 @@ export default class CheckSheet extends ActivitySheet {
       { value: "", label: game.i18n.localize("DND5E.SAVE.FIELDS.save.dc.CustomFormula") },
       { rule: true },
       { value: "spellcasting", label: game.i18n.localize("DND5E.SpellAbility") },
-      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({
-        value, label: config.label, group: game.i18n.localize("DND5E.Abilities")
-      }))
+      ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({ value, label: config.label, group }))
     ];
 
     return context;

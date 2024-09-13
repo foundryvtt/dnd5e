@@ -347,6 +347,7 @@
                             {{#if itemId}}data-item-id="{{ itemId }}"{{/if}}
                             {{#if effectId}}data-effect-id="{{ effectId }}"{{/if}}
                             {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}
+                            {{#if activityId}}data-activity-id="{{ activityId }}" data-action="useFavorite"{{/if}}
                             {{#if reference}}data-reference-tooltip="{{ reference }}"{{/if}}
                             {{#if preparationMode}}data-preparation-mode="{{ preparationMode }}"{{/if}}
                             {{#if level}}data-level="{{ level }}"{{/if}}
@@ -367,8 +368,7 @@
                             </figure>
 
                             {{!-- Name --}}
-                            <div class="name-stacked {{ rollableClass }}"
-                                 role="button" data-action="useFavorite">
+                            <div class="name-stacked {{ rollableClass }}" role="button" data-action="useFavorite">
                                 <span class="title">{{ title }}</span>
                                 {{#if subtitle}}
                                 <span class="subtitle">{{{ subtitle }}}</span>
@@ -379,7 +379,7 @@
                             <div class="info">
                                 <div class="primary {{ css }}">
                                     {{!-- Item Uses & Capacity --}}
-                                    {{#if uses}}
+                                    {{#if uses.max}}
                                     {{#with uses}}
                                     {{#if (and name @root.actor.isOwner)}}
                                     <input type="text" class="uninput value" value="{{ value }}"

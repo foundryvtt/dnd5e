@@ -2,7 +2,7 @@
   "_id": "pC3202gDTy8G5i4r",
   "name": "Vicious Longsword",
   "type": "weapon",
-  "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+  "img": "icons/weapons/swords/sword-guard-flanged.webp",
   "system": {
     "description": {
       "value": "<p>A lengthy straight blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p><p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
     "weight": {
@@ -41,8 +42,8 @@
     },
     "damage": {
       "versatile": {
-        "number": 1,
-        "denomination": 10,
+        "number": null,
+        "denomination": 0,
         "bonus": "",
         "types": [],
         "custom": {
@@ -178,7 +179,9 @@
       }
     },
     "attuned": false,
-    "ammunition": {}
+    "ammunition": {},
+    "mastery": "",
+    "identifier": "vicious-longsword"
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -193,7 +196,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725037290317,
-    "modifiedTime": 1725037290317,
+    "modifiedTime": 1725992547645,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!pC3202gDTy8G5i4r"
