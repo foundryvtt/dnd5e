@@ -1487,7 +1487,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     /**
      * A hook event that fires before a tool check is rolled for an Actor.
-     * @function dnd5e.preRollRool
+     * @function dnd5e.preRollToolCheck
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the tool check is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
@@ -1500,7 +1500,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     /**
      * A hook event that fires after a tool check has been rolled for an Actor.
-     * @function dnd5e.rollTool
+     * @function dnd5e.rollToolCheck
      * @memberof hookEvents
      * @param {Actor5e} actor   Actor for which the tool check has been rolled.
      * @param {D20Roll} roll    The resulting roll.
