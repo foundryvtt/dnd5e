@@ -17,7 +17,7 @@ export function registerSystemKeybindings() {
 
   game.keybindings.register("dnd5e", "skipDialogDisadvantage", {
     name: "KEYBINDINGS.DND5E.SkipDialogDisadvantage",
-    editable: [{ key: "CtrlLeft" }, { key: "CtrlRight" }, { key: "OsLeft" }, { key: "OsRight" }]
+    editable: [{ key: "ControlLeft" }, { key: "ControlRight" }, { key: "OsLeft" }, { key: "OsRight" }]
   });
 }
 

@@ -235,7 +235,7 @@ export function staticID(id) {
  * Based on the provided event, determine if the keys are pressed to fulfill the specified keybinding.
  * @param {Event} event    Triggering event.
  * @param {string} action  Keybinding action within the `dnd5e` namespace.
- * @returns {boolean}      Is the keybinding is triggered?
+ * @returns {boolean}      Is the keybinding triggered?
  */
 export function areKeysPressed(event, action) {
   if ( !event ) return false;
