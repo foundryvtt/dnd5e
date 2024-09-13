@@ -101,7 +101,7 @@ This functions similarly to a system macro, as if you had dragged that item to t
 
 **By Item & Activity Name**: `[[/item Bite activity=Poison]]`
 
-Using the item name without an activity will cause the activity selection dialog to open if more than one activity is present. To trigger a specific activity on the item the activity name can be included. The activity name must be proceeded by `activity=`, and it must be wrapped in paranthesis if there is a space in the name (e.g. `[[/item Tentacles activity="Escape Tentacles"]]`).
+Using the item name without an activity will cause the activity selection dialog to open if more than one activity is present. To trigger a specific activity on the item the activity name can be included. The activity name must be proceeded by `activity=`, and it must be wrapped in quotes if there is a space in the name (e.g. `[[/item Tentacles activity="Escape Tentacles"]]`).
 
 **By UUID**: `[[/item Actor.p26xCjCCTQm5fRN3.Item.amUUCouL69OK1GZU]]`
 
