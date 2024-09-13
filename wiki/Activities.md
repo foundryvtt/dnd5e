@@ -5,11 +5,11 @@ The activities system is a new method for adding things that can be done by an i
 
 ## Creating Activities
 
-![Item Sheet - Activities Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/activity-tab.jpg)
+![Item Sheet - Activities Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-tab.jpg)
 
 Activities are created on items through the "Activities" tab, using the plus button.
 
-![Activity Creation Dialog](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/activity-creation.jpg)
+![Activity Creation Dialog](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-creation.jpg)
 
 Clicking the plus button brings up the Create Activity dialog with a list of activity types that can be created. After selecting one of these options, optionally entering a name, and clicking "Create New Activity" the sheet for the new activity will be opened.
 
@@ -32,7 +32,7 @@ While parts of the activity sheet change based on the selected activity type, ma
 
 ### Identity
 
-![Activity Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/activity-identity.jpg)
+![Activity Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-identity.jpg)
 
 The first tab that appears is the "Identity" tab which contains details on how the activity is present and how it behaves:
 - *Name*: Name for the activity, will default to the name of the activity type if none is provided
@@ -46,7 +46,7 @@ The "Activation" tab contains three sub-tabs: "Time", "Consumption", and "Target
 
 #### Time
 
-![Activity Sheet - Time Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/activity-time.jpg)
+![Activity Sheet - Time Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-time.jpg)
 
 The "Activation" section contains details on how long it takes to use the activity and under what conditions it can be used. If activation data is provided by the item (such as on spells), this will default to the details from the item but can be overridden using a checkbox next to the name.
 
@@ -54,7 +54,7 @@ The "Duration" section contains details on how long the usage of the activity la
 
 #### Consumption
 
-![Activity Sheet - Consumption Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/activity-consumption.jpg)
+![Activity Sheet - Consumption Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-consumption.jpg)
 
 The "Consumption" section contains a list of consumption targets with details on what is consumed, how much, and how the consumption scales if scaling is permitted. Multiple consumption targets can be defined and used separately in the usage dialog.
 
@@ -64,12 +64,12 @@ The "Usage" and "Recovery" sections contain details on a limited pool of uses th
 
 #### Targeting
 
-![Activity Sheet - Targeting Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/activity-targeting.jpg)
+![Activity Sheet - Targeting Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-targeting.jpg)
 
 The "Range", "Targets", and "Area" sections contain details on where and who the activity can affect. These three fields can also be derived from the item data if present.
 
 ### Effect
 
-![Activity Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/activity-effect.jpg)
+![Activity Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-effect.jpg)
 
 The final tab will vary the most between different activity types. Most activity types contain an "Applied Effects" list which specifies what Active Effects present on the item will be available to apply to targets through the chat card. The dropdown allows for selecting existing effects on the item, or the plus button can be used to create a new Active Effect.
