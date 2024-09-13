@@ -7,7 +7,7 @@ The Save activity allows for calling for saving throws and rolling damage.
 
 After creating the Save activity the configuration sheet will open. Navigate over to the "Effect" tab to see options specific to the Save activity.
 
-![Save Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/save-effect.jpg)
+![Save Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/save-effect.jpg)
 
 The "Save Details" section contains values used to determine what kind of save is rolled and what the target DC is:
 - *Challenge Ability*: Controls what ability must be used when rolling the saving throw

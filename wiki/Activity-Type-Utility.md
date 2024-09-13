@@ -7,11 +7,11 @@ The Utility activity allows for rolling an arbitrary formula, adding effects, or
 
 After creating the Utility activity the configuration sheet will open to the "Identity" tab. In addition to the standard activity identity options (see the [Activities Overview](Activities.md) for more details), Utility also includes a *Utility Roll Prompt* option. This controls whether the rolling dialog is shown when rolling the utility roll (if present).
 
-![Utility Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/utility-identity.jpg)
+![Utility Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/utility-identity.jpg)
 
 ### Utility Roll
 
-![Utility Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/utility-effect.jpg)
+![Utility Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/utility-effect.jpg)
 
 The "Effect" tab contains the configuration information for the utility roll:
 - *Roll Label*: Label used for the rolling button in place of the default "Roll" label

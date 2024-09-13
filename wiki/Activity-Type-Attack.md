@@ -7,7 +7,7 @@ The Attack activity allows for making attacks and rolling damage.
 
 Using the attack activity will place an attack card into the chat log, with "Attack" and "Damage" buttons (assuming damage has been defined for the attack, otherwise only the "Attack" button will appear). Clicking on these buttons will open the standard rolling prompts.
 
-![Attack Card & Dialogs](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enchantment/attack-chat-dialog.jpg)
+![Attack Card & Dialogs](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/attack-chat-dialog.jpg)
 
 When making an attack with a weapon, a few additional options may appear in the attack roll dialog:
 - *Ammunition*: For weapons with the Ammunition property, the ammunition used with the attack will be selectable. This ammo will add a bonus to the attack roll if it has a magical bonus and bonuses to the subsequent damage rolled using the same attack card
@@ -19,13 +19,13 @@ When making an attack with a weapon, a few additional options may appear in the 
 
 After creating the Attack activity the configuration sheet will open on the "Identity" tab. In addition to the standard activity options (see the [Activities Overview](Activities.md) for more details), Attack also includes a pair of properties for defining the attack type. *Attack Type* indicates whether this is a melee or ranged attack, and *Attack Classification* indicates whether it is a weapon, spell, or unarmed attack. These values affect what bonuses are applied to attack and damage rolls from the actor. If possible, these values will be populated by default values from the containing item.
 
-![Attack Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/attack-identity.jpg)
+![Attack Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/attack-identity.jpg)
 
 ### Attack Details & Damage
 
 The "Effect" tab contains the rest of the unique properties for the Attack activity, split into sections defining attack and damage details.
 
-![Attack Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/attack-effect.jpg)
+![Attack Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/attack-effect.jpg)
 
 The "Attack Details" section contains values used to calculate the attack roll itself:
 - *Attack Ability*: Ability used to make the attack and available as `@mod` in damage formulas

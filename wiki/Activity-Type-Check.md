@@ -7,13 +7,13 @@ The Check activity allows for calling for ability checks including those that us
 
 When the check activity is used it will place buttons in chat for each of the checks defined in the activity.
 
-![Check Chat Card](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/check-card.jpg)
+![Check Chat Card](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/check-card.jpg)
 
 ## Configuring Checks
 
 After creating the Check activity the configuration sheet will open. Navigate over to the "Effect" tab to see options specific to the Check activity.
 
-![Check Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/check-effect.jpg)
+![Check Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/check-effect.jpg)
 
 The "Check Details" section contains values used to determine what kind of checks are rolled and what the target DC is:
 - *Associated Skills or Tools*: One or more skills or tools to create checks for. If left blank, then a single ability check will be created instead
