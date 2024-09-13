@@ -182,7 +182,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
      * @memberof hookEvents
      * @param {SummonActivity} activity         The activity that is performing the summoning.
      * @param {SummonsProfile} profile          Profile used for summoning.
-     * @param {SummoningConfiguration} options  Additional summoning options.
+     * @param {SummoningConfiguration} options  Configuration data for summoning behavior.
      * @returns {boolean}                       Explicitly return `false` to prevent summoning.
      */
     if ( Hooks.call("dnd5e.preSummon", this, profile, options) === false ) return;
@@ -220,7 +220,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
          * @param {SummonActivity} activity         The activity that is performing the summoning.
          * @param {SummonsProfile} profile          Profile used for summoning.
          * @param {TokenUpdateData} config          Configuration for creating a modified token.
-         * @param {SummoningConfiguration} options  Additional summoning options.
+         * @param {SummoningConfiguration} options  Configuration data for summoning behavior.
          * @returns {boolean}                       Explicitly return `false` to prevent this token from being summoned.
          */
         if ( Hooks.call("dnd5e.preSummonToken", this, profile, tokenUpdateData, options) === false ) continue;
@@ -235,7 +235,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
          * @param {SummonActivity} activity         The activity that is performing the summoning.
          * @param {SummonsProfile} profile          Profile used for summoning.
          * @param {object} tokenData                Data for creating a token.
-         * @param {SummoningConfiguration} options  Additional summoning options.
+         * @param {SummoningConfiguration} options  Configuration data for summoning behavior.
          */
         Hooks.callAll("dnd5e.summonToken", this, profile, tokenData, options);
 
