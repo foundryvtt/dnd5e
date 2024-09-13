@@ -29,7 +29,7 @@ The `[[/check]]`, `[[/skill]]`, `[[/tool]]` starting terms are all interchangeab
 
 For skill checks, the ability is optional. If one is provided then the person rolling have that ability selected by default even if it isn't the default on their sheet. Otherwise they will use whatever ability is set for that skill on their character sheet.
 
-For tool checks, the ability is required. A check like `[[/tool thief]]` will not parse because the ability must be explicitly set like `[[/tool thief dex]]`. A list of the tool ids to use for this enricher is provided below.  
+For tool checks, the ability is required. A check like `[[/tool thief]]` will not parse because the ability must be explicitly set like `[[/tool thief dex]]`. A list of the tool ids to use for this enricher is provided below.
 
 > <details>
 > <summary>Tool Ids</summary>
@@ -99,6 +99,10 @@ Item enrichers allow you to use an item from an enriched link. There are several
 
 This functions similarly to a system macro, as if you had dragged that item to the macro hotbar. When clicked, it will check for a selected token, or your assigned actor. If the token or actor has an item of a matching name, it will be used, otherwise a warning will be displayed.
 
+**By Item & Activity Name**: `[[/item Bite activity=Poison]]`
+
+Using the item name without an activity will cause the activity selection dialog to open if more than one activity is present. To trigger a specific activity on the item the activity name can be included. The activity name must be proceeded by `activity=`, and it must be wrapped in quotes if there is a space in the name (e.g. `[[/item Tentacles activity="Escape Tentacles"]]`).
+
 **By UUID**: `[[/item Actor.p26xCjCCTQm5fRN3.Item.amUUCouL69OK1GZU]]`
 
 A UUID contains references to an Actor and an Item it owns. When clicked, the enricher will find the specified Actor and use the specified Item.
@@ -106,6 +110,8 @@ A UUID contains references to an Actor and an Item it owns. When clicked, the en
 **By Relative ID:** `[[/item amUUCouL69OK1GZU]]` or `[[/item .amUUCouL69OK1GZU]]`
 
 A Relative ID can contain a reference to an owned Item either by an ID, or a relative UUID (note the preceding `.`). When clicked, the enricher will use its location (either in an Actor Sheet, Item Sheet, or Chat Card) to determine the Token or Actor that owns that card or sheet in order to use the specified item from that owner.
+
+The activity name can also be used when referring to an item using its ID in the same manner as above with item name.
 
 ![Item Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-item.png)
 
@@ -289,5 +295,5 @@ Using the enricher is very simple, simply type `&Reference` with the name of the
 > <summary>Other Rules (selected)</summary>
 >
 > <p>Inspiration, Carrying Capacity, Encumbrance, Hiding, Passive Perception, Falling, Suffocating, Lightly Obscured, Heavily Obscured, Bright Light, Dim Light, Darkness, Blindsight, Darkvision, Truesight, Surprise, Difficult Terrain, Size, Grappling, Shoving, Half Cover, Three-Quarters Cover, Total Cover, Instant Death, Death Saving Throws, Underwater Combat, Attunement, Telepathy</p>
-> 
+>
 > Source: `CONFIG.DND5E.rules`
