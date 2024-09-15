@@ -81,7 +81,7 @@ export default class Proficiency {
    * @type {string}
    */
   get term() {
-    return (game.settings.get("dnd5e", "proficiencyModifier") === "dice" && !this.deterministic)
+    return (game.settings.get("dnd5e", "proficiencyModifier") === "dice") && !this.deterministic
       ? this.dice : String(this.flat);
   }
 
