@@ -220,8 +220,8 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
    * @protected
    */
   _onDeleteActivity(target) {
-    const { id } = target.closest("[data-id]").dataset;
-    const activity = this.item.system.activities.get(id);
+    const { activityId } = target.closest("[data-activity-id]").dataset;
+    const activity = this.item.system.activities.get(activityId);
     return activity?.deleteDialog();
   }
 
