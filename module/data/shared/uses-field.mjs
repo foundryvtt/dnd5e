@@ -95,11 +95,13 @@ export default class UsesField extends SchemaField {
     // Search the recovery profiles in order to find the first matching period,
     // and then find the first profile that uses that recovery period
     let profile;
-    for ( const period of periods ) {
-      for ( const recovery of this.uses.recovery ) {
-        if ( recovery.period === period ) {
-          profile = recovery;
-          break;
+    findPeriod: {
+      for ( const period of periods ) {
+        for ( const recovery of this.uses.recovery ) {
+          if ( recovery.period === period ) {
+            profile = recovery;
+            break findPeriod;
+          }
         }
       }
     }
