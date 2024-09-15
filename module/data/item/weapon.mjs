@@ -220,7 +220,8 @@ export default class WeaponData extends ItemDataModel.mixin(
       const parts = [
         this.range.value,
         this.range.long ? `/ ${this.range.long}` : null,
-        this.range.units ? game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`) : null
+        (this.range.units in CONFIG.DND5E.movementUnits)
+          ? game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`) : null
       ];
       labels.range = parts.filterJoin(" ");
     } else labels.range = game.i18n.localize("DND5E.None");
