@@ -387,7 +387,7 @@ export class ActorDataModel extends SystemDataModel {
   getRollData({ deterministic=false }={}) {
     const data = { ...this };
     data.prof = new Proficiency(this.attributes?.prof ?? 0, 1);
-    if ( deterministic ) data.prof = data.prof.flat;
+    data.prof.deterministic = deterministic;
     return data;
   }
 }
