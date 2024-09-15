@@ -655,7 +655,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( ((config.consume === true) || config.consume.spellSlot) && this.requiresSpellSlot ) {
       const mode = this.item.system.preparation.mode;
       const isLeveled = ["always", "prepared"].includes(mode);
-      const slot = config.spell?.slot ?? (isLeveled ? `spell${this.item.system.level}` : mode);
+      const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
+      const slot = config.spell?.slot ?? (isLeveled ? `spell${effectiveLevel}` : mode);
       const slotData = this.actor.system.spells?.[slot];
       if ( slotData ) {
         if ( slotData.value ) {
@@ -1149,7 +1150,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   async #consumeResource(event, target, message) {
     const messageConfig = {};
-    await this.consume({ consume: true, event }, messageConfig);
+    const scaling = message.getFlag("dnd5e", "scaling");
+    await this.consume({ consume: true, event, scaling }, messageConfig);
     if ( !foundry.utils.isEmpty(messageConfig.data) ) await message.update(messageConfig.data);
   }
 
