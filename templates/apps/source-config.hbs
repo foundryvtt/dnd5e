@@ -3,7 +3,7 @@
     <div class="form-group">
         <label>{{ localize "DND5E.SOURCE.FIELDS.source.book.label" }}</label>
         <div class="form-fields">
-            <input type="text" name="{{ keyPath }}.book" value="{{ source.book }}" list="{{ partId }}-books"
+            <input type="text" name="system.source.book" value="{{ source.book }}" list="{{ partId }}-books"
                    placeholder="{{ data.bookPlaceholder }}">
             <datalist id="{{ partId }}-books">
                 {{ selectOptions CONFIG.sourceBooks }}
