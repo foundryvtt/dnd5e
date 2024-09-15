@@ -1117,7 +1117,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
         // Derive source values
         .map(i => {
-          let source = foundry.utils.getProperty(i, "system.source");
+          const source = foundry.utils.getProperty(i, "system.source");
           if ( (foundry.utils.getType(source) === "Object") && i.uuid ) SourceField.prepareData.call(source, i.uuid);
           return i;
         })
