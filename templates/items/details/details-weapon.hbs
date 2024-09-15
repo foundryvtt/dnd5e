@@ -10,7 +10,7 @@
                  choices=baseItems }}
 
     {{!-- Proficiency --}}
-    {{#unless isMountable}}
+    {{#unless system.isMountable}}
     {{ formField fields.proficient value=source.proficient blank="DND5E.Automatic" localize=true
                  choices=config.weaponAndArmorProficiencyLevels }}
     {{/unless}}
@@ -29,7 +29,7 @@
         <div class="form-fields">
 
             {{!-- Attunement --}}
-            {{#unless isMountable}}
+            {{#unless system.isMountable}}
             <div class="form-group label-top">
                 <label>{{ localize "DND5E.Attunement" }}</label>
                 <div class="form-fields">
