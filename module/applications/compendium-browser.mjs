@@ -705,7 +705,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     const sources = [];
     for ( const result of this.#results ) {
       const source = foundry.utils.getProperty(result, "system.source");
-      if ( !source ) continue;
+      if ( foundry.utils.getType(source) !== "Object" ) continue;
       const { slug, value } = source;
       sources.push({ slug, value: CONFIG.DND5E.sourceBooks[value] ?? value });
     }
@@ -1117,8 +1117,8 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
         // Derive source values
         .map(i => {
-          const source = foundry.utils.getProperty(i, "system.source");
-          if ( source && i.uuid ) SourceField.prepareData.call(source, i.uuid);
+          let source = foundry.utils.getProperty(i, "system.source");
+          if ( (foundry.utils.getType(source) === "Object") && i.uuid ) SourceField.prepareData.call(source, i.uuid);
           return i;
         })
 
