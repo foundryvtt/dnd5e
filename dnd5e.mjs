@@ -110,6 +110,15 @@ Hooks.once("init", function() {
     delete DND5E.transformationPresets.polymorph.options.addTemp;
     delete DND5E.transformationPresets.polymorph.options.keepHP;
     delete DND5E.transformationPresets.polymorph.options.keepType;
+
+    // Adjust language categories.
+    delete DND5E.languages.standard.children.sign;
+    DND5E.languages.exotic.children.draconic = DND5E.languages.standard.children.draconic;
+    delete DND5E.languages.standard.children.draconic;
+    DND5E.languages.cant = DND5E.languages.exotic.children.cant;
+    delete DND5E.languages.exotic.children.cant;
+    DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
+    delete DND5E.languages.exotic.children.druidic;
   }
 
   // Register Roll Extensions
