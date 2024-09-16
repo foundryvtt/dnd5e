@@ -62,8 +62,8 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
 
   /**
    * @typedef {D20RollProcessConfiguration} AttackRollProcessConfiguration
-   * @param {string|boolean} [ammunition]  Specific ammunition to consume, or `false` to prevent any ammo consumption.
-   * @param {string} [attackMode]          Mode to use for making the attack and rolling damage.
+   * @property {string|boolean} [ammunition]  Specific ammunition to consume, or `false` to prevent any ammo usage.
+   * @property {string} [attackMode]          Mode to use for making the attack and rolling damage.
    */
 
   /**
@@ -108,6 +108,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
 
     const rollConfig = foundry.utils.mergeObject({
       ammunition: selectedAmmunition,
+      attackMode: selectedAttackMode,
       elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
         && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.ability),
       halflingLucky: this.actor?.getFlag("dnd5e", "halflingLucky")
@@ -181,6 +182,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       fumble: rollConfig.rolls[0].options.criticalFailure,
       targetValue: rollConfig.rolls[0].options.target,
       ammunition: rollConfig.ammunition,
+      attackMode: rollConfig.attackMode,
       mastery: rollConfig.rolls[0].options.mastery,
       elvenAccuracy: rollConfig.elvenAccuracy,
       halflingLucky: rollConfig.halflingLucky,
@@ -226,6 +228,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       flags.ammunition = "";
     }
     if ( roll.options.attackMode ) flags.attackMode = roll.options.attackMode;
+    else if ( rollConfig.attackMode ) roll.options.attackMode = rollConfig.attackMode;
     if ( roll.options.mastery ) flags.mastery = roll.options.mastery;
     if ( !foundry.utils.isEmpty(flags) ) await this.item.setFlag("dnd5e", `last.${this.id}`, flags);
 

@@ -22,6 +22,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  *                                     `null` will prevent critical failures.
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
  * @property {string|false} [ammunition]  Ammunition to use with an attack roll.
+ * @property {string} [attackMode]     Default attack mode to use with an attack roll.
  * @property {string} [mastery]        Weapon mastery to use with an attack roll.
  *
  * ## Flags
@@ -57,7 +58,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  */
 export async function d20Roll({
   parts=[], data={}, event,
-  advantage, disadvantage, critical=20, fumble=1, targetValue, ammunition, mastery,
+  advantage, disadvantage, critical=20, fumble=1, targetValue, attackMode, ammunition, mastery,
   elvenAccuracy, halflingLucky, reliableTalent,
   fastForward, ammunitionOptions, attackModes, chooseModifier=false, masteryOptions, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
@@ -105,6 +106,7 @@ export async function d20Roll({
     if ( configured === null ) return null;
   } else {
     roll.options.ammunition ??= ammunition ?? ammunitionOptions?.[0]?.value;
+    roll.options.attackMode ??= attackMode ?? attackModes?.[0]?.value;
     roll.options.rollMode ??= defaultRollMode;
   }
 
@@ -127,8 +129,8 @@ export async function d20Roll({
   if ( ammo ) foundry.utils.setProperty(messageData, "flags.dnd5e.roll.ammunition", ammo.value);
 
   // Set the attack mode
-  if ( roll.options.attackMode || attackModes?.length ) foundry.utils.setProperty(
-    messageData, "flags.dnd5e.roll.attackMode", roll.options.attackMode ?? attackModes[0].value
+  if ( roll.options.attackMode ) foundry.utils.setProperty(
+    messageData, "flags.dnd5e.roll.attackMode", roll.options.attackMode
   );
 
   // Create a Chat Message
