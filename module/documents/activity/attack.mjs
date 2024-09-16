@@ -241,7 +241,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         "The `dnd5e.rollAttack` hook has been deprecated and replaced with `dnd5e.rollAttackV2`.",
         { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
-      const oldAmmoUpdate = [{ _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }];
+      const oldAmmoUpdate = ammoUpdate ? [{ _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }] : [];
       Hooks.callAll("dnd5e.rollAttack", this.item, roll, oldAmmoUpdate);
       if ( oldAmmoUpdate[0] ) {
         ammoUpdate.id = oldAmmoUpdate[0]._id;
