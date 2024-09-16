@@ -299,7 +299,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }
     });
 
-    if ( source.system.recharge?.value ) targets.push({
+    if ( source.system.recharge?.value && source.system.uses?.per ) targets.push({
       type: source.system.uses?.max ? "activityUses" : "itemUses",
       target: "",
       value: "1",
@@ -496,7 +496,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformUsesData(source, options) {
-    if ( !source.system.recharge?.value || !source.system.uses?.max ) return { spent: 0, max: "", recovery: [] };
+    // Do not add a recharge recovery to the activity if the parent item would already get recharge recovery.
+    if ( !source.system.recharge?.value || !source.system.uses?.max || !source.system.uses?.per ) {
+      return { spent: 0, max: "", recovery: [] };
+    }
     return {
       spent: source.system.recharge.charged ? 0 : 1,
       max: "1",
