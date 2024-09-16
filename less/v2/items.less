@@ -9,15 +9,16 @@
 
   > header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-background-25); }
 
+  .window-header { flex-wrap: nowrap; }
+
   .window-header .header-elements {
+    display: contents;
     flex: none;
     color: var(--color-text-dark-primary);
     font-family: var(--dnd5e-font-roboto-condensed);
-    display: flex;
-    align-items: center;
     line-height: 1;
-    margin-top: 6px;
-    gap: 4px;
+
+    > * { margin-top: 4px; }
 
     .source-book {
       display: flex;
