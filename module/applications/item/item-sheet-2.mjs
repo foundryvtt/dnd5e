@@ -17,7 +17,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       legacyDisplay: false,
       contextMenu: ContextMenu5e
     });
-    options.dragDrop.push({ dragSelector: ".activity[data-id]", dropSelector: "form" });
+    options.dragDrop.push({ dragSelector: ".activity[data-activity-id]", dropSelector: "form" });
     return options;
   }
 
@@ -288,8 +288,8 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
 
   /** @override */
   _onDragStart(event) {
-    const { id } = event.target.closest(".activity[data-id]")?.dataset ?? {};
-    const activity = this.item.system.activities?.get(id);
+    const { activityId } = event.target.closest(".activity[data-activity-id]")?.dataset ?? {};
+    const activity = this.item.system.activities?.get(activityId);
     if ( !activity ) return super._onDragStart(event);
     event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
   }
@@ -309,7 +309,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
 
     // Reordering
     if ( source ) {
-      const targetId = event.target.closest(".activity[data-id]")?.dataset.id;
+      const targetId = event.target.closest(".activity[data-activity-id]")?.dataset.activityId;
       const target = this.item.system.activities.get(targetId);
       if ( !target || (target === source) ) return;
       const siblings = this.item.system.activities.filter(a => a._id !== id);
