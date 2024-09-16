@@ -185,9 +185,12 @@ export default class ActivitiesTemplate extends SystemDataModel {
       }
     }
 
-    // If period is not blank, set recovery type to `recoverAll`
+    // If period is not blank, set an appropriate recovery type
     else if ( source.uses.per ) {
-      source.uses.recovery = [{ period: source.uses.per, type: "recoverAll" }];
+      if ( CONFIG.DND5E.limitedUsePeriods[source.uses.per]?.formula && source.uses.recovery ) {
+        source.uses.recovery = [{ period: source.uses.per, type: "formula", formula: source.uses.recovery }];
+      }
+      else source.uses.recovery = [{ period: source.uses.per, type: "recoverAll" }];
     }
 
     // Otherwise, check to see if recharge is set
