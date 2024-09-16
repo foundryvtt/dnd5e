@@ -107,6 +107,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       .map(m => ({ ...m, selected: m.value === selectedAttackMode }));
 
     const rollConfig = foundry.utils.mergeObject({
+      ammunition: selectedAmmunition,
       elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
         && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.ability),
       halflingLucky: this.actor?.getFlag("dnd5e", "halflingLucky")
@@ -179,6 +180,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       critical: rollConfig.rolls[0].options.criticalSuccess,
       fumble: rollConfig.rolls[0].options.criticalFailure,
       targetValue: rollConfig.rolls[0].options.target,
+      ammunition: rollConfig.ammunition,
       mastery: rollConfig.rolls[0].options.mastery,
       elvenAccuracy: rollConfig.elvenAccuracy,
       halflingLucky: rollConfig.halflingLucky,
@@ -220,6 +222,8 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       }
     } else if ( roll.options.attackMode?.startsWith("thrown") && !this.item.system.properties?.has("ret") ) {
       ammoUpdate = { id: this.item.id, quantity: Math.max(0, this.item.system.quantity - 1) };
+    } else if ( !roll.options.ammunition && dialogConfig.options?.ammunitionOptions?.length ) {
+      flags.ammunition = "";
     }
     if ( roll.options.attackMode ) flags.attackMode = roll.options.attackMode;
     if ( roll.options.mastery ) flags.mastery = roll.options.mastery;

@@ -21,6 +21,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  * @property {number|null} [fumble=1]  The value of the d20 result which represents a critical failure,
  *                                     `null` will prevent critical failures.
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
+ * @property {string|false} [ammunition]  Ammunition to use with an attack roll.
  * @property {string} [mastery]        Weapon mastery to use with an attack roll.
  *
  * ## Flags
@@ -56,7 +57,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  */
 export async function d20Roll({
   parts=[], data={}, event,
-  advantage, disadvantage, critical=20, fumble=1, targetValue, mastery,
+  advantage, disadvantage, critical=20, fumble=1, targetValue, ammunition, mastery,
   elvenAccuracy, halflingLucky, reliableTalent,
   fastForward, ammunitionOptions, attackModes, chooseModifier=false, masteryOptions, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
@@ -103,7 +104,7 @@ export async function d20Roll({
     }, dialogOptions);
     if ( configured === null ) return null;
   } else {
-    roll.options.ammunition ??= ammunitionOptions?.[0]?.value;
+    roll.options.ammunition ??= ammunition ?? ammunitionOptions?.[0]?.value;
     roll.options.rollMode ??= defaultRollMode;
   }
 
