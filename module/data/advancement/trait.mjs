@@ -1,6 +1,16 @@
 const { ArrayField, BooleanField, NumberField, SetField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * Map legacy languages to their new locations in the modern rules.
+ * @type {Record<string, string>}
+ */
+const LEGACY_LANGUAGE_MAP = {
+  "languages:exotic:draconic": "languages:standard:draconic",
+  "languages:cant": "languages:exotic:cant",
+  "languages:druidic": "languages:exotic:druidic"
+};
+
+/**
  * Configuration for a specific trait choice.
  *
  * @typedef {object} TraitChoice
@@ -44,6 +54,14 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
       { since: "DnD5e 3.3", until: "DnD5e 4.1" }
     );
     return this.parent.hint ?? "";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    if ( (game.settings.get("dnd5e", "rulesVersion") === "legacy") || !source.grants?.length ) return;
+    source.grants = source.grants.map(t => LEGACY_LANGUAGE_MAP[t] ?? t);
   }
 }
 
