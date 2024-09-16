@@ -67,6 +67,25 @@ export default class DamageRoll extends BasicRoll {
   /*  Static Construction                         */
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  static fromConfig(config, process) {
+    const roll = super.fromConfig(config, process);
+    if ( process.critical ) roll.configureDamage({ critical: process.critical });
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static async build(config = {}, dialog = {}, message = {}) {
+    config.critical ??= {};
+    config.critical.multiplyNumeric ??= game.settings.get("dnd5e", "criticalDamageModifiers");
+    config.critical.powerfulCritical ??= game.settings.get("dnd5e", "criticalDamageMaxDice");
+    return super.build(config, dialog, message);
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   static applyKeybindings(config, dialog, message) {
     const keys = {

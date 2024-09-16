@@ -69,10 +69,11 @@ export default class BasicRoll extends Roll {
 
   /**
    * Create a roll instance from a roll config.
-   * @param {BasicRollConfiguration} config  Configuration info for the roll.
+   * @param {BasicRollConfiguration} config          Configuration info for the roll.
+   * @param {BasicRollProcessConfiguration} process  Configuration info for the whole rolling process.
    * @returns {BasicRoll}
    */
-  static fromConfig(config) {
+  static fromConfig(config, process) {
     const formula = (config.parts ?? []).join(" + ");
     return new this(formula, config.data, config.options);
   }
@@ -90,7 +91,7 @@ export default class BasicRoll extends Roll {
     this.applyKeybindings(config, dialog, message);
 
     let rolls;
-    if ( dialog.configure === false ) rolls = config.rolls?.map(config => this.fromConfig(config)) ?? [];
+    if ( dialog.configure === false ) rolls = config.rolls?.map(c => this.fromConfig(c, config)) ?? [];
     else {
       const DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
       rolls = await DialogClass.configure(config, dialog, message);
