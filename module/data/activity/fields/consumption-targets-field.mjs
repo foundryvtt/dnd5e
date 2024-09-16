@@ -354,7 +354,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @returns {string}
+   * @returns {{ label: string, hint: string }}
    */
   static consumptionLabelsActivityUses(config) {
     const { cost, increaseKey, pluralRule } = this._resolveHintCost(config);
@@ -373,7 +373,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @returns {string}
+   * @returns {{ label: string, hint: string }}
    */
   static consumptionLabelsAttribute(config) {
     const { cost, increaseKey } = this._resolveHintCost(config);
@@ -392,7 +392,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @returns {string}
+   * @returns {{ label: string, hint: string }}
    */
   static consumptionLabelsHitDice(config) {
     const { cost, increaseKey, pluralRule } = this._resolveHintCost(config);
@@ -418,7 +418,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @returns {string}
+   * @returns {{ label: string, hint: string }}
    */
   static consumptionLabelsItemUses(config) {
     const { cost, increaseKey, pluralRule } = this._resolveHintCost(config);
@@ -441,15 +441,19 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @returns {string}
+   * @returns {{ label: string, hint: string }}
    */
   static consumptionLabelsMaterial(config) {
     const { cost, increaseKey } = this._resolveHintCost(config);
+    const item = this.actor.items.get(this.target);
     return {
       label: game.i18n.localize(`DND5E.CONSUMPTION.Type.Material.Prompt${increaseKey}`),
       hint: game.i18n.format(
         `DND5E.CONSUMPTION.Type.Material.PromptHint${increaseKey}`,
-        { cost, item: `<em>${this.actor.items.get(this.target).name}</em>` }
+        {
+          cost,
+          item: item ? `<em>${item.name}</em>` : game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase()
+        }
       )
     };
   }
@@ -460,7 +464,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @returns {string}
+   * @returns {{ label: string, hint: string }}
    */
   static consumptionLabelsSpellSlots(config) {
     const { cost, increaseKey, pluralRule } = this._resolveHintCost(config);
