@@ -53,7 +53,10 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Item document ${item.name}`);
         if ( flags.persistSourceMigration ) {
-          updateData = foundry.utils.mergeObject(source, updateData, {inplace: false});
+          if ( "effects" in updateData ) updateData.effects = source.effects.map(effect => foundry.utils.mergeObject(
+            effect, updateData.effects.find(e => e._id === effect._id) ?? {}, { inplace: false, performDeletions: true }
+          ));
+          updateData = foundry.utils.mergeObject(source, updateData, { inplace: false, performDeletions: true });
         }
         await item.update(updateData, {
           enforceTypes: false, diff: valid && !flags.persistSourceMigration, render: false
@@ -452,7 +455,10 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
     // Update the Owned Item
     if ( !foundry.utils.isEmpty(itemUpdate) ) {
       if ( itemFlags.persistSourceMigration ) {
-        itemUpdate = foundry.utils.mergeObject(itemData, itemUpdate, {inplace: false});
+        if ( "effects" in itemUpdate ) itemUpdate.effects = itemData.effects.map(effect => foundry.utils.mergeObject(
+          effect, itemUpdate.effects.find(e => e._id === effect._id) ?? {}, { inplace: false, performDeletions: true }
+        ));
+        itemUpdate = foundry.utils.mergeObject(itemData, itemUpdate, { inplace: false, performDeletions: true });
         flags.persistSourceMigration = true;
       }
       arr.push({ ...itemUpdate, _id: itemData._id });
