@@ -224,7 +224,8 @@ export default class RollConfigurationDialog extends Application5e {
   async _prepareButtonsContext(context, options) {
     context.buttons = {
       roll: {
-        icon: '<i class="fa-solid fa-dice"></i>',
+        default: true,
+        icon: '<i class="fa-solid fa-dice" inert></i>',
         label: game.i18n.localize("DND5E.Roll")
       }
     };
