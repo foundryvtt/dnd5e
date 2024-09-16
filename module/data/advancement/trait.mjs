@@ -1,14 +1,16 @@
 const { ArrayField, BooleanField, NumberField, SetField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Map legacy languages to their new locations in the modern rules.
+ * Map language category changes.
  * @type {Record<string, string>}
  */
-const LEGACY_LANGUAGE_MAP = {
+const _MAP = {
   "languages:exotic:draconic": "languages:standard:draconic",
   "languages:cant": "languages:exotic:cant",
   "languages:druidic": "languages:exotic:druidic"
 };
+
+const LANGUAGE_MAP = { modern: _MAP, legacy: foundry.utils.invertObject(_MAP) };
 
 /**
  * Configuration for a specific trait choice.
@@ -60,8 +62,12 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
 
   /** @inheritDoc */
   static migrateData(source) {
-    if ( (game.settings.get("dnd5e", "rulesVersion") === "legacy") || !source.grants?.length ) return;
-    source.grants = source.grants.map(t => LEGACY_LANGUAGE_MAP[t] ?? t);
+    super.migrateData(source);
+    const version = game.settings.get("dnd5e", "rulesVersion");
+    const languageMap = LANGUAGE_MAP[version] ?? {};
+    if ( source.grants?.length ) source.grants = source.grants.map(t => languageMap[t] ?? t);
+    if ( source.choices?.length ) source.choices.forEach(c => c.pool = c.pool.map(t => languageMap[t] ?? t));
+    return source;
   }
 }
 
@@ -75,5 +81,16 @@ export class TraitValueData extends foundry.abstract.DataModel {
     return {
       chosen: new SetField(new StringField(), { required: false })
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    const version = game.settings.get("dnd5e", "rulesVersion");
+    const languageMap = LANGUAGE_MAP[version] ?? {};
+    if ( source.chosen?.length ) source.chosen = source.chosen.map(t => languageMap[t] ?? t);
+    return source;
   }
 }
