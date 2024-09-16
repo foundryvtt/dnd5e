@@ -282,6 +282,7 @@ export default class ContainerData extends ItemDataModel.mixin(
       context.value = await this.contentsCount;
       context.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
     }
+    context.value = context.value.toNearest(0.1);
     context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;
   }
