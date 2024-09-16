@@ -662,17 +662,15 @@ DND5E.tools = {
   }
 };
 
-const _toolIds = Object.entries(DND5E.tools).reduce((obj, [k, { id }]) => {
-  obj[k] = id;
-  return obj;
-}, {});
-
 /**
  * The basic tool types in 5e. This enables specific tool proficiencies or
  * starting equipment provided by classes and backgrounds.
  * @enum {string}
  */
-DND5E.toolIds = new Proxy(_toolIds, {
+DND5E.toolIds = new Proxy(DND5E.tools, {
+  get(target, prop) {
+    return target[prop]?.id;
+  },
   set(target, prop, value) {
     foundry.utils.logCompatibilityWarning(
       "Appending to CONFIG.DND5E.toolIds is deprecated, use CONFIG.DND5E.tools instead.",
@@ -680,6 +678,7 @@ DND5E.toolIds = new Proxy(_toolIds, {
     );
     target[prop] ??= { ability: "int" };
     target[prop].id = value;
+    return true;
   }
 });
 
