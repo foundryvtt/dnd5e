@@ -13,7 +13,8 @@ export default class ContainerSheet extends ItemSheet5e {
       dragDrop: [
         {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
         {dragSelector: ".advancement-item", dropSelector: ".advancement"},
-        {dragSelector: ".items-list .item", dropSelector: null}
+        {dragSelector: ".items-list .item", dropSelector: null},
+        {dragSelector: ".containers .container", dropSelector: null}
       ],
       elements: {
         inventory: "dnd5e-inventory"
