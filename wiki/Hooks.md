@@ -46,21 +46,23 @@ Fires after an ability save has been rolled.
 
 Fires before a concentration effect is created. Returning `false` will prevent concentration effect from being created.
 
-| Name       | Type    | Description                            |
-| ---------- | ------- | -------------------------------------- |
-| actor      | Actor5e | The actor initiating concentration.    |
-| item       | Item5e  | The item that will be concentrated on. |
-| effectData | object  | Data used to create the ActiveEffect.  |
+| Name       | Type     | Description                                    |
+| ---------- | -------- | ---------------------------------------------- |
+| actor      | Actor5e  | The actor initiating concentration.            |
+| item       | Item5e   | The item that will be concentrated on.         |
+| effectData | object   | Data used to create the ActiveEffect.          |
+| activity   | Activity | The activity that triggered the concentration. |
 
 ### `dnd5e.beginConcentrating`
 
 Fires after a concentration effect is created.
 
-| Name   | Type           | Description                             |
-| ------ | -------------- | --------------------------------------- |
-| actor  | Actor5e        | The actor initiating concentration.     |
-| item   | Item5e         | The item that is being concentrated on. |
-| effect | ActiveEffect5e | The created ActiveEffect instance.      |
+| Name     | Type           | Description                                    |
+| -------- | -------------- | ---------------------------------------------- |
+| actor    | Actor5e        | The actor initiating concentration.            |
+| item     | Item5e         | The item that is being concentrated on.        |
+| effect   | ActiveEffect5e | The created ActiveEffect instance.             |
+| activity | Activity       | The activity that triggered the concentration. |
 
 ### `dnd5e.preEndConcentration`
 
