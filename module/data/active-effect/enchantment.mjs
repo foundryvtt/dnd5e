@@ -38,7 +38,14 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
             value.enchantment = true;
             value.locked = true;
             changes[`system.activities.${activity.id}.damage.parts`] = ActiveEffect.applyField(
-              activity, { ...change, key, value: value }
+              activity, { ...change, key, value }
+            );
+          }
+          for ( const activity of item.system.activities?.getByTypes("heal") ?? [] ) {
+            const value = damage.formula;
+            const keyPath = `healing.${activity.healing.custom.enabled ? "custom.formula" : "bonus"}`;
+            changes[`system.activities.${activity.id}.${keyPath}`] = ActiveEffect.applyField(
+              activity, { ...change, key: keyPath, value }
             );
           }
           return false;

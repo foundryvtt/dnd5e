@@ -27,7 +27,7 @@ export default class JournalRulePageSheet extends JournalTextPageSheet {
     context.CONFIG = CONFIG.DND5E;
     context.enrichedTooltip = await TextEditor.enrichHTML(this.object.system.tooltip, {
       relativeTo: this.object,
-      secrets: this.object.isOwner,
+      secrets: this.object.isOwner
     });
     return context;
   }
