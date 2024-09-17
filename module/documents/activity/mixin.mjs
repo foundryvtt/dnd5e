@@ -244,7 +244,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     // Create concentration effect & end previous effects
     if ( usageConfig.concentration?.begin ) {
-      const effect = await item.actor.beginConcentrating(item);
+      const effect = await item.actor.beginConcentrating(activity, { "flags.dnd5e.scaling": usageConfig.scaling });
       if ( effect ) {
         results.effects ??= [];
         results.effects.push(effect);
@@ -570,7 +570,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       }
     }
 
-    if ( this.item.requiresConcentration && !game.settings.get("dnd5e", "disableConcentration") ) {
+    if ( this.requiresConcentration && !game.settings.get("dnd5e", "disableConcentration") ) {
       config.concentration ??= {};
       config.concentration.begin ??= true;
       const { effects } = this.actor.concentration;

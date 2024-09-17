@@ -1169,12 +1169,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Initiate concentration on an item.
-   * @param {Item5e} item                        The item on which to being concentration.
+   * @param {Activity} activity                  The activity on which to being concentration.
    * @param {object} [effectData]                Effect data to merge into the created effect.
    * @returns {Promise<ActiveEffect5e|void>}     A promise that resolves to the created effect.
    */
-  async beginConcentrating(item, effectData={}) {
-    effectData = ActiveEffect5e.createConcentrationEffectData(item, effectData);
+  async beginConcentrating(activity, effectData={}) {
+    if ( activity instanceof Item ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `beginConcentrating` method on Actor5e now takes an Activity, rather than an Item.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      activity = activity.system.activities?.contents[0];
+      if ( !activity ) return;
+    }
+
+    effectData = ActiveEffect5e.createConcentrationEffectData(activity, effectData);
 
     /**
      * A hook that is called before a concentration effect is created.
@@ -1183,9 +1192,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {Actor5e} actor         The actor initiating concentration.
      * @param {Item5e} item           The item that will be concentrated on.
      * @param {object} effectData     Data used to create the ActiveEffect.
+     * @param {Activity} activity     The activity that triggered the concentration.
      * @returns {boolean}             Explicitly return false to prevent the effect from being created.
      */
-    if ( Hooks.call("dnd5e.preBeginConcentrating", this, item, effectData) === false ) return;
+    if ( Hooks.call("dnd5e.preBeginConcentrating", this, activity.item, effectData, activity) === false ) return;
 
     const effect = await ActiveEffect5e.create(effectData, { parent: this });
 
@@ -1196,8 +1206,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {Actor5e} actor             The actor initiating concentration.
      * @param {Item5e} item               The item that is being concentrated on.
      * @param {ActiveEffect5e} effect     The created ActiveEffect instance.
+     * @param {Activity} activity         The activity that triggered the concentration.
      */
-    Hooks.callAll("dnd5e.beginConcentrating", this, item, effect);
+    Hooks.callAll("dnd5e.beginConcentrating", this, activity.item, effect, activity);
 
     return effect;
   }

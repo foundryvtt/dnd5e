@@ -45,5 +45,30 @@ export default class DurationField extends SchemaField {
       labels.concentrationDuration = this.properties?.has("concentration")
         ? game.i18n.format("DND5E.ConcentrationDuration", { duration }) : duration;
     }
+
+    Object.defineProperty(this.duration, "getEffectData", {
+      value: DurationField.getEffectDuration.bind(this.duration),
+      configurable: true
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create duration data usable for an active effect based on this duration.
+   * @this {DurationData}
+   * @returns {EffectDurationData}
+   */
+  static getEffectDuration() {
+    if ( !Number.isNumeric(this.value) ) return {};
+    switch ( this.units ) {
+      case "turn": return { turns: this.value };
+      case "round": return { rounds: this.value };
+      case "minute": return { seconds: this.value * 60 };
+      case "hour": return { seconds: this.value * 60 * 60 };
+      case "day": return { seconds: this.value * 60 * 60 * 24 };
+      case "year": return { seconds: this.value * 60 * 60 * 24 * 365 };
+      default: return {};
+    }
   }
 }
