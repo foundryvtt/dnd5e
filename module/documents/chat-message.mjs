@@ -581,6 +581,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( this.getFlag("dnd5e", "messageType") === "usage" ) {
       effects = this.getFlag("dnd5e", "use.effects")?.map(id => item?.effects.get(id));
     } else {
+      if ( this.getFlag("dnd5e", "roll.type") ) return;
       effects = item?.effects.filter(e => (e.type !== "enchantment")
         && !item.getFlag("dnd5e", "riders.effect")?.includes(e.id));
     }
