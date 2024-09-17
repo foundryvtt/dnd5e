@@ -54,6 +54,24 @@
 "DND5E.AbbreviationLevel": "Lvl.",
 "DND5E.AbbreviationLbs": "lbs.",
 "DND5E.AbbreviationSR": "SR",
+
+"DND5E.ABILITY": {
+  "Configure": {
+    "Title": "Configure {ability}"
+  },
+  "SECTIONS": {
+    "Bonuses": {
+      "Label": "{ability} Bonuses",
+      "Hint": "These bonuses apply to checks & saves made with {ability}."
+    },
+    "Global": {
+      "Label": "Global Bonuses",
+      "Hint": "These bonuses apply to checks & saves made with any ability."
+    },
+    "Score": "{ability} Score"
+  }
+},
+
 "DND5E.Ability": "Ability",
 "DND5E.Abilities": "Abilities",
 "DND5E.AbilityStr": "Strength",
