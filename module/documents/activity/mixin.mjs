@@ -234,7 +234,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
 
     // Handle scaling
-    activity._prepareUsageScaling(usageConfig, messageConfig, item);
+    await activity._prepareUsageScaling(usageConfig, messageConfig, item);
     activity = item.system.activities.get(this.id);
 
     // Handle consumption
@@ -593,7 +593,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @param {Item5e} item                                 Clone of the item that contains this activity.
    * @protected
    */
-  _prepareUsageScaling(usageConfig, messageConfig, item) {
+  async _prepareUsageScaling(usageConfig, messageConfig, item) {
     const levelingFlag = this.item.getFlag("dnd5e", "spellLevel");
     if ( levelingFlag ) {
       usageConfig.scaling = Math.max(0, levelingFlag.value - levelingFlag.base);
@@ -721,13 +721,21 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const data = await this.item.system.getCardData();
     const properties = [...(data.tags ?? []), ...(data.properties ?? [])];
     const supplements = [];
-    if ( (this.activation.type === "reaction") && this.activation.condition ) {
-      supplements.push(`<strong>${game.i18n.localize("DND5E.Reaction")}</strong> ${this.activation.condition}`);
+    if ( this.activation.condition ) {
+      supplements.push(`<strong>${game.i18n.localize("DND5E.Trigger")}</strong> ${this.activation.condition}`);
     }
     if ( data.materials?.value ) {
       supplements.push(`<strong>${game.i18n.localize("DND5E.Materials")}</strong> ${data.materials.value}`);
     }
     const buttons = this._usageChatButtons(message);
+
+    // Include spell level in the subtitle.
+    if ( this.item.type === "spell" ) {
+      const spellLevel = foundry.utils.getProperty(message, "data.flags.dnd5e.use.spellLevel");
+      const { spellLevels, spellSchools } = CONFIG.DND5E;
+      data.subtitle = [spellLevels[spellLevel], spellSchools[this.item.system.school]?.label].filterJoin(" &bull; ");
+    }
+
     return {
       activity: this,
       actor: this.item.actor,

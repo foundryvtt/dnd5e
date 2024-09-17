@@ -299,8 +299,8 @@ export default class ChatMessage5e extends ChatMessage {
       const subtitle = roll.type === "damage"
         ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
         : roll.type === "attack"
-          ? game.i18n.localize(`DND5E.Action${activity.actionType.toUpperCase()}`)
-          : item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
+          ? (activity?.getActionLabel(roll.attackMode) ?? "")
+          : (item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]));
       const flavor = document.createElement("div");
       flavor.classList.add("dnd5e2", "chat-card");
       flavor.innerHTML = `
