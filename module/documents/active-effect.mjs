@@ -511,12 +511,21 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Create effect data for concentration on an actor.
-   * @param {Item5e} item       The item on which to begin concentrating.
-   * @param {object} [data]     Additional data provided for the effect instance.
-   * @returns {object}          Created data for the ActiveEffect.
+   * @param {Activity} activity  The Activity on which to begin concentrating.
+   * @param {object} [data]      Additional data provided for the effect instance.
+   * @returns {object}           Created data for the ActiveEffect.
    */
-  static createConcentrationEffectData(item, data={}) {
-    if ( !item.isEmbedded || !item.requiresConcentration ) {
+  static createConcentrationEffectData(activity, data={}) {
+    if ( activity instanceof Item ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `createConcentrationEffectData` method on ActiveEffect5e now takes an Activity, rather than an Item.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      activity = activity.system.activities?.contents[0];
+    }
+
+    const item = activity?.item;
+    if ( !item?.isEmbedded || !activity.duration.concentration ) {
       throw new Error("You may not begin concentrating on this item!");
     }
 
@@ -528,8 +537,16 @@ export default class ActiveEffect5e extends ActiveEffect {
         name: item.name,
         type: game.i18n.localize(`TYPES.Item.${item.type}`)
       }),
-      duration: ActiveEffect5e.getEffectDurationFromItem(item),
-      "flags.dnd5e.item.data": item.actor.items.has(item.id) ? item.id : item.toObject(),
+      duration: activity.duration.getEffectData(),
+      "flags.dnd5e": {
+        activity: {
+          type: activity.type, id: activity.id, uuid: activity.uuid
+        },
+        item: {
+          type: item.type, id: item.id, uuid: item.uuid,
+          data: !item.actor.items.has(item.id) ? item.toObject() : undefined
+        }
+      },
       origin: item.uuid,
       statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
     }, data, {inplace: false});
@@ -587,22 +604,15 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Map the duration of an item to an active effect duration.
-   * @param {Item5e} item     An item with a duration.
-   * @returns {object}        The active effect duration.
+   * @param {Item5e} item           An item with a duration.
+   * @returns {EffectDurationData}  The active effect duration.
    */
   static getEffectDurationFromItem(item) {
-    const dur = item.system.duration ?? {};
-    const value = dur.value || 1;
-
-    switch ( dur.units ) {
-      case "turn": return { turns: value };
-      case "round": return { rounds: value };
-      case "minute": return { seconds: value * 60 };
-      case "hour": return { seconds: value * 60 * 60 };
-      case "day": return { seconds: value * 60 * 60 * 24 };
-      case "year": return { seconds: value * 60 * 60 * 24 * 365 };
-      default: return {};
-    }
+    foundry.utils.logCompatibilityWarning(
+      "The `getEffectDurationFromItem` method on ActiveEffect5e has been deprecated and replaced with `getEffectData` within Item or Activity duration.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
+    return item.system.duration?.getEffectData?.() ?? {};
   }
 
   /* -------------------------------------------- */
