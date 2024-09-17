@@ -951,7 +951,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       if ( "configure" in dialogConfig ) oldRollConfig.fastForward = !dialogConfig.configure;
       if ( Hooks.call("dnd5e.preRollDamage", this.item, oldRollConfig) === false ) return;
       rollConfig.rolls = rollConfig.rolls.map((roll, index) => {
-        const otherConfig = oldRollConfig.rollConfigs.find(r => r.index === index);
+        const otherConfig = oldRollConfig.rollConfigs.find(r => r._index === index);
         if ( !otherConfig ) return null;
         roll.data = oldRollConfig.data;
         roll.parts = otherConfig.parts;
@@ -959,10 +959,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         roll.options.type = otherConfig.type;
         roll.options.types = otherConfig.types;
         roll.options.properties = otherConfig.properties;
-        return rolls;
+        return roll;
       }, [])
         .filter(_ => _)
-        .concat(oldRollConfig.rollConfigs.filter(r => r.index === undefined));
+        .concat(oldRollConfig.rollConfigs.filter(r => r._index === undefined));
       returnMultiple = oldRollConfig.returnMultiple;
       rollConfig.critical ??= {};
       rollConfig.critical.allow = oldRollConfig.allowCritical;
