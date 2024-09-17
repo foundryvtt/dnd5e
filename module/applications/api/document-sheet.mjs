@@ -1,30 +1,8 @@
-const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;
+import V2Mixin from "./v2-mixin.mjs";
+
+const { DocumentSheetV2 } = foundry.applications.api;
 
 /**
  * Base document sheet from which all document-based application should be based.
  */
-export default class DocumentSheet5e extends HandlebarsApplicationMixin(DocumentSheetV2) {
-  /** @override */
-  static DEFAULT_OPTIONS = {
-    classes: ["dnd5e2"]
-  };
-
-  /* -------------------------------------------- */
-  /*  Rendering                                   */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    context.CONFIG = CONFIG.DND5E;
-    context.inputs = { ...foundry.applications.fields, ...dnd5e.applications.fields };
-    return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _preparePartContext(partId, context, options) {
-    return { ...await super._preparePartContext(partId, context, options) };
-  }
-}
+export default class DocumentSheet5e extends V2Mixin(DocumentSheetV2) {}
