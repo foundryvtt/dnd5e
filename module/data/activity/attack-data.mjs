@@ -197,6 +197,36 @@ export default class AttackActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /**
+   * The game term label for this attack.
+   * @param {string} [attackMode]  The mode the attack was made with.
+   * @returns {string}
+   */
+  getActionLabel(attackMode) {
+    let attackModeLabel;
+    if ( attackMode ) {
+      const key = attackMode.split("-").map(s => s.capitalize()).join("");
+      attackModeLabel = game.i18n.localize(`DND5E.ATTACK.Mode.${key}`);
+    }
+    let actionType = this.actionType;
+    if ( (actionType === "mwak") && (attackMode?.startsWith("thrown")) ) actionType = "rwak";
+    let actionTypeLabel = game.i18n.localize(`DND5E.Action${actionType.toUpperCase()}`);
+    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    const isUnarmed = this.attack.type.classification === "unarmed";
+    if ( isUnarmed ) attackModeLabel = game.i18n.localize("DND5E.ATTACK.Classification.Unarmed");
+    const isSpell = (actionType === "rsak") || (actionType === "msak");
+    if ( isLegacy || isSpell ) return [actionTypeLabel, attackModeLabel].filterJoin(" &bull; ");
+    actionTypeLabel = game.i18n.localize(`DND5E.ATTACK.Attack.${actionType}`);
+    if ( isUnarmed ) return [actionTypeLabel, attackModeLabel].filterJoin(" &bull; ");
+    const weaponType = CONFIG.DND5E.weaponTypeMap[this.item.system.type?.value];
+    const weaponTypeLabel = weaponType
+      ? game.i18n.localize(`DND5E.ATTACK.Weapon.${weaponType.capitalize()}`)
+      : CONFIG.DND5E.weaponTypes[this.item.system.type?.value];
+    return [actionTypeLabel, weaponTypeLabel, attackModeLabel].filterJoin(" &bull; ");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the roll parts used to create the attack roll.
    * @returns {{ data: object, parts: string[] }}
    */
