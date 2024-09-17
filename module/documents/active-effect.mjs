@@ -759,4 +759,21 @@ export default class ActiveEffect5e extends ActiveEffect {
       classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip"]
     };
   }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async deleteDialog(dialogOptions={}, operation={}) {
+    const type = game.i18n.localize(this.constructor.metadata.label);
+    return foundry.applications.api.DialogV2.confirm(foundry.utils.mergeObject({
+      window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+      position: { width: 400 },
+      content: `
+        <p>
+            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+        </p>
+      `,
+      yes: { callback: () => this.delete(operation) }
+    }, dialogOptions));
+  }
 }
