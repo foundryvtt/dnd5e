@@ -212,11 +212,14 @@ async function enrichCheck(config, label, options) {
   }
   if ( skillConfig?.key ) config.skill = skillConfig.key;
 
+  const toolConfig = CONFIG.DND5E.tools[slugify(config.tool)];
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(config.tool)];
   const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
   if ( config.tool && !toolIndex ) {
     console.warn(`Tool ${config.tool} not found while enriching ${config._input}.`);
     invalid = true;
+  } else if ( config.tool && !config.ability && toolConfig ) {
+    config.ability = toolConfig.ability;
   }
 
   let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
