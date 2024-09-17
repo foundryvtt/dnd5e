@@ -21,14 +21,21 @@ To include your Javascript file in your world, first, shut down Foundry complete
 
 1. Navigate to your world's directory in your user data folder.
 2. Open world.json in a text editor (Visual Studio Code is a good choice, but almost any editor will do).
-3. In the world.json file, look for a line with the esmodules key. If there isn't one, add it after any of the existing keys, like this:
+3. Your world.json file might look something like this:
 ```json
 {
-  "title": "My Cool DnD Game",
+  "title": "Cool DnD World!!",
+  "id": "cool-dnd-world",
   "esmodules": [],
-  "version": "1.0.0"
-}
-```
+  "system": "dnd5e",
+  "coreVersion": "12.331",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+    "systemVersion": "3.3.1"
+}```
+The `esmodules` key is the one we're interested in; if your manifest doesn't have one, you can add it after any existing key.
 4. Add the path to your Javascript file to the esmodules array. If your Javascript file is stored in the root of the world directory as suggested above, just write the filename in quotation marks. It will look like this when you're done: `"esmodules": [ "my-script.js" ],` Note the comma is required at the end of the line, unless you've added this as the very last key in the JSON file. If you are unsure if your world.json file is formatted correctly, you can check it with an online JSON validator such as [JSONLint](https://jsonlint.com/).
 5. Save and close world.json.
 6. Create a file called my-script.js in the same directory of world.json
@@ -91,7 +98,7 @@ Hooks.once("init", () => {
 Hooks.once("init", () => {
   CONFIG.DND5E.itemProperties.laser = {
     label: "Laser",
-    isPhysical: "true"
+    isPhysical: true
   };
   CONFIG.DND5E.validProperties.weapon.add("laser");
 });
