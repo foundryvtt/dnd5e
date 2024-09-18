@@ -417,13 +417,19 @@ function expandAttributeList(attributes) {
  */
 Hooks.once("i18nInit", () => {
   if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
-    const trans = game.i18n.translations;
-    trans.TYPES.Item.race = trans.TYPES.Item.raceLegacy;
-    trans.TYPES.Item.racePl = trans.TYPES.Item.raceLegacyPl;
-    trans.DND5E.LanguagesExotic = trans.DND5E.LanguagesExoticLegacy;
-    trans.DND5E.TargetRadius = trans.DND5E.TargetRadiusLegacy;
-    foundry.utils.mergeObject(trans.DND5E.TraitArmorPlural, DND5E.TraitArmorLegacyPlural);
-    trans.DND5E.TraitArmorProf = trans.DND5E.TraitArmorLegacyProf;
+    const { translations, _fallback } = game.i18n;
+    translations.TYPES ??= {};
+    translations.TYPES.Item ??= {};
+    translations.TYPES.Item.race = game.i18n.localize("TYPES.Item.raceLegacy");
+    translations.TYPES.Item.racePl = game.i18n.localize("TYPES.Item.raceLegacyPl");
+    translations.DND5E ??= {};
+    translations.DND5E.LanguagesExotic = game.i18n.localize("DND5E.LanguagesExoticLegacy");
+    translations.DND5E.TargetRadius = game.i18n.localize("DND5E.TargetRadiusLegacy");
+    translations.DND5E.TraitArmorPlural ??= {};
+    foundry.utils.mergeObject(translations.DND5E.TraitArmorPlural, foundry.utils.mergeObject(
+      _fallback.DND5E?.TraitArmorLegacyPlural ?? {}, translations.DND5E.TraitArmorLegacyPlural ?? {}, { inplace: false }
+    ));
+    translations.DND5E.TraitArmorProf = game.i18n.localize("DND5E.TraitArmorLegacyProf");
   }
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
