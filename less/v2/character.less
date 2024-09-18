@@ -797,7 +797,7 @@
         &:hover:not(:has(a:hover)) { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
       }
 
-      &.empty {
+      &.empty:not(.disabled) {
         cursor: pointer;
         transition: opacity 250ms ease;
         &:hover { opacity: .5; }

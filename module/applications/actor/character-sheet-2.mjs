@@ -323,6 +323,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( this._mode === this.constructor.MODES.EDIT ) {
       html.find(".tab.details .item-action").on("click", this._onItemAction.bind(this));
     }
+
+    if ( !this.isEditable ) {
+      html[0].querySelectorAll('[data-action="findItem"]').forEach(el => el.classList.add("disabled"));
+    }
   }
 
   /* -------------------------------------------- */
@@ -481,6 +485,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
    * @protected
    */
   async _onFindItem(type, { classIdentifier }={}) {
+    if ( !this.isEditable ) return;
     const filters = { locked: { types: new Set([type]) } };
     if ( classIdentifier ) filters.locked.additional = { class: { [classIdentifier]: 1 } };
     const result = await CompendiumBrowser.selectOne({ filters });
