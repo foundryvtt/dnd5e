@@ -11,7 +11,7 @@ export {default as BaseConfigSheetV2} from "./api/base-config-sheet.mjs";
 
 export {default as AbilityConfig} from "./config/ability-config.mjs";
 export {default as ActorArmorConfig} from "./armor-config.mjs";
-export {default as ActorConcentrationConfig} from "./concentration-config.mjs";
+export {default as ConcentrationConfig} from "./config/concentration-config.mjs";
 export {default as DamageModificationConfig} from "./damage-modification-config.mjs";
 export {default as ActorHitDiceConfig} from "./hit-dice-config.mjs";
 export {default as ActorHitPointsConfig} from "./hit-points-config.mjs";
@@ -33,3 +33,4 @@ export {default as WeaponsConfig} from "./config/weapons-config.mjs";
 
 // Deprecated
 export {default as ActorAbilityConfig} from "./deprecated/ability-config.mjs";
+export {default as ActorConcentrationConfig} from "./deprecated/concentration-config.mjs";
