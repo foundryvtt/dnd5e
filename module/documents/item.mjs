@@ -754,6 +754,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *                                                                   activities and was posted directly to chat.
    */
   async use(config={}, dialog={}, message={}) {
+    if ( this.pack ) return;
+
     let event = config.event;
     if ( config.legacy !== false ) {
       foundry.utils.logCompatibilityWarning(

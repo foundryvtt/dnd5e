@@ -169,7 +169,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @returns {Promise<ActivityUsageResults|void>}  Details on the usage process if not canceled.
    */
   async use(usage={}, dialog={}, message={}) {
-    if ( !this.item.isEmbedded ) return;
+    if ( !this.item.isEmbedded || this.item.pack ) return;
     if ( !this.item.isOwner ) {
       ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
       return;
