@@ -78,9 +78,9 @@ export default class AttributesFields {
       concentration: new RollConfigField({
         ability: "",
         bonuses: new SchemaField({
-          save: new FormulaField({ required: true, label: "DND5E.SaveBonus" })
+          save: new FormulaField({ required: true, label: "DND5E.ConcentrationBonus" })
         }),
-        limit: new NumberField({ integer: true, min: 0, initial: 1, label: "DND5E.AttrConcentration.Limit" })
+        limit: new NumberField({ integer: true, min: 0, initial: 1, label: "DND5E.ConcentrationLimit" })
       }, { label: "DND5E.Concentration" })
     };
   }
