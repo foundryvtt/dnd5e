@@ -3,7 +3,6 @@ import Item5e from "../../documents/item.mjs";
 import { splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 
-import AbilityConfig from "./config/ability-config.mjs";
 import ActorArmorConfig from "./armor-config.mjs";
 import ConcentrationConfig from "./config/concentration-config.mjs";
 import ActorHitDiceConfig from "./hit-dice-config.mjs";
@@ -20,10 +19,12 @@ import AdvancementConfirmationDialog from "../advancement/advancement-confirmati
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 import TraitSelector from "./trait-selector.mjs";
-import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
+
+import AbilityConfig from "./config/ability-config.mjs";
+import SkillToolConfig from "./config/skill-tool-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
@@ -774,11 +775,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "ability":
         const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
         if ( ability === "concentration" ) app = new ConcentrationConfig({ document: this.actor });
-        else app = new AbilityConfig({ document: this.actor, ability });
+        else app = new AbilityConfig({ document: this.actor, key: ability });
         break;
       case "skill":
         const skill = event.currentTarget.closest("[data-key]").dataset.key;
-        app = new ProficiencyConfig(this.actor, {property: "skills", key: skill});
+        app = new SkillToolConfig({ document: this.actor, trait: "skills", key: skill });
         break;
       case "skills":
         app = new dnd5e.applications.actor.ActorSkillsConfig(this.actor);
@@ -788,7 +789,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         break;
       case "tool":
         const tool = event.currentTarget.closest("[data-key]").dataset.key;
-        app = new ProficiencyConfig(this.actor, {property: "tools", key: tool});
+        app = new SkillToolConfig({ document: this.actor, trait: "tool", key: tool });
         break;
     }
     app?.render(true);

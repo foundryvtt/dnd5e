@@ -2346,6 +2346,21 @@
 "DND5E.SizeSmallAbbr": "Sm",
 "DND5E.SizeTiny": "Tiny",
 "DND5E.SizeTinyAbbr": "Tn",
+
+"DND5E.SKILL": {
+  "SECTIONS": {
+    "Details": "{label} Details",
+    "Bonuses": {
+      "Label": "{label} Bonuses",
+      "Hint": "These bonuses apply to passive scores & checks made with {label}."
+    },
+    "Global": {
+      "Label": "Global Bonuses",
+      "Hint": "These bonuses apply to checks made with any skill."
+    }
+  }
+},
+
 "DND5E.Skill": "Skill",
 "DND5E.Skills": "Skills",
 "DND5E.SkillAcr": "Acrobatics",
@@ -2850,6 +2865,21 @@
   "Title": "Dynamic Ring"
 },
 "DND5E.ToggleDescription": "Toggle Description",
+
+"DND5E.TOOL": {
+  "SECTIONS": {
+    "Details": "{label} Details",
+    "Bonuses": {
+      "Label": "{label} Bonuses",
+      "Hint": "These bonuses apply to checks made with {label}."
+    },
+    "Global": {
+      "Label": "Global Bonuses",
+      "Hint": "These bonuses apply to checks made with any tool."
+    }
+  }
+},
+
 "DND5E.ToolArtisans": "Artisan's Tools",
 "DND5E.ToolBonuses": "Tool Bonuses",
 "DND5E.ToolCheck": "Tool Check",
