@@ -105,4 +105,20 @@ export default class Application5e extends HandlebarsApplicationMixin(Applicatio
       label.insertAdjacentElement("beforeend", hint);
     });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Disable form fields that aren't marked with the `interface-only` class.
+   */
+  _disableFields() {
+    const tags = [
+      "INPUT", "SELECT", "TEXTAREA", "BUTTON", "DND5E-CHECKBOX", "COLOR-PICKER", "DOCUMENT-TAGS",
+      "FILE-PICKER", "HUE-SLIDER", "MULTI-SELECT", "PROSE-MIRROR", "RANGE-PICKER", "STRING-TAGS"
+    ];
+    for ( const element of this.element.querySelectorAll(`:is(${tags.join(", ")}):not(.interface-only)`) ) {
+      if ( element.tagName === "TEXTAREA" ) element.readOnly = true;
+      else element.disabled = true;
+    }
+  }
 }

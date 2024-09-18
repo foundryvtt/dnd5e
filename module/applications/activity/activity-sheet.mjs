@@ -482,6 +482,7 @@ export default class ActivitySheet extends Application5e {
         .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
     }
     this.#toggleNestedTabs();
+    if ( !this.isEditable ) this._disableFields();
   }
 
   /* -------------------------------------------- */
