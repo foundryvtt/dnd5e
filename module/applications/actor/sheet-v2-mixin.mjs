@@ -394,7 +394,9 @@ export default function ActorSheetV2Mixin(Base) {
       ctx.save = item.system.activities?.getByType("save")[0]?.save;
 
       // Activities
-      ctx.activities = item.system.activities?.map(this._prepareActivity.bind(this));
+      ctx.activities = item.system.activities
+        ?.filter(a => !item.getFlag("dnd5e", "riders.activity")?.includes(a.id))
+        ?.map(this._prepareActivity.bind(this));
     }
 
     /* -------------------------------------------- */
