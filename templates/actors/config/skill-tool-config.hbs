@@ -1,0 +1,40 @@
+<section class="flexcol">
+    {{!-- Skill/Tool Proficiency & Ability --}}
+    <fieldset class="card">
+        <legend>{{ localize (concat section "Details") label=label }}</legend>
+        {{ formField fields.value name=(concat prefix "value") value=data.value
+                     options=proficiencyOptions localize=true }}
+        {{ formField fields.ability name=(concat prefix "ability") value=data.ability options=abilityOptions
+                     localize=true }}
+    </fieldset>
+
+    {{!-- Skill/Tool Checks --}}
+    <fieldset class="card">
+        <legend>{{ localize (concat section "Bonuses.Label") label=label }}</legend>
+        <div class="form-group">
+            <p class="hint">{{ localize (concat section "Bonuses.Hint") label=label }}</p>
+        </div>
+        {{#if fields.bonuses.fields.passive}}
+        {{ formField fields.bonuses.fields.passive name=(concat prefix "bonuses.passive") value=data.bonuses.passive
+                     localize=true }}
+        {{/if}}
+        {{ formField fields.bonuses.fields.check name=(concat prefix "bonuses.check") value=data.bonuses.check
+                     localize=true }}
+        <hr>
+        {{ formField fields.roll.fields.min name=(concat prefix "roll.min") type="number" value=data.roll.min
+                     localize=true }}
+        {{ formField fields.roll.fields.max name=(concat prefix "roll.max") type="number" value=data.roll.max
+                     localize=true }}
+    </fieldset>
+
+    {{!-- Global Skill Bonuses --}}
+    {{#if global}}
+    <fieldset class="card">
+        <legend>{{ localize (concat section "Global.Label") }}</legend>
+        <div class="form-group">
+            <p class="hint">{{ localize (concat section "Global.Hint") }}</p>
+        </div>
+        {{ formField global.fields.skill value=global.data.skill localize=true }}
+    </fieldset>
+    {{/if}}
+</section>
