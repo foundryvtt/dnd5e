@@ -96,19 +96,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     }).map(c => `${c.name} ${c.system.levels}`).join(" / ");
 
     // Exhaustion
-    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
-    context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
-      const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
-      const classes = ["pip"];
-      const filled = attributes.exhaustion >= n;
-      if ( filled ) classes.push("filled");
-      if ( n === max ) classes.push("death");
-      const pip = { n, label, filled, tooltip: label, classes: classes.join(" ") };
+    if (CONFIG.DND5E.conditionTypes.exhaustion) {
+      const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
+      context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
+        const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
+        const classes = ["pip"];
+        const filled = attributes.exhaustion >= n;
+        if ( filled ) classes.push("filled");
+        if ( n === max ) classes.push("death");
+        const pip = { n, label, filled, tooltip: label, classes: classes.join(" ") };
 
-      if ( n <= max / 2 ) acc.left.push(pip);
-      else acc.right.push(pip);
-      return acc;
-    }, { left: [], right: [] });
+        if ( n <= max / 2 ) acc.left.push(pip);
+        else acc.right.push(pip);
+        return acc;
+      }, { left: [], right: [] });
+    }
 
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
