@@ -20,8 +20,9 @@
                 <button type="button" name="setHalf">{{localize "DND5E.CurrencyManager.Transfer.Half"}}</button>
                 {{#each currency}}
                 <label>
-                    {{#with (lookup (lookup @root.CONFIG.currencies @key) "label") as |label|}}
-                    <i class="currency" style="background-image: url('{{ lookup (lookup @root.CONFIG.currencies @key) "icon" }}');" data-tooltip="{{label}}" aria-label="{{label}}"></i>
+                    {{#with (lookup @root.CONFIG.currencies @key) as |currency|}}
+                    <i class="currency" style="background-image: url('{{ lookup currency "icon" }}');"
+                        data-tooltip="{{ lookup currency 'label' }}" aria-label="{{ lookup currency 'label' }}"></i>
                     {{/with}}
                     {{numberInput null name=(concat "amount." @key) step=1}}
                 </label>

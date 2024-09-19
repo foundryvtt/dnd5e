@@ -1837,6 +1837,7 @@ preLocalize("lootTypes", { key: "label" });
  * @property {string} label         Localized label for the currency.
  * @property {string} abbreviation  Localized abbreviation for the currency.
  * @property {number} conversion    Number by which this currency should be multiplied to arrive at a standard value.
+ * @property {string} icon          Icon representing the currency in the interface.
  */
 
 /**
