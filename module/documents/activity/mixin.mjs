@@ -460,13 +460,24 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @internal
    */
   _createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig) {
+    let consumeResource;
+    let consumeUsage;
+    if ( (usageConfig.consume === true) || (usageConfig.consume?.resources === true) ) {
+      consumeResource = consumeUsage = true;
+    } else if ( (usageConfig.consume === false) || (usageConfig.comsume?.resources === false) ) {
+      consumeResource = consumeUsage = false;
+    } else if ( foundry.utils.getType(usageConfig.consume?.resources) === "Array" ) {
+      for ( const index of usageConfig.consume.resources ) {
+        if ( ["activityUses", "itemUses"].includes(this.consumption.targets[index]?.type) ) consumeUsage = true;
+        else consummeResource = true;
+      }
+    }
     return {
       config: {
         createMeasuredTemplate: usageConfig.create?.measuredTemplate ?? null,
-        consumeResource: usageConfig.consume?.resources !== false ?? null,
+        consumeResource,
         consumeSpellSlot: usageConfig.consume?.spellSlot !== false ?? null,
-        consumeUsage: (usageConfig.consume?.resources.includes("itemUses")
-          || usageConfig.consume?.resources.includes("activityUses")) ?? null,
+        consumeUsage,
         slotLevel: usageConfig.spell?.slot ?? null,
         resourceAmount: usageConfig.scaling ?? null,
         beginConcentrating: usageConfig.concentration?.begin ?? false,
@@ -494,13 +505,15 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @internal
    */
   _applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options) {
-    const usageTypes = ["activityUses", "itemUses"];
+    const { resourceIndices, usageIndices } = this.consumption.targets.reduce((o, data, index) => {
+      if ( ["activityUses", "itemUses"].includes(data.type) ) o.usageIndices.push(index);
+      else o.resourceIndices.push(index);
+      return o;
+    }, { resourceIndices: [], usageIndices: [] });
     let resources;
     if ( config.consumeResource && config.consumeUsage ) resources = true;
-    else if ( config.consumeResource && (config.consumeUsage === false) ) {
-      resources = Array.from(Object.keys(CONFIG.DND5E.activityConsumptionTypes)).filter(k => !usageTypes.includes(k));
-    }
-    else if ( (config.consumeResource === false) && config.consumeUsage ) resources = usageTypes;
+    else if ( config.consumeResource && (config.consumeUsage === false) ) resources = resourceIndices;
+    else if ( (config.consumeResource === false) && config.consumeUsage ) resources = usageIndices;
 
     // Set property so long as the value is not undefined
     // Avoids problems with `mergeObject` overwriting values with `undefined`
