@@ -11,15 +11,19 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 8,
+    "weight": {
+      "value": 8,
+      "units": "lb"
+    },
     "price": {
       "value": 4,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "",
     "identified": true,
@@ -38,7 +42,9 @@
       "description": ""
     },
     "container": null,
-    "properties": []
+    "properties": [],
+    "attuned": false,
+    "identifier": "saddlebags"
   },
   "effects": [],
   "folder": "PgtyWdfkDTDbc0ov",
@@ -49,11 +55,12 @@
   "flags": {},
   "_id": "TmfaFUSZJAotndn9",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233672,
-    "modifiedTime": 1704823152466,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037194443,
+    "modifiedTime": 1725992515517,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!TmfaFUSZJAotndn9"

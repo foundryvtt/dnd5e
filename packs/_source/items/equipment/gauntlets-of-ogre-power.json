@@ -1,7 +1,7 @@
 {
   "name": "Gauntlets of Ogre Power",
   "type": "equipment",
-  "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
+  "img": "icons/equipment/hand/gauntlet-armored-steel-grey.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>Your Strength score is 19 while you wear these gauntlets. They have no effect on you if your Strength is already 19 or higher.</p>",
@@ -11,75 +11,33 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 2,
+    "weight": {
+      "value": 2,
+      "units": "lb"
+    },
     "price": {
       "value": 8000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "uncommon",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
     "crewed": false,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": 0,
-      "dex": 0
+      "dex": 0,
+      "magicalBonus": null
     },
     "hp": {
       "value": 0,
@@ -103,11 +61,13 @@
     "container": null,
     "properties": [
       "mgc"
-    ]
+    ],
+    "activities": {},
+    "attuned": false,
+    "identifier": "gauntlets-of-ogre-power"
   },
   "effects": [
     {
-      "icon": "icons/magic/unholy/strike-hand-glow-pink.webp",
       "origin": "Compendium.dnd5e.items.3TWT5bv3z5zGUZCe",
       "duration": {
         "startTime": null,
@@ -128,12 +88,26 @@
           "priority": null
         }
       ],
-      "tint": null,
+      "tint": "#ffffff",
       "transfer": true,
       "flags": {},
       "name": "Gauntlets of Ogre Power",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!3TWT5bv3z5zGUZCe.m7FoXVGKT7C9X7aq"
     }
   ],
@@ -142,11 +116,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233454,
-    "modifiedTime": 1707055838986,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037093565,
+    "modifiedTime": 1725992481610,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "folder": "aJgMxnZED9XdoN2W",

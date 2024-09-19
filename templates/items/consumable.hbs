@@ -15,7 +15,7 @@
             </h1>
 
             <div class="item-subtitle">
-                <h4 class="item-type">{{itemType}}</h4>
+                <h4 class="item-type">{{ itemType }}</h4>
                 <label class="equipped">
                     <input type="checkbox" name="system.equipped" {{checked system.equipped}}>
                     {{#if system.equipped}}
@@ -39,7 +39,7 @@
             </div>
 
             <ul class="summary flexrow">
-                <li>{{ itemType }}</li>
+                <li>{{ itemStatus }}</li>
                 <li>
                     {{#if concealDetails}}
                     <span>{{ localize "DND5E.Unidentified.Title" }}</span>
@@ -94,11 +94,17 @@
             </div>
             {{/if}}
 
-            <div class="form-group">
+            <div class="form-group input-select">
                 <label>{{localize "DND5E.Attunement"}}</label>
-                <select name="system.attunement" data-dtype="Number">
-                    {{selectOptions config.attunements selected=system.attunement}}
-                </select>
+                <div class="form-fields">
+                    <input type="checkbox" name="system.attuned" {{ checked system.attuned }}
+                           {{ disabled (not system.attunement) }}
+                           data-tooltip="DND5E.Attuned" aria-label="{{ localize 'DND5E.Attuned' }}">
+                    <select name="system.attunement">
+                        {{selectOptions config.attunementTypes selected=system.attunement
+                                        blank=(localize "DND5E.AttunementNone")}}
+                    </select>
+                </div>
             </div>
 
             {{!-- Consumable Properties --}}
@@ -110,10 +116,20 @@
                 {{/if}}
                 {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                    <input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}>
+                    {{ label }}
                 </label>
                 {{/each}}
             </div>
+
+            {{#if (and properties.mgc.selected (eq system.type.value "ammo"))}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.MagicalBonus" }}</label>
+                <div class="form-fields">
+                    {{ numberInput system.magicalBonus name="system.magicalBonus" min="0" step="1" placeholder="0" }}
+                </div>
+            </div>
+            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
 

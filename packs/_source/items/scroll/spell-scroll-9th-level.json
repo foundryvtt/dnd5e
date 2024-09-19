@@ -2,7 +2,7 @@
   "_id": "O4YbkJkLlnsgUszZ",
   "name": "Spell Scroll 9th Level",
   "type": "consumable",
-  "img": "icons/sundries/scrolls/scroll-runed-brown-purple.webp",
+  "img": "icons/sundries/scrolls/scroll-bound-ruby-red.webp",
   "system": {
     "description": {
       "value": "<p>A spell scroll bears the words of a single spell, written in a mystical cipher. If the spell is on your class's spell list, you can read the scroll and cast its spell without providing any material components. Otherwise, the scroll is unintelligible. Casting the spell by reading the scroll requires the spell's normal casting time. Once the spell is cast, the words on the scroll fade, and it crumbles to dust. If the casting is interrupted, the scroll is not lost.</p>\n<p>If the spell is on your class's spell list but of a higher level than you can normally cast, you must make a DC 19 ability check using your spellcasting ability to determine whether you cast it successfully. On a failed check, the spell disappears from the scroll with no other effect.</p>\n<p>The level of the spell on the scroll determines the spell's saving throw DC and attack bonus, as well as the scroll's rarity.</p>\n<p><strong>Save DC</strong>: 19<br /><strong>Attack Bonus</strong>: +11.</p>\n<p>A wizard spell on a spell scroll can be copied just as spells in spellbooks can be copied. When a spell is copied from a spell scroll, the copier must succeed on a DC 19 Intelligence (Arcana) check. If the check succeeds, the spell is successfully copied. Whether the check succeeds or fails, the spell scroll is destroyed.</p>",
@@ -12,71 +12,41 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 0,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
     "price": {
       "value": 5120,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "legendary",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": "Spell must be on the caster's spell list."
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": 1,
       "max": "1",
-      "per": "charges",
-      "recovery": "",
+      "recovery": [],
       "autoDestroy": true,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "msak",
-    "attackBonus": "11",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0
     },
     "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": 19,
-      "scaling": "flat"
+      "base": {
+        "number": null,
+        "denomination": null,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        }
+      },
+      "replace": false
     },
     "type": {
       "value": "scroll",
@@ -86,10 +56,13 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "magicalBonus": null,
+    "activities": {},
+    "attuned": false,
+    "identifier": "spell-scroll-9th-level"
   },
   "effects": [],
   "folder": "epDf8I2SD3cS6ctz",
@@ -99,11 +72,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233636,
-    "modifiedTime": 1707055842647,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037176222,
+    "modifiedTime": 1725992509317,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!O4YbkJkLlnsgUszZ"

@@ -14,72 +14,26 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Circle of the Land 10",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
     },
-    "crewed": false,
-    "properties": []
+    "identifier": "natures-ward"
   },
   "flags": {},
   "img": "icons/commodities/flowers/lotus-pink.webp",
@@ -110,25 +64,39 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/commodities/flowers/lotus-pink.webp",
       "origin": "Item.OTvrJSJSUgAwXrWX",
       "transfer": true,
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
       "name": "Nature's Ward",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/commodities/flowers/lotus-pink.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!OTvrJSJSUgAwXrWX.Jxpz4MZmgTy7z7cm"
     }
   ],
   "folder": "oPF5p4Kt9rOawCdU",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234370,
-    "modifiedTime": 1704824716501,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037383558,
+    "modifiedTime": 1725992288214,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!OTvrJSJSUgAwXrWX"

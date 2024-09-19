@@ -11,7 +11,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "identifier": "school-of-evocation",
     "classIdentifier": "wizard",
@@ -21,12 +22,18 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.7uzJ2JkmsdRGLra3",
-            "Compendium.dnd5e.classfeatures.6VBXkjjBgjSpNElh"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.7uzJ2JkmsdRGLra3",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.6VBXkjjBgjSpNElh",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -43,11 +50,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.evEWCpE5MYgr5RRW"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.evEWCpE5MYgr5RRW",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -64,11 +74,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.7O85kj6uDEG5NzUE"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.7O85kj6uDEG5NzUE",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -85,11 +98,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.VUtSLeCzFubGXmGx"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.VUtSLeCzFubGXmGx",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -104,7 +120,8 @@
     ],
     "spellcasting": {
       "progression": "none",
-      "ability": ""
+      "ability": "",
+      "preparation": {}
     }
   },
   "effects": [],
@@ -116,11 +133,12 @@
   "flags": {},
   "_id": "Ye5f3FReEnuXfi0y",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234295,
-    "modifiedTime": 1704824717229,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037372944,
+    "modifiedTime": 1725992730647,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Ye5f3FReEnuXfi0y"

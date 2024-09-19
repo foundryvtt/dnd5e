@@ -1,0 +1,28 @@
+<section class="content">
+    <section class="header">
+        <div class="top">
+            <img src="{{ effect.img }}" alt="{{ effect.name }}">
+            <div class="name name-stacked">
+                <span class="title">{{ effect.name }}</span>
+                {{#if effect.duration.remaining}}
+                <span class="subtitle duration">
+                    <i class="fas fa-clock" inert></i>
+                    <span class="most-significant">{{ durationParts.[0] }}</span>
+                    {{#if durationParts.[1]}}
+                    <span class="separator">&vert;</span>
+                    <span class="least-significant">{{ durationParts.[1] }}</span>
+                    {{/if}}
+                </span>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    <section class="description">{{{ description }}}</section>
+    <ul class="pills">
+        {{#each properties}}
+        <li class="pill transparent">
+            <span class="label">{{ this }}</span>
+        </li>
+        {{/each}}
+    </ul>
+</section>

@@ -5,7 +5,7 @@ import AdvancementConfig from "./advancement-config.mjs";
  */
 export default class AbilityScoreImprovementConfig extends AdvancementConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/ability-score-improvement-config.hbs"
@@ -13,8 +13,10 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
   }
 
   /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
       if ( !this.advancement.canImprove(key) ) return obj;
@@ -23,6 +25,7 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
         key,
         name: `configuration.fixed.${key}`,
         label: data.label,
+        locked: this.advancement.configuration.locked.has(key),
         value: fixed,
         canIncrease: true,
         canDecrease: true
@@ -35,7 +38,7 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
       points: {
         key: "points",
         name: "configuration.points",
-        label: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementPoints"),
+        label: game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.label"),
         min: 0,
         value: this.advancement.configuration.points,
         canIncrease: true,
@@ -45,8 +48,18 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
   }
 
   /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @override */
+  async prepareConfigurationUpdate(configuration) {
+    configuration.locked = configuration.locked?.filter(l => l);
+    return configuration;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".adjustment-button").click(this._onClickButton.bind(this));

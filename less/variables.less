@@ -35,6 +35,7 @@
   --dnd5e-color-green: #205b15;
   --dnd5e-color-maroon: #741b2b;
   --dnd5e-color-parchment: #f1ebe8;
+  --dnd5e-color-purple: #c44dff;
   --dnd5e-color-scrollbar: var(--dnd5e-color-gold);
   --dnd5e-color-card: #f8f4f1;
   --dnd5e-color-hp-1: #1b4b29;
@@ -45,20 +46,33 @@
   --dnd5e-color-hd-3: #500000;
   --dnd5e-color-sc-1: #433754;
   --dnd5e-color-sc-2: #776493;
+  --dnd5e-color-blue-white: #cfd2da;
+  --dnd5e-color-blue-gray-1: #242731;
+  --dnd5e-color-blue-gray-2: #252830;
+  --dnd5e-color-blue-gray-3: #434857;
+  --dnd5e-color-blue-gray-4: #333742;
   --dnd5e-color-iron-gray: #313131;
   --dnd5e-color-light-gray: #3d3d3d;
+  --dnd5e-color-dark-gray: #0d0b0b;
   --dnd5e-color-success: #006c00;
   --dnd5e-color-success-background: #c7d0c0;
   --dnd5e-color-success-critical: green;
   --dnd5e-color-failure: #6e0000;
   --dnd5e-color-failure-background: #ffdddd;
   --dnd5e-color-failure-critical: red;
+  --dnd5e-color-application-damage: #9c5b47;
+  --dnd5e-color-application-healing: #3c7f58;
+  --dnd5e-color-application-temp: #007F7F;
+  --dnd5e-background-25: rgb(0 0 0 / 25%);
   --dnd5e-background-10: rgb(0 0 0 / 10%);
   --dnd5e-background-5: rgb(0 0 0 / 5%);
+  --dnd5e-background-card: var(--dnd5e-color-card);
+  --dnd5e-background-parchment: var(--dnd5e-color-parchment);
   --dnd5e-border-dark: 1px solid #999;
   --dnd5e-border-light: 1px solid #CCC;
   --dnd5e-border-groove: 2px groove var(--dnd5e-color-groove);
   --dnd5e-border-dotted: 1px dotted #bbb;
+  --dnd5e-border-gold: 1px solid var(--dnd5e-color-gold);
   --dnd5e-font-modesto: "Modesto Condensed", "Palatino Linotype", serif;
   --dnd5e-font-roboto: Roboto, sans-serif;
   --dnd5e-font-roboto-condensed: "Roboto Condensed", sans-serif;
@@ -66,6 +80,7 @@
   --dnd5e-sheet-background: url("ui/parchment.jpg") repeat;
   --dnd5e-shadow-45: rgb(0 0 0 / 45%);
   --dnd5e-shadow-15: rgb(0 0 0 / 15%);
+  --dnd5e-highlight-10: rgb(255 255 255 / 10%);
   --dnd5e-highlight-45: rgb(255 255 255 / 45%);
   --font-size-9: 0.5625rem;
   --font-size-10: 0.625rem;
@@ -80,51 +95,4 @@
   --dnd5e-capacity-background-color: oklch(62% 0.05 246);
   --dnd5e-capacity-border-color: oklch(91% 0.044 252.5);
   --dnd5e-capacity-text-color: oklch(95% 0 0);
-
-  @media (prefers-contrast: more) {
-    --dnd5e-color-card: #ffffff;
-    --dnd5e-color-gold: #e3ce9e;
-    --dnd5e-color-scrollbar: var(--dnd5e-color-maroon);
-    --filigree-border-color: var(--dnd5e-color-dark);
-    --proficiency-cycle-enabled-color: color-mix(in oklab, var(--dnd5e-color-blue), black 20%);
-    --proficiency-cycle-disabled-color: var(--dnd5e-color-dark);
-    .window-app .window-content {
-      --color-text-dark-primary: #000000;
-    }
-  }
-}
-
-/* ----------------------------------------- */
-/*  Flexbox                                  */
-/* ----------------------------------------- */
-
-.flexrow {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-
-  > * {
-    flex: 1;
-  }
-
-  .flex1 { flex: 1; }
-  .flex2 { flex: 2; }
-  .flex3 { flex: 3; }
-  .flex4 { flex: 4; }
-}
-
-.flexcol {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-
-  > * {
-    flex: 1;
-  }
-
-  .flex1 { flex: 1; }
-  .flex2 { flex: 2; }
-  .flex3 { flex: 3; }
-  .flex4 { flex: 4; }
 }

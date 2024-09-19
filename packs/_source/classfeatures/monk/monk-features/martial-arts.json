@@ -14,72 +14,26 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": 5,
-      "width": null,
-      "units": "ft",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "dex",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Monk 1",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
     },
-    "crewed": false,
-    "properties": []
+    "identifier": "martial-arts"
   },
   "flags": {},
   "img": "icons/skills/melee/unarmed-punch-fist.webp",
@@ -87,11 +41,12 @@
   "folder": "TMmNG8ujFDBEWXRe",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234416,
-    "modifiedTime": 1704824718493,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037387694,
+    "modifiedTime": 1725992289633,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!l50hjTxO2r0iecKw"

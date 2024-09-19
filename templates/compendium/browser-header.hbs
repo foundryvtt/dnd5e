@@ -1,0 +1,9 @@
+<div>
+    <div class="mode-toggle">
+        {{#if showModeToggle}}
+        <slide-toggle class="mode-slider header-control" data-action="toggleMode" {{ checked isAdvanced }}
+                      id="{{ partId }}-mode-toggle"></slide-toggle>
+        <label for="{{ partId }}-mode-toggle">{{ localize "DND5E.Advanced" }}</label>
+        {{/if}}
+    </div>
+</div>

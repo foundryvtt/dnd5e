@@ -11,71 +11,41 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 12000,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "veryRare",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
       "autoDestroy": false,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0,
+      "recovery": []
     },
     "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "base": {
+        "number": null,
+        "denomination": null,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        }
+      },
+      "replace": false
     },
     "type": {
       "value": "trinket",
@@ -85,25 +55,29 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "magicalBonus": null,
+    "activities": {},
+    "attuned": false,
+    "identifier": "marvelous-pigments"
   },
   "effects": [],
   "flags": {},
   "_id": "e3XQygrXkzNvkDGF",
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 6700000,
   "ownership": {
     "default": 0
   },
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233750,
-    "modifiedTime": 1707055845076,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037237709,
+    "modifiedTime": 1725992529848,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!e3XQygrXkzNvkDGF"

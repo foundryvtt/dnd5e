@@ -1,0 +1,6 @@
+<fieldset>
+    <legend>{{ localize "DND5E.RollConfiguration.Configuration" }}</legend>
+    {{#each fields}}
+        {{ formField field name=name value=value options=options input=input }}
+    {{/each}}
+</fieldset>

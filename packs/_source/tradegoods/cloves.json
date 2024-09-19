@@ -14,10 +14,14 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 3,
       "denomination": "gp"
@@ -32,7 +36,8 @@
     "type": {
       "value": "",
       "subtype": ""
-    }
+    },
+    "identifier": "cloves"
   },
   "sort": 0,
   "flags": {},
@@ -40,11 +45,12 @@
   "effects": [],
   "folder": null,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234022,
-    "modifiedTime": 1704823424240,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037332542,
+    "modifiedTime": 1725992737598,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!u753EokyA4vjksle"

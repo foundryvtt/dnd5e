@@ -1,0 +1,99 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>
+            <span>{{ localize "DND5E.SUMMON.FIELDS.profiles.label" }}</span>
+            <button type="button" class="unbutton control-button" data-action="addProfile"
+                    data-tooltip="DND5E.SUMMON.Profile.Action.Create"
+                    aria-label="{{ localize "DND5E.SUMMON.Profile.Action.Create" }}">
+                <i class="fas fa-plus" inert></i>
+            </button>
+        </legend>
+        {{#with fields.summon.fields as |fields|}}
+        {{ formField fields.mode value=../source.summon.mode options=../profileModes }}
+        {{#unless @root.activity.isSpell}}{{ formField fields.identifier value=../source.summon.identifier }}{{/unless}}
+        {{/with}}
+        <ul class="separated-list unlist">
+            {{#each profiles}}
+            <li data-index="{{ index }}" data-profile-id="{{ data._id }}" data-expand-id="profile-{{ data._id }}">
+                {{> ".profile" }}
+            </li>
+            {{else}}
+            <li class="empty">
+                {{#unless source.summon.mode}}{{{ localize "DND5E.SUMMON.Profile.EmptyDrop" }}}
+                {{~else}}{{{ localize "DND5E.SUMMON.Profile.Empty" }}}{{/unless}}
+            </li>
+            {{/each}}
+        </ul>
+    </fieldset>
+</section>
+
+{{#*inline ".profile"}}
+    <div class="form-group split-group full-width">
+        <div class="form-fields">
+
+            {{!-- Count --}}
+            {{ formField fields.count name=(concat prefix "count") value=data.count placeholder="1"
+                         classes="label-top" }}
+
+            <span class="sep">&times;</span>
+
+            {{#if (eq mode "cr")}}
+
+            {{!-- CR --}}
+            {{ formField fields.cr name=(concat prefix "cr") value=data.cr localize=true hint=false classes="label-top"
+                         label="DND5E.SUMMON.FIELDS.profiles.FIELDS.cr.abbr" }}
+
+            {{else if document}}
+
+            {{!-- UUID --}}
+            {{{ dnd5e-linkForUuid data.uuid }}}
+
+            {{else~}}
+
+            {{!-- Drop Area --}}
+            <div class="drop-area">{{ localize "DND5E.SUMMON.Profile.DropHint" }}</div>
+
+            {{/if}}
+
+            {{!-- Name --}}
+            {{ formField fields.name name=(concat prefix "name") value=data.name hint=false classes="label-top"
+                         placeholder=(ifThen document document.name "") }}
+
+            {{!-- Delete --}}
+            <button type="button" class="unbutton control-button" data-action="deleteProfile"
+                    data-tooltip="DND5E.SUMMON.Profile.Action.Delete"
+                    aria-label="{{ localize "DND5E.SUMMON.Profile.Action.Delete" }}">
+                <i class="fas fa-minus" inert></i>
+            </button>
+        </div>
+    </div>
+    <input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
+    <input type="hidden" name="{{ prefix }}uuid" value="{{ data.uuid }}">
+    <div class="additional-tray collapsible {{ collapsed }}" data-action="toggleCollapsed">
+        <label class="roboto-upper">
+            <i class="fa-solid fa-gears" inert></i>
+            <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+            <i class="fa-solid fa-caret-down" inert></i>
+        </label>
+        <div class="collapsible-content">
+            <div class="wrapper">
+                {{#if (eq mode "cr")}}
+                {{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions }}
+                {{/if}}
+                <div class="form-group">
+                    <label>{{ localize "DND5E.SUMMON.FIELDS.profiles.FIELDS.level.label" }}</label>
+                    <div class="form-fields range-fields">
+                        {{ formInput fields.level.fields.min name=(concat prefix "level.min") value=data.level.min
+                                     placeholder="0" ariaLabel=(localize "DND5E.LevelLimit.Min")
+                                     input=@root.inputs.createNumberInput }}
+                        <dnd5e-icon src="systems/dnd5e/icons/svg/range-connector.svg" class="sep"></dnd5e-icon>
+                        {{ formInput fields.level.fields.max name=(concat prefix "level.max") value=data.level.max
+                                     placeholder="∞" ariaLabel=(localize "DND5E.LevelLimit.Max")
+                                     input=@root.inputs.createNumberInput }}
+                    </div>
+                    <p class="hint">{{ localize "DND5E.SUMMON.FIELDS.profiles.FIELDS.level.hint" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/inline}}

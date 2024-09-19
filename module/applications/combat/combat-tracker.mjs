@@ -1,9 +1,21 @@
+import { formatNumber } from "../../utils.mjs";
+
 /**
  * An extension of the base CombatTracker class to provide some 5e-specific functionality.
  * @extends {CombatTracker}
  */
 export default class CombatTracker5e extends CombatTracker {
-  /** @inheritdoc */
+  async getData(options={}) {
+    const context = await super.getData(options);
+    context.turns.forEach(turn => {
+      turn.initiative = formatNumber(Number(turn.initiative), { maximumFractionDigits: 0 });
+    });
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onCombatantControl(event) {
     const btn = event.currentTarget;
     const combatantId = btn.closest(".combatant").dataset.combatantId;

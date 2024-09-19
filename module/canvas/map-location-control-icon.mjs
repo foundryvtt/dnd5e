@@ -1,3 +1,6 @@
+/**
+ * Custom control icon used to display Map Location journal pages when pinned to the map.
+ */
 export default class MapLocationControlIcon extends PIXI.Container {
   constructor({code, size=40, ...style}={}, ...args) {
     super(...args);
@@ -6,7 +9,17 @@ export default class MapLocationControlIcon extends PIXI.Container {
     this.size = size;
     this.style = style;
 
-    this.radius = size / 2;
+    this.renderMarker();
+    this.refresh();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform the actual rendering of the marker.
+   */
+  renderMarker() {
+    this.radius = this.size / 2;
     this.circle = [this.radius, this.radius, this.radius + 8];
     this.backgroundColor = this.style.backgroundColor;
     this.borderColor = this.style.borderHoverColor;
@@ -20,7 +33,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
     // Drop Shadow
     this.shadow = this.addChild(new PIXI.Graphics());
     this.shadow.clear()
-      .beginFill(this.style.borderColor, 0.65)
+      .beginFill(this.style.shadowColor, 0.65)
       .drawCircle(this.radius + 8, this.radius + 8, this.radius + 10)
       .endFill();
     this.shadow.filters = [new PIXI.filters.BlurFilter(16)];
@@ -49,8 +62,6 @@ export default class MapLocationControlIcon extends PIXI.Container {
     // Border
     this.border = this.addChild(new PIXI.Graphics());
     this.border.visible = false;
-
-    this.refresh();
   }
 
   /* -------------------------------------------- */
@@ -63,7 +74,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   refresh({ visible, iconColor, borderColor, borderVisible }={}) {
     if ( borderColor ) this.borderColor = borderColor;
     this.border.clear().lineStyle(2, this.borderColor, 1.0).drawCircle(...this.circle).endFill();
@@ -86,7 +97,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
     style.dropShadow = false;
     style.fill = Color.from(this.style.textColor);
     style.strokeThickness = 0;
-    style.fontFamily = ["Roboto Slab", "Signika"];
+    style.fontFamily = ["Signika"];
     if ( this.style.fontFamily ) style.fontFamily.unshift(this.style.fontFamily);
     style.fontSize = characterCount > 2 ? size * .5 : size * .6;
     return style;

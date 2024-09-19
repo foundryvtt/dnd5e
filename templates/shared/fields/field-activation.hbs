@@ -1,0 +1,20 @@
+{{!-- Activation --}}
+<div class="form-group split-group">
+    <label>{{ localize label }}</label>
+    <div class="form-fields">
+
+        {{!-- Amount --}}
+        {{#if activation.scalar}}
+        {{ formField fields.value value=data.value label="DND5E.Amount" placeholder="—" localize=true hint=false
+                     classes="label-top" }}
+        {{/if}}
+
+        {{!-- Type --}}
+        {{ formField fields.type value=data.type label="DND5E.Cost" localize=true classes="label-top" hint=false
+                     options=activationTypes }}
+    </div>
+
+    {{!-- Condition --}}
+    {{ formInput fields.condition value=data.condition input=inputs.createTextInput classes="full-width"
+                 placeholder=(localize "DND5E.ItemActivationCondition") }}
+</div>

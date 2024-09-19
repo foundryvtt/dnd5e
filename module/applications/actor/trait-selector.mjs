@@ -30,7 +30,7 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "trait-selector",
@@ -38,28 +38,27 @@ export default class TraitSelector extends BaseConfigSheet {
       template: "systems/dnd5e/templates/apps/trait-selector.hbs",
       width: 320,
       height: "auto",
-      sheetConfig: false,
       allowCustom: true
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get id() {
     return `${this.constructor.name}-${this.trait}-Actor-${this.document.id}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     return `${this.document.name}: ${Trait.traitLabel(this.trait)}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const path = Trait.actorKeyPath(this.trait);
     const data = foundry.utils.getProperty(this.document, path);
@@ -80,7 +79,7 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -91,12 +90,12 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getActorOverrides() {
     const overrides = super._getActorOverrides();
     const path = Trait.actorKeyPath(this.trait);
-    this.#addOverriddenChoices("choices", Trait.changeKeyPath(this.trait), overrides);
-    this.#addOverriddenChoices("bypasses", `${path}.bypasses`, overrides);
+    this._addOverriddenChoices("choices", Trait.changeKeyPath(this.trait), overrides);
+    this._addOverriddenChoices("bypasses", `${path}.bypasses`, overrides);
     const pathCustom = `${path}.custom`;
     const sourceCustom = foundry.utils.getProperty(this.document._source, pathCustom);
     const currentCustom = foundry.utils.getProperty(this.document, pathCustom);
@@ -106,22 +105,7 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Add choices that have been overridden.
-   * @param {string} prefix       The initial form prefix under which the choices are grouped.
-   * @param {string} path         Path in actor data.
-   * @param {string[]} overrides  The list of fields that are currently modified by Active Effects. *Will be mutated.*
-   */
-  #addOverriddenChoices(prefix, path, overrides) {
-    const source = new Set(foundry.utils.getProperty(this.document._source, path) ?? []);
-    const current = foundry.utils.getProperty(this.document, path) ?? new Set();
-    const delta = current.symmetricDifference(source);
-    for ( const choice of delta ) overrides.push(`${prefix}.${choice}`);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onChangeInput(event) {
     super._onChangeInput(event);
 

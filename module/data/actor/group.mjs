@@ -1,5 +1,6 @@
+import TokenPlacement from "../../canvas/token-placement.mjs";
 import { ActorDataModel } from "../abstract.mjs";
-import { FormulaField } from "../fields.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
 
@@ -43,43 +44,41 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  * });
  */
 export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new SchemaField({
-        value: new StringField({initial: "party", label: "DND5E.Group.Type"})
+        value: new StringField({ initial: "party", label: "DND5E.Group.Type" })
       }),
       description: new SchemaField({
-        full: new HTMLField({label: "DND5E.Description"}),
-        summary: new HTMLField({label: "DND5E.DescriptionSummary"})
+        full: new HTMLField({ label: "DND5E.Description" }),
+        summary: new HTMLField({ label: "DND5E.DescriptionSummary" })
       }),
       members: new ArrayField(new SchemaField({
         actor: new ForeignDocumentField(foundry.documents.BaseActor),
         quantity: new SchemaField({
-          value: new NumberField({initial: 1, integer: true, min: 0, label: "DND5E.Quantity"}),
-          formula: new FormulaField({label: "DND5E.QuantityFormula"})
+          value: new NumberField({ initial: 1, integer: true, min: 0, label: "DND5E.Quantity" }),
+          formula: new FormulaField({ label: "DND5E.QuantityFormula" })
         })
-      }), {label: "DND5E.GroupMembers"}),
+      }), { label: "DND5E.GroupMembers" }),
       attributes: new SchemaField({
         movement: new SchemaField({
-          land: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementLand"}),
-          water: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementWater"}),
-          air: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementAir"})
+          land: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementLand" }),
+          water: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementWater" }),
+          air: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementAir" })
         })
-      }, {label: "DND5E.Attributes"}),
+      }, { label: "DND5E.Attributes" }),
       details: new SchemaField({
-        xp: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.NumberField({
-            integer: true, min: 0, label: "DND5E.ExperiencePointsCurrent"
-          })
-        }, {label: "DND5E.ExperiencePoints"})
-      }, {label: "DND5E.Details"})
+        xp: new SchemaField({
+          value: new NumberField({ integer: true, min: 0, label: "DND5E.ExperiencePointsCurrent" })
+        }, { label: "DND5E.ExperiencePoints" })
+      }, { label: "DND5E.Details" })
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     systemFlagsModel: GroupSystemFlags
   }, {inplace: false}));
@@ -107,7 +106,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     GroupActor.#migrateMembers(source);
@@ -131,7 +130,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareBaseData() {
     const memberIds = new Set();
     this.members = this.members.filter((member, index) => {
@@ -157,7 +156,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareDerivedData() {
     const system = this;
     Object.defineProperty(this.details.xp, "derived", {
@@ -187,6 +186,38 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
     const membersCollection = this.toObject().members;
     membersCollection.push({ actor: actor.id });
     return this.parent.update({"system.members": membersCollection});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Place all members in the group on the current scene.
+   */
+  async placeMembers() {
+    if ( !game.user.isGM || !canvas.scene ) return;
+    const minimized = !this.parent.sheet._minimized;
+    await this.parent.sheet.minimize();
+    const tokensData = [];
+
+    try {
+      const placements = await TokenPlacement.place({
+        tokens: Object.values(this.members).flatMap(({ actor, quantity }) =>
+          Array(this.type.value === "encounter" ? (quantity.value ?? 1) : 1).fill(actor.prototypeToken)
+        )
+      });
+      for ( const placement of placements ) {
+        const actor = placement.prototypeToken.actor;
+        const appendNumber = !placement.prototypeToken.actorLink && placement.prototypeToken.appendNumber;
+        delete placement.prototypeToken;
+        const tokenDocument = await actor.getTokenDocument(placement);
+        if ( appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
+        tokensData.push(tokenDocument.toObject());
+      }
+    } finally {
+      if ( minimized ) this.parent.sheet.maximize();
+    }
+
+    await canvas.scene.createEmbeddedDocuments("Token", tokensData);
   }
 
   /* -------------------------------------------- */
@@ -226,6 +257,42 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       if ( roll.total > 0 ) member.quantity.value = roll.total;
     }));
     return this.parent.update({"system.members": membersCollection});
+  }
+
+  /* -------------------------------------------- */
+  /*  Resting                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Initiate a rest for all members of this group.
+   * @param {RestConfiguration} config  Configuration data for the rest.
+   * @param {RestResult} result         Results of the rest operation being built.
+   * @returns {boolean}                 Returns `false` to prevent regular rest process from completing.
+   */
+  async rest(config, result) {
+    const results = new Map();
+    for ( const member of this.members ) {
+      results.set(
+        member.actor,
+        await member.actor[config.type === "short" ? "shortRest" : "longRest"]({
+          ...config, dialog: false, advanceTime: false
+        }) ?? null
+      );
+    }
+
+    // Advance the game clock
+    if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
+
+    /**
+     * A hook event that fires when the rest process is completed for a group.
+     * @function dnd5e.groupRestCompleted
+     * @memberof hookEvents
+     * @param {Actor5e} group                         The group that just completed resting.
+     * @param {Map<Actor5e, RestResult|null>} result  Details on the rests completed.
+     */
+    Hooks.callAll("dnd5e.groupRestCompleted", this.parent, results);
+
+    return false;
   }
 
   /* -------------------------------------------- */

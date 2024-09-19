@@ -11,7 +11,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "identifier": "draconic-bloodline",
     "classIdentifier": "sorcerer",
@@ -21,12 +22,18 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.EZsonMThTNLZq35j",
-            "Compendium.dnd5e.classfeatures.MW1ExvBLm8Hg82aA"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.EZsonMThTNLZq35j",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.MW1ExvBLm8Hg82aA",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -43,11 +50,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.x6eEZ9GUsuOcEa3G"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.x6eEZ9GUsuOcEa3G",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -64,11 +74,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.3647zjKSE9zFwOXc"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.3647zjKSE9zFwOXc",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -85,11 +98,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.Gsha4bl0apxqspFy"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.Gsha4bl0apxqspFy",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -105,7 +121,6 @@
         "_id": "Gg8rCLE8zNfjpGOV",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -115,12 +130,15 @@
         },
         "level": 1,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       }
     ],
     "spellcasting": {
       "progression": "none",
-      "ability": ""
+      "ability": "",
+      "preparation": {}
     }
   },
   "effects": [],
@@ -132,11 +150,12 @@
   "flags": {},
   "_id": "2nadB2MBSHTQ0kcl",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234292,
-    "modifiedTime": 1704824714440,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037372784,
+    "modifiedTime": 1725992730550,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!2nadB2MBSHTQ0kcl"

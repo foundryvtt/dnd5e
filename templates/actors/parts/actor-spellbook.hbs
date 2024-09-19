@@ -1,4 +1,4 @@
-<{{elements.inventory}}>
+<{{elements.inventory}} class="inventory-element">
   <div class="inventory-filters spellbook-filters flexrow">
     <div class="form-group spellcasting-ability">
         {{#unless isNPC}}
@@ -6,7 +6,7 @@
         {{else}}
         <label>{{localize "DND5E.Level"}}</label>
         {{numberInput system.details.spellLevel name="system.details.spellLevel" class="spellcasting-level"
-                      placeholder="0" min=0 step=1}}
+                      placeholder="0" min=0 step=1 disabled=classSpellcasting}}
         {{/unless}}
         <select name="system.attributes.spellcasting" data-type="String">
             {{#select system.attributes.spellcasting}}

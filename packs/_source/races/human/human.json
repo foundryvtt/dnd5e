@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "identifier": "human",
     "advancement": [
@@ -29,7 +30,8 @@
             "wis": 1,
             "cha": 1
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -41,7 +43,6 @@
         "_id": "dNSrZePZHz2qwVpi",
         "type": "Size",
         "configuration": {
-          "hint": "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.",
           "sizes": [
             "med"
           ]
@@ -50,13 +51,13 @@
           "size": ""
         },
         "level": 1,
-        "title": ""
+        "title": "",
+        "hint": "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium."
       },
       {
         "_id": "HI6r4Y6KjHND0i53",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -73,7 +74,9 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       }
     ],
     "movement": {
@@ -105,11 +108,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1677180079259,
-    "modifiedTime": 1704824711440,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037393369,
+    "modifiedTime": 1725992703802,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

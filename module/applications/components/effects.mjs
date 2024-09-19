@@ -72,21 +72,41 @@ export default class EffectsElement extends HTMLElement {
 
   /**
    * Prepare the data structure for Active Effects which are currently applied to an Actor or Item.
-   * @param {ActiveEffect5e[]} effects  The array of Active Effect instances for which to prepare sheet data.
+   * @param {ActiveEffect5e[]} effects         The array of Active Effect instances for which to prepare sheet data.
+   * @param {object} [options={}]
+   * @param {Actor5e|Item5e} [options.parent]  Document that owns these active effects.
    * @returns {object}                  Data for rendering.
    */
-  static prepareCategories(effects) {
+  static prepareCategories(effects, { parent }={}) {
     // Define effect header categories
     const categories = {
+      enchantment: {
+        type: "enchantment",
+        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.General"),
+        effects: [],
+        isEnchantment: true
+      },
       temporary: {
         type: "temporary",
         label: game.i18n.localize("DND5E.EffectTemporary"),
         effects: []
       },
+      enchantmentActive: {
+        type: "activeEnchantment",
+        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Active"),
+        effects: [],
+        isEnchantment: true
+      },
       passive: {
         type: "passive",
         label: game.i18n.localize("DND5E.EffectPassive"),
         effects: []
+      },
+      enchantmentInactive: {
+        type: "inactiveEnchantment",
+        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Inactive"),
+        effects: [],
+        isEnchantment: true
       },
       inactive: {
         type: "inactive",
@@ -105,12 +125,25 @@ export default class EffectsElement extends HTMLElement {
     // Iterate over active effects, classifying them into categories
     for ( const e of effects ) {
       if ( (e.parent.system?.identified === false) && !game.user.isGM ) continue;
-      if ( e.isSuppressed ) categories.suppressed.effects.push(e);
+      if ( e.isAppliedEnchantment ) {
+        if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
+        else categories.enchantmentActive.effects.push(e);
+      }
+      else if ( e.type === "enchantment" ) categories.enchantment.effects.push(e);
+      else if ( e.isSuppressed ) categories.suppressed.effects.push(e);
       else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
       else categories.passive.effects.push(e);
     }
+    categories.enchantment.hidden = !parent?.system.isEnchantment;
+    categories.enchantmentActive.hidden = !categories.enchantmentActive.effects.length;
+    categories.enchantmentInactive.hidden = !categories.enchantmentInactive.effects.length;
     categories.suppressed.hidden = !categories.suppressed.effects.length;
+
+    for ( const category of Object.values(categories) ) {
+      category.localizationPrefix = category.isEnchantment ? "DND5E.ENCHANTMENT.Action." : "DND5E.Effect";
+    }
+
     return categories;
   }
 
@@ -125,6 +158,7 @@ export default class EffectsElement extends HTMLElement {
    * @protected
    */
   _getContextOptions(effect) {
+    const isConcentrationEffect = (this.document instanceof Actor5e) && this._app._concentration?.effects.has(effect);
     const options = [
       {
         name: "DND5E.ContextMenuActionEdit",
@@ -141,15 +175,22 @@ export default class EffectsElement extends HTMLElement {
       {
         name: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
-        condition: () => effect.isOwner,
+        condition: () => effect.isOwner && !isConcentrationEffect,
         callback: li => this._onAction(li[0], "delete")
       },
       {
         name: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
         icon: effect.disabled ? "<i class='fas fa-check fa-fw'></i>" : "<i class='fas fa-times fa-fw'></i>",
         group: "state",
-        condition: () => effect.isOwner,
+        condition: () => effect.isOwner && !isConcentrationEffect,
         callback: li => this._onAction(li[0], "toggle")
+      },
+      {
+        name: "DND5E.ConcentrationBreak",
+        icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
+        condition: () => isConcentrationEffect,
+        callback: () => this.document.endConcentration(effect),
+        group: "state"
       }
     ];
 
@@ -198,7 +239,8 @@ export default class EffectsElement extends HTMLElement {
       case "create":
         return this._onCreate(target);
       case "delete":
-        return effect.deleteDialog();
+        await effect.deleteDialog({}, { render: false });
+        return this.#app.render();
       case "duplicate":
         return effect.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
       case "edit":
@@ -235,14 +277,16 @@ export default class EffectsElement extends HTMLElement {
    * @returns {Promise<ActiveEffect5e>}
    */
   async _onCreate(target) {
-    const isActor = this.document instanceof Actor;
     const li = target.closest("li");
+    const isActor = this.document instanceof Actor;
+    const isEnchantment = li.dataset.effectType.startsWith("enchantment");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
+      type: isEnchantment ? "enchantment" : "base",
       name: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
-      origin: this.document.uuid,
+      origin: isEnchantment ? undefined : this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
-      disabled: li.dataset.effectType === "inactive"
+      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType)
     }]);
   }
 

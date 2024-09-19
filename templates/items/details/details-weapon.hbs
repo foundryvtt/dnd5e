@@ -1,0 +1,135 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemWeaponDetails" }}</legend>
+
+    {{!-- Weapon Type --}}
+    {{ formField fields.type.fields.value value=source.type.value label="DND5E.ItemWeaponType" localize=true
+                 choices=config.weaponTypes }}
+
+    {{!-- Weapon Base --}}
+    {{ formField fields.type.fields.baseItem value=source.type.baseItem label="DND5E.ItemWeaponBase" localize=true
+                 choices=baseItems }}
+
+    {{!-- Proficiency --}}
+    {{#unless system.isMountable}}
+    {{ formField fields.proficient value=source.proficient blank="DND5E.Automatic" localize=true
+                 choices=config.weaponAndArmorProficiencyLevels }}
+    {{/unless}}
+
+    {{!-- Weapon Mastery --}}
+    {{ formField fields.mastery value=source.mastery choices=config.weaponMasteries }}
+
+    {{!-- Weapon Properties --}}
+    {{ formField fields.properties options=properties.options label="DND5E.ItemWeaponProperties" localize=true
+                 input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid" }}
+
+    {{!-- Magical Properties --}}
+    {{#if properties.object.mgc}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Item.Property.Magical" }}</label>
+        <div class="form-fields">
+
+            {{!-- Attunement --}}
+            {{#unless system.isMountable}}
+            <div class="form-group label-top">
+                <label>{{ localize "DND5E.Attunement" }}</label>
+                <div class="form-fields">
+
+                    {{!-- Attuned --}}
+                    {{#if source.attunement}}
+                    {{ formInput fields.attuned value=source.attuned input=inputs.createCheckboxInput
+                                 ariaLabel=(localize "DND5E.Attuned") dataset=(dnd5e-object tooltip="DND5E.Attuned") }}
+                    {{/if}}
+
+                    {{!-- Attunement --}}
+                    {{ formInput fields.attunement value=source.attunement choices=config.attunementTypes
+                                 blank="DND5E.AttunementNone" localize=true }}
+                </div>
+            </div>
+            {{/unless}}
+
+            {{!-- Magical Bonus --}}
+            {{ formField fields.magicalBonus value=source.magicalBonus step=1 placeholder="0" label="DND5E.Bonus"
+                         localize=true classes="label-top" }}
+        </div>
+    </div>
+    {{/if}}
+
+    {{!-- Ammunition Type --}}
+    {{#if properties.object.amm}}
+    {{ formField fields.ammunition.fields.type value=source.ammunition.type choices=config.consumableTypes.ammo.subtypes }}
+    {{/if}}
+</fieldset>
+
+<fieldset>
+    <legend>{{ localize "DND5E.Range" }}</legend>
+
+    {{#if (or system.hasRange (not system.attackType))}}
+
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.RangeDistance" }}</label>
+        <div class="form-fields">
+
+            {{!-- Normal --}}
+            {{ formField fields.range.fields.value value=source.range.value label="DND5E.Normal" localize=true
+                         hint=false classes="label-top" }}
+
+            {{!-- Long --}}
+            {{ formField fields.range.fields.long value=source.range.long label="DND5E.Long" localize=true
+                         hint=false classes="label-top" }}
+
+            {{!-- Reach --}}
+            {{#if (not (eq system.attackType "ranged"))}}
+            {{ formField fields.range.fields.reach value=source.range.reach label="DND5E.RANGE.FIELDS.range.reach.label"
+                         placeholder=(ifThen (eq system.range.reach null) "—" system.range.reach) localize=true
+                         classes="label-top" }}
+            {{/if}}
+        </div>
+    </div>
+
+    {{!-- Units --}}
+    {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true hint=false
+                 choices=config.movementUnits }}
+
+    {{else}}
+
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.RangeDistance" }}</label>
+        <div class="form-fields">
+
+            {{!-- Reach --}}
+            {{#if (eq system.attackType "melee")}}
+            {{ formField fields.range.fields.reach value=source.range.reach label="DND5E.RANGE.FIELDS.range.reach.label"
+                         placeholder=(ifThen (eq system.range.reach null) "—" system.range.reach) classes="label-top"
+                         localize=true }}
+            {{/if}}
+
+            {{!-- Units --}}
+            {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true
+                         hint=false choices=config.movementUnits classes="label-top" }}
+        </div>
+    </div>
+
+    {{/if}}
+</fieldset>
+
+{{#if system.isMountable}}
+    {{> "dnd5e.details-mountable" }}
+{{/if}}
+
+<fieldset>
+    <legend>{{ localize "DND5E.DAMAGE.Title" }}</legend>
+    <div class="form-fields">
+        <p class="hint">{{ localize "DND5E.WEAPON.FIELDS.damage.hint" }}</p>
+    </div>
+    {{> "dnd5e.field-damage" fields=fields.damage.fields.base.fields source=source.damage.base types=damageTypes
+        prefix="system.damage.base." denominationOptions=denominationOptions.base }}
+</fieldset>
+
+{{#if properties.object.ver}}
+<fieldset>
+    <legend>{{ localize "DND5E.Versatile" }}</legend>
+    {{> "dnd5e.field-damage" fields=fields.damage.fields.versatile.fields source=source.damage.versatile
+        prefix="system.damage.versatile." bonus=false numberPlaceholder=source.damage.base.number
+        denominationOptions=denominationOptions.versatile }}
+</fieldset>
+{{/if}}

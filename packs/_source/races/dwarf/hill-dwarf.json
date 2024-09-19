@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "identifier": "hill-dwarf",
     "advancement": [
@@ -21,12 +22,18 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.races.ufysTkqet2Ctmtyi",
-            "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa"
+            {
+              "uuid": "Compendium.dnd5e.races.ufysTkqet2Ctmtyi",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -51,7 +58,8 @@
             "wis": 1,
             "cha": 0
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -63,7 +71,6 @@
         "_id": "kdMPoRp3j1uOHQom",
         "type": "Size",
         "configuration": {
-          "hint": "Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.",
           "sizes": [
             "med"
           ]
@@ -72,13 +79,13 @@
           "size": ""
         },
         "level": 1,
-        "title": ""
+        "title": "",
+        "hint": "Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium."
       },
       {
         "_id": "rmcKuRQ2Laloq1xp",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -89,13 +96,14 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "5zWGcz9uAerx3Dh5",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -105,13 +113,14 @@
         },
         "level": 0,
         "title": "Dwarven Resilience",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "J0UGmCyMy6thWDeU",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -124,13 +133,14 @@
         },
         "level": 0,
         "title": "Dwarven Combat Training",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "9CYW7Bj53L9G8Zsw",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -147,7 +157,9 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       }
     ],
     "senses": {
@@ -179,11 +191,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1677179053861,
-    "modifiedTime": 1704824711223,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037392950,
+    "modifiedTime": 1725992703517,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

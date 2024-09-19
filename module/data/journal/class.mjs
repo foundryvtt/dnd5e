@@ -1,3 +1,5 @@
+const { HTMLField, SchemaField, SetField, StringField } = foundry.data.fields;
+
 /**
  * Data definition for Class Summary journal entry pages.
  *
@@ -8,41 +10,32 @@
  * @property {string} description.additionalTraits     Additional text displayed beneath the traits section.
  * @property {string} description.additionalEquipment  Additional text displayed beneath the equipment section.
  * @property {string} description.subclass             Introduction to the subclass section.
+ * @property {string} style                            Force the page style to use modern or legacy formatting, rather
+ *                                                     than what is specified by the class.
  * @property {string} subclassHeader                   Subclass header to replace the default.
  * @property {Set<string>} subclassItems               UUIDs of all subclasses to display.
  */
-export default class ClassJournalPageData extends foundry.abstract.DataModel {
+export default class ClassJournalPageData extends foundry.abstract.TypeDataModel {
+
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = ["JOURNALENTRYPAGE.DND5E.Class"];
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static defineSchema() {
     return {
-      item: new foundry.data.fields.StringField({required: true, label: "JOURNALENTRYPAGE.DND5E.Class.Item"}),
-      description: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.HTMLField({
-          label: "JOURNALENTRYPAGE.DND5E.Class.Description",
-          hint: "JOURNALENTRYPAGE.DND5E.Class.DescriptionHint"
-        }),
-        additionalHitPoints: new foundry.data.fields.HTMLField({
-          label: "JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPoints",
-          hint: "JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPointsHint"
-        }),
-        additionalTraits: new foundry.data.fields.HTMLField({
-          label: "JOURNALENTRYPAGE.DND5E.Class.AdditionalTraits",
-          hint: "JOURNALENTRYPAGE.DND5E.Class.AdditionalTraitsHint"
-        }),
-        additionalEquipment: new foundry.data.fields.HTMLField({
-          label: "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipment",
-          hint: "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipmentHint"
-        }),
-        subclass: new foundry.data.fields.HTMLField({
-          label: "JOURNALENTRYPAGE.DND5E.Class.SubclassDescription",
-          hint: "JOURNALENTRYPAGE.DND5E.Class.SubclassDescriptionHint"
-        })
+      item: new StringField({ required: true }),
+      description: new SchemaField({
+        value: new HTMLField({ textSearch: true }),
+        additionalHitPoints: new HTMLField({ textSearch: true }),
+        additionalTraits: new HTMLField({ textSearch: true }),
+        additionalEquipment: new HTMLField({ textSearch: true }),
+        subclass: new HTMLField({ textSearch: true })
       }),
-      subclassHeader: new foundry.data.fields.StringField({
-        label: "JOURNALENTRYPAGE.DND5E.Class.SubclassHeader"
-      }),
-      subclassItems: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "JOURNALENTRYPAGE.DND5E.Class.SubclassItems"
-      })
+      style: new StringField(),
+      subclassHeader: new StringField({ textSearch: true }),
+      subclassItems: new SetField(new StringField())
     };
   }
 }

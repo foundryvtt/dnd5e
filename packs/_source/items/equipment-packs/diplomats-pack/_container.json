@@ -1,7 +1,7 @@
 {
   "name": "Diplomat's Pack",
   "type": "container",
-  "img": "icons/containers/chest/chest-reinforced-steel-pink.webp",
+  "img": "icons/containers/chest/chest-reinforced-steel-red.webp",
   "system": {
     "description": {
       "value": "<p>A chest holds 12 cubic feet or 300 pounds of gear.</p>",
@@ -11,15 +11,19 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "70",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 25,
+    "weight": {
+      "value": 25,
+      "units": "lb"
+    },
     "price": {
       "value": 39,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "",
     "identified": true,
@@ -38,17 +42,20 @@
     "unidentified": {
       "description": ""
     },
-    "properties": []
+    "properties": [],
+    "attuned": false,
+    "identifier": "diplomats-pack"
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233447,
-    "modifiedTime": 1704823151487,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037185540,
+    "modifiedTime": 1725992512537,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "Qy2aRjl4iQ8EmaT5",

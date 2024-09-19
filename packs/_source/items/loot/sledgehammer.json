@@ -12,10 +12,14 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 10,
+    "weight": {
+      "value": 10,
+      "units": "lb"
+    },
     "price": {
       "value": 2,
       "denomination": "gp"
@@ -30,7 +34,8 @@
       "description": ""
     },
     "container": null,
-    "properties": []
+    "properties": [],
+    "identifier": "sledgehammer"
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -40,11 +45,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233496,
-    "modifiedTime": 1704823144090,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037116762,
+    "modifiedTime": 1725992489455,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!9G9QGSPgpZDSsm37"

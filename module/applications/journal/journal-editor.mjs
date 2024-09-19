@@ -7,7 +7,7 @@
  */
 export default class JournalEditor extends DocumentSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["journal-editor"],
@@ -21,7 +21,7 @@ export default class JournalEditor extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     if ( this.options.title ) return `${this.document.name}: ${this.options.title}`;
     else return this.document.name;
@@ -29,20 +29,20 @@ export default class JournalEditor extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const data = super.getData();
     const rawText = foundry.utils.getProperty(this.document, this.options.textKeyPath) ?? "";
     return foundry.utils.mergeObject(data, {
       enriched: await TextEditor.enrichHTML(rawText, {
-        relativeTo: this.document, secrets: this.document.isOwner, async: true
+        relativeTo: this.document, secrets: this.document.isOwner
       })
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _updateObject(event, formData) {
     this.document.update(formData);
   }

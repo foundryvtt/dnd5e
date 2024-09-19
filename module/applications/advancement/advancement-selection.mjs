@@ -44,12 +44,12 @@ export default class AdvancementSelection extends Dialog {
   /** @inheritDoc */
   getData() {
     const context = { types: {} };
-    for ( const [name, advancement] of Object.entries(CONFIG.DND5E.advancementTypes) ) {
-      if ( !(advancement.prototype instanceof Advancement)
-        || !advancement.metadata.validItemTypes.has(this.item.type) ) continue;
+    for ( let [name, config] of Object.entries(CONFIG.DND5E.advancementTypes) ) {
+      const advancement = config.documentClass;
+      if ( config.hidden || !config.validItemTypes?.has(this.item.type) ) continue;
       context.types[name] = {
         label: advancement.metadata.title,
-        icon: advancement.metadata.icon,
+        icon: advancement.metadata.typeIcon,
         hint: advancement.metadata.hint,
         disabled: !advancement.availableForItem(this.item)
       };

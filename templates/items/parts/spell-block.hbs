@@ -1,0 +1,46 @@
+<ul class="spell-block unlist {{#if fullWidth}}full-width{{/if}}">
+    <li>
+        <strong>{{ localize "DND5E.SpellCastTime" }}:</strong>
+        <span class="value">
+            {{ labels.activation }}
+            {{#if (and (not fullWidth) activation.condition)}}
+            <span class="condition">({{ activation.condition }})</span>
+            {{/if}}
+        </span>
+    </li>
+    <li>
+        <strong>{{ localize "DND5E.Range" }}:</strong>
+        <span class="value">{{ labels.range }}</span>
+    </li>
+    {{#if labels.target}}
+    <li>
+        <strong>{{ localize "DND5E.Target" }}:</strong>
+        <span class="value">{{ labels.target }}</span>
+    </li>
+    {{/if}}
+    <li>
+        <strong>{{ localize "DND5E.Components" }}:</strong>
+        <span class="value">
+            {{ labels.components.vsm }}
+            {{#if (and (not fullWidth) labels.materials)}}
+            <span class="materials">({{ labels.materials }})</span>
+            {{/if}}
+        </span>
+    </li>
+    <li>
+        <strong>{{ localize "DND5E.Duration" }}:</strong>
+        <span class="value">{{ labels.concentrationDuration }}</span>
+    </li>
+    {{#if (and fullWidth activation.condition)}}
+    <li class="paragraph">
+        <strong>{{ localize "DND5E.Trigger" }}:</strong>
+        <span class="value">{{ activation.condition }}</span>
+    </li>
+    {{/if}}
+    {{#if (and fullWidth labels.materials)}}
+    <li class="paragraph">
+        <strong>{{ localize "DND5E.Materials" }}:</strong>
+        <span class="value">{{ labels.materials }}</span>
+    </li>
+    {{/if}}
+</ul>

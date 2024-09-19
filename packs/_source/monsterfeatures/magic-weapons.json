@@ -7,75 +7,33 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>The {creature}'s weapon attacks are magical.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<p>the [[lookup @name lowercase]]'s weapon attacks are magical.</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "magic-weapons"
   },
   "flags": {},
   "img": "icons/weapons/swords/sword-runed-glowing.webp",
@@ -83,11 +41,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234602,
-    "modifiedTime": 1672335819457,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304976778,
+    "modifiedTime": 1725992574466,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!nahRRxck9R5GVVFS"

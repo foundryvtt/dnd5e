@@ -6,8 +6,8 @@
       box-shadow: none;
     }
   }
-  .form-group .form-fields button {
-    flex: 0;
+  .form-group .form-fields {
+    :not(file-picker) > button { flex: 0; }
   }
   .form-group .form-field-readonly {
     color: #999;
@@ -43,19 +43,14 @@
   }
 
   /* ----------------------------------------- */
-  /*  Two Column Configurations                */
+  /*  Column Configurations                    */
   /* ----------------------------------------- */
-  &.two-column {
-    --grid-two-column-left-size: 1fr;
-    --grid-two-column-right-size: 1fr;
-
+  &.two-column, &.three-column {
     form {
       display: grid;
-      grid-template-columns: var(--grid-two-column-left-size) var(--grid-two-column-right-size);
-      grid-template-areas: "left right";
-      grid-gap: 0.4em;
+      gap: 0.4em;
 
-      .left-column {
+      > .left-column {
         grid-area: left;
         display: flex;
         flex-direction: column;
@@ -63,25 +58,58 @@
         > .form-group { flex: none; }
         > .drop-target { flex: 1; }
       }
-      .right-column {
+      > .right-column {
         grid-area: right;
-
-        &.level-list {
-          label {
-            flex: 0.5;
-            padding-right: 0.5rem;
-            text-align: end;
-          }
-          :is(input[type="text"], input[type="number"])::placeholder {
-            opacity: 0.5;
-          }
+      }
+      > .level-list {
+        label {
+          flex: 0.5;
+          padding-right: 0.5rem;
+          text-align: end;
+        }
+        :is(input[type="text"], input[type="number"])::placeholder {
+          opacity: 0.5;
         }
       }
+    }
+  }
+
+  &.two-column {
+    --grid-two-column-left-size: 1fr;
+    --grid-two-column-right-size: 1fr;
+
+    form {
+      grid-template-columns: var(--grid-two-column-left-size) var(--grid-two-column-right-size);
+      grid-template-areas: "left right";
+
       button[type="submit"] {
         grid-column-end: span 2;
       }
     }
   }
+
+  &.three-column {
+    --grid-three-column-left-size: 1fr;
+    --grid-three-column-center-size: 1fr;
+    --grid-three-column-right-size: 1fr;
+
+    form {
+      grid-template-columns:
+        var(--grid-two-column-left-size) var(--grid-two-column-center-size) var(--grid-two-column-right-size);
+      grid-template-areas: "left center right";
+
+      > .center-column {
+        grid-area: center;
+      }
+      button[type="submit"] {
+        grid-column-end: span 3;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Ability Score Improvement                */
+  /* ----------------------------------------- */
 
   form[data-type="AbilityScoreImprovement"] {
     .ability-scores {
@@ -120,7 +148,7 @@
           text-align: start;
           align-self: end;
         }
-        label {
+        label:first-child {
           grid-area: label;
           font-size: var(--font-size-18);
         }
@@ -137,7 +165,7 @@
         }
         .minus { grid-area: minus; }
         .plus { grid-area: plus; }
-        input {
+        > input {
           grid-area: value;
           height: 1.5em;
           border: none;
@@ -150,6 +178,18 @@
           font-weight: bold;
           i {
             font-size: var(--font-size-12);
+          }
+        }
+        .locked {
+          grid-column: 1 / -1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          font-size: var(--font-size-12);
+          > input {
+            width: 14px;
+            height: 14px;
           }
         }
       }
@@ -175,13 +215,32 @@
   }
 
   /* ----------------------------------------- */
+  /*  Item Grant                               */
+  /* ----------------------------------------- */
+  &.item-grant {
+    .items-list {
+      h3 {
+        margin: 0;
+      }
+      .item-optional {
+        flex: 0 0 65px;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Item Choice                              */
   /* ----------------------------------------- */
   &.item-choice {
+    --grid-two-column-left-size: 1fr;
+    --grid-two-column-center-size: 0.7fr;
     --grid-two-column-right-size: 0.5fr;
 
-    .level-list .hint {
-      text-align: end;
+    .level-list {
+      .items-header { padding-inline: 2px; }
+      .level-header { flex: 0.5; }
+      .choices-header { flex: 3; }
+      .replacement-header { flex: 0 0 20px; }
     }
 
     .form-group:has(textarea) {
@@ -193,7 +252,7 @@
       border: 1px solid var(--color-border-light-tertiary);
       font-family: var(--font-primary);
       font-size: var(--font-size-12);
-      height: 100px;
+      height: 140px;
     }
   }
 
@@ -211,6 +270,10 @@
       option[value=""] {
         color: var(--color-text-light-6);
       }
+    }
+
+    copyable-text {
+      font-weight: bold;
     }
   }
 
@@ -377,6 +440,18 @@
       flex: 0 0 20px;
       margin-inline-end: 1px;
     }
+    input[type="radio"] {
+      flex: 0 0 20px;
+      width: 20px;
+      height: 20px;
+      margin: 3px 5px;
+    }
+    h4.form-header {
+      margin-block-start: 0.25em;
+    }
+    .replaced h4 {
+      text-decoration: rgb(200 0 0) line-through 2px;
+    }
   }
 
   form[data-type="ScaleValue"] {
@@ -386,7 +461,7 @@
     }
     span.none { font-style: italic; }
   }
-  
+
   form[data-type="Trait"] {
     select {
       min-width: min(20em, 100%);

@@ -1,4 +1,4 @@
-<{{elements.inventory}}>
+<{{elements.inventory}} class="inventory-element">
     <div class="inventory-header flexrow">
         {{#unless isNPC}}
         <ol class="currency flexrow">
@@ -115,7 +115,8 @@
                     <div class="item-detail item-weight">
                         {{#if ctx.totalWeight}}
                         <div class="item-detail">
-                            {{ ctx.totalWeight }} {{ @root.weightUnit }}
+                            {{ ctx.totalWeight }}
+                            {{ lookup (lookup @root.config.weightUnits item.system.weight.units) "abbreviation" }}
                         </div>
                         {{/if}}
                     </div>

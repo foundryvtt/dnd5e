@@ -87,12 +87,12 @@
   &.success {
     color: inherit;
     background: var(--dnd5e-color-success-background);
-    border: 1px solid var(--dnd5e-color-success);
+    border-color: var(--dnd5e-color-success);
   }
   &.failure {
     color: inherit;
     background: var(--dnd5e-color-failure-background);
-    border: 1px solid var(--dnd5e-color-failure);
+    border-color: var(--dnd5e-color-failure);
   }
   &.critical {
     color: var(--dnd5e-color-success-critical);
@@ -106,14 +106,14 @@
 /*  Inline Roll Actions                      */
 /* ----------------------------------------- */
 
-.roll-link {
+.roll-link, .reference-link {
   a {
     background: #DDD;
     padding: 1px 4px;
     border: 1px solid var(--color-border-dark-tertiary);
     white-space: nowrap;
     word-break: break-all;
-  
+
     &:first-child {
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
@@ -128,7 +128,7 @@
       margin-inline-end: 0.25em;
     }
 
-    &[data-action="request"] {
+    &.enricher-action {
       padding-inline-end: 1px;
     }
   }

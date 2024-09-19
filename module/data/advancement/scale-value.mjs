@@ -1,4 +1,7 @@
-import { IdentifierField, MappingField } from "../fields.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
+import MappingField from "../fields/mapping-field.mjs";
+
+const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data model for the Scale Value advancement type.
@@ -10,23 +13,21 @@ import { IdentifierField, MappingField } from "../fields.mjs";
  * @property {Object<string, *>} scale  Scale values for each level. Value format is determined by type.
  */
 export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
-      identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
-      type: new foundry.data.fields.StringField({
+      identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
+      type: new StringField({
         required: true, initial: "string", choices: TYPES, label: "DND5E.AdvancementScaleValueTypeLabel"
       }),
-      distance: new foundry.data.fields.SchemaField({
-        units: new foundry.data.fields.StringField({required: true, label: "DND5E.MovementUnits"})
-      }),
-      scale: new MappingField(new ScaleValueEntryField(), {required: true})
+      distance: new SchemaField({ units: new StringField({required: true, label: "DND5E.MovementUnits"}) }),
+      scale: new MappingField(new ScaleValueEntryField(), { required: true })
     };
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static migrateData(source) {
     super.migrateData(source);
     if ( source.type === "numeric" ) source.type = "number";
@@ -74,10 +75,10 @@ export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
  * @property {string} value  String value.
  */
 export class ScaleValueType extends foundry.abstract.DataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
-      value: new foundry.data.fields.StringField({required: true})
+      value: new StringField({ required: true })
     };
   }
 
@@ -150,7 +151,7 @@ export class ScaleValueType extends foundry.abstract.DataModel {
  * @property {number} value  Numeric value.
  */
 export class ScaleValueTypeNumber extends ScaleValueType {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({required: true})
@@ -159,7 +160,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeNumber",
@@ -170,7 +171,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static convertFrom(original, options) {
     const value = Number(original.formula);
     if ( Number.isNaN(value) ) return null;
@@ -185,7 +186,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
  * @property {number} value  CR value.
  */
 export class ScaleValueTypeCR extends ScaleValueTypeNumber {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({required: true, min: 0})
@@ -195,7 +196,7 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeCR",
@@ -205,7 +206,7 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get display() {
     switch ( this.value ) {
       case 0.125: return "&frac18;";
@@ -224,17 +225,19 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
  * @property {number} faces   Die faces.
  */
 export class ScaleValueTypeDice extends ScaleValueType {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
+    const fields = foundry.data.fields;
     return {
-      number: new foundry.data.fields.NumberField({nullable: true, integer: true, positive: true}),
-      faces: new foundry.data.fields.NumberField({required: true, integer: true, positive: true})
+      number: new fields.NumberField({nullable: true, integer: true, positive: true}),
+      faces: new fields.NumberField({required: true, integer: true, positive: true}),
+      modifiers: new fields.SetField(new fields.StringField({required: true}))
     };
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeDice",
@@ -252,7 +255,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static convertFrom(original, options) {
     const [number, faces] = (original.formula ?? "").split("d");
     if ( !faces || !Number.isNumeric(number) || !Number.isNumeric(faces) ) return null;
@@ -261,7 +264,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get formula() {
     if ( !this.faces ) return null;
     return `${this.number ?? ""}${this.die}`;
@@ -270,17 +273,41 @@ export class ScaleValueTypeDice extends ScaleValueType {
   /* -------------------------------------------- */
 
   /**
-   * The die value to be rolled with the leading "d" (e.g. "d4").
+   * The entire die, with leading "d" and any modifiers, e.g., "d4" or "d4r1".
    * @type {string}
    */
   get die() {
+    if ( !this.faces ) return "";
+    return `d${this.faces}${this.mods}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The die modifiers.
+   * @type {string}
+   */
+  get mods() {
+    if ( !this.modifiers ) return "";
+    return this.modifiers.reduce((acc, mod) => {
+      return acc + (dnd5e.utils.isValidDieModifier(mod) ? mod : "");
+    }, "");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The die value to be rolled with the leading "d" (e.g. "d4").
+   * @type {string}
+   */
+  get denom() {
     if ( !this.faces ) return "";
     return `d${this.faces}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static migrateData(source) {
     if ( source.n ) source.number = source.n;
     if ( source.die ) source.faces = source.die;
@@ -294,7 +321,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
  * @property {number} value  Numeric value.
  */
 export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeDistance",
@@ -304,9 +331,9 @@ export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get display() {
-    return `${this.value} ${CONFIG.DND5E.movementUnits[this.parent.configuration.distance?.units ?? "ft"]}`;
+    return `${this.value} ${CONFIG.DND5E.movementUnits[this.parent.configuration.distance?.units || "ft"]}`;
   }
 }
 

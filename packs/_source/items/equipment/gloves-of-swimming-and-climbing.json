@@ -2,7 +2,7 @@
   "_id": "PRhtLbRLb9LjHZG7",
   "name": "Gloves of Swimming and Climbing",
   "type": "equipment",
-  "img": "icons/environment/creatures/frog-spotted-green.webp",
+  "img": "icons/equipment/hand/glove-simple-leather-green.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing these gloves, climbing and swimming don't cost you extra movement, and you gain a +5 bonus to Strength (Athletics) checks made to climb or swim.</p>",
@@ -12,74 +12,32 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 2,
+    "weight": {
+      "value": 2,
+      "units": "lb"
+    },
     "price": {
       "value": 2000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "uncommon",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": 0,
-      "dex": 0
+      "dex": 0,
+      "magicalBonus": null
     },
     "hp": {
       "value": 0,
@@ -104,7 +62,10 @@
     "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "activities": {},
+    "attuned": false,
+    "identifier": "gloves-of-swimming-and-climbing"
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -114,11 +75,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233645,
-    "modifiedTime": 1707055842811,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037181320,
+    "modifiedTime": 1725992511122,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!PRhtLbRLb9LjHZG7"

@@ -14,72 +14,26 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Monk 13",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
     },
-    "crewed": false,
-    "properties": []
+    "identifier": "tongue-of-the-sun-and-moon"
   },
   "flags": {},
   "img": "icons/magic/time/day-night-sunset-sunrise.webp",
@@ -87,11 +41,12 @@
   "folder": "TMmNG8ujFDBEWXRe",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234386,
-    "modifiedTime": 1704824717176,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037384923,
+    "modifiedTime": 1725992288650,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!XjuGBeB8Y0C3A5D4"

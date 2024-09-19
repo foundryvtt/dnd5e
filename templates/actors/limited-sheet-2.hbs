@@ -11,7 +11,15 @@
         {{!-- Name --}}
         <div class="document-name">{{ actor.name }}</div>
 
+        {{#if isNPC}}
+
+        {{{ enriched.public }}}
+
+        {{/if}}
+
     </header>
+
+    {{#if isCharacter}}
 
     {{!-- Body --}}
     <section class="sheet-body">
@@ -43,5 +51,7 @@
         </div>
 
     </section>
+
+    {{/if}}
 
 </form>

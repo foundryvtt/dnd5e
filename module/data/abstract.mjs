@@ -19,7 +19,7 @@ import Proficiency from "../documents/actor/proficiency.mjs";
  */
 export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _enableV10Validation = true;
 
   /**
@@ -76,9 +76,9 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
    * Metadata that describes this DataModel.
    * @type {SystemDataModelMetadata}
    */
-  static metadata = {
+  static metadata = Object.freeze({
     systemFlagsModel: null
-  };
+  });
 
   get metadata() {
     return this.constructor.metadata;
@@ -86,7 +86,27 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /**
+   * Filters available for this item type when using the compendium browser.
+   * @returns {CompendiumBrowserFilterDefinition}
+   */
+  static get compendiumBrowserFilters() {
+    return new Map();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Key path to the description used for default embeds.
+   * @type {string|null}
+   */
+  get embeddedDescriptionKeyPath() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static defineSchema() {
     const schema = {};
     for ( const template of this._schemaTemplates ) {
@@ -111,12 +131,11 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
     return a;
   }
 
-
   /* -------------------------------------------- */
   /*  Data Cleaning                               */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static cleanData(source, options) {
     this._cleanData(source, options);
     return super.cleanData(source, options);
@@ -140,7 +159,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   /*  Data Initialization                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static *_initializationOrder() {
     for ( const template of this._schemaTemplates ) {
       for ( const entry of template._initializationOrder() ) {
@@ -152,16 +171,6 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
       if ( this._schemaTemplateFields.has(entry[0]) ) continue;
       yield entry;
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Data Validation                             */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  validate(options={}) {
-    if ( this.constructor._enableV10Validation === false ) return true;
-    return super.validate(options);
   }
 
   /* -------------------------------------------- */
@@ -193,7 +202,15 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   /*  Data Validation                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
+  validate(options={}) {
+    if ( this.constructor._enableV10Validation === false ) return true;
+    return super.validate(options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static validateJoint(data) {
     this._validateJoint(data);
     return super.validateJoint(data);
@@ -217,7 +234,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static migrateData(source) {
     this._migrateData(source);
     return super.migrateData(source);
@@ -238,7 +255,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static shimData(data, options) {
     this._shimData(data, options);
     return super.shimData(data, options);
@@ -297,6 +314,23 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
 
     return Base;
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async toEmbed(config, options={}) {
+    const keyPath = this.embeddedDescriptionKeyPath;
+    if ( !keyPath || !foundry.utils.hasProperty(this, keyPath) ) return null;
+    const enriched = await TextEditor.enrichHTML(foundry.utils.getProperty(this, keyPath), {
+      ...options,
+      relativeTo: this.parent
+    });
+    const container = document.createElement("div");
+    container.innerHTML = enriched;
+    return container.children;
+  }
 }
 
 /* -------------------------------------------- */
@@ -312,12 +346,19 @@ export class ActorDataModel extends SystemDataModel {
    */
 
   /** @type {ActorDataModelMetadata} */
-  static metadata = foundry.utils.mergeObject(super.metadata, {
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: false
-  }, {inplace: false});
+  }, {inplace: false}));
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get embeddedDescriptionKeyPath() {
+    return "details.biography.value";
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -346,7 +387,7 @@ export class ActorDataModel extends SystemDataModel {
   getRollData({ deterministic=false }={}) {
     const data = { ...this };
     data.prof = new Proficiency(this.attributes?.prof ?? 0, 1);
-    if ( deterministic ) data.prof = data.prof.flat;
+    data.prof.deterministic = deterministic;
     return data;
   }
 }
@@ -360,19 +401,77 @@ export class ItemDataModel extends SystemDataModel {
 
   /**
    * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
-   * @property {boolean} singleton  Should only a single item of this type be allowed on an actor?
+   * @property {boolean} enchantable    Can this item be modified by enchantment effects?
+   * @property {boolean} inventoryItem  Should this item be listed with an actor's inventory?
+   * @property {number} inventoryOrder  Order this item appears in the actor's inventory, smaller numbers are earlier.
+   * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
    */
 
   /** @type {ItemDataModelMetadata} */
-  static metadata = foundry.utils.mergeObject(super.metadata, {
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: false,
+    inventoryItem: false,
+    inventoryOrder: Infinity,
     singleton: false
-  }, {inplace: false});
+  }, {inplace: false}));
 
   /**
    * The handlebars template for rendering item tooltips.
    * @type {string}
    */
   static ITEM_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Modes that can be used when making an attack with this item.
+   * @type {FormSelectOption[]}
+   */
+  get attackModes() {
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Set of abilities that can automatically be associated with this item.
+   * @type {Set<string>|null}
+   */
+  get availableAbilities() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get embeddedDescriptionKeyPath() {
+    return game.user.isGM || (this.identified !== false) ? "description.value" : "unidentified.description";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Scaling increase for this item type.
+   * @type {number|null}
+   */
+  get scalingIncrease() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    if ( this.parent.isEmbedded ) {
+      const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent._stats.compendiumSource
+        ?? this.parent.flags.core?.sourceId;
+      if ( sourceId ) this.parent.actor?.sourcedItems?.set(sourceId, this.parent);
+    }
+  }
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
@@ -402,7 +501,7 @@ export class ItemDataModel extends SystemDataModel {
   async getCardData(enrichmentOptions={}) {
     const { name, type, img } = this.parent;
     let {
-      price, weight, uses, identified, unidentified, description, school, materials, activation, properties
+      price, weight, uses, identified, unidentified, description, school, materials
     } = this;
     const rollData = this.parent.getRollData();
     const isIdentified = identified !== false;
@@ -413,17 +512,18 @@ export class ItemDataModel extends SystemDataModel {
 
     const subtitle = [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
     const context = {
-      name, type, img, price, weight, uses, school, materials, activation,
+      name, type, img, price, weight, uses, school, materials,
       config: CONFIG.DND5E,
+      controlHints: game.settings.get("dnd5e", "controlHints"),
       labels: foundry.utils.deepClone(this.parent.labels),
       tags: this.parent.labels?.components?.tags,
       subtitle: subtitle.filterJoin(" &bull; "),
       description: {
         value: await TextEditor.enrichHTML(description ?? "", {
-          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+          rollData, relativeTo: this.parent, ...enrichmentOptions
         }),
         chat: await TextEditor.enrichHTML(chat ?? "", {
-          rollData, async: true, relativeTo: this.parent, ...enrichmentOptions
+          rollData, relativeTo: this.parent, ...enrichmentOptions
         })
       }
     };
@@ -433,17 +533,9 @@ export class ItemDataModel extends SystemDataModel {
     if ( game.user.isGM || isIdentified ) {
       context.properties.push(
         ...this.cardProperties ?? [],
-        ...this.activatedEffectCardProperties ?? [],
+        ...Object.values(this.parent.labels.activations[0] ?? {}),
         ...this.equippableItemCardProperties ?? []
       );
-    }
-
-    if ( context.labels.duration ) {
-      context.labels.concentrationDuration = properties?.has("concentration")
-        ? game.i18n.format("DND5E.ConcentrationDuration", {
-          duration: context.labels.duration.toLocaleLowerCase(game.i18n.lang)
-        })
-        : context.labels.duration;
     }
 
     context.properties = context.properties.filter(_ => _);
@@ -493,6 +585,15 @@ export class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Prepare type-specific data for the Item sheet.
+   * @param {object} context  Sheet context data.
+   * @returns {Promise<void>}
+   */
+  async getSheetData(context) {}
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare a data object which defines the data schema used by dice roll commands against this Item.
    * @param {object} [options]
    * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
@@ -500,8 +601,7 @@ export class ItemDataModel extends SystemDataModel {
    * @returns {object}
    */
   getRollData({ deterministic=false }={}) {
-    if ( !this.parent.actor ) return null;
-    const actorRollData = this.parent.actor.getRollData({ deterministic });
+    const actorRollData = this.parent.actor?.getRollData({ deterministic }) ?? {};
     const data = { ...actorRollData, item: { ...this } };
     return data;
   }
@@ -513,7 +613,7 @@ export class ItemDataModel extends SystemDataModel {
  * Data Model variant that does not export fields with an `undefined` value during `toObject(true)`.
  */
 export class SparseDataModel extends foundry.abstract.DataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   toObject(source=true) {
     if ( !source ) return super.toObject(source);
     const clone = foundry.utils.flattenObject(this._source);

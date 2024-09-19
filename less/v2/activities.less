@@ -1,0 +1,179 @@
+.activity.sheet {
+  max-block-size: 85vh;
+  .window-content { overflow-y: auto; }
+
+  .additional-tray {
+    margin-block-start: 4px;
+    transition: all 250ms ease;
+
+    &.collapsed { margin-block-end: -2px; }
+
+    .wrapper {
+      padding-inline: 6px;
+      > :first-child { margin-block-start: 8px; }
+      > :last-child { margin-block-end: 3px; }
+    }
+
+    > label {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      gap: .25rem;
+      font-size: var(--font-size-10);
+
+      > span { flex: none; }
+      .fa-gears { color: var(--color-text-light-6); }
+
+      &::before, &::after {
+        content: "";
+        flex-basis: 50%;
+        border-top: 1px dotted var(--dnd5e-color-gold);
+        align-self: center;
+      }
+    }
+  }
+  .separated-list {
+    margin-top: 4px;
+    > li {
+      padding: 6px;
+      border: var(--dnd5e-border-gold);
+      box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+
+      &.empty {
+        border: none;
+        box-shadow: none;
+        font-style: italic;
+        color: var(--color-text-dark-5);
+        padding-block: 0;
+      }
+
+      .list-controls button.control-button { --size: 24px; }
+    }
+    .details { align-items: stretch; }
+    .content-link {
+      display: block;
+      align-content: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: var(--font-size-11);
+      line-height: normal;
+    }
+    .name { flex: 1 0 175px; }
+    .drop-area {
+      border: 1px dashed var(--color-border-light-2);
+      border-radius: 4px;
+      padding-inline: 4px;
+    }
+    .gold-icon {
+      flex: 0 0 24px;
+      height: 24px;
+      border-width: 1px;
+    }
+
+    &.enchantments > li { padding-top: 9px; }
+
+    .split-group.full-width {
+      padding: 0;
+      box-shadow: none;
+
+      > .form-fields { align-items: end; }
+
+      .sep {
+        height: var(--form-field-height);
+        display: grid;
+        place-content: center;
+        padding: 0 1px;
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Summon Activity                          */
+/* ----------------------------------------- */
+
+.summon-activity.sheet .separated-list:not(.effects-list) {
+  .content-link, .drop-area, .name {
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+
+  .drop-area {
+    justify-content: center;
+    font-size: var(--font-size-11);
+    font-style: italic;
+    height: var(--form-field-height);
+    color: var(--color-text-dark-5);
+  }
+
+  .content-link {
+    height: var(--form-field-height);
+    text-align: center;
+    border: 1px dashed var(--color-border-light-2);
+    border-radius: 4px;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Usage Dialog                             */
+/* ----------------------------------------- */
+
+.activity-usage {
+  .scaling-fields {
+    .separator, .max {
+      flex: 0;
+      padding-inline: 3px;
+      font-weight: bold;
+    }
+    .separator { color: var(--dnd5e-color-gold); }
+  }
+  .hint code {
+    background: none;
+    border: none;
+    color: var(--dnd5e-color-crimson);
+    font-size: inherit;
+    padding: 0;
+  }
+}
+
+/* ---------------------------------- */
+/*  Choice Dialog                     */
+/* ---------------------------------- */
+
+.activity-choice {
+  menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  button {
+    --icon-fill: var(--color-text-dark-primary);
+    --icon-size: 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 6px 56px 6px 6px;
+
+    > .name {
+      flex: 1;
+      text-transform: none;
+      font-family: var(--dnd5e-font-roboto-slab);
+      line-height: normal;
+      font-size: var(--font-size-14);
+    }
+
+    > .icon {
+      flex: 0 0 50px;
+      height: 24px;
+      text-align: left;
+    }
+
+    .gold-icon {
+      border-width: 1px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

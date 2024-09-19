@@ -1,3 +1,17 @@
+const { ArrayField, BooleanField, NumberField, SetField, SchemaField, StringField } = foundry.data.fields;
+
+/**
+ * Map language category changes.
+ * @type {Record<string, string>}
+ */
+const _MAP = {
+  "languages:exotic:draconic": "languages:standard:draconic",
+  "languages:cant": "languages:exotic:cant",
+  "languages:druidic": "languages:exotic:druidic"
+};
+
+const LANGUAGE_MAP = { modern: _MAP, legacy: foundry.utils.invertObject(_MAP) };
+
 /**
  * Configuration for a specific trait choice.
  *
@@ -10,7 +24,6 @@
 /**
  * Configuration data for the TraitAdvancement.
  *
- * @property {string} hint                Hint displayed instead of the automatically generated one.
  * @property {string} mode                Method by which this advancement modifies the actor's traits.
  * @property {boolean} allowReplacements  Whether all potential choices should be presented to the user if there
  *                                        are no more choices available in a more limited set.
@@ -20,24 +33,41 @@
 export class TraitConfigurationData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      hint: new foundry.data.fields.StringField({label: "DND5E.AdvancementHint"}),
-      mode: new foundry.data.fields.StringField({initial: "default", label: "DND5E.AdvancementTraitMode"}),
-      allowReplacements: new foundry.data.fields.BooleanField({
+      mode: new StringField({ initial: "default", label: "DND5E.AdvancementTraitMode" }),
+      allowReplacements: new BooleanField({
         required: true, label: "DND5E.AdvancementTraitAllowReplacements",
         hint: "DND5E.AdvancementTraitAllowReplacementsHint"
       }),
-      grants: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        required: true, label: "DND5E.AdvancementTraitGrants"
-      }),
-      choices: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-        count: new foundry.data.fields.NumberField({
+      grants: new SetField(new StringField(), { required: true, label: "DND5E.AdvancementTraitGrants" }),
+      choices: new ArrayField(new SchemaField({
+        count: new NumberField({
           required: true, positive: true, integer: true, initial: 1, label: "DND5E.AdvancementTraitCount"
         }),
-        pool: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-          required: false, initial: undefined, label: "DOCUMENT.Items"
-        })
-      }), {label: "DND5E.AdvancementTraitChoices"})
+        pool: new SetField(new StringField(), { required: false, label: "DOCUMENT.Items" })
+      }), { label: "DND5E.AdvancementTraitChoices" })
     };
+  }
+
+  /* -------------------------------------------- */
+
+  get hint() {
+    foundry.utils.logCompatibilityWarning(
+      "Advancement hints are now part of the base data model.",
+      { since: "DnD5e 3.3", until: "DnD5e 4.1" }
+    );
+    return this.parent.hint ?? "";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    const version = game.settings.get("dnd5e", "rulesVersion");
+    const languageMap = LANGUAGE_MAP[version] ?? {};
+    if ( source.grants?.length ) source.grants = source.grants.map(t => languageMap[t] ?? t);
+    if ( source.choices?.length ) source.choices.forEach(c => c.pool = c.pool.map(t => languageMap[t] ?? t));
+    return source;
   }
 }
 
@@ -49,9 +79,18 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
 export class TraitValueData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      chosen: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        required: false, initial: undefined
-      })
+      chosen: new SetField(new StringField(), { required: false })
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    const version = game.settings.get("dnd5e", "rulesVersion");
+    const languageMap = LANGUAGE_MAP[version] ?? {};
+    if ( source.chosen?.length ) source.chosen = source.chosen.map(t => languageMap[t] ?? t);
+    return source;
   }
 }

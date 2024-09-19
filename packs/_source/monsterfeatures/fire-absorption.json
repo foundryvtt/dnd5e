@@ -7,75 +7,33 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Whenever the {creature} is subjected to <strong><em>fire damage</em></strong>, it takes no damage and instead regains a number of<strong> hit points</strong> equal to the <strong><em>fire damage</em> dealt</strong>.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<p>Whenever the [[lookup @name lowercase]] is subjected to <strong><em>fire damage</em></strong>, it takes no damage and instead regains a number of<strong> hit points</strong> equal to the <strong><em>fire damage</em> dealt</strong>.</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "fire-absorption"
   },
   "flags": {},
   "img": "icons/magic/fire/flame-burning-campfire-rocks.webp",
@@ -83,11 +41,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234552,
-    "modifiedTime": 1672335663799,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304971491,
+    "modifiedTime": 1725992572822,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!UH57LTsTGDxl2oS6"

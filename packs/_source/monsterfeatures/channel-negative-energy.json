@@ -7,75 +7,109 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>The {creature} magically unleashes negative energy. Creatures within 60 feet of the {creature}, including ones behind barriers and around corners, can't regain hit points until the end of the {creature}'s next turn.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<p>the [[lookup @name lowercase]] magically unleashes negative energy. Creatures within 60 feet of the [[lookup @name lowercase]], including ones behind barriers and around corners, can't regain hit points until the end of the [[lookup @name lowercase]]'s next turn.</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "legendary",
-      "cost": 2,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": 60,
-      "width": null,
-      "units": "ft",
-      "type": "radius"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": "self"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "attribute",
-      "target": null,
-      "amount": 2
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "legendary",
+          "value": 2,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "attribute",
+              "target": "",
+              "value": "2",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "radius",
+            "size": "60",
+            "width": "",
+            "height": "",
+            "units": "ft"
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "roll": {
+          "formula": "",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "channel-negative-energy"
   },
   "flags": {},
   "img": "icons/magic/unholy/beam-impact-purple.webp",
@@ -83,11 +117,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234535,
-    "modifiedTime": 1672335525024,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304969540,
+    "modifiedTime": 1725992572243,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LO4nrudXAKJ4DbQI"

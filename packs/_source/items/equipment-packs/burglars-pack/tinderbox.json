@@ -11,10 +11,14 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 5,
       "denomination": "sp"
@@ -29,17 +33,19 @@
     "unidentified": {
       "description": ""
     },
-    "properties": []
+    "properties": [],
+    "identifier": "tinderbox"
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233523,
-    "modifiedTime": 1704823145200,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037127576,
+    "modifiedTime": 1725992493001,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "CG0LhGQtc3KOAeE1",

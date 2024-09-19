@@ -15,7 +15,7 @@
                 <i class="fas fa-cog"></i>
             </a>
             {{else}}
-            <span class="sign">{{ sign }}</span>{{ mod }}
+            {{ dnd5e-formatModifier mod }}
             {{/if}}
         </div>
         <div class="score">
@@ -52,12 +52,21 @@
         <div class="right">
 
             {{!-- Level --}}
-            <div class="level" aria-label="{{ localize "DND5E.LevelNumber" }}">{{ system.details.level }}</div>
+            <div class="level-badge badge" aria-label="{{ localize "DND5E.LevelNumber" level=system.details.level }}">
+                {{ system.details.level }}
+            </div>
 
             {{!-- Inspiration --}}
             <button type="button" class="inspiration unbutton" data-action="toggleInspiration"
                     aria-label="{{ localize "DND5E.Inspiration" }}" data-tooltip="DND5E.Inspiration"
                     aria-pressed="{{ system.attributes.inspiration }}"></button>
+
+            {{!-- Epic Boons --}}
+            {{#if system.details.xp.boonsEarned}}
+            <div class="boon-badge badge" data-tooltip="{{ epicBoonsEarned }}" aria-label="{{ epicBoonsEarned }}">
+                {{ dnd5e-numberFormat system.details.xp.boonsEarned numerals=true }}
+            </div>
+            {{/if}}
 
             <div>
                 {{!-- Resting & Special Traits --}}
@@ -88,8 +97,10 @@
                     {{else}}
                     <span class="value">{{ dnd5e-numberFormat value }}</span>
                     {{/if}}
+                    {{#unless @root.epicBoonsEarned}}
                     <span class="separator">&sol;</span>
                     <span class="max">{{ dnd5e-numberFormat max }}</span>
+                    {{/unless}}
                 </div>
                 <div class="xp-bar" role="meter" aria-label="{{ localize "DND5E.ExperiencePointsLabel" }}"
                      aria-valuemin="{{ min }}" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
@@ -113,11 +124,11 @@
                 <div class="card">
 
                     {{!-- Collapser --}}
-                    <button type="button" class="collapser card-tab vertical unbutton interface-only"
+                    <button type="button" class="sidebar-collapser collapser card-tab vertical unbutton interface-only"
                         {{#if sidebarCollapsed}}
-                            data-tooltip="JOURNAL.ViewExpand" aria-label="{{ localize "JOURNAL.ViewExpand" }}"
+                        data-tooltip="JOURNAL.ViewExpand" aria-label="{{ localize "JOURNAL.ViewExpand" }}"
                         {{else}}
-                            data-tooltip="JOURNAL.ViewCollapse" aria-label="{{ localize "JOURNAL.ViewCollapse" }}"
+                        data-tooltip="JOURNAL.ViewCollapse" aria-label="{{ localize "JOURNAL.ViewCollapse" }}"
                         {{/if}}>
                         <i class="fas fa-caret-{{#if sidebarCollapsed}}right{{else}}left{{/if}}"></i>
                     </button>
@@ -154,7 +165,7 @@
                             </div>
 
                             {{!-- AC --}}
-                            <div class="ac" aria-label="{{ localize "DND5E.ArmorClass" }}">
+                            <div class="ac-badge badge" aria-label="{{ localize "DND5E.ArmorClass" }}">
                                 {{#if editable}}
                                 <a class="config-button" data-action="armor" data-tooltip="DND5E.ArmorConfig"
                                    aria-label="{{ localize "DND5E.ArmorConfig" }}">
@@ -258,10 +269,11 @@
                         </div>
 
                         {{!-- Hit Dice --}}
+                        {{#with system.attributes.hd}}
                         <div class="meter-group">
                             <div class="label roboto-condensed-upper">
                                 <span>{{ localize "DND5E.HitDice" }}</span>
-                                {{#if editable}}
+                                {{#if @root.editable}}
                                 <a class="config-button" data-action="hitDice" data-tooltip="DND5E.HitDiceConfig"
                                    aria-label="{{ localize "DND5E.HitDiceConfig" }}">
                                     <i class="fas fa-cog"></i>
@@ -269,15 +281,16 @@
                                 {{/if}}
                             </div>
                             <div class="meter hit-dice progress" role="meter" aria-valuemin="0"
-                                 aria-valuenow="{{ hd.value }}" aria-valuemax="{{ hd.max }}"
-                                 style="--bar-percentage: {{ hd.pct }}%">
+                                 aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
+                                 style="--bar-percentage: {{ pct }}%">
                                 <div class="label">
-                                    <span class="value">{{ hd.value }}</span>
+                                    <span class="value">{{ value }}</span>
                                     <span class="separator">&sol;</span>
-                                    <span class="max">{{ hd.max }}</span>
+                                    <span class="max">{{ max }}</span>
                                 </div>
                             </div>
                         </div>
+                        {{/with}}
                     </div>
 
                     {{!-- Death Saves --}}
@@ -334,6 +347,7 @@
                             {{#if itemId}}data-item-id="{{ itemId }}"{{/if}}
                             {{#if effectId}}data-effect-id="{{ effectId }}"{{/if}}
                             {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}
+                            {{#if activityId}}data-activity-id="{{ activityId }}" data-action="useFavorite"{{/if}}
                             {{#if reference}}data-reference-tooltip="{{ reference }}"{{/if}}
                             {{#if preparationMode}}data-preparation-mode="{{ preparationMode }}"{{/if}}
                             {{#if level}}data-level="{{ level }}"{{/if}}
@@ -354,8 +368,7 @@
                             </figure>
 
                             {{!-- Name --}}
-                            <div class="name-stacked {{ rollableClass }}"
-                                 role="button" data-action="useFavorite">
+                            <div class="name-stacked {{ rollableClass }}" role="button" data-action="useFavorite">
                                 <span class="title">{{ title }}</span>
                                 {{#if subtitle}}
                                 <span class="subtitle">{{{ subtitle }}}</span>
@@ -366,7 +379,7 @@
                             <div class="info">
                                 <div class="primary {{ css }}">
                                     {{!-- Item Uses & Capacity --}}
-                                    {{#if uses}}
+                                    {{#if uses.max}}
                                     {{#with uses}}
                                     {{#if (and name @root.actor.isOwner)}}
                                     <input type="text" class="uninput value" value="{{ value }}"
@@ -380,11 +393,8 @@
                                     {{/with}}
 
                                     {{!-- Modifiers --}}
-                                    {{else if modifier}}
-                                    {{#with modifier}}
-                                    <span class="sign">{{ sign }}</span>
-                                    <span class="value">{{ abs }}</span>
-                                    {{/with}}
+                                    {{else if modifier includeZero=true}}
+                                    {{ dnd5e-formatModifier modifier }}
 
                                     {{!-- Passive Score --}}
                                     {{#if passive}}
@@ -392,12 +402,12 @@
                                     {{/if}}
 
                                     {{!-- Saves --}}
-                                    {{else if save.dc}}
+                                    {{else if save.dc.value}}
                                     {{#with save}}
                                     <span class="ability">
                                         {{ lookup (lookup @root.config.abilities ability) "abbreviation" }}
                                     </span>
-                                    <span class="value">{{ dc }}</span>
+                                    <span class="value">{{ dc.value }}</span>
                                     {{/with}}
 
                                     {{!-- Other Value --}}
@@ -423,8 +433,8 @@
                                     <span class="value">{{ resource.value }}</span>
                                     {{/if}}
                                     <span class="separator">&sol;</span>
-                                    {{#if @root.actor.isOwner}}
-                                    <input type="text" class="uninput max" value="{{ resource.max }}"
+                                    {{#if @root.editable}}
+                                    <input type="text" class="uninput max" value="{{ resource.source.max }}"
                                            data-dtype="Number" name="system.{{ id }}.max" inputmode="numeric"
                                            pattern="[0-9+=\-]*">
                                     {{else}}
@@ -446,6 +456,10 @@
                                         {{ units }}
                                     </span>
                                     {{/with}}
+
+                                    {{!-- Reach --}}
+                                    {{else if range.reach}}
+                                    <span class="range">{{ range.reach }} {{ range.units }}</span>
                                     {{/if}}
                                 </div>
                             </div>
@@ -473,12 +487,13 @@
 
                 {{!-- Features --}}
                 <div class="tab features" data-group="primary" data-tab="features">
-                    {{> "dnd5e.character-features" sections=features }}
+                    {{> "dnd5e.creature-features" sections=features.sections filters=features.filters
+                        showClassDrop=true }}
                 </div>
 
                 {{!-- Spells --}}
                 <div class="tab spells" data-group="primary" data-tab="spells">
-                    {{> "dnd5e.character-spells" }}
+                    {{> "dnd5e.creature-spells" }}
                 </div>
 
                 {{!-- Effects --}}
@@ -513,7 +528,11 @@
 
     {{!-- Child Creation --}}
     <button type="button" class="create-child gold-button"
-            aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
+            aria-label="{{ localize "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
         <i class="fas fa-plus"></i>
     </button>
+
+    {{!-- Warnings --}}
+    {{> "dnd5e.actor-warnings-dialog" }}
+
 </form>

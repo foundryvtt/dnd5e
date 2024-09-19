@@ -2,35 +2,6 @@
  * Extend the base Token class to implement additional system-specific logic.
  */
 export default class Token5e extends Token {
-  constructor(...args) {
-    super(...args);
-    this.ring = new CONFIG.Token.ringClass(this);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Dynamic token ring.
-   * @type {TokenRing}
-   */
-  ring;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Callback invoked when a status effect is applied on a token.
-   * @param {Token5e} token         The token whose status effect is applied.
-   * @param {string} statusId       The status effect ID being applied, from CONFIG.specialStatusEffects
-   * @param {boolean} active        Is the special status effect now active?
-   */
-  static onApplyTokenStatusEffect(token, statusId, active) {
-    const applicableEffects = [CONFIG.specialStatusEffects.DEFEATED, CONFIG.specialStatusEffects.INVISIBLE];
-    if ( !applicableEffects.includes(statusId) || !token.ring.enabled ) return;
-    const tokenRingFlag = token.document.getFlag("dnd5e", "tokenRing") || {};
-    token.ring.configureVisuals(foundry.utils.deepClone(tokenRingFlag));
-  }
-
-  /* -------------------------------------------- */
 
   /**
    * Update the token ring when this token is targeted.
@@ -39,27 +10,15 @@ export default class Token5e extends Token {
    * @param {boolean} targeted    Is the token targeted or not?
    */
   static onTargetToken(user, token, targeted) {
-    if ( !targeted || !token.ring.enabled ) return;
+    if ( !targeted ) return;
+    if ( !token.hasDynamicRing ) return;
     const color = Color.from(user.color);
-    token.ring.flashColor(color, { duration: 500, easing: CONFIG.Token.ringClass.easeTwoPeaks });
+    token.ring.flashColor(color, { duration: 500, easing: token.ring.constructor.easeTwoPeaks });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  async _draw() {
-    // Cache the subject texture if needed
-    if ( this.ring.enabled ) {
-      const subjectName = this.document.subjectPath;
-      const cached = PIXI.Assets.cache.has(subjectName);
-      if ( !cached && subjectName ) await TextureLoader.loader.loadTexture(subjectName);
-    }
-    await super._draw();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
+  /** @inheritDoc */
   _drawBar(number, bar, data) {
     if ( data.attribute === "attributes.hp" ) return this._drawHPBar(number, bar, data);
     return super._drawBar(number, bar, data);
@@ -86,8 +45,8 @@ export default class Token5e extends Token {
     let displayMax = max + (tempmax > 0 ? tempmax : 0);
 
     // Allocate percentages of the total
-    const tempPct = Math.clamped(temp, 0, displayMax) / displayMax;
-    const colorPct = Math.clamped(value, 0, effectiveMax) / displayMax;
+    const tempPct = Math.clamp(temp, 0, displayMax) / displayMax;
+    const colorPct = Math.clamp(value, 0, effectiveMax) / displayMax;
     const hpColor = dnd5e.documents.Actor5e.getHPColor(value, effectiveMax);
 
     // Determine colors to use
@@ -98,7 +57,7 @@ export default class Token5e extends Token {
     const w = this.w;
     let h = Math.max((canvas.dimensions.size / 12), 8);
     if ( this.document.height >= 2 ) h *= 1.6;
-    const bs = Math.clamped(h / 8, 1, 2);
+    const bs = Math.clamp(h / 8, 1, 2);
     const bs1 = bs+1;
 
     // Overall bar container
@@ -133,46 +92,33 @@ export default class Token5e extends Token {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onUpdate(data, options, userId) {
-    super._onUpdate(data, options, userId);
-    if ( !CONFIG.Token.ringClass.enabled ) return;
-
-    // Update ring names if necessary
-    const shapeChange = ("height" in data) || ("width" in data) || ("texture" in data);
-    if ( shapeChange ) this.ring.configureNames();
-
-    // Do we have some token ring flag changes?
-    if ( !foundry.utils.hasProperty(data, "flags.dnd5e.tokenRing") ) return;
-
-    // Do we need to trigger a full redraw? We need to do so if a token ring texture has been updated
-    const dataFlag = data.flags.dnd5e.tokenRing;
-    const redraw = ("textures" in dataFlag) || ("enabled" in dataFlag);
-    if ( redraw ) return this.renderFlags.set({redraw});
-
-    // Check for scale correction change (not necessary if shapeChange is triggered)
-    if ( ("scaleCorrection" in dataFlag) && !shapeChange ) this.ring.configureUVs(dataFlag.scaleCorrection);
-
-    // If we don't need a full redraw, we're just updating the visuals properties
-    const tokenRingFlag = this.document.getFlag("dnd5e", "tokenRing") || {};
-    this.ring.configureVisuals({...tokenRingFlag});
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _refreshShader() {
-    if ( CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
-      this.mesh?.setShaderClass(CONFIG.Token.ringClass.tokenRingSamplerShader);
-    } else super._refreshShader();
+  _onApplyStatusEffect(statusId, active) {
+    const applicableEffects = [CONFIG.specialStatusEffects.DEFEATED, CONFIG.specialStatusEffects.INVISIBLE];
+    if ( applicableEffects.includes(statusId) && this.hasDynamicRing ) {
+      this.renderFlags.set({refreshRingVisuals: true});
+    }
+    super._onApplyStatusEffect(statusId, active);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   _configureFilterEffect(statusId, active) {
-    if ( (statusId === CONFIG.specialStatusEffects.INVISIBLE) && CONFIG.Token.ringClass.enabled && this.ring.enabled ) {
-      active = false;
-    }
+    if ( (statusId === CONFIG.specialStatusEffects.INVISIBLE) && this.hasDynamicRing ) active = false;
     return super._configureFilterEffect(statusId, active);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  getRingColors() {
+    return this.document.getRingColors();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  getRingEffects() {
+    return this.document.getRingEffects();
   }
 }

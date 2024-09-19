@@ -5,6 +5,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Container items.
@@ -14,6 +15,7 @@ import CurrencyTemplate from "../shared/currency.mjs";
  * @mixes EquippableItemTemplate
  * @mixes CurrencyTemplate
  *
+ * @property {Set<string>} properties       Container properties.
  * @property {object} capacity              Information on container's carrying capacity.
  * @property {string} capacity.type         Method for tracking max capacity as defined in `DND5E.itemCapacityTypes`.
  * @property {number} capacity.value        Total amount of the type this container can carry.
@@ -21,29 +23,55 @@ import CurrencyTemplate from "../shared/currency.mjs";
 export default class ContainerData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate
 ) {
-  /** @inheritdoc */
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      quantity: new foundry.data.fields.NumberField({min: 1, max: 1}),
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.ItemContainerProperties"
-      }),
-      capacity: new foundry.data.fields.SchemaField({
-        type: new foundry.data.fields.StringField({
+      quantity: new NumberField({ min: 1, max: 1 }),
+      properties: new SetField(new StringField(), { label: "DND5E.ItemContainerProperties" }),
+      capacity: new SchemaField({
+        type: new StringField({
           required: true, initial: "weight", blank: false, label: "DND5E.ItemContainerCapacityType"
         }),
-        value: new foundry.data.fields.NumberField({
-          required: true, min: 0, label: "DND5E.ItemContainerCapacityMax"
-        })
-      }, {label: "DND5E.ItemContainerCapacity"})
+        value: new NumberField({ required: true, min: 0, label: "DND5E.ItemContainerCapacityMax" })
+      }, { label: "DND5E.ItemContainerCapacity" })
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true,
+    inventoryItem: true,
+    inventoryOrder: 500
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["attunement", this.compendiumBrowserAttunementFilter],
+      ...this.compendiumBrowserPhysicalItemFilters,
+      ["properties", this.compendiumBrowserPropertiesFilter("container")]
+    ]);
   }
 
   /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ContainerData.#migrateQuantity(source);
@@ -75,26 +103,38 @@ export default class ContainerData extends ItemDataModel.mixin(
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareDerivedData() {
-    const system = this;
-    Object.defineProperty(this.capacity, "weightless", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `system.capacity.weightless` value on containers has migrated to the 'weightlessContents' property.",
-          { since: "DnD5e 3.0", until: "DnD5e 3.2" }
-        );
-        return system.properties.has("weightlessContents");
-      },
-      configurable: true
-    });
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalEquippableData();
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   async getFavoriteData() {
-    return foundry.utils.mergeObject(await super.getFavoriteData(), { uses: await this.computeCapacity() });
+    const data = super.getFavoriteData();
+    const capacity = await this.computeCapacity();
+    if ( Number.isFinite(capacity.max) ) return foundry.utils.mergeObject(await data, { uses: capacity });
+    return await data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: context.itemType },
+      ...this.physicalItemSheetFields
+    ];
+    context.parts = ["dnd5e.details-container"];
   }
 
   /* -------------------------------------------- */
@@ -189,7 +229,9 @@ export default class ContainerData extends ItemDataModel.mixin(
    */
   get contentsWeight() {
     if ( this.parent?.pack && !this.parent?.isEmbedded ) return this.#contentsWeight();
-    return this.contents.reduce((weight, item) => weight + item.system.totalWeight, this.currencyWeight);
+    return this.contents.reduce((weight, item) =>
+      weight + item.system.totalWeightIn(this.weight.units), this.currencyWeight
+    );
   }
 
   /**
@@ -198,7 +240,9 @@ export default class ContainerData extends ItemDataModel.mixin(
    */
   async #contentsWeight() {
     const contents = await this.contents;
-    return contents.reduce(async (weight, item) => await weight + await item.system.totalWeight, this.currencyWeight);
+    return contents.reduce(async (weight, item) =>
+      await weight + await item.system.totalWeightIn(this.weight.units), this.currencyWeight
+    );
   }
 
   /* -------------------------------------------- */
@@ -208,10 +252,10 @@ export default class ContainerData extends ItemDataModel.mixin(
    * @type {number|Promise<number>}
    */
   get totalWeight() {
-    if ( this.properties.has("weightlessContents") ) return this.weight;
+    if ( this.properties.has("weightlessContents") ) return this.weight.value;
     const containedWeight = this.contentsWeight;
-    if ( containedWeight instanceof Promise ) return containedWeight.then(c => this.weight + c);
-    return this.weight + containedWeight;
+    if ( containedWeight instanceof Promise ) return containedWeight.then(c => this.weight.value + c);
+    return this.weight.value + containedWeight;
   }
 
   /* -------------------------------------------- */
@@ -230,7 +274,7 @@ export default class ContainerData extends ItemDataModel.mixin(
    */
   async computeCapacity() {
     const { value, type } = this.capacity;
-    const context = { max: value };
+    const context = { max: value ?? Infinity };
     if ( type === "weight" ) {
       context.value = await this.contentsWeight;
       context.units = game.i18n.localize("DND5E.AbbreviationLbs");
@@ -238,7 +282,8 @@ export default class ContainerData extends ItemDataModel.mixin(
       context.value = await this.contentsCount;
       context.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
     }
-    context.pct = Math.clamped(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
+    context.value = context.value.toNearest(0.1);
+    context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;
   }
 
@@ -246,7 +291,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onUpdate(changed, options, userId) {
     // Keep contents folder synchronized with container
     if ( (game.user.id === userId) && foundry.utils.hasProperty(changed, "folder") ) {

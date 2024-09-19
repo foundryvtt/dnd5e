@@ -7,75 +7,33 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>Any nonmagical weapon made of metal that hits the {creature} corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Non magical ammunition made of metal that hits the {creature} is destroyed after dealing damage.</p></section><p>Any nonmagical weapon made of metal that hits the {creature} corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<section class=\"secret\"><p>Any nonmagical weapon made of metal that hits the [[lookup @name lowercase]] corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Non magical ammunition made of metal that hits the [[lookup @name lowercase]] is destroyed after dealing damage.</p></section><p>Any nonmagical weapon made of metal that hits the [[lookup @name lowercase]] corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls.</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "rust-metal"
   },
   "flags": {},
   "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
@@ -83,11 +41,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234523,
-    "modifiedTime": 1672335996198,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304968191,
+    "modifiedTime": 1725992571802,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!GSgfXL9DyDA3GD0n"

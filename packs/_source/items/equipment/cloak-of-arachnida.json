@@ -2,7 +2,7 @@
   "_id": "VwJjuNbBf2KHMPrY",
   "name": "Cloak of Arachnida",
   "type": "equipment",
-  "img": "icons/equipment/back/cloak-heavy-fur-blue.webp",
+  "img": "icons/equipment/back/cloak-collared-blue-iron.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits:</p>\n<ul>\n<li>You have resistance to poison damage.</li>\n<li>You have a climbing speed equal to your walking speed.</li>\n<li>You can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.</li>\n<li>You can't be caught in webs of any sort and can move through webs as if they were difficult terrain.</li>\n<li>You can use an action to cast the @UUID[Compendium.dnd5e.spells.Item.UJJu9c2UvCzVljiP]{Web} spell (save DC 13). The web created by the spell fills twice its normal area. Once used, this property of the cloak can't be used again until the next dawn.</li>\n</ul>",
@@ -12,74 +12,37 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 3,
+    "weight": {
+      "value": 3,
+      "units": "lb"
+    },
     "price": {
       "value": 5000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "veryRare",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "1",
-      "units": "hour"
-    },
     "cover": null,
-    "target": {
-      "value": 40,
-      "width": null,
-      "units": "ft",
-      "type": "cube",
-      "prompt": true
-    },
-    "range": {
-      "value": 60,
-      "long": null,
-      "units": "ft"
-    },
     "uses": {
-      "value": 1,
       "max": "1",
-      "per": "day",
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "5",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "dex",
-      "dc": 13,
-      "scaling": "flat"
+      "recovery": [
+        {
+          "period": "day",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "armor": {
       "value": 0,
-      "dex": 0
+      "dex": 0,
+      "magicalBonus": null
     },
     "hp": {
       "value": 0,
@@ -104,7 +67,91 @@
     "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "1",
+          "units": "hour",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "60",
+          "units": "ft",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "cube",
+            "size": "40",
+            "width": "",
+            "height": "",
+            "units": "ft"
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "dex",
+          "dc": {
+            "calculation": "",
+            "formula": "13"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    },
+    "attuned": false,
+    "identifier": "cloak-of-arachnida"
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -114,11 +161,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233687,
-    "modifiedTime": 1707055843529,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037203028,
+    "modifiedTime": 1725992518349,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!VwJjuNbBf2KHMPrY"

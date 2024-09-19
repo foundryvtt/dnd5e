@@ -12,10 +12,14 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 4,
+    "weight": {
+      "value": 4,
+      "units": "lb"
+    },
     "price": {
       "value": 2,
       "denomination": "gp"
@@ -30,7 +34,8 @@
       "description": ""
     },
     "container": null,
-    "properties": []
+    "properties": [],
+    "identifier": "grappling-hook"
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -40,11 +45,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233913,
-    "modifiedTime": 1704823164478,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037309248,
+    "modifiedTime": 1725992554034,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!tfDxZIKDpOkz6pbx"

@@ -1,0 +1,35 @@
+{{#*inline ".packs"}}
+
+<fieldset class="card packs-section">
+    <legend>{{ localize label }}</legend>
+    <menu class="packs-list unlist {{ type }}">
+        {{#if (gt entries.length 1)}}
+        <li class="all">
+            <label class="checkbox">
+                <dnd5e-checkbox name="all-{{ type }}" {{ checked checked }} data-type="pack"
+                                {{#if indeterminate}}indeterminate{{/if}}></dnd5e-checkbox>
+                <span class="title">{{ localize "all" }}</span>
+            </label>
+        </li>
+        {{/if}}
+        {{#each entries}}
+        <li>
+            <label class="checkbox">
+                <dnd5e-checkbox name="{{ id }}" {{ checked checked }} data-type="pack"></dnd5e-checkbox>
+                <span class="title">{{ title }}</span>
+            </label>
+        </li>
+        {{/each}}
+    </menu>
+</fieldset>
+
+{{/inline}}
+
+<section class="packs">
+    {{#if packs.items.entries.length}}
+    {{> ".packs" packs.items type="items" label="DOCUMENT.Items" }}
+    {{/if}}
+    {{#if packs.actors.entries.length}}
+    {{> ".packs" packs.actors type="actors" label="DOCUMENT.Actors" }}
+    {{/if}}
+</section>

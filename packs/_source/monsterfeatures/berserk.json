@@ -7,75 +7,99 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>Whenever the {creature} starts its turn with <strong>60 hit points</strong> or fewer, roll a d6. On a 6, the {creature} goes berserk. On each of its turns while berserk, the {creature} attacks the nearest creature it can see.</p><p>If no creature is near enough to move to and attack, the {creature} attacks an object, with preference for an object smaller than itself. Once the {creature} goes berserk, it continues to do so until it is destroyed or regains all its<strong> hit points</strong>.</p>\n</section>\n<p>The {creature} goes berserk. On each of its turns while berserk, the {creature} attacks the nearest creature it can see. If no creature is near enough to move to and attack, the {creature} attacks an object, with preference for an object smaller than itself.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<section class=\"secret\">\n<p>Whenever the [[lookup @name lowercase]] starts its turn with <strong>60 hit points</strong> or fewer, roll a d6. On a 6, the [[lookup @name lowercase]] goes berserk. On each of its turns while berserk, the [[lookup @name lowercase]] attacks the nearest creature it can see.</p><p>If no creature is near enough to move to and attack, the [[lookup @name lowercase]] attacks an object, with preference for an object smaller than itself. Once the [[lookup @name lowercase]] goes berserk, it continues to do so until it is destroyed or regains all its<strong> hit points</strong>.</p>\n</section>\n<p>the [[lookup @name lowercase]] goes berserk. On each of its turns while berserk, the [[lookup @name lowercase]] attacks the nearest creature it can see. If no creature is near enough to move to and attack, the [[lookup @name lowercase]] attacks an object, with preference for an object smaller than itself.</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "other",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "1d6",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "utility",
+        "activation": {
+          "type": "",
+          "value": null,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "roll": {
+          "formula": "1d6",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "berserk"
   },
   "flags": {},
   "img": "icons/creatures/reptiles/lizard-mouth-glowing-red.webp",
@@ -83,11 +107,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234547,
-    "modifiedTime": 1672335565693,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304970946,
+    "modifiedTime": 1725992572677,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!QOWoa60SwvsQJifN"

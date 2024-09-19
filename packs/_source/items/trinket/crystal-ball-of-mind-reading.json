@@ -2,7 +2,7 @@
   "_id": "TwYeck6buBZ602mg",
   "name": "Crystal Ball of Mind Reading",
   "type": "consumable",
-  "img": "icons/commodities/gems/pearl-storm.webp",
+  "img": "icons/commodities/gems/pearl-swirl-teal.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>The Crystal Ball is about 6 inches in diameter. While touching it, you can cast the @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{Scrying}spell (save DC 17) with it.</p>\n<p>You can use an action to cast the @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{Detect Thoughts} spell (save DC 17) while you are Scrying with the Crystal Ball, targeting creatures you can see within 30 feet of the spell's sensor. You don't need to concentrate on this Detect Thoughts to maintain it during its duration, but it ends if Scrying ends.</p>",
@@ -12,71 +12,41 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 7,
+    "weight": {
+      "value": 7,
+      "units": "lb"
+    },
     "price": {
       "value": 60000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "legendary",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "10",
-      "units": "minute"
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
+      "recovery": [],
       "autoDestroy": false,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0
     },
     "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "wis",
-      "dc": 17,
-      "scaling": "flat"
+      "base": {
+        "number": null,
+        "denomination": null,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        }
+      },
+      "replace": false
     },
     "type": {
       "value": "trinket",
@@ -86,24 +56,98 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "magicalBonus": null,
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "10",
+          "units": "minute",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "wis",
+          "dc": {
+            "calculation": "",
+            "formula": "17"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    },
+    "attuned": false,
+    "identifier": "crystal-ball-of-mind-reading"
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 5600000,
   "ownership": {
     "default": 0
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233674,
-    "modifiedTime": 1707055843241,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037195309,
+    "modifiedTime": 1725992515822,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!TwYeck6buBZ602mg"

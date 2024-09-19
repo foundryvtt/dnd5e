@@ -1,0 +1,95 @@
+{{#if isGM}}
+<menu class="member-controls flexrow">
+    <li>
+        <button type="button" class="action-button" data-action="award">
+            <i class="fa-solid fa-trophy" inert></i> {{ localize "DND5E.Award.Action" }}
+        </button>
+    </li>
+    <li>
+        <button type="button" class="action-button" data-action="placeMembers">
+            <i class="fa-solid fa-location-dot" inert></i> {{localize "DND5E.Group.PlaceMembers"}}
+        </button>
+    </li>
+    <li>
+        <button type="button" class="action-button rest-button" data-action="shortRest">
+            <i class="fa-solid fa-utensils" inert></i> {{localize "DND5E.ShortRest"}}
+        </button>
+    </li>
+    <li>
+        <button type="button" class="action-button rest-button" data-action="longRest">
+            <i class="fa-solid fa-campground" inert></i> {{localize "DND5E.LongRest"}}
+        </button>
+    </li>
+</menu>
+{{/if}}
+
+{{#each sections as |section id|}}
+<section class="directory" data-section="{{id}}">
+    <header class="directory-header flexrow">
+        <h3 class="name">{{localize section.label}}</h3>
+        {{#if section.displayHPColumn}}
+        <span class="hp">{{localize "DND5E.HitPoints"}}</span>
+        {{/if}}
+        {{#if section.displayQuantityColumn}}
+        <span class="quantity">
+            {{localize "DND5E.Quantity"}}
+            {{#if @root.editable}}
+            <a class="action-button" data-action="rollQuantities" data-tooltip="DND5E.QuantityRoll"
+               aria-label="{{localize 'DND5E.QuantityRoll'}}">
+                <i class="fa-solid fa-dice"></i>
+            </a>
+            {{/if}}
+        </span>
+        {{/if}}
+        {{#if section.displayChallengeColumn}}
+        <span class="challenge">{{localize "DND5E.Group.Challenge"}}</span>
+        {{/if}}
+        <span class="controls">{{localize "DND5E.GroupControls"}}</span>
+    </header>
+    <ol class="members-list directory-list">
+        {{#each section.members as |member|}}
+        <li class="group-member directory-item flexrow" data-actor-id="{{member.id}}">
+            <input type="hidden" name="system.members.{{index}}.actor" value="{{member.id}}">
+            <div class="name flexrow">
+                <img class="thumbnail" src="{{member.img}}">
+                <h4 class="document-name"><a class="member-link">{{member.name}}</a></h4>
+            </div>
+            {{#if section.displayHPColumn}}
+            <div class="hp flexrow">
+                <div class="bar-container">
+                    <div class="bar" style="width:{{member.hp.pct}}%; background:{{member.hp.color}}; border-color:{{member.hp.border}}"></div>
+                </div>
+                {{#if displayHPValues}}
+                <span class="current">{{member.hp.current}}</span>
+                <span class="sep">/</span>
+                <span class="max">{{member.hp.max}}</span>
+                {{/if}}
+            </div>
+            {{/if}}
+            {{#if section.displayQuantityColumn}}
+            <div class="quantity flexrow">
+                <input type="number" name="system.members.{{index}}.quantity.value" min="0" step="1"
+                       value="{{member.quantity.value}}" placeholder="1">
+                <input type="text" name="system.members.{{index}}.quantity.formula"
+                       value="{{member.quantity.formula}}" placeholder="{{localize 'DND5E.Formula'}}">
+            </div>
+            {{else}}
+            <input type="hidden" name="system.members.{{index}}.quantity.value"
+                   value="{{member.quantity.value}}">
+            <input type="hidden" name="system.members.{{index}}.quantity.formula"
+                   value="{{member.quantity.formula}}">
+            {{/if}}
+            {{#if section.displayChallengeColumn}}
+            <div class="challenge">
+                <abbr>{{localize "DND5E.AbbreviationCR"}}</abbr> {{member.cr}}{{#if member.xp}} —
+                {{member.xp}} <abbr>{{localize "DND5E.ExperiencePointsAbbr"}}</abbr>{{/if}}
+            </div>
+            {{/if}}
+            <div class="controls">
+                <a class="action-button" data-action="removeMember"><i class="fa-solid fa-close"></i></a>
+            </div>
+        </li>
+        {{/each}}
+    </ol>
+</section>
+{{/each}}

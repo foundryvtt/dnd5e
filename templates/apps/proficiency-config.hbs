@@ -24,9 +24,9 @@
     <hr>
     <div class="form-group">
         <label>{{localize "DND5E.BonusAbilitySkill"}}</label>
-        <input name="system.bonuses.abilities.skill" type="text" value="{{bonusGlobal}}">
+        <input name="system.bonuses.abilities.skill" type="text" value="{{system.bonuses.abilities.skill}}">
         <p class="notes">{{localize "DND5E.SkillGlobalBonusCheckHint"}}</p>
     </div>
     {{/if}}
-    <button type="submit"><i class="far fa-save"></i> {{localize "Submit"}}</button>
+    <button type="submit"><i class="fa-regular fa-save" inert></i> {{ localize "Save" }}</button>
 </form>

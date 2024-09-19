@@ -1,0 +1,68 @@
+{{!-- Custom Formula --}}
+<div class="form-group split-group">
+    <label>{{ localize "DND5E.Formula" }}</label>
+    <div class="form-fields">
+
+        {{!-- Enable --}}
+        {{ formInput fields.custom.fields.enabled name=(concat prefix "custom.enabled") value=source.custom.enabled
+                     input=inputs.createCheckboxInput }}
+
+        {{!-- Formula --}}
+        {{#if source.custom.enabled}}
+        {{ formInput fields.custom.fields.formula name=(concat prefix "custom.formula") value=source.custom.formula }}
+        {{/if}}
+    </div>
+</div>
+
+{{!-- Simple Input --}}
+{{#unless source.custom.enabled}}
+<div class="form-group split-group">
+    <label>{{#if heal}}{{ localize "DND5E.HEAL.Title" }}{{else}}{{ localize "DND5E.DAMAGE.Title" }}{{/if}}</label>
+    <div class="form-fields">
+
+        {{!-- Number --}}
+        {{ formField fields.number name=(concat prefix "number") value=source.number label="DND5E.Number" localize=true
+                     hint=false classes="label-top" placeholder=numberPlaceholder }}
+
+        {{!-- Die --}}
+        {{ formField fields.denomination name=(concat prefix "denomination") value=source.denomination label="DND5E.Die"
+                     hint=false localize=true options=denominationOptions classes="label-top" }}
+
+        {{!-- Bonus --}}
+        {{ formField fields.bonus name=(concat prefix "bonus") value=source.bonus label="DND5E.Bonus" localize=true
+                     hint=false classes="label-top" }}
+    </div>
+</div>
+{{/unless}}
+
+{{!-- Types --}}
+{{#if types}}
+{{ formField fields.types name=(concat prefix "types") value=source.types options=types label="DND5E.Type"
+             localize=true }}
+{{/if}}
+
+{{!-- Scaling --}}
+{{#if canScale}}
+<div class="form-group split-group">
+    <label>{{ localize "DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.abbr" }}</label>
+    <div class="form-fields">
+
+        {{!-- Mode --}}
+        {{ formField fields.scaling.fields.mode name=(concat prefix "scaling.mode") value=source.scaling.mode
+                     options=scalingOptions label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.mode.abbr" hint=false
+                     localize=true classes="label-top" }}
+
+        {{!-- Dice --}}
+        {{#if source.scaling.mode}}
+        {{ formField fields.scaling.fields.number name=(concat prefix "scaling.number") value=source.scaling.number
+                     label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.number.abbr" hint=false localize=true
+                     classes="label-top" }}
+        {{/if}}
+    </div>
+</div>
+
+{{!-- Formula --}}
+{{#if source.scaling.mode}}
+{{ formField fields.scaling.fields.formula name=(concat prefix "scaling.formula") value=source.scaling.formula }}
+{{/if}}
+{{/if}}

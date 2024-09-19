@@ -7,75 +7,104 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>Any creature hostile to the {creature} that starts its turn <strong>within 20 feet</strong> of the {creature} must make a <strong>DC 21 Wisdom saving throw</strong>, unless the {creature} is incapacitated. On a failed save, the creature is frightened until the start of its next turn. If a creature's saving throw is successful, the creature is immune to the {creature}'s Fear Aura for the next 24 hours.</p></section><p>Any creature hostile to the {creature} that starts its turn <strong>within 20 feet</strong> of the {creature} must make a <strong>Wisdom</strong> saving throw.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<section class=\"secret\"><p>Any creature hostile to the [[lookup @name lowercase]] that starts its turn <strong>within 20 feet</strong> of the [[lookup @name lowercase]] must make a <strong>DC 21 Wisdom saving throw</strong>, unless the [[lookup @name lowercase]] is incapacitated. On a failed save, the creature is frightened until the start of its next turn. If a creature's saving throw is successful, the creature is immune to the [[lookup @name lowercase]]'s Fear Aura for the next 24 hours.</p></section><p>Any creature hostile to the [[lookup @name lowercase]] that starts its turn <strong>within 20 feet</strong> of the [[lookup @name lowercase]] must make a <strong>Wisdom</strong> saving throw.</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "special",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "1",
-      "units": "turn"
-    },
-    "cover": null,
-    "target": {
-      "value": 20,
-      "width": null,
-      "units": "ft",
-      "type": "radius"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "wis",
-      "dc": 21,
-      "scaling": "flat"
+      "recovery": [],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "special",
+          "value": null,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "1",
+          "units": "turn",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "radius",
+            "size": "20",
+            "width": "",
+            "height": "",
+            "units": "ft"
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "wis",
+          "dc": {
+            "calculation": "",
+            "formula": "21"
+          }
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "fear-aura"
   },
   "flags": {},
   "img": "icons/magic/water/elemental-water.webp",
@@ -83,11 +112,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234539,
-    "modifiedTime": 1672335673682,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304969987,
+    "modifiedTime": 1725992572384,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!MLVEyA7VcWu9uXqV"

@@ -39,7 +39,7 @@ export default class Advancement extends BaseAdvancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _initialize(options) {
     super._initialize(options);
     return this.prepareData();
@@ -58,13 +58,14 @@ export default class Advancement extends BaseAdvancement {
    * @property {DataModel} value          Data model used for validating value data.
    * @property {number} order          Number used to determine default sorting order of advancement items.
    * @property {string} icon           Icon used for this advancement type if no user icon is specified.
+   * @property {string} typeIcon       Icon used when selecting this advancement type during advancement creation.
    * @property {string} title          Title to be displayed if no user title is specified.
    * @property {string} hint           Description of this type shown in the advancement selection dialog.
    * @property {boolean} multiLevel    Can this advancement affect more than one level? If this is set to true,
    *                                   the level selection control in the configuration window is hidden and the
    *                                   advancement should provide its own implementation of `Advancement#levels`
    *                                   and potentially its own level configuration interface.
-   * @property {Set<string>} validItemTypes  Set of types to which this advancement can be added.
+   * @property {Set<string>} validItemTypes  Set of types to which this advancement can be added. (deprecated)
    * @property {object} apps
    * @property {*} apps.config         Subclass of AdvancementConfig that allows for editing of this advancement type.
    * @property {*} apps.flow           Subclass of AdvancementFlow that is displayed while fulfilling this advancement.
@@ -78,6 +79,7 @@ export default class Advancement extends BaseAdvancement {
     return {
       order: 100,
       icon: "icons/svg/upgrade.svg",
+      typeIcon: "icons/svg/upgrade.svg",
       title: game.i18n.localize("DND5E.AdvancementTitle"),
       hint: "",
       multiLevel: false,
@@ -87,6 +89,14 @@ export default class Advancement extends BaseAdvancement {
         flow: AdvancementFlow
       }
     };
+  }
+
+  /**
+   * Configuration information for this advancement type.
+   * @type {AdvancementMetadata}
+   */
+  get metadata() {
+    return this.constructor.metadata;
   }
 
   /* -------------------------------------------- */
@@ -152,8 +162,8 @@ export default class Advancement extends BaseAdvancement {
    */
   get appliesToClass() {
     const originalClass = this.item.isOriginalClass;
-    return (originalClass === null) || !this.classRestriction
-      || (this.classRestriction === "primary" && originalClass)
+    return !this.classRestriction
+      || (this.classRestriction === "primary" && [true, null].includes(originalClass))
       || (this.classRestriction === "secondary" && !originalClass);
   }
 
@@ -212,14 +222,15 @@ export default class Advancement extends BaseAdvancement {
 
   /**
    * Title displayed in advancement list for a specific level.
-   * @param {number} level                       Level for which to generate a title.
+   * @param {number} level                           Level for which to generate a title.
    * @param {object} [options={}]
-   * @param {object} [options.configMode=false]  Is the advancement's item sheet in configuration mode? When in
-   *                                             config mode, the choices already made on this actor should not
-   *                                             be displayed.
-   * @returns {string}                           HTML title with any level-specific information.
+   * @param {boolean} [options.legacyDisplay=false]  Use legacy formatting?
+   * @param {boolean} [options.configMode=false]     Is the advancement's item sheet in configuration mode? When in
+   *                                                 config mode, the choices already made on this actor should not
+   *                                                 be displayed.
+   * @returns {string}                               HTML title with any level-specific information.
    */
-  titleForLevel(level, { configMode=false }={}) {
+  titleForLevel(level, options={}) {
     return this.title;
   }
 
@@ -227,14 +238,15 @@ export default class Advancement extends BaseAdvancement {
 
   /**
    * Summary content displayed beneath the title in the advancement list.
-   * @param {number} level                       Level for which to generate the summary.
+   * @param {number} level                           Level for which to generate the summary.
    * @param {object} [options={}]
-   * @param {object} [options.configMode=false]  Is the advancement's item sheet in configuration mode? When in
-   *                                             config mode, the choices already made on this actor should not
-   *                                             be displayed.
-   * @returns {string}                           HTML content of the summary.
+   * @param {boolean} [options.legacyDisplay=false]  Use legacy formatting?
+   * @param {boolean} [options.configMode=false]     Is the advancement's item sheet in configuration mode? When in
+   *                                                 config mode, the choices already made on this actor should not
+   *                                                 be displayed.
+   * @returns {string}                               HTML content of the summary.
    */
-  summaryForLevel(level, { configMode=false }={}) {
+  summaryForLevel(level, options={}) {
     return "";
   }
 
@@ -332,4 +344,21 @@ export default class Advancement extends BaseAdvancement {
    */
   async reverse(level) { }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch an item and create a clone with the proper flags.
+   * @param {string} uuid  UUID of the item to fetch.
+   * @param {string} [id]  Optional ID to use instead of a random one.
+   * @returns {object|null}
+   */
+  async createItemData(uuid, id) {
+    const source = await fromUuid(uuid);
+    if ( !source ) return null;
+    return source.clone({
+      _id: id ?? foundry.utils.randomID(),
+      "flags.dnd5e.sourceId": uuid,
+      "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+    }, {keepId: true}).toObject();
+  }
 }

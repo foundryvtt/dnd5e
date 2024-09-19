@@ -11,7 +11,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "identifier": "way-of-the-open-hand",
     "classIdentifier": "monk",
@@ -21,11 +22,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.iQxLNydNLlCHNKbp"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.iQxLNydNLlCHNKbp",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -42,11 +46,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.Q7mOdk4b1lgjcptF"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.Q7mOdk4b1lgjcptF",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -63,11 +70,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.rBDZLatuoolT2FUW"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.rBDZLatuoolT2FUW",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -84,11 +94,14 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.h1gM8SH3BNRtFevE"
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.h1gM8SH3BNRtFevE",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -103,7 +116,8 @@
     ],
     "spellcasting": {
       "progression": "none",
-      "ability": ""
+      "ability": "",
+      "preparation": {}
     }
   },
   "effects": [],
@@ -115,11 +129,12 @@
   "flags": {},
   "_id": "IvlpKMXX3PmW1NY2",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234294,
-    "modifiedTime": 1704824716021,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037372867,
+    "modifiedTime": 1725992730596,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!IvlpKMXX3PmW1NY2"

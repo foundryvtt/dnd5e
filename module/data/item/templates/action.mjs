@@ -1,60 +1,47 @@
 import { ItemDataModel } from "../../abstract.mjs";
-import { FormulaField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
+import {default as EnchantmentField, EnchantmentData} from "../fields/enchantment-field.mjs";
+import SummonsField from "../fields/summons-field.mjs";
+
+const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Data model template for item actions.
- *
- * @property {string} ability             Ability score to use when determining modifier.
- * @property {string} actionType          Action type as defined in `DND5E.itemActionTypes`.
- * @property {string} attackBonus         Numeric or dice bonus to attack rolls.
- * @property {string} chatFlavor          Extra text displayed in chat.
- * @property {object} critical            Information on how critical hits are handled.
- * @property {number} critical.threshold  Minimum number on the dice to roll a critical hit.
- * @property {string} critical.damage     Extra damage on critical hit.
- * @property {object} damage              Item damage formulas.
- * @property {string[][]} damage.parts    Array of damage formula and types.
- * @property {string} damage.versatile    Special versatile damage formula.
- * @property {string} formula             Other roll formula.
- * @property {object} save                Item saving throw data.
- * @property {string} save.ability        Ability required for the save.
- * @property {number} save.dc             Custom saving throw value.
- * @property {string} save.scaling        Method for automatically determining saving throw DC.
+ * @deprecated since 4.0, targeted for removal in 4.4
  * @mixin
  */
 export default class ActionTemplate extends ItemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
+    foundry.utils.logCompatibilityWarning(
+      "The `ActionTemplate` data model has been deprecated in favor of `ActivitiesTemplate`.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+    );
     return {
-      ability: new foundry.data.fields.StringField({
-        required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"
+      ability: new StringField({required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"}),
+      actionType: new StringField({required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"}),
+      attack: new SchemaField({
+        bonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
+        flat: new BooleanField({label: "DND5E.ItemAttackFlat"})
       }),
-      actionType: new foundry.data.fields.StringField({
-        required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"
-      }),
-      attackBonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
-      chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
-      critical: new foundry.data.fields.SchemaField({
-        threshold: new foundry.data.fields.NumberField({
+      chatFlavor: new StringField({required: true, label: "DND5E.ChatFlavor"}),
+      critical: new SchemaField({
+        threshold: new NumberField({
           required: true, integer: true, initial: null, positive: true, label: "DND5E.ItemCritThreshold"
         }),
         damage: new FormulaField({required: true, label: "DND5E.ItemCritExtraDamage"})
       }),
-      damage: new foundry.data.fields.SchemaField({
-        parts: new foundry.data.fields.ArrayField(new foundry.data.fields.ArrayField(
-          new foundry.data.fields.StringField({nullable: true})
-        ), {required: true}),
+      damage: new SchemaField({
+        parts: new ArrayField(new ArrayField(new StringField({nullable: true})), {required: true}),
         versatile: new FormulaField({required: true, label: "DND5E.VersatileDamage"})
       }, {label: "DND5E.Damage"}),
+      enchantment: new EnchantmentField(),
       formula: new FormulaField({required: true, label: "DND5E.OtherFormula"}),
-      save: new foundry.data.fields.SchemaField({
-        ability: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Ability"}),
-        dc: new foundry.data.fields.NumberField({
-          required: true, min: 0, integer: true, label: "DND5E.AbbreviationDC"
-        }),
-        scaling: new foundry.data.fields.StringField({
-          required: true, blank: false, initial: "spell", label: "DND5E.ScalingFormula"
-        })
-      }, {label: "DND5E.SavingThrow"})
+      save: new SchemaField({
+        ability: new StringField({required: true, blank: true, label: "DND5E.Ability"}),
+        dc: new NumberField({required: true, min: 0, integer: true, label: "DND5E.AbbreviationDC"}),
+        scaling: new StringField({required: true, blank: false, initial: "spell", label: "DND5E.ScalingFormula"})
+      }, {label: "DND5E.SavingThrow"}),
+      summons: new SummonsField()
     };
   }
 
@@ -62,14 +49,13 @@ export default class ActionTemplate extends ItemDataModel {
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ActionTemplate.#migrateAbility(source);
-    ActionTemplate.#migrateAttackBonus(source);
+    ActionTemplate.#migrateAttack(source);
     ActionTemplate.#migrateCritical(source);
     ActionTemplate.#migrateSave(source);
-    ActionTemplate.#migrateDamage(source);
   }
 
   /* -------------------------------------------- */
@@ -85,12 +71,15 @@ export default class ActionTemplate extends ItemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Ensure a 0 or null in attack bonus is converted to an empty string rather than "0".
+   * Move 'attackBonus' to 'attack.bonus' and ensure a 0 or null is converted to an empty string rather than "0".
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static #migrateAttackBonus(source) {
-    if ( [0, "0", null].includes(source.attackBonus) ) source.attackBonus = "";
-    else if ( typeof source.attackBonus === "number" ) source.attackBonus = source.attackBonus.toString();
+  static #migrateAttack(source) {
+    if ( "attackBonus" in source ) {
+      source.attack ??= {};
+      source.attack.bonus ??= source.attackBonus;
+    }
+    if ( [0, "0", null].includes(source.attack?.bonus) ) source.attack.bonus = "";
   }
 
   /* -------------------------------------------- */
@@ -123,18 +112,6 @@ export default class ActionTemplate extends ItemDataModel {
       if ( source.save.dc === "" ) source.save.dc = null;
       else if ( Number.isNumeric(source.save.dc) ) source.save.dc = Number(source.save.dc);
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate damage parts.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateDamage(source) {
-    if ( !("damage" in source) ) return;
-    source.damage ??= {};
-    source.damage.parts ??= [];
   }
 
   /* -------------------------------------------- */
@@ -234,6 +211,16 @@ export default class ActionTemplate extends ItemDataModel {
    */
   get hasSave() {
     return this.actionType && !!(this.save.ability && this.save.scaling);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this Item implement summoning as part of its usage?
+   * @type {boolean}
+   */
+  get hasSummoning() {
+    return (this.actionType === "summ") && !!this.summons?.profiles.length;
   }
 
   /* -------------------------------------------- */

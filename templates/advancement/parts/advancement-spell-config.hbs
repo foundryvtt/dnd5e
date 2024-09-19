@@ -1,27 +1,43 @@
 <div class="form-group">
-    <label>{{localize "DND5E.AbilityModifier"}}</label>
+    <label>{{ localize "DND5E.AbilityModifier" }}</label>
     <div class="form-fields">
-        <select name="configuration.spell.ability">
-            {{selectOptions CONFIG.abilities selected=configuration.spell.ability labelAttr="label" blank="—"}}
-        </select>
+        <multi-select name="configuration.spell.ability">
+            {{#each abilities}}
+            <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+            {{/each}}
+        </multi-select>
     </div>
 </div>
 
 <div class="form-group">
-    <label>{{localize "DND5E.SpellPreparationMode"}}</label>
+    <label>{{ localize "DND5E.SpellPreparation.Mode" }}</label>
     <div class="form-fields">
         <select name="configuration.spell.preparation">
-            {{selectOptions CONFIG.spellPreparationModes selected=configuration.spell.preparation blank="—"}}
+            {{ selectOptions CONFIG.spellPreparationModes selected=configuration.spell.preparation
+                             labelAttr="label" blank="—" }}
         </select>
     </div>
 </div>
 
 <div class="form-group">
-    <label>{{localize "DND5E.LimitedUses"}}</label>
+    <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
-        <input type="text" name="configuration.spell.uses.max" value="{{configuration.spell.uses.max}}" data-formula-editor>
+        <input type="text" name="configuration.spell.uses.max" value="{{ configuration.spell.uses.max }}"
+               data-formula-editor>
         <select name="configuration.spell.uses.per">
-            {{selectOptions CONFIG.limitedUsePeriods selected=configuration.spell.uses.per blank="—"}}
+            {{ selectOptions CONFIG.limitedUsePeriods selected=configuration.spell.uses.per
+                             labelAttr="label" blank="—" }}
         </select>
     </div>
 </div>
+
+{{#if showRequireSpellSlot}}
+<div class="form-group">
+    <label>{{ localize "DND5E.ADVANCEMENT.SPELLCONFIG.FIELDS.uses.requireSlot.label" }}</label>
+    <div class="form-fields">
+        <input type="checkbox" name="configuration.spell.uses.requireSlot"
+               {{ checked configuration.spell.uses.requireSlot }}>
+    </div>
+    <p class="hint">{{ localize "DND5E.ADVANCEMENT.SPELLCONFIG.FIELDS.uses.requireSlot.hint" }}</p>
+</div>
+{{/if}}

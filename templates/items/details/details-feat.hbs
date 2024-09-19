@@ -1,0 +1,39 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemFeatureDetails" }}</legend>
+
+    {{!-- Feature Type --}}
+    {{ formField fields.type.fields.value value=source.type.value choices=config.featureTypes labelAttr="label" blank=""
+                 localize=true }}
+
+    {{!-- Feature Sub-Type --}}
+    {{#if itemSubtypes}}
+    {{ formField fields.type.fields.subtype value=source.type.subtype choices=itemSubtypes blank="" localize=true
+                 label=(localize "DND5E.ItemFeatureSubtype" category=(lookup (lookup config.featureTypes source.type.value) "label")) }}
+    {{/if}}
+
+    {{!-- Feature Prerequisites --}}
+    {{ formField fields.prerequisites.fields.level value=source.prerequisites.level localize=true step=1
+                 label="DND5E.Prerequisites.FIELDS.prerequisites.level.label"
+                 hint="DND5E.Prerequisites.FIELDS.prerequisites.level.hint" }}
+
+    {{!-- Feature Properties --}}
+    {{ formField fields.properties options=properties.options label="DND5E.ItemFeatureProperties" localize=true
+                 input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid checkbox-grid-3" }}
+</fieldset>
+
+{{#if system.isEnchantmentSource}}
+<fieldset>
+    <legend>{{ localize "DND5E.ENCHANTMENT.Label" }}</legend>
+
+    {{!-- Max Enchantments --}}
+    {{ formField fields.enchant.fields.max value=source.enchantment.max localize=true
+                 label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.label"
+                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.hint" }}
+
+    {{!-- Enchantment Replacement --}}
+    {{ formField fields.enchant.fields.period value=source.enchantment.period localize=true
+                 choices=config.enchantmentPeriods labelAttr="label" blank="DND5E.UsesPeriods.Never"
+                 label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.label"
+                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.hint" }}
+</fieldset>
+{{/if}}

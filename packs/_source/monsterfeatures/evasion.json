@@ -7,75 +7,33 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>If the {creature} is subjected to an effect that allows it to make a <strong>Dexterity</strong> saving throw to take only half damage, the {creature} instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<p>If the [[lookup @name lowercase]] is subjected to an effect that allows it to make a <strong>Dexterity</strong> saving throw to take only half damage, the [[lookup @name lowercase]] instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "evasion"
   },
   "flags": {},
   "img": "icons/magic/water/pseudopod-teal.webp",
@@ -83,11 +41,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234617,
-    "modifiedTime": 1672335680206,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304978513,
+    "modifiedTime": 1725992574998,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!xOgrn5QXzSP4QN6V"

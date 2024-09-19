@@ -12,74 +12,32 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 3,
+    "weight": {
+      "value": 3,
+      "units": "lb"
+    },
     "price": {
       "value": 3500,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "uncommon",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "5",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": 0,
-      "dex": 0
+      "dex": 0,
+      "magicalBonus": null
     },
     "hp": {
       "value": 0,
@@ -104,7 +62,10 @@
     "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "activities": {},
+    "attuned": false,
+    "identifier": "cloak-of-protection"
   },
   "effects": [
     {
@@ -133,14 +94,27 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/equipment/back/cloak-heavy-fur-blue.webp",
       "origin": "Compendium.dnd5e.items.lvaMqEhfidfHDGf5",
       "transfer": true,
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
       "name": "+1 to AC & Saves",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/equipment/back/cloak-heavy-fur-blue.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!lvaMqEhfidfHDGf5.jxfin1rh71p1xjjv"
     }
   ],
@@ -151,11 +125,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233851,
-    "modifiedTime": 1707055846461,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037276814,
+    "modifiedTime": 1725992542923,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!lvaMqEhfidfHDGf5"

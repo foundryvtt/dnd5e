@@ -1,0 +1,42 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemClassDetails" }}</legend>
+
+    {{!-- Identifier --}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Identifier" }}</label>
+        <div class="form-fields">
+            {{ formInput fields.identifier value=source.identifier placeholder=item.identifier }}
+        </div>
+        <p class="hint">
+            {{{ localize "DND5E.ClassIdentifierHint" identifier=item.identifier }}}
+            {{ localize "DND5E.IdentifierError" }}
+        </p>
+    </div>
+
+    {{!-- Hit Dice --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.CLASS.FIELDS.hitDice.label" }}</label>
+        <div class="form-fields">
+
+            {{!-- Denomination --}}
+            {{ formField fields.hitDice value=source.hitDice options=hitDieTypes label="DND5E.Denomination"
+                         localize=true classes="label-top" }}
+
+            {{!-- Spent --}}
+            {{ formField fields.hitDiceUsed value=source.hitDiceUsed placeholder="0" localize=true label="DND5E.Spent"
+                         classes="label-top" }}
+        </div>
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>{{ localize "DND5E.CLASS.Multiclass.Title" }}</legend>
+
+    {{!-- Primary Ability --}}
+    {{ formField fields.primaryAbility.fields.value value=source.primaryAbility.value options=primaryAbilities }}
+
+    {{!-- All Required --}}
+    {{#if (gt source.primaryAbility.value.length 1)}}
+    {{ formField fields.primaryAbility.fields.all value=source.primaryAbility.all input=inputs.createCheckboxInput }}
+    {{/if}}
+</fieldset>

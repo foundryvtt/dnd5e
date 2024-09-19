@@ -2,7 +2,7 @@
   "_id": "5mIeX824uMklU3xq",
   "name": "Map or Scroll Case",
   "type": "container",
-  "img": "icons/containers/bags/case-leather-tan.webp",
+  "img": "icons/containers/bags/case-scroll-leather-tan.webp",
   "system": {
     "description": {
       "value": "<p>This cylindrical leather case can hold up to ten rolled-up sheets of paper or five rolled-up sheets of parchment.</p>",
@@ -12,15 +12,19 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 1,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "",
     "identified": true,
@@ -39,7 +43,9 @@
       "description": ""
     },
     "container": null,
-    "properties": []
+    "properties": [],
+    "attuned": false,
+    "identifier": "map-or-scroll-case"
   },
   "effects": [],
   "folder": "PgtyWdfkDTDbc0ov",
@@ -49,11 +55,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233472,
-    "modifiedTime": 1704823142548,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037102156,
+    "modifiedTime": 1725992484595,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!5mIeX824uMklU3xq"

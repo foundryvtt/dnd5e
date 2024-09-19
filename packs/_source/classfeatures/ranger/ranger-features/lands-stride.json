@@ -14,72 +14,26 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Ranger 8",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
     },
-    "crewed": false,
-    "properties": []
+    "identifier": "lands-stride"
   },
   "flags": {},
   "img": "icons/magic/nature/root-vine-entangle-foot-green.webp",
@@ -87,11 +41,12 @@
   "folder": "S0rKJuStpCBy0hAf",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234345,
-    "modifiedTime": 1704824715424,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037381325,
+    "modifiedTime": 1725992287537,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!C5fzaOBc6HxyOWRn"

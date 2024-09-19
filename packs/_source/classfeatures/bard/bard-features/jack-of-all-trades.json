@@ -14,72 +14,26 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Bard 2",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
     },
-    "crewed": false,
-    "properties": []
+    "identifier": "jack-of-all-trades"
   },
   "flags": {},
   "img": "icons/commodities/tech/cog-steel.webp",
@@ -104,25 +58,39 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/commodities/tech/cog-steel.webp",
       "origin": "Item.LaQuQ37mInXH6TiR",
       "transfer": true,
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
       "name": "Jack of All Trades",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/commodities/tech/cog-steel.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!ezWijmCnlnQ9ZRX2.K4xQzXl1Z4zMnyOa"
     }
   ],
   "folder": "XEu43QVhYfhUcewt",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234402,
-    "modifiedTime": 1704824717903,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037386462,
+    "modifiedTime": 1725992289161,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ezWijmCnlnQ9ZRX2"

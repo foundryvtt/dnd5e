@@ -3,7 +3,7 @@
  */
 export default class AdvancementMigrationDialog extends Dialog {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement-migration", "dialog"],

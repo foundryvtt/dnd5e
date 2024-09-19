@@ -1,32 +1,30 @@
-<form autocomplete="off">
+<fieldset>
+    <legend>{{ localize "DND5E.SOURCE.FIELDS.source.label" }}</legend>
     <div class="form-group">
-        <label>{{localize "DND5E.SourceBook"}}</label>
-        <input type="text" name="source.book" value="{{source.book}}" list="{{appId}}-books">
-        <datalist id="{{appId}}-books">
-            {{#each CONFIG.sourceBooks as |label key|}}
-            <option value="{{key}}">{{label}}</option>
-            {{/each}}
-        </datalist>
+        <label>{{ localize "DND5E.SOURCE.FIELDS.source.book.label" }}</label>
+        <div class="form-fields">
+            <input type="text" name="system.source.book" value="{{ source.book }}" list="{{ partId }}-books"
+                   placeholder="{{ data.bookPlaceholder }}">
+            <datalist id="{{ partId }}-books">
+                {{ selectOptions CONFIG.sourceBooks }}
+            </datalist>
+        </div>
     </div>
-    <div class="form-group">
-        <label>{{localize "DND5E.SourcePage"}}</label>
-        <input type="text" name="source.page" value="{{source.page}}">
-    </div>
-    <div class="form-group">
-        <label>{{localize "DND5E.SourceCustom"}}</label>
-        <input type="text" name="source.custom" value="{{source.custom}}">
-    </div>
-    <div class="form-group">
-        <label>{{localize "DND5E.SourceLicense"}}</label>
-        <input type="text" name="source.license" value="{{source.license}}">
-    </div>
+    {{ formField fields.page value=source.page }}
+    {{ formField fields.custom value=source.custom }}
+    {{ formField fields.license value=source.license }}
+    <hr>
+    {{ formField fields.rules value=source.rules options=rulesVersions }}
+    {{#if identifier}}
+    {{ formField identifier.field value=identifier.value placeholder=identifier.placeholder localize=true }}
+    {{/if}}
+    {{ formField fields.revision value=source.revision }}
     {{#if hasSourceId}}
     <div class="form-group">
-        <label>{{localize "DND5E.SourceUUID"}}</label>
+        <label>{{ localize "DND5E.SOURCE.FIELDS.source.uuid.label" }}</label>
         <div class="source-uuid">
-            {{{dnd5e-linkForUuid sourceUuid}}}
+            {{{ dnd5e-linkForUuid sourceUuid }}}
         </div>
     </div>
     {{/if}}
-    <button type="submit"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
-</form>
+</fieldset>

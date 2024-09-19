@@ -1,4 +1,4 @@
-<{{elements.inventory}}>
+<{{elements.inventory}} class="inventory-element">
   {{#unless isVehicle}}
   <div class="inventory-filters inventory-header flexrow">
     <ul class="filter-list flexrow" data-filter="features">
@@ -38,7 +38,7 @@
     <ol class="item-list">
     {{#each section.items as |item iid|}}
     {{#dnd5e-itemContext item as |ctx|}}
-        <li class="item flexrow {{#if ctx.isDepleted}}depleted{{/if}} {{#if ctx.isExpanded}}expanded{{/if}}"
+        <li class="item flexrow {{#if ctx.isExpanded}}expanded{{/if}}"
             data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image item-action" data-action="use" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
@@ -54,12 +54,12 @@
 
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
-                {{#if ctx.isOnCooldown}}
-                    <a class="item-action" data-action="recharge">{{item.labels.recharge}}</a>
+                {{#if item.isOnCooldown}}
+                <a class="item-action" data-action="recharge">{{item.labels.recharge}}</a>
                 {{else if item.system.recharge.value}}
-                    {{localize "DND5E.Charged"}}
+                {{localize "DND5E.Charged"}}
                 {{else if ctx.hasUses}}
-                    <input type="text" value="{{item.system.uses.value}}" placeholder="0" data-dtype="Number" data-name="system.uses.value">/ {{item.system.uses.max}}
+                <input type="text" value="{{item.system.uses.value}}" placeholder="0" data-dtype="Number" data-name="system.uses.value">/ {{item.system.uses.max}}
                 {{/if}}
             </div>
             <div class="item-detail item-action">

@@ -1,0 +1,29 @@
+<div class="flexcol">
+    {{#each additional}}
+    {{#if (eq type "boolean")}}
+    <div class="filter filter-boolean" data-filter-id="{{ key }}">
+        <label>
+            <filter-state name="additional.{{ key }}" value="{{ value }}" {{ disabled locked }}></filter-state>
+            <span>{{ localize label }}</span>
+        </label>
+    </div>
+    {{else if (eq type "range")}}
+    <div class="filter filter-range form-group label-top" data-filter-id="{{ key }}">
+        <label>{{ localize label }}</label>
+        <div class="form-fields">
+            <input type="number" name="additional.{{ key }}.min" value="{{ value.min }}"
+                   min="{{ config.min }}" max="{{ config.max }}" step="any" placeholder="{{ config.min }}"
+                   {{ disabled locked.min }}>
+            <span class="sep"><dnd5e-icon src="systems/dnd5e/icons/svg/range-connector.svg"></dnd5e-icon></span>
+            <input type="number" name="additional.{{ key }}.max" value="{{ value.max }}"
+                   min="{{ config.min }}" max="{{ config.max }}" step="any" placeholder="{{ config.max }}"
+                   {{ disabled locked.max }}>
+        </div>
+    </div>
+    {{else if (eq type "set")}}
+    {{> "systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs" }}
+    {{else}}
+    <div class="filter" data-filter-id="{{ key }}">{{ label }}</div>
+    {{/if}}
+    {{/each}}
+</div>

@@ -1,5 +1,4 @@
-import TokenSystemFlags from "../data/token/token-system-flags.mjs";
-import { staticID } from "../utils.mjs";
+import { SummonsData } from "../data/item/fields/summons-field.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
@@ -16,29 +15,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @type {boolean}
    */
   get hasDynamicRing() {
-    return !!this.getFlag("dnd5e", "tokenRing.enabled");
-  }
-
-  /* -------------------------------------------- */
-
-  #subjectPath;
-
-  /**
-   * Fetch the explicit subject texture or infer from `texture.src` for dynamic rings.
-   * @type {string}
-   */
-  get subjectPath() {
-    const subject = this.getFlag("dnd5e", "tokenRing")?.textures?.subject;
-    if ( subject ) return subject;
-    this.#subjectPath ??= this.constructor.inferSubjectPath(this.texture.src);
-    return this.#subjectPath;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get _systemFlagsDataModel() {
-    return TokenSystemFlags;
+    return this.ring.enabled;
   }
 
   /* -------------------------------------------- */
@@ -60,7 +37,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /*  Methods                                     */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getBarAttribute(barName, options={}) {
     const attribute = options.alternative || this[barName]?.attribute;
     if ( attribute?.startsWith(".") ) {
@@ -91,40 +68,36 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  async toggleActiveEffect(effectData, {overlay=false, active}={}) {
-    if ( !this.actor || !effectData.id ) return false;
-    const id = staticID(`dnd5e${effectData.id}`);
+  /** @inheritDoc */
+  static getTrackedAttributeChoices(attributes) {
+    const groups = super.getTrackedAttributeChoices(attributes);
+    const abilities = [];
+    const movement = [];
+    const senses = [];
+    const skills = [];
+    const slots = [];
 
-    // Remove existing effects that contain this effect data's primary ID as their primary ID.
-    const existing = this.actor.effects.get(id);
-    const state = active ?? !existing;
-    if ( !state && existing ) await this.actor.deleteEmbeddedDocuments("ActiveEffect", [id]);
-
-    // Add a new effect
-    else if ( state ) {
-      const cls = getDocumentClass("ActiveEffect");
-      const effect = await cls.fromStatusEffect(effectData);
-      if ( overlay ) effect.updateSource({ "flags.core.overlay": true });
-      await cls.create(effect, { parent: this.actor, keepId: true });
+    // Regroup existing attributes based on their path.
+    for ( const group of Object.values(groups) ) {
+      for ( let i = 0; i < group.length; i++ ) {
+        const attribute = group[i];
+        if ( attribute.startsWith("abilities.") ) abilities.push(attribute);
+        else if ( attribute.startsWith("attributes.movement.") ) movement.push(attribute);
+        else if ( attribute.startsWith("attributes.senses.") ) senses.push(attribute);
+        else if ( attribute.startsWith("skills.") ) skills.push(attribute);
+        else if ( attribute.startsWith("spells.") ) slots.push(attribute);
+        else continue;
+        group.splice(i--, 1);
+      }
     }
 
-    return state;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Determine the subject path based on the path to the main token artwork.
-   * @param {string} path  The token's `texture.src` path.
-   * @returns {string}     Inferred subject path.
-   */
-  static inferSubjectPath(path) {
-    if ( !path ) return "";
-    for ( const [src, dest] of Object.entries(CONFIG.Token.ringClass.subjectPaths) ) {
-      if ( path.startsWith(src) ) return path.replace(src, dest);
-    }
-    return path;
+    // Add new groups to choices.
+    if ( abilities.length ) groups[game.i18n.localize("DND5E.AbilityScorePl")] = abilities;
+    if ( movement.length ) groups[game.i18n.localize("DND5E.MovementSpeeds")] = movement;
+    if ( senses.length ) groups[game.i18n.localize("DND5E.Senses")] = senses;
+    if ( skills.length ) groups[game.i18n.localize("DND5E.SkillPassives")] = skills;
+    if ( slots.length ) groups[game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots")] = slots;
+    return groups;
   }
 
   /* -------------------------------------------- */
@@ -132,7 +105,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /** @override */
   prepareData() {
     super.prepareData();
-    if ( !this.getFlag("dnd5e", "tokenRing.enabled") ) return;
+    if ( !this.hasDynamicRing ) return;
     let size = this.baseActor?.system.traits?.size;
     if ( !this.actorLink ) {
       const deltaSize = this.delta.system.traits?.size;
@@ -142,16 +115,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const dts = CONFIG.DND5E.actorSizes[size].dynamicTokenScale ?? 1;
     this.texture.scaleX = this._source.texture.scaleX * dts;
     this.texture.scaleY = this._source.texture.scaleY * dts;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onUpdate(data, options, userId) {
-    const textureChange = foundry.utils.hasProperty(data, "texture.src");
-    const tokenRingChange = foundry.utils.hasProperty(data, "flags.dnd5e.tokenRings.enabled");
-    if ( textureChange || tokenRingChange ) this.#subjectPath = null;
-    super._onUpdate(data, options, userId);
   }
 
   /* -------------------------------------------- */
@@ -177,9 +140,10 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @returns {string[]}
    */
   getRingEffects() {
-    const e = CONFIG.Token.ringClass.effects;
+    const e = foundry.canvas.tokens.TokenRing.effects;
     const effects = [];
     if ( this.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE) ) effects.push(e.INVISIBILITY);
+    else if ( this === game.combat?.combatant?.token ) effects.push(e.RING_GRADIENT);
     return effects;
   }
 
@@ -187,21 +151,30 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /**
    * Flash the token ring based on damage, healing, or temp HP.
-   * @param {object} changes
-   * @param {number} [changes.dhp]    Change to the actor's HP.
-   * @param {number} [changes.dtemp]  Change to the actor's temp HP.
+   * @param {string} type     The key to determine the type of flashing.
    */
-  flashRing({ dhp, dtemp }) {
-    let color;
-    const options = {};
-    if ( dtemp ) color = CONFIG.DND5E.tokenRingColors.temp;
-    else if ( dhp > 0 ) color = CONFIG.DND5E.tokenRingColors.healing;
-    else if ( dhp < 0 ) {
-      color = CONFIG.DND5E.tokenRingColors.damage;
-      options.duration = 500;
-      options.easing = CONFIG.Token.ringClass.easeTwoPeaks;
-    }
+  flashRing(type) {
+    if ( !this.rendered ) return;
+    const color = CONFIG.DND5E.tokenRingColors[type];
     if ( !color ) return;
-    this.object.ring.flashColor(Color.from(color), options);
+    const options = {};
+    if ( type === "damage" ) {
+      options.duration = 500;
+      options.easing = foundry.canvas.tokens.TokenRing.easeTwoPeaks;
+    }
+    this.object.ring?.flashColor(Color.from(color), options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+
+    const origin = this.actor?.getFlag("dnd5e", "summon.origin");
+    // TODO: Replace with parseUuid once V11 support is dropped
+    if ( origin ) dnd5e.registry.summons.untrack(origin.split(".Item.")[0], this.actor.uuid);
   }
 }

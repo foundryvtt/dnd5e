@@ -1,0 +1,5 @@
+<fieldset>
+    <legend>{{ localize "DND5E.HEAL.FIELDS.healing.label" }}</legend>
+    {{> "dnd5e.field-damage" fields=fields.healing.fields source=source.healing prefix="healing." heal=true
+        types=typeOptions canScale=activity.canScaleDamage }}
+</fieldset>

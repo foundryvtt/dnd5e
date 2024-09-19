@@ -7,75 +7,120 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} targets one creature it can see within 30 ft. of it. The target must succeed on a  <strong>DC 14 Wisdom</strong> saving throw or be magically charmed by the {creature} until the {creature} dies or until it is on a different plane of existence from the target.</p><p>The charmed target is under the {creature}'s control and can't take reactions, and the {creature} and the target can communicate telepathically with each other over any distance.Whenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the {creature}.</p>\n</section>\n<p>The target must make a <strong>Wisdom</strong> saving throw. Whenever the target takes damage, the target can repeat the saving throw. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the {creature}.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<section class=\"secret\">\n<p>the [[lookup @name lowercase]] targets one creature it can see within 30 ft. of it. The target must succeed on a  <strong>DC 14 Wisdom</strong> saving throw or be magically charmed by the [[lookup @name lowercase]] until the [[lookup @name lowercase]] dies or until it is on a different plane of existence from the target.</p><p>The charmed target is under the [[lookup @name lowercase]]'s control and can't take reactions, and the [[lookup @name lowercase]] and the target can communicate telepathically with each other over any distance.Whenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the [[lookup @name lowercase]].</p>\n</section>\n<p>The target must make a <strong>Wisdom</strong> saving throw. Whenever the target takes damage, the target can repeat the saving throw. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the [[lookup @name lowercase]].</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "creature"
-    },
-    "range": {
-      "value": 30,
-      "long": null,
-      "units": "ft"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": 3,
       "max": "3",
-      "per": "day",
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "wis",
-      "dc": null,
-      "scaling": "wis"
+      "recovery": [
+        {
+          "period": "day",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "30",
+          "units": "ft",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "1",
+            "type": "creature",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "wis",
+          "dc": {
+            "calculation": "wis",
+            "formula": ""
+          }
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "enslave"
   },
   "flags": {},
   "img": "icons/magic/control/hypnosis-mesmerism-watch.webp",
@@ -83,11 +128,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234580,
-    "modifiedTime": 1672335696160,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304974525,
+    "modifiedTime": 1725992573744,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gbcy9MyUF06iUC88"

@@ -22,21 +22,20 @@ export default class ActorHitPointsConfig extends BaseConfigSheet {
       classes: ["dnd5e", "actor-hit-points-config"],
       template: "systems/dnd5e/templates/apps/hit-points-config.hbs",
       width: 320,
-      height: "auto",
-      sheetConfig: false
+      height: "auto"
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     return `${game.i18n.localize("DND5E.HitPointsConfig")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData(options) {
     return {
       hp: this.clone.system.attributes.hp,
@@ -47,14 +46,14 @@ export default class ActorHitPointsConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getActorOverrides() {
     return Object.keys(foundry.utils.flattenObject(this.object.overrides?.system?.attributes || {}));
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const hp = foundry.utils.expandObject(formData).hp;
     this.clone.updateSource({"system.attributes.hp": hp});
@@ -75,7 +74,7 @@ export default class ActorHitPointsConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onChangeInput(event) {
     await super._onChangeInput(event);
     const t = event.currentTarget;

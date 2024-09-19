@@ -16,27 +16,26 @@ export default class ActorArmorConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "actor-armor-config"],
       template: "systems/dnd5e/templates/apps/actor-armor.hbs",
       width: 320,
-      height: "auto",
-      sheetConfig: false
+      height: "auto"
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     return `${game.i18n.localize("DND5E.ArmorConfig")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const ac = this.clone.system.attributes.ac;
     const isFlat = ["flat", "natural"].includes(ac.calc);
@@ -60,14 +59,14 @@ export default class ActorArmorConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getActorOverrides() {
     return Object.keys(foundry.utils.flattenObject(this.object.overrides?.system?.attributes || {}));
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const ac = foundry.utils.expandObject(formData).ac;
     return this.document.update({"system.attributes.ac": ac});
@@ -77,7 +76,7 @@ export default class ActorArmorConfig extends BaseConfigSheet {
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onChangeInput(event) {
     await super._onChangeInput(event);
 

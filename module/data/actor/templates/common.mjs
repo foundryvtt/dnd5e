@@ -1,6 +1,11 @@
+import Proficiency from "../../../documents/actor/proficiency.mjs";
+import { simplifyBonus } from "../../../utils.mjs";
 import { ActorDataModel } from "../../abstract.mjs";
-import { FormulaField, MappingField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
+import MappingField from "../../fields/mapping-field.mjs";
 import CurrencyTemplate from "../../shared/currency.mjs";
+
+const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * @typedef {object} AbilityData
@@ -20,23 +25,23 @@ import CurrencyTemplate from "../../shared/currency.mjs";
  */
 export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplate) {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      abilities: new MappingField(new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
+      abilities: new MappingField(new SchemaField({
+        value: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
         }),
-        proficient: new foundry.data.fields.NumberField({
+        proficient: new NumberField({
           required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel"
         }),
-        max: new foundry.data.fields.NumberField({
+        max: new NumberField({
           required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax"
         }),
-        bonuses: new foundry.data.fields.SchemaField({
-          check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
-          save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
-        }, {label: "DND5E.AbilityBonuses"})
+        bonuses: new SchemaField({
+          check: new FormulaField({ required: true, label: "DND5E.AbilityCheckBonus" }),
+          save: new FormulaField({ required: true, label: "DND5E.SaveBonus" })
+        }, { label: "DND5E.AbilityBonuses" })
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
         initialKeysOnly: true, label: "DND5E.Abilities"
@@ -65,10 +70,10 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     CommonTemplate.#migrateACData(source);
@@ -110,5 +115,45 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     source.attributes.movement ??= {};
     const s = original.split(" ");
     if ( s.length > 0 ) source.attributes.movement.walk = Number.isNumeric(s[0]) ? parseInt(s[0]) : 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare modifiers and other values for abilities.
+   * @param {object} [options={}]
+   * @param {object} [options.rollData={}]    Roll data used to calculate bonuses.
+   * @param {object} [options.originalSaves]  Original ability data for transformed actors.
+   */
+  prepareAbilities({ rollData={}, originalSaves }={}) {
+    const flags = this.parent.flags.dnd5e ?? {};
+    const prof = this.attributes?.prof ?? 0;
+    const checkBonus = simplifyBonus(this.bonuses?.abilities?.check, rollData);
+    const saveBonus = simplifyBonus(this.bonuses?.abilities?.save, rollData);
+    const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
+    for ( const [id, abl] of Object.entries(this.abilities) ) {
+      if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
+      abl.mod = Math.floor((abl.value - 10) / 2);
+
+      const isRA = this.parent._isRemarkableAthlete(id);
+      abl.checkProf = new Proficiency(prof, (isRA || flags.jackOfAllTrades) ? 0.5 : 0, !isRA);
+      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
+      abl.saveBonus = saveBonusAbl + saveBonus;
+
+      abl.saveProf = new Proficiency(prof, abl.proficient);
+      const checkBonusAbl = simplifyBonus(abl.bonuses?.check, rollData);
+      abl.checkBonus = checkBonusAbl + checkBonus;
+
+      abl.save = abl.mod + abl.saveBonus;
+      if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
+      abl.dc = 8 + abl.mod + prof + dcBonus;
+
+      if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
+
+      // If we merged saves when transforming, take the highest bonus here.
+      if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
+    }
   }
 }

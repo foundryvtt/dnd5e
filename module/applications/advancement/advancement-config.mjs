@@ -65,26 +65,28 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async close(options={}) {
     await super.close(options);
-    delete this.advancement.apps[this.appId];
+    delete this.advancement?.apps[this.appId];
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     const levels = Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => [l, l]));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
     else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
     const context = {
+      appId: this.id,
       CONFIG: CONFIG.DND5E,
       ...this.advancement.toObject(false),
       src: this.advancement.toObject(),
       default: {
         title: this.advancement.constructor.metadata.title,
-        icon: this.advancement.constructor.metadata.icon
+        icon: this.advancement.constructor.metadata.icon,
+        hint: ""
       },
       levels,
       showClassRestrictions: this.item.type === "class",
@@ -106,17 +108,21 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
 
     // Remove an item from the list
     if ( this.options.dropKeyPath ) html.on("click", "[data-action='delete']", this._onItemDelete.bind(this));
+
+    for ( const element of html[0].querySelectorAll("multi-select") ) {
+      element.addEventListener("change", this._onChangeInput.bind(this));
+    }
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   render(force=false, options={}) {
     this.advancement.apps[this.appId] = this;
     return super.render(force, options);
@@ -124,7 +130,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData);
     if ( updates.configuration ) updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
@@ -142,7 +148,11 @@ export default class AdvancementConfig extends FormApplication {
    */
   static _cleanedObject(object) {
     return Object.entries(object).reduce((obj, [key, value]) => {
-      if ( value ) obj[key] = value;
+      let keep = false;
+      if ( foundry.utils.getType(value) === "Object" ) {
+        keep = Object.values(value).some(v => v);
+      } else if ( value ) keep = true;
+      if ( keep ) obj[key] = value;
       else obj[`-=${key}`] = null;
       return obj;
     }, {});
@@ -164,21 +174,21 @@ export default class AdvancementConfig extends FormApplication {
     if ( !uuidToDelete ) return;
     const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
     const updates = { configuration: await this.prepareConfigurationUpdate({
-      [this.options.dropKeyPath]: items.filter(uuid => uuid !== uuidToDelete)
+      [this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
     }) };
     await this.advancement.update(updates);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _canDragDrop() {
     return this.isEditable;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDrop(event) {
     if ( !this.options.dropKeyPath ) throw new Error(
       "AdvancementConfig#options.dropKeyPath must be configured or #_onDrop must be overridden to support"
@@ -207,12 +217,14 @@ export default class AdvancementConfig extends FormApplication {
     }
 
     // Abort if this uuid exists already
-    if ( existingItems.includes(item.uuid) ) {
+    if ( existingItems.find(i => i.uuid === item.uuid) ) {
       ui.notifications.warn("DND5E.AdvancementItemGrantDuplicateWarning", {localize: true});
       return null;
     }
 
-    await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [...existingItems, item.uuid]});
+    await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [
+      ...existingItems, { uuid: item.uuid }
+    ]});
   }
 
   /* -------------------------------------------- */

@@ -2,7 +2,7 @@
   "_id": "NYIib9KEYDUFe9GY",
   "name": "Sling Bullet +1",
   "type": "consumable",
-  "img": "icons/skills/ranged/bullets-triple-ball-yellow.webp",
+  "img": "icons/weapons/ammunition/shot-round-blue.webp",
   "system": {
     "description": {
       "value": "<p>A hardened pebble of stone, bone, or metal which can be flung at high velocity using a sling. It has been imbued with magic.</p>\n<p>You have a bonus to attack and damage rolls made with this piece of magic ammunition. Once it hits a target, the ammunition is no longer magical.</p>",
@@ -12,76 +12,42 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 0.075,
+    "weight": {
+      "value": 0.075,
+      "units": "lb"
+    },
     "price": {
       "value": 25,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "uncommon",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
+      "recovery": [],
       "autoDestroy": false,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "rwak",
-    "attackBonus": "1",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0
     },
     "damage": {
-      "parts": [
-        [
-          "1",
-          "bludgeoning"
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "base": {
+        "number": null,
+        "denomination": 0,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        },
+        "bonus": ""
+      },
+      "replace": false
     },
     "type": {
       "value": "ammo",
@@ -91,10 +57,13 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "magicalBonus": 1,
+    "activities": {},
+    "attuned": false,
+    "identifier": "sling-bullet-1"
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -104,11 +73,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233632,
-    "modifiedTime": 1707244304048,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037174203,
+    "modifiedTime": 1725992508641,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!NYIib9KEYDUFe9GY"

@@ -11,74 +11,32 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 30,
+    "weight": {
+      "value": 30,
+      "units": "lb"
+    },
     "price": {
       "value": 20,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": null,
-      "dex": null
+      "dex": null,
+      "magicalBonus": null
     },
     "hp": {
       "value": 0,
@@ -101,7 +59,10 @@
     },
     "container": null,
     "crewed": false,
-    "properties": []
+    "properties": [],
+    "activities": {},
+    "attuned": false,
+    "identifier": "military-saddle"
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -112,11 +73,12 @@
   "flags": {},
   "_id": "PLkzJ310FzBnRrI5",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233644,
-    "modifiedTime": 1704823150993,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037181057,
+    "modifiedTime": 1725992511025,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!PLkzJ310FzBnRrI5"

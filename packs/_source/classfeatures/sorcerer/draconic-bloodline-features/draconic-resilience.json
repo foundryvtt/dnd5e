@@ -14,72 +14,26 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "class",
       "subtype": ""
     },
     "requirements": "Draconic Bloodline 1",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
     },
-    "crewed": false,
-    "properties": []
+    "identifier": "draconic-resilience"
   },
   "flags": {},
   "img": "icons/creatures/claws/claw-scaled-red.webp",
@@ -104,25 +58,39 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/creatures/claws/claw-scaled-red.webp",
       "origin": "Item.MW1ExvBLm8Hg82aA",
       "transfer": true,
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
       "name": "Draconic Resilience",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/creatures/claws/claw-scaled-red.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!MW1ExvBLm8Hg82aA.Pu89Tsgy2FJjYPQi"
     }
   ],
   "folder": "IDrXx9YvOrbmM699",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234366,
-    "modifiedTime": 1704824716333,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037383185,
+    "modifiedTime": 1725992288100,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!MW1ExvBLm8Hg82aA"

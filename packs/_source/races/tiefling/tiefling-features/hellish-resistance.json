@@ -14,115 +14,39 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "crewed": false,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "race",
       "subtype": ""
     },
     "requirements": "Tiefling",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "properties": [],
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
     },
-    "properties": []
+    "identifier": "hellish-resistance"
   },
   "flags": {},
   "img": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
-  "effects": [
-    {
-      "_id": "0rAhv7npcNmDcQ3B",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
-      "origin": "Item.q71Pe1F8RRtEJt8Q",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "name": "Hellish Resistance",
-      "description": "",
-      "statuses": [],
-      "_key": "!items.effects!q71Pe1F8RRtEJt8Q.0rAhv7npcNmDcQ3B"
-    }
-  ],
+  "effects": [],
   "folder": "uTOlS6Wk9xGuCs7Z",
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234473,
-    "modifiedTime": 1704824711386,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037393321,
+    "modifiedTime": 1725992703745,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!q71Pe1F8RRtEJt8Q"

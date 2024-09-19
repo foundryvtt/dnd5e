@@ -6,7 +6,7 @@ import AdvancementConfig from "./advancement-config.mjs";
  */
 export default class SizeConfig extends AdvancementConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "size"],
@@ -16,7 +16,7 @@ export default class SizeConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     return foundry.utils.mergeObject(super.getData(), {
       default: {
@@ -32,7 +32,7 @@ export default class SizeConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async prepareConfigurationUpdate(configuration) {
     configuration.sizes = filteredKeys(configuration.sizes ?? {});
     return configuration;

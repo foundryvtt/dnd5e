@@ -1,14 +1,18 @@
 import { ItemDataModel } from "../abstract.mjs";
-import { FormulaField } from "../fields.mjs";
+import FormulaField from "../fields/formula-field.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
+import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
-import ItemTypeField from "./fields/item-type-field.mjs";
+
+const { NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Tool items.
+ * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  * @mixes IdentifiableTemplate
@@ -21,33 +25,69 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @property {string} bonus       Bonus formula added to tool rolls.
  */
 export default class ToolData extends ItemDataModel.mixin(
-  ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate
+  ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
+  PhysicalItemTemplate, EquippableItemTemplate
 ) {
-  /** @inheritdoc */
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({subtype: false}, {label: "DND5E.ItemToolType"}),
-      ability: new foundry.data.fields.StringField({
-        required: true, blank: true, label: "DND5E.DefaultAbilityCheck"
-      }),
-      chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
-      proficient: new foundry.data.fields.NumberField({
+      type: new ItemTypeField({ subtype: false }, { label: "DND5E.ItemToolType" }),
+      ability: new StringField({ required: true, blank: true, label: "DND5E.DefaultAbilityCheck" }),
+      chatFlavor: new StringField({ required: true, label: "DND5E.ChatFlavor" }),
+      proficient: new NumberField({
         required: true, initial: null, min: 0, max: 2, step: 0.5, label: "DND5E.ItemToolProficiency"
       }),
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.ItemToolProperties"
-      }),
-      bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
+      properties: new SetField(new StringField(), { label: "DND5E.ItemToolProperties" }),
+      bonus: new FormulaField({ required: true, label: "DND5E.ItemToolBonus" })
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true,
+    inventoryItem: true,
+    inventoryOrder: 400
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["type", {
+        label: "DND5E.ItemToolType",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.toolTypes,
+          keyPath: "system.type.value"
+        }
+      }],
+      ["attunement", this.compendiumBrowserAttunementFilter],
+      ...this.compendiumBrowserPhysicalItemFilters,
+      ["properties", this.compendiumBrowserPropertiesFilter("tool")]
+    ]);
   }
 
   /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
     ToolData.#migrateAbility(source);
   }
 
@@ -67,8 +107,18 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
+    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
+    this.prepareDescriptionData();
     this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
+    this.prepareFinalEquippableData();
   }
 
   /* -------------------------------------------- */
@@ -79,6 +129,17 @@ export default class ToolData extends ItemDataModel.mixin(
       subtitle: this.type.label,
       modifier: this.parent.parent?.system.tools?.[this.type.baseItem]?.total
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: this.type.label },
+      ...this.physicalItemSheetFields
+    ];
+    context.parts = ["dnd5e.details-tool", "dnd5e.field-uses"];
   }
 
   /* -------------------------------------------- */
@@ -115,6 +176,13 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.toolTypes;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * The proficiency multiplier for this item.
    * @returns {number}
@@ -127,5 +195,17 @@ export default class ToolData extends ItemDataModel.mixin(
     const baseItemProf = actor.system.tools?.[this.type.baseItem];
     const categoryProf = actor.system.tools?.[this.type.value];
     return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _preCreate(data, options, user) {
+    if ( super._preCreate(data, options, user) === false ) return false;
+    if ( this.activities.size ) return;
+    const activityData = new CONFIG.DND5E.activityTypes.check.documentClass({}, { parent: this.parent }).toObject();
+    this.parent.updateSource({ [`system.activities.${activityData._id}`]: activityData });
   }
 }

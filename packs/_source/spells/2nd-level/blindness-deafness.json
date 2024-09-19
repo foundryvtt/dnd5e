@@ -14,60 +14,37 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "activation": {
       "type": "action",
-      "cost": 1,
-      "condition": ""
+      "condition": "",
+      "value": 1
     },
     "duration": {
       "value": "1",
       "units": "minute"
     },
-    "cover": null,
     "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "creature",
-      "prompt": true
+      "affects": {
+        "type": "creature",
+        "count": "1",
+        "choice": false
+      },
+      "template": {
+        "units": "",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 30,
-      "long": null,
+      "value": "30",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "con",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 2,
     "school": "nec",
@@ -81,14 +58,77 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "level",
-      "formula": ""
-    },
     "properties": [
       "vocal"
     ],
-    "crewed": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [
+          {
+            "_id": "59WpbiZFULwixyvC",
+            "onSave": false
+          },
+          {
+            "_id": "H0SG0oq3VfiCxBOQ",
+            "onSave": false
+          }
+        ],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "con",
+          "dc": {
+            "calculation": "spellcasting",
+            "formula": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    },
+    "identifier": "blindness-deafness"
   },
   "sort": 0,
   "flags": {},
@@ -96,7 +136,6 @@
   "effects": [
     {
       "name": "Blindness",
-      "icon": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
       "origin": "Compendium.dnd5e.spells.Item.zwGsAv6kmwzYGhh3",
       "duration": {
         "startTime": null,
@@ -116,12 +155,25 @@
         "blinded"
       ],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!zwGsAv6kmwzYGhh3.59WpbiZFULwixyvC"
     },
     {
       "name": "Deafness",
-      "icon": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
       "origin": "Compendium.dnd5e.spells.Item.zwGsAv6kmwzYGhh3",
       "duration": {
         "startTime": null,
@@ -141,17 +193,32 @@
         "deafened"
       ],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!zwGsAv6kmwzYGhh3.H0SG0oq3VfiCxBOQ"
     }
   ],
   "folder": "Qi4Se3we69ukl2V9",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234247,
-    "modifiedTime": 1706146917536,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037367405,
+    "modifiedTime": 1725992723756,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!zwGsAv6kmwzYGhh3"

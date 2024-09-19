@@ -2,7 +2,7 @@
   "_id": "xEtBeZjJnkDXojQM",
   "name": "Staff of Frost",
   "type": "weapon",
-  "img": "icons/weapons/staves/staff-ornate-engraved-blue.webp",
+  "img": "icons/weapons/staves/staff-ornate-blue.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement by a druid, sorcerer, warlock, or wizard)</em></p><p>You have resistance to cold damage while you hold this staff.</p><p>The staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC: @UUID[Compendium.dnd5e.spells.Item.RpKjTlYASrfqUPVA]{Cone of Cold} (5 charges), @UUID[Compendium.dnd5e.spells.Item.IBJmWjzbQGu7M4UX]{Fog Cloud} (1 charge), @UUID[Compendium.dnd5e.spells.Item.WN2LWEljYU6QqnRH]{Ice Storm} (4 charges), or @UUID[Compendium.dnd5e.spells.Item.fzZnVKLmBMo2f5up]{Wall of Ice} (4 charges).</p><p>The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff turns to water and is destroyed.</p>",
@@ -12,70 +12,66 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 4,
+    "weight": {
+      "value": 4,
+      "units": "lb"
+    },
     "price": {
       "value": 26000,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "veryRare",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
     "range": {
       "value": null,
       "long": null,
-      "units": ""
+      "units": "",
+      "reach": null
     },
     "uses": {
-      "value": 10,
       "max": "10",
-      "per": "charges",
-      "recovery": "1d6 + 4",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "recovery": [
+        {
+          "period": "dawn",
+          "type": "recoverAll"
+        }
+      ],
+      "spent": 0
     },
     "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "versatile": {
+        "number": null,
+        "denomination": null,
+        "bonus": "",
+        "types": [],
+        "custom": {
+          "enabled": false,
+          "formula": ""
+        },
+        "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+        }
+      },
+      "base": {
+        "number": null,
+        "denomination": null,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        }
+      }
     },
     "armor": {
       "value": 10
@@ -87,6 +83,7 @@
       "conditions": ""
     },
     "properties": [
+      "foc",
       "mgc"
     ],
     "proficient": null,
@@ -98,9 +95,212 @@
       "description": ""
     },
     "container": null,
-    "crewed": false
+    "crewed": false,
+    "magicalBonus": null,
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "",
+          "dc": {
+            "calculation": "spellcasting",
+            "formula": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      },
+      "dnd5eactivity300": {
+        "_id": "dnd5eactivity300",
+        "type": "utility",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "roll": {
+          "formula": "1d20",
+          "name": "",
+          "prompt": false,
+          "visible": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    },
+    "attuned": false,
+    "ammunition": {},
+    "identifier": "staff-of-frost"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Staff of Frost",
+      "origin": "Compendium.dnd5e.items.Item.xEtBeZjJnkDXojQM",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "flags": {},
+      "img": "icons/weapons/staves/staff-ornate-blue.webp",
+      "_id": "cY6gjrYWTbo4ezzH",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "cold",
+          "priority": null
+        }
+      ],
+      "description": "<p>You have resistance to cold damage while you hold this staff.</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!items.effects!xEtBeZjJnkDXojQM.cY6gjrYWTbo4ezzH"
+    }
+  ],
   "folder": "MLMTCAvKsuFE3vYA",
   "sort": 0,
   "ownership": {
@@ -108,11 +308,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233964,
-    "modifiedTime": 1704823165887,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037322364,
+    "modifiedTime": 1725992558645,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!xEtBeZjJnkDXojQM"

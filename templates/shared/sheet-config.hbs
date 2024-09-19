@@ -1,0 +1,33 @@
+<form autocomplete="off">
+    <div class="form-group">
+        <label>{{localize "SHEETS.ThisSheet"}}</label>
+        <select name="sheetClass">
+            {{selectOptions sheetClasses selected=sheetClass blank=blankLabel}}
+        </select>
+        <p class="notes">{{localize "SHEETS.DocumentSheetHint"}}</p>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "Default"}} <strong>{{type}}</strong> {{localize "Sheet"}}</label>
+        <select name="defaultClass" {{#unless isGM}}disabled{{/unless}}>
+            {{selectOptions defaultClasses selected=defaultClass}}
+        </select>
+        <p class="notes">{{localize "SHEETS.TypeSheetHint"}}</p>
+    </div>
+
+    <!-- TODO: Re-enable this when we support V12 only
+    <div class="form-group">
+        <label>{{localize "SHEETS.DND5E.THEME.Label"}}</label>
+        <select name="flags.dnd5e.theme">
+            {{#select object.flags.dnd5e.theme}}
+            <option value="">{{localize "SHEETS.DND5E.THEME.Automatic"}}</option>
+            {{selectOptions CONFIG.themes}}
+            {{/select}}
+        </select>
+    </div>
+    -->
+
+    <button type="submit">
+        <i class="fas fa-save"></i> {{localize "SHEETS.Save"}}
+    </button>
+</form>

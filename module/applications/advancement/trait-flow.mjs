@@ -14,7 +14,7 @@ export default class TraitFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/trait-flow.hbs"
@@ -33,12 +33,12 @@ export default class TraitFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     this.chosen ??= await this.prepareInitialValue();
     const available = await this.advancement.availableChoices(this.chosen);
     return foundry.utils.mergeObject(super.getData(), {
-      hint: this.advancement.configuration.hint ? this.advancement.configuration.hint : Trait.localizedList({
+      hint: this.advancement.hint ? this.advancement.hint : Trait.localizedList({
         grants: this.advancement.configuration.grants, choices: this.advancement.configuration.choices
       }),
       slots: this.prepareTraitSlots(available),
@@ -48,7 +48,7 @@ export default class TraitFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     this.form.querySelectorAll("select").forEach(s => s.addEventListener("change", this._onSelectTrait.bind(this)));
     this.form.querySelectorAll(".remove").forEach(s => s.addEventListener("click", this._onRemoveTrait.bind(this)));
@@ -81,7 +81,7 @@ export default class TraitFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     if ( formData.chosen && !Array.isArray(formData.chosen) ) formData.chosen = [formData.chosen];
     super._updateObject(event, formData);

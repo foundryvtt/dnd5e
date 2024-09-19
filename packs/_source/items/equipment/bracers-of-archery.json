@@ -2,7 +2,7 @@
   "_id": "ZYEqOSY9BLZs2GPx",
   "name": "Bracers of Archery",
   "type": "equipment",
-  "img": "icons/equipment/wrist/bracer-studded-leather-steel.webp",
+  "img": "icons/equipment/wrist/bracer-banded-leather.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing these bracers, you have proficiency with the longbow and shortbow, and you gain a +2 bonus to damage rolls on ranged attacks made with such weapons.</p>",
@@ -12,75 +12,33 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 1500,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": "required",
     "equipped": false,
     "rarity": "uncommon",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
     "crewed": false,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": 0,
-      "dex": 0
+      "dex": 0,
+      "magicalBonus": null
     },
     "hp": {
       "value": 0,
@@ -104,11 +62,13 @@
     "container": null,
     "properties": [
       "mgc"
-    ]
+    ],
+    "activities": {},
+    "attuned": false,
+    "identifier": "bracers-of-archery"
   },
   "effects": [
     {
-      "icon": "icons/equipment/wrist/bracer-studded-leather-steel.webp",
       "origin": "Compendium.dnd5e.items.ZYEqOSY9BLZs2GPx",
       "duration": {
         "startTime": null,
@@ -135,12 +95,26 @@
           "priority": null
         }
       ],
-      "tint": null,
+      "tint": "#ffffff",
       "transfer": true,
       "flags": {},
       "name": "Bracers of Archery",
       "description": "",
       "statuses": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "img": "icons/equipment/wrist/bracer-studded-leather-steel.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!ZYEqOSY9BLZs2GPx.ChaLjlYldFzDgHHv"
     }
   ],
@@ -151,11 +125,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233715,
-    "modifiedTime": 1707055844176,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037218257,
+    "modifiedTime": 1725992523461,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ZYEqOSY9BLZs2GPx"

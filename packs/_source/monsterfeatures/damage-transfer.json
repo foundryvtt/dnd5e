@@ -7,75 +7,33 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>While attached to a creature, the {creature} takes only half the damage dealt to it (rounded down) and that creature takes the other half.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<p>While attached to a creature, the [[lookup @name lowercase]] takes only half the damage dealt to it (rounded down) and that creature takes the other half.</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "damage-transfer"
   },
   "flags": {},
   "img": "icons/magic/water/strike-ice-blades.webp",
@@ -83,11 +41,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234496,
-    "modifiedTime": 1672335491944,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304965049,
+    "modifiedTime": 1725992570853,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!0npeEcwmiVMdwGMV"

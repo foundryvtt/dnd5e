@@ -1,89 +1,76 @@
 {{#if data.title.show}}
 <header>
-    <h{{title.level1}}>{{data.name}}</h{{title.level1}}>
+    <h{{ title.level1 }}>{{ data.name }}</h{{ title.level1 }}>
 </header>
 {{/if}}
 
 {{#if linked.document}}
 
 <section class="journal-page-content">
-    {{{enriched.value}}}
+    {{#if modernStyle}}{{> "dnd5e.journal-modern-traits" }}{{/if}}
 
-    <h{{title.level2}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.FeaturesHeader"}}</h{{title.level2}}>
-    <p>
-        {{localize "JOURNALENTRYPAGE.DND5E.Class.FeaturesDescription" name=linked.name lowercaseName=linked.lowercaseName}}
-    </p>
+    {{{ enriched.value }}}
 
-    {{#if (or advancement.hp enriched.additionalHitPoints)}}
-    <h{{title.level3}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.HitPointsHeader"}}</h{{title.level3}}>
+    <h{{ title.level2 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.Features.Header" }}</h{{ title.level2 }}>
+
+    {{#if modernStyle}}
     <p>
-        {{{localize "JOURNALENTRYPAGE.DND5E.Class.HitDice" dice=advancement.hp.hitDice class=linked.lowercaseName}}}<br>
-        {{{localize "JOURNALENTRYPAGE.DND5E.Class.HitPointsLevel1" max=advancement.hp.max}}}<br>
-        {{{localize "JOURNALENTRYPAGE.DND5E.Class.HitPointsLevelX" dice=advancement.hp.hitDice
-                    average=advancement.hp.average class=linked.lowercaseName}}}
+        {{ localize "JOURNALENTRYPAGE.DND5E.Class.Features.DescriptionModern" name=linked.name
+           lowercaseName=linked.lowercaseName }}
     </p>
-    {{{enriched.additionalHitPoints}}}
+    {{else}}
+    {{#if (and primaryAbility (not modernStyle))}}
+    <strong>{{ localize "DND5E.CLASS.FIELDS.primaryAbility.value.label" }}:</strong> {{ primaryAbility }}
     {{/if}}
 
-    {{#if (or advancement.traits enriched.additionalTraits)}}
-    <h{{title.level3}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.TraitsHeader"}}</h{{title.level3}}>
-    {{#if advancement.traits}}
     <p>
-        <strong>{{localize "DND5E.Armor"}}:</strong> {{advancement.traits.armor}}<br>
-        <strong>{{localize "TYPES.Item.weaponPl"}}:</strong> {{advancement.traits.weapons}}<br>
-        <strong>{{localize "TYPES.Item.toolPl"}}:</strong> {{advancement.traits.tools}}<br>
-        <strong>{{localize "DND5E.ClassSaves"}}:</strong> {{advancement.traits.saves}}<br>
-        <strong>{{localize "DND5E.Skills"}}:</strong> {{advancement.traits.skills}}
+        {{ localize "JOURNALENTRYPAGE.DND5E.Class.Features.DescriptionLegacy" name=linked.name
+           lowercaseName=linked.lowercaseName }}
     </p>
-    {{/if}}
-    {{{enriched.additionalTraits}}}
-    {{/if}}
 
-    {{#if (or advancement.equipment enriched.additionalEquipment)}}
-    <h{{title.level3}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.EquipmentHeader"}}</h{{title.level3}}>
-    {{{enriched.additionalEquipment}}}
+    {{> "dnd5e.journal-legacy-traits" }}
     {{/if}}
 
     {{> "dnd5e.journal-table" table=table level=title.level3
-        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=linked.name)}}
+        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=linked.name) }}
 
     {{#each features}}
-    <h{{@root.title.level4}}>{{this.name}}</h{{@root.title.level4}}>
-    {{{this.description}}}
+    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    {{{ this.description }}}
     {{/each}}
 
     {{#if optionalTable}}
-    <h{{title.level2}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption"}}</h{{title.level2}}>
-    <p>{{localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesDescription" class=linked.lowercaseName}}</p>
+    <h{{ title.level2 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption" }}</h{{ title.level2 }}>
+    <p>{{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesDescription" class=linked.lowercaseName }}</p>
 
     {{> "dnd5e.journal-table" table=optionalTable level=title.level3
-        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableOptionalCaption" class=linked.name)}}
+        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableOptionalCaption" class=linked.name) }}
 
     {{#each optionalFeatures}}
-    <h{{@root.title.level4}}>{{this.name}}</h{{@root.title.level4}}>
-    {{{this.description}}}
+    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    {{{ this.description }}}
     {{/each}}
     {{/if}}
 
     {{#if (or enriched.subclass subclasses)}}
     <h{{title.level2}}>
-        {{#if system.subclassHeader}}{{system.subclassHeader}}
-        {{else}}{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassItems"}}{{/if}}
+        {{#if system.subclassHeader}}{{ system.subclassHeader }}
+        {{else}}{{ localize "JOURNALENTRYPAGE.DND5E.Class.FIELDS.subclassItems.label" }}{{/if}}
     </h{{title.level2}}>
-    {{{enriched.subclass}}}
+    {{{ enriched.subclass }}}
 
     {{#each subclasses}}
-    <h{{@root.title.level3}}>{{this.name}}</h{{@root.title.level3}}>
+    <h{{ @root.title.level3 }}>{{ this.name }}</h{{ @root.title.level3 }}>
     {{{this.description}}}
 
     {{#if this.table}}
     {{> "dnd5e.journal-table" table=this.table level=title.level4
-        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=this.name)}}
+        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=this.name) }}
     {{/if}}
 
     {{#each this.features}}
-    <h{{@root.title.level4}}>{{this.name}}</h{{@root.title.level4}}>
-    {{{this.description}}}
+    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    {{{ this.description }}}
     {{/each}}
     {{/each}}
     {{/if}}
@@ -91,6 +78,6 @@
 
 {{else}}
 <section>
-    {{localize "JOURNALENTRYPAGE.DND5E.Class.NoValidClass"}}
+    {{ localize "JOURNALENTRYPAGE.DND5E.Class.NoValidClass" }}
 </section>
 {{/if}}

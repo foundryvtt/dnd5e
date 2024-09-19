@@ -31,6 +31,14 @@ export default class Proficiency {
   /* -------------------------------------------- */
 
   /**
+   * Should only deterministic proficiency be returned, regardless of system settings?
+   * @type {boolean}
+   */
+  deterministic = false;
+
+  /* -------------------------------------------- */
+
+  /**
    * Calculate an actor's proficiency modifier based on level or CR.
    * @param {number} level  Level or CR To use for calculating proficiency modifier.
    * @returns {number}      Proficiency modifier.
@@ -73,7 +81,8 @@ export default class Proficiency {
    * @type {string}
    */
   get term() {
-    return (game.settings.get("dnd5e", "proficiencyModifier") === "dice") ? this.dice : String(this.flat);
+    return (game.settings.get("dnd5e", "proficiencyModifier") === "dice") && !this.deterministic
+      ? this.dice : String(this.flat);
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,12 @@
+<div class="item-detail item-formula {{#unless labels.damage.length}}empty{{/unless}} {{#if isSpell}}spell-formula{{/if}}">
+    {{#each labels.damage}}
+    <div class="row">
+        <span class="formula">{{ formula }}</span>
+        {{#with (lookup @root.labels.damageAndHealing damageType)}}
+        <span data-tooltip="{{ label }}" aria-label="{{ label }}">
+            <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+        </span>
+        {{/with}}
+    </div>
+    {{/each}}
+</div>

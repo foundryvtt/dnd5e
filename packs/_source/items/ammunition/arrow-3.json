@@ -2,7 +2,7 @@
   "_id": "IY5PveXrF7VoFlWg",
   "name": "Arrow +3",
   "type": "consumable",
-  "img": "icons/weapons/ammunition/arrow-head-war.webp",
+  "img": "icons/weapons/ammunition/arrows-war-white.webp",
   "system": {
     "description": {
       "value": "<p>Ammunition used for bows of all varieties.  It has been imbued with magic.</p>\n<p>You have a bonus to attack and damage rolls made with this piece of magic ammunition. Once it hits a target, the ammunition is no longer magical.</p>",
@@ -12,76 +12,42 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 0.05,
+    "weight": {
+      "value": 0.05,
+      "units": "lb"
+    },
     "price": {
       "value": 400,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "veryRare",
     "identified": true,
-    "activation": {
-      "type": "action",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
+      "recovery": [],
       "autoDestroy": false,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "rwak",
-    "attackBonus": "3",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0
     },
     "damage": {
-      "parts": [
-        [
-          "3",
-          "piercing"
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "base": {
+        "number": null,
+        "denomination": 0,
+        "types": [],
+        "custom": {
+          "enabled": false
+        },
+        "scaling": {
+          "number": 1
+        },
+        "bonus": ""
+      },
+      "replace": false
     },
     "type": {
       "value": "ammo",
@@ -91,10 +57,13 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "magicalBonus": 3,
+    "activities": {},
+    "attuned": false,
+    "identifier": "arrow-3"
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -104,11 +73,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233572,
-    "modifiedTime": 1707244257808,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037156033,
+    "modifiedTime": 1725992502554,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!IY5PveXrF7VoFlWg"

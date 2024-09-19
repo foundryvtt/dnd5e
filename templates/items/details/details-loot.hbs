@@ -1,0 +1,18 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemLootDetails" }}</legend>
+
+    {{!-- Loot Type --}}
+    {{ formField fields.type.fields.value label="DND5E.ItemLootType" value=source.type.value choices=config.lootTypes
+                 labelAttr="label" blank="" localize=true }}
+
+    {{!-- Loot Subtype --}}
+    {{#if itemSubtypes}}
+    {{ formField fields.type.fields.subtype value=source.type.subtype choices=itemSubtypes blank=""
+                 label=(localize "DND5E.ItemLootSubtype" category=(lookup (lookup config.lootTypes source.type.value) "label")) }}
+    {{/if}}
+
+    {{!-- Loot Properties --}}
+    {{ formField fields.properties options=properties.options label="DND5E.ItemLootProperties" localize=true
+                 input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid" }}
+
+</fieldset>

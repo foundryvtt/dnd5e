@@ -1,0 +1,59 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemConsumableDetails" }}</legend>
+
+    {{!-- Consumable Type --}}
+    {{ formField fields.type.fields.value value=source.type.value choices=config.consumableTypes labelAttr="label"
+                 label="DND5E.ItemConsumableType" localize=true }}
+
+    {{!-- Consumable Sub-Type --}}
+    {{#if itemSubtypes}}
+    {{ formField fields.type.fields.subtype value=source.type.subtype choices=itemSubtypes blank="" localize=true
+                 label=(localize "DND5E.ItemConsumableSubtype" category=(lookup (lookup config.consumableTypes source.type.value) "label")) }}
+    {{/if}}
+
+    {{!-- Consumable Properties --}}
+    {{ formField fields.properties options=properties.options localize=true input=inputs.createMultiCheckboxInput
+                 stacked=true classes="checkbox-grid checkbox-grid-3"
+                 label=(ifThen (eq source.type.value "ammo") "DND5E.ItemAmmoProperties" "DND5E.ItemConsumableProperties") }}
+
+    {{!-- Magical Properties --}}
+    {{#if properties.object.mgc}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Item.Property.Magical" }}</label>
+        <div class="form-fields">
+
+            {{!-- Attunement --}}
+            <div class="form-group label-top">
+                <label>{{ localize "DND5E.Attunement" }}</label>
+                <div class="form-fields">
+
+                    {{!-- Attuned --}}
+                    {{#if source.attunement}}
+                    {{ formInput fields.attuned value=source.attuned input=inputs.createCheckboxInput
+                                 ariaLabel=(localize "DND5E.Attuned") dataset=(dnd5e-object tooltip="DND5E.Attuned") }}
+                    {{/if}}
+
+                    {{!-- Attunement --}}
+                    {{ formInput fields.attunement value=source.attunement choices=config.attunementTypes
+                                 blank="DND5E.AttunementNone" localize=true }}
+                </div>
+            </div>
+
+            {{!-- Magical Bonus --}}
+            {{#if (and properties.object.mgc (eq source.type.value "ammo"))}}
+            {{ formField fields.magicalBonus value=source.magicalBonus step=1 placeholder="0" label="DND5E.Bonus"
+                         localize=true classes="label-top" }}
+            {{/if}}
+        </div>
+    </div>
+    {{/if}}
+</fieldset>
+
+{{#if (eq source.type.value "ammo")}}
+<fieldset>
+    <legend>{{ localize "DND5E.CONSUMABLE.FIELDS.damage.label" }}</legend>
+    {{ formField fields.damage.fields.replace value=source.damage.replace input=inputs.createCheckboxInput }}
+    {{> "dnd5e.field-damage" fields=fields.damage.fields.base.fields source=source.damage.base
+        types=damageTypes prefix="system.damage.base." }}
+</fieldset>
+{{/if}}

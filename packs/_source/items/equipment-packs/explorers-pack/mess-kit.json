@@ -11,10 +11,14 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 2,
       "denomination": "sp"
@@ -29,17 +33,19 @@
     "unidentified": {
       "description": ""
     },
-    "properties": []
+    "properties": [],
+    "identifier": "mess-kit"
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233682,
-    "modifiedTime": 1704823160614,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037272547,
+    "modifiedTime": 1725992541443,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "lBg9CPRdpRhn4DO4",

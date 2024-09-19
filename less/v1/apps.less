@@ -98,7 +98,6 @@ h5 {
       font-weight: bold;
     }
     .form-fields {
-      .flexrow();
       > * {
         margin: 0 3px 0 0;
         &:last-child { margin-right: 0; }
@@ -542,7 +541,7 @@ h5 {
 /*  Active Effects                           */
 /* ----------------------------------------- */
 
-dnd5e-effects {
+.effects-element {
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
@@ -567,7 +566,7 @@ dnd5e-effects {
 /* ----------------------------------------- */
 
 .trait-selector {
-  max-height: 700px;
+  max-height: 80vh;
 
   form {
     overflow: hidden;
@@ -583,7 +582,9 @@ dnd5e-effects {
   .trait-list {
     list-style: none;
     margin: 0;
+    margin-block-end: 6px;
     padding: 0;
+    padding-block-end: 6px;
 
     li ol.trait-list {
       margin-left: 1.5em;
@@ -599,6 +600,18 @@ dnd5e-effects {
   input[type="text"] {
     height: 24px;
     margin: 2px;
+  }
+}
+
+.damage-modification {
+  .modifications label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      flex: 0 0 150px;
+    }
   }
 }
 
@@ -832,8 +845,13 @@ dnd5e-effects {
 /*  Token Heads-Up Display                   */
 /* ----------------------------------------- */
 
-#token-hud .status-effects .effect-control.active:not(.overlay) {
-  border: 1px solid green;
+#token-hud .status-effects {
+  width: max-content;
+  grid-template-columns: repeat(5, 25px);
+
+  .effect-control.active:not(.overlay) {
+    border: 1px solid green;
+  }
 }
 
 /* ----------------------------------------- */

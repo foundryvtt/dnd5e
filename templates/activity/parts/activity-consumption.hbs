@@ -1,0 +1,71 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>
+            <span>{{ localize "DND5E.CONSUMPTION.FIELDS.consumption.label" }}</span>
+            <button type="button" class="unbutton control-button" data-action="addConsumption"
+                    data-tooltip="DND5E.CONSUMPTION.Action.Create"
+                    aria-label="{{ localize "DND5E.CONSUMPTION.Action.Create" }}">
+                <i class="fas fa-plus" inert></i>
+            </button>
+        </legend>
+
+        {{#if showConsumeSpellSlot}}
+        {{ formField fields.consumption.fields.spellSlot value=source.consumption.spellSlot
+                     input=inputs.createCheckboxInput }}
+        {{/if}}
+
+        {{#each consumptionTargets}}
+        <div class="form-group split-group full-width card" data-index="{{ @index }}">
+            <div class="form-fields field-groups">
+                <div class="field-group">
+                    {{ formField fields.type name=(concat prefix "type") value=data.type label="DND5E.Type"
+                                 localize=true hint=false options=typeOptions classes="label-top" }}
+                    {{ formField fields.value name=(concat prefix "value") value=data.value label="DND5E.Amount"
+                                 localize=true classes="label-top" }}
+                </div>
+                {{#if showTargets}}
+                <div class="field-group">
+                    {{ formField fields.target name=(concat prefix "target") value=data.target options=validTargets
+                                 placeholder=targetPlaceholder label="DND5E.Target" localize=true hint=false
+                                 classes="label-top" }}
+                </div>
+                {{/if}}
+                <div class="field-group">
+                    {{#if scalingModes}}
+                    {{ formField fields.scaling.fields.mode name=(concat prefix "scaling.mode") value=data.scaling.mode
+                                 label="DND5E.CONSUMPTION.FIELDS.consumption.scaling.abbr" localize=true hint=false
+                                 options=scalingModes classes="label-top" }}
+                    {{#if data.scaling.mode}}
+                    {{ formField fields.scaling.fields.formula name=(concat prefix "scaling.formula")
+                                 value=data.scaling.formula placeholder=(localize "DND5E.CONSUMPTION.Scaling.Automatic")
+                                 label="DND5E.Formula" localize=true hint=false classes="label-top"}}
+                    {{/if}}
+                    {{/if}}
+                </div>
+                <button type="button" class="unbutton control-button" data-action="deleteConsumption"
+                        data-tooltip="DND5E.CONSUMPTION.Action.Delete"
+                        aria-label="{{ localize "DND5E.CONSUMPTION.Action.Delete" }}">
+                    <i class="fas fa-minus" inert></i>
+                </button>
+            </div>
+        </div>
+        {{else}}
+        <div class="empty">{{ localize "DND5E.None" }}</div>
+        {{/each}}
+    </fieldset>
+
+    {{#unless activity.isSpell}}
+    {{#with fields.consumption.fields.scaling.fields as |fields|}}
+    <fieldset>
+        <legend>{{ localize "DND5E.CONSUMPTION.FIELDS.consumption.scaling.label" }}</legend>
+        {{ formField fields.allowed value=../activity.consumption.scaling.allowed
+                     input=@root.inputs.createCheckboxInput }}
+        {{#if ../activity.consumption.scaling.allowed}}
+        {{ formField fields.max value=../activity.consumption.scaling.max placeholder="∞" }}
+        {{/if}}
+    </fieldset>
+    {{/with}}
+    {{/unless}}
+
+    {{> "dnd5e.field-uses" hasLimitedUses=true }}
+</section>

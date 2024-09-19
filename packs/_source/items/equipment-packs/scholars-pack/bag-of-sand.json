@@ -11,10 +11,14 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 0.5,
+    "weight": {
+      "value": 0.5,
+      "units": "lb"
+    },
     "price": {
       "value": 1,
       "denomination": "sp"
@@ -29,17 +33,19 @@
     "unidentified": {
       "description": ""
     },
-    "properties": []
+    "properties": [],
+    "identifier": "bag-of-sand"
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233822,
-    "modifiedTime": 1704823157703,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037244961,
+    "modifiedTime": 1725992532212,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "f3eF8EYq1rkqFwDP",

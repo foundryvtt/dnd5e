@@ -14,60 +14,37 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "activation": {
       "type": "minute",
-      "cost": 1,
-      "condition": "an area of air, earth, fire, or water that fills a 10-foot cube within range"
+      "condition": "an area of air, earth, fire, or water that fills a 10-foot cube within range",
+      "value": 1
     },
     "duration": {
       "value": "1",
       "units": "hour"
     },
-    "cover": null,
     "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "space",
-      "prompt": true
+      "affects": {
+        "type": "space",
+        "count": "1",
+        "choice": false
+      },
+      "template": {
+        "units": "",
+        "contiguous": false
+      }
     },
     "range": {
-      "value": 90,
-      "long": null,
+      "value": "90",
       "units": "ft"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "util",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "recovery": [],
+      "spent": 0
     },
     "level": 5,
     "school": "con",
@@ -81,17 +58,95 @@
       "mode": "prepared",
       "prepared": false
     },
-    "scaling": {
-      "mode": "level",
-      "formula": ""
-    },
     "properties": [
       "vocal",
       "somatic",
       "material",
       "concentration"
     ],
-    "crewed": false
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "summon",
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "prompt": true,
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "bonuses": {
+          "ac": "",
+          "hd": "",
+          "hp": "",
+          "attackDamage": "",
+          "saveDamage": "",
+          "healing": ""
+        },
+        "creatureSizes": [],
+        "creatureTypes": [],
+        "match": {
+          "attacks": false,
+          "proficiency": false,
+          "saves": false
+        },
+        "profiles": [
+          {
+            "count": "1",
+            "cr": "@item.level",
+            "name": "",
+            "_id": "BFnNfSl7Ojcw4Rm2",
+            "uuid": "",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": [
+              "elemental"
+            ]
+          }
+        ],
+        "summon": {
+          "identifier": "",
+          "mode": "cr",
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    },
+    "identifier": "conjure-elemental"
   },
   "sort": 0,
   "flags": {},
@@ -99,11 +154,12 @@
   "effects": [],
   "folder": "bG9QTayc46rfNkv2",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234056,
-    "modifiedTime": 1704823521541,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037345639,
+    "modifiedTime": 1725992716468,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!1LkZvINag7KqBmDR"

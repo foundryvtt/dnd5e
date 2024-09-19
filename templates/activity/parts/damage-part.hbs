@@ -1,0 +1,58 @@
+<div class="field-group">
+    {{ formInput fields.custom.fields.enabled name=(concat prefix "custom.enabled") value=data.custom.enabled
+                 input=@root.inputs.createCheckboxInput classes="singleton"
+                 dataset=(dnd5e-object tooltip="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.custom.enabled.hint")
+                 ariaLabel=(localize "DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.custom.enabled.hint")}}
+    {{#if data.custom.enabled}}
+
+    {{ formField fields.custom.fields.formula name=(concat prefix "custom.formula") value=data.custom.formula
+                 label="DND5E.Formula" hint=false localize=true classes="label-top" }}
+    <input type="hidden" name="{{ prefix }}number" value="{{ data.number }}" data-dtype="Number">
+    <input type="hidden" name="{{ prefix }}denomination" value="{{ data.denomination }}" data-dtype="Number">
+    <input type="hidden" name="{{ prefix }}bonus" value="{{ data.bonus }}">
+
+    {{else}}
+
+    {{ formField fields.number name=(concat prefix "number") value=data.number label="DND5E.Number" hint=false
+                 localize=true classes="label-top" }}
+
+    {{ formField fields.denomination name=(concat prefix "denomination") value=data.denomination
+                 options=@root.denominationOptions label="DND5E.Die" hint=false localize=true classes="label-top" }}
+
+    {{ formField fields.bonus name=(concat prefix "bonus") value=data.bonus label="DND5E.Bonus" hint=false localize=true
+                 classes="label-top" }}
+
+    <input type="hidden" name="{{ prefix }}custom.formula" value="{{ data.custom.formula }}">
+
+    {{/if}}
+    {{#unless data.locked}}
+    <button type="button" class="unbutton control-button" data-action="deleteDamagePart"
+            data-tooltip="DND5E.DAMAGE.Part.Action.Delete"
+            aria-label="{{ localize 'DND5E.DAMAGE.Part.Action.Delete' }}">
+        <i class="fa-solid fa-minus" inert></i>
+    </button>
+    {{/unless}}
+</div>
+
+<div class="field-group">
+    {{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions hint=false
+                 disabled=data.locked label="DND5E.Type" localize=true classes="label-top multi-select" }}
+    <!-- TODO: This disabled is only necessary because of https://github.com/foundryvtt/foundryvtt/issues/11564 -->
+</div>
+
+{{#if canScale}}
+{{#with fields.scaling.fields as |fields|}}
+<div class="field-group">
+    {{ formField fields.mode name=(concat ../prefix "scaling.mode") value=../data.scaling.mode
+                 options=../scalingOptions label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.abbr" hint=false
+                 localize=true classes="label-top" }}
+    {{#if ../data.scaling.mode}}
+    {{ formField fields.number name=(concat ../prefix "scaling.number") value=../data.scaling.number
+                 label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.number.abbr" hint=false localize=true
+                 classes="label-top" }}
+    {{ formField fields.formula name=(concat ../prefix "scaling.formula") value=../data.scaling.formula
+                 label="DND5E.Formula" hint=false localize=true classes="label-top" }}
+    {{/if}}
+</div>
+{{/with}}
+{{/if}}

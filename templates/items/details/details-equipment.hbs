@@ -1,0 +1,80 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemEquipmentDetails" }}</legend>
+
+    {{!-- Equipment Type --}}
+    {{ formField fields.type.fields.value value=source.type.value label="DND5E.ItemEquipmentType" blank=""
+                 localize=true options=equipmentTypes }}
+
+    {{!-- Equipment Base --}}
+    {{ formField fields.type.fields.baseItem value=source.type.baseItem label="DND5E.ItemEquipmentBase" blank=""
+                 localize=true choices=baseItems }}
+
+    {{!-- Proficiency --}}
+    {{ formField fields.proficient value=source.proficient blank="DND5E.Automatic" localize=true
+                 choices=config.weaponAndArmorProficiencyLevels }}
+
+    {{!-- Armor --}}
+    {{#if system.isArmor}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Armor" }}</label>
+        <div class="form-fields">
+
+            {{!-- Value --}}
+            {{ formField fields.armor.fields.value value=source.armor.value step=1 label="DND5E.AC" localize=true
+                         classes="label-top" }}
+
+            {{!-- Max Dex --}}
+            {{#if hasDexModifier}}
+            {{ formField fields.armor.fields.dex value=source.armor.dex label="DND5E.ItemEquipmentDexModAbbr"
+                         placeholder="∞" localize=true classes="label-top" }}
+            {{/if}}
+
+            {{!-- Strength Requirement --}}
+            {{#if system.isArmor}}
+            {{ formField fields.strength value=source.strength label="DND5E.AbilityStr" placeholder="—" localize=true
+                         classes="label-top" }}
+            {{/if}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{!-- Properties --}}
+    {{ formField fields.properties options=properties.options label="DND5E.ItemEquipmentProperties" localize=true
+                 input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid checkbox-grid-3" }}
+
+    {{!-- Magical Properties --}}
+    {{#if properties.object.mgc}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Item.Property.Magical" }}</label>
+        <div class="form-fields">
+
+            {{!-- Attunement --}}
+            {{#unless system.isMountable}}
+            <div class="form-group label-top">
+                <label>{{ localize "DND5E.Attunement" }}</label>
+                <div class="form-fields">
+
+                    {{!-- Attuned --}}
+                    {{#if source.attunement}}
+                    {{ formInput fields.attuned value=source.attuned input=inputs.createCheckboxInput
+                                 ariaLabel=(localize "DND5E.Attuned") dataset=(dnd5e-object tooltip="DND5E.Attuned") }}
+                    {{/if}}
+
+                    {{!-- Attunement --}}
+                    {{ formInput fields.attunement value=source.attunement choices=config.attunementTypes
+                                 blank="DND5E.AttunementNone" localize=true }}
+                </div>
+            </div>
+            {{/unless}}
+
+            {{!-- Magical Bonus --}}
+            {{ formField fields.armor.fields.magicalBonus value=source.armor.magicalBonus step=1 placeholder="0"
+                         label="DND5E.Bonus" localize=true classes="label-top" }}
+        </div>
+    </div>
+    {{/if}}
+</fieldset>
+
+{{#if system.isMountable}}
+    {{> "dnd5e.details-mountable" }}
+{{/if}}

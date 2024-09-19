@@ -1,0 +1,67 @@
+<fieldset>
+    <legend>{{ localize "DND5E.Usage" }}</legend>
+
+    {{!-- Uses --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.LimitedUses" }}</label>
+        <div class="form-fields">
+
+            {{!-- Spent --}}
+            {{ formField fields.uses.fields.spent value=data.uses.spent label="DND5E.Spent" localize=true hint=false
+                         classes="label-top" }}
+
+            {{!-- Max --}}
+            {{ formField fields.uses.fields.max value=data.uses.max label="DND5E.Max" localize=true hint=false
+                         classes="label-top" }}
+        </div>
+    </div>
+
+    {{!-- Auto-Destroy --}}
+    {{#if fields.uses.fields.autoDestroy}}
+    {{ formField fields.uses.fields.autoDestroy value=data.uses.autoDestroy localize=true
+                 input=inputs.createCheckboxInput }}
+    {{/if}}
+</fieldset>
+
+{{#if hasLimitedUses}}
+<fieldset>
+    <legend>
+        <span>{{ localize "DND5E.Recovery" }}</span>
+        <button type="button" class="unbutton control-button" data-action="addRecovery"
+                data-tooltip="DND5E.USES.Recovery.Action.Create"
+                aria-label="{{ localize "DND5E.USES.Recovery.Action.Create" }}">
+            <i class="fas fa-plus" inert></i>
+        </button>
+    </legend>
+    {{#each usesRecovery}}
+    <div class="form-group split-group full-width card" data-index="{{ @index }}">
+        <div class="form-fields">
+
+            {{!-- Period --}}
+            {{ formField fields.period name=(concat prefix "period") value=source.period options=@root.recoveryPeriods
+                         label="DND5E.Period" localize=true hint=false classes="label-top" }}
+
+            {{!-- Type --}}
+            {{#unless (eq source.period "recharge")}}
+            {{ formField fields.type name=(concat prefix "type") value=source.type options=@root.recoveryTypes
+                         label="DND5E.Recovery" localize=true hint=false classes="label-top" }}
+            {{/unless}}
+
+            {{!-- Formula --}}
+            {{#if (or (eq source.type "formula") formulaOptions)}}
+            {{ formField fields.formula name=(concat prefix "formula") value=source.formula options=formulaOptions
+                         label="DND5E.Formula" localize=true hint=false classes="label-top" }}
+            {{/if}}
+
+            <button type="button" class="unbutton control-button" data-action="deleteRecovery"
+                    data-tooltip="DND5E.USES.Recovery.Action.Delete"
+                    aria-label="{{ localize "DND5E.USES.Recovery.Action.Delete" }}">
+                <i class="fas fa-minus" inert></i>
+            </button>
+        </div>
+    </div>
+    {{else}}
+    <div class="empty">{{ localize "DND5E.UsesPeriods.Never" }}</div>
+    {{/each}}
+</fieldset>
+{{/if}}

@@ -7,75 +7,105 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>As a bonus action, the {creature} can target one creature it can see within <strong>5 ft.</strong> of it that has <strong>0 hit points</strong> and is still alive. </p><p>The target must succeed on a <strong>DC 10 Constitution saving throw</strong> against this magic or die. If the target dies, the {creature} regains 10 (3d6)<strong> hit points</strong>.</p></section><p>The {creature} can target one creature it can see within <strong>5 ft.</strong> The target must succeed on a Constitution saving throw.</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<section class=\"secret\"><p>As a bonus action, the [[lookup @name lowercase]] can target one creature it can see within <strong>5 ft.</strong> of it that has <strong>0 hit points</strong> and is still alive. </p><p>The target must succeed on a <strong>DC 10 Constitution saving throw</strong> against this magic or die. If the target dies, the [[lookup @name lowercase]] regains 10 (3d6)<strong> hit points</strong>.</p></section><p>the [[lookup @name lowercase]] can target one creature it can see within <strong>5 ft.</strong> The target must succeed on a Constitution saving throw.</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "bonus",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": 5,
-      "long": null,
-      "units": "ft"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "save",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "con",
-      "dc": null,
-      "scaling": "flat"
+      "recovery": [],
+      "spent": 0
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "save",
+        "activation": {
+          "type": "bonus",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "5",
+          "units": "ft",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "max": "",
+          "recovery": []
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": "con",
+          "dc": {
+            "calculation": "",
+            "formula": ""
+          }
+        },
+        "sort": 0
+      }
+    },
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "consume-life"
   },
   "flags": {},
   "img": "icons/magic/life/heart-glowing-red.webp",
@@ -83,11 +113,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234607,
-    "modifiedTime": 1672335506336,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304977289,
+    "modifiedTime": 1725992574656,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!r2nM5I77LnSvkLvD"

@@ -1,10 +1,14 @@
-import { FormulaField } from "../fields.mjs";
+import Proficiency from "../../documents/actor/proficiency.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
+import RollConfigField from "../shared/roll-config-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
+
+const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * System data definition for NPCs.
@@ -14,12 +18,17 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {number} attributes.ac.flat         Flat value used for flat or natural armor calculation.
  * @property {string} attributes.ac.calc         Name of one of the built-in formulas to use.
  * @property {string} attributes.ac.formula      Custom formula to use.
+ * @property {object} attributes.hd
+ * @property {number} attributes.hd.spent        Number of hit dice spent.
  * @property {object} attributes.hp
  * @property {number} attributes.hp.value        Current hit points.
  * @property {number} attributes.hp.max          Maximum allowed HP value.
  * @property {number} attributes.hp.temp         Temporary HP applied on top of value.
  * @property {number} attributes.hp.tempmax      Temporary change to the maximum HP.
  * @property {string} attributes.hp.formula      Formula used to determine hit points.
+ * @property {object} attributes.death
+ * @property {number} attributes.death.success   Number of successful death saves.
+ * @property {number} attributes.death.failure   Number of failed death saves.
  * @property {object} details
  * @property {TypeData} details.type             Creature type of this NPC.
  * @property {string} details.type.value         NPC's type as defined in the system configuration.
@@ -29,7 +38,6 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {string} details.environment        Common environments in which this NPC is found.
  * @property {number} details.cr                 NPC's challenge rating.
  * @property {number} details.spellLevel         Spellcasting level of this NPC.
- * @property {SourceField} details.source        Adventure or sourcebook where this NPC originated.
  * @property {object} resources
  * @property {object} resources.legact           NPC's legendary actions.
  * @property {number} resources.legact.value     Currently available legendary actions.
@@ -40,75 +48,103 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {object} resources.lair             NPC's lair actions.
  * @property {boolean} resources.lair.value      Does this NPC use lair actions.
  * @property {number} resources.lair.initiative  Initiative count when lair actions are triggered.
+ * @property {SourceData} source                 Adventure or sourcebook where this NPC originated.
  */
 export default class NPCData extends CreatureTemplate {
 
-  /** @inheritdoc */
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    supportsAdvancement: true
+  }, {inplace: false}));
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static _systemType = "npc";
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      attributes: new foundry.data.fields.SchemaField({
+      attributes: new SchemaField({
         ...AttributesFields.common,
         ...AttributesFields.creature,
-        ac: new foundry.data.fields.SchemaField({
-          flat: new foundry.data.fields.NumberField({integer: true, min: 0, label: "DND5E.ArmorClassFlat"}),
-          calc: new foundry.data.fields.StringField({initial: "default", label: "DND5E.ArmorClassCalculation"}),
+        ac: new SchemaField({
+          flat: new NumberField({integer: true, min: 0, label: "DND5E.ArmorClassFlat"}),
+          calc: new StringField({initial: "default", label: "DND5E.ArmorClassCalculation"}),
           formula: new FormulaField({deterministic: true, label: "DND5E.ArmorClassFormula"})
         }, {label: "DND5E.ArmorClass"}),
-        hp: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.NumberField({
+        hd: new SchemaField({
+          spent: new NumberField({integer: true, min: 0, initial: 0})
+        }, {label: "DND5E.HitDice"}),
+        hp: new SchemaField({
+          value: new NumberField({
             nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.HitPointsCurrent"
           }),
-          max: new foundry.data.fields.NumberField({
+          max: new NumberField({
             nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.HitPointsMax"
           }),
-          temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
-          tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
+          temp: new NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
+          tempmax: new NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
-        }, {label: "DND5E.HitPoints"})
+        }, {label: "DND5E.HitPoints"}),
+        death: new RollConfigField({
+          success: new NumberField({
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
+          }),
+          failure: new NumberField({
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
+          })
+        }, {label: "DND5E.DeathSave"})
       }, {label: "DND5E.Attributes"}),
-      details: new foundry.data.fields.SchemaField({
+      details: new SchemaField({
         ...DetailsFields.common,
         ...DetailsFields.creature,
         type: new CreatureTypeField(),
-        environment: new foundry.data.fields.StringField({required: true, label: "DND5E.Environment"}),
-        cr: new foundry.data.fields.NumberField({
-          required: true, nullable: false, min: 0, initial: 1, label: "DND5E.ChallengeRating"
+        environment: new StringField({required: true, label: "DND5E.Environment"}),
+        cr: new NumberField({
+          required: true, nullable: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
         }),
-        spellLevel: new foundry.data.fields.NumberField({
+        spellLevel: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
-        }),
-        source: new SourceField()
+        })
       }, {label: "DND5E.Details"}),
-      resources: new foundry.data.fields.SchemaField({
-        legact: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.NumberField({
+      resources: new SchemaField({
+        legact: new SchemaField({
+          value: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegActRemaining"
           }),
-          max: new foundry.data.fields.NumberField({
+          max: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegActMax"
           })
         }, {label: "DND5E.LegAct"}),
-        legres: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.NumberField({
+        legres: new SchemaField({
+          value: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegResRemaining"
           }),
-          max: new foundry.data.fields.NumberField({
+          max: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegResMax"
           })
         }, {label: "DND5E.LegRes"}),
-        lair: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.BooleanField({required: true, label: "DND5E.LairAct"}),
-          initiative: new foundry.data.fields.NumberField({
+        lair: new SchemaField({
+          value: new BooleanField({required: true, label: "DND5E.LairAct"}),
+          initiative: new NumberField({
             required: true, integer: true, label: "DND5E.LairActionInitiative"
           })
         }, {label: "DND5E.LairActionLabel"})
       }, {label: "DND5E.Resources"}),
-      traits: new foundry.data.fields.SchemaField({
+      source: new SourceField(),
+      traits: new SchemaField({
         ...TraitsFields.common,
         ...TraitsFields.creature
       }, {label: "DND5E.Traits"})
@@ -117,7 +153,55 @@ export default class NPCData extends CreatureTemplate {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["size", {
+        label: "DND5E.Size",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.actorSizes,
+          keyPath: "system.traits.size"
+        }
+      }],
+      ["type", {
+        label: "DND5E.CreatureType",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.creatureTypes,
+          keyPath: "system.details.type.value"
+        }
+      }],
+      ["cr", {
+        label: "DND5E.ChallengeRating",
+        type: "range",
+        config: {
+          keyPath: "system.details.cr",
+          min: 0,
+          max: 30
+        }
+      }],
+      ["movement", {
+        label: "DND5E.Movement",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.movementTypes
+        },
+        createFilter: (filters, value, def) => {
+          for ( const [k, v] of Object.entries(value ?? {}) ) {
+            if ( v === 1 ) filters.push({ k: `system.attributes.movement.${k}`, o: "gt", v: 0 });
+            if ( v === -1 ) filters.push({ k: `system.attributes.movement.${k}`, v: 0 });
+          }
+        }
+      }]
+    ]);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     NPCData.#migrateSource(source);
@@ -128,13 +212,16 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Convert source string into custom object.
+   * Convert source string into custom object & move to top-level.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateSource(source) {
-    if ( source.details?.source && (foundry.utils.getType(source.details.source) !== "Object") ) {
-      source.details.source = { custom: source.details.source };
+    let custom;
+    if ( ("details" in source) && ("source" in source.details) ) {
+      if ( foundry.utils.getType(source.details?.source) === "string" ) custom = source.details.source;
+      else source.source = source.details.source;
     }
+    if ( custom ) source.source = { custom };
   }
 
   /* -------------------------------------------- */
@@ -192,13 +279,104 @@ export default class NPCData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    this.details.level = 0;
+    this.attributes.attunement.value = 0;
+
+    // Determine hit dice denomination & max from hit points formula
+    const [, max, denomination] = this.attributes.hp.formula?.match(/(\d*)d(\d+)/i) ?? [];
+    this.attributes.hd.max = Number(max ?? 0);
+    this.attributes.hd.denomination = Number(denomination ?? CONFIG.DND5E.actorSizes[this.traits.size]?.hitDie ?? 4);
+
+    for ( const item of this.parent.items ) {
+      // Class levels & hit dice
+      if ( item.type === "class" ) {
+        const classLevels = parseInt(item.system.levels) ?? 1;
+        this.details.level += classLevels;
+        this.attributes.hd.max += classLevels;
+      }
+
+      // Attuned items
+      else if ( item.system.attuned ) this.attributes.attunement.value += 1;
+    }
+
+    // Kill Experience
+    this.details.xp ??= {};
+    this.details.xp.value = this.parent.getCRExp(this.details.cr);
+
+    // Proficiency
+    if ( this.details.cr === null ) this.attributes.prof = null;
+    else this.attributes.prof = Proficiency.calculateMod(Math.max(this.details.cr, this.details.level, 1));
+
+    // Spellcaster Level
+    if ( this.attributes.spellcasting && !Number.isNumeric(this.details.spellLevel) ) {
+      this.details.spellLevel = Math.max(this.details.cr, 1);
+    }
+
+    AttributesFields.prepareBaseArmorClass.call(this);
+    AttributesFields.prepareBaseEncumbrance.call(this);
+    SourceField.shimActor.call(this);
+  }
+
+  /* -------------------------------------------- */
 
   /**
-   * Prepare remaining NPC data.
+   * Prepare movement & senses values derived from race item.
    */
+  prepareEmbeddedData() {
+    if ( this.details.race instanceof Item ) {
+      AttributesFields.prepareRace.call(this, this.details.race, { force: true });
+      this.details.type = this.details.race.system.type;
+    }
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses[key] ??= 0;
+    this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
+    this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   prepareDerivedData() {
+    const rollData = this.parent.getRollData({ deterministic: true });
+    const { originalSaves } = this.parent.getOriginalStats();
+
+    this.prepareAbilities({ rollData, originalSaves });
+    AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
+    AttributesFields.prepareConcentration.call(this, rollData);
+    SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareResistImmune.call(this);
+
+    // Hit Dice
+    const { hd } = this.attributes;
+    hd.value = Math.max(0, hd.max - hd.spent);
+    hd.pct = Math.clamp(hd.max ? (hd.value / hd.max) * 100 : 0, 0, 100);
+
+    // Hit Points
+    const hpOptions = {
+      advancement: Object.values(this.parent.classes).map(c => c.advancement.byType.HitPoints?.[0]).filter(a => a),
+      mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
+    };
+    AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Level used to determine cantrip scaling.
+   * @param {Item5e} spell  Spell for which to fetch the cantrip level.
+   * @returns {number}
+   */
+  cantripLevel(spell) {
+    if ( spell.system.preparation.mode === "innate" ) return this.details.cr;
+    return this.details.level ? this.details.level : this.details.spellLevel;
   }
 }

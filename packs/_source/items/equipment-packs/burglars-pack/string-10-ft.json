@@ -11,10 +11,14 @@
       "book": "SRD 5.1",
       "page": "70",
       "custom": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 0,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
     "price": {
       "value": 0,
       "denomination": "gp"
@@ -29,17 +33,19 @@
     "unidentified": {
       "description": ""
     },
-    "properties": []
+    "properties": [],
+    "identifier": "string-10-ft"
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1701195737521,
-    "modifiedTime": 1704823148314,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037156571,
+    "modifiedTime": 1725992502738,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "Ij6x7481ch3Z0rff",

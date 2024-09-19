@@ -3,7 +3,7 @@
  */
 export default class JournalMapLocationPageSheet extends JournalTextPageSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.classes.push("map");
@@ -12,14 +12,14 @@ export default class JournalMapLocationPageSheet extends JournalTextPageSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get template() {
     return `templates/journal/page-text-${this.isEditable ? "edit" : "view"}.html`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _renderInner(...args) {
     const jQuery = await super._renderInner(...args);
     const editingHeader = jQuery[0].querySelector(".journal-header");

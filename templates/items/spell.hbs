@@ -84,7 +84,7 @@
                     <label>{{ localize "DND5E.Supply" }}</label>
                     {{numberInput system.materials.supply name="system.materials.supply" placeholder="0"}}
                     <label>{{ localize "DND5E.CostGP" }}</label>
-                    {{numberInput system.materials.cost name="system.materials.cost" placeholder="&mdash;"}}
+                    {{numberInput system.materials.cost name="system.materials.cost" placeholder="—"}}
                     <label>{{ localize "DND5E.Consumed" }}</label>
                     <input type="checkbox" name="system.materials.consumed" {{checked system.materials.consumed}}>
                 </div>
@@ -100,10 +100,23 @@
                         <input type="checkbox" name="system.preparation.prepared" {{checked system.preparation.prepared}}>
                     </label>
                     <select name="system.preparation.mode">
-                        {{ selectOptions config.spellPreparationModes selected=system.preparation.mode }}
+                        {{ selectOptions config.spellPreparationModes selected=system.preparation.mode labelAttr="label" }}
                     </select>
                 </div>
             </div>
+
+            {{!-- Source Class --}}
+            {{#if isEmbedded}}
+            <div class="form-group input-select">
+                <label>{{ localize "DND5E.SpellSourceClass" }}</label>
+                <div class="form-fields">
+                    <select name="system.sourceClass">
+                        {{selectOptions document.parent.spellcastingClasses selected=system.sourceClass
+                                        labelAttr="name" blank=""}}
+                    </select>
+                </div>
+            </div>
+            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.SpellCastingHeader" }}</h3>
 

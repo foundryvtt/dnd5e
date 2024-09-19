@@ -58,7 +58,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "flow"],
@@ -70,7 +70,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     const visibleSteps = this.steps.filter(s => !s.automatic);
     const visibleIndex = visibleSteps.indexOf(this.step);
@@ -83,7 +83,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get id() {
     return `actor-${this.actor.id}-advancement`;
   }
@@ -201,7 +201,7 @@ export default class AdvancementManager extends Application {
     }
 
     // All other items, just create some flows up to current character level (or class level for subclasses)
-    let targetLevel = manager.clone.system.details.level;
+    let targetLevel = manager.clone.system.details.level ?? 0;
     if ( clonedItem.type === "subclass" ) targetLevel = clonedItem.class?.system.levels ?? 0;
     Array.fromRange(targetLevel + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
@@ -293,7 +293,7 @@ export default class AdvancementManager extends Application {
     }
 
     // All other items, just create some flows down from current character level
-    Array.fromRange(manager.clone.system.details.level + 1)
+    Array.fromRange((manager.clone.system.details.level ?? 0) + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .reverse()
       .forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
@@ -330,17 +330,19 @@ export default class AdvancementManager extends Application {
    * @private
    */
   createLevelChangeSteps(classItem, levelDelta) {
+    const raceItem = this.clone.system?.details?.race instanceof Item ? this.clone.system.details.race : null;
     const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => ({ flow, ...data })));
     const getItemFlows = characterLevel => this.clone.items.contents.flatMap(i => {
-      if ( ["class", "subclass"].includes(i.type) ) return [];
+      if ( ["class", "subclass", "race"].includes(i.type) ) return [];
       return this.constructor.flowsForLevel(i, characterLevel);
     });
 
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
       const classLevel = classItem.system.levels + offset;
-      const characterLevel = this.actor.system.details.level + offset;
+      const characterLevel = (this.actor.system.details.level ?? 0) + offset;
       const stepData = { type: "forward", class: {item: classItem, level: classLevel} };
+      pushSteps(this.constructor.flowsForLevel(raceItem, characterLevel), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem, classLevel), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel), stepData);
       pushSteps(getItemFlows(characterLevel), stepData);
@@ -349,11 +351,12 @@ export default class AdvancementManager extends Application {
     // Level decreased
     for ( let offset = 0; offset > levelDelta; offset-- ) {
       const classLevel = classItem.system.levels + offset;
-      const characterLevel = this.actor.system.details.level + offset;
+      const characterLevel = (this.actor.system.details.level ?? 0) + offset;
       const stepData = { type: "reverse", class: {item: classItem, level: classLevel}, automatic: true };
       pushSteps(getItemFlows(characterLevel).reverse(), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel).reverse(), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem, classLevel).reverse(), stepData);
+      pushSteps(this.constructor.flowsForLevel(raceItem, characterLevel).reverse(), stepData);
       if ( classLevel === 1 ) this.steps.push({ type: "delete", item: classItem, automatic: true });
     }
 
@@ -390,14 +393,14 @@ export default class AdvancementManager extends Application {
    * @returns {number}       Working level.
    */
   static currentLevel(item, actor) {
-    return item.system.levels ?? item.class?.system.levels ?? actor.system.details.level;
+    return item.system.levels ?? item.class?.system.levels ?? actor.system.details.level ?? 0;
   }
 
   /* -------------------------------------------- */
   /*  Form Rendering                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     if ( !this.step ) return {};
 
@@ -425,7 +428,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   render(...args) {
     if ( this.steps.length && (this._stepIndex === null) ) this._stepIndex = 0;
 
@@ -459,7 +462,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _render(force, options) {
     await super._render(force, options);
     if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
@@ -473,7 +476,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find("button[data-action]").click(event => {
@@ -500,7 +503,7 @@ export default class AdvancementManager extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async close(options={}) {
     if ( !options.skipConfirmation ) {
       return new Dialog({

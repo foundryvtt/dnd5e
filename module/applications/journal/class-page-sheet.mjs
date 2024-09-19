@@ -1,3 +1,4 @@
+import { formatNumber, linkForUuid } from "../../utils.mjs";
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
@@ -8,10 +9,12 @@ import JournalEditor from "./journal-editor.mjs";
  */
 export default class JournalClassPageSheet extends JournalPageSheet {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     const options = foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{dropSelector: ".drop-target"}],
+      height: "auto",
+      width: 500,
       submitOnChange: true
     });
     options.classes.push("class-journal");
@@ -19,30 +22,53 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get template() {
-    return `systems/dnd5e/templates/journal/page-class-${this.isEditable ? "edit" : "view"}.hbs`;
+    return `systems/dnd5e/templates/journal/page-${this.document.type}-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   toc = {};
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /**
+   * Whether this page represents a class or subclass.
+   * @type {string}
+   */
+  get type() {
+    return this.document.type;
+  }
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getData(options) {
     const context = super.getData(options);
     context.system = context.document.system;
+    context.systemFields = this.document.system.schema.fields;
+
+    context.styleOptions = [
+      { value: "", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Inferred") },
+      { rule: true },
+      { value: "2024", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Modern") },
+      { value: "2014", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Legacy") }
+    ];
 
     context.title = Object.fromEntries(
       Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1])
     );
+    context.type = this.type;
 
     const linked = await fromUuid(this.document.system.item);
-    context.subclasses = await this._getSubclasses(this.document.system.subclassItems);
+    context.subclasses = this.type === "class" ? await this._getSubclasses(this.document.system.subclassItems) : null;
 
     if ( !linked ) return context;
     context.linked = {
@@ -50,14 +76,30 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       name: linked.name,
       lowercaseName: linked.name.toLowerCase()
     };
+    const modernStyle = context.modernStyle = (context.system.style || linked.system.source.rules) === "2024";
 
-    context.advancement = this._getAdvancement(linked);
+    context.advancement = this._getAdvancement(linked, { modernStyle });
     context.enriched = await this._getDescriptions(context.document);
-    context.table = await this._getTable(linked);
-    context.optionalTable = await this._getOptionalTable(linked);
-    context.features = await this._getFeatures(linked);
-    context.optionalFeatures = await this._getFeatures(linked, true);
-    context.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
+    context.table = await this._getTable(linked, { modernStyle });
+    context.optionalTable = await this._getOptionalTable(linked, { modernStyle });
+    context.features = await this._getFeatures(linked, { modernStyle });
+    context.optionalFeatures = await this._getFeatures(linked, { modernStyle, optional: true });
+
+    if ( context.subclasses?.length ) {
+      for ( const subclass of context.subclasses ) {
+        const initialLevel = parseInt(Object.entries(subclass.document.advancement.byLevel)
+          .find(([lvl, d]) => d.length)?.[0] ?? 1);
+        subclass.table = await this._getTable(subclass.document, { initialLevel, modernStyle });
+        subclass.features = await this._getFeatures(subclass.document, { modernStyle });
+      }
+      context.subclasses.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
+    }
+
+    if ( linked.system.primaryAbility ) {
+      context.primaryAbility = game.i18n.getListFormatter(
+        { type: linked.system.primaryAbility.all ? "conjunction" : "disjunction" }
+      ).format(Array.from(linked.system.primaryAbility.value).map(v => CONFIG.DND5E.abilities[v]?.label));
+    }
 
     return context;
   }
@@ -66,16 +108,19 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /**
    * Prepare features granted by various advancement types.
-   * @param {Item5e} item  Class item belonging to this journal.
-   * @returns {object}     Prepared advancement section.
+   * @param {Item5e} item                  Class item belonging to this journal.
+   * @param {object} options
+   * @param {boolean} options.modernStyle  Is the modern style being displayed?
+   * @returns {object}                     Prepared advancement section.
+   * @protected
    */
-  _getAdvancement(item) {
+  _getAdvancement(item, { modernStyle }) {
     const advancement = {};
 
     const hp = item.advancement.byType.HitPoints?.[0];
     if ( hp ) {
       advancement.hp = {
-        hitDice: `1${hp.hitDie}`,
+        hitDice: modernStyle ? hp.hitDie.toUpperCase() : `1${hp.hitDie}`,
         max: hp.hitDieValue,
         average: Math.floor(hp.hitDieValue / 2) + 1
       };
@@ -89,7 +134,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         return (a.classRestriction !== "secondary") && (a.level === 1);
       });
       if ( !advancement ) return game.i18n.localize("None");
-      return advancement.configuration.hint || Trait.localizedList(advancement.configuration);
+      return advancement.hint || Trait.localizedList(advancement.configuration);
     };
     if ( traits.length ) {
       advancement.traits = {
@@ -101,6 +146,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       };
     }
 
+    advancement.equipment = item.system.startingEquipmentDescription;
+
     return advancement;
   }
 
@@ -110,14 +157,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * Enrich all of the entries within the descriptions object on the sheet's system data.
    * @param {JournalEntryPage} page  Journal page being enriched.
    * @returns {Promise<object>}      Object with enriched descriptions.
+   * @protected
    */
   async _getDescriptions(page) {
     const descriptions = await Promise.all(Object.entries(page.system.description ?? {})
       .map(async ([id, text]) => {
         const enriched = await TextEditor.enrichHTML(text, {
           relativeTo: this.object,
-          secrets: this.object.isOwner,
-          async: true
+          secrets: this.object.isOwner
         });
         return [id, enriched];
       })
@@ -129,11 +176,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /**
    * Prepare table based on non-optional GrantItem advancement & ScaleValue advancement.
-   * @param {Item5e} item              Class item belonging to this journal.
-   * @param {number} [initialLevel=1]  Level at which the table begins.
-   * @returns {object}                 Prepared table.
+   * @param {Item5e} item                      Class item belonging to this journal.
+   * @param {object} options
+   * @param {number} [options.initialLevel=1]  Level at which the table begins.
+   * @param {boolean} options.modernStyle      Is the modern style being displayed?
+   * @returns {object}                         Prepared table.
+   * @protected
    */
-  async _getTable(item, initialLevel=1) {
+  async _getTable(item, { initialLevel=1, modernStyle }={}) {
     const hasFeatures = !!item.advancement.byType.ItemGrant;
     const scaleValues = (item.advancement.byType.ScaleValue ?? []);
     const spellProgression = await this._getSpellProgression(item);
@@ -158,25 +208,30 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     if ( scaleValues.length ) cols.push({class: "scale", span: scaleValues.length});
     if ( spellProgression ) cols.push(...spellProgression.cols);
 
-    const makeLink = async uuid => (await fromUuid(uuid))?.toAnchor({classes: ["content-link"]}).outerHTML;
+    const prepareFeature = uuid => {
+      const index = fromUuidSync(uuid);
+      if ( index?.type !== "feat" ) return null;
+      return linkForUuid(uuid);
+    };
 
     const rows = [];
     for ( const level of Array.fromRange((CONFIG.DND5E.maxLevel - (initialLevel - 1)), initialLevel) ) {
-      const features = [];
+      let features = [];
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "AbilityScoreImprovement":
-            features.push(game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementTitle"));
+            features.push(game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Title"));
             continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
+            features.push(...await Promise.all(advancement.configuration.items.map(i => prepareFeature(i.uuid))));
             break;
         }
       }
+      features = features.filter(_ => _);
 
       // Level & proficiency bonus
-      const cells = [{class: "level", content: level.ordinalString()}];
+      const cells = [{class: "level", content: modernStyle ? level : level.ordinalString()}];
       if ( item.type === "class" ) cells.push({class: "prof", content: `+${Proficiency.calculateMod(level)}`});
       if ( hasFeatures ) cells.push({class: "features", content: features.join(", ")});
       scaleValues.forEach(s => cells.push({class: "scale", content: s.valueForLevel(level)?.display}));
@@ -184,7 +239,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       if ( spellCells ) cells.push(...spellCells);
 
       // Skip empty rows on subclasses
-      if ( (item.type === "subclass") && !features.length && !scaleValues.length && !spellCells ) continue;
+      if ( item.type === "subclass" ) {
+        let displayRow = features.length || spellCells;
+        if ( rows.length ) displayRow ||= !rows.at(-1).some((cell, index) =>
+          (cell.class !== "scale") && (cell.content !== cells[index].content)
+        );
+        else if ( scaleValues.length ) displayRow ||= cells.filter(c => (c.class === "scale") && c.content).length;
+        if ( !displayRow ) continue;
+      }
 
       rows.push(cells);
     }
@@ -198,6 +260,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * Build out the spell progression data.
    * @param {Item5e} item  Class item belonging to this journal.
    * @returns {object}     Prepared spell progression table.
+   * @protected
    */
   async _getSpellProgression(item) {
     const spellcasting = foundry.utils.deepClone(item.spellcasting);
@@ -217,11 +280,9 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         Actor5e.computeClassProgression(progression, item, { spellcasting });
         Actor5e.prepareSpellcastingSlots(spells, "leveled", progression);
 
-        if ( !largestSlot ) largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
-          if ( !data.max ) return slot;
-          const level = parseInt(key.slice(5));
-          if ( !Number.isNaN(level) && (level > slot) ) return level;
-          return slot;
+        if ( !largestSlot ) largestSlot = Object.values(spells).reduce((slot, { max, level }) => {
+          if ( !max ) return slot;
+          return Math.max(slot, level || -1);
         }, -1);
 
         table.rows.push(Array.fromRange(largestSlot, 1).map(spellLevel => {
@@ -282,10 +343,13 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /**
    * Prepare options table based on optional GrantItem advancement.
-   * @param {Item5e} item    Class item belonging to this journal.
-   * @returns {object|null}  Prepared optional features table.
+   * @param {Item5e} item                  Class item belonging to this journal.
+   * @param {object} options
+   * @param {boolean} options.modernStyle  Is the modern style being displayed?
+   * @returns {object|null}                Prepared optional features table.
+   * @protected
    */
-  async _getOptionalTable(item) {
+  async _getOptionalTable(item, { modernStyle }) {
     const headers = [[
       { content: game.i18n.localize("DND5E.Level") },
       { content: game.i18n.localize("DND5E.Features") }
@@ -296,24 +360,29 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       { class: "features", span: 1 }
     ];
 
-    const makeLink = async uuid => (await fromUuid(uuid))?.toAnchor({classes: ["content-link"]}).outerHTML;
+    const prepareFeature = uuid => {
+      const index = fromUuidSync(uuid);
+      if ( index?.type !== "feat" ) return null;
+      return linkForUuid(uuid);
+    };
 
     const rows = [];
     for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-      const features = [];
+      let features = [];
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
             if ( !advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
+            features.push(...await Promise.all(advancement.configuration.items.map(i => prepareFeature(i.uuid))));
             break;
         }
       }
+      features = features.filter(_ => _);
       if ( !features.length ) continue;
 
       // Level & proficiency bonus
       const cells = [
-        { class: "level", content: level.ordinalString() },
+        { class: "level", content: modernStyle ? level : level.ordinalString() },
         { class: "features", content: features.join(", ") }
       ];
       rows.push(cells);
@@ -327,29 +396,36 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /**
    * Fetch data for each class feature listed.
-   * @param {Item5e} item               Class or subclass item belonging to this journal.
-   * @param {boolean} [optional=false]  Should optional features be fetched rather than required features?
+   * @param {Item5e} item                       Class or subclass item belonging to this journal.
+   * @param {object} options
+   * @param {boolean} options.modernStyle       Is the modern style being displayed?
+   * @param {boolean} [options.optional=false]  Should optional features be fetched rather than required features?
    * @returns {object[]}   Prepared features.
+   * @protected
    */
-  async _getFeatures(item, optional=false) {
-    const prepareFeature = async uuid => {
-      const document = await fromUuid(uuid);
+  async _getFeatures(item, { modernStyle, optional=false }) {
+    const prepareFeature = async (f, level) => {
+      const document = await fromUuid(f.uuid);
+      if ( document?.type !== "feat" ) return null;
       return {
         document,
-        name: document.name,
+        name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
+          name: document.name, level: formatNumber(level)
+        }) : document.name,
         description: await TextEditor.enrichHTML(document.system.description.value, {
-          relativeTo: item, secrets: false, async: true
+          relativeTo: item, secrets: false
         })
       };
     };
 
     let features = [];
-    for ( const advancement of item.advancement.byType.ItemGrant ?? [] ) {
+    const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? []).sort((lhs, rhs) => lhs.level - rhs.level);
+    for ( const advancement of itemGrants ) {
       if ( !!advancement.configuration.optional !== optional ) continue;
-      features.push(...advancement.configuration.items.map(prepareFeature));
+      features.push(...advancement.configuration.items.map(f => prepareFeature(f, advancement.level)));
     }
     features = await Promise.all(features);
-    return features;
+    return features.filter(f => f);
   }
 
   /* -------------------------------------------- */
@@ -358,6 +434,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * Fetch each subclass and their features.
    * @param {string[]} uuids   UUIDs for the subclasses to fetch.
    * @returns {object[]|null}  Prepared subclasses.
+   * @protected
    */
   async _getSubclasses(uuids) {
     const prepareSubclass = async uuid => {
@@ -375,25 +452,21 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * Prepare data for the provided subclass.
    * @param {Item5e} item  Subclass item being prepared.
    * @returns {object}     Presentation data for this subclass.
+   * @protected
    */
   async _getSubclass(item) {
-    const initialLevel = Object.entries(item.advancement.byLevel).find(([lvl, d]) => d.length)?.[0] ?? 1;
     return {
       document: item,
       name: item.name,
       description: await TextEditor.enrichHTML(item.system.description.value, {
-        relativeTo: item, secrets: false, async: true
-      }),
-      features: await this._getFeatures(item),
-      table: await this._getTable(item, parseInt(initialLevel))
+        relativeTo: item, secrets: false
+      })
     };
   }
 
   /* -------------------------------------------- */
-  /*  Rendering                                   */
-  /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _renderInner(...args) {
     const html = await super._renderInner(...args);
     this.toc = JournalEntryPage.buildTOC(html.get());
@@ -404,7 +477,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html[0].querySelectorAll(".item-delete").forEach(e => {
@@ -427,8 +500,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     const container = event.currentTarget.closest("[data-item-uuid]");
     const uuidToDelete = container?.dataset.itemUuid;
     if ( !uuidToDelete ) return;
-    switch (container.dataset.itemType) {
-      case "class":
+    switch ( container.dataset.itemType ) {
+      case "linked":
         await this.document.update({"system.item": ""});
         return this.render();
       case "subclass":
@@ -455,14 +528,15 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
 
     if ( data?.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
-    switch ( item.type ) {
-      case "class":
+    const type = this.type === item.type ? "linked" : item.type;
+    switch ( type ) {
+      case "linked":
         await this.document.update({"system.item": item.uuid});
         return this.render();
       case "subclass":

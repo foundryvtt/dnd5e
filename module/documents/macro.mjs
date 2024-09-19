@@ -16,7 +16,7 @@ export async function create5eMacro(dropData, slot) {
       foundry.utils.mergeObject(macroData, {
         name: itemData.name,
         img: itemData.img,
-        command: `dnd5e.documents.macro.rollItem("${itemData.name}")`,
+        command: `dnd5e.documents.macro.rollItem("${itemData._source.name}")`,
         flags: {"dnd5e.itemMacro": true}
       });
       break;
@@ -65,7 +65,7 @@ function getMacroTarget(name, documentType) {
   const collection = (documentType === "Item") ? actor.items : Array.from(actor.allApplicableEffects());
 
   // Find item in collection
-  const documents = collection.filter(i => i.name === name);
+  const documents = collection.filter(i => i._source.name === name);
   const type = game.i18n.localize(`DOCUMENT.${documentType}`);
   if ( documents.length === 0 ) {
     ui.notifications.warn(game.i18n.format("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));
@@ -80,12 +80,16 @@ function getMacroTarget(name, documentType) {
 /* -------------------------------------------- */
 
 /**
- * Trigger an item to roll when a macro is clicked.
+ * Trigger an item to be used when a macro is clicked.
  * @param {string} itemName                Name of the item on the selected actor to trigger.
- * @returns {Promise<ChatMessage|object>}  Roll result.
+ * @param {object} [options={}]
+ * @param {string} [options.activityName]  Name of a specific activity on the item to trigger.
+ * @returns {Promise<ChatMessage|object>}  Usage result.
  */
-export function rollItem(itemName) {
-  return getMacroTarget(itemName, "Item")?.use();
+export function rollItem(itemName, { activityName }={}) {
+  let target = getMacroTarget(itemName, "Item");
+  if ( activityName ) target = target?.system.activities?.getName(activityName);
+  return target?.use();
 }
 
 /* -------------------------------------------- */

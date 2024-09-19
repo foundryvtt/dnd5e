@@ -76,7 +76,10 @@ function packageCommand() {
  */
 function cleanPackEntry(data, { clearSourceId=true, ownership=0 }={}) {
   if ( data.ownership ) data.ownership = { default: ownership };
-  if ( clearSourceId ) delete data.flags?.core?.sourceId;
+  if ( clearSourceId ) {
+    delete data._stats?.compendiumSource;
+    delete data.flags?.core?.sourceId;
+  }
   delete data.flags?.importSource;
   delete data.flags?.exportSource;
   if ( data._stats?.lastModifiedBy ) data._stats.lastModifiedBy = "dnd5ebuilder0000";

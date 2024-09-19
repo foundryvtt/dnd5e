@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "identifier": "tiefling",
     "advancement": [
@@ -21,12 +22,20 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.races.q71Pe1F8RRtEJt8Q",
-            "Compendium.dnd5e.races.wJc88B8OP1y1xzMw"
+            {
+              "uuid": "Compendium.dnd5e.races.q71Pe1F8RRtEJt8Q",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.wJc88B8OP1y1xzMw",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "cha",
+            "ability": [
+              "cha"
+            ],
             "preparation": "innate",
             "uses": {
               "max": "",
@@ -43,11 +52,16 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.spells.22dPoeXfaaAv4K3h"
+            {
+              "uuid": "Compendium.dnd5e.spells.22dPoeXfaaAv4K3h",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "cha",
+            "ability": [
+              "cha"
+            ],
             "preparation": "innate",
             "uses": {
               "max": "1",
@@ -64,11 +78,16 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
+            {
+              "uuid": "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "cha",
+            "ability": [
+              "cha"
+            ],
             "preparation": "innate",
             "uses": {
               "max": "1",
@@ -93,7 +112,8 @@
             "wis": 0,
             "cha": 2
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -105,7 +125,6 @@
         "_id": "RdFKqK8MykC5CYIB",
         "type": "Size",
         "configuration": {
-          "hint": "Tieflings are about the same size and build as humans. Your size is Medium.",
           "sizes": [
             "med"
           ]
@@ -114,13 +133,13 @@
           "size": ""
         },
         "level": 1,
-        "title": ""
+        "title": "",
+        "hint": "Tieflings are about the same size and build as humans. Your size is Medium."
       },
       {
         "_id": "rE6m74Xp32VuJC5y",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -130,17 +149,24 @@
         },
         "level": 0,
         "title": "Hellish Resistance",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+            {
+              "uuid": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "cha",
+            "ability": [
+              "cha"
+            ],
             "preparation": "innate",
             "uses": {
               "max": "",
@@ -157,7 +183,6 @@
         "_id": "jGeaKhTjGApgqmWw",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -168,7 +193,9 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       }
     ],
     "senses": {
@@ -200,11 +227,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1677181073037,
-    "modifiedTime": 1704824711251,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037393065,
+    "modifiedTime": 1725992703578,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

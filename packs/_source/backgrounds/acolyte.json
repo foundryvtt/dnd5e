@@ -10,15 +10,15 @@
     "source": {
       "custom": "",
       "book": "SRD 5.1",
-      "page": "",
-      "license": "CC-BY-4.0"
+      "page": "60",
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "advancement": [
       {
         "_id": "wIwtQfLdf9tJdZNi",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": true,
           "grants": [
@@ -29,13 +29,14 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "9YuEhI3iqUxEfIOk",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [],
@@ -50,18 +51,23 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       },
       {
         "_id": "6grrnum72rnphzi5",
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.backgrounds.64N1NWh9kC1dI7zN"
+            {
+              "uuid": "Compendium.dnd5e.backgrounds.64N1NWh9kC1dI7zN",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -73,7 +79,87 @@
         "level": 0,
         "title": "Feature"
       }
-    ]
+    ],
+    "startingEquipment": [
+      {
+        "type": "AND",
+        "_id": "SWn3glXteLaNLSms",
+        "group": "",
+        "sort": 100000,
+        "requiresProficiency": false
+      },
+      {
+        "type": "focus",
+        "count": null,
+        "key": "holy",
+        "_id": "lDHM0OOvRne6eE8n",
+        "group": "SWn3glXteLaNLSms",
+        "sort": 200000,
+        "requiresProficiency": false
+      },
+      {
+        "type": "OR",
+        "_id": "D2qNFQ88JhFwY8bv",
+        "group": "SWn3glXteLaNLSms",
+        "sort": 300000,
+        "requiresProficiency": false
+      },
+      {
+        "type": "linked",
+        "count": null,
+        "key": "Compendium.dnd5e.items.Item.odV5cq2HSLSCH69k",
+        "_id": "BkhMHTlh4lvWJbUV",
+        "group": "D2qNFQ88JhFwY8bv",
+        "sort": 400000,
+        "requiresProficiency": false
+      },
+      {
+        "type": "linked",
+        "count": null,
+        "key": "Compendium.dnd5e.items.Item.Nd4r4hocpfu6fYDP",
+        "_id": "ZfMgYgrtZd79FA7n",
+        "group": "D2qNFQ88JhFwY8bv",
+        "sort": 500000,
+        "requiresProficiency": false
+      },
+      {
+        "type": "linked",
+        "count": 5,
+        "key": "Compendium.dnd5e.items.Item.3b0RvGi0TnTYpIxn",
+        "_id": "R0uTjUcQN2YrB9rx",
+        "group": "SWn3glXteLaNLSms",
+        "sort": 600000,
+        "requiresProficiency": false
+      },
+      {
+        "type": "linked",
+        "count": null,
+        "key": "Compendium.dnd5e.items.Item.irtqrzaUCeshmTZp",
+        "_id": "xZrjP2RKlIaHP1aH",
+        "group": "SWn3glXteLaNLSms",
+        "sort": 700000,
+        "requiresProficiency": false
+      },
+      {
+        "type": "linked",
+        "count": null,
+        "key": "Compendium.dnd5e.items.Item.8RXjiddJ6VGyE7vB",
+        "_id": "X43SWt9ujvg2tOXt",
+        "group": "SWn3glXteLaNLSms",
+        "sort": 800000,
+        "requiresProficiency": false
+      },
+      {
+        "type": "linked",
+        "count": null,
+        "key": "Compendium.dnd5e.backgrounds.Item.dQaOdm9dbVN0RZYP",
+        "_id": "wTrqZ2jdIrHxSuD5",
+        "group": "SWn3glXteLaNLSms",
+        "sort": 900000,
+        "requiresProficiency": false
+      }
+    ],
+    "identifier": "acolyte"
   },
   "effects": [],
   "folder": null,
@@ -84,11 +170,12 @@
   "flags": {},
   "_id": "IgJkSnLiLJOWH7eK",
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787234264,
-    "modifiedTime": 1704824721127,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037368262,
+    "modifiedTime": 1725992238309,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!IgJkSnLiLJOWH7eK"

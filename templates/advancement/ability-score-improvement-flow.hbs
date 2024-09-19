@@ -1,36 +1,38 @@
-<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
-    <h3>{{{this.title}}}</h3>
+<form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}">
+    <h3>{{{ this.title }}}</h3>
+    {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
 
     <ul class="ability-scores {{#if feat}}disabled{{/if}}">
         {{#unless staticIncrease}}
         <label>
             {{#if feat}}
-            {{localize "DND5E.AdvancementAbilityScoreImprovementLockedHint"}}
+            {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.LockedHint" }}
             {{else}}
             {{ pointsRemaining }}
-            {{#if advancement.configuration.cap}}<p class="cap">{{pointCap}}</p>{{/if}}
+            {{#if advancement.configuration.cap}}<p class="cap">{{ pointCap }}</p>{{/if}}
             {{/if}}
         </label>
         {{/unless}}
         {{#each abilities}}
-        {{> "dnd5e.advancement-ability-score-control" this canAdjust=(not @root.staticIncrease)}}
+        {{> "dnd5e.advancement-ability-score-control" this canAdjust=(not @root.staticIncrease) }}
         {{/each}}
     </ul>
 
     {{#if advancement.allowFeat}}
-        <h3>{{localize "DND5E.Feature.Feat"}}</h3>
+        <h3>{{ localize "DND5E.Feature.Feat.Label" }}</h3>
 
         <div class="item-name flexrow drop-area {{#unless feat}}empty{{/unless}}">
             {{#if feat}}
-            <div class="item-image" style="background-image: url('{{feat.img}}');"></div>
+            <div class="item-image" style="background-image: url('{{ feat.img }}');"></div>
             <h4>
-                <a data-uuid="{{feat.uuid}}">{{feat.name}}</a>
+                <a data-uuid="{{ feat.uuid }}">{{ feat.name }}</a>
             </h4>
-            <a class="item-control" data-action="delete" title="{{localize 'DND5E.ItemDelete'}}">
-                <i class="fas fa-trash"></i>
+            <a class="item-control" data-action="delete" data-tooltip="DND5E.ItemDelete"
+               aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                <i class="fas fa-trash" inert></i>
             </a>
             {{else}}
-            {{localize "DND5E.AdvancementAbilityScoreImprovementFeatHint"}}
+            {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.Hint" }}
             {{/if}}
         </div>
     {{/if}}

@@ -1,28 +1,49 @@
 import SystemDataModel from "../../abstract.mjs";
 
+const { BooleanField, StringField } = foundry.data.fields;
+
 /**
  * Data model template with information on items that can be attuned and equipped.
  *
- * @property {number} attunement  Attunement information as defined in `DND5E.attunementTypes`.
- * @property {boolean} equipped   Is this item equipped on its owning actor.
+ * @property {string} attunement  Attunement information as defined in `DND5E.attunementTypes`.
+ * @property {boolean} attuned    Is this item attuned on its owning actor?
+ * @property {boolean} equipped   Is this item equipped on its owning actor?
  * @mixin
  */
 export default class EquippableItemTemplate extends SystemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
-      attunement: new foundry.data.fields.NumberField({
-        required: true, integer: true, initial: CONFIG.DND5E.attunementTypes.NONE, label: "DND5E.Attunement"
-      }),
-      equipped: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Equipped"})
+      attunement: new StringField({required: true, label: "DND5E.Attunement"}),
+      attuned: new BooleanField({label: "DND5E.Attuned"}),
+      equipped: new BooleanField({required: true, label: "DND5E.Equipped"})
     };
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+
+  /**
+   * Create attunement filter configuration.
+   * @returns {CompendiumBrowserFilterDefinitionEntry}
+   */
+  static get compendiumBrowserAttunementFilter() {
+    return {
+      label: "DND5E.Attunement",
+      type: "boolean",
+      createFilter: (filters, value, def) => {
+        if ( value === 0 ) return;
+        const filter = { k: "system.attunement", o: "in", v: ["required", 1] };
+        if ( value === 1 ) filters.push(filter);
+        else filters.push({ o: "NOT", v: filter });
+      }
+    };
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     EquippableItemTemplate.#migrateAttunement(source);
@@ -36,8 +57,11 @@ export default class EquippableItemTemplate extends SystemDataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateAttunement(source) {
-    if ( (source.attuned === undefined) || (source.attunement !== undefined) ) return;
-    source.attunement = source.attuned ? CONFIG.DND5E.attunementTypes.ATTUNED : CONFIG.DND5E.attunementTypes.NONE;
+    switch ( source.attunement ) {
+      case 2: source.attuned = true;
+      case 1: source.attunement = "required"; break;
+      case 0: source.attunement = ""; break;
+    }
   }
 
   /* -------------------------------------------- */
@@ -52,7 +76,18 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure items that cannot be attuned are not marked as attuned.
+   */
+  prepareFinalEquippableData() {
+    if ( !this.attunement ) this.attuned = false;
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -60,28 +95,21 @@ export default class EquippableItemTemplate extends SystemDataModel {
    * @type {string[]}
    */
   get equippableItemCardProperties() {
-    const req = CONFIG.DND5E.attunementTypes.REQUIRED;
     return [
-      this.attunement === req ? CONFIG.DND5E.attunements[req] : null,
+      this.attunement === "required" ? CONFIG.DND5E.attunementTypes.required : null,
       game.i18n.localize(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
       ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
     ];
   }
 
   /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
 
   /**
-   * @deprecated since DnD5e 3.0, available until DnD5e 3.2
-   * @ignore
+   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
+   * @type {boolean}
    */
-  get equippableItemChatProperties() {
-    foundry.utils.logCompatibilityWarning(
-      "EquippableItemTemplate#equippableItemChatProperties is deprecated. "
-      + "Please use EquippableItemTemplate#equippableItemCardProperties.",
-      { since: "DnD5e 3.0", until: "DnD5e 3.2", once: true }
-    );
-    return this.equippableItemCardProperties;
+  get magicAvailable() {
+    const attunement = this.attuned || (this.attunement !== "required");
+    return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
   }
 }

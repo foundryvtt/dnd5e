@@ -7,75 +7,33 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<section class=\"secret\"><p>The {creature}'s weapon attacks are magical. When the {creature} hits with any weapon, the weapon deals an <strong>extra 4d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>The {creature}'s weapon attacks are magical. When the {creature} hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
-      "chat": "",
-      "unidentified": ""
+      "value": "<section class=\"secret\"><p>the [[lookup @name lowercase]]'s weapon attacks are magical. When the [[lookup @name lowercase]] hits with any weapon, the weapon deals an <strong>extra 4d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>the [[lookup @name lowercase]]'s weapon attacks are magical. When the [[lookup @name lowercase]] hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
-    },
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "type": {
       "value": "monster",
       "subtype": ""
     },
     "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "activities": {},
+    "enchant": {},
+    "prerequisites": {
+      "level": null
+    },
+    "properties": [],
+    "identifier": "angelic-weapons"
   },
   "flags": {},
   "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-blue-yellow.webp",
@@ -83,11 +41,12 @@
   "folder": null,
   "sort": 0,
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234572,
-    "modifiedTime": 1672335425867,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725304973662,
+    "modifiedTime": 1725992573503,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!cz1LUaiXG8GshgU9"

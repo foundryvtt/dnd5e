@@ -1,11 +1,16 @@
+import { convertWeight } from "../../../utils.mjs";
 import SystemDataModel from "../../abstract.mjs";
+
+const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data model template with information on physical items.
  *
  * @property {string} container           Container within which this item is located.
  * @property {number} quantity            Number of items in a stack.
- * @property {number} weight              Item's weight in pounds or kilograms (depending on system setting).
+ * @property {object} weight
+ * @property {number} weight.value        Item's weight.
+ * @property {string} weight.units        Units used to measure the weight.
  * @property {object} price
  * @property {number} price.value         Item's cost in the specified denomination.
  * @property {string} price.denomination  Currency denomination used to determine price.
@@ -13,27 +18,33 @@ import SystemDataModel from "../../abstract.mjs";
  * @mixin
  */
 export default class PhysicalItemTemplate extends SystemDataModel {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static defineSchema() {
     return {
-      container: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseItem, {
+      container: new ForeignDocumentField(foundry.documents.BaseItem, {
         idOnly: true, label: "DND5E.Container"
       }),
-      quantity: new foundry.data.fields.NumberField({
+      quantity: new NumberField({
         required: true, nullable: false, integer: true, initial: 1, min: 0, label: "DND5E.Quantity"
       }),
-      weight: new foundry.data.fields.NumberField({
-        required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
-      }),
-      price: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
+      weight: new SchemaField({
+        value: new NumberField({
+          required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
+        }),
+        units: new StringField({
+          required: true, label: "DND5E.WeightUnit.Label",
+          initial: () => game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
+        })
+      }, {label: "DND5E.Weight"}),
+      price: new SchemaField({
+        value: new NumberField({
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Price"
         }),
-        denomination: new foundry.data.fields.StringField({
+        denomination: new StringField({
           required: true, blank: false, initial: "gp", label: "DND5E.Currency"
         })
       }, {label: "DND5E.Price"}),
-      rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"})
+      rarity: new StringField({required: true, blank: true, label: "DND5E.Rarity"})
     };
   }
 
@@ -44,6 +55,36 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    * @type {number}
    */
   static MAX_DEPTH = 5;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create filter configurations shared by all physical items.
+   * @returns {[string, CompendiumBrowserFilterDefinitionEntry][]}
+   */
+  static get compendiumBrowserPhysicalItemFilters() {
+    return [
+      ["price", {
+        label: "DND5E.Price",
+        type: "range",
+        config: {
+          keyPath: "system.price.value"
+        }
+      }],
+      ["rarity", {
+        label: "DND5E.Rarity",
+        type: "set",
+        config: {
+          blank: game.i18n.localize("DND5E.ItemRarityMundane").capitalize(),
+          choices: Object.entries(CONFIG.DND5E.itemRarity).reduce((obj, [key, label]) => {
+            obj[key] = { label: label.capitalize() };
+            return obj;
+          }, {}),
+          keyPath: "system.rarity"
+        }
+      }]
+    ];
+  }
 
   /* -------------------------------------------- */
   /*  Getters                                     */
@@ -66,14 +107,32 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    * @type {number}
    */
   get totalWeight() {
-    return this.quantity * this.weight;
+    return this.quantity * this.weight.value;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Field specifications for physical items.
+   * @type {object[]}
+   */
+  get physicalItemSheetFields() {
+    return [{
+      label: CONFIG.DND5E.itemRarity[this.rarity],
+      value: this._source.rarity,
+      requiresIdentification: true,
+      field: this.schema.getField("rarity"),
+      choices: CONFIG.DND5E.itemRarity,
+      blank: "DND5E.Rarity",
+      classes: "item-rarity"
+    }];
   }
 
   /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     PhysicalItemTemplate.#migratePrice(source);
@@ -111,12 +170,15 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Convert null weights to 0.
+   * Migrate the item's weight from a single field to an object with units & convert null weights to 0.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateWeight(source) {
-    if ( !("weight" in source) ) return;
-    if ( (source.weight === null) || (source.weight === undefined) ) source.weight = 0;
+    if ( !("weight" in source) || (foundry.utils.getType(source.weight) === "Object") ) return;
+    source.weight = {
+      value: Number.isNumeric(source.weight) ? Number(source.weight) : 0,
+      units: game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
+    };
   }
 
   /* -------------------------------------------- */
@@ -150,21 +212,21 @@ export default class PhysicalItemTemplate extends SystemDataModel {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onCreate(data, options, userId) {
     this._renderContainers();
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     this._renderContainers({ formerContainer: options.formerContainer });
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onDelete(options, userId) {
     this._renderContainers();
   }
@@ -188,5 +250,18 @@ export default class PhysicalItemTemplate extends SystemDataModel {
       depth++;
     }
     return containers;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the total weight and return it in specific units.
+   * @param {string} units  Units in which the weight should be returned.
+   * @returns {number|Promise<number>}
+   */
+  totalWeightIn(units) {
+    const weight = this.totalWeight;
+    if ( weight instanceof Promise ) return weight.then(w => convertWeight(w, this.weight.units, units));
+    return convertWeight(weight, this.weight.units, units);
   }
 }

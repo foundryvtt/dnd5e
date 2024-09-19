@@ -2,7 +2,7 @@
   "_id": "hOzuSDqmOIOx8z3Z",
   "name": "Fishing Tackle",
   "type": "loot",
-  "img": "icons/tools/fishing/hook-curved-barbed-steel-white.webp",
+  "img": "icons/tools/fishing/rod-brown-gold.webp",
   "system": {
     "description": {
       "value": "<p>This kit includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting.</p>",
@@ -12,10 +12,14 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 4,
+    "weight": {
+      "value": 4,
+      "units": "lb"
+    },
     "price": {
       "value": 1,
       "denomination": "gp"
@@ -30,7 +34,8 @@
       "description": ""
     },
     "container": null,
-    "properties": []
+    "properties": [],
+    "identifier": "fishing-tackle"
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -40,11 +45,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233813,
-    "modifiedTime": 1704823158910,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037256495,
+    "modifiedTime": 1725992535947,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hOzuSDqmOIOx8z3Z"

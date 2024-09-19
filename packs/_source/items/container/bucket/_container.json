@@ -12,15 +12,19 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 2,
+    "weight": {
+      "value": 2,
+      "units": "lb"
+    },
     "price": {
       "value": 5,
       "denomination": "cp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "",
     "identified": true,
@@ -39,7 +43,9 @@
       "description": ""
     },
     "container": null,
-    "properties": []
+    "properties": [],
+    "attuned": false,
+    "identifier": "bucket"
   },
   "effects": [],
   "folder": "PgtyWdfkDTDbc0ov",
@@ -49,11 +55,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233853,
-    "modifiedTime": 1704823161242,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037278512,
+    "modifiedTime": 1725992543513,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!mQVYcHmMSoCUnBnM"

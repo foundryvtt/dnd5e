@@ -1,0 +1,14 @@
+{{#each damageParts}}
+<fieldset class="unfieldset" {{ disabled data.locked }}>
+    <div class="form-group split-group full-width card" {{#if data.base}}class="base-part"{{/if}}
+         data-index="{{ index }}">
+        <div class="form-fields field-groups">
+            {{> "systems/dnd5e/templates/activity/parts/damage-part.hbs" }}
+        </div>
+    </div>
+</fieldset>
+{{else}}
+<div class="empty">
+    {{ localize "DND5E.None" }}
+</div>
+{{/each}}

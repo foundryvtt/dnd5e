@@ -21,7 +21,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: "form" }],
@@ -31,7 +31,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async retainData(data) {
     await super.retainData(data);
     this.assignments = this.retainedData.assignments ?? {};
@@ -41,11 +41,11 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const points = {
       assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
-        if ( !this.advancement.canImprove(key) || this.advancement.configuration.fixed[key] ) return assigned;
+        if ( !this.advancement.canImprove(key) || this.advancement.configuration.locked.has(key) ) return assigned;
         return assigned + (this.assignments[key] ?? 0);
       }, 0),
       cap: this.advancement.configuration.cap ?? Infinity,
@@ -60,20 +60,21 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       const ability = this.advancement.actor.system.abilities[key];
       const assignment = this.assignments[key] ?? 0;
       const fixed = this.advancement.configuration.fixed[key] ?? 0;
-      const value = Math.min(ability.value + ((fixed || assignment) ?? 0), ability.max);
-      const max = fixed ? value : Math.min(value + points.available, ability.max);
+      const locked = this.advancement.configuration.locked.has(key);
+      const value = Math.min(ability.value + fixed + assignment, ability.max);
+      const max = locked ? value : Math.min(value + points.available, ability.max);
+      const min = Math.min(ability.value + fixed, ability.max);
       obj[key] = {
-        key, max, value,
+        key, max, min, value,
         name: `abilities.${key}`,
         label: data.label,
-        initial: ability.value,
-        min: fixed ? max : ability.value,
+        initial: ability.value + fixed,
         delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
         showDelta: true,
         isDisabled: !!this.feat,
-        isFixed: !!fixed || (ability.value >= ability.max),
-        canIncrease: (value < max) && (assignment < points.cap) && !fixed && !this.feat,
-        canDecrease: (value > ability.value) && !fixed && !this.feat
+        isLocked: !!locked || (ability.value >= ability.max),
+        canIncrease: (value < max) && ((fixed + assignment) < points.cap) && !locked && !this.feat,
+        canDecrease: (value > (ability.value + fixed)) && !locked && !this.feat
       };
       return obj;
     }, {});
@@ -84,10 +85,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       feat: this.feat,
       staticIncrease: !this.advancement.configuration.points,
       pointCap: game.i18n.format(
-        `DND5E.AdvancementAbilityScoreImprovementCapDisplay.${pluralRules.select(points.cap)}`, {points: points.cap}
+        `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(points.cap)}`, {points: points.cap}
       ),
       pointsRemaining: game.i18n.format(
-        `DND5E.AdvancementAbilityScoreImprovementPointsRemaining.${pluralRules.select(points.available)}`,
+        `DND5E.ADVANCEMENT.AbilityScoreImprovement.PointsRemaining.${pluralRules.select(points.available)}`,
         {points: points.available}
       )
     });
@@ -95,7 +96,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".adjustment-button").click(this._onClickButton.bind(this));
@@ -105,7 +106,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onChangeInput(event) {
     super._onChangeInput(event);
     const input = event.currentTarget;
@@ -113,8 +114,8 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
     else {
       this.assignments[key] = Math.min(
-        Math.clamped(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
-        this.advancement.configuration.cap ?? Infinity
+        Math.clamp(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
+        (this.advancement.configuration.cap - (this.advancement.configuration.fixed[key] ?? 0)) ?? Infinity
       );
     }
     this.render();
@@ -155,7 +156,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     // TODO: Pass through retained feat data
     await this.advancement.apply(this.level, {
@@ -183,7 +184,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDrop(event) {
     if ( !this.advancement.allowFeat ) return false;
 
@@ -199,7 +200,15 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const item = await Item.implementation.fromDropData(data);
 
     if ( (item.type !== "feat") || (item.system.type.value !== "feat") ) {
-      ui.notifications.error("DND5E.AdvancementAbilityScoreImprovementFeatWarning", {localize: true});
+      ui.notifications.error("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Type", {localize: true});
+      return null;
+    }
+
+    // If a feat has a level pre-requisite, make sure it is less than or equal to current character level
+    if ( (item.system.prerequisites?.level ?? -Infinity) > this.advancement.actor.system.details.level ) {
+      ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Level", {
+        level: item.system.prerequisites.level
+      }));
       return null;
     }
 

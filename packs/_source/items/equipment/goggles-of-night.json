@@ -2,7 +2,7 @@
   "_id": "XGAWqtmhK6SYBL6A",
   "name": "Goggles of Night",
   "type": "equipment",
-  "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
+  "img": "icons/equipment/head/goggles-leather-blue.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>While wearing these dark lenses, you have darkvision out to a range of 60 feet. If you already have darkvision, wearing the goggles increases its range by 60 feet.</p>",
@@ -12,74 +12,32 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 0.3,
+    "weight": {
+      "value": 0.3,
+      "units": "lb"
+    },
     "price": {
       "value": 1500,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "uncommon",
     "identified": true,
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
     "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": null,
       "max": "",
-      "per": null,
-      "recovery": "",
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "spent": 0,
+      "recovery": []
     },
     "armor": {
       "value": 0,
-      "dex": 0
+      "dex": 0,
+      "magicalBonus": null
     },
     "hp": {
       "value": 0,
@@ -104,7 +62,10 @@
     "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "activities": {},
+    "attuned": false,
+    "identifier": "goggles-of-night"
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -114,11 +75,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233698,
-    "modifiedTime": 1707055843772,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037208677,
+    "modifiedTime": 1725992520283,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!XGAWqtmhK6SYBL6A"

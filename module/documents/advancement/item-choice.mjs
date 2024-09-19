@@ -1,7 +1,7 @@
-import ItemGrantAdvancement from "./item-grant.mjs";
 import ItemChoiceConfig from "../../applications/advancement/item-choice-config.mjs";
 import ItemChoiceFlow from "../../applications/advancement/item-choice-flow.mjs";
-import ItemChoiceConfigurationData from "../../data/advancement/item-choice.mjs";
+import { ItemChoiceConfigurationData, ItemChoiceValueData } from "../../data/advancement/item-choice.mjs";
+import ItemGrantAdvancement from "./item-grant.mjs";
 
 /**
  * Advancement that presents the player with a choice of multiple items that they can take. Keeps track of which
@@ -9,14 +9,16 @@ import ItemChoiceConfigurationData from "../../data/advancement/item-choice.mjs"
  */
 export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
-        configuration: ItemChoiceConfigurationData
+        configuration: ItemChoiceConfigurationData,
+        value: ItemChoiceValueData
       },
       order: 50,
-      icon: "systems/dnd5e/icons/svg/item-choice.svg",
+      icon: "icons/magic/symbols/cog-orange-red.webp",
+      typeIcon: "systems/dnd5e/icons/svg/item-choice.svg",
       title: game.i18n.localize("DND5E.AdvancementItemChoiceTitle"),
       hint: game.i18n.localize("DND5E.AdvancementItemChoiceHint"),
       multiLevel: true,
@@ -31,7 +33,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get levels() {
     return Array.from(Object.keys(this.configuration.choices));
   }
@@ -40,21 +42,26 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
-    return this.value.added?.[level] !== undefined;
+    return (this.value.added?.[level] !== undefined) || !this.configuration.choices[level]?.count;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   titleForLevel(level, { configMode=false }={}) {
-    return `${this.title} <em>(${game.i18n.localize("DND5E.AdvancementChoices")})</em>`;
+    const data = this.configuration.choices[level] ?? {};
+    let tag;
+    if ( data.count ) tag = game.i18n.format("DND5E.AdvancementItemChoiceChoose", { count: data.count });
+    else if ( data.replacement ) tag = game.i18n.localize("DND5E.AdvancementItemChoiceReplacementTitle");
+    else return this.title;
+    return `${this.title} <em>(${tag})</em>`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     const items = this.value.added?.[level];
     if ( !items || configMode ) return "";
@@ -65,9 +72,71 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @override */
   storagePath(level) {
     return `value.added.${level}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async apply(level, { replace: original, ...data }, retainedData={}) {
+    let replacement;
+    if ( retainedData.replaced ) ({ original, replacement } = retainedData.replaced);
+
+    const updates = await super.apply(level, data, retainedData);
+
+    replacement ??= Object.keys(updates).pop();
+    if ( original && replacement ) {
+      const replacedLevel = Object.entries(this.value.added).reverse().reduce((level, [l, v]) => {
+        if ( (original in v) && (Number(l) > level) ) return Number(l);
+        return level;
+      }, 0);
+      if ( Number.isFinite(replacedLevel) ) {
+        this.actor.items.delete(original);
+        this.updateSource({ [`value.replaced.${level}`]: { level: replacedLevel, original, replacement } });
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  restore(level, data) {
+    const original = this.actor.items.get(data.replaced?.original);
+    if ( data.replaced && !original ) data.items = data.items.filter(i => i._id !== data.replaced.replacement);
+
+    super.restore(level, data);
+
+    if ( data.replaced ) {
+      if ( !original ) {
+        throw new ItemChoiceAdvancement.ERROR(game.i18n.localize("DND5E.AdvancementItemChoiceNoOriginalError"));
+      }
+      this.actor.items.delete(data.replaced.original);
+      this.updateSource({ [`value.replaced.${level}`]: data.replaced });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async reverse(level) {
+    const retainedData = await super.reverse(level);
+
+    const replaced = retainedData.replaced = this.value.replaced[level];
+    if ( replaced ) {
+      const uuid = this.value.added[replaced.level][replaced.original];
+      const itemData = await this.createItemData(uuid, replaced.original);
+      if ( itemData ) {
+        if ( itemData.type === "spell" ) {
+          foundry.utils.mergeObject(itemData, this.configuration.spell?.spellChanges ?? {});
+        }
+        this.actor.updateSource({ items: [itemData] });
+        this.updateSource({ [`value.replaced.-=${level}`]: null });
+      }
+    }
+
+    return retainedData;
   }
 
   /* -------------------------------------------- */
@@ -80,9 +149,10 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
    * @param {object} config.restriction     Additional restrictions to be applied.
    * @param {boolean} [config.strict=true]  Should an error be thrown when an invalid type is encountered?
    * @returns {boolean}                     Is this type valid?
-   * @throws An error if the item is invalid and strict is `true`.
+   * @throws {Error}                        An error if the item is invalid and strict is `true`.
    */
   _validateItemType(item, { type, restriction, strict=true }={}) {
+    if ( !item ) return false;
     super._validateItemType(item, { strict });
     type ??= this.configuration.type;
     restriction ??= this.configuration.restriction;

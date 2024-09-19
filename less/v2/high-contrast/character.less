@@ -1,0 +1,61 @@
+.dnd5e-flag-high-contrast .dnd5e2.sheet.actor.character,
+.dnd5e2.sheet.actor.character.dnd5e-flag-high-contrast {
+  .sidebar {
+    .card {
+      .stats .lozenges .lozenge .value {
+        text-shadow: 0 0 2px var(--dnd5e-color-dark);
+        filter: drop-shadow(0 0 2px var(--dnd5e-color-dark));
+      }
+      .meter.sectioned > .tmp > input::placeholder { color: var(--color-text-light-6); }
+    }
+    .favorites > ul .drop { opacity: .5; }
+  }
+
+  .skills, .tools {
+    > ul > li { border-bottom: var(--dnd5e-border-dark); }
+    .ability, .passive { color: var(--color-text-dark-primary); }
+  }
+  .saves {
+    > ul > li {
+      --border-style: var(--dnd5e-border-dark);
+      &:nth-child(odd) { border-inline-end: var(--border-style); }
+    }
+  }
+
+  .pill-lg {
+    &.empty:hover { opacity: 1; }
+    &.texture::before { --gradient-end: color-mix(in oklab, var(--dnd5e-background-card), transparent 40%); }
+  }
+
+  .ability-scores .ability-score {
+    &::before { background: transparent url("ui/ability-score-tab-hc.svg") no-repeat top center / contain; }
+    .label { color: var(--dnd5e-color-dark); }
+    .score { color: var(--color-text-light-1); }
+  }
+}
+
+/* ---------------------------------- */
+/*  Light Mode                        */
+/* ---------------------------------- */
+
+.dnd5e-flag-high-contrast:is(.dnd5e-theme-light, .theme-dark) .dnd5e2.sheet.actor.character,
+.dnd5e2.sheet.actor.character.dnd5e-flag-high-contrast.dnd5e-theme-light {
+  .sheet-header { background: var(--dnd5e-color-maroon); }
+  .sidebar .favorites > h3 { color: var(--dnd5e-color-dark); }
+  .tab.features .classes .class .level > span { color: var(--dnd5e-color-dark); }
+}
+
+/* ---------------------------------- */
+/*  Dark Mode                         */
+/* ---------------------------------- */
+
+.dnd5e-flag-high-contrast:is(.dnd5e-theme-dark, .theme-dark) .dnd5e2.sheet.actor.character,
+.dnd5e2.sheet.actor.character.dnd5e-flag-high-contrast.dnd5e-theme-dark {
+  .sheet-header { background: none; }
+  .sidebar .favorites > h3 { color: var(--dnd5e-color-light); }
+  .tab.features .classes .class .level > span { color: var(--dnd5e-color-light); }
+  .ability-scores .ability-score {
+    &::before { filter: invert(100%); }
+    .label { color: var(--color-text-light-1); }
+  }
+}

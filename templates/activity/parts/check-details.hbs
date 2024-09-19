@@ -1,0 +1,14 @@
+<fieldset>
+    <legend>{{ localize "DND5E.CHECK.FIELDS.check.label" }}</legend>
+    {{ formField fields.check.fields.associated value=source.check.associated options=associatedOptions }}
+    {{ formField fields.check.fields.ability value=source.check.ability options=abilityOptions }}
+    {{#with fields.check.fields.dc.fields as |fields|}}
+    {{ formField fields.calculation value=../activity.check.dc.calculation options=../calculationOptions }}
+    {{#if (not ../source.check.dc.calculation)}}
+    {{ formField fields.formula value=../source.check.dc.formula }}
+    {{else}}
+    {{ formField fields.formula name="" value=(localize "DND5E.SAVE.FIELDS.save.dc.DefaultFormula") disabled=true }}
+    <input type="hidden" name="check.dc.formula" value="{{ ../source.check.dc.formula }}">
+    {{/if}}
+    {{/with}}
+</fieldset>

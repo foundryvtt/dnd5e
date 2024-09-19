@@ -1,4 +1,5 @@
-import { FormulaField, MappingField } from "../../fields.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
+import MappingField from "../../fields/mapping-field.mjs";
 
 const { SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -124,6 +125,8 @@ export default class TraitsField {
   static prepareResistImmune() {
     if ( this.parent.hasConditionEffect("petrification") ) {
       this.traits.dr.custom = game.i18n.localize("DND5E.DamageAll");
+      Object.keys(CONFIG.DND5E.damageTypes).forEach(type => this.traits.dr.value.add(type));
+      this.traits.dr.bypasses.clear();
       this.traits.di.value.add("poison");
       this.traits.ci.value.add("poisoned");
       this.traits.ci.value.add("diseased");

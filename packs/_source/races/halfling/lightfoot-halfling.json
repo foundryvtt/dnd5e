@@ -12,7 +12,8 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "identifier": "lightfoot-halfling",
     "advancement": [
@@ -21,14 +22,26 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.races.LOMdcNAGWh5xpfm4",
-            "Compendium.dnd5e.races.7Yoo9hG0hfPSmBoC",
-            "Compendium.dnd5e.races.PqxZgcJzp1VVgP8t",
-            "Compendium.dnd5e.races.GWPjKFeIthBBeCFJ"
+            {
+              "uuid": "Compendium.dnd5e.races.LOMdcNAGWh5xpfm4",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.7Yoo9hG0hfPSmBoC",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.PqxZgcJzp1VVgP8t",
+              "optional": false
+            },
+            {
+              "uuid": "Compendium.dnd5e.races.GWPjKFeIthBBeCFJ",
+              "optional": false
+            }
           ],
           "optional": false,
           "spell": {
-            "ability": "",
+            "ability": [],
             "preparation": "",
             "uses": {
               "max": "",
@@ -53,7 +66,8 @@
             "wis": 0,
             "cha": 1
           },
-          "cap": 2
+          "cap": 2,
+          "locked": []
         },
         "value": {
           "type": "asi"
@@ -65,7 +79,6 @@
         "_id": "hv2bcANK5jEJZaAb",
         "type": "Size",
         "configuration": {
-          "hint": "Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.",
           "sizes": [
             "sm"
           ]
@@ -74,13 +87,13 @@
           "size": ""
         },
         "level": 1,
-        "title": ""
+        "title": "",
+        "hint": "Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small."
       },
       {
         "_id": "nGwMjsfNU6CXHk3A",
         "type": "Trait",
         "configuration": {
-          "hint": "",
           "mode": "default",
           "allowReplacements": false,
           "grants": [
@@ -91,7 +104,9 @@
         },
         "level": 0,
         "title": "",
-        "value": {}
+        "value": {
+          "chosen": []
+        }
       }
     ],
     "movement": {
@@ -123,11 +138,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1677178323356,
-    "modifiedTime": 1704824711240,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037393019,
+    "modifiedTime": 1725992703550,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

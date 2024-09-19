@@ -2,7 +2,7 @@
   "_id": "lHS63sC6bypENNlR",
   "name": "Flask",
   "type": "container",
-  "img": "icons/consumables/drinks/tea-jug-gourd-brown.webp",
+  "img": "icons/consumables/drinks/alcohol-jar-spirits-gray.webp",
   "system": {
     "description": {
       "value": "<p>A flask holds 1 pint of liquid.</p>",
@@ -12,15 +12,19 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 2,
       "denomination": "cp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "",
     "identified": true,
@@ -41,7 +45,9 @@
     "container": null,
     "properties": [
       "weightlessContents"
-    ]
+    ],
+    "attuned": false,
+    "identifier": "flask"
   },
   "effects": [],
   "folder": "PgtyWdfkDTDbc0ov",
@@ -51,11 +57,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233844,
-    "modifiedTime": 1704823160657,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037272855,
+    "modifiedTime": 1725992541536,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!lHS63sC6bypENNlR"

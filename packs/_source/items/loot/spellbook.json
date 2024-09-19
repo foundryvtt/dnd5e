@@ -2,7 +2,7 @@
   "_id": "LBajgahniRJbAgDr",
   "name": "Spellbook",
   "type": "loot",
-  "img": "icons/sundries/books/book-embossed-jewel-gold-purple.webp",
+  "img": "icons/sundries/books/book-symbol-triangle-silver-brown.webp",
   "system": {
     "description": {
       "value": "<p>Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.</p>\n<p> </p>",
@@ -12,10 +12,14 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 3,
+    "weight": {
+      "value": 3,
+      "units": "lb"
+    },
     "price": {
       "value": 50,
       "denomination": "gp"
@@ -30,7 +34,8 @@
       "description": ""
     },
     "container": null,
-    "properties": []
+    "properties": [],
+    "identifier": "spellbook"
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -40,11 +45,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233616,
-    "modifiedTime": 1704823149270,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037165251,
+    "modifiedTime": 1725992505595,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LBajgahniRJbAgDr"

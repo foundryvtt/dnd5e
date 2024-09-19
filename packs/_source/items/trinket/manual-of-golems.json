@@ -2,7 +2,7 @@
   "_id": "UxkP6FvDzPbsIY6o",
   "name": "Manual of Golems",
   "type": "consumable",
-  "img": "icons/sundries/books/book-symbol-triangle-silver-blue.webp",
+  "img": "icons/sundries/books/book-eye-purple.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>This tome contains information and incantations necessary to make a particular type of golem. The GM chooses the type or determines it randomly from the @UUID[Compendium.dnd5e.tables.RollTable.htMPUPPABjI6fwck]{Manual of Golems} table. Refer to the table below for a detailed description on each golem. To decipher and use the manual, you must be a spellcaster with at least two 5th-level spell slots. A creature that can't use a Manual of Golems and attempts to read it takes 6d6 psychic damage.</p>\n<table>\n<thead>\n<tr>\n<th>d20</th>\n<th>Golem</th>\n<th>Time</th>\n<th>Cost</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-5</td>\n<td>@UUID[Compendium.dnd5e.monsters.Actor.YOqhbf8WsX0jH9Fu]{Clay Golem}</td>\n<td>30 days</td>\n<td>65,000 gp</td>\n</tr>\n<tr>\n<td>6-17</td>\n<td>@UUID[Compendium.dnd5e.monsters.Actor.Hm4o2FgPZsdbXjLq]{Flesh Golem}</td>\n<td>60 days</td>\n<td>50,000 gp</td>\n</tr>\n<tr>\n<td>18</td>\n<td>@UUID[Compendium.dnd5e.monsters.Actor.h98AuPfomEPcCibP]{Iron Golem}</td>\n<td>120 days</td>\n<td>100,000 gp</td>\n</tr>\n<tr>\n<td>19-20</td>\n<td>@UUID[Compendium.dnd5e.monsters.Actor.z3gSIXHHWYaHjfBT]{Stone Golem}</td>\n<td>90 days</td>\n<td>80,000 gp</td>\n</tr>\n</tbody>\n</table>\n<p>To create a golem, you must spend the time shown on the table, working without interruption with the manual at hand and resting no more than 8 hours per day. You must also pay the specified cost to purchase supplies.</p>\n<p>Once you finish creating the golem, the book is consumed in eldritch flames. The golem becomes animate when the ashes of the manual are sprinkled on it. It is under your control, and it understands and obeys your spoken commands.</p>",
@@ -12,76 +12,47 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": {
+      "value": 1,
+      "units": "lb"
+    },
     "price": {
       "value": 35000,
       "denomination": "gp"
     },
-    "attunement": 0,
+    "attunement": "",
     "equipped": false,
     "rarity": "veryRare",
     "identified": true,
-    "activation": {
-      "type": "special",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "",
-      "prompt": true
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
     "uses": {
-      "value": 1,
       "max": "1",
-      "per": "charges",
-      "recovery": "",
+      "recovery": [],
       "autoDestroy": true,
-      "prompt": true
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null,
-      "scale": false
-    },
-    "ability": "",
-    "actionType": "util",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
+      "spent": 0
     },
     "damage": {
-      "parts": [
-        [
-          "6d6",
+      "base": {
+        "number": 6,
+        "denomination": 6,
+        "bonus": "",
+        "types": [
           "psychic"
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+        ],
+        "custom": {
+          "enabled": false,
+          "formula": ""
+        },
+        "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+        }
+      },
+      "replace": false
     },
     "type": {
       "value": "trinket",
@@ -91,24 +62,122 @@
       "description": ""
     },
     "container": null,
-    "crewed": false,
     "properties": [
       "mgc"
-    ]
+    ],
+    "magicalBonus": null,
+    "activities": {
+      "dnd5eactivity000": {
+        "_id": "dnd5eactivity000",
+        "type": "damage",
+        "activation": {
+          "type": "special",
+          "value": null,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "",
+                "formula": ""
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "damage": {
+          "critical": {
+            "allow": false,
+            "bonus": ""
+          },
+          "parts": [
+            {
+              "number": 6,
+              "denomination": 6,
+              "bonus": "",
+              "types": [
+                "psychic"
+              ],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "whole",
+                "number": null,
+                "formula": ""
+              }
+            }
+          ]
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      }
+    },
+    "attuned": false,
+    "identifier": "manual-of-golems"
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
-  "sort": 0,
+  "sort": 5900000,
   "ownership": {
     "default": 0
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.1",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233681,
-    "modifiedTime": 1707055843397,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037199912,
+    "modifiedTime": 1725992517327,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!UxkP6FvDzPbsIY6o"

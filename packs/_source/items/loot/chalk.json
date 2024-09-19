@@ -2,7 +2,7 @@
   "_id": "5fJn3LQ2eQG7luEO",
   "name": "Chalk",
   "type": "loot",
-  "img": "icons/commodities/bones/bone-fragments-grey.webp",
+  "img": "icons/commodities/metal/ingot-steel.webp",
   "system": {
     "description": {
       "value": "<p>It is soft white porous sedimentary acarbonate rock, a form of limestone composed of the mineral calcite. Can be used to draw shapes. </p>",
@@ -12,10 +12,14 @@
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "license": "CC-BY-4.0"
+      "license": "CC-BY-4.0",
+      "rules": "2014"
     },
     "quantity": 1,
-    "weight": 0,
+    "weight": {
+      "value": 0,
+      "units": "lb"
+    },
     "price": {
       "value": 1,
       "denomination": "cp"
@@ -30,7 +34,8 @@
       "description": ""
     },
     "container": null,
-    "properties": []
+    "properties": [],
+    "identifier": "chalk"
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -40,11 +45,12 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "3.0.0",
-    "coreVersion": "11.315",
-    "createdTime": 1661787233471,
-    "modifiedTime": 1704823142482,
+    "systemVersion": "4.0.0",
+    "createdTime": 1725037101567,
+    "modifiedTime": 1725992484405,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!5fJn3LQ2eQG7luEO"
