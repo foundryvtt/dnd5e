@@ -665,10 +665,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       if ( bonus && (parseInt(bonus) !== 0) ) parts.push(bonus);
     }
 
+    const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
+
     return {
       data, parts,
       options: {
-        type: this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`) ?? damage.types.first(),
+        type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
         types: Array.from(damage.types),
         properties: Array.from(this.item.system.properties ?? [])
           .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
