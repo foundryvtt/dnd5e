@@ -67,99 +67,6 @@
     ],
     "magicalBonus": null,
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "damage",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "damage": {
-          "critical": {
-            "allow": false,
-            "bonus": ""
-          },
-          "parts": [
-            {
-              "number": 5,
-              "denomination": 4,
-              "bonus": "",
-              "types": [
-                "fire"
-              ],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
-            }
-          ]
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
-      },
       "dnd5eactivity100": {
         "_id": "dnd5eactivity100",
         "type": "save",
@@ -173,12 +80,9 @@
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "target": "",
+              "scaling": {}
             }
           ],
           "scaling": {
@@ -193,13 +97,13 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "units": "",
+          "units": "self",
           "special": "",
           "override": false
         },
@@ -207,15 +111,15 @@
           "template": {
             "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
+            "type": "circle",
+            "size": "10",
             "width": "",
             "height": "",
-            "units": ""
+            "units": "ft"
           },
           "affects": {
             "count": "",
-            "type": "",
+            "type": "creature",
             "choice": false,
             "special": ""
           },
@@ -226,20 +130,18 @@
           "onSave": "half",
           "parts": [
             {
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
               "number": 5,
               "denomination": 4,
               "bonus": "",
               "types": [
                 "fire"
               ],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
               "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
+                "number": 1
               }
             }
           ]
@@ -253,9 +155,13 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
@@ -267,14 +173,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.0.2",
     "createdTime": 1725037141214,
-    "modifiedTime": 1726737364901,
+    "modifiedTime": 1726738255941,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!F8QpasPjLrw2POzE"
