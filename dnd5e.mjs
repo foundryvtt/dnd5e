@@ -418,18 +418,22 @@ function expandAttributeList(attributes) {
 Hooks.once("i18nInit", () => {
   if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
     const { translations, _fallback } = game.i18n;
-    translations.TYPES ??= {};
-    translations.TYPES.Item ??= {};
-    translations.TYPES.Item.race = game.i18n.localize("TYPES.Item.raceLegacy");
-    translations.TYPES.Item.racePl = game.i18n.localize("TYPES.Item.raceLegacyPl");
-    translations.DND5E ??= {};
-    translations.DND5E.LanguagesExotic = game.i18n.localize("DND5E.LanguagesExoticLegacy");
-    translations.DND5E.TargetRadius = game.i18n.localize("DND5E.TargetRadiusLegacy");
-    translations.DND5E.TraitArmorPlural ??= {};
-    foundry.utils.mergeObject(translations.DND5E.TraitArmorPlural, foundry.utils.mergeObject(
-      _fallback.DND5E?.TraitArmorLegacyPlural ?? {}, translations.DND5E.TraitArmorLegacyPlural ?? {}, { inplace: false }
-    ));
-    translations.DND5E.TraitArmorProf = game.i18n.localize("DND5E.TraitArmorLegacyProf");
+    foundry.utils.mergeObject(translations, {
+      "TYPES.Item": {
+        race: game.i18n.localize("TYPES.Item.raceLegacy"),
+        racePl: game.i18n.localize("TYPES.Item.raceLegacyPl")
+      },
+      DND5E: {
+        LanguagesExotic: game.i18n.localize("DND5E.LanguagesExoticLegacy"),
+        TargetRadius: game.i18n.localize("DND5E.TargetRadiusLegacy"),
+        TraitArmorPlural: foundry.utils.mergeObject(
+          _fallback.DND5E?.TraitArmorLegacyPlural ?? {},
+          translations.DND5E?.TraitArmorLegacyPlural ?? {},
+          { inplace: false }
+        ),
+        TraitArmorProf: game.i18n.localize("DND5E.TraitArmorLegacyProf")
+      }
+    });
   }
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
