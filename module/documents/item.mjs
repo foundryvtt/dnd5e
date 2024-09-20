@@ -766,7 +766,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       event = dialog?.event;
     }
     let activities = this.system.activities?.filter(a => !this.getFlag("dnd5e", "riders.activity")?.includes(a.id));
-    if ( activities.length ) {
+    if ( activities?.length ) {
       let usageConfig = config;
       let dialogConfig = dialog;
       let messageConfig = message;
