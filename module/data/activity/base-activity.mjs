@@ -127,6 +127,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * A specific set of activation-specific labels displayed in chat cards.
+   * @type {object|null}
+   */
+  get activationLabels() {
+    if ( !this.activation.type || this.isSpell ) return null;
+    const { activation, duration, range, target } = this.labels;
+    return { activation, duration, range, target };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Effects that can be applied from this activity.
    * @type {ActiveEffect5e[]|null}
    */

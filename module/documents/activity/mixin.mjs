@@ -731,7 +731,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @protected
    */
   async _usageChatContext(message) {
-    const data = await this.item.system.getCardData();
+    const data = await this.item.system.getCardData({ activity: this });
     const properties = [...(data.tags ?? []), ...(data.properties ?? [])];
     const supplements = [];
     if ( this.activation.condition ) {
