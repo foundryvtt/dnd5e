@@ -17,7 +17,7 @@
                     <span class="max">{{ max }}</span>
                 </div>
                 <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-low  arrow-down" role="presentation"></i>
+                <i class="breakpoint encumbrance-low arrow-down" role="presentation"></i>
                 <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
                 <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
             </div>
@@ -221,15 +221,7 @@
                         </div>
 
                         {{!-- Item Uses --}}
-                        <div class="item-detail item-uses {{#unless ctx.hasUses}}empty{{/unless}}">
-                            {{#if ctx.hasUses}}
-                            <input type="text" value="{{ item.system.uses.value }}" placeholder="0"
-                                   data-dtype="Number" data-name="system.uses.value" inputmode="numeric"
-                                   pattern="[0-9+=\-]*">
-                            <span class="separator">&sol;</span>
-                            <span class="max">{{ item.system.uses.max }}</span>
-                            {{/if}}
-                        </div>
+                        {{> "dnd5e.column-uses" item=item ctx=ctx }}
 
                         {{/if}}
 
