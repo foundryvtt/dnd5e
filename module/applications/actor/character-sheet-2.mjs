@@ -689,7 +689,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     return resources.concat(await this.actor.system.favorites.reduce(async (arr, f) => {
       const { id, type, sort } = f;
       const favorite = await fromUuid(id, { relative: this.actor });
-      if ( !favorite && ((type === "item") || (type === "effect")) ) return arr;
+      if ( !favorite && ((type === "item") || (type === "effect") || (type === "activity")) ) return arr;
       arr = await arr;
 
       let data;
