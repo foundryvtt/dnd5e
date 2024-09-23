@@ -174,7 +174,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScaleDamage() {
-    return this.consumption.scaling.allowed || this.isSpell;
+    return this.consumption.scaling.allowed || this.isScaledScroll || this.isSpell;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this activity on a spell scroll that is scaled.
+   * @type {boolean}
+   */
+  get isScaledScroll() {
+    return !!this.item.getFlag("dnd5e", "spellLevel");
   }
 
   /* -------------------------------------------- */
