@@ -495,15 +495,16 @@ export class ItemDataModel extends SystemDataModel {
 
   /**
    * Prepare item card template data.
-   * @param {EnrichmentOptions} enrichmentOptions  Options for text enrichment.
+   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {Activity} [enrichmentOptions.activity]     Specific activity on item to use for customizing the data.
    * @returns {Promise<object>}
    */
-  async getCardData(enrichmentOptions={}) {
+  async getCardData({ activity, ...enrichmentOptions }={}) {
     const { name, type, img } = this.parent;
     let {
       price, weight, uses, identified, unidentified, description, school, materials
     } = this;
-    const rollData = this.parent.getRollData();
+    const rollData = (activity ?? this.parent).getRollData();
     const isIdentified = identified !== false;
     const chat = isIdentified ? description.chat || description.value : unidentified?.description;
     description = game.user.isGM || isIdentified ? description.value : unidentified?.description;
@@ -515,7 +516,7 @@ export class ItemDataModel extends SystemDataModel {
       name, type, img, price, weight, uses, school, materials,
       config: CONFIG.DND5E,
       controlHints: game.settings.get("dnd5e", "controlHints"),
-      labels: foundry.utils.deepClone(this.parent.labels),
+      labels: foundry.utils.deepClone((activity ?? this.parent).labels),
       tags: this.parent.labels?.components?.tags,
       subtitle: subtitle.filterJoin(" &bull; "),
       description: {
@@ -533,7 +534,7 @@ export class ItemDataModel extends SystemDataModel {
     if ( game.user.isGM || isIdentified ) {
       context.properties.push(
         ...this.cardProperties ?? [],
-        ...Object.values(this.parent.labels.activations[0] ?? {}),
+        ...Object.values((activity ? activity?.activationLabels : this.parent.labels.activations?.[0]) ?? {}),
         ...this.equippableItemCardProperties ?? []
       );
     }
