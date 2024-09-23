@@ -1640,6 +1640,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const flags = itemData.flags ?? {};
     if ( Number.isNumeric(config.level) ) {
       flags.dnd5e ??= {};
+      flags.dnd5e.scaling = Math.max(0, config.level - spell.system.level);
       flags.dnd5e.spellLevel = {
         value: config.level,
         base: spell.system.level

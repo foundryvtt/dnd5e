@@ -246,4 +246,16 @@ export default class ConsumableData extends ItemDataModel.mixin(
       .filter(p => p !== "material").forEach(p => valid.add(p));
     return valid;
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(...options) {
+    const data = super.getRollData(...options);
+    const spellLevel = this.parent.getFlag("dnd5e", "spellLevel");
+    if ( spellLevel ) data.item.level = spellLevel.value ?? spellLevel.base;
+    return data;
+  }
 }
