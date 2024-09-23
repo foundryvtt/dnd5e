@@ -25,7 +25,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         { dragSelector: ":is(.race, .background)[data-item-id]", dropSelector: null },
         { dragSelector: ".classes .gold-icon[data-item-id]", dropSelector: null },
         { dragSelector: "[data-key] .skill-name, [data-key] .tool-name", dropSelector: null },
-        { dragSelector: ".spells-list .spell-header, .slots[data-favorite-id]", dropSelector: null }
+        { dragSelector: ".spells-list .spell-header, .slots[data-favorite-id]", dropSelector: null },
+        { dragSelector: ".effects-list [data-effect-id]", dropSelector: null }
       ],
       scrollY: [".main-content"],
       width: 800,
