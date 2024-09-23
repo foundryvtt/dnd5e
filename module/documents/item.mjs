@@ -765,12 +765,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       );
       event = dialog?.event;
     }
-    let activities = this.system.activities?.filter(a => !this.getFlag("dnd5e", "riders.activity")?.includes(a.id));
+    const activities = this.system.activities?.filter(a => !this.getFlag("dnd5e", "riders.activity")?.includes(a.id));
     if ( activities?.length ) {
       let usageConfig = config;
       let dialogConfig = dialog;
       let messageConfig = message;
-      activities.sort((a, b) => a.sort - b.sort);
       let activity = activities[0];
       if ( (activities.length > 1) && !event?.shiftKey ) activity = await ActivityChoiceDialog.create(this);
       if ( !activity ) return;

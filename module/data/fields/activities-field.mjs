@@ -13,7 +13,9 @@ export class ActivitiesField extends MappingField {
 
   /** @inheritDoc */
   initialize(value, model, options) {
-    return new ActivityCollection(model, super.initialize(value, model, options));
+    const activities = Object.values(super.initialize(value, model, options));
+    activities.sort((a, b) => a.sort - b.sort);
+    return new ActivityCollection(model, activities);
   }
 }
 
@@ -75,16 +77,16 @@ export class ActivityField extends foundry.data.fields.ObjectField {
 
 /**
  * Specialized collection type for stored activities.
- * @param {DataModel} model                   The parent DataModel to which this ActivityCollection belongs.
- * @param {Record<string, Activity>} entries  Object containing the activities to store.
+ * @param {DataModel} model     The parent DataModel to which this ActivityCollection belongs.
+ * @param {Activity[]} entries  The activities to store.
  */
 export class ActivityCollection extends Collection {
   constructor(model, entries) {
     super();
     this.#model = model;
-    for ( const [id, entry] of Object.entries(entries) ) {
+    for ( const entry of entries ) {
       if ( !(entry instanceof BaseActivityData) ) continue;
-      this.set(id, entry);
+      this.set(entry._id, entry);
     }
   }
 
