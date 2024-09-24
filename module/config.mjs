@@ -3629,6 +3629,9 @@ DND5E.activityTypes = {
   attack: {
     documentClass: activities.AttackActivity
   },
+  cast: {
+    documentClass: activities.CastActivity
+  },
   check: {
     documentClass: activities.CheckActivity
   },
