@@ -396,8 +396,6 @@ async function enrichDamage(config, label, options) {
     }
   });
 
-  console.log(config)
-
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
   if ( !config.formula ) return null;
   config.damageType = config.type ?? (config._isHealing ? "healing" : null);
