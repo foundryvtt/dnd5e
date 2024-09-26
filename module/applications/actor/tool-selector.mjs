@@ -1,4 +1,4 @@
-import TraitSelector from "./trait-selector.mjs";
+import TraitSelector from "./deprecated/trait-selector.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 
 /**
