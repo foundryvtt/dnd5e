@@ -66,7 +66,10 @@ export default class TraitsConfig extends BaseConfigSheet {
     context.keyPath = Trait.actorKeyPath(this.options.trait);
     context.data = foundry.utils.getProperty(this.document._source, context.keyPath);
     context.checkbox = new foundry.data.fields.BooleanField();
-    context.choices = await Trait.choices(this.options.trait, { chosen: new Set(context.data.value) });
+    const chosen = new Set(
+      filteredKeys(await Trait.actorValues(this.document, this.options.trait)).map(k => k.split(":").pop())
+    );
+    context.choices = await Trait.choices(this.options.trait, { chosen });
     context.fields = Trait.actorFields(this.document, this.options.trait);
 
     // Handle custom weapons not in a top-level category
