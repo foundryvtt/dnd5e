@@ -244,7 +244,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const isPrepared = config?.prepares && (mode !== "always") && (this.level > 0) && prepared;
     if ( this.parent.isOwned && this.sourceClass && isPrepared ) {
       const sourceClass = this.parent.actor.spellcastingClasses[this.sourceClass];
+      const sourceSubclass = sourceClass?.subclass;
       if ( sourceClass ) sourceClass.system.spellcasting.preparation.value++;
+      if ( sourceSubclass ) sourceSubclass.system.spellcasting.preparation.value++;
     }
   }
 
