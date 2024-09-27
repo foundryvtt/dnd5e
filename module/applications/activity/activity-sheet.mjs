@@ -14,7 +14,7 @@ export default class ActivitySheet extends Application5e {
 
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["activity", "sheet"],
+    classes: ["activity", "sheet", "standard-form"],
     tag: "form",
     document: null,
     viewPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED,

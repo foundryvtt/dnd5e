@@ -6,7 +6,7 @@ import DocumentSheet5e from "./api/document-sheet.mjs";
 export default class SourceConfig extends DocumentSheet5e {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["source-config"],
+    classes: ["source-config", "standard-form"],
     sheetConfig: false,
     position: {
       width: 400

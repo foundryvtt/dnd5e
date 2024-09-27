@@ -5,6 +5,7 @@
     text-align: start;
     color: var(--color-text-dark-primary);
     border-radius: 5px;
+    padding: 6px 8px;
     background: url("ui/texture-gray1.webp") no-repeat top left,
       url("ui/texture-gray2.webp") no-repeat bottom right,
       var(--dnd5e-color-parchment);
@@ -13,6 +14,12 @@
     border-width: 2px;
 
     .content { padding: 0 .5rem .25rem; }
+
+    h1, h2, h3, h4 {
+      line-height: normal;
+      text-shadow: none;
+      color: var(--color-text-dark-primary);
+    }
 
     .header {
       h2 {
@@ -134,16 +141,6 @@
       margin-right: -.5rem;
       scrollbar-width: thin;
       scrollbar-color: var(--dnd5e-color-gold) transparent;
-
-      &::-webkit-scrollbar-track {
-        box-shadow: none;
-        border-radius: 0;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        border: none;
-        background: var(--dnd5e-color-gold);
-      }
 
       table { display: none; }
 
