@@ -311,7 +311,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
       const { config, options } = this._createDeprecatedConfigs(usageConfig, {}, messageConfig);
-      if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return;
+      if ( Hooks.call("dnd5e.preItemUsageConsumption", this.item, config, options) === false ) return;
       this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
     }
 
@@ -342,7 +342,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         itemUpdates: updates.item.find(i => i._id === this.item.id),
         resourceUpdates: updates.item.filter(i => i._id !== this.item.id)
       };
-      if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
+      if ( Hooks.call("dnd5e.itemUsageConsumption", this.item, config, options, usage) === false ) return;
       this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
       updates.actor = usage.actorUpdates;
       updates.delete = usage.deleteIds;
