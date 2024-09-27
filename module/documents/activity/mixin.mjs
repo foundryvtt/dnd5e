@@ -393,7 +393,12 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       if ( !item ) continue;
       const itemUpdate = {};
       for ( const { keyPath, delta } of changes ) {
-        const value = foundry.utils.getProperty(item, keyPath) - delta;
+        let currentValue;
+        if ( keyPath.startsWith("system.activities") ) {
+          const [id, ...kp] = keyPath.slice(18).split(".");
+          currentValue = foundry.utils.getProperty(item.system.activities?.get(id) ?? {}, kp.join("."));
+        } else currentValue = foundry.utils.getProperty(item, keyPath);
+        const value = currentValue - delta;
         if ( !Number.isNaN(value) ) itemUpdate[keyPath] = value;
       }
       if ( !foundry.utils.isEmpty(itemUpdate) ) {
@@ -425,7 +430,12 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const getDeltas = (document, updates) => {
       updates = foundry.utils.flattenObject(updates);
       return Object.entries(updates).map(([keyPath, value]) => {
-        const delta = value - foundry.utils.getProperty(document, keyPath);
+        let currentValue;
+        if ( keyPath.startsWith("system.activities") ) {
+          const [id, ...kp] = keyPath.slice(18).split(".");
+          currentValue = foundry.utils.getProperty(document.system.activities?.get(id) ?? {}, kp.join("."));
+        } else currentValue = foundry.utils.getProperty(document, keyPath);
+        const delta = value - currentValue;
         if ( delta && !Number.isNaN(delta) ) return { keyPath, delta };
         return null;
       }).filter(_ => _);
@@ -438,6 +448,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         return obj;
       }, {})
     };
+    console.log(consumed);
     if ( foundry.utils.isEmpty(consumed.actor) ) delete consumed.actor;
     if ( foundry.utils.isEmpty(consumed.item) ) delete consumed.item;
 
@@ -665,7 +676,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
 
     // Handle spell slot consumption
-    if ( ((config.consume === true) || config.consume.spellSlot) && this.requiresSpellSlot ) {
+    if ( ((config.consume === true) || config.consume.spellSlot)
+      && this.requiresSpellSlot && this.consumption.spellSlot ) {
       const mode = this.item.system.preparation.mode;
       const isLeveled = ["always", "prepared"].includes(mode);
       const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
