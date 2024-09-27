@@ -392,9 +392,17 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _preCreate(data, options, user) {
-    if ( super._preCreate(data, options, user) === false ) return false;
-    if ( !this.parent.isEmbedded || ["atwill", "innate"].includes(this.preparation.mode) || this.sourceClass ) return;
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    if ( !this.parent.isEmbedded ) return;
+
+    // Set as prepared for NPCs, and not prepared for PCs
+    if ( ["character", "npc"].includes(this.parent.actor.type)
+      && !foundry.utils.hasProperty(data, "system.preparation.prepared") ) {
+      this.parent.updateSource({ "system.preparation.prepared": this.parent.actor.type === "npc" });
+    }
+
+    if ( ["atwill", "innate"].includes(this.preparation.mode) || this.sourceClass ) return;
     const classes = new Set(Object.keys(this.parent.actor.spellcastingClasses));
     if ( !classes.size ) return;
 
