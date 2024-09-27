@@ -241,7 +241,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       // Skip empty rows on subclasses
       if ( item.type === "subclass" ) {
         let displayRow = features.length || spellCells;
-        if ( rows.length ) displayRow ||= rows.at(-1).some((cell, index, arr) =>
+        if ( rows.length ) displayRow ||= rows.at(-1).some((cell, index) =>
           (cell.class === "scale") && (cell.content !== cells[index].content)
         );
         else if ( scaleValues.length ) displayRow ||= cells.filter(c => (c.class === "scale") && c.content).length;
