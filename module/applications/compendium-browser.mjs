@@ -632,7 +632,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     const frame = await super._renderFrame(options);
     if ( game.user.isGM ) {
       frame.querySelector('[data-action="close"]').insertAdjacentHTML("beforebegin", `
-        <button type="button" class="header-control fas fa-cog" data-action="configureSources"
+        <button type="button" class="header-control fas fa-cog icon" data-action="configureSources"
                 data-tooltip="DND5E.CompendiumBrowser.Sources.Label"
                 aria-label="${game.i18n.localize("DND5E.CompendiumBrowser.Sources.Label")}"></button>
       `);

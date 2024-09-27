@@ -9,6 +9,7 @@ export default class Dialog5e extends Application5e {
     tag: "dialog",
     window: {
       contentTag: "form",
+      contentClasses: ["standard-form"],
       minimizable: false
     }
   };

@@ -43,7 +43,7 @@ export default class RollConfigurationDialog extends Application5e {
 
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["roll-configuration"],
+    classes: ["roll-configuration", "standard-form"],
     tag: "form",
     window: {
       title: "DND5E.RollConfiguration.Title",

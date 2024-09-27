@@ -562,3 +562,38 @@
     }
   }
 }
+
+/* App V2 Standard Form */
+.dnd5e2 .standard-form,
+.dnd5e2.standard-form {
+  --color-form-label: var(--color-text-dark-primary);
+  --color-form-label-hover: var(--color-form-label);
+  --input-height: 26px;
+  gap: 0;
+
+  .form-group:not(.label-top) {
+    gap: 0;
+
+    > label {
+      flex: 2;
+      line-height: var(--input-height);
+    }
+
+    > .form-fields { flex: 3; }
+  }
+
+  fieldset { padding: revert; }
+  .hint { line-height: 16px; }
+
+  button:not(.icon, .fa-solid, .fas) {
+    height: unset;
+    &:not(.unbutton) { line-height: 28px; }
+  }
+
+  :is(document-tags, multi-select) .tags.input-element-tags .tag {
+    padding: 1px 4px;
+    color: var(--color-text-dark-primary);
+    height: unset;
+    opacity: unset;
+  }
+}
