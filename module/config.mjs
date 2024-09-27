@@ -669,7 +669,7 @@ DND5E.tools = {
  */
 DND5E.toolIds = new Proxy(DND5E.tools, {
   get(target, prop) {
-    return target[prop]?.id;
+    return target[prop]?.id ?? target[prop];
   },
   set(target, prop, value) {
     foundry.utils.logCompatibilityWarning(
