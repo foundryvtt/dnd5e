@@ -1235,8 +1235,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else if ( target instanceof ActiveEffect5e ) effect = effects.has(target) ? target : null;
     else if ( target instanceof Item5e ) {
       effect = effects.find(e => {
-        const data = e.getFlag("dnd5e", "item.data") ?? {};
-        return (data === target._id) || (data._id === target._id);
+        const data = e.getFlag("dnd5e", "item") ?? {};
+        return (data.id === target._id) || (data.data?._id === target._id);
       });
     }
     if ( !effect ) return [];
