@@ -448,7 +448,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         return obj;
       }, {})
     };
-    console.log(consumed);
     if ( foundry.utils.isEmpty(consumed.actor) ) delete consumed.actor;
     if ( foundry.utils.isEmpty(consumed.item) ) delete consumed.item;
 
