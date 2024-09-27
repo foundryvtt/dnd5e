@@ -21,6 +21,13 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
   _applyLegacy(item, change, changes) {
     let key = change.key.replace("system.", "");
     switch ( change.key ) {
+      case "system.ability":
+        for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
+          changes[`system.activities.${activity.id}.attack.ability`] = ActiveEffect.applyField(
+            activity, { ...change, key: "attack.ability" }
+          );
+        }
+        return false;
       case "system.attack.bonus":
       case "system.attack.flat":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
