@@ -107,10 +107,11 @@ async function enrichAward(config, label, options) {
   const entries = [];
   for ( let [key, amount] of Object.entries(parsed.currency) ) {
     const label = CONFIG.DND5E.currencies[key].label;
+    const icon = CONFIG.DND5E.currencies[key].icon;
     amount = Number.isNumeric(amount) ? formatNumber(amount) : amount;
     entries.push(`
       <span class="award-entry">
-        ${amount} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
+        ${amount} <i class="currency" style="background-image: url('${icon}');" data-tooltip="${label}" aria-label="${label}"></i>
       </span>
     `);
   }
