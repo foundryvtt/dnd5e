@@ -558,7 +558,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
       if ( filters.has("prepared") ) {
         if ( alwaysPrepared.includes(item.system.preparation?.mode) ) return true;
-        if ( this.actor.type === "npc" ) return true;
         return item.system.preparation?.prepared;
       }
 
