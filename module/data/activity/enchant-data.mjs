@@ -89,7 +89,7 @@ export default class EnchantActivityData extends BaseActivityData {
    * @type {EnchantEffectApplicationData[]}
    */
   get availableEnchantments() {
-    const keyPath = this.item.type === "spell" ? "item.level"
+    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
       : this.classIdentifier ? `classes.${this.classIdentifier}.levels` : "details.level";
     const level = foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
     return this.effects.filter(e => ((e.level.min ?? -Infinity) <= level) && (level <= (e.level.max ?? Infinity)));

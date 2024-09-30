@@ -118,7 +118,7 @@ export default class SummonActivityData extends BaseActivityData {
    * @type {number}
    */
   get relevantLevel() {
-    const keyPath = this.item.type === "spell" ? "item.level"
+    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
       : this.summon.identifier ? `classes.${this.summon.identifier}.levels` : "details.level";
     return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
   }
