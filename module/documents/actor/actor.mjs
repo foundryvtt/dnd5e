@@ -129,12 +129,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     for ( const effect of this.effects ) {
       if ( !effect.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) ) continue;
-      const data = effect.getFlag("dnd5e", "item.data");
+      const data = effect.getFlag("dnd5e", "item");
       concentration.effects.add(effect);
       if ( data ) {
-        const item = typeof data === "string"
-          ? this.items.get(data)
-          : new Item.implementation(data, { keepId: true, parent: this });
+        let item = this.items.get(data.id);
+        if ( !item && data.data ) item = new Item.implementation(data.data, { keepId: true, parent: this });
         if ( item ) concentration.items.add(item);
       }
     }
@@ -1236,8 +1235,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else if ( target instanceof ActiveEffect5e ) effect = effects.has(target) ? target : null;
     else if ( target instanceof Item5e ) {
       effect = effects.find(e => {
-        const data = e.getFlag("dnd5e", "item.data") ?? {};
-        return (data === target._id) || (data._id === target._id);
+        const data = e.getFlag("dnd5e", "item") ?? {};
+        return (data.id === target._id) || (data.data?._id === target._id);
       });
     }
     if ( !effect ) return [];

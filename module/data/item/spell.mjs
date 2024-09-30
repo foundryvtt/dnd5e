@@ -241,10 +241,12 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     // Count preparations.
     const { mode, prepared } = this.preparation;
     const config = CONFIG.DND5E.spellPreparationModes[mode];
-    const isPrepared = config?.prepares && (mode !== "always") && prepared;
+    const isPrepared = config?.prepares && (mode !== "always") && (this.level > 0) && prepared;
     if ( this.parent.isOwned && this.sourceClass && isPrepared ) {
       const sourceClass = this.parent.actor.spellcastingClasses[this.sourceClass];
+      const sourceSubclass = sourceClass?.subclass;
       if ( sourceClass ) sourceClass.system.spellcasting.preparation.value++;
+      if ( sourceSubclass ) sourceSubclass.system.spellcasting.preparation.value++;
     }
   }
 

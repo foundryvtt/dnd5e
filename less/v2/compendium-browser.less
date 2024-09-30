@@ -8,8 +8,10 @@
     z-index: 1;
   }
 
-  .window-content {
+  &:not(.minimized) .window-content {
     --header-size: calc(var(--header-height) + var(--font-size-24) + 6px);
+  }
+  .window-content {
     background: url("ui/texture1.webp") no-repeat top center / auto 770px,
       var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
     display: grid;

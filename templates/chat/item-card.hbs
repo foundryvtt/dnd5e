@@ -9,10 +9,9 @@
             <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
             <div class="name-stacked border">
                 <span class="title">{{ item.name }}</span>
-                {{#if (or data.subtitle item.system.chatFlavor)}}
+                {{#if data.subtitle}}
                 <span class="subtitle">
-                    {{#if item.system.chatFlavor}}{{ item.system.chatFlavor }}
-                    {{else}}{{{ data.subtitle }}}{{/if}}
+                    {{{ data.subtitle }}}
                 </span>
                 {{/if}}
             </div>

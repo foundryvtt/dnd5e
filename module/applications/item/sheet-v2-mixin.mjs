@@ -187,7 +187,7 @@ export default function ItemSheetV2Mixin(Base) {
       if ( game.user.isGM || (identified !== false) ) {
         context.properties.active.push(
           ...this.item.system.cardProperties ?? [],
-          ...Object.values(this.item.labels.activations[0] ?? {}),
+          ...Object.values(this.item.labels.activations?.[0] ?? {}),
           ...this.item.system.equippableItemCardProperties ?? []
         );
       }
