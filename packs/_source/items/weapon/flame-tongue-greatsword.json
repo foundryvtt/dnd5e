@@ -85,8 +85,8 @@
     },
     "properties": [
       "hvy",
-      "two",
-      "mgc"
+      "mgc",
+      "two"
     ],
     "proficient": null,
     "type": {
@@ -178,9 +178,8 @@
         },
         "sort": 0
       },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
+      "yxULLc5X4mfBzF5i": {
+        "type": "attack",
         "activation": {
           "type": "action",
           "value": 1,
@@ -201,7 +200,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -231,22 +230,57 @@
           "prompt": true,
           "override": false
         },
-        "roll": {
-          "formula": "2d6",
-          "name": "",
-          "prompt": false,
-          "visible": false
+        "attack": {
+          "ability": "",
+          "bonus": "",
+          "critical": {
+            "threshold": null
+          },
+          "flat": false,
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
+          }
+        },
+        "damage": {
+          "critical": {
+            "bonus": ""
+          },
+          "includeBase": true,
+          "parts": [
+            {
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "number": 2,
+              "denomination": 6,
+              "bonus": "",
+              "types": [
+                "fire"
+              ],
+              "scaling": {
+                "number": 1
+              }
+            }
+          ]
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "_id": "yxULLc5X4mfBzF5i",
+        "name": "Attack (Flaming)",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "flame-tongue-greatsword"
+    "identifier": "flame-tongue-greatsword",
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -254,14 +288,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.0.2",
     "createdTime": 1725037205326,
-    "modifiedTime": 1725992519154,
+    "modifiedTime": 1726735767821,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!WWb4vAmh18sMAxfY"
