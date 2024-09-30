@@ -31,7 +31,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _spellcastingClasses;
 
   /**
-   * Mapping of item source IDs to the items.
+   * Mapping of item compendium source UUIDs to the items.
    * @type {Map<string, Item5e>}
    */
   sourcedItems = this.sourcedItems;
@@ -213,7 +213,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
-    this.sourcedItems = new Map();
+    this.sourcedItems = new SourcedItemsMap();
     this._embeddedPreparation = true;
     super.prepareEmbeddedDocuments();
     delete this._embeddedPreparation;
@@ -3655,5 +3655,30 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
     const favorites = this.system.favorites.filter(f => !ids.has(f.id));
     return this.update({ "system.favorites": favorites });
+  }
+}
+
+/* -------------------------------------------- */
+
+class SourcedItemsMap extends Map {
+  /** @inheritDoc */
+  get(key, { legacy=true }={}) {
+    if ( legacy ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `sourcedItems` data on actor has changed from storing individual items to storing Sets of items. Pass `legacy: false` to retrieve the new Set data.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.3", once: true }
+      );
+      return super.get(key)?.first();
+    }
+    return super.get(key);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  set(key, value) {
+    if ( !this.has(key) ) super.set(key, new Set());
+    this.get(key, { legacy: false }).add(value);
+    return this;
   }
 }

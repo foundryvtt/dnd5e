@@ -140,7 +140,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     // Substitute source UUIDs in consumption targets
     if ( !this.parent.isEmbedded ) return;
     if ( ["ammo", "charges", "material"].includes(this.consume.type) && this.consume.target?.includes(".") ) {
-      const item = this.parent.actor.sourcedItems?.get(this.consume.target);
+      const item = this.parent.actor.sourcedItems?.get(this.consume.target, { legacy: false })?.first();
       if ( item ) this.consume.target = item.id;
     }
   }

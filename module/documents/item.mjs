@@ -1319,6 +1319,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    await this.system.onCreateActivities?.(data, options, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
 
@@ -1326,18 +1334,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       options.formerContainer = (await this.container)?.uuid;
     }
 
-    if ( changed.system?.activities ) {
-      const riders = this.clone(changed).system.activities.getByType("enchant").reduce((riders, a) => {
-        a.effects.forEach(e => {
-          e.riders.activity.forEach(activity => riders.activity.add(activity));
-          e.riders.effect.forEach(effect => riders.effect.add(effect));
-        });
-        return riders;
-      }, { activity: new Set(), effect: new Set() });
-      foundry.utils.setProperty(changed, "flags.dnd5e.riders", {
-        activity: Array.from(riders.activity), effect: Array.from(riders.effect)
-      });
-    }
+    await this.system.preUpdateActivities?.(changed, options, user);
 
     if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
 
@@ -1365,8 +1362,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    await this.system.onUpdateActivities?.(changed, options, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onDelete(options, userId) {
     super._onDelete(options, userId);
+    await this.system.onDeleteActivities?.(options, userId);
     if ( userId !== game.user.id ) return;
 
     // Delete a container's contents when it is deleted

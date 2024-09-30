@@ -2,7 +2,7 @@ import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { staticID } from "../utils.mjs";
 
-const { SetField, StringField } = foundry.data.fields;
+const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
@@ -155,6 +155,11 @@ export default class ActiveEffect5e extends ActiveEffect {
         const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
         foundry.utils.setProperty(model, keyPath, created);
       }
+    }
+
+    // Parse any JSON provided when targeting an object
+    if ( (field instanceof ObjectField) || (field instanceof SchemaField) ) {
+      change = { ...change, value: this.prototype._parseOrString(change.value) };
     }
 
     return super.applyField(model, change, field);
