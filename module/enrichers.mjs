@@ -822,14 +822,14 @@ async function rollAction(event) {
         const actor = token.actor;
         switch ( type ) {
           case "check":
-            await actor.rollAbilityTest(ability, options);
+            await actor.rollAbilityTest({ ability, event: options.event, target: options.targetValue });
             break;
           case "concentration":
             if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
             await actor.rollConcentration(options);
             break;
           case "save":
-            await actor.rollAbilitySave(ability, options);
+            await actor.rollAbilitySave({ ability, event: options.event, target: options.targetValue });
             break;
           case "skill":
             if ( ability ) options.ability = ability;

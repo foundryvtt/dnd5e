@@ -1192,7 +1192,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _onRollAbilityTest(event) {
     event.preventDefault();
     let ability = event.currentTarget.parentElement.dataset.ability;
-    this.actor.rollAbility(ability, {event: event});
+    this.actor.rollAbility({ ability, event });
   }
 
   /* -------------------------------------------- */

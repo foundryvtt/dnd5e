@@ -7,7 +7,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
 /**
  * Configuration data for a D20 roll.
  *
- * @typedef {object} D20RollConfiguration
+ * @typedef {object} DeprecatedD20RollConfiguration
  *
  * @property {string[]} [parts=[]]  The dice roll component parts, excluding the initial d20.
  * @property {object} [data={}]     Data that will be used when parsing this roll.
@@ -53,7 +53,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
  *
- * @param {D20RollConfiguration} configuration  Configuration data for the D20 roll.
+ * @param {DeprecatedD20RollConfiguration} configuration  Configuration data for the D20 roll.
  * @returns {Promise<D20Roll|null>}             The evaluated D20Roll, or null if the workflow was cancelled.
  */
 export async function d20Roll({
