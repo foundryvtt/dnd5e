@@ -1,5 +1,5 @@
 import DialogMixin from "../dialog-mixin.mjs";
-import ProficiencyConfig from "./proficiency-config.mjs";
+import SkillToolConfig from "./config/skill-tool-config.mjs";
 
 export default class ActorSkillsConfig extends DialogMixin(DocumentSheet) {
   /** @inheritDoc */
@@ -57,6 +57,6 @@ export default class ActorSkillsConfig extends DialogMixin(DocumentSheet) {
    */
   _onConfigureSkill(event) {
     const { key } = event.currentTarget.closest("[data-key]").dataset;
-    new ProficiencyConfig(this.document, { property: "skills", key }).render(true);
+    new SkillToolConfig({ document: this.document, trait: "skills", key }).render({ force: true });
   }
 }
