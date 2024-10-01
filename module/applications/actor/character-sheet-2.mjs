@@ -96,7 +96,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     }).map(c => `${c.name} ${c.system.levels}`).join(" / ");
 
     // Exhaustion
-    if (CONFIG.DND5E.conditionTypes.exhaustion) {
+    if ( CONFIG.DND5E.conditionTypes.exhaustion ) {
       const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
       context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
         const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
