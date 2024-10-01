@@ -9,6 +9,7 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  * @property {BasicRollConfiguration[]} rolls  Configuration data for individual rolls.
  * @property {Event} [event]                   Event that triggered the rolls.
  * @property {Document} [subject]              Document that initiated this roll.
+ * @property {number} [target]                 Default target value for all rolls.
  */
 
 /**
@@ -75,6 +76,8 @@ export default class BasicRoll extends Roll {
    */
   static fromConfig(config, process) {
     const formula = (config.parts ?? []).join(" + ");
+    config.options ??= {};
+    config.options.target ??= process.target;
     return new this(formula, config.data, config.options);
   }
 
