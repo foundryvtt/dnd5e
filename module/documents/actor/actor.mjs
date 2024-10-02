@@ -573,7 +573,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Compute cover.
-    ac.cover = this.statuses.has("coverThreeQuarters") ? 5 : this.statuses.has("coverHalf") ? 2 : 0;
+    ac.cover = Math.max(ac.cover, this.statuses.has("coverThreeQuarters") ? 5 : this.statuses.has("coverHalf") ? 2 : 0);
 
     // Compute total AC and return
     ac.min = simplifyBonus(ac.min, rollData);
