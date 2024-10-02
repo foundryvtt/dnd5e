@@ -129,7 +129,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    */
   prepareAbilities({ rollData={}, originalSaves }={}) {
     const flags = this.parent.flags.dnd5e ?? {};
-    const prof = this.attributes?.prof ?? 0;
+    const { prof = 0, ac } = this.attributes ?? {};
     const checkBonus = simplifyBonus(this.bonuses?.abilities?.check, rollData);
     const saveBonus = simplifyBonus(this.bonuses?.abilities?.save, rollData);
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
@@ -140,7 +140,9 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       const isRA = this.parent._isRemarkableAthlete(id);
       abl.checkProf = new Proficiency(prof, (isRA || flags.jackOfAllTrades) ? 0.5 : 0, !isRA);
       const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
-      abl.saveBonus = saveBonusAbl + saveBonus;
+
+      const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
+      abl.saveBonus = saveBonusAbl + saveBonus + cover;
 
       abl.saveProf = new Proficiency(prof, abl.proficient);
       const checkBonusAbl = simplifyBonus(abl.bonuses?.check, rollData);
