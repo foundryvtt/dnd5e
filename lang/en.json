@@ -593,7 +593,7 @@
     "attack": {
       "bonus": {
         "label": "Attack Bonus",
-        "hint": "If spell makes an attack, use this bonus to hit rather than the creature's normal spellcasting bonus."
+        "hint": "If the spell makes an attack, use this bonus to hit rather than the creature's normal spellcasting bonus."
       }
     },
     "spell": {
@@ -609,17 +609,24 @@
         },
         "override": {
           "label": "Override Values",
-          "hint": "Override spell's normal attack bonus & DC when casting."
+          "hint": "Override the spell's normal attack bonus & DC when casting."
         }
       },
       "level": {
         "label": "Casting Level",
         "hint": "Base level to cast the spell, if different than the spell's level."
       },
+      "properties": {
+        "label": "Ignored Properties",
+        "hint": "Spell components & tags to ignore while casting."
+      },
       "uuid": {
         "label": "Spell to Cast"
       }
     }
+  },
+  "SECTIONS": {
+    "Spell": "Spell"
   },
   "Action": {
     "RemoveSpell": "Remove Spell"

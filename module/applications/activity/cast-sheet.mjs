@@ -18,6 +18,10 @@ export default class CastSheet extends ActivitySheet {
   /** @inheritDoc */
   static PARTS = {
     ...super.PARTS,
+    identity: {
+      template: "systems/dnd5e/templates/activity/cast-identity.hbs",
+      templates: super.PARTS.identity.templates
+    },
     effect: {
       template: "systems/dnd5e/templates/activity/cast-effect.hbs",
       templates: [
@@ -44,12 +48,18 @@ export default class CastSheet extends ActivitySheet {
   /** @inheritDoc */
   async _prepareEffectContext(context) {
     context = await super._prepareEffectContext(context);
+
     if ( context.spell ) {
       context.contentLink = context.spell.toAnchor().outerHTML;
       if ( context.spell.system.level > 0 ) context.levelOptions = Object.entries(CONFIG.DND5E.spellLevels)
         .filter(([level]) => Number(level) >= context.spell.system.level)
         .map(([value, label]) => ({ value, label }));
     }
+
+    context.propertyOptions = Array.from(CONFIG.DND5E.validProperties.spell).map(value => ({
+      value, label: CONFIG.DND5E.itemProperties[value]?.label ?? ""
+    }));
+
     return context;
   }
 
@@ -60,6 +70,16 @@ export default class CastSheet extends ActivitySheet {
     context = await super._prepareIdentityContext(context);
     if ( context.spell ) context.placeholder = { name: context.spell.name, img: context.spell.img };
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _getTabs() {
+    const tabs = super._getTabs();
+    tabs.effect.label = "DND5E.CAST.SECTIONS.Spell";
+    tabs.effect.icon = "fa-solid fa-wand-sparkles";
+    return tabs;
   }
 
   /* -------------------------------------------- */

@@ -1,6 +1,6 @@
 import BaseActivityData from "./base-activity.mjs";
 
-const { BooleanField, DocumentUUIDField, NumberField, SchemaField } = foundry.data.fields;
+const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data model for a Cast activity.
@@ -11,6 +11,7 @@ const { BooleanField, DocumentUUIDField, NumberField, SchemaField } = foundry.da
  * @property {number} spell.challenge.save       Flat DC to use in place of the spell's normal save DC.
  * @property {boolean} spell.challenge.override  Use custom attack bonus & DC rather than creature's.
  * @property {number} spell.level                Base level at which to cast the spell.
+ * @property {Set<string>} spell.properties      Spell components & tags to ignore while casting.
  * @property {string} spell.uuid                 UUID of the spell to cast.
  */
 export default class CastActivityData extends BaseActivityData {
@@ -27,6 +28,7 @@ export default class CastActivityData extends BaseActivityData {
           override: new BooleanField()
         }),
         level: new NumberField(),
+        properties: new SetField(new StringField()),
         uuid: new DocumentUUIDField()
       })
     };

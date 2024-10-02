@@ -3,6 +3,7 @@
     {{#if levelOptions}}
     {{ formField fields.spell.fields.level value=source.spell.level options=levelOptions }}
     {{/if}}
+    {{ formField fields.spell.fields.properties value=source.spell.properties options=propertyOptions }}
     {{#with fields.spell.fields.challenge.fields as |fields|}}
     {{ formField fields.override value=../source.spell.challenge.override input=../inputs.createCheckboxInput }}
     {{#if ../source.spell.challenge.override}}
