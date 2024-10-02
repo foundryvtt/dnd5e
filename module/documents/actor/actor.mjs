@@ -283,8 +283,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   getCoverBonus() {
     const { coverHalf, coverThreeQuarters } = CONFIG.DND5E.statusEffects;
-    if ( this.statuses.has("coverThreeQuarters") ) return coverThreeQuarters.coverBonus;
-    else if ( this.statuses.has("coverHalf") ) return coverHalf.coverBonus;
+    if ( this.statuses.has("coverThreeQuarters") ) return coverThreeQuarters?.coverBonus;
+    else if ( this.statuses.has("coverHalf") ) return coverHalf?.coverBonus;
     return 0;
   }
 
