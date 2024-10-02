@@ -71,6 +71,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Calculate the bonus from any cover the actor is affected by.
+   * @type {number}     The cover bonus to AC and dexterity saving throws.
+   */
+  get coverBonus() {
+    const { coverHalf, coverThreeQuarters } = CONFIG.DND5E.statusEffects;
+    if ( this.statuses.has("coverThreeQuarters") ) return coverThreeQuarters?.coverBonus;
+    else if ( this.statuses.has("coverHalf") ) return coverHalf?.coverBonus;
+    return 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get all classes which have spellcasting ability.
    * @type {Record<string, Item5e>}
    */
@@ -273,19 +286,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     return Math.clamp(
       Math.floor(damage / 2), 10, game.settings.get("dnd5e", "rulesVersion") === "modern" ? 30 : Infinity
     );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Calculate the bonus from any cover the actor is affected by.
-   * @returns {number}      The cover bonus to AC and dexterity saving throws.
-   */
-  getCoverBonus() {
-    const { coverHalf, coverThreeQuarters } = CONFIG.DND5E.statusEffects;
-    if ( this.statuses.has("coverThreeQuarters") ) return coverThreeQuarters?.coverBonus;
-    else if ( this.statuses.has("coverHalf") ) return coverHalf?.coverBonus;
-    return 0;
   }
 
   /* -------------------------------------------- */
@@ -586,7 +586,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Compute cover.
-    ac.cover = Math.max(ac.cover, this.getCoverBonus());
+    ac.cover = Math.max(ac.cover, this.coverBonus);
 
     // Compute total AC and return
     ac.min = simplifyBonus(ac.min, rollData);

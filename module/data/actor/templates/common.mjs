@@ -141,7 +141,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       abl.checkProf = new Proficiency(prof, (isRA || flags.jackOfAllTrades) ? 0.5 : 0, !isRA);
       const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
 
-      const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.getCoverBonus()) : 0;
+      const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
       abl.saveBonus = saveBonusAbl + saveBonus + cover;
 
       abl.saveProf = new Proficiency(prof, abl.proficient);
