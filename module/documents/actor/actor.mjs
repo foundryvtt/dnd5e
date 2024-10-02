@@ -1686,7 +1686,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Include cover in dexterity saving throws
-    if ( abilityId === "dex" && data.attributes?.ac?.cover ) {
+    if ( (abilityId === "dex") && data.attributes?.ac?.cover ) {
       parts.push("@cover");
       data.cover = data.attributes.ac.cover;
     }
