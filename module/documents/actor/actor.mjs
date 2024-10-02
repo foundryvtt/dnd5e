@@ -278,6 +278,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Calculate the bonus from any cover the actor is affected by.
+   * @returns {number}      The cover bonus to AC and dexterity saving throws.
+   */
+  getCoverBonus() {
+    const { coverHalf, coverThreeQuarters } = CONFIG.DND5E.statusEffects;
+    if ( this.statuses.has("coverThreeQuarters") ) return coverThreeQuarters.coverBonus;
+    else if ( this.statuses.has("coverHalf") ) return coverHalf.coverBonus;
+    return 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Return the amount of experience required to gain a certain character level.
    * @param {number} level  The desired level.
    * @returns {number}      The XP required.
@@ -573,7 +586,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Compute cover.
-    ac.cover = Math.max(ac.cover, this.statuses.has("coverThreeQuarters") ? 5 : this.statuses.has("coverHalf") ? 2 : 0);
+    ac.cover = Math.max(ac.cover, this.getCoverBonus());
 
     // Compute total AC and return
     ac.min = simplifyBonus(ac.min, rollData);
@@ -1670,6 +1683,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( globalBonuses.save ) {
       parts.push("@saveBonus");
       data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
+    }
+
+    // Include cover in dexterity saving throws
+    if ( abilityId === "dex" && data.attributes?.ac?.cover ) {
+      parts.push("@cover");
+      data.cover = data.attributes.ac.cover;
     }
 
     // Add exhaustion reduction
