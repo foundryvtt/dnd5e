@@ -1741,7 +1741,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Create the spell scroll data
     const spellScrollData = foundry.utils.mergeObject(scrollData, {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
-      img: itemData.img,
       effects: itemData.effects ?? [],
       flags,
       system: {
