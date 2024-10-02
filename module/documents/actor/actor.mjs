@@ -572,6 +572,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ac.equippedShield = shields[0];
     }
 
+    // Compute cover.
+    ac.cover = this.statuses.has("coverThreeQuarters") ? 5 : this.statuses.has("coverHalf") ? 2 : 0;
+
     // Compute total AC and return
     ac.min = simplifyBonus(ac.min, rollData);
     ac.bonus = simplifyBonus(ac.bonus, rollData);

@@ -415,10 +415,10 @@ export default class ChatMessage5e extends ChatMessage {
         <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
           <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
           <div class="name">${name}</div>
-          ${ac ? `
+          ${(ac !== "") ? `
           <div class="ac">
             <i class="fas fa-shield-halved"></i>
-            <span>${ac}</span>
+            <span>${(ac === null) ? "<i class='fa-solid fa-infinity'></i>" : ac}</span>
           </div>
           ` : ""}
         </li>
