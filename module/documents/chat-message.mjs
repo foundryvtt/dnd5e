@@ -418,7 +418,7 @@ export default class ChatMessage5e extends ChatMessage {
           ${(ac !== "") ? `
           <div class="ac">
             <i class="fas fa-shield-halved"></i>
-            <span>${(ac === null) ? "<i class='fa-solid fa-infinity'></i>" : ac}</span>
+            <span>${(ac === null) ? "&infin;" : ac}</span>
           </div>
           ` : ""}
         </li>
