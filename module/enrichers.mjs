@@ -760,10 +760,14 @@ function createRollLink(label, dataset) {
 async function applyAction(event) {
   const target = event.target.closest('[data-action="apply"][data-status]');
   const status = target?.dataset.status;
-  const effect = CONFIG.statusEffects.find(e => e.id === status);
-  if ( !effect ) return;
+  if ( !status ) return;
   event.stopPropagation();
-  for ( const token of canvas.tokens.controlled ) await token.toggleEffect(effect);
+  const actors = new Set();
+  for ( const { actor } of canvas.tokens.controlled ) {
+    if ( !actor || actors.has(actor) ) continue;
+    await actor.toggleStatusEffect(status);
+    actors.add(actor);
+  }
 }
 
 /* -------------------------------------------- */
