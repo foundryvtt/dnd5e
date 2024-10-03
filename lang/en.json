@@ -761,11 +761,15 @@
     "Title": "Multiclassing"
   },
   "FIELDS": {
-    "hitDice": {
-      "label": "Hit Point Die"
-    },
-    "hitDiceUsed": {
-      "label": "Spent Hit Dice"
+    "hd": {
+      "label": "Hit Point Die",
+      "additional": {
+        "label": "Additional Hit Dice",
+        "hint": "Formula for hit dice that are available for this class beyond the amount equal to its level."
+      },
+      "spent": {
+        "label": "Spent Hit Dice"
+      }
     },
     "levels": {
       "label": "Class Levels"
