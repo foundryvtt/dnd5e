@@ -298,4 +298,14 @@ export default class DamageRoll extends BasicRoll {
       { critical: { allow: allowCritical } }, { options: { title } }, { rollMode: defaultRollMode }
     );
   }
+
+  /* -------------------------------------------- */
+  /*  Evaluate Methods                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async evaluate(options={}) {
+    this.options.appearance = { colorset: this.options.type };
+    return super.evaluate(options);
+  }
 }
