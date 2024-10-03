@@ -111,6 +111,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         else acc.right.push(pip);
         return acc;
       }, { left: [], right: [] });
+  
+      if ( max > 6 ) context.lozengesNoMarginTop = true;
     }
 
     // Speed

@@ -351,10 +351,16 @@
           .top {
             display: flex;
             align-items: start;
-            justify-content: space-between;
+            justify-content: center;
             position: relative;
 
             /* Exhaustion */
+            .pips {
+              flex-wrap: wrap;
+              justify-content: center;
+              padding: 10px;
+            }
+          
             .pips .pip.filled.death::before {
               content: "\f54c";
               font-family: var(--font-awesome);
@@ -414,6 +420,11 @@
               }
             }
           }
+
+          .lozenges.no-margin-top {
+            margin-top: 0px;
+          }
+
         }
 
         /* Hit Points & Hit Dice */
