@@ -305,7 +305,9 @@ export default class DamageRoll extends BasicRoll {
 
   /** @inheritDoc */
   async evaluate(options={}) {
-    this.options.appearance = { colorset: this.options.type };
+    if ( this.options.type && !this.options.appearance?.colorset ) {
+      foundry.utils.setProperty(this.options, "appearance.colorset", this.options.type);
+    }
     return super.evaluate(options);
   }
 }
