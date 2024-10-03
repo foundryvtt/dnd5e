@@ -549,7 +549,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const makeLabel = (name, item) => {
       let label;
       const uses = item.system.uses;
-      if ( uses.max && (uses.recovery?.length === 1) && (uses.recovery[0].type === "recoverAll") ) {
+      if ( uses.max && (uses.recovery?.length === 1) && (uses.recovery[0].type === "recoverAll")
+        && (uses.recovery[0].period !== "recharge") ) {
         const per = CONFIG.DND5E.limitedUsePeriods[uses.recovery[0].period]?.abbreviation;
         label = game.i18n.format("DND5E.AbilityUseConsumableLabel", { max: uses.max, per });
       }
@@ -558,6 +559,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     };
     return [
       { value: "", label: makeLabel(game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem"), this.item) },
+      { rule: true },
       ...(this.actor?.items ?? [])
         .filter(i => i.system.uses?.max && (i !== this.item))
         .map(i => ({ value: i.id, label: makeLabel(i.name, i) }))

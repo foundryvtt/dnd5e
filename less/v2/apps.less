@@ -77,6 +77,7 @@
       flex-direction: column;
       gap: .25rem;
       z-index: -1;
+      border: none;
 
       > .item {
         --icon-size: 14px;
@@ -350,6 +351,7 @@
       padding: .1875rem .375rem;
       display: flex;
       gap: .25rem;
+      margin: 0;
 
       &.green, &.maroon { color: var(--color-text-light-0); }
       &.green { background-color: var(--dnd5e-color-green); }
@@ -852,6 +854,7 @@
 
     button.header-control {
       --color-light-text-heading: var(--color-light-1);
+      --button-text-color: var(--color-light-text-heading);
       font-size: var(--font-size-12);
       &:hover { color: var(--color-light-text-heading); }
     }
@@ -887,6 +890,7 @@
     [data-tab] {
       flex: 1;
       padding: 0;
+      line-height: 1;
 
       label { padding-bottom: 1px; }
 
@@ -1257,16 +1261,20 @@ dialog.dnd5e2.application {
   min-width: 145px;
 
   .context-item {
+    border: none;
     padding: 0 .75rem;
+    margin: 0;
     cursor: pointer;
     display: flex;
     align-items: baseline;
     gap: 5px;
+    transition: all 250ms ease;
 
     &:hover {
       color: var(--color-text-dark-primary);
       text-shadow: none;
       background: var(--dnd5e-color-parchment);
+      border: none;
     }
 
     i {
@@ -1285,6 +1293,8 @@ dialog.dnd5e2.application {
     &:first-child { border-radius: 3px 3px 0 0; }
     &:last-child { border-radius: 0 0 3px 3px; }
   }
+
+  .context-group { border: none; }
 
   .context-group:first-child > ol > .context-item:first-child { border-radius: 3px 3px 0 0; }
   .context-group:last-child > ol > .context-item:last-child { border-radius: 0 0 3px 3px; }

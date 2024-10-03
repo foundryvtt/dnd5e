@@ -145,9 +145,9 @@ export default class ActivityChoiceDialog extends Application5e {
 
   /**
    * Display the activity choice dialog.
-   * @param {Item5e} item                       The Item whose activities are being chosen.
-   * @param {ApplicationConfiguration} options  Application configuration options.
-   * @returns {Promise<Activity|null>}          The chosen activity, or null if the dialog was dismissed.
+   * @param {Item5e} item                         The Item whose activities are being chosen.
+   * @param {ApplicationConfiguration} [options]  Application configuration options.
+   * @returns {Promise<Activity|null>}            The chosen activity, or null if the dialog was dismissed.
    */
   static create(item, options) {
     return new Promise(resolve => {

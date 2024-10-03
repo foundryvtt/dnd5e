@@ -216,8 +216,10 @@
       position: absolute;
       inset: 0;
       padding: 8px;
+      padding-inline-end: 0;
       overflow: hidden auto;
       scrollbar-width: thin;
+      scrollbar-gutter: stable;
       scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
       transition: all 450ms ease;
 
@@ -1062,9 +1064,11 @@
     }
 
     > .middle {
+      display: flex;
       gap: 1rem;
 
       > * {
+        flex: 1;
         display: flex;
         flex-direction: column;
         gap: .5rem;

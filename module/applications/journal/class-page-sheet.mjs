@@ -131,7 +131,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       const advancement = traits.find(a => {
         const rep = a.representedTraits();
         if ( (rep.size > 1) || (rep.first() !== type) ) return false;
-        return (a.classRestriction !== "secondary") && (a.level === 1);
+        return (a.classRestriction !== "secondary") && (a.level === 1) && (a.configuration.mode === "default");
       });
       if ( !advancement ) return game.i18n.localize("None");
       return advancement.hint || Trait.localizedList(advancement.configuration);
@@ -241,8 +241,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       // Skip empty rows on subclasses
       if ( item.type === "subclass" ) {
         let displayRow = features.length || spellCells;
-        if ( rows.length ) displayRow ||= !rows.at(-1).some((cell, index) =>
-          (cell.class !== "scale") && (cell.content !== cells[index].content)
+        if ( rows.length ) displayRow ||= rows.at(-1).some((cell, index) =>
+          (cell.class === "scale") && (cell.content !== cells[index].content)
         );
         else if ( scaleValues.length ) displayRow ||= cells.filter(c => (c.class === "scale") && c.content).length;
         if ( !displayRow ) continue;

@@ -127,6 +127,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * A specific set of activation-specific labels displayed in chat cards.
+   * @type {object|null}
+   */
+  get activationLabels() {
+    if ( !this.activation.type || this.isSpell ) return null;
+    const { activation, duration, range, target } = this.labels;
+    return { activation, duration, range, target };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Effects that can be applied from this activity.
    * @type {ActiveEffect5e[]|null}
    */
@@ -162,7 +174,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScaleDamage() {
-    return this.consumption.scaling.allowed || this.isSpell;
+    return this.consumption.scaling.allowed || this.isScaledScroll || this.isSpell;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this activity on a spell scroll that is scaled.
+   * @type {boolean}
+   */
+  get isScaledScroll() {
+    return !!this.item.getFlag("dnd5e", "spellLevel");
   }
 
   /* -------------------------------------------- */
@@ -665,10 +687,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       if ( bonus && (parseInt(bonus) !== 0) ) parts.push(bonus);
     }
 
+    const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
+
     return {
       data, parts,
       options: {
-        type: this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`) ?? damage.types.first(),
+        type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
         types: Array.from(damage.types),
         properties: Array.from(this.item.system.properties ?? [])
           .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)

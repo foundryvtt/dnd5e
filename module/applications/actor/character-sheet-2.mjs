@@ -25,7 +25,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         { dragSelector: ":is(.race, .background)[data-item-id]", dropSelector: null },
         { dragSelector: ".classes .gold-icon[data-item-id]", dropSelector: null },
         { dragSelector: "[data-key] .skill-name, [data-key] .tool-name", dropSelector: null },
-        { dragSelector: ".spells-list .spell-header, .slots[data-favorite-id]", dropSelector: null }
+        { dragSelector: ".spells-list .spell-header, .slots[data-favorite-id]", dropSelector: null },
+        { dragSelector: ".effects-list [data-effect-id]", dropSelector: null }
       ],
       scrollY: [".main-content"],
       width: 800,
@@ -690,7 +691,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     return resources.concat(await this.actor.system.favorites.reduce(async (arr, f) => {
       const { id, type, sort } = f;
       const favorite = await fromUuid(id, { relative: this.actor });
-      if ( !favorite && ((type === "item") || (type === "effect")) ) return arr;
+      if ( !favorite && ((type === "item") || (type === "effect") || (type === "activity")) ) return arr;
       arr = await arr;
 
       let data;

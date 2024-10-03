@@ -138,7 +138,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     context.activities = (activities ?? []).map(({ _id: id, name, img, sort }) => ({
       id, name, sort,
       img: { src: img, svg: img?.endsWith(".svg") }
-    })).sort((a, b) => a.sort - b.sort);
+    }));
 
     return context;
   }

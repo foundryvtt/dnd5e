@@ -71,6 +71,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Calculate the bonus from any cover the actor is affected by.
+   * @type {number}     The cover bonus to AC and dexterity saving throws.
+   */
+  get coverBonus() {
+    const { coverHalf, coverThreeQuarters } = CONFIG.DND5E.statusEffects;
+    if ( this.statuses.has("coverThreeQuarters") ) return coverThreeQuarters?.coverBonus;
+    else if ( this.statuses.has("coverHalf") ) return coverHalf?.coverBonus;
+    return 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get all classes which have spellcasting ability.
    * @type {Record<string, Item5e>}
    */
@@ -129,12 +142,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     for ( const effect of this.effects ) {
       if ( !effect.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) ) continue;
-      const data = effect.getFlag("dnd5e", "item.data");
+      const data = effect.getFlag("dnd5e", "item");
       concentration.effects.add(effect);
       if ( data ) {
-        const item = typeof data === "string"
-          ? this.items.get(data)
-          : new Item.implementation(data, { keepId: true, parent: this });
+        let item = this.items.get(data.id);
+        if ( !item && data.data ) item = new Item.implementation(data.data, { keepId: true, parent: this });
         if ( item ) concentration.items.add(item);
       }
     }
@@ -572,6 +584,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ac.shield = shields[0].system.armor.value ?? 0;
       ac.equippedShield = shields[0];
     }
+
+    // Compute cover.
+    ac.cover = Math.max(ac.cover, this.coverBonus);
 
     // Compute total AC and return
     ac.min = simplifyBonus(ac.min, rollData);
@@ -1236,8 +1251,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else if ( target instanceof ActiveEffect5e ) effect = effects.has(target) ? target : null;
     else if ( target instanceof Item5e ) {
       effect = effects.find(e => {
-        const data = e.getFlag("dnd5e", "item.data") ?? {};
-        return (data === target._id) || (data._id === target._id);
+        const data = e.getFlag("dnd5e", "item") ?? {};
+        return (data.id === target._id) || (data.data?._id === target._id);
       });
     }
     if ( !effect ) return [];
@@ -1668,6 +1683,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( globalBonuses.save ) {
       parts.push("@saveBonus");
       data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
+    }
+
+    // Include cover in dexterity saving throws
+    if ( (abilityId === "dex") && data.attributes?.ac?.cover ) {
+      parts.push("@cover");
+      data.cover = data.attributes.ac.cover;
     }
 
     // Add exhaustion reduction

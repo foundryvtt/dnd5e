@@ -311,7 +311,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
       const { config, options } = this._createDeprecatedConfigs(usageConfig, {}, messageConfig);
-      if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return;
+      if ( Hooks.call("dnd5e.preItemUsageConsumption", this.item, config, options) === false ) return;
       this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
     }
 
@@ -342,7 +342,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         itemUpdates: updates.item.find(i => i._id === this.item.id),
         resourceUpdates: updates.item.filter(i => i._id !== this.item.id)
       };
-      if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
+      if ( Hooks.call("dnd5e.itemUsageConsumption", this.item, config, options, usage) === false ) return;
       this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
       updates.actor = usage.actorUpdates;
       updates.delete = usage.deleteIds;
@@ -393,7 +393,12 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       if ( !item ) continue;
       const itemUpdate = {};
       for ( const { keyPath, delta } of changes ) {
-        const value = foundry.utils.getProperty(item, keyPath) - delta;
+        let currentValue;
+        if ( keyPath.startsWith("system.activities") ) {
+          const [id, ...kp] = keyPath.slice(18).split(".");
+          currentValue = foundry.utils.getProperty(item.system.activities?.get(id) ?? {}, kp.join("."));
+        } else currentValue = foundry.utils.getProperty(item, keyPath);
+        const value = currentValue - delta;
         if ( !Number.isNaN(value) ) itemUpdate[keyPath] = value;
       }
       if ( !foundry.utils.isEmpty(itemUpdate) ) {
@@ -425,7 +430,12 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const getDeltas = (document, updates) => {
       updates = foundry.utils.flattenObject(updates);
       return Object.entries(updates).map(([keyPath, value]) => {
-        const delta = value - foundry.utils.getProperty(document, keyPath);
+        let currentValue;
+        if ( keyPath.startsWith("system.activities") ) {
+          const [id, ...kp] = keyPath.slice(18).split(".");
+          currentValue = foundry.utils.getProperty(document.system.activities?.get(id) ?? {}, kp.join("."));
+        } else currentValue = foundry.utils.getProperty(document, keyPath);
+        const delta = value - currentValue;
         if ( delta && !Number.isNaN(delta) ) return { keyPath, delta };
         return null;
       }).filter(_ => _);
@@ -460,13 +470,24 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @internal
    */
   _createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig) {
+    let consumeResource;
+    let consumeUsage;
+    if ( (usageConfig.consume === true) || (usageConfig.consume?.resources === true) ) {
+      consumeResource = consumeUsage = true;
+    } else if ( (usageConfig.consume === false) || (usageConfig.comsume?.resources === false) ) {
+      consumeResource = consumeUsage = false;
+    } else if ( foundry.utils.getType(usageConfig.consume?.resources) === "Array" ) {
+      for ( const index of usageConfig.consume.resources ) {
+        if ( ["activityUses", "itemUses"].includes(this.consumption.targets[index]?.type) ) consumeUsage = true;
+        else consummeResource = true;
+      }
+    }
     return {
       config: {
         createMeasuredTemplate: usageConfig.create?.measuredTemplate ?? null,
-        consumeResource: usageConfig.consume?.resources !== false ?? null,
+        consumeResource,
         consumeSpellSlot: usageConfig.consume?.spellSlot !== false ?? null,
-        consumeUsage: (usageConfig.consume?.resources.includes("itemUses")
-          || usageConfig.consume?.resources.includes("activityUses")) ?? null,
+        consumeUsage,
         slotLevel: usageConfig.spell?.slot ?? null,
         resourceAmount: usageConfig.scaling ?? null,
         beginConcentrating: usageConfig.concentration?.begin ?? false,
@@ -494,13 +515,15 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @internal
    */
   _applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options) {
-    const usageTypes = ["activityUses", "itemUses"];
+    const { resourceIndices, usageIndices } = this.consumption.targets.reduce((o, data, index) => {
+      if ( ["activityUses", "itemUses"].includes(data.type) ) o.usageIndices.push(index);
+      else o.resourceIndices.push(index);
+      return o;
+    }, { resourceIndices: [], usageIndices: [] });
     let resources;
     if ( config.consumeResource && config.consumeUsage ) resources = true;
-    else if ( config.consumeResource && (config.consumeUsage === false) ) {
-      resources = Array.from(Object.keys(CONFIG.DND5E.activityConsumptionTypes)).filter(k => !usageTypes.includes(k));
-    }
-    else if ( (config.consumeResource === false) && config.consumeUsage ) resources = usageTypes;
+    else if ( config.consumeResource && (config.consumeUsage === false) ) resources = resourceIndices;
+    else if ( (config.consumeResource === false) && config.consumeUsage ) resources = usageIndices;
 
     // Set property so long as the value is not undefined
     // Avoids problems with `mergeObject` overwriting values with `undefined`
@@ -652,7 +675,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
 
     // Handle spell slot consumption
-    if ( ((config.consume === true) || config.consume.spellSlot) && this.requiresSpellSlot ) {
+    if ( ((config.consume === true) || config.consume.spellSlot)
+      && this.requiresSpellSlot && this.consumption.spellSlot ) {
       const mode = this.item.system.preparation.mode;
       const isLeveled = ["always", "prepared"].includes(mode);
       const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
@@ -718,7 +742,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @protected
    */
   async _usageChatContext(message) {
-    const data = await this.item.system.getCardData();
+    const data = await this.item.system.getCardData({ activity: this });
     const properties = [...(data.tags ?? []), ...(data.properties ?? [])];
     const supplements = [];
     if ( this.activation.condition ) {

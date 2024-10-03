@@ -640,7 +640,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @inheritDoc */
   _canDragStart(selector) {
-    if ( [".advancement-item", "[data-effect-id]"].includes(selector) ) return true;
+    if ( [".advancement-item", "[data-effect-id]", ".activity[data-activity-id]"].includes(selector) ) return true;
     return this.isEditable;
   }
 

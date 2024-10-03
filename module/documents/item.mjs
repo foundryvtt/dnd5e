@@ -661,10 +661,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const damages = this.labels.damages = [];
     if ( !this.system.activities?.size ) return;
     for ( const activity of this.system.activities ) {
-      if ( activity.activation.type && (this.type !== "spell") ) {
-        const { activation, concentrationDuration, duration, range, target } = activity.labels;
-        activations.push({ activation, concentrationDuration, duration, range, target });
-      }
+      const activationLabels = activity.activationLabels;
+      if ( activationLabels ) activations.push(
+        { ...activationLabels, concentrationDuration: activity.labels.concentrationDuration }
+      );
       if ( activity.type === "attack" ) {
         const { toHit, modifier } = activity.labels;
         attacks.push({ toHit, modifier });
@@ -765,12 +765,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       );
       event = dialog?.event;
     }
-    let activities = this.system.activities?.filter(a => !this.getFlag("dnd5e", "riders.activity")?.includes(a.id));
-    if ( activities.length ) {
+    const activities = this.system.activities?.filter(a => !this.getFlag("dnd5e", "riders.activity")?.includes(a.id));
+    if ( activities?.length ) {
       let usageConfig = config;
       let dialogConfig = dialog;
       let messageConfig = message;
-      activities.sort((a, b) => a.sort - b.sort);
       let activity = activities[0];
       if ( (activities.length > 1) && !event?.shiftKey ) activity = await ActivityChoiceDialog.create(this);
       if ( !activity ) return;
@@ -1641,6 +1640,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const flags = itemData.flags ?? {};
     if ( Number.isNumeric(config.level) ) {
       flags.dnd5e ??= {};
+      flags.dnd5e.scaling = Math.max(0, config.level - spell.system.level);
       flags.dnd5e.spellLevel = {
         value: config.level,
         base: spell.system.level
@@ -1741,7 +1741,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Create the spell scroll data
     const spellScrollData = foundry.utils.mergeObject(scrollData, {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
-      img: itemData.img,
       effects: itemData.effects ?? [],
       flags,
       system: {

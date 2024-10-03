@@ -194,10 +194,11 @@ export default class ActivityUsageDialog extends Dialog5e {
     }];
     if ( this.config.concentration?.begin ) {
       const existingConcentration = Array.from(this.actor.concentration.effects).map(effect => {
-        const data = effect.getFlag("dnd5e", "item.data");
+        const data = effect.getFlag("dnd5e", "item");
         return {
           value: effect.id,
-          label: data?.name ?? this.actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless")
+          label: data?.data?.name ?? this.actor.items.get(data.id)?.name
+            ?? game.i18n.localize("DND5E.ConcentratingItemless")
         };
       });
       if ( existingConcentration.length ) {
@@ -323,6 +324,7 @@ export default class ActivityUsageDialog extends Dialog5e {
       const maximumLevel = Object.values(this.actor.system.spells)
         .reduce((max, d) => d.max ? Math.max(max, d.level) : max, 0);
 
+      let spellSlotValue = this.actor.system.spells[this.config.spell?.slot]?.value ? this.config.spell.slot : null;
       const spellSlotOptions = Object.entries(this.actor.system.spells).map(([value, slot]) => {
         if ( (slot.level < minimumLevel) || (slot.level > maximumLevel) || !slot.type ) return null;
         let label;
@@ -331,13 +333,16 @@ export default class ActivityUsageDialog extends Dialog5e {
         } else {
           label = game.i18n.format(`DND5E.SpellLevel${slot.type.capitalize()}`, { level: slot.level, n: slot.value });
         }
-        return { value, label, disabled: (slot.value === 0) && this.config.consume?.spellSlot };
+        // Set current value if applicable.
+        const disabled = (slot.value === 0) && this.config.consume?.spellSlot;
+        if ( !disabled && !spellSlotValue ) spellSlotValue = value;
+        return { value, label, disabled, selected: spellSlotValue === value };
       }).filter(o => o);
 
       if ( spellSlotOptions ) context.spellSlots = {
         field: new StringField({ label: game.i18n.localize("DND5E.SpellCastUpcast") }),
         name: "spell.slot",
-        value: this.config.spell?.slot,
+        value: spellSlotValue,
         options: spellSlotOptions
       };
 

@@ -208,7 +208,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
-    if ( this.armor.value ) {
+    if ( this.armor.value && (this.isArmor || (this.type.value === "shield")) ) {
       context.properties.active.shift();
       context.info = [{
         label: "DND5E.ArmorClass",
