@@ -97,7 +97,10 @@ export default class BasicRoll extends Roll {
       rolls = await DialogClass.configure(config, dialog, message);
     }
 
-    for ( const roll of rolls ) await roll.evaluate();
+    for ( const roll of rolls ) {
+      roll.options.appearance = { colorset: roll.options.type };
+      await roll.evaluate();
+    }
 
     if ( rolls?.length && (message.create !== false) ) {
       await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
