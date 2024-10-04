@@ -872,8 +872,17 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 /**
  * @callback ConsumptionLabelsFunction
  * @this {ConsumptionTargetData}
- * @param {ActivityUseConfiguration} config    Configuration data for the activity usage.
- * @returns {{ label: string, hint: string }}  Label and hint text.
+ * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
+ * @param {boolean} consumed                 Is this consumption currently set to be consumed?
+ * @returns {ConsumptionLabels}
+ */
+
+/**
+ * @typedef ConsumptionLabels
+ * @property {string} label      Label displayed for the consumption checkbox.
+ * @property {string} hint       Hint text describing what should be consumed.
+ * @property {{ type: string, message: string }} [notes]  Additional notes relating to the consumption to be performed.
+ * @property {boolean} [warn]    Display a warning icon indicating consumption will fail.
  */
 
 /**
