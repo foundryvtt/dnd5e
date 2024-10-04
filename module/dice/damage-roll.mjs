@@ -45,6 +45,8 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
  * @property {string} [powerfulCritical]  Maximize result of extra dice added by critical, rather than rolling.
  */
 
+/* -------------------------------------------- */
+
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
  * @param {string} formula                  The string formula to parse.
