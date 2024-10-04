@@ -179,10 +179,12 @@
 
         .xp-bar {
           --bar-percentage: 0%;
-          border: 2px solid var(--dnd5e-color-gold);
+          border: 1px solid var(--dnd5e-color-gold);
+          border-radius: 3px;
           background: black;
           width: 100%;
           height: 8px;
+          overflow: hidden;
 
           &::after {
             content: "";
