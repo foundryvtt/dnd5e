@@ -1752,6 +1752,7 @@ DND5E.validProperties = {
     "weightlessContents"
   ]),
   equipment: new Set([
+    "ada",
     "mgc",
     "stealthDisadvantage"
   ]),
