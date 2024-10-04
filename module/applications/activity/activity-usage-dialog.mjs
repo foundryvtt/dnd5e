@@ -14,6 +14,8 @@ export default class ActivityUsageDialog extends Dialog5e {
     this.#config = options.config;
   }
 
+  /* -------------------------------------------- */
+
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["activity-usage"],
@@ -37,6 +39,8 @@ export default class ActivityUsageDialog extends Dialog5e {
       width: 420
     }
   };
+
+  /* -------------------------------------------- */
 
   /** @override */
   static PARTS = {
@@ -356,14 +360,15 @@ export default class ActivityUsageDialog extends Dialog5e {
     else if ( this.activity.consumption.scaling.allowed && (this.config.scaling !== false) ) {
       const scale = this.activity.consumption.scaling;
       const max = scale.max ? simplifyBonus(scale.max, this.activity.getRollData({ deterministic: true })) : Infinity;
-      context.scaling = {
-        field: new NumberField({ min: 1, max: max, label: game.i18n.localize("DND5E.ScalingValue") }),
+      if ( max > 1 ) context.scaling = {
+        field: new NumberField({ min: 1, max, label: game.i18n.localize("DND5E.ScalingValue") }),
         name: "scalingValue",
         // Config stores the scaling increase, but scaling value (increase + 1) is easier to understand in the UI
         value: Math.clamp((this.config.scaling ?? 0) + 1, 1, max),
         max,
         showRange: max <= 20
       };
+      else context.hasScaling = false;
     }
 
     else {
