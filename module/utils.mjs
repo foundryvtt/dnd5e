@@ -66,6 +66,20 @@ function _formatNumberAsNumerals(n) {
 /* -------------------------------------------- */
 
 /**
+ * Produce a number with the parts wrapped in their own spans.
+ * @param {number} value      A number for format.
+ * @param {object} [options]  Formatting options.
+ * @returns {string}
+ */
+export function formatNumberParts(value, options) {
+  if ( options.numerals ) throw new Error("Cannot segment numbers when formatted as numerals.");
+  return new Intl.NumberFormat(game.i18n.lang, options).formatToParts(value)
+    .reduce((str, { type, value }) => `${str}<span class="${type}">${value}</span>`, "");
+}
+
+/* -------------------------------------------- */
+
+/**
  * A helper for using Intl.NumberFormat within handlebars for format a range.
  * @param {number} min      The lower end of the range.
  * @param {number} max      The upper end of the range.
@@ -708,6 +722,7 @@ export function registerHandlebarsHelpers() {
     "dnd5e-itemContext": itemContext,
     "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
+    "dnd5e-numberParts": (context, options) => formatNumberParts(context, options.hash),
     "dnd5e-object": makeObject,
     "dnd5e-textFormat": formatText
   });

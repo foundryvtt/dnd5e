@@ -4,9 +4,6 @@ import { splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 
 import ActorArmorConfig from "./armor-config.mjs";
-import ConcentrationConfig from "./config/concentration-config.mjs";
-import ActorHitDiceConfig from "./hit-dice-config.mjs";
-import ActorHitPointsConfig from "./hit-points-config.mjs";
 import ActorInitiativeConfig from "./initiative-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
 import ActorSensesConfig from "./senses-config.mjs";
@@ -22,7 +19,10 @@ import ActorSheetMixin from "./sheet-mixin.mjs";
 import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
 
 import AbilityConfig from "./config/ability-config.mjs";
+import ConcentrationConfig from "./config/concentration-config.mjs";
 import DamagesConfig from "./config/damages-config.mjs";
+import HitDiceConfig from "./config/hit-dice-config.mjs";
+import HitPointsConfig from "./config/hit-points-config.mjs";
 import SkillToolConfig from "./config/skill-tool-config.mjs";
 import SkillsConfig from "./config/skills-config.mjs";
 import ToolsConfig from "./config/tools-config.mjs";
@@ -751,10 +751,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         app = new ActorArmorConfig(this.actor);
         break;
       case "hitDice":
-        app = new ActorHitDiceConfig(this.actor);
+        app = new HitDiceConfig({ document: this.actor });
         break;
       case "hitPoints":
-        app = new ActorHitPointsConfig(this.actor);
+        app = new HitPointsConfig({ document: this.actor });
         break;
       case "initiative":
         app = new ActorInitiativeConfig(this.actor);

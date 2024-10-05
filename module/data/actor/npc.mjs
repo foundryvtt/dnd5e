@@ -95,7 +95,9 @@ export default class NPCData extends CreatureTemplate {
             nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.HitPointsMax"
           }),
           temp: new NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
-          tempmax: new NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
+          tempmax: new NumberField({
+            integer: true, initial: 0, label: "DND5E.HitPointsTempMax", hint: "DND5E.HitPointsTempMaxHint"
+          }),
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
         }, {label: "DND5E.HitPoints"}),
         death: new RollConfigField({

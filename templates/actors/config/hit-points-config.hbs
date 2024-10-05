@@ -1,0 +1,63 @@
+<section class="flexcol">
+    <div class="total-hp">{{ dnd5e-numberFormat data.value }} / {{ dnd5e-numberFormat data.effectiveMax }}</div>
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.HitPointsMax" }}</legend>
+        {{#if showCalculation}}
+        {{#if showMaxInCalculation}}
+        {{ formField fields.max value=source.max localize=true }}
+        {{/if}}
+        {{#with fields.bonuses.fields.overall as |field|}}
+        {{ formField field value=../source.bonuses.overall localize=true }}
+        {{/with}}
+        {{#each classes}}
+        <div class="form-group">
+            <label>{{ name }}</label>
+            <div class="form-fields">
+                {{{ dnd5e-numberParts total signDisplay="always" }}}
+            </div>
+        </div>
+        {{/each}}
+        {{#if ability}}
+        <div class="form-group">
+            <label>{{ ability.name }}</label>
+            <div class="form-fields">
+                {{{ dnd5e-numberParts ability.mod signDisplay="always" }}}
+                <span class="multiplier"><span class="times">&times;</span> {{ dnd5e-numberFormat levels }}</span>
+            </div>
+        </div>
+        {{/if}}
+        {{#with fields.bonuses.fields.level as |field|}}
+        <div class="form-group">
+            <label>{{ localize field.label }}</label>
+            <div class="form-fields">
+                <span class="plusSign">+</span>
+                {{ formInput field value=../source.bonuses.level }}
+                <span class="multiplier"><span class="times">&times;</span> {{ dnd5e-numberFormat ../levels }}</span>
+            </div>
+        </div>
+        {{/with}}
+        <hr>
+        {{/if}}
+        {{#unless showMaxInCalculation}}
+        {{ formField fields.max value=source.max localize=true }}
+        {{/unless}}
+        {{ formField fields.tempmax value=source.tempmax localize=true }}
+        {{#if fields.formula}}
+        <div class="form-group">
+            <label>{{ localize fields.formula.label }}</label>
+            <div class="form-fields">
+                {{ formInput fields.formula value=source.formula }}
+                <button type="button" class="unbutton" data-action="roll">
+                    <i class="fa-solid fa-dice-d20" inert></i>
+                    {{ localize "DND5E.Roll" }}
+                </button>
+            </div>
+        </div>
+        {{/if}}
+    </fieldset>
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.HitPointsCurrent" }}</legend>
+        {{ formField fields.value value=source.value localize=true }}
+        {{ formField fields.temp value=source.temp localize=true }}
+    </fieldset>
+</section>
