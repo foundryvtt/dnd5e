@@ -1590,6 +1590,19 @@ preLocalize("armorTypes");
 /* -------------------------------------------- */
 
 /**
+ * Specific equipment types that modify base AC.
+ * @enum {string}
+ */
+DND5E.armorMaxDex = {
+  light: null,
+  medium: 2,
+  heavy: 0,
+  natural: null
+};
+
+/* -------------------------------------------- */
+
+/**
  * Equipment types that aren't armor.
  * @enum {string}
  */
@@ -1991,6 +2004,9 @@ DND5E.itemProperties = {
     icon: "systems/dnd5e/icons/svg/properties/magical.svg",
     isPhysical: true
   },
+  noMaxDex: {
+    label: "DND5E.Item.Property.NoMaxDexBonus"
+  },
   rch: {
     label: "DND5E.Item.Property.Reach"
   },
@@ -2063,6 +2079,7 @@ DND5E.validProperties = {
     "ada",
     "foc",
     "mgc",
+    "noMaxDex",
     "stealthDisadvantage"
   ]),
   feat: new Set([
