@@ -250,12 +250,16 @@ export default class ActivityUsageDialog extends Dialog5e {
       context.resources = [];
       const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
       for ( const [index, target] of this.activity.consumption.targets.entries() ) {
+        const value = (isArray && this.config.consume.resources.includes(index))
+          || (!isArray && (this.config.consume?.resources !== false) && (this.config.consume !== false));
+        const { label, hint, notes, warn } = target.getConsumptionLabels(this.config, value);
+        if ( notes?.length ) context.notes.push(...notes);
         context.resources.push({
-          field: new BooleanField(target.getConsumptionLabels(this.config)),
+          field: new BooleanField({ label, hint }),
+          input: context.inputs.createCheckboxInput,
           name: `consume.resources.${index}`,
-          value: (isArray && this.config.consume.resources.includes(index))
-            || (!isArray && (this.config.consume?.resources !== false) && (this.config.consume !== false)),
-          input: context.inputs.createCheckboxInput
+          value,
+          warn: value ? warn : false
         });
       }
     }
