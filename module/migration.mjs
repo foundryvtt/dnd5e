@@ -524,6 +524,14 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
     updateData["flags.dnd5e.-=migratedProperties"] = null;
   }
 
+  // Migrate no-max-dex medium armor to use the property
+  if ( itemData.system?.armor && itemData.system.type?.value === "medium" && itemData.system.armor.dex === null
+    && foundry.utils.isNewerVersion("4.1.0", itemData._stats?.systemVersion) ) {
+    const properties = new Set(foundry.utils.getProperty(itemData, "system.properties") ?? [])
+      .union(new Set(updateData["system.properties"] ?? []));
+    updateData["system.properties"] = Array.from(properties).concat(["noMaxDex"]);
+  }
+
   if ( foundry.utils.getProperty(itemData, "flags.dnd5e.persistSourceMigration") ) {
     flags.persistSourceMigration = true;
     updateData["flags.dnd5e.-=persistSourceMigration"] = null;
