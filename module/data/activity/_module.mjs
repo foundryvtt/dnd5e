@@ -1,6 +1,7 @@
 export {default as BaseActivityData} from "./base-activity.mjs";
 
 export {default as AttackActivityData} from "./attack-data.mjs";
+export {default as CastActivityData} from "./cast-data.mjs";
 export {default as CheckActivityData} from "./check-data.mjs";
 export {default as DamageActivityData} from "./damage-data.mjs";
 export {default as EnchantActivityData} from "./enchant-data.mjs";

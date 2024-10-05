@@ -699,8 +699,9 @@ export default class ItemSheet5e extends ItemSheet {
         return this._onDropActiveEffect(event, data);
       case "Activity":
         return this._onDropActivity(event, data);
-      case "Advancement":
       case "Item":
+        return this._onDropItem(event, data);
+      case "Advancement":
         return this._onDropAdvancement(event, data);
     }
   }
