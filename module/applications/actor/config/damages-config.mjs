@@ -1,14 +1,14 @@
+import SelectChoices from "../../../documents/actor/select-choices.mjs";
 import * as Trait from "../../../documents/actor/trait.mjs";
 import TraitsConfig from "./traits-config.mjs";
 
 /**
- * Configuration application for weapon proficiencies and masteries.
+ * Configuration application for actor's damage resistances, immunities, and vulnerabilities.
  */
-export default class WeaponsConfig extends TraitsConfig {
+export default class DamagesConfig extends TraitsConfig {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["weapons"],
-    trait: "weapon"
+    classes: ["damages-config"]
   };
 
   /* -------------------------------------------- */
@@ -16,7 +16,7 @@ export default class WeaponsConfig extends TraitsConfig {
   /** @override */
   static PARTS = {
     traits: {
-      template: "systems/dnd5e/templates/actors/config/weapons-config.hbs"
+      template: "systems/dnd5e/templates/actors/config/damages-config.hbs"
     }
   };
 
@@ -25,8 +25,8 @@ export default class WeaponsConfig extends TraitsConfig {
   /* -------------------------------------------- */
 
   /** @override */
-  get title() {
-    return game.i18n.localize("TYPES.Item.weaponPl");
+  get otherLabel() {
+    return game.i18n.localize("DND5E.DamageTypes");
   }
 
   /* -------------------------------------------- */
@@ -34,12 +34,13 @@ export default class WeaponsConfig extends TraitsConfig {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _processChoice(data, key, choice, categoryChosen=false) {
-    super._processChoice(data, key, choice, categoryChosen);
-    choice.mastery = {
-      chosen: data.mastery.value?.includes(key),
-      disabled: !choice.chosen
-    };
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    context.bypasses = new SelectChoices(Object.entries(CONFIG.DND5E.itemProperties).reduce((obj, [k, v]) => {
+      if ( v.isPhysical ) obj[k] = { label: v.label, chosen: context.data.bypasses.includes(k) };
+      return obj;
+    }, {}));
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -49,7 +50,7 @@ export default class WeaponsConfig extends TraitsConfig {
   /** @inheritDoc */
   _processFormData(event, form, formData) {
     const submitData = super._processFormData(event, form, formData);
-    this._filterData(submitData, `${Trait.actorKeyPath(this.options.trait)}.mastery.value`);
+    this._filterData(submitData, `${Trait.actorKeyPath(this.options.trait)}.bypasses`);
     return submitData;
   }
 }

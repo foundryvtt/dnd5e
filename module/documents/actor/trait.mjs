@@ -24,6 +24,21 @@ function _innerLabel(data, config) {
 /* -------------------------------------------- */
 
 /**
+ * Get the schema fields for this trait on the actor.
+ * @param {Actor5e} actor  Actor for which to get the fields.
+ * @param {string} trait   Trait as defined in `CONFIG.DND5E.traits`.
+ * @returns {object|void}
+ */
+export function actorFields(actor, trait) {
+  const keyPath = actorKeyPath(trait);
+  return (keyPath.startsWith("system.")
+    ? actor.system.schema.getField(keyPath.slice(7))
+    : actor.schema.getField(keyPath))?.fields;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Get the key path to the specified trait on an actor.
  * @param {string} trait  Trait as defined in `CONFIG.DND5E.traits`.
  * @returns {string}      Key path to this trait's object within an actor's system data.
