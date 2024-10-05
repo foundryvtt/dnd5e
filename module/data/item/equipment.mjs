@@ -224,6 +224,8 @@ export default class EquipmentData extends ItemDataModel.mixin(
         classes: "info-lg",
         value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
       }];
+      const defaultMaxAbility = CONFIG.DND5E.armorMaxAbility[this.type.value];
+      context.maxAbilityPlaceholder = Number.isInteger(defaultMaxAbility) ? defaultMaxAbility.toString() : "∞";
     }
     context.parts = ["dnd5e.details-equipment", "dnd5e.field-uses"];
   }
@@ -301,6 +303,17 @@ export default class EquipmentData extends ItemDataModel.mixin(
     const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
     const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get validProperties() {
+    const valid = super.validProperties;
+    if ( this.armor.value && this.isArmor && (this.type.value !== "shield") ) {
+      valid.add("uncappedAbility");
+    }
+    return valid;
   }
 
   /* -------------------------------------------- */

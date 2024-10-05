@@ -1590,10 +1590,10 @@ preLocalize("armorTypes");
 /* -------------------------------------------- */
 
 /**
- * Specific equipment types that modify base AC.
- * @enum {string}
+ * Maximum ability bonus per type of armor
+ * @enum {number|null}
  */
-DND5E.armorMaxDex = {
+DND5E.armorMaxAbility = {
   light: null,
   medium: 2,
   heavy: 0,
@@ -2004,9 +2004,6 @@ DND5E.itemProperties = {
     icon: "systems/dnd5e/icons/svg/properties/magical.svg",
     isPhysical: true
   },
-  noMaxDex: {
-    label: "DND5E.Item.Property.NoMaxDexBonus"
-  },
   rch: {
     label: "DND5E.Item.Property.Reach"
   },
@@ -2047,6 +2044,9 @@ DND5E.itemProperties = {
   two: {
     label: "DND5E.Item.Property.TwoHanded"
   },
+  uncappedAbility: {
+    label: "DND5E.Item.Property.UncappedAbility"
+  },
   ver: {
     label: "DND5E.Item.Property.Versatile"
   },
@@ -2079,7 +2079,6 @@ DND5E.validProperties = {
     "ada",
     "foc",
     "mgc",
-    "noMaxDex",
     "stealthDisadvantage"
   ]),
   feat: new Set([

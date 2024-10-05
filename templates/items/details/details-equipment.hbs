@@ -28,7 +28,7 @@
             {{!-- Max Dex --}}
             {{#if hasDexModifier}}
             {{ formField fields.armor.fields.dex value=source.armor.dex label="DND5E.ItemEquipmentDexModAbbr"
-                         placeholder=(ifThen (and (gte (lookup config.armorMaxDex source.type.value) 0) (ne (lookup config.armorMaxDex source.type.value) null)) (dnd5e-numberFormat (lookup config.armorMaxDex source.type.value)) "∞") localize=true classes="label-top" }}
+                         placeholder=maxAbilityPlaceholder localize=true classes="label-top" }}
             {{/if}}
 
             {{!-- Strength Requirement --}}
