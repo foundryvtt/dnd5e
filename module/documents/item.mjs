@@ -1291,29 +1291,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
 
-    // Create class identifier based on name
-    if ( this.system.hasOwnProperty("identifier") && !this.system.identifier ) {
-      await this.updateSource({ "system.identifier": this.identifier });
+    // Create identifier based on name
+    if ( this.system.hasOwnProperty("identifier") && !data.system?.identifier ) {
+      this.updateSource({ "system.identifier": this.identifier });
     }
-
-    if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
-    const isNPC = this.parent.type === "npc";
-    let updates;
-    switch (data.type) {
-      case "equipment":
-        updates = this._onCreateOwnedEquipment(data, isNPC);
-        break;
-      case "spell":
-        updates = this._onCreateOwnedSpell(data, isNPC);
-        break;
-      case "weapon":
-        updates = this._onCreateOwnedWeapon(data, isNPC);
-        break;
-      case "feat":
-        updates = this._onCreateOwnedFeature(data, isNPC);
-        break;
-    }
-    if ( updates ) return this.updateSource(updates);
   }
 
   /* -------------------------------------------- */
@@ -1321,45 +1302,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
-
-    if ( foundry.utils.hasProperty(changed, "system.container") ) {
-      options.formerContainer = (await this.container)?.uuid;
-    }
-
-    if ( changed.system?.activities ) {
-      const riders = this.clone(changed).system.activities.getByType("enchant").reduce((riders, a) => {
-        a.effects.forEach(e => {
-          e.riders.activity.forEach(activity => riders.activity.add(activity));
-          e.riders.effect.forEach(effect => riders.effect.add(effect));
-        });
-        return riders;
-      }, { activity: new Set(), effect: new Set() });
-      foundry.utils.setProperty(changed, "flags.dnd5e.riders", {
-        activity: Array.from(riders.activity), effect: Array.from(riders.effect)
-      });
-    }
-
-    if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
-
-    // Check to make sure the updated class level isn't below zero
-    if ( changed.system.levels <= 0 ) {
-      ui.notifications.warn("DND5E.MaxClassLevelMinimumWarn", {localize: true});
-      changed.system.levels = 1;
-    }
-
-    // Check to make sure the updated class level doesn't exceed level cap
-    if ( changed.system.levels > CONFIG.DND5E.maxLevel ) {
-      ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));
-      changed.system.levels = CONFIG.DND5E.maxLevel;
-    }
-    if ( !this.isEmbedded || (this.parent.type !== "character") ) return;
-
-    // Check to ensure the updated character doesn't exceed level cap
-    const newCharacterLevel = this.actor.system.details.level + (changed.system.levels - this.system.levels);
-    if ( newCharacterLevel > CONFIG.DND5E.maxLevel ) {
-      ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));
-      changed.system.levels -= newCharacterLevel - CONFIG.DND5E.maxLevel;
-    }
+    await this.system.preUpdateActivities?.(changed, options, user);
   }
 
   /* -------------------------------------------- */
@@ -1368,88 +1311,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   async _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( userId !== game.user.id ) return;
-
-    // Delete a container's contents when it is deleted
-    const contents = await this.system.allContainedItems;
-    if ( contents?.size && options.deleteContents ) {
-      await Item.deleteDocuments(Array.from(contents.map(i => i.id)), { pack: this.pack, parent: this.parent });
-    }
-
-    // End concentration on any effects.
     this.parent?.endConcentration?.(this);
-
-    // Assign a new original class
-    if ( this.parent && (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
-      this.parent._assignPrimaryClass();
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Pre-creation logic for the automatic configuration of owned equipment type Items.
-   *
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedEquipment(data, isNPC) {
-    const updates = {};
-    if ( foundry.utils.getProperty(data, "system.equipped") === undefined ) {
-      updates["system.equipped"] = isNPC;  // NPCs automatically equip equipment
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Pre-creation logic for the automatic configuration of owned spell type Items.
-   *
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedSpell(data, isNPC) {
-    const updates = {};
-    if ( foundry.utils.getProperty(data, "system.preparation.prepared") === undefined ) {
-      updates["system.preparation.prepared"] = isNPC; // NPCs automatically prepare spells
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Pre-creation logic for the automatic configuration of owned weapon type Items.
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object|void}     Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedWeapon(data, isNPC) {
-    if ( !isNPC ) return;
-    // NPCs automatically equip items.
-    const updates = {};
-    if ( !foundry.utils.hasProperty(data, "system.equipped") ) updates["system.equipped"] = true;
-    return updates;
-  }
-
-  /**
-   * Pre-creation logic for the automatic configuration of owned feature type Items.
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedFeature(data, isNPC) {
-    const updates = {};
-    if ( isNPC && !foundry.utils.getProperty(data, "system.type.value") ) {
-      updates["system.type.value"] = "monster"; // Set features on NPCs to be 'monster features'.
-    }
-    return updates;
   }
 
   /* -------------------------------------------- */

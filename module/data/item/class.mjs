@@ -225,4 +225,44 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
       await actor.update({ "system.attributes.spellcasting": this.parent.spellcasting.ability });
     }
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    if ( !("levels" in (changed.system ?? {})) ) return;
+
+    // Check to make sure the updated class level isn't below zero
+    if ( changed.system.levels <= 0 ) {
+      ui.notifications.warn("DND5E.MaxClassLevelMinimumWarn", { localize: true });
+      changed.system.levels = 1;
+    }
+
+    // Check to make sure the updated class level doesn't exceed level cap
+    if ( changed.system.levels > CONFIG.DND5E.maxLevel ) {
+      ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", { max: CONFIG.DND5E.maxLevel }));
+      changed.system.levels = CONFIG.DND5E.maxLevel;
+    }
+
+    if ( this.parent.actor?.type !== "character" ) return;
+
+    // Check to ensure the updated character doesn't exceed level cap
+    const newCharacterLevel = this.parent.actor.system.details.level + (changed.system.levels - this.levels);
+    if ( newCharacterLevel > CONFIG.DND5E.maxLevel ) {
+      ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", { max: CONFIG.DND5E.maxLevel }));
+      changed.system.levels -= newCharacterLevel - CONFIG.DND5E.maxLevel;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDelete(options, userId) {
+    await super._onDelete(options, userId);
+    if ( (userId !== game.user.id) ) return;
+    if ( this.parent.id === this.parent.actor?.system.details?.originalClass ) {
+      await this.parent.actor._assignPrimaryClass();
+    }
+  }
 }

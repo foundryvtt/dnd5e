@@ -213,7 +213,18 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
+    if ( foundry.utils.hasProperty(changed, "system.container") ) {
+      options.formerContainer = (await this.parent.container)?.uuid;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
     this._renderContainers();
   }
 
@@ -221,6 +232,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
 
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
     this._renderContainers({ formerContainer: options.formerContainer });
   }
 
@@ -228,6 +240,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
 
   /** @inheritDoc */
   _onDelete(options, userId) {
+    super._onDelete(options, userId);
     this._renderContainers();
   }
 
