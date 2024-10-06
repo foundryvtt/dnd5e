@@ -135,7 +135,7 @@ export default class AttributesFields {
     ac.shield = ac.cover = 0;
     ac.min = ac.bonus = "";
     ac.ability = {};
-    for ( const k of Object.keys(CONFIG.DND5E.armorMaxAbility) ) ac.ability[k] = "";
+    for ( const [k, v] of Object.entries(CONFIG.DND5E.armorTypes) ) if ( v.maxAbility !== undefined ) ac.ability[k] = "";
     ac.bonuses = {
       armored: "", unarmored: ""
     };
@@ -200,7 +200,7 @@ export default class AttributesFields {
           });
           const armorData = armors[0].system.armor;
           const armorType = armors[0].system.type.value;
-          const currMaxDex = armorData.dex ?? CONFIG.DND5E.armorMaxAbility[armorType] ?? Infinity;
+          const currMaxDex = armorData.dex ?? CONFIG.DND5E.armorTypes[armorType]?.maxAbility ?? Infinity;
           const maxDexBonus = simplifyBonus(ac.ability[armorType]);
           const newMaxDex = armors[0].system.properties.has("uncappedAbility") ? Infinity : currMaxDex + maxDexBonus;
           ac.armor = armorData.value ?? ac.armor;

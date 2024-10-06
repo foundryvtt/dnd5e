@@ -224,7 +224,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
         classes: "info-lg",
         value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
       }];
-      const defaultMaxAbility = CONFIG.DND5E.armorMaxAbility[this.type.value];
+      const defaultMaxAbility = CONFIG.DND5E.armorTypes[this.type.value]?.maxAbility;
       context.maxAbilityPlaceholder = Number.isInteger(defaultMaxAbility) ? defaultMaxAbility.toString() : "∞";
     }
     context.parts = ["dnd5e.details-equipment", "dnd5e.field-uses"];
