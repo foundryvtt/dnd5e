@@ -1576,7 +1576,7 @@ preLocalize("enchantmentPeriods", { key: "label" });
 
 /**
  * Specific equipment types that modify base AC.
- * @enum {string}
+ * @enum {{ label: string, [maxAbility]: (number|null) }}
  */
 DND5E.armorTypes = {
   light: {
