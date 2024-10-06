@@ -5,9 +5,11 @@
         {{#if showCalculation}}
         {{#if showMaxInCalculation}}
         {{ formField fields.max value=source.max localize=true }}
+        {{> ".effects" effects=effects.max }}
         {{/if}}
         {{#with fields.bonuses.fields.overall as |field|}}
         {{ formField field value=../source.bonuses.overall localize=true }}
+        {{> ".effects" effects=../effects.overall }}
         {{/with}}
         {{#each classes}}
         <div class="form-group">
@@ -22,7 +24,7 @@
             <label>{{ ability.name }}</label>
             <div class="form-fields">
                 {{{ dnd5e-numberParts ability.mod signDisplay="always" }}}
-                <span class="multiplier"><span class="times">&times;</span> {{ dnd5e-numberFormat levels }}</span>
+                {{{ @root.levelMultiplier }}}
             </div>
         </div>
         {{/if}}
@@ -32,14 +34,16 @@
             <div class="form-fields">
                 <span class="plusSign">+</span>
                 {{ formInput field value=../source.bonuses.level }}
-                <span class="multiplier"><span class="times">&times;</span> {{ dnd5e-numberFormat ../levels }}</span>
+                {{{ @root.levelMultiplier }}}
             </div>
         </div>
+        {{> ".effects" effects=../effects.bonuses multiplier=@root.levelMultiplier }}
         {{/with}}
         <hr>
         {{/if}}
         {{#unless showMaxInCalculation}}
         {{ formField fields.max value=source.max localize=true }}
+        {{> ".effects" effects=effects.max }}
         {{/unless}}
         {{ formField fields.tempmax value=source.tempmax localize=true }}
         {{#if fields.formula}}
@@ -61,3 +65,16 @@
         {{ formField fields.temp value=source.temp localize=true }}
     </fieldset>
 </section>
+
+{{#*inline ".effects"}}
+{{#each effects}}
+<div class="form-group">
+    <label>{{ label }}</label>
+    <div class="form-fields">
+        <span class="plusSign">+</span>
+        <span class="integer">{{ value }}</span>
+        {{{ ../multiplier }}}
+    </div>
+</div>
+{{/each}}
+{{/inline}}

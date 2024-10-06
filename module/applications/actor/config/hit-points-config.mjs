@@ -1,3 +1,4 @@
+import { formatNumber } from "../../../utils.mjs";
 import BaseConfigSheet from "../api/base-config-sheet.mjs";
 
 /**
@@ -40,22 +41,39 @@ export default class HitPointsConfig extends BaseConfigSheet {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
+    context.data = this.document.system.attributes.hp;
+    context.fields = this.document.system.schema.fields.attributes.fields.hp.fields;
+    context.source = this.document.system.toObject().attributes.hp;
+
+    // Display positive ability modifier as its own row, but if negative merge into classes totals
     const ability = CONFIG.DND5E.abilities[CONFIG.DND5E.defaultAbilities.hitPoints];
     const mod = this.document.system.abilities?.[CONFIG.DND5E.defaultAbilities.hitPoints]?.mod ?? 0;
-    // Display positive ability modifier as its own row, but if negative merge into classes totals
     if ( ability && (mod > 0) ) context.ability = {
       mod: this.document.system.abilities?.[CONFIG.DND5E.defaultAbilities.hitPoints]?.mod ?? 0,
       name: ability.label
     };
+
+    // Summarize HP from classes
     context.classes = Object.values(this.document.classes).map(cls => ({
       id: cls.id,
       name: cls.name,
       total: cls.advancement.byType.HitPoints?.[0]?.[mod > 0 ? "total" : "getAdjustedTotal"](mod) ?? 0
     })).sort((lhs, rhs) => rhs.name - lhs.name);
-    context.data = this.document.system.attributes.hp;
-    context.source = this.document.system.toObject().attributes.hp;
-    context.fields = this.document.system.schema.fields.attributes.fields.hp.fields;
+
+    // Display active effects targeting bonus fields
+    context.effects = {
+      bonuses: this.document._prepareActiveEffectAttributions("system.attributes.hp.bonuses.level")
+        .filter(e => e.mode === CONST.ACTIVE_EFFECT_MODES.ADD),
+      max: this.document._prepareActiveEffectAttributions("system.attributes.hp.max")
+        .filter(e => e.mode === CONST.ACTIVE_EFFECT_MODES.ADD),
+      overall: this.document._prepareActiveEffectAttributions("system.attributes.hp.bonuses.overall")
+        .filter(e => e.mode === CONST.ACTIVE_EFFECT_MODES.ADD)
+    };
+
     context.levels = this.document.system.details?.level ?? 0;
+    context.levelMultiplier = `
+      <span class="multiplier"><span class="times">&times;</span> ${formatNumber(context.levels)}</span>
+    `;
     context.showCalculation = context.classes.length || context.fields.bonuses;
     context.showMaxInCalculation = context.showCalculation && (this.document.type === "npc");
     return context;
