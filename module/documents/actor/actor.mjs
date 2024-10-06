@@ -3404,14 +3404,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
+
+    const isHpUpdate = !!data.system?.attributes?.hp
+
     if ( userId === game.userId ) {
-      await this.updateBloodied(options);
+      if ( isHpUpdate ) await this.updateBloodied(options);
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
     }
 
     const hp = options.dnd5e?.hp;
-    if ( hp && !options.isRest && !options.isAdvancement ) {
+    if ( isHpUpdate && hp && !options.isRest && !options.isAdvancement ) {
       const curr = this.system.attributes.hp;
       const changes = {
         hp: curr.value - hp.value,
