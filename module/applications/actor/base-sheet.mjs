@@ -4,7 +4,6 @@ import { splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
-import ActorArmorConfig from "./armor-config.mjs";
 import ActorConcentrationConfig from "./concentration-config.mjs";
 import ActorInitiativeConfig from "./initiative-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
@@ -23,6 +22,7 @@ import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
 
+import ArmorClassConfig from "./config/armor-class-config.mjs";
 import HitDiceConfig from "./config/hit-dice-config.mjs";
 import HitPointsConfig from "./config/hit-points-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
@@ -746,7 +746,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     let app;
     switch ( button.dataset.action ) {
       case "armor":
-        app = new ActorArmorConfig(this.actor);
+        app = new ArmorClassConfig({ document: this.actor });
         break;
       case "hitDice":
         app = new HitDiceConfig({ document: this.actor });
@@ -1256,7 +1256,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( !a || !a.dataset.target ) return;
     switch ( a.dataset.target ) {
       case "armor":
-        (new ActorArmorConfig(this.actor)).render(true);
+        new ArmorClassConfig({ document: this.actor }).render({ force: true });
         return;
       default:
         const item = await fromUuid(a.dataset.target);

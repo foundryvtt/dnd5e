@@ -29,7 +29,7 @@ export default class HitPointsConfig extends BaseConfigSheet {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /** @override */
   get title() {
     return game.i18n.localize("DND5E.HitPoints");
   }
