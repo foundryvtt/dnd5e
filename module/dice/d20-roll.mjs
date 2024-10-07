@@ -38,6 +38,7 @@ const { Die, NumericTerm, OperatorTerm } = foundry.dice.terms;
  * @param {object} [options={}]                  Extra optional arguments which describe or modify the D20Roll
  * @param {number} [options.advantageMode]       What advantage modifier to apply to the roll (none, advantage,
  *                                               disadvantage)
+ * @param {number} [options.faces]               The number of faces on the base die.
  * @param {number} [options.critical]            The value of d20 result which represents a critical success
  * @param {number} [options.fumble]              The value of d20 result which represents a critical failure
  * @param {(number)} [options.targetValue]       Assign a target value against which the result of this roll should be
@@ -117,7 +118,7 @@ export default class D20Roll extends Roll {
    * @type {boolean}
    */
   get validD20Roll() {
-    return (this.terms[0] instanceof Die) && (this.terms[0].faces === 20);
+    return (this.terms[0] instanceof Die) && (this.terms[0].faces === this.options.faces);
   }
 
   /* -------------------------------------------- */

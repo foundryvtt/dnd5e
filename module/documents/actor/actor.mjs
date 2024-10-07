@@ -1923,7 +1923,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( flags.initiativeAdv || remarkableAthlete ) options.advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
 
     // Standard initiative formula
-    const parts = ["1d20"];
+    const parts = [`1d${options.faces ?? 20}`];
 
     // Special initiative bonuses
     if ( init ) {
@@ -1992,6 +1992,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor
    */
   async rollInitiativeDialog(rollOptions={}) {
+    Hooks.call("dnd5e.preRollInitiativeDialog", this, rollOptions);
+
     // Create and configure the Initiative roll
     const roll = this.getInitiativeRoll(rollOptions);
     const choice = await roll.configureDialog({
