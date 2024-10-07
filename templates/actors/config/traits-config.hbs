@@ -2,7 +2,8 @@
     {{#each choices}}
     <fieldset class="traits card">
         <legend>{{ label }}</legend>
-        {{> "dnd5e.traits-list" choices=children keyPath=(concat @root.keyPath ".value.") topLevel=true }}
+        {{> "dnd5e.traits-list" choices=children keyPath=(concat @root.keyPath ".value.") topLevel=true
+            field=@root.checkbox input=@root.inputs.createCheckboxInput }}
     </fieldset>
     {{/each}}
     {{#if fields.custom}}

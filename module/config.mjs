@@ -3352,6 +3352,7 @@ DND5E.epicBoonInterval = 30000;
  *                                         this trait's data stored on the actor?
  * @property {string} [configKey]          If the list of trait options doesn't match the name of the trait, where can
  *                                         the options be found within `CONFIG.DND5E`?
+ * @property {Boolean|Number} [dataType]   Type of data represented.
  * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
  * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
  * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.
@@ -3452,6 +3453,14 @@ DND5E.traits = {
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
     configKey: "damageTypes"
+  },
+  dm: {
+    labels: {
+      title: "DND5E.DamMod",
+      localization: "DND5E.TraitDMPlural"
+    },
+    configKey: "damageTypes",
+    dataType: Number
   },
   ci: {
     labels: {

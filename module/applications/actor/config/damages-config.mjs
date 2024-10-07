@@ -1,3 +1,4 @@
+import FormulaField from "../../../data/fields/formula-field.mjs";
 import SelectChoices from "../../../documents/actor/select-choices.mjs";
 import * as Trait from "../../../documents/actor/trait.mjs";
 import TraitsConfig from "./traits-config.mjs";
@@ -40,6 +41,19 @@ export default class DamagesConfig extends TraitsConfig {
       if ( v.isPhysical ) obj[k] = { label: v.label, chosen: context.data.bypasses.includes(k) };
       return obj;
     }, {}));
+    context.value = {};
+    if ( this.options.trait === "dm" ) {
+      context.choices.forEach((key, data) => data.chosen = context.data.amount[key] ?? "");
+      context.bypassHint = "DND5E.DamageModification.BypassHint";
+      context.hint = "DND5E.DamageModification.Hint";
+      context.value.field = new FormulaField({ determinstic: true });
+      context.value.key = "amount";
+    } else {
+      context.bypassHint = "DND5E.DamagePhysicalBypassHint";
+      context.value.field = context.checkbox;
+      context.value.input = context.inputs.createCheckboxInput;
+      context.value.key = "value";
+    }
     return context;
   }
 
@@ -50,6 +64,14 @@ export default class DamagesConfig extends TraitsConfig {
   /** @inheritDoc */
   _processFormData(event, form, formData) {
     const submitData = super._processFormData(event, form, formData);
+    if ( this.options.trait === "dm" ) {
+      for ( const [type, formula] of Object.entries(submitData.system?.traits?.dm?.amount ?? {}) ) {
+        if ( !formula ) {
+          delete submitData.system.traits.dm.amount[type];
+          submitData.system.traits.dm.amount[`-=${type}`] = "";
+        }
+      }
+    }
     this._filterData(submitData, `${Trait.actorKeyPath(this.options.trait)}.bypasses`);
     return submitData;
   }

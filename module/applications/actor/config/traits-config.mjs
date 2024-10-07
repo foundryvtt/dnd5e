@@ -130,7 +130,9 @@ export default class TraitsConfig extends BaseConfigSheet {
   /** @inheritDoc */
   _processFormData(event, form, formData) {
     const submitData = super._processFormData(event, form, formData);
-    this._filterData(submitData, `${Trait.actorKeyPath(this.options.trait)}.value`);
+    if ( CONFIG.DND5E.traits[this.options.trait].dataType !== Number ) {
+      this._filterData(submitData, `${Trait.actorKeyPath(this.options.trait)}.value`);
+    }
     return submitData;
   }
 
