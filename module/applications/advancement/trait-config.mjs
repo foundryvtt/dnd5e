@@ -84,7 +84,8 @@ export default class TraitConfig extends AdvancementConfig {
     context.selectedIndex = this.selected;
 
     context.validTraitTypes = Object.entries(CONFIG.DND5E.traits).reduce((obj, [key, config]) => {
-      if ( (this.config.mode === "default") || (this.config.mode === "mastery" ? config.mastery : config.expertise) ) {
+      if ( ((this.config.mode === "default") || (this.config.mode === "mastery" ? config.mastery : config.expertise))
+        && (config.dataType !== Number) ) {
         obj[key] = config.labels.title;
       }
       return obj;
