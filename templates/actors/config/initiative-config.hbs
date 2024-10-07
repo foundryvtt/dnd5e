@@ -1,0 +1,17 @@
+<section class="flexcol">
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Initiative" }}</legend>
+        {{ formField fields.ability value=data.ability options=abilityOptions localize=true }}
+        {{ formField fields.bonus value=data.bonus localize=true }}
+        <hr>
+        {{#each flags}}
+        {{ formField field name=name value=value input=../inputs.createCheckboxInput }}
+        {{/each}}
+    </fieldset>
+    <fieldset class="card">
+        <legend>{{ ability.label }}</legend>
+        {{ formField ability.local.field name=ability.local.name value=ability.local.value localize=true }}
+        {{ formField ability.global.field name=ability.global.name value=ability.global.value
+                     label=(localize "DND5E.GlobalBonus") }}
+    </fieldset>
+</fieldset>
