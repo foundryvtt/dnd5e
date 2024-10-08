@@ -51,6 +51,7 @@ export default class ContainerSheet2 extends ItemSheetV2Mixin(ContainerSheet) {
       context.items.push(item);
     }
     context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    context.rollableClass = this.isEditable ? "rollable" : "";
 
     const inventory = {};
     const inventoryTypes = Object.entries(CONFIG.Item.dataModels)

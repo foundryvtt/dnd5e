@@ -244,7 +244,7 @@ export default function ItemSheetV2Mixin(Base) {
 
       // Play mode only.
       if ( this._mode === this.constructor.MODES.PLAY ) {
-        html.find(".item-image").on("click", this._onShowIcon.bind(this));
+        html.find(".sheet-header .item-image").on("click", this._onShowIcon.bind(this));
       }
     }
 
