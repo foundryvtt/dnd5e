@@ -51,7 +51,7 @@ export default class SourceConfig extends DocumentSheet5e {
     context.keyPath = this.options.keyPath;
     context.source = source.source;
     context.sourceUuid = this.document._stats.compendiumSource;
-    context.hasSourceId = !!(await fromUuid(context.sourceUuid));
+    context.sourceAnchor = (await fromUuid(context.sourceUuid))?.toAnchor().outerHTML;
     context.rulesVersions = [
       { value: "", label: "" },
       { value: "2024", label: game.i18n.localize("SETTINGS.DND5E.RULESVERSION.Modern") },
