@@ -199,7 +199,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const labels = this.parent.labels ??= {};
     labels.level = CONFIG.DND5E.spellLevels[this.level];
     labels.school = CONFIG.DND5E.spellSchools[this.school]?.label;
-    labels.materials = this.materials.value;
+    if ( this.properties.has("material") ) labels.materials = this.materials.value;
 
     labels.components = this.properties.reduce((obj, c) => {
       const config = this.validProperties.has(c) ? CONFIG.DND5E.itemProperties[c] : null;
@@ -258,6 +258,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     context.isSpell = true;
     context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
     context.properties = [];
+    if ( !this.properties.has("material") ) delete context.materials;
     return context;
   }
 
