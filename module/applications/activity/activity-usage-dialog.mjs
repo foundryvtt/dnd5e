@@ -201,7 +201,7 @@ export default class ActivityUsageDialog extends Dialog5e {
         const data = effect.getFlag("dnd5e", "item");
         return {
           value: effect.id,
-          label: data?.data?.name ?? this.actor.items.get(data.id)?.name
+          label: data?.data?.name ?? this.actor.items.get(data?.id)?.name
             ?? game.i18n.localize("DND5E.ConcentratingItemless")
         };
       });
