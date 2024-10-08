@@ -309,9 +309,8 @@ export default class AttackActivityData extends BaseActivityData {
       }
     }
 
-    if ( this.damage.critical.bonus ) {
-      rollConfig.critical ??= {};
-      rollConfig.critical.bonusDamage ??= this.damage.critical.bonus;
+    if ( this.damage.critical.bonus && !rollConfig.rolls[0]?.options?.critical?.bonusDamage ) {
+      foundry.utils.setProperty(rollConfig.rolls[0], "options.critical.bonusDamage", this.damage.critical.bonus);
     }
 
     return rollConfig;

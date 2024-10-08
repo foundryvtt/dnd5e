@@ -185,7 +185,7 @@ export default class DamageRoll extends BasicRoll {
    * @protected
    */
   configureDamage({ critical={} }={}) {
-    foundry.utils.mergeObject(critical, this.options.critical ?? {});
+    critical = foundry.utils.mergeObject(critical, this.options.critical ?? {}, { inplace: false });
 
     const flatBonus = new Map();
     for ( let [i, term] of this.terms.entries() ) {
