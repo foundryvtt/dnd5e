@@ -374,9 +374,7 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _enrichAttackTargets(html) {
     const attackRoll = this.rolls[0];
-    const visibility = game.settings.get("dnd5e", "attackRollVisibility");
-    const isVisible = game.user.isGM || (visibility !== "none");
-    if ( !isVisible || !(attackRoll instanceof dnd5e.dice.D20Roll) ) return;
+    if ( !(attackRoll instanceof dnd5e.dice.D20Roll) ) return;
 
     const masteryConfig = CONFIG.DND5E.weaponMasteries[attackRoll.options.mastery];
     if ( masteryConfig ) {
@@ -390,6 +388,10 @@ export default class ChatMessage5e extends ChatMessage {
       p.innerHTML = `<strong>${game.i18n.format("DND5E.WEAPON.Mastery.Flavor")}</strong> ${mastery}`;
       (html.querySelector(".chat-card") ?? html.querySelector(".message-content"))?.appendChild(p);
     }
+
+    const visibility = game.settings.get("dnd5e", "attackRollVisibility");
+    const isVisible = game.user.isGM || (visibility !== "none");
+    if ( !isVisible ) return;
 
     const targets = this.getFlag("dnd5e", "targets");
     if ( !targets?.length ) return;
