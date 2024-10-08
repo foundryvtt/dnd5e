@@ -1,13 +1,12 @@
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
-import ActorMovementConfig from "../actor/movement-config.mjs";
-import ActorSensesConfig from "../actor/senses-config.mjs";
 import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
 import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
+import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import SourceConfig from "../source-config.mjs";
 import StartingEquipmentConfig from "./starting-equipment-config.mjs";
 
@@ -557,10 +556,8 @@ export default class ItemSheet5e extends ItemSheet {
     let app;
     switch ( button.dataset.action ) {
       case "movement":
-        app = new ActorMovementConfig(this.item, { keyPath: "system.movement" });
-        break;
       case "senses":
-        app = new ActorSensesConfig(this.item, { keyPath: "system.senses" });
+        app = new MovementSensesConfig({ document: this.item, type: button.dataset.action });
         break;
       case "source":
         app = new SourceConfig({ document: this.item, keyPath: "system.source" });
