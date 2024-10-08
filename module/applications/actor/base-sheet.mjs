@@ -23,7 +23,8 @@ import TraitSelector from "./trait-selector.mjs";
 import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
-import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
+
+import SpellSlotsConfig from "./config/spell-slots-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
@@ -784,7 +785,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         app = new dnd5e.applications.actor.ActorSkillsConfig(this.actor);
         break;
       case "spellSlots":
-        app = new ActorSpellSlotsConfig(this.actor);
+        app = new SpellSlotsConfig({ document: this.actor });
         break;
       case "tool":
         const tool = event.currentTarget.closest("[data-key]").dataset.key;
