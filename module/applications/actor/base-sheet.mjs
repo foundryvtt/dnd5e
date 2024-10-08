@@ -15,7 +15,6 @@ import AdvancementConfirmationDialog from "../advancement/advancement-confirmati
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 import ActorSheetMixin from "./sheet-mixin.mjs";
-import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
 
 import AbilityConfig from "./config/ability-config.mjs";
 import ConcentrationConfig from "./config/concentration-config.mjs";
@@ -25,6 +24,7 @@ import HitPointsConfig from "./config/hit-points-config.mjs";
 import InitiativeConfig from "./config/initiative-config.mjs";
 import SkillToolConfig from "./config/skill-tool-config.mjs";
 import SkillsConfig from "./config/skills-config.mjs";
+import SpellSlotsConfig from "./config/spell-slots-config.mjs";
 import ToolsConfig from "./config/tools-config.mjs";
 import TraitsConfig from "./config/traits-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
@@ -787,7 +787,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         app = new SkillsConfig({ document: this.actor });
         break;
       case "spellSlots":
-        app = new ActorSpellSlotsConfig(this.actor);
+        app = new SpellSlotsConfig({ document: this.actor });
         break;
       case "tool":
         const tool = event.currentTarget.closest("[data-key]").dataset.key;

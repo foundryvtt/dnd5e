@@ -11,7 +11,6 @@ export {default as BaseConfigSheetV2} from "./api/base-config-sheet.mjs";
 
 export {default as ActorArmorConfig} from "./armor-config.mjs";
 export {default as DamageModificationConfig} from "./damage-modification-config.mjs";
-export {default as ActorSpellSlotsConfig} from "./spell-slots-config.mjs";
 export {default as LongRestDialog} from "./long-rest.mjs";
 export {default as ActorMovementConfig} from "./movement-config.mjs";
 export {default as ActorSensesConfig} from "./senses-config.mjs";
@@ -30,6 +29,7 @@ export {default as HitPointsConfig} from "./config/hit-points-config.mjs";
 export {default as InitiativeConfig} from "./config/initiative-config.mjs";
 export {default as SkillToolConfig} from "./config/skill-tool-config.mjs";
 export {default as SkillsConfig} from "./config/skills-config.mjs";
+export {default as SpellSlotsConfig} from "./config/spell-slots-config.mjs";
 export {default as ToolsConfig} from "./config/tools-config.mjs";
 export {default as TraitsConfig} from "./config/traits-config.mjs";
 export {default as WeaponsConfig} from "./config/weapons-config.mjs";
@@ -42,5 +42,6 @@ export {default as ActorHitPointsConfig} from "./deprecated/hit-points-config.mj
 export {default as ActorInitiativeConfig} from "./deprecated/initiative-config.mjs";
 export {default as ProficiencyConfig} from "./deprecated/proficiency-config.mjs";
 export {default as ActorSkillsConfig} from "./deprecated/skills-config.mjs";
+export {default as ActorSpellSlotsConfig} from "./deprecated/spell-slots-config.mjs";
 export {default as ToolSelector} from "./deprecated/tool-selector.mjs";
 export {default as TraitSelector} from "./deprecated/trait-selector.mjs";
