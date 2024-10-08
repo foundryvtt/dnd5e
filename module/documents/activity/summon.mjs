@@ -469,9 +469,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       }
     }
 
-    const attackDamageBonus = Roll.replaceFormulaData(this.bonuses.attackDamage, rollData);
-    const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage, rollData);
-    const healingBonus = Roll.replaceFormulaData(this.bonuses.healing, rollData);
+    const attackDamageBonus = Roll.replaceFormulaData(this.bonuses.attackDamage ?? "", rollData);
+    const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage ?? "", rollData);
+    const healingBonus = Roll.replaceFormulaData(this.bonuses.healing ?? "", rollData);
     for ( const item of actor.items ) {
       if ( !item.system.activities?.size ) continue;
       const changes = [];
