@@ -872,6 +872,14 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         save, range, reference, toggle, suppressed, level
       } = data;
 
+      if ( foundry.utils.getType(save?.ability) === "Set" ) save = {
+        ...save, ability: save.ability.size > 2
+          ? game.i18n.localize("DND5E.AbbreviationDC")
+          : game.i18n.getListFormatter({ style: "narrow" }).format(
+            Array.from(save.ability).map(k => CONFIG.DND5E.abilities[k].abbreviation)
+          )
+      };
+
       const css = [];
       if ( uses?.max ) {
         css.push("uses");
