@@ -2,16 +2,16 @@
     <p class="notes">{{ localize "DND5E.HitDiceConfigHint" }}</p>
     {{#each classes}}
         <div class="form-group">
-            <label>{{this.name}} ({{this.diceDenom}})</label>
+            <label>{{this.name}} ({{this.denomination}})</label>
             <div class="form-fields">
                 <button class="decrement" type="button">-</button>
                 <input data-tooltip="DND5E.HitDiceRemaining" class="current"
-                       name="{{this.classItemId}}" type="number" value="{{this.currentHitDice}}">
+                       name="{{this.classItemId}}" type="number" value="{{this.value}}">
                 <span class="sep">/</span>
-                <input data-tooltip="DND5E.HitDiceMax" class="max" type="number" value="{{this.maxHitDice}}" disabled>
+                <input data-tooltip="DND5E.HitDiceMax" class="max" type="number" value="{{this.max}}" disabled>
                 <button class="increment" type="button">+</button>
 
-                <button class="roll-hd" data-hd-denom="{{this.diceDenom}}" {{#unless this.canRoll}}disabled{{/unless}}>
+                <button class="roll-hd" data-hd-denom="{{this.denomimation}}" {{#unless this.value}}disabled{{/unless}}>
                     <i class="fas fa-dice-d20"></i> {{ localize "DND5E.Roll" }}
                 </button>
             </div>
