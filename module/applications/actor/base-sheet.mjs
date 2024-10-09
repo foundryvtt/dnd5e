@@ -2,6 +2,7 @@ import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
 import { splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
+import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
 import ActorArmorConfig from "./armor-config.mjs";
@@ -9,8 +10,6 @@ import ActorConcentrationConfig from "./concentration-config.mjs";
 import ActorHitDiceConfig from "./hit-dice-config.mjs";
 import ActorHitPointsConfig from "./hit-points-config.mjs";
 import ActorInitiativeConfig from "./initiative-config.mjs";
-import ActorMovementConfig from "./movement-config.mjs";
-import ActorSensesConfig from "./senses-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorTypeConfig from "./type-config.mjs";
 import DamageModificationConfig from "./damage-modification-config.mjs";
@@ -24,6 +23,7 @@ import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
+
 import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
@@ -757,13 +757,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         app = new ActorInitiativeConfig(this.actor);
         break;
       case "movement":
-        app = new ActorMovementConfig(this.actor);
+      case "senses":
+        app = new MovementSensesConfig({ document: this.actor, type: button.dataset.action });
         break;
       case "flags":
         app = new ActorSheetFlags(this.actor);
-        break;
-      case "senses":
-        app = new ActorSensesConfig(this.actor);
         break;
       case "source":
         app = new SourceConfig({ document: this.actor });
