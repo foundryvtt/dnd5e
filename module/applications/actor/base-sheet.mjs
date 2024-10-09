@@ -1,6 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
-import { splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
@@ -266,7 +266,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: `${primary ? primary[1] : "0"} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
+        primary: `${primary ? primary[1] : "0"} ${movement.units || defaultUnits("length")}`,
         special: speeds.map(s => s[1]).join(", ")
       };
     }
@@ -274,7 +274,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Walk as primary
     else {
       return {
-        primary: `${movement.walk || 0} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
+        primary: `${movement.walk || 0} ${movement.units || defaultUnits("length")}`,
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
       };
     }
@@ -294,7 +294,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
       if ( v === 0 ) continue;
-      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]}`;
+      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units ?? defaultUnits("length")}`;
     }
     if ( senses.special ) splitSemicolons(senses.special).forEach((c, i) => tags[`custom${i + 1}`] = c);
     return tags;

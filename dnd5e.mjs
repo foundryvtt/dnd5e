@@ -557,6 +557,15 @@ Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJ
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
+Hooks.on("preCreateScene", (doc, createData, options, userId) => {
+  // Set default grid units based on metric length setting
+  if ( !foundry.utils.getProperty(createData, "grid.units") ) doc.updateSource({
+    "grid.units": CONFIG.DND5E.defaultUnits.length[
+      game.settings.get("dnd5e", "metricLengthUnits") ? "metric" : "imperial"
+    ]
+  });
+});
+
 // TODO: Generalize this logic and make it available in the re-designed transform application.
 Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
   const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
