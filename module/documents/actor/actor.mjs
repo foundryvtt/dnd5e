@@ -2163,7 +2163,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
      * @returns {boolean}                              Explicitly return `false` to prevent hit die from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollHitDieV2", rollConfig, dialogConfig, messageConfig) === false ) return;
+    if ( Hooks.call("dnd5e.preRollHitDieV2", rollConfig, dialogConfig, messageConfig) === false ) return null;
 
     if ( "dnd5e.preRollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -2174,7 +2174,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
         chatMessage: messageConfig.create, messageData: messageConfig.data
       };
-      if ( Hooks.call("dnd5e.preRollHitDie", this, hookData, rollConfig.denomination) === false ) return;
+      if ( Hooks.call("dnd5e.preRollHitDie", this, hookData, rollConfig.denomination) === false ) return null;
       rollConfig.rolls[0].parts[0] = hookData.formula;
       rollConfig.rolls[0].data = hookData.data;
       messageConfig.create = hookData.chatMessage;
@@ -2182,6 +2182,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls.length ) return null;
     const returnValue = oldFormat && rolls?.length ? rolls[0] : rolls;
 
     const updates = { actor: {}, class: {} };
@@ -2214,7 +2215,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         "The `dnd5e.rollHitDie` hook has been deprecated and replaced with `dnd5e.rollHitDieV2`.",
         { since: "DnD5e 4.0", until: "DnD5e 4.4" }
       );
-      if ( Hooks.call("dnd5e.rollHitDie", this, rolls[0], updates) === false ) return;
+      if ( Hooks.call("dnd5e.rollHitDie", this, rolls[0], updates) === false ) return null;
     }
 
     // Perform updates
