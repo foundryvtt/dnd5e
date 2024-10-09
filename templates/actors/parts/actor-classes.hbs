@@ -58,11 +58,10 @@
     </div>
     {{/dnd5e-itemContext}}
     {{/if}}
-    {{else}}
-    {{#if showClassDrop}}
+    {{/each}}
+    {{#if @root.showClassDrop}}
     <div class="pill-lg empty roboto-upper" data-action="findItem" data-item-type="class">
         {{ localize "DND5E.ClassAdd" }}
     </div>
     {{/if}}
-    {{/each}}
 </section>
