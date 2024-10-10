@@ -95,6 +95,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
       return b.system.levels - a.system.levels;
     }).map(c => `${c.name} ${c.system.levels}`).join(" / ");
+    context.showClassDrop = !context.labels.class || (this._mode === this.constructor.MODES.EDIT);
 
     // Exhaustion
     const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
@@ -489,6 +490,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( !this.isEditable ) return;
     const filters = { locked: { types: new Set([type]) } };
     if ( classIdentifier ) filters.locked.additional = { class: { [classIdentifier]: 1 } };
+    if ( type === "class" ) {
+      const existingIdentifiers = new Set(Object.keys(this.actor.classes));
+      filters.locked.arbitrary = [{ o: "NOT", v: { k: "system.identifier", o: "in", v: existingIdentifiers } }];
+    }
     const result = await CompendiumBrowser.selectOne({ filters });
     if ( result ) this._onDropItemCreate(await fromUuid(result));
   }
