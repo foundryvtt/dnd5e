@@ -43,7 +43,7 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
    */
   get cachedSpell() {
     return this.actor?.sourcedItems.get(this.spell.uuid, { legacy: false })
-      ?.find(i => i.getFlag("dnd5e", "cachedFor") === this.id);
+      ?.find(i => i.getFlag("dnd5e", "cachedFor") === this.relativeUUID);
   }
 
   /* -------------------------------------------- */
@@ -71,7 +71,7 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
       ],
       flags: {
         dnd5e: {
-          cachedFor: this.id
+          cachedFor: this.relativeUUID
         }
       },
       _stats: { compendiumSource: this.spell.uuid }

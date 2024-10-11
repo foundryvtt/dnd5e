@@ -96,6 +96,16 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
+   * Relative UUID for this activity on an actor.
+   * @type {string}
+   */
+  get relativeUUID() {
+    return `.Item.${this.item.id}.Activity.${this.id}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Consumption targets that can be use for this activity.
    * @type {Set<string>}
    */

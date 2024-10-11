@@ -412,7 +412,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     const cachedInserts = [];
     for ( const id of Object.keys(changed.system.activities) ) {
       const activity = this.activities.get(id);
-      if ( !activity ) continue;
+      if ( !(activity instanceof CastActivity) ) continue;
       const existingSpell = activity.cachedSpell;
       if ( existingSpell ) {
         const enchantment = existingSpell.effects.get(CastActivity.ENCHANTMENT_ID);
