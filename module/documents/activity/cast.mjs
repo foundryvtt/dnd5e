@@ -92,6 +92,9 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
       delete data.override;
       changes.push({ key: `system.${type}`, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: JSON.stringify(data) });
     }
+    for ( const property of this.spell.properties ) {
+      changes.push({ key: "system.properties", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: `-${property}` });
+    }
     return changes;
   }
 }
