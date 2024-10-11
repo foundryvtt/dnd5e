@@ -138,6 +138,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    *                                                 scaling is not allowed.
    * @property {object} spell
    * @property {number} spell.slot                   The spell slot to consume.
+   * @property {object} [triggering]
+   * @property {string} [triggering.activity]        Relative UUID to the activity triggering this one. Activity must
+   *                                                 be on the same actor as this one.
+   * @property {boolean|number[]} [triggering.resources]  Control resource consumption on linked item.
    */
 
   /**
@@ -422,14 +426,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @returns {ActivityConsumptionDescriptor}  Information on consumption performed to store in message flag.
    */
   async #applyUsageUpdates(updates) {
-    // Merge activity changes into the item updates
-    if ( !foundry.utils.isEmpty(updates.activity) ) {
-      const itemIndex = updates.item.findIndex(i => i._id === this.item.id);
-      const keyPath = `system.activities.${this.id}`;
-      const activityUpdates = foundry.utils.expandObject(updates.activity);
-      if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
-      else updates.item[itemIndex][keyPath] = activityUpdates;
-    }
+    this._mergeActivityUpdates(updates);
 
     // Create the consumed flag
     const getDeltas = (document, updates) => {
@@ -591,6 +588,13 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       })?.id ?? effects.first()?.id ?? null;
     }
 
+    const linked = this.getLinkedActivity();
+    if ( linked ) {
+      config.triggering ??= {};
+      config.triggering.activity ??= linked.relativeUUID;
+      config.triggering.resources ??= true;
+    }
+
     return config;
   }
 
@@ -637,11 +641,14 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
   /**
    * Calculate changes to actor, items, & this activity based on resource consumption.
-   * @param {ActivityUseConfiguration} config  Usage configuration.
-   * @returns {ActivityUsageUpdates|false}     Updates to perform, or `false` if a consumption error occurred.
+   * @param {ActivityUseConfiguration} config                  Usage configuration.
+   * @param {object} [options={}]
+   * @param {boolean} [options.returnErrors=false]             Return array of errors, rather than displaying them.
+   * @returns {ActivityUsageUpdates|ConsumptionError[]|false}  Updates to perform, an array of ConsumptionErrors,
+   *                                                           or `false` if a consumption error occurred.
    * @protected
    */
-  async _prepareUsageUpdates(config) {
+  async _prepareUsageUpdates(config, { returnErrors=false }={}) {
     const updates = { activity: {}, actor: {}, delete: [], item: [], rolls: [] };
     if ( config.consume === false ) return updates;
     const errors = [];
@@ -661,8 +668,31 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       }
     }
 
+    // Handle consumption on a linked activity
+    if ( config.triggering ) {
+      const linkedActivity = this.getLinkedActivity(config.triggering.activity);
+      if ( linkedActivity ) {
+        const consume = {
+          resources: (config.consume === true) || (config.triggering?.resources === true)
+            ? linkedActivity.consumption.targets.keys() : config.triggering?.resources,
+          spellSlot: false
+        };
+        const usageConfig = foundry.utils.mergeObject(config, { consume, triggering: false }, { inplace: true });
+        const results = await linkedActivity._prepareUsageUpdates(usageConfig, { returnErrors: true });
+        if ( foundry.utils.getType(results) === "Object" ) {
+          linkedActivity._mergeActivityUpdates(results);
+          foundry.utils.mergeObject(updates.actor, results.actor);
+          updates.delete.push(...results.delete);
+          updates.item.push(...results.item);
+          updates.rolls.push(...results.rolls);
+        } else if ( results?.length ) {
+          errors.push(...results);
+        }
+      }
+    }
+
     // Handle spell slot consumption
-    if ( ((config.consume === true) || config.consume.spellSlot) && this.requiresSpellSlot ) {
+    else if ( ((config.consume === true) || config.consume.spellSlot) && this.requiresSpellSlot ) {
       const mode = this.item.system.preparation.mode;
       const isLeveled = ["always", "prepared"].includes(mode);
       const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
@@ -698,8 +728,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       );
     }
 
-    errors.forEach(err => ui.notifications.error(err.message, { console: false }));
-    return errors.length ? false : updates;
+    if ( !returnErrors ) errors.forEach(err => ui.notifications.error(err.message, { console: false }));
+    return errors.length ? returnErrors ? errors : false : updates;
   }
 
   /* -------------------------------------------- */
@@ -1169,7 +1199,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   async #consumeResource(event, target, message) {
     const messageConfig = {};
     const scaling = message.getFlag("dnd5e", "scaling");
-    await this.consume({ consume: true, event, scaling }, messageConfig);
+    const usageConfig = { consume: true, event, scaling };
+    const linkedActivity = this.getLinkedActivity();
+    if ( linkedActivity ) usageConfig.triggering = { activity: linkedActivity.relativeUUID, resources: true };
+    await this.consume(usageConfig, messageConfig);
     if ( !foundry.utils.isEmpty(messageConfig.data) ) await message.update(messageConfig.data);
   }
 
@@ -1233,6 +1266,19 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve a linked activity based on the provided relative UUID, or the stored `cachedFor` value.
+   * @param {string} relativeUUID  Relative UUID for an activity on this actor.
+   * @returns {Activity|null}
+   */
+  getLinkedActivity(relativeUUID) {
+    if ( !this.actor ) return null;
+    relativeUUID ??= this.item.getFlag("dnd5e", "cachedFor");
+    return fromUuidSync(relativeUUID, { relative: this.actor, strict: false });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
    * @param {object} [options]
    * @param {boolean} [options.deterministic]  Whether to force deterministic values for data properties that could
@@ -1244,5 +1290,22 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     rollData.activity = { ...this };
     rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
     return rollData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Merge the activity updates into this activity's item updates.
+   * @param {ActivityUsageUpdates} updates
+   * @internal
+   */
+  _mergeActivityUpdates(updates) {
+    if ( !foundry.utils.isEmpty(updates.activity) ) {
+      const itemIndex = updates.item.findIndex(i => i._id === this.item.id);
+      const keyPath = `system.activities.${this.id}`;
+      const activityUpdates = foundry.utils.expandObject(updates.activity);
+      if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
+      else updates.item[itemIndex][keyPath] = activityUpdates;
+    }
   }
 };
