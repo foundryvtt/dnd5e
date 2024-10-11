@@ -337,7 +337,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   async _onDropItem(event, data) {
     const item = await Item.implementation.fromDropData(data);
     if ( (item?.type === "spell") && this.item.system.activities ) this._onDropSpell(event, item);
-    else if ( item?.system.advancement && this.item.system.advancement ) this._onDropAdvancement(event, data);
+    else this._onDropAdvancement(event, data);
   }
 
   /* -------------------------------------------- */

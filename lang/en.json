@@ -590,12 +590,6 @@
 "DND5E.CAST": {
   "Title": "Cast",
   "FIELDS": {
-    "attack": {
-      "bonus": {
-        "label": "Attack Bonus",
-        "hint": "If the spell makes an attack, use this bonus to hit rather than the creature's normal spellcasting bonus."
-      }
-    },
     "spell": {
       "label": "Casting Details",
       "challenge": {
@@ -630,8 +624,7 @@
   },
   "Action": {
     "RemoveSpell": "Remove Spell"
-  },
-  "DropHint": "Drop spell here to cast"
+  }
 },
 
 "DND5E.Casting": "Casting",
