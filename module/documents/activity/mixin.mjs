@@ -956,6 +956,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const rollConfig = this.getDamageConfig(config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "damage"];
     rollConfig.subject = this;
+    rollConfig.hookNames = ["damage"].concat(config.hookNames ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({
       options: {
