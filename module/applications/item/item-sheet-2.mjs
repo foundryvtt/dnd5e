@@ -328,6 +328,30 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Handle dropping another item onto this item.
+   * @param {DragEvent} event  The drag event.
+   * @param {object} data      The dropped data.
+   */
+  async _onDropItem(event, data) {
+    const item = await Item.implementation.fromDropData(data);
+    if ( (item?.type === "spell") && this.item.system.activities ) this._onDropSpell(event, item);
+    else this._onDropAdvancement(event, data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle creating a "Cast" activity when dropping a spell.
+   * @param {DragEvent} event  The drag event.
+   * @param {Item5e} item      The dropped item.
+   */
+  _onDropSpell(event, item) {
+    this.item.createActivity("cast", { spell: { uuid: item.uuid } });
+  }
+
+  /* -------------------------------------------- */
   /*  Filtering                                   */
   /* -------------------------------------------- */
 

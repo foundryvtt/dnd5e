@@ -586,6 +586,47 @@
 "DND5E.Bonuses": "Global Bonuses",
 "DND5E.BonusesHint": "Define global bonuses as formulas which are added to certain rolls. For example: 1d4 + 2",
 "DND5E.BonusesInstructions": "Configure character bonuses which are added to the appropriate dice roll",
+
+"DND5E.CAST": {
+  "Title": "Cast",
+  "FIELDS": {
+    "spell": {
+      "label": "Casting Details",
+      "challenge": {
+        "attack": {
+          "label": "Attack Bonus",
+          "hint": "Flat to hit bonus in place of the spell's normal attack bonus."
+        },
+        "save": {
+          "label": "Save DC",
+          "hint": "Flat DC to use in place of the spell's normal save DC."
+        },
+        "override": {
+          "label": "Override Values",
+          "hint": "Override the spell's normal attack bonus & DC when casting."
+        }
+      },
+      "level": {
+        "label": "Casting Level",
+        "hint": "Base level to cast the spell, if different than the spell's level."
+      },
+      "properties": {
+        "label": "Ignored Properties",
+        "hint": "Spell components & tags to ignore while casting."
+      },
+      "uuid": {
+        "label": "Spell to Cast"
+      }
+    }
+  },
+  "SECTIONS": {
+    "Spell": "Spell"
+  },
+  "Action": {
+    "RemoveSpell": "Remove Spell"
+  }
+},
+
 "DND5E.Casting": "Casting",
 "DND5E.Conditions": "Conditions",
 "DND5E.Controls": {
