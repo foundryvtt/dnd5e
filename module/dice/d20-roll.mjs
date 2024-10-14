@@ -1,4 +1,5 @@
 import D20RollConfigurationDialog from "../applications/dice/d20-configuration-dialog.mjs";
+import SkillToolRollConfigurationDialog from "../applications/dice/skill-tool-configuration-dialog.mjs";
 import { areKeysPressed } from "../utils.mjs";
 import BasicRoll from "./basic-roll.mjs";
 
@@ -311,7 +312,8 @@ export default class D20Roll extends BasicRoll {
       "The `configureDialog` on D20Roll has been deprecated and is now handled through `D20Roll.build`.",
       { since: "DnD5e 4.1", until: "DnD5e 4.5" }
     );
-    const DialogClass = this.constructor.DefaultConfigurationDialog;
+    let DialogClass = this.constructor.DefaultConfigurationDialog;
+    if ( chooseModifier ) DialogClass = SkillToolRollConfigurationDialog;
     const defaultButton = {
       [D20Roll.ADV_MODE.NORMAL]: "normal",
       [D20Roll.ADV_MODE.ADVANTAGE]: "advantage",
@@ -383,7 +385,7 @@ export function _createDeprecatedD20Config(rollConfig, dialogConfig, messageConf
     reliableTalent: rollConfig.reliableTalent,
     // TODO: ammunitionOptions
     // TODO: attackModes
-    // TODO: chooseModifier
+    chooseModifier: dialogConfig.options?.chooseAbility,
     // TODO: masteryOptions
     title: dialogConfig.options?.title,
     dialogOptions: dialogConfig.options,
@@ -430,9 +432,9 @@ export function _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConf
   if ( "fastForward" in options ) dialogConfig.configure = !options.fastForward;
   // TODO: ammunitionOptions
   // TODO: attackModes
-  // TODO: chooseModifier
   // TODO: masteryOptions
   set(dialogConfig, "options", options.dialogOptions);
+  set(dialogConfig, "options.chooseAbility", options.chooseModifier);
   set(dialogConfig, "options.title", options.title);
   set(messageConfig, "create", options.chatMessage);
   set(messageConfig, "data", options.messageData);

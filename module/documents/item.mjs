@@ -1053,11 +1053,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
-    return this.actor?.rollToolCheck(this.system.type.baseItem, {
+    return this.actor?.rollToolCheck({
       ability: this.system.ability,
       bonus: this.system.bonus,
       prof: this.system.prof,
       item: this,
+      tool: this.system.type.baseItem,
       ...options
     });
   }

@@ -1,8 +1,8 @@
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
+import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
-import { d20Roll } from "../../dice/dice.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import { replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
@@ -1359,191 +1359,208 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Roll a Skill Check
-   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} skillId      The skill id (e.g. "ins")
-   * @param {object} options      Options which configure how the skill check is rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * Roll an ability check with a skill.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<SkillToolRollDialogConfiguration>} dialog   Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message     Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
-  async rollSkill(skillId, options={}) {
-    const skl = this.system.skills[skillId];
-    const abl = this.system.abilities[options.ability ?? skl.ability];
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = ["@mod", "@abilityCheckBonus"];
-    const data = this.getRollData();
-
-    // Add ability modifier
-    data.mod = abl?.mod ?? 0;
-    data.defaultAbility = options.ability ?? skl.ability;
-
-    // Include proficiency bonus
-    if ( skl.prof.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = skl.prof.term;
-    }
-
-    // Global ability check bonus
-    if ( globalBonuses.check ) {
-      parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
-    }
-
-    // Ability-specific check bonus
-    if ( abl?.bonuses?.check ) data.abilityCheckBonus = Roll.replaceFormulaData(abl.bonuses.check, data);
-    else data.abilityCheckBonus = 0;
-
-    // Skill-specific skill bonus
-    if ( skl.bonuses?.check ) {
-      const checkBonusKey = `${skillId}CheckBonus`;
-      parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = Roll.replaceFormulaData(skl.bonuses.check, data);
-    }
-
-    // Global skill check bonus
-    if ( globalBonuses.skill ) {
-      parts.push("@skillBonus");
-      data.skillBonus = Roll.replaceFormulaData(globalBonuses.skill, data);
-    }
-
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
-
-    // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
-
-    // Roll and return
-    const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
-    const rollData = foundry.utils.mergeObject({
-      data: data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      chooseModifier: true,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      reliableTalent,
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "skill", skillId }
-      }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
-
-    /**
-     * A hook event that fires before a skill check is rolled for an Actor.
-     * @function dnd5e.preRollSkill
-     * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the skill check is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} skillId               ID of the skill being rolled as defined in `DND5E.skills`.
-     * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
-
-    const roll = await d20Roll(rollData);
-
-    /**
-     * A hook event that fires after a skill check has been rolled for an Actor.
-     * @function dnd5e.rollSkill
-     * @memberof hookEvents
-     * @param {Actor5e} actor   Actor for which the skill check has been rolled.
-     * @param {D20Roll} roll    The resulting roll.
-     * @param {string} skillId  ID of the skill that was rolled as defined in `DND5E.skills`.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollSkill", this, roll, skillId);
-
-    return roll;
+  async rollSkill(config={}, dialog={}, message={}) {
+    return this.#rollSkillTool("skill", config, dialog, message);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Roll a Tool Check.
-   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonuses.
-   * @param {string} toolId       The identifier of the tool being rolled.
-   * @param {object} options      Options which configure how the tool check is rolled.
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance.
+   * Roll an ability check with a tool.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<SkillToolRollDialogConfiguration>} dialog   Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message     Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
-  async rollToolCheck(toolId, options={}) {
-    // Prepare roll data.
-    const tool = this.system.tools[toolId];
-    const ability = this.system.abilities[options.ability || (tool?.ability ?? "int")];
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = ["@mod", "@abilityCheckBonus"];
-    const data = this.getRollData();
+  async rollToolCheck(config={}, dialog={}, message={}) {
+    return this.#rollSkillTool("tool", config, dialog, message);
+  }
 
-    // Add ability modifier.
-    data.mod = ability?.mod ?? 0;
-    data.defaultAbility = options.ability || (tool?.ability ?? "int");
+  /* -------------------------------------------- */
 
-    // Add proficiency.
-    const prof = options.prof ?? tool?.prof;
-    if ( prof?.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = prof.term;
+  /**
+   * @typedef {D20RollProcessConfiguration} SkillToolRollProcessConfiguration
+   * @property {string} [ability]  The ability to be rolled with the skill.
+   * @property {string} [bonus]    Additional bonus term added to the check.
+   * @property {Item5e} [item]     Tool item used for rolling.
+   * @property {string} [skill]    The skill to roll.
+   * @property {string} [tool]     The tool to roll.
+   */
+
+  /**
+   * @typedef {D20RollDialogConfiguration} SkillToolRollDialogConfiguration
+   * @property {SkillToolRollConfigurationDialogOptions} [options]  Configuration options.
+   */
+
+  /**
+   * Shared rolling functionality between skill & tool checks.
+   * @param {"skill"|"tool"} type                                Type of roll.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<SkillToolRollDialogConfiguration>} dialog   Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message     Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
+   */
+  async #rollSkillTool(type, config={}, dialog={}, message={}) {
+    let oldFormat = false;
+    const name = type === "skill" ? "Skill" : "ToolCheck";
+
+    // Handle deprecated calling pattern
+    if ( foundry.utils.getType(config) !== "Object" ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`roll${name}\` method on Actor5e now takes roll, dialog, and message config objects as parameters.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      oldFormat = true;
+      const oldConfig = dialog;
+      config = { [type]: config };
+      if ( oldConfig.ability ) config.ability = oldConfig.ability;
+      if ( oldConfig.bonus ) config.bonus = oldConfig.bonus;
+      dialog = {};
+      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
     }
 
-    // Global ability check bonus.
-    if ( globalBonuses.check ) {
-      parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
+    const skill = this.system.skills?.[config.skill];
+    const skillConfig = CONFIG.DND5E.skills[config.skill];
+    const tool = this.system.tools?.[config.tool];
+    const toolConfig = CONFIG.DND5E.tools[config.tool];
+    if ( ((type === "skill") && !skillConfig) || ((type === "tool") && !toolConfig) ) {
+      return this.rollAbilityTest(config, dialog, message);
     }
 
-    // Ability-specific check bonus.
-    if ( ability?.bonuses.check ) data.abilityCheckBonus = Roll.replaceFormulaData(ability.bonuses.check, data);
-    else data.abilityCheckBonus = 0;
+    const relevant = type === "skill" ? skill : tool;
+    const rollData = this.getRollData();
+    const initialRoll = config.rolls?.pop();
+    const defaultAbility = relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
 
-    // Tool-specific check bonus.
-    if ( tool?.bonuses.check || options.bonus ) {
-      parts.push("@toolBonus");
-      const bonus = [];
-      if ( tool?.bonuses.check ) bonus.push(Roll.replaceFormulaData(tool.bonuses.check, data));
-      if ( options.bonus ) bonus.push(Roll.replaceFormulaData(options.bonus, data));
-      data.toolBonus = bonus.join(" + ");
-    }
+    const hasRemarkableAthlete = this.getFlag("dnd5e", "remarkableAthlete")
+      && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
+    const buildConfig = (process, config, formData, index) => {
+      const abilityId = formData?.get("ability") ?? process.ability ?? defaultAbility;
+      const ability = this.system.abilities?.[abilityId];
 
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
-
-    // Reliable Talent applies to any tool check we have full or better proficiency in
-    const reliableTalent = (prof?.multiplier >= 1 && this.getFlag("dnd5e", "reliableTalent"));
-
-    const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel(toolId, {trait: "tool"}) ?? ""});
-    const rollData = foundry.utils.mergeObject({
-      data, flavor,
-      title: `${flavor}: ${this.name}`,
-      chooseModifier: true,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      reliableTalent,
-      messageData: {
-        speaker: options.speaker || ChatMessage.implementation.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "tool", toolId}
+      let prof = process.prof ?? relevant?.prof;
+      if ( prof && hasRemarkableAthlete ) {
+        const validAbilities = CONFIG.DND5E.characterFlags.remarkableAthlete.abilities;
+        if ( validAbilities.includes(abilityId) && (prof.multiplier <= .5) && (prof.rounding === "down") ) {
+          prof = prof.clone({ multiplier: .5, roundDown: false });
+        } else if ( !validAbilities.includes(abilityId) && (prof.multiplier === .5) && (prof.rounding === "up") ) {
+          if ( this.getFlag("dnd5e", "jackOfAllTrades") ) prof = prof.clone({ roundDown: true });
+          else prof = prof.clone({ multiplier: 0 });
+        }
       }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
+
+      let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+        mod: ability?.mod,
+        prof: prof?.hasProficiency ? prof.term : null,
+        [`${config[type]}Bonus`]: relevant?.bonuses?.check,
+        extraBonus: process.bonus,
+        [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
+        [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
+        abilityCheckBonus: this.system.bonuses?.abilities?.check,
+        situational: config.data?.situational
+      }, { ...rollData });
+      const options = config.options ?? {};
+
+      if ( index === 0 ) {
+        if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+        if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+        if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
+      }
+
+      // Add exhaustion reduction
+      this.addRollExhaustion(parts, data);
+
+      config.parts = parts;
+      config.data = data;
+      config.data.abilityId = abilityId;
+      config.options = options;
+    };
+
+    const rollConfig = foundry.utils.mergeObject({
+      ability: defaultAbility,
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent"),
+      rolls: [{
+        options: {
+          advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+          disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+          maximum: relevant?.roll.max,
+          minimum: relevant?.roll.min
+        }
+      }]
+    }, config);
+    buildConfig(rollConfig, rollConfig.rolls[0], null, 0);
+    rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
+    rollConfig.rolls = rollConfig.rolls.concat(config.rolls ?? []);
+    rollConfig.subject = this;
+
+    const dialogConfig = foundry.utils.mergeObject({
+      applicationClass: SkillToolRollConfigurationDialog,
+      options: {
+        buildConfig,
+        chooseAbility: true
+      }
+    }, dialog);
+
+    const messageConfig = foundry.utils.mergeObject({
+      create: true,
+      data: {
+        flags: {
+          dnd5e: {
+            messageType: "roll",
+            roll: {
+              [`${type}Id`]: config[type],
+              type
+            }
+          }
+        },
+        flavor: type === "skill" ? game.i18n.format("DND5E.SkillPromptTitle", { skill: skillConfig.label })
+          : game.i18n.format("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
+        speaker: ChatMessage.getSpeaker({ actor: this })
+      }
+    });
+
+    if ( `dnd5e.preRoll${name}` in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`dnd5e.preRoll${name}\` hook has been deprecated and replaced with \`dnd5e.preRoll${type.capitalize()}V2\`.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
+      if ( Hooks.call(`dnd5e.preRoll${name}`, this, oldConfig, config.skill) === false ) return null;
+      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
+    }
+
+    const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls.length ) return null;
 
     /**
-     * A hook event that fires before a tool check is rolled for an Actor.
-     * @function dnd5e.preRollToolCheck
+     * A hook event that fires after an skill or tool check has been rolled.
+     * @function dnd5e.rollSkillV2
+     * @function dnd5e.rollToolCheckV2
      * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the tool check is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} toolId                Identifier of the tool being rolled.
-     * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
+     * @param {D20Roll[]} rolls       The resulting rolls.
+     * @param {object} data
+     * @param {string} [data.skill]   ID of the skill that was rolled as defined in `CONFIG.DND5E.skills`.
+     * @param {string} [data.tool]    ID of the tool that was rolled as defined in `CONFIG.DND5E.tools`.
+     * @param {Actor5e} data.subject  Actor for which the roll has been performed.
      */
-    if ( Hooks.call("dnd5e.preRollToolCheck", this, rollData, toolId) === false ) return;
+    Hooks.callAll(`dnd5e.roll${name}V2`, rolls, { [type]: config[type], subject: this });
 
-    const roll = await d20Roll(rollData);
+    if ( `dnd5e.roll${name}` in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`dnd5e.roll${name}\` hook has been deprecated and replaced with \`dnd5e.roll${type.capitalize()}V2\`.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      Hooks.callAll(`dnd5e.roll${name}`, this, rolls[0], config.skill);
+    }
 
-    /**
-     * A hook event that fires after a tool check has been rolled for an Actor.
-     * @function dnd5e.rollToolCheck
-     * @memberof hookEvents
-     * @param {Actor5e} actor   Actor for which the tool check has been rolled.
-     * @param {D20Roll} roll    The resulting roll.
-     * @param {string} toolId   Identifier of the tool that was rolled.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollToolCheck", this, roll, toolId);
-
-    return roll;
+    return oldFormat ? rolls[0] : rolls;
   }
 
   /* -------------------------------------------- */
