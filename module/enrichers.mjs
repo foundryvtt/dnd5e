@@ -826,7 +826,7 @@ async function rollAction(event) {
             break;
           case "concentration":
             if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
-            await actor.rollConcentration(options);
+            await actor.rollConcentration({ ...options, legacy: false });
             break;
           case "save":
             await actor.rollSavingThrow({ ability, event: options.event, target: options.targetValue });

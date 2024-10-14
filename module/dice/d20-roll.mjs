@@ -311,14 +311,16 @@ export default class D20Roll extends BasicRoll {
       "The `configureDialog` on D20Roll has been deprecated and is now handled through `D20Roll.build`.",
       { since: "DnD5e 4.1", until: "DnD5e 4.5" }
     );
-    const DialogClass = this.DefaultConfigurationDialog;
+    const DialogClass = this.constructor.DefaultConfigurationDialog;
     const defaultButton = {
       [D20Roll.ADV_MODE.NORMAL]: "normal",
       [D20Roll.ADV_MODE.ADVANTAGE]: "advantage",
       [D20Roll.ADV_MODE.DISADVANTAGE]: "disadvantage"
     }[String(defaultAction ?? "0")];
     return await DialogClass.configure(
-      {}, { options: { defaultButton, title } }, { rollMode: defaultRollMode }
+      { rolls: [{ parts: [this.formula.replace(roll.d20.formula, "")], options: this.options }] },
+      { options: { defaultButton, title } },
+      { rollMode: defaultRollMode }
     );
     // TODO: Select proper dialog (Skill dialog if chooseModifier is set, Attack dialog if ammo, attack, or mastery set)
   }
