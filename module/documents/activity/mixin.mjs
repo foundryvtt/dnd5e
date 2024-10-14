@@ -479,7 +479,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     } else if ( foundry.utils.getType(usageConfig.consume?.resources) === "Array" ) {
       for ( const index of usageConfig.consume.resources ) {
         if ( ["activityUses", "itemUses"].includes(this.consumption.targets[index]?.type) ) consumeUsage = true;
-        else consummeResource = true;
+        else consumeResource = true;
       }
     }
     return {
