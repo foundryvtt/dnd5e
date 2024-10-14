@@ -2,7 +2,7 @@ import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import buildRoll from "../../dice/build-roll.mjs";
-import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
+import { _applyDeprecatedD20Configs, _createDeprecatedD20Config, _isDeprecatedConfig } from "../../dice/d20-roll.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import { replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
@@ -1546,10 +1546,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Roll an Ability Test.
-   * @param {AbilityRollProcessConfiguration} config  Configuration information for the roll.
-   * @param {BasicRollDialogConfiguration} dialog     Configuration for the roll dialog.
-   * @param {BasicRollMessageConfiguration} message   Configuration for the roll message.
-   * @returns {Promise<D20Roll[]|null>}               A Promise which resolves to the created Roll instance.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
    */
   async rollAbilityTest(config={}, dialog={}, message={}) {
     return this.#rollAbility("check", config, dialog, message);
@@ -1559,10 +1559,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Roll an Ability Saving Throw.
-   * @param {AbilityRollProcessConfiguration} config  Configuration information for the roll.
-   * @param {BasicRollDialogConfiguration} dialog     Configuration for the roll dialog.
-   * @param {BasicRollMessageConfiguration} message   Configuration for the roll message.
-   * @returns {Promise<D20Roll[]|null>}               A Promise which resolves to the created Roll instances.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instances.
    */
   async rollAbilitySave(config={}, dialog={}, message={}) {
     return this.#rollAbility("save", config, dialog, message);
@@ -1577,11 +1577,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Shared rolling functionality between ability checks & saves.
-   * @param {"check"|"save"} type                     Ability roll type.
-   * @param {AbilityRollProcessConfiguration} config  Configuration information for the roll.
-   * @param {BasicRollDialogConfiguration} dialog     Configuration for the roll dialog.
-   * @param {BasicRollMessageConfiguration} message   Configuration for the roll message.
-   * @returns {Promise<D20Roll[]|null>}               A Promise which resolves to the created Roll instance.
+   * @param {"check"|"save"} type                              Ability roll type.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
    */
   async #rollAbility(type, config={}, dialog={}, message={}) {
     let oldFormat = false;
@@ -1600,7 +1600,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
     }
 
-    const ability = this.system.abilities[config.ability];
+    const ability = this.system.abilities?.[config.ability];
     const abilityConfig = CONFIG.DND5E.abilities[config.ability];
 
     const rollData = this.getRollData();
@@ -1610,16 +1610,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
       [`${type}Bonus`]: this.system.bonuses?.abilities?.[type]
     }, rollData);
+    const options = {};
 
     const initialRoll = config.rolls?.pop();
     if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
     if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
 
     const rollConfig = foundry.utils.mergeObject({
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     }, config);
     rollConfig.hookNames = [name].concat(config.hookNames ?? []);
-    rollConfig.rolls = [{ parts, data }].concat(config.rolls ?? []);
+    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
     rollConfig.rolls.forEach(({ parts, data }) => this.addRollExhaustion(parts, data));
     rollConfig.subject = this;
 
@@ -1655,7 +1657,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
-    if ( !rolls?.length ) return null;
+    if ( !rolls.length ) return null;
 
     /**
      * A hook event that fires after an ability check has been rolled.
@@ -1683,25 +1685,38 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Perform a death saving throw, rolling a d20 plus any global save bonuses
-   * @param {object} options          Additional options which modify the roll
-   * @returns {Promise<D20Roll|null>} A Promise which resolves to the Roll instance
+   * Perform a death saving throw, rolling a d20 plus any global save bonuses.
+   * @param {Partial<D20RollProcessConfiguration>} config     Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog    Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message  Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                       A Promise which resolves to the Roll instance.
    */
-  async rollDeathSave(options={}) {
+  async rollDeathSave(config={}, dialog={}, message={}) {
+    let oldFormat = false;
     const death = this.system.attributes.death;
     if ( !death ) throw new Error(`Actors of the type '${this.type}' don't support death saves.`);
 
+    // Handle deprecated config object
+    if ( _isDeprecatedConfig(config) ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `rollDeathSave` method on Actor5e now takes roll, dialog, and message config objects as parameters.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      oldFormat = true;
+      const oldConfig = config;
+      config = {};
+      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
+    }
+
     // Display a warning if we are not at zero HP or if we already have reached 3
     if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
-      ui.notifications.warn("DND5E.DeathSaveUnnecessary", {localize: true});
+      ui.notifications.warn("DND5E.DeathSaveUnnecessary", { localize: true });
       return null;
     }
 
-    // Evaluate a global saving throw bonus
-    const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = [];
-    const data = this.getRollData();
+    let data = {};
+    const options = {};
 
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
@@ -1709,48 +1724,52 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data.prof = new Proficiency(this.system.attributes.prof, 1).term;
     }
 
-    // Include a global actor ability save bonus
-    if ( globalBonuses.save ) {
-      parts.push("@saveBonus");
-      data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
+    const initialRoll = config.rolls?.pop();
+    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
+
+    const rollConfig = foundry.utils.mergeObject({
+      target: 10
+    }, config);
+    rollConfig.hookNames = ["deathSave"].concat(config.hooksNames ?? []);
+    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
+
+    const dialogConfig = foundry.utils.deepClone(dialog);
+
+    const messageConfig = foundry.utils.mergeObject({
+      data: {
+        flags: {
+          dnd5e: {
+            roll: {
+              type: "death"
+            }
+          }
+        },
+        flavor: game.i18n.localize("DND5E.DeathSavingThrow")
+      }
+    }, message);
+
+    if ( "dnd5e.preRollDeathSave" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preRollDeathSave` hook has been deprecated and replaced with `dnd5e.preRollDeathSaveV2`.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
+      if ( Hooks.call("dnd5e.preRollDeathSave", this, oldConfig) === false ) return null;
+      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
     }
 
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
-
-    // Evaluate the roll
-    const flavor = game.i18n.localize("DND5E.DeathSavingThrow");
-    const rollData = foundry.utils.mergeObject({
-      data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      targetValue: 10,
-      messageData: {
-        speaker: speaker,
-        "flags.dnd5e.roll": {type: "death"}
-      }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
-
-    /**
-     * A hook event that fires before a death saving throw is rolled for an Actor.
-     * @function dnd5e.preRollDeathSave
-     * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the death saving throw is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @returns {boolean}                    Explicitly return `false` to prevent death saving throw from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollDeathSave", this, rollData) === false ) return;
-
-    const roll = await d20Roll(rollData);
-    if ( !roll ) return null;
+    const rolls = await this.rollAbilitySave(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls?.length ) return null;
 
     // Take action depending on the result
     const details = {};
+    const roll = rolls[0];
+    const returnValue = oldFormat ? roll : rolls;
 
     // Save success
-    if ( roll.total >= (roll.options.targetValue ?? 10) ) {
+    if ( roll.total >= (roll.options.target ?? 10) ) {
       let successes = (death.success || 0) + 1;
 
       // Critical Success = revive with 1hp
@@ -1790,58 +1809,104 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * updates have been performed.
      * @function dnd5e.rollDeathSave
      * @memberof hookEvents
-     * @param {Actor5e} actor              Actor for which the death saving throw has been rolled.
-     * @param {D20Roll} roll               The resulting roll.
-     * @param {object} details
-     * @param {object} details.updates     Updates that will be applied to the actor as a result of this save.
-     * @param {string} details.chatString  Localizable string displayed in the create chat message. If not set, then
-     *                                     no chat message will be displayed.
-     * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
+     * @param {D20Roll[]} rolls         The resulting rolls.
+     * @param {object} data
+     * @param {string} data.chatString  Localizable string displayed in the create chat message. If not set, then
+     *                                  no chat message will be displayed.
+     * @param {object} data.updates     Updates that will be applied to the actor as a result of this save.
+     * @param {Actor5e} data.subject    Actor for which the death saving throw has been rolled.
+     * @returns {boolean}               Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollDeathSave", this, roll, details) === false ) return roll;
+    if ( Hooks.call("dnd5e.rollDeathSaveV2", rolls, { ...details, subject: this }) === false ) return returnValue;
+
+    if ( "dnd5e.rollDeathSave" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.rollDeathSave` hook has been deprecated and replaced with `dnd5e.rollDeathSaveV2`.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      if ( Hooks.call("dnd5e.rollDeathSave", this, rolls[0], details) === false ) return returnValue;
+    }
 
     if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
 
     // Display success/failure chat message
+    let resultsMessage;
     if ( details.chatString ) {
-      let chatData = { content: game.i18n.format(details.chatString, {name: this.name}), speaker };
+      let chatData = {
+        content: game.i18n.format(details.chatString, { name: this.name }),
+        speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
+      };
       ChatMessage.applyRollMode(chatData, roll.options.rollMode);
-      await ChatMessage.create(chatData);
+      resultsMessage = await ChatMessage.create(chatData);
     }
 
-    // Return the rolled result
-    return roll;
+    /**
+     * A hook event that fires after a death saving throw has been rolled and after changes have been applied.
+     * @function dnd5e.postRollDeathSave
+     * @memberof hookEvents
+     * @param {D20Roll[]} rolls                  The resulting rolls.
+     * @param {object} data
+     * @param {ChatMessage5e|void} data.message  The created results chat message.
+     * @param {Actor5e} data.subject             Actor for which the death saving throw has been rolled.
+     */
+    Hooks.callAll("dnd5e.postRollDeathSave", rolls, { message: resultsMessage, subject: this });
+
+    return returnValue;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Perform a saving throw to maintain concentration.
-   * @param {object} [options]          Options to configure how the saving throw is rolled
-   * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
    */
-  async rollConcentration(options={}) {
+  async rollConcentration(config={}, dialog={}, message={}) {
+    let oldFormat = false;
     if ( !this.isOwner ) return null;
     const conc = this.system.attributes?.concentration;
     if ( !conc ) throw new Error("You may not make a Concentration Saving Throw with this Actor.");
 
-    const config = CONFIG.DND5E;
-    const modes = CONFIG.Dice.D20Roll.ADV_MODE;
+    // Handle deprecated config object
+    if ( _isDeprecatedConfig(config) ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `rollConcentration` method on Actor5e now takes roll, dialog, and message config objects as parameters.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      oldFormat = true;
+      const oldConfig = config;
+      config = {};
+      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
+    }
+
+    let data = {};
     const parts = [];
+    const options = {
+      advantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE
+    };
 
     // Concentration bonus
     if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
 
-    const ability = (conc.ability in config.abilities) ? conc.ability : config.defaultAbilities.concentration;
+    const initialRoll = config.rolls?.pop();
+    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
 
-    options = foundry.utils.mergeObject({
-      ability: ability,
+    const rollConfig = foundry.utils.mergeObject({
+      ability: (conc.ability in CONFIG.DND5E.abilities) ? conc.ability : CONFIG.DND5E.defaultAbilities.concentration,
       isConcentration: true,
-      targetValue: 10,
-      advantage: options.advantage || (conc.roll.mode === modes.ADVANTAGE),
-      disadvantage: options.disadvantage || (conc.roll.mode === modes.DISADVANTAGE)
-    }, options);
-    options.parts = parts.concat(options.parts ?? []);
+      target: 10
+    }, config);
+    rollConfig.hookNames = ["concentration"].concat(config.hookNames ?? []);
+    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
+
+    const dialogConfig = foundry.utils.deepClone(dialog);
+
+    const messageConfig = foundry.utils.deepClone(message);
 
     /**
      * A hook event that fires before a saving throw to maintain concentration is rolled for an Actor.
@@ -1851,104 +1916,101 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {D20RollConfiguration} options    Configuration data for the pending roll.
      * @returns {boolean}                       Explicitly return `false` to prevent the save from being performed.
      */
-    if ( Hooks.call("dnd5e.preRollConcentration", this, options) === false ) return;
+    if ( "dnd5e.preRollConcentration" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preRollConcentration` hook has been deprecated and replaced with `dnd5e.preRollConcentrationV2`.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
+      if ( Hooks.call("dnd5e.preRollConcentration", this, oldConfig) === false ) return null;
+      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
+    }
 
-    // Perform a standard ability save.
-    const roll = await this.rollAbilitySave(options.ability, options);
+    const rolls = await this.rollAbilitySave(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls?.length ) return null;
 
     /**
      * A hook event that fires after a saving throw to maintain concentration is rolled for an Actor.
      * @function dnd5e.rollConcentration
      * @memberof hookEvents
-     * @param {Actor5e} actor     Actor for which the saving throw has been rolled.
-     * @param {D20Roll} roll      The resulting roll.
+     * @param {D20Roll[]} rolls     The resulting rolls.
+     * @param {object} data
+     * @param {Actor5e} data.actor  Actor for which the saving throw has been rolled.
      */
-    if ( roll ) Hooks.callAll("dnd5e.rollConcentration", this, roll);
+    Hooks.callAll("dnd5e.rollConcentrationV2", rolls, { subject: this });
 
-    return roll;
+    if ( "dnd5e.rollConcentration" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.rollConcentration` hook has been deprecated and replaced with `dnd5e.rollConcentrationV2`.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      Hooks.callAll("dnd5e.rollConcentration", this, rolls[0]);
+    }
+
+    return oldFormat ? rolls[0] : rolls;
   }
 
   /* -------------------------------------------- */
 
   /**
+   * @typedef {D20RollOptions} InitiativeRollOptions
+   * @param {D20Roll.ADV_MODE} [advantageMode]  A specific advantage mode to apply.
+   * @property {string} [flavor]                Special flavor text to apply to the created message.
+   */
+
+  /**
    * Get an un-evaluated D20Roll instance used to roll initiative for this Actor.
-   * @param {object} [options]                        Options which modify the roll
-   * @param {D20Roll.ADV_MODE} [options.advantageMode]    A specific advantage mode to apply
-   * @param {string} [options.flavor]                     Special flavor text to apply
-   * @returns {D20Roll}                               The constructed but unevaluated D20Roll
+   * @param {Partial<InitiativeRollOptions>} options  Configuration information for the roll.
+   * @returns {D20Roll|null}                          The constructed but unevaluated D20Roll.
    */
   getInitiativeRoll(options={}) {
 
     // Use a temporarily cached initiative roll
     if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
-
-    // Obtain required data
     const init = this.system.attributes?.init;
+    const flags = this.flags.dnd5e ?? {};
+
     const abilityId = init?.ability || CONFIG.DND5E.defaultAbilities.initiative;
-    const data = this.getRollData();
-    const flags = this.flags.dnd5e || {};
+    const ability = this.system.abilities?.[abilityId];
+
+    const rollData = this.getRollData();
+    let { parts, data } = buildRoll({
+      mod: init?.mod,
+      prof: init.prof.hasProficiency ? init.prof.term : null,
+      initiativeBonus: init.bonus,
+      [`${abilityId}AbilityCheckBonus`]: ability?.bonuses?.check,
+      abilityCheckBonus: this.system.bonuses?.abilities?.check,
+      alert: flags.initiativeAlert && (game.settings.get("dnd5e", "rulesVersion") === "legacy") ? 5 : null
+    }, rollData);
+
     const remarkableAthlete = flags.remarkableAthlete && (game.settings.get("dnd5e", "rulesVersion") === "modern");
     if ( flags.initiativeAdv || remarkableAthlete ) options.advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
-
-    // Standard initiative formula
-    const parts = ["1d20"];
-
-    // Special initiative bonuses
-    if ( init ) {
-      parts.push(init.mod);
-      if ( init.prof.term !== "0" ) {
-        parts.push("@prof");
-        data.prof = init.prof.term;
-      }
-      if ( init.bonus ) {
-        parts.push("@bonus");
-        data.bonus = Roll.replaceFormulaData(init.bonus, data);
-      }
-    }
-
-    // Ability check bonuses
-    if ( "abilities" in this.system ) {
-      const abilityBonus = this.system.abilities[abilityId]?.bonuses?.check;
-      if ( abilityBonus ) {
-        parts.push("@abilityBonus");
-        data.abilityBonus = Roll.replaceFormulaData(abilityBonus, data);
-      }
-    }
-
-    // Global check bonus
-    if ( "bonuses" in this.system ) {
-      const globalCheckBonus = this.system.bonuses.abilities?.check;
-      if ( globalCheckBonus ) {
-        parts.push("@globalBonus");
-        data.globalBonus = Roll.replaceFormulaData(globalCheckBonus, data);
-      }
-    }
-
-    // Alert feat
-    if ( flags.initiativeAlert ) {
-      parts.push("@alertBonus");
-      data.alertBonus = 5;
-    }
 
     // Add exhaustion reduction
     this.addRollExhaustion(parts, data);
 
     // Ability score tiebreaker
     const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
-    if ( tiebreaker && ("abilities" in this.system) ) {
-      const abilityValue = this.system.abilities[abilityId]?.value;
-      if ( Number.isNumeric(abilityValue) ) parts.push(String(abilityValue / 100));
-    }
+    if ( tiebreaker && Number.isNumeric(ability?.value) ) parts.push(String(ability.value / 100));
 
     options = foundry.utils.mergeObject({
       flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
-      halflingLucky: flags.halflingLucky ?? false,
-      critical: null,
-      fumble: null
+      halflingLucky: flags.halflingLucky ?? false
     }, options);
 
+    const rollConfig = { parts, data, options, subject: this };
+
+    /**
+     * A hook event that fires before initiative roll is prepared for an Actor.
+     * @function dnd5e.preConfigureInitiative
+     * @memberof hookEvents
+     * @param {Actor5e} subject              The Actor that is rolling initiative.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     */
+    Hooks.callAll("dnd5e.preConfigureInitiative", this, rollConfig);
+
     // Create the d20 roll
-    const formula = parts.join(" + ");
+    const formula = ["1d20"].concat(parts).join(" + ");
     return new CONFIG.Dice.D20Roll(formula, data, options);
   }
 
@@ -1956,23 +2018,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Roll initiative for this Actor with a dialog that provides an opportunity to elect advantage or other bonuses.
-   * @param {object} [rollOptions]      Options forwarded to the Actor#getInitiativeRoll method
+   * @param {Partial<InitiativeRollOptions>} [rollOptions={}]  Options forwarded to the Actor#getInitiativeRoll method.
    * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor
    */
   async rollInitiativeDialog(rollOptions={}) {
     // Create and configure the Initiative roll
     const roll = this.getInitiativeRoll(rollOptions);
-    const choice = await roll.configureDialog({
-      defaultRollMode: game.settings.get("core", "rollMode"),
-      title: `${game.i18n.localize("DND5E.InitiativeRoll")}: ${this.name}`,
-      chooseModifier: false,
-      defaultAction: rollOptions.advantageMode ?? dnd5e.dice.D20Roll.ADV_MODE.NORMAL
-    });
-    if ( choice === null ) return; // Closed dialog
+
+    const config = {
+      evaluate: false,
+      event: rollOptions.event,
+      hookNames: ["abilityTest", "initiative"],
+      rolls: [{ parts: [roll.formula.replace(roll.d20.formula, "")], options: roll.options }],
+      subject: this
+    };
+    const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
+    const message = { rollMode: game.settings.get("core", "rollMode") };
+    const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
+    if ( !rolls.length ) return;
+    rolls[0].configureModifiers();
 
     // Temporarily cache the configured roll and use it to roll initiative for the Actor
-    this._cachedInitiativeRoll = roll;
-    await this.rollInitiative({createCombatants: true});
+    this._cachedInitiativeRoll = rolls[0];
+    await this.rollInitiative({ createCombatants: true });
   }
 
   /* -------------------------------------------- */
