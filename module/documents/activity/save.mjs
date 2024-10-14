@@ -109,7 +109,7 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
       const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document });
       await token.actor.rollAbilitySave(
         {
-          event, speaker,
+          event,
           ability: target.dataset.ability ?? this.save.ability,
           target: Number.isFinite(dc) ? dc : this.save.dc.value
         },

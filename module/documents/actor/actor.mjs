@@ -1653,6 +1653,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const rollConfig = foundry.utils.mergeObject({
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     }, config);
+    rollConfig.hookNames = [name].concat(config.hookNames ?? []);
     rollConfig.rolls = [{ parts, data }].concat(config.rolls ?? []);
     rollConfig.rolls.forEach(({ parts, data }) => this.addRollExhaustion(parts, data));
     rollConfig.subject = this;
@@ -1677,18 +1678,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         speaker: ChatMessage.getSpeaker({ actor: this })
       }
     }, message);
-
-    /**
-     * A hook event that fires before an ability check is rolled.
-     * @function dnd5e.preRollAbilityTestV2
-     * @function dnd5e.preRollAbilitySaveV2
-     * @memberof hookEvents
-     * @param {AbilityRollProcessConfiguration} config   Configuration data for the pending roll.
-     * @param {BasicRollDialogConfiguration} dialog      Presentation data for the roll configuration dialog.
-     * @param {BasicRollMessageConfiguration} message    Configuration data for the roll's message.
-     * @returns {boolean}                                Explicitly return `false` to prevent the roll.
-     */
-    if ( Hooks.call(`dnd5e.preRoll${name}V2`, rollConfig, dialogConfig, messageConfig) === false ) return null;
 
     if ( "dnd5e.preRollAbilityTest" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -2128,8 +2117,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     formula ??= `max(0, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
-    rollConfig.subject = this;
+    rollConfig.hookNames = ["hitDie"].concat(config.hooksNames ?? []);
     rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
+    rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
       configure: false
@@ -2145,17 +2135,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         "flags.dnd5e.roll": {type: "hitDie"}
       }
     }, message);
-
-    /**
-     * A hook event that fires before a hit die is rolled for an Actor.
-     * @function dnd5e.preRollHitDieV2
-     * @memberof hookEvents
-     * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
-     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
-     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
-     * @returns {boolean}                              Explicitly return `false` to prevent hit die from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollHitDieV2", rollConfig, dialogConfig, messageConfig) === false ) return null;
 
     if ( "dnd5e.preRollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(

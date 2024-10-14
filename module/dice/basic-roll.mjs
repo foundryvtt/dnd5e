@@ -8,6 +8,7 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  * @typedef {object} BasicRollProcessConfiguration
  * @property {BasicRollConfiguration[]} rolls  Configuration data for individual rolls.
  * @property {Event} [event]                   Event that triggered the rolls.
+ * @property {string[]} [hookNames]            Name suffixes for configuration hooks called.
  * @property {Document} [subject]              Document that initiated this roll.
  * @property {number} [target]                 Default target value for all rolls.
  */
@@ -91,6 +92,22 @@ export default class BasicRoll extends Roll {
    * @returns {BasicRoll[]}
    */
   static async build(config={}, dialog={}, message={}) {
+    const hookNames = ["", ...(config.hookNames ?? [])].reverse();
+
+    /**
+     * A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling
+     * method (e.g. `dnd5e.preRollSkillV2`, `dnd5e.preRollAbilityTestV2`, `dnd5e.preRollV2`).
+     * @function dnd5e.preRollV2
+     * @memberof hookEvents
+     * @param {BasicRollProcessConfiguration} config   Configuration data for the pending roll.
+     * @param {BasicRollDialogConfiguration} dialog    Presentation data for the roll configuration dialog.
+     * @param {BasicRollMessageConfiguration} message  Configuration data for the roll's message.
+     * @returns {boolean}                              Explicitly return `false` to prevent the roll.
+     */
+    for ( const hookName of hookNames ) {
+      if ( Hooks.call(`dnd5e.preRoll${hookName.capitalize()}V2`, config, dialog, message) === false ) return [];
+    }
+
     this.applyKeybindings(config, dialog, message);
 
     let rolls;
