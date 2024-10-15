@@ -440,6 +440,21 @@ export function registerSystemSettings() {
     default: [],
     config: true
   });
+
+  // Auto roll NPC HP on drop
+  game.settings.register("dnd5e", "autoRollNPCHP", {
+    name: "SETTINGS.DND5E.AUTOROLLNPCHP.Name",
+    hint: "SETTINGS.DND5E.AUTOROLLNPCHP.Hint",
+    scope: "world",
+    config: true,
+    default: "no",
+    type: String,
+    choices: {
+      no: "SETTINGS.DND5E.AUTOROLLNPCHP.No",
+      silent: "SETTINGS.DND5E.AUTOROLLNPCHP.Silent",
+      yes: "SETTINGS.DND5E.AUTOROLLNPCHP.Yes"
+    }
+  });
 }
 
 /**

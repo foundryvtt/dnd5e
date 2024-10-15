@@ -3363,6 +3363,13 @@
     "Name": "Allow Summoning",
     "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
   },
+  "AUTOROLLNPCHP": {
+    "Name": "Auto-roll NPC HP",
+    "Hint": "Configure whether max HP is rolled from HP formula when an NPC token is created.",
+    "No": "Do not auto-roll",
+    "Silent": "Auto-roll without creating chat card",
+    "Yes": "Auto-roll and create chat card"
+  },
   "BLOODIED": {
     "Name": "Bloodied Status",
     "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",
