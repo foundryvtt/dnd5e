@@ -267,6 +267,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._prepareTools(rollData, globalBonuses, checkBonus);
     this._prepareArmorClass();
     this._prepareInitiative(rollData, checkBonus);
+    this._prepareSpellcastingAbility();
 
     // Apply condition immunities
     const conditionImmunities = this.system.traits?.ci?.value;
@@ -631,17 +632,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Prepare spellcasting DC & modifier.
+   */
+  _prepareSpellcastingAbility() {
+    const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
+    this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
+    this.system.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare data related to the spell-casting capabilities of the Actor.
-   * Mutates the value of the system.spells object.
+   * Mutates the value of the system.spells object. Must be called after final item preparation.
    * @protected
    */
   _prepareSpellcasting() {
     if ( !this.system.spells ) return;
-
-    // Spellcasting DC and modifier
-    const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
-    this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
-    this.system.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
 
     // Translate the list of classes into spellcasting progression
     const progression = { slot: 0, pact: 0 };
