@@ -1067,17 +1067,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Apply listeners to chat messages.
-   * @param {HTML} html  Rendered chat message.
+   * @param {jQuery|HTMLElement} html  Rendered chat message.
    */
   static chatListeners(html) {
-    html.on("click", ".item-name, .collapsible", this._onChatCardToggleContent.bind(this));
-    html[0].addEventListener("click", event => {
+    html = html instanceof HTMLElement ? html : html[0];
+    html.addEventListener("click", event => {
       if ( event.target.closest("[data-context-menu]") ) {
         event.preventDefault();
         event.stopPropagation();
         event.target.closest("[data-message-id]").dispatchEvent(new PointerEvent("contextmenu", {
           view: window, bubbles: true, cancelable: true
         }));
+      } else if ( event.target.closest(".collapsible") ) {
+        this._onChatCardToggleContent(event);
       }
     });
   }
@@ -1090,8 +1092,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @private
    */
   static _onChatCardToggleContent(event) {
-    const header = event.currentTarget;
-    if ( header.classList.contains("collapsible") && !event.target.closest(".collapsible-content.card-content") ) {
+    const header = event.target.closest(".collapsible");
+    if ( !event.target.closest(".collapsible-content.card-content") ) {
       event.preventDefault();
       header.classList.toggle("collapsed");
 

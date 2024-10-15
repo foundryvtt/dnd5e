@@ -806,11 +806,14 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {ChatPopout} app  The ChatPopout Application instance.
    * @param {jQuery} html     The rendered Application HTML.
    */
-  static onRenderChatPopout(app, [html]) {
+  static onRenderChatPopout(app, html) {
+    html = html instanceof HTMLElement ? html : html[0];
     const close = html.querySelector(".header-button.close");
-    close.innerHTML = '<i class="fas fa-times"></i>';
-    close.dataset.tooltip = game.i18n.localize("Close");
-    close.setAttribute("aria-label", close.dataset.tooltip);
+    if ( close ) {
+      close.innerHTML = '<i class="fas fa-times"></i>';
+      close.dataset.tooltip = game.i18n.localize("Close");
+      close.setAttribute("aria-label", close.dataset.tooltip);
+    }
     html.querySelector(".message-metadata [data-context-menu]")?.remove();
   }
 
@@ -818,9 +821,8 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Wait to apply appropriate element heights until after the chat log has completed its initial batch render.
-   * @param {jQuery} html  The chat log HTML.
    */
-  static onRenderChatLog([html]) {
+  static onRenderChatLog() {
     if ( !game.settings.get("dnd5e", "autoCollapseItemCards") ) {
       requestAnimationFrame(() => {
         // FIXME: Allow time for transitions to complete. Adding a transitionend listener does not appear to work, so
