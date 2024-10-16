@@ -1,0 +1,23 @@
+<ol class="unlist trait-list">
+    {{#if (and children topLevel (not otherGroup))}}
+    <li>
+        <label class="name">{{ localize "DND5E.TraitAll" category=label }}</label>
+        <div class="proficiency">
+            {{ formInput @root.checkbox name=(concat keyPath @key) value=chosen
+                         input=@root.inputs.createCheckboxInput }}
+        </div>
+    </li>
+    {{/if}}
+    {{#each choices}}
+    <li {{~#if category}} class="category"{{/if}}>
+        <label class="name">{{ label }}</label>
+        <div class="proficiency">
+            {{ formInput @root.checkbox name=(concat ../keyPath @key) value=chosen
+                         disabled=disabled input=@root.inputs.createCheckboxInput }}
+        </div>
+        {{#if children}}
+        {{> "dnd5e.traits-list" choices=children topLevel=false }}
+        {{/if}}
+    </li>
+    {{/each}}
+</ol>
