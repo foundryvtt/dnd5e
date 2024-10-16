@@ -1,7 +1,7 @@
 import Item5e from "../../documents/item.mjs";
 import { formatCR, formatNumber } from "../../utils.mjs";
 import Award from "../award.mjs";
-import ActorMovementConfig from "./movement-config.mjs";
+import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 
 /**
@@ -298,8 +298,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         this.actor.longRest({ advanceTime: true });
         break;
       case "movementConfig":
-        const movementConfig = new ActorMovementConfig(this.object);
-        movementConfig.render(true);
+        new MovementSensesConfig({ document: this.actor, type: "movement" }).render({ force: true });
         break;
       case "placeMembers":
         this.actor.system.placeMembers();

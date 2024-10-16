@@ -6,7 +6,7 @@ const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api
 export default class DocumentSheet5e extends HandlebarsApplicationMixin(DocumentSheetV2) {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["dnd5e2"]
+    classes: ["dnd5e2", "standard-form"]
   };
 
   /* -------------------------------------------- */
