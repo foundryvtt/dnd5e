@@ -7,8 +7,15 @@
         {{ formField fields.limit value=data.limit placeholder="1" localize=true }}
         <hr>
         {{ formField fields.roll.fields.mode value=data.roll.mode options=advantageModeOptions localize=true }}
-        {{ formField fields.roll.fields.min value=data.roll.min type="number" localize=true }}
-        {{ formField fields.roll.fields.max value=data.roll.max type="number" localize=true }}
+        <div class="form-group">
+            <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
+            <div class="form-fields">
+                {{ formField fields.roll.fields.min value=data.roll.min type="number" localize=true
+                             label=(localize "DND5E.Minimum") hint=false classes="label-top" }}
+                {{ formField fields.roll.fields.max value=data.roll.max type="number" localize=true
+                             label=(localize "DND5E.Maximum") hint=false classes="label-top" }}
+            </div>
+        </div>
     </fieldset>
 
     {{!-- Global Bonus --}}

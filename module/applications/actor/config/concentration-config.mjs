@@ -12,6 +12,8 @@ export default class ConcentrationConfig extends BaseConfigSheet {
     }
   };
 
+  /* -------------------------------------------- */
+
   /** @override */
   static PARTS = {
     config: {
@@ -35,7 +37,7 @@ export default class ConcentrationConfig extends BaseConfigSheet {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    const source = this.document.system.toObject();
+    const source = this.document.system._source;
 
     context.data = source.attributes?.concentration ?? {};
     context.fields = this.document.system.schema.fields.attributes.fields.concentration.fields;

@@ -18,8 +18,8 @@ export default class RollConfigField extends foundry.data.fields.SchemaField {
     fields = {
       ability: new StringField({required: true, initial: ability, label: "DND5E.AbilityModifier"}),
       roll: new SchemaField({
-        min: new NumberField({...opts, label: "DND5E.Minimum"}),
-        max: new NumberField({...opts, label: "DND5E.Maximum"}),
+        min: new NumberField({...opts, label: "DND5E.ROLL.Range.Minimum"}),
+        max: new NumberField({...opts, label: "DND5E.ROLL.Range.Maximum"}),
         mode: new NumberField({choices: [-1, 0, 1], initial: 0, label: "DND5E.AdvantageMode"}),
         ...roll
       }),

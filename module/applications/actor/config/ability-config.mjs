@@ -12,6 +12,8 @@ export default class AbilityConfig extends BaseConfigSheet {
     }
   };
 
+  /* -------------------------------------------- */
+
   /** @override */
   static PARTS = {
     config: {
