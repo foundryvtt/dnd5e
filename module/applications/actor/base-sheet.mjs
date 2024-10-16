@@ -8,7 +8,6 @@ import ActorArmorConfig from "./armor-config.mjs";
 import ActorConcentrationConfig from "./concentration-config.mjs";
 import ActorHitDiceConfig from "./hit-dice-config.mjs";
 import ActorHitPointsConfig from "./hit-points-config.mjs";
-import ActorInitiativeConfig from "./initiative-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
 import ActorSensesConfig from "./senses-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
@@ -24,6 +23,8 @@ import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
+
+import InitiativeConfig from "./config/initiative-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
@@ -754,7 +755,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         app = new ActorHitPointsConfig(this.actor);
         break;
       case "initiative":
-        app = new ActorInitiativeConfig(this.actor);
+        app = new InitiativeConfig({ document: this.actor });
         break;
       case "movement":
         app = new ActorMovementConfig(this.actor);
