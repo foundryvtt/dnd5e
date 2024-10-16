@@ -1279,4 +1279,20 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
     return buttons;
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _updateObject(event, formData) {
+    // Unset any flags which are "false"
+    for ( const [k, v] of Object.entries(formData) ) {
+      if ( k.startsWith("flags.dnd5e.") && !v ) {
+        delete formData[k];
+        if ( foundry.utils.hasProperty(this.document._source, k) ) formData[k.replace(/\.([\w\d]+)$/, ".-=$1")] = null;
+      }
+    }
+
+    // Parent ActorSheet update steps
+    return super._updateObject(event, formData);
+  }
 }

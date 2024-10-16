@@ -53,7 +53,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     { tab: "features", label: "DND5E.Features", icon: "fas fa-list" },
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
     { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
-    { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" }
+    { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
+    { tab: "special-traits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
   ];
 
   /**

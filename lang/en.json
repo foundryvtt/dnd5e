@@ -582,30 +582,75 @@
 "DND5E.BiopgrahyPublicEdit": "Edit Public Biography",
 "DND5E.Bonds": "Bonds",
 "DND5E.Bonus": "Bonus",
-"DND5E.BonusAbility": "Global Ability Bonuses",
-"DND5E.BonusAbilityCheck": "Global Ability Check Bonus",
-"DND5E.BonusAbilitySave": "Global Saving Throw Bonus",
-"DND5E.BonusAbilitySaveTitle": "Global Saving Throws",
-"DND5E.BonusAbilitySkill": "Global Skill Check Bonus",
 "DND5E.BonusAction": "Bonus Action",
 "DND5E.BonusActionAbbr": "BA",
 "DND5E.BonusAttack": "Attack Bonus",
 "DND5E.BonusDamage": "Damage Bonus",
-"DND5E.BonusMSAttack": "Melee Spell Attack Bonus",
-"DND5E.BonusMSDamage": "Melee Spell Damage Bonus",
-"DND5E.BonusMWAttack": "Melee Weapon Attack Bonus",
-"DND5E.BonusMWDamage": "Melee Weapon Damage Bonus",
-"DND5E.BonusRSAttack": "Ranged Spell Attack Bonus",
-"DND5E.BonusRSDamage": "Ranged Spell Damage Bonus",
-"DND5E.BonusRWAttack": "Ranged Weapon Attack Bonus",
-"DND5E.BonusRWDamage": "Ranged Weapon Damage Bonus",
 "DND5E.BonusSaveForm": "Update Bonuses",
-"DND5E.BonusSpell": "Global Spell Bonuses",
-"DND5E.BonusSpellDC": "Global Spell DC Bonus",
 "DND5E.BonusTitle": "Configure Actor Bonuses",
-"DND5E.Bonuses": "Global Bonuses",
-"DND5E.BonusesHint": "Define global bonuses as formulas which are added to certain rolls. For example: 1d4 + 2",
-"DND5E.BonusesInstructions": "Configure character bonuses which are added to the appropriate dice roll",
+
+"DND5E.BONUSES": {
+  "FIELDS": {
+    "bonuses": {
+      "label": "Global Bonuses",
+      "hint": "Global bonuses as formulas which are added to certain rolls.",
+      "abilities": {
+        "label": "Global Ability Bonuses",
+        "check": {
+          "label": "Global Ability Check Bonus"
+        },
+        "save": {
+          "label": "Global Saving Throw Bonus"
+        },
+        "skill": {
+          "label": "Global Skill Check Bonus"
+        }
+      },
+      "msak": {
+        "label": "Melee Spell Bonuses",
+        "attack": {
+          "label": "Melee Spell Attack Bonus"
+        },
+        "damage": {
+          "label": "Melee Spell Damage Bonus"
+        }
+      },
+      "mwak": {
+        "label": "Melee Weapon Bonuses",
+        "attack": {
+          "label": "Melee Weapon Attack Bonus"
+        },
+        "damage": {
+          "label": "Melee Weapon Damage Bonus"
+        }
+      },
+      "rsak": {
+        "label": "Ranged Spell Bonuses",
+        "attack": {
+          "label": "Ranged Spell Attack Bonus"
+        },
+        "damage": {
+          "label": "Ranged Spell Damage Bonus"
+        }
+      },
+      "rwak": {
+        "label": "Ranged Weapon Bonuses",
+        "attack": {
+          "label": "Ranged Weapon Attack Bonus"
+        },
+        "damage": {
+          "label": "Ranged Weapon Damage Bonus"
+        }
+      },
+      "spell": {
+        "label": "Global Spell Bonuses",
+        "dc": {
+          "label": "Global Spell DC Bonus"
+        }
+      }
+    }
+  }
+},
 
 "DND5E.CAST": {
   "Title": "Cast",
