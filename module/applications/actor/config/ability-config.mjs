@@ -45,7 +45,7 @@ export default class AbilityConfig extends BaseConfigSheet {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    const source = this.document.system.toObject();
+    const source = this.document.system._source;
 
     context.ability = this.abilityConfig?.label;
     context.data = source.abilities?.[this.options.ability] ?? {};

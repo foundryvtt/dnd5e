@@ -2,8 +2,15 @@
     {{!-- Ability Score & Maxmimum --}}
     <fieldset class="card">
         <legend>{{ localize "DND5E.ABILITY.SECTIONS.Score" ability=ability localize=true }}</legend>
-        {{ formField fields.value name=(concat prefix "value") value=data.value localize=true }}
-        {{ formField fields.max name=(concat prefix "max") value=data.max placeholder="20" localize=true }}
+        <div class="form-group">
+            <label>{{ localize "DND5E.AbilityScore" }}</label>
+            <div class="form-fields">
+                {{ formField fields.value name=(concat prefix "value") value=data.value localize=true
+                             label=(localize "DND5E.AbilityScoreShort") classes="label-top" }}
+                {{ formField fields.max name=(concat prefix "max") value=data.max placeholder="20" localize=true
+                             label=(localize "DND5E.AbilityScoreMaxShort") classes="label-top" }}
+            </div>
+        </div>
         {{ formField fields.proficient name=(concat prefix "proficient") value=data.proficient
                      options=proficiencyOptions localize=true }}
     </fieldset>
