@@ -13,6 +13,6 @@ export default class ActorAbilityConfig extends AbilityConfig {
       "The `ActorAbilityConfig` application has been deprecated and replaced with `AbilityConfig`.",
       { since: "DnD5e 4.1", until: "DnD5e 4.3" }
     );
-    super({ ...options, document: actor, ability: abilityId });
+    super({ ...options, document: actor, key: abilityId });
   }
 }

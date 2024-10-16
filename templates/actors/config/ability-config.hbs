@@ -1,7 +1,7 @@
 <section class="flexcol">
     {{!-- Ability Score & Maxmimum --}}
     <fieldset class="card">
-        <legend>{{ localize "DND5E.ABILITY.SECTIONS.Score" ability=ability localize=true }}</legend>
+        <legend>{{ localize "DND5E.ABILITY.SECTIONS.Score" ability=label }}</legend>
         <div class="form-group">
             <label>{{ localize "DND5E.AbilityScore" }}</label>
             <div class="form-fields">
@@ -17,9 +17,9 @@
 
     {{!-- Local Bonuses --}}
     <fieldset class="card">
-        <legend>{{ localize "DND5E.ABILITY.SECTIONS.Bonuses.Label" ability=ability }}</legend>
+        <legend>{{ localize "DND5E.ABILITY.SECTIONS.Bonuses.Label" ability=label }}</legend>
         <div class="form-group">
-            <p class="hint">{{ localize "DND5E.ABILITY.SECTIONS.Bonuses.Hint" ability=ability }}</p>
+            <p class="hint">{{ localize "DND5E.ABILITY.SECTIONS.Bonuses.Hint" ability=label }}</p>
         </div>
         {{ formField fields.bonuses.fields.save name=(concat prefix "bonuses.save") value=data.bonuses.save
                      localize=true }}
