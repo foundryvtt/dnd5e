@@ -54,6 +54,24 @@
 "DND5E.AbbreviationLevel": "Lvl.",
 "DND5E.AbbreviationLbs": "lbs.",
 "DND5E.AbbreviationSR": "SR",
+
+"DND5E.ABILITY": {
+  "Configure": {
+    "Title": "Configure {ability}"
+  },
+  "SECTIONS": {
+    "Bonuses": {
+      "Label": "{ability} Bonuses",
+      "Hint": "These bonuses apply to checks & saves made with {ability}."
+    },
+    "Global": {
+      "Label": "Global Bonuses",
+      "Hint": "These bonuses apply to checks & saves made with any ability."
+    },
+    "Score": "{ability} Score"
+  }
+},
+
 "DND5E.Ability": "Ability",
 "DND5E.Abilities": "Abilities",
 "DND5E.AbilityStr": "Strength",
@@ -73,9 +91,11 @@
 "DND5E.AbilitySan": "Sanity",
 "DND5E.AbilitySanAbbr": "san",
 "DND5E.AbilityScore": "Ability Score",
+"DND5E.AbilityScoreShort": "Score",
 "DND5E.AbilityScorePl": "Ability Scores",
 "DND5E.AbilityScoreL": "{ability} Score",
 "DND5E.AbilityScoreMax": "Maximum Ability Score",
+"DND5E.AbilityScoreMaxShort": "Maximum",
 "DND5E.AbilityModifier": "Ability Modifier",
 "DND5E.AbilityPromptText": "What type of {ability} check?",
 "DND5E.AbilityPromptTitle": "{ability} Ability Check",
