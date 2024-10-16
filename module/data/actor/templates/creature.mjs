@@ -27,19 +27,19 @@ export default class CreatureTemplate extends CommonTemplate {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       bonuses: new SchemaField({
-        mwak: makeAttackBonuses({ label: "DND5E.BonusMWAttack" }),
-        rwak: makeAttackBonuses({ label: "DND5E.BonusRWAttack" }),
-        msak: makeAttackBonuses({ label: "DND5E.BonusMSAttack" }),
-        rsak: makeAttackBonuses({ label: "DND5E.BonusRSAttack" }),
+        mwak: makeAttackBonuses(),
+        rwak: makeAttackBonuses(),
+        msak: makeAttackBonuses(),
+        rsak: makeAttackBonuses(),
         abilities: new SchemaField({
-          check: new FormulaField({ required: true, label: "DND5E.BonusAbilityCheck" }),
-          save: new FormulaField({ required: true, label: "DND5E.BonusAbilitySave" }),
-          skill: new FormulaField({ required: true, label: "DND5E.BonusAbilitySkill" })
-        }, { label: "DND5E.BonusAbility" }),
+          check: new FormulaField({ required: true }),
+          save: new FormulaField({ required: true }),
+          skill: new FormulaField({ required: true })
+        }),
         spell: new SchemaField({
-          dc: new FormulaField({ required: true, deterministic: true, label: "DND5E.BonusSpellDC" })
-        }, { label: "DND5E.BonusSpell" })
-      }, { label: "DND5E.Bonuses" }),
+          dc: new FormulaField({ required: true, deterministic: true })
+        })
+      }),
       skills: new MappingField(new RollConfigField({
         value: new NumberField({
           required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
