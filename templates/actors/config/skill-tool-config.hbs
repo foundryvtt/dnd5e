@@ -20,11 +20,22 @@
         {{/if}}
         {{ formField fields.bonuses.fields.check name=(concat prefix "bonuses.check") value=data.bonuses.check
                      localize=true }}
-        <hr>
-        {{ formField fields.roll.fields.min name=(concat prefix "roll.min") type="number" value=data.roll.min
-                     localize=true }}
-        {{ formField fields.roll.fields.max name=(concat prefix "roll.max") type="number" value=data.roll.max
-                     localize=true }}
+    </fieldset>
+
+    {{!-- Rolls --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ROLL.Section" label=label }}</legend>
+        <div class="form-group">
+            <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
+            <div class="form-fields">
+                {{ formField fields.roll.fields.min name=(concat prefix "roll.min") value=data.roll.min
+                             placeholder="1" type="number" localize=true label=(localize "DND5E.Minimum")
+                             hint=false classes="label-top" }}
+                {{ formField fields.roll.fields.max name=(concat prefix "roll.max") value=data.roll.max
+                             placeholder="20" type="number" localize=true label=(localize "DND5E.Maximum")
+                             hint=false classes="label-top" }}
+            </div>
+        </div>
     </fieldset>
 
     {{!-- Global Skill Bonuses --}}
@@ -34,7 +45,10 @@
         <div class="form-group">
             <p class="hint">{{ localize (concat section "Global.Hint") }}</p>
         </div>
+        {{ formField global.fields.check value=global.data.check localize=true }}
+        {{#if global.skill}}
         {{ formField global.fields.skill value=global.data.skill localize=true }}
+        {{/if}}
     </fieldset>
     {{/if}}
 </section>

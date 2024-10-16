@@ -5,14 +5,18 @@
         {{ formField fields.ability value=data.ability options=abilityOptions localize=true }}
         {{ formField fields.bonuses.fields.save value=data.bonuses.save localize=true }}
         {{ formField fields.limit value=data.limit placeholder="1" localize=true }}
-        <hr>
+    </fieldset>
+
+    {{!-- Rolls --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ROLL.Section" label=(localize "DND5E.Concentration") }}</legend>
         {{ formField fields.roll.fields.mode value=data.roll.mode options=advantageModeOptions localize=true }}
         <div class="form-group">
             <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
             <div class="form-fields">
-                {{ formField fields.roll.fields.min value=data.roll.min type="number" localize=true
+                {{ formField fields.roll.fields.min value=data.roll.min placeholder="1" type="number" localize=true
                              label=(localize "DND5E.Minimum") hint=false classes="label-top" }}
-                {{ formField fields.roll.fields.max value=data.roll.max type="number" localize=true
+                {{ formField fields.roll.fields.max value=data.roll.max placeholder="20" type="number" localize=true
                              label=(localize "DND5E.Maximum") hint=false classes="label-top" }}
             </div>
         </div>

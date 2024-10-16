@@ -35,7 +35,7 @@ export default class SkillToolConfig extends BaseProficiencyConfig {
     context.proficiencyOptions = Object.entries(CONFIG.DND5E.proficiencyLevels)
       .map(([value, label]) => ({ value, label }));
     context.section = `DND5E.${this.options.trait === "skills" ? "SKILL" : "TOOL"}.SECTIONS.`;
-    if ( this.options.trait === "tool" ) delete context.global;
+    context.global.skill = this.options.trait === "skills";
     return context;
   }
 }
