@@ -419,7 +419,7 @@ function enrichLookup(config, fallback, options) {
     return null;
   }
 
-  const data = options.relativeTo?.getRollData();
+  const data = options.relativeTo?.getRollData?.() ?? {};
   let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
   if ( value && style ) {
     if ( style === "capitalize" ) value = value.capitalize();
