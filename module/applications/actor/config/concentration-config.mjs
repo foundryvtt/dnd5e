@@ -1,9 +1,9 @@
 import BaseConfigSheet from "../api/base-config-sheet.mjs";
 
 /**
- * Configuration application for an actor's abilities.
+ * Configuration application for an actor's concentration checks.
  */
-export default class AbilityConfig extends BaseConfigSheet {
+export default class ConcentrationConfig extends BaseConfigSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
     ability: null,
@@ -17,7 +17,7 @@ export default class AbilityConfig extends BaseConfigSheet {
   /** @override */
   static PARTS = {
     config: {
-      template: "systems/dnd5e/templates/actors/config/ability-config.hbs"
+      template: "systems/dnd5e/templates/actors/config/concentration-config.hbs"
     }
   };
 
@@ -25,19 +25,9 @@ export default class AbilityConfig extends BaseConfigSheet {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /**
-   * Configuration data for the ability being edited.
-   * @type {AbilityConfiguration}
-   */
-  get abilityConfig() {
-    return CONFIG.DND5E.abilities[this.options.ability];
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   get title() {
-    return game.i18n.format("DND5E.ABILITY.Configure.Title", { ability: this.abilityConfig?.label });
+    return game.i18n.format("DND5E.ABILITY.Configure.Title", { ability: game.i18n.localize("DND5E.Concentration") });
   }
 
   /* -------------------------------------------- */
@@ -49,13 +39,18 @@ export default class AbilityConfig extends BaseConfigSheet {
     context = await super._preparePartContext(partId, context, options);
     const source = this.document.system._source;
 
-    context.ability = this.abilityConfig?.label;
-    context.data = source.abilities?.[this.options.ability] ?? {};
-    context.fields = this.document.system.schema.fields.abilities.model.fields;
-    context.prefix = `system.abilities.${this.options.ability}.`;
-    context.proficiencyOptions = [
-      { value: 0, label: CONFIG.DND5E.proficiencyLevels[0] },
-      { value: 1, label: CONFIG.DND5E.proficiencyLevels[1] }
+    context.data = source.attributes?.concentration ?? {};
+    context.fields = this.document.system.schema.fields.attributes.fields.concentration.fields;
+    const ability = CONFIG.DND5E.abilities[CONFIG.DND5E.defaultAbilities.concentration]?.label?.toLowerCase();
+    context.abilityOptions = [
+      { value: "", label: ability ? game.i18n.format("DND5E.DefaultSpecific", { default: ability }) : "" },
+      { rule: true },
+      ...Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }))
+    ];
+    context.advantageModeOptions = [
+      { value: -1, label: game.i18n.localize("DND5E.Disadvantage") },
+      { value: 0, label: game.i18n.localize("DND5E.Normal") },
+      { value: 1, label: game.i18n.localize("DND5E.Advantage") }
     ];
 
     if ( this.document.system.bonuses?.abilities ) context.global = {

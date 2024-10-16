@@ -5,7 +5,7 @@ import EffectsElement from "../components/effects.mjs";
 
 import AbilityConfig from "./config/ability-config.mjs";
 import ActorArmorConfig from "./armor-config.mjs";
-import ActorConcentrationConfig from "./concentration-config.mjs";
+import ConcentrationConfig from "./config/concentration-config.mjs";
 import ActorHitDiceConfig from "./hit-dice-config.mjs";
 import ActorHitPointsConfig from "./hit-points-config.mjs";
 import ActorInitiativeConfig from "./initiative-config.mjs";
@@ -773,7 +773,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         break;
       case "ability":
         const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
-        if ( ability === "concentration" ) app = new ActorConcentrationConfig(this.actor);
+        if ( ability === "concentration" ) app = new ConcentrationConfig({ document: this.actor });
         else app = new AbilityConfig({ document: this.actor, ability });
         break;
       case "skill":
