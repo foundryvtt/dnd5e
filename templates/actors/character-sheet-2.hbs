@@ -158,11 +158,13 @@
                         {{!-- AC & Exhaustion --}}
                         <div class="top">
 
+                            {{#if exhaustion}}
                             <div class="pips" data-prop="system.attributes.exhaustion">
                                 {{#each exhaustion.left}}
                                     {{> pip }}
                                 {{/each}}
                             </div>
+                            {{/if}}
 
                             {{!-- AC --}}
                             <div class="ac-badge badge" aria-label="{{ localize "DND5E.ArmorClass" }}">
@@ -179,15 +181,17 @@
                                 {{/if}}
                             </div>
 
+                            {{#if exhaustion}}
                             <div class="pips" data-prop="system.attributes.exhaustion">
                                 {{#each exhaustion.right}}
                                     {{> pip }}
                                 {{/each}}
                             </div>
+                            {{/if}}
                         </div>
 
                         {{!-- Initiative, Speed, & Proficiency --}}
-                        <div class="lozenges">
+                        <div class="lozenges{{#if lozengesNoMarginTop}} no-margin-top{{/if}}">
 
                             {{!-- Initiative --}}
                             <div class="lozenge {{#unless editable}}{{ rollableClass }}{{/unless}}"
