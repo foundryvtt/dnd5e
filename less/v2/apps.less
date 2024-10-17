@@ -1095,8 +1095,49 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 .dnd5e2.config-sheet {
-  .window-content > section:is(.flexcol, .flexrow) {
-    gap: 12px;
+  .window-content {
+    > section:is(.flexcol, .flexrow) { gap: 12px; }
+     .final-value {
+       font-size: var(--font-size-32);
+       text-align: center;
+     }
+  }
+}
+
+/* ---------------------------------- */
+/*  Creature Type Config Sheet        */
+/* ---------------------------------- */
+
+.dnd5e2.creature-type.config-sheet {
+  .card { padding: 6px 10px; }
+  .final-value { font-size: var(--font-size-24); }
+
+  .types-list {
+    --type-rows: 8;
+    gap: 0;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1px), 0 calc(100% - 1px));
+    grid-auto-flow: column;
+    grid-template-rows: repeat(var(--type-rows), auto);
+  }
+
+  .type-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-block-end: 0;
+    border-block-end: var(--dnd5e-border-dotted);
+    padding: 6px;
+
+    label, input[type="text"] {
+      font-size: var(--font-size-14);
+      font-family: var(--dnd5e-font-roboto-condensed);
+      flex: 1;
+    }
+    input[type="radio"] { margin-block-end: 4px; }
+    input[type="text"] {
+      margin: -6px;
+      padding: 6px;
+    }
   }
 }
 

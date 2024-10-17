@@ -1,11 +1,11 @@
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
-import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
 import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
+import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import SourceConfig from "../source-config.mjs";
 import StartingEquipmentConfig from "./starting-equipment-config.mjs";
@@ -566,7 +566,7 @@ export default class ItemSheet5e extends ItemSheet {
         app = new StartingEquipmentConfig(this.item);
         break;
       case "type":
-        app = new ActorTypeConfig(this.item, { keyPath: "system.type" });
+        app = new CreatureTypeConfig({ document: this.item, keyPath: "type" });
         break;
     }
     app?.render(true);
