@@ -29,15 +29,8 @@ export default class ActorHitDiceConfig extends BaseConfigSheet {
     const classes = this.object.system.attributes.hd.classes;
     return {
       classes: Array.from(classes).map(item => {
-        return {
-          classItemId: item.id,
-          name: item.name,
-          diceDenom: item.system.hitDice,
-          currentHitDice: item.system.levels - item.system.hitDiceUsed,
-          maxHitDice: item.system.levels,
-          canRoll: (item.system.levels - item.system.hitDiceUsed) > 0
-        };
-      }).sort((a, b) => parseInt(b.diceDenom.slice(1)) - parseInt(a.diceDenom.slice(1)))
+        return { classItemId: item.id, name: item.name, ...item.system.hd };
+      }).sort((a, b) => parseInt(b.denomination.slice(1)) - parseInt(a.denomination.slice(1)))
     };
   }
 
@@ -66,7 +59,7 @@ export default class ActorHitDiceConfig extends BaseConfigSheet {
     const actorItems = this.object.items;
     const classUpdates = Object.entries(formData).map(([id, hd]) => ({
       _id: id,
-      "system.hitDiceUsed": actorItems.get(id).system.levels - hd
+      "system.hd.spent": actorItems.get(id).system.hd.max - hd
     }));
     return this.object.updateEmbeddedDocuments("Item", classUpdates);
   }

@@ -1,6 +1,7 @@
 import TraitAdvancement from "../../documents/advancement/trait.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import SpellcastingField from "./fields/spellcasting-field.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
@@ -17,8 +18,10 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {Set<string>} primaryAbility.value List of primary abilities used by this class.
  * @property {boolean} primaryAbility.all       If multiple abilities are selected, does multiclassing require all of
  *                                              them to be 13 or just one.
- * @property {string} hitDice                   Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
- * @property {number} hitDiceUsed               Number of hit dice consumed.
+ * @property {object} hd                        Object describing hit dice properties.
+ * @property {string} hd.additional             Additional hit dice beyond the level of the class.
+ * @property {string} hd.denomination           Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
+ * @property {number} hd.spent                  Number of hit dice consumed.
  * @property {object[]} advancement             Advancement objects for this class.
  * @property {SpellcastingField} spellcasting   Details on class's spellcasting ability.
  */
@@ -41,11 +44,14 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
         value: new SetField(new StringField()),
         all: new BooleanField({ initial: true })
       }),
-      hitDice: new StringField({
-        required: true, initial: "d6", blank: false,
-        validate: v => /d\d+/.test(v), validationError: "must be a dice value in the format d#"
+      hd: new SchemaField({
+        additional: new FormulaField({ deterministic: true, required: true }),
+        denomination: new StringField({
+          required: true, initial: "d6", blank: false,
+          validate: v => /d\d+/.test(v), validationError: "must be a dice value in the format d#"
+        }),
+        spent: new NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 })
       }),
-      hitDiceUsed: new NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 }),
       advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       spellcasting: new SpellcastingField()
     });
@@ -91,7 +97,11 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /** @inheritDoc */
   prepareFinalData() {
     this.isOriginalClass = this.parent.isOriginalClass;
-    SpellcastingField.prepareData.call(this, this.parent.getRollData({ deterministic: true }));
+    const rollData = this.parent.getRollData({ deterministic: true });
+    SpellcastingField.prepareData.call(this, rollData);
+    this.hd.additional = this.hd.additional ? Roll.create(this.hd.additional, rollData).evaluateSync().total : 0;
+    this.hd.max = this.levels + this.hd.additional;
+    this.hd.value = this.hd.max - this.hd.spent;
   }
 
   /* -------------------------------------------- */
@@ -121,10 +131,32 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    ClassData.#migrateHitDice(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ClassData.#migrateLevels(source);
     ClassData.#migrateSpellcastingData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the hit dice data.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateHitDice(source) {
+    if ( foundry.utils.getType(source.hitDice) === "string" ) {
+      source.hd ??= {};
+      source.hd.denomination = source.hitDice;
+      source.hd.spent = source.hitDiceUsed ?? 0;
+    }
   }
 
   /* -------------------------------------------- */
