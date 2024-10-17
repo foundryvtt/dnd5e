@@ -448,12 +448,14 @@ export function registerSystemSettings() {
     scope: "world",
     config: true,
     default: "no",
-    type: String,
-    choices: {
-      no: "SETTINGS.DND5E.AUTOROLLNPCHP.No",
-      silent: "SETTINGS.DND5E.AUTOROLLNPCHP.Silent",
-      yes: "SETTINGS.DND5E.AUTOROLLNPCHP.Yes"
-    }
+    type: new foundry.data.fields.StringField({
+      required: true,
+      choices: {
+        no: "SETTINGS.DND5E.AUTOROLLNPCHP.No",
+        silent: "SETTINGS.DND5E.AUTOROLLNPCHP.Silent",
+        yes: "SETTINGS.DND5E.AUTOROLLNPCHP.Yes"
+      }
+    })
   });
 }
 
