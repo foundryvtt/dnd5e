@@ -1,4 +1,5 @@
 import Proficiency from "../../documents/actor/proficiency.mjs";
+import { defaultUnits } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
@@ -334,8 +335,8 @@ export default class NPCData extends CreatureTemplate {
     }
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses[key] ??= 0;
-    this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
-    this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
+    this.attributes.movement.units ??= defaultUnits("length");
+    this.attributes.senses.units ??= defaultUnits("length");
   }
 
   /* -------------------------------------------- */
