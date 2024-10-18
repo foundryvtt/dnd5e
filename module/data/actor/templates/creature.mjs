@@ -173,6 +173,7 @@ export default class CreatureTemplate extends CommonTemplate {
     data.classes = {};
     for ( const [identifier, cls] of Object.entries(this.parent.classes) ) {
       data.classes[identifier] = {...cls.system};
+      data.classes[identifier].hitDice = cls.system.hd.denomination; // Backwards compatibility
       if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
     }
     return data;
