@@ -16,6 +16,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  * ## D20 Properties
  * @property {boolean} [advantage]     Apply advantage to this roll (unless overridden by modifier keys or dialog)?
  * @property {boolean} [disadvantage]  Apply disadvantage to this roll (unless overridden by modifier keys or dialog)?
+ * @property {number|null} [faces=20]  The number of faces on the base die.
  * @property {number|null} [critical=20]  The value of the d20 result which represents a critical success,
  *                                     `null` will prevent critical successes.
  * @property {number|null} [fumble=1]  The value of the d20 result which represents a critical failure,
@@ -58,14 +59,14 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  */
 export async function d20Roll({
   parts=[], data={}, event,
-  advantage, disadvantage, critical=20, fumble=1, targetValue, attackMode, ammunition, mastery,
+  advantage, disadvantage, faces=20, critical=20, fumble=1, targetValue, attackMode, ammunition, mastery,
   elvenAccuracy, halflingLucky, reliableTalent,
   fastForward, ammunitionOptions, attackModes, chooseModifier=false, masteryOptions, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
   // Handle input arguments
-  const formula = ["1d20"].concat(parts).join(" + ");
+  const formula = [`1d${faces}`].concat(parts).join(" + ");
   const {advantageMode, isFF} = CONFIG.Dice.D20Roll.determineAdvantageMode({
     advantage, disadvantage, fastForward, event
   });
@@ -79,6 +80,7 @@ export async function d20Roll({
   const roll = new CONFIG.Dice.D20Roll(formula, data, {
     flavor: flavor || title,
     advantageMode,
+    faces,
     defaultRollMode,
     rollMode,
     critical,
