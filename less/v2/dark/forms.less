@@ -18,7 +18,8 @@
     &.label-top > label > p.hint::before { color: var(--dnd5e-color-gold); }
   }
 
-  :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
+  .form-group :is(select, input):not([type="range"]),
+  fieldset:not(.card) :is(select, input):not([type="range"]) {
     border: var(--dnd5e-border-gold);
     background: var(--dnd5e-background-parchment);
   }
