@@ -43,7 +43,7 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
       &:has([value="0.5"], [value="2"])::after {
         content: "";
         position: absolute;
-        background: var(--_fill);  
+        background: var(--_fill);
       }
 
       &:has([value="0.5"])::after {
@@ -131,12 +131,12 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
 
   /**
    * Type of proficiency represented by this control (e.g. "ability" or "skill").
-   * @type {"ability"|"skill"}
+   * @type {"ability"|"skill"|"tool"}
    */
   get type() { return this.getAttribute("type") ?? "ability"; }
 
   set type(value) {
-    if ( !["ability", "skill"].includes(value) ) throw new Error("Type must be 'ability' or 'skill'.");
+    if ( !["ability", "skill", "tool"].includes(value) ) throw new Error("Type must be 'ability', 'skill', or 'tool'.");
     this.setAttribute("type", value);
     this.#internals.ariaValueMin = 0;
     this.#internals.ariaValueMax = value === "ability" ? 1 : 2;

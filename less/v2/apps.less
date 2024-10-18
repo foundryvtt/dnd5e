@@ -979,8 +979,11 @@ dialog.dnd5e2.application {
 /*  Skill Configuration Dialog        */
 /* ---------------------------------- */
 
-.dnd5e2.dialog.skills-config {
-  .card { padding: 6px 10px; }
+.dnd5e2.config-sheet.skills {
+  [data-application-part="traits"].card {
+    display: block;
+    padding: 6px 10px;
+  }
 
   .skills-list {
     --skill-rows: 9;
@@ -995,6 +998,7 @@ dialog.dnd5e2.application {
     align-items: center;
     gap: 8px;
     padding: 6px;
+    margin-bottom: 0;
     border-bottom: var(--dnd5e-border-dotted);
 
     .name {
@@ -1101,14 +1105,17 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 .dnd5e2.trait-selector {
-  [data-application-part="traits"] {
+  [data-application-part="traits"] { gap: 12px; }
+  &:not(.trait-columns) [data-application-part="traits"] {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
     align-items: flex-start;
-
     fieldset.traits { flex: 1 1 40%; }
     fieldset:not(.traits) { flex: 1 0 100%; }
+  }
+  &.trait-columns [data-application-part="traits"] {
+    column-count: 2;
+    .traits:not(:last-of-type) { margin-block-end: 12px; }
   }
   .traits {
     --checkbox-size: 16px;
@@ -1150,6 +1157,19 @@ dialog.dnd5e2.application {
         }
       }
     }
+  }
+}
+
+/* ---------------------------------- */
+
+.dnd5e2.tools.trait-selector {
+  .traits {
+    grid-template-columns: [proficiency] 15px [name] 1fr [bonus] 20px [config] 20px;
+    li {
+      padding-block-start: 1px;
+      &:not(:last-of-type) { padding-block-end: 4px; }
+    }
+    .bonus { grid-column: bonus; }
   }
 }
 

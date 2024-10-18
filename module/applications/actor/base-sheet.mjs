@@ -18,13 +18,14 @@ import SourceConfig from "../source-config.mjs";
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
-import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
 
 import AbilityConfig from "./config/ability-config.mjs";
 import DamagesConfig from "./config/damages-config.mjs";
 import SkillToolConfig from "./config/skill-tool-config.mjs";
+import SkillsConfig from "./config/skills-config.mjs";
+import ToolsConfig from "./config/tools-config.mjs";
 import TraitsConfig from "./config/traits-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
 
@@ -783,7 +784,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         app = new SkillToolConfig({ document: this.actor, trait: "skills", key: skill });
         break;
       case "skills":
-        app = new dnd5e.applications.actor.ActorSkillsConfig(this.actor);
+        app = new SkillsConfig({ document: this.actor });
         break;
       case "spellSlots":
         app = new ActorSpellSlotsConfig(this.actor);
@@ -1238,13 +1239,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _onTraitSelector(event) {
     event.preventDefault();
     const trait = event.currentTarget.dataset.trait;
-    if ( trait === "tool" ) return new ToolSelector(this.actor, trait).render(true);
-    else if ( ["dr", "di", "dv"].includes(trait) ) {
-      return new DamagesConfig({ document: this.actor, trait }).render({ force: true });
-    }
+    const options = { document: this.actor, trait };
+    if ( trait === "tool" ) return new ToolsConfig(options).render({ force: true });
+    else if ( ["dr", "di", "dv"].includes(trait) ) return new DamagesConfig(options).render({ force: true });
     else if ( trait === "dm" ) return new DamageModificationConfig(this.actor).render(true);
-    else if ( trait === "weapon" ) return new WeaponsConfig({ document: this.actor }).render({ force: true });
-    return new TraitsConfig({ document: this.actor, trait }).render({ force: true });
+    else if ( trait === "weapon" ) return new WeaponsConfig(options).render({ force: true });
+    return new TraitsConfig(options).render({ force: true });
   }
 
   /* -------------------------------------------- */
