@@ -69,9 +69,14 @@ export default class DamageRoll extends BasicRoll {
 
   /** @inheritDoc */
   static fromConfig(config, process) {
-    const roll = super.fromConfig(config, process);
-    if ( process.critical ) roll.configureDamage({ critical: process.critical });
-    return roll;
+    if ( process.critical ) {
+      config = foundry.utils.deepClone(config);
+      config.options ??= {};
+      config.options.critical = foundry.utils.mergeObject(
+        process.critical, config.options.critical ?? {}, { inplace: false }
+      );
+    }
+    return super.fromConfig(config, process);
   }
 
   /* -------------------------------------------- */
