@@ -1135,6 +1135,20 @@ dialog.dnd5e2.application {
     li {
       align-items: center;
       &:not(:last-of-type) { border-bottom: var(--dnd5e-border-dotted); }
+      &.category { gap: 4px; }
+      li {
+        position: relative;
+        margin: 0 0 4px 0;
+        &::before {
+          content: "┗";
+          position: absolute;
+          left: -1.8em;
+          font-size: var(--font-size-10);
+          font-weight: bold;
+          top: 3px;
+          color: var(--color-text-dark-5);
+        }
+      }
     }
   }
 }

@@ -64,7 +64,7 @@ export default class TraitsConfig extends BaseConfigSheet {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     context.keyPath = Trait.actorKeyPath(this.options.trait);
-    context.data = foundry.utils.getProperty(this.document.toObject(), context.keyPath);
+    context.data = foundry.utils.getProperty(this.document._source, context.keyPath);
     context.checkbox = new foundry.data.fields.BooleanField();
     context.choices = await Trait.choices(this.options.trait, { chosen: new Set(context.data.value) });
     context.fields = Trait.actorFields(this.document, this.options.trait);
@@ -94,6 +94,7 @@ export default class TraitsConfig extends BaseConfigSheet {
    * @param {object} data                     Traits data.
    * @param {SelectChoices} choices           Choices object.
    * @param {boolean} [categoryChosen=false]  Is the category above this one selected?
+   * @protected
    */
   _processChoices(data, choices, categoryChosen=false) {
     for ( const [key, choice] of Object.entries(choices) ) {
@@ -110,6 +111,7 @@ export default class TraitsConfig extends BaseConfigSheet {
    * @param {string} key                      Choice key.
    * @param {object} choice                   Data for the choice.
    * @param {boolean} [categoryChosen=false]  Is the category above this one selected?
+   * @protected
    */
   _processChoice(data, key, choice, categoryChosen=false) {
     if ( categoryChosen ) {
@@ -135,7 +137,7 @@ export default class TraitsConfig extends BaseConfigSheet {
    * Filter and order list of traits before submission.
    * @param {object} submitData  Form submission data.
    * @param {string} keyPath     Path to the trait to modify.
-   * @internal
+   * @protected
    */
   _filterData(submitData, keyPath) {
     foundry.utils.setProperty(submitData, keyPath, filteredKeys(
