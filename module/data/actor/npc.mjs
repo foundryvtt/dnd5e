@@ -57,7 +57,7 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 

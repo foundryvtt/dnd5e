@@ -235,11 +235,6 @@
                                     aria-label="{{ localize "DND5E.LongRest" }}">
                                 <i class="fas fa-campground"></i>
                             </button>
-                            <button type="button" class="config-button gold-button" data-action="flags"
-                                    data-tooltip="DND5E.SpecialTraits"
-                                    aria-label="{{ localize "DND5E.SpecialTraits" }}">
-                                <i class="fas fa-star"></i>
-                            </button>
                         </div>
 
                         <div class="proficiency">
@@ -515,6 +510,11 @@
 
                 {{!-- Biography --}}
                 {{~> "dnd5e.npc-biography" ~}}
+
+                {{!-- Special Traits --}}
+                <div class="tab special-traits" data-group="primary" data-tab="special-traits">
+                    {{~> "dnd5e.creature-special-traits" ~}}
+                </div>
 
             </section>
 
