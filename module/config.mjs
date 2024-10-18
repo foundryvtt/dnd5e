@@ -2053,6 +2053,23 @@ preLocalize("movementTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Default units used for imperial & metric settings.
+ * @enum {{ imperial: string, metric: string }}
+ */
+DND5E.defaultUnits = {
+  length: {
+    imperial: "ft",
+    metric: "m"
+  },
+  weight: {
+    imperial: "lb",
+    metric: "kg"
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * The valid units of measure for movement distances in the game system.
  * By default this uses the imperial units of feet and miles.
  * @enum {string}

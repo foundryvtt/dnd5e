@@ -32,8 +32,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
         }),
         units: new StringField({
-          required: true, label: "DND5E.WeightUnit.Label",
-          initial: () => game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
+          required: true, label: "DND5E.WeightUnit.Label", initial: () => defaultUnits("weight")
         })
       }, {label: "DND5E.Weight"}),
       price: new SchemaField({
@@ -177,7 +176,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     if ( !("weight" in source) || (foundry.utils.getType(source.weight) === "Object") ) return;
     source.weight = {
       value: Number.isNumeric(source.weight) ? Number(source.weight) : 0,
-      units: game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
+      units: defaultUnits("weight")
     };
   }
 

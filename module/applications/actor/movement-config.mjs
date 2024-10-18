@@ -1,3 +1,4 @@
+import { defaultUnits } from "../../utils.mjs";
 import BaseConfigSheet from "./base-config.mjs";
 
 /**
@@ -54,7 +55,7 @@ export default class ActorMovementConfig extends BaseConfigSheet {
       canHover: Object.hasOwn(movement, "hover"),
       units: CONFIG.DND5E.movementUnits,
       unitsPlaceholder: game.i18n.format("DND5E.AutomaticValue", {
-        value: CONFIG.DND5E.movementUnits[raceData.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]]?.toLowerCase()
+        value: CONFIG.DND5E.movementUnits[raceData.units ?? defaultUnits("length")]?.toLowerCase()
       }),
       keyPath: this.options.keyPath
     };
