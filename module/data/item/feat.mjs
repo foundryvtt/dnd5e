@@ -259,4 +259,18 @@ export default class FeatData extends ItemDataModel.mixin(
   get proficiencyMultiplier() {
     return 1;
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+
+    // Set type as "Monster Feature" if created directly on a NPC
+    if ( (this.parent.actor?.type === "npc") && !foundry.utils.hasProperty(data, "system.type.value") ) {
+      this.parent.updateSource({ "system.type.value": "monster" });
+    }
+  }
 }
