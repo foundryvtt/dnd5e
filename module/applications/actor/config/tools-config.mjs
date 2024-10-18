@@ -45,7 +45,7 @@ export default class ToolsConfig extends TraitsConfig {
 
   /** @inheritDoc */
   _onRender(context, options) {
-    super._onFirstRender(context, options);
+    super._onRender(context, options);
     this.element.querySelectorAll("proficiency-cycle").forEach(e => {
       e.addEventListener("change", event => this.submit());
     });
@@ -74,7 +74,7 @@ export default class ToolsConfig extends TraitsConfig {
   _processFormData(event, form, formData) {
     const submitData = Object.entries(formData.object).reduce((obj, [k, value]) => {
       const key = k.split(".")[2];
-      const tool = this.document.system.tools[key];
+      const tool = this.document.system._source.tools[key];
       const config = CONFIG.DND5E.tools[key];
       if ( tool && !value ) obj[`system.tools.-=${key}`] = null;
       else if ( !tool && value ) obj[`system.tools.${key}`] = { value, ability: config?.ability || "int" };
