@@ -547,7 +547,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/activity/columns/activity-column-uses.hbs",
     "systems/dnd5e/templates/activity/columns/activity-column-weight.hbs",
     "systems/dnd5e/templates/activity/activity-row-summary.hbs",
-    "systems/dnd5e/templates/activity/activity-usage-notes.hbs",
+    "systems/dnd5e/templates/activity/parts/activity-usage-notes.hbs",
 
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",
