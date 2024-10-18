@@ -58,14 +58,15 @@
       },
       "base": {
         "number": null,
-        "denomination": null,
+        "denomination": 0,
         "types": [],
         "custom": {
           "enabled": false
         },
         "scaling": {
           "number": 1
-        }
+        },
+        "bonus": ""
       }
     },
     "armor": {
@@ -161,7 +162,8 @@
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "staff-of-the-python"
+    "identifier": "staff-of-the-python",
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -174,9 +176,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037170767,
-    "modifiedTime": 1725992507439,
+    "modifiedTime": 1729014169610,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!MOeFq5MLAQzVQC7z"
