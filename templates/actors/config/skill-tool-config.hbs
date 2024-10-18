@@ -2,10 +2,10 @@
     {{!-- Skill/Tool Proficiency & Ability --}}
     <fieldset class="card">
         <legend>{{ localize (concat section "Details") label=label }}</legend>
-        {{ formField fields.value name=(concat prefix "value") value=data.value
-                     options=proficiencyOptions localize=true }}
+        {{ formField fields.value name=(concat prefix "value") value=data.value options=proficiencyOptions
+                     localize=true rootId=partId }}
         {{ formField fields.ability name=(concat prefix "ability") value=data.ability options=abilityOptions
-                     localize=true }}
+                     localize=true rootId=partId }}
     </fieldset>
 
     {{!-- Skill/Tool Checks --}}
@@ -16,24 +16,24 @@
         </div>
         {{#if fields.bonuses.fields.passive}}
         {{ formField fields.bonuses.fields.passive name=(concat prefix "bonuses.passive") value=data.bonuses.passive
-                     localize=true }}
+                     localize=true rootId=partId }}
         {{/if}}
         {{ formField fields.bonuses.fields.check name=(concat prefix "bonuses.check") value=data.bonuses.check
-                     localize=true }}
+                     localize=true rootId=partId }}
     </fieldset>
 
     {{!-- Rolls --}}
     <fieldset class="card">
         <legend>{{ localize "DND5E.ROLL.Section" label=label }}</legend>
-        <div class="form-group">
+        <div class="form-group split-group">
             <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
             <div class="form-fields">
                 {{ formField fields.roll.fields.min name=(concat prefix "roll.min") value=data.roll.min
                              placeholder="1" type="number" localize=true label=(localize "DND5E.Minimum")
-                             hint=false classes="label-top" }}
+                             hint=false classes="label-top" rootId=partId }}
                 {{ formField fields.roll.fields.max name=(concat prefix "roll.max") value=data.roll.max
                              placeholder="20" type="number" localize=true label=(localize "DND5E.Maximum")
-                             hint=false classes="label-top" }}
+                             hint=false classes="label-top" rootId=partId }}
             </div>
         </div>
     </fieldset>
@@ -45,9 +45,9 @@
         <div class="form-group">
             <p class="hint">{{ localize (concat section "Global.Hint") }}</p>
         </div>
-        {{ formField global.fields.check value=global.data.check localize=true }}
+        {{ formField global.fields.check value=global.data.check localize=true rootId=partId }}
         {{#if global.skill}}
-        {{ formField global.fields.skill value=global.data.skill localize=true }}
+        {{ formField global.fields.skill value=global.data.skill localize=true rootId=partId }}
         {{/if}}
     </fieldset>
     {{/if}}

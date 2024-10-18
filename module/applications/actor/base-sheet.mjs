@@ -18,13 +18,14 @@ import SourceConfig from "../source-config.mjs";
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
-import TraitSelector from "./trait-selector.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
 
 import AbilityConfig from "./config/ability-config.mjs";
+import DamagesConfig from "./config/damages-config.mjs";
 import SkillToolConfig from "./config/skill-tool-config.mjs";
+import TraitsConfig from "./config/traits-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
@@ -1238,9 +1239,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     event.preventDefault();
     const trait = event.currentTarget.dataset.trait;
     if ( trait === "tool" ) return new ToolSelector(this.actor, trait).render(true);
+    else if ( ["dr", "di", "dv"].includes(trait) ) {
+      return new DamagesConfig({ document: this.actor, trait }).render({ force: true });
+    }
     else if ( trait === "dm" ) return new DamageModificationConfig(this.actor).render(true);
     else if ( trait === "weapon" ) return new WeaponsConfig({ document: this.actor }).render({ force: true });
-    return new TraitSelector(this.actor, trait).render(true);
+    return new TraitsConfig({ document: this.actor, trait }).render({ force: true });
   }
 
   /* -------------------------------------------- */
