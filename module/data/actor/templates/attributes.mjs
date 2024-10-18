@@ -114,6 +114,11 @@ export default class AttributesFields {
     ac.armor = 10;
     ac.shield = ac.cover = 0;
     ac.min = ac.bonus = "";
+    ac.ability = {};
+    for ( const [k, v] of Object.entries(CONFIG.DND5E.armorTypes) ) if ( v.maxAbility !== undefined ) ac.ability[k] = "";
+    ac.bonuses = {
+      armored: "", unarmored: ""
+    };
   }
 
   /* -------------------------------------------- */
