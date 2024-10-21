@@ -1105,7 +1105,7 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 .dnd5e2.hit-dice.config-sheet {
-  .card { padding-block: 8px; }
+  fieldset { padding-block: 8px; }
   .form-group {
     .separator { flex: 0; }
     .max {
@@ -1113,8 +1113,8 @@ dialog.dnd5e2.application {
       text-align: center;
     }
     [data-action="roll"] {
-      margin-inline-start: 8px;
-      padding-inline: 1em;
+      padding: 6px 8px;
+      > i { margin: 0; }
     }
     &:not(:last-of-type) {
       border-block-end: var(--dnd5e-border-dotted);
@@ -1143,6 +1143,10 @@ dialog.dnd5e2.application {
     flex: 0 0 4em;
     text-align: center;
     .times { font-size: var(--font-size-14); }
+  }
+  .form-group > label .content-link {
+    padding: 0;
+    > i { display: none; }
   }
 }
 

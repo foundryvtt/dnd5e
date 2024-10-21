@@ -1,11 +1,12 @@
 /**
  * Description for a single part of a property attribution.
  * @typedef {object} AttributionDescription
- * @property {string} label  Descriptive label that will be displayed. If the label is in the form
- *                           of an @ property, the system will try to turn it into a human-readable label.
- * @property {number} mode   Application mode for this step as defined in
+ * @property {string} label               Descriptive label that will be displayed. If the label is in the form
+ *                                        of an @ property, the system will try to turn it into a human-readable label.
+ * @property {number} mode                Application mode for this step as defined in
  *                           [CONST.ACTIVE_EFFECT_MODES](https://foundryvtt.com/api/module-constants.html#.ACTIVE_EFFECT_MODES).
- * @property {number} value  Value of this step.
+ * @property {number} value               Value of this step.
+ * @property {ActiveEffect5e} [document]  Active effect applying this attribution, if any.
  */
 
 /**

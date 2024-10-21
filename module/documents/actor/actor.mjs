@@ -2920,7 +2920,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
         return n + simplifyBonus(change.value, rollData);
       }, 0);
-      if ( value ) attributions.push({ value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD });
+      if ( value ) attributions.push({ value, label: source, document: e, mode: CONST.ACTIVE_EFFECT_MODES.ADD });
     }
     return attributions;
   }

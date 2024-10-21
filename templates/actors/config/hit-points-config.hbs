@@ -13,7 +13,7 @@
         {{/with}}
         {{#each classes}}
         <div class="form-group">
-            <label>{{ name }}</label>
+            <label>{{{ anchor }}}</label>
             <div class="form-fields">
                 {{{ dnd5e-numberParts total signDisplay="always" }}}
             </div>
@@ -51,9 +51,9 @@
             <label>{{ localize fields.formula.label }}</label>
             <div class="form-fields">
                 {{ formInput fields.formula value=source.formula }}
-                <button type="button" class="unbutton" data-action="roll">
+                <button type="button" class="unbutton" data-action="roll" data-tooltip="DND5E.Roll"
+                        aria-label="{{ localize 'DND5E.Roll' }}">
                     <i class="fa-solid fa-dice-d20" inert></i>
-                    {{ localize "DND5E.Roll" }}
                 </button>
             </div>
         </div>
@@ -69,7 +69,7 @@
 {{#*inline ".effects"}}
 {{#each effects}}
 <div class="form-group">
-    <label>{{ label }}</label>
+    <label>{{{ anchor }}}</label>
     <div class="form-fields">
         <span class="plusSign">+</span>
         <span class="integer">{{ value }}</span>

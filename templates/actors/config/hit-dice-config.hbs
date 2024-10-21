@@ -1,4 +1,4 @@
-<fieldset class="card">
+<fieldset>
     {{#each classes}}
     <div class="form-group" data-class="{{ id }}">
         <label>{{ label }}</label>
@@ -15,9 +15,9 @@
                     aria-label="{{ localize 'DND5E.HITDICE.Action.Increase' }}">
                 <i class="fa-solid fa-plus" inert></i>
             </button>
-            <button type="button" data-action="roll" data-denomination="d{{ denomination }}">
+            <button type="button" data-action="roll" data-denomination="d{{ denomination }}" data-tooltip="DND5E.Roll"
+                    aria-label="{{ localize 'DND5E.Roll' }}">
                 <i class="fa-solid fa-dice-d20" inert></i>
-                {{ localize "DND5E.Roll" }}
             </button>
         </div>
     </div>

@@ -10,7 +10,6 @@ export {default as BaseConfigSheet} from "./base-config.mjs";
 export {default as BaseConfigSheetV2} from "./api/base-config-sheet.mjs";
 
 export {default as ActorArmorConfig} from "./armor-config.mjs";
-export {default as ConcentrationConfig} from "./config/concentration-config.mjs";
 export {default as DamageModificationConfig} from "./damage-modification-config.mjs";
 export {default as ActorSpellSlotsConfig} from "./spell-slots-config.mjs";
 export {default as ActorInitiativeConfig} from "./initiative-config.mjs";
@@ -25,6 +24,7 @@ export {default as ActorSheetV2Mixin} from "./sheet-v2-mixin.mjs";
 
 export {default as AbilityConfig} from "./config/ability-config.mjs";
 export {default as BaseProficiencyConfig} from "./config/base-proficiency-config.mjs";
+export {default as ConcentrationConfig} from "./config/concentration-config.mjs";
 export {default as DamagesConfig} from "./config/damages-config.mjs";
 export {default as HitDiceConfig} from "./config/hit-dice-config.mjs";
 export {default as HitPointsConfig} from "./config/hit-points-config.mjs";
