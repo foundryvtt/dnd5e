@@ -873,7 +873,8 @@ preLocalize("abilityConsumptionTypes", { sort: true });
  * @callback ConsumptionLabelsFunction
  * @this {ConsumptionTargetData}
  * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
- * @param {boolean} consumed                 Is this consumption currently set to be consumed?
+ * @param {object} [options={}]
+ * @param {boolean} [options.consumed]       Is this consumption currently set to be consumed?
  * @returns {ConsumptionLabels}
  */
 

@@ -340,13 +340,14 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   /**
    * Create label and hint text indicating how much of this resource will be consumed/recovered.
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @param {boolean} consumed                 Is this consumption currently set to be consumed?
+   * @param {object} [options={}]
+   * @param {boolean} [options.consumed]       Is this consumption currently set to be consumed?
    * @returns {ConsumptionLabels}
    */
-  getConsumptionLabels(config, consumed) {
+  getConsumptionLabels(config, options={}) {
     const typeConfig = CONFIG.DND5E.activityConsumptionTypes[this.type];
     if ( !typeConfig?.consumptionLabels ) return "";
-    return typeConfig.consumptionLabels.call(this, config, consumed);
+    return typeConfig.consumptionLabels.call(this, config, options);
   }
 
   /* -------------------------------------------- */
@@ -355,10 +356,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @param {boolean} consumed                 Is this consumption currently set to be consumed?
+   * @param {object} [options={}]
+   * @param {boolean} [options.consumed]       Is this consumption currently set to be consumed?
    * @returns {ConsumptionLabels}
    */
-  static consumptionLabelsActivityUses(config, consumed) {
+  static consumptionLabelsActivityUses(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
     const uses = this.activity.uses;
     const usesPluralRule = new Intl.PluralRules(game.i18n.lang).select(uses.value);
@@ -383,10 +385,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @param {boolean} consumed                 Is this consumption currently set to be consumed?
+   * @param {object} [options={}]
+   * @param {boolean} [options.consumed]       Is this consumption currently set to be consumed?
    * @returns {ConsumptionLabels}
    */
-  static consumptionLabelsAttribute(config, consumed) {
+  static consumptionLabelsAttribute(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey } = this._resolveHintCost(config);
     const current = foundry.utils.getProperty(this.actor.system, this.target);
     return {
@@ -405,10 +408,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @param {boolean} consumed                 Is this consumption currently set to be consumed?
+   * @param {object} [options={}]
+   * @param {boolean} [options.consumed]       Is this consumption currently set to be consumed?
    * @returns {ConsumptionLabels}
    */
-  static consumptionLabelsHitDice(config, consumed) {
+  static consumptionLabelsHitDice(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
     let denomination;
     if ( this.target === "smallest" ) denomination = game.i18n.localize("DND5E.ConsumeHitDiceSmallest");
@@ -436,10 +440,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @param {boolean} consumed                 Is this consumption currently set to be consumed?
+   * @param {object} [options={}]
+   * @param {boolean} [options.consumed]       Is this consumption currently set to be consumed?
    * @returns {ConsumptionLabels}
    */
-  static consumptionLabelsItemUses(config, consumed) {
+  static consumptionLabelsItemUses(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
     const item = this.actor.items.get(this.target);
     const itemName = item ? item.name : game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase();
@@ -477,10 +482,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @param {boolean} consumed                 Is this consumption currently set to be consumed?
+   * @param {object} [options={}]
+   * @param {boolean} [options.consumed]       Is this consumption currently set to be consumed?
    * @returns {ConsumptionLabels}
    */
-  static consumptionLabelsMaterial(config, consumed) {
+  static consumptionLabelsMaterial(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey } = this._resolveHintCost(config);
     const item = this.actor.items.get(this.target);
     const quantity = (item ?? this.item).system.quantity;
@@ -504,10 +510,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Create hint text indicating how much of this resource will be consumed/recovered.
    * @this {ConsumptionTargetData}
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
-   * @param {boolean} consumed                 Is this consumption currently set to be consumed?
+   * @param {object} [options={}]
+   * @param {boolean} [options.consumed]       Is this consumption currently set to be consumed?
    * @returns {ConsumptionLabels}
    */
-  static consumptionLabelsSpellSlots(config, consumed) {
+  static consumptionLabelsSpellSlots(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
     const levelNumber = Math.clamp(this.resolveLevel({ config }), 1, Object.keys(CONFIG.DND5E.spellLevels).length - 1);
     const level = CONFIG.DND5E.spellLevels[levelNumber].toLowerCase();
