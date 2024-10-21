@@ -910,7 +910,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     context.properties = [
       ...this.system.chatProperties ?? [],
       ...this.system.equippableItemCardProperties ?? [],
-      ...Object.values(this.labels.activations[0] ?? {})
+      ...Object.values(this.labels.activations?.[0] ?? {})
     ].filter(p => p);
 
     return context;
