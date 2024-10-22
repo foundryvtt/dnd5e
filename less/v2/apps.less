@@ -1126,18 +1126,27 @@ dialog.dnd5e2.application {
     gap: 8px;
     margin-block-end: 0;
     border-block-end: var(--dnd5e-border-dotted);
-    padding: 6px;
-
+    padding: 0;
+    label {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 10px;
+      &:hover {
+        cursor: pointer;
+        background: var(--dnd5e-background-parchment);
+      }
+    }
+    &.custom label {
+      padding-block: 0;
+      padding-inline: 6px 10px;
+    }
     label, input[type="text"] {
       font-size: var(--font-size-14);
       font-family: var(--dnd5e-font-roboto-condensed);
       flex: 1;
     }
     input[type="radio"] { margin-block-end: 4px; }
-    input[type="text"] {
-      margin: -6px;
-      padding: 6px;
-    }
+    input[type="text"] { padding: 6px; }
   }
 }
 

@@ -4,17 +4,21 @@
         <ol class="unlist form-grid form-grid-50 types-list" style="--type-rows: {{ rows }};">
             {{#each typeOptions}}
             <li class="type-row">
-                <label for="{{ ../partId }}-type-{{ value }}">{{ label }}</label>
-                <input type="radio" name="{{ ../keyPath }}.value" value="{{ value }}" {{ checked selected }}
-                       id="{{ ../partId }}-type-{{ value }}">
+                <label>
+                    <span>{{ label }}</span>
+                    <input type="radio" name="{{ ../keyPath }}.value" value="{{ value }}" {{ checked selected }}
+                           id="{{ ../partId }}-type-{{ value }}">
+                </label>
             </li>
             {{/each}}
             {{#if custom.enabled}}
             <li class="type-row custom">
-                {{ formInput fields.custom value=data.custom
-                             placeholder=(localize "DND5E.CreatureTypeSelectorCustom") }}
-                <input type="radio" name="{{ keyPath }}.value" value="custom"
-                       {{ checked custom.selected }} id="{{ partId }}-type-custom">
+                <label for="{{ partId }}-type-custom">
+                    {{ formInput fields.custom value=data.custom
+                                 placeholder=(localize "DND5E.CreatureTypeSelectorCustom") }}
+                    <input type="radio" name="{{ keyPath }}.value" value="custom"
+                           {{ checked custom.selected }} id="{{ partId }}-type-custom">
+                </label>
             </li>
             {{/if}}
         </ol>
