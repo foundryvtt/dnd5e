@@ -3,10 +3,6 @@
   fieldset {
     --color-fieldset-border: var(--dnd5e-color-blue-gray-3);
     > legend { color: var(--dnd5e-color-gold); }
-
-    &.card {
-      select, input { background: var(--dnd5e-background-25); }
-    }
   }
 
   .form-group {
@@ -18,11 +14,12 @@
     &.label-top > label > p.hint::before { color: var(--dnd5e-color-gold); }
   }
 
-  .form-group :is(select, input):not([type="range"]),
-  fieldset:not(.card) :is(select, input):not([type="range"]) {
+  :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
     border: var(--dnd5e-border-gold);
     background: var(--dnd5e-background-parchment);
   }
+
+  fieldset.card :is(select, input):not([type="range"]) { background: var(--dnd5e-background-25); }
 
   :is(input, select):not([type="range"]):disabled {
     background: var(--dnd5e-color-dark-gray);

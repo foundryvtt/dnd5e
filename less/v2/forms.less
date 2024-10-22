@@ -223,7 +223,10 @@
     }
 
     &:disabled {
-      .form-group label, .hint { color: var(--color-text-light-6); }
+      .form-group label, .hint {
+        --color-form-hint: var(--color-text-light-6);
+        color: var(--color-text-light-6);
+      }
     }
   }
 
@@ -367,8 +370,9 @@
 
   /* Hints */
   :is(.form-group, fieldset) .hint {
+    --color-form-hint: var(--color-text-dark-5);
+    --color-form-hint-hover: var(--color-form-hint);
     font-size: var(--font-size-11);
-    color: var(--color-text-dark-5);
     margin: 4px 0 0;
   }
 
