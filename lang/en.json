@@ -99,17 +99,6 @@
 "DND5E.AbilityModifier": "Ability Modifier",
 "DND5E.AbilityPromptText": "What type of {ability} check?",
 "DND5E.AbilityPromptTitle": "{ability} Ability Check",
-"DND5E.AbilityUseHint": "Configure how you would like to use the {name} {type}.",
-"DND5E.AbilityUseUnavailableHint": "There are no uses of this item remaining!",
-"DND5E.AbilityUseChargedHint": "This {type} is charged and ready to use!",
-"DND5E.AbilityUseRechargeHint": "This {type} is depleted and must be recharged!",
-"DND5E.AbilityUseNormalHint": "This {type} has {value} of {max} uses per {per} remaining.",
-"DND5E.AbilityUseConsumableChargeHint": "Using this {type} will consume 1 charge of {value} remaining.",
-"DND5E.AbilityUseConsumableQuantityHint": "Using this {type} will consume 1 quantity of {quantity} remaining",
-"DND5E.AbilityUseConsumableDestroyHint": "Using this {type} will consume its final charge and it will be destroyed.",
-"DND5E.AbilityUseConsumableDestroyResourceHint": "Using this {type} will consume the final charge off {name} and destroy it.",
-"DND5E.AbilityUseConsume": "Consume Available Usage?",
-"DND5E.AbilityUseConsumeAction": "Consume Usage",
 "DND5E.AbilityUseChargesLabel": "{value} Charges",
 "DND5E.AbilityUseConsumableLabel": "{max} per {per}",
 "DND5E.AbilityUseCast": "Cast Spell",
@@ -1016,7 +1005,7 @@
       "Label": "Activity Uses",
       "PromptDecrease": "Consume Activity Use?",
       "PromptIncrease": "Restore Activity Use?",
-      "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of this activity.",
+      "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of this activity ({available} {availableUse} available).",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of this activity.",
       "Warning": "uses on {item}'s activity {activity}"
     },
@@ -1024,15 +1013,15 @@
       "Label": "Attribute",
       "PromptDecrease": "Consume Attribute?",
       "PromptIncrease": "Restore Attribute?",
-      "PromptHintDecrease": "Decrease <code>{attribute}</code> by <strong>{cost}</strong>.",
-      "PromptHintIncrease": "Increase <code>{attribute}</code> by <strong>{cost}</strong>.",
+      "PromptHintDecrease": "Decrease <code>{attribute}</code> by <strong>{cost}</strong> (currently {current}).",
+      "PromptHintIncrease": "Increase <code>{attribute}</code> by <strong>{cost}</strong> (currently {current}).",
       "Warning": "{attribute} amount"
     },
     "HitDice": {
       "Label": "Hit Dice",
       "PromptDecrease": "Consume Hit Die?",
       "PromptIncrease": "Restore Hit Die?",
-      "PromptHintDecrease": "Spend <strong>{cost}</strong> {denomination} {die}.",
+      "PromptHintDecrease": "Spend <strong>{cost}</strong> {denomination} {die} ({available} remaining).",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {denomination} {die}.",
       "Warning": "{denomination} hit dice"
     },
@@ -1044,7 +1033,7 @@
       "Label": "Item Uses",
       "PromptDecrease": "Consume Item Use?",
       "PromptIncrease": "Restore Item Use?",
-      "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of {item}.",
+      "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of {item} ({available} {availableUse} available).",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of {item}.",
       "Warning": "uses on {name}"
     },
@@ -1052,7 +1041,7 @@
       "Label": "Material",
       "PromptDecrease": "Consume Material?",
       "PromptIncrease": "Restore Material?",
-      "PromptHintDecrease": "Reduce quantity of {item} by <strong>{cost}</strong>.",
+      "PromptHintDecrease": "Reduce quantity of {item} by <strong>{cost}</strong> ({quantity} remaining).",
       "PromptHintIncrease": "Increase quantity of {item} by <strong>{cost}</strong>.",
       "Warning": "of {name}"
     },
@@ -1064,7 +1053,7 @@
       "Label": "Spell Slots",
       "PromptDecrease": "Consume Spell Slot?",
       "PromptIncrease": "Restore Spell Slot?",
-      "PromptHintDecrease": "Spend <strong>{cost}</strong> {slot}.",
+      "PromptHintDecrease": "Spend <strong>{cost}</strong> {slot} ({available} remaining).",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {slot}.",
       "Warning": "{level} slots"
     },
@@ -1079,7 +1068,8 @@
     "MissingItem": "Item configured to be consumed by {activity} activity on {item} could not be found.",
     "MissingSpellSlot": "No {level} slots available.",
     "None": "No {type} available to spend, {cost} required.",
-    "NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available."
+    "NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available.",
+    "WillDestroy": "Consuming {item} will spend its final use and it will be destroyed."
   }
 },
 
