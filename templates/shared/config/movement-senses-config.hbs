@@ -1,0 +1,17 @@
+<section class="flexcol">
+    <fieldset class="card">
+        {{#each types}}{{ formField field value=value placeholder=placeholder localize=true }}{{/each}}
+        {{#if (or fields.units extras.length)}}<hr>{{/if}}
+        {{#if fields.units}}{{ formField fields.units value=data.units options=unitsOptions localize=true }}{{/if}}
+        {{#each extras}}{{ formField field value=value input=input localize=true }}{{/each}}
+    </fieldset>
+    {{#if fields.special}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Special" }}</legend>
+        <div class="form-group">
+            {{ formInput fields.special value=data.special }}
+            <p class="hint">{{ localize "DND5E.SpecialHint" }}</p>
+        </div>
+    </fieldset>
+    {{/if}}
+</section>
