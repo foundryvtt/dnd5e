@@ -96,10 +96,13 @@ export default class CharacterData extends CreatureTemplate {
             nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsCurrent"
           }),
           max: new NumberField({
-            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride"
+            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride",
+            hint: "DND5E.HitPointsOverrideHint"
           }),
           temp: new NumberField({ integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp" }),
-          tempmax: new NumberField({ integer: true, initial: 0, label: "DND5E.HitPointsTempMax" }),
+          tempmax: new NumberField({
+            integer: true, initial: 0, label: "DND5E.HitPointsTempMax", hint: "DND5E.HitPointsTempMaxHint"
+          }),
           bonuses: new SchemaField({
             level: new FormulaField({ deterministic: true, label: "DND5E.HitPointsBonusLevel" }),
             overall: new FormulaField({ deterministic: true, label: "DND5E.HitPointsBonusOverall" })

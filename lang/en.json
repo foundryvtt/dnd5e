@@ -1776,16 +1776,27 @@
 "DND5E.HitPointsCurrent": "Current Hit Points",
 "DND5E.HitPointsMax": "Maximum Hit Points",
 "DND5E.HitPointsMin": "Minimum Hit Points",
-"DND5E.HitPointsOverride": "Maximum Hit Points Override",
+"DND5E.HitPointsOverride": "Maximum Override",
+"DND5E.HitPointsOverrideHint": "Override automatically calculated hit points, ignoring any HP from classes, bonuses, and ability modifier.",
 "DND5E.HitPointsTemp": "Temporary Hit Points",
 "DND5E.HitPointsTempShort": "Temporary HP",
-"DND5E.HitPointsTempMax": "Temporary Maximum Hit Points",
+"DND5E.HitPointsTempMax": "Temporary Maximum",
+"DND5E.HitPointsTempMaxHint": "Temporary change to the maximum HP.",
 "DND5E.HitPointsTempMaxShort": "Temp Max HP",
 "DND5E.HP": "HP",
 "DND5E.HealthConditions": "Health Conditions",
 "DND5E.HPFormula": "Health Formula",
 "DND5E.HPFormulaError": "The provided hit point formula could not be evaluated.",
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
+
+"DND5E.HITDICE": {
+  "Action": {
+    "Decrease": "Decrease",
+    "Increase": "Increase"
+  },
+  "Config": "Adjust Hit Dice"
+},
+
 "DND5E.HitDie": "Hit Die",
 "DND5E.HitDice": "Hit Dice",
 "DND5E.HitDiceAutoSpend": {
