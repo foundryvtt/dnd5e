@@ -39,7 +39,7 @@ export default class InitiativeConfig extends BaseConfigSheet {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    const source = this.document.toObject();
+    const source = this.document._source;
 
     const defaultAbility = CONFIG.DND5E.abilities[CONFIG.DND5E.defaultAbilities.initiative];
     context.abilityOptions = [
