@@ -12,6 +12,7 @@ const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, Str
  * @property {boolean} spell.challenge.override  Use custom attack bonus & DC rather than creature's.
  * @property {number} spell.level                Base level at which to cast the spell.
  * @property {Set<string>} spell.properties      Spell components & tags to ignore while casting.
+ * @property {boolean} spell.spellbook           Display spell in the Spells tab of the character sheet.
  * @property {string} spell.uuid                 UUID of the spell to cast.
  */
 export default class CastActivityData extends BaseActivityData {
@@ -29,6 +30,7 @@ export default class CastActivityData extends BaseActivityData {
         }),
         level: new NumberField(),
         properties: new SetField(new StringField()),
+        spellbook: new BooleanField({ initial: true }),
         uuid: new DocumentUUIDField()
       })
     };

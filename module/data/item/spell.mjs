@@ -349,6 +349,18 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /**
+   * Retrieve a linked activity that granted this spell using the stored `cachedFor` value.
+   * @returns {Activity|null}
+   */
+  get linkedActivity() {
+    const relative = this.parent.actor;
+    if ( !relative ) return null;
+    return fromUuidSync(this.parent.getFlag("dnd5e", "cachedFor"), { relative, strict: false }) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The proficiency multiplier for this item.
    * @returns {number}
    */
