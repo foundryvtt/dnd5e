@@ -171,7 +171,7 @@ export default class TraitAdvancement extends Advancement {
 
     // If "default" mode is selected, return all traits
     // If any other mode is selected, only return traits that support expertise or mastery
-    const traitTypes = this.configuration.mode === "default" ? Object.keys(CONFIG.DND5E.traits)
+    const traitTypes = this.configuration.mode === "default" ? Object.keys(CONFIG.DND5E.traits).filter(k => k !== "dm")
       : filteredKeys(CONFIG.DND5E.traits, t => t[this.configuration.mode === "mastery" ? "mastery" : "expertise"]);
 
     for ( const trait of traitTypes ) {

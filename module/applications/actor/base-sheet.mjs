@@ -7,7 +7,6 @@ import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 
 import ActorArmorConfig from "./armor-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
-import DamageModificationConfig from "./damage-modification-config.mjs";
 import SourceConfig from "../source-config.mjs";
 
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
@@ -321,6 +320,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _prepareTraits(systemData) {
     const traits = {};
     for ( const [trait, traitConfig] of Object.entries(CONFIG.DND5E.traits) ) {
+      if ( trait === "dm" ) continue;
       const key = traitConfig.actorKeyPath?.replace("system.", "") ?? `traits.${trait}`;
       const data = foundry.utils.deepClone(foundry.utils.getProperty(systemData, key));
       if ( !data ) continue;
@@ -1238,8 +1238,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const trait = event.currentTarget.dataset.trait;
     const options = { document: this.actor, trait };
     if ( trait === "tool" ) return new ToolsConfig(options).render({ force: true });
-    else if ( ["dr", "di", "dv"].includes(trait) ) return new DamagesConfig(options).render({ force: true });
-    else if ( trait === "dm" ) return new DamageModificationConfig(this.actor).render(true);
+    else if ( ["dr", "di", "dv", "dm"].includes(trait) ) return new DamagesConfig(options).render({ force: true });
     else if ( trait === "weapon" ) return new WeaponsConfig(options).render({ force: true });
     return new TraitsConfig(options).render({ force: true });
   }

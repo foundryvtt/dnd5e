@@ -73,8 +73,10 @@ export async function actorValues(actor, trait) {
     Object.entries(data).forEach(([k, d]) => setValue(k, d.value));
   } else if ( trait === "saves" ) {
     Object.entries(data).forEach(([k, d]) => setValue(k, d.proficient));
+  } else if ( trait === "dm" ) {
+    Object.entries(data.amount).forEach(([k, d]) => setValue(k, d));
   } else {
-    data.value.forEach(v => setValue(v, 1));
+    data.value?.forEach(v => setValue(v, 1));
   }
 
   if ( trait === "weapon" ) data.mastery?.value?.forEach(v => setValue(v, 2));

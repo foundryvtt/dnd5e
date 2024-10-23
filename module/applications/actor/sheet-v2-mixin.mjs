@@ -195,6 +195,7 @@ export default function ActorSheetV2Mixin(Base) {
     _prepareTraits() {
       const traits = {};
       for ( const [trait, config] of Object.entries(CONFIG.DND5E.traits) ) {
+        if ( trait === "dm" ) continue;
         const key = config.actorKeyPath ?? `system.traits.${trait}`;
         const data = foundry.utils.deepClone(foundry.utils.getProperty(this.actor, key));
         if ( !data ) continue;
