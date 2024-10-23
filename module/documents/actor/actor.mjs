@@ -1786,7 +1786,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const parts = [];
     let data = {};
-    const options = {};
+    const options = {
+      advantage: death.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: death.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      maximum: death.roll.max,
+      minimum: death.roll.min
+    };
 
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
@@ -1956,7 +1961,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const parts = [];
     const options = {
       advantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE
+      disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      maximum: conc.roll.max,
+      minimum: conc.roll.min
     };
 
     // Concentration bonus
@@ -2066,7 +2073,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     options = foundry.utils.mergeObject({
       flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
-      halflingLucky: flags.halflingLucky ?? false
+      halflingLucky: flags.halflingLucky ?? false,
+      maximum: init.roll.max,
+      minimum: init.roll.min
     }, options);
 
     const rollConfig = { parts, data, options, subject: this };
@@ -2100,14 +2109,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       evaluate: false,
       event: rollOptions.event,
       hookNames: ["initiative", "abilityCheck", "d20Test"],
-      rolls: [{ parts: [roll.formula.replace(roll.d20.formula, "")], options: roll.options }],
+      rolls: [{ parts: [roll.formula.replace(roll.d20.formula, "")], options: { ...roll.options, configured: false } }],
       subject: this
     };
     const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
     const message = { rollMode: game.settings.get("core", "rollMode") };
     const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
     if ( !rolls.length ) return;
-    rolls[0].configureModifiers();
 
     // Temporarily cache the configured roll and use it to roll initiative for the Actor
     this._cachedInitiativeRoll = rolls[0];
