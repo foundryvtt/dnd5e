@@ -1315,6 +1315,30 @@ dialog.dnd5e2.application {
 }
 
 /* ---------------------------------- */
+
+.dnd5e2.damages-config.trait-selector {
+  .traits {
+    grid-template-columns: [icon] 16px [name] 2fr [proficiency] 1fr;
+    .trait-list li {
+      dnd5e-icon, i {
+        --icon-fill: var(--color-text-light-6);
+        color: var(--color-text-light-6);
+      }
+
+      > i {
+        font-family: var(--font-awesome);
+        font-weight: bold;
+        font-style: normal;
+
+        &.ada::before { content: "\f132"; }
+        &.mgc::before { content: "\f72b"; }
+        &.sil::before { content: "\53"; }
+      }
+    }
+  }
+}
+
+/* ---------------------------------- */
 /*  Create Document Dialog            */
 /* ---------------------------------- */
 
