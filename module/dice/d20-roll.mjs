@@ -98,7 +98,7 @@ export default class D20Roll extends BasicRoll {
    * @param {BasicRollMessageConfiguration} [message={}]  Configuration data that guides roll message creation.
    * @returns {D20Roll[]}                                 Any rolls created.
    */
-  static async build(config = {}, dialog = {}, message = {}) {
+  static async build(config={}, dialog={}, message={}) {
     for ( const roll of config.rolls ?? [] ) {
       roll.options ??= {};
       roll.options.criticalSuccess ??= CONFIG.Dice.D20Die.CRITICAL_SUCCESS_TOTAL;
@@ -147,7 +147,8 @@ export default class D20Roll extends BasicRoll {
    * @type {D20Die|void}
    */
   get d20() {
-    if ( !(this.terms[0] instanceof foundry.dice.terms.Die) ) return undefined;
+    if ( !(this.terms[0] instanceof foundry.dice.terms.Die) ) return;
+    if ( !(this.terms[0] instanceof CONFIG.Dice.D20Die) ) this.#createD20Die();
     return this.terms[0];
   }
 
@@ -190,7 +191,6 @@ export default class D20Roll extends BasicRoll {
    * @type {boolean|void}
    */
   get isCritical() {
-    this.#createD20Die();
     return this.d20.isCriticalSuccess;
   }
 
@@ -201,7 +201,6 @@ export default class D20Roll extends BasicRoll {
    * @type {boolean|void}
    */
   get isFumble() {
-    this.#createD20Die();
     return this.d20.isCriticalFailure;
   }
 
@@ -224,7 +223,7 @@ export default class D20Roll extends BasicRoll {
     let advantage = true;
     let disadvantage = true;
 
-    const rtLabel = `(${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
+    const rtLabel = game.i18n.localize("DND5E.FlagsReliableTalent");
     for ( const roll of rolls ) {
       if ( !roll.validD20Roll ) continue;
       if ( !roll.hasAdvantage ) advantage = false;
@@ -278,9 +277,9 @@ export default class D20Roll extends BasicRoll {
    * Ensure the d20 die for this roll is actually a D20Die instance.
    */
   #createD20Die() {
-    if ( this.d20 instanceof CONFIG.Dice.D20Die ) return;
-    if ( !(this.d20 instanceof foundry.dice.terms.Die) ) return;
-    this.d20 = new CONFIG.Dice.D20Die({ ...this.d20 });
+    if ( this.terms[0] instanceof CONFIG.Dice.D20Die ) return;
+    if ( !(this.terms[0] instanceof foundry.dice.terms.Die) ) return;
+    this.terms[0] = new CONFIG.Dice.D20Die({ ...this.terms[0] });
   }
 
   /* -------------------------------------------- */

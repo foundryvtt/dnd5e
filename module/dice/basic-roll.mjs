@@ -191,7 +191,7 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Perform specific changes on message data before creating message.
+   * Perform specific changes to message data before creating message.
    * @param {BasicRoll[]} rolls   Rolls to add to the message.
    * @param {object} messageData  The data object to use when creating the message.
    * @protected

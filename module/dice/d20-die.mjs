@@ -4,7 +4,7 @@ const { Die } = foundry.dice.terms;
  * Primary die used when performing a D20 roll.
  */
 export default class D20Die extends Die {
-  constructor({ number = 1, faces = 20, ...args }={}) {
+  constructor({ number=1, faces=20, ...args }={}) {
     super({ number, faces, ...args });
   }
 
@@ -31,7 +31,7 @@ export default class D20Die extends Die {
    * @type {boolean|void}
    */
   get isCriticalSuccess() {
-    if ( !this.isValid || !this._evaluated ) return undefined;
+    if ( !this.isValid || !this._evaluated ) return;
     if ( !Number.isNumeric(this.options.criticalSuccess) ) return false;
     return this.total >= this.options.criticalSuccess;
   }
@@ -43,7 +43,7 @@ export default class D20Die extends Die {
    * @type {boolean|void}
    */
   get isCriticalFailure() {
-    if ( !this.isValid || !this._evaluated ) return undefined;
+    if ( !this.isValid || !this._evaluated ) return;
     if ( !Number.isNumeric(this.options.criticalFailure) ) return false;
     return this.total <= this.options.criticalFailure;
   }
@@ -68,12 +68,11 @@ export default class D20Die extends Die {
    */
   applyAdvantage(advantageMode) {
     this.options.advantageMode = advantageMode;
-    if ( advantageMode !== CONFIG.Dice.D20Roll.ADV_MODE.NORMAL ) {
+    if ( advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.NORMAL ) this.number = 1;
+    else {
       const isAdvantage = advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
       this.number = (isAdvantage && this.options.elvenAccuracy) ? 3 : 2;
       this.modifiers.push(isAdvantage ? "kh" : "kl");
-    } else {
-      this.number = 1;
     }
   }
 
