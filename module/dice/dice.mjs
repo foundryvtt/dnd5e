@@ -108,11 +108,6 @@ export async function d20Roll({
 
   // TODO: Delete this reference code once skill, tool, and attack rolls are properly handled
 
-  if ( chooseModifier && !isFF ) {
-    data.mod = "@mod";
-    if ( "abilityCheckBonus" in data ) data.abilityCheckBonus = "@abilityCheckBonus";
-  }
-
   // Prompt a Dialog to further configure the D20Roll
   if ( !isFF ) {
   } else {

@@ -792,7 +792,8 @@ async function rollAction(event) {
 
   const { type, ability, skill, tool, dc } = target.dataset;
   const options = { event };
-  if ( dc ) options.targetValue = dc;
+  if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+  if ( dc ) options.target = dc;
 
   const action = event.target.closest("a")?.dataset.action ?? "roll";
 
@@ -815,22 +816,19 @@ async function rollAction(event) {
         const actor = token.actor;
         switch ( type ) {
           case "check":
-            await actor.rollAbilityTest({ ability, event: options.event, target: options.targetValue });
+            await actor.rollAbilityTest(options);
             break;
           case "concentration":
-            if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
             await actor.rollConcentration(options);
             break;
           case "save":
-            await actor.rollAbilitySave({ ability, event: options.event, target: options.targetValue });
+            await actor.rollAbilitySave(options);
             break;
           case "skill":
-            if ( ability ) options.ability = ability;
-            await actor.rollSkill(skill, options);
+            await actor.rollSkill({ skill, ...options });
             break;
           case "tool":
-            options.ability = ability;
-            await actor.rollToolCheck(tool, options);
+            await actor.rollToolCheck({ tool, ...options });
             break;
         }
       }
