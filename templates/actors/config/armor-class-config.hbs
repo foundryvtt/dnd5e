@@ -1,48 +1,44 @@
 <section class="flexcol">
     <div class="final-value">{{ dnd5e-numberFormat data.value }}</div>
     <fieldset class="card">
-        <legend>{{ localize "DND5E.ArmorClassCalculation" }}</legend>
+        <legend>{{ localize "DND5E.ArmorClassFormula" }}</legend>
         {{ formField fields.calc value=source.calc options=calculationOptions localize=true }}
         {{ formField fields.formula value=formula.value disabled=formula.disabled localize=true }}
+        {{#if dexterity}}
+        <div class="form-group">
+            <label>{{ localize CONFIG.abilities.dex.label }}</label>
+            <div class="form-fields">
+                {{{ dnd5e-numberParts dexterity signDisplay="always" }}}
+            </div>
+        </div>
+        {{/if}}
         {{#if formula.showFlat}}
         {{ formField fields.flat value=source.flat localize=true }}
         {{/if}}
-        {{#each effects.bonuses}}
-        <div class="form-group">
-            <label>{{ label }}</label>
-            <div class="form-fields">
-                <span class="plusSign">+</span>
-                <span class="integer">{{ value }}</span>
-            </div>
-        </div>
-        {{/each}}
     </fieldset>
-    {{#if equipped}}
+    {{#if calculations.length}}
     <fieldset class="card equipped">
-        <legend>{{ localize "DND5E.ArmorClassEquipment" }}</legend>
+        <legend>{{ localize "DND5E.ArmorClassCalculation" }}</legend>
         <div class="header">
-            <div class="armorValue">
+            <div class="armor-value">
                 <i class="fa-solid fa-shield" data-tooltip="DND5E.ArmorValue"
                    aria-label="{{ localize 'DND5E.ArmorValue' }}"></i>
             </div>
-            <div class="magicalBonus">
+            <div class="magical-bonus">
                 <i class="fa-solid fa-wand-sparkles" data-tooltip="DND5E.EquipmentBonus"
                    aria-label="{{ localize 'DND5E.EquipmentBonus' }}"></i>
             </div>
         </div>
-        {{#if equipped.armor}}{{> ".equipped" equipped.armor }}{{/if}}
-        {{#if equipped.shield}}{{> ".equipped" equipped.shield }}{{/if}}
+        {{#each calculations}}
+        <div class="form-group">
+            <div class="name">
+                <img src="{{ img }}" class="gold-icon" alt="{{ name }}">
+                {{{ anchor }}}
+            </div>
+            <span class="armor-value">{{ value }}</span>
+            <span class="magical-bonus">{{ magicalBonus }}</span>
+        </div>
+        {{/each}}
     </fieldset>
     {{/if}}
 </section>
-
-{{#*inline ".equipped"}}
-<div class="form-group">
-    <div class="name">
-        <img src="{{ img }}" class="gold-icon" alt="{{ name }}">
-        {{{ anchor }}}
-    </div>
-    <span class="armorValue">{{ value }}</span>
-    <span class="magicalBonus">{{ magicalBonus }}</span>
-</div>
-{{/inline}}
