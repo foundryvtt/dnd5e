@@ -156,7 +156,8 @@ export default class ActivityUsageDialog extends Dialog5e {
     if ( "scaling" in this.config ) this.#item = this.#item.clone({ "flags.dnd5e.scaling": this.config.scaling });
     return {
       ...await super._prepareContext(options),
-      activity: this.activity
+      activity: this.activity,
+      linkedActivity: this.config.cause ? this.activity.getLinkedActivity(this.config.cause.activity) : null
     };
   }
 
@@ -240,7 +241,7 @@ export default class ActivityUsageDialog extends Dialog5e {
     context.notes = [];
 
     if ( this.activity.requiresSpellSlot && this.activity.consumption.spellSlot
-      && this._shouldDisplay("consume.spellSlot") ) context.spellSlot = {
+      && this._shouldDisplay("consume.spellSlot") && !this.config.cause ) context.spellSlot = {
       field: new BooleanField({ label: game.i18n.localize("DND5E.SpellCastConsume") }),
       name: "consume.spellSlot",
       value: this.config.consume?.spellSlot
@@ -248,20 +249,25 @@ export default class ActivityUsageDialog extends Dialog5e {
 
     if ( this._shouldDisplay("consume.resources") ) {
       context.resources = [];
-      const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
-      for ( const [index, target] of this.activity.consumption.targets.entries() ) {
-        const value = (isArray && this.config.consume.resources.includes(index))
-          || (!isArray && (this.config.consume?.resources !== false) && (this.config.consume !== false));
-        const { label, hint, notes, warn } = target.getConsumptionLabels(this.config, value);
-        if ( notes?.length ) context.notes.push(...notes);
-        context.resources.push({
-          field: new BooleanField({ label, hint }),
-          input: context.inputs.createCheckboxInput,
-          name: `consume.resources.${index}`,
-          value,
-          warn: value ? warn : false
-        });
-      }
+      const addResources = (targets, keyPath) => {
+        const consume = foundry.utils.getProperty(this.config, keyPath);
+        const isArray = foundry.utils.getType(consume) === "Array";
+        for ( const [index, target] of targets.entries() ) {
+          const value = (isArray && consume.includes(index))
+            || (!isArray && (consume !== false) && (this.config.consume !== false));
+          const { label, hint, notes, warn } = target.getConsumptionLabels(this.config, value);
+          if ( notes?.length ) context.notes.push(...notes);
+          context.resources.push({
+            field: new BooleanField({ label, hint }),
+            input: context.inputs.createCheckboxInput,
+            name: `${keyPath}.${index}`,
+            value,
+            warn: value ? warn : false
+          });
+        }
+      };
+      addResources(this.activity.consumption.targets, "consume.resources");
+      if ( context.linkedActivity ) addResources(context.linkedActivity.consumption.targets, "cause.resources");
     }
 
     context.hasConsumption = context.spellSlot || context.resources;
@@ -327,7 +333,26 @@ export default class ActivityUsageDialog extends Dialog5e {
       return context;
     }
 
-    if ( this.activity.requiresSpellSlot && (this.config.scaling !== false) ) {
+    const scale = (context.linkedActivity ?? this.activity).consumption.scaling;
+    const rollData = (context.linkedActivity ?? this.activity).getRollData({ deterministic: true });
+
+    if ( this.activity.requiresSpellSlot && context.linkedActivity && (this.config.scaling !== false) ) {
+      const max = simplifyBonus(scale.max, rollData);
+      const minimumLevel = this.item.system.level ?? 1;
+      const maximumLevel = scale.allowed ? scale.max ? minimumLevel + max - 1 : Infinity : minimumLevel;
+      const spellSlotOptions = Object.entries(CONFIG.DND5E.spellLevels).map(([level, label]) => {
+        if ( (Number(level) < minimumLevel) || (Number(level) > maximumLevel) ) return null;
+        return { value: `spell${level}`, label };
+      }).filter(_ => _);
+      context.spellSlots = {
+        field: new StringField({ label: game.i18n.localize("DND5E.SpellCastUpcast") }),
+        name: "spell.slot",
+        value: this.config.spell?.slot,
+        options: spellSlotOptions
+      };
+    }
+
+    else if ( this.activity.requiresSpellSlot && (this.config.scaling !== false) ) {
       const minimumLevel = this.item.system.level ?? 1;
       const maximumLevel = Object.values(this.actor.system.spells)
         .reduce((max, d) => d.max ? Math.max(max, d.level) : max, 0);
@@ -347,9 +372,9 @@ export default class ActivityUsageDialog extends Dialog5e {
         const disabled = (slot.value === 0) && consumeSlot;
         if ( !disabled && !spellSlotValue ) spellSlotValue = value;
         return { value, label, disabled, selected: spellSlotValue === value };
-      }).filter(o => o);
+      }).filter(_ => _);
 
-      if ( spellSlotOptions ) context.spellSlots = {
+      context.spellSlots = {
         field: new StringField({ label: game.i18n.localize("DND5E.SpellCastUpcast") }),
         name: "spell.slot",
         value: spellSlotValue,
@@ -363,9 +388,8 @@ export default class ActivityUsageDialog extends Dialog5e {
       });
     }
 
-    else if ( this.activity.consumption.scaling.allowed && (this.config.scaling !== false) ) {
-      const scale = this.activity.consumption.scaling;
-      const max = scale.max ? simplifyBonus(scale.max, this.activity.getRollData({ deterministic: true })) : Infinity;
+    else if ( scale.allowed && (this.config.scaling !== false) ) {
+      const max = scale.max ? simplifyBonus(scale.max, rollData) : Infinity;
       if ( max > 1 ) context.scaling = {
         field: new NumberField({ min: 1, max, label: game.i18n.localize("DND5E.ScalingValue") }),
         name: "scalingValue",
@@ -448,8 +472,10 @@ export default class ActivityUsageDialog extends Dialog5e {
       submitData.scaling = submitData.scalingValue - 1;
       delete submitData.scalingValue;
     }
-    if ( foundry.utils.getType(submitData.consume?.resources) === "Object" ) {
-      submitData.consume.resources = filteredKeys(submitData.consume.resources).map(i => Number(i));
+    for ( const key of ["consume", "cause"] ) {
+      if ( foundry.utils.getType(submitData[key]?.resources) === "Object" ) {
+        submitData[key].resources = filteredKeys(submitData[key].resources).map(i => Number(i));
+      }
     }
     return submitData;
   }
