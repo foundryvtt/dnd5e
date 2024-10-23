@@ -580,7 +580,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
       // Re-link UUIDs in consumption fields to explicit items on the actor
       if ( target.target.includes(".") ) {
-        const item = actor.sourcedItems?.get(target.target);
+        const item = actor.sourcedItems?.get(target.target, { legacy: false })?.first();
         if ( item ) target.target = item.id;
       }
 
