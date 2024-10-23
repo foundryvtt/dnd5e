@@ -7,6 +7,8 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  *
  * @typedef {object} BasicRollProcessConfiguration
  * @property {BasicRollConfiguration[]} rolls  Configuration data for individual rolls.
+ * @property {boolean} [evaluate=true]         Should the rolls be evaluated? If set to `false`, then no chat message
+ *                                             will be created regardless of message configuration.
  * @property {Event} [event]                   Event that triggered the rolls.
  * @property {string[]} [hookNames]            Name suffixes for configuration hooks called.
  * @property {Document} [subject]              Document that initiated this roll.
@@ -117,6 +119,7 @@ export default class BasicRoll extends Roll {
       rolls = await DialogClass.configure(config, dialog, message);
     }
 
+    if ( config.evaluate === false ) return rolls;
     for ( const roll of rolls ) await roll.evaluate();
 
     if ( rolls?.length && (message.create !== false) ) {
