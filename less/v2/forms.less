@@ -128,10 +128,10 @@
     }
 
     input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
+      --input-background-color: var(--dnd5e-background-parchment);
       border: 2px solid var(--dnd5e-color-gold);
       border-radius: 8px;
       padding: .5rem;
-      background: var(--dnd5e-color-parchment);
       font-size: var(--font-size-14);
       height: unset;
       width: 100%;
@@ -506,7 +506,10 @@
       display: grid;
       grid-template-columns: repeat(var(--num-cols), 1fr);
 
-      > label { text-align: unset; }
+      > label {
+        text-align: unset;
+        > span { line-height: normal; }
+      }
     }
   }
 
@@ -571,6 +574,7 @@
 /* App V2 Standard Form */
 .dnd5e2 .standard-form,
 .dnd5e2.standard-form {
+  --color-fieldset-border: var(--color-border-light-tertiary);
   --color-form-label: var(--color-text-dark-primary);
   --color-form-label-hover: var(--color-form-label);
   --input-height: 26px;

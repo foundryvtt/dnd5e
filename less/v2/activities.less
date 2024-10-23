@@ -55,7 +55,6 @@
       align-content: center;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: var(--font-size-11);
       line-height: normal;
     }
     .name { flex: 1 0 175px; }
@@ -94,6 +93,10 @@
 
 .cast-activity.sheet .spell-details {
   margin-block-end: 0;
+  document-tags {
+    row-gap: 0;
+    input { font-size: var(--font-size-11); }
+  }
 }
 
 /* ----------------------------------------- */
@@ -120,6 +123,7 @@
     text-align: center;
     border: 1px dashed var(--color-border-light-2);
     border-radius: 4px;
+    font-size: var(--font-size-11);
   }
 }
 
