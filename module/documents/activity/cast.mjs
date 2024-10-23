@@ -72,13 +72,13 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
 
     let spell = this.cachedSpell;
     if ( !spell ) {
-      spell = await this.actor.createEmbeddedDocuments("Item", [await this.getCachedSpellData()])[0];
+      [spell] = await this.actor.createEmbeddedDocuments("Item", [await this.getCachedSpellData()]);
     }
 
     const results = await spell.use({ ...usage, legacy: false }, dialog, message);
 
     /**
-     * A hook event that fires after an linked spell is used by a Cast activity.
+     * A hook event that fires after a linked spell is used by a Cast activity.
      * @function dnd5e.postUseLinkedSpell
      * @memberof hookEvents
      * @param {Activity} activity                              Activity being activated.

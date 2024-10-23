@@ -138,10 +138,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    *                                                 scaling is not allowed.
    * @property {object} spell
    * @property {number} spell.slot                   The spell slot to consume.
-   * @property {object} [triggering]
-   * @property {string} [triggering.activity]        Relative UUID to the activity triggering this one. Activity must
-   *                                                 be on the same actor as this one.
-   * @property {boolean|number[]} [triggering.resources]  Control resource consumption on linked item.
+   * @property {object} [cause]
+   * @property {string} [cause.activity]             Relative UUID to the activity that caused this one to be used.
+   *                                                 Activity must be on the same actor as this one.
+   * @property {boolean|number[]} [cause.resources]  Control resource consumption on linked item.
    */
 
   /**
@@ -613,9 +613,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     const linked = this.getLinkedActivity();
     if ( linked ) {
-      config.triggering ??= {};
-      config.triggering.activity ??= linked.relativeUUID;
-      config.triggering.resources ??= true;
+      config.cause ??= {};
+      config.cause.activity ??= linked.relativeUUID;
+      config.cause.resources ??= true;
     }
 
     return config;
@@ -692,15 +692,15 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
 
     // Handle consumption on a linked activity
-    if ( config.triggering ) {
-      const linkedActivity = this.getLinkedActivity(config.triggering.activity);
+    if ( config.cause ) {
+      const linkedActivity = this.getLinkedActivity(config.cause.activity);
       if ( linkedActivity ) {
         const consume = {
-          resources: (config.consume === true) || (config.triggering?.resources === true)
-            ? linkedActivity.consumption.targets.keys() : config.triggering?.resources,
+          resources: (config.consume === true) || (config.cause?.resources === true)
+            ? linkedActivity.consumption.targets.keys() : config.cause?.resources,
           spellSlot: false
         };
-        const usageConfig = foundry.utils.mergeObject(config, { consume, triggering: false }, { inplace: true });
+        const usageConfig = foundry.utils.mergeObject(config, { consume, cause: false }, { inplace: true });
         const results = await linkedActivity._prepareUsageUpdates(usageConfig, { returnErrors: true });
         if ( foundry.utils.getType(results) === "Object" ) {
           linkedActivity._mergeActivityUpdates(results);
@@ -1225,7 +1225,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const scaling = message.getFlag("dnd5e", "scaling");
     const usageConfig = { consume: true, event, scaling };
     const linkedActivity = this.getLinkedActivity();
-    if ( linkedActivity ) usageConfig.triggering = { activity: linkedActivity.relativeUUID, resources: true };
+    if ( linkedActivity ) usageConfig.cause = { activity: linkedActivity.relativeUUID, resources: true };
     await this.consume(usageConfig, messageConfig);
     if ( !foundry.utils.isEmpty(messageConfig.data) ) await message.update(messageConfig.data);
   }
@@ -1324,12 +1324,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @internal
    */
   _mergeActivityUpdates(updates) {
-    if ( !foundry.utils.isEmpty(updates.activity) ) {
-      const itemIndex = updates.item.findIndex(i => i._id === this.item.id);
-      const keyPath = `system.activities.${this.id}`;
-      const activityUpdates = foundry.utils.expandObject(updates.activity);
-      if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
-      else updates.item[itemIndex][keyPath] = activityUpdates;
-    }
+    if ( foundry.utils.isEmpty(updates.activity) ) return;
+    const itemIndex = updates.item.findIndex(i => i._id === this.item.id);
+    const keyPath = `system.activities.${this.id}`;
+    const activityUpdates = foundry.utils.expandObject(updates.activity);
+    if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
+    else updates.item[itemIndex][keyPath] = activityUpdates;
   }
 };

@@ -157,7 +157,7 @@ export default class ActivityUsageDialog extends Dialog5e {
     return {
       ...await super._prepareContext(options),
       activity: this.activity,
-      linkedActivity: !this.config.triggering ? null : this.activity.getLinkedActivity(this.config.triggering.activity)
+      linkedActivity: this.config.cause ? this.activity.getLinkedActivity(this.config.cause.activity) : null
     };
   }
 
@@ -241,7 +241,7 @@ export default class ActivityUsageDialog extends Dialog5e {
     context.notes = [];
 
     if ( this.activity.requiresSpellSlot && this.activity.consumption.spellSlot
-      && this._shouldDisplay("consume.spellSlot") && !this.config.triggering ) context.spellSlot = {
+      && this._shouldDisplay("consume.spellSlot") && !this.config.cause ) context.spellSlot = {
       field: new BooleanField({ label: game.i18n.localize("DND5E.SpellCastConsume") }),
       name: "consume.spellSlot",
       value: this.config.consume?.spellSlot
@@ -267,7 +267,7 @@ export default class ActivityUsageDialog extends Dialog5e {
         }
       };
       addResources(this.activity.consumption.targets, "consume.resources");
-      if ( context.linkedActivity ) addResources(context.linkedActivity.consumption.targets, "triggering.resources");
+      if ( context.linkedActivity ) addResources(context.linkedActivity.consumption.targets, "cause.resources");
     }
 
     context.hasConsumption = context.spellSlot || context.resources;
@@ -472,7 +472,7 @@ export default class ActivityUsageDialog extends Dialog5e {
       submitData.scaling = submitData.scalingValue - 1;
       delete submitData.scalingValue;
     }
-    for ( const key of ["consume", "triggering"] ) {
+    for ( const key of ["consume", "cause"] ) {
       if ( foundry.utils.getType(submitData[key]?.resources) === "Object" ) {
         submitData[key].resources = filteredKeys(submitData[key].resources).map(i => Number(i));
       }
