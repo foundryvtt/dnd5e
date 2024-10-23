@@ -14,7 +14,6 @@ export {default as DamageModificationConfig} from "./damage-modification-config.
 export {default as LongRestDialog} from "./long-rest.mjs";
 export {default as ActorSheetFlags} from "./sheet-flags.mjs";
 export {default as ShortRestDialog} from "./short-rest.mjs";
-export {default as ActorTypeConfig} from "./type-config.mjs";
 export {default as ActorSheetMixin} from "./sheet-mixin.mjs";
 export {default as ActorSheetV2Mixin} from "./sheet-v2-mixin.mjs";
 
@@ -45,3 +44,4 @@ export {default as ActorSkillsConfig} from "./deprecated/skills-config.mjs";
 export {default as ActorSpellSlotsConfig} from "./deprecated/spell-slots-config.mjs";
 export {default as ToolSelector} from "./deprecated/tool-selector.mjs";
 export {default as TraitSelector} from "./deprecated/trait-selector.mjs";
+export {default as ActorTypeConfig} from "./deprecated/type-config.mjs";

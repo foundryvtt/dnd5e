@@ -3,10 +3,10 @@ import Item5e from "../../documents/item.mjs";
 import { splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
+import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 
 import ActorArmorConfig from "./armor-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
-import ActorTypeConfig from "./type-config.mjs";
 import DamageModificationConfig from "./damage-modification-config.mjs";
 import SourceConfig from "../source-config.mjs";
 
@@ -769,7 +769,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         app = new SourceConfig({ document: this.actor });
         break;
       case "type":
-        app = new ActorTypeConfig(this.actor);
+        app = new CreatureTypeConfig({ document: this.actor });
         break;
       case "ability":
         const ability = event.currentTarget.closest("[data-ability]").dataset.ability;

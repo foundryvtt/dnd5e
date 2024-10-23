@@ -1,5 +1,5 @@
+import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 import ActorSheet5e from "./base-sheet.mjs";
-import ActorTypeConfig from "./type-config.mjs";
 
 /**
  * An Actor sheet for NPC type characters.
@@ -142,7 +142,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     event.preventDefault();
     event.stopPropagation();
     if ( (event.currentTarget.dataset.action === "type") && (this.actor.system.details.race?.id) ) {
-      new ActorTypeConfig(this.actor.system.details.race, { keyPath: "system.type" }).render(true);
+      new CreatureTypeConfig({ document: this.actor.system.details.race, keyPath: "type" }).render(true);
     }
     else return super._onConfigMenu(event);
   }
