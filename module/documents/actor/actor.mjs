@@ -3660,6 +3660,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
 /* -------------------------------------------- */
 
+/**
+ * @extends {Map<string, Set<Item5e>>}
+ */
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
   get(key, { legacy=true }={}) {

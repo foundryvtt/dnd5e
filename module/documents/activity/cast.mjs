@@ -86,9 +86,10 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
    */
   getSpellChanges() {
     const changes = [];
+    const source = this.toObject();
     for ( const type of ["activation", "duration", "range", "target"] ) {
       if ( !this[type].override ) continue;
-      const data = this.toObject()[type];
+      const data = source[type];
       delete data.override;
       changes.push({ key: `system.${type}`, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: JSON.stringify(data) });
     }

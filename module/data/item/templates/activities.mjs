@@ -357,7 +357,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /**
    * Prepare any item or actor changes based on activity changes.
-   * @param {object} changed  The differential data that is changed relative to the documents prior values.
+   * @param {object} changed  The differential data that is changed relative to the document's prior values.
    * @param {object} options  Additional options which modify the update request.
    * @param {User} user       The User requesting the document update.
    */
@@ -395,7 +395,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /**
    * Perform any additional updates when an item with activities is updated.
-   * @param {object} changed  The differential data that is changed relative to the documents prior values.
+   * @param {object} changed  The differential data that is changed relative to the document's prior values.
    * @param {object} options  Additional options which modify the update request.
    * @param {string} userId   The id of the User requesting the document update.
    */
