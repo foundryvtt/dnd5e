@@ -1456,7 +1456,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ability: defaultAbility,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent"),
-      rolls: [{}]
+      rolls: [{
+        options: {
+          advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+          disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+          maximum: relevant?.roll.max,
+          minimum: relevant?.roll.min
+        }
+      }]
     }, config);
     buildConfig(rollConfig, rollConfig.rolls[0], null, 0);
     rollConfig.hookNames = ["abilityCheck", type].concat(config.hookNames ?? []);
