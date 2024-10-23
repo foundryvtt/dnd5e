@@ -5,7 +5,6 @@ import EffectsElement from "../components/effects.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 
-import ActorArmorConfig from "./armor-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
 import SourceConfig from "../source-config.mjs";
 
@@ -15,6 +14,7 @@ import AdvancementManager from "../advancement/advancement-manager.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 
 import AbilityConfig from "./config/ability-config.mjs";
+import ArmorClassConfig from "./config/armor-class-config.mjs";
 import ConcentrationConfig from "./config/concentration-config.mjs";
 import DamagesConfig from "./config/damages-config.mjs";
 import HitDiceConfig from "./config/hit-dice-config.mjs";
@@ -747,7 +747,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     let app;
     switch ( button.dataset.action ) {
       case "armor":
-        app = new ActorArmorConfig(this.actor);
+        app = new ArmorClassConfig({ document: this.actor });
         break;
       case "hitDice":
         app = new HitDiceConfig({ document: this.actor });
@@ -1256,7 +1256,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( !a || !a.dataset.target ) return;
     switch ( a.dataset.target ) {
       case "armor":
-        (new ActorArmorConfig(this.actor)).render(true);
+        new ArmorClassConfig({ document: this.actor }).render({ force: true });
         return;
       default:
         const item = await fromUuid(a.dataset.target);

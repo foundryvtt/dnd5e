@@ -1097,10 +1097,55 @@ dialog.dnd5e2.application {
 .dnd5e2.config-sheet {
   .window-content {
     > section:is(.flexcol, .flexrow) { gap: 12px; }
-     .final-value {
-       font-size: var(--font-size-32);
-       text-align: center;
-     }
+    .final-value {
+      font-size: var(--font-size-32);
+      text-align: center;
+    }
+    .form-group {
+      .plusSign, .minusSign {
+        flex: 0 0 1.5em;
+        font-size: var(--font-size-16);
+        text-align: center;
+      }
+      .integer { padding-inline-start: 4px; }
+    }
+  }
+  .header {
+    margin-inline: -10px;
+    padding-block: 3px 2px;
+    padding-inline: 10px;
+    border-radius: 0;
+  }
+}
+
+/* ---------------------------------- */
+/*  Armor Class Config Sheet          */
+/* ---------------------------------- */
+
+.dnd5e2.armor-class.config-sheet {
+  .equipped {
+    display: grid;
+    grid-template-columns: [name] 4fr [armorValue] 1fr [magicalBonus] 1fr;
+
+    .header, .form-group {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: subgrid;
+    }
+    .name {
+      grid-column: name;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      .gold-icon {
+        flex: 0 0 32px;
+        width: 32px;
+        height: 32px;
+      }
+      .content-link > i { display: none; }
+    }
+    .armor-value { grid-column: armorValue; }
+    .magical-bonus { grid-column: magicalBonus; }
   }
 }
 
@@ -1179,16 +1224,6 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 .dnd5e2.hit-points.config-sheet {
-  .total-hp {
-    font-size: var(--font-size-32);
-    text-align: center;
-  }
-  .plusSign, .minusSign {
-    flex: 0 0 1.5em;
-    font-size: var(--font-size-16);
-    text-align: center;
-  }
-  .integer { padding-inline-start: 4px; }
   .multiplier {
     flex: 0 0 4em;
     text-align: center;
@@ -1227,12 +1262,6 @@ dialog.dnd5e2.application {
       display: grid;
       grid-column: 1 / -1;
       grid-template-columns: subgrid;
-    }
-    .header {
-      margin-inline: -10px;
-      padding-block: 3px 2px;
-      padding-inline: 10px;
-      border-radius: 0;
     }
     .name { grid-column: name; }
     .proficiency {
