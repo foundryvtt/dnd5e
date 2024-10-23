@@ -334,6 +334,30 @@ export default class ActivitiesTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Track changes to rider items.
+   * @param {object} changed  The differential data that is changed relative to the documents prior values.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {User} user       The User requesting the document update.
+   */
+  async preUpdateActivities(changed, options, user) {
+    if ( !foundry.utils.hasProperty(changed, "system.activities") ) return;
+    const riders = this.parent.clone(changed).system.activities.getByType("enchant").reduce((riders, a) => {
+      a.effects.forEach(e => {
+        e.riders.activity.forEach(activity => riders.activity.add(activity));
+        e.riders.effect.forEach(effect => riders.effect.add(effect));
+      });
+      return riders;
+    }, { activity: new Set(), effect: new Set() });
+    foundry.utils.setProperty(changed, "flags.dnd5e.riders", {
+      activity: Array.from(riders.activity), effect: Array.from(riders.effect)
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Shims                                       */
   /* -------------------------------------------- */
 
