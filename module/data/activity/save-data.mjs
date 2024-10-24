@@ -4,7 +4,7 @@ import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
-const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @typedef {EffectApplicationData} SaveEffectApplicationData
@@ -19,7 +19,7 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
  * @property {DamageData[]} damage.parts            Parts of damage to inflict.
  * @property {SaveEffectApplicationData[]} effects  Linked effects that can be applied.
  * @property {object} save
- * @property {string} save.ability                  Make the saving throw with this ability.
+ * @property {Set<string>} save.ability             Make the saving throw with one of these abilities.
  * @property {object} save.dc
  * @property {string} save.dc.calculation           Method or ability used to calculate the difficulty class.
  * @property {string} save.dc.formula               Custom DC formula or flat value.
@@ -37,7 +37,7 @@ export default class SaveActivityData extends BaseActivityData {
         onSave: new BooleanField()
       })),
       save: new SchemaField({
-        ability: new StringField({ initial: () => Object.keys(CONFIG.DND5E.abilities)[0] }),
+        ability: new SetField(new StringField()),
         dc: new SchemaField({
           calculation: new StringField({ initial: "initial" }),
           formula: new FormulaField({ deterministic: true })
@@ -54,11 +54,21 @@ export default class SaveActivityData extends BaseActivityData {
   get ability() {
     if ( this.save.dc.calculation in CONFIG.DND5E.abilities ) return this.save.dc.calculation;
     if ( this.save.dc.calculation === "spellcasting" ) return this.spellcastingAbility;
-    return this.save.ability;
+    return this.save.ability.first() ?? null;
   }
 
   /* -------------------------------------------- */
   /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static migrateData(source) {
+    if ( foundry.utils.getType(source.save?.ability) === "string" ) {
+      if ( source.save.ability ) source.save.ability = [source.save.ability];
+      else source.save.ability = [];
+    }
+  }
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -73,7 +83,7 @@ export default class SaveActivityData extends BaseActivityData {
         parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
       },
       save: {
-        ability: source.system.save?.ability ?? Object.keys(CONFIG.DND5E.abilities)[0],
+        ability: [source.system.save?.ability ?? Object.keys(CONFIG.DND5E.abilities)[0]],
         dc: {
           calculation,
           formula: String(source.system.save?.dc ?? "")
