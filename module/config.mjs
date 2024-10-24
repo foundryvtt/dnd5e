@@ -479,6 +479,79 @@ DND5E.ammoIds = {
 };
 
 /* -------------------------------------------- */
+/*  Bastion Facilities                          */
+/* -------------------------------------------- */
+
+DND5E.facilities = {
+  orders: {
+    craft: "DND5E.FACILITY.Orders.craft.inf",
+    empower: "DND5E.FACILITY.Orders.empower.inf",
+    harvest: "DND5E.FACILITY.Orders.harvest.inf",
+    maintain: "DND5E.FACILITY.Orders.maintain.inf",
+    recruit: "DND5E.FACILITY.Orders.recruit.inf",
+    research: "DND5E.FACILITY.Orders.research.inf",
+    trade: "DND5E.FACILITY.Orders.trade.inf"
+  },
+  sizes: {
+    cramped: "DND5E.FACILITY.Sizes.cramped",
+    roomy: "DND5E.FACILITY.Sizes.roomy",
+    vast: "DND5E.FACILITY.Sizes.vast"
+  },
+  types: {
+    basic: {
+      label: "DND5E.FACILITY.Types.Basic.Label",
+      subtypes: {
+        bedroom: "DND5E.FACILITY.Types.Basic.Bedroom",
+        diningRoom: "DND5E.FACILITY.Types.Basic.DiningRoom",
+        parlor: "DND5E.FACILITY.Types.Basic.Parlor",
+        courtyard: "DND5E.FACILITY.Types.Basic.Courtyard",
+        kitchen: "DND5E.FACILITY.Types.Basic.Kitchen",
+        storage: "DND5E.FACILITY.Types.Basic.Storage"
+      }
+    },
+    special: {
+      label: "DND5E.FACILITY.Types.Special.Label",
+      subtypes: {
+        arcaneStudy: "DND5E.FACILITY.Types.Special.ArcaneStudy",
+        armory: "DND5E.FACILITY.Types.Special.Armory",
+        barrack: "DND5E.FACILITY.Types.Special.Barrack",
+        garden: "DND5E.FACILITY.Types.Special.Garden",
+        library: "DND5E.FACILITY.Types.Special.Library",
+        sanctuary: "DND5E.FACILITY.Types.Special.Sanctuary",
+        smithy: "DND5E.FACILITY.Types.Special.Smithy",
+        storehouse: "DND5E.FACILITY.Types.Special.Storehouse",
+        workshop: "DND5E.FACILITY.Types.Special.Workshop",
+        gamingHall: "DND5E.FACILITY.Types.Special.GamingHall",
+        greenhouse: "DND5E.FACILITY.Types.Special.Greenhouse",
+        laboratory: "DND5E.FACILITY.Types.Special.Laboratory",
+        sacristy: "DND5E.FACILITY.Types.Special.Sacristy",
+        scriptorium: "DND5E.FACILITY.Types.Special.Scriptorium",
+        stable: "DND5E.FACILITY.Types.Special.Stable",
+        teleportationCircle: "DND5E.FACILITY.Types.Special.TeleportationCircle",
+        theater: "DND5E.FACILITY.Types.Special.Theater",
+        trainingArea: "DND5E.FACILITY.Types.Special.TrainingArea",
+        trophyRoom: "DND5E.FACILITY.Types.Special.TrophyRoom",
+        archive: "DND5E.FACILITY.Types.Special.Archive",
+        meditationChamber: "DND5E.FACILITY.Types.Special.MeditationChamber",
+        menagerie: "DND5E.FACILITY.Types.Special.Menagerie",
+        observatory: "DND5E.FACILITY.Types.Special.Observatory",
+        pub: "DND5E.FACILITY.Types.Special.Pub",
+        reliquary: "DND5E.FACILITY.Types.Special.Reliquary",
+        demiplane: "DND5E.FACILITY.Types.Special.Demiplane",
+        guildhall: "DND5E.FACILITY.Types.Special.Guildhall",
+        sanctum: "DND5E.FACILITY.Types.Special.Sanctum",
+        warRoom: "DND5E.FACILITY.Types.Special.WarRoom"
+      }
+    }
+  }
+};
+preLocalize("facilities.orders", { sort: true });
+preLocalize("facilities.sizes", { sort: true });
+preLocalize("facilities.types", { key: "label", sort: true });
+preLocalize("facilities.types.basic.subtypes", { sort: true });
+preLocalize("facilities.types.special.subtypes", { sort: true });
+
+/* -------------------------------------------- */
 /*  Tool Details                                */
 /* -------------------------------------------- */
 
@@ -3743,6 +3816,7 @@ DND5E.defaultArtwork = {
     consumable: "systems/dnd5e/icons/svg/items/consumable.svg",
     container: "systems/dnd5e/icons/svg/items/container.svg",
     equipment: "systems/dnd5e/icons/svg/items/equipment.svg",
+    facility: "systems/dnd5e/icons/svg/items/facility.svg",
     feat: "systems/dnd5e/icons/svg/items/feature.svg",
     loot: "systems/dnd5e/icons/svg/items/loot.svg",
     race: "systems/dnd5e/icons/svg/items/race.svg",
