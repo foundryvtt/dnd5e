@@ -253,10 +253,12 @@
                             </a>
 
                             {{!-- Deleting --}}
+                            {{#if item.canDelete}}
                             <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
                                aria-label="{{ localize "DND5E.ItemDelete" }}">
                                 <i class="fas fa-trash"></i>
                             </a>
+                            {{/if}}
                             {{else if @root.owner}}
                             {{!-- Preparing --}}
                             {{#with ctx.preparation}}

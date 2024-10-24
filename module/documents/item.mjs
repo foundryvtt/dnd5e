@@ -104,6 +104,27 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return this.system.abilityMod ?? null;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Should deletion of this item be allowed? Doesn't prevent programatic deletion, but affects UI controls.
+   * @type {boolean}
+   */
+  get canDelete() {
+    return !this.flags.dnd5e?.cachedFor;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Should duplication of this item be allowed? Doesn't prevent programatic duplication, but affects UI controls.
+   * @type {boolean}
+   */
+  get canDuplicate() {
+    return !this.system.metadata?.singleton && !["class", "subclass"].includes(this.type)
+      && !this.flags.dnd5e?.cachedFor;
+  }
+
   /* --------------------------------------------- */
 
   /**
