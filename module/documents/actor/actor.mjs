@@ -2144,6 +2144,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     formula ??= `max(0, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
     rollConfig.subject = this;
+    rollConfig.hookNames = ["hitDie"].concat(config.hookNames ?? []);
     rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({
