@@ -35,8 +35,8 @@
                 <img src="{{ img }}" class="gold-icon" alt="{{ name }}">
                 {{{ anchor }}}
             </div>
-            <span class="armor-value">{{ value }}</span>
-            <span class="magical-bonus">{{ magicalBonus }}</span>
+            <span class="armor-value {{#if (eq value "—")}}empty{{/if}}">{{ value }}</span>
+            <span class="magical-bonus {{#if (eq magicalBonus "—")}}empty{{/if}}">{{ magicalBonus }}</span>
         </div>
         {{/each}}
     </fieldset>

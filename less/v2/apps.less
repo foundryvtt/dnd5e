@@ -1132,6 +1132,12 @@ dialog.dnd5e2.application {
       grid-column: 1 / -1;
       grid-template-columns: subgrid;
     }
+    .form-group {
+      margin-inline: -.75em;
+      padding-inline: .75em;
+      &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
+      &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
+    }
     .name {
       grid-column: name;
       display: flex;
@@ -1146,6 +1152,9 @@ dialog.dnd5e2.application {
     }
     .armor-value { grid-column: armorValue; }
     .magical-bonus { grid-column: magicalBonus; }
+    .armor-value, .magical-bonus {
+      &.empty { color: var(--color-text-light-6); }
+    }
   }
 }
 
