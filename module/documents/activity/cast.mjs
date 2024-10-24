@@ -47,6 +47,16 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Should this spell be listed in the actor's spellbook?
+   * @type {boolean}
+   */
+  get displayInSpellbook() {
+    return this.item.system.magicAvailable && this.spell.spellbook;
+  }
+
+  /* -------------------------------------------- */
   /*  Activation                                  */
   /* -------------------------------------------- */
 

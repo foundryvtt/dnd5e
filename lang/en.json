@@ -624,13 +624,18 @@
         "label": "Ignored Properties",
         "hint": "Spell components & tags to ignore while casting."
       },
+      "spellbook": {
+        "label": "Display in Spellbook",
+        "hint": "Display spell in the Spells tab of the character sheet."
+      },
       "uuid": {
         "label": "Spell to Cast"
       }
     }
   },
   "SECTIONS": {
-    "Spell": "Spell"
+    "Spell": "Spell",
+    "Spellbook": "Item Spells"
   },
   "Action": {
     "RemoveSpell": "Remove Spell"

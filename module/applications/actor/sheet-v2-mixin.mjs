@@ -305,6 +305,7 @@ export default function ActorSheetV2Mixin(Base) {
 
       // Spells
       if ( item.type === "spell" ) {
+        const linked = item.system.linkedActivity?.item;
 
         // Activation
         const cost = system.activation?.value ?? "";
@@ -334,7 +335,7 @@ export default function ActorSheetV2Mixin(Base) {
         // Prepared
         const mode = system.preparation?.mode;
         const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
-        if ( config.prepares ) {
+        if ( config.prepares && !linked ) {
           const isAlways = mode === "always";
           const prepared = isAlways || system.preparation.prepared;
           ctx.preparation = {
@@ -353,7 +354,7 @@ export default function ActorSheetV2Mixin(Base) {
 
         // Subtitle
         ctx.subtitle = [
-          this.actor.classes[system.sourceClass]?.name,
+          linked ? linked.name : this.actor.classes[system.sourceClass]?.name,
           item.labels.components.vsm
         ].filterJoin(" &bull; ");
       }

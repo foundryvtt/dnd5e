@@ -460,8 +460,15 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       let s = spell.system.level || 0;
       const sl = `spell${s}`;
 
+      // Spells from items
+      if ( spell.getFlag("dnd5e", "cachedFor") ) {
+        s = "item";
+        if ( !spell.system.linkedActivity?.displayInSpellbook ) return;
+        if ( !spellbook[s] ) registerSection(null, s, game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook"));
+      }
+
       // Specialized spellcasting modes (if they exist)
-      if ( mode in sections ) {
+      else if ( mode in sections ) {
         s = sections[mode];
         if ( !spellbook[s] ) {
           const l = levels[mode] || {};
