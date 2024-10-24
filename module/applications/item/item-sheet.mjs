@@ -396,7 +396,7 @@ export default class ItemSheet5e extends ItemSheet {
         }
       })
     };
-    return super.activateEditor(name, options, initialContent);
+    return super.activateEditor(name, options, foundry.utils.getProperty(this.item._source, name));
   }
 
   /* -------------------------------------------- */
