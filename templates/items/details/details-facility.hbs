@@ -1,0 +1,63 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemFacilityDetails" }}</legend>
+
+    {{!-- Type --}}
+    {{ formField fields.type.fields.value value=source.type.value choices=config.facilities.types labelAttr="label"
+                 blank=false }}
+
+    {{!-- Sub-Type --}}
+    {{ formField fields.type.fields.subtype value=source.type.subtype choices=facilitySubtypes }}
+
+    {{!-- Size --}}
+    {{ formField fields.size value=source.size choices=config.facilities.sizes }}
+
+    {{!-- Properties --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.FACILITY.Properties" }}</label>
+        <div class="form-fields">
+
+            {{!-- Level --}}
+            {{ formField fields.level value=source.level label="DND5E.Level" localize=true classes="label-top" }}
+
+            {{!-- Order --}}
+            {{ formField fields.order value=source.order classes="label-top" choices=config.facilities.orders
+                         blank="" }}
+        </div>
+    </div>
+
+    {{!-- Occupants --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.FACILITY.Occupants" }}</label>
+        <div class="form-fields">
+
+            {{!-- Hirelings --}}
+            {{ formField fields.hirelings.fields.max value=source.hirelings.max classes="label-top" placeholder="—" }}
+
+            {{!-- Defenders --}}
+            {{ formField fields.defenders.fields.max value=source.defenders classes="label-top" placeholder="—" }}
+        </div>
+    </div>
+
+    {{!-- Free Facility --}}
+    {{#if (eq source.type.value "special")}}
+    {{ formField fields.free value=source.free input=inputs.createCheckboxInput }}
+    {{/if}}
+
+</fieldset>
+
+<fieldset>
+    <legend>{{ localize "DND5E.FACILITY.Orders.Label" }}</legend>
+
+    {{!-- Progress --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.FACILITY.Progress" }}</label>
+        <div class="form-fields">
+
+            {{!-- Current --}}
+            {{ formField fields.progress.fields.value value=source.progress.value classes="label-top" }}
+
+            {{!-- Total --}}
+            {{ formField fields.progress.fields.max value=source.progress.max classes="label-top" placeholder="—" }}
+        </div>
+    </div>
+</fieldset>

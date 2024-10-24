@@ -28,6 +28,8 @@
 "TYPES.Item.consumablePl": "Consumables",
 "TYPES.Item.equipment": "Equipment",
 "TYPES.Item.equipmentPl": "Equipment",
+"TYPES.Item.facility": "Facility",
+"TYPES.Item.facilityPl": "Facilities",
 "TYPES.Item.feat": "Feature",
 "TYPES.Item.featurePl": "Features",
 "TYPES.Item.loot": "Loot",
@@ -1534,6 +1536,137 @@
 "DND5E.ExperiencePointsMin": "Minimum XP for This Level",
 "DND5E.ExperiencePointsValue": "XP Value",
 "DND5E.Expertise": "Expertise",
+
+"DND5E.FACILITY": {
+  "FIELDS": {
+    "defenders": {
+      "max": {
+        "label": "Defenders"
+      }
+    },
+    "free": {
+      "hint": "Free facilities do not count towards your special facilities cap.",
+      "label": "Free Facility"
+    },
+    "hirelings": {
+      "max": {
+        "label": "Hirelings"
+      }
+    },
+    "level": {
+      "label": "Level Requirement"
+    },
+    "order": {
+      "label": "Order"
+    },
+    "progress": {
+      "max": {
+        "label": "Total"
+      },
+      "value": {
+        "label": "Current"
+      }
+    },
+    "size": {
+      "label": "Size"
+    },
+    "type": {
+      "subtype": {
+        "label": "Type"
+      },
+      "value": {
+        "label": "Category"
+      }
+    }
+  },
+  "Occupants": "Occupants",
+  "Orders": {
+    "Label": "Orders",
+    "craft": {
+      "inf": "Craft",
+      "present": "Crafting"
+    },
+    "empower": {
+      "inf": "Empower",
+      "present": "Empowering"
+    },
+    "enlarge": {
+      "inf": "Enlarge",
+      "present": "Enlarging"
+    },
+    "harvest": {
+      "inf": "Harvest",
+      "present": "Harvesting"
+    },
+    "maintain": {
+      "inf": "Maintain",
+      "present": "Maintaining"
+    },
+    "recruit": {
+      "inf": "Recruit",
+      "present": "Recruiting"
+    },
+    "research": {
+      "inf": "Research",
+      "present": "Researching"
+    },
+    "trade": {
+      "inf": "Trade",
+      "present": "Trading"
+    }
+  },
+  "Progress": "Progress",
+  "Properties": "Properties",
+  "Sizes": {
+    "cramped": "Cramped",
+    "roomy": "Roomy",
+    "vast": "Vast"
+  },
+  "Types": {
+    "Basic": {
+      "Label": "Basic Facility",
+      "Bedroom": "Bedroom",
+      "DiningRoom": "Dining Room",
+      "Parlor": "Parlor",
+      "Courtyard": "Courtyard",
+      "Kitchen": "Kitchen",
+      "Storage": "Storage"
+    },
+    "Special": {
+      "Label": "Special Facility",
+      "ArcaneStudy": "Arcane Study",
+      "Armory": "Armory",
+      "Barrack": "Barrack",
+      "Garden": "Garden",
+      "Library": "Library",
+      "Sanctuary": "Sanctuary",
+      "Smithy": "Smithy",
+      "Storehouse": "Storehouse",
+      "Workshop": "Workshop",
+      "GamingHall": "Gaming Hall",
+      "Greenhouse": "Greenhouse",
+      "Laboratory": "Laboratory",
+      "Sacristy": "Sacristy",
+      "Scriptorium": "Scriptorium",
+      "Stable": "Stable",
+      "TeleportationCircle": "Teleportation Circle",
+      "Theater": "Theater",
+      "TrainingArea": "Training Area",
+      "TrophyRoom": "Trophy Room",
+      "Archive": "Archive",
+      "MeditationChamber": "Meditation Chamber",
+      "Menagerie": "Menagerie",
+      "Observatory": "Observatory",
+      "Pub": "Pub",
+      "Reliquary": "Reliquary",
+      "Demiplane": "Demiplane",
+      "Guildhall": "Guildhall",
+      "Sanctum": "Sanctum",
+      "WarRoom": "War Room"
+    }
+  }
+},
+
 "DND5E.Favorite": "Favorite",
 "DND5E.FavoriteDrop": "Drop Favorite",
 "DND5E.FavoriteRemove": "Remove Favorite",
@@ -1867,6 +2000,7 @@
 "DND5E.ItemEquipmentStealthDisav": "Imposes Stealth Disadvantage",
 "DND5E.ItemEquipmentType": "Equipment Type",
 "DND5E.ItemEquipmentUsage": "Equipment Usage",
+"DND5E.ItemFacilityDetails": "Facility Details",
 "DND5E.ItemFeatureDetails": "Feature Details",
 "DND5E.ItemFeatureProperties": "Feature Properties",
 "DND5E.ItemFeatureSubtype": "{category} Type",
