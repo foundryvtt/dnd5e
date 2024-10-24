@@ -73,6 +73,7 @@ export default class D20Roll extends BasicRoll {
   /** @inheritDoc */
   static fromConfig(config, process) {
     const formula = [new CONFIG.Dice.D20Die().formula].concat(config.parts ?? []).join(" + ");
+    config.options.target ??= process.target;
     return new this(formula, config.data, config.options);
   }
 
@@ -349,5 +350,96 @@ export default class D20Roll extends BasicRoll {
 
     // Set the mastery
     if ( submitData.mastery ) this.options.mastery = submitData.mastery;
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Translate new config objects back into old config objects for deprecated hooks.
+ * @param {D20RollProcessConfiguration} rollConfig
+ * @param {BasicRollDialogConfiguration} dialogConfig
+ * @param {BasicRollMessageConfiguration} messageConfig
+ * @returns {DeprecatedD20RollConfiguration}
+ * @internal
+ */
+export function _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig) {
+  const oldConfig = {
+    parts: rollConfig.rolls[0].parts,
+    data: rollConfig.rolls[0].data,
+    event: rollConfig.event,
+    advantage: rollConfig.rolls[0].options?.advantage,
+    disadvantage: rollConfig.rolls[0].options?.disadvantage,
+    critical: rollConfig.rolls[0].options?.criticalSuccess,
+    fumble: rollConfig.rolls[0].options?.criticalFailure,
+    targetValue: rollConfig.target,
+    // TODO: ammunition
+    // TODO: attackMode
+    // TODO: mastery
+    elvenAccuracy: rollConfig.elvenAccuracy,
+    halflingLucky: rollConfig.halflingLucky,
+    reliableTalent: rollConfig.reliableTalent,
+    // TODO: ammunitionOptions
+    // TODO: attackModes
+    // TODO: chooseModifier
+    // TODO: masteryOptions
+    title: dialogConfig.options?.title,
+    dialogOptions: dialogConfig.options,
+    chatMessage: messageConfig.create,
+    messageData: messageConfig.data,
+    rollMode: messageConfig.rollMode,
+    flavor: messageConfig.data?.flavor
+  };
+  if ( "configure" in dialogConfig ) oldConfig.fastForward = !dialogConfig.configure;
+  return oldConfig;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Apply changes from old config objects back onto new config objects.
+ * @param {D20RollProcessConfiguration} rollConfig
+ * @param {BasicRollDialogConfiguration} dialogConfig
+ * @param {BasicRollMessageConfiguration} messageConfig
+ * @param {DeprecatedD20RollConfiguration} options
+ * @internal
+ */
+export function _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, options) {
+  const set = (config, keyPath, value) => {
+    if ( value === undefined ) return;
+    foundry.utils.setProperty(config, keyPath, value);
+  };
+
+  let roll = rollConfig.rolls?.[0] ?? {};
+  set(roll, "parts", options.parts);
+  set(roll, "data", options.data);
+  set(rollConfig, "event", options.event);
+  set(roll, "options.advantage", options.advantage);
+  set(roll, "options.disadvantage", options.disadvantage);
+  set(roll, "options.criticalSuccess", options.critical);
+  set(roll, "options.criticalFailure", options.fumble);
+  set(rollConfig, "target", options.targetValue);
+  // TODO: ammunition
+  // TODO: attackMode
+  // TODO: mastery
+  set(rollConfig, "elvenAccuracy", options.elvenAccuracy);
+  set(rollConfig, "halflingLucky", options.halflingLucky);
+  set(rollConfig, "reliableTalent", options.reliableTalent);
+  if ( "fastForward" in options ) dialogConfig.configure = !options.fastForward;
+  // TODO: ammunitionOptions
+  // TODO: attackModes
+  // TODO: chooseModifier
+  // TODO: masteryOptions
+  set(dialogConfig, "options", options.dialogOptions);
+  set(dialogConfig, "options.title", options.title);
+  set(messageConfig, "create", options.chatMessage);
+  set(messageConfig, "data", options.messageData);
+  set(messageConfig, "rollMode", options.rollMode);
+  set(messageConfig, "data.flavor", options.flavor);
+
+  if ( !foundry.utils.isEmpty(roll) ) {
+    rollConfig.rolls ??= [];
+    if ( rollConfig.rolls[0] ) rollConfig.rolls[0] = roll;
+    else rollConfig.rolls.push(roll);
   }
 }
