@@ -9,6 +9,11 @@
     {{/if}}
     {{#each choices}}
     <li {{~#if category}} class="category"{{/if}}>
+        {{#if icon.svg}}
+        <dnd5e-icon src="{{ icon.src }}"></dnd5e-icon>
+        {{else if icon}}
+        <i class="{{ icon.src }} fa-fw" inert></i>
+        {{/if}}
         <label class="name">{{ label }}</label>
         <div class="proficiency">
             {{ formInput ../field name=(concat ../keyPath @key) value=chosen disabled=disabled input=../input }}
