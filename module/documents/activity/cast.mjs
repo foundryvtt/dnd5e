@@ -136,7 +136,7 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
 
   /**
    * Create spell changes based on the activity's configuration.
-   * @returns {object}
+   * @returns {object[]}
    */
   getSpellChanges() {
     const changes = [];
