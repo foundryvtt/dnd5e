@@ -565,7 +565,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   _prepareUsageConfig(config) {
     config = foundry.utils.deepClone(config);
-    const linked = this.getLinkedActivity();
+    const linked = this.getLinkedActivity(config.cause?.activity);
 
     if ( config.create !== false ) {
       config.create ??= {};
@@ -575,11 +575,12 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     if ( config.consume !== false ) {
       const hasResourceConsumption = this.consumption.targets.length > 0;
+      const hasLinkedConsumption = linked?.consumption.targets.length > 0;
       const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
       config.consume ??= {};
       config.consume.resources ??= hasResourceConsumption;
-      config.consume.spellSlot ??= hasSpellSlotConsumption;
-      config.hasConsumption = hasResourceConsumption || hasSpellSlotConsumption;
+      config.consume.spellSlot ??= !linked && hasSpellSlotConsumption;
+      config.hasConsumption = hasResourceConsumption || hasLinkedConsumption || (!linked && hasSpellSlotConsumption);
     }
 
     const levelingFlag = this.item.getFlag("dnd5e", "spellLevel");
@@ -591,8 +592,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
 
     else {
+      const canScale = linked ? linked.consumption.scaling.allowed : this.canScale;
       const linkedDelta = (linked?.spell.level ?? Infinity) - this.item.system.level;
-      if ( this.canScale ) config.scaling ??= Number.isFinite(linkedDelta) ? linkedDelta : 0;
+      if ( canScale ) config.scaling ??= Number.isFinite(linkedDelta) ? linkedDelta : 0;
       else config.scaling = false;
 
       if ( this.requiresSpellSlot ) {
@@ -617,9 +619,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( linked ) {
       config.cause ??= {};
       config.cause.activity ??= linked.relativeUUID;
-      config.cause.resources ??= true;
+      config.cause.resources ??= linked.consumption.targets.length > 0;
     }
-    console.log(foundry.utils.deepClone(config));
 
     return config;
   }
@@ -772,7 +773,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const checkObject = obj => (foundry.utils.getType(obj) === "Object") && Object.values(obj).some(v => v);
     return config.concentration?.begin === true
       || checkObject(config.create)
-      || checkObject(config.consume)
+      || ((checkObject(config.consume) || (config.cause?.resources === true)) && config.hasConsumption)
       || (config.scaling !== false);
   }
 
