@@ -565,6 +565,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   _prepareUsageConfig(config) {
     config = foundry.utils.deepClone(config);
+    const linked = this.getLinkedActivity();
 
     if ( config.create !== false ) {
       config.create ??= {};
@@ -590,13 +591,15 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
 
     else {
-      if ( this.canScale ) config.scaling ??= 0;
+      const linkedDelta = (linked?.spell.level ?? Infinity) - this.item.system.level;
+      if ( this.canScale ) config.scaling ??= Number.isFinite(linkedDelta) ? linkedDelta : 0;
       else config.scaling = false;
 
       if ( this.requiresSpellSlot ) {
         const mode = this.item.system.preparation.mode;
         config.spell ??= {};
-        config.spell.slot ??= (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
+        config.spell.slot ??= linked?.spell.level ? `spell${linked.spell.level}`
+          : (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
       }
     }
 
@@ -611,12 +614,12 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       })?.id ?? effects.first()?.id ?? null;
     }
 
-    const linked = this.getLinkedActivity();
     if ( linked ) {
       config.cause ??= {};
       config.cause.activity ??= linked.relativeUUID;
       config.cause.resources ??= true;
     }
+    console.log(foundry.utils.deepClone(config));
 
     return config;
   }

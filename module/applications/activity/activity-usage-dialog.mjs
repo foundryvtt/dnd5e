@@ -338,7 +338,7 @@ export default class ActivityUsageDialog extends Dialog5e {
 
     if ( this.activity.requiresSpellSlot && context.linkedActivity && (this.config.scaling !== false) ) {
       const max = simplifyBonus(scale.max, rollData);
-      const minimumLevel = this.item.system.level ?? 1;
+      const minimumLevel = context.linkedActivity.spell?.level ?? this.item.system.level ?? 1;
       const maximumLevel = scale.allowed ? scale.max ? minimumLevel + max - 1 : Infinity : minimumLevel;
       const spellSlotOptions = Object.entries(CONFIG.DND5E.spellLevels).map(([level, label]) => {
         if ( (Number(level) < minimumLevel) || (Number(level) > maximumLevel) ) return null;
