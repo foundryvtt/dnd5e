@@ -303,4 +303,16 @@ export default class DamageRoll extends BasicRoll {
       { critical: { allow: allowCritical } }, { options: { title } }, { rollMode: defaultRollMode }
     );
   }
+
+  /* -------------------------------------------- */
+  /*  Evaluate Methods                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async evaluate(options={}) {
+    if ( this.options.type && !this.options.appearance?.colorset ) {
+      foundry.utils.setProperty(this.options, "appearance.colorset", this.options.type);
+    }
+    return super.evaluate(options);
+  }
 }
