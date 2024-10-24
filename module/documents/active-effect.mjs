@@ -232,24 +232,6 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
-
-  /** @override */
-  getRelativeUUID(doc) {
-    // TODO: Backport relative UUID fixes to accommodate descendant documents. Can be removed once v12 is the minimum.
-    if ( this.compendium && (this.compendium !== doc.compendium) ) return this.uuid;
-    if ( this.isEmbedded && (this.collection === doc.collection) ) return `.${this.id}`;
-    const parts = [this.documentName, this.id];
-    let parent = this.parent;
-    while ( parent ) {
-      if ( parent === doc ) break;
-      parts.unshift(parent.documentName, parent.id);
-      parent = parent.parent;
-    }
-    if ( parent === doc ) return `.${parts.join(".")}`;
-    return this.uuid;
-  }
-
-  /* -------------------------------------------- */
   /*  Lifecycle                                   */
   /* -------------------------------------------- */
 
