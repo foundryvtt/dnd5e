@@ -54,15 +54,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /**
-   * Track the most recent drag event.
-   * @type {DragEvent}
-   * @protected
-   */
-  _event = null;
-
-  /* -------------------------------------------- */
-
-  /**
    * IDs for items on the sheet that have been expanded.
    * @type {Set<string>}
    * @protected
@@ -920,14 +911,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async _onDrop(event) {
-    this._event = event;
-    return super._onDrop(event);
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   async _onDropActiveEffect(event, data) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
@@ -948,7 +931,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       return this._onSortItem(event, item.toObject());
     }
 
-    return this._onDropItemCreate(item);
+    return this._onDropItemCreate(item, event);
   }
 
   /* -------------------------------------------- */
@@ -962,18 +945,19 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
       return item;
     }));
-    return this._onDropItemCreate(droppedItemData);
+    return this._onDropItemCreate(droppedItemData, event);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Handle the final creation of dropped Item data on the Actor.
-   * @param {Item5e[]|Item5e} itemData     The item or items requested for creation
+   * @param {Item5e[]|Item5e} itemData     The item or items requested for creation.
+   * @param {DragEvent} event              The concluding DragEvent which provided the drop data.
    * @returns {Promise<Item5e[]>}
    * @protected
    */
-  async _onDropItemCreate(itemData) {
+  async _onDropItemCreate(itemData, event) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
@@ -988,7 +972,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {
-      transformFirst: item => this._onDropSingleItem(item.toObject())
+      transformFirst: item => this._onDropSingleItem(item.toObject(), event)
     });
     return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
   }
@@ -998,11 +982,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /**
    * Handles dropping of a single item onto this character sheet.
    * @param {object} itemData            The item data to create.
+   * @param {DragEvent} event            The concluding DragEvent which provided the drop data.
    * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
    *                                     created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItem(itemData) {
+  async _onDropSingleItem(itemData, event) {
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
@@ -1020,7 +1005,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Clean up data
-    this._onDropResetData(itemData);
+    this._onDropResetData(itemData, event);
 
     // Stack identical consumables
     const stacked = this._onDropStackConsumables(itemData);
@@ -1048,7 +1033,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Adjust the preparation mode of a leveled spell depending on the section on which it is dropped.
-    if ( itemData.type === "spell" ) this._onDropSpell(itemData);
+    if ( itemData.type === "spell" ) this._onDropSpell(itemData, event);
 
     return itemData;
   }
@@ -1058,8 +1043,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /**
    * Reset certain pieces of data stored on items when they are dropped onto the actor.
    * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   * @param {DragEvent} event    The concluding DragEvent which provided the drop data.
    */
-  _onDropResetData(itemData) {
+  _onDropResetData(itemData, event) {
     if ( !itemData.system ) return;
     ["attuned", "equipped", "prepared"].forEach(k => delete itemData.system[k]);
   }
@@ -1069,14 +1055,15 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /**
    * Adjust the preparation mode of a dropped spell depending on the drop location on the sheet.
    * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   * @param {DragEvent} event    The concluding DragEvent which provided the drop data.
    */
-  _onDropSpell(itemData) {
+  _onDropSpell(itemData, event) {
     if ( !["npc", "character"].includes(this.document.type) ) return;
 
     // Determine the section it is dropped on, if any.
-    let header = this._event.target.closest(".items-header"); // Dropped directly on the header.
+    let header = event.target.closest(".items-header"); // Dropped directly on the header.
     if ( !header ) {
-      const list = this._event.target.closest(".item-list"); // Dropped inside an existing list.
+      const list = event.target.closest(".item-list"); // Dropped inside an existing list.
       header = list?.previousElementSibling;
     }
     const { level, preparationMode } = header?.closest("[data-level]")?.dataset ?? {};
