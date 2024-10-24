@@ -71,6 +71,7 @@ Hooks.once("init", function() {
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
   CONFIG.Dice.BasicRoll = dice.BasicRoll;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
+  CONFIG.Dice.D20Die = dice.D20Die;
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.Note.objectClass = canvas.Note5e;

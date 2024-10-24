@@ -157,7 +157,7 @@ export default class BasicRoll extends Roll {
    * This function can either create the ChatMessage directly, or return the data object that will be used to create it.
    *
    * @param {BasicRoll[]} rolls              Rolls to add to the message.
-   * @param {object} messageData             The data object to use when creating the message
+   * @param {object} messageData             The data object to use when creating the message.
    * @param {options} [options]              Additional options which modify the created message.
    * @param {string} [options.rollMode]      The template roll mode to use for the message from CONFIG.Dice.rollModes
    * @param {boolean} [options.create=true]  Whether to automatically create the chat message, or only return the
@@ -174,6 +174,7 @@ export default class BasicRoll extends Roll {
     // Prepare chat data
     messageData = foundry.utils.mergeObject({ sound: CONFIG.sounds.dice }, messageData);
     messageData.rolls = rolls;
+    this._prepareMessageData(rolls, messageData);
 
     // Process the chat data
     const cls = getDocumentClass("ChatMessage");
@@ -186,6 +187,16 @@ export default class BasicRoll extends Roll {
       return msg.toObject();
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform specific changes to message data before creating message.
+   * @param {BasicRoll[]} rolls   Rolls to add to the message.
+   * @param {object} messageData  The data object to use when creating the message.
+   * @protected
+   */
+  static _prepareMessageData(rolls, messageData) {}
 
   /* -------------------------------------------- */
   /*  Evaluate Methods                            */

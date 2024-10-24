@@ -31,13 +31,16 @@ export default class DamageRollConfigurationDialog extends RollConfigurationDial
   /** @override */
   async _prepareButtonsContext(context, options) {
     const allowCritical = this.config.critical?.allow !== false;
+    const defaultCritical = allowCritical && (this.options.defaultButton === "critical");
     context.buttons = {
       critical: {
-        icon: '<i class="fa-solid fa-bomb"></i>',
+        default: defaultCritical,
+        icon: '<i class="fa-solid fa-bomb" inert></i>',
         label: game.i18n.localize("DND5E.CriticalHit")
       },
       normal: {
-        icon: '<i class="fa-solid fa-dice"></i>',
+        default: !defaultCritical,
+        icon: '<i class="fa-solid fa-dice" inert></i>',
         label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll")
       }
     };
