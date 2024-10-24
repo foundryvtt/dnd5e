@@ -56,6 +56,13 @@ export default class HealActivity extends ActivityMixin(HealActivityData) {
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  async _triggerSubsequentActions(config, results) {
+    this.rollDamage({ event: config.event });
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
