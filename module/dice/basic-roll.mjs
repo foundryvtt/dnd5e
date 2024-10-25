@@ -137,6 +137,23 @@ export default class BasicRoll extends Roll {
       rolls = await DialogClass.configure(config, dialog, message);
     }
 
+    /**
+     * A hook event that fires after roll configuration is complete, but before the roll is evaluated.
+     * Multiple hooks may be called depending on the rolling method (e.g. `postSkillCheckRollConfiguration`,
+     * `postAbilityTestRollConfiguration`, and `postRollConfiguration` for skill checks).
+     * @function dnd5e.postRollConfiguration
+     * @memberof hookEvents
+     * @param {BasicRoll[]} rolls                      Rolls that have been constructed but not evaluated.
+     * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
+     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
+     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
+     * @returns {boolean}                              Explicitly return `false` to prevent rolls.
+     */
+    for ( const hookName of hookNames ) {
+      const name = `dnd5e.post${hookName.capitalize()}RollConfiguration`;
+      if ( Hooks.call(name, rolls, config, dialog, message) === false ) return [];
+    }
+
     for ( const roll of rolls ) await roll.evaluate();
 
     message = foundry.utils.expandObject(message);
