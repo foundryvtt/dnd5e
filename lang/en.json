@@ -1538,6 +1538,9 @@
 "DND5E.Expertise": "Expertise",
 
 "DND5E.FACILITY": {
+  "Action": {
+    "RemoveCraft": "Remove Craft"
+  },
   "FIELDS": {
     "defenders": {
       "max": {
@@ -1570,6 +1573,28 @@
     "size": {
       "label": "Size"
     },
+    "trade": {
+      "creatures": {
+        "max": {
+          "label": "Creature Capacity"
+        }
+      },
+      "profit": {
+        "label": "Profit Factor"
+      },
+      "stock": {
+        "stocked": {
+          "hint": "Appropriate for facilities that do not store a variable value of goods, but are instead considered either stocked or empty.",
+          "label": "Stocked"
+        },
+        "value": {
+          "label": "Value"
+        },
+        "max": {
+          "label": "Max"
+        }
+      }
+    },
     "type": {
       "subtype": {
         "label": "Type"
@@ -1579,6 +1604,7 @@
       }
     }
   },
+  "Goods": "Goods",
   "Occupants": "Occupants",
   "Orders": {
     "Label": "Orders",

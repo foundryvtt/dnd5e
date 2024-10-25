@@ -482,6 +482,17 @@ DND5E.ammoIds = {
 /*  Bastion Facilities                          */
 /* -------------------------------------------- */
 
+/**
+ * @typedef FacilityConfiguration
+ * @property {Record<string, string>} orders                   Orders that can be issued to a facility.
+ * @property {Record<string, string>} sizes                    Facility size categories.
+ * @property {Record<string, SubtypeTypeConfiguration>} types  Facility types and subtypes.
+ */
+
+/**
+ * Configuration data for bastion facilities.
+ * @type {FacilityConfiguration}
+ */
 DND5E.facilities = {
   orders: {
     craft: "DND5E.FACILITY.Orders.craft.inf",
