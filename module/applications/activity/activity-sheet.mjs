@@ -202,6 +202,7 @@ export default class ActivitySheet extends Application5e {
     context.data = {};
     context.disabled = {};
     for ( const field of ["activation", "duration", "range", "target", "uses"] ) {
+      if ( !this.activity[field] ) continue;
       context.data[field] = this.activity[field].override ? context.source[field] : context.inferred[field];
       context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override;
     }
@@ -215,7 +216,7 @@ export default class ActivitySheet extends Application5e {
       { value: "", label: game.i18n.localize("DND5E.NoneActionLabel") }
     ];
     context.affectsPlaceholder = game.i18n.localize(
-      `DND5E.Target${context.data.target.template.type ? "Every" : "Any"}`
+      `DND5E.Target${context.data.target?.template?.type ? "Every" : "Any"}`
     );
     context.durationUnits = [
       { value: "inst", label: game.i18n.localize("DND5E.TimeInst") },
@@ -260,6 +261,7 @@ export default class ActivitySheet extends Application5e {
       };
     });
     context.showConsumeSpellSlot = this.activity.isSpell && (this.item.system.level !== 0);
+    context.showScaling = !this.activity.isSpell;
 
     // Uses recovery
     context.recoveryPeriods = [
@@ -284,7 +286,7 @@ export default class ActivitySheet extends Application5e {
     }));
 
     // Template dimensions
-    context.dimensions = context.activity.target.template.dimensions;
+    context.dimensions = context.activity.target?.template?.dimensions;
 
     return context;
   }

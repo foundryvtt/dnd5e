@@ -5,6 +5,7 @@ export {default as CastActivity} from "./cast.mjs";
 export {default as CheckActivity} from "./check.mjs";
 export {default as DamageActivity} from "./damage.mjs";
 export {default as EnchantActivity, EnchantmentError} from "./enchant.mjs";
+export {default as ForwardActivity} from "./forward.mjs";
 export {default as HealActivity} from "./heal.mjs";
 export {default as SaveActivity} from "./save.mjs";
 export {default as SummonActivity} from "./summon.mjs";

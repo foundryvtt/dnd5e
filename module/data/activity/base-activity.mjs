@@ -555,10 +555,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
 
-    this._setOverride("activation");
-    this._setOverride("duration");
-    this._setOverride("range");
-    this._setOverride("target");
+    if ( this.activation ) this._setOverride("activation");
+    if ( this.duration ) this._setOverride("duration");
+    if ( this.range ) this._setOverride("range");
+    if ( this.target ) this._setOverride("target");
 
     Object.defineProperty(this, "_inferredSource", {
       value: Object.freeze(this.toObject(false)),
@@ -567,10 +567,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       writable: false
     });
 
-    ActivationField.prepareData.call(this, rollData, this.labels);
-    DurationField.prepareData.call(this, rollData, this.labels);
-    RangeField.prepareData.call(this, rollData, this.labels);
-    TargetField.prepareData.call(this, rollData, this.labels);
+    if ( this.activation ) ActivationField.prepareData.call(this, rollData, this.labels);
+    if ( this.duration ) DurationField.prepareData.call(this, rollData, this.labels);
+    if ( this.range ) RangeField.prepareData.call(this, rollData, this.labels);
+    if ( this.target ) TargetField.prepareData.call(this, rollData, this.labels);
     UsesField.prepareData.call(this, rollData, this.labels);
 
     const actor = this.item.actor;

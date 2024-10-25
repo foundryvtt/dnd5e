@@ -368,6 +368,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( !foundry.utils.isEmpty(consumed) ) {
       foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.consumed", consumed);
     }
+    if ( usageConfig.cause?.activity ) {
+      foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.cause", usageConfig.cause.activity);
+    }
 
     /**
      * A hook event that fires after an item's resource consumption is calculated and applied.
@@ -593,14 +596,14 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
     else {
       const canScale = linked ? linked.consumption.scaling.allowed : this.canScale;
-      const linkedDelta = (linked?.spell.level ?? Infinity) - this.item.system.level;
+      const linkedDelta = (linked?.spell?.level ?? Infinity) - this.item.system.level;
       if ( canScale ) config.scaling ??= Number.isFinite(linkedDelta) ? linkedDelta : 0;
       else config.scaling = false;
 
       if ( this.requiresSpellSlot ) {
         const mode = this.item.system.preparation.mode;
         config.spell ??= {};
-        config.spell.slot ??= linked?.spell.level ? `spell${linked.spell.level}`
+        config.spell.slot ??= linked?.spell?.level ? `spell${linked.spell.level}`
           : (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
       }
     }
@@ -704,7 +707,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
             ? linkedActivity.consumption.targets.keys() : config.cause?.resources,
           spellSlot: false
         };
-        const usageConfig = foundry.utils.mergeObject(config, { consume, cause: false }, { inplace: true });
+        const usageConfig = foundry.utils.mergeObject(config, { consume, cause: false }, { inplace: false });
         const results = await linkedActivity._prepareUsageUpdates(usageConfig, { returnErrors: true });
         if ( foundry.utils.getType(results) === "Object" ) {
           linkedActivity._mergeActivityUpdates(results);
@@ -1228,8 +1231,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const messageConfig = {};
     const scaling = message.getFlag("dnd5e", "scaling");
     const usageConfig = { consume: true, event, scaling };
-    const linkedActivity = this.getLinkedActivity();
-    if ( linkedActivity ) usageConfig.cause = { activity: linkedActivity.relativeUUID, resources: true };
+    const linkedActivity = this.getLinkedActivity(message.getFlag("dnd5e", "use.cause"));
+    if ( linkedActivity ) usageConfig.cause = {
+      activity: linkedActivity.relativeUUID, resources: linkedActivity.consumption.targets.length > 0
+    };
     await this.consume(usageConfig, messageConfig);
     if ( !foundry.utils.isEmpty(messageConfig.data) ) await message.update(messageConfig.data);
   }
