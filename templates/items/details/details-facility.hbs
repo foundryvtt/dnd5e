@@ -1,0 +1,122 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemFacilityDetails" }}</legend>
+
+    {{!-- Type --}}
+    {{ formField fields.type.fields.value value=source.type.value choices=config.facilities.types labelAttr="label"
+                 blank=false }}
+
+    {{!-- Sub-Type --}}
+    {{ formField fields.type.fields.subtype value=source.type.subtype choices=facilitySubtypes }}
+
+    {{!-- Size --}}
+    {{ formField fields.size value=source.size choices=config.facilities.sizes }}
+
+    {{!-- Level --}}
+    {{ formField fields.level value=source.level }}
+
+    {{#if (eq source.type.value "special")}}
+    {{!-- Occupants --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.FACILITY.Occupants" }}</label>
+        <div class="form-fields">
+
+            {{!-- Hirelings --}}
+            {{ formField fields.hirelings.fields.max value=source.hirelings.max classes="label-top" placeholder="—" }}
+
+            {{!-- Defenders --}}
+            {{ formField fields.defenders.fields.max value=source.defenders.max classes="label-top" placeholder="—" }}
+        </div>
+    </div>
+
+    {{!-- Free Facility --}}
+    {{ formField fields.free value=source.free input=inputs.createCheckboxInput }}
+    {{/if}}
+
+</fieldset>
+
+{{#if (eq source.type.value "special")}}
+<fieldset>
+    <legend>{{ localize "DND5E.FACILITY.Orders.Label" }}</legend>
+
+    {{!-- Order --}}
+    {{ formField fields.order value=source.order choices=config.facilities.orders blank="" }}
+
+    {{!-- Progress --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.FACILITY.Progress" }}</label>
+        <div class="form-fields">
+
+            {{!-- Current --}}
+            {{ formField fields.progress.fields.value value=source.progress.value classes="label-top" }}
+
+            {{!-- Total --}}
+            {{ formField fields.progress.fields.max value=source.progress.max classes="label-top" placeholder="—" }}
+        </div>
+    </div>
+</fieldset>
+{{/if}}
+
+{{#if (and (eq source.type.value "special") (eq source.order "craft"))}}
+<fieldset>
+    <legend>{{ localize "DND5E.FACILITY.Orders.craft.present" }}</legend>
+    <div class="form-group">
+        <p class="hint">{{ localize "DND5E.FACILITY.CraftHint" }}</p>
+    </div>
+    <ul class="separated-list facility-craft">
+        <li>
+            {{#if craft}}
+            <div class="details flexrow">
+                <img class="gold-icon" src="{{ craft.img }}" alt="{{ craft.name }}">
+                {{{ craft.contentLink }}}
+                <div class="list-controls flexrow">
+                    <button type="button" class="unbutton control-button" data-action="removeCraft"
+                            data-tooltip="DND5E.FACILITY.Action.RemoveCraft"
+                            aria-label="{{ localize "DND5E.FACILITY.Action.RemoveCraft" }}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            {{else}}
+            {{ formInput fields.craft value=source.craft }}
+            {{/if}}
+        </li>
+    </ul>
+</fieldset>
+{{/if}}
+
+{{#if (and (eq source.type.value "special") (eq source.order "trade"))}}
+<fieldset>
+    <legend>{{ localize "DND5E.FACILITY.Orders.trade.present" }}</legend>
+
+    {{!-- Stocked --}}
+    {{ formField fields.trade.fields.stock.fields.stocked value=source.trade.stock.stocked
+                 input=inputs.createCheckboxInput }}
+
+    {{!-- Goods --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.FACILITY.Goods" }}</label>
+        <div class="form-fields">
+
+            {{!-- Value --}}
+            {{ formField fields.trade.fields.stock.fields.value value=source.trade.stock.value classes="label-top"
+                         placeholder="—" }}
+
+            {{!-- Max --}}
+            {{ formField fields.trade.fields.stock.fields.max value=source.trade.stock.max classes="label-top"
+                         placeholder="—" }}
+        </div>
+    </div>
+
+    {{!-- Creatures --}}
+    {{ formField fields.trade.fields.creatures.fields.max value=source.trade.creatures.max placeholder="—" }}
+
+    {{!-- Profit Factor --}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.FACILITY.FIELDS.trade.profit.label" }}</label>
+        <div class="form-fields">
+            {{ formInput fields.trade.fields.profit value=source.trade.profit placeholder="—" }}
+            <span class="sep unit">&percnt;</span>
+        </div>
+    </div>
+</fieldset>
+{{/if}}

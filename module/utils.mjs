@@ -510,6 +510,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-consumable.hbs",
     "systems/dnd5e/templates/items/details/details-container.hbs",
     "systems/dnd5e/templates/items/details/details-equipment.hbs",
+    "systems/dnd5e/templates/items/details/details-facility.hbs",
     "systems/dnd5e/templates/items/details/details-feat.hbs",
     "systems/dnd5e/templates/items/details/details-loot.hbs",
     "systems/dnd5e/templates/items/details/details-mountable.hbs",

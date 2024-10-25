@@ -35,7 +35,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    const { activities, spellcasting } = this.item.system;
+    const { activities, craft, spellcasting } = this.item.system;
     const target = this.item.type === "spell" ? this.item.system.target : null;
 
     // Effects
@@ -139,6 +139,18 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       id, name, sort,
       img: { src: img, svg: img?.endsWith(".svg") }
     }));
+
+    // Facilities
+    if ( craft ) {
+      const crafting = await fromUuid(craft);
+      if ( crafting ) {
+        context.craft = {
+          img: crafting.img,
+          name: crafting.name,
+          contentLink: crafting.toAnchor().outerHTML
+        };
+      }
+    }
 
     return context;
   }
@@ -256,6 +268,17 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /* -------------------------------------------- */
 
   /**
+   * Handle removing the Item currently being crafted.
+   * @returns {Promise}
+   * @protected
+   */
+  _onRemoveCraft() {
+    return this.submit({ updateData: { "system.craft": null } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle performing some sheet action.
    * @param {PointerEvent} event  The originating event.
    * @returns {Promise|void}
@@ -268,6 +291,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       case "addRecovery": return this._onAddRecovery();
       case "deleteActivity": return this._onDeleteActivity(target);
       case "deleteRecovery": return this._onDeleteRecovery(target);
+      case "removeCraft": return this._onRemoveCraft();
     }
   }
 
