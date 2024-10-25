@@ -9,7 +9,7 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import { formatIdentifier, staticID } from "../utils.mjs";
+import { areKeysPressed, formatIdentifier, staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -708,8 +708,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let dialogConfig = dialog;
       let messageConfig = message;
       let activity = activities[0];
-      if ( ((activities.length > 1) || chooseActivity) && !event?.shiftKey ) {
-        activity = await ActivityChoiceDialog.create(this);
+      const skipDialog = areKeysPressed(event, "skipDialogNormal")
+        || areKeysPressed(event, "skipDialogAdvantage")
+        || areKeysPressed(event, "skipDialogDisadvantage");
+      if ( ((activities.length > 1) || chooseActivity) && !skipDialog ) {
+        const result = await ActivityChoiceDialog.create(this);
+        activity = result.activity;
+        event = result.event;
       }
       if ( !activity ) return;
       return activity.use(usageConfig, dialogConfig, messageConfig);
