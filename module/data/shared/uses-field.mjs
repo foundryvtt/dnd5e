@@ -180,7 +180,6 @@ export default class UsesField extends SchemaField {
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "recharge"];
     rollConfig.subject = this;
-    rollConfig.hookNames = ["recharge"].concat(config.hookNames ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({ configure: false }, dialog);
 

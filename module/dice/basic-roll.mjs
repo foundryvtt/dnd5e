@@ -149,7 +149,7 @@ export default class BasicRoll extends Roll {
      * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
      * @returns {boolean}                              Explicitly return `false` to prevent rolls.
      */
-    for ( const hookName of ["", ...(config?.hookNames ?? [])].reverse() ) {
+    for ( const hookName of hookNames ) {
       const name = `dnd5e.post${hookName.capitalize()}RollConfiguration`;
       if ( Hooks.call(name, rolls, config, dialog, message) === false ) return [];
     }
