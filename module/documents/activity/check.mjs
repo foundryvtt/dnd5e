@@ -110,7 +110,10 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
         }
         await token.actor.rollToolCheck(tool, checkData);
       } else {
-        await token.actor.rollAbilityTest(ability, data);
+        await token.actor.rollAbilityCheck({
+          ability,
+          target: data.targetValue
+        }, {}, { data: { speaker: data.speaker } });
       }
     }
   }

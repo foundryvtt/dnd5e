@@ -954,6 +954,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   async rollDamage(config={}, dialog={}, message={}) {
     const rollConfig = this.getDamageConfig(config);
+    rollConfig.hookNames = [...(config.hookNames ?? []), "damage"];
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -980,17 +981,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         speaker: ChatMessage.getSpeaker({ actor: this.actor })
       }
     }, message);
-
-    /**
-     * A hook event that fires before damage is rolled.
-     * @function dnd5e.preRollDamageV2
-     * @memberof hookEvents
-     * @param {DamageRollProcessConfiguration} config  Configuration data for the pending roll.
-     * @param {BasicRollDialogConfiguration} dialog    Presentation data for the roll configuration dialog.
-     * @param {BasicRollMessageConfiguration} message  Configuration data for the roll's message.
-     * @returns {boolean}                              Explicitly return `false` to prevent the roll.
-     */
-    if ( Hooks.call("dnd5e.preRollDamageV2", rollConfig, dialogConfig, messageConfig) === false ) return;
 
     let returnMultiple = rollConfig.returnMultiple ?? true;
     if ( "dnd5e.preRollDamage" in Hooks.events ) {

@@ -1,6 +1,7 @@
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import { replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
@@ -1550,22 +1551,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Roll a generic ability test or saving throw.
    * Prompt the user for input on which variety of roll they want to do.
-   * @param {string} abilityId    The ability id (e.g. "str")
-   * @param {object} options      Options which configure how ability tests or saving throws are rolled
+   * @param {AbilityRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog     Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message   Configuration for the roll message.
    */
-  rollAbility(abilityId, options={}) {
+  rollAbility(config={}, dialog={}, message={}) {
+    let abilityId = config;
+    if ( foundry.utils.getType(config) === "Object" ) abilityId = config.ability;
+    else foundry.utils.logCompatibilityWarning(
+      "The `rollAbility` method on Actor5e now takes roll, dialog, and message config objects as parameters.",
+      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+    );
     const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     new Dialog({
-      title: `${game.i18n.format("DND5E.AbilityPromptTitle", {ability: label})}: ${this.name}`,
-      content: `<p>${game.i18n.format("DND5E.AbilityPromptText", {ability: label})}</p>`,
+      title: `${game.i18n.format("DND5E.AbilityPromptTitle", { ability: label })}: ${this.name}`,
+      content: `<p>${game.i18n.format("DND5E.AbilityPromptText", { ability: label })}</p>`,
       buttons: {
         test: {
           label: game.i18n.localize("DND5E.ActionAbil"),
-          callback: () => this.rollAbilityTest(abilityId, options)
+          callback: () => this.rollAbilityCheck(config, dialog, message)
         },
         save: {
           label: game.i18n.localize("DND5E.ActionSave"),
-          callback: () => this.rollAbilitySave(abilityId, options)
+          callback: () => this.rollSavingThrow(config, dialog, message)
         }
       }
     }).render(true);
@@ -1574,171 +1582,171 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Roll an Ability Test
-   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} abilityId    The ability ID (e.g. "str")
-   * @param {object} options      Options which configure how ability tests are rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * Roll an Ability Check.
+   * @param {AbilityRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog     Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}               A Promise which resolves to the created Roll instance.
    */
-  async rollAbilityTest(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
-    const abl = this.system.abilities[abilityId];
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = [];
-    const data = this.getRollData();
+  async rollAbilityCheck(config={}, dialog={}, message={}) {
+    return this.#rollD20Test("check", config, dialog, message);
+  }
 
-    // Add ability modifier
-    parts.push("@mod");
-    data.mod = abl?.mod ?? 0;
-
-    // Include proficiency bonus
-    if ( abl?.checkProf.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = abl.checkProf.term;
-    }
-
-    // Add ability-specific check bonus
-    if ( abl?.bonuses?.check ) {
-      const checkBonusKey = `${abilityId}CheckBonus`;
-      parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
-    }
-
-    // Add global actor bonus
-    if ( globalBonuses.check ) {
-      parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
-    }
-
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
-
-    // Roll and return
-    const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
-    const rollData = foundry.utils.mergeObject({
-      data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "ability", abilityId }
-      }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
-
-    /**
-     * A hook event that fires before an ability test is rolled for an Actor.
-     * @function dnd5e.preRollAbilityTest
-     * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the ability test is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
-     * @returns {boolean}                    Explicitly return `false` to prevent ability test from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollAbilityTest", this, rollData, abilityId) === false ) return;
-
-    const roll = await d20Roll(rollData);
-
-    /**
-     * A hook event that fires after an ability test has been rolled for an Actor.
-     * @function dnd5e.rollAbilityTest
-     * @memberof hookEvents
-     * @param {Actor5e} actor     Actor for which the ability test has been rolled.
-     * @param {D20Roll} roll      The resulting roll.
-     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollAbilityTest", this, roll, abilityId);
-
-    return roll;
+  /**
+   * Roll an Ability Test.
+   * @param {AbilityRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog     Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}               A Promise which resolves to the created Roll instance.
+   */
+  async rollAbilityTest(config={}, dialog={}, message={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The `rollAbilityTest` method on Actor5e has been renamed `rollAbilityCheck`.",
+      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+    );
+    return this.rollAbilityCheck(config, dialog, message);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Roll an Ability Saving Throw
-   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} abilityId          The ability ID (e.g. "str")
-   * @param {object} [options]          Options which configure how ability saves are rolled
-   * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
+   * Roll a Saving Throw.
+   * @param {AbilityRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog     Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}               A Promise which resolves to the created Roll instances.
    */
-  async rollAbilitySave(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
-    const abl = this.system.abilities[abilityId];
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = [];
-    const data = this.getRollData();
+  async rollSavingThrow(config={}, dialog={}, message={}) {
+    return this.#rollD20Test("save", config, dialog, message);
+  }
 
-    // Add ability modifier
-    parts.push("@mod");
-    data.mod = abl?.mod ?? 0;
+  /**
+   * Roll an Ability Saving Throw.
+   * @param {AbilityRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog     Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}               A Promise which resolves to the created Roll instances.
+   */
+  async rollAbilitySave(config={}, dialog={}, message={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The `rollAbilitySave` method on Actor5e has been renamed `rollSavingThrow`.",
+      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+    );
+    return this.rollSavingThrow(config, dialog, message);
+  }
 
-    // Include proficiency bonus
-    if ( abl?.saveProf.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = abl.saveProf.term;
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {D20RollProcessConfiguration} AbilityRollProcessConfiguration
+   * @property {string} [ability]  ID of the ability to roll as found in `CONFIG.DND5E.abilities`.
+   */
+
+  /**
+   * Shared rolling functionality between ability checks & saving throws.
+   * @param {"check"|"save"} type                     D20 test type.
+   * @param {AbilityRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog     Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}               A Promise which resolves to the created Roll instance.
+   */
+  async #rollD20Test(type, config={}, dialog={}, message={}) {
+    let oldFormat = false;
+    const name = type === "check" ? "AbilityCheck" : "SavingThrow";
+    const oldName = type === "check" ? "AbilityTest" : "AbilitySave";
+
+    // Handle deprecated calling pattern
+    if ( config && (foundry.utils.getType(config) !== "Object") ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`roll${oldName}\` method on Actor5e now takes roll, dialog, and message config objects as parameters.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      oldFormat = true;
+      const oldConfig = dialog;
+      config = { ability: config };
+      dialog = {};
+      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
     }
 
-    // Include ability-specific saving throw bonus
-    if ( abl?.bonuses?.save ) {
-      const saveBonusKey = `${abilityId}SaveBonus`;
-      parts.push(`@${saveBonusKey}`);
-      data[saveBonusKey] = Roll.replaceFormulaData(abl.bonuses.save, data);
-    }
+    const ability = this.system.abilities[config.ability];
+    const abilityConfig = CONFIG.DND5E.abilities[config.ability];
 
-    // Include a global actor ability save bonus
-    if ( globalBonuses.save ) {
-      parts.push("@saveBonus");
-      data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
-    }
+    const rollData = this.getRollData();
+    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+      mod: ability?.mod,
+      prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
+      [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
+      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
+      cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
+    }, rollData);
 
-    // Include cover in dexterity saving throws
-    if ( (abilityId === "dex") && data.attributes?.ac?.cover ) {
-      parts.push("@cover");
-      data.cover = data.attributes.ac.cover;
-    }
+    const initialRoll = config.rolls?.pop();
+    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
 
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
+    const rollConfig = foundry.utils.mergeObject({
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
+    }, config);
+    rollConfig.hookNames = [...(config.hookNames ?? []), name, "d20Test"];
+    rollConfig.rolls = [{ parts, data }].concat(config.rolls ?? []);
+    rollConfig.rolls.forEach(({ parts, data }) => this.addRollExhaustion(parts, data));
+    rollConfig.subject = this;
 
-    // Roll and return
-    const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
-    const rollData = foundry.utils.mergeObject({
-      data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "save", abilityId }
+    const dialogConfig = foundry.utils.deepClone(dialog);
+
+    const messageConfig = foundry.utils.mergeObject({
+      create: true,
+      data: {
+        flags: {
+          dnd5e: {
+            messageType: "roll",
+            roll: {
+              ability: config.ability,
+              type: type === "check" ? "ability" : "save"
+            }
+          }
+        },
+        flavor: game.i18n.format(
+          `DND5E.${type === "check" ? "Ability" : "Save"}PromptTitle`, { ability: abilityConfig?.label ?? "" }
+        ),
+        speaker: ChatMessage.getSpeaker({ actor: this })
       }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
+    }, message);
+
+    if ( "dnd5e.preRollAbilityTest" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`dnd5e.preRoll${oldName}\` hook has been deprecated and replaced with \`dnd5e.preRoll${name}V2\`.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
+      if ( Hooks.call(`dnd5e.preRoll${oldName}`, this, oldConfig, config.ability) === false ) return null;
+      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
+    }
+
+    const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls?.length ) return null;
 
     /**
-     * A hook event that fires before an ability save is rolled for an Actor.
-     * @function dnd5e.preRollAbilitySave
+     * A hook event that fires after an ability check or save has been rolled.
+     * @function dnd5e.rollAbilityCheck
+     * @function dnd5e.rollSavingThrow
      * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the ability save is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
-     * @returns {boolean}                    Explicitly return `false` to prevent ability save from being rolled.
+     * @param {D20Roll[]} rolls       The resulting rolls.
+     * @param {object} data
+     * @param {string} data.ability   ID of the ability that was rolled as defined in `CONFIG.DND5E.abilities`.
+     * @param {Actor5e} data.subject  Actor for which the roll has been performed.
      */
-    if ( Hooks.call("dnd5e.preRollAbilitySave", this, rollData, abilityId) === false ) return;
+    Hooks.callAll(`dnd5e.roll${name}`, rolls, { ability: config.ability, subject: this });
 
-    const roll = await d20Roll(rollData);
+    if ( `dnd5e.roll${name}` in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`dnd5e.roll${oldName}\` hook has been deprecated and replaced with \`dnd5e.roll${name}\`.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      Hooks.callAll(`dnd5e.roll${oldName}`, this, rolls[0], config.ability);
+    }
 
-    /**
-     * A hook event that fires after an ability save has been rolled for an Actor.
-     * @function dnd5e.rollAbilitySave
-     * @memberof hookEvents
-     * @param {Actor5e} actor     Actor for which the ability save has been rolled.
-     * @param {D20Roll} roll      The resulting roll.
-     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollAbilitySave", this, roll, abilityId);
-
-    return roll;
+    return oldFormat ? rolls[0] : rolls;
   }
 
   /* -------------------------------------------- */
@@ -2143,8 +2151,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     formula ??= `max(0, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
-    rollConfig.subject = this;
+    rollConfig.hookNames = [...(config.hookNames ?? []), "hitDie"];
     rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
+    rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
       configure: false
@@ -2160,17 +2169,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         "flags.dnd5e.roll": {type: "hitDie"}
       }
     }, message);
-
-    /**
-     * A hook event that fires before a hit die is rolled for an Actor.
-     * @function dnd5e.preRollHitDieV2
-     * @memberof hookEvents
-     * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
-     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
-     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
-     * @returns {boolean}                              Explicitly return `false` to prevent hit die from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollHitDieV2", rollConfig, dialogConfig, messageConfig) === false ) return null;
 
     if ( "dnd5e.preRollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
