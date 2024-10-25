@@ -950,7 +950,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   async rollDamage(config={}, dialog={}, message={}) {
     const rollConfig = this.getDamageConfig(config);
-    rollConfig.hookNames = ["damage"].concat(config.hooksNames ?? []);
+    rollConfig.hookNames = [...(config.hookNames ?? []), "damage"];
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({

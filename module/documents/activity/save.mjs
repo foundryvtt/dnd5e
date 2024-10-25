@@ -107,15 +107,11 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
     const dc = parseInt(target.dataset.dc);
     for ( const token of targets ) {
       const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document });
-      await token.actor.rollAbilitySave(
-        {
-          event,
-          ability: target.dataset.ability ?? this.save.ability,
-          target: Number.isFinite(dc) ? dc : this.save.dc.value
-        },
-        {},
-        { data: { speaker } }
-      );
+      await token.actor.rollSavingThrow({
+        event,
+        ability: target.dataset.ability ?? this.save.ability,
+        target: Number.isFinite(dc) ? dc : this.save.dc.value
+      }, {}, { data: { speaker } });
     }
   }
 

@@ -85,6 +85,26 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
+   * Construct roll parts and populate its data object.
+   * @param {object} parts   Information on the parts to be constructed.
+   * @param {object} [data]  Roll data to use and populate while constructing the parts.
+   * @returns {{ parts: string[], data: object }}
+   */
+  static constructParts(parts, data={}) {
+    const finalParts = [];
+    for ( const [key, value] of Object.entries(parts) ) {
+      if ( !value && (value !== 0) ) continue;
+      finalParts.push(`@${key}`);
+      foundry.utils.setProperty(
+        data, key, foundry.utils.getType(value) === "string" ? Roll.replaceFormulaData(value, data) : value
+      );
+    }
+    return { parts: finalParts, data };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Construct and perform a roll through the standard workflow.
    * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
    * @param {BasicRollDialogConfiguration} [dialog={}]    Configuration for roll prompt.
@@ -92,11 +112,11 @@ export default class BasicRoll extends Roll {
    * @returns {BasicRoll[]}
    */
   static async build(config={}, dialog={}, message={}) {
-    const hookNames = ["", ...(config.hookNames ?? [])].reverse();
+    const hookNames = [...(config.hookNames ?? []), ""];
 
     /**
      * A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling
-     * method (e.g. `dnd5e.preRollSkillV2`, `dnd5e.preRollAbilityTestV2`, `dnd5e.preRollV2`).
+     * method (e.g. `dnd5e.preRollSkillV2`, `dnd5e.preRollAbilityCheckV2`, `dnd5e.preRollV2`).
      * @function dnd5e.preRollV2
      * @memberof hookEvents
      * @param {BasicRollProcessConfiguration} config   Configuration data for the pending roll.

@@ -65,7 +65,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     }
 
     const rollConfig = foundry.utils.deepClone(config);
-    rollConfig.hookNames = ["formula"].concat(config.hooksNames ?? []);
+    rollConfig.hookNames = [...(config.hookNames ?? []), "formula"];
     rollConfig.rolls = [{ parts: [this.roll.formula], data: this.getRollData() }].concat(config.rolls ?? []);
     rollConfig.subject = this;
 
