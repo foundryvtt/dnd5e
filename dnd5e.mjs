@@ -196,11 +196,14 @@ Hooks.once("init", function() {
     types: ["spells"]
   });
 
-  CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
-  DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
-  DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
-    label: "DND5E.SheetClassToken"
-  });
+  if ( game.release.generation === 12 ) {
+    // TODO: Update sheet classes and remove the above check
+    CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
+    DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
+    DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
+      label: "DND5E.SheetClassToken"
+    });
+  }
 
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
@@ -344,10 +347,8 @@ function _configureStatusEffects() {
   const addEffect = (effects, {special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
-    if ( foundry.utils.isNewerVersion(game.version, 12) ) {
-      data.img = data.icon ?? data.img;
-      delete data.icon;
-    }
+    data.img = data.icon ?? data.img;
+    delete data.icon;
     effects.push(data);
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
   };
