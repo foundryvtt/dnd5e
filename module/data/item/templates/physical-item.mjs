@@ -214,7 +214,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
 
   /** @inheritDoc */
   async _preUpdate(changed, options, user) {
-    await super._preUpdate(changed, options, user);
+    if ( await super._preUpdate(changed, options, user) === false ) return false;
     if ( foundry.utils.hasProperty(changed, "system.container") ) {
       options.formerContainer = (await this.parent.container)?.uuid;
     }

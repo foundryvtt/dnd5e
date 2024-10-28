@@ -270,7 +270,7 @@ export default class FeatData extends ItemDataModel.mixin(
 
     // Set type as "Monster Feature" if created directly on a NPC
     if ( (this.parent.actor?.type === "npc") && !foundry.utils.hasProperty(data, "system.type.value") ) {
-      this.parent.updateSource({ "system.type.value": "monster" });
+      this.updateSource({ "type.value": "monster" });
     }
   }
 }

@@ -399,7 +399,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     // Set as prepared for NPCs, and not prepared for PCs
     if ( ["character", "npc"].includes(this.parent.actor.type)
       && !foundry.utils.hasProperty(data, "system.preparation.prepared") ) {
-      this.parent.updateSource({ "system.preparation.prepared": this.parent.actor.type === "npc" });
+      this.updateSource({ "preparation.prepared": this.parent.actor.type === "npc" });
     }
 
     if ( ["atwill", "innate"].includes(this.preparation.mode) || this.sourceClass ) return;
@@ -408,11 +408,11 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
     // Set the source class, and ensure the preparation mode matches if adding a prepared spell to an alt class
     const setClass = cls => {
-      const update = { "system.sourceClass": cls };
+      const update = { sourceClass: cls };
       const type = this.parent.actor.classes[cls].spellcasting.type;
       if ( (type !== "leveled") && (this.preparation.mode === "prepared") && (this.level > 0)
-        && (type in CONFIG.DND5E.spellPreparationModes) ) update["system.preparation.mode"] = type;
-      this.parent.updateSource(update);
+        && (type in CONFIG.DND5E.spellPreparationModes) ) update["preparation.mode"] = type;
+      this.updateSource(update);
     };
 
     // If preparation mode matches an alt spellcasting type and matching class exists, set as that class

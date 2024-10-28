@@ -258,11 +258,11 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onDelete(options, userId) {
-    await super._onDelete(options, userId);
-    if ( (userId !== game.user.id) ) return;
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if ( userId !== game.user.id ) return;
     if ( this.parent.id === this.parent.actor?.system.details?.originalClass ) {
-      await this.parent.actor._assignPrimaryClass();
+      this.parent.actor._assignPrimaryClass();
     }
   }
 }

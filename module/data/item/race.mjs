@@ -181,8 +181,8 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onCreate(data, options, userId) {
-    await super._onCreate(data, options, userId);
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
     if ( (game.user.id !== userId) || !["character", "npc"].includes(this.parent.actor?.type) ) return;
     this.parent.actor.update({ "system.details.race": this.parent.id });
   }
