@@ -1804,9 +1804,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
     if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
 
-    const rollConfig = foundry.utils.mergeObject({
-      target: 10
-    }, config);
+    const rollConfig = foundry.utils.mergeObject({ target: 10 }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "deathSave"];
     rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
 
@@ -1907,7 +1905,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Display success/failure chat message
     let resultsMessage;
     if ( details.chatString ) {
-      let chatData = {
+      const chatData = {
         content: game.i18n.format(details.chatString, { name: this.name }),
         speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
       };
