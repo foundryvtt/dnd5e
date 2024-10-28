@@ -294,4 +294,14 @@ export default class EquipmentData extends ItemDataModel.mixin(
     const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await this.preCreateEquipped(data, options, user);
+  }
 }
