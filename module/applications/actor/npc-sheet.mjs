@@ -166,7 +166,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
         return this.activateEditor(name, {}, editor.initial);
 
       case "rollDeathSave":
-        return this.actor.rollDeathSave({ event });
+        return this.actor.rollDeathSave({ event, legacy: false });
 
       case "rollInitiative":
         event.stopPropagation();

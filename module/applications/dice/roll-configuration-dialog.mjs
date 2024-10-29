@@ -377,9 +377,9 @@ export default class RollConfigurationDialog extends Dialog5e {
 
   /**
    * A helper to handle displaying and responding to the dialog.
-   * @param {BasicRollProcessConfiguration} [config]        Initial roll configuration.
-   * @param {BasicRollConfigurationDialogOptions} [dialog]  Dialog configuration options.
-   * @param {BasicRollMessageConfiguration} [message]       Message configuration.
+   * @param {BasicRollProcessConfiguration} [config]   Initial roll configuration.
+   * @param {BasicRollDialogConfiguration} [dialog]    Dialog configuration options.
+   * @param {BasicRollMessageConfiguration} [message]  Message configuration.
    * @returns {Promise<BasicRoll[]>}
    */
   static async configure(config={}, dialog={}, message={}) {

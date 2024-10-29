@@ -684,7 +684,7 @@ export default function ActorSheetV2Mixin(Base) {
     _onRollAbility(event) {
       const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
       const isSavingThrow = event.currentTarget.classList.contains("saving-throw");
-      if ( ability === "concentration" ) this.actor.rollConcentration({ event });
+      if ( ability === "concentration" ) this.actor.rollConcentration({ event, legacy: false });
       else if ( isSavingThrow ) this.actor.rollSavingThrow({ ability, event });
       else this.actor.rollAbilityCheck({ ability, event });
     }

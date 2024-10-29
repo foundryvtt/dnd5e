@@ -262,9 +262,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
           yes: () => this.actor.convertCurrency()
         });
       case "rollDeathSave":
-        return this.actor.rollDeathSave({event: event});
+        return this.actor.rollDeathSave({ event, legacy: false });
       case "rollInitiative":
-        return this.actor.rollInitiativeDialog({event});
+        return this.actor.rollInitiativeDialog({ event });
     }
   }
 

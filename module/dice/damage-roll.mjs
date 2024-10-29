@@ -302,7 +302,9 @@ export default class DamageRoll extends BasicRoll {
     );
     const DialogClass = this.DefaultConfigurationDialog;
     return await DialogClass.configure(
-      { critical: { allow: allowCritical } }, { options: { title } }, { rollMode: defaultRollMode }
+      { critical: { allow: allowCritical }, rolls: rolls.map(r => ({ parts: [r.formula], options: r.options })) },
+      { options: { title } },
+      { rollMode: defaultRollMode }
     );
   }
 }
