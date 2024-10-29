@@ -434,22 +434,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     ability ??= skillData.ability;
     const abilityData = this.system.abilities[ability];
     skillData.ability = ability;
-
-    const feats = CONFIG.DND5E.characterFlags;
-
     const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
-    let roundDown = true;
-
-    // Remarkable Athlete
-    if ( this._isRemarkableAthlete(skillData.ability) && (skillData.value < 0.5) ) {
-      skillData.value = 0.5;
-      roundDown = false;
-    }
-
-    // Jack of All Trades
-    else if ( flags.jackOfAllTrades && (skillData.value < 0.5) ) {
-      skillData.value = 0.5;
-    }
 
     // Polymorph Skill Proficiencies
     if ( originalSkills ) {
@@ -460,13 +445,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
     skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
     skillData.mod = abilityData?.mod ?? 0;
-    skillData.prof = new Proficiency(this.system.attributes.prof, skillData.value, roundDown);
+    skillData.prof = this.system.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
     skillData.proficient = skillData.value;
     skillData.total = skillData.mod + skillData.bonus;
     if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
 
     // Compute passive bonus
-    const passive = flags.observantFeat && feats.observantFeat.skills.includes(skillId) ? 5 : 0;
+    const passive = flags.observantFeat && CONFIG.DND5E.characterFlags.observantFeat.skills.includes(skillId) ? 5 : 0;
     const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
     skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
 
@@ -484,25 +469,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _prepareTools(bonusData, globalBonuses, checkBonus) {
     if ( this.type === "vehicle" ) return;
-    const flags = this.flags.dnd5e ?? {};
     for ( const tool of Object.values(this.system.tools) ) {
       const ability = this.system.abilities[tool.ability];
       const baseBonus = simplifyBonus(tool.bonuses.check, bonusData);
-      let roundDown = true;
-
-      // Remarkable Athlete.
-      if ( this._isRemarkableAthlete(tool.ability) && (tool.value < 0.5) ) {
-        tool.value = 0.5;
-        roundDown = false;
-      }
-
-      // Jack of All Trades.
-      else if ( flags.jackOfAllTrades && (tool.value < 0.5) ) tool.value = 0.5;
-
       const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
       tool.bonus = baseBonus + checkBonus + checkBonusAbl;
       tool.mod = ability?.mod ?? 0;
-      tool.prof = new Proficiency(this.system.attributes.prof, tool.value, roundDown);
+      tool.prof = this.system.calculateAbilityCheckProficiency(tool.value, tool.ability);
       tool.total = tool.mod + tool.bonus;
       if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
     }
@@ -1425,80 +1398,32 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
     }
 
-    const skill = this.system.skills?.[config.skill];
     const skillConfig = CONFIG.DND5E.skills[config.skill];
-    const tool = this.system.tools?.[config.tool];
     const toolConfig = CONFIG.DND5E.tools[config.tool];
     if ( ((type === "skill") && !skillConfig) || ((type === "tool") && !toolConfig) ) {
       return this.rollAbilityTest(config, dialog, message);
     }
 
-    const relevant = type === "skill" ? skill : tool;
-    const rollData = this.getRollData();
-    const initialRoll = config.rolls?.pop();
-    const defaultAbility = relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
-
-    const hasRemarkableAthlete = this.getFlag("dnd5e", "remarkableAthlete")
-      && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
-    const buildConfig = (process, config, formData, index) => {
-      const abilityId = formData?.get("ability") ?? process.ability ?? defaultAbility;
-      const ability = this.system.abilities?.[abilityId];
-
-      let prof = process.prof ?? relevant?.prof;
-      if ( prof && hasRemarkableAthlete ) {
-        const validAbilities = CONFIG.DND5E.characterFlags.remarkableAthlete.abilities;
-        if ( validAbilities.includes(abilityId) && (prof.multiplier <= .5) && (prof.rounding === "down") ) {
-          prof = prof.clone({ multiplier: .5, roundDown: false });
-        } else if ( !validAbilities.includes(abilityId) && (prof.multiplier === .5) && (prof.rounding === "up") ) {
-          if ( this.getFlag("dnd5e", "jackOfAllTrades") ) prof = prof.clone({ roundDown: true });
-          else prof = prof.clone({ multiplier: 0 });
-        }
-      }
-
-      let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
-        mod: ability?.mod,
-        prof: prof?.hasProficiency ? prof.term : null,
-        [`${config[type]}Bonus`]: relevant?.bonuses?.check,
-        extraBonus: process.bonus,
-        [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
-        [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
-        abilityCheckBonus: this.system.bonuses?.abilities?.check,
-        situational: config.data?.situational
-      }, { ...rollData });
-      const options = config.options ?? {};
-
-      if ( index === 0 ) {
-        if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
-        if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
-        if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
-      }
-
-      // Add exhaustion reduction
-      this.addRollExhaustion(parts, data);
-
-      config.parts = parts;
-      config.data = data;
-      config.data.abilityId = abilityId;
-      config.options = options;
-    };
+    const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
+    const buildConfig = this._buildSkillToolConfig.bind(this, type, config.rolls?.shift());
 
     const rollConfig = foundry.utils.mergeObject({
-      ability: defaultAbility,
+      ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent"),
-      rolls: [{
-        options: {
-          advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-          disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
-          maximum: relevant?.roll.max,
-          minimum: relevant?.roll.min
-        }
-      }]
+      rolls: []
     }, config);
-    buildConfig(rollConfig, rollConfig.rolls[0], null, 0);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
-    rollConfig.rolls = rollConfig.rolls.concat(config.rolls ?? []);
+    rollConfig.rolls = [{
+      options: {
+        advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+        disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+        maximum: relevant?.roll.max,
+        minimum: relevant?.roll.min
+      }
+    }].concat(config.rolls ?? []);
     rollConfig.subject = this;
+    rollConfig.rolls.forEach((r, index) => buildConfig(rollConfig, r, null, index));
 
     const dialogConfig = foundry.utils.mergeObject({
       applicationClass: SkillToolRollConfigurationDialog,
@@ -1561,6 +1486,54 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     return oldFormat ? rolls[0] : rolls;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Configure a roll config for each roll performed as part of the skill or tool check process. Will be called once
+   * per roll in the process each time an option is changed in the roll configuration interface.
+   * @param {"skill"|"tool"} type                          Type of roll.
+   * @param {Partial<D20RollConfiguration>} [initialRoll]  Initial roll passed to the rolling method.
+   * @param {D20RollProcessConfiguration} process          Configuration for the entire rolling process.
+   * @param {D20RollConfiguration} config                  Configuration for a specific roll.
+   * @param {FormDataExtended} [formData]                  Any data entered into the rolling prompt.
+   * @param {number} index                                 Index of the roll within all rolls being prepared.
+   */
+  _buildSkillToolConfig(type, initialRoll, process, config, formData, index) {
+    const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
+    const rollData = this.getRollData();
+    const defaultAbility = relevant?.ability
+      ?? (type === "skill" ? CONFIG.DND5E.skills[process.skill].ability : CONFIG.DND5E.tools[process.tool].ability);
+    const abilityId = formData?.get("ability") ?? process.ability ?? defaultAbility;
+    const ability = this.system.abilities?.[abilityId];
+    const prof = this.system.calculateAbilityCheckProficiency(relevant.value, abilityId);
+
+    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+      mod: ability?.mod,
+      prof: prof?.hasProficiency ? prof.term : null,
+      [`${config[type]}Bonus`]: relevant?.bonuses?.check,
+      extraBonus: process.bonus,
+      [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
+      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
+      abilityCheckBonus: this.system.bonuses?.abilities?.check,
+      situational: config.data?.situational
+    }, { ...rollData });
+    const options = config.options ?? {};
+
+    if ( index === 0 ) {
+      if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+      if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+      if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
+    }
+
+    // Add exhaustion reduction
+    this.addRollExhaustion(parts, data);
+
+    config.parts = parts;
+    config.data = data;
+    config.data.abilityId = abilityId;
+    config.options = options;
   }
 
   /* -------------------------------------------- */

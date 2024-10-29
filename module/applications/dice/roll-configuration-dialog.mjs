@@ -14,7 +14,7 @@ const { DiceTerm } = foundry.dice.terms;
  */
 
 /**
- * @callback {RollBuildConfigCallback}
+ * @callback RollBuildConfigCallback
  * @param {BasicRollProcessConfiguration} process  Configuration for the entire rolling process.
  * @param {BasicRollConfiguration} config          Configuration for a specific roll.
  * @param {FormDataExtended} [formData]            Any data entered into the rolling prompt.
