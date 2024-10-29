@@ -1,3 +1,4 @@
+import AttackRollConfigurationDialog from "../applications/dice/attack-configuration-dialog.mjs";
 import D20RollConfigurationDialog from "../applications/dice/d20-configuration-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../applications/dice/skill-tool-configuration-dialog.mjs";
 import { areKeysPressed } from "../utils.mjs";
@@ -96,7 +97,7 @@ export default class D20Roll extends BasicRoll {
   /**
    * Construct and perform a D20 Roll through the standard workflow.
    * @param {D20RollProcessConfiguration} [config={}]     Roll configuration data.
-   * @param {D20RollDialogConfiguration} [dialog={}]      Data for the roll configuration dialog.
+   * @param {BasicRollDialogConfiguration} [dialog={}]    Data for the roll configuration dialog.
    * @param {BasicRollMessageConfiguration} [message={}]  Configuration data that guides roll message creation.
    * @returns {D20Roll[]}                                 Any rolls created.
    */
@@ -117,7 +118,7 @@ export default class D20Roll extends BasicRoll {
   /**
    * Determines whether the roll should be fast forwarded and what the default advantage mode should be.
    * @param {D20RollProcessConfiguration} config     Roll configuration data.
-   * @param {D20RollDialogConfiguration} dialog      Data for the roll configuration dialog.
+   * @param {BasicRollDialogConfiguration} dialog    Data for the roll configuration dialog.
    * @param {BasicRollMessageConfiguration} message  Configuration data that guides roll message creation.
    */
   static applyKeybindings(config, dialog, message) {
@@ -314,6 +315,7 @@ export default class D20Roll extends BasicRoll {
     );
     let DialogClass = this.constructor.DefaultConfigurationDialog;
     if ( chooseModifier ) DialogClass = SkillToolRollConfigurationDialog;
+    else if ( ammunitionOptions || attackModes || masteryOptions ) DialogClass = AttackRollConfigurationDialog;
     const defaultButton = {
       [D20Roll.ADV_MODE.NORMAL]: "normal",
       [D20Roll.ADV_MODE.ADVANTAGE]: "advantage",
@@ -321,39 +323,9 @@ export default class D20Roll extends BasicRoll {
     }[String(defaultAction ?? "0")];
     return await DialogClass.configure(
       { rolls: [{ parts: [this.formula.replace(roll.d20.formula, "")], options: this.options }] },
-      { options: { defaultButton, title } },
+      { options: { ammunitionOptions, attackModes, defaultButton, masteryOptions, title } },
       { rollMode: defaultRollMode }
     );
-    // TODO: Select proper dialog (Skill dialog if chooseModifier is set, Attack dialog if ammo, attack, or mastery set)
-  }
-
-  /* -------------------------------------------- */
-
-  // TODO: Delete this reference code once skill, tool, and attack rolls are properly handled
-  _onDialogSubmit(html, advantageMode) {
-    // Set the ammunition
-    if ( submitData.ammunition ) this.options.ammunition = submitData.ammunition;
-
-    // Set the attack mode
-    if ( submitData.attackMode ) this.options.attackMode = submitData.attackMode;
-
-    // Customize the modifier
-    if ( submitData.ability ) {
-      const abl = this.data.abilities[submitData.ability];
-      this.terms = this.terms.flatMap(t => {
-        if ( t.term === "@mod" ) return new NumericTerm({number: abl.mod});
-        if ( t.term === "@abilityCheckBonus" ) {
-          const bonus = abl.bonuses?.check;
-          if ( bonus ) return new Roll(bonus, this.data).terms;
-          return new NumericTerm({number: 0});
-        }
-        return t;
-      });
-      this.options.flavor += ` (${CONFIG.DND5E.abilities[submitData.ability]?.label ?? ""})`;
-    }
-
-    // Set the mastery
-    if ( submitData.mastery ) this.options.mastery = submitData.mastery;
   }
 }
 
@@ -377,16 +349,16 @@ export function _createDeprecatedD20Config(rollConfig, dialogConfig, messageConf
     critical: rollConfig.rolls[0].options?.criticalSuccess,
     fumble: rollConfig.rolls[0].options?.criticalFailure,
     targetValue: rollConfig.target,
-    // TODO: ammunition
-    // TODO: attackMode
-    // TODO: mastery
+    ammunition: rollConfig.ammunition,
+    attackMode: rollConfig.attackMode,
+    mastery: rollConfig.mastery,
     elvenAccuracy: rollConfig.elvenAccuracy,
     halflingLucky: rollConfig.halflingLucky,
     reliableTalent: rollConfig.reliableTalent,
-    // TODO: ammunitionOptions
-    // TODO: attackModes
+    ammunitionOptions: dialogConfig.options?.ammunitionOptions,
+    attackModes: dialogConfig.options?.attackModeOptions,
     chooseModifier: dialogConfig.options?.chooseAbility,
-    // TODO: masteryOptions
+    masteryOptions: dialogConfig?.options?.masteryOptions,
     title: dialogConfig.options?.title,
     dialogOptions: dialogConfig.options,
     chatMessage: messageConfig.create,
@@ -423,18 +395,18 @@ export function _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConf
   set(roll, "options.criticalSuccess", options.critical);
   set(roll, "options.criticalFailure", options.fumble);
   set(rollConfig, "target", options.targetValue);
-  // TODO: ammunition
-  // TODO: attackMode
-  // TODO: mastery
+  set(rollConfig, "ammunition", options.ammunition);
+  set(rollConfig, "attackMode", options.attackMode);
+  set(rollConfig, "mastery", options.mastery);
   set(rollConfig, "elvenAccuracy", options.elvenAccuracy);
   set(rollConfig, "halflingLucky", options.halflingLucky);
   set(rollConfig, "reliableTalent", options.reliableTalent);
   if ( "fastForward" in options ) dialogConfig.configure = !options.fastForward;
-  // TODO: ammunitionOptions
-  // TODO: attackModes
-  // TODO: masteryOptions
   set(dialogConfig, "options", options.dialogOptions);
+  set(dialogConfig, "options.ammunitionOptions", options.ammunitionOptions);
+  set(dialogConfig, "options.attackModeOptions", options.attackModes);
   set(dialogConfig, "options.chooseAbility", options.chooseModifier);
+  set(dialogConfig, "options.masteryOptions", options.masteryOptions);
   set(dialogConfig, "options.title", options.title);
   set(messageConfig, "create", options.chatMessage);
   set(messageConfig, "data", options.messageData);

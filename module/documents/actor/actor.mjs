@@ -1367,7 +1367,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
 
   /**
-   * @typedef {D20RollDialogConfiguration} SkillToolRollDialogConfiguration
+   * @typedef {BasicRollDialogConfiguration} SkillToolRollDialogConfiguration
    * @property {SkillToolRollConfigurationDialogOptions} [options]  Configuration options.
    */
 
@@ -1410,8 +1410,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const rollConfig = foundry.utils.mergeObject({
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent"),
-      rolls: []
+      reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
     rollConfig.rolls = [{

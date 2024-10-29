@@ -159,9 +159,9 @@ export default class BasicRoll extends Roll {
     if ( config.evaluate === false ) return rolls;
     for ( const roll of rolls ) await roll.evaluate();
 
-    message = foundry.utils.expandObject(message);
+    message.data = foundry.utils.expandObject(message.data ?? {});
     const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
-    if ( messageId ) foundry.utils.setProperty(message, "data.flags.dnd5e.originatingMessage", messageId);
+    if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
 
     if ( rolls?.length && (message.create !== false) ) {
       await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
