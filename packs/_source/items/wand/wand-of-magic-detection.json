@@ -1,7 +1,7 @@
 {
   "_id": "18fbyArtidKzON01",
   "name": "Wand of Magic Detection",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/wands/wand-gem-purple.webp",
   "system": {
     "description": {
@@ -63,6 +63,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -156,9 +157,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037084495,
-    "modifiedTime": 1725992478594,
+    "modifiedTime": 1730323651481,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!18fbyArtidKzON01"

@@ -1,7 +1,7 @@
 {
   "_id": "Do3qeSHtBjUsmfvz",
   "name": "Rod of Alertness",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/staves/staff-ornate-wood-red.webp",
   "system": {
     "description": {
@@ -62,6 +62,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -156,9 +157,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037134551,
-    "modifiedTime": 1725992495316,
+    "modifiedTime": 1730323612662,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Do3qeSHtBjUsmfvz"

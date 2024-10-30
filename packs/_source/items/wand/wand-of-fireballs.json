@@ -1,7 +1,7 @@
 {
   "_id": "DoSvjhRARhRqWZXg",
   "name": "Wand of Fireballs",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/staves/staff-obsidian.webp",
   "system": {
     "description": {
@@ -69,6 +69,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -353,9 +354,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037134840,
-    "modifiedTime": 1725992495408,
+    "modifiedTime": 1730323645617,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!DoSvjhRARhRqWZXg"
