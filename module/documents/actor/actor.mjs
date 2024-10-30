@@ -443,10 +443,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Compute modifier
     const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
+    skillData.baseValue = skillData.value;
     skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
     skillData.mod = abilityData?.mod ?? 0;
     skillData.prof = this.system.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
-    skillData.proficient = skillData.value;
+    skillData.value = skillData.proficient = skillData.prof.multiplier;
     skillData.total = skillData.mod + skillData.bonus;
     if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
 
@@ -473,11 +474,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const ability = this.system.abilities[tool.ability];
       const baseBonus = simplifyBonus(tool.bonuses.check, bonusData);
       const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
+      tool.baseValue = tool.value;
       tool.bonus = baseBonus + checkBonus + checkBonusAbl;
       tool.mod = ability?.mod ?? 0;
       tool.prof = this.system.calculateAbilityCheckProficiency(tool.value, tool.ability);
       tool.total = tool.mod + tool.bonus;
       if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
+      tool.value = tool.prof.multiplier;
     }
   }
 
@@ -1503,11 +1506,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _buildSkillToolConfig(type, initialRoll, process, config, formData, index) {
     const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
     const rollData = this.getRollData();
-    const defaultAbility = relevant?.ability
-      ?? (type === "skill" ? CONFIG.DND5E.skills[process.skill].ability : CONFIG.DND5E.tools[process.tool].ability);
-    const abilityId = formData?.get("ability") ?? process.ability ?? defaultAbility;
+    const abilityId = formData?.get("ability") ?? process.ability;
     const ability = this.system.abilities?.[abilityId];
-    const prof = this.system.calculateAbilityCheckProficiency(relevant.value, abilityId);
+    const prof = this.system.calculateAbilityCheckProficiency(relevant.baseValue, abilityId);
 
     let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
       mod: ability?.mod,
