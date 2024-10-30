@@ -6,8 +6,10 @@
                  choices=config.weaponTypes }}
 
     {{!-- Weapon Base --}}
+    {{#if baseItems}}
     {{ formField fields.type.fields.baseItem value=source.type.baseItem label="DND5E.ItemWeaponBase" localize=true
                  choices=baseItems }}
+    {{/if}}
 
     {{!-- Proficiency --}}
     {{#unless system.isMountable}}

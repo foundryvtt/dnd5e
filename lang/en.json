@@ -1510,16 +1510,40 @@
 },
 
 "DND5E.Environment": "Environment",
+
+"DND5E.EQUIPMENT": {
+  "Type": {
+    "Clothing": {
+      "Label": "Clothing"
+    },
+    "Ring": {
+      "Label": "Ring"
+    },
+    "Rod": {
+      "Label": "Rod"
+    },
+    "Trinket": {
+      "Label": "Trinket"
+    },
+    "Vehicle": {
+      "Label": "Vehicle Equipment"
+    },
+    "Wand": {
+      "Label": "Wand"
+    },
+    "Wondrous": {
+      "Label": "Wondrous Item"
+    }
+  }
+},
+
 "DND5E.EquipmentBonus": "Magical Bonus",
-"DND5E.EquipmentClothing": "Clothing",
 "DND5E.EquipmentHeavy": "Heavy Armor",
 "DND5E.EquipmentLight": "Light Armor",
 "DND5E.EquipmentMedium": "Medium Armor",
 "DND5E.EquipmentNatural": "Natural Armor",
 "DND5E.EquipmentShield": "Shield",
 "DND5E.EquipmentShieldProficiency": "Shields",
-"DND5E.EquipmentTrinket": "Trinket",
-"DND5E.EquipmentVehicle": "Vehicle Equipment",
 "DND5E.Equipped": "Equipped",
 "DND5E.Exhaustion": "Exhaustion",
 "DND5E.ExhaustionLevel": "Exhaustion Level {n}",

@@ -44,18 +44,14 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "light", subtype: false}, {label: "DND5E.ItemEquipmentType"}),
+      type: new ItemTypeField({ subtype: false }, { label: "DND5E.ItemEquipmentType" }),
       armor: new SchemaField({
-        value: new NumberField({required: true, integer: true, min: 0, label: "DND5E.ArmorClass"}),
-        magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
-        dex: new NumberField({required: true, integer: true, label: "DND5E.ItemEquipmentDexMod"})
+        value: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClass" }),
+        magicalBonus: new NumberField({ min: 0, integer: true, label: "DND5E.MagicalBonus" }),
+        dex: new NumberField({ required: true, integer: true, label: "DND5E.ItemEquipmentDexMod" })
       }),
-      properties: new SetField(new StringField(), {
-        label: "DND5E.ItemEquipmentProperties"
-      }),
-      strength: new NumberField({
-        required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr"
-      }),
+      properties: new SetField(new StringField(), { label: "DND5E.ItemEquipmentProperties" }),
+      strength: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr" }),
       proficient: new NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
       })

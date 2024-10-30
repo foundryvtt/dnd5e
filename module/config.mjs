@@ -1391,9 +1391,13 @@ preLocalize("armorTypes");
  * @enum {string}
  */
 DND5E.miscEquipmentTypes = {
-  clothing: "DND5E.EquipmentClothing",
-  trinket: "DND5E.EquipmentTrinket",
-  vehicle: "DND5E.EquipmentVehicle"
+  clothing: "DND5E.EQUIPMENT.Type.Clothing.Label",
+  ring: "DND5E.EQUIPMENT.Type.Ring.Label",
+  rod: "DND5E.EQUIPMENT.Type.Rod.Label",
+  trinket: "DND5E.EQUIPMENT.Type.Trinket.Label",
+  vehicle: "DND5E.EQUIPMENT.Type.Vehicle.Label",
+  wand: "DND5E.EQUIPMENT.Type.Wand.Label",
+  wondrous: "DND5E.EQUIPMENT.Type.Wondrous.Label"
 };
 preLocalize("miscEquipmentTypes", { sort: true });
 
@@ -1847,6 +1851,7 @@ DND5E.validProperties = {
   ]),
   equipment: new Set([
     "ada",
+    "foc",
     "mgc",
     "stealthDisadvantage"
   ]),

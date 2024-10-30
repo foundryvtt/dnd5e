@@ -262,7 +262,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the base weapons and tools based on the selected type.
-   * @returns {Promise<object>}  Object with base items for this type formatted for selectOptions.
+   * @returns {Promise<object|null>}  Object with base items for this type formatted for selectOptions.
    * @protected
    */
   async _getItemBaseTypes() {
@@ -270,7 +270,7 @@ export default class ItemSheet5e extends ItemSheet {
       ...CONFIG.DND5E.armorIds,
       ...CONFIG.DND5E.shieldIds
     } : CONFIG.DND5E[`${this.item.type}Ids`];
-    if ( baseIds === undefined ) return {};
+    if ( baseIds === undefined ) return null;
 
     const baseType = this.item.system.type.value;
 
@@ -280,6 +280,7 @@ export default class ItemSheet5e extends ItemSheet {
       if ( baseType !== baseItem?.system?.type?.value ) continue;
       items[name] = baseItem.name;
     }
+    if ( foundry.utils.isEmpty(items) ) return null;
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1], game.i18n.lang)));
   }
 

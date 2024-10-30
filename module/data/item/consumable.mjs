@@ -47,7 +47,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({ value: "potion", baseItem: false }, { label: "DND5E.ItemConsumableType" }),
+      type: new ItemTypeField({ baseItem: false }, { label: "DND5E.ItemConsumableType" }),
       damage: new SchemaField({
         base: new DamageField(),
         replace: new BooleanField()
