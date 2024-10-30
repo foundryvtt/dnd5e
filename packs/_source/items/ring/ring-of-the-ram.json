@@ -83,17 +83,17 @@
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
+              "target": "",
               "scaling": {
-                "mode": "",
+                "mode": "amount",
                 "formula": ""
               }
             }
           ],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": true,
+            "max": "3"
           },
           "spellSlot": true
         },
@@ -103,7 +103,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -125,8 +125,8 @@
             "units": ""
           },
           "affects": {
-            "count": "",
-            "type": "self",
+            "count": "1",
+            "type": "creature",
             "choice": false,
             "special": ""
           },
@@ -152,19 +152,19 @@
           "includeBase": true,
           "parts": [
             {
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
               "number": 2,
               "denomination": 10,
               "bonus": "",
               "types": [
                 "force"
               ],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
               "scaling": {
                 "mode": "whole",
-                "number": null,
+                "number": 2,
                 "formula": ""
               }
             }
@@ -172,9 +172,13 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "",
+        "img": "",
+        "appliedEffects": []
       },
       "dnd5eactivity300": {
         "_id": "dnd5eactivity300",
@@ -189,17 +193,16 @@
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
+              "target": "",
               "scaling": {
-                "mode": "",
-                "formula": ""
+                "mode": "amount"
               }
             }
           ],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": true,
+            "max": "3"
           },
           "spellSlot": true
         },
@@ -209,7 +212,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -247,9 +250,13 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
@@ -261,14 +268,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037296791,
-    "modifiedTime": 1725992549916,
+    "modifiedTime": 1729015702206,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!qw05Om9XWqTMoio2"
