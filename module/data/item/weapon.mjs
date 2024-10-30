@@ -291,11 +291,14 @@ export default class WeaponData extends ItemDataModel.mixin(
    */
   get ammunitionOptions() {
     if ( !this.parent.actor ) return [];
-    return this.parent.actor.items
-      .filter(i => (i.type === "consumable") && (i.system.type.value === "ammo")
+    return this.parent.actor.itemTypes.consumable
+      .filter(i => (i.system.type.value === "ammo")
         && (!this.ammunition?.type || (i.system.type.subtype === this.ammunition.type)))
-      .map(i => ({
-        value: i.id, label: `${i.name} (${i.system.quantity})`, item: i, disabled: !i.system.quantity
+      .map(item => ({
+        item,
+        value: item.id,
+        label: `${item.name} (${item.system.quantity})`,
+        disabled: !item.system.quantity
       }))
       .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
   }

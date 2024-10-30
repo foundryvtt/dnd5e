@@ -2,9 +2,9 @@ import D20RollConfigurationDialog from "./d20-configuration-dialog.mjs";
 
 /**
  * @typedef {BasicRollConfigurationDialogOptions} AttackRollConfigurationDialogOptions
- * @property {FormSelectOption[]} ammunitionOptions - Ammunition that can be used with the attack.
- * @property {FormSelectOption[]} attackModeOptions - Different modes of attack.
- * @property {FormSelectOption[]} masteryOptions - Available masteries for the attacking weapon.
+ * @property {FormSelectOption[]} ammunitionOptions  Ammunition that can be used with the attack.
+ * @property {FormSelectOption[]} attackModeOptions  Different modes of attack.
+ * @property {FormSelectOption[]} masteryOptions     Available masteries for the attacking weapon.
  */
 
 /**
@@ -30,14 +30,15 @@ export default class AttackRollConfigurationDialog extends D20RollConfigurationD
       { key: "ammunition", label: "DND5E.CONSUMABLE.Type.Ammunition.Label", options: this.options.ammunitionOptions },
       { key: "mastery", label: "DND5E.WEAPON.Mastery.Label", options: this.options.masteryOptions }
     ];
-    for ( const { key, label, options } of optionsFields.reverse() ) {
-      if ( options?.length ) context.fields.unshift({
+    context.fields = [
+      ...optionsFields.map(({ key, label, options }) => options.length ? {
         field: new foundry.data.fields.StringField({ label: game.i18n.localize(label) }),
         name: key,
         options,
         value: this.config[key]
-      });
-    }
+      } : null).filter(_ => _),
+      ...context.fields
+    ];
     return context;
   }
 }

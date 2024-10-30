@@ -267,15 +267,15 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
    * @param {number} index                                 Index of the roll within all rolls being prepared.
    */
   _buildAttackConfig(initialRoll, process, config, formData, index) {
-    if ( formData?.has("ammunition") ) process.ammunition = formData.get("ammunition");
-    if ( formData?.has("attackMode") ) process.attackMode = formData.get("attackMode");
-    if ( formData?.has("mastery") ) process.mastery = formData.get("mastery");
+    const ammunition = formData?.get("ammunition") ?? process.ammunition;
+    const attackMode = formData?.get("attackMode") ?? process.attackMode;
+    const mastery = formData?.get("mastery") ?? process.mastery;
 
-    let { parts, data } = this.getAttackData(process, config.data?.situational);
+    let { parts, data } = this.getAttackData({ ammunition, attackMode, situational: config.data?.situational });
     const options = config.options ?? {};
-    if ( process?.ammunition ) options.ammunition = process.ammunition;
-    if ( process?.attackMode ) options.attackMode = process.attackMode;
-    if ( process?.mastery ) options.mastery = process.mastery;
+    if ( ammunition !== undefined ) options.ammunition = ammunition;
+    if ( attackMode !== undefined ) options.attackMode = attackMode;
+    if ( mastery !== undefined ) options.mastery = mastery;
 
     if ( index === 0 ) {
       if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };

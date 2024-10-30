@@ -228,16 +228,18 @@ export default class AttackActivityData extends BaseActivityData {
 
   /**
    * Get the roll parts used to create the attack roll.
-   * @param {Partial<AttackRollProcessConfiguration>} [config]
-   * @param {string} [situational]
+   * @param {object} [config={}]
+   * @param {string} [config.ammunition]
+   * @param {string} [config.attackMode]
+   * @param {string} [config.situational]
    * @returns {{ data: object, parts: string[] }}
    */
-  getAttackData(config, situational) {
+  getAttackData({ ammunition, attackMode, situational }={}) {
     const rollData = this.getRollData();
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;
-    const ammo = this.actor?.items.get(config?.ammunition)?.system;
+    const ammo = this.actor?.items.get(ammunition)?.system;
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
       mod: this.attack.ability !== "none" ? rollData.mod : null,
       prof: weapon.prof?.term,
@@ -246,7 +248,7 @@ export default class AttackActivityData extends BaseActivityData {
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
       actorBonus: this.actor?.system.bonuses?.[this.actionType]?.attack,
       situational
-    }, this.getRollData());
+    }, rollData);
 
     // Add exhaustion reduction
     this.actor?.addRollExhaustion(parts, data);
