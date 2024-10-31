@@ -1,3 +1,4 @@
+import { formatNumber } from "../../utils.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 import ActorSheet5e from "./base-sheet.mjs";
@@ -135,7 +136,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const ctx = context.itemContext[cls.id] ??= {};
       ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(level => {
         const delta = level - cls.system.levels;
-        return { level, delta, disabled: delta > maxLevelDelta };
+        let label = formatNumber(level);
+        if ( delta ) label = `${label} (${formatNumber(delta, { signDisplay: "always" })})`;
+        return { value: delta, label, disabled: delta > maxLevelDelta };
       });
       ctx.prefixedImage = cls.img ? foundry.utils.getRoute(cls.img) : null;
       arr.push(cls);

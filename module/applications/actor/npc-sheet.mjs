@@ -1,3 +1,4 @@
+import { formatNumber } from "../../utils.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 import ActorSheet5e from "./base-sheet.mjs";
 
@@ -72,9 +73,12 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       if ( ctx.group === "passive" ) ctx.ungroup = "passive";
       // Individual item preparation
       this._prepareItem(item, ctx);
-      if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => ({
-        level, delta: level - item.system.levels, disabled: (level - item.system.levels) > maxLevelDelta
-      }));
+      if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => {
+        const delta = level - cls.system.levels;
+        let label = game.i18n.format("DND5E.LevelNumber", { level });
+        if ( delta ) label = `${label} (${formatNumber(delta, { signDisplay: "always" })})`;
+        return { value: delta, label, disabled: delta > maxLevelDelta };
+      });
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;

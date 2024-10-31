@@ -50,15 +50,7 @@
                 <label>{{ localize "DND5E.SpellLevel" }}</label>
                 <div class="form-fields">
                     <select name="configuration.restriction.level">
-                        {{#select configuration.restriction.level}}
-                        <option value="">&mdash;</option>
-                        {{#each CONFIG.spellLevels}}
-                        <option value="{{ @key }}">{{ this }}</option>
-                        {{/each}}
-                        <option value="available">
-                            {{ localize "DND5E.AdvancementItemChoiceSpellLevelAvailable" }}
-                        </option>
-                        {{/select}}
+                        {{ selectOptions levelRestrictionOptions selected=configuration.restriction.level }}
                     </select>
                 </div>
                 <p class="hint">{{localize "DND5E.AdvancementItemChoiceSpellLevelHint"}}</p>

@@ -9,11 +9,7 @@
         <label>{{ localize "DND5E.ShortRestSelect" }}</label>
         <div class="form-fields">
             <select name="hd">
-                {{#select denomination}}
-                {{#each availableHD as |num denom|}}
-                <option value="{{denom}}">{{denom}} ({{num}} {{ localize "DND5E.available" }})</option>
-                {{/each}}
-                {{/select}}
+                {{ selectOptions hdOptions selected=denomination }}
             </select>
             <button id="roll-hd" {{#unless canRoll}}disabled{{/unless}}>
                 <i class="fas fa-dice-d20"></i> {{ localize "DND5E.Roll" }}

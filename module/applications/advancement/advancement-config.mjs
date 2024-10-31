@@ -89,6 +89,11 @@ export default class AdvancementConfig extends FormApplication {
         hint: ""
       },
       levels,
+      classRestrictionOptions: [
+        { value: "", label: game.i18n.localize("DND5E.AdvancementClassRestrictionNone") },
+        { value: "primary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionPrimary") },
+        { value: "secondary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionSecondary") }
+      ],
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.constructor.metadata.multiLevel
     };

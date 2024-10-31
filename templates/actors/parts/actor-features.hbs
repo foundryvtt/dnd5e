@@ -71,14 +71,7 @@
             {{else if (eq item.type "class")}}
             <div class="item-detail item-action">
                 <select class="level-selector">
-                    {{#select 0}}
-                    {{#each ctx.availableLevels}}
-                        <option value="{{this.delta}}" {{disabled this.disabled}}>
-                            {{localize "DND5E.LevelNumber" level=this.level}}
-                            {{#if this.delta}}({{numberFormat this.delta sign=true}}){{/if}}
-                        </option>
-                    {{/each}}
-                    {{/select}}
+                    {{ selectOptions ctx.availableLevels selected=0 }}
                 </select>
             </div>
             {{/if}}
