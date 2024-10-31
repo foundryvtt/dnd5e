@@ -6,10 +6,19 @@ const { DiceTerm } = foundry.dice.terms;
  * Dialog rendering options for a roll configuration dialog.
  *
  * @typedef {object} BasicRollConfigurationDialogOptions
- * @property {typeof BasicRoll} rollType  Roll type to use when constructing final roll.
+ * @property {typeof BasicRoll} rollType              Roll type to use when constructing final roll.
  * @property {object} [default]
- * @property {number} [default.rollMode]  Default roll mode to have selected.
+ * @property {number} [default.rollMode]              Default roll mode to have selected.
+ * @property {RollBuildConfigCallback} [buildConfig]  Callback to handle additional build configuration.
  * @property {BasicRollConfigurationDialogRenderOptions} [rendering]
+ */
+
+/**
+ * @callback RollBuildConfigCallback
+ * @param {BasicRollProcessConfiguration} process  Configuration for the entire rolling process.
+ * @param {BasicRollConfiguration} config          Configuration for a specific roll.
+ * @param {FormDataExtended} [formData]            Any data entered into the rolling prompt.
+ * @param {number} index                           Index of the roll within all rolls being prepared.
  */
 
 /**
@@ -54,6 +63,7 @@ export default class RollConfigurationDialog extends Dialog5e {
     position: {
       width: 400
     },
+    buildConfig: null,
     rendering: {
       dice: {
         max: 5,
@@ -311,6 +321,8 @@ export default class RollConfigurationDialog extends Dialog5e {
     } else {
       config.parts.findSplice(v => v === "@situational");
     }
+
+    this.options.buildConfig?.(this.config, config, formData, index);
 
     return config;
   }

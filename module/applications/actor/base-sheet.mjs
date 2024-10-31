@@ -1193,7 +1193,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _onRollSkillCheck(event) {
     event.preventDefault();
     const skill = event.currentTarget.closest("[data-key]").dataset.key;
-    return this.actor.rollSkill(skill, {event: event});
+    return this.actor.rollSkill({ skill, event });
   }
 
   /* -------------------------------------------- */
@@ -1201,7 +1201,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _onRollToolCheck(event) {
     event.preventDefault();
     const tool = event.currentTarget.closest("[data-key]").dataset.key;
-    return this.actor.rollToolCheck(tool, {event});
+    return this.actor.rollToolCheck({ tool, event });
   }
 
   /* -------------------------------------------- */

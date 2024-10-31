@@ -29,23 +29,14 @@ export default class Proficiency {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
 
   /**
    * Should only deterministic proficiency be returned, regardless of system settings?
    * @type {boolean}
    */
   deterministic = false;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Calculate an actor's proficiency modifier based on level or CR.
-   * @param {number} level  Level or CR To use for calculating proficiency modifier.
-   * @returns {number}      Proficiency modifier.
-   */
-  static calculateMod(level) {
-    return Math.floor((level + 7) / 4);
-  }
 
   /* -------------------------------------------- */
 
@@ -96,10 +87,40 @@ export default class Proficiency {
   }
 
   /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate an actor's proficiency modifier based on level or CR.
+   * @param {number} level  Level or CR To use for calculating proficiency modifier.
+   * @returns {number}      Proficiency modifier.
+   */
+  static calculateMod(level) {
+    return Math.floor((level + 7) / 4);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return a clone of this proficiency with any changes applied.
+   * @param {object} [updates={}]
+   * @param {number} updates.proficiency  Actor's flat proficiency bonus based on their current level.
+   * @param {number} updates.multiplier   Value by which to multiply the actor's base proficiency value.
+   * @param {boolean} updates.roundDown   Should half-values be rounded up or down?
+   * @returns {Proficiency}
+   */
+  clone({ proficiency, multiplier, roundDown }={}) {
+    proficiency ??= this._baseProficiency;
+    multiplier ??= this.multiplier;
+    roundDown ??= this.rounding === "down";
+    return new this.constructor(proficiency, multiplier, roundDown);
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Override the default `toString` method to return flat proficiency for backwards compatibility in formula.
-   * @returns {string}  Flat proficiency value.
+   * @returns {string}  Either flat or dice proficiency term based on configured setting.
    */
   toString() {
     return this.term;
