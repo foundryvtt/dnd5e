@@ -53,7 +53,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     { tab: "features", label: "DND5E.Features", icon: "fas fa-list" },
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
     { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
-    { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" }
+    { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
+    { tab: "bastion", label: "Bastion", icon: "fas fa-chess-rook" }
   ];
 
   /**
@@ -82,6 +83,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     const isUpdate = (context === "update") || (context === "updateActor");
     const hp = foundry.utils.getProperty(data ?? {}, "system.attributes.hp.value");
     if ( isUpdate && (hp === 0) ) this._toggleDeathTray(true);
+    const [bastion] = this.element.find('nav.tabs [data-tab="bastion"]');
+    if ( bastion ) bastion.toggleAttribute("hidden", this.object.system.details.level < 5);
   }
 
   /* -------------------------------------------- */
@@ -89,7 +92,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    const { attributes, details, traits } = this.actor.system;
+    const { attributes, bastion, details, traits } = this.actor.system;
 
     // Class
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
@@ -222,6 +225,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       );
     }
 
+    // Bastion
+    context.bastion = {
+      description: await TextEditor.enrichHTML(bastion.description, {
+        secrets: this.actor.isOwner,
+        rollData: context.rollData,
+        relativeTo: this.actor
+      })
+    };
+
+    // Facilities
+    await this._prepareFacilities(context);
+
     return context;
   }
 
@@ -315,7 +330,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     // Apply special context menus for items outside inventory elements
     const featuresElement = html[0].querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
     if ( featuresElement ) {
-      new ContextMenu5e(html, ".pills-lg [data-item-id], .favorites [data-item-id]", [], {
+      new ContextMenu5e(html, ".pills-lg [data-item-id], .favorites [data-item-id], .facility[data-item-id]", [], {
         onOpen: (...args) => featuresElement._onOpenContextMenu(...args)
       });
     }
@@ -444,6 +459,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   _onAction(event) {
     const target = event.currentTarget;
     switch ( target.dataset.action ) {
+      case "deleteOccupant": this._onDeleteOccupant(event); break;
       case "findItem":
         this._onFindItem(target.dataset.itemType, { classIdentifier: target.dataset.classIdentifier });
         break;
@@ -451,6 +467,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       case "spellcasting": this._onToggleSpellcasting(event); break;
       case "toggleInspiration": this._onToggleInspiration(); break;
       case "useFavorite": this._onUseFavorite(event); break;
+      case "viewOccupant": this._onViewOccupant(event); break;
     }
   }
 
@@ -474,6 +491,25 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       top: this.position.top + 40,
       left: this.position.left + ((this.position.width - DocumentSheet.defaultOptions.width) / 2)
     }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting an occupant from a facility.
+   * @param {PointerEvent} event  The triggering event.
+   * @returns {Promise<Item5e>|void}
+   * @protected
+   */
+  _onDeleteOccupant(event) {
+    event.stopPropagation();
+    const { facilityId } = event.target.closest("[data-facility-id]")?.dataset ?? {};
+    const { prop } = event.target.closest("[data-prop]")?.dataset ?? {};
+    const { index } = event.target.closest("[data-index]")?.dataset ?? {};
+    const facility = this.actor.items.get(facilityId);
+    if ( !facility || !prop || (index === undefined) ) return;
+    const value = foundry.utils.getProperty(facility, prop).filter((_, i) => i != index);
+    return facility.update({ [prop]: value });
   }
 
   /* -------------------------------------------- */
@@ -513,6 +549,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   _onToggleSpellcasting(event) {
     const ability = event.currentTarget.closest("[data-ability]")?.dataset.ability;
     this.actor.update({ "system.attributes.spellcasting": ability });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle viewing a facility occupant.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  async _onViewOccupant(event) {
+    const { actorUuid } = event.currentTarget.dataset;
+    const actor = await fromUuid(actorUuid);
+    actor?.sheet.render(true);
   }
 
   /* -------------------------------------------- */
@@ -559,6 +608,20 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( !activity ) return;
     const uuid = `${activity.item.getRelativeUUID(this.actor)}.Activity.${activity.id}`;
     return this._onDropFavorite(event, { type: "activity", id: uuid });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDropActor(event, data) {
+    if ( !event.target.closest(".facility-occupants") || !data.uuid ) return super._onDropActor(event, data);
+    const { facilityId } = event.target.closest("[data-facility-id]").dataset;
+    const facility = this.actor.items.get(facilityId);
+    if ( !facility ) return;
+    const { prop } = event.target.closest("[data-prop]").dataset;
+    const { max, value } = foundry.utils.getProperty(facility, prop);
+    if ( (value.length + 1) > max ) return;
+    return facility.update({ [`${prop}.value`]: [...value, data.uuid] });
   }
 
   /* -------------------------------------------- */
@@ -658,6 +721,80 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       return favorite.use({ legacy: false, event });
     }
     if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) return favorite.update({ disabled: !favorite.disabled });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare bastion facility data for display.
+   * @param {object} context  Render context.
+   * @returns {Promise<void>}
+   * @protected
+   */
+  async _prepareFacilities(context) {
+    const allDefenders = [];
+    const basic = [];
+    const special = [];
+
+    // TODO: Consider batching compendium lookups. Most occupants are likely to all be from the same compendium.
+    for ( const facility of Object.values(this.actor.itemTypes.facility) ) {
+      const { id, img, labels, name, system } = facility;
+      const { craft, defenders, hirelings, progress, size, trade, type } = system;
+      const subtitle = [CONFIG.DND5E.facilities.sizes[size].label];
+      if ( trade.stock.max ) subtitle.push(`${trade.stock.value} &sol; ${trade.stock.max}`);
+      const context = {
+        id, labels, name, progress,
+        craft: craft ? await fromUuid(craft) : null,
+        creatures: await this._prepareFacilityOccupants(trade.creatures),
+        defenders: await this._prepareFacilityOccupants(defenders),
+        executing: CONFIG.DND5E.facilities.orders[progress.order]?.icon,
+        hirelings: await this._prepareFacilityOccupants(hirelings),
+        img: foundry.utils.getRoute(img),
+        isSpecial: type.value === "special",
+        subtitle: subtitle.join(" &bull; ")
+      };
+      allDefenders.push(...context.defenders.map(({ actor }) => {
+        if ( !actor ) return;
+        const { img, name, uuid } = actor;
+        return { img, name, uuid, facility: facility.id };
+      }).filter(_ => _));
+      if ( context.isSpecial ) special.push(context);
+      else basic.push(context);
+    }
+
+    context.defenders = allDefenders;
+    context.facilities = { basic: { chosen: basic }, special: { chosen: special } };
+    ["basic", "special"].forEach(type => {
+      const config = CONFIG.DND5E.facilities.advancement[type];
+      let [, available] = Object.entries(config).reverse().find(([level]) => {
+        return level <= this.actor.system.details.level;
+      }) ?? [];
+      available = (available ?? 0) - context.facilities[type].chosen.length;
+      context.facilities[type].available = Array.fromRange(Math.max(0, available)).map(() => {
+        return { label: `DND5E.FACILITY.AvailableFacility.${type}.free` };
+      });
+    });
+
+    if ( !context.facilities.basic.available.length ) {
+      context.facilities.basic.available.push({ label: "DND5E.FACILITY.AvailableFacility.basic.build" });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare facility occupants for display.
+   * @param {FacilityOccupants} occupants  The occupants.
+   * @returns {Promise<object[]>}
+   * @protected
+   */
+  _prepareFacilityOccupants(occupants) {
+    const { max, value } = occupants;
+    return Promise.all(Array.fromRange(max).map(async i => {
+      const uuid = value[i];
+      if ( uuid ) return { actor: await fromUuid(uuid) };
+      return { empty: true };
+    }));
   }
 
   /* -------------------------------------------- */

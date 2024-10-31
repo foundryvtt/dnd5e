@@ -1563,9 +1563,21 @@
 
 "DND5E.FACILITY": {
   "Action": {
+    "DeleteDefender": "Delete Defender",
+    "DeleteOccupant": "Delete Occupant",
     "RemoveCraft": "Remove Craft"
   },
+  "AvailableFacility": {
+    "basic": {
+      "build": "Build Facility",
+      "free": "Free Facility"
+    },
+    "special": {
+      "free": "Add Facility"
+    }
+  },
   "CraftHint": "The item that this facility is currently in the process of crafting, if any.",
+  "Description": "Description",
   "FIELDS": {
     "defenders": {
       "max": {
@@ -1590,6 +1602,9 @@
     "progress": {
       "max": {
         "label": "Total"
+      },
+      "order": {
+        "label": "Executing"
       },
       "value": {
         "label": "Current"
@@ -1630,6 +1645,7 @@
     }
   },
   "Goods": "Goods",
+  "NoDefenders": "Bastion is undefended.",
   "Occupants": "Occupants",
   "Orders": {
     "Label": "Orders",
@@ -1673,9 +1689,13 @@
     "roomy": "Roomy",
     "vast": "Vast"
   },
+  "Squares": "{squares} squares",
   "Types": {
     "Basic": {
-      "Label": "Basic Facility",
+      "Label": {
+        "one": "Basic Facility",
+        "other": "Basic Facilities"
+      },
       "Bedroom": "Bedroom",
       "DiningRoom": "Dining Room",
       "Parlor": "Parlor",
@@ -1684,7 +1704,10 @@
       "Storage": "Storage"
     },
     "Special": {
-      "Label": "Special Facility",
+      "Label": {
+        "one": "Special Facility",
+        "other": "Special Facilities"
+      },
       "ArcaneStudy": "Arcane Study",
       "Armory": "Armory",
       "Barrack": "Barrack",

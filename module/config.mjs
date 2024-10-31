@@ -484,9 +484,26 @@ DND5E.ammoIds = {
 
 /**
  * @typedef FacilityConfiguration
- * @property {Record<string, string>} orders                   Orders that can be issued to a facility.
- * @property {Record<string, string>} sizes                    Facility size categories.
- * @property {Record<string, SubtypeTypeConfiguration>} types  Facility types and subtypes.
+ * @property {Record<string, Record<number, number>>} advancement  The number of free facilities of a given type awarded
+ *                                                                 at certain character levels.
+ * @property {Record<string, FacilityOrder>} orders                Orders that can be issued to a facility.
+ * @property {Record<string, FacilitySize>} sizes                  Facility size categories.
+ * @property {Record<string, SubtypeTypeConfiguration>} types      Facility types and subtypes.
+ */
+
+/**
+ * @typedef FacilityOrder
+ * @property {string} label     The human-readable name of the order.
+ * @property {string} icon      The SVG icon for this order.
+ * @property {boolean} [basic]  Whether this order can be issued to basic facilities.
+ */
+
+/**
+ * @typedef FacilitySize
+ * @property {string} label    The human-readable name of the size category.
+ * @property {number} days     The number of days to build the facility.
+ * @property {number} squares  The maximum area the facility may occupy in the bastion plan.
+ * @property {number} value    The cost in gold pieces to build the facility.
  */
 
 /**
@@ -494,23 +511,68 @@ DND5E.ammoIds = {
  * @type {FacilityConfiguration}
  */
 DND5E.facilities = {
+  advancement: {
+    basic: { 5: 2 },
+    special: { 5: 2, 9: 4, 13: 5, 17: 6 }
+  },
   orders: {
-    craft: "DND5E.FACILITY.Orders.craft.inf",
-    empower: "DND5E.FACILITY.Orders.empower.inf",
-    harvest: "DND5E.FACILITY.Orders.harvest.inf",
-    maintain: "DND5E.FACILITY.Orders.maintain.inf",
-    recruit: "DND5E.FACILITY.Orders.recruit.inf",
-    research: "DND5E.FACILITY.Orders.research.inf",
-    trade: "DND5E.FACILITY.Orders.trade.inf"
+    craft: {
+      label: "DND5E.FACILITY.Orders.craft.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/craft.svg"
+    },
+    empower: {
+      label: "DND5E.FACILITY.Orders.empower.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/empower.svg"
+    },
+    enlarge: {
+      label: "DND5E.FACILITY.Orders.enlarge.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/enlarge.svg",
+      basic: true
+    },
+    harvest: {
+      label: "DND5E.FACILITY.Orders.harvest.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/harvest.svg"
+    },
+    maintain: {
+      label: "DND5E.FACILITY.Orders.maintain.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/maintain.svg"
+    },
+    recruit: {
+      label: "DND5E.FACILITY.Orders.recruit.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/recruit.svg"
+    },
+    research: {
+      label: "DND5E.FACILITY.Orders.research.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/research.svg"
+    },
+    trade: {
+      label: "DND5E.FACILITY.Orders.trade.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/trade.svg"
+    }
   },
   sizes: {
-    cramped: "DND5E.FACILITY.Sizes.cramped",
-    roomy: "DND5E.FACILITY.Sizes.roomy",
-    vast: "DND5E.FACILITY.Sizes.vast"
+    cramped: {
+      label: "DND5E.FACILITY.Sizes.cramped",
+      days: 20,
+      squares: 4,
+      value: 500
+    },
+    roomy: {
+      label: "DND5E.FACILITY.Sizes.roomy",
+      days: 45,
+      squares: 16,
+      value: 1_000
+    },
+    vast: {
+      label: "DND5E.FACILITY.Sizes.vast",
+      days: 125,
+      squares: 36,
+      value: 3_000
+    }
   },
   types: {
     basic: {
-      label: "DND5E.FACILITY.Types.Basic.Label",
+      label: "DND5E.FACILITY.Types.Basic.Label.one",
       subtypes: {
         bedroom: "DND5E.FACILITY.Types.Basic.Bedroom",
         diningRoom: "DND5E.FACILITY.Types.Basic.DiningRoom",
@@ -521,7 +583,7 @@ DND5E.facilities = {
       }
     },
     special: {
-      label: "DND5E.FACILITY.Types.Special.Label",
+      label: "DND5E.FACILITY.Types.Special.Label.one",
       subtypes: {
         arcaneStudy: "DND5E.FACILITY.Types.Special.ArcaneStudy",
         armory: "DND5E.FACILITY.Types.Special.Armory",
@@ -556,8 +618,8 @@ DND5E.facilities = {
     }
   }
 };
-preLocalize("facilities.orders", { sort: true });
-preLocalize("facilities.sizes", { sort: true });
+preLocalize("facilities.orders", { key: "label", sort: true });
+preLocalize("facilities.sizes", { key: "label", sort: true });
 preLocalize("facilities.types", { key: "label", sort: true });
 preLocalize("facilities.types.basic.subtypes", { sort: true });
 preLocalize("facilities.types.special.subtypes", { sort: true });

@@ -35,7 +35,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    const { activities, craft, spellcasting } = this.item.system;
+    const { activities, craft, order, spellcasting, type } = this.item.system;
     const target = this.item.type === "spell" ? this.item.system.target : null;
 
     // Effects
@@ -141,6 +141,17 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     }));
 
     // Facilities
+    if ( this.item.type === "facility" ) {
+      context.orders = Object.entries(CONFIG.DND5E.facilities.orders).reduce((obj, [value, { label, basic }]) => {
+        if ( (type.value === "basic") && basic ) obj.executable.push({ value, label });
+        else if ( (type.value === "special") && !basic ) {
+          obj.available.push({ value, label });
+          if ( (value === order) || (value === "maintain") ) obj.executable.push({ value, label });
+        }
+        return obj;
+      }, { available: [], executable: [] });
+    }
+
     if ( craft ) {
       const crafting = await fromUuid(craft);
       if ( crafting ) {
