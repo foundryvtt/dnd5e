@@ -362,6 +362,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     // Create Activities
     const riderActivities = {};
+    let riderEffects = [];
     for ( const id of profile.riders.activity ) {
       const activityData = item.system.activities.get(id)?.toObject();
       if ( !activityData ) continue;
@@ -372,10 +373,13 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( !foundry.utils.isEmpty(riderActivities) ) {
       await this.parent.update({ "system.activities": riderActivities });
       createdActivities = Object.keys(riderActivities).map(id => this.parent.system.activities?.get(id));
+      createdActivities.forEach(a => a.effects?.forEach(e => {
+        if ( !this.parent.effects.has(e._id) ) riderEffects.push(item.effects.get(e._id)?.toObject());
+      }));
     }
 
     // Create Effects
-    const riderEffects = profile.riders.effect.map(id => {
+    riderEffects.push(...profile.riders.effect.map(id => {
       const effectData = item.effects.get(id)?.toObject();
       if ( effectData ) {
         delete effectData._id;
@@ -383,8 +387,9 @@ export default class ActiveEffect5e extends ActiveEffect {
         effectData.origin = this.origin;
       }
       return effectData;
-    }).filter(_ => _);
-    const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", Array.from(riderEffects));
+    }));
+    riderEffects = riderEffects.filter(_ => _);
+    const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
 
     // Create Items
     let createdItems = [];
