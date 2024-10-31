@@ -90,7 +90,7 @@ export default class ChatMessage5e extends ChatMessage {
     this._shimFlags();
     if ( !this.flags.dnd5e?.item?.data && this.flags.dnd5e?.item?.id ) {
       const itemData = this.getFlag("dnd5e", "use.consumed.deleted")?.find(i => i._id === this.flags.dnd5e.item.id);
-      if ( itemData ) Object.defineProperty(this.flags.dnd5e.item, "data", { value: itemData, writable: false });
+      if ( itemData ) Object.defineProperty(this.flags.dnd5e.item, "data", { value: itemData });
     }
     dnd5e.registry.messages.track(this);
   }
