@@ -208,7 +208,8 @@ export default class UsesField extends SchemaField {
     }
 
     const createMessage = messageConfig.create !== false;
-    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, { ...messageConfig, create: false });
+    messageConfig.create = false;
+    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
     if ( !rolls.length ) return;
     if ( createMessage ) {
       messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {

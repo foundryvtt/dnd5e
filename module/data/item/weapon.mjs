@@ -286,6 +286,26 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Ammunition that can be used with this weapon.
+   * @type {FormSelectOption[]}
+   */
+  get ammunitionOptions() {
+    if ( !this.parent.actor ) return [];
+    return this.parent.actor.itemTypes.consumable
+      .filter(i => (i.system.type.value === "ammo")
+        && (!this.ammunition?.type || (i.system.type.subtype === this.ammunition.type)))
+      .map(item => ({
+        item,
+        value: item.id,
+        label: `${item.name} (${item.system.quantity})`,
+        disabled: !item.system.quantity
+      }))
+      .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Attack classification of this weapon.
    * @type {"weapon"|"unarmed"}
    */

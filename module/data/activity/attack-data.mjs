@@ -228,32 +228,30 @@ export default class AttackActivityData extends BaseActivityData {
 
   /**
    * Get the roll parts used to create the attack roll.
+   * @param {object} [config={}]
+   * @param {string} [config.ammunition]
+   * @param {string} [config.attackMode]
+   * @param {string} [config.situational]
    * @returns {{ data: object, parts: string[] }}
    */
-  getAttackData() {
-    const parts = [];
-    const data = this.getRollData();
-    const item = this.item.system;
+  getAttackData({ ammunition, attackMode, situational }={}) {
+    const rollData = this.getRollData();
+    if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
-    if ( this.actor && !this.attack.flat ) {
-      // Ability modifier & proficiency bonus
-      if ( this.attack.ability !== "none" ) parts.push("@mod");
-      if ( item.prof?.hasProficiency ) {
-        parts.push("@prof");
-        data.prof = item.prof.term;
-      }
+    const weapon = this.item.system;
+    const ammo = this.actor?.items.get(ammunition)?.system;
+    const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+      mod: this.attack.ability !== "none" ? rollData.mod : null,
+      prof: weapon.prof?.term,
+      bonus: this.attack.bonus,
+      weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
+      ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
+      actorBonus: this.actor?.system.bonuses?.[this.actionType]?.attack,
+      situational
+    }, rollData);
 
-      // Actor-level global bonus to attack rolls
-      const actorBonus = this.actor.system.bonuses?.[this.actionType];
-      if ( actorBonus?.attack ) parts.push(actorBonus.attack);
-
-      // Add exhaustion reduction
-      this.actor.addRollExhaustion(parts, data);
-    }
-
-    // Include the activity's attack bonus & item's magical bonus
-    if ( this.attack.bonus ) parts.push(this.attack.bonus);
-    if ( item.magicalBonus && item.magicAvailable && !this.attack.flat ) parts.push(item.magicalBonus);
+    // Add exhaustion reduction
+    this.actor?.addRollExhaustion(parts, data);
 
     return { data, parts };
   }

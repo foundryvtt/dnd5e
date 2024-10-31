@@ -7,6 +7,7 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
+import { _applyDeprecatedD20Configs } from "../dice/d20-roll.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -963,7 +964,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const activity = item.system.activities?.getByType("attack")[0];
     if ( !activity ) throw new Error("This Item does not have an Attack activity to roll!");
 
-    const rolls = await activity.rollAttack(options);
+    const rollConfig = {};
+    const dialogConfig = {};
+    const messageConfig = {};
+    _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, options);
+
+    const rolls = await activity.rollAttack(rollConfig, dialogConfig, messageConfig);
     return rolls?.[0] ?? null;
   }
 
@@ -1035,6 +1041,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /**
    * Perform an ability recharge test for an item which uses the d6 recharge mechanic.
    * @returns {Promise<Roll|void>}   A Promise which resolves to the created Roll instance
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
    */
   async rollRecharge() {
     foundry.utils.logCompatibilityWarning(

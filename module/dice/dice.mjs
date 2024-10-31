@@ -1,4 +1,4 @@
-const { NumericTerm, OperatorTerm } = foundry.dice.terms;
+const { OperatorTerm } = foundry.dice.terms;
 
 /* -------------------------------------------- */
 /* D20 Roll                                     */
@@ -105,36 +105,6 @@ export async function d20Roll({
   const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
 
   return rolls?.[0] ?? null;
-
-  // TODO: Delete this reference code once skill, tool, and attack rolls are properly handled
-
-  // Prompt a Dialog to further configure the D20Roll
-  if ( !isFF ) {
-  } else {
-    roll.options.ammunition ??= ammunition ?? ammunitionOptions?.[0]?.value;
-    roll.options.attackMode ??= attackMode ?? attackModes?.[0]?.value;
-    roll.options.rollMode ??= defaultRollMode;
-  }
-
-  // If ammunition has a magical bonus, add it to the roll
-  const ammo = ammunitionOptions?.find(a => a.value === roll.options.ammunition);
-  if ( ammo?.item.system.magicAvailable && ammo.item.system.magicalBonus ) {
-    roll.terms.push(new OperatorTerm({ operator: "+" }), new NumericTerm({ number: ammo.item.system.magicalBonus }));
-    roll.resetFormula();
-  }
-
-  // Attach original message ID to the message
-  messageData = foundry.utils.expandObject(messageData);
-  const messageId = event?.target.closest("[data-message-id]")?.dataset.messageId;
-  if ( messageId ) foundry.utils.setProperty(messageData, "flags.dnd5e.originatingMessage", messageId);
-
-  // Store the ammunition used in the chat message
-  if ( ammo ) foundry.utils.setProperty(messageData, "flags.dnd5e.roll.ammunition", ammo.value);
-
-  // Set the attack mode
-  if ( roll.options.attackMode ) foundry.utils.setProperty(
-    messageData, "flags.dnd5e.roll.attackMode", roll.options.attackMode
-  );
 }
 
 /* -------------------------------------------- */
