@@ -210,6 +210,14 @@ export default class ActiveEffect5e extends ActiveEffect {
     return super.applyField(model, change, field);
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _applyLegacy(actor, change, changes) {
+    if ( this.system._applyLegacy?.(actor, change, changes) === false ) return;
+    super._applyLegacy(actor, change, changes);
+  }
+
   /* --------------------------------------------- */
 
   /** @inheritDoc */
