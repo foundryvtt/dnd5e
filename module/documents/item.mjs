@@ -1,3 +1,4 @@
+import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
 import CreateScrollDialog from "../applications/item/create-scroll-dialog.mjs";
@@ -8,12 +9,12 @@ import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import { _applyDeprecatedD20Configs } from "../dice/d20-roll.mjs";
+import { staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
-import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
 
 /**
  * Override and extend the basic Item implementation.
@@ -1520,6 +1521,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Item5e|void>}                The created scroll consumable item.
    */
   static async createScrollFromSpell(spell, options={}, config={}) {
+    if ( spell.pack ) return this.createScrollFromCompendiumSpell(spell.uuid, config);
+
     const values = {};
     if ( (spell instanceof Item5e) && spell.isOwned && (game.settings.get("dnd5e", "rulesVersion") === "modern") ) {
       const spellcastingClass = spell.actor.spellcastingClasses?.[spell.system.sourceClass];
@@ -1569,7 +1572,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preCreateScrollFromSpell", itemData, options, config) === false ) return;
 
-    let { activities, description, level, properties, source } = itemData.system;
+    let { activities, level, properties, source } = itemData.system;
 
     // Get scroll data
     let scrollUuid;
@@ -1582,45 +1585,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const scrollItem = await fromUuid(scrollUuid);
     const scrollData = scrollItem.toObject();
     delete scrollData._id;
-    const isConc = properties.includes("concentration");
 
     // Create a composite description from the scroll description and the spell details
-    let desc;
-    switch ( config.explanation ) {
-      case "full":
-        // Split the scroll description into an intro paragraph and the remaining details
-        const scrollDescription = scrollData.system.description.value;
-        const pdel = "</p>";
-        const scrollIntroEnd = scrollDescription.indexOf(pdel);
-        const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
-        const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
-        desc = [
-          scrollIntro,
-          "<hr>",
-          `<h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`,
-          isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
-          "<hr>",
-          description.value,
-          "<hr>",
-          `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
-          "<hr>",
-          scrollDetails
-        ].filterJoin("");
-        break;
-      case "reference":
-        desc = [
-          "<p><em>",
-          CONFIG.DND5E.spellLevels[level] ?? level,
-          " &Reference[Spell Scroll]",
-          isConc ? `, ${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}` : null,
-          "</em></p>",
-          description.value
-        ].filterJoin("");
-        break;
-      default:
-        desc = description.value;
-        break;
-    }
+    const desc = this._createScrollDescription(scrollItem, itemData, null, config);
 
     for ( const level of Array.fromRange(itemData.system.level + 1).reverse() ) {
       const values = CONFIG.DND5E.spellScrollValues[level];
@@ -1676,6 +1643,149 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData, config);
 
     return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a consumable spell scroll Item from a spell Item.
+   * @param {string} uuid                           UUID of the spell to add to the scroll.
+   * @param {SpellScrollConfiguration} [config={}]  Configuration options for scroll creation.
+   * @returns {Promise<Item5e|void>}                The created scroll consumable item.
+   */
+  static async createScrollFromCompendiumSpell(uuid, config={}) {
+    const spell = await fromUuid(uuid);
+    if ( !spell ) return;
+
+    const values = {};
+
+    config = foundry.utils.mergeObject({
+      explanation: game.user.getFlag("dnd5e", "creation.scrollExplanation") ?? "reference",
+      level: spell.system.level,
+      values
+    }, config);
+
+    if ( config.dialog !== false ) {
+      const result = await CreateScrollDialog.create(spell, config);
+      if ( !result ) return;
+      foundry.utils.mergeObject(config, result);
+      await game.user.setFlag("dnd5e", "creation.scrollExplanation", config.explanation);
+    }
+
+    /**
+     * A hook event that fires before the item data for a scroll is created for a compendium spell.
+     * @function dnd5e.preCreateScrollFromCompendiumSpell
+     * @memberof hookEvents
+     * @param {Item5e} spell                     Spell to add to the scroll.
+     * @param {SpellScrollConfiguration} config  Configuration options for scroll creation.
+     * @returns {boolean}                        Explicitly return `false` to prevent the scroll to be created.
+     */
+    if ( Hooks.call("dnd5e.preCreateScrollFromCompendiumSpell", spell, config) === false ) return;
+
+    // Get scroll data
+    let scrollUuid;
+    const id = CONFIG.DND5E.spellScrollIds[spell.system.level];
+    if ( foundry.data.validators.isValidId(id) ) {
+      scrollUuid = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS).index.get(id).uuid;
+    } else {
+      scrollUuid = id;
+    }
+    const scrollItem = await fromUuid(scrollUuid);
+    const scrollData = scrollItem.toObject();
+    delete scrollData._id;
+
+    for ( const level of Array.fromRange(spell.system.level + 1).reverse() ) {
+      const values = CONFIG.DND5E.spellScrollValues[level];
+      if ( values ) {
+        config.values.bonus ??= values.bonus;
+        config.values.dc ??= values.dc;
+        break;
+      }
+    }
+
+    const activity = {
+      _id: staticID("dnd5escrollspell"),
+      type: "cast",
+      consumption: {
+        targets: [{ type: "itemUses", value: "1" }]
+      },
+      spell: {
+        challenge: {
+          attack: config.values.bonus,
+          save: config.values.dc,
+          override: true
+        },
+        level: config.level,
+        uuid
+      }
+    };
+
+    // Create the spell scroll data
+    const spellScrollData = foundry.utils.mergeObject(scrollData, {
+      name: `${game.i18n.localize("DND5E.SpellScroll")}: ${spell.name}`,
+      system: {
+        activities: { ...(scrollData.system.activities ?? {}), [activity._id]: activity },
+        description: {
+          value: this._createScrollDescription(scrollItem, spell, `<p>@Embed[${uuid} inline]</p>`, config).trim()
+        }
+      }
+    });
+
+    /**
+     * A hook event that fires after the item data for a scroll is created but before the item is returned.
+     * @function dnd5e.createScrollFromSpell
+     * @memberof hookEvents
+     * @param {Item5e} spell                     The spell or item data to be made into a scroll.
+     * @param {object} spellScrollData           The final item data used to make the scroll.
+     * @param {SpellScrollConfiguration} config  Configuration options for scroll creation.
+     */
+    Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData, config);
+
+    return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the description for a spell scroll.
+   * @param {Item5e} scroll                         Base spell scroll.
+   * @param {Item5e|object} spell                   Spell being added to the scroll.
+   * @param {string} [spellDescription]             Description from the spell being added.
+   * @param {SpellScrollConfiguration} [config={}]  Configuration options for scroll creation.
+   * @returns {string}
+   * @protected
+   */
+  static _createScrollDescription(scroll, spell, spellDescription, config={}) {
+    spellDescription ??= spell.system.description.value;
+    const isConc = spell.system.properties[spell instanceof Item5e ? "has" : "includes"]("concentration");
+    const level = spell.system.level;
+    switch ( config.explanation ) {
+      case "full":
+        // Split the scroll description into an intro paragraph and the remaining details
+        const scrollDescription = scroll.system.description.value;
+        const pdel = "</p>";
+        const scrollIntroEnd = scrollDescription.indexOf(pdel);
+        const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
+        const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
+        return [
+          scrollIntro,
+          `<h3>${spell.name} (${game.i18n.format("DND5E.LevelNumber", { level })})</h3>`,
+          isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
+          spellDescription,
+          `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
+          scrollDetails
+        ].filterJoin("");
+      case "reference":
+        return [
+          "<p><em>",
+          CONFIG.DND5E.spellLevels[level] ?? level,
+          " &Reference[Spell Scroll]",
+          isConc ? `, ${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}` : null,
+          "</em></p>",
+          spellDescription
+        ].filterJoin("");
+    }
+    return spellDescription;
   }
 
   /* -------------------------------------------- */
