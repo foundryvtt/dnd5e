@@ -443,7 +443,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Compute modifier
     const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
-    skillData.baseValue = skillData.value;
+    skillData.effectValue = skillData.value;
     skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
     skillData.mod = abilityData?.mod ?? 0;
     skillData.prof = this.system.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
@@ -474,7 +474,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const ability = this.system.abilities[tool.ability];
       const baseBonus = simplifyBonus(tool.bonuses.check, bonusData);
       const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
-      tool.baseValue = tool.value;
+      tool.effectValue = tool.value;
       tool.bonus = baseBonus + checkBonus + checkBonusAbl;
       tool.mod = ability?.mod ?? 0;
       tool.prof = this.system.calculateAbilityCheckProficiency(tool.value, tool.ability);
@@ -1508,7 +1508,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const rollData = this.getRollData();
     const abilityId = formData?.get("ability") ?? process.ability;
     const ability = this.system.abilities?.[abilityId];
-    const prof = this.system.calculateAbilityCheckProficiency(relevant.baseValue, abilityId);
+    const prof = this.system.calculateAbilityCheckProficiency(relevant.effectValue, abilityId);
 
     let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
       mod: ability?.mod,
