@@ -119,6 +119,51 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  apply(doc, change) {
+    // Ensure changes targeting flags use the proper types
+    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(doc, change);
+
+    // Properly handle formulas that don't exist as part of the data model
+    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
+      const field = new FormulaField({ deterministic: true });
+      return { [change.key]: this.constructor.applyField(doc, change, field) };
+    }
+
+    // Handle activity-targeted changes
+    if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
+      && (doc instanceof Item) ) return this.applyActivity(doc, change);
+
+    return super.apply(doc, change);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply a change to activities on this item.
+   * @param {Item5e} item              The Item to whom this change should be applied.
+   * @param {EffectChangeData} change  The change data being applied.
+   * @returns {Record<string, *>}      An object of property paths and their updated values.
+   */
+  applyActivity(item, change) {
+    const changes = {};
+    const apply = (activity, key) => {
+      const c = this.apply(activity, { ...change, key });
+      Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
+    };
+    if ( change.key.startsWith("system.activities.") ) {
+      const [, , id, ...keyPath] = change.key.split(".");
+      const activity = item.system.activities?.get(id);
+      if ( activity ) apply(activity, keyPath.join("."));
+    } else {
+      const { type, key } = change.key.match(/activities\[(?<type>[^\]]+)]\.(?<key>.+)/)?.groups ?? {};
+      item.system.activities?.getByType(type)?.forEach(activity => apply(activity, key));
+    }
+    return changes;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static applyField(model, change, field) {
     field ??= model.schema.getField(change.key);
     change = foundry.utils.deepClone(change);
@@ -163,22 +208,6 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
 
     return super.applyField(model, change, field);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _applyLegacy(actor, change, changes) {
-    if ( this.system._applyLegacy?.(actor, change, changes) === false ) return;
-    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
-
-    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
-      const field = new FormulaField({ deterministic: true });
-      changes[change.key] = ActiveEffect5e.applyField(actor, change, field);
-      return;
-    }
-
-    super._applyLegacy(actor, change, changes);
   }
 
   /* --------------------------------------------- */

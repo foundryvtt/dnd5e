@@ -141,15 +141,31 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
   getSpellChanges() {
     const changes = [];
     const source = this.toObject();
+
+    // Override spell details
     for ( const type of ["activation", "duration", "range", "target"] ) {
       if ( !this[type].override ) continue;
       const data = source[type];
       delete data.override;
       changes.push({ key: `system.${type}`, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: JSON.stringify(data) });
     }
+
+    // Remove ignored properties
     for ( const property of this.spell.properties ) {
       changes.push({ key: "system.properties", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: `-${property}` });
     }
+
+    // Set challenge overrides
+    const challenge = this.spell.challenge;
+    if ( challenge.override && challenge.attack ) changes.push(
+      { key: "activities[attack].attack.bonus", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.attack },
+      { key: "activities[attack].attack.flat", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: true }
+    );
+    if ( challenge.override && challenge.save ) changes.push(
+      { key: "activities[save].save.dc.calculation", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: "" },
+      { key: "activities[save].save.dc.formula", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.save }
+    );
+
     return changes;
   }
 }
