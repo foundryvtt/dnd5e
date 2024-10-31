@@ -158,12 +158,12 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
     // Set challenge overrides
     const challenge = this.spell.challenge;
     if ( challenge.override && challenge.attack ) changes.push(
-      { key: "activity.attack.attack.bonus", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.attack },
-      { key: "activity.attack.attack.flat", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: true }
+      { key: "activities[attack].attack.bonus", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.attack },
+      { key: "activities[attack].attack.flat", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: true }
     );
     if ( challenge.override && challenge.save ) changes.push(
-      { key: "activity.save.save.dc.calculation", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: "" },
-      { key: "activity.save.save.dc.formula", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.save }
+      { key: "activities[save].save.dc.calculation", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: "" },
+      { key: "activities[save].save.dc.formula", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.save }
     );
 
     return changes;

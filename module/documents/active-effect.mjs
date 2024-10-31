@@ -130,7 +130,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
 
     // Handle activity-targeted changes
-    if ( (change.key.startsWith("activity.") || change.key.startsWith("system.activities."))
+    if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
       && (doc instanceof Item) ) return this.applyActivity(doc, change);
 
     return super.apply(doc, change);
@@ -146,17 +146,17 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   applyActivity(item, change) {
     const changes = {};
-    const apply = (activity, keyPath) => {
-      const c = this.apply(activity, { ...change, key: keyPath.join(".") });
+    const apply = (activity, key) => {
+      const c = this.apply(activity, { ...change, key });
       Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
     };
     if ( change.key.startsWith("system.activities.") ) {
       const [, , id, ...keyPath] = change.key.split(".");
       const activity = item.system.activities?.get(id);
-      if ( activity ) apply(activity, keyPath);
+      if ( activity ) apply(activity, keyPath.join("."));
     } else {
-      const [, type, ...keyPath] = change.key.split(".");
-      item.system.activities?.getByType(type)?.forEach(activity => apply(activity, keyPath));
+      const { type, key } = change.key.match(/activities\[(?<type>[^\]]+)]\.(?<key>.+)/)?.groups ?? {};
+      item.system.activities?.getByType(type)?.forEach(activity => apply(activity, key));
     }
     return changes;
   }
