@@ -189,8 +189,11 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     const crs = {"1/8": 0.125, "⅛": 0.125, "1/4": 0.25, "¼": 0.25, "1/2": 0.5, "½": 0.5};
     let crv = "system.details.cr";
     let cr = formData[crv];
-    cr = crs[cr] || parseFloat(cr);
-    if ( cr ) formData[crv] = cr < 1 ? cr : parseInt(cr);
+    if ( cr === "" ) formData[crv] = null;
+    else {
+      cr = crs[cr] || parseFloat(cr);
+      if ( !Number.isNaN(cr) ) formData[crv] = cr < 1 ? cr : parseInt(cr);
+    }
 
     // Parent ActorSheet update steps
     return super._updateObject(event, formData);
