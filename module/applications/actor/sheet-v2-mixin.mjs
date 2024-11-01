@@ -357,6 +357,15 @@ export default function ActorSheetV2Mixin(Base) {
           linked ? linked.name : this.actor.classes[system.sourceClass]?.name,
           item.labels.components.vsm
         ].filterJoin(" &bull; ");
+
+        ctx.dataset = {
+          itemLevel: item.system.level,
+          itemName: item.name,
+          itemSort: item.sort,
+          itemPreparationMode: item.system.preparation.mode,
+          itemPreparationPrepared: item.system.preparation.prepared,
+          linkedName: linked?.name
+        };
       }
 
       // Gear

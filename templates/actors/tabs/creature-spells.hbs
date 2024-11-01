@@ -134,10 +134,7 @@
 
                 {{!-- Spells --}}
                 <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-item-id="{{ item.id }}"
-                    data-entry-id="{{ item.id }}" data-item-level="{{ item.system.level }}" data-uuid="{{ item.uuid }}"
-                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}"
-                    data-item-preparation-mode="{{ item.system.preparation.mode }}"
-                    data-item-preparation-prepared="{{ item.system.preparation.prepared }}">
+                    data-entry-id="{{ item.id }}" data-uuid="{{ item.uuid }}" {{ dnd5e-dataset ctx.dataset }}>
 
                     <div class="item-row">
 
