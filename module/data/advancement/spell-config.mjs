@@ -53,20 +53,32 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
       for ( const activity of Object.values(itemData.system.activities ?? {}) ) {
         if ( !activity.consumption?.spellSlot ) continue;
 
-        const activityData = foundry.utils.deepClone(activity);
-        activityData.consumption.targets ??= [];
-        activityData.consumption.targets.push({ type: "itemUses", target: "", value: "1" });
+        // Create a forward activity
         if ( createForwardActivity ) {
-          activityData._id = foundry.utils.randomID();
-          activityData.name ??= game.i18n.localize(
-            CONFIG.DND5E.activityTypes[activityData.type]?.documentClass.metadata.title
-          );
-          activityData.name += ` (${game.i18n.localize("DND5E.ADVANCEMENT.SPELLCONFIG.FreeCasting").toLowerCase()})`;
-          activityData.sort = (activityData.sort ?? 0) + 1;
-          activityData.consumption.spellSlot = false;
+          const newActivity = {
+            _id: foundry.utils.randomID(),
+            type: "forward",
+            name: `${activity.name ?? game.i18n.localize(
+              CONFIG.DND5E.activityTypes[activity.type]?.documentClass.metadata.title
+            )} (${game.i18n.localize("DND5E.ADVANCEMENT.SPELLCONFIG.FreeCasting").toLowerCase()})`,
+            sort: (activity.sort ?? 0) + 1,
+            activity: {
+              id: activity._id
+            },
+            consumption: {
+              targets: [{ type: "itemUses", target: "", value: "1" }]
+            }
+          };
+          foundry.utils.setProperty(itemData, `system.activities.${newActivity._id}`, newActivity);
         }
 
-        foundry.utils.setProperty(itemData, `system.activities.${activityData._id}`, activityData);
+        // Modify existing activity
+        else {
+          const activityData = foundry.utils.deepClone(activity);
+          activityData.consumption.targets ??= [];
+          activityData.consumption.targets.push({ type: "itemUses", target: "", value: "1" });
+          foundry.utils.setProperty(itemData, `system.activities.${activityData._id}`, activityData);
+        }
       }
     }
   }
