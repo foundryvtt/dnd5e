@@ -1001,7 +1001,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( (itemData.type === "spell")
       && (this._tabs[0].active === "inventory" || this.actor.type === "vehicle") ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
-      return scroll?.toObject?.();
+      return scroll?.toObject?.() ?? false;
     }
 
     // Clean up data

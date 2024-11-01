@@ -136,7 +136,7 @@ export default class ContainerSheet extends ItemSheet5e {
     // Create any remaining items
     const toCreate = await Item5e.createWithContents(items, {
       container: this.item,
-      transformAll: itemData => itemData.type === "spell" ? Item5e.createScrollFromSpell(itemData) : itemData
+      transformAll: (itemData, options) => this._onDropSingleItem(itemData, { ...options, event })
     });
     if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder.id);
     return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.parent, keepId: true});
@@ -175,10 +175,37 @@ export default class ContainerSheet extends ItemSheet5e {
     // Otherwise, create a new item & contents in this context
     const toCreate = await Item5e.createWithContents([item], {
       container: this.item,
-      transformAll: itemData => itemData.type === "spell" ? Item5e.createScrollFromSpell(itemData) : itemData
+      transformAll: (itemData, options) => this._onDropSingleItem(itemData, { ...options, event })
     });
     if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder.id);
     return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.actor, keepId: true});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Process a single item when dropping into the container.
+   * @param {object} itemData           The item data to create.
+   * @param {object} options
+   * @param {string} options.container  ID of the container to create the items.
+   * @param {number} options.depth      Current depth of the item being created.
+   * @param {DragEvent} options.event   The concluding DragEvent which provided the drop data.
+   * @returns {Promise<object|false>}   The item data to create after processing, or false if the item should not be
+   *                                    created or creation has been otherwise handled.
+   * @protected
+   */
+  async _onDropSingleItem(itemData, { container, depth, event }) {
+    if ( itemData.type === "spell" ) {
+      const scroll = await Item5e.createScrollFromSpell(itemData);
+      return scroll?.toObject?.() ?? false;
+    }
+
+    if ( this.item.actor && (container === this.item.id) ) {
+      const result = await this.item.actor.sheet._onDropStackConsumables(itemData, { container });
+      if ( result ) return false;
+    }
+
+    return itemData;
   }
 
   /* -------------------------------------------- */

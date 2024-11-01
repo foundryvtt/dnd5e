@@ -1459,14 +1459,23 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * @callback ItemContentsTransformer
+   * @param {Item5e|object} item        Data for the item to transform.
+   * @param {object} options
+   * @param {string} options.container  ID of the container to create the items.
+   * @param {number} options.depth      Current depth of the item being created.
+   * @returns {Item5e|object|void}
+   */
+
+  /**
    * Prepare creation data for the provided items and any items contained within them. The data created by this method
    * can be passed to `createDocuments` with `keepId` always set to true to maintain links to container contents.
    * @param {Item5e[]} items                     Items to create.
    * @param {object} [context={}]                Context for the item's creation.
    * @param {Item5e} [context.container]         Container in which to create the item.
    * @param {boolean} [context.keepId=false]     Should IDs be maintained?
-   * @param {Function} [context.transformAll]    Method called on provided items and their contents.
-   * @param {Function} [context.transformFirst]  Method called only on provided items.
+   * @param {ItemContentsTransformer} [context.transformAll]    Method called on provided items and their contents.
+   * @param {ItemContentsTransformer} [context.transformFirst]  Method called only on provided items.
    * @returns {Promise<object[]>}                Data for items to be created.
    */
   static async createWithContents(items, { container, keepId=false, transformAll, transformFirst }={}) {
@@ -1480,8 +1489,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     const createItemData = async (item, containerId, depth) => {
-      let newItemData = transformAll ? await transformAll(item) : item;
-      if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData);
+      const o = { container: containerId, depth };
+      let newItemData = transformAll ? await transformAll(item, o) : item;
+      if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData, o);
       if ( !newItemData ) return;
       if ( newItemData instanceof Item ) newItemData = newItemData.toObject();
       foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
