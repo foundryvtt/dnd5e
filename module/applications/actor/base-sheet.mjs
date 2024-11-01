@@ -534,6 +534,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const recoveries = ["lr", "sr"];
     const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
     const schoolFilter = spellSchools.intersection(filters);
+    const spellcastingClasses = new Set(Object.keys(this.actor.spellcastingClasses));
+    const classFilter = spellcastingClasses.intersection(filters);
 
     return items.filter(item => {
 
@@ -556,6 +558,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
+      if ( classFilter.size && !classFilter.has(item.system.sourceClass) ) return false;
       if ( filters.has("prepared") ) {
         if ( alwaysPrepared.includes(item.system.preparation?.mode) ) return true;
         return item.system.preparation?.prepared;

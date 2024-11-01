@@ -86,6 +86,9 @@
             {{#each config.spellSchools}}
             <option value="{{ @key }}">{{ label }}</option>
             {{/each}}
+            {{#each actor.spellcastingClasses}}
+            <option value="{{ @key }}">{{ name }}</option>
+            {{/each}}
         </datalist>
     </item-list-controls>
 
