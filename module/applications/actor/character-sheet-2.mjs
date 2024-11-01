@@ -54,7 +54,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
     { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
-    { tab: "bastion", label: "Bastion", icon: "fas fa-chess-rook" }
+    { tab: "bastion", label: "DND5E.FACILITY.Bastion", icon: "fas fa-chess-rook" }
   ];
 
   /**
@@ -508,8 +508,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     const { index } = event.target.closest("[data-index]")?.dataset ?? {};
     const facility = this.actor.items.get(facilityId);
     if ( !facility || !prop || (index === undefined) ) return;
-    const value = foundry.utils.getProperty(facility, prop).filter((_, i) => i != index);
-    return facility.update({ [prop]: value });
+    let { value } = foundry.utils.getProperty(facility, prop);
+    value = value.filter((_, i) => i != index);
+    return facility.update({ [`${prop}.value`]: value });
   }
 
   /* -------------------------------------------- */
@@ -941,6 +942,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /** @inheritDoc */
   canExpand(item) {
-    return !["background", "race"].includes(item.type) && super.canExpand(item);
+    return !["background", "race", "facility"].includes(item.type) && super.canExpand(item);
   }
 }

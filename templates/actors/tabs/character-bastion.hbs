@@ -21,7 +21,7 @@
             <ul class="unlist">
             {{#each defenders}}
             <li class="defender" data-action="viewOccupant" data-actor-uuid="{{ uuid }}" data-tooltip="{{ name }}"
-                data-facility-id="{{ facility }}" data-prop="system.defenders.value" data-index="{{ @key }}">
+                data-facility-id="{{ facility }}" data-prop="system.defenders" data-index="{{ @key }}">
                 <img src="{{ img }}" alt="{{ name }}">
                 {{#if @root.editable}}
                 <a class="deletion-control" data-action="deleteOccupant"
