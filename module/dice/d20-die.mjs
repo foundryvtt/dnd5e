@@ -68,6 +68,7 @@ export default class D20Die extends Die {
    */
   applyAdvantage(advantageMode) {
     this.options.advantageMode = advantageMode;
+    this.modifiers.findSplice(m => ["kh", "kl"].includes(m));
     if ( advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.NORMAL ) this.number = 1;
     else {
       const isAdvantage = advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
