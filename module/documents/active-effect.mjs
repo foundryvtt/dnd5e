@@ -213,6 +213,23 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _applyAdd(actor, change, current, delta, changes) {
+    if ( current instanceof Set ) {
+      const handle = v => {
+        const neg = v.replace(/^\s*-\s*/, "");
+        if ( neg !== v ) current.delete(neg);
+        else current.add(v);
+      };
+      if ( Array.isArray(delta) ) delta.forEach(item => handle(item));
+      else handle(delta);
+      return;
+    }
+    super._applyAdd(actor, change, current, delta, changes);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _applyLegacy(actor, change, changes) {
     if ( this.system._applyLegacy?.(actor, change, changes) === false ) return;
     super._applyLegacy(actor, change, changes);
