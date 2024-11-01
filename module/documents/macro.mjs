@@ -89,7 +89,7 @@ function getMacroTarget(name, documentType) {
 export function rollItem(itemName, { activityName }={}) {
   let target = getMacroTarget(itemName, "Item");
   if ( activityName ) target = target?.system.activities?.getName(activityName);
-  return target?.use();
+  return target?.use({ legacy: false });
 }
 
 /* -------------------------------------------- */
