@@ -2407,7 +2407,7 @@
                 {
                   "number": 2,
                   "denomination": 6,
-                  "bonus": 6,
+                  "bonus": "@mod",
                   "types": [
                     "bludgeoning"
                   ],
@@ -2426,7 +2426,7 @@
             "save": {
               "ability": "dex",
               "dc": {
-                "calculation": "",
+                "calculation": "str",
                 "formula": "19"
               }
             },
