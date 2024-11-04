@@ -26,6 +26,7 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @property {object} progress
  * @property {number} progress.value              The number of days' progress made towards completing the order.
  * @property {number} progress.max                The number of days required to complete the order.
+ * @property {string} progress.order              The order that is currently being executed.
  * @property {string} size                        The size category of the facility.
  * @property {object} trade
  * @property {FacilityOccupants} trade.creatures  The trade facility's stocked creatures.
@@ -58,10 +59,11 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
         max: new NumberField({ required: true, integer: true, positive: true })
       }),
       level: new NumberField({ required: true, integer: true, positive: true, initial: 5 }),
-      order: new StringField({ required: true, nullable: false, blank: true }),
+      order: new StringField({ required: true }),
       progress: new SchemaField({
         value: new NumberField({ required: true, integer: true, min: 0, nullable: false, initial: 0 }),
-        max: new NumberField({ required: true, integer: true, positive: true })
+        max: new NumberField({ required: true, integer: true, positive: true }),
+        order: new StringField({ required: true })
       }),
       size: new StringField({ initial: "cramped", blank: false, nullable: false, required: true }),
       trade: new SchemaField({
@@ -93,6 +95,15 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
     const config = CONFIG.DND5E.facilities.types[this.type.value];
     this.type.label = config?.subtypes?.[this.type.subtype] ?? config?.label;
 
+    // Price
+    if ( this.type.value === "basic" ) {
+      const { value, days } = CONFIG.DND5E.facilities.sizes[this.size];
+      this.price = { value, days };
+    }
+
+    // Squares
+    this.squares = CONFIG.DND5E.facilities.sizes[this.size].squares;
+
     // Progress
     if ( this.progress.max ) {
       const { value, max } = this.progress;
@@ -120,7 +131,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
     context.singleDescription = true;
     context.subtitles = [
       { label: this.type.label },
-      { label: CONFIG.DND5E.facilities.sizes[this.size] }
+      { label: CONFIG.DND5E.facilities.sizes[this.size].label }
     ];
     context.parts = ["dnd5e.details-facility"];
   }

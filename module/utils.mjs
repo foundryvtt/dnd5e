@@ -490,6 +490,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs",
     "systems/dnd5e/templates/actors/parts/biography-textbox.hbs",
+    "systems/dnd5e/templates/actors/tabs/character-bastion.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
     "systems/dnd5e/templates/actors/tabs/creature-features.hbs",

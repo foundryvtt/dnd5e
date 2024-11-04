@@ -84,7 +84,6 @@
         width: var(--tab-full-width);
         height: 40px;
         position: relative;
-        display: flex;
         align-items: center;
         background: var(--dnd5e-color-black);
         color: var(--dnd5e-color-gold);
@@ -92,6 +91,8 @@
         border: 1px solid transparent;
         transition: all 250ms ease;
         flex: none;
+
+        &:not([hidden]) { display: flex; }
 
         i { font-size: var(--font-size-14); }
 
@@ -593,7 +594,7 @@
         content: "";
         position: absolute;
         block-size: 100%;
-        inline-size: calc(var(--bar-percentage) - var(--border-width));
+        inline-size: var(--bar-percentage);
         box-shadow: 0 0 6px var(--dnd5e-shadow-45);
         clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
         border-radius: 4px;

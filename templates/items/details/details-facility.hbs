@@ -9,12 +9,27 @@
     {{ formField fields.type.fields.subtype value=source.type.subtype choices=facilitySubtypes }}
 
     {{!-- Size --}}
-    {{ formField fields.size value=source.size choices=config.facilities.sizes }}
+    {{ formField fields.size value=source.size choices=config.facilities.sizes labelAttr="label" }}
 
     {{!-- Level --}}
+    {{#if (eq source.type.value "basic")}}
     {{ formField fields.level value=source.level }}
+    {{/if}}
 
     {{#if (eq source.type.value "special")}}
+    {{!-- Properties --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.FACILITY.Properties" }}</label>
+        <div class="form-fields">
+
+            {{!-- Level --}}
+            {{ formField fields.level value=source.level label="DND5E.Level" localize=true classes="label-top" }}
+
+            {{!-- Order --}}
+            {{ formField fields.order value=source.order classes="label-top" options=orders.available blank="" }}
+        </div>
+    </div>
+
     {{!-- Occupants --}}
     <div class="form-group split-group">
         <label>{{ localize "DND5E.FACILITY.Occupants" }}</label>
@@ -34,12 +49,11 @@
 
 </fieldset>
 
-{{#if (eq source.type.value "special")}}
 <fieldset>
     <legend>{{ localize "DND5E.FACILITY.Orders.Label" }}</legend>
 
-    {{!-- Order --}}
-    {{ formField fields.order value=source.order choices=config.facilities.orders blank="" }}
+    {{!-- Executing --}}
+    {{ formField fields.progress.fields.order value=source.progress.order options=orders.executable blank="" }}
 
     {{!-- Progress --}}
     <div class="form-group split-group">
@@ -54,7 +68,6 @@
         </div>
     </div>
 </fieldset>
-{{/if}}
 
 {{#if (and (eq source.type.value "special") (eq source.order "craft"))}}
 <fieldset>
