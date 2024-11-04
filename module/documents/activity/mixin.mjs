@@ -284,8 +284,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
      * @param {Activity} activity                     Activity being activated.
      * @param {ActivityUseConfiguration} usageConfig  Configuration data for the activation.
      * @param {ActivityUsageResults} results          Final details on the activation.
+     * @returns {boolean}  Explicitly return `false` to prevent any subsequent actions from being triggered.
      */
-    Hooks.callAll("dnd5e.postUseActivity", activity, usageConfig, results);
+    if ( Hooks.call("dnd5e.postUseActivity", activity, usageConfig, results) === false ) return results;
 
     if ( "dnd5e.useItem" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -295,6 +296,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       const { config, options } = this._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
       Hooks.callAll("dnd5e.itemUsageConsumption", item, config, options, results.templates, results.effects, null);
     }
+
+    // Trigger any primary action provided by this activity
+    activity._triggerSubsequentActions(usageConfig, results);
 
     return results;
   }
@@ -943,6 +947,16 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   async _finalizeUsage(config, results) {
     results.templates = config.create?.measuredTemplate ? await this.#placeTemplate() : [];
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger a primary activation action defined by the activity (such as opening the attack dialog for attack rolls).
+   * @param {ActivityUseConfiguration} config  Configuration data for the activation.
+   * @param {ActivityUsageResults} results     Final details on the activation.
+   * @protected
+   */
+  async _triggerSubsequentActions(config, results) {}
 
   /* -------------------------------------------- */
   /*  Rolling                                     */
