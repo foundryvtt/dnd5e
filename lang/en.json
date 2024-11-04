@@ -1799,6 +1799,19 @@
 "DND5E.Loot.Treasure": "Treasure",
 "DND5E.Flaws": "Flaws",
 "DND5E.FormulaCannotContainDiceError": "{name} formula cannot contain dice expressions.",
+
+"DND5E.FORWARD": {
+  "Title": "Forward",
+  "FIELDS": {
+    "activity": {
+      "label": "Triggered Activity"
+    }
+  },
+  "Warning": {
+    "NoActivity": "Linked activity must be configured before Forward activity can be used."
+  }
+},
+
 "DND5E.EffectCreate": "Create Effect",
 "DND5E.EffectToggle": "Toggle Effect",
 "DND5E.EffectEdit": "Edit Effect",

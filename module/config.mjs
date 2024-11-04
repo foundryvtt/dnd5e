@@ -3815,6 +3815,9 @@ DND5E.activityTypes = {
   enchant: {
     documentClass: activities.EnchantActivity
   },
+  forward: {
+    documentClass: activities.ForwardActivity
+  },
   heal: {
     documentClass: activities.HealActivity
   },
