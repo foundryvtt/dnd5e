@@ -348,8 +348,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( (userId !== game.user.id) || !this.parent.isEmbedded ) return;
 
     // If item has any Cast activities, create locally cached copies of the spells
-    const spells = (await Promise.all(this.activities.getByType("cast").map(a => a.getCachedSpellData())))
-      .filter(_ => _);
+    const spells = (await Promise.all(
+      this.activities.getByType("cast").map(a => !a.cachedSpell && a.getCachedSpellData())
+    )).filter(_ => _);
     if ( spells.length ) this.parent.actor.createEmbeddedDocuments("Item", spells);
   }
 

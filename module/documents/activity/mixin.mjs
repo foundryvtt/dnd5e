@@ -404,7 +404,9 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @param {ActivityConsumptionDescriptor} consumed  Data on the consumption that occurred.
    */
   async refund(consumed) {
-    const updates = { activity: {}, actor: {}, item: [] };
+    const updates = {
+      activity: {}, actor: {}, create: consumed.deleted ?? [], delete: consumed.created ?? [], item: []
+    };
     for ( const { keyPath, delta } of consumed.actor ?? [] ) {
       const value = foundry.utils.getProperty(this.actor, keyPath) - delta;
       if ( !Number.isNaN(value) ) updates.actor[keyPath] = value;
@@ -440,6 +442,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   async #applyUsageUpdates(updates) {
     this._mergeActivityUpdates(updates);
 
+    // Ensure no existing items are created again & no non-existent items try to be deleted
+    updates.create = updates.create?.filter(i => !this.actor.items.has(i));
+    updates.delete = updates.delete?.filter(i => this.actor.items.has(i));
+
     // Create the consumed flag
     const getDeltas = (document, updates) => {
       updates = foundry.utils.flattenObject(updates);
@@ -464,9 +470,14 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     };
     if ( foundry.utils.isEmpty(consumed.actor) ) delete consumed.actor;
     if ( foundry.utils.isEmpty(consumed.item) ) delete consumed.item;
+    if ( updates.create?.length ) consumed.created = updates.create;
+    if ( updates.delete?.length ) consumed.deleted = updates.delete.map(i => this.actor.items.get(i).toObject());
 
     // Update documents with consumption
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
+    if ( !foundry.utils.isEmpty(updates.create) ) {
+      await this.actor.createEmbeddedDocuments("Item", updates.create, { keepId: true });
+    }
     if ( !foundry.utils.isEmpty(updates.delete) ) await this.actor.deleteEmbeddedDocuments("Item", updates.delete);
     if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
 
@@ -668,6 +679,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @typedef {object} ActivityUsageUpdates
    * @property {object} activity  Updates applied to activity that performed the activation.
    * @property {object} actor     Updates applied to the actor that performed the activation.
+   * @property {object[]} create  Full data for Items to create (with IDs maintained).
    * @property {string[]} delete  IDs of items to be deleted from the actor.
    * @property {object[]} item    Updates applied to items on the actor that performed the activation.
    * @property {Roll[]} rolls     Any rolls performed as part of the activation.
@@ -683,7 +695,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @protected
    */
   async _prepareUsageUpdates(config, { returnErrors=false }={}) {
-    const updates = { activity: {}, actor: {}, delete: [], item: [], rolls: [] };
+    const updates = { activity: {}, actor: {}, create: [], delete: [], item: [], rolls: [] };
     if ( config.consume === false ) return updates;
     const errors = [];
 
@@ -719,6 +731,11 @@ export default Base => class extends PseudoDocumentMixin(Base) {
           updates.delete.push(...results.delete);
           updates.item.push(...results.item);
           updates.rolls.push(...results.rolls);
+          // Mark this item for deletion if it is linked to a cast activity that will be deleted
+          if ( updates.delete.includes(linkedActivity.item.id)
+            && (this.item.getFlag("dnd5e", "cachedFor") === linkedActivity.relativeUUID) ) {
+            updates.delete.push(this.item.id);
+          }
         } else if ( results?.length ) {
           errors.push(...results);
         }
@@ -906,11 +923,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         }
       }
     }, message);
-
-    // If the Item was destroyed in the process, embed a copy of its data
-    if ( !this.actor?.items.has(this.item.id) ) {
-      foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.item.data", this.item.toObject());
-    }
 
     /**
      * A hook event that fires before an activity usage card is created.
