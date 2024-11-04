@@ -1,3 +1,4 @@
+import { localizedKeybinding } from "../../utils.mjs";
 import Application5e from "../api/application.mjs";
 
 /**
@@ -92,8 +93,9 @@ export default class ActivityChoiceDialog extends Application5e {
   /** @inheritDoc */
   async _prepareContext(options) {
     let controlHint;
-    if ( game.settings.get("dnd5e", "controlHints") ) {
-      controlHint = game.i18n.localize("DND5E.Controls.Activity.FastForwardHint");
+    const key = localizedKeybinding("skipDialogNormal");
+    if ( game.settings.get("dnd5e", "controlHints") && key ) {
+      controlHint = game.i18n.format("DND5E.Controls.Activity.FastForwardHint", { key });
       controlHint = controlHint.replace(
         "<left-click>",
         `<img src="systems/dnd5e/icons/svg/mouse-left.svg" alt="${game.i18n.localize("DND5E.Controls.LeftClick")}">`
