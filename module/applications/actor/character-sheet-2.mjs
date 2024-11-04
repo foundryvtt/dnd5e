@@ -509,7 +509,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     const facility = this.actor.items.get(facilityId);
     if ( !facility || !prop || (index === undefined) ) return;
     let { value } = foundry.utils.getProperty(facility, prop);
-    value = value.filter((_, i) => i != index);
+    value = value.filter((_, i) => i !== Number(index));
     return facility.update({ [`${prop}.value`]: value });
   }
 

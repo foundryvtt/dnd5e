@@ -84,7 +84,6 @@
         width: var(--tab-full-width);
         height: 40px;
         position: relative;
-        display: flex;
         align-items: center;
         background: var(--dnd5e-color-black);
         color: var(--dnd5e-color-gold);
@@ -92,6 +91,8 @@
         border: 1px solid transparent;
         transition: all 250ms ease;
         flex: none;
+
+        &:not([hidden]) { display: flex; }
 
         i { font-size: var(--font-size-14); }
 
