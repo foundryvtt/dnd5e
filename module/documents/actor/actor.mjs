@@ -3405,7 +3405,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
 
-    const isHpUpdate = !!data.system?.attributes?.hp
+    const isHpUpdate = !!data.system?.attributes?.hp;
 
     if ( userId === game.userId ) {
       if ( isHpUpdate ) await this.updateBloodied(options);
