@@ -873,29 +873,30 @@ async function rollDamage(event) {
   const target = event.target.closest(".roll-link");
   const { formula, damageType } = target.dataset;
 
-  const isHealing = damageType in CONFIG.DND5E.healingTypes;
-  const title = game.i18n.localize(`DND5E.${isHealing ? "Healing" : "Damage"}Roll`);
   const rollConfig = {
-    rollConfigs: [{
-      parts: [formula],
-      type: damageType
-    }],
-    flavor: title,
     event,
-    title,
-    messageData: {
-      "flags.dnd5e": {
-        messageType: "roll",
-        roll: { type: "damage" },
-        targets: getTargetDescriptors()
+    hookNames: ["damage"],
+    rolls: [{ parts: [formula], options: { type: damageType } }]
+  };
+
+  const messageConfig = {
+    create: true,
+    data: {
+      flags: {
+        dnd5e: {
+          messageType: "roll",
+          roll: { type: "damage" },
+          targets: getTargetDescriptors()
+        }
       },
+      flavor: game.i18n.localize(`DND5E.${damageType in CONFIG.DND5E.healingTypes ? "Healing" : "Damage"}Roll`),
       speaker: ChatMessage.implementation.getSpeaker()
     }
   };
 
-  if ( Hooks.call("dnd5e.preRollDamage", undefined, rollConfig) === false ) return;
-  const roll = await damageRoll(rollConfig);
-  if ( roll ) Hooks.callAll("dnd5e.rollDamage", undefined, roll);
+  const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, {}, messageConfig);
+  if ( !rolls?.length ) return;
+  Hooks.callAll("dnd5e.rollDamageV2", rolls);
 }
 
 /* -------------------------------------------- */
