@@ -28,7 +28,7 @@ export async function create5eMacro(dropData, slot) {
       }
       foundry.utils.mergeObject(macroData, {
         name: effectData.name,
-        img: effectData.icon,
+        img: effectData.img,
         command: `dnd5e.documents.macro.toggleEffect("${effectData.name}")`,
         flags: {"dnd5e.effectMacro": true}
       });
