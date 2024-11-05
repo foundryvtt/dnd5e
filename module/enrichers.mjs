@@ -419,7 +419,7 @@ function enrichLookup(config, fallback, options) {
     return null;
   }
 
-  const data = options.relativeTo?.getRollData();
+  const data = options.rollData ?? options.relativeTo?.getRollData();
   let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
   if ( value && style ) {
     if ( style === "capitalize" ) value = value.capitalize();
@@ -429,6 +429,7 @@ function enrichLookup(config, fallback, options) {
 
   const span = document.createElement("span");
   span.classList.add("lookup-value");
+  if ( !value && (options.documents === false) ) return null;
   if ( !value ) span.classList.add("not-found");
   span.innerText = value ?? keyPath;
   return span;
