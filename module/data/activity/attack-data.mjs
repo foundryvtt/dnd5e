@@ -288,7 +288,7 @@ export default class AttackActivityData extends BaseActivityData {
       // Add the ammunition's damage
       if ( ammo.damage.base.formula ) {
         const basePartIndex = rollConfig.rolls.findIndex(i => i.base);
-        const damage = ammo.damage.base.clone();
+        const damage = ammo.damage.base.clone(ammo.damage.base);
         const rollData = this.getRollData();
 
         // If mode is "replace" and base part is present, replace the base part
@@ -322,7 +322,7 @@ export default class AttackActivityData extends BaseActivityData {
 
     // Swap base damage for versatile if two-handed attack is made on versatile weapon
     if ( this.item.system.isVersatile && (rollConfig.attackMode === "twoHanded") ) {
-      const versatile = this.item.system.damage.versatile.clone();
+      const versatile = this.item.system.damage.versatile.clone(this.item.system.damage.versatile);
       versatile.base = true;
       versatile.denomination ||= damage.steppedDenomination();
       versatile.number ||= damage.number;
