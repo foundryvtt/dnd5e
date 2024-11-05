@@ -424,6 +424,8 @@ Hooks.once("i18nInit", () => {
       },
       DND5E: {
         LanguagesExotic: game.i18n.localize("DND5E.LanguagesExoticLegacy"),
+        LongRestHint: game.i18n.localize("DND5E.LongRestHintLegacy"),
+        LongRestHintGroup: game.i18n.localize("DND5E.LongRestHintGroupLegacy"),
         TargetRadius: game.i18n.localize("DND5E.TargetRadiusLegacy"),
         TraitArmorPlural: foundry.utils.mergeObject(
           _fallback.DND5E?.TraitArmorLegacyPlural ?? {},
