@@ -28,7 +28,7 @@ class EnchantmentRegisty {
     }
     return Array.from(EnchantmentRegisty.#appliedEnchantments.get(uuid) ?? [])
       .map(uuid => fromUuidSync(uuid))
-      .filter(i => i);
+      .filter(effect => effect?.isAppliedEnchantment);
   }
 
   /* -------------------------------------------- */
