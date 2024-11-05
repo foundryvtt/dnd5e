@@ -1,5 +1,4 @@
 import CompendiumBrowser from "./applications/compendium-browser.mjs";
-import EnchantActivity from "./documents/activity/enchant.mjs";
 
 /* -------------------------------------------- */
 /*  Enchantments                                */
@@ -22,17 +21,14 @@ class EnchantmentRegisty {
    */
   static applied(uuid) {
     const source = fromUuidSync(uuid);
-    if ( source instanceof EnchantActivity ) {
-      return Array.from(EnchantmentRegisty.#appliedEnchantments.get(uuid) ?? [])
-        .map(uuid => fromUuidSync(uuid))
-        .filter(i => i);
-    }
     if ( source instanceof Item ) {
       return source.system.activities?.getByType("enchant")
         .map(a => EnchantmentRegisty.applied(a.uuid))
         .flat() ?? [];
     }
-    return [];
+    return Array.from(EnchantmentRegisty.#appliedEnchantments.get(uuid) ?? [])
+      .map(uuid => fromUuidSync(uuid))
+      .filter(i => i);
   }
 
   /* -------------------------------------------- */
