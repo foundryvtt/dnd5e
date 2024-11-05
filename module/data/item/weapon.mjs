@@ -290,7 +290,7 @@ export default class WeaponData extends ItemDataModel.mixin(
    * @type {FormSelectOption[]}
    */
   get ammunitionOptions() {
-    if ( !this.parent.actor ) return [];
+    if ( !this.parent.actor || !this.properties.has("amm") ) return [];
     return this.parent.actor.itemTypes.consumable
       .filter(i => (i.system.type.value === "ammo")
         && (!this.ammunition?.type || (i.system.type.subtype === this.ammunition.type)))

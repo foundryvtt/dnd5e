@@ -113,7 +113,8 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       target: targets.length === 1 ? targets[0].ac : undefined
     }, config);
 
-    const ammunitionOptions = [{ value: "", label: "" }, ...(this.item.system.ammunitionOptions ?? [])];
+    const ammunitionOptions = this.item.system.ammunitionOptions ?? [];
+    if ( ammunitionOptions.length ) ammunitionOptions.unshift({ value: "", label: "" });
     if ( rollConfig.ammunition === undefined ) rollConfig.ammunition = ammunitionOptions?.[1]?.value;
     else if ( !ammunitionOptions?.find(m => m.value === rollConfig.ammunition) ) {
       rollConfig.ammunition = ammunitionOptions?.[0]?.value;
