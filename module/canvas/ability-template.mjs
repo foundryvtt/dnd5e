@@ -63,6 +63,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
           height: target.height,
           adjustedSize: target.type === "radius"
         },
+        item: activity.item.uuid,
         origin: activity.uuid,
         spellLevel: rollData.item.level
       } }
