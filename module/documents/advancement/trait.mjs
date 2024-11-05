@@ -241,11 +241,11 @@ export default class TraitAdvancement extends Advancement {
     // display all remaining choices as an option
     if ( this.configuration.allowReplacements && (unfilteredLength > available.length) ) {
       const rep = this.representedTraits();
-      return {
+      if ( rep.size === 1 ) return {
         choices: choices.filter(this.representedTraits().map(t => `${t}:*`), { inplace: false }),
         label: game.i18n.format("DND5E.AdvancementTraitChoicesRemaining", {
           count: unfilteredLength,
-          type: Trait.traitLabel(rep.size === 1 ? rep.first() : null, unfilteredLength)
+          type: Trait.traitLabel(rep.first())
         })
       };
       // TODO: This works well for types without categories like skills where it is primarily intended,

@@ -92,6 +92,7 @@ export default class TraitConfig extends AdvancementConfig {
     }, {});
 
     const rep = this.advancement.representedTraits();
+    context.disableAllowReplacements = rep.size > 1;
     const traitConfig = rep.size === 1 ? CONFIG.DND5E.traits[rep.first()] : null;
     if ( traitConfig ) {
       context.default.title = traitConfig.labels.title;
