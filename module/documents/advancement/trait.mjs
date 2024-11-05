@@ -245,7 +245,7 @@ export default class TraitAdvancement extends Advancement {
         choices: choices.filter(this.representedTraits().map(t => `${t}:*`), { inplace: false }),
         label: game.i18n.format("DND5E.AdvancementTraitChoicesRemaining", {
           count: unfilteredLength,
-          type: Trait.traitLabel(rep.first())
+          type: Trait.traitLabel(rep.first(), unfilteredLength)
         })
       };
       // TODO: This works well for types without categories like skills where it is primarily intended,
