@@ -327,7 +327,7 @@ export default class ItemListControlsElement extends HTMLElement {
       for ( const item of this.list.querySelectorAll(".item") ) {
         const { grouped, ungrouped } = item.dataset;
         const section = sections[group ? grouped : ungrouped];
-        section.appendChild(item);
+        section?.appendChild(item);
       }
     }
     this._applyFilters();
