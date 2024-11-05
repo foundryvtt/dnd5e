@@ -238,6 +238,9 @@ export default class AttackActivityData extends BaseActivityData {
     const rollData = this.getRollData();
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
+    let actionType = this.actionType;
+    if ( (actionType === "mwak") && attackMode?.startsWith("thrown") ) actionType = "rwak";
+
     const weapon = this.item.system;
     const ammo = this.actor?.items.get(ammunition)?.system;
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
@@ -246,7 +249,7 @@ export default class AttackActivityData extends BaseActivityData {
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
-      actorBonus: this.actor?.system.bonuses?.[this.actionType]?.attack,
+      actorBonus: this.actor?.system.bonuses?.[actionType]?.attack,
       situational
     }, rollData);
 
