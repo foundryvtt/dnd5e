@@ -348,6 +348,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       level: this.relevantLevel,
       mod: rollData.mod,
       origin: this.item.uuid,
+      activity: this.id,
       profile: profile._id
     };
 
