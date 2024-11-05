@@ -604,10 +604,10 @@
       "enabled": true,
       "range": 60,
       "brightness": 0,
-      "visionMode": "basic",
+      "visionMode": "darkvision",
       "color": null,
-      "attenuation": 0.1,
-      "saturation": 0,
+      "attenuation": 0,
+      "saturation": -1,
       "contrast": 0
     },
     "detectionModes": [],
@@ -623,7 +623,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -5332,7 +5332,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.0.0",
     "createdTime": 1725036838772,
-    "modifiedTime": 1725992447260,
+    "modifiedTime": 1730842351839,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!4Jsv5vYaJ1atUEDV"
