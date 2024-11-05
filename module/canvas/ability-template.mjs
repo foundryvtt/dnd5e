@@ -238,7 +238,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     const now = Date.now(); // Apply a 20ms throttle
     if ( now - this.#moveTime <= 20 ) return;
     const center = event.data.getLocalPosition(this.layer);
-    const updates = canvas.templates.getSnappedPoint(center);
+    const updates = this.getSnappedPosition(center);
 
     // Adjust template size to take hovered token into account if `adjustedSize` is set
     const baseDistance = this.document.flags.dnd5e?.dimensions?.size;
