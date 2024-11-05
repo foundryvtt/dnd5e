@@ -845,7 +845,9 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   if ( attr.startsWith(".") && actor ) {
-    const item = fromUuidSync(attr, { relative: actor });
+    // TODO: Remove `strict: false` when https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
+    // Only necessary when opening the token config for an actor in a compendium
+    const item = fromUuidSync(attr, { relative: actor, strict: false });
     return item?.name ?? attr;
   }
 
