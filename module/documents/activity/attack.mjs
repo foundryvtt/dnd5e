@@ -61,7 +61,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
 
   /** @override */
   async _triggerSubsequentActions(config, results) {
-    this.rollAttack({ event: config.event });
+    this.rollAttack({ event: config.event }, {}, { data: { "flags.dnd5e.originatingMessage": results.message?.id } });
   }
 
   /* -------------------------------------------- */
