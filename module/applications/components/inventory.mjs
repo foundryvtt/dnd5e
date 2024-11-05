@@ -48,6 +48,8 @@ export default class InventoryElement extends HTMLElement {
       });
     }
 
+    this.querySelectorAll("input").forEach(e => e.addEventListener("focus", () => e.select()));
+
     // Bind activity menu to child to work around lack of stopImmediatePropagation in ContextMenu#bind
     new ContextMenu5e(this.querySelector(".items-list"), ".activity-row[data-activity-id]", [], {
       onOpen: this._onOpenContextMenu.bind(this)
