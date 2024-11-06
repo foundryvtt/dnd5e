@@ -129,7 +129,7 @@ export default class AttackActivityData extends BaseActivityData {
     let damageParts = source.system.damage?.parts ?? [];
     const hasBase = (source.type === "weapon")
       || ((source.type === "consumable") && (source.system?.type?.value === "ammo"));
-    if ( hasBase && damageParts.length ) {
+    if ( hasBase && damageParts.length && !source.system.damage?.base ) {
       const [base, ...rest] = damageParts;
       source.system.damage.parts = [base];
       damageParts = rest;

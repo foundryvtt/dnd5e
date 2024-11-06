@@ -138,9 +138,8 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( "base" in (source.damage ?? {}) ) return;
     const systemData = { system: { scaling: { mode: "none" } } };
     if ( source.damage?.parts?.[0] ) {
-      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts?.[0]);
+      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts.shift());
       if ( source.damage.base.bonus === "@mod" ) source.damage.base.bonus = "";
-      delete source.damage.parts;
     }
     if ( foundry.utils.getType(source.damage?.versatile) === "string" ) {
       source.damage.versatile = BaseActivityData.transformDamagePartData(systemData, [source.damage?.versatile, ""]);
