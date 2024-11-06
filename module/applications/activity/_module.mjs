@@ -13,4 +13,5 @@ export {default as UtilitySheet} from "./utility-sheet.mjs";
 export {default as ActivityChoiceDialog} from "./activity-choice-dialog.mjs";
 export {default as ActivityUsageDialog} from "./activity-usage-dialog.mjs";
 export {default as EnchantUsageDialog} from "./enchant-usage-dialog.mjs";
+export {default as OrderUsageDialog} from "./order-usage-dialog.mjs";
 export {default as SummonUsageDialog} from "./summon-usage-dialog.mjs";

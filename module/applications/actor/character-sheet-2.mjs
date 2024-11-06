@@ -466,6 +466,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       case "removeFavorite": this._onRemoveFavorite(event); break;
       case "spellcasting": this._onToggleSpellcasting(event); break;
       case "toggleInspiration": this._onToggleInspiration(); break;
+      case "useFacility": this._onUseFacility(event); break;
       case "useFavorite": this._onUseFavorite(event); break;
       case "viewOccupant": this._onViewOccupant(event); break;
     }
@@ -708,6 +709,20 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /* -------------------------------------------- */
 
   /**
+   * Handle using a facility.
+   * @param {PointerEvent} event  The triggering event.
+   * @returns {Promise|void}
+   * @protected
+   */
+  _onUseFacility(event) {
+    const { facilityId } = event.target.closest("[data-facility-id]")?.dataset ?? {};
+    const facility = this.actor.items.get(facilityId);
+    return facility?.use({ legacy: false, chooseActivity: true, event });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle using a favorited item.
    * @param {PointerEvent} event  The triggering event.
    * @returns {Promise|void}
@@ -740,12 +755,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     // TODO: Consider batching compendium lookups. Most occupants are likely to all be from the same compendium.
     for ( const facility of Object.values(this.actor.itemTypes.facility) ) {
       const { id, img, labels, name, system } = facility;
-      const { craft, defenders, hirelings, progress, size, trade, type } = system;
+      const { craft, defenders, free, hirelings, progress, size, trade, type } = system;
       const subtitle = [CONFIG.DND5E.facilities.sizes[size].label];
-      if ( trade.stock.max ) subtitle.push(`${trade.stock.value} &sol; ${trade.stock.max}`);
+      if ( trade.stock.max ) subtitle.push(`${trade.stock.value ?? 0} &sol; ${trade.stock.max}`);
       const context = {
-        id, labels, name, progress,
-        craft: craft ? await fromUuid(craft) : null,
+        id, labels, name, free, progress,
+        craft: craft.item ? await fromUuid(craft.item) : null,
         creatures: await this._prepareFacilityOccupants(trade.creatures),
         defenders: await this._prepareFacilityOccupants(defenders),
         executing: CONFIG.DND5E.facilities.orders[progress.order]?.icon,
@@ -755,7 +770,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         subtitle: subtitle.join(" &bull; ")
       };
       allDefenders.push(...context.defenders.map(({ actor }) => {
-        if ( !actor ) return;
+        if ( !actor ) return null;
         const { img, name, uuid } = actor;
         return { img, name, uuid, facility: facility.id };
       }).filter(_ => _));
@@ -766,12 +781,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     context.defenders = allDefenders;
     context.facilities = { basic: { chosen: basic }, special: { chosen: special } };
     ["basic", "special"].forEach(type => {
+      const facilities = context.facilities[type];
       const config = CONFIG.DND5E.facilities.advancement[type];
       let [, available] = Object.entries(config).reverse().find(([level]) => {
         return level <= this.actor.system.details.level;
       }) ?? [];
-      available = (available ?? 0) - context.facilities[type].chosen.length;
-      context.facilities[type].available = Array.fromRange(Math.max(0, available)).map(() => {
+      facilities.value = facilities.chosen.filter(({ free }) => (type === "basic") || !free).length;
+      facilities.max = available ?? 0;
+      available = (available ?? 0) - facilities.value;
+      facilities.available = Array.fromRange(Math.max(0, available)).map(() => {
         return { label: `DND5E.FACILITY.AvailableFacility.${type}.free` };
       });
     });

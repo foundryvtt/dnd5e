@@ -1,0 +1,21 @@
+<div class="dnd5e2 chat-card activation-card">
+
+    {{!-- Description --}}
+    <p class="order-description">{{{ description }}}</p>
+
+    {{!-- Supplements --}}
+    {{#each supplements}}
+    <p class="supplement">{{{ this }}}</p>
+    {{/each}}
+
+    {{!-- Buttons --}}
+    {{#if buttons}}
+    {{#each buttons}}
+    <div class="card-buttons">
+        <button type="button" {{ dnd5e-dataset dataset }}>
+            {{{ icon }}} <span>{{{ label }}}</span>
+        </button>
+    </div>
+    {{/each}}
+    {{/if}}
+</div>

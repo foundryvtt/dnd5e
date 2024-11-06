@@ -170,10 +170,14 @@ export default class EquipmentData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.preparePhysicalData();
     this.armor.base = this._source.armor.value ?? 0;
     this.armor.value = this.armor.base + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
+    this.type.identifier = this.type.value === "shield"
+      ? CONFIG.DND5E.shieldIds[this.type.baseItem]
+      : CONFIG.DND5E.armorIds[this.type.baseItem];
 
     const labels = this.parent.labels ??= {};
     labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";

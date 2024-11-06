@@ -1201,7 +1201,14 @@
 
       .roster { grid-area: a; }
       .facilities.basic { grid-area: b; }
-      .facilities.special { grid-area: c; }
+
+      .facilities.special {
+        grid-area: c;
+        h3 {
+          > span { line-height: 1; }
+          .counter { margin-left: auto; }
+        }
+      }
     }
 
     .contents > section ul {
@@ -1236,8 +1243,9 @@
       }
     }
 
-    :is(.roster, .occupant-slot, .item-slot) img {
+    .roster img {
       border: none;
+      border-radius: 3px;
       width: 100%;
       height: 100%;
       max-width: unset;
@@ -1289,7 +1297,6 @@
       }
 
       .facility-header {
-        cursor: pointer;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -1298,7 +1305,10 @@
         .name-stacked { flex: 1; }
         .title { font-size: var(--font-size-13); }
         .slots { flex: none; }
-        &:hover .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
+        .name-stacked.rollable {
+          cursor: pointer;
+          &:hover .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
+        }
       }
 
       .facility-progress {
@@ -1316,23 +1326,7 @@
         & + .facility-header { margin-top: -4px; }
       }
 
-      .slots {
-        display: flex;
-        gap: 4px;
-      }
-
-      .slot {
-        --slot-size: 32px;
-        flex: 0 0 var(--slot-size);
-        height: var(--slot-size);
-        width: var(--slot-size);
-        border: var(--dnd5e-border-gold);
-        border-radius: 3px;
-        overflow: hidden;
-        background: var(--dnd5e-background-card);
-
-        &.empty { box-shadow: inset 0 0 3px var(--dnd5e-shadow-45); }
-      }
+      .facility-occupants { padding-inline: 8px; }
 
       .order-slot {
         --icon-size: 22px;
@@ -1351,36 +1345,12 @@
         }
       }
 
-      .facility-occupants {
-        padding-inline: 8px;
-        flex-wrap: wrap;
-      }
-
-      .occupant-slot {
-        --slot-size: 26px;
-        overflow: visible;
-        cursor: pointer;
-
-        &.empty {
-          display: inline-grid;
-          place-content: center;
-
-          &::before {
-            font-family: var(--font-awesome);
-            font-weight: bold;
-            opacity: .15;
-          }
-        }
-
-        &.hireling.empty::before { content: "\f007"; }
-        &.defender.empty::before { content: "\f132"; }
-        &.creature.empty::before { content: "\f7ab"; }
-      }
+      .occupant-slot { --slot-size: 26px; }
 
       > :last-child { padding-bottom: 8px; }
     }
 
-    .defender, .slot {
+    .defender {
       position: relative;
 
       .deletion-control {

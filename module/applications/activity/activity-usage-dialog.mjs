@@ -170,7 +170,6 @@ export default class ActivityUsageDialog extends Dialog5e {
       case "concentration": return this._prepareConcentrationContext(context, options);
       case "consumption": return this._prepareConsumptionContext(context, options);
       case "creation": return this._prepareCreationContext(context, options);
-      case "footer": return this._prepareFooterContext(context, options);
       case "scaling": return this._prepareScalingContext(context, options);
     }
     return context;
@@ -435,7 +434,7 @@ export default class ActivityUsageDialog extends Dialog5e {
    * @param {FormDataExtended} formData  Data from the submitted form.
    */
   static async #onSubmitForm(event, form, formData) {
-    const submitData = this._prepareSubmitData(event, formData);
+    const submitData = await this._prepareSubmitData(event, formData);
     await this._processSubmitData(event, submitData);
   }
 
@@ -449,7 +448,7 @@ export default class ActivityUsageDialog extends Dialog5e {
    */
   static async #onUse(event, target) {
     const formData = new FormDataExtended(this.element.querySelector("form"));
-    const submitData = this._prepareSubmitData(event, formData);
+    const submitData = await this._prepareSubmitData(event, formData);
     foundry.utils.mergeObject(this.#config, submitData);
     this.#used = true;
     this.close();
@@ -461,9 +460,9 @@ export default class ActivityUsageDialog extends Dialog5e {
    * Perform any pre-processing of the form data to prepare it for updating.
    * @param {SubmitEvent} event          Triggering submit event.
    * @param {FormDataExtended} formData  Data from the submitted form.
-   * @returns {object}
+   * @returns {Promise<object>}
    */
-  _prepareSubmitData(event, formData) {
+  async _prepareSubmitData(event, formData) {
     const submitData = foundry.utils.expandObject(formData.object);
     if ( foundry.utils.hasProperty(submitData, "spell.slot") ) {
       const level = this.actor.system.spells?.[submitData.spell.slot]?.level ?? 0;

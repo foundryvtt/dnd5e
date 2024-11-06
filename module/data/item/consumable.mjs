@@ -134,6 +134,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.preparePhysicalData();
     if ( !this.type.value ) return;
     const config = CONFIG.DND5E.consumableTypes[this.type.value];
     if ( config ) {
@@ -249,6 +250,21 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getCraftCost(options={}) {
+    const { days, gold } = await super.getCraftCost(options);
+    const { consumable, magic } = CONFIG.DND5E.crafting;
+    const { rarity } = this;
+    if ( !this.properties.has("mgc") || !(rarity in magic) ) return { days, gold };
+    const costs = magic[rarity];
+    return {
+      days: Math.floor(costs.days * consumable.days),
+      gold: Math.floor(costs.gold * consumable.gold)
+    };
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

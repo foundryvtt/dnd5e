@@ -50,7 +50,7 @@ export default class ForwardSheet extends ActivitySheet {
     context.activityOptions = [
       { value: "", label: "" },
       ...this.item.system.activities.contents
-        .filter(a => a.type !== "forward")
+        .filter(a => (a.type !== "forward") && (CONFIG.DND5E.activityTypes[a.type] !== false))
         .map(activity => ({ value: activity.id, label: activity.name }))
     ];
     return context;

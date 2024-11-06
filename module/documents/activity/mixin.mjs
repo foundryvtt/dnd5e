@@ -27,7 +27,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
 
   /**
    * Configuration information for this PseudoDocument.
-   * @type {PseudoDocumentsMetadata}
+   * @type {ActivityMetadata}
    */
   static metadata = Object.freeze({
     name: "Activity",
@@ -50,8 +50,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( fields.damage?.fields.parts ) {
       this._localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE.FIELDS.damage.parts"]);
     }
-    this._localizeSchema(fields.consumption.fields.targets.element, ["DND5E.CONSUMPTION.FIELDS.consumption.targets"]);
-    this._localizeSchema(fields.uses.fields.recovery.element, ["DND5E.USES.FIELDS.uses.recovery"]);
+    if ( fields.consumption ) {
+      this._localizeSchema(fields.consumption.fields.targets.element, ["DND5E.CONSUMPTION.FIELDS.consumption.targets"]);
+    }
+    if ( fields.uses ) this._localizeSchema(fields.uses.fields.recovery.element, ["DND5E.USES.FIELDS.uses.recovery"]);
   }
 
   /* -------------------------------------------- */

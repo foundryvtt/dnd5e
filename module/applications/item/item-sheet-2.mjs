@@ -135,7 +135,9 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     }));
 
     // Activities
-    context.activities = (activities ?? []).map(({ _id: id, name, img, sort }) => ({
+    context.activities = (activities ?? []).filter(a => {
+      return CONFIG.DND5E.activityTypes[a.type]?.configurable !== false;
+    }).map(({ _id: id, name, img, sort }) => ({
       id, name, sort,
       img: { src: img, svg: img?.endsWith(".svg") }
     }));
@@ -152,8 +154,10 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       }, { available: [], executable: [] });
     }
 
-    if ( craft ) {
-      const crafting = await fromUuid(craft);
+    if ( (type?.value === "special") && ((order === "craft") || (order === "harvest")) ) {
+      context.canCraft = true;
+      context.isHarvesting = order === "harvest";
+      const crafting = await fromUuid(craft.item);
       if ( crafting ) {
         context.craft = {
           img: crafting.img,

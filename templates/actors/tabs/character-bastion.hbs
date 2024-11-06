@@ -55,20 +55,23 @@
         </section>
 
         {{!-- Special Facilities --}}
+        {{#with facilities.special}}
         <section class="facilities special">
             <h3 class="icon">
                 <i class="fas fa-building-columns"></i>
                 <span class="roboto-upper">{{ localize "DND5E.FACILITY.Types.Special.Label.other" }}</span>
+                <span class="counter">{{ value }} &sol; {{ max }}</span>
             </h3>
             <ul class="unlist">
-                {{#each facilities.special.chosen}}
+                {{#each chosen}}
                     {{> ".facility" }}
                 {{/each}}
-                {{#each facilities.special.available}}
+                {{#each available}}
                 <li class="facility empty roboto-upper">{{ localize label }}</li>
                 {{/each}}
             </ul>
         </section>
+        {{/with}}
 
     </section>
 
@@ -99,7 +102,7 @@
     </div>
     {{/if}}
     <div class="facility-header">
-        <div class="name-stacked">
+        <div class="name-stacked {{ @root.rollableClass }}" data-action="useFacility">
             <span class="title">{{ name }}</span>
             <span class="subtitle">{{{ subtitle }}}</span>
         </div>
