@@ -165,8 +165,8 @@ export default class AttackActivityData extends BaseActivityData {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    this.attack.type.value ||= this.item.system.attackType ?? "";
-    this.attack.type.classification ||= this.item.system.attackClassification ?? "";
+    this.attack.type.value ||= this.item.system.attackType ?? "melee";
+    this.attack.type.classification ||= this.item.system.attackClassification ?? "weapon";
   }
 
   /* -------------------------------------------- */
