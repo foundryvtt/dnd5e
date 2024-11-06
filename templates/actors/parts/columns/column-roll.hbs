@@ -3,9 +3,7 @@
     <span class="value">{{ dnd5e-formatModifier ctx.toHit }}</span>
     {{else if ctx.save.ability}}
     <div class="stacked">
-        <span class="ability">
-            {{ lookup (lookup @root.config.abilities ctx.save.ability) "abbreviation" }}
-        </span>
+        <span class="ability">{{ ctx.save.ability }}</span>
         <span class="value">{{ ctx.save.dc.value }}</span>
     </div>
     {{/if}}
