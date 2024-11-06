@@ -2848,6 +2848,10 @@
       "hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
     },
     "match": {
+      "ability": {
+        "label": "Match Ability",
+        "hint": "Specific ability to use when when matching attacks and save DCs."
+      },
       "attacks": {
         "label": "Match Attacks",
         "hint": "Modify to hit values on the summoned creature's attacks to match that of the summoner."

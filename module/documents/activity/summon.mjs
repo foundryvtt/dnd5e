@@ -479,7 +479,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
 
       // Match attacks
       if ( this.match.attacks && item.system.hasAttack ) {
-        const ability = this.item.abilityMod ?? rollData.attributes?.spellcasting;
+        const ability = this.ability ?? this.item.abilityMod ?? rollData.attributes?.spellcasting;
         const actionType = item.system.activities.getByType("attack")[0].actionType;
         const typeMapping = { mwak: "msak", rwak: "rsak" };
         const parts = [
@@ -500,7 +500,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
 
       // Match saves
       if ( this.match.saves && item.hasSave ) {
-        let dc = rollData.attributes.spelldc;
+        let dc = rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spelldc;
         if ( this.item.type === "spell" ) {
           const ability = this.item.system.availableAbilities?.first();
           if ( ability ) dc = rollData.abilities[ability]?.dc ?? dc;
