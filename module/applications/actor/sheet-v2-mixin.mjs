@@ -432,7 +432,7 @@ export default function ActorSheetV2Mixin(Base) {
         minute: "DND5E.TimeMinuteAbbr",
         hour: "DND5E.TimeHourAbbr",
         day: "DND5E.TimeDayAbbr"
-      }[activation.type];
+      }[activation?.type || ""];
 
       // Limited Uses
       uses = { ...(uses ?? {}) };

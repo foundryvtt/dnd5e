@@ -2036,6 +2036,112 @@ DND5E.currencies = {
 preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
+
+/**
+ * @typedef CraftingConfiguration
+ * @property {CraftingCostsMultiplier} consumable     Discounts for crafting a magical consumable.
+ * @property {Record<string, CraftingCosts>} magic    Magic item crafting costs.
+ * @property {CraftingCostsMultiplier} mundane        Multipliers for crafting mundane items.
+ * @property {CraftingCosts} potionOfHealing          Crafting costs for a potion of healing.
+ * @property {Record<number, CraftingCosts>} scrolls  Crafting costs for spell scrolls.
+ */
+
+/**
+ * @typedef CraftingCostsMultiplier
+ * @property {number} days  The days multiplier.
+ * @property {number} gold  The gold multiplier.
+ */
+
+/**
+ * @typedef CraftingCosts
+ * @property {number} days  The number of days required to craft the item, not including its base item.
+ * @property {number} gold  The amount of gold required for the raw materials, not including the base item.
+ */
+
+/**
+ * Configuration data for crafting costs.
+ * @type {CraftingConfiguration}
+ */
+DND5E.crafting = {
+  consumable: {
+    days: .5,
+    gold: .5
+  },
+  magic: {
+    common: {
+      days: 5,
+      gold: 50
+    },
+    uncommon: {
+      days: 10,
+      gold: 200
+    },
+    rare: {
+      days: 50,
+      gold: 2_000
+    },
+    veryRare: {
+      days: 125,
+      gold: 20_000
+    },
+    legendary: {
+      days: 250,
+      gold: 100_000
+    }
+  },
+  mundane: {
+    days: .1,
+    gold: .5
+  },
+  potionOfHealing: {
+    days: 1,
+    gold: 25
+  },
+  scrolls: {
+    0: {
+      days: 1,
+      gold: 15
+    },
+    1: {
+      days: 1,
+      gold: 25
+    },
+    2: {
+      days: 3,
+      gold: 100
+    },
+    3: {
+      days: 5,
+      gold: 150
+    },
+    4: {
+      days: 10,
+      gold: 1_000
+    },
+    5: {
+      days: 25,
+      gold: 1_500
+    },
+    6: {
+      days: 40,
+      gold: 10_000
+    },
+    7: {
+      days: 50,
+      gold: 12_500
+    },
+    8: {
+      days: 60,
+      gold: 15_000
+    },
+    9: {
+      days: 120,
+      gold: 50_000
+    }
+  }
+};
+
+/* -------------------------------------------- */
 /*  Damage                                      */
 /* -------------------------------------------- */
 
@@ -3820,6 +3926,9 @@ DND5E.activityTypes = {
   },
   heal: {
     documentClass: activities.HealActivity
+  },
+  order: {
+    documentClass: activities.OrderActivity
   },
   save: {
     documentClass: activities.SaveActivity

@@ -183,6 +183,41 @@
       &::before { content: "\21"; }
     }
   }
+  [data-application-part=order] {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .description {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--dnd5e-font-roboto-condensed);
+    font-size: var(--font-size-16);
+  }
+  fieldset.harvesting {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    > ul { flex: 1 }
+
+    .quantity {
+      flex: 0 0 60px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .separator { color: var(--color-text-dark-5); }
+    }
+  }
+
+  .animals .animal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 /* ---------------------------------- */
@@ -221,5 +256,16 @@
       width: 24px;
       height: 24px;
     }
+  }
+}
+
+/* ---------------------------------- */
+/*  Chat Cards                        */
+/* ---------------------------------- */
+
+.dnd5e2.chat-card {
+  .order-description {
+    padding: 8px;
+    text-align: center;
   }
 }

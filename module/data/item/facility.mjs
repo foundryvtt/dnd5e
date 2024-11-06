@@ -2,6 +2,8 @@ import { ItemDataModel } from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
+import { staticID } from "../../utils.mjs";
+import OrderActivity from "../../documents/activity/order.mjs";
 
 const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -16,8 +18,11 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
  *
- * @property {string} craft                       The Item the facility is currently crafting.
+ * @property {object} craft
+ * @property {string} craft.item                  The Item the facility is currently crafting.
+ * @property {number} craft.quantity              The number of Items being crafted.
  * @property {FacilityOccupants} defenders        The facility's configured defenders.
+ * @property {boolean} enlargeable                Whether the facility is capable of being enlarged.
  * @property {boolean} free                       Whether the facility counts towards the character's maximum special
  *                                                facility cap.
  * @property {FacilityOccupants} hirelings        The facility's configured hirelings.
@@ -30,6 +35,11 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @property {string} size                        The size category of the facility.
  * @property {object} trade
  * @property {FacilityOccupants} trade.creatures  The trade facility's stocked creatures.
+ * @property {object} trade.pending
+ * @property {string[]} trade.pending.creatures   Creatures being bought or sold.
+ * @property {"buy"|"sell"} trade.pending.operation  The type of trade operation that was executed this turn.
+ * @property {boolean} trade.pending.stocked      Whether the inventory will be fully stocked when the order completes.
+ * @property {number} trade.pending.value         The base value transacted during the trade operation this turn.
  * @property {number} trade.profit                The trade facility's profit factor as a percentage.
  * @property {object} trade.stock
  * @property {boolean} trade.stock.stocked        Whether the facility is fully stocked.
@@ -48,11 +58,16 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
 
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      craft: new DocumentUUIDField({ type: "Item" }),
+      craft: new SchemaField({
+        // TODO: Add type constraint when v12 support is dropped.
+        item: new DocumentUUIDField(),
+        quantity: new NumberField({ required: true, integer: true, positive: true, initial: 1, nullable: false })
+      }),
       defenders: new SchemaField({
         value: new ArrayField(new DocumentUUIDField({ type: "Actor" })),
         max: new NumberField({ required: true, integer: true, positive: true })
       }),
+      enlargeable: new BooleanField({ required: true }),
       free: new BooleanField({ required: true }),
       hirelings: new SchemaField({
         value: new ArrayField(new DocumentUUIDField({ type: "Actor" })),
@@ -68,8 +83,14 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
       size: new StringField({ initial: "cramped", blank: false, nullable: false, required: true }),
       trade: new SchemaField({
         creatures: new SchemaField({
-          value: new ArrayField(new DocumentUUIDField({ type: "Actor" })),
+          value: new ArrayField(new DocumentUUIDField()),
           max: new NumberField({ required: true, integer: true, positive: true })
+        }),
+        pending: new SchemaField({
+          creatures: new ArrayField(new DocumentUUIDField()),
+          operation: new StringField({ required: true, nullable: true, options: ["buy", "sell"], initial: null }),
+          stocked: new BooleanField({ required: true }),
+          value: new NumberField({ required: true, min: 0, integer: true })
         }),
         profit: new NumberField({ required: true, min: 0, integer: true }),
         stock: new SchemaField({
@@ -86,6 +107,39 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
+  /**
+   * Create an ephemeral Order activity.
+   * @param {string} id     The static ID string for the order. Will have staticID called on it.
+   * @param {string} order  The order.
+   * @protected
+   */
+  _createOrderActivity(id, order) {
+    const activity = new OrderActivity({
+      order,
+      _id: staticID(id),
+      name: game.i18n.format("DND5E.FACILITY.Order.Issue", {
+        order: game.i18n.localize(`DND5E.FACILITY.Orders.${order}.inf`)
+      })
+    }, { parent: this.parent });
+    this.activities.set(activity.id, activity);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+
+    if ( this.type.value === "basic" ) this.enlargeable = true;
+    if ( this.size === "vast" ) this.enlargeable = false;
+
+    // Activities
+    if ( this.type.value === "special" ) this._createOrderActivity("dnd5eFacOrder", this.order);
+    if ( this.enlargeable ) this._createOrderActivity("dnd5eFacEnlarge", "enlarge");
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
@@ -98,7 +152,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
     // Price
     if ( this.type.value === "basic" ) {
       const { value, days } = CONFIG.DND5E.facilities.sizes[this.size];
-      this.price = { value, days };
+      this.price = { value, days, denomination: "gp" };
     }
 
     // Squares

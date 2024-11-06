@@ -521,26 +521,6 @@
         li { line-height: 1.5; }
       }
 
-      .facility-craft {
-        margin-block: 0;
-        > li {
-          padding: 6px;
-          border: var(--dnd5e-border-gold);
-          box-shadow: 0 0 6px var(--dnd5e-shadow-15);
-          .details { align-items: center; }
-          .control-button { --size: 24px; }
-        }
-        document-tags {
-          row-gap: 0;
-          input { font-size: var(--font-size-11); }
-        }
-        .gold-icon {
-          flex: 0 0 24px;
-          height: 24px;
-          border-width: 1px;
-        }
-      }
-
       .form-group .sep.unit {
         margin-inline: 4px;
         font-weight: bold;
@@ -591,6 +571,25 @@
       }
 
       + .activity { margin-top: 8px; }
+    }
+
+    /* Facilities */
+    fieldset.harvesting {
+      display: grid;
+      grid-template: "a a" "b c" / 1fr 60px;
+      column-gap: 8px;
+
+      > .form-group { grid-area: a; }
+      .facility-craft { grid-area: b; }
+
+      .quantity {
+        grid-area: c;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .separator { color: var(--color-text-dark-5); }
+      }
     }
 
   }

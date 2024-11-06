@@ -314,7 +314,10 @@ export default function ItemSheetV2Mixin(Base) {
 
       if ( activeTab === "activities" ) {
         return dnd5e.documents.activity.UtilityActivity.createDialog({}, {
-          parent: this.item, types: Object.keys(CONFIG.DND5E.activityTypes)
+          parent: this.item,
+          types: Object.entries(CONFIG.DND5E.activityTypes).filter(([, { documentClass }]) => {
+            return documentClass.metadata.configurable;
+          }).map(([k]) => k)
         });
       }
     }

@@ -623,6 +623,68 @@
   }
 
   /* ---------------------------------- */
+  /*  Slots                             */
+  /* ---------------------------------- */
+
+  .slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .slot {
+      --slot-size: 32px;
+      flex: 0 0 var(--slot-size);
+      height: var(--slot-size);
+      width: var(--slot-size);
+      border: var(--dnd5e-border-gold);
+      border-radius: 3px;
+      overflow: hidden;
+      background: var(--dnd5e-background-card);
+      position: relative;
+
+      &.empty { box-shadow: inset 0 0 3px var(--dnd5e-shadow-45); }
+
+      .deletion-control {
+        width: unset;
+        height: unset;
+        cursor: pointer;
+        position: absolute;
+        inset: -3px -3px 0 0;
+      }
+    }
+
+    .occupant-slot {
+      overflow: visible;
+      cursor: pointer;
+
+      &.empty {
+        display: inline-grid;
+        place-content: center;
+
+        &::before {
+          font-family: var(--font-awesome);
+          font-weight: bold;
+          opacity: .15;
+        }
+      }
+
+      &.hireling.empty::before { content: "\f007"; }
+      &.defender.empty::before { content: "\f132"; }
+      &.creature.empty::before { content: "\f7ab"; }
+    }
+
+    :is(.item-slot, .occupant-slot) img {
+      border: none;
+      border-radius: 3px;
+      width: 100%;
+      height: 100%;
+      max-width: unset;
+      object-fit: cover;
+      background: var(--dnd5e-color-iron-gray);
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Lists                             */
   /* ---------------------------------- */
 
@@ -660,6 +722,26 @@
           block-size: var(--size);
           inline-size: var(--size);
         }
+      }
+    }
+
+    &.single-item {
+      margin-block: 0;
+      > li {
+        padding: 6px;
+        border: var(--dnd5e-border-gold);
+        box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+        .details { align-items: center; }
+        .control-button { --size: 24px; }
+      }
+      document-tags {
+        row-gap: 0;
+        input { font-size: var(--font-size-11); }
+      }
+      .gold-icon {
+        flex: 0 0 24px;
+        height: 24px;
+        border-width: 1px;
       }
     }
   }

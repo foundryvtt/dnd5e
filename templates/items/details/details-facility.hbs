@@ -45,6 +45,9 @@
 
     {{!-- Free Facility --}}
     {{ formField fields.free value=source.free input=inputs.createCheckboxInput }}
+
+    {{!-- Enlargeable --}}
+    {{ formField fields.enlargeable value=source.enlargeable input=inputs.createCheckboxInput }}
     {{/if}}
 
 </fieldset>
@@ -69,13 +72,13 @@
     </div>
 </fieldset>
 
-{{#if (and (eq source.type.value "special") (eq source.order "craft"))}}
-<fieldset>
-    <legend>{{ localize "DND5E.FACILITY.Orders.craft.present" }}</legend>
+{{#if canCraft}}
+<fieldset {{#if isHarvesting}}class="harvesting"{{/if}}>
+    <legend>{{ localize (concat "DND5E.FACILITY.Orders." source.order ".present") }}</legend>
     <div class="form-group">
-        <p class="hint">{{ localize "DND5E.FACILITY.CraftHint" }}</p>
+        <p class="hint">{{ localize "DND5E.FACILITY.Craft.Hint" }}</p>
     </div>
-    <ul class="separated-list facility-craft">
+    <ul class="separated-list single-item facility-craft">
         <li>
             {{#if craft}}
             <div class="details flexrow">
@@ -90,10 +93,16 @@
                 </div>
             </div>
             {{else}}
-            {{ formInput fields.craft value=source.craft }}
+            {{ formInput fields.craft.fields.item value=source.craft.item }}
             {{/if}}
         </li>
     </ul>
+    {{#if isHarvesting}}
+    <div class="quantity">
+        <span class="separator">&times;</span>
+        {{ formInput fields.craft.fields.quantity value=source.craft.quantity }}
+    </div>
+    {{/if}}
 </fieldset>
 {{/if}}
 

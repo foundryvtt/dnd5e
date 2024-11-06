@@ -70,7 +70,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         blank: false, required: true, readOnly: true, initial: () => this.metadata.type
       }),
       name: new StringField({ initial: undefined }),
-      img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
+      img: new FilePathField({ initial: undefined, categories: ["IMAGE"], base64: false }),
       sort: new IntegerSortField(),
       activation: new ActivationField({
         override: new BooleanField()
@@ -571,10 +571,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     if ( this.duration ) DurationField.prepareData.call(this, rollData, this.labels);
     if ( this.range ) RangeField.prepareData.call(this, rollData, this.labels);
     if ( this.target ) TargetField.prepareData.call(this, rollData, this.labels);
-    UsesField.prepareData.call(this, rollData, this.labels);
+    if ( this.uses ) UsesField.prepareData.call(this, rollData, this.labels);
 
     const actor = this.item.actor;
-    if ( !actor ) return;
+    if ( !actor || !("consumption" in this) ) return;
     for ( const target of this.consumption.targets ) {
       if ( !["itemUses", "material"].includes(target.type) || !target.target ) continue;
 

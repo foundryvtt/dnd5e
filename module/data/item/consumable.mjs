@@ -252,6 +252,21 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async getCraftCost(options={}) {
+    const { days, gold } = await super.getCraftCost(options);
+    const { consumable, magic } = CONFIG.DND5E.crafting;
+    const { rarity } = this;
+    if ( !this.properties.has("mgc") || !(rarity in magic) ) return { days, gold };
+    const costs = magic[rarity];
+    return {
+      days: Math.floor(costs.days * consumable.days),
+      gold: Math.floor(costs.gold * consumable.gold)
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   getRollData(...options) {
     const data = super.getRollData(...options);
     const spellLevel = this.parent.getFlag("dnd5e", "spellLevel");

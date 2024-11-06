@@ -1306,6 +1306,7 @@
 "DND5E.DeathSaveRoll": "Roll a Death Saving Throw",
 "DND5E.DeathSavingThrow": "Death Saving Throw",
 "DND5E.DeathSaveUnnecessary": "You do not need to roll death saves because you have a positive number of hit points or have already reached 3 successes or failures.",
+"DND5E.DeductCurrencyError": "Failed to deduct {amount}{denomination} from {name}. Insufficient funds.",
 "DND5E.Default": "Default",
 "DND5E.DefaultSpecific": "Default ({default})",
 "DND5E.DefaultAbilityCheck": "Default Ability Check",
@@ -1577,13 +1578,31 @@
     }
   },
   "Bastion": "Bastion",
-  "CraftHint": "The item that this facility is currently in the process of crafting, if any.",
+  "Costs": {
+    "Automatic": "Deduct Automatically",
+    "Days": "{days} days",
+    "Label": "Costs",
+    "Manual": "Mark as Paid",
+    "Paid": "paid",
+    "Unpaid": "unpaid"
+  },
+  "Craft": {
+    "BaseItem": {
+      "Label": "Purchase Base Item",
+      "Hint": "If checked, the base item will be purchased at full price instead of crafted."
+    },
+    "Hint": "The items that this facility is currently in the process of crafting or harvesting, if any."
+  },
   "Description": "Description",
   "FIELDS": {
     "defenders": {
       "max": {
         "label": "Defenders"
       }
+    },
+    "enlargeable": {
+      "hint": "Certain special facilities may have their size categories increased for a cost.",
+      "label": "Can Be Enlarged"
     },
     "free": {
       "hint": "Free facilities do not count towards your special facilities cap.",
@@ -1648,6 +1667,10 @@
   "Goods": "Goods",
   "NoDefenders": "Bastion is undefended.",
   "Occupants": "Occupants",
+  "Order": {
+    "Execute": "Execute Order",
+    "Issue": "Issue Order: {order}"
+  },
   "Orders": {
     "Label": "Orders",
     "craft": {
@@ -1691,6 +1714,30 @@
     "vast": "Vast"
   },
   "Squares": "{squares} squares",
+  "Trade": {
+    "Buy": {
+      "Supplement": "Buy"
+    },
+    "Creatures": {
+      "Buy": "Drop animals that you wish to purchase into the slots above, and update the cost appropriately below."
+    },
+    "Price": {
+      "Label": "Base Price",
+      "Hint": "Select which stock to sell, and input the base price above."
+    },
+    "Sell": {
+      "Label": "Sell Stock",
+      "Supplement": "Sell"
+    },
+    "Stock": {
+      "Buy": "Buying",
+      "Sell": "Selling"
+    },
+    "Stocked": {
+      "Label": "Fully Stock",
+      "Hint": "Input the required cost to fully stock this facility below."
+    }
+  },
   "Types": {
     "Basic": {
       "Label": {
@@ -1739,6 +1786,9 @@
       "Sanctum": "Sanctum",
       "WarRoom": "War Room"
     }
+  },
+  "Use": {
+    "Description": "Issued the <strong>{order}</strong> order to their {link} {facilityType}."
   }
 },
 

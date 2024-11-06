@@ -606,6 +606,32 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }, []);
     }
 
+    // Price
+    if ( ("price" in this.system) && ("gp" in CONFIG.DND5E.currencies) ) {
+      const { value, denomination } = this.system.price;
+      const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
+      const { gp } = CONFIG.DND5E.currencies;
+      if ( conversion ) {
+        const multiplier = gp.conversion / conversion;
+        this.system.price.valueInGP = Math.floor(value * multiplier);
+      }
+    }
+
+    // Type
+    if ( "type" in this.system ) {
+      let identifier = "";
+      const { baseItem, value } = this.system.type;
+      switch ( this.type ) {
+        case "weapon": identifier = CONFIG.DND5E.weaponIds[baseItem]; break;
+        case "tool": identifier = CONFIG.DND5E.toolIds[baseItem]; break;
+        case "equipment":
+          if ( value === "shield" ) identifier = CONFIG.DND5E.shieldIds[baseItem];
+          else identifier = CONFIG.DND5E.armorIds[baseItem];
+          break;
+      }
+      this.system.type.identifier = identifier;
+    }
+
     // Un-owned items can have their final preparation done here, otherwise this needs to happen in the owning Actor
     if ( !this.isOwned ) this.prepareFinalAttributes();
   }
@@ -683,6 +709,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const damages = this.labels.damages = [];
     if ( !this.system.activities?.size ) return;
     for ( const activity of this.system.activities ) {
+      if ( !("activation" in activity) ) continue;
       const activationLabels = activity.activationLabels;
       if ( activationLabels ) activations.push(
         { ...activationLabels, concentrationDuration: activity.labels.concentrationDuration }
@@ -769,6 +796,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Trigger an Item usage, optionally creating a chat message with followup actions.
    * @param {ActivityUseConfiguration} config       Configuration info for the activation.
    * @param {boolean} [config.legacy=true]          Whether this is a legacy invocation, using the old signature.
+   * @param {boolean} [config.chooseActivity=false] Force the activity selection prompt unless the fast-forward modifier
+   *                                                is held.
    * @param {ActivityDialogConfiguration} dialog    Configuration info for the usage dialog.
    * @param {ActivityMessageConfiguration} message  Configuration info for the created chat message.
    * @returns {Promise<ActivityUsageResults|ChatMessage|object|void>}  Returns the usage results for the triggered
@@ -789,17 +818,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     const activities = this.system.activities?.filter(a => !this.getFlag("dnd5e", "riders.activity")?.includes(a.id));
     if ( activities?.length ) {
-      let usageConfig = config;
+      const { legacy, chooseActivity, ...activityConfig } = config;
+      let usageConfig = activityConfig;
       let dialogConfig = dialog;
       let messageConfig = message;
       let activity = activities[0];
-      if ( (activities.length > 1) && !event?.shiftKey ) activity = await ActivityChoiceDialog.create(this);
+      if ( ((activities.length > 1) || chooseActivity) && !event?.shiftKey ) {
+        activity = await ActivityChoiceDialog.create(this);
+      }
       if ( !activity ) return;
-      if ( config.legacy !== false ) {
+      if ( legacy !== false ) {
         usageConfig = {};
         dialogConfig = {};
         messageConfig = {};
-        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, dialog);
+        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, activityConfig, dialog);
       }
       return activity.use(usageConfig, dialogConfig, messageConfig);
     }

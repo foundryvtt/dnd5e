@@ -81,14 +81,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
       && !this.unidentified.description;
     if ( !fetchName && !fetchDesc ) return;
 
-    let baseItemIdentifier;
-    if ( this.parent.type === "weapon" ) baseItemIdentifier = CONFIG.DND5E.weaponIds[this.type.baseItem];
-    else if ( this.parent.type === "tool" ) baseItemIdentifier = CONFIG.DND5E.toolIds[this.type.baseItem];
-    else if ( this.parent.type === "equipment" ) {
-      if ( this.type.value === "shield" ) baseItemIdentifier = CONFIG.DND5E.shieldIds[this.type.baseItem];
-      else baseItemIdentifier = CONFIG.DND5E.armorIds[this.type.baseItem];
-    }
-    const baseItem = await Trait.getBaseItem(baseItemIdentifier ?? "", { fullItem: fetchDesc });
+    const baseItem = await Trait.getBaseItem(this.type.identifier ?? "", { fullItem: fetchDesc });
 
     // If a base item is set, fetch that and use its name/description
     if ( baseItem ) {
