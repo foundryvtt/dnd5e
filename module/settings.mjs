@@ -1,5 +1,6 @@
 import { ModuleArtConfig } from "./module-art.mjs";
 import CompendiumBrowserSourceConfig from "./applications/compendium-browser-source-config.mjs";
+import BastionConfig, { BastionSetting } from "./applications/bastion.mjs";
 
 /**
  * Register all of the system's keybindings.
@@ -406,6 +407,27 @@ export function registerSystemSettings() {
     config: false,
     type: Object,
     default: {}
+  });
+
+  // Bastions
+  game.settings.registerMenu("dnd5e", "bastionConfiguration", {
+    name: "DND5E.Bastion.Configuration.Name",
+    label: "DND5E.Bastion.Configuration.Label",
+    hint: "DND5E.Bastion.Configuration.Hint",
+    icon: "fas fa-chess-rook",
+    type: BastionConfig,
+    restricted: true
+  });
+
+  game.settings.register("dnd5e", "bastionConfiguration", {
+    name: "Bastion Configuration",
+    scope: "world",
+    config: false,
+    type: BastionSetting,
+    default: {
+      enabled: false,
+      duration: 7
+    }
   });
 
   // Primary Group
