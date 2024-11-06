@@ -18,7 +18,7 @@
     {{/unless}}
 
     {{!-- Weapon Mastery --}}
-    {{ formField fields.mastery value=source.mastery choices=config.weaponMasteries }}
+    {{ formField fields.mastery value=source.mastery choices=config.weaponMasteries labelAttr="label" }}
 
     {{!-- Weapon Properties --}}
     {{ formField fields.properties options=properties.options label="DND5E.ItemWeaponProperties" localize=true
