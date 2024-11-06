@@ -402,7 +402,10 @@ export default function ActorSheetV2Mixin(Base) {
       ctx.toHit = item.hasAttack && !isNaN(toHit) ? toHit : null;
 
       // Save
-      ctx.save = item.system.activities?.getByType("save")[0]?.save;
+      ctx.save = { ...item.system.activities?.getByType("save")[0]?.save };
+      ctx.save.ability = ctx.save.ability?.size ? ctx.save.ability.size === 1
+        ? CONFIG.DND5E.abilities[ctx.save.ability.first()]?.abbreviation
+        : game.i18n.localize("DND5E.AbbreviationDC") : null;
 
       // Activities
       ctx.activities = item.system.activities
