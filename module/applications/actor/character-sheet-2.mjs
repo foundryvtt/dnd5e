@@ -84,7 +84,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     const hp = foundry.utils.getProperty(data ?? {}, "system.attributes.hp.value");
     if ( isUpdate && (hp === 0) ) this._toggleDeathTray(true);
     const [bastion] = this.element.find('nav.tabs [data-tab="bastion"]');
-    if ( bastion ) bastion.toggleAttribute("hidden", this.object.system.details.level < 5);
+    const { enabled } = game.settings.get("dnd5e", "bastionConfiguration");
+    if ( bastion ) bastion.toggleAttribute("hidden", (this.actor.system.details.level < 5) || !enabled);
   }
 
   /* -------------------------------------------- */

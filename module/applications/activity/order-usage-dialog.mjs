@@ -37,12 +37,12 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
    * @protected
    */
   _prepareCostsContext(context, { days, gold }) {
+    const { duration } = game.settings.get("dnd5e", "bastionConfiguration");
     context.costs = {
       days: {
-        // TODO: Make bastion turn duration configurable.
         field: new NumberField({ nullable: true, integer: true, min: 0, label: "DND5E.TimeDay" }),
         name: "costs.days",
-        value: this.config.costs?.days ?? days ?? 7
+        value: this.config.costs?.days ?? days ?? duration
       },
       gold: {
         field: new NumberField({ nullable: true, integer: true, min: 0, label: "DND5E.CurrencyGP" }),
