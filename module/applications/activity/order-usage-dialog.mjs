@@ -1,6 +1,6 @@
 import ActivityUsageDialog from "./activity-usage-dialog.mjs";
 
-const { BooleanField, DocumentUUIDField, NumberField } = foundry.data.fields;
+const { BooleanField, DocumentUUIDField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Dialog for configuring the usage of an order activity.
@@ -26,6 +26,23 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare render context for the build section.
+   * @param {ApplicationRenderContext} context  Render context.
+   * @param {HandlebarsRenderOptions} options   Render options.
+   * @protected
+   */
+  _prepareBuildContext(context, options) {
+    context.build = {
+      choices: CONFIG.DND5E.facilities.sizes,
+      field: new StringField({ nullable: false, blank: false, label: "DND5E.FACILITY.FIELDS.size.label" }),
+      name: "building.size",
+      value: this.config.building?.size ?? "cramped"
+    };
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -145,6 +162,13 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
   async _prepareOrderContext(context, options) {
     if ( this.activity.order === "enlarge" ) {
       const { days, gold } = this._prepareEnlargeContext(context, options);
+      this._prepareCostsContext(context, { ...options, days, gold });
+      return;
+    }
+
+    if ( this.activity.order === "build" ) {
+      const { days, value: gold } = CONFIG.DND5E.facilities.sizes.cramped;
+      this._prepareBuildContext(context, options);
       this._prepareCostsContext(context, { ...options, days, gold });
       return;
     }
@@ -279,6 +303,18 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
   /* -------------------------------------------- */
 
   /**
+   * Prepare submission data for build orders.
+   * @param {object} submitData  Submission data.
+   * @protected
+   */
+  _prepareBuildData(submitData) {
+    const { days, value: gold } = CONFIG.DND5E.facilities.sizes[submitData.building.size];
+    Object.assign(submitData.costs, { days, gold });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare submission data for craft orders.
    * @param {object} submitData  Submission data.
    * @returns {Promise<void>}
@@ -301,6 +337,7 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
   /** @inheritDoc */
   async _prepareSubmitData(event, formData) {
     const submitData = await super._prepareSubmitData(event, formData);
+    if ( "building" in submitData ) this._prepareBuildData(submitData);
     if ( submitData.craft?.item ) await this._prepareCraftData(submitData);
     if ( "trade" in submitData ) await this._prepareTradeData(submitData);
     return submitData;

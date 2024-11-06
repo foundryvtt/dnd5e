@@ -48,6 +48,12 @@
 
     {{!-- Enlargeable --}}
     {{ formField fields.enlargeable value=source.enlargeable input=inputs.createCheckboxInput }}
+
+    {{else}}
+
+    {{!-- Built --}}
+    {{ formField fields.building.fields.built value=source.building.built input=inputs.createCheckboxInput }}
+
     {{/if}}
 
 </fieldset>
