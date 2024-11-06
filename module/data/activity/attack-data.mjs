@@ -99,7 +99,6 @@ export default class AttackActivityData extends BaseActivityData {
     // Weapon & unarmed attacks uses melee or ranged ability depending on type, or both if actor is an NPC
     const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;
     const ranged = CONFIG.DND5E.defaultAbilities.rangedAttack;
-    if ( this.actor?.type === "npc" ) return new Set([melee, ranged]);
     return new Set([this.attack.type.value === "melee" ? melee : ranged]);
   }
 

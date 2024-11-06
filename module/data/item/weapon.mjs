@@ -374,6 +374,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;
     const ranged = CONFIG.DND5E.defaultAbilities.rangedAttack;
     if ( this.properties.has("fin") ) return new Set([melee, ranged]);
+    if ( !this.attackType ) return null;
     return new Set([this.attackType === "melee" ? melee : ranged]);
   }
 
@@ -407,6 +408,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   get _typeAbilityMod() {
     const availableAbilities = this.availableAbilities;
+    if ( !availableAbilities ) return null;
     if ( availableAbilities.size === 1 ) return availableAbilities.first();
     const abilities = this.parent?.actor?.system.abilities ?? {};
     return availableAbilities.reduce((largest, ability) =>
