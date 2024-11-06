@@ -136,7 +136,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
 
     // Activities
     context.activities = (activities ?? []).filter(a => {
-      return a.metadata?.configurable;
+      return CONFIG.DND5E.activityTypes[a.type]?.configurable !== false;
     }).map(({ _id: id, name, img, sort }) => ({
       id, name, sort,
       img: { src: img, svg: img?.endsWith(".svg") }

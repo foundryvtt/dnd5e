@@ -1152,6 +1152,9 @@
     "Action": "Convert All Currency",
     "Hint": "Convert all carried currency to the highest possible denomination to reduce the amount of coinage carried by the character. Be wary, this action cannot be undone."
   },
+  "Error": {
+    "InsufficientFunds": "Failed to deduct {amount}{denomination} from {name}. Insufficient funds."
+  },
   "Transfer": {
     "Label": "Transfer",
     "Action": "Transfer Selected",
@@ -1306,7 +1309,6 @@
 "DND5E.DeathSaveRoll": "Roll a Death Saving Throw",
 "DND5E.DeathSavingThrow": "Death Saving Throw",
 "DND5E.DeathSaveUnnecessary": "You do not need to roll death saves because you have a positive number of hit points or have already reached 3 successes or failures.",
-"DND5E.DeductCurrencyError": "Failed to deduct {amount}{denomination} from {name}. Insufficient funds.",
 "DND5E.Default": "Default",
 "DND5E.DefaultSpecific": "Default ({default})",
 "DND5E.DefaultAbilityCheck": "Default Ability Check",

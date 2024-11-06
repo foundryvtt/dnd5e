@@ -563,13 +563,13 @@ export class ItemDataModel extends SystemDataModel {
     // Mundane Items
     if ( !this.properties.has("mgc") || !rarity ) {
       const { mundane } = CONFIG.DND5E.crafting;
-      const { valueInGP } = price;
+      const valueInGP = price.valueInGP ?? 0;
       return { days: Math.ceil(valueInGP * mundane.days), gold: Math.floor(valueInGP * mundane.gold) };
     }
 
     const base = await Trait.getBaseItem(type.identifier ?? "", { fullItem: true });
     if ( base && (baseItem !== "none") ) {
-      if ( baseItem === "buy" ) gold += base.system.price.valueInGP;
+      if ( baseItem === "buy" ) gold += base.system.price.valueInGP ?? 0;
       else {
         const costs = await base.system.getCraftCost();
         days += costs.days;

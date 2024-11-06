@@ -15,8 +15,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * Configuration information for Activities.
    *
    * @typedef {PseudoDocumentsMetadata} ActivityMetadata
-   * @property {boolean} configurable                     Whether the activity appears on Item sheets and is
-   *                                                      user-configurable.
    * @property {string} type                              Type name of this activity.
    * @property {string} img                               Default icon.
    * @property {string} title                             Default title.
@@ -32,7 +30,6 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @type {ActivityMetadata}
    */
   static metadata = Object.freeze({
-    configurable: true,
     name: "Activity",
     sheetClass: ActivitySheet,
     usage: {

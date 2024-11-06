@@ -1,6 +1,7 @@
 import ActivityMixin from "./mixin.mjs";
 import OrderActivityData from "../../data/activity/order-data.mjs";
 import OrderUsageDialog from "../../applications/activity/order-usage-dialog.mjs";
+import CurrencyManager from "../../applications/currency-manager.mjs";
 
 /**
  * @typedef {ActivityUseConfiguration} OrderUseConfiguration
@@ -32,7 +33,6 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    configurable: false,
     type: "order",
     img: "systems/dnd5e/icons/svg/activity/order.svg",
     title: "DND5E.FACILITY.Order.Issue",
@@ -249,6 +249,8 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
   }
 
   /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
 
   /**
    * Handle deducting currency for the order.
@@ -264,7 +266,10 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
     const config = foundry.utils.expandObject({ "data.flags.dnd5e.order": order });
     if ( method === "automatic" ) {
       try {
-        await this.actor.deductCurrency(order.costs.gold, "gp", { recursive: true, priority: "high" });
+        await CurrencyManager.deductActorCurrency(this.actor, order.costs.gold, "gp", {
+          recursive: true,
+          priority: "high"
+        });
       } catch(err) {
         ui.notifications.error(err.message);
         return;

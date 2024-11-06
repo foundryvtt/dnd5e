@@ -606,32 +606,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }, []);
     }
 
-    // Price
-    if ( ("price" in this.system) && ("gp" in CONFIG.DND5E.currencies) ) {
-      const { value, denomination } = this.system.price;
-      const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
-      const { gp } = CONFIG.DND5E.currencies;
-      if ( conversion ) {
-        const multiplier = gp.conversion / conversion;
-        this.system.price.valueInGP = Math.floor(value * multiplier);
-      }
-    }
-
-    // Type
-    if ( "type" in this.system ) {
-      let identifier = "";
-      const { baseItem, value } = this.system.type;
-      switch ( this.type ) {
-        case "weapon": identifier = CONFIG.DND5E.weaponIds[baseItem]; break;
-        case "tool": identifier = CONFIG.DND5E.toolIds[baseItem]; break;
-        case "equipment":
-          if ( value === "shield" ) identifier = CONFIG.DND5E.shieldIds[baseItem];
-          else identifier = CONFIG.DND5E.armorIds[baseItem];
-          break;
-      }
-      this.system.type.identifier = identifier;
-    }
-
     // Un-owned items can have their final preparation done here, otherwise this needs to happen in the owning Actor
     if ( !this.isOwned ) this.prepareFinalAttributes();
   }

@@ -2039,11 +2039,12 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /**
  * @typedef CraftingConfiguration
- * @property {CraftingCostsMultiplier} consumable     Discounts for crafting a magical consumable.
- * @property {Record<string, CraftingCosts>} magic    Magic item crafting costs.
- * @property {CraftingCostsMultiplier} mundane        Multipliers for crafting mundane items.
- * @property {CraftingCosts} potionOfHealing          Crafting costs for a potion of healing.
- * @property {Record<number, CraftingCosts>} scrolls  Crafting costs for spell scrolls.
+ * @property {CraftingCostsMultiplier} consumable        Discounts for crafting a magical consumable.
+ * @property {Record<string, CraftingCosts>} exceptions  Crafting costs for items that are exception to the general
+ *                                                       crafting rules, by identifier.
+ * @property {Record<string, CraftingCosts>} magic       Magic item crafting costs by rarity.
+ * @property {CraftingCostsMultiplier} mundane           Multipliers for crafting mundane items.
+ * @property {Record<number, CraftingCosts>} scrolls     Crafting costs for spell scrolls by level.
  */
 
 /**
@@ -2066,6 +2067,12 @@ DND5E.crafting = {
   consumable: {
     days: .5,
     gold: .5
+  },
+  exceptions: {
+    "potion-of-healing": {
+      days: 1,
+      gold: 25
+    }
   },
   magic: {
     common: {
@@ -2092,10 +2099,6 @@ DND5E.crafting = {
   mundane: {
     days: .1,
     gold: .5
-  },
-  potionOfHealing: {
-    days: 1,
-    gold: 25
   },
   scrolls: {
     0: {
@@ -3903,6 +3906,7 @@ preLocalize("groupTypes");
  *
  * @typedef {object} ActivityTypeConfiguration
  * @property {typeof Activity} documentClass  The activity's document class.
+ * @property {boolean} [configurable=true]    Whether the activity is editable via the UI.
  * @property {boolean} [hidden]               Should this activity type be hidden in the selection dialog?
  */
 DND5E.activityTypes = {
@@ -3928,7 +3932,8 @@ DND5E.activityTypes = {
     documentClass: activities.HealActivity
   },
   order: {
-    documentClass: activities.OrderActivity
+    documentClass: activities.OrderActivity,
+    configurable: false
   },
   save: {
     documentClass: activities.SaveActivity

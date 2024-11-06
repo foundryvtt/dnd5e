@@ -134,7 +134,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
     if ( this.size === "vast" ) this.enlargeable = false;
 
     // Activities
-    if ( this.type.value === "special" ) this._createOrderActivity("dnd5eFacOrder", this.order);
+    if ( (this.type.value === "special") && this.order ) this._createOrderActivity("dnd5eFacOrder", this.order);
     if ( this.enlargeable ) this._createOrderActivity("dnd5eFacEnlarge", "enlarge");
   }
 

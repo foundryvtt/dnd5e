@@ -90,7 +90,7 @@ export default class UsesField extends SchemaField {
    * @returns {Promise<{ updates: object, rolls: BasicRoll[] }|false>}
    */
   static async recoverUses(periods, rollData) {
-    if ( !this.uses.recovery.length ) return false;
+    if ( !this.uses?.recovery.length ) return false;
 
     // Search the recovery profiles in order to find the first matching period,
     // and then find the first profile that uses that recovery period

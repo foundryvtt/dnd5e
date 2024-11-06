@@ -64,7 +64,7 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
     context.craft = {
       legend: game.i18n.localize(`DND5E.FACILITY.Orders.${this.activity.order}.present`),
       item: {
-        field: new DocumentUUIDField({ type: "Item" }),
+        field: new DocumentUUIDField(),
         name: "craft.item",
         value: this.config.craft?.item ?? ""
       }

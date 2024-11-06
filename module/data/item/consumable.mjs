@@ -134,6 +134,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.preparePhysicalData();
     if ( !this.type.value ) return;
     const config = CONFIG.DND5E.consumableTypes[this.type.value];
     if ( config ) {

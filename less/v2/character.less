@@ -1297,7 +1297,6 @@
       }
 
       .facility-header {
-        cursor: pointer;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -1306,7 +1305,10 @@
         .name-stacked { flex: 1; }
         .title { font-size: var(--font-size-13); }
         .slots { flex: none; }
-        &:hover .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
+        .name-stacked.rollable {
+          cursor: pointer;
+          &:hover .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
+        }
       }
 
       .facility-progress {
