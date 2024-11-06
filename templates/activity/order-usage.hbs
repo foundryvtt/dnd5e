@@ -5,6 +5,18 @@
     <div class="description">{{{ description }}}</div>
     {{/if}}
 
+    {{!-- Building --}}
+    {{#if build}}
+    {{#with build}}
+    <fieldset>
+        <legend>{{ localize "DND5E.FACILITY.Orders.build.inf" }}</legend>
+
+        {{!-- Size --}}
+        {{ formField field name=name value=value choices=choices labelAttr="label" blank=false localize=true }}
+    </fieldset>
+    {{/with}}
+    {{/if}}
+
     {{!-- Crafting --}}
     {{#if craft}}
     {{#with craft}}

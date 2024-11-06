@@ -5,6 +5,8 @@ import CurrencyManager from "../../applications/currency-manager.mjs";
 
 /**
  * @typedef {ActivityUseConfiguration} OrderUseConfiguration
+ * @property {object} [building]
+ * @property {string} [building.size]            The size of facility to build.
  * @property {object} [costs]
  * @property {number} [costs.days]               The cost of executing the order, in days.
  * @property {number} [costs.gold]               The cost of executing the order, in gold.
@@ -52,6 +54,18 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
   /** @override */
   shouldHideChatButton(button, message) {
     return !this.actor.isOwner;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update building configuration.
+   * @param {OrderUseConfiguration} usageConfig  Order configuration.
+   * @param {object} updates                     Item updates.
+   * @protected
+   */
+  _finalizeBuild(usageConfig, updates) {
+    updates["system.building.size"] = usageConfig.building.size;
   }
 
   /* -------------------------------------------- */
@@ -140,6 +154,7 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
   async _finalizeUsage(usageConfig, results) {
     const updates = {};
     switch ( this.order ) {
+      case "build": this._finalizeBuild(usageConfig, updates); break;
       case "craft":
       case "harvest":
         this._finalizeCraft(usageConfig, updates);

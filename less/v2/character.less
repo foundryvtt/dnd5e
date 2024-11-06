@@ -1276,6 +1276,9 @@
         &:hover { opacity: 1; }
       }
 
+      &.disabled, &.building { filter: grayscale(1); }
+      &.disabled { pointer-events: none; }
+
       &:not(.empty) {
         border: var(--dnd5e-border-gold);
         background: var(--dnd5e-background-card);

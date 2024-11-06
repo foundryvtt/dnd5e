@@ -18,6 +18,10 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
  *
+ * @property {object} building
+ * @property {boolean} building.built             Whether the facility has been fully built. Only applicable to basic
+ *                                                facilities.
+ * @property {string} building.size               The target size for the facility to be built at.
  * @property {object} craft
  * @property {string} craft.item                  The Item the facility is currently crafting.
  * @property {number} craft.quantity              The number of Items being crafted.
@@ -58,6 +62,10 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
 
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      building: new SchemaField({
+        built: new BooleanField({ required: true }),
+        size: new StringField({ initial: "cramped", blank: false, nullable: false, required: true })
+      }),
       craft: new SchemaField({
         // TODO: Add type constraint when v12 support is dropped.
         item: new DocumentUUIDField(),
@@ -104,6 +112,22 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get compendiumBrowserFilters() {
+    return new Map([
+      ["type", {
+        label: "DND5E.FACILITY.FIELDS.type.value.label",
+        type: "set",
+        config: {
+          choices: Object.fromEntries(Object.entries(CONFIG.DND5E.facilities.types).map(([k, v]) => [k, v.label])),
+          keyPath: "system.type.value"
+        }
+      }]
+    ]);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -130,12 +154,14 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
   prepareBaseData() {
     super.prepareBaseData();
 
-    if ( this.type.value === "basic" ) this.enlargeable = true;
+    if ( this.type.value === "basic" ) this.enlargeable = this.building.built;
+    else this.building.built = true;
     if ( this.size === "vast" ) this.enlargeable = false;
 
     // Activities
     if ( (this.type.value === "special") && this.order ) this._createOrderActivity("dnd5eFacOrder", this.order);
     if ( this.enlargeable ) this._createOrderActivity("dnd5eFacEnlarge", "enlarge");
+    if ( !this.building.built ) this._createOrderActivity("dnd5eFacBuild", "build");
   }
 
   /* -------------------------------------------- */
@@ -188,5 +214,21 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
       { label: CONFIG.DND5E.facilities.sizes[this.size].label }
     ];
     context.parts = ["dnd5e.details-facility"];
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    const actor = this.parent?.parent;
+    if ( !actor ) return;
+    const { basic } = CONFIG.DND5E.facilities.advancement;
+    const [, available] = Object.entries(basic).reverse().find(([level]) => level <= actor.system.details.level);
+    const existing = actor.itemTypes.facility.filter(f => f.system.type.value === "basic").length;
+    const free = available - existing;
+    if ( free > 0 ) this.updateSource({ "building.built": true });
   }
 }

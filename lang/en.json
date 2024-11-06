@@ -1596,6 +1596,9 @@
       "free": "Add Facility"
     }
   },
+  "Build": {
+    "Unbuilt": "Unbuilt"
+  },
   "Costs": {
     "Automatic": "Deduct Automatically",
     "Days": "{days} days",
@@ -1613,6 +1616,12 @@
   },
   "Description": "Description",
   "FIELDS": {
+    "building": {
+      "built": {
+        "label": "Built",
+        "hint": "Basic facilities must be built first before they can be used."
+      }
+    },
     "defenders": {
       "max": {
         "label": "Defenders"
@@ -1691,6 +1700,10 @@
   },
   "Orders": {
     "Label": "Orders",
+    "build": {
+      "inf": "Build",
+      "present": "Building"
+    },
     "craft": {
       "inf": "Craft",
       "present": "Crafting"

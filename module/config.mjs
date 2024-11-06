@@ -516,6 +516,10 @@ DND5E.facilities = {
     special: { 5: 2, 9: 4, 13: 5, 17: 6 }
   },
   orders: {
+    build: {
+      label: "DND5E.FACILITY.Orders.build.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/build.svg"
+    },
     craft: {
       label: "DND5E.FACILITY.Orders.craft.inf",
       icon: "systems/dnd5e/icons/svg/facilities/craft.svg"
