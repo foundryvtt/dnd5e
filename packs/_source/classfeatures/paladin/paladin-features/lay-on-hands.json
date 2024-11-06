@@ -50,14 +50,14 @@
               "target": "",
               "value": "1",
               "scaling": {
-                "mode": "",
+                "mode": "amount",
                 "formula": ""
               }
             }
           ],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": true,
+            "max": "@item.uses.value"
           },
           "spellSlot": true
         },
@@ -93,23 +93,94 @@
             "choice": false,
             "special": ""
           },
-          "prompt": true,
+          "prompt": false,
           "override": false
         },
         "healing": {
           "number": null,
           "denomination": null,
           "bonus": "",
-          "types": [],
+          "types": [
+            "healing"
+          ],
           "custom": {
-            "enabled": false,
-            "formula": ""
+            "enabled": true,
+            "formula": "1"
           },
           "scaling": {
             "mode": "whole",
             "number": null,
-            "formula": ""
+            "formula": "1"
           }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "sort": 0
+      },
+      "dnd5eactivity001": {
+        "_id": "dnd5eactivity001",
+        "type": "utility",
+        "name": "Cure Disease and Poison",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "Target cannot be Undead or a Construct.",
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "5",
+              "scaling": {
+                "mode": "amount",
+                "formula": "5"
+              }
+            }
+          ],
+          "scaling": {
+            "allowed": true,
+            "max": "floor(@item.uses.value / 5)"
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "touch",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "1",
+            "type": "creature",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": false,
+          "override": false
         },
         "uses": {
           "spent": 0,
