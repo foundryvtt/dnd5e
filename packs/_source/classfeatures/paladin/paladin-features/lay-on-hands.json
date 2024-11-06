@@ -57,7 +57,7 @@
           ],
           "scaling": {
             "allowed": true,
-            "max": ""
+            "max": "@item.uses.value"
           },
           "spellSlot": true
         },
@@ -143,7 +143,7 @@
           ],
           "scaling": {
             "allowed": true,
-            "max": ""
+            "max": "floor(@item.uses.value / 5)"
           },
           "spellSlot": true
         },
