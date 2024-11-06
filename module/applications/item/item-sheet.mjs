@@ -727,7 +727,9 @@ export default class ItemSheet5e extends ItemSheet {
       options.keepOrigin = true;
       options.dnd5e = {
         enchantmentProfile: effect.id,
-        activityId: data.activityId
+        activityId: data.activityId ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
+          a.effects.some(e => e._id === effect.id)
+        )?.id
       };
     }
 
