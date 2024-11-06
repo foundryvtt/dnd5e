@@ -54,7 +54,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
     { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
-    { tab: "bastion", label: "DND5E.FACILITY.Bastion", icon: "fas fa-chess-rook" }
+    { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook" }
   ];
 
   /**
@@ -83,9 +83,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     const isUpdate = (context === "update") || (context === "updateActor");
     const hp = foundry.utils.getProperty(data ?? {}, "system.attributes.hp.value");
     if ( isUpdate && (hp === 0) ) this._toggleDeathTray(true);
+    this._toggleBastionTab();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle displaying the bastion tab when characters are eligible.
+   * @protected
+   */
+  _toggleBastionTab() {
     const [bastion] = this.element.find('nav.tabs [data-tab="bastion"]');
     const { enabled } = game.settings.get("dnd5e", "bastionConfiguration");
-    if ( bastion ) bastion.toggleAttribute("hidden", (this.actor.system.details.level < 5) || !enabled);
+    const { basic, special } = CONFIG.DND5E.facilities.advancement;
+    const threshold = Math.min(...Object.keys(basic), ...Object.keys(special));
+    if ( bastion ) bastion.toggleAttribute("hidden", (this.actor.system.details.level < threshold) || !enabled);
   }
 
   /* -------------------------------------------- */

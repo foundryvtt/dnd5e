@@ -571,6 +571,11 @@
 "DND5E.BackgroundName": "Background Name",
 
 "DND5E.Bastion": {
+  "Configuration": {
+    "Name": "Bastions",
+    "Label": "Configure Bastions",
+    "Hint": "Various configuration options for the Bastion system as presented in the DMG 2024."
+  },
   "Duration": {
     "Label": "Bastion Turn Duration (days)"
   },
@@ -578,11 +583,7 @@
     "Label": "Enable Bastion Functionality",
     "Hint": "When enabled, player characters will have access to a new Bastion tab on their character sheets when reaching level 5, and will be able to build facilities and issue orders to them."
   },
-  "Configuration": {
-    "Name": "Bastions",
-    "Label": "Configure Bastions",
-    "Hint": "Various configuration options for the Bastion system as presented in the DMG 2024."
-  }
+  "Label": "Bastion"
 },
 
 "DND5E.Biography": "Biography",
@@ -1595,7 +1596,6 @@
       "free": "Add Facility"
     }
   },
-  "Bastion": "Bastion",
   "Costs": {
     "Automatic": "Deduct Automatically",
     "Days": "{days} days",
