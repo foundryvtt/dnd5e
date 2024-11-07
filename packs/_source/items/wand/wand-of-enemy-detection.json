@@ -68,160 +68,74 @@
     ],
     "magicalBonus": null,
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
+      "8rw7aoQH53r3yP40": {
         "type": "utility",
+        "_id": "8rw7aoQH53r3yP40",
+        "sort": 0,
         "activation": {
           "type": "action",
-          "value": 1,
-          "condition": "Command word.",
-          "override": false
+          "value": null,
+          "override": false,
+          "condition": ""
         },
         "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "target": "",
+              "scaling": {}
             }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
+          ]
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "value": "60",
+          "override": false,
           "units": "ft",
           "special": "",
-          "override": false
+          "value": "60"
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft",
+            "type": ""
           },
           "affects": {
-            "count": "",
-            "type": "",
             "choice": false,
+            "count": "1",
+            "type": "enemy",
             "special": ""
           },
-          "prompt": true,
-          "override": false
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
         },
         "roll": {
-          "formula": "1d6 +1",
-          "name": "",
           "prompt": false,
-          "visible": false
+          "visible": false,
+          "name": "",
+          "formula": ""
         },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
-      },
-      "dnd5eactivity100": {
-        "_id": "dnd5eactivity100",
-        "type": "save",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "Command word.",
-          "override": false
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "value": "60",
-          "units": "ft",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "damage": {
-          "onSave": "half",
-          "parts": []
-        },
-        "save": {
-          "ability": "wis",
-          "dc": {
-            "calculation": "",
-            "formula": ""
-          }
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
+        "name": "Detect Enemy",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
@@ -233,14 +147,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037100973,
-    "modifiedTime": 1730323640927,
+    "modifiedTime": 1731015765246,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!5Rxo4K9cgpwgW9vZ"
