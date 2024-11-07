@@ -87,11 +87,15 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
-        "effects": [],
+        "effects": [
+          {
+            "_id": "7KHJyEznWKJ8rc5s"
+          }
+        ],
         "range": {
           "units": "self",
           "special": "",
@@ -124,28 +128,78 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "Become Invisible",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
     "identifier": "ring-of-invisibility"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Invisibility",
+      "img": "icons/equipment/finger/ring-faceted-silver-orange.webp",
+      "origin": "Compendium.dnd5e.items.Item.1J0dsxyKRhVXYQf5",
+      "transfer": false,
+      "_id": "7KHJyEznWKJ8rc5s",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [
+        "invisible"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.1.0",
+        "createdTime": 1731017665728,
+        "modifiedTime": 1731017671713,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!items.effects!1J0dsxyKRhVXYQf5.7KHJyEznWKJ8rc5s"
+    }
+  ],
   "folder": "5jrDZJ1U23Q9jDqB",
   "sort": 0,
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037085047,
-    "modifiedTime": 1725992478783,
+    "modifiedTime": 1731017665769,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!1J0dsxyKRhVXYQf5"
