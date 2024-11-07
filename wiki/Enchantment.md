@@ -1,4 +1,4 @@
-![Up to date as of 4.0.0](https://img.shields.io/static/v1?label=dnd5e&message=4.0.0&color=informational)
+![Up to date as of 4.1.0](https://img.shields.io/static/v1?label=dnd5e&message=4.1.0&color=informational)
 
 Enchantments are a special type of Active Effect that makes changes on the item to which they are added, rather than the actor like normal Active Effects. They are configured in much the same way as normal Active Effects, but rely on different attribute keys that are documented below.
 
@@ -30,7 +30,7 @@ system.description.value
 
 #### Changing the Name
 
-You can reference the original name using a pair of curly brackets (`{}`) and the `override` change mode (e.g. `{}, +1` for a +1 weapon).
+You can reference the original name using a pair of curly brackets (`{}`) and the `override` change mode (e.g. `{}, +1` for a +1 weapon would result in `Shortsword, +1`).
 
 | Attribute Key | Change Mode | Effect Value | Roll Data? |
 | ------------- | ----------- | ------------ | ---------- |
@@ -44,7 +44,7 @@ You can reference the original name using a pair of curly brackets (`{}`) and th
 
 #### Changing the Description
 
-You can reference the original description using a pair of curly brackets (`{}`) and the `override` change mode (e.g. `{} <p>Some more description</p>`).
+You can reference the original description using a pair of curly brackets (`{}`) and the `override` change mode (e.g. `{} <p>Some more description</p>`) or use the `add` change mode to add to the end of the existing description. Note that any added description should be written using HTML, which can be copied from an existing item using the "Source HTML" button in the description editor.
 
 | Attribute Key              | Change Mode | Effect Value | Roll Data? |
 | -------------------------- | ----------- | ------------ | ---------- |
@@ -89,7 +89,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 >
 > | Equipment Property   | Abbreviation          |
 > | -------------------- | --------------------- |
-> | Concentration        | `concentration`       |
 > | Magical              | `mgc`                 |
 > | Stealth Disadvantage | `stealthDisadvantage` |
 >
@@ -99,9 +98,8 @@ The valid effect values depend on the item type, and in the case of consumables 
 > <details>
 > <summary>Tool Properties</summary>
 >
-> | Tool Property   | Abbreviation          |
+> | Tool Property        | Abbreviation          |
 > | -------------------- | --------------------- |
-> | Concentration        | `concentration`       |
 > | Magical              | `mgc`                 |
 >
 > Source: `CONFIG.DND5E.validProperties.tool`
@@ -124,7 +122,6 @@ The valid effect values depend on the item type, and in the case of consumables 
 >
 > | Scroll Property | Abbreviation    |
 > | --------------- | --------------- |
-> | Concentration   | `concentration` |
 > | Magical         | `mgc`           |
 > | Ritual          | `ritual`        |
 > | Somatic         | `somatic`       |
@@ -383,3 +380,37 @@ Since damage is both a roll formula and damage type, you need to include both wh
 >
 > Source: `CONFIG.DND5E.damageTypes`
 > </details>
+
+## Activity Changes
+
+Enchantments can also target changes to item activities based on their type. This is done using the format `activities[<type>].<change path>`.
+
+### Attack Activity Examples
+
+#### Changing the Attack Ability
+
+| Attribute Key                       | Change Mode | Effect Value | Roll Data? |
+| ----------------------------------- | ----------- | ------------ | ---------- |
+| `activities[attack].attack.ability` | Override    | `[string]`   | No         |
+
+#### Setting Flat To Hit
+
+| Attribute Key                     | Change Mode | Effect Value | Roll Data? |
+| --------------------------------- | ----------- | ------------ | ---------- |
+| `activities[attack].attack.bonus` | Override    | `[formula]`  | Yes        |
+| `activities[attack].attack.flat`  | Override    | `true        | No         |
+
+#### Lowering the Critical Threshold
+
+| Attribute Key                                  | Change Mode | Effect Value | Roll Data? |
+| ---------------------------------------------- | ----------- | ------------ | ---------- |
+| `activities[attack].attack.critical.threshold` | Downgrade   | `[number]`   | No         |
+
+### Save Activity Examples
+
+#### Setting a Specific Save DC
+
+| Attribute Key                          | Change Mode | Effect Value | Roll Data? |
+| -------------------------------------- | ----------- | ------------ | ---------- |
+| `activities[save].save.dc.calculation` | Override    |              | No         |
+| `activities[save].save.dc.formula`     | Override    | `[formula]`  | Yes        |
