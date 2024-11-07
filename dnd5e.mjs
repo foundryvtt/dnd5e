@@ -86,6 +86,9 @@ Hooks.once("init", function() {
   game.dnd5e.moduleArt = new ModuleArt();
   registerModuleData();
 
+  // Configure bastions
+  game.dnd5e.bastion = new documents.Bastion();
+
   // Configure tooltips
   game.dnd5e.tooltips = new Tooltips5e();
 
@@ -461,6 +464,9 @@ Hooks.once("ready", function() {
 
   // Chat message listeners
   documents.ChatMessage5e.activateListeners();
+
+  // Bastion initialization
+  game.dnd5e.bastion.initializeUI();
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;

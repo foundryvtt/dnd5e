@@ -1,6 +1,7 @@
 import { ModuleArtConfig } from "./module-art.mjs";
 import CompendiumBrowserSourceConfig from "./applications/compendium-browser-source-config.mjs";
 import BastionConfig, { BastionSetting } from "./applications/bastion.mjs";
+import * as Bastion from "./documents/actor/bastion.mjs";
 
 /**
  * Register all of the system's keybindings.
@@ -425,9 +426,11 @@ export function registerSystemSettings() {
     config: false,
     type: BastionSetting,
     default: {
+      button: false,
       enabled: false,
       duration: 7
-    }
+    },
+    onChange: () => game.dnd5e.bastion.initializeUI()
   });
 
   // Primary Group

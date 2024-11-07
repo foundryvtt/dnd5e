@@ -1,0 +1,42 @@
+<div class="dnd5e2 chat-card bastion-card">
+
+    {{!-- Orders --}}
+    {{#if orders.length}}
+    <ul class="unlist order-summary">
+        {{#each orders}}
+        <li>{{{ localize "DND5E.Bastion.Summary.Order" link=contentLink order=order }}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p class="order-description">{{ localize "DND5E.Bastion.Summary.NoOrders" }}</p>
+    {{/if}}
+
+    {{!-- Items --}}
+    {{#if items.length}}
+    <ul class="unlist item-summary">
+        {{#each items}}
+        <li class="item-tooltip" data-uuid="{{ uuid }}" data-quantity="{{ quantity }}" data-action="viewItem"
+            data-tooltip="<section class='loading' data-uuid='{{ uuid }}'><i class='fas fa-spinner fa-spin-pulse'></i></section>">
+            <img src="{{ img }}" alt="{{ name }}">
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
+    {{!-- Supplements --}}
+    {{#each supplements}}
+    <p class="supplement">{{{ this }}}</p>
+    {{/each}}
+
+    {{!-- Buttons --}}
+    {{#if buttons.length}}
+    <div class="card-buttons">
+        {{#each buttons}}
+        <button type="button" {{ dnd5e-dataset dataset }}>
+            {{{ icon }}} <span>{{{ label }}}</span>
+        </button>
+        {{/each}}
+    </div>
+    {{/if}}
+
+</div>
