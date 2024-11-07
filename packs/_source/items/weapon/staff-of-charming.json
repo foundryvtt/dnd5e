@@ -122,7 +122,7 @@
           ]
         },
         "_id": "jQpPiY9JypFhSabm",
-        "sort": 0,
+        "sort": 100000,
         "activation": {
           "type": "action",
           "value": null,
@@ -188,7 +188,7 @@
           ]
         },
         "_id": "kyu1xW3gkZI4gPRh",
-        "sort": 0,
+        "sort": 300000,
         "activation": {
           "type": "action",
           "value": null,
@@ -254,7 +254,7 @@
           ]
         },
         "_id": "rkyJP9ExCzn3gY7I",
-        "sort": 0,
+        "sort": 400000,
         "activation": {
           "type": "action",
           "value": null,
@@ -307,7 +307,7 @@
         "type": "utility",
         "name": "Save Against Enchantment",
         "_id": "m2ld3DGVjzh1mfvQ",
-        "sort": 0,
+        "sort": 500000,
         "activation": {
           "type": "",
           "value": null,
@@ -375,7 +375,7 @@
       "qYGpiqu9mc8BzArx": {
         "type": "utility",
         "_id": "qYGpiqu9mc8BzArx",
-        "sort": 0,
+        "sort": 600000,
         "activation": {
           "type": "",
           "value": null,
@@ -438,6 +438,60 @@
         "name": "Turn Back Spell",
         "img": "",
         "appliedEffects": []
+      },
+      "5uagImprd2VO7ueb": {
+        "type": "attack",
+        "_id": "5uagImprd2VO7ueb",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": []
+        },
+        "description": {},
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "attack": {
+          "critical": {
+            "threshold": null
+          },
+          "flat": false,
+          "type": {}
+        },
+        "damage": {
+          "critical": {},
+          "includeBase": true,
+          "parts": []
+        }
       }
     },
     "attuned": false,
@@ -465,7 +519,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037143507,
-    "modifiedTime": 1729013221808,
+    "modifiedTime": 1731019499564,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!FeouSUPUlUhfgeRp"

@@ -47,8 +47,8 @@
     },
     "damage": {
       "versatile": {
-        "number": 1,
-        "denomination": 8,
+        "number": null,
+        "denomination": 0,
         "bonus": "",
         "types": [],
         "custom": {
@@ -258,25 +258,7 @@
         },
         "damage": {
           "onSave": "half",
-          "parts": [
-            {
-              "number": 1,
-              "denomination": 6,
-              "bonus": "@mod",
-              "types": [
-                "bludgeoning"
-              ],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
-            }
-          ]
+          "parts": []
         },
         "save": {
           "ability": "con",
@@ -290,6 +272,87 @@
           "recovery": []
         },
         "sort": 0
+      },
+      "48P9wGkMbuzWOOQS": {
+        "type": "damage",
+        "_id": "48P9wGkMbuzWOOQS",
+        "sort": 0,
+        "activation": {
+          "type": "",
+          "value": null,
+          "override": false,
+          "condition": "When you hit with an attack using the staff"
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": [
+            {
+              "type": "itemUses",
+              "value": "1",
+              "target": "",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "count": "",
+            "type": ""
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "damage": {
+          "critical": {
+            "allow": false
+          },
+          "parts": [
+            {
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "number": 2,
+              "denomination": 10,
+              "bonus": "",
+              "types": [
+                "necrotic"
+              ],
+              "scaling": {
+                "number": 1
+              }
+            }
+          ]
+        },
+        "name": "Wither",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
@@ -303,14 +366,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037311440,
-    "modifiedTime": 1729014371593,
+    "modifiedTime": 1731019403396,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!uHL99JKLUpTKAbz8"

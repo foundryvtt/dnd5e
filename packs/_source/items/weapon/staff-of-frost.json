@@ -117,7 +117,7 @@
           ]
         },
         "_id": "t2bjgs4Rehoss7mc",
-        "sort": 0,
+        "sort": 100000,
         "activation": {
           "type": "action",
           "value": null,
@@ -184,7 +184,7 @@
           ]
         },
         "_id": "3ozkXRFfpdGwx6zZ",
-        "sort": 0,
+        "sort": 300000,
         "activation": {
           "type": "action",
           "value": null,
@@ -250,7 +250,7 @@
           ]
         },
         "_id": "BjnMyi8sdbu0Ybrr",
-        "sort": 0,
+        "sort": 400000,
         "activation": {
           "type": "action",
           "value": null,
@@ -317,7 +317,7 @@
           ]
         },
         "_id": "LOde45eToutGhwC6",
-        "sort": 0,
+        "sort": 500000,
         "activation": {
           "type": "action",
           "value": null,
@@ -366,6 +366,60 @@
         },
         "name": "",
         "img": ""
+      },
+      "IRwrNunMhdXwXXne": {
+        "type": "attack",
+        "_id": "IRwrNunMhdXwXXne",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": []
+        },
+        "description": {},
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "attack": {
+          "critical": {
+            "threshold": null
+          },
+          "flat": false,
+          "type": {}
+        },
+        "damage": {
+          "critical": {},
+          "includeBase": true,
+          "parts": []
+        }
       }
     },
     "attuned": false,
@@ -437,7 +491,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037322364,
-    "modifiedTime": 1729013369863,
+    "modifiedTime": 1731019516799,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!xEtBeZjJnkDXojQM"

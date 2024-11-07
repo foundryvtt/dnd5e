@@ -69,86 +69,6 @@
       "mgc"
     ],
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "save",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "Must have eye contact with the target humanoid.",
-          "override": false
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "value": "30",
-          "units": "ft",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "damage": {
-          "onSave": "half",
-          "parts": []
-        },
-        "save": {
-          "ability": "wis",
-          "dc": {
-            "calculation": "",
-            "formula": "13"
-          }
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
-      },
       "9rqbuaaYgPZZKVFJ": {
         "type": "cast",
         "spell": {
@@ -239,7 +159,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037115295,
-    "modifiedTime": 1729015295030,
+    "modifiedTime": 1731019107334,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!8dfhaa1g3VDjhtm3"

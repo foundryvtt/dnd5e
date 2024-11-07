@@ -70,7 +70,7 @@
         "activation": {
           "type": "",
           "value": null,
-          "condition": "",
+          "condition": "A Light spell is cast on the robe",
           "override": false
         },
         "consumption": {
@@ -86,15 +86,15 @@
         },
         "duration": {
           "concentration": false,
-          "value": "",
-          "units": "",
+          "value": "1",
+          "units": "minute",
           "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "value": "120",
-          "units": "ft",
+          "value": "",
+          "units": "self",
           "special": "",
           "override": false
         },
@@ -125,14 +125,94 @@
           "ability": "con",
           "dc": {
             "calculation": "",
-            "formula": ""
+            "formula": "11"
           }
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "Save vs. Light",
+        "img": "",
+        "appliedEffects": []
+      },
+      "pA9Ko1PbdY79DvVb": {
+        "type": "save",
+        "activation": {
+          "type": "",
+          "value": null,
+          "condition": "A Daylight spell is cast within 5 feet of the robe",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "1",
+          "units": "minute",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "value": "",
+          "units": "self",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "self",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": []
+        },
+        "save": {
+          "ability": [
+            "con"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "15"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "sort": 0,
+        "name": "Save vs. Daylight",
+        "_id": "pA9Ko1PbdY79DvVb",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
@@ -144,14 +224,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037196157,
-    "modifiedTime": 1725992516112,
+    "modifiedTime": 1731019239452,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!U74TPNQLJZbHJyCk"
