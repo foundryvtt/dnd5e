@@ -81,10 +81,7 @@
                 {{else}}
                 <span class="value">{{ dnd5e-numberFormat system.price.value }}</span>
                 <i class="currency {{ system.price.denomination }}"
-                   {{#with (lookup config.currencies system.price.denomination) as |currency|}}
-                   style="background-image: url('{{ lookup currency "icon" }}');"
-                   aria-label="{{ lookup currency "label" }}"></i>
-                   {{/with}}
+                   aria-label="{{ lookup (lookup config.currencies system.price.denomination) "label" }}"></i>
                 {{/if}}
             </div>
             {{/if}}

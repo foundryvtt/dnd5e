@@ -71,13 +71,12 @@
         </button>
         {{#each system.currency}}
         {{#with (lookup @root.config.currencies @key) as |currency|}}
-        <label aria-label="{{ lookup currency "label" }}">
-            <i class="currency" style="background-image: url('{{ lookup currency "icon" }}');"
-               data-tooltip="{{ lookup currency "label" }}"></i>
-        {{/with}}
-            <input type="text" class="uninput" name="system.currency.{{ @key }}" value="{{ this }}"
+        <label aria-label="{{ lookup currency 'label' }}">
+            <i class="currency {{ @key }}" data-tooltip="{{ lookup currency "label" }}"></i>
+            <input type="text" class="uninput" name="system.currency.{{ @key }}" value="{{ ../this }}"
                    data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*">
         </label>
+        {{/with}}
         {{/each}}
     </section>
 

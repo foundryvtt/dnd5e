@@ -14,7 +14,7 @@
     <section class="currency">
         {{#each currency}}
         <label aria-label="{{label}}">
-            <i class="currency" style="background-image: url('{{ icon }}');" data-tooltip="{{ label }}"></i>
+            <i class="currency {{ @key }}" data-tooltip="{{ label }}"></i>
             {{numberInput value name=(concat "amount." @key) class="uninput" min=0 step=1}}
         </label>
         {{/each}}

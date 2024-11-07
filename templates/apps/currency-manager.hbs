@@ -21,8 +21,8 @@
                 {{#each currency}}
                 <label>
                     {{#with (lookup @root.CONFIG.currencies @key) as |currency|}}
-                    <i class="currency" style="background-image: url('{{ lookup currency "icon" }}');"
-                        data-tooltip="{{ lookup currency 'label' }}" aria-label="{{ lookup currency 'label' }}"></i>
+                    <i class="currency {{ @key }}" data-tooltip="{{ lookup currency 'label' }}"
+                       aria-label="{{ lookup currency 'label' }}"></i>
                     {{/with}}
                     {{numberInput null name=(concat "amount." @key) step=1}}
                 </label>

@@ -393,6 +393,20 @@ Hooks.once("setup", function() {
   // Apply custom item compendium
   game.packs.filter(p => p.metadata.type === "Item")
     .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
+
+  // Create CSS for currencies
+  const style = document.createElement("style");
+  const currencies = append => Object.entries(CONFIG.DND5E.currencies)
+    .map(([key, { icon }]) => `&.${key}${append ?? ""} { background-image: url("${icon}"); }`);
+  style.innerHTML = `
+    :is(.dnd5e2, .dnd5e2-journal) :is(i, span).currency {
+      ${currencies().join("\n")}
+    }
+    .dnd5e2 .form-group label.label-icon.currency {
+      ${currencies("::after").join("\n")}
+    }
+  `;
+  document.head.append(style);
 });
 
 /* --------------------------------------------- */
