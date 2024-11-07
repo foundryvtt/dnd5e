@@ -162,6 +162,9 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
     if ( (this.type.value === "special") && this.order ) this._createOrderActivity("dnd5eFacOrder", this.order);
     if ( this.enlargeable ) this._createOrderActivity("dnd5eFacEnlarge", "enlarge");
     if ( !this.building.built ) this._createOrderActivity("dnd5eFacBuild", "build");
+
+    // TODO: Allow order activities to be user-creatable and configurable to avoid having to hard-code this.
+    if ( this.type.subtype === "garden" ) this._createOrderActivity("dnd5eFacChange", "change");
   }
 
   /* -------------------------------------------- */

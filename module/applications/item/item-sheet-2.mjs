@@ -145,8 +145,13 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     // Facilities
     if ( this.item.type === "facility" ) {
       context.orders = Object.entries(CONFIG.DND5E.facilities.orders).reduce((obj, [value, { label, basic }]) => {
+        // TODO: More hard-coding that we can potentially avoid.
         if ( value === "build" ) {
           if ( !building.built ) obj.executable.push({ value, label });
+          return obj;
+        }
+        if ( value === "change" ) {
+          if ( type.subtype === "garden" ) obj.executable.push({ value, label });
           return obj;
         }
         if ( type.value === "basic" ) {
