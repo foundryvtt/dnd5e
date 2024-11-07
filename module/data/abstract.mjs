@@ -1,4 +1,5 @@
 import Proficiency from "../documents/actor/proficiency.mjs";
+import * as Trait from "../documents/actor/trait.mjs";
 
 /**
  * Data Model variant with some extra methods to support template mix-ins.
@@ -387,7 +388,7 @@ export class ActorDataModel extends SystemDataModel {
   getRollData({ deterministic=false }={}) {
     const data = { ...this };
     data.prof = new Proficiency(this.attributes?.prof ?? 0, 1);
-    if ( deterministic ) data.prof = data.prof.flat;
+    data.prof.deterministic = deterministic;
     return data;
   }
 }
@@ -495,15 +496,16 @@ export class ItemDataModel extends SystemDataModel {
 
   /**
    * Prepare item card template data.
-   * @param {EnrichmentOptions} enrichmentOptions  Options for text enrichment.
+   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {Activity} [enrichmentOptions.activity]     Specific activity on item to use for customizing the data.
    * @returns {Promise<object>}
    */
-  async getCardData(enrichmentOptions={}) {
+  async getCardData({ activity, ...enrichmentOptions }={}) {
     const { name, type, img } = this.parent;
     let {
       price, weight, uses, identified, unidentified, description, school, materials
     } = this;
-    const rollData = this.parent.getRollData();
+    const rollData = (activity ?? this.parent).getRollData();
     const isIdentified = identified !== false;
     const chat = isIdentified ? description.chat || description.value : unidentified?.description;
     description = game.user.isGM || isIdentified ? description.value : unidentified?.description;
@@ -515,7 +517,7 @@ export class ItemDataModel extends SystemDataModel {
       name, type, img, price, weight, uses, school, materials,
       config: CONFIG.DND5E,
       controlHints: game.settings.get("dnd5e", "controlHints"),
-      labels: foundry.utils.deepClone(this.parent.labels),
+      labels: foundry.utils.deepClone((activity ?? this.parent).labels),
       tags: this.parent.labels?.components?.tags,
       subtitle: subtitle.filterJoin(" &bull; "),
       description: {
@@ -533,7 +535,7 @@ export class ItemDataModel extends SystemDataModel {
     if ( game.user.isGM || isIdentified ) {
       context.properties.push(
         ...this.cardProperties ?? [],
-        ...Object.values(this.parent.labels.activations[0] ?? {}),
+        ...Object.values((activity ? activity?.activationLabels : this.parent.labels.activations?.[0]) ?? {}),
         ...this.equippableItemCardProperties ?? []
       );
     }
@@ -541,6 +543,44 @@ export class ItemDataModel extends SystemDataModel {
     context.properties = context.properties.filter(_ => _);
     context.hasProperties = context.tags?.length || context.properties.length;
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the cost to craft this Item.
+   * @param {object} [options]
+   * @param {"buy"|"craft"|"none"} [options.baseItem="craft"]  Ignore base item if "none". Include full base item gold
+   *                                                           price if "buy". Include base item craft costs if "craft".
+   * @returns {Promise<{ days: number, gold: number }>}
+   */
+  async getCraftCost({ baseItem="craft" }={}) {
+    let days = 0;
+    let gold = 0;
+    if ( !("price" in this) ) return { days, gold };
+    const { price, type, rarity } = this;
+
+    // Mundane Items
+    if ( !this.properties.has("mgc") || !rarity ) {
+      const { mundane } = CONFIG.DND5E.crafting;
+      const valueInGP = price.valueInGP ?? 0;
+      return { days: Math.ceil(valueInGP * mundane.days), gold: Math.floor(valueInGP * mundane.gold) };
+    }
+
+    const base = await Trait.getBaseItem(type.identifier ?? "", { fullItem: true });
+    if ( base && (baseItem !== "none") ) {
+      if ( baseItem === "buy" ) gold += base.system.price.valueInGP ?? 0;
+      else {
+        const costs = await base.system.getCraftCost();
+        days += costs.days;
+        gold += costs.gold;
+      }
+    }
+
+    const { magic } = CONFIG.DND5E.crafting;
+    if ( !(rarity in magic) ) return { days, gold };
+    const costs = magic[rarity];
+    return { days: days + costs.days, gold: gold + costs.gold };
   }
 
   /* -------------------------------------------- */

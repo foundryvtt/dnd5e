@@ -1,7 +1,7 @@
 {
   "_id": "lPsueMv4ZoXqCYf9",
   "name": "Wand of Wonder",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/wands/wand-totem.webp",
   "system": {
     "description": {
@@ -63,6 +63,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -329,9 +330,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037273704,
-    "modifiedTime": 1725992541827,
+    "modifiedTime": 1730323674675,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!lPsueMv4ZoXqCYf9"

@@ -239,7 +239,8 @@ export default class EffectsElement extends HTMLElement {
       case "create":
         return this._onCreate(target);
       case "delete":
-        return effect.deleteDialog();
+        await effect.deleteDialog({}, { render: false });
+        return this.#app.render();
       case "duplicate":
         return effect.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
       case "edit":

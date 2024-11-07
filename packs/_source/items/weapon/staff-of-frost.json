@@ -40,7 +40,8 @@
       "recovery": [
         {
           "period": "dawn",
-          "type": "recoverAll"
+          "type": "formula",
+          "formula": "1d6 + 4"
         }
       ],
       "spent": 0
@@ -63,14 +64,15 @@
       },
       "base": {
         "number": null,
-        "denomination": null,
+        "denomination": 0,
         "types": [],
         "custom": {
           "enabled": false
         },
         "scaling": {
           "number": 1
-        }
+        },
+        "bonus": ""
       }
     },
     "armor": {
@@ -98,163 +100,278 @@
     "crewed": false,
     "magicalBonus": null,
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "save",
+      "t2bjgs4Rehoss7mc": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.RpKjTlYASrfqUPVA",
+          "challenge": {
+            "attack": null,
+            "save": null,
+            "override": false
+          },
+          "level": "5",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "t2bjgs4Rehoss7mc",
+        "sort": 0,
         "activation": {
           "type": "action",
-          "value": 1,
-          "condition": "",
+          "value": null,
           "override": false
         },
         "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
           "targets": [
             {
               "type": "itemUses",
+              "value": "5",
               "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "scaling": {}
             }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
+          ]
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
-        "effects": [],
         "range": {
-          "units": "",
-          "special": "",
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft"
           },
           "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
+            "choice": false
           },
-          "prompt": true,
-          "override": false
-        },
-        "damage": {
-          "onSave": "half",
-          "parts": []
-        },
-        "save": {
-          "ability": "",
-          "dc": {
-            "calculation": "spellcasting",
-            "formula": ""
-          }
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "name": "",
+        "img": ""
       },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
+      "3ozkXRFfpdGwx6zZ": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.IBJmWjzbQGu7M4UX",
+          "challenge": {
+            "attack": null,
+            "save": null,
+            "override": false
+          },
+          "level": "1",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "3ozkXRFfpdGwx6zZ",
+        "sort": 0,
         "activation": {
           "type": "action",
-          "value": 1,
-          "condition": "",
+          "value": null,
           "override": false
         },
         "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "scaling": {}
             }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
+          ]
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
-        "effects": [],
         "range": {
-          "units": "",
-          "special": "",
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft"
           },
           "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
+            "choice": false
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "1d20",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "name": "",
+        "img": ""
+      },
+      "BjnMyi8sdbu0Ybrr": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.WN2LWEljYU6QqnRH",
+          "challenge": {
+            "attack": null,
+            "save": null,
+            "override": false
+          },
+          "level": "4",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "BjnMyi8sdbu0Ybrr",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": [
+            {
+              "type": "itemUses",
+              "value": "4",
+              "target": "",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "LOde45eToutGhwC6": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.fzZnVKLmBMo2f5up",
+          "challenge": {
+            "attack": null,
+            "save": null,
+            "override": false
+          },
+          "level": "6",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "LOde45eToutGhwC6",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": [
+            {
+              "type": "itemUses",
+              "value": "4",
+              "target": "",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "staff-of-frost"
+    "identifier": "staff-of-frost",
+    "mastery": ""
   },
   "effects": [
     {
@@ -306,14 +423,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037322364,
-    "modifiedTime": 1725992558645,
+    "modifiedTime": 1729013369863,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!xEtBeZjJnkDXojQM"

@@ -78,7 +78,9 @@ export default class VehicleData extends CommonTemplate {
             nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsMax"
           }),
           temp: new NumberField({ integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp" }),
-          tempmax: new NumberField({ integer: true, initial: 0, label: "DND5E.HitPointsTempMax" }),
+          tempmax: new NumberField({
+            integer: true, initial: 0, label: "DND5E.HitPointsTempMax", hint: "DND5E.HitPointsTempMaxHint"
+          }),
           dt: new NumberField({
             required: true, integer: true, min: 0, label: "DND5E.DamageThreshold"
           }),

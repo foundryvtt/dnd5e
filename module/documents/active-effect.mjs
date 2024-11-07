@@ -2,7 +2,7 @@ import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { staticID } from "../utils.mjs";
 
-const { SetField, StringField } = foundry.data.fields;
+const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
@@ -119,6 +119,51 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  apply(doc, change) {
+    // Ensure changes targeting flags use the proper types
+    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(doc, change);
+
+    // Properly handle formulas that don't exist as part of the data model
+    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
+      const field = new FormulaField({ deterministic: true });
+      return { [change.key]: this.constructor.applyField(doc, change, field) };
+    }
+
+    // Handle activity-targeted changes
+    if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
+      && (doc instanceof Item) ) return this.applyActivity(doc, change);
+
+    return super.apply(doc, change);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply a change to activities on this item.
+   * @param {Item5e} item              The Item to whom this change should be applied.
+   * @param {EffectChangeData} change  The change data being applied.
+   * @returns {Record<string, *>}      An object of property paths and their updated values.
+   */
+  applyActivity(item, change) {
+    const changes = {};
+    const apply = (activity, key) => {
+      const c = this.apply(activity, { ...change, key });
+      Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
+    };
+    if ( change.key.startsWith("system.activities.") ) {
+      const [, , id, ...keyPath] = change.key.split(".");
+      const activity = item.system.activities?.get(id);
+      if ( activity ) apply(activity, keyPath.join("."));
+    } else {
+      const { type, key } = change.key.match(/activities\[(?<type>[^\]]+)]\.(?<key>.+)/)?.groups ?? {};
+      item.system.activities?.getByType(type)?.forEach(activity => apply(activity, key));
+    }
+    return changes;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static applyField(model, change, field) {
     field ??= model.schema.getField(change.key);
     change = foundry.utils.deepClone(change);
@@ -157,7 +202,29 @@ export default class ActiveEffect5e extends ActiveEffect {
       }
     }
 
+    // Parse any JSON provided when targeting an object
+    if ( (field instanceof ObjectField) || (field instanceof SchemaField) ) {
+      change = { ...change, value: this.prototype._parseOrString(change.value) };
+    }
+
     return super.applyField(model, change, field);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _applyAdd(actor, change, current, delta, changes) {
+    if ( current instanceof Set ) {
+      const handle = v => {
+        const neg = v.replace(/^\s*-\s*/, "");
+        if ( neg !== v ) current.delete(neg);
+        else current.add(v);
+      };
+      if ( Array.isArray(delta) ) delta.forEach(item => handle(item));
+      else handle(delta);
+      return;
+    }
+    super._applyAdd(actor, change, current, delta, changes);
   }
 
   /* -------------------------------------------- */
@@ -165,14 +232,6 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   _applyLegacy(actor, change, changes) {
     if ( this.system._applyLegacy?.(actor, change, changes) === false ) return;
-    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
-
-    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
-      const field = new FormulaField({ deterministic: true });
-      changes[change.key] = ActiveEffect5e.applyField(actor, change, field);
-      return;
-    }
-
     super._applyLegacy(actor, change, changes);
   }
 
@@ -224,24 +283,6 @@ export default class ActiveEffect5e extends ActiveEffect {
     this.isSuppressed = false;
     if ( this.type === "enchantment" ) return;
     if ( this.parent instanceof dnd5e.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  getRelativeUUID(doc) {
-    // TODO: Backport relative UUID fixes to accommodate descendant documents. Can be removed once v12 is the minimum.
-    if ( this.compendium && (this.compendium !== doc.compendium) ) return this.uuid;
-    if ( this.isEmbedded && (this.collection === doc.collection) ) return `.${this.id}`;
-    const parts = [this.documentName, this.id];
-    let parent = this.parent;
-    while ( parent ) {
-      if ( parent === doc ) break;
-      parts.unshift(parent.documentName, parent.id);
-      parent = parent.parent;
-    }
-    if ( parent === doc ) return `.${parts.join(".")}`;
-    return this.uuid;
   }
 
   /* -------------------------------------------- */
@@ -346,6 +387,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     // Create Activities
     const riderActivities = {};
+    let riderEffects = [];
     for ( const id of profile.riders.activity ) {
       const activityData = item.system.activities.get(id)?.toObject();
       if ( !activityData ) continue;
@@ -356,10 +398,13 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( !foundry.utils.isEmpty(riderActivities) ) {
       await this.parent.update({ "system.activities": riderActivities });
       createdActivities = Object.keys(riderActivities).map(id => this.parent.system.activities?.get(id));
+      createdActivities.forEach(a => a.effects?.forEach(e => {
+        if ( !this.parent.effects.has(e._id) ) riderEffects.push(item.effects.get(e._id)?.toObject());
+      }));
     }
 
     // Create Effects
-    const riderEffects = profile.riders.effect.map(id => {
+    riderEffects.push(...profile.riders.effect.map(id => {
       const effectData = item.effects.get(id)?.toObject();
       if ( effectData ) {
         delete effectData._id;
@@ -367,8 +412,9 @@ export default class ActiveEffect5e extends ActiveEffect {
         effectData.origin = this.origin;
       }
       return effectData;
-    }).filter(_ => _);
-    const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", Array.from(riderEffects));
+    }));
+    riderEffects = riderEffects.filter(_ => _);
+    const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
 
     // Create Items
     let createdItems = [];
@@ -511,12 +557,21 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Create effect data for concentration on an actor.
-   * @param {Item5e} item       The item on which to begin concentrating.
-   * @param {object} [data]     Additional data provided for the effect instance.
-   * @returns {object}          Created data for the ActiveEffect.
+   * @param {Activity} activity  The Activity on which to begin concentrating.
+   * @param {object} [data]      Additional data provided for the effect instance.
+   * @returns {object}           Created data for the ActiveEffect.
    */
-  static createConcentrationEffectData(item, data={}) {
-    if ( !item.isEmbedded || !item.requiresConcentration ) {
+  static createConcentrationEffectData(activity, data={}) {
+    if ( activity instanceof Item ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `createConcentrationEffectData` method on ActiveEffect5e now takes an Activity, rather than an Item.",
+        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      );
+      activity = activity.system.activities?.contents[0];
+    }
+
+    const item = activity?.item;
+    if ( !item?.isEmbedded || !activity.duration.concentration ) {
       throw new Error("You may not begin concentrating on this item!");
     }
 
@@ -524,12 +579,20 @@ export default class ActiveEffect5e extends ActiveEffect {
     const effectData = foundry.utils.mergeObject({
       ...statusEffect,
       name: `${game.i18n.localize("EFFECT.DND5E.StatusConcentrating")}: ${item.name}`,
-      description: game.i18n.format("DND5E.ConcentratingOn", {
+      description: `<p>${game.i18n.format("DND5E.ConcentratingOn", {
         name: item.name,
         type: game.i18n.localize(`TYPES.Item.${item.type}`)
-      }),
-      duration: ActiveEffect5e.getEffectDurationFromItem(item),
-      "flags.dnd5e.item.data": item.actor.items.has(item.id) ? item.id : item.toObject(),
+      })}</p><hr><p>@Embed[${item.uuid} inline]</p>`,
+      duration: activity.duration.getEffectData(),
+      "flags.dnd5e": {
+        activity: {
+          type: activity.type, id: activity.id, uuid: activity.uuid
+        },
+        item: {
+          type: item.type, id: item.id, uuid: item.uuid,
+          data: !item.actor.items.has(item.id) ? item.toObject() : undefined
+        }
+      },
       origin: item.uuid,
       statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
     }, data, {inplace: false});
@@ -587,22 +650,15 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Map the duration of an item to an active effect duration.
-   * @param {Item5e} item     An item with a duration.
-   * @returns {object}        The active effect duration.
+   * @param {Item5e} item           An item with a duration.
+   * @returns {EffectDurationData}  The active effect duration.
    */
   static getEffectDurationFromItem(item) {
-    const dur = item.system.duration ?? {};
-    const value = dur.value || 1;
-
-    switch ( dur.units ) {
-      case "turn": return { turns: value };
-      case "round": return { rounds: value };
-      case "minute": return { seconds: value * 60 };
-      case "hour": return { seconds: value * 60 * 60 };
-      case "day": return { seconds: value * 60 * 60 * 24 };
-      case "year": return { seconds: value * 60 * 60 * 24 * 365 };
-      default: return {};
-    }
+    foundry.utils.logCompatibilityWarning(
+      "The `getEffectDurationFromItem` method on ActiveEffect5e has been deprecated and replaced with `getEffectData` within Item or Activity duration.",
+      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    );
+    return item.system.duration?.getEffectData?.() ?? {};
   }
 
   /* -------------------------------------------- */
@@ -758,5 +814,22 @@ export default class ActiveEffect5e extends ActiveEffect {
       ),
       classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip"]
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async deleteDialog(dialogOptions={}, operation={}) {
+    const type = game.i18n.localize(this.constructor.metadata.label);
+    return foundry.applications.api.DialogV2.confirm(foundry.utils.mergeObject({
+      window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+      position: { width: 400 },
+      content: `
+        <p>
+            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+        </p>
+      `,
+      yes: { callback: () => this.delete(operation) }
+    }, dialogOptions));
   }
 }

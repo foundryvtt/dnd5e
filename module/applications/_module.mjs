@@ -9,9 +9,11 @@ export * as fields from "./fields.mjs";
 export * as item from "./item/_module.mjs";
 export * as journal from "./journal/_module.mjs";
 export * as mixins from "./mixins/_module.mjs";
+export * as shared from "./shared/_module.mjs";
 
 export {default as Accordion} from "./accordion.mjs";
 export {default as Award} from "./award.mjs";
+export {default as BastionConfig} from "./bastion.mjs";
 export {default as CompendiumBrowser} from "./compendium-browser.mjs";
 export {default as CompendiumBrowserSourceConfig} from "./compendium-browser-source-config.mjs";
 export {default as ContextMenu5e} from "./context-menu.mjs";

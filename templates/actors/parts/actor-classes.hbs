@@ -42,14 +42,7 @@
         <div class="level">
             {{#if @root.editable}}
             <select class="level-selector">
-                {{#select 0}}
-                {{#each ctx.availableLevels}}
-                <option value="{{ delta }}" {{ disabled this.disabled }}>
-                    {{ level }}
-                    {{#if delta}}({{ dnd5e-numberFormat delta signDisplay="always"}}){{/if}}
-                </option>
-                {{/each}}
-                {{/select}}
+                {{ selectOptions ctx.availableLevels selected=0 }}
             </select>
             {{else}}
             <span>{{ cls.system.levels }}</span>

@@ -1,7 +1,7 @@
 import Item5e from "../../documents/item.mjs";
 import { formatCR, formatNumber } from "../../utils.mjs";
 import Award from "../award.mjs";
-import ActorMovementConfig from "./movement-config.mjs";
+import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 
 /**
@@ -298,8 +298,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         this.actor.longRest({ advanceTime: true });
         break;
       case "movementConfig":
-        const movementConfig = new ActorMovementConfig(this.object);
-        movementConfig.render(true);
+        new MovementSensesConfig({ document: this.actor, type: "movement" }).render({ force: true });
         break;
       case "placeMembers":
         this.actor.system.placeMembers();
@@ -355,7 +354,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       return this._onSortItem(event, item.toObject());
     }
 
-    return this._onDropItemCreate(item);
+    return this._onDropItemCreate(item, event);
   }
 
   /* -------------------------------------------- */
@@ -369,13 +368,13 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
       return item;
     }));
-    return this._onDropItemCreate(droppedItemData);
+    return this._onDropItemCreate(droppedItemData, event);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(itemData) {
+  async _onDropItemCreate(itemData, event) {
     let items = itemData instanceof Array ? itemData : [itemData];
 
     // Filter out items already in containers to avoid creating duplicates
@@ -384,7 +383,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
 
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {
-      transformFirst: item => this._onDropSingleItem(item.toObject())
+      transformFirst: item => this._onDropSingleItem(item.toObject(), event)
     });
     return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
   }
@@ -394,11 +393,12 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /**
    * Handles dropping of a single item onto this group sheet.
    * @param {object} itemData            The item data to create.
+   * @param {DragEvent} event            The concluding DragEvent which provided the drop data.
    * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
    *                                     created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItem(itemData) {
+  async _onDropSingleItem(itemData, event) {
 
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {

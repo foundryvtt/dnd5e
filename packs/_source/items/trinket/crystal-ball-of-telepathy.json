@@ -144,6 +144,139 @@
           "recovery": []
         },
         "sort": 0
+      },
+      "gYpXMExP1crA0hHe": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20",
+          "challenge": {
+            "attack": null,
+            "save": 17,
+            "override": true
+          },
+          "level": "5",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "gYpXMExP1crA0hHe",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": []
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "5OrwGscvIsTh4piO": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4",
+          "challenge": {
+            "attack": null,
+            "save": 17,
+            "override": true
+          },
+          "level": "2",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "5OrwGscvIsTh4piO",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": true,
+          "condition": "While you are Scrying with the Crystal Ball"
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": [
+            {
+              "type": "activityUses",
+              "value": "1",
+              "scaling": {}
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "spec",
+          "concentration": false,
+          "override": true,
+          "special": "As long as the Scrying spell is active"
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [
+            {
+              "period": "dawn",
+              "type": "recoverAll"
+            }
+          ],
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "attuned": false,
@@ -155,14 +288,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037100710,
-    "modifiedTime": 1725992484110,
+    "modifiedTime": 1729014834198,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!5KiRtMMSTnJmMtBr"

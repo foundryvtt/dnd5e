@@ -6,8 +6,8 @@
                  labelAttr="label" blank="" localize=true }}
 
     {{!-- Loot Subtype --}}
-    {{#if itemSubTypes}}
-    {{ formField fields.type.fields.subtype value=source.type.subtype choices=itemSubTypes blank=""
+    {{#if itemSubtypes}}
+    {{ formField fields.type.fields.subtype value=source.type.subtype choices=itemSubtypes blank=""
                  label=(localize "DND5E.ItemLootSubtype" category=(lookup (lookup config.lootTypes source.type.value) "label")) }}
     {{/if}}
 

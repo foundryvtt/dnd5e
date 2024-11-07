@@ -100,12 +100,12 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onCreate(data, options, userId) {
-    await super._onCreate(data, options, userId);
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
     const actor = this.parent.actor;
     if ( !actor || (userId !== game.user.id) ) return;
     if ( !actor.system.attributes?.spellcasting && this.parent.spellcasting?.ability ) {
-      await actor.update({ "system.attributes.spellcasting": this.parent.spellcasting.ability });
+      actor.update({ "system.attributes.spellcasting": this.parent.spellcasting.ability });
     }
   }
 }

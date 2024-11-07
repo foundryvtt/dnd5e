@@ -81,6 +81,16 @@ export default function ActorSheetV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
+    _getHeaderButtons() {
+      const buttons = super._getHeaderButtons();
+      const tokenButton = buttons.find(b => b.class === "configure-token");
+      if ( tokenButton && this.actor.isToken ) tokenButton.icon = "far fa-user-circle";
+      return buttons;
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
     async getData(options) {
       this._concentration = this.actor.concentration; // Cache concentration so it's not called for every item.
       const context = await super.getData(options);
@@ -195,6 +205,7 @@ export default function ActorSheetV2Mixin(Base) {
     _prepareTraits() {
       const traits = {};
       for ( const [trait, config] of Object.entries(CONFIG.DND5E.traits) ) {
+        if ( trait === "dm" ) continue;
         const key = config.actorKeyPath ?? `system.traits.${trait}`;
         const data = foundry.utils.deepClone(foundry.utils.getProperty(this.actor, key));
         if ( !data ) continue;
@@ -304,6 +315,7 @@ export default function ActorSheetV2Mixin(Base) {
 
       // Spells
       if ( item.type === "spell" ) {
+        const linked = item.system.linkedActivity?.item;
 
         // Activation
         const cost = system.activation?.value ?? "";
@@ -333,7 +345,7 @@ export default function ActorSheetV2Mixin(Base) {
         // Prepared
         const mode = system.preparation?.mode;
         const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
-        if ( config.prepares ) {
+        if ( config.prepares && !linked ) {
           const isAlways = mode === "always";
           const prepared = isAlways || system.preparation.prepared;
           ctx.preparation = {
@@ -352,9 +364,18 @@ export default function ActorSheetV2Mixin(Base) {
 
         // Subtitle
         ctx.subtitle = [
-          this.actor.classes[system.sourceClass]?.name,
+          linked ? linked.name : this.actor.classes[system.sourceClass]?.name,
           item.labels.components.vsm
         ].filterJoin(" &bull; ");
+
+        ctx.dataset = {
+          itemLevel: item.system.level,
+          itemName: item.name,
+          itemSort: item.sort,
+          itemPreparationMode: item.system.preparation.mode,
+          itemPreparationPrepared: item.system.preparation.prepared,
+          linkedName: linked?.name
+        };
       }
 
       // Gear
@@ -391,10 +412,15 @@ export default function ActorSheetV2Mixin(Base) {
       ctx.toHit = item.hasAttack && !isNaN(toHit) ? toHit : null;
 
       // Save
-      ctx.save = item.system.activities?.getByType("save")[0]?.save;
+      ctx.save = { ...item.system.activities?.getByType("save")[0]?.save };
+      ctx.save.ability = ctx.save.ability?.size ? ctx.save.ability.size === 1
+        ? CONFIG.DND5E.abilities[ctx.save.ability.first()]?.abbreviation
+        : game.i18n.localize("DND5E.AbbreviationDC") : null;
 
       // Activities
-      ctx.activities = item.system.activities?.map(this._prepareActivity.bind(this));
+      ctx.activities = item.system.activities
+        ?.filter(a => !item.getFlag("dnd5e", "riders.activity")?.includes(a.id))
+        ?.map(this._prepareActivity.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -419,7 +445,7 @@ export default function ActorSheetV2Mixin(Base) {
         minute: "DND5E.TimeMinuteAbbr",
         hour: "DND5E.TimeHourAbbr",
         day: "DND5E.TimeDayAbbr"
-      }[activation.type];
+      }[activation?.type || ""];
 
       // Limited Uses
       uses = { ...(uses ?? {}) };
@@ -678,11 +704,11 @@ export default function ActorSheetV2Mixin(Base) {
      * @protected
      */
     _onRollAbility(event) {
-      const abilityId = event.currentTarget.closest("[data-ability]").dataset.ability;
+      const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
       const isSavingThrow = event.currentTarget.classList.contains("saving-throw");
-      if ( abilityId === "concentration" ) this.actor.rollConcentration({ event });
-      else if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
-      else this.actor.rollAbilityTest(abilityId, { event });
+      if ( ability === "concentration" ) this.actor.rollConcentration({ event, legacy: false });
+      else if ( isSavingThrow ) this.actor.rollSavingThrow({ ability, event });
+      else this.actor.rollAbilityCheck({ ability, event });
     }
 
     /* -------------------------------------------- */

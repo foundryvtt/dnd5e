@@ -1,0 +1,32 @@
+<section class="flexcol">
+    <div class="final-value">{{ preview }}</div>
+    <fieldset class="card">
+        <ol class="unlist form-grid form-grid-50 types-list" style="--type-rows: {{ rows }};">
+            {{#each typeOptions}}
+            <li class="type-row">
+                <label>
+                    <span>{{ label }}</span>
+                    <input type="radio" name="{{ ../keyPath }}.value" value="{{ value }}" {{ checked selected }}
+                           id="{{ ../partId }}-type-{{ value }}">
+                </label>
+            </li>
+            {{/each}}
+            {{#if custom.enabled}}
+            <li class="type-row custom">
+                <label for="{{ partId }}-type-custom">
+                    {{ formInput fields.custom value=data.custom
+                                 placeholder=(localize "DND5E.CreatureTypeSelectorCustom") }}
+                    <input type="radio" name="{{ keyPath }}.value" value="custom"
+                           {{ checked custom.selected }} id="{{ partId }}-type-custom">
+                </label>
+            </li>
+            {{/if}}
+        </ol>
+    </fieldset>
+    <fieldset class="card">
+        {{ formField fields.subtype value=data.subtype localize=true rootId=partId }}
+        {{#if fields.swarm}}
+        {{ formField fields.swarm value=data.swarm options=swarmOptions localize=true rootId=partId }}
+        {{/if}}
+    </fieldset>
+</section>

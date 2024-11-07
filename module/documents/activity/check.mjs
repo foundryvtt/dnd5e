@@ -95,23 +95,22 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
     let { ability, dc, skill, tool } = target.dataset;
     dc = parseInt(dc);
-    const data = { event, targetValue: Number.isFinite(dc) ? dc : this.check.dc.value };
+    const rollData = { event, target: Number.isFinite(dc) ? dc : this.check.dc.value };
+    if ( ability in CONFIG.DND5E.abilities ) rollData.ability = ability;
 
     for ( const token of targets ) {
-      data.speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document });
-      if ( skill ) {
-        await token.actor.rollSkill(skill, { ...data, ability });
-      } else if ( tool ) {
-        const checkData = { ...data, ability };
+      const messageData = { data: { speaker: ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document }) } };
+      if ( skill ) await token.actor.rollSkill({ ...rollData, skill }, {}, messageData);
+      else if ( tool ) {
+        rollData.tool = tool;
         if ( (this.item.type === "tool") && !this.check.associated.size ) {
-          checkData.bonus = this.item.system.bonus;
-          checkData.prof = this.item.system.prof;
-          checkData.item = this.item;
+          rollData.bonus = this.item.system.bonus;
+          rollData.prof = this.item.system.prof;
+          rollData.item = this.item;
         }
-        await token.actor.rollToolCheck(tool, checkData);
-      } else {
-        await token.actor.rollAbilityTest(ability, data);
+        await token.actor.rollToolCheck(rollData, {}, messageData);
       }
+      else await token.actor.rollAbilityCheck(rollData, {}, messageData);
     }
   }
 }

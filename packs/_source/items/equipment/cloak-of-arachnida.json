@@ -33,7 +33,7 @@
       "max": "1",
       "recovery": [
         {
-          "period": "day",
+          "period": "dawn",
           "type": "recoverAll"
         }
       ],
@@ -69,85 +69,72 @@
       "mgc"
     ],
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "save",
+      "ARmT21Y3mklDGsvO": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.UJJu9c2UvCzVljiP",
+          "challenge": {
+            "attack": null,
+            "save": 13,
+            "override": true
+          },
+          "level": "2",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "ARmT21Y3mklDGsvO",
+        "sort": 0,
         "activation": {
           "type": "action",
-          "value": 1,
-          "condition": "",
+          "value": null,
           "override": false
         },
         "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "target": "",
+              "scaling": {}
             }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
+          ]
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "1",
-          "units": "hour",
-          "special": "",
           "override": false
         },
-        "effects": [],
         "range": {
-          "value": "60",
-          "units": "ft",
-          "special": "",
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "cube",
-            "size": "40",
-            "width": "",
-            "height": "",
             "units": "ft"
           },
           "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
+            "choice": false
           },
-          "prompt": true,
-          "override": false
-        },
-        "damage": {
-          "onSave": "half",
-          "parts": []
-        },
-        "save": {
-          "ability": "dex",
-          "dc": {
-            "calculation": "",
-            "formula": "13"
-          }
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "name": "",
+        "img": ""
       }
     },
     "attuned": false,
@@ -159,14 +146,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037203028,
-    "modifiedTime": 1725992518349,
+    "modifiedTime": 1729015261227,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!VwJjuNbBf2KHMPrY"

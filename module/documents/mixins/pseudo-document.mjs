@@ -300,6 +300,9 @@ export default Base => class extends Base {
       },
       callback: html => {
         const form = html.querySelector("form");
+        if ( !form.checkValidity() ) {
+          throw new Error(game.i18n.format("DOCUMENT.DND5E.Warning.SelectType", { name: label }));
+        }
         const fd = new FormDataExtended(form);
         const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
         if ( !createData.name?.trim() ) delete createData.name;

@@ -1,3 +1,4 @@
+import CastActivity from "../../../documents/activity/cast.mjs";
 import SystemDataModel from "../../abstract.mjs";
 import { ActivitiesField } from "../../fields/activities-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
@@ -165,6 +166,12 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} source  Candidate source data to migrate.
    */
   static #migrateUses(source) {
+    // Remove any old ternary operators from uses to prevent errors
+    if ( source.uses?.max?.includes(" ? ") ) source.uses.max = "";
+    for ( const activity of Object.values(source.activities ?? {}) ) {
+      if ( activity.uses?.max?.includes(" ? ") ) activity.uses.max = "";
+    }
+
     if ( Array.isArray(source.uses?.recovery) ) return;
 
     const charged = source.recharge?.charged;
@@ -185,9 +192,12 @@ export default class ActivitiesTemplate extends SystemDataModel {
       }
     }
 
-    // If period is not blank, set recovery type to `recoverAll`
+    // If period is not blank, set an appropriate recovery type
     else if ( source.uses.per ) {
-      source.uses.recovery = [{ period: source.uses.per, type: "recoverAll" }];
+      if ( CONFIG.DND5E.limitedUsePeriods[source.uses.per]?.formula && source.uses.recovery ) {
+        source.uses.recovery = [{ period: source.uses.per, type: "formula", formula: source.uses.recovery }];
+      }
+      else source.uses.recovery = [{ period: source.uses.per, type: "recoverAll" }];
     }
 
     // Otherwise, check to see if recharge is set
@@ -231,8 +241,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( !source.system.actionType && !source.system.activation?.type
       && (source.type !== "tool") ) return false;
 
-    // If item was updated after `4.0.0`, it shouldn't need the migration
-    if ( !foundry.utils.isNewerVersion("4.0.0", source._stats?.systemVersion ?? "0.0.0") ) return false;
+    // If item was updated after `4.0.1`, it shouldn't need the migration
+    if ( !foundry.utils.isNewerVersion("4.0.1", source._stats?.systemVersion ?? "0.0.0") ) return false;
 
     // If the initial activity has already been created, no reason to create it again
     if ( !foundry.utils.isEmpty(source.system.activities) ) return false;
@@ -328,6 +338,110 @@ export default class ActivitiesTemplate extends SystemDataModel {
     }
 
     return { updates, rolls };
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Perform any necessary actions when an item with activities is created.
+   * @param {object} data     The initial data object provided to the document creation request.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {string} userId   The id of the User requesting the document update.
+   */
+  async onCreateActivities(data, options, userId) {
+    if ( (userId !== game.user.id) || !this.parent.isEmbedded ) return;
+
+    // If item has any Cast activities, create locally cached copies of the spells
+    const spells = (await Promise.all(
+      this.activities.getByType("cast").map(a => !a.cachedSpell && a.getCachedSpellData())
+    )).filter(_ => _);
+    if ( spells.length ) this.parent.actor.createEmbeddedDocuments("Item", spells);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare any item or actor changes based on activity changes.
+   * @param {object} changed  The differential data that is changed relative to the document's prior values.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {User} user       The User requesting the document update.
+   */
+  async preUpdateActivities(changed, options, user) {
+    if ( !foundry.utils.hasProperty(changed, "system.activities") ) return;
+
+    // Track changes to rider activities & effects and store in item flags
+    const riders = this.parent.clone(changed).system.activities.getByType("enchant").reduce((riders, a) => {
+      a.effects.forEach(e => {
+        e.riders.activity.forEach(activity => riders.activity.add(activity));
+        e.riders.effect.forEach(effect => riders.effect.add(effect));
+      });
+      return riders;
+    }, { activity: new Set(), effect: new Set() });
+    foundry.utils.setProperty(changed, "flags.dnd5e.riders", {
+      activity: Array.from(riders.activity), effect: Array.from(riders.effect)
+    });
+
+    if ( !this.parent.isEmbedded ) return;
+
+    // Track changes to cached spells on cast activities
+    const removed = Object.entries(changed.system?.activities ?? {}).map(([key, data]) => {
+      if ( key.startsWith("-=") ) {
+        const id = key.replace("-=", "");
+        return this.activities.get(id).cachedSpell?.id;
+      } else if ( foundry.utils.hasProperty(data, "spell.uuid") ) {
+        return this.activities.get(key)?.cachedSpell?.id;
+      }
+      return null;
+    }).filter(_ => _);
+    if ( removed.length ) foundry.utils.setProperty(options, "dnd5e.removedCachedItems", removed);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform any additional updates when an item with activities is updated.
+   * @param {object} changed  The differential data that is changed relative to the document's prior values.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {string} userId   The id of the User requesting the document update.
+   */
+  async onUpdateActivities(changed, options, userId) {
+    if ( (userId !== game.user.id) || !this.parent.isEmbedded
+      || !foundry.utils.hasProperty(changed, "system.activities") ) return;
+
+    // If any Cast activities were removed, or their spells changed, remove old cached spells
+    if ( options.dnd5e?.removedCachedItems ) {
+      await this.parent.actor.deleteEmbeddedDocuments("Item", options.dnd5e.removedCachedItems);
+    }
+
+    // Create any new cached spells & update existing ones as necessary
+    const cachedInserts = [];
+    for ( const id of Object.keys(changed.system.activities) ) {
+      const activity = this.activities.get(id);
+      if ( !(activity instanceof CastActivity) ) continue;
+      const existingSpell = activity.cachedSpell;
+      if ( existingSpell ) {
+        const enchantment = existingSpell.effects.get(CastActivity.ENCHANTMENT_ID);
+        await enchantment.update({ changes: activity.getSpellChanges() });
+      } else cachedInserts.push(await activity.getCachedSpellData());
+    }
+    if ( cachedInserts.length ) await this.parent.actor.createEmbeddedDocuments("Item", cachedInserts);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform any necessary cleanup when an item with activities is deleted.
+   * @param {object} options  Additional options which modify the deletion request.
+   * @param {string} userId   The id of the User requesting the document update.
+   */
+  onDeleteActivities(options, userId) {
+    if ( (userId !== game.user.id) || !this.parent.isEmbedded ) return;
+
+    // If item has any Cast activities, clean up any cached spells
+    const spellIds = this.activities.getByType("cast").map(a => a.cachedSpell?.id).filter(_ => _);
+    if ( spellIds.length ) this.parent.actor.deleteEmbeddedDocuments("Item", spellIds);
   }
 
   /* -------------------------------------------- */

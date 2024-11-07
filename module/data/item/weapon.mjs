@@ -138,9 +138,8 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( "base" in (source.damage ?? {}) ) return;
     const systemData = { system: { scaling: { mode: "none" } } };
     if ( source.damage?.parts?.[0] ) {
-      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts?.[0]);
+      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts.shift());
       if ( source.damage.base.bonus === "@mod" ) source.damage.base.bonus = "";
-      delete source.damage.parts;
     }
     if ( foundry.utils.getType(source.damage?.versatile) === "string" ) {
       source.damage.versatile = BaseActivityData.transformDamagePartData(systemData, [source.damage?.versatile, ""]);
@@ -195,7 +194,9 @@ export default class WeaponData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.preparePhysicalData();
     this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
+    this.type.identifier = CONFIG.DND5E.weaponIds[this.type.baseItem];
 
     const labels = this.parent.labels ??= {};
     labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
@@ -220,7 +221,8 @@ export default class WeaponData extends ItemDataModel.mixin(
       const parts = [
         this.range.value,
         this.range.long ? `/ ${this.range.long}` : null,
-        game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`)
+        (this.range.units in CONFIG.DND5E.movementUnits)
+          ? game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`) : null
       ];
       labels.range = parts.filterJoin(" ");
     } else labels.range = game.i18n.localize("DND5E.None");
@@ -282,6 +284,26 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Ammunition that can be used with this weapon.
+   * @type {FormSelectOption[]}
+   */
+  get ammunitionOptions() {
+    if ( !this.parent.actor || !this.properties.has("amm") ) return [];
+    return this.parent.actor.itemTypes.consumable
+      .filter(i => (i.system.type.value === "ammo")
+        && (!this.ammunition?.type || (i.system.type.subtype === this.ammunition.type)))
+      .map(item => ({
+        item,
+        value: item.id,
+        label: `${item.name} (${item.system.quantity})`,
+        disabled: !item.system.quantity
+      }))
+      .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -351,6 +373,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;
     const ranged = CONFIG.DND5E.defaultAbilities.rangedAttack;
     if ( this.properties.has("fin") ) return new Set([melee, ranged]);
+    if ( !this.attackType ) return null;
     return new Set([this.attackType === "melee" ? melee : ranged]);
   }
 
@@ -384,6 +407,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   get _typeAbilityMod() {
     const availableAbilities = this.availableAbilities;
+    if ( !availableAbilities ) return null;
     if ( availableAbilities.size === 1 ) return availableAbilities.first();
     const abilities = this.parent?.actor?.system.abilities ?? {};
     return availableAbilities.reduce((largest, ability) =>
@@ -493,9 +517,11 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _preCreate(data, options, user) {
-    if ( super._preCreate(data, options, user) === false ) return false;
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await this.preCreateEquipped(data, options, user);
     if ( this.activities.size ) return;
+
     const activityData = new CONFIG.DND5E.activityTypes.attack.documentClass({}, { parent: this.parent }).toObject();
     this.parent.updateSource({ [`system.activities.${activityData._id}`]: activityData });
   }

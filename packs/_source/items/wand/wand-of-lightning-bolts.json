@@ -1,7 +1,7 @@
 {
   "_id": "bPFVfq81EsMNu6OQ",
   "name": "Wand of Lightning Bolts",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/staves/staff-ornate-jeweled-blue.webp",
   "system": {
     "description": {
@@ -69,6 +69,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -334,6 +335,77 @@
           "recovery": []
         },
         "sort": 0
+      },
+      "1eOjR7lfMEA3xTt2": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.IyikgTEOTv701jgQ",
+          "challenge": {
+            "attack": null,
+            "save": 15,
+            "override": true
+          },
+          "level": "3",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "1eOjR7lfMEA3xTt2",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": true,
+            "max": ""
+          },
+          "spellSlot": true,
+          "targets": [
+            {
+              "type": "itemUses",
+              "value": "1",
+              "target": "",
+              "scaling": {
+                "mode": "amount",
+                "formula": ""
+              }
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "attuned": false,
@@ -345,14 +417,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037227490,
-    "modifiedTime": 1725992526472,
+    "modifiedTime": 1730323648096,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!bPFVfq81EsMNu6OQ"

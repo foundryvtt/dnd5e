@@ -1,6 +1,7 @@
-import ActorSheet5e from "./base-sheet.mjs";
-import ActorTypeConfig from "./type-config.mjs";
+import { formatNumber } from "../../utils.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
+import CreatureTypeConfig from "../shared/creature-type-config.mjs";
+import ActorSheet5e from "./base-sheet.mjs";
 
 /**
  * An Actor sheet for player character type actors.
@@ -135,7 +136,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const ctx = context.itemContext[cls.id] ??= {};
       ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(level => {
         const delta = level - cls.system.levels;
-        return { level, delta, disabled: delta > maxLevelDelta };
+        let label = formatNumber(level);
+        if ( delta ) label = `${label} (${formatNumber(delta, { signDisplay: "always" })})`;
+        return { value: delta, label, disabled: delta > maxLevelDelta };
       });
       ctx.prefixedImage = cls.img ? foundry.utils.getRoute(cls.img) : null;
       arr.push(cls);
@@ -237,7 +240,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     event.stopPropagation();
     if ( (event.currentTarget.dataset.action === "type") && (this.actor.system.details.race?.id) ) {
-      new ActorTypeConfig(this.actor.system.details.race, { keyPath: "system.type" }).render(true);
+      new CreatureTypeConfig({ document: this.actor.system.details.race, keyPath: "type" }).render({ force: true });
     } else if ( event.currentTarget.dataset.action !== "type" ) {
       return super._onConfigMenu(event);
     }
@@ -262,9 +265,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
           yes: () => this.actor.convertCurrency()
         });
       case "rollDeathSave":
-        return this.actor.rollDeathSave({event: event});
+        return this.actor.rollDeathSave({ event, legacy: false });
       case "rollInitiative":
-        return this.actor.rollInitiativeDialog({event});
+        return this.actor.rollInitiativeDialog({ event });
     }
   }
 
@@ -299,7 +302,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropSingleItem(itemData) {
+  async _onDropSingleItem(itemData, event) {
 
     // Increment the number of class levels a character instead of creating a new item
     if ( itemData.type === "class" ) {
@@ -341,6 +344,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         return false;
       }
     }
-    return super._onDropSingleItem(itemData);
+    return super._onDropSingleItem(itemData, event);
   }
 }

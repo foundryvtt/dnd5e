@@ -1,5 +1,6 @@
+import { formatNumber } from "../../utils.mjs";
+import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 import ActorSheet5e from "./base-sheet.mjs";
-import ActorTypeConfig from "./type-config.mjs";
 
 /**
  * An Actor sheet for NPC type characters.
@@ -72,9 +73,12 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       if ( ctx.group === "passive" ) ctx.ungroup = "passive";
       // Individual item preparation
       this._prepareItem(item, ctx);
-      if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => ({
-        level, delta: level - item.system.levels, disabled: (level - item.system.levels) > maxLevelDelta
-      }));
+      if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => {
+        const delta = level - cls.system.levels;
+        let label = game.i18n.format("DND5E.LevelNumber", { level });
+        if ( delta ) label = `${label} (${formatNumber(delta, { signDisplay: "always" })})`;
+        return { value: delta, label, disabled: delta > maxLevelDelta };
+      });
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;
@@ -142,7 +146,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     event.preventDefault();
     event.stopPropagation();
     if ( (event.currentTarget.dataset.action === "type") && (this.actor.system.details.race?.id) ) {
-      new ActorTypeConfig(this.actor.system.details.race, { keyPath: "system.type" }).render(true);
+      new CreatureTypeConfig({ document: this.actor.system.details.race, keyPath: "type" }).render(true);
     }
     else return super._onConfigMenu(event);
   }
@@ -166,7 +170,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
         return this.activateEditor(name, {}, editor.initial);
 
       case "rollDeathSave":
-        return this.actor.rollDeathSave({ event });
+        return this.actor.rollDeathSave({ event, legacy: false });
 
       case "rollInitiative":
         event.stopPropagation();
@@ -182,11 +186,14 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   async _updateObject(event, formData) {
 
     // Format NPC Challenge Rating
-    const crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
+    const crs = {"1/8": 0.125, "⅛": 0.125, "1/4": 0.25, "¼": 0.25, "1/2": 0.5, "½": 0.5};
     let crv = "system.details.cr";
     let cr = formData[crv];
-    cr = crs[cr] || parseFloat(cr);
-    if ( cr ) formData[crv] = cr < 1 ? cr : parseInt(cr);
+    if ( cr === "" ) formData[crv] = null;
+    else {
+      cr = crs[cr] || parseFloat(cr);
+      if ( !Number.isNaN(cr) ) formData[crv] = cr < 1 ? cr : parseInt(cr);
+    }
 
     // Parent ActorSheet update steps
     return super._updateObject(event, formData);

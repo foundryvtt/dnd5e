@@ -86,6 +86,9 @@
             {{#each config.spellSchools}}
             <option value="{{ @key }}">{{ label }}</option>
             {{/each}}
+            {{#each actor.spellcastingClasses}}
+            <option value="{{ @key }}">{{ name }}</option>
+            {{/each}}
         </datalist>
     </item-list-controls>
 
@@ -134,10 +137,7 @@
 
                 {{!-- Spells --}}
                 <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-item-id="{{ item.id }}"
-                    data-entry-id="{{ item.id }}" data-item-level="{{ item.system.level }}" data-uuid="{{ item.uuid }}"
-                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}"
-                    data-item-preparation-mode="{{ item.system.preparation.mode }}"
-                    data-item-preparation-prepared="{{ item.system.preparation.prepared }}">
+                    data-entry-id="{{ item.id }}" data-uuid="{{ item.uuid }}" {{ dnd5e-dataset ctx.dataset }}>
 
                     <div class="item-row">
 
@@ -148,7 +148,8 @@
                             <i class="concentration fas fa-arrow-rotate-left fa-spin fa-spin-reverse"
                                aria-label="{{ localize "DND5E.Concentration" }}"></i>
                             {{/if}}
-                            <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+                            <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}"
+                                 draggable="false">
                             <div class="name name-stacked">
                                 <span class="title">{{ item.name }}</span>
                                 <span class="subtitle">
@@ -209,9 +210,7 @@
                             <span class="value">{{ dnd5e-formatModifier ctx.toHit }}</span>
                             {{else if ctx.save.ability}}
                             <div class="stacked">
-                                <span class="ability">
-                                    {{ lookup (lookup @root.config.abilities ctx.save.ability) "abbreviation" }}
-                                </span>
+                                <span class="ability">{{ ctx.save.ability }}</span>
                                 <span class="value">{{ ctx.save.dc.value }}</span>
                             </div>
                             {{/if}}
@@ -252,10 +251,12 @@
                             </a>
 
                             {{!-- Deleting --}}
+                            {{#if item.canDelete}}
                             <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
                                aria-label="{{ localize "DND5E.ItemDelete" }}">
                                 <i class="fas fa-trash"></i>
                             </a>
+                            {{/if}}
                             {{else if @root.owner}}
                             {{!-- Preparing --}}
                             {{#with ctx.preparation}}

@@ -55,6 +55,11 @@ export default class SummonSheet extends ActivitySheet {
   async _prepareEffectContext(context) {
     context = await super._prepareEffectContext(context);
 
+    context.abilityOptions = [
+      { value: "", label: this.activity.isSpell ? game.i18n.localize("DND5E.Spellcasting") : "" },
+      { rule: true },
+      ...Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }))
+    ];
     context.creatureSizeOptions = Object.entries(CONFIG.DND5E.actorSizes).map(([value, config]) => ({
       value, label: config.label, selected: this.activity.creatureSizes.has(value)
     }));

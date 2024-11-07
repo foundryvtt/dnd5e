@@ -199,7 +199,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const labels = this.parent.labels ??= {};
     labels.level = CONFIG.DND5E.spellLevels[this.level];
     labels.school = CONFIG.DND5E.spellSchools[this.school]?.label;
-    labels.materials = this.materials.value;
+    if ( this.properties.has("material") ) labels.materials = this.materials.value;
 
     labels.components = this.properties.reduce((obj, c) => {
       const config = this.validProperties.has(c) ? CONFIG.DND5E.itemProperties[c] : null;
@@ -241,10 +241,12 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     // Count preparations.
     const { mode, prepared } = this.preparation;
     const config = CONFIG.DND5E.spellPreparationModes[mode];
-    const isPrepared = config?.prepares && (mode === "always" || prepared);
+    const isPrepared = config?.prepares && (mode !== "always") && (this.level > 0) && prepared;
     if ( this.parent.isOwned && this.sourceClass && isPrepared ) {
       const sourceClass = this.parent.actor.spellcastingClasses[this.sourceClass];
+      const sourceSubclass = sourceClass?.subclass;
       if ( sourceClass ) sourceClass.system.spellcasting.preparation.value++;
+      if ( sourceSubclass ) sourceSubclass.system.spellcasting.preparation.value++;
     }
   }
 
@@ -256,6 +258,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     context.isSpell = true;
     context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
     context.properties = [];
+    if ( !this.properties.has("material") ) delete context.materials;
     return context;
   }
 
@@ -346,6 +349,18 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /**
+   * Retrieve a linked activity that granted this spell using the stored `cachedFor` value.
+   * @returns {Activity|null}
+   */
+  get linkedActivity() {
+    const relative = this.parent.actor;
+    if ( !relative ) return null;
+    return fromUuidSync(this.parent.getFlag("dnd5e", "cachedFor"), { relative, strict: false }) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The proficiency multiplier for this item.
    * @returns {number}
    */
@@ -377,19 +392,27 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _preCreate(data, options, user) {
-    if ( super._preCreate(data, options, user) === false ) return false;
-    if ( !this.parent.isEmbedded || ["atwill", "innate"].includes(this.preparation.mode) || this.sourceClass ) return;
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    if ( !this.parent.isEmbedded ) return;
+
+    // Set as prepared for NPCs, and not prepared for PCs
+    if ( ["character", "npc"].includes(this.parent.actor.type)
+      && !foundry.utils.hasProperty(data, "system.preparation.prepared") ) {
+      this.updateSource({ "preparation.prepared": this.parent.actor.type === "npc" });
+    }
+
+    if ( ["atwill", "innate"].includes(this.preparation.mode) || this.sourceClass ) return;
     const classes = new Set(Object.keys(this.parent.actor.spellcastingClasses));
     if ( !classes.size ) return;
 
     // Set the source class, and ensure the preparation mode matches if adding a prepared spell to an alt class
     const setClass = cls => {
-      const update = { "system.sourceClass": cls };
+      const update = { sourceClass: cls };
       const type = this.parent.actor.classes[cls].spellcasting.type;
       if ( (type !== "leveled") && (this.preparation.mode === "prepared") && (this.level > 0)
-        && (type in CONFIG.DND5E.spellPreparationModes) ) update["system.preparation.mode"] = type;
-      this.parent.updateSource(update);
+        && (type in CONFIG.DND5E.spellPreparationModes) ) update["preparation.mode"] = type;
+      this.updateSource(update);
     };
 
     // If preparation mode matches an alt spellcasting type and matching class exists, set as that class

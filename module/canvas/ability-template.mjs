@@ -47,6 +47,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     if ( !templateShape ) return null;
 
     // Prepare template data
+    const rollData = activity.getRollData();
     const templateData = foundry.utils.mergeObject({
       t: templateShape,
       user: game.user.id,
@@ -62,8 +63,9 @@ export default class AbilityTemplate extends MeasuredTemplate {
           height: target.height,
           adjustedSize: target.type === "radius"
         },
+        item: activity.item.uuid,
         origin: activity.uuid,
-        spellLevel: activity.item.system.level
+        spellLevel: rollData.item.level
       } }
     }, options);
 

@@ -34,17 +34,11 @@
     grid-template-columns: 1fr var(--dnd5e-sheet-header-right-width);
     align-items: center;
 
-    /* Name */
     .document-name {
       color: var(--color-text-light-0);
       font-size: var(--font-size-46);
       text-shadow: 2px 2px 2px var(--color-shadow-dark);
-      font-family: var(--dnd5e-font-modesto);
-      font-weight: bold;
       letter-spacing: 2px;
-      padding: 0;
-      margin: 0;
-      transition: all 250ms ease;
     }
 
     /* Name & Class */
@@ -62,11 +56,6 @@
       &.optional-ability-2 {
         padding-right: 14rem;
         .document-name { font-size: var(--font-size-36); }
-      }
-
-      input.document-name {
-        padding: .3125rem .75rem;
-        border-radius: 6px;
       }
 
       /* Class */
@@ -179,10 +168,12 @@
 
         .xp-bar {
           --bar-percentage: 0%;
-          border: 2px solid var(--dnd5e-color-gold);
+          border: 1px solid var(--dnd5e-color-gold);
+          border-radius: 3px;
           background: black;
           width: 100%;
           height: 8px;
+          overflow: hidden;
 
           &::after {
             content: "";
@@ -194,6 +185,20 @@
         }
       }
     }
+  }
+
+  /* Name */
+  .document-name {
+    font-family: var(--dnd5e-font-modesto);
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    transition: all 250ms ease;
+  }
+
+  input.document-name {
+    padding: 5px 12px;
+    border-radius: 6px;
   }
 
   /* ---------------------------------- */
@@ -216,8 +221,10 @@
       position: absolute;
       inset: 0;
       padding: 8px;
+      padding-inline-end: 0;
       overflow: hidden auto;
       scrollbar-width: thin;
+      scrollbar-gutter: stable;
       scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
       transition: all 450ms ease;
 
@@ -349,10 +356,16 @@
           .top {
             display: flex;
             align-items: start;
-            justify-content: space-between;
+            justify-content: center;
             position: relative;
 
             /* Exhaustion */
+            .pips {
+              flex-wrap: wrap;
+              justify-content: center;
+              padding: 10px;
+            }
+          
             .pips .pip.filled.death::before {
               content: "\f54c";
               font-family: var(--font-awesome);
@@ -412,6 +425,7 @@
               }
             }
           }
+          .top:has([data-n="7"]) + .lozenges { margin-block-start: 0; }
         }
 
         /* Hit Points & Hit Dice */
@@ -660,7 +674,7 @@
 
       .tab:not(.details) { padding-inline: .5rem; }
 
-      .tab:not(.details, .biography) {
+      .tab:not(.details, .biography, .bastion) {
         // enough room that the "create new" button doesn't overlap when scrolled all the way down
         padding-bottom: calc(1.5rem + 30px);
       }
@@ -797,7 +811,7 @@
         &:hover:not(:has(a:hover)) { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
       }
 
-      &.empty {
+      &.empty:not(.disabled) {
         cursor: pointer;
         transition: opacity 250ms ease;
         &:hover { opacity: .5; }
@@ -860,6 +874,47 @@
     .effects-element {
       gap: 16px;
       .effects-list { gap: 16px; }
+    }
+  }
+
+  /* Editors */
+  .tab.biography > .bottom, .tab.bastion .description {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      margin-right: 1.5rem;
+      position: relative;
+
+      i.fa-feather {
+        position: absolute;
+        inset: auto auto -1px 100%;
+        font-size: var(--font-size-18);
+      }
+    }
+
+    .editor {
+      flex: 1;
+      min-height: 500px;
+      overflow-y: visible;
+
+      .editor-content {
+        font-family: var(--dnd5e-font-roboto-condensed);
+        font-size: var(--font-size-14);
+        scrollbar-width: thin;
+        scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+
+        &::-webkit-scrollbar-track {
+          box-shadow: none;
+          border-radius: 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border: none;
+          background: var(--dnd5e-color-scrollbar);
+        }
+      }
     }
   }
 
@@ -1062,9 +1117,11 @@
     }
 
     > .middle {
+      display: flex;
       gap: 1rem;
 
       > * {
+        flex: 1;
         display: flex;
         flex-direction: column;
         gap: .5rem;
@@ -1073,47 +1130,7 @@
       .right .textbox-half:last-child textarea { height: 156px; }
     }
 
-    > .bottom {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-
-      h3 {
-        margin-right: 1.5rem;
-        position: relative;
-
-        span { font-size: var(--font-size-14); }
-
-        i.fa-feather {
-          position: absolute;
-          inset: auto auto -1px 100%;
-          font-size: var(--font-size-18);
-        }
-      }
-
-      .editor {
-        flex: 1;
-        min-height: 500px;
-        overflow-y: visible;
-
-        .editor-content {
-          font-family: var(--dnd5e-font-roboto-condensed);
-          font-size: var(--font-size-14);
-          scrollbar-width: thin;
-          scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
-
-          &::-webkit-scrollbar-track {
-            box-shadow: none;
-            border-radius: 0;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            border: none;
-            background: var(--dnd5e-color-scrollbar);
-          }
-        }
-      }
-    }
+    > .bottom h3 span { font-size: var(--font-size-14); }
 
     .characteristics {
       width: 520px;
@@ -1156,6 +1173,202 @@
           margin: 0;
           min-height: unset;
         }
+      }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Bastion                           */
+  /* ---------------------------------- */
+
+  .tab.bastion {
+    flex-direction: column;
+    gap: 16px;
+
+    &.active { display: flex; }
+
+    .name {
+      flex: none;
+      padding: 6px 6px 0;
+      margin-bottom: -8px;
+      font-size: var(--font-size-42);
+      text-align: center;
+
+      input.document-name {
+        font-size: var(--font-size-42);
+        text-align: center;
+      }
+    }
+
+    .contents {
+      flex: none;
+      display: grid;
+      grid-template: "a a" auto "b c" 1fr / minmax(0, 1fr) minmax(0, 1fr);
+      gap: 16px;
+
+      .roster { grid-area: a; }
+      .facilities.basic { grid-area: b; }
+
+      .facilities.special {
+        grid-area: c;
+        h3 {
+          > span { line-height: 1; }
+          .counter { margin-left: auto; }
+        }
+      }
+    }
+
+    .contents > section ul {
+      flex-wrap: wrap;
+      display: flex;
+      gap: 8px;
+
+      li {
+        border: 2px solid var(--dnd5e-color-gold);
+        border-radius: 5px;
+        box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+
+        &.empty {
+          display: inline-grid;
+          place-content: center;
+        }
+      }
+    }
+
+    /* Roster */
+    .roster ul li {
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+
+      &.empty {
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        font-style: italic;
+        color: var(--color-text-dark-5);
+      }
+    }
+
+    .roster img {
+      border: none;
+      border-radius: 3px;
+      width: 100%;
+      height: 100%;
+      max-width: unset;
+      object-fit: cover;
+      background: var(--dnd5e-color-iron-gray);
+    }
+
+    /* Facilities */
+    .facilities ul { flex-direction: column; }
+
+    .facility {
+      --bar-height: 20px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      > * { position: relative; }
+
+      &.empty {
+        min-height: 50px;
+        color: var(--dnd5e-color-gold);
+        cursor: pointer;
+        border-style: dashed;
+        opacity: .5;
+        transition: all 250ms ease;
+
+        &:hover { opacity: 1; }
+      }
+
+      &.disabled, &.building { filter: grayscale(1); }
+      &.disabled { pointer-events: none; }
+
+      &:not(.empty) {
+        border: var(--dnd5e-border-gold);
+        background: var(--dnd5e-background-card);
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: var(--underlay) center / cover;
+          mask-image: linear-gradient(135deg, transparent 35%, black);
+          border-radius: 5px;
+          opacity: .5;
+        }
+
+        &:has(> .facility-progress)::before {
+          top: var(--bar-height);
+          border-radius: 0 0 5px 5px;
+        }
+      }
+
+      .facility-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 8px 0;
+
+        .name-stacked { flex: 1; }
+        .title { font-size: var(--font-size-13); }
+        .slots { flex: none; }
+        .name-stacked.rollable {
+          cursor: pointer;
+          &:hover .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
+        }
+      }
+
+      .facility-progress {
+        height: var(--bar-height);
+        border: none;
+        border-radius: 0;
+        font-size: var(--font-size-11);
+
+        &::before {
+          background: linear-gradient(to right, var(--dnd5e-color-hp-1), var(--dnd5e-color-hp-2));
+          border-inline-end: var(--border-width) solid var(--dnd5e-color-hp-3);
+          border-radius: 0;
+        }
+
+        & + .facility-header { margin-top: -4px; }
+      }
+
+      .facility-occupants { padding-inline: 8px; }
+
+      .order-slot {
+        --icon-size: 22px;
+        --icon-fill: var(--dnd5e-color-gold);
+        padding: 4px;
+        box-shadow: inset 0 0 3px var(--dnd5e-shadow-45);
+
+        &.empty::before {
+          content: "";
+          width: 100%;
+          height: 100%;
+          display: block;
+          background: url("icons/svg/facilities/maintain.svg") no-repeat center / cover;
+          filter: invert(1);
+          opacity: .15;
+        }
+      }
+
+      .occupant-slot { --slot-size: 26px; }
+
+      > :last-child { padding-bottom: 8px; }
+    }
+
+    .defender {
+      position: relative;
+
+      .deletion-control {
+        width: unset;
+        height: unset;
+        cursor: pointer;
+        position: absolute;
+        inset: -3px -3px 0 0;
       }
     }
   }

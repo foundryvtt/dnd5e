@@ -44,18 +44,14 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "light", subtype: false}, {label: "DND5E.ItemEquipmentType"}),
+      type: new ItemTypeField({ subtype: false }, { label: "DND5E.ItemEquipmentType" }),
       armor: new SchemaField({
-        value: new NumberField({required: true, integer: true, min: 0, label: "DND5E.ArmorClass"}),
-        magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
-        dex: new NumberField({required: true, integer: true, label: "DND5E.ItemEquipmentDexMod"})
+        value: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClass" }),
+        magicalBonus: new NumberField({ min: 0, integer: true, label: "DND5E.MagicalBonus" }),
+        dex: new NumberField({ required: true, integer: true, label: "DND5E.ItemEquipmentDexMod" })
       }),
-      properties: new SetField(new StringField(), {
-        label: "DND5E.ItemEquipmentProperties"
-      }),
-      strength: new NumberField({
-        required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr"
-      }),
+      properties: new SetField(new StringField(), { label: "DND5E.ItemEquipmentProperties" }),
+      strength: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr" }),
       proficient: new NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
       })
@@ -174,9 +170,14 @@ export default class EquipmentData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
-    this.armor.value = (this._source.armor.value ?? 0) + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
+    this.preparePhysicalData();
+    this.armor.base = this._source.armor.value ?? 0;
+    this.armor.value = this.armor.base + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
+    this.type.identifier = this.type.value === "shield"
+      ? CONFIG.DND5E.shieldIds[this.type.baseItem]
+      : CONFIG.DND5E.armorIds[this.type.baseItem];
 
     const labels = this.parent.labels ??= {};
     labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
@@ -208,7 +209,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
-    if ( this.armor.value ) {
+    if ( this.armor.value && (this.isArmor || (this.type.value === "shield")) ) {
       context.properties.active.shift();
       context.info = [{
         label: "DND5E.ArmorClass",
@@ -292,5 +293,15 @@ export default class EquipmentData extends ItemDataModel.mixin(
     const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
     const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await this.preCreateEquipped(data, options, user);
   }
 }

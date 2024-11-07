@@ -11,7 +11,7 @@ import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
 
 const {
-  ArrayField, BooleanField, IntegerSortField, NumberField, SchemaField, SetField, StringField
+  ArrayField, BooleanField, HTMLField, IntegerSortField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
 /**
@@ -43,10 +43,14 @@ const {
  * @property {number} attributes.death.failure            Number of failed death saves.
  * @property {number} attributes.exhaustion               Number of levels of exhaustion.
  * @property {number} attributes.inspiration              Does this character have inspiration?
+ * @property {object} bastion
+ * @property {string} bastion.name                        The name of the character's bastion.
+ * @property {string} bastion.description                 Additional description and details for the character's
+ *                                                        bastion.
  * @property {object} details
  * @property {Item5e|string} details.background           Character's background item or name.
  * @property {string} details.originalClass               ID of first class taken by character.
- * @property {XPData} details.xp                          Experience points gained.
+ * @property {object} details.xp                          Experience points gained.
  * @property {number} details.xp.value                    Total experience points earned.
  * @property {string} details.appearance                  Description of character's appearance.
  * @property {string} details.trait                       Character's personality traits.
@@ -61,9 +65,9 @@ const {
  *                                                           attack with a weapon that has mastery.
  * @property {SimpleTraitData} traits.armorProf              Character's armor proficiencies.
  * @property {object} resources
- * @property {CharacterResourceData} resources.primary    Resource number one.
- * @property {CharacterResourceData} resources.secondary  Resource number two.
- * @property {CharacterResourceData} resources.tertiary   Resource number three.
+ * @property {ResourceData} resources.primary             Resource number one.
+ * @property {ResourceData} resources.secondary           Resource number two.
+ * @property {ResourceData} resources.tertiary            Resource number three.
  * @property {ActorFavorites5e[]} favorites               The character's favorites.
  */
 export default class CharacterData extends CreatureTemplate {
@@ -96,10 +100,13 @@ export default class CharacterData extends CreatureTemplate {
             nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsCurrent"
           }),
           max: new NumberField({
-            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride"
+            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride",
+            hint: "DND5E.HitPointsOverrideHint"
           }),
           temp: new NumberField({ integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp" }),
-          tempmax: new NumberField({ integer: true, initial: 0, label: "DND5E.HitPointsTempMax" }),
+          tempmax: new NumberField({
+            integer: true, initial: 0, label: "DND5E.HitPointsTempMax", hint: "DND5E.HitPointsTempMaxHint"
+          }),
           bonuses: new SchemaField({
             level: new FormulaField({ deterministic: true, label: "DND5E.HitPointsBonusLevel" }),
             overall: new FormulaField({ deterministic: true, label: "DND5E.HitPointsBonusOverall" })
@@ -115,6 +122,10 @@ export default class CharacterData extends CreatureTemplate {
         }, { label: "DND5E.DeathSave" }),
         inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" })
       }, { label: "DND5E.Attributes" }),
+      bastion: new SchemaField({
+        name: new StringField({ required: true }),
+        description: new HTMLField()
+      }),
       details: new SchemaField({
         ...DetailsFields.common,
         ...DetailsFields.creature,

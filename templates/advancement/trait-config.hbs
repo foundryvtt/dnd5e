@@ -16,7 +16,8 @@
             <label>{{localize "DND5E.AdvancementTraitAllowReplacements"}}</label>
             <div class="form-fields">
                 <input name="configuration.allowReplacements" id="allowReplacements"
-                             type="checkbox" {{checked configuration.allowReplacements}}>
+                             type="checkbox" {{checked configuration.allowReplacements}}
+                             {{ disabled disableAllowReplacements }}>
             </div>
             <p class="hint">{{localize "DND5E.AdvancementTraitAllowReplacementsHint"}}</p>
         </div>

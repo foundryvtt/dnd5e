@@ -191,6 +191,7 @@ export default function DocumentSheetV2Mixin(Base) {
     _disableFields(form) {
       super._disableFields(form);
       form.querySelectorAll(".interface-only").forEach(input => input.disabled = false);
+      form.querySelectorAll("dnd5e-checkbox:not(.interface-only)").forEach(input => input.disabled = true);
     }
 
     /* -------------------------------------------- */

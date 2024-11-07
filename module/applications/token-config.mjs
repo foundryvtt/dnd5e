@@ -44,8 +44,7 @@ export default class TokenConfig5e extends TokenConfig {
   _addItemAttributes(attributes) {
     const actor = this.object?.actor;
     const items = actor?.items.reduce((arr, i) => {
-      const { per, max } = i.system.uses ?? {};
-      if ( per && max ) arr.push([i.getRelativeUUID(actor), i.name]);
+      if ( i.hasLimitedUses ) arr.push([i.getRelativeUUID(actor), i.name]);
       return arr;
     }, []) ?? [];
     if ( items.length ) {

@@ -56,6 +56,10 @@ export default class ShortRestDialog extends Dialog {
       context.denomination = (context.availableHD[this._denom] > 0) ? this._denom : dice.find(([k, v]) => v > 0)?.[0];
     }
 
+    context.hdOptions = Object.entries(context.availableHD).map(([value, number]) => ({
+      value, label: `${value} (${number} ${game.i18n.localize("DND5E.available")})`
+    }));
+
     // Determine rest type
     const variant = game.settings.get("dnd5e", "restVariant");
     context.promptNewDay = variant !== "epic";     // It's never a new day when only resting 1 minute

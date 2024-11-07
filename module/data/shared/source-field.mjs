@@ -54,6 +54,7 @@ export default class SourceField extends SchemaField {
 
     Object.defineProperty(this, "directlyEditable", {
       value: (this.custom ?? "") === this.label,
+      configurable: true,
       enumerable: false
     });
   }

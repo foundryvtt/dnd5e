@@ -2,7 +2,7 @@
   "_id": "HLhFCDGfI8EK7uV9",
   "name": "Boots of Levitation",
   "type": "equipment",
-  "img": "icons/equipment/feet/boots-collared-rounded-brown.webp",
+  "img": "icons/equipment/feet/boots-layered-blue.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While you wear these boots, you can use an action to cast the <em>@UUID[Compendium.dnd5e.spells.Item.MRxldJd6C4bsBo3O]{Levitate}</em> spell on yourself at will.</p>",
@@ -64,69 +64,60 @@
       "mgc"
     ],
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "utility",
+      "efepst7jgpEyeh5e": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.MRxldJd6C4bsBo3O",
+          "challenge": {
+            "attack": null,
+            "save": null,
+            "override": false
+          },
+          "level": null,
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "efepst7jgpEyeh5e",
+        "sort": 0,
         "activation": {
           "type": "action",
-          "value": 1,
-          "condition": "",
+          "value": null,
           "override": false
         },
         "consumption": {
-          "targets": [],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": false
           },
-          "spellSlot": true
+          "spellSlot": true,
+          "targets": []
         },
-        "description": {
-          "chatFlavor": ""
-        },
+        "description": {},
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "10",
-          "units": "minute",
-          "special": "",
           "override": false
         },
-        "effects": [],
         "range": {
-          "units": "",
-          "special": "",
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft"
           },
           "affects": {
-            "count": "",
-            "type": "self",
-            "choice": false,
-            "special": ""
+            "choice": false
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
           "recovery": []
-        },
-        "sort": 0
+        }
       }
     },
     "attuned": false,
@@ -138,14 +129,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037150041,
-    "modifiedTime": 1725992500516,
+    "modifiedTime": 1729015178969,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!HLhFCDGfI8EK7uV9"

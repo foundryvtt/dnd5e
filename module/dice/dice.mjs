@@ -1,4 +1,4 @@
-const { NumericTerm, OperatorTerm } = foundry.dice.terms;
+const { OperatorTerm } = foundry.dice.terms;
 
 /* -------------------------------------------- */
 /* D20 Roll                                     */
@@ -7,7 +7,7 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
 /**
  * Configuration data for a D20 roll.
  *
- * @typedef {object} D20RollConfiguration
+ * @typedef {object} DeprecatedD20RollConfiguration
  *
  * @property {string[]} [parts=[]]  The dice roll component parts, excluding the initial d20.
  * @property {object} [data={}]     Data that will be used when parsing this roll.
@@ -21,6 +21,8 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  * @property {number|null} [fumble=1]  The value of the d20 result which represents a critical failure,
  *                                     `null` will prevent critical failures.
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
+ * @property {string|false} [ammunition]  Ammunition to use with an attack roll.
+ * @property {string} [attackMode]     Default attack mode to use with an attack roll.
  * @property {string} [mastery]        Weapon mastery to use with an attack roll.
  *
  * ## Flags
@@ -51,88 +53,58 @@ const { NumericTerm, OperatorTerm } = foundry.dice.terms;
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
  *
- * @param {D20RollConfiguration} configuration  Configuration data for the D20 roll.
+ * @param {DeprecatedD20RollConfiguration} configuration  Configuration data for the D20 roll.
  * @returns {Promise<D20Roll|null>}             The evaluated D20Roll, or null if the workflow was cancelled.
  */
 export async function d20Roll({
   parts=[], data={}, event,
-  advantage, disadvantage, critical=20, fumble=1, targetValue, mastery,
+  advantage, disadvantage, critical=20, fumble=1, targetValue, attackMode, ammunition, mastery,
   elvenAccuracy, halflingLucky, reliableTalent,
   fastForward, ammunitionOptions, attackModes, chooseModifier=false, masteryOptions, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
+  foundry.utils.logCompatibilityWarning(
+    "The `d20Roll` standalone method has been deprecated and replaced with `CONFIG.Dice.D20Roll.build`.",
+    { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+  );
 
-  // Handle input arguments
-  const formula = ["1d20"].concat(parts).join(" + ");
-  const {advantageMode, isFF} = CONFIG.Dice.D20Roll.determineAdvantageMode({
-    advantage, disadvantage, fastForward, event
-  });
-  const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
-  if ( chooseModifier && !isFF ) {
-    data.mod = "@mod";
-    if ( "abilityCheckBonus" in data ) data.abilityCheckBonus = "@abilityCheckBonus";
-  }
+  const rollConfig = {
+    event, ammunition, attackMode, mastery, elvenAccuracy, halflingLucky, reliableTalent,
+    rolls: [{
+      parts, data,
+      options: {
+        advantage, disadvantage,
+        criticalSuccess: critical,
+        criticalFailure: fumble,
+        target: targetValue
+      }
+    }]
+  };
 
-  // Construct the D20Roll instance
-  const roll = new CONFIG.Dice.D20Roll(formula, data, {
-    flavor: flavor || title,
-    advantageMode,
-    defaultRollMode,
-    rollMode,
-    critical,
-    fumble,
-    targetValue,
-    mastery,
-    elvenAccuracy,
-    halflingLucky,
-    reliableTalent
-  });
-
-  // Prompt a Dialog to further configure the D20Roll
-  if ( !isFF ) {
-    const configured = await roll.configureDialog({
-      title,
+  const dialogConfig = {
+    options: {
       ammunitionOptions,
       attackModes,
       chooseModifier,
-      defaultRollMode,
-      defaultAction: advantageMode,
-      defaultAbility: data?.item?.ability || data?.defaultAbility,
       masteryOptions,
-      template
-    }, dialogOptions);
-    if ( configured === null ) return null;
-  } else {
-    roll.options.ammunition ??= ammunitionOptions?.[0]?.value;
-    roll.options.rollMode ??= defaultRollMode;
-  }
+      ...(dialogOptions ?? {}),
+      title
+    }
+  };
+  if ( fastForward !== undefined ) dialogConfig.configure = !fastForward;
 
-  // If ammunition has a magical bonus, add it to the roll
-  const ammo = ammunitionOptions?.find(a => a.value === roll.options.ammunition);
-  if ( ammo?.item.system.magicAvailable && ammo.item.system.magicalBonus ) {
-    roll.terms.push(new OperatorTerm({ operator: "+" }), new NumericTerm({ number: ammo.item.system.magicalBonus }));
-    roll.resetFormula();
-  }
+  const messageConfig = {
+    create: chatMessage,
+    data: {
+      ...messageData,
+      flavor
+    },
+    rollMode: rollMode ?? game.settings.get("core", "rollMode")
+  };
 
-  // Evaluate the configured roll
-  await roll.evaluate({ allowInteractive: (roll.options.rollMode ?? defaultRollMode) !== CONST.DICE_ROLL_MODES.BLIND });
+  const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
 
-  // Attach original message ID to the message
-  messageData = foundry.utils.expandObject(messageData);
-  const messageId = event?.target.closest("[data-message-id]")?.dataset.messageId;
-  if ( messageId ) foundry.utils.setProperty(messageData, "flags.dnd5e.originatingMessage", messageId);
-
-  // Store the ammunition used in the chat message
-  if ( ammo ) foundry.utils.setProperty(messageData, "flags.dnd5e.roll.ammunition", ammo.value);
-
-  // Set the attack mode
-  if ( roll.options.attackMode || attackModes?.length ) foundry.utils.setProperty(
-    messageData, "flags.dnd5e.roll.attackMode", roll.options.attackMode ?? attackModes[0].value
-  );
-
-  // Create a Chat Message
-  if ( roll && chatMessage ) await roll.toMessage(messageData);
-  return roll;
+  return rolls?.[0] ?? null;
 }
 
 /* -------------------------------------------- */
@@ -229,12 +201,12 @@ export async function damageRoll({
   }
 
   const dialogConfig = {
-    configure: !fastForward,
     options: {
       ...(dialogOptions ?? {}),
       title
     }
   };
+  if ( fastForward !== undefined ) dialogConfig.configure = !fastForward;
 
   const messageConfig = {
     create: chatMessage,

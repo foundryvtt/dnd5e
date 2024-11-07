@@ -6,8 +6,10 @@
                  localize=true options=equipmentTypes }}
 
     {{!-- Equipment Base --}}
+    {{#if baseItems}}
     {{ formField fields.type.fields.baseItem value=source.type.baseItem label="DND5E.ItemEquipmentBase" blank=""
                  localize=true choices=baseItems }}
+    {{/if}}
 
     {{!-- Proficiency --}}
     {{ formField fields.proficient value=source.proficient blank="DND5E.Automatic" localize=true
@@ -49,7 +51,7 @@
         <div class="form-fields">
 
             {{!-- Attunement --}}
-            {{#unless isMountable}}
+            {{#unless system.isMountable}}
             <div class="form-group label-top">
                 <label>{{ localize "DND5E.Attunement" }}</label>
                 <div class="form-fields">

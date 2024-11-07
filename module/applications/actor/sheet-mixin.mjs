@@ -33,16 +33,16 @@ export default Base => class extends Base {
 
   /**
    * Stack identical consumables when a new one is dropped rather than creating a duplicate item.
-   * @param {object} itemData         The item data requested for creation.
-   * @returns {Promise<Item5e>|null}  If a duplicate was found, returns the adjusted item stack.
+   * @param {object} itemData                  The item data requested for creation.
+   * @param {object} [options={}]
+   * @param {string} [options.container=null]  ID of the container into which this item is being dropped.
+   * @returns {Promise<Item5e>|null}           If a duplicate was found, returns the adjusted item stack.
    */
-  _onDropStackConsumables(itemData) {
+  _onDropStackConsumables(itemData, { container=null }={}) {
     const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags.core?.sourceId;
     if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
-    const similarItem = this.actor.items.find(i => {
-      const sourceId = i._stats?.compendiumSource;
-      return sourceId && (sourceId === droppedSourceId) && (i.type === "consumable") && (i.name === itemData.name);
-    });
+    const similarItem = this.actor.sourcedItems.get("Compendium.dnd5e.items.Item.ytlsBjYsZ7OBSEBs", { legacy: false })
+      ?.filter(i => (i.system.container === container) && (i.name === itemData.name))?.first();
     if ( !similarItem ) return null;
     return similarItem.update({
       "system.quantity": similarItem.system.quantity + Math.max(itemData.system.quantity, 1)

@@ -3,8 +3,8 @@
         <legend>
             <span>{{ localize "DND5E.CONSUMPTION.FIELDS.consumption.label" }}</span>
             <button type="button" class="unbutton control-button" data-action="addConsumption"
-                    data-tooltip="DND5E.CONSUMPTION.Action.Delete"
-                    aria-label="{{ localize "DND5E.CONSUMPTION.Action.Delete" }}">
+                    data-tooltip="DND5E.CONSUMPTION.Action.Create"
+                    aria-label="{{ localize "DND5E.CONSUMPTION.Action.Create" }}">
                 <i class="fas fa-plus" inert></i>
             </button>
         </legend>
@@ -54,7 +54,7 @@
         {{/each}}
     </fieldset>
 
-    {{#unless activity.isSpell}}
+    {{#if showScaling}}
     {{#with fields.consumption.fields.scaling.fields as |fields|}}
     <fieldset>
         <legend>{{ localize "DND5E.CONSUMPTION.FIELDS.consumption.scaling.label" }}</legend>
@@ -65,7 +65,7 @@
         {{/if}}
     </fieldset>
     {{/with}}
-    {{/unless}}
+    {{/if}}
 
     {{> "dnd5e.field-uses" hasLimitedUses=true }}
 </section>

@@ -38,7 +38,7 @@ export default Base => class extends SystemFlagsMixin(Base) {
   /**
    * Perform preliminary operations before a Document of this type is updated.
    * Pre-update operations only occur for the client which requested the operation.
-   * @param {object} changed            The differential data that is changed relative to the documents prior values
+   * @param {object} changed            The differential data that is changed relative to the document's prior values.
    * @param {object} options            Additional options which modify the update request
    * @param {documents.BaseUser} user   The User requesting the document update
    * @returns {Promise<boolean|void>}   A return value of false indicates the update operation should be cancelled.

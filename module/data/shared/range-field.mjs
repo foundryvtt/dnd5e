@@ -40,7 +40,11 @@ export default class RangeField extends SchemaField {
     if ( labels && this.range.units ) {
       const parts = [];
       if ( this.range.scalar && this.range.value ) {
-        parts.push(this.range.value, game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`));
+        parts.push(
+          this.range.value,
+          this.range.units in CONFIG.DND5E.movementUnits
+            ? game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`) : null
+        );
       } else if ( !this.range.scalar ) {
         parts.push(CONFIG.DND5E.distanceUnits[this.range.units]);
       }

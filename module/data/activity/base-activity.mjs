@@ -70,7 +70,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         blank: false, required: true, readOnly: true, initial: () => this.metadata.type
       }),
       name: new StringField({ initial: undefined }),
-      img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
+      img: new FilePathField({ initial: undefined, categories: ["IMAGE"], base64: false }),
       sort: new IntegerSortField(),
       activation: new ActivationField({
         override: new BooleanField()
@@ -127,6 +127,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * A specific set of activation-specific labels displayed in chat cards.
+   * @type {object|null}
+   */
+  get activationLabels() {
+    if ( !this.activation.type || this.isSpell ) return null;
+    const { activation, duration, range, target } = this.labels;
+    return { activation, duration, range, target };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Effects that can be applied from this activity.
    * @type {ActiveEffect5e[]|null}
    */
@@ -162,7 +174,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScaleDamage() {
-    return this.consumption.scaling.allowed || this.isSpell;
+    return this.consumption.scaling.allowed || this.isScaledScroll || this.isSpell;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this activity on a spell scroll that is scaled.
+   * @type {boolean}
+   */
+  get isScaledScroll() {
+    return !!this.item.getFlag("dnd5e", "spellLevel");
   }
 
   /* -------------------------------------------- */
@@ -299,7 +321,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }
     });
 
-    if ( source.system.recharge?.value ) targets.push({
+    if ( source.system.recharge?.value && source.system.uses?.per ) targets.push({
       type: source.system.uses?.max ? "activityUses" : "itemUses",
       target: "",
       value: "1",
@@ -496,7 +518,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformUsesData(source, options) {
-    if ( !source.system.recharge?.value || !source.system.uses?.max ) return { spent: 0, max: "", recovery: [] };
+    // Do not add a recharge recovery to the activity if the parent item would already get recharge recovery.
+    if ( !source.system.recharge?.value || !source.system.uses?.max || !source.system.uses?.per ) {
+      return { spent: 0, max: "", recovery: [] };
+    }
     return {
       spent: source.system.recharge.charged ? 0 : 1,
       max: "1",
@@ -530,10 +555,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
 
-    this._setOverride("activation");
-    this._setOverride("duration");
-    this._setOverride("range");
-    this._setOverride("target");
+    if ( this.activation ) this._setOverride("activation");
+    if ( this.duration ) this._setOverride("duration");
+    if ( this.range ) this._setOverride("range");
+    if ( this.target ) this._setOverride("target");
 
     Object.defineProperty(this, "_inferredSource", {
       value: Object.freeze(this.toObject(false)),
@@ -542,20 +567,20 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       writable: false
     });
 
-    ActivationField.prepareData.call(this, rollData, this.labels);
-    DurationField.prepareData.call(this, rollData, this.labels);
-    RangeField.prepareData.call(this, rollData, this.labels);
-    TargetField.prepareData.call(this, rollData, this.labels);
-    UsesField.prepareData.call(this, rollData, this.labels);
+    if ( this.activation ) ActivationField.prepareData.call(this, rollData, this.labels);
+    if ( this.duration ) DurationField.prepareData.call(this, rollData, this.labels);
+    if ( this.range ) RangeField.prepareData.call(this, rollData, this.labels);
+    if ( this.target ) TargetField.prepareData.call(this, rollData, this.labels);
+    if ( this.uses ) UsesField.prepareData.call(this, rollData, this.labels);
 
     const actor = this.item.actor;
-    if ( !actor ) return;
+    if ( !actor || !("consumption" in this) ) return;
     for ( const target of this.consumption.targets ) {
       if ( !["itemUses", "material"].includes(target.type) || !target.target ) continue;
 
       // Re-link UUIDs in consumption fields to explicit items on the actor
       if ( target.target.includes(".") ) {
-        const item = actor.sourcedItems?.get(target.target);
+        const item = actor.sourcedItems?.get(target.target, { legacy: false })?.first();
         if ( item ) target.target = item.id;
       }
 
@@ -658,17 +683,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const data = { ...rollData };
 
     if ( index === 0 ) {
-      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${this.actionType}.damage`);
-      if ( bonus && (parseInt(bonus) !== 0) ) {
-        parts.push("@bonus");
-        data.bonus = bonus;
-      }
+      let actionType = this.actionType;
+      if ( (actionType === "mwak") && rollConfig.attackMode?.startsWith("thrown") ) actionType = "rwak";
+      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
+      if ( bonus && (parseInt(bonus) !== 0) ) parts.push(bonus);
     }
+
+    const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
 
     return {
       data, parts,
       options: {
-        type: this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`) ?? damage.types.first(),
+        type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
         types: Array.from(damage.types),
         properties: Array.from(this.item.system.properties ?? [])
           .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)

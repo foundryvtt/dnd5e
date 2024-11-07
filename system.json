@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "compatibility": {
     "minimum": "12.331",
     "verified": "12"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-4.0.0/dnd5e-release-4.0.0.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-4.1.0/dnd5e-release-4.1.0.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -29,7 +29,7 @@
     },
     "Actor": {
       "character": {
-        "htmlFields": ["details.biography.value", "details.biography.public"]
+        "htmlFields": ["details.biography.value", "details.biography.public", "bastion.description"]
       },
       "npc": {
         "htmlFields": ["details.biography.value", "details.biography.public"]
@@ -80,6 +80,9 @@
       },
       "backpack": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+      },
+      "facility": {
+        "htmlFields": ["description.value", "description.chat"]
       }
     },
     "JournalEntryPage": {
@@ -355,7 +358,7 @@
         "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.k7Rs5EyXeA0SFTXD"
       ]
     },
-    "needsMigrationVersion": "4.0.0",
+    "needsMigrationVersion": "4.0.1",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
       "extensions": ["css", "hbs", "json"],

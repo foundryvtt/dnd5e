@@ -6,7 +6,7 @@ import DocumentSheet5e from "./api/document-sheet.mjs";
 export default class SourceConfig extends DocumentSheet5e {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["source-config"],
+    classes: ["source-config", "standard-form"],
     sheetConfig: false,
     position: {
       width: 400
@@ -51,7 +51,7 @@ export default class SourceConfig extends DocumentSheet5e {
     context.keyPath = this.options.keyPath;
     context.source = source.source;
     context.sourceUuid = this.document._stats.compendiumSource;
-    context.hasSourceId = !!(await fromUuid(context.sourceUuid));
+    context.sourceAnchor = (await fromUuid(context.sourceUuid))?.toAnchor().outerHTML;
     context.rulesVersions = [
       { value: "", label: "" },
       { value: "2024", label: game.i18n.localize("SETTINGS.DND5E.RULESVERSION.Modern") },

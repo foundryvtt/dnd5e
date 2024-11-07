@@ -253,8 +253,8 @@
                     <div class="right cr-badge badge" aria-label="{{ localize "DND5E.CRLabel" cr=system.details.cr }}"
                          {{#unless editable}}data-tooltip="DND5E.ChallengeRating"{{/unless}}>
                         {{#if editable}}
-                        <input type="number" class="uninput" name="system.details.cr" value="{{ source.details.cr }}"
-                               step="any">
+                        <input type="text" class="uninput" name="system.details.cr"
+                               value="{{ dnd5e-formatCR source.details.cr }}">
                         {{else}}
                         {{{ dnd5e-formatCR system.details.cr }}}
                         {{/if}}

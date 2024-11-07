@@ -48,6 +48,8 @@ export default class InventoryElement extends HTMLElement {
       });
     }
 
+    this.querySelectorAll("input").forEach(e => e.addEventListener("focus", () => e.select()));
+
     // Bind activity menu to child to work around lack of stopImmediatePropagation in ContextMenu#bind
     new ContextMenu5e(this.querySelector(".items-list"), ".activity-row[data-activity-id]", [], {
       onOpen: this._onOpenContextMenu.bind(this)
@@ -201,14 +203,13 @@ export default class InventoryElement extends HTMLElement {
       {
         name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: () => !item.system.metadata?.singleton && !["class", "subclass"].includes(item.type) && item.isOwner
-          && !item.compendium?.locked,
+        condition: () => item.canDuplicate && item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], "duplicate")
       },
       {
         name: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
-        condition: () => item.isOwner && !item.compendium?.locked,
+        condition: () => item.canDelete && item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], "delete")
       },
       {
@@ -218,7 +219,8 @@ export default class InventoryElement extends HTMLElement {
           const scroll = await Item5e.createScrollFromSpell(item);
           if ( scroll ) Item5e.create(scroll, { parent: this.actor });
         },
-        condition: li => (item.type === "spell") && this.actor?.isOwner && !this.actor?.compendium?.locked,
+        condition: li => (item.type === "spell") && !item.getFlag("dnd5e", "cachedFor") && this.actor?.isOwner
+          && !this.actor?.compendium?.locked,
         group: "action"
       },
       {
@@ -262,7 +264,8 @@ export default class InventoryElement extends HTMLElement {
     });
 
     // Toggle Prepared State
-    else if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared") ) options.push({
+    else if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared")
+      && !item.getFlag("dnd5e", "cachedFor") ) options.push({
       name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
       icon: "<i class='fas fa-sun fa-fw'></i>",
       condition: () => item.isOwner && !item.compendium?.locked,

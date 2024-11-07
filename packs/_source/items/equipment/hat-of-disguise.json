@@ -2,7 +2,7 @@
   "_id": "dQxqcjDm0IxYusCV",
   "name": "Hat of Disguise",
   "type": "equipment",
-  "img": "icons/magic/control/silhouette-hold-change-blue.webp",
+  "img": "icons/equipment/head/hat-belted-simple.webp",
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing this hat, you can use an action to cast the @UUID[Compendium.dnd5e.spells.Item.A3q2gTNqG6fvNGrv]{Disguise Self} spell from it at will. The spell ends if the hat is removed.</p>",
@@ -64,138 +64,60 @@
       "mgc"
     ],
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "utility",
+      "wRay1ZVWKBGtk9mL": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.A3q2gTNqG6fvNGrv",
+          "challenge": {
+            "attack": null,
+            "save": null,
+            "override": false
+          },
+          "level": null,
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "wRay1ZVWKBGtk9mL",
+        "sort": 0,
         "activation": {
           "type": "action",
-          "value": 1,
-          "condition": "",
+          "value": null,
           "override": false
         },
         "consumption": {
-          "targets": [],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": false
           },
-          "spellSlot": true
+          "spellSlot": true,
+          "targets": []
         },
-        "description": {
-          "chatFlavor": ""
-        },
+        "description": {},
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
-        "effects": [],
         "range": {
-          "units": "self",
-          "special": "",
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft"
           },
           "affects": {
-            "count": "",
-            "type": "self",
-            "choice": false,
-            "special": ""
+            "choice": false
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
           "recovery": []
-        },
-        "sort": 0
-      },
-      "dnd5eactivity100": {
-        "_id": "dnd5eactivity100",
-        "type": "save",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
-        },
-        "consumption": {
-          "targets": [],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "units": "self",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "",
-            "type": "self",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "damage": {
-          "onSave": "half",
-          "parts": []
-        },
-        "save": {
-          "ability": "int",
-          "dc": {
-            "calculation": "spellcasting",
-            "formula": ""
-          }
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
+        }
       }
     },
     "attuned": false,
@@ -207,14 +129,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037234437,
-    "modifiedTime": 1725992528761,
+    "modifiedTime": 1729015322129,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!dQxqcjDm0IxYusCV"

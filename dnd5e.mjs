@@ -53,9 +53,6 @@ Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
   console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
-  // TODO: Remove when v11 support is dropped.
-  CONFIG.compatibility.excludePatterns.push(/select/);
-
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
@@ -74,6 +71,7 @@ Hooks.once("init", function() {
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
   CONFIG.Dice.BasicRoll = dice.BasicRoll;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
+  CONFIG.Dice.D20Die = dice.D20Die;
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.Note.objectClass = canvas.Note5e;
@@ -110,6 +108,15 @@ Hooks.once("init", function() {
     delete DND5E.transformationPresets.polymorph.options.addTemp;
     delete DND5E.transformationPresets.polymorph.options.keepHP;
     delete DND5E.transformationPresets.polymorph.options.keepType;
+
+    // Adjust language categories.
+    delete DND5E.languages.standard.children.sign;
+    DND5E.languages.exotic.children.draconic = DND5E.languages.standard.children.draconic;
+    delete DND5E.languages.standard.children.draconic;
+    DND5E.languages.cant = DND5E.languages.exotic.children.cant;
+    delete DND5E.languages.exotic.children.cant;
+    DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
+    delete DND5E.languages.exotic.children.druidic;
   }
 
   // Register Roll Extensions
@@ -189,11 +196,14 @@ Hooks.once("init", function() {
     types: ["spells"]
   });
 
-  CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
-  DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
-  DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
-    label: "DND5E.SheetClassToken"
-  });
+  if ( game.release.generation === 12 ) {
+    // TODO: Update sheet classes and remove the above check
+    CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
+    DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
+    DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
+      label: "DND5E.SheetClassToken"
+    });
+  }
 
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
@@ -337,10 +347,8 @@ function _configureStatusEffects() {
   const addEffect = (effects, {special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
-    if ( foundry.utils.isNewerVersion(game.version, 12) ) {
-      data.img = data.icon ?? data.img;
-      delete data.icon;
-    }
+    data.img = data.icon ?? data.img;
+    delete data.icon;
     effects.push(data);
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
   };
@@ -385,6 +393,20 @@ Hooks.once("setup", function() {
   // Apply custom item compendium
   game.packs.filter(p => p.metadata.type === "Item")
     .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
+
+  // Create CSS for currencies
+  const style = document.createElement("style");
+  const currencies = append => Object.entries(CONFIG.DND5E.currencies)
+    .map(([key, { icon }]) => `&.${key}${append ?? ""} { background-image: url("${icon}"); }`);
+  style.innerHTML = `
+    :is(.dnd5e2, .dnd5e2-journal) :is(i, span).currency {
+      ${currencies().join("\n")}
+    }
+    .dnd5e2 .form-group label.label-icon.currency {
+      ${currencies("::after").join("\n")}
+    }
+  `;
+  document.head.append(style);
 });
 
 /* --------------------------------------------- */
@@ -408,13 +430,25 @@ function expandAttributeList(attributes) {
  */
 Hooks.once("i18nInit", () => {
   if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
-    const trans = game.i18n.translations;
-    trans.TYPES.Item.race = trans.TYPES.Item.raceLegacy;
-    trans.TYPES.Item.racePl = trans.TYPES.Item.raceLegacyPl;
-    trans.DND5E.LanguagesExotic = trans.DND5E.LanguagesExoticLegacy;
-    trans.DND5E.TargetRadius = trans.DND5E.TargetRadiusLegacy;
-    foundry.utils.mergeObject(trans.DND5E.TraitArmorPlural, DND5E.TraitArmorLegacyPlural);
-    trans.DND5E.TraitArmorProf = trans.DND5E.TraitArmorLegacyProf;
+    const { translations, _fallback } = game.i18n;
+    foundry.utils.mergeObject(translations, {
+      "TYPES.Item": {
+        race: game.i18n.localize("TYPES.Item.raceLegacy"),
+        racePl: game.i18n.localize("TYPES.Item.raceLegacyPl")
+      },
+      DND5E: {
+        LanguagesExotic: game.i18n.localize("DND5E.LanguagesExoticLegacy"),
+        LongRestHint: game.i18n.localize("DND5E.LongRestHintLegacy"),
+        LongRestHintGroup: game.i18n.localize("DND5E.LongRestHintGroupLegacy"),
+        TargetRadius: game.i18n.localize("DND5E.TargetRadiusLegacy"),
+        TraitArmorPlural: foundry.utils.mergeObject(
+          _fallback.DND5E?.TraitArmorLegacyPlural ?? {},
+          translations.DND5E?.TraitArmorLegacyPlural ?? {},
+          { inplace: false }
+        ),
+        TraitArmorProf: game.i18n.localize("DND5E.TraitArmorLegacyProf")
+      }
+    });
   }
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());

@@ -1,6 +1,9 @@
 {
 "DOCUMENT.DND5E": {
-  "Activity": "Activity"
+  "Activity": "Activity",
+  "Warning": {
+    "SelectType": "{name} type must be selected for creation."
+  }
 },
 
 "TYPES.Actor.character": "Player Character",
@@ -25,6 +28,8 @@
 "TYPES.Item.consumablePl": "Consumables",
 "TYPES.Item.equipment": "Equipment",
 "TYPES.Item.equipmentPl": "Equipment",
+"TYPES.Item.facility": "Facility",
+"TYPES.Item.facilityPl": "Facilities",
 "TYPES.Item.feat": "Feature",
 "TYPES.Item.featurePl": "Features",
 "TYPES.Item.loot": "Loot",
@@ -51,6 +56,24 @@
 "DND5E.AbbreviationLevel": "Lvl.",
 "DND5E.AbbreviationLbs": "lbs.",
 "DND5E.AbbreviationSR": "SR",
+
+"DND5E.ABILITY": {
+  "Configure": {
+    "Title": "Configure {ability}"
+  },
+  "SECTIONS": {
+    "Bonuses": {
+      "Label": "{ability} Bonuses",
+      "Hint": "These bonuses apply to checks & saves made with {ability}."
+    },
+    "Global": {
+      "Label": "Global Bonuses",
+      "Hint": "These bonuses apply to checks & saves made with any ability."
+    },
+    "Score": "{ability} Score"
+  }
+},
+
 "DND5E.Ability": "Ability",
 "DND5E.Abilities": "Abilities",
 "DND5E.AbilityStr": "Strength",
@@ -70,23 +93,14 @@
 "DND5E.AbilitySan": "Sanity",
 "DND5E.AbilitySanAbbr": "san",
 "DND5E.AbilityScore": "Ability Score",
+"DND5E.AbilityScoreShort": "Score",
 "DND5E.AbilityScorePl": "Ability Scores",
 "DND5E.AbilityScoreL": "{ability} Score",
 "DND5E.AbilityScoreMax": "Maximum Ability Score",
+"DND5E.AbilityScoreMaxShort": "Maximum",
 "DND5E.AbilityModifier": "Ability Modifier",
 "DND5E.AbilityPromptText": "What type of {ability} check?",
 "DND5E.AbilityPromptTitle": "{ability} Ability Check",
-"DND5E.AbilityUseHint": "Configure how you would like to use the {name} {type}.",
-"DND5E.AbilityUseUnavailableHint": "There are no uses of this item remaining!",
-"DND5E.AbilityUseChargedHint": "This {type} is charged and ready to use!",
-"DND5E.AbilityUseRechargeHint": "This {type} is depleted and must be recharged!",
-"DND5E.AbilityUseNormalHint": "This {type} has {value} of {max} uses per {per} remaining.",
-"DND5E.AbilityUseConsumableChargeHint": "Using this {type} will consume 1 charge of {value} remaining.",
-"DND5E.AbilityUseConsumableQuantityHint": "Using this {type} will consume 1 quantity of {quantity} remaining",
-"DND5E.AbilityUseConsumableDestroyHint": "Using this {type} will consume its final charge and it will be destroyed.",
-"DND5E.AbilityUseConsumableDestroyResourceHint": "Using this {type} will consume the final charge off {name} and destroy it.",
-"DND5E.AbilityUseConsume": "Consume Available Usage?",
-"DND5E.AbilityUseConsumeAction": "Consume Usage",
 "DND5E.AbilityUseChargesLabel": "{value} Charges",
 "DND5E.AbilityUseConsumableLabel": "{max} per {per}",
 "DND5E.AbilityUseCast": "Cast Spell",
@@ -441,6 +455,7 @@
 "DND5E.ArmorHeavyProficiency": "Heavy",
 "DND5E.ArmorLightProficiency": "Light",
 "DND5E.ArmorMediumProficiency": "Medium",
+"DND5E.ArmorValue": "Armor Value",
 "DND5E.AC": "AC",
 
 "DND5E.ATTACK": {
@@ -499,6 +514,10 @@
       }
     }
   },
+  "Attack": {
+    "mwak": "Melee Attack",
+    "rwak": "Ranged Attack"
+  },
   "Classification": {
     "Spell": "Spell",
     "Unarmed": "Unarmed",
@@ -518,6 +537,10 @@
   },
   "Warning": {
     "NoQuantity": "Attempting to attack with a weapon with a quantity of zero."
+  },
+  "Weapon": {
+    "Melee": "Melee Weapon",
+    "Ranged": "Ranged Weapon"
   }
 },
 
@@ -546,6 +569,23 @@
 "DND5E.Background": "Background",
 "DND5E.BackgroundAdd": "Add Background",
 "DND5E.BackgroundName": "Background Name",
+
+"DND5E.Bastion": {
+  "Configuration": {
+    "Name": "Bastions",
+    "Label": "Configure Bastions",
+    "Hint": "Various configuration options for the Bastion system as presented in the DMG 2024."
+  },
+  "Duration": {
+    "Label": "Bastion Turn Duration (days)"
+  },
+  "Enabled": {
+    "Label": "Enable Bastion Functionality",
+    "Hint": "When enabled, player characters will have access to a new Bastion tab on their character sheets when reaching level 5, and will be able to build facilities and issue orders to them."
+  },
+  "Label": "Bastion"
+},
+
 "DND5E.Biography": "Biography",
 "DND5E.BiographyPublic": "Public Biography",
 "DND5E.BiopgrahyPublicEdit": "Edit Public Biography",
@@ -575,6 +615,55 @@
 "DND5E.Bonuses": "Global Bonuses",
 "DND5E.BonusesHint": "Define global bonuses as formulas which are added to certain rolls. For example: 1d4 + 2",
 "DND5E.BonusesInstructions": "Configure character bonuses which are added to the appropriate dice roll",
+
+"DND5E.CAST": {
+  "Title": "Cast",
+  "FIELDS": {
+    "spell": {
+      "label": "Casting Details",
+      "challenge": {
+        "attack": {
+          "label": "Attack Bonus",
+          "hint": "Flat to hit bonus in place of the spell's normal attack bonus."
+        },
+        "save": {
+          "label": "Save DC",
+          "hint": "Flat DC to use in place of the spell's normal save DC."
+        },
+        "override": {
+          "label": "Override Values",
+          "hint": "Override the spell's normal attack bonus & DC when casting."
+        }
+      },
+      "level": {
+        "label": "Casting Level",
+        "hint": "Base level to cast the spell, if different than the spell's level."
+      },
+      "properties": {
+        "label": "Ignored Properties",
+        "hint": "Spell components & tags to ignore while casting."
+      },
+      "spellbook": {
+        "label": "Display in Spellbook",
+        "hint": "Display spell in the Spells tab of the character sheet."
+      },
+      "uuid": {
+        "label": "Spell to Cast"
+      }
+    }
+  },
+  "SECTIONS": {
+    "Spell": "Spell",
+    "Spellbook": "Item Spells"
+  },
+  "Action": {
+    "RemoveSpell": "Remove Spell"
+  },
+  "Enchantment": {
+    "Name": "Spell Changes"
+  }
+},
+
 "DND5E.Casting": "Casting",
 "DND5E.Conditions": "Conditions",
 "DND5E.Controls": {
@@ -944,7 +1033,7 @@
       "Label": "Activity Uses",
       "PromptDecrease": "Consume Activity Use?",
       "PromptIncrease": "Restore Activity Use?",
-      "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of this activity.",
+      "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of this activity ({available} {availableUse} available).",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of this activity.",
       "Warning": "uses on {item}'s activity {activity}"
     },
@@ -952,15 +1041,15 @@
       "Label": "Attribute",
       "PromptDecrease": "Consume Attribute?",
       "PromptIncrease": "Restore Attribute?",
-      "PromptHintDecrease": "Decrease <code>{attribute}</code> by <strong>{cost}</strong>.",
-      "PromptHintIncrease": "Increase <code>{attribute}</code> by <strong>{cost}</strong>.",
+      "PromptHintDecrease": "Decrease <code>{attribute}</code> by <strong>{cost}</strong> (currently {current}).",
+      "PromptHintIncrease": "Increase <code>{attribute}</code> by <strong>{cost}</strong> (currently {current}).",
       "Warning": "{attribute} amount"
     },
     "HitDice": {
       "Label": "Hit Dice",
       "PromptDecrease": "Consume Hit Die?",
       "PromptIncrease": "Restore Hit Die?",
-      "PromptHintDecrease": "Spend <strong>{cost}</strong> {denomination} {die}.",
+      "PromptHintDecrease": "Spend <strong>{cost}</strong> {denomination} {die} ({available} remaining).",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {denomination} {die}.",
       "Warning": "{denomination} hit dice"
     },
@@ -972,7 +1061,7 @@
       "Label": "Item Uses",
       "PromptDecrease": "Consume Item Use?",
       "PromptIncrease": "Restore Item Use?",
-      "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of {item}.",
+      "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of {item} ({available} {availableUse} available).",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of {item}.",
       "Warning": "uses on {name}"
     },
@@ -980,7 +1069,7 @@
       "Label": "Material",
       "PromptDecrease": "Consume Material?",
       "PromptIncrease": "Restore Material?",
-      "PromptHintDecrease": "Reduce quantity of {item} by <strong>{cost}</strong>.",
+      "PromptHintDecrease": "Reduce quantity of {item} by <strong>{cost}</strong> ({quantity} remaining).",
       "PromptHintIncrease": "Increase quantity of {item} by <strong>{cost}</strong>.",
       "Warning": "of {name}"
     },
@@ -992,7 +1081,7 @@
       "Label": "Spell Slots",
       "PromptDecrease": "Consume Spell Slot?",
       "PromptIncrease": "Restore Spell Slot?",
-      "PromptHintDecrease": "Spend <strong>{cost}</strong> {slot}.",
+      "PromptHintDecrease": "Spend <strong>{cost}</strong> {slot} ({available} remaining).",
       "PromptHintIncrease": "Recover <strong>{cost}</strong> {slot}.",
       "Warning": "{level} slots"
     },
@@ -1007,7 +1096,8 @@
     "MissingItem": "Item configured to be consumed by {activity} activity on {item} could not be found.",
     "MissingSpellSlot": "No {level} slots available.",
     "None": "No {type} available to spend, {cost} required.",
-    "NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available."
+    "NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available.",
+    "WillDestroy": "Consuming {item} will spend its final use and it will be destroyed."
   }
 },
 
@@ -1078,6 +1168,9 @@
     "Label": "Convert",
     "Action": "Convert All Currency",
     "Hint": "Convert all carried currency to the highest possible denomination to reduce the amount of coinage carried by the character. Be wary, this action cannot be undone."
+  },
+  "Error": {
+    "InsufficientFunds": "Failed to deduct {amount}{denomination} from {name}. Insufficient funds."
   },
   "Transfer": {
     "Label": "Transfer",
@@ -1437,16 +1530,40 @@
 },
 
 "DND5E.Environment": "Environment",
+
+"DND5E.EQUIPMENT": {
+  "Type": {
+    "Clothing": {
+      "Label": "Clothing"
+    },
+    "Ring": {
+      "Label": "Ring"
+    },
+    "Rod": {
+      "Label": "Rod"
+    },
+    "Trinket": {
+      "Label": "Trinket"
+    },
+    "Vehicle": {
+      "Label": "Vehicle Equipment"
+    },
+    "Wand": {
+      "Label": "Wand"
+    },
+    "Wondrous": {
+      "Label": "Wondrous Item"
+    }
+  }
+},
+
 "DND5E.EquipmentBonus": "Magical Bonus",
-"DND5E.EquipmentClothing": "Clothing",
 "DND5E.EquipmentHeavy": "Heavy Armor",
 "DND5E.EquipmentLight": "Light Armor",
 "DND5E.EquipmentMedium": "Medium Armor",
 "DND5E.EquipmentNatural": "Natural Armor",
 "DND5E.EquipmentShield": "Shield",
 "DND5E.EquipmentShieldProficiency": "Shields",
-"DND5E.EquipmentTrinket": "Trinket",
-"DND5E.EquipmentVehicle": "Vehicle Equipment",
 "DND5E.Equipped": "Equipped",
 "DND5E.Exhaustion": "Exhaustion",
 "DND5E.ExhaustionLevel": "Exhaustion Level {n}",
@@ -1463,6 +1580,249 @@
 "DND5E.ExperiencePointsMin": "Minimum XP for This Level",
 "DND5E.ExperiencePointsValue": "XP Value",
 "DND5E.Expertise": "Expertise",
+
+"DND5E.FACILITY": {
+  "Action": {
+    "DeleteDefender": "Delete Defender",
+    "DeleteOccupant": "Delete Occupant",
+    "RemoveCraft": "Remove Craft"
+  },
+  "AvailableFacility": {
+    "basic": {
+      "build": "Build Facility",
+      "free": "Free Facility"
+    },
+    "special": {
+      "free": "Add Facility"
+    }
+  },
+  "Build": {
+    "Unbuilt": "Unbuilt"
+  },
+  "Costs": {
+    "Automatic": "Deduct Automatically",
+    "Days": "{days} days",
+    "Label": "Costs",
+    "Manual": "Mark as Paid",
+    "Paid": "paid",
+    "Unpaid": "unpaid"
+  },
+  "Craft": {
+    "BaseItem": {
+      "Label": "Purchase Base Item",
+      "Hint": "If checked, the base item will be purchased at full price instead of crafted."
+    },
+    "Hint": "The items that this facility is currently in the process of crafting or harvesting, if any."
+  },
+  "Description": "Description",
+  "FIELDS": {
+    "building": {
+      "built": {
+        "label": "Built",
+        "hint": "Basic facilities must be built first before they can be used."
+      }
+    },
+    "defenders": {
+      "max": {
+        "label": "Defenders"
+      }
+    },
+    "enlargeable": {
+      "hint": "Certain special facilities may have their size categories increased for a cost.",
+      "label": "Can Be Enlarged"
+    },
+    "free": {
+      "hint": "Free facilities do not count towards your special facilities cap.",
+      "label": "Free Facility"
+    },
+    "hirelings": {
+      "max": {
+        "label": "Hirelings"
+      }
+    },
+    "level": {
+      "label": "Level Requirement"
+    },
+    "order": {
+      "label": "Order"
+    },
+    "progress": {
+      "max": {
+        "label": "Total"
+      },
+      "order": {
+        "label": "Executing"
+      },
+      "value": {
+        "label": "Current"
+      }
+    },
+    "size": {
+      "label": "Size"
+    },
+    "trade": {
+      "creatures": {
+        "max": {
+          "label": "Creature Capacity"
+        }
+      },
+      "profit": {
+        "label": "Profit Factor"
+      },
+      "stock": {
+        "stocked": {
+          "hint": "Appropriate for facilities that do not store a variable value of goods, but are instead considered either stocked or empty.",
+          "label": "Stocked"
+        },
+        "value": {
+          "label": "Value"
+        },
+        "max": {
+          "label": "Max"
+        }
+      }
+    },
+    "type": {
+      "subtype": {
+        "label": "Type"
+      },
+      "value": {
+        "label": "Category"
+      }
+    }
+  },
+  "Goods": "Goods",
+  "NoDefenders": "Bastion is undefended.",
+  "Occupants": "Occupants",
+  "Order": {
+    "Execute": "Execute Order",
+    "Issue": "Issue Order: {order}"
+  },
+  "Orders": {
+    "Label": "Orders",
+    "build": {
+      "inf": "Build",
+      "present": "Building"
+    },
+    "craft": {
+      "inf": "Craft",
+      "present": "Crafting"
+    },
+    "empower": {
+      "inf": "Empower",
+      "present": "Empowering"
+    },
+    "enlarge": {
+      "inf": "Enlarge",
+      "present": "Enlarging"
+    },
+    "harvest": {
+      "inf": "Harvest",
+      "present": "Harvesting"
+    },
+    "maintain": {
+      "inf": "Maintain",
+      "present": "Maintaining"
+    },
+    "recruit": {
+      "inf": "Recruit",
+      "present": "Recruiting"
+    },
+    "research": {
+      "inf": "Research",
+      "present": "Researching"
+    },
+    "trade": {
+      "inf": "Trade",
+      "present": "Trading"
+    }
+  },
+  "Progress": "Progress",
+  "Properties": "Properties",
+  "Sizes": {
+    "cramped": "Cramped",
+    "roomy": "Roomy",
+    "vast": "Vast"
+  },
+  "Squares": "{squares} squares",
+  "Trade": {
+    "Buy": {
+      "Supplement": "Buy"
+    },
+    "Creatures": {
+      "Buy": "Drop animals that you wish to purchase into the slots above, and update the cost appropriately below."
+    },
+    "Price": {
+      "Label": "Base Price",
+      "Hint": "Select which stock to sell, and input the base price above."
+    },
+    "Sell": {
+      "Label": "Sell Stock",
+      "Supplement": "Sell"
+    },
+    "Stock": {
+      "Buy": "Buying",
+      "Sell": "Selling"
+    },
+    "Stocked": {
+      "Label": "Fully Stock",
+      "Hint": "Input the required cost to fully stock this facility below."
+    }
+  },
+  "Types": {
+    "Basic": {
+      "Label": {
+        "one": "Basic Facility",
+        "other": "Basic Facilities"
+      },
+      "Bedroom": "Bedroom",
+      "DiningRoom": "Dining Room",
+      "Parlor": "Parlor",
+      "Courtyard": "Courtyard",
+      "Kitchen": "Kitchen",
+      "Storage": "Storage"
+    },
+    "Special": {
+      "Label": {
+        "one": "Special Facility",
+        "other": "Special Facilities"
+      },
+      "ArcaneStudy": "Arcane Study",
+      "Armory": "Armory",
+      "Barrack": "Barrack",
+      "Garden": "Garden",
+      "Library": "Library",
+      "Sanctuary": "Sanctuary",
+      "Smithy": "Smithy",
+      "Storehouse": "Storehouse",
+      "Workshop": "Workshop",
+      "GamingHall": "Gaming Hall",
+      "Greenhouse": "Greenhouse",
+      "Laboratory": "Laboratory",
+      "Sacristy": "Sacristy",
+      "Scriptorium": "Scriptorium",
+      "Stable": "Stable",
+      "TeleportationCircle": "Teleportation Circle",
+      "Theater": "Theater",
+      "TrainingArea": "Training Area",
+      "TrophyRoom": "Trophy Room",
+      "Archive": "Archive",
+      "MeditationChamber": "Meditation Chamber",
+      "Menagerie": "Menagerie",
+      "Observatory": "Observatory",
+      "Pub": "Pub",
+      "Reliquary": "Reliquary",
+      "Demiplane": "Demiplane",
+      "Guildhall": "Guildhall",
+      "Sanctum": "Sanctum",
+      "WarRoom": "War Room"
+    }
+  },
+  "Use": {
+    "Description": "Issued the <strong>{order}</strong> order to their {link} {facilityType}."
+  }
+},
+
 "DND5E.Favorite": "Favorite",
 "DND5E.FavoriteDrop": "Drop Favorite",
 "DND5E.FavoriteRemove": "Remove Favorite",
@@ -1520,6 +1880,19 @@
 "DND5E.Loot.Treasure": "Treasure",
 "DND5E.Flaws": "Flaws",
 "DND5E.FormulaCannotContainDiceError": "{name} formula cannot contain dice expressions.",
+
+"DND5E.FORWARD": {
+  "Title": "Forward",
+  "FIELDS": {
+    "activity": {
+      "label": "Triggered Activity"
+    }
+  },
+  "Warning": {
+    "NoActivity": "Linked activity must be configured before Forward activity can be used."
+  }
+},
+
 "DND5E.EffectCreate": "Create Effect",
 "DND5E.EffectToggle": "Toggle Effect",
 "DND5E.EffectEdit": "Edit Effect",
@@ -1613,6 +1986,7 @@
 "DND5E.FormulaMalformedError": "Problem preparing the {property} formula within {name}.",
 "DND5E.FormulaMissingReferenceWarn": "The {property} formula within {name} has references to missing data: {references}",
 "DND5E.Gender": "Gender",
+"DND5E.GlobalBonus": "Global Bonus",
 "DND5E.GrantedAbilities": "Granted Abilities",
 "DND5E.GroupInventory": "Inventory",
 "DND5E.GroupHP": "Aggregate Hit Points",
@@ -1704,16 +2078,27 @@
 "DND5E.HitPointsCurrent": "Current Hit Points",
 "DND5E.HitPointsMax": "Maximum Hit Points",
 "DND5E.HitPointsMin": "Minimum Hit Points",
-"DND5E.HitPointsOverride": "Maximum Hit Points Override",
+"DND5E.HitPointsOverride": "Maximum Override",
+"DND5E.HitPointsOverrideHint": "Override automatically calculated hit points, ignoring any HP from classes, bonuses, and ability modifier.",
 "DND5E.HitPointsTemp": "Temporary Hit Points",
 "DND5E.HitPointsTempShort": "Temporary HP",
-"DND5E.HitPointsTempMax": "Temporary Maximum Hit Points",
+"DND5E.HitPointsTempMax": "Temporary Maximum",
+"DND5E.HitPointsTempMaxHint": "Temporary change to the maximum HP.",
 "DND5E.HitPointsTempMaxShort": "Temp Max HP",
 "DND5E.HP": "HP",
 "DND5E.HealthConditions": "Health Conditions",
 "DND5E.HPFormula": "Health Formula",
 "DND5E.HPFormulaError": "The provided hit point formula could not be evaluated.",
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
+
+"DND5E.HITDICE": {
+  "Action": {
+    "Decrease": "Decrease",
+    "Increase": "Increase"
+  },
+  "Config": "Adjust Hit Dice"
+},
+
 "DND5E.HitDie": "Hit Die",
 "DND5E.HitDice": "Hit Dice",
 "DND5E.HitDiceAutoSpend": {
@@ -1784,6 +2169,7 @@
 "DND5E.ItemEquipmentStealthDisav": "Imposes Stealth Disadvantage",
 "DND5E.ItemEquipmentType": "Equipment Type",
 "DND5E.ItemEquipmentUsage": "Equipment Usage",
+"DND5E.ItemFacilityDetails": "Facility Details",
 "DND5E.ItemFeatureDetails": "Feature Details",
 "DND5E.ItemFeatureProperties": "Feature Properties",
 "DND5E.ItemFeatureSubtype": "{category} Type",
@@ -1865,6 +2251,7 @@
 "DND5E.LanguagesAuran": "Auran",
 "DND5E.LanguagesCelestial": "Celestial",
 "DND5E.LanguagesCommon": "Common",
+"DND5E.LanguagesCommonSign": "Common Sign Language",
 "DND5E.LanguagesDeepSpeech": "Deep Speech",
 "DND5E.LanguagesDraconic": "Draconic",
 "DND5E.LanguagesDruidic": "Druidic",
@@ -1926,8 +2313,10 @@
 "DND5E.LongRestGritty": "Long Rest (7 days)",
 "DND5E.LongRestEpic": "Long Rest (1 hour)",
 "DND5E.LongRestOvernight": "Long Rest (New Day)",
-"DND5E.LongRestHint": "Take a long rest? On a long rest you will recover hit points, half your maximum hit dice, class resources, limited use item charges, and spell slots.",
-"DND5E.LongRestHintGroup": "Take a long rest? On a long rest group members will recover hit points, half of their maximum hit dice, class resources, limited use item charges, and spell slots.",
+"DND5E.LongRestHint": "Take a long rest? On a long rest you will recover hit points, hit dice, class resources, limited use item charges, and spell slots.",
+"DND5E.LongRestHintLegacy": "Take a long rest? On a long rest you will recover hit points, half your maximum hit dice, class resources, limited use item charges, and spell slots.",
+"DND5E.LongRestHintGroup": "Take a long rest? On a long rest group members will recover hit points, hit dice, class resources, limited use item charges, and spell slots.",
+"DND5E.LongRestHintGroupLegacy": "Take a long rest? On a long rest group members will recover hit points, half of their maximum hit dice, class resources, limited use item charges, and spell slots.",
 "DND5E.LongRestRecovery": "Recovers after Long Rest",
 "DND5E.LongRestResult": "{name} takes a long rest and recovers {health} Hit Points and {dice} Hit Dice.",
 "DND5E.LongRestResultHitDice": "{name} takes a long rest and recovers {dice} Hit Dice.",
@@ -2025,6 +2414,7 @@
 "DND5E.ProficiencyConfigurationHint": "Configure proficiency and bonuses.",
 "DND5E.ProficiencyConfigureTitle": "Configure {label}",
 "DND5E.ProficiencyLevel": "Proficiency Level",
+"DND5E.ProficiencyOther": "Other",
 "DND5E.Proficient": "Proficient",
 "DND5E.Properties": "Properties",
 "DND5E.PropertyBase": "Base",
@@ -2094,6 +2484,16 @@
 "DND5E.RestS": "S. Rest",
 "DND5E.Ritual": "Ritual",
 "DND5E.RitualAbbr": "R",
+
+"DND5E.ROLL": {
+  "Range": {
+    "Label": "Roll Range",
+    "Maximum": "Maximum Roll",
+    "Minimum": "Minimum Roll"
+  },
+  "Section": "{label} Rolls"
+},
+
 "DND5E.Roll": "Roll",
 "DND5E.RollConfiguration": {
   "Title": "Configure Roll",
@@ -2157,8 +2557,8 @@
     "save": {
       "label": "Save Details",
       "ability": {
-        "label": "Challenge Ability",
-        "hint": "Ability that must be rolled to attempt to save."
+        "label": "Challenge Abilities",
+        "hint": "Abilities that may be rolled to attempt to save."
       },
       "dc": {
         "label": "Difficulty Class",
@@ -2264,6 +2664,21 @@
 "DND5E.SizeSmallAbbr": "Sm",
 "DND5E.SizeTiny": "Tiny",
 "DND5E.SizeTinyAbbr": "Tn",
+
+"DND5E.SKILL": {
+  "SECTIONS": {
+    "Details": "{label} Details",
+    "Bonuses": {
+      "Label": "{label} Bonuses",
+      "Hint": "These bonuses apply to passive scores & checks made with {label}."
+    },
+    "Global": {
+      "Label": "Global Bonuses",
+      "Hint": "These bonuses apply to checks made with any skill."
+    }
+  }
+},
+
 "DND5E.Skill": "Skill",
 "DND5E.Skills": "Skills",
 "DND5E.SkillAcr": "Acrobatics",
@@ -2514,6 +2929,10 @@
       "hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
     },
     "match": {
+      "ability": {
+        "label": "Match Ability",
+        "hint": "Specific ability to use when when matching attacks and save DCs."
+      },
       "attacks": {
         "label": "Match Attacks",
         "hint": "Modify to hit values on the summoned creature's attacks to match that of the summoner."
@@ -2768,6 +3187,21 @@
   "Title": "Dynamic Ring"
 },
 "DND5E.ToggleDescription": "Toggle Description",
+
+"DND5E.TOOL": {
+  "SECTIONS": {
+    "Details": "{label} Details",
+    "Bonuses": {
+      "Label": "{label} Bonuses",
+      "Hint": "These bonuses apply to checks made with {label}."
+    },
+    "Global": {
+      "Label": "Global Bonuses",
+      "Hint": "These bonuses apply to checks made with any tool."
+    }
+  }
+},
+
 "DND5E.ToolArtisans": "Artisan's Tools",
 "DND5E.ToolBonuses": "Tool Bonuses",
 "DND5E.ToolCheck": "Tool Check",
@@ -2799,6 +3233,8 @@
 "DND5E.TraitConfigChooseWrapper": "Choose {choices}",
 "DND5E.TraitDIPlural.one": "Damage Immunity",
 "DND5E.TraitDIPlural.other": "Damage Immunities",
+"DND5E.TraitDMPlural.one": "Damage Modification",
+"DND5E.TraitDMPlural.other": "Damage Modifications",
 "DND5E.TraitDRPlural.one": "Damage Resistance",
 "DND5E.TraitDRPlural.other": "Damage Resistances",
 "DND5E.TraitDVPlural.one": "Damage Vulnerability",
@@ -3012,7 +3448,6 @@
 "DND5E.WeaponMartialProficiency": "Martial",
 "DND5E.WeaponMartialR": "Martial Ranged",
 "DND5E.WeaponNatural": "Natural",
-"DND5E.WeaponOtherProficiency": "Other",
 "DND5E.WeaponSiege": "Siege Weapon",
 "DND5E.WeaponSimpleM": "Simple Melee",
 "DND5E.WeaponSimpleProficiency": "Simple",

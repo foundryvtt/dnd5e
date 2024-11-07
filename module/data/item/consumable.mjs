@@ -47,7 +47,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({ value: "potion", baseItem: false }, { label: "DND5E.ItemConsumableType" }),
+      type: new ItemTypeField({ baseItem: false }, { label: "DND5E.ItemConsumableType" }),
       damage: new SchemaField({
         base: new DamageField(),
         replace: new BooleanField()
@@ -134,6 +134,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.preparePhysicalData();
     if ( !this.type.value ) return;
     const config = CONFIG.DND5E.consumableTypes[this.type.value];
     if ( config ) {
@@ -245,5 +246,32 @@ export default class ConsumableData extends ItemDataModel.mixin(
     else if ( this.type.value === "scroll" ) CONFIG.DND5E.validProperties.spell
       .filter(p => p !== "material").forEach(p => valid.add(p));
     return valid;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getCraftCost(options={}) {
+    const { days, gold } = await super.getCraftCost(options);
+    const { consumable, magic } = CONFIG.DND5E.crafting;
+    const { rarity } = this;
+    if ( !this.properties.has("mgc") || !(rarity in magic) ) return { days, gold };
+    const costs = magic[rarity];
+    return {
+      days: Math.floor(costs.days * consumable.days),
+      gold: Math.floor(costs.gold * consumable.gold)
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(...options) {
+    const data = super.getRollData(...options);
+    const spellLevel = this.parent.getFlag("dnd5e", "spellLevel");
+    if ( spellLevel ) data.item.level = spellLevel.value ?? spellLevel.base;
+    return data;
   }
 }

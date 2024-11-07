@@ -1,7 +1,7 @@
 {
   "_id": "EJFql4aNWHHJSxT9",
   "name": "Wand of Fear",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/staves/staff-animal-skull-horned.webp",
   "system": {
     "description": {
@@ -63,6 +63,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -237,9 +238,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037136851,
-    "modifiedTime": 1725992496076,
+    "modifiedTime": 1730323643353,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!EJFql4aNWHHJSxT9"

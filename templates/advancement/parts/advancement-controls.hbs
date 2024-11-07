@@ -17,11 +17,7 @@
     <label>{{ localize "DND5E.AdvancementClassRestriction" }}</label>
     <div class="form-fields">
         <select name="classRestriction">
-            {{#select classRestriction}}
-            <option value="">{{ localize "DND5E.AdvancementClassRestrictionNone" }}</option>
-            <option value="primary">{{ localize "DND5E.AdvancementClassRestrictionPrimary" }}</option>
-            <option value="secondary">{{ localize "DND5E.AdvancementClassRestrictionSecondary" }}</option>
-            {{/select}}
+            {{ selectOptions classRestrictionOptions selected=classRestriction}}
         </select>
     </div>
 </div>

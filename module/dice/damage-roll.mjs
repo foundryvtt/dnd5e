@@ -45,6 +45,8 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
  * @property {string} [powerfulCritical]  Maximize result of extra dice added by critical, rather than rolling.
  */
 
+/* -------------------------------------------- */
+
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
  * @param {string} formula                  The string formula to parse.
@@ -65,6 +67,30 @@ export default class DamageRoll extends BasicRoll {
 
   /* -------------------------------------------- */
   /*  Static Construction                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static fromConfig(config, process) {
+    if ( process.critical ) {
+      config = foundry.utils.deepClone(config);
+      config.options ??= {};
+      config.options.critical = foundry.utils.mergeObject(
+        process.critical, config.options.critical ?? {}, { inplace: false }
+      );
+    }
+    return super.fromConfig(config, process);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static async build(config={}, dialog={}, message={}) {
+    config.critical ??= {};
+    config.critical.multiplyNumeric ??= game.settings.get("dnd5e", "criticalDamageModifiers");
+    config.critical.powerfulCritical ??= game.settings.get("dnd5e", "criticalDamageMaxDice");
+    return super.build(config, dialog, message);
+  }
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -166,7 +192,7 @@ export default class DamageRoll extends BasicRoll {
    * @protected
    */
   configureDamage({ critical={} }={}) {
-    foundry.utils.mergeObject(critical, this.options.critical ?? {});
+    critical = foundry.utils.mergeObject(critical, this.options.critical ?? {}, { inplace: false });
 
     const flatBonus = new Map();
     for ( let [i, term] of this.terms.entries() ) {
@@ -276,7 +302,9 @@ export default class DamageRoll extends BasicRoll {
     );
     const DialogClass = this.DefaultConfigurationDialog;
     return await DialogClass.configure(
-      { critical: { allow: allowCritical } }, { options: { title } }, { rollMode: defaultRollMode }
+      { critical: { allow: allowCritical }, rolls: rolls.map(r => ({ parts: [r.formula], options: r.options })) },
+      { options: { title } },
+      { rollMode: defaultRollMode }
     );
   }
 }

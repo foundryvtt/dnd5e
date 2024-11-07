@@ -1,7 +1,7 @@
 {
   "_id": "5Rxo4K9cgpwgW9vZ",
   "name": "Wand of Enemy Detection",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/wands/wand-simple-eye.webp",
   "system": {
     "description": {
@@ -63,6 +63,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -237,9 +238,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037100973,
-    "modifiedTime": 1725992484207,
+    "modifiedTime": 1730323640927,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!5Rxo4K9cgpwgW9vZ"

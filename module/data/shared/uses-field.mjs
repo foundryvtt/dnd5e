@@ -90,16 +90,18 @@ export default class UsesField extends SchemaField {
    * @returns {Promise<{ updates: object, rolls: BasicRoll[] }|false>}
    */
   static async recoverUses(periods, rollData) {
-    if ( !this.uses.recovery.length ) return false;
+    if ( !this.uses?.recovery.length ) return false;
 
     // Search the recovery profiles in order to find the first matching period,
     // and then find the first profile that uses that recovery period
     let profile;
-    for ( const period of periods ) {
-      for ( const recovery of this.uses.recovery ) {
-        if ( recovery.period === period ) {
-          profile = recovery;
-          break;
+    findPeriod: {
+      for ( const period of periods ) {
+        for ( const recovery of this.uses.recovery ) {
+          if ( recovery.period === period ) {
+            profile = recovery;
+            break findPeriod;
+          }
         }
       }
     }
@@ -176,6 +178,7 @@ export default class UsesField extends SchemaField {
         }
       }]
     }, config);
+    rollConfig.hookNames = [...(config.hookNames ?? []), "recharge"];
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({ configure: false }, dialog);
@@ -187,17 +190,6 @@ export default class UsesField extends SchemaField {
       },
       rollMode: game.settings.get("core", "rollMode")
     }));
-
-    /**
-     * A hook event that fires before recharge is rolled for an Item or Activity.
-     * @function dnd5e.preRollRechargeV2
-     * @memberof hookEvents
-     * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
-     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
-     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
-     * @returns {boolean}                              Explicitly return `false` to prevent recharge from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollRechargeV2", rollConfig, dialogConfig, messageConfig) === false ) return;
 
     if ( "dnd5e.preRollRecharge" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -216,8 +208,10 @@ export default class UsesField extends SchemaField {
     }
 
     const createMessage = messageConfig.create !== false;
-    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, { ...messageConfig, create: false });
-    if ( rolls?.length && createMessage ) {
+    messageConfig.create = false;
+    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls.length ) return;
+    if ( createMessage ) {
       messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {
         name: this.name,
         result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)

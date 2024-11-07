@@ -1,13 +1,12 @@
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
-import ActorMovementConfig from "../actor/movement-config.mjs";
-import ActorSensesConfig from "../actor/senses-config.mjs";
-import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
 import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
+import CreatureTypeConfig from "../shared/creature-type-config.mjs";
+import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import SourceConfig from "../source-config.mjs";
 import StartingEquipmentConfig from "./starting-equipment-config.mjs";
 
@@ -263,7 +262,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the base weapons and tools based on the selected type.
-   * @returns {Promise<object>}  Object with base items for this type formatted for selectOptions.
+   * @returns {Promise<object|null>}  Object with base items for this type formatted for selectOptions.
    * @protected
    */
   async _getItemBaseTypes() {
@@ -271,7 +270,7 @@ export default class ItemSheet5e extends ItemSheet {
       ...CONFIG.DND5E.armorIds,
       ...CONFIG.DND5E.shieldIds
     } : CONFIG.DND5E[`${this.item.type}Ids`];
-    if ( baseIds === undefined ) return {};
+    if ( baseIds === undefined ) return null;
 
     const baseType = this.item.system.type.value;
 
@@ -281,6 +280,7 @@ export default class ItemSheet5e extends ItemSheet {
       if ( baseType !== baseItem?.system?.type?.value ) continue;
       items[name] = baseItem.name;
     }
+    if ( foundry.utils.isEmpty(items) ) return null;
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1], game.i18n.lang)));
   }
 
@@ -397,6 +397,7 @@ export default class ItemSheet5e extends ItemSheet {
         }
       })
     };
+    this.editors[name].initial = initialContent = foundry.utils.getProperty(this.item._source, name);
     return super.activateEditor(name, options, initialContent);
   }
 
@@ -431,7 +432,7 @@ export default class ItemSheet5e extends ItemSheet {
         ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
         }));
-        return null;
+        return {};
       }
     }
 
@@ -445,7 +446,7 @@ export default class ItemSheet5e extends ItemSheet {
         ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.Duration")
         }));
-        return null;
+        return {};
       }
     }
 
@@ -454,7 +455,7 @@ export default class ItemSheet5e extends ItemSheet {
       formData.system.identifier = this.item._source.system.identifier;
       this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
       ui.notifications.error("DND5E.IdentifierError", {localize: true});
-      return null;
+      return {};
     }
 
     // Return the flattened submission data
@@ -557,10 +558,8 @@ export default class ItemSheet5e extends ItemSheet {
     let app;
     switch ( button.dataset.action ) {
       case "movement":
-        app = new ActorMovementConfig(this.item, { keyPath: "system.movement" });
-        break;
       case "senses":
-        app = new ActorSensesConfig(this.item, { keyPath: "system.senses" });
+        app = new MovementSensesConfig({ document: this.item, type: button.dataset.action });
         break;
       case "source":
         app = new SourceConfig({ document: this.item, keyPath: "system.source" });
@@ -569,7 +568,7 @@ export default class ItemSheet5e extends ItemSheet {
         app = new StartingEquipmentConfig(this.item);
         break;
       case "type":
-        app = new ActorTypeConfig(this.item, { keyPath: "system.type" });
+        app = new CreatureTypeConfig({ document: this.item, keyPath: "type" });
         break;
     }
     app?.render(true);
@@ -640,7 +639,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @inheritDoc */
   _canDragStart(selector) {
-    if ( [".advancement-item", "[data-effect-id]"].includes(selector) ) return true;
+    if ( [".advancement-item", "[data-effect-id]", ".activity[data-activity-id]"].includes(selector) ) return true;
     return this.isEditable;
   }
 
@@ -699,8 +698,9 @@ export default class ItemSheet5e extends ItemSheet {
         return this._onDropActiveEffect(event, data);
       case "Activity":
         return this._onDropActivity(event, data);
-      case "Advancement":
       case "Item":
+        return this._onDropItem(event, data);
+      case "Advancement":
         return this._onDropAdvancement(event, data);
     }
   }
@@ -727,7 +727,9 @@ export default class ItemSheet5e extends ItemSheet {
       options.keepOrigin = true;
       options.dnd5e = {
         enchantmentProfile: effect.id,
-        activityId: data.activityId
+        activityId: data.activityId ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
+          a.effects.some(e => e._id === effect.id)
+        )?.id
       };
     }
 

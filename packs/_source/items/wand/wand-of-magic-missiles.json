@@ -1,7 +1,7 @@
 {
   "_id": "1taRIMF9w7jpnonN",
   "name": "Wand of Magic Missiles",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/wands/wand-gem-pink.webp",
   "system": {
     "description": {
@@ -69,6 +69,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -350,6 +351,76 @@
           "recovery": []
         },
         "sort": 0
+      },
+      "TdKi7kwKecDnJ77E": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs",
+          "challenge": {
+            "attack": null,
+            "save": null,
+            "override": false
+          },
+          "level": "1",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
+        },
+        "_id": "TdKi7kwKecDnJ77E",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": true,
+            "max": ""
+          },
+          "spellSlot": true,
+          "targets": [
+            {
+              "type": "itemUses",
+              "value": "1",
+              "target": "",
+              "scaling": {
+                "mode": "amount"
+              }
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "attuned": false,
@@ -361,14 +432,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037087123,
-    "modifiedTime": 1725992479472,
+    "modifiedTime": 1730323654063,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!1taRIMF9w7jpnonN"

@@ -5,7 +5,7 @@
   "img": "icons/weapons/swords/sword-katana-purple.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement)</em></p>\n<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p>\n<p>When you hit a dragon with this weapon, the dragon takes an extra 3d6 damage of the weapon's type. For the purpose of this weapon, \"dragon\" refers to any creature with the dragon type, including dragon turtles and wyverns.</p>",
+      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p><p>When you hit a dragon with this weapon, the dragon takes an extra 3d6 damage of the weapon's type. For the purpose of this weapon, \"dragon\" refers to any creature with the dragon type, including dragon turtles and wyverns.</p>",
       "chat": ""
     },
     "source": {
@@ -24,7 +24,7 @@
       "value": 8000,
       "denomination": "gp"
     },
-    "attunement": "required",
+    "attunement": "",
     "equipped": false,
     "rarity": "rare",
     "identified": true,
@@ -245,7 +245,8 @@
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "dragon-slayer-rapier"
+    "identifier": "dragon-slayer-rapier",
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -258,9 +259,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037188730,
-    "modifiedTime": 1725992513615,
+    "modifiedTime": 1729274743163,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!S7TrIOlE600KIOUx"

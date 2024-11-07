@@ -107,6 +107,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.preparePhysicalData();
   }
 
   /* -------------------------------------------- */
@@ -282,6 +283,7 @@ export default class ContainerData extends ItemDataModel.mixin(
       context.value = await this.contentsCount;
       context.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
     }
+    context.value = context.value.toNearest(0.1);
     context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;
   }
@@ -301,5 +303,20 @@ export default class ContainerData extends ItemDataModel.mixin(
     }
 
     super._onUpdate(changed, options, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if ( (userId !== game.user.id) || !options.deleteContents ) return;
+
+    // Delete a container's contents when it is deleted
+    const contents = await this.allContainedItems;
+    if ( contents?.size ) await Item.deleteDocuments(Array.from(contents.map(i => i.id)), {
+      pack: this.parent.pack,
+      parent: this.parent.parent
+    });
   }
 }

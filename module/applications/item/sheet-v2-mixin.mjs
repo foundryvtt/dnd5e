@@ -187,7 +187,7 @@ export default function ItemSheetV2Mixin(Base) {
       if ( game.user.isGM || (identified !== false) ) {
         context.properties.active.push(
           ...this.item.system.cardProperties ?? [],
-          ...Object.values(this.item.labels.activations[0] ?? {}),
+          ...Object.values(this.item.labels.activations?.[0] ?? {}),
           ...this.item.system.equippableItemCardProperties ?? []
         );
       }
@@ -244,7 +244,7 @@ export default function ItemSheetV2Mixin(Base) {
 
       // Play mode only.
       if ( this._mode === this.constructor.MODES.PLAY ) {
-        html.find(".item-image").on("click", this._onShowIcon.bind(this));
+        html.find(".sheet-header .item-image").on("click", this._onShowIcon.bind(this));
       }
     }
 
@@ -314,7 +314,10 @@ export default function ItemSheetV2Mixin(Base) {
 
       if ( activeTab === "activities" ) {
         return dnd5e.documents.activity.UtilityActivity.createDialog({}, {
-          parent: this.item, types: Object.keys(CONFIG.DND5E.activityTypes)
+          parent: this.item,
+          types: Object.entries(CONFIG.DND5E.activityTypes).filter(([, { configurable }]) => {
+            return configurable !== false;
+          }).map(([k]) => k)
         });
       }
     }

@@ -217,8 +217,6 @@
 
     /* Tables */
     table {
-      --dnd5e-color-table-row-even: var(--dnd5e-color-parchment);
-      --dnd5e-color-table-row-odd: var(--dnd5e-color-card);
       background: var(--dnd5e-color-card);
       border-color: var(--dnd5e-color-gold);
 
@@ -240,6 +238,11 @@
 
         tr:nth-child(n) { background: unset; }
         td { word-break: normal; }
+
+        th {
+          line-height: normal;
+          font-size: var(--font-size-14);
+        }
       }
 
       tr:nth-child(even) { background-color: var(--dnd5e-color-table-row-even); }
@@ -255,9 +258,10 @@
     text-underline-offset: 2px;
 
     > i {
-      color: var(--dnd5e-color-text-dark-primary);
+      color: var(--color-text-dark-primary);
       opacity: .75;
       transition: opacity 250ms ease;
+      margin-right: .25em;
     }
 
     &.broken {

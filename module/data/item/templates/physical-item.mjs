@@ -129,6 +129,24 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare physical item properties.
+   */
+  preparePhysicalData() {
+    if ( !("gp" in CONFIG.DND5E.currencies) ) return;
+    const { value, denomination } = this.price;
+    const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
+    const { gp } = CONFIG.DND5E.currencies;
+    if ( conversion ) {
+      const multiplier = gp.conversion / conversion;
+      this.price.valueInGP = Math.floor(value * multiplier);
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
@@ -213,7 +231,18 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( await super._preUpdate(changed, options, user) === false ) return false;
+    if ( foundry.utils.hasProperty(changed, "system.container") ) {
+      options.formerContainer = (await this.parent.container)?.uuid;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
     this._renderContainers();
   }
 
@@ -221,6 +250,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
 
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
     this._renderContainers({ formerContainer: options.formerContainer });
   }
 
@@ -228,6 +258,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
 
   /** @inheritDoc */
   _onDelete(options, userId) {
+    super._onDelete(options, userId);
     this._renderContainers();
   }
 

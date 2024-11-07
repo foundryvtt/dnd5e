@@ -129,7 +129,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    */
   prepareAbilities({ rollData={}, originalSaves }={}) {
     const flags = this.parent.flags.dnd5e ?? {};
-    const prof = this.attributes?.prof ?? 0;
+    const { prof = 0, ac } = this.attributes ?? {};
     const checkBonus = simplifyBonus(this.bonuses?.abilities?.check, rollData);
     const saveBonus = simplifyBonus(this.bonuses?.abilities?.save, rollData);
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
@@ -137,10 +137,11 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.mod = Math.floor((abl.value - 10) / 2);
 
-      const isRA = this.parent._isRemarkableAthlete(id);
-      abl.checkProf = new Proficiency(prof, (isRA || flags.jackOfAllTrades) ? 0.5 : 0, !isRA);
+      abl.checkProf = this.calculateAbilityCheckProficiency(0, id);
       const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
-      abl.saveBonus = saveBonusAbl + saveBonus;
+
+      const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
+      abl.saveBonus = saveBonusAbl + saveBonus + cover;
 
       abl.saveProf = new Proficiency(prof, abl.proficient);
       const checkBonusAbl = simplifyBonus(abl.bonuses?.check, rollData);
@@ -155,5 +156,28 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       // If we merged saves when transforming, take the highest bonus here.
       if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Create the proficiency object for an ability, skill, or tool, taking remarkable athlete and Jack of All Trades
+   * into account.
+   * @param {number} multiplier  Multiplier stored on the actor.
+   * @param {string} ability     Ability associated with this proficiency.
+   * @returns {Proficiency}
+   */
+  calculateAbilityCheckProficiency(multiplier, ability) {
+    let roundDown = true;
+    if ( multiplier < 1 ) {
+      if ( this.parent._isRemarkableAthlete(ability) ) {
+        multiplier = .5;
+        roundDown = false;
+      }
+      else if ( this.parent.flags.dnd5e?.jackOfAllTrades ) multiplier = .5;
+    }
+    return new Proficiency(this.attributes.prof, multiplier, roundDown);
   }
 }

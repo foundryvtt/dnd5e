@@ -27,6 +27,12 @@ export default class ItemChoiceConfig extends AdvancementConfig {
         obj[k] = { label: c.label, selected: this.advancement.configuration.spell?.ability.has(k) ? "selected" : "" };
         return obj;
       }, {}),
+      levelRestrictionOptions: [
+        { value: "", label: "" },
+        { value: "available", label: game.i18n.localize("DND5E.AdvancementItemChoiceSpellLevelAvailable") },
+        { rule: true },
+        ...Object.entries(CONFIG.DND5E.spellLevels).map(([value, label]) => ({ value, label }))
+      ],
       showContainerWarning: indexes.some(i => i?.type === "container"),
       showSpellConfig: this.advancement.configuration.type === "spell",
       showRequireSpellSlot: !this.advancement.configuration.spell?.preparation

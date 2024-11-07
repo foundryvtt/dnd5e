@@ -186,7 +186,7 @@
             <ul class="skills-list">
             {{#each config.skills as |obj s|}}
             {{#with (lookup ../skills s) as |skill|}}
-                <li class="proficiency-row skill flexrow {{#if skill.value}}proficient{{/if}}"
+                <li class="proficiency-row skill flexrow {{#if skill.prof.hasProficiency}}proficient{{/if}}"
                     data-property="skills" data-key="{{s}}">
                     <input type="hidden" name="system.skills.{{s}}.value"
                            value="{{skill.baseValue}}" data-dtype="Number">
@@ -246,12 +246,14 @@
                             <input type="text" name="system.attributes.death.failure" value="{{system.attributes.death.failure}}" placeholder="0" data-dtype="Number">
                         </div>
                     </div>
+                    {{#if config.conditionTypes.exhaustion}}
                     <div class="counter flexrow exhaustion">
                         <h4>{{ localize "DND5E.Exhaustion" }}</h4>
                         <div class="counter-value">
                             <input type="text" name="system.attributes.exhaustion" value="{{system.attributes.exhaustion}}" placeholder="0" data-dtype="Number">
                         </div>
                     </div>
+                    {{/if}}
                     <div class="counter flexrow inspiration">
                         <label class="flexrow">
                             <h4>{{ localize "DND5E.Inspiration" }}</h4>

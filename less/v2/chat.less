@@ -2,7 +2,7 @@
 /*  Chat Cards                        */
 /* ---------------------------------- */
 
-:is(.chat-popout, #chat-log) .message {
+:is(.chat-popout, #chat-log, .chat-log) .message {
   padding: .5rem;
   border-width: 1px;
   border-block-end-width: 2px;
@@ -97,7 +97,7 @@
 }
 
 /* Modifier Keys */
-:is(.chat-popout, #chat-log)[data-modifier-shift] {
+:is(.chat-popout, #chat-log, .chat-log)[data-modifier-shift] {
   .message .message-header .message-delete { display: unset; }
 }
 
@@ -307,19 +307,28 @@
     inset: 0 0 auto 0;
     z-index: 1;
     padding: 7px 6px 0 0;
+    background: none;
+
+    a.header-button, .header-control {
+      height: 15px;
+      border-radius: 100%;
+      background: rgb(0 0 0 / 25%);
+      font-size: var(--font-size-10);
+    }
 
     a.header-button {
       width: 15px;
-      height: 15px;
       display: inline-grid;
       place-content: center;
-      border-radius: 100%;
-      background: rgb(0 0 0 / 25%);
       color: var(--color-text-light-highlight);
       margin: 0;
-      font-size: var(--font-size-10);
 
       > i { margin: 0; }
+    }
+
+    .header-control {
+      flex: 0 0 15px;
+      &:hover { text-shadow: 0 0 8px red; }
     }
   }
 
@@ -372,17 +381,13 @@
 
       .name-stacked {
         flex: 1;
-
-        &.border {
-          padding-right: .5rem;
-          border-right: 1px solid var(--color-border-light-1);
-        }
+        padding-right: .5rem;
       }
 
       > i {
         font-size: var(--font-size-14);
         color: var(--color-text-dark-5);
-        margin-right: .25rem;
+        margin-right: 8px;
         transition: all 250ms ease;
       }
     }
@@ -699,7 +704,7 @@ enchantment-application {
 /*  Target Evaluations                */
 /* ---------------------------------- */
 
-:is(.chat-popout, #chat-log) .message .dnd5e2.evaluation {
+:is(.chat-popout, #chat-log, .chat-log) .message .dnd5e2.evaluation {
   display: flex;
   flex-direction: column;
   gap: .25rem;

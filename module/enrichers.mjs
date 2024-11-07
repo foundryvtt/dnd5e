@@ -212,11 +212,14 @@ async function enrichCheck(config, label, options) {
   }
   if ( skillConfig?.key ) config.skill = skillConfig.key;
 
+  const toolConfig = CONFIG.DND5E.tools[slugify(config.tool)];
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(config.tool)];
   const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
   if ( config.tool && !toolIndex ) {
     console.warn(`Tool ${config.tool} not found while enriching ${config._input}.`);
     invalid = true;
+  } else if ( config.tool && !config.ability && toolConfig ) {
+    config.ability = toolConfig.ability;
   }
 
   let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
@@ -416,7 +419,7 @@ function enrichLookup(config, fallback, options) {
     return null;
   }
 
-  const data = options.relativeTo?.getRollData();
+  const data = options.rollData ?? options.relativeTo?.getRollData();
   let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
   if ( value && style ) {
     if ( style === "capitalize" ) value = value.capitalize();
@@ -426,6 +429,7 @@ function enrichLookup(config, fallback, options) {
 
   const span = document.createElement("span");
   span.classList.add("lookup-value");
+  if ( !value && (options.documents === false) ) return null;
   if ( !value ) span.classList.add("not-found");
   span.innerText = value ?? keyPath;
   return span;
@@ -757,10 +761,14 @@ function createRollLink(label, dataset) {
 async function applyAction(event) {
   const target = event.target.closest('[data-action="apply"][data-status]');
   const status = target?.dataset.status;
-  const effect = CONFIG.statusEffects.find(e => e.id === status);
-  if ( !effect ) return;
+  if ( !status ) return;
   event.stopPropagation();
-  for ( const token of canvas.tokens.controlled ) await token.toggleEffect(effect);
+  const actors = new Set();
+  for ( const { actor } of canvas.tokens.controlled ) {
+    if ( !actor || actors.has(actor) ) continue;
+    await actor.toggleStatusEffect(status);
+    actors.add(actor);
+  }
 }
 
 /* -------------------------------------------- */
@@ -792,7 +800,8 @@ async function rollAction(event) {
 
   const { type, ability, skill, tool, dc } = target.dataset;
   const options = { event };
-  if ( dc ) options.targetValue = dc;
+  if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+  if ( dc ) options.target = dc;
 
   const action = event.target.closest("a")?.dataset.action ?? "roll";
 
@@ -815,22 +824,19 @@ async function rollAction(event) {
         const actor = token.actor;
         switch ( type ) {
           case "check":
-            await actor.rollAbilityTest(ability, options);
+            await actor.rollAbilityCheck(options);
             break;
           case "concentration":
-            if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
-            await actor.rollConcentration(options);
+            await actor.rollConcentration({ ...options, legacy: false });
             break;
           case "save":
-            await actor.rollAbilitySave(ability, options);
+            await actor.rollSavingThrow(options);
             break;
           case "skill":
-            if ( ability ) options.ability = ability;
-            await actor.rollSkill(skill, options);
+            await actor.rollSkill({ skill, ...options });
             break;
           case "tool":
-            options.ability = ability;
-            await actor.rollToolCheck(tool, options);
+            await actor.rollToolCheck({ tool, ...options });
             break;
         }
       }
@@ -867,29 +873,30 @@ async function rollDamage(event) {
   const target = event.target.closest(".roll-link");
   const { formula, damageType } = target.dataset;
 
-  const isHealing = damageType in CONFIG.DND5E.healingTypes;
-  const title = game.i18n.localize(`DND5E.${isHealing ? "Healing" : "Damage"}Roll`);
   const rollConfig = {
-    rollConfigs: [{
-      parts: [formula],
-      type: damageType
-    }],
-    flavor: title,
     event,
-    title,
-    messageData: {
-      "flags.dnd5e": {
-        messageType: "roll",
-        roll: { type: "damage" },
-        targets: getTargetDescriptors()
+    hookNames: ["damage"],
+    rolls: [{ parts: [formula], options: { type: damageType } }]
+  };
+
+  const messageConfig = {
+    create: true,
+    data: {
+      flags: {
+        dnd5e: {
+          messageType: "roll",
+          roll: { type: "damage" },
+          targets: getTargetDescriptors()
+        }
       },
+      flavor: game.i18n.localize(`DND5E.${damageType in CONFIG.DND5E.healingTypes ? "Healing" : "Damage"}Roll`),
       speaker: ChatMessage.implementation.getSpeaker()
     }
   };
 
-  if ( Hooks.call("dnd5e.preRollDamage", undefined, rollConfig) === false ) return;
-  const roll = await damageRoll(rollConfig);
-  if ( roll ) Hooks.callAll("dnd5e.rollDamage", undefined, roll);
+  const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, {}, messageConfig);
+  if ( !rolls?.length ) return;
+  Hooks.callAll("dnd5e.rollDamageV2", rolls);
 }
 
 /* -------------------------------------------- */

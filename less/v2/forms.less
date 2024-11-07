@@ -128,10 +128,10 @@
     }
 
     input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
+      --input-background-color: var(--dnd5e-background-parchment);
       border: 2px solid var(--dnd5e-color-gold);
       border-radius: 8px;
       padding: .5rem;
-      background: var(--dnd5e-color-parchment);
       font-size: var(--font-size-14);
       height: unset;
       width: 100%;
@@ -221,9 +221,13 @@
         z-index: -1;
       }
     }
+    &.card:not(:has(legend)) { padding-block-start: 10px; }
 
     &:disabled {
-      .form-group label, .hint { color: var(--color-text-light-6); }
+      .form-group label, .hint {
+        --color-form-hint: var(--color-text-light-6);
+        color: var(--color-text-light-6);
+      }
     }
   }
 
@@ -308,14 +312,6 @@
         margin-left: 3px;
         position: absolute;
       }
-
-      &.currency {
-        &.cp::after { background-image: url("icons/currency/copper.webp"); }
-        &.sp::after { background-image: url("icons/currency/silver.webp"); }
-        &.ep::after { background-image: url("icons/currency/electrum.webp"); }
-        &.gp::after { background-image: url("icons/currency/gold.webp"); }
-        &.pp::after { background-image: url("icons/currency/platinum.webp"); }
-      }
     }
 
     /* Split Groups */
@@ -367,8 +363,9 @@
 
   /* Hints */
   :is(.form-group, fieldset) .hint {
+    --color-form-hint: var(--color-text-dark-5);
+    --color-form-hint-hover: var(--color-form-hint);
     font-size: var(--font-size-11);
-    color: var(--color-text-dark-5);
     margin: 4px 0 0;
   }
 
@@ -501,7 +498,10 @@
       display: grid;
       grid-template-columns: repeat(var(--num-cols), 1fr);
 
-      > label { text-align: unset; }
+      > label {
+        text-align: unset;
+        > span { line-height: normal; }
+      }
     }
   }
 
@@ -560,5 +560,41 @@
         &.filled { background: var(--dnd5e-color-gold); }
       }
     }
+  }
+}
+
+/* App V2 Standard Form */
+.dnd5e2 .standard-form,
+.dnd5e2.standard-form {
+  --color-fieldset-border: var(--color-border-light-tertiary);
+  --color-form-label: var(--color-text-dark-primary);
+  --color-form-label-hover: var(--color-form-label);
+  --input-height: 26px;
+  gap: 0;
+
+  .form-group:not(.label-top) {
+    gap: 0;
+
+    > label {
+      flex: 2;
+      line-height: var(--input-height);
+    }
+
+    > .form-fields { flex: 3; }
+  }
+
+  fieldset { padding: revert; }
+  .hint { line-height: 16px; }
+
+  button:not(.icon, .fa-solid, .fas) {
+    height: unset;
+    &:not(.unbutton) { line-height: 28px; }
+  }
+
+  :is(document-tags, multi-select) .tags.input-element-tags .tag {
+    padding: 1px 4px;
+    color: var(--color-text-dark-primary);
+    height: unset;
+    opacity: unset;
   }
 }

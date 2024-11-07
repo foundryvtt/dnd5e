@@ -21,6 +21,13 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
   _applyLegacy(item, change, changes) {
     let key = change.key.replace("system.", "");
     switch ( change.key ) {
+      case "system.ability":
+        for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
+          changes[`system.activities.${activity.id}.attack.ability`] = ActiveEffect.applyField(
+            activity, { ...change, key: "attack.ability" }
+          );
+        }
+        return false;
       case "system.attack.bonus":
       case "system.attack.flat":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
@@ -38,7 +45,14 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
             value.enchantment = true;
             value.locked = true;
             changes[`system.activities.${activity.id}.damage.parts`] = ActiveEffect.applyField(
-              activity, { ...change, key, value: value }
+              activity, { ...change, key, value }
+            );
+          }
+          for ( const activity of item.system.activities?.getByTypes("heal") ?? [] ) {
+            const value = damage.formula;
+            const keyPath = `healing.${activity.healing.custom.enabled ? "custom.formula" : "bonus"}`;
+            changes[`system.activities.${activity.id}.${keyPath}`] = ActiveEffect.applyField(
+              activity, { ...change, key: keyPath, value }
             );
           }
           return false;
