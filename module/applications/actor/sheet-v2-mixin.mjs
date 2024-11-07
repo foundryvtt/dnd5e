@@ -81,6 +81,16 @@ export default function ActorSheetV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
+    _getHeaderButtons() {
+      const buttons = super._getHeaderButtons();
+      const tokenButton = buttons.find(b => b.class === "configure-token");
+      if ( tokenButton && this.actor.isToken ) tokenButton.icon = "far fa-user-circle";
+      return buttons;
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
     async getData(options) {
       this._concentration = this.actor.concentration; // Cache concentration so it's not called for every item.
       const context = await super.getData(options);
