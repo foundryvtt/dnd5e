@@ -24,7 +24,7 @@
       "value": 16000,
       "denomination": "gp"
     },
-    "attunement": "required",
+    "attunement": "optional",
     "equipped": false,
     "rarity": "legendary",
     "identified": true,
@@ -258,13 +258,13 @@
           "max": ""
         },
         "sort": 0,
-        "name": "Crit a Giant: Saving Throw",
+        "name": "Giant's Bane (On Crit)",
         "img": "",
         "appliedEffects": []
       },
       "HUaufCvw2ISsEtbL": {
         "type": "attack",
-        "name": "Ranged Attack",
+        "name": "Hurl Hammer",
         "_id": "HUaufCvw2ISsEtbL",
         "sort": 0,
         "activation": {
@@ -346,7 +346,7 @@
       },
       "raoOPd1C5wdDhOed": {
         "type": "save",
-        "name": "Ranged Attack: Saving Throw",
+        "name": "Thunderclap",
         "_id": "raoOPd1C5wdDhOed",
         "sort": 0,
         "activation": {
@@ -488,7 +488,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037317730,
-    "modifiedTime": 1727821208343,
+    "modifiedTime": 1730938414461,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!wGDDt17DpBcXPuUD"
