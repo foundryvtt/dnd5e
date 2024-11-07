@@ -493,9 +493,10 @@ DND5E.ammoIds = {
 
 /**
  * @typedef FacilityOrder
- * @property {string} label     The human-readable name of the order.
- * @property {string} icon      The SVG icon for this order.
- * @property {boolean} [basic]  Whether this order can be issued to basic facilities.
+ * @property {string} label       The human-readable name of the order.
+ * @property {string} icon        The SVG icon for this order.
+ * @property {boolean} [basic]    Whether this order can be issued to basic facilities.
+ * @property {number} [duration]  The amount of time taken to complete the order if different to a normal bastion turn.
  */
 
 /**
@@ -519,6 +520,11 @@ DND5E.facilities = {
     build: {
       label: "DND5E.FACILITY.Orders.build.inf",
       icon: "systems/dnd5e/icons/svg/facilities/build.svg"
+    },
+    change: {
+      label: "DND5E.FACILITY.Orders.change.inf",
+      icon: "systems/dnd5e/icons/svg/facilities/change.svg",
+      duration: 21
     },
     craft: {
       label: "DND5E.FACILITY.Orders.craft.inf",

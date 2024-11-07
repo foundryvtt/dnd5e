@@ -175,13 +175,17 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
       return;
     }
 
+    let { duration } = game.settings.get("dnd5e", "bastionConfiguration");
     if ( (this.activity.order === "craft") || (this.activity.order === "harvest") ) {
       await this._prepareCraftContext(context, options);
     }
+    else if ( this.activity.order === "trade" ) await this._prepareTradeContext(context, options);
+    else {
+      const config = CONFIG.DND5E.facilities.orders[this.activity.order];
+      if ( config?.duration ) duration = config.duration;
+    }
 
-    if ( this.activity.order === "trade" ) await this._prepareTradeContext(context, options);
-
-    this._prepareCostsContext(context, options);
+    this._prepareCostsContext(context, { ...options, days: duration });
   }
 
   /* -------------------------------------------- */
