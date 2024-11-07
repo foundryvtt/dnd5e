@@ -432,7 +432,7 @@ export default class ItemSheet5e extends ItemSheet {
         ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
         }));
-        return null;
+        return {};
       }
     }
 
@@ -446,7 +446,7 @@ export default class ItemSheet5e extends ItemSheet {
         ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.Duration")
         }));
-        return null;
+        return {};
       }
     }
 
@@ -455,7 +455,7 @@ export default class ItemSheet5e extends ItemSheet {
       formData.system.identifier = this.item._source.system.identifier;
       this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
       ui.notifications.error("DND5E.IdentifierError", {localize: true});
-      return null;
+      return {};
     }
 
     // Return the flattened submission data

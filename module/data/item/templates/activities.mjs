@@ -166,6 +166,12 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} source  Candidate source data to migrate.
    */
   static #migrateUses(source) {
+    // Remove any old ternary operators from uses to prevent errors
+    if ( source.uses?.max?.includes(" ? ") ) source.uses.max = "";
+    for ( const activity of Object.values(source.activities ?? {}) ) {
+      if ( activity.uses?.max?.includes(" ? ") ) activity.uses.max = "";
+    }
+
     if ( Array.isArray(source.uses?.recovery) ) return;
 
     const charged = source.recharge?.charged;
