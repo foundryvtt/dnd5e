@@ -240,11 +240,12 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
     if ( ammoUpdate?.destroy ) {
       // If ammunition was deleted, store a copy of it in the roll message
-      const data = ammo.toObject();
-      const id = rollConfig.event?.target.closest("[data-message-id]")?.dataset.messageId;
-      const attackMessage = dnd5e.registry.messages.messages(id, "attack").pop();
+      const data = this.actor.items.get(ammoUpdate.id).toObject();
+      const messageId = messageConfig.data?.flags?.dnd5e?.originatingMessage
+        ?? rollConfig.event?.target.closest("[data-message-id]")?.dataset.messageId;
+      const attackMessage = dnd5e.registry.messages.get(messageId, "attack")?.pop();
       await attackMessage?.setFlag("dnd5e", "roll.ammunitionData", data);
-      await this.actor?.deleteEmbeddedDocuments("Item", [ammoUpdate.id]);
+      await this.actor.deleteEmbeddedDocuments("Item", [ammoUpdate.id]);
     }
     else if ( ammoUpdate ) await this.actor?.updateEmbeddedDocuments("Item", [
       { _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }
