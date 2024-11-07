@@ -579,10 +579,10 @@ export default class ActiveEffect5e extends ActiveEffect {
     const effectData = foundry.utils.mergeObject({
       ...statusEffect,
       name: `${game.i18n.localize("EFFECT.DND5E.StatusConcentrating")}: ${item.name}`,
-      description: game.i18n.format("DND5E.ConcentratingOn", {
+      description: `<p>${game.i18n.format("DND5E.ConcentratingOn", {
         name: item.name,
         type: game.i18n.localize(`TYPES.Item.${item.type}`)
-      }),
+      })}</p><hr><p>@Embed[${item.uuid} inline]</p>`,
       duration: activity.duration.getEffectData(),
       "flags.dnd5e": {
         activity: {
