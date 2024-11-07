@@ -2,6 +2,7 @@ import ActivityMixin from "./mixin.mjs";
 import OrderActivityData from "../../data/activity/order-data.mjs";
 import OrderUsageDialog from "../../applications/activity/order-usage-dialog.mjs";
 import CurrencyManager from "../../applications/currency-manager.mjs";
+import { formatNumber } from "../../utils.mjs";
 
 /**
  * @typedef {ActivityUseConfiguration} OrderUseConfiguration
@@ -49,13 +50,6 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
 
   /* -------------------------------------------- */
   /*  Activation                                  */
-  /* -------------------------------------------- */
-
-  /** @override */
-  shouldHideChatButton(button, message) {
-    return !this.actor.isOwner;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -108,7 +102,7 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
     if ( (this.item.system.type.value !== "special") || (this.item.system.size === "vast") ) return;
     const sizes = Object.entries(CONFIG.DND5E.facilities.sizes).sort((a, b) => a.value - b.value);
     const index = sizes.findIndex(([size]) => size === this.item.system.size);
-    updates.size = sizes[index + 1][0];
+    updates["system.size"] = sizes[index + 1][0];
   }
 
   /* -------------------------------------------- */
@@ -123,6 +117,8 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
     const { costs, trade } = usageConfig;
     const { system } = this.item;
     updates["system.trade.pending.operation"] = trade.sell ? "sell" : "buy";
+    updates["system.trade.pending.creatures"] = [];
+    updates["system.trade.pending.value"] = null;
     if ( trade.stock ) {
       if ( "stocked" in trade.stock ) {
         updates["system.trade.pending.stocked"] = trade.stock.stocked;
@@ -131,15 +127,15 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
       else updates["system.trade.pending.value"] = trade.stock.value;
     }
     if ( trade.creatures ) {
-      let creatures = trade.creatures.buy.filter(_ => _);
+      let creatures = (trade.creatures.buy ?? []).filter(_ => _);
       if ( trade.sell ) {
         creatures = [];
-        for ( let i = 0; i < trade.creatures.sell.length; i++ ) {
+        for ( let i = 0; i < trade.creatures.sell?.length ?? 0; i++ ) {
           const sold = trade.creatures.sell[i];
           if ( sold ) creatures.push(system.trade.creatures.value[i]);
         }
       }
-      updates["system.trade.pending.value"] = trade.sell ? trade.creatures.price : costs.gold;
+      updates["system.trade.pending.value"] = trade.sell ? (trade.creatures.price ?? 0) : costs.gold;
       updates["system.trade.pending.creatures"] = creatures;
       // TODO: We need a way to visualize 'pending' animal purchases/sales. For now update immediately.
       updates["system.trade.creatures.value"] = trade.sell
@@ -220,7 +216,7 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
     `);
     if ( costs.gold ) supplements.push(`
       <strong>${game.i18n.localize("DND5E.CurrencyGP")}</strong>
-      ${new Intl.NumberFormat(game.i18n.lang).format(costs.gold)}
+      ${formatNumber(costs.gold)}
       (${game.i18n.localize(`DND5E.FACILITY.Costs.${costs.paid ? "Paid" : "Unpaid"}`)})
     `);
     if ( craft?.item ) {
@@ -233,7 +229,7 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
     }
     if ( trade?.stock?.value && trade.sell ) supplements.push(`
       <strong>${game.i18n.localize("DND5E.FACILITY.Trade.Sell.Supplement")}</strong>
-      ${new Intl.NumberFormat(game.i18n.lang).format(trade.stock.value)}
+      ${formatNumber(trade.stock.value)}
       ${CONFIG.DND5E.currencies.gp?.abbreviation ?? ""}
     `);
     if ( trade?.creatures ) {

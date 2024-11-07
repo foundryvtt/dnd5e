@@ -78,6 +78,7 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
    * @protected
    */
   async _prepareCraftContext(context, options) {
+    const { craft } = this.item.system;
     context.craft = {
       legend: game.i18n.localize(`DND5E.FACILITY.Orders.${this.activity.order}.present`),
       item: {
@@ -89,10 +90,11 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
 
     if ( this.activity.order === "harvest" ) {
       context.craft.isHarvesting = true;
+      context.craft.item.value = this.config.craft?.item ?? craft.item ?? "";
       context.craft.quantity = {
         field: new NumberField({ nullable: false, integer: true, positive: true }),
         name: "craft.quantity",
-        value: this.config.craft?.quantity ?? 1
+        value: this.config.craft?.quantity ?? craft.quantity ?? 1
       };
     } else {
       context.craft.baseItem = {
@@ -105,8 +107,8 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
       };
     }
 
-    if ( this.config.craft?.item ) {
-      const item = await fromUuid(this.config.craft.item);
+    if ( context.craft.item.value ) {
+      const item = await fromUuid(context.craft.item.value);
       context.craft.value = {
         img: item.img,
         name: item.name,
