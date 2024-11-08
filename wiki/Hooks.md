@@ -16,7 +16,7 @@ A hook event that fires before a roll is performed. Multiple hooks may be called
 
 ### `dnd5e.postRollConfiguration`
 
-A hook event that fires after roll configuration is complete, but before the roll is evaluated. Multiple hooks may be called depending on the rolling method (e.g. `postSkillCheckRollConfiguration`, `postAbilityTestRollConfiguration`, and `postRollConfiguration` for skill checks). Exact contents of the configuration object will also change based on the roll type, but the same objects will always be present. Returning `false` will prevent the normal rolling process.
+A hook event that fires after roll configuration is complete, but before the roll is evaluated. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.postSkillCheckRollConfiguration`, `dnd5e.postAbilityTestRollConfiguration`, and `dnd5e.postRollConfiguration` for skill checks). Exact contents of the configuration object will also change based on the roll type, but the same objects will always be present. Returning `false` will prevent the normal rolling process.
 
 | Name    | Type                           | Description                                         |
 | ------- | ------------------------------ | --------------------------------------------------- |
