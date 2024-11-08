@@ -93,9 +93,9 @@
 </div>
 
 {{#*inline ".facility"}}
-<li class="facility {{#unless building.built}}building{{/unless}}" data-item-id="{{ id }}" data-facility-id="{{ id }}"
-    style="--underlay: url('{{ img }}')">
-    {{#if executing}}
+<li class="facility {{#unless building.built}}building{{/unless}} {{#if disabled}}disabled{{/if}}"
+    data-item-id="{{ id }}" data-facility-id="{{ id }}" style="--underlay: url('{{ img }}')">
+    {{#if (and progress.max executing)}}
     <div class="facility-progress meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ progress.pct }}"
          aria-valuetext="{{ progress.value }}" aria-valuemax="{{ progress.max }}"
          style="--bar-percentage: {{ progress.pct }}%">

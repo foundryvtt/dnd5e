@@ -26,6 +26,7 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @property {string} craft.item                  The Item the facility is currently crafting.
  * @property {number} craft.quantity              The number of Items being crafted.
  * @property {FacilityOccupants} defenders        The facility's configured defenders.
+ * @property {boolean} disabled                   Whether the facility is currently disabled.
  * @property {boolean} enlargeable                Whether the facility is capable of being enlarged.
  * @property {boolean} free                       Whether the facility counts towards the character's maximum special
  *                                                facility cap.
@@ -75,6 +76,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
         value: new ArrayField(new DocumentUUIDField({ type: "Actor" })),
         max: new NumberField({ required: true, integer: true, positive: true })
       }),
+      disabled: new BooleanField({ required: true }),
       enlargeable: new BooleanField({ required: true }),
       free: new BooleanField({ required: true }),
       hirelings: new SchemaField({
@@ -193,6 +195,8 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
       this.progress.value = Math.clamp(value, 0, max);
       this.progress.pct = Math.round((this.progress.value / max) * 100);
     }
+
+    if ( this.disabled ) this.progress.order = "repair";
 
     // Labels
     const labels = this.parent.labels ??= {};
