@@ -1358,8 +1358,10 @@ dialog.dnd5e2.application {
   }
   .traits {
     --checkbox-size: 16px;
-    display: grid;
+    display: inline-grid;
     grid-template-columns: [name] 2fr [proficiency] 1fr;
+    width: 100%;
+    break-inside: avoid-column;
 
     > .hint { grid-column: 1 / -1; }
     .header, ol, li {

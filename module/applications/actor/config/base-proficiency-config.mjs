@@ -51,7 +51,7 @@ export default class BaseProficiencyConfig extends BaseConfigSheet {
   /** @inheritDoc */
   _initializeApplicationOptions(options) {
     options = super._initializeApplicationOptions(options);
-    options.uniqueId = `${options.trait}-${options.key}-${options.document.uuid}`;
+    options.uniqueId = `${options.trait}-${options.key}-${options.document.uuid}`.replace(/\./g, "-");
     return options;
   }
 

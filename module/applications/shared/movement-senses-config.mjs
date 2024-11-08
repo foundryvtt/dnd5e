@@ -62,7 +62,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
   /** @inheritDoc */
   _initializeApplicationOptions(options) {
     options = super._initializeApplicationOptions(options);
-    options.uniqueId = `${options.type}-${options.document.uuid}`;
+    options.uniqueId = `${options.type}-${options.document.uuid}`.replace(/\./g, "-");
     return options;
   }
 

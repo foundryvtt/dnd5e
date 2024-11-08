@@ -54,7 +54,7 @@ export default class TraitsConfig extends BaseConfigSheet {
     if ( !CONFIG.DND5E.traits[options.trait] ) throw new Error(
       `Cannot instantiate TraitsConfig with a trait not defined in CONFIG.DND5E.traits: ${options.trait}.`
     );
-    options.uniqueId = `${options.trait}-${options.document.uuid}`;
+    options.uniqueId = `${options.trait}-${options.document.uuid}`.replace(/\./g, "-");
     return options;
   }
 
