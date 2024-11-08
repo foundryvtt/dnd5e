@@ -117,7 +117,18 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
 
   /** @override */
   static get compendiumBrowserFilters() {
+    const { basic, special } = CONFIG.DND5E.facilities.advancement;
+    const min = Math.min(...Object.keys(basic), ...Object.keys(special));
     return new Map([
+      ["level", {
+        label: "DND5E.FACILITY.FIELDS.level.label",
+        type: "range",
+        config: {
+          keyPath: "system.level",
+          min,
+          max: CONFIG.DND5E.maxLevel
+        }
+      }],
       ["type", {
         label: "DND5E.FACILITY.FIELDS.type.value.label",
         type: "set",
