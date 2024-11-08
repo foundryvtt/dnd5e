@@ -2096,7 +2096,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const config = {
       evaluate: false,
       event: rollOptions.event,
-      hookNames: ["initiative", "abilityCheck", "d20Test"],
+      hookNames: ["initiativeDialog", "abilityCheck", "d20Test"],
       rolls: [{ parts: [roll.formula.replace(roll.d20.formula, "")], options: { ...roll.options, configured: false } }],
       subject: this
     };

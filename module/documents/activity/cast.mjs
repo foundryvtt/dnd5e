@@ -91,7 +91,7 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
      * A hook event that fires after a linked spell is used by a Cast activity.
      * @function dnd5e.postUseLinkedSpell
      * @memberof hookEvents
-     * @param {Activity} activity                              Activity being activated.
+     * @param {CastActivity} activity                          Activity being activated.
      * @param {Partial<ActivityUseConfiguration>} usageConfig  Configuration data for the activation.
      * @param {ActivityUsageResults} results                   Final details on the activation.
      */
