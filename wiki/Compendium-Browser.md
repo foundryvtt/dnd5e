@@ -18,7 +18,7 @@ The browser can also be activated from elsewhere in the system in locked mode. I
 
 ## Source Configuration
 
-GMs have the option for modify what sources appear in the compendium browser, customizing which specific compendiums are offered by different modules. These options using the "Configure Sources" button in the system settings or the gear on the top right of the compendium browser itself.
+GMs have the option to modify what sources appear in the compendium browser, customizing which specific compendiums are offered by different modules. These options are available using the "Configure Sources" button in the system settings or the gear on the top right of the compendium browser itself.
 
 ![Compendium Browser - Configure Sources](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/compendium-browser/configure-sources.jpg)
 
