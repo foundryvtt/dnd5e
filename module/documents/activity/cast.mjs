@@ -53,7 +53,7 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
    * @type {boolean}
    */
   get displayInSpellbook() {
-    return this.item.system.magicAvailable && this.spell.spellbook;
+    return (this.item.system.magicAvailable !== false) && this.spell.spellbook;
   }
 
   /* -------------------------------------------- */
